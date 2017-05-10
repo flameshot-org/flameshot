@@ -1,0 +1,12 @@
+Button {
+    border-radius: 15px;
+    background-color: rgb(136, 0, 170);
+}
+
+Button:hover {
+    background-color: rgb(166, 0, 200);
+}
+
+Button:pressed {
+    background-color: rgb(136, 0, 170);
+}

@@ -1,0 +1,477 @@
+// Copyright 2017 Alejandro Sirgo Rica
+//
+// This file is part of Flameshot.
+//
+//     Flameshot is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, either version 3 of the License, or
+//     (at your option) any later version.
+//
+//     Flameshot is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+ 
+// Based on Lightscreen areadialog.cpp, Copyright 2017  Christian Kaiser <info@ckaiser.com.ar>
+// released under the GNU GPL2  <https://www.gnu.org/licenses/gpl-2.0.txt>
+ 
+// Based on KDE's KSnapshot regiongrabber.cpp, revision 796531, Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
+// released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
+
+#include "screenshot.h"
+#include "capturemodification.h"
+#include "capturewidget.h"
+#include "button.h"
+#include <QScreen>
+#include <QWindow>
+#include <QGuiApplication>
+#include <QApplication>
+#include <QShortcut>
+#include <QPainter>
+#include <QPaintEvent>
+#include <QMouseEvent>
+#include <QClipboard>
+#include <QSettings>
+
+#include <QDebug>
+
+namespace {
+    const int HANDLE_SIZE = 9;
+}
+
+// http://doc.qt.io/qt-5/qwidget.html#setMask
+
+CaptureWidget::CaptureWidget(QWidget *parent) :
+    QWidget(parent), m_mouseOverHandle(0), m_newSelection(false),
+    m_grabbing(false), m_onButton(false), m_state(Button::Type::move) {
+    setAttribute(Qt::WA_DeleteOnClose);
+
+    QRect baseRect(0, 0, HANDLE_SIZE, HANDLE_SIZE);
+    m_TLHandle = baseRect; m_TRHandle = baseRect;
+    m_BLHandle = baseRect; m_BRHandle = baseRect;
+    m_LHandle = baseRect; m_THandle = baseRect;
+    m_RHandle = baseRect; m_BHandle = baseRect;
+
+    m_Handles << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
+    << &m_LHandle << &m_THandle << &m_RHandle << &m_BHandle;
+
+    move(0,0);
+    setWindowFlags( Qt::WindowStaysOnTopHint
+                  | Qt::X11BypassWindowManagerHint
+                  | Qt::FramelessWindowHint
+                  | Qt::Popup);
+    setMouseTracking(true);
+    setCursor(Qt::CrossCursor);
+    initShortcuts();
+
+    QVector<Button::Type> tempVector;
+    for (int i =0; i < (int)Button::Type::last; ++i) {
+        tempVector.append((Button::Type)i);
+    }
+    m_buttonHandler = new ButtonHandler();
+    redefineButtons(tempVector);
+
+    createCapture();
+    resize(m_screenshot.size());
+
+    m_mouseIsClicked = false;
+    m_buttonHandler->hide();
+    show();
+}
+
+CaptureWidget::~CaptureWidget() {
+    delete(m_buttonHandler);
+}
+
+void CaptureWidget::redefineButtons(QVector<Button::Type> vector) {
+    QVector<Button*> vectorButtons;
+    for (auto t: vector) {
+        Button *b = new Button(t, this);
+        if (t == Button::Type::selectionIndicator) {
+            m_sizeIndButton = b;
+        }
+        connect(b, &Button::hovered, this, &CaptureWidget::enterButton);
+        connect(b, &Button::mouseExited, this, &CaptureWidget::leaveButton);
+        connect(b, &Button::typeEmited, this, &CaptureWidget::setState);
+        vectorButtons << b;
+    }
+    m_buttonHandler->setButtons(vectorButtons);
+}
+
+void CaptureWidget::paintEvent(QPaintEvent *) {
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    if (m_grabbing) { // grabWindow() should just get the background
+        return;
+    }
+
+    Screenshot s(m_screenshot);
+    s.paintModifications(m_modifications);
+    painter.drawPixmap(0, 0, s.getScreenshot());
+
+    QColor overlayColor(0, 0, 0, 160);
+    painter.setBrush(overlayColor);
+    QRect r = m_selection.normalized().adjusted(0, 0, -1, -1);
+    QRegion grey(rect());
+    grey = grey.subtracted(r);
+    painter.setClipRegion(grey);
+    painter.drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
+    painter.setClipRect(rect());
+
+    if (!m_selection.isNull()) {
+        // paint selection rect
+        QColor purpleColor(136, 0, 170, 220);
+        painter.setPen(purpleColor);
+        painter.setBrush(Qt::NoBrush);
+        painter.drawRect(r);
+
+        // paint handlers
+        updateHandles();
+        painter.setBrush(purpleColor);
+        for(auto r: handleMask()) {
+            painter.drawRoundRect(r, 100, 100);
+        }
+    }
+}
+
+void CaptureWidget::mousePressEvent(QMouseEvent *e) {
+        if (e->button() == Qt::LeftButton) {
+            m_mouseIsClicked = true;
+            if (m_state != Button::Type::move) {
+                m_modifications.append(CaptureModification(m_state, e->pos()));
+                return;
+            }
+            m_dragStartPoint = e->pos();
+            m_selectionBeforeDrag = m_selection;
+            m_buttonHandler->hide();
+            if (!m_selection.contains(e->pos()) && !m_mouseOverHandle) {
+                m_newSelection = true;
+                m_selection = QRect();
+                setCursor(Qt::CrossCursor);
+            } else if (m_selection.contains(e->pos())){
+                setCursor(Qt::ClosedHandCursor);
+            }
+        }
+    update();
+}
+
+void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
+    if (m_mouseIsClicked && m_state == Button::Type::move) {
+        m_mousePos = e->pos();
+
+        if (m_newSelection) {
+            m_selection = QRect(m_dragStartPoint, limitPointToRect(m_mousePos, rect())).normalized();
+        } else if (m_mouseOverHandle == 0) {
+            // Moving the whole selection
+            QRect r = rect().normalized(), s = m_selectionBeforeDrag.normalized();
+            QPoint p = s.topLeft() + e->pos() - m_dragStartPoint;
+            r.setBottomRight(r.bottomRight() - QPoint(s.width(), s.height()));
+
+            if (!r.isNull() && r.isValid()) {
+                m_selection.moveTo(limitPointToRect(p, r));
+            }
+        } else {
+            // Dragging a handle
+            QRect r = m_selectionBeforeDrag;
+            QPoint offset = e->pos() - m_dragStartPoint;
+
+            bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
+
+            if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_THandle
+                    || m_mouseOverHandle == &m_TRHandle) { // dragging one of the top handles
+                r.setTop(r.top() + offset.y());
+
+                if (symmetryMod) {
+                    r.setBottom(r.bottom() - offset.y());
+                }
+            }
+            if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_LHandle
+                    || m_mouseOverHandle == &m_BLHandle) { // dragging one of the left handles
+                r.setLeft(r.left() + offset.x());
+
+                if (symmetryMod) {
+                    r.setRight(r.right() - offset.x());
+                }
+            }
+            if (m_mouseOverHandle == &m_BLHandle || m_mouseOverHandle == &m_BHandle
+                    || m_mouseOverHandle == &m_BRHandle) { // dragging one of the bottom handles
+                r.setBottom(r.bottom() + offset.y());
+
+                if (symmetryMod) {
+                    r.setTop(r.top() - offset.y());
+                }
+            }
+            if (m_mouseOverHandle == &m_TRHandle || m_mouseOverHandle == &m_RHandle
+                    || m_mouseOverHandle == &m_BRHandle) { // dragging one of the right handles
+                r.setRight(r.right() + offset.x());
+
+                if (symmetryMod) {
+                    r.setLeft(r.left() - offset.x());
+                }
+            }
+            r = r.normalized();
+            r.setTopLeft(limitPointToRect(r.topLeft(), rect()));
+            r.setBottomRight(limitPointToRect(r.bottomRight(), rect()));
+            m_selection = r;
+        }
+        update();
+
+    } else if (m_mouseIsClicked) {
+        m_modifications.last().addPoint(e->pos());
+    } else {
+        if (m_selection.isNull()) {
+            update();
+            return;
+        }
+        bool found = false;
+        for (QRect *r: m_Handles) {
+            if (r->contains(e->pos())) {
+                m_mouseOverHandle = r;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            m_mouseOverHandle = 0;
+            if (m_selection.contains(e->pos()) && !m_onButton &&
+                    m_state == Button::Type::move) {
+                setCursor(Qt::OpenHandCursor);
+            } else if (m_onButton) {
+                setCursor(Qt::ArrowCursor);
+            } else {
+                setCursor(Qt::CrossCursor);
+            }
+        } else if (m_state == Button::Type::move){
+            // cursor on the handlers
+            if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_BRHandle) {
+                setCursor(Qt::SizeFDiagCursor);
+            } else if (m_mouseOverHandle == &m_TRHandle || m_mouseOverHandle == &m_BLHandle) {
+                setCursor(Qt::SizeBDiagCursor);
+            } else if (m_mouseOverHandle == &m_LHandle || m_mouseOverHandle == &m_RHandle) {
+                setCursor(Qt::SizeHorCursor);
+            } else if (m_mouseOverHandle == &m_THandle || m_mouseOverHandle == &m_BHandle) {
+                setCursor(Qt::SizeVerCursor);
+            }
+        }
+    }
+    update();
+}
+
+void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
+    if (!m_selection.isNull() && !m_buttonHandler->isVisible()) {
+        updateSizeIndicator();
+        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->show();
+    }
+
+    m_mouseIsClicked = false;
+    m_newSelection = false;
+
+    if (m_state == Button::Type::move && m_mouseOverHandle == 0 &&
+            m_selection.contains(e->pos())) {
+        setCursor(Qt::OpenHandCursor);
+    }
+    update();
+}
+
+void CaptureWidget::keyPressEvent(QKeyEvent *e) {
+    if (e->key() == Qt::Key_Return) {
+        copyScreenshot();
+    } else if (e->key() == Qt::Key_Escape) {
+        close();
+    } else if (m_selection.isNull()) {
+        return;
+    } else if (e->key() == Qt::Key_Up
+               && m_selection.top() > rect().top()) {
+        m_selection.moveTop(m_selection.top()-1);
+    } else if (e->key() == Qt::Key_Down
+               && m_selection.bottom() < rect().bottom()) {
+        m_selection.moveBottom(m_selection.bottom()+1);
+    } else if (e->key() == Qt::Key_Left
+               && m_selection.left() > rect().left()) {
+        m_selection.moveLeft(m_selection.left()-1);
+    } else if (e->key() == Qt::Key_Right
+               && m_selection.right() < rect().right()) {
+        m_selection.moveRight(m_selection.right()+1);
+    }
+    m_buttonHandler->updatePosition(m_selection, rect());
+    update();
+}
+
+void CaptureWidget::saveScreenshot() {
+    Screenshot s(m_screenshot);
+    s.paintModifications(m_modifications);
+    if (m_selection.isNull()) {
+        s.graphicalSave();
+    } else { // save full screen when no selection
+        s.graphicalSave(getExtendedSelection());
+    }
+}
+
+void CaptureWidget::copyScreenshot() {
+    Screenshot s(m_screenshot);
+    s.paintModifications(m_modifications);
+    if (m_selection.isNull()) {
+        QApplication::clipboard()->setPixmap(s.getScreenshot());
+    } else { // copy full screen when no selection
+        QApplication::clipboard()->setPixmap(s.getScreenshot()
+                                             .copy(getExtendedSelection()));
+    }
+    close();
+}
+
+void CaptureWidget::undo() {
+    if (!m_modifications.isEmpty()) {
+        m_modifications.pop_back();
+        update();
+    }
+}
+
+void CaptureWidget::leftResize() {
+    if (!m_selection.isNull() && m_selection.right() > m_selection.left()) {
+        m_selection.setRight(m_selection.right()-1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
+void CaptureWidget::rightResize() {
+    if (!m_selection.isNull() && m_selection.right() < rect().right()) {
+        m_selection.setRight(m_selection.right()+1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
+void CaptureWidget::upResize() {
+    if (!m_selection.isNull() && m_selection.bottom() > m_selection.top()) {
+        m_selection.setBottom(m_selection.bottom()-1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
+void CaptureWidget::downResize() {
+    if (!m_selection.isNull() && m_selection.bottom() < rect().bottom()) {
+        m_selection.setBottom(m_selection.bottom()+1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+// http://stackoverflow.com/questions/10250332/qt-how-to-open-a-link-in-a-default-user-browser#10250386
+// http://stackoverflow.com/questions/40292484/how-to-pass-several-parameters-when-uploading-image-to-imgur
+void CaptureWidget::setState(Button::Type t) {
+    if(t == Button::Type::selectionIndicator ||
+            t == Button::Type::mouseVisibility ||
+            t == Button::Type::colorPicker ||
+            t == Button::Type::imageUploader) {
+        return;
+    }
+    Button::Type newState = t;
+    if (m_state == t) {
+        newState =  Button::Type::move;
+    }
+    if (t == Button::Type::save) {
+        saveScreenshot();
+    } else if (t == Button::Type::copy) {
+        copyScreenshot();
+    } else if (t == Button::Type::exit) {
+        close();
+    } else if (t == Button::Type::undo) {
+        undo();
+    } else {
+        m_state = newState;
+    }
+}
+
+void CaptureWidget::leaveButton() {
+    m_onButton = false;
+}
+void CaptureWidget::enterButton() {
+    m_onButton = true;
+}
+
+void CaptureWidget::createCapture() {
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if (const QWindow *window = windowHandle())
+        screen = window->screen();
+    if (!screen){
+        close();
+        return;
+    }
+    m_screenshot = screen->grabWindow(0);
+}
+
+void CaptureWidget::initShortcuts() {
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveScreenshot()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), this, SLOT(copyScreenshot()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo()));
+    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right), this, SLOT(rightResize()));
+    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left), this, SLOT(leftResize()));
+    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this, SLOT(upResize()));
+    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
+}
+
+void CaptureWidget::updateHandles() {
+    QRect r = m_selection.normalized().adjusted(0, 0, -1, -1);
+    int s2 = HANDLE_SIZE / 2;
+
+    m_TLHandle.moveTopLeft(QPoint(r.x() - s2, r.y() - s2));
+    m_TRHandle.moveTopRight(QPoint(r.right() + s2, r.y() - s2));
+    m_BRHandle.moveBottomRight(QPoint(r.x() + r.width() + s2, r.bottom() + s2));
+    m_BLHandle.moveBottomLeft(QPoint(QPoint(r.x() - s2, r.bottom() + s2)));
+
+    m_LHandle.moveTopLeft(QPoint(r.x() - s2, r.y() + r.height() / 2 - s2));
+    m_THandle.moveTopLeft(QPoint(r.x() + r.width() / 2 - s2, r.y() - s2));
+    m_RHandle.moveTopRight(QPoint(r.right() + s2, r.y() + r.height() / 2 - s2));
+    m_BHandle.moveBottomLeft(QPoint(r.x() + r.width() / 2 - s2, r.bottom() + s2));
+}
+
+void CaptureWidget::updateSizeIndicator() {
+    // The grabbed region is everything which is covered by the drawn
+    // rectangles (border included, that's the reason of the +2).
+    if (m_sizeIndButton){
+        m_sizeIndButton->setText(QString("%1\n%2")
+                                     .arg(m_selection.width()+2)
+                                     .arg(m_selection.height()+2));
+    }
+}
+
+QRegion CaptureWidget::handleMask() const {
+    // note: not normalized QRects are bad here, since they will not be drawn
+    QRegion mask;
+    foreach(QRect * rect, m_Handles) mask += QRegion(*rect);
+    return mask;
+}
+
+
+QPoint CaptureWidget::limitPointToRect(const QPoint &p, const QRect &r) const {
+    int x = r.x();
+    int y = r.y();
+    if (x < p.x()) {
+        x = (p.x() < r.right()) ? p.x() : r.right();
+    }
+    if (y < p.y()) {
+       y = (p.y() < r.bottom()) ? p.y() : r.bottom();
+    }
+    return QPoint(x,y);
+}
+
+QRect CaptureWidget::getExtendedSelection() const {
+    auto devicePixelRatio = m_screenshot.devicePixelRatio();
+
+    return QRect(m_selection.left()   * devicePixelRatio,
+                 m_selection.top()    * devicePixelRatio,
+                 m_selection.width()  * devicePixelRatio,
+                 m_selection.height() * devicePixelRatio);
+}
