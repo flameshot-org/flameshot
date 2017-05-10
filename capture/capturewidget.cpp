@@ -38,6 +38,9 @@
 
 #include <QDebug>
 
+// CaptureWidget is the main component used to capture the screen. It contains an
+// are of selection with its respective buttons.
+
 namespace {
     const int HANDLE_SIZE = 9;
 }

@@ -4,6 +4,9 @@
 #include <QToolTip>
 #include <QSettings>
 
+// Button represents a single button of the capture widget, it can enable
+// multiple functionality.
+
 namespace {
     const int BUTTON_SIZE = 30;
 }

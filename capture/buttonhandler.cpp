@@ -1,6 +1,9 @@
 #include "buttonhandler.h"
 #include <QPoint>
 
+// ButtonHandler is a habdler for every active button. It makes easier to
+// manipulate the buttons as a unit.
+
 namespace {
     const int SEPARATION = 6;
 }

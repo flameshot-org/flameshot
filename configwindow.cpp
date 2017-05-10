@@ -7,6 +7,8 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
+// ConfigWindow contains the menus where you can configure the application
+
 ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowIcon(QIcon(":img/flameshot.svg"));

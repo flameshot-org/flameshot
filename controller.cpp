@@ -7,6 +7,8 @@
 #include <QMenu>
 #include <QSystemTrayIcon>
 
+// Controller is the core component of Flameshot, creates the trayIcon and
+// launches the capture widget
 
 Controller::Controller(QObject *parent) : QObject(parent) {
     createActions();
@@ -21,6 +23,7 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     qApp->setQuitOnLastWindowClosed(false);
 }
 
+// creates the items of the trayIcon
 void Controller::createActions() {
     m_configAction = new QAction(tr("&Configuration"), this);
     connect(m_configAction, &QAction::triggered, this, &Controller::openConfigWindow);
@@ -32,6 +35,7 @@ void Controller::createActions() {
     connect(m_quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 }
 
+// creates the trayIcon
 void Controller::createTrayIcon() {
     // requires a widget as parent but it should be used the whole app live period
     m_trayIconMenu = new QMenu();
@@ -46,18 +50,21 @@ void Controller::createTrayIcon() {
     m_trayIcon->setIcon(QIcon(":img/flameshot.svg"));
 }
 
+// creation of a new capture
 void Controller::slotPrintHotkey() {
     if (!m_captureWindow) {
         m_captureWindow = new CaptureWidget();
     }
 }
 
+// creation of the configuration window
 void Controller::openConfigWindow() {
     if (!m_configWindow) {
         m_configWindow = new ConfigWindow();
     }
 }
 
+// creation of the window of information
 void Controller::openInfoWindow() {
     if (!m_infoWindow) {
         m_infoWindow = new InfoWindow();

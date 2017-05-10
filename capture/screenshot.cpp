@@ -11,7 +11,8 @@
 #include <QFileDialog>
 #include <QPainter>
 
-// ADD MODIFICATIONS
+// Screenshot is an extension of QPixmap which lets you manage specific tasks
+
 Screenshot::Screenshot(const QPixmap &p) : m_screenshot(p) {
 
 }

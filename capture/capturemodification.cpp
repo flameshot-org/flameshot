@@ -2,6 +2,9 @@
 #include <QSettings>
 #include <QColor>
 
+// CaptureModification is a single modification in the screenshot drawn
+// by the user.
+
 CaptureModification::CaptureModification(
         const Button::Type t, QPoint p) : m_type(t) {
     m_coords.append(p);
