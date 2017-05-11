@@ -16,7 +16,7 @@
    viewBox="0 0 64 64"
    enable-background="new 0 0 64 64"
    xml:space="preserve"
-   sodipodi:docname="libreshot.svg"
+   sodipodi:docname="flameshot.svg"
    inkscape:version="0.92.1 r"
    inkscape:export-filename="/home/dharkael/qt/libreshot/src/libreshot.svg.png"
    inkscape:export-xdpi="96"
@@ -38,9 +38,9 @@
      id="namedview97"
      showgrid="false"
      inkscape:zoom="5.2149126"
-     inkscape:cx="15.629948"
+     inkscape:cx="12.274187"
      inkscape:cy="24.949905"
-     inkscape:window-x="1024"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="Layer_1" /><g
@@ -84,11 +84,4 @@
      d="m 13.844924,32.547713 c 8.832834,-11.647275 6.84612,-19.816349 6.84612,-19.816349 0,0 11.316725,14.190349 3.61602,22.979377 -8.602482,9.818252 -4.856061,16.648887 -4.856061,16.648887 0,0 -10.6722595,-13.131467 -5.606079,-19.811915 z"
      id="path914"
      inkscape:connector-curvature="0"
-     sodipodi:nodetypes="scscs" /><g
-     id="g48"
-     transform="translate(-89.35912,-5.3692182)"><g
-       id="g46"><path
-         style="fill:#ffffff"
-         inkscape:connector-curvature="0"
-         id="path44"
-         d="M 34.5,25.7 C 35.6,25.2 36.8,25 38,25 c 1.3,0 2.4,0.3 3.5,0.7 3.2,1.4 5.5,4.6 5.5,8.3 0,5 -4,9 -9,9 v 0 c -5,0 -9,-4.1 -9,-9 0,-3.7 2.3,-6.9 5.5,-8.3 z" /></g></g></svg>
+     sodipodi:nodetypes="scscs" /></svg>
