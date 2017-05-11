@@ -70,12 +70,8 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     setCursor(Qt::CrossCursor);
     initShortcuts();
 
-    QVector<Button::Type> tempVector;
-    for (int i =0; i < (int)Button::Type::last; ++i) {
-        tempVector.append((Button::Type)i);
-    }
     m_buttonHandler = new ButtonHandler();
-    redefineButtons(tempVector);
+    redefineButtons();
 
     createCapture();
     resize(m_screenshot.size());
@@ -89,9 +85,12 @@ CaptureWidget::~CaptureWidget() {
     delete(m_buttonHandler);
 }
 
-void CaptureWidget::redefineButtons(QVector<Button::Type> vector) {
+void CaptureWidget::redefineButtons() {
+    QSettings settings;
+    auto buttonsInt = settings.value("buttons").value<QList<int> >();
     QVector<Button*> vectorButtons;
-    for (auto t: vector) {
+    for (auto i: buttonsInt) {
+        auto t = static_cast<Button::Type>(i);
         Button *b = new Button(t, this);
         if (t == Button::Type::selectionIndicator) {
             m_sizeIndButton = b;

@@ -40,7 +40,7 @@ public:
     explicit CaptureWidget(QWidget *parent = 0);
     ~CaptureWidget();
 
-    void redefineButtons(QVector<Button::Type>);
+    void redefineButtons();
 
 private slots:
     void saveScreenshot();

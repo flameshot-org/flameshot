@@ -41,10 +41,7 @@ void Screenshot::setScreenshot(const QPixmap &p) {
 QPixmap Screenshot::getScreenshot() const {
     return m_screenshot;
 }
-/*
-https://github.com/KDE/spectacle/tree/118bcd8a9a4c6c89445a589fa990d15ec9223099/src/PlatformBackends
-https://github.com/ckaiser/Lightscreen/blob/354574e5d4a15af60004c86cb747dc3bb72a33e8/tools/screenshot.cpp#L416
-*/
+
 QString Screenshot::graphicalSave(const QRect &selection) const {
     const QString format = "png";
 
@@ -118,6 +115,9 @@ QPixmap Screenshot::paintModifications(const QVector<CaptureModification> v) {
         switch (modification.getType()) {
         case Button::Type::arrow:
             painter.drawLine(points[0], points[1]);
+            // https://forum.qt.io/topic/27284/solved-trouble-creating-an-arrow-between-two-qgraphicsitems
+            // http://doc.qt.io/qt-5/qtwidgets-graphicsview-diagramscene-example.html
+            // https://forum.qt.io/topic/38928/code-to-create-a-arrow-graphics-item-in-qt
             break;
         case Button::Type::circle:
             painter.drawEllipse(QRect(points[0], points[1]));

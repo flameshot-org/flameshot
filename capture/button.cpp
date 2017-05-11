@@ -153,6 +153,23 @@ size_t Button::getButtonBaseSize() {
     return BUTTON_SIZE;
 }
 
+Button::Type Button::getTypeByName(QString s) {
+    // posible use of bimap???
+    Button::Type res;
+    for (auto it = typeName.begin(); it != typeName.end(); ++it )
+        if (it->second == s)
+            res = it->first;
+    return res;
+}
+
+QString Button::getTypeName(Button::Type t) {
+    return typeName[t];
+}
+
+QString Button::getTypeTooltip(Button::Type t) {
+    return typeTooltip[t];
+}
+
 Button::typeData Button::typeTooltip = {
         {Button::Type::selectionIndicator, "Shows the dimensions of the selection (X Y)"},
         {Button::Type::mouseVisibility, "Sets the visibility of the mouse pointer"},

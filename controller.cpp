@@ -32,6 +32,9 @@ Controller::Controller(QObject *parent) : QObject(parent) {
     createTrayIcon();
     m_trayIcon->show();
 
+    // required for the button serialization
+    qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
+
     m_nativeEventFilter = new NativeEventFilter(this);
     qApp->installNativeEventFilter(m_nativeEventFilter);
     connect(m_nativeEventFilter, &NativeEventFilter::activated, this, &Controller::slotPrintHotkey);

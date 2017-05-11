@@ -49,14 +49,14 @@ public:
         last
     };
 
-    typedef std::map<Button::Type, const QString> typeData;
-    static typeData typeTooltip;
-    static typeData typeName;
 
     explicit Button(Type, QWidget *parent = 0);
 
     static QIcon getIcon(const Type);
     static size_t getButtonBaseSize();
+    static Button::Type getTypeByName(QString);
+    static QString getTypeName(Button::Type);
+    static QString getTypeTooltip(Button::Type);
 
     Type getButtonType() const;
 
@@ -72,6 +72,10 @@ private:
     Type m_buttonType;
 
     QPropertyAnimation *emergeAnimation;
+
+    typedef std::map<Button::Type, const QString> typeData;
+    static typeData typeTooltip;
+    static typeData typeName;
 
 signals:
     void hovered();

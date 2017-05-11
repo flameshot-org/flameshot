@@ -36,32 +36,47 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
     QLabel *buttonSelectLabel = new QLabel("Choose the buttons to enable", this);
     baseLayout->addWidget(buttonSelectLabel);
 
-    QListWidget *buttonList = new QListWidget(this);
-    baseLayout->addWidget(buttonList);
-
-    buttonList->setFlow(QListWidget::TopToBottom);
-    buttonList->setMouseTracking(true);
-    //buttonList->setSelectionMode(QAbstractItemView::NoSelection);
-    // http://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlistview
-
-    for (int i = 0; i != static_cast<int>(Button::Type::last); ++i) {
-        auto t = static_cast<Button::Type>(i);
-        QListWidgetItem *buttonItem = new QListWidgetItem(buttonList);
-        buttonItem->setIcon(Button::getIcon(t));
-        buttonItem->setText(Button::typeName[t]);
-        buttonItem->setToolTip(Button::typeTooltip[t]);
-        buttonItem->setCheckState(Qt::Unchecked);
-    }
+    m_buttonListView = new QListWidget(this);
+    m_buttonListView->setFlow(QListWidget::TopToBottom);
+    m_buttonListView->setMouseTracking(true);
 
     QSettings settings;
-    // http://www.qtcentre.org/threads/52957-QColor-vector-in-QSettings
+    m_listButtons = settings.value("buttons").value<QList<int> >();
+    initButtonList();
 
-    // black white icons
-    // color interface
+    connect(m_buttonListView, &QListWidget::itemChanged, this,
+            &ConfigWindow::updateActiveButtons);
 
-    // buttons available
-
-    // path save
-    // color paint tools
+    baseLayout->addWidget(m_buttonListView);
     show();
+}
+
+void ConfigWindow::initButtonList() {
+    for (int i = 0; i != static_cast<int>(Button::Type::last); ++i) {
+        auto t = static_cast<Button::Type>(i);
+        // Blocked items
+        if (t ==Button::Type::mouseVisibility || t ==Button::Type::text ||
+                t ==Button::Type::imageUploader || t ==Button::Type::arrow) {
+            continue;
+        }
+        QListWidgetItem *buttonItem = new QListWidgetItem(m_buttonListView);
+        buttonItem->setIcon(Button::getIcon(t));
+        buttonItem->setText(Button::getTypeName(t));
+        buttonItem->setToolTip(Button::getTypeTooltip(t));
+        if (m_listButtons.contains(i)) {
+            buttonItem->setCheckState(Qt::Checked);
+        } else {
+            buttonItem->setCheckState(Qt::Unchecked);
+        }
+    }
+}
+
+void ConfigWindow::updateActiveButtons(QListWidgetItem *item) {
+    int buttonIndex = static_cast<int>(Button::getTypeByName(item->text()));
+    if (item->checkState() == Qt::Checked) {
+        m_listButtons.append(buttonIndex);
+    } else {
+        m_listButtons.removeOne(buttonIndex);
+    }
+    QSettings().setValue("buttons", QVariant::fromValue(m_listButtons));
 }
