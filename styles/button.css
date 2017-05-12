@@ -7,6 +7,6 @@ Button:hover {
     background-color: rgb(166, 0, 200);
 }
 
-Button:pressed {
+Button:pressed:!hover {
     background-color: rgb(136, 0, 170);
 }
