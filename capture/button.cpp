@@ -154,8 +154,7 @@ size_t Button::getButtonBaseSize() {
 }
 
 Button::Type Button::getTypeByName(QString s) {
-    // posible use of bimap???
-    Button::Type res;
+    Button::Type res = Button::Type::line;
     for (auto it = typeName.begin(); it != typeName.end(); ++it )
         if (it->second == s)
             res = it->first;
