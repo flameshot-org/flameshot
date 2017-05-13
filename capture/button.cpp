@@ -51,8 +51,11 @@ Button::Button(Type t, QWidget *parent) : QPushButton(parent) {
 
 }
 
-QIcon Button::getIcon(const Type t) {
-    QString iconColor = "White"; // or "Black"
+QIcon Button::getIcon(const Type t, bool isWhite) {
+    QString iconColor = "Black"; // or "Black"
+    if (isWhite) {
+        iconColor = "White";
+    }
     QString path = ":/img/buttonIcons" + iconColor + "/";
 
     if (t == Type::mouseVisibility) {
@@ -113,6 +116,12 @@ QIcon Button::getIcon(const Type t) {
         break;
     }
     return QIcon(path);
+}
+
+QIcon Button::getIcon(const Type t) {
+    // assign th isWhite based on the settings
+    bool isWhite = true;
+    return getIcon(t, isWhite);
 }
 
 void Button::enterEvent(QEvent *e) {

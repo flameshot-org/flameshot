@@ -50,7 +50,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
     baseLayout->addWidget(m_buttonListView);
     show();
 }
-
+#include <QDebug>
 void ConfigWindow::initButtonList() {
     for (int i = 0; i != static_cast<int>(Button::Type::last); ++i) {
         auto t = static_cast<Button::Type>(i);
@@ -60,7 +60,15 @@ void ConfigWindow::initButtonList() {
             continue;
         }
         QListWidgetItem *buttonItem = new QListWidgetItem(m_buttonListView);
-        buttonItem->setIcon(Button::getIcon(t));
+
+        bool iconsAreWhite = false;
+        QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
+        // when the background is lighter than gray, it uses the white icons
+        if (bgColor < QColor(Qt::gray).name()) {
+            iconsAreWhite = true;
+        }
+        buttonItem->setIcon(Button::getIcon(t, iconsAreWhite));
+
         buttonItem->setText(Button::getTypeName(t));
         buttonItem->setToolTip(Button::getTypeTooltip(t));
         if (m_listButtons.contains(i)) {

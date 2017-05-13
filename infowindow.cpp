@@ -36,10 +36,6 @@ InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     initInfoTable();
     layout->addWidget(new QLabel("<b>License</b>", this));
     layout->addWidget(new QLabel("GPLv3+", this));
-    layout->addWidget(new QLabel("<b>License</b>", this));
-    layout->addWidget(new QLabel("GPLv3+", this));
-    layout->addWidget(new QLabel("<b>License</b>", this));
-    layout->addWidget(new QLabel("GPLv3+", this));
 
     // inform about full screen capture when no selection
 
