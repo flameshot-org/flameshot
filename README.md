@@ -3,8 +3,16 @@
 
 **This program is in heavy develpment and it's incomplete!**
 
+## Considerations
+If you have a system-wide shortcut assigned to the`Print`
+ key, you should disable it because it may interfere with the global key detection.
+ 
+ Check the ./docs folder for more information.
+ 
 ## Dependencies
-TO DO
+- QT (tested with QT5.8)
+- QT X11
+- X11 devel (with xcb)
 
 ## Screenshots
 Dynamic button position based on your selection!
