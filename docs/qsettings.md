@@ -1,0 +1,15 @@
+- List of Buttons
+    - value: "buttons"
+    - type: <QList<int> >
+- Last saved image path
+    - value: "savePath"
+    - type: QString
+- Drawing color
+    - value: "drawColor"
+    - type: QColor
+- Mouse visibility
+    - value: "mouseVisible"
+    - type: bool
+- UI color
+    - value: "uiColor"
+    - type: QColor
