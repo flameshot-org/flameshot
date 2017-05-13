@@ -1,6 +1,7 @@
 Button {
     border-radius: 15px;
     background-color: rgb(136, 0, 170);
+    color: white
 }
 
 Button:hover {
