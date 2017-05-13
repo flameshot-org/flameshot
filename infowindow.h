@@ -20,6 +20,8 @@
 
 #include <QWidget>
 
+class QVBoxLayout;
+
 class InfoWindow : public QWidget {
     Q_OBJECT
 public:
@@ -28,6 +30,10 @@ public:
 signals:
 
 public slots:
+
+private:
+    void initInfoTable();
+    QVBoxLayout *layout;
 };
 
 #endif // INFOWINDOW_H
