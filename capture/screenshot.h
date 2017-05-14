@@ -20,22 +20,27 @@
 
 #include <QPixmap>
 #include <QRect>
+#include <QPointer>
 
 class QString;
 class CaptureModification;
+class QNetworkAccessManager;
 
-class Screenshot
-{
+class Screenshot {
 public:
     Screenshot(const QPixmap &);
+    ~Screenshot();
 
     void setScreenshot(const QPixmap &);
     QPixmap getScreenshot() const;
     QString graphicalSave(const QRect &selection = QRect()) const;
+    void uploadToImgur(QNetworkAccessManager *,
+                       const QRect &selection = QRect());
     QPixmap paintModifications(const QVector<CaptureModification>);
 
 private:
     QPixmap m_screenshot;
+    QPointer<QNetworkAccessManager> m_accessManager;
 };
 
 #endif // SCREENSHOT_H

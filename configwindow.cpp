@@ -56,7 +56,7 @@ void ConfigWindow::initButtonList() {
         auto t = static_cast<Button::Type>(i);
         // Blocked items
         if (t ==Button::Type::mouseVisibility || t ==Button::Type::text ||
-                t ==Button::Type::imageUploader || t ==Button::Type::arrow) {
+                 t ==Button::Type::arrow) {
             continue;
         }
         QListWidgetItem *buttonItem = new QListWidgetItem(m_buttonListView);

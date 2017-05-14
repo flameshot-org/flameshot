@@ -27,11 +27,19 @@
 #include <QImageWriter>
 #include <QFileDialog>
 #include <QPainter>
+#include <QBuffer>
+#include <QUrlQuery>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
 
 // Screenshot is an extension of QPixmap which lets you manage specific tasks
 
 Screenshot::Screenshot(const QPixmap &p) : m_screenshot(p) {
 
+}
+
+Screenshot::~Screenshot() {
+    if (m_accessManager) delete(m_accessManager);
 }
 
 void Screenshot::setScreenshot(const QPixmap &p) {
@@ -115,9 +123,8 @@ QPixmap Screenshot::paintModifications(const QVector<CaptureModification> v) {
         switch (modification.getType()) {
         case Button::Type::arrow:
             painter.drawLine(points[0], points[1]);
-            // https://forum.qt.io/topic/27284/solved-trouble-creating-an-arrow-between-two-qgraphicsitems
-            // http://doc.qt.io/qt-5/qtwidgets-graphicsview-diagramscene-example.html
-            // https://forum.qt.io/topic/38928/code-to-create-a-arrow-graphics-item-in-qt
+
+
             break;
         case Button::Type::circle:
             painter.drawEllipse(QRect(points[0], points[1]));
@@ -142,6 +149,35 @@ QPixmap Screenshot::paintModifications(const QVector<CaptureModification> v) {
         }
     }
     return m_screenshot;
+}
+
+void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
+                               const QRect &selection) {
+    QString title ="asdasdf";
+    QString description = "test";
+    QPixmap pixToSave;
+    if (selection.isEmpty()) {
+        pixToSave = m_screenshot;
+    } else { // save full screen when no selection
+        pixToSave = m_screenshot.copy(selection);
+    }
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    pixToSave.save(&buffer, "PNG");
+
+    QUrlQuery urlQuery;
+    urlQuery.addQueryItem("title", title);
+    urlQuery.addQueryItem("description", description);
+
+    QNetworkRequest request;
+    QUrl url("https://api.imgur.com/3/image");
+    url.setQuery(urlQuery);
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader,
+                      "application/application/x-www-form-urlencoded");
+    request.setRawHeader("Authorization", "Client-ID 313baf0c7b4d3ff");
+
+    accessManager->post(request, byteArray);
 }
 
 

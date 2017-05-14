@@ -35,6 +35,8 @@
 #include <QMouseEvent>
 #include <QClipboard>
 #include <QSettings>
+#include <QNetworkReply>
+#include <QDesktopServices>
 
 #include <QDebug>
 
@@ -329,6 +331,30 @@ void CaptureWidget::copyScreenshot() {
     close();
 }
 
+void CaptureWidget::openURL(QNetworkReply *reply) {
+    if (reply->error() == QNetworkReply::NoError) {
+        QString data = QString::fromUtf8(reply->readAll());
+        QString imageID = data.split("\"").at(5);
+        QString url = QString("http://i.imgur.com/%1.png").arg(imageID);
+        QDesktopServices::openUrl(url);
+    }
+    close();
+}
+
+void CaptureWidget::uploadScreenshot() {
+    Screenshot s(m_screenshot);
+    s.paintModifications(m_modifications);
+    QNetworkAccessManager *am = new QNetworkAccessManager(this);
+    connect(am, &QNetworkAccessManager::finished, this,
+            &CaptureWidget::openURL);
+    if (m_selection.isNull()) {
+        s.uploadToImgur(am);
+    } else {
+        s.uploadToImgur(am, getExtendedSelection());
+    }
+    hide();
+}
+
 void CaptureWidget::undo() {
     if (!m_modifications.isEmpty()) {
         m_modifications.pop_back();
@@ -375,8 +401,7 @@ void CaptureWidget::downResize() {
 void CaptureWidget::setState(Button::Type t) {
     if(t == Button::Type::selectionIndicator ||
             t == Button::Type::mouseVisibility ||
-            t == Button::Type::colorPicker ||
-            t == Button::Type::imageUploader) {
+            t == Button::Type::colorPicker) {
         return;
     }
     Button::Type newState = t;
@@ -391,6 +416,8 @@ void CaptureWidget::setState(Button::Type t) {
         close();
     } else if (t == Button::Type::undo) {
         undo();
+    } else if (t == Button::Type::imageUploader) {
+        uploadScreenshot();
     } else {
         m_state = newState;
     }

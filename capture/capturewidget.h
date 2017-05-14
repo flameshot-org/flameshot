@@ -33,6 +33,8 @@ class QPaintEvent;
 class QResizeEvent;
 class QMouseEvent;
 class CaptureModification;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 class CaptureWidget : public QWidget {
     Q_OBJECT
@@ -45,6 +47,7 @@ public:
 private slots:
     void saveScreenshot();
     void copyScreenshot();
+    void openURL(QNetworkReply *reply);
     void leaveButton();
     void enterButton();
     void undo();
@@ -92,6 +95,7 @@ protected:
 
 private:
     void createCapture();
+    void uploadScreenshot();
     void initShortcuts();
     void updateHandles();
     void updateSizeIndicator();
