@@ -31,8 +31,6 @@ public:
 signals:
     void activated();
 
-public slots:
-
 private:
     void setShortcut();
 };

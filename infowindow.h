@@ -27,10 +27,6 @@ class InfoWindow : public QWidget {
 public:
     explicit InfoWindow(QWidget *parent = 0);
 
-signals:
-
-public slots:
-
 private:
     void initInfoTable();
     QVBoxLayout *layout;

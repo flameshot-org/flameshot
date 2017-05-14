@@ -52,7 +52,10 @@ bool ButtonHandler::isVisible() const {
 size_t ButtonHandler::size() const {
     return m_vectorButtons.size();
 }
-
+// updatePosition updates the position of the buttons arround the
+// selection area. Ignores the sides blocked by the end of the screen.
+// When the selection is too small it works on a virtual selection with
+// the original in the center.
 void ButtonHandler::updatePosition(const QRect &selection,
                                    const  QRect &limits) {
     const QVector<Button*>::size_type vecLength = m_vectorButtons.size();
@@ -239,6 +242,9 @@ void ButtonHandler::updatePosition(const QRect &selection,
     }
 }
 
+// getHPoints is an auxiliar method for the button position computation.
+// starts from a known center and keeps adding elements horizontally
+// and returns the computed positions.
 QVector<QPoint> ButtonHandler::getHPoints(
         const QPoint &center, const int elements) const {
 
@@ -261,6 +267,9 @@ QVector<QPoint> ButtonHandler::getHPoints(
     return res;
 }
 
+// getHPoints is an auxiliar method for the button position computation.
+// starts from a known center and keeps adding elements vertically
+// and returns the computed positions.
 QVector<QPoint> ButtonHandler::getVPoints(
         const QPoint &center, const int elements) const {
 
@@ -282,7 +291,7 @@ QVector<QPoint> ButtonHandler::getVPoints(
     }
     return res;
 }
-
+// setButtons redefines the buttons of the button handler
 void ButtonHandler::setButtons(QVector<Button *> v) {
     for (Button *b: m_vectorButtons) delete(b);
     m_vectorButtons = v;

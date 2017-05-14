@@ -19,16 +19,14 @@
 #define CONFIGURATION_H
 
 #include <QWidget>
-class QListWidgetItem;
 
+class QListWidgetItem;
 class QListWidget;
 
 class ConfigWindow : public QWidget {
     Q_OBJECT
 public:
     explicit ConfigWindow(QWidget *parent = 0);
-
-signals:
 
 private slots:
     void updateActiveButtons(QListWidgetItem *);

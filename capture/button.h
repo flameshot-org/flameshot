@@ -49,7 +49,6 @@ public:
         last
     };
 
-
     explicit Button(Type, QWidget *parent = 0);
 
     static QIcon getIcon(const Type);
@@ -68,6 +67,11 @@ protected:
     virtual void leaveEvent(QEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
 
+signals:
+    void hovered();
+    void mouseExited();
+    void typeEmited(Type);
+
 private:
     Button(QWidget *parent = 0);
     Type m_buttonType;
@@ -77,13 +81,6 @@ private:
     typedef std::map<Button::Type, const QString> typeData;
     static typeData typeTooltip;
     static typeData typeName;
-
-signals:
-    void hovered();
-    void mouseExited();
-    void typeEmited(Type);
-
-public slots:
 };
 
 #endif // BUTTON_H

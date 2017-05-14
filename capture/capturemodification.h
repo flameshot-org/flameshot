@@ -31,6 +31,7 @@ public:
     QColor getColor() const;
     QVector<QPoint> getPoints() const;
     void addPoint(const QPoint);
+
 private:
     QVector<QPoint> m_coords;
     QColor m_color;

@@ -51,8 +51,10 @@ Button::Button(Type t, QWidget *parent) : QPushButton(parent) {
 
 }
 
+// getIcon returns the icon for the type of button, this method lets
+// you choose between black or white icons (needed for the config menu)
 QIcon Button::getIcon(const Type t, bool isWhite) {
-    QString iconColor = "Black"; // or "Black"
+    QString iconColor = "Black";
     if (isWhite) {
         iconColor = "White";
     }
@@ -117,9 +119,9 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     }
     return QIcon(path);
 }
-
+// get icon returns the icon for the type of button
 QIcon Button::getIcon(const Type t) {
-    // assign th isWhite based on the settings
+    // assign the isWhite based on the settings
     bool isWhite = true;
     return getIcon(t, isWhite);
 }
@@ -135,7 +137,6 @@ void Button::leaveEvent(QEvent *e) {
 }
 
 void Button::mouseReleaseEvent(QMouseEvent *) {
-
     if (m_buttonType == Type::mouseVisibility) {
         QSettings settings;
         bool mouseVisible = settings.value("mouseVisible").toBool();
@@ -144,9 +145,7 @@ void Button::mouseReleaseEvent(QMouseEvent *) {
     } else if (m_buttonType == Type::colorPicker) {
 
     }
-
     Q_EMIT typeEmited(m_buttonType);
-
 }
 
 void Button::animatedShow() {
@@ -157,13 +156,14 @@ void Button::animatedShow() {
 Button::Type Button::getButtonType() const {
     return m_buttonType;
 }
-
+// getButtonBaseSize returns the base size of the buttons
 size_t Button::getButtonBaseSize() {
     return BUTTON_SIZE;
 }
-
+// getTypeByName receives a name and return the corresponding button type.
+// returns Button::Type::last when the corresponding button is not found.
 Button::Type Button::getTypeByName(QString s) {
-    Button::Type res = Button::Type::line;
+    Button::Type res = Type::last;
     for (auto it = typeName.begin(); it != typeName.end(); ++it )
         if (it->second == s)
             res = it->first;

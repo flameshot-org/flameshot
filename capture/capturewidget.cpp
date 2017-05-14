@@ -42,16 +42,19 @@
 // are of selection with its respective buttons.
 
 namespace {
+    // size of the handlers at the corners of the selection
     const int HANDLE_SIZE = 9;
 }
 
 // http://doc.qt.io/qt-5/qwidget.html#setMask
 
 CaptureWidget::CaptureWidget(QWidget *parent) :
-    QWidget(parent), m_mouseOverHandle(0), m_newSelection(false),
-    m_grabbing(false), m_onButton(false), m_state(Button::Type::move) {
-    setAttribute(Qt::WA_DeleteOnClose);
+    QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
+    m_newSelection(false), m_grabbing(false), m_onButton(false),
+    m_state(Button::Type::move) {
 
+    setAttribute(Qt::WA_DeleteOnClose);
+    // create selection handlers
     QRect baseRect(0, 0, HANDLE_SIZE, HANDLE_SIZE);
     m_TLHandle = baseRect; m_TRHandle = baseRect;
     m_BLHandle = baseRect; m_BRHandle = baseRect;
@@ -60,7 +63,7 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
 
     m_Handles << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
     << &m_LHandle << &m_THandle << &m_RHandle << &m_BHandle;
-
+    // set base config of the widget
     move(0,0);
     setWindowFlags( Qt::WindowStaysOnTopHint
                   | Qt::X11BypassWindowManagerHint
@@ -69,15 +72,13 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     setMouseTracking(true);
     setCursor(Qt::CrossCursor);
     initShortcuts();
-
+    // create buttons
     m_buttonHandler = new ButtonHandler();
     redefineButtons();
-
+    m_buttonHandler->hide();
+    // init screenshot
     createCapture();
     resize(m_screenshot.size());
-
-    m_mouseIsClicked = false;
-    m_buttonHandler->hide();
     show();
 }
 
@@ -85,6 +86,8 @@ CaptureWidget::~CaptureWidget() {
     delete(m_buttonHandler);
 }
 
+// redefineButtons retrieves the buttons configured to be shown with the
+// selection in the capture
 void CaptureWidget::redefineButtons() {
     QSettings settings;
     auto buttonsInt = settings.value("buttons").value<QList<int> >();
@@ -270,7 +273,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         m_buttonHandler->updatePosition(m_selection, rect());
         m_buttonHandler->show();
     }
-
     m_mouseIsClicked = false;
     m_newSelection = false;
 
@@ -369,8 +371,7 @@ void CaptureWidget::downResize() {
         update();
     }
 }
-// http://stackoverflow.com/questions/10250332/qt-how-to-open-a-link-in-a-default-user-browser#10250386
-// http://stackoverflow.com/questions/40292484/how-to-pass-several-parameters-when-uploading-image-to-imgur
+
 void CaptureWidget::setState(Button::Type t) {
     if(t == Button::Type::selectionIndicator ||
             t == Button::Type::mouseVisibility ||
