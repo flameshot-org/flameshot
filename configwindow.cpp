@@ -23,6 +23,7 @@
 #include <QListWidgetItem>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QDebug>
 
 // ConfigWindow contains the menus where you can configure the application
 
@@ -50,15 +51,10 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
     baseLayout->addWidget(m_buttonListView);
     show();
 }
-#include <QDebug>
+
 void ConfigWindow::initButtonList() {
     for (int i = 0; i != static_cast<int>(Button::Type::last); ++i) {
         auto t = static_cast<Button::Type>(i);
-        // Blocked items
-        if (t ==Button::Type::mouseVisibility || t ==Button::Type::text ||
-                 t ==Button::Type::arrow) {
-            continue;
-        }
         QListWidgetItem *buttonItem = new QListWidgetItem(m_buttonListView);
 
         bool iconsAreWhite = false;

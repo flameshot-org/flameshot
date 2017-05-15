@@ -42,6 +42,7 @@ private slots:
 private:
     void createActions();
     void createTrayIcon();
+    void initDefaults();
 
     QAction *m_configAction;
     QAction *m_infoAction;

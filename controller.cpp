@@ -23,17 +23,19 @@
 #include <QApplication>
 #include <QMenu>
 #include <QSystemTrayIcon>
+#include <QSettings>
 
 // Controller is the core component of Flameshot, creates the trayIcon and
 // launches the capture widget
 
 Controller::Controller(QObject *parent) : QObject(parent) {
+    // required for the button serialization
+    qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
     createActions();
     createTrayIcon();
     m_trayIcon->show();
 
-    // required for the button serialization
-    qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
+    initDefaults();
 
     m_nativeEventFilter = new NativeEventFilter(this);
     qApp->installNativeEventFilter(m_nativeEventFilter);
@@ -68,6 +70,23 @@ void Controller::createTrayIcon() {
     m_trayIcon->setToolTip("Flameshot");
     m_trayIcon->setContextMenu(m_trayIconMenu);
     m_trayIcon->setIcon(QIcon(":img/flameshot.svg"));
+}
+
+// initDefaults inits the global config in the very first run of the program
+void Controller::initDefaults() {
+    QSettings settings;
+    if (!settings.value("initiated").toBool()) {
+        settings.setValue("initiated", true);
+        settings.setValue("drawColor", QColor(Qt::red));
+        settings.setValue("mouseVisible", false);
+        settings.setValue("uiColor", QColor(136, 0, 170));
+
+        QList<int> buttons;
+        for (int i = 0; i < static_cast<int>(Button::Type::last); ++i) {
+            buttons << i;
+        }
+        settings.setValue("buttons", QVariant::fromValue(buttons));
+    }
 }
 
 // creation of a new capture
