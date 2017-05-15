@@ -128,12 +128,13 @@ void ButtonHandler::updatePosition(const QRect &selection,
             }
             break;
         }
+        // number of buttons per row column
         int buttonsPerRow = (baseArea.width() + SEPARATION) / (baseWidth + SEPARATION);
         int buttonsPerCol = (baseArea.height() + SEPARATION) / (baseHeight + SEPARATION);
-
+        // buttons to be placed in the corners
         int extraButtons = vecLength - buttonsPerRow*2 - buttonsPerCol*2;
         int elemsAtCorners = extraButtons > 4 ? 4 : extraButtons;
-
+        // add buttons at the botton of the seletion
         if (!blockedBotton) {
             int addCounter =
                     (vecLength - elemIndicator < buttonsPerRow) ?
@@ -161,6 +162,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 ++elemIndicator;
             }
         }
+        // add buttons at the right side of the seletion
         if (!blockedRight && elemIndicator < vecLength) {
             int addCounter =
                     (vecLength - elemIndicator < buttonsPerCol) ?
@@ -174,6 +176,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 ++elemIndicator;
             }
         }
+        // add buttons at the top of the seletion
         if (!blockedTop && elemIndicator < vecLength) {
             int addCounter =
                     (vecLength - elemIndicator < buttonsPerRow) ?
@@ -201,12 +204,13 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 ++elemIndicator;
             }
         }
+        // add buttons at the left side of the seletion
         if (!blockedLeft && elemIndicator < vecLength) {
             int addCounter =
                     (vecLength - elemIndicator < buttonsPerCol) ?
                       vecLength - elemIndicator : buttonsPerCol;
 
-            if (vecLength - elemIndicator < buttonsPerRow) {
+            if (vecLength - elemIndicator < buttonsPerCol) {
                 addCounter = vecLength - elemIndicator;
             }
             QPoint center = QPoint(baseArea.left() - (SEPARATION+baseWidth),
