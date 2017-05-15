@@ -55,10 +55,11 @@ QString Screenshot::graphicalSave(const QRect &selection) const {
 
     QSettings settings;
     QString savePath = settings.value("savePath").toString();
-    if (savePath.isEmpty()) {
+    if (savePath.isEmpty() || !QDir(savePath).exists()) {
         savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-        if (savePath.isEmpty())
+        if (savePath.isEmpty()) {
             savePath = QDir::currentPath();
+        }
     }
     // find unused name adding _n where n is a number
     QString tempName = QObject::tr("/screenshot");
