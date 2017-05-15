@@ -81,6 +81,9 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     // init screenshot
     createCapture();
     resize(m_screenshot.size());
+    // initi interface color
+    m_uiColor = QSettings().value("uiColor").value<QColor>();
+
     show();
 }
 
@@ -131,14 +134,13 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 
     if (!m_selection.isNull()) {
         // paint selection rect
-        QColor purpleColor(136, 0, 170, 220);
-        painter.setPen(purpleColor);
+        painter.setPen(m_uiColor);
         painter.setBrush(Qt::NoBrush);
         painter.drawRect(r);
 
         // paint handlers
         updateHandles();
-        painter.setBrush(purpleColor);
+        painter.setBrush(m_uiColor);
         for(auto r: handleMask()) {
             painter.drawRoundRect(r, 100, 100);
         }

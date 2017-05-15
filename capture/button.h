@@ -53,6 +53,7 @@ public:
 
     static QIcon getIcon(const Type);
     static QIcon getIcon(const Type, bool isWhite);
+    static QString getStyle();
     static size_t getButtonBaseSize();
     static Button::Type getTypeByName(QString);
     static QString getTypeName(Button::Type);

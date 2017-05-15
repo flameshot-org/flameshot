@@ -31,7 +31,6 @@
         <file>img/buttonIconsWhite/mouse-off.svg</file>
         <file>img/buttonIconsWhite/mouse.svg</file>
         <file>img/buttonIconsWhite/pencil.svg</file>
-        <file>styles/button.css</file>
         <file>img/buttonIconsBlack/cursor-move.svg</file>
         <file>img/buttonIconsWhite/cursor-move.svg</file>
     </qresource>

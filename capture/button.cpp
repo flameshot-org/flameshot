@@ -119,10 +119,25 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     }
     return QIcon(path);
 }
+
+QString Button::getStyle() {
+    QSettings settings;
+    QColor mainColor = settings.value("uiColor").value<QColor>();
+    QString baseSheet = "Button { border-radius: 15px;"
+                        "background-color: %1; color: white }"
+                        "Button:hover { background-color: %2; }"
+                        "Button:pressed:!hover { "
+                        "background-color: %1; }";
+    QColor contrast(mainColor.darker(120));
+    if (mainColor.name() < QColor(30,30,30).name()) {
+        contrast = contrast.lighter(120);
+    }
+    return baseSheet.arg(mainColor.name()).arg(contrast.name());
+}
 // get icon returns the icon for the type of button
 QIcon Button::getIcon(const Type t) {
-    // assign the isWhite based on the settings
-    bool isWhite = true;
+    QSettings settings;
+    bool isWhite = settings.value("whiteIconColor").toBool();
     return getIcon(t, isWhite);
 }
 

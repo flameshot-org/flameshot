@@ -106,6 +106,8 @@ private:
 
     Button::Type m_state;
     ButtonHandler *m_buttonHandler;
+
+    QColor m_uiColor;
 };
 
 #endif // CAPTUREWIDGET_H
