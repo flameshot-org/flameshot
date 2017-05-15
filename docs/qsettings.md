@@ -1,15 +1,20 @@
 - List of Buttons
     - value: "buttons"
     - type: <QList<int> >
+    - description: list of buttons to be shown with the selection.
 - Last saved image path
     - value: "savePath"
     - type: QString
+    - description: initial path of the save scheenshot widget.
 - Drawing color
     - value: "drawColor"
     - type: QColor
+    - description: color of the drawing tools.
 - Mouse visibility
     - value: "mouseVisible"
     - type: bool
+    - description: visibility of the mouse in the capture.
 - UI color
     - value: "uiColor"
     - type: QColor
+    - description: color of buttons and the selection.
