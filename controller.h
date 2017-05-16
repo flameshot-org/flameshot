@@ -38,6 +38,7 @@ private slots:
     void slotPrintHotkey();
     void openConfigWindow();
     void openInfoWindow();
+    void showMessage(QString);
 
 private:
     void createActions();

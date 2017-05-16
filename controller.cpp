@@ -101,6 +101,8 @@ void Controller::initDefaults() {
 void Controller::slotPrintHotkey() {
     if (!m_captureWindow) {
         m_captureWindow = new CaptureWidget();
+        connect(m_captureWindow, &CaptureWidget::newMessage,
+                this, &Controller::showMessage);
     }
 }
 
@@ -116,4 +118,8 @@ void Controller::openInfoWindow() {
     if (!m_infoWindow) {
         m_infoWindow = new InfoWindow();
     }
+}
+
+void Controller::showMessage(QString msg) {
+    m_trayIcon->showMessage("Flameshot Info", msg);
 }

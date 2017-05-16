@@ -44,6 +44,9 @@ public:
 
     void redefineButtons();
 
+signals:
+    void newMessage(QString);
+
 private slots:
     void saveScreenshot();
     void copyScreenshot();

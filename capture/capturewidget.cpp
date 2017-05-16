@@ -355,6 +355,7 @@ void CaptureWidget::uploadScreenshot() {
         s.uploadToImgur(am, getExtendedSelection());
     }
     hide();
+    Q_EMIT newMessage("Uploading image...");
 }
 
 void CaptureWidget::undo() {
