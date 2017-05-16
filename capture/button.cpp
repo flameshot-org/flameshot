@@ -60,16 +60,16 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     }
     QString path = ":/img/buttonIcons" + iconColor + "/";
 
-    if (t == Type::mouseVisibility) {
-        QSettings settings;
-        bool mouseVisible = settings.value("mouseVisible").toBool();
-        if (mouseVisible){
-            path += "mouse.svg";
-        } else {
-            path += "mouse-off.svg";
-        }
-        return QIcon(path);
-    }
+//    if (t == Type::mouseVisibility) {
+//        QSettings settings;
+//        bool mouseVisible = settings.value("mouseVisible").toBool();
+//        if (mouseVisible){
+//            path += "mouse.svg";
+//        } else {
+//            path += "mouse-off.svg";
+//        }
+//        return QIcon(path);
+//    }
 
     switch (t) {
     case Type::arrow:
@@ -150,17 +150,19 @@ void Button::leaveEvent(QEvent *e) {
     Q_EMIT mouseExited();
     QWidget::leaveEvent(e);
 }
+#include <QMouseEvent>
+void Button::mouseReleaseEvent(QMouseEvent *e) {
+    if (e->button() == Qt::LeftButton){
+//        if (m_buttonType == Type::mouseVisibility) {
+//            QSettings settings;
+//            bool mouseVisible = settings.value("mouseVisible").toBool();
+//            settings.setValue("mouseVisible", !mouseVisible);
+//            setIcon(getIcon(Type::mouseVisibility));
+//        } else if (m_buttonType == Type::colorPicker) {
 
-void Button::mouseReleaseEvent(QMouseEvent *) {
-    if (m_buttonType == Type::mouseVisibility) {
-        QSettings settings;
-        bool mouseVisible = settings.value("mouseVisible").toBool();
-        settings.setValue("mouseVisible", !mouseVisible);
-        setIcon(getIcon(Type::mouseVisibility));
-    } else if (m_buttonType == Type::colorPicker) {
-
+//        }
+        Q_EMIT typeEmited(m_buttonType);
     }
-    Q_EMIT typeEmited(m_buttonType);
 }
 
 void Button::animatedShow() {

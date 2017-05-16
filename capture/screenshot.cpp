@@ -103,9 +103,9 @@ QString Screenshot::graphicalSave(const QRect &selection) const {
         pixToSave = m_screenshot.copy(selection);
     }
 
-    if (settings.value("mouseVisible").toBool()) {
-        // TO DO
-    }
+//    if (settings.value("mouseVisible").toBool()) {
+//        // TO DO
+//    }
 
     if (!pixToSave.save(fileName)) {
         QMessageBox::warning(nullptr, QObject::tr("Save Error"),

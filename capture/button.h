@@ -31,7 +31,6 @@ class Button : public QPushButton {
 public:
     enum class Type {
         selectionIndicator,
-        mouseVisibility,
         exit,
         copy,
         save,
@@ -42,11 +41,12 @@ public:
         circle,
         marker,
         text,
-        colorPicker,
         undo,
         imageUploader,
         move,
-        last
+        last, // used for iteration over the enum
+        mouseVisibility,
+        colorPicker
     };
 
     explicit Button(Type, QWidget *parent = 0);

@@ -402,7 +402,7 @@ void CaptureWidget::downResize() {
 
 void CaptureWidget::setState(Button::Type t) {
     if(t == Button::Type::selectionIndicator ||
-            t == Button::Type::mouseVisibility ||
+            //t == Button::Type::mouseVisibility ||
             t == Button::Type::colorPicker) {
         return;
     }
