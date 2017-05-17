@@ -35,6 +35,7 @@ class QMouseEvent;
 class CaptureModification;
 class QNetworkAccessManager;
 class QNetworkReply;
+class ColorPicker;
 
 class CaptureWidget : public QWidget {
     Q_OBJECT
@@ -111,6 +112,7 @@ private:
     ButtonHandler *m_buttonHandler;
 
     QColor m_uiColor;
+    ColorPicker *m_colorPicker;
 };
 
 #endif // CAPTUREWIDGET_H

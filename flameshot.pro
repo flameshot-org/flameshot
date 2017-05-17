@@ -40,7 +40,8 @@ SOURCES += main.cpp\
     configwindow.cpp \
     capture/screenshot.cpp \
     capture/capturewidget.cpp \
-    capture/capturemodification.cpp
+    capture/capturemodification.cpp \
+    capture/colorpicker.cpp
 
 HEADERS  += \
     nativeeventfilter.h \
@@ -51,7 +52,8 @@ HEADERS  += \
     configwindow.h \
     capture/screenshot.h \
     capture/capturewidget.h \
-    capture/capturemodification.h
+    capture/capturemodification.h \
+    capture/colorpicker.h
 
 RESOURCES += \
     graphics.qrc

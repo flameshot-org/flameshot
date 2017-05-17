@@ -25,6 +25,7 @@
 #include "capturemodification.h"
 #include "capturewidget.h"
 #include "button.h"
+#include "capture/colorpicker.h"
 #include <QScreen>
 #include <QWindow>
 #include <QGuiApplication>
@@ -83,8 +84,9 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     resize(m_screenshot.size());
     // initi interface color
     m_uiColor = QSettings().value("uiColor").value<QColor>();
-
     show();
+
+    m_colorPicker = new ColorPicker(this);
 }
 
 CaptureWidget::~CaptureWidget() {
@@ -148,24 +150,31 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 }
 
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
-        if (e->button() == Qt::LeftButton) {
-            m_mouseIsClicked = true;
-            if (m_state != Button::Type::move) {
-                m_modifications.append(CaptureModification(m_state, e->pos()));
-                return;
-            }
-            m_dragStartPoint = e->pos();
-            m_selectionBeforeDrag = m_selection;
-            m_buttonHandler->hide();
-            if (!m_selection.contains(e->pos()) && !m_mouseOverHandle) {
-                m_newSelection = true;
-                m_selection = QRect();
-                setCursor(Qt::CrossCursor);
-            } else if (m_selection.contains(e->pos())){
-                setCursor(Qt::ClosedHandCursor);
-            }
+    if (e->button() == Qt::RightButton) {
+        m_colorPicker->move(e->pos().x()-m_colorPicker->width()/2,
+                            e->pos().y()-m_colorPicker->height()/2);
+        m_colorPicker->show();
+        return;
+    }
+
+    if (e->button() == Qt::LeftButton) {
+        m_mouseIsClicked = true;
+        if (m_state != Button::Type::move) {
+            m_modifications.append(CaptureModification(m_state, e->pos()));
+            return;
         }
-    update();
+        m_dragStartPoint = e->pos();
+        m_selectionBeforeDrag = m_selection;
+        m_buttonHandler->hide();
+        if (!m_selection.contains(e->pos()) && !m_mouseOverHandle) {
+            m_newSelection = true;
+            m_selection = QRect();
+            setCursor(Qt::CrossCursor);
+        } else if (m_selection.contains(e->pos())){
+            setCursor(Qt::ClosedHandCursor);
+        }
+    }
+update();
 }
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
@@ -272,6 +281,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
+    if (e->button() == Qt::RightButton) {
+        m_colorPicker->hide();
+        return;
+    }
+
     if (!m_selection.isNull() && !m_buttonHandler->isVisible()) {
         updateSizeIndicator();
         m_buttonHandler->updatePosition(m_selection, rect());
