@@ -26,7 +26,7 @@ class QPoint;
 class CaptureModification {
 public:
     CaptureModification();
-    CaptureModification(const Button::Type, const QPoint);
+    CaptureModification(const Button::Type, const QPoint, const QColor);
     Button::Type getType() const;
     QColor getColor() const;
     QVector<QPoint> getPoints() const;

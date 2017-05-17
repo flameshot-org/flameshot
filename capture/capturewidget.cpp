@@ -53,8 +53,8 @@ namespace {
 
 CaptureWidget::CaptureWidget(QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
-    m_newSelection(false), m_grabbing(false), m_onButton(false),
-    m_state(Button::Type::move) {
+    m_rightClick(false), m_newSelection(false), m_grabbing(false),
+    m_onButton(false), m_state(Button::Type::move) {
 
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
@@ -151,6 +151,8 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
+        m_rightClick = true;
+        setCursor(Qt::ArrowCursor);
         m_colorPicker->move(e->pos().x()-m_colorPicker->width()/2,
                             e->pos().y()-m_colorPicker->height()/2);
         m_colorPicker->show();
@@ -160,7 +162,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     if (e->button() == Qt::LeftButton) {
         m_mouseIsClicked = true;
         if (m_state != Button::Type::move) {
-            m_modifications.append(CaptureModification(m_state, e->pos()));
+            m_modifications.append(CaptureModification(m_state, e->pos(),
+                                                       m_colorPicker->getDrawColor()));
             return;
         }
         m_dragStartPoint = e->pos();
@@ -256,7 +259,10 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 
         if (!found) {
             m_mouseOverHandle = 0;
-            if (m_selection.contains(e->pos()) && !m_onButton &&
+
+            if (m_rightClick) {
+                setCursor(Qt::ArrowCursor);
+            } else if (m_selection.contains(e->pos()) && !m_onButton &&
                     m_state == Button::Type::move) {
                 setCursor(Qt::OpenHandCursor);
             } else if (m_onButton) {
@@ -283,6 +289,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
         m_colorPicker->hide();
+        m_rightClick = false;
         return;
     }
 
