@@ -82,7 +82,7 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     // init screenshot
     createCapture();
     resize(m_screenshot.size());
-    // initi interface color
+    // init interface color
     m_uiColor = QSettings().value("uiColor").value<QColor>();
     show();
 

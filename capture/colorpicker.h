@@ -9,7 +9,6 @@ class ColorPicker : public QWidget
 public:
     explicit ColorPicker(QWidget *parent = 0);
     ~ColorPicker();
-    static QVector<Qt::GlobalColor> colorList;
 
     QColor getDrawColor();
 
@@ -26,6 +25,7 @@ public slots:
 private:
     const int m_colorAreaSize;
     QVector<QRect> m_colorAreaList;
+    static QVector<Qt::GlobalColor> colorList;
 
     QColor m_uiColor, m_drawColor;
 };

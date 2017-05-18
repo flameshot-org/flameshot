@@ -124,7 +124,7 @@ QPixmap Screenshot::paintModifications(const QVector<CaptureModification> v) {
         switch (modification.getType()) {
         case Button::Type::arrow:
             painter.drawLine(points[0], points[1]);
-
+            // TODO
 
             break;
         case Button::Type::circle:

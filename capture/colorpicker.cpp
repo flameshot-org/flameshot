@@ -7,17 +7,20 @@
 ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
         m_colorAreaSize(18) {
     setMouseTracking(true);
-
+    // save the color values in member variables for faster access
     QSettings settings;
     m_uiColor = settings.value("uiColor").value<QColor>();
     m_drawColor = settings.value("drawColor").value<QColor>();
+    // extraSize represents the extra space needed for the highlight of the
+    // selected color.
     const int extraSize = 6;
     double radius = (colorList.size()*m_colorAreaSize/1.3)/(3.141592);
     resize(radius*2 + m_colorAreaSize + extraSize,
            radius*2 + m_colorAreaSize+ extraSize);
     double degree = 360 / (colorList.size());
     double degreeAcum = degree;
-
+    // this line is the radius of the circle which will be rotated to add
+    // the color components.
     QLineF baseLine = QLineF(QPoint(radius+extraSize/2, radius+extraSize/2),
                              QPoint(radius*2, radius));
 
@@ -44,6 +47,7 @@ void ColorPicker::paintEvent(QPaintEvent *) {
     QVector<QRect> rects = handleMask();
     painter.setPen(QColor(Qt::black));
     for(int i = 0; i < rects.size(); ++i) {
+        // draw the highlight when we have to draw the selected color
         if (m_drawColor == QColor(colorList.at(i))) {
             QColor c = QColor(m_uiColor);
             c.setAlpha(155);
