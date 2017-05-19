@@ -26,7 +26,7 @@
 
 InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFixedSize(400, 260);
+    setFixedSize(400, 275);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     setWindowIcon(QIcon(":img/flameshot.svg"));
     setWindowTitle(tr("About"));
@@ -49,7 +49,8 @@ namespace {
         "ESC",
         "CTRL + C",
         "CTRL + S",
-        "CTRL + Z"
+        "CTRL + Z",
+        "Right Click"
     };
 
     QVector<QString> description = {
@@ -58,7 +59,8 @@ namespace {
         "Quit capture",
         "Copy to clipboard",
         "Save selection as a file",
-        "Undo the last modification"
+        "Undo the last modification",
+        "Show color picker"
     };
 }
 
