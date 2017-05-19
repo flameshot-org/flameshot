@@ -97,11 +97,13 @@ CaptureWidget::~CaptureWidget() {
 // selection in the capture
 void CaptureWidget::redefineButtons() {
     QSettings settings;
+    QString buttonStyle = Button::getStyle();
     auto buttonsInt = settings.value("buttons").value<QList<int> >();
     QVector<Button*> vectorButtons;
     for (auto i: buttonsInt) {
         auto t = static_cast<Button::Type>(i);
         Button *b = new Button(t, this);
+        b->setStyleSheet(buttonStyle);
         if (t == Button::Type::selectionIndicator) {
             m_sizeIndButton = b;
         }

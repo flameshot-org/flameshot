@@ -1,5 +1,5 @@
-#ifndef UICOLOREDITOR_H
-#define UICOLOREDITOR_H
+#ifndef UICOLORPICKER_H
+#define UICOLORPICKER_H
 
 #include <QWidget>
 
@@ -8,9 +8,12 @@ class UIcolorEditor : public QWidget {
 public:
     explicit UIcolorEditor(QWidget *parent = 0);
 
-signals:
+private slots:
+    void updateUIcolor();
+    void updateLocalColor(QColor);
 
-public slots:
+private:
+    QColor m_uiColor;
 };
 
-#endif // UICOLOREDITOR_H
+#endif // UICOLORPICKER_H

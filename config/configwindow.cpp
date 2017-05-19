@@ -18,6 +18,7 @@
 #include "configwindow.h"
 #include "capture/button.h"
 #include "config/buttonlistview.h"
+#include "config/uicoloreditor.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -31,6 +32,11 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
     setWindowTitle(tr("Configuration"));
 
     QVBoxLayout *baseLayout = new QVBoxLayout(this);
+
+    QLabel *colorSelectionLabel = new QLabel("Choose the UI color", this);
+    baseLayout->addWidget(colorSelectionLabel);
+
+    baseLayout->addWidget(new UIcolorEditor(this));
 
     QLabel *buttonSelectLabel = new QLabel("Choose the buttons to enable", this);
     baseLayout->addWidget(buttonSelectLabel);
