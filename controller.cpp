@@ -18,7 +18,7 @@
 #include "controller.h"
 #include "capture/capturewidget.h"
 #include "infowindow.h"
-#include "configwindow.h"
+#include "config/configwindow.h"
 #include "capture/button.h"
 #include <QAction>
 #include <QApplication>
