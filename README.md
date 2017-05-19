@@ -7,6 +7,8 @@
 If you have a system-wide shortcut assigned to the`Print`
  key, you should disable it because it may interfere with the global key detection.
  
+ In order to solve this problem I'm thinking about creating a cli tool to communicate with Flameshot via IPC socket; you could assign the specific command tto trigger the capture in a very convenient way. (that could be extended with many functions but it isn't a priority)
+ 
  Check the ./docs folder for more information.
  
 ## Dependencies
