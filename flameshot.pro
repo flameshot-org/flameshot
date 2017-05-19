@@ -37,11 +37,12 @@ SOURCES += main.cpp\
     capture/button.cpp \
     capture/buttonhandler.cpp \
     infowindow.cpp \
-    configwindow.cpp \
+    config/configwindow.cpp \
     capture/screenshot.cpp \
     capture/capturewidget.cpp \
     capture/capturemodification.cpp \
-    capture/colorpicker.cpp
+    capture/colorpicker.cpp \
+    config/buttonlistview.cpp
 
 HEADERS  += \
     nativeeventfilter.h \
@@ -49,11 +50,12 @@ HEADERS  += \
     capture/button.h \
     capture/buttonhandler.h \
     infowindow.h \
-    configwindow.h \
+    config/configwindow.h \
     capture/screenshot.h \
     capture/capturewidget.h \
     capture/capturemodification.h \
-    capture/colorpicker.h
+    capture/colorpicker.h \
+    config/buttonlistview.h
 
 RESOURCES += \
     graphics.qrc

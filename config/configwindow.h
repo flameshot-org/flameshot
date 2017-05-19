@@ -28,14 +28,8 @@ class ConfigWindow : public QWidget {
 public:
     explicit ConfigWindow(QWidget *parent = 0);
 
-private slots:
-    void updateActiveButtons(QListWidgetItem *);
-
 private:
-    void initButtonList();
 
-    QList<int> m_listButtons;
-    QListWidget *m_buttonListView;
 };
 
 #endif // CONFIGURATION_H
