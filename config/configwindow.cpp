@@ -21,6 +21,7 @@
 #include "config/uicoloreditor.h"
 #include <QIcon>
 #include <QVBoxLayout>
+#include <QGroupBox>
 #include <QLabel>
 #include <QDebug>
 
@@ -33,12 +34,12 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
 
     QVBoxLayout *baseLayout = new QVBoxLayout(this);
 
-    QLabel *colorSelectionLabel = new QLabel("Choose the UI color", this);
+    QLabel *colorSelectionLabel = new QLabel("UI color editor", this);
     baseLayout->addWidget(colorSelectionLabel);
 
     baseLayout->addWidget(new UIcolorEditor(this));
 
-    QLabel *buttonSelectLabel = new QLabel("Choose the buttons to enable", this);
+    QLabel *buttonSelectLabel = new QLabel("Button selection", this);
     baseLayout->addWidget(buttonSelectLabel);
 
     ButtonListView *m_buttonListView = new ButtonListView(this);

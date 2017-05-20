@@ -28,12 +28,9 @@ namespace {
     const int BUTTON_SIZE = 30;
 }
 
-Button::Button(Type t, QWidget *parent) : QPushButton(parent) {
-    setFocusPolicy(Qt::NoFocus);
-    m_buttonType = t;
-    resize(BUTTON_SIZE, BUTTON_SIZE);
-    setMouseTracking(true);
-    setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
+Button::Button(Type t, QWidget *parent) : QPushButton(parent),
+    m_buttonType(t) {
+    initButton();
 
     if (t == Button::Type::selectionIndicator) {
         QFont f = this->font();
@@ -41,14 +38,33 @@ Button::Button(Type t, QWidget *parent) : QPushButton(parent) {
     } else {
         setIcon(getIcon(t));
     }
-    setToolTip(typeTooltip[t]);
+}
+
+Button::Button(Button::Type t, bool isWhite, QWidget *parent) : QPushButton(parent),
+    m_buttonType(t) {
+    initButton();
+
+    if (t == Button::Type::selectionIndicator) {
+        QFont f = this->font();
+        setFont(QFont(f.family(), 7, QFont::Bold));
+    } else {
+        setIcon(getIcon(t, isWhite));
+    }
+}
+
+void Button::initButton() {
+    setFocusPolicy(Qt::NoFocus);
+    resize(BUTTON_SIZE, BUTTON_SIZE);
+    setMouseTracking(true);
+    setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
+
+    setToolTip(typeTooltip[m_buttonType]);
 
     emergeAnimation = new  QPropertyAnimation(this, "size", this);
     emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
     emergeAnimation->setDuration(80);
     emergeAnimation->setStartValue(QSize(0, 0));
     emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
-
 }
 
 // getIcon returns the icon for the type of button, this method lets
@@ -123,6 +139,10 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
 QString Button::getStyle() {
     QSettings settings;
     QColor mainColor = settings.value("uiColor").value<QColor>();
+    return getStyle(mainColor);
+}
+
+QString Button::getStyle(QColor mainColor) {
     QString baseSheet = "Button { border-radius: 15px;"
                         "background-color: %1; color: white }"
                         "Button:hover { background-color: %2; }"

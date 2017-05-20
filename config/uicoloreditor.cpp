@@ -1,32 +1,20 @@
 #include "uicoloreditor.h"
 #include "color_wheel.hpp"
-#include "buttonlistview.h"
+#include "capture/button.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSettings>
 
-UIcolorEditor::UIcolorEditor(QWidget *parent) : QWidget(parent) {
+UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     setFixedSize(200,130);
-    QHBoxLayout *hLayout = new QHBoxLayout;
-    QVBoxLayout *vLayout = new QVBoxLayout;
-    setLayout(hLayout);
+    setFrameStyle(QFrame::StyledPanel);
 
-    color_widgets::ColorWheel *colorWheel = new color_widgets::ColorWheel(this);
-    connect(colorWheel, &color_widgets::ColorWheel::mouseReleaseOnColor, this,
-            &UIcolorEditor::updateUIcolor);
-    connect(colorWheel, &color_widgets::ColorWheel::colorChanged, this,
-            &UIcolorEditor::updateLocalColor);
+    hLayout = new QHBoxLayout;
+    vLayout = new QVBoxLayout;
 
-    QSettings settings;
-    m_uiColor = settings.value("uiColor").value<QColor>();
-
-    colorWheel->setColor(m_uiColor);
-    colorWheel->setFixedSize(100,100);
-    hLayout->addWidget(colorWheel);
-
+    initButton();
+    initColorWheel();
     hLayout->addLayout(vLayout);
-
-
 
     setLayout(hLayout);
 }
@@ -38,4 +26,32 @@ void UIcolorEditor::updateUIcolor() {
 
 void UIcolorEditor::updateLocalColor(QColor c) {
     m_uiColor = c;
+    QString style = Button::getStyle(c);
+    m_button->setStyleSheet(style);
+}
+
+void UIcolorEditor::initColorWheel() {
+    color_widgets::ColorWheel *colorWheel = new color_widgets::ColorWheel(this);
+    connect(colorWheel, &color_widgets::ColorWheel::mouseReleaseOnColor, this,
+            &UIcolorEditor::updateUIcolor);
+    connect(colorWheel, &color_widgets::ColorWheel::colorChanged, this,
+            &UIcolorEditor::updateLocalColor);
+
+    QSettings settings;
+    m_uiColor = settings.value("uiColor").value<QColor>();
+
+    colorWheel->setColor(m_uiColor);
+    colorWheel->setFixedSize(100,100);
+
+    hLayout->addWidget(colorWheel);
+}
+
+void UIcolorEditor::initButton() {
+    bool iconsAreWhite = false;
+    QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
+    if (bgColor < QColor(Qt::gray).name()) {
+        iconsAreWhite = true;
+    }
+    m_button = new Button(Button::Type::circle, iconsAreWhite, this);
+    m_button->setStyleSheet(Button::getStyle());
 }

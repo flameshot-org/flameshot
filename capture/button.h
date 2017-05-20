@@ -50,10 +50,12 @@ public:
     };
 
     explicit Button(Type, QWidget *parent = 0);
+    explicit Button(Type, bool isWhite, QWidget *parent = 0);
 
     static QIcon getIcon(const Type);
     static QIcon getIcon(const Type, bool isWhite);
     static QString getStyle();
+    static QString getStyle(QColor);
     static size_t getButtonBaseSize();
     static Button::Type getTypeByName(QString);
     static QString getTypeName(Button::Type);
@@ -82,6 +84,8 @@ private:
     typedef std::map<Button::Type, const QString> typeData;
     static typeData typeTooltip;
     static typeData typeName;
+
+    void initButton();
 };
 
 #endif // BUTTON_H
