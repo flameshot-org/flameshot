@@ -134,7 +134,7 @@ QPixmap Screenshot::paintModifications(const QVector<CaptureModification> v) {
             painter.drawLine(points[0], points[1]);
             break;
         case Button::Type::marker:
-            painter.setOpacity(0.5);
+            painter.setOpacity(0.35);
             painter.setPen(QPen(modification.getColor(), 14));
             painter.drawLine(points[0], points[1]);
             painter.setOpacity(1);
