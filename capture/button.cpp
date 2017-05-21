@@ -28,7 +28,7 @@ namespace {
     const int BUTTON_SIZE = 30;
 }
 
-Button::Button(Type t, QWidget *parent) : QPushButton(parent),
+Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
     m_buttonType(t) {
     initButton();
 
@@ -40,8 +40,8 @@ Button::Button(Type t, QWidget *parent) : QPushButton(parent),
     }
 }
 
-Button::Button(Button::Type t, bool isWhite, QWidget *parent) : QPushButton(parent),
-    m_buttonType(t) {
+Button::Button(const Button::Type t, const bool isWhite, QWidget *parent)
+    : QPushButton(parent), m_buttonType(t) {
     initButton();
 
     if (t == Button::Type::selectionIndicator) {
@@ -142,7 +142,7 @@ QString Button::getStyle() {
     return getStyle(mainColor);
 }
 
-QString Button::getStyle(QColor mainColor) {
+QString Button::getStyle(const QColor &mainColor) {
     QString baseSheet = "Button { border-radius: 15px;"
                         "background-color: %1; color: white }"
                         "Button:hover { background-color: %2; }"
@@ -199,7 +199,7 @@ size_t Button::getButtonBaseSize() {
 }
 // getTypeByName receives a name and return the corresponding button type.
 // returns Button::Type::last when the corresponding button is not found.
-Button::Type Button::getTypeByName(QString s) {
+Button::Type Button::getTypeByName(const QString s) {
     Button::Type res = Type::last;
     for (auto it = typeName.begin(); it != typeName.end(); ++it )
         if (it->second == s)
@@ -207,11 +207,11 @@ Button::Type Button::getTypeByName(QString s) {
     return res;
 }
 
-QString Button::getTypeName(Button::Type t) {
+QString Button::getTypeName(const Button::Type t) {
     return typeName[t];
 }
 
-QString Button::getTypeTooltip(Button::Type t) {
+QString Button::getTypeTooltip(const Button::Type t) {
     return typeTooltip[t];
 }
 

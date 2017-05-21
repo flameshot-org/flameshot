@@ -296,7 +296,7 @@ QVector<QPoint> ButtonHandler::getVPoints(
     return res;
 }
 // setButtons redefines the buttons of the button handler
-void ButtonHandler::setButtons(QVector<Button *> v) {
+void ButtonHandler::setButtons(const QVector<Button *> v) {
     for (Button *b: m_vectorButtons) delete(b);
     m_vectorButtons = v;
     if (!v.isEmpty()) {

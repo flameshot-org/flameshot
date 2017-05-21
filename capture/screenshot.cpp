@@ -39,7 +39,6 @@ Screenshot::Screenshot(const QPixmap &p) : m_baseScreenshot(p),
     m_modifiedScreenshot(p) {}
 
 Screenshot::~Screenshot() {
-    if (m_accessManager) delete(m_accessManager);
 }
 
 void Screenshot::setScreenshot(const QPixmap &p) {

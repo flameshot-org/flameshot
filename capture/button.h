@@ -49,17 +49,17 @@ public:
         colorPicker
     };
 
-    explicit Button(Type, QWidget *parent = 0);
-    explicit Button(Type, bool isWhite, QWidget *parent = 0);
+    explicit Button(const Type, QWidget *parent = 0);
+    explicit Button(const Type, const bool isWhite, QWidget *parent = 0);
 
     static QIcon getIcon(const Type);
     static QIcon getIcon(const Type, bool isWhite);
     static QString getStyle();
-    static QString getStyle(QColor);
+    static QString getStyle(const QColor &);
     static size_t getButtonBaseSize();
-    static Button::Type getTypeByName(QString);
-    static QString getTypeName(Button::Type);
-    static QString getTypeTooltip(Button::Type);
+    static Button::Type getTypeByName(const QString);
+    static QString getTypeName(const Button::Type);
+    static QString getTypeTooltip(const Button::Type);
 
     Type getButtonType() const;
 

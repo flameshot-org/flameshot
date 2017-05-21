@@ -14,7 +14,7 @@ public:
 
 private slots:
     void updateUIcolor();
-    void updateLocalColor(QColor);
+    void updateLocalColor(const QColor);
 
 private:
     QColor m_uiColor;

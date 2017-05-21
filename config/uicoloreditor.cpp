@@ -24,7 +24,7 @@ void UIcolorEditor::updateUIcolor() {
     settings.setValue("uiColor", m_uiColor);
 }
 
-void UIcolorEditor::updateLocalColor(QColor c) {
+void UIcolorEditor::updateLocalColor(const QColor c) {
     m_uiColor = c;
     QString style = Button::getStyle(c);
     m_button->setStyleSheet(style);

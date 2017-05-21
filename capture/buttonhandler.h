@@ -37,7 +37,7 @@ public:
     size_t size() const;
 
     void updatePosition(const QRect &selection, const QRect &limits);
-    void setButtons(QVector<Button*>);
+    void setButtons(const QVector<Button*>);
 
 private:
     QVector<QPoint> getHPoints(const QPoint &center, const int elements) const;
