@@ -23,7 +23,6 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
-#include <QDebug>
 
 // ConfigWindow contains the menus where you can configure the application
 
