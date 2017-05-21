@@ -16,10 +16,12 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "button.h"
+#include "capture/capturewidget.h"
 #include <QIcon>
 #include <QPropertyAnimation>
 #include <QToolTip>
 #include <QSettings>
+#include <QMouseEvent>
 
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
@@ -29,7 +31,7 @@ namespace {
 }
 
 Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
-    m_buttonType(t) {
+    m_buttonType(t), m_pressed(false) {
     initButton();
 
     if (t == Button::Type::selectionIndicator) {
@@ -41,7 +43,7 @@ Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
 }
 
 Button::Button(const Button::Type t, const bool isWhite, QWidget *parent)
-    : QPushButton(parent), m_buttonType(t) {
+    : QPushButton(parent), m_buttonType(t), m_pressed(false) {
     initButton();
 
     if (t == Button::Type::selectionIndicator) {
@@ -167,12 +169,15 @@ void Button::enterEvent(QEvent *e) {
 }
 
 void Button::leaveEvent(QEvent *e) {
+    m_pressed = false;
     Q_EMIT mouseExited();
     QWidget::leaveEvent(e);
 }
-#include <QMouseEvent>
+
 void Button::mouseReleaseEvent(QMouseEvent *e) {
-    if (e->button() == Qt::LeftButton){
+    CaptureWidget *parent = (CaptureWidget*)this->parent();
+    parent->mouseReleaseEvent(e);
+    if (e->button() == Qt::LeftButton && m_pressed) {
 //        if (m_buttonType == Type::mouseVisibility) {
 //            QSettings settings;
 //            bool mouseVisible = settings.value("mouseVisible").toBool();
@@ -183,6 +188,11 @@ void Button::mouseReleaseEvent(QMouseEvent *e) {
 //        }
         Q_EMIT typeEmited(m_buttonType);
     }
+    m_pressed = false;
+}
+
+void Button::mousePressEvent(QMouseEvent *) {
+    m_pressed = true;
 }
 
 void Button::animatedShow() {

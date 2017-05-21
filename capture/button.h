@@ -69,6 +69,7 @@ protected:
     virtual void enterEvent(QEvent *);
     virtual void leaveEvent(QEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
+    virtual void mousePressEvent(QMouseEvent *);
 
 signals:
     void hovered();
@@ -78,6 +79,7 @@ signals:
 private:
     Button(QWidget *parent = 0);
     Type m_buttonType;
+    bool m_pressed;
 
     QPropertyAnimation *emergeAnimation;
 
