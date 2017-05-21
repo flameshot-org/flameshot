@@ -47,11 +47,11 @@ void UIcolorEditor::initColorWheel() {
 }
 
 void UIcolorEditor::initButton() {
-    bool iconsAreWhite = false;
-    QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
-    if (bgColor < QColor(Qt::gray).name()) {
-        iconsAreWhite = true;
-    }
+    bool iconsAreWhite = QSettings().value("whiteIconColor").toBool();
+//    QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
+//    if (bgColor < QColor(Qt::gray).name()) {
+//        iconsAreWhite = true;
+//    }
     m_button = new Button(Button::Type::circle, iconsAreWhite, this);
     m_button->setStyleSheet(Button::getStyle());
 }

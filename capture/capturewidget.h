@@ -36,6 +36,7 @@ class CaptureModification;
 class QNetworkAccessManager;
 class QNetworkReply;
 class ColorPicker;
+class Screenshot;
 
 class CaptureWidget : public QWidget {
     Q_OBJECT
@@ -74,7 +75,7 @@ protected:
     QRegion handleMask() const;
 
     // pixel map of the screen
-    QPixmap m_screenshot;
+    Screenshot* m_screenshot;
 
     QPoint m_dragStartPoint;
     QPoint m_mousePos;

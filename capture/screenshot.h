@@ -32,14 +32,19 @@ public:
     ~Screenshot();
 
     void setScreenshot(const QPixmap &);
+    QPixmap getBaseScreenshot() const;
     QPixmap getScreenshot() const;
+
     QString graphicalSave(const QRect &selection = QRect()) const;
     void uploadToImgur(QNetworkAccessManager *,
                        const QRect &selection = QRect());
-    QPixmap paintModifications(const QVector<CaptureModification>);
+    QPixmap paintModification(const CaptureModification &);
+    QPixmap paintTemporalModification(const CaptureModification &);
+    QPixmap paintBaseModifications(const QVector<CaptureModification> &);
 
 private:
-    QPixmap m_screenshot;
+    QPixmap m_baseScreenshot;
+    QPixmap m_modifiedScreenshot;
     QPointer<QNetworkAccessManager> m_accessManager;
 };
 

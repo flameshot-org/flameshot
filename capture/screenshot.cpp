@@ -21,6 +21,7 @@
 #include <QStandardPaths>
 #include <QIcon>
 #include <QSettings>
+#include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <QMessageBox>
@@ -34,22 +35,30 @@
 
 // Screenshot is an extension of QPixmap which lets you manage specific tasks
 
-Screenshot::Screenshot(const QPixmap &p) : m_screenshot(p) {
-
-}
+Screenshot::Screenshot(const QPixmap &p) : m_baseScreenshot(p),
+    m_modifiedScreenshot(p) {}
 
 Screenshot::~Screenshot() {
     if (m_accessManager) delete(m_accessManager);
 }
 
 void Screenshot::setScreenshot(const QPixmap &p) {
-    m_screenshot = p;
+    m_baseScreenshot = p;
+    m_modifiedScreenshot = p;
 }
 
+//  getScreenshot returns the screenshot with no modifications
+QPixmap Screenshot::getBaseScreenshot() const {
+    return m_baseScreenshot;
+}
+
+//  getScreenshot returns the screenshot with all the modifications
 QPixmap Screenshot::getScreenshot() const {
-    return m_screenshot;
+    return m_modifiedScreenshot;
 }
 
+// graphicalSave generates a graphical window to ask about the save path and
+// saves the screenshot with all the modifications in such directory
 QString Screenshot::graphicalSave(const QRect &selection) const {
     const QString format = "png";
 
@@ -98,9 +107,9 @@ QString Screenshot::graphicalSave(const QRect &selection) const {
 
     QPixmap pixToSave;
     if (selection.isEmpty()) {
-        pixToSave = m_screenshot;
+        pixToSave = m_modifiedScreenshot;
     } else { // save full screen when no selection
-        pixToSave = m_screenshot.copy(selection);
+        pixToSave = m_modifiedScreenshot.copy(selection);
     }
 
 //    if (settings.value("mouseVisible").toBool()) {
@@ -115,52 +124,101 @@ QString Screenshot::graphicalSave(const QRect &selection) const {
     return fileName;
 }
 
-QPixmap Screenshot::paintModifications(const QVector<CaptureModification> v) {
-    QPainter painter(&m_screenshot);
+// paintModification adds a new modification to the screenshot
+QPixmap Screenshot::paintModification(const CaptureModification &modification) {
+    QPainter painter(&m_modifiedScreenshot);
     painter.setRenderHint(QPainter::Antialiasing);
-    for (CaptureModification modification: v) {
-        painter.setPen(QPen(modification.getColor(), 2));
-        QVector<QPoint> points = modification.getPoints();
-        switch (modification.getType()) {
-        case Button::Type::arrow:
-            painter.drawLine(points[0], points[1]);
-            // TODO
 
-            break;
-        case Button::Type::circle:
-            painter.drawEllipse(QRect(points[0], points[1]));
-            break;
-        case Button::Type::line:
-            painter.drawLine(points[0], points[1]);
-            break;
-        case Button::Type::marker:
-            painter.setOpacity(0.35);
-            painter.setPen(QPen(modification.getColor(), 14));
-            painter.drawLine(points[0], points[1]);
-            painter.setOpacity(1);
-            break;
-        case Button::Type::pencil:
-            painter.drawPolyline(points.data(), points.size());
-            break;
-        case Button::Type::rectangle:
-            painter.drawRect(QRect(points[0], points[1]));
-            break;
-        default:
-            break;
-        }
+    painter.setPen(QPen(modification.getColor(), 2));
+    QVector<QPoint> points = modification.getPoints();
+    switch (modification.getType()) {
+    case Button::Type::arrow:
+        painter.drawLine(points[0], points[1]);
+        // TODO
+
+        break;
+    case Button::Type::circle:
+        painter.drawEllipse(QRect(points[0], points[1]));
+        break;
+    case Button::Type::line:
+        painter.drawLine(points[0], points[1]);
+        break;
+    case Button::Type::marker:
+        painter.setOpacity(0.35);
+        painter.setPen(QPen(modification.getColor(), 14));
+        painter.drawLine(points[0], points[1]);
+        painter.setOpacity(1);
+        break;
+    case Button::Type::pencil:
+        painter.drawPolyline(points.data(), points.size());
+        break;
+    case Button::Type::rectangle:
+        painter.drawRect(QRect(points[0], points[1]));
+        break;
+    default:
+        break;
     }
-    return m_screenshot;
+    return m_modifiedScreenshot;
+}
+
+QPixmap Screenshot::paintTemporalModification(const CaptureModification &modification) {
+    QPixmap tempPix = m_modifiedScreenshot;
+    QPainter painter(&tempPix);
+    if (modification.getType() != Button::Type::pencil) {
+        painter.setRenderHint(QPainter::Antialiasing);
+    }
+
+    painter.setPen(QPen(modification.getColor(), 2));
+    QVector<QPoint> points = modification.getPoints();
+    switch (modification.getType()) {
+    case Button::Type::arrow:
+        painter.drawLine(points[0], points[1]);
+        // TODO
+
+        break;
+    case Button::Type::circle:
+        painter.drawEllipse(QRect(points[0], points[1]));
+        break;
+    case Button::Type::line:
+        painter.drawLine(points[0], points[1]);
+        break;
+    case Button::Type::marker:
+        painter.setOpacity(0.35);
+        painter.setPen(QPen(modification.getColor(), 14));
+        painter.drawLine(points[0], points[1]);
+        painter.setOpacity(1);
+        break;
+    case Button::Type::pencil:
+        painter.drawPolyline(points.data(), points.size());
+        break;
+    case Button::Type::rectangle:
+        painter.drawRect(QRect(points[0], points[1]));
+        break;
+    default:
+        break;
+    }
+    return tempPix;
+}
+
+// paintBaseModifications overrides the modifications of the screenshot with new ones
+QPixmap Screenshot::paintBaseModifications(const QVector<CaptureModification> &m) {
+    m_modifiedScreenshot = m_baseScreenshot;
+    for (const CaptureModification modification: m) {
+        paintModification(modification);
+    }
+    return m_modifiedScreenshot;
 }
 
 void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
                                const QRect &selection) {
-    QString title ="asdasdf";
-    QString description = "test";
+    QString title ="flameshot_screenshot";
+    QString datetime = QDateTime().toString();
+    QString description = "flameshot " + datetime;
     QPixmap pixToSave;
     if (selection.isEmpty()) {
-        pixToSave = m_screenshot;
+        pixToSave = m_modifiedScreenshot;
     } else { // save full screen when no selection
-        pixToSave = m_screenshot.copy(selection);
+        pixToSave = m_modifiedScreenshot.copy(selection);
     }
     QByteArray byteArray;
     QBuffer buffer(&byteArray);

@@ -81,7 +81,7 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     m_buttonHandler->hide();
     // init screenshot
     createCapture();
-    resize(m_screenshot.size());
+    resize(m_screenshot->getScreenshot().size());
     // init interface color
     m_uiColor = QSettings().value("uiColor").value<QColor>();
     show();
@@ -91,6 +91,7 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
 
 CaptureWidget::~CaptureWidget() {
     delete(m_buttonHandler);
+    delete(m_screenshot);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -122,10 +123,15 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     if (m_grabbing) { // grabWindow() should just get the background
         return;
     }
-
-    Screenshot s(m_screenshot);
-    s.paintModifications(m_modifications);
-    painter.drawPixmap(0, 0, s.getScreenshot());
+    // if we are creating a new modification to the screenshot we just draw
+    // a temporal modification without antialiasing in the pencil tool for
+    // performance. When we are not drawing we just shot the modified screenshot
+    if (m_mouseIsClicked && m_state != Button::Type::move) {
+        painter.drawPixmap(0, 0, m_screenshot->paintTemporalModification(
+                               m_modifications.last()));
+    } else {
+        painter.drawPixmap(0, 0, m_screenshot->getScreenshot());
+    }
 
     QColor overlayColor(0, 0, 0, 160);
     painter.setBrush(overlayColor);
@@ -166,6 +172,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         if (m_state != Button::Type::move) {
             m_modifications.append(CaptureModification(m_state, e->pos(),
                                                        m_colorPicker->getDrawColor()));
+            m_screenshot->paintModification(m_modifications.last());
             return;
         }
         m_dragStartPoint = e->pos();
@@ -293,6 +300,10 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         m_colorPicker->hide();
         m_rightClick = false;
         return;
+    // when we end the drawing of a modification in the capture we have to
+    // register the last point and add the whole modification to the screenshot
+    } else if (m_mouseIsClicked && m_state != Button::Type::move) {
+        m_screenshot->paintModification(m_modifications.last());
     }
 
     if (!m_selection.isNull() && !m_buttonHandler->isVisible()) {
@@ -335,22 +346,18 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 }
 
 void CaptureWidget::saveScreenshot() {
-    Screenshot s(m_screenshot);
-    s.paintModifications(m_modifications);
     if (m_selection.isNull()) {
-        s.graphicalSave();
+        m_screenshot->graphicalSave();
     } else { // save full screen when no selection
-        s.graphicalSave(getExtendedSelection());
+        m_screenshot->graphicalSave(getExtendedSelection());
     }
 }
 
 void CaptureWidget::copyScreenshot() {
-    Screenshot s(m_screenshot);
-    s.paintModifications(m_modifications);
     if (m_selection.isNull()) {
-        QApplication::clipboard()->setPixmap(s.getScreenshot());
+        QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot());
     } else { // copy full screen when no selection
-        QApplication::clipboard()->setPixmap(s.getScreenshot()
+        QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot()
                                              .copy(getExtendedSelection()));
     }
     close();
@@ -367,15 +374,13 @@ void CaptureWidget::openURL(QNetworkReply *reply) {
 }
 
 void CaptureWidget::uploadScreenshot() {
-    Screenshot s(m_screenshot);
-    s.paintModifications(m_modifications);
     QNetworkAccessManager *am = new QNetworkAccessManager(this);
     connect(am, &QNetworkAccessManager::finished, this,
             &CaptureWidget::openURL);
     if (m_selection.isNull()) {
-        s.uploadToImgur(am);
+        m_screenshot->uploadToImgur(am);
     } else {
-        s.uploadToImgur(am, getExtendedSelection());
+        m_screenshot->uploadToImgur(am, getExtendedSelection());
     }
     hide();
     Q_EMIT newMessage("Uploading image...");
@@ -384,6 +389,7 @@ void CaptureWidget::uploadScreenshot() {
 void CaptureWidget::undo() {
     if (!m_modifications.isEmpty()) {
         m_modifications.pop_back();
+        m_screenshot->paintBaseModifications(m_modifications);
         update();
     }
 }
@@ -464,7 +470,7 @@ void CaptureWidget::createCapture() {
         close();
         return;
     }
-    m_screenshot = screen->grabWindow(0);
+    m_screenshot = new Screenshot(screen->grabWindow(0));
 }
 
 void CaptureWidget::initShortcuts() {
@@ -524,7 +530,7 @@ QPoint CaptureWidget::limitPointToRect(const QPoint &p, const QRect &r) const {
 }
 
 QRect CaptureWidget::getExtendedSelection() const {
-    auto devicePixelRatio = m_screenshot.devicePixelRatio();
+    auto devicePixelRatio = m_screenshot->getScreenshot().devicePixelRatio();
 
     return QRect(m_selection.left()   * devicePixelRatio,
                  m_selection.top()    * devicePixelRatio,
