@@ -170,7 +170,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         if (m_state != Button::Type::move) {
             m_modifications.append(CaptureModification(m_state, e->pos(),
                                                        m_colorPicker->getDrawColor()));
-            m_screenshot->paintModification(m_modifications.last());
             return;
         }
         m_dragStartPoint = e->pos();
@@ -184,7 +183,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
             setCursor(Qt::ClosedHandCursor);
         }
     }
-update();
+    update();
 }
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
