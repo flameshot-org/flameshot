@@ -16,6 +16,9 @@ If you have a system-wide shortcut assigned to the`Print`
 - QT X11
 - X11 devel (with xcb)
 
+## Compilation
+Just download QT Creator and the dependencies (see the previous section) and import the project selecting the `flameshot.pro` file. Hit the "Build" button.
+
 ## Screenshots
 Dynamic button position based on your selection!
 
@@ -31,3 +34,9 @@ Choose your buttons and edit your screenshots!
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp
 - The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h
 - Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project)
+
+## Acknowledgment
+I really appreciate those who have shown interest in the develpment process:
+- Cosmo.
+- ismatori.
+- The members of the Sugus association.
