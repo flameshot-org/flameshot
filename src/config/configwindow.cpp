@@ -16,9 +16,9 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "configwindow.h"
-#include "capture/button.h"
-#include "config/buttonlistview.h"
-#include "config/uicoloreditor.h"
+#include "src/capture/button.h"
+#include "src/config/buttonlistview.h"
+#include "src/config/uicoloreditor.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QGroupBox>

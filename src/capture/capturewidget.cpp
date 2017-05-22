@@ -25,7 +25,7 @@
 #include "capturemodification.h"
 #include "capturewidget.h"
 #include "button.h"
-#include "capture/colorpicker.h"
+#include "src/capture/colorpicker.h"
 #include <QScreen>
 #include <QWindow>
 #include <QGuiApplication>

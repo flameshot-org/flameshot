@@ -17,7 +17,7 @@
 
 #include "uicoloreditor.h"
 #include "color_wheel.hpp"
-#include "capture/button.h"
+#include "src/capture/button.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSettings>

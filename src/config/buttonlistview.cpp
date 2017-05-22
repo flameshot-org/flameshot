@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "buttonlistview.h"
-#include "capture/button.h"
+#include "src/capture/button.h"
 #include <QListWidgetItem>
 #include <QListWidgetItem>
 #include <QSettings>

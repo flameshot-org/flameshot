@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "button.h"
-#include "capture/capturewidget.h"
+#include "src/capture/capturewidget.h"
 #include <QIcon>
 #include <QPropertyAnimation>
 #include <QToolTip>

@@ -20,7 +20,6 @@
 
 #include <QPushButton>
 #include <map>
-#include "button.h"
 
 class QWidget;
 class QPropertyAnimation;

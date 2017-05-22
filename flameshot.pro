@@ -27,38 +27,38 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-include(singleapplication/singleapplication.pri)
-include(Qt-Color-Widgets//color_widgets.pri)
+include(src/singleapplication/singleapplication.pri)
+include(src/Qt-Color-Widgets//color_widgets.pri)
 
 DEFINES += QAPPLICATION_CLASS=QApplication
 
-SOURCES += main.cpp\
-    nativeeventfilter.cpp \
-    controller.cpp \
-    capture/button.cpp \
-    capture/buttonhandler.cpp \
-    infowindow.cpp \
-    config/configwindow.cpp \
-    capture/screenshot.cpp \
-    capture/capturewidget.cpp \
-    capture/capturemodification.cpp \
-    capture/colorpicker.cpp \
-    config/buttonlistview.cpp \
-    config/uicoloreditor.cpp
+SOURCES += src/main.cpp\
+    src/nativeeventfilter.cpp \
+    src/controller.cpp \
+    src/capture/button.cpp \
+    src/capture/buttonhandler.cpp \
+    src/infowindow.cpp \
+    src/config/configwindow.cpp \
+    src/capture/screenshot.cpp \
+    src/capture/capturewidget.cpp \
+    src/capture/capturemodification.cpp \
+    src/capture/colorpicker.cpp \
+    src/config/buttonlistview.cpp \
+    src/config/uicoloreditor.cpp
 
 HEADERS  += \
-    nativeeventfilter.h \
-    controller.h \
-    capture/button.h \
-    capture/buttonhandler.h \
-    infowindow.h \
-    config/configwindow.h \
-    capture/screenshot.h \
-    capture/capturewidget.h \
-    capture/capturemodification.h \
-    capture/colorpicker.h \
-    config/buttonlistview.h \
-    config/uicoloreditor.h
+    src/nativeeventfilter.h \
+    src/controller.h \
+    src/capture/button.h \
+    src/capture/buttonhandler.h \
+    src/infowindow.h \
+    src/config/configwindow.h \
+    src/capture/screenshot.h \
+    src/capture/capturewidget.h \
+    src/capture/capturemodification.h \
+    src/capture/colorpicker.h \
+    src/config/buttonlistview.h \
+    src/config/uicoloreditor.h
 
 RESOURCES += \
     graphics.qrc
