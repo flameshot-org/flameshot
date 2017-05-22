@@ -42,27 +42,27 @@ InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     show();
 }
 
-namespace {
-    QVector<QString> keys = {
-        "←↓↑→",
-        "SHIFT + ←↓↑→",
-        "ESC",
-        "CTRL + C",
-        "CTRL + S",
-        "CTRL + Z",
-        "Right Click"
-    };
 
-    QVector<QString> description = {
-        "Move selection 1px",
-        "Resize selection 1px",
-        "Quit capture",
-        "Copy to clipboard",
-        "Save selection as a file",
-        "Undo the last modification",
-        "Show color picker"
-    };
-}
+QVector<QString> InfoWindow::keys = {
+    "←↓↑→",
+    "SHIFT + ←↓↑→",
+    "ESC",
+    "CTRL + C",
+    "CTRL + S",
+    "CTRL + Z",
+    tr("Right Click")
+};
+
+QVector<QString> InfoWindow::description = {
+    tr("Move selection 1px"),
+    tr("Resize selection 1px"),
+    tr("Quit capture"),
+    tr("Copy to clipboard"),
+    tr("Save selection as a file"),
+    tr("Undo the last modification"),
+    tr("Show color picker")
+};
+
 
 void InfoWindow::initInfoTable() {
     QTableWidget *table = new QTableWidget(this);
@@ -76,7 +76,7 @@ void InfoWindow::initInfoTable() {
     table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     // header creation
     QStringList names;
-    names  << "Key" << "Description";
+    names  << tr("Key") << tr("Description");
     table->setHorizontalHeaderLabels(names);
     //add content
     for (int i= 0; i < keys.size(); ++i){

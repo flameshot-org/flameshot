@@ -380,7 +380,7 @@ void CaptureWidget::uploadScreenshot() {
         m_screenshot->uploadToImgur(am, getExtendedSelection());
     }
     hide();
-    Q_EMIT newMessage("Uploading image...");
+    Q_EMIT newMessage(tr("Uploading image..."));
 }
 
 void CaptureWidget::undo() {

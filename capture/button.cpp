@@ -226,22 +226,22 @@ QString Button::getTypeTooltip(const Button::Type t) {
 }
 
 Button::typeData Button::typeTooltip = {
-        {Button::Type::selectionIndicator, "Shows the dimensions of the selection (X Y)"},
-        {Button::Type::mouseVisibility, "Sets the visibility of the mouse pointer"},
-        {Button::Type::exit, "Leaves the capture screen"},
-        {Button::Type::copy, "Copies the selecion into the clipboard"},
-        {Button::Type::save, "Opens the save image window"},
-        {Button::Type::pencil, "Sets the paint tool to a pencil"},
-        {Button::Type::line, "Sets the paint tool to a line drawer"},
-        {Button::Type::arrow, "Sets the paint tool to an arrow drawer"},
-        {Button::Type::rectangle, "Sets the paint tool to a rectagle drawer"},
-        {Button::Type::circle, "Sets the paint tool to a circle drawer"},
-        {Button::Type::marker, "Sets the paint tool to a marker"},
-        {Button::Type::text, "Sets the paint tool to a text creator"},
-        {Button::Type::colorPicker, "Opens the color picker widget"},
-        {Button::Type::undo, "Undo the last modification"},
-        {Button::Type::imageUploader, "Upload the selection to Imgur"},
-        {Button::Type::move, "Move the selection area"}
+        {Button::Type::selectionIndicator, tr("Shows the dimensions of the selection (X Y)")},
+        {Button::Type::mouseVisibility, tr("Sets the visibility of the mouse pointer")},
+        {Button::Type::exit, tr("Leaves the capture screen")},
+        {Button::Type::copy, tr("Copies the selecion into the clipboard")},
+        {Button::Type::save, tr("Opens the save image window")},
+        {Button::Type::pencil, tr("Sets the paint tool to a pencil")},
+        {Button::Type::line, tr("Sets the paint tool to a line drawer")},
+        {Button::Type::arrow, tr("Sets the paint tool to an arrow drawer")},
+        {Button::Type::rectangle, tr("Sets the paint tool to a rectagle drawer")},
+        {Button::Type::circle, tr("Sets the paint tool to a circle drawer")},
+        {Button::Type::marker, tr("Sets the paint tool to a marker")},
+        {Button::Type::text, tr("Sets the paint tool to a text creator")},
+        {Button::Type::colorPicker, tr("Opens the color picker widget")},
+        {Button::Type::undo, tr("Undo the last modification")},
+        {Button::Type::imageUploader, tr("Upload the selection to Imgur")},
+        {Button::Type::move, tr("Move the selection area")}
     };
 
 Button::typeData Button::typeName = {
