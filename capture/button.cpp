@@ -145,7 +145,7 @@ QString Button::getStyle() {
 }
 
 QString Button::getStyle(const QColor &mainColor) {
-    QString baseSheet = "Button { border-radius: 15px;"
+    QString baseSheet = "Button { border-radius: %3;"
                         "background-color: %1; color: white }"
                         "Button:hover { background-color: %2; }"
                         "Button:pressed:!hover { "
@@ -154,7 +154,7 @@ QString Button::getStyle(const QColor &mainColor) {
     if (mainColor.name() < QColor(30,30,30).name()) {
         contrast = contrast.lighter(120);
     }
-    return baseSheet.arg(mainColor.name()).arg(contrast.name());
+    return baseSheet.arg(mainColor.name()).arg(contrast.name()).arg(BUTTON_SIZE/2);
 }
 // get icon returns the icon for the type of button
 QIcon Button::getIcon(const Type t) {
@@ -175,7 +175,7 @@ void Button::leaveEvent(QEvent *e) {
 }
 
 void Button::mouseReleaseEvent(QMouseEvent *e) {
-    CaptureWidget *parent = (CaptureWidget*)this->parent();
+    CaptureWidget *parent = static_cast<CaptureWidget*>(this->parent());
     parent->mouseReleaseEvent(e);
     if (e->button() == Qt::LeftButton && m_pressed) {
 //        if (m_buttonType == Type::mouseVisibility) {
