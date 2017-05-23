@@ -44,6 +44,9 @@ private:
     void initColorWheel();
     void initButton();
     void initComboBox();
+
+    enum class iconColor {Black, White};
+    static QMap<iconColor, const char *> iconColorToString;
 };
 
 #endif // UICOLORPICKER_H

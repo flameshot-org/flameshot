@@ -31,8 +31,8 @@ private:
     void initInfoTable();
     QVBoxLayout *layout;
 
-    static QVector<QString> keys;
-    static QVector<QString> description;
+    static QVector<const char *> keys;
+    static QVector<const char *> description;
 };
 
 #endif // INFOWINDOW_H

@@ -43,24 +43,24 @@ InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
 }
 
 
-QVector<QString> InfoWindow::keys = {
+QVector<const char *> InfoWindow::keys = {
     "←↓↑→",
     "SHIFT + ←↓↑→",
     "ESC",
     "CTRL + C",
     "CTRL + S",
     "CTRL + Z",
-    tr("Right Click")
+    QT_TR_NOOP("Right Click")
 };
 
-QVector<QString> InfoWindow::description = {
-    tr("Move selection 1px"),
-    tr("Resize selection 1px"),
-    tr("Quit capture"),
-    tr("Copy to clipboard"),
-    tr("Save selection as a file"),
-    tr("Undo the last modification"),
-    tr("Show color picker")
+QVector<const char *> InfoWindow::description = {
+    QT_TR_NOOP("Move selection 1px"),
+    QT_TR_NOOP("Resize selection 1px"),
+    QT_TR_NOOP("Quit capture"),
+    QT_TR_NOOP("Copy to clipboard"),
+    QT_TR_NOOP("Save selection as a file"),
+    QT_TR_NOOP("Undo the last modification"),
+    QT_TR_NOOP("Show color picker")
 };
 
 
@@ -80,8 +80,8 @@ void InfoWindow::initInfoTable() {
     table->setHorizontalHeaderLabels(names);
     //add content
     for (int i= 0; i < keys.size(); ++i){
-        table->setItem(i, 0, new QTableWidgetItem(keys.at(i)));
-        table->setItem(i, 1, new QTableWidgetItem(description.at(i)));
+        table->setItem(i, 0, new QTableWidgetItem(tr(keys.at(i))));
+        table->setItem(i, 1, new QTableWidgetItem(tr(description.at(i))));
     }
     // adjust size
     table->resizeColumnsToContents();

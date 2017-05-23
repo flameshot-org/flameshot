@@ -22,6 +22,7 @@
 #include <QVBoxLayout>
 #include <QSettings>
 #include <QComboBox>
+#include <QMap>
 
 UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     setFrameStyle(QFrame::StyledPanel);
@@ -46,15 +47,6 @@ void UIcolorEditor::updateLocalColor(const QColor c) {
     m_uiColor = c;
     QString style = Button::getStyle(c);
     m_button->setStyleSheet(style);
-}
-
-void UIcolorEditor::updateButtonIcon(const QString &text) {
-    bool iconsAreWhite = true;
-    if (text.contains("Black")) {
-        iconsAreWhite = false;
-    }
-    m_button->setIcon(Button::getIcon(m_button->getButtonType(), iconsAreWhite));
-     QSettings().setValue("whiteIconColor", iconsAreWhite);
 }
 
 void UIcolorEditor::initColorWheel() {
@@ -91,15 +83,16 @@ void UIcolorEditor::initButton() {
     //    }
 }
 
+QMap<UIcolorEditor::iconColor, const char *> UIcolorEditor::iconColorToString = {
+    {iconColor::White, QT_TR_NOOP("White Icon")},
+    {iconColor::Black, QT_TR_NOOP("Black Icon")}
+};
+
 void UIcolorEditor::initComboBox() {
     QComboBox *comboBox = new QComboBox(this);
-    comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
-    comboBox->setFixedSize(comboBox->width(), comboBox->height());
 
-    vLayout->addWidget(comboBox);
-
-    QString textWhite = "White Icon";
-    QString textBlack = "Black Icon";
+    QString textWhite = tr(iconColorToString[iconColor::White]);
+    QString textBlack = tr(iconColorToString[iconColor::Black]);
 
     comboBox->addItem(textWhite);
     comboBox->addItem(textBlack);
@@ -111,4 +104,17 @@ void UIcolorEditor::initComboBox() {
     }
     connect(comboBox, &QComboBox::currentTextChanged, this, &UIcolorEditor::updateButtonIcon);
 
+    comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+    vLayout->addWidget(comboBox);
+
+}
+
+void UIcolorEditor::updateButtonIcon(const QString &text) {
+    bool iconsAreWhite = true;
+    QString blackMessage = tr(iconColorToString[iconColor::Black]);
+    if (text == blackMessage) {
+        iconsAreWhite = false;
+    }
+    m_button->setIcon(Button::getIcon(m_button->getButtonType(), iconsAreWhite));
+     QSettings().setValue("whiteIconColor", iconsAreWhite);
 }
