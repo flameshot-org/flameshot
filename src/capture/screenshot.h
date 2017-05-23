@@ -46,6 +46,8 @@ private:
     QPixmap m_baseScreenshot;
     QPixmap m_modifiedScreenshot;
     QPointer<QNetworkAccessManager> m_accessManager;
+
+    void paintInPainter(QPainter &, const CaptureModification &);
 };
 
 #endif // SCREENSHOT_H

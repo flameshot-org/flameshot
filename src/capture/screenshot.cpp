@@ -16,8 +16,8 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshot.h"
-#include "capturemodification.h"
 #include "button.h"
+#include "capturemodification.h"
 #include <QStandardPaths>
 #include <QIcon>
 #include <QSettings>
@@ -128,45 +128,38 @@ QPixmap Screenshot::paintModification(const CaptureModification &modification) {
     QPainter painter(&m_modifiedScreenshot);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.setPen(QPen(modification.getColor(), 2));
-    QVector<QPoint> points = modification.getPoints();
-    switch (modification.getType()) {
-    case Button::Type::arrow:
-        painter.drawLine(points[0], points[1]);
-        // TODO
-
-        break;
-    case Button::Type::circle:
-        painter.drawEllipse(QRect(points[0], points[1]));
-        break;
-    case Button::Type::line:
-        painter.drawLine(points[0], points[1]);
-        break;
-    case Button::Type::marker:
-        painter.setOpacity(0.35);
-        painter.setPen(QPen(modification.getColor(), 14));
-        painter.drawLine(points[0], points[1]);
-        painter.setOpacity(1);
-        break;
-    case Button::Type::pencil:
-        painter.drawPolyline(points.data(), points.size());
-        break;
-    case Button::Type::rectangle:
-        painter.drawRect(QRect(points[0], points[1]));
-        break;
-    default:
-        break;
-    }
+    paintInPainter(painter, modification);
     return m_modifiedScreenshot;
 }
 
-QPixmap Screenshot::paintTemporalModification(const CaptureModification &modification) {
+// paintTemporalModification paints a modification without updating the
+// member pixmap
+QPixmap Screenshot::paintTemporalModification(
+        const CaptureModification &modification) {
     QPixmap tempPix = m_modifiedScreenshot;
     QPainter painter(&tempPix);
     if (modification.getType() != Button::Type::pencil) {
         painter.setRenderHint(QPainter::Antialiasing);
     }
+    paintInPainter(painter, modification);
+    return tempPix;
+}
 
+// paintBaseModifications overrides the modifications of the screenshot
+// with new ones.
+QPixmap Screenshot::paintBaseModifications(
+        const QVector<CaptureModification> &m) {
+    m_modifiedScreenshot = m_baseScreenshot;
+    for (const CaptureModification modification: m) {
+        paintModification(modification);
+    }
+    return m_modifiedScreenshot;
+}
+
+// paintInPainter is an aux method to prevent duplicated code, it draws the
+// passed modification to the painter.
+void Screenshot::paintInPainter(QPainter &painter,
+                                const CaptureModification &modification) {
     painter.setPen(QPen(modification.getColor(), 2));
     QVector<QPoint> points = modification.getPoints();
     switch (modification.getType()) {
@@ -196,16 +189,7 @@ QPixmap Screenshot::paintTemporalModification(const CaptureModification &modific
     default:
         break;
     }
-    return tempPix;
-}
 
-// paintBaseModifications overrides the modifications of the screenshot with new ones
-QPixmap Screenshot::paintBaseModifications(const QVector<CaptureModification> &m) {
-    m_modifiedScreenshot = m_baseScreenshot;
-    for (const CaptureModification modification: m) {
-        paintModification(modification);
-    }
-    return m_modifiedScreenshot;
 }
 
 void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
