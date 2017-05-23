@@ -16,11 +16,18 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
-#include <QApplication>
 #include "singleapplication.h"
+#include <QApplication>
+#include <QTranslator>
 
 int main(int argc, char *argv[]) {
+    QTranslator translator;
+    translator.load(QLocale::system().language(),
+      "Internationalization", "_");
+
     SingleApplication app(argc, argv);
+    app.installTranslator(&translator);
+
     app.setApplicationName("flameshot");
     app.setOrganizationName("Dharkael");
 

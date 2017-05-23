@@ -19,13 +19,14 @@
 #define BUTTON_H
 
 #include <QPushButton>
-#include <map>
+#include <QMap>
 
 class QWidget;
 class QPropertyAnimation;
 
 class Button : public QPushButton {
     Q_OBJECT
+    Q_ENUMS(Type)
 
 public:
     enum class Type {
@@ -77,12 +78,12 @@ signals:
 
 private:
     Button(QWidget *parent = 0);
-    Type m_buttonType;
+    const Type m_buttonType;
     bool m_pressed;
 
     QPropertyAnimation *emergeAnimation;
 
-    typedef std::map<Button::Type, const QString> typeData;
+    typedef QMap<Button::Type, const char *> typeData;
     static typeData typeTooltip;
     static typeData typeName;
 

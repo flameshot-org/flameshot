@@ -60,7 +60,7 @@ void Button::initButton() {
     setMouseTracking(true);
     setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
 
-    setToolTip(typeTooltip[m_buttonType]);
+    setToolTip(getTypeTooltip(m_buttonType));
 
     emergeAnimation = new  QPropertyAnimation(this, "size", this);
     emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
@@ -211,54 +211,54 @@ size_t Button::getButtonBaseSize() {
 // returns Button::Type::last when the corresponding button is not found.
 Button::Type Button::getTypeByName(const QString s) {
     Button::Type res = Type::last;
-    for (auto it = typeName.begin(); it != typeName.end(); ++it )
-        if (it->second == s)
-            res = it->first;
+    for (auto i: typeName.toStdMap())
+        if (i.second == s)
+            res = i.first;
     return res;
 }
 
 QString Button::getTypeName(const Button::Type t) {
-    return typeName[t];
+    return tr(typeName[t]);
 }
 
 QString Button::getTypeTooltip(const Button::Type t) {
-    return typeTooltip[t];
+    return tr(typeTooltip[t]);
 }
 
 Button::typeData Button::typeTooltip = {
-        {Button::Type::selectionIndicator, tr("Shows the dimensions of the selection (X Y)")},
-        {Button::Type::mouseVisibility, tr("Sets the visibility of the mouse pointer")},
-        {Button::Type::exit, tr("Leaves the capture screen")},
-        {Button::Type::copy, tr("Copies the selecion into the clipboard")},
-        {Button::Type::save, tr("Opens the save image window")},
-        {Button::Type::pencil, tr("Sets the paint tool to a pencil")},
-        {Button::Type::line, tr("Sets the paint tool to a line drawer")},
-        {Button::Type::arrow, tr("Sets the paint tool to an arrow drawer")},
-        {Button::Type::rectangle, tr("Sets the paint tool to a rectagle drawer")},
-        {Button::Type::circle, tr("Sets the paint tool to a circle drawer")},
-        {Button::Type::marker, tr("Sets the paint tool to a marker")},
-        {Button::Type::text, tr("Sets the paint tool to a text creator")},
-        {Button::Type::colorPicker, tr("Opens the color picker widget")},
-        {Button::Type::undo, tr("Undo the last modification")},
-        {Button::Type::imageUploader, tr("Upload the selection to Imgur")},
-        {Button::Type::move, tr("Move the selection area")}
-    };
+        {Button::Type::selectionIndicator, QT_TR_NOOP("Shows the dimensions of the selection (X Y)")},
+        {Button::Type::mouseVisibility, QT_TR_NOOP("Sets the visibility of the mouse pointer")},
+        {Button::Type::exit, QT_TR_NOOP("Leaves the capture screen")},
+        {Button::Type::copy, QT_TR_NOOP("Copies the selecion into the clipboard")},
+        {Button::Type::save, QT_TR_NOOP("Opens the save image window")},
+        {Button::Type::pencil, QT_TR_NOOP("Sets the paint tool to a pencil")},
+        {Button::Type::line, QT_TR_NOOP("Sets the paint tool to a line drawer")},
+        {Button::Type::arrow, QT_TR_NOOP("Sets the paint tool to an arrow drawer")},
+        {Button::Type::rectangle, QT_TR_NOOP("Sets the paint tool to a rectagle drawer")},
+        {Button::Type::circle, QT_TR_NOOP("Sets the paint tool to a circle drawer")},
+        {Button::Type::marker, QT_TR_NOOP("Sets the paint tool to a marker")},
+        {Button::Type::text, QT_TR_NOOP("Sets the paint tool to a text creator")},
+        {Button::Type::colorPicker, QT_TR_NOOP("Opens the color picker widget")},
+        {Button::Type::undo, QT_TR_NOOP("Undo the last modification")},
+        {Button::Type::imageUploader, QT_TR_NOOP("Upload the selection to Imgur")},
+        {Button::Type::move, QT_TR_NOOP("Move the selection area")}
+};
 
 Button::typeData Button::typeName = {
-    {Button::Type::selectionIndicator, "Selection Size Indicator"},
-    {Button::Type::mouseVisibility, "Mouse Visibility"},
-    {Button::Type::exit, "Exit"},
-    {Button::Type::copy, "Copy"},
-    {Button::Type::save, "Save"},
-    {Button::Type::pencil, "Pencil"},
-    {Button::Type::line, "Line"},
-    {Button::Type::arrow, "Arrow"},
-    {Button::Type::rectangle, "Rectangle"},
-    {Button::Type::circle, "Circle"},
-    {Button::Type::marker, "Marker"},
-    {Button::Type::text, "Text"},
-    {Button::Type::colorPicker, "Color Picker"},
-    {Button::Type::undo, "Undo"},
-    {Button::Type::imageUploader, "Image Uploader"},
-    {Button::Type::move, "Move"}
+    {Button::Type::selectionIndicator, QT_TR_NOOP("Selection Size Indicator")},
+    {Button::Type::mouseVisibility, QT_TR_NOOP("Mouse Visibility")},
+    {Button::Type::exit, QT_TR_NOOP("Exit")},
+    {Button::Type::copy, QT_TR_NOOP("Copy")},
+    {Button::Type::save, QT_TR_NOOP("Save")},
+    {Button::Type::pencil, QT_TR_NOOP("Pencil")},
+    {Button::Type::line, QT_TR_NOOP("Line")},
+    {Button::Type::arrow, QT_TR_NOOP("Arrow")},
+    {Button::Type::rectangle, QT_TR_NOOP("Rectangle")},
+    {Button::Type::circle, QT_TR_NOOP("Circle")},
+    {Button::Type::marker, QT_TR_NOOP("Marker")},
+    {Button::Type::text, QT_TR_NOOP("Text")},
+    {Button::Type::colorPicker, QT_TR_NOOP("Color Picker")},
+    {Button::Type::undo, QT_TR_NOOP("Undo")},
+    {Button::Type::imageUploader, QT_TR_NOOP("Image Uploader")},
+    {Button::Type::move, QT_TR_NOOP("Move")}
 };
