@@ -146,7 +146,7 @@ QString Button::getStyle() {
 
 QString Button::getStyle(const QColor &mainColor) {
     QString baseSheet = "Button { border-radius: %3;"
-                        "background-color: %1; color: white }"
+                        "background-color: %1; color: %4 }"
                         "Button:hover { background-color: %2; }"
                         "Button:pressed:!hover { "
                         "background-color: %1; }";
@@ -154,7 +154,12 @@ QString Button::getStyle(const QColor &mainColor) {
     if (mainColor.name() < QColor(30,30,30).name()) {
         contrast = contrast.lighter(120);
     }
-    return baseSheet.arg(mainColor.name()).arg(contrast.name()).arg(BUTTON_SIZE/2);
+    bool iconsAreWhite = QSettings().value("whiteIconColor").toBool();
+    QString color = "black";
+    if (iconsAreWhite) { color = "white"; }
+
+    return baseSheet.arg(mainColor.name()).arg(contrast.name())
+            .arg(BUTTON_SIZE/2).arg(color);
 }
 // get icon returns the icon for the type of button
 QIcon Button::getIcon(const Type t) {

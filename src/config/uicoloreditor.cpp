@@ -21,19 +21,20 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSettings>
+#include <QComboBox>
 
 UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
-    setFixedSize(200,130);
     setFrameStyle(QFrame::StyledPanel);
 
     hLayout = new QHBoxLayout;
     vLayout = new QVBoxLayout;
 
     initButton();
+    initComboBox();
     initColorWheel();
     hLayout->addLayout(vLayout);
-
     setLayout(hLayout);
+
 }
 
 void UIcolorEditor::updateUIcolor() {
@@ -45,6 +46,15 @@ void UIcolorEditor::updateLocalColor(const QColor c) {
     m_uiColor = c;
     QString style = Button::getStyle(c);
     m_button->setStyleSheet(style);
+}
+
+void UIcolorEditor::updateButtonIcon(const QString &text) {
+    bool iconsAreWhite = true;
+    if (text.contains("Black")) {
+        iconsAreWhite = false;
+    }
+    m_button->setIcon(Button::getIcon(m_button->getButtonType(), iconsAreWhite));
+     QSettings().setValue("whiteIconColor", iconsAreWhite);
 }
 
 void UIcolorEditor::initColorWheel() {
@@ -64,11 +74,41 @@ void UIcolorEditor::initColorWheel() {
 }
 
 void UIcolorEditor::initButton() {
+    QFrame *frame = new QFrame(this);
+    const int extraSize = 10;
+    int frameSize = Button::getButtonBaseSize() + extraSize;
+    frame->setFixedSize(frameSize, frameSize);
+    frame->setFrameStyle(QFrame::StyledPanel);
+
     bool iconsAreWhite = QSettings().value("whiteIconColor").toBool();
+    m_button = new Button(Button::Type::circle, iconsAreWhite, frame);
+    m_button->move(m_button->x() + extraSize/2, m_button->y() + extraSize/2);
+    vLayout->addWidget(frame);
+
 //    QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
 //    if (bgColor < QColor(Qt::gray).name()) {
 //        iconsAreWhite = true;
-//    }
-    m_button = new Button(Button::Type::circle, iconsAreWhite, this);
-    m_button->setStyleSheet(Button::getStyle());
+    //    }
+}
+
+void UIcolorEditor::initComboBox() {
+    QComboBox *comboBox = new QComboBox(this);
+    comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+    comboBox->setFixedSize(comboBox->width(), comboBox->height());
+
+    vLayout->addWidget(comboBox);
+
+    QString textWhite = "White Icon";
+    QString textBlack = "Black Icon";
+
+    comboBox->addItem(textWhite);
+    comboBox->addItem(textBlack);
+    bool iconsAreWhite = QSettings().value("whiteIconColor").toBool();
+    if (iconsAreWhite) {
+        comboBox->setCurrentText(textWhite);
+    } else {
+        comboBox->setCurrentText(textBlack);
+    }
+    connect(comboBox, &QComboBox::currentTextChanged, this, &UIcolorEditor::updateButtonIcon);
+
 }

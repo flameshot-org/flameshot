@@ -32,6 +32,7 @@ public:
 private slots:
     void updateUIcolor();
     void updateLocalColor(const QColor);
+    void updateButtonIcon(const QString &);
 
 private:
     QColor m_uiColor;
@@ -42,6 +43,7 @@ private:
 
     void initColorWheel();
     void initButton();
+    void initComboBox();
 };
 
 #endif // UICOLORPICKER_H
