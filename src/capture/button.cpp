@@ -143,16 +143,18 @@ QString Button::getStyle() {
     QColor mainColor = settings.value("uiColor").value<QColor>();
     return getStyle(mainColor);
 }
-
+#include <QDebug>
 QString Button::getStyle(const QColor &mainColor) {
     QString baseSheet = "Button { border-radius: %3;"
                         "background-color: %1; color: %4 }"
                         "Button:hover { background-color: %2; }"
                         "Button:pressed:!hover { "
                         "background-color: %1; }";
+
     QColor contrast(mainColor.darker(120));
-    if (mainColor.name() < QColor(30,30,30).name()) {
-        contrast = contrast.lighter(120);
+    int sumRGB = mainColor.red() + mainColor.green() + mainColor.blue();
+    if (sumRGB < 130) {
+        contrast = mainColor.lighter(160);
     }
     bool iconsAreWhite = QSettings().value("whiteIconColor").toBool();
     QString color = "black";
