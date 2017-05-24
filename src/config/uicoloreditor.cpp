@@ -77,13 +77,10 @@ void UIcolorEditor::initButton() {
     m_button->move(m_button->x() + extraSize/2, m_button->y() + extraSize/2);
     vLayout->addWidget(frame);
 
-//    QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
-//    if (bgColor < QColor(Qt::gray).name()) {
-//        iconsAreWhite = true;
-    //    }
+    m_button->setToolTip(tr("Color preview"));
 }
 
-QMap<UIcolorEditor::iconColor, const char *> UIcolorEditor::iconColorToString = {
+UIcolorEditor::colorToStringMap UIcolorEditor::iconColorToString = {
     {iconColor::White, QT_TR_NOOP("White Icon")},
     {iconColor::Black, QT_TR_NOOP("Black Icon")}
 };

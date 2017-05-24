@@ -26,7 +26,7 @@
 
 // ConfigWindow contains the menus where you can configure the application
 
-ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent){
+ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setFixedSize(280, 400);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);

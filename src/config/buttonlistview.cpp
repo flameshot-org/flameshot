@@ -23,7 +23,6 @@
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
-    //setFocusPolicy(Qt::NoFocus);
 
     QSettings settings;
     m_listButtons = settings.value("buttons").value<QList<int> >();

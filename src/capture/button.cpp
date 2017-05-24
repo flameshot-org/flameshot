@@ -31,7 +31,8 @@ namespace {
 }
 
 Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
-    m_buttonType(t), m_pressed(false) {
+    m_buttonType(t), m_pressed(false)
+{
     initButton();
 
     if (t == Button::Type::selectionIndicator) {
@@ -43,7 +44,8 @@ Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
 }
 
 Button::Button(const Button::Type t, const bool isWhite, QWidget *parent)
-    : QPushButton(parent), m_buttonType(t), m_pressed(false) {
+    : QPushButton(parent), m_buttonType(t), m_pressed(false)
+{
     initButton();
 
     if (t == Button::Type::selectionIndicator) {
@@ -143,7 +145,7 @@ QString Button::getStyle() {
     QColor mainColor = settings.value("uiColor").value<QColor>();
     return getStyle(mainColor);
 }
-#include <QDebug>
+
 QString Button::getStyle(const QColor &mainColor) {
     QString baseSheet = "Button { border-radius: %3;"
                         "background-color: %1; color: %4 }"

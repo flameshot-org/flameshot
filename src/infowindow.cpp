@@ -87,5 +87,6 @@ void InfoWindow::initInfoTable() {
     table->resizeColumnsToContents();
     table->resizeRowsToContents();
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-    table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
+                                             QSizePolicy::Expanding);
 }

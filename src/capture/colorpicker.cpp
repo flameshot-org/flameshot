@@ -22,7 +22,8 @@
 
 
 ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
-        m_colorAreaSize(18) {
+        m_colorAreaSize(18)
+{
     setMouseTracking(true);
     // save the color values in member variables for faster access
     QSettings settings;

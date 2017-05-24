@@ -36,7 +36,9 @@ NativeEventFilter::NativeEventFilter(QObject *parent) : QObject(parent) {
     setShortcut();
 }
 
-bool NativeEventFilter::nativeEventFilter(const QByteArray &eventType, void *message, long *result) {
+bool NativeEventFilter::nativeEventFilter(const QByteArray &eventType,
+                                          void *message, long *result)
+{
     Q_UNUSED(eventType)
     Q_UNUSED(result)
 

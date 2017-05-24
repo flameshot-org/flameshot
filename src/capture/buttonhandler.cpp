@@ -57,7 +57,8 @@ size_t ButtonHandler::size() const {
 // When the selection is too small it works on a virtual selection with
 // the original in the center.
 void ButtonHandler::updatePosition(const QRect &selection,
-                                   const  QRect &limits) {
+                                   const  QRect &limits)
+{
     const QVector<Button*>::size_type vecLength = m_vectorButtons.size();
     if (vecLength == 0) {
         return;
@@ -250,7 +251,8 @@ void ButtonHandler::updatePosition(const QRect &selection,
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::getHPoints(
-        const QPoint &center, const int elements) const {
+        const QPoint &center, const int elements) const
+{
 
     QVector<QPoint> res;
     QPoint left, right;
@@ -275,8 +277,8 @@ QVector<QPoint> ButtonHandler::getHPoints(
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::getVPoints(
-        const QPoint &center, const int elements) const {
-
+        const QPoint &center, const int elements) const
+{
     QVector<QPoint> res;
     QPoint up, down;
     if (elements % 2 == 0) {

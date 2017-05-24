@@ -22,7 +22,8 @@
 // by the user.
 
 CaptureModification::CaptureModification(const Button::Type t, const QPoint p,
-                                         const QColor c) : m_color(c), m_type(t) {
+                                         const QColor c) : m_color(c), m_type(t)
+{
     m_coords.append(p);
     if (m_type == Button::Type::circle || m_type == Button::Type::rectangle
          || m_type == Button::Type::arrow || m_type == Button::Type::line ||

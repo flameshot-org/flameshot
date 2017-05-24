@@ -31,7 +31,8 @@
 // launches the capture widget
 
 Controller::Controller(QObject *parent) : QObject(parent),
-        m_captureWindow(nullptr) {
+        m_captureWindow(nullptr)
+{
     // required for the button serialization
     qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
     createActions();
@@ -53,13 +54,16 @@ Controller::Controller(QObject *parent) : QObject(parent),
 // creates the items of the trayIcon
 void Controller::createActions() {
     m_configAction = new QAction(tr("&Configuration"), this);
-    connect(m_configAction, &QAction::triggered, this, &Controller::openConfigWindow);
+    connect(m_configAction, &QAction::triggered, this,
+            &Controller::openConfigWindow);
 
     m_infoAction = new QAction(tr("&Information"), this);
-    connect(m_infoAction, &QAction::triggered, this, &Controller::openInfoWindow);
+    connect(m_infoAction, &QAction::triggered, this,
+            &Controller::openInfoWindow);
 
     m_quitAction = new QAction(tr("&Quit"), this);
-    connect(m_quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+    connect(m_quitAction, &QAction::triggered, qApp,
+            &QCoreApplication::quit);
 }
 
 // creates the trayIcon

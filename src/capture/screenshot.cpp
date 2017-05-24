@@ -135,7 +135,8 @@ QPixmap Screenshot::paintModification(const CaptureModification &modification) {
 // paintTemporalModification paints a modification without updating the
 // member pixmap
 QPixmap Screenshot::paintTemporalModification(
-        const CaptureModification &modification) {
+        const CaptureModification &modification)
+{
     QPixmap tempPix = m_modifiedScreenshot;
     QPainter painter(&tempPix);
     if (modification.getType() != Button::Type::pencil) {
@@ -148,7 +149,8 @@ QPixmap Screenshot::paintTemporalModification(
 // paintBaseModifications overrides the modifications of the screenshot
 // with new ones.
 QPixmap Screenshot::paintBaseModifications(
-        const QVector<CaptureModification> &m) {
+        const QVector<CaptureModification> &m)
+{
     m_modifiedScreenshot = m_baseScreenshot;
     for (const CaptureModification modification: m) {
         paintModification(modification);
@@ -201,7 +203,8 @@ namespace {
 // paintInPainter is an aux method to prevent duplicated code, it draws the
 // passed modification to the painter.
 void Screenshot::paintInPainter(QPainter &painter,
-                                const CaptureModification &modification) {
+                                const CaptureModification &modification)
+{
     painter.setPen(QPen(modification.getColor(), 2));
     QVector<QPoint> points = modification.getPoints();
     switch (modification.getType()) {
@@ -234,7 +237,8 @@ void Screenshot::paintInPainter(QPainter &painter,
 }
 
 void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
-                               const QRect &selection) {
+                               const QRect &selection)
+{
     QString title ="flameshot_screenshot";
     QString datetime = QDateTime().toString();
     QString description = "flameshot " + datetime;

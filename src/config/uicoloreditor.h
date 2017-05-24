@@ -46,7 +46,8 @@ private:
     void initComboBox();
 
     enum class iconColor {Black, White};
-    static QMap<iconColor, const char *> iconColorToString;
+    typedef QMap<UIcolorEditor::iconColor, const char *> colorToStringMap;
+    static colorToStringMap iconColorToString;
 };
 
 #endif // UICOLORPICKER_H

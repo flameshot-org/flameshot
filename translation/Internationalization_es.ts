@@ -4,162 +4,162 @@
 <context>
     <name>Button</name>
     <message>
-        <location filename="../src/capture/button.cpp" line="234"/>
+        <location filename="../src/capture/button.cpp" line="236"/>
         <source>Shows the dimensions of the selection (X Y)</source>
         <translation>Muestra la dimensión de ls selección (X Y)</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="235"/>
+        <location filename="../src/capture/button.cpp" line="237"/>
         <source>Sets the visibility of the mouse pointer</source>
         <translation>Selecciona la visibilidad del puntero del ratón</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="236"/>
+        <location filename="../src/capture/button.cpp" line="238"/>
         <source>Leaves the capture screen</source>
         <translation>Cierra la pantalla de captura</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="237"/>
+        <location filename="../src/capture/button.cpp" line="239"/>
         <source>Copies the selecion into the clipboard</source>
         <translation>Copia la selección al portapapeles</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="238"/>
+        <location filename="../src/capture/button.cpp" line="240"/>
         <source>Opens the save image window</source>
         <translation>Abre la ventana de guardar imagen</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="239"/>
+        <location filename="../src/capture/button.cpp" line="241"/>
         <source>Sets the paint tool to a pencil</source>
         <translation>Establece el lápiz como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="240"/>
+        <location filename="../src/capture/button.cpp" line="242"/>
         <source>Sets the paint tool to a line drawer</source>
         <translation>Establece la línea como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="241"/>
+        <location filename="../src/capture/button.cpp" line="243"/>
         <source>Sets the paint tool to an arrow drawer</source>
         <translation>Establece la flecha como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="242"/>
+        <location filename="../src/capture/button.cpp" line="244"/>
         <source>Sets the paint tool to a rectagle drawer</source>
         <translation>Establece el rectángulo como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="243"/>
+        <location filename="../src/capture/button.cpp" line="245"/>
         <source>Sets the paint tool to a circle drawer</source>
         <translation>Establece el círculo como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="244"/>
+        <location filename="../src/capture/button.cpp" line="246"/>
         <source>Sets the paint tool to a marker</source>
         <translation>Establece el marcador como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="245"/>
+        <location filename="../src/capture/button.cpp" line="247"/>
         <source>Sets the paint tool to a text creator</source>
         <translation>Establece el texto como herramienta de dibujo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="246"/>
+        <location filename="../src/capture/button.cpp" line="248"/>
         <source>Opens the color picker widget</source>
         <translation>Abre el selector de color</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="247"/>
+        <location filename="../src/capture/button.cpp" line="249"/>
         <source>Undo the last modification</source>
         <translation>Deshace la última modificación</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="248"/>
+        <location filename="../src/capture/button.cpp" line="250"/>
         <source>Upload the selection to Imgur</source>
         <translation>Sube la selección a Imgur</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="249"/>
+        <location filename="../src/capture/button.cpp" line="251"/>
         <source>Move the selection area</source>
         <translation>Mueve la selección</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="253"/>
+        <location filename="../src/capture/button.cpp" line="255"/>
         <source>Selection Size Indicator</source>
         <translation>Indicador de Tamaño de Selección</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="254"/>
+        <location filename="../src/capture/button.cpp" line="256"/>
         <source>Mouse Visibility</source>
         <translation>Visibilidad del Ratón</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="255"/>
+        <location filename="../src/capture/button.cpp" line="257"/>
         <source>Exit</source>
         <translation>Salir</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="256"/>
+        <location filename="../src/capture/button.cpp" line="258"/>
         <source>Copy</source>
         <translation>Copiar</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="257"/>
+        <location filename="../src/capture/button.cpp" line="259"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="258"/>
+        <location filename="../src/capture/button.cpp" line="260"/>
         <source>Pencil</source>
         <translation>Lápiz</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="259"/>
+        <location filename="../src/capture/button.cpp" line="261"/>
         <source>Line</source>
         <translation>Línea</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="260"/>
+        <location filename="../src/capture/button.cpp" line="262"/>
         <source>Arrow</source>
         <translation>Flecha</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="261"/>
+        <location filename="../src/capture/button.cpp" line="263"/>
         <source>Rectangle</source>
         <translation>Rectángulo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="262"/>
+        <location filename="../src/capture/button.cpp" line="264"/>
         <source>Circle</source>
         <translation>Círculo</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="263"/>
+        <location filename="../src/capture/button.cpp" line="265"/>
         <source>Marker</source>
         <translation>Marcador</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="264"/>
+        <location filename="../src/capture/button.cpp" line="266"/>
         <source>Text</source>
         <translation>Texto</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="265"/>
+        <location filename="../src/capture/button.cpp" line="267"/>
         <source>Color Picker</source>
         <translation>Selector de Color</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="266"/>
+        <location filename="../src/capture/button.cpp" line="268"/>
         <source>Undo</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="267"/>
+        <location filename="../src/capture/button.cpp" line="269"/>
         <source>Image Uploader</source>
         <translation>Subir Imagen</translation>
     </message>
     <message>
-        <location filename="../src/capture/button.cpp" line="268"/>
+        <location filename="../src/capture/button.cpp" line="270"/>
         <source>Move</source>
         <translation>Mover Selección</translation>
     </message>
@@ -167,7 +167,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="383"/>
+        <location filename="../src/capture/capturewidget.cpp" line="388"/>
         <source>Uploading image...</source>
         <translation>Subiendo imagen...</translation>
     </message>
@@ -175,17 +175,17 @@
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="32"/>
+        <location filename="../src/config/configwindow.cpp" line="34"/>
         <source>Configuration</source>
         <translation>Configuración</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="36"/>
+        <location filename="../src/config/configwindow.cpp" line="38"/>
         <source>UI color editor</source>
         <translation>Editor de color de interfaz</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="41"/>
+        <location filename="../src/config/configwindow.cpp" line="43"/>
         <source>Button selection</source>
         <translation>Selección de botones</translation>
     </message>
@@ -193,17 +193,17 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="56"/>
+        <location filename="../src/controller.cpp" line="55"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuración</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="59"/>
+        <location filename="../src/controller.cpp" line="58"/>
         <source>&amp;Information</source>
         <translation>&amp;Información</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="62"/>
+        <location filename="../src/controller.cpp" line="61"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
@@ -302,12 +302,17 @@
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="87"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="80"/>
+        <source>Color preview</source>
+        <translation>Previsualización de color</translation>
+    </message>
+    <message>
+        <location filename="../src/config/uicoloreditor.cpp" line="84"/>
         <source>White Icon</source>
         <translation>Icono Blanco</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="88"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="85"/>
         <source>Black Icon</source>
         <translation>Icono Negro</translation>
     </message>

@@ -53,8 +53,8 @@ namespace {
 CaptureWidget::CaptureWidget(QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_onButton(false), m_state(Button::Type::move) {
-
+    m_onButton(false), m_state(Button::Type::move)
+{
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
     QRect baseRect(0, 0, HANDLE_SIZE, HANDLE_SIZE);
@@ -196,7 +196,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         m_mousePos = e->pos();
 
         if (m_newSelection) {
-            m_selection = QRect(m_dragStartPoint, limitPointToRect(m_mousePos, rect())).normalized();
+            m_selection = QRect(m_dragStartPoint, limitPointToRect(
+                                    m_mousePos, rect())).normalized();
         } else if (m_mouseOverHandle == 0) {
             // Moving the whole selection
             QRect r = rect().normalized(), s = m_selectionBeforeDrag.normalized();
