@@ -3,6 +3,15 @@
 
 **This program is in heavy develpment and it's incomplete!**
 
+## Usage
+
+When you execute the binary, the app will create a systray icon, the app will be waiting for the Print Key to start a new capture.
+
+Do a right click on the tray icon and you'll see menu items to open the configuration window and the information window.
+Check out the information window to see all the available shortcuts in the capture mode.
+
+This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
+
 ## Considerations
 If you have a system-wide shortcut assigned to the`Print`
  key, you should disable it because it may interfere with the global key detection.
@@ -13,7 +22,7 @@ If you have a system-wide shortcut assigned to the`Print`
 
 ## Dependencies
 - QT (tested with QT5.8)
-- QT X11
+- QT X11 extras
 - X11 devel (with xcb)
 
 ## Compilation
