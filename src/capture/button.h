@@ -40,11 +40,11 @@ public:
         rectangle,
         circle,
         marker,
-        text,
         undo,
         imageUploader,
         move,
         last, // used for iteration over the enum
+        text,
         mouseVisibility,
         colorPicker
     };

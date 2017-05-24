@@ -28,6 +28,9 @@ class ConfigWindow : public QWidget {
 public:
     explicit ConfigWindow(QWidget *parent = 0);
 
+signals:
+    void setDefaults();
+
 private:
 
 };

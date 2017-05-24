@@ -32,10 +32,12 @@ public:
     QVector<QPoint> getPoints() const;
     void addPoint(const QPoint);
 
-private:
-    QVector<QPoint> m_coords;
+protected:
     QColor m_color;
     Button::Type m_type;
+
+private:
+    QVector<QPoint> m_coords;
 
 };
 

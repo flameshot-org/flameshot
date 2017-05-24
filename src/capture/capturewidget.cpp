@@ -38,6 +38,7 @@
 #include <QSettings>
 #include <QNetworkReply>
 #include <QDesktopServices>
+#include <QLineEdit>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.

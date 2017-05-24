@@ -156,31 +156,47 @@ QPixmap Screenshot::paintBaseModifications(
     return m_modifiedScreenshot;
 }
 
-QPainterPath getArrowHead(QPoint p1, QPoint p2) {
-    QLineF body(p1, p2);
-    int originalLength = body.length();
-    body.setLength(10);
-    // move across the line up to the head
-    //QPointF  = ;
-    QLineF temp(QPoint(0,0), p2-p1);
-    temp.setLength(originalLength-20);
-    QPointF bottonTranslation(temp.p2());
+namespace {
+    const int ArrowWidth = 10;
+    const int ArrowHeight = 18;
 
-    // generates the transformation to center the head of the arrow
-    body.setAngle(body.angle()+90);
-    QPointF temp2 = p1-body.p2();
-    QPointF centerTranslation((temp2.x()/2), (temp2.y()/2));
+    QPainterPath getArrowHead(QPoint p1, QPoint p2) {
+        QLineF body(p1, p2);
+        int originalLength = body.length();
+        body.setLength(ArrowWidth);
+        // move across the line up to the head
+        //QPointF  = ;
+        QLineF temp(QPoint(0,0), p2-p1);
+        temp.setLength(originalLength-ArrowHeight);
+        QPointF bottonTranslation(temp.p2());
 
-    body.translate(bottonTranslation);
-    body.translate(centerTranslation);
+        // generates the transformation to center of the arrowhead
+        body.setAngle(body.angle()+90);
+        QPointF temp2 = p1-body.p2();
+        QPointF centerTranslation((temp2.x()/2), (temp2.y()/2));
 
-    QPainterPath path;
-    path.moveTo(p2);
-    path.lineTo(body.p1());
-    path.lineTo(body.p2());
-    path.lineTo(p2);
-    return path;
+        body.translate(bottonTranslation);
+        body.translate(centerTranslation);
+
+        QPainterPath path;
+        path.moveTo(p2);
+        path.lineTo(body.p1());
+        path.lineTo(body.p2());
+        path.lineTo(p2);
+        return path;
+    }
+
+    // gets a shorter line to prevent overlap in the point of the arrow
+    QLine getShorterLine(QPoint p1, QPoint p2) {
+        QLineF l(p1, p2);
+        l.setLength(l.length()-ArrowHeight);
+        return l.toLine();
+    }
+
 }
+
+
+
 
 // paintInPainter is an aux method to prevent duplicated code, it draws the
 // passed modification to the painter.
@@ -190,7 +206,7 @@ void Screenshot::paintInPainter(QPainter &painter,
     QVector<QPoint> points = modification.getPoints();
     switch (modification.getType()) {
     case Button::Type::arrow:
-        painter.drawLine(points[0], points[1]);
+        painter.drawLine(getShorterLine(points[0], points[1]));
         painter.fillPath(getArrowHead(points[0], points[1]),
                 QBrush(modification.getColor()));
         break;

@@ -39,11 +39,11 @@ private slots:
     void openConfigWindow();
     void openInfoWindow();
     void showMessage(QString);
+    void initDefaults();
 
 private:
     void createActions();
     void createTrayIcon();
-    void initDefaults();
 
     QAction *m_configAction;
     QAction *m_infoAction;
