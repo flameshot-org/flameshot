@@ -42,8 +42,8 @@ public:
 private:
     QVector<QPoint> getHPoints(const QPoint &center, const int elements) const;
     QVector<QPoint> getVPoints(const QPoint &center, const int elements) const;
-
     QVector<Button*> m_vectorButtons;
+
     int m_distance;
 };
 

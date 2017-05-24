@@ -38,7 +38,7 @@
 #include <QSettings>
 #include <QNetworkReply>
 #include <QDesktopServices>
-#include <QLineEdit>
+#include <QGraphicsColorizeEffect>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -83,6 +83,9 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     resize(m_screenshot->getScreenshot().size());
     // init interface color
     m_uiColor = QSettings().value("uiColor").value<QColor>();
+    m_reversedUiColor = QColor(255 - m_uiColor.red(),
+                              255 - m_uiColor.green(),
+                              255 - m_uiColor.blue());
     show();
 
     m_colorPicker = new ColorPicker(this);
@@ -107,9 +110,10 @@ void CaptureWidget::redefineButtons() {
         if (t == Button::Type::selectionIndicator) {
             m_sizeIndButton = b;
         }
+
         connect(b, &Button::hovered, this, &CaptureWidget::enterButton);
         connect(b, &Button::mouseExited, this, &CaptureWidget::leaveButton);
-        connect(b, &Button::typeEmited, this, &CaptureWidget::setState);
+        connect(b, &Button::pressedButton, this, &CaptureWidget::setState);
         vectorButtons << b;
     }
     m_buttonHandler->setButtons(vectorButtons);
@@ -428,7 +432,8 @@ void CaptureWidget::downResize() {
     }
 }
 
-void CaptureWidget::setState(Button::Type t) {
+void CaptureWidget::setState(Button *b) {
+    Button::Type t = b->getButtonType();
     if(t == Button::Type::selectionIndicator ||
             //t == Button::Type::mouseVisibility ||
             t == Button::Type::colorPicker) {
@@ -450,6 +455,15 @@ void CaptureWidget::setState(Button::Type t) {
         uploadScreenshot();
     } else {
         m_state = newState;
+        if (m_lastPressedButton) {
+            m_lastPressedButton->setGraphicsEffect(0);
+        }
+        m_lastPressedButton = b;
+        if (m_state != Button::Type::move) {
+            QGraphicsColorizeEffect *e =new QGraphicsColorizeEffect(this);
+            e->setColor(m_reversedUiColor);
+            m_lastPressedButton->setGraphicsEffect(e);
+        }
     }
 }
 

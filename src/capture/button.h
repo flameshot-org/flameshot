@@ -74,7 +74,7 @@ protected:
 signals:
     void hovered();
     void mouseExited();
-    void typeEmited(Type);
+    void pressedButton(Button *);
 
 private:
     Button(QWidget *parent = 0);

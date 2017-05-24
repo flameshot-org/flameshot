@@ -65,7 +65,7 @@ private slots:
     void upResize();
     void downResize();
 
-    void setState(Button::Type);
+    void setState(Button *);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -112,11 +112,13 @@ private:
     QRect getExtendedSelection() const;
     QVector<CaptureModification> m_modifications;
     QPointer<Button> m_sizeIndButton;
+    QPointer<Button> m_lastPressedButton;
 
     Button::Type m_state;
     ButtonHandler *m_buttonHandler;
 
     QColor m_uiColor;
+    QColor m_reversedUiColor;
     ColorPicker *m_colorPicker;
 };
 

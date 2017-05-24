@@ -191,7 +191,7 @@ void Button::mouseReleaseEvent(QMouseEvent *e) {
 //        } else if (m_buttonType == Type::colorPicker) {
 
 //        }
-        Q_EMIT typeEmited(m_buttonType);
+        Q_EMIT pressedButton(this);
     }
     m_pressed = false;
 }
