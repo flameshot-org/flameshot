@@ -45,7 +45,6 @@ Controller::Controller(QObject *parent) : QObject(parent),
     qApp->installNativeEventFilter(m_nativeEventFilter);
     connect(m_nativeEventFilter, &NativeEventFilter::activated, this, &Controller::slotPrintHotkey);
 
-
     QString StyleSheet = Button::getStyle();
     qApp->setStyleSheet(StyleSheet);
 
@@ -92,6 +91,18 @@ void Controller::initDefaults() {
         QList<int> buttons;
         for (int i = 0; i < static_cast<int>(Button::Type::last); ++i) {
             buttons << i;
+        }
+        settings.setValue("buttons", QVariant::fromValue(buttons));
+    } else {
+        // disabled buttons cleanup
+        int higherValue = static_cast<int>(Button::Type::last) - 1;
+        QList<int> buttons = settings.value("buttons").value<QList<int> >();
+
+        QMutableListIterator<int> i(buttons);
+        while (i.hasNext()) {
+            if (i.next() > higherValue) {
+                i.remove();
+            }
         }
         settings.setValue("buttons", QVariant::fromValue(buttons));
     }
