@@ -23,6 +23,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
+#include <QKeyEvent>
 
 // ConfigWindow contains the menus where you can configure the application
 
@@ -47,5 +48,12 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     m_buttonListView->setFlow(QListWidget::TopToBottom);
 
     baseLayout->addWidget(m_buttonListView);
+
     show();
+}
+
+void ConfigWindow::keyPressEvent(QKeyEvent *e) {
+    if (e->key() == Qt::Key_Escape) {
+            close();
+    }
 }

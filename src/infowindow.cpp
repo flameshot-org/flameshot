@@ -21,6 +21,7 @@
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QLabel>
+#include <QKeyEvent>
 
 // InfoWindow show basic information about the usage of Flameshot
 
@@ -89,4 +90,10 @@ void InfoWindow::initInfoTable() {
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
                                              QSizePolicy::Expanding);
+}
+
+void InfoWindow::keyPressEvent(QKeyEvent *e) {
+    if (e->key() == Qt::Key_Escape) {
+            close();
+    }
 }

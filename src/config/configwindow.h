@@ -31,6 +31,9 @@ public:
 signals:
     void setDefaults();
 
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 private:
 
 };

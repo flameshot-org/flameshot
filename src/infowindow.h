@@ -27,6 +27,9 @@ class InfoWindow : public QWidget {
 public:
     explicit InfoWindow(QWidget *parent = 0);
 
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 private:
     void initInfoTable();
     QVBoxLayout *layout;
