@@ -1,7 +1,7 @@
 ![image](./img/flameshot.png)
 > Powerfull yet simple to use screenshot software.
 
-**This program is in heavy develpment and it's incomplete!**
+**A beta will be released and packaged for the main GNU/Linux distros soon !**
 
 ## Usage
 
