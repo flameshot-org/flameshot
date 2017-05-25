@@ -93,46 +93,46 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
 
     switch (t) {
     case Type::arrow:
-        path += "arrow-bottom-left.svg";
+        path += "arrow-bottom-left.png";
         break;
     case Type::circle:
-        path += "circle-outline.svg";
+        path += "circle-outline.png";
         break;
     case Type::colorPicker:
-        path += "square-outline.svg";
+        path += "square-outline.png";
         break;
     case Type::copy:
-        path += "content-copy.svg";
+        path += "content-copy.png";
         break;
     case Type::exit:
-        path += "close.svg";
+        path += "close.png";
         break;
     case Type::imageUploader:
-        path += "cloud-upload.svg";
+        path += "cloud-upload.png";
         break;
     case Type::line:
-        path += "line.svg";
+        path += "line.png";
         break;
     case Type::marker:
-        path += "marker.svg";
+        path += "marker.png";
         break;
     case Type::pencil:
-        path += "pencil.svg";
+        path += "pencil.png";
         break;
     case Type::rectangle:
-        path += "square-outline.svg";
+        path += "square-outline.png";
         break;
     case Type::save:
-        path += "content-save.svg";
+        path += "content-save.png";
         break;
     case Type::text:
-        path += "format-text.svg";
+        path += "format-text.png";
         break;
     case Type::undo:
-        path += "undo-variant.svg";
+        path += "undo-variant.png";
         break;
     case Type::move:
-        path += "cursor-move.svg";
+        path += "cursor-move.png";
         break;
     default:
         break;
