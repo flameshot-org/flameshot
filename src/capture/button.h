@@ -63,6 +63,12 @@ public:
 
     Type getButtonType() const;
 
+    void updateIconColor(const QColor &);
+    void updateIconColor();
+
+    bool iconIsWhite() const;
+    static bool iconIsWhite(const QColor &);
+
     void animatedShow();
 
 protected:
@@ -86,6 +92,8 @@ private:
     typedef QMap<Button::Type, const char *> typeData;
     static typeData typeTooltip;
     static typeData typeName;
+    static QColor m_mainColor;
+
 
     void initButton();
 };

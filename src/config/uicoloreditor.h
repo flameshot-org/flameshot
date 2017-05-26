@@ -32,22 +32,20 @@ public:
 private slots:
     void updateUIcolor();
     void updateLocalColor(const QColor);
-    void updateButtonIcon(const QString &);
+    void updateButtonIcon();
+    void changeLastButton(Button *);
 
 private:
     QColor m_uiColor;
-    Button *m_button;
+    Button *m_buttonMainColor;
+    Button *m_buttonContrast;
+    Button *m_lastButtonPressed;
 
     QHBoxLayout *hLayout;
     QVBoxLayout *vLayout;
 
     void initColorWheel();
-    void initButton();
-    void initComboBox();
-
-    enum class iconColor {Black, White};
-    typedef QMap<UIcolorEditor::iconColor, const char *> colorToStringMap;
-    static colorToStringMap iconColorToString;
+    void initButtons();
 };
 
 #endif // UICOLORPICKER_H

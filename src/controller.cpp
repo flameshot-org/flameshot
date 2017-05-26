@@ -89,8 +89,8 @@ void Controller::initDefaults() {
         settings.setValue("initiated", true);
         settings.setValue("drawColor", QColor(Qt::red));
         //settings.setValue("mouseVisible", false);
-        settings.setValue("whiteIconColor", true);
-        settings.setValue("uiColor", QColor(136, 0, 170));
+        settings.setValue("uiColor", QColor(116, 0, 150));
+        settings.setValue("contastUiColor", QColor(86, 0, 120));
 
         QList<int> buttons;
         for (int i = 0; i < static_cast<int>(Button::Type::last); ++i) {

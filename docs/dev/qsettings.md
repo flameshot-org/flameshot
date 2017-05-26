@@ -18,3 +18,7 @@
     - value: "uiColor"
     - type: QColor
     - description: color of buttons and the selection.
+- contast UI color
+    - value: "contastUiColor"
+    - type: QColor
+    - description: color of buttons awhile selected.

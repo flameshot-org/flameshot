@@ -118,7 +118,7 @@ private:
     ButtonHandler *m_buttonHandler;
 
     QColor m_uiColor;
-    QColor m_reversedUiColor;
+    QColor m_contrastUiColor;
     ColorPicker *m_colorPicker;
 };
 

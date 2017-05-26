@@ -38,7 +38,6 @@
 #include <QSettings>
 #include <QNetworkReply>
 #include <QDesktopServices>
-#include <QGraphicsColorizeEffect>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -82,10 +81,9 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     createCapture();
     resize(m_screenshot->getScreenshot().size());
     // init interface color
-    m_uiColor = QSettings().value("uiColor").value<QColor>();
-    m_reversedUiColor = QColor(255 - m_uiColor.red(),
-                              255 - m_uiColor.green(),
-                              255 - m_uiColor.blue());
+    QSettings settings;
+    m_uiColor = settings.value("uiColor").value<QColor>();
+    m_contrastUiColor = settings.value("contastUiColor").value<QColor>();
     show();
 
     m_colorPicker = new ColorPicker(this);
@@ -100,13 +98,11 @@ CaptureWidget::~CaptureWidget() {
 // selection in the capture
 void CaptureWidget::redefineButtons() {
     QSettings settings;
-    QString buttonStyle = Button::getStyle();
     auto buttonsInt = settings.value("buttons").value<QList<int> >();
     QVector<Button*> vectorButtons;
     for (auto i: buttonsInt) {
         auto t = static_cast<Button::Type>(i);
         Button *b = new Button(t, this);
-        b->setStyleSheet(buttonStyle);
         if (t == Button::Type::selectionIndicator) {
             m_sizeIndButton = b;
         }
@@ -457,13 +453,13 @@ void CaptureWidget::setState(Button *b) {
     } else {
         m_state = newState;
         if (m_lastPressedButton) {
-            m_lastPressedButton->setGraphicsEffect(0);
+            m_lastPressedButton->setStyleSheet(Button::getStyle());
+            m_lastPressedButton->updateIconColor();
         }
         m_lastPressedButton = b;
         if (m_state != Button::Type::move) {
-            QGraphicsColorizeEffect *e =new QGraphicsColorizeEffect(this);
-            e->setColor(m_reversedUiColor);
-            m_lastPressedButton->setGraphicsEffect(e);
+            m_lastPressedButton->setStyleSheet(Button::getStyle(m_contrastUiColor));
+            m_lastPressedButton->updateIconColor(m_contrastUiColor);
         }
     }
 }

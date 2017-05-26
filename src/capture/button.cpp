@@ -69,6 +69,8 @@ void Button::initButton() {
     emergeAnimation->setDuration(80);
     emergeAnimation->setStartValue(QSize(0, 0));
     emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
+
+    setStyleSheet(getStyle());
 }
 
 // getIcon returns the icon for the type of button, this method lets
@@ -142,11 +144,12 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
 
 QString Button::getStyle() {
     QSettings settings;
-    QColor mainColor = settings.value("uiColor").value<QColor>();
-    return getStyle(mainColor);
+    m_mainColor = settings.value("uiColor").value<QColor>();
+    return getStyle(m_mainColor);
 }
 
 QString Button::getStyle(const QColor &mainColor) {
+    m_mainColor = mainColor;
     QString baseSheet = "Button { border-radius: %3;"
                         "background-color: %1; color: %4 }"
                         "Button:hover { background-color: %2; }"
@@ -154,22 +157,19 @@ QString Button::getStyle(const QColor &mainColor) {
                         "background-color: %1; }";
 
     QColor contrast(mainColor.darker(120));
-    int sumRGB = mainColor.red() + mainColor.green() + mainColor.blue();
-    if (sumRGB < 130) {
+    if (mainColor.valueF() < 0.5) {
         contrast = mainColor.lighter(160);
     }
-    bool iconsAreWhite = QSettings().value("whiteIconColor").toBool();
+
     QString color = "black";
-    if (iconsAreWhite) { color = "white"; }
+    if (iconIsWhite(mainColor)) { color = "white"; }
 
     return baseSheet.arg(mainColor.name()).arg(contrast.name())
             .arg(BUTTON_SIZE/2).arg(color);
 }
 // get icon returns the icon for the type of button
 QIcon Button::getIcon(const Type t) {
-    QSettings settings;
-    bool isWhite = settings.value("whiteIconColor").toBool();
-    return getIcon(t, isWhite);
+    return getIcon(t, iconIsWhite(m_mainColor));
 }
 
 void Button::enterEvent(QEvent *e) {
@@ -211,6 +211,26 @@ void Button::animatedShow() {
 
 Button::Type Button::getButtonType() const {
     return m_buttonType;
+}
+
+void Button::updateIconColor(const QColor &c) {
+    setIcon(getIcon(m_buttonType, iconIsWhite(c)));
+}
+
+void Button::updateIconColor() {
+    setIcon(getIcon(m_buttonType, iconIsWhite()));
+}
+
+bool Button::iconIsWhite(const QColor &c) {
+    bool isWhite = true;
+    if (c.valueF() > 0.65) {
+        isWhite = false;
+    }
+    return isWhite;
+}
+
+bool Button::iconIsWhite() const {
+    return iconIsWhite(m_mainColor);
 }
 // getButtonBaseSize returns the base size of the buttons
 size_t Button::getButtonBaseSize() {
@@ -271,3 +291,5 @@ Button::typeData Button::typeName = {
     {Button::Type::imageUploader, QT_TR_NOOP("Image Uploader")},
     {Button::Type::move, QT_TR_NOOP("Move")}
 };
+
+QColor Button::m_mainColor = QSettings().value("uiColor").value<QColor>();
