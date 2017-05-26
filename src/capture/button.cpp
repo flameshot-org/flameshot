@@ -157,7 +157,8 @@ QString Button::getStyle(const QColor &mainColor) {
                         "background-color: %1; }";
 
     QColor contrast(mainColor.darker(120));
-    if (mainColor.valueF() < 0.5) {
+    if (mainColor.value() < m_colorValueLimit ||
+            mainColor.saturation() > m_colorSaturationLimit) {
         contrast = mainColor.lighter(160);
     }
 
@@ -222,9 +223,10 @@ void Button::updateIconColor() {
 }
 
 bool Button::iconIsWhite(const QColor &c) {
-    bool isWhite = true;
-    if (c.valueF() > 0.65) {
-        isWhite = false;
+    bool isWhite = false;
+    if (c.value() < m_colorValueLimit ||
+            c.saturation() > m_colorSaturationLimit) {
+        isWhite = true;
     }
     return isWhite;
 }
