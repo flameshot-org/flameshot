@@ -40,13 +40,15 @@ void ButtonListView::initButtonList() {
         QListWidgetItem *buttonItem = new QListWidgetItem(this);
 
         bool iconsAreWhite = false;
-        QString bgColor = this->palette().color(QWidget::backgroundRole()).name();
+        QColor bgColor = this->palette().color(QWidget::backgroundRole());
         // when the background is lighter than gray, it uses the white icons
-        if (bgColor < QColor(Qt::gray).name()) {
+        if (bgColor.valueF() < 0.6) {
             iconsAreWhite = true;
         }
         buttonItem->setIcon(Button::getIcon(t, iconsAreWhite));
         buttonItem->setFlags(Qt::ItemIsUserCheckable);
+        QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
+        buttonItem->setTextColor(foregroundColor);
 
         buttonItem->setText(Button::getTypeName(t));
         buttonItem->setToolTip(Button::getTypeTooltip(t));
