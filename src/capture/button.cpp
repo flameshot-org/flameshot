@@ -221,7 +221,8 @@ void Button::updateIconColor(const QColor &c) {
 void Button::updateIconColor() {
     setIcon(getIcon(m_buttonType, iconIsWhite()));
 }
-
+// iconIsWhite returns true if the passed color would contain a white icon
+// if applied to a button, and false otherwise
 bool Button::iconIsWhite(const QColor &c) {
     bool isWhite = false;
     if (c.value() < m_colorValueLimit ||

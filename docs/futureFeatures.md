@@ -8,3 +8,5 @@ These are just conceptual and they may not be implemented implemented in a short
 - CLI tool: having a cli tool is very practical and it could be used in many different ways. Having a command line program will enable the posibility of using the system-wide shortcuts to activate the captures.
 
 - Video Recording Support: I don't know if this will happen but it could be interesting to have a unified tool and satisfy every need to capture your desktop. Requires a ton of investigation.
+
+- Wayland support

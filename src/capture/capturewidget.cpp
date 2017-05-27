@@ -150,7 +150,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         // paint handlers
         updateHandles();
         painter.setBrush(m_uiColor);
-        for(auto r: handleMask()) {
+        for(auto r: handleMask().rects()) {
             painter.drawRoundRect(r, 100, 100);
         }
     }

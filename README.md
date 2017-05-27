@@ -13,6 +13,9 @@ Check out the information window to see all the available shortcuts in the captu
 This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
 
 ## Considerations
+
+**Not working on Wayland**
+
 If you have a system-wide shortcut assigned to the`Print`
  key, you should disable it because it may interfere with the global key detection.
 

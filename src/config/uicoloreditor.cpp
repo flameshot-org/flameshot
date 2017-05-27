@@ -37,7 +37,7 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     setLayout(hLayout);
 
 }
-
+// updateUIcolor updates the appearance of the buttons
 void UIcolorEditor::updateUIcolor() {
     QSettings settings;
     if (m_lastButtonPressed == m_buttonMainColor) {
@@ -46,7 +46,7 @@ void UIcolorEditor::updateUIcolor() {
         settings.setValue("contastUiColor", m_uiColor);
     }
 }
-
+// updateLocalColor updates the local button
 void UIcolorEditor::updateLocalColor(const QColor c) {
     m_uiColor = c;
     QString style = Button::getStyle(c);
