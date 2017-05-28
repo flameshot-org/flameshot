@@ -78,7 +78,9 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     m_buttonHandler->hide();
     // init screenshot
     createCapture();
-    resize(m_screenshot->getScreenshot().size());
+    QSize size = m_screenshot->getScreenshot().size();
+    // we need to increase by 1 the size to reach to the end of the screen
+    resize(size.width()+1, size.height()+1);
     // init interface color
     QSettings settings;
     m_uiColor = settings.value("uiColor").value<QColor>();
