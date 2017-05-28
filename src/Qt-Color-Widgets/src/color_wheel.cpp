@@ -49,6 +49,7 @@ private:
 
 public:
     qreal hue, sat, val;
+    bool backgroundIsDark;
     unsigned int wheel_width;
     MouseStatus mouse_status;
     QPixmap hue_ring;
@@ -63,7 +64,10 @@ public:
         wheel_width(20), mouse_status(Nothing),
         display_flags(FLAGS_DEFAULT),
         color_from(&QColor::fromHsvF), rainbow_from_hue(&detail::rainbow_hsv)
-    { }
+    {
+        qreal backgroundValue = widget->palette().background().color().valueF();
+        backgroundIsDark = backgroundValue < 0.5;
+    }
 
     /// Calculate outer wheel radius from idget center
     qreal outer_radius() const
@@ -351,10 +355,17 @@ void ColorWheel::paintEvent(QPaintEvent * )
     painter.setClipping(false);
 
     // lum-sat selector
-    // isWhite defines when the selector is white based on values of saturation
-    // and color value combined as a union
-    bool isWhite = (p->val < 0.65 || p->sat > 0.43);
-    painter.setPen(QPen(isWhite ? Qt::white : Qt::black, 3));
+    // we define the color of the selecto based on the background color of the widget
+    // in order to improve to contrast
+    if (p->backgroundIsDark)
+    {
+        bool isWhite = (p->val < 0.65 || p->sat > 0.43);
+        painter.setPen(QPen(isWhite ? Qt::white : Qt::black, 3));
+    }
+    else
+    {
+        painter.setPen(QPen(p->val > 0.5 ? Qt::black : Qt::white, 3));
+    }
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(selector_position, selector_radius, selector_radius);
 
