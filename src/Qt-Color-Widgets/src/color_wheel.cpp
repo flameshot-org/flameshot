@@ -351,7 +351,8 @@ void ColorWheel::paintEvent(QPaintEvent * )
     painter.setClipping(false);
 
     // lum-sat selector
-    painter.setPen(QPen(p->val > 0.5 ? Qt::black : Qt::white, 3));
+    bool isWhite = (p->val < 0.65 || p->sat > 0.43); //0.62 || p->sat > 0.43
+    painter.setPen(QPen(isWhite ? Qt::white : Qt::black, 3));
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(selector_position, selector_radius, selector_radius);
 

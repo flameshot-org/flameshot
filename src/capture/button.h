@@ -85,7 +85,7 @@ signals:
 private:
     Button(QWidget *parent = 0);
     const Type m_buttonType;
-    static const int m_colorValueLimit = 160;
+    static const int m_colorValueLimit = 166;
     static const int m_colorSaturationLimit = 110;
     bool m_pressed;
 
