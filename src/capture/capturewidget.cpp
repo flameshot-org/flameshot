@@ -67,7 +67,6 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     // set base config of the widget
     move(0,0);
     setWindowFlags( Qt::WindowStaysOnTopHint
-                  | Qt::X11BypassWindowManagerHint
                   | Qt::FramelessWindowHint
                   | Qt::Popup);
     setMouseTracking(true);
