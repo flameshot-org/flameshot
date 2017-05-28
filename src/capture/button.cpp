@@ -69,8 +69,6 @@ void Button::initButton() {
     emergeAnimation->setDuration(80);
     emergeAnimation->setStartValue(QSize(0, 0));
     emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
-
-    setStyleSheet(getStyle());
 }
 
 // getIcon returns the icon for the type of button, this method lets
