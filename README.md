@@ -12,6 +12,8 @@ Check out the information window to see all the available shortcuts in the captu
 
 This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
 
+Check the user manual [here](./docs/user-manual/userManual.md)
+
 ## Considerations
 
 **Not working on Wayland**
@@ -19,7 +21,7 @@ This software is very focused on selection capture and edition, but you can do f
 If you have a system-wide shortcut assigned to the`Print`
  key, you should disable it because it may interfere with the global key detection.
 
- In order to solve this problem I'm thinking about creating a cli tool to communicate with Flameshot via IPC socket; you could assign the specific command tto trigger the capture in a very convenient way. (that could be extended with many functions but it isn't a priority)
+ In order to solve this problem I'm thinking about creating a cli tool to communicate with Flameshot via IPC socket; you could assign the specific command to trigger the capture in a very convenient way.
 
  Check the ./docs folder for more information.
 
