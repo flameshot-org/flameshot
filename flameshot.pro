@@ -64,3 +64,9 @@ HEADERS  += \
 
 RESOURCES += \
     graphics.qrc
+
+unix: {
+    qmfile.path  = /usr/share/flameshot/translations
+    qmfile.files = translation/Internationalization_es.qm
+    INSTALLS += qmfile
+}
