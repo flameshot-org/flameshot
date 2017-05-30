@@ -46,6 +46,9 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
 
     ButtonListView *m_buttonListView = new ButtonListView(this);
     m_buttonListView->setFlow(QListWidget::TopToBottom);
+    m_buttonListView->setWhatsThis(tr("Select which buttons will appear arround "
+                                   "the capture's selection by clicking on its"
+                                   " checkbox."));
 
     baseLayout->addWidget(m_buttonListView);
 
