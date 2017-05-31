@@ -82,9 +82,6 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     // we need to increase by 1 the size to reach to the end of the screen
     resize(size.width()+1, size.height()+1);
     // init interface color
-    QSettings settings;
-    m_uiColor = settings.value("uiColor").value<QColor>();
-    m_contrastUiColor = settings.value("contastUiColor").value<QColor>();
     show();
 
     m_colorPicker = new ColorPicker(this);
@@ -99,14 +96,22 @@ CaptureWidget::~CaptureWidget() {
 // selection in the capture
 void CaptureWidget::redefineButtons() {
     QSettings settings;
+    m_uiColor = settings.value("uiColor").value<QColor>();
+    m_contrastUiColor = settings.value("contastUiColor").value<QColor>();
+
     auto buttonsInt = settings.value("buttons").value<QList<int> >();
     QVector<Button*> vectorButtons;
+
+    bool iconIsWhite = Button::iconIsWhite(m_uiColor);
+    QString buttonStyle = Button::getStyle(m_uiColor);
+
     for (auto i: buttonsInt) {
         auto t = static_cast<Button::Type>(i);
-        Button *b = new Button(t, this);
+        Button *b = new Button(t, iconIsWhite, this);
         if (t == Button::Type::selectionIndicator) {
             m_sizeIndButton = b;
         }
+        b->setStyleSheet(buttonStyle);
 
         connect(b, &Button::hovered, this, &CaptureWidget::enterButton);
         connect(b, &Button::mouseExited, this, &CaptureWidget::leaveButton);

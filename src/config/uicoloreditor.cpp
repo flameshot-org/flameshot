@@ -86,6 +86,7 @@ void UIcolorEditor::initButtons() {
     frame->setFixedSize(frameSize, frameSize);
     frame->setFrameStyle(QFrame::StyledPanel);
 
+
     m_buttonMainColor = new Button(Button::Type::circle, frame);
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize/2, m_buttonMainColor->y() + extraSize/2);
     QHBoxLayout *h1 = new QHBoxLayout();
@@ -101,8 +102,10 @@ void UIcolorEditor::initButtons() {
     frame2->setFixedSize(frameSize, frameSize);
     frame2->setFrameStyle(QFrame::StyledPanel);
 
-    m_buttonContrast = new Button(Button::Type::circle, frame2);
     QColor contrastColor = QSettings().value("contastUiColor").value<QColor>();
+    bool whiteIconWithContast = Button::iconIsWhite(contrastColor);
+    m_buttonContrast = new Button(Button::Type::circle,
+                                  whiteIconWithContast, frame2);
     m_buttonContrast->setStyleSheet(Button::getStyle(contrastColor));
     m_buttonContrast->move(m_buttonContrast->x() + extraSize/2,
                            m_buttonContrast->y() + extraSize/2);
