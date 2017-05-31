@@ -162,7 +162,6 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         rectColor.setAlpha(180);
         QColor textColor((Button::iconIsWhite(rectColor) ? Qt::white : Qt::black));
         painter.setPen(QPen(textColor));
-        //painter.setBrush(QBrush(QColor(255, 255, 255, 180), Qt::SolidPattern));
         painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
         QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
 
@@ -175,7 +174,6 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.drawRect(bRect);
 
         // Draw the text:
-        //painter.setPen(QPen(Qt::black));
         painter.setPen(textColor);
         painter.drawText(helpRect, Qt::AlignCenter, helpTxt);
     }
@@ -196,7 +194,6 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 }
 
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
-    m_showInitialMsg = false;
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         setCursor(Qt::ArrowCursor);
@@ -207,6 +204,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     }
 
     if (e->button() == Qt::LeftButton) {
+        m_showInitialMsg = false;
         m_mouseIsClicked = true;
         if (m_state != Button::Type::move) {
             m_modifications.append(CaptureModification(m_state, e->pos(),
