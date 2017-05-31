@@ -167,7 +167,16 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="386"/>
+        <location filename="../src/capture/capturewidget.cpp" line="155"/>
+        <source>Select an area with the mouse, or press Esc to exit.
+Press Enter to capture the screen.
+Press Right Click to choose the tool color.</source>
+        <translation>Selecciona un área con el ratón, or presiona Esc para salir.
+Presiona Enter para capturar la pantalla.
+Presiona Click Derecho para elegir color de herramienta.</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/capturewidget.cpp" line="425"/>
         <source>Uploading image...</source>
         <translation>Subiendo imagen...</translation>
     </message>
@@ -331,24 +340,24 @@
         <translation>Selecciona un Botón para modificarlo</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="93"/>
-        <location filename="../src/config/uicoloreditor.cpp" line="96"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="94"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="97"/>
         <source>Main Color</source>
         <translation>Color Principal</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="97"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="98"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color primario.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="112"/>
         <location filename="../src/config/uicoloreditor.cpp" line="115"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="118"/>
         <source>Contrast Color</source>
         <translation>Color de Contraste</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="116"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="119"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color de contraste.</translation>
     </message>

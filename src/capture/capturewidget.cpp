@@ -52,7 +52,7 @@ namespace {
 CaptureWidget::CaptureWidget(QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_onButton(false), m_state(Button::Type::move)
+    m_onButton(false), m_showInitialMsg(true), m_state(Button::Type::move)
 {
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
@@ -143,9 +143,42 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     QRect r = m_selection.normalized().adjusted(0, 0, -1, -1);
     QRegion grey(rect());
     grey = grey.subtracted(r);
+
     painter.setClipRegion(grey);
     painter.drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
     painter.setClipRect(rect());
+
+    if(m_showInitialMsg) {
+
+        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+
+        QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
+                             "\nPress Enter to capture the screen."
+                             "\nPress Right Click to choose the tool color.");
+
+        // We draw the white contrasting background for the text, using the
+        //same text and options to get the boundingRect that the text will have.
+        QColor rectColor = m_uiColor;
+        rectColor.setAlpha(180);
+        QColor textColor((Button::iconIsWhite(rectColor) ? Qt::white : Qt::black));
+        painter.setPen(QPen(textColor));
+        //painter.setBrush(QBrush(QColor(255, 255, 255, 180), Qt::SolidPattern));
+        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
+        QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
+
+        // These four calls provide padding for the rect
+        bRect.setWidth(bRect.width() + 12);
+        bRect.setHeight(bRect.height() + 10);
+        bRect.setX(bRect.x() - 12);
+        bRect.setY(bRect.y() - 10);
+
+        painter.drawRect(bRect);
+
+        // Draw the text:
+        //painter.setPen(QPen(Qt::black));
+        painter.setPen(textColor);
+        painter.drawText(helpRect, Qt::AlignCenter, helpTxt);
+    }
 
     if (!m_selection.isNull()) {
         // paint selection rect
@@ -163,6 +196,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 }
 
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
+    m_showInitialMsg = false;
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         setCursor(Qt::ArrowCursor);

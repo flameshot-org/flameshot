@@ -92,6 +92,7 @@ protected:
     bool m_newSelection;
     bool m_grabbing;
     bool m_onButton;
+    bool m_showInitialMsg;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left
