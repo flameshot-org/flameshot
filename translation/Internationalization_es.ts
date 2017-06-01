@@ -167,7 +167,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="155"/>
+        <location filename="../src/capture/capturewidget.cpp" line="157"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to choose the tool color.</source>
@@ -184,22 +184,27 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="35"/>
+        <location filename="../src/config/configwindow.cpp" line="37"/>
         <source>Configuration</source>
         <translation>Configuración</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="39"/>
+        <location filename="../src/config/configwindow.cpp" line="42"/>
         <source>UI color editor</source>
         <translation>Editor de color de interfaz</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="44"/>
+        <location filename="../src/config/configwindow.cpp" line="48"/>
+        <source>General</source>
+        <translation>General</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="54"/>
         <source>Button selection</source>
         <translation>Selección de botones</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="49"/>
+        <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Select which buttons will appear arround the capture&apos;s selection by clicking on its checkbox.</source>
         <translation>Selecciona qué botones aparecerán alrededor de la selección de captura clicando en su casilla.</translation>
     </message>
@@ -220,6 +225,19 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
         <location filename="../src/controller.cpp" line="64"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
+    </message>
+</context>
+<context>
+    <name>GeneneralConf</name>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="19"/>
+        <source>Show help message</source>
+        <translation>Mostrar mensaje de ayuda</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="23"/>
+        <source>Show the help message at the beginning in the capture mode.</source>
+        <translation>Muestra el mensaje de ayuda al iniciar el modo de captura.</translation>
     </message>
 </context>
 <context>

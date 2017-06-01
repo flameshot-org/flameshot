@@ -19,30 +19,40 @@
 #include "src/capture/button.h"
 #include "src/config/buttonlistview.h"
 #include "src/config/uicoloreditor.h"
+#include "src/config/geneneralconf.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QFrame>
 
 // ConfigWindow contains the menus where you can configure the application
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFixedSize(400, 400);
+    setFixedSize(400, 450);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     setWindowIcon(QIcon(":img/flameshot.svg"));
     setWindowTitle(tr("Configuration"));
 
-    QVBoxLayout *baseLayout = new QVBoxLayout(this);
+    m_layout = new QVBoxLayout(this);
 
+    // color editor
     QLabel *colorSelectionLabel = new QLabel(tr("UI color editor"), this);
-    baseLayout->addWidget(colorSelectionLabel);
+    m_layout->addWidget(colorSelectionLabel);
 
-    baseLayout->addWidget(new UIcolorEditor(this));
+    m_layout->addWidget(new UIcolorEditor(this));
 
+    // general config
+    QLabel *configLabel = new QLabel(tr("General"), this);
+    m_layout->addWidget(configLabel);
+
+    m_layout->addWidget(new GeneneralConf(this));
+
+    // button selection
     QLabel *buttonSelectLabel = new QLabel(tr("Button selection"), this);
-    baseLayout->addWidget(buttonSelectLabel);
+    m_layout->addWidget(buttonSelectLabel);
 
     ButtonListView *m_buttonListView = new ButtonListView(this);
     m_buttonListView->setFlow(QListWidget::TopToBottom);
@@ -50,7 +60,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
                                    "the capture's selection by clicking on its"
                                    " checkbox."));
 
-    baseLayout->addWidget(m_buttonListView);
+    m_layout->addWidget(m_buttonListView);
 
     show();
 }

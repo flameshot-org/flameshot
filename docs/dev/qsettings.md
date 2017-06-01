@@ -22,3 +22,7 @@
     - value: "contastUiColor"
     - type: QColor
     - description: color of buttons awhile selected.
+- show Help message
+    - value: "showHelp"
+    - type: bool
+    - description: show Help message in capture mode.

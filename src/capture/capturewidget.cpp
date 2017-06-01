@@ -52,8 +52,10 @@ namespace {
 CaptureWidget::CaptureWidget(QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_onButton(false), m_showInitialMsg(true), m_state(Button::Type::move)
+    m_onButton(false), m_state(Button::Type::move)
 {
+    m_showInitialMsg = QSettings().value("showHelp").toBool();
+
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
     QRect baseRect(0, 0, HANDLE_SIZE, HANDLE_SIZE);

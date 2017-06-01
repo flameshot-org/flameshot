@@ -20,6 +20,8 @@
 
 #include <QWidget>
 
+class QVBoxLayout;
+
 class QListWidgetItem;
 class QListWidget;
 
@@ -28,13 +30,13 @@ class ConfigWindow : public QWidget {
 public:
     explicit ConfigWindow(QWidget *parent = 0);
 
-signals:
-    void setDefaults();
-
 protected:
     void keyPressEvent(QKeyEvent *);
 
 private:
+    QVBoxLayout *m_layout;
+
+
 
 };
 

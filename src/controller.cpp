@@ -87,6 +87,7 @@ void Controller::initDefaults() {
     //settings.setValue("initiated", false); // testing change
     if (!settings.value("initiated").toBool()) {
         settings.setValue("initiated", true);
+        settings.setValue("showHelp", true);
         settings.setValue("drawColor", QColor(Qt::red));
         //settings.setValue("mouseVisible", false);
         settings.setValue("uiColor", QColor(116, 0, 150));

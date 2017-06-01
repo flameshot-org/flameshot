@@ -46,7 +46,8 @@ SOURCES += src/main.cpp\
     src/capture/capturemodification.cpp \
     src/capture/colorpicker.cpp \
     src/config/buttonlistview.cpp \
-    src/config/uicoloreditor.cpp
+    src/config/uicoloreditor.cpp \
+    src/config/geneneralconf.cpp
 
 HEADERS  += \
     src/nativeeventfilter.h \
@@ -60,7 +61,8 @@ HEADERS  += \
     src/capture/capturemodification.h \
     src/capture/colorpicker.h \
     src/config/buttonlistview.h \
-    src/config/uicoloreditor.h
+    src/config/uicoloreditor.h \
+    src/config/geneneralconf.h
 
 RESOURCES += \
     graphics.qrc
