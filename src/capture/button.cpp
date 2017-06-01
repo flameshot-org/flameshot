@@ -119,7 +119,7 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     case Type::pencil:
         path += "pencil.png";
         break;
-    case Type::rectangle:
+    case Type::selection:
         path += "square-outline.png";
         break;
     case Type::save:
@@ -133,6 +133,9 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
         break;
     case Type::move:
         path += "cursor-move.png";
+        break;
+    case Type::rectangle:
+        path += "square.png";
         break;
     default:
         break;
@@ -261,16 +264,17 @@ Button::typeData Button::typeTooltip = {
         {Button::Type::exit, QT_TR_NOOP("Leaves the capture screen")},
         {Button::Type::copy, QT_TR_NOOP("Copies the selecion into the clipboard")},
         {Button::Type::save, QT_TR_NOOP("Opens the save image window")},
-        {Button::Type::pencil, QT_TR_NOOP("Sets the paint tool to a pencil")},
-        {Button::Type::line, QT_TR_NOOP("Sets the paint tool to a line drawer")},
-        {Button::Type::arrow, QT_TR_NOOP("Sets the paint tool to an arrow drawer")},
-        {Button::Type::rectangle, QT_TR_NOOP("Sets the paint tool to a rectagle drawer")},
-        {Button::Type::circle, QT_TR_NOOP("Sets the paint tool to a circle drawer")},
-        {Button::Type::marker, QT_TR_NOOP("Sets the paint tool to a marker")},
-        {Button::Type::text, QT_TR_NOOP("Sets the paint tool to a text creator")},
+        {Button::Type::pencil, QT_TR_NOOP("Sets the Pencil as the paint tool")},
+        {Button::Type::line, QT_TR_NOOP("Sets the Line as the paint tool")},
+        {Button::Type::arrow, QT_TR_NOOP("Sets the Arrow as the paint tool")},
+        {Button::Type::rectangle, QT_TR_NOOP("Sets the Rectangle as the paint tool")},
+        {Button::Type::circle, QT_TR_NOOP("Sets the Circle as the paint tool")},
+        {Button::Type::marker, QT_TR_NOOP("Sets the Marker as the paint tool")},
+        {Button::Type::text, QT_TR_NOOP("Sets the Text as the paint tool")},
         {Button::Type::colorPicker, QT_TR_NOOP("Opens the color picker widget")},
         {Button::Type::undo, QT_TR_NOOP("Undo the last modification")},
-        {Button::Type::imageUploader, QT_TR_NOOP("Upload the selection to Imgur")},
+        {Button::Type::imageUploader, QT_TR_NOOP("Uploads the selection to Imgur")},
+        {Button::Type::selection, QT_TR_NOOP("Sets the Selection as the paint tool")},
         {Button::Type::move, QT_TR_NOOP("Move the selection area")}
 };
 
@@ -290,6 +294,7 @@ Button::typeData Button::typeName = {
     {Button::Type::colorPicker, QT_TR_NOOP("Color Picker")},
     {Button::Type::undo, QT_TR_NOOP("Undo")},
     {Button::Type::imageUploader, QT_TR_NOOP("Image Uploader")},
+    {Button::Type::selection, QT_TR_NOOP("Rectangular Selection")},
     {Button::Type::move, QT_TR_NOOP("Move")}
 };
 

@@ -228,7 +228,11 @@ void Screenshot::paintInPainter(QPainter &painter,
     case Button::Type::pencil:
         painter.drawPolyline(points.data(), points.size());
         break;
+    case Button::Type::selection:
+        painter.drawRect(QRect(points[0], points[1]));
+        break;
     case Button::Type::rectangle:
+        painter.setBrush(QBrush(modification.getColor()));
         painter.drawRect(QRect(points[0], points[1]));
         break;
     default:

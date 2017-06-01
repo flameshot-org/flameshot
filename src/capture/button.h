@@ -43,6 +43,7 @@ public:
         undo,
         imageUploader,
         move,
+        selection,
         last, // used for iteration over the enum
         text,
         mouseVisibility,

@@ -25,9 +25,12 @@ CaptureModification::CaptureModification(const Button::Type t, const QPoint p,
                                          const QColor c) : m_color(c), m_type(t)
 {
     m_coords.append(p);
-    if (m_type == Button::Type::circle || m_type == Button::Type::rectangle
-         || m_type == Button::Type::arrow || m_type == Button::Type::line ||
-            m_type == Button::Type::marker) {
+    if (m_type == Button::Type::circle
+            || m_type == Button::Type::rectangle
+            || m_type == Button::Type::arrow
+            || m_type == Button::Type::line
+            || m_type == Button::Type::marker
+            || m_type == Button::Type::selection) {
         m_coords.append(p);
     }
 }
@@ -49,9 +52,12 @@ QVector<QPoint> CaptureModification::getPoints() const {
 }
 // addPoint adds a point to the vector of points
 void CaptureModification::addPoint(const QPoint p) {
-    if (m_type == Button::Type::circle || m_type == Button::Type::rectangle
-         || m_type == Button::Type::arrow || m_type == Button::Type::line ||
-            m_type == Button::Type::marker) {
+    if (m_type == Button::Type::circle
+            || m_type == Button::Type::rectangle
+            || m_type == Button::Type::arrow
+            || m_type == Button::Type::line
+            || m_type == Button::Type::marker
+            || m_type == Button::Type::selection) {
         m_coords[1] = p;
     } else {
         m_coords.append(p);

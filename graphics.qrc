@@ -33,5 +33,7 @@
         <file>img/buttonIconsWhite/pencil.png</file>
         <file>img/buttonIconsBlack/cursor-move.png</file>
         <file>img/buttonIconsWhite/cursor-move.png</file>
+        <file>img/buttonIconsBlack/square.png</file>
+        <file>img/buttonIconsWhite/square.png</file>
     </qresource>
 </RCC>
