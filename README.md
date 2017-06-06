@@ -18,10 +18,9 @@ Check the user manual [here](./docs/user-manual/userManual.md)
 
 **Not working on Wayland**
 
-If you have a system-wide shortcut assigned to the`Print`
- key, you should disable it because it may interfere with the global key detection.
+If you have a system-wide shortcut assigned to the`Print` key, you should disable it because it may interfere with the global key detection.
 
- In order to solve this problem I'm thinking about creating a cli tool to communicate with Flameshot via IPC socket; you could assign the specific command to trigger the capture in a very convenient way.
+As an alternative you can compile the cli-tool in `./tools/flameshot-cli`. The execution of this tool will launch a new capture via DBus (more functionalities will be implemented).
 
  Check the ./docs folder for more information.
 
