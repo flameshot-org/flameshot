@@ -23,7 +23,6 @@
 #include <QAction>
 #include <QApplication>
 #include <QMenu>
-#include <QSystemTrayIcon>
 #include <QSettings>
 #include <QFile>
 
@@ -75,6 +74,8 @@ void Controller::createTrayIcon() {
     m_trayIcon->setToolTip("Flameshot");
     m_trayIcon->setContextMenu(m_trayIconMenu);
     m_trayIcon->setIcon(QIcon(":img/flameshot.svg"));
+    connect(m_trayIcon, &QSystemTrayIcon::activated,
+            this, &Controller::trayIconActivated);
 }
 
 // initDefaults inits the global config in the very first run of the program
@@ -106,6 +107,12 @@ void Controller::initDefaults() {
             }
         }
         settings.setValue("buttons", QVariant::fromValue(buttons));
+    }
+}
+
+void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r) {
+    if (r == QSystemTrayIcon::Trigger) {
+        createCapture();
     }
 }
 

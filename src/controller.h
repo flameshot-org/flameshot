@@ -20,6 +20,7 @@
 
 #include <QObject>
 #include <QPointer>
+#include <QSystemTrayIcon>
 
 class QMenu;
 class QSystemTrayIcon;
@@ -41,6 +42,7 @@ public slots:
 private slots:
     void showMessage(QString);
     void initDefaults();
+    void trayIconActivated(QSystemTrayIcon::ActivationReason r);
 
 private:
     void createActions();
