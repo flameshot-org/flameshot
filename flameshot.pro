@@ -7,6 +7,7 @@
 
 QT       += core gui
 QT       += x11extras
+QT       += dbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -47,7 +48,8 @@ SOURCES += src/main.cpp\
     src/capture/colorpicker.cpp \
     src/config/buttonlistview.cpp \
     src/config/uicoloreditor.cpp \
-    src/config/geneneralconf.cpp
+    src/config/geneneralconf.cpp \
+    src/flameshotdbusadapter.cpp
 
 HEADERS  += \
     src/nativeeventfilter.h \
@@ -62,7 +64,8 @@ HEADERS  += \
     src/capture/colorpicker.h \
     src/config/buttonlistview.h \
     src/config/uicoloreditor.h \
-    src/config/geneneralconf.h
+    src/config/geneneralconf.h \
+    src/flameshotdbusadapter.h
 
 RESOURCES += \
     graphics.qrc

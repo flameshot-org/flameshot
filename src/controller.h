@@ -34,10 +34,12 @@ class Controller : public QObject {
 public:
     explicit Controller(QObject *parent = 0);
 
-private slots:
-    void slotPrintHotkey();
+public slots:
+    void createCapture();
     void openConfigWindow();
     void openInfoWindow();
+
+private slots:
     void showMessage(QString);
     void initDefaults();
 

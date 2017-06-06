@@ -44,7 +44,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
     m_nativeEventFilter = new NativeEventFilter(this);
     qApp->installNativeEventFilter(m_nativeEventFilter);
-    connect(m_nativeEventFilter, &NativeEventFilter::activated, this, &Controller::slotPrintHotkey);
+    connect(m_nativeEventFilter, &NativeEventFilter::activated, this, &Controller::createCapture);
 
     QString StyleSheet = Button::getStyle();
     qApp->setStyleSheet(StyleSheet);
@@ -114,7 +114,7 @@ void Controller::initDefaults() {
 }
 
 // creation of a new capture
-void Controller::slotPrintHotkey() {
+void Controller::createCapture() {
     if (!m_captureWindow) {
         m_captureWindow = new CaptureWidget();
         connect(m_captureWindow, &CaptureWidget::newMessage,

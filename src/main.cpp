@@ -17,8 +17,10 @@
 
 #include "controller.h"
 #include "singleapplication.h"
+#include "src/flameshotdbusadapter.h"
 #include <QApplication>
 #include <QTranslator>
+#include <QDBusConnection>
 
 int main(int argc, char *argv[]) {
     QTranslator translator;
@@ -27,11 +29,16 @@ int main(int argc, char *argv[]) {
 
     SingleApplication app(argc, argv);
     app.installTranslator(&translator);
+    app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
     app.setApplicationName("flameshot");
     app.setOrganizationName("Dharkael");
 
-    Controller w;
+    Controller c;
+    new FlameshotDBusAdapter(&c);
+    QDBusConnection dbus = QDBusConnection::sessionBus();
+    dbus.registerObject("/", &c);
+    dbus.registerService("org.dharkael.Flameshot");
 
     return app.exec();
 }
