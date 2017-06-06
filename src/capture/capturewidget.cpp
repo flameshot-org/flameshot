@@ -68,9 +68,17 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     << &m_LHandle << &m_THandle << &m_RHandle << &m_BHandle;
     // set base config of the widget
     move(0,0);
-    setWindowFlags( Qt::WindowStaysOnTopHint
-                  | Qt::FramelessWindowHint
-                  | Qt::Popup);
+
+    setWindowFlags(Qt::BypassWindowManagerHint
+                   | Qt::WindowStaysOnTopHint
+                   | Qt::FramelessWindowHint
+                   | Qt::Tool);
+
+//  setWindowFlags( Qt::WindowStaysOnTopHint
+//                | Qt::FramelessWindowHint
+//                | Qt::Popup);
+
+
     setMouseTracking(true);
     setCursor(Qt::CrossCursor);
     initShortcuts();
@@ -83,9 +91,10 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     QSize size = m_screenshot->getScreenshot().size();
     // we need to increase by 1 the size to reach to the end of the screen
     resize(size.width()+1, size.height()+1);
-    // init interface color
-    show();
 
+    showFullScreen();
+
+    // init interface color
     m_colorPicker = new ColorPicker(this);
 }
 
