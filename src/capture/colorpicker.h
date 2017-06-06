@@ -29,6 +29,9 @@ public:
 
     QColor getDrawColor();
 
+    void show();
+    void hide();
+
 protected:
     void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *);

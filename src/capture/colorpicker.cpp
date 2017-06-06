@@ -58,6 +58,16 @@ QColor ColorPicker::getDrawColor() {
     return m_drawColor;
 }
 
+void ColorPicker::show() {
+    grabMouse();
+    QWidget::show();
+}
+
+void ColorPicker::hide() {
+    releaseMouse();
+    QWidget::hide();
+}
+
 void ColorPicker::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -85,13 +95,13 @@ void ColorPicker::paintEvent(QPaintEvent *) {
 }
 
 void ColorPicker::mouseMoveEvent(QMouseEvent *e) {
-  for(int i = 0; i < colorList.size(); ++i) {
-    if (m_colorAreaList.at(i).contains(e->pos())) {
-        m_drawColor = colorList.at(i);
-        update();
-        break;
+    for(int i = 0; i < colorList.size(); ++i) {
+        if (m_colorAreaList.at(i).contains(e->pos())) {
+            m_drawColor = colorList.at(i);
+            update();
+            break;
+        }
     }
-  }
 }
 
 QVector<QRect> ColorPicker::handleMask() const {
