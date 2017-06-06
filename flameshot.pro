@@ -36,7 +36,6 @@ include(src/Qt-Color-Widgets//color_widgets.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp\
-    src/nativeeventfilter.cpp \
     src/controller.cpp \
     src/capture/button.cpp \
     src/capture/buttonhandler.cpp \
@@ -52,7 +51,6 @@ SOURCES += src/main.cpp\
     src/flameshotdbusadapter.cpp
 
 HEADERS  += \
-    src/nativeeventfilter.h \
     src/controller.h \
     src/capture/button.h \
     src/capture/buttonhandler.h \

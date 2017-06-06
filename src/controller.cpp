@@ -42,10 +42,6 @@ Controller::Controller(QObject *parent) : QObject(parent),
     initDefaults();
     qApp->setQuitOnLastWindowClosed(false);
 
-    m_nativeEventFilter = new NativeEventFilter(this);
-    qApp->installNativeEventFilter(m_nativeEventFilter);
-    connect(m_nativeEventFilter, &NativeEventFilter::activated, this, &Controller::createCapture);
-
     QString StyleSheet = Button::getStyle();
     qApp->setStyleSheet(StyleSheet);
 

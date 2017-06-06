@@ -20,7 +20,6 @@
 
 #include <QObject>
 #include <QPointer>
-#include "nativeeventfilter.h"
 
 class QMenu;
 class QSystemTrayIcon;
@@ -53,8 +52,6 @@ private:
 
     QSystemTrayIcon *m_trayIcon;
     QMenu *m_trayIconMenu;
-
-    NativeEventFilter *m_nativeEventFilter;
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;

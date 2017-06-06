@@ -18,9 +18,7 @@ Check the user manual [here](./docs/user-manual/userManual.md)
 
 **Not working on Wayland**
 
-If you have a system-wide shortcut assigned to the`Print` key, you should disable it because it may interfere with the global key detection.
-
-As an alternative you can compile the cli-tool in `./tools/flameshot-cli`. The execution of this tool will launch a new capture via DBus (more functionalities will be implemented).
+In order to launch a new capture you need to execute `flameshot-cli`, the sources of the cli tool are in `./tools/flameshot-cli` (the tool is compiled independently). 
 
  Check the ./docs folder for more information.
 
