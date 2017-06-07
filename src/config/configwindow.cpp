@@ -33,7 +33,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setFixedSize(400, 450);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-    setWindowIcon(QIcon(":img/flameshot.svg"));
+    setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
     m_layout = new QVBoxLayout(this);

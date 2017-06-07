@@ -73,7 +73,7 @@ void Controller::createTrayIcon() {
     m_trayIcon = new QSystemTrayIcon(this);
     m_trayIcon->setToolTip("Flameshot");
     m_trayIcon->setContextMenu(m_trayIconMenu);
-    m_trayIcon->setIcon(QIcon(":img/flameshot.svg"));
+    m_trayIcon->setIcon(QIcon(":img/flameshot.png"));
     connect(m_trayIcon, &QSystemTrayIcon::activated,
             this, &Controller::trayIconActivated);
 }

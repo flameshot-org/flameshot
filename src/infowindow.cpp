@@ -29,7 +29,7 @@ InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setFixedSize(400, 275);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-    setWindowIcon(QIcon(":img/flameshot.svg"));
+    setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("About"));
 
     layout = new QVBoxLayout(this);
