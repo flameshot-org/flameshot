@@ -6,14 +6,12 @@
 
 
 QT       += core gui
-QT       += x11extras
 QT       += dbus
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG    += c++11
 CONFIG    += link_pkgconfig
-PKGCONFIG += x11
 
 TARGET = flameshot
 TEMPLATE = app
