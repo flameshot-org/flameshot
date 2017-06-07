@@ -20,15 +20,8 @@ Check the user manual [here](./docs/user-manual/userManual.md)
 
 In order to launch a new capture you need to execute `flameshot-cli`, the sources of the cli tool are in `./tools/flameshot-cli` (the tool is compiled independently). 
 
- Check the ./docs folder for more information.
+Check the ./docs folder for more information.
 
-## Dependencies
-- QT (tested with QT5.8)
-- QT X11 extras
-- X11 devel (with xcb)
-
-## Compilation
-Just download QT Creator and the dependencies (see the previous section) and import the project selecting the `flameshot.pro` file. Hit the "Build" button.
 
 ## Screenshots
 Dynamic button position based on your selection!
@@ -42,12 +35,12 @@ Choose your buttons and edit your screenshots!
 - The main code is licensed under GPLv3
 - The logo of Flameshot is licensed under Free Art License v1.3
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
-- The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp
-- The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h
-- Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project)
+- The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (LGPL/GPL)
+- The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h (LGPL/GPL)
+- Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project) (LGPL/GPL)
 
 ## Acknowledgment
 I really appreciate those who have shown interest in the develpment process:
 - Cosmo.
 - ismatori.
-- The members of the Sugus association.
+- The members of the Sugus GNU/Linux association.

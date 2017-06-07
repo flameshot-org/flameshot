@@ -25,7 +25,7 @@
 int main(int argc, char *argv[]) {
     QTranslator translator;
     translator.load(QLocale::system().language(),
-      "Internationalization", "_");
+      "Internationalization", "_", "/usr/share/flameshot/translations/");
 
     SingleApplication app(argc, argv);
     app.installTranslator(&translator);
