@@ -12,13 +12,11 @@ Check out the information window to see all the available shortcuts in the captu
 
 This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
 
-Check the user manual [here](./docs/user-manual/userManual.md)
-
 ## Considerations
 
 **Not working on Wayland**
 
-If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtry icon.
+If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtray icon.
 
 In order to launch a new capture you need to execute `flameshot-cli`, the sources of the cli tool are in `./tools/flameshot-cli` (the tool is compiled independently). 
 
