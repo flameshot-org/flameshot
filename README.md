@@ -18,6 +18,8 @@ Check the user manual [here](./docs/user-manual/userManual.md)
 
 **Not working on Wayland**
 
+If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtry icon.
+
 In order to launch a new capture you need to execute `flameshot-cli`, the sources of the cli tool are in `./tools/flameshot-cli` (the tool is compiled independently). 
 
 Check the ./docs folder for more information.

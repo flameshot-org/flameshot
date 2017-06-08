@@ -32,7 +32,6 @@
 ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setFixedSize(400, 450);
-    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
@@ -56,10 +55,6 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
 
     ButtonListView *m_buttonListView = new ButtonListView(this);
     m_buttonListView->setFlow(QListWidget::TopToBottom);
-    m_buttonListView->setWhatsThis(tr("Select which buttons will appear arround "
-                                   "the capture's selection by clicking on its"
-                                   " checkbox."));
-
     m_layout->addWidget(m_buttonListView);
 
     show();

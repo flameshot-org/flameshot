@@ -28,7 +28,6 @@
 InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setFixedSize(400, 275);
-    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("About"));
 
@@ -67,7 +66,7 @@ QVector<const char *> InfoWindow::description = {
 
 void InfoWindow::initInfoTable() {
     QTableWidget *table = new QTableWidget(this);
-    table->setWhatsThis(tr("Available shorcuts in the screen capture mode."));
+    table->setToolTip(tr("Available shorcuts in the screen capture mode."));
 
     layout->addWidget(table);
 

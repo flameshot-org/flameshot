@@ -35,10 +35,6 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     initColorWheel();
     hLayout->addLayout(vLayout);
     setLayout(hLayout);
-
-    setWhatsThis(tr("Color edition component, click on the color wheel and "
-                 "change the UI colors!"));
-
 }
 // updateUIcolor updates the appearance of the buttons
 void UIcolorEditor::updateUIcolor() {
@@ -70,7 +66,7 @@ void UIcolorEditor::initColorWheel() {
     colorWheel->setColor(m_uiColor);
     colorWheel->setFixedSize(100,100);
 
-    colorWheel->setWhatsThis(tr("Change the color moving the selectors and see"
+    colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));
 
     hLayout->addWidget(colorWheel);
@@ -94,8 +90,7 @@ void UIcolorEditor::initButtons() {
     h1->addWidget(new QLabel(tr("Main Color"), this));
     vLayout->addLayout(h1);
 
-    m_buttonMainColor->setToolTip(tr("Main Color"));
-    m_buttonMainColor->setWhatsThis(tr("Click on this button to set the edition"
+    m_buttonMainColor->setToolTip(tr("Click on this button to set the edition"
                                        " mode of the main color."));
 
     QFrame *frame2 = new QFrame(this);
@@ -115,8 +110,7 @@ void UIcolorEditor::initButtons() {
     h2->addWidget(new QLabel(tr("Contrast Color"), this));
     vLayout->addLayout(h2);
 
-    m_buttonContrast->setToolTip(tr("Contrast Color"));
-    m_buttonContrast->setWhatsThis(tr("Click on this button to set the edition"
+    m_buttonContrast->setToolTip(tr("Click on this button to set the edition"
                                       " mode of the contrast color."));
 
     m_lastButtonPressed = m_buttonMainColor;

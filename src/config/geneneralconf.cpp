@@ -20,7 +20,7 @@ void GeneneralConf::initHelpShow() {
     QSettings settings;
     bool checked = settings.value("showHelp").toBool();
     c->setChecked(checked);
-    c->setWhatsThis(tr("Show the help message at the beginning "
+    c->setToolTip(tr("Show the help message at the beginning "
                        "in the capture mode."));
     m_layout->addWidget(c);
 

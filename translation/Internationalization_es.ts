@@ -209,7 +209,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="157"/>
+        <location filename="../src/capture/capturewidget.cpp" line="166"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to choose the tool color.</source>
@@ -218,7 +218,7 @@ Presiona Enter para capturar la pantalla.
 Presiona Click Derecho para elegir color de herramienta.</translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="425"/>
+        <location filename="../src/capture/capturewidget.cpp" line="434"/>
         <source>Uploading image...</source>
         <translation>Subiendo imagen...</translation>
     </message>
@@ -226,45 +226,44 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="37"/>
+        <location filename="../src/config/configwindow.cpp" line="36"/>
         <source>Configuration</source>
         <translation>Configuración</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="42"/>
+        <location filename="../src/config/configwindow.cpp" line="41"/>
         <source>UI color editor</source>
         <translation>Editor de color de interfaz</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="48"/>
+        <location filename="../src/config/configwindow.cpp" line="47"/>
         <source>General</source>
         <translation>General</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="54"/>
+        <location filename="../src/config/configwindow.cpp" line="53"/>
         <source>Button selection</source>
         <translation>Selección de botones</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Select which buttons will appear arround the capture&apos;s selection by clicking on its checkbox.</source>
-        <translation>Selecciona qué botones aparecerán alrededor de la selección de captura clicando en su casilla.</translation>
+        <translation type="obsolete">Selecciona qué botones aparecerán alrededor de la selección de captura clicando en su casilla.</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="56"/>
+        <location filename="../src/controller.cpp" line="51"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuración</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="60"/>
+        <location filename="../src/controller.cpp" line="55"/>
         <source>&amp;Information</source>
         <translation>&amp;Información</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="64"/>
+        <location filename="../src/controller.cpp" line="59"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
@@ -285,72 +284,72 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/infowindow.cpp" line="33"/>
+        <location filename="../src/infowindow.cpp" line="32"/>
         <source>About</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="36"/>
+        <location filename="../src/infowindow.cpp" line="35"/>
         <source>&lt;b&gt;Shortcuts&lt;/b&gt;</source>
         <translation>&lt;b&gt;Atajos&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="38"/>
+        <location filename="../src/infowindow.cpp" line="37"/>
         <source>&lt;b&gt;License&lt;/b&gt;</source>
         <translation>&lt;b&gt;Licencia&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="54"/>
+        <location filename="../src/infowindow.cpp" line="53"/>
         <source>Right Click</source>
         <translation>Click Derecho</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="58"/>
+        <location filename="../src/infowindow.cpp" line="57"/>
         <source>Move selection 1px</source>
         <translation>Mueve la selección 1px</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="59"/>
+        <location filename="../src/infowindow.cpp" line="58"/>
         <source>Resize selection 1px</source>
         <translation>Redimensiona la selección 1px</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="60"/>
+        <location filename="../src/infowindow.cpp" line="59"/>
         <source>Quit capture</source>
         <translation>Salir de la captura</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="61"/>
+        <location filename="../src/infowindow.cpp" line="60"/>
         <source>Copy to clipboard</source>
         <translation>Copiar al portapapeles</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="62"/>
+        <location filename="../src/infowindow.cpp" line="61"/>
         <source>Save selection as a file</source>
         <translation>Guarda la selección como un archivo</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="63"/>
+        <location filename="../src/infowindow.cpp" line="62"/>
         <source>Undo the last modification</source>
         <translation>Deshacer la última modificación</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="64"/>
+        <location filename="../src/infowindow.cpp" line="63"/>
         <source>Show color picker</source>
         <translation>Muestra el selector de color</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="70"/>
+        <location filename="../src/infowindow.cpp" line="69"/>
         <source>Available shorcuts in the screen capture mode.</source>
         <translation>Atajos disponibles en el modo de captura de pantalla.</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="82"/>
+        <location filename="../src/infowindow.cpp" line="81"/>
         <source>Key</source>
         <translation>Tecla</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="82"/>
+        <location filename="../src/infowindow.cpp" line="81"/>
         <source>Description</source>
         <translation>Descripción</translation>
     </message>
@@ -385,39 +384,36 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
         <translation type="obsolete">Selecciona un Botón para cambiar el color</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="39"/>
         <source>Color edition component, click on the color wheel and change the UI colors!</source>
-        <translation>Componente de edición de color, ¡clica en él para cambiar el color de la interfaz!</translation>
+        <translation type="obsolete">Componente de edición de color, ¡clica en él para cambiar el color de la interfaz!</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="73"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="69"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>Cambia el color moviendo los selectores y observa los cambios en los botones de previsualización.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="83"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="79"/>
         <source>Select a Button to modify it</source>
         <translation>Selecciona un Botón para modificarlo</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="94"/>
-        <location filename="../src/config/uicoloreditor.cpp" line="97"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="90"/>
         <source>Main Color</source>
         <translation>Color Principal</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="98"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="93"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color primario.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
-        <location filename="../src/config/uicoloreditor.cpp" line="118"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="110"/>
         <source>Contrast Color</source>
         <translation>Color de Contraste</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="119"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="113"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color de contraste.</translation>
     </message>
