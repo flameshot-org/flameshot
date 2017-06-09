@@ -5,12 +5,12 @@
 
 ## Usage
 
-When you execute the binary, the app will create a systray icon, the app will be waiting for the Print Key to start a new capture.
+Add `flameshot-cli` to be executed as a shortcut. When you press the assigned key, Flameshot will be launched in the capture mode.
 
-Do a right click on the tray icon and you'll see menu items to open the configuration window and the information window.
+A systray icon will be added to your panel after the first execution of Flameshot.
+
+Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
 Check out the information window to see all the available shortcuts in the capture mode.
-
-This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
 
 ## Considerations
 
@@ -18,7 +18,7 @@ This software is very focused on selection capture and edition, but you can do f
 
 If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtray icon.
 
-In order to launch a new capture you need to execute `flameshot-cli`, the sources of the cli tool are in `./tools/flameshot-cli` (the tool is compiled independently). 
+This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
 
 Check the ./docs folder for more information.
 
