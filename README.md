@@ -1,8 +1,6 @@
 ![image](./img/flameshot.png)
 > Powerfull yet simple to use screenshot software.
 
-**A beta will be released and packaged for the main GNU/Linux distros soon !**
-
 ## Usage
 
 Add `flameshot-cli` to be executed as a shortcut. When you press the assigned key, Flameshot will be launched in the capture mode.
@@ -16,11 +14,15 @@ Check out the information window to see all the available shortcuts in the captu
 
 **Not working on Wayland**
 
-If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtray icon.
+- If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtray icon.
 
-This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
+- In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting an application automatically on boot.
 
-Check the ./docs folder for more information.
+- This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
+
+- Check the [docs](./docs) folder for more information.
+
+- Information about manual compilation can be found [here](./docs/dev/compilation.md)`
 
 
 ## Screenshots

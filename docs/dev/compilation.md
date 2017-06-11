@@ -17,7 +17,14 @@ dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory and in `tools/flameshot-cli`
- 
+
+### Arch
+Dependencies:
+````
+pacman -S git qt5-base base-devel
+````
+
+Compilation:  run `qmake && make` in the main directory and in `tools/flameshot-cli`
 
 ## Install
 

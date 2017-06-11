@@ -1,4 +1,5 @@
- This will gather some possible features to implement in Flameshot.
+This will gather some possible features to implement in Flameshot.
+
 These are just conceptual and they may not be implemented implemented in a short period of time.
 
 - Add Text Button: this could be very handy but requires a huge refactor of the source code.
