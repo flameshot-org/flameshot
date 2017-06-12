@@ -394,11 +394,13 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 }
 
 void CaptureWidget::saveScreenshot() {
+    hide();
     if (m_selection.isNull()) {
-        m_screenshot->graphicalSave();
+        m_screenshot->graphicalSave(QRect(), this);
     } else { // save full screen when no selection
-        m_screenshot->graphicalSave(getExtendedSelection());
+        m_screenshot->graphicalSave(getExtendedSelection(), this);
     }
+    close();
 }
 
 void CaptureWidget::copyScreenshot() {

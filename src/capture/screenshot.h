@@ -21,21 +21,23 @@
 #include <QPixmap>
 #include <QRect>
 #include <QPointer>
+#include <QObject>
 
 class QString;
 class CaptureModification;
 class QNetworkAccessManager;
 
-class Screenshot {
+class Screenshot : public QObject {
+   Q_OBJECT
 public:
-    Screenshot(const QPixmap &);
+    Screenshot(const QPixmap &, QObject *parent = 0);
     ~Screenshot();
 
     void setScreenshot(const QPixmap &);
     QPixmap getBaseScreenshot() const;
     QPixmap getScreenshot() const;
 
-    QString graphicalSave(const QRect &selection = QRect()) const;
+    QString graphicalSave(const QRect &selection = QRect(), QWidget *parent = 0) const;
     void uploadToImgur(QNetworkAccessManager *,
                        const QRect &selection = QRect());
     QPixmap paintModification(const CaptureModification &);

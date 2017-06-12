@@ -35,7 +35,8 @@
 
 // Screenshot is an extension of QPixmap which lets you manage specific tasks
 
-Screenshot::Screenshot(const QPixmap &p) : m_baseScreenshot(p),
+Screenshot::Screenshot(const QPixmap &p, QObject *parent) : QObject(parent),
+    m_baseScreenshot(p),
     m_modifiedScreenshot(p) {}
 
 Screenshot::~Screenshot() {
@@ -58,7 +59,7 @@ QPixmap Screenshot::getScreenshot() const {
 
 // graphicalSave generates a graphical window to ask about the save path and
 // saves the screenshot with all the modifications in such directory
-QString Screenshot::graphicalSave(const QRect &selection) const {
+QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const {
     const QString format = "png";
 
     QSettings settings;
@@ -87,7 +88,7 @@ QString Screenshot::graphicalSave(const QRect &selection) const {
     }
     savePath += tempName + "." + format;
 
-    QFileDialog fileDialog(nullptr, QObject::tr("Save As"), savePath);
+    QFileDialog fileDialog(parent, QObject::tr("Save As"), savePath);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setDirectory(savePath);
@@ -97,29 +98,36 @@ QString Screenshot::graphicalSave(const QRect &selection) const {
     fileDialog.setMimeTypeFilters(mimeTypes);
     fileDialog.selectMimeTypeFilter("image/" + format);
     fileDialog.setDefaultSuffix(format);
-    fileDialog.setWindowIcon(QIcon(":img/flameshot.svg"));
-    if (fileDialog.exec() != QDialog::Accepted) { return ""; }
-    const QString fileName = fileDialog.selectedFiles().first();
+    fileDialog.setWindowIcon(QIcon(":img/flameshot.png"));
 
-    const QString pathNoFile = fileName.left(fileName.lastIndexOf("/"));
-    settings.setValue("savePath", pathNoFile);
+    bool saved = false;
+    QString fileName;
+    do {
+        if (fileDialog.exec() != QDialog::Accepted) { return fileName; }
+        fileName = fileDialog.selectedFiles().first();
 
-    QPixmap pixToSave;
-    if (selection.isEmpty()) {
-        pixToSave = m_modifiedScreenshot;
-    } else { // save full screen when no selection
-        pixToSave = m_modifiedScreenshot.copy(selection);
-    }
+        const QString pathNoFile = fileName.left(fileName.lastIndexOf("/"));
+        settings.setValue("savePath", pathNoFile);
 
-//    if (settings.value("mouseVisible").toBool()) {
-//        // TO DO
-//    }
+        QPixmap pixToSave;
+        if (selection.isEmpty()) {
+            pixToSave = m_modifiedScreenshot;
+        } else { // save full screen when no selection
+            pixToSave = m_modifiedScreenshot.copy(selection);
+        }
+//        if (settings.value("mouseVisible").toBool()) {
+//            // TO DO
+//        }
 
-    if (!pixToSave.save(fileName)) {
-        QMessageBox::warning(nullptr, QObject::tr("Save Error"),
-                             QObject::tr("The image could not be saved to \"%1\".")
-                             .arg(QDir::toNativeSeparators(fileName)));
-    }
+        saved = pixToSave.save(fileName);
+        if (!saved) {
+            QMessageBox saveErrBox(QMessageBox::Warning, QObject::tr("Save Error"),
+                                   QObject::tr("The image could not be saved to \"%1\".")
+                                   .arg(QDir::toNativeSeparators(fileName)));
+            saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
+            saveErrBox.exec();
+        }
+    } while(!saved);
     return fileName;
 }
 
