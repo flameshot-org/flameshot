@@ -18,6 +18,7 @@
 #ifndef UICOLORPICKER_H
 #define UICOLORPICKER_H
 
+#include "color_wheel.hpp"
 #include <QFrame>
 
 class QVBoxLayout;
@@ -40,6 +41,7 @@ private:
     Button *m_buttonMainColor;
     Button *m_buttonContrast;
     Button *m_lastButtonPressed;
+    color_widgets::ColorWheel *m_colorWheel;
 
     QHBoxLayout *hLayout;
     QVBoxLayout *vLayout;

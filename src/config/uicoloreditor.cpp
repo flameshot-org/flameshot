@@ -16,7 +16,6 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "uicoloreditor.h"
-#include "color_wheel.hpp"
 #include "src/capture/button.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -54,22 +53,22 @@ void UIcolorEditor::updateLocalColor(const QColor c) {
 }
 
 void UIcolorEditor::initColorWheel() {
-    color_widgets::ColorWheel *colorWheel = new color_widgets::ColorWheel(this);
-    connect(colorWheel, &color_widgets::ColorWheel::mouseReleaseOnColor, this,
+    m_colorWheel = new color_widgets::ColorWheel(this);
+    connect(m_colorWheel, &color_widgets::ColorWheel::mouseReleaseOnColor, this,
             &UIcolorEditor::updateUIcolor);
-    connect(colorWheel, &color_widgets::ColorWheel::colorChanged, this,
+    connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);
 
     QSettings settings;
     m_uiColor = settings.value("uiColor").value<QColor>();
 
-    colorWheel->setColor(m_uiColor);
-    colorWheel->setFixedSize(100,100);
+    m_colorWheel->setColor(m_uiColor);
+    m_colorWheel->setFixedSize(100,100);
 
-    colorWheel->setToolTip(tr("Change the color moving the selectors and see"
+    m_colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));
 
-    hLayout->addWidget(colorWheel);
+    hLayout->addWidget(m_colorWheel);
 }
 
 void UIcolorEditor::initButtons() {
@@ -125,5 +124,11 @@ void UIcolorEditor::updateButtonIcon() {
 }
 
 void UIcolorEditor::changeLastButton(Button *b) {
-    m_lastButtonPressed = b;
+    if (m_lastButtonPressed != b) {
+        m_lastButtonPressed = b;
+        QString type = b == m_buttonMainColor ? "uiColor" : "contastUiColor";
+        QColor c = QSettings().value(type).value<QColor>();
+        m_colorWheel->setColor(c);
+
+    }
 }
