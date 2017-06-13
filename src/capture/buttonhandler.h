@@ -20,15 +20,17 @@
 
 #include "button.h"
 #include <QVector>
+#include <QObject>
 
 class Button;
 class QRect;
 class QPoint;
 
-class ButtonHandler {
+class ButtonHandler : public QObject {
+    Q_OBJECT
 public:
-    ButtonHandler(const QVector<Button*>&);
-    ButtonHandler();
+    ButtonHandler(const QVector<Button*>&, QObject *parent = 0);
+    ButtonHandler(QObject *parent = 0);
 
     void hide();
     void show();

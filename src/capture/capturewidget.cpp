@@ -83,7 +83,7 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     setCursor(Qt::CrossCursor);
     initShortcuts();
     // create buttons
-    m_buttonHandler = new ButtonHandler();
+    m_buttonHandler = new ButtonHandler(this);
     redefineButtons();
     m_buttonHandler->hide();
     // init screenshot
@@ -99,8 +99,7 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
 }
 
 CaptureWidget::~CaptureWidget() {
-    delete(m_buttonHandler);
-    delete(m_screenshot);
+
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -530,7 +529,7 @@ void CaptureWidget::createCapture() {
         close();
         return;
     }
-    m_screenshot = new Screenshot(screen->grabWindow(0));
+    m_screenshot = new Screenshot(screen->grabWindow(0), this);
 }
 
 void CaptureWidget::initShortcuts() {

@@ -37,7 +37,10 @@
 
 Screenshot::Screenshot(const QPixmap &p, QObject *parent) : QObject(parent),
     m_baseScreenshot(p),
-    m_modifiedScreenshot(p) {}
+    m_modifiedScreenshot(p)
+{
+
+}
 
 Screenshot::~Screenshot() {
 }

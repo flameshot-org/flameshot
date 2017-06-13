@@ -25,14 +25,18 @@ namespace {
     const int SEPARATION = 6;
 }
 
-ButtonHandler::ButtonHandler(const QVector<Button*> &v) {
+ButtonHandler::ButtonHandler(const QVector<Button*> &v, QObject *parent) :
+    QObject(parent)
+{
     if (!v.isEmpty()) {
         m_distance = v[0]->getButtonBaseSize() + SEPARATION;
         m_vectorButtons = v;
     }
 }
 
-ButtonHandler::ButtonHandler() {
+ButtonHandler::ButtonHandler(QObject *parent) :
+    QObject(parent)
+{
 }
 
 void ButtonHandler::hide() {
