@@ -30,20 +30,20 @@ class Button : public QPushButton {
 
 public:
     enum class Type {
-        selectionIndicator,
-        exit,
-        copy,
-        save,
         pencil,
         line,
         arrow,
+        selection,
         rectangle,
         circle,
         marker,
-        undo,
-        imageUploader,
+        selectionIndicator,
         move,
-        selection,
+        undo,
+        copy,
+        save,
+        exit,
+        imageUploader,
         last, // used for iteration over the enum
         text,
         mouseVisibility,

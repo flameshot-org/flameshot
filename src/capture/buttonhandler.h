@@ -40,8 +40,10 @@ public:
     void setButtons(const QVector<Button*>);
 
 private:
-    QVector<QPoint> getHPoints(const QPoint &center, const int elements) const;
-    QVector<QPoint> getVPoints(const QPoint &center, const int elements) const;
+    QVector<QPoint> getHPoints(const QPoint &center, const int elements,
+                               const bool leftToRight) const;
+    QVector<QPoint> getVPoints(const QPoint &center, const int elements,
+                               const bool upToDown) const;
     QVector<Button*> m_vectorButtons;
 
     int m_distance;

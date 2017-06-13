@@ -157,7 +157,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 }
             }
 
-            QVector<QPoint> positions = getHPoints(center, addCounter);
+            QVector<QPoint> positions = getHPoints(center, addCounter, true);
             for (QPoint p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
@@ -171,7 +171,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
 
             QPoint center = QPoint(baseArea.right() + SEPARATION,
                                    baseArea.center().y());
-            QVector<QPoint> positions = getVPoints(center, addCounter);
+            QVector<QPoint> positions = getVPoints(center, addCounter, false);
             for (QPoint p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
@@ -199,7 +199,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                     center.setX(center.x() - (baseWidth+SEPARATION)/2);
                 }
             }
-            QVector<QPoint> positions = getHPoints(center, addCounter);
+            QVector<QPoint> positions = getHPoints(center, addCounter, false);
             for (QPoint p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
@@ -216,7 +216,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
             }
             QPoint center = QPoint(baseArea.left() - (SEPARATION+baseWidth),
                                    baseArea.center().y());
-            QVector<QPoint> positions = getVPoints(center, addCounter);
+            QVector<QPoint> positions = getVPoints(center, addCounter, true);
             for (QPoint p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
@@ -251,24 +251,24 @@ void ButtonHandler::updatePosition(const QRect &selection,
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::getHPoints(
-        const QPoint &center, const int elements) const
+        const QPoint &center, const int elements, const bool leftToRight) const
 {
-
     QVector<QPoint> res;
-    QPoint left, right;
+    // distance from the center to start adding buttons
+    int shift = 0;
     if (elements % 2 == 0) {
-        left = QPoint(center.x()-m_distance + SEPARATION/2, center.y());
-        right = QPoint(center.x()+SEPARATION/2, center.y());
+        shift = m_distance * (elements / 2) - (SEPARATION / 2);
     } else {
-        res.append(QPoint(center.x()-(m_distance-SEPARATION)/2, center.y()));
-        left = QPoint(res[0].x()-m_distance, res[0].y());
-        right = QPoint(res[0].x()+m_distance, res[0].y());
+        shift = m_distance * ((elements-1) / 2) + Button::getButtonBaseSize() / 2;
     }
+    if (!leftToRight) { shift -= Button::getButtonBaseSize(); }
+    int x = leftToRight ? center.x() - shift :
+                          center.x() + shift;
+    QPoint i(x, center.y());
     while (elements > res.length()) {
-        res.append(left);
-        res.append(right);
-        left.setX(left.x()-m_distance);
-        right.setX(right.x()+m_distance);
+        res.append(i);
+        leftToRight ? i.setX(i.x() + m_distance) :
+                      i.setX(i.x() - m_distance);
     }
     return res;
 }
@@ -277,23 +277,24 @@ QVector<QPoint> ButtonHandler::getHPoints(
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::getVPoints(
-        const QPoint &center, const int elements) const
+        const QPoint &center, const int elements,const bool upToDown) const
 {
     QVector<QPoint> res;
-    QPoint up, down;
+    // distance from the center to start adding buttons
+    int shift = 0;
     if (elements % 2 == 0) {
-        up = QPoint(center.x(), center.y()-m_distance + SEPARATION/2);
-        down = QPoint(center.x(), center.y()+SEPARATION/2);
+        shift = m_distance * (elements / 2) - (SEPARATION / 2);
     } else {
-        res.append(QPoint(center.x(), center.y()-(m_distance-SEPARATION)/2));
-        up = QPoint(res[0].x(), res[0].y()-m_distance);
-        down = QPoint(res[0].x(), res[0].y()+m_distance);
+        shift = m_distance * ((elements-1) / 2) + Button::getButtonBaseSize() / 2;
     }
+    if (!upToDown) { shift -= Button::getButtonBaseSize(); }
+    int y = upToDown ? center.y() - shift :
+                       center.y() + shift;
+    QPoint i(center.x(), y);
     while (elements > res.length()) {
-        res.append(up);
-        res.append(down);
-        up.setY(up.y()-m_distance);
-        down.setY(down.y()+m_distance);
+        res.append(i);
+        upToDown ? i.setY(i.y() + m_distance) :
+                      i.setY(i.y() - m_distance);
     }
     return res;
 }
