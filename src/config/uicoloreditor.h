@@ -37,7 +37,7 @@ private slots:
     void changeLastButton(Button *);
 
 private:
-    QColor m_uiColor;
+    QColor m_uiColor, m_contrastColor;
     Button *m_buttonMainColor;
     Button *m_buttonContrast;
     Button *m_lastButtonPressed;

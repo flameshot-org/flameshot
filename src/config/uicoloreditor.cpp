@@ -30,6 +30,10 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     hLayout = new QHBoxLayout;
     vLayout = new QVBoxLayout;
 
+    QSettings settings;
+    m_uiColor = settings.value("uiColor").value<QColor>();
+    m_contrastColor = settings.value("contastUiColor").value<QColor>();
+
     initButtons();
     initColorWheel();
     hLayout->addLayout(vLayout);
@@ -41,12 +45,16 @@ void UIcolorEditor::updateUIcolor() {
     if (m_lastButtonPressed == m_buttonMainColor) {
         settings.setValue("uiColor", m_uiColor);
     } else {
-        settings.setValue("contastUiColor", m_uiColor);
+        settings.setValue("contastUiColor", m_contrastColor);
     }
 }
 // updateLocalColor updates the local button
 void UIcolorEditor::updateLocalColor(const QColor c) {
-    m_uiColor = c;
+    if (m_lastButtonPressed == m_buttonMainColor) {
+        m_uiColor = c;
+    } else {
+        m_contrastColor = c;
+    }
     QString style = Button::getStyle(c);
     m_lastButtonPressed->setStyleSheet(style);
     updateButtonIcon();
@@ -58,9 +66,6 @@ void UIcolorEditor::initColorWheel() {
             &UIcolorEditor::updateUIcolor);
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);
-
-    QSettings settings;
-    m_uiColor = settings.value("uiColor").value<QColor>();
 
     m_colorWheel->setColor(m_uiColor);
     m_colorWheel->setFixedSize(100,100);
@@ -96,11 +101,10 @@ void UIcolorEditor::initButtons() {
     frame2->setFixedSize(frameSize, frameSize);
     frame2->setFrameStyle(QFrame::StyledPanel);
 
-    QColor contrastColor = QSettings().value("contastUiColor").value<QColor>();
-    bool whiteIconWithContast = Button::iconIsWhite(contrastColor);
+    bool whiteIconWithContast = Button::iconIsWhite(m_contrastColor);
     m_buttonContrast = new Button(Button::Type::circle,
                                   whiteIconWithContast, frame2);
-    m_buttonContrast->setStyleSheet(Button::getStyle(contrastColor));
+    m_buttonContrast->setStyleSheet(Button::getStyle(m_contrastColor));
     m_buttonContrast->move(m_buttonContrast->x() + extraSize/2,
                            m_buttonContrast->y() + extraSize/2);
 
@@ -126,9 +130,8 @@ void UIcolorEditor::updateButtonIcon() {
 void UIcolorEditor::changeLastButton(Button *b) {
     if (m_lastButtonPressed != b) {
         m_lastButtonPressed = b;
-        QString type = b == m_buttonMainColor ? "uiColor" : "contastUiColor";
-        QColor c = QSettings().value(type).value<QColor>();
-        m_colorWheel->setColor(c);
 
+        if (b == m_buttonMainColor) { m_colorWheel->setColor(m_uiColor); }
+        else { m_colorWheel->setColor(m_contrastColor); }
     }
 }
