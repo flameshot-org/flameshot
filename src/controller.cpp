@@ -85,6 +85,7 @@ void Controller::initDefaults() {
     if (!settings.value("initiated").toBool()) {
         settings.setValue("initiated", true);
         settings.setValue("showHelp", true);
+        settings.setValue("showDesktopNotification", true);
         settings.setValue("drawColor", QColor(Qt::red));
         //settings.setValue("mouseVisible", false);
         settings.setValue("uiColor", QColor(116, 0, 150));
@@ -140,5 +141,8 @@ void Controller::openInfoWindow() {
 }
 
 void Controller::showMessage(QString msg) {
-    m_trayIcon->showMessage("Flameshot Info", msg);
+    bool showMessages = QSettings().value("showDesktopNotification").toBool();
+    if (showMessages) {
+        m_trayIcon->showMessage("Flameshot Info", msg);
+    }
 }

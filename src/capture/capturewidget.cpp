@@ -164,7 +164,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 
         QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
                              "\nPress Enter to capture the screen."
-                             "\nPress Right Click to choose the tool color.");
+                             "\nPress Right Click to show the color picker.");
 
         // We draw the white contrasting background for the text, using the
         //same text and options to get the boundingRect that the text will have.
@@ -394,10 +394,15 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 
 void CaptureWidget::saveScreenshot() {
     hide();
+    QString path;
     if (m_selection.isNull()) {
-        m_screenshot->graphicalSave(QRect(), this);
+        path = m_screenshot->graphicalSave(QRect(), this);
     } else { // save full screen when no selection
-        m_screenshot->graphicalSave(getExtendedSelection(), this);
+        path = m_screenshot->graphicalSave(getExtendedSelection(), this);
+    }
+    if (!path.isEmpty()) {
+        QString saveMessage(tr("Capture saved in "));
+        Q_EMIT newMessage(saveMessage + path);
     }
     close();
 }

@@ -12,11 +12,13 @@ public:
 
 private slots:
    void showHelpChanged(bool checked);
+   void showDesktopNotificationChanged(bool checked);
 
 private:
     QVBoxLayout *m_layout;
 
-    void initHelpShow();
+    void initShowHelp();
+    void initShowDesktopNotification();
 };
 
 #endif // GENENERALCONF_H
