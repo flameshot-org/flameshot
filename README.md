@@ -2,13 +2,28 @@
 > Powerfull yet simple to use screenshot software.
 
 ## Usage
+Example commands:
+- capture with GUI:
 
-Add `flameshot-cli` to be executed as a shortcut. When you press the assigned key, Flameshot will be launched in the capture mode.
+`flameshot gui`
+- capture with GUI with custom save path:
 
-A systray icon will be added to your panel after the first execution of Flameshot.
+`flameshot gui -p ~/myStuff/captures`
+- fullscreen capture (asking savepath):
 
+`flameshot full`
+- fullscreen capture with custom save path (no GUI):
+
+`flameshot full -p ~/myStuff/captures`
+- fullscreen capture with custom save path copying to clipboard:
+
+`flameshot full -c -p ~/myStuff/captures`
+
+In case of doubt choose the first or the second shortcut in your favorite desktop environment.
+
+A systray icon will be in your system's panel while Flameshot is running.
 Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
-Check out the information window to see all the available shortcuts in the capture mode.
+Check out the information window to see all the available shortcuts in the graphical capture mode.
 
 ## Considerations
 
@@ -18,12 +33,13 @@ Check out the information window to see all the available shortcuts in the captu
 
 - In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting an application automatically on boot.
 
-- This software is very focused on selection capture and edition, but you can do full screen captures very easily just not having a visible selection, by default it will take it as if you were selecting the whole screen.
+- Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard!
+
+## Compilation and development
+
+- Information about manual compilation can be found [here](./docs/dev/compilation.md)
 
 - Check the [docs](./docs) folder for more information.
-
-- Information about manual compilation can be found [here](./docs/dev/compilation.md)`
-
 
 ## Screenshots
 Dynamic button position based on your selection!
