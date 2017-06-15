@@ -49,10 +49,11 @@ namespace {
 
 // http://doc.qt.io/qt-5/qwidget.html#setMask
 
-CaptureWidget::CaptureWidget(QWidget *parent) :
+CaptureWidget::CaptureWidget(bool enableSaveWindow, QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_onButton(false), m_state(Button::Type::move)
+    m_onButton(false), m_enableSaveWindow(enableSaveWindow),
+    m_state(Button::Type::move)
 {
     m_showInitialMsg = QSettings().value("showHelp").toBool();
 
@@ -74,17 +75,12 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
                    | Qt::FramelessWindowHint
                    | Qt::Tool);
 
-//  setWindowFlags( Qt::WindowStaysOnTopHint
-//                | Qt::FramelessWindowHint
-//                | Qt::Popup);
-
-
     setMouseTracking(true);
     setCursor(Qt::CrossCursor);
     initShortcuts();
     // create buttons
     m_buttonHandler = new ButtonHandler(this);
-    redefineButtons();
+    updateButtons();
     m_buttonHandler->hide();
     // init screenshot
     createCapture();
@@ -92,10 +88,9 @@ CaptureWidget::CaptureWidget(QWidget *parent) :
     // we need to increase by 1 the size to reach to the end of the screen
     resize(size.width()+1, size.height()+1);
 
-    showFullScreen();
-
     // init interface color
     m_colorPicker = new ColorPicker(this);
+    m_colorPicker->hide();
 }
 
 CaptureWidget::~CaptureWidget() {
@@ -104,7 +99,7 @@ CaptureWidget::~CaptureWidget() {
 
 // redefineButtons retrieves the buttons configured to be shown with the
 // selection in the capture
-void CaptureWidget::redefineButtons() {
+void CaptureWidget::updateButtons() {
     QSettings settings;
     m_uiColor = settings.value("uiColor").value<QColor>();
     m_contrastUiColor = settings.value("contastUiColor").value<QColor>();
@@ -392,7 +387,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
     update();
 }
 
-void CaptureWidget::saveScreenshot() {
+QString CaptureWidget::saveScreenshot(bool toClipboard) {
     hide();
     QString path;
     if (m_selection.isNull()) {
@@ -404,7 +399,27 @@ void CaptureWidget::saveScreenshot() {
         QString saveMessage(tr("Capture saved in "));
         Q_EMIT newMessage(saveMessage + path);
     }
+    if (toClipboard) {
+        copyScreenshot();
+    }
     close();
+    return path;
+}
+
+QString CaptureWidget::saveScreenshot(QString path, bool toClipboard) {
+    QSettings().setValue("savePath", path);
+    if (m_selection.isNull()) {
+        m_screenshot->fileSave();
+    } else { // save full screen when no selection
+        m_screenshot->fileSave(getExtendedSelection());
+    }
+    if (toClipboard) {
+        copyScreenshot();
+    }
+    QString saveMessage(tr("Capture saved in "));
+    Q_EMIT newMessage(saveMessage + path);
+    close();
+    return path;
 }
 
 void CaptureWidget::copyScreenshot() {
@@ -496,7 +511,9 @@ void CaptureWidget::setState(Button *b) {
         newState =  Button::Type::move;
     }
     if (t == Button::Type::save) {
-        saveScreenshot();
+        m_enableSaveWindow ?
+                    saveScreenshot() :
+                    saveScreenshot(QSettings().value("savePath").toString());
     } else if (t == Button::Type::copy) {
         copyScreenshot();
     } else if (t == Button::Type::exit) {

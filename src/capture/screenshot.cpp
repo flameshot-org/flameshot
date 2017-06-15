@@ -64,7 +64,6 @@ QPixmap Screenshot::getScreenshot() const {
 // saves the screenshot with all the modifications in such directory
 QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const {
     const QString format = "png";
-
     QSettings settings;
     QString savePath = settings.value("savePath").toString();
     if (savePath.isEmpty() || !QDir(savePath).exists()) {
@@ -104,12 +103,12 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
     fileDialog.setWindowIcon(QIcon(":img/flameshot.png"));
 
     bool saved = false;
-    QString fileName;
+    QString fileName, pathNoFile;
     do {
-        if (fileDialog.exec() != QDialog::Accepted) { return fileName; }
+        if (fileDialog.exec() != QDialog::Accepted) { return ""; }
         fileName = fileDialog.selectedFiles().first();
 
-        const QString pathNoFile = fileName.left(fileName.lastIndexOf("/"));
+        pathNoFile = fileName.left(fileName.lastIndexOf("/"));
         settings.setValue("savePath", pathNoFile);
 
         QPixmap pixToSave;
@@ -131,7 +130,44 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
             saveErrBox.exec();
         }
     } while(!saved);
-    return fileName;
+
+    return pathNoFile;
+}
+
+QString Screenshot::fileSave(const QRect &selection) const {
+    const QString format = "png";
+    QSettings settings;
+    QString savePath = settings.value("savePath").toString();
+    if (savePath.isEmpty() || !QDir(savePath).exists()) {
+        savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+        if (savePath.isEmpty()) {
+            savePath = QDir::currentPath();
+        }
+    }
+    // find unused name adding _n where n is a number
+    QString tempName = QObject::tr("/screenshot");
+    QFileInfo checkFile(savePath + tempName + "." + format);
+    if (checkFile.exists()) {
+        tempName += "_";
+        int i = 1;
+        while (true) {
+            checkFile.setFile(
+                        savePath + tempName + QString::number(i) + "." + format);
+            if (!checkFile.exists()) {
+                tempName += QString::number(i);
+                break;
+            }
+            ++i;
+        }
+    }
+    savePath += tempName + "." + format;
+    QPixmap pixToSave;
+    if (selection.isEmpty()) {
+        pixToSave = m_modifiedScreenshot;
+    } else { // save full screen when no selection
+        pixToSave = m_modifiedScreenshot.copy(selection);
+    }
+    return pixToSave.save(savePath) ? savePath : "";
 }
 
 // paintModification adds a new modification to the screenshot

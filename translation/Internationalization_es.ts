@@ -29,34 +29,6 @@
         <translation>Abre la ventana de guardar imagen</translation>
     </message>
     <message>
-        <source>Sets the paint tool to a pencil</source>
-        <translation type="obsolete">Establece el lápiz como herramienta de dibujo</translation>
-    </message>
-    <message>
-        <source>Sets the paint tool to a line drawer</source>
-        <translation type="obsolete">Establece la línea como herramienta de dibujo</translation>
-    </message>
-    <message>
-        <source>Sets the paint tool to an arrow drawer</source>
-        <translation type="obsolete">Establece la flecha como herramienta de dibujo</translation>
-    </message>
-    <message>
-        <source>Sets the paint tool to a rectagle drawer</source>
-        <translation type="obsolete">Establece el rectángulo como herramienta de dibujo</translation>
-    </message>
-    <message>
-        <source>Sets the paint tool to a circle drawer</source>
-        <translation type="obsolete">Establece el círculo como herramienta de dibujo</translation>
-    </message>
-    <message>
-        <source>Sets the paint tool to a marker</source>
-        <translation type="obsolete">Establece el marcador como herramienta de dibujo</translation>
-    </message>
-    <message>
-        <source>Sets the paint tool to a text creator</source>
-        <translation type="obsolete">Establece el texto como herramienta de dibujo</translation>
-    </message>
-    <message>
         <location filename="../src/capture/button.cpp" line="274"/>
         <source>Opens the color picker widget</source>
         <translation>Abre el selector de color</translation>
@@ -65,10 +37,6 @@
         <location filename="../src/capture/button.cpp" line="275"/>
         <source>Undo the last modification</source>
         <translation>Deshace la última modificación</translation>
-    </message>
-    <message>
-        <source>Upload the selection to Imgur</source>
-        <translation type="obsolete">Sube la selección a Imgur</translation>
     </message>
     <message>
         <location filename="../src/capture/button.cpp" line="267"/>
@@ -209,16 +177,22 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="166"/>
+        <location filename="../src/capture/capturewidget.cpp" line="160"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
-Press Right Click to choose the tool color.</source>
-        <translation>Selecciona un área con el ratón, or presiona Esc para salir.
+Press Right Click to show the color picker.</source>
+        <translation>Selecciona un área con el ratón, o presiona Esc para salir.
 Presiona Enter para capturar la pantalla.
-Presiona Click Derecho para elegir color de herramienta.</translation>
+Presiona click derecho para mostrar el selector de color.</translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="434"/>
+        <location filename="../src/capture/capturewidget.cpp" line="399"/>
+        <location filename="../src/capture/capturewidget.cpp" line="419"/>
+        <source>Capture saved in </source>
+        <translation>Captura guardada en </translation>
+    </message>
+    <message>
+        <location filename="../src/capture/capturewidget.cpp" line="455"/>
         <source>Uploading image...</source>
         <translation>Subiendo imagen...</translation>
     </message>
@@ -245,40 +219,51 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
         <source>Button selection</source>
         <translation>Selección de botones</translation>
     </message>
-    <message>
-        <source>Select which buttons will appear arround the capture&apos;s selection by clicking on its checkbox.</source>
-        <translation type="obsolete">Selecciona qué botones aparecerán alrededor de la selección de captura clicando en su casilla.</translation>
-    </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="51"/>
+        <location filename="../src/controller.cpp" line="59"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuración</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="55"/>
+        <location filename="../src/controller.cpp" line="63"/>
         <source>&amp;Information</source>
         <translation>&amp;Información</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="59"/>
+        <location filename="../src/controller.cpp" line="67"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
 </context>
 <context>
+    <name>FlameshotDBusAdapter</name>
+    <message>
+        <location filename="../src/flameshotdbusadapter.cpp" line="48"/>
+        <location filename="../src/flameshotdbusadapter.cpp" line="56"/>
+        <source>Capture saved in </source>
+        <translation>Captura guardada en </translation>
+    </message>
+</context>
+<context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="19"/>
+        <location filename="../src/config/geneneralconf.cpp" line="24"/>
         <source>Show help message</source>
         <translation>Mostrar mensaje de ayuda</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="23"/>
+        <location filename="../src/config/geneneralconf.cpp" line="28"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Muestra el mensaje de ayuda al iniciar el modo de captura.</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="36"/>
+        <location filename="../src/config/geneneralconf.cpp" line="40"/>
+        <source>Show desktop notifications</source>
+        <translation>Mostrar notificaciones del escritorio</translation>
     </message>
 </context>
 <context>
@@ -357,63 +342,86 @@ Presiona Click Derecho para elegir color de herramienta.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="73"/>
+        <location filename="../src/capture/screenshot.cpp" line="76"/>
+        <location filename="../src/capture/screenshot.cpp" line="148"/>
         <source>/screenshot</source>
         <translation>/captura</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="90"/>
+        <location filename="../src/capture/screenshot.cpp" line="93"/>
         <source>Save As</source>
         <translation>Guardar Como</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="119"/>
+        <location filename="../src/capture/screenshot.cpp" line="126"/>
         <source>Save Error</source>
         <translation>Error al Guardar</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="120"/>
+        <location filename="../src/capture/screenshot.cpp" line="127"/>
         <source>The image could not be saved to &quot;%1&quot;.</source>
         <translation>la imagen no pudo ser guardada en &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="59"/>
+        <source>Powerfull yet simple to use screenshot software.</source>
+        <translation>Potente pero simple de usar software de capturas.</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="61"/>
+        <source>Capture the entire desktop.</source>
+        <translation>Captura el escritorio completo.</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="62"/>
+        <source>Start a manual capture in GUI mode.</source>
+        <translation>Inicia una captura manual en modo gráfico.</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="72"/>
+        <source>Path where the capture will be saved</source>
+        <translation>Ruta donde la captura será guardada</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="75"/>
+        <source>Save the capture to the clipboard</source>
+        <translation>Guarda la captura en el portapapeles</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="97"/>
+        <source>Invalid path.</source>
+        <translation>Rura inválida.</translation>
     </message>
 </context>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <source>Select a Button to change the color</source>
-        <translation type="obsolete">Selecciona un Botón para cambiar el color</translation>
-    </message>
-    <message>
-        <source>Color edition component, click on the color wheel and change the UI colors!</source>
-        <translation type="obsolete">Componente de edición de color, ¡clica en él para cambiar el color de la interfaz!</translation>
-    </message>
-    <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="69"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="73"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>Cambia el color moviendo los selectores y observa los cambios en los botones de previsualización.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="79"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="83"/>
         <source>Select a Button to modify it</source>
         <translation>Selecciona un Botón para modificarlo</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="90"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="94"/>
         <source>Main Color</source>
         <translation>Color Principal</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="93"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="97"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color primario.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="110"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="113"/>
         <source>Contrast Color</source>
         <translation>Color de Contraste</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="113"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="116"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color de contraste.</translation>
     </message>

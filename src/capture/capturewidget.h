@@ -44,16 +44,18 @@ class CaptureWidget : public QWidget {
     friend class Button;
 
 public:
-    explicit CaptureWidget(QWidget *parent = 0);
+    explicit CaptureWidget(bool enableSaveWindow = true, QWidget *parent = 0);
     ~CaptureWidget();
 
-    void redefineButtons();
+    void updateButtons();
+public slots:
+    QString saveScreenshot(bool toClipboard = false);
+    QString saveScreenshot(QString path, bool toClipboard = false);
 
 signals:
     void newMessage(QString);
 
 private slots:
-    void saveScreenshot();
     void copyScreenshot();
     void openURL(QNetworkReply *reply);
     void leaveButton();
@@ -93,6 +95,7 @@ protected:
     bool m_grabbing;
     bool m_onButton;
     bool m_showInitialMsg;
+    bool m_enableSaveWindow;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

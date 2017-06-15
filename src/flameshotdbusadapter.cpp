@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "flameshotdbusadapter.h"
+#include <QSettings>
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(Controller *parent)
     : QDBusAbstractAdaptor(parent)
@@ -31,6 +32,27 @@ Controller *FlameshotDBusAdapter::parent() const {
     return static_cast<Controller *>(QObject::parent());
 }
 
-void FlameshotDBusAdapter::createCapture() {
+void FlameshotDBusAdapter::openCapture() {
+    parent()->createVisualCapture();
+}
+
+void FlameshotDBusAdapter::openCaptureWithPath(QString path) {
+    QSettings().setValue("savePath", path);
+    parent()->createVisualCapture(false);
+}
+
+void FlameshotDBusAdapter::fullScreen(bool toClipboard) {
     parent()->createCapture();
+    QString path = parent()->saveScreenshot(toClipboard);
+    if (!path.isEmpty()) {
+        QString saveMessage(tr("Capture saved in "));
+        parent()->showDesktopNotification(saveMessage + path);
+    }
+}
+
+void FlameshotDBusAdapter::fullScreenWithPath(QString path, bool toClipboard) {
+    parent()->createCapture();
+    QString finalPath = parent()->saveScreenshot(path, toClipboard);
+    QString saveMessage(tr("Capture saved in "));
+    parent()->showDesktopNotification(saveMessage + finalPath);
 }

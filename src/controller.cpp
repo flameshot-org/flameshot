@@ -46,6 +46,14 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
 }
 
+QString Controller::saveScreenshot(bool toClipboard) {
+    return m_captureWindow->saveScreenshot(toClipboard);
+}
+
+QString Controller::saveScreenshot(QString path, bool toClipboard) {
+    return m_captureWindow->saveScreenshot(path, toClipboard);
+}
+
 // creates the items of the trayIcon
 void Controller::createActions() {
     m_configAction = new QAction(tr("&Configuration"), this);
@@ -113,16 +121,24 @@ void Controller::initDefaults() {
 
 void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r) {
     if (r == QSystemTrayIcon::Trigger) {
-        createCapture();
+        createVisualCapture();
     }
 }
 
 // creation of a new capture
-void Controller::createCapture() {
+void Controller::createCapture(bool enableSaveWindow) {
     if (!m_captureWindow) {
-        m_captureWindow = new CaptureWidget();
+        m_captureWindow = new CaptureWidget(enableSaveWindow);
         connect(m_captureWindow, &CaptureWidget::newMessage,
-                this, &Controller::showMessage);
+                this, &Controller::showDesktopNotification);
+    }
+}
+
+// creation of a new capture in GUI mode
+void Controller::createVisualCapture(bool enableSaveWindow) {
+    createCapture(enableSaveWindow);
+    if (m_captureWindow && !m_captureWindow->isVisible()) {
+        m_captureWindow->showFullScreen();
     }
 }
 
@@ -140,7 +156,7 @@ void Controller::openInfoWindow() {
     }
 }
 
-void Controller::showMessage(QString msg) {
+void Controller::showDesktopNotification(QString msg) {
     bool showMessages = QSettings().value("showDesktopNotification").toBool();
     if (showMessages) {
         m_trayIcon->showMessage("Flameshot Info", msg);

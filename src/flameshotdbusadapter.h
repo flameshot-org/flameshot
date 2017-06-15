@@ -25,20 +25,18 @@ class FlameshotDBusAdapter : public QDBusAbstractAdaptor
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.dharkael.Flameshot")
-    Q_CLASSINFO("D-Bus Introspection", ""
-                "<interface name=\"org.kde.Flameshot\">\n"
-                "    <method name=\"createCapture\">\n"
-                "    </method>\n"
-                "</interface>\n"
-                ""
-    )
+
 public:
     FlameshotDBusAdapter(Controller *parent = 0);
     virtual ~FlameshotDBusAdapter();
     inline Controller *parent() const;
 
 public slots:
-    Q_NOREPLY void createCapture();
+    Q_NOREPLY void openCapture();
+    Q_NOREPLY void openCaptureWithPath(QString path);
+
+    Q_NOREPLY void fullScreen(bool toClipboard);
+    Q_NOREPLY void fullScreenWithPath(QString path, bool toClipboard);
 };
 
 #endif // FLAMESHOTDBUSADAPTER_H

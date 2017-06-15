@@ -34,13 +34,16 @@ class Controller : public QObject {
 public:
     explicit Controller(QObject *parent = 0);
 
+    QString saveScreenshot(bool toClipboard = false);
+    QString saveScreenshot(QString path, bool toClipboard = false);
 public slots:
-    void createCapture();
+    void createCapture(bool enableSaveWindow = true);
+    void createVisualCapture(bool enableSaveWindow = true);
     void openConfigWindow();
     void openInfoWindow();
+    void showDesktopNotification(QString);
 
 private slots:
-    void showMessage(QString);
     void initDefaults();
     void trayIconActivated(QSystemTrayIcon::ActivationReason r);
 
