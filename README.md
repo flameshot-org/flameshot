@@ -1,5 +1,9 @@
-![image](./img/flameshot.png)
+# Flameshot
+![image](./img/flameshot.png) 
 > Powerfull yet simple to use screenshot software.
+
+## Preview
+![image](./img/appPreview/animatedUsage.gif)
 
 ## Index
 - [Features](#features)
@@ -10,7 +14,6 @@
   - [Fedora](#fedora)
   - [Arch](#arch)
   - [Instal](#install)
-- [Screenshots](#screenshots)
 - [License](#license)
 
 ## Features
@@ -82,15 +85,6 @@ Compilation:  run `qmake && make` in the main directory.
 ## Install
 
 Simply use `make install` with privileges.
-
-
-## Screenshots
-Dynamic button position based on your selection!
-
-![image](./img/appScreenshots/screenshot_1.png)
-
-Choose your buttons and edit your screenshots!
-![image](./img/appScreenshots/screenshot_2.png)
 
 ## License
 - The main code is licensed under GPLv3
