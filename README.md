@@ -1,6 +1,18 @@
 ![image](./img/flameshot.png)
 > Powerfull yet simple to use screenshot software.
 
+## Index
+- [Usage](#usage)
+- [Considerations](#considerations)
+- [Usage](#usage)
+- [Compilation](#compilation)
+  - [Debian](#debian)
+  - [Fedora](#fedora)
+  - [Arch](#arch)
+  - [Instal](#install)
+- [Screenshots](#screenshots)
+- [License](#license)
+
 ## Usage
 Example commands:
 - capture with GUI:
@@ -27,7 +39,7 @@ Check out the information window to see all the available shortcuts in the graph
 
 ## Considerations
 
-**Not working on Wayland**
+- **Not working on Wayland**
 
 - If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/495/topicons/) extension in order to see the systemtray icon.
 
@@ -35,11 +47,35 @@ Check out the information window to see all the available shortcuts in the graph
 
 - Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard!
 
-## Compilation and development
+## Compilation
+### Debian
+Dependencies:
+````
+apt install -y git g++ build-essential qt5-qmake qt5-default
+````
 
-- Information about manual compilation can be found [here](./docs/dev/compilation.md)
+Compilation: run `qmake && make` in the main directory.
 
-- Check the [docs](./docs) folder for more information.
+### Fedora
+Dependencies:
+````
+dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel
+````
+
+Compilation:  run `qmake-qt5 && make` in the main directory.
+
+### Arch
+Dependencies:
+````
+pacman -S git qt5-base base-devel
+````
+
+Compilation:  run `qmake && make` in the main directory.
+
+## Install
+
+Simply use `make install` with privileges.
+
 
 ## Screenshots
 Dynamic button position based on your selection!

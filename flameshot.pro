@@ -66,8 +66,22 @@ HEADERS  += \
 RESOURCES += \
     graphics.qrc
 
+# installs
 unix: {
-    qmfile.path  = /usr/share/flameshot/translations
+    target.path = /usr/bin/
+
+    qmfile.path = /usr/share/flameshot/translations/
     qmfile.files = translation/Internationalization_es.qm
-    INSTALLS += qmfile
+
+    servicedbus.path = /usr/share/dbus-1/services/
+    servicedbus.files = dbus/org.dharkael.Flameshot.service
+
+    dbus.path = /usr/share/dbus-1/interfaces/
+    dbus.files = dbus/org.dharkael.Flameshot.xml
+
+    INSTALLS += target \
+        qmfile \
+        servicedbus \
+        dbus
 }
+
