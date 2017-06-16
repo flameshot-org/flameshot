@@ -158,7 +158,7 @@ void Controller::openInfoWindow() {
 
 void Controller::showDesktopNotification(QString msg) {
     bool showMessages = QSettings().value("showDesktopNotification").toBool();
-    if (showMessages) {
+    if (showMessages && m_trayIcon->supportsMessages()) {
         m_trayIcon->showMessage("Flameshot Info", msg);
     }
 }
