@@ -2,9 +2,9 @@
 > Powerfull yet simple to use screenshot software.
 
 ## Index
+- [Features](#features)
 - [Usage](#usage)
 - [Considerations](#considerations)
-- [Usage](#usage)
 - [Compilation](#compilation)
   - [Debian](#debian)
   - [Fedora](#fedora)
@@ -12,6 +12,13 @@
   - [Instal](#install)
 - [Screenshots](#screenshots)
 - [License](#license)
+
+## Features
+- Customizable appearance
+- Easy to use
+- In-app screenshot edition
+- DBus interface
+- Upload to Imgur
 
 ## Usage
 Example commands:
