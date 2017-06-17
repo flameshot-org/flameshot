@@ -68,7 +68,7 @@ RESOURCES += \
 
 # installs
 unix: {
-    target.path = /usr/bin/
+    target.path = /usr/local/bin/
 
     qmfile.path = /usr/share/flameshot/translations/
     qmfile.files = translation/Internationalization_es.qm
