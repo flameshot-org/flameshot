@@ -78,8 +78,17 @@ unix: {
 
     dbus.path = /usr/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
+    
+    icon.path = /usr/local/share/icons/
+    icon.files = img/flameshot.png
+    
+    desktopentry.path = /usr/local/share/applications
+    desktopentry.files = docs/desktopEntry/make/flameshot.desktop
+
 
     INSTALLS += target \
+        icon \
+        desktopentry \
         qmfile \
         servicedbus \
         dbus
