@@ -42,7 +42,6 @@ void FlameshotDBusAdapter::openCaptureWithPath(QString path) {
 }
 
 void FlameshotDBusAdapter::fullScreen(bool toClipboard) {
-    parent()->createCapture();
     QString path = parent()->saveScreenshot(toClipboard);
     if (!path.isEmpty()) {
         QString saveMessage(tr("Capture saved in "));
@@ -51,7 +50,6 @@ void FlameshotDBusAdapter::fullScreen(bool toClipboard) {
 }
 
 void FlameshotDBusAdapter::fullScreenWithPath(QString path, bool toClipboard) {
-    parent()->createCapture();
     QString finalPath = parent()->saveScreenshot(path, toClipboard);
     QString saveMessage(tr("Capture saved in "));
     parent()->showDesktopNotification(saveMessage + finalPath);

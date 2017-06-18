@@ -37,7 +37,7 @@ public:
     QString saveScreenshot(bool toClipboard = false);
     QString saveScreenshot(QString path, bool toClipboard = false);
 public slots:
-    void createCapture(bool enableSaveWindow = true);
+    QPointer<CaptureWidget> createCapture(bool enableSaveWindow = true);
     void createVisualCapture(bool enableSaveWindow = true);
     void openConfigWindow();
     void openInfoWindow();
