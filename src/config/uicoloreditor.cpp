@@ -16,7 +16,6 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "uicoloreditor.h"
-#include "src/capture/button.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSettings>
@@ -87,11 +86,12 @@ void UIcolorEditor::initButtons() {
     frame->setFrameStyle(QFrame::StyledPanel);
 
 
-    m_buttonMainColor = new Button(Button::Type::circle, frame);
+    m_buttonMainColor = new Button(m_buttonIconType, frame);
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize/2, m_buttonMainColor->y() + extraSize/2);
     QHBoxLayout *h1 = new QHBoxLayout();
     h1->addWidget(frame);
-    h1->addWidget(new QLabel(tr("Main Color"), this));
+    m_labelMain = new QLabel(tr("Main Color"), this);
+    h1->addWidget(m_labelMain);
     vLayout->addLayout(h1);
 
     m_buttonMainColor->setToolTip(tr("Click on this button to set the edition"
@@ -101,16 +101,17 @@ void UIcolorEditor::initButtons() {
     frame2->setFixedSize(frameSize, frameSize);
     frame2->setFrameStyle(QFrame::StyledPanel);
 
-    bool whiteIconWithContast = Button::iconIsWhite(m_contrastColor);
-    m_buttonContrast = new Button(Button::Type::circle,
-                                  whiteIconWithContast, frame2);
+    m_buttonContrast = new Button(m_buttonIconType, frame2);
+    m_buttonContrast->setIcon(QIcon());
     m_buttonContrast->setStyleSheet(Button::getStyle(m_contrastColor));
     m_buttonContrast->move(m_buttonContrast->x() + extraSize/2,
                            m_buttonContrast->y() + extraSize/2);
 
     QHBoxLayout *h2 = new QHBoxLayout();
     h2->addWidget(frame2);
-    h2->addWidget(new QLabel(tr("Contrast Color"), this));
+    m_labelContrast = new QLabel(tr("Contrast Color"), this);
+    m_labelContrast->setStyleSheet("QLabel { color : gray; }");
+    h2->addWidget(m_labelContrast);
     vLayout->addLayout(h2);
 
     m_buttonContrast->setToolTip(tr("Click on this button to set the edition"
@@ -129,9 +130,18 @@ void UIcolorEditor::updateButtonIcon() {
 
 void UIcolorEditor::changeLastButton(Button *b) {
     if (m_lastButtonPressed != b) {
+        m_lastButtonPressed->setIcon(QIcon());
         m_lastButtonPressed = b;
 
-        if (b == m_buttonMainColor) { m_colorWheel->setColor(m_uiColor); }
-        else { m_colorWheel->setColor(m_contrastColor); }
+        if (b == m_buttonMainColor) {
+            m_colorWheel->setColor(m_uiColor);
+            m_labelContrast->setStyleSheet("QLabel { color : gray; }");
+            m_labelMain->setStyleSheet("QLabel { color : white; }");
+        } else {
+            m_colorWheel->setColor(m_contrastColor);
+            m_labelContrast->setStyleSheet("QLabel { color : white; }");
+            m_labelMain->setStyleSheet("QLabel { color : gray; }");
+        }
+        b->setIcon(b->getIcon(m_buttonIconType));
     }
 }

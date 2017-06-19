@@ -19,11 +19,13 @@
 #define UICOLORPICKER_H
 
 #include "color_wheel.hpp"
+#include "src/capture/button.h"
 #include <QFrame>
 
 class QVBoxLayout;
 class QHBoxLayout;
 class Button;
+class QLabel;
 
 class UIcolorEditor : public QFrame {
     Q_OBJECT
@@ -39,9 +41,13 @@ private slots:
 private:
     QColor m_uiColor, m_contrastColor;
     Button *m_buttonMainColor;
+    QLabel *m_labelMain;
     Button *m_buttonContrast;
+    QLabel *m_labelContrast;
     Button *m_lastButtonPressed;
     color_widgets::ColorWheel *m_colorWheel;
+
+    static const Button::Type m_buttonIconType = Button::Type::circle;
 
     QHBoxLayout *hLayout;
     QVBoxLayout *vLayout;
