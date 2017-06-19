@@ -46,7 +46,8 @@ SOURCES += src/main.cpp\
     src/config/buttonlistview.cpp \
     src/config/uicoloreditor.cpp \
     src/config/geneneralconf.cpp \
-    src/flameshotdbusadapter.cpp
+    src/flameshotdbusadapter.cpp \
+    src/config/clickablelabel.cpp
 
 HEADERS  += \
     src/controller.h \
@@ -61,7 +62,8 @@ HEADERS  += \
     src/config/buttonlistview.h \
     src/config/uicoloreditor.h \
     src/config/geneneralconf.h \
-    src/flameshotdbusadapter.h
+    src/flameshotdbusadapter.h \
+    src/config/clickablelabel.h
 
 RESOURCES += \
     graphics.qrc

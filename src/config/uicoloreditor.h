@@ -25,7 +25,7 @@
 class QVBoxLayout;
 class QHBoxLayout;
 class Button;
-class QLabel;
+class ClickableLabel;
 
 class UIcolorEditor : public QFrame {
     Q_OBJECT
@@ -41,9 +41,9 @@ private slots:
 private:
     QColor m_uiColor, m_contrastColor;
     Button *m_buttonMainColor;
-    QLabel *m_labelMain;
+    ClickableLabel *m_labelMain;
     Button *m_buttonContrast;
-    QLabel *m_labelContrast;
+    ClickableLabel *m_labelContrast;
     Button *m_lastButtonPressed;
     color_widgets::ColorWheel *m_colorWheel;
 

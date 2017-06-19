@@ -16,12 +16,12 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "uicoloreditor.h"
+#include "clickablelabel.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSettings>
 #include <QComboBox>
 #include <QMap>
-#include <QLabel>
 
 UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     setFrameStyle(QFrame::StyledPanel);
@@ -90,7 +90,7 @@ void UIcolorEditor::initButtons() {
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize/2, m_buttonMainColor->y() + extraSize/2);
     QHBoxLayout *h1 = new QHBoxLayout();
     h1->addWidget(frame);
-    m_labelMain = new QLabel(tr("Main Color"), this);
+    m_labelMain = new ClickableLabel(tr("Main Color"), this);
     h1->addWidget(m_labelMain);
     vLayout->addLayout(h1);
 
@@ -109,7 +109,7 @@ void UIcolorEditor::initButtons() {
 
     QHBoxLayout *h2 = new QHBoxLayout();
     h2->addWidget(frame2);
-    m_labelContrast = new QLabel(tr("Contrast Color"), this);
+    m_labelContrast = new ClickableLabel(tr("Contrast Color"), this);
     m_labelContrast->setStyleSheet("QLabel { color : gray; }");
     h2->addWidget(m_labelContrast);
     vLayout->addLayout(h2);
@@ -122,6 +122,11 @@ void UIcolorEditor::initButtons() {
             this, &UIcolorEditor::changeLastButton);
     connect(m_buttonContrast, &Button::pressedButton,
             this, &UIcolorEditor::changeLastButton);
+    // clicking the labels chages the button too
+    connect(m_labelMain, &ClickableLabel::clicked,
+            this, [this]{ changeLastButton(m_buttonMainColor); });
+    connect(m_labelContrast, &ClickableLabel::clicked,
+            this, [this]{ changeLastButton(m_buttonContrast); });
 }
 
 void UIcolorEditor::updateButtonIcon() {
