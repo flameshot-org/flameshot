@@ -157,14 +157,15 @@ QString Button::getStyle(const QColor &mainColor) {
                         "Button:pressed:!hover { "
                         "background-color: %1; }";
 
+    // define color when mouse is hovering
     QColor contrast(mainColor.darker(120));
     if (mainColor.value() < m_colorValueLimit ||
             mainColor.saturation() > m_colorSaturationLimit) {
-        contrast = mainColor.lighter(160);
+        contrast = mainColor.lighter(140);
     }
 
-    QString color = "black";
-    if (iconIsWhite(mainColor)) { color = "white"; }
+    // foreground color
+    QString color = iconIsWhite(mainColor) ? "white" : "black";
 
     return baseSheet.arg(mainColor.name()).arg(contrast.name())
             .arg(BUTTON_SIZE/2).arg(color);
