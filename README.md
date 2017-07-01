@@ -59,28 +59,43 @@ Check out the information window to see all the available shortcuts in the graph
 
 ## Compilation
 ### Debian
-Dependencies:
+Compilation Dependencies:
 ````
 apt install -y git g++ build-essential qt5-qmake qt5-default
 ````
 
 Compilation: run `qmake && make` in the main directory.
 
+Runtime Dependencies (not needed if compiled from source):
+````
+apt install -y libqt5dbus5, libqt5network5, libqt5core5a, libqt5widgets5, libqt5gui5
+````
+
 ### Fedora
-Dependencies:
+Compilation Dependencies:
 ````
 dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory.
 
+Runtime Dependencies (not needed if compiled from source):
+````
+dnf install -y qt5-qtbase
+````
+
 ### Arch
-Dependencies:
+Compilation Dependencies:
 ````
 pacman -S git qt5-base base-devel
 ````
 
 Compilation:  run `qmake && make` in the main directory.
+
+Runtime Dependencies (not needed if compiled from source):
+````
+pacman -S qt5-base
+````
 
 ## Install
 
