@@ -1,6 +1,6 @@
 # Flameshot
 ![image](./img/flameshot.png) 
-> Powerfull yet simple to use screenshot software.
+> Powerful yet simple to use screenshot software.
 
 ## Usage Preview
 ![image](./img/appPreview/animatedUsage.gif)

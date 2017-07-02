@@ -1,17 +1,46 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="org.dharkael.Flameshot">
+      
+    <!--
+      openCapture:
+      Opens the user interface used to capture pictures of the screen.
+    -->
     <method name="openCapture">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    
+    <!--
+      openCaptureWithPath:
+      @path: the path where the screenshot will be saved
+    
+      Opens the user interface used to capture pictures of the screen with
+      a predefined save path (wont ask for it when saving the capture).
+    -->
     <method name="openCaptureWithPath">
       <arg name="path" type="s" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    
+    <!--
+      fullScreen:
+      @toClipboard: Whether to copy the screenshot to clipboard or not
+    
+      Takes a simple screenshot of the whole screen.
+    -->
     <method name="fullScreen">
       <arg name="toClipboard" type="b" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    
+    <!--
+      fullScreenWithPath:
+      @path: the path where the screenshot will be saved
+      @toClipboard: Whether to copy the screenshot to clipboard or not
+    
+      Takes a simple screenshot of the whole screen with
+      a predefined save path (wont ask for it when saving the capture).
+    -->
     <method name="fullScreenWithPath">
       <arg name="path" type="s" direction="in"/>
       <arg name="toClipboard" type="b" direction="in"/>
