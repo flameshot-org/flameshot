@@ -20,12 +20,14 @@
 #include <QListWidgetItem>
 #include <QListWidgetItem>
 #include <QSettings>
+#include <algorithm>
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
 
     QSettings settings;
     m_listButtons = settings.value("buttons").value<QList<int> >();
+
     initButtonList();
 
     connect(this, &QListWidget::itemChanged, this,
@@ -62,11 +64,15 @@ void ButtonListView::initButtonList() {
 
 void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     int buttonIndex = static_cast<int>(Button::getTypeByName(item->text()));
+
     if (item->checkState() == Qt::Checked) {
         m_listButtons.append(buttonIndex);
+        std::sort(m_listButtons.begin(), m_listButtons.end());
+
     } else {
         m_listButtons.removeOne(buttonIndex);
     }
+
     QSettings().setValue("buttons", QVariant::fromValue(m_listButtons));
 }
 

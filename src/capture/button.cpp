@@ -246,7 +246,7 @@ size_t Button::getButtonBaseSize() {
 Button::Type Button::getTypeByName(const QString s) {
     Button::Type res = Type::last;
     for (auto i: typeName.toStdMap())
-        if (i.second == s)
+        if (tr(i.second) == s)
             res = i.first;
     return res;
 }
