@@ -8,6 +8,7 @@
 ## Index
 - [Features](#features)
 - [Usage](#usage)
+- [Shortcuts](#shortcuts)
 - [Considerations](#considerations)
 - [Compilation](#compilation)
   - [Debian](#debian)
@@ -47,6 +48,20 @@ A systray icon will be in your system's panel while Flameshot is running.
 Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
 Check out the information window to see all the available shortcuts in the graphical capture mode.
 
+## Shortcuts
+
+These shortcuts are available in GUI mode:
+
+|  Keys         |  Description                |
+|---            |---                          |
+|  ←↓↑→         | Move selection 1px          |
+| SHIFT + ←↓↑→  | Resize selection 1px        |
+| ESC           | Quit capture                |
+| CTRL + C      | Copy to clipboard           |
+| CTRL + S      | Save selection as a file    |
+| CTRL + Z      | Undo the last modification  |
+| Right Click   | Show color picker           |
+
 ## Considerations
 
 - **Not working on Wayland**
@@ -55,7 +70,9 @@ Check out the information window to see all the available shortcuts in the graph
 
 - In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
 
-- Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard!
+- Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing `Ctrl + S` will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
+
+- Execute `flameshot` without parameters to launch a running instance of the program without taking actions.
 
 ## Compilation
 ### Debian
