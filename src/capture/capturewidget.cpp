@@ -440,16 +440,23 @@ void CaptureWidget::openURL(QNetworkReply *reply) {
         QString url = QString("http://i.imgur.com/%1.png").arg(imageID);
         bool successful = QDesktopServices::openUrl(url);
         if (!successful) {
-            QMessageBox openErrBox(QMessageBox::Warning, QObject::tr("Resource Error"),
-                                   QObject::tr("Unable to open the URL."));
-                        openErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
-                        openErrBox.exec();
+            QMessageBox *openErrBox =
+                    new QMessageBox(QMessageBox::Warning,
+                                    QObject::tr("Resource Error"),
+                                    QObject::tr("Unable to open the URL."));
+            openErrBox->setModal(false);
+            openErrBox->setAttribute(Qt::WA_DeleteOnClose);
+            openErrBox->setWindowIcon(QIcon(":img/flameshot.png"));
+            openErrBox->show();
         }
     } else {
-        QMessageBox netErrBox(QMessageBox::Warning, "Network Error",
-                               reply->errorString());
-                    netErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
-                    netErrBox.exec();
+        QMessageBox *netErrBox =
+                new QMessageBox(QMessageBox::Warning, "Network Error",
+                                reply->errorString());
+        netErrBox->setModal(false);
+        netErrBox->setAttribute(Qt::WA_DeleteOnClose);
+        netErrBox->setWindowIcon(QIcon(":img/flameshot.png"));
+        netErrBox->show();
     }
     close();
 }
