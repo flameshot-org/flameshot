@@ -37,6 +37,7 @@
 #include <QClipboard>
 #include <QSettings>
 #include <QNetworkReply>
+#include <QMessageBox>
 #include <QDesktopServices>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
@@ -437,7 +438,18 @@ void CaptureWidget::openURL(QNetworkReply *reply) {
         QString data = QString::fromUtf8(reply->readAll());
         QString imageID = data.split("\"").at(5);
         QString url = QString("http://i.imgur.com/%1.png").arg(imageID);
-        QDesktopServices::openUrl(url);
+        bool successful = QDesktopServices::openUrl(url);
+        if (!successful) {
+            QMessageBox openErrBox(QMessageBox::Warning, QObject::tr("Resource Error"),
+                                   QObject::tr("Unable to open the URL."));
+                        openErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
+                        openErrBox.exec();
+        }
+    } else {
+        QMessageBox netErrBox(QMessageBox::Warning, "Network Error",
+                               reply->errorString());
+                    netErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
+                    netErrBox.exec();
     }
     close();
 }
