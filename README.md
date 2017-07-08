@@ -15,6 +15,7 @@
   - [Fedora](#fedora)
   - [Arch](#arch)
   - [Install](#install)
+- [Packaging](#packaging)
 - [License](#license)
 
 ## Features
@@ -83,11 +84,6 @@ apt install -y git g++ build-essential qt5-qmake qt5-default
 
 Compilation: run `qmake && make` in the main directory.
 
-Runtime Dependencies (not needed if compiled from source):
-````
-apt install -y libqt5dbus5, libqt5network5, libqt5core5a, libqt5widgets5, libqt5gui5
-````
-
 ### Fedora
 Compilation Dependencies:
 ````
@@ -95,11 +91,6 @@ dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory.
-
-Runtime Dependencies (not needed if compiled from source):
-````
-dnf install -y qt5-qtbase
-````
 
 ### Arch
 Compilation Dependencies:
@@ -109,14 +100,36 @@ pacman -S git qt5-base base-devel
 
 Compilation:  run `qmake && make` in the main directory.
 
-Runtime Dependencies (not needed if compiled from source):
-````
-pacman -S qt5-base
-````
-
-## Install
+### Install
 
 Simply use `make install` with privileges.
+
+## Packaging
+
+In order to generate the makefile installing in `/usr` instead of in `/usr/local` you can use the `packaging` option to generate the proper makefile (`qmake CONFIG+=packaging` instead of just `qmake`).
+
+If you want to install in a custom directory you can define the `BASEDIR` variable.
+
+**Example**:
+You whant to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
+`qmake CONFIG+=packaging BASEDIR=~/myBuilds/test && make install`
+
+### Runtime Dependencies
+
+**Debian**:
+````
+libqt5dbus5, libqt5network5, libqt5core5a, libqt5widgets5, libqt5gui5
+````
+
+**Fedora**:
+````
+qt5-qtbase
+````
+
+**Arch**:
+````
+qt5-base
+````
 
 ## License
 - The main code is licensed under [GPLv3](./LICENSE)

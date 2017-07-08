@@ -13,6 +13,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG    += c++11
 CONFIG    += link_pkgconfig
 
+#CONFIG    += packaging   # Enables "make install" for packaging paths
+
 TARGET = flameshot
 TEMPLATE = app
 
@@ -70,27 +72,41 @@ RESOURCES += \
 
 # installs
 unix: {
-    target.path = /usr/local/bin/
+    packaging {
+        USRPATH = /usr
+    } else {
+        USRPATH = /usr/local
+    }
 
-    qmfile.path = /usr/share/flameshot/translations/
+    target.path = $${BASEDIR}$${USRPATH}/bin/
+
+    qmfile.path = $${BASEDIR}/usr/share/flameshot/translations/
     qmfile.files = translation/Internationalization_es.qm
 
-    servicedbus.path = /usr/share/dbus-1/services/
-    servicedbus.files = dbus/org.dharkael.Flameshot.service
-
-    dbus.path = /usr/share/dbus-1/interfaces/
+    dbus.path = $${BASEDIR}/usr/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
     
-    icon.path = /usr/local/share/icons/
+    icon.path = $${BASEDIR}$${USRPATH}/share/icons/
     icon.files = img/flameshot.png
     
-    desktopentry.path = /usr/local/share/applications
-    desktopentry.files = docs/desktopEntry/make/flameshot.desktop
+    desktopentry.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentryinit.path = $${BASEDIR}$${USRPATH}/share/applications
+    servicedbus.path = $${BASEDIR}/usr/share/dbus-1/services/
 
+    packaging {
+        desktopentry.files = docs/desktopEntry/package/flameshot.desktop
+        desktopentryinit.files = docs/desktopEntry/package/flameshot-init.desktop
+        servicedbus.files = dbus/package/org.dharkael.Flameshot.service
+    } else {
+        desktopentry.files = docs/desktopEntry/make/flameshot.desktop
+        desktopentryinit.files = docs/desktopEntry/make/flameshot-init.desktop
+        servicedbus.files = dbus/make/org.dharkael.Flameshot.service
+    }
 
     INSTALLS += target \
         icon \
         desktopentry \
+        desktopentryinit \
         qmfile \
         servicedbus \
         dbus
