@@ -52,7 +52,8 @@ SOURCES += src/main.cpp\
     src/config/clickablelabel.cpp \
     src/config/filenameeditor.cpp \
     src/utils/filenamehandler.cpp \
-    src/config/strftimechooserwidget.cpp
+    src/config/strftimechooserwidget.cpp \
+    src/capture/screengrabber.cpp
 
 HEADERS  += \
     src/controller.h \
@@ -71,7 +72,8 @@ HEADERS  += \
     src/config/clickablelabel.h \
     src/config/filenameeditor.h \
     src/utils/filenamehandler.h \
-    src/config/strftimechooserwidget.h
+    src/config/strftimechooserwidget.h \
+    src/capture/screengrabber.h
 
 RESOURCES += \
     graphics.qrc

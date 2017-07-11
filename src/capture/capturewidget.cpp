@@ -26,10 +26,10 @@
 #include "capturewidget.h"
 #include "button.h"
 #include "src/capture/colorpicker.h"
-#include <QScreen>
-#include <QWindow>
+#include "src/capture/screengrabber.h"
 #include <QGuiApplication>
 #include <QApplication>
+#include <QScreen>
 #include <QShortcut>
 #include <QPainter>
 #include <QPaintEvent>
@@ -39,7 +39,6 @@
 #include <QNetworkReply>
 #include <QMessageBox>
 #include <QDesktopServices>
-#include <QDebug>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -81,8 +80,9 @@ CaptureWidget::CaptureWidget(bool enableSaveWindow, QWidget *parent) :
     initShortcuts();
 
     // init content
-    createCapture();
-    QSize size = m_screenshot->getScreenshot().size();
+    QPixmap fullScreenshot(ScreenGrabber().grabEntireDesktop());
+    m_screenshot = new Screenshot(fullScreenshot, this);
+    QSize size = fullScreenshot.size();
     // we need to increase by 1 the size to reach to the end of the screen
     setGeometry(0 ,0 , size.width()+1, size.height()+1);
 
@@ -561,17 +561,6 @@ void CaptureWidget::leaveButton() {
 }
 void CaptureWidget::enterButton() {
     m_onButton = true;
-}
-
-void CaptureWidget::createCapture() {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    if (const QWindow *window = windowHandle())
-        screen = window->screen();
-    if (!screen){
-        close();
-        return;
-    }
-    m_screenshot = new Screenshot(screen->grabWindow(0), this);
 }
 
 void CaptureWidget::initShortcuts() {

@@ -107,7 +107,6 @@ protected:
     QVector<QRect*> m_Handles;
 
 private:
-    void createCapture();
     void uploadScreenshot();
     void initShortcuts();
     void updateHandles();
