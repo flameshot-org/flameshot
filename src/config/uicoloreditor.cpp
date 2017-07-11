@@ -133,19 +133,22 @@ void UIcolorEditor::updateButtonIcon() {
     m_lastButtonPressed->setIcon(Button::getIcon(m_buttonMainColor->getButtonType()));
 }
 
+// visual update for the selected button
 void UIcolorEditor::changeLastButton(Button *b) {
     if (m_lastButtonPressed != b) {
         m_lastButtonPressed->setIcon(QIcon());
         m_lastButtonPressed = b;
 
+        QString offStyle("QLabel { color : gray; }");
+
         if (b == m_buttonMainColor) {
             m_colorWheel->setColor(m_uiColor);
-            m_labelContrast->setStyleSheet("QLabel { color : gray; }");
-            m_labelMain->setStyleSheet("QLabel { color : white; }");
+            m_labelContrast->setStyleSheet(offStyle);
+            m_labelMain->setStyleSheet(styleSheet());
         } else {
             m_colorWheel->setColor(m_contrastColor);
-            m_labelContrast->setStyleSheet("QLabel { color : white; }");
-            m_labelMain->setStyleSheet("QLabel { color : gray; }");
+            m_labelContrast->setStyleSheet(styleSheet());
+            m_labelMain->setStyleSheet(offStyle);
         }
         b->setIcon(b->getIcon(m_buttonIconType));
     }
