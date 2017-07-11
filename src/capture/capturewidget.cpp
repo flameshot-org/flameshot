@@ -39,6 +39,7 @@
 #include <QNetworkReply>
 #include <QMessageBox>
 #include <QDesktopServices>
+#include <QDebug>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -68,9 +69,8 @@ CaptureWidget::CaptureWidget(bool enableSaveWindow, QWidget *parent) :
 
     m_Handles << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
     << &m_LHandle << &m_THandle << &m_RHandle << &m_BHandle;
-    // set base config of the widget
-    move(0,0);
 
+    // set base config of the widget
     setWindowFlags(Qt::BypassWindowManagerHint
                    | Qt::WindowStaysOnTopHint
                    | Qt::FramelessWindowHint
@@ -79,16 +79,17 @@ CaptureWidget::CaptureWidget(bool enableSaveWindow, QWidget *parent) :
     setMouseTracking(true);
     setCursor(Qt::CrossCursor);
     initShortcuts();
+
+    // init content
+    createCapture();
+    QSize size = m_screenshot->getScreenshot().size();
+    // we need to increase by 1 the size to reach to the end of the screen
+    setGeometry(0 ,0 , size.width()+1, size.height()+1);
+
     // create buttons
     m_buttonHandler = new ButtonHandler(this);
     updateButtons();
     m_buttonHandler->hide();
-    // init screenshot
-    createCapture();
-    QSize size = m_screenshot->getScreenshot().size();
-    // we need to increase by 1 the size to reach to the end of the screen
-    resize(size.width()+1, size.height()+1);
-
     // init interface color
     m_colorPicker = new ColorPicker(this);
     m_colorPicker->hide();
