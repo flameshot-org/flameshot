@@ -30,3 +30,7 @@
     - value: "showDesktopNotification"
     - type: bool
     - description: show every desktop notification.
+- filename pattern
+    - value: "filenamePattern"
+    - type: QString
+    - description: pattern for the saved files.

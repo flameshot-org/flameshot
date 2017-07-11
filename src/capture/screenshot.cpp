@@ -18,10 +18,10 @@
 #include "screenshot.h"
 #include "button.h"
 #include "capturemodification.h"
+#include "src/utils/filenamehandler.h"
 #include <QStandardPaths>
 #include <QIcon>
 #include <QSettings>
-#include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <QMessageBox>
@@ -72,8 +72,9 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
             savePath = QDir::currentPath();
         }
     }
+
+    QString tempName = "/"+ FileNameHandler().getParsedPattern();
     // find unused name adding _n where n is a number
-    QString tempName = QObject::tr("/screenshot");
     QFileInfo checkFile(savePath + tempName + "." + format);
     if (checkFile.exists()) {
         tempName += "_";
@@ -291,8 +292,7 @@ void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
                                const QRect &selection)
 {
     QString title ="flameshot_screenshot";
-    QString datetime = QDateTime().toString();
-    QString description = "flameshot " + datetime;
+    QString description = FileNameHandler().getParsedPattern();
     QPixmap pixToSave;
     if (selection.isEmpty()) {
         pixToSave = m_modifiedScreenshot;

@@ -20,18 +20,18 @@
 #include "src/config/buttonlistview.h"
 #include "src/config/uicoloreditor.h"
 #include "src/config/geneneralconf.h"
+#include "src/config/filenameeditor.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QKeyEvent>
-#include <QFrame>
 
 // ConfigWindow contains the menus where you can configure the application
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFixedSize(400, 450);
+    setFixedSize(410, 540);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
@@ -56,6 +56,13 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
     ButtonListView *m_buttonListView = new ButtonListView(this);
     m_buttonListView->setFlow(QListWidget::TopToBottom);
     m_layout->addWidget(m_buttonListView);
+
+    // name editor
+    QLabel *nameEditLabel = new QLabel(tr("Filename editor"), this);
+    m_layout->addWidget(nameEditLabel);
+
+    FileNameEditor *nameEditor = new FileNameEditor(this);
+    m_layout->addWidget(nameEditor);
 
     show();
 }

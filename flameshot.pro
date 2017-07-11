@@ -49,7 +49,10 @@ SOURCES += src/main.cpp\
     src/config/uicoloreditor.cpp \
     src/config/geneneralconf.cpp \
     src/flameshotdbusadapter.cpp \
-    src/config/clickablelabel.cpp
+    src/config/clickablelabel.cpp \
+    src/config/filenameeditor.cpp \
+    src/utils/filenamehandler.cpp \
+    src/config/strftimechooserwidget.cpp
 
 HEADERS  += \
     src/controller.h \
@@ -65,7 +68,10 @@ HEADERS  += \
     src/config/uicoloreditor.h \
     src/config/geneneralconf.h \
     src/flameshotdbusadapter.h \
-    src/config/clickablelabel.h
+    src/config/clickablelabel.h \
+    src/config/filenameeditor.h \
+    src/utils/filenamehandler.h \
+    src/config/strftimechooserwidget.h
 
 RESOURCES += \
     graphics.qrc
