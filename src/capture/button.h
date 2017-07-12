@@ -45,9 +45,6 @@ public:
         exit,
         imageUploader,
         last, // used for iteration over the enum
-        text,
-        mouseVisibility,
-        colorPicker
     };
 
     explicit Button(const Type, QWidget *parent = 0);

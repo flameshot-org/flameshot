@@ -97,7 +97,6 @@ void Controller::initDefaults() {
         settings.setValue("showHelp", true);
         settings.setValue("showDesktopNotification", true);
         settings.setValue("drawColor", QColor(Qt::red));
-        //settings.setValue("mouseVisible", false);
         settings.setValue("uiColor", QColor(116, 0, 150));
         settings.setValue("contastUiColor", QColor(86, 0, 120));
 

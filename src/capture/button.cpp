@@ -80,17 +80,6 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     }
     QString path = ":/img/buttonIcons" + iconColor + "/";
 
-//    if (t == Type::mouseVisibility) {
-//        QSettings settings;
-//        bool mouseVisible = settings.value("mouseVisible").toBool();
-//        if (mouseVisible){
-//            path += "mouse.svg";
-//        } else {
-//            path += "mouse-off.svg";
-//        }
-//        return QIcon(path);
-//    }
-
     switch (t) {
     case Type::arrow:
         path += "arrow-bottom-left.png";
@@ -190,14 +179,6 @@ void Button::mouseReleaseEvent(QMouseEvent *e) {
     CaptureWidget *parent = static_cast<CaptureWidget*>(this->parent());
     parent->mouseReleaseEvent(e);
     if (e->button() == Qt::LeftButton && m_pressed) {
-//        if (m_buttonType == Type::mouseVisibility) {
-//            QSettings settings;
-//            bool mouseVisible = settings.value("mouseVisible").toBool();
-//            settings.setValue("mouseVisible", !mouseVisible);
-//            setIcon(getIcon(Type::mouseVisibility));
-//        } else if (m_buttonType == Type::colorPicker) {
-
-//        }
         Q_EMIT pressedButton(this);
     }
     m_pressed = false;

@@ -118,9 +118,6 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
         } else { // save full screen when no selection
             pixToSave = m_modifiedScreenshot.copy(selection);
         }
-//        if (settings.value("mouseVisible").toBool()) {
-//            // TO DO
-//        }
 
         saved = pixToSave.save(fileName);
         if (!saved) {
@@ -215,7 +212,6 @@ namespace {
         int originalLength = body.length();
         body.setLength(ArrowWidth);
         // move across the line up to the head
-        //QPointF  = ;
         QLineF temp(QPoint(0,0), p2-p1);
         temp.setLength(originalLength-ArrowHeight);
         QPointF bottonTranslation(temp.p2());
