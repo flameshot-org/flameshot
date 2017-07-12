@@ -37,7 +37,6 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp\
     src/controller.cpp \
-    src/capture/button.cpp \
     src/capture/buttonhandler.cpp \
     src/infowindow.cpp \
     src/config/configwindow.cpp \
@@ -52,11 +51,12 @@ SOURCES += src/main.cpp\
     src/config/clickablelabel.cpp \
     src/config/filenameeditor.cpp \
     src/utils/filenamehandler.cpp \
-    src/config/strftimechooserwidget.cpp
+    src/config/strftimechooserwidget.cpp \
+    src/capture/tools/capturetool.cpp \
+    src/capture/capturebutton.cpp
 
 HEADERS  += \
     src/controller.h \
-    src/capture/button.h \
     src/capture/buttonhandler.h \
     src/infowindow.h \
     src/config/configwindow.h \
@@ -71,7 +71,9 @@ HEADERS  += \
     src/config/clickablelabel.h \
     src/config/filenameeditor.h \
     src/utils/filenamehandler.h \
-    src/config/strftimechooserwidget.h
+    src/config/strftimechooserwidget.h \
+    src/capture/tools/capturetool.h \
+    src/capture/capturebutton.h
 
 RESOURCES += \
     graphics.qrc

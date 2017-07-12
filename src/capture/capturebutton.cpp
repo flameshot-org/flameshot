@@ -15,7 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "button.h"
+#include "capturebutton.h"
 #include "src/capture/capturewidget.h"
 #include <QIcon>
 #include <QPropertyAnimation>
@@ -30,12 +30,12 @@ namespace {
     const int BUTTON_SIZE = 30;
 }
 
-Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
+CaptureButton::CaptureButton(const Type t, QWidget *parent) : QPushButton(parent),
     m_buttonType(t), m_pressed(false)
 {
     initButton();
 
-    if (t == Button::Type::selectionIndicator) {
+    if (t == CaptureButton::Type::selectionIndicator) {
         QFont f = this->font();
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else {
@@ -43,12 +43,12 @@ Button::Button(const Type t, QWidget *parent) : QPushButton(parent),
     }
 }
 
-Button::Button(const Button::Type t, const bool isWhite, QWidget *parent)
+CaptureButton::CaptureButton(const CaptureButton::Type t, const bool isWhite, QWidget *parent)
     : QPushButton(parent), m_buttonType(t), m_pressed(false)
 {
     initButton();
 
-    if (t == Button::Type::selectionIndicator) {
+    if (t == CaptureButton::Type::selectionIndicator) {
         QFont f = this->font();
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else {
@@ -56,7 +56,7 @@ Button::Button(const Button::Type t, const bool isWhite, QWidget *parent)
     }
 }
 
-void Button::initButton() {
+void CaptureButton::initButton() {
     setFocusPolicy(Qt::NoFocus);
     resize(BUTTON_SIZE, BUTTON_SIZE);
     setMouseTracking(true);
@@ -73,7 +73,7 @@ void Button::initButton() {
 
 // getIcon returns the icon for the type of button, this method lets
 // you choose between black or white icons (needed for the config menu)
-QIcon Button::getIcon(const Type t, bool isWhite) {
+QIcon CaptureButton::getIcon(const Type t, bool isWhite) {
     QString iconColor = "Black";
     if (isWhite) {
         iconColor = "White";
@@ -86,9 +86,6 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
         break;
     case Type::circle:
         path += "circle-outline.png";
-        break;
-    case Type::colorPicker:
-        path += "square-outline.png";
         break;
     case Type::copy:
         path += "content-copy.png";
@@ -114,9 +111,6 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     case Type::save:
         path += "content-save.png";
         break;
-    case Type::text:
-        path += "format-text.png";
-        break;
     case Type::undo:
         path += "undo-variant.png";
         break;
@@ -132,13 +126,13 @@ QIcon Button::getIcon(const Type t, bool isWhite) {
     return QIcon(path);
 }
 
-QString Button::getStyle() {
+QString CaptureButton::getStyle() {
     QSettings settings;
     m_mainColor = settings.value("uiColor").value<QColor>();
     return getStyle(m_mainColor);
 }
 
-QString Button::getStyle(const QColor &mainColor) {
+QString CaptureButton::getStyle(const QColor &mainColor) {
     m_mainColor = mainColor;
     QString baseSheet = "Button { border-radius: %3;"
                         "background-color: %1; color: %4 }"
@@ -160,22 +154,22 @@ QString Button::getStyle(const QColor &mainColor) {
             .arg(BUTTON_SIZE/2).arg(color);
 }
 // get icon returns the icon for the type of button
-QIcon Button::getIcon(const Type t) {
+QIcon CaptureButton::getIcon(const Type t) {
     return getIcon(t, iconIsWhite(m_mainColor));
 }
 
-void Button::enterEvent(QEvent *e) {
+void CaptureButton::enterEvent(QEvent *e) {
     Q_EMIT hovered();
     QWidget::enterEvent(e);
 }
 
-void Button::leaveEvent(QEvent *e) {
+void CaptureButton::leaveEvent(QEvent *e) {
     m_pressed = false;
     Q_EMIT mouseExited();
     QWidget::leaveEvent(e);
 }
 
-void Button::mouseReleaseEvent(QMouseEvent *e) {
+void CaptureButton::mouseReleaseEvent(QMouseEvent *e) {
     CaptureWidget *parent = static_cast<CaptureWidget*>(this->parent());
     parent->mouseReleaseEvent(e);
     if (e->button() == Qt::LeftButton && m_pressed) {
@@ -184,29 +178,29 @@ void Button::mouseReleaseEvent(QMouseEvent *e) {
     m_pressed = false;
 }
 
-void Button::mousePressEvent(QMouseEvent *) {
+void CaptureButton::mousePressEvent(QMouseEvent *) {
     m_pressed = true;
 }
 
-void Button::animatedShow() {
+void CaptureButton::animatedShow() {
     show();
     emergeAnimation->start();
 }
 
-Button::Type Button::getButtonType() const {
+CaptureButton::Type CaptureButton::getButtonType() const {
     return m_buttonType;
 }
 
-void Button::updateIconColor(const QColor &c) {
+void CaptureButton::updateIconColor(const QColor &c) {
     setIcon(getIcon(m_buttonType, iconIsWhite(c)));
 }
 
-void Button::updateIconColor() {
+void CaptureButton::updateIconColor() {
     setIcon(getIcon(m_buttonType, iconIsWhite()));
 }
 // iconIsWhite returns true if the passed color would contain a white icon
 // if applied to a button, and false otherwise
-bool Button::iconIsWhite(const QColor &c) {
+bool CaptureButton::iconIsWhite(const QColor &c) {
     bool isWhite = false;
     if (c.value() < m_colorValueLimit ||
             c.saturation() > m_colorSaturationLimit) {
@@ -215,69 +209,63 @@ bool Button::iconIsWhite(const QColor &c) {
     return isWhite;
 }
 
-bool Button::iconIsWhite() const {
+bool CaptureButton::iconIsWhite() const {
     return iconIsWhite(m_mainColor);
 }
 // getButtonBaseSize returns the base size of the buttons
-size_t Button::getButtonBaseSize() {
+size_t CaptureButton::getButtonBaseSize() {
     return BUTTON_SIZE;
 }
 // getTypeByName receives a name and return the corresponding button type.
 // returns Button::Type::last when the corresponding button is not found.
-Button::Type Button::getTypeByName(const QString s) {
-    Button::Type res = Type::last;
+CaptureButton::Type CaptureButton::getTypeByName(const QString s) {
+    CaptureButton::Type res = Type::last;
     for (auto i: typeName.toStdMap())
         if (tr(i.second) == s)
             res = i.first;
     return res;
 }
 
-QString Button::getTypeName(const Button::Type t) {
+QString CaptureButton::getTypeName(const CaptureButton::Type t) {
     return tr(typeName[t]);
 }
 
-QString Button::getTypeTooltip(const Button::Type t) {
+QString CaptureButton::getTypeTooltip(const CaptureButton::Type t) {
     return tr(typeTooltip[t]);
 }
 
-Button::typeData Button::typeTooltip = {
-        {Button::Type::selectionIndicator, QT_TR_NOOP("Shows the dimensions of the selection (X Y)")},
-        {Button::Type::mouseVisibility, QT_TR_NOOP("Sets the visibility of the mouse pointer")},
-        {Button::Type::exit, QT_TR_NOOP("Leaves the capture screen")},
-        {Button::Type::copy, QT_TR_NOOP("Copies the selecion into the clipboard")},
-        {Button::Type::save, QT_TR_NOOP("Opens the save image window")},
-        {Button::Type::pencil, QT_TR_NOOP("Sets the Pencil as the paint tool")},
-        {Button::Type::line, QT_TR_NOOP("Sets the Line as the paint tool")},
-        {Button::Type::arrow, QT_TR_NOOP("Sets the Arrow as the paint tool")},
-        {Button::Type::rectangle, QT_TR_NOOP("Sets the Rectangle as the paint tool")},
-        {Button::Type::circle, QT_TR_NOOP("Sets the Circle as the paint tool")},
-        {Button::Type::marker, QT_TR_NOOP("Sets the Marker as the paint tool")},
-        {Button::Type::text, QT_TR_NOOP("Sets the Text as the paint tool")},
-        {Button::Type::colorPicker, QT_TR_NOOP("Opens the color picker widget")},
-        {Button::Type::undo, QT_TR_NOOP("Undo the last modification")},
-        {Button::Type::imageUploader, QT_TR_NOOP("Uploads the selection to Imgur")},
-        {Button::Type::selection, QT_TR_NOOP("Sets the Selection as the paint tool")},
-        {Button::Type::move, QT_TR_NOOP("Move the selection area")}
+CaptureButton::typeData CaptureButton::typeTooltip = {
+        {CaptureButton::Type::selectionIndicator, QT_TR_NOOP("Shows the dimensions of the selection (X Y)")},
+        {CaptureButton::Type::exit, QT_TR_NOOP("Leaves the capture screen")},
+        {CaptureButton::Type::copy, QT_TR_NOOP("Copies the selecion into the clipboard")},
+        {CaptureButton::Type::save, QT_TR_NOOP("Opens the save image window")},
+        {CaptureButton::Type::pencil, QT_TR_NOOP("Sets the Pencil as the paint tool")},
+        {CaptureButton::Type::line, QT_TR_NOOP("Sets the Line as the paint tool")},
+        {CaptureButton::Type::arrow, QT_TR_NOOP("Sets the Arrow as the paint tool")},
+        {CaptureButton::Type::rectangle, QT_TR_NOOP("Sets the Rectangle as the paint tool")},
+        {CaptureButton::Type::circle, QT_TR_NOOP("Sets the Circle as the paint tool")},
+        {CaptureButton::Type::marker, QT_TR_NOOP("Sets the Marker as the paint tool")},
+        {CaptureButton::Type::undo, QT_TR_NOOP("Undo the last modification")},
+        {CaptureButton::Type::imageUploader, QT_TR_NOOP("Uploads the selection to Imgur")},
+        {CaptureButton::Type::selection, QT_TR_NOOP("Sets the Selection as the paint tool")},
+        {CaptureButton::Type::move, QT_TR_NOOP("Move the selection area")}
 };
 
-Button::typeData Button::typeName = {
-    {Button::Type::selectionIndicator, QT_TR_NOOP("Selection Size Indicator")},
-    {Button::Type::mouseVisibility, QT_TR_NOOP("Mouse Visibility")},
-    {Button::Type::exit, QT_TR_NOOP("Exit")},
-    {Button::Type::copy, QT_TR_NOOP("Copy")},
-    {Button::Type::save, QT_TR_NOOP("Save")},
-    {Button::Type::pencil, QT_TR_NOOP("Pencil")},
-    {Button::Type::line, QT_TR_NOOP("Line")},
-    {Button::Type::arrow, QT_TR_NOOP("Arrow")},
-    {Button::Type::rectangle, QT_TR_NOOP("Rectangle")},
-    {Button::Type::circle, QT_TR_NOOP("Circle")},
-    {Button::Type::marker, QT_TR_NOOP("Marker")},
-    {Button::Type::text, QT_TR_NOOP("Text")},
-    {Button::Type::colorPicker, QT_TR_NOOP("Color Picker")},
-    {Button::Type::undo, QT_TR_NOOP("Undo")},
-    {Button::Type::imageUploader, QT_TR_NOOP("Image Uploader")},
-    {Button::Type::selection, QT_TR_NOOP("Rectangular Selection")},
-    {Button::Type::move, QT_TR_NOOP("Move")}
+CaptureButton::typeData CaptureButton::typeName = {
+    {CaptureButton::Type::selectionIndicator, QT_TR_NOOP("Selection Size Indicator")},
+    {CaptureButton::Type::exit, QT_TR_NOOP("Exit")},
+    {CaptureButton::Type::copy, QT_TR_NOOP("Copy")},
+    {CaptureButton::Type::save, QT_TR_NOOP("Save")},
+    {CaptureButton::Type::pencil, QT_TR_NOOP("Pencil")},
+    {CaptureButton::Type::line, QT_TR_NOOP("Line")},
+    {CaptureButton::Type::arrow, QT_TR_NOOP("Arrow")},
+    {CaptureButton::Type::rectangle, QT_TR_NOOP("Rectangle")},
+    {CaptureButton::Type::circle, QT_TR_NOOP("Circle")},
+    {CaptureButton::Type::marker, QT_TR_NOOP("Marker")},
+    {CaptureButton::Type::undo, QT_TR_NOOP("Undo")},
+    {CaptureButton::Type::imageUploader, QT_TR_NOOP("Image Uploader")},
+    {CaptureButton::Type::selection, QT_TR_NOOP("Rectangular Selection")},
+    {CaptureButton::Type::move, QT_TR_NOOP("Move")}
 };
 
-QColor Button::m_mainColor = QSettings().value("uiColor").value<QColor>();
+QColor CaptureButton::m_mainColor = QSettings().value("uiColor").value<QColor>();

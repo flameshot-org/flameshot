@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshot.h"
-#include "button.h"
+#include "capturebutton.h"
 #include "capturemodification.h"
 #include "src/utils/filenamehandler.h"
 #include <QStandardPaths>
@@ -184,7 +184,7 @@ QPixmap Screenshot::paintTemporalModification(
 {
     QPixmap tempPix = m_modifiedScreenshot;
     QPainter painter(&tempPix);
-    if (modification.getType() != Button::Type::pencil) {
+    if (modification.getType() != CaptureButton::Type::pencil) {
         painter.setRenderHint(QPainter::Antialiasing);
     }
     paintInPainter(painter, modification);
@@ -252,30 +252,30 @@ void Screenshot::paintInPainter(QPainter &painter,
     painter.setPen(QPen(modification.getColor(), 2));
     QVector<QPoint> points = modification.getPoints();
     switch (modification.getType()) {
-    case Button::Type::arrow:
+    case CaptureButton::Type::arrow:
         painter.drawLine(getShorterLine(points[0], points[1]));
         painter.fillPath(getArrowHead(points[0], points[1]),
                 QBrush(modification.getColor()));
         break;
-    case Button::Type::circle:
+    case CaptureButton::Type::circle:
         painter.drawEllipse(QRect(points[0], points[1]));
         break;
-    case Button::Type::line:
+    case CaptureButton::Type::line:
         painter.drawLine(points[0], points[1]);
         break;
-    case Button::Type::marker:
+    case CaptureButton::Type::marker:
         painter.setOpacity(0.35);
         painter.setPen(QPen(modification.getColor(), 14));
         painter.drawLine(points[0], points[1]);
         painter.setOpacity(1);
         break;
-    case Button::Type::pencil:
+    case CaptureButton::Type::pencil:
         painter.drawPolyline(points.data(), points.size());
         break;
-    case Button::Type::selection:
+    case CaptureButton::Type::selection:
         painter.drawRect(QRect(points[0], points[1]));
         break;
-    case Button::Type::rectangle:
+    case CaptureButton::Type::rectangle:
         painter.setBrush(QBrush(modification.getColor()));
         painter.drawRect(QRect(points[0], points[1]));
         break;

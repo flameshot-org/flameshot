@@ -21,16 +21,16 @@
 // CaptureModification is a single modification in the screenshot drawn
 // by the user.
 
-CaptureModification::CaptureModification(const Button::Type t, const QPoint p,
+CaptureModification::CaptureModification(const CaptureButton::Type t, const QPoint p,
                                          const QColor c) : m_color(c), m_type(t)
 {
     m_coords.append(p);
-    if (m_type == Button::Type::circle
-            || m_type == Button::Type::rectangle
-            || m_type == Button::Type::arrow
-            || m_type == Button::Type::line
-            || m_type == Button::Type::marker
-            || m_type == Button::Type::selection) {
+    if (m_type == CaptureButton::Type::circle
+            || m_type == CaptureButton::Type::rectangle
+            || m_type == CaptureButton::Type::arrow
+            || m_type == CaptureButton::Type::line
+            || m_type == CaptureButton::Type::marker
+            || m_type == CaptureButton::Type::selection) {
         m_coords.append(p);
     }
 }
@@ -39,7 +39,7 @@ CaptureModification::CaptureModification() {
 
 }
 
-Button::Type CaptureModification::getType() const {
+CaptureButton::Type CaptureModification::getType() const {
     return m_type;
 }
 
@@ -52,12 +52,12 @@ QVector<QPoint> CaptureModification::getPoints() const {
 }
 // addPoint adds a point to the vector of points
 void CaptureModification::addPoint(const QPoint p) {
-    if (m_type == Button::Type::circle
-            || m_type == Button::Type::rectangle
-            || m_type == Button::Type::arrow
-            || m_type == Button::Type::line
-            || m_type == Button::Type::marker
-            || m_type == Button::Type::selection) {
+    if (m_type == CaptureButton::Type::circle
+            || m_type == CaptureButton::Type::rectangle
+            || m_type == CaptureButton::Type::arrow
+            || m_type == CaptureButton::Type::line
+            || m_type == CaptureButton::Type::marker
+            || m_type == CaptureButton::Type::selection) {
         m_coords[1] = p;
     } else {
         m_coords.append(p);

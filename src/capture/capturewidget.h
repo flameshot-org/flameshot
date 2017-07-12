@@ -24,7 +24,7 @@
 #ifndef CAPTUREWIDGET_H
 #define CAPTUREWIDGET_H
 
-#include "button.h"
+#include "capturebutton.h"
 #include "buttonhandler.h"
 #include <QWidget>
 #include <QPointer>
@@ -41,7 +41,7 @@ class Screenshot;
 class CaptureWidget : public QWidget {
     Q_OBJECT
 
-    friend class Button;
+    friend class CaptureButton;
 
 public:
     explicit CaptureWidget(bool enableSaveWindow = true, QWidget *parent = 0);
@@ -67,7 +67,7 @@ private slots:
     void upResize();
     void downResize();
 
-    void setState(Button *);
+    void setState(CaptureButton *);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -115,10 +115,10 @@ private:
 
     QRect getExtendedSelection() const;
     QVector<CaptureModification> m_modifications;
-    QPointer<Button> m_sizeIndButton;
-    QPointer<Button> m_lastPressedButton;
+    QPointer<CaptureButton> m_sizeIndButton;
+    QPointer<CaptureButton> m_lastPressedButton;
 
-    Button::Type m_state;
+    CaptureButton::Type m_state;
     ButtonHandler *m_buttonHandler;
 
     QColor m_uiColor;

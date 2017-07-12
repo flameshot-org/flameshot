@@ -24,7 +24,7 @@
 #include "screenshot.h"
 #include "capturemodification.h"
 #include "capturewidget.h"
-#include "button.h"
+#include "capturebutton.h"
 #include "src/capture/colorpicker.h"
 #include <QScreen>
 #include <QWindow>
@@ -55,7 +55,7 @@ CaptureWidget::CaptureWidget(bool enableSaveWindow, QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
     m_onButton(false), m_enableSaveWindow(enableSaveWindow),
-    m_state(Button::Type::move)
+    m_state(CaptureButton::Type::move)
 {
     m_showInitialMsg = QSettings().value("showHelp").toBool();
 
@@ -107,22 +107,22 @@ void CaptureWidget::updateButtons() {
     m_contrastUiColor = settings.value("contastUiColor").value<QColor>();
 
     auto buttonsInt = settings.value("buttons").value<QList<int> >();
-    QVector<Button*> vectorButtons;
+    QVector<CaptureButton*> vectorButtons;
 
-    bool iconIsWhite = Button::iconIsWhite(m_uiColor);
-    QString buttonStyle = Button::getStyle(m_uiColor);
+    bool iconIsWhite = CaptureButton::iconIsWhite(m_uiColor);
+    QString buttonStyle = CaptureButton::getStyle(m_uiColor);
 
     for (auto i: buttonsInt) {
-        auto t = static_cast<Button::Type>(i);
-        Button *b = new Button(t, iconIsWhite, this);
-        if (t == Button::Type::selectionIndicator) {
+        auto t = static_cast<CaptureButton::Type>(i);
+        CaptureButton *b = new CaptureButton(t, iconIsWhite, this);
+        if (t == CaptureButton::Type::selectionIndicator) {
             m_sizeIndButton = b;
         }
         b->setStyleSheet(buttonStyle);
 
-        connect(b, &Button::hovered, this, &CaptureWidget::enterButton);
-        connect(b, &Button::mouseExited, this, &CaptureWidget::leaveButton);
-        connect(b, &Button::pressedButton, this, &CaptureWidget::setState);
+        connect(b, &CaptureButton::hovered, this, &CaptureWidget::enterButton);
+        connect(b, &CaptureButton::mouseExited, this, &CaptureWidget::leaveButton);
+        connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
         vectorButtons << b;
     }
     m_buttonHandler->setButtons(vectorButtons);
@@ -138,7 +138,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     // if we are creating a new modification to the screenshot we just draw
     // a temporal modification without antialiasing in the pencil tool for
     // performance. When we are not drawing we just shot the modified screenshot
-    if (m_mouseIsClicked && m_state != Button::Type::move) {
+    if (m_mouseIsClicked && m_state != CaptureButton::Type::move) {
         painter.drawPixmap(0, 0, m_screenshot->paintTemporalModification(
                                m_modifications.last()));
     } else {
@@ -167,7 +167,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         //same text and options to get the boundingRect that the text will have.
         QColor rectColor = m_uiColor;
         rectColor.setAlpha(180);
-        QColor textColor((Button::iconIsWhite(rectColor) ? Qt::white : Qt::black));
+        QColor textColor((CaptureButton::iconIsWhite(rectColor) ? Qt::white : Qt::black));
         painter.setPen(QPen(textColor));
         painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
         QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
@@ -213,7 +213,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
-        if (m_state != Button::Type::move) {
+        if (m_state != CaptureButton::Type::move) {
             m_modifications.append(CaptureModification(m_state, e->pos(),
                                                        m_colorPicker->getDrawColor()));
             return;
@@ -233,7 +233,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
 }
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
-    if (m_mouseIsClicked && m_state == Button::Type::move) {
+    if (m_mouseIsClicked && m_state == CaptureButton::Type::move) {
         m_mousePos = e->pos();
 
         if (m_newSelection) {
@@ -316,14 +316,14 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             if (m_rightClick) {
                 setCursor(Qt::ArrowCursor);
             } else if (m_selection.contains(e->pos()) && !m_onButton &&
-                    m_state == Button::Type::move) {
+                    m_state == CaptureButton::Type::move) {
                 setCursor(Qt::OpenHandCursor);
             } else if (m_onButton) {
                 setCursor(Qt::ArrowCursor);
             } else {
                 setCursor(Qt::CrossCursor);
             }
-        } else if (m_state == Button::Type::move){
+        } else if (m_state == CaptureButton::Type::move){
             // cursor on the handlers
             if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_BRHandle) {
                 setCursor(Qt::SizeFDiagCursor);
@@ -346,7 +346,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         return;
     // when we end the drawing of a modification in the capture we have to
     // register the last point and add the whole modification to the screenshot
-    } else if (m_mouseIsClicked && m_state != Button::Type::move) {
+    } else if (m_mouseIsClicked && m_state != CaptureButton::Type::move) {
         m_screenshot->paintModification(m_modifications.last());
     }
 
@@ -358,7 +358,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     m_mouseIsClicked = false;
     m_newSelection = false;
 
-    if (m_state == Button::Type::move && m_mouseOverHandle == 0 &&
+    if (m_state == CaptureButton::Type::move && m_mouseOverHandle == 0 &&
             m_selection.contains(e->pos())) {
         setCursor(Qt::OpenHandCursor);
     }
@@ -519,37 +519,36 @@ void CaptureWidget::downResize() {
     }
 }
 
-void CaptureWidget::setState(Button *b) {
-    Button::Type t = b->getButtonType();
-    if(t == Button::Type::selectionIndicator ||
-            t == Button::Type::colorPicker) {
+void CaptureWidget::setState(CaptureButton *b) {
+    CaptureButton::Type t = b->getButtonType();
+    if(t == CaptureButton::Type::selectionIndicator) {
         return;
     }
-    Button::Type newState = t;
+    CaptureButton::Type newState = t;
     if (m_state == t) {
-        newState =  Button::Type::move;
+        newState =  CaptureButton::Type::move;
     }
-    if (t == Button::Type::save) {
+    if (t == CaptureButton::Type::save) {
         m_enableSaveWindow ?
                     saveScreenshot() :
                     saveScreenshot(QSettings().value("savePath").toString());
-    } else if (t == Button::Type::copy) {
+    } else if (t == CaptureButton::Type::copy) {
         copyScreenshot();
-    } else if (t == Button::Type::exit) {
+    } else if (t == CaptureButton::Type::exit) {
         close();
-    } else if (t == Button::Type::undo) {
+    } else if (t == CaptureButton::Type::undo) {
         undo();
-    } else if (t == Button::Type::imageUploader) {
+    } else if (t == CaptureButton::Type::imageUploader) {
         uploadScreenshot();
     } else {
         m_state = newState;
         if (m_lastPressedButton) {
-            m_lastPressedButton->setStyleSheet(Button::getStyle());
+            m_lastPressedButton->setStyleSheet(CaptureButton::getStyle());
             m_lastPressedButton->updateIconColor();
         }
         m_lastPressedButton = b;
-        if (m_state != Button::Type::move) {
-            m_lastPressedButton->setStyleSheet(Button::getStyle(m_contrastUiColor));
+        if (m_state != CaptureButton::Type::move) {
+            m_lastPressedButton->setStyleSheet(CaptureButton::getStyle(m_contrastUiColor));
             m_lastPressedButton->updateIconColor(m_contrastUiColor);
         }
     }

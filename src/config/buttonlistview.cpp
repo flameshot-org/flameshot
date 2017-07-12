@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "buttonlistview.h"
-#include "src/capture/button.h"
+#include "src/capture/capturebutton.h"
 #include <QListWidgetItem>
 #include <QListWidgetItem>
 #include <QSettings>
@@ -37,8 +37,8 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
 }
 
 void ButtonListView::initButtonList() {
-    for (int i = 0; i != static_cast<int>(Button::Type::last); ++i) {
-        auto t = static_cast<Button::Type>(i);
+    for (int i = 0; i != static_cast<int>(CaptureButton::Type::last); ++i) {
+        auto t = static_cast<CaptureButton::Type>(i);
         QListWidgetItem *buttonItem = new QListWidgetItem(this);
 
         bool iconsAreWhite = false;
@@ -47,13 +47,13 @@ void ButtonListView::initButtonList() {
         if (bgColor.valueF() < 0.6) {
             iconsAreWhite = true;
         }
-        buttonItem->setIcon(Button::getIcon(t, iconsAreWhite));
+        buttonItem->setIcon(CaptureButton::getIcon(t, iconsAreWhite));
         buttonItem->setFlags(Qt::ItemIsUserCheckable);
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
         buttonItem->setTextColor(foregroundColor);
 
-        buttonItem->setText(Button::getTypeName(t));
-        buttonItem->setToolTip(Button::getTypeTooltip(t));
+        buttonItem->setText(CaptureButton::getTypeName(t));
+        buttonItem->setToolTip(CaptureButton::getTypeTooltip(t));
         if (m_listButtons.contains(i)) {
             buttonItem->setCheckState(Qt::Checked);
         } else {
@@ -63,7 +63,7 @@ void ButtonListView::initButtonList() {
 }
 
 void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
-    int buttonIndex = static_cast<int>(Button::getTypeByName(item->text()));
+    int buttonIndex = static_cast<int>(CaptureButton::getTypeByName(item->text()));
 
     if (item->checkState() == Qt::Checked) {
         m_listButtons.append(buttonIndex);

@@ -24,7 +24,7 @@
 class QWidget;
 class QPropertyAnimation;
 
-class Button : public QPushButton {
+class CaptureButton : public QPushButton {
     Q_OBJECT
     Q_ENUMS(Type)
 
@@ -47,17 +47,17 @@ public:
         last, // used for iteration over the enum
     };
 
-    explicit Button(const Type, QWidget *parent = 0);
-    explicit Button(const Type, const bool isWhite, QWidget *parent = 0);
+    explicit CaptureButton(const Type, QWidget *parent = 0);
+    explicit CaptureButton(const Type, const bool isWhite, QWidget *parent = 0);
 
     static QIcon getIcon(const Type);
     static QIcon getIcon(const Type, bool isWhite);
     static QString getStyle();
     static QString getStyle(const QColor &);
     static size_t getButtonBaseSize();
-    static Button::Type getTypeByName(const QString);
-    static QString getTypeName(const Button::Type);
-    static QString getTypeTooltip(const Button::Type);
+    static CaptureButton::Type getTypeByName(const QString);
+    static QString getTypeName(const CaptureButton::Type);
+    static QString getTypeTooltip(const CaptureButton::Type);
 
     Type getButtonType() const;
 
@@ -78,10 +78,10 @@ protected:
 signals:
     void hovered();
     void mouseExited();
-    void pressedButton(Button *);
+    void pressedButton(CaptureButton *);
 
 private:
-    Button(QWidget *parent = 0);
+    CaptureButton(QWidget *parent = 0);
     const Type m_buttonType;
     static const int m_colorValueLimit = 166;
     static const int m_colorSaturationLimit = 110;
@@ -89,7 +89,7 @@ private:
 
     QPropertyAnimation *emergeAnimation;
 
-    typedef QMap<Button::Type, const char *> typeData;
+    typedef QMap<CaptureButton::Type, const char *> typeData;
     static typeData typeTooltip;
     static typeData typeName;
     static QColor m_mainColor;

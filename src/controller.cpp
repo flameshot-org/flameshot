@@ -19,7 +19,7 @@
 #include "capture/capturewidget.h"
 #include "infowindow.h"
 #include "config/configwindow.h"
-#include "capture/button.h"
+#include "capture/capturebutton.h"
 #include <QAction>
 #include <QApplication>
 #include <QMenu>
@@ -41,7 +41,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     initDefaults();
     qApp->setQuitOnLastWindowClosed(false);
 
-    QString StyleSheet = Button::getStyle();
+    QString StyleSheet = CaptureButton::getStyle();
     qApp->setStyleSheet(StyleSheet);
 
 }
@@ -101,13 +101,13 @@ void Controller::initDefaults() {
         settings.setValue("contastUiColor", QColor(86, 0, 120));
 
         QList<int> buttons;
-        for (int i = 0; i < static_cast<int>(Button::Type::last); ++i) {
+        for (int i = 0; i < static_cast<int>(CaptureButton::Type::last); ++i) {
             buttons << i;
         }
         settings.setValue("buttons", QVariant::fromValue(buttons));
     } else {
         // disabled buttons cleanup
-        int higherValue = static_cast<int>(Button::Type::last) - 1;
+        int higherValue = static_cast<int>(CaptureButton::Type::last) - 1;
         QList<int> buttons = settings.value("buttons").value<QList<int> >();
 
         QMutableListIterator<int> i(buttons);

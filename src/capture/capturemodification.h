@@ -18,7 +18,7 @@
 #ifndef CAPTURECHANGE_H
 #define CAPTURECHANGE_H
 
-#include "button.h"
+#include "capturebutton.h"
 #include <QVector>
 
 class QPoint;
@@ -26,15 +26,15 @@ class QPoint;
 class CaptureModification {
 public:
     CaptureModification();
-    CaptureModification(const Button::Type, const QPoint, const QColor);
-    Button::Type getType() const;
+    CaptureModification(const CaptureButton::Type, const QPoint, const QColor);
+    CaptureButton::Type getType() const;
     QColor getColor() const;
     QVector<QPoint> getPoints() const;
     void addPoint(const QPoint);
 
 protected:
     QColor m_color;
-    Button::Type m_type;
+    CaptureButton::Type m_type;
 
 private:
     QVector<QPoint> m_coords;
