@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "flameshotdbusadapter.h"
-#include <QSettings>
+#include "src/utils/confighandler.h"
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(Controller *parent)
     : QDBusAbstractAdaptor(parent)
@@ -37,7 +37,7 @@ void FlameshotDBusAdapter::openCapture() {
 }
 
 void FlameshotDBusAdapter::openCaptureWithPath(QString path) {
-    QSettings().setValue("savePath", path);
+    ConfigHandler().setSavePath(path);
     parent()->createVisualCapture(false);
 }
 

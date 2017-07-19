@@ -15,11 +15,11 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
+#include "src/utils/confighandler.h"
 #include "uicoloreditor.h"
 #include "clickablelabel.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QSettings>
 #include <QComboBox>
 #include <QMap>
 
@@ -29,9 +29,9 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
     hLayout = new QHBoxLayout;
     vLayout = new QVBoxLayout;
 
-    QSettings settings;
-    m_uiColor = settings.value("uiColor").value<QColor>();
-    m_contrastColor = settings.value("contastUiColor").value<QColor>();
+    ConfigHandler config;
+    m_uiColor = config.getUIMainColor();
+    m_contrastColor = config.getUIContrastColor();
 
     initButtons();
     initColorWheel();
@@ -40,11 +40,11 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
 }
 // updateUIcolor updates the appearance of the buttons
 void UIcolorEditor::updateUIcolor() {
-    QSettings settings;
+    ConfigHandler config;
     if (m_lastButtonPressed == m_buttonMainColor) {
-        settings.setValue("uiColor", m_uiColor);
+        config.setUIMainColor(m_uiColor);
     } else {
-        settings.setValue("contastUiColor", m_contrastColor);
+        config.setUIContrastColor(m_contrastColor);
     }
 }
 // updateLocalColor updates the local button
@@ -54,9 +54,7 @@ void UIcolorEditor::updateLocalColor(const QColor c) {
     } else {
         m_contrastColor = c;
     }
-    QString style = Button::getStyle(c);
-    m_lastButtonPressed->setStyleSheet(style);
-    updateButtonIcon();
+    m_lastButtonPressed->setColor(c);
 }
 
 void UIcolorEditor::initColorWheel() {
@@ -77,7 +75,7 @@ void UIcolorEditor::initColorWheel() {
 
 void UIcolorEditor::initButtons() {
     const int extraSize = 10;
-    int frameSize = Button::getButtonBaseSize() + extraSize;
+    int frameSize = CaptureButton::getButtonBaseSize() + extraSize;
 
     vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));
 
@@ -86,7 +84,7 @@ void UIcolorEditor::initButtons() {
     frame->setFrameStyle(QFrame::StyledPanel);
 
 
-    m_buttonMainColor = new Button(m_buttonIconType, frame);
+    m_buttonMainColor = new CaptureButton(m_buttonIconType, frame);
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize/2, m_buttonMainColor->y() + extraSize/2);
     QHBoxLayout *h1 = new QHBoxLayout();
     h1->addWidget(frame);
@@ -101,9 +99,9 @@ void UIcolorEditor::initButtons() {
     frame2->setFixedSize(frameSize, frameSize);
     frame2->setFrameStyle(QFrame::StyledPanel);
 
-    m_buttonContrast = new Button(m_buttonIconType, frame2);
+    m_buttonContrast = new CaptureButton(m_buttonIconType, frame2);
     m_buttonContrast->setIcon(QIcon());
-    m_buttonContrast->setStyleSheet(Button::getStyle(m_contrastColor));
+    m_buttonContrast->setColor(m_contrastColor);
     m_buttonContrast->move(m_buttonContrast->x() + extraSize/2,
                            m_buttonContrast->y() + extraSize/2);
 
@@ -118,9 +116,9 @@ void UIcolorEditor::initButtons() {
                                       " mode of the contrast color."));
 
     m_lastButtonPressed = m_buttonMainColor;
-    connect(m_buttonMainColor, &Button::pressedButton,
+    connect(m_buttonMainColor, &CaptureButton::pressedButton,
             this, &UIcolorEditor::changeLastButton);
-    connect(m_buttonContrast, &Button::pressedButton,
+    connect(m_buttonContrast, &CaptureButton::pressedButton,
             this, &UIcolorEditor::changeLastButton);
     // clicking the labels chages the button too
     connect(m_labelMain, &ClickableLabel::clicked,
@@ -129,12 +127,8 @@ void UIcolorEditor::initButtons() {
             this, [this]{ changeLastButton(m_buttonContrast); });
 }
 
-void UIcolorEditor::updateButtonIcon() {
-    m_lastButtonPressed->setIcon(Button::getIcon(m_buttonMainColor->getButtonType()));
-}
-
 // visual update for the selected button
-void UIcolorEditor::changeLastButton(Button *b) {
+void UIcolorEditor::changeLastButton(CaptureButton *b) {
     if (m_lastButtonPressed != b) {
         m_lastButtonPressed->setIcon(QIcon());
         m_lastButtonPressed = b;
@@ -150,6 +144,6 @@ void UIcolorEditor::changeLastButton(Button *b) {
             m_labelContrast->setStyleSheet(styleSheet());
             m_labelMain->setStyleSheet(offStyle);
         }
-        b->setIcon(b->getIcon(m_buttonIconType));
+        b->setIcon(b->getIcon());
     }
 }

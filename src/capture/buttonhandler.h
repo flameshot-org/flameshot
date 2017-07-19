@@ -18,19 +18,19 @@
 #ifndef BUTTONHANDLER_H
 #define BUTTONHANDLER_H
 
-#include "button.h"
+#include "capturebutton.h"
 #include <QVector>
 #include <QObject>
 
-class Button;
+class CaptureButton;
 class QRect;
 class QPoint;
 
 class ButtonHandler : public QObject {
     Q_OBJECT
 public:
-    ButtonHandler(const QVector<Button*>&, QObject *parent = 0);
-    ButtonHandler(QObject *parent = 0);
+    ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
+    ButtonHandler(QObject *parent = nullptr);
 
     void hide();
     void show();
@@ -39,16 +39,17 @@ public:
     size_t size() const;
 
     void updatePosition(const QRect &selection, const QRect &limits);
-    void setButtons(const QVector<Button*>);
+    void setButtons(const QVector<CaptureButton*>);
 
 private:
     QVector<QPoint> getHPoints(const QPoint &center, const int elements,
                                const bool leftToRight) const;
     QVector<QPoint> getVPoints(const QPoint &center, const int elements,
                                const bool upToDown) const;
-    QVector<Button*> m_vectorButtons;
+    QVector<CaptureButton*> m_vectorButtons;
 
     int m_distance;
+    int m_buttonBaseSize;
 };
 
 #endif // BUTTONHANDLER_H

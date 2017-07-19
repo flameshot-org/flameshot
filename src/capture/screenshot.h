@@ -30,7 +30,7 @@ class QNetworkAccessManager;
 class Screenshot : public QObject {
    Q_OBJECT
 public:
-    Screenshot(const QPixmap &, QObject *parent = 0);
+    Screenshot(const QPixmap &, QObject *parent = nullptr);
     ~Screenshot();
 
     void setScreenshot(const QPixmap &);
@@ -41,16 +41,16 @@ public:
     QString fileSave(const QRect &selection = QRect()) const;
     void uploadToImgur(QNetworkAccessManager *,
                        const QRect &selection = QRect());
-    QPixmap paintModification(const CaptureModification &);
-    QPixmap paintTemporalModification(const CaptureModification &);
-    QPixmap paintBaseModifications(const QVector<CaptureModification> &);
+    QPixmap paintModification(const CaptureModification*);
+    QPixmap paintTemporalModification(const CaptureModification*);
+    QPixmap paintBaseModifications(const QVector<CaptureModification*> &);
 
 private:
     QPixmap m_baseScreenshot;
     QPixmap m_modifiedScreenshot;
     QPointer<QNetworkAccessManager> m_accessManager;
 
-    void paintInPainter(QPainter &, const CaptureModification &);
+    void paintInPainter(QPainter &, const CaptureModification *);
 };
 
 #endif // SCREENSHOT_H

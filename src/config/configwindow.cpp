@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "configwindow.h"
-#include "src/capture/button.h"
+#include "src/capture/capturebutton.h"
 #include "src/config/buttonlistview.h"
 #include "src/config/uicoloreditor.h"
 #include "src/config/geneneralconf.h"

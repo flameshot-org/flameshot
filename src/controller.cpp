@@ -17,13 +17,13 @@
 
 #include "controller.h"
 #include "capture/capturewidget.h"
+#include "src/utils/confighandler.h"
 #include "infowindow.h"
 #include "config/configwindow.h"
-#include "capture/button.h"
+#include "capture/capturebutton.h"
 #include <QAction>
 #include <QApplication>
 #include <QMenu>
-#include <QSettings>
 #include <QFile>
 
 // Controller is the core component of Flameshot, creates the trayIcon and
@@ -41,7 +41,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     initDefaults();
     qApp->setQuitOnLastWindowClosed(false);
 
-    QString StyleSheet = Button::getStyle();
+    QString StyleSheet = CaptureButton::getGlobalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
 }
@@ -90,34 +90,16 @@ void Controller::createTrayIcon() {
 
 // initDefaults inits the global config in the very first run of the program
 void Controller::initDefaults() {
-    QSettings settings;
-    //settings.setValue("initiated", false); // testing change
-    if (!settings.value("initiated").toBool()) {
-        settings.setValue("initiated", true);
-        settings.setValue("showHelp", true);
-        settings.setValue("showDesktopNotification", true);
-        settings.setValue("drawColor", QColor(Qt::red));
-        //settings.setValue("mouseVisible", false);
-        settings.setValue("uiColor", QColor(116, 0, 150));
-        settings.setValue("contastUiColor", QColor(86, 0, 120));
-
-        QList<int> buttons;
-        for (int i = 0; i < static_cast<int>(Button::Type::last); ++i) {
-            buttons << i;
-        }
-        settings.setValue("buttons", QVariant::fromValue(buttons));
-    } else {
-        // disabled buttons cleanup
-        int higherValue = static_cast<int>(Button::Type::last) - 1;
-        QList<int> buttons = settings.value("buttons").value<QList<int> >();
-
-        QMutableListIterator<int> i(buttons);
-        while (i.hasNext()) {
-            if (i.next() > higherValue) {
-                i.remove();
-            }
-        }
-        settings.setValue("buttons", QVariant::fromValue(buttons));
+    ConfigHandler config;
+    //config.setNotInitiated();
+    if (!config.initiatedIsSet()) {
+        config.setInitiated();
+        config.setShowHelp(true);
+        config.setDesktopNotification(true);
+        config.setDrawColor(QColor(Qt::red));
+        config.setUIMainColor(QColor(116, 0, 150));
+        config.setUIContrastColor(QColor(86, 0, 120));
+        config.setAllTheButtons();
     }
 }
 
@@ -158,7 +140,7 @@ void Controller::openInfoWindow() {
 }
 
 void Controller::showDesktopNotification(QString msg) {
-    bool showMessages = QSettings().value("showDesktopNotification").toBool();
+    bool showMessages = ConfigHandler().getDesktopNotification();
     if (showMessages && m_trayIcon->supportsMessages()) {
         m_trayIcon->showMessage("Flameshot Info", msg);
     }

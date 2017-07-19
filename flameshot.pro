@@ -37,7 +37,6 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp\
     src/controller.cpp \
-    src/capture/button.cpp \
     src/capture/buttonhandler.cpp \
     src/infowindow.cpp \
     src/config/configwindow.cpp \
@@ -53,11 +52,28 @@ SOURCES += src/main.cpp\
     src/config/filenameeditor.cpp \
     src/utils/filenamehandler.cpp \
     src/config/strftimechooserwidget.cpp \
-    src/capture/screengrabber.cpp
+    src/capture/screengrabber.cpp \
+    src/capture/tools/capturetool.cpp \
+    src/capture/capturebutton.cpp \
+    src/capture/tools/penciltool.cpp \
+    src/capture/tools/undotool.cpp \
+    src/capture/tools/arrowtool.cpp \
+    src/capture/tools/circletool.cpp \
+    src/capture/tools/copytool.cpp \
+    src/capture/tools/exittool.cpp \
+    src/capture/tools/imguruploadertool.cpp \
+    src/capture/tools/linetool.cpp \
+    src/capture/tools/markertool.cpp \
+    src/capture/tools/movetool.cpp \
+    src/capture/tools/rectangletool.cpp \
+    src/capture/tools/savetool.cpp \
+    src/capture/tools/selectiontool.cpp \
+    src/capture/tools/sizeindicatortool.cpp \
+    src/capture/tools/toolfactory.cpp \
+    src/utils/confighandler.cpp
 
 HEADERS  += \
     src/controller.h \
-    src/capture/button.h \
     src/capture/buttonhandler.h \
     src/infowindow.h \
     src/config/configwindow.h \
@@ -73,7 +89,25 @@ HEADERS  += \
     src/config/filenameeditor.h \
     src/utils/filenamehandler.h \
     src/config/strftimechooserwidget.h \
-    src/capture/screengrabber.h
+    src/capture/screengrabber.h \
+    src/capture/tools/capturetool.h \
+    src/capture/capturebutton.h \
+    src/capture/tools/penciltool.h \
+    src/capture/tools/undotool.h \
+    src/capture/tools/arrowtool.h \
+    src/capture/tools/circletool.h \
+    src/capture/tools/copytool.h \
+    src/capture/tools/exittool.h \
+    src/capture/tools/imguruploadertool.h \
+    src/capture/tools/linetool.h \
+    src/capture/tools/markertool.h \
+    src/capture/tools/movetool.h \
+    src/capture/tools/rectangletool.h \
+    src/capture/tools/savetool.h \
+    src/capture/tools/selectiontool.h \
+    src/capture/tools/sizeindicatortool.h \
+    src/capture/tools/toolfactory.h \
+    src/utils/confighandler.h
 
 RESOURCES += \
     graphics.qrc

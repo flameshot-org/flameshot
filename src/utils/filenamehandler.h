@@ -27,7 +27,6 @@ class FileNameHandler : public QObject
 public:
     explicit FileNameHandler(QObject *parent = nullptr);
 
-    QString getActualPattern();
     QString getParsedPattern();
     QString parseFilename(const QString &name);
 
@@ -35,6 +34,7 @@ public:
 
 public slots:
     void savePattern(const QString &pattern);
+    QString getAbsoluteSavePath();
 
 private:
     //using charArr = char[MAX_CHARACTERS];

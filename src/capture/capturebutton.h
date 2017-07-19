@@ -20,56 +20,52 @@
 
 #include <QPushButton>
 #include <QMap>
+#include <QVector>
 
 class QWidget;
 class QPropertyAnimation;
+class CaptureTool;
 
-class Button : public QPushButton {
+class CaptureButton : public QPushButton {
     Q_OBJECT
-    Q_ENUMS(Type)
+    Q_ENUMS(ButtonType)
 
 public:
-    enum class Type {
-        pencil,
-        line,
-        arrow,
-        selection,
-        rectangle,
-        circle,
-        marker,
-        selectionIndicator,
-        move,
-        undo,
-        copy,
-        save,
-        exit,
-        imageUploader,
-        last, // used for iteration over the enum
-        text,
-        mouseVisibility,
-        colorPicker
+    // Don't forget to add the new types to CaptureButton::iterableButtonTypes
+    // in the .cpp
+    enum ButtonType {
+        TYPE_PENCIL,
+        TYPE_LINE,
+        TYPE_ARROW,
+        TYPE_SELECTION,
+        TYPE_RECTANGLE,
+        TYPE_CIRCLE,
+        TYPE_MARKER,
+        TYPE_SELECTIONINDICATOR,
+        TYPE_MOVESELECTION,
+        TYPE_UNDO,
+        TYPE_COPY,
+        TYPE_SAVE,
+        TYPE_EXIT,
+        TYPE_IMAGEUPLOADER,
     };
 
-    explicit Button(const Type, QWidget *parent = 0);
-    explicit Button(const Type, const bool isWhite, QWidget *parent = 0);
+    CaptureButton() = delete;
+    explicit CaptureButton(const ButtonType, QWidget *parent = nullptr);
 
-    static QIcon getIcon(const Type);
-    static QIcon getIcon(const Type, bool isWhite);
-    static QString getStyle();
-    static QString getStyle(const QColor &);
     static size_t getButtonBaseSize();
-    static Button::Type getTypeByName(const QString);
-    static QString getTypeName(const Button::Type);
-    static QString getTypeTooltip(const Button::Type);
+    static bool iconIsWhiteByColor(const QColor &);
+    static QString getGlobalStyleSheet();
+    static QVector<CaptureButton::ButtonType> getIterableButtonTypes();
 
-    Type getButtonType() const;
+    QString getName() const;
+    QString getDescription() const;
+    QIcon getIcon() const;
+    QString getStyleSheet() const;
+    ButtonType getButtonType() const;
+    CaptureTool* getTool() const;
 
-    void updateIconColor(const QColor &);
-    void updateIconColor();
-
-    bool iconIsWhite() const;
-    static bool iconIsWhite(const QColor &);
-
+    void setColor(const QColor &c);
     void animatedShow();
 
 protected:
@@ -77,26 +73,26 @@ protected:
     virtual void leaveEvent(QEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void mousePressEvent(QMouseEvent *);
+    static QVector<ButtonType> iterableButtonTypes;
+
+    CaptureTool *m_tool;
 
 signals:
     void hovered();
     void mouseExited();
-    void pressedButton(Button *);
+    void pressedButton(CaptureButton *);
 
 private:
-    Button(QWidget *parent = 0);
-    const Type m_buttonType;
+    CaptureButton(QWidget *parent = 0);
+    ButtonType m_buttonType;
+    bool m_pressed;
+
     static const int m_colorValueLimit = 166;
     static const int m_colorSaturationLimit = 110;
-    bool m_pressed;
 
     QPropertyAnimation *emergeAnimation;
 
-    typedef QMap<Button::Type, const char *> typeData;
-    static typeData typeTooltip;
-    static typeData typeName;
     static QColor m_mainColor;
-
 
     void initButton();
 };

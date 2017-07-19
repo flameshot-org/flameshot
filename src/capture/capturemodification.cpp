@@ -15,31 +15,32 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
+//#include "src/capture/tools/capturetool.h"
 #include "capturemodification.h"
+#include "src/capture/tools/toolfactory.h"
+#include "src/capture/tools/capturetool.h"
 #include <QColor>
 
 // CaptureModification is a single modification in the screenshot drawn
 // by the user.
 
-CaptureModification::CaptureModification(const Button::Type t, const QPoint p,
-                                         const QColor c) : m_color(c), m_type(t)
+CaptureModification::CaptureModification(
+        const CaptureButton::ButtonType t,
+        const QPoint &p,
+        const QColor &c,
+        QObject *parent) :
+    QObject(parent),
+    m_color(c),
+    m_type(t)
 {
+    m_tool = ToolFactory().CreateTool(t, this);
     m_coords.append(p);
-    if (m_type == Button::Type::circle
-            || m_type == Button::Type::rectangle
-            || m_type == Button::Type::arrow
-            || m_type == Button::Type::line
-            || m_type == Button::Type::marker
-            || m_type == Button::Type::selection) {
+    if (m_tool->isSelectable()) {
         m_coords.append(p);
     }
 }
 
-CaptureModification::CaptureModification() {
-
-}
-
-Button::Type CaptureModification::getType() const {
+CaptureButton::ButtonType CaptureModification::getType() const {
     return m_type;
 }
 
@@ -50,14 +51,14 @@ QColor CaptureModification::getColor() const {
 QVector<QPoint> CaptureModification::getPoints() const {
     return m_coords;
 }
+
+CaptureTool* CaptureModification::getTool() const{
+    return m_tool;
+}
+
 // addPoint adds a point to the vector of points
 void CaptureModification::addPoint(const QPoint p) {
-    if (m_type == Button::Type::circle
-            || m_type == Button::Type::rectangle
-            || m_type == Button::Type::arrow
-            || m_type == Button::Type::line
-            || m_type == Button::Type::marker
-            || m_type == Button::Type::selection) {
+    if(m_tool->getToolType() == CaptureTool::TYPE_LINE_DRAWER) {
         m_coords[1] = p;
     } else {
         m_coords.append(p);

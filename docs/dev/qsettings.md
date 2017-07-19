@@ -10,10 +10,6 @@
     - value: "drawColor"
     - type: QColor
     - description: color of the drawing tools.
-- Mouse visibility
-    - value: "mouseVisible"
-    - type: bool
-    - description: visibility of the mouse in the capture.
 - UI color
     - value: "uiColor"
     - type: QColor
@@ -26,7 +22,7 @@
     - value: "showHelp"
     - type: bool
     - description: show Help messages in capture mode.
-- show Help message
+- show desktop notifications
     - value: "showDesktopNotification"
     - type: bool
     - description: show every desktop notification.

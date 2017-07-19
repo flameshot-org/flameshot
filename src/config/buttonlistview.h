@@ -19,10 +19,11 @@
 #define BUTTONLISTVIEW_H
 
 #include <QListWidget>
+#include "src/capture/capturebutton.h"
 
 class ButtonListView : public QListWidget {
 public:
-    ButtonListView(QWidget *parent= 0);
+    ButtonListView(QWidget *parent= nullptr);
 
 private slots:
     void updateActiveButtons(QListWidgetItem *);
@@ -33,6 +34,7 @@ protected:
 
 private:
     QList<int> m_listButtons;
+    QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 };
 
 #endif // BUTTONLISTVIEW_H

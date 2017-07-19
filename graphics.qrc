@@ -8,11 +8,8 @@
         <file>img/buttonIconsBlack/content-copy.png</file>
         <file>img/buttonIconsBlack/content-save.png</file>
         <file>img/buttonIconsBlack/exit-to-app.png</file>
-        <file>img/buttonIconsBlack/format-text.png</file>
         <file>img/buttonIconsBlack/line.png</file>
         <file>img/buttonIconsBlack/marker.png</file>
-        <file>img/buttonIconsBlack/mouse.png</file>
-        <file>img/buttonIconsBlack/mouse-off.png</file>
         <file>img/buttonIconsBlack/pencil.png</file>
         <file>img/buttonIconsBlack/square-outline.png</file>
         <file>img/buttonIconsBlack/undo-variant.png</file>
@@ -28,8 +25,6 @@
         <file>img/buttonIconsWhite/format-text.png</file>
         <file>img/buttonIconsWhite/line.png</file>
         <file>img/buttonIconsWhite/marker.png</file>
-        <file>img/buttonIconsWhite/mouse-off.png</file>
-        <file>img/buttonIconsWhite/mouse.png</file>
         <file>img/buttonIconsWhite/pencil.png</file>
         <file>img/buttonIconsBlack/cursor-move.png</file>
         <file>img/buttonIconsWhite/cursor-move.png</file>
