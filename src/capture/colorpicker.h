@@ -24,7 +24,7 @@ class ColorPicker : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ColorPicker(QWidget *parent = 0);
+    explicit ColorPicker(QWidget *parent = nullptr);
     ~ColorPicker();
 
     QColor getDrawColor();

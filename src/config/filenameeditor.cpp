@@ -17,6 +17,7 @@
 
 #include "filenameeditor.h"
 #include "src/utils/filenamehandler.h"
+#include "src/utils/confighandler.h"
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QPushButton>
@@ -47,7 +48,7 @@ void FileNameEditor::initWidgets() {
 
     connect(m_nameEditor, &QLineEdit::textChanged, this,
             &FileNameEditor::showParsedPattern);
-    m_nameEditor->setText(m_nameHandler->getActualPattern());
+    m_nameEditor->setText(ConfigHandler().getFilenamePattern());
     m_outputLabel->setText(m_nameHandler->getParsedPattern());
 
     connect(m_saveButton, &QPushButton::clicked, this, &FileNameEditor::savePattern);

@@ -18,12 +18,9 @@
 #include "screenshot.h"
 #include "capturebutton.h"
 #include "capturemodification.h"
+#include "src/capture/tools/capturetool.h"
 #include "src/utils/filenamehandler.h"
-#include <QStandardPaths>
-#include <QIcon>
-#include <QSettings>
-#include <QObject>
-#include <QString>
+#include "src/utils/confighandler.h"
 #include <QMessageBox>
 #include <QImageWriter>
 #include <QFileDialog>
@@ -63,34 +60,8 @@ QPixmap Screenshot::getScreenshot() const {
 // graphicalSave generates a graphical window to ask about the save path and
 // saves the screenshot with all the modifications in such directory
 QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const {
-    const QString format = "png";
-    QSettings settings;
-    QString savePath = settings.value("savePath").toString();
-    if (savePath.isEmpty() || !QDir(savePath).exists()) {
-        savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-        if (savePath.isEmpty()) {
-            savePath = QDir::currentPath();
-        }
-    }
-
-    QString tempName = "/"+ FileNameHandler().getParsedPattern();
-    // find unused name adding _n where n is a number
-    QFileInfo checkFile(savePath + tempName + "." + format);
-    if (checkFile.exists()) {
-        tempName += "_";
-        int i = 1;
-        while (true) {
-            checkFile.setFile(
-                        savePath + tempName + QString::number(i) + "." + format);
-            if (!checkFile.exists()) {
-                tempName += QString::number(i);
-                break;
-            }
-            ++i;
-        }
-    }
-    savePath += tempName + "." + format;
-
+    QString savePath = FileNameHandler().getAbsoluteSavePath();
+    // setup window
     QFileDialog fileDialog(parent, QObject::tr("Save As"), savePath);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.setFileMode(QFileDialog::AnyFile);
@@ -99,18 +70,18 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
     for (const QByteArray &bf: QImageWriter::supportedMimeTypes())
         mimeTypes.append(QLatin1String(bf));
     fileDialog.setMimeTypeFilters(mimeTypes);
-    fileDialog.selectMimeTypeFilter("image/" + format);
-    fileDialog.setDefaultSuffix(format);
+    fileDialog.selectMimeTypeFilter("image/png");
+    fileDialog.setDefaultSuffix("png");
     fileDialog.setWindowIcon(QIcon(":img/flameshot.png"));
 
     bool saved = false;
-    QString fileName, pathNoFile;
+    QString fileName;
     do {
         if (fileDialog.exec() != QDialog::Accepted) { return ""; }
         fileName = fileDialog.selectedFiles().first();
 
-        pathNoFile = fileName.left(fileName.lastIndexOf("/"));
-        settings.setValue("savePath", pathNoFile);
+        QString pathNoFile = fileName.left(fileName.lastIndexOf("/"));
+        ConfigHandler().setSavePath(pathNoFile);
 
         QPixmap pixToSave;
         if (selection.isEmpty()) {
@@ -118,47 +89,22 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
         } else { // save full screen when no selection
             pixToSave = m_modifiedScreenshot.copy(selection);
         }
-
         saved = pixToSave.save(fileName);
         if (!saved) {
-            QMessageBox saveErrBox(QMessageBox::Warning, QObject::tr("Save Error"),
-                                   QObject::tr("The image could not be saved to \"%1\".")
-                                   .arg(QDir::toNativeSeparators(fileName)));
+            QMessageBox saveErrBox(
+                        QMessageBox::Warning,
+                        QObject::tr("Save Error"),
+                        QObject::tr("The image could not be saved to \"%1\".")
+                        .arg(QDir::toNativeSeparators(fileName)));
             saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
             saveErrBox.exec();
         }
     } while(!saved);
-
-    return pathNoFile;
+    return savePath;
 }
 
 QString Screenshot::fileSave(const QRect &selection) const {
-    const QString format = "png";
-    QSettings settings;
-    QString savePath = settings.value("savePath").toString();
-    if (savePath.isEmpty() || !QDir(savePath).exists()) {
-        savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-        if (savePath.isEmpty()) {
-            savePath = QDir::currentPath();
-        }
-    }
-    // find unused name adding _n where n is a number
-    QString tempName = QObject::tr("/screenshot");
-    QFileInfo checkFile(savePath + tempName + "." + format);
-    if (checkFile.exists()) {
-        tempName += "_";
-        int i = 1;
-        while (true) {
-            checkFile.setFile(
-                        savePath + tempName + QString::number(i) + "." + format);
-            if (!checkFile.exists()) {
-                tempName += QString::number(i);
-                break;
-            }
-            ++i;
-        }
-    }
-    savePath += tempName + "." + format;
+    QString savePath = FileNameHandler().getAbsoluteSavePath();
     QPixmap pixToSave;
     if (selection.isEmpty()) {
         pixToSave = m_modifiedScreenshot;
@@ -169,7 +115,7 @@ QString Screenshot::fileSave(const QRect &selection) const {
 }
 
 // paintModification adds a new modification to the screenshot
-QPixmap Screenshot::paintModification(const CaptureModification &modification) {
+QPixmap Screenshot::paintModification(const CaptureModification *modification) {
     QPainter painter(&m_modifiedScreenshot);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -180,11 +126,11 @@ QPixmap Screenshot::paintModification(const CaptureModification &modification) {
 // paintTemporalModification paints a modification without updating the
 // member pixmap
 QPixmap Screenshot::paintTemporalModification(
-        const CaptureModification &modification)
+        const CaptureModification *modification)
 {
     QPixmap tempPix = m_modifiedScreenshot;
     QPainter painter(&tempPix);
-    if (modification.getType() != CaptureButton::Type::pencil) {
+    if (modification->getType() != CaptureButton::TYPE_PENCIL) {
         painter.setRenderHint(QPainter::Antialiasing);
     }
     paintInPainter(painter, modification);
@@ -194,94 +140,23 @@ QPixmap Screenshot::paintTemporalModification(
 // paintBaseModifications overrides the modifications of the screenshot
 // with new ones.
 QPixmap Screenshot::paintBaseModifications(
-        const QVector<CaptureModification> &m)
+        const QVector<CaptureModification*> &m)
 {
     m_modifiedScreenshot = m_baseScreenshot;
-    for (const CaptureModification modification: m) {
+    for (const CaptureModification *modification: m) {
         paintModification(modification);
     }
     return m_modifiedScreenshot;
 }
 
-namespace {
-    const int ArrowWidth = 10;
-    const int ArrowHeight = 18;
-
-    QPainterPath getArrowHead(QPoint p1, QPoint p2) {
-        QLineF body(p1, p2);
-        int originalLength = body.length();
-        body.setLength(ArrowWidth);
-        // move across the line up to the head
-        QLineF temp(QPoint(0,0), p2-p1);
-        temp.setLength(originalLength-ArrowHeight);
-        QPointF bottonTranslation(temp.p2());
-
-        // generates the transformation to center of the arrowhead
-        body.setAngle(body.angle()+90);
-        QPointF temp2 = p1-body.p2();
-        QPointF centerTranslation((temp2.x()/2), (temp2.y()/2));
-
-        body.translate(bottonTranslation);
-        body.translate(centerTranslation);
-
-        QPainterPath path;
-        path.moveTo(p2);
-        path.lineTo(body.p1());
-        path.lineTo(body.p2());
-        path.lineTo(p2);
-        return path;
-    }
-
-    // gets a shorter line to prevent overlap in the point of the arrow
-    QLine getShorterLine(QPoint p1, QPoint p2) {
-        QLineF l(p1, p2);
-        l.setLength(l.length()-ArrowHeight);
-        return l.toLine();
-    }
-
-}
-
-
-
-
 // paintInPainter is an aux method to prevent duplicated code, it draws the
 // passed modification to the painter.
 void Screenshot::paintInPainter(QPainter &painter,
-                                const CaptureModification &modification)
+                                const CaptureModification *modification)
 {
-    painter.setPen(QPen(modification.getColor(), 2));
-    QVector<QPoint> points = modification.getPoints();
-    switch (modification.getType()) {
-    case CaptureButton::Type::arrow:
-        painter.drawLine(getShorterLine(points[0], points[1]));
-        painter.fillPath(getArrowHead(points[0], points[1]),
-                QBrush(modification.getColor()));
-        break;
-    case CaptureButton::Type::circle:
-        painter.drawEllipse(QRect(points[0], points[1]));
-        break;
-    case CaptureButton::Type::line:
-        painter.drawLine(points[0], points[1]);
-        break;
-    case CaptureButton::Type::marker:
-        painter.setOpacity(0.35);
-        painter.setPen(QPen(modification.getColor(), 14));
-        painter.drawLine(points[0], points[1]);
-        painter.setOpacity(1);
-        break;
-    case CaptureButton::Type::pencil:
-        painter.drawPolyline(points.data(), points.size());
-        break;
-    case CaptureButton::Type::selection:
-        painter.drawRect(QRect(points[0], points[1]));
-        break;
-    case CaptureButton::Type::rectangle:
-        painter.setBrush(QBrush(modification.getColor()));
-        painter.drawRect(QRect(points[0], points[1]));
-        break;
-    default:
-        break;
-    }
+    const QVector<QPoint> &points = modification->getPoints();
+    QColor color = modification->getColor();
+    modification->getTool()->processImage(painter, points, color);
 }
 
 void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,

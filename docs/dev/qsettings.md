@@ -22,7 +22,7 @@
     - value: "showHelp"
     - type: bool
     - description: show Help messages in capture mode.
-- show Help message
+- show desktop notifications
     - value: "showDesktopNotification"
     - type: bool
     - description: show every desktop notification.

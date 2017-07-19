@@ -30,12 +30,11 @@ class ClickableLabel;
 class UIcolorEditor : public QFrame {
     Q_OBJECT
 public:
-    explicit UIcolorEditor(QWidget *parent = 0);
+    explicit UIcolorEditor(QWidget *parent = nullptr);
 
 private slots:
     void updateUIcolor();
     void updateLocalColor(const QColor);
-    void updateButtonIcon();
     void changeLastButton(CaptureButton *);
 
 private:
@@ -47,7 +46,7 @@ private:
     CaptureButton *m_lastButtonPressed;
     color_widgets::ColorWheel *m_colorWheel;
 
-    static const CaptureButton::Type m_buttonIconType = CaptureButton::Type::circle;
+    static const CaptureButton::ButtonType m_buttonIconType = CaptureButton::TYPE_CIRCLE;
 
     QHBoxLayout *hLayout;
     QVBoxLayout *vLayout;

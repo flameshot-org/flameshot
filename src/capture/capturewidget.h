@@ -25,6 +25,7 @@
 #define CAPTUREWIDGET_H
 
 #include "capturebutton.h"
+#include "src/capture/tools/capturetool.h"
 #include "buttonhandler.h"
 #include <QWidget>
 #include <QPointer>
@@ -44,13 +45,14 @@ class CaptureWidget : public QWidget {
     friend class CaptureButton;
 
 public:
-    explicit CaptureWidget(bool enableSaveWindow = true, QWidget *parent = 0);
+    explicit CaptureWidget(bool enableSaveWindow = true, QWidget *parent = nullptr);
     ~CaptureWidget();
 
     void updateButtons();
 public slots:
     QString saveScreenshot(bool toClipboard = false);
     QString saveScreenshot(QString path, bool toClipboard = false);
+    void handleButtonSignal(CaptureTool::Request r);
 
 signals:
     void newMessage(QString);
@@ -60,7 +62,7 @@ private slots:
     void openURL(QNetworkReply *reply);
     void leaveButton();
     void enterButton();
-    void undo();
+    bool undo();
 
     void leftResize();
     void rightResize();
@@ -114,11 +116,11 @@ private:
     void updateSizeIndicator();
 
     QRect getExtendedSelection() const;
-    QVector<CaptureModification> m_modifications;
+    QVector<CaptureModification*> m_modifications;
     QPointer<CaptureButton> m_sizeIndButton;
     QPointer<CaptureButton> m_lastPressedButton;
 
-    CaptureButton::Type m_state;
+    CaptureButton::ButtonType m_state;
     ButtonHandler *m_buttonHandler;
 
     QColor m_uiColor;

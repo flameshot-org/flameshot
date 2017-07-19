@@ -16,20 +16,18 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "filenamehandler.h"
+#include "src/utils/confighandler.h"
 #include <ctime>
 #include <locale>
-#include <QSettings>
+#include <QStandardPaths>
+#include <QDir>
 
 FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
     std::locale::global(std::locale(std::locale("").name()));
 }
 
-QString FileNameHandler::getActualPattern() {
-    return QSettings().value("filenamePattern").toString();
-}
-
 QString FileNameHandler::getParsedPattern() {
-    return parseFilename(getActualPattern());
+    return parseFilename(ConfigHandler().getFilenamePattern());
 }
 
 QString FileNameHandler::parseFilename(const QString &name) {
@@ -50,7 +48,40 @@ QString FileNameHandler::parseFilename(const QString &name) {
 }
 
 void FileNameHandler::savePattern(const QString &pattern) {
-    QSettings().setValue("filenamePattern", pattern);
+    ConfigHandler().setFilenamePattern(pattern);
+}
+
+QString FileNameHandler::getAbsoluteSavePath() {
+    ConfigHandler config;
+    QString savePath = config.getSavePath();
+    bool changed = false;
+    if (savePath.isEmpty() || !QDir(savePath).exists() || !QFileInfo(savePath).isWritable()) {
+        changed = true;
+        savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+        if (savePath.isEmpty()) {
+            savePath = QDir::currentPath();
+        }
+    }
+    if(changed) {
+        config.setSavePath(savePath);
+    }
+    QString tempName = "/"+ FileNameHandler().getParsedPattern();
+    // find unused name adding _n where n is a number
+    QFileInfo checkFile(savePath + tempName + ".png");
+    if (checkFile.exists()) {
+        tempName += "_";
+        int i = 1;
+        while (true) {
+            checkFile.setFile(
+                        savePath + tempName + QString::number(i) + ".png");
+            if (!checkFile.exists()) {
+                tempName += QString::number(i);
+                break;
+            }
+            ++i;
+        }
+    }
+    return savePath + tempName + ".png";
 }
 
 QString FileNameHandler::charArrToQString(const char *c) {

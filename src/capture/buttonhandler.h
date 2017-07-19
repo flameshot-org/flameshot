@@ -29,8 +29,8 @@ class QPoint;
 class ButtonHandler : public QObject {
     Q_OBJECT
 public:
-    ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = 0);
-    ButtonHandler(QObject *parent = 0);
+    ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
+    ButtonHandler(QObject *parent = nullptr);
 
     void hide();
     void show();
@@ -49,6 +49,7 @@ private:
     QVector<CaptureButton*> m_vectorButtons;
 
     int m_distance;
+    int m_buttonBaseSize;
 };
 
 #endif // BUTTONHANDLER_H

@@ -31,11 +31,13 @@ class InfoWindow;
 
 class Controller : public QObject {
     Q_OBJECT
+
 public:
-    explicit Controller(QObject *parent = 0);
+    explicit Controller(QObject *parent = nullptr);
 
     QString saveScreenshot(bool toClipboard = false);
     QString saveScreenshot(QString path, bool toClipboard = false);
+
 public slots:
     QPointer<CaptureWidget> createCapture(bool enableSaveWindow = true);
     void createVisualCapture(bool enableSaveWindow = true);

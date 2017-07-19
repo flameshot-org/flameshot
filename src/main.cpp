@@ -25,7 +25,6 @@
 #include <QDBusMessage>
 #include <QCommandLineParser>
 #include <QDir>
-#include <QDebug>
 
 int main(int argc, char *argv[]) {
     QTranslator translator;

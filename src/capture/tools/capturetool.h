@@ -1,26 +1,72 @@
+// Copyright 2017 Alejandro Sirgo Rica
+//
+// This file is part of Flameshot.
+//
+//     Flameshot is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, either version 3 of the License, or
+//     (at your option) any later version.
+//
+//     Flameshot is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+
 #ifndef CAPTURETOOL_H
 #define CAPTURETOOL_H
 
 #include <QObject>
 #include <QVector>
 
+class QPainter;
+
 class CaptureTool : public QObject
 {
     Q_OBJECT
+
 public:
-    enum toolType{WORKER, PATH_DRAWER, LINE_DRAWER};
+    enum ToolWorkType {
+        TYPE_WORKER,
+        TYPE_PATH_DRAWER,
+        TYPE_LINE_DRAWER
+    };
+
+    enum Request {
+        REQ_CLOSE_GUI,
+        REQ_HIDE_GUI,
+        REQ_HIDE_SELECTION,
+        REQ_UNDO_MODIFICATION,
+        REQ_CLEAR_MODIFICATIONS,
+        REQ_SAVE_SCREENSHOT,
+        REQ_SELECT_ALL,
+        REQ_TO_CLIPBOARD,
+        REQ_UPLOAD_TO_IMGUR,
+        REQ_MOVE_MODE,
+    };
 
     explicit CaptureTool(QObject *parent = nullptr);
 
-    virtual int getID() = 0;
-    virtual bool isCheckable() = 0;
-    virtual void drawChanges(QPixmap &pm, const QVector<QPoint> &points) = 0;
-    virtual toolType getToolType() = 0;
+    virtual bool isSelectable() = 0;
+    virtual ToolWorkType getToolType() = 0;
+
+    virtual QString getIconName() = 0;
+    virtual QString getName() = 0;
+    virtual QString getDescription() = 0;
+
+    virtual void processImage(
+            QPainter &painter,
+            const QVector<QPoint> &points,
+            const QColor &color) = 0;
 
 signals:
-    void requestAction();
+    void requestAction(Request r);
 
 public slots:
+    virtual void onPressed() = 0;
+
 };
 
 #endif // CAPTURETOOL_H

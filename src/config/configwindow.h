@@ -28,7 +28,7 @@ class QListWidget;
 class ConfigWindow : public QWidget {
     Q_OBJECT
 public:
-    explicit ConfigWindow(QWidget *parent = 0);
+    explicit ConfigWindow(QWidget *parent = nullptr);
 
 protected:
     void keyPressEvent(QKeyEvent *);

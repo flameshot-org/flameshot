@@ -18,7 +18,7 @@
 #include "colorpicker.h"
 #include <QPainter>
 #include <QMouseEvent>
-#include <QSettings>
+#include "src/utils/confighandler.h"
 
 
 ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
@@ -26,9 +26,9 @@ ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
 {
     setMouseTracking(true);
     // save the color values in member variables for faster access
-    QSettings settings;
-    m_uiColor = settings.value("uiColor").value<QColor>();
-    m_drawColor = settings.value("drawColor").value<QColor>();
+    ConfigHandler config;
+    m_uiColor = config.getUIMainColor();
+    m_drawColor = config.getDrawColor();
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;
@@ -51,7 +51,7 @@ ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
 }
 
 ColorPicker::~ColorPicker() {
-    QSettings().setValue("drawColor", m_drawColor);
+    ConfigHandler().setDrawColor(m_drawColor);
 }
 
 QColor ColorPicker::getDrawColor() {

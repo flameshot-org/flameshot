@@ -29,7 +29,8 @@ ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v, QObject *parent) 
     QObject(parent)
 {
     if (!v.isEmpty()) {
-        m_distance = v[0]->getButtonBaseSize() + SEPARATION;
+        m_buttonBaseSize = v[0]->getButtonBaseSize();
+        m_distance = m_buttonBaseSize + SEPARATION;
         m_vectorButtons = v;
     }
 }
@@ -68,8 +69,8 @@ void ButtonHandler::updatePosition(const QRect &selection,
         return;
     }
     // button dimmensions
-    const int baseHeight = CaptureButton::getButtonBaseSize();
-    const int baseWidth = CaptureButton::getButtonBaseSize();
+    const int baseHeight = m_buttonBaseSize;
+    const int baseWidth = m_buttonBaseSize;
     // copy of the selection area for internal modifications
     QRect baseArea = selection;
 
@@ -218,7 +219,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
             if (vecLength - elemIndicator < buttonsPerCol) {
                 addCounter = vecLength - elemIndicator;
             }
-            QPoint center = QPoint(baseArea.left() - (SEPARATION+baseWidth),
+            QPoint center = QPoint(baseArea.left() - (SEPARATION + baseWidth),
                                    baseArea.center().y());
             QVector<QPoint> positions = getVPoints(center, addCounter, true);
             for (QPoint p: positions) {
@@ -231,9 +232,9 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 !(blockedBotton && horizontalBlocked && blockedTop)) {
 
             if (blockedRight && !blockedLeft) {
-                baseArea.setX(baseArea.x() - (baseWidth+SEPARATION));
+                baseArea.setX(baseArea.x() - (baseWidth + SEPARATION));
             } else if (!blockedRight && !blockedLeft) {
-                baseArea.setX(baseArea.x() - (baseWidth+SEPARATION));
+                baseArea.setX(baseArea.x() - (baseWidth + SEPARATION));
                 baseArea.setWidth(baseArea.width() + (baseWidth + SEPARATION));
             } else {
                 baseArea.setWidth(baseArea.width() + (baseWidth + SEPARATION));
@@ -242,7 +243,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
             if (blockedBotton && !blockedTop) {
                 baseArea.setY(baseArea.y() - (baseHeight + SEPARATION));
             } else if (!blockedTop && !blockedBotton) {
-                baseArea.setY(baseArea.y() - (baseHeight+SEPARATION));
+                baseArea.setY(baseArea.y() - (baseHeight + SEPARATION));
                 baseArea.setHeight(baseArea.height() + (baseHeight + SEPARATION));
             } else {
                 baseArea.setHeight(baseArea.height() + (baseHeight + SEPARATION));
@@ -263,9 +264,9 @@ QVector<QPoint> ButtonHandler::getHPoints(
     if (elements % 2 == 0) {
         shift = m_distance * (elements / 2) - (SEPARATION / 2);
     } else {
-        shift = m_distance * ((elements-1) / 2) + CaptureButton::getButtonBaseSize() / 2;
+        shift = m_distance * ((elements-1) / 2) + m_buttonBaseSize / 2;
     }
-    if (!leftToRight) { shift -= CaptureButton::getButtonBaseSize(); }
+    if (!leftToRight) { shift -= m_buttonBaseSize; }
     int x = leftToRight ? center.x() - shift :
                           center.x() + shift;
     QPoint i(x, center.y());
@@ -289,9 +290,9 @@ QVector<QPoint> ButtonHandler::getVPoints(
     if (elements % 2 == 0) {
         shift = m_distance * (elements / 2) - (SEPARATION / 2);
     } else {
-        shift = m_distance * ((elements-1) / 2) + CaptureButton::getButtonBaseSize() / 2;
+        shift = m_distance * ((elements-1) / 2) + m_buttonBaseSize / 2;
     }
-    if (!upToDown) { shift -= CaptureButton::getButtonBaseSize(); }
+    if (!upToDown) { shift -= m_buttonBaseSize; }
     int y = upToDown ? center.y() - shift :
                        center.y() + shift;
     QPoint i(center.x(), y);
@@ -307,6 +308,7 @@ void ButtonHandler::setButtons(const QVector<CaptureButton *> v) {
     for (CaptureButton *b: m_vectorButtons) delete(b);
     m_vectorButtons = v;
     if (!v.isEmpty()) {
-        m_distance = v[0]->getButtonBaseSize() + SEPARATION;
+        m_buttonBaseSize = v[0]->getButtonBaseSize();
+        m_distance = m_buttonBaseSize + SEPARATION;
     }
 }

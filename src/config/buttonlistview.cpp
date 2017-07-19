@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "buttonlistview.h"
-#include "src/capture/capturebutton.h"
+#include "src/capture/tools/toolfactory.h"
 #include <QListWidgetItem>
 #include <QListWidgetItem>
 #include <QSettings>
@@ -24,12 +24,7 @@
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
-
-    QSettings settings;
-    m_listButtons = settings.value("buttons").value<QList<int> >();
-
     initButtonList();
-
     connect(this, &QListWidget::itemChanged, this,
             &ButtonListView::updateActiveButtons);
     connect(this, &QListWidget::itemClicked, this,
@@ -37,38 +32,49 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
 }
 
 void ButtonListView::initButtonList() {
-    for (int i = 0; i != static_cast<int>(CaptureButton::Type::last); ++i) {
-        auto t = static_cast<CaptureButton::Type>(i);
+    m_listButtons = QSettings().value("buttons").value<QList<int> >();
+    ToolFactory factory;
+    auto listTypes = CaptureButton::getIterableButtonTypes();
+
+    for (CaptureButton::ButtonType t: listTypes) {
+        CaptureTool *tool = factory.CreateTool(t);
+
+        // add element to the local map
+        m_buttonTypeByName[tool->getName()] = t;
+
+        // init the menu option
+
         QListWidgetItem *buttonItem = new QListWidgetItem(this);
 
-        bool iconsAreWhite = false;
-        QColor bgColor = this->palette().color(QWidget::backgroundRole());
         // when the background is lighter than gray, it uses the white icons
-        if (bgColor.valueF() < 0.6) {
-            iconsAreWhite = true;
-        }
-        buttonItem->setIcon(CaptureButton::getIcon(t, iconsAreWhite));
+        QColor bgColor = this->palette().color(QWidget::backgroundRole());
+        QString color = bgColor.valueF() < 0.6 ? "White" : "Black";
+        QString iconPath = QString(":/img/buttonIcons%1/%2")
+                .arg(color).arg(tool->getIconName());
+        buttonItem->setIcon(QIcon(iconPath));
+
         buttonItem->setFlags(Qt::ItemIsUserCheckable);
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
         buttonItem->setTextColor(foregroundColor);
 
-        buttonItem->setText(CaptureButton::getTypeName(t));
-        buttonItem->setToolTip(CaptureButton::getTypeTooltip(t));
-        if (m_listButtons.contains(i)) {
+        buttonItem->setText(tool->getName());
+        buttonItem->setToolTip(tool->getDescription());
+        if (m_listButtons.contains(static_cast<int>(t))) {
             buttonItem->setCheckState(Qt::Checked);
         } else {
             buttonItem->setCheckState(Qt::Unchecked);
         }
+        tool->deleteLater();
     }
 }
 
 void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
-    int buttonIndex = static_cast<int>(CaptureButton::getTypeByName(item->text()));
+    CaptureButton::ButtonType bType = m_buttonTypeByName[item->text()];
+    int buttonIndex = static_cast<int>(bType);
 
     if (item->checkState() == Qt::Checked) {
         m_listButtons.append(buttonIndex);
         std::sort(m_listButtons.begin(), m_listButtons.end());
-
     } else {
         m_listButtons.removeOne(buttonIndex);
     }
