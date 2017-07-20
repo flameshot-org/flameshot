@@ -93,13 +93,7 @@ void Controller::initDefaults() {
     ConfigHandler config;
     //config.setNotInitiated();
     if (!config.initiatedIsSet()) {
-        config.setInitiated();
-        config.setShowHelp(true);
-        config.setDesktopNotification(true);
-        config.setDrawColor(QColor(Qt::red));
-        config.setUIMainColor(QColor(116, 0, 150));
-        config.setUIContrastColor(QColor(86, 0, 120));
-        config.setAllTheButtons();
+        config.setDefaults();
     }
 }
 

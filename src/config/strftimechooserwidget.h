@@ -30,8 +30,7 @@ signals:
     void variableEmitted(const QString &);
 
 private:
-    static QStringList m_valuesStr;
-    static QStringList m_buttonLabel;
+    static QMap<QString, QString> m_buttonData;
 };
 
 #endif // STRFTIMECHOOSERWIDGET_H

@@ -57,6 +57,7 @@ public:
     bool initiatedIsSet();
     void setInitiated();
     void setNotInitiated();
+    void setDefaults();
 
     void setAllTheButtons();
 

@@ -16,95 +16,53 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "strftimechooserwidget.h"
+#include <QMap>
+#include <QGridLayout>
+#include <QPushButton>
 
 StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) {
-
+    setAttribute(Qt::WA_DeleteOnClose);
+    setWindowIcon(QIcon(":img/flameshot.png"));
+    QGridLayout *layout = new QGridLayout(this);
+    auto k = m_buttonData.keys();
+    int middle = k.length()/2;
+    // add the buttons in 2 columns (they need to be even)
+    for(int i = 0; i < 2; i++) {
+        for(int j = 0; j < middle; j++) {
+            QString key = k.last();
+            k.pop_back();
+            QString variable = m_buttonData.value(key);
+            QPushButton *button = new QPushButton(this);
+            button->setText(key);
+            button->setToolTip(variable);
+            layout->addWidget(button, j, i);
+            connect(button, &QPushButton::clicked,
+                    this, [variable, this](){Q_EMIT variableEmitted(variable);});
+        }
+    }
+    setLayout(layout);
 }
 
-//QStringList StrftimeChooserWidget::m_valuesStr = QList<QString>()
-//        << "%a"
-//        << "%A"
-//        << "%b"
-//        << "%B"
-//        << "%C"
-//        << "%d"
-//        << "%D"
-//        << "%e"
-//        << "%E"
-//        << "%F"
-//        << "%G"
-//        << "%g"
-//        << "%h"
-//        << "%H"
-//        << "%I"
-//        << "%j"
-//        << "%k"
-//        << "%l"
-//        << "%m"
-//        << "%M"
-//        << "%n"
-//        << "%O"
-//        << "%p"
-//        << "%P"
-//        << "%r"
-//        << "%R"
-//        << "%s"
-//        << "%S"
-//        << "%t"
-//        << "%T"
-//        << "%u"
-//        << "%U"
-//        << "%V"
-//        << "%w"
-//        << "%W"
-//        << "%x"
-//        << "%X"
-//        << "%y"
-//        << "%Y"
-//        << "%z"
-//        << "%Z"
-//        << "%%";
-
-//QStringList StrftimeChooserWidget::m_buttonLabel = QList<QString>()
-//        << "Day (Mon)"    //"%a"
-//        << "Day (Monday)"     //"%A"
-//        << "Month (Jan)"  //"%b"
-//        << "Month (1...12)"   //"%B"
-//        << "Century (21)"     //"%C"
-//        << "Day (01...31)"   //"%d"
-//        << "Full Date (%m/%d/%y)"   //"%D"
-//        << " ()"   //"%e"
-//        << " ()"   //"%E"
-//        << " ()"   //"%F"
-//        << " ()"   //"%G"
-//        << " ()"   //"%g"
-//        << " ()"   //"%h"
-//        << " ()"   //"%H"
-//        << " ()"   //"%I"
-//        << " ()"   //"%j"
-//        << " ()"   //"%k"
-//        << " ()"   //"%l"
-//        << " ()"   //"%m"
-//        << " ()"   //"%M"
-//        << " ()"   //"%n"
-//        << " ()"   //"%O"
-//        << " ()"   //"%p"
-//        << " ()"   //"%P"
-//        << " ()"   //"%r"
-//        << " ()"   //"%R"
-//        << " ()"   //"%s"
-//        << " ()"   //"%S"
-//        << " ()"   //"%t"
-//        << " ()"   //"%T"
-//        << " ()"   //"%u"
-//        << " ()"   //"%U"
-//        << " ()"   //"%V"
-//        << " ()"   //"%w"
-//        << " ()"   //"%W"
-//        << " ()"   //"%x"
-//        << " ()"   //"%X"
-//        << " ()"   //"%y"
-//        << " ()"   //"%Y"
-//        << " ()"   //"%z"
-//        << " ()"   //"%Z"
-//        << "%";  //"%%";
+QMap<QString, QString> StrftimeChooserWidget::m_buttonData {
+    { "Century (00-99)",        "%C"},
+    { "Year (00-99)",           "%y"},
+    { "Year (2000)",            "%Y"},
+    { "Month Name (jan)",       "%b"},
+    { "Month Name (january)",   "%B"},
+    { "Month (01-12)",          "%m"},
+    { "Week Day (1-7)",         "%u"},
+    { "week (01-53)",           "%V"},
+    { "Day Name (mon)",         "%a"},
+    { "Day Name (monday)",      "%A"},
+    { "Day (01-31)",            "%d"},
+    { "Day of Month (1-31)",    "%e"},
+    { "Day (001-366)",          "%j"},
+    { "Time (%H:%M:%S)",        "%T"},
+    { "Time (%H:%M)",           "%R"},
+    { "Hour (00-23)",           "%H"},
+    { "Hour (01-12)",           "%I"},
+    { "Minute (00-59)",         "%M"},
+    { "Second (00-59)",         "%S"},
+    { "Full Date (%m/%d/%y)",   "%D"},
+    { "Full Date (%Y-%m-%d)",   "%F"},
+};

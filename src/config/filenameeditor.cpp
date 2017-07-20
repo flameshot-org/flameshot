@@ -18,23 +18,30 @@
 #include "filenameeditor.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
-#include <QGridLayout>
+#include "src/config/strftimechooserwidget.h"
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QLabel>
 
 FileNameEditor::FileNameEditor(QWidget *parent) : QFrame(parent) {
     setFrameStyle(QFrame::StyledPanel);
     initWidgets();
-    initLayout();
+    initLayout();    
 }
 
 void FileNameEditor::initLayout() {
-    m_layout = new QGridLayout(this);
-    m_layout->addWidget(m_nameEditor, 0,1);
-    m_layout->addWidget(m_saveButton, 0, 0);
-    m_layout->addWidget(new QLabel("Preview: ", this), 1, 0);
-    m_layout->addWidget(m_outputLabel, 1, 1);
+    m_layout = new QVBoxLayout(this);
+    m_layout->addWidget(m_nameEditor);
+    m_layout->addWidget(m_outputLabel);
+
+    QPushButton *openHelp = new QPushButton(tr("Open Helper"), this);
+    connect(openHelp, &QPushButton::clicked, this, &FileNameEditor::openHelper);
+    m_layout->addWidget(m_saveButton);
+    QHBoxLayout *horizLayout = new QHBoxLayout();
+    horizLayout->addWidget(m_saveButton);
+    horizLayout->addWidget(openHelp);
+    m_layout->addLayout(horizLayout);
 }
 
 void FileNameEditor::initWidgets() {
@@ -43,14 +50,20 @@ void FileNameEditor::initWidgets() {
     m_nameEditor = new QLineEdit(this);
     m_nameEditor->setMaxLength(FileNameHandler::MAX_CHARACTERS);
 
-    m_outputLabel = new QLabel(this);
-    m_saveButton = new QPushButton(tr("Save"), this);
+    m_outputLabel = new QLineEdit(this);
+    m_outputLabel->setReadOnly(true);
+    m_outputLabel->setFocusPolicy(Qt::NoFocus);
+    QPalette pal = m_outputLabel->palette();
+    QColor color = pal.color(QPalette::Disabled, m_outputLabel->backgroundRole());
+    pal.setColor(QPalette::Active, m_outputLabel->backgroundRole(), color);
+    m_outputLabel->setPalette(pal);
 
     connect(m_nameEditor, &QLineEdit::textChanged, this,
             &FileNameEditor::showParsedPattern);
     m_nameEditor->setText(ConfigHandler().getFilenamePattern());
     m_outputLabel->setText(m_nameHandler->getParsedPattern());
 
+    m_saveButton = new QPushButton(tr("Save"), this);
     connect(m_saveButton, &QPushButton::clicked, this, &FileNameEditor::savePattern);
 }
 
@@ -62,4 +75,19 @@ void FileNameEditor::savePattern() {
 void FileNameEditor::showParsedPattern(const QString &p) {
     QString output = m_nameHandler->parseFilename(p);
     m_outputLabel->setText(output);
+}
+
+void FileNameEditor::addToNameEditor(QString s) {
+    m_nameEditor->setText(m_nameEditor->text() + s);
+}
+
+void FileNameEditor::openHelper() {
+    if (!m_buttonHelper) {
+        m_buttonHelper = new StrftimeChooserWidget();
+        m_buttonHelper.data()->show();
+        connect(this, &FileNameEditor::destroyed,
+                m_buttonHelper, &StrftimeChooserWidget::deleteLater);
+        connect(m_buttonHelper, &StrftimeChooserWidget::variableEmitted,
+                this, &FileNameEditor::addToNameEditor);
+    }
 }

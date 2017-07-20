@@ -105,6 +105,15 @@ void ConfigHandler::setNotInitiated() {
     m_settings->setValue("initiated", false);
 }
 
+void ConfigHandler::setDefaults() {
+    setShowHelp(true);
+    setDesktopNotification(true);
+    setDrawColor(QColor(Qt::red));
+    setUIMainColor(QColor(116, 0, 150));
+    setUIContrastColor(QColor(86, 0, 120));
+    setAllTheButtons();
+}
+
 void ConfigHandler::setAllTheButtons() {
     QList<int> buttons;
     auto listTypes = CaptureButton::getIterableButtonTypes();
