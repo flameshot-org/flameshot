@@ -17,6 +17,7 @@
 
 #include "buttonlistview.h"
 #include "src/capture/tools/toolfactory.h"
+#include "src/utils/confighandler.h"
 #include <QListWidgetItem>
 #include <QListWidgetItem>
 #include <QSettings>
@@ -87,6 +88,14 @@ void ButtonListView::reverseItemCheck(QListWidgetItem *item){
     if (item->checkState() == Qt::Checked) {
         item->setCheckState(Qt::Unchecked);
     } else {
+        item->setCheckState(Qt::Checked);
+    }
+}
+
+void ButtonListView::selectAll() {
+    ConfigHandler().setAllTheButtons();
+    for(int i = 0; i < this->count(); ++i) {
+        QListWidgetItem* item = this->item(i);
         item->setCheckState(Qt::Checked);
     }
 }

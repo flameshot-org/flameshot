@@ -44,11 +44,18 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     QVBoxLayout *layoutUI= new QVBoxLayout();
     visuals->setLayout(layoutUI);
     layoutUI->addWidget(new UIcolorEditor());
+
     auto boxButtons = new QGroupBox();
     boxButtons->setTitle(tr("Button Selection"));
     auto listLayout = new QVBoxLayout(boxButtons);
-    listLayout->addWidget(new ButtonListView());
+    auto buttonList = new ButtonListView();
     layoutUI->addWidget(boxButtons);
+    listLayout->addWidget(buttonList);
+
+    QPushButton* setAllButtons = new QPushButton(tr("Select All"));
+    connect(setAllButtons, &QPushButton::clicked,
+            buttonList, &ButtonListView::selectAll);
+    listLayout->addWidget(setAllButtons);
 
     addTab(visuals, "Interface");
     setTabIcon(0, QIcon(modifier + "graphics.png"));
@@ -57,6 +64,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     addTab(new FileNameEditor(), "Name Editor");
     setTabIcon(1, QIcon(modifier + "name_edition.png"));
 
+    // general
     addTab(new GeneneralConf(), "General");
     setTabIcon(2, QIcon(modifier + "config.png"));
 

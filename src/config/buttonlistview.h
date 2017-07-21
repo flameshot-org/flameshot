@@ -25,6 +25,9 @@ class ButtonListView : public QListWidget {
 public:
     ButtonListView(QWidget *parent= nullptr);
 
+public slots:
+    void selectAll();
+
 private slots:
     void updateActiveButtons(QListWidgetItem *);
     void reverseItemCheck(QListWidgetItem *);
