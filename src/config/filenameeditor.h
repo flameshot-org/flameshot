@@ -18,7 +18,7 @@
 #ifndef FILENAMEEDITOR_H
 #define FILENAMEEDITOR_H
 
-#include <QFrame>
+#include <QGroupBox>
 #include <QPointer>
 
 class QVBoxLayout;
@@ -27,7 +27,7 @@ class FileNameHandler;
 class QPushButton;
 class StrftimeChooserWidget;
 
-class FileNameEditor : public QFrame
+class FileNameEditor : public QGroupBox
 {
     Q_OBJECT
 public:
@@ -37,19 +37,22 @@ private:
     QVBoxLayout *m_layout;
     QLineEdit *m_outputLabel;
     QLineEdit *m_nameEditor;
-    QPushButton *m_saveButton;
     FileNameHandler *m_nameHandler;
-
-    QPointer<StrftimeChooserWidget> m_buttonHelper;
+    StrftimeChooserWidget *m_helperButtons;
+    QPushButton *m_saveButton;
+    QPushButton *m_resetButton;
+    QPushButton *m_clearButton;
 
     void initLayout();
     void initWidgets();
 
+public slots:
+    void addToNameEditor(QString s);
+
 private slots:
     void savePattern();
     void showParsedPattern(const QString &);
-    void addToNameEditor(QString s);
-    void openHelper();
+    void resetName();
 };
 
 #endif // FILENAMEEDITOR_H

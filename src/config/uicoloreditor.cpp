@@ -23,9 +23,8 @@
 #include <QComboBox>
 #include <QMap>
 
-UIcolorEditor::UIcolorEditor(QWidget *parent) : QFrame(parent) {
-    setFrameStyle(QFrame::StyledPanel);
-
+UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
+    setTitle(tr("UI Color Editor"));
     hLayout = new QHBoxLayout;
     vLayout = new QVBoxLayout;
 

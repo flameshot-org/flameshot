@@ -21,8 +21,6 @@
 #include <QPushButton>
 
 StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) {
-    setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/flameshot.png"));
     QGridLayout *layout = new QGridLayout(this);
     auto k = m_buttonData.keys();
     int middle = k.length()/2;
@@ -35,6 +33,7 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) 
             QPushButton *button = new QPushButton(this);
             button->setText(key);
             button->setToolTip(variable);
+            button->setFixedHeight(30);
             layout->addWidget(button, j, i);
             connect(button, &QPushButton::clicked,
                     this, [variable, this](){Q_EMIT variableEmitted(variable);});

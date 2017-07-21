@@ -24,35 +24,36 @@
 #include <QLineEdit>
 #include <QPushButton>
 
-FileNameEditor::FileNameEditor(QWidget *parent) : QFrame(parent) {
-    setFrameStyle(QFrame::StyledPanel);
+FileNameEditor::FileNameEditor(QWidget *parent) : QGroupBox(parent) {
     initWidgets();
     initLayout();    
 }
 
 void FileNameEditor::initLayout() {
     m_layout = new QVBoxLayout(this);
+    m_layout->addWidget(m_helperButtons);
     m_layout->addWidget(m_nameEditor);
     m_layout->addWidget(m_outputLabel);
 
-    QPushButton *openHelp = new QPushButton(tr("Open Helper"), this);
-    connect(openHelp, &QPushButton::clicked, this, &FileNameEditor::openHelper);
-    m_layout->addWidget(m_saveButton);
     QHBoxLayout *horizLayout = new QHBoxLayout();
     horizLayout->addWidget(m_saveButton);
-    horizLayout->addWidget(openHelp);
+    horizLayout->addWidget(m_resetButton);
+    horizLayout->addWidget(m_clearButton);
     m_layout->addLayout(horizLayout);
 }
 
 void FileNameEditor::initWidgets() {
     m_nameHandler = new FileNameHandler(this);
 
+    // editor
     m_nameEditor = new QLineEdit(this);
     m_nameEditor->setMaxLength(FileNameHandler::MAX_CHARACTERS);
 
+    // preview
     m_outputLabel = new QLineEdit(this);
-    m_outputLabel->setReadOnly(true);
-    m_outputLabel->setFocusPolicy(Qt::NoFocus);
+    m_outputLabel->setDisabled(true);
+    QString foreground = this->palette().foreground().color().name();
+    m_outputLabel->setStyleSheet(QString("color: %1").arg(foreground));
     QPalette pal = m_outputLabel->palette();
     QColor color = pal.color(QPalette::Disabled, m_outputLabel->backgroundRole());
     pal.setColor(QPalette::Active, m_outputLabel->backgroundRole(), color);
@@ -63,9 +64,26 @@ void FileNameEditor::initWidgets() {
     m_nameEditor->setText(ConfigHandler().getFilenamePattern());
     m_outputLabel->setText(m_nameHandler->getParsedPattern());
 
+    // helper buttons
+    m_helperButtons = new StrftimeChooserWidget(this);
+    connect(m_helperButtons, &StrftimeChooserWidget::variableEmitted,
+            this, &FileNameEditor::addToNameEditor);
+
+    // save
     m_saveButton = new QPushButton(tr("Save"), this);
     connect(m_saveButton, &QPushButton::clicked, this, &FileNameEditor::savePattern);
-}
+    m_saveButton->setToolTip(tr("Saves the pattern"));
+    // reset
+    m_resetButton = new QPushButton(tr("Reset"), this);
+    connect(m_resetButton, &QPushButton::clicked,
+            this, &FileNameEditor::resetName);
+    m_resetButton->setToolTip(tr("Restores the saved pattern"));
+    // clear
+    m_clearButton = new QPushButton(tr("Clear"), this);
+    connect(m_clearButton, &QPushButton::clicked, this,
+            [this](){ m_nameEditor->setText("");
+    });
+    m_clearButton->setToolTip(tr("Deletes the name"));}
 
 void FileNameEditor::savePattern() {
     QString pattern = m_nameEditor->text();
@@ -77,17 +95,10 @@ void FileNameEditor::showParsedPattern(const QString &p) {
     m_outputLabel->setText(output);
 }
 
-void FileNameEditor::addToNameEditor(QString s) {
-    m_nameEditor->setText(m_nameEditor->text() + s);
+void FileNameEditor::resetName() {
+    m_nameEditor->setText(ConfigHandler().getFilenamePattern());
 }
 
-void FileNameEditor::openHelper() {
-    if (!m_buttonHelper) {
-        m_buttonHelper = new StrftimeChooserWidget();
-        m_buttonHelper.data()->show();
-        connect(this, &FileNameEditor::destroyed,
-                m_buttonHelper, &StrftimeChooserWidget::deleteLater);
-        connect(m_buttonHelper, &StrftimeChooserWidget::variableEmitted,
-                this, &FileNameEditor::addToNameEditor);
-    }
+void FileNameEditor::addToNameEditor(QString s) {
+    m_nameEditor->setText(m_nameEditor->text() + s);
 }

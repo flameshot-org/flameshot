@@ -21,48 +21,44 @@
 #include "src/config/uicoloreditor.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
+#include "src/config/strftimechooserwidget.h"
 #include <QIcon>
 #include <QVBoxLayout>
-#include <QGroupBox>
 #include <QLabel>
 #include <QKeyEvent>
 
 // ConfigWindow contains the menus where you can configure the application
 
-ConfigWindow::ConfigWindow(QWidget *parent) : QWidget(parent) {
+ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setFixedSize(410, 540);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
-    m_layout = new QVBoxLayout(this);
+    QColor background = this->palette().background().color();
+    bool isWhite = CaptureButton::iconIsWhiteByColor(background);
+    QString modifier = isWhite ? ":img/configWhite/" : ":img/configBlack/";
 
-    // color editor
-    QLabel *colorSelectionLabel = new QLabel(tr("UI color editor"), this);
-    m_layout->addWidget(colorSelectionLabel);
+    // visuals
+    auto visuals = new QWidget();
+    QVBoxLayout *layoutUI= new QVBoxLayout();
+    visuals->setLayout(layoutUI);
+    layoutUI->addWidget(new UIcolorEditor());
+    auto boxButtons = new QGroupBox();
+    boxButtons->setTitle(tr("Button Selection"));
+    auto listLayout = new QVBoxLayout(boxButtons);
+    listLayout->addWidget(new ButtonListView());
+    layoutUI->addWidget(boxButtons);
 
-    m_layout->addWidget(new UIcolorEditor(this));
+    addTab(visuals, "Interface");
+    setTabIcon(0, QIcon(modifier + "graphics.png"));
 
-    // general config
-    QLabel *configLabel = new QLabel(tr("General"), this);
-    m_layout->addWidget(configLabel);
+    // filename
+    addTab(new FileNameEditor(), "Name Editor");
+    setTabIcon(1, QIcon(modifier + "name_edition.png"));
 
-    m_layout->addWidget(new GeneneralConf(this));
-
-    // button selection
-    QLabel *buttonSelectLabel = new QLabel(tr("Button selection"), this);
-    m_layout->addWidget(buttonSelectLabel);
-
-    ButtonListView *m_buttonListView = new ButtonListView(this);
-    m_buttonListView->setFlow(QListWidget::TopToBottom);
-    m_layout->addWidget(m_buttonListView);
-
-    // name editor
-    QLabel *nameEditLabel = new QLabel(tr("Filename editor"), this);
-    m_layout->addWidget(nameEditLabel);
-
-    FileNameEditor *nameEditor = new FileNameEditor(this);
-    m_layout->addWidget(nameEditor);
+    addTab(new GeneneralConf(), "General");
+    setTabIcon(2, QIcon(modifier + "config.png"));
 
     show();
 }

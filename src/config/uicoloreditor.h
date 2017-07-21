@@ -20,14 +20,14 @@
 
 #include "color_wheel.hpp"
 #include "src/capture/capturebutton.h"
-#include <QFrame>
+#include <QGroupBox>
 
 class QVBoxLayout;
 class QHBoxLayout;
 class CaptureButton;
 class ClickableLabel;
 
-class UIcolorEditor : public QFrame {
+class UIcolorEditor : public QGroupBox {
     Q_OBJECT
 public:
     explicit UIcolorEditor(QWidget *parent = nullptr);

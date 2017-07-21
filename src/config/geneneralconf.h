@@ -18,11 +18,11 @@
 #ifndef GENENERALCONF_H
 #define GENENERALCONF_H
 
-#include <QFrame>
+#include <QGroupBox>
 
 class QVBoxLayout;
 
-class GeneneralConf : public QFrame {
+class GeneneralConf : public QGroupBox {
     Q_OBJECT
 public:
     GeneneralConf(QWidget *parent = nullptr);

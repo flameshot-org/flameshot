@@ -24,6 +24,7 @@
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
+    setFlow(QListWidget::TopToBottom);
     initButtonList();
     connect(this, &QListWidget::itemChanged, this,
             &ButtonListView::updateActiveButtons);
@@ -40,7 +41,7 @@ void ButtonListView::initButtonList() {
         CaptureTool *tool = factory.CreateTool(t);
 
         // add element to the local map
-        m_buttonTypeByName[tool->getName()] = t;
+        m_buttonTypeByName.insert(tool->getName(), t);
 
         // init the menu option
 

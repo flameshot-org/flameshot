@@ -31,5 +31,11 @@
         <file>img/buttonIconsBlack/square.png</file>
         <file>img/buttonIconsWhite/square.png</file>
         <file>img/flameshot.png</file>
+        <file>img/configWhite/config.png</file>
+        <file>img/configWhite/graphics.png</file>
+        <file>img/configWhite/name_edition.png</file>
+        <file>img/configBlack/config.png</file>
+        <file>img/configBlack/graphics.png</file>
+        <file>img/configBlack/name_edition.png</file>
     </qresource>
 </RCC>

@@ -18,14 +18,9 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#include <QWidget>
+#include <QTabWidget>
 
-class QVBoxLayout;
-
-class QListWidgetItem;
-class QListWidget;
-
-class ConfigWindow : public QWidget {
+class ConfigWindow : public QTabWidget {
     Q_OBJECT
 public:
     explicit ConfigWindow(QWidget *parent = nullptr);
@@ -34,9 +29,6 @@ protected:
     void keyPressEvent(QKeyEvent *);
 
 private:
-    QVBoxLayout *m_layout;
-
-
 
 };
 

@@ -20,10 +20,9 @@
 #include <QVBoxLayout>
 #include <QCheckBox>
 
-GeneneralConf::GeneneralConf(QWidget *parent) : QFrame(parent) {
-    setFrameStyle(QFrame::StyledPanel);
-
+GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     m_layout = new QVBoxLayout(this);
+    m_layout->setAlignment(Qt::AlignTop);
     initShowHelp();
     initShowDesktopNotification();
 }
