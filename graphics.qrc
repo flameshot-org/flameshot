@@ -37,5 +37,7 @@
         <file>img/configBlack/config.png</file>
         <file>img/configBlack/graphics.png</file>
         <file>img/configBlack/name_edition.png</file>
+        <file>img/buttonIconsBlack/size_indicator.png</file>
+        <file>img/buttonIconsWhite/size_indicator.png</file>
     </qresource>
 </RCC>

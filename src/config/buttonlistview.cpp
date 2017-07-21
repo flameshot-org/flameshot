@@ -53,6 +53,10 @@ void ButtonListView::initButtonList() {
         QString color = bgColor.valueF() < 0.6 ? "White" : "Black";
         QString iconPath = QString(":/img/buttonIcons%1/%2")
                 .arg(color).arg(tool->getIconName());
+        if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
+            iconPath = QString(":/img/buttonIcons%1/size_indicator.png")
+                    .arg(color);
+        }
         buttonItem->setIcon(QIcon(iconPath));
 
         buttonItem->setFlags(Qt::ItemIsUserCheckable);
