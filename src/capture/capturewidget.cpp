@@ -29,10 +29,8 @@
 #include "src/capture/screengrabber.h"
 #include "src/utils/confighandler.h"
 #include <QScreen>
-#include <QWindow>
 #include <QGuiApplication>
 #include <QApplication>
-#include <QScreen>
 #include <QShortcut>
 #include <QPainter>
 #include <QPaintEvent>
@@ -210,25 +208,23 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         m_colorPicker->show();
         return;
     }
-
     if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
         if (m_state != CaptureButton::TYPE_MOVESELECTION) {
-            m_modifications.append(
-                        new CaptureModification(m_state, e->pos(),
-                                                m_colorPicker->getDrawColor(),
-                                                this)
-                        );
+            auto mod = new CaptureModification(m_state, e->pos(),
+                                               m_colorPicker->getDrawColor(),
+                                               this);
+            m_modifications.append(mod);
             return;
         }
         m_dragStartPoint = e->pos();
         m_selectionBeforeDrag = m_selection;
-        m_buttonHandler->hide();
         if (!m_selection.contains(e->pos()) && !m_mouseOverHandle) {
             m_newSelection = true;
             m_selection = QRect();
             setCursor(Qt::CrossCursor);
+            m_buttonHandler->hide();
         } else if (m_selection.contains(e->pos())){
             setCursor(Qt::ClosedHandCursor);
         }
@@ -239,7 +235,9 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
     if (m_mouseIsClicked && m_state == CaptureButton::TYPE_MOVESELECTION) {
         m_mousePos = e->pos();
-
+        if (m_buttonHandler->isVisible()) {
+            m_buttonHandler->hide();
+        }
         if (m_newSelection) {
             m_selection = QRect(m_dragStartPoint, limitPointToRect(
                                     m_mousePos, rect())).normalized();
@@ -296,8 +294,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             r.setBottomRight(limitPointToRect(r.bottomRight(), rect()));
             m_selection = r;
         }
-        update();
-
     } else if (m_mouseIsClicked) {
         m_modifications.last()->addPoint(e->pos());
     } else {
