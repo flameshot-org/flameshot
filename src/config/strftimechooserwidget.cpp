@@ -31,7 +31,7 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) 
             k.pop_back();
             QString variable = m_buttonData.value(key);
             QPushButton *button = new QPushButton(this);
-            button->setText(key);
+            button->setText(tr(key.toStdString().data()));
             button->setToolTip(variable);
             button->setFixedHeight(30);
             layout->addWidget(button, j, i);
@@ -43,25 +43,25 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) 
 }
 
 QMap<QString, QString> StrftimeChooserWidget::m_buttonData {
-    { "Century (00-99)",        "%C"},
-    { "Year (00-99)",           "%y"},
-    { "Year (2000)",            "%Y"},
-    { "Month Name (jan)",       "%b"},
-    { "Month Name (january)",   "%B"},
-    { "Month (01-12)",          "%m"},
-    { "Week Day (1-7)",         "%u"},
-    { "week (01-53)",           "%V"},
-    { "Day Name (mon)",         "%a"},
-    { "Day Name (monday)",      "%A"},
-    { "Day (01-31)",            "%d"},
-    { "Day of Month (1-31)",    "%e"},
-    { "Day (001-366)",          "%j"},
-    { "Time (%H:%M:%S)",        "%T"},
-    { "Time (%H:%M)",           "%R"},
-    { "Hour (00-23)",           "%H"},
-    { "Hour (01-12)",           "%I"},
-    { "Minute (00-59)",         "%M"},
-    { "Second (00-59)",         "%S"},
-    { "Full Date (%m/%d/%y)",   "%D"},
-    { "Full Date (%Y-%m-%d)",   "%F"},
+    { QT_TR_NOOP("Century (00-99)"),        "%C"},
+    { QT_TR_NOOP("Year (00-99)"),           "%y"},
+    { QT_TR_NOOP("Year (2000)"),            "%Y"},
+    { QT_TR_NOOP("Month Name (jan)"),       "%b"},
+    { QT_TR_NOOP("Month Name (january)"),   "%B"},
+    { QT_TR_NOOP("Month (01-12)"),          "%m"},
+    { QT_TR_NOOP("Week Day (1-7)"),         "%u"},
+    { QT_TR_NOOP("Week (01-53)"),           "%V"},
+    { QT_TR_NOOP("Day Name (mon)"),         "%a"},
+    { QT_TR_NOOP("Day Name (monday)"),      "%A"},
+    { QT_TR_NOOP("Day (01-31)"),            "%d"},
+    { QT_TR_NOOP("Day of Month (1-31)"),    "%e"},
+    { QT_TR_NOOP("Day (001-366)"),          "%j"},
+    { QT_TR_NOOP("Time (%H:%M:%S)"),        "%T"},
+    { QT_TR_NOOP("Time (%H:%M)"),           "%R"},
+    { QT_TR_NOOP("Hour (00-23)"),           "%H"},
+    { QT_TR_NOOP("Hour (01-12)"),           "%I"},
+    { QT_TR_NOOP("Minute (00-59)"),         "%M"},
+    { QT_TR_NOOP("Second (00-59)"),         "%S"},
+    { QT_TR_NOOP("Full Date (%m/%d/%y)"),   "%D"},
+    { QT_TR_NOOP("Full Date (%Y-%m-%d)"),   "%F"},
 };
