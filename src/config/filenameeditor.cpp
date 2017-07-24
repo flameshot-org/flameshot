@@ -101,4 +101,5 @@ void FileNameEditor::resetName() {
 
 void FileNameEditor::addToNameEditor(QString s) {
     m_nameEditor->setText(m_nameEditor->text() + s);
+    m_nameEditor->setFocus();
 }
