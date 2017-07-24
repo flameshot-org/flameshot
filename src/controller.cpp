@@ -46,14 +46,10 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
 }
 
-QString Controller::saveScreenshot(bool toClipboard) {
-    QPointer<CaptureWidget> w = createCapture();
+QString Controller::saveScreenshot(const QString &path,
+                                   bool const toClipboard) {
+    QPointer<CaptureWidget> w = createCaptureWidget(path);
     return w->saveScreenshot(toClipboard);
-}
-
-QString Controller::saveScreenshot(QString path, bool toClipboard) {
-    QPointer<CaptureWidget> w = createCapture();
-    return w->saveScreenshot(path, toClipboard);
 }
 
 // creates the items of the trayIcon
@@ -104,17 +100,17 @@ void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r) {
 }
 
 // creation of a new capture
-QPointer<CaptureWidget> Controller::createCapture(bool enableSaveWindow) {
-    QPointer<CaptureWidget> w = new CaptureWidget(enableSaveWindow);
+QPointer<CaptureWidget> Controller::createCaptureWidget(const QString &forcedSavePath) {
+    QPointer<CaptureWidget> w = new CaptureWidget(forcedSavePath);
     connect(w, &CaptureWidget::newMessage,
             this, &Controller::showDesktopNotification);
     return w;
 }
 
 // creation of a new capture in GUI mode
-void Controller::createVisualCapture(bool enableSaveWindow) {
+void Controller::createVisualCapture(const QString &forcedSavePath) {
     if (!m_captureWindow) {
-        m_captureWindow = createCapture(enableSaveWindow);
+        m_captureWindow = createCaptureWidget(forcedSavePath);
         m_captureWindow->showFullScreen();
     }
 }

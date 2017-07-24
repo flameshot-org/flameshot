@@ -35,12 +35,11 @@ class Controller : public QObject {
 public:
     explicit Controller(QObject *parent = nullptr);
 
-    QString saveScreenshot(bool toClipboard = false);
-    QString saveScreenshot(QString path, bool toClipboard = false);
-
 public slots:
-    QPointer<CaptureWidget> createCapture(bool enableSaveWindow = true);
-    void createVisualCapture(bool enableSaveWindow = true);
+    QString saveScreenshot(const QString &path = "",
+                           bool const toClipboard = false);
+    void createVisualCapture(const QString &forcedSavePath = "");
+
     void openConfigWindow();
     void openInfoWindow();
     void showDesktopNotification(QString);
@@ -50,6 +49,8 @@ private slots:
     void trayIconActivated(QSystemTrayIcon::ActivationReason r);
 
 private:
+    QPointer<CaptureWidget> createCaptureWidget(const QString &forcedSavePath = "");
+
     void createActions();
     void createTrayIcon();
 

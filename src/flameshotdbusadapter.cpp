@@ -17,6 +17,7 @@
 
 #include "flameshotdbusadapter.h"
 #include "src/utils/confighandler.h"
+#include <QTimer>
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(Controller *parent)
     : QDBusAbstractAdaptor(parent)
@@ -32,25 +33,19 @@ Controller *FlameshotDBusAdapter::parent() const {
     return static_cast<Controller *>(QObject::parent());
 }
 
-void FlameshotDBusAdapter::openCapture() {
-    parent()->createVisualCapture();
+void FlameshotDBusAdapter::graphicCapture(QString path, int delay) {
+    auto p = parent();
+    auto f = [p, path, this]() {
+        p->createVisualCapture(path);
+    };
+    QTimer::singleShot(delay, p, f);
 }
 
-void FlameshotDBusAdapter::openCaptureWithPath(QString path) {
-    ConfigHandler().setSavePath(path);
-    parent()->createVisualCapture(false);
-}
+void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay) {
+    auto p = parent();
+    auto f = [p, path, toClipboard, this]() {
+        p->saveScreenshot(path, toClipboard);
+    };
+    QTimer::singleShot(delay, p, f);
 
-void FlameshotDBusAdapter::fullScreen(bool toClipboard) {
-    QString path = parent()->saveScreenshot(toClipboard);
-    if (!path.isEmpty()) {
-        QString saveMessage(tr("Capture saved in "));
-        parent()->showDesktopNotification(saveMessage + path);
-    }
-}
-
-void FlameshotDBusAdapter::fullScreenWithPath(QString path, bool toClipboard) {
-    QString finalPath = parent()->saveScreenshot(path, toClipboard);
-    QString saveMessage(tr("Capture saved in "));
-    parent()->showDesktopNotification(saveMessage + finalPath);
 }

@@ -59,7 +59,10 @@ QPixmap Screenshot::getScreenshot() const {
 
 // graphicalSave generates a graphical window to ask about the save path and
 // saves the screenshot with all the modifications in such directory
-QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const {
+QString Screenshot::graphicalSave(bool &ok,
+                                  const QRect &selection,
+                                  QWidget *parent) const
+{
     QString savePath = FileNameHandler().getAbsoluteSavePath();
     // setup window
     QFileDialog fileDialog(parent, QObject::tr("Save As"), savePath);
@@ -74,7 +77,6 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
     fileDialog.setDefaultSuffix("png");
     fileDialog.setWindowIcon(QIcon(":img/flameshot.png"));
 
-    bool saved = false;
     QString fileName;
     do {
         if (fileDialog.exec() != QDialog::Accepted) { return ""; }
@@ -89,8 +91,8 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
         } else { // save full screen when no selection
             pixToSave = m_modifiedScreenshot.copy(selection);
         }
-        saved = pixToSave.save(fileName);
-        if (!saved) {
+        ok = pixToSave.save(fileName);
+        if (!ok) {
             QMessageBox saveErrBox(
                         QMessageBox::Warning,
                         QObject::tr("Save Error"),
@@ -99,11 +101,11 @@ QString Screenshot::graphicalSave(const QRect &selection, QWidget *parent) const
             saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
             saveErrBox.exec();
         }
-    } while(!saved);
+    } while(!ok);
     return savePath;
 }
 
-QString Screenshot::fileSave(const QRect &selection) const {
+QString Screenshot::fileSave(bool &ok, const QRect &selection) const {
     QString savePath = FileNameHandler().getAbsoluteSavePath();
     QPixmap pixToSave;
     if (selection.isEmpty()) {
@@ -111,7 +113,8 @@ QString Screenshot::fileSave(const QRect &selection) const {
     } else { // save full screen when no selection
         pixToSave = m_modifiedScreenshot.copy(selection);
     }
-    return pixToSave.save(savePath) ? savePath : "";
+    ok = pixToSave.save(savePath);
+    return savePath;
 }
 
 // paintModification adds a new modification to the screenshot

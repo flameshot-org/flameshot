@@ -17,7 +17,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="160"/>
+        <location filename="../src/capture/capturewidget.cpp" line="158"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.</source>
@@ -26,13 +26,17 @@ Presiona Enter para capturar la pantalla.
 Presiona click derecho para mostrar el selector de color.</translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="400"/>
-        <location filename="../src/capture/capturewidget.cpp" line="421"/>
+        <location filename="../src/capture/capturewidget.cpp" line="401"/>
+        <source>Error trying to save in </source>
+        <translation>Error intentando guardar en </translation>
+    </message>
+    <message>
+        <location filename="../src/capture/capturewidget.cpp" line="410"/>
         <source>Capture saved in </source>
         <translation>Captura guardada en </translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="475"/>
+        <location filename="../src/capture/capturewidget.cpp" line="465"/>
         <source>Uploading image...</source>
         <translation>Subiendo imagen...</translation>
     </message>
@@ -71,17 +75,17 @@ Presiona click derecho para mostrar el selector de color.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/controller.cpp" line="61"/>
+        <location filename="../src/controller.cpp" line="57"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuración</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="65"/>
+        <location filename="../src/controller.cpp" line="61"/>
         <source>&amp;Information</source>
         <translation>&amp;Información</translation>
     </message>
     <message>
-        <location filename="../src/controller.cpp" line="69"/>
+        <location filename="../src/controller.cpp" line="65"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
@@ -151,15 +155,6 @@ Presiona click derecho para mostrar el selector de color.</translation>
         <location filename="../src/utils/filenamehandler.cpp" line="36"/>
         <source>screenshot</source>
         <translation>captura</translation>
-    </message>
-</context>
-<context>
-    <name>FlameshotDBusAdapter</name>
-    <message>
-        <location filename="../src/flameshotdbusadapter.cpp" line="47"/>
-        <location filename="../src/flameshotdbusadapter.cpp" line="54"/>
-        <source>Capture saved in </source>
-        <translation>Captura guardada en </translation>
     </message>
 </context>
 <context>
@@ -322,17 +317,17 @@ Presiona click derecho para mostrar el selector de color.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="65"/>
+        <location filename="../src/capture/screenshot.cpp" line="68"/>
         <source>Save As</source>
         <translation>Guardar Como</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="96"/>
+        <location filename="../src/capture/screenshot.cpp" line="98"/>
         <source>Save Error</source>
         <translation>Error al Guardar</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="97"/>
+        <location filename="../src/capture/screenshot.cpp" line="99"/>
         <source>The image could not be saved to &quot;%1&quot;.</source>
         <translation>la imagen no pudo ser guardada en &quot;%1&quot;.</translation>
     </message>
@@ -362,17 +357,27 @@ Presiona click derecho para mostrar el selector de color.</translation>
         <translation>Guarda la captura en el portapapeles</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="96"/>
-        <source>Invalid path.</source>
-        <translation>Rura inválida.</translation>
+        <location filename="../src/main.cpp" line="76"/>
+        <source>Delay time in milliseconds</source>
+        <translation>Tiempo de espera en milisegundos</translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="446"/>
+        <location filename="../src/main.cpp" line="98"/>
+        <source>Invalid path.</source>
+        <translation>Ruta inválida.</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="106"/>
+        <source>Invalid negative delay.</source>
+        <translation>Valor negativo de espera inválido.</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/capturewidget.cpp" line="436"/>
         <source>Resource Error</source>
         <translation>Error de Recurso</translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="447"/>
+        <location filename="../src/capture/capturewidget.cpp" line="437"/>
         <source>Unable to open the URL.</source>
         <translation>No puede abrir la URL.</translation>
     </message>

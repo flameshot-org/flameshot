@@ -72,53 +72,53 @@ int main(int argc, char *argv[]) {
                                   "pathVal");
     QCommandLineOption clipboardOption({{"c", "clipboard"},
                                         QObject::tr("Save the capture to the clipboard")});
+    QCommandLineOption delayOption(QStringList() << "d" << "delay",
+                                  QObject::tr("Delay time in milliseconds"),
+                                  "pathVal");
     if (command == "full") {
         parser.clearPositionalArguments();
         parser.addPositionalArgument(
                     "full", fullDescription, "full [full_options]");
-        parser.addOptions({ pathOption, clipboardOption });
+        parser.addOptions({ pathOption, clipboardOption, delayOption });
     } else if (command == "gui") {
         parser.clearPositionalArguments();
         parser.addPositionalArgument(
                     "gui", guiDescription, "gui [gui_options]");
 
-        parser.addOption(pathOption);
+        parser.addOptions({ pathOption, delayOption });
     }
     parser.process(app);
 
+    // obtain values
     QDBusMessage m;
     QString pathValue;
-    bool pathIsSetAndValid = parser.isSet("path");
-    if (pathIsSetAndValid) {
+    if (parser.isSet("path")) {
         pathValue = QString::fromStdString(parser.value("path").toStdString());
-        pathIsSetAndValid = QDir(pathValue).exists();
-        if (!pathIsSetAndValid) {
+        if (!QDir(pathValue).exists()) {
             qWarning() << QObject::tr("Invalid path.");
             return 0;
         }
     }
-
-    if (command == "gui") {
-        if (pathIsSetAndValid) {
-            m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "openCaptureWithPath");
-            m << pathValue;
-        } else {
-            m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "openCapture");
+    int delay = 0;
+    if (parser.isSet("delay")) {
+        delay = parser.value("delay").toInt();
+        if (delay < 0) {
+            qWarning() << QObject::tr("Invalid negative delay.");
+            return 0;
         }
+    }
+
+    // process commands
+    if (command == "gui") {
+        m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
+                                           "/", "", "graphicCapture");
+        m << pathValue << delay;
         QDBusConnection::sessionBus().call(m);
 
     } else if (command == "full") {
-        if (pathIsSetAndValid) {
-            m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "fullScreenWithPath");
-            m << pathValue;
-        } else {
-            m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "fullScreen");
-        }
-        m << parser.isSet("clipboard");
+        m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
+                                           "/", "", "fullScreen");
+        m << pathValue << parser.isSet("clipboard") << delay;
         QDBusConnection::sessionBus().call(m);
     }
     return 0;

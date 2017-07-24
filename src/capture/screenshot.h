@@ -37,8 +37,10 @@ public:
     QPixmap getBaseScreenshot() const;
     QPixmap getScreenshot() const;
 
-    QString graphicalSave(const QRect &selection = QRect(), QWidget *parent = 0) const;
-    QString fileSave(const QRect &selection = QRect()) const;
+    QString graphicalSave(bool &ok,
+                          const QRect &selection = QRect(),
+                          QWidget *parent = 0) const;
+    QString fileSave(bool &ok, const QRect &selection = QRect()) const;
     void uploadToImgur(QNetworkAccessManager *,
                        const QRect &selection = QRect());
     QPixmap paintModification(const CaptureModification*);

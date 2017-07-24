@@ -45,13 +45,13 @@ class CaptureWidget : public QWidget {
     friend class CaptureButton;
 
 public:
-    explicit CaptureWidget(bool enableSaveWindow = true, QWidget *parent = nullptr);
+    explicit CaptureWidget(const QString &forcedSavePath = "",
+                           QWidget *parent = nullptr);
     ~CaptureWidget();
 
     void updateButtons();
 public slots:
     QString saveScreenshot(bool toClipboard = false);
-    QString saveScreenshot(QString path, bool toClipboard = false);
     void handleButtonSignal(CaptureTool::Request r);
 
 signals:
@@ -97,7 +97,8 @@ protected:
     bool m_grabbing;
     bool m_onButton;
     bool m_showInitialMsg;
-    bool m_enableSaveWindow;
+
+    const QString m_forcedSavePath;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

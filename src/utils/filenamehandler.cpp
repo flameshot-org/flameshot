@@ -58,14 +58,14 @@ QString FileNameHandler::getAbsoluteSavePath() {
     if (savePath.isEmpty() || !QDir(savePath).exists() || !QFileInfo(savePath).isWritable()) {
         changed = true;
         savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-        if (savePath.isEmpty()) {
-            savePath = QDir::currentPath();
-        }
     }
     if(changed) {
         config.setSavePath(savePath);
     }
-    QString tempName = "/"+ FileNameHandler().getParsedPattern();
+    // first add slash if needed
+    QString tempName = savePath.endsWith("/") ? "" : "/";
+    // add the parsed pattern in a correct format for the filesystem
+    tempName += FileNameHandler().getParsedPattern().replace("/", "⁄");
     // find unused name adding _n where n is a number
     QFileInfo checkFile(savePath + tempName + ".png");
     if (checkFile.exists()) {

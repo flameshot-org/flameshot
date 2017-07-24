@@ -2,48 +2,31 @@
 <node>
   <interface name="org.dharkael.Flameshot">
       
-    <!--
-      openCapture:
-      Opens the user interface used to capture pictures of the screen.
+      <!--
+        graphicCapture:
+        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
+        @delay: delay time in milliseconds.
+
+        Open the user interface used to capture the screen.
     -->
-    <method name="openCapture">
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-    
-    <!--
-      openCaptureWithPath:
-      @path: the path where the screenshot will be saved
-    
-      Opens the user interface used to capture pictures of the screen with
-      a predefined save path (wont ask for it when saving the capture).
-    -->
-    <method name="openCaptureWithPath">
+    <method name="graphicCapture">
       <arg name="path" type="s" direction="in"/>
+      <arg name="delay" type="i" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
     
     <!--
-      fullScreen:
-      @toClipboard: Whether to copy the screenshot to clipboard or not
-    
-      Takes a simple screenshot of the whole screen.
+        fullScreen:
+        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
+        @toClipboard: Whether to copy the screenshot to clipboard or not.
+        @delay: delay time in milliseconds.
+
+        Takes a screenshot of the whole screen.
     -->
     <method name="fullScreen">
-      <arg name="toClipboard" type="b" direction="in"/>
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-    
-    <!--
-      fullScreenWithPath:
-      @path: the path where the screenshot will be saved
-      @toClipboard: Whether to copy the screenshot to clipboard or not
-    
-      Takes a simple screenshot of the whole screen with
-      a predefined save path (wont ask for it when saving the capture).
-    -->
-    <method name="fullScreenWithPath">
       <arg name="path" type="s" direction="in"/>
       <arg name="toClipboard" type="b" direction="in"/>
+      <arg name="delay" type="i" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
   </interface>

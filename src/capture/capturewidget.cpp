@@ -47,13 +47,11 @@ namespace {
     // size of the handlers at the corners of the selection
     const int HANDLE_SIZE = 9;
 }
-
-// http://doc.qt.io/qt-5/qwidget.html#setMask
-
-CaptureWidget::CaptureWidget(bool enableSaveWindow, QWidget *parent) :
+// enableSaveWIndow
+CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_onButton(false), m_enableSaveWindow(enableSaveWindow),
+    m_onButton(false), m_forcedSavePath(forcedSavePath),
     m_state(CaptureButton::TYPE_MOVESELECTION)
 {
     m_showInitialMsg = ConfigHandler().getShowHelp();
@@ -389,37 +387,29 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 }
 
 QString CaptureWidget::saveScreenshot(bool toClipboard) {
-    hide();
-    QString path;
-    if (m_selection.isNull()) {
-        path = m_screenshot->graphicalSave(QRect(), this);
-    } else { // save full screen when no selection
-        path = m_screenshot->graphicalSave(getExtendedSelection(), this);
-    }
-    if (!path.isEmpty()) {
-        QString saveMessage(tr("Capture saved in "));
-        Q_EMIT newMessage(saveMessage + path);
-    }
-    if (toClipboard) {
-        copyScreenshot();
-    }
-    close();
-    return path;
-}
-
-QString CaptureWidget::saveScreenshot(QString path, bool toClipboard) {
-    ConfigHandler().setSavePath(path);
-    QString savePath;
-    if (m_selection.isNull()) {
-        savePath = m_screenshot->fileSave();
-    } else { // save full screen when no selection
-        savePath = m_screenshot->fileSave(getExtendedSelection());
+    QString savePath, saveMessage;
+    bool ok = true;
+    if(m_forcedSavePath.isEmpty()) {
+        if(isVisible()) {
+            hide();
+        }
+        savePath = m_screenshot->graphicalSave(ok, getExtendedSelection(), this);
+    } else {
+        ConfigHandler config;
+        config.setSavePath(m_forcedSavePath);
+        savePath = m_screenshot->fileSave(ok, getExtendedSelection());
+        if(!ok || config.getSavePath() != m_forcedSavePath) {
+            saveMessage = tr("Error trying to save in ") + savePath;
+            Q_EMIT newMessage(saveMessage);
+        }
     }
     if (toClipboard) {
         copyScreenshot();
     }
-    QString saveMessage(tr("Capture saved in "));
-    Q_EMIT newMessage(saveMessage + savePath);
+    if(ok) {
+        saveMessage = tr("Capture saved in ") + savePath;
+        Q_EMIT newMessage(saveMessage);
+    }
     close();
     return savePath;
 }
@@ -556,9 +546,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
         setCursor(Qt::CrossCursor);
         break;
     case CaptureTool::REQ_SAVE_SCREENSHOT:
-        m_enableSaveWindow ?
-                    saveScreenshot() :
-                    saveScreenshot(ConfigHandler().getSavePath());
+        saveScreenshot();
         break;
     case CaptureTool::REQ_SELECT_ALL:
         m_selection = rect();
@@ -649,6 +637,7 @@ QPoint CaptureWidget::limitPointToRect(const QPoint &p, const QRect &r) const {
 }
 
 QRect CaptureWidget::getExtendedSelection() const {
+    if(m_selection.isNull()) return QRect();
     auto devicePixelRatio = m_screenshot->getScreenshot().devicePixelRatio();
 
     return QRect(m_selection.left()   * devicePixelRatio,

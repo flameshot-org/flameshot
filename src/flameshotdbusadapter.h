@@ -32,11 +32,9 @@ public:
     inline Controller *parent() const;
 
 public slots:
-    Q_NOREPLY void openCapture();
-    Q_NOREPLY void openCaptureWithPath(QString path);
+    Q_NOREPLY void graphicCapture(QString path, int delay);
+    Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay);
 
-    Q_NOREPLY void fullScreen(bool toClipboard);
-    Q_NOREPLY void fullScreenWithPath(QString path, bool toClipboard);
 };
 
 #endif // FLAMESHOTDBUSADAPTER_H
