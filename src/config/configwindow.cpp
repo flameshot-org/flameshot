@@ -57,15 +57,15 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
             buttonList, &ButtonListView::selectAll);
     listLayout->addWidget(setAllButtons);
 
-    addTab(visuals, "Interface");
+    addTab(visuals, tr("Interface"));
     setTabIcon(0, QIcon(modifier + "graphics.png"));
 
     // filename
-    addTab(new FileNameEditor(), "Name Editor");
+    addTab(new FileNameEditor(), tr("Filename Editor"));
     setTabIcon(1, QIcon(modifier + "name_edition.png"));
 
     // general
-    addTab(new GeneneralConf(), "General");
+    addTab(new GeneneralConf(), tr("General"));
     setTabIcon(2, QIcon(modifier + "config.png"));
 
     show();

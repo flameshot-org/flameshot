@@ -22,6 +22,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLineEdit>
+#include <QLabel>
 #include <QPushButton>
 
 FileNameEditor::FileNameEditor(QWidget *parent) : QGroupBox(parent) {
@@ -31,6 +32,7 @@ FileNameEditor::FileNameEditor(QWidget *parent) : QGroupBox(parent) {
 
 void FileNameEditor::initLayout() {
     m_layout = new QVBoxLayout(this);
+    m_layout->addWidget(new QLabel(tr("Edit the name of your captures:"), this));
     m_layout->addWidget(m_helperButtons);
     m_layout->addWidget(m_nameEditor);
     m_layout->addWidget(m_outputLabel);

@@ -26,7 +26,7 @@ Presiona Enter para capturar la pantalla.
 Presiona click derecho para mostrar el selector de color.</translation>
     </message>
     <message>
-        <location filename="../src/capture/capturewidget.cpp" line="401"/>
+        <location filename="../src/capture/capturewidget.cpp" line="402"/>
         <source>Error trying to save in </source>
         <translation>Error intentando guardar en </translation>
     </message>
@@ -70,6 +70,21 @@ Presiona click derecho para mostrar el selector de color.</translation>
         <location filename="../src/config/configwindow.cpp" line="55"/>
         <source>Select All</source>
         <translation>Seleccionar Todos</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="60"/>
+        <source>Interface</source>
+        <translation>Interfaz</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
+        <source>Filename Editor</source>
+        <translation>Editor de Nombre</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <source>General</source>
+        <translation>General</translation>
     </message>
 </context>
 <context>
@@ -119,32 +134,37 @@ Presiona click derecho para mostrar el selector de color.</translation>
 <context>
     <name>FileNameEditor</name>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="73"/>
+        <location filename="../src/config/filenameeditor.cpp" line="35"/>
+        <source>Edit the name of your captures:</source>
+        <translation>Edita el nombre de tus capturas:</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filenameeditor.cpp" line="75"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="75"/>
+        <location filename="../src/config/filenameeditor.cpp" line="77"/>
         <source>Saves the pattern</source>
         <translation>Guarda el patrón</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="77"/>
+        <location filename="../src/config/filenameeditor.cpp" line="79"/>
         <source>Reset</source>
         <translation>Reiniciar</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="80"/>
+        <location filename="../src/config/filenameeditor.cpp" line="82"/>
         <source>Restores the saved pattern</source>
         <translation>Restaura el patrón guardado</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="82"/>
+        <location filename="../src/config/filenameeditor.cpp" line="84"/>
         <source>Clear</source>
         <translation>Limpiar</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="86"/>
+        <location filename="../src/config/filenameeditor.cpp" line="88"/>
         <source>Deletes the name</source>
         <translation>Borra el patrón</translation>
     </message>
@@ -317,17 +337,17 @@ Presiona click derecho para mostrar el selector de color.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="68"/>
+        <location filename="../src/capture/screenshot.cpp" line="69"/>
         <source>Save As</source>
         <translation>Guardar Como</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="98"/>
+        <location filename="../src/capture/screenshot.cpp" line="99"/>
         <source>Save Error</source>
         <translation>Error al Guardar</translation>
     </message>
     <message>
-        <location filename="../src/capture/screenshot.cpp" line="99"/>
+        <location filename="../src/capture/screenshot.cpp" line="100"/>
         <source>The image could not be saved to &quot;%1&quot;.</source>
         <translation>la imagen no pudo ser guardada en &quot;%1&quot;.</translation>
     </message>
