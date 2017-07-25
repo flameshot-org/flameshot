@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
     if (parser.isSet("path")) {
         pathValue = QString::fromStdString(parser.value("path").toStdString());
         if (!QDir(pathValue).exists()) {
-            qWarning() << QObject::tr("Invalid path.");
+            qWarning().noquote() << QObject::tr("Invalid path.");
             return 0;
         }
     }
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     if (parser.isSet("delay")) {
         delay = parser.value("delay").toInt();
         if (delay < 0) {
-            qWarning() << QObject::tr("Invalid negative delay.");
+            qWarning().noquote() << QObject::tr("Invalid negative delay.");
             return 0;
         }
     }
