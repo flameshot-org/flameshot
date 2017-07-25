@@ -229,7 +229,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     }
     update();
 }
-
+#include <QDebug>
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
     if (m_mouseIsClicked && m_state == CaptureButton::TYPE_MOVESELECTION) {
         m_mousePos = e->pos();
@@ -237,16 +237,24 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             m_buttonHandler->hide();
         }
         if (m_newSelection) {
-            m_selection = QRect(m_dragStartPoint, limitPointToRect(
-                                    m_mousePos, rect())).normalized();
-        } else if (m_mouseOverHandle == 0) {
+            m_selection = QRect(m_dragStartPoint, m_mousePos).normalized();
+        } else if (m_mouseOverHandle == nullptr) {
             // Moving the whole selection
-            QRect r = rect().normalized(), s = m_selectionBeforeDrag.normalized();
-            QPoint p = s.topLeft() + e->pos() - m_dragStartPoint;
-            r.setBottomRight(r.bottomRight() - QPoint(s.width(), s.height()));
-
-            if (!r.isNull() && r.isValid()) {
-                m_selection.moveTo(limitPointToRect(p, r));
+            QRect r = rect().normalized();
+            QRect initialRect = m_selection.normalized();
+            // new top left
+            QPoint p = initialRect.topLeft() + (e->pos() - m_dragStartPoint);
+            m_dragStartPoint += e->pos() - m_dragStartPoint;
+            m_selection.moveTo(p);
+            if(!r.contains(QPoint(r.center().x(), m_selection.top()))) {
+                m_selection.setTop(r.top());
+            } if(!r.contains(QPoint(m_selection.left(), r.center().y()))) {
+                m_selection.setLeft(r.left());
+            }
+            if(!r.contains(QPoint(m_selection.right(), r.center().y()))) {
+                m_selection.setRight(r.right());
+            } if(!r.contains(QPoint(r.center().x(), m_selection.bottom()))) {
+                m_selection.setBottom(r.bottom());
             }
         } else {
             // Dragging a handle
@@ -256,41 +264,38 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
             if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_THandle
-                    || m_mouseOverHandle == &m_TRHandle) { // dragging one of the top handles
+                    || m_mouseOverHandle == &m_TRHandle)
+            { // dragging one of the top handles
                 r.setTop(r.top() + offset.y());
-
                 if (symmetryMod) {
                     r.setBottom(r.bottom() - offset.y());
                 }
             }
             if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_LHandle
-                    || m_mouseOverHandle == &m_BLHandle) { // dragging one of the left handles
+                    || m_mouseOverHandle == &m_BLHandle)
+            { // dragging one of the left handles
                 r.setLeft(r.left() + offset.x());
-
                 if (symmetryMod) {
                     r.setRight(r.right() - offset.x());
                 }
             }
             if (m_mouseOverHandle == &m_BLHandle || m_mouseOverHandle == &m_BHandle
-                    || m_mouseOverHandle == &m_BRHandle) { // dragging one of the bottom handles
+                    || m_mouseOverHandle == &m_BRHandle)
+            { // dragging one of the bottom handles
                 r.setBottom(r.bottom() + offset.y());
-
                 if (symmetryMod) {
                     r.setTop(r.top() - offset.y());
                 }
             }
             if (m_mouseOverHandle == &m_TRHandle || m_mouseOverHandle == &m_RHandle
-                    || m_mouseOverHandle == &m_BRHandle) { // dragging one of the right handles
+                    || m_mouseOverHandle == &m_BRHandle)
+            { // dragging one of the right handles
                 r.setRight(r.right() + offset.x());
-
                 if (symmetryMod) {
                     r.setLeft(r.left() - offset.x());
                 }
             }
-            r = r.normalized();
-            r.setTopLeft(limitPointToRect(r.topLeft(), rect()));
-            r.setBottomRight(limitPointToRect(r.bottomRight(), rect()));
-            m_selection = r;
+            m_selection = r.normalized();
         }
     } else if (m_mouseIsClicked) {
         m_modifications.last()->addPoint(e->pos());
@@ -621,19 +626,6 @@ QRegion CaptureWidget::handleMask() const {
     QRegion mask;
     foreach(QRect * rect, m_Handles) mask += QRegion(*rect);
     return mask;
-}
-
-
-QPoint CaptureWidget::limitPointToRect(const QPoint &p, const QRect &r) const {
-    int x = r.x();
-    int y = r.y();
-    if (x < p.x()) {
-        x = (p.x() < r.right()) ? p.x() : r.right();
-    }
-    if (y < p.y()) {
-       y = (p.y() < r.bottom()) ? p.y() : r.bottom();
-    }
-    return QPoint(x,y);
 }
 
 QRect CaptureWidget::getExtendedSelection() const {

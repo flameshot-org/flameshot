@@ -78,7 +78,6 @@ protected:
     void mouseReleaseEvent(QMouseEvent *);
     void keyPressEvent(QKeyEvent *);
 
-    QPoint limitPointToRect(const QPoint &p, const QRect &r) const;
     QRegion handleMask() const;
 
     // pixel map of the screen
