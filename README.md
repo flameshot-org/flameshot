@@ -30,15 +30,18 @@ Example commands:
 - capture with GUI:
 
 `flameshot gui`
+- open GUI with a delay of 2 seconds:
+
+`flameshot gui -d 2000`
 - capture with GUI with custom save path:
 
 `flameshot gui -p ~/myStuff/captures`
 - fullscreen capture (asking savepath):
 
 `flameshot full`
-- fullscreen capture with custom save path (no GUI):
+- fullscreen capture with custom save path (no GUI) and delayed:
 
-`flameshot full -p ~/myStuff/captures`
+`flameshot full -p ~/myStuff/captures -d 5000`
 - fullscreen capture with custom save path copying to clipboard:
 
 `flameshot full -c -p ~/myStuff/captures`
@@ -63,6 +66,8 @@ These shortcuts are available in GUI mode:
 | CTRL + Z      | Undo the last modification  |
 | Right Click   | Show color picker           |
 
+Shift + drag a handler of the selection area: mirror redimension in the opposite handler.
+
 ## Considerations
 
 - **Not working on Wayland**
@@ -73,7 +78,7 @@ These shortcuts are available in GUI mode:
 
 - Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing `Ctrl + S` will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
 
-- Execute `flameshot` without parameters to launch a running instance of the program without taking actions.
+- Execute the command `flameshot` without parameters or use the "Launch Flameshot" desktop entry to launch a running instance of the program without taking actions.
 
 ## Compilation
 ### Debian
