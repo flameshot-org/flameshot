@@ -388,7 +388,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 
 QString CaptureWidget::saveScreenshot(bool toClipboard) {
     QString savePath, saveMessage;
-    bool ok = true;
+    bool ok = false;
     if(m_forcedSavePath.isEmpty()) {
         if(isVisible()) {
             hide();

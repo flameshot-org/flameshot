@@ -63,6 +63,7 @@ QString Screenshot::graphicalSave(bool &ok,
                                   const QRect &selection,
                                   QWidget *parent) const
 {
+    ok = false; // user quits the dialog case
     QString savePath = FileNameHandler().getAbsoluteSavePath();
     // setup window
     QFileDialog fileDialog(parent, QObject::tr("Save As"), savePath);
