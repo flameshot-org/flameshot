@@ -74,7 +74,7 @@ CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
                    | Qt::Tool);
 
     setMouseTracking(true);
-    setCursor(Qt::CrossCursor);
+    updateCursor();
     initShortcuts();
 
     // init content
@@ -128,9 +128,6 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    if (m_grabbing) { // grabWindow() should just get the background
-        return;
-    }
     // if we are creating a new modification to the screenshot we just draw
     // a temporal modification without antialiasing in the pencil tool for
     // performance. When we are not drawing we just shot the modified screenshot
@@ -200,13 +197,10 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
-        setCursor(Qt::ArrowCursor);
         m_colorPicker->move(e->pos().x()-m_colorPicker->width()/2,
                             e->pos().y()-m_colorPicker->height()/2);
         m_colorPicker->show();
-        return;
-    }
-    if (e->button() == Qt::LeftButton) {
+    } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
         if (m_state != CaptureButton::TYPE_MOVESELECTION) {
@@ -221,24 +215,25 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         if (!m_selection.contains(e->pos()) && !m_mouseOverHandle) {
             m_newSelection = true;
             m_selection = QRect();
-            setCursor(Qt::CrossCursor);
             m_buttonHandler->hide();
-        } else if (m_selection.contains(e->pos())){
-            setCursor(Qt::ClosedHandCursor);
+        } else {
+            m_grabbing = true;
         }
     }
+    updateCursor();
     update();
 }
-#include <QDebug>
+
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
+    m_mousePos = e->pos();
+
     if (m_mouseIsClicked && m_state == CaptureButton::TYPE_MOVESELECTION) {
-        m_mousePos = e->pos();
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
         if (m_newSelection) {
             m_selection = QRect(m_dragStartPoint, m_mousePos).normalized();
-        } else if (m_mouseOverHandle == nullptr) {
+        } else if (!m_mouseOverHandle) {
             // Moving the whole selection
             QRect r = rect().normalized();
             QRect initialRect = m_selection.normalized();
@@ -260,7 +255,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             // Dragging a handle
             QRect r = m_selectionBeforeDrag;
             QPoint offset = e->pos() - m_dragStartPoint;
-
             bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
             if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_THandle
@@ -313,30 +307,9 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             }
         }
         if (!found) {
-            m_mouseOverHandle = 0;
-
-            if (m_rightClick) {
-                setCursor(Qt::ArrowCursor);
-            } else if (m_selection.contains(e->pos()) && !m_onButton &&
-                    m_state == CaptureButton::TYPE_MOVESELECTION) {
-                setCursor(Qt::OpenHandCursor);
-            } else if (m_onButton) {
-                setCursor(Qt::ArrowCursor);
-            } else {
-                setCursor(Qt::CrossCursor);
-            }
-        } else if (m_state == CaptureButton::TYPE_MOVESELECTION){
-            // cursor on the handlers
-            if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_BRHandle) {
-                setCursor(Qt::SizeFDiagCursor);
-            } else if (m_mouseOverHandle == &m_TRHandle || m_mouseOverHandle == &m_BLHandle) {
-                setCursor(Qt::SizeBDiagCursor);
-            } else if (m_mouseOverHandle == &m_LHandle || m_mouseOverHandle == &m_RHandle) {
-                setCursor(Qt::SizeHorCursor);
-            } else if (m_mouseOverHandle == &m_THandle || m_mouseOverHandle == &m_BHandle) {
-                setCursor(Qt::SizeVerCursor);
-            }
+            m_mouseOverHandle = nullptr;
         }
+        updateCursor();
     }
     update();
 }
@@ -345,25 +318,22 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
         m_colorPicker->hide();
         m_rightClick = false;
-        return;
     // when we end the drawing of a modification in the capture we have to
     // register the last point and add the whole modification to the screenshot
     } else if (m_mouseIsClicked && m_state != CaptureButton::TYPE_MOVESELECTION) {
         m_screenshot->paintModification(m_modifications.last());
     }
 
-    if (!m_selection.isNull() && !m_buttonHandler->isVisible()) {
+    if (!m_buttonHandler->isVisible() && !m_selection.isNull()) {
         updateSizeIndicator();
         m_buttonHandler->updatePosition(m_selection, rect());
         m_buttonHandler->show();
     }
     m_mouseIsClicked = false;
     m_newSelection = false;
+    m_grabbing = false;
 
-    if (m_state == CaptureButton::TYPE_MOVESELECTION && m_mouseOverHandle == 0 &&
-            m_selection.contains(e->pos())) {
-        setCursor(Qt::OpenHandCursor);
-    }
+    updateCursor();
     update();
 }
 
@@ -482,42 +452,6 @@ bool CaptureWidget::undo() {
     return itemRemoved;
 }
 
-void CaptureWidget::leftResize() {
-    if (!m_selection.isNull() && m_selection.right() > m_selection.left()) {
-        m_selection.setRight(m_selection.right()-1);
-        m_buttonHandler->updatePosition(m_selection, rect());
-        updateSizeIndicator();
-        update();
-    }
-}
-
-void CaptureWidget::rightResize() {
-    if (!m_selection.isNull() && m_selection.right() < rect().right()) {
-        m_selection.setRight(m_selection.right()+1);
-        m_buttonHandler->updatePosition(m_selection, rect());
-        updateSizeIndicator();
-        update();
-    }
-}
-
-void CaptureWidget::upResize() {
-    if (!m_selection.isNull() && m_selection.bottom() > m_selection.top()) {
-        m_selection.setBottom(m_selection.bottom()-1);
-        m_buttonHandler->updatePosition(m_selection, rect());
-        updateSizeIndicator();
-        update();
-    }
-}
-
-void CaptureWidget::downResize() {
-    if (!m_selection.isNull() && m_selection.bottom() < rect().bottom()) {
-        m_selection.setBottom(m_selection.bottom()+1);
-        m_buttonHandler->updatePosition(m_selection, rect());
-        updateSizeIndicator();
-        update();
-    }
-}
-
 void CaptureWidget::setState(CaptureButton *b) {
     CaptureButton::ButtonType t = b->getButtonType();
     if(b->getTool()->isSelectable()) {
@@ -548,7 +482,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     case CaptureTool::REQ_HIDE_SELECTION:
         m_newSelection = true;
         m_selection = QRect();
-        setCursor(Qt::CrossCursor);
+        updateCursor();
         break;
     case CaptureTool::REQ_SAVE_SCREENSHOT:
         saveScreenshot();
@@ -585,6 +519,42 @@ void CaptureWidget::enterButton() {
     m_onButton = true;
 }
 
+void CaptureWidget::leftResize() {
+    if (!m_selection.isNull() && m_selection.right() > m_selection.left()) {
+        m_selection.setRight(m_selection.right()-1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
+void CaptureWidget::rightResize() {
+    if (!m_selection.isNull() && m_selection.right() < rect().right()) {
+        m_selection.setRight(m_selection.right()+1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
+void CaptureWidget::upResize() {
+    if (!m_selection.isNull() && m_selection.bottom() > m_selection.top()) {
+        m_selection.setBottom(m_selection.bottom()-1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
+void CaptureWidget::downResize() {
+    if (!m_selection.isNull() && m_selection.bottom() < rect().bottom()) {
+        m_selection.setBottom(m_selection.bottom()+1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        updateSizeIndicator();
+        update();
+    }
+}
+
 void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveScreenshot()));
@@ -619,6 +589,34 @@ void CaptureWidget::updateSizeIndicator() {
                                      .arg(m_selection.width()+2)
                                      .arg(m_selection.height()+2));
     }
+}
+
+void CaptureWidget::updateCursor() {
+    if (m_rightClick || m_onButton) {
+        setCursor(Qt::ArrowCursor);
+    } else if (m_grabbing) {
+        setCursor(Qt::ClosedHandCursor);
+    } else if (m_state == CaptureButton::TYPE_MOVESELECTION) {
+        if (m_mouseOverHandle){
+            // cursor on the handlers
+            if (m_mouseOverHandle == &m_TLHandle || m_mouseOverHandle == &m_BRHandle) {
+                setCursor(Qt::SizeFDiagCursor);
+            } else if (m_mouseOverHandle == &m_TRHandle || m_mouseOverHandle == &m_BLHandle) {
+                setCursor(Qt::SizeBDiagCursor);
+            } else if (m_mouseOverHandle == &m_LHandle || m_mouseOverHandle == &m_RHandle) {
+                setCursor(Qt::SizeHorCursor);
+            } else if (m_mouseOverHandle == &m_THandle || m_mouseOverHandle == &m_BHandle) {
+                setCursor(Qt::SizeVerCursor);
+            }
+        } else if (m_selection.contains(m_mousePos)) {
+            setCursor(Qt::OpenHandCursor);
+        } else {
+            setCursor(Qt::CrossCursor);
+        }
+    } else {
+        setCursor(Qt::CrossCursor);
+    }
+
 }
 
 QRegion CaptureWidget::handleMask() const {

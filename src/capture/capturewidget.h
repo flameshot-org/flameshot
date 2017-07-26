@@ -113,6 +113,7 @@ private:
     void initShortcuts();
     void updateHandles();
     void updateSizeIndicator();
+    void updateCursor();
 
     QRect getExtendedSelection() const;
     QVector<CaptureModification*> m_modifications;
