@@ -32,7 +32,9 @@ FileNameEditor::FileNameEditor(QWidget *parent) : QGroupBox(parent) {
 
 void FileNameEditor::initLayout() {
     m_layout = new QVBoxLayout(this);
-    m_layout->addWidget(new QLabel(tr("Edit the name of your captures:"), this));
+    auto infoLabel = new QLabel(tr("Edit the name of your captures:"), this);
+    infoLabel->setFixedHeight(20);
+    m_layout->addWidget(infoLabel);
     m_layout->addWidget(m_helperButtons);
     m_layout->addWidget(m_nameEditor);
     m_layout->addWidget(m_outputLabel);

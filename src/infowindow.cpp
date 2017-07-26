@@ -27,7 +27,6 @@
 
 InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFixedSize(400, 275);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("About"));
 
@@ -35,9 +34,12 @@ InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     layout->addWidget(new QLabel(tr("<b>Shortcuts</b>"), this));
     initInfoTable();
     layout->addWidget(new QLabel(tr("<b>License</b>"), this));
-    layout->addWidget(new QLabel("GPLv3+", this));
 
-    // inform about full screen capture when no selection
+    auto imgGPL = new QLabel(this);
+    imgGPL->setStyleSheet("background: white; border-color: black; border-width: 2px");
+    imgGPL->setPixmap(QPixmap(":img/gplv3.png"));
+    imgGPL->setFixedWidth(imgGPL->pixmap()->width());
+    layout->addWidget(imgGPL);
 
     show();
 }
@@ -75,7 +77,6 @@ void InfoWindow::initInfoTable() {
     table->setSelectionMode(QAbstractItemView::NoSelection);
     table->setFocusPolicy(Qt::NoFocus);
     table->verticalHeader()->hide();
-    table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     // header creation
     QStringList names;
     names  << tr("Key") << tr("Description");
@@ -88,6 +89,8 @@ void InfoWindow::initInfoTable() {
     // adjust size
     table->resizeColumnsToContents();
     table->resizeRowsToContents();
+    table->setMinimumWidth(400);
+
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
                                              QSizePolicy::Expanding);

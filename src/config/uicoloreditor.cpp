@@ -64,7 +64,7 @@ void UIcolorEditor::initColorWheel() {
             &UIcolorEditor::updateLocalColor);
 
     m_colorWheel->setColor(m_uiColor);
-    m_colorWheel->setFixedSize(100,100);
+    m_colorWheel->setMinimumSize(100, 100);
 
     m_colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));

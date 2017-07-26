@@ -33,7 +33,7 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) 
             QPushButton *button = new QPushButton(this);
             button->setText(tr(key.toStdString().data()));
             button->setToolTip(variable);
-            button->setFixedHeight(30);
+            button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             layout->addWidget(button, j, i);
             connect(button, &QPushButton::clicked,
                     this, [variable, this](){Q_EMIT variableEmitted(variable);});

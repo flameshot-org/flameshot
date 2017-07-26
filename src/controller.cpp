@@ -119,6 +119,7 @@ void Controller::createVisualCapture(const QString &forcedSavePath) {
 void Controller::openConfigWindow() {
     if (!m_configWindow) {
         m_configWindow = new ConfigWindow();
+        m_configWindow->show();
     }
 }
 

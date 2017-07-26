@@ -31,7 +31,7 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFixedSize(410, 540);
+    setMinimumSize(395, 490);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
@@ -67,8 +67,6 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     // general
     addTab(new GeneneralConf(), tr("General"));
     setTabIcon(2, QIcon(modifier + "config.png"));
-
-    show();
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent *e) {
