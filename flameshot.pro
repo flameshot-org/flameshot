@@ -4,6 +4,8 @@
 #
 #-------------------------------------------------
 
+VERSION = $$system(git describe)
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 QT       += core gui
 QT       += dbus

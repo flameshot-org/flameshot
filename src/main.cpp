@@ -27,6 +27,8 @@
 #include <QDir>
 
 int main(int argc, char *argv[]) {
+    qApp->setApplicationVersion(static_cast<QString>(APP_VERSION));
+
     QTranslator translator;
     translator.load(QLocale::system().language(),
       "Internationalization", "_", "/usr/share/flameshot/translations/");
@@ -52,7 +54,12 @@ int main(int argc, char *argv[]) {
     app.setApplicationName("flameshot");
     app.setOrganizationName("Dharkael");
 
+    // CLI parsing
     QCommandLineParser parser;
+    QCommandLineOption versionOption(QStringList() << "v" << "version",
+                                     "Show version information");
+
+    parser.addOption(versionOption);
     parser.addHelpOption();
     parser.setApplicationDescription(
                 "Powerfull yet simple to use screenshot software.");
@@ -64,17 +71,22 @@ int main(int argc, char *argv[]) {
                                  "mode [mode_options]");
     parser.parse(app.arguments());
 
+    // show app version
+    if (parser.isSet("version")) {
+        qInfo().noquote() << "Flameshot" << qApp->applicationVersion()
+                          << "\nCompiled with Qt" << QT_VERSION_STR;
+        return 0;
+    }
     const QStringList args = parser.positionalArguments();
     const QString command = args.isEmpty() ? QString() : args.first();
 
     QCommandLineOption pathOption(QStringList() << "p" << "path",
-                                  "Path where the capture will be saved",
-                                  "pathVal");
+                                  "Path where the capture will be saved", "");
     QCommandLineOption clipboardOption({{"c", "clipboard"},
                                         "Save the capture to the clipboard"});
     QCommandLineOption delayOption(QStringList() << "d" << "delay",
-                                  "Delay time in milliseconds",
-                                  "pathVal");
+                                  "Delay time in milliseconds", "0");
+    // parse commands
     if (command == "full") {
         parser.clearPositionalArguments();
         parser.addPositionalArgument(
