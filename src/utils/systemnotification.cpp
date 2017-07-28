@@ -1,4 +1,5 @@
 #include "systemnotification.h"
+#include "src/utils/confighandler.h"
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusInterface>
@@ -17,6 +18,10 @@ void SystemNotification::sendMessage(
         const QString &title,
         const int timeout)
 {
+    if(!ConfigHandler().getDesktopNotification()) {
+        return;
+    }
+
     QList<QVariant> args;
     args << (qAppName())                 //appname
          << static_cast<unsigned int>(0) //id
