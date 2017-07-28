@@ -17,6 +17,7 @@
 
 #include "geneneralconf.h"
 #include "src/utils/confighandler.h"
+#include "src/core/controller.h"
 #include <QVBoxLayout>
 #include <QCheckBox>
 
@@ -25,6 +26,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     m_layout->setAlignment(Qt::AlignTop);
     initShowHelp();
     initShowDesktopNotification();
+    initShowTrayIcon();
 }
 
 void GeneneralConf::showHelpChanged(bool checked) {
@@ -33,6 +35,15 @@ void GeneneralConf::showHelpChanged(bool checked) {
 
 void GeneneralConf::showDesktopNotificationChanged(bool checked) {
     ConfigHandler().setDesktopNotification(checked);
+}
+
+void GeneneralConf::showTrayIconChanged(bool checked) {
+    auto controller = Controller::getInstance();
+    if(checked) {
+        controller->enableTrayIcon();
+    } else {
+        controller->disableTrayIcon();
+    }
 }
 
 void GeneneralConf::initShowHelp() {
@@ -57,4 +68,16 @@ void GeneneralConf::initShowDesktopNotification() {
 
     connect(c, &QCheckBox::clicked, this,
             &GeneneralConf::showDesktopNotificationChanged);
+}
+
+void GeneneralConf::initShowTrayIcon() {
+    QCheckBox *c = new QCheckBox(tr("Show tray icon"), this);
+    ConfigHandler config;
+    bool checked = !config.getDisabledTrayIcon();
+    c->setChecked(checked);
+    c->setToolTip(tr("Show systemtray icons"));
+    m_layout->addWidget(c);
+
+    connect(c, &QCheckBox::clicked, this,
+            &GeneneralConf::showTrayIconChanged);
 }

@@ -30,12 +30,14 @@ public:
 private slots:
    void showHelpChanged(bool checked);
    void showDesktopNotificationChanged(bool checked);
+   void showTrayIconChanged(bool checked);
 
 private:
     QVBoxLayout *m_layout;
 
     void initShowHelp();
     void initShowDesktopNotification();
+    void initShowTrayIcon();
 };
 
 #endif // GENENERALCONF_H
