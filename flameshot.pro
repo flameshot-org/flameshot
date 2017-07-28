@@ -36,7 +36,6 @@ include(src/Qt-Color-Widgets//color_widgets.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp\
-    src/controller.cpp \
     src/capture/buttonhandler.cpp \
     src/infowindow.cpp \
     src/config/configwindow.cpp \
@@ -47,7 +46,7 @@ SOURCES += src/main.cpp\
     src/config/buttonlistview.cpp \
     src/config/uicoloreditor.cpp \
     src/config/geneneralconf.cpp \
-    src/flameshotdbusadapter.cpp \
+    src/core/flameshotdbusadapter.cpp \
     src/config/clickablelabel.cpp \
     src/config/filenameeditor.cpp \
     src/utils/filenamehandler.cpp \
@@ -70,10 +69,10 @@ SOURCES += src/main.cpp\
     src/capture/tools/selectiontool.cpp \
     src/capture/tools/sizeindicatortool.cpp \
     src/capture/tools/toolfactory.cpp \
-    src/utils/confighandler.cpp
+    src/utils/confighandler.cpp \
+    src/core/controller.cpp
 
 HEADERS  += \
-    src/controller.h \
     src/capture/buttonhandler.h \
     src/infowindow.h \
     src/config/configwindow.h \
@@ -84,7 +83,7 @@ HEADERS  += \
     src/config/buttonlistview.h \
     src/config/uicoloreditor.h \
     src/config/geneneralconf.h \
-    src/flameshotdbusadapter.h \
+    src/core/flameshotdbusadapter.h \
     src/config/clickablelabel.h \
     src/config/filenameeditor.h \
     src/utils/filenamehandler.h \
@@ -107,7 +106,8 @@ HEADERS  += \
     src/capture/tools/selectiontool.h \
     src/capture/tools/sizeindicatortool.h \
     src/capture/tools/toolfactory.h \
-    src/utils/confighandler.h
+    src/utils/confighandler.h \
+    src/core/controller.h
 
 RESOURCES += \
     graphics.qrc

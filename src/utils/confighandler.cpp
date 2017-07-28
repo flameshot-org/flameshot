@@ -93,6 +93,14 @@ void ConfigHandler::setFilenamePattern(const QString &pattern) {
     return m_settings->setValue("filenamePattern", pattern);
 }
 
+bool ConfigHandler::getDisabledTrayIcon() {
+    return m_settings->value("disabledTrayIcon").toBool();
+}
+
+void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon) {
+    m_settings->setValue("disabledTrayIcon", disabledTrayIcon);
+}
+
 bool ConfigHandler::initiatedIsSet() {
     return m_settings->value("initiated").toBool();
 }

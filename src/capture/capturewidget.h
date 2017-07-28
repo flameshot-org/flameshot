@@ -54,9 +54,6 @@ public slots:
     QString saveScreenshot(bool toClipboard = false);
     void handleButtonSignal(CaptureTool::Request r);
 
-signals:
-    void newMessage(QString);
-
 private slots:
     void copyScreenshot();
     void openURL(QNetworkReply *reply);

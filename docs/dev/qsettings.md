@@ -30,3 +30,7 @@
     - value: "filenamePattern"
     - type: QString
     - description: pattern for the saved files.
+- show System Tray
+    - value: "showTrayIcon"
+    - type: bool
+    - description: show Tray Icon in the taskbar.

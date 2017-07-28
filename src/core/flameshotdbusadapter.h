@@ -19,7 +19,7 @@
 #define FLAMESHOTDBUSADAPTER_H
 
 #include <QtDBus/QDBusAbstractAdaptor>
-#include "src/controller.h"
+#include "src/core/controller.h"
 
 class FlameshotDBusAdapter : public QDBusAbstractAdaptor
 {

@@ -375,7 +375,7 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
         savePath = m_screenshot->fileSave(ok, getExtendedSelection());
         if(!ok || config.getSavePath() != m_forcedSavePath) {
             saveMessage = tr("Error trying to save in ") + savePath;
-            Q_EMIT newMessage(saveMessage);
+            // TODO send saveMessage
         }
     }
     if (toClipboard) {
@@ -383,7 +383,7 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
     }
     if(ok) {
         saveMessage = tr("Capture saved in ") + savePath;
-        Q_EMIT newMessage(saveMessage);
+        // TODO send saveMessage
     }
     close();
     return savePath;
@@ -437,7 +437,7 @@ void CaptureWidget::uploadScreenshot() {
         m_screenshot->uploadToImgur(am, getExtendedSelection());
     }
     hide();
-    Q_EMIT newMessage(tr("Uploading image..."));
+    // TODO send tr("Uploading image...")
 }
 
 bool CaptureWidget::undo() {

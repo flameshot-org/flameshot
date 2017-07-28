@@ -20,20 +20,20 @@
 
 #include <QObject>
 #include <QPointer>
-#include <QSystemTrayIcon>
 
-class QMenu;
-class QSystemTrayIcon;
-class QAction;
 class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
+class QSystemTrayIcon;
 
 class Controller : public QObject {
     Q_OBJECT
 
 public:
-    explicit Controller(QObject *parent = nullptr);
+    static Controller* getInstance();
+
+    Controller(const Controller&) = delete;
+    void operator =(const Controller&) = delete;
 
 public slots:
     QString saveScreenshot(const QString &path = "",
@@ -42,28 +42,22 @@ public slots:
 
     void openConfigWindow();
     void openInfoWindow();
-    void showDesktopNotification(QString);
+
+    void enableTrayIcon();
+    void disableTrayIcon();
 
 private slots:
     void initDefaults();
-    void trayIconActivated(QSystemTrayIcon::ActivationReason r);
 
 private:
+    Controller();
+
     QPointer<CaptureWidget> createCaptureWidget(const QString &forcedSavePath = "");
-
-    void createActions();
-    void createTrayIcon();
-
-    QAction *m_configAction;
-    QAction *m_infoAction;
-    QAction *m_quitAction;
-
-    QSystemTrayIcon *m_trayIcon;
-    QMenu *m_trayIconMenu;
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;
     QPointer<ConfigWindow> m_configWindow;
+    QPointer<QSystemTrayIcon> m_trayIcon;
 };
 
 #endif // CONTROLLER_H

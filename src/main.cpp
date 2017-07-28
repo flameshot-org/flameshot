@@ -15,9 +15,9 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "controller.h"
+#include "src/core/controller.h"
 #include "singleapplication.h"
-#include "src/flameshotdbusadapter.h"
+#include "src/core/flameshotdbusadapter.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QObject>
@@ -39,10 +39,10 @@ int main(int argc, char *argv[]) {
         app.setApplicationName("flameshot");
         app.setOrganizationName("Dharkael");
 
-        Controller c;
-        new FlameshotDBusAdapter(&c);
+        auto c = Controller::getInstance();
+        new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
-        dbus.registerObject("/", &c);
+        dbus.registerObject("/", c);
         dbus.registerService("org.dharkael.Flameshot");
         return app.exec();
     }

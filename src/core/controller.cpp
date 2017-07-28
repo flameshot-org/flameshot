@@ -16,34 +16,41 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
-#include "capture/capturewidget.h"
+#include "src/capture/capturewidget.h"
 #include "src/utils/confighandler.h"
-#include "infowindow.h"
-#include "config/configwindow.h"
-#include "capture/capturebutton.h"
-#include <QAction>
-#include <QApplication>
-#include <QMenu>
+#include "src/infowindow.h"
+#include "src/config/configwindow.h"
+#include "src/capture/capturebutton.h"
 #include <QFile>
+#include <QApplication>
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QMenu>
 
 // Controller is the core component of Flameshot, creates the trayIcon and
 // launches the capture widget
 
-Controller::Controller(QObject *parent) : QObject(parent),
-        m_captureWindow(nullptr)
+Controller::Controller() : m_captureWindow(nullptr)
 {
     // required for the button serialization
     qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
-    createActions();
-    createTrayIcon();
-    m_trayIcon->show();
+    qApp->setQuitOnLastWindowClosed(false);
+
+    // init tray icon
+    if(!ConfigHandler().getDisabledTrayIcon()) {
+        enableTrayIcon();
+    }
 
     initDefaults();
-    qApp->setQuitOnLastWindowClosed(false);
 
     QString StyleSheet = CaptureButton::getGlobalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
+}
+
+Controller *Controller::getInstance() {
+    static Controller c;
+    return &c;
 }
 
 QString Controller::saveScreenshot(const QString &path,
@@ -52,39 +59,7 @@ QString Controller::saveScreenshot(const QString &path,
     return w->saveScreenshot(toClipboard);
 }
 
-// creates the items of the trayIcon
-void Controller::createActions() {
-    m_configAction = new QAction(tr("&Configuration"), this);
-    connect(m_configAction, &QAction::triggered, this,
-            &Controller::openConfigWindow);
-
-    m_infoAction = new QAction(tr("&Information"), this);
-    connect(m_infoAction, &QAction::triggered, this,
-            &Controller::openInfoWindow);
-
-    m_quitAction = new QAction(tr("&Quit"), this);
-    connect(m_quitAction, &QAction::triggered, qApp,
-            &QCoreApplication::quit);
-}
-
-// creates the trayIcon
-void Controller::createTrayIcon() {
-    // requires a widget as parent but it should be used the whole app live period
-    m_trayIconMenu = new QMenu();
-    m_trayIconMenu->addAction(m_configAction);
-    m_trayIconMenu->addAction(m_infoAction);
-    m_trayIconMenu->addSeparator();
-    m_trayIconMenu->addAction(m_quitAction);
-
-    m_trayIcon = new QSystemTrayIcon(this);
-    m_trayIcon->setToolTip("Flameshot");
-    m_trayIcon->setContextMenu(m_trayIconMenu);
-    m_trayIcon->setIcon(QIcon(":img/flameshot.png"));
-    connect(m_trayIcon, &QSystemTrayIcon::activated,
-            this, &Controller::trayIconActivated);
-}
-
-// initDefaults inits the global config in the very first run of the program
+// initDefaults inits the global config in the first execution of the program
 void Controller::initDefaults() {
     ConfigHandler config;
     //config.setNotInitiated();
@@ -93,17 +68,9 @@ void Controller::initDefaults() {
     }
 }
 
-void Controller::trayIconActivated(QSystemTrayIcon::ActivationReason r) {
-    if (r == QSystemTrayIcon::Trigger) {
-        createVisualCapture();
-    }
-}
-
 // creation of a new capture
 QPointer<CaptureWidget> Controller::createCaptureWidget(const QString &forcedSavePath) {
     QPointer<CaptureWidget> w = new CaptureWidget(forcedSavePath);
-    connect(w, &CaptureWidget::newMessage,
-            this, &Controller::showDesktopNotification);
     return w;
 }
 
@@ -130,9 +97,42 @@ void Controller::openInfoWindow() {
     }
 }
 
-void Controller::showDesktopNotification(QString msg) {
-    bool showMessages = ConfigHandler().getDesktopNotification();
-    if (showMessages && m_trayIcon->supportsMessages()) {
-        m_trayIcon->showMessage("Flameshot Info", msg);
+void Controller::enableTrayIcon() {
+    if(m_trayIcon) {
+        return;
     }
+    ConfigHandler().setDisabledTrayIcon(false);
+    QAction *configAction = new QAction(tr("&Configuration"));
+    connect(configAction, &QAction::triggered, this,
+            &Controller::openConfigWindow);
+    QAction *infoAction = new QAction(tr("&Information"));
+    connect(infoAction, &QAction::triggered, this,
+            &Controller::openInfoWindow);
+    QAction *quitAction = new QAction(tr("&Quit"));
+    connect(quitAction, &QAction::triggered, qApp,
+            &QCoreApplication::quit);
+
+    QMenu *trayIconMenu = new QMenu();
+    trayIconMenu->addAction(configAction);
+    trayIconMenu->addAction(infoAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction);
+
+    m_trayIcon = new QSystemTrayIcon();
+    m_trayIcon->setToolTip("Flameshot");
+    m_trayIcon->setContextMenu(trayIconMenu);
+    m_trayIcon->setIcon(QIcon(":img/flameshot.png"));
+
+    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r){
+        if (r == QSystemTrayIcon::Trigger) {
+            createVisualCapture();
+        }
+    };
+    connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+    m_trayIcon->show();
+}
+
+void Controller::disableTrayIcon() {
+    m_trayIcon->deleteLater();
+    ConfigHandler().setDisabledTrayIcon(true);
 }

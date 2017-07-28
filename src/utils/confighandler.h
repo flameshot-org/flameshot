@@ -54,6 +54,9 @@ public:
     QString getFilenamePattern();
     void setFilenamePattern(const QString &);
 
+    bool getDisabledTrayIcon();
+    void setDisabledTrayIcon(const bool);
+
     bool initiatedIsSet();
     void setInitiated();
     void setNotInitiated();
