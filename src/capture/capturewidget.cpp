@@ -28,6 +28,7 @@
 #include "src/capture/colorpicker.h"
 #include "src/capture/screengrabber.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/systemnotification.h"
 #include <QScreen>
 #include <QGuiApplication>
 #include <QApplication>
@@ -364,6 +365,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 QString CaptureWidget::saveScreenshot(bool toClipboard) {
     QString savePath, saveMessage;
     bool ok = false;
+    SystemNotification notify;
     if(m_forcedSavePath.isEmpty()) {
         if(isVisible()) {
             hide();
@@ -375,7 +377,7 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
         savePath = m_screenshot->fileSave(ok, getExtendedSelection());
         if(!ok || config.getSavePath() != m_forcedSavePath) {
             saveMessage = tr("Error trying to save in ") + savePath;
-            // TODO send saveMessage
+            notify.sendMessage(saveMessage);
         }
     }
     if (toClipboard) {
@@ -383,7 +385,7 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
     }
     if(ok) {
         saveMessage = tr("Capture saved in ") + savePath;
-        // TODO send saveMessage
+        notify.sendMessage(saveMessage);
     }
     close();
     return savePath;
@@ -437,7 +439,7 @@ void CaptureWidget::uploadScreenshot() {
         m_screenshot->uploadToImgur(am, getExtendedSelection());
     }
     hide();
-    // TODO send tr("Uploading image...")
+    SystemNotification().sendMessage(tr("Uploading image..."));
 }
 
 bool CaptureWidget::undo() {

@@ -70,7 +70,8 @@ SOURCES += src/main.cpp\
     src/capture/tools/sizeindicatortool.cpp \
     src/capture/tools/toolfactory.cpp \
     src/utils/confighandler.cpp \
-    src/core/controller.cpp
+    src/core/controller.cpp \
+    src/utils/systemnotification.cpp
 
 HEADERS  += \
     src/capture/buttonhandler.h \
@@ -107,7 +108,8 @@ HEADERS  += \
     src/capture/tools/sizeindicatortool.h \
     src/capture/tools/toolfactory.h \
     src/utils/confighandler.h \
-    src/core/controller.h
+    src/core/controller.h \
+    src/utils/systemnotification.h
 
 RESOURCES += \
     graphics.qrc
