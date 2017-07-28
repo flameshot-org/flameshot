@@ -55,10 +55,10 @@ int main(int argc, char *argv[]) {
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.setApplicationDescription(
-                QObject::tr("Powerfull yet simple to use screenshot software."));
+                "Powerfull yet simple to use screenshot software.");
 
-    QString fullDescription = QObject::tr("Capture the entire desktop.");
-    QString guiDescription = QObject::tr("Start a manual capture in GUI mode.");
+    QString fullDescription = "Capture the entire desktop.";
+    QString guiDescription = "Start a manual capture in GUI mode.";
     parser.addPositionalArgument("mode", "full\t"+fullDescription+"\n"
                                          "gui\t"+guiDescription,
                                  "mode [mode_options]");
@@ -68,12 +68,12 @@ int main(int argc, char *argv[]) {
     const QString command = args.isEmpty() ? QString() : args.first();
 
     QCommandLineOption pathOption(QStringList() << "p" << "path",
-                                  QObject::tr("Path where the capture will be saved"),
+                                  "Path where the capture will be saved",
                                   "pathVal");
     QCommandLineOption clipboardOption({{"c", "clipboard"},
-                                        QObject::tr("Save the capture to the clipboard")});
+                                        "Save the capture to the clipboard"});
     QCommandLineOption delayOption(QStringList() << "d" << "delay",
-                                  QObject::tr("Delay time in milliseconds"),
+                                  "Delay time in milliseconds",
                                   "pathVal");
     if (command == "full") {
         parser.clearPositionalArguments();
