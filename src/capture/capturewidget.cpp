@@ -364,8 +364,16 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 
 QString CaptureWidget::saveScreenshot(bool toClipboard) {
     QString savePath, saveMessage;
-    bool ok = false;
     SystemNotification notify;
+    if (toClipboard) {
+        if (m_selection.isNull()) { // copy full screen when no selection
+            QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot());
+        } else {
+            QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot()
+                                                 .copy(getExtendedSelection()));
+        }
+    }
+    bool ok = false;
     if(m_forcedSavePath.isEmpty()) {
         if(isVisible()) {
             hide();
@@ -380,9 +388,6 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
             notify.sendMessage(saveMessage);
         }
     }
-    if (toClipboard) {
-        copyScreenshot();
-    }
     if(ok) {
         saveMessage = tr("Capture saved in ") + savePath;
         notify.sendMessage(saveMessage);
@@ -392,9 +397,9 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
 }
 
 void CaptureWidget::copyScreenshot() {
-    if (m_selection.isNull()) {
+    if (m_selection.isNull()) { // copy full screen when no selection
         QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot());
-    } else { // copy full screen when no selection
+    } else {
         QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot()
                                              .copy(getExtendedSelection()));
     }
