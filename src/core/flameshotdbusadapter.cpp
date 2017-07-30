@@ -17,9 +17,10 @@
 
 #include "flameshotdbusadapter.h"
 #include "src/utils/confighandler.h"
+#include "src/core/controller.h"
 #include <QTimer>
 
-FlameshotDBusAdapter::FlameshotDBusAdapter(Controller *parent)
+FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
 
@@ -29,23 +30,32 @@ FlameshotDBusAdapter::~FlameshotDBusAdapter() {
 
 }
 
-Controller *FlameshotDBusAdapter::parent() const {
-    return static_cast<Controller *>(QObject::parent());
-}
-
 void FlameshotDBusAdapter::graphicCapture(QString path, int delay) {
-    auto p = parent();
-    auto f = [p, path, this]() {
-        p->createVisualCapture(path);
+    auto controller =  Controller::getInstance();
+    auto f = [controller, path, this]() {
+       controller->createVisualCapture(path);
     };
-    QTimer::singleShot(delay, p, f);
+    QTimer::singleShot(delay, controller, f);
 }
 
 void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay) {
-    auto p = parent();
-    auto f = [p, path, toClipboard, this]() {
-        p->saveScreenshot(path, toClipboard);
+    auto controller =  Controller::getInstance();
+    auto f = [controller, path, toClipboard, this]() {
+        controller->saveScreenshot(path, toClipboard);
     };
-    QTimer::singleShot(delay, p, f);
+    QTimer::singleShot(delay, controller, f);
 
+}
+
+void FlameshotDBusAdapter::openConfig() {
+    Controller::getInstance()->openConfigWindow();
+}
+
+void FlameshotDBusAdapter::trayIconEnabled(bool enabled) {
+    auto controller =  Controller::getInstance();
+    if (enabled) {
+        controller->enableTrayIcon();
+    } else {
+        controller->disableTrayIcon();
+    }
 }

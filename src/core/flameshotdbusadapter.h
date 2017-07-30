@@ -27,13 +27,14 @@ class FlameshotDBusAdapter : public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.dharkael.Flameshot")
 
 public:
-    FlameshotDBusAdapter(Controller *parent = nullptr);
+    FlameshotDBusAdapter(QObject *parent = nullptr);
     virtual ~FlameshotDBusAdapter();
-    inline Controller *parent() const;
 
 public slots:
     Q_NOREPLY void graphicCapture(QString path, int delay);
     Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay);
+    Q_NOREPLY void openConfig();
+    Q_NOREPLY void trayIconEnabled(bool enabled);
 
 };
 

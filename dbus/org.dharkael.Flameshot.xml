@@ -29,5 +29,25 @@
       <arg name="delay" type="i" direction="in"/>
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    
+    <!--
+        openConfig:
+
+        Opens the configuration window.
+    -->
+    <method name="openConfig">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
+    
+    <!--
+        trayIconEnabled:
+        @enabled: The new state fot the trayIcon.
+
+        Enable or disable the trayIcon.
+    -->
+    <method name="trayIconEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
   </interface>
 </node>

@@ -73,7 +73,7 @@ SOURCES += src/main.cpp\
     src/capture/tools/toolfactory.cpp \
     src/utils/confighandler.cpp \
     src/core/controller.cpp \
-    src/utils/systemnotification.cpp
+    src/utils/systemnotification.cpp \
 
 HEADERS  += \
     src/capture/buttonhandler.h \
@@ -111,7 +111,7 @@ HEADERS  += \
     src/capture/tools/toolfactory.h \
     src/utils/confighandler.h \
     src/core/controller.h \
-    src/utils/systemnotification.h
+    src/utils/systemnotification.h \
 
 RESOURCES += \
     graphics.qrc
