@@ -43,30 +43,47 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     auto visuals = new QWidget();
     QVBoxLayout *layoutUI= new QVBoxLayout();
     visuals->setLayout(layoutUI);
-    layoutUI->addWidget(new UIcolorEditor());
+    m_colorEditor = new UIcolorEditor();
+    layoutUI->addWidget(m_colorEditor);
 
     auto boxButtons = new QGroupBox();
     boxButtons->setTitle(tr("Button Selection"));
     auto listLayout = new QVBoxLayout(boxButtons);
-    auto buttonList = new ButtonListView();
+    m_buttonList = new ButtonListView();
     layoutUI->addWidget(boxButtons);
-    listLayout->addWidget(buttonList);
+    listLayout->addWidget(m_buttonList);
 
     QPushButton* setAllButtons = new QPushButton(tr("Select All"));
     connect(setAllButtons, &QPushButton::clicked,
-            buttonList, &ButtonListView::selectAll);
+            m_buttonList, &ButtonListView::selectAll);
     listLayout->addWidget(setAllButtons);
 
     addTab(visuals, tr("Interface"));
     setTabIcon(0, QIcon(modifier + "graphics.png"));
 
     // filename
-    addTab(new FileNameEditor(), tr("Filename Editor"));
+    m_filenameEditor = new FileNameEditor();
+    addTab(m_filenameEditor, tr("Filename Editor"));
     setTabIcon(1, QIcon(modifier + "name_edition.png"));
 
     // general
-    addTab(new GeneneralConf(), tr("General"));
+    m_generalConfig = new GeneneralConf();
+    addTab(m_generalConfig, tr("General"));
     setTabIcon(2, QIcon(modifier + "config.png"));
+
+    // connect update sigslots
+    connect(this, &ConfigWindow::updateChildren,
+            m_filenameEditor, &FileNameEditor::updateComponents);
+    connect(this, &ConfigWindow::updateChildren,
+            m_colorEditor, &UIcolorEditor::updateComponents);
+    connect(this, &ConfigWindow::updateChildren,
+            m_buttonList, &ButtonListView::updateComponents);
+    connect(this, &ConfigWindow::updateChildren,
+            m_generalConfig, &GeneneralConf::updateComponents);
+}
+
+void ConfigWindow::updateComponents() {
+    Q_EMIT updateChildren();
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent *e) {

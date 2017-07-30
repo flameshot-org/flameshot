@@ -58,4 +58,5 @@ void FlameshotDBusAdapter::trayIconEnabled(bool enabled) {
     } else {
         controller->disableTrayIcon();
     }
+    controller->updateConfigComponents();
 }

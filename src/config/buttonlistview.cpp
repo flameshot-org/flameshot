@@ -19,7 +19,6 @@
 #include "src/capture/tools/toolfactory.h"
 #include "src/utils/confighandler.h"
 #include <QListWidgetItem>
-#include <QListWidgetItem>
 #include <QSettings>
 #include <algorithm>
 
@@ -27,6 +26,7 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setMouseTracking(true);
     setFlow(QListWidget::TopToBottom);
     initButtonList();
+    updateComponents();
     connect(this, &QListWidget::itemChanged, this,
             &ButtonListView::updateActiveButtons);
     connect(this, &QListWidget::itemClicked, this,
@@ -34,7 +34,6 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
 }
 
 void ButtonListView::initButtonList() {
-    m_listButtons = QSettings().value("buttons").value<QList<int> >();
     ToolFactory factory;
     auto listTypes = CaptureButton::getIterableButtonTypes();
 
@@ -46,7 +45,7 @@ void ButtonListView::initButtonList() {
 
         // init the menu option
 
-        QListWidgetItem *buttonItem = new QListWidgetItem(this);
+        QListWidgetItem *m_buttonItem = new QListWidgetItem(this);
 
         // when the background is lighter than gray, it uses the white icons
         QColor bgColor = this->palette().color(QWidget::backgroundRole());
@@ -57,19 +56,14 @@ void ButtonListView::initButtonList() {
             iconPath = QString(":/img/buttonIcons%1/size_indicator.png")
                     .arg(color);
         }
-        buttonItem->setIcon(QIcon(iconPath));
+        m_buttonItem->setIcon(QIcon(iconPath));
 
-        buttonItem->setFlags(Qt::ItemIsUserCheckable);
+        m_buttonItem->setFlags(Qt::ItemIsUserCheckable);
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
-        buttonItem->setTextColor(foregroundColor);
+        m_buttonItem->setTextColor(foregroundColor);
 
-        buttonItem->setText(tool->getName());
-        buttonItem->setToolTip(tool->getDescription());
-        if (m_listButtons.contains(static_cast<int>(t))) {
-            buttonItem->setCheckState(Qt::Checked);
-        } else {
-            buttonItem->setCheckState(Qt::Unchecked);
-        }
+        m_buttonItem->setText(tool->getName());
+        m_buttonItem->setToolTip(tool->getDescription());
         tool->deleteLater();
     }
 }
@@ -84,7 +78,6 @@ void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     } else {
         m_listButtons.removeOne(buttonIndex);
     }
-
     QSettings().setValue("buttons", QVariant::fromValue(m_listButtons));
 }
 
@@ -101,5 +94,18 @@ void ButtonListView::selectAll() {
     for(int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
         item->setCheckState(Qt::Checked);
+    }
+}
+
+void ButtonListView::updateComponents() {
+    m_listButtons = QSettings().value("buttons").value<QList<int> >();
+    auto listTypes = CaptureButton::getIterableButtonTypes();
+    for(int i = 0; i < this->count(); ++i) {
+        QListWidgetItem* item = this->item(i);
+        if (m_listButtons.contains(listTypes.at(i))) {
+            item->setCheckState(Qt::Checked);
+        } else {
+            item->setCheckState(Qt::Unchecked);
+        }
     }
 }

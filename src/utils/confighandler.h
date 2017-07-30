@@ -72,8 +72,6 @@ private:
     QList<CaptureButton::ButtonType> fromIntToButton(const QList<int> &l);
     QList<int> fromButtonToInt(const QList<CaptureButton::ButtonType> &l);
 
-
-
 };
 
 #endif // CONFIGHANDLER_H

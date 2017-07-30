@@ -20,15 +20,30 @@
 
 #include <QTabWidget>
 
+class ButtonListView;
+class UIcolorEditor;
+class FileNameEditor;
+class GeneneralConf;
+
 class ConfigWindow : public QTabWidget {
     Q_OBJECT
 public:
     explicit ConfigWindow(QWidget *parent = nullptr);
 
+public slots:
+    void updateComponents();
+
+signals:
+    void updateChildren();
+
 protected:
     void keyPressEvent(QKeyEvent *);
 
 private:
+    ButtonListView *m_buttonList;
+    UIcolorEditor *m_colorEditor;
+    FileNameEditor *m_filenameEditor;
+    GeneneralConf *m_generalConfig;
 
 };
 

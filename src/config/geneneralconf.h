@@ -21,11 +21,15 @@
 #include <QGroupBox>
 
 class QVBoxLayout;
+class QCheckBox;
 
 class GeneneralConf : public QGroupBox {
     Q_OBJECT
 public:
     GeneneralConf(QWidget *parent = nullptr);
+
+public slots:
+    void updateComponents();
 
 private slots:
    void showHelpChanged(bool checked);
@@ -34,6 +38,9 @@ private slots:
 
 private:
     QVBoxLayout *m_layout;
+    QCheckBox *m_sysNotifications;
+    QCheckBox *m_showTray;
+    QCheckBox *m_helpMessage;
 
     void initShowHelp();
     void initShowDesktopNotification();

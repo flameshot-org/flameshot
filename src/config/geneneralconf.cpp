@@ -27,6 +27,14 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     initShowHelp();
     initShowDesktopNotification();
     initShowTrayIcon();
+    updateComponents();
+}
+
+void GeneneralConf::updateComponents() {
+    ConfigHandler config;
+    m_helpMessage->setChecked(config.getShowHelp());
+    m_showTray->setChecked(!config.getDisabledTrayIcon());
+    m_sysNotifications->setChecked(config.getDesktopNotification());
 }
 
 void GeneneralConf::showHelpChanged(bool checked) {
@@ -47,37 +55,39 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
 }
 
 void GeneneralConf::initShowHelp() {
-    QCheckBox *c = new QCheckBox(tr("Show help message"), this);
+    m_helpMessage = new QCheckBox(tr("Show help message"), this);
     ConfigHandler config;
     bool checked = config.getShowHelp();
-    c->setChecked(checked);
-    c->setToolTip(tr("Show the help message at the beginning "
+    m_helpMessage->setChecked(checked);
+    m_helpMessage->setToolTip(tr("Show the help message at the beginning "
                        "in the capture mode."));
-    m_layout->addWidget(c);
+    m_layout->addWidget(m_helpMessage);
 
-    connect(c, &QCheckBox::clicked, this, &GeneneralConf::showHelpChanged);
+    connect(m_helpMessage, &QCheckBox::clicked, this,
+            &GeneneralConf::showHelpChanged);
 }
 
 void GeneneralConf::initShowDesktopNotification() {
-    QCheckBox *c = new QCheckBox(tr("Show desktop notifications"), this);
+    m_sysNotifications =
+            new QCheckBox(tr("Show desktop notifications"), this);
     ConfigHandler config;
     bool checked = config.getDesktopNotification();
-    c->setChecked(checked);
-    c->setToolTip(tr("Show desktop notifications"));
-    m_layout->addWidget(c);
+    m_sysNotifications->setChecked(checked);
+    m_sysNotifications->setToolTip(tr("Show desktop notifications"));
+    m_layout->addWidget(m_sysNotifications);
 
-    connect(c, &QCheckBox::clicked, this,
+    connect(m_sysNotifications, &QCheckBox::clicked, this,
             &GeneneralConf::showDesktopNotificationChanged);
 }
 
 void GeneneralConf::initShowTrayIcon() {
-    QCheckBox *c = new QCheckBox(tr("Show tray icon"), this);
+    m_showTray = new QCheckBox(tr("Show tray icon"), this);
     ConfigHandler config;
     bool checked = !config.getDisabledTrayIcon();
-    c->setChecked(checked);
-    c->setToolTip(tr("Show systemtray icons"));
-    m_layout->addWidget(c);
+    m_showTray->setChecked(checked);
+    m_showTray->setToolTip(tr("Show systemtray icons"));
+    m_layout->addWidget(m_showTray);
 
-    connect(c, &QCheckBox::clicked, this,
+    connect(m_showTray, &QCheckBox::clicked, this,
             &GeneneralConf::showTrayIconChanged);
 }

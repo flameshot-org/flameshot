@@ -32,6 +32,9 @@ class UIcolorEditor : public QGroupBox {
 public:
     explicit UIcolorEditor(QWidget *parent = nullptr);
 
+public slots:
+    void updateComponents();
+
 private slots:
     void updateUIcolor();
     void updateLocalColor(const QColor);

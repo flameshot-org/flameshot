@@ -46,6 +46,8 @@ public slots:
     void enableTrayIcon();
     void disableTrayIcon();
 
+    void updateConfigComponents();
+
 private slots:
     void initDefaults();
 

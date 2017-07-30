@@ -27,6 +27,7 @@ public:
 
 public slots:
     void selectAll();
+    void updateComponents();
 
 private slots:
     void updateActiveButtons(QListWidgetItem *);
@@ -38,6 +39,7 @@ protected:
 private:
     QList<int> m_listButtons;
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
+
 };
 
 #endif // BUTTONLISTVIEW_H

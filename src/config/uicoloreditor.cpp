@@ -28,15 +28,21 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
     hLayout = new QHBoxLayout;
     vLayout = new QVBoxLayout;
 
-    ConfigHandler config;
-    m_uiColor = config.getUIMainColor();
-    m_contrastColor = config.getUIContrastColor();
-
     initButtons();
     initColorWheel();
     hLayout->addLayout(vLayout);
     setLayout(hLayout);
+    updateComponents();
 }
+
+void UIcolorEditor::updateComponents() {
+    ConfigHandler config;
+    m_uiColor = config.getUIMainColor();
+    m_contrastColor = config.getUIContrastColor();
+    m_lastButtonPressed = m_buttonContrast;
+    changeLastButton(m_buttonMainColor);
+}
+
 // updateUIcolor updates the appearance of the buttons
 void UIcolorEditor::updateUIcolor() {
     ConfigHandler config;
@@ -63,9 +69,7 @@ void UIcolorEditor::initColorWheel() {
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);
 
-    m_colorWheel->setColor(m_uiColor);
     m_colorWheel->setMinimumSize(100, 100);
-
     m_colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));
 
@@ -81,7 +85,6 @@ void UIcolorEditor::initButtons() {
     QFrame *frame = new QFrame(this);
     frame->setFixedSize(frameSize, frameSize);
     frame->setFrameStyle(QFrame::StyledPanel);
-
 
     m_buttonMainColor = new CaptureButton(m_buttonIconType, frame);
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize/2, m_buttonMainColor->y() + extraSize/2);
@@ -99,22 +102,18 @@ void UIcolorEditor::initButtons() {
     frame2->setFrameStyle(QFrame::StyledPanel);
 
     m_buttonContrast = new CaptureButton(m_buttonIconType, frame2);
-    m_buttonContrast->setIcon(QIcon());
-    m_buttonContrast->setColor(m_contrastColor);
     m_buttonContrast->move(m_buttonContrast->x() + extraSize/2,
                            m_buttonContrast->y() + extraSize/2);
 
     QHBoxLayout *h2 = new QHBoxLayout();
     h2->addWidget(frame2);
     m_labelContrast = new ClickableLabel(tr("Contrast Color"), this);
-    m_labelContrast->setStyleSheet("QLabel { color : gray; }");
     h2->addWidget(m_labelContrast);
     vLayout->addLayout(h2);
 
     m_buttonContrast->setToolTip(tr("Click on this button to set the edition"
                                       " mode of the contrast color."));
 
-    m_lastButtonPressed = m_buttonMainColor;
     connect(m_buttonMainColor, &CaptureButton::pressedButton,
             this, &UIcolorEditor::changeLastButton);
     connect(m_buttonContrast, &CaptureButton::pressedButton,

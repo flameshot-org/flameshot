@@ -48,6 +48,7 @@ private:
 
 public slots:
     void addToNameEditor(QString s);
+    void updateComponents();
 
 private slots:
     void savePattern();

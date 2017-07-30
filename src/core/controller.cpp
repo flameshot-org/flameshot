@@ -136,3 +136,9 @@ void Controller::disableTrayIcon() {
     m_trayIcon->deleteLater();
     ConfigHandler().setDisabledTrayIcon(true);
 }
+
+void Controller::updateConfigComponents() {
+    if(m_configWindow) {
+        m_configWindow->updateComponents();
+    }
+}
