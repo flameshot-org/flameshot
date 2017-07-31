@@ -312,7 +312,8 @@ void ColorWheel::paintEvent(QPaintEvent * )
     painter.drawPixmap(-p->outer_radius(), -p->outer_radius(), p->hue_ring);
 
     // hue selector
-    painter.setPen(QPen(Qt::black,3));
+    QColor penColor = p->backgroundIsDark ? Qt::white : Qt::black;
+    painter.setPen(QPen(penColor,3));
     painter.setBrush(Qt::NoBrush);
     QLineF ray(0, 0, p->outer_radius(), 0);
     ray.setAngle(p->hue*360);
@@ -356,7 +357,7 @@ void ColorWheel::paintEvent(QPaintEvent * )
 
     // lum-sat selector
     // we define the color of the selecto based on the background color of the widget
-    // in order to improve to contrast
+    // in order to improve the contrast
     if (p->backgroundIsDark)
     {
         bool isWhite = (p->val < 0.65 || p->sat > 0.43);
