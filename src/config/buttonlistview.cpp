@@ -60,7 +60,7 @@ void ButtonListView::initButtonList() {
 
         m_buttonItem->setFlags(Qt::ItemIsUserCheckable);
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
-        m_buttonItem->setTextColor(foregroundColor);
+        m_buttonItem->setForeground(foregroundColor);
 
         m_buttonItem->setText(tool->getName());
         m_buttonItem->setToolTip(tool->getDescription());

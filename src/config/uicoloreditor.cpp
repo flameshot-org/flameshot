@@ -22,16 +22,21 @@
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <QMap>
+#include <QSpacerItem>
 
 UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
     setTitle(tr("UI Color Editor"));
-    hLayout = new QHBoxLayout;
-    vLayout = new QVBoxLayout;
-
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_hLayout = new QHBoxLayout;
+    m_vLayout = new QVBoxLayout;
+    m_hLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
+    m_vLayout->setAlignment(Qt::AlignVCenter);
     initButtons();
     initColorWheel();
-    hLayout->addLayout(vLayout);
-    setLayout(hLayout);
+    m_vLayout->addSpacing(10);
+    m_hLayout->addLayout(m_vLayout);
+    m_hLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
+    setLayout(m_hLayout);
     updateComponents();
 }
 
@@ -70,21 +75,22 @@ void UIcolorEditor::initColorWheel() {
             &UIcolorEditor::updateLocalColor);
 
     m_colorWheel->setMinimumSize(100, 100);
+    m_colorWheel->setMaximumSize(170, 170);
+    m_colorWheel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));
 
-    hLayout->addWidget(m_colorWheel);
+    m_hLayout->addWidget(m_colorWheel);
 }
 
 void UIcolorEditor::initButtons() {
     const int extraSize = 10;
     int frameSize = CaptureButton::getButtonBaseSize() + extraSize;
 
-    vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));
+    m_vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));
 
-    QFrame *frame = new QFrame(this);
+    QGroupBox *frame = new QGroupBox();
     frame->setFixedSize(frameSize, frameSize);
-    frame->setFrameStyle(QFrame::StyledPanel);
 
     m_buttonMainColor = new CaptureButton(m_buttonIconType, frame);
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize/2, m_buttonMainColor->y() + extraSize/2);
@@ -92,24 +98,22 @@ void UIcolorEditor::initButtons() {
     h1->addWidget(frame);
     m_labelMain = new ClickableLabel(tr("Main Color"), this);
     h1->addWidget(m_labelMain);
-    vLayout->addLayout(h1);
+    m_vLayout->addLayout(h1);
 
     m_buttonMainColor->setToolTip(tr("Click on this button to set the edition"
                                        " mode of the main color."));
 
-    QFrame *frame2 = new QFrame(this);
-    frame2->setFixedSize(frameSize, frameSize);
-    frame2->setFrameStyle(QFrame::StyledPanel);
-
+    QGroupBox *frame2 = new QGroupBox();
     m_buttonContrast = new CaptureButton(m_buttonIconType, frame2);
     m_buttonContrast->move(m_buttonContrast->x() + extraSize/2,
                            m_buttonContrast->y() + extraSize/2);
 
     QHBoxLayout *h2 = new QHBoxLayout();
     h2->addWidget(frame2);
+    frame2->setFixedSize(frameSize, frameSize);
     m_labelContrast = new ClickableLabel(tr("Contrast Color"), this);
     h2->addWidget(m_labelContrast);
-    vLayout->addLayout(h2);
+    m_vLayout->addLayout(h2);
 
     m_buttonContrast->setToolTip(tr("Click on this button to set the edition"
                                       " mode of the contrast color."));

@@ -51,8 +51,8 @@ private:
 
     static const CaptureButton::ButtonType m_buttonIconType = CaptureButton::TYPE_CIRCLE;
 
-    QHBoxLayout *hLayout;
-    QVBoxLayout *vLayout;
+    QHBoxLayout *m_hLayout;
+    QVBoxLayout *m_vLayout;
 
     void initColorWheel();
     void initButtons();
