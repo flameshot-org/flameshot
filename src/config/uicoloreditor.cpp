@@ -44,8 +44,13 @@ void UIcolorEditor::updateComponents() {
     ConfigHandler config;
     m_uiColor = config.getUIMainColor();
     m_contrastColor = config.getUIContrastColor();
-    m_lastButtonPressed = m_buttonContrast;
-    changeLastButton(m_buttonMainColor);
+    if (m_lastButtonPressed == m_buttonMainColor) {
+        m_colorWheel->setColor(m_uiColor);
+    } else {
+        m_colorWheel->setColor(m_contrastColor);
+    }
+    m_buttonContrast->setColor(m_contrastColor);
+    m_buttonMainColor->setColor(m_uiColor);
 }
 
 // updateUIcolor updates the appearance of the buttons
@@ -57,6 +62,7 @@ void UIcolorEditor::updateUIcolor() {
         config.setUIContrastColor(m_contrastColor);
     }
 }
+
 // updateLocalColor updates the local button
 void UIcolorEditor::updateLocalColor(const QColor c) {
     if (m_lastButtonPressed == m_buttonMainColor) {
@@ -127,6 +133,7 @@ void UIcolorEditor::initButtons() {
             this, [this]{ changeLastButton(m_buttonMainColor); });
     connect(m_labelContrast, &ClickableLabel::clicked,
             this, [this]{ changeLastButton(m_buttonContrast); });
+    m_lastButtonPressed = m_buttonMainColor;
 }
 
 // visual update for the selected button
