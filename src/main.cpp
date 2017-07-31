@@ -82,15 +82,37 @@ int main(int argc, char *argv[]) {
     QTextStream out(stdout);
 
     // CLI options
-    QCommandLineOption pathOption(QStringList() << "p" << "path",
-                                  "Path where the capture will be saved", "path");
-    QCommandLineOption clipboardOption({{"c", "clipboard"},
-                                        "Save the capture to the clipboard"});
-    QCommandLineOption delayOption(QStringList() << "d" << "delay",
-                                  "Delay time in milliseconds", "milliseconds");
-    QCommandLineOption filenameOption("filename", "Set the filename pattern", "pattern");
-    QCommandLineOption trayOption("trayicon", "Enable or disable the trayicon", "bool");
-    QCommandLineOption showHelpOption("showhelp", "Show the help message in the capture mode", "bool");
+    QCommandLineOption pathOption(
+                {"p", "path"},
+                "Path where the capture will be saved",
+                "path");
+    QCommandLineOption clipboardOption(
+                {"c", "clipboard"},
+                "Save the capture to the clipboard");
+    QCommandLineOption delayOption(
+                {"d", "delay"},
+                "Delay time in milliseconds",
+                "milliseconds");
+    QCommandLineOption filenameOption(
+                "filename",
+                "Set the filename pattern",
+                "pattern");
+    QCommandLineOption trayOption(
+                "trayicon",
+                "Enable or disable the trayicon",
+                "bool");
+    QCommandLineOption showHelpOption(
+                "showhelp",
+                "Show the help message in the capture mode",
+                "bool");
+    QCommandLineOption mainColorOption(
+                "maincolor",
+                "Define the main UI color",
+                "color code");
+    QCommandLineOption contrastColorOption(
+                "contrastcolor",
+                "Define the contrast UI color",
+                "color code");
     // add here the names of the options without required values after the tag
     QStringList optionsWithoutValue = QStringList()
             << clipboardOption.names();
@@ -203,20 +225,24 @@ int main(int argc, char *argv[]) {
         parser.clearPositionalArguments();
         parser.addPositionalArgument(
                     "config", configDescription, "config [config_options]");
-        parser.addOptions({ filenameOption, trayOption, showHelpOption });
+        parser.addOptions({ filenameOption, trayOption, showHelpOption,
+                            mainColorOption, contrastColorOption });
         parser.process(app);
 
         bool filename = parser.isSet(filenameOption);
         bool tray = parser.isSet(trayOption);
         bool help = parser.isSet(showHelpOption);
-        bool someFlagSet = (filename || tray || help);
+        bool mainColor = parser.isSet(mainColorOption);
+        bool contrastColor = parser.isSet(contrastColorOption);
+        bool someFlagSet = (filename || tray || help ||
+                            mainColor || contrastColor);
         ConfigHandler config;
         if (filename) {
             QString newFilename(parser.value(filenameOption));
             config.setFilenamePattern(newFilename);
             FileNameHandler fh;
-            out << "The new pattern is " << newFilename
-                              << "\nParsed pattern example: "
+            out << "The new pattern is '" << newFilename
+                              << "'\nParsed pattern example: "
                               << fh.getParsedPattern() << "\n";
         }
         if (tray) {
@@ -236,6 +262,35 @@ int main(int argc, char *argv[]) {
                 config.setShowHelp(true);
             }
         }
+        if (mainColor) {
+            QString colorCode = parser.value(mainColorOption);
+            QColor parsedColor(colorCode);
+            if (parsedColor.isValid()) {
+                config.setUIMainColor(parsedColor);
+            } else {
+                out << "Invalid main color, "
+                       "this flag supports the following formats:\n"
+                       "- RGB (each of R, G, and B is a single hex digit)"
+                       "- RRGGBB\n- AARRGGBB\n- RRRGGGBBB\n"
+                       "- RRRRGGGGBBBB\n"
+                       "- named colors like 'blue' or 'red'";
+            }
+        }
+        if (contrastColor) {
+            QString colorCode = parser.value(contrastColorOption);
+            QColor parsedColor(colorCode);
+            if (parsedColor.isValid()) {
+                config.setUIContrastColor(parsedColor);
+            } else {
+                out << "Invalid contrast color, "
+                       "this flag supports the following formats:\n"
+                       "- RGB (each of R, G, and B is a single hex digit)"
+                       "- RRGGBB\n- AARRGGBB\n- RRRGGGBBB\n"
+                       "- RRRRGGGGBBBB\n"
+                       "- named colors like 'blue' or 'red'";
+            }
+        }
+
         // Open gui when no options
         if (!someFlagSet) {
             QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
