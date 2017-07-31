@@ -24,6 +24,7 @@ class ButtonListView;
 class UIcolorEditor;
 class FileNameEditor;
 class GeneneralConf;
+class QFileSystemWatcher;
 
 class ConfigWindow : public QTabWidget {
     Q_OBJECT
@@ -44,6 +45,8 @@ private:
     UIcolorEditor *m_colorEditor;
     FileNameEditor *m_filenameEditor;
     GeneneralConf *m_generalConfig;
+
+    QFileSystemWatcher *m_configWatcher;
 
 };
 

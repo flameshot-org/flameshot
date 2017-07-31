@@ -22,10 +22,13 @@
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/strftimechooserwidget.h"
+#include "src/utils/confighandler.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QFileSystemWatcher>
+#include <QDebug>
 
 // ConfigWindow contains the menus where you can configure the application
 
@@ -34,6 +37,19 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setMinimumSize(395, 490);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
+
+    auto changedSlot = [this](QString s){
+        Q_UNUSED(s);
+        this->m_configWatcher->removePath(s);
+        this->m_configWatcher->addPath(s);
+        if(!this->hasFocus()) {
+            Q_EMIT updateComponents();
+        }
+    };
+    m_configWatcher = new QFileSystemWatcher(this);
+    m_configWatcher->addPath(ConfigHandler().getConfigFilePath());
+    connect(m_configWatcher, &QFileSystemWatcher::fileChanged,
+            this, changedSlot);
 
     QColor background = this->palette().background().color();
     bool isWhite = CaptureButton::iconIsWhiteByColor(background);

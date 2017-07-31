@@ -32,8 +32,6 @@
 
 Controller::Controller() : m_captureWindow(nullptr)
 {
-    // required for the button serialization
-    qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
     qApp->setQuitOnLastWindowClosed(false);
 
     // init tray icon
@@ -133,7 +131,9 @@ void Controller::enableTrayIcon() {
 }
 
 void Controller::disableTrayIcon() {
-    m_trayIcon->deleteLater();
+    if (m_trayIcon) {
+        m_trayIcon->deleteLater();
+    }
     ConfigHandler().setDisabledTrayIcon(true);
 }
 

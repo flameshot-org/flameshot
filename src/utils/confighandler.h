@@ -64,6 +64,8 @@ public:
 
     void setAllTheButtons();
 
+    QString getConfigFilePath() const;
+
 private:
     QSettings *m_settings;
 

@@ -30,7 +30,6 @@ public slots:
     void updateComponents();
 
 private slots:
-    void updateActiveButtons(QListWidgetItem *);
     void reverseItemCheck(QListWidgetItem *);
 
 protected:
@@ -40,6 +39,7 @@ private:
     QList<int> m_listButtons;
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 
+    void updateActiveButtons(QListWidgetItem *);
 };
 
 #endif // BUTTONLISTVIEW_H

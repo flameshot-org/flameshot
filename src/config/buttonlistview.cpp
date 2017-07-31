@@ -27,8 +27,6 @@ ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
     setFlow(QListWidget::TopToBottom);
     initButtonList();
     updateComponents();
-    connect(this, &QListWidget::itemChanged, this,
-            &ButtonListView::updateActiveButtons);
     connect(this, &QListWidget::itemClicked, this,
             &ButtonListView::reverseItemCheck);
 }
@@ -44,7 +42,6 @@ void ButtonListView::initButtonList() {
         m_buttonTypeByName.insert(tool->getName(), t);
 
         // init the menu option
-
         QListWidgetItem *m_buttonItem = new QListWidgetItem(this);
 
         // when the background is lighter than gray, it uses the white icons
@@ -78,6 +75,7 @@ void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     } else {
         m_listButtons.removeOne(buttonIndex);
     }
+    qDebug("updateActiveButtons");
     QSettings().setValue("buttons", QVariant::fromValue(m_listButtons));
 }
 
@@ -87,6 +85,7 @@ void ButtonListView::reverseItemCheck(QListWidgetItem *item){
     } else {
         item->setCheckState(Qt::Checked);
     }
+    updateActiveButtons(item);
 }
 
 void ButtonListView::selectAll() {

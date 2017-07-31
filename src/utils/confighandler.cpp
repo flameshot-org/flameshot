@@ -34,6 +34,7 @@ QList<CaptureButton::ButtonType> ConfigHandler::getButtons() {
 void ConfigHandler::setButtons(const QList<CaptureButton::ButtonType> &buttons) {
     QList<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
+    qDebug("setButtons");
     m_settings->setValue("buttons", QVariant::fromValue(l));
 }
 
@@ -129,6 +130,10 @@ void ConfigHandler::setAllTheButtons() {
         buttons << static_cast<int>(t);
     }
     m_settings->setValue("buttons", QVariant::fromValue(buttons));
+}
+
+QString ConfigHandler::getConfigFilePath() const {
+    return m_settings->fileName();
 }
 
 bool ConfigHandler::normalizeButtons(QList<int> &buttons) {
