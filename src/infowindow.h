@@ -31,11 +31,12 @@ protected:
     void keyPressEvent(QKeyEvent *);
 
 private:
-    void initInfoTable();
-    QVBoxLayout *layout;
+    inline void initInfoTable();
+    inline void initLabels();
+    QVBoxLayout *m_layout;
 
-    static QVector<const char *> keys;
-    static QVector<const char *> description;
+    static QVector<const char *> m_keys;
+    static QVector<const char *> m_description;
 };
 
 #endif // INFOWINDOW_H

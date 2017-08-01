@@ -85,7 +85,7 @@ void GeneneralConf::initShowTrayIcon() {
     ConfigHandler config;
     bool checked = !config.getDisabledTrayIcon();
     m_showTray->setChecked(checked);
-    m_showTray->setToolTip(tr("Show systemtray icons"));
+    m_showTray->setToolTip(tr("Show the systemtray icon"));
     m_layout->addWidget(m_showTray);
 
     connect(m_showTray, &QCheckBox::clicked, this,

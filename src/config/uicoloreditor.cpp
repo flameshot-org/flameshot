@@ -118,6 +118,7 @@ void UIcolorEditor::initButtons() {
     h2->addWidget(frame2);
     frame2->setFixedSize(frameSize, frameSize);
     m_labelContrast = new ClickableLabel(tr("Contrast Color"), this);
+    m_labelContrast->setStyleSheet("color : gray");
     h2->addWidget(m_labelContrast);
     m_vLayout->addLayout(h2);
 
