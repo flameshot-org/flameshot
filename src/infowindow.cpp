@@ -31,6 +31,7 @@ InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setWindowTitle(tr("About"));
 
     m_layout = new QVBoxLayout(this);
+    m_layout->setAlignment(Qt::AlignHCenter);
     initLabels();
     initInfoTable();
     show();
@@ -57,7 +58,7 @@ QVector<const char *> InfoWindow::m_description = {
     QT_TR_NOOP("Show color picker")
 };
 
-
+#include <QDebug>
 void InfoWindow::initInfoTable() {
     QTableWidget *table = new QTableWidget(this);
     table->setToolTip(tr("Available shorcuts in the screen capture mode."));
@@ -82,15 +83,17 @@ void InfoWindow::initInfoTable() {
     table->resizeColumnsToContents();
     table->resizeRowsToContents();
     table->setMinimumWidth(400);
+    table->setMaximumWidth(600);
 
     table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
     table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
                                              QSizePolicy::Expanding);
+    m_layout->addStretch();
 }
 
 void InfoWindow::initLabels() {
     m_layout->addStretch();
-    QLabel *licenseTitleLabel = new QLabel(tr("<b>License</b>"), this);
+    QLabel *licenseTitleLabel = new QLabel(tr("<u><b>License</b></u>"), this);
     licenseTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(licenseTitleLabel);
     QLabel *licenseLabel = new QLabel("GPLv3+", this);
@@ -98,15 +101,17 @@ void InfoWindow::initLabels() {
     m_layout->addWidget(licenseLabel);
     m_layout->addStretch();
 
-    QLabel *versionTitleLabel = new QLabel(tr("<b>Version</b>"), this);
+    QLabel *versionTitleLabel = new QLabel(tr("<u><b>Version</b></u>"), this);
     versionTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(versionTitleLabel);
-    QLabel *versionLabel = new QLabel(APP_VERSION, this);
+    QString versionMsg = "Flameshot " + QString(APP_VERSION) + "\nCompiled with QT "
+            + QT_VERSION_STR;
+    QLabel *versionLabel = new QLabel(versionMsg, this);
     versionLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(versionLabel);
     m_layout->addStretch();
     m_layout->addSpacing(10);
-    QLabel *shortcutsTitleLabel = new QLabel(tr("<b>Shortcuts</b>"), this);
+    QLabel *shortcutsTitleLabel = new QLabel(tr("<u><b>Shortcuts</b></u>"), this);
     shortcutsTitleLabel->setAlignment(Qt::AlignHCenter);;
     m_layout->addWidget(shortcutsTitleLabel);
 }
