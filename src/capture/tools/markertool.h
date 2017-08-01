@@ -40,6 +40,9 @@ public:
             const QColor &color);
 
     void onPressed();
+
+private:
+    inline bool needsAdjustment(const QPoint &p0, const QPoint &p1) const;
 };
 
 #endif // MARKERTOOL_H

@@ -18,6 +18,8 @@
 #include "markertool.h"
 #include <QPainter>
 
+#define ADJ_VALUE 14
+
 MarkerTool::MarkerTool(QObject *parent) : CaptureTool(parent) {
 
 }
@@ -47,11 +49,20 @@ void MarkerTool::processImage(
         const QVector<QPoint> &points,
         const QColor &color)
 {
+    QPoint p0 = points[0];
+    QPoint p1 = points[1];
+    if (needsAdjustment(p0, p1)) {
+        p1.setY(p0.y());
+    }
     painter.setOpacity(0.35);
     painter.setPen(QPen(color, 14));
-    painter.drawLine(points[0], points[1]);
+    painter.drawLine(p0, p1);
     painter.setOpacity(1);
 }
 
 void MarkerTool::onPressed() {
+}
+
+bool MarkerTool::needsAdjustment(const QPoint &p0, const QPoint &p1) const {
+    return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
 }
