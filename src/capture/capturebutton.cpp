@@ -24,12 +24,35 @@
 #include <QPropertyAnimation>
 #include <QToolTip>
 #include <QMouseEvent>
-
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
 
 namespace {
     const int BUTTON_SIZE = 30;
+
+    inline qreal getColorLuma(const QColor &c) {
+        return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
+    }
+
+    inline int constrain(const int x, const int min, const int max) {
+        if (x > max) {
+            return max;
+        } else if (x < min) {
+            return min;
+        } else {
+            return x;
+        }
+    }
+
+    QColor getContrastColor(const QColor &c) {
+        bool isWhite = CaptureButton::iconIsWhiteByColor(c);
+        int change = isWhite ? 30 : -45;
+
+        return QColor(constrain(c.red() + change, 0, 255),
+                      constrain(c.green() + change, 0, 255),
+                      constrain(c.blue() + change, 0, 255));
+    }
+
 }
 
 CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(parent),
@@ -74,11 +97,8 @@ QString CaptureButton::getGlobalStyleSheet() {
                         "CaptureButton:pressed:!hover { "
                         "background-color: %1; }";
     // define color when mouse is hovering
-    QColor contrast(mainColor.darker(120));
-    if (mainColor.value() < m_colorValueLimit ||
-            mainColor.saturation() > m_colorSaturationLimit) {
-        contrast = mainColor.lighter(140);
-    }
+    QColor contrast = getContrastColor(m_mainColor);
+
     // foreground color
     QString color = iconIsWhiteByColor(mainColor) ? "white" : "black";
 
@@ -93,11 +113,7 @@ QString CaptureButton::getStyleSheet() const {
                         "CaptureButton:pressed:!hover { "
                         "background-color: %1; }";
     // define color when mouse is hovering
-    QColor contrast(m_mainColor.darker(120));
-    if (m_mainColor.value() < m_colorValueLimit ||
-            m_mainColor.saturation() > m_colorSaturationLimit) {
-        contrast = m_mainColor.lighter(140);
-    }
+    QColor contrast = getContrastColor(m_mainColor);
     // foreground color
     QString color = iconIsWhiteByColor(m_mainColor) ? "white" : "black";
 
@@ -138,6 +154,7 @@ void CaptureButton::mousePressEvent(QMouseEvent *) {
     Q_EMIT pressed();
 }
 
+
 void CaptureButton::animatedShow() {
     show();
     emergeAnimation->start();
@@ -164,8 +181,7 @@ size_t CaptureButton::getButtonBaseSize() {
 
 bool CaptureButton::iconIsWhiteByColor(const QColor &c) {
     bool isWhite = false;
-    if (c.value() < m_colorValueLimit ||
-            c.saturation() > m_colorSaturationLimit) {
+    if (getColorLuma(c) <= 0.60) {
         isWhite = true;
     }
     return isWhite;

@@ -87,9 +87,6 @@ private:
     ButtonType m_buttonType;
     bool m_pressed;
 
-    static const int m_colorValueLimit = 166;
-    static const int m_colorSaturationLimit = 110;
-
     QPropertyAnimation *emergeAnimation;
 
     static QColor m_mainColor;
