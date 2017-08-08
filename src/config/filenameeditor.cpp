@@ -36,7 +36,9 @@ void FileNameEditor::initLayout() {
     infoLabel->setFixedHeight(20);
     m_layout->addWidget(infoLabel);
     m_layout->addWidget(m_helperButtons);
+    m_layout->addWidget(new QLabel(tr("Edit:")));
     m_layout->addWidget(m_nameEditor);
+    m_layout->addWidget(new QLabel(tr("Preview:")));
     m_layout->addWidget(m_outputLabel);
 
     QHBoxLayout *horizLayout = new QHBoxLayout();

@@ -34,7 +34,7 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setMinimumSize(395, 490);
+    setMinimumSize(400, 490);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
