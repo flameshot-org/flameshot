@@ -20,12 +20,11 @@
 #include "src/core/flameshotdbusadapter.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
+#include "src/cli/commandlineparser.h"
 #include <QApplication>
 #include <QTranslator>
-#include <QObject>
 #include <QDBusConnection>
 #include <QDBusMessage>
-#include <QCommandLineParser>
 #include <QDir>
 
 int main(int argc, char *argv[]) {
@@ -60,175 +59,125 @@ int main(int argc, char *argv[]) {
     app.setApplicationName("flameshot");
     app.setOrganizationName("Dharkael");
     app.setApplicationVersion(qApp->applicationVersion());
-    QCommandLineParser parser;
+    CommandLineParser parser;
     // Add description
-    parser.setApplicationDescription(
+    parser.setDescription(
                 "Powerfull yet simple to use screenshot software.");
-    // Command descriptions
-    QString fullDescription = "Capture the entire desktop.";
-    QString guiDescription = "Start a manual capture in GUI mode.";
-    QString configDescription = "Configure flameshot.";
-    // Positional alguments
-    parser.addPositionalArgument("mode", "full\t" + fullDescription + "\n"+
-                                 "gui\t" + guiDescription + "\n" +
-                                 "config\t" + configDescription,
-                                 "mode [mode_options]");
+    parser.setGeneralErrorMessage("See 'flameshot --help'.");
+    // Arguments
+    CommandArgument fullArgument("full", "Capture the entire desktop.");
+    CommandArgument guiArgument("gui", "Start a manual capture in GUI mode.");
+    CommandArgument configArgument("config", "Configure flameshot.");
 
-    // Add options
-    parser.addHelpOption();
-    parser.addVersionOption();
-    // Initial parse ---------------------------------
-    parser.parse(app.arguments());
-    QTextStream out(stdout);
-
-    // CLI options
-    QCommandLineOption pathOption(
+    // Options
+    CommandOption pathOption(
                 {"p", "path"},
                 "Path where the capture will be saved",
                 "path");
-    QCommandLineOption clipboardOption(
+    CommandOption clipboardOption(
                 {"c", "clipboard"},
                 "Save the capture to the clipboard");
-    QCommandLineOption delayOption(
+    CommandOption delayOption(
                 {"d", "delay"},
                 "Delay time in milliseconds",
                 "milliseconds");
-    QCommandLineOption filenameOption(
-                "filename",
+    CommandOption filenameOption(
+                {"f", "filename"},
                 "Set the filename pattern",
                 "pattern");
-    QCommandLineOption trayOption(
-                "trayicon",
+    CommandOption trayOption(
+                {"t", "trayicon"},
                 "Enable or disable the trayicon",
                 "bool");
-    QCommandLineOption showHelpOption(
-                "showhelp",
+    CommandOption showHelpOption(
+                {"s", "showhelp"},
                 "Show the help message in the capture mode",
                 "bool");
-    QCommandLineOption mainColorOption(
-                "maincolor",
+    CommandOption mainColorOption(
+                {"m", "maincolor"},
                 "Define the main UI color",
-                "color code");
-    QCommandLineOption contrastColorOption(
-                "contrastcolor",
+                "color-code");
+    CommandOption contrastColorOption(
+                {"k", "contrastcolor"},
                 "Define the contrast UI color",
-                "color code");
-    // add here the names of the options without required values after the tag
-    QStringList optionsWithoutValue = QStringList()
-            << clipboardOption.names();
-    // Second parse ----------------------------------
+                "color-code");
 
-    /* Detect undesired elements
-     * This is a very hacky solution to filter undesired arguments.
-     * I may consider changing to a better cli parsing library for
-     * this kind of command structure.
-     */
-    auto args = app.arguments().mid(1); // ignore the first
-    QStringList commandList{"gui", "full", "config"};
-    auto i = args.cbegin();
-    QString val = (*i);
-    bool ok = commandList.contains(val);
-    // check first
-    for (++i; i != args.cend(); ++i) {
-        if (!ok) break;
-        val = (*i);
-        if(val.startsWith("-")) {
-            // skip next when
-            // - the parameter is not in the format -flag=100
-            // - there are more elements to check
-            // - it's a flag and it requires a value
-            bool skipNext = (!val.contains("=") && i+1 != args.cend()
-                    && !optionsWithoutValue.contains(val.remove("-")));
-            if (skipNext) ++i;
-        } else { // not a flag
-            ok = false;
-        }
+    // Add checkers
+    auto colorChecker = [&parser](const QString &colorCode) -> bool {
+        QColor parsedColor(colorCode);
+        return parsedColor.isValid() && parsedColor.alphaF() == 1.0;
+    };
+    QString colorErr = "Invalid color, "
+                       "this flag supports the following formats:\n"
+                       "- #RGB (each of R, G, and B is a single hex digit)\n"
+                       "- #RRGGBB\n- #RRRGGGBBB\n"
+                       "- #RRRRGGGGBBBB\n"
+                       "- Named colors like 'blue' or 'red'\n"
+                       "You may need to escape the '#' sign as in '\\#FFF'";
+
+    auto delayChecker = [&parser](const QString &delayValue) -> bool {
+        int value = delayValue.toInt();
+        return value >= 0;
+    };
+    QString delayErr = "Ivalid delay, it must be higher than 0";
+
+    auto pathChecker = [&parser](const QString &pathValue) -> bool {
+        return QDir(pathValue).exists();
+    };
+    QString pathErr = "Ivalid path, it must be a real path in the system";
+
+    auto booleanChecker = [&parser](const QString &value) -> bool {
+        return value == "true" || value == "false";
+    };
+    QString booleanErr = "Ivalid value, it must be defined as 'true' or 'false'";
+
+    contrastColorOption.addChecker(colorChecker, colorErr);
+    mainColorOption.addChecker(colorChecker, colorErr);
+    delayOption.addChecker(delayChecker, delayErr);
+    pathOption.addChecker(pathChecker, pathErr);
+    trayOption.addChecker(booleanChecker, booleanErr);
+    showHelpOption.addChecker(booleanChecker, booleanErr);
+
+    // Relationships
+    parser.AddArgument(guiArgument);
+    parser.AddArgument(fullArgument);
+    parser.AddArgument(configArgument);
+    auto helpOption = parser.addHelpOption();
+    auto versionOption = parser.addVersionOption();
+    parser.AddOptions({ pathOption, delayOption }, guiArgument);
+    parser.AddOptions({ pathOption, clipboardOption, delayOption }, fullArgument);
+    parser.AddOptions({ filenameOption, trayOption, showHelpOption,
+                        mainColorOption, contrastColorOption }, configArgument);
+    // Parse
+    if (!parser.parse(app.arguments()))
+        return 0;
+
+    // PROCESS DATA
+    //--------------
+    if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
     }
-
-    // obtain the command
-    QString command;
-    if (ok && parser.positionalArguments().count() > 0) {
-        command = parser.positionalArguments().first();
-    }
-
-    // GUI
-    if (command == "gui") {
-        // Description
-        parser.clearPositionalArguments();
-        parser.addPositionalArgument(
-                    "gui", guiDescription, "gui [gui_options]");
-        parser.addOptions({ pathOption, delayOption });
-        parser.process(app);
-
-        // paramenters
-        QString pathValue;
-        if (parser.isSet(pathOption)) {
-            pathValue = QString::fromStdString(parser.value("path").toStdString());
-            if (!QDir(pathValue).exists()) {
-                qWarning().noquote() << "Invalid path.";
-                return 0;
-            }
-        }
-        int delay = 0;
-        if (parser.isSet(delayOption)) {
-            delay = parser.value("delay").toInt();
-            if (delay < 0) {
-                qWarning().noquote() << "Invalid negative delay.";
-                return 0;
-            }
-        }
+    else if (parser.isSet(guiArgument)) { // GUI
+        QString pathValue = parser.value(pathOption);
+        int delay = parser.value(delayOption).toInt();
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
                                            "/", "", "graphicCapture");
         m << pathValue << delay;
         QDBusConnection::sessionBus().call(m);
-
     }
-    // FULL
-    else if (command == "full") {
-        // Description
-        parser.clearPositionalArguments();
-        parser.addPositionalArgument(
-                    "full", fullDescription, "full [full_options]");
-        parser.addOptions({ pathOption, clipboardOption, delayOption });
-        parser.process(app);
-
-        // paramenters
-        QString pathValue;
-        if (parser.isSet(pathOption)) {
-            pathValue = QString::fromStdString(parser.value("path").toStdString());
-            if (!QDir(pathValue).exists()) {
-                qWarning().noquote() << "Invalid path.";
-                return 0;
-            }
-        }
-        int delay = 0;
-        if (parser.isSet(delayOption)) {
-            delay = parser.value("delay").toInt();
-            if (delay < 0) {
-                qWarning().noquote() << "Invalid negative delay.";
-                return 0;
-            }
-        }
+    else if (parser.isSet(fullArgument)) { // FULL
+        QString pathValue = parser.value(pathOption);
+        int delay = parser.value(delayOption).toInt();
+        bool toClipboard = parser.isSet(clipboardOption);
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
                                            "/", "", "fullScreen");
-        m << pathValue << parser.isSet("clipboard") << delay;
+        m << pathValue << toClipboard << delay;
         QDBusConnection::sessionBus().call(m);
-
     }
-    // CONFIG
-    else if (command == "config") {
-        // Description
-        parser.clearPositionalArguments();
-        parser.addPositionalArgument(
-                    "config", configDescription, "config [config_options]");
-        parser.addOptions({ filenameOption, trayOption, showHelpOption,
-                            mainColorOption, contrastColorOption });
-        parser.process(app);
-
+    else if (parser.isSet(configArgument)) { // CONFIG
         bool filename = parser.isSet(filenameOption);
         bool tray = parser.isSet(trayOption);
         bool help = parser.isSet(showHelpOption);
@@ -241,9 +190,9 @@ int main(int argc, char *argv[]) {
             QString newFilename(parser.value(filenameOption));
             config.setFilenamePattern(newFilename);
             FileNameHandler fh;
-            out << "The new pattern is '" << newFilename
-                              << "'\nParsed pattern example: "
-                              << fh.getParsedPattern() << "\n";
+            qInfo().noquote() << QString("The new pattern is '%1'\n"
+                                         "Parsed pattern example: %2").arg(newFilename)
+                                 .arg(fh.getParsedPattern());
         }
         if (tray) {
             QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
@@ -265,30 +214,12 @@ int main(int argc, char *argv[]) {
         if (mainColor) {
             QString colorCode = parser.value(mainColorOption);
             QColor parsedColor(colorCode);
-            if (parsedColor.isValid()) {
-                config.setUIMainColor(parsedColor);
-            } else {
-                out << "Invalid main color, "
-                       "this flag supports the following formats:\n"
-                       "- RGB (each of R, G, and B is a single hex digit)"
-                       "- RRGGBB\n- AARRGGBB\n- RRRGGGBBB\n"
-                       "- RRRRGGGGBBBB\n"
-                       "- named colors like 'blue' or 'red'";
-            }
+            config.setUIMainColor(parsedColor);
         }
         if (contrastColor) {
             QString colorCode = parser.value(contrastColorOption);
             QColor parsedColor(colorCode);
-            if (parsedColor.isValid()) {
-                config.setUIContrastColor(parsedColor);
-            } else {
-                out << "Invalid contrast color, "
-                       "this flag supports the following formats:\n"
-                       "- RGB (each of R, G, and B is a single hex digit)"
-                       "- RRGGBB\n- AARRGGBB\n- RRRGGGBBB\n"
-                       "- RRRRGGGGBBBB\n"
-                       "- named colors like 'blue' or 'red'";
-            }
+            config.setUIContrastColor(parsedColor);
         }
 
         // Open gui when no options
@@ -297,9 +228,6 @@ int main(int argc, char *argv[]) {
                                                "/", "", "openConfig");
             QDBusConnection::sessionBus().call(m);
         }
-    } else {
-        qWarning().noquote() << "Invalid command, see 'flameshot --help'.";
-        parser.process(app.arguments());
     }
     return 0;
 }

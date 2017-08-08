@@ -74,6 +74,9 @@ SOURCES += src/main.cpp\
     src/utils/confighandler.cpp \
     src/core/controller.cpp \
     src/utils/systemnotification.cpp \
+    src/cli/commandlineparser.cpp \
+    src/cli/commandoption.cpp \
+    src/cli/commandargument.cpp
 
 HEADERS  += \
     src/capture/buttonhandler.h \
@@ -112,6 +115,9 @@ HEADERS  += \
     src/utils/confighandler.h \
     src/core/controller.h \
     src/utils/systemnotification.h \
+    src/cli/commandlineparser.h \
+    src/cli/commandoption.h \
+    src/cli/commandargument.h
 
 RESOURCES += \
     graphics.qrc
