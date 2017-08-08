@@ -40,6 +40,7 @@ public:
 
     void updatePosition(const QRect &selection, const QRect &limits);
     void setButtons(const QVector<CaptureButton*>);
+    bool contains(const QPoint &p) const;
 
 private:
     QVector<QPoint> getHPoints(const QPoint &center, const int elements,
@@ -50,6 +51,9 @@ private:
 
     int m_distance;
     int m_buttonBaseSize;
+
+    QRegion m_region;
+    void addToRegion(const QVector<QPoint> &points);
 };
 
 #endif // BUTTONHANDLER_H

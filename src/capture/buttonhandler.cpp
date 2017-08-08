@@ -64,6 +64,7 @@ size_t ButtonHandler::size() const {
 void ButtonHandler::updatePosition(const QRect &selection,
                                    const  QRect &limits)
 {
+    m_region = QRegion();
     const QVector<CaptureButton*>::size_type vecLength = m_vectorButtons.size();
     if (vecLength == 0) {
         return;
@@ -120,10 +121,11 @@ void ButtonHandler::updatePosition(const QRect &selection,
 
         // add them inside the area when there is no more space
         if (blockedBotton && horizontalBlocked && blockedTop) {
+            QVector<QPoint> positions;
             int buttonsPerRow = (baseArea.width() - SEPARATION) / (baseWidth + SEPARATION);
             int xPos = baseArea.left() + SEPARATION;
             int yPos = baseArea.bottom() - SEPARATION - baseHeight;
-
+            positions << QPoint(xPos, yPos);
             for (; elemIndicator < vecLength; ++elemIndicator) {
                 if (elemIndicator % buttonsPerRow == 0 && elemIndicator != 0) {
                     xPos = baseArea.left() + SEPARATION;
@@ -131,8 +133,10 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 }
                 m_vectorButtons[elemIndicator]->move(xPos, yPos);
                 xPos += (SEPARATION + baseWidth);
+                positions << QPoint(xPos, yPos);
             }
-            break;
+            addToRegion(positions);
+            break; // the while
         }
         // number of buttons per row column
         int buttonsPerRow = (baseArea.width() + SEPARATION) / (baseWidth + SEPARATION);
@@ -167,6 +171,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
+            addToRegion(positions);
         }
         // add buttons at the right side of the seletion
         if (!blockedRight && elemIndicator < vecLength) {
@@ -181,6 +186,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
+            addToRegion(positions);
         }
         // add buttons at the top of the seletion
         if (!blockedTop && elemIndicator < vecLength) {
@@ -209,6 +215,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
+            addToRegion(positions);
         }
         // add buttons at the left side of the seletion
         if (!blockedLeft && elemIndicator < vecLength) {
@@ -226,6 +233,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
+            addToRegion(positions);
         }
         // if there are elements for the next cycle, increase the size of the base area
         if (elemIndicator < vecLength &&
@@ -303,6 +311,18 @@ QVector<QPoint> ButtonHandler::getVPoints(
     }
     return res;
 }
+
+void ButtonHandler::addToRegion(const QVector<QPoint> &points) {
+    if (!points.isEmpty()) {
+        QPoint first(points.first());
+        QPoint last(points.last());
+        bool firstIsTopLeft = (first.x() <= last.x() && first.y() <= last.y());
+        QPoint topLeft = firstIsTopLeft ? first : last;
+        QPoint bottonRight = firstIsTopLeft ? last : first;
+        bottonRight += QPoint(m_buttonBaseSize, m_buttonBaseSize);
+        m_region += QRegion(QRect(topLeft, bottonRight).normalized());
+    }
+}
 // setButtons redefines the buttons of the button handler
 void ButtonHandler::setButtons(const QVector<CaptureButton *> v) {
     for (CaptureButton *b: m_vectorButtons) delete(b);
@@ -311,4 +331,8 @@ void ButtonHandler::setButtons(const QVector<CaptureButton *> v) {
         m_buttonBaseSize = v[0]->getButtonBaseSize();
         m_distance = m_buttonBaseSize + SEPARATION;
     }
+}
+
+bool ButtonHandler::contains(const QPoint &p) const {
+    return m_region.contains(p);
 }

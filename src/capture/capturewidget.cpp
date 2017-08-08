@@ -294,6 +294,13 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
     } else if (m_mouseIsClicked) {
         m_modifications.last()->addPoint(e->pos());
+        // check if it has to hide the buttons
+        bool containsMouse = m_buttonHandler->contains(m_mousePos);
+        if (m_buttonHandler->isVisible() && containsMouse) {
+            m_buttonHandler->hide();
+        } else if (!m_buttonHandler->isVisible() && !containsMouse){
+            m_buttonHandler->show();
+        }
     } else {
         if (m_selection.isNull()) {
             update();
@@ -339,11 +346,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
 }
 
 void CaptureWidget::keyPressEvent(QKeyEvent *e) {
-    if (e->key() == Qt::Key_Return) {
-        copyScreenshot();
-    } else if (e->key() == Qt::Key_Escape) {
-        close();
-    } else if (m_selection.isNull()) {
+    if (m_selection.isNull()) {
         return;
     } else if (e->key() == Qt::Key_Up
                && m_selection.top() > rect().top()) {
@@ -571,6 +574,8 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left), this, SLOT(leftResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this, SLOT(upResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
+    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+    new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
 }
 
 void CaptureWidget::updateHandles() {
