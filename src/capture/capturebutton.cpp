@@ -73,7 +73,6 @@ void CaptureButton::initButton() {
 
     setFocusPolicy(Qt::NoFocus);
     resize(BUTTON_SIZE, BUTTON_SIZE);
-    setMouseTracking(true);
     setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
 
     setToolTip(m_tool->getDescription());
