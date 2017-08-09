@@ -15,12 +15,9 @@ public:
                      const QString &title = "Flameshot Info",
                      const int timeout = 5000);
 
-signals:
-
-public slots:
-
 private:
     QDBusInterface *m_interface;
+
 };
 
 #endif // SYSTEMNOTIFICATION_H

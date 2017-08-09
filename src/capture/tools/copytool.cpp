@@ -22,23 +22,27 @@ CopyTool::CopyTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool CopyTool::isSelectable() {
+int CopyTool::id() const {
+    return 0;
+}
+
+bool CopyTool::isSelectable() const {
     return false;
 }
 
-QString CopyTool::getIconName() {
+QString CopyTool::iconName() const {
     return "content-copy.png";
 }
 
-QString CopyTool::getName() {
+QString CopyTool::name() const {
     return tr("Copy");
 }
 
-QString CopyTool::getDescription() {
+QString CopyTool::description() const {
     return tr("Copies the selecion into the clipboard");
 }
 
-CaptureTool::ToolWorkType CopyTool::getToolType() {
+CaptureTool::ToolWorkType CopyTool::toolType() const {
     return TYPE_WORKER;
 }
 

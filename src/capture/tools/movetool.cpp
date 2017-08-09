@@ -22,23 +22,27 @@ MoveTool::MoveTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool MoveTool::isSelectable() {
+int MoveTool::id() const {
+    return 0;
+}
+
+bool MoveTool::isSelectable() const {
     return false;
 }
 
-QString MoveTool::getIconName() {
+QString MoveTool::iconName() const {
     return "cursor-move.png";
 }
 
-QString MoveTool::getName() {
+QString MoveTool::name() const {
     return tr("Move");
 }
 
-QString MoveTool::getDescription() {
+QString MoveTool::description() const {
     return tr("Move the selection area");
 }
 
-CaptureTool::ToolWorkType MoveTool::getToolType() {
+CaptureTool::ToolWorkType MoveTool::toolType() const {
     return TYPE_WORKER;
 }
 

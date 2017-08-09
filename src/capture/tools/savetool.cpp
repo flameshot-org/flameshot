@@ -22,23 +22,27 @@ SaveTool::SaveTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool SaveTool::isSelectable() {
+int SaveTool::id() const {
+    return 0;
+}
+
+bool SaveTool::isSelectable() const {
     return false;
 }
 
-QString SaveTool::getIconName() {
+QString SaveTool::iconName() const {
     return "content-save.png";
 }
 
-QString SaveTool::getName() {
+QString SaveTool::name() const {
     return tr("Save");
 }
 
-QString SaveTool::getDescription() {
+QString SaveTool::description() const {
     return tr("Save the capture");
 }
 
-CaptureTool::ToolWorkType SaveTool::getToolType() {
+CaptureTool::ToolWorkType SaveTool::toolType() const {
     return TYPE_WORKER;
 }
 

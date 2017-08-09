@@ -41,8 +41,7 @@ public:
     CaptureTool* CreateTool(
             CaptureButton::ButtonType t,
             QObject *parent = nullptr);
-private:
-    //void registerTool();
+
 };
 
 #endif // TOOLFACTORY_H

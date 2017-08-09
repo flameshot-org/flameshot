@@ -42,8 +42,8 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
 
 void UIcolorEditor::updateComponents() {
     ConfigHandler config;
-    m_uiColor = config.getUIMainColor();
-    m_contrastColor = config.getUIContrastColor();
+    m_uiColor = config.uiMainColorValue();
+    m_contrastColor = config.uiContrastColorValue();
     if (m_lastButtonPressed == m_buttonMainColor) {
         m_colorWheel->setColor(m_uiColor);
     } else {
@@ -91,7 +91,7 @@ void UIcolorEditor::initColorWheel() {
 
 void UIcolorEditor::initButtons() {
     const int extraSize = 10;
-    int frameSize = CaptureButton::getButtonBaseSize() + extraSize;
+    int frameSize = CaptureButton::buttonBaseSize() + extraSize;
 
     m_vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));
 
@@ -154,6 +154,6 @@ void UIcolorEditor::changeLastButton(CaptureButton *b) {
             m_labelContrast->setStyleSheet(styleSheet());
             m_labelMain->setStyleSheet(offStyle);
         }
-        b->setIcon(b->getIcon());
+        b->setIcon(b->icon());
     }
 }

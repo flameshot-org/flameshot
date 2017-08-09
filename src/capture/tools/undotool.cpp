@@ -22,23 +22,27 @@ UndoTool::UndoTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool UndoTool::isSelectable() {
+int UndoTool::id() const {
+    return 0;
+}
+
+bool UndoTool::isSelectable() const {
     return false;
 }
 
-QString UndoTool::getIconName() {
+QString UndoTool::iconName() const {
     return "undo-variant.png";
 }
 
-QString UndoTool::getName() {
+QString UndoTool::name() const {
     return tr("Undo");
 }
 
-QString UndoTool::getDescription() {
+QString UndoTool::description() const {
     return tr("Undo the last modification");
 }
 
-CaptureTool::ToolWorkType UndoTool::getToolType() {
+CaptureTool::ToolWorkType UndoTool::toolType() const {
     return TYPE_WORKER;
 }
 

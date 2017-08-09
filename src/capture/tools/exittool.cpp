@@ -22,23 +22,27 @@ ExitTool::ExitTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool ExitTool::isSelectable() {
+int ExitTool::id() const {
+    return 0;
+}
+
+bool ExitTool::isSelectable() const {
     return false;
 }
 
-QString ExitTool::getIconName() {
+QString ExitTool::iconName() const {
     return "close.png";
 }
 
-QString ExitTool::getName() {
+QString ExitTool::name() const {
     return tr("Exit");
 }
 
-QString ExitTool::getDescription() {
+QString ExitTool::description() const {
     return tr("Leave the capture screen");
 }
 
-CaptureTool::ToolWorkType ExitTool::getToolType() {
+CaptureTool::ToolWorkType ExitTool::toolType() const {
     return TYPE_WORKER;
 }
 

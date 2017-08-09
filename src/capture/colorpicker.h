@@ -27,7 +27,7 @@ public:
     explicit ColorPicker(QWidget *parent = nullptr);
     ~ColorPicker();
 
-    QColor getDrawColor();
+    QColor drawColor();
 
     void show();
     void hide();
@@ -38,16 +38,13 @@ protected:
 
     QVector<QRect> handleMask() const;
 
-signals:
-
-public slots:
-
 private:
     const int m_colorAreaSize;
     QVector<QRect> m_colorAreaList;
     static QVector<Qt::GlobalColor> colorList;
 
     QColor m_uiColor, m_drawColor;
+
 };
 
 #endif // COLORPICKER_H

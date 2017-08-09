@@ -28,32 +28,23 @@
 // multiple functionality.
 
 namespace {
-    const int BUTTON_SIZE = 30;
 
-    inline qreal getColorLuma(const QColor &c) {
-        return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
-    }
+const int BUTTON_SIZE = 30;
 
-    inline int constrain(const int x, const int min, const int max) {
-        if (x > max) {
-            return max;
-        } else if (x < min) {
-            return min;
-        } else {
-            return x;
-        }
-    }
-
-    QColor getContrastColor(const QColor &c) {
-        bool isWhite = CaptureButton::iconIsWhiteByColor(c);
-        int change = isWhite ? 30 : -45;
-
-        return QColor(constrain(c.red() + change, 0, 255),
-                      constrain(c.green() + change, 0, 255),
-                      constrain(c.blue() + change, 0, 255));
-    }
-
+inline qreal getColorLuma(const QColor &c) {
+    return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
 }
+
+QColor getContrastColor(const QColor &c) {
+    bool isWhite = CaptureButton::iconIsWhiteByColor(c);
+    int change = isWhite ? 30 : -45;
+
+    return QColor(qBound(0, c.red() + change, 255),
+                  qBound(0, c.green() + change, 255),
+                  qBound(0, c.blue() + change, 255));
+}
+
+} // unnamed namespace
 
 CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(parent),
     m_buttonType(t), m_pressed(false)
@@ -63,7 +54,7 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
         QFont f = this->font();
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else {
-        setIcon(getIcon());
+        setIcon(icon());
     }
 }
 
@@ -75,7 +66,7 @@ void CaptureButton::initButton() {
     resize(BUTTON_SIZE, BUTTON_SIZE);
     setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
 
-    setToolTip(m_tool->getDescription());
+    setToolTip(m_tool->description());
 
     emergeAnimation = new  QPropertyAnimation(this, "size", this);
     emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
@@ -88,8 +79,8 @@ QVector<CaptureButton::ButtonType> CaptureButton::getIterableButtonTypes() {
     return iterableButtonTypes;
 }
 
-QString CaptureButton::getGlobalStyleSheet() {
-    QColor mainColor = ConfigHandler().getUIMainColor();
+QString CaptureButton::globalStyleSheet() {
+    QColor mainColor = ConfigHandler().uiMainColorValue();
     QString baseSheet = "CaptureButton { border-radius: %3;"
                         "background-color: %1; color: %4 }"
                         "CaptureButton:hover { background-color: %2; }"
@@ -105,7 +96,7 @@ QString CaptureButton::getGlobalStyleSheet() {
             .arg(BUTTON_SIZE/2).arg(color);
 }
 
-QString CaptureButton::getStyleSheet() const {
+QString CaptureButton::styleSheet() const {
     QString baseSheet = "CaptureButton { border-radius: %3;"
                         "background-color: %1; color: %4 }"
                         "CaptureButton:hover { background-color: %2; }"
@@ -121,10 +112,10 @@ QString CaptureButton::getStyleSheet() const {
 }
 
 // get icon returns the icon for the type of button
-QIcon CaptureButton::getIcon() const {
+QIcon CaptureButton::icon() const {
     QString color(iconIsWhiteByColor(m_mainColor) ? "White" : "Black");
     QString iconPath = QString(":/img/buttonIcons%1/%2")
-            .arg(color).arg(m_tool->getIconName());
+            .arg(color).arg(m_tool->iconName());
     return QIcon(iconPath);
 }
 
@@ -159,22 +150,22 @@ void CaptureButton::animatedShow() {
     emergeAnimation->start();
 }
 
-CaptureButton::ButtonType CaptureButton::getButtonType() const {
+CaptureButton::ButtonType CaptureButton::buttonType() const {
     return m_buttonType;
 }
 
-CaptureTool *CaptureButton::getTool() const {
+CaptureTool *CaptureButton::tool() const {
     return m_tool;
 }
 
 void CaptureButton::setColor(const QColor &c) {
     m_mainColor = c;
-    setStyleSheet(getStyleSheet());
-    setIcon(getIcon());
+    setStyleSheet(styleSheet());
+    setIcon(icon());
 }
 
 // getButtonBaseSize returns the base size of the buttons
-size_t CaptureButton::getButtonBaseSize() {
+size_t CaptureButton::buttonBaseSize() {
     return BUTTON_SIZE;
 }
 
@@ -186,7 +177,7 @@ bool CaptureButton::iconIsWhiteByColor(const QColor &c) {
     return isWhite;
 }
 
-QColor CaptureButton::m_mainColor = ConfigHandler().getUIMainColor();
+QColor CaptureButton::m_mainColor = ConfigHandler().uiMainColorValue();
 
 QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_PENCIL,

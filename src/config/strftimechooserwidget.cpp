@@ -25,8 +25,8 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget *parent) : QWidget(parent) 
     auto k = m_buttonData.keys();
     int middle = k.length()/2;
     // add the buttons in 2 columns (they need to be even)
-    for(int i = 0; i < 2; i++) {
-        for(int j = 0; j < middle; j++) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < middle; j++) {
             QString key = k.last();
             k.pop_back();
             QString variable = m_buttonData.value(key);

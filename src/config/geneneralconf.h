@@ -45,6 +45,7 @@ private:
     void initShowHelp();
     void initShowDesktopNotification();
     void initShowTrayIcon();
+
 };
 
 #endif // GENENERALCONF_H

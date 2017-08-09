@@ -53,17 +53,17 @@ public:
     CaptureButton() = delete;
     explicit CaptureButton(const ButtonType, QWidget *parent = nullptr);
 
-    static size_t getButtonBaseSize();
+    static size_t buttonBaseSize();
     static bool iconIsWhiteByColor(const QColor &);
-    static QString getGlobalStyleSheet();
+    static QString globalStyleSheet();
     static QVector<CaptureButton::ButtonType> getIterableButtonTypes();
 
-    QString getName() const;
-    QString getDescription() const;
-    QIcon getIcon() const;
-    QString getStyleSheet() const;
-    ButtonType getButtonType() const;
-    CaptureTool* getTool() const;
+    QString name() const;
+    QString description() const;
+    QIcon icon() const;
+    QString styleSheet() const;
+    ButtonType buttonType() const;
+    CaptureTool* tool() const;
 
     void setColor(const QColor &c);
     void animatedShow();
@@ -92,6 +92,7 @@ private:
     static QColor m_mainColor;
 
     void initButton();
+
 };
 
 #endif // BUTTON_H

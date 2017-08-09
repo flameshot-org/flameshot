@@ -54,6 +54,7 @@ private slots:
     void savePattern();
     void showParsedPattern(const QString &);
     void resetName();
+
 };
 
 #endif // FILENAMEEDITOR_H

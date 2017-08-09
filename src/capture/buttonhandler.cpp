@@ -29,7 +29,7 @@ ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v, QObject *parent) 
     QObject(parent)
 {
     if (!v.isEmpty()) {
-        m_buttonBaseSize = v[0]->getButtonBaseSize();
+        m_buttonBaseSize = v[0]->buttonBaseSize();
         m_distance = m_buttonBaseSize + SEPARATION;
         m_vectorButtons = v;
     }
@@ -166,8 +166,8 @@ void ButtonHandler::updatePosition(const QRect &selection,
                 }
             }
 
-            QVector<QPoint> positions = getHPoints(center, addCounter, true);
-            for (QPoint p: positions) {
+            QVector<QPoint> positions = horizontalPoints(center, addCounter, true);
+            for (const QPoint &p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
@@ -181,8 +181,8 @@ void ButtonHandler::updatePosition(const QRect &selection,
 
             QPoint center = QPoint(baseArea.right() + SEPARATION,
                                    baseArea.center().y());
-            QVector<QPoint> positions = getVPoints(center, addCounter, false);
-            for (QPoint p: positions) {
+            QVector<QPoint> positions = verticalPoints(center, addCounter, false);
+            for (const QPoint &p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
@@ -210,8 +210,8 @@ void ButtonHandler::updatePosition(const QRect &selection,
                     center.setX(center.x() - (baseWidth+SEPARATION)/2);
                 }
             }
-            QVector<QPoint> positions = getHPoints(center, addCounter, false);
-            for (QPoint p: positions) {
+            QVector<QPoint> positions = horizontalPoints(center, addCounter, false);
+            for (const QPoint &p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
@@ -228,8 +228,8 @@ void ButtonHandler::updatePosition(const QRect &selection,
             }
             QPoint center = QPoint(baseArea.left() - (SEPARATION + baseWidth),
                                    baseArea.center().y());
-            QVector<QPoint> positions = getVPoints(center, addCounter, true);
-            for (QPoint p: positions) {
+            QVector<QPoint> positions = verticalPoints(center, addCounter, true);
+            for (const QPoint &p: positions) {
                 m_vectorButtons[elemIndicator]->move(p);
                 ++elemIndicator;
             }
@@ -263,7 +263,7 @@ void ButtonHandler::updatePosition(const QRect &selection,
 // getHPoints is an auxiliar method for the button position computation.
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
-QVector<QPoint> ButtonHandler::getHPoints(
+QVector<QPoint> ButtonHandler::horizontalPoints(
         const QPoint &center, const int elements, const bool leftToRight) const
 {
     QVector<QPoint> res;
@@ -289,7 +289,7 @@ QVector<QPoint> ButtonHandler::getHPoints(
 // getHPoints is an auxiliar method for the button position computation.
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
-QVector<QPoint> ButtonHandler::getVPoints(
+QVector<QPoint> ButtonHandler::verticalPoints(
         const QPoint &center, const int elements,const bool upToDown) const
 {
     QVector<QPoint> res;
@@ -328,7 +328,7 @@ void ButtonHandler::setButtons(const QVector<CaptureButton *> v) {
     for (CaptureButton *b: m_vectorButtons) delete(b);
     m_vectorButtons = v;
     if (!v.isEmpty()) {
-        m_buttonBaseSize = v[0]->getButtonBaseSize();
+        m_buttonBaseSize = v[0]->buttonBaseSize();
         m_distance = m_buttonBaseSize + SEPARATION;
     }
 }

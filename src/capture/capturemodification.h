@@ -35,10 +35,10 @@ public:
             const QColor &,
             QObject *parent = nullptr
             );
-    QColor getColor() const;
-    QVector<QPoint> getPoints() const;
-    CaptureTool* getTool() const;
-    CaptureButton::ButtonType getType() const;
+    QColor color() const;
+    QVector<QPoint> points() const;
+    CaptureTool* tool() const;
+    CaptureButton::ButtonType buttonType() const;
     void addPoint(const QPoint);
 
 protected:
@@ -46,8 +46,6 @@ protected:
     CaptureButton::ButtonType m_type;
     QVector<QPoint> m_coords;
     CaptureTool *m_tool;
-
-private:
 
 };
 

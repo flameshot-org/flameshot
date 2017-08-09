@@ -49,12 +49,13 @@ public:
 
     explicit CaptureTool(QObject *parent = nullptr);
 
-    virtual bool isSelectable() = 0;
-    virtual ToolWorkType getToolType() = 0;
+    virtual int id() const = 0;
+    virtual bool isSelectable() const = 0;
+    virtual ToolWorkType toolType() const = 0;
 
-    virtual QString getIconName() = 0;
-    virtual QString getName() = 0;
-    virtual QString getDescription() = 0;
+    virtual QString iconName() const = 0;
+    virtual QString name() const = 0;
+    virtual QString description() const = 0;
 
     virtual void processImage(
             QPainter &painter,

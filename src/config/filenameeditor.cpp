@@ -86,7 +86,7 @@ void FileNameEditor::initWidgets() {
     // clear
     m_clearButton = new QPushButton(tr("Clear"), this);
     connect(m_clearButton, &QPushButton::clicked, this,
-            [this](){ m_nameEditor->setText("");
+            [this](){ m_nameEditor->setText(QString());
     });
     m_clearButton->setToolTip(tr("Deletes the name"));}
 
@@ -101,7 +101,7 @@ void FileNameEditor::showParsedPattern(const QString &p) {
 }
 
 void FileNameEditor::resetName() {
-    m_nameEditor->setText(ConfigHandler().getFilenamePattern());
+    m_nameEditor->setText(ConfigHandler().filenamePatternValue());
 }
 
 void FileNameEditor::addToNameEditor(QString s) {
@@ -110,6 +110,6 @@ void FileNameEditor::addToNameEditor(QString s) {
 }
 
 void FileNameEditor::updateComponents() {
-    m_nameEditor->setText(ConfigHandler().getFilenamePattern());
-    m_outputLabel->setText(m_nameHandler->getParsedPattern());
+    m_nameEditor->setText(ConfigHandler().filenamePatternValue());
+    m_outputLabel->setText(m_nameHandler->parsedPattern());
 }

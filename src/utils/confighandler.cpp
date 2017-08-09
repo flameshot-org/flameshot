@@ -34,11 +34,10 @@ QList<CaptureButton::ButtonType> ConfigHandler::getButtons() {
 void ConfigHandler::setButtons(const QList<CaptureButton::ButtonType> &buttons) {
     QList<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
-    qDebug("setButtons");
     m_settings->setValue("buttons", QVariant::fromValue(l));
 }
 
-QString ConfigHandler::getSavePath() {
+QString ConfigHandler::savePathValue() {
     return m_settings->value("savePath").toString();
 }
 
@@ -46,7 +45,7 @@ void ConfigHandler::setSavePath(const QString &savePath) {
     m_settings->setValue("savePath", savePath);
 }
 
-QColor ConfigHandler::getUIMainColor() {
+QColor ConfigHandler::uiMainColorValue() {
     return m_settings->value("uiColor").value<QColor>();
 }
 
@@ -54,7 +53,7 @@ void ConfigHandler::setUIMainColor(const QColor &c) {
     m_settings->setValue("uiColor", c);
 }
 
-QColor ConfigHandler::getUIContrastColor() {
+QColor ConfigHandler::uiContrastColorValue() {
     return m_settings->value("contastUiColor").value<QColor>();
 }
 
@@ -62,7 +61,7 @@ void ConfigHandler::setUIContrastColor(const QColor &c) {
     m_settings->setValue("contastUiColor", c);
 }
 
-QColor ConfigHandler::getDrawColor() {
+QColor ConfigHandler::drawColorValue() {
     return m_settings->value("drawColor").value<QColor>();
 }
 
@@ -70,7 +69,7 @@ void ConfigHandler::setDrawColor(const QColor &c) {
     m_settings->setValue("drawColor", c);
 }
 
-bool ConfigHandler::getShowHelp() {
+bool ConfigHandler::showHelpValue() {
     return m_settings->value("showHelp").toBool();
 }
 
@@ -78,7 +77,7 @@ void ConfigHandler::setShowHelp(const bool showHelp) {
     m_settings->setValue("showHelp", showHelp);
 }
 
-bool ConfigHandler::getDesktopNotification() {
+bool ConfigHandler::desktopNotificationValue() {
     return m_settings->value("showDesktopNotification").toBool();
 }
 
@@ -86,7 +85,7 @@ void ConfigHandler::setDesktopNotification(const bool showDesktopNotification) {
     m_settings->setValue("showDesktopNotification", showDesktopNotification);
 }
 
-QString ConfigHandler::getFilenamePattern() {
+QString ConfigHandler::filenamePatternValue() {
     return m_settings->value("filenamePattern").toString();
 }
 
@@ -94,7 +93,7 @@ void ConfigHandler::setFilenamePattern(const QString &pattern) {
     return m_settings->setValue("filenamePattern", pattern);
 }
 
-bool ConfigHandler::getDisabledTrayIcon() {
+bool ConfigHandler::disabledTrayIconValue() {
     return m_settings->value("disabledTrayIcon").toBool();
 }
 
@@ -126,13 +125,13 @@ void ConfigHandler::setDefaults() {
 void ConfigHandler::setAllTheButtons() {
     QList<int> buttons;
     auto listTypes = CaptureButton::getIterableButtonTypes();
-    for (CaptureButton::ButtonType t: listTypes) {
+    for (const CaptureButton::ButtonType t: listTypes) {
         buttons << static_cast<int>(t);
     }
     m_settings->setValue("buttons", QVariant::fromValue(buttons));
 }
 
-QString ConfigHandler::getConfigFilePath() const {
+QString ConfigHandler::configFilePath() const {
     return m_settings->fileName();
 }
 
@@ -156,7 +155,7 @@ QList<CaptureButton::ButtonType> ConfigHandler::fromIntToButton(
         const QList<int> &l)
 {
     QList<CaptureButton::ButtonType> buttons;
-    for(auto i: l)
+    for (auto const i: l)
         buttons << static_cast<CaptureButton::ButtonType>(i);
     return buttons;
 }
@@ -165,7 +164,7 @@ QList<int> ConfigHandler::fromButtonToInt(
         const QList<CaptureButton::ButtonType> &l)
 {
     QList<int> buttons;
-    for(auto i: l)
+    for (auto const i: l)
         buttons << static_cast<int>(i);
     return buttons;
 }

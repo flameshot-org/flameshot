@@ -28,7 +28,6 @@
 #include <QLabel>
 #include <QKeyEvent>
 #include <QFileSystemWatcher>
-#include <QDebug>
 
 // ConfigWindow contains the menus where you can configure the application
 
@@ -47,7 +46,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
         }
     };
     m_configWatcher = new QFileSystemWatcher(this);
-    m_configWatcher->addPath(ConfigHandler().getConfigFilePath());
+    m_configWatcher->addPath(ConfigHandler().configFilePath());
     connect(m_configWatcher, &QFileSystemWatcher::fileChanged,
             this, changedSlot);
 

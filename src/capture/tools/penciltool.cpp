@@ -22,23 +22,27 @@ PencilTool::PencilTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool PencilTool::isSelectable() {
+int PencilTool::id() const {
+    return 0;
+}
+
+bool PencilTool::isSelectable() const {
     return true;
 }
 
-QString PencilTool::getIconName() {
+QString PencilTool::iconName() const {
     return "pencil.png";
 }
 
-QString PencilTool::getName() {
+QString PencilTool::name() const {
     return tr("Pencil");
 }
 
-QString PencilTool::getDescription() {
+QString PencilTool::description() const {
     return tr("Sets the Pencil as the paint tool");
 }
 
-CaptureTool::ToolWorkType PencilTool::getToolType() {
+CaptureTool::ToolWorkType PencilTool::toolType() const {
     return TYPE_PATH_DRAWER;
 }
 

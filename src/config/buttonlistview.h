@@ -40,6 +40,7 @@ private:
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem *);
+
 };
 
 #endif // BUTTONLISTVIEW_H

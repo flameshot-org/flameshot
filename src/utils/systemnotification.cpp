@@ -18,7 +18,7 @@ void SystemNotification::sendMessage(
         const QString &title,
         const int timeout)
 {
-    if(!ConfigHandler().getDesktopNotification()) {
+    if(!ConfigHandler().desktopNotificationValue()) {
         return;
     }
 

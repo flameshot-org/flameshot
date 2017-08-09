@@ -26,8 +26,8 @@ FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
     std::locale::global(std::locale(std::locale("").name()));
 }
 
-QString FileNameHandler::getParsedPattern() {
-    return parseFilename(ConfigHandler().getFilenamePattern());
+QString FileNameHandler::parsedPattern() {
+    return parseFilename(ConfigHandler().filenamePatternValue());
 }
 
 QString FileNameHandler::parseFilename(const QString &name) {
@@ -51,21 +51,21 @@ void FileNameHandler::savePattern(const QString &pattern) {
     ConfigHandler().setFilenamePattern(pattern);
 }
 
-QString FileNameHandler::getAbsoluteSavePath() {
+QString FileNameHandler::absoluteSavePath() {
     ConfigHandler config;
-    QString savePath = config.getSavePath();
+    QString savePath = config.savePathValue();
     bool changed = false;
     if (savePath.isEmpty() || !QDir(savePath).exists() || !QFileInfo(savePath).isWritable()) {
         changed = true;
         savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
-    if(changed) {
+    if (changed) {
         config.setSavePath(savePath);
     }
     // first add slash if needed
     QString tempName = savePath.endsWith("/") ? "" : "/";
     // add the parsed pattern in a correct format for the filesystem
-    tempName += FileNameHandler().getParsedPattern().replace("/", "⁄");
+    tempName += FileNameHandler().parsedPattern().replace("/", "⁄");
     // find unused name adding _n where n is a number
     QFileInfo checkFile(savePath + tempName + ".png");
     if (checkFile.exists()) {

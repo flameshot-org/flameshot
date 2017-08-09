@@ -35,13 +35,13 @@ Controller::Controller() : m_captureWindow(nullptr)
     qApp->setQuitOnLastWindowClosed(false);
 
     // init tray icon
-    if(!ConfigHandler().getDisabledTrayIcon()) {
+    if (!ConfigHandler().disabledTrayIconValue()) {
         enableTrayIcon();
     }
 
     initDefaults();
 
-    QString StyleSheet = CaptureButton::getGlobalStyleSheet();
+    QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
 }
@@ -96,7 +96,7 @@ void Controller::openInfoWindow() {
 }
 
 void Controller::enableTrayIcon() {
-    if(m_trayIcon) {
+    if (m_trayIcon) {
         return;
     }
     ConfigHandler().setDisabledTrayIcon(false);
@@ -138,7 +138,7 @@ void Controller::disableTrayIcon() {
 }
 
 void Controller::updateConfigComponents() {
-    if(m_configWindow) {
+    if (m_configWindow) {
         m_configWindow->updateComponents();
     }
 }

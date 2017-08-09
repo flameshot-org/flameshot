@@ -24,23 +24,27 @@ LineTool::LineTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool LineTool::isSelectable() {
+int LineTool::id() const {
+    return 0;
+}
+
+bool LineTool::isSelectable() const {
     return true;
 }
 
-QString LineTool::getIconName() {
+QString LineTool::iconName() const {
     return "line.png";
 }
 
-QString LineTool::getName() {
+QString LineTool::name() const {
     return tr("Line");
 }
 
-QString LineTool::getDescription() {
+QString LineTool::description() const {
     return tr("Sets the Line as the paint tool");
 }
 
-CaptureTool::ToolWorkType LineTool::getToolType() {
+CaptureTool::ToolWorkType LineTool::toolType() const {
     return TYPE_LINE_DRAWER;
 }
 

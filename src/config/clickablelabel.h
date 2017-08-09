@@ -32,6 +32,7 @@ signals:
 
 private:
     void mousePressEvent (QMouseEvent *);
+
 };
 
 #endif // CLICKABLELABEL_H

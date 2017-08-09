@@ -45,9 +45,12 @@
 // are of selection with its respective buttons.
 
 namespace {
-    // size of the handlers at the corners of the selection
-    const int HANDLE_SIZE = 9;
-}
+
+// size of the handlers at the corners of the selection
+const int HANDLE_SIZE = 9;
+
+} // unnamed namespace
+
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
@@ -55,7 +58,7 @@ CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     m_onButton(false), m_forcedSavePath(forcedSavePath),
     m_state(CaptureButton::TYPE_MOVESELECTION)
 {
-    m_showInitialMsg = ConfigHandler().getShowHelp();
+    m_showInitialMsg = ConfigHandler().showHelpValue();
 
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
@@ -102,13 +105,13 @@ CaptureWidget::~CaptureWidget() {
 // selection in the capture
 void CaptureWidget::updateButtons() {
     ConfigHandler config;
-    m_uiColor = config.getUIMainColor();
-    m_contrastUiColor = config.getUIContrastColor();
+    m_uiColor = config.uiMainColorValue();
+    m_contrastUiColor = config.uiContrastColorValue();
 
     auto buttons = config.getButtons();
     QVector<CaptureButton*> vectorButtons;
 
-    for (auto t: buttons) {
+    for (const CaptureButton::ButtonType &t: buttons) {
         CaptureButton *b = new CaptureButton(t, this);
         if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
@@ -118,7 +121,7 @@ void CaptureWidget::updateButtons() {
         connect(b, &CaptureButton::hovered, this, &CaptureWidget::enterButton);
         connect(b, &CaptureButton::mouseExited, this, &CaptureWidget::leaveButton);
         connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
-        connect(b->getTool(), &CaptureTool::requestAction,
+        connect(b->tool(), &CaptureTool::requestAction,
                 this, &CaptureWidget::handleButtonSignal);
         vectorButtons << b;
     }
@@ -136,7 +139,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.drawPixmap(0, 0, m_screenshot->paintTemporalModification(
                                m_modifications.last()));
     } else {
-        painter.drawPixmap(0, 0, m_screenshot->getScreenshot());
+        painter.drawPixmap(0, 0, m_screenshot->screenshot());
     }
 
     QColor overlayColor(0, 0, 0, 160);
@@ -149,8 +152,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     painter.drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
     painter.setClipRect(rect());
 
-    if(m_showInitialMsg) {
-
+    if (m_showInitialMsg) {
         QRect helpRect = QGuiApplication::primaryScreen()->geometry();
 
         QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
@@ -206,7 +208,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         m_mouseIsClicked = true;
         if (m_state != CaptureButton::TYPE_MOVESELECTION) {
             auto mod = new CaptureModification(m_state, e->pos(),
-                                               m_colorPicker->getDrawColor(),
+                                               m_colorPicker->drawColor(),
                                                this);
             m_modifications.append(mod);
             return;
@@ -242,14 +244,14 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             QPoint p = initialRect.topLeft() + (e->pos() - m_dragStartPoint);
             m_dragStartPoint += e->pos() - m_dragStartPoint;
             m_selection.moveTo(p);
-            if(!r.contains(QPoint(r.center().x(), m_selection.top()))) {
+            if (!r.contains(QPoint(r.center().x(), m_selection.top()))) {
                 m_selection.setTop(r.top());
-            } if(!r.contains(QPoint(m_selection.left(), r.center().y()))) {
+            } if (!r.contains(QPoint(m_selection.left(), r.center().y()))) {
                 m_selection.setLeft(r.left());
             }
-            if(!r.contains(QPoint(m_selection.right(), r.center().y()))) {
+            if (!r.contains(QPoint(m_selection.right(), r.center().y()))) {
                 m_selection.setRight(r.right());
-            } if(!r.contains(QPoint(r.center().x(), m_selection.bottom()))) {
+            } if (!r.contains(QPoint(r.center().x(), m_selection.bottom()))) {
                 m_selection.setBottom(r.bottom());
             }
         } else {
@@ -307,7 +309,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             return;
         }
         bool found = false;
-        for (QRect *r: m_Handles) {
+        for (QRect *const r: m_Handles) {
             if (r->contains(e->pos())) {
                 m_mouseOverHandle = r;
                 found = true;
@@ -370,28 +372,28 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
     SystemNotification notify;
     if (toClipboard) {
         if (m_selection.isNull()) { // copy full screen when no selection
-            QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot());
+            QApplication::clipboard()->setPixmap(m_screenshot->screenshot());
         } else {
-            QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot()
-                                                 .copy(getExtendedSelection()));
+            QApplication::clipboard()->setPixmap(m_screenshot->screenshot()
+                                                 .copy(extendedSelection()));
         }
     }
     bool ok = false;
-    if(m_forcedSavePath.isEmpty()) {
-        if(isVisible()) {
+    if (m_forcedSavePath.isEmpty()) {
+        if (isVisible()) {
             hide();
         }
-        savePath = m_screenshot->graphicalSave(ok, getExtendedSelection(), this);
+        savePath = m_screenshot->graphicalSave(ok, extendedSelection(), this);
     } else {
         ConfigHandler config;
         config.setSavePath(m_forcedSavePath);
-        savePath = m_screenshot->fileSave(ok, getExtendedSelection());
-        if(!ok || config.getSavePath() != m_forcedSavePath) {
+        savePath = m_screenshot->fileSave(ok, extendedSelection());
+        if(!ok || config.savePathValue() != m_forcedSavePath) {
             saveMessage = tr("Error trying to save in ") + savePath;
             notify.sendMessage(saveMessage);
         }
     }
-    if(ok) {
+    if (ok) {
         saveMessage = tr("Capture saved in ") + savePath;
         notify.sendMessage(saveMessage);
     }
@@ -401,10 +403,10 @@ QString CaptureWidget::saveScreenshot(bool toClipboard) {
 
 void CaptureWidget::copyScreenshot() {
     if (m_selection.isNull()) { // copy full screen when no selection
-        QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot());
+        QApplication::clipboard()->setPixmap(m_screenshot->screenshot());
     } else {
-        QApplication::clipboard()->setPixmap(m_screenshot->getScreenshot()
-                                             .copy(getExtendedSelection()));
+        QApplication::clipboard()->setPixmap(m_screenshot->screenshot()
+                                             .copy(extendedSelection()));
     }
     close();
 }
@@ -444,7 +446,7 @@ void CaptureWidget::uploadScreenshot() {
     if (m_selection.isNull()) {
         m_screenshot->uploadToImgur(am);
     } else {
-        m_screenshot->uploadToImgur(am, getExtendedSelection());
+        m_screenshot->uploadToImgur(am, extendedSelection());
     }
     hide();
     SystemNotification().sendMessage(tr("Uploading image..."));
@@ -463,9 +465,9 @@ bool CaptureWidget::undo() {
 }
 
 void CaptureWidget::setState(CaptureButton *b) {
-    CaptureButton::ButtonType t = b->getButtonType();
-    if(b->getTool()->isSelectable()) {
-        if(t != m_state) {
+    CaptureButton::ButtonType t = b->buttonType();
+    if (b->tool()->isSelectable()) {
+        if (t != m_state) {
             m_state = t;
             if (m_lastPressedButton) {
                 m_lastPressedButton->setColor(m_uiColor);
@@ -638,9 +640,10 @@ QRegion CaptureWidget::handleMask() const {
     return mask;
 }
 
-QRect CaptureWidget::getExtendedSelection() const {
-    if(m_selection.isNull()) return QRect();
-    auto devicePixelRatio = m_screenshot->getScreenshot().devicePixelRatio();
+QRect CaptureWidget::extendedSelection() const {
+    if (m_selection.isNull())
+        return QRect();
+    auto devicePixelRatio = m_screenshot->screenshot().devicePixelRatio();
 
     return QRect(m_selection.left()   * devicePixelRatio,
                  m_selection.top()    * devicePixelRatio,

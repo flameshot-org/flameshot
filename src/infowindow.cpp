@@ -58,7 +58,6 @@ QVector<const char *> InfoWindow::m_description = {
     QT_TR_NOOP("Show color picker")
 };
 
-#include <QDebug>
 void InfoWindow::initInfoTable() {
     QTableWidget *table = new QTableWidget(this);
     table->setToolTip(tr("Available shorcuts in the screen capture mode."));

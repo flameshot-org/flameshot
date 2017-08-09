@@ -56,6 +56,7 @@ private:
 
     void initColorWheel();
     void initButtons();
+
 };
 
 #endif // UICOLORPICKER_H

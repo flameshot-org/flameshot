@@ -19,65 +19,70 @@
 #include <QPainter>
 
 namespace {
-    const int ArrowWidth = 10;
-    const int ArrowHeight = 18;
 
-    QPainterPath getArrowHead(QPoint p1, QPoint p2) {
-        QLineF body(p1, p2);
-        int originalLength = body.length();
-        body.setLength(ArrowWidth);
-        // move across the line up to the head
-        //QPointF  =;
-        QLineF temp(QPoint(0,0), p2-p1);
-        temp.setLength(originalLength-ArrowHeight);
-        QPointF bottonTranslation(temp.p2());
+const int ArrowWidth = 10;
+const int ArrowHeight = 18;
 
-        // generates the transformation to center of the arrowhead
-        body.setAngle(body.angle()+90);
-        QPointF temp2 = p1-body.p2();
-        QPointF centerTranslation((temp2.x()/2), (temp2.y()/2));
+QPainterPath getArrowHead(QPoint p1, QPoint p2) {
+    QLineF body(p1, p2);
+    int originalLength = body.length();
+    body.setLength(ArrowWidth);
+    // move across the line up to the head
+    //QPointF  =;
+    QLineF temp(QPoint(0,0), p2-p1);
+    temp.setLength(originalLength-ArrowHeight);
+    QPointF bottonTranslation(temp.p2());
 
-        body.translate(bottonTranslation);
-        body.translate(centerTranslation);
+    // generates the transformation to center of the arrowhead
+    body.setAngle(body.angle()+90);
+    QPointF temp2 = p1-body.p2();
+    QPointF centerTranslation((temp2.x()/2), (temp2.y()/2));
 
-        QPainterPath path;
-        path.moveTo(p2);
-        path.lineTo(body.p1());
-        path.lineTo(body.p2());
-        path.lineTo(p2);
-        return path;
-    }
+    body.translate(bottonTranslation);
+    body.translate(centerTranslation);
 
-    // gets a shorter line to prevent overlap in the point of the arrow
-    QLine getShorterLine(QPoint p1, QPoint p2) {
-        QLineF l(p1, p2);
-        l.setLength(l.length()-ArrowHeight);
-        return l.toLine();
-    }
-
+    QPainterPath path;
+    path.moveTo(p2);
+    path.lineTo(body.p1());
+    path.lineTo(body.p2());
+    path.lineTo(p2);
+    return path;
 }
+
+// gets a shorter line to prevent overlap in the point of the arrow
+QLine getShorterLine(QPoint p1, QPoint p2) {
+    QLineF l(p1, p2);
+    l.setLength(l.length()-ArrowHeight);
+    return l.toLine();
+}
+
+} // unnamed namespace
 
 ArrowTool::ArrowTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool ArrowTool::isSelectable() {
+int ArrowTool::id() const {
+    return 0;
+}
+
+bool ArrowTool::isSelectable() const {
     return true;
 }
 
-QString ArrowTool::getIconName() {
+QString ArrowTool::iconName() const {
     return "arrow-bottom-left.png";
 }
 
-QString ArrowTool::getName() {
+QString ArrowTool::name() const {
     return tr("Arrow");
 }
 
-QString ArrowTool::getDescription() {
+QString ArrowTool::description() const {
     return tr("Sets the Arrow as the paint tool");
 }
 
-CaptureTool::ToolWorkType ArrowTool::getToolType() {
+CaptureTool::ToolWorkType ArrowTool::toolType() const {
     return TYPE_LINE_DRAWER;
 }
 

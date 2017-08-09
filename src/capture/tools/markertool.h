@@ -26,23 +26,24 @@ class MarkerTool : public CaptureTool
 public:
     explicit MarkerTool(QObject *parent = nullptr);
 
-    int getID();
-    bool isSelectable();
-    ToolWorkType getToolType();
+    int id() const override;
+    bool isSelectable() const override;
+    ToolWorkType toolType() const override;
 
-    QString getIconName();
-    QString getName();
-    QString getDescription();
+    QString iconName() const override;
+    QString name() const override;
+    QString description() const override;
 
     void processImage(
             QPainter &painter,
             const QVector<QPoint> &points,
-            const QColor &color);
+            const QColor &color) override;
 
-    void onPressed();
+    void onPressed() override;
 
 private:
     inline bool needsAdjustment(const QPoint &p0, const QPoint &p1) const;
+
 };
 
 #endif // MARKERTOOL_H

@@ -33,28 +33,28 @@ public:
     QList<CaptureButton::ButtonType> getButtons();
     void setButtons(const QList<CaptureButton::ButtonType> &);
 
-    QString getSavePath();
+    QString savePathValue();
     void setSavePath(const QString &);
 
-    QColor getUIMainColor();
+    QColor uiMainColorValue();
     void setUIMainColor(const QColor &);
 
-    QColor getUIContrastColor();
+    QColor uiContrastColorValue();
     void setUIContrastColor(const QColor &);
 
-    QColor getDrawColor();
+    QColor drawColorValue();
     void setDrawColor(const QColor &);
 
-    bool getShowHelp();
+    bool showHelpValue();
     void setShowHelp(const bool);
 
-    bool getDesktopNotification();
+    bool desktopNotificationValue();
     void setDesktopNotification(const bool);
 
-    QString getFilenamePattern();
+    QString filenamePatternValue();
     void setFilenamePattern(const QString &);
 
-    bool getDisabledTrayIcon();
+    bool disabledTrayIconValue();
     void setDisabledTrayIcon(const bool);
 
     bool initiatedIsSet();
@@ -64,7 +64,7 @@ public:
 
     void setAllTheButtons();
 
-    QString getConfigFilePath() const;
+    QString configFilePath() const;
 
 private:
     QSettings *m_settings;

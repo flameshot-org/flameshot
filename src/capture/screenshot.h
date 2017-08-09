@@ -34,8 +34,8 @@ public:
     ~Screenshot();
 
     void setScreenshot(const QPixmap &);
-    QPixmap getBaseScreenshot() const;
-    QPixmap getScreenshot() const;
+    QPixmap baseScreenshot() const;
+    QPixmap screenshot() const;
 
     QString graphicalSave(bool &ok,
                           const QRect &selection = QRect(),
@@ -53,6 +53,7 @@ private:
     QPointer<QNetworkAccessManager> m_accessManager;
 
     void paintInPainter(QPainter &, const CaptureModification *);
+
 };
 
 #endif // SCREENSHOT_H

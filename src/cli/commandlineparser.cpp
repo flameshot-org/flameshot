@@ -37,7 +37,7 @@ auto helpOption = CommandOption({"h", "help"},
 
 inline QStringList addDashToOptionNames(const QStringList &names) {
     QStringList dashedNames;
-    for (QString name: names) {
+    for (const QString &name: names) {
         // prepend "-" to single character options, and "--" to the others
         QString dashedName = (name.length() == 1) ?
                     QString("-%1").arg(name) :
@@ -56,7 +56,7 @@ QString optionsToString(const QList<CommandOption> &options,
     for (auto const &option: options) {
         QStringList dashedOptions = addDashToOptionNames(option.names());
         QString joinedDashedOptions = dashedOptions.join(", ");
-        if(!option.valueName().isEmpty()) {
+        if (!option.valueName().isEmpty()) {
             joinedDashedOptions += QString(" <%1>")
                     .arg(option.valueName());
         }
@@ -79,7 +79,7 @@ QString optionsToString(const QList<CommandOption> &options,
                     .arg(dashedOptionList.at(i).leftJustified(size, ' '))
                     .arg(options.at(i).description());
         }
-        if(!arguments.isEmpty()) {
+        if (!arguments.isEmpty()) {
             result += "\n";
         }
     }
@@ -94,7 +94,7 @@ QString optionsToString(const QList<CommandOption> &options,
     return result;
 }
 
-} // namespace
+} // unnamed namespace
 
 bool CommandLineParser::processArgs(const QStringList &args,
                                     QStringList::const_iterator &actualIt,
@@ -134,7 +134,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
     bool isDoubleDashed = arg.startsWith("--");
     ok =  isDoubleDashed ? arg.length() > 3 :
                 arg.length() == 2;
-    if(!ok) {
+    if (!ok) {
         out << QString("the option %1 has a wrong format.").arg(arg);
         return ok;
     }

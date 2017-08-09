@@ -27,8 +27,8 @@ ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
     setMouseTracking(true);
     // save the color values in member variables for faster access
     ConfigHandler config;
-    m_uiColor = config.getUIMainColor();
-    m_drawColor = config.getDrawColor();
+    m_uiColor = config.uiMainColorValue();
+    m_drawColor = config.drawColorValue();
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;
@@ -54,7 +54,7 @@ ColorPicker::~ColorPicker() {
     ConfigHandler().setDrawColor(m_drawColor);
 }
 
-QColor ColorPicker::getDrawColor() {
+QColor ColorPicker::drawColor() {
     return m_drawColor;
 }
 
@@ -74,7 +74,7 @@ void ColorPicker::paintEvent(QPaintEvent *) {
 
     QVector<QRect> rects = handleMask();
     painter.setPen(QColor(Qt::black));
-    for(int i = 0; i < rects.size(); ++i) {
+    for (int i = 0; i < rects.size(); ++i) {
         // draw the highlight when we have to draw the selected color
         if (m_drawColor == QColor(colorList.at(i))) {
             QColor c = QColor(m_uiColor);
@@ -95,7 +95,7 @@ void ColorPicker::paintEvent(QPaintEvent *) {
 }
 
 void ColorPicker::mouseMoveEvent(QMouseEvent *e) {
-    for(int i = 0; i < colorList.size(); ++i) {
+    for (int i = 0; i < colorList.size(); ++i) {
         if (m_colorAreaList.at(i).contains(e->pos())) {
             m_drawColor = colorList.at(i);
             update();
@@ -106,7 +106,7 @@ void ColorPicker::mouseMoveEvent(QMouseEvent *e) {
 
 QVector<QRect> ColorPicker::handleMask() const {
     QVector<QRect> areas;
-    for(QRect rect: m_colorAreaList) {
+    for (const QRect &rect: m_colorAreaList) {
         areas.append(rect);
     }
 

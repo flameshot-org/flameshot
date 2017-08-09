@@ -45,7 +45,7 @@ class CaptureWidget : public QWidget {
     friend class CaptureButton;
 
 public:
-    explicit CaptureWidget(const QString &forcedSavePath = "",
+    explicit CaptureWidget(const QString &forcedSavePath = QString(),
                            QWidget *parent = nullptr);
     ~CaptureWidget();
 
@@ -112,7 +112,7 @@ private:
     void updateSizeIndicator();
     void updateCursor();
 
-    QRect getExtendedSelection() const;
+    QRect extendedSelection() const;
     QVector<CaptureModification*> m_modifications;
     QPointer<CaptureButton> m_sizeIndButton;
     QPointer<CaptureButton> m_lastPressedButton;
@@ -123,6 +123,7 @@ private:
     QColor m_uiColor;
     QColor m_contrastUiColor;
     ColorPicker *m_colorPicker;
+
 };
 
 #endif // CAPTUREWIDGET_H

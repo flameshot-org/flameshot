@@ -28,7 +28,7 @@ ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 
 QPixmap ScreenGrabber::grabEntireDesktop() {
     QRect geometry;
-    for (QScreen *screen : QGuiApplication::screens()) {
+    for (QScreen *const screen : QGuiApplication::screens()) {
         geometry = geometry.united(screen->geometry());
     }
 

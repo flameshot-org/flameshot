@@ -32,9 +32,9 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
 
 void GeneneralConf::updateComponents() {
     ConfigHandler config;
-    m_helpMessage->setChecked(config.getShowHelp());
-    m_showTray->setChecked(!config.getDisabledTrayIcon());
-    m_sysNotifications->setChecked(config.getDesktopNotification());
+    m_helpMessage->setChecked(config.showHelpValue());
+    m_showTray->setChecked(!config.disabledTrayIconValue());
+    m_sysNotifications->setChecked(config.desktopNotificationValue());
 }
 
 void GeneneralConf::showHelpChanged(bool checked) {
@@ -47,7 +47,7 @@ void GeneneralConf::showDesktopNotificationChanged(bool checked) {
 
 void GeneneralConf::showTrayIconChanged(bool checked) {
     auto controller = Controller::getInstance();
-    if(checked) {
+    if (checked) {
         controller->enableTrayIcon();
     } else {
         controller->disableTrayIcon();
@@ -57,7 +57,7 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
 void GeneneralConf::initShowHelp() {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
     ConfigHandler config;
-    bool checked = config.getShowHelp();
+    bool checked = config.showHelpValue();
     m_helpMessage->setChecked(checked);
     m_helpMessage->setToolTip(tr("Show the help message at the beginning "
                        "in the capture mode."));
@@ -71,7 +71,7 @@ void GeneneralConf::initShowDesktopNotification() {
     m_sysNotifications =
             new QCheckBox(tr("Show desktop notifications"), this);
     ConfigHandler config;
-    bool checked = config.getDesktopNotification();
+    bool checked = config.desktopNotificationValue();
     m_sysNotifications->setChecked(checked);
     m_sysNotifications->setToolTip(tr("Show desktop notifications"));
     m_layout->addWidget(m_sysNotifications);
@@ -83,7 +83,7 @@ void GeneneralConf::initShowDesktopNotification() {
 void GeneneralConf::initShowTrayIcon() {
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
     ConfigHandler config;
-    bool checked = !config.getDisabledTrayIcon();
+    bool checked = !config.disabledTrayIconValue();
     m_showTray->setChecked(checked);
     m_showTray->setToolTip(tr("Show the systemtray icon"));
     m_layout->addWidget(m_showTray);

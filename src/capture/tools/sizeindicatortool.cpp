@@ -22,23 +22,27 @@ SizeIndicatorTool::SizeIndicatorTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool SizeIndicatorTool::isSelectable() {
+int SizeIndicatorTool::id() const {
+    return 0;
+}
+
+bool SizeIndicatorTool::isSelectable() const {
     return false;
 }
 
-QString SizeIndicatorTool::getIconName() {
-    return "";
+QString SizeIndicatorTool::iconName() const {
+    return QString();
 }
 
-QString SizeIndicatorTool::getName() {
+QString SizeIndicatorTool::name() const {
     return tr("Selection Size Indicator");
 }
 
-QString SizeIndicatorTool::getDescription() {
+QString SizeIndicatorTool::description() const {
     return tr("Shows the dimensions of the selection (X Y)");
 }
 
-CaptureTool::ToolWorkType SizeIndicatorTool::getToolType() {
+CaptureTool::ToolWorkType SizeIndicatorTool::toolType() const {
     return TYPE_WORKER;
 }
 

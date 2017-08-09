@@ -192,7 +192,7 @@ int main(int argc, char *argv[]) {
             FileNameHandler fh;
             qInfo().noquote() << QString("The new pattern is '%1'\n"
                                          "Parsed pattern example: %2").arg(newFilename)
-                                 .arg(fh.getParsedPattern());
+                                 .arg(fh.parsedPattern());
         }
         if (tray) {
             QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",

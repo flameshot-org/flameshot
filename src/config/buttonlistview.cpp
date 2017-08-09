@@ -35,11 +35,11 @@ void ButtonListView::initButtonList() {
     ToolFactory factory;
     auto listTypes = CaptureButton::getIterableButtonTypes();
 
-    for (CaptureButton::ButtonType t: listTypes) {
+    for (const CaptureButton::ButtonType t: listTypes) {
         CaptureTool *tool = factory.CreateTool(t);
 
         // add element to the local map
-        m_buttonTypeByName.insert(tool->getName(), t);
+        m_buttonTypeByName.insert(tool->name(), t);
 
         // init the menu option
         QListWidgetItem *m_buttonItem = new QListWidgetItem(this);
@@ -48,7 +48,7 @@ void ButtonListView::initButtonList() {
         QColor bgColor = this->palette().color(QWidget::backgroundRole());
         QString color = bgColor.valueF() < 0.6 ? "White" : "Black";
         QString iconPath = QString(":/img/buttonIcons%1/%2")
-                .arg(color).arg(tool->getIconName());
+                .arg(color).arg(tool->iconName());
         if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
             iconPath = QString(":/img/buttonIcons%1/size_indicator.png")
                     .arg(color);
@@ -59,8 +59,8 @@ void ButtonListView::initButtonList() {
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
         m_buttonItem->setForeground(foregroundColor);
 
-        m_buttonItem->setText(tool->getName());
-        m_buttonItem->setToolTip(tool->getDescription());
+        m_buttonItem->setText(tool->name());
+        m_buttonItem->setToolTip(tool->description());
         tool->deleteLater();
     }
 }
@@ -75,7 +75,6 @@ void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     } else {
         m_listButtons.removeOne(buttonIndex);
     }
-    qDebug("updateActiveButtons");
     QSettings().setValue("buttons", QVariant::fromValue(m_listButtons));
 }
 

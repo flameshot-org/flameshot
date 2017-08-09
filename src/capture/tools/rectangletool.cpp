@@ -22,23 +22,27 @@ RectangleTool::RectangleTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool RectangleTool::isSelectable() {
+int RectangleTool::id() const {
+    return 0;
+}
+
+bool RectangleTool::isSelectable() const {
     return true;
 }
 
-QString RectangleTool::getIconName() {
+QString RectangleTool::iconName() const {
     return "square.png";
 }
 
-QString RectangleTool::getName() {
+QString RectangleTool::name() const {
     return tr("Rectangle");
 }
 
-QString RectangleTool::getDescription() {
+QString RectangleTool::description() const {
     return tr("Sets the Rectangle as the paint tool");
 }
 
-CaptureTool::ToolWorkType RectangleTool::getToolType() {
+CaptureTool::ToolWorkType RectangleTool::toolType() const {
     return TYPE_LINE_DRAWER;
 }
 

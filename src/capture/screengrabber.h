@@ -27,9 +27,6 @@ public:
     explicit ScreenGrabber(QObject *parent = nullptr);
     QPixmap grabEntireDesktop();
 
-signals:
-
-public slots:
 };
 
 #endif // SCREENGRABBER_H

@@ -24,23 +24,27 @@ MarkerTool::MarkerTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool MarkerTool::isSelectable() {
+int MarkerTool::id() const {
+    return 0;
+}
+
+bool MarkerTool::isSelectable() const {
     return true;
 }
 
-QString MarkerTool::getIconName() {
+QString MarkerTool::iconName() const {
     return "marker.png";
 }
 
-QString MarkerTool::getName() {
+QString MarkerTool::name() const {
     return tr("Marker");
 }
 
-QString MarkerTool::getDescription() {
+QString MarkerTool::description() const {
     return tr("Sets the Marker as the paint tool");
 }
 
-CaptureTool::ToolWorkType MarkerTool::getToolType() {
+CaptureTool::ToolWorkType MarkerTool::toolType() const {
     return TYPE_LINE_DRAWER;
 }
 

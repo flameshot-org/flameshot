@@ -40,25 +40,25 @@ CaptureModification::CaptureModification(
     }
 }
 
-CaptureButton::ButtonType CaptureModification::getType() const {
+CaptureButton::ButtonType CaptureModification::buttonType() const {
     return m_type;
 }
 
-QColor CaptureModification::getColor() const {
+QColor CaptureModification::color() const {
     return m_color;
 }
 
-QVector<QPoint> CaptureModification::getPoints() const {
+QVector<QPoint> CaptureModification::points() const {
     return m_coords;
 }
 
-CaptureTool* CaptureModification::getTool() const{
+CaptureTool* CaptureModification::tool() const{
     return m_tool;
 }
 
 // addPoint adds a point to the vector of points
 void CaptureModification::addPoint(const QPoint p) {
-    if(m_tool->getToolType() == CaptureTool::TYPE_LINE_DRAWER) {
+    if (m_tool->toolType() == CaptureTool::TYPE_LINE_DRAWER) {
         m_coords[1] = p;
     } else {
         m_coords.append(p);

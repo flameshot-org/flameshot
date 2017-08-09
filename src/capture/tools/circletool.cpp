@@ -22,23 +22,27 @@ CircleTool::CircleTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool CircleTool::isSelectable() {
+int CircleTool::id() const {
+    return 0;
+}
+
+bool CircleTool::isSelectable() const {
     return true;
 }
 
-QString CircleTool::getIconName() {
+QString CircleTool::iconName() const {
     return "circle-outline.png";
 }
 
-QString CircleTool::getName() {
+QString CircleTool::name() const {
     return tr("Circle");
 }
 
-QString CircleTool::getDescription() {
+QString CircleTool::description() const {
     return tr("Sets the Circle as the paint tool");
 }
 
-CaptureTool::ToolWorkType CircleTool::getToolType() {
+CaptureTool::ToolWorkType CircleTool::toolType() const {
     return TYPE_LINE_DRAWER;
 }
 

@@ -37,6 +37,7 @@ private:
 
     static QVector<const char *> m_keys;
     static QVector<const char *> m_description;
+
 };
 
 #endif // INFOWINDOW_H

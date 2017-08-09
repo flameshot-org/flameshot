@@ -48,12 +48,12 @@ void Screenshot::setScreenshot(const QPixmap &p) {
 }
 
 //  getScreenshot returns the screenshot with no modifications
-QPixmap Screenshot::getBaseScreenshot() const {
+QPixmap Screenshot::baseScreenshot() const {
     return m_baseScreenshot;
 }
 
 //  getScreenshot returns the screenshot with all the modifications
-QPixmap Screenshot::getScreenshot() const {
+QPixmap Screenshot::screenshot() const {
     return m_modifiedScreenshot;
 }
 
@@ -64,7 +64,7 @@ QString Screenshot::graphicalSave(bool &ok,
                                   QWidget *parent) const
 {
     ok = false; // user quits the dialog case
-    QString savePath = FileNameHandler().getAbsoluteSavePath();
+    QString savePath = FileNameHandler().absoluteSavePath();
     // setup window
     QFileDialog fileDialog(parent, QObject::tr("Save As"), savePath);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
@@ -80,7 +80,7 @@ QString Screenshot::graphicalSave(bool &ok,
 
     QString fileName;
     do {
-        if (fileDialog.exec() != QDialog::Accepted) { return ""; }
+        if (fileDialog.exec() != QDialog::Accepted) { return QString(); }
         fileName = fileDialog.selectedFiles().first();
 
         QString pathNoFile = fileName.left(fileName.lastIndexOf("/"));
@@ -107,7 +107,7 @@ QString Screenshot::graphicalSave(bool &ok,
 }
 
 QString Screenshot::fileSave(bool &ok, const QRect &selection) const {
-    QString savePath = FileNameHandler().getAbsoluteSavePath();
+    QString savePath = FileNameHandler().absoluteSavePath();
     QPixmap pixToSave;
     if (selection.isEmpty()) {
         pixToSave = m_modifiedScreenshot;
@@ -134,7 +134,7 @@ QPixmap Screenshot::paintTemporalModification(
 {
     QPixmap tempPix = m_modifiedScreenshot;
     QPainter painter(&tempPix);
-    if (modification->getType() != CaptureButton::TYPE_PENCIL) {
+    if (modification->buttonType() != CaptureButton::TYPE_PENCIL) {
         painter.setRenderHint(QPainter::Antialiasing);
     }
     paintInPainter(painter, modification);
@@ -147,7 +147,7 @@ QPixmap Screenshot::paintBaseModifications(
         const QVector<CaptureModification*> &m)
 {
     m_modifiedScreenshot = m_baseScreenshot;
-    for (const CaptureModification *modification: m) {
+    for (const CaptureModification *const modification: m) {
         paintModification(modification);
     }
     return m_modifiedScreenshot;
@@ -158,16 +158,16 @@ QPixmap Screenshot::paintBaseModifications(
 void Screenshot::paintInPainter(QPainter &painter,
                                 const CaptureModification *modification)
 {
-    const QVector<QPoint> &points = modification->getPoints();
-    QColor color = modification->getColor();
-    modification->getTool()->processImage(painter, points, color);
+    const QVector<QPoint> &points = modification->points();
+    QColor color = modification->color();
+    modification->tool()->processImage(painter, points, color);
 }
 
 void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
                                const QRect &selection)
 {
     QString title ="flameshot_screenshot";
-    QString description = FileNameHandler().getParsedPattern();
+    QString description = FileNameHandler().parsedPattern();
     QPixmap pixToSave;
     if (selection.isEmpty()) {
         pixToSave = m_modifiedScreenshot;

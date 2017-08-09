@@ -22,23 +22,27 @@ ImgurUploaderTool::ImgurUploaderTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool ImgurUploaderTool::isSelectable() {
+int ImgurUploaderTool::id() const {
+    return 0;
+}
+
+bool ImgurUploaderTool::isSelectable() const {
     return false;
 }
 
-QString ImgurUploaderTool::getIconName() {
+QString ImgurUploaderTool::iconName() const {
     return "cloud-upload.png";
 }
 
-QString ImgurUploaderTool::getName() {
+QString ImgurUploaderTool::name() const {
     return tr("Image Uploader");
 }
 
-QString ImgurUploaderTool::getDescription() {
+QString ImgurUploaderTool::description() const {
     return tr("Uploads the selection to Imgur");
 }
 
-CaptureTool::ToolWorkType ImgurUploaderTool::getToolType() {
+CaptureTool::ToolWorkType ImgurUploaderTool::toolType() const {
     return TYPE_WORKER;
 }
 

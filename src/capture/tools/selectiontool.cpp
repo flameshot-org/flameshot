@@ -22,23 +22,27 @@ SelectionTool::SelectionTool(QObject *parent) : CaptureTool(parent) {
 
 }
 
-bool SelectionTool::isSelectable() {
+int SelectionTool::id() const {
+    return 0;
+}
+
+bool SelectionTool::isSelectable() const {
     return true;
 }
 
-QString SelectionTool::getIconName() {
+QString SelectionTool::iconName() const {
     return "square-outline.png";
 }
 
-QString SelectionTool::getName() {
+QString SelectionTool::name() const {
     return tr("Rectangular Selection");
 }
 
-QString SelectionTool::getDescription() {
+QString SelectionTool::description() const {
     return tr("Sets the Selection as the paint tool");
 }
 
-CaptureTool::ToolWorkType SelectionTool::getToolType() {
+CaptureTool::ToolWorkType SelectionTool::toolType() const {
     return TYPE_LINE_DRAWER;
 }
 

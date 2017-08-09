@@ -31,6 +31,7 @@ signals:
 
 private:
     static QMap<QString, QString> m_buttonData;
+
 };
 
 #endif // STRFTIMECHOOSERWIDGET_H

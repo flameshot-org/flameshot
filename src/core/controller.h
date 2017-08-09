@@ -36,9 +36,9 @@ public:
     void operator =(const Controller&) = delete;
 
 public slots:
-    QString saveScreenshot(const QString &path = "",
+    QString saveScreenshot(const QString &path = QString(),
                            bool const toClipboard = false);
-    void createVisualCapture(const QString &forcedSavePath = "");
+    void createVisualCapture(const QString &forcedSavePath = QString());
 
     void openConfigWindow();
     void openInfoWindow();
@@ -54,12 +54,14 @@ private slots:
 private:
     Controller();
 
-    QPointer<CaptureWidget> createCaptureWidget(const QString &forcedSavePath = "");
+    QPointer<CaptureWidget> createCaptureWidget(
+            const QString &forcedSavePath = QString());
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
+
 };
 
 #endif // CONTROLLER_H
