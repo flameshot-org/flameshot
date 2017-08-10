@@ -32,28 +32,55 @@ public:
     ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
     ButtonHandler(QObject *parent = nullptr);
 
-    void hide();
-    void show();
+    void hideSectionUnderMouse(const QPoint &p);
 
     bool isVisible() const;
+    bool isPartiallyHidden() const;
+    bool buttonsAreInside() const;
     size_t size() const;
 
     void updatePosition(const QRect &selection, const QRect &limits);
     void setButtons(const QVector<CaptureButton*>);
     bool contains(const QPoint &p) const;
 
+public slots:
+    void hide();
+    void show();
+
 private:
     QVector<QPoint> horizontalPoints(const QPoint &center, const int elements,
                                const bool leftToRight) const;
     QVector<QPoint> verticalPoints(const QPoint &center, const int elements,
                                const bool upToDown) const;
+
     QVector<CaptureButton*> m_vectorButtons;
+
+    QVector<CaptureButton*> m_topButtons;
+    QVector<CaptureButton*> m_bottonButtons;
+    QVector<CaptureButton*> m_leftButtons;
+    QVector<CaptureButton*> m_rightButtons;
+    QVector<CaptureButton*> m_insideButtons;
+    QVector<CaptureButton*> * m_hiddenButtonVector;
+
+    QRegion m_topRegion;
+    QRegion m_bottonRegion;
+    QRegion m_leftRegion;
+    QRegion m_rightRegion;
+    QRegion m_insideRegion;
+
+    bool m_isPartiallyHidden;
+
+    enum side {
+        TOP, LEFT, BOTTON, RIGHT, INSIDE, NONE
+    };
 
     int m_distance;
     int m_buttonBaseSize;
+    bool m_buttonsAreInside;
 
-    QRegion m_region;
-    void addToRegion(const QVector<QPoint> &points);
+    // aux methods
+    void addToRegion(const QVector<QPoint> &points, const side s);
+    inline void resetRegionTrack();
 
 };
 

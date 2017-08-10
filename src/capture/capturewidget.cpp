@@ -40,6 +40,7 @@
 #include <QNetworkReply>
 #include <QMessageBox>
 #include <QDesktopServices>
+#include <QTimer>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -224,7 +225,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         }
     }
     updateCursor();
-    update();
+    //update();
 }
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
@@ -296,12 +297,14 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
     } else if (m_mouseIsClicked) {
         m_modifications.last()->addPoint(e->pos());
-        // check if it has to hide the buttons
-        bool containsMouse = m_buttonHandler->contains(m_mousePos);
-        if (m_buttonHandler->isVisible() && containsMouse) {
-            m_buttonHandler->hide();
-        } else if (!m_buttonHandler->isVisible() && !containsMouse){
-            m_buttonHandler->show();
+        // hides the group of buttons under the mouse, if you leave
+        if (m_buttonHandler->buttonsAreInside()) {
+            bool containsMouse = m_buttonHandler->contains(m_mousePos);
+            if (containsMouse) {
+                m_buttonHandler->hideSectionUnderMouse(e->pos());
+            } else if (m_buttonHandler->isPartiallyHidden()) {
+                m_buttonHandler->show();
+            }
         }
     } else {
         if (m_selection.isNull()) {
