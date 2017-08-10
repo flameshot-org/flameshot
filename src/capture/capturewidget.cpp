@@ -131,7 +131,6 @@ void CaptureWidget::updateButtons() {
 
 void CaptureWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
 
     // if we are creating a new modification to the screenshot we just draw
     // a temporal modification without antialiasing in the pencil tool for
@@ -190,6 +189,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.drawRect(r);
 
         // paint handlers
+        painter.setRenderHint(QPainter::Antialiasing);
         updateHandles();
         painter.setBrush(m_uiColor);
         for(auto r: handleMask().rects()) {
@@ -225,7 +225,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         }
     }
     updateCursor();
-    //update();
 }
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
@@ -237,6 +236,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
         if (m_newSelection) {
             m_selection = QRect(m_dragStartPoint, m_mousePos).normalized();
+            update();
         } else if (!m_mouseOverHandle) {
             // Moving the whole selection
             QRect r = rect().normalized();
@@ -255,6 +255,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             } if (!r.contains(QPoint(r.center().x(), m_selection.bottom()))) {
                 m_selection.setBottom(r.bottom());
             }
+            update();
         } else {
             // Dragging a handle
             QRect r = m_selectionBeforeDrag;
@@ -294,9 +295,12 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
                 }
             }
             m_selection = r.normalized();
+            update();
         }
-    } else if (m_mouseIsClicked) {
+    } else if (m_mouseIsClicked && m_state != CaptureButton::TYPE_MOVESELECTION) {
+        // drawing with a tool
         m_modifications.last()->addPoint(e->pos());
+        update();
         // hides the group of buttons under the mouse, if you leave
         if (m_buttonHandler->buttonsAreInside()) {
             bool containsMouse = m_buttonHandler->contains(m_mousePos);
@@ -308,7 +312,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
     } else {
         if (m_selection.isNull()) {
-            update();
             return;
         }
         bool found = false;
@@ -324,7 +327,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
         updateCursor();
     }
-    update();
 }
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
@@ -335,6 +337,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     // register the last point and add the whole modification to the screenshot
     } else if (m_mouseIsClicked && m_state != CaptureButton::TYPE_MOVESELECTION) {
         m_screenshot->paintModification(m_modifications.last());
+        update();
     }
 
     if (!m_buttonHandler->isVisible() && !m_selection.isNull()) {
@@ -347,7 +350,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     m_grabbing = false;
 
     updateCursor();
-    update();
 }
 
 void CaptureWidget::keyPressEvent(QKeyEvent *e) {
@@ -356,18 +358,24 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
     } else if (e->key() == Qt::Key_Up
                && m_selection.top() > rect().top()) {
         m_selection.moveTop(m_selection.top()-1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        update();
     } else if (e->key() == Qt::Key_Down
                && m_selection.bottom() < rect().bottom()) {
         m_selection.moveBottom(m_selection.bottom()+1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        update();
     } else if (e->key() == Qt::Key_Left
                && m_selection.left() > rect().left()) {
         m_selection.moveLeft(m_selection.left()-1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        update();
     } else if (e->key() == Qt::Key_Right
                && m_selection.right() < rect().right()) {
         m_selection.moveRight(m_selection.right()+1);
+        m_buttonHandler->updatePosition(m_selection, rect());
+        update();
     }
-    m_buttonHandler->updatePosition(m_selection, rect());
-    update();
 }
 
 QString CaptureWidget::saveScreenshot(bool toClipboard) {
@@ -460,7 +468,7 @@ bool CaptureWidget::undo() {
     if (!m_modifications.isEmpty()) {
         m_modifications.last()->deleteLater();
         m_modifications.pop_back();
-        m_screenshot->paintBaseModifications(m_modifications);
+        m_screenshot->overrideModifications(m_modifications);
         update();
         itemRemoved = true;
     }
@@ -524,7 +532,6 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     default:
         break;
     }
-    update();
 }
 
 void CaptureWidget::leaveButton() {

@@ -122,7 +122,6 @@ QString Screenshot::fileSave(bool &ok, const QRect &selection) const {
 QPixmap Screenshot::paintModification(const CaptureModification *modification) {
     QPainter painter(&m_modifiedScreenshot);
     painter.setRenderHint(QPainter::Antialiasing);
-
     paintInPainter(painter, modification);
     return m_modifiedScreenshot;
 }
@@ -132,7 +131,7 @@ QPixmap Screenshot::paintModification(const CaptureModification *modification) {
 QPixmap Screenshot::paintTemporalModification(
         const CaptureModification *modification)
 {
-    QPixmap tempPix = m_modifiedScreenshot;
+    QPixmap tempPix(m_modifiedScreenshot);
     QPainter painter(&tempPix);
     if (modification->buttonType() != CaptureButton::TYPE_PENCIL) {
         painter.setRenderHint(QPainter::Antialiasing);
@@ -143,7 +142,7 @@ QPixmap Screenshot::paintTemporalModification(
 
 // paintBaseModifications overrides the modifications of the screenshot
 // with new ones.
-QPixmap Screenshot::paintBaseModifications(
+QPixmap Screenshot::overrideModifications(
         const QVector<CaptureModification*> &m)
 {
     m_modifiedScreenshot = m_baseScreenshot;

@@ -45,14 +45,14 @@ public:
                        const QRect &selection = QRect());
     QPixmap paintModification(const CaptureModification*);
     QPixmap paintTemporalModification(const CaptureModification*);
-    QPixmap paintBaseModifications(const QVector<CaptureModification*> &);
+    QPixmap overrideModifications(const QVector<CaptureModification*> &);
 
 private:
     QPixmap m_baseScreenshot;
     QPixmap m_modifiedScreenshot;
     QPointer<QNetworkAccessManager> m_accessManager;
 
-    void paintInPainter(QPainter &, const CaptureModification *);
+    inline void paintInPainter(QPainter &, const CaptureModification *);
 
 };
 

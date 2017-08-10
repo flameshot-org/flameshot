@@ -59,6 +59,7 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
 }
 
 void CaptureButton::initButton() {
+    setMouseTracking(true);
     m_tool = ToolFactory().CreateTool(m_buttonType, this);
     connect(this, &CaptureButton::pressed, m_tool, &CaptureTool::onPressed);
 
@@ -146,8 +147,14 @@ void CaptureButton::mousePressEvent(QMouseEvent *) {
 
 
 void CaptureButton::animatedShow() {
-    show();
-    emergeAnimation->start();
+    if(!isVisible()) {
+        setMouseTracking(false);
+        show();
+        emergeAnimation->start();
+        connect(emergeAnimation, &QPropertyAnimation::finished, this, [this](){
+            setMouseTracking(true);
+        });
+    }
 }
 
 CaptureButton::ButtonType CaptureButton::buttonType() const {
