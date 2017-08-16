@@ -152,18 +152,21 @@ unix: {
     
     icon.path = $${BASEDIR}$${USRPATH}/share/icons/
     icon.files = img/flameshot.png
-    
+
     desktopentry.path = $${BASEDIR}$${USRPATH}/share/applications
     desktopentryinit.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentryconfig.path = $${BASEDIR}$${USRPATH}/share/applications
     servicedbus.path = $${BASEDIR}/usr/share/dbus-1/services/
 
     packaging {
         desktopentry.files = docs/desktopEntry/package/flameshot.desktop
         desktopentryinit.files = docs/desktopEntry/package/flameshot-init.desktop
+        desktopentryconfig.files = docs/desktopEntry/package/flameshot-config.desktop
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
     } else {
         desktopentry.files = docs/desktopEntry/make/flameshot.desktop
         desktopentryinit.files = docs/desktopEntry/make/flameshot-init.desktop
+        desktopentryconfig.files = docs/desktopEntry/make/flameshot-config.desktop
         servicedbus.files = dbus/make/org.dharkael.Flameshot.service
     }
 
@@ -171,6 +174,7 @@ unix: {
         icon \
         desktopentry \
         desktopentryinit \
+        desktopentryconfig \
         qmfile \
         servicedbus \
         dbus
