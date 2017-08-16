@@ -224,6 +224,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
             m_newSelection = true;
             m_selection = QRect();
             m_buttonHandler->hide();
+            update();
         } else {
             m_grabbing = true;
         }
