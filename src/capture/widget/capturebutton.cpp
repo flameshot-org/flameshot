@@ -24,6 +24,8 @@
 #include <QPropertyAnimation>
 #include <QToolTip>
 #include <QMouseEvent>
+#include <QGraphicsDropShadowEffect>
+
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
 
@@ -47,7 +49,7 @@ QColor getContrastColor(const QColor &c) {
 } // unnamed namespace
 
 CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(parent),
-    m_buttonType(t), m_pressed(false)
+    m_buttonType(t)
 {
     initButton();
     if (t == TYPE_SELECTIONINDICATOR) {
@@ -56,10 +58,10 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
     } else {
         setIcon(icon());
     }
+    setCursor(Qt::ArrowCursor);
 }
 
 void CaptureButton::initButton() {
-    setMouseTracking(true);
     m_tool = ToolFactory().CreateTool(m_buttonType, this);
     connect(this, &CaptureButton::pressed, m_tool, &CaptureTool::onPressed);
 
@@ -74,6 +76,14 @@ void CaptureButton::initButton() {
     m_emergeAnimation->setDuration(80);
     m_emergeAnimation->setStartValue(QSize(0, 0));
     m_emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
+
+    auto dsEffect = new QGraphicsDropShadowEffect(this);
+    dsEffect->setBlurRadius(5);
+    dsEffect->setOffset(0);
+    dsEffect->setColor(QColor(Qt::black));
+
+    setGraphicsEffect(dsEffect);
+
 }
 
 QVector<CaptureButton::ButtonType> CaptureButton::getIterableButtonTypes() {
@@ -120,39 +130,18 @@ QIcon CaptureButton::icon() const {
     return QIcon(iconPath);
 }
 
-void CaptureButton::enterEvent(QEvent *e) {
-    Q_EMIT hovered();
-    QWidget::enterEvent(e);
-}
-
-void CaptureButton::leaveEvent(QEvent *e) {
-    m_pressed = false;
-    Q_EMIT mouseExited();
-    QWidget::leaveEvent(e);
-}
-
-void CaptureButton::mouseReleaseEvent(QMouseEvent *e) {
-//    CaptureWidget *parent = static_cast<CaptureWidget*>(this->parent());
-//    parent->mouseReleaseEvent(e);
-    if (e->button() == Qt::LeftButton && m_pressed) {
+void CaptureButton::mousePressEvent(QMouseEvent *e) {
+    if (e->button() == Qt::LeftButton) {
         Q_EMIT pressedButton(this);
     }
-    m_pressed = false;
-}
-
-void CaptureButton::mousePressEvent(QMouseEvent *) {
-    m_pressed = true;
-    Q_EMIT pressed();
 }
 
 
 void CaptureButton::animatedShow() {
     if(!isVisible()) {
-        setMouseTracking(false);
         show();
         m_emergeAnimation->start();
         connect(m_emergeAnimation, &QPropertyAnimation::finished, this, [this](){
-            setMouseTracking(true);
         });
     }
 }

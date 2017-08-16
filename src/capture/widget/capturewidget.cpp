@@ -52,7 +52,7 @@ const int HANDLE_SIZE = 9;
 CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
     m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_onButton(false), m_forcedSavePath(forcedSavePath),
+    m_forcedSavePath(forcedSavePath),
     m_state(CaptureButton::TYPE_MOVESELECTION)
 {
     m_showInitialMsg = ConfigHandler().showHelpValue();
@@ -115,8 +115,6 @@ void CaptureWidget::updateButtons() {
         }
         b->setColor(m_uiColor);
 
-        connect(b, &CaptureButton::hovered, this, &CaptureWidget::enterButton);
-        connect(b, &CaptureButton::mouseExited, this, &CaptureWidget::leaveButton);
         connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
         connect(b->tool(), &CaptureTool::requestAction,
                 this, &CaptureWidget::handleButtonSignal);
@@ -454,13 +452,6 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     }
 }
 
-void CaptureWidget::leaveButton() {
-    m_onButton = false;
-}
-void CaptureWidget::enterButton() {
-    m_onButton = true;
-}
-
 void CaptureWidget::leftResize() {
     if (!m_selection.isNull() && m_selection.right() > m_selection.left()) {
         m_selection.setRight(m_selection.right()-1);
@@ -536,7 +527,7 @@ void CaptureWidget::updateSizeIndicator() {
 }
 
 void CaptureWidget::updateCursor() {
-    if (m_rightClick || m_onButton) {
+    if (m_rightClick) {
         setCursor(Qt::ArrowCursor);
     } else if (m_grabbing) {
         setCursor(Qt::ClosedHandCursor);

@@ -42,8 +42,6 @@ class Screenshot;
 class CaptureWidget : public QWidget {
     Q_OBJECT
 
-    friend class CaptureButton;
-
 public:
     explicit CaptureWidget(const QString &forcedSavePath = QString(),
                            QWidget *parent = nullptr);
@@ -56,8 +54,6 @@ private slots:
     void copyScreenshot();
     void saveScreenshot();
     void uploadToImgur();
-    void leaveButton();
-    void enterButton();
     bool undo();
 
     void leftResize();
@@ -91,7 +87,6 @@ protected:
     bool m_rightClick;
     bool m_newSelection;
     bool m_grabbing;
-    bool m_onButton;
     bool m_showInitialMsg;
 
     const QString m_forcedSavePath;

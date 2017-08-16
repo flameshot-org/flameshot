@@ -69,23 +69,17 @@ public:
     void animatedShow();
 
 protected:
-    virtual void enterEvent(QEvent *);
-    virtual void leaveEvent(QEvent *);
-    virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void mousePressEvent(QMouseEvent *);
     static QVector<ButtonType> iterableButtonTypes;
 
     CaptureTool *m_tool;
 
 signals:
-    void hovered();
-    void mouseExited();
     void pressedButton(CaptureButton *);
 
 private:
     CaptureButton(QWidget *parent = 0);
     ButtonType m_buttonType;
-    bool m_pressed;
 
     QPropertyAnimation *m_emergeAnimation;
 
