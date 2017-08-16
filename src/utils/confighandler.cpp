@@ -16,17 +16,15 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "confighandler.h"
-#include <QSettings>
 
-ConfigHandler::ConfigHandler(QObject *parent) : QObject(parent) {
-    m_settings = new QSettings(this);
+ConfigHandler::ConfigHandler(){
 }
 
 QList<CaptureButton::ButtonType> ConfigHandler::getButtons() {
-    QList<int> buttons = m_settings->value("buttons").value<QList<int> >();
+    QList<int> buttons = m_settings.value("buttons").value<QList<int> >();
     bool modified = normalizeButtons(buttons);
     if (modified) {
-        m_settings->setValue("buttons", QVariant::fromValue(buttons));
+        m_settings.setValue("buttons", QVariant::fromValue(buttons));
     }
     return fromIntToButton(buttons);
 }
@@ -34,83 +32,83 @@ QList<CaptureButton::ButtonType> ConfigHandler::getButtons() {
 void ConfigHandler::setButtons(const QList<CaptureButton::ButtonType> &buttons) {
     QList<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
-    m_settings->setValue("buttons", QVariant::fromValue(l));
+    m_settings.setValue("buttons", QVariant::fromValue(l));
 }
 
 QString ConfigHandler::savePathValue() {
-    return m_settings->value("savePath").toString();
+    return m_settings.value("savePath").toString();
 }
 
 void ConfigHandler::setSavePath(const QString &savePath) {
-    m_settings->setValue("savePath", savePath);
+    m_settings.setValue("savePath", savePath);
 }
 
 QColor ConfigHandler::uiMainColorValue() {
-    return m_settings->value("uiColor").value<QColor>();
+    return m_settings.value("uiColor").value<QColor>();
 }
 
 void ConfigHandler::setUIMainColor(const QColor &c) {
-    m_settings->setValue("uiColor", c);
+    m_settings.setValue("uiColor", c);
 }
 
 QColor ConfigHandler::uiContrastColorValue() {
-    return m_settings->value("contastUiColor").value<QColor>();
+    return m_settings.value("contastUiColor").value<QColor>();
 }
 
 void ConfigHandler::setUIContrastColor(const QColor &c) {
-    m_settings->setValue("contastUiColor", c);
+    m_settings.setValue("contastUiColor", c);
 }
 
 QColor ConfigHandler::drawColorValue() {
-    return m_settings->value("drawColor").value<QColor>();
+    return m_settings.value("drawColor").value<QColor>();
 }
 
 void ConfigHandler::setDrawColor(const QColor &c) {
-    m_settings->setValue("drawColor", c);
+    m_settings.setValue("drawColor", c);
 }
 
 bool ConfigHandler::showHelpValue() {
-    return m_settings->value("showHelp").toBool();
+    return m_settings.value("showHelp").toBool();
 }
 
 void ConfigHandler::setShowHelp(const bool showHelp) {
-    m_settings->setValue("showHelp", showHelp);
+    m_settings.setValue("showHelp", showHelp);
 }
 
 bool ConfigHandler::desktopNotificationValue() {
-    return m_settings->value("showDesktopNotification").toBool();
+    return m_settings.value("showDesktopNotification").toBool();
 }
 
 void ConfigHandler::setDesktopNotification(const bool showDesktopNotification) {
-    m_settings->setValue("showDesktopNotification", showDesktopNotification);
+    m_settings.setValue("showDesktopNotification", showDesktopNotification);
 }
 
 QString ConfigHandler::filenamePatternValue() {
-    return m_settings->value("filenamePattern").toString();
+    return m_settings.value("filenamePattern").toString();
 }
 
 void ConfigHandler::setFilenamePattern(const QString &pattern) {
-    return m_settings->setValue("filenamePattern", pattern);
+    return m_settings.setValue("filenamePattern", pattern);
 }
 
 bool ConfigHandler::disabledTrayIconValue() {
-    return m_settings->value("disabledTrayIcon").toBool();
+    return m_settings.value("disabledTrayIcon").toBool();
 }
 
 void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon) {
-    m_settings->setValue("disabledTrayIcon", disabledTrayIcon);
+    m_settings.setValue("disabledTrayIcon", disabledTrayIcon);
 }
 
 bool ConfigHandler::initiatedIsSet() {
-    return m_settings->value("initiated").toBool();
+    return m_settings.value("initiated").toBool();
 }
 
 void ConfigHandler::setInitiated() {
-    m_settings->setValue("initiated", true);
+    m_settings.setValue("initiated", true);
 }
 
 void ConfigHandler::setNotInitiated() {
-    m_settings->setValue("initiated", false);
+    m_settings.setValue("initiated", false);
 }
 
 void ConfigHandler::setDefaults() {
@@ -128,11 +126,11 @@ void ConfigHandler::setAllTheButtons() {
     for (const CaptureButton::ButtonType t: listTypes) {
         buttons << static_cast<int>(t);
     }
-    m_settings->setValue("buttons", QVariant::fromValue(buttons));
+    m_settings.setValue("buttons", QVariant::fromValue(buttons));
 }
 
 QString ConfigHandler::configFilePath() const {
-    return m_settings->fileName();
+    return m_settings.fileName();
 }
 
 bool ConfigHandler::normalizeButtons(QList<int> &buttons) {

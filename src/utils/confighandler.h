@@ -19,16 +19,13 @@
 #define CONFIGHANDLER_H
 
 #include "src/capture/widget/capturebutton.h"
-#include <QObject>
 #include <QList>
+#include <QSettings>
 
-class QSettings;
-
-class ConfigHandler : public QObject
+class ConfigHandler
 {
-    Q_OBJECT
 public:
-    explicit ConfigHandler(QObject *parent = nullptr);
+    explicit ConfigHandler();
 
     QList<CaptureButton::ButtonType> getButtons();
     void setButtons(const QList<CaptureButton::ButtonType> &);
@@ -67,7 +64,7 @@ public:
     QString configFilePath() const;
 
 private:
-    QSettings *m_settings;
+    QSettings m_settings;
 
     bool normalizeButtons(QList<int> &);
 
