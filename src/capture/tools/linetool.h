@@ -42,7 +42,7 @@ public:
     void onPressed() override;
 
 private:
-    inline bool needsAdjustment(const QPoint &p0, const QPoint &p1) const;
+    bool needsAdjustment(const QPoint &p0, const QPoint &p1) const;
 
 };
 

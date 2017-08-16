@@ -80,7 +80,7 @@ private:
 
     // aux methods
     void addToRegion(const QVector<QPoint> &points, const side s);
-    inline void resetRegionTrack();
+    void resetRegionTrack();
 
 };
 

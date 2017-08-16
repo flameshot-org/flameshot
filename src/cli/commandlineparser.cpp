@@ -35,7 +35,7 @@ auto versionOption = CommandOption({"v", "version"},
 auto helpOption = CommandOption({"h", "help"},
                                 "Displays this help");
 
-inline QStringList addDashToOptionNames(const QStringList &names) {
+QStringList addDashToOptionNames(const QStringList &names) {
     QStringList dashedNames;
     for (const QString &name: names) {
         // prepend "-" to single character options, and "--" to the others

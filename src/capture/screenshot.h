@@ -36,7 +36,7 @@ public:
     void setScreenshot(const QPixmap &);
     QPixmap baseScreenshot() const;
     QPixmap screenshot() const;
-    inline QPixmap croppedScreenshot(const QRect &selection) const;
+    QPixmap croppedScreenshot(const QRect &selection) const;
 
     QPixmap paintModification(const CaptureModification*);
     QPixmap paintTemporalModification(const CaptureModification*);
@@ -46,7 +46,7 @@ private:
     QPixmap m_baseScreenshot;
     QPixmap m_modifiedScreenshot;
 
-    inline void paintInPainter(QPainter &, const CaptureModification *);
+    void paintInPainter(QPainter &, const CaptureModification *);
 
 };
 

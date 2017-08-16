@@ -74,15 +74,15 @@ private:
     QList<CommandArgument> m_foundArgs;
 
     // helper functions
-    inline void printVersion();
+    void printVersion();
     void printHelp(QStringList args, const Node *node);
     Node* findParent(const CommandArgument &parent);
     Node* recursiveParentSearch(const CommandArgument &parent,
                                 Node &node) const;
-    inline bool processIfOptionIsHelp(const QStringList &args,
+    bool processIfOptionIsHelp(const QStringList &args,
                                 QStringList::const_iterator &actualIt,
                                 Node * &actualNode);
-    inline bool processArgs(const QStringList &args,
+    bool processArgs(const QStringList &args,
                             QStringList::const_iterator &actualIt,
                             Node * &actualNode);
     bool processOptions(const QStringList &args,

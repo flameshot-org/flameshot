@@ -50,7 +50,7 @@ public:
     ~CaptureWidget();
 
     void updateButtons();
-    inline QPixmap pixmap();
+    QPixmap pixmap();
 
 private slots:
     void copyScreenshot();

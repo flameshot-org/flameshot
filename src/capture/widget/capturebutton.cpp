@@ -31,7 +31,7 @@ namespace {
 
 const int BUTTON_SIZE = 30;
 
-inline qreal getColorLuma(const QColor &c) {
+qreal getColorLuma(const QColor &c) {
     return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
 }
 
