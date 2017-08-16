@@ -50,13 +50,12 @@ public:
     ~CaptureWidget();
 
     void updateButtons();
-public slots:
-    QString saveScreenshot(bool toClipboard = false);
-    void handleButtonSignal(CaptureTool::Request r);
+    inline QPixmap pixmap();
 
 private slots:
     void copyScreenshot();
-    void openURL(QNetworkReply *reply);
+    void saveScreenshot();
+    void uploadToImgur();
     void leaveButton();
     void enterButton();
     bool undo();
@@ -67,6 +66,7 @@ private slots:
     void downResize();
 
     void setState(CaptureButton *);
+    void handleButtonSignal(CaptureTool::Request r);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -106,7 +106,6 @@ protected:
     QVector<QRect*> m_Handles;
 
 private:
-    void uploadScreenshot();
     void initShortcuts();
     void updateHandles();
     void updateSizeIndicator();

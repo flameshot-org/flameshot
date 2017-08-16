@@ -18,7 +18,7 @@
 #ifndef CAPTURECHANGE_H
 #define CAPTURECHANGE_H
 
-#include "capturebutton.h"
+#include "src/capture/widget/capturebutton.h"
 #include <QObject>
 #include <QVector>
 

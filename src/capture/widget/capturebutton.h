@@ -87,7 +87,7 @@ private:
     ButtonType m_buttonType;
     bool m_pressed;
 
-    QPropertyAnimation *emergeAnimation;
+    QPropertyAnimation *m_emergeAnimation;
 
     static QColor m_mainColor;
 

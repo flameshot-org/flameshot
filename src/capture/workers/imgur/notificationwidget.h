@@ -15,33 +15,36 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TOOLFACTORY_H
-#define TOOLFACTORY_H
+#ifndef NOTIFICATIONWIDGET_H
+#define NOTIFICATIONWIDGET_H
 
-#include <QObject>
-#include "src/capture/widget/capturebutton.h"
-#include "src/capture/tools/capturetool.h"
+#include <QWidget>
 
-class CaptureTool;
+class QLabel;
+class QTimer;
+class QPropertyAnimation;
+class QVBoxLayout;
+class QFrame;
 
-class ToolFactory : public QObject
+class NotificationWidget : public QWidget
 {
     Q_OBJECT
-
 public:
-    enum ToolType {
+    explicit NotificationWidget(QWidget *parent = nullptr);
 
-    };
+    void showMessage(const QString &msg);
 
-    explicit ToolFactory(QObject *parent = nullptr);
+private:
+    QLabel *m_label;
+    QPropertyAnimation *m_showAnimation;
+    QPropertyAnimation *m_hideAnimation;
+    QVBoxLayout *m_layout;
+    QFrame *m_content;
+    QTimer *m_timer;
 
-    ToolFactory(const ToolFactory &) = delete;
-    ToolFactory & operator=(const ToolFactory &) = delete;
-
-    CaptureTool* CreateTool(
-            CaptureButton::ButtonType t,
-            QObject *parent = nullptr);
+    void animatedShow();
+    void animatedHide();
 
 };
 
-#endif // TOOLFACTORY_H
+#endif // NOTIFICATIONWIDGET_H

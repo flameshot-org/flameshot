@@ -29,17 +29,20 @@ public:
 
     QString parsedPattern();
     QString parseFilename(const QString &name);
+    QString generateAbsolutePath(const QString &path);
+    QString absoluteSavePath(QString &directory, QString &filename);
 
     static const int MAX_CHARACTERS = 70;
 
 public slots:
-    void savePattern(const QString &pattern);
-    QString absoluteSavePath();
+    void setPattern(const QString &pattern);
 
 private:
     //using charArr = char[MAX_CHARACTERS];
     inline QString charArrToQString(const char *c);
     inline char * QStringTocharArr(const QString &s);
+
+    void fixPath(QString &directory, QString &filename);
 
 };
 

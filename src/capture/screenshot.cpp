@@ -15,8 +15,8 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "screenshot.h"
-#include "capturebutton.h"
+#include "src/capture/screenshot.h"
+#include "src/capture/widget/capturebutton.h"
 #include "capturemodification.h"
 #include "src/capture/tools/capturetool.h"
 #include "src/utils/filenamehandler.h"
@@ -57,65 +57,8 @@ QPixmap Screenshot::screenshot() const {
     return m_modifiedScreenshot;
 }
 
-// graphicalSave generates a graphical window to ask about the save path and
-// saves the screenshot with all the modifications in such directory
-QString Screenshot::graphicalSave(bool &ok,
-                                  const QRect &selection,
-                                  QWidget *parent) const
-{
-    ok = false; // user quits the dialog case
-    QString savePath = FileNameHandler().absoluteSavePath();
-    // setup window
-    QFileDialog fileDialog(parent, QObject::tr("Save As"), savePath);
-    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setFileMode(QFileDialog::AnyFile);
-    fileDialog.setDirectory(savePath);
-    QStringList mimeTypes;
-    for (const QByteArray &bf: QImageWriter::supportedMimeTypes())
-        mimeTypes.append(QLatin1String(bf));
-    fileDialog.setMimeTypeFilters(mimeTypes);
-    fileDialog.selectMimeTypeFilter("image/png");
-    fileDialog.setDefaultSuffix("png");
-    fileDialog.setWindowIcon(QIcon(":img/flameshot.png"));
-
-    QString fileName;
-    do {
-        if (fileDialog.exec() != QDialog::Accepted) { return QString(); }
-        fileName = fileDialog.selectedFiles().first();
-
-        QString pathNoFile = fileName.left(fileName.lastIndexOf("/"));
-        ConfigHandler().setSavePath(pathNoFile);
-
-        QPixmap pixToSave;
-        if (selection.isEmpty()) {
-            pixToSave = m_modifiedScreenshot;
-        } else { // save full screen when no selection
-            pixToSave = m_modifiedScreenshot.copy(selection);
-        }
-        ok = pixToSave.save(fileName);
-        if (!ok) {
-            QMessageBox saveErrBox(
-                        QMessageBox::Warning,
-                        QObject::tr("Save Error"),
-                        QObject::tr("The image could not be saved to \"%1\".")
-                        .arg(QDir::toNativeSeparators(fileName)));
-            saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
-            saveErrBox.exec();
-        }
-    } while(!ok);
-    return savePath;
-}
-
-QString Screenshot::fileSave(bool &ok, const QRect &selection) const {
-    QString savePath = FileNameHandler().absoluteSavePath();
-    QPixmap pixToSave;
-    if (selection.isEmpty()) {
-        pixToSave = m_modifiedScreenshot;
-    } else { // save full screen when no selection
-        pixToSave = m_modifiedScreenshot.copy(selection);
-    }
-    ok = pixToSave.save(savePath);
-    return savePath;
+QPixmap Screenshot::croppedScreenshot(const QRect &selection) const {
+    return m_modifiedScreenshot.copy(selection);
 }
 
 // paintModification adds a new modification to the screenshot
@@ -160,36 +103,6 @@ void Screenshot::paintInPainter(QPainter &painter,
     const QVector<QPoint> &points = modification->points();
     QColor color = modification->color();
     modification->tool()->processImage(painter, points, color);
-}
-
-void Screenshot::uploadToImgur(QNetworkAccessManager *accessManager,
-                               const QRect &selection)
-{
-    QString title ="flameshot_screenshot";
-    QString description = FileNameHandler().parsedPattern();
-    QPixmap pixToSave;
-    if (selection.isEmpty()) {
-        pixToSave = m_modifiedScreenshot;
-    } else { // save full screen when no selection
-        pixToSave = m_modifiedScreenshot.copy(selection);
-    }
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    pixToSave.save(&buffer, "PNG");
-
-    QUrlQuery urlQuery;
-    urlQuery.addQueryItem("title", title);
-    urlQuery.addQueryItem("description", description);
-
-    QNetworkRequest request;
-    QUrl url("https://api.imgur.com/3/image");
-    url.setQuery(urlQuery);
-    request.setUrl(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/application/x-www-form-urlencoded");
-    request.setRawHeader("Authorization", "Client-ID 313baf0c7b4d3ff");
-
-    accessManager->post(request, byteArray);
 }
 
 

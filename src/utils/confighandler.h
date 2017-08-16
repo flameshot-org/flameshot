@@ -18,7 +18,7 @@
 #ifndef CONFIGHANDLER_H
 #define CONFIGHANDLER_H
 
-#include "src/capture/capturebutton.h"
+#include "src/capture/widget/capturebutton.h"
 #include <QObject>
 #include <QList>
 

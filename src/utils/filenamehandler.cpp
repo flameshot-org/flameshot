@@ -44,44 +44,32 @@ QString FileNameHandler::parseFilename(const QString &name) {
         res = QString::fromLocal8Bit(data, strlen(data));
         free(tempData);
     }
+    // add the parsed pattern in a correct format for the filesystem
+    res = res.replace("/", "⁄");
     return res;
 }
 
-void FileNameHandler::savePattern(const QString &pattern) {
+QString FileNameHandler::generateAbsolutePath(const QString &path)
+{
+    QString directory = path;
+    QString filename = parsedPattern();
+    fixPath(directory, filename);
+    return directory + filename;
+}
+// path a images si no existe, add numeration
+void FileNameHandler::setPattern(const QString &pattern) {
     ConfigHandler().setFilenamePattern(pattern);
 }
 
-QString FileNameHandler::absoluteSavePath() {
+QString FileNameHandler::absoluteSavePath(QString &directory, QString &filename) {
     ConfigHandler config;
-    QString savePath = config.savePathValue();
-    bool changed = false;
-    if (savePath.isEmpty() || !QDir(savePath).exists() || !QFileInfo(savePath).isWritable()) {
-        changed = true;
-        savePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    directory = config.savePathValue();
+    if (directory.isEmpty() || !QDir(directory).exists() || !QFileInfo(directory).isWritable()) {
+        directory = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
-    if (changed) {
-        config.setSavePath(savePath);
-    }
-    // first add slash if needed
-    QString tempName = savePath.endsWith("/") ? "" : "/";
-    // add the parsed pattern in a correct format for the filesystem
-    tempName += FileNameHandler().parsedPattern().replace("/", "⁄");
-    // find unused name adding _n where n is a number
-    QFileInfo checkFile(savePath + tempName + ".png");
-    if (checkFile.exists()) {
-        tempName += "_";
-        int i = 1;
-        while (true) {
-            checkFile.setFile(
-                        savePath + tempName + QString::number(i) + ".png");
-            if (!checkFile.exists()) {
-                tempName += QString::number(i);
-                break;
-            }
-            ++i;
-        }
-    }
-    return savePath + tempName + ".png";
+    filename = parsedPattern();
+    fixPath(directory, filename);
+    return directory + filename;
 }
 
 QString FileNameHandler::charArrToQString(const char *c) {
@@ -91,4 +79,27 @@ QString FileNameHandler::charArrToQString(const char *c) {
 char * FileNameHandler::QStringTocharArr(const QString &s) {
     QByteArray ba = s.toLocal8Bit();
     return const_cast<char *>(strdup(ba.constData()));
+}
+
+void FileNameHandler::fixPath(QString &directory, QString &filename) {
+    // add '/' at the end of the directory
+    if (!directory.endsWith("/")) {
+        directory += "/";
+    }
+    // add numeration in case of repeated filename in the directory
+    // find unused name adding _n where n is a number
+    QFileInfo checkFile(directory + filename + ".png");
+    if (checkFile.exists()) {
+        filename += "_";
+        int i = 1;
+        while (true) {
+            checkFile.setFile(
+                        directory + filename + QString::number(i) + ".png");
+            if (!checkFile.exists()) {
+                filename += QString::number(i);
+                break;
+            }
+            ++i;
+        }
+    }
 }

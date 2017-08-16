@@ -41,7 +41,7 @@ void FlameshotDBusAdapter::graphicCapture(QString path, int delay) {
 void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay) {
     auto controller =  Controller::getInstance();
     auto f = [controller, path, toClipboard, this]() {
-        controller->saveScreenshot(path, toClipboard);
+        controller->saveFullScreenshot(path, toClipboard);
     };
     QTimer::singleShot(delay, controller, f);
 

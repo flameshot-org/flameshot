@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "capturebutton.h"
-#include "src/capture/capturewidget.h"
+#include "src/capture/widget/capturewidget.h"
 #include "src/utils/confighandler.h"
 #include "src/capture/tools/capturetool.h"
 #include "src/capture/tools/toolfactory.h"
@@ -69,11 +69,11 @@ void CaptureButton::initButton() {
 
     setToolTip(m_tool->description());
 
-    emergeAnimation = new  QPropertyAnimation(this, "size", this);
-    emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-    emergeAnimation->setDuration(80);
-    emergeAnimation->setStartValue(QSize(0, 0));
-    emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
+    m_emergeAnimation = new  QPropertyAnimation(this, "size", this);
+    m_emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
+    m_emergeAnimation->setDuration(80);
+    m_emergeAnimation->setStartValue(QSize(0, 0));
+    m_emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
 }
 
 QVector<CaptureButton::ButtonType> CaptureButton::getIterableButtonTypes() {
@@ -132,8 +132,8 @@ void CaptureButton::leaveEvent(QEvent *e) {
 }
 
 void CaptureButton::mouseReleaseEvent(QMouseEvent *e) {
-    CaptureWidget *parent = static_cast<CaptureWidget*>(this->parent());
-    parent->mouseReleaseEvent(e);
+//    CaptureWidget *parent = static_cast<CaptureWidget*>(this->parent());
+//    parent->mouseReleaseEvent(e);
     if (e->button() == Qt::LeftButton && m_pressed) {
         Q_EMIT pressedButton(this);
     }
@@ -150,8 +150,8 @@ void CaptureButton::animatedShow() {
     if(!isVisible()) {
         setMouseTracking(false);
         show();
-        emergeAnimation->start();
-        connect(emergeAnimation, &QPropertyAnimation::finished, this, [this](){
+        m_emergeAnimation->start();
+        connect(m_emergeAnimation, &QPropertyAnimation::finished, this, [this](){
             setMouseTracking(true);
         });
     }

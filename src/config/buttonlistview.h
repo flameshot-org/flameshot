@@ -18,8 +18,8 @@
 #ifndef BUTTONLISTVIEW_H
 #define BUTTONLISTVIEW_H
 
+#include "src/capture/widget/capturebutton.h"
 #include <QListWidget>
-#include "src/capture/capturebutton.h"
 
 class ButtonListView : public QListWidget {
 public:

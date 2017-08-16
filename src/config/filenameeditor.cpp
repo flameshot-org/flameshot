@@ -92,7 +92,7 @@ void FileNameEditor::initWidgets() {
 
 void FileNameEditor::savePattern() {
     QString pattern = m_nameEditor->text();
-    m_nameHandler->savePattern(pattern);
+    m_nameHandler->setPattern(pattern);
 }
 
 void FileNameEditor::showParsedPattern(const QString &p) {

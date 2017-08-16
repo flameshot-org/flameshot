@@ -15,33 +15,20 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TOOLFACTORY_H
-#define TOOLFACTORY_H
+#ifndef SCREENSHOTSAVER_H
+#define SCREENSHOTSAVER_H
 
-#include <QObject>
-#include "src/capture/widget/capturebutton.h"
-#include "src/capture/tools/capturetool.h"
+class QPixmap;
+class QString;
 
-class CaptureTool;
-
-class ToolFactory : public QObject
+class ScreenshotSaver
 {
-    Q_OBJECT
-
 public:
-    enum ToolType {
+    ScreenshotSaver();
 
-    };
-
-    explicit ToolFactory(QObject *parent = nullptr);
-
-    ToolFactory(const ToolFactory &) = delete;
-    ToolFactory & operator=(const ToolFactory &) = delete;
-
-    CaptureTool* CreateTool(
-            CaptureButton::ButtonType t,
-            QObject *parent = nullptr);
+    void saveToClipboard(const QPixmap &capture);
+    void saveToFilesystem(const QPixmap &capture, const QString &path);
 
 };
 
-#endif // TOOLFACTORY_H
+#endif // SCREENSHOTSAVER_H

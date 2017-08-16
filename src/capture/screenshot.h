@@ -36,13 +36,8 @@ public:
     void setScreenshot(const QPixmap &);
     QPixmap baseScreenshot() const;
     QPixmap screenshot() const;
+    inline QPixmap croppedScreenshot(const QRect &selection) const;
 
-    QString graphicalSave(bool &ok,
-                          const QRect &selection = QRect(),
-                          QWidget *parent = 0) const;
-    QString fileSave(bool &ok, const QRect &selection = QRect()) const;
-    void uploadToImgur(QNetworkAccessManager *,
-                       const QRect &selection = QRect());
     QPixmap paintModification(const CaptureModification*);
     QPixmap paintTemporalModification(const CaptureModification*);
     QPixmap overrideModifications(const QVector<CaptureModification*> &);
@@ -50,7 +45,6 @@ public:
 private:
     QPixmap m_baseScreenshot;
     QPixmap m_modifiedScreenshot;
-    QPointer<QNetworkAccessManager> m_accessManager;
 
     inline void paintInPainter(QPainter &, const CaptureModification *);
 

@@ -16,11 +16,15 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
-#include "src/capture/capturewidget.h"
+#include "src/capture/widget/capturewidget.h"
 #include "src/utils/confighandler.h"
 #include "src/infowindow.h"
 #include "src/config/configwindow.h"
-#include "src/capture/capturebutton.h"
+#include "src/capture/widget/capturebutton.h"
+#include "src/utils/screengrabber.h"
+#include "src/capture/workers/imgur/imguruploader.h"
+#include "src/capture/workers/screenshotsaver.h"
+#include "src/capture/workers/graphicalscreenshotsaver.h"
 #include <QFile>
 #include <QApplication>
 #include <QSystemTrayIcon>
@@ -51,10 +55,17 @@ Controller *Controller::getInstance() {
     return &c;
 }
 
-QString Controller::saveScreenshot(const QString &path,
+void Controller::saveFullScreenshot(const QString &path,
                                    bool const toClipboard) {
-    QPointer<CaptureWidget> w = createCaptureWidget(path);
-    return w->saveScreenshot(toClipboard);
+    QPixmap p(ScreenGrabber().grabEntireDesktop());
+    if(toClipboard) {
+        captureToClipboard(p);
+    }
+    if(path.isEmpty()) {
+        captureToFileUi(p);
+    } else {
+        captureToFile(p, path);
+    }
 }
 
 // initDefaults inits the global config in the first execution of the program
@@ -66,16 +77,10 @@ void Controller::initDefaults() {
     }
 }
 
-// creation of a new capture
-QPointer<CaptureWidget> Controller::createCaptureWidget(const QString &forcedSavePath) {
-    QPointer<CaptureWidget> w = new CaptureWidget(forcedSavePath);
-    return w;
-}
-
 // creation of a new capture in GUI mode
 void Controller::createVisualCapture(const QString &forcedSavePath) {
     if (!m_captureWindow) {
-        m_captureWindow = createCaptureWidget(forcedSavePath);
+        m_captureWindow = new CaptureWidget(forcedSavePath);
         m_captureWindow->showFullScreen();
     }
 }
@@ -141,4 +146,22 @@ void Controller::updateConfigComponents() {
     if (m_configWindow) {
         m_configWindow->updateComponents();
     }
+}
+
+void Controller::captureToClipboard(const QPixmap &p) {
+    ScreenshotSaver().saveToClipboard(p);
+}
+
+void Controller::captureToFile(const QPixmap &p, const QString &path) {
+    ScreenshotSaver().saveToFilesystem(p, path);
+}
+
+void Controller::captureToFileUi(const QPixmap &p) {
+    auto w = new GraphicalScreenshotSaver(p);
+    w->show();
+}
+
+void Controller::captureToImgur(const QPixmap &p) {
+    auto w = new ImgurUploader(p);
+    w->show();
 }

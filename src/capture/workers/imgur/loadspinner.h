@@ -15,33 +15,39 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TOOLFACTORY_H
-#define TOOLFACTORY_H
+#ifndef LOADSPINNER_H
+#define LOADSPINNER_H
 
-#include <QObject>
-#include "src/capture/widget/capturebutton.h"
-#include "src/capture/tools/capturetool.h"
+#include <QWidget>
 
-class CaptureTool;
-
-class ToolFactory : public QObject
+class LoadSpinner : public QWidget
 {
     Q_OBJECT
-
 public:
-    enum ToolType {
+    explicit LoadSpinner(QWidget *parent = nullptr);
 
-    };
+    void setColor(const QColor &c);
+    void setWidth(int w);
+    void setHeight(int h);
+    void start();
+    void stop();
 
-    explicit ToolFactory(QObject *parent = nullptr);
+protected:
+    void paintEvent(QPaintEvent *);
 
-    ToolFactory(const ToolFactory &) = delete;
-    ToolFactory & operator=(const ToolFactory &) = delete;
+private slots:
+    void rotate();
 
-    CaptureTool* CreateTool(
-            CaptureButton::ButtonType t,
-            QObject *parent = nullptr);
+private:
+    QColor m_color;
+    QTimer *m_timer;
 
+    int m_startAngle = 0;
+    int m_span =180;
+    bool m_growing;
+
+    QRect  m_frame;
+    void updateFrame();
 };
 
-#endif // TOOLFACTORY_H
+#endif // LOADSPINNER_H

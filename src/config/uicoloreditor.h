@@ -19,7 +19,7 @@
 #define UICOLORPICKER_H
 
 #include "color_wheel.hpp"
-#include "src/capture/capturebutton.h"
+#include "src/capture/widget/capturebutton.h"
 #include <QGroupBox>
 
 class QVBoxLayout;

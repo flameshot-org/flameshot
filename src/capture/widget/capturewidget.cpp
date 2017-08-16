@@ -21,14 +21,15 @@
 // Based on KDE's KSnapshot regiongrabber.cpp, revision 796531, Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
 // released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
-#include "screenshot.h"
-#include "capturemodification.h"
+#include "src/capture/screenshot.h"
+#include "src/capture/capturemodification.h"
 #include "capturewidget.h"
 #include "capturebutton.h"
-#include "src/capture/colorpicker.h"
-#include "src/capture/screengrabber.h"
+#include "src/capture/widget/colorpicker.h"
+#include "src/utils/screengrabber.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/systemnotification.h"
+#include "src/core/controller.h"
 #include <QScreen>
 #include <QGuiApplication>
 #include <QApplication>
@@ -36,11 +37,6 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QMouseEvent>
-#include <QClipboard>
-#include <QNetworkReply>
-#include <QMessageBox>
-#include <QDesktopServices>
-#include <QTimer>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -127,6 +123,14 @@ void CaptureWidget::updateButtons() {
         vectorButtons << b;
     }
     m_buttonHandler->setButtons(vectorButtons);
+}
+
+QPixmap CaptureWidget::pixmap() {
+    if (m_selection.isNull()) { // copy full screen when no selection
+        return m_screenshot->screenshot();
+    } else {
+        return m_screenshot->screenshot().copy(extendedSelection());
+    }
 }
 
 void CaptureWidget::paintEvent(QPaintEvent *) {
@@ -378,91 +382,6 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
     }
 }
 
-QString CaptureWidget::saveScreenshot(bool toClipboard) {
-    QString savePath, saveMessage;
-    SystemNotification notify;
-    if (toClipboard) {
-        if (m_selection.isNull()) { // copy full screen when no selection
-            QApplication::clipboard()->setPixmap(m_screenshot->screenshot());
-        } else {
-            QApplication::clipboard()->setPixmap(m_screenshot->screenshot()
-                                                 .copy(extendedSelection()));
-        }
-    }
-    bool ok = false;
-    if (m_forcedSavePath.isEmpty()) {
-        if (isVisible()) {
-            hide();
-        }
-        savePath = m_screenshot->graphicalSave(ok, extendedSelection(), this);
-    } else {
-        ConfigHandler config;
-        config.setSavePath(m_forcedSavePath);
-        savePath = m_screenshot->fileSave(ok, extendedSelection());
-        if(!ok || config.savePathValue() != m_forcedSavePath) {
-            saveMessage = tr("Error trying to save in ") + savePath;
-            notify.sendMessage(saveMessage);
-        }
-    }
-    if (ok) {
-        saveMessage = tr("Capture saved in ") + savePath;
-        notify.sendMessage(saveMessage);
-    }
-    close();
-    return savePath;
-}
-
-void CaptureWidget::copyScreenshot() {
-    if (m_selection.isNull()) { // copy full screen when no selection
-        QApplication::clipboard()->setPixmap(m_screenshot->screenshot());
-    } else {
-        QApplication::clipboard()->setPixmap(m_screenshot->screenshot()
-                                             .copy(extendedSelection()));
-    }
-    close();
-}
-
-void CaptureWidget::openURL(QNetworkReply *reply) {
-    if (reply->error() == QNetworkReply::NoError) {
-        QString data = QString::fromUtf8(reply->readAll());
-        QString imageID = data.split("\"").at(5);
-        QString url = QString("http://i.imgur.com/%1.png").arg(imageID);
-        bool successful = QDesktopServices::openUrl(url);
-        if (!successful) {
-            QMessageBox *openErrBox =
-                    new QMessageBox(QMessageBox::Warning,
-                                    QObject::tr("Resource Error"),
-                                    QObject::tr("Unable to open the URL."));
-            openErrBox->setModal(false);
-            openErrBox->setAttribute(Qt::WA_DeleteOnClose);
-            openErrBox->setWindowIcon(QIcon(":img/flameshot.png"));
-            openErrBox->show();
-        }
-    } else {
-        QMessageBox *netErrBox =
-                new QMessageBox(QMessageBox::Warning, "Network Error",
-                                reply->errorString());
-        netErrBox->setModal(false);
-        netErrBox->setAttribute(Qt::WA_DeleteOnClose);
-        netErrBox->setWindowIcon(QIcon(":img/flameshot.png"));
-        netErrBox->show();
-    }
-    close();
-}
-
-void CaptureWidget::uploadScreenshot() {
-    QNetworkAccessManager *am = new QNetworkAccessManager(this);
-    connect(am, &QNetworkAccessManager::finished, this,
-            &CaptureWidget::openURL);
-    if (m_selection.isNull()) {
-        m_screenshot->uploadToImgur(am);
-    } else {
-        m_screenshot->uploadToImgur(am, extendedSelection());
-    }
-    hide();
-    SystemNotification().sendMessage(tr("Uploading image..."));
-}
-
 bool CaptureWidget::undo() {
     bool itemRemoved = false;
     if (!m_modifications.isEmpty()) {
@@ -520,7 +439,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
         undo();
         break;
     case CaptureTool::REQ_UPLOAD_TO_IMGUR:
-        uploadScreenshot();
+        uploadToImgur();
         break;
     case CaptureTool::REQ_MOVE_MODE:
         m_state = CaptureButton::TYPE_MOVESELECTION;
@@ -648,6 +567,25 @@ QRegion CaptureWidget::handleMask() const {
     QRegion mask;
     foreach(QRect * rect, m_Handles) mask += QRegion(*rect);
     return mask;
+}
+
+void CaptureWidget::copyScreenshot() {
+    Controller::getInstance()->captureToClipboard(pixmap());
+    close();
+}
+
+void CaptureWidget::saveScreenshot() {
+    if (m_forcedSavePath.isEmpty()) {
+        Controller::getInstance()->captureToFileUi(pixmap());
+    } else {
+        Controller::getInstance()->captureToFile(pixmap(), m_forcedSavePath);
+    }
+    close();
+}
+
+void CaptureWidget::uploadToImgur() {
+    Controller::getInstance()->captureToImgur(pixmap());
+    close();
 }
 
 QRect CaptureWidget::extendedSelection() const {
