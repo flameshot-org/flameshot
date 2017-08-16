@@ -29,7 +29,7 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/systemnotification.h"
-#include "src/core/controller.h"
+#include "src/core/resourceexporter.h"
 #include <QScreen>
 #include <QGuiApplication>
 #include <QApplication>
@@ -562,21 +562,21 @@ QRegion CaptureWidget::handleMask() const {
 }
 
 void CaptureWidget::copyScreenshot() {
-    Controller::getInstance()->captureToClipboard(pixmap());
+    ResourceExporter().captureToClipboard(pixmap());
     close();
 }
 
 void CaptureWidget::saveScreenshot() {
     if (m_forcedSavePath.isEmpty()) {
-        Controller::getInstance()->captureToFileUi(pixmap());
+        ResourceExporter().captureToFileUi(pixmap());
     } else {
-        Controller::getInstance()->captureToFile(pixmap(), m_forcedSavePath);
+        ResourceExporter().captureToFile(pixmap(), m_forcedSavePath);
     }
     close();
 }
 
 void CaptureWidget::uploadToImgur() {
-    Controller::getInstance()->captureToImgur(pixmap());
+    ResourceExporter().captureToImgur(pixmap());
     close();
 }
 

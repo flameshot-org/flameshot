@@ -133,9 +133,9 @@ QIcon CaptureButton::icon() const {
 void CaptureButton::mousePressEvent(QMouseEvent *e) {
     if (e->button() == Qt::LeftButton) {
         Q_EMIT pressedButton(this);
+        Q_EMIT pressed();
     }
 }
-
 
 void CaptureButton::animatedShow() {
     if(!isVisible()) {

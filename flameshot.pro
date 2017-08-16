@@ -82,7 +82,8 @@ SOURCES += src/main.cpp\
     src/capture/workers/graphicalscreenshotsaver.cpp \
     src/capture/workers/imgur/loadspinner.cpp \
     src/capture/workers/imgur/imagelabel.cpp \
-    src/capture/workers/imgur/notificationwidget.cpp
+    src/capture/workers/imgur/notificationwidget.cpp \
+    src/core/resourceexporter.cpp
 
 HEADERS  += \
     src/capture/widget/buttonhandler.h \
@@ -129,7 +130,8 @@ HEADERS  += \
     src/capture/workers/graphicalscreenshotsaver.h \
     src/capture/workers/imgur/loadspinner.h \
     src/capture/workers/imgur/imagelabel.h \
-    src/capture/workers/imgur/notificationwidget.h
+    src/capture/workers/imgur/notificationwidget.h \
+    src/core/resourceexporter.h
 
 RESOURCES += \
     graphics.qrc

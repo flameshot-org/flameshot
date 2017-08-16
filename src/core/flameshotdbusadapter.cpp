@@ -17,7 +17,9 @@
 
 #include "flameshotdbusadapter.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/screengrabber.h"
 #include "src/core/controller.h"
+#include "src/core/resourceexporter.h"
 #include <QTimer>
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
@@ -39,11 +41,18 @@ void FlameshotDBusAdapter::graphicCapture(QString path, int delay) {
 }
 
 void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay) {
-    auto controller =  Controller::getInstance();
-    auto f = [controller, path, toClipboard, this]() {
-        controller->saveFullScreenshot(path, toClipboard);
+    auto f = [path, toClipboard, this]() {
+        QPixmap p(ScreenGrabber().grabEntireDesktop());
+        if(toClipboard) {
+            ResourceExporter().captureToClipboard(p);
+        }
+        if(path.isEmpty()) {
+            ResourceExporter().captureToFileUi(p);
+        } else {
+            ResourceExporter().captureToFile(p, path);
+        }
     };
-    QTimer::singleShot(delay, controller, f);
+    QTimer::singleShot(delay, this, f);
 
 }
 

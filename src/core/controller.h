@@ -36,8 +36,6 @@ public:
     void operator =(const Controller&) = delete;
 
 public slots:
-    void saveFullScreenshot(const QString &path = QString(),
-                           bool const toClipboard = false);
     void createVisualCapture(const QString &forcedSavePath = QString());
 
     void openConfigWindow();
@@ -47,12 +45,6 @@ public slots:
     void disableTrayIcon();
 
     void updateConfigComponents();
-
-    void captureToClipboard(const QPixmap &p);
-    void captureToFile(const QPixmap &p, const QString &path);
-    void captureToFileUi(const QPixmap &p);
-    void captureToImgur(const QPixmap &p);
-
 
 private slots:
     void initDefaults();

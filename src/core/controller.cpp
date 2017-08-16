@@ -21,10 +21,6 @@
 #include "src/infowindow.h"
 #include "src/config/configwindow.h"
 #include "src/capture/widget/capturebutton.h"
-#include "src/utils/screengrabber.h"
-#include "src/capture/workers/imgur/imguruploader.h"
-#include "src/capture/workers/screenshotsaver.h"
-#include "src/capture/workers/graphicalscreenshotsaver.h"
 #include <QFile>
 #include <QApplication>
 #include <QSystemTrayIcon>
@@ -47,25 +43,11 @@ Controller::Controller() : m_captureWindow(nullptr)
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
-
 }
 
 Controller *Controller::getInstance() {
     static Controller c;
     return &c;
-}
-
-void Controller::saveFullScreenshot(const QString &path,
-                                   bool const toClipboard) {
-    QPixmap p(ScreenGrabber().grabEntireDesktop());
-    if(toClipboard) {
-        captureToClipboard(p);
-    }
-    if(path.isEmpty()) {
-        captureToFileUi(p);
-    } else {
-        captureToFile(p, path);
-    }
 }
 
 // initDefaults inits the global config in the first execution of the program
@@ -146,22 +128,4 @@ void Controller::updateConfigComponents() {
     if (m_configWindow) {
         m_configWindow->updateComponents();
     }
-}
-
-void Controller::captureToClipboard(const QPixmap &p) {
-    ScreenshotSaver().saveToClipboard(p);
-}
-
-void Controller::captureToFile(const QPixmap &p, const QString &path) {
-    ScreenshotSaver().saveToFilesystem(p, path);
-}
-
-void Controller::captureToFileUi(const QPixmap &p) {
-    auto w = new GraphicalScreenshotSaver(p);
-    w->show();
-}
-
-void Controller::captureToImgur(const QPixmap &p) {
-    auto w = new ImgurUploader(p);
-    w->show();
 }
