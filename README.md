@@ -10,6 +10,7 @@
 - [Usage](#usage)
 - [Shortcuts](#shortcuts)
 - [Considerations](#considerations)
+- [Installation](#installation)
 - [Compilation](#compilation)
   - [Debian](#debian)
   - [Fedora](#fedora)
@@ -30,18 +31,23 @@ Example commands:
 - capture with GUI:
 
 `flameshot gui`
-- open GUI with a delay of 2 seconds:
 
-`flameshot gui -d 2000`
 - capture with GUI with custom save path:
 
 `flameshot gui -p ~/myStuff/captures`
+
+- open GUI with a delay of 2 seconds:
+
+`flameshot gui -d 2000`
+
 - fullscreen capture (asking savepath):
 
 `flameshot full`
+
 - fullscreen capture with custom save path (no GUI) and delayed:
 
 `flameshot full -p ~/myStuff/captures -d 5000`
+
 - fullscreen capture with custom save path copying to clipboard:
 
 `flameshot full -c -p ~/myStuff/captures`
@@ -51,6 +57,21 @@ In case of doubt choose the first or the second command as shortcut in your favo
 A systray icon will be in your system's panel while Flameshot is running.
 Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
 Check out the information window to see all the available shortcuts in the graphical capture mode.
+
+### CLI configuration
+You can use the graphical menu to configure Flameshot, but alternatively you can use your terminal or scripts to do so.
+
+- open the confguration menu:
+
+`flameshot config`
+
+- show the initial help message in the capture mode:
+
+`flameshot config --showhelp true`
+
+- for more information about the available options use the help flag:
+
+`flameshot config -h`
 
 ## Shortcuts
 
@@ -65,6 +86,7 @@ These shortcuts are available in GUI mode:
 | CTRL + S      | Save selection as a file    |
 | CTRL + Z      | Undo the last modification  |
 | Right Click   | Show color picker           |
+| Mouse Wheel   | Change the tool's thickness |
 
 Shift + drag a handler of the selection area: mirror redimension in the opposite handler.
 
@@ -79,6 +101,15 @@ Shift + drag a handler of the selection area: mirror redimension in the opposite
 - Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing `Ctrl + S` will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
 
 - Execute the command `flameshot` without parameters or use the "Launch Flameshot" desktop entry to launch a running instance of the program without taking actions.
+
+## Installation
+
+There are a packages available for a few distros:
+- [Arch](https://aur.archlinux.org/packages/flameshot/)
+- [Open Suse](https://software.opensuse.org/package/flameshot)
+
+If you are not using any of these distros you'll need to compile the program :(
+but don't worry, it's pretty easy!
 
 ## Compilation
 ### Debian

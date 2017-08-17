@@ -57,7 +57,7 @@ QVector<const char *> InfoWindow::m_description = {
     QT_TR_NOOP("Save selection as a file"),
     QT_TR_NOOP("Undo the last modification"),
     QT_TR_NOOP("Show color picker"),
-    QT_TR_NOOP("Change draw tool thickness")
+    QT_TR_NOOP("Change the tool's thickness")
 };
 
 void InfoWindow::initInfoTable() {
