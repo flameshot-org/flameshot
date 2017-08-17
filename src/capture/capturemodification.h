@@ -31,13 +31,15 @@ public:
     CaptureModification(QObject *parent = nullptr) = delete;
     CaptureModification(
             const CaptureButton::ButtonType,
-            const QPoint &,
-            const QColor &,
+            const QPoint &initialPoint,
+            const QColor &color,
+            const int thickness,
             QObject *parent = nullptr
             );
     QColor color() const;
     QVector<QPoint> points() const;
     CaptureTool* tool() const;
+    int thickness() const;
     CaptureButton::ButtonType buttonType() const;
     void addPoint(const QPoint);
 
@@ -46,6 +48,7 @@ protected:
     CaptureButton::ButtonType m_type;
     QVector<QPoint> m_coords;
     CaptureTool *m_tool;
+    int m_thickness;
 
 };
 

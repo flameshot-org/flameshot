@@ -60,7 +60,8 @@ public:
     virtual void processImage(
             QPainter &painter,
             const QVector<QPoint> &points,
-            const QColor &color) = 0;
+            const QColor &color,
+            const int thickness) = 0;
 
 signals:
     void requestAction(Request r);

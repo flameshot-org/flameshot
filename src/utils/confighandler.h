@@ -54,6 +54,9 @@ public:
     bool disabledTrayIconValue();
     void setDisabledTrayIcon(const bool);
 
+    int drawThicknessValue();
+    void setdrawThickness(const int);
+
     bool initiatedIsSet();
     void setInitiated();
     void setNotInitiated();

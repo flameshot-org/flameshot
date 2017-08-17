@@ -49,11 +49,13 @@ CaptureTool::ToolWorkType CopyTool::toolType() const {
 void CopyTool::processImage(
         QPainter &painter,
         const QVector<QPoint> &points,
-        const QColor &color)
+        const QColor &color,
+        const int thickness)
 {
     Q_UNUSED(painter);
     Q_UNUSED(points);
     Q_UNUSED(color);
+    Q_UNUSED(thickness);
 }
 
 void CopyTool::onPressed() {

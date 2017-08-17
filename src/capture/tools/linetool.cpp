@@ -51,14 +51,15 @@ CaptureTool::ToolWorkType LineTool::toolType() const {
 void LineTool::processImage(
         QPainter &painter,
         const QVector<QPoint> &points,
-        const QColor &color)
+        const QColor &color,
+        const int thickness)
 {
     QPoint p0 = points[0];
     QPoint p1 = points[1];
     if (needsAdjustment(p0, p1)) {
         p1.setY(p0.y());
     }
-    painter.setPen(QPen(color, 2));
+    painter.setPen(QPen(color, 2 + thickness));
     painter.drawLine(p0, p1);
 }
 

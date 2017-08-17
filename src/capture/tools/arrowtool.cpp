@@ -23,14 +23,13 @@ namespace {
 const int ArrowWidth = 10;
 const int ArrowHeight = 18;
 
-QPainterPath getArrowHead(QPoint p1, QPoint p2) {
+QPainterPath getArrowHead(QPoint p1, QPoint p2, const int thickness) {
     QLineF body(p1, p2);
     int originalLength = body.length();
-    body.setLength(ArrowWidth);
+    body.setLength(ArrowWidth + thickness*2);
     // move across the line up to the head
-    //QPointF  =;
     QLineF temp(QPoint(0,0), p2-p1);
-    temp.setLength(originalLength-ArrowHeight);
+    temp.setLength(originalLength - ArrowHeight - thickness*2);
     QPointF bottonTranslation(temp.p2());
 
     // generates the transformation to center of the arrowhead
@@ -50,9 +49,9 @@ QPainterPath getArrowHead(QPoint p1, QPoint p2) {
 }
 
 // gets a shorter line to prevent overlap in the point of the arrow
-QLine getShorterLine(QPoint p1, QPoint p2) {
+QLine getShorterLine(QPoint p1, QPoint p2, const int thickness) {
     QLineF l(p1, p2);
-    l.setLength(l.length()-ArrowHeight);
+    l.setLength(l.length() - ArrowHeight - thickness*2);
     return l.toLine();
 }
 
@@ -89,11 +88,12 @@ CaptureTool::ToolWorkType ArrowTool::toolType() const {
 void ArrowTool::processImage(
         QPainter &painter,
         const QVector<QPoint> &points,
-        const QColor &color)
+        const QColor &color,
+        const int thickness)
 {
-    painter.setPen(QPen(color, 2));
-    painter.drawLine(getShorterLine(points[0], points[1]));
-    painter.fillPath(getArrowHead(points[0], points[1]), QBrush(color));
+    painter.setPen(QPen(color, 2 + thickness));
+    painter.drawLine(getShorterLine(points[0], points[1], thickness));
+    painter.fillPath(getArrowHead(points[0], points[1], thickness), QBrush(color));
 }
 
 void ArrowTool::onPressed() {

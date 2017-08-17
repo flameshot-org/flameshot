@@ -5,7 +5,7 @@
 //     Flameshot is free software: you can redistribute it and/or modify
 //     it under the terms of the GNU General Public License as published by
 //     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) const any later version.
+//     (at your option) any later version.
 //
 //     Flameshot is distributed in the hope that it will be useful,
 //     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,33 +15,31 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef COPYTOOL_H
-#define COPYTOOL_H
+#ifndef NOTIFIERBOX_H
+#define NOTIFIERBOX_H
 
-#include "capturetool.h"
+#include <QWidget>
 
-class CopyTool : public CaptureTool
+class QTimer;
+
+class NotifierBox : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CopyTool(QObject *parent = nullptr);
+    explicit NotifierBox(QWidget *parent = nullptr);
 
-    int id() const override;
-    bool isSelectable() const override;
-    ToolWorkType toolType() const override;
+protected:
+    virtual void enterEvent(QEvent *);
+    virtual void paintEvent(QPaintEvent *);
 
-    QString iconName() const override;
-    QString name() const override;
-    QString description() const override;
+public slots:
+    void showMessage(const QString &msg);
 
-    void processImage(
-            QPainter &painter,
-            const QVector<QPoint> &points,
-            const QColor &color,
-            const int thickness) override;
-
-    void onPressed() override;
-
+private:
+    QTimer *m_timer;
+    QString m_message;
+    QColor m_bgColor;
+    QColor m_foregroundColor;
 };
 
-#endif // COPYTOOL_H
+#endif // NOTIFIERBOX_H

@@ -49,11 +49,13 @@ CaptureTool::ToolWorkType SizeIndicatorTool::toolType() const {
 void SizeIndicatorTool::processImage(
         QPainter &painter,
         const QVector<QPoint> &points,
-        const QColor &color)
+        const QColor &color,
+        const int thickness)
 {
     Q_UNUSED(painter);
     Q_UNUSED(points);
     Q_UNUSED(color);
+    Q_UNUSED(thickness);
 }
 
 void SizeIndicatorTool::onPressed() {

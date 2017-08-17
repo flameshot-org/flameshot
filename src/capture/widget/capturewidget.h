@@ -38,6 +38,7 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class ColorPicker;
 class Screenshot;
+class NotifierBox;
 
 class CaptureWidget : public QWidget {
     Q_OBJECT
@@ -70,6 +71,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *);
     void mouseReleaseEvent(QMouseEvent *);
     void keyPressEvent(QKeyEvent *);
+    void wheelEvent(QWheelEvent *);
 
     QRegion handleMask() const;
 
@@ -90,6 +92,9 @@ protected:
     bool m_showInitialMsg;
 
     const QString m_forcedSavePath;
+
+    int m_thickness;
+    NotifierBox *m_notifierBox;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

@@ -99,6 +99,14 @@ void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon) {
     m_settings.setValue("disabledTrayIcon", disabledTrayIcon);
 }
 
+int ConfigHandler::drawThicknessValue() {
+    return m_settings.value("drawThickness").toInt();
+}
+
+void ConfigHandler::setdrawThickness(const int thickness) {
+    m_settings.setValue("drawThickness", thickness);
+}
+
 bool ConfigHandler::initiatedIsSet() {
     return m_settings.value("initiated").toBool();
 }

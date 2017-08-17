@@ -102,7 +102,8 @@ void Screenshot::paintInPainter(QPainter &painter,
 {
     const QVector<QPoint> &points = modification->points();
     QColor color = modification->color();
-    modification->tool()->processImage(painter, points, color);
+    int thickness = modification->thickness();
+    modification->tool()->processImage(painter, points, color, thickness);
 }
 
 

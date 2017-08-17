@@ -37,7 +37,8 @@ public:
     void processImage(
             QPainter &painter,
             const QVector<QPoint> &points,
-            const QColor &color) override;
+            const QColor &color,
+            const int thickness) override;
 
     void onPressed() override;
 

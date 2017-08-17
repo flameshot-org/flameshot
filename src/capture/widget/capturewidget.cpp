@@ -25,6 +25,7 @@
 #include "src/capture/capturemodification.h"
 #include "capturewidget.h"
 #include "capturebutton.h"
+#include "src/capture/widget/notifierbox.h"
 #include "src/capture/widget/colorpicker.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/confighandler.h"
@@ -55,7 +56,9 @@ CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     m_forcedSavePath(forcedSavePath),
     m_state(CaptureButton::TYPE_MOVESELECTION)
 {
-    m_showInitialMsg = ConfigHandler().showHelpValue();
+    ConfigHandler config;
+    m_showInitialMsg = config.showHelpValue();
+    m_thickness = config.drawThicknessValue();
 
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
@@ -92,10 +95,15 @@ CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     // init interface color
     m_colorPicker = new ColorPicker(this);
     m_colorPicker->hide();
+
+    m_notifierBox = new NotifierBox(this);
+    auto geometry = QGuiApplication::primaryScreen()->geometry();
+    m_notifierBox->move(geometry.left() +20, geometry.left() +20);
+    m_notifierBox->hide();
 }
 
 CaptureWidget::~CaptureWidget() {
-
+    ConfigHandler().setdrawThickness(m_thickness);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -159,16 +167,11 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 
         QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
                              "\nPress Enter to capture the screen."
-                             "\nPress Right Click to show the color picker.");
+                             "\nPress Right Click to show the color picker."
+                             "\nUse the Mouse Wheel to change the thickness of your tool.");
 
         // We draw the white contrasting background for the text, using the
         //same text and options to get the boundingRect that the text will have.
-        QColor rectColor = m_uiColor;
-        rectColor.setAlpha(180);
-        QColor textColor((CaptureButton::iconIsWhiteByColor(rectColor) ?
-                              Qt::white : Qt::black));
-        painter.setPen(QPen(textColor));
-        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
         QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
 
         // These four calls provide padding for the rect
@@ -177,10 +180,15 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         bRect.setX(bRect.x() - 12);
         bRect.setY(bRect.y() - 10);
 
+        QColor rectColor(m_uiColor);
+        rectColor.setAlpha(180);
+        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
         painter.drawRect(bRect);
 
         // Draw the text:
-        painter.setPen(textColor);
+        QColor textColor((CaptureButton::iconIsWhiteByColor(rectColor) ?
+                              Qt::white : Qt::black));
+        painter.setPen(QPen(textColor));
         painter.drawText(helpRect, Qt::AlignCenter, helpTxt);
     }
 
@@ -212,6 +220,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         if (m_state != CaptureButton::TYPE_MOVESELECTION) {
             auto mod = new CaptureModification(m_state, e->pos(),
                                                m_colorPicker->drawColor(),
+                                               m_thickness,
                                                this);
             m_modifications.append(mod);
             return;
@@ -379,6 +388,12 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
         m_buttonHandler->updatePosition(m_selection, rect());
         update();
     }
+}
+
+void CaptureWidget::wheelEvent(QWheelEvent *e) {
+    m_thickness += e->delta() / 120;
+    m_thickness = qBound(0, m_thickness, 100);
+    m_notifierBox->showMessage(QString::number(m_thickness));
 }
 
 bool CaptureWidget::undo() {

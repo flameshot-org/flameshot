@@ -45,7 +45,8 @@ QVector<const char *> InfoWindow::m_keys = {
     "CTRL + C",
     "CTRL + S",
     "CTRL + Z",
-    QT_TR_NOOP("Right Click")
+    QT_TR_NOOP("Right Click"),
+    QT_TR_NOOP("Mouse Wheel")
 };
 
 QVector<const char *> InfoWindow::m_description = {
@@ -55,7 +56,8 @@ QVector<const char *> InfoWindow::m_description = {
     QT_TR_NOOP("Copy to clipboard"),
     QT_TR_NOOP("Save selection as a file"),
     QT_TR_NOOP("Undo the last modification"),
-    QT_TR_NOOP("Show color picker")
+    QT_TR_NOOP("Show color picker"),
+    QT_TR_NOOP("Change draw tool thickness")
 };
 
 void InfoWindow::initInfoTable() {

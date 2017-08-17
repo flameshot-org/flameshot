@@ -49,9 +49,10 @@ CaptureTool::ToolWorkType SelectionTool::toolType() const {
 void SelectionTool::processImage(
         QPainter &painter,
         const QVector<QPoint> &points,
-        const QColor &color)
+        const QColor &color,
+        const int thickness)
 {
-    painter.setPen(QPen(color, 2));
+    painter.setPen(QPen(color, 2 + thickness));
     painter.drawRect(QRect(points[0], points[1]));
 }
 
