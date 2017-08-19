@@ -152,7 +152,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.drawPixmap(0, 0, m_screenshot->screenshot());
     }
 
-    QColor overlayColor(0, 0, 0, 160);
+    QColor overlayColor(0, 0, 0, 190);
     painter.setBrush(overlayColor);
     QRect r = m_selection.normalized().adjusted(0, 0, -1, -1);
     QRegion grey(rect());
