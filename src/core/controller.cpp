@@ -87,13 +87,13 @@ void Controller::enableTrayIcon() {
         return;
     }
     ConfigHandler().setDisabledTrayIcon(false);
-    QAction *configAction = new QAction(tr("&Configuration"));
+    QAction *configAction = new QAction(tr("&Configuration"), this);
     connect(configAction, &QAction::triggered, this,
             &Controller::openConfigWindow);
-    QAction *infoAction = new QAction(tr("&Information"));
+    QAction *infoAction = new QAction(tr("&Information"), this);
     connect(infoAction, &QAction::triggered, this,
             &Controller::openInfoWindow);
-    QAction *quitAction = new QAction(tr("&Quit"));
+    QAction *quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp,
             &QCoreApplication::quit);
 

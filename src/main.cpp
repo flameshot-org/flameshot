@@ -25,6 +25,7 @@
 #include <QTranslator>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QTextStream>
 #include <QDir>
 
 int main(int argc, char *argv[]) {
@@ -190,8 +191,8 @@ int main(int argc, char *argv[]) {
             QString newFilename(parser.value(filenameOption));
             config.setFilenamePattern(newFilename);
             FileNameHandler fh;
-            qInfo().noquote() << QString("The new pattern is '%1'\n"
-                                         "Parsed pattern example: %2").arg(newFilename)
+            QTextStream(stdout) << QString("The new pattern is '%1'\n"
+                                         "Parsed pattern example: %2\n").arg(newFilename)
                                  .arg(fh.parsedPattern());
         }
         if (tray) {

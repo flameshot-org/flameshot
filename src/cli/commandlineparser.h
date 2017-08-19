@@ -65,8 +65,8 @@ private:
                     subNodes == n.subNodes;
         }
         CommandArgument argument;
-        QMap<QStringList, CommandOption> options;
-        QMap<QString, Node> subNodes;
+        QList<CommandOption> options;
+        QList<Node> subNodes;
     };
 
     Node m_parseTree;

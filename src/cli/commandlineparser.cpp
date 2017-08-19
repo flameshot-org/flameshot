@@ -102,8 +102,15 @@ bool CommandLineParser::processArgs(const QStringList &args,
 {
     QString argument = *actualIt;
     bool ok = true;
-    if (actualNode->subNodes.contains(argument)) {
-        actualNode = &(*actualNode->subNodes.find(argument));
+    bool isValidArg = false;
+    for (Node &n: actualNode->subNodes) {
+        if (n.argument.name() == argument) {
+            actualNode = &n;
+            isValidArg = true;
+            break;
+        }
+    }
+    if (isValidArg) {
         auto nextArg = actualNode->argument;
         m_foundArgs.append(nextArg);
         // check next is help
@@ -142,10 +149,11 @@ bool CommandLineParser::processOptions(const QStringList &args,
                 arg.remove(0, 2) :
                 arg.remove(0, 1);
     // get option
-    auto optionIt = actualNode->options.end();
-    for (const QStringList &sl: actualNode->options.keys()) {
-        if (sl.contains(arg)) {
-            optionIt = actualNode->options.find(sl);
+    auto endIt = actualNode->options.cend();
+    auto optionIt = endIt;
+    for (auto i = actualNode->options.cbegin(); i != endIt; ++i) {
+        if ((*i).names().contains(arg)) {
+            optionIt = i;
             break;
         }
     }
@@ -254,7 +262,7 @@ bool CommandLineParser::AddArgument(const CommandArgument &arg,
     } else {
         Node child;
         child.argument = arg;
-        n->subNodes.insert(child.argument.name(), child);
+        n->subNodes.append(child);
     }
     return res;
 }
@@ -267,7 +275,7 @@ bool CommandLineParser::AddOption(const CommandOption &option,
     if (n == nullptr) {
         res = false;
     } else {
-        n->options.insert(option.names(), option);
+        n->options.append(option);
     }
     return res;
 }
@@ -333,7 +341,7 @@ void CommandLineParser::printHelp(QStringList args, const Node *node) {
     QList<CommandArgument> subArgs;
     for (const Node &n: node->subNodes)
         subArgs.append(n.argument);
-    auto modifiedOptions = node->options.values();
+    auto modifiedOptions = node->options;
     if (m_withHelp)
         modifiedOptions << helpOption;
     if (m_withVersion && node == &m_parseTree) {

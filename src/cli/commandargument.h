@@ -18,7 +18,7 @@
 #ifndef COMMANDARGUMENT_H
 #define COMMANDARGUMENT_H
 
-#include <QStringList>
+#include <QString>
 
 class CommandArgument
 {
