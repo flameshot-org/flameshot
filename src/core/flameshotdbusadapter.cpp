@@ -21,6 +21,22 @@
 #include "src/core/controller.h"
 #include "src/core/resourceexporter.h"
 #include <QTimer>
+#include <functional>
+
+namespace {
+    using std::function;
+    using lambda = function<void(void)>;
+
+    // replace QTimer::singleShot introduced in QT 5.4
+    // the actual target QT version is QT 5.3
+    void doLater(int msec, QObject *receiver, lambda func) {
+        QTimer *timer = new QTimer(receiver);
+        QObject::connect(timer, &QTimer::timeout, receiver,
+                         [timer, func](){ func(); timer->deleteLater(); });
+        timer->setInterval(msec);
+        timer->start();
+    }
+}
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
     : QDBusAbstractAdaptor(parent)
@@ -37,7 +53,8 @@ void FlameshotDBusAdapter::graphicCapture(QString path, int delay) {
     auto f = [controller, path, this]() {
        controller->createVisualCapture(path);
     };
-    QTimer::singleShot(delay, controller, f);
+    // QTimer::singleShot(delay, controller, f); // requires Qt 5.4
+    doLater(delay, controller, f);
 }
 
 void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay) {
@@ -52,8 +69,8 @@ void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay)
             ResourceExporter().captureToFile(p, path);
         }
     };
-    QTimer::singleShot(delay, this, f);
-
+    //QTimer::singleShot(delay, this, f); // // requires Qt 5.4
+    doLater(delay, this, f);
 }
 
 void FlameshotDBusAdapter::openConfig() {

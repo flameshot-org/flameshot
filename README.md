@@ -112,6 +112,8 @@ If you are not using any of these distros you'll need to compile the program :(
 but don't worry, it's pretty easy!
 
 ## Compilation
+The compilation requires Qt version 5.3 or higher (this is the version that Debian 8 has in its repos, so most modern distros should be able to compile without installing newer Qt versions).
+
 ### Debian
 Compilation Dependencies:
 ````

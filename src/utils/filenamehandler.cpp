@@ -23,7 +23,7 @@
 #include <QDir>
 
 FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
-    std::locale::global(std::locale(std::locale("").name()));
+    std::locale::global(std::locale(""));
 }
 
 QString FileNameHandler::parsedPattern() {
