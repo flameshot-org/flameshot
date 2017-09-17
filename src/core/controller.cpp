@@ -56,6 +56,7 @@ void Controller::initDefaults() {
     //config.setNotInitiated();
     if (!config.initiatedIsSet()) {
         config.setDefaults();
+        config.setInitiated();
     }
 }
 
