@@ -1,0 +1,15 @@
+Source: flameshot
+Section: admin
+Priority: optional
+Maintainer: Juanma Navarro Mañez <juanma1980@gmail.com>
+Build-Depends: debhelper (>=9), qt5-qmake, qt5-default
+Standards-Version: 3.9.6
+Homepage: https://github.com/lupoDharkael/flameshot
+#Vcs-Git: git://anonscm.debian.org/collab-maint/flameshot.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/flameshot.git
+
+Package: flameshot
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5dbus5, libqt5network5, libqt5core5a, libqt5widgets5, libqt5gui5
+Description: screenshot software
+ Powerful yet simple to use screenshot software for GNU/Linux 
