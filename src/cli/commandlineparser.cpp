@@ -157,7 +157,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
             break;
         }
     }
-    if (optionIt == actualNode->options.end()) {
+	if (optionIt == endIt) {
         QString argName = actualNode->argument.name();
         if (argName.isEmpty()) {
             argName = qApp->applicationName();
