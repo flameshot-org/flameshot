@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-VERSION = $$system(git describe)
+VERSION = 0.5.0-dev
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 QT       += core gui
