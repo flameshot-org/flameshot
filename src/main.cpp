@@ -21,6 +21,7 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
 #include "src/cli/commandlineparser.h"
+#include "src/utils/systemnotification.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QDBusConnection>
@@ -116,21 +117,25 @@ int main(int argc, char *argv[]) {
                        "- Named colors like 'blue' or 'red'\n"
                        "You may need to escape the '#' sign as in '\\#FFF'";
 
+    const QString delayErr = "Ivalid delay, it must be higher than 0";
     auto delayChecker = [&parser](const QString &delayValue) -> bool {
         int value = delayValue.toInt();
         return value >= 0;
     };
-    QString delayErr = "Ivalid delay, it must be higher than 0";
 
-    auto pathChecker = [&parser](const QString &pathValue) -> bool {
-        return QDir(pathValue).exists();
+    const QString pathErr = "Ivalid path, it must be a real path in the system";
+    auto pathChecker = [&parser, pathErr](const QString &pathValue) -> bool {
+        bool res = QDir(pathValue).exists();
+        if (!res) {
+            SystemNotification().sendMessage(QObject::tr(pathErr.toLatin1().data()));
+        }
+        return res;
     };
-    QString pathErr = "Ivalid path, it must be a real path in the system";
 
+    const QString booleanErr = "Ivalid value, it must be defined as 'true' or 'false'";
     auto booleanChecker = [&parser](const QString &value) -> bool {
         return value == "true" || value == "false";
     };
-    QString booleanErr = "Ivalid value, it must be defined as 'true' or 'false'";
 
     contrastColorOption.addChecker(colorChecker, colorErr);
     mainColorOption.addChecker(colorChecker, colorErr);
