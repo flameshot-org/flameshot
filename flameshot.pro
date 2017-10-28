@@ -84,7 +84,8 @@ SOURCES += src/main.cpp\
     src/capture/workers/imgur/imagelabel.cpp \
     src/capture/workers/imgur/notificationwidget.cpp \
     src/core/resourceexporter.cpp \
-    src/capture/widget/notifierbox.cpp
+    src/capture/widget/notifierbox.cpp \
+    src/utils/desktopinfo.cpp
 
 HEADERS  += \
     src/capture/widget/buttonhandler.h \
@@ -133,7 +134,8 @@ HEADERS  += \
     src/capture/workers/imgur/imagelabel.h \
     src/capture/workers/imgur/notificationwidget.h \
     src/core/resourceexporter.h \
-    src/capture/widget/notifierbox.h
+    src/capture/widget/notifierbox.h \
+    src/utils/desktopinfo.h
 
 RESOURCES += \
     graphics.qrc
