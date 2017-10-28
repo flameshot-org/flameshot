@@ -175,6 +175,29 @@ bool CaptureButton::iconIsWhiteByColor(const QColor &c) {
 
 QColor CaptureButton::m_mainColor = ConfigHandler().uiMainColorValue();
 
+static std::map<CaptureButton::ButtonType, int> buttonTypeOrder {
+    { CaptureButton::TYPE_PENCIL,             0 },
+    { CaptureButton::TYPE_LINE,               1 },
+    { CaptureButton::TYPE_ARROW,              2 },
+    { CaptureButton::TYPE_SELECTION,          3 },
+    { CaptureButton::TYPE_RECTANGLE,          4 },
+    { CaptureButton::TYPE_CIRCLE,             5 },
+    { CaptureButton::TYPE_MARKER,             6 },
+    { CaptureButton::TYPE_SELECTIONINDICATOR, 7 },
+    { CaptureButton::TYPE_MOVESELECTION,      8 },
+    { CaptureButton::TYPE_UNDO,               9 },
+    { CaptureButton::TYPE_COPY,              10 },
+    { CaptureButton::TYPE_SAVE,              11 },
+    { CaptureButton::TYPE_EXIT,              12 },
+    { CaptureButton::TYPE_IMAGEUPLOADER,     13 },
+};
+
+int CaptureButton::getPriorityByButton(CaptureButton::ButtonType b) {
+    auto it = buttonTypeOrder.find(b);
+    return it == buttonTypeOrder.cend() ? (int)buttonTypeOrder.size() : it->second;
+}
+
+
 QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_PENCIL,
     CaptureButton::TYPE_LINE,

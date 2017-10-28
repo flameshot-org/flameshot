@@ -32,7 +32,7 @@ class CaptureButton : public QPushButton {
 
 public:
     // Don't forget to add the new types to CaptureButton::iterableButtonTypes
-    // in the .cpp
+    // in the .cpp and the order value in the private array buttonTypeOrder
     enum ButtonType {
         TYPE_PENCIL,
         TYPE_LINE,
@@ -57,6 +57,7 @@ public:
     static bool iconIsWhiteByColor(const QColor &);
     static QString globalStyleSheet();
     static QVector<CaptureButton::ButtonType> getIterableButtonTypes();
+    static int getPriorityByButton(CaptureButton::ButtonType);
 
     QString name() const;
     QString description() const;

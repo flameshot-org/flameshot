@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "confighandler.h"
+#include <algorithm>
 
 ConfigHandler::ConfigHandler(){
 }
@@ -154,6 +155,10 @@ bool ConfigHandler::normalizeButtons(QList<int> &buttons) {
             hasChanged = true;
         }
     }
+    std::sort(buttons.begin(), buttons.end(), [](int a, int b){
+        return CaptureButton::getPriorityByButton((CaptureButton::ButtonType)a) <
+                CaptureButton::getPriorityByButton((CaptureButton::ButtonType)b);
+    });
     return hasChanged;
 }
 
