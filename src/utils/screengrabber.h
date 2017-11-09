@@ -18,6 +18,7 @@
 #ifndef SCREENGRABBER_H
 #define SCREENGRABBER_H
 
+#include "src/utils/desktopinfo.h"
 #include <QObject>
 
 class ScreenGrabber : public QObject
@@ -25,8 +26,10 @@ class ScreenGrabber : public QObject
     Q_OBJECT
 public:
     explicit ScreenGrabber(QObject *parent = nullptr);
-    QPixmap grabEntireDesktop();
+    QPixmap grabEntireDesktop(bool &ok);
 
+private:
+    DesktopInfo m_info;
 };
 
 #endif // SCREENGRABBER_H

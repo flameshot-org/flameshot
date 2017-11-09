@@ -20,6 +20,7 @@
 
 #include <QObject>
 #include <QPointer>
+#include <QPixmap>
 
 class CaptureWidget;
 class ConfigWindow;
@@ -35,8 +36,13 @@ public:
     Controller(const Controller&) = delete;
     void operator =(const Controller&) = delete;
 
+signals:
+    void captureTaken(uint id, QByteArray p);
+    void captureFailed(uint id);
+
 public slots:
-    void createVisualCapture(const QString &forcedSavePath = QString());
+    void createVisualCapture(const uint id = 0,
+                             const QString &forcedSavePath = QString());
 
     void openConfigWindow();
     void openInfoWindow();

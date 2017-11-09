@@ -26,7 +26,28 @@ ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 
 }
 
-QPixmap ScreenGrabber::grabEntireDesktop() {
+QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
+    ok = true; // revisit later
+    if(m_info.waylandDectected()) {
+        ok = false;
+        QPixmap res;
+        /*
+        habdle screenshot based on DE
+
+        switch (m_info.windowManager()) {
+        case m_info.GNOME:
+            // https://github.com/GNOME/gnome-shell/blob/695bfb96160033be55cfb5ac41c121998f98c328/data/org.gnome.Shell.Screenshot.xml
+            break;
+        case m_info.KDE:
+            // https://github.com/KDE/spectacle/blob/517a7baf46a4ca0a45f32fd3f2b1b7210b180134/src/PlatformBackends/KWinWaylandImageGrabber.cpp#L145
+            break;
+        default:
+            ok = false;
+            break;
+        }
+        */
+        return res;
+    }
     QRect geometry;
     for (QScreen *const screen : QGuiApplication::screens()) {
         geometry = geometry.united(screen->geometry());

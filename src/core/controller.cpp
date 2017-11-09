@@ -61,9 +61,13 @@ void Controller::initDefaults() {
 }
 
 // creation of a new capture in GUI mode
-void Controller::createVisualCapture(const QString &forcedSavePath) {
+void Controller::createVisualCapture(const uint id, const QString &forcedSavePath) {
     if (!m_captureWindow) {
-        m_captureWindow = new CaptureWidget(forcedSavePath);
+        m_captureWindow = new CaptureWidget(id, forcedSavePath);
+        connect(m_captureWindow, &CaptureWidget::captureFailed,
+                this, &Controller::captureFailed);
+        connect(m_captureWindow, &CaptureWidget::captureTaken,
+                this, &Controller::captureTaken);
         m_captureWindow->showFullScreen();
     }
 }

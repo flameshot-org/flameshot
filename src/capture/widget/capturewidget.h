@@ -44,12 +44,17 @@ class CaptureWidget : public QWidget {
     Q_OBJECT
 
 public:
-    explicit CaptureWidget(const QString &forcedSavePath = QString(),
+    explicit CaptureWidget(const uint id = 0,
+                           const QString &forcedSavePath = QString(),
                            QWidget *parent = nullptr);
     ~CaptureWidget();
 
     void updateButtons();
     QPixmap pixmap();
+
+signals:
+    void captureTaken(uint id, QByteArray p);
+    void captureFailed(uint id);
 
 private slots:
     void copyScreenshot();
@@ -90,10 +95,12 @@ protected:
     bool m_newSelection;
     bool m_grabbing;
     bool m_showInitialMsg;
+    bool m_captureDone;
 
     const QString m_forcedSavePath;
 
     int m_thickness;
+    uint m_id;
     NotifierBox *m_notifierBox;
 
     // naming convention for handles

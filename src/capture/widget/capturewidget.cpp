@@ -38,6 +38,7 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QMouseEvent>
+#include <QBuffer>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
@@ -50,11 +51,12 @@ const int HANDLE_SIZE = 9;
 } // unnamed namespace
 
 // enableSaveWIndow
-CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
-    QWidget(parent), m_mouseOverHandle(0), m_mouseIsClicked(false),
-    m_rightClick(false), m_newSelection(false), m_grabbing(false),
-    m_forcedSavePath(forcedSavePath),
-    m_state(CaptureButton::TYPE_MOVESELECTION)
+CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
+                             QWidget *parent) :
+    QWidget(parent), m_screenshot(nullptr), m_mouseOverHandle(0),
+    m_mouseIsClicked(false), m_rightClick(false), m_newSelection(false),
+    m_grabbing(false), m_captureDone(false), m_forcedSavePath(forcedSavePath),
+    m_id(id), m_state(CaptureButton::TYPE_MOVESELECTION)
 {
     ConfigHandler config;
     m_showInitialMsg = config.showHelpValue();
@@ -82,7 +84,11 @@ CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
     initShortcuts();
 
     // init content
-    QPixmap fullScreenshot(ScreenGrabber().grabEntireDesktop());
+    bool ok = true;
+    QPixmap fullScreenshot(ScreenGrabber().grabEntireDesktop(ok));
+    if(!ok) {
+        this->close();
+    }
     m_screenshot = new Screenshot(fullScreenshot, this);
     QSize size = fullScreenshot.size();
     // we need to increase by 1 the size to reach to the end of the screen
@@ -103,6 +109,14 @@ CaptureWidget::CaptureWidget(const QString &forcedSavePath, QWidget *parent) :
 }
 
 CaptureWidget::~CaptureWidget() {
+    if (m_captureDone) {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        this->pixmap().save(&buffer, "PNG");
+        Q_EMIT captureTaken(m_id, byteArray);
+    } else {
+        Q_EMIT captureFailed(m_id);
+    }
     ConfigHandler().setdrawThickness(m_thickness);
 }
 
@@ -577,11 +591,13 @@ QRegion CaptureWidget::handleMask() const {
 }
 
 void CaptureWidget::copyScreenshot() {
+    m_captureDone = true;
     ResourceExporter().captureToClipboard(pixmap());
     close();
 }
 
 void CaptureWidget::saveScreenshot() {
+    m_captureDone = true;
     if (m_forcedSavePath.isEmpty()) {
         ResourceExporter().captureToFileUi(pixmap());
     } else {
@@ -591,6 +607,7 @@ void CaptureWidget::saveScreenshot() {
 }
 
 void CaptureWidget::uploadToImgur() {
+    m_captureDone = true;
     ResourceExporter().captureToImgur(pixmap());
     close();
 }

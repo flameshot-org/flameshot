@@ -15,31 +15,28 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef FLAMESHOTDBUSADAPTER_H
-#define FLAMESHOTDBUSADAPTER_H
+#ifndef TERMINALUTILS_H
+#define TERMINALUTILS_H
 
-#include <QtDBus/QDBusAbstractAdaptor>
-#include "src/core/controller.h"
+#include "src/cli/commandlineparser.h"
+#include <QDBusConnection>
+#include <QObject>
 
-class FlameshotDBusAdapter : public QDBusAbstractAdaptor
+class DBusUtils : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.dharkael.Flameshot")
-
 public:
-    FlameshotDBusAdapter(QObject *parent = nullptr);
-    virtual ~FlameshotDBusAdapter();
+    explicit DBusUtils(QObject *parent = nullptr);
+    explicit DBusUtils(uint id, QObject *parent = nullptr);
 
-signals:
+    void checkDBusConnection(const QDBusConnection &connection);
+
+public slots:
     void captureTaken(uint id, QByteArray rawImage);
     void captureFailed(uint id);
 
-public slots:
-    Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
-    Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
-    Q_NOREPLY void openConfig();
-    Q_NOREPLY void trayIconEnabled(bool enabled);
-
+private:
+    uint m_id;
 };
 
-#endif // FLAMESHOTDBUSADAPTER_H
+#endif // TERMINALUTILS_H

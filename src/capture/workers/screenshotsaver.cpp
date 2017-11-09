@@ -25,7 +25,6 @@
 
 ScreenshotSaver::ScreenshotSaver()
 {
-
 }
 
 void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {

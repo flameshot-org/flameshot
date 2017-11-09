@@ -22,6 +22,7 @@
 #include "src/core/resourceexporter.h"
 #include <QTimer>
 #include <functional>
+#include <QBuffer>
 
 namespace {
     using std::function;
@@ -41,33 +42,53 @@ namespace {
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
-
+    auto controller =  Controller::getInstance();
+    connect(controller, &Controller::captureFailed,
+            this, &FlameshotDBusAdapter::captureFailed);
+    connect(controller, &Controller::captureTaken,
+            this, &FlameshotDBusAdapter::captureTaken);
 }
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {
 
 }
 
-void FlameshotDBusAdapter::graphicCapture(QString path, int delay) {
+void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id) {
     auto controller =  Controller::getInstance();
-    auto f = [controller, path, this]() {
-       controller->createVisualCapture(path);
+
+    auto f = [controller, id, path, this]() {
+       controller->createVisualCapture(id, path);
     };
     // QTimer::singleShot(delay, controller, f); // requires Qt 5.4
     doLater(delay, controller, f);
 }
 
-void FlameshotDBusAdapter::fullScreen(QString path, bool toClipboard, int delay) {
-    auto f = [path, toClipboard, this]() {
-        QPixmap p(ScreenGrabber().grabEntireDesktop());
+void FlameshotDBusAdapter::fullScreen(
+        QString path, bool toClipboard, int delay, uint id)
+{
+    auto f = [id, path, toClipboard, this]() {
+        bool ok = true;
+        QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+        if (!ok) {
+            // TODO notify
+            Q_EMIT captureFailed(id);
+            return;
+        }
+        if (!toClipboard && path.isEmpty()) {
+            ResourceExporter().captureToFileUi(p);
+            goto emit_signal;
+        }
         if(toClipboard) {
             ResourceExporter().captureToClipboard(p);
         }
-        if(path.isEmpty()) {
-            ResourceExporter().captureToFileUi(p);
-        } else {
+        if(!path.isEmpty()) {
             ResourceExporter().captureToFile(p, path);
         }
+     emit_signal:
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        p.save(&buffer, "PNG");
+        Q_EMIT captureTaken(id, byteArray);
     };
     //QTimer::singleShot(delay, this, f); // // requires Qt 5.4
     doLater(delay, this, f);
