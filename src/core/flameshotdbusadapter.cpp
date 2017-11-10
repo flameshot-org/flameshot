@@ -20,6 +20,7 @@
 #include "src/utils/screengrabber.h"
 #include "src/core/controller.h"
 #include "src/core/resourceexporter.h"
+#include "src/utils/systemnotification.h"
 #include <QTimer>
 #include <functional>
 #include <QBuffer>
@@ -70,7 +71,7 @@ void FlameshotDBusAdapter::fullScreen(
         bool ok = true;
         QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
         if (!ok) {
-            // TODO notify
+            SystemNotification().sendMessage(tr("Unable to capture screen"));
             Q_EMIT captureFailed(id);
             return;
         }

@@ -188,7 +188,6 @@ int main(int argc, char *argv[]) {
         sessionBus.call(m);
 
         if (isRaw) {
-            // TODO
             // captureTaken
             sessionBus.connect("org.dharkael.Flameshot",
                                "/", "", "captureTaken",
@@ -225,7 +224,6 @@ int main(int argc, char *argv[]) {
         sessionBus.call(m);
 
         if (isRaw) {
-            // TODO
             // captureTaken
             sessionBus.connect("org.dharkael.Flameshot",
                                "/", "", "captureTaken",

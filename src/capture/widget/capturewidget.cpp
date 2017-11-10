@@ -87,6 +87,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
     bool ok = true;
     QPixmap fullScreenshot(ScreenGrabber().grabEntireDesktop(ok));
     if(!ok) {
+        SystemNotification().sendMessage(tr("Unable to capture screen"));
         this->close();
     }
     m_screenshot = new Screenshot(fullScreenshot, this);
