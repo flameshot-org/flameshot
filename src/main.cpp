@@ -165,8 +165,9 @@ int main(int argc, char *argv[]) {
     parser.AddOptions({ filenameOption, trayOption, showHelpOption,
                         mainColorOption, contrastColorOption }, configArgument);
     // Parse
-    if (!parser.parse(app.arguments()))
-        return 0;
+    if (!parser.parse(app.arguments())) {
+        goto finish;
+    }
 
     // PROCESS DATA
     //--------------
@@ -212,6 +213,13 @@ int main(int argc, char *argv[]) {
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
+        // Not a valid command
+        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
+            QTextStream(stdout) << "you have to set a valid flag:\n\n";
+            parser.parse(QStringList() << argv[0] << "full" << "-h");
+            goto finish;
+        }
+
         uint id = qHash(app.arguments().join(" "));
         DBusUtils utils(id);
 
@@ -306,5 +314,6 @@ int main(int argc, char *argv[]) {
             sessionBus.call(m);
         }
     }
+finish:
     return 0;
 }

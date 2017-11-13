@@ -75,17 +75,12 @@ void FlameshotDBusAdapter::fullScreen(
             Q_EMIT captureFailed(id);
             return;
         }
-        if (!toClipboard && path.isEmpty()) {
-            ResourceExporter().captureToFileUi(p);
-            goto emit_signal;
-        }
         if(toClipboard) {
             ResourceExporter().captureToClipboard(p);
         }
         if(!path.isEmpty()) {
             ResourceExporter().captureToFile(p, path);
         }
-     emit_signal:
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         p.save(&buffer, "PNG");
