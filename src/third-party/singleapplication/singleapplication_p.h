@@ -40,6 +40,7 @@
 struct InstancesInfo {
     bool primary;
     quint32 secondary;
+    qint64 primaryPid;
 };
 
 class SingleApplicationPrivate : public QObject {
@@ -54,6 +55,7 @@ public:
     void startPrimary( bool resetMemory );
     void startSecondary();
     void connectToPrimary( int msecs, char connectionType );
+    qint64 primaryPid();
 
 #ifdef Q_OS_UNIX
     void crashHandler();

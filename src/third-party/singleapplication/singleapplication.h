@@ -102,9 +102,15 @@ public:
 
     /**
      * @brief Returns a unique identifier for the current instance
-     * @returns {int}
+     * @returns {qint32}
      */
     quint32 instanceId();
+
+    /**
+     * @brief Returns the process ID (PID) of the primary instance
+     * @returns {qint64}
+     */
+    qint64 primaryPid();
 
     /**
      * @brief Sends a message to the primary instance. Returns true on success.

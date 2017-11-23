@@ -80,6 +80,11 @@ Using `SingleApplication::instance()` is a neat way to get the
 `SingleApplication` instance for binding to it's signals anywhere in your
 program.
 
+__Note:__ On Windows the ability to bring the application windows to the
+foreground is restricted. See [Windows specific implementations](Windows.md)
+for a workaround and an example implementation.
+
+
 Secondary Instances
 -------------------
 
@@ -177,7 +182,15 @@ Returns if the instance is a secondary instance.
 quint32 SingleApplication::instanceId()
 ```
 
-Returns a unique identifier for the current instance
+Returns a unique identifier for the current instance.
+
+---
+
+```cpp
+qint64 SingleApplication::primaryPid()
+```
+
+Returns the process ID (PID) of the primary instance.
 
 ### Signals
 

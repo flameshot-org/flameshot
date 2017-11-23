@@ -1,6 +1,22 @@
 Changelog
 =========
 
+__3.0.9__
+---------
+
+*   Added SingleApplicationPrivate::primaryPid() as a solution to allow
+    bringing the primary window of an application to the foreground on
+    Windows.
+
+    _Eelco van Dam from Peacs BV_
+
+__3.0.8__
+---------
+
+*   Bug fix - changed QApplication::instance() to QCoreApplication::instance()
+
+    _Evgeniy Bazhenov_
+
 __3.0.7a__
 ----------
 

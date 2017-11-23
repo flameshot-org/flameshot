@@ -11,3 +11,8 @@ win32 {
     msvc:LIBS += Advapi32.lib
     gcc:LIBS += -lAdvapi32
 }
+
+DISTFILES += \
+    $$PWD/README.md \
+    $$PWD/CHANGELOG.md \
+    $$PWD/Windows.md
