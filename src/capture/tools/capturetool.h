@@ -45,6 +45,7 @@ public:
         REQ_TO_CLIPBOARD,
         REQ_UPLOAD_TO_IMGUR,
         REQ_MOVE_MODE,
+        REQ_OPEN_APP,
     };
 
     explicit CaptureTool(QObject *parent = nullptr);

@@ -30,6 +30,7 @@
 #include "selectiontool.h"
 #include "sizeindicatortool.h"
 #include "undotool.h"
+#include "applauncher.h"
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent)
 {
@@ -83,6 +84,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_UNDO:
         tool = new UndoTool(parent);
+        break;
+    case CaptureButton::TYPE_OPEN_APP:
+        tool = new AppLauncher(parent);
         break;
     default:
         tool = nullptr;

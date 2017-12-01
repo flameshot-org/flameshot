@@ -86,7 +86,11 @@ SOURCES += src/main.cpp\
     src/core/resourceexporter.cpp \
     src/capture/widget/notifierbox.cpp \
     src/utils/desktopinfo.cpp \
-    src/utils/dbusutils.cpp
+    src/utils/dbusutils.cpp \
+    src/capture/workers/launcher/applauncherwidget.cpp \
+    src/capture/tools/applauncher.cpp \
+    src/utils/desktopfileparse.cpp \
+    src/capture/workers/launcher/launcheritemdelegate.cpp
 
 HEADERS  += \
     src/capture/widget/buttonhandler.h \
@@ -137,7 +141,11 @@ HEADERS  += \
     src/core/resourceexporter.h \
     src/capture/widget/notifierbox.h \
     src/utils/desktopinfo.h \
-    src/utils/dbusutils.h
+    src/utils/dbusutils.h \
+    src/capture/workers/launcher/applauncherwidget.h \
+    src/capture/tools/applauncher.h \
+    src/utils/desktopfileparse.h \
+    src/capture/workers/launcher/launcheritemdelegate.h
 
 RESOURCES += \
     graphics.qrc

@@ -15,20 +15,26 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RESOURCEEXPORTER_H
-#define RESOURCEEXPORTER_H
+#ifndef LAUNCHERITEMDELEGATE_H
+#define LAUNCHERITEMDELEGATE_H
 
-#include <QPixmap>
+#include "src/utils/desktopfileparse.h"
+#include <QStyledItemDelegate>
 
-class ResourceExporter {
+class launcherItemDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
 public:
-    ResourceExporter();
+    explicit launcherItemDelegate(QObject *parent = nullptr);
 
-    void captureToClipboard(const QPixmap &p);
-    void captureToFile(const QPixmap &p, const QString &path);
-    void captureToFileUi(const QPixmap &p);
-    void captureToImgur(const QPixmap &p);
-    void captureToProgram(const QPixmap &p);
+    void paint(QPainter *painter,
+               const QStyleOptionViewItem &option,
+               const QModelIndex &index) const;
+
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+private:
+
 };
 
-#endif // RESOURCEEXPORTER_H
+#endif // LAUNCHERITEMDELEGATE_H

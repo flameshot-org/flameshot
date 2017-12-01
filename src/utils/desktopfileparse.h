@@ -15,20 +15,30 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RESOURCEEXPORTER_H
-#define RESOURCEEXPORTER_H
+#ifndef DESKTOPFILEPARSE_H
+#define DESKTOPFILEPARSE_H
 
-#include <QPixmap>
+#include <QIcon>
 
-class ResourceExporter {
-public:
-    ResourceExporter();
+class QFile;
+class QString;
+class QTextStream;
 
-    void captureToClipboard(const QPixmap &p);
-    void captureToFile(const QPixmap &p, const QString &path);
-    void captureToFileUi(const QPixmap &p);
-    void captureToImgur(const QPixmap &p);
-    void captureToProgram(const QPixmap &p);
+struct DesktopAppData {
+    QIcon icon;
+    QString name;
+    QString description;
+    QString exec;
 };
 
-#endif // RESOURCEEXPORTER_H
+struct DesktopFileParse {
+    DesktopFileParse();
+    DesktopAppData parseDesktopFile(const QString &fileName, bool &ok);
+
+private:
+    QString m_localeName;
+    QString m_localeDescription;
+
+};
+
+#endif // DESKTOPFILEPARSE_H

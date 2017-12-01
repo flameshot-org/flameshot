@@ -15,20 +15,32 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RESOURCEEXPORTER_H
-#define RESOURCEEXPORTER_H
+#ifndef APPOPENER_H
+#define APPOPENER_H
 
-#include <QPixmap>
+#include "capturetool.h"
 
-class ResourceExporter {
+class AppLauncher : public CaptureTool
+{
+    Q_OBJECT
 public:
-    ResourceExporter();
+    explicit AppLauncher(QObject *parent = nullptr);
 
-    void captureToClipboard(const QPixmap &p);
-    void captureToFile(const QPixmap &p, const QString &path);
-    void captureToFileUi(const QPixmap &p);
-    void captureToImgur(const QPixmap &p);
-    void captureToProgram(const QPixmap &p);
+    int id() const override;
+    bool isSelectable() const override;
+    ToolWorkType toolType() const override;
+
+    QString iconName() const override;
+    QString name() const override;
+    QString description() const override;
+
+    void processImage(
+            QPainter &painter,
+            const QVector<QPoint> &points,
+            const QColor &color,
+            const int thickness) override;
+
+    void onPressed() override;
 };
 
-#endif // RESOURCEEXPORTER_H
+#endif // APPOPENER_H

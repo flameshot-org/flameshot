@@ -60,6 +60,7 @@ private slots:
     void copyScreenshot();
     void saveScreenshot();
     void uploadToImgur();
+    void openWithProgram();
     bool undo();
 
     void leftResize();

@@ -470,6 +470,9 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     case CaptureTool::REQ_UPLOAD_TO_IMGUR:
         uploadToImgur();
         break;
+    case CaptureTool::REQ_OPEN_APP:
+        openWithProgram();
+        break;
     case CaptureTool::REQ_MOVE_MODE:
         m_state = CaptureButton::TYPE_MOVESELECTION;
         if (m_lastPressedButton) {
@@ -610,6 +613,12 @@ void CaptureWidget::saveScreenshot() {
 void CaptureWidget::uploadToImgur() {
     m_captureDone = true;
     ResourceExporter().captureToImgur(pixmap());
+    close();
+}
+
+void CaptureWidget::openWithProgram() {
+    m_captureDone = true;
+    ResourceExporter().captureToProgram(pixmap());
     close();
 }
 
