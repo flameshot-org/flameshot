@@ -19,6 +19,7 @@
 #include "src/utils/desktopfileparse.h"
 #include "src/utils/filenamehandler.h"
 #include "src/capture/workers/launcher/launcheritemdelegate.h"
+#include "src/utils/confighandler.h"
 #include <QDir>
 #include <QVector>
 #include <QProcess>
@@ -26,17 +27,14 @@
 #include <QListView>
 #include <QListWidgetItem>
 #include <QHBoxLayout>
+#include <QCheckBox>
 
 AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     QWidget(parent), m_pixmap(p)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    m_tempFile = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
-    bool ok = p.save(m_tempFile);
-    if (!ok) {
-        // TO DO
-        return;
-    }
+    m_keepOpen = ConfigHandler().keepOpenAppLauncherValue();
+
     QString dir = "/usr/share/applications/";
     QString dirLocal = "~/.local/share/applications/";
     QDir appsDirLocal(dirLocal);
@@ -46,6 +44,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     QStringList entriesLocal = appsDirLocal.entryList(QDir::NoDotAndDotDot | QDir::Files);
 
     DesktopFileParse parser;
+    bool ok;
     QList<DesktopAppData> appList;
     for (QString file: entries){
         DesktopAppData app = parser.parseDesktopFile(dir + file, ok);
@@ -59,7 +58,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
             appList.append(app);
         }
     }
-    auto layout = new QHBoxLayout(this);
+    auto layout = new QVBoxLayout(this);
     auto *listView = new QListWidget(this);
     listView->setItemDelegate(new launcherItemDelegate());
     listView->setViewMode(QListWidget::IconMode);
@@ -81,11 +80,31 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
         buttonItem->setToolTip(app.description);
     }
     connect(listView, &QListWidget::clicked, this, &AppLauncherWidget::launch);
+
+    m_checkbox = new QCheckBox("Keep open after selection", this);
+    connect(m_checkbox, &QCheckBox::clicked, this, &AppLauncherWidget::checkboxClicked);
+
     layout->addWidget(listView);
+    layout->addWidget(m_checkbox);
 }
 
 void AppLauncherWidget::launch(const QModelIndex &index) {
+    m_tempFile = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
+    bool ok = m_pixmap.save(m_tempFile);
+    if (!ok) {
+        // TO DO
+        return;
+    }
     QString command = index.data(Qt::UserRole).toString().replace(
                 QRegExp("(\%.)"), m_tempFile);
     QProcess::startDetached(command);
+    if (!m_keepOpen) {
+        close();
+    }
+}
+
+void AppLauncherWidget::checkboxClicked(const bool enabled) {
+    m_keepOpen = enabled;
+    ConfigHandler().setKeepOpenAppLauncher(enabled);
+    m_checkbox->setChecked(enabled);
 }

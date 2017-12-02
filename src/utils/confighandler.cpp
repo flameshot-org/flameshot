@@ -108,6 +108,14 @@ void ConfigHandler::setdrawThickness(const int thickness) {
     m_settings.setValue("drawThickness", thickness);
 }
 
+bool ConfigHandler::keepOpenAppLauncherValue() {
+    return m_settings.value("keepOpenAppLauncher").toBool();
+}
+
+void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen) {
+    m_settings.setValue("keepOpenAppLauncher", keepOpen);
+}
+
 bool ConfigHandler::initiatedIsSet() {
     return m_settings.value("initiated").toBool();
 }

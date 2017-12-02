@@ -20,18 +20,23 @@
 
 #include <QWidget>
 
+class QCheckBox;
+
 class AppLauncherWidget: public QWidget
 {
     Q_OBJECT
 public:
     explicit AppLauncherWidget(const QPixmap &p, QWidget *parent = nullptr);
 
+private slots:
+    void launch(const QModelIndex &index);
+    void checkboxClicked(const bool enabled);
+
 private:
     QPixmap m_pixmap;
     QString m_tempFile;
-
-private slots:
-    void launch(const QModelIndex &index);
+    bool m_keepOpen;
+    QCheckBox *m_checkbox;
 
 };
 

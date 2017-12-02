@@ -34,3 +34,7 @@
     - value: "showTrayIcon"
     - type: bool
     - description: show Tray Icon in the taskbar.
+- Keep Open App Launcher
+    - value: "keepOpenAppLauncher"
+    - type: bool
+    - description: don't close the app launcher's window after selecting an app.
