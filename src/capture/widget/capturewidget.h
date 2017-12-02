@@ -97,6 +97,7 @@ protected:
     bool m_grabbing;
     bool m_showInitialMsg;
     bool m_captureDone;
+    bool m_toolIsForDrawing;
 
     const QString m_forcedSavePath;
 

@@ -157,12 +157,23 @@ QPixmap CaptureWidget::pixmap() {
 void CaptureWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
 
-    // if we are creating a new modification to the screenshot we just draw
+    // If we are creating a new modification to the screenshot we just draw
     // a temporal modification without antialiasing in the pencil tool for
     // performance. When we are not drawing we just shot the modified screenshot
     if (m_mouseIsClicked && m_state != CaptureButton::TYPE_MOVESELECTION) {
         painter.drawPixmap(0, 0, m_screenshot->paintTemporalModification(
                                m_modifications.last()));
+    } else if (m_toolIsForDrawing) {
+        CaptureButton::ButtonType type = CaptureButton::ButtonType::TYPE_LINE;
+        if (m_state == CaptureButton::ButtonType::TYPE_MARKER) {
+            type = CaptureButton::ButtonType::TYPE_MARKER;
+        }
+        CaptureModification tempMod(type, m_mousePos,
+                                    m_colorPicker->drawColor(),
+                                    m_thickness);
+        tempMod.addPoint(m_mousePos);
+        painter.drawPixmap(0, 0, m_screenshot->paintTemporalModification(
+                               &tempMod));
     } else {
         painter.drawPixmap(0, 0, m_screenshot->screenshot());
     }
@@ -337,6 +348,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
                 m_buttonHandler->show();
             }
         }
+    } else if (m_toolIsForDrawing) {
+        update();
     } else {
         if (m_selection.isNull()) {
             return;
@@ -409,6 +422,9 @@ void CaptureWidget::wheelEvent(QWheelEvent *e) {
     m_thickness += e->delta() / 120;
     m_thickness = qBound(0, m_thickness, 100);
     m_notifierBox->showMessage(QString::number(m_thickness));
+    if (m_toolIsForDrawing) {
+        update();
+    }
 }
 
 bool CaptureWidget::undo() {
@@ -428,6 +444,9 @@ void CaptureWidget::setState(CaptureButton *b) {
     if (b->tool()->isSelectable()) {
         if (t != m_state) {
             m_state = t;
+            m_toolIsForDrawing =
+                    (b->tool()->toolType() !=
+                    CaptureTool::ToolWorkType::TYPE_WORKER);
             if (m_lastPressedButton) {
                 m_lastPressedButton->setColor(m_uiColor);
             }
@@ -475,6 +494,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
         break;
     case CaptureTool::REQ_MOVE_MODE:
         m_state = CaptureButton::TYPE_MOVESELECTION;
+        m_toolIsForDrawing = false;
         if (m_lastPressedButton) {
             m_lastPressedButton->setColor(m_uiColor);
             m_lastPressedButton = nullptr;
