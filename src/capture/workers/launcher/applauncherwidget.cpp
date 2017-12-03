@@ -35,6 +35,8 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     setAttribute(Qt::WA_DeleteOnClose);
     m_keepOpen = ConfigHandler().keepOpenAppLauncherValue();
 
+    // In case of wanting to know the default app for a mime:
+    // xdg-mime query default image/png
     QString dir = "/usr/share/applications/";
     QString dirLocal = "~/.local/share/applications/";
     QDir appsDirLocal(dirLocal);
