@@ -53,7 +53,11 @@ void PencilTool::processImage(
         const int thickness)
 {
     painter.setPen(QPen(color, 2 + thickness));
-    painter.drawPolyline(points.data(), points.size());
+    if (points.length() == 2) {
+        painter.drawLine(points[0], points[1]);
+    } else {
+        painter.drawPolyline(points.data(), points.size());
+    }
 }
 
 void PencilTool::onPressed() {
