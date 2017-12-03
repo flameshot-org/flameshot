@@ -90,7 +90,8 @@ SOURCES += src/main.cpp\
     src/capture/workers/launcher/applauncherwidget.cpp \
     src/capture/tools/applauncher.cpp \
     src/utils/desktopfileparse.cpp \
-    src/capture/workers/launcher/launcheritemdelegate.cpp
+    src/capture/workers/launcher/launcheritemdelegate.cpp \
+    src/capture/tools/blurtool.cpp
 
 HEADERS  += \
     src/capture/widget/buttonhandler.h \
@@ -145,7 +146,8 @@ HEADERS  += \
     src/capture/workers/launcher/applauncherwidget.h \
     src/capture/tools/applauncher.h \
     src/utils/desktopfileparse.h \
-    src/capture/workers/launcher/launcheritemdelegate.h
+    src/capture/workers/launcher/launcheritemdelegate.h \
+    src/capture/tools/blurtool.h
 
 RESOURCES += \
     graphics.qrc

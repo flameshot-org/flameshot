@@ -31,6 +31,7 @@
 #include "sizeindicatortool.h"
 #include "undotool.h"
 #include "applauncher.h"
+#include "blurtool.h"
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent)
 {
@@ -87,6 +88,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_OPEN_APP:
         tool = new AppLauncher(parent);
+        break;
+    case CaptureButton::TYPE_BLUR:
+        tool = new BlurTool(parent);
         break;
     default:
         tool = nullptr;

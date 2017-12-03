@@ -41,5 +41,7 @@
         <file>img/buttonIconsWhite/size_indicator.png</file>
         <file>img/buttonIconsBlack/open_with.png</file>
         <file>img/buttonIconsWhite/open_with.png</file>
+        <file>img/buttonIconsBlack/blur.png</file>
+        <file>img/buttonIconsWhite/blur.png</file>
     </qresource>
 </RCC>

@@ -49,6 +49,7 @@ public:
         TYPE_EXIT,
         TYPE_IMAGEUPLOADER,
         TYPE_OPEN_APP,
+        TYPE_BLUR,
     };
 
     CaptureButton() = delete;

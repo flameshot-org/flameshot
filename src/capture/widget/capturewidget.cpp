@@ -446,7 +446,8 @@ void CaptureWidget::setState(CaptureButton *b) {
             m_state = t;
             m_toolIsForDrawing =
                     (b->tool()->toolType() !=
-                    CaptureTool::ToolWorkType::TYPE_WORKER);
+                    CaptureTool::ToolWorkType::TYPE_WORKER) &&
+                    b->buttonType() != CaptureButton::TYPE_BLUR;
             if (m_lastPressedButton) {
                 m_lastPressedButton->setColor(m_uiColor);
             }
