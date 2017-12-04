@@ -68,6 +68,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     listView->setSpacing(4);
     listView->setFlow(QListView::LeftToRight);
     listView->setDragEnabled(false);
+    listView->setMinimumSize(375, 210);
 
     for (auto app: appList) {
         QListWidgetItem *buttonItem = new QListWidgetItem(listView);

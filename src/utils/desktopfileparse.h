@@ -38,6 +38,8 @@ struct DesktopFileParse {
 private:
     QString m_localeName;
     QString m_localeDescription;
+    QString m_localeNameShort;
+    QString m_localeDescriptionShort;
 
 };
 

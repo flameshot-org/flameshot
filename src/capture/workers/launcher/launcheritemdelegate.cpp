@@ -59,5 +59,5 @@ QSize launcherItemDelegate::sizeHint(
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
-    return QSize(100, 100);
+    return QSize(110, 115);
 }

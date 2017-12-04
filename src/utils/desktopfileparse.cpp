@@ -23,8 +23,12 @@
 
 DesktopFileParse::DesktopFileParse() {
     QString locale = QLocale().name();
+    QString localeShort = QLocale().name().left(2);
     m_localeName = QString("Name[%1]").arg(locale);
     m_localeDescription = QString("Comment[%1]").arg(locale);
+    m_localeNameShort = QString("Name[%1]").arg(localeShort);
+    m_localeDescriptionShort = QString("Comment[%1]")
+            .arg(localeShort);
 }
 
 DesktopAppData DesktopFileParse::parseDesktopFile(
@@ -49,7 +53,9 @@ DesktopAppData DesktopFileParse::parseDesktopFile(
                       line.mid(line.indexOf("=")+1).trimmed());
         }
         else if (!nameLocaleSet && line.startsWith("Name")) {
-            if (line.startsWith(m_localeName)) {
+            if (line.startsWith(m_localeName) ||
+                    line.startsWith(m_localeNameShort))
+            {
                 res.name = line.mid(line.indexOf("=")+1).trimmed();
                 nameLocaleSet = true;
             } else if (line.startsWith("Name=")) {
@@ -57,7 +63,9 @@ DesktopAppData DesktopFileParse::parseDesktopFile(
             }
         }
         else if (!descriptionLocaleSet && line.startsWith("Comment")) {
-            if (line.startsWith(m_localeName)) {
+            if (line.startsWith(m_localeDescription) ||
+                    line.startsWith(m_localeDescriptionShort))
+            {
                 res.description = line.mid(line.indexOf("=")+1).trimmed();
                 descriptionLocaleSet = true;
             } else if (line.startsWith("Comment=")) {

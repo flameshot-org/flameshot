@@ -68,6 +68,7 @@ void MarkerTool::processImage(
 void MarkerTool::onPressed() {
 }
 
+// Have to force horizontal position
 bool MarkerTool::needsAdjustment(const QPoint &p0, const QPoint &p1) const {
     return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
 }

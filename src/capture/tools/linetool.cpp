@@ -66,6 +66,7 @@ void LineTool::processImage(
 void LineTool::onPressed() {
 }
 
+// Have to force horizontal position
 bool LineTool::needsAdjustment(const QPoint &p0, const QPoint &p1) const {
     return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
 }
