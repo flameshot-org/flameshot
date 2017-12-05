@@ -79,8 +79,6 @@ protected:
     void keyPressEvent(QKeyEvent *);
     void wheelEvent(QWheelEvent *);
 
-    QRegion handleMask() const;
-
     // pixel map of the screen
     Screenshot* m_screenshot;
 
@@ -111,8 +109,11 @@ protected:
     // 1 letter: the handle on the middle of the corresponding side
     QRect m_TLHandle, m_TRHandle, m_BLHandle, m_BRHandle;
     QRect m_LHandle, m_THandle, m_RHandle, m_BHandle;
+	// Side Rects
+	QRect m_LSide, m_TSide, m_RSide, m_BSide;
     // list containing the active habdlers
-    QVector<QRect*> m_Handles;
+	QVector<QRect*> m_handles;
+	QVector<QRect*> m_sides;
 
 private:
     void initShortcuts();
