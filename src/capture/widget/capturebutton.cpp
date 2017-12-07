@@ -207,6 +207,7 @@ QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_RECTANGLE,
     CaptureButton::TYPE_CIRCLE,
     CaptureButton::TYPE_MARKER,
+	CaptureButton::TYPE_BLUR,
     CaptureButton::TYPE_SELECTIONINDICATOR,
     CaptureButton::TYPE_MOVESELECTION,
     CaptureButton::TYPE_UNDO,
@@ -215,5 +216,4 @@ QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_EXIT,
     CaptureButton::TYPE_IMAGEUPLOADER,
     CaptureButton::TYPE_OPEN_APP,
-    CaptureButton::TYPE_BLUR,
 };
