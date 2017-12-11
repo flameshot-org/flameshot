@@ -159,7 +159,10 @@ script:
   - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
   - chmod +x linuxdeployqt & ls
   - pwd & ./linuxdeployqt ./flameshot
-  - rm ./linuxdeployqt
+  - rm ./linuxdeployqt ./AppRun
+  - rm -rf ./doc
+##################################### libQt5XcbQpa.so.5(QT5.9.3) need libxcb-xinerama
+  - cp /usr/lib/x86_64-linux-gnu/libxcb-xinerama.so.0.0.0 ./lib/libxcb-xinerama.so.0
   - cd .. 
   - tar -zcvf build.tar.gz ./qtdeploy
   - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot-build.tar.gz 
