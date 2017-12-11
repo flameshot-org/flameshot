@@ -18,12 +18,12 @@
 #include "launcheritemdelegate.h"
 #include <QPainter>
 
-launcherItemDelegate::launcherItemDelegate(QObject *parent) :
+LauncherItemDelegate::LauncherItemDelegate(QObject *parent) :
     QStyledItemDelegate(parent)
 {
 }
 
-void launcherItemDelegate::paint(
+void LauncherItemDelegate::paint(
         QPainter *painter,
         const QStyleOptionViewItem &option,
         const QModelIndex &index) const
@@ -53,7 +53,7 @@ void launcherItemDelegate::paint(
                       index.data(Qt::DisplayRole).toString());
 }
 
-QSize launcherItemDelegate::sizeHint(
+QSize LauncherItemDelegate::sizeHint(
         const QStyleOptionViewItem &option,
         const QModelIndex &index) const
 {

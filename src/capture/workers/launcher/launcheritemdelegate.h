@@ -21,11 +21,11 @@
 #include "src/utils/desktopfileparse.h"
 #include <QStyledItemDelegate>
 
-class launcherItemDelegate : public QStyledItemDelegate
+class LauncherItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit launcherItemDelegate(QObject *parent = nullptr);
+	explicit LauncherItemDelegate(QObject *parent = nullptr);
 
     void paint(QPainter *painter,
                const QStyleOptionViewItem &option,

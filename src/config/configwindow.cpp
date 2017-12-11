@@ -73,18 +73,18 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
             m_buttonList, &ButtonListView::selectAll);
     listLayout->addWidget(setAllButtons);
 
-    addTab(visuals, tr("Interface"));
-    setTabIcon(0, QIcon(modifier + "graphics.png"));
+	addTab(visuals, QIcon(modifier + "graphics.png"),
+		   tr("Interface"));
 
     // filename
     m_filenameEditor = new FileNameEditor();
-    addTab(m_filenameEditor, tr("Filename Editor"));
-    setTabIcon(1, QIcon(modifier + "name_edition.png"));
+	addTab(m_filenameEditor, QIcon(modifier + "name_edition.png"),
+		   tr("Filename Editor"));
 
     // general
     m_generalConfig = new GeneneralConf();
-    addTab(m_generalConfig, tr("General"));
-    setTabIcon(2, QIcon(modifier + "config.png"));
+	addTab(m_generalConfig, QIcon(modifier + "config.png"),
+		   tr("General"));
 
     // connect update sigslots
     connect(this, &ConfigWindow::updateChildren,

@@ -18,9 +18,11 @@
 #ifndef APPLAUNCHERWIDGET_H
 #define APPLAUNCHERWIDGET_H
 
+#include "src/utils/desktopfileparse.h"
 #include <QWidget>
 
 class QCheckBox;
+class QVBoxLayout;
 
 class AppLauncherWidget: public QWidget
 {
@@ -33,10 +35,12 @@ private slots:
     void checkboxClicked(const bool enabled);
 
 private:
+	DesktopFileParser m_parser;
     QPixmap m_pixmap;
     QString m_tempFile;
     bool m_keepOpen;
     QCheckBox *m_checkbox;
+	QVBoxLayout *m_layout;
 
 };
 

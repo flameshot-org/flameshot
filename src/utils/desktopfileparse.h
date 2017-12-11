@@ -19,21 +19,48 @@
 #define DESKTOPFILEPARSE_H
 
 #include <QIcon>
+#include <QStringList>
+#include <QMap>
 
-class QFile;
+class QDir;
 class QString;
 class QTextStream;
 
 struct DesktopAppData {
-    QIcon icon;
+	DesktopAppData() = default;
+
+	DesktopAppData(
+			QString name,
+			QString description,
+			QString exec,
+			QIcon icon) :
+		name(name),
+		description(description),
+		exec(exec),
+		icon(icon),
+		showInTerminal(false)
+	{}
+
+	bool operator==(const DesktopAppData &other) const {
+		return name == other.name;
+	}
+
     QString name;
     QString description;
     QString exec;
+	QStringList categories;
+	QIcon icon;
+	bool showInTerminal;
 };
 
-struct DesktopFileParse {
-    DesktopFileParse();
-    DesktopAppData parseDesktopFile(const QString &fileName, bool &ok);
+struct DesktopFileParser {
+	DesktopFileParser();
+	DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
+	int processDirectory(const QDir &dir);
+
+	QList<DesktopAppData> getAppsByCategory(const QString &category);
+	QMap<QString, QList<DesktopAppData>> getAppsByCategory(
+			const QStringList &categories);
 
 private:
     QString m_localeName;
@@ -41,6 +68,8 @@ private:
     QString m_localeNameShort;
     QString m_localeDescriptionShort;
 
+	QIcon m_defaultIcon;
+	QList<DesktopAppData> m_appList;
 };
 
 #endif // DESKTOPFILEPARSE_H

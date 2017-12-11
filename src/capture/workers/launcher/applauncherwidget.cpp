@@ -16,12 +16,12 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "applauncherwidget.h"
-#include "src/utils/desktopfileparse.h"
 #include "src/utils/filenamehandler.h"
 #include "src/capture/workers/launcher/launcheritemdelegate.h"
 #include "src/utils/confighandler.h"
+#include "moreappswidget.h"
 #include <QDir>
-#include <QVector>
+#include <QList>
 #include <QProcess>
 #include <QPixmap>
 #include <QListView>
@@ -33,42 +33,33 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     QWidget(parent), m_pixmap(p)
 {
     setAttribute(Qt::WA_DeleteOnClose);
+	setWindowIcon(QIcon(":img/flameshot.png"));
+	setWindowTitle(tr("Open With"));
+
     m_keepOpen = ConfigHandler().keepOpenAppLauncherValue();
 
-    // In case of wanting to know the default app for a mime:
-    // xdg-mime query default image/png
-    QString dir = "/usr/share/applications/";
-    QString dirLocal = "~/.local/share/applications/";
-    QDir appsDirLocal(dirLocal);
-    QDir appsDir(dir);
+	QString dirLocal = QDir::homePath() + "/.local/share/applications/";
+	QDir appsDirLocal(dirLocal);
+	m_parser.processDirectory(appsDirLocal);
 
-    QStringList entries = appsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
-    QStringList entriesLocal = appsDirLocal.entryList(QDir::NoDotAndDotDot | QDir::Files);
+	QString dir = "/usr/share/applications/";
+	QDir appsDir(dir);
+	m_parser.processDirectory(appsDir);
 
-    DesktopFileParse parser;
-    bool ok;
-    QList<DesktopAppData> appList;
-    for (QString file: entries){
-        DesktopAppData app = parser.parseDesktopFile(dir + file, ok);
-        if (ok) {
-            appList.append(app);
-        }
-    }
-    for (QString file: entriesLocal){
-        DesktopAppData app = parser.parseDesktopFile(dirLocal + file, ok);
-        if (ok) {
-            appList.append(app);
-        }
-    }
-    auto layout = new QVBoxLayout(this);
-    auto *listView = new QListWidget(this);
-    listView->setItemDelegate(new launcherItemDelegate());
+	m_layout = new QVBoxLayout(this);
+	QListWidget *listView = new QListWidget(this);
+	listView->setItemDelegate(new LauncherItemDelegate());
     listView->setViewMode(QListWidget::IconMode);
     listView->setResizeMode(QListView::Adjust);
     listView->setSpacing(4);
     listView->setFlow(QListView::LeftToRight);
     listView->setDragEnabled(false);
     listView->setMinimumSize(375, 210);
+
+	QList<DesktopAppData> appList = m_parser.getAppsByCategory("Graphics");
+	appList.append(DesktopAppData(QObject::tr("Other Application"), "", ".",
+								  QIcon::fromTheme("applications-other")
+					   ));
 
     for (auto app: appList) {
         QListWidgetItem *buttonItem = new QListWidgetItem(listView);
@@ -87,23 +78,32 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     m_checkbox = new QCheckBox("Keep open after selection", this);
     connect(m_checkbox, &QCheckBox::clicked, this, &AppLauncherWidget::checkboxClicked);
 
-    layout->addWidget(listView);
-    layout->addWidget(m_checkbox);
+	m_layout->addWidget(listView);
+	m_layout->addWidget(m_checkbox);
+	m_checkbox->setChecked(ConfigHandler().keepOpenAppLauncherValue());
 }
 
 void AppLauncherWidget::launch(const QModelIndex &index) {
-    m_tempFile = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
-    bool ok = m_pixmap.save(m_tempFile);
-    if (!ok) {
-        // TO DO
-        return;
-    }
-    QString command = index.data(Qt::UserRole).toString().replace(
-                QRegExp("(\%.)"), m_tempFile);
-    QProcess::startDetached(command);
-    if (!m_keepOpen) {
-        close();
-    }
+	QString command = index.data(Qt::UserRole).toString().replace(
+				QRegExp("(\%.)"), m_tempFile);
+	if (command == ".") {
+		MoreAppsWidget *widget = new MoreAppsWidget(m_pixmap, m_parser);
+		connect(widget, &MoreAppsWidget::appClicked,
+				this, &AppLauncherWidget::launch);
+		m_layout->takeAt(0)->widget()->deleteLater();
+		m_layout->insertWidget(0, widget);
+	} else {
+		m_tempFile = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
+		bool ok = m_pixmap.save(m_tempFile);
+		if (!ok) {
+			// TO DO
+			return;
+		}
+		QProcess::startDetached(command);
+	}
+	if (!m_keepOpen) {
+		close();
+	}
 }
 
 void AppLauncherWidget::checkboxClicked(const bool enabled) {
