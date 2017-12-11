@@ -1,0 +1,179 @@
+language: cpp
+#speed compile process
+cache: ccache 
+compiler: gcc
+os:
+  - linux
+#sudo: required
+dist: trusty
+#Ubuntu Trusty 14.04 (LTS)
+#Xenial still not out in 2017!
+env:
+  global:
+    - QT_VERSION_MAJOR=5
+    - TRAVIS_DIST_NAME=trusty
+#    - CLANG_VERSION=4.0
+  matrix:
+#    - QT_VERSION_MINOR=8 QT_VERSION_REVISION=0
+#    - QT_VERSION_MINOR=9 QT_VERSION_REVISION=1
+    - QT_VERSION_MINOR=9 QT_VERSION_REVISION=3
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      #clang4
+#      - llvm-toolchain-trusty-4.0
+#      - sourceline: 'ppa:beineri/opt-qt58-trusty'
+#      - sourceline: 'ppa:beineri/opt-qt591-trusty'
+      - sourceline: 'ppa:beineri/opt-qt593-trusty'
+    packages:
+###################################### GCC
+      - g++-6
+      - gcc-6
+###################################### Clang
+#      - clang-4.0
+###################################### Qt5
+      - qt593d
+      - qt59base
+      - qt59canvas3d
+      - qt59connectivity
+#      - qt59gamepad
+      - qt59graphicaleffects
+      - qt59imageformats
+      - qt59location
+      - qt59multimedia
+      - qt59networkauth-no-lgpl
+      - qt59quickcontrols
+      - qt59quickcontrols2
+      - qt59scxml
+      - qt59script
+      - qt59sensors
+      - qt59serialbus
+      - qt59serialport
+#      - qt59speech
+      - qt59svg
+      - qt59tools
+      - qt59translations
+#      - qt59webengine
+      - qt59websockets
+      - qt59x11extras
+      - qt59xmlpatterns
+###################################### Dependencies
+#-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
+      - build-essential
+      # XCB/X11 support
+      - libfontconfig1-dev
+      - libfreetype6-dev
+      - libx11-dev
+      - libxext-dev
+      - libxfixes-dev
+      - libxi-dev
+      - libxrender-dev
+      - libxcb-xinerama0
+      - libxcb-xinerama0-dev
+      - libxcb1-dev
+      - libx11-xcb-dev
+      - libxcb-glx0-dev
+      # OpenGL - GLX
+      - libglu1-mesa-dev
+      # Audio
+      - libasound2-dev
+      - libpulse-dev
+      # G-Streamer support
+      - libgstreamer0.10-dev
+      - libgstreamer-plugins-base0.10-dev
+      - libgstreamer-plugins-bad0.10-dev
+      - libgstreamer0.10-dev
+      # XKB fixes for Qt5.4x
+      - libxkbfile1
+      - x11-xkb-utils
+      - xkb-data
+      - libxkbfile-dev
+      # SQLite 3 support
+      - libsqlite-dev
+      - libsqlite3-dev
+      # SSL/TLS Support
+      - libssl-dev
+#      - gnutls-dev
+      - libgnutls-dev
+      # DEPS+=" libgnutls-openssl-dev" # Not available on debian
+      - libsslcommon2-dev
+      # D-BUS ?
+      - libdbus-glib-1-dev
+
+before_install:
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then 
+#      brew update;
+#    fi
+  - if test -n "$BUILD_CC"; then export CC="$BUILD_CC"; fi
+  - if test -n "$BUILD_CXX"; then export CXX="$BUILD_CXX"; fi
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
+#  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-${CLANG_VERSION}" CC="clang-${CLANG_VERSION}"; fi
+  - if [ "$CXX" == "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50; fi
+
+install:
+#  - if [ "$CXX" == "clang++" ]; then cwd=$(pwd); fi
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then 
+#      brew install qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR};
+#      brew link --force qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR};
+#    fi
+
+before_script:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then export QT_ENV_SCRIPT="/opt/qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR}/bin/qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR}-env.sh"; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then echo "QT_ENV_SCRIPT=${QT_ENV_SCRIPT}"; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat ${QT_ENV_SCRIPT}; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then source ${QT_ENV_SCRIPT}; fi
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
+script:
+  - echo "------------- SHOW STATS ------------"
+  - FLAMESHOT_BUILD_ROOT=build
+  - mkdir -p ${FLAMESHOT_BUILD_ROOT}
+  - cd ${FLAMESHOT_BUILD_ROOT}
+  - pwd
+  - ls -haltF ../
+  - which c++
+  - which g++
+#  - which clang++
+  - c++ --version
+  - which ${CXX}
+  - ${CXX} --version
+  - which qmake
+  - qmake -v
+  - echo "NPROC=$(nproc)"
+  - echo "--------------- QMAKE ---------------"
+  - qmake QMAKE_CXX=g++-6 QMAKE_CC=gcc-6 QMAKE_LINK=g++-6 ../flameshot.pro
+  - echo "---------------- MAKE ---------------"
+  - make -j$(nproc) -l
+  - echo "------------- RUN TESTS -------------"
+  - make check
+  - pwd & ls
+  - mkdir qtdeploy & mv flameshot ./qtdeploy/
+  - cp ./qtdeploy/flameshot ./
+  - curl --upload-file ./flameshot https://transfer.sh/flameshot
+  - cd ./qtdeploy 
+###################################### linuxqtdepoly
+  - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
+  - chmod +x linuxdeployqt & ls
+  - pwd & ./linuxdeployqt ./flameshot
+  - rm ./linuxdeployqt
+  - cd .. 
+  - tar -zcvf build.tar.gz ./qtdeploy
+  - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot-build.tar.gz 
+
+#notifications:
+#  email:
+#    recipients:
+#      - xxx@gmail.com
+#    on_success: change
+#    on_failure: always
+#  irc:
+#    channels:
+#      - "irc.freenode.net:8001#xxx"
+#    on_success: change
+#    on_failure: always
+#    template:
+#      - "%{repository} (%{commit}) : %{message} %{foo} "
+#      - "Build details: %{build_url}"
