@@ -74,6 +74,7 @@ addons:
       - libxcb1-dev
       - libx11-xcb-dev
       - libxcb-glx0-dev
+      - libegl1-mesa
       # OpenGL - GLX
       - libglu1-mesa-dev
       # Audio
