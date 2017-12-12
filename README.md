@@ -179,7 +179,7 @@ qt5-base
 - I copied a few lines of code from KSnapshot regiongrabber.cpp revision 796531 (LGPL)
 - Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project) (LGPL/GPL)
 
-Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of ypur project applied.
+Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Acknowledgment
 I really appreciate those who have shown interest in the develpment process:
