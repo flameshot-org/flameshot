@@ -19,6 +19,7 @@
 #include "src/utils/filenamehandler.h"
 #include "src/capture/workers/launcher/launcheritemdelegate.h"
 #include "src/utils/confighandler.h"
+#include "terminallauncher.h"
 #include "moreappswidget.h"
 #include <QDir>
 #include <QList>
@@ -66,6 +67,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
         buttonItem->setData(Qt::DecorationRole, app.icon);
         buttonItem->setData(Qt::DisplayRole, app.name);
         buttonItem->setData(Qt::UserRole, app.exec);
+		buttonItem->setData(Qt::UserRole+1, app.showInTerminal);
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
         buttonItem->setForeground(foregroundColor);
 
@@ -99,7 +101,15 @@ void AppLauncherWidget::launch(const QModelIndex &index) {
 			// TO DO
 			return;
 		}
-		QProcess::startDetached(command);
+		bool inTerminal = index.data(Qt::UserRole+1).toBool();
+		if (inTerminal) {
+			ok = TerminalLauncher::launchDetached(command);
+			if (!ok) {
+				// TO DO
+			}
+		} else {
+			QProcess::startDetached(command);
+		}
 	}
 	if (!m_keepOpen) {
 		close();

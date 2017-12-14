@@ -27,7 +27,7 @@ class QString;
 class QTextStream;
 
 struct DesktopAppData {
-	DesktopAppData() = default;
+	DesktopAppData() : showInTerminal() {}
 
 	DesktopAppData(
 			QString name,
