@@ -94,6 +94,7 @@ MoreAppsWidget::MoreAppsWidget(
 			buttonItem->setData(Qt::DecorationRole, app.icon);
 			buttonItem->setData(Qt::DisplayRole, app.name);
 			buttonItem->setData(Qt::UserRole, app.exec);
+			buttonItem->setData(Qt::UserRole+1, app.showInTerminal);
 			QColor foregroundColor =
 					this->palette().color(QWidget::foregroundRole());
 			buttonItem->setForeground(foregroundColor);
