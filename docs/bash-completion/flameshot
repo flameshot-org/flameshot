@@ -8,8 +8,8 @@ _flameshot() {
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	cmd="gui full config"
-	gui_opts="--path --delay -p -d"
-	full_opts="--path --delay --clipboard -p -d -c"
+	gui_opts="--path --delay --raw -p -d -r"
+	full_opts="--path --delay --clipboard --raw -p -d -c -r"
 	config_opts="--contrastcolor --filename --maincolor --showhelp --trayicon -k -f -m -s -t"
 
 	case "${prev}" in
