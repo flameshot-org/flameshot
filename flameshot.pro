@@ -175,6 +175,9 @@ unix: {
     icon.path = $${BASEDIR}$${USRPATH}/share/icons/
     icon.files = img/flameshot.png
 
+    completion.path = /usr/share/bash-completion/completions/
+    completion.files = docs/bash-completion/flameshot
+
     desktopentry.path = $${BASEDIR}$${USRPATH}/share/applications
     desktopentryinit.path = $${BASEDIR}$${USRPATH}/share/applications
     desktopentryconfig.path = $${BASEDIR}$${USRPATH}/share/applications
@@ -199,6 +202,7 @@ unix: {
         desktopentryconfig \
         qmfile \
         servicedbus \
-        dbus
+        dbus \
+        completion
 }
 
