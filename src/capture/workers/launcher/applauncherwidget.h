@@ -39,7 +39,8 @@ private:
     QPixmap m_pixmap;
     QString m_tempFile;
     bool m_keepOpen;
-    QCheckBox *m_checkbox;
+	QCheckBox *m_keepOpenCheckbox;
+	QCheckBox *m_terminalCheckbox;
 	QVBoxLayout *m_layout;
 
 };
