@@ -22,6 +22,7 @@
 
 class QVBoxLayout;
 class QCheckBox;
+class QPushButton;
 
 class GeneneralConf : public QGroupBox {
     Q_OBJECT
@@ -35,16 +36,23 @@ private slots:
    void showHelpChanged(bool checked);
    void showDesktopNotificationChanged(bool checked);
    void showTrayIconChanged(bool checked);
+   void importConfiguration();
+   void exportConfiguration();
+   void resetConfiguration();
 
 private:
     QVBoxLayout *m_layout;
     QCheckBox *m_sysNotifications;
     QCheckBox *m_showTray;
     QCheckBox *m_helpMessage;
+	QPushButton *m_importButton;
+	QPushButton *m_exportButton;
+	QPushButton *m_resetButton;
 
     void initShowHelp();
     void initShowDesktopNotification();
     void initShowTrayIcon();
+	void initConfingButtons();
 
 };
 
