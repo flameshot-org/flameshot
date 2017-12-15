@@ -77,12 +77,14 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
     }
     connect(listView, &QListWidget::clicked, this, &AppLauncherWidget::launch);
 
-    m_checkbox = new QCheckBox("Keep open after selection", this);
-    connect(m_checkbox, &QCheckBox::clicked, this, &AppLauncherWidget::checkboxClicked);
+	m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
+	m_keepOpenCheckbox = new QCheckBox(tr("Keep open after selection"), this);
+	connect(m_keepOpenCheckbox, &QCheckBox::clicked, this, &AppLauncherWidget::checkboxClicked);
 
 	m_layout->addWidget(listView);
-	m_layout->addWidget(m_checkbox);
-	m_checkbox->setChecked(ConfigHandler().keepOpenAppLauncherValue());
+	m_layout->addWidget(m_keepOpenCheckbox);
+	m_layout->addWidget(m_terminalCheckbox);
+	m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncherValue());
 }
 
 void AppLauncherWidget::launch(const QModelIndex &index) {
@@ -101,7 +103,8 @@ void AppLauncherWidget::launch(const QModelIndex &index) {
 			// TO DO
 			return;
 		}
-		bool inTerminal = index.data(Qt::UserRole+1).toBool();
+		bool inTerminal = index.data(Qt::UserRole+1).toBool() ||
+				m_terminalCheckbox->isChecked();
 		if (inTerminal) {
 			ok = TerminalLauncher::launchDetached(command);
 			if (!ok) {
@@ -119,5 +122,5 @@ void AppLauncherWidget::launch(const QModelIndex &index) {
 void AppLauncherWidget::checkboxClicked(const bool enabled) {
     m_keepOpen = enabled;
     ConfigHandler().setKeepOpenAppLauncher(enabled);
-    m_checkbox->setChecked(enabled);
+	m_keepOpenCheckbox->setChecked(enabled);
 }
