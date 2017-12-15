@@ -40,8 +40,8 @@ QStringList addDashToOptionNames(const QStringList &names) {
     for (const QString &name: names) {
         // prepend "-" to single character options, and "--" to the others
         QString dashedName = (name.length() == 1) ?
-                    QString("-%1").arg(name) :
-                    QString("--%1").arg(name);
+					QStringLiteral("-%1").arg(name) :
+					QStringLiteral("--%1").arg(name);
         dashedNames << dashedName;
     }
     return dashedNames;
@@ -57,7 +57,7 @@ QString optionsToString(const QList<CommandOption> &options,
         QStringList dashedOptions = addDashToOptionNames(option.names());
         QString joinedDashedOptions = dashedOptions.join(", ");
         if (!option.valueName().isEmpty()) {
-            joinedDashedOptions += QString(" <%1>")
+			joinedDashedOptions += QStringLiteral(" <%1>")
                     .arg(option.valueName());
         }
         if (joinedDashedOptions.length() > size) {
@@ -75,7 +75,7 @@ QString optionsToString(const QList<CommandOption> &options,
     if(!dashedOptionList.isEmpty()) {
         result += "Options:\n";
         for (int i = 0; i < options.length(); ++i) {
-            result += QString("  %1  %2\n")
+			result += QStringLiteral("  %1  %2\n")
                     .arg(dashedOptionList.at(i).leftJustified(size, ' '))
                     .arg(options.at(i).description());
         }
@@ -87,7 +87,7 @@ QString optionsToString(const QList<CommandOption> &options,
         result += "Arguments:\n";
     }
     for (int i = 0; i < arguments.length(); ++i) {
-        result += QString("  %1  %2\n")
+		result += QStringLiteral("  %1  %2\n")
                 .arg(arguments.at(i).name().leftJustified(size, ' '))
                 .arg(arguments.at(i).description());
     }
@@ -119,7 +119,7 @@ bool CommandLineParser::processArgs(const QStringList &args,
         --actualIt;
     } else {
         ok = false;
-        out << QString("'%1' is not a valid argument.").arg(argument);
+		out << QStringLiteral("'%1' is not a valid argument.").arg(argument);
     }
     return ok;
 }
@@ -142,7 +142,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
     ok =  isDoubleDashed ? arg.length() > 3 :
                 arg.length() == 2;
     if (!ok) {
-        out << QString("the option %1 has a wrong format.").arg(arg);
+		out << QStringLiteral("the option %1 has a wrong format.").arg(arg);
         return ok;
     }
     arg = isDoubleDashed ?
@@ -162,7 +162,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
         if (argName.isEmpty()) {
             argName = qApp->applicationName();
         }
-        out << QString("the option '%1' is not a valid option "
+		out << QStringLiteral("the option '%1' is not a valid option "
                          "for the argument '%2'.").arg(arg)
                 .arg(argName);
         ok = false;
@@ -172,7 +172,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
     CommandOption option = *optionIt;
     bool requiresValue = !(option.valueName().isEmpty());
     if (!requiresValue && equalsPos != -1) {
-        out << QString("the option '%1' contains a '=' and it doesn't "
+		out << QStringLiteral("the option '%1' contains a '=' and it doesn't "
                          "require a value.").arg(arg);
         ok = false;
         return ok;
@@ -181,7 +181,7 @@ bool CommandLineParser::processOptions(const QStringList &args,
         if (actualIt+1 != args.cend()) {
             ++actualIt;
         } else {
-            out << QString("Expected value after the option '%1'.").arg(arg);
+			out << QStringLiteral("Expected value after the option '%1'.").arg(arg);
             ok = false;
             return ok;
         }
@@ -237,7 +237,7 @@ bool CommandLineParser::parse(const QStringList &args) {
         }
     }
     if (!ok && !m_generalErrorMessage.isEmpty()) {
-        out << QString(" %1\n").arg(m_generalErrorMessage);
+		out << QStringLiteral(" %1\n").arg(m_generalErrorMessage);
     }
     return ok;
 }
@@ -335,7 +335,8 @@ void CommandLineParser::printHelp(QStringList args, const Node *node) {
         argName = qApp->applicationName();
     }
     QString argText = node->subNodes.isEmpty() ? "" : "[arguments]";
-    helpText += QString("Usage: %1 [%2-options] %3\n\n").arg(args.join(" "))
+	helpText += QStringLiteral("Usage: %1 [%2-options] %3\n\n")
+			.arg(args.join(" "))
             .arg(argName).arg(argText);
     // add command options and subarguments
     QList<CommandArgument> subArgs;

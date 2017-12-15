@@ -6,9 +6,9 @@
 #include <QApplication>
 
 SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
-    m_interface = new QDBusInterface("org.freedesktop.Notifications",
-                                     "/org/freedesktop/Notifications",
-                                     "org.freedesktop.Notifications",
+	m_interface = new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
+									 QStringLiteral("/org/freedesktop/Notifications"),
+									 QStringLiteral("org.freedesktop.Notifications"),
                                      QDBusConnection::sessionBus(),
                                      this);
 }

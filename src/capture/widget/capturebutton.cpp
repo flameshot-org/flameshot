@@ -125,7 +125,7 @@ QString CaptureButton::styleSheet() const {
 // get icon returns the icon for the type of button
 QIcon CaptureButton::icon() const {
     QString color(iconIsWhiteByColor(m_mainColor) ? "White" : "Black");
-    QString iconPath = QString(":/img/buttonIcons%1/%2")
+	QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
             .arg(color).arg(m_tool->iconName());
     return QIcon(iconPath);
 }

@@ -25,10 +25,10 @@
 DesktopFileParser::DesktopFileParser() {
     QString locale = QLocale().name();
     QString localeShort = QLocale().name().left(2);
-    m_localeName = QString("Name[%1]").arg(locale);
-    m_localeDescription = QString("Comment[%1]").arg(locale);
-    m_localeNameShort = QString("Name[%1]").arg(localeShort);
-    m_localeDescriptionShort = QString("Comment[%1]")
+	m_localeName = QStringLiteral("Name[%1]").arg(locale);
+	m_localeDescription = QStringLiteral("Comment[%1]").arg(locale);
+	m_localeNameShort = QStringLiteral("Name[%1]").arg(localeShort);
+	m_localeDescriptionShort = QStringLiteral("Comment[%1]")
             .arg(localeShort);
 	m_defaultIcon = QIcon::fromTheme("application-x-executable");
 }

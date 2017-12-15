@@ -592,7 +592,7 @@ void CaptureWidget::updateSizeIndicator() {
     // The grabbed region is everything which is covered by the drawn
     // rectangles (border included, that's the reason of the +2).
     if (m_sizeIndButton){
-        m_sizeIndButton->setText(QString("%1\n%2")
+		m_sizeIndButton->setText(QStringLiteral("%1\n%2")
                                      .arg(m_selection.width()+2)
                                      .arg(m_selection.height()+2));
     }
