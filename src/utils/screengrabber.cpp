@@ -16,11 +16,14 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screengrabber.h"
+#include "src/utils/filenamehandler.h"
 #include <QPixmap>
 #include <QScreen>
 #include <QGuiApplication>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QDBusInterface>
+#include <QDBusReply>
 
 ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 
@@ -29,23 +32,34 @@ ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
     ok = true; // revisit later
     if(m_info.waylandDectected()) {
-        ok = false;
         QPixmap res;
-        /*
-        habdle screenshot based on DE
-
+		// handle screenshot based on DE
         switch (m_info.windowManager()) {
-        case m_info.GNOME:
+		case m_info.GNOME: {
             // https://github.com/GNOME/gnome-shell/blob/695bfb96160033be55cfb5ac41c121998f98c328/data/org.gnome.Shell.Screenshot.xml
+			QString path = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
+			QDBusInterface gnomeInterface(QStringLiteral("org.gnome.Shell"),
+										  QStringLiteral("/org/gnome/Shell/Screenshot"),
+										  QStringLiteral("org.gnome.Shell.Screenshot"));
+			QDBusReply<bool> reply = gnomeInterface.call("Screenshot", false, false, path);
+			if (reply.value()) {
+				res = QPixmap(path);
+			} else {
+				ok = false;
+			}
             break;
-        case m_info.KDE:
+		} case m_info.KDE: {
             // https://github.com/KDE/spectacle/blob/517a7baf46a4ca0a45f32fd3f2b1b7210b180134/src/PlatformBackends/KWinWaylandImageGrabber.cpp#L145
-            break;
-        default:
+			QDBusInterface kwinInterface(QStringLiteral("org.kde.KWin"),
+										 QStringLiteral("/Screenshot"),
+										 QStringLiteral("org.kde.kwin.Screenshot"));
+			QDBusReply<QString> reply = kwinInterface.call("screenshotFullscreen");
+			res = QPixmap(reply.value());
+			break;
+		} default:
             ok = false;
             break;
         }
-        */
         return res;
     }
     QRect geometry;
