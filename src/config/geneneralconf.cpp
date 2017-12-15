@@ -17,9 +17,16 @@
 
 #include "geneneralconf.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/confighandler.h"
 #include "src/core/controller.h"
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QCheckBox>
+#include <QPushButton>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QFile>
+#include <QTextCodec>
 
 GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     m_layout = new QVBoxLayout(this);
@@ -27,6 +34,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     initShowHelp();
     initShowDesktopNotification();
     initShowTrayIcon();
+	initConfingButtons();
     updateComponents();
 }
 
@@ -51,7 +59,44 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
         controller->enableTrayIcon();
     } else {
         controller->disableTrayIcon();
-    }
+	}
+}
+
+void GeneneralConf::importConfiguration() {
+	QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
+	QFile file(fileName);
+	QTextCodec *codec = QTextCodec::codecForLocale();
+	if (!file.open(QFile::ReadOnly)) {
+		QMessageBox::about(this, tr("Error"), tr("Unable to read file."));
+		return;
+	}
+	QString text = codec->toUnicode(file.readAll());
+	file.close();
+
+	QFile config(ConfigHandler().configFilePath());
+	if (!config.open(QFile::WriteOnly)) {
+	   QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
+	   return;
+	}
+	config.write(codec->fromUnicode(text));
+	config.close();
+}
+
+void GeneneralConf::exportConfiguration() {
+	QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+							   "flameshot.conf");
+	QFile::copy(ConfigHandler().configFilePath(), fileName);
+}
+
+void GeneneralConf::resetConfiguration() {
+	QMessageBox::StandardButton reply;
+	reply = QMessageBox::question(
+			  this, tr("Confirm Reset"),
+			  tr("Are you sure you want to reset the configuration?"),
+			  QMessageBox::Yes | QMessageBox::No);
+	if (reply == QMessageBox::Yes) {
+		ConfigHandler().setDefaults();
+	}
 }
 
 void GeneneralConf::initShowHelp() {
@@ -89,5 +134,26 @@ void GeneneralConf::initShowTrayIcon() {
     m_layout->addWidget(m_showTray);
 
     connect(m_showTray, &QCheckBox::clicked, this,
-            &GeneneralConf::showTrayIconChanged);
+			&GeneneralConf::showTrayIconChanged);
+}
+
+void GeneneralConf::initConfingButtons() {
+	QHBoxLayout *buttonLayout = new QHBoxLayout();
+	m_layout->addStretch();
+	m_layout->addLayout(buttonLayout);
+
+	m_exportButton = new QPushButton(tr("Export configuration"));
+	buttonLayout->addWidget(m_exportButton);
+	connect(m_exportButton, &QPushButton::clicked, this,
+			&GeneneralConf::exportConfiguration);
+
+	m_importButton = new QPushButton(tr("Import configuration"));
+	buttonLayout->addWidget(m_importButton);
+	connect(m_importButton, &QPushButton::clicked, this,
+			&GeneneralConf::importConfiguration);
+
+	m_resetButton = new QPushButton(tr("Reset configuration"));
+	buttonLayout->addWidget(m_resetButton);
+	connect(m_resetButton, &QPushButton::clicked, this,
+			&GeneneralConf::resetConfiguration);
 }
