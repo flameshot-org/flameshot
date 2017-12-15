@@ -47,10 +47,10 @@ void ButtonListView::initButtonList() {
         // when the background is lighter than gray, it uses the white icons
         QColor bgColor = this->palette().color(QWidget::backgroundRole());
         QString color = bgColor.valueF() < 0.6 ? "White" : "Black";
-        QString iconPath = QString(":/img/buttonIcons%1/%2")
+		QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
                 .arg(color).arg(tool->iconName());
         if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
-            iconPath = QString(":/img/buttonIcons%1/size_indicator.png")
+			iconPath = QStringLiteral(":/img/buttonIcons%1/size_indicator.png")
                     .arg(color);
         }
         m_buttonItem->setIcon(QIcon(iconPath));
