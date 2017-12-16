@@ -27,6 +27,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QTextCodec>
+#include <QGroupBox>
 
 GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     m_layout = new QVBoxLayout(this);
@@ -138,21 +139,25 @@ void GeneneralConf::initShowTrayIcon() {
 }
 
 void GeneneralConf::initConfingButtons() {
+
 	QHBoxLayout *buttonLayout = new QHBoxLayout();
 	m_layout->addStretch();
-	m_layout->addLayout(buttonLayout);
+	QGroupBox *box = new QGroupBox(tr("Configuration File"));
+	box->setFlat(true);
+	box->setLayout(buttonLayout);
+	m_layout->addWidget(box);
 
-	m_exportButton = new QPushButton(tr("Export configuration"));
+	m_exportButton = new QPushButton(tr("Export"));
 	buttonLayout->addWidget(m_exportButton);
 	connect(m_exportButton, &QPushButton::clicked, this,
 			&GeneneralConf::exportConfiguration);
 
-	m_importButton = new QPushButton(tr("Import configuration"));
+	m_importButton = new QPushButton(tr("Import"));
 	buttonLayout->addWidget(m_importButton);
 	connect(m_importButton, &QPushButton::clicked, this,
 			&GeneneralConf::importConfiguration);
 
-	m_resetButton = new QPushButton(tr("Reset configuration"));
+	m_resetButton = new QPushButton(tr("Reset"));
 	buttonLayout->addWidget(m_resetButton);
 	connect(m_resetButton, &QPushButton::clicked, this,
 			&GeneneralConf::resetConfiguration);
