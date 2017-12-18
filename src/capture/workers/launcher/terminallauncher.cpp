@@ -6,18 +6,18 @@
 
 namespace {
 	static const TerminalApp terminalApps[] = {
-		{ "xterm",				 "-e" },
 		{ "x-terminal-emulator", "-e" },
-		{ "aterm",				 "-e" },
-		{ "Eterm",				 "-e" },
-		{ "rxvt",				 "-e" },
-		{ "urxvt",				 "-e" },
 		{ "xfce4-terminal",		 "-x" },
 		{ "konsole",			 "-e" },
 		{ "gnome-terminal",		 "--" },
 		{ "terminator",			 "-e" },
 		{ "terminology",		 "-e" },
 		{ "tilix",				 "-e" },
+		{ "xterm",				 "-e" },
+		{ "aterm",				 "-e" },
+		{ "Eterm",				 "-e" },
+		{ "rxvt",				 "-e" },
+		{ "urxvt",				 "-e" },
 	};
 }
 

@@ -92,7 +92,6 @@ SOURCES += src/main.cpp\
     src/utils/desktopfileparse.cpp \
     src/capture/workers/launcher/launcheritemdelegate.cpp \
     src/capture/tools/blurtool.cpp \
-    src/capture/workers/launcher/moreappswidget.cpp \
     src/capture/workers/launcher/terminallauncher.cpp
 
 HEADERS  += \
@@ -150,7 +149,6 @@ HEADERS  += \
     src/utils/desktopfileparse.h \
     src/capture/workers/launcher/launcheritemdelegate.h \
     src/capture/tools/blurtool.h \
-    src/capture/workers/launcher/moreappswidget.h \
     src/capture/workers/launcher/terminallauncher.h
 
 RESOURCES += \

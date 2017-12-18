@@ -20,9 +20,13 @@
 
 #include "src/utils/desktopfileparse.h"
 #include <QWidget>
+#include <QMap>
 
+class QTabWidget;
 class QCheckBox;
 class QVBoxLayout;
+class QLineEdit;
+class QListWidget;
 
 class AppLauncherWidget: public QWidget
 {
@@ -33,16 +37,26 @@ public:
 private slots:
     void launch(const QModelIndex &index);
     void checkboxClicked(const bool enabled);
+	void searchChanged(const QString &text);
 
 private:
+	void initListWidget();
+	void initAppMap();
+	void configureListView(QListWidget *widget);
+	void addAppsToListWidget(QListWidget *widget,
+							 const QList<DesktopAppData> &appList);
+
 	DesktopFileParser m_parser;
     QPixmap m_pixmap;
     QString m_tempFile;
     bool m_keepOpen;
+	QMap<QString, QList<DesktopAppData>> m_appsMap;
 	QCheckBox *m_keepOpenCheckbox;
 	QCheckBox *m_terminalCheckbox;
 	QVBoxLayout *m_layout;
-
+	QLineEdit *m_lineEdit;
+	QListWidget *m_filterList;
+	QTabWidget *m_tabWidget;
 };
 
 #endif // APPLAUNCHERWIDGET_H
