@@ -252,13 +252,13 @@ void ButtonHandler::updatePosition(const QRect &selection,
 
             if (elemsAtCorners > 1 && !horizontalBlocked && !oneHorizontalBlocked) {
                 addCounter += 2;
-            } else if ((elemsAtCorners == 1 &&
-                        (!horizontalBlocked || oneHorizontalBlocked)) ||
-                        (elemsAtCorners > 1 && oneHorizontalBlocked)) {
+            } else if ((elemsAtCorners >= 1 &&
+                        (!horizontalBlocked || oneHorizontalBlocked))){
                 addCounter += 1;
             }
             QPoint center = QPoint(baseArea.center().x(),
                                    baseArea.top() - (SEPARATION+baseHeight));
+            addCounter = qBound(0, addCounter, vecLength - elemIndicator);
             if (addCounter == 1 + buttonsPerRow) {
                 if (blockedLeft) {
                     center.setX(center.x() + (baseWidth+SEPARATION)/2);
@@ -281,9 +281,6 @@ void ButtonHandler::updatePosition(const QRect &selection,
                     (vecLength - elemIndicator < buttonsPerCol) ?
                       vecLength - elemIndicator : buttonsPerCol;
 
-            if (vecLength - elemIndicator < buttonsPerCol) {
-                addCounter = vecLength - elemIndicator;
-            }
             QPoint center = QPoint(baseArea.left() - (SEPARATION + baseWidth),
                                    baseArea.center().y());
             QVector<QPoint> positions = verticalPoints(center, addCounter, true);
