@@ -159,16 +159,28 @@ You whant to install Flameshot in ~/myBuilds/test. You would execute the followi
 ````
 libqt5dbus5, libqt5network5, libqt5core5a, libqt5widgets5, libqt5gui5
 ````
+Optional:
+```
+openssl, ca-certificates
+```
 
 **Fedora**:
 ````
 qt5-qtbase
 ````
+Optional:
+```
+openssl, ca-certificates
+```
 
 **Arch**:
 ````
 qt5-base
 ````
+Optional:
+```
+openssl, ca-certificates
+```
 
 ## License
 - The main code is licensed under [GPLv3](./LICENSE)
