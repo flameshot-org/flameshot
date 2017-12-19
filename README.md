@@ -92,7 +92,7 @@ Shift + drag a handler of the selection area: mirror redimension in the opposite
 
 ## Considerations
 
-- **Not working on Wayland**
+- Experimental Gnome Wayland and Plasma Wayland support.
 
 - If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/1031/topicons/) extension in order to see the systemtray icon.
 
