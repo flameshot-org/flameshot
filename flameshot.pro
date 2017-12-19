@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-VERSION = 0.5.0-dev
+VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 QT       += core gui
