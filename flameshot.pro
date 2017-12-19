@@ -20,7 +20,25 @@ CONFIG    += link_pkgconfig
 TARGET = flameshot
 TEMPLATE = app
 
-TRANSLATIONS = translation/Internationalization_es.ts
+TRANSLATIONS = translation/Internationalization_es.ts \
+    translation/Internationalization_ca.ts
+
+# Generate translations in build
+TRANSLATIONS_FILES =
+
+qtPrepareTool(LRELEASE, lrelease)
+for(tsfile, TRANSLATIONS) {
+    qmfile = $$shadowed($$tsfile)
+    qmfile ~= s,.ts$,.qm,
+    qmdir = $$dirname(qmfile)
+    !exists($$qmdir) {
+        mkpath($$qmdir)|error("Aborting.")
+    }
+    command = $$LRELEASE -removeidentical $$tsfile -qm $$qmfile
+    system($$command)|error("Failed to run: $$command")
+    TRANSLATIONS_FILES += $$qmfile
+}
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -37,7 +55,7 @@ include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
 
 DEFINES += QAPPLICATION_CLASS=QApplication
 
-SOURCES += src/main.cpp\
+SOURCES += src/main.cpp \
     src/capture/widget/buttonhandler.cpp \
     src/infowindow.cpp \
     src/config/configwindow.cpp \
@@ -165,7 +183,7 @@ unix: {
     target.path = $${BASEDIR}$${USRPATH}/bin/
 
     qmfile.path = $${BASEDIR}/usr/share/flameshot/translations/
-    qmfile.files = translation/Internationalization_es.qm
+    qmfile.files = $${TRANSLATIONS_FILES}
 
     dbus.path = $${BASEDIR}/usr/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
