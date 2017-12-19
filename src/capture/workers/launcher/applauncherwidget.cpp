@@ -95,7 +95,7 @@ void AppLauncherWidget::launch(const QModelIndex &index) {
 		m_tempFile = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
 		bool ok = m_pixmap.save(m_tempFile);
 		if (!ok) {
-			QMessageBox::about(this, tr("Error"), tr("Unable to write in /tmp."));
+            QMessageBox::about(this, tr("Error"), tr("Unable to write in") + "/tmp.");
 			return;
 		}
 	}
