@@ -151,7 +151,7 @@ script:
   - echo "------------- RUN TESTS -------------"
   - make check
   - pwd & ls
-  - mkdir qtdeploy & mv flameshot ./qtdeploy/
+  - mkdir qtdeploy && mv flameshot ./qtdeploy/
   - cp ./qtdeploy/flameshot ./
   - curl --upload-file ./flameshot https://transfer.sh/flameshot
   - cd ./qtdeploy 
