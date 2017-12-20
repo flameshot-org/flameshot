@@ -126,7 +126,7 @@ Compilation: run `qmake && make` in the main directory.
 ### Fedora
 Compilation Dependencies:
 ````
-dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel
+dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory.
@@ -134,7 +134,7 @@ Compilation:  run `qmake-qt5 && make` in the main directory.
 ### Arch
 Compilation Dependencies:
 ````
-pacman -S git qt5-base base-devel
+pacman -S git qt5-base base-devel qt5-tools
 ````
 
 Compilation:  run `qmake && make` in the main directory.
