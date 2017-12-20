@@ -118,7 +118,7 @@ The compilation requires Qt version 5.3 or higher (this is the version that Debi
 ### Debian
 Compilation Dependencies:
 ````
-apt install -y git g++ build-essential qt5-qmake qt5-default
+apt install -y git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
 ````
 
 Compilation: run `qmake && make` in the main directory.
