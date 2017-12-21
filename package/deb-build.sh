@@ -10,6 +10,7 @@ rm -rf .gitkeep
 tar -zcvf build.tar.gz .
 #upload .tar.gz file
 curl --upload-file ./build.tar.gz https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64.tar.gz
+rm -rf ./build.tar.gz
 cd ..
 cd ..
 cd ..
