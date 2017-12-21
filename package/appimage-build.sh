@@ -1,6 +1,7 @@
 #! /bin/bash
 wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-chmod +x linuxdeployqt & ls
+chmod +x linuxdeployqt 
+ls
 pwd & ./linuxdeployqt ./flameshot.AppDir/flameshot
 rm ./linuxdeployqt
 rm -rf ./flameshot.AppDir/doc
