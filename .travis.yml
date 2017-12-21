@@ -61,6 +61,10 @@ addons:
 ###################################### Dependencies
 #-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
       - build-essential
+      - fakeroot
+#      - debhelper 
+#      - qt5-qmake 
+#      - qt5-default
       # XCB/X11 support
       - libfontconfig1-dev
       - libfreetype6-dev
@@ -129,6 +133,8 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
+#  - dpkg-buildpackage -b -rfakeroot -us -uc
+#  - ls
   - echo "------------- SHOW STATS ------------"
   - FLAMESHOT_BUILD_ROOT=build
   - mkdir -p ${FLAMESHOT_BUILD_ROOT}
@@ -151,21 +157,21 @@ script:
   - echo "------------- RUN TESTS -------------"
   - make check
   - pwd & ls
-  - mkdir qtdeploy && mv flameshot ./qtdeploy/
-  - cp ./qtdeploy/flameshot ./
-  - curl --upload-file ./flameshot https://transfer.sh/flameshot
-  - cd ./qtdeploy 
-###################################### linuxqtdepoly
-  - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-  - chmod +x linuxdeployqt & ls
-  - pwd & ./linuxdeployqt ./flameshot
-  - rm ./linuxdeployqt ./AppRun
-  - rm -rf ./doc
-##################################### libQt5XcbQpa.so.5(QT5.9.3) need libxcb-xinerama
-  - cp /usr/lib/x86_64-linux-gnu/libxcb-xinerama.so.0.0.0 ./lib/libxcb-xinerama.so.0
-  - cd .. 
-  - tar -zcvf build.tar.gz ./qtdeploy
-  - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot-build.tar.gz 
+###################################### deb-build
+  - cd ../package
+  - echo "---------------- DEB ----------------"
+  - bash ./deb-build.sh
+  - pwd & ls
+##################################### appimage-build
+  - mv ../build/flameshot ./appimage/flameshot.AppDir/
+  - cp ./appimage/flameshot.AppDir/flameshot ../build/
+# upload single executable file
+  - curl --upload-file ./appimage/flameshot.AppDir/flameshot https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64
+  - cd ./appimage
+  - echo "-------------- APPIMAGE -------------"
+  - bash ../appimage-build.sh
+
+
 
 #notifications:
 #  email:
