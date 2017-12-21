@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=flameshot
+Exec=flameshot
+GenericName=Screenshot software
+Comment=Powerful yet simple screenshot software
+Icon=flameshot
+Type=Application
+Categories=Qt;GNOME;KDE;Graphics;2DGraphics;
+StartupNotify=true
+Terminal=false
+Name[en_US]=flameshot.desktop

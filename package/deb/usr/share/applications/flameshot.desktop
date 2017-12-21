@@ -1,0 +1,17 @@
+[Desktop Entry]
+Name=flameshot
+Comment=Powerful yet simple screenshot software
+Comment[en_CA]=Powerful yet simple screenshot software
+Comment[en_GB]=Powerful yet simple screenshot softwares
+Comment[ja]=強力でシンプルなスクリーンショットソフトウェア
+Comment[ko]=강력하고 간단한 스크린 샷 소프트웨어
+Comment[tr]=Güçlü ve basit ekran görüntüsü yazılımı  
+Comment[zh_CN]=强大而简单的截图软件
+Comment[zh_HK]=強大而簡單的截圖軟件
+Comment[zh_TW]=強大而簡單的截圖軟體                                 
+Exec=/opt/flameshot/flameshot                                    
+Icon=flameshot
+Terminal=false                                                      
+Type=Application
+Categories=Qt;GNOME;KDE;Graphics;2DGraphics;                             
+DBusActivatable=true
