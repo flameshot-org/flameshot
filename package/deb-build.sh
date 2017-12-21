@@ -2,7 +2,8 @@
 cp ../build/flameshot ./deb/opt/flameshot/flameshot
 cd ./deb/opt/flameshot
 wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-chmod +x linuxdeployqt & ls
+chmod +x linuxdeployqt 
+ls
 pwd & ./linuxdeployqt ./flameshot
 rm ./linuxdeployqt ./AppRun
 rm -rf ./doc
