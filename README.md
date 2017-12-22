@@ -108,6 +108,7 @@ There are a packages available for a few distros:
 - [Arch](https://aur.archlinux.org/packages/flameshot/)
 - [Open Suse](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/voidlinux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
+- [Docker](https://github.com/ManuelLR/docker-flameshot)
 
 If you are not using any of these distros you'll need to compile the program :(
 but don't worry, it's pretty easy!
