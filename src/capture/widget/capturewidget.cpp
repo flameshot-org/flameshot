@@ -163,10 +163,11 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     // If we are creating a new modification to the screenshot we just draw
     // a temporal modification without antialiasing in the pencil tool for
     // performance. When we are not drawing we just shot the modified screenshot
-    if (m_mouseIsClicked && m_state != CaptureButton::TYPE_MOVESELECTION) {
+    bool stateIsSelection = m_state == CaptureButton::TYPE_MOVESELECTION;
+    if (m_mouseIsClicked && !stateIsSelection) {
         painter.drawPixmap(0, 0, m_screenshot->paintTemporalModification(
                                m_modifications.last()));
-    } else if (m_toolIsForDrawing) {
+    } else if (m_toolIsForDrawing && !stateIsSelection) {
         CaptureButton::ButtonType type = CaptureButton::ButtonType::TYPE_LINE;
         if (m_state == CaptureButton::ButtonType::TYPE_MARKER) {
             type = CaptureButton::ButtonType::TYPE_MARKER;
