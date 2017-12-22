@@ -185,6 +185,7 @@ script:
   - rm ./linuxdeployqt ./AppRun
   - rm -rf ./doc
   - rm -rf .gitkeep
+  - sleep 3 
   - tar -zcvf build.tar.gz .
 #upload .tar.gz file
   - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64.tar.gz
