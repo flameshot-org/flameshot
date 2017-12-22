@@ -157,10 +157,88 @@ script:
   - echo "------------- RUN TESTS -------------"
   - make check
   - pwd & ls
+###################################### ready for package
+  - cd ..
+  - mkdir -p package/appimage/flameshot.AppDir 
+  - mkdir -p package/deb/DEBIAN 
+  - mkdir -p package/deb/opt/flameshot 
+  - mkdir -p package/deb/usr/share/applications 
+  - mkdir -p package/deb/usr/share/pixmaps
+  - cp ./img/flameshot.png ./package/deb/usr/share/pixmaps
+  - cp ./img/flameshot.png ./package/appimage/flameshot.AppDir
+  - cat >> package/deb/usr/share/applications/flameshot.desktop << EOF
+    [Desktop Entry]
+    Encoding=UTF-8
+    Name=Flameshot
+    Name=Take graphical screenshot
+    Name[es]=Tomar captura gráfica
+    GenericName[es]=Herramienta de captura de pantalla
+    Comment=Powerfull yet simple to use screenshot software.
+    Comment[es]=Potente pero simple de usar software de capturas.
+    Exec=/opt/flameshot/flameshot gui
+    TryExec=/opt/flameshot/flameshot 
+    Icon=flameshot
+    Terminal=false
+    Type=Application
+    Categories=Graphics
+    StartupNotify=false
+    EOF
+  - cat >> package/appimage/flameshot.AppDir/flameshot.desktop << EOF
+    [Desktop Entry]
+    Name=Flameshot
+    Name=Take graphical screenshot
+    Name[es]=Tomar captura gráfica
+    GenericName[es]=Herramienta de captura de pantalla
+    Comment=Powerfull yet simple to use screenshot software.
+    Comment[es]=Potente pero simple de usar software de capturas.
+    Exec=flameshot
+    Icon=flameshot
+    Terminal=false
+    Type=Application
+    Categories=Graphics
+    StartupNotify=false
+    EOF
+
+  - cat >> package/deb/DEBIAN/control << EOF
+    Package: flameshot
+    Version: 0.5.0
+    Architecture: amd64
+    Maintainer: Ahmed Zetao Yang <vitzys@outlook.com>
+    Installed-Size: 54400
+    Depends: libstdc++6, libc6 (>= 2.14), libgcc1, libglib2.0-0, 	libglib2.0-0, libx11-6, libpng12-0, libharfbuzz0b, zlib1g, libgl1-mesa-glx | libgl1, libdbus-1-3, libproxy1v5, libpcre16-3, libffi6, libpcre3, libxcb1, libfreetype6, libgraphite2-3, libxext6, libxau6, libxdmcp6, libselinux1, liblzma5, libgcrypt20, libgpg-error0, libsystemd0, libxcb-xinerama0
+    Recommends: openssl, ca-certificates
+    Section: qt
+    Priority: optional
+    Homepage: https://github.com/lupoDharkael/flameshot
+    Description: Screenshot software
+     Powerful yet simple to use screenshot software for GNU/Linux 
+    EOF
+
 ###################################### deb-build
   - cd ../package
   - echo "---------------- DEB ----------------"
-  - bash ./deb-build.sh
+# Qt libraries and plugins are all in .deb package
+# so flameshot executable file is placed at /opt/flameshot/
+  - cp ../build/flameshot ./deb/opt/flameshot/flameshot
+  - cd ./deb/opt/flameshot
+  - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
+  - chmod +x linuxdeployqt 
+  - ls
+  - pwd & ./linuxdeployqt ./flameshot
+  - rm ./linuxdeployqt ./AppRun
+  - rm -rf ./doc
+  - rm -rf .gitkeep
+  - tar -zcvf build.tar.gz .
+#upload .tar.gz file
+  - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64.tar.gz
+  - rm -rf ./build.tar.gz
+  - cd ..
+  - cd ..
+  - cd ..
+  - ls
+  - dpkg -b deb flameshot_amd64.deb
+  - curl --upload-file ./flameshot_amd64.deb https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64.deb
+
   - pwd & ls
 ##################################### appimage-build
   - mv ../build/flameshot ./appimage/flameshot.AppDir/
@@ -169,7 +247,20 @@ script:
   - curl --upload-file ./appimage/flameshot.AppDir/flameshot https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64
   - cd ./appimage
   - echo "-------------- APPIMAGE -------------"
-  - bash ../appimage-build.sh
+  - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
+  - chmod +x linuxdeployqt 
+  - ls
+  - pwd & ./linuxdeployqt ./flameshot.AppDir/flameshot
+  - rm ./linuxdeployqt
+  - rm -rf ./flameshot.AppDir/doc
+#libQt5XcbQpa.so.5(QT5.9.3) need libxcb-xinerama
+  - cp /usr/lib/x86_64-linux-gnu/libxcb-xinerama.so.0.0.0 ./flameshot.AppDir/lib/libxcb-xinerama.so.0
+  - pwd & ls
+  - wget -c "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -O appimagetool
+  - chmod +x appimagetool & ls
+  - ./appimagetool flameshot.AppDir
+  - ls
+  - curl --upload-file ./flameshot-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d)_.AppImage
 
 
 
