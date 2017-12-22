@@ -99,7 +99,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
     setGeometry(0 ,0 , size.width()+1, size.height()+1);
 
     // create buttons
-    m_buttonHandler = new ButtonHandler(this);
+    m_buttonHandler = new ButtonHandler(rect(), this);
     updateButtons();
     m_buttonHandler->hide();
     // init interface color
@@ -344,12 +344,12 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         // drawing with a tool
         m_modifications.last()->addPoint(e->pos());
         update();
-        // hides the group of buttons under the mouse, if you leave
+        // Hides the buttons under the mouse. If the mouse leaves, it shows them.
         if (m_buttonHandler->buttonsAreInside()) {
-            bool containsMouse = m_buttonHandler->contains(m_mousePos);
+            const bool containsMouse = m_buttonHandler->contains(m_mousePos);
             if (containsMouse) {
-                m_buttonHandler->hideSectionUnderMouse(e->pos());
-            } else if (m_buttonHandler->isPartiallyHidden()) {
+                m_buttonHandler->hide();
+            } else {
                 m_buttonHandler->show();
             }
         }
@@ -387,7 +387,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
 
     if (!m_buttonHandler->isVisible() && !m_selection.isNull()) {
         updateSizeIndicator();
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
         m_buttonHandler->show();
     }
     m_mouseIsClicked = false;
@@ -403,25 +403,25 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
     } else if (e->key() == Qt::Key_Up
                && m_selection.top() > rect().top()) {
         m_selection.moveTop(m_selection.top()-1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
 		updateHandles();
         update();
     } else if (e->key() == Qt::Key_Down
                && m_selection.bottom() < rect().bottom()) {
         m_selection.moveBottom(m_selection.bottom()+1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
 		updateHandles();
         update();
     } else if (e->key() == Qt::Key_Left
                && m_selection.left() > rect().left()) {
         m_selection.moveLeft(m_selection.left()-1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
 		updateHandles();
         update();
     } else if (e->key() == Qt::Key_Right
                && m_selection.right() < rect().right()) {
         m_selection.moveRight(m_selection.right()+1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
 		updateHandles();
         update();
     }
@@ -518,7 +518,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
 void CaptureWidget::leftResize() {
     if (!m_selection.isNull() && m_selection.right() > m_selection.left()) {
         m_selection.setRight(m_selection.right()-1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
         update();
@@ -528,7 +528,7 @@ void CaptureWidget::leftResize() {
 void CaptureWidget::rightResize() {
     if (!m_selection.isNull() && m_selection.right() < rect().right()) {
         m_selection.setRight(m_selection.right()+1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
         update();
@@ -538,7 +538,7 @@ void CaptureWidget::rightResize() {
 void CaptureWidget::upResize() {
     if (!m_selection.isNull() && m_selection.bottom() > m_selection.top()) {
         m_selection.setBottom(m_selection.bottom()-1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
         update();
@@ -548,7 +548,7 @@ void CaptureWidget::upResize() {
 void CaptureWidget::downResize() {
     if (!m_selection.isNull() && m_selection.bottom() < rect().bottom()) {
         m_selection.setBottom(m_selection.bottom()+1);
-        m_buttonHandler->updatePosition(m_selection, rect());
+        m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
         update();
