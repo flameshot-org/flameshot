@@ -184,12 +184,6 @@ script:
   - pwd & ./linuxdeployqt ./flameshot
   - rm ./linuxdeployqt ./AppRun
   - rm -rf ./doc
-  - rm -rf .gitkeep
-  - sleep 3 
-  - tar -zcvf build.tar.gz .
-#upload .tar.gz file
-  - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64.tar.gz
-  - rm -rf ./build.tar.gz
   - cd ..
   - cd ..
   - cd ..
@@ -218,7 +212,7 @@ script:
   - chmod +x appimagetool & ls
   - ./appimagetool flameshot.AppDir
   - ls
-  - curl --upload-file ./flameshot-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d).AppImage
+  - curl --upload-file ./Flameshot-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d).AppImage
 
 
 
