@@ -65,6 +65,7 @@ addons:
       - debhelper 
       - qt5-qmake 
       - qt5-default
+      - qttools5-dev-tools
       # XCB/X11 support
       - libfontconfig1-dev
       - libfreetype6-dev
