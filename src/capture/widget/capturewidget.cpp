@@ -466,6 +466,7 @@ void CaptureWidget::setState(CaptureButton *b) {
         } else {
             handleButtonSignal(CaptureTool::REQ_MOVE_MODE);
         }
+        update(); // clear mouse preview
     }
 }
 
