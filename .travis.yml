@@ -61,11 +61,11 @@ addons:
 ###################################### Dependencies
 #-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
       - build-essential
-      - fakeroot
-      - debhelper 
-      - qt5-qmake 
-      - qt5-default
-      - qttools5-dev-tools
+#      - fakeroot
+#      - debhelper 
+#      - qt5-qmake 
+#      - qt5-default
+#      - qttools5-dev-tools
       # XCB/X11 support
       - libfontconfig1-dev
       - libfreetype6-dev
@@ -134,8 +134,8 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - dpkg-buildpackage -b -rfakeroot -us -uc
-  - ls
+#  - dpkg-buildpackage -b -rfakeroot -us -uc
+#  - ls
   - echo "------------- SHOW STATS ------------"
   - FLAMESHOT_BUILD_ROOT=build
   - mkdir -p ${FLAMESHOT_BUILD_ROOT}
@@ -172,7 +172,7 @@ script:
   - bash scripts/deb_control_gen.sh
 
 ###################################### deb-build
-  - cd ../package
+  - cd ./package
   - echo "---------------- DEB ----------------"
 # Qt libraries and plugins are all in .deb package
 # so flameshot executable file is placed at /opt/flameshot/
