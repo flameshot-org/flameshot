@@ -2,8 +2,6 @@
 cat >> package/appimage/flameshot.AppDir/flameshot.desktop << EOF
 [Desktop Entry]
 Name=Flameshot
-Name=Take graphical screenshot
-Name[es]=Tomar captura gráfica
 GenericName=Screen capture tool
 GenericName[es]=Herramienta de captura de pantalla
 Comment=Powerfull yet simple to use screenshot software.
