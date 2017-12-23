@@ -36,9 +36,8 @@ bool DesktopInfo::waylandDectected() {
 
 DesktopInfo::WM DesktopInfo::windowManager() {
     DesktopInfo::WM res = DesktopInfo::OTHER;
-    if (XDG_CURRENT_DESKTOP == "GNOME" ||
-            (!GNOME_DESKTOP_SESSION_ID.isEmpty() &&
-             "this-is-deprecated" != GNOME_DESKTOP_SESSION_ID) ||
+    if (XDG_CURRENT_DESKTOP.contains("GNOME", Qt::CaseInsensitive) ||
+            !GNOME_DESKTOP_SESSION_ID.isEmpty() ||
             QString::compare("GNOME", GDMSESSION, Qt::CaseInsensitive) == 0 ||
             GDMSESSION == "gnome-shell" ||
             GDMSESSION == "gnome-classic" ||
