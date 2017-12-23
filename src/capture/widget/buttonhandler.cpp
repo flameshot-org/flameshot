@@ -25,7 +25,8 @@ namespace {
     const int SEPARATION = 6;
 }
 
-ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v, const QRect &limits, QObject *parent) :
+ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v,
+                             const QRect &limits, QObject *parent) :
     QObject(parent), m_limits(limits)
 {
     setButtons(v);
@@ -68,7 +69,7 @@ size_t ButtonHandler::size() const {
     return m_vectorButtons.size();
 }
 
-// updatePosition updates the position of the buttons arround the
+// UpdatePosition updates the position of the buttons arround the
 // selection area. Ignores the sides blocked by the end of the screen.
 // When the selection is too small it works on a virtual selection with
 // the original in the center.
@@ -78,152 +79,99 @@ void ButtonHandler::updatePosition(const QRect &selection) {
     if (vecLength == 0) {
         return;
     }
-
-    // copy of the selection area for internal modifications
+    // Copy of the selection area for internal modifications
     m_selection = selection;
-
-    // detect if a side is smaller than a button in order to prevent collision
-    // and redimension the base area the the base size of a single button per side
-    if (m_selection.width() < m_buttonBaseSize) {
-        if (m_blockedRight && !m_blockedLeft) {
-            m_selection.setX(m_selection.x() - (m_buttonBaseSize-m_selection.width()));
-        } else if (!m_blockedLeft && !m_blockedRight) {
-            // when not close to the left side (because the rect grows to the right)
-            m_selection.setX(m_selection.x() - (m_buttonBaseSize-m_selection.width()) / 2);
-        }
-        m_selection.setWidth(m_buttonBaseSize);
-    }
-    if (m_selection.height() < m_buttonBaseSize) {
-        if (m_blockedBotton && !m_blockedTop) {
-            m_selection.setY(m_selection.y() - (m_buttonBaseSize-m_selection.height()));
-        } else if (!m_blockedTop && !m_blockedBotton) {
-            // when not close to the top (because the rect grows to the bottom)
-            m_selection.setY(m_selection.y() - (m_buttonBaseSize-m_selection.height()) / 2);
-        }
-        m_selection.setHeight(m_buttonBaseSize);
-    }
-    // indicates the actual button to be moved
+    ensureSelectionMinimunSize();
+    // Indicates the actual button to be moved
     int elemIndicator = 0;
 
     while (elemIndicator < vecLength) {
         updateBlockedSides();
 
-        // add them inside the area when there is no more space
+        // Add them inside the area when there is no more space
         if (m_allSidesBlocked) {
             positionButtonsInside(elemIndicator);
             break; // the while
         }
-        // number of buttons per row column
+        // Number of buttons per row column
         int buttonsPerRow = (m_selection.width() + SEPARATION) / (m_buttonExtendedSize);
         int buttonsPerCol = (m_selection.height() + SEPARATION) / (m_buttonExtendedSize);
-        // buttons to be placed in the corners
-        int extraButtons = vecLength - buttonsPerRow*2 - buttonsPerCol*2;
+        // Buttons to be placed in the corners
+        int extraButtons = (vecLength - elemIndicator) -
+                (buttonsPerRow + buttonsPerCol) * 2;
         int elemsAtCorners = extraButtons > 4 ? 4 : extraButtons;
-        // add buttons at the botton of the seletion
+        int maxExtra = 2;
+        if (m_oneHorizontalBlocked) {
+            maxExtra = 1;
+        } else if (m_horizontalyBlocked) {
+            maxExtra = 0;
+        }
+        int elemCornersTop = qBound(0, elemsAtCorners, maxExtra);
+        elemsAtCorners -= elemCornersTop;
+        int elemCornersBotton = qBound(0, elemsAtCorners, maxExtra);
+
+        // Add buttons at the botton of the seletion
         if (!m_blockedBotton) {
-            int addCounter =
-                    (vecLength - elemIndicator < buttonsPerRow) ?
-                      vecLength - elemIndicator : buttonsPerRow;
-            if (elemsAtCorners > 2) {
-                int temp = elemsAtCorners - 2;
-                if (m_oneHorizontalBlocked && temp > 1) {
-                    temp -= 1;
-                }
-                addCounter += temp;
-            }
+            int addCounter = buttonsPerRow + elemCornersBotton;
+            // Don't add more than we have
+            addCounter = qBound(0, addCounter, vecLength - elemIndicator);
             QPoint center = QPoint(m_selection.center().x(),
                                    m_selection.bottom() + SEPARATION);
             if (addCounter > buttonsPerRow) {
-                if (m_blockedLeft) {
-                    center.setX(center.x() + m_buttonExtendedSize/2);
-                } else if (m_blockedRight) {
-                    center.setX(center.x() - m_buttonExtendedSize/2);
-                }
+                adjustHorizontalCenter(center);
             }
-            // elemIndicator, elemsAtCorners
+            // ElemIndicator, elemsAtCorners
             QVector<QPoint> positions = horizontalPoints(center, addCounter, true);
-            for (const QPoint &p: positions) {
-                auto button = m_vectorButtons[elemIndicator];
-                button->move(p);
-                ++elemIndicator;
-            }
+            moveButtonsToPoints(positions, elemIndicator);
         }
-        // add buttons at the right side of the seletion
+        // Add buttons at the right side of the seletion
         if (!m_blockedRight && elemIndicator < vecLength) {
-            int addCounter =
-                    (vecLength - elemIndicator < buttonsPerCol) ?
-                      vecLength - elemIndicator : buttonsPerCol;
+            int addCounter = buttonsPerCol;
+            addCounter = qBound(0, addCounter, vecLength - elemIndicator);
 
             QPoint center = QPoint(m_selection.right() + SEPARATION,
                                    m_selection.center().y());
             QVector<QPoint> positions = verticalPoints(center, addCounter, false);
-            for (const QPoint &p: positions) {
-                auto button = m_vectorButtons[elemIndicator];
-                button->move(p);
-                ++elemIndicator;
-            }
+            moveButtonsToPoints(positions, elemIndicator);
         }
-        // add buttons at the top of the seletion
+        // Add buttons at the top of the seletion
         if (!m_blockedTop && elemIndicator < vecLength) {
-            int addCounter =
-                    (vecLength - elemIndicator < buttonsPerRow) ?
-                      vecLength - elemIndicator : buttonsPerRow;
-
-            if (elemsAtCorners > 1 && !m_horizontalyBlocked && !m_oneHorizontalBlocked) {
-                addCounter += 2;
-            } else if ((elemsAtCorners >= 1 &&
-                        (!m_horizontalyBlocked || m_oneHorizontalBlocked))){
-                addCounter += 1;
-            }
+            int addCounter = buttonsPerRow + elemCornersTop;
+            addCounter = qBound(0, addCounter, vecLength - elemIndicator);
             QPoint center = QPoint(m_selection.center().x(),
                                    m_selection.top() - m_buttonExtendedSize);
-            addCounter = qBound(0, addCounter, vecLength - elemIndicator);
             if (addCounter == 1 + buttonsPerRow) {
-                if (m_blockedLeft) {
-                    center.setX(center.x() + m_buttonExtendedSize/2);
-                } else if (m_blockedRight) {
-                    center.setX(center.x() - m_buttonExtendedSize/2);
-                }
+                adjustHorizontalCenter(center);
             }
             QVector<QPoint> positions = horizontalPoints(center, addCounter, false);
-            for (const QPoint &p: positions) {
-                auto button = m_vectorButtons[elemIndicator];
-                button->move(p);
-                ++elemIndicator;
-            }
+            moveButtonsToPoints(positions, elemIndicator);
         }
-        // add buttons at the left side of the seletion
+        // Add buttons at the left side of the seletion
         if (!m_blockedLeft && elemIndicator < vecLength) {
-            int addCounter =
-                    (vecLength - elemIndicator < buttonsPerCol) ?
-                      vecLength - elemIndicator : buttonsPerCol;
+            int addCounter = buttonsPerCol;
+            addCounter = qBound(0, addCounter, vecLength - elemIndicator);
 
             QPoint center = QPoint(m_selection.left() - m_buttonExtendedSize,
                                    m_selection.center().y());
             QVector<QPoint> positions = verticalPoints(center, addCounter, true);
-            for (const QPoint &p: positions) {
-                auto button = m_vectorButtons[elemIndicator];
-                button->move(p);
-                ++elemIndicator;
-            }
+            moveButtonsToPoints(positions, elemIndicator);
         }
-        // if there are elements for the next cycle, increase the size of the base area
-        if (elemIndicator < vecLength &&
-                !(m_allSidesBlocked))
-        {
+        // If there are elements for the next cycle, increase the size of the
+        // base area
+        if (elemIndicator < vecLength && !(m_allSidesBlocked)) {
             expandSelection();
         }
     }
 }
 
-// getHPoints is an auxiliar method for the button position computation.
+// GetHPoints is an auxiliar method for the button position computation.
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::horizontalPoints(
         const QPoint &center, const int elements, const bool leftToRight) const
 {
     QVector<QPoint> res;
-    // distance from the center to start adding buttons
+    // Distance from the center to start adding buttons
     int shift = 0;
     if (elements % 2 == 0) {
         shift = m_buttonExtendedSize * (elements / 2) - (SEPARATION / 2);
@@ -249,7 +197,7 @@ QVector<QPoint> ButtonHandler::verticalPoints(
         const QPoint &center, const int elements, const bool upToDown) const
 {
     QVector<QPoint> res;
-    // distance from the center to start adding buttons
+    // Distance from the center to start adding buttons
     int shift = 0;
     if (elements % 2 == 0) {
         shift = m_buttonExtendedSize * (elements / 2) - (SEPARATION / 2);
@@ -321,6 +269,47 @@ void ButtonHandler::positionButtonsInside(int index) {
         xPos += (m_buttonExtendedSize);
     }
     m_buttonsAreInside = true;
+}
+
+void ButtonHandler::ensureSelectionMinimunSize() {
+    // Detect if a side is smaller than a button in order to prevent collision
+    // and redimension the base area the the base size of a single button per side
+    if (m_selection.width() < m_buttonBaseSize) {
+        if (m_blockedRight && !m_blockedLeft) {
+            m_selection.setX(m_selection.x() - (m_buttonBaseSize-m_selection.width()));
+        } else if (!m_blockedLeft && !m_blockedRight) {
+            // When not close to the left side (because the rect grows to the right)
+            m_selection.setX(m_selection.x() - (m_buttonBaseSize-m_selection.width()) / 2);
+        }
+        m_selection.setWidth(m_buttonBaseSize);
+    }
+    if (m_selection.height() < m_buttonBaseSize) {
+        if (m_blockedBotton && !m_blockedTop) {
+            m_selection.setY(m_selection.y() - (m_buttonBaseSize-m_selection.height()));
+        } else if (!m_blockedTop && !m_blockedBotton) {
+            // When not close to the top (because the rect grows to the bottom)
+            m_selection.setY(m_selection.y() - (m_buttonBaseSize-m_selection.height()) / 2);
+        }
+        m_selection.setHeight(m_buttonBaseSize);
+    }
+}
+
+void ButtonHandler::moveButtonsToPoints(
+        const QVector<QPoint> &points, int &index)
+{
+    for (const QPoint &p: points) {
+        auto button = m_vectorButtons[index];
+        button->move(p);
+        ++index;
+    }
+}
+
+void ButtonHandler::adjustHorizontalCenter(QPoint &center) {
+    if (m_blockedLeft) {
+        center.setX(center.x() + m_buttonExtendedSize/2);
+    } else if (m_blockedRight) {
+        center.setX(center.x() - m_buttonExtendedSize/2);
+    }
 }
 
 // setButtons redefines the buttons of the button handler
