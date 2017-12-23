@@ -195,20 +195,20 @@ unix: {
     completion.files = docs/bash-completion/flameshot
 
     desktopentry.path = $${BASEDIR}$${USRPATH}/share/applications
-    desktopentryinit.path = $${BASEDIR}$${USRPATH}/share/applications
-    desktopentryconfig.path = $${BASEDIR}$${USRPATH}/share/applications
-    servicedbus.path = $${BASEDIR}/usr/share/dbus-1/services/
+    desktopentry.files = docs/desktopEntry/package/flameshot.desktop
 
+    desktopentryinit.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentryinit.files = docs/desktopEntry/package/flameshot-init.desktop
+
+    desktopentryconfig.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentryconfig.files = docs/desktopEntry/package/flameshot-config.desktop
+
+    servicedbus.path = $${BASEDIR}/usr/share/dbus-1/services/
     packaging {
-        desktopentry.files = docs/desktopEntry/package/flameshot.desktop
-        desktopentryinit.files = docs/desktopEntry/package/flameshot-init.desktop
-        desktopentryconfig.files = docs/desktopEntry/package/flameshot-config.desktop
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
     } else {
-        desktopentry.files = docs/desktopEntry/make/flameshot.desktop
-        desktopentryinit.files = docs/desktopEntry/make/flameshot-init.desktop
-        desktopentryconfig.files = docs/desktopEntry/make/flameshot-config.desktop
-        servicedbus.files = dbus/make/org.dharkael.Flameshot.service
+        $$system(cd $$OUT_PWD && bash $$PWD/dbus/other-path/service-gen.sh /usr/local/bin)
+        servicedbus.files = org.dharkael.Flameshot.service
     }
 
     INSTALLS += target \
