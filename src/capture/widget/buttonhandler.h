@@ -74,6 +74,9 @@ private:
     void updateBlockedSides();
     void expandSelection();
     void positionButtonsInside(int index);
+    void ensureSelectionMinimunSize();
+    void moveButtonsToPoints(const QVector<QPoint> &points, int &index);
+    void adjustHorizontalCenter(QPoint &center);
 
 };
 
