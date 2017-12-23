@@ -11,5 +11,5 @@ Exec=flameshot
 Icon=flameshot
 Terminal=false
 Type=Application
-Categories=Graphics
+Categories=Graphics;
 StartupNotify=false
