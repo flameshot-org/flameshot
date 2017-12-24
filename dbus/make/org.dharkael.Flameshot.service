@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.dharkael.Flameshot
+Exec=/usr/local/bin/flameshot

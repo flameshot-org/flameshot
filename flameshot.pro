@@ -20,8 +20,17 @@ CONFIG    += link_pkgconfig
 TARGET = flameshot
 TEMPLATE = app
 
+#release: DESTDIR = build/release
+#debug:   DESTDIR = build/debug
+
+#OBJECTS_DIR = $$DESTDIR/.obj
+#MOC_DIR = $$DESTDIR/.moc
+#RCC_DIR = $$DESTDIR/.qrc
+#UI_DIR = $$DESTDIR/.ui
+
 TRANSLATIONS = translation/Internationalization_es.ts \
-    translation/Internationalization_ca.ts
+    translation/Internationalization_ca.ts \
+    translation/Internationalization_ru.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
@@ -38,7 +47,6 @@ for(tsfile, TRANSLATIONS) {
     system($$command)|error("Failed to run: $$command")
     TRANSLATIONS_FILES += $$qmfile
 }
-
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -207,8 +215,7 @@ unix: {
     packaging {
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
     } else {
-        $$system(cd $$OUT_PWD && bash $$PWD/dbus/other-path/service-gen.sh /usr/local/bin)
-        servicedbus.files = org.dharkael.Flameshot.service
+        servicedbus.files = dbus/make/org.dharkael.Flameshot.service
     }
 
     INSTALLS += target \
