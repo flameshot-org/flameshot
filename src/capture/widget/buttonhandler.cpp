@@ -81,12 +81,12 @@ void ButtonHandler::updatePosition(const QRect &selection) {
     }
     // Copy of the selection area for internal modifications
     m_selection = selection;
+    updateBlockedSides();
     ensureSelectionMinimunSize();
     // Indicates the actual button to be moved
     int elemIndicator = 0;
 
     while (elemIndicator < vecLength) {
-        updateBlockedSides();
 
         // Add them inside the area when there is no more space
         if (m_allSidesBlocked) {
@@ -161,6 +161,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
         if (elemIndicator < vecLength && !(m_allSidesBlocked)) {
             expandSelection();
         }
+        updateBlockedSides();
     }
 }
 
@@ -275,20 +276,16 @@ void ButtonHandler::ensureSelectionMinimunSize() {
     // Detect if a side is smaller than a button in order to prevent collision
     // and redimension the base area the the base size of a single button per side
     if (m_selection.width() < m_buttonBaseSize) {
-        if (m_blockedRight && !m_blockedLeft) {
-            m_selection.setX(m_selection.x() - (m_buttonBaseSize-m_selection.width()));
-        } else if (!m_blockedLeft && !m_blockedRight) {
-            // When not close to the left side (because the rect grows to the right)
-            m_selection.setX(m_selection.x() - (m_buttonBaseSize-m_selection.width()) / 2);
+        if (!m_blockedLeft) {
+            m_selection.setX(m_selection.x() -
+                             (m_buttonBaseSize-m_selection.width()) / 2);
         }
         m_selection.setWidth(m_buttonBaseSize);
     }
     if (m_selection.height() < m_buttonBaseSize) {
-        if (m_blockedBotton && !m_blockedTop) {
-            m_selection.setY(m_selection.y() - (m_buttonBaseSize-m_selection.height()));
-        } else if (!m_blockedTop && !m_blockedBotton) {
-            // When not close to the top (because the rect grows to the bottom)
-            m_selection.setY(m_selection.y() - (m_buttonBaseSize-m_selection.height()) / 2);
+        if (!m_blockedTop) {
+            m_selection.setY(m_selection.y() -
+                             (m_buttonBaseSize-m_selection.height()) / 2);
         }
         m_selection.setHeight(m_buttonBaseSize);
     }
