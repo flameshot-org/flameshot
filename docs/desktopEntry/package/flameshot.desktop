@@ -1,7 +1,6 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Encoding=UTF-8
-Name=Flameshot
 Name=Take graphical screenshot
 Name[es]=Tomar captura gráfica
 GenericName[es]=Herramienta de captura de pantalla
