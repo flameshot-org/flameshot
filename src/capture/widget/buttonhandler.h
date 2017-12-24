@@ -29,17 +29,16 @@ class QPoint;
 class ButtonHandler : public QObject {
     Q_OBJECT
 public:
-    ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
-    ButtonHandler(QObject *parent = nullptr);
+    ButtonHandler(const QVector<CaptureButton*>&, const QRect &limits, QObject *parent = nullptr);
+    ButtonHandler(const QRect &limits, QObject *parent = nullptr);
 
     void hideSectionUnderMouse(const QPoint &p);
 
     bool isVisible() const;
-    bool isPartiallyHidden() const;
     bool buttonsAreInside() const;
     size_t size() const;
 
-    void updatePosition(const QRect &selection, const QRect &limits);
+    void updatePosition(const QRect &selection);
     void setButtons(const QVector<CaptureButton*>);
     bool contains(const QPoint &p) const;
 
@@ -55,32 +54,29 @@ private:
 
     QVector<CaptureButton*> m_vectorButtons;
 
-    QVector<CaptureButton*> m_topButtons;
-    QVector<CaptureButton*> m_bottonButtons;
-    QVector<CaptureButton*> m_leftButtons;
-    QVector<CaptureButton*> m_rightButtons;
-    QVector<CaptureButton*> m_insideButtons;
-    QVector<CaptureButton*> * m_hiddenButtonVector;
-
-    QRegion m_topRegion;
-    QRegion m_bottonRegion;
-    QRegion m_leftRegion;
-    QRegion m_rightRegion;
-    QRegion m_insideRegion;
-
-    bool m_isPartiallyHidden;
-
-    enum side {
-        TOP, LEFT, BOTTON, RIGHT, INSIDE, NONE
-    };
-
-    int m_distance;
+    int m_buttonExtendedSize;
     int m_buttonBaseSize;
+
     bool m_buttonsAreInside;
+    bool m_blockedRight;
+    bool m_blockedLeft;
+    bool m_blockedBotton;
+    bool m_blockedTop;
+    bool m_oneHorizontalBlocked;
+    bool m_horizontalyBlocked;
+    bool m_allSidesBlocked;
+
+    QRect m_limits;
+    QRect m_selection;
 
     // aux methods
-    void addToRegion(const QVector<QPoint> &points, const side s);
     void resetRegionTrack();
+    void updateBlockedSides();
+    void expandSelection();
+    void positionButtonsInside(int index);
+    void ensureSelectionMinimunSize();
+    void moveButtonsToPoints(const QVector<QPoint> &points, int &index);
+    void adjustHorizontalCenter(QPoint &center);
 
 };
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Encoding=UTF-8
 Name=Configure Flameshot
@@ -6,9 +7,8 @@ GenericName=Screenshot tool
 GenericName[es]=Herramienta de captura de pantalla
 Comment=Powerfull yet simple to use screenshot software.
 Comment[es]=Potente pero simple de usar software de capturas.
-Exec=/usr/bin/flameshot config
-TryExec=/usr/bin/flameshot
-Icon=/usr/share/icons/flameshot.png
+Exec=flameshot config
+Icon=flameshot
 Terminal=false
 Type=Application
-Categories=Graphics
+Categories=Graphics;

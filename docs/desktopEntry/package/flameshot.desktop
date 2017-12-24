@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Encoding=UTF-8
 Name=Flameshot
@@ -6,10 +7,9 @@ Name[es]=Tomar captura gráfica
 GenericName[es]=Herramienta de captura de pantalla
 Comment=Powerfull yet simple to use screenshot software.
 Comment[es]=Potente pero simple de usar software de capturas.
-Exec=/usr/bin/flameshot gui
-TryExec=/usr/bin/flameshot
-Icon=/usr/share/icons/flameshot.png
+Exec=flameshot gui
+Icon=flameshot
 Terminal=false
 Type=Application
-Categories=Graphics
+Categories=Graphics;
 StartupNotify=false
