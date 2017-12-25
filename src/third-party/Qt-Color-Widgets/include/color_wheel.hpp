@@ -22,8 +22,6 @@
 #ifndef COLOR_WHEEL_HPP
 #define COLOR_WHEEL_HPP
 
-#include "colorwidgets_global.hpp"
-
 #include <QWidget>
 
 namespace color_widgets {
@@ -34,7 +32,7 @@ namespace color_widgets {
  * It has an outer wheel to select the Hue and an intenal square to select
  * Saturation and Lightness.
  */
-class QCP_EXPORT ColorWheel : public QWidget
+class ColorWheel : public QWidget
 {
     Q_OBJECT
 
