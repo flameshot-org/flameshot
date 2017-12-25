@@ -172,6 +172,7 @@ script:
 #  - bash scripts/appimage_desktop_gen.sh
   - cp ./docs/desktopEntry/package/flameshot-init.desktop ./package/appimage/flameshot.AppDir
 #  - bash scripts/deb_control_gen.sh
+  - touch package/deb/DEBIAN/control
   - echo "Package: flameshot" >> package/deb/DEBIAN/control
   - echo "Version: 0.5.0-0" >> package/deb/DEBIAN/control
   - echo "Architecture: amd64" >> package/deb/DEBIAN/control 
