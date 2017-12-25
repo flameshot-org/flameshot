@@ -226,7 +226,7 @@ script:
   - chmod +x appimagetool & ls
   - ./appimagetool flameshot.AppDir
   - ls
-  - curl --upload-file ./Flameshot-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d).AppImage
+  - curl --upload-file ./*-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d).AppImage
 
 
 
