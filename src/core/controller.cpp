@@ -147,6 +147,6 @@ void Controller::sendTrayNotification(
 
 void Controller::updateConfigComponents() {
     if (m_configWindow) {
-        m_configWindow->updateComponents();
+        m_configWindow->updateChildren();
     }
 }

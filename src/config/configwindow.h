@@ -31,9 +31,6 @@ class ConfigWindow : public QTabWidget {
 public:
     explicit ConfigWindow(QWidget *parent = nullptr);
 
-public slots:
-    void updateComponents();
-
 signals:
     void updateChildren();
 
