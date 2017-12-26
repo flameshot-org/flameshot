@@ -202,7 +202,7 @@ deploy:
 #set environment variable GITHUB_OAUTH_TOKEN on travis-ci project #setting page
   api_key: "${GITHUB_OAUTH_TOKEN}"
   file_glob: true
-  file: "/package/appimage/flameshot-x86_64.AppImage"
+  file: "/home/travis/build/*/flameshot/package/appimage/flameshot-x86_64.AppImage"
   skip_cleanup: true
   on:
     tags: true
