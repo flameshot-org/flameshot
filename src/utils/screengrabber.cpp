@@ -22,15 +22,19 @@
 #include <QGuiApplication>
 #include <QApplication>
 #include <QDesktopWidget>
+
+#ifdef Q_OS_LINUX
 #include <QDBusInterface>
 #include <QDBusReply>
+#endif
 
 ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 
 }
 
 QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
-    ok = true; // revisit later
+    ok = true;
+#ifdef Q_OS_LINUX
     if(m_info.waylandDectected()) {
         QPixmap res;
 		// handle screenshot based on DE
@@ -62,6 +66,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
         }
         return res;
     }
+#endif
+
     QRect geometry;
     for (QScreen *const screen : QGuiApplication::screens()) {
         geometry = geometry.united(screen->geometry());
