@@ -42,8 +42,10 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
 void GeneneralConf::updateComponents() {
     ConfigHandler config;
     m_helpMessage->setChecked(config.showHelpValue());
-    m_showTray->setChecked(!config.disabledTrayIconValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
+#ifdef Q_OS_LINUX
+    m_showTray->setChecked(!config.disabledTrayIconValue());
+#endif
 }
 
 void GeneneralConf::showHelpChanged(bool checked) {
@@ -127,6 +129,7 @@ void GeneneralConf::initShowDesktopNotification() {
 }
 
 void GeneneralConf::initShowTrayIcon() {
+#ifdef Q_OS_LINUX
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
     ConfigHandler config;
     bool checked = !config.disabledTrayIconValue();
@@ -136,6 +139,7 @@ void GeneneralConf::initShowTrayIcon() {
 
     connect(m_showTray, &QCheckBox::clicked, this,
 			&GeneneralConf::showTrayIconChanged);
+#endif
 }
 
 void GeneneralConf::initConfingButtons() {

@@ -7,8 +7,11 @@
 VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
-QT       += core gui
-QT       += dbus
+QT  += core gui
+
+unix:!macx {
+    QT  += dbus
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -74,7 +77,6 @@ SOURCES += src/main.cpp \
     src/config/buttonlistview.cpp \
     src/config/uicoloreditor.cpp \
     src/config/geneneralconf.cpp \
-    src/core/flameshotdbusadapter.cpp \
     src/core/controller.cpp \
     src/config/clickablelabel.cpp \
     src/config/filenameeditor.cpp \
@@ -112,7 +114,6 @@ SOURCES += src/main.cpp \
     src/core/resourceexporter.cpp \
     src/capture/widget/notifierbox.cpp \
     src/utils/desktopinfo.cpp \
-    src/utils/dbusutils.cpp \
     src/capture/workers/launcher/applauncherwidget.cpp \
     src/capture/tools/applauncher.cpp \
     src/utils/desktopfileparse.cpp \
@@ -120,8 +121,7 @@ SOURCES += src/main.cpp \
     src/capture/tools/blurtool.cpp \
     src/capture/workers/launcher/terminallauncher.cpp
 
-HEADERS  += \
-    src/capture/widget/buttonhandler.h \
+HEADERS  += src/capture/widget/buttonhandler.h \
     src/infowindow.h \
     src/config/configwindow.h \
     src/capture/screenshot.h \
@@ -131,7 +131,6 @@ HEADERS  += \
     src/config/buttonlistview.h \
     src/config/uicoloreditor.h \
     src/config/geneneralconf.h \
-    src/core/flameshotdbusadapter.h \
     src/config/clickablelabel.h \
     src/config/filenameeditor.h \
     src/utils/filenamehandler.h \
@@ -169,7 +168,6 @@ HEADERS  += \
     src/core/resourceexporter.h \
     src/capture/widget/notifierbox.h \
     src/utils/desktopinfo.h \
-    src/utils/dbusutils.h \
     src/capture/workers/launcher/applauncherwidget.h \
     src/capture/tools/applauncher.h \
     src/utils/desktopfileparse.h \
@@ -177,11 +175,19 @@ HEADERS  += \
     src/capture/tools/blurtool.h \
     src/capture/workers/launcher/terminallauncher.h
 
+unix:!macx {
+    SOURCES += src/core/flameshotdbusadapter.cpp \
+        src/utils/dbusutils.cpp
+
+    HEADERS  += src/core/flameshotdbusadapter.h \
+        src/utils/dbusutils.h
+}
+
 RESOURCES += \
     graphics.qrc
 
 # installs
-unix: {
+unix:!macx {
     packaging {
         USRPATH = /usr
     } else {

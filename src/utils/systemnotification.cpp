@@ -1,10 +1,16 @@
 #include "systemnotification.h"
 #include "src/utils/confighandler.h"
+#include <QApplication>
+
+#ifndef Q_OS_WIN
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusInterface>
-#include <QApplication>
+#else
+#endif
+#include "src/core/controller.h"
 
+#ifdef Q_OS_LINUX
 SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
 	m_interface = new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
 									 QStringLiteral("/org/freedesktop/Notifications"),
@@ -12,6 +18,11 @@ SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
                                      QDBusConnection::sessionBus(),
                                      this);
 }
+#else
+SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
+
+}
+#endif
 
 void SystemNotification::sendMessage(
         const QString &text,
@@ -22,6 +33,7 @@ void SystemNotification::sendMessage(
         return;
     }
 
+#ifndef Q_OS_WIN
     QList<QVariant> args;
     args << (qAppName())                 //appname
          << static_cast<unsigned int>(0) //id
@@ -32,4 +44,8 @@ void SystemNotification::sendMessage(
          << QVariantMap()                //hints
          << timeout;                     //timeout
     m_interface->callWithArgumentList(QDBus::AutoDetect, "Notify", args);
+#else
+#endif
+    auto c = Controller::getInstance();
+    c->sendTrayNotification(title, text);
 }
