@@ -5,7 +5,6 @@ compiler: gcc
 os:
   - linux
 #sudo: required
-sudo: true
 dist: trusty
 #Ubuntu Trusty 14.04 (LTS)
 #Xenial still not out in 2017!
@@ -63,6 +62,7 @@ addons:
 #-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
       - build-essential
       - fakeroot
+      - dh-make
       - debhelper 
       - qt5-qmake 
       - qt5-default
@@ -135,7 +135,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - dpkg-buildpackage -B
+  - dpkg-buildpackage -rfakeroot -B 
   - ls
   - echo "------------- SHOW STATS ------------"
   - FLAMESHOT_BUILD_ROOT=build
