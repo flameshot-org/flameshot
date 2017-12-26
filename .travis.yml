@@ -61,7 +61,7 @@ addons:
 ###################################### Dependencies
 #-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
       - build-essential
-#      - fakeroot
+      - fakeroot
       - debhelper 
       - qt5-qmake 
       - qt5-default
