@@ -47,5 +47,5 @@ void SystemNotification::sendMessage(
 #else
 #endif
     auto c = Controller::getInstance();
-    c->sendTrayNotification(title, text);
+    c->sendTrayNotification(title, text, timeout);
 }
