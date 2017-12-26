@@ -45,7 +45,7 @@ void SystemNotification::sendMessage(
          << timeout;                     //timeout
     m_interface->callWithArgumentList(QDBus::AutoDetect, "Notify", args);
 #else
-#endif
     auto c = Controller::getInstance();
-    c->sendTrayNotification(title, text, timeout);
+    c->sendTrayNotification(text, title, timeout);
+#endif
 }
