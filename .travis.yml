@@ -193,10 +193,15 @@ script:
   - mv *-x86_64.AppImage flameshot-x86_64.AppImage
   - curl --upload-file ./*-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d).AppImage
 
+before_deploy:
+  - cd ~
+  - pwd && ls
+
 deploy:
   provider: releases
 #set environment variable GITHUB_OAUTH_TOKEN on travis-ci project #setting page
   api_key: "${GITHUB_OAUTH_TOKEN}"
+  file_glob: true
   file: "/package/appimage/flameshot-x86_64.AppImage"
   skip_cleanup: true
   on:
