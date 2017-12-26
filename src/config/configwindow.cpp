@@ -38,12 +38,11 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setWindowTitle(tr("Configuration"));
 
     auto changedSlot = [this](QString s){
-        Q_UNUSED(s);
-        this->m_configWatcher->removePath(s);
-        this->m_configWatcher->addPath(s);
-        if(!this->hasFocus()) {
-            Q_EMIT updateComponents();
+        QStringList files = m_configWatcher->files();
+        if (!files.contains(s)) {
+            this->m_configWatcher->addPath(s);
         }
+        Q_EMIT updateChildren();
     };
     m_configWatcher = new QFileSystemWatcher(this);
     m_configWatcher->addPath(ConfigHandler().configFilePath());
@@ -95,10 +94,6 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
             m_buttonList, &ButtonListView::updateComponents);
     connect(this, &ConfigWindow::updateChildren,
             m_generalConfig, &GeneneralConf::updateComponents);
-}
-
-void ConfigWindow::updateComponents() {
-    Q_EMIT updateChildren();
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent *e) {
