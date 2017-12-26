@@ -61,12 +61,12 @@ addons:
 ###################################### Dependencies
 #-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
       - build-essential
-      - fakeroot
-      - dh-make
-      - debhelper 
-      - qt5-qmake 
-      - qt5-default
-      - qttools5-dev-tools
+#      - fakeroot
+#      - dh-make
+#      - debhelper 
+#      - qt5-qmake 
+#      - qt5-default
+#      - qttools5-dev-tools
       # XCB/X11 support
       - libfontconfig1-dev
       - libfreetype6-dev
@@ -135,8 +135,8 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - dpkg-buildpackage -rfakeroot -B 
-  - ls
+#  - dpkg-buildpackage -B 
+#  - ls
   - echo "------------- SHOW STATS ------------"
   - FLAMESHOT_BUILD_ROOT=build
   - mkdir -p ${FLAMESHOT_BUILD_ROOT}
@@ -162,47 +162,21 @@ script:
 ###################################### ready for package
   - cd ..
   - mkdir -p package/appimage/flameshot.AppDir 
-  - mkdir -p package/deb/DEBIAN 
-  - mkdir -p package/deb/opt/flameshot 
-  - mkdir -p package/deb/usr/share/applications 
-  - mkdir -p package/deb/usr/share/pixmaps
-  - cp ./img/flameshot.png ./package/deb/usr/share/pixmaps
   - cp ./img/flameshot.png ./package/appimage/flameshot.AppDir
-  - bash scripts/deb_desktop_gen.sh
-#  - cp ./docs/desktopEntry/package/flameshot-init.desktop ./package/deb/usr/share/applications
-#  - bash scripts/appimage_desktop_gen.sh
   - cp ./docs/desktopEntry/package/flameshot-init.desktop ./package/appimage/flameshot.AppDir
-  - bash scripts/deb_control_gen.sh
   
 
-###################################### deb-build
+##################################### deb-build
   - cd ./package
-  - echo "---------------- DEB ----------------"
-# Qt libraries and plugins are all in .deb package
-# so flameshot executable file is placed at /opt/flameshot/
-  - cp ../build/flameshot ./deb/opt/flameshot/flameshot
-  - cd ./deb/opt/flameshot
-  - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-  - chmod +x linuxdeployqt 
-  - ls
-  - pwd & ./linuxdeployqt ./flameshot
-  - rm ./linuxdeployqt ./AppRun
-  - rm -rf ./doc
-  - cd ..
-  - cd ..
-  - cd ..
-  - ls
-  - dpkg -b deb flameshot_amd64.deb
-  - curl --upload-file ./flameshot_amd64.deb https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64.deb
-
+##################################### ...
   - pwd & ls
 ##################################### appimage-build
+  - echo "-------------- APPIMAGE -------------"
   - mv ../build/flameshot ./appimage/flameshot.AppDir/
   - cp ./appimage/flameshot.AppDir/flameshot ../build/
 # upload single executable file
   - curl --upload-file ./appimage/flameshot.AppDir/flameshot https://transfer.sh/flameshot_$(date +%Y%m%d)_amd64
   - cd ./appimage
-  - echo "-------------- APPIMAGE -------------"
   - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
   - chmod +x linuxdeployqt 
   - ls
@@ -216,9 +190,17 @@ script:
   - chmod +x appimagetool & ls
   - ./appimagetool flameshot.AppDir
   - ls
+  - mv *-x86_64.AppImage flameshot-x86_64.AppImage
   - curl --upload-file ./*-x86_64.AppImage https://transfer.sh/flameshot-x86_64_$(date +%Y%m%d).AppImage
 
-
+deploy:
+  provider: releases
+#set environment variable GITHUB_OAUTH_TOKEN on travis-ci project #setting page
+  api_key: "${GITHUB_OAUTH_TOKEN}"
+  file: "/package/appimage/flameshot-x86_64.AppImage"
+  skip_cleanup: true
+  on:
+    tags: true
 
 #notifications:
 #  email:
