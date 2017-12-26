@@ -19,6 +19,7 @@
 #include <algorithm>
 
 ConfigHandler::ConfigHandler(){
+    m_settings.setDefaultFormat(QSettings::IniFormat);
 }
 
 QList<CaptureButton::ButtonType> ConfigHandler::getButtons() {
