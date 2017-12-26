@@ -23,7 +23,6 @@
 #include "src/utils/systemnotification.h"
 #include <QApplication>
 #include <QTranslator>
-#include <QDBusMessage>
 #include <QTextStream>
 #include <QTimer>
 #include <QDir>
@@ -31,6 +30,7 @@
 #ifdef Q_OS_LINUX
 #include "src/core/flameshotdbusadapter.h"
 #include "src/utils/dbusutils.h"
+#include <QDBusMessage>
 #include <QDBusConnection>
 #endif
 
