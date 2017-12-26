@@ -17,19 +17,22 @@
 
 #include "src/core/controller.h"
 #include "singleapplication.h"
-#include "src/core/flameshotdbusadapter.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
 #include "src/cli/commandlineparser.h"
 #include "src/utils/systemnotification.h"
-#include "src/utils/dbusutils.h"
 #include <QApplication>
 #include <QTranslator>
-#include <QDBusConnection>
-#include <QDBusMessage>
 #include <QTextStream>
 #include <QTimer>
 #include <QDir>
+
+#ifdef Q_OS_LINUX
+#include "src/core/flameshotdbusadapter.h"
+#include "src/utils/dbusutils.h"
+#include <QDBusMessage>
+#include <QDBusConnection>
+#endif
 
 int main(int argc, char *argv[]) {
     // required for the button serialization
@@ -48,6 +51,7 @@ int main(int argc, char *argv[]) {
         app.setApplicationName("flameshot");
         app.setOrganizationName("Dharkael");
 
+#ifdef Q_OS_LINUX
         auto c = Controller::getInstance();
         new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
@@ -57,9 +61,14 @@ int main(int argc, char *argv[]) {
         }
         dbus.registerObject("/", c);
         dbus.registerService("org.dharkael.Flameshot");
+#else
+        // Create inicial static instance
+        Controller::getInstance();
+#endif
         return app.exec();
     }
 
+#ifndef Q_OS_WIN
     /*--------------|
      * CLI parsing  |
      * ------------*/
@@ -316,5 +325,7 @@ int main(int argc, char *argv[]) {
         }
     }
 finish:
+
+#endif
     return 0;
 }

@@ -49,6 +49,9 @@ public slots:
 
     void enableTrayIcon();
     void disableTrayIcon();
+    void sendTrayNotification(const QString &text,
+                              const QString &title = "Flameshot Info",
+                              const int timeout = 5000);
 
     void updateConfigComponents();
 

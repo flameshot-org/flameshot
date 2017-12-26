@@ -24,7 +24,6 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/include/color_wheel.hpp \
-    $$PWD/include/colorwidgets_global.hpp \
     $$PWD/src/color_utils.hpp
 
 RESOURCES += \

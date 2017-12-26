@@ -263,7 +263,7 @@ void ButtonHandler::positionButtonsInside(int index) {
     for (; index < m_vectorButtons.size(); ++index) {
         button = m_vectorButtons[index];
         button->move(xPos, yPos);
-        if (button->pos().x() + m_buttonExtendedSize) {
+        if (button->pos().x() + m_buttonExtendedSize > m_limits.right()) {
             xPos = m_selection.left() + SEPARATION;
             yPos -= (m_buttonExtendedSize);
         }
