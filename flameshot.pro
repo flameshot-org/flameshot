@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
-DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+APP_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+DEFINES += APP_VERSION
 
 QT  += core gui
 
@@ -22,6 +22,8 @@ CONFIG    += link_pkgconfig
 
 TARGET = flameshot
 TEMPLATE = app
+
+win32:RC_ICONS += img/flameshot.ico
 
 #release: DESTDIR = build/release
 #debug:   DESTDIR = build/debug
@@ -181,6 +183,12 @@ unix:!macx {
 
     HEADERS  += src/core/flameshotdbusadapter.h \
         src/utils/dbusutils.h
+}
+
+win32 {
+    SOURCES += src/core/globalshortcutfilter.cpp
+
+    HEADERS  += src/core/globalshortcutfilter.h
 }
 
 RESOURCES += \
