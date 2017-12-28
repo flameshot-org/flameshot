@@ -27,6 +27,10 @@
 #include <QAction>
 #include <QMenu>
 
+#ifdef Q_OS_WIN
+#include "src/core/globalshortcutfilter.h"
+#endif
+
 // Controller is the core component of Flameshot, creates the trayIcon and
 // launches the capture widget
 
@@ -34,16 +38,21 @@ Controller::Controller() : m_captureWindow(nullptr)
 {
     qApp->setQuitOnLastWindowClosed(false);
 
+    initDefaults();
+
     // init tray icon
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX)
     if (!ConfigHandler().disabledTrayIconValue()) {
         enableTrayIcon();
     }
-#else
+#elif defined(Q_OS_WIN)
     enableTrayIcon();
-#endif
 
-    initDefaults();
+    GlobalShortcutFilter *nativeFilter = new GlobalShortcutFilter(this);
+    qApp->installNativeEventFilter(nativeFilter);
+    connect(nativeFilter, &GlobalShortcutFilter::printPressed,
+            this, [this](){ this->createVisualCapture(); });
+#endif
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
