@@ -28,7 +28,6 @@
 #include "src/capture/widget/notifierbox.h"
 #include "src/capture/widget/colorpicker.h"
 #include "src/utils/screengrabber.h"
-#include "src/utils/confighandler.h"
 #include "src/utils/systemnotification.h"
 #include "src/core/resourceexporter.h"
 #include <QScreen>
@@ -58,9 +57,8 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
     m_grabbing(false), m_captureDone(false), m_forcedSavePath(forcedSavePath),
     m_id(id), m_state(CaptureButton::TYPE_MOVESELECTION)
 {
-    ConfigHandler config;
-    m_showInitialMsg = config.showHelpValue();
-    m_thickness = config.drawThicknessValue();
+    m_showInitialMsg = m_config.showHelpValue();
+    m_thickness = m_config.drawThicknessValue();
 
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
@@ -121,17 +119,16 @@ CaptureWidget::~CaptureWidget() {
     } else {
         Q_EMIT captureFailed(m_id);
     }
-    ConfigHandler().setdrawThickness(m_thickness);
+    m_config.setdrawThickness(m_thickness);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
 // selection in the capture
 void CaptureWidget::updateButtons() {
-    ConfigHandler config;
-    m_uiColor = config.uiMainColorValue();
-    m_contrastUiColor = config.uiContrastColorValue();
+    m_uiColor = m_config.uiMainColorValue();
+    m_contrastUiColor = m_config.uiContrastColorValue();
 
-    auto buttons = config.getButtons();
+    auto buttons = m_config.getButtons();
     QVector<CaptureButton*> vectorButtons;
 
     for (const CaptureButton::ButtonType &t: buttons) {
@@ -591,8 +588,6 @@ void CaptureWidget::updateHandles() {
 }
 
 void CaptureWidget::updateSizeIndicator() {
-    // The grabbed region is everything which is covered by the drawn
-    // rectangles (border included, that's the reason of the +2).
     if (m_sizeIndButton){
 		m_sizeIndButton->setText(QStringLiteral("%1\n%2")
                                      .arg(m_selection.width()+2)

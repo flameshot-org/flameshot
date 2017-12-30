@@ -26,6 +26,7 @@
 
 #include "capturebutton.h"
 #include "src/capture/tools/capturetool.h"
+#include "src/utils/confighandler.h"
 #include "buttonhandler.h"
 #include <QWidget>
 #include <QPointer>
@@ -132,6 +133,8 @@ private:
     QColor m_uiColor;
     QColor m_contrastUiColor;
     ColorPicker *m_colorPicker;
+
+    ConfigHandler m_config;
 
 };
 
