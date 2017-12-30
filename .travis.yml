@@ -1,183 +1,190 @@
-language: cpp
-#speed compile process
-cache: ccache 
-compiler: gcc
-os:
-  - linux
-#sudo: required
+os: linux
+sudo: false
 dist: trusty
-#Ubuntu Trusty 14.04 (LTS)
-#Xenial still not out in 2017!
+stages:
+  - Build & Test
+  - Packaging
+  - name: Deploy
+#    if: branch = master
+ 
 env:
   global:
-    - QT_VERSION_MAJOR=5
-    - TRAVIS_DIST_NAME=trusty
-#    - CLANG_VERSION=4.0
-  matrix:
-#    - QT_VERSION_MINOR=8 QT_VERSION_REVISION=0
-#    - QT_VERSION_MINOR=9 QT_VERSION_REVISION=1
-    - QT_VERSION_MINOR=9 QT_VERSION_REVISION=3
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      #clang4
-#      - llvm-toolchain-trusty-4.0
-#      - sourceline: 'ppa:beineri/opt-qt58-trusty'
-#      - sourceline: 'ppa:beineri/opt-qt591-trusty'
-      - sourceline: 'ppa:beineri/opt-qt593-trusty'
-    packages:
-###################################### GCC
-      - g++-6
-      - gcc-6
-###################################### Clang
-#      - clang-4.0
-###################################### Qt5
-      - qt593d
-      - qt59base
-      - qt59canvas3d
-      - qt59connectivity
-#      - qt59gamepad
-      - qt59graphicaleffects
-      - qt59imageformats
-      - qt59location
-      - qt59multimedia
-      - qt59networkauth-no-lgpl
-      - qt59quickcontrols
-      - qt59quickcontrols2
-      - qt59scxml
-      - qt59script
-      - qt59sensors
-      - qt59serialbus
-      - qt59serialport
-#      - qt59speech
-      - qt59svg
-      - qt59tools
-      - qt59translations
-#      - qt59webengine
-      - qt59websockets
-      - qt59x11extras
-      - qt59xmlpatterns
-###################################### Dependencies
-#-lGL -lpthread -lpulse-mainloop-glib -lpulse -lglib-2.0 
-      - build-essential
-      # XCB/X11 support
-      - libfontconfig1-dev
-      - libfreetype6-dev
-      - libx11-dev
-      - libxext-dev
-      - libxfixes-dev
-      - libxi-dev
-      - libxrender-dev
-      - libxcb-xinerama0
-      - libxcb-xinerama0-dev
-      - libxcb1-dev
-      - libx11-xcb-dev
-      - libxcb-glx0-dev
-      - libegl1-mesa
-      # OpenGL - GLX
-      - libglu1-mesa-dev
-      # Audio
-      - libasound2-dev
-      - libpulse-dev
-      # G-Streamer support
-      - libgstreamer0.10-dev
-      - libgstreamer-plugins-base0.10-dev
-      - libgstreamer-plugins-bad0.10-dev
-      - libgstreamer0.10-dev
-      # XKB fixes for Qt5.4x
-      - libxkbfile1
-      - x11-xkb-utils
-      - xkb-data
-      - libxkbfile-dev
-      # SQLite 3 support
-      - libsqlite-dev
-      - libsqlite3-dev
-      # SSL/TLS Support
-      - libssl-dev
-#      - gnutls-dev
-      - libgnutls-dev
-      # DEPS+=" libgnutls-openssl-dev" # Not available on debian
-      - libsslcommon2-dev
-      # D-BUS ?
-      - libdbus-glib-1-dev
+    #### Destination binary path
+    - BUILD_DST_PATH=build
+    #### Destination packaging path. If we use one by job they doesn't need to wait until the others end
+    - APPIMAGE_DST_PATH=build-appimage
+    - DEB_DST_PATH=build-deb
 
-before_install:
-#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then 
-#      brew update;
-#    fi
-  - if test -n "$BUILD_CC"; then export CC="$BUILD_CC"; fi
-  - if test -n "$BUILD_CXX"; then export CXX="$BUILD_CXX"; fi
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6"; fi
-#  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-${CLANG_VERSION}" CC="clang-${CLANG_VERSION}"; fi
-  - if [ "$CXX" == "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50; fi
+jobs:
+  include:
+############## Build & Test ##############
+    - stage: Build & Test
+      #language: cpp   ->  Not necessary because we use specific versions
+      #compiler: gcc   ->  Not necessary because we use specific versions
+      cache:
+        - ccache: true
+        - apt: true
+        - directories:
+          ### > Save the build directory to reuse in other jobs
+          - &build_dst_path build
+      addons: &build_apt
+        apt:
+          sources:
+            # qt5 >= 5.3
+            - sourceline: 'ppa:beineri/opt-qt532-trusty'
+            # g++ & gcc >= 4.9
+            - ubuntu-toolchain-r-test
+          packages:
+            - git
+            - build-essential
 
-install:
-#  - if [ "$CXX" == "clang++" ]; then cwd=$(pwd); fi
-#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then 
-#      brew install qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR};
-#      brew link --force qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR};
-#    fi
+            #### Replacement of: qt5-qmake, qt5-default, qttools5-dev-tools
+            - qt53base
+            - qt53tools
 
-before_script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then export QT_ENV_SCRIPT="/opt/qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR}/bin/qt${QT_VERSION_MAJOR}${QT_VERSION_MINOR}-env.sh"; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then echo "QT_ENV_SCRIPT=${QT_ENV_SCRIPT}"; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat ${QT_ENV_SCRIPT}; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then source ${QT_ENV_SCRIPT}; fi
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
+            #### Using g++ >= 4.9
+            - g++-4.9
+            - gcc-4.9
 
-script:
-  - echo "------------- SHOW STATS ------------"
-  - FLAMESHOT_BUILD_ROOT=build
-  - mkdir -p ${FLAMESHOT_BUILD_ROOT}
-  - cd ${FLAMESHOT_BUILD_ROOT}
-  - pwd
-  - ls -haltF ../
-  - which c++
-  - which g++
-#  - which clang++
-  - c++ --version
-  - which ${CXX}
-  - ${CXX} --version
-  - which qmake
-  - qmake -v
-  - echo "NPROC=$(nproc)"
-  - echo "--------------- QMAKE ---------------"
-  - qmake QMAKE_CXX=g++-6 QMAKE_CC=gcc-6 QMAKE_LINK=g++-6 ../flameshot.pro
-  - echo "---------------- MAKE ---------------"
-  - make -j$(nproc) -l
-  - echo "------------- RUN TESTS -------------"
-  - make check
-  - pwd & ls
-  - mkdir qtdeploy && mv flameshot ./qtdeploy/
-  - cp ./qtdeploy/flameshot ./
-  - curl --upload-file ./flameshot https://transfer.sh/flameshot
-  - cd ./qtdeploy 
-###################################### linuxqtdepoly
-  - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-  - chmod +x linuxdeployqt & ls
-  - pwd & ./linuxdeployqt ./flameshot
-  - rm ./linuxdeployqt ./AppRun
-  - rm -rf ./doc
-##################################### libQt5XcbQpa.so.5(QT5.9.3) need libxcb-xinerama
-  - cp /usr/lib/x86_64-linux-gnu/libxcb-xinerama.so.0.0.0 ./lib/libxcb-xinerama.so.0
-  - cd .. 
-  - tar -zcvf build.tar.gz ./qtdeploy
-  - curl --upload-file ./build.tar.gz https://transfer.sh/flameshot-build.tar.gz 
+      before_install:
+        ##### Clean cache folder
+        - rm -rf $BUILD_DST_PATH/*
 
-#notifications:
-#  email:
-#    recipients:
-#      - xxx@gmail.com
-#    on_success: change
-#    on_failure: always
-#  irc:
-#    channels:
-#      - "irc.freenode.net:8001#xxx"
-#    on_success: change
-#    on_failure: always
-#    template:
-#      - "%{repository} (%{commit}) : %{message} %{foo} "
-#      - "Build details: %{build_url}"
+      before_script: &build_before_script
+        #### Use qt5 == 5.3 instead other version
+        - source /opt/qt53/bin/qt53-env.sh && qmake --version
+
+        ##### Use gcc y cpp == 4.9 instead other version
+        - export CC=gcc-4.9 CXX=g++-4.9
+
+      script:
+        - qmake QMAKE_CXX=$CXX QMAKE_CC=$CC QMAKE_LINK=$CXX DESTDIR=$BUILD_DST_PATH
+
+        # Building flameshot
+        - make -j$(nproc)
+
+        # Running flameshot tests
+        - make check -j$(nproc)
+        - ls -alhR
+
+      after_script:
+        #### Wait preventing cache doesn't update
+        - sleep 10
+
+############## Packaging AppImage ##############
+    - stage: Packaging
+      #language: cpp
+      #compiler: gcc
+      cache:
+        - directories:
+          - *build_dst_path
+          ### > Save the appimage directory to reuse in other jobs
+          - &appimage_dst_path build-appimage
+      addons:
+        apt:
+          sources:
+            # qt5 >= 5.3
+            - sourceline: 'ppa:beineri/opt-qt532-trusty'
+          packages:
+            #### Replacement of: qt5-qmake, qt5-default, qttools5-dev-tools
+            - qt53base
+            # - qt53tools
+      before_install:
+        ##### Clean cache folder
+        - rm -rf $APPIMAGE_DST_PATH/*
+
+      before_script:
+        #### Use qt5 == 5.3 instead other version
+        - source /opt/qt53/bin/qt53-env.sh && qmake --version
+
+        ##### Download and install linuxdeployqt
+        - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
+        - chmod +x linuxdeployqt
+        ## Extract linuxdeployqt in 'squashfs-root/'
+        - ./linuxdeployqt --appimage-extract
+        # - ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+            #|-squashfs-root
+            #|---usr
+            #|-----bin
+            #|-----lib
+            #|-----share
+            #|-------doc
+            #|---------libicu52
+            #|---------libpcre3
+            #|---------qt59base
+            #|-----translations
+
+      script:
+        #### Prepare packing
+        - mkdir appdir
+        - cp $BUILD_DST_PATH/flameshot appdir/
+        - cp docs/desktopEntry/package/* appdir/
+        - cp img/flameshot.png appdir/
+        - ls -alhR appdir/
+
+        #### Configure env vars
+        - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
+        - export VERSION=$(git rev-parse --short HEAD) # linuxdeployqt uses this for naming the file
+
+        #### Packaging
+        - ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -bundle-non-qt-libs
+        - ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -appimage
+        #- ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -appimage -no-translations
+        - ls -alhR ./*.AppImage
+        - cp *.AppImage $APPIMAGE_DST_PATH/
+
+      after_script:
+        #### Wait preventing cache doesn't update
+        - sleep 10
+
+
+
+############## Packaging Deb ##############
+    - stage: Packaging
+      cache:
+        - directories:
+          - *build_dst_path
+          ### > Save the deb directory to reuse in other jobs
+          - &deb_dst_path build-deb
+      before_install:
+        ##### Clean cache folder
+        - rm -rf $DEB_DST_PATH/*
+
+      script:
+        - ls -alhR $BUILD_DST_PATH
+        - echo "Do .deb" > $DEB_DST_PATH/dev.txt
+        - ls -alhR $DEB_DST_PATH
+
+      after_script:
+        #### Wait preventing cache doesn't update
+        - sleep 10
+
+############## Deploy ##############
+    - stage: Deploy
+      cache:
+        - directories:
+          - *build_dst_path
+          - *appimage_dst_path
+          - *deb_dst_path
+      script:
+        - ls -alhR $BUILD_DST_PATH
+        - ls -alhR ./
+
+        #### Upload all files to transfer.sh
+        - WHERE_FIND="$BUILD_DST_PATH $APPIMAGE_DST_PATH $DEB_DST_PATH"
+        - |
+          for file_path in $(find $WHERE_FIND -maxdepth 1 -mindepth 1 -type f)
+          do
+              curl --upload-file "$file_path" "https://transfer.sh/$(basename $file_path)"
+              printf "\n\n"
+          done
+
+      before_cache:
+        #### Clean cache to optimize future builds
+        - find . -type f -delete
+
+
+notifications:
+ email:
+   on_success: change
+   on_failure: always
