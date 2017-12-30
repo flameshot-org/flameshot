@@ -526,7 +526,7 @@ void CaptureWidget::leftResize() {
 
 void CaptureWidget::rightResize() {
     if (!m_selection.isNull() && m_selection.right() < rect().right()) {
-        m_selection.setRight(m_selection.right()+1);
+        m_selection.setRight(m_selection.right());
         m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
@@ -546,7 +546,7 @@ void CaptureWidget::upResize() {
 
 void CaptureWidget::downResize() {
     if (!m_selection.isNull() && m_selection.bottom() < rect().bottom()) {
-        m_selection.setBottom(m_selection.bottom()+1);
+        m_selection.setBottom(m_selection.bottom());
         m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
@@ -589,9 +589,10 @@ void CaptureWidget::updateHandles() {
 
 void CaptureWidget::updateSizeIndicator() {
     if (m_sizeIndButton){
+        const QRect &selection = extendedSelection();
 		m_sizeIndButton->setText(QStringLiteral("%1\n%2")
-                                     .arg(m_selection.width()+2)
-                                     .arg(m_selection.height()+2));
+                                     .arg(selection.width())
+                                     .arg(selection.height()));
     }
 }
 
