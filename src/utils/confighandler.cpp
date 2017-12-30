@@ -17,6 +17,8 @@
 
 #include "confighandler.h"
 #include <algorithm>
+#include <QFile>
+#include <QDir>
 
 ConfigHandler::ConfigHandler(){
     m_settings.setDefaultFormat(QSettings::IniFormat);
@@ -115,6 +117,44 @@ bool ConfigHandler::keepOpenAppLauncherValue() {
 
 void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen) {
     m_settings.setValue("keepOpenAppLauncher", keepOpen);
+}
+
+bool ConfigHandler::startupLaunchValue() {
+    bool res = false;
+#if defined(Q_OS_LINUX)
+    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
+    res = QFile(path).exists();
+#elif defined(Q_OS_WIN)
+    QSettings bootUpSettings(
+                "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+                QSettings::NativeFormat);
+    res = !bootUpSettings.value("Flameshot").toString().isEmpty();
+#endif
+    return res;
+}
+
+void ConfigHandler::setStartupLaunch(const bool start) {
+#if defined(Q_OS_LINUX)
+    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
+    QFile file(path);
+    if (start) {
+        if (file.open(QIODevice::WriteOnly)) {
+              file.write("[Desktop Entry]\nIcon=system-run\nExec=flameshot\nTerminal=false");
+        }
+    } else {
+        file.remove();
+    }
+#elif defined(Q_OS_WIN)
+    QSettings bootUpSettings(
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+                QSettings::NativeFormat);
+    if (start) {
+        QString app_path = QCoreApplication::applicationFilePath();
+        bootUpSettings.setValue("Flameshot", app_path);
+    } else {
+        bootUpSettings.remove("Flameshot");
+    }
+#endif
 }
 
 bool ConfigHandler::initiatedIsSet() {

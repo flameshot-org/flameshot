@@ -60,6 +60,9 @@ public:
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);
 
+    bool startupLaunchValue();
+    void setStartupLaunch(const bool);
+
     bool initiatedIsSet();
     void setInitiated();
     void setNotInitiated();

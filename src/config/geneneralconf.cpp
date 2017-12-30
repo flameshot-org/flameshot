@@ -35,6 +35,8 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     initShowHelp();
     initShowDesktopNotification();
     initShowTrayIcon();
+    initAutostart();
+
 	initConfingButtons();
     updateComponents();
 }
@@ -43,6 +45,7 @@ void GeneneralConf::updateComponents() {
     ConfigHandler config;
     m_helpMessage->setChecked(config.showHelpValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
+    m_autostart->setChecked(config.startupLaunchValue());
 #ifdef Q_OS_LINUX
     m_showTray->setChecked(!config.disabledTrayIconValue());
 #endif
@@ -62,7 +65,11 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
         controller->enableTrayIcon();
     } else {
         controller->disableTrayIcon();
-	}
+    }
+}
+
+void GeneneralConf::autostartChanged(bool checked) {
+    ConfigHandler().setStartupLaunch(checked);
 }
 
 void GeneneralConf::importConfiguration() {
@@ -164,5 +171,18 @@ void GeneneralConf::initConfingButtons() {
 	m_resetButton = new QPushButton(tr("Reset"));
 	buttonLayout->addWidget(m_resetButton);
 	connect(m_resetButton, &QPushButton::clicked, this,
-			&GeneneralConf::resetConfiguration);
+            &GeneneralConf::resetConfiguration);
+}
+
+void GeneneralConf::initAutostart() {
+    m_autostart =
+            new QCheckBox(tr("Launch at startup"), this);
+    ConfigHandler config;
+    bool checked = config.startupLaunchValue();
+    m_autostart->setChecked(checked);
+    m_autostart->setToolTip(tr("Launch Flameshot "));
+    m_layout->addWidget(m_autostart);
+
+    connect(m_autostart, &QCheckBox::clicked, this,
+            &GeneneralConf::autostartChanged);
 }
