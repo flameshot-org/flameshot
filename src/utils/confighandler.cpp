@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <QFile>
 #include <QDir>
+#include <QCoreApplication>
 
 ConfigHandler::ConfigHandler(){
     m_settings.setDefaultFormat(QSettings::IniFormat);
