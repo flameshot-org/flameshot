@@ -18,13 +18,13 @@
 #ifndef GENENERALCONF_H
 #define GENENERALCONF_H
 
-#include <QGroupBox>
+#include <QWidget>
 
 class QVBoxLayout;
 class QCheckBox;
 class QPushButton;
 
-class GeneneralConf : public QGroupBox {
+class GeneneralConf : public QWidget {
     Q_OBJECT
 public:
     GeneneralConf(QWidget *parent = nullptr);
@@ -38,7 +38,7 @@ private slots:
    void showTrayIconChanged(bool checked);
    void autostartChanged(bool checked);
    void importConfiguration();
-   void exportConfiguration();
+   void exportFileConfiguration();
    void resetConfiguration();
 
 private:

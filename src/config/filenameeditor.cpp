@@ -25,7 +25,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-FileNameEditor::FileNameEditor(QWidget *parent) : QGroupBox(parent) {
+FileNameEditor::FileNameEditor(QWidget *parent) : QWidget(parent) {
     initWidgets();
     initLayout();    
 }

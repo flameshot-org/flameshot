@@ -158,6 +158,19 @@ void ConfigHandler::setStartupLaunch(const bool start) {
 #endif
 }
 
+int ConfigHandler::contrastOpacityValue() {
+    int opacity = 190;
+    if (m_settings.contains("contrastOpacity")) {
+        opacity = m_settings.value("contrastOpacity").toInt();
+        opacity = qBound(0, opacity, 255);
+    }
+    return opacity;
+}
+
+void ConfigHandler::setContrastOpacity(const int transparency) {
+    m_settings.setValue("contrastOpacity", transparency);
+}
+
 bool ConfigHandler::initiatedIsSet() {
     return m_settings.value("initiated").toBool();
 }
