@@ -6,7 +6,7 @@ stages:
   - Packaging
   - name: Deploy
 #    if: branch = master
- 
+
 env:
   global:
     #### Destination binary path
@@ -68,8 +68,9 @@ jobs:
         - ls -alhR
 
       after_script:
-        #### Wait preventing cache doesn't update
+        #### Wait for the cache to update
         - sleep 10
+
 
 ############## Packaging AppImage ##############
     - stage: Packaging
@@ -123,41 +124,42 @@ jobs:
         - ls -alhR appdir/
 
         #### Configure env vars
-        - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
+        - unset QTDIR QT_PLUGIN_PATH LD_LIBRARY_PATH
         - export VERSION=$(git rev-parse --short HEAD) # linuxdeployqt uses this for naming the file
 
         #### Packaging
         - ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -bundle-non-qt-libs
+        - ln -sf plugins/platforms/ appdir/platforms  # An unknown bug
         - ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -appimage
-        #- ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -appimage -no-translations
         - ls -alhR ./*.AppImage
         - cp *.AppImage $APPIMAGE_DST_PATH/
 
       after_script:
-        #### Wait preventing cache doesn't update
+        #### Wait for the cache to update
         - sleep 10
 
 
 
 ############## Packaging Deb ##############
-    - stage: Packaging
-      cache:
-        - directories:
-          - *build_dst_path
-          ### > Save the deb directory to reuse in other jobs
-          - &deb_dst_path build-deb
-      before_install:
-        ##### Clean cache folder
-        - rm -rf $DEB_DST_PATH/*
+    #- stage: Packaging
+      #cache:
+        #- directories:
+          #- *build_dst_path
+          #### > Save the deb directory to reuse in other jobs
+          #- &deb_dst_path build-deb
+      #before_install:
+        ###### Clean cache folder
+        #- rm -rf $DEB_DST_PATH/*
 
-      script:
-        - ls -alhR $BUILD_DST_PATH
-        - echo "Do .deb" > $DEB_DST_PATH/dev.txt
-        - ls -alhR $DEB_DST_PATH
+      #script:
+        #- ls -alhR $BUILD_DST_PATH
+        #- echo "Do .deb" > $DEB_DST_PATH/dev.txt
+        #- ls -alhR $DEB_DST_PATH
 
-      after_script:
-        #### Wait preventing cache doesn't update
-        - sleep 10
+      #after_script:
+        ##### Wait for the cache to update
+        #- sleep 10
+
 
 ############## Deploy ##############
     - stage: Deploy
@@ -165,10 +167,10 @@ jobs:
         - directories:
           - *build_dst_path
           - *appimage_dst_path
-          - *deb_dst_path
+          #- *deb_dst_path
       script:
-        - ls -alhR $BUILD_DST_PATH
-        - ls -alhR ./
+        # - ls -alhR $BUILD_DST_PATH
+        - ls -alhR ./build*
 
         #### Upload all files to transfer.sh
         - WHERE_FIND="$BUILD_DST_PATH $APPIMAGE_DST_PATH $DEB_DST_PATH"
