@@ -101,6 +101,7 @@ protected:
     const QString m_forcedSavePath;
 
     int m_thickness;
+    int m_opacity;
     uint m_id;
     NotifierBox *m_notifierBox;
 

@@ -29,7 +29,7 @@
 #include <QTextCodec>
 #include <QGroupBox>
 
-GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
+GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
     initShowHelp();
@@ -37,7 +37,8 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QGroupBox(parent) {
     initShowTrayIcon();
     initAutostart();
 
-	initConfingButtons();
+    // this has to be at the end
+    initConfingButtons();
     updateComponents();
 }
 
@@ -46,6 +47,7 @@ void GeneneralConf::updateComponents() {
     m_helpMessage->setChecked(config.showHelpValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+
 #ifdef Q_OS_LINUX
     m_showTray->setChecked(!config.disabledTrayIconValue());
 #endif
@@ -92,7 +94,7 @@ void GeneneralConf::importConfiguration() {
 	config.close();
 }
 
-void GeneneralConf::exportConfiguration() {
+void GeneneralConf::exportFileConfiguration() {
 	QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
 							   "flameshot.conf");
 	QFile::copy(ConfigHandler().configFilePath(), fileName);
@@ -106,8 +108,9 @@ void GeneneralConf::resetConfiguration() {
 			  QMessageBox::Yes | QMessageBox::No);
 	if (reply == QMessageBox::Yes) {
 		ConfigHandler().setDefaults();
-	}
+    }
 }
+
 
 void GeneneralConf::initShowHelp() {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
@@ -150,7 +153,6 @@ void GeneneralConf::initShowTrayIcon() {
 }
 
 void GeneneralConf::initConfingButtons() {
-
 	QHBoxLayout *buttonLayout = new QHBoxLayout();
 	m_layout->addStretch();
 	QGroupBox *box = new QGroupBox(tr("Configuration File"));
@@ -161,7 +163,7 @@ void GeneneralConf::initConfingButtons() {
 	m_exportButton = new QPushButton(tr("Export"));
 	buttonLayout->addWidget(m_exportButton);
 	connect(m_exportButton, &QPushButton::clicked, this,
-			&GeneneralConf::exportConfiguration);
+            &GeneneralConf::exportFileConfiguration);
 
 	m_importButton = new QPushButton(tr("Import"));
 	buttonLayout->addWidget(m_importButton);

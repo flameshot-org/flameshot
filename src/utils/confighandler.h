@@ -63,6 +63,10 @@ public:
     bool startupLaunchValue();
     void setStartupLaunch(const bool);
 
+    int contrastOpacityValue();
+    void setContrastOpacity(const int);
+
+
     bool initiatedIsSet();
     void setInitiated();
     void setNotInitiated();

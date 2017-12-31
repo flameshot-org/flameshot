@@ -20,11 +20,10 @@
 
 #include <QTabWidget>
 
-class ButtonListView;
-class UIcolorEditor;
 class FileNameEditor;
 class GeneneralConf;
 class QFileSystemWatcher;
+class VisualsEditor;
 
 class ConfigWindow : public QTabWidget {
     Q_OBJECT
@@ -38,11 +37,9 @@ protected:
     void keyPressEvent(QKeyEvent *);
 
 private:
-    ButtonListView *m_buttonList;
-    UIcolorEditor *m_colorEditor;
     FileNameEditor *m_filenameEditor;
     GeneneralConf *m_generalConfig;
-
+    VisualsEditor *m_visuals;
     QFileSystemWatcher *m_configWatcher;
 
 };

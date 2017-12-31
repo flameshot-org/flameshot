@@ -59,6 +59,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
 {
     m_showInitialMsg = m_config.showHelpValue();
     m_thickness = m_config.drawThicknessValue();
+    m_opacity = m_config.contrastOpacityValue();
 
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
@@ -179,7 +180,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.drawPixmap(0, 0, m_screenshot->screenshot());
     }
 
-    QColor overlayColor(0, 0, 0, 190);
+    QColor overlayColor(0, 0, 0, m_opacity);
     painter.setBrush(overlayColor);
     QRect r = m_selection.normalized().adjusted(0, 0, -1, -1);
     QRegion grey(rect());

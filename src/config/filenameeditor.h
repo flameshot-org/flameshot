@@ -18,7 +18,7 @@
 #ifndef FILENAMEEDITOR_H
 #define FILENAMEEDITOR_H
 
-#include <QGroupBox>
+#include <QWidget>
 #include <QPointer>
 
 class QVBoxLayout;
@@ -27,7 +27,7 @@ class FileNameHandler;
 class QPushButton;
 class StrftimeChooserWidget;
 
-class FileNameEditor : public QGroupBox
+class FileNameEditor : public QWidget
 {
     Q_OBJECT
 public:

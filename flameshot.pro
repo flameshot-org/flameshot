@@ -121,7 +121,8 @@ SOURCES += src/main.cpp \
     src/utils/desktopfileparse.cpp \
     src/capture/workers/launcher/launcheritemdelegate.cpp \
     src/capture/tools/blurtool.cpp \
-    src/capture/workers/launcher/terminallauncher.cpp
+    src/capture/workers/launcher/terminallauncher.cpp \
+    src/config/visualseditor.cpp
 
 HEADERS  += src/capture/widget/buttonhandler.h \
     src/infowindow.h \
@@ -175,7 +176,8 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/utils/desktopfileparse.h \
     src/capture/workers/launcher/launcheritemdelegate.h \
     src/capture/tools/blurtool.h \
-    src/capture/workers/launcher/terminallauncher.h
+    src/capture/workers/launcher/terminallauncher.h \
+    src/config/visualseditor.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

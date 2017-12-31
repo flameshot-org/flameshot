@@ -17,12 +17,11 @@
 
 #include "configwindow.h"
 #include "src/capture/widget/capturebutton.h"
-#include "src/config/buttonlistview.h"
-#include "src/config/uicoloreditor.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/strftimechooserwidget.h"
 #include "src/utils/confighandler.h"
+#include "src/config/visualseditor.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -54,25 +53,8 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     QString modifier = isWhite ? ":img/configWhite/" : ":img/configBlack/";
 
     // visuals
-    auto visuals = new QWidget();
-    QVBoxLayout *layoutUI= new QVBoxLayout();
-    visuals->setLayout(layoutUI);
-    m_colorEditor = new UIcolorEditor();
-    layoutUI->addWidget(m_colorEditor);
-
-    auto boxButtons = new QGroupBox();
-    boxButtons->setTitle(tr("Button Selection"));
-    auto listLayout = new QVBoxLayout(boxButtons);
-    m_buttonList = new ButtonListView();
-    layoutUI->addWidget(boxButtons);
-    listLayout->addWidget(m_buttonList);
-
-    QPushButton* setAllButtons = new QPushButton(tr("Select All"));
-    connect(setAllButtons, &QPushButton::clicked,
-            m_buttonList, &ButtonListView::selectAll);
-    listLayout->addWidget(setAllButtons);
-
-	addTab(visuals, QIcon(modifier + "graphics.png"),
+    m_visuals = new VisualsEditor();
+    addTab(m_visuals, QIcon(modifier + "graphics.png"),
 		   tr("Interface"));
 
     // filename
@@ -89,9 +71,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     connect(this, &ConfigWindow::updateChildren,
             m_filenameEditor, &FileNameEditor::updateComponents);
     connect(this, &ConfigWindow::updateChildren,
-            m_colorEditor, &UIcolorEditor::updateComponents);
-    connect(this, &ConfigWindow::updateChildren,
-            m_buttonList, &ButtonListView::updateComponents);
+            m_visuals, &VisualsEditor::updateComponents);
     connect(this, &ConfigWindow::updateChildren,
             m_generalConfig, &GeneneralConf::updateComponents);
 }
