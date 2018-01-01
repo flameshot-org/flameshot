@@ -54,8 +54,9 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
                              QWidget *parent) :
     QWidget(parent), m_screenshot(nullptr), m_mouseOverHandle(0),
     m_mouseIsClicked(false), m_rightClick(false), m_newSelection(false),
-    m_grabbing(false), m_captureDone(false), m_forcedSavePath(forcedSavePath),
-    m_id(id), m_state(CaptureButton::TYPE_MOVESELECTION)
+    m_grabbing(false), m_captureDone(false), m_toolIsForDrawing(false),
+    m_forcedSavePath(forcedSavePath), m_id(id),
+    m_state(CaptureButton::TYPE_MOVESELECTION)
 {
     m_showInitialMsg = m_config.showHelpValue();
     m_thickness = m_config.drawThicknessValue();
