@@ -211,13 +211,13 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 
         QColor rectColor(m_uiColor);
         rectColor.setAlpha(180);
-        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
-        painter.drawRect(bRect);
-
-        // Draw the text:
         QColor textColor((CaptureButton::iconIsWhiteByColor(rectColor) ?
                               Qt::white : Qt::black));
+
+        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
         painter.setPen(QPen(textColor));
+
+        painter.drawRect(bRect);
         painter.drawText(helpRect, Qt::AlignCenter, helpTxt);
     }
 
