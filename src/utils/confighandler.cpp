@@ -190,6 +190,8 @@ void ConfigHandler::setDefaults() {
     setUIMainColor(QColor(116, 0, 150));
     setUIContrastColor(QColor(86, 0, 120));
 	setdrawThickness(0);
+    setContrastOpacity(190);
+    setDisabledTrayIcon(false);
     setAllTheButtons();
 }
 
