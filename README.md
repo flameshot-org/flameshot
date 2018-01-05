@@ -18,6 +18,7 @@
   - [Install](#install)
 - [Packaging](#packaging)
 - [License](#license)
+- [Donations](#donations)
 
 ## Features
 - Customizable appearance.
@@ -194,8 +195,13 @@ openssl, ca-certificates
 
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
+## Donations
+I improve Flameshot in my free time because I want to create something good for everyone to use. 
+If you want you can donate some bucks [here](https://www.paypal.me/lupoDharkael).
+
 ## Acknowledgment
-I really appreciate those who have shown interest in the develpment process:
-- Cosmo.
-- ismatori.
-- The members of the Sugus GNU/Linux association.
+I really appreciate those who have shown interest in the early develpment process:
+- [Cosmo](https://github.com/philpem)
+- [XerTheSquirrel](https://github.com/XerTheSquirrel)
+- [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)
+- ismatori
