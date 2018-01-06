@@ -1,6 +1,18 @@
 Changelog
 =========
 
+__3.0.10__
+----------
+
+* Removed C style casts and eliminated all clang warnings. Fixed `instanceId`
+  reading from only one byte in the message deserialization. Cleaned up
+  serialization code using `QDataStream`. Changed connection type to use
+  `quint8 enum` rather than `char`.
+* Renamed `SingleAppConnectionType` to `ConnectionType`. Added initialization
+  values to all `ConnectionType` enum cases.
+
+    _Jedidiah Buck McCready_
+
 __3.0.9__
 ---------
 
