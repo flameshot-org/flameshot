@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-APP_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
-DEFINES += APP_VERSION
+TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
 QT  += core gui
 
