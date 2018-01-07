@@ -109,32 +109,30 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="38"/>
+        <location filename="../src/config/configwindow.cpp" line="37"/>
         <source>Configuration</source>
         <translation>Configuración</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="65"/>
         <source>Button Selection</source>
-        <translation>Selección de Botón</translation>
+        <translation type="vanished">Selección de Botón</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="71"/>
         <source>Select All</source>
-        <translation>Seleccionar Todos</translation>
+        <translation type="vanished">Seleccionar Todos</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="77"/>
+        <location filename="../src/config/configwindow.cpp" line="58"/>
         <source>Interface</source>
         <translation>Interfaz</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="82"/>
+        <location filename="../src/config/configwindow.cpp" line="63"/>
         <source>Filename Editor</source>
         <translation>Editor de Nombre</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="87"/>
+        <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>General</source>
         <translation>General</translation>
     </message>
@@ -142,17 +140,17 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="95"/>
+        <location filename="../src/core/controller.cpp" line="108"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuración</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="98"/>
+        <location filename="../src/core/controller.cpp" line="111"/>
         <source>&amp;Information</source>
         <translation>&amp;Información</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="101"/>
+        <location filename="../src/core/controller.cpp" line="114"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
@@ -258,82 +256,92 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="67"/>
-        <location filename="../src/config/geneneralconf.cpp" line="155"/>
+        <location filename="../src/config/geneneralconf.cpp" line="78"/>
+        <location filename="../src/config/geneneralconf.cpp" line="168"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="71"/>
-        <location filename="../src/config/geneneralconf.cpp" line="79"/>
+        <location filename="../src/config/geneneralconf.cpp" line="82"/>
+        <location filename="../src/config/geneneralconf.cpp" line="90"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="71"/>
+        <location filename="../src/config/geneneralconf.cpp" line="82"/>
         <source>Unable to read file.</source>
         <translation>Imposible leer el archivo.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="79"/>
+        <location filename="../src/config/geneneralconf.cpp" line="90"/>
         <source>Unable to write file.</source>
         <translation>Imposible escribir el archivo.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="87"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
         <source>Save File</source>
         <translation>Guardar Archivo</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="95"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
         <source>Confirm Reset</source>
         <translation>Confirmar Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="96"/>
+        <location filename="../src/config/geneneralconf.cpp" line="107"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>¿Estás seguro de que quieres reiniciar la configuración?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="104"/>
+        <location filename="../src/config/geneneralconf.cpp" line="116"/>
         <source>Show help message</source>
         <translation>Mostrar mensaje de ayuda</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="108"/>
+        <location filename="../src/config/geneneralconf.cpp" line="120"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Muestra el mensaje de ayuda al iniciar el modo de captura.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="118"/>
-        <location filename="../src/config/geneneralconf.cpp" line="122"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="134"/>
         <source>Show desktop notifications</source>
         <translation>Mostrar notificaciones del escritorio</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="143"/>
         <source>Show tray icon</source>
         <translation>Mostrar icono en la barra de tareas</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="134"/>
+        <location filename="../src/config/geneneralconf.cpp" line="147"/>
         <source>Show the systemtray icon</source>
         <translation>Mostrar el icono en la barra de tareas</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="145"/>
+        <location filename="../src/config/geneneralconf.cpp" line="158"/>
         <source>Configuration File</source>
         <translation>Archivo de Configuración</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="150"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="160"/>
+        <location filename="../src/config/geneneralconf.cpp" line="173"/>
         <source>Reset</source>
         <translation>Reset</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <source>Launch at startup</source>
+        <translation>Lanzar en el arranque</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="185"/>
+        <source>Launch Flameshot </source>
+        <translation>Lanzar Flameshot </translation>
     </message>
 </context>
 <context>
@@ -451,8 +459,12 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="65"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation>Atajos disponibles en el modo captura de pantalla.</translation>
+    </message>
+    <message>
         <source>Available shorcuts in the screen capture mode.</source>
-        <translation>Atajos disponibles en el modo de captura de pantalla.</translation>
+        <translation type="vanished">Atajos disponibles en el modo de captura de pantalla.</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="76"/>
@@ -557,9 +569,9 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation>Error intentando guardar como </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="56"/>
-        <location filename="../src/main.cpp" line="284"/>
-        <location filename="../src/main.cpp" line="313"/>
+        <location filename="../src/main.cpp" line="60"/>
+        <location filename="../src/main.cpp" line="293"/>
+        <location filename="../src/main.cpp" line="322"/>
         <source>Unable to connect via DBus</source>
         <translation>Imposible conectar mediante DBus</translation>
     </message>
@@ -773,6 +785,24 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <location filename="../src/capture/tools/undotool.cpp" line="42"/>
         <source>Undo the last modification</source>
         <translation>Borra la última modificación</translation>
+    </message>
+</context>
+<context>
+    <name>VisualsEditor</name>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="25"/>
+        <source>Opacity of area outside selection:</source>
+        <translation>Opacidad del area fuera de la selección:</translation>
+    </message>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="58"/>
+        <source>Button Selection</source>
+        <translation>Selección de Botón</translation>
+    </message>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="64"/>
+        <source>Select All</source>
+        <translation>Seleccionar Todos</translation>
     </message>
 </context>
 </TS>
