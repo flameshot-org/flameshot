@@ -214,7 +214,7 @@ unix:!macx {
     dbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
     
-    icon.path = $${BASEDIR}$${PREFIX}/share/icons/hicolor/scalable/apps
+    icon.path = $${BASEDIR}$${PREFIX}/share/icons/
     icon.files = img/flameshot.png
 
     completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
