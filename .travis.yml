@@ -1,6 +1,7 @@
 os: linux
 sudo: false
 dist: trusty
+#dist: xenial  ### wait ubuntu 16.04's coming from travis-ci
 stages:
   - Build & Test
   - Packaging
@@ -141,24 +142,35 @@ jobs:
 
 
 ############## Packaging Deb ##############
-    #- stage: Packaging
-      #cache:
-        #- directories:
-          #- *build_dst_path
-          #### > Save the deb directory to reuse in other jobs
-          #- &deb_dst_path build-deb
-      #before_install:
-        ###### Clean cache folder
-        #- rm -rf $DEB_DST_PATH/*
+    # - stage: Packaging
+    #   cache:
+    #     - directories:
+    #       - *build_dst_path
+    #       ### > Save the deb directory to reuse in other jobs
+    #       - &deb_dst_path build-deb
+    #   addons:
+    #     apt:
+    #       sources:
+    #          - ubuntu-toolchain-r-test
+    #       packages:
+    #          - debhelper
+    #          - fakeroot
+    #          - qt5-qmake 
+    #          - qt5-default
+    #          - qttools5-dev-tools
+    #   before_install:
+    #     ##### Clean cache folder
+    #     - rm -rf $DEB_DST_PATH/*
 
-      #script:
-        #- ls -alhR $BUILD_DST_PATH
-        #- echo "Do .deb" > $DEB_DST_PATH/dev.txt
-        #- ls -alhR $DEB_DST_PATH
+    #   script:
+    #     - ls -alhR $BUILD_DST_PATH
+    #     - echo "Do .deb" > $DEB_DST_PATH/dev.txt
+    #     - ls -alhR $DEB_DST_PATH
+    #     - dpkg-buildpackage -rfakeroot -b -us -uc
 
-      #after_script:
-        ##### Wait for the cache to update
-        #- sleep 10
+    #   after_script:
+    #     #### Wait for the cache to update
+    #     - sleep 10
 
 
 ############## Deploy ##############
