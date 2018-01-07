@@ -98,11 +98,11 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <source>Button Selection</source>
-        <translation>按钮选择</translation>
+        <translation type="vanished">按钮选择</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>全选</translation>
+        <translation type="vanished">全选</translation>
     </message>
     <message>
         <source>Interface</source>
@@ -276,6 +276,14 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
+    <message>
+        <source>Launch at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch Flameshot </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImgurUploader</name>
@@ -371,7 +379,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <source>Available shorcuts in the screen capture mode.</source>
-        <translation>屏幕捕捉模式中的可用快捷键。</translation>
+        <translation type="vanished">屏幕捕捉模式中的可用快捷键。</translation>
     </message>
     <message>
         <source>Key</source>
@@ -392,6 +400,10 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;快捷键&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -632,6 +644,21 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <source>Undo the last modification</source>
         <translation>撤消上次修改</translation>
+    </message>
+</context>
+<context>
+    <name>VisualsEditor</name>
+    <message>
+        <source>Opacity of area outside selection:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button Selection</source>
+        <translation type="unfinished">按钮选择</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished">全选</translation>
     </message>
 </context>
 </TS>

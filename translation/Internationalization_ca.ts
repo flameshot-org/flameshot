@@ -98,11 +98,11 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     </message>
     <message>
         <source>Button Selection</source>
-        <translation>Selecció de botó</translation>
+        <translation type="vanished">Selecció de botó</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Selecciona-ho tot</translation>
+        <translation type="vanished">Selecciona-ho tot</translation>
     </message>
     <message>
         <source>Interface</source>
@@ -276,6 +276,14 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
+    <message>
+        <source>Launch at startup</source>
+        <translation>Llançament a l&apos;inici</translation>
+    </message>
+    <message>
+        <source>Launch Flameshot </source>
+        <translation>Llançament de Flameshot </translation>
+    </message>
 </context>
 <context>
     <name>ImgurUploader</name>
@@ -371,7 +379,7 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     </message>
     <message>
         <source>Available shorcuts in the screen capture mode.</source>
-        <translation>Dreceres disponibles en el mode de captura de pantalla.</translation>
+        <translation type="vanished">Dreceres disponibles en el mode de captura de pantalla.</translation>
     </message>
     <message>
         <source>Key</source>
@@ -392,6 +400,10 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Dreceres&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation>Dreceres disponibles en el mode de captura de pantalla.</translation>
     </message>
 </context>
 <context>
@@ -632,6 +644,21 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>Undo the last modification</source>
         <translation>Desfés l&apos;última modificació</translation>
+    </message>
+</context>
+<context>
+    <name>VisualsEditor</name>
+    <message>
+        <source>Opacity of area outside selection:</source>
+        <translation>Opacitat de la zona fora de la selecció:</translation>
+    </message>
+    <message>
+        <source>Button Selection</source>
+        <translation>Selecció de botó</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Selecciona-ho tot</translation>
     </message>
 </context>
 </TS>

@@ -35,7 +35,8 @@ win32:RC_ICONS += img/flameshot.ico
 
 TRANSLATIONS = translation/Internationalization_es.ts \
     translation/Internationalization_ca.ts \
-    translation/Internationalization_ru.ts
+    translation/Internationalization_ru.ts \
+    translation/Internationalization_zh-cn.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
