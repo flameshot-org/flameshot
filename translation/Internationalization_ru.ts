@@ -417,7 +417,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/infowindow.cpp" line="54"/>
         <source>Resize selection 1px</source>
-        <translation type="unfinished">Измененить размер выделения на 1px</translation>
+        <translation type="unfinished">Изменить размер выделения на 1px</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="55"/>
@@ -451,8 +451,8 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="65"/>
-        <source>Available shorcuts in the screen capture mode.</source>
-        <translation type="unfinished">Доступные горячие клавииши в режиме захвата экрана.</translation>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">Доступные горячие клавиши в режиме захвата экрана.</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="76"/>
