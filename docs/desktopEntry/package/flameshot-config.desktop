@@ -1,6 +1,4 @@
-#!/usr/bin/env xdg-open
 [Desktop Entry]
-Encoding=UTF-8
 Name=Configure Flameshot
 Name[es]=Configurar Flameshot
 GenericName=Screenshot tool
