@@ -220,6 +220,9 @@ unix:!macx {
 
     completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot
+    
+    appdata.path = $${BASEDIR}$${PREFIX}/share/appdata/
+    appdata.files = docs/appdata/flameshot.appdata.xml
 
     desktopentry.path = $${BASEDIR}$${PREFIX}/share/applications
     desktopentry.files = docs/desktopEntry/package/flameshot.desktop
@@ -245,6 +248,7 @@ unix:!macx {
         qmfile \
         servicedbus \
         dbus \
-        completion
+        completion \
+        appdata
 }
 
