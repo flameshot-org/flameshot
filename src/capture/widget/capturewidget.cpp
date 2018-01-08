@@ -96,7 +96,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
     m_screenshot = new Screenshot(fullScreenshot, this);
     QSize size = fullScreenshot.size();
     // we need to increase by 1 the size to reach to the end of the screen
-    setGeometry(0 ,0 , size.width()+1, size.height()+1);
+    setGeometry(0 ,0 , size.width(), size.height());
 
     // create buttons
     m_buttonHandler = new ButtonHandler(rect(), this);
@@ -528,7 +528,7 @@ void CaptureWidget::leftResize() {
 
 void CaptureWidget::rightResize() {
     if (!m_selection.isNull() && m_selection.right() < rect().right()) {
-        m_selection.setRight(m_selection.right());
+        m_selection.setRight(m_selection.right()+1);
         m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
@@ -548,7 +548,7 @@ void CaptureWidget::upResize() {
 
 void CaptureWidget::downResize() {
     if (!m_selection.isNull() && m_selection.bottom() < rect().bottom()) {
-        m_selection.setBottom(m_selection.bottom());
+        m_selection.setBottom(m_selection.bottom()+1);
         m_buttonHandler->updatePosition(m_selection);
         updateSizeIndicator();
 		updateHandles();
