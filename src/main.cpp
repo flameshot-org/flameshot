@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     CommandLineParser parser;
     // Add description
     parser.setDescription(
-                "Powerfull yet simple to use screenshot software.");
+                "Powerful yet simple to use screenshot software.");
     parser.setGeneralErrorMessage("See 'flameshot --help'.");
     // Arguments
     CommandArgument fullArgument("full", "Capture the entire desktop.");

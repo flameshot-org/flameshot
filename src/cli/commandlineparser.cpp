@@ -65,7 +65,7 @@ QString optionsToString(const QList<CommandOption> &options,
         }
         dashedOptionList << joinedDashedOptions;
     }
-    // check the lenght of the arguments
+    // check the length of the arguments
     for (auto const &arg: arguments) {
         if(arg.name().length() > size)
             size = arg.name().length();

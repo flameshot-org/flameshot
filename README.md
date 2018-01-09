@@ -152,7 +152,7 @@ In order to generate the makefile installing in `/usr` instead of in `/usr/local
 If you want to install in a custom directory you can define the `BASEDIR` variable.
 
 **Example**:
-You whant to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
+You want to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
 `qmake CONFIG+=packaging BASEDIR=~/myBuilds/test && make install`
 
 ### Runtime Dependencies
@@ -200,7 +200,7 @@ I improve Flameshot in my free time because I want to create something good for 
 If you want you can donate some bucks [here](https://www.paypal.me/lupoDharkael).
 
 ## Acknowledgment
-I really appreciate those who have shown interest in the early develpment process:
+I really appreciate those who have shown interest in the early development process:
 - [Cosmo](https://github.com/philpem)
 - [XerTheSquirrel](https://github.com/XerTheSquirrel)
 - [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)
