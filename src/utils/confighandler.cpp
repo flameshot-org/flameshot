@@ -26,12 +26,18 @@ ConfigHandler::ConfigHandler(){
 }
 
 QList<CaptureButton::ButtonType> ConfigHandler::getButtons() {
-    QList<int> buttons = m_settings.value("buttons").value<QList<int> >();
-    bool modified = normalizeButtons(buttons);
-    if (modified) {
-        m_settings.setValue("buttons", QVariant::fromValue(buttons));
+    QList<CaptureButton::ButtonType> buttons;
+    if (m_settings.contains("buttons")) {
+        QList<int> buttonsInt = m_settings.value("buttons").value<QList<int> >();
+        bool modified = normalizeButtons(buttonsInt);
+        if (modified) {
+            m_settings.setValue("buttons", QVariant::fromValue(buttonsInt));
+        }
+        buttons = fromIntToButton(buttonsInt);
+    } else {
+        buttons = CaptureButton::getIterableButtonTypes().toList();
     }
-    return fromIntToButton(buttons);
+    return buttons;
 }
 
 void ConfigHandler::setButtons(const QList<CaptureButton::ButtonType> &buttons) {
@@ -49,7 +55,11 @@ void ConfigHandler::setSavePath(const QString &savePath) {
 }
 
 QColor ConfigHandler::uiMainColorValue() {
-    return m_settings.value("uiColor").value<QColor>();
+    QColor res = QColor(116, 0, 150);
+    if (m_settings.contains("uiColor")) {
+        res = m_settings.value("uiColor").value<QColor>();
+    }
+    return res;
 }
 
 void ConfigHandler::setUIMainColor(const QColor &c) {
@@ -57,7 +67,11 @@ void ConfigHandler::setUIMainColor(const QColor &c) {
 }
 
 QColor ConfigHandler::uiContrastColorValue() {
-    return m_settings.value("contastUiColor").value<QColor>();
+    QColor res = QColor(86, 0, 120);
+    if (m_settings.contains("contastUiColor")) {
+        res = m_settings.value("contastUiColor").value<QColor>();
+    }
+    return res;
 }
 
 void ConfigHandler::setUIContrastColor(const QColor &c) {
@@ -65,7 +79,11 @@ void ConfigHandler::setUIContrastColor(const QColor &c) {
 }
 
 QColor ConfigHandler::drawColorValue() {
-    return m_settings.value("drawColor").value<QColor>();
+    QColor res(Qt::red);
+    if (m_settings.contains("drawColor")) {
+        res = m_settings.value("drawColor").value<QColor>();
+    }
+    return res;
 }
 
 void ConfigHandler::setDrawColor(const QColor &c) {
@@ -73,7 +91,11 @@ void ConfigHandler::setDrawColor(const QColor &c) {
 }
 
 bool ConfigHandler::showHelpValue() {
-    return m_settings.value("showHelp").toBool();
+    bool res = true;
+    if (m_settings.contains("showHelp")) {
+        res = m_settings.value("showHelp").toBool();
+    }
+    return res;
 }
 
 void ConfigHandler::setShowHelp(const bool showHelp) {
@@ -81,7 +103,11 @@ void ConfigHandler::setShowHelp(const bool showHelp) {
 }
 
 bool ConfigHandler::desktopNotificationValue() {
-    return m_settings.value("showDesktopNotification").toBool();
+    bool res = true;
+    if (m_settings.contains("showDesktopNotification")) {
+        res = m_settings.value("showDesktopNotification").toBool();
+    }
+    return res;
 }
 
 void ConfigHandler::setDesktopNotification(const bool showDesktopNotification) {
@@ -97,7 +123,11 @@ void ConfigHandler::setFilenamePattern(const QString &pattern) {
 }
 
 bool ConfigHandler::disabledTrayIconValue() {
-    return m_settings.value("disabledTrayIcon").toBool();
+    bool res = false;
+    if (m_settings.contains("disabledTrayIcon")) {
+        res = m_settings.value("disabledTrayIcon").toBool();
+    }
+    return res;
 }
 
 void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon) {
@@ -105,7 +135,11 @@ void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon) {
 }
 
 int ConfigHandler::drawThicknessValue() {
-    return m_settings.value("drawThickness").toInt();
+    int res = 0;
+    if (m_settings.contains("drawThickness")) {
+        res = m_settings.value("drawThickness").toInt();
+    }
+    return res;
 }
 
 void ConfigHandler::setdrawThickness(const int thickness) {
@@ -171,25 +205,13 @@ void ConfigHandler::setContrastOpacity(const int transparency) {
     m_settings.setValue("contrastOpacity", transparency);
 }
 
-bool ConfigHandler::initiatedIsSet() {
-    return m_settings.value("initiated").toBool();
-}
-
-void ConfigHandler::setInitiated() {
-    m_settings.setValue("initiated", true);
-}
-
-void ConfigHandler::setNotInitiated() {
-    m_settings.setValue("initiated", false);
-}
-
 void ConfigHandler::setDefaults() {
     setShowHelp(true);
     setDesktopNotification(true);
     setDrawColor(QColor(Qt::red));
     setUIMainColor(QColor(116, 0, 150));
     setUIContrastColor(QColor(86, 0, 120));
-	setdrawThickness(0);
+    setdrawThickness(0);
     setContrastOpacity(190);
     setDisabledTrayIcon(false);
     setAllTheButtons();

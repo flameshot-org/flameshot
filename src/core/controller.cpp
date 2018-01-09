@@ -38,8 +38,6 @@ Controller::Controller() : m_captureWindow(nullptr)
 {
     qApp->setQuitOnLastWindowClosed(false);
 
-    initDefaults();
-
     // init tray icon
 #if defined(Q_OS_LINUX)
     if (!ConfigHandler().disabledTrayIconValue()) {
@@ -61,16 +59,6 @@ Controller::Controller() : m_captureWindow(nullptr)
 Controller *Controller::getInstance() {
     static Controller c;
     return &c;
-}
-
-// initDefaults inits the global config in the first execution of the program
-void Controller::initDefaults() {
-    ConfigHandler config;
-    //config.setNotInitiated();
-    if (!config.initiatedIsSet()) {
-        config.setDefaults();
-        config.setInitiated();
-    }
 }
 
 // creation of a new capture in GUI mode
