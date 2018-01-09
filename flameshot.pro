@@ -221,7 +221,7 @@ unix:!macx {
     completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot
     
-    appdata.path = $${BASEDIR}$${PREFIX}/share/appdata/
+    appdata.path = $${BASEDIR}$${PREFIX}/share/metainfo/
     appdata.files = docs/appdata/flameshot.appdata.xml
 
     desktopentry.path = $${BASEDIR}$${PREFIX}/share/applications
