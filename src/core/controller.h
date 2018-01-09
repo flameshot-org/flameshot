@@ -56,7 +56,6 @@ public slots:
     void updateConfigComponents();
 
 private slots:
-    void initDefaults();
 
 private:
     Controller();
