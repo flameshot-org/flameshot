@@ -140,17 +140,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="108"/>
+        <location filename="../src/core/controller.cpp" line="96"/>
         <source>&amp;Configuration</source>
         <translation type="unfinished">&amp;Настройка</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="111"/>
+        <location filename="../src/core/controller.cpp" line="99"/>
         <source>&amp;Information</source>
         <translation type="unfinished">&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="102"/>
         <source>&amp;Quit</source>
         <translation type="unfinished">&amp;Выход</translation>
     </message>
