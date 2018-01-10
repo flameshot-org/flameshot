@@ -44,13 +44,13 @@ void UIcolorEditor::updateComponents() {
     ConfigHandler config;
     m_uiColor = config.uiMainColorValue();
     m_contrastColor = config.uiContrastColorValue();
+    m_buttonContrast->setColor(m_contrastColor);
+    m_buttonMainColor->setColor(m_uiColor);
     if (m_lastButtonPressed == m_buttonMainColor) {
         m_colorWheel->setColor(m_uiColor);
     } else {
         m_colorWheel->setColor(m_contrastColor);
     }
-    m_buttonContrast->setColor(m_contrastColor);
-    m_buttonMainColor->setColor(m_uiColor);
 }
 
 // updateUIcolor updates the appearance of the buttons
@@ -140,7 +140,6 @@ void UIcolorEditor::initButtons() {
 // visual update for the selected button
 void UIcolorEditor::changeLastButton(CaptureButton *b) {
     if (m_lastButtonPressed != b) {
-        m_lastButtonPressed->setIcon(QIcon());
         m_lastButtonPressed = b;
 
         QString offStyle("QLabel { color : gray; }");
