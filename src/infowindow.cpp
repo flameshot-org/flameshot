@@ -62,7 +62,7 @@ QVector<const char *> InfoWindow::m_description = {
 
 void InfoWindow::initInfoTable() {
     QTableWidget *table = new QTableWidget(this);
-    table->setToolTip(tr("Available shorcuts in the screen capture mode."));
+    table->setToolTip(tr("Available shortcuts in the screen capture mode."));
 
     m_layout->addWidget(table);
 

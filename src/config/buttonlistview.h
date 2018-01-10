@@ -36,7 +36,7 @@ protected:
     void initButtonList();
 
 private:
-    QList<int> m_listButtons;
+    QList<CaptureButton::ButtonType> m_listButtons;
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem *);

@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-APP_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
-DEFINES += APP_VERSION
+TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
 QT  += core gui
 
@@ -35,7 +35,8 @@ win32:RC_ICONS += img/flameshot.ico
 
 TRANSLATIONS = translation/Internationalization_es.ts \
     translation/Internationalization_ca.ts \
-    translation/Internationalization_ru.ts
+    translation/Internationalization_ru.ts \
+    translation/Internationalization_zh-cn.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
@@ -198,36 +199,41 @@ RESOURCES += \
 
 # installs
 unix:!macx {
-    packaging {
-        USRPATH = /usr
-    } else {
-        USRPATH = /usr/local
+    isEmpty(PREFIX) {
+      packaging {
+        PREFIX = /usr
+      } else {
+        PREFIX = /usr/local
+      }
     }
 
-    target.path = $${BASEDIR}$${USRPATH}/bin/
+    target.path = $${BASEDIR}$${PREFIX}/bin/
 
     qmfile.path = $${BASEDIR}/usr/share/flameshot/translations/
     qmfile.files = $${TRANSLATIONS_FILES}
 
-    dbus.path = $${BASEDIR}/usr/share/dbus-1/interfaces/
+    dbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
     
-    icon.path = $${BASEDIR}$${USRPATH}/share/icons/
+    icon.path = $${BASEDIR}$${PREFIX}/share/icons/
     icon.files = img/flameshot.png
 
-    completion.path = /usr/share/bash-completion/completions/
+    completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot
+    
+    appdata.path = $${BASEDIR}$${PREFIX}/share/metainfo/
+    appdata.files = docs/appdata/flameshot.appdata.xml
 
-    desktopentry.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentry.path = $${BASEDIR}$${PREFIX}/share/applications
     desktopentry.files = docs/desktopEntry/package/flameshot.desktop
 
-    desktopentryinit.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentryinit.path = $${BASEDIR}$${PREFIX}/share/applications
     desktopentryinit.files = docs/desktopEntry/package/flameshot-init.desktop
 
-    desktopentryconfig.path = $${BASEDIR}$${USRPATH}/share/applications
+    desktopentryconfig.path = $${BASEDIR}$${PREFIX}/share/applications
     desktopentryconfig.files = docs/desktopEntry/package/flameshot-config.desktop
 
-    servicedbus.path = $${BASEDIR}/usr/share/dbus-1/services/
+    servicedbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/services/
     packaging {
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
     } else {
@@ -242,6 +248,7 @@ unix:!macx {
         qmfile \
         servicedbus \
         dbus \
-        completion
+        completion \
+        appdata
 }
 

@@ -66,12 +66,7 @@ public:
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
-
-    bool initiatedIsSet();
-    void setInitiated();
-    void setNotInitiated();
     void setDefaults();
-
     void setAllTheButtons();
 
     QString configFilePath() const;

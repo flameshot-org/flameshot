@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018 Vitaly Zaitsev <vitaly@easycoding.org> -->
+<component type="desktop">
+  <id>flameshot.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPLv3+ and ASL 2.0 and GPLv2 and LGPLv3 and Free Art</project_license>
+  <name>Flameshot</name>
+  <summary>Powerful and simple to use screenshot software</summary>
+  <description>
+    <p>
+      Powerful and simple to use screenshot software with built-in
+      editor with advanced features.
+    </p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/lupoDharkael/flameshot/master/img/appPreview/usageStatic.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/lupoDharkael/flameshot/master/img/appPreview/animatedUsage.gif</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/lupoDharkael/flameshot</url>
+  <update_contact>https://github.com/lupoDharkael</update_contact>
+</component>

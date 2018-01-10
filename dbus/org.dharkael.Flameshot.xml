@@ -9,7 +9,7 @@
         @id: identificator of the call.
 
         Open the user interface used to capture the screen. Sends a captureTaken signal with the raw image after closing the GUI
-        due to a capture taken. It could send a captureFailed signal if the screenshot cant be retrieved.
+        due to a capture taken. It could send a captureFailed signal if the screenshot can't be retrieved.
     -->
     <method name="graphicCapture">
       <arg name="path" type="s" direction="in"/>

@@ -69,7 +69,7 @@ size_t ButtonHandler::size() const {
     return m_vectorButtons.size();
 }
 
-// UpdatePosition updates the position of the buttons arround the
+// UpdatePosition updates the position of the buttons around the
 // selection area. Ignores the sides blocked by the end of the screen.
 // When the selection is too small it works on a virtual selection with
 // the original in the center.

@@ -18,6 +18,7 @@
   - [Install](#install)
 - [Packaging](#packaging)
 - [License](#license)
+- [Donations](#donations)
 
 ## Features
 - Customizable appearance.
@@ -106,7 +107,7 @@ Shift + drag a handler of the selection area: mirror redimension in the opposite
 
 There are a packages available for a few distros:
 - [Arch](https://aur.archlinux.org/packages/flameshot/)
-- [Open Suse](https://software.opensuse.org/package/flameshot)
+- [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/voidlinux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 
@@ -119,7 +120,7 @@ The compilation requires Qt version 5.3 or higher and GCC 4.9.2 or higher.
 ### Debian
 Compilation Dependencies:
 ````
-apt install -y git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+apt install git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
 ````
 
 Compilation: run `qmake && make` in the main directory.
@@ -127,7 +128,7 @@ Compilation: run `qmake && make` in the main directory.
 ### Fedora
 Compilation Dependencies:
 ````
-dnf install -y qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist
+dnf install qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory.
@@ -151,7 +152,7 @@ In order to generate the makefile installing in `/usr` instead of in `/usr/local
 If you want to install in a custom directory you can define the `BASEDIR` variable.
 
 **Example**:
-You whant to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
+You want to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
 `qmake CONFIG+=packaging BASEDIR=~/myBuilds/test && make install`
 
 ### Runtime Dependencies
@@ -194,8 +195,13 @@ openssl, ca-certificates
 
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
+## Donations
+I improve Flameshot in my free time because I want to create something good for everyone to use. 
+If you want you can donate some bucks [here](https://www.paypal.me/lupoDharkael).
+
 ## Acknowledgment
-I really appreciate those who have shown interest in the develpment process:
-- Cosmo.
-- ismatori.
-- The members of the Sugus GNU/Linux association.
+I really appreciate those who have shown interest in the early development process:
+- [Cosmo](https://github.com/philpem)
+- [XerTheSquirrel](https://github.com/XerTheSquirrel)
+- [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)
+- ismatori

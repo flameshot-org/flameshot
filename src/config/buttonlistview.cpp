@@ -19,7 +19,6 @@
 #include "src/capture/tools/toolfactory.h"
 #include "src/utils/confighandler.h"
 #include <QListWidgetItem>
-#include <QSettings>
 #include <algorithm>
 
 ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
@@ -67,15 +66,13 @@ void ButtonListView::initButtonList() {
 
 void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     CaptureButton::ButtonType bType = m_buttonTypeByName[item->text()];
-    int buttonIndex = static_cast<int>(bType);
-
     if (item->checkState() == Qt::Checked) {
-        m_listButtons.append(buttonIndex);
+        m_listButtons.append(bType);
         std::sort(m_listButtons.begin(), m_listButtons.end());
     } else {
-        m_listButtons.removeOne(buttonIndex);
+        m_listButtons.removeOne(bType);
     }
-    QSettings().setValue("buttons", QVariant::fromValue(m_listButtons));
+    ConfigHandler().setButtons(m_listButtons);
 }
 
 void ButtonListView::reverseItemCheck(QListWidgetItem *item){
@@ -96,11 +93,12 @@ void ButtonListView::selectAll() {
 }
 
 void ButtonListView::updateComponents() {
-    m_listButtons = QSettings().value("buttons").value<QList<int> >();
+    m_listButtons = ConfigHandler().getButtons();
     auto listTypes = CaptureButton::getIterableButtonTypes();
     for(int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
-        if (m_listButtons.contains(listTypes.at(i))) {
+        auto elem = static_cast<CaptureButton::ButtonType>(listTypes.at(i));
+        if (m_listButtons.contains(elem)) {
             item->setCheckState(Qt::Checked);
         } else {
             item->setCheckState(Qt::Unchecked);
