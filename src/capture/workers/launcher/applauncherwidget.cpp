@@ -92,10 +92,11 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap &p, QWidget *parent):
 
 void AppLauncherWidget::launch(const QModelIndex &index) {
 	if (!QFileInfo(m_tempFile).isReadable()) {
-		m_tempFile = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
+        m_tempFile = FileNameHandler().generateAbsolutePath(QDir::tempPath()) + ".png";
 		bool ok = m_pixmap.save(m_tempFile);
 		if (!ok) {
-            QMessageBox::about(this, tr("Error"), tr("Unable to write in") + "/tmp.");
+            QMessageBox::about(this, tr("Error"), tr("Unable to write in")
+                               + QDir::tempPath());
 			return;
 		}
 	}
