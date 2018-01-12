@@ -4,6 +4,8 @@
 #
 #-------------------------------------------------
 
+win32:LIBS += -luser32 #-lshell32
+
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
@@ -123,7 +125,8 @@ SOURCES += src/main.cpp \
     src/capture/workers/launcher/launcheritemdelegate.cpp \
     src/capture/tools/blurtool.cpp \
     src/capture/workers/launcher/terminallauncher.cpp \
-    src/config/visualseditor.cpp
+    src/config/visualseditor.cpp \
+    src/config/extendedslider.cpp
 
 HEADERS  += src/capture/widget/buttonhandler.h \
     src/infowindow.h \
@@ -178,7 +181,8 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/capture/workers/launcher/launcheritemdelegate.h \
     src/capture/tools/blurtool.h \
     src/capture/workers/launcher/terminallauncher.h \
-    src/config/visualseditor.h
+    src/config/visualseditor.h \
+    src/config/extendedslider.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
