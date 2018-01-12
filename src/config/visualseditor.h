@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-class QSlider;
+class ExtendedSlider;
 class QVBoxLayout;
 class ButtonListView;
 class UIcolorEditor;
@@ -18,15 +18,13 @@ public slots:
     void updateComponents();
 
 private slots:
-    void updateOpacity(int);
     void saveOpacity();
 
 private:
-    int m_opacity; // Slider local value
     QVBoxLayout *m_layout;
     ButtonListView *m_buttonList;
     UIcolorEditor *m_colorEditor;
-    QSlider *m_opacitySlider;
+    ExtendedSlider *m_opacitySlider;
 
     void initWidgets();
     void initOpacitySlider();
