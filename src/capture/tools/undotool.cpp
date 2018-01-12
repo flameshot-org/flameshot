@@ -1,4 +1,4 @@
-// Copyright 2017 Alejandro Sirgo Rica
+// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
