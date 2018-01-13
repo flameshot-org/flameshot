@@ -54,3 +54,14 @@ script:
  # - git describe --long
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then bash ./.travis_linux.sh ; fi
   - pwd && ls   
+
+# deploy:
+#    # Deploy packages to Github Release
+#    provider: releases
+#    api_key: "GITHUB ENCYPTED OAUTH TOKEN"
+#    file_glob: true
+#    file: dist/*.{deb,rpm,AppImage}
+#    skip_cleanup: true
+#    on:
+#      tags: true
+#      branch: master
