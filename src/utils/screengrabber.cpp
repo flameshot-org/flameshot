@@ -1,4 +1,4 @@
-// Copyright 2017 Alejandro Sirgo Rica
+// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -26,6 +26,7 @@
 #ifdef Q_OS_LINUX
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QDir>
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
@@ -41,7 +42,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
         switch (m_info.windowManager()) {
 		case m_info.GNOME: {
             // https://github.com/GNOME/gnome-shell/blob/695bfb96160033be55cfb5ac41c121998f98c328/data/org.gnome.Shell.Screenshot.xml
-			QString path = FileNameHandler().generateAbsolutePath("/tmp") + ".png";
+            QString path = FileNameHandler().generateAbsolutePath(QDir::tempPath()) + ".png";
 			QDBusInterface gnomeInterface(QStringLiteral("org.gnome.Shell"),
 										  QStringLiteral("/org/gnome/Shell/Screenshot"),
 										  QStringLiteral("org.gnome.Shell.Screenshot"));

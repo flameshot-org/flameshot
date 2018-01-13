@@ -15,33 +15,31 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SELECTIONTOOL_H
-#define SELECTIONTOOL_H
+#ifndef EXTENDEDSLIDER_H
+#define EXTENDEDSLIDER_H
 
-#include "capturetool.h"
+#include <QSlider>
+#include <QTimer>
 
-class SelectionTool : public CaptureTool
+class ExtendedSlider : public QSlider
 {
     Q_OBJECT
 public:
-    explicit SelectionTool(QObject *parent = nullptr);
+    explicit ExtendedSlider(QWidget *parent = nullptr);
 
-    int id() const override;
-    bool isSelectable() const override;
-    ToolWorkType toolType() const override;
+    int mappedValue(int min, int max);
+    void setMapedValue(int min, int val, int max);
 
-    QString iconName() const override;
-    QString name() const override;
-    QString description() const override;
+signals:
+    void modificationsEnded();
 
-    void processImage(
-            QPainter &painter,
-            const QVector<QPoint> &points,
-            const QColor &color,
-            const int thickness) override;
+private slots:
+    void updateTooltip();
+    void fireTimer();
 
-    void onPressed() override;
+private:
+    QTimer m_timer;
 
 };
 
-#endif // SELECTIONTOOL_H
+#endif // EXTENDEDSLIDER_H

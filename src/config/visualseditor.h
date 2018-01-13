@@ -1,9 +1,26 @@
+// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+//
+// This file is part of Flameshot.
+//
+//     Flameshot is free software: you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation, either version 3 of the License, or
+//     (at your option) any later version.
+//
+//     Flameshot is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+//
+//     You should have received a copy of the GNU General Public License
+//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+
 #ifndef VISUALSEDITOR_H
 #define VISUALSEDITOR_H
 
 #include <QWidget>
 
-class QSlider;
+class ExtendedSlider;
 class QVBoxLayout;
 class ButtonListView;
 class UIcolorEditor;
@@ -18,15 +35,13 @@ public slots:
     void updateComponents();
 
 private slots:
-    void updateOpacity(int);
     void saveOpacity();
 
 private:
-    int m_opacity; // Slider local value
     QVBoxLayout *m_layout;
     ButtonListView *m_buttonList;
     UIcolorEditor *m_colorEditor;
-    QSlider *m_opacitySlider;
+    ExtendedSlider *m_opacitySlider;
 
     void initWidgets();
     void initOpacitySlider();
