@@ -33,7 +33,7 @@
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="109"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
@@ -43,7 +43,7 @@
         <translation type="unfinished">Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Unable to launch in terminal.</source>
         <translation type="unfinished">Не удалось запустить в терминале.</translation>
     </message>
@@ -786,17 +786,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="25"/>
+        <location filename="../src/config/visualseditor.cpp" line="53"/>
         <source>Opacity of area outside selection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="58"/>
+        <location filename="../src/config/visualseditor.cpp" line="77"/>
         <source>Button Selection</source>
         <translation type="unfinished">Выбор кнопок</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="64"/>
+        <location filename="../src/config/visualseditor.cpp" line="83"/>
         <source>Select All</source>
         <translation type="unfinished">Выбрать все</translation>
     </message>
