@@ -628,12 +628,14 @@ void CaptureWidget::updateCursor() {
 
 void CaptureWidget::copyScreenshot() {
     m_captureDone = true;
+    hide();
     ResourceExporter().captureToClipboard(pixmap());
     close();
 }
 
 void CaptureWidget::saveScreenshot() {
     m_captureDone = true;
+    hide();
     if (m_forcedSavePath.isEmpty()) {
         ResourceExporter().captureToFileUi(pixmap());
     } else {
@@ -644,12 +646,14 @@ void CaptureWidget::saveScreenshot() {
 
 void CaptureWidget::uploadToImgur() {
     m_captureDone = true;
+    hide();
     ResourceExporter().captureToImgur(pixmap());
     close();
 }
 
 void CaptureWidget::openWithProgram() {
     m_captureDone = true;
+    hide();
     ResourceExporter().captureToProgram(pixmap());
     close();
 }
