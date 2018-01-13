@@ -1,204 +1,56 @@
-os: linux
-sudo: false
 dist: trusty
-#dist: xenial  ### wait ubuntu 16.04's coming from travis-ci
-stages:
-  - Build & Test
-  - Packaging
-  - name: Deploy
-#    if: branch = master
+sudo: required
+services:
+  - docker
 
+language: cpp
+
+os:
+  - linux
+
+cache:
+    directories:
+      - $HOME/.cache
+ 
 env:
-  global:
-    #### Destination binary path
-    - BUILD_DST_PATH=build
-    #### Destination packaging path. If we use one by job they doesn't need to wait until the others end
-    - APPIMAGE_DST_PATH=build-appimage
-    - DEB_DST_PATH=build-deb
+    global:
+      # Environment variables for packpack
+      - PRODUCT=flameshot
+      - VERSION=0.5.0
+      - RELEASE=1
+      - ARCH=x86_64
+      - DOCKER_REPO=packpack/packpack
+    matrix:
+      #The actual list of distribution is available on
+      #https://hub.docker.com/r/packpack/packpack/tags/
+      - OS=fedora DIST=25
+      - OS=fedora DIST=26
+      # trusty: only for build & test & AppImage
+      - OS=ubuntu DIST=trusty   #14.04 LTS;  Qt version is 5.2.1, flameshot not support
+      - OS=ubuntu DIST=xenial   #16.04 LTS
+      - OS=ubuntu DIST=zesty    #17.04
+      - OS=ubuntu DIST=artful   #17.10
+      - OS=debian DIST=jessie   #8
+      - OS=debian DIST=stretch  #9
 
-jobs:
-  include:
-############## Build & Test ##############
-    - stage: Build & Test
-      #language: cpp   ->  Not necessary because we use specific versions
-      #compiler: gcc   ->  Not necessary because we use specific versions
-      cache:
-        - ccache: true
-        - apt: true
-        - directories:
-          ### > Save the build directory to reuse in other jobs
-          - &build_dst_path build
-      addons: &build_apt
-        apt:
-          sources:
-            # qt5 >= 5.3
-            - sourceline: 'ppa:beineri/opt-qt532-trusty'
-            # g++ & gcc >= 4.9
-            - ubuntu-toolchain-r-test
-          packages:
-            - git
-            - build-essential
+before_install:
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get -qq update ; fi
+  # - export VERSION=0.5.0
 
-            #### Replacement of: qt5-qmake, qt5-default, qttools5-dev-tools
-            - qt53base
-            - qt53tools
+before_script:
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then chmod +x .travis_linux.sh ; fi
 
-            #### Using g++ >= 4.9
-            - g++-4.9
-            - gcc-4.9
+install:
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq git; sudo apt-get install -qq build-essential ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install openssl libssl-dev ; fi
+  # - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install libgl1-mesa-dev ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install tree ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq gcc-4.9; sudo apt-get install -qq g++-4.9 ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq git ; fi
 
-      before_install:
-        ##### Clean cache folder
-        - rm -rf $BUILD_DST_PATH/*
-
-      before_script: &build_before_script
-        #### Use qt5 == 5.3 instead other version
-        - source /opt/qt53/bin/qt53-env.sh && qmake --version
-
-        ##### Use gcc y cpp == 4.9 instead other version
-        - export CC=gcc-4.9 CXX=g++-4.9
-
-      script:
-        - qmake QMAKE_CXX=$CXX QMAKE_CC=$CC QMAKE_LINK=$CXX DESTDIR=$BUILD_DST_PATH
-
-        # Building flameshot
-        - make -j$(nproc)
-
-        # Running flameshot tests
-        - make check -j$(nproc)
-        - ls -alhR
-
-      after_script:
-        #### Wait for the cache to update
-        - sleep 10
-
-
-############## Packaging AppImage ##############
-    - stage: Packaging
-      #language: cpp
-      #compiler: gcc
-      cache:
-        - directories:
-          - *build_dst_path
-          ### > Save the appimage directory to reuse in other jobs
-          - &appimage_dst_path build-appimage
-      addons:
-        apt:
-          sources:
-            # qt5 >= 5.3
-            - sourceline: 'ppa:beineri/opt-qt532-trusty'
-          packages:
-            #### Replacement of: qt5-qmake, qt5-default, qttools5-dev-tools
-            - qt53base
-            # - qt53tools
-      before_install:
-        ##### Clean cache folder
-        - rm -rf $APPIMAGE_DST_PATH/*
-
-      before_script:
-        #### Use qt5 == 5.3 instead other version
-        - source /opt/qt53/bin/qt53-env.sh && qmake --version
-
-        ##### Download and install linuxdeployqt
-        - wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage" -O linuxdeployqt
-        - chmod +x linuxdeployqt
-        ## Extract linuxdeployqt in 'squashfs-root/'
-        - ./linuxdeployqt --appimage-extract
-        # - ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-            #|-squashfs-root
-            #|---usr
-            #|-----bin
-            #|-----lib
-            #|-----share
-            #|-------doc
-            #|---------libicu52
-            #|---------libpcre3
-            #|---------qt59base
-            #|-----translations
-
-      script:
-        #### Prepare packing
-        - mkdir appdir
-        - cp $BUILD_DST_PATH/flameshot appdir/
-        - cp docs/desktopEntry/package/* appdir/
-        - cp img/flameshot.png appdir/
-        - ls -alhR appdir/
-
-        #### Configure env vars
-        - unset QTDIR QT_PLUGIN_PATH LD_LIBRARY_PATH
-        - export VERSION=$(git rev-parse --short HEAD) # linuxdeployqt uses this for naming the file
-
-        #### Packaging
-        - ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -bundle-non-qt-libs
-        - ln -sf plugins/platforms/ appdir/platforms  # An unknown bug
-        - ./squashfs-root/usr/bin/linuxdeployqt appdir/flameshot -verbose=2 -appimage
-        - ls -alhR ./*.AppImage
-        - cp *.AppImage $APPIMAGE_DST_PATH/
-
-      after_script:
-        #### Wait for the cache to update
-        - sleep 10
-
-
-
-############## Packaging Deb ##############
-    # - stage: Packaging
-    #   cache:
-    #     - directories:
-    #       - *build_dst_path
-    #       ### > Save the deb directory to reuse in other jobs
-    #       - &deb_dst_path build-deb
-    #   addons:
-    #     apt:
-    #       sources:
-    #          - ubuntu-toolchain-r-test
-    #       packages:
-    #          - debhelper
-    #          - fakeroot
-    #          - qt5-qmake 
-    #          - qt5-default
-    #          - qttools5-dev-tools
-    #   before_install:
-    #     ##### Clean cache folder
-    #     - rm -rf $DEB_DST_PATH/*
-
-    #   script:
-    #     - ls -alhR $BUILD_DST_PATH
-    #     - echo "Do .deb" > $DEB_DST_PATH/dev.txt
-    #     - ls -alhR $DEB_DST_PATH
-    #     - dpkg-buildpackage -rfakeroot -b -us -uc
-
-    #   after_script:
-    #     #### Wait for the cache to update
-    #     - sleep 10
-
-
-############## Deploy ##############
-    - stage: Deploy
-      cache:
-        - directories:
-          - *build_dst_path
-          - *appimage_dst_path
-          #- *deb_dst_path
-      script:
-        # - ls -alhR $BUILD_DST_PATH
-        - ls -alhR ./build*
-
-        #### Upload all files to transfer.sh
-        - WHERE_FIND="$BUILD_DST_PATH $APPIMAGE_DST_PATH $DEB_DST_PATH"
-        - |
-          for file_path in $(find $WHERE_FIND -maxdepth 1 -mindepth 1 -type f)
-          do
-              curl --upload-file "$file_path" "https://transfer.sh/$(basename $file_path)"
-              printf "\n\n"
-          done
-
-      before_cache:
-        #### Clean cache to optimize future builds
-        - find . -type f -delete
-
-
-notifications:
- email:
-   on_success: change
-   on_failure: always
+script:
+ # - git submodule update --init --recursive
+ # - git describe --long
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then bash ./.travis_linux.sh ; fi
+  - pwd && ls   
