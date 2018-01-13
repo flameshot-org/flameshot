@@ -33,12 +33,12 @@
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="109"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Unable to launch in terminal.</source>
         <translation>无法在终端中启动。</translation>
     </message>
@@ -791,17 +791,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="25"/>
+        <location filename="../src/config/visualseditor.cpp" line="53"/>
         <source>Opacity of area outside selection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="58"/>
+        <location filename="../src/config/visualseditor.cpp" line="77"/>
         <source>Button Selection</source>
         <translation>按钮选择</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="64"/>
+        <location filename="../src/config/visualseditor.cpp" line="83"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>

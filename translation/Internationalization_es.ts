@@ -33,7 +33,7 @@
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="109"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -43,7 +43,7 @@
         <translation>Imposible escribir en</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Unable to launch in terminal.</source>
         <translation>Imposible lanzar en terminal.</translation>
     </message>
@@ -790,17 +790,17 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="25"/>
+        <location filename="../src/config/visualseditor.cpp" line="53"/>
         <source>Opacity of area outside selection:</source>
         <translation>Opacidad del area fuera de la selección:</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="58"/>
+        <location filename="../src/config/visualseditor.cpp" line="77"/>
         <source>Button Selection</source>
         <translation>Selección de Botón</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="64"/>
+        <location filename="../src/config/visualseditor.cpp" line="83"/>
         <source>Select All</source>
         <translation>Seleccionar Todos</translation>
     </message>
