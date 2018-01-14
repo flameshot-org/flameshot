@@ -28,6 +28,7 @@ public:
 
     void saveToClipboard(const QPixmap &capture);
     void saveToFilesystem(const QPixmap &capture, const QString &path);
+    void saveToFilesystemGUI(const QPixmap &capture);
 
 };
 

@@ -72,6 +72,11 @@ QString FileNameHandler::absoluteSavePath(QString &directory, QString &filename)
     return directory + filename;
 }
 
+QString FileNameHandler::absoluteSavePath() {
+    QString dir, file;
+    return absoluteSavePath(dir, file);
+}
+
 QString FileNameHandler::charArrToQString(const char *c) {
     return QString::fromLocal8Bit(c, MAX_CHARACTERS);
 }
