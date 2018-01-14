@@ -22,6 +22,8 @@
 #include <QClipboard>
 #include <QApplication>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QImageWriter>
 
 ScreenshotSaver::ScreenshotSaver()
 {
@@ -45,6 +47,35 @@ void ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
         saveMessage = QObject::tr("Error trying to save as ") + completePath;
     }
     SystemNotification().sendMessage(saveMessage);
+}
+
+void ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
+    bool ok = false;
+    while (!ok) {
+        QString savePath = QFileDialog::getSaveFileName(
+                    nullptr,
+                    QString(),
+                    FileNameHandler().absoluteSavePath() + ".png");
+
+        if (savePath.isNull()) {
+            return;
+        }
+        ok = capture.save(savePath);
+        if (ok) {
+            QString pathNoFile = savePath.left(savePath.lastIndexOf("/"));
+            ConfigHandler().setSavePath(pathNoFile);
+            QString msg = QObject::tr("Capture saved as ") + savePath;
+            SystemNotification().sendMessage(msg);
+        } else {
+            QString msg = QObject::tr("Error trying to save as ") + savePath;
+            QMessageBox saveErrBox(
+                        QMessageBox::Warning,
+                        QObject::tr("Save Error"),
+                        msg);
+            saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
+            saveErrBox.exec();
+        }
+    }
 }
 
 

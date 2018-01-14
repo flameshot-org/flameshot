@@ -113,7 +113,6 @@ SOURCES += src/main.cpp \
     src/cli/commandargument.cpp \
     src/capture/workers/screenshotsaver.cpp \
     src/capture/workers/imgur/imguruploader.cpp \
-    src/capture/workers/graphicalscreenshotsaver.cpp \
     src/capture/workers/imgur/loadspinner.cpp \
     src/capture/workers/imgur/imagelabel.cpp \
     src/capture/workers/imgur/notificationwidget.cpp \
@@ -170,7 +169,6 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/cli/commandargument.h \
     src/capture/workers/screenshotsaver.h \
     src/capture/workers/imgur/imguruploader.h \
-    src/capture/workers/graphicalscreenshotsaver.h \
     src/capture/workers/imgur/loadspinner.h \
     src/capture/workers/imgur/imagelabel.h \
     src/capture/workers/imgur/notificationwidget.h \
