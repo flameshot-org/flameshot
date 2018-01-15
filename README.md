@@ -110,9 +110,7 @@ There are a packages available for a few distros:
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/voidlinux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
-
-If you are not using any of these distros you'll need to compile the program :(
-but don't worry, it's pretty easy!
+- Fedora: dnf install flameshot
 
 ## Compilation
 The compilation requires Qt version 5.3 or higher and GCC 4.9.2 or higher.
