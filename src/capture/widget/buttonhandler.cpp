@@ -32,11 +32,13 @@ ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v,
     QObject(parent), m_limits(limits)
 {
     setButtons(v);
+    updateScreenRegions();
 }
 
 ButtonHandler::ButtonHandler(const QRect &limits, QObject *parent) :
     QObject(parent), m_limits(limits)
 {
+    updateScreenRegions();
 }
 
 void ButtonHandler::hide() {
@@ -224,14 +226,32 @@ void ButtonHandler::resetRegionTrack() {
 }
 
 void ButtonHandler::updateBlockedSides() {
-    m_blockedRight =
-            (m_limits.right() - m_selection.right() < SEPARATION*2 + m_buttonBaseSize);
-    m_blockedLeft =
-            (m_selection.x() < m_buttonBaseSize + SEPARATION*2);
-    m_blockedBotton =
-            (m_limits.bottom() - m_selection.bottom() < SEPARATION*2 + m_buttonBaseSize);
-    m_blockedTop =
-            (m_selection.y() < m_buttonBaseSize + SEPARATION*2);
+    const int EXTENSION = SEPARATION * 2 + m_buttonBaseSize;
+    // Right
+    QPoint pointA(m_selection.right() + EXTENSION,
+                m_selection.bottom());
+    QPoint pointB(pointA.x(),
+                m_selection.top());
+    m_blockedRight = !(m_screenRegions.contains(pointA) &&
+                       m_screenRegions.contains(pointB));
+    // Left
+    pointA.setX(m_selection.left() - EXTENSION);
+    pointB.setX(pointA.x());
+    m_blockedLeft = !(m_screenRegions.contains(pointA) &&
+                      m_screenRegions.contains(pointB));
+    // Botton
+    pointA = QPoint(m_selection.left(),
+                    m_selection.bottom() + EXTENSION);
+    pointB = QPoint(m_selection.right(),
+                    pointA.y());
+    m_blockedBotton = !(m_screenRegions.contains(pointA) &&
+                        m_screenRegions.contains(pointB));
+    // Top
+    pointA.setY(m_selection.top() - EXTENSION);
+    pointB.setY(pointA.y());
+    m_blockedTop = !(m_screenRegions.contains(pointA) &&
+                     m_screenRegions.contains(pointB));
+    // Auxiliar
     m_oneHorizontalBlocked = (!m_blockedRight && m_blockedLeft) ||
             (m_blockedRight && !m_blockedLeft);
     m_horizontalyBlocked = (m_blockedRight && m_blockedLeft);
@@ -344,4 +364,11 @@ bool ButtonHandler::contains(const QPoint &p) const {
     bottonRight += QPoint(m_buttonExtendedSize, m_buttonExtendedSize);
     QRegion r(QRect(topLeft, bottonRight).normalized());
     return r.contains(p);
+}
+
+void ButtonHandler::updateScreenRegions() {
+    m_screenRegions = QRegion();
+    for (QScreen *const screen : QGuiApplication::screens()) {
+        m_screenRegions += screen->geometry();
+    }
 }
