@@ -17,6 +17,8 @@
 
 #include "buttonhandler.h"
 #include <QPoint>
+#include <QGuiApplication>
+#include <QScreen>
 
 // ButtonHandler is a habdler for every active button. It makes easier to
 // manipulate the buttons as a unit.
@@ -257,13 +259,24 @@ void ButtonHandler::expandSelection() {
 }
 
 void ButtonHandler::positionButtonsInside(int index) {
+    // Position the buttons from left to right starting at the botton
+    // left of the selection.
+    // The main screen has priority as the reference when its x,y botton
+    // left corner values are lower than the ones  of the selection.
+    QRect mainArea = QGuiApplication::primaryScreen()->geometry();
     int xPos = m_selection.left() + SEPARATION;
     int yPos = m_selection.bottom() - m_buttonExtendedSize;
+    if (m_selection.left() < mainArea.left()) {
+        xPos = mainArea.left() + SEPARATION;
+    }
+    if (m_selection.bottom() > mainArea.bottom()) {
+        yPos = mainArea.bottom() - m_buttonExtendedSize;
+    }
     CaptureButton *button = nullptr;
     for (; index < m_vectorButtons.size(); ++index) {
         button = m_vectorButtons[index];
         button->move(xPos, yPos);
-        if (button->pos().x() + m_buttonExtendedSize > m_limits.right()) {
+        if (button->pos().x() + m_buttonExtendedSize > mainArea.right()) {
             xPos = m_selection.left() + SEPARATION;
             yPos -= (m_buttonExtendedSize);
         }
