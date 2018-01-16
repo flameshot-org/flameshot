@@ -9,7 +9,7 @@ win32:LIBS += -luser32 -lshell32
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
-QT  += core gui
+QT  += core gui widgets network
 
 unix:!macx {
     QT  += dbus
@@ -57,16 +57,8 @@ for(tsfile, TRANSLATIONS) {
     TRANSLATIONS_FILES += $$qmfile
 }
 
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which as been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# You can also make your code fail to compile if you use deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 include(src/third-party/singleapplication/singleapplication.pri)
 include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
 
