@@ -113,14 +113,15 @@ If you don't like the defaults, you can change them manually later.
 Steps for using the configuration:
 
 1. The configuration file configures shortcuts so that Flameshot automatically saves (without opening the save dialog) screenshots to _~/Pictures/Screenshots_ folder. Make sure you have that folder by running the following command:
-```
-mkdir -p ~/Pictures/Screenshots
-```
-   (If you don't like the default location, you can skip this step and configure your preferred directory later.)<br>
+    ```
+    mkdir -p ~/Pictures/Screenshots
+    ```
+   (If you don't like the default location, you can skip this step and configure your preferred directory later.)
+
 2. Download the configuration file:
-```
-cd ~/Desktop; wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
-```
+    ```
+    cd ~/Desktop; wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+    ```
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
