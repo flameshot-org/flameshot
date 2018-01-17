@@ -88,10 +88,10 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>C</kbd>                                                                | Copy to clipboard                    |
 | <kbd>Ctrl</kbd> + <kbd>S</kbd>                                                                | Save selection as a file             |
 | <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                                                | Undo the last modification           |
-| **Right Click**                                                                               | Show color picker                    |
-| **Mouse Wheel**                                                                               | Change the tool's thickness          |
+| Right Click                                                                                   | Show color picker                    |
+| Mouse Wheel                                                                                   | Change the tool's thickness          |
 
-Shift + drag a handler of the selection area: mirror redimension in the opposite handler.
+<kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
 
 ### Global
 
@@ -136,7 +136,7 @@ Steps for using the configuration:
 
 - In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
 
-- Press `Enter` or `Ctrl + C` when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing `Ctrl + S` will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
+- Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
 
 - Execute the command `flameshot` without parameters or use the "Launch Flameshot" desktop entry to launch a running instance of the program without taking actions.
 
