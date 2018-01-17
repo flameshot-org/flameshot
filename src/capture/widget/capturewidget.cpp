@@ -198,10 +198,11 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
 
         // These four calls provide padding for the rect
-        bRect.setWidth(bRect.width() + 12);
-        bRect.setHeight(bRect.height() + 10);
-        bRect.setX(bRect.x() - 12);
-        bRect.setY(bRect.y() - 10);
+        const int margin = QApplication::fontMetrics().width("-") * 2;
+        bRect.setWidth(bRect.width() + margin);
+        bRect.setHeight(bRect.height() + margin);
+        bRect.setX(bRect.x() - margin);
+        bRect.setY(bRect.y() - margin);
 
         QColor rectColor(m_uiColor);
         rectColor.setAlpha(180);

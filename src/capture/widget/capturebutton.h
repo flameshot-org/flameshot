@@ -89,6 +89,7 @@ private:
     static QColor m_mainColor;
 
     void initButton();
+    void updateIcon();
 
 };
 
