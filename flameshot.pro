@@ -15,12 +15,9 @@ unix:!macx {
     QT  += dbus
 }
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+CONFIG += c++11 link_pkgconfig
 
-CONFIG    += c++11
-CONFIG    += link_pkgconfig
-
-#CONFIG    += packaging   # Enables "make install" for packaging paths
+#CONFIG += packaging   # Enables "make install" for packaging paths
 
 TARGET = flameshot
 TEMPLATE = app
