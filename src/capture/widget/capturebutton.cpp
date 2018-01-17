@@ -25,13 +25,12 @@
 #include <QToolTip>
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
+#include <QApplication>
 
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
 
 namespace {
-
-const int BUTTON_SIZE = 30;
 
 qreal getColorLuma(const QColor &c) {
     return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
@@ -66,8 +65,8 @@ void CaptureButton::initButton() {
     connect(this, &CaptureButton::pressed, m_tool, &CaptureTool::onPressed);
 
     setFocusPolicy(Qt::NoFocus);
-    resize(BUTTON_SIZE, BUTTON_SIZE);
-    setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
+    resize(buttonBaseSize(), buttonBaseSize());
+    setMask(QRegion(QRect(-1,-1,buttonBaseSize()+2, buttonBaseSize()+2), QRegion::Ellipse));
 
     setToolTip(m_tool->description());
 
@@ -75,7 +74,7 @@ void CaptureButton::initButton() {
     m_emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
     m_emergeAnimation->setDuration(80);
     m_emergeAnimation->setStartValue(QSize(0, 0));
-    m_emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
+    m_emergeAnimation->setEndValue(QSize(buttonBaseSize(), buttonBaseSize()));
 
     auto dsEffect = new QGraphicsDropShadowEffect(this);
     dsEffect->setBlurRadius(5);
@@ -104,7 +103,7 @@ QString CaptureButton::globalStyleSheet() {
     QString color = iconIsWhiteByColor(mainColor) ? "white" : "black";
 
     return baseSheet.arg(mainColor.name()).arg(contrast.name())
-            .arg(BUTTON_SIZE/2).arg(color);
+            .arg(buttonBaseSize()/2).arg(color);
 }
 
 QString CaptureButton::styleSheet() const {
@@ -119,7 +118,7 @@ QString CaptureButton::styleSheet() const {
     QString color = iconIsWhiteByColor(m_mainColor) ? "white" : "black";
 
     return baseSheet.arg(m_mainColor.name()).arg(contrast.name())
-            .arg(BUTTON_SIZE/2).arg(color);
+            .arg(buttonBaseSize()/2).arg(color);
 }
 
 // get icon returns the icon for the type of button
@@ -162,7 +161,7 @@ void CaptureButton::setColor(const QColor &c) {
 
 // getButtonBaseSize returns the base size of the buttons
 size_t CaptureButton::buttonBaseSize() {
-    return BUTTON_SIZE;
+    return QApplication::fontMetrics().height() * 2.2 * qApp->devicePixelRatio();
 }
 
 bool CaptureButton::iconIsWhiteByColor(const QColor &c) {

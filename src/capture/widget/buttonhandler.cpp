@@ -23,22 +23,18 @@
 // ButtonHandler is a habdler for every active button. It makes easier to
 // manipulate the buttons as a unit.
 
-namespace {
-    const int SEPARATION = 6;
-}
-
 ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v,
                              const QRect &limits, QObject *parent) :
     QObject(parent), m_limits(limits)
 {
     setButtons(v);
-    updateScreenRegions();
+    init();
 }
 
 ButtonHandler::ButtonHandler(const QRect &limits, QObject *parent) :
     QObject(parent), m_limits(limits)
 {
-    updateScreenRegions();
+    init();
 }
 
 void ButtonHandler::hide() {
@@ -98,8 +94,8 @@ void ButtonHandler::updatePosition(const QRect &selection) {
             break; // the while
         }
         // Number of buttons per row column
-        int buttonsPerRow = (m_selection.width() + SEPARATION) / (m_buttonExtendedSize);
-        int buttonsPerCol = (m_selection.height() + SEPARATION) / (m_buttonExtendedSize);
+        int buttonsPerRow = (m_selection.width() + m_separator) / (m_buttonExtendedSize);
+        int buttonsPerCol = (m_selection.height() + m_separator) / (m_buttonExtendedSize);
         // Buttons to be placed in the corners
         int extraButtons = (vecLength - elemIndicator) -
                 (buttonsPerRow + buttonsPerCol) * 2;
@@ -120,7 +116,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
             // Don't add more than we have
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);
             QPoint center = QPoint(m_selection.center().x(),
-                                   m_selection.bottom() + SEPARATION);
+                                   m_selection.bottom() + m_separator);
             if (addCounter > buttonsPerRow) {
                 adjustHorizontalCenter(center);
             }
@@ -133,7 +129,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
             int addCounter = buttonsPerCol;
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);
 
-            QPoint center = QPoint(m_selection.right() + SEPARATION,
+            QPoint center = QPoint(m_selection.right() + m_separator,
                                    m_selection.center().y());
             QVector<QPoint> positions = verticalPoints(center, addCounter, false);
             moveButtonsToPoints(positions, elemIndicator);
@@ -179,7 +175,7 @@ QVector<QPoint> ButtonHandler::horizontalPoints(
     // Distance from the center to start adding buttons
     int shift = 0;
     if (elements % 2 == 0) {
-        shift = m_buttonExtendedSize * (elements / 2) - (SEPARATION / 2);
+        shift = m_buttonExtendedSize * (elements / 2) - (m_separator / 2);
     } else {
         shift = m_buttonExtendedSize * ((elements-1) / 2) + m_buttonBaseSize / 2;
     }
@@ -205,7 +201,7 @@ QVector<QPoint> ButtonHandler::verticalPoints(
     // Distance from the center to start adding buttons
     int shift = 0;
     if (elements % 2 == 0) {
-        shift = m_buttonExtendedSize * (elements / 2) - (SEPARATION / 2);
+        shift = m_buttonExtendedSize * (elements / 2) - (m_separator / 2);
     } else {
         shift = m_buttonExtendedSize * ((elements-1) / 2) + m_buttonBaseSize / 2;
     }
@@ -221,12 +217,17 @@ QVector<QPoint> ButtonHandler::verticalPoints(
     return res;
 }
 
+void ButtonHandler::init() {
+    updateScreenRegions();
+    m_separator = CaptureButton::buttonBaseSize() / 4;
+}
+
 void ButtonHandler::resetRegionTrack() {
     m_buttonsAreInside = false;
 }
 
 void ButtonHandler::updateBlockedSides() {
-    const int EXTENSION = SEPARATION * 2 + m_buttonBaseSize;
+    const int EXTENSION = m_separator * 2 + m_buttonBaseSize;
     // Right
     QPoint pointA(m_selection.right() + EXTENSION,
                 m_selection.bottom());
@@ -284,10 +285,10 @@ void ButtonHandler::positionButtonsInside(int index) {
     // The main screen has priority as the reference when its x,y botton
     // left corner values are lower than the ones  of the selection.
     QRect mainArea = QGuiApplication::primaryScreen()->geometry();
-    int xPos = m_selection.left() + SEPARATION;
+    int xPos = m_selection.left() + m_separator;
     int yPos = m_selection.bottom() - m_buttonExtendedSize;
     if (m_selection.left() < mainArea.left()) {
-        xPos = mainArea.left() + SEPARATION;
+        xPos = mainArea.left() + m_separator;
     }
     if (m_selection.bottom() > mainArea.bottom()) {
         yPos = mainArea.bottom() - m_buttonExtendedSize;
@@ -297,7 +298,7 @@ void ButtonHandler::positionButtonsInside(int index) {
         button = m_vectorButtons[index];
         button->move(xPos, yPos);
         if (button->pos().x() + m_buttonExtendedSize > mainArea.right()) {
-            xPos = m_selection.left() + SEPARATION;
+            xPos = m_selection.left() + m_separator;
             yPos -= (m_buttonExtendedSize);
         }
         xPos += (m_buttonExtendedSize);
@@ -350,8 +351,8 @@ void ButtonHandler::setButtons(const QVector<CaptureButton *> v) {
     for (CaptureButton *b: m_vectorButtons)
         delete(b);
     m_vectorButtons = v;
-    m_buttonBaseSize = v[0]->buttonBaseSize();
-    m_buttonExtendedSize = m_buttonBaseSize + SEPARATION;
+    m_buttonBaseSize = CaptureButton::buttonBaseSize();
+    m_buttonExtendedSize = m_buttonBaseSize + m_separator;
 }
 
 bool ButtonHandler::contains(const QPoint &p) const {
@@ -360,7 +361,7 @@ bool ButtonHandler::contains(const QPoint &p) const {
     bool firstIsTopLeft = (first.x() <= last.x() && first.y() <= last.y());
     QPoint topLeft = firstIsTopLeft ? first : last;
     QPoint bottonRight = firstIsTopLeft ? last : first;
-    topLeft += QPoint(-SEPARATION, -SEPARATION);
+    topLeft += QPoint(-m_separator, -m_separator);
     bottonRight += QPoint(m_buttonExtendedSize, m_buttonExtendedSize);
     QRegion r(QRect(topLeft, bottonRight).normalized());
     return r.contains(p);

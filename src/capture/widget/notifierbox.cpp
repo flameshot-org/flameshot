@@ -20,6 +20,7 @@
 #include "src/capture/widget/capturebutton.h"
 #include <QTimer>
 #include <QPainter>
+#include <QApplication>
 
 NotifierBox::NotifierBox(QWidget *parent) : QWidget(parent) {
     m_timer = new QTimer(this);
@@ -30,7 +31,10 @@ NotifierBox::NotifierBox(QWidget *parent) : QWidget(parent) {
     m_foregroundColor = (CaptureButton::iconIsWhiteByColor(m_bgColor) ?
                              Qt::white : Qt::black);
     m_bgColor.setAlpha(180);
-    setFixedSize(QSize(46, 46));
+    const int size = (CaptureButton::buttonBaseSize() +
+                      CaptureButton::buttonBaseSize()/2) *
+            qApp->devicePixelRatio();
+    setFixedSize(QSize(size, size));
 }
 
 void NotifierBox::enterEvent(QEvent *) {

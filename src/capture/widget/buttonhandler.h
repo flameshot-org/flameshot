@@ -73,7 +73,10 @@ private:
     QRect m_limits;
     QRect m_selection;
 
+    int m_separator;
+
     // aux methods
+    void init();
     void resetRegionTrack();
     void updateBlockedSides();
     void expandSelection();

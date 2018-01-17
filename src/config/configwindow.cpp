@@ -32,7 +32,8 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setMinimumSize(400, 490);
+    const int size = CaptureButton::buttonBaseSize() * 12;
+    setMinimumSize(size, size);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
