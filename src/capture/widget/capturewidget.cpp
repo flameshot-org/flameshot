@@ -42,13 +42,6 @@
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
 
-namespace {
-
-// size of the handlers at the corners of the selection
-const int HANDLE_SIZE = 9;
-
-} // unnamed namespace
-
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
                              QWidget *parent) :
@@ -64,7 +57,8 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
 
     setAttribute(Qt::WA_DeleteOnClose);
     // create selection handlers
-    QRect baseRect(0, 0, HANDLE_SIZE, HANDLE_SIZE);
+
+    QRect baseRect(0, 0, handleSize(), handleSize());
     m_TLHandle = baseRect; m_TRHandle = baseRect;
     m_BLHandle = baseRect; m_BRHandle = baseRect;
     m_LHandle = baseRect; m_THandle = baseRect;
@@ -571,7 +565,7 @@ void CaptureWidget::initShortcuts() {
 
 void CaptureWidget::updateHandles() {
     QRect r = m_selection.normalized().adjusted(0, 0, -1, -1);
-    int s2 = HANDLE_SIZE / 2;
+    int s2 = handleSize() / 2;
 
     m_TLHandle.moveTopLeft(QPoint(r.x() - s2, r.y() - s2));
     m_TRHandle.moveTopRight(QPoint(r.right() + s2, r.y() - s2));
@@ -624,6 +618,11 @@ void CaptureWidget::updateCursor() {
         setCursor(Qt::CrossCursor);
     }
 
+}
+
+int CaptureWidget::handleSize() {
+    return (QApplication::fontMetrics().height() * 0.7) *
+            qApp->devicePixelRatio();
 }
 
 void CaptureWidget::copyScreenshot() {

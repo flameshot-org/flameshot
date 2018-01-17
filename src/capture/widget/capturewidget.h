@@ -123,6 +123,9 @@ private:
     void updateSizeIndicator();
     void updateCursor();
 
+    // size of the handlers at the corners of the selection
+    int handleSize();
+
     QRect extendedSelection() const;
     QVector<CaptureModification*> m_modifications;
     QPointer<CaptureButton> m_sizeIndButton;

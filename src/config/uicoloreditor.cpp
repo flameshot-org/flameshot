@@ -80,8 +80,9 @@ void UIcolorEditor::initColorWheel() {
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);
 
-    m_colorWheel->setMinimumSize(100, 100);
-    m_colorWheel->setMaximumSize(170, 170);
+    const int size = CaptureButton::buttonBaseSize() * 3;
+    m_colorWheel->setMinimumSize(size, size);
+    m_colorWheel->setMaximumSize(size*2, size*2);
     m_colorWheel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));
@@ -90,7 +91,7 @@ void UIcolorEditor::initColorWheel() {
 }
 
 void UIcolorEditor::initButtons() {
-    const int extraSize = 10;
+    const int extraSize = CaptureButton::buttonBaseSize() / 3;
     int frameSize = CaptureButton::buttonBaseSize() + extraSize;
 
     m_vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));

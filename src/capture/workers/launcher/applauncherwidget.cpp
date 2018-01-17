@@ -18,6 +18,7 @@
 #include "applauncherwidget.h"
 #include "src/utils/filenamehandler.h"
 #include "src/capture/workers/launcher/launcheritemdelegate.h"
+#include "src/capture/widget/capturebutton.h"
 #include "src/utils/confighandler.h"
 #include "terminallauncher.h"
 #include <QDir>
@@ -155,7 +156,8 @@ void AppLauncherWidget::searchChanged(const QString &text) {
 
 void AppLauncherWidget::initListWidget() {
 	m_tabWidget = new QTabWidget;
-	m_tabWidget->setIconSize(QSize(30, 30));
+    const int size = CaptureButton::buttonBaseSize();
+    m_tabWidget->setIconSize(QSize(size, size));
 
 	for (auto const& i : catIconNames.toStdMap()) {
 		const QString &cat = i.first;
@@ -219,7 +221,6 @@ void AppLauncherWidget::configureListView(QListWidget *widget) {
 	widget->setSpacing(4);
 	widget->setFlow(QListView::LeftToRight);
 	widget->setDragEnabled(false);
-	widget->setMinimumSize(375, 210);
 	connect(widget, &QListWidget::clicked,
 			this, &AppLauncherWidget::launch);
 }
