@@ -55,7 +55,7 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
         QFont f = this->font();
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else {
-        setIcon(icon());
+        updateIcon();
     }
     setCursor(Qt::ArrowCursor);
 }
@@ -83,6 +83,11 @@ void CaptureButton::initButton() {
 
     setGraphicsEffect(dsEffect);
 
+}
+
+void CaptureButton::updateIcon() {
+    setIcon(icon());
+    setIconSize(size()*0.6);
 }
 
 QVector<CaptureButton::ButtonType> CaptureButton::getIterableButtonTypes() {
@@ -156,7 +161,7 @@ CaptureTool *CaptureButton::tool() const {
 void CaptureButton::setColor(const QColor &c) {
     m_mainColor = c;
     setStyleSheet(styleSheet());
-    setIcon(icon());
+    updateIcon();
 }
 
 // getButtonBaseSize returns the base size of the buttons
