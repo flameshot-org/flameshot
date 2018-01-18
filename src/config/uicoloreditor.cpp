@@ -31,7 +31,7 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
     m_hLayout = new QHBoxLayout;
     m_vLayout = new QVBoxLayout;
 
-    const size_t space = QApplication::fontMetrics().lineSpacing();
+    const int space = QApplication::fontMetrics().lineSpacing();
     m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     m_vLayout->setAlignment(Qt::AlignVCenter);
 
