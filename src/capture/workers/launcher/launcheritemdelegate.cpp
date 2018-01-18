@@ -44,10 +44,11 @@ void LauncherItemDelegate::paint(
     const int halfIcon = iconSide/2;
     const int halfWidth = rect.width()/2;
     const int halfHeight = rect.height()/2;
+    QSize size(iconSide, iconSide);
+    QPixmap pixIcon = icon.pixmap(size).scaled(size);
     painter->drawPixmap(rect.x() + (halfWidth - halfIcon),
                         rect.y()+ (halfHeight/2 - halfIcon),
-                        iconSide, iconSide,
-                        icon.pixmap(QSize(iconSide, iconSide)));
+                        iconSide, iconSide, pixIcon);
     const QRect textRect(rect.x(), rect.y() + halfHeight,
                          rect.width(), halfHeight);
     painter->drawText(textRect, Qt::TextWordWrap | Qt::AlignHCenter,
