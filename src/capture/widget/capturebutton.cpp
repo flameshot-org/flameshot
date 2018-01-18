@@ -66,7 +66,7 @@ void CaptureButton::initButton() {
 
     setFocusPolicy(Qt::NoFocus);
     resize(buttonBaseSize(), buttonBaseSize());
-    setMask(QRegion(QRect(-1,-1,buttonBaseSize()+2, buttonBaseSize()+2), QRegion::Ellipse));
+    setMask(QRegion(QRect(-1,-1, buttonBaseSize()+2, buttonBaseSize()+2), QRegion::Ellipse));
 
     setToolTip(m_tool->description());
 
@@ -165,7 +165,7 @@ void CaptureButton::setColor(const QColor &c) {
 }
 
 // getButtonBaseSize returns the base size of the buttons
-size_t CaptureButton::buttonBaseSize() {
+int CaptureButton::buttonBaseSize() {
     return QApplication::fontMetrics().lineSpacing() * 2.2;
 }
 

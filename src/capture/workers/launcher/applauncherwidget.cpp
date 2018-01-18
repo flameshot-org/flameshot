@@ -102,7 +102,7 @@ void AppLauncherWidget::launch(const QModelIndex &index) {
 		}
 	}
 	QString command = index.data(Qt::UserRole).toString().replace(
-				QRegExp("(\%.)"), '"' + m_tempFile + '"');
+                QRegExp("(\\%.)"), '"' + m_tempFile + '"');
 	bool inTerminal = index.data(Qt::UserRole+1).toBool() ||
 			m_terminalCheckbox->isChecked();
 	if (inTerminal) {
