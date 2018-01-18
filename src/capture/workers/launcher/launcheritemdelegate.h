@@ -25,7 +25,7 @@ class LauncherItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-	explicit LauncherItemDelegate(QObject *parent = nullptr);
+    explicit LauncherItemDelegate(QObject *parent = nullptr);
 
     void paint(QPainter *painter,
                const QStyleOptionViewItem &option,

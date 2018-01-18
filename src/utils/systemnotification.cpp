@@ -12,9 +12,9 @@
 
 #ifdef Q_OS_LINUX
 SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
-	m_interface = new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
-									 QStringLiteral("/org/freedesktop/Notifications"),
-									 QStringLiteral("org.freedesktop.Notifications"),
+    m_interface = new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
+                                     QStringLiteral("/org/freedesktop/Notifications"),
+                                     QStringLiteral("org.freedesktop.Notifications"),
                                      QDBusConnection::sessionBus(),
                                      this);
 }
