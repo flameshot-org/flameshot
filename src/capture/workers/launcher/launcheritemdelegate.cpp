@@ -45,7 +45,7 @@ void LauncherItemDelegate::paint(
     const int halfWidth = rect.width()/2;
     const int halfHeight = rect.height()/2;
     QSize size(iconSide, iconSide);
-    QPixmap pixIcon = icon.pixmap(size).scaled(size);
+    QPixmap pixIcon = icon.pixmap(size).scaled(size, Qt::KeepAspectRatio);
     painter->drawPixmap(rect.x() + (halfWidth - halfIcon),
                         rect.y()+ (halfHeight/2 - halfIcon),
                         iconSide, iconSide, pixIcon);
