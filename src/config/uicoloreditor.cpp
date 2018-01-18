@@ -19,6 +19,7 @@
 #include "uicoloreditor.h"
 #include "clickablelabel.h"
 #include <QHBoxLayout>
+#include <QApplication>
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <QMap>
@@ -29,13 +30,17 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_hLayout = new QHBoxLayout;
     m_vLayout = new QVBoxLayout;
-    m_hLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
+
+    const size_t space = QApplication::fontMetrics().lineSpacing();
+    m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     m_vLayout->setAlignment(Qt::AlignVCenter);
+
     initButtons();
     initColorWheel();
-    m_vLayout->addSpacing(10);
+
+    m_vLayout->addSpacing(space);
     m_hLayout->addLayout(m_vLayout);
-    m_hLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
+    m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     setLayout(m_hLayout);
     updateComponents();
 }

@@ -17,33 +17,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="55"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
         <translation>Abrir Con</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="70"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
         <translation>Lanzar en terminal</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
         <translation>Mantener abierto tras la selección</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
         <translation>Imposible escribir en</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
         <translation>Imposible lanzar en terminal.</translation>
     </message>
@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="93"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation>Imposible capturar la pantalla</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="197"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -109,7 +109,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="37"/>
+        <location filename="../src/config/configwindow.cpp" line="38"/>
         <source>Configuration</source>
         <translation>Configuración</translation>
     </message>
@@ -122,17 +122,17 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation type="vanished">Seleccionar Todos</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="58"/>
+        <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>Interfaz</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Filename Editor</source>
         <translation>Editor de Nombre</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>General</source>
         <translation>General</translation>
     </message>
@@ -547,24 +547,23 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="38"/>
         <source>Save As</source>
-        <translation>Guardar Como</translation>
+        <translation type="vanished">Guardar Como</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="74"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation>Error al Guardar</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="87"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="43"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
         <source>Capture saved as </source>
         <translation>Captura guardada como </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="91"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Error trying to save as </source>
         <translation>Error intentando guardar como </translation>
     </message>
@@ -574,6 +573,16 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <location filename="../src/main.cpp" line="322"/>
         <source>Unable to connect via DBus</source>
         <translation>Imposible conectar mediante DBus</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
+        <source>Unable to write in</source>
+        <translation type="unfinished">Imposible escribir en</translation>
     </message>
 </context>
 <context>
@@ -739,37 +748,37 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="28"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="29"/>
         <source>UI Color Editor</source>
         <translation>Editor de Color de Interfaz</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="86"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="92"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>Cambia el color moviendo los selectores y observa los cambios en los botones de previsualización.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="96"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="102"/>
         <source>Select a Button to modify it</source>
         <translation>Selecciona un Botón para modificarlo</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="105"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="111"/>
         <source>Main Color</source>
         <translation>Color Principal</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="109"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color primario.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="120"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="126"/>
         <source>Contrast Color</source>
         <translation>Color de Contraste</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="125"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="131"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>Clica en este botón para aplicar el modo edición para el color de contraste.</translation>
     </message>

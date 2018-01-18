@@ -166,7 +166,7 @@ void CaptureButton::setColor(const QColor &c) {
 
 // getButtonBaseSize returns the base size of the buttons
 size_t CaptureButton::buttonBaseSize() {
-    return QApplication::fontMetrics().height() * 2.2 * qApp->devicePixelRatio();
+    return QApplication::fontMetrics().lineSpacing() * 2.2;
 }
 
 bool CaptureButton::iconIsWhiteByColor(const QColor &c) {
