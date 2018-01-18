@@ -17,33 +17,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="55"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
         <translation type="unfinished">Открыть с помощью</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="70"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
         <translation type="unfinished">Запустить в терминале</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
         <translation type="unfinished">Оставить запущенным после выделения</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
         <translation type="unfinished">Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
         <translation type="unfinished">Не удалось запустить в терминале.</translation>
     </message>
@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="93"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation type="unfinished">Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="197"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -109,7 +109,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="37"/>
+        <location filename="../src/config/configwindow.cpp" line="38"/>
         <source>Configuration</source>
         <translation type="unfinished">Настройка</translation>
     </message>
@@ -122,17 +122,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation type="obsolete">Выбрать все</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="58"/>
+        <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation type="unfinished">Интерфейс</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Filename Editor</source>
         <translation type="unfinished">Редактор имен файлов</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>General</source>
         <translation type="unfinished">Общее</translation>
     </message>
@@ -543,24 +543,23 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="38"/>
         <source>Save As</source>
-        <translation type="unfinished">Сохранить как</translation>
+        <translation type="obsolete">Сохранить как</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="74"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation type="unfinished">Ошибка сохранения</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="87"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="43"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
         <source>Capture saved as </source>
         <translation type="unfinished">Сохранить снимок как </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="91"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Error trying to save as </source>
         <translation type="unfinished">Ошибка при попытке сохранить как </translation>
     </message>
@@ -570,6 +569,16 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/main.cpp" line="322"/>
         <source>Unable to connect via DBus</source>
         <translation type="unfinished">Не удалось подключиться через DBus</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
+        <source>Unable to write in</source>
+        <translation type="unfinished">Не удалось сохранить</translation>
     </message>
 </context>
 <context>
@@ -735,37 +744,37 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="28"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="29"/>
         <source>UI Color Editor</source>
         <translation type="unfinished">Редактор цвета интерфейса</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="86"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="92"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation type="unfinished">Измените цвет, перемещая выделение, и посмотрите изменения в кнопках предварительного просмотра.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="96"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="102"/>
         <source>Select a Button to modify it</source>
         <translation type="unfinished">Выберите кнопку, чтобы изменить ее</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="105"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="111"/>
         <source>Main Color</source>
         <translation type="unfinished">Основной цвет</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="109"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation type="unfinished">Нажмите на эту кнопку, чтобы перейти в режим редактирования основного цвета.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="120"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="126"/>
         <source>Contrast Color</source>
         <translation type="unfinished">Контрастный цвет</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="125"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="131"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation type="unfinished">Нажмите на эту кнопку, чтобы перейти в режим редактирования контрастного цвета.</translation>
     </message>

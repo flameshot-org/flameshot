@@ -17,33 +17,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="55"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
         <translation>გახსნა პროგრამით</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="70"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
         <translation>ტერმინალში გაშვება</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
         <translation>არ დახურო დიალოგი არჩევის შემდეგ</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
         <translation>შეცდომა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
         <translation>შემდეგ მისამართზე ჩაწერა ვერ მოხერხდა:</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
         <translation>ტერმინალში გაშვება ვერ მოხერხდა.</translation>
     </message>
@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="93"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation>ეკრანის გადაღება ვერ მოხერხდა</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="197"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -109,30 +109,30 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="37"/>
+        <location filename="../src/config/configwindow.cpp" line="38"/>
         <source>Configuration</source>
         <translation>პარამეტრები</translation>
     </message>
     <message>
         <source>Button Selection</source>
-        <translation>ღილაკის არჩევა</translation>
+        <translation type="vanished">ღილაკის არჩევა</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>ყველაფრის შერჩევა</translation>
+        <translation type="vanished">ყველაფრის შერჩევა</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="58"/>
+        <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>ინტერფეისი</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Filename Editor</source>
         <translation>ფაილის სახელის რედაქტორი</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>General</source>
         <translation>ზოგადი</translation>
     </message>
@@ -543,24 +543,23 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="38"/>
         <source>Save As</source>
-        <translation>შენახვა როგორც</translation>
+        <translation type="vanished">შენახვა როგორც</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="74"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation>შეცდომა შენახვისას</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="87"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="43"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
         <source>Capture saved as </source>
         <translation>სურათი შენახულია როგორც: </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="91"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Error trying to save as </source>
         <translation>შეცდომა მცდელობისას შენახულიყო როგორც: </translation>
     </message>
@@ -570,6 +569,16 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/main.cpp" line="322"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus-ით დაკავშირება ვერ მოხერხდა</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
+        <source>Error</source>
+        <translation type="unfinished">შეცდომა</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
+        <source>Unable to write in</source>
+        <translation type="unfinished">შემდეგ მისამართზე ჩაწერა ვერ მოხერხდა:</translation>
     </message>
 </context>
 <context>
@@ -735,37 +744,37 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="28"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="29"/>
         <source>UI Color Editor</source>
         <translation>ინტერფეისის ფერის რედაქტორი</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="86"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="92"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>შეცვალეთ ფერი ნიშნულის გადაადგილებით და შეხედეთ ცვლილებებს გადასახედ ღილაკებზე.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="96"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="102"/>
         <source>Select a Button to modify it</source>
         <translation>აირჩიეთ ღილაკი მის შესაცვლელად</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="105"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="111"/>
         <source>Main Color</source>
         <translation>ძირითადი ფერი</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="109"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>დააწექით ამ ღილაკს ძირითადი ფერის არჩევის რეჟიმის ჩასართავად.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="120"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="126"/>
         <source>Contrast Color</source>
         <translation>კონტრასტული ფერი</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="125"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="131"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>დააწექით ამ ღილაკს კონტრასტული ფერის არჩევის რეჟიმის ჩასართავად.</translation>
     </message>

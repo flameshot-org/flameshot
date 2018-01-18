@@ -198,7 +198,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
 
         // These four calls provide padding for the rect
-        const int margin = QApplication::fontMetrics().width("-") * 2;
+        const int margin = QApplication::fontMetrics().height() / 2;
         bRect.setWidth(bRect.width() + margin);
         bRect.setHeight(bRect.height() + margin);
         bRect.setX(bRect.x() - margin);
@@ -622,8 +622,7 @@ void CaptureWidget::updateCursor() {
 }
 
 int CaptureWidget::handleSize() {
-    return (QApplication::fontMetrics().height() * 0.7) *
-            qApp->devicePixelRatio();
+    return (QApplication::fontMetrics().height() * 0.7);
 }
 
 void CaptureWidget::copyScreenshot() {
