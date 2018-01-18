@@ -129,7 +129,7 @@ QString CaptureButton::styleSheet() const {
 // get icon returns the icon for the type of button
 QIcon CaptureButton::icon() const {
     QString color(iconIsWhiteByColor(m_mainColor) ? "White" : "Black");
-	QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
+    QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
             .arg(color).arg(m_tool->iconName());
     return QIcon(iconPath);
 }
@@ -187,15 +187,15 @@ static std::map<CaptureButton::ButtonType, int> buttonTypeOrder {
     { CaptureButton::TYPE_RECTANGLE,          4 },
     { CaptureButton::TYPE_CIRCLE,             5 },
     { CaptureButton::TYPE_MARKER,             6 },
-	{ CaptureButton::TYPE_SELECTIONINDICATOR, 8 },
-	{ CaptureButton::TYPE_MOVESELECTION,      9 },
-	{ CaptureButton::TYPE_UNDO,              10 },
-	{ CaptureButton::TYPE_COPY,              11 },
-	{ CaptureButton::TYPE_SAVE,              12 },
-	{ CaptureButton::TYPE_EXIT,              13 },
-	{ CaptureButton::TYPE_IMAGEUPLOADER,     14 },
-	{ CaptureButton::TYPE_OPEN_APP,          15 },
-	{ CaptureButton::TYPE_BLUR,              7  },
+    { CaptureButton::TYPE_SELECTIONINDICATOR, 8 },
+    { CaptureButton::TYPE_MOVESELECTION,      9 },
+    { CaptureButton::TYPE_UNDO,              10 },
+    { CaptureButton::TYPE_COPY,              11 },
+    { CaptureButton::TYPE_SAVE,              12 },
+    { CaptureButton::TYPE_EXIT,              13 },
+    { CaptureButton::TYPE_IMAGEUPLOADER,     14 },
+    { CaptureButton::TYPE_OPEN_APP,          15 },
+    { CaptureButton::TYPE_BLUR,              7  },
 };
 
 int CaptureButton::getPriorityByButton(CaptureButton::ButtonType b) {
@@ -211,7 +211,7 @@ QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_RECTANGLE,
     CaptureButton::TYPE_CIRCLE,
     CaptureButton::TYPE_MARKER,
-	CaptureButton::TYPE_BLUR,
+    CaptureButton::TYPE_BLUR,
     CaptureButton::TYPE_SELECTIONINDICATOR,
     CaptureButton::TYPE_MOVESELECTION,
     CaptureButton::TYPE_UNDO,
