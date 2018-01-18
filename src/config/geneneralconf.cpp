@@ -76,6 +76,9 @@ void GeneneralConf::autostartChanged(bool checked) {
 
 void GeneneralConf::importConfiguration() {
 	QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
+    if (fileName.isEmpty()) {
+        return;
+    }
 	QFile file(fileName);
 	QTextCodec *codec = QTextCodec::codecForLocale();
 	if (!file.open(QFile::ReadOnly)) {
