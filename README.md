@@ -8,7 +8,7 @@
 ## Index
 - [Features](#features)
 - [Usage](#usage)
-- [Shortcuts](#shortcuts)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Considerations](#considerations)
 - [Installation](#installation)
 - [Compilation](#compilation)
