@@ -1,0 +1,135 @@
+[Data]
+DataCount=1
+
+[Data_1]
+Comment=Shortcuts for taking screenshots with Flameshot
+DataCount=4
+Enabled=true
+Name=Flameshot
+SystemGroup=0
+Type=ACTION_DATA_GROUP
+
+[Data_1Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_1_1]
+Comment=Start the Flameshot screenshot tool and take a screenshot
+Enabled=true
+Name=Take screenshot
+Type=SIMPLE_ACTION_DATA
+
+[Data_1_1Actions]
+ActionsCount=1
+
+[Data_1_1Actions0]
+Arguments='Pictures/Screenshots' 0 0
+Call=graphicCapture
+RemoteApp=org.dharkael.Flameshot
+RemoteObj=/
+Type=DBUS
+
+[Data_1_1Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_1_1Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_1_1Triggers0]
+Key=Print
+Type=SHORTCUT
+Uuid={65ecb470-7d89-497a-9f9d-406b068f7207}
+
+[Data_1_2]
+Comment=Wait for 3 seconds, then start the Flameshot screenshot tool and take a screenshot
+Enabled=true
+Name=Take screenshot with delay
+Type=SIMPLE_ACTION_DATA
+
+[Data_1_2Actions]
+ActionsCount=1
+
+[Data_1_2Actions0]
+Arguments='Pictures/Screenshots' 3000 0
+Call=graphicCapture
+RemoteApp=org.dharkael.Flameshot
+RemoteObj=/
+Type=DBUS
+
+[Data_1_2Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_1_2Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_1_2Triggers0]
+Key=Ctrl+Print
+Type=SHORTCUT
+Uuid={cea82966-75d5-437d-afaf-aeba83a4abfd}
+
+[Data_1_3]
+Comment=Take a full-screen (all monitors) screenshot and save it
+Enabled=true
+Name=Take full-screen screenshot and save
+Type=SIMPLE_ACTION_DATA
+
+[Data_1_3Actions]
+ActionsCount=1
+
+[Data_1_3Actions0]
+Arguments='Pictures/Screenshots' false 0 0
+Call=fullScreen
+RemoteApp=org.dharkael.Flameshot
+RemoteObj=/
+Type=DBUS
+
+[Data_1_3Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_1_3Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_1_3Triggers0]
+Key=Shift+Print
+Type=SHORTCUT
+Uuid={3c7ead73-00ad-4f90-bdba-5d15a70b8b43}
+
+[Data_1_4]
+Comment=Take a full-screen (all monitors) screenshot and copy it to the clipboard
+Enabled=true
+Name=Take full-screen screenshot and copy it to clipboard
+Type=SIMPLE_ACTION_DATA
+
+[Data_1_4Actions]
+ActionsCount=1
+
+[Data_1_4Actions0]
+Arguments='' true 0 0
+Call=fullScreen
+RemoteApp=org.dharkael.Flameshot
+RemoteObj=/
+Type=DBUS
+
+[Data_1_4Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_1_4Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_1_4Triggers0]
+Key=Ctrl+Shift+Print
+Type=SHORTCUT
+Uuid={a724b514-0cb6-40f0-bf14-c08db726b320}
+
+[Main]
+AllowMerge=false
+ImportId=flameshot
+Version=2
