@@ -1,9 +1,11 @@
 [Desktop Entry]
 Name=Launch Flameshot
 Name[es]=Iniciar Flameshot
+Name[tr]=Flameshot Başlat
 Name[zh_CN]=启动 Flameshot
 GenericName=Screenshot tool
 GenericName[es]=Herramienta de captura de pantalla
+GenericName[tr]=Ekran kayıt aracı
 GenericName[zh_CN]=截图工具
 Comment=Powerful yet simple to use screenshot software.
 Comment[es]=Potente pero simple de usar software de capturas.
