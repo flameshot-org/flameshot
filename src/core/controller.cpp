@@ -64,6 +64,14 @@ Controller *Controller::getInstance() {
 // creation of a new capture in GUI mode
 void Controller::createVisualCapture(const uint id, const QString &forcedSavePath) {
     if (!m_captureWindow) {
+        QWidget *modalWidget = nullptr;
+        do {
+            modalWidget = qApp->activeModalWidget();
+            if (modalWidget) {
+                modalWidget->close();
+                modalWidget->deleteLater();
+            }
+        } while (modalWidget);
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         connect(m_captureWindow, &CaptureWidget::captureFailed,
                 this, &Controller::captureFailed);
