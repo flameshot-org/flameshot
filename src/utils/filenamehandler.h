@@ -31,6 +31,8 @@ public:
     QString parseFilename(const QString &name);
     QString generateAbsolutePath(const QString &path);
     QString absoluteSavePath(QString &directory, QString &filename);
+    QString absoluteSavePath();
+
 
     static const int MAX_CHARACTERS = 70;
 

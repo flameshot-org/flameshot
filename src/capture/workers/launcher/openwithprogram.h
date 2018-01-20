@@ -15,29 +15,11 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GRAPHICALSCREENSHOTSAVER_H
-#define GRAPHICALSCREENSHOTSAVER_H
+#ifndef OPENWITHPROGRAM_H
+#define OPENWITHPROGRAM_H
 
-#include <QWidget>
+#include <QPixmap>
 
-class QFileDialog;
-class QVBoxLayout;
+void showOpenWithMenu(const QPixmap &capture);
 
-class GraphicalScreenshotSaver : public QWidget
-{
-    Q_OBJECT
-public:
-    explicit GraphicalScreenshotSaver(const QPixmap &capture,
-                                      QWidget *parent = nullptr);
-
-private:
-    QPixmap m_pixmap;
-    QFileDialog *m_fileDialog;
-    QVBoxLayout *m_layout;
-
-    void initFileDialog();
-    void showErrorMessage(const QString &msg);
-    void checkSaveAcepted();
-};
-
-#endif // GRAPHICALSCREENSHOTSAVER_H
+#endif // OPENWITHPROGRAM_H

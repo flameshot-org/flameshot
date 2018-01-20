@@ -32,7 +32,8 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setMinimumSize(400, 490);
+    const int size = CaptureButton::buttonBaseSize() * 12;
+    setMinimumSize(size, size);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
@@ -55,17 +56,17 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     // visuals
     m_visuals = new VisualsEditor();
     addTab(m_visuals, QIcon(modifier + "graphics.png"),
-		   tr("Interface"));
+           tr("Interface"));
 
     // filename
     m_filenameEditor = new FileNameEditor();
-	addTab(m_filenameEditor, QIcon(modifier + "name_edition.png"),
-		   tr("Filename Editor"));
+    addTab(m_filenameEditor, QIcon(modifier + "name_edition.png"),
+           tr("Filename Editor"));
 
     // general
     m_generalConfig = new GeneneralConf();
-	addTab(m_generalConfig, QIcon(modifier + "config.png"),
-		   tr("General"));
+    addTab(m_generalConfig, QIcon(modifier + "config.png"),
+           tr("General"));
 
     // connect update sigslots
     connect(this, &ConfigWindow::updateChildren,

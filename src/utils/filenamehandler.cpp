@@ -41,7 +41,7 @@ QString FileNameHandler::parseFilename(const QString &name) {
         char data[MAX_CHARACTERS] = {0};
         std::strftime(data, sizeof(data),
                       tempData, std::localtime(&t));
-        res = QString::fromLocal8Bit(data, strlen(data));
+        res = QString::fromLocal8Bit(data, (int)strlen(data));
         free(tempData);
     }
     // add the parsed pattern in a correct format for the filesystem
@@ -70,6 +70,11 @@ QString FileNameHandler::absoluteSavePath(QString &directory, QString &filename)
     filename = parsedPattern();
     fixPath(directory, filename);
     return directory + filename;
+}
+
+QString FileNameHandler::absoluteSavePath() {
+    QString dir, file;
+    return absoluteSavePath(dir, file);
 }
 
 QString FileNameHandler::charArrToQString(const char *c) {

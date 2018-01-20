@@ -21,6 +21,7 @@
 #include "capturebutton.h"
 #include <QVector>
 #include <QObject>
+#include <QRegion>
 
 class CaptureButton;
 class QRect;
@@ -41,6 +42,7 @@ public:
     void updatePosition(const QRect &selection);
     void setButtons(const QVector<CaptureButton*>);
     bool contains(const QPoint &p) const;
+    void updateScreenRegions();
 
 public slots:
     void hide();
@@ -53,6 +55,8 @@ private:
                                const bool upToDown) const;
 
     QVector<CaptureButton*> m_vectorButtons;
+
+    QRegion m_screenRegions;
 
     int m_buttonExtendedSize;
     int m_buttonBaseSize;
@@ -69,7 +73,10 @@ private:
     QRect m_limits;
     QRect m_selection;
 
+    int m_separator;
+
     // aux methods
+    void init();
     void resetRegionTrack();
     void updateBlockedSides();
     void expandSelection();

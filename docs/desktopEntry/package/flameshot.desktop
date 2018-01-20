@@ -1,10 +1,15 @@
 [Desktop Entry]
 Name=Take graphical screenshot
 Name[es]=Tomar captura gráfica
+Name[zh_CN]=进行图形截图
 GenericName=Screen capture tool
 GenericName[es]=Herramienta de captura de pantalla
+GenericName[zh_CN]=屏幕截图工具
 Comment=Powerful yet simple to use screenshot software.
 Comment[es]=Potente pero simple de usar software de capturas.
+Comment[zh_CN]=强大又易用的截图软件
+Keywords=flameshot;screenshot;capture;
+Keywords[zh_CN]=flameshot;screenshot;capture;截图;
 Exec=flameshot gui
 Icon=flameshot
 Terminal=false

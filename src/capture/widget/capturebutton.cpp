@@ -25,13 +25,12 @@
 #include <QToolTip>
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
+#include <QApplication>
 
 // Button represents a single button of the capture widget, it can enable
 // multiple functionality.
 
 namespace {
-
-const int BUTTON_SIZE = 30;
 
 qreal getColorLuma(const QColor &c) {
     return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
@@ -56,7 +55,7 @@ CaptureButton::CaptureButton(const ButtonType t, QWidget *parent) : QPushButton(
         QFont f = this->font();
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else {
-        setIcon(icon());
+        updateIcon();
     }
     setCursor(Qt::ArrowCursor);
 }
@@ -66,8 +65,8 @@ void CaptureButton::initButton() {
     connect(this, &CaptureButton::pressed, m_tool, &CaptureTool::onPressed);
 
     setFocusPolicy(Qt::NoFocus);
-    resize(BUTTON_SIZE, BUTTON_SIZE);
-    setMask(QRegion(QRect(-1,-1,BUTTON_SIZE+2, BUTTON_SIZE+2), QRegion::Ellipse));
+    resize(buttonBaseSize(), buttonBaseSize());
+    setMask(QRegion(QRect(-1,-1, buttonBaseSize()+2, buttonBaseSize()+2), QRegion::Ellipse));
 
     setToolTip(m_tool->description());
 
@@ -75,7 +74,7 @@ void CaptureButton::initButton() {
     m_emergeAnimation->setEasingCurve(QEasingCurve::InOutQuad);
     m_emergeAnimation->setDuration(80);
     m_emergeAnimation->setStartValue(QSize(0, 0));
-    m_emergeAnimation->setEndValue(QSize(BUTTON_SIZE, BUTTON_SIZE));
+    m_emergeAnimation->setEndValue(QSize(buttonBaseSize(), buttonBaseSize()));
 
     auto dsEffect = new QGraphicsDropShadowEffect(this);
     dsEffect->setBlurRadius(5);
@@ -84,6 +83,11 @@ void CaptureButton::initButton() {
 
     setGraphicsEffect(dsEffect);
 
+}
+
+void CaptureButton::updateIcon() {
+    setIcon(icon());
+    setIconSize(size()*0.6);
 }
 
 QVector<CaptureButton::ButtonType> CaptureButton::getIterableButtonTypes() {
@@ -104,7 +108,7 @@ QString CaptureButton::globalStyleSheet() {
     QString color = iconIsWhiteByColor(mainColor) ? "white" : "black";
 
     return baseSheet.arg(mainColor.name()).arg(contrast.name())
-            .arg(BUTTON_SIZE/2).arg(color);
+            .arg(buttonBaseSize()/2).arg(color);
 }
 
 QString CaptureButton::styleSheet() const {
@@ -119,13 +123,13 @@ QString CaptureButton::styleSheet() const {
     QString color = iconIsWhiteByColor(m_mainColor) ? "white" : "black";
 
     return baseSheet.arg(m_mainColor.name()).arg(contrast.name())
-            .arg(BUTTON_SIZE/2).arg(color);
+            .arg(buttonBaseSize()/2).arg(color);
 }
 
 // get icon returns the icon for the type of button
 QIcon CaptureButton::icon() const {
     QString color(iconIsWhiteByColor(m_mainColor) ? "White" : "Black");
-	QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
+    QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
             .arg(color).arg(m_tool->iconName());
     return QIcon(iconPath);
 }
@@ -157,12 +161,12 @@ CaptureTool *CaptureButton::tool() const {
 void CaptureButton::setColor(const QColor &c) {
     m_mainColor = c;
     setStyleSheet(styleSheet());
-    setIcon(icon());
+    updateIcon();
 }
 
 // getButtonBaseSize returns the base size of the buttons
-size_t CaptureButton::buttonBaseSize() {
-    return BUTTON_SIZE;
+int CaptureButton::buttonBaseSize() {
+    return QApplication::fontMetrics().lineSpacing() * 2.2;
 }
 
 bool CaptureButton::iconIsWhiteByColor(const QColor &c) {
@@ -183,15 +187,15 @@ static std::map<CaptureButton::ButtonType, int> buttonTypeOrder {
     { CaptureButton::TYPE_RECTANGLE,          4 },
     { CaptureButton::TYPE_CIRCLE,             5 },
     { CaptureButton::TYPE_MARKER,             6 },
-	{ CaptureButton::TYPE_SELECTIONINDICATOR, 8 },
-	{ CaptureButton::TYPE_MOVESELECTION,      9 },
-	{ CaptureButton::TYPE_UNDO,              10 },
-	{ CaptureButton::TYPE_COPY,              11 },
-	{ CaptureButton::TYPE_SAVE,              12 },
-	{ CaptureButton::TYPE_EXIT,              13 },
-	{ CaptureButton::TYPE_IMAGEUPLOADER,     14 },
-	{ CaptureButton::TYPE_OPEN_APP,          15 },
-	{ CaptureButton::TYPE_BLUR,              7  },
+    { CaptureButton::TYPE_SELECTIONINDICATOR, 8 },
+    { CaptureButton::TYPE_MOVESELECTION,      9 },
+    { CaptureButton::TYPE_UNDO,              10 },
+    { CaptureButton::TYPE_COPY,              11 },
+    { CaptureButton::TYPE_SAVE,              12 },
+    { CaptureButton::TYPE_EXIT,              13 },
+    { CaptureButton::TYPE_IMAGEUPLOADER,     14 },
+    { CaptureButton::TYPE_OPEN_APP,          15 },
+    { CaptureButton::TYPE_BLUR,              7  },
 };
 
 int CaptureButton::getPriorityByButton(CaptureButton::ButtonType b) {
@@ -207,7 +211,7 @@ QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_RECTANGLE,
     CaptureButton::TYPE_CIRCLE,
     CaptureButton::TYPE_MARKER,
-	CaptureButton::TYPE_BLUR,
+    CaptureButton::TYPE_BLUR,
     CaptureButton::TYPE_SELECTIONINDICATOR,
     CaptureButton::TYPE_MOVESELECTION,
     CaptureButton::TYPE_UNDO,

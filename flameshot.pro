@@ -4,23 +4,20 @@
 #
 #-------------------------------------------------
 
-win32:LIBS += -luser32 #-lshell32
+win32:LIBS += -luser32 -lshell32
 
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
-QT  += core gui
+QT  += core gui widgets network
 
 unix:!macx {
     QT  += dbus
 }
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+CONFIG += c++11 link_pkgconfig
 
-CONFIG    += c++11
-CONFIG    += link_pkgconfig
-
-#CONFIG    += packaging   # Enables "make install" for packaging paths
+#CONFIG += packaging   # Enables "make install" for packaging paths
 
 TARGET = flameshot
 TEMPLATE = app
@@ -35,10 +32,14 @@ win32:RC_ICONS += img/flameshot.ico
 #RCC_DIR = $$DESTDIR/.qrc
 #UI_DIR = $$DESTDIR/.ui
 
-TRANSLATIONS = translation/Internationalization_es.ts \
-    translation/Internationalization_ca.ts \
-    translation/Internationalization_ru.ts \
-    translation/Internationalization_zh_CN.ts
+TRANSLATIONS = translations/Internationalization_es.ts \
+    translations/Internationalization_ca.ts \
+    translations/Internationalization_ru.ts \
+    translations/Internationalization_zh_CN.ts \
+    translations/Internationalization_zh_TW.ts \
+    translations/Internationalization_tr.ts \
+    translations/Internationalization_ka.ts \
+    translations/Internationalization_fr.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
@@ -56,16 +57,8 @@ for(tsfile, TRANSLATIONS) {
     TRANSLATIONS_FILES += $$qmfile
 }
 
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which as been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# You can also make your code fail to compile if you use deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 include(src/third-party/singleapplication/singleapplication.pri)
 include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
 
@@ -112,7 +105,6 @@ SOURCES += src/main.cpp \
     src/cli/commandargument.cpp \
     src/capture/workers/screenshotsaver.cpp \
     src/capture/workers/imgur/imguruploader.cpp \
-    src/capture/workers/graphicalscreenshotsaver.cpp \
     src/capture/workers/imgur/loadspinner.cpp \
     src/capture/workers/imgur/imagelabel.cpp \
     src/capture/workers/imgur/notificationwidget.cpp \
@@ -126,7 +118,8 @@ SOURCES += src/main.cpp \
     src/capture/tools/blurtool.cpp \
     src/capture/workers/launcher/terminallauncher.cpp \
     src/config/visualseditor.cpp \
-    src/config/extendedslider.cpp
+    src/config/extendedslider.cpp \
+    src/capture/workers/launcher/openwithprogram.cpp
 
 HEADERS  += src/capture/widget/buttonhandler.h \
     src/infowindow.h \
@@ -168,7 +161,6 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/cli/commandargument.h \
     src/capture/workers/screenshotsaver.h \
     src/capture/workers/imgur/imguruploader.h \
-    src/capture/workers/graphicalscreenshotsaver.h \
     src/capture/workers/imgur/loadspinner.h \
     src/capture/workers/imgur/imagelabel.h \
     src/capture/workers/imgur/notificationwidget.h \
@@ -182,7 +174,8 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/capture/tools/blurtool.h \
     src/capture/workers/launcher/terminallauncher.h \
     src/config/visualseditor.h \
-    src/config/extendedslider.h
+    src/config/extendedslider.h \
+    src/capture/workers/launcher/openwithprogram.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

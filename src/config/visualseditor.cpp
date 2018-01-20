@@ -50,7 +50,7 @@ void VisualsEditor::initOpacitySlider() {
     localLayout->addWidget(new QLabel("100%"));
 
     QLabel *label = new QLabel();
-    QString labelMsg = tr("Opacity of area outside selection:") + " %1";
+    QString labelMsg = tr("Opacity of area outside selection:") + " %1%";
     connect(m_opacitySlider, &ExtendedSlider::valueChanged,
             this, [labelMsg, label](int val){
         label->setText(labelMsg.arg(val));

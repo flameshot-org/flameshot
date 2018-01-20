@@ -18,8 +18,7 @@
 #include "resourceexporter.h"
 #include "src/capture/workers/imgur/imguruploader.h"
 #include "src/capture/workers/screenshotsaver.h"
-#include "src/capture/workers/graphicalscreenshotsaver.h"
-#include "src/capture/workers/launcher/applauncherwidget.h"
+#include "src/capture/workers/launcher/openwithprogram.h"
 
 ResourceExporter::ResourceExporter() {
 
@@ -34,8 +33,7 @@ void ResourceExporter::captureToFile(const QPixmap &p, const QString &path) {
 }
 
 void ResourceExporter::captureToFileUi(const QPixmap &p) {
-    auto w = new GraphicalScreenshotSaver(p);
-    w->show();
+    ScreenshotSaver().saveToFilesystemGUI(p);
 }
 
 void ResourceExporter::captureToImgur(const QPixmap &p) {
@@ -44,6 +42,5 @@ void ResourceExporter::captureToImgur(const QPixmap &p) {
 }
 
 void ResourceExporter::captureToProgram(const QPixmap &p) {
-    auto w = new AppLauncherWidget(p);
-    w->show();
+    showOpenWithMenu(p);
 }

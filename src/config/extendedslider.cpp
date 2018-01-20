@@ -42,7 +42,7 @@ void ExtendedSlider::setMapedValue(int min, int val, int max) {
 }
 
 void ExtendedSlider::updateTooltip() {
-    setToolTip(QString::number(value()));
+    setToolTip(QString::number(value())+"%");
 }
 
 void ExtendedSlider::fireTimer() {
