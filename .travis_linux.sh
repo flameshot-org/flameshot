@@ -24,7 +24,7 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	BUILD_DST_PATH='build-test'
 	APPIMAGE_DST_PATH='build-appimage'
 
-	# Install qt5.9
+	# Install qt5.3.2
 	sudo add-apt-repository ppa:beineri/opt-qt532-trusty -y
 	sudo apt-get update -qq
 	sudo apt-get -y install qt53base qt53tools
@@ -43,9 +43,20 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	# Packaging AppImage using linuxdeployqt
 	#
 	mkdir build-appimage
-	mkdir -p ./build-appimage/appdir
-	cp $BUILD_DST_PATH/flameshot $APPIMAGE_DST_PATH/appdir
-	cp ${project_dir}/docs/desktopEntry/package/* $APPIMAGE_DST_PATH/appdir
+	mkdir -p ./build-appimage/appdir/usr/bin
+    mkdir -p ./build-appimage/appdir/usr/share/applications
+    mkdir -p ./build-appimage/appdir/usr/share/dbus-1/interfaces
+    mkdir -p ./build-appimage/appdir/usr/share/dbus-1/services
+    mkdir -p ./build-appimage/appdir/usr/share/metainfo
+    mkdir -p ./build-appimage/appdir/usr/share/bash-completion/completions
+    mkdir -p ./build-appimage/appdir/usr/share/flameshot/translations
+	cp $BUILD_DST_PATH/flameshot $APPIMAGE_DST_PATH/appdir/usr/bin
+    cp ${project_dir}/dbus/org.dharkael.Flameshot.xml $APPIMAGE_DST_PATH/appdir/usr/share/dbus-1/interfaces
+    cp ${project_dir}/dbus/package/org.dharkael.Flameshot.service $APPIMAGE_DST_PATH/appdir/usr/share/dbus-1/services
+    cp ${project_dir}/docs/appdata/flameshot.appdata.xml $APPIMAGE_DST_PATH/appdir/usr/share/metainfo
+    cp ${project_dir}/docs/bash-completion/flameshot $APPIMAGE_DST_PATH/appdir/usr/share/bash-completion/completions
+    cp ${project_dir}/translations/*.qm $APPIMAGE_DST_PATH/appdir/usr/share/flameshot/translations
+	cp ${project_dir}/docs/desktopEntry/package/* $APPIMAGE_DST_PATH/appdir/usr/share/applications
 	cp ${project_dir}/img/flameshot.png $APPIMAGE_DST_PATH/appdir
 	ls -alhR $APPIMAGE_DST_PATH/appdir
 
@@ -64,9 +75,17 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	chmod +x linuxdeployqt
 
 	# Packaging
-	./linuxdeployqt $APPIMAGE_DST_PATH/appdir/flameshot -verbose=2 -bundle-non-qt-libs
-	ln -sf plugins/platforms/ $APPIMAGE_DST_PATH/appdir/platforms  # An unknown bug
-	./linuxdeployqt $APPIMAGE_DST_PATH/appdir/flameshot -verbose=2 -appimage
+    # -verbose=2
+	./linuxdeployqt $APPIMAGE_DST_PATH/appdir/usr/bin/flameshot -bundle-non-qt-libs
+
+    rm -f $APPIMAGE_DST_PATH/appdir/usr/lib/libatk-1.0.so.0
+    cd $APPIMAGE_DST_PATH/appdir/usr/bin
+	ln -sf ../plugins/platforms/ .   # An unknown bug
+    cd ${project_dir}
+
+    # -verbose=2
+	./linuxdeployqt $APPIMAGE_DST_PATH/appdir/usr/share/applications/flameshot.desktop -appimage
+
 	ls -alhR ./*.AppImage
 	cp *.AppImage $APPIMAGE_DST_PATH/
 

@@ -19,16 +19,17 @@ env:
       - VERSION=0.5.0
       - RELEASE=1
       - ARCH=x86_64
-      - DOCKER_REPO=packpack/packpack
+#      - DOCKER_REPO=packpack/packpack
+      - DOCKER_REPO=vitzy/packpack
     matrix:
       #The actual list of distribution is available on
       #https://hub.docker.com/r/packpack/packpack/tags/
-      - OS=fedora DIST=25
+      #https://hub.docker.com/r/vitzy/packpack/tags/
       - OS=fedora DIST=26
+      - OS=fedora DIST=27
       # trusty: only for build & test & AppImage
       - OS=ubuntu DIST=trusty   #14.04 LTS;  Qt version is 5.2.1, flameshot not support
       - OS=ubuntu DIST=xenial   #16.04 LTS
-      - OS=ubuntu DIST=zesty    #17.04
       - OS=ubuntu DIST=artful   #17.10
       - OS=debian DIST=jessie   #8
       - OS=debian DIST=stretch  #9
