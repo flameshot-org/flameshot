@@ -16,14 +16,13 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "colorpicker.h"
+#include "src/utils/confighandler.h"
+#include "src/capture/widget/capturebutton.h"
 #include <QPainter>
 #include <QMouseEvent>
-#include "src/utils/confighandler.h"
 
-
-ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
-        m_colorAreaSize(18)
-{
+ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent) {
+    m_colorAreaSize = CaptureButton::buttonBaseSize() * 0.6;
     setMouseTracking(true);
     // save the color values in member variables for faster access
     ConfigHandler config;
