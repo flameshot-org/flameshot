@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef FLAMESHOTDBUSADAPTER_H
-#define FLAMESHOTDBUSADAPTER_H
+#pragma once
 
 #include <QtDBus/QDBusAbstractAdaptor>
 #include "src/core/controller.h"
@@ -41,5 +40,3 @@ public slots:
     Q_NOREPLY void trayIconEnabled(bool enabled);
 
 };
-
-#endif // FLAMESHOTDBUSADAPTER_H

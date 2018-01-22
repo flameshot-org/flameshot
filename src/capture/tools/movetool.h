@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MOVETOOL_H
-#define MOVETOOL_H
+#pragma once
 
 #include "capturetool.h"
 
@@ -43,5 +42,3 @@ public:
     void onPressed() override;
 
 };
-
-#endif // MOVETOOL_H

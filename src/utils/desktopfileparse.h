@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef DESKTOPFILEPARSE_H
-#define DESKTOPFILEPARSE_H
+#pragma once
 
 #include <QIcon>
 #include <QStringList>
@@ -71,5 +70,3 @@ private:
     QIcon m_defaultIcon;
     QList<DesktopAppData> m_appList;
 };
-
-#endif // DESKTOPFILEPARSE_H

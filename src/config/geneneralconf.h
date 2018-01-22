@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GENENERALCONF_H
-#define GENENERALCONF_H
+#pragma once
 
 #include <QWidget>
 
@@ -58,5 +57,3 @@ private:
     void initAutostart();
 
 };
-
-#endif // GENENERALCONF_H

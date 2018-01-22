@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#pragma once
 
 #include <QPushButton>
 #include <QMap>
@@ -92,5 +91,3 @@ private:
     void updateIcon();
 
 };
-
-#endif // BUTTON_H

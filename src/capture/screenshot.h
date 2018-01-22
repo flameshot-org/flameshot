@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SCREENSHOT_H
-#define SCREENSHOT_H
+#pragma once
 
 #include <QPixmap>
 #include <QRect>
@@ -49,5 +48,3 @@ private:
     void paintInPainter(QPainter &, const CaptureModification *);
 
 };
-
-#endif // SCREENSHOT_H

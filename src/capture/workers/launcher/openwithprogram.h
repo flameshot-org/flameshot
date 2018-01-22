@@ -15,11 +15,8 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef OPENWITHPROGRAM_H
-#define OPENWITHPROGRAM_H
+#pragma once
 
 #include <QPixmap>
 
 void showOpenWithMenu(const QPixmap &capture);
-
-#endif // OPENWITHPROGRAM_H

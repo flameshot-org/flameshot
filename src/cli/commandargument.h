@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef COMMANDARGUMENT_H
-#define COMMANDARGUMENT_H
+#pragma once
 
 #include <QString>
 
@@ -41,5 +40,3 @@ private:
     QString m_description;
 
 };
-
-#endif // COMMANDARGUMENT_H

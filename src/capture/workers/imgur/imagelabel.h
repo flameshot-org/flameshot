@@ -18,8 +18,7 @@
 // This code is a modified version of the KDE software Spectacle
 // /src/Gui/KSImageWidget.h commit cbbd6d45f6426ccbf1a82b15fdf98613ccccbbe9
 
-#ifndef IMAGELABEL_H
-#define IMAGELABEL_H
+#pragma once
 
 #include <QGuiApplication>
 #include <QStyleHints>
@@ -55,5 +54,3 @@ private:
     QPoint                     m_dragStartPosition;
 
 };
-
-#endif // IMAGELABEL_H

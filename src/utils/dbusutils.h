@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TERMINALUTILS_H
-#define TERMINALUTILS_H
+#pragma once
 
 #include "src/cli/commandlineparser.h"
 #include <QDBusConnection>
@@ -38,5 +37,3 @@ public slots:
 private:
     uint m_id;
 };
-
-#endif // TERMINALUTILS_H

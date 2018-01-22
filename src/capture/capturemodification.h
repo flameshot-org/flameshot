@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CAPTURECHANGE_H
-#define CAPTURECHANGE_H
+#pragma once
 
 #include "src/capture/widget/capturebutton.h"
 #include <QObject>
@@ -51,5 +50,3 @@ protected:
     int m_thickness;
 
 };
-
-#endif // CAPTURECHANGE_H

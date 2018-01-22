@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CONFIGHANDLER_H
-#define CONFIGHANDLER_H
+#pragma once
 
 #include "src/capture/widget/capturebutton.h"
 #include <QList>
@@ -80,5 +79,3 @@ private:
     QList<int> fromButtonToInt(const QList<CaptureButton::ButtonType> &l);
 
 };
-
-#endif // CONFIGHANDLER_H

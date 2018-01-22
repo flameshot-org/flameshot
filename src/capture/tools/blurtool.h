@@ -15,9 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-
-#ifndef BLURTOOL_H
-#define BLURTOOL_H
+#pragma once
 
 #include "capturetool.h"
 
@@ -47,5 +45,3 @@ private:
     bool needsAdjustment(const QPoint &p0, const QPoint &p1) const;
 
 };
-
-#endif // BLURTOOL_H

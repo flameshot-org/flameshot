@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef COMMANDOPTION_H
-#define COMMANDOPTION_H
+#pragma once
 
 #include <QStringList>
 #include <functional>
@@ -64,5 +63,3 @@ private:
     QString m_errorMsg;
 
 };
-
-#endif // COMMANDOPTION_H
