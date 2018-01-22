@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SYSTEMNOTIFICATION_H
-#define SYSTEMNOTIFICATION_H
+#pragma once
 
 #include <QObject>
 
@@ -36,5 +35,3 @@ private:
     QDBusInterface *m_interface;
 
 };
-
-#endif // SYSTEMNOTIFICATION_H

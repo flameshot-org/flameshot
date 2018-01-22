@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef APPLAUNCHERWIDGET_H
-#define APPLAUNCHERWIDGET_H
+#pragma once
 
 #include "src/utils/desktopfileparse.h"
 #include <QWidget>
@@ -58,5 +57,3 @@ private:
     QListWidget *m_filterList;
     QTabWidget *m_tabWidget;
 };
-
-#endif // APPLAUNCHERWIDGET_H

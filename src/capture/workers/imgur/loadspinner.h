@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef LOADSPINNER_H
-#define LOADSPINNER_H
+#pragma once
 
 #include <QWidget>
 
@@ -49,5 +48,3 @@ private:
     QRect  m_frame;
     void updateFrame();
 };
-
-#endif // LOADSPINNER_H

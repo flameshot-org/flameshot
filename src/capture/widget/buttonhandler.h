@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef BUTTONHANDLER_H
-#define BUTTONHANDLER_H
+#pragma once
 
 #include "capturebutton.h"
 #include <QVector>
@@ -86,5 +85,3 @@ private:
     void adjustHorizontalCenter(QPoint &center);
 
 };
-
-#endif // BUTTONHANDLER_H

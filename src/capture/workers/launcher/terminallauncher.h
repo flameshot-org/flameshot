@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TERMINALLAUNCHER_H
-#define TERMINALLAUNCHER_H
+#pragma once
 
 #include <QObject>
 
@@ -35,5 +34,3 @@ public:
 private:
     static TerminalApp getPreferedTerminal();
 };
-
-#endif // TERMINALLAUNCHER_H

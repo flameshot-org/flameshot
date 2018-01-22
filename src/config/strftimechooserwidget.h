@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef STRFTIMECHOOSERWIDGET_H
-#define STRFTIMECHOOSERWIDGET_H
+#pragma once
 
 #include <QWidget>
 
@@ -33,5 +32,3 @@ private:
     static QMap<QString, QString> m_buttonData;
 
 };
-
-#endif // STRFTIMECHOOSERWIDGET_H

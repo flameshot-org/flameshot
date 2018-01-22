@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef NOTIFIERBOX_H
-#define NOTIFIERBOX_H
+#pragma once
 
 #include <QWidget>
 
@@ -41,5 +40,3 @@ private:
     QColor m_bgColor;
     QColor m_foregroundColor;
 };
-
-#endif // NOTIFIERBOX_H

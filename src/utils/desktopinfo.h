@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef DESKTOPINFO_H
-#define DESKTOPINFO_H
+#pragma once
 
 #include <QString>
 
@@ -44,5 +43,3 @@ private:
     QString DESKTOP_SESSION;
 
 };
-
-#endif // DESKTOPINFO_H
