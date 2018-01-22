@@ -58,7 +58,7 @@
     <message>
         <location filename="../src/capture/tools/arrowtool.cpp" line="81"/>
         <source>Sets the Arrow as the paint tool</source>
-        <translation>Définir la flèche comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Flèche</translation>
     </message>
 </context>
 <context>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../src/capture/tools/blurtool.cpp" line="45"/>
         <source>Sets the Blur as the paint tool</source>
-        <translation>Définir le fondu comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Flou</translation>
     </message>
 </context>
 <context>
@@ -98,12 +98,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/capture/tools/circletool.cpp" line="38"/>
         <source>Circle</source>
-        <translation>Cercle</translation>
+        <translation>Ellipse</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/circletool.cpp" line="42"/>
         <source>Sets the Circle as the paint tool</source>
-        <translation>Définir le cercle comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Ellipse</translation>
     </message>
 </context>
 <context>
@@ -502,7 +502,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/capture/tools/linetool.cpp" line="44"/>
         <source>Sets the Line as the paint tool</source>
-        <translation>Définir la ligne comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Ligne</translation>
     </message>
 </context>
 <context>
@@ -510,12 +510,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/capture/tools/markertool.cpp" line="40"/>
         <source>Marker</source>
-        <translation>Marqueur</translation>
+        <translation>Surligneur</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/markertool.cpp" line="44"/>
         <source>Sets the Marker as the paint tool</source>
-        <translation>Définir le marqueur comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Surligneur</translation>
     </message>
 </context>
 <context>
@@ -541,7 +541,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/capture/tools/penciltool.cpp" line="42"/>
         <source>Sets the Pencil as the paint tool</source>
-        <translation>Définir le crayon comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Crayon</translation>
     </message>
 </context>
 <context>
@@ -581,12 +581,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/capture/tools/rectangletool.cpp" line="38"/>
         <source>Rectangle</source>
-        <translation>Rectangle</translation>
+        <translation>Rectangle plein</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/rectangletool.cpp" line="42"/>
         <source>Sets the Rectangle as the paint tool</source>
-        <translation>Définir le rectangle comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Rectangle plein</translation>
     </message>
 </context>
 <context>
@@ -607,12 +607,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/capture/tools/selectiontool.cpp" line="38"/>
         <source>Rectangular Selection</source>
-        <translation>Sélection rectangulaire</translation>
+        <translation>Rectangle</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/selectiontool.cpp" line="42"/>
         <source>Sets the Selection as the paint tool</source>
-        <translation>Définir la sélection rectangulaire comme pinceau</translation>
+        <translation>Sélectionner l&apos;outil Rectangle</translation>
     </message>
 </context>
 <context>
