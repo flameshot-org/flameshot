@@ -39,7 +39,7 @@ protected:
     QVector<QRect> handleMask() const;
 
 private:
-    const int m_colorAreaSize;
+    int m_colorAreaSize;
     QVector<QRect> m_colorAreaList;
     static QVector<Qt::GlobalColor> colorList;
 
