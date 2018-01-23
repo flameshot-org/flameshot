@@ -18,7 +18,7 @@
 #pragma once
 
 #include "src/capture/widget/capturebutton.h"
-#include <QList>
+#include <QVector>
 #include <QSettings>
 
 class ConfigHandler
@@ -26,8 +26,8 @@ class ConfigHandler
 public:
     explicit ConfigHandler();
 
-    QList<CaptureButton::ButtonType> getButtons();
-    void setButtons(const QList<CaptureButton::ButtonType> &);
+	QVector<CaptureButton::ButtonType> getButtons();
+	void setButtons(const QVector<CaptureButton::ButtonType> &);
 
     QString savePathValue();
     void setSavePath(const QString &);
@@ -73,9 +73,9 @@ public:
 private:
     QSettings m_settings;
 
-    bool normalizeButtons(QList<int> &);
+	bool normalizeButtons(QVector<int> &);
 
-    QList<CaptureButton::ButtonType> fromIntToButton(const QList<int> &l);
-    QList<int> fromButtonToInt(const QList<CaptureButton::ButtonType> &l);
+	QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
+	QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
 
 };
