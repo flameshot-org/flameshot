@@ -70,7 +70,7 @@ void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
         m_listButtons.append(bType);
         std::sort(m_listButtons.begin(), m_listButtons.end());
     } else {
-        m_listButtons.removeOne(bType);
+        m_listButtons.remove(m_listButtons.indexOf(bType));
     }
     ConfigHandler().setButtons(m_listButtons);
 }
