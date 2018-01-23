@@ -34,7 +34,7 @@ void SystemNotification::sendMessage(
     }
 
 #ifndef Q_OS_WIN
-    QList<QVariant> args;
+	QList<QVariant> args;
     args << (qAppName())                 //appname
          << static_cast<unsigned int>(0) //id
          << "flameshot.png"              //icon
