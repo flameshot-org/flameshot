@@ -128,7 +128,7 @@ int DesktopFileParser::processDirectory(const QDir &dir) {
 }
 
 QVector<DesktopAppData> DesktopFileParser::getAppsByCategory(const QString &category) {
-	QVector<DesktopAppData> res;
+    QVector<DesktopAppData> res;
     for (const DesktopAppData &app : m_appList) {
         if (app.categories.contains(category)) {
             res.append(app);
@@ -140,7 +140,7 @@ QVector<DesktopAppData> DesktopFileParser::getAppsByCategory(const QString &cate
 QMap<QString, QVector<DesktopAppData>> DesktopFileParser::getAppsByCategory(
         const QStringList &categories)
 {
-	QMap<QString, QVector<DesktopAppData>> res;
+    QMap<QString, QVector<DesktopAppData>> res;
     for (const DesktopAppData &app : m_appList) {
         for (const QString &category: categories) {
             if (app.categories.contains(category)) {

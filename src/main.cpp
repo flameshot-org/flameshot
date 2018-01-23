@@ -36,7 +36,7 @@
 
 int main(int argc, char *argv[]) {
     // required for the button serialization
-	qRegisterMetaTypeStreamOperators<QVector<int> >("QVector<int>");
+    qRegisterMetaTypeStreamOperators<QVector<int> >("QVector<int>");
     qApp->setApplicationVersion(static_cast<QString>(APP_VERSION));
 
     QTranslator translator;

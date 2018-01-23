@@ -57,8 +57,8 @@ struct DesktopFileParser {
     DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
     int processDirectory(const QDir &dir);
 
-	QVector<DesktopAppData> getAppsByCategory(const QString &category);
-	QMap<QString, QVector<DesktopAppData>> getAppsByCategory(
+    QVector<DesktopAppData> getAppsByCategory(const QString &category);
+    QMap<QString, QVector<DesktopAppData>> getAppsByCategory(
             const QStringList &categories);
 
 private:
@@ -68,5 +68,5 @@ private:
     QString m_localeDescriptionShort;
 
     QIcon m_defaultIcon;
-	QVector<DesktopAppData> m_appList;
+    QVector<DesktopAppData> m_appList;
 };
