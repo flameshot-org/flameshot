@@ -77,7 +77,11 @@ void Controller::createVisualCapture(const uint id, const QString &forcedSavePat
                 this, &Controller::captureFailed);
         connect(m_captureWindow, &CaptureWidget::captureTaken,
                 this, &Controller::captureTaken);
+#ifdef Q_OS_WIN
+        m_captureWindow->show();
+#else
         m_captureWindow->showFullScreen();
+#endif
     }
 }
 

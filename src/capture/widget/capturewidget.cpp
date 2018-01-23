@@ -71,10 +71,16 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
             << &m_LSide << &m_TSide << &m_RSide << &m_BSide;
 
     // set base config of the widget
+#ifdef Q_OS_WIN
+    setWindowFlags(Qt::WindowStaysOnTopHint
+                   | Qt::FramelessWindowHint
+                   | Qt::Popup);
+#else
     setWindowFlags(Qt::BypassWindowManagerHint
                    | Qt::WindowStaysOnTopHint
                    | Qt::FramelessWindowHint
                    | Qt::Tool);
+#endif
 
     setMouseTracking(true);
     updateCursor();
