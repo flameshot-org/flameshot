@@ -43,13 +43,13 @@ private:
     void initAppMap();
     void configureListView(QListWidget *widget);
     void addAppsToListWidget(QListWidget *widget,
-							 const QVector<DesktopAppData> &appList);
+                             const QVector<DesktopAppData> &appList);
 
     DesktopFileParser m_parser;
     QPixmap m_pixmap;
     QString m_tempFile;
     bool m_keepOpen;
-	QMap<QString, QVector<DesktopAppData>> m_appsMap;
+    QMap<QString, QVector<DesktopAppData>> m_appsMap;
     QCheckBox *m_keepOpenCheckbox;
     QCheckBox *m_terminalCheckbox;
     QVBoxLayout *m_layout;

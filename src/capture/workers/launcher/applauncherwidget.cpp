@@ -134,14 +134,14 @@ void AppLauncherWidget::searchChanged(const QString &text) {
         m_filterList->show();
         m_filterList->clear();
         QRegExp regexp(text, Qt::CaseInsensitive, QRegExp::Wildcard);
-		QVector<DesktopAppData> apps;
+        QVector<DesktopAppData> apps;
 
         for (auto const& i : catIconNames.toStdMap()) {
             const QString &cat = i.first;
             if (!m_appsMap.contains(cat)) {
                 continue;
             }
-			const QVector<DesktopAppData> &appList = m_appsMap[cat];
+            const QVector<DesktopAppData> &appList = m_appsMap[cat];
             for (const DesktopAppData &app: appList) {
                 if (!apps.contains(app) && (app.name.contains(regexp) ||
                         app.description.contains(regexp) ))
@@ -170,7 +170,7 @@ void AppLauncherWidget::initListWidget() {
         QListWidget *itemsWidget = new QListWidget();
         configureListView(itemsWidget);
 
-		const QVector<DesktopAppData> &appList = m_appsMap[cat];
+        const QVector<DesktopAppData> &appList = m_appsMap[cat];
         addAppsToListWidget(itemsWidget, appList);
 
         m_tabWidget->addTab(itemsWidget, QIcon::fromTheme(iconName), "");
@@ -197,7 +197,7 @@ void AppLauncherWidget::initAppMap() {
     m_appsMap = m_parser.getAppsByCategory(categories);
 
     // Unify multimedia.
-	QVector<DesktopAppData> multimediaList;
+    QVector<DesktopAppData> multimediaList;
     QStringList multimediaNames;
     multimediaNames << "AudioVideo" << "Audio" << "Video";
     for (const QString &name : multimediaNames) {
@@ -227,7 +227,7 @@ void AppLauncherWidget::configureListView(QListWidget *widget) {
 }
 
 void AppLauncherWidget::addAppsToListWidget(
-		QListWidget *widget, const QVector<DesktopAppData> &appList)
+        QListWidget *widget, const QVector<DesktopAppData> &appList)
 {
     for (const DesktopAppData &app: appList) {
         QListWidgetItem *buttonItem = new QListWidgetItem(widget);

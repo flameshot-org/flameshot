@@ -26,8 +26,11 @@ class ConfigHandler
 public:
     explicit ConfigHandler();
 
-	QVector<CaptureButton::ButtonType> getButtons();
-	void setButtons(const QVector<CaptureButton::ButtonType> &);
+    QVector<CaptureButton::ButtonType> getButtons();
+    void setButtons(const QVector<CaptureButton::ButtonType> &);
+
+    QVector<QColor> getUserColors();
+    void setUserColors(const QVector<QColor> &);
 
     QString savePathValue();
     void setSavePath(const QString &);
@@ -73,9 +76,9 @@ public:
 private:
     QSettings m_settings;
 
-	bool normalizeButtons(QVector<int> &);
+    bool normalizeButtons(QVector<int> &);
 
-	QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
-	QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
+    QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
+    QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
 
 };

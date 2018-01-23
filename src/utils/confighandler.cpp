@@ -26,24 +26,48 @@ ConfigHandler::ConfigHandler(){
 }
 
 QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
-	QVector<CaptureButton::ButtonType> buttons;
+    QVector<CaptureButton::ButtonType> buttons;
     if (m_settings.contains("buttons")) {
-		QVector<int> buttonsInt = m_settings.value("buttons").value<QVector<int> >();
+        QVector<int> buttonsInt = m_settings.value("buttons").value<QVector<int> >();
         bool modified = normalizeButtons(buttonsInt);
         if (modified) {
             m_settings.setValue("buttons", QVariant::fromValue(buttonsInt));
         }
         buttons = fromIntToButton(buttonsInt);
     } else {
-		buttons = CaptureButton::getIterableButtonTypes();
+        buttons = CaptureButton::getIterableButtonTypes();
     }
     return buttons;
 }
 
 void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons) {
-	QVector<int> l = fromButtonToInt(buttons);
+    QVector<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
     m_settings.setValue("buttons", QVariant::fromValue(l));
+}
+
+QVector<QColor> ConfigHandler::getUserColors() {
+    QVector<QColor> colors;
+    if (m_settings.contains("userColors")) {
+        colors = m_settings.value("userColors").value<QVector<QColor> >();
+    } else {
+        colors = {
+            Qt::darkRed,
+            Qt::red,
+            Qt::yellow,
+            Qt::green,
+            Qt::darkGreen,
+            Qt::cyan,
+            Qt::blue,
+            Qt::magenta,
+            Qt::darkMagenta,
+        };
+    }
+    return colors;
+}
+
+void ConfigHandler::setUserColors(const QVector<QColor> &l) {
+    m_settings.setValue("userColors", QVariant::fromValue(l));
 }
 
 QString ConfigHandler::savePathValue() {
@@ -210,7 +234,7 @@ void ConfigHandler::setDefaults() {
 }
 
 void ConfigHandler::setAllTheButtons() {
-	QVector<int> buttons;
+    QVector<int> buttons;
     auto listTypes = CaptureButton::getIterableButtonTypes();
     for (const CaptureButton::ButtonType t: listTypes) {
         buttons << static_cast<int>(t);
@@ -224,14 +248,14 @@ QString ConfigHandler::configFilePath() const {
 
 bool ConfigHandler::normalizeButtons(QVector<int> &buttons) {
     auto listTypes = CaptureButton::getIterableButtonTypes();
-	QVector<int> listTypesInt;
-	for(auto i: listTypes)
-		listTypesInt << static_cast<int>(i);
+    QVector<int> listTypesInt;
+    for(auto i: listTypes)
+        listTypesInt << static_cast<int>(i);
 
     bool hasChanged = false;
-	for (int i = 0; i < buttons.size(); i++) {
-		if (!listTypesInt.contains(buttons.at(i))) {
-			buttons.remove(i);
+    for (int i = 0; i < buttons.size(); i++) {
+        if (!listTypesInt.contains(buttons.at(i))) {
+            buttons.remove(i);
             hasChanged = true;
         }
     }
@@ -243,18 +267,18 @@ bool ConfigHandler::normalizeButtons(QVector<int> &buttons) {
 }
 
 QVector<CaptureButton::ButtonType> ConfigHandler::fromIntToButton(
-		const QVector<int> &l)
+        const QVector<int> &l)
 {
-	QVector<CaptureButton::ButtonType> buttons;
+    QVector<CaptureButton::ButtonType> buttons;
     for (auto const i: l)
         buttons << static_cast<CaptureButton::ButtonType>(i);
     return buttons;
 }
 
 QVector<int> ConfigHandler::fromButtonToInt(
-		const QVector<CaptureButton::ButtonType> &l)
+        const QVector<CaptureButton::ButtonType> &l)
 {
-	QVector<int> buttons;
+    QVector<int> buttons;
     for (auto const i: l)
         buttons << static_cast<int>(i);
     return buttons;

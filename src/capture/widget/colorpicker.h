@@ -40,7 +40,7 @@ protected:
 private:
     int m_colorAreaSize;
     QVector<QRect> m_colorAreaList;
-    static QVector<Qt::GlobalColor> colorList;
+    QVector<QColor> m_colorList;
 
     QColor m_uiColor, m_drawColor;
 
