@@ -63,7 +63,7 @@ void LoadSpinner::paintEvent(QPaintEvent *) {
     painter.setRenderHint(QPainter::Antialiasing, true);
     auto pen = QPen(m_color);
 
-    pen.setWidth(5);
+    pen.setWidth(height()/10);
     painter.setPen(pen);
     painter.setOpacity(0.2);
     painter.drawArc(m_frame, 0,  5760);
