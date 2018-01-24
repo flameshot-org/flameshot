@@ -205,6 +205,48 @@ void ConfigHandler::setContrastOpacity(const int transparency) {
     m_settings.setValue("contrastOpacity", transparency);
 }
 
+void ConfigHandler::setFtpHostname(const QString &hostname) {
+    m_settings.setValue("ftpHostname", hostname);
+}
+
+QString ConfigHandler::ftpHostname() {
+    return m_settings.value("ftpHostname").toString();
+}
+
+void ConfigHandler::setFtpSite(const QString &site) {
+    m_settings.setValue("ftpSite", site);
+}
+
+QString ConfigHandler::ftpSite() {
+    return m_settings.value("ftpSite").toString();
+}
+
+
+void ConfigHandler::setFtpPort(const int port) {
+    m_settings.setValue("ftpPort", port);
+}
+
+int ConfigHandler::ftpPort() {
+    return m_settings.value("ftpPort").toInt();
+}
+
+void ConfigHandler::setFtpLogin(const QString &login) {
+    m_settings.setValue("ftpLogin", login);
+}
+
+QString ConfigHandler::ftpLogin() {
+    return m_settings.value("ftpLogin").toString();
+}
+
+void ConfigHandler::setFtpPassword(const QString &password) {
+    m_settings.setValue("ftpPassword", password);
+}
+
+QString ConfigHandler::ftpPassword() {
+    return m_settings.value("ftpPassword").toString();
+}
+
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }

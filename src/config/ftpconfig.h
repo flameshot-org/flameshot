@@ -15,35 +15,43 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#ifndef FtpConfig_H
+#define FtpConfig_H
 
-#include <QTabWidget>
+#include <QWidget>
+#include <QPointer>
 
-class FileNameEditor;
-class FtpConfig;
-class GeneneralConf;
-class QFileSystemWatcher;
-class VisualsEditor;
+class QVBoxLayout;
+class QLineEdit;
+class FileNameHandler;
+class QPushButton;
+class StrftimeChooserWidget;
 
-class ConfigWindow : public QTabWidget {
+class FtpConfig : public QWidget
+{
     Q_OBJECT
 public:
-    explicit ConfigWindow(QWidget *parent = nullptr);
-
-signals:
-    void updateChildren();
-
-protected:
-    void keyPressEvent(QKeyEvent *);
+    explicit FtpConfig(QWidget *parent = nullptr);
 
 private:
-    FileNameEditor *m_filenameEditor;
-    FtpConfig *m_ftpConfig;
-    GeneneralConf *m_generalConfig;
-    VisualsEditor *m_visuals;
-    QFileSystemWatcher *m_configWatcher;
+    QVBoxLayout *m_layout;
+    QLineEdit *m_hostname;
+    QLineEdit *m_sitename;
+    QLineEdit *m_port;
+    QLineEdit *m_username;
+    QLineEdit *m_password;
+
+    QPushButton *m_saveButton;
+
+    void initLayout();
+    void initWidgets();
+
+public slots:
+    void updateComponents();
+
+private slots:
+    void saveSettings();
 
 };
 
-#endif // CONFIGURATION_H
+#endif // FtpConfig_H

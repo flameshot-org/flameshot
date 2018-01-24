@@ -19,6 +19,7 @@
 #include "src/capture/widget/capturebutton.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
+#include "src/config/ftpconfig.h"
 #include "src/config/strftimechooserwidget.h"
 #include "src/utils/confighandler.h"
 #include "src/config/visualseditor.h"
@@ -32,7 +33,7 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setMinimumSize(400, 490);
+    setMinimumSize(450, 490);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
 
@@ -67,9 +68,16 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
 	addTab(m_generalConfig, QIcon(modifier + "config.png"),
 		   tr("General"));
 
+    // ftp
+    m_ftpConfig = new FtpConfig();
+    addTab(m_ftpConfig, QIcon(modifier + "upload-network.png"),
+           tr("FTP"));
+
     // connect update sigslots
     connect(this, &ConfigWindow::updateChildren,
             m_filenameEditor, &FileNameEditor::updateComponents);
+    connect(this, &ConfigWindow::updateChildren,
+            m_ftpConfig, &FtpConfig::updateComponents);
     connect(this, &ConfigWindow::updateChildren,
             m_visuals, &VisualsEditor::updateComponents);
     connect(this, &ConfigWindow::updateChildren,

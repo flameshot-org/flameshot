@@ -500,6 +500,9 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     case CaptureTool::REQ_UPLOAD_TO_IMGUR:
         uploadToImgur();
         break;
+    case CaptureTool::REQ_UPLOAD_TO_FTP:
+        uploadToFTP();
+        break;
     case CaptureTool::REQ_OPEN_APP:
         openWithProgram();
         break;
@@ -648,6 +651,13 @@ void CaptureWidget::uploadToImgur() {
     m_captureDone = true;
     hide();
     ResourceExporter().captureToImgur(pixmap());
+    close();
+}
+
+void CaptureWidget::uploadToFTP() {
+    m_captureDone = true;
+    hide();
+    ResourceExporter().captureToFTP(pixmap());
     close();
 }
 

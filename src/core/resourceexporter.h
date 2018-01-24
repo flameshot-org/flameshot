@@ -28,6 +28,7 @@ public:
     void captureToFile(const QPixmap &p, const QString &path);
     void captureToFileUi(const QPixmap &p);
     void captureToImgur(const QPixmap &p);
+    void captureToFTP(const QPixmap &p);
     void captureToProgram(const QPixmap &p);
 };
 

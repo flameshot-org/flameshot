@@ -15,35 +15,33 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#ifndef FTPUPLOADERTOOL_H
+#define FTPUPLOADERTOOL_H
 
-#include <QTabWidget>
+#include "capturetool.h"
 
-class FileNameEditor;
-class FtpConfig;
-class GeneneralConf;
-class QFileSystemWatcher;
-class VisualsEditor;
-
-class ConfigWindow : public QTabWidget {
+class FTPUploaderTool : public CaptureTool
+{
     Q_OBJECT
 public:
-    explicit ConfigWindow(QWidget *parent = nullptr);
+    explicit FTPUploaderTool(QObject *parent = nullptr);
 
-signals:
-    void updateChildren();
+    int id() const override;
+    bool isSelectable() const override;
+    ToolWorkType toolType() const override;
 
-protected:
-    void keyPressEvent(QKeyEvent *);
+    QString iconName() const override;
+    QString name() const override;
+    QString description() const override;
 
-private:
-    FileNameEditor *m_filenameEditor;
-    FtpConfig *m_ftpConfig;
-    GeneneralConf *m_generalConfig;
-    VisualsEditor *m_visuals;
-    QFileSystemWatcher *m_configWatcher;
+    void processImage(
+            QPainter &painter,
+            const QVector<QPoint> &points,
+            const QColor &color,
+            const int thickness) override;
+
+    void onPressed() override;
 
 };
 
-#endif // CONFIGURATION_H
+#endif // FTPUPLOADERTOOL_H

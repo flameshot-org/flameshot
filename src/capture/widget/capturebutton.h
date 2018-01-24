@@ -50,6 +50,7 @@ public:
 		TYPE_IMAGEUPLOADER = 13,
 		TYPE_OPEN_APP = 14,
 		TYPE_BLUR = 15,
+        TYPE_IMAGEFTPUPLOADER = 16,
     };
 
     CaptureButton() = delete;

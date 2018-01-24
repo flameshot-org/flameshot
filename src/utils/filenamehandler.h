@@ -32,7 +32,7 @@ public:
     QString generateAbsolutePath(const QString &path);
     QString absoluteSavePath(QString &directory, QString &filename);
     QString absoluteSavePath();
-
+    QString getRandom(const int length = 12);
 
     static const int MAX_CHARACTERS = 70;
 

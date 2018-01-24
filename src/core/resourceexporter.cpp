@@ -17,6 +17,7 @@
 
 #include "resourceexporter.h"
 #include "src/capture/workers/imgur/imguruploader.h"
+#include"src/capture/workers/ftp/ftpuploader.h"
 #include "src/capture/workers/screenshotsaver.h"
 #include "src/capture/workers/launcher/openwithprogram.h"
 
@@ -38,6 +39,11 @@ void ResourceExporter::captureToFileUi(const QPixmap &p) {
 
 void ResourceExporter::captureToImgur(const QPixmap &p) {
     auto w = new ImgurUploader(p);
+    w->show();
+}
+
+void ResourceExporter::captureToFTP(const QPixmap &p) {
+    auto w = new FTPUploader(p);
     w->show();
 }
 

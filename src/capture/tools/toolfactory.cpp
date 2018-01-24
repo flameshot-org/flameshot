@@ -21,6 +21,7 @@
 #include "copytool.h"
 #include "exittool.h"
 #include "imguruploadertool.h"
+#include "ftpuploadertool.h"
 #include "linetool.h"
 #include "markertool.h"
 #include "movetool.h"
@@ -32,6 +33,8 @@
 #include "undotool.h"
 #include "applauncher.h"
 #include "blurtool.h"
+
+#include <QMessageBox>
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent)
 {
@@ -91,6 +94,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_BLUR:
         tool = new BlurTool(parent);
+        break;
+    case CaptureButton::TYPE_IMAGEFTPUPLOADER:
+        tool = new FTPUploaderTool(parent);
         break;
     default:
         tool = nullptr;

@@ -46,6 +46,7 @@ public:
         REQ_UPLOAD_TO_IMGUR,
         REQ_MOVE_MODE,
         REQ_OPEN_APP,
+        REQ_UPLOAD_TO_FTP,
     };
 
     explicit CaptureTool(QObject *parent = nullptr);
