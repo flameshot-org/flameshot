@@ -28,10 +28,12 @@ ConfigHandler::ConfigHandler(){
 QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
     QVector<CaptureButton::ButtonType> buttons;
     if (m_settings.contains("buttons")) {
-        QVector<int> buttonsInt = m_settings.value("buttons").value<QVector<int> >();
+        // TODO: remove toList in v1.0
+        QVector<int> buttonsInt =
+                m_settings.value("buttons").value<QList<int> >().toVector();
         bool modified = normalizeButtons(buttonsInt);
         if (modified) {
-            m_settings.setValue("buttons", QVariant::fromValue(buttonsInt));
+            m_settings.setValue("buttons", QVariant::fromValue(buttonsInt.toList()));
         }
         buttons = fromIntToButton(buttonsInt);
     } else {
@@ -43,7 +45,8 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
 void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons) {
     QVector<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
-    m_settings.setValue("buttons", QVariant::fromValue(l));
+    // TODO: remove toList in v1.0
+    m_settings.setValue("buttons", QVariant::fromValue(l.toList()));
 }
 
 QVector<QColor> ConfigHandler::getUserColors() {
@@ -241,7 +244,8 @@ void ConfigHandler::setAllTheButtons() {
     for (const CaptureButton::ButtonType t: listTypes) {
         buttons << static_cast<int>(t);
     }
-    m_settings.setValue("buttons", QVariant::fromValue(buttons));
+    // TODO: remove toList in v1.0
+    m_settings.setValue("buttons", QVariant::fromValue(buttons.toList()));
 }
 
 QString ConfigHandler::configFilePath() const {
