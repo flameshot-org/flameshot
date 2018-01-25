@@ -15,25 +15,22 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TERMINALLAUNCHER_H
-#define TERMINALLAUNCHER_H
+#pragma once
 
 #include <QObject>
 
 struct TerminalApp {
-	QString name;
-	QString arg;
+    QString name;
+    QString arg;
 };
 
 class TerminalLauncher : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	explicit TerminalLauncher(QObject *parent = nullptr);
+    explicit TerminalLauncher(QObject *parent = nullptr);
 
-	static bool launchDetached(const QString &command);
+    static bool launchDetached(const QString &command);
 private:
-	static TerminalApp getPreferedTerminal();
+    static TerminalApp getPreferedTerminal();
 };
-
-#endif // TERMINALLAUNCHER_H

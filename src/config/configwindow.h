@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#pragma once
 
 #include <QTabWidget>
 
@@ -45,5 +44,3 @@ private:
     QFileSystemWatcher *m_configWatcher;
 
 };
-
-#endif // CONFIGURATION_H

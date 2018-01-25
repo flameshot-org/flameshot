@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CAPTURETOOL_H
-#define CAPTURETOOL_H
+#pragma once
 
 #include <QObject>
 #include <QVector>
@@ -72,5 +71,3 @@ public slots:
     virtual void onPressed() = 0;
 
 };
-
-#endif // CAPTURETOOL_H

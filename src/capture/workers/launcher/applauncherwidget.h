@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef APPLAUNCHERWIDGET_H
-#define APPLAUNCHERWIDGET_H
+#pragma once
 
 #include "src/utils/desktopfileparse.h"
 #include <QWidget>
@@ -37,26 +36,24 @@ public:
 private slots:
     void launch(const QModelIndex &index);
     void checkboxClicked(const bool enabled);
-	void searchChanged(const QString &text);
+    void searchChanged(const QString &text);
 
 private:
-	void initListWidget();
-	void initAppMap();
-	void configureListView(QListWidget *widget);
-	void addAppsToListWidget(QListWidget *widget,
-							 const QList<DesktopAppData> &appList);
+    void initListWidget();
+    void initAppMap();
+    void configureListView(QListWidget *widget);
+    void addAppsToListWidget(QListWidget *widget,
+                             const QVector<DesktopAppData> &appList);
 
-	DesktopFileParser m_parser;
+    DesktopFileParser m_parser;
     QPixmap m_pixmap;
     QString m_tempFile;
     bool m_keepOpen;
-	QMap<QString, QList<DesktopAppData>> m_appsMap;
-	QCheckBox *m_keepOpenCheckbox;
-	QCheckBox *m_terminalCheckbox;
-	QVBoxLayout *m_layout;
-	QLineEdit *m_lineEdit;
-	QListWidget *m_filterList;
-	QTabWidget *m_tabWidget;
+    QMap<QString, QVector<DesktopAppData>> m_appsMap;
+    QCheckBox *m_keepOpenCheckbox;
+    QCheckBox *m_terminalCheckbox;
+    QVBoxLayout *m_layout;
+    QLineEdit *m_lineEdit;
+    QListWidget *m_filterList;
+    QTabWidget *m_tabWidget;
 };
-
-#endif // APPLAUNCHERWIDGET_H

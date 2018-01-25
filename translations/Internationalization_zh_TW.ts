@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="1.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>AppLauncher</name>
     <message>
@@ -17,33 +17,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="55"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
         <translation>打開</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="70"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
         <translation>在終端機中啟動</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
         <translation>選擇後維持此視窗開啟</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="110"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
         <translation>無法在終端機中啟動</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="98"/>
+        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
         <translation>無法寫入</translation>
     </message>
@@ -77,7 +77,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="197"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -88,7 +88,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 使用滑鼠滾輪來改變繪製工具的寬度</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="93"/>
+        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation>無法擷取螢幕</translation>
     </message>
@@ -109,30 +109,30 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="37"/>
+        <location filename="../src/config/configwindow.cpp" line="38"/>
         <source>Configuration</source>
         <translation>設定</translation>
     </message>
     <message>
         <source>Button Selection</source>
-        <translation>按鈕選擇</translation>
+        <translation type="vanished">按鈕選擇</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>全選</translation>
+        <translation type="vanished">全選</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="58"/>
+        <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>介面</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Filename Editor</source>
         <translation>檔案名稱編輯器</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>General</source>
         <translation>一般</translation>
     </message>
@@ -459,7 +459,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <source>Available shorcuts in the screen capture mode.</source>
-        <translation>螢幕截取模式中的可用快速鍵</translation>
+        <translation type="vanished">螢幕截取模式中的可用快速鍵</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="76"/>
@@ -547,24 +547,23 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="38"/>
         <source>Save As</source>
-        <translation>另存為</translation>
+        <translation type="vanished">另存為</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="74"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation>存檔錯誤</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="87"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="43"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
         <source>Capture saved as </source>
         <translation>截圖已另存為 </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/graphicalscreenshotsaver.cpp" line="91"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Error trying to save as </source>
         <translation>嘗試另存新檔時發生錯誤 </translation>
     </message>
@@ -574,6 +573,16 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/main.cpp" line="322"/>
         <source>Unable to connect via DBus</source>
         <translation>無法透過 DBus 進行連接</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
+        <source>Error</source>
+        <translation type="unfinished">錯誤</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
+        <source>Unable to write in</source>
+        <translation type="unfinished">無法寫入</translation>
     </message>
 </context>
 <context>
@@ -739,37 +748,37 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="28"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="29"/>
         <source>UI Color Editor</source>
         <translation>UI 顏色編輯器</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="86"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="92"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>移動顏色選擇並在預覽按鈕檢視</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="96"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="102"/>
         <source>Select a Button to modify it</source>
         <translation>選擇一個按鈕來修改它</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="105"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="111"/>
         <source>Main Color</source>
         <translation>主色</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="109"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>點選按鈕設定主色</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="120"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="126"/>
         <source>Contrast Color</source>
         <translation>對比色</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="125"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="131"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>點選按鈕設定對比色</translation>
     </message>

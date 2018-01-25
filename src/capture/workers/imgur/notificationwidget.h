@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef NOTIFICATIONWIDGET_H
-#define NOTIFICATIONWIDGET_H
+#pragma once
 
 #include <QWidget>
 
@@ -46,5 +45,3 @@ private:
     void animatedHide();
 
 };
-
-#endif // NOTIFICATIONWIDGET_H

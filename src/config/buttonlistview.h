@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef BUTTONLISTVIEW_H
-#define BUTTONLISTVIEW_H
+#pragma once
 
 #include "src/capture/widget/capturebutton.h"
 #include <QListWidget>
@@ -36,11 +35,9 @@ protected:
     void initButtonList();
 
 private:
-    QList<CaptureButton::ButtonType> m_listButtons;
+    QVector<CaptureButton::ButtonType> m_listButtons;
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem *);
 
 };
-
-#endif // BUTTONLISTVIEW_H

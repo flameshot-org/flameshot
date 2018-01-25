@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
+#pragma once
 
 #include <QObject>
 #include <QPointer>
@@ -66,5 +65,3 @@ private:
     QPointer<QSystemTrayIcon> m_trayIcon;
 
 };
-
-#endif // CONTROLLER_H

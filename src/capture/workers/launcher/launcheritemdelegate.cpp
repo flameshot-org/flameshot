@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "launcheritemdelegate.h"
+#include "src/capture/widget/capturebutton.h"
 #include <QPainter>
 
 LauncherItemDelegate::LauncherItemDelegate(QObject *parent) :
@@ -39,14 +40,15 @@ void LauncherItemDelegate::paint(
     }
     QIcon icon = index.data(Qt::DecorationRole).value<QIcon>();
 
-    const int iconSide = 40;
+    const int iconSide = CaptureButton::buttonBaseSize() * 1.3;
     const int halfIcon = iconSide/2;
     const int halfWidth = rect.width()/2;
     const int halfHeight = rect.height()/2;
+    QSize size(iconSide, iconSide);
+    QPixmap pixIcon = icon.pixmap(size).scaled(size, Qt::KeepAspectRatio);
     painter->drawPixmap(rect.x() + (halfWidth - halfIcon),
                         rect.y()+ (halfHeight/2 - halfIcon),
-                        iconSide, iconSide,
-                        icon.pixmap(QSize(iconSide, iconSide)));
+                        iconSide, iconSide, pixIcon);
     const QRect textRect(rect.x(), rect.y() + halfHeight,
                          rect.width(), halfHeight);
     painter->drawText(textRect, Qt::TextWordWrap | Qt::AlignHCenter,
@@ -59,5 +61,6 @@ QSize LauncherItemDelegate::sizeHint(
 {
     Q_UNUSED(option);
     Q_UNUSED(index);
-    return QSize(110, 115);
+    const int size = CaptureButton::buttonBaseSize();
+    return QSize(size * 3.2, size * 3.7);
 }

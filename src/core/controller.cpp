@@ -64,12 +64,24 @@ Controller *Controller::getInstance() {
 // creation of a new capture in GUI mode
 void Controller::createVisualCapture(const uint id, const QString &forcedSavePath) {
     if (!m_captureWindow) {
+        QWidget *modalWidget = nullptr;
+        do {
+            modalWidget = qApp->activeModalWidget();
+            if (modalWidget) {
+                modalWidget->close();
+                modalWidget->deleteLater();
+            }
+        } while (modalWidget);
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         connect(m_captureWindow, &CaptureWidget::captureFailed,
                 this, &Controller::captureFailed);
         connect(m_captureWindow, &CaptureWidget::captureTaken,
                 this, &Controller::captureTaken);
+#ifdef Q_OS_WIN
+        m_captureWindow->show();
+#else
         m_captureWindow->showFullScreen();
+#endif
     }
 }
 

@@ -19,6 +19,7 @@
 #include "uicoloreditor.h"
 #include "clickablelabel.h"
 #include <QHBoxLayout>
+#include <QApplication>
 #include <QVBoxLayout>
 #include <QComboBox>
 #include <QMap>
@@ -29,13 +30,17 @@ UIcolorEditor::UIcolorEditor(QWidget *parent) : QGroupBox(parent) {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_hLayout = new QHBoxLayout;
     m_vLayout = new QVBoxLayout;
-    m_hLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
+
+    const int space = QApplication::fontMetrics().lineSpacing();
+    m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     m_vLayout->setAlignment(Qt::AlignVCenter);
+
     initButtons();
     initColorWheel();
-    m_vLayout->addSpacing(10);
+
+    m_vLayout->addSpacing(space);
     m_hLayout->addLayout(m_vLayout);
-    m_hLayout->addItem(new QSpacerItem(10, 10, QSizePolicy::Expanding));
+    m_hLayout->addItem(new QSpacerItem(space, space, QSizePolicy::Expanding));
     setLayout(m_hLayout);
     updateComponents();
 }
@@ -80,8 +85,9 @@ void UIcolorEditor::initColorWheel() {
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);
 
-    m_colorWheel->setMinimumSize(100, 100);
-    m_colorWheel->setMaximumSize(170, 170);
+    const int size = CaptureButton::buttonBaseSize() * 3;
+    m_colorWheel->setMinimumSize(size, size);
+    m_colorWheel->setMaximumSize(size*2, size*2);
     m_colorWheel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_colorWheel->setToolTip(tr("Change the color moving the selectors and see"
                                 " the changes in the preview buttons."));
@@ -90,7 +96,7 @@ void UIcolorEditor::initColorWheel() {
 }
 
 void UIcolorEditor::initButtons() {
-    const int extraSize = 10;
+    const int extraSize = CaptureButton::buttonBaseSize() / 3;
     int frameSize = CaptureButton::buttonBaseSize() + extraSize;
 
     m_vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));

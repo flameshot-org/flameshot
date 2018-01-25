@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef VISUALSEDITOR_H
-#define VISUALSEDITOR_H
+#pragma once
 
 #include <QWidget>
 
@@ -46,5 +45,3 @@ private:
     void initWidgets();
     void initOpacitySlider();
 };
-
-#endif // VISUALSEDITOR_H

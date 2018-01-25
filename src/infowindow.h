@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef INFOWINDOW_H
-#define INFOWINDOW_H
+#pragma once
 
 #include <QWidget>
 
@@ -39,5 +38,3 @@ private:
     static QVector<const char *> m_description;
 
 };
-
-#endif // INFOWINDOW_H

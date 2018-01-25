@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef COLORPICKER_H
-#define COLORPICKER_H
+#pragma once
 
 #include <QWidget>
 
@@ -39,12 +38,10 @@ protected:
     QVector<QRect> handleMask() const;
 
 private:
-    const int m_colorAreaSize;
+    int m_colorAreaSize;
     QVector<QRect> m_colorAreaList;
-    static QVector<Qt::GlobalColor> colorList;
+    QVector<QColor> m_colorList;
 
     QColor m_uiColor, m_drawColor;
 
 };
-
-#endif // COLORPICKER_H

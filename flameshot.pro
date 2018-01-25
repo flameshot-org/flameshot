@@ -15,12 +15,9 @@ unix:!macx {
     QT  += dbus
 }
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+CONFIG += c++11 link_pkgconfig
 
-CONFIG    += c++11
-CONFIG    += link_pkgconfig
-
-#CONFIG    += packaging   # Enables "make install" for packaging paths
+#CONFIG += packaging   # Enables "make install" for packaging paths
 
 TARGET = flameshot
 TEMPLATE = app
@@ -35,12 +32,14 @@ win32:RC_ICONS += img/flameshot.ico
 #RCC_DIR = $$DESTDIR/.qrc
 #UI_DIR = $$DESTDIR/.ui
 
-TRANSLATIONS = translation/Internationalization_es.ts \
-    translation/Internationalization_ca.ts \
-    translation/Internationalization_ru.ts \
-    translation/Internationalization_zh_CN.ts \
-    translation/Internationalization_zh_TW.ts \
-    translation/Internationalization_tr.ts
+TRANSLATIONS = translations/Internationalization_es.ts \
+    translations/Internationalization_ca.ts \
+    translations/Internationalization_ru.ts \
+    translations/Internationalization_zh_CN.ts \
+    translations/Internationalization_zh_TW.ts \
+    translations/Internationalization_tr.ts \
+    translations/Internationalization_ka.ts \
+    translations/Internationalization_fr.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =

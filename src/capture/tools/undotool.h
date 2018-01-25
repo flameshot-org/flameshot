@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef UNDOTOOL_H
-#define UNDOTOOL_H
+#pragma once
 
 #include "capturetool.h"
 
@@ -43,5 +42,3 @@ public:
     void onPressed() override;
 
 };
-
-#endif // UNDOTOOL_H

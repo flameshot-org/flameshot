@@ -15,11 +15,10 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CONFIGHANDLER_H
-#define CONFIGHANDLER_H
+#pragma once
 
 #include "src/capture/widget/capturebutton.h"
-#include <QList>
+#include <QVector>
 #include <QSettings>
 
 class ConfigHandler
@@ -27,8 +26,11 @@ class ConfigHandler
 public:
     explicit ConfigHandler();
 
-    QList<CaptureButton::ButtonType> getButtons();
-    void setButtons(const QList<CaptureButton::ButtonType> &);
+    QVector<CaptureButton::ButtonType> getButtons();
+    void setButtons(const QVector<CaptureButton::ButtonType> &);
+
+    QVector<QColor> getUserColors();
+    void setUserColors(const QVector<QColor> &);
 
     QString savePathValue();
     void setSavePath(const QString &);
@@ -89,11 +91,9 @@ public:
 private:
     QSettings m_settings;
 
-    bool normalizeButtons(QList<int> &);
+    bool normalizeButtons(QVector<int> &);
 
-    QList<CaptureButton::ButtonType> fromIntToButton(const QList<int> &l);
-    QList<int> fromButtonToInt(const QList<CaptureButton::ButtonType> &l);
+    QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
+    QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
 
 };
-
-#endif // CONFIGHANDLER_H

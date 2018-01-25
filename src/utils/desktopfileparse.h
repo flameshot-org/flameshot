@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef DESKTOPFILEPARSE_H
-#define DESKTOPFILEPARSE_H
+#pragma once
 
 #include <QIcon>
 #include <QStringList>
@@ -27,40 +26,40 @@ class QString;
 class QTextStream;
 
 struct DesktopAppData {
-	DesktopAppData() : showInTerminal() {}
+    DesktopAppData() : showInTerminal() {}
 
-	DesktopAppData(
-			QString name,
-			QString description,
-			QString exec,
-			QIcon icon) :
-		name(name),
-		description(description),
-		exec(exec),
-		icon(icon),
-		showInTerminal(false)
-	{}
+    DesktopAppData(
+            QString name,
+            QString description,
+            QString exec,
+            QIcon icon) :
+        name(name),
+        description(description),
+        exec(exec),
+        icon(icon),
+        showInTerminal(false)
+    {}
 
-	bool operator==(const DesktopAppData &other) const {
-		return name == other.name;
-	}
+    bool operator==(const DesktopAppData &other) const {
+        return name == other.name;
+    }
 
     QString name;
     QString description;
     QString exec;
-	QStringList categories;
-	QIcon icon;
-	bool showInTerminal;
+    QStringList categories;
+    QIcon icon;
+    bool showInTerminal;
 };
 
 struct DesktopFileParser {
-	DesktopFileParser();
-	DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
-	int processDirectory(const QDir &dir);
+    DesktopFileParser();
+    DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
+    int processDirectory(const QDir &dir);
 
-	QList<DesktopAppData> getAppsByCategory(const QString &category);
-	QMap<QString, QList<DesktopAppData>> getAppsByCategory(
-			const QStringList &categories);
+    QVector<DesktopAppData> getAppsByCategory(const QString &category);
+    QMap<QString, QVector<DesktopAppData>> getAppsByCategory(
+            const QStringList &categories);
 
 private:
     QString m_localeName;
@@ -68,8 +67,6 @@ private:
     QString m_localeNameShort;
     QString m_localeDescriptionShort;
 
-	QIcon m_defaultIcon;
-	QList<DesktopAppData> m_appList;
+    QIcon m_defaultIcon;
+    QVector<DesktopAppData> m_appList;
 };
-
-#endif // DESKTOPFILEPARSE_H

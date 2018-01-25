@@ -75,39 +75,45 @@ void GeneneralConf::autostartChanged(bool checked) {
 }
 
 void GeneneralConf::importConfiguration() {
-	QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
-	QFile file(fileName);
-	QTextCodec *codec = QTextCodec::codecForLocale();
-	if (!file.open(QFile::ReadOnly)) {
-		QMessageBox::about(this, tr("Error"), tr("Unable to read file."));
-		return;
-	}
-	QString text = codec->toUnicode(file.readAll());
-	file.close();
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
+    if (fileName.isEmpty()) {
+        return;
+    }
+    QFile file(fileName);
+    QTextCodec *codec = QTextCodec::codecForLocale();
+    if (!file.open(QFile::ReadOnly)) {
+        QMessageBox::about(this, tr("Error"), tr("Unable to read file."));
+        return;
+    }
+    QString text = codec->toUnicode(file.readAll());
+    file.close();
 
-	QFile config(ConfigHandler().configFilePath());
-	if (!config.open(QFile::WriteOnly)) {
-	   QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
-	   return;
-	}
-	config.write(codec->fromUnicode(text));
-	config.close();
+    QFile config(ConfigHandler().configFilePath());
+    if (!config.open(QFile::WriteOnly)) {
+       QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
+       return;
+    }
+    config.write(codec->fromUnicode(text));
+    config.close();
 }
 
 void GeneneralConf::exportFileConfiguration() {
-	QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-							   "flameshot.conf");
-	QFile::copy(ConfigHandler().configFilePath(), fileName);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                               "flameshot.conf");
+    bool ok = QFile::copy(ConfigHandler().configFilePath(), fileName);
+    if (!ok) {
+        QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
+    }
 }
 
 void GeneneralConf::resetConfiguration() {
-	QMessageBox::StandardButton reply;
-	reply = QMessageBox::question(
-			  this, tr("Confirm Reset"),
-			  tr("Are you sure you want to reset the configuration?"),
-			  QMessageBox::Yes | QMessageBox::No);
-	if (reply == QMessageBox::Yes) {
-		ConfigHandler().setDefaults();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(
+              this, tr("Confirm Reset"),
+              tr("Are you sure you want to reset the configuration?"),
+              QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        ConfigHandler().setDefaults();
     }
 }
 
@@ -148,31 +154,31 @@ void GeneneralConf::initShowTrayIcon() {
     m_layout->addWidget(m_showTray);
 
     connect(m_showTray, &QCheckBox::clicked, this,
-			&GeneneralConf::showTrayIconChanged);
+            &GeneneralConf::showTrayIconChanged);
 #endif
 }
 
 void GeneneralConf::initConfingButtons() {
-	QHBoxLayout *buttonLayout = new QHBoxLayout();
-	m_layout->addStretch();
-	QGroupBox *box = new QGroupBox(tr("Configuration File"));
-	box->setFlat(true);
-	box->setLayout(buttonLayout);
-	m_layout->addWidget(box);
+    QHBoxLayout *buttonLayout = new QHBoxLayout();
+    m_layout->addStretch();
+    QGroupBox *box = new QGroupBox(tr("Configuration File"));
+    box->setFlat(true);
+    box->setLayout(buttonLayout);
+    m_layout->addWidget(box);
 
-	m_exportButton = new QPushButton(tr("Export"));
-	buttonLayout->addWidget(m_exportButton);
-	connect(m_exportButton, &QPushButton::clicked, this,
+    m_exportButton = new QPushButton(tr("Export"));
+    buttonLayout->addWidget(m_exportButton);
+    connect(m_exportButton, &QPushButton::clicked, this,
             &GeneneralConf::exportFileConfiguration);
 
-	m_importButton = new QPushButton(tr("Import"));
-	buttonLayout->addWidget(m_importButton);
-	connect(m_importButton, &QPushButton::clicked, this,
-			&GeneneralConf::importConfiguration);
+    m_importButton = new QPushButton(tr("Import"));
+    buttonLayout->addWidget(m_importButton);
+    connect(m_importButton, &QPushButton::clicked, this,
+            &GeneneralConf::importConfiguration);
 
-	m_resetButton = new QPushButton(tr("Reset"));
-	buttonLayout->addWidget(m_resetButton);
-	connect(m_resetButton, &QPushButton::clicked, this,
+    m_resetButton = new QPushButton(tr("Reset"));
+    buttonLayout->addWidget(m_resetButton);
+    connect(m_resetButton, &QPushButton::clicked, this,
             &GeneneralConf::resetConfiguration);
 }
 

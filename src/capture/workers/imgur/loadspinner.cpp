@@ -19,6 +19,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 #include <QTimer>
+#include <QApplication>
 
 #define OFFSET 5
 
@@ -26,7 +27,8 @@ LoadSpinner::LoadSpinner(QWidget *parent) :
     QWidget(parent), m_startAngle(0),  m_span(0), m_growing(true)
 {
     setAttribute(Qt::WA_TranslucentBackground);
-    setFixedSize(100, 100);
+    const int size = QApplication::fontMetrics().height() * 8;
+    setFixedSize(size, size);
     updateFrame();
     // init timer
     m_timer =  new QTimer(this);
@@ -61,7 +63,7 @@ void LoadSpinner::paintEvent(QPaintEvent *) {
     painter.setRenderHint(QPainter::Antialiasing, true);
     auto pen = QPen(m_color);
 
-    pen.setWidth(5);
+    pen.setWidth(height()/10);
     painter.setPen(pen);
     painter.setOpacity(0.2);
     painter.drawArc(m_frame, 0,  5760);

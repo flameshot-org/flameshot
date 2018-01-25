@@ -70,7 +70,7 @@ void ImgurUploader::handleReply(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
         QString data = QString::fromUtf8(reply->readAll());
         QString imageID = data.split("\"").at(5);
-		QString url = QStringLiteral("http://i.imgur.com/%1.png").arg(imageID);
+        QString url = QStringLiteral("http://i.imgur.com/%1.png").arg(imageID);
         m_imageURL.setUrl(url);
         onUploadOk();
     } else {

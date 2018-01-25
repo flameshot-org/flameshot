@@ -454,7 +454,7 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <name>QObject</name>
     <message>
         <source>Save As</source>
-        <translation>Anomena i guarda</translation>
+        <translation type="vanished">Anomena i guarda</translation>
     </message>
     <message>
         <source>Save Error</source>
@@ -471,6 +471,14 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>Unable to connect via DBus</source>
         <translation>No es pot connectar mitjançant DBus</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Unable to write in</source>
+        <translation type="unfinished">No es pot escriure a</translation>
     </message>
 </context>
 <context>

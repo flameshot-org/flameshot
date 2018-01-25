@@ -16,33 +16,33 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "colorpicker.h"
+#include "src/utils/confighandler.h"
+#include "src/capture/widget/capturebutton.h"
 #include <QPainter>
 #include <QMouseEvent>
-#include "src/utils/confighandler.h"
 
-
-ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent),
-        m_colorAreaSize(18)
-{
+ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent) {
+    ConfigHandler config;
+    m_colorList = config.getUserColors();
+    m_colorAreaSize = CaptureButton::buttonBaseSize() * 0.6;
     setMouseTracking(true);
     // save the color values in member variables for faster access
-    ConfigHandler config;
     m_uiColor = config.uiMainColorValue();
     m_drawColor = config.drawColorValue();
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;
-    double radius = (colorList.size()*m_colorAreaSize/1.3)/(3.141592);
+    double radius = (m_colorList.size()*m_colorAreaSize/1.3)/(3.141592);
     resize(radius*2 + m_colorAreaSize + extraSize,
            radius*2 + m_colorAreaSize+ extraSize);
-    double degree = 360 / (colorList.size());
+    double degree = 360 / (m_colorList.size());
     double degreeAcum = degree;
     // this line is the radius of the circle which will be rotated to add
     // the color components.
     QLineF baseLine = QLineF(QPoint(radius+extraSize/2, radius+extraSize/2),
                              QPoint(radius*2, radius));
 
-    for (int i = 0; i<colorList.size(); ++i) {
+    for (int i = 0; i<m_colorList.size(); ++i) {
         m_colorAreaList.append(QRect(baseLine.x2(), baseLine.y2(),
                                  m_colorAreaSize, m_colorAreaSize));
         baseLine.setAngle(degreeAcum);
@@ -76,7 +76,7 @@ void ColorPicker::paintEvent(QPaintEvent *) {
     painter.setPen(QColor(Qt::black));
     for (int i = 0; i < rects.size(); ++i) {
         // draw the highlight when we have to draw the selected color
-        if (m_drawColor == QColor(colorList.at(i))) {
+        if (m_drawColor == QColor(m_colorList.at(i))) {
             QColor c = QColor(m_uiColor);
             c.setAlpha(155);
             painter.setBrush(c);
@@ -89,15 +89,15 @@ void ColorPicker::paintEvent(QPaintEvent *) {
             painter.drawRoundRect(highlight, 100, 100);
             painter.setPen(QColor(Qt::black));
         }
-        painter.setBrush(QColor(colorList.at(i)));
+        painter.setBrush(QColor(m_colorList.at(i)));
         painter.drawRoundRect(rects.at(i), 100, 100);
     }
 }
 
 void ColorPicker::mouseMoveEvent(QMouseEvent *e) {
-    for (int i = 0; i < colorList.size(); ++i) {
+    for (int i = 0; i < m_colorList.size(); ++i) {
         if (m_colorAreaList.at(i).contains(e->pos())) {
-            m_drawColor = colorList.at(i);
+            m_drawColor = m_colorList.at(i);
             update();
             break;
         }
@@ -109,18 +109,5 @@ QVector<QRect> ColorPicker::handleMask() const {
     for (const QRect &rect: m_colorAreaList) {
         areas.append(rect);
     }
-
     return areas;
 }
-
-QVector<Qt::GlobalColor> ColorPicker::colorList = {
-    Qt::darkRed,
-    Qt::red,
-    Qt::yellow,
-    Qt::green,
-    Qt::darkGreen,
-    Qt::cyan,
-    Qt::blue,
-    Qt::magenta,
-    Qt::darkMagenta
-};

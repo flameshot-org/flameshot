@@ -15,11 +15,9 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef FILENAMEHANDLER_H
-#define FILENAMEHANDLER_H
+#pragma once
 
 #include <QObject>
-
 
 class FileNameHandler : public QObject
 {
@@ -47,5 +45,3 @@ private:
     void fixPath(QString &directory, QString &filename);
 
 };
-
-#endif // FILENAMEHANDLER_H
