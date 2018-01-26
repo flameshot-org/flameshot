@@ -13,6 +13,7 @@
         <file>img/buttonIconsBlack/pencil.png</file>
         <file>img/buttonIconsBlack/square-outline.png</file>
         <file>img/buttonIconsBlack/undo-variant.png</file>
+        <file>img/buttonIconsBlack/upload-network.png</file>
         <file>img/buttonIconsWhite/arrow-bottom-left.png</file>
         <file>img/buttonIconsWhite/square-outline.png</file>
         <file>img/buttonIconsWhite/undo-variant.png</file>
@@ -30,13 +31,16 @@
         <file>img/buttonIconsWhite/cursor-move.png</file>
         <file>img/buttonIconsBlack/square.png</file>
         <file>img/buttonIconsWhite/square.png</file>
+        <file>img/buttonIconsWhite/upload-network.png</file>
         <file>img/flameshot.png</file>
         <file>img/configWhite/config.png</file>
         <file>img/configWhite/graphics.png</file>
         <file>img/configWhite/name_edition.png</file>
+        <file>img/configWhite/upload-network.png</file>
         <file>img/configBlack/config.png</file>
         <file>img/configBlack/graphics.png</file>
         <file>img/configBlack/name_edition.png</file>
+        <file>img/configBlack/upload-network.png</file>
         <file>img/buttonIconsBlack/size_indicator.png</file>
         <file>img/buttonIconsWhite/size_indicator.png</file>
         <file>img/buttonIconsBlack/open_with.png</file>

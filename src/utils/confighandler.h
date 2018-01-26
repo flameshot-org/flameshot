@@ -68,6 +68,21 @@ public:
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
+    QString ftpHostname();
+    void setFtpHostname(const QString &);
+
+    QString ftpSite();
+    void setFtpSite(const QString &);
+
+    int ftpPort();
+    void setFtpPort(const int);
+
+    QString ftpLogin();
+    void setFtpLogin(const QString &);
+
+    QString ftpPassword();
+    void setFtpPassword(const QString &);
+
     void setDefaults();
     void setAllTheButtons();
 

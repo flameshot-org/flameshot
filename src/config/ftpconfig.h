@@ -15,18 +15,43 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#ifndef FtpConfig_H
+#define FtpConfig_H
 
-#include <QPixmap>
+#include <QWidget>
+#include <QPointer>
 
-class ResourceExporter {
+class QVBoxLayout;
+class QLineEdit;
+class FileNameHandler;
+class QPushButton;
+class StrftimeChooserWidget;
+
+class FtpConfig : public QWidget
+{
+    Q_OBJECT
 public:
-    ResourceExporter();
+    explicit FtpConfig(QWidget *parent = nullptr);
 
-    void captureToClipboard(const QPixmap &p);
-    void captureToFile(const QPixmap &p, const QString &path);
-    void captureToFileUi(const QPixmap &p);
-    void captureToImgur(const QPixmap &p);
-    void captureToFTP(const QPixmap &p);
-    void captureToProgram(const QPixmap &p);
+private:
+    QVBoxLayout *m_layout;
+    QLineEdit *m_hostname;
+    QLineEdit *m_sitename;
+    QLineEdit *m_port;
+    QLineEdit *m_username;
+    QLineEdit *m_password;
+
+    QPushButton *m_saveButton;
+
+    void initLayout();
+    void initWidgets();
+
+public slots:
+    void updateComponents();
+
+private slots:
+    void saveSettings();
+
 };
+
+#endif // FtpConfig_H

@@ -77,6 +77,21 @@ QString FileNameHandler::absoluteSavePath() {
     return absoluteSavePath(dir, file);
 }
 
+QString FileNameHandler::getRandom(const int length)
+{
+   const QString chars("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+
+   QString random;
+   for(int i = 0; i < length; ++i)
+   {
+       int index = qrand() % chars.length();
+       QChar nextChar = chars.at(index);
+       random.append(nextChar);
+   }
+
+   return random;
+}
+
 QString FileNameHandler::charArrToQString(const char *c) {
     return QString::fromLocal8Bit(c, MAX_CHARACTERS);
 }

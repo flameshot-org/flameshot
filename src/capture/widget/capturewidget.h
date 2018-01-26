@@ -60,6 +60,7 @@ private slots:
     void copyScreenshot();
     void saveScreenshot();
     void uploadToImgur();
+    void uploadToFTP();
     void openWithProgram();
     bool undo();
 

@@ -87,6 +87,7 @@ SOURCES += src/main.cpp \
     src/capture/tools/circletool.cpp \
     src/capture/tools/copytool.cpp \
     src/capture/tools/exittool.cpp \
+    src/capture/tools/ftpuploadertool.cpp \
     src/capture/tools/imguruploadertool.cpp \
     src/capture/tools/linetool.cpp \
     src/capture/tools/markertool.cpp \
@@ -104,6 +105,7 @@ SOURCES += src/main.cpp \
     src/cli/commandoption.cpp \
     src/cli/commandargument.cpp \
     src/capture/workers/screenshotsaver.cpp \
+    src/capture/workers/ftp/ftpuploader.cpp \
     src/capture/workers/imgur/imguruploader.cpp \
     src/capture/workers/imgur/loadspinner.cpp \
     src/capture/workers/imgur/imagelabel.cpp \
@@ -119,7 +121,8 @@ SOURCES += src/main.cpp \
     src/capture/workers/launcher/terminallauncher.cpp \
     src/config/visualseditor.cpp \
     src/config/extendedslider.cpp \
-    src/capture/workers/launcher/openwithprogram.cpp
+    src/capture/workers/launcher/openwithprogram.cpp \
+    src/config/ftpconfig.cpp
 
 HEADERS  += src/capture/widget/buttonhandler.h \
     src/infowindow.h \
@@ -144,6 +147,7 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/capture/tools/circletool.h \
     src/capture/tools/copytool.h \
     src/capture/tools/exittool.h \
+    src/capture/tools/ftpuploadertool.h \
     src/capture/tools/imguruploadertool.h \
     src/capture/tools/linetool.h \
     src/capture/tools/markertool.h \
@@ -160,6 +164,7 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/cli/commandoption.h \
     src/cli/commandargument.h \
     src/capture/workers/screenshotsaver.h \
+    src/capture/workers/ftp/ftpuploader.h \
     src/capture/workers/imgur/imguruploader.h \
     src/capture/workers/imgur/loadspinner.h \
     src/capture/workers/imgur/imagelabel.h \
@@ -175,7 +180,8 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/capture/workers/launcher/terminallauncher.h \
     src/config/visualseditor.h \
     src/config/extendedslider.h \
-    src/capture/workers/launcher/openwithprogram.h
+    src/capture/workers/launcher/openwithprogram.h \
+    src/config/ftpconfig.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
