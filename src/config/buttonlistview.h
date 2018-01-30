@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include <QListWidget>
 
 class ButtonListView : public QListWidget {
