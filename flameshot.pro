@@ -66,13 +66,13 @@ include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp \
-    src/capture/widget/buttonhandler.cpp \
+    src/capture/widgets/buttonhandler.cpp \
     src/infowindow.cpp \
     src/config/configwindow.cpp \
     src/capture/screenshot.cpp \
-    src/capture/widget/capturewidget.cpp \
+    src/capture/widgets/capturewidget.cpp \
     src/capture/capturemodification.cpp \
-    src/capture/widget/colorpicker.cpp \
+    src/capture/widgets/colorpicker.cpp \
     src/config/buttonlistview.cpp \
     src/config/uicoloreditor.cpp \
     src/config/geneneralconf.cpp \
@@ -81,7 +81,7 @@ SOURCES += src/main.cpp \
     src/config/filenameeditor.cpp \
     src/config/strftimechooserwidget.cpp \
     src/capture/tools/capturetool.cpp \
-    src/capture/widget/capturebutton.cpp \
+    src/capture/widgets/capturebutton.cpp \
     src/capture/tools/penciltool.cpp \
     src/capture/tools/undotool.cpp \
     src/capture/tools/arrowtool.cpp \
@@ -106,11 +106,11 @@ SOURCES += src/main.cpp \
     src/cli/commandargument.cpp \
     src/capture/workers/screenshotsaver.cpp \
     src/capture/workers/imgur/imguruploader.cpp \
-    src/capture/workers/imgur/loadspinner.cpp \
-    src/capture/workers/imgur/imagelabel.cpp \
-    src/capture/workers/imgur/notificationwidget.cpp \
+    src/widgets/loadspinner.cpp \
+    src/widgets/imagelabel.cpp \
+    src/widgets/notificationwidget.cpp \
     src/core/resourceexporter.cpp \
-    src/capture/widget/notifierbox.cpp \
+    src/capture/widgets/notifierbox.cpp \
     src/utils/desktopinfo.cpp \
     src/capture/workers/launcher/applauncherwidget.cpp \
     src/capture/tools/applauncher.cpp \
@@ -122,13 +122,13 @@ SOURCES += src/main.cpp \
     src/config/extendedslider.cpp \
     src/capture/workers/launcher/openwithprogram.cpp
 
-HEADERS  += src/capture/widget/buttonhandler.h \
+HEADERS  += src/capture/widgets/buttonhandler.h \
     src/infowindow.h \
     src/config/configwindow.h \
     src/capture/screenshot.h \
-    src/capture/widget/capturewidget.h \
+    src/capture/widgets/capturewidget.h \
     src/capture/capturemodification.h \
-    src/capture/widget/colorpicker.h \
+    src/capture/widgets/colorpicker.h \
     src/config/buttonlistview.h \
     src/config/uicoloreditor.h \
     src/config/geneneralconf.h \
@@ -138,7 +138,7 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/config/strftimechooserwidget.h \
     src/utils/screengrabber.h \
     src/capture/tools/capturetool.h \
-    src/capture/widget/capturebutton.h \
+    src/capture/widgets/capturebutton.h \
     src/capture/tools/penciltool.h \
     src/capture/tools/undotool.h \
     src/capture/tools/arrowtool.h \
@@ -162,11 +162,11 @@ HEADERS  += src/capture/widget/buttonhandler.h \
     src/cli/commandargument.h \
     src/capture/workers/screenshotsaver.h \
     src/capture/workers/imgur/imguruploader.h \
-    src/capture/workers/imgur/loadspinner.h \
-    src/capture/workers/imgur/imagelabel.h \
-    src/capture/workers/imgur/notificationwidget.h \
+    src/widgets/loadspinner.h \
+    src/widgets/imagelabel.h \
+    src/widgets/notificationwidget.h \
     src/core/resourceexporter.h \
-    src/capture/widget/notifierbox.h \
+    src/capture/widgets/notifierbox.h \
     src/utils/desktopinfo.h \
     src/capture/workers/launcher/applauncherwidget.h \
     src/capture/tools/applauncher.h \

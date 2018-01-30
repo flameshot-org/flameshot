@@ -18,7 +18,7 @@
 #include "applauncherwidget.h"
 #include "src/utils/filenamehandler.h"
 #include "src/capture/workers/launcher/launcheritemdelegate.h"
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include "src/utils/confighandler.h"
 #include "terminallauncher.h"
 #include <QDir>

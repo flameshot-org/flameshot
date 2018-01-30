@@ -18,7 +18,7 @@
 #pragma once
 
 #include <QObject>
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include "src/capture/tools/capturetool.h"
 
 class CaptureTool;

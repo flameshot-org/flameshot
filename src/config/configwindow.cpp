@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "configwindow.h"
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/strftimechooserwidget.h"
