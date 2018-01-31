@@ -1,20 +1,27 @@
 image: Visual Studio 2015
 
-version: 0.5.0.{build}
+version: 0.5.{build}.0
+# Major_Version_Number.Minor_Version_Number.Build_Number.Revision_Number
 
 branches:
     only:
-        - dev
+        - master
 
 environment:
     COMPILER: msvc
     VSVER: 14
 
     matrix:
-        - QT: C:\Qt\5.9.2\msvc2015_64
+        - QT: C:\Qt\5.9\msvc2015_64
           PLATFORM: amd64
-        - QT: C:\Qt\5.9.2\msvc2015
+        - QT: C:\Qt\5.9\msvc2015
           PLATFORM: x86
+init:
+    - ps: |
+        $version = new-object System.Version $env:APPVEYOR_BUILD_VERSION
+        $packageVersion = "{0}.{1}.{2}" -f $version.Major, $version.Minor, $version.Revision
+        $env:build_number = $version.Build
+        $env:flameshot_version = $packageVersion
 
 # scripts that run after cloning repository
 install:
@@ -36,7 +43,6 @@ build_script:
 
 # scripts that run after build
 after_build:
-    - set flameshot_version=0.5.0
     # Clone OpenSSL DLLs
     - git clone https://github.com/tamlok/openssl-utils.git openssl-utils.git
     - mkdir distrib\flameshot
@@ -45,6 +51,7 @@ after_build:
     - copy "%APPVEYOR_BUILD_FOLDER%\README.md" "distrib\flameshot\README.md"
     - copy "%APPVEYOR_BUILD_FOLDER%\LICENSE" "distrib\flameshot\LICENSE.txt"
     - echo %flameshot_version% > "distrib\flameshot\version.txt"
+    - echo Build:%build_number% >> "distrib\flameshot\version.txt"
     - echo %APPVEYOR_REPO_COMMIT% >> "distrib\flameshot\version.txt"
     - copy "distrib\flameshot\flameshot.exe" "distrib\flameshot_win_%PLATFORM%.exe"
     # Delete translations\qt_*.qm
