@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SCREENSHOTSAVER_H
-#define SCREENSHOTSAVER_H
+#pragma once
 
 class QPixmap;
 class QString;
@@ -31,5 +30,3 @@ public:
     void saveToFilesystemGUI(const QPixmap &capture);
 
 };
-
-#endif // SCREENSHOTSAVER_H

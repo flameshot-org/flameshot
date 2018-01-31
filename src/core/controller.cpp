@@ -16,11 +16,11 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
-#include "src/capture/widget/capturewidget.h"
+#include "src/capture/widgets/capturewidget.h"
 #include "src/utils/confighandler.h"
 #include "src/infowindow.h"
 #include "src/config/configwindow.h"
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include <QFile>
 #include <QApplication>
 #include <QSystemTrayIcon>
@@ -77,7 +77,11 @@ void Controller::createVisualCapture(const uint id, const QString &forcedSavePat
                 this, &Controller::captureFailed);
         connect(m_captureWindow, &CaptureWidget::captureTaken,
                 this, &Controller::captureTaken);
+#ifdef Q_OS_WIN
+        m_captureWindow->show();
+#else
         m_captureWindow->showFullScreen();
+#endif
     }
 }
 

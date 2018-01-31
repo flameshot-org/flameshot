@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef EXTENDEDSLIDER_H
-#define EXTENDEDSLIDER_H
+#pragma once
 
 #include <QSlider>
 #include <QTimer>
@@ -41,5 +40,3 @@ private:
     QTimer m_timer;
 
 };
-
-#endif // EXTENDEDSLIDER_H

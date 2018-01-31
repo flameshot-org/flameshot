@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MARKERTOOL_H
-#define MARKERTOOL_H
+#pragma once
 
 #include "capturetool.h"
 
@@ -46,5 +45,3 @@ private:
     bool needsAdjustment(const QPoint &p0, const QPoint &p1) const;
 
 };
-
-#endif // MARKERTOOL_H

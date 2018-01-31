@@ -21,8 +21,7 @@
 // Based on KDE's KSnapshot regiongrabber.cpp, revision 796531, Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
 // released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
-#ifndef CAPTUREWIDGET_H
-#define CAPTUREWIDGET_H
+#pragma once
 
 #include "capturebutton.h"
 #include "src/capture/tools/capturetool.h"
@@ -141,5 +140,3 @@ private:
     ConfigHandler m_config;
 
 };
-
-#endif // CAPTUREWIDGET_H

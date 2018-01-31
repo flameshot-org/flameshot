@@ -15,11 +15,10 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef UICOLORPICKER_H
-#define UICOLORPICKER_H
+#pragma once
 
 #include "color_wheel.hpp"
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include <QGroupBox>
 
 class QVBoxLayout;
@@ -58,5 +57,3 @@ private:
     void initButtons();
 
 };
-
-#endif // UICOLORPICKER_H

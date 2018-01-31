@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef DESKTOPFILEPARSE_H
-#define DESKTOPFILEPARSE_H
+#pragma once
 
 #include <QIcon>
 #include <QStringList>
@@ -58,8 +57,8 @@ struct DesktopFileParser {
     DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
     int processDirectory(const QDir &dir);
 
-    QList<DesktopAppData> getAppsByCategory(const QString &category);
-    QMap<QString, QList<DesktopAppData>> getAppsByCategory(
+    QVector<DesktopAppData> getAppsByCategory(const QString &category);
+    QMap<QString, QVector<DesktopAppData>> getAppsByCategory(
             const QStringList &categories);
 
 private:
@@ -69,7 +68,5 @@ private:
     QString m_localeDescriptionShort;
 
     QIcon m_defaultIcon;
-    QList<DesktopAppData> m_appList;
+    QVector<DesktopAppData> m_appList;
 };
-
-#endif // DESKTOPFILEPARSE_H

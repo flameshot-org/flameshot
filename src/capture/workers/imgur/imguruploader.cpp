@@ -18,9 +18,9 @@
 #include "imguruploader.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
-#include "src/capture/workers/imgur/loadspinner.h"
-#include "src/capture/workers/imgur/imagelabel.h"
-#include "src/capture/workers/imgur/notificationwidget.h"
+#include "src/widgets/loadspinner.h"
+#include "src/widgets/imagelabel.h"
+#include "src/widgets/notificationwidget.h"
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QClipboard>

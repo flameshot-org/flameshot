@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "launcheritemdelegate.h"
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include <QPainter>
 
 LauncherItemDelegate::LauncherItemDelegate(QObject *parent) :

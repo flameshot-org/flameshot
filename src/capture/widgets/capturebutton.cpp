@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "capturebutton.h"
-#include "src/capture/widget/capturewidget.h"
+#include "src/capture/widgets/capturewidget.h"
 #include "src/utils/confighandler.h"
 #include "src/capture/tools/capturetool.h"
 #include "src/capture/tools/toolfactory.h"

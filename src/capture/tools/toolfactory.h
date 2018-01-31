@@ -15,11 +15,10 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TOOLFACTORY_H
-#define TOOLFACTORY_H
+#pragma once
 
 #include <QObject>
-#include "src/capture/widget/capturebutton.h"
+#include "src/capture/widgets/capturebutton.h"
 #include "src/capture/tools/capturetool.h"
 
 class CaptureTool;
@@ -43,5 +42,3 @@ public:
             QObject *parent = nullptr);
 
 };
-
-#endif // TOOLFACTORY_H

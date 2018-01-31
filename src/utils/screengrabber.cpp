@@ -40,7 +40,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
         QPixmap res;
         // handle screenshot based on DE
         switch (m_info.windowManager()) {
-        case m_info.GNOME: {
+        case DesktopInfo::GNOME: {
             // https://github.com/GNOME/gnome-shell/blob/695bfb96160033be55cfb5ac41c121998f98c328/data/org.gnome.Shell.Screenshot.xml
             QString path = FileNameHandler().generateAbsolutePath(QDir::tempPath()) + ".png";
             QDBusInterface gnomeInterface(QStringLiteral("org.gnome.Shell"),
@@ -53,7 +53,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
                 ok = false;
             }
             break;
-        } case m_info.KDE: {
+        } case DesktopInfo::KDE: {
             // https://github.com/KDE/spectacle/blob/517a7baf46a4ca0a45f32fd3f2b1b7210b180134/src/PlatformBackends/KWinWaylandImageGrabber.cpp#L145
             QDBusInterface kwinInterface(QStringLiteral("org.kde.KWin"),
                                          QStringLiteral("/Screenshot"),

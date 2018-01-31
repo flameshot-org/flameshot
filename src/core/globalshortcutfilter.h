@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef GLOBALSHORTCUTFILTER_H
-#define GLOBALSHORTCUTFILTER_H
+#pragma once
 
 #include <QObject>
 #include <QAbstractNativeEventFilter>
@@ -38,5 +37,3 @@ private:
     bool unregisterShortcut(quint32 nativeKey, quint32 nativeMods);
 
 };
-
-#endif // GLOBALSHORTCUTFILTER_H

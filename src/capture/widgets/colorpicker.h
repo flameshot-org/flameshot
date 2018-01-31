@@ -15,31 +15,33 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef NOTIFIERBOX_H
-#define NOTIFIERBOX_H
+#pragma once
 
 #include <QWidget>
 
-class QTimer;
-
-class NotifierBox : public QWidget
+class ColorPicker : public QWidget
 {
     Q_OBJECT
 public:
-    explicit NotifierBox(QWidget *parent = nullptr);
+    explicit ColorPicker(QWidget *parent = nullptr);
+    ~ColorPicker();
+
+    QColor drawColor();
+
+    void show();
+    void hide();
 
 protected:
-    virtual void enterEvent(QEvent *);
-    virtual void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *);
+    void mouseMoveEvent(QMouseEvent *);
 
-public slots:
-    void showMessage(const QString &msg);
+    QVector<QRect> handleMask() const;
 
 private:
-    QTimer *m_timer;
-    QString m_message;
-    QColor m_bgColor;
-    QColor m_foregroundColor;
-};
+    int m_colorAreaSize;
+    QVector<QRect> m_colorAreaList;
+    QVector<QColor> m_colorList;
 
-#endif // NOTIFIERBOX_H
+    QColor m_uiColor, m_drawColor;
+
+};

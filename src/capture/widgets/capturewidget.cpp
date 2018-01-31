@@ -25,8 +25,8 @@
 #include "src/capture/capturemodification.h"
 #include "capturewidget.h"
 #include "capturebutton.h"
-#include "src/capture/widget/notifierbox.h"
-#include "src/capture/widget/colorpicker.h"
+#include "src/capture/widgets/notifierbox.h"
+#include "src/capture/widgets/colorpicker.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
 #include "src/core/resourceexporter.h"
@@ -71,10 +71,16 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
             << &m_LSide << &m_TSide << &m_RSide << &m_BSide;
 
     // set base config of the widget
+#ifdef Q_OS_WIN
+    setWindowFlags(Qt::WindowStaysOnTopHint
+                   | Qt::FramelessWindowHint
+                   | Qt::Popup);
+#else
     setWindowFlags(Qt::BypassWindowManagerHint
                    | Qt::WindowStaysOnTopHint
                    | Qt::FramelessWindowHint
                    | Qt::Tool);
+#endif
 
     setMouseTracking(true);
     updateCursor();

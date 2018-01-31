@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RESOURCEEXPORTER_H
-#define RESOURCEEXPORTER_H
+#pragma once
 
 #include <QPixmap>
 
@@ -30,5 +29,3 @@ public:
     void captureToImgur(const QPixmap &p);
     void captureToProgram(const QPixmap &p);
 };
-
-#endif // RESOURCEEXPORTER_H

@@ -15,39 +15,28 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef LOADSPINNER_H
-#define LOADSPINNER_H
+#pragma once
 
 #include <QWidget>
 
-class LoadSpinner : public QWidget
+class QTimer;
+
+class NotifierBox : public QWidget
 {
     Q_OBJECT
 public:
-    explicit LoadSpinner(QWidget *parent = nullptr);
-
-    void setColor(const QColor &c);
-    void setWidth(int w);
-    void setHeight(int h);
-    void start();
-    void stop();
+    explicit NotifierBox(QWidget *parent = nullptr);
 
 protected:
-    void paintEvent(QPaintEvent *);
+    virtual void enterEvent(QEvent *);
+    virtual void paintEvent(QPaintEvent *);
 
-private slots:
-    void rotate();
+public slots:
+    void showMessage(const QString &msg);
 
 private:
-    QColor m_color;
     QTimer *m_timer;
-
-    int m_startAngle = 0;
-    int m_span =180;
-    bool m_growing;
-
-    QRect  m_frame;
-    void updateFrame();
+    QString m_message;
+    QColor m_bgColor;
+    QColor m_foregroundColor;
 };
-
-#endif // LOADSPINNER_H

@@ -15,36 +15,36 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef NOTIFICATIONWIDGET_H
-#define NOTIFICATIONWIDGET_H
+#pragma once
 
 #include <QWidget>
 
-class QLabel;
-class QTimer;
-class QPropertyAnimation;
-class QVBoxLayout;
-class QFrame;
-
-class NotificationWidget : public QWidget
+class LoadSpinner : public QWidget
 {
     Q_OBJECT
 public:
-    explicit NotificationWidget(QWidget *parent = nullptr);
+    explicit LoadSpinner(QWidget *parent = nullptr);
 
-    void showMessage(const QString &msg);
+    void setColor(const QColor &c);
+    void setWidth(int w);
+    void setHeight(int h);
+    void start();
+    void stop();
+
+protected:
+    void paintEvent(QPaintEvent *);
+
+private slots:
+    void rotate();
 
 private:
-    QLabel *m_label;
-    QPropertyAnimation *m_showAnimation;
-    QPropertyAnimation *m_hideAnimation;
-    QVBoxLayout *m_layout;
-    QFrame *m_content;
+    QColor m_color;
     QTimer *m_timer;
 
-    void animatedShow();
-    void animatedHide();
+    int m_startAngle = 0;
+    int m_span =180;
+    bool m_growing;
 
+    QRect  m_frame;
+    void updateFrame();
 };
-
-#endif // NOTIFICATIONWIDGET_H

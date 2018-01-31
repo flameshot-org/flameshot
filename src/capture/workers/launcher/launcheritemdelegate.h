@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef LAUNCHERITEMDELEGATE_H
-#define LAUNCHERITEMDELEGATE_H
+#pragma once
 
 #include "src/utils/desktopfileparse.h"
 #include <QStyledItemDelegate>
@@ -36,5 +35,3 @@ public:
 private:
 
 };
-
-#endif // LAUNCHERITEMDELEGATE_H

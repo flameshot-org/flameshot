@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CLICKABLELABEL_H
-#define CLICKABLELABEL_H
+#pragma once
 
 #include <QLabel>
 
@@ -34,5 +33,3 @@ private:
     void mousePressEvent (QMouseEvent *);
 
 };
-
-#endif // CLICKABLELABEL_H

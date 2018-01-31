@@ -15,36 +15,33 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef COLORPICKER_H
-#define COLORPICKER_H
+#pragma once
 
 #include <QWidget>
 
-class ColorPicker : public QWidget
+class QLabel;
+class QTimer;
+class QPropertyAnimation;
+class QVBoxLayout;
+class QFrame;
+
+class NotificationWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ColorPicker(QWidget *parent = nullptr);
-    ~ColorPicker();
+    explicit NotificationWidget(QWidget *parent = nullptr);
 
-    QColor drawColor();
-
-    void show();
-    void hide();
-
-protected:
-    void paintEvent(QPaintEvent *);
-    void mouseMoveEvent(QMouseEvent *);
-
-    QVector<QRect> handleMask() const;
+    void showMessage(const QString &msg);
 
 private:
-    const int m_colorAreaSize;
-    QVector<QRect> m_colorAreaList;
-    static QVector<Qt::GlobalColor> colorList;
+    QLabel *m_label;
+    QPropertyAnimation *m_showAnimation;
+    QPropertyAnimation *m_hideAnimation;
+    QVBoxLayout *m_layout;
+    QFrame *m_content;
+    QTimer *m_timer;
 
-    QColor m_uiColor, m_drawColor;
+    void animatedShow();
+    void animatedHide();
 
 };
-
-#endif // COLORPICKER_H

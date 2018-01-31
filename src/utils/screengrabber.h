@@ -15,8 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SCREENGRABBER_H
-#define SCREENGRABBER_H
+#pragma once
 
 #include "src/utils/desktopinfo.h"
 #include <QObject>
@@ -31,5 +30,3 @@ public:
 private:
     DesktopInfo m_info;
 };
-
-#endif // SCREENGRABBER_H
