@@ -21,6 +21,7 @@
 #include "src/utils/confighandler.h"
 #include "src/cli/commandlineparser.h"
 #include "src/utils/systemnotification.h"
+#include "src/utils/pathinfo.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QTextStream>
@@ -41,8 +42,16 @@ int main(int argc, char *argv[]) {
     qApp->setApplicationVersion(static_cast<QString>(APP_VERSION));
 
     QTranslator translator;
-    translator.load(QLocale::system().language(),
-      "Internationalization", "_", "/usr/share/flameshot/translations/");
+    QStringList trPaths = PathInfo::translations();
+    bool match = false;
+    for (const QString &path: trPaths) {
+        match = translator.load(QLocale::system().language(),
+                                "Internationalization", "_",
+                                path);
+        if (match) {
+            break;
+        }
+    }
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
