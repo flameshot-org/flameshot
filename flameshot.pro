@@ -120,7 +120,8 @@ SOURCES += src/main.cpp \
     src/capture/workers/launcher/terminallauncher.cpp \
     src/config/visualseditor.cpp \
     src/config/extendedslider.cpp \
-    src/capture/workers/launcher/openwithprogram.cpp
+    src/capture/workers/launcher/openwithprogram.cpp \
+    src/utils/pathinfo.cpp
 
 HEADERS  += src/capture/widgets/buttonhandler.h \
     src/infowindow.h \
@@ -176,7 +177,8 @@ HEADERS  += src/capture/widgets/buttonhandler.h \
     src/capture/workers/launcher/terminallauncher.h \
     src/config/visualseditor.h \
     src/config/extendedslider.h \
-    src/capture/workers/launcher/openwithprogram.h
+    src/capture/workers/launcher/openwithprogram.h \
+    src/utils/pathinfo.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
