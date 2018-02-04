@@ -71,17 +71,6 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
             << &m_LSide << &m_TSide << &m_RSide << &m_BSide;
 
     // set base config of the widget
-#ifdef Q_OS_WIN
-    setWindowFlags(Qt::WindowStaysOnTopHint
-                   | Qt::FramelessWindowHint
-                   | Qt::Popup);
-#else
-    setWindowFlags(Qt::BypassWindowManagerHint
-                   | Qt::WindowStaysOnTopHint
-                   | Qt::FramelessWindowHint
-                   | Qt::Tool);
-#endif
-
     setMouseTracking(true);
     updateCursor();
     initShortcuts();
@@ -94,9 +83,6 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
         this->close();
     }
     m_screenshot = new Screenshot(fullScreenshot, this);
-    QSize size = fullScreenshot.size();
-    // we need to increase by 1 the size to reach to the end of the screen
-    setGeometry(0 ,0 , size.width(), size.height());
 
     // create buttons
     m_buttonHandler = new ButtonHandler(rect(), this);
