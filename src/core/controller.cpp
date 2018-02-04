@@ -75,7 +75,7 @@ void Controller::createVisualCapture(const uint id, const QString &forcedSavePat
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
 #ifdef Q_OS_WIN
-        setWindowFlags(Qt::WindowStaysOnTopHint
+        m_captureWindow->setWindowFlags(Qt::WindowStaysOnTopHint
                        | Qt::FramelessWindowHint
                        | Qt::Popup);
 #else
