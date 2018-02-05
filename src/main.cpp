@@ -41,21 +41,22 @@ int main(int argc, char *argv[]) {
     qRegisterMetaTypeStreamOperators<QList<int> >("QList<int>");
     qApp->setApplicationVersion(static_cast<QString>(APP_VERSION));
 
-    QTranslator translator;
-    QStringList trPaths = PathInfo::translations();
-    bool match = false;
-    for (const QString &path: trPaths) {
-        match = translator.load(QLocale::system().language(),
-                                "Internationalization", "_",
-                                path);
-        if (match) {
-            break;
-        }
-    }
-
     // no arguments, just launch Flameshot
     if (argc == 1) {
         SingleApplication app(argc, argv);
+
+        QTranslator translator;
+        QStringList trPaths = PathInfo::translations();
+        bool match = false;
+        for (const QString &path: trPaths) {
+            match = translator.load(QLocale::system().language(),
+                                    "Internationalization", "_",
+                                    path);
+            if (match) {
+                break;
+            }
+        }
+
         app.installTranslator(&translator);
         app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
         app.setApplicationName("flameshot");
