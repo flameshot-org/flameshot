@@ -26,6 +26,7 @@ QStringList PathInfo::translations() {
     QString trPath = QDir::toNativeSeparators(binaryPath) + "translations";
 #if defined(Q_OS_LINUX)
     return QStringList()
+            << QString(APP_PREFIX) + "/share/flameshot/translations"
             << trPath
             << "/usr/share/flameshot/translations"
             << "/usr/local/share/flameshot/translations";

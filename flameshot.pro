@@ -207,6 +207,8 @@ unix:!macx {
       }
     }
 
+    DEFINES += APP_PREFIX=\\\"$$PREFIX\\\"
+
     target.path = $${BASEDIR}$${PREFIX}/bin/
 
     qmfile.path = $${BASEDIR}$${PREFIX}/share/flameshot/translations/
