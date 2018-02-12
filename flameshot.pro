@@ -209,7 +209,7 @@ unix:!macx {
 
     target.path = $${BASEDIR}$${PREFIX}/bin/
 
-    qmfile.path = $${BASEDIR}/usr/share/flameshot/translations/
+    qmfile.path = $${BASEDIR}$${PREFIX}/share/flameshot/translations/
     qmfile.files = $${TRANSLATIONS_FILES}
 
     dbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/interfaces/
