@@ -29,8 +29,8 @@ class QPoint;
 class ButtonHandler : public QObject {
     Q_OBJECT
 public:
-    ButtonHandler(const QVector<CaptureButton*>&, const QRect &limits, QObject *parent = nullptr);
-    ButtonHandler(const QRect &limits, QObject *parent = nullptr);
+    ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
+    ButtonHandler(QObject *parent = nullptr);
 
     void hideSectionUnderMouse(const QPoint &p);
 
@@ -41,7 +41,7 @@ public:
     void updatePosition(const QRect &selection);
     void setButtons(const QVector<CaptureButton*>);
     bool contains(const QPoint &p) const;
-    void updateScreenRegions();
+    void updateScreenRegions(const QVector<QRect> &rects);
 
 public slots:
     void hide();
@@ -57,6 +57,9 @@ private:
 
     QRegion m_screenRegions;
 
+    QRect m_selection;
+
+    int m_separator;
     int m_buttonExtendedSize;
     int m_buttonBaseSize;
 
@@ -68,11 +71,6 @@ private:
     bool m_oneHorizontalBlocked;
     bool m_horizontalyBlocked;
     bool m_allSidesBlocked;
-
-    QRect m_limits;
-    QRect m_selection;
-
-    int m_separator;
 
     // aux methods
     void init();

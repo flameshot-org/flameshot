@@ -74,17 +74,6 @@ void Controller::createVisualCapture(const uint id, const QString &forcedSavePat
         } while (modalWidget);
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
-#ifdef Q_OS_WIN
-        m_captureWindow->setWindowFlags(Qt::WindowStaysOnTopHint
-                       | Qt::FramelessWindowHint
-                       | Qt::Popup);
-#else
-        m_captureWindow->setWindowFlags(Qt::BypassWindowManagerHint
-                       | Qt::WindowStaysOnTopHint
-                       | Qt::FramelessWindowHint
-                       | Qt::Tool);
-#endif
-        m_captureWindow->resize(m_captureWindow->pixmap().size());
         connect(m_captureWindow, &CaptureWidget::captureFailed,
                 this, &Controller::captureFailed);
         connect(m_captureWindow, &CaptureWidget::captureTaken,

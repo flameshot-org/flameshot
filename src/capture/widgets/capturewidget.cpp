@@ -14,10 +14,10 @@
 //
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
- 
+
 // Based on Lightscreen areadialog.cpp, Copyright 2017  Christian Kaiser <info@ckaiser.com.ar>
 // released under the GNU GPL2  <https://www.gnu.org/licenses/gpl-2.0.txt>
- 
+
 // Based on KDE's KSnapshot regiongrabber.cpp, revision 796531, Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
 // released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
@@ -38,13 +38,14 @@
 #include <QPaintEvent>
 #include <QMouseEvent>
 #include <QBuffer>
+#include <QDesktopWidget>
 
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
 
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
-                             QWidget *parent) :
+                             CaptureWidget::LaunchMode mode, QWidget *parent) :
     QWidget(parent), m_screenshot(nullptr), m_mouseOverHandle(0),
     m_mouseIsClicked(false), m_rightClick(false), m_newSelection(false),
     m_grabbing(false), m_captureDone(false), m_toolIsForDrawing(false),
@@ -75,26 +76,62 @@ CaptureWidget::CaptureWidget(const uint id, const QString &forcedSavePath,
     updateCursor();
     initShortcuts();
 
-    // init content
-    bool ok = true;
-    QPixmap fullScreenshot(ScreenGrabber().grabEntireDesktop(ok));
-    if(!ok) {
-        SystemNotification().sendMessage(tr("Unable to capture screen"));
-        this->close();
-    }
-    m_screenshot = new Screenshot(fullScreenshot, this);
+#ifdef Q_OS_WIN
+    QPoint topLeft(0,0);
+#endif
+    if (mode == FULLSCREEN) {
+        // init content
+        bool ok = true;
+        QPixmap fullScreenshot(ScreenGrabber().grabEntireDesktop(ok));
+        if(!ok) {
+            SystemNotification().sendMessage(tr("Unable to capture screen"));
+            this->close();
+        }
+        m_screenshot = new Screenshot(fullScreenshot, this);
 
+#ifdef Q_OS_WIN
+        setWindowFlags(Qt::WindowStaysOnTopHint
+                       | Qt::FramelessWindowHint
+                       | Qt::Popup);
+
+        for (QScreen *const screen : QGuiApplication::screens()) {
+            QPoint topLeftScreen = screen->geometry().topLeft();
+            if (topLeft.x() > topLeftScreen.x() ||
+                    topLeft.y() > topLeftScreen.y()) {
+                topLeft = topLeftScreen;
+            }
+        }
+        move(topLeft);
+#else
+        setWindowFlags(Qt::BypassWindowManagerHint
+                       | Qt::WindowStaysOnTopHint
+                       | Qt::FramelessWindowHint
+                       | Qt::Tool);
+#endif
+        resize(pixmap().size());
+    }
     // create buttons
-    m_buttonHandler = new ButtonHandler(rect(), this);
+    m_buttonHandler = new ButtonHandler(this);
     updateButtons();
+    QVector<QRect> areas;
+    if (mode == FULLSCREEN) {
+        for (QScreen *const screen : QGuiApplication::screens()) {
+            QRect r = screen->geometry();
+#ifdef Q_OS_WIN
+            r.moveTo(r.topLeft() - topLeft);
+#endif
+            areas.append(r);
+        }
+    } else {
+        areas.append(rect());
+    }
+    m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
     // init interface color
     m_colorPicker = new ColorPicker(this);
     m_colorPicker->hide();
 
     m_notifierBox = new NotifierBox(this);
-    auto geometry = QGuiApplication::primaryScreen()->geometry();
-    m_notifierBox->move(geometry.left() +20, geometry.left() +20);
     m_notifierBox->hide();
 }
 
@@ -179,6 +216,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 
     if (m_showInitialMsg) {
         QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+        helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
 
         QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
                              "\nPress Enter to capture the screen."
@@ -417,6 +455,10 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
 void CaptureWidget::wheelEvent(QWheelEvent *e) {
     m_thickness += e->delta() / 120;
     m_thickness = qBound(0, m_thickness, 100);
+    QPoint topLeft = qApp->desktop()->screenGeometry(
+                qApp->desktop()->screenNumber(QCursor::pos())).topLeft();
+    int offset = m_notifierBox->width() / 4;
+    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
     m_notifierBox->showMessage(QString::number(m_thickness));
     if (m_toolIsForDrawing) {
         update();
