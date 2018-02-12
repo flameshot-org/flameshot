@@ -44,10 +44,17 @@ class CaptureWidget : public QWidget {
     Q_OBJECT
 
 public:
+    enum LaunchMode {
+        WINDOW_MODE,
+        FULLSCREEN,
+    };
+
     explicit CaptureWidget(const uint id = 0,
                            const QString &forcedSavePath = QString(),
+                           CaptureWidget::LaunchMode mode = LaunchMode::FULLSCREEN,
                            QWidget *parent = nullptr);
     ~CaptureWidget();
+
 
     void updateButtons();
     QPixmap pixmap();

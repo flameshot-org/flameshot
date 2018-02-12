@@ -24,15 +24,15 @@
 // manipulate the buttons as a unit.
 
 ButtonHandler::ButtonHandler(const QVector<CaptureButton*> &v,
-                             const QRect &limits, QObject *parent) :
-    QObject(parent), m_limits(limits)
+                             QObject *parent) :
+    QObject(parent)
 {
     setButtons(v);
     init();
 }
 
-ButtonHandler::ButtonHandler(const QRect &limits, QObject *parent) :
-    QObject(parent), m_limits(limits)
+ButtonHandler::ButtonHandler(QObject *parent) :
+    QObject(parent)
 {
     init();
 }
@@ -69,7 +69,7 @@ size_t ButtonHandler::size() const {
     return m_vectorButtons.size();
 }
 
-// UpdatePosition updates the position of the buttons around the
+// updatePosition updates the position of the buttons around the
 // selection area. Ignores the sides blocked by the end of the screen.
 // When the selection is too small it works on a virtual selection with
 // the original in the center.
@@ -165,7 +165,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
     }
 }
 
-// GetHPoints is an auxiliar method for the button position computation.
+// horizontalPoints is an auxiliar method for the button position computation.
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::horizontalPoints(
@@ -191,7 +191,7 @@ QVector<QPoint> ButtonHandler::horizontalPoints(
     return res;
 }
 
-// getHPoints is an auxiliar method for the button position computation.
+// verticalPoints is an auxiliar method for the button position computation.
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::verticalPoints(
@@ -218,7 +218,6 @@ QVector<QPoint> ButtonHandler::verticalPoints(
 }
 
 void ButtonHandler::init() {
-    updateScreenRegions();
     m_separator = CaptureButton::buttonBaseSize() / 4;
 }
 
@@ -367,9 +366,9 @@ bool ButtonHandler::contains(const QPoint &p) const {
     return r.contains(p);
 }
 
-void ButtonHandler::updateScreenRegions() {
+void ButtonHandler::updateScreenRegions(const QVector<QRect> &rects) {
     m_screenRegions = QRegion();
-    for (QScreen *const screen : QGuiApplication::screens()) {
-        m_screenRegions += screen->geometry();
+    for (const QRect &rect: rects) {
+        m_screenRegions += rect;
     }
 }
