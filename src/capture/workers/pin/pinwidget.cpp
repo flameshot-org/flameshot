@@ -98,7 +98,7 @@ void PinWidget::wheelEvent(QWheelEvent *event){
 
     // window size will be scaled to (0,0), or even negative, here limited to (50,50)
     if (nW > 50 || nH > 50){
-        setFixedSize(QSize(nW, nH));
+        resize(QSize(nW, nH));
         move(x, y);
     }
     event->accept();
