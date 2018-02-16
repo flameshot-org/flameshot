@@ -40,6 +40,8 @@
 #include <QBuffer>
 #include <QDesktopWidget>
 
+QRect CaptureWidget::capturePos;
+
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
 
@@ -540,6 +542,11 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
             m_lastPressedButton = nullptr;
         }
         break;
+    case CaptureTool::REQ_PIN:
+            copyScreenshot();
+            capturePos = m_selection;
+            close();
+            break;
     default:
         break;
     }

@@ -121,7 +121,10 @@ SOURCES += src/main.cpp \
     src/config/visualseditor.cpp \
     src/config/extendedslider.cpp \
     src/capture/workers/launcher/openwithprogram.cpp \
-    src/utils/pathinfo.cpp
+    src/utils/pathinfo.cpp \
+    src/capture/workers/pin/contentwidget.cpp \
+    src/capture/workers/pin/pinwidget.cpp \
+    src/capture/tools/pintool.cpp
 
 HEADERS  += src/capture/widgets/buttonhandler.h \
     src/infowindow.h \
@@ -178,7 +181,10 @@ HEADERS  += src/capture/widgets/buttonhandler.h \
     src/config/visualseditor.h \
     src/config/extendedslider.h \
     src/capture/workers/launcher/openwithprogram.h \
-    src/utils/pathinfo.h
+    src/utils/pathinfo.h \
+    src/capture/workers/pin/pinwidget.h \
+    src/capture/workers/pin/contentwidget.h \
+    src/capture/tools/pintool.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

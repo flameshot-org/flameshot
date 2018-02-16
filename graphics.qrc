@@ -43,5 +43,7 @@
         <file>img/buttonIconsWhite/open_with.png</file>
         <file>img/buttonIconsBlack/blur.png</file>
         <file>img/buttonIconsWhite/blur.png</file>
+        <file>img/buttonIconsBlack/push-pin.png</file>
+        <file>img/buttonIconsWhite/push-pin.png</file>
     </qresource>
 </RCC>
