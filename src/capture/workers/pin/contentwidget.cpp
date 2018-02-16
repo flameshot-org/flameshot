@@ -16,11 +16,9 @@ void ContentWidget::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     painter.drawPixmap(rect,pix);
-
 }
 
 QPixmap ContentWidget::returnClipboardPix() {
-
     QClipboard *board = QApplication::clipboard();
     QPixmap pix = board->pixmap();
     return pix;

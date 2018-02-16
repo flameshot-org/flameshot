@@ -4,13 +4,11 @@
 #include <QGridLayout>
 #include <QApplication>
 #include <QClipboard>
-#include <QMouseEvent>
 #include <QDropEvent>
 #include <QDrag>
 #include <QMimeData>
 #include <QList>
 #include <QUrl>
-
 
 struct PinWidgetPrivate {
     PinWidgetPrivate(QWidget *contentWidget) : contentWidget(contentWidget) {}
@@ -152,6 +150,6 @@ void PinWidget::dropEvent(QDropEvent *event){
         QImage img(path);
         if(img.isNull()) return;
         cb->setImage(img, QClipboard::Clipboard);
-        this->resize(img.size());
+        resize(img.size());
     }
 }

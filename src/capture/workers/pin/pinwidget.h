@@ -12,15 +12,15 @@ class PinWidget : public QWidget
 public:
     explicit PinWidget(QWidget *contentWidget, QWidget *parent = nullptr);
     ~PinWidget();
-    void EnableMove( bool bMove = true ){ m_bMove = bMove; }
-    void EnableWheel(bool bWheel= true ){ m_bWheel= bWheel;}
+    void EnableMove(bool bMove = true){ m_bMove = bMove; }
+    void EnableWheel(bool bWheel= true){ m_bWheel= bWheel;}
 
 protected:
-    virtual void mousePressEvent( QMouseEvent *event );
-    virtual void mouseMoveEvent( QMouseEvent *event );
-    virtual void mouseReleaseEvent( QMouseEvent *event );
-    virtual void wheelEvent( QWheelEvent *event );
-    virtual void mouseDoubleClickEvent( QMouseEvent* event );
+    virtual void mousePressEvent(QMouseEvent *event);
+    virtual void mouseMoveEvent(QMouseEvent *event);
+    virtual void mouseReleaseEvent(QMouseEvent *event);
+    virtual void wheelEvent(QWheelEvent *event );
+    virtual void mouseDoubleClickEvent(QMouseEvent* event);
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void dragEnterEvent(QDragEnterEvent *event);
     virtual void dropEvent(QDropEvent *event);
