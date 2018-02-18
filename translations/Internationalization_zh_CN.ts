@@ -337,12 +337,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="181"/>
         <source>Launch at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>开机时启动</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="185"/>
         <source>Launch Flameshot </source>
-        <translation type="unfinished"></translation>
+        <translation>启动 Flameshot </translation>
     </message>
 </context>
 <context>
@@ -578,12 +578,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">无法写入</translation>
+        <translation>无法写入</translation>
     </message>
 </context>
 <context>
@@ -802,7 +802,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="53"/>
         <source>Opacity of area outside selection:</source>
-        <translation type="unfinished"></translation>
+        <translation>选中区域之外的不透明度：</translation>
     </message>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="77"/>
