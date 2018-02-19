@@ -1,0 +1,70 @@
+name: flameshot
+version: git
+icon: img/flameshot.png
+summary: Powerful yet simple to use screenshot software
+description: |
+  A powerful open source screenshot and annotation tool for Linux, Flameshot
+  has a varied set of markup tools available, which include Freehand drawing,
+  Lines, Arrows, Boxes, Circles, Highlighting, Blur. Additionally, you can
+  customise the color, size and/or thickness of many of these image annotation
+  tools.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+
+apps:
+  flameshot:
+    command: env LC_ALL=C.UTF-8 desktop-launch flameshot
+    slots: [ dbus-svc ]
+    plugs:
+      - unity7
+      - opengl
+      - home
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+
+parts:
+  flameshot:
+    plugin: qmake
+    qt-version: qt5
+    options:
+      - CONFIG+=packaging
+    source: .
+    source-type: git
+#    prepare: |
+#       sed -i 's|Icon=flameshot|Icon=\${SNAP}/meta/gui/flameshot\.png|g' meta/gui/flameshot.desktop
+#       sed -i 's|^Name=.*|Name=Flameshot|g' meta/gui/flameshot.desktop
+#       sed -i 's|Icon=flameshot|Icon=\${SNAP}/meta/gui/flameshot\.png|g' meta/gui/flameshot-init.desktop
+    build-packages:
+      - qtbase5-dev
+      - qttools5-dev-tools
+    stage-packages:
+      - fonts-freefont-ttf
+      - dbus-x11
+      - libqt5dbus5
+      - libqt5network5
+      - libqt5core5a
+      - libqt5widgets5
+      - libqt5gui5
+      - libqt5libqgtk2
+      - libqt5svg5
+      - libgtk2.0-0
+      - openssl
+      - ca-certificates
+    after:
+      - desktop-qt5
+      - indicator-qt5
+
+slots:
+  # Depending on in which environment we're running we either need
+  # to use the system or session DBus so we also need to have one
+  # slot for each.
+  dbus-svc:
+    interface: dbus
+    bus: session
+    name: org.dharkael.Flameshot

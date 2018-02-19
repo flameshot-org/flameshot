@@ -46,6 +46,7 @@ parts/
 prime/
 stage/
 *.snap
+.snapcraft/
 flameshot*.tar.bz2
 
 
