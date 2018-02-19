@@ -5,8 +5,9 @@ services:
 
 language: cpp
 
-os:
-  - linux
+branches:
+  only:
+    - master
 
 cache:
     directories:
@@ -21,26 +22,43 @@ env:
       - ARCH=x86_64
 #      - DOCKER_REPO=packpack/packpack
       - DOCKER_REPO=vitzy/packpack
-    matrix:
-      #The actual list of distribution is available on
-      #https://hub.docker.com/r/packpack/packpack/tags/
-      #https://hub.docker.com/r/vitzy/packpack/tags/
-      - OS=fedora DIST=26
-      - OS=fedora DIST=27
-      # trusty: only for build & test & AppImage
-      - OS=ubuntu DIST=trusty   #14.04 LTS;  Qt version is 5.2.1, flameshot not support
-      - OS=ubuntu DIST=xenial   #16.04 LTS
-      - OS=ubuntu DIST=artful   #17.10
-      - OS=debian DIST=jessie   #8
-      - OS=debian DIST=stretch  #9
+
+#The actual list of distribution is available on
+#https://hub.docker.com/r/packpack/packpack/tags/
+#https://hub.docker.com/r/vitzy/packpack/tags/
+matrix:
+    include:
+        - os: linux
+          env: OS=fedora DIST=26
+        - os: linux
+          env: OS=fedora DIST=27
+        - os: linux
+          # trusty: only for build & test & AppImage
+          # 14.04 LTS;  Qt version is 5.2.1, flameshot not support
+          env: OS=ubuntu DIST=trusty
+        - os: linux
+          # 16.04 LTS
+          env: OS=ubuntu DIST=xenial
+        - os: linux
+          # 17.10
+          env: OS=ubuntu DIST=artful
+        - os: linux
+          # 8
+          env: OS=debian DIST=jessie
+        - os: linux
+          # 9
+          env: OS=debian DIST=stretch 
+        - os: osx
+          compiler: clang
+          osx_image: xcode9.2
 
 before_install:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
   - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get -qq update ; fi
-  # - export VERSION=0.5.0
 
 before_script:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then chmod +x .travis_linux.sh ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then chmod +x .travis_macos.sh ; fi
 
 install:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq git; sudo apt-get install -qq build-essential ; fi
@@ -54,6 +72,7 @@ script:
  # - git submodule update --init --recursive
  # - git describe --long
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then bash ./.travis_linux.sh ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then bash ./.travis_macos.sh ; fi
   - pwd && ls   
 
 # deploy:
@@ -61,7 +80,7 @@ script:
 #    provider: releases
 #    api_key: "GITHUB ENCYPTED OAUTH TOKEN"
 #    file_glob: true
-#    file: dist/*.{deb,rpm,AppImage}
+#    file: dist/*.{deb,rpm,AppImage,dmg}
 #    skip_cleanup: true
 #    on:
 #      tags: true
