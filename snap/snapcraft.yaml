@@ -15,50 +15,44 @@ confinement: devmode # use 'strict' once you have the right plugs and slots
 
 apps:
   flameshot:
-    command: env LC_ALL=C.UTF-8 desktop-launch flameshot
+    command: desktop-launch ${SNAP}/usr/bin/flameshot
+    environment:
+      LC_ALL: C.UTF-8
     slots: [ dbus-svc ]
     plugs:
-      - unity7
-      - opengl
+      - desktop
+      - desktop-legacy
       - home
       - network
       - network-bind
-      - desktop
-      - desktop-legacy
+      - opengl
+      - pulseaudio
+      - unity7
       - wayland
       - x11
 
 parts:
   flameshot:
+    after:
+      - desktop-qt5
+      - indicator-qt5
     plugin: qmake
     qt-version: qt5
     options:
       - CONFIG+=packaging
     source: .
     source-type: git
-#    prepare: |
-#       sed -i 's|Icon=flameshot|Icon=\${SNAP}/meta/gui/flameshot\.png|g' meta/gui/flameshot.desktop
-#       sed -i 's|^Name=.*|Name=Flameshot|g' meta/gui/flameshot.desktop
-#       sed -i 's|Icon=flameshot|Icon=\${SNAP}/meta/gui/flameshot\.png|g' meta/gui/flameshot-init.desktop
     build-packages:
-      - qtbase5-dev
+      - qt5-default
       - qttools5-dev-tools
     stage-packages:
-      - fonts-freefont-ttf
       - dbus-x11
-      - libqt5dbus5
-      - libqt5network5
-      - libqt5core5a
-      - libqt5widgets5
-      - libqt5gui5
-      - libqt5libqgtk2
-      - libqt5svg5
       - libgtk2.0-0
       - openssl
       - ca-certificates
-    after:
-      - desktop-qt5
-      - indicator-qt5
+
+  desktop-qt5:
+    stage: [ -./**/lib/*/qt5/**/libappmenu-qt5.so ]
 
 slots:
   # Depending on in which environment we're running we either need
