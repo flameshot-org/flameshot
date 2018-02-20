@@ -73,7 +73,8 @@ void BlurTool::processImage(
     scene.addItem(item);
 
     scene.render(&painter, selection, QRectF());
-    blur->setBlurRadius(15);
+    blur->setBlurRadius(12);
+    scene.render(&painter, selection, QRectF());
     scene.render(&painter, selection, QRectF());
 }
 
