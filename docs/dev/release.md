@@ -1,6 +1,6 @@
  What to do in every release?
 
  - Update translations.
- - Properly generate the .deb file.
- - Releases always use annotated tags as in `git tag -a -m "v0.5.0"`
+ - Update travis version
+ - Releases always use annotated tags as in `git tag -a v0.5.1 -m "version 0.5.1"`
  - Add a changelog description in the Github's release.

@@ -17,7 +17,7 @@ env:
     global:
       # Environment variables for packpack
       - PRODUCT=flameshot
-      - VERSION=0.5.0
+      - VERSION=0.5.1
       - RELEASE=1
       - ARCH=x86_64
 #      - DOCKER_REPO=packpack/packpack
