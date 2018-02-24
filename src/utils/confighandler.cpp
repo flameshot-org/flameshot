@@ -202,9 +202,9 @@ void ConfigHandler::setStartupLaunch(const bool start) {
     QFile file(path);
     if (start) {
         if (file.open(QIODevice::WriteOnly)) {
-            QByteArray data("[Desktop Entry]\nEncoding=UTF-8\nName=flameshot"
-                            "\nIcon=flameshot\nExec=flameshot\nTerminal=false"
-                            "\nType=Application\nX-GNOME-Autostart-enabled=true\n");
+            QByteArray data("[Desktop Entry]\nName=flameshot\nIcon=flameshot"
+                            "\nExec=flameshot\nTerminal=false\nType=Application"
+                            "\nX-GNOME-Autostart-enabled=true\n");
             file.write(data);
         }
     } else {
