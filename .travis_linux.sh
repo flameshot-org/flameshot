@@ -31,6 +31,9 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	source /opt/qt53/bin/qt53-env.sh && qmake --version
 	export CC=gcc-4.9 CXX=g++-4.9
 
+	# Install fcitx-frontend-qt5
+	sudo apt-get -y install fcitx-frontend-qt5
+
 	mkdir build-test
 	qmake QMAKE_CXX=$CXX QMAKE_CC=$CC QMAKE_LINK=$CXX DESTDIR=$BUILD_DST_PATH
 	# Building flameshot
@@ -79,6 +82,7 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	./linuxdeployqt $APPIMAGE_DST_PATH/appdir/usr/bin/flameshot -bundle-non-qt-libs
 
     rm -f $APPIMAGE_DST_PATH/appdir/usr/lib/libatk-1.0.so.0
+    cp /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so $APPIMAGE_DST_PATH/appdir/usr/plugins/platforminputcontexts/
     cd $APPIMAGE_DST_PATH/appdir/usr/bin
 	ln -sf ../plugins/platforms/ .   # An unknown bug
     cd ${project_dir}
