@@ -1,7 +1,5 @@
 dist: trusty
 sudo: required
-services:
-  - docker
 
 language: cpp
 
@@ -29,25 +27,31 @@ env:
 matrix:
     include:
         - os: linux
-          env: OS=fedora DIST=26
+          env: OS=fedora DIST=26 EXTEN=rpm
+          services: docker
         - os: linux
-          env: OS=fedora DIST=27
+          env: OS=fedora DIST=27 EXTEN=rpm
+          services: docker
         - os: linux
           # trusty: only for build & test & AppImage
           # 14.04 LTS;  Qt version is 5.2.1, flameshot not support
-          env: OS=ubuntu DIST=trusty
+          env: OS=ubuntu DIST=trusty EXTEN=AppImage
         - os: linux
           # 16.04 LTS
-          env: OS=ubuntu DIST=xenial
+          env: OS=ubuntu DIST=xenial EXTEN=deb
+          services: docker
         - os: linux
           # 17.10
-          env: OS=ubuntu DIST=artful
+          env: OS=ubuntu DIST=artful EXTEN=deb
+          services: docker
         - os: linux
           # 8
-          env: OS=debian DIST=jessie
+          env: OS=debian DIST=jessie EXTEN=deb
+          services: docker
         - os: linux
           # 9
-          env: OS=debian DIST=stretch 
+          env: OS=debian DIST=stretch EXTEN=deb
+          services: docker
         - os: osx
           compiler: clang
           osx_image: xcode9.2

@@ -5,15 +5,15 @@ if [[ "${DIST}" != "trusty" ]]; then
 	pwd && ls ;
 	packpack/packpack ;
 	if [ $OS == "ubuntu" ];
-	then curl --upload-file build/flameshot_*_*.deb "https://transfer.sh/flameshot_$VERSION-$RELEASE_ubuntu_$ARCH.deb" ;
+	then curl --upload-file build/flameshot_*_*.deb "https://transfer.sh/flameshot_$VERSION-$DIST-$ARCH_$ARCH.$EXTEN" ;
 	# copy deb to dist path for distribution
-	cp build/flameshot_*_*.deb dist/flameshot_$VERSION-$RELEASE_ubuntu_$ARCH.deb ;
+	cp build/flameshot_*_*.deb dist/flameshot_$VERSION-$DIST-$ARCH_$ARCH.$EXTEN ;
 	elif [ $OS == "debian" ];
-	then curl --upload-file build/flameshot_*_*.deb "https://transfer.sh/flameshot_$VERSION-$RELEASE_debian_$ARCH.deb" ;
-	cp build/flameshot_*_*.deb dist/flameshot_$VERSION-$RELEASE_debian_$ARCH.deb ;
+	then curl --upload-file build/flameshot_*_*.deb "https://transfer.sh/flameshot_$VERSION-$DIST-$ARCH_$ARCH.$EXTEN" ;
+	cp build/flameshot_*_*.deb dist/flameshot_$VERSION-$DIST-$ARCH_$ARCH.$EXTEN ;
 	elif [ $OS == "fedora" ];
-	then curl --upload-file build/flameshot-$VERSION-$RELEASE.*.$ARCH.rpm "https://transfer.sh/flameshot_$VERSION-$RELEASE_fedora_$ARCH.rpm" ;
-	cp build/flameshot-$VERSION-$RELEASE.*.$ARCH.rpm dist/flameshot_$VERSION-$RELEASE_fedora_$ARCH.rpm ;
+	then curl --upload-file build/flameshot-$VERSION-$RELEASE.*.$ARCH.rpm "https://transfer.sh/flameshot_$VERSION-fedora$DIST-$ARCH_$ARCH.$EXTEN" ;
+	cp build/flameshot-$VERSION-$RELEASE.*.$ARCH.rpm dist/flameshot_$VERSION-fedora$DIST-$ARCH_$ARCH.$EXTEN ;
 	else echo "";
 	fi
 	echo -e "\n" ;
@@ -100,12 +100,12 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	mkdir dist
 
 	# Rename AppImage and move AppImage to DIST_PATH 
-	cd $APPIMAGE_DST_PATH && mv Take_graphical_screenshot-${VERSION}-x86_64.AppImage flameshot_x86_64_${VERSION}.AppImage
-	cd .. && cp $APPIMAGE_DST_PATH/flameshot_x86_64_${VERSION}.AppImage $DIST_PATH/flameshot_x86_64_${VERSION}.AppImage
+	cd $APPIMAGE_DST_PATH && mv Take_graphical_screenshot-${VERSION}-${ARCH}.AppImage flameshot_${ARCH}_${VERSION}.AppImage
+	cd .. && cp $APPIMAGE_DST_PATH/flameshot_${ARCH}_${VERSION}.AppImage $DIST_PATH/flameshot_${ARCH}_${VERSION}.$EXTEN
 
 	pwd
 
-    curl --upload-file $DIST_PATH/flameshot_x86_64_${VERSION}.AppImage "https://transfer.sh/flameshot_x86_64_${VERSION}.AppImage" ;
+    curl --upload-file $DIST_PATH/flameshot_${ARCH}_${VERSION}.AppImage "https://transfer.sh/flameshot_${ARCH}_${VERSION}.$EXTEN" ;
 	
 	exit 0 ;
 else echo "" ;
