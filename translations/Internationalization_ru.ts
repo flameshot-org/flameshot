@@ -126,7 +126,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>General</source>
-        <translation>Общее</translation>
+        <translation>Общие</translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="35"/>
         <source>Unable to connect via DBus</source>
-        <translation>Не удалось подключится через DBus</translation>
+        <translation>Не удалось подключиться через DBus</translation>
     </message>
 </context>
 <context>
