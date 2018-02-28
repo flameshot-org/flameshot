@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/capture/tools/applauncher.cpp" line="38"/>
         <source>App Launcher</source>
-        <translation type="unfinished">Запуск приложения</translation>
+        <translation>Запуск приложения</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/applauncher.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished">Выберите приложение, чтобы открыть снимок</translation>
+        <translation>Выберите приложение, которым открыть снимок</translation>
     </message>
 </context>
 <context>
@@ -19,33 +19,33 @@
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
-        <translation type="unfinished">Открыть с помощью</translation>
+        <translation>Открыть с помощью</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished">Запустить в терминале</translation>
+        <translation>Запустить в терминале</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished">Оставить запущенным после выделения</translation>
+        <translation>Оставить запущенным после выделения</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">Не удалось сохранить</translation>
+        <translation>Не удалось сохранить</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
-        <translation type="unfinished">Не удалось запустить в терминале.</translation>
+        <translation>Не удалось запустить в терминале.</translation>
     </message>
 </context>
 <context>
@@ -53,12 +53,12 @@
     <message>
         <location filename="../src/capture/tools/arrowtool.cpp" line="77"/>
         <source>Arrow</source>
-        <translation type="unfinished">Стрелка</translation>
+        <translation>Стрелка</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/arrowtool.cpp" line="81"/>
         <source>Sets the Arrow as the paint tool</source>
-        <translation type="unfinished">Выбрать Стрелку инструментом для рисования</translation>
+        <translation>Выбрать Стрелку инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -66,28 +66,28 @@
     <message>
         <location filename="../src/capture/tools/blurtool.cpp" line="41"/>
         <source>Blur</source>
-        <translation type="unfinished">Размытие</translation>
+        <translation>Размытие</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/blurtool.cpp" line="45"/>
         <source>Sets the Blur as the paint tool</source>
-        <translation type="unfinished">Выбрать Размытие инструментом для рисования</translation>
+        <translation>Выбрать Размытие инструментом для рисования</translation>
     </message>
 </context>
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Не удалось захватить экран</translation>
+        <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="221"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="unfinished">Выберите область с помощью мыши или нажмите Esc для выхода.
+        <translation>Выберите область с помощью мыши или нажмите Esc для выхода.
 Нажмите Enter, чтобы сделать снимок.
 Нажмите ПКМ, чтобы отобразить панель выбора цвета.
 Используйте колесико мыши, чтобы изменить толщину вашего инструмента.</translation>
@@ -98,12 +98,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/circletool.cpp" line="38"/>
         <source>Circle</source>
-        <translation type="unfinished">Окружность</translation>
+        <translation>Окружность</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/circletool.cpp" line="42"/>
         <source>Sets the Circle as the paint tool</source>
-        <translation type="unfinished">Выбрать Окружность инструментом для рисования</translation>
+        <translation>Выбрать Окружность инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -111,48 +111,40 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/configwindow.cpp" line="38"/>
         <source>Configuration</source>
-        <translation type="unfinished">Настройка</translation>
-    </message>
-    <message>
-        <source>Button Selection</source>
-        <translation type="obsolete">Выбор кнопок</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">Выбрать все</translation>
+        <translation>Настройка</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
-        <translation type="unfinished">Интерфейс</translation>
+        <translation>Интерфейс</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Filename Editor</source>
-        <translation type="unfinished">Редактор имен файлов</translation>
+        <translation>Редактор имен файлов</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>General</source>
-        <translation type="unfinished">Общее</translation>
+        <translation>Общие</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="96"/>
+        <location filename="../src/core/controller.cpp" line="109"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Настройка</translation>
+        <translation>&amp;Настройка</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="99"/>
+        <location filename="../src/core/controller.cpp" line="112"/>
         <source>&amp;Information</source>
-        <translation type="unfinished">&amp;Информация</translation>
+        <translation>&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="102"/>
+        <location filename="../src/core/controller.cpp" line="115"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Выход</translation>
+        <translation>&amp;Выход</translation>
     </message>
 </context>
 <context>
@@ -160,12 +152,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/copytool.cpp" line="38"/>
         <source>Copy</source>
-        <translation type="unfinished">Скопировать</translation>
+        <translation>Скопировать</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/copytool.cpp" line="42"/>
         <source>Copies the selecion into the clipboard</source>
-        <translation type="unfinished">Скопировать выделение в буфер обмена</translation>
+        <translation>Скопировать выделение в буфер обмена</translation>
     </message>
 </context>
 <context>
@@ -173,7 +165,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="35"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Не удалось подключится через DBus</translation>
+        <translation>Не удалось подключиться через DBus</translation>
     </message>
 </context>
 <context>
@@ -181,12 +173,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/exittool.cpp" line="38"/>
         <source>Exit</source>
-        <translation type="unfinished">Выход</translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/exittool.cpp" line="42"/>
         <source>Leave the capture screen</source>
-        <translation type="unfinished">Покинуть захват экрана</translation>
+        <translation>Покинуть захват экрана</translation>
     </message>
 </context>
 <context>
@@ -194,47 +186,47 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="35"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished">Отредактируйте имя ваших снимков:</translation>
+        <translation>Отредактируйте имя ваших снимков:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="39"/>
         <source>Edit:</source>
-        <translation type="unfinished">Шаблон:</translation>
+        <translation>Шаблон:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="41"/>
         <source>Preview:</source>
-        <translation type="unfinished">Предпросмотр:</translation>
+        <translation>Предпросмотр:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="78"/>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="80"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished">Сохранить шаблон</translation>
+        <translation>Сохранить шаблон</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="82"/>
         <source>Reset</source>
-        <translation type="unfinished">Сбросить</translation>
+        <translation>Сбросить</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="85"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished">Восстанавливает сохраненный шаблон</translation>
+        <translation>Восстанавливает сохраненный шаблон</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="87"/>
         <source>Clear</source>
-        <translation type="unfinished">Очистить</translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="91"/>
         <source>Deletes the name</source>
-        <translation type="unfinished">Удаляет имя</translation>
+        <translation>Удаляет имя</translation>
     </message>
 </context>
 <context>
@@ -242,7 +234,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/filenamehandler.cpp" line="36"/>
         <source>screenshot</source>
-        <translation type="unfinished">снимок</translation>
+        <translation>снимок</translation>
     </message>
 </context>
 <context>
@@ -250,98 +242,100 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/core/flameshotdbusadapter.cpp" line="74"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Не удается захватить экран</translation>
+        <translation>Не удается захватить экран</translation>
     </message>
 </context>
 <context>
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Import</source>
-        <translation type="unfinished">Импорт</translation>
+        <translation>Импорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Не удалось прочитать файл.</translation>
+        <translation>Не удалось прочитать файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Не удалось записать файл.</translation>
+        <translation>Не удалось записать файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
         <source>Save File</source>
-        <translation type="unfinished">Сохранить файл</translation>
+        <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="112"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Подтвердить сброс</translation>
+        <translation>Подтвердить сброс</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="107"/>
+        <location filename="../src/config/geneneralconf.cpp" line="113"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Вы действительно хотите сбросить настройки?</translation>
+        <translation>Вы действительно хотите сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Show help message</source>
-        <translation type="unfinished">Показывать справочное сообщение</translation>
+        <translation>Показывать справочное сообщение</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="120"/>
+        <location filename="../src/config/geneneralconf.cpp" line="126"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">Показать справочное сообщение перед началом захвата экрана.</translation>
+        <translation>Показывать справочное сообщение перед началом захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
-        <location filename="../src/config/geneneralconf.cpp" line="134"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Показывать уведомления</translation>
+        <translation>Показывать уведомления</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="143"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">Показывать значок в трее</translation>
+        <translation>Показывать значок в трее</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="147"/>
+        <location filename="../src/config/geneneralconf.cpp" line="153"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">Показать значок в системном трее</translation>
+        <translation>Показать значок в системном трее</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="164"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Файл конфигурации</translation>
+        <translation>Файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
         <source>Export</source>
-        <translation type="unfinished">Экспорт</translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Reset</source>
-        <translation type="unfinished">Сброс</translation>
+        <translation>Сброс</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Launch at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускать при старте системы</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="185"/>
-        <source>Launch Flameshot </source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <source>Launch Flameshot</source>
+        <translation>Запустить Flameshot</translation>
     </message>
 </context>
 <context>
@@ -349,42 +343,42 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="45"/>
         <source>Upload to Imgur</source>
-        <translation type="unfinished">Загрузить в Imgur</translation>
+        <translation>Загрузить в Imgur</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="51"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Загрузка изображения</translation>
+        <translation>Загрузка изображения</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Скопировать URL</translation>
+        <translation>Скопировать URL</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="130"/>
         <source>Open URL</source>
-        <translation type="unfinished">Открыть URL</translation>
+        <translation>Открыть URL</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="131"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Изображение в буфер обмена.</translation>
+        <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="148"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Не удалось открыть URL.</translation>
+        <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="154"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL скопирован в буфер обмена.</translation>
+        <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="159"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Снимок скопирован в буфер обмена.</translation>
+        <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
 </context>
 <context>
@@ -392,12 +386,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/imguruploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Отправка изображений</translation>
+        <translation>Отправка изображений</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/imguruploadertool.cpp" line="42"/>
         <source>Uploads the selection to Imgur</source>
-        <translation type="unfinished">Загрузить выделение на Imgur</translation>
+        <translation>Загрузить выделение на Imgur</translation>
     </message>
 </context>
 <context>
@@ -405,87 +399,87 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/infowindow.cpp" line="31"/>
         <source>About</source>
-        <translation type="unfinished">Информация</translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="48"/>
         <source>Right Click</source>
-        <translation type="unfinished">ПКМ</translation>
+        <translation>ПКМ</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="49"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Колесико мыши</translation>
+        <translation>Колесико мыши</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="53"/>
         <source>Move selection 1px</source>
-        <translation type="unfinished">Переместить выделение на 1px</translation>
+        <translation>Переместить выделение на 1px</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="54"/>
         <source>Resize selection 1px</source>
-        <translation type="unfinished">Изменить размер выделения на 1px</translation>
+        <translation>Изменить размер выделения на 1px</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="55"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Выйти из захвата экрана</translation>
+        <translation>Выйти из захвата экрана</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="56"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Скопировать в буфер обмена</translation>
+        <translation>Скопировать в буфер обмена</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="57"/>
         <source>Save selection as a file</source>
-        <translation type="unfinished">Сохранить выделение в файл</translation>
+        <translation>Сохранить выделение в файл</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="58"/>
         <source>Undo the last modification</source>
-        <translation type="unfinished">Отменить последнее изменение</translation>
+        <translation>Отменить последнее изменение</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="59"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Показать выбор цвета</translation>
+        <translation>Показать выбор цвета</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="60"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Изменить толщину инструмента</translation>
+        <translation>Изменить толщину инструмента</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="65"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Доступные горячие клавиши в режиме захвата экрана.</translation>
+        <translation>Доступные горячие клавиши в режиме захвата экрана.</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="76"/>
         <source>Key</source>
-        <translation type="unfinished">Клавиша</translation>
+        <translation>Клавиша</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="76"/>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="97"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="unfinished">&lt;u&gt;&lt;b&gt;Лицензия&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;Лицензия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="105"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="unfinished">&lt;u&gt;&lt;b&gt;Версия&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;Версия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="unfinished">&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
 </context>
 <context>
@@ -493,12 +487,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/linetool.cpp" line="40"/>
         <source>Line</source>
-        <translation type="unfinished">Линия</translation>
+        <translation>Линия</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/linetool.cpp" line="44"/>
         <source>Sets the Line as the paint tool</source>
-        <translation type="unfinished">Выбрать Линию инструментом для рисования</translation>
+        <translation>Выбрать Линию инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -506,12 +500,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/markertool.cpp" line="40"/>
         <source>Marker</source>
-        <translation type="unfinished">Маркер</translation>
+        <translation>Маркер</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/markertool.cpp" line="44"/>
         <source>Sets the Marker as the paint tool</source>
-        <translation type="unfinished">Выбрать Маркер инструментом для рисования</translation>
+        <translation>Выбрать Маркер инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -519,12 +513,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/movetool.cpp" line="38"/>
         <source>Move</source>
-        <translation type="unfinished">Перемещение</translation>
+        <translation>Перемещение</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/movetool.cpp" line="42"/>
         <source>Move the selection area</source>
-        <translation type="unfinished">Выбрать Перемещение инструментом для рисования</translation>
+        <translation>Выбрать Перемещение инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -532,53 +526,49 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/penciltool.cpp" line="38"/>
         <source>Pencil</source>
-        <translation type="unfinished">Карандаш</translation>
+        <translation>Карандаш</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/penciltool.cpp" line="42"/>
         <source>Sets the Pencil as the paint tool</source>
-        <translation type="unfinished">Выбрать Карандаш инструментом для рисования</translation>
+        <translation>Выбрать Карандаш инструментом для рисования</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <source>Save As</source>
-        <translation type="obsolete">Сохранить как</translation>
-    </message>
-    <message>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
-        <translation type="unfinished">Ошибка сохранения</translation>
+        <translation>Ошибка сохранения</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
         <source>Capture saved as </source>
-        <translation type="unfinished">Сохранить снимок как </translation>
+        <translation>Сохранить снимок как </translation>
     </message>
     <message>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Error trying to save as </source>
-        <translation type="unfinished">Ошибка при попытке сохранить как </translation>
+        <translation>Ошибка при попытке сохранить как </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="60"/>
-        <location filename="../src/main.cpp" line="293"/>
-        <location filename="../src/main.cpp" line="322"/>
+        <location filename="../src/main.cpp" line="71"/>
+        <location filename="../src/main.cpp" line="304"/>
+        <location filename="../src/main.cpp" line="333"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Не удалось подключиться через DBus</translation>
+        <translation>Не удалось подключиться через DBus</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">Не удалось сохранить</translation>
+        <translation>Не удалось сохранить</translation>
     </message>
 </context>
 <context>
@@ -586,12 +576,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/rectangletool.cpp" line="38"/>
         <source>Rectangle</source>
-        <translation type="unfinished">Прямоугольник</translation>
+        <translation>Прямоугольник</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/rectangletool.cpp" line="42"/>
         <source>Sets the Rectangle as the paint tool</source>
-        <translation type="unfinished">Выбрать Прямоугольник инструментом для рисования</translation>
+        <translation>Выбрать Прямоугольник инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -599,12 +589,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/savetool.cpp" line="38"/>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/savetool.cpp" line="42"/>
         <source>Save the capture</source>
-        <translation type="unfinished">Сохранить снимок</translation>
+        <translation>Сохранить снимок</translation>
     </message>
 </context>
 <context>
@@ -612,12 +602,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/selectiontool.cpp" line="38"/>
         <source>Rectangular Selection</source>
-        <translation type="unfinished">Прямоугольное выделение</translation>
+        <translation>Прямоугольное выделение</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/selectiontool.cpp" line="42"/>
         <source>Sets the Selection as the paint tool</source>
-        <translation type="unfinished">Выбрать Прямоугольное выделение инструментом для рисования</translation>
+        <translation>Выбрать Прямоугольное выделение инструментом для рисования</translation>
     </message>
 </context>
 <context>
@@ -625,12 +615,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/sizeindicatortool.cpp" line="38"/>
         <source>Selection Size Indicator</source>
-        <translation type="unfinished">Индикатор размера выделения</translation>
+        <translation>Индикатор размера выделения</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/sizeindicatortool.cpp" line="42"/>
         <source>Shows the dimensions of the selection (X Y)</source>
-        <translation type="unfinished">Показывает размер выделения (X Y)</translation>
+        <translation>Показывает размер выделения (X Y)</translation>
     </message>
 </context>
 <context>
@@ -638,107 +628,107 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Century (00-99)</source>
-        <translation type="unfinished">Век (00-99)</translation>
+        <translation>Век (00-99)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Year (00-99)</source>
-        <translation type="unfinished">Год (00-99)</translation>
+        <translation>Год (00-99)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Year (2000)</source>
-        <translation type="unfinished">Год (2000)</translation>
+        <translation>Год (2000)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Month Name (jan)</source>
-        <translation type="unfinished">Название месяца (янв)</translation>
+        <translation>Название месяца (янв)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month Name (january)</source>
-        <translation type="unfinished">Название месяца (январь)</translation>
+        <translation>Название месяца (январь)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Month (01-12)</source>
-        <translation type="unfinished">Месяц (01-12)</translation>
+        <translation>Месяц (01-12)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week Day (1-7)</source>
-        <translation type="unfinished">День недели (1-7)</translation>
+        <translation>День недели (1-7)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Week (01-53)</source>
-        <translation type="unfinished">Неделя (01-53)</translation>
+        <translation>Неделя (01-53)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day Name (mon)</source>
-        <translation type="unfinished">День недели (пн)</translation>
+        <translation>День недели (пн)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (monday)</source>
-        <translation type="unfinished">День недели (понедельник)</translation>
+        <translation>День недели (понедельник)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day (01-31)</source>
-        <translation type="unfinished">День (01-31)</translation>
+        <translation>День (01-31)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
         <source>Day of Month (1-31)</source>
-        <translation type="unfinished">День месяца (1-31)</translation>
+        <translation>День месяца (1-31)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (001-366)</source>
-        <translation type="unfinished">День (001-366)</translation>
+        <translation>День (001-366)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H:%M:%S)</source>
-        <translation type="unfinished">Время (%H:%M:%S)</translation>
+        <translation>Время (%H:%M:%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H:%M)</source>
-        <translation type="unfinished">Время (%H:%M)</translation>
+        <translation>Время (%H:%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Hour (00-23)</source>
-        <translation type="unfinished">Час (00-23)</translation>
+        <translation>Час (00-23)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Hour (01-12)</source>
-        <translation type="unfinished">Час (01-12)</translation>
+        <translation>Час (01-12)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Minute (00-59)</source>
-        <translation type="unfinished">Минута (00-59)</translation>
+        <translation>Минута (00-59)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Second (00-59)</source>
-        <translation type="unfinished">Секунда (00-59)</translation>
+        <translation>Секунда (00-59)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation type="unfinished">Полная дата (%m/%d/%y)</translation>
+        <translation>Полная дата (%m/%d/%y)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation type="unfinished">Полная дата  (%Y-%m-%d)</translation>
+        <translation>Полная дата  (%Y-%m-%d)</translation>
     </message>
 </context>
 <context>
@@ -746,37 +736,37 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="29"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Редактор цвета интерфейса</translation>
+        <translation>Редактор цвета интерфейса</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="92"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation type="unfinished">Измените цвет, перемещая выделение, и посмотрите изменения в кнопках предварительного просмотра.</translation>
+        <translation>Измените цвет, перемещая выделение, и посмотрите изменения в кнопках предварительного просмотра.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="102"/>
         <source>Select a Button to modify it</source>
-        <translation type="unfinished">Выберите кнопку, чтобы изменить ее</translation>
+        <translation>Выберите кнопку, чтобы изменить ее</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="111"/>
         <source>Main Color</source>
-        <translation type="unfinished">Основной цвет</translation>
+        <translation>Основной цвет</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="115"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation type="unfinished">Нажмите на эту кнопку, чтобы перейти в режим редактирования основного цвета.</translation>
+        <translation>Нажмите на эту кнопку, чтобы перейти в режим редактирования основного цвета.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="126"/>
         <source>Contrast Color</source>
-        <translation type="unfinished">Контрастный цвет</translation>
+        <translation>Контрастный цвет</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="131"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation type="unfinished">Нажмите на эту кнопку, чтобы перейти в режим редактирования контрастного цвета.</translation>
+        <translation>Нажмите на эту кнопку, чтобы перейти в режим редактирования контрастного цвета.</translation>
     </message>
 </context>
 <context>
@@ -784,12 +774,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/capture/tools/undotool.cpp" line="38"/>
         <source>Undo</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <location filename="../src/capture/tools/undotool.cpp" line="42"/>
         <source>Undo the last modification</source>
-        <translation type="unfinished">Отменить последнее изменение</translation>
+        <translation>Отменить последнее изменение</translation>
     </message>
 </context>
 <context>
@@ -797,17 +787,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="53"/>
         <source>Opacity of area outside selection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Затемнение невыделенной области:</translation>
     </message>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="77"/>
         <source>Button Selection</source>
-        <translation type="unfinished">Выбор кнопок</translation>
+        <translation>Выбор кнопок</translation>
     </message>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="83"/>
         <source>Select All</source>
-        <translation type="unfinished">Выбрать все</translation>
+        <translation>Выбрать все</translation>
     </message>
 </context>
 </TS>
