@@ -12,6 +12,7 @@
 
 ## Index
 - [Features](#features)
+- [Contribute](#contribute)
 - [Usage](#usage)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Considerations](#considerations)
@@ -31,6 +32,9 @@
 - In-app screenshot edition.
 - DBus interface.
 - Upload to Imgur.
+
+## Contribute
+If you want to contribute check the [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Usage
 Example commands:
