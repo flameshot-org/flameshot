@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation type="unfinished">Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="221"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -114,14 +114,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation type="unfinished">Настройка</translation>
     </message>
     <message>
-        <source>Button Selection</source>
-        <translation type="obsolete">Выбор кнопок</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">Выбрать все</translation>
-    </message>
-    <message>
         <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation type="unfinished">Интерфейс</translation>
@@ -140,17 +132,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="96"/>
+        <location filename="../src/core/controller.cpp" line="109"/>
         <source>&amp;Configuration</source>
         <translation type="unfinished">&amp;Настройка</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="99"/>
+        <location filename="../src/core/controller.cpp" line="112"/>
         <source>&amp;Information</source>
         <translation type="unfinished">&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="102"/>
+        <location filename="../src/core/controller.cpp" line="115"/>
         <source>&amp;Quit</source>
         <translation type="unfinished">&amp;Выход</translation>
     </message>
@@ -257,90 +249,92 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Import</source>
         <translation type="unfinished">Импорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <source>Unable to read file.</source>
         <translation type="unfinished">Не удалось прочитать файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Unable to write file.</source>
         <translation type="unfinished">Не удалось записать файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
         <source>Save File</source>
         <translation type="unfinished">Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="112"/>
         <source>Confirm Reset</source>
         <translation type="unfinished">Подтвердить сброс</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="107"/>
+        <location filename="../src/config/geneneralconf.cpp" line="113"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation type="unfinished">Вы действительно хотите сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Show help message</source>
         <translation type="unfinished">Показывать справочное сообщение</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="120"/>
+        <location filename="../src/config/geneneralconf.cpp" line="126"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation type="unfinished">Показать справочное сообщение перед началом захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
-        <location filename="../src/config/geneneralconf.cpp" line="134"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show desktop notifications</source>
         <translation type="unfinished">Показывать уведомления</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="143"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show tray icon</source>
         <translation type="unfinished">Показывать значок в трее</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="147"/>
+        <location filename="../src/config/geneneralconf.cpp" line="153"/>
         <source>Show the systemtray icon</source>
         <translation type="unfinished">Показать значок в системном трее</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="164"/>
         <source>Configuration File</source>
         <translation type="unfinished">Файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
         <source>Export</source>
         <translation type="unfinished">Экспорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Reset</source>
         <translation type="unfinished">Сброс</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Launch at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="185"/>
-        <source>Launch Flameshot </source>
+        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <source>Launch Flameshot</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -543,10 +537,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <source>Save As</source>
-        <translation type="obsolete">Сохранить как</translation>
-    </message>
-    <message>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation type="unfinished">Ошибка сохранения</translation>
@@ -564,9 +554,9 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation type="unfinished">Ошибка при попытке сохранить как </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="60"/>
-        <location filename="../src/main.cpp" line="293"/>
-        <location filename="../src/main.cpp" line="322"/>
+        <location filename="../src/main.cpp" line="71"/>
+        <location filename="../src/main.cpp" line="304"/>
+        <location filename="../src/main.cpp" line="333"/>
         <source>Unable to connect via DBus</source>
         <translation type="unfinished">Не удалось подключиться через DBus</translation>
     </message>
