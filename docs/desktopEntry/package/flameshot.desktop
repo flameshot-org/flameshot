@@ -1,17 +1,8 @@
 [Desktop Entry]
-Name=Launch Flameshot
-Name[es]=Iniciar Flameshot
-Name[tr]=Flameshot Başlat
-Name[zh_CN]=启动 Flameshot
+Name=Flameshot
 GenericName=Screenshot tool
-GenericName[es]=Herramienta de captura de pantalla
-GenericName[tr]=Ekran kayıt aracı
-GenericName[zh_CN]=截图工具
 Comment=Powerful yet simple to use screenshot software.
-Comment[es]=Potente pero simple de usar software de capturas.
-Comment[zh_CN]=强大又易用的截图软件
 Keywords=flameshot;screenshot;capture;
-Keywords[zh_CN]=flameshot;screenshot;capture;截图;
 Exec=flameshot
 Icon=flameshot
 Terminal=false
@@ -21,13 +12,9 @@ StartupNotify=false
 Actions=Configure;Capture;
 
 [Desktop Action Configure]
-Name=Configure Flameshot
-Name[es]=Configurar Flameshot
-Name[zh_CN]=配置 Flameshot
+Name=Configure
 Exec=flameshot config
 
 [Desktop Action Capture]
-Name=Take graphical screenshot
-Name[es]=Tomar captura gráfica
-Name[zh_CN]=进行图形截图
+Name=Take screenshot
 Exec=flameshot gui
