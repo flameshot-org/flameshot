@@ -229,13 +229,8 @@ unix:!macx {
     desktopentry.path = $${BASEDIR}$${PREFIX}/share/applications
     desktopentry.files = docs/desktopEntry/package/flameshot.desktop
 
-    desktopentryinit.path = $${BASEDIR}$${PREFIX}/share/applications
-    desktopentryinit.files = docs/desktopEntry/package/flameshot-init.desktop
-
-    desktopentryconfig.path = $${BASEDIR}$${PREFIX}/share/applications
-    desktopentryconfig.files = docs/desktopEntry/package/flameshot-config.desktop
-
     servicedbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/services/
+
     packaging {
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
     } else {
@@ -245,8 +240,6 @@ unix:!macx {
     INSTALLS += target \
         icon \
         desktopentry \
-        desktopentryinit \
-        desktopentryconfig \
         qmfile \
         servicedbus \
         dbus \
