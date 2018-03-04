@@ -87,7 +87,7 @@
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>Selecciona un área con el ratón. o presiona Esc para salir.
+        <translation>Selecciona un área con el ratón, o presiona Esc para salir.
 Presiona Enter para capturar la pantalla.
 Presion Click Derecho para mostrar el selector de color.
 Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
@@ -577,12 +577,12 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">Imposible escribir en</translation>
+        <translation>Imposible escribir en</translation>
     </message>
 </context>
 <context>
