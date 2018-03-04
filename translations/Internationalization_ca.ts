@@ -97,14 +97,6 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <translation>Configuració</translation>
     </message>
     <message>
-        <source>Button Selection</source>
-        <translation type="vanished">Selecció de botó</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="vanished">Selecciona-ho tot</translation>
-    </message>
-    <message>
         <source>Interface</source>
         <translation>Interfície</translation>
     </message>
@@ -281,8 +273,8 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <translation>Llançament a l&apos;inici</translation>
     </message>
     <message>
-        <source>Launch Flameshot </source>
-        <translation>Llançament de Flameshot </translation>
+        <source>Launch Flameshot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -378,10 +370,6 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <translation>Canvia el gruix de l&apos;eina</translation>
     </message>
     <message>
-        <source>Available shorcuts in the screen capture mode.</source>
-        <translation type="vanished">Dreceres disponibles en el mode de captura de pantalla.</translation>
-    </message>
-    <message>
         <source>Key</source>
         <translation>Tecla</translation>
     </message>
@@ -452,10 +440,6 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Save As</source>
-        <translation type="vanished">Anomena i guarda</translation>
-    </message>
     <message>
         <source>Save Error</source>
         <translation>S&apos;ha produït un error en guardar</translation>
