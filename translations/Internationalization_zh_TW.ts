@@ -77,7 +77,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="221"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -88,7 +88,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 使用滑鼠滾輪來改變繪製工具的寬度</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation>無法擷取螢幕</translation>
     </message>
@@ -114,14 +114,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>設定</translation>
     </message>
     <message>
-        <source>Button Selection</source>
-        <translation type="vanished">按鈕選擇</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="vanished">全選</translation>
-    </message>
-    <message>
         <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>介面</translation>
@@ -140,17 +132,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="96"/>
+        <location filename="../src/core/controller.cpp" line="109"/>
         <source>&amp;Configuration</source>
         <translation>&amp;設定</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="99"/>
+        <location filename="../src/core/controller.cpp" line="112"/>
         <source>&amp;Information</source>
         <translation>&amp;資訊</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="102"/>
+        <location filename="../src/core/controller.cpp" line="115"/>
         <source>&amp;Quit</source>
         <translation>&amp;結束</translation>
     </message>
@@ -256,92 +248,94 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Show help message</source>
         <translation>顯示説明資訊</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="120"/>
+        <location filename="../src/config/geneneralconf.cpp" line="126"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>在擷取之前顯示説明資訊</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
-        <location filename="../src/config/geneneralconf.cpp" line="134"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show desktop notifications</source>
         <translation>顯示桌面通知</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="143"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show tray icon</source>
         <translation>顯示託盤圖示</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="147"/>
+        <location filename="../src/config/geneneralconf.cpp" line="153"/>
         <source>Show the systemtray icon</source>
         <translation>顯示工作列圖示</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Import</source>
         <translation>匯入</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <source>Unable to read file.</source>
         <translation>無法讀取檔案</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Unable to write file.</source>
         <translation>無法寫入檔案</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
         <source>Save File</source>
         <translation>存檔</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="112"/>
         <source>Confirm Reset</source>
         <translation>確認重設</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="107"/>
+        <location filename="../src/config/geneneralconf.cpp" line="113"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>你確定你想要重設？</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="164"/>
         <source>Configuration File</source>
         <translation>設定檔</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
         <source>Export</source>
         <translation>匯出</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Reset</source>
         <translation>重設</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Launch at startup</source>
         <translation>自動啟動</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="185"/>
-        <source>Launch Flameshot </source>
-        <translation>啟動 Flameshot</translation>
+        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <source>Launch Flameshot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -458,10 +452,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>改變工具的寬度</translation>
     </message>
     <message>
-        <source>Available shorcuts in the screen capture mode.</source>
-        <translation type="vanished">螢幕截取模式中的可用快速鍵</translation>
-    </message>
-    <message>
         <location filename="../src/infowindow.cpp" line="76"/>
         <source>Key</source>
         <translation>鍵</translation>
@@ -547,10 +537,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <source>Save As</source>
-        <translation type="vanished">另存為</translation>
-    </message>
-    <message>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation>存檔錯誤</translation>
@@ -568,9 +554,9 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>嘗試另存新檔時發生錯誤 </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="60"/>
-        <location filename="../src/main.cpp" line="293"/>
-        <location filename="../src/main.cpp" line="322"/>
+        <location filename="../src/main.cpp" line="71"/>
+        <location filename="../src/main.cpp" line="304"/>
+        <location filename="../src/main.cpp" line="333"/>
         <source>Unable to connect via DBus</source>
         <translation>無法透過 DBus 進行連接</translation>
     </message>

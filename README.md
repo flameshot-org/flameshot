@@ -12,6 +12,7 @@
 
 ## Index
 - [Features](#features)
+- [Contribute](#contribute)
 - [Usage](#usage)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Considerations](#considerations)
@@ -31,6 +32,9 @@
 - In-app screenshot edition.
 - DBus interface.
 - Upload to Imgur.
+
+## Contribute
+If you want to contribute check the [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Usage
 Example commands:
@@ -147,8 +151,11 @@ Steps for using the configuration:
 
 ## Installation
 
-There are a packages available for a few distros:
-- [Arch](https://aur.archlinux.org/packages/flameshot/)
+There are packages available for a few distros:
+- [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/)
+  + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
+- [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
+- [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/voidlinux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)

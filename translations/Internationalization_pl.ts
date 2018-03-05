@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL">
+<TS version="2.1" language="pl_PL">
 <context>
     <name>AppLauncher</name>
     <message>
@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="87"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="87"/>
         <source>Unable to capture screen</source>
         <translation>Nie można przechwycić ekranu</translation>
     </message>
     <message>
-        <location filename="../src/capture/widget/capturewidget.cpp" line="191"/>
+        <location filename="../src/capture/widgets/capturewidget.cpp" line="221"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -114,14 +114,6 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <translation>Konfiguracja</translation>
     </message>
     <message>
-        <source>Button Selection</source>
-        <translation>Wybór przycisków</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation>Zaznacz wszystkie</translation>
-    </message>
-    <message>
         <location filename="../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>Interfejs</translation>
@@ -140,17 +132,17 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="96"/>
+        <location filename="../src/core/controller.cpp" line="109"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Konfiguracja</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="99"/>
+        <location filename="../src/core/controller.cpp" line="112"/>
         <source>&amp;Information</source>
         <translation>&amp;Informacje</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="102"/>
+        <location filename="../src/core/controller.cpp" line="115"/>
         <source>&amp;Quit</source>
         <translation>&amp;Wyjdź</translation>
     </message>
@@ -257,91 +249,93 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Import</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="82"/>
+        <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <source>Unable to read file.</source>
         <translation>Nie można odczytać pliku.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="90"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="105"/>
         <source>Unable to write file.</source>
         <translation>Nie można zapisać pliku.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
         <source>Save File</source>
         <translation>Zapisz plik</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="112"/>
         <source>Confirm Reset</source>
         <translation>Potwierdź Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="107"/>
+        <location filename="../src/config/geneneralconf.cpp" line="113"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Czy na pewno chcesz zresetować konfigurację?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Show help message</source>
         <translation>Pokaż podpowiedzi</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="120"/>
+        <location filename="../src/config/geneneralconf.cpp" line="126"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Pokaż podpowiedzi na początku trybu przechwytywania.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
-        <location filename="../src/config/geneneralconf.cpp" line="134"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show desktop notifications</source>
         <translation>Pokaż powiadomienia ekranowe</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="143"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show tray icon</source>
         <translation>Pokaż ikonę w trayu</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="147"/>
+        <location filename="../src/config/geneneralconf.cpp" line="153"/>
         <source>Show the systemtray icon</source>
         <translation>Pokaż ikonę w zasobniku systemowym</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="164"/>
         <source>Configuration File</source>
         <translation>Plik konfiguracyjny</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
         <source>Export</source>
         <translation>Export</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Launch at startup</source>
         <translation>Uruchom podczas startu</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="185"/>
-        <source>Launch Flameshot </source>
-        <translation>Uruchom  Flameshot </translation>
+        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <source>Launch Flameshot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -463,10 +457,6 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <translation>Dostępne skróty w trybie przechwytywania obrazu.</translation>
     </message>
     <message>
-        <source>Available shorcuts in the screen capture mode.</source>
-        <translation>Dostępne skróty w trybie przechwytywania obrazu.</translation>
-    </message>
-    <message>
         <location filename="../src/infowindow.cpp" line="76"/>
         <source>Key</source>
         <translation>Klawisz</translation>
@@ -547,10 +537,6 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
 <context>
     <name>QObject</name>
     <message>
-        <source>Save As</source>
-        <translation>Zapisz jako</translation>
-    </message>
-    <message>
         <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Save Error</source>
         <translation>Błąd zapisu</translation>
@@ -568,9 +554,9 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <translation>Błąd przy próbie zapisu jako </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="60"/>
-        <location filename="../src/main.cpp" line="293"/>
-        <location filename="../src/main.cpp" line="322"/>
+        <location filename="../src/main.cpp" line="71"/>
+        <location filename="../src/main.cpp" line="304"/>
+        <location filename="../src/main.cpp" line="333"/>
         <source>Unable to connect via DBus</source>
         <translation>Nie udało się połączyć za pomocą DBus</translation>
     </message>

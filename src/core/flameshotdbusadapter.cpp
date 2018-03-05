@@ -75,11 +75,12 @@ void FlameshotDBusAdapter::fullScreen(
             Q_EMIT captureFailed(id);
             return;
         }
-        if(toClipboard) {
-            ResourceExporter().captureToClipboard(p);
-        }
+        // This needs to be done first in order to prevent a severe block
         if(!path.isEmpty()) {
             ResourceExporter().captureToFile(p, path);
+        }
+        if(toClipboard) {
+            ResourceExporter().captureToClipboard(p);
         }
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
