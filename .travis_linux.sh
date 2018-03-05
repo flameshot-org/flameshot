@@ -100,7 +100,7 @@ elif [[ "${DIST}" == "trusty" ]]; then
 	mkdir dist
 
 	# Rename AppImage and move AppImage to DIST_PATH 
-	cd $APPIMAGE_DST_PATH && mv Take_graphical_screenshot-${VERSION}-${ARCH}.AppImage flameshot_${ARCH}_${VERSION}.AppImage
+	cd $APPIMAGE_DST_PATH && mv Flameshot-${VERSION}-${ARCH}.AppImage flameshot_${ARCH}_${VERSION}.AppImage
 	cd .. && cp $APPIMAGE_DST_PATH/flameshot_${ARCH}_${VERSION}.AppImage $DIST_PATH/flameshot_${ARCH}_${VERSION}.$EXTEN
 
 	pwd
