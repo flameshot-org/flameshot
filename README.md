@@ -37,7 +37,7 @@
 If you want to contribute check the [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Usage
-Example commands:
+Example commands (all assuming flameshot is already running in the background):
 - capture with GUI:
 
    `flameshot gui`
