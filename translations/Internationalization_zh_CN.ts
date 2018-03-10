@@ -135,17 +135,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="109"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;配置</translation>
+        <translation>配置(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="112"/>
         <source>&amp;Information</source>
-        <translation>&amp;信息</translation>
+        <translation>信息(&amp;I)</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="115"/>
         <source>&amp;Quit</source>
-        <translation>&amp;退出</translation>
+        <translation>退出(&amp;Q)</translation>
     </message>
 </context>
 <context>
@@ -166,7 +166,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="35"/>
         <source>Unable to connect via DBus</source>
-        <translation>无法通过Dbus进行连接</translation>
+        <translation>无法通过DBus进行连接</translation>
     </message>
 </context>
 <context>
@@ -336,7 +336,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="191"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>启动 Flameshot</translation>
     </message>
 </context>
 <context>
@@ -465,12 +465,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/infowindow.cpp" line="97"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;许可证&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="105"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;版本&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../src/infowindow.cpp" line="115"/>
@@ -538,19 +538,24 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="76"/>
         <source>Save Error</source>
         <translation>保存错误</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="48"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Capture saved as </source>
-        <translation>捕获保存为 </translation>
+        <translation>捕获已保存为 </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="35"/>
+        <source>Capture saved to clipboard</source>
+        <translation>捕获已保存至剪贴板</translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="50"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Error trying to save as </source>
         <translation>尝试另存为时出错 </translation>
     </message>
@@ -747,7 +752,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="102"/>
         <source>Select a Button to modify it</source>
-        <translation>选择一个按钮来修改它</translation>
+        <translation>选择一个按钮以进行修改</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="111"/>
