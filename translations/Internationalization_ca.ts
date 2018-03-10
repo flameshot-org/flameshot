@@ -464,6 +464,10 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <source>Unable to write in</source>
         <translation type="unfinished">No es pot escriure a</translation>
     </message>
+    <message>
+        <source>Capture saved to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

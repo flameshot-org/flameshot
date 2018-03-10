@@ -31,6 +31,9 @@ ScreenshotSaver::ScreenshotSaver()
 
 void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
     QApplication::clipboard()->setPixmap(capture);
+    QString saveMessage;
+    saveMessage = QObject::tr("Capture saved to clipboard");
+    SystemNotification().sendMessage(saveMessage);
 }
 
 void ScreenshotSaver::saveToFilesystem(const QPixmap &capture,

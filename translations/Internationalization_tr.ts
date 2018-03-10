@@ -537,19 +537,24 @@ Araç boyutunu değiştirmek için Fare tekerleğini kullanın.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="76"/>
         <source>Save Error</source>
         <translation>Hata Kaydet</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="48"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Capture saved as </source>
         <translation>Yakalanma şu şekilde kaydedildi </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="35"/>
+        <source>Capture saved to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="50"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Error trying to save as </source>
         <translation>Olarak kaydedilmeye çalışılırken hata oluştu </translation>
     </message>

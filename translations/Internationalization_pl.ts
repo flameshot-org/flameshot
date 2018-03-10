@@ -537,19 +537,24 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="76"/>
         <source>Save Error</source>
         <translation>Błąd zapisu</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="45"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="67"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="48"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
         <source>Capture saved as </source>
         <translation>Zaznaczenie zapisano jako </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="47"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="35"/>
+        <source>Capture saved to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="50"/>
+        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
         <source>Error trying to save as </source>
         <translation>Błąd przy próbie zapisu jako </translation>
     </message>
