@@ -100,6 +100,10 @@ void GeneneralConf::importConfiguration() {
 void GeneneralConf::exportFileConfiguration() {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
                                "flameshot.conf");
+    QFile targetFile(fileName);
+    if (targetFile.exists()) {
+        targetFile.remove();
+    }
     bool ok = QFile::copy(ConfigHandler().configFilePath(), fileName);
     if (!ok) {
         QMessageBox::about(this, tr("Error"), tr("Unable to write file."));
