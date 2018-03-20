@@ -37,3 +37,17 @@ Makefile*
 # QtCtreator CMake
 CMakeLists.txt.user
 
+
+# Created by https://www.gitignore.io/api/snapcraft
+
+### Snapcraft ###
+# Snapcraft
+parts/
+prime/
+stage/
+*.snap
+.snapcraft/
+flameshot*.tar.bz2
+
+
+# End of https://www.gitignore.io/api/snapcraft
