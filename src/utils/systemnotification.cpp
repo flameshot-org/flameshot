@@ -37,7 +37,7 @@ void SystemNotification::sendMessage(
     QList<QVariant> args;
     args << (qAppName())                 //appname
          << static_cast<unsigned int>(0) //id
-         << "flameshot.png"              //icon
+         << "flameshot"                  //icon
          << title                        //summary
          << text                         //body
          << QStringList()                //actions
