@@ -58,6 +58,8 @@ public:
 
     void updateButtons();
     QPixmap pixmap();
+    //screenshot location
+    static QRect capturePos;
 
 signals:
     void captureTaken(uint id, QByteArray p);

@@ -32,6 +32,7 @@
 #include "undotool.h"
 #include "applauncher.h"
 #include "blurtool.h"
+#include "pintool.h"
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent)
 {
@@ -91,6 +92,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_BLUR:
         tool = new BlurTool(parent);
+        break;
+    case CaptureButton::TYPE_PIN:
+        tool = new PinTool(parent);
         break;
     default:
         tool = nullptr;
