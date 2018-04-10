@@ -24,8 +24,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
-VisualsEditor::VisualsEditor(QWidget *parent) : QWidget(parent)
-{
+VisualsEditor::VisualsEditor(QWidget *parent) : QWidget(parent) {
     m_layout= new QVBoxLayout();
     setLayout(m_layout);
     initWidgets();

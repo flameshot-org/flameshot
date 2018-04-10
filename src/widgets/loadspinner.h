@@ -19,8 +19,7 @@
 
 #include <QWidget>
 
-class LoadSpinner : public QWidget
-{
+class LoadSpinner : public QWidget {
     Q_OBJECT
 public:
     explicit LoadSpinner(QWidget *parent = nullptr);

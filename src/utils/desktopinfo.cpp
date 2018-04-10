@@ -18,8 +18,7 @@
 #include "desktopinfo.h"
 #include <QProcessEnvironment>
 
-DesktopInfo::DesktopInfo()
-{
+DesktopInfo::DesktopInfo() {
     auto e = QProcessEnvironment::systemEnvironment();
     XDG_CURRENT_DESKTOP = e.value("XDG_CURRENT_DESKTOP");
     XDG_SESSION_TYPE = e.value("XDG_SESSION_TYPE");

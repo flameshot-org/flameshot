@@ -63,5 +63,4 @@ private:
     QPointer<InfoWindow> m_infoWindow;
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
-
 };

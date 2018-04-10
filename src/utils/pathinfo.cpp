@@ -20,7 +20,15 @@
 #include <QFileInfo>
 #include <QDir>
 
-QStringList PathInfo::translations() {
+const QString PathInfo::whiteIconPath() {
+    return ":/img/buttonIconsWhite/";
+}
+
+const QString PathInfo::blackIconPath() {
+    return ":/img/buttonIconsBlack/";
+}
+
+QStringList PathInfo::translationsPaths() {
     QString binaryPath = QFileInfo(qApp->applicationFilePath())
             .absoluteFilePath();
     QString trPath = QDir::toNativeSeparators(binaryPath) + "translations";

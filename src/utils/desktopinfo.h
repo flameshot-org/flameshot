@@ -19,8 +19,7 @@
 
 #include <QString>
 
-class DesktopInfo
-{
+class DesktopInfo {
 public:
     DesktopInfo();
 
@@ -41,5 +40,4 @@ private:
     QString GNOME_DESKTOP_SESSION_ID;
     QString GDMSESSION;
     QString DESKTOP_SESSION;
-
 };

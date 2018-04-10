@@ -18,6 +18,7 @@
 #include "src/utils/confighandler.h"
 #include "uicoloreditor.h"
 #include "clickablelabel.h"
+#include "src/utils/globalvalues.h"
 #include <QHBoxLayout>
 #include <QApplication>
 #include <QVBoxLayout>
@@ -85,7 +86,7 @@ void UIcolorEditor::initColorWheel() {
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
             &UIcolorEditor::updateLocalColor);
 
-    const int size = CaptureButton::buttonBaseSize() * 3;
+    const int size = GlobalValues::buttonBaseSize() * 3;
     m_colorWheel->setMinimumSize(size, size);
     m_colorWheel->setMaximumSize(size*2, size*2);
     m_colorWheel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -96,8 +97,8 @@ void UIcolorEditor::initColorWheel() {
 }
 
 void UIcolorEditor::initButtons() {
-    const int extraSize = CaptureButton::buttonBaseSize() / 3;
-    int frameSize = CaptureButton::buttonBaseSize() + extraSize;
+    const int extraSize = GlobalValues::buttonBaseSize() / 3;
+    int frameSize = GlobalValues::buttonBaseSize() + extraSize;
 
     m_vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));
 

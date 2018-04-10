@@ -40,5 +40,4 @@ private:
     GeneneralConf *m_generalConfig;
     VisualsEditor *m_visuals;
     QFileSystemWatcher *m_configWatcher;
-
 };

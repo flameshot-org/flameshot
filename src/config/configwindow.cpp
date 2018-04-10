@@ -16,12 +16,15 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "configwindow.h"
-#include "src/capture/widgets/capturebutton.h"
+#include "src/utils/colorutils.h"
+#include "src/utils/confighandler.h"
+#include "src/utils/pathinfo.h"
+#include "src/widgets/capture/capturebutton.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/strftimechooserwidget.h"
-#include "src/utils/confighandler.h"
 #include "src/config/visualseditor.h"
+#include "src/utils/globalvalues.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -32,7 +35,7 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    const int size = CaptureButton::buttonBaseSize() * 12;
+    const int size = GlobalValues::buttonBaseSize() * 12;
     setMinimumSize(size, size);
     setWindowIcon(QIcon(":img/flameshot.png"));
     setWindowTitle(tr("Configuration"));
@@ -42,7 +45,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
         if (!files.contains(s)) {
             this->m_configWatcher->addPath(s);
         }
-        Q_EMIT updateChildren();
+        emit updateChildren();
     };
     m_configWatcher = new QFileSystemWatcher(this);
     m_configWatcher->addPath(ConfigHandler().configFilePath());
@@ -50,8 +53,8 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
             this, changedSlot);
 
     QColor background = this->palette().background().color();
-    bool isWhite = CaptureButton::iconIsWhiteByColor(background);
-    QString modifier = isWhite ? ":img/configWhite/" : ":img/configBlack/";
+    bool isDark = ColorUtils::colorIsDark(background);
+    QString modifier = isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
 
     // visuals
     m_visuals = new VisualsEditor();

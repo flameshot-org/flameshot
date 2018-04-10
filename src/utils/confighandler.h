@@ -17,12 +17,11 @@
 
 #pragma once
 
-#include "src/capture/widgets/capturebutton.h"
+#include "src/widgets/capture/capturebutton.h"
 #include <QVector>
 #include <QSettings>
 
-class ConfigHandler
-{
+class ConfigHandler {
 public:
     explicit ConfigHandler();
 
@@ -80,5 +79,4 @@ private:
 
     QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
     QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
-
 };

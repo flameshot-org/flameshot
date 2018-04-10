@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
         SingleApplication app(argc, argv);
 
         QTranslator translator;
-        QStringList trPaths = PathInfo::translations();
+        QStringList trPaths = PathInfo::translationsPaths();
         bool match = false;
         for (const QString &path: trPaths) {
             match = translator.load(QLocale::system().language(),

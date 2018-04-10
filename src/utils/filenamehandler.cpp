@@ -49,8 +49,7 @@ QString FileNameHandler::parseFilename(const QString &name) {
     return res;
 }
 
-QString FileNameHandler::generateAbsolutePath(const QString &path)
-{
+QString FileNameHandler::generateAbsolutePath(const QString &path) {
     QString directory = path;
     QString filename = parsedPattern();
     fixPath(directory, filename);

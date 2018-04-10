@@ -66,13 +66,11 @@ include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp \
-    src/capture/widgets/buttonhandler.cpp \
-    src/infowindow.cpp \
+    src/widgets/capture/buttonhandler.cpp \
+    src/widgets/infowindow.cpp \
     src/config/configwindow.cpp \
-    src/capture/screenshot.cpp \
-    src/capture/widgets/capturewidget.cpp \
-    src/capture/capturemodification.cpp \
-    src/capture/widgets/colorpicker.cpp \
+    src/widgets/capture/capturewidget.cpp \
+    src/widgets/capture/colorpicker.cpp \
     src/config/buttonlistview.cpp \
     src/config/uicoloreditor.cpp \
     src/config/geneneralconf.cpp \
@@ -80,23 +78,23 @@ SOURCES += src/main.cpp \
     src/config/clickablelabel.cpp \
     src/config/filenameeditor.cpp \
     src/config/strftimechooserwidget.cpp \
-    src/capture/tools/capturetool.cpp \
-    src/capture/widgets/capturebutton.cpp \
-    src/capture/tools/penciltool.cpp \
-    src/capture/tools/undotool.cpp \
-    src/capture/tools/arrowtool.cpp \
-    src/capture/tools/circletool.cpp \
-    src/capture/tools/copytool.cpp \
-    src/capture/tools/exittool.cpp \
-    src/capture/tools/imguruploadertool.cpp \
-    src/capture/tools/linetool.cpp \
-    src/capture/tools/markertool.cpp \
-    src/capture/tools/movetool.cpp \
-    src/capture/tools/rectangletool.cpp \
-    src/capture/tools/savetool.cpp \
-    src/capture/tools/selectiontool.cpp \
-    src/capture/tools/sizeindicatortool.cpp \
-    src/capture/tools/toolfactory.cpp \
+    src/widgets/capture/capturebutton.cpp \
+    src/tools/pencil/penciltool.cpp \
+    src/tools/undo/undotool.cpp \
+    src/tools/redo/redotool.cpp \
+    src/tools/arrow/arrowtool.cpp \
+    src/tools/circle/circletool.cpp \
+    src/tools/copy/copytool.cpp \
+    src/tools/exit/exittool.cpp \
+    src/tools/imgur/imguruploadertool.cpp \
+    src/tools/line/linetool.cpp \
+    src/tools/marker/markertool.cpp \
+    src/tools/move/movetool.cpp \
+    src/tools/rectangle/rectangletool.cpp \
+    src/tools/save/savetool.cpp \
+    src/tools/selection/selectiontool.cpp \
+    src/tools/sizeindicator/sizeindicatortool.cpp \
+    src/tools/toolfactory.cpp \
     src/utils/filenamehandler.cpp \
     src/utils/screengrabber.cpp \
     src/utils/confighandler.cpp \
@@ -104,32 +102,36 @@ SOURCES += src/main.cpp \
     src/cli/commandlineparser.cpp \
     src/cli/commandoption.cpp \
     src/cli/commandargument.cpp \
-    src/capture/workers/screenshotsaver.cpp \
-    src/capture/workers/imgur/imguruploader.cpp \
+    src/utils/screenshotsaver.cpp \
+    src/tools/imgur/imguruploader.cpp \
     src/widgets/loadspinner.cpp \
     src/widgets/imagelabel.cpp \
     src/widgets/notificationwidget.cpp \
-    src/core/resourceexporter.cpp \
-    src/capture/widgets/notifierbox.cpp \
+    src/widgets/capture/notifierbox.cpp \
     src/utils/desktopinfo.cpp \
-    src/capture/workers/launcher/applauncherwidget.cpp \
-    src/capture/tools/applauncher.cpp \
+    src/tools/launcher/applauncherwidget.cpp \
     src/utils/desktopfileparse.cpp \
-    src/capture/workers/launcher/launcheritemdelegate.cpp \
-    src/capture/tools/blurtool.cpp \
-    src/capture/workers/launcher/terminallauncher.cpp \
+    src/tools/launcher/launcheritemdelegate.cpp \
+    src/tools/blur/blurtool.cpp \
+    src/tools/launcher/terminallauncher.cpp \
     src/config/visualseditor.cpp \
     src/config/extendedslider.cpp \
-    src/capture/workers/launcher/openwithprogram.cpp \
-    src/utils/pathinfo.cpp
+    src/tools/launcher/openwithprogram.cpp \
+    src/tools/launcher/applaunchertool.cpp \
+    src/utils/pathinfo.cpp \
+    src/utils/colorutils.cpp \
+    src/tools/capturecontext.cpp \
+    src/widgets/capture/modificationcommand.cpp \
+    src/tools/abstractpathtool.cpp \
+    src/tools/abstracttwopointtool.cpp \
+    src/tools/abstractactiontool.cpp \
+    src/utils/globalvalues.cpp
 
-HEADERS  += src/capture/widgets/buttonhandler.h \
-    src/infowindow.h \
+HEADERS  += src/widgets/capture/buttonhandler.h \
+    src/widgets/infowindow.h \
     src/config/configwindow.h \
-    src/capture/screenshot.h \
-    src/capture/widgets/capturewidget.h \
-    src/capture/capturemodification.h \
-    src/capture/widgets/colorpicker.h \
+    src/widgets/capture/capturewidget.h \
+    src/widgets/capture/colorpicker.h \
     src/config/buttonlistview.h \
     src/config/uicoloreditor.h \
     src/config/geneneralconf.h \
@@ -138,47 +140,54 @@ HEADERS  += src/capture/widgets/buttonhandler.h \
     src/utils/filenamehandler.h \
     src/config/strftimechooserwidget.h \
     src/utils/screengrabber.h \
-    src/capture/tools/capturetool.h \
-    src/capture/widgets/capturebutton.h \
-    src/capture/tools/penciltool.h \
-    src/capture/tools/undotool.h \
-    src/capture/tools/arrowtool.h \
-    src/capture/tools/circletool.h \
-    src/capture/tools/copytool.h \
-    src/capture/tools/exittool.h \
-    src/capture/tools/imguruploadertool.h \
-    src/capture/tools/linetool.h \
-    src/capture/tools/markertool.h \
-    src/capture/tools/movetool.h \
-    src/capture/tools/rectangletool.h \
-    src/capture/tools/savetool.h \
-    src/capture/tools/selectiontool.h \
-    src/capture/tools/sizeindicatortool.h \
-    src/capture/tools/toolfactory.h \
+    src/tools/capturetool.h \
+    src/widgets/capture/capturebutton.h \
+    src/tools/pencil/penciltool.h \
+    src/tools/undo/undotool.h \
+    src/tools/redo/redotool.h \
+    src/tools/arrow/arrowtool.h \
+    src/tools/circle/circletool.h \
+    src/tools/copy/copytool.h \
+    src/tools/exit/exittool.h \
+    src/tools/imgur/imguruploadertool.h \
+    src/tools/line/linetool.h \
+    src/tools/marker/markertool.h \
+    src/tools/move/movetool.h \
+    src/tools/rectangle/rectangletool.h \
+    src/tools/save/savetool.h \
+    src/tools/selection/selectiontool.h \
+    src/tools/sizeindicator/sizeindicatortool.h \
+    src/tools/toolfactory.h \
     src/utils/confighandler.h \
     src/core/controller.h \
     src/utils/systemnotification.h \
     src/cli/commandlineparser.h \
     src/cli/commandoption.h \
     src/cli/commandargument.h \
-    src/capture/workers/screenshotsaver.h \
-    src/capture/workers/imgur/imguruploader.h \
+    src/utils/screenshotsaver.h \
+    src/tools/imgur/imguruploader.h \
     src/widgets/loadspinner.h \
     src/widgets/imagelabel.h \
     src/widgets/notificationwidget.h \
-    src/core/resourceexporter.h \
-    src/capture/widgets/notifierbox.h \
+    src/widgets/capture/notifierbox.h \
     src/utils/desktopinfo.h \
-    src/capture/workers/launcher/applauncherwidget.h \
-    src/capture/tools/applauncher.h \
+    src/tools/launcher/applauncherwidget.h \
     src/utils/desktopfileparse.h \
-    src/capture/workers/launcher/launcheritemdelegate.h \
-    src/capture/tools/blurtool.h \
-    src/capture/workers/launcher/terminallauncher.h \
+    src/tools/launcher/launcheritemdelegate.h \
+    src/tools/blur/blurtool.h \
+    src/tools/launcher/terminallauncher.h \
     src/config/visualseditor.h \
     src/config/extendedslider.h \
-    src/capture/workers/launcher/openwithprogram.h \
-    src/utils/pathinfo.h
+    src/tools/launcher/openwithprogram.h \
+    src/utils/pathinfo.h \
+    src/tools/capturecontext.h \
+    src/tools/launcher/applaunchertool.h \
+    src/utils/globalvalues.h \
+    src/utils/colorutils.h \
+    src/widgets/capture/modificationcommand.h \
+    src/tools/abstractpathtool.h \
+    src/tools/abstracttwopointtool.h \
+    src/tools/abstractactiontool.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

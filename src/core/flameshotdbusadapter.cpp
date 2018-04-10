@@ -19,7 +19,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/core/controller.h"
-#include "src/core/resourceexporter.h"
+#include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
 #include <QTimer>
 #include <functional>
@@ -72,20 +72,19 @@ void FlameshotDBusAdapter::fullScreen(
         QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
         if (!ok) {
             SystemNotification().sendMessage(tr("Unable to capture screen"));
-            Q_EMIT captureFailed(id);
+            emit captureFailed(id);
             return;
         }
-        // This needs to be done first in order to prevent a severe block
         if(!path.isEmpty()) {
-            ResourceExporter().captureToFile(p, path);
+            ScreenshotSaver().saveToFilesystem(p, path);
         }
         if(toClipboard) {
-            ResourceExporter().captureToClipboard(p);
+            ScreenshotSaver().saveToClipboard(p);
         }
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         p.save(&buffer, "PNG");
-        Q_EMIT captureTaken(id, byteArray);
+        emit captureTaken(id, byteArray);
     };
     //QTimer::singleShot(delay, this, f); // // requires Qt 5.4
     doLater(delay, this, f);

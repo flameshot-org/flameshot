@@ -29,28 +29,26 @@
 #include <QPixmap>
 #include <QGraphicsDropShadowEffect>
 
-class ImageLabel : public QLabel
-{
+class ImageLabel : public QLabel {
     Q_OBJECT
 
 public:
-    explicit ImageLabel(QWidget *parent = 0);
+    explicit ImageLabel(QWidget *parent = nullptr);
     void setScreenshot(const QPixmap &pixmap);
 
 signals:
     void dragInitiated();
 
 protected:
-    void mousePressEvent(QMouseEvent *event)   Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
     void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void mouseMoveEvent(QMouseEvent *event)    Q_DECL_OVERRIDE;
-    void resizeEvent(QResizeEvent *event)      Q_DECL_OVERRIDE;
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
 private:
     void setScaledPixmap();
 
     QGraphicsDropShadowEffect *m_DSEffect;
-    QPixmap                    m_pixmap;
-    QPoint                     m_dragStartPosition;
-
+    QPixmap m_pixmap;
+    QPoint m_dragStartPosition;
 };

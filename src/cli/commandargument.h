@@ -19,8 +19,7 @@
 
 #include <QString>
 
-class CommandArgument
-{
+class CommandArgument {
 public:
     CommandArgument();
     explicit CommandArgument(const QString &name, const QString &description);
@@ -38,5 +37,4 @@ public:
 private:
     QString m_name;
     QString m_description;
-
 };

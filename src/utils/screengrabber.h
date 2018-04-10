@@ -20,8 +20,7 @@
 #include "src/utils/desktopinfo.h"
 #include <QObject>
 
-class ScreenGrabber : public QObject
-{
+class ScreenGrabber : public QObject {
     Q_OBJECT
 public:
     explicit ScreenGrabber(QObject *parent = nullptr);

@@ -18,7 +18,7 @@
 #pragma once
 
 #include "color_wheel.hpp"
-#include "src/capture/widgets/capturebutton.h"
+#include "src/widgets/capture/capturebutton.h"
 #include <QGroupBox>
 
 class QVBoxLayout;
@@ -55,5 +55,4 @@ private:
 
     void initColorWheel();
     void initButtons();
-
 };

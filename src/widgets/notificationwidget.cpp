@@ -24,8 +24,7 @@
 #include <QFrame>
 #include <QIcon>
 
-NotificationWidget::NotificationWidget(QWidget *parent) : QWidget(parent)
-{
+NotificationWidget::NotificationWidget(QWidget *parent) : QWidget(parent) {
     m_timer = new QTimer(this);
     m_timer->setSingleShot(true);
     m_timer->setInterval(7000);

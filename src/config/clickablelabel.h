@@ -19,8 +19,7 @@
 
 #include <QLabel>
 
-class ClickableLabel : public QLabel
-{
+class ClickableLabel : public QLabel {
     Q_OBJECT
 public:
     explicit ClickableLabel(QWidget *parent = nullptr);
@@ -31,5 +30,4 @@ signals:
 
 private:
     void mousePressEvent (QMouseEvent *);
-
 };

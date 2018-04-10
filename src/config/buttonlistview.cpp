@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "buttonlistview.h"
-#include "src/capture/tools/toolfactory.h"
+#include "src/tools/toolfactory.h"
 #include "src/utils/confighandler.h"
 #include <QListWidgetItem>
 #include <algorithm>
@@ -45,14 +45,7 @@ void ButtonListView::initButtonList() {
 
         // when the background is lighter than gray, it uses the white icons
         QColor bgColor = this->palette().color(QWidget::backgroundRole());
-        QString color = bgColor.valueF() < 0.6 ? "White" : "Black";
-        QString iconPath = QStringLiteral(":/img/buttonIcons%1/%2")
-                .arg(color).arg(tool->iconName());
-        if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
-            iconPath = QStringLiteral(":/img/buttonIcons%1/size_indicator.png")
-                    .arg(color);
-        }
-        m_buttonItem->setIcon(QIcon(iconPath));
+        m_buttonItem->setIcon(tool->icon(bgColor, false));
 
         m_buttonItem->setFlags(Qt::ItemIsUserCheckable);
         QColor foregroundColor = this->palette().color(QWidget::foregroundRole());

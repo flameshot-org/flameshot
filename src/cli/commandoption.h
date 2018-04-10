@@ -22,8 +22,7 @@
 
 using std::function;
 
-class CommandOption
-{
+class CommandOption {
 public:
     CommandOption(const QString &name, const QString &description,
                   const QString &valueName = QString(),
@@ -61,5 +60,4 @@ private:
 
     function<bool(QString const&)> m_checker;
     QString m_errorMsg;
-
 };

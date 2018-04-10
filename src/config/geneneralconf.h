@@ -55,5 +55,4 @@ private:
     void initShowTrayIcon();
     void initConfingButtons();
     void initAutostart();
-
 };

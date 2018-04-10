@@ -20,8 +20,7 @@
 #include <QSlider>
 #include <QTimer>
 
-class ExtendedSlider : public QSlider
-{
+class ExtendedSlider : public QSlider {
     Q_OBJECT
 public:
     explicit ExtendedSlider(QWidget *parent = nullptr);
@@ -38,5 +37,4 @@ private slots:
 
 private:
     QTimer m_timer;
-
 };

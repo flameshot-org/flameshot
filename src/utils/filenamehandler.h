@@ -19,8 +19,7 @@
 
 #include <QObject>
 
-class FileNameHandler : public QObject
-{
+class FileNameHandler : public QObject {
     Q_OBJECT
 public:
     explicit FileNameHandler(QObject *parent = nullptr);
@@ -43,5 +42,4 @@ private:
     char * QStringTocharArr(const QString &s);
 
     void fixPath(QString &directory, QString &filename);
-
 };
