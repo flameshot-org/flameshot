@@ -31,19 +31,19 @@ QString FileNameHandler::parsedPattern() {
 }
 
 QString FileNameHandler::parseFilename(const QString &name) {
-    QString res;
+    QString res = name;
     if (name.isEmpty()) {
-        res = tr("screenshot");
-    } else {
-        std::time_t t = std::time(NULL);
-
-        char *tempData = QStringTocharArr(name);
-        char data[MAX_CHARACTERS] = {0};
-        std::strftime(data, sizeof(data),
-                      tempData, std::localtime(&t));
-        res = QString::fromLocal8Bit(data, (int)strlen(data));
-        free(tempData);
+        res = "%F_%R";
     }
+    std::time_t t = std::time(NULL);
+
+    char *tempData = QStringTocharArr(res);
+    char data[MAX_CHARACTERS] = {0};
+    std::strftime(data, sizeof(data),
+                  tempData, std::localtime(&t));
+    res = QString::fromLocal8Bit(data, (int)strlen(data));
+    free(tempData);
+
     // add the parsed pattern in a correct format for the filesystem
     res = res.replace("/", "⁄");
     return res;
