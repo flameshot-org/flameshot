@@ -17,7 +17,9 @@
 
 #include "abstractpathtool.h"
 
-AbstractPathTool::AbstractPathTool(QObject *parent)  : CaptureTool(parent) {
+AbstractPathTool::AbstractPathTool(QObject *parent)  :
+    CaptureTool(parent), m_thickness(0), m_padding(0)
+{
 
 }
 
@@ -47,7 +49,7 @@ QWidget *AbstractPathTool::configurationWidget() {
 
 void AbstractPathTool::undo(QPixmap &pixmap) {
     QPainter p(&pixmap);
-    const int val = m_thickness;
+    const int val = m_thickness + m_padding;
     QRect area = m_backupArea + QMargins(val, val, val, val);
     p.drawPixmap(area.intersected(pixmap.rect())
                  .topLeft(), m_pixmapBackup);
@@ -62,7 +64,7 @@ void AbstractPathTool::drawMove(const QPoint &p) {
 }
 
 void AbstractPathTool::updateBackup(const QPixmap &pixmap) {
-    const int val = m_thickness;
+    const int val = m_thickness + m_padding;
     QRect area = m_backupArea.normalized() + QMargins(val, val, val, val);
     m_pixmapBackup = pixmap.copy(area);
 }

@@ -46,4 +46,6 @@ protected:
     QRect m_backupArea;
     QVector<QPoint> m_points;
     int m_thickness;
+    // use m_padding to extend the area of the backup
+    int m_padding;
 };
