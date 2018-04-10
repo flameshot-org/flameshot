@@ -26,8 +26,7 @@ class FileNameHandler;
 class QPushButton;
 class StrftimeChooserWidget;
 
-class FileNameEditor : public QWidget
-{
+class FileNameEditor : public QWidget {
     Q_OBJECT
 public:
     explicit FileNameEditor(QWidget *parent = nullptr);
@@ -53,5 +52,4 @@ private slots:
     void savePattern();
     void showParsedPattern(const QString &);
     void resetName();
-
 };

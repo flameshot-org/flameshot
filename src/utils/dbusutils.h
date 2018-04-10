@@ -21,8 +21,7 @@
 #include <QDBusConnection>
 #include <QObject>
 
-class DBusUtils : public QObject
-{
+class DBusUtils : public QObject {
     Q_OBJECT
 public:
     explicit DBusUtils(QObject *parent = nullptr);

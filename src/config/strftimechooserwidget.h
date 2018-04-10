@@ -19,8 +19,7 @@
 
 #include <QWidget>
 
-class StrftimeChooserWidget : public QWidget
-{
+class StrftimeChooserWidget : public QWidget {
     Q_OBJECT
 public:
     explicit StrftimeChooserWidget(QWidget *parent = nullptr);
@@ -30,5 +29,4 @@ signals:
 
 private:
     static QMap<QString, QString> m_buttonData;
-
 };

@@ -24,8 +24,7 @@ class QVBoxLayout;
 class ButtonListView;
 class UIcolorEditor;
 
-class VisualsEditor : public QWidget
-{
+class VisualsEditor : public QWidget {
     Q_OBJECT
 public:
     explicit VisualsEditor(QWidget *parent = nullptr);

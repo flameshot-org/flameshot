@@ -381,8 +381,8 @@ void ColorWheel::mouseMoveEvent(QMouseEvent *ev)
         p->hue = p->line_to_point(ev->pos()).angle()/360.0;
         p->render_inner_selector();
 
-        Q_EMIT colorSelected(color());
-        Q_EMIT colorChanged(color());
+        emit colorSelected(color());
+        emit colorChanged(color());
         update();
     }
     else if(p->mouse_status == DragSquare)
@@ -414,8 +414,8 @@ void ColorWheel::mouseMoveEvent(QMouseEvent *ev)
                 p->sat = qBound(0.0, (pt.y()-ymin)/slice_h, 1.0);
         }
 
-        Q_EMIT colorSelected(color());
-        Q_EMIT colorChanged(color());
+        emit colorSelected(color());
+        emit colorChanged(color());
         update();
     }
 }
@@ -440,7 +440,7 @@ void ColorWheel::mouseReleaseEvent(QMouseEvent *ev)
 {
     mouseMoveEvent(ev);
     p->mouse_status = Nothing;
-    Q_EMIT mouseReleaseOnColor(color());
+    emit mouseReleaseOnColor(color());
 
 }
 
@@ -457,7 +457,7 @@ void ColorWheel::setColor(QColor c)
     if (!qFuzzyCompare(oldh+1, p->hue+1))
         p->render_inner_selector();
     update();
-    Q_EMIT colorChanged(c);
+    emit colorChanged(c);
 }
 
 void ColorWheel::setHue(qreal h)
@@ -522,7 +522,7 @@ void ColorWheel::setDisplayFlags(DisplayFlags flags)
     p->display_flags = flags;
     p->render_inner_selector();
     update();
-    Q_EMIT displayFlagsChanged(flags);
+    emit displayFlagsChanged(flags);
 }
 
 ColorWheel::DisplayFlags ColorWheel::displayFlags(DisplayFlags mask) const

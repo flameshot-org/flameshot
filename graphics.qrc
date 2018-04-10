@@ -43,5 +43,7 @@
         <file>img/buttonIconsWhite/open_with.png</file>
         <file>img/buttonIconsBlack/blur.png</file>
         <file>img/buttonIconsWhite/blur.png</file>
+        <file>img/buttonIconsBlack/redo-variant.png</file>
+        <file>img/buttonIconsWhite/redo-variant.png</file>
     </qresource>
 </RCC>

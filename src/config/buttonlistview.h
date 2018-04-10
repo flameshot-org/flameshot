@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "src/capture/widgets/capturebutton.h"
+#include "src/widgets/capture/capturebutton.h"
 #include <QListWidget>
 
 class ButtonListView : public QListWidget {
@@ -39,5 +39,4 @@ private:
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem *);
-
 };

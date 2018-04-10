@@ -25,8 +25,7 @@ class QPropertyAnimation;
 class QVBoxLayout;
 class QFrame;
 
-class NotificationWidget : public QWidget
-{
+class NotificationWidget : public QWidget {
     Q_OBJECT
 public:
     explicit NotificationWidget(QWidget *parent = nullptr);
@@ -43,5 +42,4 @@ private:
 
     void animatedShow();
     void animatedHide();
-
 };

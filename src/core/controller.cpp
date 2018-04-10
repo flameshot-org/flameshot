@@ -16,11 +16,11 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
-#include "src/capture/widgets/capturewidget.h"
+#include "src/widgets/capture/capturewidget.h"
 #include "src/utils/confighandler.h"
-#include "src/infowindow.h"
+#include "src/widgets/infowindow.h"
 #include "src/config/configwindow.h"
-#include "src/capture/widgets/capturebutton.h"
+#include "src/widgets/capture/capturebutton.h"
 #include <QFile>
 #include <QApplication>
 #include <QSystemTrayIcon>
@@ -34,8 +34,7 @@
 // Controller is the core component of Flameshot, creates the trayIcon and
 // launches the capture widget
 
-Controller::Controller() : m_captureWindow(nullptr)
-{
+Controller::Controller() : m_captureWindow(nullptr) {
     qApp->setQuitOnLastWindowClosed(false);
 
     // init tray icon

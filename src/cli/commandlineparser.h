@@ -21,8 +21,7 @@
 #include "src/cli/commandoption.h"
 #include <QMap>
 
-class CommandLineParser
-{
+class CommandLineParser {
 public:
     CommandLineParser();
 
@@ -87,5 +86,4 @@ private:
     bool processOptions(const QStringList &args,
                         QStringList::const_iterator &actualIt,
                         Node *const actualNode);
-
 };

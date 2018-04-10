@@ -49,7 +49,7 @@ void DBusUtils::captureTaken(uint id, QByteArray rawImage) {
 
 void DBusUtils::captureFailed(uint id) {
     if (m_id == id) {
-        QTextStream(stdout) << "screenshot failed";
+        QTextStream(stdout) << "screenshot aborted\n";
         qApp->exit();
     }
 }

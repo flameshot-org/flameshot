@@ -66,8 +66,7 @@ void ImageLabel::mouseReleaseEvent(QMouseEvent *event) {
     }
 }
 
-void ImageLabel::mouseMoveEvent(QMouseEvent *event)
-{
+void ImageLabel::mouseMoveEvent(QMouseEvent *event) {
     if (!(event->buttons() & Qt::LeftButton)) {
         return;
     }

@@ -20,8 +20,7 @@
 #include <QtDBus/QDBusAbstractAdaptor>
 #include "src/core/controller.h"
 
-class FlameshotDBusAdapter : public QDBusAbstractAdaptor
-{
+class FlameshotDBusAdapter : public QDBusAbstractAdaptor {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.dharkael.Flameshot")
 
@@ -38,5 +37,4 @@ public slots:
     Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
-
 };

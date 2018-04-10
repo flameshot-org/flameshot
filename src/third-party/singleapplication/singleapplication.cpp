@@ -313,7 +313,7 @@ void SingleApplicationPrivate::slotConnectionEstablished()
         &QLocalSocket::aboutToClose,
         this,
         [nextConnSocket, instanceId, this]() {
-            Q_EMIT this->slotClientConnectionClosed( nextConnSocket, instanceId );
+            emit this->slotClientConnectionClosed( nextConnSocket, instanceId );
         }
     );
 
@@ -322,7 +322,7 @@ void SingleApplicationPrivate::slotConnectionEstablished()
         &QLocalSocket::readyRead,
         this,
         [nextConnSocket, instanceId, this]() {
-            Q_EMIT this->slotDataAvailable( nextConnSocket, instanceId );
+            emit this->slotDataAvailable( nextConnSocket, instanceId );
         }
     );
 
@@ -331,24 +331,24 @@ void SingleApplicationPrivate::slotConnectionEstablished()
             options & SingleApplication::Mode::SecondaryNotification
         )
     ) {
-        Q_EMIT q->instanceStarted();
+        emit q->instanceStarted();
     }
 
     if( nextConnSocket->bytesAvailable() > 0 ) {
-        Q_EMIT this->slotDataAvailable( nextConnSocket, instanceId );
+        emit this->slotDataAvailable( nextConnSocket, instanceId );
     }
 }
 
 void SingleApplicationPrivate::slotDataAvailable( QLocalSocket *dataSocket, quint32 instanceId )
 {
     Q_Q(SingleApplication);
-    Q_EMIT q->receivedMessage( instanceId, dataSocket->readAll() );
+    emit q->receivedMessage( instanceId, dataSocket->readAll() );
 }
 
 void SingleApplicationPrivate::slotClientConnectionClosed( QLocalSocket *closedSocket, quint32 instanceId )
 {
     if( closedSocket->bytesAvailable() > 0 )
-        Q_EMIT slotDataAvailable( closedSocket, instanceId  );
+        emit slotDataAvailable( closedSocket, instanceId  );
     closedSocket->deleteLater();
 }
 

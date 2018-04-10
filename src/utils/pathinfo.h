@@ -19,8 +19,12 @@
 
 #include <QStringList>
 
-class PathInfo
-{
-public:
-    static QStringList translations();
-};
+namespace PathInfo { // namespace
+
+const QString whiteIconPath();
+
+const QString blackIconPath();
+
+QStringList translationsPaths();
+
+} // namespace

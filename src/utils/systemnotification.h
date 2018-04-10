@@ -21,8 +21,7 @@
 
 class QDBusInterface;
 
-class SystemNotification : public QObject
-{
+class SystemNotification : public QObject {
     Q_OBJECT
 public:
     explicit SystemNotification(QObject *parent = nullptr);
@@ -33,5 +32,4 @@ public:
 
 private:
     QDBusInterface *m_interface;
-
 };
