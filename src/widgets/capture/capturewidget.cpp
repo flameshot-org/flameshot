@@ -418,8 +418,11 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         m_activeTool = nullptr;
     }
 
-    // Show the buttons after the creation of a new selection
+    // Show the buttons after the resize of the selection or the creation
+    // of a new one.
     if (!m_buttonHandler->isVisible() && !m_context.selection.isNull()) {
+        // Don't go outside
+        m_context.selection = m_context.selection.intersected(rect());
         updateSizeIndicator();
         m_buttonHandler->updatePosition(m_context.selection);
         m_buttonHandler->show();
