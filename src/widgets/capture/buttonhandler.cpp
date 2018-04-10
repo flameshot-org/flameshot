@@ -91,6 +91,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
 
         // Add them inside the area when there is no more space
         if (m_allSidesBlocked) {
+            m_selection = selection;
             positionButtonsInside(elemIndicator);
             break; // the while
         }
@@ -280,29 +281,23 @@ void ButtonHandler::expandSelection() {
 }
 
 void ButtonHandler::positionButtonsInside(int index) {
-    // Position the buttons from left to right starting at the botton
-    // left of the selection.
-    // The main screen has priority as the reference when its x,y botton
-    // left corner values are lower than the ones  of the selection.
-    QRect mainArea = QGuiApplication::primaryScreen()->geometry();
-    int xPos = m_selection.left() + m_separator;
-    int yPos = m_selection.bottom() - m_buttonExtendedSize;
-    if (m_selection.left() < mainArea.left()) {
-        xPos = mainArea.left() + m_separator;
+    // Position the buttons in the botton-center of the main but inside of the
+    // selection.
+    QRect mainArea = QGuiApplication::primaryScreen()->geometry()
+            .intersected(m_selection);
+    const int buttonsPerRow = (mainArea.width()) / (m_buttonExtendedSize);
+    QPoint center = QPoint(mainArea.center().x(),
+                           mainArea.bottom() - m_buttonExtendedSize);
+
+    int addCounter;
+    while (m_vectorButtons.size() > index) {
+        addCounter = buttonsPerRow;
+        addCounter = qBound(0, addCounter, m_vectorButtons.size() - index);
+        QVector<QPoint> positions = horizontalPoints(center, addCounter, true);
+        moveButtonsToPoints(positions, index);
+        center.setY(center.y() - m_buttonExtendedSize);
     }
-    if (m_selection.bottom() > mainArea.bottom()) {
-        yPos = mainArea.bottom() - m_buttonExtendedSize;
-    }
-    CaptureButton *button = nullptr;
-    for (; index < m_vectorButtons.size(); ++index) {
-        button = m_vectorButtons[index];
-        button->move(xPos, yPos);
-        if (button->pos().x() + m_buttonExtendedSize > mainArea.right()) {
-            xPos = m_selection.left() + m_separator;
-            yPos -= (m_buttonExtendedSize);
-        }
-        xPos += (m_buttonExtendedSize);
-    }
+
     m_buttonsAreInside = true;
 }
 
