@@ -17,6 +17,12 @@
 
 #include "abstracttwopointtool.h"
 
+AbstractTwoPointTool::AbstractTwoPointTool(QObject *parent) :
+    CaptureTool(parent), m_thickness(0), m_padding(0)
+{
+
+}
+
 bool AbstractTwoPointTool::isValid() const {
     return (m_points.first != m_points.second);
 }
@@ -60,7 +66,7 @@ void AbstractTwoPointTool::updateBackup(const QPixmap &pixmap) {
 
 QRect AbstractTwoPointTool::backupRect(const QRect &limits) const {
     QRect r = QRect(m_points.first, m_points.second).normalized();
-    const int val = m_thickness;
+    const int val = m_thickness + m_padding;
     r += QMargins(val, val, val, val);
     return r.intersected(limits);
 }

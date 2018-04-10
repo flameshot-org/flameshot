@@ -22,7 +22,7 @@
 class AbstractTwoPointTool : public CaptureTool {
     Q_OBJECT
 public:
-    explicit AbstractTwoPointTool(QObject *parent = nullptr) : CaptureTool(parent){}
+    explicit AbstractTwoPointTool(QObject *parent = nullptr);
 
     bool isValid() const;
     bool closeOnButtonPressed() const;
@@ -45,5 +45,7 @@ protected:
     QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;
     int m_thickness;
+    // use m_padding to extend the area of the backup
+    int m_padding;
 
 };
