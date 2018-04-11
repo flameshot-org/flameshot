@@ -26,6 +26,18 @@ class ConfigWindow;
 class InfoWindow;
 class QSystemTrayIcon;
 
+////////////////////////////////////
+// TODO Separate later
+#include <QTimer>
+#include <functional>
+
+using lambda = std::function<void(void)>;
+
+// replace QTimer::singleShot introduced in QT 5.4
+// the actual target QT version is QT 5.3
+void doLater(int msec, QObject *receiver, lambda func);
+////////////////////////////////////
+
 class Controller : public QObject {
     Q_OBJECT
 

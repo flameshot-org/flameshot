@@ -21,24 +21,7 @@
 #include "src/core/controller.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
-#include <QTimer>
-#include <functional>
 #include <QBuffer>
-
-namespace {
-    using std::function;
-    using lambda = function<void(void)>;
-
-    // replace QTimer::singleShot introduced in QT 5.4
-    // the actual target QT version is QT 5.3
-    void doLater(int msec, QObject *receiver, lambda func) {
-        QTimer *timer = new QTimer(receiver);
-        QObject::connect(timer, &QTimer::timeout, receiver,
-                         [timer, func](){ func(); timer->deleteLater(); });
-        timer->setInterval(msec);
-        timer->start();
-    }
-}
 
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
     : QDBusAbstractAdaptor(parent)
