@@ -196,7 +196,7 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <name>FileNameHandler</name>
     <message>
         <source>screenshot</source>
-        <translation>captura</translation>
+        <translation type="vanished">captura</translation>
     </message>
 </context>
 <context>
@@ -478,6 +478,13 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>Sets the Rectangle as the paint tool</source>
         <translation>Estableix el rectangle com a eina de dibuix</translation>
+    </message>
+</context>
+<context>
+    <name>RedoTool</name>
+    <message>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
