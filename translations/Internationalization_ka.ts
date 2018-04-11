@@ -4,12 +4,12 @@
 <context>
     <name>AppLauncher</name>
     <message>
-        <location filename="../src/capture/tools/applauncher.cpp" line="38"/>
+        <location filename="../src/tools/launcher/applaunchertool.cpp" line="34"/>
         <source>App Launcher</source>
         <translation>აპლიკაციის გამშვები</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/applauncher.cpp" line="42"/>
+        <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
         <translation>აირჩიეთ აპლიკაცია სურათის გასახსნელად</translation>
     </message>
@@ -17,33 +17,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="56"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
         <translation>გახსნა პროგრამით</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="71"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
         <translation>ტერმინალში გაშვება</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="72"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
         <translation>არ დახურო დიალოგი არჩევის შემდეგ</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="111"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
         <translation>შეცდომა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
         <translation>შემდეგ მისამართზე ჩაწერა ვერ მოხერხდა:</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/applauncherwidget.cpp" line="112"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
         <translation>ტერმინალში გაშვება ვერ მოხერხდა.</translation>
     </message>
@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../src/capture/tools/arrowtool.cpp" line="77"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="80"/>
         <source>Arrow</source>
         <translation>ისარი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/arrowtool.cpp" line="81"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Sets the Arrow as the paint tool</source>
         <translation>ისრის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -64,12 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../src/capture/tools/blurtool.cpp" line="41"/>
+        <location filename="../src/tools/blur/blurtool.cpp" line="34"/>
         <source>Blur</source>
         <translation>გაბუნდოვნება</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/blurtool.cpp" line="45"/>
+        <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
         <source>Sets the Blur as the paint tool</source>
         <translation>გაბუნდოვნების ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/capture/widgets/capturewidget.cpp" line="87"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="97"/>
         <source>Unable to capture screen</source>
         <translation>ეკრანის გადაღება ვერ მოხერხდა</translation>
     </message>
     <message>
-        <location filename="../src/capture/widgets/capturewidget.cpp" line="221"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="221"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -96,12 +96,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>CircleTool</name>
     <message>
-        <location filename="../src/capture/tools/circletool.cpp" line="38"/>
+        <location filename="../src/tools/circle/circletool.cpp" line="34"/>
         <source>Circle</source>
         <translation>წრე</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/circletool.cpp" line="42"/>
+        <location filename="../src/tools/circle/circletool.cpp" line="42"/>
         <source>Sets the Circle as the paint tool</source>
         <translation>წრის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -109,22 +109,22 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="38"/>
+        <location filename="../src/config/configwindow.cpp" line="41"/>
         <source>Configuration</source>
         <translation>პარამეტრები</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="59"/>
+        <location filename="../src/config/configwindow.cpp" line="62"/>
         <source>Interface</source>
         <translation>ინტერფეისი</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="64"/>
+        <location filename="../src/config/configwindow.cpp" line="67"/>
         <source>Filename Editor</source>
         <translation>ფაილის სახელის რედაქტორი</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="69"/>
+        <location filename="../src/config/configwindow.cpp" line="72"/>
         <source>General</source>
         <translation>ზოგადი</translation>
     </message>
@@ -132,17 +132,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="109"/>
+        <location filename="../src/core/controller.cpp" line="108"/>
         <source>&amp;Configuration</source>
         <translation>&amp;პარამეტრები</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="112"/>
+        <location filename="../src/core/controller.cpp" line="111"/>
         <source>&amp;Information</source>
         <translation>&amp;ინფორმაცია</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="115"/>
+        <location filename="../src/core/controller.cpp" line="114"/>
         <source>&amp;Quit</source>
         <translation>&amp;გამოსვლა</translation>
     </message>
@@ -150,12 +150,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>CopyTool</name>
     <message>
-        <location filename="../src/capture/tools/copytool.cpp" line="38"/>
+        <location filename="../src/tools/copy/copytool.cpp" line="35"/>
         <source>Copy</source>
         <translation>კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/copytool.cpp" line="42"/>
+        <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selecion into the clipboard</source>
         <translation>შერჩეულის გაცვლის ბუფერში კოპირება</translation>
     </message>
@@ -171,12 +171,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ExitTool</name>
     <message>
-        <location filename="../src/capture/tools/exittool.cpp" line="38"/>
+        <location filename="../src/tools/exit/exittool.cpp" line="34"/>
         <source>Exit</source>
         <translation>გამოსვლა</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/exittool.cpp" line="42"/>
+        <location filename="../src/tools/exit/exittool.cpp" line="42"/>
         <source>Leave the capture screen</source>
         <translation>ეკრანის გადაღების დატოვება</translation>
     </message>
@@ -232,9 +232,8 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>FileNameHandler</name>
     <message>
-        <location filename="../src/utils/filenamehandler.cpp" line="36"/>
         <source>screenshot</source>
-        <translation>სურათი</translation>
+        <translation type="vanished">სურათი</translation>
     </message>
 </context>
 <context>
@@ -249,14 +248,14 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="174"/>
+        <location filename="../src/config/geneneralconf.cpp" line="178"/>
         <source>Import</source>
         <translation>იმპორტირება</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="105"/>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Error</source>
         <translation>შეცდომა</translation>
     </message>
@@ -267,7 +266,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="105"/>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Unable to write file.</source>
         <translation>ფაილის ჩაწერა ვერ მოხერხდა.</translation>
     </message>
@@ -277,63 +276,63 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>ფაილის შენახვა</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="112"/>
+        <location filename="../src/config/geneneralconf.cpp" line="116"/>
         <source>Confirm Reset</source>
         <translation>განულების დადასტურება</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="113"/>
+        <location filename="../src/config/geneneralconf.cpp" line="117"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>დარწმუნებული ხართ, რომ გსურთ პარამეტრების განულება?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="122"/>
+        <location filename="../src/config/geneneralconf.cpp" line="126"/>
         <source>Show help message</source>
         <translation>დახმარების შეტყობინების ნახვა</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="126"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>დახმარების შეტყობინების ნახვა გადაღების რეჟიმის დაწყებისას.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <location filename="../src/config/geneneralconf.cpp" line="140"/>
+        <location filename="../src/config/geneneralconf.cpp" line="144"/>
         <source>Show desktop notifications</source>
         <translation>ცნობების ჩვენება სამუშაო მაგიდაზე</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="149"/>
+        <location filename="../src/config/geneneralconf.cpp" line="153"/>
         <source>Show tray icon</source>
         <translation>ხატულის ჩვენება სისტემურ პანელზე</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="153"/>
+        <location filename="../src/config/geneneralconf.cpp" line="157"/>
         <source>Show the systemtray icon</source>
         <translation>ხატულის ჩვენება სისტემურ პანელზე</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="164"/>
+        <location filename="../src/config/geneneralconf.cpp" line="168"/>
         <source>Configuration File</source>
         <translation>პარამეტრების ფაილი</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="169"/>
+        <location filename="../src/config/geneneralconf.cpp" line="173"/>
         <source>Export</source>
         <translation>ექსპორტირება</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="179"/>
+        <location filename="../src/config/geneneralconf.cpp" line="183"/>
         <source>Reset</source>
         <translation>განულება</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="191"/>
         <source>Launch at startup</source>
         <translation>გაშვება სისტემის ჩატვირთვისას</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <location filename="../src/config/geneneralconf.cpp" line="195"/>
         <source>Launch Flameshot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -341,42 +340,42 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="45"/>
         <source>Upload to Imgur</source>
         <translation>Imgur-ზე ატვირთვა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="51"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="51"/>
         <source>Uploading Image</source>
         <translation>სურათის ატვირთვა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="129"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="129"/>
         <source>Copy URL</source>
         <translation>URL-ის კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="130"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="130"/>
         <source>Open URL</source>
         <translation>URL-ის გახსნა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="131"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="131"/>
         <source>Image to Clipboard.</source>
         <translation>სურათის გაცვლის ბუფერში გაგზავნა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="148"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="148"/>
         <source>Unable to open the URL.</source>
         <translation>URL-ის გახსნა ვერ მოხერხდა.</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="154"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="154"/>
         <source>URL copied to clipboard.</source>
         <translation>URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/imgur/imguruploader.cpp" line="159"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="159"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
@@ -384,12 +383,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../src/capture/tools/imguruploadertool.cpp" line="38"/>
+        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="35"/>
         <source>Image Uploader</source>
         <translation>სურათის ამტვირთველი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/imguruploadertool.cpp" line="42"/>
+        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
         <source>Uploads the selection to Imgur</source>
         <translation>შერჩეულის Imgur-ზე ატვირთვა</translation>
     </message>
@@ -397,87 +396,87 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/infowindow.cpp" line="31"/>
+        <location filename="../src/widgets/infowindow.cpp" line="31"/>
         <source>About</source>
         <translation>პროგრამის შესახებ</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="48"/>
+        <location filename="../src/widgets/infowindow.cpp" line="48"/>
         <source>Right Click</source>
         <translation>მაუსის მარჯვენა ღილაკი</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="49"/>
+        <location filename="../src/widgets/infowindow.cpp" line="49"/>
         <source>Mouse Wheel</source>
         <translation>მაუსის გორგოლაჭი</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="53"/>
+        <location filename="../src/widgets/infowindow.cpp" line="53"/>
         <source>Move selection 1px</source>
         <translation>შერჩეულის გადაადგილება 1px-ით</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="54"/>
+        <location filename="../src/widgets/infowindow.cpp" line="54"/>
         <source>Resize selection 1px</source>
         <translation>შერჩეულის ზომის შეცვლა 1px-ით</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="55"/>
+        <location filename="../src/widgets/infowindow.cpp" line="55"/>
         <source>Quit capture</source>
         <translation>გადაღებიდან გამოსვლა</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="56"/>
+        <location filename="../src/widgets/infowindow.cpp" line="56"/>
         <source>Copy to clipboard</source>
         <translation>გაცვლის ბუფერში კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="57"/>
+        <location filename="../src/widgets/infowindow.cpp" line="57"/>
         <source>Save selection as a file</source>
         <translation>შერჩეულის ფაილად შენახვა</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="58"/>
+        <location filename="../src/widgets/infowindow.cpp" line="58"/>
         <source>Undo the last modification</source>
         <translation>ბოლო ცვლილების გაუქმება</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="59"/>
+        <location filename="../src/widgets/infowindow.cpp" line="59"/>
         <source>Show color picker</source>
         <translation>ფერის შესარჩევის ჩვენება</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="60"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>ხელსაწყოს სისქის შეცვლა</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="65"/>
+        <location filename="../src/widgets/infowindow.cpp" line="65"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>გადაღების რეჟიმში ხელმისაწვდომი მალსახმობები.</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Key</source>
         <translation>კლავიში</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Description</source>
         <translation>აღწერა</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="97"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;ლიცენზია&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="105"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;ვერსია&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;მალსახმობები&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -485,12 +484,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../src/capture/tools/linetool.cpp" line="40"/>
+        <location filename="../src/tools/line/linetool.cpp" line="42"/>
         <source>Line</source>
         <translation>ხაზი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/linetool.cpp" line="44"/>
+        <location filename="../src/tools/line/linetool.cpp" line="50"/>
         <source>Sets the Line as the paint tool</source>
         <translation>ხაზის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -498,12 +497,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../src/capture/tools/markertool.cpp" line="40"/>
+        <location filename="../src/tools/marker/markertool.cpp" line="42"/>
         <source>Marker</source>
         <translation>მარკერი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/markertool.cpp" line="44"/>
+        <location filename="../src/tools/marker/markertool.cpp" line="50"/>
         <source>Sets the Marker as the paint tool</source>
         <translation>მარკერის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -511,12 +510,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>MoveTool</name>
     <message>
-        <location filename="../src/capture/tools/movetool.cpp" line="38"/>
+        <location filename="../src/tools/move/movetool.cpp" line="34"/>
         <source>Move</source>
         <translation>გადაადგილება</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/movetool.cpp" line="42"/>
+        <location filename="../src/tools/move/movetool.cpp" line="42"/>
         <source>Move the selection area</source>
         <translation>შერჩეული არის გადაადგილება</translation>
     </message>
@@ -524,12 +523,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>PencilTool</name>
     <message>
-        <location filename="../src/capture/tools/penciltool.cpp" line="38"/>
+        <location filename="../src/tools/pencil/penciltool.cpp" line="30"/>
         <source>Pencil</source>
         <translation>ფანქარი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/penciltool.cpp" line="42"/>
+        <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
         <source>Sets the Pencil as the paint tool</source>
         <translation>ფანქრის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -537,24 +536,24 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="76"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
         <source>Save Error</source>
         <translation>შეცდომა შენახვისას</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="70"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved as </source>
         <translation>სურათი შენახულია როგორც: </translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="35"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/capture/workers/screenshotsaver.cpp" line="73"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
         <source>Error trying to save as </source>
         <translation>შეცდომა მცდელობისას შენახულიყო როგორც: </translation>
     </message>
@@ -566,12 +565,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>DBus-ით დაკავშირება ვერ მოხერხდა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="39"/>
+        <location filename="../src/tools/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
         <translation type="unfinished">შეცდომა</translation>
     </message>
     <message>
-        <location filename="../src/capture/workers/launcher/openwithprogram.cpp" line="40"/>
+        <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
         <translation type="unfinished">შემდეგ მისამართზე ჩაწერა ვერ მოხერხდა:</translation>
     </message>
@@ -579,25 +578,33 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../src/capture/tools/rectangletool.cpp" line="38"/>
+        <location filename="../src/tools/rectangle/rectangletool.cpp" line="34"/>
         <source>Rectangle</source>
         <translation>მართკუთხედი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/rectangletool.cpp" line="42"/>
+        <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
         <source>Sets the Rectangle as the paint tool</source>
         <translation>მართკუთხედის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
 </context>
 <context>
+    <name>RedoTool</name>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="34"/>
+        <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SaveTool</name>
     <message>
-        <location filename="../src/capture/tools/savetool.cpp" line="38"/>
+        <location filename="../src/tools/save/savetool.cpp" line="35"/>
         <source>Save</source>
         <translation>შენახვა</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/savetool.cpp" line="42"/>
+        <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
         <translation>სურათის შენახვა</translation>
     </message>
@@ -605,12 +612,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>SelectionTool</name>
     <message>
-        <location filename="../src/capture/tools/selectiontool.cpp" line="38"/>
+        <location filename="../src/tools/selection/selectiontool.cpp" line="38"/>
         <source>Rectangular Selection</source>
         <translation>მართკუთხა შერჩევა</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/selectiontool.cpp" line="42"/>
+        <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
         <source>Sets the Selection as the paint tool</source>
         <translation>შერჩევის ხელსაწყოს არჩევა სახატავად</translation>
     </message>
@@ -618,12 +625,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>SizeIndicatorTool</name>
     <message>
-        <location filename="../src/capture/tools/sizeindicatortool.cpp" line="38"/>
+        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="34"/>
         <source>Selection Size Indicator</source>
         <translation>შერჩეულის ზომის მაჩვენებელი</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/sizeindicatortool.cpp" line="42"/>
+        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
         <source>Shows the dimensions of the selection (X Y)</source>
         <translation>აჩვენებს შერჩეული არის განზომილებებს (X Y)</translation>
     </message>
@@ -739,37 +746,37 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="29"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
         <translation>ინტერფეისის ფერის რედაქტორი</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="92"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="93"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>შეცვალეთ ფერი ნიშნულის გადაადგილებით და შეხედეთ ცვლილებებს გადასახედ ღილაკებზე.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="102"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="103"/>
         <source>Select a Button to modify it</source>
         <translation>აირჩიეთ ღილაკი მის შესაცვლელად</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="111"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="112"/>
         <source>Main Color</source>
         <translation>ძირითადი ფერი</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="115"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="116"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>დააწექით ამ ღილაკს ძირითადი ფერის არჩევის რეჟიმის ჩასართავად.</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="126"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="127"/>
         <source>Contrast Color</source>
         <translation>კონტრასტული ფერი</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="131"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="132"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>დააწექით ამ ღილაკს კონტრასტული ფერის არჩევის რეჟიმის ჩასართავად.</translation>
     </message>
@@ -777,12 +784,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>UndoTool</name>
     <message>
-        <location filename="../src/capture/tools/undotool.cpp" line="38"/>
+        <location filename="../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo</source>
         <translation>უკუქმნა</translation>
     </message>
     <message>
-        <location filename="../src/capture/tools/undotool.cpp" line="42"/>
+        <location filename="../src/tools/undo/undotool.cpp" line="42"/>
         <source>Undo the last modification</source>
         <translation>ბოლო ცვლილების გაუქმება</translation>
     </message>
