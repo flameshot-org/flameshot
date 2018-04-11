@@ -105,6 +105,11 @@ void Controller::enableTrayIcon() {
         return;
     }
     ConfigHandler().setDisabledTrayIcon(false);
+    QAction *captureAction = new QAction(tr("&Take Screenshot"), this);
+    connect(captureAction, &QAction::triggered, this, [this](){
+        // Wait 400 ms to hide the QMenu
+        doLater(400, this, [this](){ this->createVisualCapture(); });
+    });
     QAction *configAction = new QAction(tr("&Configuration"), this);
     connect(configAction, &QAction::triggered, this,
             &Controller::openConfigWindow);
@@ -116,6 +121,7 @@ void Controller::enableTrayIcon() {
             &QCoreApplication::quit);
 
     QMenu *trayIconMenu = new QMenu();
+    trayIconMenu->addAction(captureAction);
     trayIconMenu->addAction(configAction);
     trayIconMenu->addAction(infoAction);
     trayIconMenu->addSeparator();
@@ -159,4 +165,12 @@ void Controller::updateConfigComponents() {
     if (m_configWindow) {
         m_configWindow->updateChildren();
     }
+}
+
+void doLater(int msec, QObject *receiver, lambda func)  {
+    QTimer *timer = new QTimer(receiver);
+    QObject::connect(timer, &QTimer::timeout, receiver,
+                     [timer, func](){ func(); timer->deleteLater(); });
+    timer->setInterval(msec);
+    timer->start();
 }
