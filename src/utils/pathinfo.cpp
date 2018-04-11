@@ -29,9 +29,9 @@ const QString PathInfo::blackIconPath() {
 }
 
 QStringList PathInfo::translationsPaths() {
-    QString binaryPath = QFileInfo(qApp->applicationFilePath())
+    QString binaryPath = QFileInfo(qApp->applicationDirPath())
             .absoluteFilePath();
-    QString trPath = QDir::toNativeSeparators(binaryPath) + "translations";
+    QString trPath = QDir::toNativeSeparators(binaryPath + "/translations") ;
 #if defined(Q_OS_LINUX)
     return QStringList()
             << QString(APP_PREFIX) + "/share/flameshot/translations"
