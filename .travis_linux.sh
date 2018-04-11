@@ -85,6 +85,7 @@ elif [[ "${DIST}" == "trusty" ]]; then
     cp /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so $APPIMAGE_DST_PATH/appdir/usr/plugins/platforminputcontexts/
     cd $APPIMAGE_DST_PATH/appdir/usr/bin
 	ln -sf ../plugins/platforms/ .   # An unknown bug
+	ln -sf ../share/flameshot/translations/ . # add translation soft link 
     cd ${project_dir}
 
     # -verbose=2
