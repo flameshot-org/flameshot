@@ -24,6 +24,10 @@ SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
 }
 #endif
 
+void SystemNotification::sendMessage(const QString &text) {
+    sendMessage(text, tr("Flameshot Info"));
+}
+
 void SystemNotification::sendMessage(
         const QString &text,
         const QString &title,
