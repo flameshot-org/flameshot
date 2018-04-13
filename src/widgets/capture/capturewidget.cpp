@@ -22,6 +22,7 @@
 // released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
+#include "src/widgets/capture/hovereventfilter.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/globalvalues.h"
 #include "src/widgets/capture/notifierbox.h"
@@ -31,6 +32,7 @@
 #include "src/utils/screenshotsaver.h"
 #include "src/core/controller.h"
 #include "src/widgets/capture/modificationcommand.h"
+#include <QUndoView>
 #include <QScreen>
 #include <QGuiApplication>
 #include <QApplication>
@@ -49,48 +51,32 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
                              bool fullscreen, QWidget *parent) :
     QWidget(parent), m_mouseOverHandle(nullptr),
     m_mouseIsClicked(false), m_rightClick(false), m_newSelection(false),
-    m_grabbing(false), m_captureDone(false),
+    m_grabbing(false), m_captureDone(false), m_previewEnabled(true),
     m_activeButton(nullptr), m_activeTool(nullptr), m_id(id)
 {
+    m_eventFilter = new HoverEventFilter(this);
+    connect(m_eventFilter, &HoverEventFilter::hoverIn,
+            this, &CaptureWidget::childEnter);
+    connect(m_eventFilter, &HoverEventFilter::hoverOut,
+            this, &CaptureWidget::childLeave);
+
+    initContext(savePath, fullscreen);
+    initSelection();
+
+    // Base config of the widget
+    setAttribute(Qt::WA_DeleteOnClose);
     m_showInitialMsg = m_config.showHelpValue();
     m_opacity = m_config.contrastOpacityValue();
-
-    // Init context
-    m_context.widgetDimensions = rect();
-    // TODO check color handler. No handle on it, just here as it could have
-    // multiple color pickers
-    m_context.color = m_config.drawColorValue();
-    m_context.savePath = savePath;
-    m_context.widgetOffset = mapToGlobal(QPoint(0,0));
-    m_context.mousePos= mapFromGlobal(QCursor::pos());
-    m_context.thickness = m_config.drawThicknessValue();
-    m_context.fullscreen = fullscreen;
-
-    setAttribute(Qt::WA_DeleteOnClose);
-    // create selection handlers
-
-    QRect baseRect(0, 0, handleSize(), handleSize());
-    m_TLHandle = baseRect; m_TRHandle = baseRect;
-    m_BLHandle = baseRect; m_BRHandle = baseRect;
-    m_LHandle = baseRect; m_THandle = baseRect;
-    m_RHandle = baseRect; m_BHandle = baseRect;
-
-    m_handles << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
-    << &m_LHandle << &m_THandle << &m_RHandle << &m_BHandle;
-
-    m_sides << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
-            << &m_LSide << &m_TSide << &m_RSide << &m_BSide;
-
-    // set base config of the widget
     setMouseTracking(true);
     updateCursor();
     initShortcuts();
 
 #ifdef Q_OS_WIN
+    // Top left of the whole set of screens
     QPoint topLeft(0,0);
 #endif
     if (m_context.fullscreen) {
-        // init content
+        // Grab Screenshot
         bool ok = true;
         m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
         if(!ok) {
@@ -120,7 +106,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
 #endif
         resize(pixmap().size());
     }
-    // create buttons
+    // Create buttons
     m_buttonHandler = new ButtonHandler(this);
     updateButtons();
     QVector<QRect> areas;
@@ -137,17 +123,21 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     }
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
-    // init interface color
+
+
+    // Init color picker
     m_colorPicker = new ColorPicker(this);
     connect(m_colorPicker, &ColorPicker::colorSelected,
             this, &CaptureWidget::setDrawColor);
     m_colorPicker->hide();
 
+    // Init notification widget
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
 
     connect(&m_undoStack, &QUndoStack::indexChanged,
             this, [this](int){ this->update(); });
+    initPanel();
 }
 
 CaptureWidget::~CaptureWidget() {
@@ -177,6 +167,7 @@ void CaptureWidget::updateButtons() {
             m_sizeIndButton = b;
         }
         b->setColor(m_uiColor);
+        makeChild(b);
 
         connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
         connect(b->tool(), &CaptureTool::requestAction,
@@ -198,7 +189,9 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
         painter.restore();
-    } else if (m_activeButton && m_activeButton->tool()->showMousePreview()){
+    } else if (m_activeButton && m_activeButton->tool()->showMousePreview() &&
+               m_previewEnabled)
+    {
         painter.save();
         m_activeButton->tool()->paintMousePreview(painter, m_context);
         painter.restore();
@@ -272,7 +265,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         m_mouseIsClicked = true;
         if (m_activeButton) {
             if (m_activeTool) {
-                // TODO
+                m_activeTool->deleteLater();
             }
             m_activeTool = m_activeButton->tool()->copy(this);
             connect(m_activeTool, &CaptureTool::requestAction,
@@ -280,6 +273,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
             m_activeTool->drawStart(m_context);
             return;
         }
+
         m_dragStartPoint = e->pos();
         m_selectionBeforeDrag = m_context.selection;
         if (!m_context.selection.contains(e->pos()) && !m_mouseOverHandle) {
@@ -488,6 +482,45 @@ void CaptureWidget::moveEvent(QMoveEvent *e) {
     m_context.widgetOffset = mapToGlobal(QPoint(0,0));
 }
 
+void CaptureWidget::initContext(const QString &savePath, bool fullscreen) {
+    m_context.widgetDimensions = rect();
+    m_context.color = m_config.drawColorValue();
+    m_context.savePath = savePath;
+    m_context.widgetOffset = mapToGlobal(QPoint(0,0));
+    m_context.mousePos= mapFromGlobal(QCursor::pos());
+    m_context.thickness = m_config.drawThicknessValue();
+    m_context.fullscreen = fullscreen;
+}
+
+void CaptureWidget::initPanel() {
+    m_panel = new UtilityPanel(this);
+    makeChild(m_panel);
+    QRect panelRect = QGuiApplication::primaryScreen()->geometry();
+    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
+    panelRect.setWidth(m_colorPicker->width() * 3);
+    m_panel->setGeometry(panelRect);
+
+    m_panel->pushWidget(new QUndoView(&m_undoStack, this));
+}
+
+void CaptureWidget::initSelection() {
+    QRect baseRect(0, 0, handleSize(), handleSize());
+    m_TLHandle = baseRect; m_TRHandle = baseRect;
+    m_BLHandle = baseRect; m_BRHandle = baseRect;
+    m_LHandle = baseRect; m_THandle = baseRect;
+    m_RHandle = baseRect; m_BHandle = baseRect;
+
+    m_handles << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
+    << &m_LHandle << &m_THandle << &m_RHandle << &m_BHandle;
+
+    m_sides << &m_TLHandle << &m_TRHandle << &m_BLHandle << &m_BRHandle
+            << &m_LSide << &m_TSide << &m_RSide << &m_BSide;
+}
+
+void CaptureWidget::initWidget() {
+
+}
+
 void CaptureWidget::setState(CaptureButton *b) {
     if (!b) {
         return;
@@ -521,7 +554,7 @@ void CaptureWidget::processTool(CaptureTool *t) {
     m_activeTool = backup;
     QWidget *cw = t->configurationWidget();
     if (cw) {
-        // TODO add to panel.
+        m_panel->addToolWidget(t->configurationWidget());
     }
 }
 
@@ -555,7 +588,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
         update();
         break;
     case CaptureTool::REQ_TOGGLE_SIDEBAR:
-        // TODO
+        m_panel->toggle();
         break;
     case CaptureTool::REQ_SHOW_COLOR_PICKER:
         // TODO
@@ -569,7 +602,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     case CaptureTool::REQ_ADD_CHILD_WIDGETS:
         if (m_activeTool) {
             QWidget *w = m_activeTool->widget();
-            w->setParent(this);
+            makeChild(w);
             w->move(m_context.mousePos);
             w->show();
         }
@@ -593,7 +626,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     }
 }
 
-void CaptureWidget::setDrawColor(QColor c) {
+void CaptureWidget::setDrawColor(const QColor &c) {
     m_context.color = c;
     ConfigHandler().setDrawColor(m_context.color);
 }
@@ -642,12 +675,13 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveScreenshot()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), this, SLOT(copyScreenshot()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo())); // TODO
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z), this, SLOT(redo()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right), this, SLOT(rightResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left), this, SLOT(leftResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this, SLOT(upResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
+    new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
     new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
 }
@@ -706,7 +740,25 @@ void CaptureWidget::updateCursor() {
     } else {
         setCursor(Qt::CrossCursor);
     }
+}
 
+void CaptureWidget::makeChild(QWidget *w) {
+    w->setParent(this);
+    w->installEventFilter(m_eventFilter);
+}
+
+void CaptureWidget::togglePanel() {
+    m_panel->toggle();
+}
+
+void CaptureWidget::childEnter() {
+    m_previewEnabled = false;
+    update();
+}
+
+void CaptureWidget::childLeave() {
+    m_previewEnabled = true;
+    update();
 }
 
 int CaptureWidget::handleSize() {

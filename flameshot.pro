@@ -125,7 +125,9 @@ SOURCES += src/main.cpp \
     src/tools/abstractpathtool.cpp \
     src/tools/abstracttwopointtool.cpp \
     src/tools/abstractactiontool.cpp \
-    src/utils/globalvalues.cpp
+    src/utils/globalvalues.cpp \
+    src/widgets/capture/utilitypanel.cpp \
+    src/widgets/capture/hovereventfilter.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -187,7 +189,9 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/capture/modificationcommand.h \
     src/tools/abstractpathtool.h \
     src/tools/abstracttwopointtool.h \
-    src/tools/abstractactiontool.h
+    src/tools/abstractactiontool.h \
+    src/widgets/capture/utilitypanel.h \
+    src/widgets/capture/hovereventfilter.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

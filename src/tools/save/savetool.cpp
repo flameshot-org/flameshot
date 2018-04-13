@@ -48,7 +48,6 @@ CaptureTool* SaveTool::copy(QObject *parent) {
 }
 
 void SaveTool::pressed(const CaptureContext &context) {
-    // TODO blocks type and others
     if (context.savePath.isEmpty()) {
         emit requestAction(REQ_HIDE_GUI);
         bool ok = ScreenshotSaver().saveToFilesystemGUI(

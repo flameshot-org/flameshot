@@ -21,14 +21,11 @@
 ModificationCommand::ModificationCommand(QPixmap *p, CaptureTool *t) :
     m_pixmap(p), m_tool(t)
 {
+    setText(t->name());
 }
 
 void ModificationCommand::undo() {
     m_tool->undo(*m_pixmap);
-}
-
-QString ModificationCommand::text() const {
-    return m_tool->name();
 }
 
 void ModificationCommand::redo() {
