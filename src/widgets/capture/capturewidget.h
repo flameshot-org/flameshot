@@ -22,11 +22,12 @@
 // released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #pragma once
-// TODO
+
 #include "capturebutton.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
+#include "src/widgets/capture/utilitypanel.h"
 #include "buttonhandler.h"
 #include <QWidget>
 #include <QUndoStack>
@@ -41,6 +42,7 @@ class QNetworkReply;
 class ColorPicker;
 class Screenshot;
 class NotifierBox;
+class HoverEventFilter;
 
 class CaptureWidget : public QWidget {
     Q_OBJECT
@@ -68,6 +70,9 @@ private slots:
     void saveScreenshot();
     void undo();
     void redo();
+    void togglePanel();
+    void childEnter();
+    void childLeave();
 
     void leftResize();
     void rightResize();
@@ -77,7 +82,7 @@ private slots:
     void setState(CaptureButton *b);
     void processTool(CaptureTool *t);
     void handleButtonSignal(CaptureTool::Request r);
-    void setDrawColor(QColor c);
+    void setDrawColor(const QColor &c);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -109,12 +114,18 @@ protected:
     bool m_grabbing;
     bool m_showInitialMsg;
     bool m_captureDone;
+    bool m_previewEnabled;
 
 private:
+    void initContext(const QString &savePath, bool fullscreen);
+    void initPanel();
+    void initSelection();
+    void initWidget();
     void initShortcuts();
     void updateHandles();
     void updateSizeIndicator();
     void updateCursor();
+    void makeChild(QWidget *w);
 
     // size of the handlers at the corners of the selection
     int handleSize();
@@ -128,11 +139,13 @@ private:
     QPointer<CaptureTool> m_activeTool;
 
     ButtonHandler *m_buttonHandler;
+    UtilityPanel *m_panel;
     ColorPicker *m_colorPicker;
     ConfigHandler m_config;
     NotifierBox *m_notifierBox;
+    HoverEventFilter *m_eventFilter;
+
     QPoint m_dragStartPoint;
-    CaptureButton::ButtonType m_state;
     uint m_id;
 
     // naming convention for handles

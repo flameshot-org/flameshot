@@ -50,10 +50,6 @@ ColorPicker::ColorPicker(QWidget *parent) : QWidget(parent) {
     }
 }
 
-ColorPicker::~ColorPicker() {
-    ConfigHandler().setDrawColor(m_drawColor);
-}
-
 QColor ColorPicker::drawColor() {
     return m_drawColor;
 }

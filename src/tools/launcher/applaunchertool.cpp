@@ -47,7 +47,7 @@ QWidget* AppLauncher::widget() {
 }
 
 CaptureTool* AppLauncher::copy(QObject *parent) {
-    return new AppLauncher(parent); // TODO
+    return new AppLauncher(parent);
 }
 
 void AppLauncher::pressed(const CaptureContext &context) {

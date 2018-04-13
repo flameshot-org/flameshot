@@ -26,7 +26,7 @@ public:
 
     virtual void undo() override;
     virtual void redo() override;
-    QString text() const;
+
 private:
     QPixmap *m_pixmap;
     QScopedPointer<CaptureTool> m_tool;
