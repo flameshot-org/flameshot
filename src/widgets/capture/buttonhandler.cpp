@@ -81,7 +81,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
         return;
     }
     // Copy of the selection area for internal modifications
-    m_selection = selection;
+    m_selection = intersectWithAreas(selection);
     updateBlockedSides();
     ensureSelectionMinimunSize();
     // Indicates the actual button to be moved
@@ -219,6 +219,17 @@ QVector<QPoint> ButtonHandler::verticalPoints(
     return res;
 }
 
+QRect ButtonHandler::intersectWithAreas(const QRect &rect) {
+    QRect res;
+    for(const QRect &r : m_screenRegions) {
+        QRect temp = rect.intersected(r);
+        if (temp.height() * temp.width() > res.height() * res.width()) {
+            res = temp;
+        }
+    }
+    return res;
+}
+
 void ButtonHandler::init() {
     m_separator = GlobalValues::buttonBaseSize() / 4;
 }
@@ -261,31 +272,20 @@ void ButtonHandler::updateBlockedSides() {
 }
 
 void ButtonHandler::expandSelection() {
-    if (m_blockedRight && !m_blockedLeft) {
-        m_selection.setX(m_selection.x() - m_buttonExtendedSize);
-    } else if (!m_blockedRight && !m_blockedLeft) {
-        m_selection.setX(m_selection.x() - m_buttonExtendedSize);
-        m_selection.setWidth(m_selection.width() + m_buttonExtendedSize);
-    } else {
-        m_selection.setWidth(m_selection.width() + m_buttonExtendedSize);
-    }
-
-    if (m_blockedBotton && !m_blockedTop) {
-        m_selection.setY(m_selection.y() - m_buttonExtendedSize);
-    } else if (!m_blockedTop && !m_blockedBotton) {
-        m_selection.setY(m_selection.y() - m_buttonExtendedSize);
-        m_selection.setHeight(m_selection.height() + m_buttonExtendedSize);
-    } else {
-        m_selection.setHeight(m_selection.height() + m_buttonExtendedSize);
-    }
+    int &s = m_buttonExtendedSize;
+    m_selection = m_selection + QMargins(s, s, s, s);
+    m_selection = intersectWithAreas(m_selection);
 }
 
 void ButtonHandler::positionButtonsInside(int index) {
     // Position the buttons in the botton-center of the main but inside of the
     // selection.
-    QRect mainArea = QGuiApplication::primaryScreen()->geometry()
-            .intersected(m_selection);
+    QRect mainArea = m_selection;
+    mainArea = intersectWithAreas(mainArea);
     const int buttonsPerRow = (mainArea.width()) / (m_buttonExtendedSize);
+    if (buttonsPerRow == 0) {
+        return;
+    }
     QPoint center = QPoint(mainArea.center().x(),
                            mainArea.bottom() - m_buttonExtendedSize);
 
