@@ -475,6 +475,9 @@ void CaptureWidget::resizeEvent(QResizeEvent *e) {
     QWidget::resizeEvent(e);
     m_context.widgetDimensions = rect();
     m_context.widgetOffset = mapToGlobal(QPoint(0,0));
+    if (!m_context.fullscreen) {
+        m_buttonHandler->updateScreenRegions(rect());
+    }
 }
 
 void CaptureWidget::moveEvent(QMoveEvent *e) {

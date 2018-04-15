@@ -368,3 +368,7 @@ void ButtonHandler::updateScreenRegions(const QVector<QRect> &rects) {
         m_screenRegions += rect;
     }
 }
+
+void ButtonHandler::updateScreenRegions(const QRect &rect) {
+    m_screenRegions = QRegion(rect);
+}
