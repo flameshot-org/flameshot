@@ -30,6 +30,7 @@
 
 UtilityPanel::UtilityPanel(QWidget *parent) : QWidget(parent) {
     initInternalPanel();
+    setAttribute(Qt::WA_TransparentForMouseEvents);
 
     m_showAnimation = new QPropertyAnimation(m_internalPanel, "geometry", this);
     m_showAnimation->setEasingCurve(QEasingCurve::InOutQuad);
@@ -57,11 +58,13 @@ void UtilityPanel::pushWidget(QWidget *w) {
 
 void UtilityPanel::toggle() {
     if (m_internalPanel->isHidden()) {
+        setAttribute(Qt::WA_TransparentForMouseEvents, false);
         m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
         m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
         m_internalPanel->show();
         m_showAnimation->start();
     } else {
+        setAttribute(Qt::WA_TransparentForMouseEvents);
         m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
         m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
         m_hideAnimation->start();
