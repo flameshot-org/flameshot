@@ -69,7 +69,6 @@ void UtilityPanel::toggle() {
         m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
         m_hideAnimation->start();
     }
-
 }
 
 void UtilityPanel::initInternalPanel() {

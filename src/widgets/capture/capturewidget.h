@@ -27,6 +27,7 @@
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
+#include "src/widgets/capture/selectionwidget.h"
 #include "src/widgets/capture/utilitypanel.h"
 #include "buttonhandler.h"
 #include <QWidget>
@@ -102,9 +103,6 @@ protected:
     // Secondary ui color
     QColor m_contrastUiColor;
 
-    // pointer to the handlers under the mouse
-    QRect m_selectionBeforeDrag;
-    QRect *m_mouseOverHandle;
     // Outside selection opacity
     int m_opacity;
     // utility flags
@@ -122,7 +120,6 @@ private:
     void initSelection();
     void initWidget();
     void initShortcuts();
-    void updateHandles();
     void updateSizeIndicator();
     void updateCursor();
     void makeChild(QWidget *w);
@@ -144,19 +141,9 @@ private:
     ConfigHandler m_config;
     NotifierBox *m_notifierBox;
     HoverEventFilter *m_eventFilter;
+    SelectionWidget *m_selection;
 
     QPoint m_dragStartPoint;
+    SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
-
-    // naming convention for handles
-    // T top, B bottom, R Right, L left
-    // 2 letters: a corner
-    // 1 letter: the handle on the middle of the corresponding side
-    QRect m_TLHandle, m_TRHandle, m_BLHandle, m_BRHandle;
-    QRect m_LHandle, m_THandle, m_RHandle, m_BHandle;
-    // Side Rects
-    QRect m_LSide, m_TSide, m_RSide, m_BSide;
-    // list containing the active habdlers
-    QVector<QRect*> m_handles;
-    QVector<QRect*> m_sides;
 };

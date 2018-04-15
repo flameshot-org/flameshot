@@ -54,6 +54,8 @@ private:
     QVector<QPoint> verticalPoints(const QPoint &center, const int elements,
                                const bool upToDown) const;
 
+    QRect intersectWithAreas(const QRect &rect);
+
     QVector<CaptureButton*> m_vectorButtons;
 
     QRegion m_screenRegions;

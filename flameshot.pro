@@ -127,7 +127,8 @@ SOURCES += src/main.cpp \
     src/tools/abstractactiontool.cpp \
     src/utils/globalvalues.cpp \
     src/widgets/capture/utilitypanel.cpp \
-    src/widgets/capture/hovereventfilter.cpp
+    src/widgets/capture/hovereventfilter.cpp \
+    src/widgets/capture/selectionwidget.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -191,7 +192,8 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/abstracttwopointtool.h \
     src/tools/abstractactiontool.h \
     src/widgets/capture/utilitypanel.h \
-    src/widgets/capture/hovereventfilter.h
+    src/widgets/capture/hovereventfilter.h \
+    src/widgets/capture/selectionwidget.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
