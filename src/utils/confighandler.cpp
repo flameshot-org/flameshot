@@ -37,8 +37,31 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
         }
         buttons = fromIntToButton(buttonsInt);
     } else {
-        buttons = CaptureButton::getIterableButtonTypes();
+        // Default tools
+        buttons << CaptureButton::TYPE_PENCIL
+                << CaptureButton::TYPE_DRAWER
+                << CaptureButton::TYPE_ARROW
+                << CaptureButton::TYPE_SELECTION
+                << CaptureButton::TYPE_RECTANGLE
+                << CaptureButton::TYPE_CIRCLE
+                << CaptureButton::TYPE_MARKER
+                << CaptureButton::TYPE_BLUR
+                << CaptureButton::TYPE_SELECTIONINDICATOR
+                << CaptureButton::TYPE_MOVESELECTION
+                << CaptureButton::TYPE_UNDO
+                << CaptureButton::TYPE_REDO
+                << CaptureButton::TYPE_COPY
+                << CaptureButton::TYPE_SAVE
+                << CaptureButton::TYPE_EXIT
+                << CaptureButton::TYPE_IMAGEUPLOADER
+                << CaptureButton::TYPE_OPEN_APP;
     }
+
+    using bt = CaptureButton::ButtonType;
+    std::sort(buttons.begin(), buttons.end(), [](bt a, bt b){
+        return CaptureButton::getPriorityByButton(a) <
+                CaptureButton::getPriorityByButton(b);
+    });
     return buttons;
 }
 
@@ -268,10 +291,6 @@ bool ConfigHandler::normalizeButtons(QVector<int> &buttons) {
             hasChanged = true;
         }
     }
-    std::sort(buttons.begin(), buttons.end(), [](int a, int b){
-        return CaptureButton::getPriorityByButton((CaptureButton::ButtonType)a) <
-                CaptureButton::getPriorityByButton((CaptureButton::ButtonType)b);
-    });
     return hasChanged;
 }
 

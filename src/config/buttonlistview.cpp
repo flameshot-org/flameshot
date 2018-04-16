@@ -61,7 +61,12 @@ void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     CaptureButton::ButtonType bType = m_buttonTypeByName[item->text()];
     if (item->checkState() == Qt::Checked) {
         m_listButtons.append(bType);
-        std::sort(m_listButtons.begin(), m_listButtons.end());
+        // TODO refactor so we don't need external sorts
+        using bt = CaptureButton::ButtonType;
+        std::sort(m_listButtons.begin(), m_listButtons.end(), [](bt a, bt b){
+            return CaptureButton::getPriorityByButton(a) <
+                    CaptureButton::getPriorityByButton(b);
+        });
     } else {
         m_listButtons.remove(m_listButtons.indexOf(bType));
     }
