@@ -54,6 +54,17 @@
     </method>
 
     <!--
+        autostartEnabled:
+        @enabled: The new state fot the autostart.
+
+        Enable or disable the autostart of the program.
+    -->
+    <method name="autostartEnabled">
+      <arg name="enabled" type="b" direction="in"/>
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
+
+    <!--
         captureTaken:
         @id: identificator of the call.
         @rawImage: raw image in PNG format.
