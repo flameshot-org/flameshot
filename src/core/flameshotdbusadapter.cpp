@@ -85,3 +85,10 @@ void FlameshotDBusAdapter::trayIconEnabled(bool enabled) {
         controller->disableTrayIcon();
     }
 }
+
+void FlameshotDBusAdapter::autostartEnabled(bool enabled) {
+    ConfigHandler().setStartupLaunch(enabled);
+    auto controller =  Controller::getInstance();
+    // Autostart is not saved in a .ini file, requires manual update
+    controller->updateConfigComponents();
+}

@@ -37,4 +37,5 @@ public slots:
     Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
+    Q_NOREPLY void autostartEnabled(bool enabled);
 };

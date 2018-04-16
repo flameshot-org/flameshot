@@ -117,6 +117,10 @@ int main(int argc, char *argv[]) {
                 {"t", "trayicon"},
                 "Enable or disable the trayicon",
                 "bool");
+    CommandOption autostartOption(
+                {"a", "autostart"},
+                "Enable or disable run at startup",
+                "bool");
     CommandOption showHelpOption(
                 {"s", "showhelp"},
                 "Show the help message in the capture mode",
@@ -171,6 +175,7 @@ int main(int argc, char *argv[]) {
     delayOption.addChecker(delayChecker, delayErr);
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
+    autostartOption.addChecker(booleanChecker, booleanErr);
     showHelpOption.addChecker(booleanChecker, booleanErr);
 
     // Relationships
@@ -182,8 +187,9 @@ int main(int argc, char *argv[]) {
     parser.AddOptions({ pathOption, delayOption, rawImageOption }, guiArgument);
     parser.AddOptions({ pathOption, clipboardOption, delayOption, rawImageOption },
                       fullArgument);
-    parser.AddOptions({ filenameOption, trayOption, showHelpOption,
-                        mainColorOption, contrastColorOption }, configArgument);
+    parser.AddOptions({ autostartOption, filenameOption, trayOption,
+                        showHelpOption, mainColorOption, contrastColorOption },
+                      configArgument);
     // Parse
     if (!parser.parse(app.arguments())) {
         goto finish;
@@ -273,6 +279,7 @@ int main(int argc, char *argv[]) {
         }
     }
     else if (parser.isSet(configArgument)) { // CONFIG
+        bool autostart = parser.isSet(autostartOption);
         bool filename = parser.isSet(filenameOption);
         bool tray = parser.isSet(trayOption);
         bool help = parser.isSet(showHelpOption);
@@ -281,6 +288,21 @@ int main(int argc, char *argv[]) {
         bool someFlagSet = (filename || tray || help ||
                             mainColor || contrastColor);
         ConfigHandler config;
+        if (autostart) {
+            QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
+                                               "/", "", "autostartEnabled");
+            if (parser.value(autostartOption) == "false") {
+                m << false;
+            } else if (parser.value(autostartOption) == "true") {
+                m << true;
+            }
+            QDBusConnection sessionBus = QDBusConnection::sessionBus();
+            if (!sessionBus.isConnected()) {
+                SystemNotification().sendMessage(
+                            QObject::tr("Unable to connect via DBus"));
+            }
+            sessionBus.call(m);
+        }
         if (filename) {
             QString newFilename(parser.value(filenameOption));
             config.setFilenamePattern(newFilename);
