@@ -45,5 +45,7 @@
         <file>img/buttonIconsWhite/blur.png</file>
         <file>img/buttonIconsBlack/redo-variant.png</file>
         <file>img/buttonIconsWhite/redo-variant.png</file>
+        <file>img/buttonIconsBlack/pin.png</file>
+        <file>img/buttonIconsWhite/pin.png</file>
     </qresource>
 </RCC>

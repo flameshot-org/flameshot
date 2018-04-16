@@ -50,6 +50,7 @@ public:
         TYPE_OPEN_APP = 14,
         TYPE_BLUR = 15,
         TYPE_REDO = 16,
+        TYPE_PIN = 17,
     };
 
     CaptureButton() = delete;
