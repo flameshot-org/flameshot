@@ -113,6 +113,7 @@ SOURCES += src/main.cpp \
     src/utils/desktopfileparse.cpp \
     src/tools/launcher/launcheritemdelegate.cpp \
     src/tools/blur/blurtool.cpp \
+    src/tools/pin/pintool.cpp \
     src/tools/launcher/terminallauncher.cpp \
     src/config/visualseditor.cpp \
     src/config/extendedslider.cpp \
@@ -128,7 +129,8 @@ SOURCES += src/main.cpp \
     src/utils/globalvalues.cpp \
     src/widgets/capture/utilitypanel.cpp \
     src/widgets/capture/hovereventfilter.cpp \
-    src/widgets/capture/selectionwidget.cpp
+    src/widgets/capture/selectionwidget.cpp \
+    src/tools/pin/pinwidget.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -178,6 +180,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/utils/desktopfileparse.h \
     src/tools/launcher/launcheritemdelegate.h \
     src/tools/blur/blurtool.h \
+    src/tools/pin/pintool.h \
     src/tools/launcher/terminallauncher.h \
     src/config/visualseditor.h \
     src/config/extendedslider.h \
@@ -193,7 +196,8 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/abstractactiontool.h \
     src/widgets/capture/utilitypanel.h \
     src/widgets/capture/hovereventfilter.h \
-    src/widgets/capture/selectionwidget.h
+    src/widgets/capture/selectionwidget.h \
+    src/tools/pin/pinwidget.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

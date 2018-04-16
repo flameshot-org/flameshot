@@ -166,6 +166,7 @@ static std::map<CaptureButton::ButtonType, int> buttonTypeOrder {
     { CaptureButton::TYPE_EXIT,              14 },
     { CaptureButton::TYPE_IMAGEUPLOADER,     15 },
     { CaptureButton::TYPE_OPEN_APP,          16 },
+    { CaptureButton::TYPE_PIN,               17 },
     { CaptureButton::TYPE_BLUR,              7  },
     { CaptureButton::TYPE_REDO,              11 },
 };
@@ -193,4 +194,5 @@ QVector<CaptureButton::ButtonType> CaptureButton::iterableButtonTypes = {
     CaptureButton::TYPE_EXIT,
     CaptureButton::TYPE_IMAGEUPLOADER,
     CaptureButton::TYPE_OPEN_APP,
+    CaptureButton::TYPE_PIN,
 };
