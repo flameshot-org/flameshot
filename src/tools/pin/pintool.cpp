@@ -44,7 +44,11 @@ QString PinTool::description() const {
 
 QWidget* PinTool::widget() {
     PinWidget *w = new PinWidget(m_pixmap);
-    w->setGeometry(m_geometry);
+    QRect adjusted_pos = QRect (m_geometry.left() - LAYOUT_MARGIN,
+                                m_geometry.top() - LAYOUT_MARGIN,
+                                m_geometry.width() + 2 * LAYOUT_MARGIN,
+                                m_geometry.height() + 2 * LAYOUT_MARGIN);
+    w->setGeometry(adjusted_pos);
     return w;
 }
 
