@@ -81,6 +81,7 @@ void Controller::createVisualCapture(const uint id, const QString &forcedSavePat
         m_captureWindow->show();
 #else
         m_captureWindow->showFullScreen();
+        //m_captureWindow->show(); // Debug
 #endif
     }
 }
