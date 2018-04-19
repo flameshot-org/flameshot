@@ -503,10 +503,11 @@ void CaptureWidget::initPanel() {
 
 void CaptureWidget::initSelection() {
     m_selection = new SelectionWidget(m_uiColor, this);
-    m_selection->setVisible(false);
     connect(m_selection, &SelectionWidget::animationEnded, this, [this](){
         this->m_buttonHandler->updatePosition(this->m_selection->geometry());
     });
+    m_selection->setVisible(false);
+    m_selection->setGeometry(QRect());
 }
 
 void CaptureWidget::initWidget() {
@@ -708,7 +709,9 @@ void CaptureWidget::updateCursor() {
             default:
                 break;
             }
-        } else if (m_selection->geometry().contains(m_context.mousePos)) {
+        } else if (m_selection->isVisible() &&
+                   m_selection->geometry().contains(m_context.mousePos))
+        {
             setCursor(Qt::OpenHandCursor);
         } else {
             setCursor(Qt::CrossCursor);
