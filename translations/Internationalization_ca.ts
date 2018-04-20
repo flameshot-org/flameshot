@@ -123,6 +123,10 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <source>&amp;Quit</source>
         <translation>&amp;Ix</translation>
     </message>
+    <message>
+        <source>&amp;Take Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -439,6 +443,17 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     </message>
 </context>
 <context>
+    <name>PinTool</name>
+    <message>
+        <source>Pin Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin image on the desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Save Error</source>
@@ -605,6 +620,13 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>Full Date (%Y-%m-%d)</source>
         <translation>Data (%Y-%m-%d)</translation>
+    </message>
+</context>
+<context>
+    <name>SystemNotification</name>
+    <message>
+        <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
