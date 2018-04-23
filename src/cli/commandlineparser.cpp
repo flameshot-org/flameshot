@@ -35,18 +35,6 @@ auto versionOption = CommandOption({"v", "version"},
 auto helpOption = CommandOption({"h", "help"},
                                 "Displays this help");
 
-QStringList addDashToOptionNames(const QStringList &names) {
-    QStringList dashedNames;
-    for (const QString &name: names) {
-        // prepend "-" to single character options, and "--" to the others
-        QString dashedName = (name.length() == 1) ?
-                    QStringLiteral("-%1").arg(name) :
-                    QStringLiteral("--%1").arg(name);
-        dashedNames << dashedName;
-    }
-    return dashedNames;
-}
-
 QString optionsToString(const QList<CommandOption> &options,
                         const QList<CommandArgument> &arguments) {
     int size = 0; // track the largest size
@@ -54,7 +42,7 @@ QString optionsToString(const QList<CommandOption> &options,
     // save the dashed options and its size in order to print the description
     // of every option at the same horizontal character position.
     for (auto const &option: options) {
-        QStringList dashedOptions = addDashToOptionNames(option.names());
+        QStringList dashedOptions = option.dashedNames();
         QString joinedDashedOptions = dashedOptions.join(", ");
         if (!option.valueName().isEmpty()) {
             joinedDashedOptions += QStringLiteral(" <%1>")
@@ -210,7 +198,7 @@ bool CommandLineParser::parse(const QStringList &args) {
     Node *actualNode = &m_parseTree;
     auto it = ++args.cbegin();
     // check  version option
-    QStringList dashedVersion = addDashToOptionNames(versionOption.names());
+    QStringList dashedVersion = versionOption.dashedNames();
     if (m_withVersion && args.length() > 1 &&
             dashedVersion.contains(args.at(1)))
     {
@@ -395,7 +383,7 @@ bool CommandLineParser::processIfOptionIsHelp(
         Node * &actualNode)
 {
     bool ok = true;
-    auto dashedHelpNames = addDashToOptionNames(helpOption.names());
+    auto dashedHelpNames = helpOption.dashedNames();
     if (m_withHelp && actualIt != args.cend() &&
             dashedHelpNames.contains(*actualIt))
     {

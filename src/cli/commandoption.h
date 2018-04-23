@@ -35,6 +35,7 @@ public:
     void setName(const QString &name);
     void setNames(const QStringList &names);
     QStringList names() const;
+    QStringList dashedNames() const;
 
     void setValueName(const QString &name);
     QString valueName() const;

@@ -241,7 +241,12 @@ int main(int argc, char *argv[]) {
         bool isRaw = parser.isSet(rawImageOption);
         // Not a valid command
         if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream(stdout) << "you have to set a valid flag:\n\n";
+            QTextStream out(stdout);
+            out << "Invalid format, set where to save the content with one of "
+                << "the following flags:\n "
+                << pathOption.dashedNames().join(", ") << "\n "
+                << rawImageOption.dashedNames().join(", ") << "\n "
+                << clipboardOption.dashedNames().join(", ") << "\n\n";
             parser.parse(QStringList() << argv[0] << "full" << "-h");
             goto finish;
         }
