@@ -221,7 +221,7 @@ QVector<QPoint> ButtonHandler::verticalPoints(
 
 QRect ButtonHandler::intersectWithAreas(const QRect &rect) {
     QRect res;
-    for(const QRect &r : m_screenRegions) {
+    for(const QRect &r : m_screenRegions.rects()) {
         QRect temp = rect.intersected(r);
         if (temp.height() * temp.width() > res.height() * res.width()) {
             res = temp;
