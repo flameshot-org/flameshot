@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
         <source>Unable to capture screen</source>
         <translation>Imposible de capturer l&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="221"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="215"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -132,17 +132,22 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="108"/>
+        <location filename="../src/core/controller.cpp" line="109"/>
+        <source>&amp;Take Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="114"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuration</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="111"/>
+        <location filename="../src/core/controller.cpp" line="117"/>
         <source>&amp;Information</source>
         <translation>&amp;Information</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="120"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
@@ -239,7 +244,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
 <context>
     <name>FlameshotDBusAdapter</name>
     <message>
-        <location filename="../src/core/flameshotdbusadapter.cpp" line="74"/>
+        <location filename="../src/core/flameshotdbusadapter.cpp" line="57"/>
         <source>Unable to capture screen</source>
         <translation>Impossible de capturer l&apos;écran</translation>
     </message>
@@ -534,6 +539,19 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     </message>
 </context>
 <context>
+    <name>PinTool</name>
+    <message>
+        <location filename="../src/tools/pin/pintool.cpp" line="34"/>
+        <source>Pin Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/pin/pintool.cpp" line="42"/>
+        <source>Pin image on the desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
@@ -559,8 +577,9 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     </message>
     <message>
         <location filename="../src/main.cpp" line="71"/>
-        <location filename="../src/main.cpp" line="304"/>
-        <location filename="../src/main.cpp" line="333"/>
+        <location filename="../src/main.cpp" line="302"/>
+        <location filename="../src/main.cpp" line="326"/>
+        <location filename="../src/main.cpp" line="355"/>
         <source>Unable to connect via DBus</source>
         <translation>Impossible de se connecter via DBus</translation>
     </message>
@@ -741,6 +760,14 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%Y-%m-%d)</source>
         <translation>Date Complête (%Y-%m-%d)</translation>
+    </message>
+</context>
+<context>
+    <name>SystemNotification</name>
+    <message>
+        <location filename="../src/utils/systemnotification.cpp" line="28"/>
+        <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

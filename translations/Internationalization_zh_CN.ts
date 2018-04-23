@@ -58,7 +58,7 @@
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Sets the Arrow as the paint tool</source>
-        <translation>选择箭头作为油漆工具</translation>
+        <translation>选择箭头作为绘画工具</translation>
     </message>
 </context>
 <context>
@@ -77,18 +77,18 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="221"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="215"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>用鼠标选择一个区域,或按Esc退出。
-按Enter键捕捉屏幕。
-按鼠标右键显示颜色选择器。
-使用鼠标滚轮来改变油漆工具的厚度。</translation>
+        <translation>用鼠标选择一个区域,或按 Esc 退出。
+按 Enter 键捕捉屏幕。
+按住鼠标右键显示颜色选择器。
+使用鼠标滚轮来改变绘画工具的宽度。</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
@@ -133,17 +133,22 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="108"/>
+        <location filename="../src/core/controller.cpp" line="109"/>
+        <source>&amp;Take Screenshot</source>
+        <translation>进行截图(&amp;T)</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="114"/>
         <source>&amp;Configuration</source>
         <translation>配置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="111"/>
+        <location filename="../src/core/controller.cpp" line="117"/>
         <source>&amp;Information</source>
         <translation>信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="120"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
@@ -166,7 +171,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="35"/>
         <source>Unable to connect via DBus</source>
-        <translation>无法通过DBus进行连接</translation>
+        <translation>无法通过 DBus 进行连接</translation>
     </message>
 </context>
 <context>
@@ -240,7 +245,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>FlameshotDBusAdapter</name>
     <message>
-        <location filename="../src/core/flameshotdbusadapter.cpp" line="74"/>
+        <location filename="../src/core/flameshotdbusadapter.cpp" line="57"/>
         <source>Unable to capture screen</source>
         <translation>无法捕获屏幕</translation>
     </message>
@@ -289,13 +294,13 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <source>Unable to read file.</source>
-        <translation>无法读取文件.</translation>
+        <translation>无法读取文件。</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
         <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Unable to write file.</source>
-        <translation>无法写入文件.</translation>
+        <translation>无法写入文件。</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="101"/>
@@ -535,6 +540,19 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
+    <name>PinTool</name>
+    <message>
+        <location filename="../src/tools/pin/pintool.cpp" line="34"/>
+        <source>Pin Tool</source>
+        <translation>贴图工具</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/pin/pintool.cpp" line="42"/>
+        <source>Pin image on the desktop</source>
+        <translation>在桌面上固定图像</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
@@ -560,8 +578,9 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/main.cpp" line="71"/>
-        <location filename="../src/main.cpp" line="304"/>
-        <location filename="../src/main.cpp" line="333"/>
+        <location filename="../src/main.cpp" line="302"/>
+        <location filename="../src/main.cpp" line="326"/>
+        <location filename="../src/main.cpp" line="355"/>
         <source>Unable to connect via DBus</source>
         <translation>无法通过DBus进行连接</translation>
     </message>
@@ -745,11 +764,19 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
+    <name>SystemNotification</name>
+    <message>
+        <location filename="../src/utils/systemnotification.cpp" line="28"/>
+        <source>Flameshot Info</source>
+        <translation>Flameshot 消息</translation>
+    </message>
+</context>
+<context>
     <name>UIcolorEditor</name>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>UI颜色编辑器</translation>
+        <translation>UI 颜色编辑器</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
