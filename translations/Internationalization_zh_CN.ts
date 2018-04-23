@@ -58,7 +58,7 @@
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Sets the Arrow as the paint tool</source>
-        <translation>选择箭头作为油漆工具</translation>
+        <translation>选择箭头作为绘画工具</translation>
     </message>
 </context>
 <context>
@@ -82,10 +82,10 @@
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>用鼠标选择一个区域,或按Esc退出。
-按Enter键捕捉屏幕。
-按鼠标右键显示颜色选择器。
-使用鼠标滚轮来改变油漆工具的厚度。</translation>
+        <translation>用鼠标选择一个区域,或按 Esc 退出。
+按 Enter 键捕捉屏幕。
+按住鼠标右键显示颜色选择器。
+使用鼠标滚轮来改变绘画工具的宽度。</translation>
     </message>
     <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
@@ -171,7 +171,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="35"/>
         <source>Unable to connect via DBus</source>
-        <translation>无法通过DBus进行连接</translation>
+        <translation>无法通过 DBus 进行连接</translation>
     </message>
 </context>
 <context>
@@ -294,13 +294,13 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <source>Unable to read file.</source>
-        <translation>无法读取文件.</translation>
+        <translation>无法读取文件。</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
         <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Unable to write file.</source>
-        <translation>无法写入文件.</translation>
+        <translation>无法写入文件。</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="101"/>
@@ -776,7 +776,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>UI颜色编辑器</translation>
+        <translation>UI 颜色编辑器</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
