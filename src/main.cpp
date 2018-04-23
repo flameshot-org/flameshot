@@ -226,7 +226,7 @@ int main(int argc, char *argv[]) {
                                &utils,
                                SLOT(captureFailed(uint)));
             QTimer t;
-            t.setInterval(1000 * 60 * 15); // 15 minutes timeout
+            t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
             QObject::connect(&t, &QTimer::timeout, qApp,
                              &QCoreApplication::quit);
             t.start();
@@ -275,7 +275,7 @@ int main(int argc, char *argv[]) {
                                SLOT(captureFailed(uint)));
             // timeout just in case
             QTimer t;
-            t.setInterval(2000);
+            t.setInterval(delay + 2000);
             QObject::connect(&t, &QTimer::timeout, qApp,
                              &QCoreApplication::quit);
             t.start();
