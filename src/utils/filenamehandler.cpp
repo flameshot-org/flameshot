@@ -45,7 +45,7 @@ QString FileNameHandler::parseFilename(const QString &name) {
     free(tempData);
 
     // add the parsed pattern in a correct format for the filesystem
-    res = res.replace("/", "⁄");
+    res = res.replace("/", "⁄").replace(":", "-");
     return res;
 }
 
