@@ -50,10 +50,6 @@ Example commands:
 
    `flameshot gui -d 2000`
 
-- fullscreen capture (asking savepath):
-
-   `flameshot full`
-
 - fullscreen capture with custom save path (no GUI) and delayed:
 
    `flameshot full -p ~/myStuff/captures -d 5000`
@@ -193,6 +189,8 @@ Compilation:  run `qmake && make` in the main directory.
 Simply use `make install` with privileges.
 
 ## Packaging
+
+Having `git` installed is required if you want to have  precise app version information inside Flameshot after the generation of the makefile with `qmake`.
 
 In order to generate the makefile installing in `/usr` instead of in `/usr/local` you can use the `packaging` option to generate the proper makefile (`qmake CONFIG+=packaging` instead of just `qmake`).
 
