@@ -48,6 +48,18 @@ QStringList CommandOption::names() const {
     return m_names;
 }
 
+QStringList CommandOption::dashedNames() const {
+    QStringList dashedNames;
+    for (const QString &name: m_names) {
+        // prepend "-" to single character options, and "--" to the others
+        QString dashedName = (name.length() == 1) ?
+                    QStringLiteral("-%1").arg(name) :
+                    QStringLiteral("--%1").arg(name);
+        dashedNames << dashedName;
+    }
+    return dashedNames;
+}
+
 void CommandOption::setValueName(const QString &name) {
     m_valueName = name;
 }
