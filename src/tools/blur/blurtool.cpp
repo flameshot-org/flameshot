@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "blurtool.h"
+#include "src/utils/confighandler.h"
 #include <QPainter>
 #include <QGraphicsBlurEffect>
 #include <QGraphicsPixmapItem>
@@ -56,7 +57,7 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
     QRect selection = QRect(p0, p1).normalized();
 
     QGraphicsBlurEffect *blur = new QGraphicsBlurEffect;
-    blur->setBlurRadius(10);
+    blur->setBlurRadius(ConfigHandler().blurRadius());
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem (
                 pixmap.copy(selection));
     item->setGraphicsEffect(blur);
@@ -65,7 +66,7 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
     scene.addItem(item);
 
     scene.render(&painter, selection, QRectF());
-    blur->setBlurRadius(12);
+    blur->setBlurRadius(ConfigHandler().blurRadius());
     scene.render(&painter, selection, QRectF());
     scene.render(&painter, selection, QRectF());
 }
