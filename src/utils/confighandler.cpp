@@ -260,6 +260,19 @@ void ConfigHandler::setContrastOpacity(const int transparency) {
     m_settings.setValue("contrastOpacity", transparency);
 }
 
+int ConfigHandler::blurRadius() {
+    int blurRadius = 10;
+    if (m_settings.contains("blurRadius")) {
+        blurRadius = m_settings.value("blurRadius").toInt();
+        blurRadius = qBound(1, blurRadius, 30);
+    }
+    return blurRadius;
+}
+
+void ConfigHandler::setBlurRadius(const int blur) {
+    m_settings.setValue("blurRadius", blur);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }

@@ -67,6 +67,9 @@ public:
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
+    int blurRadius();
+    void setBlurRadius(const int);
+
     void setDefaults();
     void setAllTheButtons();
 

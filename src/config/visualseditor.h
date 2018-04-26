@@ -34,13 +34,16 @@ public slots:
 
 private slots:
     void saveOpacity();
+    void saveBlurRadius();
 
 private:
     QVBoxLayout *m_layout;
     ButtonListView *m_buttonList;
     UIcolorEditor *m_colorEditor;
     ExtendedSlider *m_opacitySlider;
+    ExtendedSlider *m_blurRadiusSlider;
 
     void initWidgets();
     void initOpacitySlider();
+    void initBlurRadiusSlider();
 };

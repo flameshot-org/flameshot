@@ -34,7 +34,9 @@ void VisualsEditor::updateComponents() {
     m_buttonList->updateComponents();
     m_colorEditor->updateComponents();
     int opacity = ConfigHandler().contrastOpacityValue();
+    int blurRadius = ConfigHandler().blurRadius();
     m_opacitySlider->setMapedValue(0, opacity, 255);
+    m_blurRadiusSlider->setMapedValue(1, blurRadius, 30);
 }
 
 void VisualsEditor::initOpacitySlider() {
@@ -67,11 +69,42 @@ void VisualsEditor::saveOpacity() {
     ConfigHandler().setContrastOpacity(value);
 }
 
+void VisualsEditor::initBlurRadiusSlider() {
+    m_blurRadiusSlider = new ExtendedSlider();
+    m_blurRadiusSlider->setFocusPolicy(Qt::NoFocus);
+    m_blurRadiusSlider->setOrientation(Qt::Horizontal);
+    m_blurRadiusSlider->setRange(1, 30);
+    connect(m_blurRadiusSlider, &ExtendedSlider::modificationsEnded,
+            this, &VisualsEditor::saveBlurRadius);
+    QHBoxLayout *localLayout = new QHBoxLayout();
+    localLayout->addWidget(new QLabel("1"));
+    localLayout->addWidget(m_blurRadiusSlider);
+    localLayout->addWidget(new QLabel("30"));
+
+    QLabel *label = new QLabel();
+    QString labelMsg = tr("Blur radius for blur tool:") + " %1";
+    connect(m_blurRadiusSlider, &ExtendedSlider::valueChanged,
+            this, [labelMsg, label](int val){
+        label->setText(labelMsg.arg(val));
+    });
+    m_layout->addWidget(label);
+    m_layout->addLayout(localLayout);
+
+    int blurRadius = ConfigHandler().blurRadius();
+    m_blurRadiusSlider->setMapedValue(1, blurRadius, 30);
+}
+
+void VisualsEditor::saveBlurRadius() {
+    int value = m_blurRadiusSlider->mappedValue(1, 30);
+    ConfigHandler().setBlurRadius(value);
+}
+
 void VisualsEditor::initWidgets() {
     m_colorEditor = new UIcolorEditor();
     m_layout->addWidget(m_colorEditor);
 
     initOpacitySlider();
+    initBlurRadiusSlider();
 
     auto boxButtons = new QGroupBox();
     boxButtons->setTitle(tr("Button Selection"));
