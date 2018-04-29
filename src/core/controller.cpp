@@ -50,7 +50,9 @@ Controller::Controller() : m_captureWindow(nullptr) {
     GlobalShortcutFilter *nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
     connect(nativeFilter, &GlobalShortcutFilter::printPressed,
-            this, [this](){ this->createVisualCapture(); });
+            this, [this](){
+        this->requestCapture(CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
+    });
 #endif
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
