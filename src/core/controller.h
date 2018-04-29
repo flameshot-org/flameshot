@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QPixmap>
+#include <QMap>
 #include <QTimer>
 #include <functional>
 
