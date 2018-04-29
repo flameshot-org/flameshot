@@ -17,6 +17,7 @@
 
 #include "screengrabber.h"
 #include "src/utils/filenamehandler.h"
+#include "src/utils/systemnotification.h"
 #include <QPixmap>
 #include <QScreen>
 #include <QGuiApplication>
@@ -64,6 +65,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
         } default:
             ok = false;
             break;
+        }
+        if (!ok) {
+            SystemNotification().sendMessage(tr("Unable to capture screen"));
         }
         return res;
     }

@@ -43,7 +43,7 @@ bool GlobalShortcutFilter::nativeEventFilter(
 
         // TODO: this is just a temporal workwrround, proper global
         // support would need custom shortcuts defined by the user.
-        Controller::getInstance()->createVisualCapture();
+        Controller::getInstance()->startVisualCapture();
         return true;
     }
     return false;

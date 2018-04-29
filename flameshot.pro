@@ -133,7 +133,8 @@ SOURCES += src/main.cpp \
     src/widgets/capture/utilitypanel.cpp \
     src/widgets/capture/hovereventfilter.cpp \
     src/widgets/capture/selectionwidget.cpp \
-    src/tools/pin/pinwidget.cpp
+    src/tools/pin/pinwidget.cpp \
+    src/core/capturerequest.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -200,7 +201,8 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/capture/utilitypanel.h \
     src/widgets/capture/hovereventfilter.h \
     src/widgets/capture/selectionwidget.h \
-    src/tools/pin/pinwidget.h
+    src/tools/pin/pinwidget.h \
+    src/core/capturerequest.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
