@@ -61,7 +61,7 @@ public:
     QPixmap pixmap();
 
 signals:
-    void captureTaken(uint id, QByteArray p);
+    void captureTaken(uint id, QPixmap p);
     void captureFailed(uint id);
 
 private slots:

@@ -140,10 +140,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
 
 CaptureWidget::~CaptureWidget() {
     if (m_captureDone) {
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
-        this->pixmap().save(&buffer, "PNG");
-        emit captureTaken(m_id, byteArray);
+        emit captureTaken(m_id, this->pixmap());
     } else {
         emit captureFailed(m_id);
     }

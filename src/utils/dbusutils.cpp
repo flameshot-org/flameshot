@@ -22,12 +22,20 @@
 #include <QFile>
 
 DBusUtils::DBusUtils(QObject *parent) : QObject(parent) {
-    m_id = qHash(qApp->arguments().join(" "));
 }
 
-DBusUtils::DBusUtils(uint id, QObject *parent) :
-    QObject(parent), m_id(id)
-{
+void DBusUtils::connectPrintCapture(QDBusConnection &session, uint id) {
+    m_id = id;
+    // captureTaken
+    session.connect("org.dharkael.Flameshot",
+                       "/", "", "captureTaken",
+                       this,
+                       SLOT(captureTaken(uint, QByteArray)));
+    // captureFailed
+    session.connect("org.dharkael.Flameshot",
+                       "/", "", "captureFailed",
+                       this,
+                       SLOT(captureFailed(uint)));
 }
 
 void DBusUtils::checkDBusConnection(const QDBusConnection &c) {

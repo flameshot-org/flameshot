@@ -25,8 +25,8 @@ class DBusUtils : public QObject {
     Q_OBJECT
 public:
     explicit DBusUtils(QObject *parent = nullptr);
-    explicit DBusUtils(uint id, QObject *parent = nullptr);
 
+    void connectPrintCapture(QDBusConnection &session, uint id);
     void checkDBusConnection(const QDBusConnection &connection);
 
 public slots:
@@ -34,5 +34,6 @@ public slots:
     void captureFailed(uint id);
 
 private:
+
     uint m_id;
 };

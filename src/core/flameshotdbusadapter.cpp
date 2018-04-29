@@ -30,7 +30,7 @@ FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
     connect(controller, &Controller::captureFailed,
             this, &FlameshotDBusAdapter::captureFailed);
     connect(controller, &Controller::captureTaken,
-            this, &FlameshotDBusAdapter::captureTaken);
+            this, &FlameshotDBusAdapter::handleCaptureTaken);
 }
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {
@@ -38,39 +38,26 @@ FlameshotDBusAdapter::~FlameshotDBusAdapter() {
 }
 
 void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id) {
-    auto controller =  Controller::getInstance();
-
-    auto f = [controller, id, path, this]() {
-       controller->createVisualCapture(id, path);
-    };
-    // QTimer::singleShot(delay, controller, f); // requires Qt 5.4
-    doLater(delay, controller, f);
+    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+//    if (toClipboard) {
+//        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+//    }
+    req.setStaticID(id);
+    Controller::getInstance()->requestCapture(req);
 }
 
 void FlameshotDBusAdapter::fullScreen(
         QString path, bool toClipboard, int delay, uint id)
 {
-    auto f = [id, path, toClipboard, this]() {
-        bool ok = true;
-        QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
-        if (!ok) {
-            SystemNotification().sendMessage(tr("Unable to capture screen"));
-            emit captureFailed(id);
-            return;
-        }
-        if(!path.isEmpty()) {
-            ScreenshotSaver().saveToFilesystem(p, path);
-        }
-        if(toClipboard) {
-            ScreenshotSaver().saveToClipboard(p);
-        }
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
-        p.save(&buffer, "PNG");
-        emit captureTaken(id, byteArray);
-    };
-    //QTimer::singleShot(delay, this, f); // // requires Qt 5.4
-    doLater(delay, this, f);
+    CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, path);
+    if (toClipboard) {
+        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+    }
+    if (!path.isEmpty()) {
+        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    }
+    req.setStaticID(id);
+    Controller::getInstance()->requestCapture(req);
 }
 
 void FlameshotDBusAdapter::openConfig() {
@@ -91,4 +78,11 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled) {
     auto controller =  Controller::getInstance();
     // Autostart is not saved in a .ini file, requires manual update
     controller->updateConfigComponents();
+}
+
+void FlameshotDBusAdapter::handleCaptureTaken(uint id, QPixmap p) {
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    p.save(&buffer, "PNG");
+    emit captureTaken(id, byteArray);
 }

@@ -22,6 +22,7 @@
 #include "src/cli/commandlineparser.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/pathinfo.h"
+#include "src/core/capturerequest.h"
 #include <QApplication>
 #include <QTranslator>
 #include <QTextStream>
@@ -203,28 +204,20 @@ int main(int argc, char *argv[]) {
         QString pathValue = parser.value(pathOption);
         int delay = parser.value(delayOption).toInt();
         bool isRaw = parser.isSet(rawImageOption);
-        uint id = qHash(app.arguments().join(" "));
-        DBusUtils utils(id);
+        DBusUtils dbusUtils;
+        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
+        uint id = req.id();
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
                                            "/", "", "graphicCapture");
         m << pathValue << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
-        utils.checkDBusConnection(sessionBus);
+        dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
         if (isRaw) {
-            // captureTaken
-            sessionBus.connect("org.dharkael.Flameshot",
-                               "/", "", "captureTaken",
-                               &utils,
-                               SLOT(captureTaken(uint, QByteArray)));
-            // captureFailed
-            sessionBus.connect("org.dharkael.Flameshot",
-                               "/", "", "captureFailed",
-                               &utils,
-                               SLOT(captureFailed(uint)));
+            dbusUtils.connectPrintCapture(sessionBus, id);
             QTimer t;
             t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
             QObject::connect(&t, &QTimer::timeout, qApp,
@@ -251,28 +244,23 @@ int main(int argc, char *argv[]) {
             goto finish;
         }
 
-        uint id = qHash(app.arguments().join(" "));
-        DBusUtils utils(id);
+        CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, pathValue);
+        if (toClipboard) {
+            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        }
+        uint id = req.id();
+        DBusUtils dbusUtils;
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
                                                "/", "", "fullScreen");
         m << pathValue << toClipboard << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
-        utils.checkDBusConnection(sessionBus);
+        dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
         if (isRaw) {
-            // captureTaken
-            sessionBus.connect("org.dharkael.Flameshot",
-                               "/", "", "captureTaken",
-                               &utils,
-                               SLOT(captureTaken(uint, QByteArray)));
-            // captureFailed
-            sessionBus.connect("org.dharkael.Flameshot",
-                               "/", "", "captureFailed",
-                               &utils,
-                               SLOT(captureFailed(uint)));
+            dbusUtils.connectPrintCapture(sessionBus, id);
             // timeout just in case
             QTimer t;
             t.setInterval(delay + 2000);
