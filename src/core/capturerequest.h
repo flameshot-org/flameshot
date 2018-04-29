@@ -18,7 +18,6 @@
 #pragma once
 
 #include <QString>
-#include <QDBusMessage>
 
 class CaptureRequest {
 public:
