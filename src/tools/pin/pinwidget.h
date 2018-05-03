@@ -20,8 +20,6 @@
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
 
-#define LAYOUT_MARGIN 7
-
 class QVBoxLayout;
 class QLabel;
 
@@ -46,5 +44,5 @@ private:
     QLabel *m_label;
     QPoint m_dragStart;
     qreal m_offsetX, m_offsetY;
-    QGraphicsDropShadowEffect *m_shadowEffect = new QGraphicsDropShadowEffect(this);
+    QGraphicsDropShadowEffect *m_shadowEffect;
 };
