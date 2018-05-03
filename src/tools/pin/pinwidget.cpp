@@ -26,8 +26,19 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
     QWidget(parent), m_pixmap(pixmap)
 {
     setWindowFlags(Qt::WindowStaysOnTopHint
-                   | Qt::FramelessWindowHint);
+                   | Qt::FramelessWindowHint
+                   | Qt::Tool
+                   | Qt::X11BypassWindowManagerHint);
+    //set the bottom widget background transparent
+    setAttribute(Qt::WA_TranslucentBackground);
+
+    m_shadowEffect->setColor(Qt::lightGray);
+    m_shadowEffect->setBlurRadius(2 * LAYOUT_MARGIN);
+    m_shadowEffect->setOffset(0, 0);
+    setGraphicsEffect(m_shadowEffect);
+
     m_layout = new QVBoxLayout(this);
+    m_layout->setContentsMargins(LAYOUT_MARGIN, LAYOUT_MARGIN, LAYOUT_MARGIN, LAYOUT_MARGIN);
 
     m_label = new QLabel();
     m_label->setPixmap(m_pixmap);
@@ -47,6 +58,13 @@ void PinWidget::wheelEvent(QWheelEvent *e) {
     adjustSize();
 
     e->accept();
+}
+
+void PinWidget::enterEvent(QEvent *) {
+    m_shadowEffect->setColor(QColor(3, 150, 255));
+}
+void PinWidget::leaveEvent(QEvent *) {
+    m_shadowEffect->setColor(Qt::lightGray);
 }
 
 void PinWidget::mouseDoubleClickEvent(QMouseEvent *) {
