@@ -18,6 +18,9 @@
 #pragma once
 
 #include <QWidget>
+#include <QGraphicsDropShadowEffect>
+
+#define LAYOUT_MARGIN 7
 
 class QVBoxLayout;
 class QLabel;
@@ -32,6 +35,8 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent *);
     void mousePressEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *);
+    void enterEvent(QEvent *);
+    void leaveEvent(QEvent *);
 
 private:
     void setScaledPixmap(const QSize &size);
@@ -41,4 +46,5 @@ private:
     QLabel *m_label;
     QPoint m_dragStart;
     qreal m_offsetX, m_offsetY;
+    QGraphicsDropShadowEffect *m_shadowEffect = new QGraphicsDropShadowEffect(this);
 };
