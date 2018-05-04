@@ -32,7 +32,7 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
 
 
     m_layout = new QVBoxLayout(this);
-    const int margin = 7;
+    const int margin = this->margin();
     m_layout->setContentsMargins(margin, margin, margin, margin);
 
     m_shadowEffect = new QGraphicsDropShadowEffect(this);
@@ -47,6 +47,10 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
 
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+}
+
+int PinWidget::margin() const {
+    return 7;
 }
 
 void PinWidget::wheelEvent(QWheelEvent *e) {

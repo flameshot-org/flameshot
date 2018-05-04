@@ -28,6 +28,8 @@ class PinWidget : public QWidget {
 public:
     explicit PinWidget(const QPixmap &pixmap, QWidget *parent = nullptr);
 
+    int margin() const;
+
 protected:
     void wheelEvent(QWheelEvent *e);
     void mouseDoubleClickEvent(QMouseEvent *);
