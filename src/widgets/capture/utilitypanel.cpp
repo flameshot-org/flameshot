@@ -31,6 +31,7 @@
 UtilityPanel::UtilityPanel(QWidget *parent) : QWidget(parent) {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
+    setCursor(Qt::ArrowCursor);
 
     m_showAnimation = new QPropertyAnimation(m_internalPanel, "geometry", this);
     m_showAnimation->setEasingCurve(QEasingCurve::InOutQuad);
