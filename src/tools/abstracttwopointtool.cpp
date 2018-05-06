@@ -60,6 +60,14 @@ void AbstractTwoPointTool::drawMove(const QPoint &p) {
     m_points.second = p;
 }
 
+void AbstractTwoPointTool::colorChanged(const QColor &c) {
+    m_color = c;
+}
+
+void AbstractTwoPointTool::thicknessChanged(const int th) {
+    m_thickness = th;
+}
+
 void AbstractTwoPointTool::updateBackup(const QPixmap &pixmap) {
     m_pixmapBackup = pixmap.copy(backupRect(pixmap.rect()));
 }

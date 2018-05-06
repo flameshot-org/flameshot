@@ -29,20 +29,38 @@ class CaptureTool : public QObject {
 public:
     // Request actions on the main widget
     enum Request {
+        // Call close() in the editor.
         REQ_CLOSE_GUI,
+        // Call hide() in the editor.
         REQ_HIDE_GUI,
+        // Select the whole screen.
         REQ_SELECT_ALL,
+        // Disable the selection.
         REQ_HIDE_SELECTION,
+        // Undo the last active modification in the stack.
         REQ_UNDO_MODIFICATION,
+        // Redo the next modification in the stack.
         REQ_REDO_MODIFICATION,
+        // Remove all the modifications.
         REQ_CLEAR_MODIFICATIONS,
+        // Disable the active tool.
         REQ_MOVE_MODE,
+        // Open the color picker under the mouse.
         REQ_SHOW_COLOR_PICKER,
+        // Open/Close the side-panel.
         REQ_TOGGLE_SIDEBAR,
+        // Call update() in the editor.
         REQ_REDRAW,
+        // Append this tool to the undo/redo stack
+        REQ_APPEND_TO_STACK,
+        // Notify is the screenshot has been saved.
         REQ_CAPTURE_DONE_OK,
-        REQ_ADD_CHILD_WIDGETS,
+        // Instance this->widget()'s widget inside the editor under the mouse.
+        REQ_ADD_CHILD_WIDGET,
+        // Instance this->widget()'s widget as a window which closes after
+        // closing the editor.
         REQ_ADD_CHILD_WINDOW,
+        // Instance this->widget()'s widget which handles its own lifetime.
         REQ_ADD_EXTERNAL_WIDGETS,
     };
 
@@ -69,6 +87,7 @@ public:
     // Codename for the tool, this hsouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
     static QString nameID();
+    // Short description of the tool.
     virtual QString description() const = 0;
 
     // if the type is TYPE_WIDGET the widget is loaded in the main widget.
@@ -84,8 +103,12 @@ public:
     // revert changes
     virtual void undo(QPixmap &pixmap) = 0;
     // Called everytime the tool has to draw
-    virtual void process(
-            QPainter &painter, const QPixmap &pixmap, bool recordUndo = false) = 0;
+    // recordUndo indicates when the tool should save the information
+    // for the undo(), if the value is false calling undo() after
+    // that process should not modify revert the changes.
+    virtual void process(QPainter &painter,
+                         const QPixmap &pixmap,
+                         bool recordUndo = false) = 0;
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter &painter, const CaptureContext &context) = 0;
 
@@ -99,11 +122,16 @@ protected:
     }
 
 public slots:
-    // On mouse release
+    // On mouse release.
     virtual void drawEnd(const QPoint &p) = 0;
-    // Mouse pressed and moving, called once a pixel
+    // Mouse pressed and moving, called once a pixel.
     virtual void drawMove(const QPoint &p) = 0;
-    // Called when the tool is activated
+    // Called when the tool is activated.
     virtual void drawStart(const CaptureContext &context) = 0;
+    // Called right after pressign the button which activates the tool.
     virtual void pressed(const CaptureContext &context) = 0;
+    // Called when the color is changed in the editor.
+    virtual void colorChanged(const QColor &c) = 0;
+    // Called when the thickness of the tool is updated in the editor.
+    virtual void thicknessChanged(const int th) = 0;
 };

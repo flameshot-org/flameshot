@@ -38,7 +38,5 @@ public slots:
     void drawMove(const QPoint &p) override;
     void drawStart(const CaptureContext &context) override;
     void pressed(const CaptureContext &context) override;
-
-private:
-    QColor m_color;
+    void thicknessChanged(const int th) override;
 };

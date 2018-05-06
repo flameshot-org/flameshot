@@ -51,7 +51,8 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
                              bool fullscreen, QWidget *parent) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
-    m_previewEnabled(true), m_activeButton(nullptr), m_activeTool(nullptr),
+    m_previewEnabled(true), m_activeButton(nullptr),
+    m_activeTool(nullptr), m_toolWidget(nullptr),
     m_mouseOverHandle(SelectionWidget::NO_SIDE), m_id(id)
 {
     // Base config of the widget
@@ -173,7 +174,24 @@ void CaptureWidget::updateButtons() {
 }
 
 QPixmap CaptureWidget::pixmap() {
+    QPixmap p;
+    if (m_toolWidget && m_activeTool) {
+        p = m_context.selectedScreenshotArea().copy();
+        QPainter painter(&p);
+        m_activeTool->process(painter, p);
+    } else {
+        p = m_context.selectedScreenshotArea();
+    }
     return m_context.selectedScreenshotArea();
+}
+
+void CaptureWidget::close() {
+    if (m_toolWidget) {
+        m_toolWidget->deleteLater();
+        m_toolWidget = nullptr;
+    } else {
+        QWidget::close();
+    }
 }
 
 void CaptureWidget::paintEvent(QPaintEvent *) {
@@ -260,9 +278,21 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         // Click using a tool
         if (m_activeButton) {
             if (m_activeTool) {
-                m_activeTool->deleteLater();
+                if (m_activeTool->isValid() && m_toolWidget) {
+                    pushToolToStack();
+                } else {
+                    m_activeTool->deleteLater();
+                }
+                if (m_toolWidget) {
+                    m_toolWidget->deleteLater();
+                    return;
+                }
             }
             m_activeTool = m_activeButton->tool()->copy(this);
+            connect(this, &CaptureWidget::colorChanged,
+                    m_activeTool, &CaptureTool::colorChanged);
+            connect(this, &CaptureWidget::thicknessChanged,
+                    m_activeTool, &CaptureTool::thicknessChanged);
             connect(m_activeTool, &CaptureTool::requestAction,
                     this, &CaptureWidget::handleButtonSignal);
             m_activeTool->drawStart(m_context);
@@ -396,11 +426,11 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     } else if (m_mouseIsClicked && m_activeTool) {
         m_activeTool->drawEnd(m_context.mousePos);
         if (m_activeTool->isValid()) {
-            auto mod = new ModificationCommand(
-                        &m_context.screenshot, m_activeTool);
-            m_undoStack.push(mod);
+            pushToolToStack();
+        } else if (!m_toolWidget){
+            m_activeTool->deleteLater();
+            m_activeTool = nullptr;
         }
-        m_activeTool = nullptr;
     }
 
     // Show the buttons after the resize of the selection or the creation
@@ -457,6 +487,7 @@ void CaptureWidget::wheelEvent(QWheelEvent *e) {
     if (m_activeButton && m_activeButton->tool()->showMousePreview()) {
         update();
     }
+    emit thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent *e) {
@@ -514,6 +545,15 @@ void CaptureWidget::initWidget() {
 void CaptureWidget::setState(CaptureButton *b) {
     if (!b) {
         return;
+    }
+    if (m_toolWidget) {
+        m_toolWidget->deleteLater();
+        if (m_activeTool->isValid()) {
+            auto mod = new ModificationCommand(
+                        &m_context.screenshot, m_activeTool);
+            m_undoStack.push(mod);
+            m_activeTool = nullptr;
+        }
     }
     processTool(b->tool());
     // Only close activated from button
@@ -589,23 +629,34 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
     case CaptureTool::REQ_CAPTURE_DONE_OK:
         m_captureDone = true;
         break;
-    case CaptureTool::REQ_ADD_CHILD_WIDGETS:
-        if (m_activeTool) {
-            QWidget *w = m_activeTool->widget();
-            makeChild(w);
-            w->move(m_context.mousePos);
-            w->show();
+    case CaptureTool::REQ_ADD_CHILD_WIDGET:
+        if (!m_activeTool) {
+            break;
+        }
+        if (m_toolWidget) {
+            m_toolWidget->deleteLater();
+        }
+        m_toolWidget = m_activeTool->widget();
+        if (m_toolWidget) {
+            makeChild(m_toolWidget);
+            m_toolWidget->move(m_context.mousePos);
+            m_toolWidget->show();
+            m_toolWidget->setFocus();
         }
         break;
     case CaptureTool::REQ_ADD_CHILD_WINDOW:
-        if (m_activeTool) {
+        if (!m_activeTool) {
+            break;
+        } else {
             QWidget *w = m_activeTool->widget();
             connect(this, &CaptureWidget::destroyed, w, &QWidget::deleteLater);
             w->show();
         }
         break;
     case CaptureTool::REQ_ADD_EXTERNAL_WIDGETS:
-        if (m_activeTool) {
+        if (!m_activeTool) {
+            break;
+        } else {
             QWidget *w = m_activeTool->widget();
             w->setAttribute(Qt::WA_DeleteOnClose);
             w->show();
@@ -619,6 +670,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
 void CaptureWidget::setDrawColor(const QColor &c) {
     m_context.color = c;
     ConfigHandler().setDrawColor(m_context.color);
+    emit colorChanged(c);
 }
 
 void CaptureWidget::leftResize() {
@@ -718,6 +770,17 @@ void CaptureWidget::updateCursor() {
     }
 }
 
+void CaptureWidget::pushToolToStack() {
+    auto mod = new ModificationCommand(
+                &m_context.screenshot, m_activeTool);
+    m_undoStack.push(mod);
+    disconnect(this, &CaptureWidget::colorChanged,
+               m_activeTool, &CaptureTool::colorChanged);
+    disconnect(this, &CaptureWidget::thicknessChanged,
+               m_activeTool, &CaptureTool::thicknessChanged);
+    m_activeTool = nullptr;
+}
+
 void CaptureWidget::makeChild(QWidget *w) {
     w->setParent(this);
     w->installEventFilter(m_eventFilter);
@@ -743,7 +806,7 @@ int CaptureWidget::handleSize() {
 
 void CaptureWidget::copyScreenshot() {
     m_captureDone = true;
-    ScreenshotSaver().saveToClipboard(m_context.selectedScreenshotArea());
+    ScreenshotSaver().saveToClipboard(pixmap());
     close();
 }
 

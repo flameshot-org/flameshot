@@ -39,7 +39,4 @@ public:
 public slots:
     void drawStart(const CaptureContext &context) override;
     void pressed(const CaptureContext &context) override;
-
-private:
-    QColor m_color;
 };

@@ -63,6 +63,14 @@ void AbstractPathTool::drawMove(const QPoint &p) {
     addPoint(p);
 }
 
+void AbstractPathTool::colorChanged(const QColor &c) {
+    m_color = c;
+}
+
+void AbstractPathTool::thicknessChanged(const int th) {
+    m_thickness = th;
+}
+
 void AbstractPathTool::updateBackup(const QPixmap &pixmap) {
     const int val = m_thickness + m_padding;
     QRect area = m_backupArea.normalized() + QMargins(val, val, val, val);

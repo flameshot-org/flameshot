@@ -17,25 +17,33 @@
 
 #pragma once
 
-#include "src/tools/abstracttwopointtool.h"
+#include <QTextEdit>
 
-class LineTool : public AbstractTwoPointTool {
+class TextWidget : public QTextEdit
+{
     Q_OBJECT
 public:
-    explicit LineTool(QObject *parent = nullptr);
+    explicit TextWidget(QWidget *parent = nullptr);
 
-    QIcon icon(const QColor &background, bool inEditor) const override;
-    QString name() const override;
-    static QString nameID();
-    QString description() const override;
+    void adjustSize();
+    void setFont(const QFont &f);
 
-    CaptureTool* copy(QObject *parent = nullptr) override;
-    void process(
-            QPainter &painter, const QPixmap &pixmap, bool recordUndo = false) override;
-    void paintMousePreview(QPainter &painter, const CaptureContext &context) override;
+protected:
+    void showEvent(QShowEvent *e);
+    void resizeEvent(QResizeEvent *e);
+
+signals:
+    void textUpdated(const QString &s);
 
 public slots:
-    void drawMove(const QPoint &p) override;
-    void drawStart(const CaptureContext &context) override;
-    void pressed(const CaptureContext &context) override;
+    void updateFont(const QFont &f);
+    void setTextColor(const QColor &c);
+    void setFontPointSize(qreal s);
+
+private slots:
+    void emitTextUpdated();
+
+private:
+    QSize m_baseSize;
+    QSize m_minSize;
 };

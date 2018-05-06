@@ -60,9 +60,14 @@ public:
     void updateButtons();
     QPixmap pixmap();
 
+public slots:
+    void close();
+
 signals:
     void captureTaken(uint id, QPixmap p);
     void captureFailed(uint id);
+    void colorChanged(const QColor &c);
+    void thicknessChanged(const int thickness);
 
 private slots:
 
@@ -122,6 +127,7 @@ private:
     void initShortcuts();
     void updateSizeIndicator();
     void updateCursor();
+    void pushToolToStack();
     void makeChild(QWidget *w);
 
     // size of the handlers at the corners of the selection
@@ -134,6 +140,7 @@ private:
     // Last pressed button
     QPointer<CaptureButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
+    QPointer<QWidget> m_toolWidget;
 
     ButtonHandler *m_buttonHandler;
     UtilityPanel *m_panel;

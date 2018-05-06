@@ -37,6 +37,8 @@ public:
 public slots:
     void drawEnd(const QPoint &p) override;
     void drawMove(const QPoint &p) override;
+    void colorChanged(const QColor &c) override;
+    void thicknessChanged(const int th) override;
 
 protected:
     void updateBackup(const QPixmap &pixmap);
@@ -44,6 +46,7 @@ protected:
 
     QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;
+    QColor m_color;
     int m_thickness;
     // use m_padding to extend the area of the backup
     int m_padding;

@@ -69,3 +69,11 @@ void AbstractActionTool::drawMove(const QPoint &p) {
 void AbstractActionTool::drawStart(const CaptureContext &context) {
     Q_UNUSED(context);
 }
+
+void AbstractActionTool::colorChanged(const QColor &c) {
+    Q_UNUSED(c);
+}
+
+void AbstractActionTool::thicknessChanged(const int th) {
+    Q_UNUSED(th);
+}
