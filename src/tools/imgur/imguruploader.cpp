@@ -38,6 +38,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QTimer>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 ImgurUploader::ImgurUploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
@@ -68,10 +70,10 @@ ImgurUploader::ImgurUploader(const QPixmap &capture, QWidget *parent) :
 void ImgurUploader::handleReply(QNetworkReply *reply) {
     m_spinner->deleteLater();
     if (reply->error() == QNetworkReply::NoError) {
-        QString data = QString::fromUtf8(reply->readAll());
-        QString imageID = data.split("\"").at(5);
-        QString url = QStringLiteral("http://i.imgur.com/%1.png").arg(imageID);
-        m_imageURL.setUrl(url);
+        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject json = response.object();
+        QJsonObject data = json["data"].toObject();
+        m_imageURL.setUrl(data["link"].toString());
         onUploadOk();
     } else {
         m_infoLabel->setText(reply->errorString());
