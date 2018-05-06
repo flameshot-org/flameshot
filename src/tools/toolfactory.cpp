@@ -34,6 +34,7 @@
 #include "blur/blurtool.h"
 #include "redo/redotool.h"
 #include "pin/pintool.h"
+#include "text/texttool.h"
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent) {
 
@@ -98,6 +99,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_PIN:
         tool = new PinTool(parent);
+        break;
+    case CaptureButton::TYPE_TEXT:
+        tool = new TextTool(parent);
         break;
     default:
         tool = nullptr;

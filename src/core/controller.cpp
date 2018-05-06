@@ -104,6 +104,7 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
         } while (modalWidget);
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
+        //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
         connect(m_captureWindow, &CaptureWidget::captureFailed,
                 this, &Controller::captureFailed);
         connect(m_captureWindow, &CaptureWidget::captureTaken,

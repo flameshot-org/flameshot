@@ -51,6 +51,7 @@ public:
         TYPE_BLUR = 15,
         TYPE_REDO = 16,
         TYPE_PIN = 17,
+        TYPE_TEXT = 18,
     };
 
     CaptureButton() = delete;

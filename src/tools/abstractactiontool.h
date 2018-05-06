@@ -19,7 +19,7 @@
 
 #include "capturetool.h"
 
-class AbstractActionTool : public CaptureTool{
+class AbstractActionTool : public CaptureTool {
     Q_OBJECT
 public:
     explicit AbstractActionTool(QObject *parent = nullptr);
@@ -39,4 +39,6 @@ public slots:
     void drawEnd(const QPoint &p) override;
     void drawMove(const QPoint &p) override;
     void drawStart(const CaptureContext &context) override;
+    void colorChanged(const QColor &c) override;
+    void thicknessChanged(const int th) override;
 };
