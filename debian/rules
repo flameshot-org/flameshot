@@ -13,6 +13,7 @@
 # package maintainers to append LDFLAGS
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
+export QT_SELECT := 5
 
 %:
 	dh $@ 
