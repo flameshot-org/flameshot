@@ -1,5 +1,5 @@
-flameshot (0.4-1) xenial; urgency=medium
+flameshot (0.6~dev-1) unstable; urgency=medium
 
-  * Initial package release
+  * Initial deb package.
 
- -- Juanma Navarro Mañez <juanma1980@gmail.com>  Thu, 21 Sep 2017 09:01:13 +0200
+ -- Boyuan Yang <073plan@gmail.com>  Mon, 07 May 2018 17:34:56 +0800
