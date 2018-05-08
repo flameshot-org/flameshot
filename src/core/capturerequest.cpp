@@ -22,9 +22,10 @@
 
 CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
                                const uint delay, const QString &path,
+                               const QVariant &data,
                                CaptureRequest::ExportTask tasks) :
     m_mode(mode), m_delay(delay), m_path(path), m_tasks(tasks),
-    m_forcedID(false), m_id(0)
+    m_data(data), m_forcedID(false), m_id(0)
 {
 
 }
@@ -42,7 +43,7 @@ uint CaptureRequest::id() const {
     uint id = 0;
     QVector<uint>v;
     v << qHash(m_mode) << qHash(m_delay * QDateTime::currentMSecsSinceEpoch())
-      << qHash(m_path) << qHash(m_tasks);
+      << qHash(m_path) << qHash(m_tasks) << m_data.toInt();
     for(uint i : v) {
         id ^= i + 0x9e3779b9 + (id << 6) + (id >> 2);
     }
@@ -59,6 +60,10 @@ uint CaptureRequest::delay() const {
 
 QString CaptureRequest::path() const {
     return m_path;
+}
+
+QVariant CaptureRequest::data() const {
+    return m_data;
 }
 
 void CaptureRequest::addTask(CaptureRequest::ExportTask task) {

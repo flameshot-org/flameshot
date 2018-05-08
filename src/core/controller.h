@@ -41,6 +41,8 @@ public:
     Controller(const Controller&) = delete;
     void operator =(const Controller&) = delete;
 
+    void enableExports();
+
 signals:
     void captureTaken(uint id, QPixmap p);
     void captureFailed(uint id);
@@ -62,6 +64,7 @@ private slots:
     void startFullscreenCapture(const uint id = 0);
     void startVisualCapture(const uint id = 0,
                              const QString &forcedSavePath = QString());
+    void startScreenGrab(const uint id = 0, const int screenNumber = -1);
 
     void handleCaptureTaken(uint id, QPixmap p);
     void handleCaptureFailed(uint id);

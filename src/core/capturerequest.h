@@ -19,14 +19,14 @@
 
 #include <QString>
 #include <QPixmap>
+#include <QVariant>
 
 class CaptureRequest {
 public:
     enum CaptureMode {
         FULLSCREEN_MODE,
         GRAPHICAL_MODE,
-        //GRAPHICAL_WINDOW,
-        //SCREEN,
+        SCREEN_MODE,
     };
 
     enum ExportTask {
@@ -38,6 +38,7 @@ public:
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
                    const QString &path = "",
+                   const QVariant &data = QVariant(),
                    ExportTask tasks = NO_TASK);
 
     void setStaticID(uint id);
@@ -45,6 +46,7 @@ public:
     uint id() const;
     uint delay() const;
     QString path() const;
+    QVariant data() const;
     CaptureMode captureMode() const;
 
     void addTask(ExportTask task);
@@ -55,6 +57,7 @@ private:
     uint m_delay;
     QString m_path;
     ExportTask m_tasks;
+    QVariant m_data;
 
     bool m_forcedID;
     uint m_id;

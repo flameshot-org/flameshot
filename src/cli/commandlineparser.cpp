@@ -62,10 +62,12 @@ QString optionsToString(const QList<CommandOption> &options,
     QString result;
     if(!dashedOptionList.isEmpty()) {
         result += "Options:\n";
+        QString linePadding = QString(" ").repeated(size + 4).prepend("\n");
         for (int i = 0; i < options.length(); ++i) {
             result += QStringLiteral("  %1  %2\n")
                     .arg(dashedOptionList.at(i).leftJustified(size, ' '))
-                    .arg(options.at(i).description());
+                    .arg(options.at(i).description()
+                         .replace("\n", linePadding));
         }
         if (!arguments.isEmpty()) {
             result += "\n";
@@ -299,7 +301,7 @@ bool CommandLineParser::isSet(const CommandOption &option) const {
 }
 
 QString CommandLineParser::value(const CommandOption &option) const {
-    QString value;
+    QString value = option.value();
     for (const CommandOption &fOption: m_foundOptions) {
         if (option == fOption) {
             value = fOption.value();
