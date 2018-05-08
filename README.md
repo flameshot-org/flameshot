@@ -58,6 +58,14 @@ Example commands:
 
    `flameshot full -c -p ~/myStuff/captures`
 
+- capture the screen containing the mouse and print the image (bytes) in PNG format:
+
+   `flameshot screen -r`
+
+- capture the screen number 1 and copy it to the clipboard:
+
+   `flameshot screen -n 1 -c`
+
 In case of doubt choose the first or the second command as shortcut in your favorite desktop environment.
 
 A systray icon will be in your system's panel while Flameshot is running.

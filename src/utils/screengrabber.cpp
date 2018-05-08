@@ -88,3 +88,31 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
     p.setDevicePixelRatio(QApplication::desktop()->devicePixelRatio());
     return p;
 }
+
+QPixmap ScreenGrabber::grabScreen(int screenNumber, bool &ok) {
+    QPixmap p;
+    bool isVirtual = QApplication::desktop()->isVirtualDesktop();
+    if (isVirtual || m_info.waylandDectected()) {
+        p = grabEntireDesktop(ok);
+        if (ok) {
+            QPoint topLeft(0, 0);
+#ifdef Q_OS_WIN
+            for (QScreen *const screen : QGuiApplication::screens()) {
+                QPoint topLeftScreen = screen->geometry().topLeft();
+                if (topLeft.x() > topLeftScreen.x() ||
+                        topLeft.y() > topLeftScreen.y()) {
+                    topLeft = topLeftScreen;
+                }
+            }
+#endif
+            QRect geometry = QApplication::desktop()->
+                    screenGeometry(screenNumber);
+            geometry.moveTo(geometry.topLeft() - topLeft);
+            p = p.copy(geometry);
+        }
+    } else {
+        p = QApplication::desktop()->screen(screenNumber)->grab();
+        ok = true;
+    }
+    return p;
+}

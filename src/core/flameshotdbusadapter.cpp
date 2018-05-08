@@ -22,7 +22,6 @@
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
 #include <QBuffer>
-
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
     : QDBusAbstractAdaptor(parent)
 {
@@ -60,6 +59,20 @@ void FlameshotDBusAdapter::fullScreen(
     Controller::getInstance()->requestCapture(req);
 }
 
+void FlameshotDBusAdapter::captureScreen(int number, QString path,
+                                         bool toClipboard, int delay, uint id)
+{
+    CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, path, number);
+    if (toClipboard) {
+        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+    }
+    if (!path.isEmpty()) {
+        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    }
+    req.setStaticID(id);
+    Controller::getInstance()->requestCapture(req);
+}
+
 void FlameshotDBusAdapter::openConfig() {
     Controller::getInstance()->openConfigWindow();
 }
@@ -80,7 +93,7 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled) {
     controller->updateConfigComponents();
 }
 
-void FlameshotDBusAdapter::handleCaptureTaken(uint id, QPixmap p) {
+void FlameshotDBusAdapter::handleCaptureTaken(uint id, const QPixmap &p) {
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     p.save(&buffer, "PNG");

@@ -18,7 +18,7 @@
     </method>
 
     <!--
-        fullScreenRaw:
+        fullScreen:
         @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
         @toClipboard: Whether to copy the screenshot to clipboard or not.
         @delay: delay time in milliseconds, both return the @id defined in the call of this method.
@@ -27,6 +27,24 @@
         Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
     -->
     <method name="fullScreen">
+      <arg name="path" type="s" direction="in"/>
+      <arg name="toClipboard" type="b" direction="in"/>
+      <arg name="delay" type="i" direction="in"/>
+      <arg name="id" type="i" direction="in"/>
+    </method>
+
+    <!--
+        captureScreen:
+        @number: number of the screen to be captured.
+        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
+        @toClipboard: Whether to copy the screenshot to clipboard or not.
+        @delay: delay time in milliseconds, both return the @id defined in the call of this method.
+        @id: identificator of the call.
+
+        Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
+    -->
+    <method name="captureScreen">
+      <arg name="number" type="i" direction="in"/>
       <arg name="path" type="s" direction="in"/>
       <arg name="toClipboard" type="b" direction="in"/>
       <arg name="delay" type="i" direction="in"/>

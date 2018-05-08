@@ -28,6 +28,7 @@
 #include <QSystemTrayIcon>
 #include <QAction>
 #include <QMenu>
+#include <QDesktopWidget>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -57,16 +58,18 @@ Controller::Controller() : m_captureWindow(nullptr) {
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
-
-    connect(this, &Controller::captureTaken,
-            this, &Controller::handleCaptureTaken);
-    connect(this, &Controller::captureFailed,
-            this, &Controller::handleCaptureFailed);
 }
 
 Controller *Controller::getInstance() {
     static Controller c;
     return &c;
+}
+
+void Controller::enableExports() {
+    connect(this, &Controller::captureTaken,
+            this, &Controller::handleCaptureTaken);
+    connect(this, &Controller::captureFailed,
+            this, &Controller::handleCaptureFailed);
 }
 
 void Controller::requestCapture(const CaptureRequest &request) {
@@ -79,7 +82,13 @@ void Controller::requestCapture(const CaptureRequest &request) {
             this->startFullscreenCapture(id);
         });
         break;
-    case CaptureRequest::GRAPHICAL_MODE: {
+    case CaptureRequest::SCREEN_MODE: {
+        int &&number = request.data().toInt();
+        doLater(request.delay(), this, [this, id, number](){
+            this->startScreenGrab(id, number);
+        });
+        break;
+    } case CaptureRequest::GRAPHICAL_MODE: {
         QString &&path = request.path();
         doLater(request.delay(), this, [this, id, path](){
             this->startVisualCapture(id, path);
@@ -116,6 +125,22 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
         m_captureWindow->showFullScreen();
         //m_captureWindow->show(); // Debug
 #endif
+    } else {
+        emit captureFailed(id);
+    }
+}
+
+void Controller::startScreenGrab(const uint id, const int screenNumber) {
+    bool ok = true;
+    int n = screenNumber;
+
+    if (n < 0) {
+        QPoint globalCursorPos = QCursor::pos();
+        n = qApp->desktop()->screenNumber(globalCursorPos);
+    }
+    QPixmap p(ScreenGrabber().grabScreen(n, ok));
+    if (ok) {
+        emit captureTaken(id, p);
     } else {
         emit captureFailed(id);
     }
@@ -226,10 +251,6 @@ void Controller::handleCaptureFailed(uint id) {
 }
 
 void Controller::doLater(int msec, QObject *receiver, lambda func)  {
-    if (msec == 0) {
-        func();
-        return;
-    }
     QTimer *timer = new QTimer(receiver);
     QObject::connect(timer, &QTimer::timeout, receiver,
                      [timer, func](){ func(); timer->deleteLater(); });
