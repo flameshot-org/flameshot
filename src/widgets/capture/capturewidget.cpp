@@ -32,6 +32,7 @@
 #include "src/utils/screenshotsaver.h"
 #include "src/core/controller.h"
 #include "src/widgets/capture/modificationcommand.h"
+#include "src/cv/rectdetector.h"
 #include <QUndoView>
 #include <QScreen>
 #include <QGuiApplication>
@@ -137,6 +138,10 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     connect(&m_undoStack, &QUndoStack::indexChanged,
             this, [this](int){ this->update(); });
     initPanel();
+
+    // TODO
+    RectDetector detector(m_context.screenshot);
+    m_rectGroup.setRects(detector.getRects());
 }
 
 CaptureWidget::~CaptureWidget() {
@@ -409,8 +414,18 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
     } else if (m_activeButton && m_activeButton->tool()->showMousePreview()) {
         update();
     } else {
+        // TODO /////////////////////////////////////////////////////////////////////////////////////////
+        QRect rcv = m_rectGroup.getRectContainingPoint(m_context.mousePos);
+        if (!rcv.isEmpty()) {
+            m_selection->setGeometryAnimated(rcv);
+            m_selection->show();
+            update();
+        } else {
+            m_selection->hide();
+            update();
+        }
         if (!m_selection->isVisible()) {
-            return;
+            //return;
         }
         m_mouseOverHandle = m_selection->getMouseSide(m_context.mousePos);
         updateCursor();
@@ -533,6 +548,7 @@ void CaptureWidget::initSelection() {
     m_selection = new SelectionWidget(m_uiColor, this);
     connect(m_selection, &SelectionWidget::animationEnded, this, [this](){
         this->m_buttonHandler->updatePosition(this->m_selection->geometry());
+        update();
     });
     m_selection->setVisible(false);
     m_selection->setGeometry(QRect());

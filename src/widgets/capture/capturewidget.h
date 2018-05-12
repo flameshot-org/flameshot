@@ -29,6 +29,7 @@
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include "src/widgets/capture/utilitypanel.h"
+#include "src/widgets/capture/rectgroup.h"
 #include "buttonhandler.h"
 #include <QWidget>
 #include <QUndoStack>
@@ -153,4 +154,6 @@ private:
     QPoint m_dragStartPoint;
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
+
+    RectGroup m_rectGroup;
 };

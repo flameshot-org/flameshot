@@ -18,7 +18,12 @@ unix:!macx {
     QT  += dbus
 }
 
-CONFIG += c++11 link_pkgconfig
+CONFIG += c++11
+
+unix{
+    CONFIG += link_pkgconfig
+    PKGCONFIG += opencv
+}
 
 #CONFIG += packaging   # Enables "make install" for packaging paths
 
@@ -137,7 +142,10 @@ SOURCES += src/main.cpp \
     src/tools/text/texttool.cpp \
     src/tools/text/textwidget.cpp \
     src/core/capturerequest.cpp \
-    src/tools/text/textconfig.cpp
+    src/tools/text/textconfig.cpp \
+    src/cv/rectdetector.cpp \
+    src/cv/cvmatandqimage.cpp \
+    src/widgets/capture/rectgroup.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -208,7 +216,10 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/text/texttool.h \
     src/tools/text/textwidget.h \
     src/core/capturerequest.h \
-    src/tools/text/textconfig.h
+    src/tools/text/textconfig.h \
+    src/cv/rectdetector.h \
+    src/cv/cvmatandqimage.h \
+    src/widgets/capture/rectgroup.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
