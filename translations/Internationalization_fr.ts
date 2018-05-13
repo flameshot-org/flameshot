@@ -134,7 +134,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/core/controller.cpp" line="109"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Capturer l&apos;écran</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="114"/>
@@ -144,7 +144,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/core/controller.cpp" line="117"/>
         <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <translation>&amp;Informations</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="120"/>
@@ -339,7 +339,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="195"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer Flameshot</translation>
     </message>
 </context>
 <context>
@@ -543,12 +543,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Épinglage</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Épingler l&apos;image sur le bureau</translation>
     </message>
 </context>
 <context>
@@ -567,7 +567,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Capture d&apos;écran copiée dans le Presse-papier</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
@@ -586,12 +586,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">Imposible d&apos;écrire dessus</translation>
+        <translation>Imposible d&apos;écrire par dessus</translation>
     </message>
 </context>
 <context>
@@ -612,7 +612,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Rétablir</translation>
     </message>
 </context>
 <context>
@@ -767,7 +767,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info Flameshot</translation>
     </message>
 </context>
 <context>
