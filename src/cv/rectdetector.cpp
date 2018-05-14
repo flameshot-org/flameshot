@@ -21,6 +21,8 @@
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
 #include "cvmatandqimage.h"
+#include <QGuiApplication>
+#include <QScreen>
 
 using pointMat = std::vector<std::vector<cv::Point>>;
 
@@ -29,108 +31,53 @@ RectDetector::RectDetector(const QPixmap &pixmap) : m_pixmap(pixmap) {
 
 }
 
-// finds a cosine of angle between vectors
-// from pt0->pt1 and from pt0->pt2
-static double angle(const cv::Point &pt1,
-                    const cv::Point &pt2,
-                    const cv::Point &pt0)
-{
-    double dx1 = pt1.x - pt0.x;
-    double dy1 = pt1.y - pt0.y;
-    double dx2 = pt2.x - pt0.x;
-    double dy2 = pt2.y - pt0.y;
-    return (dx1*dx2 + dy1*dy2)/sqrt((dx1*dx1 + dy1*dy1)*(dx2*dx2 + dy2*dy2) + 1e-10);
-}
-
 /*
  * hierarchy:
  * [next, previous, child, parent]
  * -1 == no
  * */
-static pointMat filterContours(const pointMat &contours,
+#include <algorithm>
+static QVector<QRect> filterContours(const pointMat &contours,
                                const std::vector<cv::Vec4i> &hierarchy)
 {
-    pointMat res;
-    std::vector<cv::Point> approx;
+    QVector<QRect> res;
+    res.reserve(contours.size());
+    QSize maxSize = QGuiApplication::primaryScreen()->size() - QSize(5, 5);
 
     for (size_t i = 0; i < contours.size(); i++) {
-        // approximate contour with accuracy proportional
-        // to the contour perimeter
-        cv::approxPolyDP(cv::Mat(contours[i]), approx,
-                         cv::arcLength(cv::Mat(contours[i]), true)*0.02, true);
-
-        // square contours should have 4 vertices after approximation
-        // relatively large area (to filter out noisy contours)
-        // and be convex.
-        // Note: absolute value of an area is used because
-        // area may be positive or negative - in accordance with the
-        // contour orientation
-        if (approx.size() == 4 &&
-            fabs(contourArea(cv::Mat(approx))) > 800 &&
-            isContourConvex(cv::Mat(approx)))
-        {
-            double maxCosine = 0;
-
-            for (int j = 2; j < 5; j++) {
-                // find the maximum cosine of the angle between joint edges
-                double cosine = fabs(angle(approx[j%4], approx[j-2], approx[j-1]));
-                maxCosine = MAX(maxCosine, cosine);
-            }
-
-            // if cosines of all angles are small
-            // (all angles are ~90 degree) then write quandrange
-            // vertices to resultant sequence
-            if (maxCosine < 0.3) {
-                res.push_back(approx);
-            }
+        cv::Rect rect = cv::boundingRect(contours[i]);
+        if(rect.width > maxSize.width() || rect.height > maxSize.width()) {
+            continue;
+        }
+        if (rect.width > 14 && rect.height > 14) {
+            res.append(QRect(rect.x, rect.y, rect.width, rect.height));
         }
     }
+    // TODO use hierarchy and not a sort
+    std::sort(res.begin(), res.end(), [](const QRect &r1, const QRect &r2) {
+        return r1.width() * r1.height() < r2.width() * r2.height();
+    });
     return res;
 }
 
 // returns sequence of squares detected on the image.
 // the sequence is stored in the specified memory storage
-static pointMat findSquares(const cv::Mat& image) {
-    pointMat squares;
+static QVector<QRect> findSquares(const cv::Mat& image) {
+    cv::Mat gray(image.size(), CV_8U);
+    cv::Mat borders;
 
-    cv::Mat gray0(image.size(), CV_8U);
-    cv::Mat gray;
-
-    pointMat contours;
     std::vector<cv::Vec4i> hierarchy;
 
-    const int N = 5;
-    // find squares in every color plane of the image
-    for (int c = 0; c < 3; c++) {
-        int ch[] = {c, 0};
-        mixChannels(&image, 1, &gray0, 1, ch, 1);
+    cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
 
-        // apply Canny. Take the upper threshold from slider
-        // and set the lower to 0 (which forces edges merging)
-        Canny(gray0, gray, 0, 100, 5);
+    Canny(gray, borders, 0, 190, 5);
 
-        // dilate canny output to remove potential
-        // holes between edge segments
-        cv::dilate(gray, gray, cv::Mat(), cv::Point(-1,-1));
-        // find contours and store them all as a list
-        cv::findContours(gray, contours, hierarchy,cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
+    cv::dilate(borders, borders, cv::Mat(), cv::Point(-1,-1), 2);
 
-        pointMat &&tmpPoints = filterContours(contours, hierarchy);
-        squares.reserve(squares.size() + tmpPoints.size());
-        squares.insert(squares.end(), tmpPoints.begin(), tmpPoints.end());
+    pointMat contours;
+    cv::findContours(borders, contours, hierarchy,cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
 
-        // try several threshold levels
-        for (int l = 1; l < N; l++) {
-            const int thresval = l *(255 / N);
-            gray = gray0 >= thresval;
-
-            cv::findContours(gray, contours, hierarchy,cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
-            pointMat &&tmpPoints = filterContours(contours, hierarchy);
-            squares.reserve(squares.size() + tmpPoints.size());
-            squares.insert(squares.end(), tmpPoints.begin(), tmpPoints.end());
-        }
-    }
-    return squares;
+    return filterContours(contours, hierarchy);;
 }
 
 cv::Mat qimage_to_mat_cpy(QImage const &img, int format)
@@ -144,11 +91,7 @@ cv::Mat qimage_to_mat_cpy(QImage const &img, int format)
 QVector<QRect> RectDetector::getRects() const {
     QVector<QRect> res;
     if (!m_pixmap.isNull()) {
-        auto v = findSquares(QtOcv::image2Mat(m_pixmap.toImage()));
-        for (const std::vector<cv::Point> &p : v) {
-            res.append(QRect(QPoint(p.at(0).x, p.at(0).y),
-                             QPoint(p.at(2).x, p.at(2).y)).normalized());
-        }
+        res = findSquares(QtOcv::image2Mat(m_pixmap.toImage()));
     }
     return res;
 }

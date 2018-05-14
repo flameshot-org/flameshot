@@ -310,8 +310,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
                 m_selection->geometry().contains(e->pos());
 
         // New selection.
-        if (!mouseInSelection &&
-                m_mouseOverHandle == SelectionWidget::NO_SIDE)
+        if (!m_selectionIsSet || (!mouseInSelection &&
+                m_mouseOverHandle == SelectionWidget::NO_SIDE))
         {
             m_selectionIsSet = false;
             m_selection->setVisible(false);
@@ -320,9 +320,9 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
             update();
         // Set the selection in the position of the preview.
         } else if (!m_selectionIsSet && mouseInSelection) {
-            m_selectionIsSet = true;
-            update();
-        } else {
+            //m_selectionIsSet = true;
+            //update();
+        } else if (m_selectionIsSet){
             m_grabbing = true;
         }
     }
@@ -336,13 +336,13 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
-        if (m_newSelection) {
+        if (m_newSelection || (!m_selectionIsSet && m_dragStartPoint != e->pos())) {
             m_selectionIsSet = true;
             m_selection->setVisible(true);
             m_selection->setGeometry(
                     QRect(m_dragStartPoint, m_context.mousePos).normalized());
             update();
-        } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
+        } else if (m_grabbing && m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
             QRect initialRect = m_selection->savedGeometry().normalized();
             QPoint newTopLeft = initialRect.topLeft() + (e->pos() - m_dragStartPoint);
@@ -441,27 +441,37 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
         m_colorPicker->hide();
         m_rightClick = false;
-    // when we end the drawing we have to register the last  point and
-    //add the temp modification to the list of modifications
-    } else if (m_mouseIsClicked && m_activeTool) {
-        m_activeTool->drawEnd(m_context.mousePos);
-        if (m_activeTool->isValid()) {
-            pushToolToStack();
-        } else if (!m_toolWidget){
-            m_activeTool->deleteLater();
-            m_activeTool = nullptr;
+    } else {
+        // when we end the drawing we have to register the last  point and
+        //add the temp modification to the list of modifications
+        if (m_mouseIsClicked && m_activeTool) {
+            m_activeTool->drawEnd(m_context.mousePos);
+            if (m_activeTool->isValid()) {
+                pushToolToStack();
+            } else if (!m_toolWidget){
+                m_activeTool->deleteLater();
+                m_activeTool = nullptr;
+            }
         }
-    }
 
-    // Show the buttons after the resize of the selection or the creation
-    // of a new one.
-    if (!m_buttonHandler->isVisible() && m_selectionIsSet) {
-        // Don't go outside
-        m_selection->setGeometry(m_selection->geometry().intersected(rect()));
-        m_context.selection = m_selection->geometry(); // TODO remove?
-        updateSizeIndicator();
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        m_buttonHandler->show();
+        const bool mouseInSelection =
+                m_selection->geometry().contains(e->pos());
+        if (!m_selectionIsSet && mouseInSelection) {
+            m_selectionIsSet = true;
+            update();
+        }
+
+        // Show the buttons after the resize of the selection or the creation
+        // of a new one.
+        if (!m_buttonHandler->isVisible() && m_selectionIsSet) {
+            // Don't go outside
+            m_selection->setGeometry(m_selection->geometry().intersected(rect()));
+            m_selection->setVisible(true);
+            m_context.selection = m_selection->geometry(); // TODO remove?
+            updateSizeIndicator();
+            m_buttonHandler->updatePosition(m_selection->geometry());
+            m_buttonHandler->show();
+        }
     }
 
     m_mouseIsClicked = false;
