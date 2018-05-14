@@ -309,17 +309,19 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         const bool mouseInSelection =
                 m_selection->geometry().contains(e->pos());
 
-        // New selection
-        if (/*!m_selectionIsSet || */(!mouseInSelection &&
-                m_mouseOverHandle == SelectionWidget::NO_SIDE))
+        // New selection.
+        if (!mouseInSelection &&
+                m_mouseOverHandle == SelectionWidget::NO_SIDE)
         {
             m_selectionIsSet = false;
             m_selection->setVisible(false);
             m_newSelection = true;
             m_buttonHandler->hide();
             update();
-        } else if (mouseInSelection) {
+        // Set the selection in the position of the preview.
+        } else if (!m_selectionIsSet && mouseInSelection) {
             m_selectionIsSet = true;
+            update();
         } else {
             m_grabbing = true;
         }
