@@ -119,6 +119,7 @@ protected:
     bool m_showInitialMsg;
     bool m_captureDone;
     bool m_previewEnabled;
+    bool m_selectionIsSet;
 
 private:
     void initContext(const QString &savePath, bool fullscreen);

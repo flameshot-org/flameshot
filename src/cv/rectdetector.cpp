@@ -143,10 +143,12 @@ cv::Mat qimage_to_mat_cpy(QImage const &img, int format)
 
 QVector<QRect> RectDetector::getRects() const {
     QVector<QRect> res;
-    auto v = findSquares(QtOcv::image2Mat(m_pixmap.toImage()));
-    for (const std::vector<cv::Point> &p : v) {
-        res.append(QRect(QPoint(p.at(0).x, p.at(0).y),
-                         QPoint(p.at(2).x, p.at(2).y)).normalized());
+    if (!m_pixmap.isNull()) {
+        auto v = findSquares(QtOcv::image2Mat(m_pixmap.toImage()));
+        for (const std::vector<cv::Point> &p : v) {
+            res.append(QRect(QPoint(p.at(0).x, p.at(0).y),
+                             QPoint(p.at(2).x, p.at(2).y)).normalized());
+        }
     }
     return res;
 }
