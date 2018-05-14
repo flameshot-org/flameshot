@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
         <source>Unable to capture screen</source>
         <translation>Imposible capturar la pantalla</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="215"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -132,22 +132,22 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="109"/>
+        <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tomar captura de pantalla</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="174"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuración</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="117"/>
+        <location filename="../src/core/controller.cpp" line="177"/>
         <source>&amp;Information</source>
         <translation>&amp;Información</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="120"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Quit</source>
         <translation>&amp;Salir</translation>
     </message>
@@ -168,7 +168,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../src/utils/dbusutils.cpp" line="35"/>
+        <location filename="../src/utils/dbusutils.cpp" line="43"/>
         <source>Unable to connect via DBus</source>
         <translation>Imposible conectarse mediante DBus</translation>
     </message>
@@ -235,32 +235,17 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     </message>
 </context>
 <context>
-    <name>FileNameHandler</name>
-    <message>
-        <source>screenshot</source>
-        <translation type="vanished">captura</translation>
-    </message>
-</context>
-<context>
-    <name>FlameshotDBusAdapter</name>
-    <message>
-        <location filename="../src/core/flameshotdbusadapter.cpp" line="57"/>
-        <source>Unable to capture screen</source>
-        <translation>Imposible capturar la pantalla</translation>
-    </message>
-</context>
-<context>
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="178"/>
+        <location filename="../src/config/geneneralconf.cpp" line="184"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -271,7 +256,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Unable to write file.</source>
         <translation>Imposible escribir el archivo.</translation>
     </message>
@@ -281,106 +266,112 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation>Guardar Archivo</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Confirm Reset</source>
         <translation>Confirmar Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="117"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>¿Estás seguro de que quieres reiniciar la configuración?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="126"/>
+        <location filename="../src/config/geneneralconf.cpp" line="132"/>
         <source>Show help message</source>
         <translation>Mostrar mensaje de ayuda</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Muestra el mensaje de ayuda al iniciar el modo de captura.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
+        <location filename="../src/config/geneneralconf.cpp" line="150"/>
         <source>Show desktop notifications</source>
         <translation>Mostrar notificaciones del escritorio</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="153"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
         <source>Show tray icon</source>
         <translation>Mostrar icono en la barra de tareas</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="157"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show the systemtray icon</source>
         <translation>Mostrar el icono en la barra de tareas</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Configuration File</source>
         <translation>Archivo de Configuración</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="183"/>
+        <location filename="../src/config/geneneralconf.cpp" line="189"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Launch at startup</source>
         <translation>Lanzar en el arranque</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="195"/>
+        <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanzar Flameshot</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
         <source>Upload to Imgur</source>
         <translation>Subir a Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="51"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
         <translation>Subiendo Imagen</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="129"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
         <source>Copy URL</source>
         <translation>Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="130"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
         <source>Open URL</source>
         <translation>Abrir URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="131"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
+        <source>Delete image</source>
+        <translation>Borrar imagen</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
         <source>Image to Clipboard.</source>
         <translation>Imagen al Portapapeles.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="148"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
         <source>Unable to open the URL.</source>
         <translation>No puede abrir la URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="154"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
         <source>URL copied to clipboard.</source>
         <translation>URL copiada al portapapeles.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="159"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Captura copiada al portapapeles.</translation>
     </message>
@@ -543,12 +534,12 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Chincheta</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Fija la imagen sobre el escritorio</translation>
     </message>
 </context>
 <context>
@@ -567,7 +558,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura guardada en el portapapeles</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
@@ -576,10 +567,10 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation>Error intentando guardar como </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="71"/>
-        <location filename="../src/main.cpp" line="302"/>
-        <location filename="../src/main.cpp" line="326"/>
-        <location filename="../src/main.cpp" line="355"/>
+        <location filename="../src/main.cpp" line="72"/>
+        <location filename="../src/main.cpp" line="359"/>
+        <location filename="../src/main.cpp" line="383"/>
+        <location filename="../src/main.cpp" line="412"/>
         <source>Unable to connect via DBus</source>
         <translation>Imposible conectar mediante DBus</translation>
     </message>
@@ -612,7 +603,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Rehacer</translation>
     </message>
 </context>
 <context>
@@ -626,6 +617,14 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
         <translation>Guarda la captura</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenGrabber</name>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <source>Unable to capture screen</source>
+        <translation>Imposible capturar la pantalla</translation>
     </message>
 </context>
 <context>
@@ -723,13 +722,13 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
-        <source>Time (%H:%M:%S)</source>
-        <translation>Tiempo (%H:%M:%S)</translation>
+        <source>Time (%H-%M-%S)</source>
+        <translation>Tiempo (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
-        <source>Time (%H:%M)</source>
-        <translation>Tiempo (%H:%M)</translation>
+        <source>Time (%H-%M)</source>
+        <translation>Tiempo (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -767,7 +766,20 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información de Flameshot</translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="50"/>
+        <source>Text</source>
+        <translation>Texto</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="58"/>
+        <source>Add text to your capture</source>
+        <translation>Agregar texto a la captura</translation>
     </message>
 </context>
 <context>

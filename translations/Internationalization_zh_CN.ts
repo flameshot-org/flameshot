@@ -77,7 +77,7 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="215"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -88,7 +88,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 使用鼠标滚轮来改变绘画工具的宽度。</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
@@ -133,22 +133,22 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="109"/>
+        <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
         <translation>进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="174"/>
         <source>&amp;Configuration</source>
         <translation>配置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="117"/>
+        <location filename="../src/core/controller.cpp" line="177"/>
         <source>&amp;Information</source>
         <translation>信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="120"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
@@ -169,7 +169,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../src/utils/dbusutils.cpp" line="35"/>
+        <location filename="../src/utils/dbusutils.cpp" line="43"/>
         <source>Unable to connect via DBus</source>
         <translation>无法通过 DBus 进行连接</translation>
     </message>
@@ -236,58 +236,43 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
-    <name>FileNameHandler</name>
-    <message>
-        <source>screenshot</source>
-        <translation type="vanished">屏幕截图</translation>
-    </message>
-</context>
-<context>
-    <name>FlameshotDBusAdapter</name>
-    <message>
-        <location filename="../src/core/flameshotdbusadapter.cpp" line="57"/>
-        <source>Unable to capture screen</source>
-        <translation>无法捕获屏幕</translation>
-    </message>
-</context>
-<context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="126"/>
+        <location filename="../src/config/geneneralconf.cpp" line="132"/>
         <source>Show help message</source>
         <translation>显示帮助文档</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>在捕获之前显示帮助信息。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
+        <location filename="../src/config/geneneralconf.cpp" line="150"/>
         <source>Show desktop notifications</source>
         <translation>显示桌面通知</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="153"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
         <source>Show tray icon</source>
         <translation>显示托盘图标</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="157"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show the systemtray icon</source>
         <translation>显示任务栏图标</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="178"/>
+        <location filename="../src/config/geneneralconf.cpp" line="184"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -298,7 +283,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Unable to write file.</source>
         <translation>无法写入文件。</translation>
     </message>
@@ -308,37 +293,37 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Confirm Reset</source>
         <translation>确定重置</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="117"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>你确定你想要重置配置？</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Configuration File</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="183"/>
+        <location filename="../src/config/geneneralconf.cpp" line="189"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Launch at startup</source>
         <translation>开机时启动</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="195"/>
+        <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Launch Flameshot</source>
         <translation>启动 Flameshot</translation>
     </message>
@@ -346,42 +331,48 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
         <source>Upload to Imgur</source>
         <translation>上传到Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="51"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
         <translation>正在上传</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="129"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
         <source>Copy URL</source>
         <translation>复制链接</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="130"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
         <source>Open URL</source>
         <translation>打开链接</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="131"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
         <source>Image to Clipboard.</source>
         <translation>保存文件到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="148"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
         <source>Unable to open the URL.</source>
         <translation>无法打开此链接。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="154"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
         <source>URL copied to clipboard.</source>
         <translation>复制链接到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="159"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>截图复制到剪贴板。</translation>
     </message>
@@ -577,10 +568,10 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>尝试另存为时出错 </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="71"/>
-        <location filename="../src/main.cpp" line="302"/>
-        <location filename="../src/main.cpp" line="326"/>
-        <location filename="../src/main.cpp" line="355"/>
+        <location filename="../src/main.cpp" line="72"/>
+        <location filename="../src/main.cpp" line="359"/>
+        <location filename="../src/main.cpp" line="383"/>
+        <location filename="../src/main.cpp" line="412"/>
         <source>Unable to connect via DBus</source>
         <translation>无法通过DBus进行连接</translation>
     </message>
@@ -627,6 +618,14 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
         <translation>保存捕获</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenGrabber</name>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <source>Unable to capture screen</source>
+        <translation type="unfinished">无法捕获屏幕</translation>
     </message>
 </context>
 <context>
@@ -724,13 +723,13 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
-        <source>Time (%H:%M:%S)</source>
-        <translation>时间 (%H:%M:%S)</translation>
+        <source>Time (%H-%M-%S)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
-        <source>Time (%H:%M)</source>
-        <translation>时间 (%H:%M)</translation>
+        <source>Time (%H-%M)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -769,6 +768,19 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
         <translation>Flameshot 消息</translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="50"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="58"/>
+        <source>Add text to your capture</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
