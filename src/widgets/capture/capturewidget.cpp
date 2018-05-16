@@ -231,7 +231,8 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
                              "\nPress Enter to capture the screen."
                              "\nPress Right Click to show the color picker."
-                             "\nUse the Mouse Wheel to change the thickness of your tool.");
+                             "\nUse the Mouse Wheel to change the thickness of your tool."
+                             "\nPress Space to open the side panel.");
 
         // We draw the white contrasting background for the text, using the
         //same text and options to get the boundingRect that the text will have.
