@@ -18,6 +18,25 @@ void RectGroup::setRects(const QVector<QRect> &v) {
     });
 }
 
+/*
+  - x() of the rects from higher to lower: [30, 20, 10, 2]
+  - mousePos's x(): 24
+
+  +--------------------------------             +
+  |                                             |
+  |        +-------------------------------+    |
+  |        |                               |    |
+  |        |         +---------------+     |    |
+  |        |         |  M     +---+  |     |    |
+  |        |         |        +---+  |     |    |
+  |        |         +---------------+     |    |
+  +--------+------------------------------------+
+  ^        ^         ^        ^
+  | 2      | 10      | 20     | 30
+
+  Only the rects with x() [20, 10, 2] can contain the mouse with x() 24
+*/
+
 QRect RectGroup::getRectContainingPoint(const QPoint &p) const {
     QRect res;
     // Get the iterator to the QRect with x() lower than p's x().
