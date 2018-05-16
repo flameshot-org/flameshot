@@ -28,7 +28,7 @@
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/selectionwidget.h"
-#include "src/widgets/capture/utilitypanel.h"
+#include "src/widgets/panel/utilitypanel.h"
 #include "buttonhandler.h"
 #include <QWidget>
 #include <QUndoStack>

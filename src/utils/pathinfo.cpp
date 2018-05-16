@@ -28,6 +28,15 @@ const QString PathInfo::blackIconPath() {
     return ":/img/buttonIconsBlack/";
 }
 
+const QString PathInfo::whiteConfigIconPath() {
+    return ":/img/configWhite/";
+}
+
+const QString PathInfo::blackConfigIconPath() {
+    return ":/img/configBlack/";
+}
+
+
 QStringList PathInfo::translationsPaths() {
     QString binaryPath = QFileInfo(qApp->applicationDirPath())
             .absoluteFilePath();

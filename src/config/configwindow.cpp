@@ -54,7 +54,8 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
 
     QColor background = this->palette().background().color();
     bool isDark = ColorUtils::colorIsDark(background);
-    QString modifier = isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+    QString modifier = isDark ? PathInfo::whiteIconPath() :
+                                PathInfo::blackIconPath();
 
     // visuals
     m_visuals = new VisualsEditor();
