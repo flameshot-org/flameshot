@@ -25,7 +25,7 @@ SelectionWidget::SelectionWidget(const QColor &c, QWidget *parent) :
 {
     m_animation = new QPropertyAnimation(this, "geometry", this);
     m_animation->setEasingCurve(QEasingCurve::InOutQuad);
-    m_animation->setDuration(200);
+    m_animation->setDuration(250);
     connect(m_animation, &QPropertyAnimation::finished,
             this, &SelectionWidget::animationEnded);
 

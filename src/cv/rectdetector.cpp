@@ -18,8 +18,6 @@
 #include "rectdetector.h"
 #include "opencv2/core.hpp"
 #include "opencv2/imgproc.hpp"
-#include "opencv2/imgcodecs.hpp"
-#include "opencv2/highgui.hpp"
 #include "cvmatandqimage.h"
 #include <QGuiApplication>
 #include <QScreen>
@@ -36,10 +34,7 @@ RectDetector::RectDetector(const QPixmap &pixmap) : m_pixmap(pixmap) {
  * [next, previous, child, parent]
  * -1 == no
  * */
-#include <algorithm>
-static QVector<QRect> filterContours(const pointMat &contours,
-                               const std::vector<cv::Vec4i> &hierarchy)
-{
+static QVector<QRect> filterContours(const pointMat &contours) {
     QVector<QRect> res;
     res.reserve(contours.size());
     QSize maxSize = QGuiApplication::primaryScreen()->size() - QSize(5, 5);
@@ -53,10 +48,6 @@ static QVector<QRect> filterContours(const pointMat &contours,
             res.append(QRect(rect.x, rect.y, rect.width, rect.height));
         }
     }
-    // TODO use hierarchy and not a sort
-    std::sort(res.begin(), res.end(), [](const QRect &r1, const QRect &r2) {
-        return r1.width() * r1.height() < r2.width() * r2.height();
-    });
     return res;
 }
 
@@ -66,8 +57,6 @@ static QVector<QRect> findSquares(const cv::Mat& image) {
     cv::Mat gray(image.size(), CV_8U);
     cv::Mat borders;
 
-    std::vector<cv::Vec4i> hierarchy;
-
     cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
 
     Canny(gray, borders, 0, 190, 5);
@@ -75,9 +64,9 @@ static QVector<QRect> findSquares(const cv::Mat& image) {
     cv::dilate(borders, borders, cv::Mat(), cv::Point(-1,-1), 2);
 
     pointMat contours;
-    cv::findContours(borders, contours, hierarchy,cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
+    cv::findContours(borders, contours,cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
 
-    return filterContours(contours, hierarchy);;
+    return filterContours(contours);;
 }
 
 cv::Mat qimage_to_mat_cpy(QImage const &img, int format)

@@ -130,6 +130,7 @@ private:
     void updateSizeIndicator();
     void updateCursor();
     void pushToolToStack();
+    void handleDragUpdate();
     void makeChild(QWidget *w);
 
     // size of the handlers at the corners of the selection
