@@ -125,7 +125,6 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
         m_captureWindow->showFullScreen();
         //m_captureWindow->show(); // Debug
 #endif
-        m_captureWindow->grabKeyboard();
     } else {
         emit captureFailed(id);
     }
