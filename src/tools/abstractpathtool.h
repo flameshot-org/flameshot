@@ -29,9 +29,6 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
 
-    QWidget* widget() override;
-    QWidget* configurationWidget() override;
-
     void undo(QPixmap &pixmap) override;
 
 public slots:

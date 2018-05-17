@@ -39,14 +39,6 @@ bool AbstractTwoPointTool::showMousePreview() const {
     return true;
 }
 
-QWidget *AbstractTwoPointTool::widget() {
-    return nullptr;
-}
-
-QWidget *AbstractTwoPointTool::configurationWidget() {
-    return nullptr;
-}
-
 void AbstractTwoPointTool::undo(QPixmap &pixmap) {
     QPainter p(&pixmap);
     p.drawPixmap(backupRect(pixmap.rect()).topLeft(), m_pixmapBackup);

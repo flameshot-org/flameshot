@@ -33,14 +33,6 @@ bool AbstractActionTool::showMousePreview() const {
     return false;
 }
 
-QWidget *AbstractActionTool::widget() {
-    return nullptr;
-}
-
-QWidget *AbstractActionTool::configurationWidget() {
-    return nullptr;
-}
-
 void AbstractActionTool::undo(QPixmap &pixmap) {
     Q_UNUSED(pixmap);
 }
