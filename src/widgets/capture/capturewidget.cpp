@@ -439,10 +439,22 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     // of a new one.
     if (!m_buttonHandler->isVisible() && m_selection->isVisible()) {
         // Don't go outside
-        m_selection->setGeometry(m_selection->geometry().intersected(rect()));
-        m_context.selection = m_selection->geometry(); // TODO remove?
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        // normalize
+        if (newGeometry.width() <= 0) {
+            int left = newGeometry.left();
+            newGeometry.setLeft(newGeometry.right());
+            newGeometry.setRight(left);
+        }
+        if (newGeometry.height() <= 0) {
+            int top = newGeometry.top();
+            newGeometry.setTop(newGeometry.bottom());
+            newGeometry.setBottom(top);
+        }
+        m_selection->setGeometry(newGeometry);
+        m_context.selection = newGeometry;
         updateSizeIndicator();
-        m_buttonHandler->updatePosition(m_selection->geometry());
+        m_buttonHandler->updatePosition(newGeometry);
         m_buttonHandler->show();
     }
     m_mouseIsClicked = false;
