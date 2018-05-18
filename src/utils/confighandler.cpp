@@ -260,6 +260,18 @@ void ConfigHandler::setContrastOpacity(const int transparency) {
     m_settings.setValue("contrastOpacity", transparency);
 }
 
+bool ConfigHandler::cvProcessingValue() {
+    bool res = false;
+    if (m_settings.contains("cvProcessing")) {
+        res = m_settings.value("cvProcessing").toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCvProcessing(const bool doProcessing) {
+    m_settings.setValue("cvProcessing", doProcessing);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }

@@ -67,6 +67,9 @@ public:
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
+    bool cvProcessingValue();
+    void setCvProcessing(const bool);
+
     void setDefaults();
     void setAllTheButtons();
 
