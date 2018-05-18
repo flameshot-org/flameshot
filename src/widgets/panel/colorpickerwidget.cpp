@@ -125,7 +125,9 @@ QColor ColorPickerWidget::grabPixmapColor(const QPoint &p) {
 }
 
 bool ColorPickerWidget::handleKeyPress(QKeyEvent *e) {
-    if (e->key() == Qt::Key_Escape) {
+    if (e->key() == Qt::Key_Space) {
+        emit togglePanel();
+    } else if (e->key() == Qt::Key_Escape) {
         releaseColorGrab();
         updateColor(m_colorBackup);
     } else if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter) {

@@ -34,6 +34,7 @@ public:
 
 signals:
     void colorChanged(const QColor &c);
+    void togglePanel();
 
 public slots:
     void updateColor(const QColor &c);

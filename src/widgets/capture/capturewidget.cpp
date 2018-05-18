@@ -540,11 +540,14 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
-    ColorPickerWidget *colorPicker = new ColorPickerWidget(&m_context.screenshot);
+    ColorPickerWidget *colorPicker =
+            new ColorPickerWidget(&m_context.screenshot);
     connect(colorPicker, &ColorPickerWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
     connect(this, &CaptureWidget::colorChanged,
             colorPicker, &ColorPickerWidget::updateColor);
+    connect(colorPicker, &ColorPickerWidget::togglePanel,
+            m_panel, &UtilityPanel::toggle);
     colorPicker->colorChanged(m_context.color);
     m_panel->pushWidget(colorPicker);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
