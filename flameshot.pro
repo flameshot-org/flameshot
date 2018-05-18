@@ -135,7 +135,7 @@ SOURCES += src/main.cpp \
     src/tools/abstracttwopointtool.cpp \
     src/tools/abstractactiontool.cpp \
     src/utils/globalvalues.cpp \
-    src/widgets/capture/utilitypanel.cpp \
+    src/widgets/panel/utilitypanel.cpp \
     src/widgets/capture/hovereventfilter.cpp \
     src/widgets/capture/selectionwidget.cpp \
     src/tools/pin/pinwidget.cpp \
@@ -145,7 +145,8 @@ SOURCES += src/main.cpp \
     src/tools/text/textconfig.cpp \
     src/cv/rectdetector.cpp \
     src/cv/cvmatandqimage.cpp \
-    src/widgets/capture/rectgroup.cpp
+    src/widgets/capture/rectgroup.cpp \
+    src/widgets/panel/colorpickerwidget.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -209,7 +210,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/abstractpathtool.h \
     src/tools/abstracttwopointtool.h \
     src/tools/abstractactiontool.h \
-    src/widgets/capture/utilitypanel.h \
+    src/widgets/panel/utilitypanel.h \
     src/widgets/capture/hovereventfilter.h \
     src/widgets/capture/selectionwidget.h \
     src/tools/pin/pinwidget.h \
@@ -219,7 +220,8 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/text/textconfig.h \
     src/cv/rectdetector.h \
     src/cv/cvmatandqimage.h \
-    src/widgets/capture/rectgroup.h
+    src/widgets/capture/rectgroup.h \
+    src/widgets/panel/colorpickerwidget.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

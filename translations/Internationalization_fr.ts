@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
         <source>Unable to capture screen</source>
         <translation>Imposible de capturer l&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="215"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -132,22 +132,22 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="109"/>
+        <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Capturer l&apos;écran</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="174"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuration</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="117"/>
+        <location filename="../src/core/controller.cpp" line="177"/>
         <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <translation>&amp;Informations</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="120"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
@@ -168,7 +168,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../src/utils/dbusutils.cpp" line="35"/>
+        <location filename="../src/utils/dbusutils.cpp" line="43"/>
         <source>Unable to connect via DBus</source>
         <translation>Imposible de se connecter via DBus</translation>
     </message>
@@ -235,32 +235,17 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     </message>
 </context>
 <context>
-    <name>FileNameHandler</name>
-    <message>
-        <source>screenshot</source>
-        <translation type="vanished">capture d&apos;écran</translation>
-    </message>
-</context>
-<context>
-    <name>FlameshotDBusAdapter</name>
-    <message>
-        <location filename="../src/core/flameshotdbusadapter.cpp" line="57"/>
-        <source>Unable to capture screen</source>
-        <translation>Impossible de capturer l&apos;écran</translation>
-    </message>
-</context>
-<context>
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="178"/>
+        <location filename="../src/config/geneneralconf.cpp" line="184"/>
         <source>Import</source>
         <translation>Importer</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -271,7 +256,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Unable to write file.</source>
         <translation>Impossible d&apos;écrire le fichier.</translation>
     </message>
@@ -281,106 +266,112 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <translation>Sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Confirm Reset</source>
         <translation>Confirmer la Réinitialisation</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="117"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Êtes-vous sûr de vouloir réinitialiser la configuration ?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="126"/>
+        <location filename="../src/config/geneneralconf.cpp" line="132"/>
         <source>Show help message</source>
         <translation>Montrer le message d&apos;aide</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Afficher ce message au lancement du mode capture.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
+        <location filename="../src/config/geneneralconf.cpp" line="150"/>
         <source>Show desktop notifications</source>
         <translation>Afficher les notifications du bureau</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="153"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
         <source>Show tray icon</source>
         <translation>Afficher les icones de la barre d&apos;état</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="157"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show the systemtray icon</source>
         <translation>Afficher l&apos;icône dans la barre de tâches</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Configuration File</source>
         <translation>Fichier de Configuration</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="183"/>
+        <location filename="../src/config/geneneralconf.cpp" line="189"/>
         <source>Reset</source>
         <translation>Réinitialiser</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Launch at startup</source>
         <translation>Lancer au démarrage</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="195"/>
+        <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer Flameshot</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
         <source>Upload to Imgur</source>
         <translation>Mettre en ligne vers Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="51"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
         <translation>Mise en ligne de l&apos;image</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="129"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
         <source>Copy URL</source>
         <translation>Copier l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="130"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
         <source>Open URL</source>
         <translation>Ouvrir l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="131"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
         <source>Image to Clipboard.</source>
         <translation>Image dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="148"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
         <source>Unable to open the URL.</source>
         <translation>Impossible d&apos;ouvrir l&apos;URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="154"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
         <source>URL copied to clipboard.</source>
         <translation>URL copiée dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="159"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Capture d&apos;écran copiée dans le Presse-papier.</translation>
     </message>
@@ -543,12 +534,12 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Outil Épinglage</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Épingler l&apos;image sur le bureau</translation>
     </message>
 </context>
 <context>
@@ -567,7 +558,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Capture d&apos;écran copiée dans le Presse-papier</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
@@ -576,22 +567,22 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <translation>Erreur lors de la sauvegarde sous </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="71"/>
-        <location filename="../src/main.cpp" line="302"/>
-        <location filename="../src/main.cpp" line="326"/>
-        <location filename="../src/main.cpp" line="355"/>
+        <location filename="../src/main.cpp" line="72"/>
+        <location filename="../src/main.cpp" line="359"/>
+        <location filename="../src/main.cpp" line="383"/>
+        <location filename="../src/main.cpp" line="412"/>
         <source>Unable to connect via DBus</source>
         <translation>Impossible de se connecter via DBus</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">Imposible d&apos;écrire dessus</translation>
+        <translation>Imposible d&apos;écrire par dessus</translation>
     </message>
 </context>
 <context>
@@ -612,7 +603,7 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Rétablir</translation>
     </message>
 </context>
 <context>
@@ -626,6 +617,14 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
         <translation>Sauvegarder la capture d&apos;écran</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenGrabber</name>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <source>Unable to capture screen</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -723,13 +722,13 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
-        <source>Time (%H:%M:%S)</source>
-        <translation>Temps (%H:%M:%S)</translation>
+        <source>Time (%H-%M-%S)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
-        <source>Time (%H:%M)</source>
-        <translation>Temps (%H:%M)</translation>
+        <source>Time (%H-%M)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -767,6 +766,19 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
+        <translation>Info Flameshot</translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="50"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="58"/>
+        <source>Add text to your capture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

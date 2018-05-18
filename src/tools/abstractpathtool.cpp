@@ -39,14 +39,6 @@ bool AbstractPathTool::showMousePreview() const {
     return true;
 }
 
-QWidget *AbstractPathTool::widget() {
-    return nullptr;
-}
-
-QWidget *AbstractPathTool::configurationWidget() {
-    return nullptr;
-}
-
 void AbstractPathTool::undo(QPixmap &pixmap) {
     QPainter p(&pixmap);
     const int val = m_thickness + m_padding;

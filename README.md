@@ -75,7 +75,7 @@ Check out the information window to see all the available shortcuts in the graph
 ### CLI configuration
 You can use the graphical menu to configure Flameshot, but alternatively you can use your terminal or scripts to do so.
 
-- open the confguration menu:
+- open the configuration menu:
 
    `flameshot config`
 
@@ -108,7 +108,7 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-If you want use Flameshot as a default screenshot utility, chanses are you want to launch it using the <kbd>Prt Sc</kbd> key. Flameshot doesn't yet offer a fully-automated option to do so, but you can configure your system to do so.
+If you want use Flameshot as a default screenshot utility, chances are you want to launch it using the <kbd>Prt Sc</kbd> key. Flameshot doesn't yet offer a fully-automated option to do so, but you can configure your system to do so.
 
 #### On KDE Plasma desktop
 

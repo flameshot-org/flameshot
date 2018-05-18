@@ -28,9 +28,6 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
 
-    QWidget* widget() override;
-    QWidget* configurationWidget() override;
-
     void undo(QPixmap &pixmap) override;
     void process(QPainter &painter, const QPixmap &pixmap, bool recordUndo = false) override;
     void paintMousePreview(QPainter &painter, const CaptureContext &context) override;

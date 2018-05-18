@@ -93,10 +93,19 @@ public:
     // if the type is TYPE_WIDGET the widget is loaded in the main widget.
     // If the type is TYPE_EXTERNAL_WIDGET it is created outside as an
     // individual widget.
-    virtual QWidget* widget() = 0;
+    virtual QWidget* widget() {
+        return nullptr;
+    }
     // When the tool is selected this method is called and the widget is added
     // to the configuration panel inside the main widget.
-    virtual QWidget* configurationWidget() = 0;
+    virtual QWidget* configurationWidget() {
+        return nullptr;
+    }
+    // Permanent configuration used in the configuration outside of the
+    // capture.
+    virtual QWidget* permanentConfigurationWidget() {
+        return nullptr;
+    }
     // Return a copy of the tool
     virtual CaptureTool* copy(QObject *parent = nullptr) = 0;
 

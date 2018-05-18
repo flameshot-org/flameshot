@@ -77,12 +77,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="79"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
         <source>Unable to capture screen</source>
         <translation>ეკრანის გადაღება ვერ მოხერხდა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="215"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -132,22 +132,22 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="109"/>
+        <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="114"/>
+        <location filename="../src/core/controller.cpp" line="174"/>
         <source>&amp;Configuration</source>
         <translation>&amp;პარამეტრები</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="117"/>
+        <location filename="../src/core/controller.cpp" line="177"/>
         <source>&amp;Information</source>
         <translation>&amp;ინფორმაცია</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="120"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Quit</source>
         <translation>&amp;გამოსვლა</translation>
     </message>
@@ -168,7 +168,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../src/utils/dbusutils.cpp" line="35"/>
+        <location filename="../src/utils/dbusutils.cpp" line="43"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus-ით დაკავშირება ვერ მოხერხდა</translation>
     </message>
@@ -235,32 +235,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
-    <name>FileNameHandler</name>
-    <message>
-        <source>screenshot</source>
-        <translation type="vanished">სურათი</translation>
-    </message>
-</context>
-<context>
-    <name>FlameshotDBusAdapter</name>
-    <message>
-        <location filename="../src/core/flameshotdbusadapter.cpp" line="57"/>
-        <source>Unable to capture screen</source>
-        <translation>ეკრანის გადაღება ვერ მოხერხდა</translation>
-    </message>
-</context>
-<context>
     <name>GeneneralConf</name>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="178"/>
+        <location filename="../src/config/geneneralconf.cpp" line="184"/>
         <source>Import</source>
         <translation>იმპორტირება</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Error</source>
         <translation>შეცდომა</translation>
     </message>
@@ -271,7 +256,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Unable to write file.</source>
         <translation>ფაილის ჩაწერა ვერ მოხერხდა.</translation>
     </message>
@@ -281,63 +266,63 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>ფაილის შენახვა</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Confirm Reset</source>
         <translation>განულების დადასტურება</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="117"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>დარწმუნებული ხართ, რომ გსურთ პარამეტრების განულება?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="126"/>
+        <location filename="../src/config/geneneralconf.cpp" line="132"/>
         <source>Show help message</source>
         <translation>დახმარების შეტყობინების ნახვა</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>დახმარების შეტყობინების ნახვა გადაღების რეჟიმის დაწყებისას.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
+        <location filename="../src/config/geneneralconf.cpp" line="150"/>
         <source>Show desktop notifications</source>
         <translation>ცნობების ჩვენება სამუშაო მაგიდაზე</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="153"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
         <source>Show tray icon</source>
         <translation>ხატულის ჩვენება სისტემურ პანელზე</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="157"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show the systemtray icon</source>
         <translation>ხატულის ჩვენება სისტემურ პანელზე</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="168"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Configuration File</source>
         <translation>პარამეტრების ფაილი</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../src/config/geneneralconf.cpp" line="179"/>
         <source>Export</source>
         <translation>ექსპორტირება</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="183"/>
+        <location filename="../src/config/geneneralconf.cpp" line="189"/>
         <source>Reset</source>
         <translation>განულება</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="191"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Launch at startup</source>
         <translation>გაშვება სისტემის ჩატვირთვისას</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="195"/>
+        <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Launch Flameshot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -345,42 +330,48 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
         <source>Upload to Imgur</source>
         <translation>Imgur-ზე ატვირთვა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="51"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
         <translation>სურათის ატვირთვა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="129"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
         <source>Copy URL</source>
         <translation>URL-ის კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="130"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
         <source>Open URL</source>
         <translation>URL-ის გახსნა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="131"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
         <source>Image to Clipboard.</source>
         <translation>სურათის გაცვლის ბუფერში გაგზავნა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="148"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
         <source>Unable to open the URL.</source>
         <translation>URL-ის გახსნა ვერ მოხერხდა.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="154"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
         <source>URL copied to clipboard.</source>
         <translation>URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="159"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
@@ -576,10 +567,10 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>შეცდომა მცდელობისას შენახულიყო როგორც: </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="71"/>
-        <location filename="../src/main.cpp" line="302"/>
-        <location filename="../src/main.cpp" line="326"/>
-        <location filename="../src/main.cpp" line="355"/>
+        <location filename="../src/main.cpp" line="72"/>
+        <location filename="../src/main.cpp" line="359"/>
+        <location filename="../src/main.cpp" line="383"/>
+        <location filename="../src/main.cpp" line="412"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus-ით დაკავშირება ვერ მოხერხდა</translation>
     </message>
@@ -626,6 +617,14 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
         <translation>სურათის შენახვა</translation>
+    </message>
+</context>
+<context>
+    <name>ScreenGrabber</name>
+    <message>
+        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <source>Unable to capture screen</source>
+        <translation type="unfinished">ეკრანის გადაღება ვერ მოხერხდა</translation>
     </message>
 </context>
 <context>
@@ -723,13 +722,13 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
-        <source>Time (%H:%M:%S)</source>
-        <translation>დრო (%H:%M:%S)</translation>
+        <source>Time (%H-%M-%S)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
-        <source>Time (%H:%M)</source>
-        <translation>დრო (%H:%M)</translation>
+        <source>Time (%H-%M)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -767,6 +766,19 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="50"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/texttool.cpp" line="58"/>
+        <source>Add text to your capture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -49,5 +49,7 @@
         <file>img/buttonIconsWhite/pin.png</file>
         <file>img/buttonIconsBlack/text.png</file>
         <file>img/buttonIconsWhite/text.png</file>
+        <file>img/configBlack/colorize.png</file>
+        <file>img/configWhite/colorize.png</file>
     </qresource>
 </RCC>

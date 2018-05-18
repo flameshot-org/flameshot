@@ -23,6 +23,7 @@
 
 #include "capturewidget.h"
 #include "src/widgets/capture/hovereventfilter.h"
+#include "src/widgets/panel/colorpickerwidget.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/globalvalues.h"
 #include "src/widgets/capture/notifierbox.h"
@@ -234,7 +235,8 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         QString helpTxt = tr("Select an area with the mouse, or press Esc to exit."
                              "\nPress Enter to capture the screen."
                              "\nPress Right Click to show the color picker."
-                             "\nUse the Mouse Wheel to change the thickness of your tool.");
+                             "\nUse the Mouse Wheel to change the thickness of your tool."
+                             "\nPress Space to open the side panel.");
 
         // We draw the white contrasting background for the text, using the
         //same text and options to get the boundingRect that the text will have.
@@ -271,6 +273,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 }
 
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
+    m_showInitialMsg = false;
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         if (m_selectionIsSet) {
@@ -279,7 +282,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
             m_colorPicker->show();
         }
     } else if (e->button() == Qt::LeftButton) {
-        m_showInitialMsg = false;
         m_mouseIsClicked = true;
         // Click using a tool
         if (m_activeButton) {
@@ -413,6 +415,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
             updateSizeIndicator();
             m_buttonHandler->updatePosition(m_selection->geometry());
             m_buttonHandler->show();
+            update();
         }
         m_colorPicker->hide();
         m_rightClick = false;
@@ -440,11 +443,23 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         // of a new one.
         if (!m_buttonHandler->isVisible() && m_selectionIsSet) {
             // Don't go outside
-            m_selection->setGeometry(m_selection->geometry().intersected(rect()));
-            m_context.selection = m_selection->geometry();
+            QRect newGeometry = m_selection->geometry().intersected(rect());
+            // normalize
+            if (newGeometry.width() <= 0) {
+                int left = newGeometry.left();
+                newGeometry.setLeft(newGeometry.right());
+                newGeometry.setRight(left);
+            }
+            if (newGeometry.height() <= 0) {
+                int top = newGeometry.top();
+                newGeometry.setTop(newGeometry.bottom());
+                newGeometry.setBottom(top);
+            }
+            m_selection->setGeometry(newGeometry);
+            m_context.selection = newGeometry;
             m_selection->setVisible(true);
             updateSizeIndicator();
-            m_buttonHandler->updatePosition(m_selection->geometry());
+            m_buttonHandler->updatePosition(newGeometry);
             m_buttonHandler->show();
         }
     }
@@ -532,6 +547,13 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
+    ColorPickerWidget *colorPicker = new ColorPickerWidget(&m_context.screenshot);
+    connect(colorPicker, &ColorPickerWidget::colorChanged,
+            this, &CaptureWidget::setDrawColor);
+    connect(this, &CaptureWidget::colorChanged,
+            colorPicker, &ColorPickerWidget::updateColor);
+    colorPicker->colorChanged(m_context.color);
+    m_panel->pushWidget(colorPicker);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
 }
 

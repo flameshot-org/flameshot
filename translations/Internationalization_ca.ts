@@ -197,20 +197,6 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     </message>
 </context>
 <context>
-    <name>FileNameHandler</name>
-    <message>
-        <source>screenshot</source>
-        <translation type="vanished">captura</translation>
-    </message>
-</context>
-<context>
-    <name>FlameshotDBusAdapter</name>
-    <message>
-        <source>Unable to capture screen</source>
-        <translation>Imposible capturar la pantalla</translation>
-    </message>
-</context>
-<context>
     <name>GeneneralConf</name>
     <message>
         <source>Show help message</source>
@@ -314,6 +300,10 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>Screenshot copied to clipboard.</source>
         <translation>La captura s&apos;ha copiat al porta-retalls.</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -514,6 +504,13 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     </message>
 </context>
 <context>
+    <name>ScreenGrabber</name>
+    <message>
+        <source>Unable to capture screen</source>
+        <translation type="unfinished">Imposible capturar la pantalla</translation>
+    </message>
+</context>
+<context>
     <name>SelectionTool</name>
     <message>
         <source>Rectangular Selection</source>
@@ -590,14 +587,6 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <translation>Dia (001-366)</translation>
     </message>
     <message>
-        <source>Time (%H:%M:%S)</source>
-        <translation>Temps (%H:%M:%S)</translation>
-    </message>
-    <message>
-        <source>Time (%H:%M)</source>
-        <translation>Temps (%H:%M)</translation>
-    </message>
-    <message>
         <source>Hour (00-23)</source>
         <translation>Hora (00-23)</translation>
     </message>
@@ -621,11 +610,30 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <source>Full Date (%Y-%m-%d)</source>
         <translation>Data (%Y-%m-%d)</translation>
     </message>
+    <message>
+        <source>Time (%H-%M-%S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time (%H-%M)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SystemNotification</name>
     <message>
         <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add text to your capture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
