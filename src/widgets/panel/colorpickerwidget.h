@@ -53,6 +53,8 @@ private:
     bool handleMouseButtonPressed(QMouseEvent *e);
     bool handleMouseMove(QMouseEvent *e);
 
+    void updateGrabButton(const bool activated);
+
     QVBoxLayout *m_layout;
     QPushButton *m_colorGrabButton;
     color_widgets::ColorWheel *m_colorWheel;
