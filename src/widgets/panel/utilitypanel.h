@@ -35,7 +35,9 @@ class UtilityPanel : public QWidget {
 public:
     explicit UtilityPanel(QWidget *parent = nullptr);
 
+    QWidget* toolWidget() const;
     void addToolWidget(QWidget *w);
+    void clearToolWidget();
     void pushWidget(QWidget *w);
 
 signals:
