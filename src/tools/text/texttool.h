@@ -21,6 +21,7 @@
 #include <QPointer>
 
 class TextWidget;
+class TextConfig;
 
 class TextTool : public CaptureTool {
 public:
@@ -57,13 +58,19 @@ public slots:
 private slots:
     void updateText(const QString &s);
     void setFont(const QFont &f);
+    void updateFamily(const QString &s);
+    void updateFontUnderline(const bool underlined);
+    void updateFontStrikeOut(const bool s);
+    void updateFontWeight(const QFont::Weight w);
+    void updateFontItalic(const bool italic);
 
 private:
-    QString m_text;
     QFont m_font;
+    QString m_text;
     int m_size;
     QColor m_color;
     QPixmap m_pixmapBackup;
     QRect m_backupArea;
     QPointer<TextWidget> m_widget;
+    QPointer<TextConfig> m_confW;
 };

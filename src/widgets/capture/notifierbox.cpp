@@ -60,3 +60,7 @@ void NotifierBox::showMessage(const QString &msg) {
     show();
     m_timer->start();
 }
+
+void NotifierBox::showColor(const QColor &color) {
+    m_message = "";
+}

@@ -45,11 +45,23 @@ UtilityPanel::UtilityPanel(QWidget *parent) : QWidget(parent) {
             m_internalPanel, &QWidget::hide);
 }
 
+QWidget *UtilityPanel::toolWidget() const {
+    return m_toolWidget;
+}
+
 void UtilityPanel::addToolWidget(QWidget *w) {
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
+    }
+    if (w) {
         m_toolWidget = w;
         m_upLayout->addWidget(w);
+    }
+}
+
+void UtilityPanel::clearToolWidget() {
+    if (m_toolWidget) {
+        m_toolWidget->deleteLater();
     }
 }
 

@@ -51,5 +51,13 @@
         <file>img/buttonIconsWhite/text.png</file>
         <file>img/configBlack/colorize.png</file>
         <file>img/configWhite/colorize.png</file>
+        <file>img/configWhite/format_bold.png</file>
+        <file>img/configWhite/format_italic.png</file>
+        <file>img/configWhite/format_strikethrough.png</file>
+        <file>img/configWhite/format_underlined.png</file>
+        <file>img/configBlack/format_bold.png</file>
+        <file>img/configBlack/format_italic.png</file>
+        <file>img/configBlack/format_strikethrough.png</file>
+        <file>img/configBlack/format_underlined.png</file>
     </qresource>
 </RCC>
