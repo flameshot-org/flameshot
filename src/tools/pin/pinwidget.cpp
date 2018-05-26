@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "pinwidget.h"
+#include "src/utils/confighandler.h"
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QWheelEvent>
@@ -30,13 +31,16 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
     //set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
 
+    ConfigHandler conf;
+    m_baseColor = conf.uiMainColorValue();
+    m_hoverColor = conf.uiContrastColorValue();
 
     m_layout = new QVBoxLayout(this);
     const int margin = this->margin();
     m_layout->setContentsMargins(margin, margin, margin, margin);
 
     m_shadowEffect = new QGraphicsDropShadowEffect(this);
-    m_shadowEffect->setColor(Qt::lightGray);
+    m_shadowEffect->setColor(m_baseColor);
     m_shadowEffect->setBlurRadius(2 * margin);
     m_shadowEffect->setOffset(0, 0);
     setGraphicsEffect(m_shadowEffect);
@@ -66,10 +70,10 @@ void PinWidget::wheelEvent(QWheelEvent *e) {
 }
 
 void PinWidget::enterEvent(QEvent *) {
-    m_shadowEffect->setColor(QColor(3, 150, 255));
+    m_shadowEffect->setColor(m_hoverColor);
 }
 void PinWidget::leaveEvent(QEvent *) {
-    m_shadowEffect->setColor(Qt::lightGray);
+    m_shadowEffect->setColor(m_baseColor);
 }
 
 void PinWidget::mouseDoubleClickEvent(QMouseEvent *) {
