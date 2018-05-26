@@ -297,6 +297,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
                 }
             }
             m_activeTool = m_activeButton->tool()->copy(this);
+
             connect(this, &CaptureWidget::colorChanged,
                     m_activeTool, &CaptureTool::colorChanged);
             connect(this, &CaptureWidget::thicknessChanged,
@@ -547,11 +548,14 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
-    ColorPickerWidget *colorPicker = new ColorPickerWidget(&m_context.screenshot);
+    ColorPickerWidget *colorPicker =
+            new ColorPickerWidget(&m_context.screenshot);
     connect(colorPicker, &ColorPickerWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
     connect(this, &CaptureWidget::colorChanged,
             colorPicker, &ColorPickerWidget::updateColor);
+    connect(colorPicker, &ColorPickerWidget::togglePanel,
+            m_panel, &UtilityPanel::toggle);
     colorPicker->colorChanged(m_context.color);
     m_panel->pushWidget(colorPicker);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
@@ -578,13 +582,12 @@ void CaptureWidget::setState(CaptureButton *b) {
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
         if (m_activeTool->isValid()) {
-            auto mod = new ModificationCommand(
-                        &m_context.screenshot, m_activeTool);
-            m_undoStack.push(mod);
-            m_activeTool = nullptr;
+            pushToolToStack();
         }
     }
-    processTool(b->tool());
+    if (m_activeButton != b) {
+        processTool(b->tool());
+    }
     // Only close activated from button
     if (b->tool()->closeOnButtonPressed()) {
         close();
@@ -592,12 +595,15 @@ void CaptureWidget::setState(CaptureButton *b) {
 
     if (b->tool()->isSelectable()) {
         if (m_activeButton != b) {
+            QWidget *confW = b->tool()->configurationWidget();
+            m_panel->addToolWidget(confW);
             if (m_activeButton) {
                 m_activeButton->setColor(m_uiColor);
             }
             m_activeButton = b;
             m_activeButton->setColor(m_contrastUiColor);
         } else if (m_activeButton) {
+            m_panel->clearToolWidget();
             m_activeButton->setColor(m_uiColor);
             m_activeButton = nullptr;
         }
@@ -611,10 +617,6 @@ void CaptureWidget::processTool(CaptureTool *t) {
     m_activeTool = t;
     t->pressed(m_context);
     m_activeTool = backup;
-    QWidget *cw = t->configurationWidget();
-    if (cw) {
-        m_panel->addToolWidget(t->configurationWidget());
-    }
 }
 
 void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
@@ -803,11 +805,14 @@ void CaptureWidget::updateCursor() {
 void CaptureWidget::pushToolToStack() {
     auto mod = new ModificationCommand(
                 &m_context.screenshot, m_activeTool);
-    m_undoStack.push(mod);
     disconnect(this, &CaptureWidget::colorChanged,
                m_activeTool, &CaptureTool::colorChanged);
     disconnect(this, &CaptureWidget::thicknessChanged,
                m_activeTool, &CaptureTool::thicknessChanged);
+    if (m_panel->toolWidget()) {
+        disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
+    }
+    m_undoStack.push(mod);
     m_activeTool = nullptr;
 }
 

@@ -69,7 +69,8 @@ ColorPickerWidget::ColorPickerWidget(QPixmap *p, QWidget *parent) :
     QString modifier = isDark ? PathInfo::whiteConfigIconPath() :
                                 PathInfo::blackConfigIconPath();
     QIcon grabIcon(modifier + "colorize.png");
-    m_colorGrabButton = new QPushButton(grabIcon, tr("Grab Color"));
+    m_colorGrabButton = new QPushButton(grabIcon, "");
+    updateGrabButton(false);
     connect(m_colorGrabButton, &QPushButton::pressed,
             this, &ColorPickerWidget::colorGrabberActivated);
     m_layout->addWidget(m_colorGrabButton);
@@ -105,6 +106,7 @@ void ColorPickerWidget::colorGrabberActivated() {
         m_eventFilter = new QColorPickingEventFilter(this, this);
     }
     installEventFilter(m_eventFilter);
+    updateGrabButton(true);
 }
 
 void ColorPickerWidget::releaseColorGrab() {
@@ -113,6 +115,7 @@ void ColorPickerWidget::releaseColorGrab() {
     releaseMouse();
     releaseKeyboard();
     setFocus();
+    updateGrabButton(false);
 }
 
 QColor ColorPickerWidget::grabPixmapColor(const QPoint &p) {
@@ -125,7 +128,9 @@ QColor ColorPickerWidget::grabPixmapColor(const QPoint &p) {
 }
 
 bool ColorPickerWidget::handleKeyPress(QKeyEvent *e) {
-    if (e->key() == Qt::Key_Escape) {
+    if (e->key() == Qt::Key_Space) {
+        emit togglePanel();
+    } else if (e->key() == Qt::Key_Escape) {
         releaseColorGrab();
         updateColor(m_colorBackup);
     } else if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter) {
@@ -152,4 +157,12 @@ bool ColorPickerWidget::handleMouseButtonPressed(QMouseEvent *e) {
 bool ColorPickerWidget::handleMouseMove(QMouseEvent *e) {
     updateColorNoWheel(grabPixmapColor(e->globalPos()));
     return true;
+}
+
+void ColorPickerWidget::updateGrabButton(const bool activated) {
+    if (activated) {
+        m_colorGrabButton->setText(tr("Press ESC to cancel"));
+    } else {
+        m_colorGrabButton->setText(tr("Grab Color"));
+    }
 }

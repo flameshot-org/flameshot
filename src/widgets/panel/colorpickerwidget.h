@@ -34,6 +34,7 @@ public:
 
 signals:
     void colorChanged(const QColor &c);
+    void togglePanel();
 
 public slots:
     void updateColor(const QColor &c);
@@ -51,6 +52,8 @@ private:
     bool handleKeyPress(QKeyEvent *e);
     bool handleMouseButtonPressed(QMouseEvent *e);
     bool handleMouseMove(QMouseEvent *e);
+
+    void updateGrabButton(const bool activated);
 
     QVBoxLayout *m_layout;
     QPushButton *m_colorGrabButton;

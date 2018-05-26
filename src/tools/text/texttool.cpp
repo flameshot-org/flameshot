@@ -21,8 +21,8 @@
 
 #define BASE_POINT_SIZE 8
 
-TextTool::TextTool(QObject *parent) : CaptureTool(parent) {
 
+TextTool::TextTool(QObject *parent) : CaptureTool(parent) {
 }
 
 bool TextTool::isValid() const {
@@ -66,17 +66,42 @@ QWidget *TextTool::widget() {
     connect(w, &TextWidget::textUpdated,
             this, &TextTool::updateText);
     m_widget = w;
-      return w;
-}
-
-QWidget *TextTool::configurationWidget() {
-    TextConfig *w = nullptr;//new TextConfig();
-    // TODO CONNECT
     return w;
 }
 
+QWidget *TextTool::configurationWidget() {
+    m_confW = new TextConfig();
+    connect(m_confW, &TextConfig::fontFamilyChanged,
+            this, &TextTool::updateFamily);
+    connect(m_confW, &TextConfig::fontItalicChanged,
+            this, &TextTool::updateFontItalic);
+    connect(m_confW, &TextConfig::fontStrikeOutChanged,
+            this, &TextTool::updateFontStrikeOut);
+    connect(m_confW, &TextConfig::fontUnderlineChanged,
+            this, &TextTool::updateFontUnderline);
+    connect(m_confW, &TextConfig::fontWeightChanged,
+            this, &TextTool::updateFontWeight);
+    m_confW->setItalic(m_font.italic());
+    m_confW->setUnderline(m_font.underline());
+    m_confW->setStrikeOut(m_font.strikeOut());
+    m_confW->setWeight(m_font.weight());
+    return m_confW;
+}
+
 CaptureTool *TextTool::copy(QObject *parent) {
-    return new TextTool(parent);
+    TextTool *tt = new TextTool(parent);
+    connect(m_confW, &TextConfig::fontFamilyChanged,
+            tt, &TextTool::updateFamily);
+    connect(m_confW, &TextConfig::fontItalicChanged,
+            tt, &TextTool::updateFontItalic);
+    connect(m_confW, &TextConfig::fontStrikeOutChanged,
+            tt, &TextTool::updateFontStrikeOut);
+    connect(m_confW, &TextConfig::fontUnderlineChanged,
+            tt, &TextTool::updateFontUnderline);
+    connect(m_confW, &TextConfig::fontWeightChanged,
+            tt, &TextTool::updateFontWeight);
+    tt->m_font = m_font;
+    return tt;
 }
 
 void TextTool::undo(QPixmap &pixmap) {
@@ -85,7 +110,6 @@ void TextTool::undo(QPixmap &pixmap) {
 }
 
 void TextTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo) {
-    // TODO updateBackup() of others
     if (m_text.isEmpty()) {
         return;
     }
@@ -147,5 +171,40 @@ void TextTool::setFont(const QFont &f) {
     m_font = f;
     if (m_widget) {
         m_widget->setFont(f);
+    }
+}
+
+void TextTool::updateFamily(const QString &s) {
+    m_font.setFamily(s);
+    if (m_widget) {
+        m_widget->setFont(m_font);
+    }
+}
+
+void TextTool::updateFontUnderline(const bool underlined) {
+    m_font.setUnderline(underlined);
+    if (m_widget) {
+        m_widget->setFont(m_font);
+    }
+}
+
+void TextTool::updateFontStrikeOut(const bool s) {
+    m_font.setStrikeOut(s);
+    if (m_widget) {
+        m_widget->setFont(m_font);
+    }
+}
+
+void TextTool::updateFontWeight(const QFont::Weight w) {
+    m_font.setWeight(w);
+    if (m_widget) {
+        m_widget->setFont(m_font);
+    }
+}
+
+void TextTool::updateFontItalic(const bool italic) {
+    m_font.setItalic(italic);
+    if (m_widget) {
+        m_widget->setFont(m_font);
     }
 }

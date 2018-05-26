@@ -32,6 +32,7 @@ protected:
 
 public slots:
     void showMessage(const QString &msg);
+    void showColor(const QColor &color);
 
 private:
     QTimer *m_timer;
