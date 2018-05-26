@@ -26,7 +26,7 @@ class QPushButton;
 class GeneneralConf : public QWidget {
     Q_OBJECT
 public:
-    GeneneralConf(QWidget *parent = nullptr);
+    explicit GeneneralConf(QWidget *parent = nullptr);
 
 public slots:
     void updateComponents();

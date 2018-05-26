@@ -59,7 +59,7 @@ public:
     QColor (*rainbow_from_hue)(qreal);
     int max_size = 128;
 
-    Private(ColorWheel *widget)
+    explicit Private(ColorWheel *widget)
         : w(widget), hue(0), sat(0), val(0),
         wheel_width(20), mouse_status(Nothing),
         display_flags(FLAGS_DEFAULT),

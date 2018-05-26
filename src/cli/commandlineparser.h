@@ -55,7 +55,7 @@ private:
     QString  m_generalErrorMessage;
 
     struct Node {
-        Node(const CommandArgument &arg) : argument(arg) {}
+        explicit Node(const CommandArgument &arg) : argument(arg) {}
         Node() {}
         bool operator==(const Node &n) const {
             return argument == n.argument &&

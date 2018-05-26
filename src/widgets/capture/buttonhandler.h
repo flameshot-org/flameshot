@@ -30,7 +30,7 @@ class ButtonHandler : public QObject {
     Q_OBJECT
 public:
     ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
-    ButtonHandler(QObject *parent = nullptr);
+    explicit ButtonHandler(QObject *parent = nullptr);
 
     void hideSectionUnderMouse(const QPoint &p);
 

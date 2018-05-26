@@ -36,6 +36,8 @@ TextConfig::TextConfig(QWidget *parent) : QWidget(parent) {
     int index = fontsCB->findData(QFont().family());
     if ( index != -1 ) {
         fontsCB->setCurrentIndex(index);
+    } else {
+
     }
 
     QColor bgColor(palette().background().color());
