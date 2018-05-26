@@ -563,10 +563,6 @@ void CaptureWidget::initSelection() {
     m_selection->setGeometry(QRect());
 }
 
-void CaptureWidget::initWidget() {
-
-}
-
 void CaptureWidget::setState(CaptureButton *b) {
     if (!b) {
         return;
@@ -824,10 +820,6 @@ void CaptureWidget::childEnter() {
 void CaptureWidget::childLeave() {
     m_previewEnabled = true;
     update();
-}
-
-int CaptureWidget::handleSize() {
-    return (QApplication::fontMetrics().height() * 0.7);
 }
 
 void CaptureWidget::copyScreenshot() {

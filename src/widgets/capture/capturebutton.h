@@ -65,7 +65,6 @@ public:
     QString description() const;
     QIcon icon() const;
     QString styleSheet() const;
-    ButtonType buttonType() const;
     CaptureTool* tool() const;
 
     void setColor(const QColor &c);

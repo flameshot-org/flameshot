@@ -62,5 +62,6 @@ void NotifierBox::showMessage(const QString &msg) {
 }
 
 void NotifierBox::showColor(const QColor &color) {
+    Q_UNUSED(color);
     m_message = "";
 }

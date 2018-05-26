@@ -25,7 +25,7 @@ class FlameshotDBusAdapter : public QDBusAbstractAdaptor {
     Q_CLASSINFO("D-Bus Interface", "org.dharkael.Flameshot")
 
 public:
-    FlameshotDBusAdapter(QObject *parent = nullptr);
+    explicit FlameshotDBusAdapter(QObject *parent = nullptr);
     virtual ~FlameshotDBusAdapter();
 
 signals:
