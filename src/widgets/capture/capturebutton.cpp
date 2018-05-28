@@ -134,10 +134,6 @@ void CaptureButton::animatedShow() {
     }
 }
 
-CaptureButton::ButtonType CaptureButton::buttonType() const {
-    return m_buttonType;
-}
-
 CaptureTool *CaptureButton::tool() const {
     return m_tool;
 }

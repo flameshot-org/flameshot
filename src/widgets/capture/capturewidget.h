@@ -125,16 +125,12 @@ private:
     void initContext(const QString &savePath, bool fullscreen);
     void initPanel();
     void initSelection();
-    void initWidget();
     void initShortcuts();
     void updateSizeIndicator();
     void updateCursor();
     void pushToolToStack();
     void handleDragUpdate();
     void makeChild(QWidget *w);
-
-    // size of the handlers at the corners of the selection
-    int handleSize();
 
     QRect extendedSelection() const;
 

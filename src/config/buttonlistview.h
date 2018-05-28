@@ -22,7 +22,7 @@
 
 class ButtonListView : public QListWidget {
 public:
-    ButtonListView(QWidget *parent= nullptr);
+    explicit ButtonListView(QWidget *parent= nullptr);
 
 public slots:
     void selectAll();

@@ -33,10 +33,8 @@ TextConfig::TextConfig(QWidget *parent) : QWidget(parent) {
             this, &TextConfig::fontFamilyChanged);
     fontsCB->addItems(fontDB.families());
     // TODO save family in config
-    int index = fontsCB->findData(QFont().family());
-    if ( index != -1 ) {
-        fontsCB->setCurrentIndex(index);
-    }
+    int index = fontsCB->findText(font().family());
+    fontsCB->setCurrentIndex(index);
 
     QColor bgColor(palette().background().color());
     QString iconPrefix = ColorUtils::colorIsDark(bgColor) ?

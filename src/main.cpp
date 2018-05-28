@@ -48,9 +48,9 @@ int main(int argc, char *argv[]) {
 
         QTranslator translator;
         QStringList trPaths = PathInfo::translationsPaths();
-        bool match = false;
+
         for (const QString &path: trPaths) {
-            match = translator.load(QLocale::system().language(),
+            bool match = translator.load(QLocale::system().language(),
                                     "Internationalization", "_",
                                     path);
             if (match) {

@@ -289,9 +289,8 @@ void ButtonHandler::positionButtonsInside(int index) {
     QPoint center = QPoint(mainArea.center().x(),
                            mainArea.bottom() - m_buttonExtendedSize);
 
-    int addCounter;
     while (m_vectorButtons.size() > index) {
-        addCounter = buttonsPerRow;
+        int addCounter = buttonsPerRow;
         addCounter = qBound(0, addCounter, m_vectorButtons.size() - index);
         QVector<QPoint> positions = horizontalPoints(center, addCounter, true);
         moveButtonsToPoints(positions, index);

@@ -22,7 +22,7 @@
 #define BASE_POINT_SIZE 8
 
 
-TextTool::TextTool(QObject *parent) : CaptureTool(parent) {
+TextTool::TextTool(QObject *parent) : CaptureTool(parent), m_size(1) {
 }
 
 bool TextTool::isValid() const {
