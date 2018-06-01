@@ -51,7 +51,7 @@
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
                              bool fullscreen, QWidget *parent) :
-    QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
+    QWidget(parent), m_leftClicked(false), m_rightClicked(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
     m_previewEnabled(true), m_selectionIsSet(false), m_activeButton(nullptr),
     m_activeTool(nullptr), m_toolWidget(nullptr),
@@ -203,7 +203,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_context.screenshot);
 
-    if (m_activeTool && m_mouseIsClicked) {
+    if (m_activeTool && m_leftClicked) {
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
         painter.restore();
@@ -275,14 +275,14 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     m_showInitialMsg = false;
     if (e->button() == Qt::RightButton) {
-        m_rightClick = true;
+        m_rightClicked = true;
         if (m_selectionIsSet) {
             m_colorPicker->move(e->pos().x()-m_colorPicker->width()/2,
                                 e->pos().y()-m_colorPicker->height()/2);
             m_colorPicker->show();
         }
     } else if (e->button() == Qt::LeftButton) {
-        m_mouseIsClicked = true;
+        m_leftClicked = true;
         // Click using a tool
         if (m_activeButton) {
             if (m_activeTool) {
@@ -337,7 +337,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
 void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
     m_context.mousePos = e->pos();
 
-    if (m_mouseIsClicked && !m_activeButton) {
+    if (m_leftClicked && !m_activeButton) {
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
@@ -373,7 +373,9 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         // Find the smallest rect containing the cursor.
         QRect rcv = m_rectGroup.getRectContainingPoint(m_context.mousePos);
         if (!rcv.isEmpty()) {
-            if (m_rightClick) {
+            if (m_leftClicked) {
+                // Don't modify the areas
+            } else if (m_rightClicked) { // TODO
                 m_selection->setGeometry(m_selection->geometry().united(rcv));
             } else {
                 if (!m_selection->isVisible()) {
@@ -383,11 +385,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
             }
             m_context.selection = rcv;
             m_selection->show();
-        } else if (!m_rightClick){
+        } else if (!m_rightClicked){
             m_selection->hide();
         }
         update();
-    } else if (m_mouseIsClicked && m_activeTool) {
+    } else if (m_leftClicked && m_activeTool) {
         // drawing with a tool
         m_activeTool->drawMove(e->pos());
         update();
@@ -419,11 +421,11 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
             update();
         }
         m_colorPicker->hide();
-        m_rightClick = false;
+        m_rightClicked = false;
     } else {
         // when we end the drawing we have to register the last  point and
         //add the temp modification to the list of modifications
-        if (m_mouseIsClicked && m_activeTool) {
+        if (m_leftClicked && m_activeTool) {
             m_activeTool->drawEnd(m_context.mousePos);
             if (m_activeTool->isValid()) {
                 pushToolToStack();
@@ -465,7 +467,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         }
     }
 
-    m_mouseIsClicked = false;
+    m_leftClicked = false;
     m_grabbing = false;
     m_newSelection = false;
 
@@ -762,7 +764,7 @@ void CaptureWidget::updateSizeIndicator() {
 }
 
 void CaptureWidget::updateCursor() {
-    if (m_rightClick) {
+    if (m_rightClicked) {
         setCursor(Qt::ArrowCursor);
     } else if (m_grabbing) {
         setCursor(Qt::ClosedHandCursor);

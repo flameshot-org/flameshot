@@ -112,8 +112,8 @@ protected:
     // Outside selection opacity
     int m_opacity;
     // utility flags
-    bool m_mouseIsClicked;
-    bool m_rightClick;
+    bool m_leftClicked;
+    bool m_rightClicked;
     bool m_newSelection;
     bool m_grabbing;
     bool m_showInitialMsg;
