@@ -77,17 +77,25 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
         <translation>ეკრანის გადაღება ვერ მოხერხდა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
+        <source>Select an area with the mouse, or press Esc to exit.
+Press Enter to capture the screen.
+Press Right Click to show the color picker.
+Use the Mouse Wheel to change the thickness of your tool.
+Press Space to open the side panel.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>შეარჩიეთ ეკრანის არე მაუსით, ან დააწექით Esc-ს გამოსასვლელად.
+        <translation type="vanished">შეარჩიეთ ეკრანის არე მაუსით, ან დააწექით Esc-ს გამოსასვლელად.
 დააწექით Enter-ს ეკრანის გადასაღებად.
 წააწექით და დაიჭირეთ მაუსის მარჯვენა ღილაკი ფერის ასარჩევად.
 გამოიყენეთ მაუსის გორგოლაჭი ხელსაწყოს სისქის შესარევად.</translation>
@@ -107,6 +115,24 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
+    <name>ColorPickerWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <source>Active color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <source>Grab Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigWindow</name>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
@@ -114,17 +140,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>პარამეტრები</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="62"/>
+        <location filename="../src/config/configwindow.cpp" line="63"/>
         <source>Interface</source>
         <translation>ინტერფეისი</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="67"/>
+        <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>Filename Editor</source>
         <translation>ფაილის სახელის რედაქტორი</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="72"/>
+        <location filename="../src/config/configwindow.cpp" line="73"/>
         <source>General</source>
         <translation>ზოგადი</translation>
     </message>
@@ -766,6 +792,29 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextConfig</name>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="49"/>
+        <source>StrikeOut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="56"/>
+        <source>Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="63"/>
+        <source>Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="70"/>
+        <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

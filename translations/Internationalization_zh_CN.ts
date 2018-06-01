@@ -77,21 +77,33 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>用鼠标选择一个区域,或按 Esc 退出。
+        <translation type="vanished">用鼠标选择一个区域,或按 Esc 退出。
 按 Enter 键捕捉屏幕。
 按住鼠标右键显示颜色选择器。
 使用鼠标滚轮来改变绘画工具的宽度。</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
+        <source>Select an area with the mouse, or press Esc to exit.
+Press Enter to capture the screen.
+Press Right Click to show the color picker.
+Use the Mouse Wheel to change the thickness of your tool.
+Press Space to open the side panel.</source>
+        <translation>用鼠标选择一个区域,或按 Esc 退出。
+按 Enter 键捕捉屏幕。
+按住鼠标右键显示颜色选择器。
+使用鼠标滚轮来改变绘画工具的宽度。
+按下空格键以打开侧边面板。</translation>
     </message>
 </context>
 <context>
@@ -108,6 +120,24 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
+    <name>ColorPickerWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <source>Active color:</source>
+        <translation>活动颜色：</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <source>Press ESC to cancel</source>
+        <translation>按下 ESC 键以取消</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <source>Grab Color</source>
+        <translation>获取颜色</translation>
+    </message>
+</context>
+<context>
     <name>ConfigWindow</name>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
@@ -115,17 +145,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="62"/>
+        <location filename="../src/config/configwindow.cpp" line="63"/>
         <source>Interface</source>
         <translation>界面</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="67"/>
+        <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>Filename Editor</source>
         <translation>文件名编辑器</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="72"/>
+        <location filename="../src/config/configwindow.cpp" line="73"/>
         <source>General</source>
         <translation>常规</translation>
     </message>
@@ -353,7 +383,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>删除图像</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
@@ -625,7 +655,7 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/utils/screengrabber.cpp" line="70"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">无法捕获屏幕</translation>
+        <translation>无法捕获屏幕</translation>
     </message>
 </context>
 <context>
@@ -724,12 +754,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>时间 (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>时间 (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -771,16 +801,39 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
 </context>
 <context>
+    <name>TextConfig</name>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="49"/>
+        <source>StrikeOut</source>
+        <translation>删除线</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="56"/>
+        <source>Underline</source>
+        <translation>下划线</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="63"/>
+        <source>Bold</source>
+        <translation>粗体</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="70"/>
+        <source>Italic</source>
+        <translation>斜体</translation>
+    </message>
+</context>
+<context>
     <name>TextTool</name>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>文本</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>在您的捕获中添加文本</translation>
     </message>
 </context>
 <context>

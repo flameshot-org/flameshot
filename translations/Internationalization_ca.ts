@@ -68,7 +68,7 @@
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>Seleccioneu una àrea amb el ratolí, o premeu Esc per a eixir.
+        <translation type="vanished">Seleccioneu una àrea amb el ratolí, o premeu Esc per a eixir.
 Premeu Retorn per a capturar la pantalla.
 Feu clic amb el botó dret per a mostrar el selector de color.
 Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translation>
@@ -77,6 +77,14 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
         <translation>Imposible capturar la pantalla</translation>
+    </message>
+    <message>
+        <source>Select an area with the mouse, or press Esc to exit.
+Press Enter to capture the screen.
+Press Right Click to show the color picker.
+Use the Mouse Wheel to change the thickness of your tool.
+Press Space to open the side panel.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -88,6 +96,21 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <message>
         <source>Sets the Circle as the paint tool</source>
         <translation>Estableix el cercle com a eina de dibuix</translation>
+    </message>
+</context>
+<context>
+    <name>ColorPickerWidget</name>
+    <message>
+        <source>Active color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grab Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -623,6 +646,25 @@ Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translatio
     <name>SystemNotification</name>
     <message>
         <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextConfig</name>
+    <message>
+        <source>StrikeOut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
