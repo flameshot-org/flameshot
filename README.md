@@ -3,7 +3,7 @@
 > Powerful yet simple to use screenshot software.
 
 [![Build Status](https://img.shields.io/travis/lupoDharkael/flameshot.svg)](https://travis-ci.org/lupoDharkael/flameshot)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/lupoDharkael/flameshot?svg=true)](https://ci.appveyor.com/project/lupoDharkael/flameshot)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/lupoDharkael/flameshot?svg=true)](https://ci.appveyor.com/project/lupoDharkael/flameshot)
 [![License](https://img.shields.io/github/license/lupoDharkael/flameshot.svg)](https://github.com/lupoDharkael/flameshot/blob/master/LICENSE)
 [![Release](https://img.shields.io/github/release/lupoDharkael/flameshot.svg)](https://github.com/lupoDharkael/flameshot/releases)
 
@@ -93,16 +93,16 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
 
 These shortcuts are available in GUI mode:
 
-|  Keys                                                                                         |  Description                         |
-|---                                                                                            |---                                   |
-| <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                                        | Move selection 1px                   |
-| <kbd>Shift</kbd> + <kbd><kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd></kbd>          | Resize selection 1px                 |
-| <kbd>Esc</kbd>                                                                                | Quit capture                         |
-| <kbd>Ctrl</kbd> + <kbd>C</kbd>                                                                | Copy to clipboard                    |
-| <kbd>Ctrl</kbd> + <kbd>S</kbd>                                                                | Save selection as a file             |
-| <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                                                | Undo the last modification           |
-| Right Click                                                                                   | Show color picker                    |
-| Mouse Wheel                                                                                   | Change the tool's thickness          |
+|  Keys                                                                     |  Description                         |
+|---                                                                        |---                                   |
+| <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                   |
+| <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                 |
+| <kbd>Esc</kbd>                                                            | Quit capture                         |
+| <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                    |
+| <kbd>Ctrl</kbd> + <kbd>S</kbd>                                            | Save selection as a file             |
+| <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                            | Undo the last modification           |
+| Right Click                                                               | Show color picker                    |
+| Mouse Wheel                                                               | Change the tool's thickness          |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
 
