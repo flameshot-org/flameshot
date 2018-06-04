@@ -74,8 +74,11 @@ void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons
 
 QVector<QColor> ConfigHandler::getUserColors() {
     QVector<QColor> colors;
+
     if (m_settings.contains("userColors")) {
-        colors = m_settings.value("userColors").value<QVector<QColor> >();
+        for (const QString &name : m_settings.value("userColors").toStringList()) {
+            colors.append(QColor(name));
+        }
     } else {
         colors = {
             Qt::darkRed,
@@ -89,11 +92,18 @@ QVector<QColor> ConfigHandler::getUserColors() {
             Qt::darkMagenta,
         };
     }
+
     return colors;
 }
 
 void ConfigHandler::setUserColors(const QVector<QColor> &l) {
-    m_settings.setValue("userColors", QVariant::fromValue(l));
+    QStringList hexColors;
+
+    for (const QColor &color : l) {
+        hexColors.append(color.name());
+    }
+
+    m_settings.setValue("userColors", QVariant::fromValue(hexColors));
 }
 
 QString ConfigHandler::savePathValue() {
@@ -106,38 +116,43 @@ void ConfigHandler::setSavePath(const QString &savePath) {
 
 QColor ConfigHandler::uiMainColorValue() {
     QColor res = QColor(116, 0, 150);
+
     if (m_settings.contains("uiColor")) {
-        res = m_settings.value("uiColor").value<QColor>();
+        res = QColor(m_settings.value("uiColor").toString());
     }
     return res;
 }
 
 void ConfigHandler::setUIMainColor(const QColor &c) {
-    m_settings.setValue("uiColor", c);
+    m_settings.setValue("uiColor", c.name());
 }
 
 QColor ConfigHandler::uiContrastColorValue() {
     QColor res = QColor(86, 0, 120);
+
     if (m_settings.contains("contastUiColor")) {
-        res = m_settings.value("contastUiColor").value<QColor>();
+        res = QColor(m_settings.value("contastUiColor").toString());
     }
+
     return res;
 }
 
 void ConfigHandler::setUIContrastColor(const QColor &c) {
-    m_settings.setValue("contastUiColor", c);
+    m_settings.setValue("contastUiColor", c.name());
 }
 
 QColor ConfigHandler::drawColorValue() {
     QColor res(Qt::red);
+
     if (m_settings.contains("drawColor")) {
-        res = m_settings.value("drawColor").value<QColor>();
+        res = QColor(m_settings.value("drawColor").toString());
     }
+
     return res;
 }
 
 void ConfigHandler::setDrawColor(const QColor &c) {
-    m_settings.setValue("drawColor", c);
+    m_settings.setValue("drawColor", c.name());
 }
 
 bool ConfigHandler::showHelpValue() {
