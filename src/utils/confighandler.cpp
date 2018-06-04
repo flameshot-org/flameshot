@@ -74,23 +74,30 @@ void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons
 
 QVector<QColor> ConfigHandler::getUserColors() {
     QVector<QColor> colors;
+    const QVector<QColor> &defaultColors = {
+        Qt::darkRed,
+        Qt::red,
+        Qt::yellow,
+        Qt::green,
+        Qt::darkGreen,
+        Qt::cyan,
+        Qt::blue,
+        Qt::magenta,
+        Qt::darkMagenta
+    };
 
     if (m_settings.contains("userColors")) {
-        for (const QString &name : m_settings.value("userColors").toStringList()) {
-            colors.append(QColor(name));
+        for (const QString &hex : m_settings.value("userColors").toStringList()) {
+            if (QColor::isValidColor(hex)) {
+                colors.append(QColor(hex));
+            }
+        }
+
+        if (colors.isEmpty()) {
+            colors = defaultColors;
         }
     } else {
-        colors = {
-            Qt::darkRed,
-            Qt::red,
-            Qt::yellow,
-            Qt::green,
-            Qt::darkGreen,
-            Qt::cyan,
-            Qt::blue,
-            Qt::magenta,
-            Qt::darkMagenta,
-        };
+        colors = defaultColors;
     }
 
     return colors;
@@ -118,7 +125,11 @@ QColor ConfigHandler::uiMainColorValue() {
     QColor res = QColor(116, 0, 150);
 
     if (m_settings.contains("uiColor")) {
-        res = QColor(m_settings.value("uiColor").toString());
+        QString hex = m_settings.value("uiColor").toString();
+
+        if (QColor::isValidColor(hex)) {
+            res = QColor(hex);
+        }
     }
     return res;
 }
@@ -131,7 +142,11 @@ QColor ConfigHandler::uiContrastColorValue() {
     QColor res = QColor(86, 0, 120);
 
     if (m_settings.contains("contastUiColor")) {
-        res = QColor(m_settings.value("contastUiColor").toString());
+        QString hex = m_settings.value("contastUiColor").toString();
+
+        if (QColor::isValidColor(hex)) {
+            res = QColor(hex);
+        }
     }
 
     return res;
@@ -145,7 +160,11 @@ QColor ConfigHandler::drawColorValue() {
     QColor res(Qt::red);
 
     if (m_settings.contains("drawColor")) {
-        res = QColor(m_settings.value("drawColor").toString());
+        QString hex = m_settings.value("drawColor").toString();
+
+        if (QColor::isValidColor(hex)) {
+            res = QColor(hex);
+        }
     }
 
     return res;
