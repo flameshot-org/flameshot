@@ -1,5 +1,6 @@
 #!/bin/bash --
 
+set -x
 set -e
 
 if [[ "${DIST}" == "trusty" ]]; then

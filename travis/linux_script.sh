@@ -1,5 +1,6 @@
 #!/bin/bash --
 
+set -x
 set -e
 
 if [[ "${DIST}" == "trusty" ]]; then
@@ -7,7 +8,13 @@ if [[ "${DIST}" == "trusty" ]]; then
 	DIST_PATH=dist
 	BUILD_DST_PATH=build-test
 	APPIMAGE_DST_PATH=build-appimage
-	source /opt/qt53/bin/qt53-env.sh
+
+	#source /opt/qt53/bin/qt53-env.sh
+	QT_BASE_DIR=/opt/qt53
+	export QTDIR="${QT_BASE_DIR}"
+	export PATH="${QT_BASE_DIR}"/bin:"${PATH}"
+	export LD_LIBRARY_PATH="${QT_BASE_DIR}"/lib/x86_64-linux-gnu:"${QT_BASE_DIR}"/lib:"${LD_LIBRARY_PATH}"
+	export PKG_CONFIG_PATH="${QT_BASE_DIR}"/lib/pkgconfig:"${PKG_CONFIG_PATH}"
 
 	qmake --version
 	export CC=gcc-4.9 CXX=g++-4.9
