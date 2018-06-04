@@ -18,7 +18,7 @@ env:
       - VERSION=0.5.1
       - RELEASE=1
       - ARCH=x86_64
-#      - DOCKER_REPO=packpack/packpack
+#     - DOCKER_REPO=packpack/packpack
       - DOCKER_REPO=vitzy/packpack
 
 #The actual list of distribution is available on
@@ -52,32 +52,25 @@ matrix:
           # 9
           env: OS=debian DIST=stretch EXTEN=deb
           services: docker
-        - os: osx
-          compiler: clang
-          osx_image: xcode9.2
+#       - os: osx
+#         compiler: clang
+#         osx_image: xcode9.2
 
 before_install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get -qq update ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_before_install.sh; fi
 
 before_script:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then chmod +x .travis_linux.sh ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then chmod +x .travis_macos.sh ; fi
+  - chmod +x travis/*.sh
 
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq git; sudo apt-get install -qq build-essential ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install openssl libssl-dev ; fi
-  # - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install libgl1-mesa-dev ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install tree ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq gcc-4.9; sudo apt-get install -qq g++-4.9 ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" && "${DIST}" == "trusty" ]]; then sudo apt-get install -qq git ; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_install.sh; fi
 
 script:
- # - git submodule update --init --recursive
- # - git describe --long
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then bash ./.travis_linux.sh ; fi
-  - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then bash ./.travis_macos.sh ; fi
-  - pwd && ls   
+# - git submodule update --init --recursive
+# - git describe --long
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_script.sh; fi
+# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then travis/osx_script.sh; fi
+  - pwd && ls
 
 # deploy:
 #    # Deploy packages to Github Release
