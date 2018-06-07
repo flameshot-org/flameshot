@@ -77,17 +77,25 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="80"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
         <translation>Nie można przechwycić ekranu</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="230"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
+        <source>Select an area with the mouse, or press Esc to exit.
+Press Enter to capture the screen.
+Press Right Click to show the color picker.
+Use the Mouse Wheel to change the thickness of your tool.
+Press Space to open the side panel.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>Zaznacz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
+        <translation type="vanished">Zaznacz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
 Wciśnij Enter aby wykonać zrzut ekranu.
 Kliknij prawym przyciskiem myszy, aby pokazać próbnik kolorów.
 Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translation>
@@ -107,6 +115,24 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     </message>
 </context>
 <context>
+    <name>ColorPickerWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <source>Active color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <source>Grab Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigWindow</name>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
@@ -114,17 +140,17 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <translation>Konfiguracja</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="62"/>
+        <location filename="../src/config/configwindow.cpp" line="63"/>
         <source>Interface</source>
         <translation>Interfejs</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="67"/>
+        <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>Filename Editor</source>
         <translation>Edytor nazw plików</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="72"/>
+        <location filename="../src/config/configwindow.cpp" line="73"/>
         <source>General</source>
         <translation>Ogólne</translation>
     </message>
@@ -766,6 +792,29 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextConfig</name>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="49"/>
+        <source>StrikeOut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="56"/>
+        <source>Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="63"/>
+        <source>Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/text/textconfig.cpp" line="70"/>
+        <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
