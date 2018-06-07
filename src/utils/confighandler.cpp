@@ -295,7 +295,7 @@ void ConfigHandler::setContrastOpacity(const int transparency) {
 }
 
 bool ConfigHandler::cvProcessingValue() {
-    bool res = false;
+    bool res = true;
     if (m_settings.contains("cvProcessing")) {
         res = m_settings.value("cvProcessing").toBool();
     }

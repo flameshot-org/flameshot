@@ -140,8 +140,10 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
             this, [this](int){ this->update(); });
     initPanel();
 
-    RectDetector detector(m_context.screenshot);
-    m_rectGroup.setRects(detector.getRects());
+    if (m_config.cvProcessingValue()) {
+        RectDetector detector(m_context.screenshot);
+        m_rectGroup.setRects(detector.getRects());
+    }
 }
 
 CaptureWidget::~CaptureWidget() {
@@ -373,10 +375,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         // Find the smallest rect containing the cursor.
         QRect rcv = m_rectGroup.getRectContainingPoint(m_context.mousePos);
         if (!rcv.isEmpty()) {
-            if (m_leftClicked) {
-                // Don't modify the areas
-            } else if (m_rightClicked) { // TODO
-                m_selection->setGeometry(m_selection->geometry().united(rcv));
+            bool ctrlMod = qApp->keyboardModifiers() & Qt::ControlModifier;
+            if (m_rightClicked) {
+                if (!ctrlMod) {
+                    m_selection->setGeometry(m_selection->geometry().united(rcv));
+                }
             } else {
                 if (!m_selection->isVisible()) {
                     m_selection->setGeometry(QRect(e->pos(), e->pos()));

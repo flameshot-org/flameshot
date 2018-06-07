@@ -36,6 +36,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initAutoselection();
 
     // this has to be at the end
     initConfingButtons();
@@ -47,6 +48,7 @@ void GeneneralConf::updateComponents() {
     m_helpMessage->setChecked(config.showHelpValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+    m_autoselection->setChecked(config.cvProcessingValue());
 
 #ifdef Q_OS_LINUX
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -72,6 +74,10 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
 
 void GeneneralConf::autostartChanged(bool checked) {
     ConfigHandler().setStartupLaunch(checked);
+}
+
+void GeneneralConf::autoselectChanged(bool checked) {
+    ConfigHandler().setCvProcessing(checked);
 }
 
 void GeneneralConf::importConfiguration() {
@@ -203,4 +209,17 @@ void GeneneralConf::initAutostart() {
 
     connect(m_autostart, &QCheckBox::clicked, this,
             &GeneneralConf::autostartChanged);
+}
+
+void GeneneralConf::initAutoselection() {
+    m_autoselection =
+            new QCheckBox(tr("Auto Select rectangles"), this);
+    ConfigHandler config;
+    bool checked = config.cvProcessingValue();
+    m_autoselection->setChecked(checked);
+    m_autoselection->setToolTip(tr("Auto Select rectangles on mouse move"));
+    m_layout->addWidget(m_autoselection);
+
+    connect(m_autoselection, &QCheckBox::clicked, this,
+            &GeneneralConf::autoselectChanged);
 }
