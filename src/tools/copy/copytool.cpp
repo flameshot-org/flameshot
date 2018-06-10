@@ -40,7 +40,7 @@ QString CopyTool::nameID() {
 }
 
 QString CopyTool::description() const {
-    return tr("Copies the selecion into the clipboard");
+    return tr("Copies the selection into the clipboard");
 }
 
 CaptureTool* CopyTool::copy(QObject *parent) {
