@@ -248,13 +248,13 @@ unix:!macx {
 
     dbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
-    
+
     icon.path = $${BASEDIR}$${PREFIX}/share/icons/
     icon.files = img/flameshot.png
 
     completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot
-    
+
     appdata.path = $${BASEDIR}$${PREFIX}/share/metainfo/
     appdata.files = docs/appdata/flameshot.appdata.xml
 
@@ -279,3 +279,5 @@ unix:!macx {
         appdata
 }
 
+# Imgur API data
+include(src/imgur.pri)
