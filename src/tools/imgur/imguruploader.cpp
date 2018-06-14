@@ -110,7 +110,7 @@ void ImgurUploader::upload() {
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                       "application/application/x-www-form-urlencoded");
-    request.setRawHeader("Authorization", "Client-ID 313baf0c7b4d3ff");
+    request.setRawHeader("Authorization", QString("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
 
     m_NetworkAM->post(request, byteArray);
 }
@@ -147,7 +147,6 @@ void ImgurUploader::onUploadOk() {
             this, &ImgurUploader::openDeleteURL);
     connect(m_toClipboardButton, &QPushButton::clicked,
             this, &ImgurUploader::copyImage);
-
 }
 
 void ImgurUploader::openURL() {
@@ -174,4 +173,3 @@ void ImgurUploader::copyImage() {
     QApplication::clipboard()->setPixmap(m_pixmap);
     m_notification->showMessage(tr("Screenshot copied to clipboard."));
 }
-
