@@ -29,11 +29,6 @@ RectDetector::RectDetector(const QPixmap &pixmap) : m_pixmap(pixmap) {
 
 }
 
-/*
- * hierarchy:
- * [next, previous, child, parent]
- * -1 == no
- * */
 static QVector<QRect> filterContours(const pointMat &contours) {
     QVector<QRect> res;
     res.reserve(contours.size());
