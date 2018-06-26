@@ -159,7 +159,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Copies the selecion into the clipboard</source>
-        <translation>Copia la selecció al porta-retalls</translation>
+        <translation type="vanished">Copia la selecció al porta-retalls</translation>
+    </message>
+    <message>
+        <source>Copies the selection into the clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -187,8 +187,12 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
+        <source>Copies the selection into the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Copies the selecion into the clipboard</source>
-        <translation>Скопировать выделение в буфер обмена</translation>
+        <translation type="vanished">Скопировать выделение в буфер обмена</translation>
     </message>
 </context>
 <context>
@@ -386,18 +390,18 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
         <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
