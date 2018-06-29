@@ -65,6 +65,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 include(src/third-party/singleapplication/singleapplication.pri)
 include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
+win32 {
+    include(src/third-party/QHotkey/qhotkey.pri)
+}
 
 DEFINES += QAPPLICATION_CLASS=QApplication
 
