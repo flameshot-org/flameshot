@@ -75,11 +75,21 @@ void InfoWindow::initInfoTable() {
     QStringList names;
     names  << tr("Key") << tr("Description");
     table->setHorizontalHeaderLabels(names);
+
     //add content
     for (int i= 0; i < m_keys.size(); ++i){
         table->setItem(i, 0, new QTableWidgetItem(tr(m_keys.at(i))));
         table->setItem(i, 1, new QTableWidgetItem(tr(m_description.at(i))));
     }
+
+    // Read-only table items
+    for (int x = 0; x < table->rowCount(); ++x) {
+        for (int y = 0; y < table->columnCount(); ++y) {
+            QTableWidgetItem *item = table->item(x, y);
+            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        }
+    }
+
     // adjust size
     table->resizeColumnsToContents();
     table->resizeRowsToContents();
