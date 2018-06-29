@@ -57,10 +57,8 @@ matrix:
 #         osx_image: xcode9.2
 
 before_install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_before_install.sh; fi
-
-before_script:
   - chmod +x travis/*.sh
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_before_install.sh; fi
 
 install:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_install.sh; fi
