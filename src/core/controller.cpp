@@ -41,7 +41,7 @@ Controller::Controller() : m_captureWindow(nullptr) {
     qApp->setQuitOnLastWindowClosed(false);
 
     // init tray icon
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!ConfigHandler().disabledTrayIconValue()) {
         enableTrayIcon();
     }
@@ -204,7 +204,7 @@ void Controller::enableTrayIcon() {
 }
 
 void Controller::disableTrayIcon() {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (m_trayIcon) {
         m_trayIcon->deleteLater();
     }
