@@ -29,7 +29,7 @@
 #include <QTimer>
 #include <QDir>
 
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "src/core/flameshotdbusadapter.h"
 #include "src/utils/dbusutils.h"
 #include <QDBusMessage>
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
         app.setOrganizationName("Dharkael");
 
         auto c = Controller::getInstance();
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
         new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
