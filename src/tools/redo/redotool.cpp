@@ -39,7 +39,7 @@ QString RedoTool::nameID() {
 }
 
 QString RedoTool::description() const {
-    return "Redo the next modification";
+    return tr("Redo the next modification");
 }
 
 CaptureTool* RedoTool::copy(QObject *parent) {
