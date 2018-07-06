@@ -492,17 +492,17 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licences&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Raccourci&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -634,6 +634,11 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
         <translation>Rétablir</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

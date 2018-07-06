@@ -518,6 +518,10 @@ Press Space to open the side panel.</source>
         <source>Redo</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Redo the next modification</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SaveTool</name>

@@ -193,7 +193,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>复制选择到剪贴板</translation>
     </message>
     <message>
         <source>Copies the selecion into the clipboard</source>
@@ -492,17 +492,17 @@ Press Space to open the side panel.</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;许可证&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;版本&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;快捷键&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -640,6 +640,11 @@ Press Space to open the side panel.</source>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
+        <translation>重做上次修改</translation>
+    </message>
 </context>
 <context>
     <name>SaveTool</name>
@@ -693,27 +698,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Century (00-99)</source>
-        <translation>世纪 (00-99)</translation>
+        <translation>世纪（00-99）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Year (00-99)</source>
-        <translation>年 (00-99)</translation>
+        <translation>年（00-99）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Year (2000)</source>
-        <translation>年 (2000)</translation>
+        <translation>年（2000）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Month Name (jan)</source>
-        <translation>月 (jul)</translation>
+        <translation>月（1月 - 12月）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month Name (january)</source>
-        <translation>月 (juliol)</translation>
+        <translation>月（一月 - 十二月）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
@@ -723,77 +728,77 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week Day (1-7)</source>
-        <translation>平常日 (1-7)</translation>
+        <translation>周内的日（1-7）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Week (01-53)</source>
-        <translation>周 (01-53)</translation>
+        <translation>周（01-53）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day Name (mon)</source>
-        <translation>星期 (dg)</translation>
+        <translation>星期（一 - 七）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (monday)</source>
-        <translation>星期 (diumenge)</translation>
+        <translation>星期（星期一 - 星期日）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day (01-31)</source>
-        <translation>天 (01-31)</translation>
+        <translation>天（01-31）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
         <source>Day of Month (1-31)</source>
-        <translation>一月中的某天 (1-31)</translation>
+        <translation>一月中的某天（1-31）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (001-366)</source>
-        <translation>天 (001-366)</translation>
+        <translation>天（001-366）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation>时间 (%H-%M-%S)</translation>
+        <translation>时间（%H-%M-%S）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation>时间 (%H-%M)</translation>
+        <translation>时间（%H-%M）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Hour (00-23)</source>
-        <translation>小时 (00-23)</translation>
+        <translation>小时（00-23）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Hour (01-12)</source>
-        <translation>小时 (01-12)</translation>
+        <translation>小时（01-12）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Minute (00-59)</source>
-        <translation>分钟 (00-59)</translation>
+        <translation>分钟（00-59）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Second (00-59)</source>
-        <translation>秒 (00-59)</translation>
+        <translation>秒（00-59）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>日期 (%m/%d/%y)</translation>
+        <translation>完整日期（%m/%d/%y）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>日期 (%Y-%m-%d)</translation>
+        <translation>完整日期（%Y-%m-%d）</translation>
     </message>
 </context>
 <context>
@@ -845,7 +850,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>UI 颜色编辑器</translation>
+        <translation>用户界面颜色编辑器</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
