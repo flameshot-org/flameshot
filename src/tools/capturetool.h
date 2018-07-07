@@ -111,7 +111,7 @@ public:
 
     // revert changes
     virtual void undo(QPixmap &pixmap) = 0;
-    // Called everytime the tool has to draw
+    // Called every time the tool has to draw
     // recordUndo indicates when the tool should save the information
     // for the undo(), if the value is false calling undo() after
     // that process should not modify revert the changes.
