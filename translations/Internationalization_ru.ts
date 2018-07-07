@@ -492,17 +492,17 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Лицензия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Версия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -633,6 +633,11 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

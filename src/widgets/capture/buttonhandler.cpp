@@ -112,7 +112,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
         elemsAtCorners -= elemCornersTop;
         int elemCornersBotton = qBound(0, elemsAtCorners, maxExtra);
 
-        // Add buttons at the botton of the seletion
+        // Add buttons at the button of the seletion
         if (!m_blockedBotton) {
             int addCounter = buttonsPerRow + elemCornersBotton;
             // Don't add more than we have

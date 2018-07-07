@@ -62,7 +62,7 @@
 
     <!--
         trayIconEnabled:
-        @enabled: The new state fot the trayIcon.
+        @enabled: The new state for the trayIcon.
 
         Enable or disable the trayIcon.
     -->
@@ -73,7 +73,7 @@
 
     <!--
         autostartEnabled:
-        @enabled: The new state fot the autostart.
+        @enabled: The new state for the autostart.
 
         Enable or disable the autostart of the program.
     -->

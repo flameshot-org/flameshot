@@ -136,7 +136,7 @@ void UIcolorEditor::initButtons() {
             this, &UIcolorEditor::changeLastButton);
     connect(m_buttonContrast, &CaptureButton::pressedButton,
             this, &UIcolorEditor::changeLastButton);
-    // clicking the labels chages the button too
+    // clicking the labels changes the button too
     connect(m_labelMain, &ClickableLabel::clicked,
             this, [this]{ changeLastButton(m_buttonMainColor); });
     connect(m_labelContrast, &ClickableLabel::clicked,
