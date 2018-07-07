@@ -24,6 +24,7 @@ class TextWidget;
 class TextConfig;
 
 class TextTool : public CaptureTool {
+    Q_OBJECT
 public:
     explicit TextTool(QObject *parent = nullptr);
 
