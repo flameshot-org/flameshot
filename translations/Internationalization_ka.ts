@@ -90,16 +90,6 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">შეარჩიეთ ეკრანის არე მაუსით, ან დააწექით Esc-ს გამოსასვლელად.
-დააწექით Enter-ს ეკრანის გადასაღებად.
-წააწექით და დაიჭირეთ მაუსის მარჯვენა ღილაკი ფერის ასარჩევად.
-გამოიყენეთ მაუსის გორგოლაჭი ხელსაწყოს სისქის შესარევად.</translation>
-    </message>
 </context>
 <context>
     <name>CircleTool</name>
@@ -189,10 +179,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">შერჩეულის გაცვლის ბუფერში კოპირება</translation>
     </message>
 </context>
 <context>

@@ -90,16 +90,6 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
-Ekranresmi almak için Enter tuşuna basın.
-Renk seçicisini göstermek için farenizin sağ butonuna basın.
-Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
-    </message>
 </context>
 <context>
     <name>CircleTool</name>
@@ -189,10 +179,6 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">Seçimi panoya kopyalar</translation>
     </message>
 </context>
 <context>

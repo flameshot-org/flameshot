@@ -64,16 +64,6 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Seleccioneu una àrea amb el ratolí, o premeu Esc per a eixir.
-Premeu Retorn per a capturar la pantalla.
-Feu clic amb el botó dret per a mostrar el selector de color.
-Utilitzeu la roda del ratolí per a canviar el gruix de l&apos;eina.</translation>
-    </message>
-    <message>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
         <translation>Imposible capturar la pantalla</translation>
@@ -156,10 +146,6 @@ Press Space to open the side panel.</source>
     <message>
         <source>Copy</source>
         <translation>Copia</translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">Copia la selecció al porta-retalls</translation>
     </message>
     <message>
         <source>Copies the selection into the clipboard</source>
