@@ -642,7 +642,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="42"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Rehacer la siguiente modificación</translation>
     </message>
 </context>
 <context>
