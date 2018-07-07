@@ -93,16 +93,6 @@ Wciśnij Enter, aby wykonać zrzut ekranu.
 Prawy klik, aby pokazać próbnik kolorów.
 Spacja, aby pokazać panel boczny.</translation>
     </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Zaznacz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
-Wciśnij Enter aby wykonać zrzut ekranu.
-Kliknij prawym przyciskiem myszy, aby pokazać próbnik kolorów.
-Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translation>
-    </message>
 </context>
 <context>
     <name>CircleTool</name>
@@ -192,10 +182,6 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">Kopiuje zaznaczenie do schowka</translation>
     </message>
 </context>
 <context>

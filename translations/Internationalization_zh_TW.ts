@@ -77,16 +77,6 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">用滑鼠選擇一個區域,或按 Esc 退出
-按 Enter 鍵擷取螢幕
-按滑鼠右鍵顯示顏色選擇器
-使用滑鼠滾輪來改變繪製工具的寬度</translation>
-    </message>
-    <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
         <translation>無法擷取螢幕</translation>
@@ -189,10 +179,6 @@ Press Space to open the side panel.</source>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">複製到剪貼簿</translation>
     </message>
 </context>
 <context>

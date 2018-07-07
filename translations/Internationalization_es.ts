@@ -94,16 +94,6 @@ Presion Click Derecho para mostrar el selector de color.
 Usa la rueda del ratón para cambiar el grosor de la herramienta.
 Presiona Espacion para abrir el panel lateral.</translation>
     </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Selecciona un área con el ratón, o presiona Esc para salir.
-Presiona Enter para capturar la pantalla.
-Presion Click Derecho para mostrar el selector de color.
-Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
-    </message>
 </context>
 <context>
     <name>CircleTool</name>
@@ -193,10 +183,6 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
         <translation>Copia la selección al portapapeles</translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">Copia la selección al portapapeles</translation>
     </message>
 </context>
 <context>
@@ -642,7 +628,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="42"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Rehacer la siguiente modificación</translation>
     </message>
 </context>
 <context>

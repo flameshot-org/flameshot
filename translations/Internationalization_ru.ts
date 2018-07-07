@@ -90,16 +90,6 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Выберите область с помощью мыши или нажмите Esc для выхода.
-Нажмите Enter, чтобы сделать снимок.
-Нажмите ПКМ, чтобы отобразить панель выбора цвета.
-Используйте колесико мыши, чтобы изменить толщину вашего инструмента.</translation>
-    </message>
 </context>
 <context>
     <name>CircleTool</name>
@@ -189,10 +179,6 @@ Use the Mouse Wheel to change the thickness of your tool.</source>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copies the selecion into the clipboard</source>
-        <translation type="vanished">Скопировать выделение в буфер обмена</translation>
     </message>
 </context>
 <context>
