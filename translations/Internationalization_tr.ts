@@ -88,7 +88,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
+Ekranı yakalamak için Enter tuşuna basın.
+Renk seçiciyi göstermek için farenin sağ tuşuna tıklayın.
+Aracınızın kalınlığını değiştirmek için Fare Tekerleğini kullanın.
+Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
 </context>
 <context>
@@ -109,12 +113,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktif Renk:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Çıkmak için ESC'ye tıklayın</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
@@ -178,7 +182,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copies the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçimi panoya kopyalar</translation>
     </message>
 </context>
 <context>
@@ -368,7 +372,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Resmi sil</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
@@ -800,17 +804,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Altçizgi</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalın</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Eğik</translation>
     </message>
 </context>
 <context>
@@ -818,12 +822,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Metin</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilgisayardan yazı ekle</translation>
     </message>
 </context>
 <context>
