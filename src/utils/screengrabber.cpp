@@ -85,7 +85,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
                   geometry.width(),
                   geometry.height())
               );
-    p.setDevicePixelRatio(QApplication::desktop()->devicePixelRatio());
+    auto screenNumber = QApplication::desktop()->screenNumber();
+    QScreen *screen = QApplication::screens()[screenNumber];
+    p.setDevicePixelRatio(screen->devicePixelRatio());
     return p;
 }
 

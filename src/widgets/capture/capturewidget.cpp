@@ -453,7 +453,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
             newGeometry.setBottom(top);
         }
         m_selection->setGeometry(newGeometry);
-        m_context.selection = newGeometry;
+        m_context.selection = extendedRect(&newGeometry);
         updateSizeIndicator();
         m_buttonHandler->updatePosition(newGeometry);
         m_buttonHandler->show();
@@ -850,11 +850,14 @@ void CaptureWidget::redo() {
 QRect CaptureWidget::extendedSelection() const {
     if (!m_selection->isVisible())
         return QRect();
-    auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
+    QRect r = m_selection->geometry();
+    return extendedRect(&r);
+}
 
-    QRect const &r = m_selection->geometry();
-    return QRect(r.left()   * devicePixelRatio,
-                 r.top()    * devicePixelRatio,
-                 r.width()  * devicePixelRatio,
-                 r.height() * devicePixelRatio);
+QRect CaptureWidget::extendedRect(QRect *r) const {
+    auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
+    return QRect(r->left()   * devicePixelRatio,
+                 r->top()    * devicePixelRatio,
+                 r->width()  * devicePixelRatio,
+                 r->height() * devicePixelRatio);
 }
