@@ -36,7 +36,7 @@ MarkerTool::MarkerTool(QObject *parent) : AbstractTwoPointTool(parent) {
 
 QIcon MarkerTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "marker.png");
+    return QIcon(iconPath(background) + "marker.svg");
 }
 QString MarkerTool::name() const {
     return tr("Marker");

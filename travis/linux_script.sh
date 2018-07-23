@@ -59,7 +59,7 @@ if [[ "${DIST}" == "trusty" ]]; then
 		"${project_dir}"/docs/desktopEntry/package/* \
 		"${APPIMAGE_DST_PATH}"/appdir/usr/share/applications
 	cp \
-		"${project_dir}"/img/flameshot.png \
+		"${project_dir}"/img/app/flameshot.png \
 		"${APPIMAGE_DST_PATH}"/appdir
 	ls -alhR "${APPIMAGE_DST_PATH}"/appdir
 

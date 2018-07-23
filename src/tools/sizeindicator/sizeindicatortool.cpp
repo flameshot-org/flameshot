@@ -28,7 +28,7 @@ bool SizeIndicatorTool::closeOnButtonPressed() const {
 
 QIcon SizeIndicatorTool::icon(const QColor &background, bool inEditor) const {
     return inEditor ? QIcon() :
-                      QIcon(iconPath(background) + "size_indicator.png");
+                      QIcon(iconPath(background) + "size_indicator.svg");
 }
 QString SizeIndicatorTool::name() const {
     return tr("Selection Size Indicator");
