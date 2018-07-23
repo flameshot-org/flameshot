@@ -1,5 +1,5 @@
 # Flameshot
-![image](./img/flameshot.png) 
+![image](./img/app/flameshot.png)
 > Powerful yet simple to use screenshot software.
 
 [![Build Status](https://img.shields.io/travis/lupoDharkael/flameshot.svg)](https://travis-ci.org/lupoDharkael/flameshot)
@@ -8,7 +8,7 @@
 [![Release](https://img.shields.io/github/release/lupoDharkael/flameshot.svg)](https://github.com/lupoDharkael/flameshot/releases)
 
 ## Usage Preview
-![image](./img/appPreview/animatedUsage.gif)
+![image](./img/preview/animatedUsage.gif)
 
 ## Index
 - [Features](#features)
@@ -171,7 +171,7 @@ The compilation requires Qt version 5.3 or higher and GCC 4.9.2 or higher.
 ### Debian
 Compilation Dependencies:
 ````
-apt install git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+apt install git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools libqt5svg5-dev
 ````
 
 Compilation: run `qmake && make` in the main directory.
@@ -179,7 +179,7 @@ Compilation: run `qmake && make` in the main directory.
 ### Fedora
 Compilation Dependencies:
 ````
-dnf install qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist
+dnf install qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist qt5-qtsvg-devel
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory.
@@ -187,7 +187,7 @@ Compilation:  run `qmake-qt5 && make` in the main directory.
 ### Arch
 Compilation Dependencies:
 ````
-pacman -S git qt5-base base-devel qt5-tools
+pacman -S base-devel git qt5-base qt5-tools qt5-svg
 ````
 
 Compilation:  run `qmake && make` in the main directory.

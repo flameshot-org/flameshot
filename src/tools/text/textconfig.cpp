@@ -38,32 +38,32 @@ TextConfig::TextConfig(QWidget *parent) : QWidget(parent) {
 
     QColor bgColor(palette().background().color());
     QString iconPrefix = ColorUtils::colorIsDark(bgColor) ?
-                PathInfo::whiteConfigIconPath() :
-                PathInfo::blackConfigIconPath();
+                PathInfo::whiteIconPath() :
+                PathInfo::blackIconPath();
 
     m_strikeOutButton = new QPushButton(
-                QIcon(iconPrefix + "format_strikethrough.png"), "");
+                QIcon(iconPrefix + "format_strikethrough.svg"), "");
     m_strikeOutButton->setCheckable(true);
     connect(m_strikeOutButton, &QPushButton::clicked,
             this, &TextConfig::fontStrikeOutChanged);
     m_strikeOutButton->setToolTip(tr("StrikeOut"));
 
     m_underlineButton = new QPushButton(
-                QIcon(iconPrefix + "format_underlined.png"), "");
+                QIcon(iconPrefix + "format_underlined.svg"), "");
     m_underlineButton->setCheckable(true);
     connect(m_underlineButton, &QPushButton::clicked,
             this, &TextConfig::fontUnderlineChanged);
     m_underlineButton->setToolTip(tr("Underline"));
 
     m_weightButton = new QPushButton(
-                QIcon(iconPrefix + "format_bold.png"), "");
+                QIcon(iconPrefix + "format_bold.svg"), "");
     m_weightButton->setCheckable(true);
     connect(m_weightButton, &QPushButton::clicked,
             this, &TextConfig::weightButtonPressed);
     m_weightButton->setToolTip(tr("Bold"));
 
     m_italicButton = new QPushButton(
-                QIcon(iconPrefix + "format_italic.png"), "");
+                QIcon(iconPrefix + "format_italic.svg"), "");
     m_italicButton->setCheckable(true);
     connect(m_italicButton, &QPushButton::clicked,
             this, &TextConfig::fontItalicChanged);

@@ -27,7 +27,7 @@
 
 InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/flameshot.png"));
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("About"));
 
     m_layout = new QVBoxLayout(this);

@@ -36,7 +36,7 @@ LineTool::LineTool(QObject *parent) : AbstractTwoPointTool(parent) {
 
 QIcon LineTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "line.png");
+    return QIcon(iconPath(background) + "line.svg");
 }
 QString LineTool::name() const {
     return tr("Line");

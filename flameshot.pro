@@ -12,7 +12,7 @@ isEmpty(TAG_VERSION){
 }
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
-QT  += core gui widgets network
+QT  += core gui widgets network svg
 
 unix:!macx {
     QT  += dbus
@@ -25,7 +25,7 @@ CONFIG += c++11 link_pkgconfig
 TARGET = flameshot
 TEMPLATE = app
 
-win32:RC_ICONS += img/flameshot.ico
+win32:RC_ICONS += img/app/flameshot.ico
 
 #release: DESTDIR = build/release
 #debug:   DESTDIR = build/debug
@@ -250,7 +250,7 @@ unix:!macx {
     dbus.files = dbus/org.dharkael.Flameshot.xml
 
     icon.path = $${BASEDIR}$${PREFIX}/share/icons/
-    icon.files = img/flameshot.png
+    icon.files = img/app/flameshot.svg
 
     completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot

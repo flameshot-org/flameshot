@@ -21,21 +21,12 @@
 #include <QDir>
 
 const QString PathInfo::whiteIconPath() {
-    return ":/img/buttonIconsWhite/";
+    return ":/img/material/white/";
 }
 
 const QString PathInfo::blackIconPath() {
-    return ":/img/buttonIconsBlack/";
+    return ":/img/material/black/";
 }
-
-const QString PathInfo::whiteConfigIconPath() {
-    return ":/img/configWhite/";
-}
-
-const QString PathInfo::blackConfigIconPath() {
-    return ":/img/configBlack/";
-}
-
 
 QStringList PathInfo::translationsPaths() {
     QString binaryPath = QFileInfo(qApp->applicationDirPath())

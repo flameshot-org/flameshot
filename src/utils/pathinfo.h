@@ -25,10 +25,6 @@ const QString whiteIconPath();
 
 const QString blackIconPath();
 
-const QString whiteConfigIconPath();
-
-const QString blackConfigIconPath();
-
 QStringList translationsPaths();
 
 } // namespace

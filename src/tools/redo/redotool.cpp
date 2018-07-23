@@ -28,7 +28,7 @@ bool RedoTool::closeOnButtonPressed() const {
 
 QIcon RedoTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "redo-variant.png");
+    return QIcon(iconPath(background) + "redo-variant.svg");
 }
 QString RedoTool::name() const {
     return tr("Redo");
