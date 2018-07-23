@@ -32,7 +32,7 @@ bool SelectionTool::closeOnButtonPressed() const {
 
 QIcon SelectionTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "square-outline.png");
+    return QIcon(iconPath(background) + "square-outline.svg");
 }
 QString SelectionTool::name() const {
     return tr("Rectangular Selection");

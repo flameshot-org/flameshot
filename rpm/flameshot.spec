@@ -20,6 +20,7 @@ BuildRequires: pkgconfig(Qt5Gui)  >= 5.3.0
 BuildRequires: pkgconfig(Qt5Widgets)  >= 5.3.0
 BuildRequires: qt5-qttools-devel
 BuildRequires: qt5-linguist
+BuildRequires: qt5-qtsvg-devel
 BuildRequires: git
 
 Requires: qt5-qtbase >= 5.3.0
@@ -53,7 +54,7 @@ make %{?_smp_mflags}
 %{_datadir}/flameshot/translations/Internationalization_*.qm
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completion/completions/%{name}
-%{_datadir}/icons/%{name}.png
+%{_datadir}/icons/%{name}.svg
 
 %changelog
 * Tue Jan 09 2018 Zetao Yang <yangzetao2015@outlook.com> - 0.5.0-1

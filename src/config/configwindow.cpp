@@ -37,7 +37,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     const int size = GlobalValues::buttonBaseSize() * 12;
     setMinimumSize(size, size);
-    setWindowIcon(QIcon(":img/flameshot.png"));
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("Configuration"));
 
     auto changedSlot = [this](QString s){
@@ -59,17 +59,17 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
 
     // visuals
     m_visuals = new VisualsEditor();
-    addTab(m_visuals, QIcon(modifier + "graphics.png"),
+    addTab(m_visuals, QIcon(modifier + "graphics.svg"),
            tr("Interface"));
 
     // filename
     m_filenameEditor = new FileNameEditor();
-    addTab(m_filenameEditor, QIcon(modifier + "name_edition.png"),
+    addTab(m_filenameEditor, QIcon(modifier + "name_edition.svg"),
            tr("Filename Editor"));
 
     // general
     m_generalConfig = new GeneneralConf();
-    addTab(m_generalConfig, QIcon(modifier + "config.png"),
+    addTab(m_generalConfig, QIcon(modifier + "config.svg"),
            tr("General"));
 
     // connect update sigslots

@@ -28,7 +28,7 @@ bool ExitTool::closeOnButtonPressed() const {
 
 QIcon ExitTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "close.png");
+    return QIcon(iconPath(background) + "close.svg");
 }
 QString ExitTool::name() const {
     return tr("Exit");

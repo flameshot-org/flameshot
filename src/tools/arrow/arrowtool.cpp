@@ -74,7 +74,7 @@ ArrowTool::ArrowTool(QObject *parent) : AbstractTwoPointTool(parent) {
 
 QIcon ArrowTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "arrow-bottom-left.png");
+    return QIcon(iconPath(background) + "arrow-bottom-left.svg");
 }
 QString ArrowTool::name() const {
     return tr("Arrow");

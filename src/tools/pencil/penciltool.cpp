@@ -24,7 +24,7 @@ PencilTool::PencilTool(QObject *parent) : AbstractPathTool(parent) {
 
 QIcon PencilTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "pencil.png");
+    return QIcon(iconPath(background) + "pencil.svg");
 }
 QString PencilTool::name() const {
     return tr("Pencil");

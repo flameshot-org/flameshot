@@ -83,7 +83,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
                         QMessageBox::Warning,
                         QObject::tr("Save Error"),
                         msg);
-            saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
+            saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
             saveErrBox.exec();
         }
     }

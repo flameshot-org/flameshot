@@ -9,6 +9,7 @@ Build-Depends:
  qt5-qmake,
  qtbase5-dev,
  qttools5-dev-tools,
+ libqt5svg5-dev
 Standards-Version: 4.1.4
 Homepage: https://github.com/lupoDharkael/flameshot
 Vcs-Browser: https://github.com/lupoDharkael/flameshot

@@ -28,7 +28,7 @@ bool PinTool::closeOnButtonPressed() const {
 
 QIcon PinTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "pin.png");
+    return QIcon(iconPath(background) + "pin.svg");
 }
 QString PinTool::name() const {
     return tr("Pin Tool");

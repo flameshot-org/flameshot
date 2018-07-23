@@ -1,6 +1,6 @@
 name: flameshot
 version: git
-icon: img/flameshot.png
+icon: img/app/flameshot.svg
 summary: Powerful yet simple to use screenshot software
 description: |
   A powerful open source screenshot and annotation tool for Linux, Flameshot
@@ -45,6 +45,7 @@ parts:
     build-packages:
       - qt5-default
       - qttools5-dev-tools
+      - libqt5svg5-dev
     stage-packages:
       - dbus-x11
       - libgtk2.0-0

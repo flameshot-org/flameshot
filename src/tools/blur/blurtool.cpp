@@ -28,7 +28,7 @@ BlurTool::BlurTool(QObject *parent) : AbstractTwoPointTool(parent) {
 
 QIcon BlurTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "blur.png");
+    return QIcon(iconPath(background) + "blur.svg");
 }
 QString BlurTool::name() const {
     return tr("Blur");

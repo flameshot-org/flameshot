@@ -43,7 +43,7 @@ bool TextTool::showMousePreview() const {
 
 QIcon TextTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "text.png");
+    return QIcon(iconPath(background) + "text.svg");
 }
 
 QString TextTool::name() const {
