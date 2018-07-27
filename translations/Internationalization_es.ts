@@ -565,13 +565,13 @@ Presiona Espacion para abrir el panel lateral.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Save Error</source>
         <translation>Error al Guardar</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
         <translation>Captura guardada como </translation>
     </message>
@@ -581,8 +581,8 @@ Presiona Espacion para abrir el panel lateral.</translation>
         <translation>Captura guardada en el portapapeles</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
         <translation>Error intentando guardar como </translation>
     </message>

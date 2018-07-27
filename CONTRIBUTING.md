@@ -9,7 +9,7 @@ Contributions are welcome! Here's how you can help:
 
 ## Translations
 
-Check this nice official documentation from QT docs as it explains how to translate for a project written with QT: https://doc.qt.io/qt-5/linguist-translators.html
+Check this nice official documentation from Qt docs as it explains how to translate for a project written with Qt: https://doc.qt.io/qt-5/linguist-translators.html
 
 #### Status:
 
