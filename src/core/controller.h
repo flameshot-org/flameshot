@@ -72,8 +72,8 @@ private slots:
 private:
     Controller();
 
-    // replace QTimer::singleShot introduced in QT 5.4
-    // the actual target QT version is QT 5.3
+    // replace QTimer::singleShot introduced in Qt 5.4
+    // the actual target Qt version is 5.3
     void doLater(int msec, QObject *receiver, lambda func);
 
     QMap<uint, CaptureRequest> m_requestMap;
