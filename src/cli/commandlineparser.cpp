@@ -312,7 +312,7 @@ QString CommandLineParser::value(const CommandOption &option) const {
 }
 
 void CommandLineParser::printVersion() {
-    out << "Flameshot " << qApp->applicationVersion() << "\nCompiled with QT "
+    out << "Flameshot " << qApp->applicationVersion() << "\nCompiled with Qt "
         << static_cast<QString>(QT_VERSION_STR) << "\n";
 }
 
