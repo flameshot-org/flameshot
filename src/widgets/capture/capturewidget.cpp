@@ -49,7 +49,7 @@
 
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
-                             bool fullscreen, QWidget *parent) :
+                             bool fullScreen, QWidget *parent) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
     m_previewEnabled(true), m_activeButton(nullptr),
@@ -66,14 +66,14 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     m_showInitialMsg = m_config.showHelpValue();
     m_opacity = m_config.contrastOpacityValue();
     setMouseTracking(true);
-    initContext(savePath, fullscreen);
+    initContext(savePath, fullScreen);
     initShortcuts();
 
 #ifdef Q_OS_WIN
     // Top left of the whole set of screens
     QPoint topLeft(0,0);
 #endif
-    if (fullscreen) {
+    if (fullScreen) {
         // Grab Screenshot
         bool ok = true;
         m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);

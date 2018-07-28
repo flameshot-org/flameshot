@@ -20,7 +20,7 @@ SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
 }
 #else
 SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
-
+    m_interface = nullptr;
 }
 #endif
 

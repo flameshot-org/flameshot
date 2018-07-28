@@ -24,8 +24,8 @@ class AbstractPathTool : public CaptureTool {
 public:
     explicit AbstractPathTool(QObject *parent = nullptr);
 
-    bool isValid() const;
-    bool closeOnButtonPressed() const;
+    bool isValid() const override;
+    bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
 

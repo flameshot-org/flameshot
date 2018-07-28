@@ -33,7 +33,7 @@ class NotificationWidget;
 class ImgurUploader : public QWidget {
     Q_OBJECT
 public:
-    explicit ImgurUploader(const QPixmap &p, QWidget *parent = nullptr);
+    explicit ImgurUploader(const QPixmap &capture, QWidget *parent = nullptr);
 
 private slots:
     void handleReply(QNetworkReply *reply);

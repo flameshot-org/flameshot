@@ -65,15 +65,15 @@ private:
 
 using eTask = CaptureRequest::ExportTask;
 
-inline eTask operator|(eTask a, eTask b) {
+inline eTask operator|(const eTask &a, const eTask &b) {
     return static_cast<eTask>(static_cast<int>(a) | static_cast<int>(b));
 }
 
-inline eTask operator&(eTask a, eTask b) {
+inline eTask operator&(const eTask &a, const eTask &b) {
     return static_cast<eTask>(static_cast<int>(a) & static_cast<int>(b));
 }
 
-inline eTask& operator|=(eTask &a, eTask b) {
+inline eTask& operator|=(eTask &a, const eTask &b) {
     a = static_cast<eTask>(static_cast<int>(a) | static_cast<int>(b));
     return a;
 }

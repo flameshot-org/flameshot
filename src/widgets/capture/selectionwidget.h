@@ -39,7 +39,7 @@ public:
 
     explicit SelectionWidget(const QColor &c, QWidget *parent = nullptr);
 
-    SideType getMouseSide(const QPoint &p) const;
+    SideType getMouseSide(const QPoint &point) const;
     QVector<QRect> handlerAreas();
 
     void setGeometryAnimated(const QRect &r);

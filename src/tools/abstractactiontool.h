@@ -24,7 +24,7 @@ class AbstractActionTool : public CaptureTool {
 public:
     explicit AbstractActionTool(QObject *parent = nullptr);
 
-    bool isValid() const;
+    bool isValid() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
 

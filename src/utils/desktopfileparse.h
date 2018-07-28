@@ -29,9 +29,9 @@ struct DesktopAppData {
     DesktopAppData() : showInTerminal() {}
 
     DesktopAppData(
-            QString name,
-            QString description,
-            QString exec,
+            const QString &name,
+            const QString &description,
+            const QString &exec,
             QIcon icon) :
         name(name),
         description(description),
