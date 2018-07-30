@@ -203,11 +203,11 @@ Having `git` installed is required if you want to have  precise app version info
 
 In order to generate the makefile installing in `/usr` instead of in `/usr/local` you can use the `packaging` option to generate the proper makefile (`qmake CONFIG+=packaging` instead of just `qmake`).
 
-If you want to install in a custom directory you can define the `BASEDIR` variable.
+If you want to install in a custom directory you can use the `INSTALL_ROOT` variable.
 
 **Example**:
 You want to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
-`qmake CONFIG+=packaging BASEDIR=~/myBuilds/test && make install`
+`qmake CONFIG+=packaging && make INSTALL_ROOT=~/myBuilds/test install`
 
 ### Runtime Dependencies
 
