@@ -70,6 +70,9 @@ script:
 # - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then travis/osx_script.sh; fi
   - pwd && ls
 
+after_success:
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_after_success.sh; fi
+
 # deploy:
 #    # Deploy packages to Github Release
 #    provider: releases
