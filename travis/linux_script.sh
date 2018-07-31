@@ -2,9 +2,14 @@
 
 set -e
 
+DIST_PATH=dist
+
+if [[ ! -d "${DIST_PATH}" ]]; then
+	mkdir "${DIST_PATH}"
+fi
+
 if [[ "${DIST}" == "trusty" ]]; then
 	project_dir="$(pwd)"
-	DIST_PATH=dist
 	BUILD_DST_PATH=build-test
 	APPIMAGE_DST_PATH=build-appimage
 
@@ -18,7 +23,7 @@ if [[ "${DIST}" == "trusty" ]]; then
 	qmake --version
 	export CC=gcc-4.9 CXX=g++-4.9
 
-	mkdir build-test
+	mkdir "${BUILD_DST_PATH}"
 	qmake QMAKE_CXX="${CXX}" QMAKE_CC="${CC}" QMAKE_LINK="${CXX}" DESTDIR="${BUILD_DST_PATH}"
 	# Building flameshot
 	make -j$(nproc)
@@ -29,38 +34,37 @@ if [[ "${DIST}" == "trusty" ]]; then
 	#
 	# Packaging AppImage using linuxdeployqt
 	#
-	mkdir build-appimage
-	mkdir -p ./build-appimage/appdir/usr/bin
-	mkdir -p ./build-appimage/appdir/usr/share/applications
-	mkdir -p ./build-appimage/appdir/usr/share/dbus-1/interfaces
-	mkdir -p ./build-appimage/appdir/usr/share/dbus-1/services
-	mkdir -p ./build-appimage/appdir/usr/share/metainfo
-	mkdir -p ./build-appimage/appdir/usr/share/bash-completion/completions
-	mkdir -p ./build-appimage/appdir/usr/share/flameshot/translations
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/bin
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/share/applications
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/share/dbus-1/interfaces
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/share/dbus-1/services
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/share/metainfo
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/share/bash-completion/completions
+	mkdir -p "${APPIMAGE_DST_PATH}"/appdir/usr/share/flameshot/translations
 	cp \
 		"${BUILD_DST_PATH}"/flameshot \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/bin
+		"${APPIMAGE_DST_PATH}"/appdir/usr/bin/
 	cp \
 		"${project_dir}"/dbus/org.dharkael.Flameshot.xml \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/share/dbus-1/interfaces
+		"${APPIMAGE_DST_PATH}"/appdir/usr/share/dbus-1/interfaces/
 	cp \
 		"${project_dir}"/dbus/package/org.dharkael.Flameshot.service \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/share/dbus-1/services
+		"${APPIMAGE_DST_PATH}"/appdir/usr/share/dbus-1/services/
 	cp \
 		"${project_dir}"/docs/appdata/flameshot.appdata.xml \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/share/metainfo
+		"${APPIMAGE_DST_PATH}"/appdir/usr/share/metainfo/
 	cp \
 		"${project_dir}"/docs/bash-completion/flameshot \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/share/bash-completion/completions
+		"${APPIMAGE_DST_PATH}"/appdir/usr/share/bash-completion/completions/
 	cp \
 		"${project_dir}"/translations/*.qm \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/share/flameshot/translations
+		"${APPIMAGE_DST_PATH}"/appdir/usr/share/flameshot/translations/
 	cp \
 		"${project_dir}"/docs/desktopEntry/package/* \
-		"${APPIMAGE_DST_PATH}"/appdir/usr/share/applications
+		"${APPIMAGE_DST_PATH}"/appdir/usr/share/applications/
 	cp \
 		"${project_dir}"/img/app/flameshot.png \
-		"${APPIMAGE_DST_PATH}"/appdir
+		"${APPIMAGE_DST_PATH}"/appdir/
 	ls -alhR "${APPIMAGE_DST_PATH}"/appdir
 
 	# Copy other project files
@@ -98,8 +102,6 @@ if [[ "${DIST}" == "trusty" ]]; then
 
 	ls -l "${APPIMAGE_DST_PATH}"/*.AppImage
 
-	mkdir dist
-
 	# Rename AppImage and move AppImage to DIST_PATH 
 	cd "${APPIMAGE_DST_PATH}"
 	mv Flameshot-${VERSION}-${ARCH}.AppImage flameshot_${ARCH}_${VERSION}.AppImage
@@ -108,36 +110,22 @@ if [[ "${DIST}" == "trusty" ]]; then
 		"${APPIMAGE_DST_PATH}"/flameshot_${ARCH}_${VERSION}.AppImage \
 		"${DIST_PATH}"/flameshot_${ARCH}_${VERSION}.${EXTEN}
 	pwd
-
-	curl \
-		--upload-file "${DIST_PATH}"/flameshot_${ARCH}_${VERSION}.AppImage \
-		"https://transfer.sh/flameshot_${ARCH}_${VERSION}.${EXTEN}"
 else
 	git clone https://github.com/packpack/packpack.git
-	mkdir dist
 	packpack/packpack
-	pwd
-	ls
+	pwd && ls
 
 	case "${OS}" in
 		"ubuntu"|"debian")
-			curl \
-				--upload-file \
-				build/flameshot_*_*.deb \
-				"https://transfer.sh/flameshot_${VERSION}-${DIST}-${ARCH}_${ARCH}.${EXTEN}"
 			# copy deb to dist path for distribution
 			cp \
 				build/flameshot_*_*.deb \
-				dist/flameshot_${VERSION}-${DIST}-${ARCH}_${ARCH}.${EXTEN}
+				"${DIST_PATH}"/flameshot_${VERSION}-${DIST}-${ARCH}_${ARCH}.${EXTEN}
 			;;
 		"fedora")
-			curl \
-				--upload-file \
-				build/flameshot-${VERSION}-${RELEASE}.*.${ARCH}.rpm \
-				"https://transfer.sh/flameshot_${VERSION}-fedora${DIST}-${ARCH}_${ARCH}.${EXTEN}"
 			cp \
 				build/flameshot-${VERSION}-${RELEASE}.*.${ARCH}.rpm \
-				dist/flameshot_${VERSION}-fedora${DIST}-${ARCH}_${ARCH}.${EXTEN}
+				"${DIST_PATH}"/flameshot_${VERSION}-fedora${DIST}-${ARCH}_${ARCH}.${EXTEN}
 			;;
 	esac
 fi
