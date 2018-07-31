@@ -249,7 +249,7 @@ unix:!macx {
     dbus.path = $${PREFIX}/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
 
-    icon.path = $${PREFIX}/share/icons/
+    icon.path = $${PREFIX}/share/pixmaps/
     icon.files = img/app/flameshot.svg
 
     completion.path = $${PREFIX}/share/bash-completion/completions/
