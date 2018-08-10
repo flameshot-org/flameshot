@@ -19,18 +19,20 @@ env:
       - RELEASE=1
       - ARCH=x86_64
 #     - DOCKER_REPO=packpack/packpack
-      - DOCKER_REPO=vitzy/packpack
+#     - DOCKER_REPO=vitzy/packpack
+      - DOCKER_REPO=vitzy/flameshot
 
 #The actual list of distribution is available on
 #https://hub.docker.com/r/packpack/packpack/tags/
 #https://hub.docker.com/r/vitzy/packpack/tags/
+#https://hub.docker.com/r/vitzy/flameshot/tags/
 matrix:
     include:
         - os: linux
-          env: OS=fedora DIST=26 EXTEN=rpm
+          env: OS=fedora DIST=27 EXTEN=rpm
           services: docker
         - os: linux
-          env: OS=fedora DIST=27 EXTEN=rpm
+          env: OS=fedora DIST=28 EXTEN=rpm
           services: docker
         - os: linux
           # trusty: only for build & test & AppImage
@@ -41,8 +43,8 @@ matrix:
           env: OS=ubuntu DIST=xenial EXTEN=deb
           services: docker
         - os: linux
-          # 17.10
-          env: OS=ubuntu DIST=artful EXTEN=deb
+          # 18.04
+          env: OS=ubuntu DIST=bionic EXTEN=deb
           services: docker
         - os: linux
           # 8
