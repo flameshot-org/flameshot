@@ -111,8 +111,8 @@ if [[ "${DIST}" == "trusty" ]]; then
 		"${DIST_PATH}"/flameshot_${ARCH}_${VERSION}.${EXTEN}
 	pwd
 else
-	git clone https://github.com/packpack/packpack.git
-	packpack/packpack
+	travis_retry git clone https://github.com/packpack/packpack.git
+	travis_retry packpack/packpack
 	pwd && ls
 
 	case "${OS}" in

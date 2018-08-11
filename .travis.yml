@@ -60,20 +60,20 @@ matrix:
 
 before_install:
   - chmod +x travis/*.sh
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_before_install.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_before_install.sh; fi
 
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_install.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_install.sh; fi
 
 script:
 # - git submodule update --init --recursive
 # - git describe --long
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_script.sh; fi
-# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then travis/osx_script.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_script.sh; fi
+# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then source travis/osx_script.sh; fi
   - pwd && ls
 
 after_success:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_after_success.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_after_success.sh; fi
 
 # deploy:
 #    # Deploy packages to Github Release
