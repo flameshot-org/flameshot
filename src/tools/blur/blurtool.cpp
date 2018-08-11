@@ -52,13 +52,15 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
     }
     QPoint &p0 = m_points.first;
     QPoint &p1 = m_points.second;
+    auto pixelRatio = pixmap.devicePixelRatio();
 
     QRect selection = QRect(p0, p1).normalized();
+    QRect selectionScaled = QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
     QGraphicsBlurEffect *blur = new QGraphicsBlurEffect;
     blur->setBlurRadius(10);
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem (
-                pixmap.copy(selection));
+                pixmap.copy(selectionScaled));
     item->setGraphicsEffect(blur);
 
     QGraphicsScene scene;
