@@ -54,7 +54,7 @@ make %{?_smp_mflags}
 %{_datadir}/flameshot/translations/Internationalization_*.qm
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completion/completions/%{name}
-%{_datadir}/pixmaps/%{name}.svg
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 %changelog
 * Tue Jan 09 2018 Zetao Yang <yangzetao2015@outlook.com> - 0.5.0-1
