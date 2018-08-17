@@ -8,7 +8,7 @@ win32:LIBS += -luser32 -lshell32
 
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 isEmpty(TAG_VERSION){
-    TAG_VERSION = v0.6.0-dev
+    TAG_VERSION = v0.6.0
 }
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
