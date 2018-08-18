@@ -1,6 +1,6 @@
 image: Visual Studio 2015
 
-version: 0.5.{build}.0
+version: 0.6.{build}.0
 # Major_Version_Number.Minor_Version_Number.Build_Number.Revision_Number
 
 branches:
