@@ -41,18 +41,21 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
     completePath += ".png";
     bool ok = capture.save(completePath);
     QString saveMessage;
+
     if (ok) {
         ConfigHandler().setSavePath(path);
         saveMessage = QObject::tr("Capture saved as ") + completePath;
     } else {
         saveMessage = QObject::tr("Error trying to save as ") + completePath;
     }
+
     SystemNotification().sendMessage(saveMessage);
     return ok;
 }
 
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
     bool ok = false;
+
     while (!ok) {
         QString savePath = QFileDialog::getSaveFileName(
                     nullptr,
@@ -62,7 +65,13 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
         if (savePath.isNull()) {
             break;
         }
+
+        if (!savePath.endsWith(".png")) {
+            savePath += ".png";
+        }
+
         ok = capture.save(savePath);
+
         if (ok) {
             QString pathNoFile = savePath.left(savePath.lastIndexOf("/"));
             ConfigHandler().setSavePath(pathNoFile);
@@ -74,7 +83,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
                         QMessageBox::Warning,
                         QObject::tr("Save Error"),
                         msg);
-            saveErrBox.setWindowIcon(QIcon(":img/flameshot.png"));
+            saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
             saveErrBox.exec();
         }
     }

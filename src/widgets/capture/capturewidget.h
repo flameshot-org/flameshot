@@ -133,6 +133,7 @@ private:
     void makeChild(QWidget *w);
 
     QRect extendedSelection() const;
+    QRect extendedRect(QRect *r) const;
 
     QUndoStack m_undoStack;
     QPointer<CaptureButton> m_sizeIndButton;

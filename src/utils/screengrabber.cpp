@@ -24,7 +24,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDir>
@@ -36,7 +36,7 @@ ScreenGrabber::ScreenGrabber(QObject *parent) : QObject(parent) {
 
 QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
     ok = true;
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if(m_info.waylandDectected()) {
         QPixmap res;
         // handle screenshot based on DE
@@ -85,7 +85,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
                   geometry.width(),
                   geometry.height())
               );
-    p.setDevicePixelRatio(QApplication::desktop()->devicePixelRatio());
+    auto screenNumber = QApplication::desktop()->screenNumber();
+    QScreen *screen = QApplication::screens()[screenNumber];
+    p.setDevicePixelRatio(screen->devicePixelRatio());
     return p;
 }
 

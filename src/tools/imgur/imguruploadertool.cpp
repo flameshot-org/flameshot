@@ -29,7 +29,7 @@ bool ImgurUploaderTool::closeOnButtonPressed() const {
 
 QIcon ImgurUploaderTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "cloud-upload.png");
+    return QIcon(iconPath(background) + "cloud-upload.svg");
 }
 QString ImgurUploaderTool::name() const {
     return tr("Image Uploader");

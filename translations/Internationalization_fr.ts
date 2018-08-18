@@ -90,16 +90,6 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Sélectionner une zone avec la souris, ou taper sur Echap pour quitter.
-Taper sur Entrée pour capturer l&apos;écran.
-Clic droit pour afficher la palette de couleurs.
-Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation>
-    </message>
 </context>
 <context>
     <name>CircleTool</name>
@@ -187,8 +177,8 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selecion into the clipboard</source>
-        <translation>Copie la sélection dans le Presse-papier</translation>
+        <source>Copies the selection into the clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -386,18 +376,18 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <translation>Image dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
         <translation>Impossible d&apos;ouvrir l&apos;URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
         <translation>URL copiée dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Capture d&apos;écran copiée dans le Presse-papier.</translation>
     </message>
@@ -488,17 +478,17 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licences&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Raccourci&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -571,13 +561,13 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Save Error</source>
         <translation>Erreur lors de la sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
         <translation>Capture d&apos;écran sauvegardée sous </translation>
     </message>
@@ -587,8 +577,8 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <translation>Capture d&apos;écran copiée dans le Presse-papier</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
         <translation>Erreur lors de la sauvegarde sous </translation>
     </message>
@@ -630,6 +620,11 @@ Utiliser la molette pour changer l&apos;épaisseur de l&apos;outil.</translation
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
         <translation>Rétablir</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

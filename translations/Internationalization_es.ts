@@ -88,17 +88,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Selecciona un área con el ratón, o presiona Esc para salir.
+        <translation>Selecciona un área con el ratón, o presiona Esc para salir.
 Presiona Enter para capturar la pantalla.
 Presion Click Derecho para mostrar el selector de color.
-Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
+Usa la rueda del ratón para cambiar el grosor de la herramienta.
+Presiona Espacion para abrir el panel lateral.</translation>
     </message>
 </context>
 <context>
@@ -119,17 +113,17 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Color activo:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Presiona Esc para cancelar</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar Color</translation>
     </message>
 </context>
 <context>
@@ -187,7 +181,7 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selecion into the clipboard</source>
+        <source>Copies the selection into the clipboard</source>
         <translation>Copia la selección al portapapeles</translation>
     </message>
 </context>
@@ -386,18 +380,18 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation>Imagen al Portapapeles.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
         <translation>No puede abrir la URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
         <translation>URL copiada al portapapeles.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Captura copiada al portapapeles.</translation>
     </message>
@@ -488,17 +482,17 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation>Descripción</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licencia&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Versión&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Atajos&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -571,13 +565,13 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Save Error</source>
         <translation>Error al Guardar</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
         <translation>Captura guardada como </translation>
     </message>
@@ -587,8 +581,8 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <translation>Captura guardada en el portapapeles</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
         <translation>Error intentando guardar como </translation>
     </message>
@@ -630,6 +624,11 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
         <translation>Rehacer</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
+        <translation>Rehacer la siguiente modificación</translation>
     </message>
 </context>
 <context>
@@ -800,22 +799,22 @@ Usa la rueda del ratón para cambiar el grosor de la herramienta.</translation>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="49"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>Tachado</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Subrayado</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Negrita</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Cursiva</translation>
     </message>
 </context>
 <context>

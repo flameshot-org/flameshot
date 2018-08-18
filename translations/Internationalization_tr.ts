@@ -88,17 +88,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
-Ekranresmi almak için Enter tuşuna basın.
-Renk seçicisini göstermek için farenizin sağ butonuna basın.
-Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
+        <translation>Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
+Ekranı yakalamak için Enter tuşuna basın.
+Renk seçiciyi göstermek için farenin sağ tuşuna tıklayın.
+Aracınızın kalınlığını değiştirmek için Fare Tekerleğini kullanın.
+Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
 </context>
 <context>
@@ -119,12 +113,12 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktif Renk:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Çıkmak için ESC&apos;ye tıklayın</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
@@ -187,7 +181,7 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selecion into the clipboard</source>
+        <source>Copies the selection into the clipboard</source>
         <translation>Seçimi panoya kopyalar</translation>
     </message>
 </context>
@@ -378,7 +372,7 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Resmi sil</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
@@ -386,18 +380,18 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
         <translation>Resim Pano&apos;ya.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
         <translation>URL açılamıyor.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
         <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Ekran görüntüsü panoya kopyalandı.</translation>
     </message>
@@ -488,17 +482,17 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
         <translation>Tanım</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Lisans&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Sürüm&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Kısayollar&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -571,13 +565,13 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Save Error</source>
         <translation>Kaydetme Hatası</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
         <translation>Yakalama farklı kaydedildi </translation>
     </message>
@@ -587,8 +581,8 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
         <translation>Yakalama panoya kaydedildi</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
         <translation>Farklı kaydetmeye çalışılırken hata oluştu </translation>
     </message>
@@ -630,6 +624,11 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
         <translation>Yeniden</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -805,17 +804,17 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Altçizgi</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalın</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Eğik</translation>
     </message>
 </context>
 <context>
@@ -823,12 +822,12 @@ Araç boyutunu değiştirmek için fare tekerleğini kullanın.</translation>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Metin</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilgisayardan yazı ekle</translation>
     </message>
 </context>
 <context>

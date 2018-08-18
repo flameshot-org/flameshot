@@ -15,22 +15,24 @@ env:
     global:
       # Environment variables for packpack
       - PRODUCT=flameshot
-      - VERSION=0.5.1
+      - VERSION=0.6.0
       - RELEASE=1
       - ARCH=x86_64
 #     - DOCKER_REPO=packpack/packpack
-      - DOCKER_REPO=vitzy/packpack
+#     - DOCKER_REPO=vitzy/packpack
+      - DOCKER_REPO=vitzy/flameshot
 
 #The actual list of distribution is available on
 #https://hub.docker.com/r/packpack/packpack/tags/
 #https://hub.docker.com/r/vitzy/packpack/tags/
+#https://hub.docker.com/r/vitzy/flameshot/tags/
 matrix:
     include:
         - os: linux
-          env: OS=fedora DIST=26 EXTEN=rpm
+          env: OS=fedora DIST=27 EXTEN=rpm
           services: docker
         - os: linux
-          env: OS=fedora DIST=27 EXTEN=rpm
+          env: OS=fedora DIST=28 EXTEN=rpm
           services: docker
         - os: linux
           # trusty: only for build & test & AppImage
@@ -41,8 +43,8 @@ matrix:
           env: OS=ubuntu DIST=xenial EXTEN=deb
           services: docker
         - os: linux
-          # 17.10
-          env: OS=ubuntu DIST=artful EXTEN=deb
+          # 18.04
+          env: OS=ubuntu DIST=bionic EXTEN=deb
           services: docker
         - os: linux
           # 8
@@ -57,20 +59,21 @@ matrix:
 #         osx_image: xcode9.2
 
 before_install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_before_install.sh; fi
-
-before_script:
   - chmod +x travis/*.sh
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_before_install.sh; fi
 
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_install.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_install.sh; fi
 
 script:
 # - git submodule update --init --recursive
 # - git describe --long
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then travis/linux_script.sh; fi
-# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then travis/osx_script.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_script.sh; fi
+# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then source travis/osx_script.sh; fi
   - pwd && ls
+
+after_success:
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_after_success.sh; fi
 
 # deploy:
 #    # Deploy packages to Github Release

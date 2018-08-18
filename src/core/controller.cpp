@@ -41,7 +41,7 @@ Controller::Controller() : m_captureWindow(nullptr) {
     qApp->setQuitOnLastWindowClosed(false);
 
     // init tray icon
-#if defined(Q_OS_LINUX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!ConfigHandler().disabledTrayIconValue()) {
         enableTrayIcon();
     }
@@ -191,7 +191,7 @@ void Controller::enableTrayIcon() {
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip("Flameshot");
     m_trayIcon->setContextMenu(trayIconMenu);
-    QIcon trayicon = QIcon::fromTheme("flameshot-tray", QIcon(":img/flameshot.png"));
+    QIcon trayicon = QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
     m_trayIcon->setIcon(trayicon);
 
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r){
@@ -204,7 +204,7 @@ void Controller::enableTrayIcon() {
 }
 
 void Controller::disableTrayIcon() {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (m_trayIcon) {
         m_trayIcon->deleteLater();
     }

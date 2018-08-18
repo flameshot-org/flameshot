@@ -50,7 +50,7 @@ void GeneneralConf::updateComponents() {
     m_autostart->setChecked(config.startupLaunchValue());
     m_autoselection->setChecked(config.cvProcessingValue());
 
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
 #endif
 }
@@ -161,7 +161,7 @@ void GeneneralConf::initShowDesktopNotification() {
 }
 
 void GeneneralConf::initShowTrayIcon() {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
     ConfigHandler config;
     bool checked = !config.disabledTrayIconValue();

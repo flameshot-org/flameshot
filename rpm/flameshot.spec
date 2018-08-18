@@ -1,5 +1,5 @@
 Name: flameshot
-Version: 0.5.0
+Version: 0.6.0
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 Summary(eu-ES): Potente pero simple de usar software de capturas
@@ -20,6 +20,7 @@ BuildRequires: pkgconfig(Qt5Gui)  >= 5.3.0
 BuildRequires: pkgconfig(Qt5Widgets)  >= 5.3.0
 BuildRequires: qt5-qttools-devel
 BuildRequires: qt5-linguist
+BuildRequires: qt5-qtsvg-devel
 BuildRequires: git
 
 Requires: qt5-qtbase >= 5.3.0
@@ -53,20 +54,13 @@ make %{?_smp_mflags}
 %{_datadir}/flameshot/translations/Internationalization_*.qm
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completion/completions/%{name}
-%{_datadir}/icons/%{name}.png
+%{_datadir}/icons/hicolor
 
 %changelog
-* Tue Jan 09 2018 Zetao Yang <yangzetao2015@outlook.com> - 0.5.0-1
-- Updated for flameshot 0.5.0
-- Catalan translation.
-- Debian package configuration.
-- Add --raw flag: prints the raw bytes of the png after the capture.
-- Bash completion.
-- Blur tool.
-- Preview draw size on mouse pointer after tool selection.
-- App Launcher tool: choose an app to open the capture.
-- Travis integration
-- Configuration import, export and reset.
-- Experimental Wayland support (Plasma & Gnome)
-* Tue Jan 09 2018 Zetao Yang <yangzetao2015@outlook.com> - 0.5.0-1
-- Initial package
+* Sat Aug 18 2018 Zetao Yang <vitzys@outlook.com> - 0.6.0-1
+- Updated for flameshot 0.6.0
+- - More details, please see https://flameshot.js.org/#/changelog?id=v060
+* Tue Jan 09 2018 Zetao Yang <vitzys@outlook.com> - 0.5.0-1
+- Initial package for flameshot 0.5.0
+- More details, please see https://flameshot.js.org/#/changelog?id=v051
+

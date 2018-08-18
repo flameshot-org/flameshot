@@ -77,16 +77,6 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">用鼠标选择一个区域,或按 Esc 退出。
-按 Enter 键捕捉屏幕。
-按住鼠标右键显示颜色选择器。
-使用鼠标滚轮来改变绘画工具的宽度。</translation>
-    </message>
-    <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
@@ -192,7 +182,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selecion into the clipboard</source>
+        <source>Copies the selection into the clipboard</source>
         <translation>复制选择到剪贴板</translation>
     </message>
 </context>
@@ -391,18 +381,18 @@ Press Space to open the side panel.</source>
         <translation>保存文件到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
         <translation>无法打开此链接。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
         <translation>复制链接到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>截图复制到剪贴板。</translation>
     </message>
@@ -488,17 +478,17 @@ Press Space to open the side panel.</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;许可证&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;版本&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;快捷键&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -576,13 +566,13 @@ Press Space to open the side panel.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Save Error</source>
         <translation>保存错误</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
         <translation>捕获已保存为 </translation>
     </message>
@@ -592,8 +582,8 @@ Press Space to open the side panel.</source>
         <translation>捕获已保存至剪贴板</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
         <translation>尝试另存为时出错 </translation>
     </message>
@@ -635,6 +625,11 @@ Press Space to open the side panel.</source>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
         <translation>重做</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
+        <translation>重做上次修改</translation>
     </message>
 </context>
 <context>
@@ -689,27 +684,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Century (00-99)</source>
-        <translation>世纪 (00-99)</translation>
+        <translation>世纪（00-99）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Year (00-99)</source>
-        <translation>年 (00-99)</translation>
+        <translation>年（00-99）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Year (2000)</source>
-        <translation>年 (2000)</translation>
+        <translation>年（2000）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Month Name (jan)</source>
-        <translation>月 (jul)</translation>
+        <translation>月（1月 - 12月）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month Name (january)</source>
-        <translation>月 (juliol)</translation>
+        <translation>月（一月 - 十二月）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
@@ -719,77 +714,77 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week Day (1-7)</source>
-        <translation>平常日 (1-7)</translation>
+        <translation>周内的日（1-7）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Week (01-53)</source>
-        <translation>周 (01-53)</translation>
+        <translation>周（01-53）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day Name (mon)</source>
-        <translation>星期 (dg)</translation>
+        <translation>星期（一 - 七）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (monday)</source>
-        <translation>星期 (diumenge)</translation>
+        <translation>星期（星期一 - 星期日）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day (01-31)</source>
-        <translation>天 (01-31)</translation>
+        <translation>天（01-31）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
         <source>Day of Month (1-31)</source>
-        <translation>一月中的某天 (1-31)</translation>
+        <translation>一月中的某天（1-31）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (001-366)</source>
-        <translation>天 (001-366)</translation>
+        <translation>天（001-366）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation>时间 (%H-%M-%S)</translation>
+        <translation>时间（%H-%M-%S）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation>时间 (%H-%M)</translation>
+        <translation>时间（%H-%M）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Hour (00-23)</source>
-        <translation>小时 (00-23)</translation>
+        <translation>小时（00-23）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Hour (01-12)</source>
-        <translation>小时 (01-12)</translation>
+        <translation>小时（01-12）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Minute (00-59)</source>
-        <translation>分钟 (00-59)</translation>
+        <translation>分钟（00-59）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Second (00-59)</source>
-        <translation>秒 (00-59)</translation>
+        <translation>秒（00-59）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>日期 (%m/%d/%y)</translation>
+        <translation>完整日期（%m/%d/%y）</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>日期 (%Y-%m-%d)</translation>
+        <translation>完整日期（%Y-%m-%d）</translation>
     </message>
 </context>
 <context>
@@ -841,7 +836,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>UI 颜色编辑器</translation>
+        <translation>用户界面颜色编辑器</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>

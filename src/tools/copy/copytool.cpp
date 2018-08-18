@@ -29,7 +29,7 @@ bool CopyTool::closeOnButtonPressed() const {
 
 QIcon CopyTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "content-copy.png");
+    return QIcon(iconPath(background) + "content-copy.svg");
 }
 QString CopyTool::name() const {
     return tr("Copy");
@@ -40,7 +40,7 @@ QString CopyTool::nameID() {
 }
 
 QString CopyTool::description() const {
-    return tr("Copies the selecion into the clipboard");
+    return tr("Copies the selection into the clipboard");
 }
 
 CaptureTool* CopyTool::copy(QObject *parent) {

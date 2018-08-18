@@ -375,6 +375,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         // Find the smallest rect containing the cursor.
         QRect rcv = m_rectGroup.getRectContainingPoint(m_context.mousePos);
         if (!rcv.isEmpty()) {
+            rcv = extendedRect(&rcv);
             bool ctrlMod = qApp->keyboardModifiers() & Qt::ControlModifier;
             if (m_rightClicked) {
                 if (!ctrlMod) {
@@ -462,7 +463,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
                 newGeometry.setBottom(top);
             }
             m_selection->setGeometry(newGeometry);
-            m_context.selection = newGeometry;
+            m_context.selection = extendedRect(&newGeometry);;
             m_selection->setVisible(true);
             updateSizeIndicator();
             m_buttonHandler->updatePosition(newGeometry);
@@ -910,11 +911,14 @@ void CaptureWidget::redo() {
 QRect CaptureWidget::extendedSelection() const {
     if (!m_selectionIsSet)
         return QRect();
-    auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
+    QRect r = m_selection->geometry();
+    return extendedRect(&r);
+}
 
-    QRect const &r = m_selection->geometry();
-    return QRect(r.left()   * devicePixelRatio,
-                 r.top()    * devicePixelRatio,
-                 r.width()  * devicePixelRatio,
-                 r.height() * devicePixelRatio);
+QRect CaptureWidget::extendedRect(QRect *r) const {
+    auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
+    return QRect(r->left()   * devicePixelRatio,
+                 r->top()    * devicePixelRatio,
+                 r->width()  * devicePixelRatio,
+                 r->height() * devicePixelRatio);
 }

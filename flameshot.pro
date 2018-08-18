@@ -8,11 +8,11 @@ win32:LIBS += -luser32 -lshell32
 
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 isEmpty(TAG_VERSION){
-    TAG_VERSION = v0.6.0-dev
+    TAG_VERSION = v0.6.0
 }
 DEFINES += APP_VERSION=\\\"$$TAG_VERSION\\\"
 
-QT  += core gui widgets network
+QT  += core gui widgets network svg
 
 unix:!macx {
     QT  += dbus
@@ -30,7 +30,7 @@ unix{
 TARGET = flameshot
 TEMPLATE = app
 
-win32:RC_ICONS += img/flameshot.ico
+win32:RC_ICONS += img/app/flameshot.ico
 
 #release: DESTDIR = build/release
 #debug:   DESTDIR = build/debug
@@ -252,27 +252,27 @@ unix:!macx {
 
     DEFINES += APP_PREFIX=\\\"$$PREFIX\\\"
 
-    target.path = $${BASEDIR}$${PREFIX}/bin/
+    target.path = $${PREFIX}/bin/
 
-    qmfile.path = $${BASEDIR}$${PREFIX}/share/flameshot/translations/
+    qmfile.path = $${PREFIX}/share/flameshot/translations/
     qmfile.files = $${TRANSLATIONS_FILES}
 
-    dbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/interfaces/
+    dbus.path = $${PREFIX}/share/dbus-1/interfaces/
     dbus.files = dbus/org.dharkael.Flameshot.xml
-    
-    icon.path = $${BASEDIR}$${PREFIX}/share/icons/
-    icon.files = img/flameshot.png
 
-    completion.path = $${BASEDIR}$${PREFIX}/share/bash-completion/completions/
+    icon.path = $${PREFIX}/share/icons/hicolor/
+    icon.files = img/hicolor/*
+
+    completion.path = $${PREFIX}/share/bash-completion/completions/
     completion.files = docs/bash-completion/flameshot
-    
-    appdata.path = $${BASEDIR}$${PREFIX}/share/metainfo/
+
+    appdata.path = $${PREFIX}/share/metainfo/
     appdata.files = docs/appdata/flameshot.appdata.xml
 
-    desktopentry.path = $${BASEDIR}$${PREFIX}/share/applications
+    desktopentry.path = $${PREFIX}/share/applications
     desktopentry.files = docs/desktopEntry/package/flameshot.desktop
 
-    servicedbus.path = $${BASEDIR}$${PREFIX}/share/dbus-1/services/
+    servicedbus.path = $${PREFIX}/share/dbus-1/services/
 
     packaging {
         servicedbus.files = dbus/package/org.dharkael.Flameshot.service
@@ -290,3 +290,5 @@ unix:!macx {
         appdata
 }
 
+# Imgur API data
+include(src/imgur.pri)

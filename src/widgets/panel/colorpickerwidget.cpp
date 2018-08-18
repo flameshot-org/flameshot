@@ -66,9 +66,9 @@ ColorPickerWidget::ColorPickerWidget(QPixmap *p, QWidget *parent) :
 
     QColor background = this->palette().background().color();
     bool isDark = ColorUtils::colorIsDark(background);
-    QString modifier = isDark ? PathInfo::whiteConfigIconPath() :
-                                PathInfo::blackConfigIconPath();
-    QIcon grabIcon(modifier + "colorize.png");
+    QString modifier = isDark ? PathInfo::whiteIconPath() :
+                                PathInfo::blackIconPath();
+    QIcon grabIcon(modifier + "colorize.svg");
     m_colorGrabButton = new QPushButton(grabIcon, "");
     updateGrabButton(false);
     connect(m_colorGrabButton, &QPushButton::pressed,

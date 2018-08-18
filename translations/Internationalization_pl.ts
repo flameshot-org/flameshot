@@ -88,17 +88,10 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select an area with the mouse, or press Esc to exit.
-Press Enter to capture the screen.
-Press Right Click to show the color picker.
-Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation type="vanished">Zaznacz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
-Wciśnij Enter aby wykonać zrzut ekranu.
-Kliknij prawym przyciskiem myszy, aby pokazać próbnik kolorów.
-Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translation>
+        <translation>Wybierz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
+Wciśnij Enter, aby wykonać zrzut ekranu.
+Prawy klik, aby pokazać próbnik kolorów.
+Spacja, aby pokazać panel boczny.</translation>
     </message>
 </context>
 <context>
@@ -119,17 +112,17 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktywny kolor:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Wciśnij ESC, aby anulować</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobierz kolor</translation>
     </message>
 </context>
 <context>
@@ -160,7 +153,7 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zrzut ekranu</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="174"/>
@@ -187,8 +180,8 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selecion into the clipboard</source>
-        <translation>Kopiuje zaznaczenie do schowka</translation>
+        <source>Copies the selection into the clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -350,7 +343,7 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom Flameshot</translation>
     </message>
 </context>
 <context>
@@ -378,7 +371,7 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń obrazek</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
@@ -386,18 +379,18 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <translation>Obrazek do schowka.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="156"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="169"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
         <translation>Nie można otworzyć adresu URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
         <translation>URL skopiowany do schowka.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Zrzut ekranu skopiowany do schowka.</translation>
     </message>
@@ -488,17 +481,17 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
         <translation>Działanie</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="97"/>
+        <location filename="../src/widgets/infowindow.cpp" line="107"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licencja&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="105"/>
+        <location filename="../src/widgets/infowindow.cpp" line="115"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Wersja&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Skróty klawiszowe&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -560,35 +553,35 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Narzędzie przypinania</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Przypnij obrazek do pulpitu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="75"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Save Error</source>
         <translation>Błąd zapisu</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="46"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
         <translation>Zaznaczenie zapisano jako </translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrzut skopiowano do schowka</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="72"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
         <translation>Błąd przy próbie zapisu jako </translation>
     </message>
@@ -629,6 +622,11 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
+        <translation>Cofnij</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <source>Redo the next modification</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -650,7 +648,7 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/utils/screengrabber.cpp" line="70"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Nie można przechwycić ekranu</translation>
+        <translation>Nie można przechwycić ekranu</translation>
     </message>
 </context>
 <context>
@@ -749,12 +747,12 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -792,7 +790,7 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot Info</translation>
     </message>
 </context>
 <context>
@@ -800,22 +798,22 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="49"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>Przekreślenie</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Podkreślenie</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogrubienie</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kursywa</translation>
     </message>
 </context>
 <context>
@@ -823,12 +821,12 @@ Użyj kółka myszy, aby zmienić grubość narzędzia do rysowania.</translatio
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaje tekst do zrzutu</translation>
     </message>
 </context>
 <context>

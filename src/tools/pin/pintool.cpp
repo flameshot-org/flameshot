@@ -28,7 +28,7 @@ bool PinTool::closeOnButtonPressed() const {
 
 QIcon PinTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "pin.png");
+    return QIcon(iconPath(background) + "pin.svg");
 }
 QString PinTool::name() const {
     return tr("Pin Tool");
@@ -45,7 +45,7 @@ QString PinTool::description() const {
 QWidget* PinTool::widget() {
     PinWidget *w = new PinWidget(m_pixmap);
     const int &&m = w->margin();
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QRect adjusted_pos = m_geometry + QMargins(m,-m,-m,-m);
 #else
     QRect adjusted_pos = m_geometry + QMargins(m, m, m, m);

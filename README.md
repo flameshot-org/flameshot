@@ -1,5 +1,5 @@
 # Flameshot
-![image](./img/flameshot.png) 
+![image](./img/app/flameshot.png)
 > Powerful yet simple to use screenshot software.
 
 [![Build Status](https://img.shields.io/travis/lupoDharkael/flameshot.svg)](https://travis-ci.org/lupoDharkael/flameshot)
@@ -8,7 +8,7 @@
 [![Release](https://img.shields.io/github/release/lupoDharkael/flameshot.svg)](https://github.com/lupoDharkael/flameshot/releases)
 
 ## Usage Preview
-![image](./img/appPreview/animatedUsage.gif)
+![image](./img/preview/animatedUsage.gif)
 
 ## Index
 - [Features](#features)
@@ -159,6 +159,7 @@ There are packages available for a few distros:
 - [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/)
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
+  + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/voidlinux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
@@ -171,7 +172,7 @@ The compilation requires Qt version 5.3 or higher and GCC 4.9.2 or higher.
 ### Debian
 Compilation Dependencies:
 ````
-apt install git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools
+apt install git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools libqt5svg5-dev
 ````
 
 Compilation: run `qmake && make` in the main directory.
@@ -179,7 +180,7 @@ Compilation: run `qmake && make` in the main directory.
 ### Fedora
 Compilation Dependencies:
 ````
-dnf install qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist
+dnf install qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist qt5-qtsvg-devel
 ````
 
 Compilation:  run `qmake-qt5 && make` in the main directory.
@@ -187,7 +188,7 @@ Compilation:  run `qmake-qt5 && make` in the main directory.
 ### Arch
 Compilation Dependencies:
 ````
-pacman -S git qt5-base base-devel qt5-tools
+pacman -S base-devel git qt5-base qt5-tools qt5-svg
 ````
 
 Compilation:  run `qmake && make` in the main directory.
@@ -202,11 +203,11 @@ Having `git` installed is required if you want to have  precise app version info
 
 In order to generate the makefile installing in `/usr` instead of in `/usr/local` you can use the `packaging` option to generate the proper makefile (`qmake CONFIG+=packaging` instead of just `qmake`).
 
-If you want to install in a custom directory you can define the `BASEDIR` variable.
+If you want to install in a custom directory you can use the `INSTALL_ROOT` variable.
 
 **Example**:
 You want to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
-`qmake CONFIG+=packaging BASEDIR=~/myBuilds/test && make install`
+`qmake CONFIG+=packaging && make INSTALL_ROOT=~/myBuilds/test install`
 
 ### Runtime Dependencies
 
