@@ -1,6 +1,6 @@
 image: Visual Studio 2015
 
-version: 0.5.{build}.0
+version: 0.6.{build}.0
 # Major_Version_Number.Minor_Version_Number.Build_Number.Revision_Number
 
 branches:
@@ -61,8 +61,8 @@ after_build:
     - if "%PLATFORM%" EQU "X64" (xcopy "openssl-utils.git\win64\*.dll" "distrib\flameshot")
     - if "%PLATFORM%" EQU "x86" (xcopy "openssl-utils.git\win32\*.dll" "distrib\flameshot")
     - cd distrib
-    - 7z a flameshot_win_%PLATFORM%_portable_%flameshot_version%.zip flameshot
-    - curl --upload-file ./flameshot_win_%PLATFORM%_portable_%flameshot_version%.zip https://transfer.sh/flameshot_win_%PLATFORM%_portable_%flameshot_version%.zip
+    - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
+    - curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
 
 
 # artifacts:
