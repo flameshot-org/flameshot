@@ -104,14 +104,14 @@ if [[ "${DIST}" == "trusty" ]]; then
 
 	# Rename AppImage and move AppImage to DIST_PATH 
 	cd "${APPIMAGE_DST_PATH}"
-	mv Flameshot-${VERSION}-${ARCH}.AppImage flameshot_${ARCH}_${VERSION}.AppImage
+	mv Flameshot-${VERSION}-${ARCH}.AppImage flameshot_${VERSION}_${ARCH}.AppImage
 	cd ..
 	cp \
-		"${APPIMAGE_DST_PATH}"/flameshot_${ARCH}_${VERSION}.AppImage \
-		"${DIST_PATH}"/flameshot_${ARCH}_${VERSION}.${EXTEN}
+		"${APPIMAGE_DST_PATH}"/flameshot_${VERSION}_${ARCH}.AppImage \
+		"${DIST_PATH}"/flameshot_${VERSION}_${ARCH}.${EXTEN}
 	pwd
 else
-	travis_retry git clone https://github.com/packpack/packpack.git
+	travis_retry git clone https://github.com/flameshotapp/packpack.git
 	travis_retry packpack/packpack
 	pwd && ls
 
@@ -120,12 +120,12 @@ else
 			# copy deb to dist path for distribution
 			cp \
 				build/flameshot_*_*.deb \
-				"${DIST_PATH}"/flameshot_${VERSION}-${DIST}-${ARCH}_${ARCH}.${EXTEN}
+				"${DIST_PATH}"/flameshot_${VERSION}_${DIST}_${ARCH}.${EXTEN}
 			;;
 		"fedora")
 			cp \
 				build/flameshot-${VERSION}-${RELEASE}.*.${ARCH}.rpm \
-				"${DIST_PATH}"/flameshot_${VERSION}-fedora${DIST}-${ARCH}_${ARCH}.${EXTEN}
+				"${DIST_PATH}"/flameshot_${VERSION}_fedora${DIST}_${ARCH}.${EXTEN}
 			;;
 	esac
 fi
