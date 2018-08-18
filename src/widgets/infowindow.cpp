@@ -23,12 +23,26 @@
 #include <QLabel>
 #include <QKeyEvent>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#include <QCursor>
+#include <QRect>
+#include <QScreen>
+#include <QGuiApplication>
+#endif
+
 // InfoWindow show basic information about the usage of Flameshot
 
 InfoWindow::InfoWindow(QWidget *parent) : QWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("About"));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    QRect position = frameGeometry();
+    QScreen *screen = QGuiApplication::screenAt(QCursor::pos());
+    position.moveCenter(screen->availableGeometry().center());
+    move(position.topLeft());
+#endif
 
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter);
