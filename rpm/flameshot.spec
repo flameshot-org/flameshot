@@ -59,7 +59,7 @@ make %{?_smp_mflags}
 %changelog
 * Sat Aug 18 2018 Zetao Yang <vitzys@outlook.com> - 0.6.0-1
 - Updated for flameshot 0.6.0
-- - More details, please see https://flameshot.js.org/#/changelog?id=v060
+- More details, please see https://flameshot.js.org/#/changelog?id=v060
 * Tue Jan 09 2018 Zetao Yang <vitzys@outlook.com> - 0.5.0-1
 - Initial package for flameshot 0.5.0
 - More details, please see https://flameshot.js.org/#/changelog?id=v051
