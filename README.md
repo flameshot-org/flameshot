@@ -1,7 +1,7 @@
 <h1 align="center">
   <br>
   <a href="https://github.com/lupoDharkael/flameshot">
-    <img src="https://cdn.rawgit.com/lupoDharkael/flameshot/36c62f6e/img/app/flameshot.svg" width="128" height="128" alt="Flameshot logo" />
+    <img src="https://cdn.rawgit.com/lupoDharkael/flameshot/aee5c03a/img/app/flameshot.svg" alt="Flameshot logo" />
   </a>
   <br>
   Flameshot
