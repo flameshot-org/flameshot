@@ -1,11 +1,24 @@
-# Flameshot
-![image](./img/app/flameshot.png)
-> Powerful yet simple to use screenshot software.
+<h1 align="center">
+  <br>
+  <a href="https://github.com/lupoDharkael/flameshot">
+    <img src="https://cdn.rawgit.com/lupoDharkael/flameshot/36c62f6e/img/app/flameshot.svg" width="128" height="128" alt="Flameshot logo" />
+  </a>
+  <br>
+  Flameshot
+  <br>
+</h1>
 
-[![Build Status](https://img.shields.io/travis/lupoDharkael/flameshot.svg)](https://travis-ci.org/lupoDharkael/flameshot)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/lupoDharkael/flameshot?svg=true)](https://ci.appveyor.com/project/lupoDharkael/flameshot)
-[![License](https://img.shields.io/github/license/lupoDharkael/flameshot.svg)](https://github.com/lupoDharkael/flameshot/blob/master/LICENSE)
-[![Release](https://img.shields.io/github/release/lupoDharkael/flameshot.svg)](https://github.com/lupoDharkael/flameshot/releases)
+<h4 align="center">Powerful yet simple to use screenshot software.</h4>
+
+<div align="center">
+  <a href="https://travis-ci.org/lupoDharkael/flameshot"><img src="https://img.shields.io/travis/lupoDharkael/flameshot.svg" /></a>
+  <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot"><img src="https://ci.appveyor.com/api/projects/status/github/lupoDharkael/flameshot?svg=true" /></a>
+  <a href="https://github.com/lupoDharkael/flameshot/releases"><img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg" /></a>
+  <a href="https://github.com/lupoDharkael/flameshot/releases"><img src="https://img.shields.io/github/downloads/lupoDharkael/flameshot/total.svg" /></a>
+  <a href="https://github.com/lupoDharkael/flameshot/blob/master/LICENSE"><img src="https://img.shields.io/github/license/lupoDharkael/flameshot.svg" /></a>
+  <a href="https://github.com/lupoDharkael/flameshot"><img src="https://img.shields.io/badge/platform-Linux%20Windows-lightgrey.svg" /></a>
+</div>
+<br>
 
 ## Usage Preview
 ![image](./img/preview/animatedUsage.gif)
@@ -129,7 +142,7 @@ Steps for using the configuration:
     ```
     mkdir -p ~/Pictures/Screenshots
     ```
-   (If you don't like the default location, you can skip this step and configure your preferred directory later.)
+      (If you don't like the default location, you can skip this step and configure your preferred directory later.)
 
 2. Download the configuration file:
     ```
