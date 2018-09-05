@@ -20,64 +20,89 @@
 </div>
 <br>
 
-## Usage Preview
+## Preview
+
 ![image](./img/preview/animatedUsage.gif)
 
 ## Index
+
 - [Features](#features)
-- [Contribute](#contribute)
 - [Usage](#usage)
+  - [CLI configuration](#cli-configuration)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
+  - [Local](#local)
+  - [Global](#global)
+    - [On KDE Plasma desktop](#on-kde-plasma-desktop)
 - [Considerations](#considerations)
 - [Installation](#installation)
 - [Compilation](#compilation)
-  - [Debian](#debian)
-  - [Fedora](#fedora)
-  - [Arch](#arch)
+  - [Dependencies](#dependencies)
+    - [Compile-time](#compile-time)
+    - [Run-time](#run-time)
+    - [Debian](#debian)
+    - [Fedora](#fedora)
+    - [Arch](#arch)
+  - [Build](#build)
   - [Install](#install)
 - [Packaging](#packaging)
 - [License](#license)
+- [Contribute](#contribute)
 - [Donations](#donations)
+- [Acknowledgment](#acknowledgment)
 
 ## Features
+
 - Customizable appearance.
 - Easy to use.
 - In-app screenshot edition.
 - DBus interface.
 - Upload to Imgur.
 
-## Contribute
-If you want to contribute check the [CONTRIBUTING.md](./CONTRIBUTING.md)
-
 ## Usage
+
 Example commands:
-- capture with GUI:
 
-   `flameshot gui`
+- Capture with GUI:
 
-- capture with GUI with custom save path:
+   ```shell
+   flameshot gui
+   ```
 
-   `flameshot gui -p ~/myStuff/captures`
+- Capture with GUI with custom save path:
 
-- open GUI with a delay of 2 seconds:
+   ```shell
+   flameshot gui -p ~/myStuff/captures
+   ```
 
-   `flameshot gui -d 2000`
+- Open GUI with a delay of 2 seconds:
 
-- fullscreen capture with custom save path (no GUI) and delayed:
+   ```shell
+   flameshot gui -d 2000
+   ```
 
-   `flameshot full -p ~/myStuff/captures -d 5000`
+- Fullscreen capture with custom save path (no GUI) and delayed:
 
-- fullscreen capture with custom save path copying to clipboard:
+   ```shell
+   flameshot full -p ~/myStuff/captures -d 5000
+   ```
 
-   `flameshot full -c -p ~/myStuff/captures`
+- Fullscreen capture with custom save path copying to clipboard:
 
-- capture the screen containing the mouse and print the image (bytes) in PNG format:
+   ```shell
+   flameshot full -c -p ~/myStuff/captures
+   ```
 
-   `flameshot screen -r`
+- Capture the screen containing the mouse and print the image (bytes) in PNG format:
 
-- capture the screen number 1 and copy it to the clipboard:
+   ```shell
+   flameshot screen -r
+   ```
 
-   `flameshot screen -n 1 -c`
+- Capture the screen number 1 and copy it to the clipboard:
+
+   ```shell
+   flameshot screen -n 1 -c
+   ```
 
 In case of doubt choose the first or the second command as shortcut in your favorite desktop environment.
 
@@ -86,19 +111,26 @@ Do a right click on the tray icon and you'll see some menu items to open the con
 Check out the information window to see all the available shortcuts in the graphical capture mode.
 
 ### CLI configuration
+
 You can use the graphical menu to configure Flameshot, but alternatively you can use your terminal or scripts to do so.
 
-- open the configuration menu:
+- Open the configuration menu:
 
-   `flameshot config`
+   ```shell
+   flameshot config
+   ```
 
-- show the initial help message in the capture mode:
+- Show the initial help message in the capture mode:
 
-   `flameshot config --showhelp true`
+   ```shell
+   flameshot config --showhelp true
+   ```
 
-- for more information about the available options use the help flag:
+- For more information about the available options use the help flag:
 
-   `flameshot config -h`
+   ```shell
+   flameshot config -h
+   ```
 
 ## Keyboard shortcuts
 
@@ -127,27 +159,32 @@ If you want use Flameshot as a default screenshot utility, chances are you want 
 
 To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
 
-|  Keys                                                           |  Description                                                                                |
-|---                                                              |---                                                                                          |
-| <kbd>Prt Sc</kbd>                                               | Start the Flameshot screenshot tool and take a screenshot                                   |
-| <kbd>Ctrl</kbd> + <kbd>Prt Sc</kbd>                             | Wait for 3 seconds, then start the Flameshot screenshot tool and take a screenshot          |
-| <kbd>Shift</kbd> + <kbd>Prt Sc</kbd>                            | Take a full-screen (all monitors) screenshot and save it                                    |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Prt Sc</kbd>          | Take a full-screen (all monitors) screenshot and copy it to the clipboard                   |
+|  Keys                                                  |  Description                                                                       |
+|---                                                     |---                                                                                 |
+| <kbd>Prt Sc</kbd>                                      | Start the Flameshot screenshot tool and take a screenshot                          |
+| <kbd>Ctrl</kbd> + <kbd>Prt Sc</kbd>                    | Wait for 3 seconds, then start the Flameshot screenshot tool and take a screenshot |
+| <kbd>Shift</kbd> + <kbd>Prt Sc</kbd>                   | Take a full-screen (all monitors) screenshot and save it                           |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Prt Sc</kbd> | Take a full-screen (all monitors) screenshot and copy it to the clipboard          |
 
 If you don't like the defaults, you can change them manually later.
 
 Steps for using the configuration:
 
-1. The configuration file configures shortcuts so that Flameshot automatically saves (without opening the save dialog) screenshots to _~/Pictures/Screenshots_ folder. Make sure you have that folder by running the following command:
-    ```
-    mkdir -p ~/Pictures/Screenshots
-    ```
-      (If you don't like the default location, you can skip this step and configure your preferred directory later.)
+1. The configuration file configures shortcuts so that Flameshot automatically saves (without opening the save dialog) screenshots to `~/Pictures/Screenshots` folder. Make sure you have that folder by running the following command:
+
+  ```shell
+  mkdir -p ~/Pictures/Screenshots
+  ```
+
+  (If you don't like the default location, you can skip this step and configure your preferred directory later.)
 
 2. Download the configuration file:
-    ```
-    cd ~/Desktop; wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
-    ```
+
+  ```shell
+  cd ~/Desktop
+  wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+  ```
+
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
@@ -164,11 +201,12 @@ Steps for using the configuration:
 
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
 
-- Execute the command `flameshot` without parameters or use the "Launch Flameshot" desktop entry to launch a running instance of the program without taking actions.
+- Execute the command `flameshot` without parameters to launch a running instance of the program without taking actions.
 
 ## Installation
 
 There are packages available for a few distros:
+
 - [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/)
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
@@ -180,31 +218,77 @@ There are packages available for a few distros:
 - Fedora: `dnf install flameshot`
 
 ## Compilation
-The compilation requires Qt version 5.3 or higher and GCC 4.9.2 or higher.
 
-### Debian
-Compilation Dependencies:
-````
-apt install git g++ build-essential qt5-qmake qt5-default qttools5-dev-tools libqt5svg5-dev
-````
+To build the application in your system, you'll need to install the dependencies needed for it and Package names might be different for each distribution, see [Dependencies](#dependencies) below for more information.
 
-Compilation: run `qmake && make` in the main directory.
+### Dependencies
 
-### Fedora
-Compilation Dependencies:
-````
-dnf install qt5-devel gcc-c++ git qt5-qtbase-devel qt5-linguist qt5-qtsvg-devel
-````
+#### Compile-time
 
-Compilation:  run `qmake-qt5 && make` in the main directory.
+- Qt >= 5.3
+  + Development tools
+- GCC >= 4.9.2
 
-### Arch
-Compilation Dependencies:
-````
-pacman -S base-devel git qt5-base qt5-tools qt5-svg
-````
+#### Run-time
 
-Compilation:  run `qmake && make` in the main directory.
+- Qt
+  + SVG
+
+#### Optional
+
+- Git
+- OpenSSL
+- CA Certificates
+
+#### Debian
+
+```shell
+# Compile-time
+apt install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools
+
+# Run-time
+apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev
+
+# Optional
+apt install git openssl ca-certificates
+```
+
+#### Fedora
+
+```shell
+# Compile-time
+dnf install gcc-c++ qt5-devel qt5-qtbase-devel qt5-linguist
+
+# Run-time
+dnf install qt5-qtbase qt5-qtsvg-devel
+
+# Optional
+dnf install git openssl ca-certificates
+```
+
+#### Arch
+
+```shell
+# Compile-time
+pacman -S base-devel git qt5-base qt5-tools
+
+# Run-time
+pacman -S qt5-svg
+
+# Optional
+pacman -S openssl ca-certificates
+```
+
+### Build
+
+After installing all the dependencies, finally run the following commands in the sources root directory:
+
+```shell
+mkdir build
+cd build
+qmake ../
+make
+```
 
 ### Install
 
@@ -212,43 +296,19 @@ Simply use `make install` with privileges.
 
 ## Packaging
 
-Having `git` installed is required if you want to have  precise app version information inside Flameshot after the generation of the makefile with `qmake`.
+Having `git` installed is required if you're building Flameshot from a snapshot to have precise version information.
 
-In order to generate the makefile installing in `/usr` instead of in `/usr/local` you can use the `packaging` option to generate the proper makefile (`qmake CONFIG+=packaging` instead of just `qmake`).
+In order to generate the instructions in the `Makefile` to install the application in `/usr` instead of in `/usr/local` you can pass the `packaging` option to `qmake` (`qmake CONFIG+=packaging`).
 
 If you want to install in a custom directory you can use the `INSTALL_ROOT` variable.
 
 **Example**:
-You want to install Flameshot in ~/myBuilds/test. You would execute the following to do so:
-`qmake CONFIG+=packaging && make INSTALL_ROOT=~/myBuilds/test install`
 
-### Runtime Dependencies
+If you want to install Flameshot in `~/myBuilds/test`, you can execute the following to do so:
 
-**Debian**:
-````
-libqt5dbus5, libqt5network5, libqt5core5a, libqt5widgets5, libqt5gui5
-````
-Optional:
-```
-openssl, ca-certificates
-```
-
-**Fedora**:
-````
-qt5-qtbase
-````
-Optional:
-```
-openssl, ca-certificates
-```
-
-**Arch**:
-````
-qt5-base
-````
-Optional:
-```
-openssl, ca-certificates
+```shell
+qmake CONFIG+=packaging
+make INSTALL_ROOT=~/myBuilds/test install
 ```
 
 ## License
@@ -261,6 +321,10 @@ openssl, ca-certificates
 - Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project) (LGPL/GPL)
 
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
+
+## Contribute
+
+If you want to contribute check the [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Donations
 I improve Flameshot in my free time because I want to create something good for everyone to use. 
