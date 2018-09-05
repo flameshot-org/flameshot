@@ -1,28 +1,36 @@
-<h1 align="center">
-  <br>
-  <a href="https://github.com/lupoDharkael/flameshot">
-    <img src="https://cdn.rawgit.com/lupoDharkael/flameshot/aee5c03a/img/app/flameshot.svg" alt="Flameshot logo" />
-  </a>
-  <br>
-  Flameshot
-  <br>
-</h1>
-
-<h4 align="center">Powerful yet simple to use screenshot software.</h4>
-
 <div align="center">
-  <a href="https://travis-ci.org/lupoDharkael/flameshot"><img src="https://img.shields.io/travis/lupoDharkael/flameshot.svg" /></a>
-  <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot"><img src="https://ci.appveyor.com/api/projects/status/github/lupoDharkael/flameshot?svg=true" /></a>
-  <a href="https://github.com/lupoDharkael/flameshot/releases"><img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg" /></a>
-  <a href="https://github.com/lupoDharkael/flameshot/releases"><img src="https://img.shields.io/github/downloads/lupoDharkael/flameshot/total.svg" /></a>
-  <a href="https://github.com/lupoDharkael/flameshot/blob/master/LICENSE"><img src="https://img.shields.io/github/license/lupoDharkael/flameshot.svg" /></a>
-  <a href="https://github.com/lupoDharkael/flameshot"><img src="https://img.shields.io/badge/platform-Linux%20Windows-lightgrey.svg" /></a>
+  <p>
+    <h1>
+      <a href="https://github.com/lupoDharkael/flameshot">
+        <img src="img/app/flameshot.svg" alt="Flameshot" />
+      </a>
+      <br />
+      Flameshot
+    </h1>
+    <h4>Powerful yet simple to use screenshot software.</h4>
+  </p>
+  <p>
+    <a href="https://travis-ci.org/lupoDharkael/flameshot">
+      <img src="https://img.shields.io/travis/lupoDharkael/flameshot.svg?style=flat-square&label=gnu/linux" alt="GNU/Linux Build Status" />
+    </a>
+    <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot">
+      <img src="https://img.shields.io/appveyor/ci/lupoDharkael/flameshot.svg?style=flat-square&label=windows" alt="Windows Build Status" />
+    </a>
+    <a href="https://github.com/lupoDharkael/flameshot/releases">
+      <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
+    </a>
+    <a href="https://github.com/lupoDharkael/flameshot/releases">
+      <img src="https://img.shields.io/github/downloads/lupoDharkael/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
+    </a>
+    <a href="https://github.com/lupoDharkael/flameshot/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/lupoDharkael/flameshot.svg?style=flat-square" alt="License" />
+    </a>
+  </p>
 </div>
-<br>
 
 ## Preview
 
-![image](./img/preview/animatedUsage.gif)
+![image](img/preview/animatedUsage.gif)
 
 ## Index
 
@@ -39,6 +47,7 @@
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
     - [Run-time](#run-time)
+    - [Optional](#optional)
     - [Debian](#debian)
     - [Fedora](#fedora)
     - [Arch](#arch)
@@ -312,19 +321,19 @@ make INSTALL_ROOT=~/myBuilds/test install
 ```
 
 ## License
-- The main code is licensed under [GPLv3](./LICENSE)
-- The logo of Flameshot is licensed under [Free Art License v1.3](./img/flameshotLogoLicense.txt)
+- The main code is licensed under [GPLv3](LICENSE)
+- The logo of Flameshot is licensed under [Free Art License v1.3](img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
 - The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h (GPLv2)
-- I copied a few lines of code from KSnapshot regiongrabber.cpp revision 796531 (LGPL)
+- I copied a few lines of code from KSnapshot regiongrabber.cpp revision `796531` (LGPL)
 - Qt-Color-Widgets taken and modified from https://github.com/mbasaglia/Qt-Color-Widgets (see their license and exceptions in the project) (LGPL/GPL)
 
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Contribute
 
-If you want to contribute check the [CONTRIBUTING.md](./CONTRIBUTING.md)
+If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Donations
 I improve Flameshot in my free time because I want to create something good for everyone to use. 
