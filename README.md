@@ -73,45 +73,45 @@ Example commands:
 
 - Capture with GUI:
 
-   ```shell
-   flameshot gui
-   ```
+    ```shell
+    flameshot gui
+    ```
 
 - Capture with GUI with custom save path:
 
-   ```shell
-   flameshot gui -p ~/myStuff/captures
-   ```
+    ```shell
+    flameshot gui -p ~/myStuff/captures
+    ```
 
 - Open GUI with a delay of 2 seconds:
 
-   ```shell
-   flameshot gui -d 2000
-   ```
+    ```shell
+    flameshot gui -d 2000
+    ```
 
 - Fullscreen capture with custom save path (no GUI) and delayed:
 
-   ```shell
-   flameshot full -p ~/myStuff/captures -d 5000
-   ```
+    ```shell
+    flameshot full -p ~/myStuff/captures -d 5000
+    ```
 
 - Fullscreen capture with custom save path copying to clipboard:
 
-   ```shell
-   flameshot full -c -p ~/myStuff/captures
-   ```
+    ```shell
+    flameshot full -c -p ~/myStuff/captures
+    ```
 
 - Capture the screen containing the mouse and print the image (bytes) in PNG format:
 
-   ```shell
-   flameshot screen -r
-   ```
+    ```shell
+    flameshot screen -r
+    ```
 
 - Capture the screen number 1 and copy it to the clipboard:
 
-   ```shell
-   flameshot screen -n 1 -c
-   ```
+    ```shell
+    flameshot screen -n 1 -c
+    ```
 
 In case of doubt choose the first or the second command as shortcut in your favorite desktop environment.
 
@@ -125,21 +125,21 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
 
 - Open the configuration menu:
 
-   ```shell
-   flameshot config
-   ```
+    ```shell
+    flameshot config
+    ```
 
 - Show the initial help message in the capture mode:
 
-   ```shell
-   flameshot config --showhelp true
-   ```
+    ```shell
+    flameshot config --showhelp true
+    ```
 
 - For more information about the available options use the help flag:
 
-   ```shell
-   flameshot config -h
-   ```
+    ```shell
+    flameshot config -h
+    ```
 
 ## Keyboard shortcuts
 
@@ -181,19 +181,17 @@ Steps for using the configuration:
 
 1. The configuration file configures shortcuts so that Flameshot automatically saves (without opening the save dialog) screenshots to `~/Pictures/Screenshots` folder. Make sure you have that folder by running the following command:
 
-  ```shell
-  mkdir -p ~/Pictures/Screenshots
-  ```
+    ```shell
+    mkdir -p ~/Pictures/Screenshots
+    ```
 
-  (If you don't like the default location, you can skip this step and configure your preferred directory later.)
-
+    (If you don't like the default location, you can skip this step and configure your preferred directory later.)
 2. Download the configuration file:
 
-  ```shell
-  cd ~/Desktop
-  wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
-  ```
-
+    ```shell
+    cd ~/Desktop
+    wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+    ```
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
