@@ -9,16 +9,16 @@ description: |
   customise the color, size and/or thickness of many of these image annotation
   tools.
 
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+grade: edge # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 
 apps:
   flameshot:
-    command: desktop-launch ${SNAP}/usr/bin/flameshot
+    command: desktop-launch flameshot
     environment:
       LC_ALL: C.UTF-8
-    slots: [ dbus-svc ]
+      DISABLE_WAYLAND: 1
     plugs:
       - desktop
       - desktop-legacy
@@ -59,7 +59,7 @@ slots:
   # Depending on in which environment we're running we either need
   # to use the system or session DBus so we also need to have one
   # slot for each.
-  dbus-svc:
+  flameshot-app:
     interface: dbus
     bus: session
     name: org.dharkael.Flameshot

@@ -1,20 +1,35 @@
 [Desktop Entry]
 Name=Flameshot
-Name[es]=Tomar captura gráfica
-Name[zh_CN]=进行图形截图
-GenericName=Screen capture tool
-GenericName[es]=Herramienta de captura de pantalla
-GenericName[tr]=Ekran kayıt aracı
+Name[zh_CN]=火焰截图
+GenericName=Screenshot tool
 GenericName[zh_CN]=屏幕截图工具
+GenericName[pl]=Zrzuty ekranu
+GenericName[fr]=Outil de capture d'écran
 Comment=Powerful yet simple to use screenshot software.
-Comment[es]=Potente pero simple de usar software de capturas.
-Comment[tr]=Güçlü ve kullanımı kolay ekran kayıt yazılımı.
-Comment[zh_CN]=强大又易用的截图软件
-Keywords=flameshot;screenshot;capture;
-Keywords[zh_CN]=flameshot;screenshot;capture;截图;
-Exec=flameshot gui
+Comment[zh_CN]=强大又易用的屏幕截图软件
+Comment[pl]=Proste w użyciu narzędzie do zrzutów ekranu
+Comment[fr]=Logiciel de capture d'écran puissant et simple d'utilisation.
+Keywords=flameshot;screenshot;capture;shutter;
+Keywords[zh_CN]=flameshot;screenshot;capture;shutter;截图;屏幕;
+Keywords[fr]=flameshot;capture d'écran;capter;shutter;
+Exec=flameshot
 Icon=${SNAP}/meta/gui/flameshot.png
 Terminal=false
 Type=Application
 Categories=Graphics;
 StartupNotify=false
+Actions=Configure;Capture;
+
+[Desktop Action Configure]
+Name=Configure
+Name[zh_CN]=配置
+Name[pl]=Konfiguruj
+Name[fr]=Configurer
+Exec=flameshot config
+
+[Desktop Action Capture]
+Name=Take screenshot
+Name[zh_CN]=进行截图
+Name[pl]=Zrzut ekranu
+Name[fr]=Prendre une capture d'écran
+Exec=flameshot gui --delay 500
