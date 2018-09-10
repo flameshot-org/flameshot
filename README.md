@@ -214,7 +214,7 @@ Steps for using the configuration:
 
 There are packages available for a few distros:
 
-- [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/)
+- [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
