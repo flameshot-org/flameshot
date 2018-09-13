@@ -61,7 +61,7 @@ public:
     QPixmap pixmap();
 
 public slots:
-    void close();
+    void deleteToolwidgetOrClose();
 
 signals:
     void captureTaken(uint id, QPixmap p);

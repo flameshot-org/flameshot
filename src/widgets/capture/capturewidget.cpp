@@ -186,12 +186,12 @@ QPixmap CaptureWidget::pixmap() {
     return m_context.selectedScreenshotArea();
 }
 
-void CaptureWidget::close() {
+void CaptureWidget::deleteToolwidgetOrClose() {
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
         m_toolWidget = nullptr;
     } else {
-        QWidget::close();
+        close();
     }
 }
 
@@ -739,7 +739,7 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this, SLOT(upResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
     new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
-    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
     new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
 }
 
