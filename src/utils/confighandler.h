@@ -70,6 +70,9 @@ public:
     void setDefaults();
     void setAllTheButtons();
 
+    bool saveOnCopy();
+    void setSaveOnCopy(const bool);
+
     QString configFilePath() const;
 
 private:

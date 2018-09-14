@@ -17,6 +17,7 @@
 
 #include "copytool.h"
 #include "src/utils/screenshotsaver.h"
+#include "src/utils/confighandler.h"
 #include <QPainter>
 
 CopyTool::CopyTool(QObject *parent) : AbstractActionTool(parent) {
@@ -48,6 +49,23 @@ CaptureTool* CopyTool::copy(QObject *parent) {
 }
 
 void CopyTool::pressed(const CaptureContext &context) {
-    emit requestAction(REQ_CAPTURE_DONE_OK);
+    if (ConfigHandler().saveOnCopy()) {
+        bool ok = false;
+        emit requestAction(REQ_HIDE_GUI);
+        if (context.savePath.isEmpty()) {
+            ok = ScreenshotSaver().saveToFilesystemGUI(
+                    context.selectedScreenshotArea());
+
+        } else {
+            ok = ScreenshotSaver().saveToFilesystem(
+                    context.selectedScreenshotArea(), context.savePath);
+        }
+
+        if (ok) {
+            emit requestAction(REQ_CAPTURE_DONE_OK);
+        }
+    } else {
+        emit requestAction(REQ_CAPTURE_DONE_OK);
+    }
     ScreenshotSaver().saveToClipboard(context.selectedScreenshotArea());
 }

@@ -31,6 +31,7 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/screenshotsaver.h"
+#include "src/utils/confighandler.h"
 #include "src/core/controller.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include <QUndoView>
@@ -824,7 +825,17 @@ void CaptureWidget::childLeave() {
 
 void CaptureWidget::copyScreenshot() {
     m_captureDone = true;
-    ScreenshotSaver().saveToClipboard(pixmap());
+    auto result = pixmap();
+    if (ConfigHandler().saveOnCopy()) {
+        if (m_context.savePath.isEmpty()) {
+            ScreenshotSaver().saveToFilesystemGUI(result);
+        } else {
+            ScreenshotSaver().saveToFilesystem(result, m_context.savePath);
+        }
+    }
+
+    ScreenshotSaver().saveToClipboard(result);
+
     close();
 }
 

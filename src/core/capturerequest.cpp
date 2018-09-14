@@ -17,6 +17,7 @@
 
 #include "capturerequest.h"
 #include "src/utils/screenshotsaver.h"
+#include "src/utils/confighandler.h"
 #include <QVector>
 #include <QDateTime>
 
@@ -71,15 +72,23 @@ void CaptureRequest::addTask(CaptureRequest::ExportTask task) {
 }
 
 void CaptureRequest::exportCapture(const QPixmap &p) {
-    if ((m_tasks & ExportTask::FILESYSTEM_SAVE_TASK) != ExportTask::NO_TASK) {
+    auto exportToFile = [&]() {
         if (m_path.isEmpty()) {
             ScreenshotSaver().saveToFilesystemGUI(p);
         } else {
             ScreenshotSaver().saveToFilesystem(p, m_path);
         }
+    };
+
+    if ((m_tasks & ExportTask::FILESYSTEM_SAVE_TASK) != ExportTask::NO_TASK) {
+        exportToFile();
     }
 
     if ((m_tasks & ExportTask::CLIPBOARD_SAVE_TASK) != ExportTask::NO_TASK) {
+        if (ConfigHandler().saveOnCopy()) {
+            exportToFile();
+        }
+
         ScreenshotSaver().saveToClipboard(p);
     }
 

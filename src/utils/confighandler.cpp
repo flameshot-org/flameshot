@@ -345,3 +345,11 @@ QVector<int> ConfigHandler::fromButtonToInt(
         buttons << static_cast<int>(i);
     return buttons;
 }
+
+bool ConfigHandler::saveOnCopy() {
+    return m_settings.value("saveOnCopy").toBool();
+}
+
+void ConfigHandler::setSaveOnCopy(const bool save) {
+    m_settings.setValue("saveOnCopy", save);
+}

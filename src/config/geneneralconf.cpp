@@ -17,7 +17,6 @@
 
 #include "geneneralconf.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/confighandler.h"
 #include "src/core/controller.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -36,6 +35,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initSaveOnCopy();
 
     // this has to be at the end
     initConfingButtons();
@@ -47,6 +47,7 @@ void GeneneralConf::updateComponents() {
     m_helpMessage->setChecked(config.showHelpValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+    m_saveoncopy->setChecked(config.saveOnCopy());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -203,4 +204,21 @@ void GeneneralConf::initAutostart() {
 
     connect(m_autostart, &QCheckBox::clicked, this,
             &GeneneralConf::autostartChanged);
+}
+
+void GeneneralConf::saveOnCopyChanged(bool save) {
+    ConfigHandler().setSaveOnCopy(save);
+}
+
+void GeneneralConf::initSaveOnCopy() {
+    m_saveoncopy =
+            new QCheckBox(tr("Save on copy (works best with -p argument)"), this);
+    ConfigHandler config;
+    bool checked = config.saveOnCopy();
+    m_saveoncopy->setChecked(checked);
+    m_saveoncopy->setToolTip(tr("Save selected area in desired directory when copying to clipboard"));
+    m_layout->addWidget(m_saveoncopy);
+
+    connect(m_saveoncopy, &QCheckBox::clicked, this,
+            &GeneneralConf::saveOnCopyChanged);
 }
