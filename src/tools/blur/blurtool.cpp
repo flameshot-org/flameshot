@@ -54,21 +54,35 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
     QPoint &p1 = m_points.second;
     auto pixelRatio = pixmap.devicePixelRatio();
 
+    int minThickness = 5;
+    int maxThickness = minThickness * 10;
+    m_thickness = m_thickness < minThickness ? minThickness : m_thickness;
+    m_thickness = m_thickness > maxThickness ? maxThickness : m_thickness;
+
+    QPoint offset = QPoint(m_thickness, m_thickness);
+
     QRect selection = QRect(p0, p1).normalized();
-    QRect selectionScaled = QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
+    QRect blurArea = QRect(selection.topLeft() - offset,
+                           selection.bottomRight() + offset);
+    QRect selectionScaled = QRect(blurArea.topLeft() * pixelRatio,
+                                  blurArea.bottomRight() * pixelRatio).normalized();
 
     QGraphicsBlurEffect *blur = new QGraphicsBlurEffect;
     blur->setBlurRadius(m_thickness);
+    QGraphicsRectItem* drawItem = new QGraphicsRectItem(QRect(offset, selection.size()));
+    drawItem->setFlag(QGraphicsItem::ItemClipsChildrenToShape);
+    drawItem->setBrush(Qt::NoBrush);
+    drawItem->setPen(Qt::NoPen);
     QGraphicsPixmapItem *item = new QGraphicsPixmapItem (
-                pixmap.copy(selectionScaled));
+                pixmap.copy(selectionScaled), drawItem);
     item->setGraphicsEffect(blur);
 
     QGraphicsScene scene;
-    scene.addItem(item);
+    scene.addItem(drawItem);
 
-    scene.render(&painter, selection, QRectF());
-    scene.render(&painter, selection, QRectF());
-    scene.render(&painter, selection, QRectF());
+    scene.render(&painter, blurArea, QRectF());
+    scene.render(&painter, blurArea, QRectF());
+    scene.render(&painter, blurArea, QRectF());
 }
 
 void BlurTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
