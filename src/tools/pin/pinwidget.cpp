@@ -27,7 +27,8 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
     QWidget(parent), m_pixmap(pixmap)
 {
     setWindowFlags(Qt::WindowStaysOnTopHint
-                   | Qt::FramelessWindowHint);
+                   | Qt::FramelessWindowHint
+                   | Qt::X11BypassWindowManagerHint);
     //set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
 
@@ -58,7 +59,7 @@ int PinWidget::margin() const {
 }
 
 void PinWidget::wheelEvent(QWheelEvent *e) {
-    int val = e->delta() > 0 ? 5 : -5;
+    int val = e->delta() > 0 ? 15 : -15;
     int newWidth = qBound(50, m_label->width() + val, maximumWidth());
     int newHeight = qBound(50, m_label->height() + val, maximumHeight());
 
