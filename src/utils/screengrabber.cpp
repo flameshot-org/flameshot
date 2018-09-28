@@ -50,6 +50,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
             QDBusReply<bool> reply = gnomeInterface.call("Screenshot", false, false, path);
             if (reply.value()) {
                 res = QPixmap(path);
+                QFile dbusResult(path);
+                dbusResult.remove();
             } else {
                 ok = false;
             }
@@ -61,6 +63,10 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
                                          QStringLiteral("org.kde.kwin.Screenshot"));
             QDBusReply<QString> reply = kwinInterface.call("screenshotFullscreen");
             res = QPixmap(reply.value());
+            if (!res.isNull()) {
+                QFile dbusResult(reply.value());
+                dbusResult.remove();
+            }
             break;
         } default:
             ok = false;
