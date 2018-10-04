@@ -741,6 +741,7 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
     new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
+    new QShortcut(Qt::Key_Enter, this, SLOT(copyScreenshot()));
 }
 
 void CaptureWidget::updateSizeIndicator() {
