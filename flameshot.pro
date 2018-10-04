@@ -43,7 +43,8 @@ TRANSLATIONS = translations/Internationalization_es.ts \
     translations/Internationalization_tr.ts \
     translations/Internationalization_ka.ts \
     translations/Internationalization_fr.ts \
-    translations/Internationalization_pl.ts
+    translations/Internationalization_pl.ts \
+    translations/Internationalization_ja.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
