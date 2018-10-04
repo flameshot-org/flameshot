@@ -66,12 +66,12 @@
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="34"/>
         <source>Blur</source>
-        <translation>Desenfoque</translation>
+        <translation>Desfoque</translation>
     </message>
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
         <source>Sets the Blur as the paint tool</source>
-        <translation>Usa o Desenfoque como ferramenta de desenho</translation>
+        <translation>Usa o Desfoque como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
