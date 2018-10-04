@@ -383,7 +383,7 @@ Pressione espaço abrir o painel lateral.</translation>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
-        <translation>Mão foi possível abrir a URL.</translation>
+        <translation>Não foi possível abrir a URL.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
@@ -713,7 +713,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week Day (1-7)</source>
-        <translation>Día da semana (1-7)</translation>
+        <translation>Dia da semana (1-7)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
