@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
-        <translation>Escolha uma aplicação para abrir o capturador</translation>
+        <translation>Escolha uma aplicação para abrir a captura</translation>
     </message>
 </context>
 <context>
