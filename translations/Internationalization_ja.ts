@@ -91,7 +91,7 @@ Press Space to open the side panel.</source>
         <translation>マウスで領域を選択、Esc を押すと終了。
 Enter を押すと画面をキャプチャー。
 マウスの右ボタンでカラーピッカーを表示。
-マウスホイールでツールの大きさ等を変更。
+マウスホイールでツールの太さ等を変更。
 スペースを押すとサイドパネルを開く。</translation>
     </message>
 </context>
@@ -231,7 +231,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="80"/>
         <source>Saves the pattern</source>
-        <translation>パータンを保存する</translation>
+        <translation>パターンを保存する</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="82"/>
@@ -464,7 +464,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="60"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>ツールの値 (大きさなど) を変更する</translation>
+        <translation>ツールの値 (太さや濃さ) を変更する</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="76"/>
