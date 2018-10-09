@@ -85,7 +85,7 @@ QString ArrowTool::nameID() {
 }
 
 QString ArrowTool::description() const {
-    return tr("Sets the Arrow as the paint tool");
+    return tr("Set the Arrow as the paint tool");
 }
 
 CaptureTool* ArrowTool::copy(QObject *parent) {

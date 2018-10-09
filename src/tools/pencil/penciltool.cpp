@@ -35,7 +35,7 @@ QString PencilTool::nameID() {
 }
 
 QString PencilTool::description() const {
-    return tr("Sets the Pencil as the paint tool");
+    return tr("Set the Pencil as the paint tool");
 }
 
 CaptureTool* PencilTool::copy(QObject *parent) {
