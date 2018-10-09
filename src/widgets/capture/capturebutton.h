@@ -53,7 +53,11 @@ public:
         TYPE_TEXT = 18,
     };
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+    Q_ENUMS(ButtonType)
+#else
     Q_ENUM(ButtonType)
+#endif
 
     CaptureButton() = delete;
     explicit CaptureButton(const ButtonType, QWidget *parent = nullptr);
