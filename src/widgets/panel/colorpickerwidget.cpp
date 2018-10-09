@@ -68,8 +68,8 @@ ColorPickerWidget::ColorPickerWidget(QPixmap *p, QWidget *parent) :
     colorForm->addRow(tr("Active color:"), m_colorLabel);
     m_layout->addLayout(colorForm);
 
-    connect(m_thicknessSlider, &QSlider::valueChanged,
-            this, &ColorPickerWidget::thicknessChanged);
+    connect(m_thicknessSlider, &QSlider::sliderReleased,
+            this, &ColorPickerWidget::updateCurrentThickness);
     connect(this, &ColorPickerWidget::thicknessChanged,
             this, &ColorPickerWidget::updateThickness);
 
@@ -110,6 +110,11 @@ void ColorPickerWidget::updateColorNoWheel(const QColor &c) {
     m_color = c;
     m_colorLabel->setStyleSheet(
                 QString("QLabel { background-color : %1; }").arg(c.name()));
+}
+
+void ColorPickerWidget::updateCurrentThickness()
+{
+    emit thicknessChanged(m_thicknessSlider->value());
 }
 
 void ColorPickerWidget::colorGrabberActivated() {

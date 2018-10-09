@@ -701,7 +701,7 @@ void CaptureWidget::setDrawThickness(const int &t)
 {
     m_context.thickness = qBound(0, t, 100);
     ConfigHandler().setdrawThickness(m_context.thickness);
-    emit thicknessChanged(t);
+    emit thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::leftResize() {

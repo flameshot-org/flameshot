@@ -44,6 +44,7 @@ public slots:
 
 private slots:
     void updateColorNoWheel(const QColor &c);
+    void updateCurrentThickness();
 
 private slots:
     void colorGrabberActivated();
