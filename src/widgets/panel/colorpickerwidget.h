@@ -24,6 +24,7 @@ class QVBoxLayout;
 class QPushButton;
 class QLabel;
 class QColorPickingEventFilter;
+class QSlider;
 
 class ColorPickerWidget : public QWidget {
     Q_OBJECT
@@ -34,10 +35,12 @@ public:
 
 signals:
     void colorChanged(const QColor &c);
+    void thicknessChanged(const int &t);
     void togglePanel();
 
 public slots:
     void updateColor(const QColor &c);
+    void updateThickness(const int &t);
 
 private slots:
     void updateColorNoWheel(const QColor &c);
@@ -62,6 +65,8 @@ private:
     QPixmap *m_pixmap;
     QColor m_colorBackup;
     QColor m_color;
+    QSlider *m_thicknessSlider;
+    int m_thickness;
     QColorPickingEventFilter *m_eventFilter;
 
 };

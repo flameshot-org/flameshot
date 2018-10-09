@@ -545,11 +545,16 @@ void CaptureWidget::initPanel() {
             new ColorPickerWidget(&m_context.screenshot);
     connect(colorPicker, &ColorPickerWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
+    connect(colorPicker, &ColorPickerWidget::thicknessChanged,
+            this, &CaptureWidget::setDrawThickness);
     connect(this, &CaptureWidget::colorChanged,
             colorPicker, &ColorPickerWidget::updateColor);
+    connect(this, &CaptureWidget::thicknessChanged,
+            colorPicker, &ColorPickerWidget::updateThickness);
     connect(colorPicker, &ColorPickerWidget::togglePanel,
             m_panel, &UtilityPanel::toggle);
     colorPicker->colorChanged(m_context.color);
+    colorPicker->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(colorPicker);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
 }
@@ -690,6 +695,13 @@ void CaptureWidget::setDrawColor(const QColor &c) {
     m_context.color = c;
     ConfigHandler().setDrawColor(m_context.color);
     emit colorChanged(c);
+}
+
+void CaptureWidget::setDrawThickness(const int &t)
+{
+    m_context.thickness = qBound(0, t, 100);
+    ConfigHandler().setdrawThickness(m_context.thickness);
+    emit thicknessChanged(t);
 }
 
 void CaptureWidget::leftResize() {

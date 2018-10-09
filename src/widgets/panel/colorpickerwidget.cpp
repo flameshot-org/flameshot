@@ -23,12 +23,13 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QSlider>
 
 class QColorPickingEventFilter : public QObject {
 public:
 
     explicit QColorPickingEventFilter(
-            ColorPickerWidget *pw, QObject *parent = 0) :
+            ColorPickerWidget *pw, QObject *parent = nullptr) :
         QObject(parent), m_pw(pw) {}
 
     bool eventFilter(QObject *, QEvent *event) override {
@@ -59,10 +60,18 @@ ColorPickerWidget::ColorPickerWidget(QPixmap *p, QWidget *parent) :
     m_layout = new QVBoxLayout(this);
 
     QFormLayout *colorForm = new QFormLayout();
+    m_thicknessSlider = new QSlider(Qt::Horizontal);
+    m_thicknessSlider->setValue(m_thickness);
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    colorForm->addRow(tr("Active thickness:"), m_thicknessSlider);
     colorForm->addRow(tr("Active color:"), m_colorLabel);
     m_layout->addLayout(colorForm);
+
+    connect(m_thicknessSlider, &QSlider::valueChanged,
+            this, &ColorPickerWidget::thicknessChanged);
+    connect(this, &ColorPickerWidget::thicknessChanged,
+            this, &ColorPickerWidget::updateThickness);
 
     QColor background = this->palette().background().color();
     bool isDark = ColorUtils::colorIsDark(background);
@@ -89,6 +98,12 @@ void ColorPickerWidget::updateColor(const QColor &c) {
     m_colorLabel->setStyleSheet(
                 QString("QLabel { background-color : %1; }").arg(c.name()));
     m_colorWheel->setColor(m_color);
+}
+
+void ColorPickerWidget::updateThickness(const int &t)
+{
+    m_thickness = qBound(0, t, 100);
+    m_thicknessSlider->setValue(m_thickness);
 }
 
 void ColorPickerWidget::updateColorNoWheel(const QColor &c) {
