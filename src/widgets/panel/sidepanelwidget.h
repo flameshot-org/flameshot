@@ -26,12 +26,12 @@ class QLabel;
 class QColorPickingEventFilter;
 class QSlider;
 
-class ColorPickerWidget : public QWidget {
+class SidePanelWidget : public QWidget {
     Q_OBJECT
 
     friend class QColorPickingEventFilter;
 public:
-    explicit ColorPickerWidget(QPixmap *p, QWidget *parent = nullptr);
+    explicit SidePanelWidget(QPixmap *p, QWidget *parent = nullptr);
 
 signals:
     void colorChanged(const QColor &c);

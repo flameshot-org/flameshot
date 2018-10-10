@@ -109,19 +109,19 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
 </context>
 <context>
-    <name>ColorPickerWidget</name>
+    <name>SidePanelWidget</name>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
         <translation>Aktif Renk:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
         <translation>Çıkmak için ESC&apos;ye tıklayın</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
         <translation type="unfinished"></translation>
     </message>

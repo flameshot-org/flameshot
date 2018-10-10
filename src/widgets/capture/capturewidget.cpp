@@ -23,7 +23,7 @@
 
 #include "capturewidget.h"
 #include "src/widgets/capture/hovereventfilter.h"
-#include "src/widgets/panel/colorpickerwidget.h"
+#include "src/widgets/panel/sidepanelwidget.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/globalvalues.h"
 #include "src/widgets/capture/notifierbox.h"
@@ -541,21 +541,21 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
-    ColorPickerWidget *colorPicker =
-            new ColorPickerWidget(&m_context.screenshot);
-    connect(colorPicker, &ColorPickerWidget::colorChanged,
+    SidePanelWidget *sidePanel =
+            new SidePanelWidget(&m_context.screenshot);
+    connect(sidePanel, &SidePanelWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
-    connect(colorPicker, &ColorPickerWidget::thicknessChanged,
+    connect(sidePanel, &SidePanelWidget::thicknessChanged,
             this, &CaptureWidget::setDrawThickness);
     connect(this, &CaptureWidget::colorChanged,
-            colorPicker, &ColorPickerWidget::updateColor);
+            sidePanel, &SidePanelWidget::updateColor);
     connect(this, &CaptureWidget::thicknessChanged,
-            colorPicker, &ColorPickerWidget::updateThickness);
-    connect(colorPicker, &ColorPickerWidget::togglePanel,
+            sidePanel, &SidePanelWidget::updateThickness);
+    connect(sidePanel, &SidePanelWidget::togglePanel,
             m_panel, &UtilityPanel::toggle);
-    colorPicker->colorChanged(m_context.color);
-    colorPicker->thicknessChanged(m_context.thickness);
-    m_panel->pushWidget(colorPicker);
+    sidePanel->colorChanged(m_context.color);
+    sidePanel->thicknessChanged(m_context.thickness);
+    m_panel->pushWidget(sidePanel);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
 }
 
