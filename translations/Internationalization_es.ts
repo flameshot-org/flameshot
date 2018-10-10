@@ -109,19 +109,19 @@ Presiona Espacion para abrir el panel lateral.</translation>
     </message>
 </context>
 <context>
-    <name>ColorPickerWidget</name>
+    <name>SidePanelWidget</name>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
         <translation>Color activo:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
         <translation>Presiona Esc para cancelar</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
         <translation>Tomar Color</translation>
     </message>

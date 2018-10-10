@@ -15,7 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "colorpickerwidget.h"
+#include "sidepanelwidget.h"
 #include "src/utils/pathinfo.h"
 #include "src/utils/colorutils.h"
 #include <QVBoxLayout>
@@ -23,12 +23,13 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QSlider>
 
 class QColorPickingEventFilter : public QObject {
 public:
 
     explicit QColorPickingEventFilter(
-            ColorPickerWidget *pw, QObject *parent = 0) :
+            SidePanelWidget *pw, QObject *parent = nullptr) :
         QObject(parent), m_pw(pw) {}
 
     bool eventFilter(QObject *, QEvent *event) override {
@@ -48,21 +49,29 @@ public:
     }
 
 private:
-    ColorPickerWidget *m_pw;
+    SidePanelWidget *m_pw;
 };
 
 ////////////////////////
 
-ColorPickerWidget::ColorPickerWidget(QPixmap *p, QWidget *parent) :
+SidePanelWidget::SidePanelWidget(QPixmap *p, QWidget *parent) :
     QWidget(parent), m_pixmap(p), m_eventFilter(nullptr)
 {
     m_layout = new QVBoxLayout(this);
 
     QFormLayout *colorForm = new QFormLayout();
+    m_thicknessSlider = new QSlider(Qt::Horizontal);
+    m_thicknessSlider->setValue(m_thickness);
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    colorForm->addRow(tr("Active thickness:"), m_thicknessSlider);
     colorForm->addRow(tr("Active color:"), m_colorLabel);
     m_layout->addLayout(colorForm);
+
+    connect(m_thicknessSlider, &QSlider::sliderReleased,
+            this, &SidePanelWidget::updateCurrentThickness);
+    connect(this, &SidePanelWidget::thicknessChanged,
+            this, &SidePanelWidget::updateThickness);
 
     QColor background = this->palette().background().color();
     bool isDark = ColorUtils::colorIsDark(background);
@@ -72,32 +81,43 @@ ColorPickerWidget::ColorPickerWidget(QPixmap *p, QWidget *parent) :
     m_colorGrabButton = new QPushButton(grabIcon, "");
     updateGrabButton(false);
     connect(m_colorGrabButton, &QPushButton::pressed,
-            this, &ColorPickerWidget::colorGrabberActivated);
+            this, &SidePanelWidget::colorGrabberActivated);
     m_layout->addWidget(m_colorGrabButton);
 
     m_colorWheel = new color_widgets::ColorWheel(this);
     m_colorWheel->setColor(m_color);
     connect(m_colorWheel, &color_widgets::ColorWheel::mouseReleaseOnColor, this,
-            &ColorPickerWidget::colorChanged);
+            &SidePanelWidget::colorChanged);
     connect(m_colorWheel, &color_widgets::ColorWheel::colorChanged, this,
-            &ColorPickerWidget::updateColorNoWheel);
+            &SidePanelWidget::updateColorNoWheel);
     m_layout->addWidget(m_colorWheel);
 }
 
-void ColorPickerWidget::updateColor(const QColor &c) {
+void SidePanelWidget::updateColor(const QColor &c) {
     m_color = c;
     m_colorLabel->setStyleSheet(
                 QString("QLabel { background-color : %1; }").arg(c.name()));
     m_colorWheel->setColor(m_color);
 }
 
-void ColorPickerWidget::updateColorNoWheel(const QColor &c) {
+void SidePanelWidget::updateThickness(const int &t)
+{
+    m_thickness = qBound(0, t, 100);
+    m_thicknessSlider->setValue(m_thickness);
+}
+
+void SidePanelWidget::updateColorNoWheel(const QColor &c) {
     m_color = c;
     m_colorLabel->setStyleSheet(
                 QString("QLabel { background-color : %1; }").arg(c.name()));
 }
 
-void ColorPickerWidget::colorGrabberActivated() {
+void SidePanelWidget::updateCurrentThickness()
+{
+    emit thicknessChanged(m_thicknessSlider->value());
+}
+
+void SidePanelWidget::colorGrabberActivated() {
     grabKeyboard();
     grabMouse(Qt::CrossCursor);
     setMouseTracking(true);
@@ -109,7 +129,7 @@ void ColorPickerWidget::colorGrabberActivated() {
     updateGrabButton(true);
 }
 
-void ColorPickerWidget::releaseColorGrab() {
+void SidePanelWidget::releaseColorGrab() {
     setMouseTracking(false);
     removeEventFilter(m_eventFilter);
     releaseMouse();
@@ -118,7 +138,7 @@ void ColorPickerWidget::releaseColorGrab() {
     updateGrabButton(false);
 }
 
-QColor ColorPickerWidget::grabPixmapColor(const QPoint &p) {
+QColor SidePanelWidget::grabPixmapColor(const QPoint &p) {
     QColor c;
     if (m_pixmap) {
         QPixmap pixel = m_pixmap->copy(QRect(p, p));
@@ -127,7 +147,7 @@ QColor ColorPickerWidget::grabPixmapColor(const QPoint &p) {
     return c;
 }
 
-bool ColorPickerWidget::handleKeyPress(QKeyEvent *e) {
+bool SidePanelWidget::handleKeyPress(QKeyEvent *e) {
     if (e->key() == Qt::Key_Space) {
         emit togglePanel();
     } else if (e->key() == Qt::Key_Escape) {
@@ -141,7 +161,7 @@ bool ColorPickerWidget::handleKeyPress(QKeyEvent *e) {
     return true;
 }
 
-bool ColorPickerWidget::handleMouseButtonPressed(QMouseEvent *e) {
+bool SidePanelWidget::handleMouseButtonPressed(QMouseEvent *e) {
     if (m_colorGrabButton->geometry().contains(e->pos()) ||
             e->button() == Qt::RightButton)
     {
@@ -154,12 +174,12 @@ bool ColorPickerWidget::handleMouseButtonPressed(QMouseEvent *e) {
     return true;
 }
 
-bool ColorPickerWidget::handleMouseMove(QMouseEvent *e) {
+bool SidePanelWidget::handleMouseMove(QMouseEvent *e) {
     updateColorNoWheel(grabPixmapColor(e->globalPos()));
     return true;
 }
 
-void ColorPickerWidget::updateGrabButton(const bool activated) {
+void SidePanelWidget::updateGrabButton(const bool activated) {
     if (activated) {
         m_colorGrabButton->setText(tr("Press ESC to cancel"));
     } else {

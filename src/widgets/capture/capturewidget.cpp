@@ -23,7 +23,7 @@
 
 #include "capturewidget.h"
 #include "src/widgets/capture/hovereventfilter.h"
-#include "src/widgets/panel/colorpickerwidget.h"
+#include "src/widgets/panel/sidepanelwidget.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/globalvalues.h"
 #include "src/widgets/capture/notifierbox.h"
@@ -541,16 +541,21 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
-    ColorPickerWidget *colorPicker =
-            new ColorPickerWidget(&m_context.screenshot);
-    connect(colorPicker, &ColorPickerWidget::colorChanged,
+    SidePanelWidget *sidePanel =
+            new SidePanelWidget(&m_context.screenshot);
+    connect(sidePanel, &SidePanelWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
+    connect(sidePanel, &SidePanelWidget::thicknessChanged,
+            this, &CaptureWidget::setDrawThickness);
     connect(this, &CaptureWidget::colorChanged,
-            colorPicker, &ColorPickerWidget::updateColor);
-    connect(colorPicker, &ColorPickerWidget::togglePanel,
+            sidePanel, &SidePanelWidget::updateColor);
+    connect(this, &CaptureWidget::thicknessChanged,
+            sidePanel, &SidePanelWidget::updateThickness);
+    connect(sidePanel, &SidePanelWidget::togglePanel,
             m_panel, &UtilityPanel::toggle);
-    colorPicker->colorChanged(m_context.color);
-    m_panel->pushWidget(colorPicker);
+    sidePanel->colorChanged(m_context.color);
+    sidePanel->thicknessChanged(m_context.thickness);
+    m_panel->pushWidget(sidePanel);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
 }
 
@@ -690,6 +695,13 @@ void CaptureWidget::setDrawColor(const QColor &c) {
     m_context.color = c;
     ConfigHandler().setDrawColor(m_context.color);
     emit colorChanged(c);
+}
+
+void CaptureWidget::setDrawThickness(const int &t)
+{
+    m_context.thickness = qBound(0, t, 100);
+    ConfigHandler().setdrawThickness(m_context.thickness);
+    emit thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::leftResize() {

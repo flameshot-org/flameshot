@@ -109,19 +109,19 @@ Enter を押すと画面をキャプチャー。
     </message>
 </context>
 <context>
-    <name>ColorPickerWidget</name>
+    <name>SidePanelWidget</name>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
         <translation>アクティブな色:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
         <translation>ESC でキャンセル</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
         <translation>色の取得</translation>
     </message>

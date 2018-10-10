@@ -27,7 +27,6 @@ class CaptureTool;
 
 class CaptureButton : public QPushButton {
     Q_OBJECT
-    Q_ENUMS(ButtonType)
 
 public:
     // Don't forget to add the new types to CaptureButton::iterableButtonTypes
@@ -53,6 +52,12 @@ public:
         TYPE_PIN = 17,
         TYPE_TEXT = 18,
     };
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+    Q_ENUMS(ButtonType)
+#else
+    Q_ENUM(ButtonType)
+#endif
 
     CaptureButton() = delete;
     explicit CaptureButton(const ButtonType, QWidget *parent = nullptr);
