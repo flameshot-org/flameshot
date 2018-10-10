@@ -110,19 +110,19 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
-    <name>ColorPickerWidget</name>
+    <name>SidePanelWidget</name>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
         <translation>活动颜色：</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
         <translation>按下 ESC 键以取消</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
         <translation>获取颜色</translation>
     </message>

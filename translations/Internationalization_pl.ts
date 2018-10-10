@@ -108,19 +108,19 @@ Spacja, aby pokazać panel boczny.</translation>
     </message>
 </context>
 <context>
-    <name>ColorPickerWidget</name>
+    <name>SidePanelWidget</name>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
         <translation>Aktywny kolor:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
         <translation>Wciśnij ESC, aby anulować</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
         <translation>Pobierz kolor</translation>
     </message>
