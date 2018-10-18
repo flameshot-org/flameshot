@@ -57,7 +57,7 @@
     </message>
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
-        <source>Sets the Arrow as the paint tool</source>
+        <source>Set the Arrow as the paint tool</source>
         <translation>選擇箭頭作為繪製工具</translation>
     </message>
 </context>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
-        <source>Sets the Blur as the paint tool</source>
+        <source>Set Blur as the paint tool</source>
         <translation>選擇模糊作為繪製工具</translation>
     </message>
 </context>
@@ -100,7 +100,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/circle/circletool.cpp" line="42"/>
-        <source>Sets the Circle as the paint tool</source>
+        <source>Set the Circle as the paint tool</source>
         <translation>選擇圈型作為繪畫工具</translation>
     </message>
 </context>
@@ -177,7 +177,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selection into the clipboard</source>
+        <source>Copy the selection into the clipboard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -401,7 +401,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
-        <source>Uploads the selection to Imgur</source>
+        <source>Upload the selection to Imgur</source>
         <translation>上傳到 Imgur</translation>
     </message>
 </context>
@@ -502,7 +502,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/line/linetool.cpp" line="50"/>
-        <source>Sets the Line as the paint tool</source>
+        <source>Set the Line as the paint tool</source>
         <translation>將直線線設定為繪畫工具</translation>
     </message>
 </context>
@@ -515,7 +515,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="50"/>
-        <source>Sets the Marker as the paint tool</source>
+        <source>Set the Marker as the paint tool</source>
         <translation>將標記設定為繪畫工具</translation>
     </message>
 </context>
@@ -541,7 +541,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
-        <source>Sets the Pencil as the paint tool</source>
+        <source>Set the Pencil as the paint tool</source>
         <translation>將鉛筆設定為繪畫工具</translation>
     </message>
 </context>
@@ -610,7 +610,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
-        <source>Sets the Rectangle as the paint tool</source>
+        <source>Set the Rectangle as the paint tool</source>
         <translation>將實心矩形設定為繪畫工具</translation>
     </message>
 </context>
@@ -657,7 +657,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
-        <source>Sets the Selection as the paint tool</source>
+        <source>Set Selection as the paint tool</source>
         <translation>將矩形選擇設定為繪畫工具</translation>
     </message>
 </context>
@@ -670,7 +670,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
-        <source>Shows the dimensions of the selection (X Y)</source>
+        <source>Show the dimensions of the selection (X Y)</source>
         <translation>顯示選擇的尺寸 (X Y)</translation>
     </message>
 </context>
