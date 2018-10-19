@@ -46,7 +46,7 @@
         <translation>Nyíl</translation>
     </message>
     <message>
-        <source>Sets the Arrow as the paint tool</source>
+        <source>Set the Arrow as the paint tool</source>
         <translation>Beállítja a nyíl eszközt festő eszközként</translation>
     </message>
 </context>
@@ -57,7 +57,7 @@
         <translation>Homályosítás</translation>
     </message>
     <message>
-        <source>Sets the Blur as the paint tool</source>
+        <source>Set Blur as the paint tool</source>
         <translation>Beállítja a Homályosítás eszközt festő eszközként</translation>
     </message>
 </context>
@@ -85,7 +85,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Kör</translation>
     </message>
     <message>
-        <source>Sets the Circle as the paint tool</source>
+        <source>Set the Circle as the paint tool</source>
         <translation>Beálítja a Kör eszközt festő eszközként</translation>
     </message>
 </context>
@@ -318,7 +318,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Kép feltöltő</translation>
     </message>
     <message>
-        <source>Uploads the selection to Imgur</source>
+        <source>Upload the selection to Imgur</source>
         <translation>Feltölti a kiválasztott képet az Imgur -ra</translation>
     </message>
 </context>
@@ -400,7 +400,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Vonal</translation>
     </message>
     <message>
-        <source>Sets the Line as the paint tool</source>
+        <source>Set the Line as the paint tool</source>
         <translation>Beállítja a Vonal eszközt festő eszközként</translation>
     </message>
 </context>
@@ -411,7 +411,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Jelölő</translation>
     </message>
     <message>
-        <source>Sets the Marker as the paint tool</source>
+        <source>Set the Marker as the paint tool</source>
         <translation>Beállítja a Jelölő eszközt festő eszközként</translation>
     </message>
 </context>
@@ -433,7 +433,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Ceruza</translation>
     </message>
     <message>
-        <source>Sets the Pencil as the paint tool</source>
+        <source>Set the Pencil as the paint tool</source>
         <translation>Beállítja a Ceruza eszközt festő eszközként</translation>
     </message>
 </context>
@@ -476,7 +476,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Téglalap</translation>
     </message>
     <message>
-        <source>Sets the Rectangle as the paint tool</source>
+        <source>Set the Rectangle as the paint tool</source>
         <translation>Beállítja a Téglalap eszközt festő eszközként</translation>
     </message>
 </context>
@@ -505,7 +505,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Téglalapos kijelölő</translation>
     </message>
     <message>
-        <source>Sets the Selection as the paint tool</source>
+        <source>Set Selection as the paint tool</source>
         <translation>Beállítja a Téglalapos kijelölő eszközt Festő eszközként</translation>
     </message>
 </context>
@@ -516,7 +516,7 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <translation>Kiválasztott terület méretének indikátora</translation>
     </message>
     <message>
-        <source>Shows the dimensions of the selection (X Y)</source>
+        <source>Show the dimensions of the selection (X Y)</source>
         <translation>Mutatja a dimenzióját a kijelölésnek (X Y)</translation>
     </message>
 </context>
