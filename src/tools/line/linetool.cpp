@@ -47,7 +47,7 @@ QString LineTool::nameID() {
 }
 
 QString LineTool::description() const {
-    return tr("Sets the Line as the paint tool");
+    return tr("Set the Line as the paint tool");
 }
 
 CaptureTool* LineTool::copy(QObject *parent) {

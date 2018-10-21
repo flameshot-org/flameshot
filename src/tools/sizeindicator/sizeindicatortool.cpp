@@ -39,7 +39,7 @@ QString SizeIndicatorTool::nameID() {
 }
 
 QString SizeIndicatorTool::description() const {
-    return tr("Shows the dimensions of the selection (X Y)");
+    return tr("Show the dimensions of the selection (X Y)");
 }
 
 CaptureTool* SizeIndicatorTool::copy(QObject *parent) {

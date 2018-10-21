@@ -39,7 +39,7 @@ QString RectangleTool::nameID() {
 }
 
 QString RectangleTool::description() const {
-    return tr("Sets the Rectangle as the paint tool");
+    return tr("Set the Rectangle as the paint tool");
 }
 
 CaptureTool* RectangleTool::copy(QObject *parent) {

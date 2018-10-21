@@ -39,7 +39,7 @@ QString CircleTool::nameID() {
 }
 
 QString CircleTool::description() const {
-    return tr("Sets the Circle as the paint tool");
+    return tr("Set the Circle as the paint tool");
 }
 
 CaptureTool* CircleTool::copy(QObject *parent) {

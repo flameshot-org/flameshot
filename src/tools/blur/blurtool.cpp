@@ -39,7 +39,7 @@ QString BlurTool::nameID() {
 }
 
 QString BlurTool::description() const {
-    return tr("Sets the Blur as the paint tool");
+    return tr("Set Blur as the paint tool");
 }
 
 CaptureTool* BlurTool::copy(QObject *parent) {

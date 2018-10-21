@@ -47,7 +47,7 @@ QString MarkerTool::nameID() {
 }
 
 QString MarkerTool::description() const {
-    return tr("Sets the Marker as the paint tool");
+    return tr("Set the Marker as the paint tool");
 }
 
 CaptureTool* MarkerTool::copy(QObject *parent) {
