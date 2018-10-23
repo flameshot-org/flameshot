@@ -31,7 +31,7 @@ QString PencilTool::name() const {
 }
 
 QString PencilTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString PencilTool::description() const {

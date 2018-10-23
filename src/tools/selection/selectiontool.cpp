@@ -39,7 +39,7 @@ QString SelectionTool::name() const {
 }
 
 QString SelectionTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString SelectionTool::description() const {

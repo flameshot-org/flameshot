@@ -35,7 +35,7 @@ QString RectangleTool::name() const {
 }
 
 QString RectangleTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString RectangleTool::description() const {

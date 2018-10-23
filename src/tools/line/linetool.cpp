@@ -43,7 +43,7 @@ QString LineTool::name() const {
 }
 
 QString LineTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString LineTool::description() const {

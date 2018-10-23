@@ -98,7 +98,7 @@ void UtilityPanel::initInternalPanel() {
 
     QColor bgColor = palette().background().color();
     bgColor.setAlphaF(0.0);
-    m_internalPanel->setStyleSheet(QString("QScrollArea {background-color: %1}")
+    m_internalPanel->setStyleSheet(QStringLiteral("QScrollArea {background-color: %1}")
                                    .arg(bgColor.name()));
     m_internalPanel->hide();
 }

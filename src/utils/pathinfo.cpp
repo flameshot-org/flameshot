@@ -21,11 +21,11 @@
 #include <QDir>
 
 const QString PathInfo::whiteIconPath() {
-    return ":/img/material/white/";
+    return QStringLiteral(":/img/material/white/");
 }
 
 const QString PathInfo::blackIconPath() {
-    return ":/img/material/black/";
+    return QStringLiteral(":/img/material/black/");
 }
 
 QStringList PathInfo::translationsPaths() {
@@ -34,10 +34,10 @@ QStringList PathInfo::translationsPaths() {
     QString trPath = QDir::toNativeSeparators(binaryPath + "/translations") ;
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     return QStringList()
-            << QString(APP_PREFIX) + "/share/flameshot/translations"
+            << QStringLiteral(APP_PREFIX) + "/share/flameshot/translations"
             << trPath
-            << "/usr/share/flameshot/translations"
-            << "/usr/local/share/flameshot/translations";
+            << QStringLiteral("/usr/share/flameshot/translations")
+            << QStringLiteral("/usr/local/share/flameshot/translations");
 #elif defined(Q_OS_WIN)
     return QStringList()
             << trPath;

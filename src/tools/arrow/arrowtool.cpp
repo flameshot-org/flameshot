@@ -81,7 +81,7 @@ QString ArrowTool::name() const {
 }
 
 QString ArrowTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString ArrowTool::description() const {

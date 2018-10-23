@@ -35,7 +35,7 @@ QString BlurTool::name() const {
 }
 
 QString BlurTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString BlurTool::description() const {

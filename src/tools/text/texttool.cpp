@@ -51,7 +51,7 @@ QString TextTool::name() const {
 }
 
 QString TextTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString TextTool::description() const {

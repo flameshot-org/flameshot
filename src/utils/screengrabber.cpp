@@ -47,7 +47,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
             QDBusInterface gnomeInterface(QStringLiteral("org.gnome.Shell"),
                                           QStringLiteral("/org/gnome/Shell/Screenshot"),
                                           QStringLiteral("org.gnome.Shell.Screenshot"));
-            QDBusReply<bool> reply = gnomeInterface.call("Screenshot", false, false, path);
+            QDBusReply<bool> reply = gnomeInterface.call(QStringLiteral("Screenshot"), false, false, path);
             if (reply.value()) {
                 res = QPixmap(path);
                 QFile dbusResult(path);
@@ -61,7 +61,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool &ok) {
             QDBusInterface kwinInterface(QStringLiteral("org.kde.KWin"),
                                          QStringLiteral("/Screenshot"),
                                          QStringLiteral("org.kde.kwin.Screenshot"));
-            QDBusReply<QString> reply = kwinInterface.call("screenshotFullscreen");
+            QDBusReply<QString> reply = kwinInterface.call(QStringLiteral("screenshotFullscreen"));
             res = QPixmap(reply.value());
             if (!res.isNull()) {
                 QFile dbusResult(reply.value());
