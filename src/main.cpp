@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
                 "Screen number", "-1");
 
     // Add checkers
-    auto colorChecker = [&parser](const QString &colorCode) -> bool {
+    auto colorChecker = [](const QString &colorCode) -> bool {
         QColor parsedColor(colorCode);
         return parsedColor.isValid() && parsedColor.alphaF() == 1.0;
     };
@@ -158,13 +158,13 @@ int main(int argc, char *argv[]) {
 
     const QString delayErr = "Invalid delay, it must be higher than 0";
     const QString numberErr = "Invalid screen number, it must be non negative";
-    auto numericChecker = [&parser](const QString &delayValue) -> bool {
+    auto numericChecker = [](const QString &delayValue) -> bool {
         int value = delayValue.toInt();
         return value >= 0;
     };
 
     const QString pathErr = "Invalid path, it must be a real path in the system";
-    auto pathChecker = [&parser, pathErr](const QString &pathValue) -> bool {
+    auto pathChecker = [pathErr](const QString &pathValue) -> bool {
         bool res = QDir(pathValue).exists();
         if (!res) {
             SystemNotification().sendMessage(QObject::tr(pathErr.toLatin1().data()));
@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
     };
 
     const QString booleanErr = "Invalid value, it must be defined as 'true' or 'false'";
-    auto booleanChecker = [&parser](const QString &value) -> bool {
+    auto booleanChecker = [](const QString &value) -> bool {
         return value == "true" || value == "false";
     };
 
