@@ -38,7 +38,7 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
                                        const QString &path)
 {
     QString completePath = FileNameHandler().generateAbsolutePath(path);
-    completePath += ".png";
+    completePath += QLatin1String(".png");
     bool ok = capture.save(completePath);
     QString saveMessage;
 
@@ -66,14 +66,14 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
             break;
         }
 
-        if (!savePath.endsWith(".png")) {
-            savePath += ".png";
+        if (!savePath.endsWith(QLatin1String(".png"))) {
+            savePath += QLatin1String(".png");
         }
 
         ok = capture.save(savePath);
 
         if (ok) {
-            QString pathNoFile = savePath.left(savePath.lastIndexOf("/"));
+            QString pathNoFile = savePath.left(savePath.lastIndexOf(QLatin1String("/")));
             ConfigHandler().setSavePath(pathNoFile);
             QString msg = QObject::tr("Capture saved as ") + savePath;
             SystemNotification().sendMessage(msg);

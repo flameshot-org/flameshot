@@ -35,7 +35,7 @@ QString RedoTool::name() const {
 }
 
 QString RedoTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString RedoTool::description() const {

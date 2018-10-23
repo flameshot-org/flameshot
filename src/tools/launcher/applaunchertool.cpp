@@ -35,7 +35,7 @@ QString AppLauncher::name() const {
 }
 
 QString AppLauncher::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString AppLauncher::description() const {

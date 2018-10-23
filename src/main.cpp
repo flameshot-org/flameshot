@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 
         for (const QString &path: trPaths) {
             bool match = translator.load(QLocale(),
-                                    "Internationalization", "_",
+                                    QStringLiteral("Internationalization"), QStringLiteral("_"),
                                     path);
             if (match) {
                 break;
@@ -60,8 +60,8 @@ int main(int argc, char *argv[]) {
 
         app.installTranslator(&translator);
         app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
-        app.setApplicationName("flameshot");
-        app.setOrganizationName("Dharkael");
+        app.setApplicationName(QStringLiteral("flameshot"));
+        app.setOrganizationName(QStringLiteral("Dharkael"));
 
         auto c = Controller::getInstance();
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -71,8 +71,8 @@ int main(int argc, char *argv[]) {
             SystemNotification().sendMessage(
                         QObject::tr("Unable to connect via DBus"));
         }
-        dbus.registerObject("/", c);
-        dbus.registerService("org.dharkael.Flameshot");
+        dbus.registerObject(QStringLiteral("/"), c);
+        dbus.registerService(QStringLiteral("org.dharkael.Flameshot"));
 #endif
         // Exporting captures must be connected after the dbus interface
         // or the dbus signal gets blocked until we end the exports.
@@ -85,63 +85,63 @@ int main(int argc, char *argv[]) {
      * CLI parsing  |
      * ------------*/
     QCoreApplication app(argc, argv);
-    app.setApplicationName("flameshot");
-    app.setOrganizationName("Dharkael");
+    app.setApplicationName(QStringLiteral("flameshot"));
+    app.setOrganizationName(QStringLiteral("Dharkael"));
     app.setApplicationVersion(qApp->applicationVersion());
     CommandLineParser parser;
     // Add description
     parser.setDescription(
-                "Powerful yet simple to use screenshot software.");
-    parser.setGeneralErrorMessage("See 'flameshot --help'.");
+                QStringLiteral("Powerful yet simple to use screenshot software."));
+    parser.setGeneralErrorMessage(QStringLiteral("See 'flameshot --help'."));
     // Arguments
-    CommandArgument fullArgument("full", "Capture the entire desktop.");
-    CommandArgument guiArgument("gui", "Start a manual capture in GUI mode.");
-    CommandArgument configArgument("config", "Configure flameshot.");
-    CommandArgument screenArgument("screen", "Capture a single screen.");
+    CommandArgument fullArgument(QStringLiteral("full"), QStringLiteral("Capture the entire desktop."));
+    CommandArgument guiArgument(QStringLiteral("gui"), QStringLiteral("Start a manual capture in GUI mode."));
+    CommandArgument configArgument(QStringLiteral("config"), QStringLiteral("Configure flameshot."));
+    CommandArgument screenArgument(QStringLiteral("screen"), QStringLiteral("Capture a single screen."));
 
     // Options
     CommandOption pathOption(
                 {"p", "path"},
-                "Path where the capture will be saved",
-                "path");
+                QStringLiteral("Path where the capture will be saved"),
+                QStringLiteral("path"));
     CommandOption clipboardOption(
                 {"c", "clipboard"},
-                "Save the capture to the clipboard");
+                QStringLiteral("Save the capture to the clipboard"));
     CommandOption delayOption(
                 {"d", "delay"},
-                "Delay time in milliseconds",
-                "milliseconds");
+                QStringLiteral("Delay time in milliseconds"),
+                QStringLiteral("milliseconds"));
     CommandOption filenameOption(
                 {"f", "filename"},
-                "Set the filename pattern",
-                "pattern");
+                QStringLiteral("Set the filename pattern"),
+                QStringLiteral("pattern"));
     CommandOption trayOption(
                 {"t", "trayicon"},
-                "Enable or disable the trayicon",
-                "bool");
+                QStringLiteral("Enable or disable the trayicon"),
+                QStringLiteral("bool"));
     CommandOption autostartOption(
                 {"a", "autostart"},
-                "Enable or disable run at startup",
-                "bool");
+                QStringLiteral("Enable or disable run at startup"),
+                QStringLiteral("bool"));
     CommandOption showHelpOption(
                 {"s", "showhelp"},
-                "Show the help message in the capture mode",
-                "bool");
+                QStringLiteral("Show the help message in the capture mode"),
+                QStringLiteral("bool"));
     CommandOption mainColorOption(
                 {"m", "maincolor"},
-                "Define the main UI color",
-                "color-code");
+                QStringLiteral("Define the main UI color"),
+                QStringLiteral("color-code"));
     CommandOption contrastColorOption(
                 {"k", "contrastcolor"},
-                "Define the contrast UI color",
-                "color-code");
+                QStringLiteral("Define the contrast UI color"),
+                QStringLiteral("color-code"));
     CommandOption rawImageOption(
                 {"r", "raw"},
-                "Print raw PNG capture");
+                QStringLiteral("Print raw PNG capture"));
     CommandOption screenNumberOption(
                 {"n", "number"},
-                "Define the screen to capture,\ndefault: screen containing the cursor",
-                "Screen number", "-1");
+                QStringLiteral("Define the screen to capture,\ndefault: screen containing the cursor"),
+                QStringLiteral("Screen number"), QStringLiteral("-1"));
 
     // Add checkers
     auto colorChecker = [](const QString &colorCode) -> bool {
@@ -156,14 +156,14 @@ int main(int argc, char *argv[]) {
                        "- Named colors like 'blue' or 'red'\n"
                        "You may need to escape the '#' sign as in '\\#FFF'";
 
-    const QString delayErr = "Invalid delay, it must be higher than 0";
-    const QString numberErr = "Invalid screen number, it must be non negative";
+    const QString delayErr = QStringLiteral("Invalid delay, it must be higher than 0");
+    const QString numberErr = QStringLiteral("Invalid screen number, it must be non negative");
     auto numericChecker = [](const QString &delayValue) -> bool {
         int value = delayValue.toInt();
         return value >= 0;
     };
 
-    const QString pathErr = "Invalid path, it must be a real path in the system";
+    const QString pathErr = QStringLiteral("Invalid path, it must be a real path in the system");
     auto pathChecker = [pathErr](const QString &pathValue) -> bool {
         bool res = QDir(pathValue).exists();
         if (!res) {
@@ -172,9 +172,9 @@ int main(int argc, char *argv[]) {
         return res;
     };
 
-    const QString booleanErr = "Invalid value, it must be defined as 'true' or 'false'";
+    const QString booleanErr = QStringLiteral("Invalid value, it must be defined as 'true' or 'false'");
     auto booleanChecker = [](const QString &value) -> bool {
-        return value == "true" || value == "false";
+        return value == QLatin1String("true") || value == QLatin1String("false");
     };
 
     contrastColorOption.addChecker(colorChecker, colorErr);
@@ -220,8 +220,8 @@ int main(int argc, char *argv[]) {
         uint id = req.id();
 
         // Send message
-        QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                           "/", "", "graphicCapture");
+        QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                           QStringLiteral("/"), QLatin1String(""), QStringLiteral("graphicCapture"));
         m << pathValue << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
@@ -248,10 +248,10 @@ int main(int argc, char *argv[]) {
             QTextStream out(stdout);
             out << "Invalid format, set where to save the content with one of "
                 << "the following flags:\n "
-                << pathOption.dashedNames().join(", ") << "\n "
-                << rawImageOption.dashedNames().join(", ") << "\n "
-                << clipboardOption.dashedNames().join(", ") << "\n\n";
-            parser.parse(QStringList() << argv[0] << "full" << "-h");
+                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
+                << rawImageOption.dashedNames().join(QStringLiteral(", ")) << "\n "
+                << clipboardOption.dashedNames().join(QStringLiteral(", ")) << "\n\n";
+            parser.parse(QStringList() << argv[0] << QStringLiteral("full") << QStringLiteral("-h"));
             goto finish;
         }
 
@@ -266,8 +266,8 @@ int main(int argc, char *argv[]) {
         DBusUtils dbusUtils;
 
         // Send message
-        QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "fullScreen");
+        QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                               QStringLiteral("/"), QLatin1String(""), QStringLiteral("fullScreen"));
         m << pathValue << toClipboard << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
@@ -287,7 +287,7 @@ int main(int argc, char *argv[]) {
     }
     else if (parser.isSet(screenArgument)) { // SCREEN
         QString numberStr = parser.value(screenNumberOption);
-        int number = numberStr.startsWith("-") ? -1 : numberStr.toInt();
+        int number = numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
         QString pathValue = parser.value(pathOption);
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
@@ -297,10 +297,10 @@ int main(int argc, char *argv[]) {
             QTextStream out(stdout);
             out << "Invalid format, set where to save the content with one of "
                 << "the following flags:\n "
-                << pathOption.dashedNames().join(", ") << "\n "
-                << rawImageOption.dashedNames().join(", ") << "\n "
-                << clipboardOption.dashedNames().join(", ") << "\n\n";
-            parser.parse(QStringList() << argv[0] << "screen" << "-h");
+                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
+                << rawImageOption.dashedNames().join(QStringLiteral(", ")) << "\n "
+                << clipboardOption.dashedNames().join(QStringLiteral(", ")) << "\n\n";
+            parser.parse(QStringList() << argv[0] << QStringLiteral("screen") << QStringLiteral("-h"));
             goto finish;
         }
 
@@ -316,8 +316,8 @@ int main(int argc, char *argv[]) {
         DBusUtils dbusUtils;
 
         // Send message
-        QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "captureScreen");
+        QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                               QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureScreen"));
         m << number << pathValue << toClipboard << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
@@ -346,11 +346,11 @@ int main(int argc, char *argv[]) {
                             mainColor || contrastColor);
         ConfigHandler config;
         if (autostart) {
-            QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "autostartEnabled");
-            if (parser.value(autostartOption) == "false") {
+            QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                               QStringLiteral("/"), QLatin1String(""), QStringLiteral("autostartEnabled"));
+            if (parser.value(autostartOption) == QLatin1String("false")) {
                 m << false;
-            } else if (parser.value(autostartOption) == "true") {
+            } else if (parser.value(autostartOption) == QLatin1String("true")) {
                 m << true;
             }
             QDBusConnection sessionBus = QDBusConnection::sessionBus();
@@ -370,11 +370,11 @@ int main(int argc, char *argv[]) {
                        .arg(fh.parsedPattern());
         }
         if (tray) {
-            QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "trayIconEnabled");
-            if (parser.value(trayOption) == "false") {
+            QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                               QStringLiteral("/"), QLatin1String(""), QStringLiteral("trayIconEnabled"));
+            if (parser.value(trayOption) == QLatin1String("false")) {
                 m << false;
-            } else if (parser.value(trayOption) == "true") {
+            } else if (parser.value(trayOption) == QLatin1String("true")) {
                 m << true;
             }
             QDBusConnection sessionBus = QDBusConnection::sessionBus();
@@ -385,9 +385,9 @@ int main(int argc, char *argv[]) {
             sessionBus.call(m);
         }
         if (help) {
-            if (parser.value(showHelpOption) == "false") {
+            if (parser.value(showHelpOption) == QLatin1String("false")) {
                 config.setShowHelp(false);
-            } else if (parser.value(showHelpOption) == "true") {
+            } else if (parser.value(showHelpOption) == QLatin1String("true")) {
                 config.setShowHelp(true);
             }
         }
@@ -404,8 +404,8 @@ int main(int argc, char *argv[]) {
 
         // Open gui when no options
         if (!someFlagSet) {
-            QDBusMessage m = QDBusMessage::createMethodCall("org.dharkael.Flameshot",
-                                               "/", "", "openConfig");
+            QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                               QStringLiteral("/"), QLatin1String(""), QStringLiteral("openConfig"));
             QDBusConnection sessionBus = QDBusConnection::sessionBus();
             if (!sessionBus.isConnected()) {
                 SystemNotification().sendMessage(

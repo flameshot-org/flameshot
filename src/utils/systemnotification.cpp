@@ -47,7 +47,7 @@ void SystemNotification::sendMessage(
          << QStringList()                //actions
          << QVariantMap()                //hints
          << timeout;                     //timeout
-    m_interface->callWithArgumentList(QDBus::AutoDetect, "Notify", args);
+    m_interface->callWithArgumentList(QDBus::AutoDetect, QStringLiteral("Notify"), args);
 #else
     auto c = Controller::getInstance();
     c->sendTrayNotification(text, title, timeout);

@@ -36,7 +36,7 @@ QString ImgurUploaderTool::name() const {
 }
 
 QString ImgurUploaderTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString ImgurUploaderTool::description() const {

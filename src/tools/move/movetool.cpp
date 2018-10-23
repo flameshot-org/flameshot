@@ -35,7 +35,7 @@ QString MoveTool::name() const {
 }
 
 QString MoveTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString MoveTool::description() const {

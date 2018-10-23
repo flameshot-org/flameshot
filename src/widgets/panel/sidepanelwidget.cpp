@@ -78,7 +78,7 @@ SidePanelWidget::SidePanelWidget(QPixmap *p, QWidget *parent) :
     QString modifier = isDark ? PathInfo::whiteIconPath() :
                                 PathInfo::blackIconPath();
     QIcon grabIcon(modifier + "colorize.svg");
-    m_colorGrabButton = new QPushButton(grabIcon, "");
+    m_colorGrabButton = new QPushButton(grabIcon, QLatin1String(""));
     updateGrabButton(false);
     connect(m_colorGrabButton, &QPushButton::pressed,
             this, &SidePanelWidget::colorGrabberActivated);
@@ -96,7 +96,7 @@ SidePanelWidget::SidePanelWidget(QPixmap *p, QWidget *parent) :
 void SidePanelWidget::updateColor(const QColor &c) {
     m_color = c;
     m_colorLabel->setStyleSheet(
-                QString("QLabel { background-color : %1; }").arg(c.name()));
+                QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
     m_colorWheel->setColor(m_color);
 }
 
@@ -109,7 +109,7 @@ void SidePanelWidget::updateThickness(const int &t)
 void SidePanelWidget::updateColorNoWheel(const QColor &c) {
     m_color = c;
     m_colorLabel->setStyleSheet(
-                QString("QLabel { background-color : %1; }").arg(c.name()));
+                QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
 }
 
 void SidePanelWidget::updateCurrentThickness()
