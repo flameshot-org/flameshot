@@ -36,7 +36,7 @@ QString CopyTool::name() const {
 }
 
 QString CopyTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString CopyTool::description() const {

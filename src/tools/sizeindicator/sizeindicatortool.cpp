@@ -35,7 +35,7 @@ QString SizeIndicatorTool::name() const {
 }
 
 QString SizeIndicatorTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString SizeIndicatorTool::description() const {

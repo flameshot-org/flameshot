@@ -99,7 +99,7 @@ void GeneneralConf::importConfiguration() {
 
 void GeneneralConf::exportFileConfiguration() {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                               "flameshot.conf");
+                               QStringLiteral("flameshot.conf"));
 
     // Cancel button
     if (fileName.isNull()) {

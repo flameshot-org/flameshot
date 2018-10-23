@@ -27,13 +27,13 @@ DBusUtils::DBusUtils(QObject *parent) : QObject(parent) {
 void DBusUtils::connectPrintCapture(QDBusConnection &session, uint id) {
     m_id = id;
     // captureTaken
-    session.connect("org.dharkael.Flameshot",
-                       "/", "", "captureTaken",
+    session.connect(QStringLiteral("org.dharkael.Flameshot"),
+                       QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureTaken"),
                        this,
                        SLOT(captureTaken(uint, QByteArray)));
     // captureFailed
-    session.connect("org.dharkael.Flameshot",
-                       "/", "", "captureFailed",
+    session.connect(QStringLiteral("org.dharkael.Flameshot"),
+                       QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureFailed"),
                        this,
                        SLOT(captureFailed(uint)));
 }

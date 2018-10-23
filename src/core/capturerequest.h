@@ -37,7 +37,7 @@ public:
 
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
-                   const QString &path = "",
+                   const QString &path = QLatin1String(""),
                    const QVariant &data = QVariant(),
                    ExportTask tasks = NO_TASK);
 

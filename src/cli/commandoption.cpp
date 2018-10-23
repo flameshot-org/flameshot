@@ -70,7 +70,7 @@ QString CommandOption::valueName() const {
 
 void CommandOption::setValue(const QString &value) {
     if (m_valueName.isEmpty()) {
-        m_valueName = "value";
+        m_valueName = QLatin1String("value");
     }
     m_value = value;
 }

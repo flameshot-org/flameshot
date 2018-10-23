@@ -43,7 +43,7 @@ QString MarkerTool::name() const {
 }
 
 QString MarkerTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString MarkerTool::description() const {

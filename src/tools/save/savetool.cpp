@@ -36,7 +36,7 @@ QString SaveTool::name() const {
 }
 
 QString SaveTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString SaveTool::description() const {

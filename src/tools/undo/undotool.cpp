@@ -35,7 +35,7 @@ QString UndoTool::name() const {
 }
 
 QString UndoTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString UndoTool::description() const {

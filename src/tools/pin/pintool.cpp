@@ -35,7 +35,7 @@ QString PinTool::name() const {
 }
 
 QString PinTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString PinTool::description() const {

@@ -35,7 +35,7 @@ QString CircleTool::name() const {
 }
 
 QString CircleTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString CircleTool::description() const {

@@ -129,7 +129,7 @@ void CaptureButton::animatedShow() {
     if(!isVisible()) {
         show();
         m_emergeAnimation->start();
-        connect(m_emergeAnimation, &QPropertyAnimation::finished, this, [this](){
+        connect(m_emergeAnimation, &QPropertyAnimation::finished, this, [](){
         });
     }
 }

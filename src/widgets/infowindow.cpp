@@ -121,7 +121,7 @@ void InfoWindow::initLabels() {
     QLabel *licenseTitleLabel = new QLabel(tr("<u><b>License</b></u>"), this);
     licenseTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(licenseTitleLabel);
-    QLabel *licenseLabel = new QLabel("GPLv3+", this);
+    QLabel *licenseLabel = new QLabel(QStringLiteral("GPLv3+"), this);
     licenseLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(licenseLabel);
     m_layout->addStretch();
@@ -129,7 +129,7 @@ void InfoWindow::initLabels() {
     QLabel *versionTitleLabel = new QLabel(tr("<u><b>Version</b></u>"), this);
     versionTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(versionTitleLabel);
-    QString versionMsg = "Flameshot " + QString(APP_VERSION) + "\nCompiled with Qt "
+    QString versionMsg = "Flameshot " + QStringLiteral(APP_VERSION) + "\nCompiled with Qt "
             + QT_VERSION_STR;
     QLabel *versionLabel = new QLabel(versionMsg, this);
     versionLabel->setAlignment(Qt::AlignHCenter);

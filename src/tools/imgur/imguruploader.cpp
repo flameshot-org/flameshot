@@ -72,10 +72,10 @@ void ImgurUploader::handleReply(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
-        QJsonObject data = json["data"].toObject();
-        m_imageURL.setUrl(data["link"].toString());
-        m_deleteImageURL.setUrl(QString("https://imgur.com/delete/%1").arg(
-                                    data["deletehash"].toString()));
+        QJsonObject data = json[QStringLiteral("data")].toObject();
+        m_imageURL.setUrl(data[QStringLiteral("link")].toString());
+        m_deleteImageURL.setUrl(QStringLiteral("https://imgur.com/delete/%1").arg(
+                                    data[QStringLiteral("deletehash")].toString()));
         onUploadOk();
     } else {
         m_infoLabel->setText(reply->errorString());
@@ -101,16 +101,16 @@ void ImgurUploader::upload() {
     m_pixmap.save(&buffer, "PNG");
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("title", "flameshot_screenshot");
+    urlQuery.addQueryItem(QStringLiteral("title"), QStringLiteral("flameshot_screenshot"));
     QString description = FileNameHandler().parsedPattern();
-    urlQuery.addQueryItem("description", description);
+    urlQuery.addQueryItem(QStringLiteral("description"), description);
 
-    QUrl url("https://api.imgur.com/3/image");
+    QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
     url.setQuery(urlQuery);
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                       "application/application/x-www-form-urlencoded");
-    request.setRawHeader("Authorization", QString("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
+    request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
 
     m_NetworkAM->post(request, byteArray);
 }

@@ -125,7 +125,7 @@ void UIcolorEditor::initButtons() {
     h2->addWidget(frame2);
     frame2->setFixedSize(frameSize, frameSize);
     m_labelContrast = new ClickableLabel(tr("Contrast Color"), this);
-    m_labelContrast->setStyleSheet("color : gray");
+    m_labelContrast->setStyleSheet(QStringLiteral("color : gray"));
     h2->addWidget(m_labelContrast);
     m_vLayout->addLayout(h2);
 
@@ -149,7 +149,7 @@ void UIcolorEditor::changeLastButton(CaptureButton *b) {
     if (m_lastButtonPressed != b) {
         m_lastButtonPressed = b;
 
-        QString offStyle("QLabel { color : gray; }");
+        QString offStyle(QStringLiteral("QLabel { color : gray; }"));
 
         if (b == m_buttonMainColor) {
             m_colorWheel->setColor(m_uiColor);
