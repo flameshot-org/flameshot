@@ -40,6 +40,8 @@
 #include <QTimer>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMap>
+#include <QVariant>
 
 ImgurUploader::ImgurUploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
@@ -96,6 +98,8 @@ void ImgurUploader::startDrag() {
 }
 
 void ImgurUploader::upload() {
+    ImgurConfigHandler config;
+    QMap<QString, QVariant> token = config.getToken();
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     m_pixmap.save(&buffer, "PNG");
@@ -105,12 +109,26 @@ void ImgurUploader::upload() {
     QString description = FileNameHandler().parsedPattern();
     urlQuery.addQueryItem(QStringLiteral("description"), description);
 
+    if (config.isAuthorized() && !config.getSetting(QStringLiteral("anonymous_upload")).toBool()) {
+        urlQuery.addQueryItem(QStringLiteral("album"), config.getSetting(QStringLiteral("album"), "").toString());
+    }
+
     QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
     url.setQuery(urlQuery);
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                       "application/application/x-www-form-urlencoded");
-    request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
+
+    // Use bundled client_id by default
+    QByteArray authorization = QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8();
+
+    if (config.isAuthorized() && config.getSetting(QStringLiteral("anonymous_upload")).toBool()) {
+        authorization = QStringLiteral("Client-ID %1").arg(config.getSetting(QStringLiteral("Api/client_id"), "").toString()).toUtf8();
+    } else if (config.isAuthorized()) {
+        authorization = QStringLiteral("Bearer %1").arg(token.value(QStringLiteral("access_token"), "").toString()).toUtf8();
+    }
+
+    request.setRawHeader("Authorization", authorization);
 
     m_NetworkAM->post(request, byteArray);
 }

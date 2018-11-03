@@ -20,6 +20,8 @@
 #include <QWidget>
 #include <QUrl>
 
+#include "src/utils/imgurconfighandler.h"
+
 class QNetworkReply;
 class QNetworkAccessManager;
 class QHBoxLayout;

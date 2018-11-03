@@ -17,29 +17,22 @@
 
 #pragma once
 
-#include <QTabWidget>
+#include <QApplication>
+#include <QSettings>
+#include <QMap>
+#include <QVariant>
 
-class FileNameEditor;
-class GeneneralConf;
-class QFileSystemWatcher;
-class VisualsEditor;
-class ImgurConf;
-
-class ConfigWindow : public QTabWidget {
-    Q_OBJECT
+class ImgurConfigHandler
+{
 public:
-    explicit ConfigWindow(QWidget *parent = nullptr);
-
-signals:
-    void updateChildren();
-
-protected:
-    void keyPressEvent(QKeyEvent *);
+    explicit ImgurConfigHandler();
+    bool isAuthorized() const;
+    QMap<QString, QVariant> getToken() const;
+    void setApiCredentials(const QString &clientId, const QString &clientSecret);
+    void setToken(QMap<QString, QVariant> &token);
+    void setSetting(const QString &key, const QVariant &value = QVariant());
+    QVariant getSetting(const QString &key, const QVariant &defaultValue = QVariant()) const;
 
 private:
-    FileNameEditor *m_filenameEditor;
-    GeneneralConf *m_generalConfig;
-    VisualsEditor *m_visuals;
-    QFileSystemWatcher *m_configWatcher;
-    ImgurConf *m_imgurConfig;
+    QSettings *m_imgurConfig;
 };

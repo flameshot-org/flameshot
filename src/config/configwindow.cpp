@@ -25,6 +25,7 @@
 #include "src/config/strftimechooserwidget.h"
 #include "src/config/visualseditor.h"
 #include "src/utils/globalvalues.h"
+#include "src/config/imgurconf.h"
 #include <QIcon>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -71,6 +72,11 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     m_generalConfig = new GeneneralConf();
     addTab(m_generalConfig, QIcon(modifier + "config.svg"),
            tr("General"));
+
+    // imgur
+    m_imgurConfig = new ImgurConf();
+    addTab(m_imgurConfig, QIcon(modifier + "cloud-upload.svg"),
+           tr("Imgur"));
 
     // connect update sigslots
     connect(this, &ConfigWindow::updateChildren,

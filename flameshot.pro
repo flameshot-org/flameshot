@@ -141,7 +141,9 @@ SOURCES += src/main.cpp \
     src/tools/text/textwidget.cpp \
     src/core/capturerequest.cpp \
     src/tools/text/textconfig.cpp \
-    src/widgets/panel/sidepanelwidget.cpp
+    src/widgets/panel/sidepanelwidget.cpp \
+    src/config/imgurconf.cpp \
+    src/utils/imgurconfighandler.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -213,7 +215,9 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/text/textwidget.h \
     src/core/capturerequest.h \
     src/tools/text/textconfig.h \
-    src/widgets/panel/sidepanelwidget.h
+    src/widgets/panel/sidepanelwidget.h \
+    src/config/imgurconf.h \
+    src/utils/imgurconfighandler.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \
