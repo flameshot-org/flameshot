@@ -220,7 +220,7 @@ There are packages available for a few distros:
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
-- [Void Linux](https://github.com/voidlinux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
+- [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - Fedora: `dnf install flameshot`
 
