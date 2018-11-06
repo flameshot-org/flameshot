@@ -54,10 +54,12 @@ signals:
     void settingsChanged();
 
 public slots:
-    void authorize();
+    void authorize(bool force = false);
     void deauthorize();
-    void updateImgurSettings();
-    void updateComponents();
+    void refreshToken();
+
+private slots:
+    void handleReply(QNetworkReply *reply);
 
 private:
     ImgurConfigHandler config;
@@ -73,5 +75,7 @@ private:
     QPushButton *m_saveButton;
 
     void initWidgets();
+    void updateImgurSettings();
+    void updateComponents();
     void extractToken(QString &token_url);
 };

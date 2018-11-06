@@ -71,6 +71,7 @@ ImgurUploader::ImgurUploader(const QPixmap &capture, QWidget *parent) :
 
 void ImgurUploader::handleReply(QNetworkReply *reply) {
     m_spinner->deleteLater();
+
     if (reply->error() == QNetworkReply::NoError) {
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
@@ -81,7 +82,29 @@ void ImgurUploader::handleReply(QNetworkReply *reply) {
         onUploadOk();
     } else {
         m_infoLabel->setText(reply->errorString());
+        int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        ImgurConf *imgurConfWidget = new ImgurConf(this);
+
+        switch(status) {
+            case 401: // Probably unauthorized
+                emit imgurConfWidget->authorize(true);
+            break;
+
+            case 403: // Probably invalid token
+                emit imgurConfWidget->refreshToken();
+            break;
+
+            case 429: // Rate limit
+                QDateTime wait;
+                wait.setSecsSinceEpoch(reply->rawHeader("X-RateLimit-UserReset").toInt());
+                m_infoLabel->setText(
+                    tr("API rate limit reached, you'll need to wait %1 seconds to try again.")
+                        .arg(QDateTime::currentDateTimeUtc().secsTo(wait))
+                );
+            break;
+        }
     }
+
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
 
@@ -123,8 +146,10 @@ void ImgurUploader::upload() {
     QByteArray authorization = QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8();
 
     if (config.isAuthorized() && config.getSetting(QStringLiteral("anonymous_upload")).toBool()) {
+        // Anonymous upload of authorized application
         authorization = QStringLiteral("Client-ID %1").arg(config.getSetting(QStringLiteral("Api/client_id"), "").toString()).toUtf8();
     } else if (config.isAuthorized()) {
+        // Upload image to user account
         authorization = QStringLiteral("Bearer %1").arg(token.value(QStringLiteral("access_token"), "").toString()).toUtf8();
     }
 

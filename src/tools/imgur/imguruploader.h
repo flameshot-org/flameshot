@@ -21,6 +21,7 @@
 #include <QUrl>
 
 #include "src/utils/imgurconfighandler.h"
+#include "src/config/imgurconf.h"
 
 class QNetworkReply;
 class QNetworkAccessManager;
