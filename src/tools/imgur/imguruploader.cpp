@@ -96,7 +96,11 @@ void ImgurUploader::handleReply(QNetworkReply *reply) {
 
             case 429: // Rate limit
                 QDateTime wait;
+#if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
+                wait.setTime_t(reply->rawHeader("X-RateLimit-UserReset").toInt());
+#else
                 wait.setSecsSinceEpoch(reply->rawHeader("X-RateLimit-UserReset").toInt());
+#endif
                 m_infoLabel->setText(
                     tr("API rate limit reached, you'll need to wait %1 seconds to try again.")
                         .arg(QDateTime::currentDateTimeUtc().secsTo(wait))
