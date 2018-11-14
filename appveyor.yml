@@ -62,7 +62,7 @@ after_build:
     - if "%PLATFORM%" EQU "x86" (xcopy "openssl-utils.git\win32\*.dll" "distrib\flameshot")
     - cd distrib
     - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
-    - curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
+    - appveyor-retry curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
 
 
 # artifacts:
