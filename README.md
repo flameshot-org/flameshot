@@ -147,16 +147,17 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
 
 These shortcuts are available in GUI mode:
 
-|  Keys                                                                     |  Description                         |
-|---                                                                        |---                                   |
-| <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                   |
-| <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                 |
-| <kbd>Esc</kbd>                                                            | Quit capture                         |
-| <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                    |
-| <kbd>Ctrl</kbd> + <kbd>S</kbd>                                            | Save selection as a file             |
-| <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                            | Undo the last modification           |
-| Right Click                                                               | Show color picker                    |
-| Mouse Wheel                                                               | Change the tool's thickness          |
+|  Keys                                                                     |  Description                                                   |
+|---                                                                        |---                                                             |
+| <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                                             |
+| <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                                           |
+| <kbd>Esc</kbd>                                                            | Quit capture                                                   |
+| <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                                              |
+| <kbd>Ctrl</kbd> + <kbd>S</kbd>                                            | Save selection as a file                                       |
+| <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                            | Undo the last modification                                     |
+| <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool |
+| Right Click                                                               | Show color picker                                              |
+| Mouse Wheel                                                               | Change the tool's thickness                                    |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
 
