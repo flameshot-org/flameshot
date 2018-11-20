@@ -88,7 +88,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите область с помощью мыши или нажмите Esc чтобы выйти.
+Нажмите Enter чтобы захватить экран.
+Нажмите правую кнопку мыши чтобы показать выбор цвета.
+Используйте колесо мыши чтобы выбрать толщину текущего инструмента.
+Нажмите Пробел чтобы открыть боковую панель.</translation>
     </message>
 </context>
 <context>
@@ -109,17 +113,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Активный цвет:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите Esc для отмены</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Захватить цвет с экрана</translation>
     </message>
 </context>
 <context>
@@ -150,7 +154,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="174"/>
@@ -178,7 +182,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать выделение в буфер обмена</translation>
     </message>
 </context>
 <context>
@@ -368,7 +372,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить изображение</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
@@ -550,12 +554,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Булавка</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикрепить изображение к рабочему столу</translation>
     </message>
 </context>
 <context>
@@ -574,7 +578,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить снимок как в буфер обмена</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
@@ -619,12 +623,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторить</translation>
     </message>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="42"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторить последнее изменение</translation>
     </message>
 </context>
 <context>
@@ -645,7 +649,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/screengrabber.cpp" line="70"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Не удалось захватить экран</translation>
+        <translation>Не удалось захватить экран</translation>
     </message>
 </context>
 <context>
@@ -744,12 +748,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Время (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>Время (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -787,7 +791,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot Инфо</translation>
     </message>
 </context>
 <context>
@@ -795,22 +799,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="49"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>Зачеркнутый</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Подчеркнутый</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Полужирный</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Курсив</translation>
     </message>
 </context>
 <context>
@@ -818,12 +822,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить текст на снимок</translation>
     </message>
 </context>
 <context>
