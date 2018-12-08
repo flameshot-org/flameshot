@@ -26,10 +26,6 @@ env:
 matrix:
     include:
         - os: linux
-          # No docker environment, just for CI build & test
-          # ubuntu xenial;  default Qt version is 5.6.1
-          env: OS=ubuntu DIST=xenial EXTEN=other
-        - os: linux
           # 27
           env: OS=fedora DIST=27 EXTEN=rpm
           services: docker
@@ -57,6 +53,10 @@ matrix:
           # 9
           env: OS=debian DIST=stretch EXTEN=deb
           services: docker
+        - os: linux
+          # No docker environment, just for CI build & test
+          # ubuntu xenial;  default Qt version is 5.6.1
+          env: OS=ubuntu DIST=xenial EXTEN=other
 #       - os: osx
 #         compiler: clang
 #         osx_image: xcode9.2
