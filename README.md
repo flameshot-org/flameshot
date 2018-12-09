@@ -25,8 +25,13 @@
     <a href="https://github.com/lupoDharkael/flameshot/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/lupoDharkael/flameshot.svg?style=flat-square" alt="License" />
     </a>
+    <a href="https://github.com/flameshotapp/flameshotapp.github.io">
+      <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
+    </a>
   </p>
 </div>
+
+
 
 ## Preview
 
@@ -224,6 +229,8 @@ There are packages available for a few distros:
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - Fedora: `dnf install flameshot`
+- [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
+- Besides, generic packages availabe via [opensuse software  repertory](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
 
 ## Compilation
 

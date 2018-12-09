@@ -48,8 +48,8 @@ cd ..
 hdiutil create -srcfolder ./Flameshot -format UDBZ ./flameshot.dmg
 mv flameshot.dmg flameshot_X64_${VERSION}.dmg
 mv flameshot_X64_${VERSION}.dmg "${project_dir}"/dist/flameshot_X64_$VERSION.dmg
-curl \
+TEMP_DOWNLOAD_URL=$(curl \
 	--upload-file \
 	flameshot_X64_$VERSION.dmg \
-	"https://transfer.sh/flameshot_X64_$VERSION.dmg"
+	"https://transfer.sh/flameshot_X64_$VERSION.dmg")
 cd ..
