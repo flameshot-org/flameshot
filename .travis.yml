@@ -1,4 +1,4 @@
-dist: trusty
+dist: xenial
 sudo: required
 
 language: cpp
@@ -13,37 +13,36 @@ cache:
  
 env:
     global:
-      # Environment variables for packpack
+      # Environment variables for 
       - PRODUCT=flameshot
       - VERSION=0.6.0
       - RELEASE=1
       - ARCH=x86_64
-#     - DOCKER_REPO=packpack/packpack
-#     - DOCKER_REPO=vitzy/packpack
+      # Dockerfile from https://github.com/flameshotapp/flameshot-docker-images
       - DOCKER_REPO=vitzy/flameshot
 
-#The actual list of distribution is available on
-#https://hub.docker.com/r/packpack/packpack/tags/
-#https://hub.docker.com/r/vitzy/packpack/tags/
-#https://hub.docker.com/r/vitzy/flameshot/tags/
+# The actual list of distribution is available on
+# https://hub.docker.com/r/vitzy/flameshot/tags/
 matrix:
     include:
         - os: linux
+          # 27
           env: OS=fedora DIST=27 EXTEN=rpm
           services: docker
         - os: linux
+          # 28
           env: OS=fedora DIST=28 EXTEN=rpm
           services: docker
         - os: linux
-          # trusty: only for build & test & AppImage
-          # 14.04 LTS;  Qt version is 5.2.1, flameshot not support
-          env: OS=ubuntu DIST=trusty EXTEN=AppImage
+          # 29
+          env: OS=fedora DIST=29 EXTEN=rpm
+          services: docker
         - os: linux
           # 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
           services: docker
         - os: linux
-          # 18.04
+          # 18.04 LTS
           env: OS=ubuntu DIST=bionic EXTEN=deb
           services: docker
         - os: linux
@@ -54,26 +53,30 @@ matrix:
           # 9
           env: OS=debian DIST=stretch EXTEN=deb
           services: docker
+        - os: linux
+          # No docker environment, just for CI build & test
+          # ubuntu xenial;  default Qt version is 5.6.1
+          env: OS=ubuntu DIST=xenial EXTEN=other
 #       - os: osx
 #         compiler: clang
 #         osx_image: xcode9.2
 
 before_install:
-  - chmod +x travis/*.sh
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_before_install.sh; fi
+  - chmod +x .travis/*.sh
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_before_install.sh; fi
 
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_install.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_install.sh; fi
 
 script:
 # - git submodule update --init --recursive
 # - git describe --long
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_script.sh; fi
-# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then source travis/osx_script.sh; fi
-  - pwd && ls
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_script.sh; fi
+# - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then source .travis/osx_script.sh; fi
 
 after_success:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source travis/linux_after_success.sh; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_after_success.sh; fi
+  - echo "Download URL is $TEMP_DOWNLOAD_URL ."
 
 # deploy:
 #    # Deploy packages to Github Release
