@@ -13,7 +13,7 @@ cache:
  
 env:
     global:
-      # Environment variables for 
+      # Environment variables for packaging
       - PRODUCT=flameshot
       - VERSION=0.6.0
       - RELEASE=1
@@ -25,10 +25,6 @@ env:
 # https://hub.docker.com/r/vitzy/flameshot/tags/
 matrix:
     include:
-        - os: linux
-          # 27
-          env: OS=fedora DIST=27 EXTEN=rpm
-          services: docker
         - os: linux
           # 28
           env: OS=fedora DIST=28 EXTEN=rpm
