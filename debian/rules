@@ -21,7 +21,7 @@ export QT_SELECT := 5
 override_dh_auto_configure:
 	# The existence of an empty .git directory triggers syncqt.
 	mkdir .git || true
-	qmake CONFIG+=packaging CONFIG-=debug CONFIG+=release
+	dh_auto_configure -- CONFIG+=packaging CONFIG-=debug CONFIG+=release
 
 # dh_make generated override targets
 # This is example for Cmake (See https://bugs.debian.org/641051 )
