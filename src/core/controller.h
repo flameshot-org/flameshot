@@ -48,7 +48,7 @@ public:
     void updateRecentScreenshots();
 
 signals:
-    void captureTaken(uint id, QPixmap p);
+    void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
 
 public slots:
@@ -74,7 +74,7 @@ private slots:
                             const QString& forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
 
-    void handleCaptureTaken(uint id, QPixmap p);
+    void handleCaptureTaken(uint id, QPixmap p, QRect selection);
     void handleCaptureFailed(uint id);
 
 private:

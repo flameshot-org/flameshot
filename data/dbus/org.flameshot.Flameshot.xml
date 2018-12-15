@@ -95,12 +95,14 @@
         captureTaken:
         @id: identificator of the call.
         @rawImage: raw image in PNG format.
+        @selection: QRect selection geometry.
 
         Successful capture signal returning the image.
     -->
     <signal name="captureTaken">
       <arg name="id" type="u" direction="out"/>
       <arg name="rawImage" type="ay" direction="out"/>
+      <arg name="selection" type="(iiii)" direction="out"/>
     </signal>
 
     <!--
@@ -112,5 +114,6 @@
     <signal name="captureFailed">
       <arg name="id" type="u" direction="out"/>
     </signal>
+
   </interface>
 </node>

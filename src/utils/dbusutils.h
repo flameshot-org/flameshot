@@ -29,9 +29,11 @@ public:
 
     void connectPrintCapture(QDBusConnection& session, uint id);
     void checkDBusConnection(const QDBusConnection& connection);
+    void connectSelectionCapture(QDBusConnection& session, uint id);
 
 public slots:
-    void captureTaken(uint id, QByteArray rawImage);
+    void selectionTaken(uint id, QByteArray rawImage, QRect selection);
+    void captureTaken(uint id, QByteArray rawImage, QRect selection);
     void captureFailed(uint id);
 
 private:

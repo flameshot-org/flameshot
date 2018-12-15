@@ -63,7 +63,7 @@ public slots:
     void deleteToolwidgetOrClose();
 
 signals:
-    void captureTaken(uint id, QPixmap p);
+    void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
     void thicknessChanged(const int thickness);
