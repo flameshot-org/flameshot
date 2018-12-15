@@ -160,7 +160,7 @@ CaptureWidget::CaptureWidget(const uint id,
 CaptureWidget::~CaptureWidget()
 {
     if (m_captureDone) {
-        emit captureTaken(m_id, this->pixmap());
+        emit captureTaken(m_id, this->pixmap(), m_context.selection);
     } else {
         emit captureFailed(m_id);
     }
