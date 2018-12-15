@@ -157,7 +157,8 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     }
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
-        emit captureTaken(id, p);
+        QRect selection; // `flameshot screen` does not support --selection
+        emit captureTaken(id, p, selection);
     } else {
         emit captureFailed(id);
     }
@@ -276,13 +277,14 @@ void Controller::startFullscreenCapture(const uint id)
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     if (ok) {
-        emit captureTaken(id, p);
+        QRect selection; // `flameshot full` does not support --selection
+        emit captureTaken(id, p, selection);
     } else {
         emit captureFailed(id);
     }
 }
 
-void Controller::handleCaptureTaken(uint id, QPixmap p)
+void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
 {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {
