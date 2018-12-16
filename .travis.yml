@@ -26,13 +26,19 @@ env:
 matrix:
     include:
         - os: linux
+          # 27
+          env: OS=fedora DIST=27 EXTEN=rpm
+          services: docker
+        - os: linux
           # 28
           env: OS=fedora DIST=28 EXTEN=rpm
           services: docker
-        - os: linux
-          # 29
-          env: OS=fedora DIST=29 EXTEN=rpm
-          services: docker
+        # cups-libs-2.2.8-6 cannot be found, correct is cups-libs-2.2.8-7,
+        # maybe it was caused by upstream docker images, so disable temporarily.
+        # - os: linux
+        #   # 29
+        #   env: OS=fedora DIST=29 EXTEN=rpm
+        #   services: docker
         - os: linux
           # 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
