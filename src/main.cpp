@@ -235,7 +235,7 @@ int main(int argc, char *argv[]) {
                              &QCoreApplication::quit);
             t.start();
             // wait
-            app.exec();
+            return app.exec();
         }
     }
     else if (parser.isSet(fullArgument)) { // FULL
@@ -282,7 +282,7 @@ int main(int argc, char *argv[]) {
                              &QCoreApplication::quit);
             t.start();
             // wait
-            app.exec();
+            return app.exec();
         }
     }
     else if (parser.isSet(screenArgument)) { // SCREEN
@@ -332,7 +332,7 @@ int main(int argc, char *argv[]) {
                              &QCoreApplication::quit);
             t.start();
             // wait
-            app.exec();
+            return app.exec();
         }
     }
     else if (parser.isSet(configArgument)) { // CONFIG

@@ -41,7 +41,7 @@ void DBusUtils::connectPrintCapture(QDBusConnection &session, uint id) {
 void DBusUtils::checkDBusConnection(const QDBusConnection &connection) {
     if (!connection.isConnected()) {
         SystemNotification().sendMessage(tr("Unable to connect via DBus"));
-        qApp->exit();
+        qApp->exit(1);
     }
 }
 
@@ -58,6 +58,6 @@ void DBusUtils::captureTaken(uint id, QByteArray rawImage) {
 void DBusUtils::captureFailed(uint id) {
     if (m_id == id) {
         QTextStream(stdout) << "screenshot aborted\n";
-        qApp->exit();
+        qApp->exit(1);
     }
 }
