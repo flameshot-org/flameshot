@@ -13,7 +13,7 @@ cache:
  
 env:
     global:
-      # Environment variables for 
+      # Environment variables for packaging
       - PRODUCT=flameshot
       - VERSION=0.6.0
       - RELEASE=1
@@ -33,10 +33,12 @@ matrix:
           # 28
           env: OS=fedora DIST=28 EXTEN=rpm
           services: docker
-        - os: linux
-          # 29
-          env: OS=fedora DIST=29 EXTEN=rpm
-          services: docker
+        # cups-libs-2.2.8-6 cannot be found, correct is cups-libs-2.2.8-7,
+        # maybe it was caused by upstream docker images, so disable temporarily.
+        # - os: linux
+        #   # 29
+        #   env: OS=fedora DIST=29 EXTEN=rpm
+        #   services: docker
         - os: linux
           # 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
