@@ -230,7 +230,14 @@ There are packages available for a few distros:
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
-- Besides, generic packages available via [opensuse software  repertory](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
+- Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
+
+<details>
+  <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
+  <a href="https://repology.org/metapackage/flameshot/versions">
+    <img src="https://repology.org/badge/vertical-allrepos/flameshot.svg" alt="Packaging status">
+  </a>
+</details>
 
 ## Compilation
 
