@@ -88,7 +88,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner une zone avec la souris ou appuyer sur Echap pour quitter
+Appuyer sur Entrée pour capturer l'écran
+Effectuer un clic droit pour afficher le sélecteur de couleurs.
+Utiliser la molette de la souris pour changer l'épaisseur de l'outil.
+Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     </message>
 </context>
 <context>
@@ -109,17 +113,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur actuelle:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
         <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Appuyer sur Echap pour annuler</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisir la couleur</translation>
     </message>
 </context>
 <context>
@@ -178,7 +182,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier la sélection dans le presse-papier</translation>
     </message>
 </context>
 <context>
@@ -624,7 +628,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="42"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Refaire la prochaine modification</translation>
     </message>
 </context>
 <context>
@@ -645,7 +649,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/screengrabber.cpp" line="70"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Imposible de capturer l&apos;écran</translation>
+        <translation>Imposible de capturer l&apos;écran</translation>
     </message>
 </context>
 <context>
@@ -744,12 +748,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -795,22 +799,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="49"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayer</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Souligner</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Gras</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Italique</translation>
     </message>
 </context>
 <context>
@@ -818,12 +822,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter du texte à la capture</translation>
     </message>
 </context>
 <context>
