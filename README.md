@@ -208,7 +208,7 @@ Steps for using the configuration:
 
 - Experimental Gnome Wayland and Plasma Wayland support.
 
-- If you are using Gnome you need to install the [TopIcons](https://extensions.gnome.org/extension/1031/topicons/) extension in order to see the systemtray icon.
+- If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the systemtray icon.
 
 - In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
 
