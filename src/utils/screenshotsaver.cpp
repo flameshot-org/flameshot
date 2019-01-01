@@ -60,14 +60,11 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
         QString savePath = QFileDialog::getSaveFileName(
                     nullptr,
                     QString(),
-                    FileNameHandler().absoluteSavePath() + ".png");
+                    FileNameHandler().absoluteSavePath() + ".png",
+					QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)"));
 
         if (savePath.isNull()) {
             break;
-        }
-
-        if (!savePath.endsWith(QLatin1String(".png"))) {
-            savePath += QLatin1String(".png");
         }
 
         ok = capture.save(savePath);
