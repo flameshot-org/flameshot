@@ -109,24 +109,6 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
-    <name>SidePanelWidget</name>
-    <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
-        <source>Active color:</source>
-        <translation>Активна боја:</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
-        <source>Press ESC to cancel</source>
-        <translation>Притисните ESC за прекид</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
-        <source>Grab Color</source>
-        <translation>Преузмите боју</translation>
-    </message>
-</context>
-<context>
     <name>ConfigWindow</name>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
@@ -412,87 +394,92 @@ Press Space to open the side panel.</source>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="31"/>
+        <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
         <translation>О програму</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="48"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
         <translation>Десни клик</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="49"/>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
         <translation>Точкић миша</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="53"/>
+        <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
         <translation>Помери избор за 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="54"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
         <translation>Увећај избор за 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="55"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Quit capture</source>
         <translation>Излаз из снимача екрана</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="56"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
         <translation>Запамти у привременој меморији</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="57"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
         <translation>Сачувај избор у датотеку</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="58"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Undo the last modification</source>
         <translation>Поништи последње измене</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="59"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
         <translation>Прикажи избор боје</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Измени дебљину линије алата</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="65"/>
+        <location filename="../src/widgets/infowindow.cpp" line="81"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Доступне пречице у моду снимка екрана.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Key</source>
         <translation>Тастер</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="107"/>
+        <location filename="../src/widgets/infowindow.cpp" line="123"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Лиценца&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="131"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Верзија&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="125"/>
+        <location filename="../src/widgets/infowindow.cpp" line="141"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Пречице&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -648,7 +635,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
         <translation>Нисам успео да снимим екран</translation>
     </message>
@@ -664,6 +651,29 @@ Press Space to open the side panel.</source>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
         <source>Set Selection as the paint tool</source>
         <translation>Избор цртања правоугаоног оквира</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <source>Active thickness:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <source>Active color:</source>
+        <translation>Активна боја:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <source>Press ESC to cancel</source>
+        <translation>Притисните ESC за прекид</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <source>Grab Color</source>
+        <translation>Преузмите боју</translation>
     </message>
 </context>
 <context>

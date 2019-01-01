@@ -108,24 +108,6 @@ Spacja, aby pokazać panel boczny.</translation>
     </message>
 </context>
 <context>
-    <name>SidePanelWidget</name>
-    <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
-        <source>Active color:</source>
-        <translation>Aktywny kolor:</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="164"/>
-        <source>Press ESC to cancel</source>
-        <translation>Wciśnij ESC, aby anulować</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="166"/>
-        <source>Grab Color</source>
-        <translation>Pobierz kolor</translation>
-    </message>
-</context>
-<context>
     <name>ConfigWindow</name>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
@@ -411,87 +393,92 @@ Spacja, aby pokazać panel boczny.</translation>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="31"/>
+        <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
         <translation>O programie</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="48"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
         <translation>Prawy klik</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="49"/>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
         <translation>Kółko myszy</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="53"/>
+        <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
         <translation>Przesuń zaznaczenie o 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="54"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
         <translation>Zmień rozmiar zaznaczenia o 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="55"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Quit capture</source>
         <translation>Zakończ przechwytywanie</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="56"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
         <translation>Kopiuj do schowka</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="57"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
         <translation>Zapisz zaznaczenie jako plik</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="58"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Undo the last modification</source>
         <translation>Cofnij ostatnią modyfikację</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="59"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
         <translation>Pokaż próbnik kolorów</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Zmień grubość narzędzia</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="65"/>
+        <location filename="../src/widgets/infowindow.cpp" line="81"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Dostępne skróty w trybie przechwytywania obrazu.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Key</source>
         <translation>Klawisz</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Description</source>
         <translation>Działanie</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="107"/>
+        <location filename="../src/widgets/infowindow.cpp" line="123"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licencja&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="131"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Wersja&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="125"/>
+        <location filename="../src/widgets/infowindow.cpp" line="141"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Skróty klawiszowe&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -646,7 +633,7 @@ Spacja, aby pokazać panel boczny.</translation>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
         <translation>Nie można przechwycić ekranu</translation>
     </message>
@@ -662,6 +649,29 @@ Spacja, aby pokazać panel boczny.</translation>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
         <source>Set Selection as the paint tool</source>
         <translation>Ustawia zaznaczenie prostokątne jako narzędzie do rysowania</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <source>Active thickness:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <source>Active color:</source>
+        <translation>Aktywny kolor:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <source>Press ESC to cancel</source>
+        <translation>Wciśnij ESC, aby anulować</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <source>Grab Color</source>
+        <translation>Pobierz kolor</translation>
     </message>
 </context>
 <context>
