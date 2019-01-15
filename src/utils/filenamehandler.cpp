@@ -27,7 +27,7 @@ FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
 #ifdef Q_OS_WIN
     invalidCharacters = QRegularExpression("[<>:\"/\\\\|?*]+");
 #else //Q_OS_LINUX
-    invalidCharacters = QRegularExpression("[/]+");
+    invalidCharacters = QRegularExpression(QStringLiteral("[/]+"));
 #endif
 }
 
@@ -52,7 +52,7 @@ QString FileNameHandler::parseFilename(const QString &name) {
     free(tempData);
 
     // replace invalid characters with underscores
-    res = res.replace(invalidCharacters, "_");
+    res = res.replace(invalidCharacters, QLatin1String("_"));
 
     return res;
 }
