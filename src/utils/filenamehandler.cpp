@@ -24,6 +24,11 @@
 
 FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
     std::locale::global(std::locale(""));
+#ifdef Q_OS_WIN
+    invalidCharacters = QRegularExpression("[<>:\"/\\\\|?*]+");
+#else //Q_OS_LINUX
+    invalidCharacters = QRegularExpression("[/]+");
+#endif
 }
 
 QString FileNameHandler::parsedPattern() {
@@ -32,9 +37,11 @@ QString FileNameHandler::parsedPattern() {
 
 QString FileNameHandler::parseFilename(const QString &name) {
     QString res = name;
+
     if (name.isEmpty()) {
         res = QLatin1String("%F_%H-%M");
     }
+
     std::time_t t = std::time(NULL);
 
     char *tempData = QStringTocharArr(res);
@@ -44,8 +51,11 @@ QString FileNameHandler::parseFilename(const QString &name) {
     res = QString::fromLocal8Bit(data, (int)strlen(data));
     free(tempData);
 
-    // add the parsed pattern in a correct format for the filesystem
-    res = res.replace(QLatin1String("/"), QStringLiteral("⁄")).replace(QLatin1String(":"), QLatin1String("-"));
+    // replace invalid characters with underscores
+    if (res.contains(invalidCharacters)) {
+        res = res.replace(invalidCharacters, "_");
+    }
+
     return res;
 }
 

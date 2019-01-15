@@ -18,6 +18,7 @@
 #pragma once
 
 #include <QObject>
+#include <QRegularExpression>
 
 class FileNameHandler : public QObject {
     Q_OBJECT
@@ -42,4 +43,5 @@ private:
     char * QStringTocharArr(const QString &s);
 
     void fixPath(QString &directory, QString &filename);
+    QRegularExpression invalidCharacters;
 };

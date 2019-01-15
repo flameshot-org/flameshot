@@ -27,7 +27,7 @@
 
 FileNameEditor::FileNameEditor(QWidget *parent) : QWidget(parent) {
     initWidgets();
-    initLayout();    
+    initLayout();
 }
 
 void FileNameEditor::initLayout() {
@@ -36,6 +36,7 @@ void FileNameEditor::initLayout() {
     infoLabel->setFixedHeight(20);
     m_layout->addWidget(infoLabel);
     m_layout->addWidget(m_helperButtons);
+    m_layout->addWidget(new QLabel(tr("Invalid characters will be replaced with underscores.")));
     m_layout->addWidget(new QLabel(tr("Edit:")));
     m_layout->addWidget(m_nameEditor);
     m_layout->addWidget(new QLabel(tr("Preview:")));
