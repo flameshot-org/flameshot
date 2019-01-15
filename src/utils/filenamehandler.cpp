@@ -52,9 +52,7 @@ QString FileNameHandler::parseFilename(const QString &name) {
     free(tempData);
 
     // replace invalid characters with underscores
-    if (res.contains(invalidCharacters)) {
-        res = res.replace(invalidCharacters, "_");
-    }
+    res = res.replace(invalidCharacters, "_");
 
     return res;
 }
