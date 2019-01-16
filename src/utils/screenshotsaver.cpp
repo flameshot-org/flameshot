@@ -67,6 +67,13 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
             break;
         }
 
+		if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
+			!savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
+			!savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
+
+			savePath += QLatin1String(".png");
+		}
+
         ok = capture.save(savePath);
 
         if (ok) {
