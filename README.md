@@ -160,8 +160,8 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                                              |
 | <kbd>Ctrl</kbd> + <kbd>S</kbd>                                            | Save selection as a file                                       |
 | <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                            | Undo the last modification                                     |
-| <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool |
-| Right Click                                                               | Show color picker                                              |
+| <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
+| Right Click                                                               | Show the color wheel                                              |
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
