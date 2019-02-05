@@ -52,7 +52,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
                              bool fullScreen, QWidget *parent) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
-    m_previewEnabled(true), m_activeButton(nullptr),
+    m_previewEnabled(true), m_adjustmentButtonPressed(false), m_activeButton(nullptr),
     m_activeTool(nullptr), m_toolWidget(nullptr),
     m_mouseOverHandle(SelectionWidget::NO_SIDE), m_id(id)
 {
@@ -398,7 +398,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
     } else if (m_mouseIsClicked && m_activeTool) {
         // drawing with a tool
-        m_activeTool->drawMove(e->pos());
+        if (m_adjustmentButtonPressed) {
+            m_activeTool->drawMoveWithAdjustment(e->pos());
+        } else {
+            m_activeTool->drawMove(e->pos());
+        }
         update();
         // Hides the buttons under the mouse. If the mouse leaves, it shows them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -488,6 +492,14 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
         m_selection->move(QPoint(m_selection->x() +1, m_selection->y()));
         m_buttonHandler->updatePosition(m_selection->geometry());
         update();
+    } else if (e->key() == Qt::Key_Control) {
+        m_adjustmentButtonPressed = true;
+    }
+}
+
+void CaptureWidget::keyReleaseEvent(QKeyEvent *e) {
+    if (e->key() == Qt::Key_Control) {
+        m_adjustmentButtonPressed = false;
     }
 }
 

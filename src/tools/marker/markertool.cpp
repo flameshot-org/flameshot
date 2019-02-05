@@ -20,31 +20,13 @@
 
 namespace {
 
-#define ADJ_VALUE 14
 #define PADDING_VALUE 14
-
-// Have to force horizontal position
-bool needsHorizontalAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
-}
-
-// Have to force vertical position
-bool needsVerticalAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.x() >= p0.x() - ADJ_VALUE) && (p1.x() <= p0.x() + ADJ_VALUE);
-}
-
-// Have to force one of the four possible 45-degree direction positions
-bool needsDiagonalAdjustment(const QPoint &p0, const QPoint &p1) {
-    return ((p1.x() + p1.y() - p0.x() - p0.y()) *
-            (p1.x() + p1.y() - p0.x() - p0.y()) <= 2 * ADJ_VALUE * ADJ_VALUE) ||
-            ((p1.x() - p1.y() + p0.y() - p0.x()) *
-            (p1.x() - p1.y() + p0.y() - p0.x()) <= 2 * ADJ_VALUE * ADJ_VALUE);
-}
 
 }
 
 MarkerTool::MarkerTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsOrthogonalAdj = true;
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon MarkerTool::icon(const QColor &background, bool inEditor) const {
@@ -80,29 +62,6 @@ void MarkerTool::paintMousePreview(QPainter &painter, const CaptureContext &cont
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void MarkerTool::drawMove(const QPoint &p) {
-    m_points.second = p;
-    if (needsHorizontalAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setY(m_points.first.y());
-    } else if (needsVerticalAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setX(m_points.first.x());
-    } else if (needsDiagonalAdjustment(m_points.first, m_points.second)) {
-        const QPoint* p0 = &m_points.first;
-        QPoint* p1 = &m_points.second;
-        if ((p1->x() >= p0->x()) == (p1->y() >= p0->y())) {
-            int newY = (p1->x() + p1->y() - p0->x() + p0->y()) / 2;
-            int newX = (p1->x() + p1->y() + p0->x() - p0->y()) / 2;
-            p1->setX(newX);
-            p1->setY(newY);
-        } else {
-            int newX = (p0->x() + p0->y() + p1->x() - p1->y()) / 2;
-            int newY = p0->x() + p0->y() - newX;
-            p1->setX(newX);
-            p1->setY(newY);
-        }
-    }
 }
 
 void MarkerTool::drawStart(const CaptureContext &context) {

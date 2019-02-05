@@ -19,26 +19,7 @@
 
 namespace {
 
-#define ADJ_VALUE 13
 #define PADDING_VALUE 2
-
-// Have to force horizontal position
-bool needsHorizontalAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
-}
-
-// Have to force vertical position
-bool needsVerticalAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.x() >= p0.x() - ADJ_VALUE) && (p1.x() <= p0.x() + ADJ_VALUE);
-}
-
-// Have to force one of the four possible 45-degree direction positions
-bool needsDiagonalAdjustment(const QPoint &p0, const QPoint &p1) {
-    return ((p1.x() + p1.y() - p0.x() - p0.y()) *
-            (p1.x() + p1.y() - p0.x() - p0.y()) <= 2 * ADJ_VALUE * ADJ_VALUE) ||
-            ((p1.x() - p1.y() + p0.y() - p0.x()) *
-            (p1.x() - p1.y() + p0.y() - p0.x()) <= 2 * ADJ_VALUE * ADJ_VALUE);
-}
 
 const int ArrowWidth = 10;
 const int ArrowHeight = 18;
@@ -89,6 +70,8 @@ QLine getShorterLine(QPoint p1, QPoint p2, const int thickness) {
 
 ArrowTool::ArrowTool(QObject *parent) : AbstractTwoPointTool(parent) {
     m_padding = ArrowWidth / 2;
+    m_supportsOrthogonalAdj = true;
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon ArrowTool::icon(const QColor &background, bool inEditor) const {
@@ -123,29 +106,6 @@ void ArrowTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUnd
 void ArrowTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void ArrowTool::drawMove(const QPoint &p) {
-    m_points.second = p;
-    if (needsHorizontalAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setY(m_points.first.y());
-    } else if (needsVerticalAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setX(m_points.first.x());
-    } else if (needsDiagonalAdjustment(m_points.first, m_points.second)) {
-        const QPoint* p0 = &m_points.first;
-        QPoint* p1 = &m_points.second;
-        if ((p1->x() >= p0->x()) == (p1->y() >= p0->y())) {
-            int newY = (p1->x() + p1->y() - p0->x() + p0->y()) / 2;
-            int newX = (p1->x() + p1->y() + p0->x() - p0->y()) / 2;
-            p1->setX(newX);
-            p1->setY(newY);
-        } else {
-            int newX = (p0->x() + p0->y() + p1->x() - p1->y()) / 2;
-            int newY = p0->x() + p0->y() - newX;
-            p1->setX(newX);
-            p1->setY(newY);
-        }
-    }
 }
 
 void ArrowTool::drawStart(const CaptureContext &context) {
