@@ -401,7 +401,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>ПКМ</translation>
+        <translation>Правый клик</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="64"/>
@@ -441,7 +441,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать боковую панель с настройками выбранного инструмента</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="75"/>
@@ -657,7 +657,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
         <source>Active thickness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Активная толщина:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
