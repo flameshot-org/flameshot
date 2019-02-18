@@ -25,6 +25,7 @@ Check this nice official documentation from Qt docs as it explains how to transl
 | French                | fr | :bookmark:v0.5.1 | [ld892012](https://github.com/ld892012) |
 | Polish                | pl | :bookmark:v0.5.1 | [napcok](https://github.com/napcok) |
 | Serbian               | sr | :bookmark:v0.6.0 | [cobisimo](https://github.com/cobisimo) |
+| Ukrainian             | uk | :bookmark:v0.6.0 | [vboden](https://github.com/vboden) |
 
 
 ## Code
