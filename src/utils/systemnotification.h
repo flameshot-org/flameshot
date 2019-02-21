@@ -26,10 +26,12 @@ class SystemNotification : public QObject {
 public:
     explicit SystemNotification(QObject *parent = nullptr);
 
-    void sendMessage(const QString &text);
+    void sendMessage(const QString &text,
+                     const QString &savePath = {});
 
     void sendMessage(const QString &text,
                      const QString &title,
+                     const QString &savePath,
                      const int timeout = 5000);
 
 private:
