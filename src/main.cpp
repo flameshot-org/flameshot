@@ -24,6 +24,7 @@
 #include "src/utils/pathinfo.h"
 #include "src/core/capturerequest.h"
 #include <QApplication>
+#include <QLibraryInfo>
 #include <QTranslator>
 #include <QTextStream>
 #include <QTimer>
@@ -46,7 +47,7 @@ int main(int argc, char *argv[]) {
     if (argc == 1) {
         SingleApplication app(argc, argv);
 
-        QTranslator translator;
+        QTranslator translator, qtTranslator;
         QStringList trPaths = PathInfo::translationsPaths();
 
         for (const QString &path: trPaths) {
@@ -58,7 +59,11 @@ int main(int argc, char *argv[]) {
             }
         }
 
+        qtTranslator.load(QLocale::system(), "qt", "_",
+            QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+
         app.installTranslator(&translator);
+        app.installTranslator(&qtTranslator);
         app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
         app.setApplicationName(QStringLiteral("flameshot"));
         app.setOrganizationName(QStringLiteral("Dharkael"));
