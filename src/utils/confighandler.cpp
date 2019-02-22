@@ -242,6 +242,21 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen) {
 
 bool ConfigHandler::startupLaunchValue() {
     bool res = false;
+
+    if (m_settings.contains(QStringLiteral("startupLaunch"))) {
+        res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
+    }
+
+    if (res != verifyLaunchFile()) {
+        setStartupLaunch(res);
+    }
+
+    return res;
+}
+
+bool ConfigHandler::verifyLaunchFile() {
+    bool res = false;
+
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
     res = QFile(path).exists();
@@ -281,6 +296,7 @@ void ConfigHandler::setStartupLaunch(const bool start) {
         bootUpSettings.remove("Flameshot");
     }
 #endif
+    m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
 int ConfigHandler::contrastOpacityValue() {
