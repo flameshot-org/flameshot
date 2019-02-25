@@ -560,7 +560,7 @@ Press Space to open the side panel.</source>
         <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
         <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
-        <translation>Сохранить снимок как </translation>
+        <translation>Снимок сохранён как </translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
