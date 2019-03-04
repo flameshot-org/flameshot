@@ -560,12 +560,12 @@ Press Space to open the side panel.</source>
         <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
         <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
-        <translation>Сохранить снимок как </translation>
+        <translation>Снимок сохранён как </translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation>Сохранить снимок как в буфер обмена</translation>
+        <translation>Снимок сохранён в буфер обмена</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
