@@ -41,15 +41,17 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
     completePath += QLatin1String(".png");
     bool ok = capture.save(completePath);
     QString saveMessage;
+    QString notificationPath = completePath;
 
     if (ok) {
         ConfigHandler().setSavePath(path);
         saveMessage = QObject::tr("Capture saved as ") + completePath;
     } else {
         saveMessage = QObject::tr("Error trying to save as ") + completePath;
+        notificationPath = "";
     }
 
-    SystemNotification().sendMessage(saveMessage, ok ? completePath : "");
+    SystemNotification().sendMessage(saveMessage, notificationPath);
     return ok;
 }
 
