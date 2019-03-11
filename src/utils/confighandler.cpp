@@ -272,8 +272,13 @@ bool ConfigHandler::verifyLaunchFile() {
 
 void ConfigHandler::setStartupLaunch(const bool start) {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
-    QFile file(path);
+    QString path = QDir::homePath() + "/.config/autostart/";
+    QDir autostartDir(path);
+    if (!autostartDir.exists()) {
+        autostartDir.mkpath(".");
+    }
+
+    QFile file(path + "Flameshot.desktop");
     if (start) {
         if (file.open(QIODevice::WriteOnly)) {
             QByteArray data("[Desktop Entry]\nName=flameshot\nIcon=flameshot"
