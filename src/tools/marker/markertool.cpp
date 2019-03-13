@@ -58,12 +58,14 @@ void MarkerTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUn
     if (recordUndo) {
         updateBackup(pixmap);
     }
+    painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(m_points.first, m_points.second);
 }
 
 void MarkerTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
+    painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
