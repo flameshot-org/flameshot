@@ -59,7 +59,7 @@ QVector<const char *> InfoWindow::m_keys = {
     "CTRL + C",
     "CTRL + S",
     "CTRL + Z",
-    "SPACEBAR",
+    QT_TR_NOOP("SPACEBAR"),
     QT_TR_NOOP("Right Click"),
     QT_TR_NOOP("Mouse Wheel")
 };
