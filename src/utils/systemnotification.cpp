@@ -1,6 +1,7 @@
 #include "systemnotification.h"
 #include "src/utils/confighandler.h"
 #include <QApplication>
+#include <QUrl>
 
 #ifndef Q_OS_WIN
 #include <QDBusConnection>
@@ -24,13 +25,14 @@ SystemNotification::SystemNotification(QObject *parent) : QObject(parent) {
 }
 #endif
 
-void SystemNotification::sendMessage(const QString &text) {
-    sendMessage(text, tr("Flameshot Info"));
+void SystemNotification::sendMessage(const QString &text, const QString &savePath) {
+    sendMessage(text, tr("Flameshot Info"), savePath);
 }
 
 void SystemNotification::sendMessage(
         const QString &text,
         const QString &title,
+        const QString &savePath,
         const int timeout)
 {
     if(!ConfigHandler().desktopNotificationValue()) {
@@ -39,13 +41,19 @@ void SystemNotification::sendMessage(
 
 #ifndef Q_OS_WIN
     QList<QVariant> args;
+    QVariantMap hintsMap;
+    if (!savePath.isEmpty()) {
+        QUrl fullPath = QUrl::fromLocalFile(savePath);
+        // allows the notification to be dragged and dropped
+        hintsMap[QStringLiteral("x-kde-urls")] = QStringList({fullPath.toString()});
+    }
     args << (qAppName())                 //appname
          << static_cast<unsigned int>(0) //id
          << "flameshot"                  //icon
          << title                        //summary
          << text                         //body
          << QStringList()                //actions
-         << QVariantMap()                //hints
+         << hintsMap                     //hints
          << timeout;                     //timeout
     m_interface->callWithArgumentList(QDBus::AutoDetect, QStringLiteral("Notify"), args);
 #else
