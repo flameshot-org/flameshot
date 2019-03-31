@@ -23,7 +23,7 @@ namespace {
 }
 
 CircleTool::CircleTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon CircleTool::icon(const QColor &background, bool inEditor) const {
