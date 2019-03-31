@@ -20,18 +20,13 @@
 
 namespace {
 
-#define ADJ_VALUE 14
 #define PADDING_VALUE 14
-
-// Have to force horizontal position
-bool needsAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
-}
 
 }
 
 MarkerTool::MarkerTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsOrthogonalAdj = true;
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon MarkerTool::icon(const QColor &background, bool inEditor) const {
@@ -69,13 +64,6 @@ void MarkerTool::paintMousePreview(QPainter &painter, const CaptureContext &cont
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void MarkerTool::drawMove(const QPoint &p) {
-    m_points.second = p;
-    if (needsAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setY(m_points.first.y());
-    }
 }
 
 void MarkerTool::drawStart(const CaptureContext &context) {

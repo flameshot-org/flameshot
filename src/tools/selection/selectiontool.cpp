@@ -23,7 +23,7 @@ namespace {
 }
 
 SelectionTool::SelectionTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsDiagonalAdj = true;
 }
 
 bool SelectionTool::closeOnButtonPressed() const {

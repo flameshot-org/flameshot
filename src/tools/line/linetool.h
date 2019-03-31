@@ -35,7 +35,6 @@ public:
     void paintMousePreview(QPainter &painter, const CaptureContext &context) override;
 
 public slots:
-    void drawMove(const QPoint &p) override;
     void drawStart(const CaptureContext &context) override;
     void pressed(const CaptureContext &context) override;
 };

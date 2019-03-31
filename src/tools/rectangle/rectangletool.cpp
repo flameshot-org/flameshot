@@ -23,7 +23,7 @@ namespace {
 }
 
 RectangleTool::RectangleTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon RectangleTool::icon(const QColor &background, bool inEditor) const {
