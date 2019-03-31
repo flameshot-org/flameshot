@@ -61,6 +61,7 @@ public:
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);
 
+    bool verifyLaunchFile();
     bool startupLaunchValue();
     void setStartupLaunch(const bool);
 

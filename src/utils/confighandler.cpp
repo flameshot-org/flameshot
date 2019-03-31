@@ -242,6 +242,21 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen) {
 
 bool ConfigHandler::startupLaunchValue() {
     bool res = false;
+
+    if (m_settings.contains(QStringLiteral("startupLaunch"))) {
+        res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
+    }
+
+    if (res != verifyLaunchFile()) {
+        setStartupLaunch(res);
+    }
+
+    return res;
+}
+
+bool ConfigHandler::verifyLaunchFile() {
+    bool res = false;
+
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
     res = QFile(path).exists();
@@ -257,8 +272,13 @@ bool ConfigHandler::startupLaunchValue() {
 
 void ConfigHandler::setStartupLaunch(const bool start) {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
-    QFile file(path);
+    QString path = QDir::homePath() + "/.config/autostart/";
+    QDir autostartDir(path);
+    if (!autostartDir.exists()) {
+        autostartDir.mkpath(".");
+    }
+
+    QFile file(path + "Flameshot.desktop");
     if (start) {
         if (file.open(QIODevice::WriteOnly)) {
             QByteArray data("[Desktop Entry]\nName=flameshot\nIcon=flameshot"
@@ -281,6 +301,7 @@ void ConfigHandler::setStartupLaunch(const bool start) {
         bootUpSettings.remove("Flameshot");
     }
 #endif
+    m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
 int ConfigHandler::contrastOpacityValue() {
