@@ -100,6 +100,7 @@ int main(int argc, char *argv[]) {
     parser.setGeneralErrorMessage(QStringLiteral("See 'flameshot --help'."));
     // Arguments
     CommandArgument fullArgument(QStringLiteral("full"), QStringLiteral("Capture the entire desktop."));
+    CommandArgument launcherArgument(QStringLiteral("launcher"), QStringLiteral("Open the capture launcher."));
     CommandArgument guiArgument(QStringLiteral("gui"), QStringLiteral("Start a manual capture in GUI mode."));
     CommandArgument configArgument(QStringLiteral("config"), QStringLiteral("Configure flameshot."));
     CommandArgument screenArgument(QStringLiteral("screen"), QStringLiteral("Capture a single screen."));
@@ -195,6 +196,7 @@ int main(int argc, char *argv[]) {
     parser.AddArgument(guiArgument);
     parser.AddArgument(screenArgument);
     parser.AddArgument(fullArgument);
+    parser.AddArgument(launcherArgument);
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
@@ -215,6 +217,16 @@ int main(int argc, char *argv[]) {
     // PROCESS DATA
     //--------------
     if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
+    }
+    else if (parser.isSet(launcherArgument)) { // LAUNCHER
+        QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
+                                           QStringLiteral("/"), QLatin1String(""), QStringLiteral("openLauncher"));
+        QDBusConnection sessionBus = QDBusConnection::sessionBus();
+        if (!sessionBus.isConnected()) {
+            SystemNotification().sendMessage(
+                        QObject::tr("Unable to connect via DBus"));
+        }
+        sessionBus.call(m);
     }
     else if (parser.isSet(guiArgument)) { // GUI
         QString pathValue = parser.value(pathOption);

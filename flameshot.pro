@@ -139,6 +139,7 @@ SOURCES += src/main.cpp \
     src/widgets/capture/hovereventfilter.cpp \
     src/widgets/capture/selectionwidget.cpp \
     src/tools/pin/pinwidget.cpp \
+    src/widgets/capturelauncher.cpp \
     src/tools/text/texttool.cpp \
     src/tools/text/textwidget.cpp \
     src/core/capturerequest.cpp \
@@ -211,6 +212,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/capture/hovereventfilter.h \
     src/widgets/capture/selectionwidget.h \
     src/tools/pin/pinwidget.h \
+    src/widgets/capturelauncher.h \
     src/tools/text/texttool.h \
     src/tools/text/textwidget.h \
     src/core/capturerequest.h \

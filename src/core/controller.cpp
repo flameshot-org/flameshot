@@ -21,6 +21,7 @@
 #include "src/widgets/infowindow.h"
 #include "src/config/configwindow.h"
 #include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capturelauncher.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/screengrabber.h"
 #include <QFile>
@@ -161,6 +162,11 @@ void Controller::openInfoWindow() {
     }
 }
 
+void Controller::openLauncherWindow() {
+    CaptureLauncher *w = new CaptureLauncher();
+    w->show();
+}
+
 void Controller::enableTrayIcon() {
     if (m_trayIcon) {
         return;
@@ -171,6 +177,9 @@ void Controller::enableTrayIcon() {
         // Wait 400 ms to hide the QMenu
         doLater(400, this, [this](){ this->startVisualCapture(); });
     });
+    QAction *launcherAction = new QAction(tr("&Open Launcher"), this);
+    connect(launcherAction, &QAction::triggered, this,
+            &Controller::openLauncherWindow);
     QAction *configAction = new QAction(tr("&Configuration"), this);
     connect(configAction, &QAction::triggered, this,
             &Controller::openConfigWindow);
@@ -183,6 +192,8 @@ void Controller::enableTrayIcon() {
 
     QMenu *trayIconMenu = new QMenu();
     trayIconMenu->addAction(captureAction);
+    trayIconMenu->addAction(launcherAction);
+    trayIconMenu->addSeparator();
     trayIconMenu->addAction(configAction);
     trayIconMenu->addAction(infoAction);
     trayIconMenu->addSeparator();
