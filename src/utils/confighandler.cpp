@@ -317,6 +317,14 @@ void ConfigHandler::setContrastOpacity(const int transparency) {
     m_settings.setValue(QStringLiteral("contrastOpacity"), transparency);
 }
 
+bool ConfigHandler::closeAfterScreenshotValue() {
+    return m_settings.value(QStringLiteral("closeAfterScreenshot")).toBool();
+}
+
+void ConfigHandler::setCloseAfterScreenshot(const bool close) {
+    m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }
