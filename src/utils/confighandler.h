@@ -68,6 +68,10 @@ public:
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
+    bool closeAfterScreenshotValue();
+    void setCloseAfterScreenshot(const bool);
+
+
     void setDefaults();
     void setAllTheButtons();
 

@@ -36,6 +36,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initCloseAfterCapture();
 
     // this has to be at the end
     initConfingButtons();
@@ -47,6 +48,7 @@ void GeneneralConf::updateComponents() {
     m_helpMessage->setChecked(config.showHelpValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+    m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -72,6 +74,10 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
 
 void GeneneralConf::autostartChanged(bool checked) {
     ConfigHandler().setStartupLaunch(checked);
+}
+
+void GeneneralConf::closeAfterCaptureChanged(bool checked) {
+    ConfigHandler().setCloseAfterScreenshot(checked);
 }
 
 void GeneneralConf::importConfiguration() {
@@ -203,4 +209,16 @@ void GeneneralConf::initAutostart() {
 
     connect(m_autostart, &QCheckBox::clicked, this,
             &GeneneralConf::autostartChanged);
+}
+
+void GeneneralConf::initCloseAfterCapture() {
+    m_closeAfterCapture = new QCheckBox(tr("Close after capture"), this);
+    ConfigHandler config;
+    bool checked = config.closeAfterScreenshotValue();
+    m_closeAfterCapture->setChecked(checked);
+    m_closeAfterCapture->setToolTip(tr("Close after taking a screenshot"));
+    m_layout->addWidget(m_closeAfterCapture);
+
+    connect(m_closeAfterCapture, &QCheckBox::clicked, this,
+            &GeneneralConf::closeAfterCaptureChanged);
 }
