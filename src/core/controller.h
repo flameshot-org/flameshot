@@ -52,6 +52,7 @@ public slots:
 
     void openConfigWindow();
     void openInfoWindow();
+    void openLauncherWindow();
     void enableTrayIcon();
     void disableTrayIcon();
     void sendTrayNotification(const QString &text,

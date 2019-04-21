@@ -59,6 +59,10 @@ void FlameshotDBusAdapter::fullScreen(
     Controller::getInstance()->requestCapture(req);
 }
 
+void FlameshotDBusAdapter::openLauncher() {
+    Controller::getInstance()->openLauncherWindow();
+}
+
 void FlameshotDBusAdapter::captureScreen(int number, QString path,
                                          bool toClipboard, int delay, uint id)
 {

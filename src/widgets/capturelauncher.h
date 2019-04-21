@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -18,36 +18,34 @@
 #pragma once
 
 #include <QWidget>
-#include <QPointer>
 
+class QCheckBox;
+class QPushButton;
 class QVBoxLayout;
-class QPropertyAnimation;
-class QScrollArea;
+class QComboBox;
+class QSpinBox;
+class QLabel;
+class ImageLabel;
 
-class UtilityPanel : public QWidget {
+class CaptureLauncher : public QWidget
+{
     Q_OBJECT
 public:
-    explicit UtilityPanel(QWidget *parent = nullptr);
+    explicit CaptureLauncher(QWidget *parent = nullptr);
 
-    QWidget* toolWidget() const;
-    void addToolWidget(QWidget *w);
-    void clearToolWidget();
-    void pushWidget(QWidget *w);
-
-signals:
-    void mouseEnter();
-    void mouseLeave();
-
-public slots:
-    void toggle();
+private slots:
+    void startCapture();
+    void startDrag();
+    void captureTaken(uint id, QPixmap p);
+    void captureFailed(uint id);
 
 private:
-    void initInternalPanel();
 
-    QPointer<QWidget> m_toolWidget;
-    QScrollArea *m_internalPanel;
-    QVBoxLayout *m_upLayout;
-    QVBoxLayout *m_layout;
-    QPropertyAnimation *m_showAnimation;
-    QPropertyAnimation *m_hideAnimation;
+    QSpinBox *m_delaySpinBox;
+    QComboBox *m_captureType;
+    QVBoxLayout *m_mainLayout;
+    QPushButton *m_launchButton;
+    QLabel *m_CaptureModeLabel;
+    ImageLabel *m_imageLabel;
+    uint m_id;
 };

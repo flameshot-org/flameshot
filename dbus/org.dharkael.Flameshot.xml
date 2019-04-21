@@ -34,6 +34,15 @@
     </method>
 
     <!--
+        openLauncher:
+
+        Opens the capture launcher.
+    -->
+    <method name="openLauncher">
+      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
+
+    <!--
         captureScreen:
         @number: number of the screen to be captured.
         @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
