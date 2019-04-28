@@ -5,23 +5,27 @@ set -e
 DIST_PATH=dist
 
 if [[ "${EXTEN}" == "other" ]]; then
-	TEMP_DOWNLOAD_URL=$(travis_retry curl \
-		--upload-file \
-		"${BUILD_DST_PATH}"/flameshot \
-		"https://transfer.sh/flameshot_${VERSION}_${ARCH}")
+	cp "${BUILD_DST_PATH}/flameshot" "${ROOT_PATH}/.travis/services/flameshot_${VERSION}_${ARCH}"
+	cd "${ROOT_PATH}/.travis/services"
+	TEMP_DOWNLOAD_URL=$(travis_retry bash \
+	"${ROOT_PATH}/.travis/services/${UPLOAD_SERVICE}.sh" \
+	flameshot_"${VERSION}_${ARCH}")
 else
 	case "${OS}" in
 		"ubuntu"|"debian")
-			TEMP_DOWNLOAD_URL=$(travis_retry curl \
-				--upload-file \
-				"${DIST_PATH}"/flameshot_${VERSION}_${DIST}_${ARCH}.${EXTEN} \
-				"https://transfer.sh/flameshot_${VERSION}_${DIST}_${ARCH}.${EXTEN}")
+		    cp "${DIST_PATH}/flameshot_${VERSION}_${DIST}_${ARCH}.${EXTEN}" "${ROOT_PATH}/.travis/services/flameshot_${VERSION}_${DIST}_${ARCH}.${EXTEN}"
+			cd "${ROOT_PATH}/.travis/services"
+			TEMP_DOWNLOAD_URL=$(travis_retry bash \
+				"${ROOT_PATH}/.travis/services/${UPLOAD_SERVICE}.sh" \
+				"flameshot_${VERSION}_${DIST}_${ARCH}.${EXTEN}")
 			;;
 		"fedora")
-			TEMP_DOWNLOAD_URL=$(travis_retry curl \
-				--upload-file \
-				"${DIST_PATH}"/flameshot_${VERSION}_fedora${DIST}_${ARCH}.${EXTEN} \
-				"https://transfer.sh/flameshot_${VERSION}_fedora${DIST}_${ARCH}.${EXTEN}")
+			cp "${DIST_PATH}/flameshot_${VERSION}_fedora${DIST}_${ARCH}.${EXTEN}" "${ROOT_PATH}/.travis/services/flameshot_${VERSION}_fedora${DIST}_${ARCH}.${EXTEN}"
+			cd "${ROOT_PATH}/.travis/services"
+			TEMP_DOWNLOAD_URL=$(travis_retry bash \
+				"${ROOT_PATH}/.travis/services/${UPLOAD_SERVICE}.sh" \
+				"flameshot_${VERSION}_fedora${DIST}_${ARCH}.${EXTEN}")
 			;;
 	esac
 fi
+

@@ -20,25 +20,21 @@ env:
       - ARCH=x86_64
       # Dockerfile from https://github.com/flameshotapp/flameshot-docker-images
       - DOCKER_REPO=vitzy/flameshot
+      # Option: wetransfer.com, file.io, 0x0.st, transfer.sh
+      - UPLOAD_SERVICE=wetransfer.com
 
 # The actual list of distribution is available on
 # https://hub.docker.com/r/vitzy/flameshot/tags/
 matrix:
     include:
         - os: linux
-          # 27
-          env: OS=fedora DIST=27 EXTEN=rpm
-          services: docker
-        - os: linux
           # 28
           env: OS=fedora DIST=28 EXTEN=rpm
           services: docker
-        # cups-libs-2.2.8-6 cannot be found, correct is cups-libs-2.2.8-7,
-        # maybe it was caused by upstream docker images, so disable temporarily.
-        # - os: linux
-        #   # 29
-        #   env: OS=fedora DIST=29 EXTEN=rpm
-        #   services: docker
+        - os: linux
+          # 29
+          env: OS=fedora DIST=29 EXTEN=rpm
+          services: docker
         - os: linux
           # 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
@@ -46,6 +42,10 @@ matrix:
         - os: linux
           # 18.04 LTS
           env: OS=ubuntu DIST=bionic EXTEN=deb
+          services: docker
+        - os: linux
+          # 19.04
+          env: OS=ubuntu DIST=disco EXTEN=deb
           services: docker
         - os: linux
           # 8
@@ -64,7 +64,9 @@ matrix:
 #         osx_image: xcode9.2
 
 before_install:
+  - export ROOT_PATH="$(pwd)"
   - chmod +x .travis/*.sh
+  - chmod +x .travis/services/*.sh
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_before_install.sh; fi
 
 install:
