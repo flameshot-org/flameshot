@@ -22,6 +22,8 @@
 class QVBoxLayout;
 class QCheckBox;
 class QPushButton;
+class QLabel;
+class QLineEdit;
 
 class GeneneralConf : public QWidget {
     Q_OBJECT
@@ -37,6 +39,8 @@ private slots:
    void showTrayIconChanged(bool checked);
    void autostartChanged(bool checked);
    void closeAfterCaptureChanged(bool checked);
+   void saveAfterCopyChanged(bool checked);
+   void changeSavePath();
    void importConfiguration();
    void exportFileConfiguration();
    void resetConfiguration();
@@ -51,6 +55,9 @@ private:
     QPushButton *m_importButton;
     QPushButton *m_exportButton;
     QPushButton *m_resetButton;
+    QCheckBox *m_saveAfterCopy;
+    QLineEdit *m_savePath;
+    QPushButton *m_changeSaveButton;
 
     void initShowHelp();
     void initShowDesktopNotification();
@@ -58,4 +65,5 @@ private:
     void initConfingButtons();
     void initAutostart();
     void initCloseAfterCapture();
+    void initSaveAfterCopy();
 };

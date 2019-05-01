@@ -71,6 +71,11 @@ public:
     bool closeAfterScreenshotValue();
     void setCloseAfterScreenshot(const bool);
 
+    bool saveAfterCopyValue();
+    void setSaveAfterCopy(const bool);
+
+    QString saveAfterCopyPathValue();
+    void setSaveAfterCopyPath(const QString &);
 
     void setDefaults();
     void setAllTheButtons();

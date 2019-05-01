@@ -325,6 +325,22 @@ void ConfigHandler::setCloseAfterScreenshot(const bool close) {
     m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
 }
 
+bool ConfigHandler::saveAfterCopyValue() {
+    return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
+}
+
+void ConfigHandler::setSaveAfterCopy(const bool save) {
+    m_settings.setValue(QStringLiteral("saveAfterCopy"), save);
+}
+
+QString ConfigHandler::saveAfterCopyPathValue() {
+    return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
+}
+
+void ConfigHandler::setSaveAfterCopyPath(const QString &path) {
+    m_settings.setValue(QStringLiteral("saveAfterCopyPath"), path);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }
