@@ -25,6 +25,7 @@ public:
     ScreenshotSaver();
 
     void saveToClipboard(const QPixmap &capture);
+    void saveToClipboard(const QString &str);
     bool saveToFilesystem(const QPixmap &capture, const QString &path);
     bool saveToFilesystemGUI(const QPixmap &capture);
 

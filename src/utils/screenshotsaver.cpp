@@ -34,6 +34,12 @@ void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
     QApplication::clipboard()->setPixmap(capture);
 }
 
+void ScreenshotSaver::saveToClipboard(const QString &str) {
+    SystemNotification().sendMessage(
+                QObject::tr("Bar Code saved to clipboard"));
+    QApplication::clipboard()->setText(str);
+}
+
 bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
                                        const QString &path)
 {

@@ -69,7 +69,8 @@ for(tsfile, TRANSLATIONS) {
 DEFINES += QT_DEPRECATED_WARNINGS
 
 include(src/third-party/singleapplication/singleapplication.pri)
-include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
+include(src/third-party/Qt-Color-Widgets/color_widgets.pri)
+include(src/third-party/QZXing/QZXing.pri)
 
 DEFINES += QAPPLICATION_CLASS=QApplication
 
@@ -102,6 +103,7 @@ SOURCES += src/main.cpp \
     src/tools/save/savetool.cpp \
     src/tools/selection/selectiontool.cpp \
     src/tools/sizeindicator/sizeindicatortool.cpp \
+    src/tools/barcode/barcodetool.cpp \
     src/tools/toolfactory.cpp \
     src/utils/filenamehandler.cpp \
     src/utils/screengrabber.cpp \
@@ -176,6 +178,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/save/savetool.h \
     src/tools/selection/selectiontool.h \
     src/tools/sizeindicator/sizeindicatortool.h \
+    src/tools/barcode/barcodetool.h \
     src/tools/toolfactory.h \
     src/utils/confighandler.h \
     src/core/controller.h \

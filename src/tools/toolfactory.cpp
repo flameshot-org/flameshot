@@ -35,6 +35,7 @@
 #include "redo/redotool.h"
 #include "pin/pintool.h"
 #include "text/texttool.h"
+#include "barcode/barcodetool.h"
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent) {
 
@@ -102,6 +103,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_TEXT:
         tool = new TextTool(parent);
+        break;
+    case CaptureButton::TYPE_BARCODE:
+        tool = new BarcodeTool(parent);
         break;
     default:
         tool = nullptr;
