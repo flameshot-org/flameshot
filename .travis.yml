@@ -10,7 +10,7 @@ branches:
 cache:
     directories:
       - $HOME/.cache
- 
+
 env:
     global:
       # Environment variables for packaging

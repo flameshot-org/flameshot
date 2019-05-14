@@ -16,7 +16,7 @@ export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 export QT_SELECT := 5
 
 %:
-	dh $@ 
+	dh $@
 
 override_dh_auto_configure:
 	# The existence of an empty .git directory triggers syncqt.

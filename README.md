@@ -349,7 +349,7 @@ Info: If I take code from your project and that implies a relicense to GPLv3, yo
 If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Donations
-I improve Flameshot in my free time because I want to create something good for everyone to use. 
+I improve Flameshot in my free time because I want to create something good for everyone to use.
 If you want you can donate some bucks [here](https://www.paypal.me/lupoDharkael).
 
 ## Acknowledgment

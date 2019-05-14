@@ -14,7 +14,7 @@ Source0: https://github.com/lupoDharkael/%{sourcename}/archive/v%{version}.tar.g
 #%%define _binaries_in_noarch_packages_terminate_build   0
 #BuildArch: noarch
 
-BuildRequires: gcc-c++  >= 4.9.2  
+BuildRequires: gcc-c++  >= 4.9.2
 BuildRequires: pkgconfig(Qt5Core) >= 5.3.0
 BuildRequires: pkgconfig(Qt5Gui)  >= 5.3.0
 BuildRequires: pkgconfig(Qt5Widgets)  >= 5.3.0
