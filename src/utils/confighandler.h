@@ -71,6 +71,8 @@ public:
     bool closeAfterScreenshotValue();
     void setCloseAfterScreenshot(const bool);
 
+    bool quickModeEnabled() const;
+    void setQuickModeEnabled(bool);
 
     void setDefaults();
     void setAllTheButtons();

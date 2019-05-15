@@ -325,6 +325,14 @@ void ConfigHandler::setCloseAfterScreenshot(const bool close) {
     m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
 }
 
+bool ConfigHandler::quickModeEnabled() const {
+    return m_settings.value(QStringLiteral("quickMode")).toBool();
+}
+
+void ConfigHandler::setQuickModeEnabled(bool value) {
+    m_settings.setValue(QStringLiteral("quickMode"), value);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }

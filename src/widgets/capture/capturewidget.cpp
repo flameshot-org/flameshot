@@ -458,7 +458,13 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
         }
         m_selection->setGeometry(newGeometry);
         m_context.selection = extendedRect(&newGeometry);
+
+        if (m_config.quickModeEnabled()) {
+            saveScreenshot();
+        }
+
         updateSizeIndicator();
+
         m_buttonHandler->updatePosition(newGeometry);
         m_buttonHandler->show();
     }

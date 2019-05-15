@@ -37,6 +37,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowTrayIcon();
     initAutostart();
     initCloseAfterCapture();
+    initQuickMode();
 
     // this has to be at the end
     initConfingButtons();
@@ -49,6 +50,7 @@ void GeneneralConf::updateComponents() {
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
     m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
+    m_quickMode->setChecked(config.quickModeEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -221,4 +223,17 @@ void GeneneralConf::initCloseAfterCapture() {
 
     connect(m_closeAfterCapture, &QCheckBox::clicked, this,
             &GeneneralConf::closeAfterCaptureChanged);
+}
+
+void GeneneralConf::initQuickMode()
+{
+    m_quickMode = new QCheckBox(tr("Quick mode"), this);
+    ConfigHandler config;
+    m_quickMode->setChecked(config.quickModeEnabled());
+    m_quickMode->setToolTip(tr("Quick mode saves the screenshot after selecting the area"));
+    m_layout->addWidget(m_quickMode);
+
+    connect(m_quickMode, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setQuickModeEnabled(checked);
+    });
 }
