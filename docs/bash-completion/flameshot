@@ -9,7 +9,7 @@ _flameshot() {
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	cmd="gui full config launcher screen"
 	screen_opts="--number --path --delay --raw -p -d -r -n"
-	gui_opts="--path --delay --raw -p -d -r"
+	gui_opts="--path --delay --raw --interactive -p -d -r -i"
 	full_opts="--path --delay --clipboard --raw -p -d -c -r"
 	config_opts="--contrastcolor --filename --maincolor --showhelp --trayicon --autostart -k -f -m -s -t -a"
 

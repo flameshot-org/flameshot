@@ -36,8 +36,8 @@ FlameshotDBusAdapter::~FlameshotDBusAdapter() {
 
 }
 
-void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id) {
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id, bool interactive) {
+    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path, interactive);
 //    if (toClipboard) {
 //        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
 //    }

@@ -33,7 +33,7 @@ signals:
     void captureFailed(uint id);
 
 public slots:
-    Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
+    Q_NOREPLY void graphicCapture(QString path, int delay, uint id, bool interactive);
     Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
     Q_NOREPLY void captureScreen(int number, QString path, bool toClipboard, int delay, uint id);
     Q_NOREPLY void openLauncher();

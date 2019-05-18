@@ -7,6 +7,7 @@
         @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
         @delay: delay time in milliseconds.
         @id: identificator of the call.
+        @interactive: start with full screen selected and pencil tool.
 
         Open the user interface used to capture the screen. Sends a captureTaken signal with the raw image after closing the GUI
         due to a capture taken. It could send a captureFailed signal if the screenshot can't be retrieved.
@@ -15,6 +16,7 @@
       <arg name="path" type="s" direction="in"/>
       <arg name="delay" type="i" direction="in"/>
       <arg name="id" type="i" direction="in"/>
+      <arg name="interactive" type="b" direction="in"/>
     </method>
 
     <!--

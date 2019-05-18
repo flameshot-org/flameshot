@@ -53,7 +53,8 @@ public:
     explicit CaptureWidget(const uint id = 0,
                            const QString &savePath = QString(),
                            bool fullScreen = true,
-                           QWidget *parent = nullptr);
+                           QWidget *parent = nullptr,
+                           bool intersected = false);
     ~CaptureWidget();
 
 
@@ -131,6 +132,7 @@ private:
     void updateCursor();
     void pushToolToStack();
     void makeChild(QWidget *w);
+    void selectAll();
 
     QRect extendedSelection() const;
     QRect extendedRect(QRect *r) const;

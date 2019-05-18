@@ -94,6 +94,12 @@ Example commands:
     flameshot gui -d 2000
     ```
 
+- Open GUI with entire screen selected and pencil tool picked
+
+    ```shell
+    flameshot gui -i
+    ```
+
 - Fullscreen capture with custom save path (no GUI) and delayed:
 
     ```shell

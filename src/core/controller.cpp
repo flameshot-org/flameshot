@@ -91,8 +91,9 @@ void Controller::requestCapture(const CaptureRequest &request) {
         break;
     } case CaptureRequest::GRAPHICAL_MODE: {
         QString &&path = request.path();
-        doLater(request.delay(), this, [this, id, path](){
-            this->startVisualCapture(id, path);
+        bool &&interactive = request.data().toBool();
+        doLater(request.delay(), this, [this, id, path, interactive](){
+            this->startVisualCapture(id, path, interactive);
         });
         break;
     } default:
@@ -102,7 +103,9 @@ void Controller::requestCapture(const CaptureRequest &request) {
 }
 
 // creation of a new capture in GUI mode
-void Controller::startVisualCapture(const uint id, const QString &forcedSavePath) {
+void Controller::startVisualCapture(const uint id,
+                                    const QString &forcedSavePath,
+                                    const bool interactive) {
     if (!m_captureWindow) {
         QWidget *modalWidget = nullptr;
         do {
@@ -113,7 +116,7 @@ void Controller::startVisualCapture(const uint id, const QString &forcedSavePath
             }
         } while (modalWidget);
 
-        m_captureWindow = new CaptureWidget(id, forcedSavePath);
+        m_captureWindow = new CaptureWidget(id, forcedSavePath, true, nullptr, interactive);
         //m_captureWindow = new CaptureWidget(id, forcedSavePath, false); // debug
         connect(m_captureWindow, &CaptureWidget::captureFailed,
                 this, &Controller::captureFailed);

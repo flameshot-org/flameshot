@@ -23,7 +23,7 @@ Type=SIMPLE_ACTION_DATA
 ActionsCount=1
 
 [Data_1_1Actions0]
-Arguments='Pictures/Screenshots' 0 0
+Arguments='Pictures/Screenshots' 0 0 false
 Call=graphicCapture
 RemoteApp=org.dharkael.Flameshot
 RemoteObj=/
@@ -52,7 +52,7 @@ Type=SIMPLE_ACTION_DATA
 ActionsCount=1
 
 [Data_1_2Actions0]
-Arguments='Pictures/Screenshots' 3000 0
+Arguments='Pictures/Screenshots' 3000 0 false
 Call=graphicCapture
 RemoteApp=org.dharkael.Flameshot
 RemoteObj=/

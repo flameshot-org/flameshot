@@ -148,6 +148,9 @@ int main(int argc, char *argv[]) {
                 {"n", "number"},
                 QStringLiteral("Define the screen to capture,\ndefault: screen containing the cursor"),
                 QStringLiteral("Screen number"), QStringLiteral("-1"));
+    CommandOption interactiveOption(
+                {"i", "interactive"},
+                QStringLiteral("Interactive mode"));
 
     // Add checkers
     auto colorChecker = [](const QString &colorCode) -> bool {
@@ -191,6 +194,7 @@ int main(int argc, char *argv[]) {
     autostartOption.addChecker(booleanChecker, booleanErr);
     showHelpOption.addChecker(booleanChecker, booleanErr);
     screenNumberOption.addChecker(numericChecker, numberErr);
+    interactiveOption.addChecker(booleanChecker, booleanErr);
 
     // Relationships
     parser.AddArgument(guiArgument);
@@ -200,7 +204,7 @@ int main(int argc, char *argv[]) {
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
-    parser.AddOptions({ pathOption, delayOption, rawImageOption }, guiArgument);
+    parser.AddOptions({ pathOption, delayOption, rawImageOption, interactiveOption }, guiArgument);
     parser.AddOptions({ screenNumberOption, clipboardOption,pathOption,
                         delayOption, rawImageOption },
                       screenArgument);
@@ -232,6 +236,7 @@ int main(int argc, char *argv[]) {
         QString pathValue = parser.value(pathOption);
         int delay = parser.value(delayOption).toInt();
         bool isRaw = parser.isSet(rawImageOption);
+        bool isInteractive = parser.isSet(interactiveOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
         uint id = req.id();
@@ -239,7 +244,7 @@ int main(int argc, char *argv[]) {
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
                                            QStringLiteral("/"), QLatin1String(""), QStringLiteral("graphicCapture"));
-        m << pathValue << delay << id;
+        m << pathValue << delay << id << isInteractive;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);

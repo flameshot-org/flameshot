@@ -47,9 +47,26 @@
 // CaptureWidget is the main component used to capture the screen. It contains an
 // are of selection with its respective buttons.
 
+void CaptureWidget::selectAll() {
+    m_selection->setVisible(true);
+    QRect screenGeometry = QGuiApplication::primaryScreen()->geometry();
+
+    m_selection->setGeometry(screenGeometry);
+    m_context.selection = extendedRect(&screenGeometry);
+    updateSizeIndicator();
+
+    // default tool: Pencil
+    setState(new CaptureButton(CaptureButton::TYPE_PENCIL, this));
+
+    m_buttonHandler->updatePosition(screenGeometry);
+    m_buttonHandler->show();
+
+    updateCursor();
+}
+
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
-                             bool fullScreen, QWidget *parent) :
+                             bool fullScreen, QWidget *parent, bool interactive) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
     m_previewEnabled(true), m_adjustmentButtonPressed(false), m_activeButton(nullptr),
@@ -138,6 +155,10 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     connect(&m_undoStack, &QUndoStack::indexChanged,
             this, [this](int){ this->update(); });
     initPanel();
+
+    // select the entire screen and enable pencil tool
+    if (interactive)
+      selectAll();
 }
 
 CaptureWidget::~CaptureWidget() {
