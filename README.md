@@ -42,6 +42,7 @@
 - [Features](#features)
 - [Usage](#usage)
   - [CLI configuration](#cli-configuration)
+  - [config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
   - [Local](#local)
   - [Global](#global)
@@ -145,6 +146,12 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```shell
     flameshot config -h
     ```
+
+### config file
+
+A traditional config file (dotfile) can be found in the following location:
+
+- `.config/Dharkael/flameshot.ini`
 
 ## Keyboard shortcuts
 
