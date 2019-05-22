@@ -350,7 +350,10 @@ If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Donations
 I improve Flameshot in my free time because I want to create something good for everyone to use. 
-If you want you can donate some bucks [here](https://www.paypal.me/lupoDharkael).
+If you want you can donate some bucks with the following options: 
+- [Paypal](https://www.paypal.me/lupoDharkael)
+- bitcoin:1K6oiUKWVjP3x9ZuW9C7NbDfcFkMx3G8ue
+
 
 ## Acknowledgment
 I really appreciate those who have shown interest in the early development process:
