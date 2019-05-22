@@ -92,7 +92,7 @@ Press Space to open the side panel.</source>
 Presiona Enter para capturar la pantalla.
 Presion Click Derecho para mostrar el selector de color.
 Usa la rueda del ratón para cambiar el grosor de la herramienta.
-Presiona Espacion para abrir el panel lateral.</translation>
+Presiona Espacio para abrir el panel lateral.</translation>
     </message>
 </context>
 <context>
