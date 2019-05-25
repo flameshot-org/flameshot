@@ -233,6 +233,7 @@ There are packages available for a few distros:
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
+- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
 
 <details>
