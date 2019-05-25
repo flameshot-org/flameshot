@@ -54,7 +54,7 @@ public:
                            const QString &savePath = QString(),
                            bool fullScreen = true,
                            QWidget *parent = nullptr,
-                           bool intersected = false);
+                           bool interactive = false);
     ~CaptureWidget();
 
 
