@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>img/app/flameshot.svg</file>
         <file>img/app/flameshot.png</file>
+        <file>img/material/black/clear.svg</file>
         <file>img/material/black/undo-variant.svg</file>
         <file>img/material/black/text.svg</file>
         <file>img/material/black/square.svg</file>
@@ -33,6 +34,7 @@
         <file>img/material/black/circle-outline.svg</file>
         <file>img/material/black/blur.svg</file>
         <file>img/material/black/arrow-bottom-left.svg</file>
+        <file>img/material/white/clear.svg</file>
         <file>img/material/white/undo-variant.svg</file>
         <file>img/material/white/text.svg</file>
         <file>img/material/white/square.svg</file>

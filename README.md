@@ -157,6 +157,7 @@ These shortcuts are available in GUI mode:
 | <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                                             |
 | <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                                           |
 | <kbd>Esc</kbd>                                                            | Quit capture                                                   |
+| <kbd>Delete</kbd>                                                         | Clear all modifications                                        |
 | <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                                              |
 | <kbd>Ctrl</kbd> + <kbd>S</kbd>                                            | Save selection as a file                                       |
 | <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                            | Undo the last modification                                     |

@@ -51,6 +51,7 @@ public:
         TYPE_REDO = 16,
         TYPE_PIN = 17,
         TYPE_TEXT = 18,
+        TYPE_CLEAR = 19,
     };
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)

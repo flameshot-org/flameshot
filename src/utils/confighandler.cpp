@@ -50,6 +50,7 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
                 << CaptureButton::TYPE_MOVESELECTION
                 << CaptureButton::TYPE_UNDO
                 << CaptureButton::TYPE_REDO
+                << CaptureButton::TYPE_CLEAR
                 << CaptureButton::TYPE_COPY
                 << CaptureButton::TYPE_SAVE
                 << CaptureButton::TYPE_EXIT

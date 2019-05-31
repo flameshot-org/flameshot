@@ -30,6 +30,7 @@
 #include "selection/selectiontool.h"
 #include "sizeindicator/sizeindicatortool.h"
 #include "undo/undotool.h"
+#include "clear/cleartool.h"
 #include "launcher/applaunchertool.h"
 #include "blur/blurtool.h"
 #include "redo/redotool.h"
@@ -87,6 +88,9 @@ CaptureTool* ToolFactory::CreateTool(
         break;
     case CaptureButton::TYPE_UNDO:
         tool = new UndoTool(parent);
+        break;
+    case CaptureButton::TYPE_CLEAR:
+        tool = new ClearTool(parent);
         break;
     case CaptureButton::TYPE_REDO:
         tool = new RedoTool(parent);

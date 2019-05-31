@@ -91,6 +91,7 @@ SOURCES += src/main.cpp \
     src/tools/pencil/penciltool.cpp \
     src/tools/undo/undotool.cpp \
     src/tools/redo/redotool.cpp \
+    src/tools/clear/cleartool.cpp \
     src/tools/arrow/arrowtool.cpp \
     src/tools/circle/circletool.cpp \
     src/tools/copy/copytool.cpp \
@@ -165,6 +166,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/pencil/penciltool.h \
     src/tools/undo/undotool.h \
     src/tools/redo/redotool.h \
+    src/tools/clear/cleartool.h \
     src/tools/arrow/arrowtool.h \
     src/tools/circle/circletool.h \
     src/tools/copy/copytool.h \
