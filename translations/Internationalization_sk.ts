@@ -157,6 +157,19 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     </message>
 </context>
 <context>
+    <name>ClearTool</name>
+    <message>
+        <location filename="../src/tools/clear/cleartool.cpp" line="34"/>
+        <source>Clear</source>
+        <translation type="unfinished">Vyčistiť</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/clear/cleartool.cpp" line="42"/>
+        <source>Clear all modifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigWindow</name>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
@@ -462,92 +475,97 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
         <translation>O programe</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="62"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>SPACEBAR</source>
         <translation>MEDZERNÍK</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="63"/>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Right Click</source>
         <translation>Kliknutie pravým tlačidlom</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="64"/>
+        <location filename="../src/widgets/infowindow.cpp" line="65"/>
         <source>Mouse Wheel</source>
         <translation>Kolečko myši</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="68"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Move selection 1px</source>
         <translation>Presunúť výber o 1 px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="69"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Resize selection 1px</source>
         <translation>Zmeniť rozmery výberu o 1 px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Quit capture</source>
         <translation>Ukončiť zachytávanie obrazovky</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
+        <source>Clear all modifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
         <translation>Kopírovať do schránky</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
         <translation>Zapísať výber do súboru</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
         <translation>Vrátiť poslednú úpravu</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
         <translation>Prepnúť viditeľnosť bočnej lišty s možnosťami vybraného nástroja</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
+        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
         <translation>Zobraziť dialóg na výber farby</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Zmena hrúbky nástroja</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="81"/>
+        <location filename="../src/widgets/infowindow.cpp" line="83"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Dostupné klávesové skratky v režime zachytávania obrazovky.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="94"/>
         <source>Key</source>
         <translation>Kláves</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="94"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="123"/>
+        <location filename="../src/widgets/infowindow.cpp" line="125"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licencia&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="131"/>
+        <location filename="../src/widgets/infowindow.cpp" line="133"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Verzia&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="141"/>
+        <location filename="../src/widgets/infowindow.cpp" line="143"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Klávesové skratky&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
