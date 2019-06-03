@@ -204,6 +204,25 @@ Steps for using the configuration:
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty mush self-explanatory.
 
+#### On Ubuntu and other Gnome based distros
+
+You can easely configure your 'print' keyboard shortcut to be assigned to Flameshot.
+
+1. Open _Settings_ → _Devices_ → _Keyboard_  → _Shortcuts_.
+
+2. Search for 'print', and unbind the screen capture funcion by selecting it, and clicking _backspace_.
+
+3. Scroll down and click on the '+'.
+
+4. On 'Name', name it 'Flameshot' or 'PrintScreen'.
+
+5. Define the command as 'flameshot gui'.
+
+6. Select 'Define shortcut...'and click yout keyboard <kbd>Prt Sc</kbd> key.
+
+Now you can use your defauld keyboard key to launch Flameshot.
+
+
 ## Considerations
 
 - Experimental Gnome Wayland and Plasma Wayland support.
