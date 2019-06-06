@@ -39,6 +39,7 @@ public:
     size_t size() const;
 
     void setButtons(const QVector<CaptureButton*>);
+    QVector<CaptureButton*> getButtons();
     bool contains(const QPoint &p) const;
     void updateScreenRegions(const QVector<QRect> &rects);
     void updateScreenRegions(const QRect &rect);

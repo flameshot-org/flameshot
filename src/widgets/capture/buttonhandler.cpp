@@ -349,6 +349,10 @@ void ButtonHandler::setButtons(const QVector<CaptureButton *> v) {
     m_buttonExtendedSize = m_buttonBaseSize + m_separator;
 }
 
+QVector<CaptureButton*> ButtonHandler::getButtons() {
+    return m_vectorButtons;
+}
+
 bool ButtonHandler::contains(const QPoint &p) const {
     QPoint first(m_vectorButtons.first()->pos());
     QPoint last(m_vectorButtons.last()->pos());

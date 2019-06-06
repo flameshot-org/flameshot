@@ -138,6 +138,10 @@ CaptureTool *CaptureButton::tool() const {
     return m_tool;
 }
 
+CaptureButton::ButtonType CaptureButton::getButtonType() const {
+    return m_buttonType;
+}
+
 void CaptureButton::setColor(const QColor &c) {
     m_mainColor = c;
     setStyleSheet(styleSheet());
