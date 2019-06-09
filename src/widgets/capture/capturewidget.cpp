@@ -58,10 +58,13 @@ void CaptureWidget::selectAll() {
     updateSizeIndicator();
 
     // default tool: Pencil
-    for (auto* button : m_buttonHandler->getButtons()) {
-      if (button->getButtonType() == CaptureButton::TYPE_PENCIL)
-        setState(button);
-      break;
+    if (!m_activeButton) {
+        for (auto* button : m_buttonHandler->getButtons()) {
+            if (button->getButtonType() == CaptureButton::TYPE_PENCIL) {
+                setState(button);
+                break;
+            }
+        }
     }
 
     m_buttonHandler->updatePosition(screenGeometry);
