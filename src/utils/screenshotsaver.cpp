@@ -16,6 +16,9 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshotsaver.h"
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include "src/utils/systemnotification.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
@@ -29,9 +32,27 @@ ScreenshotSaver::ScreenshotSaver() {
 }
 
 void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
-    SystemNotification().sendMessage(
-                QObject::tr("Capture saved to clipboard"));
-    QApplication::clipboard()->setPixmap(capture);
+    char tmp_file[] = "/tmp/clip.XXXXXX.png";
+    mkstemps(tmp_file, 4);
+    bool success = capture.save(QString(tmp_file), 0, -1);
+
+    if (!success) {
+        SystemNotification().sendMessage(
+                QObject::tr("Saved to QT clipboard (Disappears after closing instance)"));
+        QApplication::clipboard()->setPixmap(capture);
+    } else {
+        char save[100 + sizeof(tmp_file)];
+        snprintf(save, sizeof(save),"cat %s | xclip -selection clipboard -target image/png -i", tmp_file);
+        system(save);
+
+        char rm[100 + sizeof(tmp_file)];
+        snprintf(rm, sizeof(rm),"rm -f %s", tmp_file);
+        system(rm);
+
+        SystemNotification().sendMessage(
+                QObject::tr("Saved to global clipboard"));
+    }
+
 }
 
 bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
