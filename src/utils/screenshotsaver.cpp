@@ -45,14 +45,13 @@ void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
         snprintf(save, sizeof(save),"cat %s | xclip -selection clipboard -target image/png -i", tmp_file);
         system(save);
 
-        char rm[100 + sizeof(tmp_file)];
-        snprintf(rm, sizeof(rm),"rm -f %s", tmp_file);
-        system(rm);
-
         SystemNotification().sendMessage(
                 QObject::tr("Saved to global clipboard"));
     }
 
+    char rm[100 + sizeof(tmp_file)];
+    snprintf(rm, sizeof(rm),"rm -f %s", tmp_file);
+    system(rm);
 }
 
 bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
