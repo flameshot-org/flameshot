@@ -33,22 +33,24 @@ bool useXclipClipboard(const QPixmap &capture) {
     char tmp_file[] = "/tmp/clip.XXXXXX.png";
     mkstemps(tmp_file, 4);
     bool success = capture.save(QString(tmp_file), 0, -1);
-    if (!success) return false;
 
-    // save tmp file to clipboard using xclip
-    char save[100 + sizeof(tmp_file)];
-    snprintf(save, sizeof(save),"cat %s | xclip -selection clipboard -target image/png -i", tmp_file);
-    system(save);
+    if (success) {
+        // save tmp file to clipboard using xclip
+        char save[100 + sizeof(tmp_file)];
+        snprintf(save, sizeof(save),"cat %s | xclip -selection clipboard -target image/png -i", tmp_file);
+        system(save);
 
-    SystemNotification().sendMessage(
-            QObject::tr("Saved to global clipboard"));
-    
+        SystemNotification().sendMessage(
+                QObject::tr("Saved to global clipboard"));
+        
+    }
+
     // remove tmp file
     char rm[100 + sizeof(tmp_file)];
     snprintf(rm, sizeof(rm),"rm -f %s", tmp_file);
     system(rm);
 
-    return true;
+    return success;
 }
 
 void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
