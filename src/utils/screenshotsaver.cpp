@@ -16,9 +16,6 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshotsaver.h"
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include "src/utils/systemnotification.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
@@ -31,27 +28,40 @@
 ScreenshotSaver::ScreenshotSaver() {
 }
 
-void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
+bool useXclipClipboard(const QPixmap &capture) {
+    // create tmp png file
     char tmp_file[] = "/tmp/clip.XXXXXX.png";
     mkstemps(tmp_file, 4);
     bool success = capture.save(QString(tmp_file), 0, -1);
+    if (!success) return false;
+
+    // save tmp file to clipboard using xclip
+    char save[100 + sizeof(tmp_file)];
+    snprintf(save, sizeof(save),"cat %s | xclip -selection clipboard -target image/png -i", tmp_file);
+    system(save);
+
+    SystemNotification().sendMessage(
+            QObject::tr("Saved to global clipboard"));
+    
+    // remove tmp file
+    char rm[100 + sizeof(tmp_file)];
+    snprintf(rm, sizeof(rm),"rm -f %s", tmp_file);
+    system(rm);
+
+    return true;
+}
+
+void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
+    bool success = false;
+    if (ConfigHandler().useXclipManagerValue()) {
+        success = useXclipClipboard(capture);
+    }
 
     if (!success) {
         SystemNotification().sendMessage(
                 QObject::tr("Saved to QT clipboard (Disappears after closing instance)"));
         QApplication::clipboard()->setPixmap(capture);
-    } else {
-        char save[100 + sizeof(tmp_file)];
-        snprintf(save, sizeof(save),"cat %s | xclip -selection clipboard -target image/png -i", tmp_file);
-        system(save);
-
-        SystemNotification().sendMessage(
-                QObject::tr("Saved to global clipboard"));
     }
-
-    char rm[100 + sizeof(tmp_file)];
-    snprintf(rm, sizeof(rm),"rm -f %s", tmp_file);
-    system(rm);
 }
 
 bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
