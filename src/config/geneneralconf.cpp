@@ -37,6 +37,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowTrayIcon();
     initAutostart();
     initCloseAfterCapture();
+    initXclipManager();
 
     // this has to be at the end
     initConfingButtons();
@@ -78,6 +79,10 @@ void GeneneralConf::autostartChanged(bool checked) {
 
 void GeneneralConf::closeAfterCaptureChanged(bool checked) {
     ConfigHandler().setCloseAfterScreenshot(checked);
+}
+
+void GeneneralConf::useXclipManagerChanged(bool checked) {
+    ConfigHandler().setXclipManager(checked);
 }
 
 void GeneneralConf::importConfiguration() {
@@ -221,4 +226,15 @@ void GeneneralConf::initCloseAfterCapture() {
 
     connect(m_closeAfterCapture, &QCheckBox::clicked, this,
             &GeneneralConf::closeAfterCaptureChanged);
+}
+
+void GeneneralConf::initXclipManager() {
+    m_xclipManager = new QCheckBox(tr("Use xclip to save on clipboard"), this);
+    ConfigHandler config;
+    bool checked = config.useXclipManagerValue();
+    m_xclipManager->setChecked(checked);
+    m_xclipManager->setToolTip(tr("Use xclip to save on clipboard"));
+    m_layout->addWidget(m_xclipManager);
+    connect(m_xclipManager, &QCheckBox::clicked, this,
+            &GeneneralConf::useXclipManagerChanged);
 }

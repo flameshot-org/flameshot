@@ -37,6 +37,7 @@ private slots:
    void showTrayIconChanged(bool checked);
    void autostartChanged(bool checked);
    void closeAfterCaptureChanged(bool checked);
+   void useXclipManagerChanged(bool checked);
    void importConfiguration();
    void exportFileConfiguration();
    void resetConfiguration();
@@ -48,6 +49,7 @@ private:
     QCheckBox *m_helpMessage;
     QCheckBox *m_autostart;
     QCheckBox *m_closeAfterCapture;
+    QCheckBox *m_xclipManager;
     QPushButton *m_importButton;
     QPushButton *m_exportButton;
     QPushButton *m_resetButton;
@@ -58,4 +60,5 @@ private:
     void initConfingButtons();
     void initAutostart();
     void initCloseAfterCapture();
+    void initXclipManager();
 };

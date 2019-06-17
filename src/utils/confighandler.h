@@ -71,6 +71,8 @@ public:
     bool closeAfterScreenshotValue();
     void setCloseAfterScreenshot(const bool);
 
+    bool useXclipManagerValue();
+    void setXclipManager(const bool);
 
     void setDefaults();
     void setAllTheButtons();

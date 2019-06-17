@@ -325,6 +325,14 @@ void ConfigHandler::setCloseAfterScreenshot(const bool close) {
     m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
 }
 
+bool ConfigHandler::useXclipManagerValue() {
+    return m_settings.value(QStringLiteral("xclipManager")).toBool();
+}
+
+void ConfigHandler::setXclipManager(const bool xclip) {
+    return m_settings.setValue(QStringLiteral("xclipManager"), xclip);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }
