@@ -25,6 +25,7 @@ BuildRequires: git
 
 Requires: qt5-qtbase >= 5.3.0
 Requires: qt5-qttools
+Requires: qt5-qtsvg
 
 %description
 Flameshot is a screenshot software, it's
