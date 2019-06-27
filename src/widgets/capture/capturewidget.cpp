@@ -702,6 +702,12 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
             QWidget *w = m_activeTool->widget();
             w->setAttribute(Qt::WA_DeleteOnClose);
             w->show();
+            if (ConfigHandler().closeAfterScreenshotValue()) {
+                hide();
+                QEventLoop loop;
+                connect(w, &QWidget::destroyed, &loop, &QEventLoop::quit);
+                loop.exec();
+            }
         }
         break;
     default:
