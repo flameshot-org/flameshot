@@ -31,6 +31,7 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/screenshotsaver.h"
+#include "src/tools/imgur/imguruploadertool.h"
 #include "src/core/controller.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include <QUndoView>
@@ -770,6 +771,7 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveScreenshot()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), this, SLOT(copyScreenshot()));
+    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_U), this, SLOT(uploadScreenshot()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z), this, SLOT(redo()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right), this, SLOT(rightResize()));
@@ -876,6 +878,16 @@ void CaptureWidget::saveScreenshot() {
         ScreenshotSaver().saveToFilesystem(pixmap(), m_context.savePath);
     }
     close();
+}
+
+void CaptureWidget::uploadScreenshot() {
+    m_captureDone = true;
+    hide();
+    QPixmap p = m_context.selectedScreenshotArea().copy();
+    QPainter painter(&p);
+    m_activeTool = new ImgurUploaderTool(this);
+    m_activeTool->widget()->show();
+    m_activeTool->process(painter, m_context.selectedScreenshotArea());
 }
 
 void CaptureWidget::undo() {
