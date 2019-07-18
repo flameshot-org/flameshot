@@ -204,6 +204,24 @@ Steps for using the configuration:
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty mush self-explanatory.
 
+### On Ubuntu (Tested on 18.04)
+
+Taken from [adaptation](https://askubuntu.com/posts/1039949/revisions) of [Pavel Answer on askubuntu](https://askubuntu.com/revisions/1036473/1). To use flameshot instead of default screenshot application in ubuntu we need to release the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui`.
+
+1. Release the binding on <kbd>Prt Sc</kbd> using the following command.
+
+  ```shell
+  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+  ```
+
+2. Go to Settings > Device > Keyboard and press the '+' button at the bottom.
+
+3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
+
+4. Then click "_Set Shortcut.._" and press <kbd>Prt Sc</kbd>. This will show as "_print_".
+
+Now everytime You press <kbd>Prt Sc</kbd> it will start the flameshot gui instead of the default application
+
 ## Considerations
 
 - Experimental Gnome Wayland and Plasma Wayland support.
