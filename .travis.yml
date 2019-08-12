@@ -36,6 +36,10 @@ matrix:
           env: OS=fedora DIST=29 EXTEN=rpm
           services: docker
         - os: linux
+          # 30
+          env: OS=fedora DIST=30 EXTEN=rpm
+          services: docker
+        - os: linux
           # 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
           services: docker
