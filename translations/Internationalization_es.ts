@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
-        <translation>Elije una aplicación con la que abrir la captura</translation>
+        <translation>Elige una aplicación con la que abrir la captura</translation>
     </message>
 </context>
 <context>
@@ -441,7 +441,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterna la visualización de la barra lateral de opciones de la herramienta seleccionada</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="75"/>
@@ -657,7 +657,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
         <source>Active thickness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Espesor activo:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
