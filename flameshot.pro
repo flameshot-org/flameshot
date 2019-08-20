@@ -50,6 +50,7 @@ TRANSLATIONS = translations/Internationalization_es.ts \
     translations/Internationalization_uk.ts \
     translations/Internationalization_de_DE.ts \
     translations/Internationalization_sk.ts \
+    translations/Internationalization_hu.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
