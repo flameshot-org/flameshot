@@ -36,6 +36,7 @@ win32:RC_ICONS += img/app/flameshot.ico
 #UI_DIR = $$DESTDIR/.ui
 
 TRANSLATIONS =  translations/Internationalization_ca.ts \
+                translations/Internationalization_cs.ts \
                 translations/Internationalization_de_DE.ts \
                 translations/Internationalization_es.ts
                 translations/Internationalization_ka.ts \
