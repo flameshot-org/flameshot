@@ -35,21 +35,21 @@ win32:RC_ICONS += img/app/flameshot.ico
 #RCC_DIR = $$DESTDIR/.qrc
 #UI_DIR = $$DESTDIR/.ui
 
-TRANSLATIONS = translations/Internationalization_es.ts \
-    translations/Internationalization_ca.ts \
-    translations/Internationalization_ru.ts \
-    translations/Internationalization_zh_CN.ts \
-    translations/Internationalization_zh_TW.ts \
-    translations/Internationalization_tr.ts \
-    translations/Internationalization_ka.ts \
-    translations/Internationalization_fr.ts \
-    translations/Internationalization_pl.ts \
-    translations/Internationalization_ja.ts \
-    translations/Internationalization_pt_br.ts \
-    translations/Internationalization_sr.ts \
-    translations/Internationalization_uk.ts \
-    translations/Internationalization_de_DE.ts \
-    translations/Internationalization_sk.ts \
+TRANSLATIONS =  translations/Internationalization_ca.ts \
+                translations/Internationalization_de_DE.ts \
+                translations/Internationalization_es.ts
+                translations/Internationalization_ka.ts \
+                translations/Internationalization_fr.ts \
+                translations/Internationalization_ja.ts \
+                translations/Internationalization_pl.ts \
+                translations/Internationalization_pt_br.ts \
+                translations/Internationalization_ru.ts \
+                translations/Internationalization_sr.ts \
+                translations/Internationalization_sk.ts \
+                translations/Internationalization_tr.ts \
+                translations/Internationalization_uk.ts \
+                translations/Internationalization_zh_CN.ts \
+                translations/Internationalization_zh_TW.ts
 
 # Generate translations in build
 TRANSLATIONS_FILES =
