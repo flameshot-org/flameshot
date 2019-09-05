@@ -850,7 +850,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändra färgen genom att röra reglagen och se ändringarna på förhandsgranskningsknapparna.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="103"/>
