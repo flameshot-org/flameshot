@@ -6,7 +6,7 @@
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="34"/>
         <source>App Launcher</source>
-        <translation>App startare</translation>
+        <translation>Appstartare</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
