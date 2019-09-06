@@ -6,12 +6,12 @@
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="34"/>
         <source>App Launcher</source>
-        <translation>Appstartare</translation>
+        <translation>Programstartare</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
-        <translation>Välj en app för att öppna skärmklippet</translation>
+        <translation>Välj ett program för att öppna skärmklippet</translation>
     </message>
 </context>
 <context>
@@ -123,7 +123,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>Filename Editor</source>
-        <translation>Filnamnsredigering</translation>
+        <translation>Redigera filnamn</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="73"/>
@@ -296,12 +296,12 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="159"/>
         <source>Show tray icon</source>
-        <translation>Visa systemfältsikon</translation>
+        <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show the systemtray icon</source>
-        <translation>Visa systemfältsikon</translation>
+        <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="174"/>
@@ -388,7 +388,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
         <source>Upload the selection to Imgur</source>
-        <translation>Ladda upp urval till Imgur</translation>
+        <translation>Ladda upp skärmklipp till Imgur</translation>
     </message>
 </context>
 <context>
@@ -461,7 +461,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Key</source>
-        <translation>Nyckel</translation>
+        <translation>Tangent</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="92"/>
@@ -502,12 +502,12 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="42"/>
         <source>Marker</source>
-        <translation>Markör</translation>
+        <translation>Överstrykningspenna</translation>
     </message>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="50"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Välj markör som ritverktyg</translation>
+        <translation>Välj Överstrykningspenna som ritverktyg</translation>
     </message>
 </context>
 <context>
@@ -541,12 +541,12 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation></translation>
+        <translation>Fäst</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation></translation>
+        <translation>Fäst bilden på skrivbordet</translation>
     </message>
 </context>
 <context>
@@ -628,7 +628,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
-        <translation>Svara urvalet</translation>
+        <translation>Spara skärmklippet</translation>
     </message>
 </context>
 <context>
@@ -865,7 +865,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="116"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicka här för att redigera huvudfärg.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="127"/>
@@ -875,7 +875,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="132"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicka här för att redigera kontrastfärg.</translation>
     </message>
 </context>
 <context>
