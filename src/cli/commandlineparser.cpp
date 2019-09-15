@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -31,9 +31,9 @@ QTextStream out(stdout);
 QTextStream err(stderr);
 
 auto versionOption = CommandOption({"v", "version"},
-                                   "Displays version information");
+                                   QStringLiteral("Displays version information"));
 auto helpOption = CommandOption({"h", "help"},
-                                "Displays this help");
+                                QStringLiteral("Displays this help"));
 
 QString optionsToString(const QList<CommandOption> &options,
                         const QList<CommandArgument> &arguments) {
@@ -43,7 +43,7 @@ QString optionsToString(const QList<CommandOption> &options,
     // of every option at the same horizontal character position.
     for (auto const &option: options) {
         QStringList dashedOptions = option.dashedNames();
-        QString joinedDashedOptions = dashedOptions.join(", ");
+        QString joinedDashedOptions = dashedOptions.join(QStringLiteral(", "));
         if (!option.valueName().isEmpty()) {
             joinedDashedOptions += QStringLiteral(" <%1>")
                     .arg(option.valueName());
@@ -61,20 +61,20 @@ QString optionsToString(const QList<CommandOption> &options,
     // generate the text
     QString result;
     if(!dashedOptionList.isEmpty()) {
-        result += "Options:\n";
-        QString linePadding = QString(" ").repeated(size + 4).prepend("\n");
+        result += QLatin1String("Options:\n");
+        QString linePadding = QStringLiteral(" ").repeated(size + 4).prepend("\n");
         for (int i = 0; i < options.length(); ++i) {
             result += QStringLiteral("  %1  %2\n")
                     .arg(dashedOptionList.at(i).leftJustified(size, ' '))
                     .arg(options.at(i).description()
-                         .replace("\n", linePadding));
+                         .replace(QLatin1String("\n"), linePadding));
         }
         if (!arguments.isEmpty()) {
-            result += "\n";
+            result += QLatin1String("\n");
         }
     }
     if (!arguments.isEmpty()) {
-        result += "Arguments:\n";
+        result += QLatin1String("Arguments:\n");
     }
     for (int i = 0; i < arguments.length(); ++i) {
         result += QStringLiteral("  %1  %2\n")
@@ -121,14 +121,14 @@ bool CommandLineParser::processOptions(const QStringList &args,
     QString arg = *actualIt;
     bool ok = true;
     // track values
-    int equalsPos = arg.indexOf("=");
+    int equalsPos = arg.indexOf(QLatin1String("="));
     QString valueStr;
     if (equalsPos != -1) {
         valueStr = arg.mid(equalsPos +1); // right
         arg = arg.mid(0, equalsPos); // left
     }
     // check format -x --xx...
-    bool isDoubleDashed = arg.startsWith("--");
+    bool isDoubleDashed = arg.startsWith(QLatin1String("--"));
     ok =  isDoubleDashed ? arg.length() > 3 :
                 arg.length() == 2;
     if (!ok) {
@@ -182,8 +182,8 @@ bool CommandLineParser::processOptions(const QStringList &args,
         ok = option.checkValue(valueStr);
         if (!ok) {
             QString err = option.errorMsg();
-            if (!err.endsWith("."))
-                err += ".";
+            if (!err.endsWith(QLatin1String(".")))
+                err += QLatin1String(".");
             out << err;
             return ok;
         }
@@ -219,7 +219,7 @@ bool CommandLineParser::parse(const QStringList &args) {
     // process the other args
     for (; it != args.cend() && ok; ++it) {
         const QString &value = *it;
-        if (value.startsWith("-")) {
+        if (value.startsWith(QLatin1String("-"))) {
             ok = processOptions(args, it, actualNode);
 
         } else {
@@ -326,7 +326,7 @@ void CommandLineParser::printHelp(QStringList args, const Node *node) {
     }
     QString argText = node->subNodes.isEmpty() ? "" : "[arguments]";
     helpText += QStringLiteral("Usage: %1 [%2-options] %3\n\n")
-            .arg(args.join(" "))
+            .arg(args.join(QStringLiteral(" ")))
             .arg(argName).arg(argText);
     // add command options and subarguments
     QList<CommandArgument> subArgs;

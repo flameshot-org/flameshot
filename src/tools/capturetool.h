@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -135,6 +135,11 @@ public slots:
     virtual void drawEnd(const QPoint &p) = 0;
     // Mouse pressed and moving, called once a pixel.
     virtual void drawMove(const QPoint &p) = 0;
+    // Called when drawMove is needed with an adjustment;
+    // should be overridden in case an adjustment is applicable.
+    virtual void drawMoveWithAdjustment(const QPoint &p) {
+        drawMove(p);
+    }
     // Called when the tool is activated.
     virtual void drawStart(const CaptureContext &context) = 0;
     // Called right after pressign the button which activates the tool.

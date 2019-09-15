@@ -43,7 +43,13 @@ TRANSLATIONS = translations/Internationalization_es.ts \
     translations/Internationalization_tr.ts \
     translations/Internationalization_ka.ts \
     translations/Internationalization_fr.ts \
-    translations/Internationalization_pl.ts
+    translations/Internationalization_pl.ts \
+    translations/Internationalization_ja.ts \
+    translations/Internationalization_pt_br.ts \
+    translations/Internationalization_sr.ts \
+    translations/Internationalization_uk.ts \
+    translations/Internationalization_de_DE.ts \
+    translations/Internationalization_sk.ts \
 
 # Generate translations in build
 TRANSLATIONS_FILES =
@@ -134,11 +140,12 @@ SOURCES += src/main.cpp \
     src/widgets/capture/hovereventfilter.cpp \
     src/widgets/capture/selectionwidget.cpp \
     src/tools/pin/pinwidget.cpp \
+    src/widgets/capturelauncher.cpp \
     src/tools/text/texttool.cpp \
     src/tools/text/textwidget.cpp \
     src/core/capturerequest.cpp \
     src/tools/text/textconfig.cpp \
-    src/widgets/panel/colorpickerwidget.cpp
+    src/widgets/panel/sidepanelwidget.cpp
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
@@ -206,11 +213,12 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/capture/hovereventfilter.h \
     src/widgets/capture/selectionwidget.h \
     src/tools/pin/pinwidget.h \
+    src/widgets/capturelauncher.h \
     src/tools/text/texttool.h \
     src/tools/text/textwidget.h \
     src/core/capturerequest.h \
     src/tools/text/textconfig.h \
-    src/widgets/panel/colorpickerwidget.h
+    src/widgets/panel/sidepanelwidget.h
 
 unix:!macx {
     SOURCES += src/core/flameshotdbusadapter.cpp \

@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -37,7 +37,7 @@ public:
 
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
-                   const QString &path = "",
+                   const QString &path = QLatin1String(""),
                    const QVariant &data = QVariant(),
                    ExportTask tasks = NO_TASK);
 

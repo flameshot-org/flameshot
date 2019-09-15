@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -35,11 +35,11 @@ QString BlurTool::name() const {
 }
 
 QString BlurTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString BlurTool::description() const {
-    return tr("Sets the Blur as the paint tool");
+    return tr("Set Blur as the paint tool");
 }
 
 CaptureTool* BlurTool::copy(QObject *parent) {

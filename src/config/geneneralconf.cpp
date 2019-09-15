@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -36,6 +36,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initCloseAfterCapture();
 
     // this has to be at the end
     initConfingButtons();
@@ -47,6 +48,7 @@ void GeneneralConf::updateComponents() {
     m_helpMessage->setChecked(config.showHelpValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+    m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -74,6 +76,10 @@ void GeneneralConf::autostartChanged(bool checked) {
     ConfigHandler().setStartupLaunch(checked);
 }
 
+void GeneneralConf::closeAfterCaptureChanged(bool checked) {
+    ConfigHandler().setCloseAfterScreenshot(checked);
+}
+
 void GeneneralConf::importConfiguration() {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
     if (fileName.isEmpty()) {
@@ -99,7 +105,7 @@ void GeneneralConf::importConfiguration() {
 
 void GeneneralConf::exportFileConfiguration() {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-                               "flameshot.conf");
+                               QStringLiteral("flameshot.conf"));
 
     // Cancel button
     if (fileName.isNull()) {
@@ -163,7 +169,7 @@ void GeneneralConf::initShowTrayIcon() {
     m_showTray->setToolTip(tr("Show the systemtray icon"));
     m_layout->addWidget(m_showTray);
 
-    connect(m_showTray, &QCheckBox::clicked, this,
+    connect(m_showTray, &QCheckBox::stateChanged, this,
             &GeneneralConf::showTrayIconChanged);
 #endif
 }
@@ -203,4 +209,16 @@ void GeneneralConf::initAutostart() {
 
     connect(m_autostart, &QCheckBox::clicked, this,
             &GeneneralConf::autostartChanged);
+}
+
+void GeneneralConf::initCloseAfterCapture() {
+    m_closeAfterCapture = new QCheckBox(tr("Close after capture"), this);
+    ConfigHandler config;
+    bool checked = config.closeAfterScreenshotValue();
+    m_closeAfterCapture->setChecked(checked);
+    m_closeAfterCapture->setToolTip(tr("Close after taking a screenshot"));
+    m_layout->addWidget(m_closeAfterCapture);
+
+    connect(m_closeAfterCapture, &QCheckBox::clicked, this,
+            &GeneneralConf::closeAfterCaptureChanged);
 }

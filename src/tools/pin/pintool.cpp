@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -35,7 +35,7 @@ QString PinTool::name() const {
 }
 
 QString PinTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString PinTool::description() const {
@@ -45,11 +45,7 @@ QString PinTool::description() const {
 QWidget* PinTool::widget() {
     PinWidget *w = new PinWidget(m_pixmap);
     const int &&m = w->margin();
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QRect adjusted_pos = m_geometry + QMargins(m,-m,-m,-m);
-#else
     QRect adjusted_pos = m_geometry + QMargins(m, m, m, m);
-#endif
     w->setGeometry(adjusted_pos);
     return w;
 }

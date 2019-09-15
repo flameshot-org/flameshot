@@ -57,7 +57,7 @@
     </message>
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
-        <source>Sets the Arrow as the paint tool</source>
+        <source>Set the Arrow as the paint tool</source>
         <translation>Выбрать Стрелку инструментом для рисования</translation>
     </message>
 </context>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
-        <source>Sets the Blur as the paint tool</source>
+        <source>Set Blur as the paint tool</source>
         <translation>Выбрать Размытие инструментом для рисования</translation>
     </message>
 </context>
@@ -88,7 +88,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите область с помощью мыши или нажмите Esc чтобы выйти.
+Нажмите Enter чтобы захватить экран.
+Нажмите правую кнопку мыши чтобы показать выбор цвета.
+Используйте колесо мыши чтобы выбрать толщину текущего инструмента.
+Нажмите Пробел чтобы открыть боковую панель.</translation>
     </message>
 </context>
 <context>
@@ -100,26 +104,8 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/circle/circletool.cpp" line="42"/>
-        <source>Sets the Circle as the paint tool</source>
+        <source>Set the Circle as the paint tool</source>
         <translation>Выбрать Окружность инструментом для рисования</translation>
-    </message>
-</context>
-<context>
-    <name>ColorPickerWidget</name>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
-        <source>Active color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
-        <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
-        <source>Grab Color</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -150,7 +136,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="169"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="174"/>
@@ -177,8 +163,8 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <source>Copy the selection into the clipboard</source>
+        <translation>Скопировать выделение в буфер обмена</translation>
     </message>
 </context>
 <context>
@@ -368,7 +354,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить изображение</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
@@ -401,94 +387,99 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
-        <source>Uploads the selection to Imgur</source>
+        <source>Upload the selection to Imgur</source>
         <translation>Загрузить выделение на Imgur</translation>
     </message>
 </context>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="31"/>
+        <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="48"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>ПКМ</translation>
+        <translation>Правый клик</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="49"/>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
         <translation>Колесико мыши</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="53"/>
+        <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
         <translation>Переместить выделение на 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="54"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
         <translation>Изменить размер выделения на 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="55"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Quit capture</source>
         <translation>Выйти из захвата экрана</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="56"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
         <translation>Скопировать в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="57"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
         <translation>Сохранить выделение в файл</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="58"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Undo the last modification</source>
         <translation>Отменить последнее изменение</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="59"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation>Показать боковую панель с настройками выбранного инструмента</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
         <translation>Показать выбор цвета</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Изменить толщину инструмента</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="65"/>
+        <location filename="../src/widgets/infowindow.cpp" line="81"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Доступные горячие клавиши в режиме захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="107"/>
+        <location filename="../src/widgets/infowindow.cpp" line="123"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Лицензия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="131"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Версия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="125"/>
+        <location filename="../src/widgets/infowindow.cpp" line="141"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -502,7 +493,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/line/linetool.cpp" line="50"/>
-        <source>Sets the Line as the paint tool</source>
+        <source>Set the Line as the paint tool</source>
         <translation>Выбрать Линию инструментом для рисования</translation>
     </message>
 </context>
@@ -515,7 +506,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="50"/>
-        <source>Sets the Marker as the paint tool</source>
+        <source>Set the Marker as the paint tool</source>
         <translation>Выбрать Маркер инструментом для рисования</translation>
     </message>
 </context>
@@ -541,7 +532,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
-        <source>Sets the Pencil as the paint tool</source>
+        <source>Set the Pencil as the paint tool</source>
         <translation>Выбрать Карандаш инструментом для рисования</translation>
     </message>
 </context>
@@ -550,12 +541,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Булавка</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикрепить изображение к рабочему столу</translation>
     </message>
 </context>
 <context>
@@ -569,12 +560,12 @@ Press Space to open the side panel.</source>
         <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
         <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
-        <translation>Сохранить снимок как </translation>
+        <translation>Снимок сохранён как </translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Снимок сохранён в буфер обмена</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
@@ -610,7 +601,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
-        <source>Sets the Rectangle as the paint tool</source>
+        <source>Set the Rectangle as the paint tool</source>
         <translation>Выбрать Прямоугольник инструментом для рисования</translation>
     </message>
 </context>
@@ -619,12 +610,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторить</translation>
     </message>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="42"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторить последнее изменение</translation>
     </message>
 </context>
 <context>
@@ -643,9 +634,9 @@ Press Space to open the side panel.</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished">Не удалось захватить экран</translation>
+        <translation>Не удалось захватить экран</translation>
     </message>
 </context>
 <context>
@@ -657,8 +648,31 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
-        <source>Sets the Selection as the paint tool</source>
+        <source>Set Selection as the paint tool</source>
         <translation>Выбрать Прямоугольное выделение инструментом для рисования</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <source>Active thickness:</source>
+        <translation>Активная толщина:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <source>Active color:</source>
+        <translation>Активный цвет:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <source>Press ESC to cancel</source>
+        <translation>Нажмите Esc для отмены</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <source>Grab Color</source>
+        <translation>Захватить цвет с экрана</translation>
     </message>
 </context>
 <context>
@@ -670,7 +684,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
-        <source>Shows the dimensions of the selection (X Y)</source>
+        <source>Show the dimensions of the selection (X Y)</source>
         <translation>Показывает размер выделения (X Y)</translation>
     </message>
 </context>
@@ -744,12 +758,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Время (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>Время (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
@@ -787,7 +801,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="28"/>
         <source>Flameshot Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot Инфо</translation>
     </message>
 </context>
 <context>
@@ -795,22 +809,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="49"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>Зачеркнутый</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Подчеркнутый</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Полужирный</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Курсив</translation>
     </message>
 </context>
 <context>
@@ -818,12 +832,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить текст на снимок</translation>
     </message>
 </context>
 <context>

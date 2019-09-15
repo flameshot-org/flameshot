@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -58,7 +58,7 @@ int PinWidget::margin() const {
 }
 
 void PinWidget::wheelEvent(QWheelEvent *e) {
-    int val = e->delta() > 0 ? 5 : -5;
+    int val = e->delta() > 0 ? 15 : -15;
     int newWidth = qBound(50, m_label->width() + val, maximumWidth());
     int newHeight = qBound(50, m_label->height() + val, maximumHeight());
 

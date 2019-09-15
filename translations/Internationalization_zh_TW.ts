@@ -57,7 +57,7 @@
     </message>
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
-        <source>Sets the Arrow as the paint tool</source>
+        <source>Set the Arrow as the paint tool</source>
         <translation>選擇箭頭作為繪製工具</translation>
     </message>
 </context>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
-        <source>Sets the Blur as the paint tool</source>
+        <source>Set Blur as the paint tool</source>
         <translation>選擇模糊作為繪製工具</translation>
     </message>
 </context>
@@ -100,26 +100,8 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/circle/circletool.cpp" line="42"/>
-        <source>Sets the Circle as the paint tool</source>
+        <source>Set the Circle as the paint tool</source>
         <translation>選擇圈型作為繪畫工具</translation>
-    </message>
-</context>
-<context>
-    <name>ColorPickerWidget</name>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
-        <source>Active color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
-        <source>Press ESC to cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
-        <source>Grab Color</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -177,7 +159,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selection into the clipboard</source>
+        <source>Copy the selection into the clipboard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -401,94 +383,99 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
-        <source>Uploads the selection to Imgur</source>
+        <source>Upload the selection to Imgur</source>
         <translation>上傳到 Imgur</translation>
     </message>
 </context>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="31"/>
+        <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="48"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
         <translation>右鍵</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="49"/>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
         <translation>滑鼠滑輪</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="53"/>
+        <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
         <translation>移動 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="54"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
         <translation>調整大小 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="55"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Quit capture</source>
         <translation>結束擷取</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="56"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
         <translation>複製到剪貼簿</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="57"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
         <translation>將選擇範圍另存新檔</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="58"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Undo the last modification</source>
         <translation>復原上次修改</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="59"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
         <translation>顯示顏色選擇器</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>改變工具的寬度</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Key</source>
         <translation>鍵</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Description</source>
         <translation>描述</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="107"/>
+        <location filename="../src/widgets/infowindow.cpp" line="123"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;授權條款&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="131"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;版本&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="125"/>
+        <location filename="../src/widgets/infowindow.cpp" line="141"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;快速鍵&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="65"/>
+        <location filename="../src/widgets/infowindow.cpp" line="81"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>螢幕擷取模式中的可用快速鍵</translation>
     </message>
@@ -502,7 +489,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/line/linetool.cpp" line="50"/>
-        <source>Sets the Line as the paint tool</source>
+        <source>Set the Line as the paint tool</source>
         <translation>將直線線設定為繪畫工具</translation>
     </message>
 </context>
@@ -515,7 +502,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="50"/>
-        <source>Sets the Marker as the paint tool</source>
+        <source>Set the Marker as the paint tool</source>
         <translation>將標記設定為繪畫工具</translation>
     </message>
 </context>
@@ -541,7 +528,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
-        <source>Sets the Pencil as the paint tool</source>
+        <source>Set the Pencil as the paint tool</source>
         <translation>將鉛筆設定為繪畫工具</translation>
     </message>
 </context>
@@ -610,7 +597,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
-        <source>Sets the Rectangle as the paint tool</source>
+        <source>Set the Rectangle as the paint tool</source>
         <translation>將實心矩形設定為繪畫工具</translation>
     </message>
 </context>
@@ -643,7 +630,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
         <translation type="unfinished">無法擷取螢幕</translation>
     </message>
@@ -657,8 +644,31 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
-        <source>Sets the Selection as the paint tool</source>
+        <source>Set Selection as the paint tool</source>
         <translation>將矩形選擇設定為繪畫工具</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <source>Active thickness:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <source>Active color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <source>Grab Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -670,7 +680,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
-        <source>Shows the dimensions of the selection (X Y)</source>
+        <source>Show the dimensions of the selection (X Y)</source>
         <translation>顯示選擇的尺寸 (X Y)</translation>
     </message>
 </context>

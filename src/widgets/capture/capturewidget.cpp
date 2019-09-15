@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -23,7 +23,7 @@
 
 #include "capturewidget.h"
 #include "src/widgets/capture/hovereventfilter.h"
-#include "src/widgets/panel/colorpickerwidget.h"
+#include "src/widgets/panel/sidepanelwidget.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/globalvalues.h"
 #include "src/widgets/capture/notifierbox.h"
@@ -52,7 +52,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
                              bool fullScreen, QWidget *parent) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
-    m_previewEnabled(true), m_activeButton(nullptr),
+    m_previewEnabled(true), m_adjustmentButtonPressed(false), m_activeButton(nullptr),
     m_activeTool(nullptr), m_toolWidget(nullptr),
     m_mouseOverHandle(SelectionWidget::NO_SIDE), m_id(id)
 {
@@ -186,12 +186,12 @@ QPixmap CaptureWidget::pixmap() {
     return m_context.selectedScreenshotArea();
 }
 
-void CaptureWidget::close() {
+void CaptureWidget::deleteToolwidgetOrClose() {
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
         m_toolWidget = nullptr;
     } else {
-        QWidget::close();
+        close();
     }
 }
 
@@ -398,7 +398,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
         }
     } else if (m_mouseIsClicked && m_activeTool) {
         // drawing with a tool
-        m_activeTool->drawMove(e->pos());
+        if (m_adjustmentButtonPressed) {
+            m_activeTool->drawMoveWithAdjustment(e->pos());
+        } else {
+            m_activeTool->drawMove(e->pos());
+        }
         update();
         // Hides the buttons under the mouse. If the mouse leaves, it shows them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -471,11 +475,15 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
     } else if (e->key() == Qt::Key_Up
                && m_selection->geometry().top() > rect().top()) {
         m_selection->move(QPoint(m_selection->x(), m_selection->y() -1));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         update();
     } else if (e->key() == Qt::Key_Down
                && m_selection->geometry().bottom() < rect().bottom()) {
         m_selection->move(QPoint(m_selection->x(), m_selection->y() +1));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         update();
     } else if (e->key() == Qt::Key_Left
@@ -486,8 +494,18 @@ void CaptureWidget::keyPressEvent(QKeyEvent *e) {
     } else if (e->key() == Qt::Key_Right
                && m_selection->geometry().right() < rect().right()) {
         m_selection->move(QPoint(m_selection->x() +1, m_selection->y()));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         update();
+    } else if (e->key() == Qt::Key_Control) {
+        m_adjustmentButtonPressed = true;
+    }
+}
+
+void CaptureWidget::keyReleaseEvent(QKeyEvent *e) {
+    if (e->key() == Qt::Key_Control) {
+        m_adjustmentButtonPressed = false;
     }
 }
 
@@ -541,16 +559,21 @@ void CaptureWidget::initPanel() {
     panelRect.setWidth(m_colorPicker->width() * 3);
     m_panel->setGeometry(panelRect);
 
-    ColorPickerWidget *colorPicker =
-            new ColorPickerWidget(&m_context.screenshot);
-    connect(colorPicker, &ColorPickerWidget::colorChanged,
+    SidePanelWidget *sidePanel =
+            new SidePanelWidget(&m_context.screenshot);
+    connect(sidePanel, &SidePanelWidget::colorChanged,
             this, &CaptureWidget::setDrawColor);
+    connect(sidePanel, &SidePanelWidget::thicknessChanged,
+            this, &CaptureWidget::setDrawThickness);
     connect(this, &CaptureWidget::colorChanged,
-            colorPicker, &ColorPickerWidget::updateColor);
-    connect(colorPicker, &ColorPickerWidget::togglePanel,
+            sidePanel, &SidePanelWidget::updateColor);
+    connect(this, &CaptureWidget::thicknessChanged,
+            sidePanel, &SidePanelWidget::updateThickness);
+    connect(sidePanel, &SidePanelWidget::togglePanel,
             m_panel, &UtilityPanel::toggle);
-    colorPicker->colorChanged(m_context.color);
-    m_panel->pushWidget(colorPicker);
+    sidePanel->colorChanged(m_context.color);
+    sidePanel->thicknessChanged(m_context.thickness);
+    m_panel->pushWidget(sidePanel);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
 }
 
@@ -692,9 +715,18 @@ void CaptureWidget::setDrawColor(const QColor &c) {
     emit colorChanged(c);
 }
 
+void CaptureWidget::setDrawThickness(const int &t)
+{
+    m_context.thickness = qBound(0, t, 100);
+    ConfigHandler().setdrawThickness(m_context.thickness);
+    emit thicknessChanged(m_context.thickness);
+}
+
 void CaptureWidget::leftResize() {
     if (m_selection->isVisible() && m_selection->geometry().right() > m_selection->geometry().left()) {
         m_selection->setGeometry(m_selection->geometry() + QMargins(0, 0, -1, 0));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -704,6 +736,8 @@ void CaptureWidget::leftResize() {
 void CaptureWidget::rightResize() {
     if (m_selection->isVisible() && m_selection->geometry().right() < rect().right()) {
         m_selection->setGeometry(m_selection->geometry() + QMargins(0, 0, 1, 0));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -713,6 +747,8 @@ void CaptureWidget::rightResize() {
 void CaptureWidget::upResize() {
     if (m_selection->isVisible() && m_selection->geometry().bottom() > m_selection->geometry().top()) {
         m_selection->setGeometry(m_selection->geometry() + QMargins(0, 0, 0, -1));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -722,6 +758,8 @@ void CaptureWidget::upResize() {
 void CaptureWidget::downResize() {
     if (m_selection->isVisible() && m_selection->geometry().bottom() < rect().bottom()) {
         m_selection->setGeometry(m_selection->geometry() + QMargins(0, 0, 0, 1));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -739,8 +777,9 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this, SLOT(upResize()));
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
     new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
-    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
     new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
+    new QShortcut(Qt::Key_Enter, this, SLOT(copyScreenshot()));
 }
 
 void CaptureWidget::updateSizeIndicator() {

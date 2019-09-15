@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -70,7 +70,7 @@ QString CommandOption::valueName() const {
 
 void CommandOption::setValue(const QString &value) {
     if (m_valueName.isEmpty()) {
-        m_valueName = "value";
+        m_valueName = QLatin1String("value");
     }
     m_value = value;
 }

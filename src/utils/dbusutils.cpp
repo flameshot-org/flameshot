@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -27,13 +27,13 @@ DBusUtils::DBusUtils(QObject *parent) : QObject(parent) {
 void DBusUtils::connectPrintCapture(QDBusConnection &session, uint id) {
     m_id = id;
     // captureTaken
-    session.connect("org.dharkael.Flameshot",
-                       "/", "", "captureTaken",
+    session.connect(QStringLiteral("org.dharkael.Flameshot"),
+                       QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureTaken"),
                        this,
                        SLOT(captureTaken(uint, QByteArray)));
     // captureFailed
-    session.connect("org.dharkael.Flameshot",
-                       "/", "", "captureFailed",
+    session.connect(QStringLiteral("org.dharkael.Flameshot"),
+                       QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureFailed"),
                        this,
                        SLOT(captureFailed(uint)));
 }
@@ -41,7 +41,7 @@ void DBusUtils::connectPrintCapture(QDBusConnection &session, uint id) {
 void DBusUtils::checkDBusConnection(const QDBusConnection &connection) {
     if (!connection.isConnected()) {
         SystemNotification().sendMessage(tr("Unable to connect via DBus"));
-        qApp->exit();
+        qApp->exit(1);
     }
 }
 
@@ -58,6 +58,6 @@ void DBusUtils::captureTaken(uint id, QByteArray rawImage) {
 void DBusUtils::captureFailed(uint id) {
     if (m_id == id) {
         QTextStream(stdout) << "screenshot aborted\n";
-        qApp->exit();
+        qApp->exit(1);
     }
 }

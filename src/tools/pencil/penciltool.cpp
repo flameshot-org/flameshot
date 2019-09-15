@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -31,11 +31,11 @@ QString PencilTool::name() const {
 }
 
 QString PencilTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString PencilTool::description() const {
-    return tr("Sets the Pencil as the paint tool");
+    return tr("Set the Pencil as the paint tool");
 }
 
 CaptureTool* PencilTool::copy(QObject *parent) {

@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -57,6 +57,10 @@ void FlameshotDBusAdapter::fullScreen(
     }
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
+}
+
+void FlameshotDBusAdapter::openLauncher() {
+    Controller::getInstance()->openLauncherWindow();
 }
 
 void FlameshotDBusAdapter::captureScreen(int number, QString path,

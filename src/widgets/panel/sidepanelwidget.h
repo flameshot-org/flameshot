@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -24,23 +24,27 @@ class QVBoxLayout;
 class QPushButton;
 class QLabel;
 class QColorPickingEventFilter;
+class QSlider;
 
-class ColorPickerWidget : public QWidget {
+class SidePanelWidget : public QWidget {
     Q_OBJECT
 
     friend class QColorPickingEventFilter;
 public:
-    explicit ColorPickerWidget(QPixmap *p, QWidget *parent = nullptr);
+    explicit SidePanelWidget(QPixmap *p, QWidget *parent = nullptr);
 
 signals:
     void colorChanged(const QColor &c);
+    void thicknessChanged(const int &t);
     void togglePanel();
 
 public slots:
     void updateColor(const QColor &c);
+    void updateThickness(const int &t);
 
 private slots:
     void updateColorNoWheel(const QColor &c);
+    void updateCurrentThickness();
 
 private slots:
     void colorGrabberActivated();
@@ -62,6 +66,8 @@ private:
     QPixmap *m_pixmap;
     QColor m_colorBackup;
     QColor m_color;
+    QSlider *m_thicknessSlider;
+    int m_thickness;
     QColorPickingEventFilter *m_eventFilter;
 
 };

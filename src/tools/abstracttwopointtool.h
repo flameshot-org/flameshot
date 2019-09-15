@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -34,6 +34,7 @@ public:
 public slots:
     void drawEnd(const QPoint &p) override;
     void drawMove(const QPoint &p) override;
+    void drawMoveWithAdjustment(const QPoint &p) override;
     void colorChanged(const QColor &c) override;
     void thicknessChanged(const int th) override;
 
@@ -48,4 +49,9 @@ protected:
     // use m_padding to extend the area of the backup
     int m_padding;
 
+    bool m_supportsOrthogonalAdj = false;
+    bool m_supportsDiagonalAdj = false;
+
+private:
+    QPoint adjustedVector(QPoint v) const;
 };

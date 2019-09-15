@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -35,7 +35,6 @@ public:
     void paintMousePreview(QPainter &painter, const CaptureContext &context) override;
 
 public slots:
-    void drawMove(const QPoint &p) override;
     void drawStart(const CaptureContext &context) override;
     void pressed(const CaptureContext &context) override;
 };

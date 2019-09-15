@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -23,7 +23,7 @@ namespace {
 }
 
 CircleTool::CircleTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon CircleTool::icon(const QColor &background, bool inEditor) const {
@@ -35,11 +35,11 @@ QString CircleTool::name() const {
 }
 
 QString CircleTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString CircleTool::description() const {
-    return tr("Sets the Circle as the paint tool");
+    return tr("Set the Circle as the paint tool");
 }
 
 CaptureTool* CircleTool::copy(QObject *parent) {

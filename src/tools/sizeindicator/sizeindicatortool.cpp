@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -35,11 +35,11 @@ QString SizeIndicatorTool::name() const {
 }
 
 QString SizeIndicatorTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString SizeIndicatorTool::description() const {
-    return tr("Shows the dimensions of the selection (X Y)");
+    return tr("Show the dimensions of the selection (X Y)");
 }
 
 CaptureTool* SizeIndicatorTool::copy(QObject *parent) {

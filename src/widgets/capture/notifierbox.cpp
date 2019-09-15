@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -63,5 +63,5 @@ void NotifierBox::showMessage(const QString &msg) {
 
 void NotifierBox::showColor(const QColor &color) {
     Q_UNUSED(color);
-    m_message = "";
+    m_message = QLatin1String("");
 }

@@ -57,7 +57,7 @@
     </message>
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
-        <source>Sets the Arrow as the paint tool</source>
+        <source>Set the Arrow as the paint tool</source>
         <translation>Oku çizim aracı olarak ayarlar</translation>
     </message>
 </context>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
-        <source>Sets the Blur as the paint tool</source>
+        <source>Set Blur as the paint tool</source>
         <translation>Bulnıklığı boyama aracı olarak ayarlar</translation>
     </message>
 </context>
@@ -104,26 +104,8 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/circle/circletool.cpp" line="42"/>
-        <source>Sets the Circle as the paint tool</source>
+        <source>Set the Circle as the paint tool</source>
         <translation>Çemberi boyama aracı olarak ayarlar</translation>
-    </message>
-</context>
-<context>
-    <name>ColorPickerWidget</name>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="64"/>
-        <source>Active color:</source>
-        <translation>Aktif Renk:</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="164"/>
-        <source>Press ESC to cancel</source>
-        <translation>Çıkmak için ESC&apos;ye tıklayın</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/panel/colorpickerwidget.cpp" line="166"/>
-        <source>Grab Color</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -181,7 +163,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
-        <source>Copies the selection into the clipboard</source>
+        <source>Copy the selection into the clipboard</source>
         <translation>Seçimi panoya kopyalar</translation>
     </message>
 </context>
@@ -405,94 +387,99 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
-        <source>Uploads the selection to Imgur</source>
+        <source>Upload the selection to Imgur</source>
         <translation>Seçimi Imgur&apos;a yükler</translation>
     </message>
 </context>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="31"/>
+        <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="48"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
         <translation>Sağ Tık</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="49"/>
+        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
         <translation>Fare Tekerleği</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="53"/>
+        <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
         <translation>1px seçimini hareket ettir</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="54"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
         <translation>1px seçimini yeniden boyutlandır</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="55"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Quit capture</source>
         <translation>Çıkış</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="56"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
         <translation>Panoya kopyala</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="57"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
         <translation>Seçimi dosya olarak kaydet</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="58"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Undo the last modification</source>
         <translation>Son değişikliği geri al</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="59"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
         <translation>Renk seçici göster</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Araç  kalınlığını değiştirin</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="65"/>
+        <location filename="../src/widgets/infowindow.cpp" line="81"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Ekran yakalama modunda kullanılabilir kısayollar.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Key</source>
         <translation>Anahtar</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
         <source>Description</source>
         <translation>Tanım</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="107"/>
+        <location filename="../src/widgets/infowindow.cpp" line="123"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Lisans&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="115"/>
+        <location filename="../src/widgets/infowindow.cpp" line="131"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Sürüm&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="125"/>
+        <location filename="../src/widgets/infowindow.cpp" line="141"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Kısayollar&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -506,7 +493,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/line/linetool.cpp" line="50"/>
-        <source>Sets the Line as the paint tool</source>
+        <source>Set the Line as the paint tool</source>
         <translation>Çizgiyi boyama aracı olarak ayarlar</translation>
     </message>
 </context>
@@ -519,7 +506,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="50"/>
-        <source>Sets the Marker as the paint tool</source>
+        <source>Set the Marker as the paint tool</source>
         <translation>İşaretleyiciyi boyama aracı olarak ayarlar</translation>
     </message>
 </context>
@@ -545,7 +532,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
-        <source>Sets the Pencil as the paint tool</source>
+        <source>Set the Pencil as the paint tool</source>
         <translation>Kurşun Kalemi çizim aracı olarak ayarlar</translation>
     </message>
 </context>
@@ -614,7 +601,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
-        <source>Sets the Rectangle as the paint tool</source>
+        <source>Set the Rectangle as the paint tool</source>
         <translation>Dikdörtgeni boyama aracı olarak ayarlar</translation>
     </message>
 </context>
@@ -647,7 +634,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../src/utils/screengrabber.cpp" line="70"/>
+        <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
         <translation type="unfinished">Ekran resmi alınamadı</translation>
     </message>
@@ -661,8 +648,31 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
-        <source>Sets the Selection as the paint tool</source>
+        <source>Set Selection as the paint tool</source>
         <translation>Seçimi boyama aracı olarak ayarlar</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <source>Active thickness:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <source>Active color:</source>
+        <translation>Aktif Renk:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <source>Press ESC to cancel</source>
+        <translation>Çıkmak için ESC&apos;ye tıklayın</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <source>Grab Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -674,7 +684,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
-        <source>Shows the dimensions of the selection (X Y)</source>
+        <source>Show the dimensions of the selection (X Y)</source>
         <translation>Seçimin boyutlarını gösterir (X Y)</translation>
     </message>
 </context>

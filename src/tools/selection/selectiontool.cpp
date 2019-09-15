@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -23,7 +23,7 @@ namespace {
 }
 
 SelectionTool::SelectionTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsDiagonalAdj = true;
 }
 
 bool SelectionTool::closeOnButtonPressed() const {
@@ -39,11 +39,11 @@ QString SelectionTool::name() const {
 }
 
 QString SelectionTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString SelectionTool::description() const {
-    return tr("Sets the Selection as the paint tool");
+    return tr("Set Selection as the paint tool");
 }
 
 CaptureTool* SelectionTool::copy(QObject *parent) {

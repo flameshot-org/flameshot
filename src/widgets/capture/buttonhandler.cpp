@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -167,7 +167,7 @@ void ButtonHandler::updatePosition(const QRect &selection) {
     }
 }
 
-// horizontalPoints is an auxiliar method for the button position computation.
+// horizontalPoints is an auxiliary method for the button position computation.
 // starts from a known center and keeps adding elements horizontally
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::horizontalPoints(
@@ -193,7 +193,7 @@ QVector<QPoint> ButtonHandler::horizontalPoints(
     return res;
 }
 
-// verticalPoints is an auxiliar method for the button position computation.
+// verticalPoints is an auxiliary method for the button position computation.
 // starts from a known center and keeps adding elements vertically
 // and returns the computed positions.
 QVector<QPoint> ButtonHandler::verticalPoints(
@@ -252,7 +252,7 @@ void ButtonHandler::updateBlockedSides() {
     pointB.setX(pointA.x());
     m_blockedLeft = !(m_screenRegions.contains(pointA) &&
                       m_screenRegions.contains(pointB));
-    // Botton
+    // Bottom
     pointA = QPoint(m_selection.left(),
                     m_selection.bottom() + EXTENSION);
     pointB = QPoint(m_selection.right(),
@@ -264,7 +264,7 @@ void ButtonHandler::updateBlockedSides() {
     pointB.setY(pointA.y());
     m_blockedTop = !(m_screenRegions.contains(pointA) &&
                      m_screenRegions.contains(pointB));
-    // Auxiliar
+    // Auxiliary
     m_oneHorizontalBlocked = (!m_blockedRight && m_blockedLeft) ||
             (m_blockedRight && !m_blockedLeft);
     m_horizontalyBlocked = (m_blockedRight && m_blockedLeft);

@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -36,11 +36,11 @@ QString CopyTool::name() const {
 }
 
 QString CopyTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString CopyTool::description() const {
-    return tr("Copies the selection into the clipboard");
+    return tr("Copy the selection into the clipboard");
 }
 
 CaptureTool* CopyTool::copy(QObject *parent) {

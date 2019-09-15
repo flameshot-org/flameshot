@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -36,11 +36,11 @@ QString ImgurUploaderTool::name() const {
 }
 
 QString ImgurUploaderTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString ImgurUploaderTool::description() const {
-    return tr("Uploads the selection to Imgur");
+    return tr("Upload the selection to Imgur");
 }
 
 QWidget* ImgurUploaderTool::widget() {

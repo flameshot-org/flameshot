@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -20,18 +20,13 @@
 
 namespace {
 
-#define ADJ_VALUE 14
 #define PADDING_VALUE 14
-
-// Have to force horizontal position
-bool needsAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
-}
 
 }
 
 MarkerTool::MarkerTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsOrthogonalAdj = true;
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon MarkerTool::icon(const QColor &background, bool inEditor) const {
@@ -43,11 +38,11 @@ QString MarkerTool::name() const {
 }
 
 QString MarkerTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString MarkerTool::description() const {
-    return tr("Sets the Marker as the paint tool");
+    return tr("Set the Marker as the paint tool");
 }
 
 CaptureTool* MarkerTool::copy(QObject *parent) {
@@ -58,22 +53,17 @@ void MarkerTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUn
     if (recordUndo) {
         updateBackup(pixmap);
     }
+    painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(m_points.first, m_points.second);
 }
 
 void MarkerTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
+    painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void MarkerTool::drawMove(const QPoint &p) {
-    m_points.second = p;
-    if (needsAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setY(m_points.first.y());
-    }
 }
 
 void MarkerTool::drawStart(const CaptureContext &context) {

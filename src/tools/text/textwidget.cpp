@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -18,7 +18,7 @@
 #include "textwidget.h"
 
 TextWidget::TextWidget(QWidget *parent) : QTextEdit(parent) {
-    setStyleSheet("TextWidget { background: transparent; }");
+    setStyleSheet(QStringLiteral("TextWidget { background: transparent; }"));
     connect(this, &TextWidget::textChanged,
             this, &TextWidget::adjustSize);
     connect(this, &TextWidget::textChanged,
@@ -61,7 +61,7 @@ void TextWidget::setFontPointSize(qreal s) {
 }
 
 void TextWidget::setTextColor(const QColor &c) {
-    QString s("TextWidget { background: transparent; color: %1; }");
+    QString s(QStringLiteral("TextWidget { background: transparent; color: %1; }"));
     setStyleSheet(s.arg(c.name()));
 }
 

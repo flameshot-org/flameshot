@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -32,7 +32,7 @@ LoadSpinner::LoadSpinner(QWidget *parent) :
     updateFrame();
     // init timer
     m_timer =  new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(rotate()));
+    connect(m_timer, &QTimer::timeout, this, &LoadSpinner::rotate);
     m_timer->setInterval(30);
 }
 

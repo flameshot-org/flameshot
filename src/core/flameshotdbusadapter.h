@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -36,6 +36,7 @@ public slots:
     Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
     Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
     Q_NOREPLY void captureScreen(int number, QString path, bool toClipboard, int delay, uint id);
+    Q_NOREPLY void openLauncher();
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
     Q_NOREPLY void autostartEnabled(bool enabled);

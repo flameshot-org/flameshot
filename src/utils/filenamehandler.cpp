@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -33,7 +33,7 @@ QString FileNameHandler::parsedPattern() {
 QString FileNameHandler::parseFilename(const QString &name) {
     QString res = name;
     if (name.isEmpty()) {
-        res = "%F_%H-%M";
+        res = QLatin1String("%F_%H-%M");
     }
     std::time_t t = std::time(NULL);
 
@@ -45,7 +45,7 @@ QString FileNameHandler::parseFilename(const QString &name) {
     free(tempData);
 
     // add the parsed pattern in a correct format for the filesystem
-    res = res.replace("/", "⁄").replace(":", "-");
+    res = res.replace(QLatin1String("/"), QStringLiteral("⁄")).replace(QLatin1String(":"), QLatin1String("-"));
     return res;
 }
 
@@ -87,14 +87,14 @@ char * FileNameHandler::QStringTocharArr(const QString &s) {
 
 void FileNameHandler::fixPath(QString &directory, QString &filename) {
     // add '/' at the end of the directory
-    if (!directory.endsWith("/")) {
-        directory += "/";
+    if (!directory.endsWith(QLatin1String("/"))) {
+        directory += QLatin1String("/");
     }
     // add numeration in case of repeated filename in the directory
     // find unused name adding _n where n is a number
     QFileInfo checkFile(directory + filename + ".png");
     if (checkFile.exists()) {
-        filename += "_";
+        filename += QLatin1String("_");
         int i = 1;
         while (true) {
             checkFile.setFile(

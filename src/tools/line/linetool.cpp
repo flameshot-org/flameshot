@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -20,18 +20,13 @@
 
 namespace {
 
-#define ADJ_VALUE 13
 #define PADDING_VALUE 2
-
-// Have to force horizontal position
-bool needsAdjustment(const QPoint &p0, const QPoint &p1) {
-    return (p1.y() >= p0.y() - ADJ_VALUE) && (p1.y() <= p0.y() + ADJ_VALUE);
-}
 
 }
 
 LineTool::LineTool(QObject *parent) : AbstractTwoPointTool(parent) {
-
+    m_supportsOrthogonalAdj = true;
+    m_supportsDiagonalAdj = true;
 }
 
 QIcon LineTool::icon(const QColor &background, bool inEditor) const {
@@ -43,11 +38,11 @@ QString LineTool::name() const {
 }
 
 QString LineTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString LineTool::description() const {
-    return tr("Sets the Line as the paint tool");
+    return tr("Set the Line as the paint tool");
 }
 
 CaptureTool* LineTool::copy(QObject *parent) {
@@ -65,13 +60,6 @@ void LineTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
 void LineTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void LineTool::drawMove(const QPoint &p) {
-    m_points.second = p;
-    if (needsAdjustment(m_points.first, m_points.second)) {
-        m_points.second.setY(m_points.first.y());
-    }
 }
 
 void LineTool::drawStart(const CaptureContext &context) {

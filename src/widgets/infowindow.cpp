@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -59,6 +59,7 @@ QVector<const char *> InfoWindow::m_keys = {
     "CTRL + C",
     "CTRL + S",
     "CTRL + Z",
+    QT_TR_NOOP("SPACEBAR"),
     QT_TR_NOOP("Right Click"),
     QT_TR_NOOP("Mouse Wheel")
 };
@@ -70,6 +71,7 @@ QVector<const char *> InfoWindow::m_description = {
     QT_TR_NOOP("Copy to clipboard"),
     QT_TR_NOOP("Save selection as a file"),
     QT_TR_NOOP("Undo the last modification"),
+    QT_TR_NOOP("Toggle visibility of sidebar with options of the selected tool"),
     QT_TR_NOOP("Show color picker"),
     QT_TR_NOOP("Change the tool's thickness")
 };
@@ -121,7 +123,7 @@ void InfoWindow::initLabels() {
     QLabel *licenseTitleLabel = new QLabel(tr("<u><b>License</b></u>"), this);
     licenseTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(licenseTitleLabel);
-    QLabel *licenseLabel = new QLabel("GPLv3+", this);
+    QLabel *licenseLabel = new QLabel(QStringLiteral("GPLv3+"), this);
     licenseLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(licenseLabel);
     m_layout->addStretch();
@@ -129,7 +131,7 @@ void InfoWindow::initLabels() {
     QLabel *versionTitleLabel = new QLabel(tr("<u><b>Version</b></u>"), this);
     versionTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(versionTitleLabel);
-    QString versionMsg = "Flameshot " + QString(APP_VERSION) + "\nCompiled with Qt "
+    QString versionMsg = "Flameshot " + QStringLiteral(APP_VERSION) + "\nCompiled with Qt "
             + QT_VERSION_STR;
     QLabel *versionLabel = new QLabel(versionMsg, this);
     versionLabel->setAlignment(Qt::AlignHCenter);

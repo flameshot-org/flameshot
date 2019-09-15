@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -36,7 +36,7 @@ QString SaveTool::name() const {
 }
 
 QString SaveTool::nameID() {
-    return "";
+    return QLatin1String("");
 }
 
 QString SaveTool::description() const {

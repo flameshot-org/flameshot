@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2018 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -52,10 +52,11 @@ public slots:
 
     void openConfigWindow();
     void openInfoWindow();
+    void openLauncherWindow();
     void enableTrayIcon();
     void disableTrayIcon();
     void sendTrayNotification(const QString &text,
-                              const QString &title = "Flameshot Info",
+                              const QString &title = QStringLiteral("Flameshot Info"),
                               const int timeout = 5000);
 
     void updateConfigComponents();

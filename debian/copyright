@@ -3,7 +3,7 @@ Upstream-Name: flameshot
 Source: https://github.com/lupoDharkael/flameshot/
 
 Files: *
-Copyright: 2016-2017 lupoDharkael <izhe@hotmail.es>
+Copyright: 2016-2019 lupoDharkael <izhe@hotmail.es>
 License: GPL-3+
 Comments:
  The author copied a few lines of code from KSnapshot regiongrabber.cpp
@@ -11,12 +11,17 @@ Comments:
 
 Files: debian/*
 Copyright: 2017 Juanma Navarro Mañez <juanma1980@gmail.com>
-           2018 Boyuan Yang <073plan@gmail.com>
+           2018-2019 Boyuan Yang <byang@debian.org>
 License: GPL-3+
 
 Files: img/flameshot.*
 Copyright: 2017 lupoDharkael <izhe@hotmail.es>
 License: Free-Art-License-1.3
+
+Files:
+ docs/appdata/flameshot.appdata.xml
+Copyright: 2017-2019 lupoDharkael <izhe@hotmail.es>
+License: CC0-1.0
 
 Files: img/buttonIconsBlack/* img/buttonIconsWhite/*
 Copyright: Google Inc.
@@ -375,3 +380,7 @@ License: GPL-3+
  .
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+License: CC0-1.0
+ On Debian systems, the complete text of the Creative Commons Zero v1.0
+ Universal License can be found in "/usr/share/common-licenses/CC0-1.0".
