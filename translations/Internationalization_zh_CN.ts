@@ -92,7 +92,7 @@ Press Space to open the side panel.</source>
         <translation>用鼠标选择一个区域,或按 Esc 退出。
 按 Enter 键捕捉屏幕。
 按住鼠标右键显示颜色选择器。
-使用鼠标滚轮来改变绘画工具的宽度。
+使用鼠标滚轮来改变绘画工具的尺度。
 按下空格键以打开侧边面板。</translation>
     </message>
 </context>
@@ -452,7 +452,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>改变工具的厚度</translation>
+        <translation>改变工具的尺度</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="92"/>
@@ -658,7 +658,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
         <source>Active thickness:</source>
-        <translation>当前宽度：</translation>
+        <translation>当前尺度：</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
