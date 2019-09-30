@@ -241,7 +241,7 @@ There are packages available for a few distros:
 
 ## Compilation
 
-To build the application in your system, you'll need to install the dependencies needed for it and Package names might be different for each distribution, see [Dependencies](#dependencies) below for more information.
+To build the application in your system, you'll need to install the dependencies needed for it and package names might be different for each distribution, see [Dependencies](#dependencies) below for more information. You can also install most of the Qt dependencies via [their installer](https://www.qt.io/download-qt-installer). If you were developing Qt apps before, you probably already have them. Also you can open and build/debug the project in Qt Creator IDE by opening `flameshot.pro` like all standard Qt projects.
 
 ### Dependencies
 
