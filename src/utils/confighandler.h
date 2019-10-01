@@ -58,6 +58,9 @@ public:
     int drawThicknessValue();
     void setdrawThickness(const int);
 
+    int pinBorderWidthValue() const;
+    void setPinBorderWidth(const int);
+
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);
 

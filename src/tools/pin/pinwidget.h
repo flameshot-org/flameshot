@@ -20,6 +20,8 @@
 #include <QWidget>
 #include <QGraphicsDropShadowEffect>
 
+#include <src/utils/confighandler.h>
+
 class QVBoxLayout;
 class QLabel;
 
@@ -48,4 +50,5 @@ private:
     qreal m_offsetX, m_offsetY;
     QGraphicsDropShadowEffect *m_shadowEffect;
     QColor m_baseColor, m_hoverColor;
+    ConfigHandler m_config;
 };

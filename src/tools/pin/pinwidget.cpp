@@ -31,9 +31,8 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
     //set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
 
-    ConfigHandler conf;
-    m_baseColor = conf.uiMainColorValue();
-    m_hoverColor = conf.uiContrastColorValue();
+    m_baseColor = m_config.uiMainColorValue();
+    m_hoverColor = m_config.uiContrastColorValue();
 
     m_layout = new QVBoxLayout(this);
     const int margin = this->margin();
@@ -54,7 +53,7 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
 }
 
 int PinWidget::margin() const {
-    return 7;
+    return m_config.pinBorderWidthValue();
 }
 
 void PinWidget::wheelEvent(QWheelEvent *e) {
