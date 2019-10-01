@@ -121,6 +121,54 @@
     </message>
 </context>
 <context>
+    <name>CaptureLauncher</name>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
+        <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Режим захвата&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
+        <source>Rectangular Region</source>
+        <translation>Прямоугольная область</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
+        <source>Full Screen (All Monitors)</source>
+        <translation>Весь экран (все мониторы)</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
+        <source>No Delay</source>
+        <translation>Без задержки</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <source> second</source>
+        <translation> сек</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <source> seconds</source>
+        <translation> сек</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
+        <source>Take new screenshot</source>
+        <translation>Сделать новый снимок</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
+        <source>Area:</source>
+        <translation>Область:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
+        <source>Delay:</source>
+        <translation>Задержка:</translation>
+    </message>
+</context>
+<context>
     <name>CaptureWidget</name>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
@@ -198,12 +246,12 @@ Press Space to open the side panel.</source>
         <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="207"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть лаунчер</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="210"/>
+        <location filename="../src/core/controller.cpp" line="183"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Настройка</translation>
     </message>
@@ -393,24 +441,24 @@ Press Space to open the side panel.</source>
         <translation>Запустить Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="257"/>
+        <location filename="../src/config/geneneralconf.cpp" line="217"/>
         <source>Close after capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть после снимка</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="261"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
         <source>Close after taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть после снимка</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="273"/>
+        <location filename="../src/config/geneneralconf.cpp" line="230"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать URL после загрузки</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="278"/>
+        <location filename="../src/config/geneneralconf.cpp" line="233"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать URL и закрыть окно после загрузки</translation>
     </message>
 </context>
 <context>
@@ -483,12 +531,12 @@ Press Space to open the side panel.</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="62"/>
+        <location filename="../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Пробел</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="63"/>
+        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
         <translation>Правый клик</translation>
     </message>
@@ -530,7 +578,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="73"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>Показать боковую панель с настройками выбранного инструмента</translation>
+        <translation>Показать боковую панель с настройками инструмента</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="74"/>
@@ -826,39 +874,9 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL скопирован в буфер обмена.</translation>
-    </message>
-    <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="77"/>
-        <source>Arguments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="349"/>
-        <source>arguments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
-        <source>Usage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
-        <source>options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="356"/>
-        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL скопирован в буфер обмена.</translation>
     </message>
 </context>
 <context>
