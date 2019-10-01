@@ -894,17 +894,22 @@ Press Space to open the side panel.</source>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="53"/>
+        <location filename="../src/config/visualseditor.cpp" line="55"/>
         <source>Opacity of area outside selection:</source>
         <translation>Затемнение невыделенной области:</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="77"/>
+        <location filename="../src/config/visualseditor.cpp" line="69"/>
+        <source>Pin border width:</source>
+        <translation>Размер рамки прикрепленного изображения:</translation>
+    </message>
+    <message>
+        <location filename="../src/config/visualseditor.cpp" line="100"/>
         <source>Button Selection</source>
         <translation>Выбор кнопок</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="83"/>
+        <location filename="../src/config/visualseditor.cpp" line="106"/>
         <source>Select All</source>
         <translation>Выбрать все</translation>
     </message>

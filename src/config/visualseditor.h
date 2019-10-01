@@ -19,6 +19,7 @@
 
 #include <QWidget>
 
+class QSpinBox;
 class ExtendedSlider;
 class QVBoxLayout;
 class ButtonListView;
@@ -40,7 +41,9 @@ private:
     ButtonListView *m_buttonList;
     UIcolorEditor *m_colorEditor;
     ExtendedSlider *m_opacitySlider;
+    QSpinBox *m_pinBorderWidthSpinBox;
 
     void initWidgets();
     void initOpacitySlider();
+    void initPinBorderEditor();
 };
