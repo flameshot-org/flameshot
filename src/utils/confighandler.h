@@ -71,6 +71,9 @@ public:
     bool closeAfterScreenshotValue();
     void setCloseAfterScreenshot(const bool);
 
+    bool copyAndCloseAfterUploadEnabled();
+    void setCopyAndCloseAfterUploadEnabled(const bool);
+
 
     void setDefaults();
     void setAllTheButtons();

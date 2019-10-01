@@ -37,6 +37,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowTrayIcon();
     initAutostart();
     initCloseAfterCapture();
+    initCopyAndCloseAfterUpload();
 
     // this has to be at the end
     initConfingButtons();
@@ -49,6 +50,7 @@ void GeneneralConf::updateComponents() {
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
     m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
+    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -221,4 +223,17 @@ void GeneneralConf::initCloseAfterCapture() {
 
     connect(m_closeAfterCapture, &QCheckBox::clicked, this,
             &GeneneralConf::closeAfterCaptureChanged);
+}
+
+void GeneneralConf::initCopyAndCloseAfterUpload()
+{
+    m_copyAndCloseAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
+    ConfigHandler config;
+    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
+    m_copyAndCloseAfterUpload->setToolTip(tr("Copy URL and close window after upload"));
+    m_layout->addWidget(m_copyAndCloseAfterUpload);
+
+    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+    });
 }
