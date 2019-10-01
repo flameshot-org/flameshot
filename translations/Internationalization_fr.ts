@@ -346,6 +346,16 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <source>Launch Flameshot</source>
         <translation>Démarrer Flameshot</translation>
     </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="215"/>
+        <source>Close after capture</source>
+        <translation>Fermer après une capture</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="219"/>
+        <source>Close after taking a screenshot</source>
+        <translation>Fermer l&apos;application après une capture d&apos;écran</translation>
+    </message>
 </context>
 <context>
     <name>ImgurUploader</name>
