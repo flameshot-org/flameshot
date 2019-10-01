@@ -411,12 +411,12 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
-        <translation>Mueve la selección 1px</translation>
+        <translation>Mover la selección 1px</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
-        <translation>Redimensiona la selección 1px</translation>
+        <translation>Redimensionar la selección 1px</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="70"/>
@@ -431,7 +431,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
-        <translation>Guarda la selección como un archivo</translation>
+        <translation>Guardar la selección como un archivo</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="73"/>
@@ -441,12 +441,12 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>Alterna la visualización de la barra lateral de opciones de la herramienta seleccionada</translation>
+        <translation>Alternar la visualización de la barra lateral de opciones de la herramienta seleccionada</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
-        <translation>Muestra el selector de color</translation>
+        <translation>Mostrar el selector de color</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="76"/>
@@ -628,7 +628,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
-        <translation>Guarda la captura</translation>
+        <translation>Guardar la captura</translation>
     </message>
 </context>
 <context>
@@ -667,7 +667,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
         <source>Press ESC to cancel</source>
-        <translation>Presiona Esc para cancelar</translation>
+        <translation>Presiona ESC para cancelar</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
