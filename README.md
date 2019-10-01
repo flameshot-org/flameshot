@@ -88,7 +88,7 @@ Example commands:
     flameshot gui -p ~/myStuff/captures
     ```
 
-- Open GUI with a delay of 2 seconds:
+- Capture with GUI after 2 seconds delay (can be useful to take screenshots of mouse hover tooltips, etc.):
 
     ```shell
     flameshot gui -d 2000
