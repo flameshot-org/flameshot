@@ -90,7 +90,7 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation>Wähle einen Bereich mit der Maus oder drücke ESC um zu beenden.
 Drücke Eingabe um den Bereich aufzunehmen.
-Drücke die rechte Maustacke um die Farbe auszuwählen.
+Drücke die rechte Maustaste um die Farbe auszuwählen.
 Benutze das Mausrad um die Dicke des Werkzeugs auszuwählen.
 Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     </message>
@@ -551,7 +551,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation>Pinne Bild auf den Dekstop</translation>
+        <translation>Pinne Bild auf den Desktop</translation>
     </message>
 </context>
 <context>
@@ -738,12 +738,12 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day Name (mon)</source>
-        <translation>Tagesname (Mon)</translation>
+        <translation>Wochentag (Mon)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (monday)</source>
-        <translation>Tagesname (Montag)</translation>
+        <translation>Wochentag (Montag)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
@@ -850,7 +850,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>UI Farb Editor</translation>
+        <translation>Grafischer Farbeditor</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
