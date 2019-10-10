@@ -49,6 +49,7 @@ void UtilityPanel::addToolWidget(QWidget *w) {
     }
     if (w) {
         m_toolWidget = w;
+        w->setFixedWidth(m_upLayout->geometry().width());
         m_upLayout->addWidget(w);
     }
 }
