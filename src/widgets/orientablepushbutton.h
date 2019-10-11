@@ -15,40 +15,34 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
+// Based on https://stackoverflow.com/a/53135675/964478
+
 #pragma once
 
-#include <QWidget>
-#include <QPointer>
+#include <QPushButton>
 
-class QVBoxLayout;
-class QPropertyAnimation;
-class QScrollArea;
-
-class UtilityPanel : public QWidget {
+class OrientablePushButton : public QPushButton
+{
     Q_OBJECT
 public:
-    explicit UtilityPanel(QWidget *parent = nullptr);
+    enum Orientation {
+        Horizontal,
+        VerticalTopToBottom,
+        VerticalBottomToTop
+    };
 
-    QWidget* toolWidget() const;
-    void addToolWidget(QWidget *w);
-    void clearToolWidget();
-    void pushWidget(QWidget *w);
+    OrientablePushButton(QWidget *parent = nullptr);
+    OrientablePushButton(const QString &text, QWidget *parent = nullptr);
+    OrientablePushButton(const QIcon &icon, const QString &text, QWidget *parent = nullptr);
 
-signals:
-    void mouseEnter();
-    void mouseLeave();
+    QSize sizeHint() const;
 
-public slots:
-    void toggle();
+    OrientablePushButton::Orientation orientation() const;
+    void setOrientation(const OrientablePushButton::Orientation &orientation);
+
+protected:
+    void paintEvent(QPaintEvent *event);
 
 private:
-    void initInternalPanel();
-
-    QPointer<QWidget> m_toolWidget;
-    QScrollArea *m_internalPanel;
-    QVBoxLayout *m_upLayout;
-    QVBoxLayout *m_bottomLayout;
-    QVBoxLayout *m_layout;
-    QPropertyAnimation *m_showAnimation;
-    QPropertyAnimation *m_hideAnimation;
+    Orientation m_orientation = Horizontal;
 };
