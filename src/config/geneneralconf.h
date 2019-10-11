@@ -33,6 +33,7 @@ public slots:
 
 private slots:
    void showHelpChanged(bool checked);
+   void showSidePanelButtonChanged(bool checked);
    void showDesktopNotificationChanged(bool checked);
    void showTrayIconChanged(bool checked);
    void autostartChanged(bool checked);
@@ -46,6 +47,7 @@ private:
     QCheckBox *m_sysNotifications;
     QCheckBox *m_showTray;
     QCheckBox *m_helpMessage;
+    QCheckBox *m_sidePanelButton;
     QCheckBox *m_autostart;
     QCheckBox *m_closeAfterCapture;
     QCheckBox *m_copyAndCloseAfterUpload;
@@ -54,6 +56,7 @@ private:
     QPushButton *m_resetButton;
 
     void initShowHelp();
+    void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
     void initConfingButtons();

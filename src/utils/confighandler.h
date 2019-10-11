@@ -46,6 +46,9 @@ public:
     bool showHelpValue();
     void setShowHelp(const bool);
 
+    bool showSidePanelButtonValue();
+    void setShowSidePanelButton(const bool);
+
     bool desktopNotificationValue();
     void setDesktopNotification(const bool);
 

@@ -555,21 +555,25 @@ void CaptureWidget::initPanel() {
         panelRect = QGuiApplication::primaryScreen()->geometry();
     }
 
-    auto *panelToggleButton = new OrientablePushButton(tr("Tool Settings"), this);
-    makeChild(panelToggleButton);
-    panelToggleButton->setOrientation(OrientablePushButton::VerticalBottomToTop);
-    panelToggleButton->move(panelRect.x(), panelRect.y() + panelRect.height() / 2 - panelToggleButton->width() / 2);
-    panelToggleButton->setCursor(Qt::ArrowCursor);
-    connect(panelToggleButton, &QPushButton::clicked, this, &CaptureWidget::togglePanel);
+    ConfigHandler config;
 
-    QColor mainColor = ConfigHandler().uiMainColorValue();
-    QColor textColor = ColorUtils::colorIsDark(mainColor) ? Qt::white : Qt::black;
-    QPalette palette = panelToggleButton->palette();
-    palette.setColor(QPalette::Button, mainColor);
-    palette.setColor(QPalette::ButtonText, textColor);
-    panelToggleButton->setAutoFillBackground(true);
-    panelToggleButton->setPalette(palette);
-    panelToggleButton->update();
+    if (config.showSidePanelButtonValue()) {
+        auto *panelToggleButton = new OrientablePushButton(tr("Tool Settings"), this);
+        makeChild(panelToggleButton);
+        panelToggleButton->setOrientation(OrientablePushButton::VerticalBottomToTop);
+        panelToggleButton->move(panelRect.x(), panelRect.y() + panelRect.height() / 2 - panelToggleButton->width() / 2);
+        panelToggleButton->setCursor(Qt::ArrowCursor);
+        connect(panelToggleButton, &QPushButton::clicked, this, &CaptureWidget::togglePanel);
+
+        QColor mainColor = config.uiMainColorValue();
+        QColor textColor = ColorUtils::colorIsDark(mainColor) ? Qt::white : Qt::black;
+        QPalette palette = panelToggleButton->palette();
+        palette.setColor(QPalette::Button, mainColor);
+        palette.setColor(QPalette::ButtonText, textColor);
+        panelToggleButton->setAutoFillBackground(true);
+        panelToggleButton->setPalette(palette);
+        panelToggleButton->update();
+    }
 
     m_panel = new UtilityPanel(this);
     makeChild(m_panel);

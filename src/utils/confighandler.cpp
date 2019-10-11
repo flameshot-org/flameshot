@@ -188,6 +188,14 @@ void ConfigHandler::setShowHelp(const bool showHelp) {
     m_settings.setValue(QStringLiteral("showHelp"), showHelp);
 }
 
+bool ConfigHandler::showSidePanelButtonValue() {
+    return m_settings.value(QStringLiteral("showSidePanelButton"), true).toBool();
+}
+
+void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton) {
+    m_settings.setValue(QStringLiteral("showSidePanelButton"), showSidePanelButton);
+}
+
 bool ConfigHandler::desktopNotificationValue() {
     bool res = true;
     if (m_settings.contains(QStringLiteral("showDesktopNotification"))) {
