@@ -40,12 +40,14 @@
 #include <QTimer>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkProxyFactory>
 
 ImgurUploader::ImgurUploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
     setWindowTitle(tr("Upload to Imgur"));
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     m_spinner = new LoadSpinner(this);
     m_spinner->setColor(ConfigHandler().uiMainColorValue());
