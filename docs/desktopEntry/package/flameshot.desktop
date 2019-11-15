@@ -27,7 +27,7 @@ Terminal=false
 Type=Application
 Categories=Graphics;
 StartupNotify=false
-Actions=Configure;Capture;
+Actions=Configure;Capture;Launcher;
 
 [Desktop Action Configure]
 Name=Configure
@@ -50,3 +50,8 @@ Name[ru]=Сделать скриншот
 Name[sr]=Сними екран
 Name[uk]=Зробити знімок
 Exec=flameshot gui --delay 500
+
+[Desktop Action Launcher]
+Name=Open launcher
+Name[de]=Starter öffnen
+Exec=flameshot launcher
