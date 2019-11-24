@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
-        <translation>Escolha uma aplicação para abrir a captura</translation>
+        <translation>Escolha um programa para abrir a captura</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
-        <translation>Abrir Com</translation>
+        <translation>Abrir com</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="71"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
-        <translation>Manter aberto após seleção</translation>
+        <translation>Manter aberto após selecionar</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
@@ -88,10 +88,10 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Selecione uma área com o mouse, ou precione Esc para sair.
+        <translation>Selecione uma área com o mouse, ou pressione Esc para sair.
 Pressione Enter para capturar a tela.
 Pressione o botão direito do mouse para abrir o seletor de cores.
-Use a roda do mouse para aumentar a grossura do pincel.
+Use o scroll do mouse para aumentar a espessura do pincel.
 Pressione espaço abrir o painel lateral.</translation>
     </message>
 </context>
@@ -123,7 +123,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>Filename Editor</source>
-        <translation>Editor de nome de arquivo</translation>
+        <translation>Editor do nome de arquivo</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="73"/>
@@ -203,7 +203,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="41"/>
         <source>Preview:</source>
-        <translation>Preview:</translation>
+        <translation>Visualizar:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="78"/>
@@ -265,12 +265,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="101"/>
         <source>Save File</source>
-        <translation>Salvar Arquivo</translation>
+        <translation>Salvar arquivo</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="122"/>
         <source>Confirm Reset</source>
-        <translation>Confirmar Reset</translation>
+        <translation>Confirmar redefinição</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="123"/>
@@ -291,22 +291,22 @@ Pressione espaço abrir o painel lateral.</translation>
         <location filename="../src/config/geneneralconf.cpp" line="146"/>
         <location filename="../src/config/geneneralconf.cpp" line="150"/>
         <source>Show desktop notifications</source>
-        <translation>Mostrar notificações de Desktop</translation>
+        <translation>Mostrar notificações no Desktop</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="159"/>
         <source>Show tray icon</source>
-        <translation>Mostrar ícone de tray</translation>
+        <translation>Mostrar ícone na bandeja do sistema</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show the systemtray icon</source>
-        <translation>Mosrar ícone na barra de aplicações</translation>
+        <translation>Mosrar ícone bandeja do sistema</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Configuration File</source>
-        <translation>Arquivo de Configurações</translation>
+        <translation>Arquivo de configurações</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="179"/>
@@ -339,7 +339,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>Upando Imagem</translation>
+        <translation>Enviando imagem</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
@@ -354,12 +354,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation>Deletar imagem</translation>
+        <translation>Excluir imagem</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
         <source>Image to Clipboard.</source>
-        <translation>Imagem no Clipboard.</translation>
+        <translation>Imagem na área de transferência.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
@@ -370,12 +370,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copiada para o clipboard.</translation>
+        <translation>URL copiada para área de transferência.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Screenshot copiada para o clipboard.</translation>
+        <translation>Screenshot copiada para área de transferência.</translation>
     </message>
 </context>
 <context>
@@ -388,7 +388,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
         <source>Upload the selection to Imgur</source>
-        <translation>Upa a seleção no Imgur</translation>
+        <translation>Envia a seleção para o Imgur</translation>
     </message>
 </context>
 <context>
@@ -401,12 +401,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>Botão Direito</translation>
+        <translation>Botão direito</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>Roda do mouse</translation>
+        <translation>Scroll do mouse</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="68"/>
@@ -426,7 +426,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
-        <translation>Copiar ao clipboard</translation>
+        <translation>Copiar para área de transferência</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="72"/>
@@ -441,17 +441,17 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
+         <translation>Alternar a visibilidade da barra lateral com as opções da ferramenta selecionada</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
-        <translation>Mostra seletor de cores</translation>
+        <translation>Exibe o seletor de cores</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Muda a grossura do pincel</translation>
+        <translation>Altera a espessura do pincel</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="81"/>
@@ -541,12 +541,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation>Ferramenta de Pin</translation>
+        <translation>Ferramenta de fixação</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation>Pinnar imagem no desktop</translation>
+        <translation>Fixar imagem no desktop</translation>
     </message>
 </context>
 <context>
@@ -560,18 +560,18 @@ Pressione espaço abrir o painel lateral.</translation>
         <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
         <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Capture saved as </source>
-        <translation>Captura salva como </translation>
+        <translation>Salvar captura como </translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation>Captura salva no clipboard</translation>
+        <translation>Captura salva na área de transferência</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
         <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
         <source>Error trying to save as </source>
-        <translation>Erro tentando salvar como </translation>
+        <translation>Erro ao tentar salvar como </translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="72"/>
@@ -644,7 +644,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="38"/>
         <source>Rectangular Selection</source>
-        <translation>Seleção Retangular</translation>
+        <translation>Seleção retangular</translation>
     </message>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
@@ -657,7 +657,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
         <source>Active thickness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Espessura ativa:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
@@ -680,7 +680,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="34"/>
         <source>Selection Size Indicator</source>
-        <translation>Indicador do Tamanho da Seleção</translation>
+        <translation>Indicador do tamanho da seleção</translation>
     </message>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
@@ -845,7 +845,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>Interface de Edição de Cores</translation>
+        <translation>Interface de edição de cores</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
@@ -860,7 +860,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="112"/>
         <source>Main Color</source>
-        <translation>Cor Principal</translation>
+        <translation>Cor principal</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="116"/>
@@ -870,12 +870,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="127"/>
         <source>Contrast Color</source>
-        <translation>Cor de Contraste</translation>
+        <translation>Cor do contraste</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="132"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Clique neste botão para setar o modo de edição da cor de contraste.</translation>
+        <translation>Clique neste botão para definir o modo de edição da cor do contraste.</translation>
     </message>
 </context>
 <context>
@@ -906,7 +906,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="83"/>
         <source>Select All</source>
-        <translation>Selecionar Todos</translation>
+        <translation>Selecionar todos</translation>
     </message>
 </context>
 </TS>
