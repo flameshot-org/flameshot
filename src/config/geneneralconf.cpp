@@ -38,6 +38,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initAutostart();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
+    initUploadHost();
 
     // this has to be at the end
     initConfingButtons();
@@ -235,5 +236,18 @@ void GeneneralConf::initCopyAndCloseAfterUpload()
 
     connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+    });
+}
+
+void GeneneralConf::initUploadHost()
+{
+    m_useUp1UploadHost = new QCheckBox(tr("Use Up1 as upload host"), this);
+    ConfigHandler config;
+    m_useUp1UploadHost->setChecked(config.useUp1HostEnabled());
+    m_useUp1UploadHost->setToolTip(tr("Use Riseup instead of Imgur as the upload host"));
+    m_layout->addWidget(m_useUp1UploadHost);
+
+    connect(m_useUp1UploadHost, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUseUp1HostEnabled(checked);
     });
 }

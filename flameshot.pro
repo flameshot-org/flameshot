@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 win32:LIBS += -luser32 -lshell32
+linux:LIBS += -lcrypto
 
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 isEmpty(TAG_VERSION){
@@ -96,6 +97,7 @@ SOURCES += src/main.cpp \
     src/tools/copy/copytool.cpp \
     src/tools/exit/exittool.cpp \
     src/tools/imgur/imguruploadertool.cpp \
+    src/tools/up1/up1uploadertool.cpp \
     src/tools/line/linetool.cpp \
     src/tools/marker/markertool.cpp \
     src/tools/move/movetool.cpp \
@@ -113,6 +115,7 @@ SOURCES += src/main.cpp \
     src/cli/commandargument.cpp \
     src/utils/screenshotsaver.cpp \
     src/tools/imgur/imguruploader.cpp \
+    src/tools/up1/up1uploader.cpp \
     src/widgets/loadspinner.cpp \
     src/widgets/imagelabel.cpp \
     src/widgets/notificationwidget.cpp \
@@ -170,6 +173,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/copy/copytool.h \
     src/tools/exit/exittool.h \
     src/tools/imgur/imguruploadertool.h \
+    src/tools/up1/up1uploadertool.h \
     src/tools/line/linetool.h \
     src/tools/marker/markertool.h \
     src/tools/move/movetool.h \
@@ -186,6 +190,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/cli/commandargument.h \
     src/utils/screenshotsaver.h \
     src/tools/imgur/imguruploader.h \
+    src/tools/up1/up1uploader.h \
     src/widgets/loadspinner.h \
     src/widgets/imagelabel.h \
     src/widgets/notificationwidget.h \
@@ -287,5 +292,6 @@ unix:!macx {
         appdata
 }
 
-# Imgur API data
+# Upload API data
 include(src/imgur.pri)
+include(src/up1.pri)
