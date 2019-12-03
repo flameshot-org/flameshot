@@ -108,12 +108,11 @@ void Up1Uploader::startDrag() {
 }
 
 void Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, QString& ident) {
-    // N.B. IV for CCM is 13 bytes and we require a 64-bit tag for Up1.
-    constexpr int IV_LENGTH = 13;
+    // N.B. We require a 64-bit tag for Up1.
     constexpr int TAG_LENGTH = 8;
 
     unsigned char entropy[32], hash[64], key[32], iv[16];
-    int length, encryptSize;
+    int length, encryptSize, ivLength;
     EVP_CIPHER_CTX *ctx;
     SHA512_CTX sha512;
 
@@ -152,8 +151,16 @@ void Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, 
     if (EVP_EncryptInit_ex(ctx, EVP_aes_256_ccm(), nullptr, nullptr, nullptr) != 1)
         goto cleanup;
 
+    // Calculate IV size for CCM mode.
+    if (input->size() < 0xFFFF)
+        ivLength = 13;
+    else if (input->size() < 0xFFFFFF)
+        ivLength = 12;
+    else
+        ivLength = 11;
+
     // Set IV and tag length.
-    if (EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_CCM_SET_IVLEN, IV_LENGTH, nullptr) != 1 ||
+    if (EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_CCM_SET_IVLEN, ivLength, nullptr) != 1 ||
         EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_CCM_SET_TAG, TAG_LENGTH, nullptr) != 1)
         goto cleanup;
 
