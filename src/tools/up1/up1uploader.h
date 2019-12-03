@@ -68,7 +68,7 @@ private:
     QString m_ident;
     QHttpMultiPart *m_uploadForm;
 
-    void encrypt(QByteArray* input, QByteArray* output, QString& seed, QString& ident);
+    bool encrypt(QByteArray* input, QByteArray* output, QString& seed, QString& ident);
     void upload();
     void onUploadOk();
 };

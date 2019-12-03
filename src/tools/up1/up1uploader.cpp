@@ -107,7 +107,7 @@ void Up1Uploader::startDrag() {
     dragHandler->exec();
 }
 
-void Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, QString& ident) {
+bool Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, QString& ident) {
     // N.B. We require a 64-bit tag for Up1.
     constexpr int TAG_LENGTH = 8;
 
@@ -115,6 +115,7 @@ void Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, 
     int length, encryptSize, ivLength;
     EVP_CIPHER_CTX *ctx;
     SHA512_CTX sha512;
+    bool result = false;
 
     // Metadata + Input
     // This contains:
@@ -149,6 +150,10 @@ void Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, 
     ctx = EVP_CIPHER_CTX_new();
     EVP_CIPHER_CTX_init(ctx);
     if (EVP_EncryptInit_ex(ctx, EVP_aes_256_ccm(), nullptr, nullptr, nullptr) != 1)
+        goto cleanup;
+
+    // Up1 allows by default a maximum of 50000000 bytes.
+    if (input->size() > 50000000)
         goto cleanup;
 
     // Calculate IV size for CCM mode.
@@ -191,11 +196,15 @@ void Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, 
 
     EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_CCM_GET_TAG, TAG_LENGTH,
                         reinterpret_cast<unsigned char*>(output->data()) + encryptSize);
+    
+    result = true;
 
 cleanup:
 
     EVP_CIPHER_CTX_cleanup(ctx);
     EVP_CIPHER_CTX_free(ctx);
+
+    return result;
 }
 
 void Up1Uploader::upload() {
@@ -205,7 +214,10 @@ void Up1Uploader::upload() {
     QBuffer buffer(&input);
     m_pixmap.save(&buffer, "PNG");
 
-    encrypt(&input, &output, m_seed, m_ident);
+    if (!encrypt(&input, &output, m_seed, m_ident)) {
+        m_infoLabel->setText("Encryption failed");
+        return;
+    }
 
     m_uploadForm = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     
