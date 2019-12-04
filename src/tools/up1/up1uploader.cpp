@@ -110,28 +110,42 @@ void Up1Uploader::startDrag() {
 bool Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, QString& ident) {
     // N.B. We require a 64-bit tag for Up1.
     constexpr int TAG_LENGTH = 8;
+    const int ENDIAN_TEST = 0x0001;
 
     unsigned char entropy[32], hash[64], key[32], iv[16];
     int length, encryptSize, ivLength;
     EVP_CIPHER_CTX *ctx;
     SHA512_CTX sha512;
     bool result = false;
+    QByteArray metaBytes;
+    QString metaString;
+    ushort word;
 
-    // Metadata + Input
-    // This contains:
-    // - JSON string of "{ mime: image/png, name: image.png }"
-    // - String metadata converted to UTF-16 in big endian order.
-    // - Finally appended with separator bytes [0, 0]
-    input->prepend(QByteArray().fromBase64("AHsAIgBtAGkAbQBlACIAOgAiAGkAbQBhAGcAZQAvA"
-                                           "HAAbgBnACIALAAiAG4AYQBtAGUAIgA6ACIAaQBtAG"
-                                           "EAZwBlAC4AcABuAGcAIgB9AAA="));
+    // Metadata is prepended to the input blob prior to encryption.
+    // Must be formatted as a UTF-16 Big-Endian encoded string containing:
+    //     "{ mime: '<mime type>', name: '<file name>' }\0\0"
+    metaString = QStringLiteral("{\"mime\":\"image/png\",\"name\":\"%1.png\"}\0")
+                            .arg(FileNameHandler().parsedPattern());
+
+    metaBytes = QByteArray(reinterpret_cast<const char*>(metaString.utf16()),
+                           metaString.length() * sizeof(ushort));
+
+    // Reverse 16 bit byte order if not using a big-endian system.
+    if (*reinterpret_cast<const char *>(&ENDIAN_TEST) != 0) {
+        for (int i = 0; i < metaBytes.length(); i += 2) {
+            word = *reinterpret_cast<ushort*>(metaBytes.data() + i);
+            *reinterpret_cast<ushort*>(metaBytes.data() + i) = word << 8 | word >> 8;
+        }
+    }
+
+    input->prepend(metaBytes);
 
     // Generate random input to convert to a seed
     RAND_bytes(entropy, sizeof(entropy));
 
     // The seed can be of any length but must be in URL-encoded Base64.
-    seed = QByteArray(reinterpret_cast<const char*>(entropy), 32).toBase64();
-    seed.replace("+","-"); seed.replace("/", "_"); seed.replace("=", "");
+    seed = QByteArray(reinterpret_cast<const char*>(entropy), 32)
+                .toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals);
 
     // SHA-512 of the seed in base64 produces the encryption keys.
     SHA512_Init(&sha512);
@@ -143,8 +157,8 @@ bool Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, 
     memcpy(iv, hash + 32, 16);
 
     // Identity = 128 Bits (URL-Encoded Base64)
-    ident = QByteArray(reinterpret_cast<const char*>(hash + 48), 16).toBase64();
-    ident.replace("+","-"); ident.replace("/", "_"); ident.replace("=", "");
+    ident = QByteArray(reinterpret_cast<const char*>(hash + 48), 16)
+                .toBase64(QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals);
 
     // Initialize AES-512 in CCM mode.
     ctx = EVP_CIPHER_CTX_new();
