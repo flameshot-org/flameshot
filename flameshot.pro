@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 win32:LIBS += -luser32 -lshell32
-linux:LIBS += -lcrypto
 
 TAG_VERSION = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 isEmpty(TAG_VERSION){
@@ -17,6 +16,7 @@ QT  += core gui widgets network svg
 
 unix:!macx {
     QT  += dbus
+    LIBS += -lcrypto
 }
 
 CONFIG += c++11 link_pkgconfig
@@ -237,6 +237,18 @@ win32 {
     SOURCES += src/core/globalshortcutfilter.cpp
 
     HEADERS  += src/core/globalshortcutfilter.h
+
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        INCLUDEPATH += C:/OpenSSL-Win32/include
+        LIBS += -L"C:/OpenSSL-Win32/lib" -llibcrypto
+        LIBS += -L"C:/OpenSSL-Win32/lib" -llibeay32
+        LIBS += -L"C:/OpenSSL-Win32/lib" -lssleay32
+    } else {
+        INCLUDEPATH += C:/OpenSSL-Win64/include
+        LIBS += -L"C:/OpenSSL-Win64/lib" -llibcrypto
+        LIBS += -L"C:/OpenSSL-Win64/lib" -llibeay32
+        LIBS += -L"C:/OpenSSL-Win64/lib" -lssleay32
+    }
 }
 
 RESOURCES += \

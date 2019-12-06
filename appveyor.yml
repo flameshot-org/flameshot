@@ -25,6 +25,10 @@ init:
 
 # scripts that run after cloning repository
 install:
+    - ps: Start-FileDownload 'https://slproweb.com/download/Win64OpenSSL-1_1_1d.exe'
+    - ps: Start-FileDownload 'https://slproweb.com/download/Win32OpenSSL-1_1_1d.exe'
+    - ps: Start-Process "Win32OpenSSL-1_1_1d.exe" -ArgumentList "/silent /verysilent /sp- /suppressmsgboxes" -Wait
+    - ps: Start-Process "Win64OpenSSL-1_1_1d.exe" -ArgumentList "/silent /verysilent /sp- /suppressmsgboxes" -Wait
     - set PATH=%QT%\bin\;C:\Qt\Tools\QtCreator\bin\;C:\Qt\QtIFW3.0.1\bin\;%PATH%
 
 # scripts that run before build
@@ -39,12 +43,11 @@ before_build:
 
 # custom build scripts
 build_script:
+    - set CL=/MP
     - nmake
 
 # scripts that run after build
 after_build:
-    # Clone OpenSSL DLLs
-    - git clone https://github.com/tamlok/openssl-utils.git openssl-utils.git
     - mkdir distrib\flameshot
     - windeployqt.exe --dir .\distrib\flameshot %APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe
     - copy "%APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe" "distrib\flameshot\flameshot.exe"
@@ -57,9 +60,15 @@ after_build:
     - copy "%APPVEYOR_BUILD_FOLDER%\build\translations\Internationalization_*.qm" "distrib\flameshot\translations"
     # Delete translations\qt_*.qm
     - del /F /Q "distrib\flameshot\translations\qt_*.qm"
+    # Clone OpenSSL DLLs
+    - git clone https://github.com/tamlok/openssl-utils.git openssl-utils.git
     # Copy OpenSSL DLLs
-    - if "%PLATFORM%" EQU "X64" (xcopy "openssl-utils.git\win64\*.dll" "distrib\flameshot")
-    - if "%PLATFORM%" EQU "x86" (xcopy "openssl-utils.git\win32\*.dll" "distrib\flameshot")
+    - if "%PLATFORM%" EQU "X64" (xcopy "C:\OpenSSL-Win64\libcrypto-1_1-x64.dll" "distrib\flameshot")
+    - if "%PLATFORM%" EQU "X64" (xcopy "C:\OpenSSL-Win64\libeay32.dll" "distrib\flameshot")
+    - if "%PLATFORM%" EQU "X64" (xcopy "C:\OpenSSL-Win64\ssleay32.dll" "distrib\flameshot")
+    - if "%PLATFORM%" EQU "X86" (xcopy "C:\OpenSSL-Win32\libcrypto*.dll" "distrib\flameshot")
+    - if "%PLATFORM%" EQU "X86" (xcopy "C:\OpenSSL-Win32\libeay32.dll" "distrib\flameshot")
+    - if "%PLATFORM%" EQU "X86" (xcopy "C:\OpenSSL-Win32\ssleay32.dll" "distrib\flameshot")
     - cd distrib
     - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
     - appveyor-retry curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
