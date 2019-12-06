@@ -12,10 +12,8 @@ environment:
     VSVER: 14
 
     matrix:
-        - QT: C:\Qt\5.9\msvc2015_64
+        - QT: C:\Qt\5.12\msvc2015_64
           PLATFORM: amd64
-        - QT: C:\Qt\5.9\msvc2015
-          PLATFORM: x86
 init:
     - ps: |
         $version = new-object System.Version $env:APPVEYOR_BUILD_VERSION
@@ -25,6 +23,8 @@ init:
 
 # scripts that run after cloning repository
 install:
+    - ps: Start-FileDownload 'https://slproweb.com/download/Win64OpenSSL-1_1_1d.exe'
+    - ps: Start-Process "Win64OpenSSL-1_1_1d.exe" -ArgumentList "/silent /verysilent /sp- /suppressmsgboxes /dir=C:\OpenSSL-Win64" -Wait
     - set PATH=%QT%\bin\;C:\Qt\Tools\QtCreator\bin\;C:\Qt\QtIFW3.0.1\bin\;%PATH%
 
 # scripts that run before build
@@ -34,17 +34,15 @@ before_build:
     - qmake --version
     - mkdir build
     - cd build
-    - if "%PLATFORM%" EQU "X64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ../flameshot.pro)
-    - if "%PLATFORM%" EQU "x86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ../flameshot.pro)
+    - qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ../flameshot.pro
 
 # custom build scripts
 build_script:
+    - set CL=/MP
     - nmake
 
 # scripts that run after build
 after_build:
-    # Clone OpenSSL DLLs
-    - git clone https://github.com/tamlok/openssl-utils.git openssl-utils.git
     - mkdir distrib\flameshot
     - windeployqt.exe --dir .\distrib\flameshot %APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe
     - copy "%APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe" "distrib\flameshot\flameshot.exe"
@@ -57,9 +55,8 @@ after_build:
     - copy "%APPVEYOR_BUILD_FOLDER%\build\translations\Internationalization_*.qm" "distrib\flameshot\translations"
     # Delete translations\qt_*.qm
     - del /F /Q "distrib\flameshot\translations\qt_*.qm"
-    # Copy OpenSSL DLLs
-    - if "%PLATFORM%" EQU "X64" (xcopy "openssl-utils.git\win64\*.dll" "distrib\flameshot")
-    - if "%PLATFORM%" EQU "x86" (xcopy "openssl-utils.git\win32\*.dll" "distrib\flameshot")
+    # Copy OpenSSL DLL
+    - xcopy "C:\OpenSSL-Win64\*.dll" "distrib\flameshot"
     - cd distrib
     - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
     - appveyor-retry curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
