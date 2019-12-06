@@ -21,6 +21,7 @@
 #include "copy/copytool.h"
 #include "exit/exittool.h"
 #include "imgur/imguruploadertool.h"
+#include "up1/up1uploadertool.h"
 #include "line/linetool.h"
 #include "marker/markertool.h"
 #include "move/movetool.h"
@@ -35,6 +36,7 @@
 #include "redo/redotool.h"
 #include "pin/pintool.h"
 #include "text/texttool.h"
+#include "src/utils/confighandler.h"
 
 ToolFactory::ToolFactory(QObject *parent) : QObject(parent) {
 
@@ -59,7 +61,10 @@ CaptureTool* ToolFactory::CreateTool(
         tool = new ExitTool(parent);
         break;
     case CaptureButton::TYPE_IMAGEUPLOADER:
-        tool = new ImgurUploaderTool(parent);
+        if (ConfigHandler().useUp1HostEnabled())
+            tool = new Up1UploaderTool(parent);
+        else
+            tool = new ImgurUploaderTool(parent);
         break;
     case CaptureButton::TYPE_DRAWER:
         tool = new LineTool(parent);

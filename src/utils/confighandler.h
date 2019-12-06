@@ -74,6 +74,8 @@ public:
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
 
+    bool useUp1HostEnabled();
+    void setUseUp1HostEnabled(const bool);
 
     void setDefaults();
     void setAllTheButtons();

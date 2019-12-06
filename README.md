@@ -70,7 +70,7 @@
 - Easy to use.
 - In-app screenshot edition.
 - DBus interface.
-- Upload to Imgur.
+- Upload to Imgur or Up1 (Riseup).
 
 ## Usage
 

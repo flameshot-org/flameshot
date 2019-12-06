@@ -333,6 +333,14 @@ void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value) {
     m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
 }
 
+bool ConfigHandler::useUp1HostEnabled() {
+    return m_settings.value(QStringLiteral("useUp1Host")).toBool();
+}
+
+void ConfigHandler::setUseUp1HostEnabled(const bool value) {
+    m_settings.setValue(QStringLiteral("useUp1Host"), value);
+}
+
 void ConfigHandler::setDefaults() {
     m_settings.clear();
 }
