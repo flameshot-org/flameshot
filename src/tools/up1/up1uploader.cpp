@@ -39,7 +39,6 @@
 #include <QTimer>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QRandomGenerator>
 
 #include <openssl/rand.h>
 #include <openssl/sha.h>
@@ -142,11 +141,8 @@ bool Up1Uploader::encrypt(QByteArray* input, QByteArray* output, QString& seed, 
     input->prepend(metaBytes);
 
     // Generate random input to convert to a seed
-    if (RAND_bytes(entropy, sizeof(entropy)) != 1) {
-        // Use Qt's system-seeded RNG.
-        QRandomGenerator::global()->fillRange(reinterpret_cast<quint64*>(entropy),
-            sizeof(entropy) / sizeof(quint64));
-    }
+    if (RAND_bytes(entropy, sizeof(entropy)) != 1)
+        goto cleanup;
 
     // The seed can be of any length but must be in URL-encoded Base64.
     seed = QByteArray(reinterpret_cast<const char*>(entropy), sizeof(entropy))
