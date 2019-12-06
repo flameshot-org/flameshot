@@ -19,11 +19,11 @@ Package: flameshot
 Architecture: any
 Depends:
  libqt5svg5,
+ openssl,
  ${shlibs:Depends},
  ${misc:Depends},
 Suggests:
  ca-certificates,
- openssl,
 Description: Powerful yet simple-to-use screenshot software
  Flameshot is a powerful yet simple-to-use screenshot software.
  Notable features include customizable appearance, in-app screenshot editing,

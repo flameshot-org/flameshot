@@ -250,6 +250,7 @@ To build the application in your system, you'll need to install the dependencies
 - Qt >= 5.3
   + Development tools
 - GCC >= 4.9.2
+- OpenSSL
 
 #### Run-time
 
@@ -259,46 +260,45 @@ To build the application in your system, you'll need to install the dependencies
 #### Optional
 
 - Git
-- OpenSSL
 - CA Certificates
 
 #### Debian
 
 ```shell
 # Compile-time
-apt install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools
+apt install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools openssl
 
 # Run-time
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev
 
 # Optional
-apt install git openssl ca-certificates
+apt install git ca-certificates
 ```
 
 #### Fedora
 
 ```shell
 # Compile-time
-dnf install gcc-c++ qt5-devel qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ qt5-devel qt5-qtbase-devel qt5-linguist openssl
 
 # Run-time
 dnf install qt5-qtbase qt5-qtsvg-devel
 
 # Optional
-dnf install git openssl ca-certificates
+dnf install git ca-certificates
 ```
 
 #### Arch
 
 ```shell
 # Compile-time
-pacman -S base-devel git qt5-base qt5-tools
+pacman -S base-devel git qt5-base qt5-tools openssl
 
 # Run-time
 pacman -S qt5-svg
 
 # Optional
-pacman -S openssl ca-certificates
+pacman -S ca-certificates
 ```
 
 ### Build
