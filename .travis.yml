@@ -28,16 +28,16 @@ env:
 matrix:
     include:
         - os: linux
-          # 28
-          env: OS=fedora DIST=28 EXTEN=rpm
-          services: docker
-        - os: linux
           # 29
           env: OS=fedora DIST=29 EXTEN=rpm
           services: docker
         - os: linux
           # 30
           env: OS=fedora DIST=30 EXTEN=rpm
+          services: docker
+        - os: linux
+          # 31
+          env: OS=fedora DIST=31 EXTEN=rpm
           services: docker
         - os: linux
           # 16.04 LTS
@@ -48,8 +48,8 @@ matrix:
           env: OS=ubuntu DIST=bionic EXTEN=deb
           services: docker
         - os: linux
-          # 19.04
-          env: OS=ubuntu DIST=disco EXTEN=deb
+          # 19.10
+          env: OS=ubuntu DIST=eoan EXTEN=deb
           services: docker
         - os: linux
           # 8
@@ -58,6 +58,10 @@ matrix:
         - os: linux
           # 9
           env: OS=debian DIST=stretch EXTEN=deb
+          services: docker
+        - os: linux
+          # 10
+          env: OS=debian DIST=buster EXTEN=deb
           services: docker
         - os: linux
           # No docker environment, just for CI build & test
