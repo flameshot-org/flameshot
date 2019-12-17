@@ -40,12 +40,12 @@
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
-        <translation>Imposible d&apos;écrire dessus</translation>
+        <translation>Impossible d&apos;écrire dessus</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="112"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Imposible de lancer dans le terminal.</translation>
+        <translation>Impossible de lancer dans le terminal.</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
-        <translation>Imposible de capturer l&apos;écran</translation>
+        <translation>Impossible de capturer l&apos;écran</translation>
     </message>
     <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
@@ -190,7 +190,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="43"/>
         <source>Unable to connect via DBus</source>
-        <translation>Imposible de se connecter via DBus</translation>
+        <translation>Impossible de se connecter via DBus</translation>
     </message>
 </context>
 <context>
@@ -617,7 +617,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation>Imposible d&apos;écrire par dessus</translation>
+        <translation>Impossible d&apos;écrire par dessus</translation>
     </message>
 </context>
 <context>
@@ -664,7 +664,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
-        <translation>Imposible de capturer l&apos;écran</translation>
+        <translation>Impossible de capturer l&apos;écran</translation>
     </message>
 </context>
 <context>
@@ -713,7 +713,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation>Montre les dimmensions de la sélection (X Y)</translation>
+        <translation>Montrer les dimensions de la sélection (X Y)</translation>
     </message>
 </context>
 <context>
@@ -878,7 +878,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Modifiez la couleur en déplaçant les sélecteur et voir les changements dans les boutons de prévisualisation.</translation>
+        <translation>Modifier la couleur en déplaçant les sélecteur et voir les changements dans les boutons de prévisualisation.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="103"/>
@@ -893,7 +893,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="116"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Cliquer sur ce boutton pour définir le mode édition de la couleur principale.</translation>
+        <translation>Cliquer sur ce bouton pour définir le mode édition de la couleur principale.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="127"/>
@@ -903,7 +903,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="132"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Cliquer sur ce boutton pour définir le mode édition de la couleur de contraste.</translation>
+        <translation>Cliquer sur ce bouton pour définir le mode édition de la couleur de contraste.</translation>
     </message>
 </context>
 <context>
@@ -929,7 +929,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="77"/>
         <source>Button Selection</source>
-        <translation>Boutton de sélection</translation>
+        <translation>Bouton de sélection</translation>
     </message>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="83"/>
