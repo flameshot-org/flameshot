@@ -40,12 +40,12 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Unable to write in</source>
-        <translation>Imposible d&apos;écrire dessus</translation>
+        <translation>Impossible d&apos;écrire dessus</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="124"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Imposible de lancer dans le terminal.</translation>
+        <translation>Impossible de lancer dans le terminal.</translation>
     </message>
 </context>
 <context>
@@ -125,7 +125,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
         <source>Unable to capture screen</source>
-        <translation>Imposible de capturer l&apos;écran</translation>
+        <translation>Impossible de capturer l&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="257"/>
@@ -236,7 +236,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="52"/>
         <source>Unable to connect via DBus</source>
-        <translation>Imposible de se connecter via DBus</translation>
+        <translation>Impossible de se connecter via DBus</translation>
     </message>
 </context>
 <context>
@@ -823,7 +823,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="42"/>
         <source>Unable to write in</source>
-        <translation>Imposible d&apos;écrire par dessus</translation>
+        <translation>Impossible d&apos;écrire par dessus</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
@@ -905,7 +905,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="84"/>
         <source>Unable to capture screen</source>
-        <translation>Imposible de capturer l&apos;écran</translation>
+        <translation>Impossible de capturer l&apos;écran</translation>
     </message>
 </context>
 <context>
@@ -954,7 +954,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="52"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation>Montre les dimmensions de la sélection (X Y)</translation>
+        <translation>Montrer les dimensions de la sélection (X Y)</translation>
     </message>
 </context>
 <context>
@@ -1119,7 +1119,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="107"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Modifiez la couleur en déplaçant les sélecteur et voir les changements dans les boutons de prévisualisation.</translation>
+        <translation>Modifier la couleur en déplaçant les sélecteur et voir les changements dans les boutons de prévisualisation.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="119"/>
@@ -1134,7 +1134,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="133"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Cliquer sur ce boutton pour définir le mode édition de la couleur principale.</translation>
+        <translation>Cliquer sur ce bouton pour définir le mode édition de la couleur principale.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="144"/>
@@ -1144,7 +1144,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="149"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Cliquer sur ce boutton pour définir le mode édition de la couleur de contraste.</translation>
+        <translation>Cliquer sur ce bouton pour définir le mode édition de la couleur de contraste.</translation>
     </message>
 </context>
 <context>
@@ -1170,7 +1170,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="89"/>
         <source>Button Selection</source>
-        <translation>Boutton de sélection</translation>
+        <translation>Bouton de sélection</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="95"/>
