@@ -288,6 +288,19 @@ dnf install qt5-qtbase qt5-qtsvg-devel
 dnf install git openssl ca-certificates
 ```
 
+#### CentOS 8
+
+```shell
+# Compile-time
+dnf install gcc-c++ qt5-qtbase-devel qt5-linguist
+
+# Run-time
+dnf install qt5-qtbase qt5-qtsvg-devel
+
+# Optional
+dnf install git openssl ca-certificates
+```
+
 #### Arch
 
 ```shell
@@ -303,6 +316,8 @@ pacman -S openssl ca-certificates
 
 ### Build
 
+#### Default
+
 After installing all the dependencies, finally run the following commands in the sources root directory:
 
 ```shell
@@ -310,6 +325,15 @@ mkdir build
 cd build
 qmake ../
 make
+```
+
+#### CentOS 8
+
+```shell
+mkdir build
+cd build
+qmake-qt5 ../
+make -j 4
 ```
 
 ### Install
