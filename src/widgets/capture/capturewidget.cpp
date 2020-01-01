@@ -894,7 +894,9 @@ QRect CaptureWidget::extendedSelection() const {
 }
 
 QRect CaptureWidget::extendedRect(QRect *r) const {
-    auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
+    // We need to scale screen back so applying reverse scaling,
+    // Before fix code was multiplying
+    auto devicePixelRatio = qreal(1.0) / m_context.screenshot.devicePixelRatio();
     return QRect(r->left()   * devicePixelRatio,
                  r->top()    * devicePixelRatio,
                  r->width()  * devicePixelRatio,
