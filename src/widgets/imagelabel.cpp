@@ -40,15 +40,7 @@ void ImageLabel::setScreenshot(const QPixmap &pixmap) {
     const QString tooltip = QStringLiteral("%1x%2 px").arg(m_pixmap.width())
             .arg(m_pixmap.height());
     setToolTip(tooltip);
-    setScaledPixmap();
-}
-
-void ImageLabel::setScaledPixmap() {
-    const qreal scale = qApp->devicePixelRatio();
-    QPixmap scaledPixmap = m_pixmap.scaled(size() * scale, Qt::KeepAspectRatio,
-                                           Qt::SmoothTransformation);
-    scaledPixmap.setDevicePixelRatio(scale);
-    setPixmap(scaledPixmap);
+    setPixmap(m_pixmap);
 }
 
 // drag handlers
@@ -82,5 +74,5 @@ void ImageLabel::mouseMoveEvent(QMouseEvent *event) {
 // resize handler
 void ImageLabel::resizeEvent(QResizeEvent *event) {
     Q_UNUSED(event);
-    setScaledPixmap();
+    setPixmap(m_pixmap);
 }
