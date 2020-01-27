@@ -2,11 +2,11 @@
 # this variable to qmake
 
 isEmpty(UP1_HOST) {
-    UP1_HOST = "https://share.riseup.net"
+    UP1_HOST = "https://pastebin.synalabs.hosting"
 }
 
 isEmpty(UP1_API_KEY) {
-    UP1_API_KEY = "59Mnk5nY6eCn4bi9GvfOXhMH54E7Bh6EMJXtyJfs"
+    UP1_API_KEY = "4034a170b4517897238b58ecbe902dee187bf890"
 }
 
 DEFINES += UP1_HOST=\\\"$${UP1_HOST}\\\"
