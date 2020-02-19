@@ -33,7 +33,7 @@
 #include <QDrag>
 #include <QMimeData>
 #include <QBuffer>
-#include <QUrlQuery>
+#include <QHttpMultiPart>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -107,19 +107,30 @@ void ImgurUploader::upload() {
     QBuffer buffer(&byteArray);
     m_pixmap.save(&buffer, "PNG");
 
-    QUrlQuery urlQuery;
-    urlQuery.addQueryItem(QStringLiteral("title"), QStringLiteral("flameshot_screenshot"));
-    QString description = FileNameHandler().parsedPattern();
-    urlQuery.addQueryItem(QStringLiteral("description"), description);
+    QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+    QHttpPart titlePart;
+    titlePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"title\""));
+    titlePart.setBody(QStringLiteral("flameshot_screenshot"));
+
+    QHttpPart descPart;
+    descPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"description\""));
+    descPart.setBody(FileNameHandler().parsedPattern().toLatin1());
+
+    QHttpPart imagePart;
+    imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("image/png"));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"image\""));
+    imagePart.setBody(byteArray);
+
+    multiPart->append(titlePart);
+    multiPart->append(descPart);
+    multiPart->append(imagePart);
 
     QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
-    url.setQuery(urlQuery);
     QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/application/x-www-form-urlencoded");
     request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
 
-    m_NetworkAM->post(request, byteArray);
+    m_NetworkAM->post(request, multiPart);
 }
 
 void ImgurUploader::onUploadOk() {
