@@ -111,7 +111,7 @@ void ImgurUploader::upload() {
 
     QHttpPart titlePart;
     titlePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"title\""));
-    titlePart.setBody(QStringLiteral("flameshot_screenshot"));
+    titlePart.setBody("flameshot_screenshot");
 
     QHttpPart descPart;
     descPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"description\""));
