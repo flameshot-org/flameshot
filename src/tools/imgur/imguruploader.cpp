@@ -126,7 +126,7 @@ void ImgurUploader::upload() {
     multiPart->append(descPart);
     multiPart->append(imagePart);
 
-    QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
+    QUrl url = ConfigHandler().uploadUrlValue();
     QNetworkRequest request(url);
     request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
 

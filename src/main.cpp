@@ -110,6 +110,10 @@ int main(int argc, char *argv[]) {
                 {"p", "path"},
                 QStringLiteral("Path where the capture will be saved"),
                 QStringLiteral("path"));
+    CommandOption urlOption(
+                {"u", "uploadurl"},
+                QStringLiteral("Set the upload URL of Imgur compatible hosting"),
+                QStringLiteral("URL"));
     CommandOption clipboardOption(
                 {"c", "clipboard"},
                 QStringLiteral("Save the capture to the clipboard"));
@@ -178,11 +182,23 @@ int main(int argc, char *argv[]) {
         return res;
     };
 
+    const QString urlErr = QStringLiteral("Invalid URL format or unsupported scheme");
+    auto urlChecker = [](const QString &uploadUrl) -> bool {
+        QUrl url(uploadUrl);
+
+        if (url.scheme() == QLatin1String("http") || url.scheme() == QLatin1String("https")) {
+            return url.isValid();
+        }
+
+        return false;
+    };
+
     const QString booleanErr = QStringLiteral("Invalid value, it must be defined as 'true' or 'false'");
     auto booleanChecker = [](const QString &value) -> bool {
         return value == QLatin1String("true") || value == QLatin1String("false");
     };
 
+    urlOption.addChecker(urlChecker, urlErr);
     contrastColorOption.addChecker(colorChecker, colorErr);
     mainColorOption.addChecker(colorChecker, colorErr);
     delayOption.addChecker(numericChecker, delayErr);
@@ -207,7 +223,7 @@ int main(int argc, char *argv[]) {
     parser.AddOptions({ pathOption, clipboardOption, delayOption, rawImageOption },
                       fullArgument);
     parser.AddOptions({ autostartOption, filenameOption, trayOption,
-                        showHelpOption, mainColorOption, contrastColorOption },
+                        showHelpOption, mainColorOption, contrastColorOption, urlOption },
                       configArgument);
     // Parse
     if (!parser.parse(app.arguments())) {
@@ -359,8 +375,9 @@ int main(int argc, char *argv[]) {
         bool help = parser.isSet(showHelpOption);
         bool mainColor = parser.isSet(mainColorOption);
         bool contrastColor = parser.isSet(contrastColorOption);
+        bool uploadUrl = parser.isSet(urlOption);
         bool someFlagSet = (filename || tray || help ||
-                            mainColor || contrastColor);
+                            mainColor || contrastColor || uploadUrl );
         ConfigHandler config;
         if (autostart) {
             QDBusMessage m = QDBusMessage::createMethodCall(QStringLiteral("org.dharkael.Flameshot"),
@@ -417,6 +434,9 @@ int main(int argc, char *argv[]) {
             QString colorCode = parser.value(contrastColorOption);
             QColor parsedColor(colorCode);
             config.setUIContrastColor(parsedColor);
+        }
+        if (uploadUrl) {
+            config.setUploadUrl(parser.value(urlOption));
         }
 
         // Open gui when no options

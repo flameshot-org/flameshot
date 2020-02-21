@@ -18,6 +18,7 @@
 #pragma once
 
 #include "src/widgets/capture/capturebutton.h"
+#include <QUrl>
 #include <QVector>
 #include <QSettings>
 
@@ -33,6 +34,9 @@ public:
 
     QString savePathValue();
     void setSavePath(const QString &);
+
+    QUrl uploadUrlValue();
+    void setUploadUrl(const QString &);
 
     QColor uiMainColorValue();
     void setUIMainColor(const QColor &);
