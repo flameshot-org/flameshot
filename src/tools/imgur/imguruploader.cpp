@@ -114,12 +114,13 @@ void ImgurUploader::upload() {
     titlePart.setBody("flameshot_screenshot");
 
     QHttpPart descPart;
+    QString desc = FileNameHandler().parsedPattern();
     descPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"description\""));
-    descPart.setBody(FileNameHandler().parsedPattern().toLatin1());
+    descPart.setBody(desc.toLatin1());
 
     QHttpPart imagePart;
     imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("image/png"));
-    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"image\""));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"image\"; filename=\"" + desc.toLatin1() + "\""));
     imagePart.setBody(byteArray);
 
     multiPart->append(titlePart);
