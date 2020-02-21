@@ -131,6 +131,8 @@ QUrl ConfigHandler::uploadUrlValue() {
         if (url.isValid() &&
             (url.scheme() == QLatin1String("http") || url.scheme() == QLatin1String("https"))) {
             res = url;
+        } else {
+            m_settings.remove(QStringLiteral("uploadUrl"));
         }
     }
     return res;
@@ -138,6 +140,10 @@ QUrl ConfigHandler::uploadUrlValue() {
 
 void ConfigHandler::setUploadUrl(const QString &uploadUrl) {
     m_settings.setValue(QStringLiteral("uploadUrl"), uploadUrl);
+}
+
+bool ConfigHandler::isCustomHosting() {
+    return m_settings.contains(QStringLiteral("uploadUrl"));
 }
 
 QColor ConfigHandler::uiMainColorValue() {

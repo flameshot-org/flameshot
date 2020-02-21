@@ -129,7 +129,9 @@ void ImgurUploader::upload() {
 
     QUrl url = ConfigHandler().uploadUrlValue();
     QNetworkRequest request(url);
-    request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
+    if (!ConfigHandler().isCustomHosting()) {
+        request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
+    }
 
     m_NetworkAM->post(request, multiPart);
 }
@@ -157,6 +159,10 @@ void ImgurUploader::onUploadOk() {
     m_hLayout->addWidget(m_openUrlButton);
     m_hLayout->addWidget(m_openDeleteUrlButton);
     m_hLayout->addWidget(m_toClipboardButton);
+
+    if (ConfigHandler().isCustomHosting()) {
+        m_openDeleteUrlButton->setEnabled(false);
+    }
 
     connect(m_copyUrlButton, &QPushButton::clicked,
             this, &ImgurUploader::copyURL);

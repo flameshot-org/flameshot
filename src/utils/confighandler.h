@@ -37,6 +37,7 @@ public:
 
     QUrl uploadUrlValue();
     void setUploadUrl(const QString &);
+    bool isCustomHosting();
 
     QColor uiMainColorValue();
     void setUIMainColor(const QColor &);
