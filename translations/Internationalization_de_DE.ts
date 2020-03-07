@@ -134,22 +134,27 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="169"/>
+        <location filename="../src/core/controller.cpp" line="175"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Bildschirmaufnahme anfertigen</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="174"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
+        <source>&amp;Open Launcher</source>
+        <translation>&amp;Starter öffnen</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="183"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="177"/>
+        <location filename="../src/core/controller.cpp" line="186"/>
         <source>&amp;Information</source>
         <translation>&amp;Informationen</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="189"/>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
     </message>
@@ -389,6 +394,54 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
         <source>Upload the selection to Imgur</source>
         <translation>Auswahl zu Imgur hochladen</translation>
+    </message>
+</context>
+<context>
+    <name>CaptureLauncher</name>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="38"/>
+        <source>&lt;/b&gt;&lt;/u&gt;Capture Mode&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;Aufnahmemodus&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
+        <source>Rectangular Region</source>
+        <translation>Rechteckiger Bereich</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
+        <source>Full Screen (All Monitors)</source>
+        <translation>Vollbildschirm (Alle Monitore)</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
+        <source>No Delay</source>
+        <translation>Keine Verzögerung</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <source> second</source>
+        <translation> Sekunde</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <source> seconds</source>
+        <translation> Sekunden</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
+        <source>Take new screenshot</source>
+        <translation>Neue Bildschirmaufnahme anfertigen</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
+        <source>Area:</source>
+        <translation>Bereich:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
+        <source>Delay:</source>
+        <translation>Verzögerung:</translation>
     </message>
 </context>
 <context>
