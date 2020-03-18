@@ -18,12 +18,11 @@
 #pragma once
 
 #include "src/tools/abstracttwopointtool.h"
-#include <QPainter>
-#include <QPainterPath>
-class ArrowTool : public AbstractTwoPointTool {
+
+class CircleCountTool : public AbstractTwoPointTool {
     Q_OBJECT
 public:
-    explicit ArrowTool(QObject *parent = nullptr);
+    explicit CircleCountTool(QObject *parent = nullptr);
 
     QIcon icon(const QColor &background, bool inEditor) const override;
     QString name() const override;
@@ -34,7 +33,8 @@ public:
     void process(
             QPainter &painter, const QPixmap &pixmap, bool recordUndo = false) override;
     void paintMousePreview(QPainter &painter, const CaptureContext &context) override;
-
+private:
+    unsigned int m_count;
 public slots:
     void drawStart(const CaptureContext &context) override;
     void pressed(const CaptureContext &context) override;

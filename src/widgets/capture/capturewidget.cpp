@@ -68,7 +68,7 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
-
+    m_context.circleCount=1;
 #ifdef Q_OS_WIN
     // Top left of the whole set of screens
     QPoint topLeft(0,0);
@@ -636,6 +636,11 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
         m_undoStack.setIndex(0);
         update();
         break;
+
+    case CaptureTool::REQ_INCREMENT_CIRCLE_COUNT:
+        incrementCircleCount();
+        break;
+
     case CaptureTool::REQ_CLOSE_GUI:
         close();
         break;
@@ -715,7 +720,12 @@ void CaptureWidget::setDrawColor(const QColor &c) {
     emit colorChanged(c);
 }
 
-void CaptureWidget::setDrawThickness(const int &t)
+void CaptureWidget::incrementCircleCount()
+{
+    m_context.circleCount++;
+}
+
+    void CaptureWidget::setDrawThickness(const int &t)
 {
     m_context.thickness = qBound(0, t, 100);
     ConfigHandler().setdrawThickness(m_context.thickness);

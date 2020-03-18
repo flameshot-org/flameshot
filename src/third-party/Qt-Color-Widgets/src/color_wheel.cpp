@@ -23,6 +23,7 @@
 
 #include <cmath>
 #include <QMouseEvent>
+#include <QPainterPath>
 #include <QPainter>
 #include <QLineF>
 #include <QDragEnterEvent>
