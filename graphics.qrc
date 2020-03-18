@@ -64,5 +64,7 @@
         <file>img/material/white/circle-outline.svg</file>
         <file>img/material/white/blur.svg</file>
         <file>img/material/white/arrow-bottom-left.svg</file>
+        <file>img/material/black/circlecount-outline.svg</file>
+        <file>img/material/white/circlecount-outline.svg</file>
     </qresource>
 </RCC>

@@ -50,4 +50,7 @@ stage/
 flameshot*.tar.bz2
 
 
+# NVIM
+*~
+
 # End of https://www.gitignore.io/api/snapcraft

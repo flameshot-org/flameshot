@@ -56,7 +56,8 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
                 << CaptureButton::TYPE_IMAGEUPLOADER
                 << CaptureButton::TYPE_OPEN_APP
                 << CaptureButton::TYPE_PIN
-                << CaptureButton::TYPE_TEXT;
+                << CaptureButton::TYPE_TEXT
+                << CaptureButton::TYPE_CIRCLECOUNT;
     }
 
     using bt = CaptureButton::ButtonType;
