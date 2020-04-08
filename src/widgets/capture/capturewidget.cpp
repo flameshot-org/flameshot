@@ -49,11 +49,11 @@
 
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
-                             bool fullScreen, QWidget *parent) :
+                             bool fullScreen, QPixmap editPixmap, QWidget *parent) :
     QWidget(parent), m_mouseIsClicked(false), m_rightClick(false),
     m_newSelection(false), m_grabbing(false), m_captureDone(false),
     m_previewEnabled(true), m_adjustmentButtonPressed(false), m_activeButton(nullptr),
-    m_activeTool(nullptr), m_toolWidget(nullptr),
+    m_activeTool(nullptr), m_toolWidget(nullptr),m_editPixmap(editPixmap),
     m_mouseOverHandle(SelectionWidget::NO_SIDE), m_id(id)
 {
     // Base config of the widget
@@ -123,6 +123,36 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
     m_buttonHandler->hide();
 
     initSelection();
+
+    // set context from our history edit pixmap
+    if (!m_editPixmap.isNull()) {
+        m_context.screenshot = m_editPixmap;
+        m_context.origScreenshot = m_editPixmap;
+        m_context.widgetDimensions.setWidth(m_editPixmap.rect().width() + 60);
+        m_context.widgetDimensions.setHeight(m_editPixmap.rect().height() + 60);
+        m_context.selection = m_editPixmap.rect();
+    }
+
+    initPanel(m_context.widgetDimensions);
+    // update our selection if we have a editPixmap loaded
+    if (!m_editPixmap.isNull()) {
+        show();
+
+        m_selection->setSizeLimit(m_context.selection);
+        m_selection->setGeometry(m_context.selection);
+        m_selection->setVisible(true);
+        m_selection->saveGeometry();
+
+        m_newSelection = false;
+        m_showInitialMsg = false;
+
+        m_buttonHandler->updateScreenRegions(m_context.widgetDimensions);
+        m_buttonHandler->updatePosition(m_selection->geometry());
+        m_buttonHandler->show();
+
+        updateSizeIndicator();
+    }
+
     updateCursor();
 
     // Init color picker
@@ -137,7 +167,6 @@ CaptureWidget::CaptureWidget(const uint id, const QString &savePath,
 
     connect(&m_undoStack, &QUndoStack::indexChanged,
             this, [this](int){ this->update(); });
-    initPanel();
 }
 
 CaptureWidget::~CaptureWidget() {
@@ -548,7 +577,7 @@ void CaptureWidget::initContext(const QString &savePath, bool fullscreen) {
     m_context.fullscreen = fullscreen;
 }
 
-void CaptureWidget::initPanel() {
+void CaptureWidget::initPanel(QRect inputRect) {
     m_panel = new UtilityPanel(this);
     makeChild(m_panel);
     QRect panelRect = rect();
@@ -556,7 +585,11 @@ void CaptureWidget::initPanel() {
         panelRect = QGuiApplication::primaryScreen()->geometry();
     }
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
-    panelRect.setWidth(m_colorPicker->width() * 3);
+    if (!inputRect.isEmpty()) {
+        panelRect = inputRect;
+    } else {
+        panelRect.setWidth(m_colorPicker->width() * 3);
+    }
     m_panel->setGeometry(panelRect);
 
     SidePanelWidget *sidePanel =

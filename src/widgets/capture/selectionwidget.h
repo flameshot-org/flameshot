@@ -45,6 +45,8 @@ public:
     void setGeometryAnimated(const QRect &r);
     void saveGeometry();
     QRect savedGeometry();
+    virtual void setGeometry(const QRect &r);
+    void setSizeLimit(const QRect &r);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -66,6 +68,8 @@ private:
     QPoint m_areaOffset;
     QPoint m_handleOffset;
     QRect m_geometryBackup;
+
+    QRect m_sizeLimit;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

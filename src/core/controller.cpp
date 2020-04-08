@@ -19,6 +19,7 @@
 #include "src/widgets/capture/capturewidget.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/infowindow.h"
+#include "src/widgets/historywindow.h"
 #include "src/config/configwindow.h"
 #include "src/widgets/capture/capturebutton.h"
 #include "src/widgets/capturelauncher.h"
@@ -30,6 +31,7 @@
 #include <QAction>
 #include <QMenu>
 #include <QDesktopWidget>
+#include <QDateTime>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -155,6 +157,16 @@ void Controller::openConfigWindow() {
     }
 }
 
+// creation of the history window
+void Controller::openHistoryWindow() {
+    if( !m_historyWindow) {
+        m_historyWindow = new HistoryWindow();
+    }
+    if (m_historyWindow) {
+        m_historyWindow->show();
+    }
+}
+
 // creation of the window of information
 void Controller::openInfoWindow() {
     if (!m_infoWindow) {
@@ -186,6 +198,9 @@ void Controller::enableTrayIcon() {
     QAction *infoAction = new QAction(tr("&Information"), this);
     connect(infoAction, &QAction::triggered, this,
             &Controller::openInfoWindow);
+    QAction *historyAction = new QAction(tr("&History"), this);
+    connect(historyAction, &QAction::triggered, this,
+            &Controller::openHistoryWindow);
     QAction *quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp,
             &QCoreApplication::quit);
@@ -196,6 +211,7 @@ void Controller::enableTrayIcon() {
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(configAction);
     trayIconMenu->addAction(infoAction);
+    trayIconMenu->addAction(historyAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
 
@@ -253,8 +269,17 @@ void Controller::handleCaptureTaken(uint id, QPixmap p) {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {
         it.value().exportCapture(p);
+
         m_requestMap.erase(it);
     }
+
+    // Save capture in our history
+    QDateTime now = QDateTime::currentDateTime();
+    if( !m_historyWindow) {
+        m_historyWindow = new HistoryWindow();
+    }
+    m_historyWindow->addImage(now.toString("yyyy-MM-dd hh:mm:ss"), p);
+
     if (ConfigHandler().closeAfterScreenshotValue()) {
         QApplication::quit();
     }

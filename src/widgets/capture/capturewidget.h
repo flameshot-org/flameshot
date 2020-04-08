@@ -53,6 +53,7 @@ public:
     explicit CaptureWidget(const uint id = 0,
                            const QString &savePath = QString(),
                            bool fullScreen = true,
+                           QPixmap editPixmap = QPixmap(),
                            QWidget *parent = nullptr);
     ~CaptureWidget();
 
@@ -124,7 +125,7 @@ protected:
 
 private:
     void initContext(const QString &savePath, bool fullscreen);
-    void initPanel();
+    void initPanel(QRect inputRect = QRect());
     void initSelection();
     void initShortcuts();
     void updateSizeIndicator();
@@ -141,6 +142,7 @@ private:
     QPointer<CaptureButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
     QPointer<QWidget> m_toolWidget;
+    QPixmap m_editPixmap;
 
     ButtonHandler *m_buttonHandler;
     UtilityPanel *m_panel;

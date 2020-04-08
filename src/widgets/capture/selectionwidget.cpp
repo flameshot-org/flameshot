@@ -21,7 +21,7 @@
 #include <QPropertyAnimation>
 
 SelectionWidget::SelectionWidget(const QColor &c, QWidget *parent) :
-    QWidget(parent), m_color(c)
+    QWidget(parent), m_color(c), m_sizeLimit(QRect())
 {
     m_animation = new QPropertyAnimation(this, "geometry", this);
     m_animation->setEasingCurve(QEasingCurve::InOutQuad);
@@ -77,6 +77,26 @@ void SelectionWidget::setGeometryAnimated(const QRect &r) {
         m_animation->setEndValue(r);
         m_animation->start();
     }
+}
+void SelectionWidget::setGeometry(const QRect &r)
+{
+    QRect c = r;
+    if (!m_sizeLimit.isEmpty()) {
+        if (c.bottom() > m_sizeLimit.bottom())
+            c.setBottom(m_sizeLimit.bottom());
+        if (c.left() < m_sizeLimit.left())
+            c.setLeft(m_sizeLimit.left());
+        if (c.top() < m_sizeLimit.top())
+            c.setTop(m_sizeLimit.top());
+        if (c.right() > m_sizeLimit.right())
+            c.setRight(m_sizeLimit.right());
+    }
+    QWidget::setGeometry(c);
+}
+
+void SelectionWidget::setSizeLimit(const QRect &r)
+{
+    m_sizeLimit = r;
 }
 
 void SelectionWidget::saveGeometry() {

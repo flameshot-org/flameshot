@@ -27,6 +27,7 @@
 
 class CaptureWidget;
 class ConfigWindow;
+class HistoryWindow;
 class InfoWindow;
 class QSystemTrayIcon;
 
@@ -51,6 +52,7 @@ public slots:
     void requestCapture(const CaptureRequest &request);
 
     void openConfigWindow();
+    void openHistoryWindow();
     void openInfoWindow();
     void openLauncherWindow();
     void enableTrayIcon();
@@ -79,6 +81,7 @@ private:
 
     QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
+    QPointer<HistoryWindow> m_historyWindow;
     QPointer<InfoWindow> m_infoWindow;
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;

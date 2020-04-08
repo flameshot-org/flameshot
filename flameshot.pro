@@ -77,6 +77,7 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 SOURCES += src/main.cpp \
     src/widgets/capture/buttonhandler.cpp \
     src/widgets/infowindow.cpp \
+    src/widgets/historywindow.cpp \
     src/config/configwindow.cpp \
     src/widgets/capture/capturewidget.cpp \
     src/widgets/capture/colorpicker.cpp \
@@ -149,6 +150,7 @@ SOURCES += src/main.cpp \
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/widgets/infowindow.h \
+    src/widgets/historywindow.h \
     src/config/configwindow.h \
     src/widgets/capture/capturewidget.h \
     src/widgets/capture/colorpicker.h \
