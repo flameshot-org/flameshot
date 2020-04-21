@@ -393,7 +393,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
                     r.setLeft(r.left() - offset.x());
                 }
             }
-            m_selection->setGeometry(r.intersected(rect()).normalized());
+            QRect const intersectionResult = r.intersected(rect()).normalized();
+            if(intersectionResult.isNull())
+                m_selection->setGeometry(r);
+            else
+                m_selection->setGeometry(intersectionResult);
             update();
         }
     } else if (m_mouseIsClicked && m_activeTool) {
@@ -444,7 +448,13 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     // of a new one.
     if (!m_buttonHandler->isVisible() && m_selection->isVisible()) {
         // Don't go outside
-        QRect newGeometry = m_selection->geometry().intersected(rect());
+        QRect const intersectionResult = m_selection->geometry().intersected(rect());
+        QRect newGeometry;
+        if(intersectionResult.isNull()) {
+            newGeometry = m_selection->geometry();
+        } else {
+            newGeometry = intersectionResult;
+        }
         // normalize
         if (newGeometry.width() <= 0) {
             int left = newGeometry.left();
