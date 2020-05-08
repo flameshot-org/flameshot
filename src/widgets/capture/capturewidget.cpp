@@ -104,9 +104,12 @@ CaptureWidget::CaptureWidget(const uint id,
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
-            if (topLeft.x() > topLeftScreen.x() ||
-                topLeft.y() > topLeftScreen.y()) {
-                topLeft = topLeftScreen;
+
+            if (topLeftScreen.x() < topLeft.x()) {
+                topLeft.setX(topLeftScreen.x());
+            }
+            if (topLeftScreen.y() < topLeft.y()) {
+                topLeft.setY(topLeftScreen.y());
             }
         }
         move(topLeft);
