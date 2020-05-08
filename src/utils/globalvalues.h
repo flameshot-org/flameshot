@@ -15,10 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#define pragma once
-
-#include <QVector>
-#include "src/widgets/capture/capturebutton.h"
+#pragma once
 
 namespace GlobalValues {
 

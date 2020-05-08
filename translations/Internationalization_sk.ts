@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<TS version="2.1" language="sk_SK">
 <context>
     <name>AppLauncher</name>
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="34"/>
         <source>App Launcher</source>
-        <translation>应用启动器</translation>
+        <translation>Spúšťač aplikácií</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
         <source>Choose an app to open the capture</source>
-        <translation>选择一个应用打开此截图</translation>
+        <translation>Vyberte aplikáciu na otvorenie snímky obrazovky</translation>
     </message>
 </context>
 <context>
@@ -19,33 +19,33 @@
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="56"/>
         <source>Open With</source>
-        <translation>打开</translation>
+        <translation>Otvoriť s</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
-        <translation>在终端中启动</translation>
+        <translation>Otvoriť v termináli</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
-        <translation>选择后保持此窗口打开</translation>
+        <translation>Nechať otvorené po výbere</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="111"/>
         <source>Error</source>
-        <translation>错误</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="112"/>
-        <source>Unable to launch in terminal.</source>
-        <translation>无法在终端中启动。</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
         <source>Unable to write in</source>
-        <translation>无法写入</translation>
+        <translation>Zlyhal zápis do</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="112"/>
+        <source>Unable to launch in terminal.</source>
+        <translation>Nepodarilo sa spustiť v termináli.</translation>
     </message>
 </context>
 <context>
@@ -53,12 +53,12 @@
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Arrow</source>
-        <translation>箭头</translation>
+        <translation>Šípka</translation>
     </message>
     <message>
         <location filename="../src/tools/arrow/arrowtool.cpp" line="90"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>选择箭头作为绘画工具</translation>
+        <translation>Nastaviť Šípku ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -66,12 +66,12 @@
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="34"/>
         <source>Blur</source>
-        <translation>模糊</translation>
+        <translation>Rozmazanie</translation>
     </message>
     <message>
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
         <source>Set Blur as the paint tool</source>
-        <translation>选择模糊作为绘画工具</translation>
+        <translation>Nastaviť Rozmazanie ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -79,47 +79,47 @@
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;捕获模式&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Režim zachytávania&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
         <source>Rectangular Region</source>
-        <translation>方形区域</translation>
+        <translation>Pravouhlá oblasť</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>全屏（所有显示器）</translation>
+        <translation>Celá obrazovka (všetky monitory)</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
         <source>No Delay</source>
-        <translation>无延迟</translation>
+        <translation>Bez oneskorenia</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
         <source> second</source>
-        <translation> 秒</translation>
+        <translation> sekunda</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
         <source> seconds</source>
-        <translation> 秒</translation>
+        <translation> sekundy</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
         <source>Take new screenshot</source>
-        <translation>获取新屏幕截图</translation>
+        <translation>Urobiť novú snímku</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
         <source>Area:</source>
-        <translation>区域：</translation>
+        <translation>Oblasť:</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
         <source>Delay:</source>
-        <translation>延迟：</translation>
+        <translation>Oneskorenie:</translation>
     </message>
 </context>
 <context>
@@ -127,8 +127,7 @@
     <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
         <source>Unable to capture screen</source>
-        <translatorcomment>无法捕获屏幕</translatorcomment>
-        <translation>无法捕获屏幕</translation>
+        <translation>Nepodarilo sa zachytiť obrazovku</translation>
     </message>
     <message>
         <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
@@ -137,11 +136,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>用鼠标选择一个区域,或按 Esc 退出。
-按 Enter 键捕捉屏幕。
-按住鼠标右键显示颜色选择器。
-使用鼠标滚轮来改变绘画工具的宽度。
-按下空格键以打开侧边面板。</translation>
+        <translation>Vyberte oblasť snímania pomocou myši alebo stlačte Esc pre ukončenie.
+Stlačte Enter pre zachytenie obrazovky.
+Kliknite pravým tlačidlom pre zobrazenie nástroja pre výber farby.
+Použite kolečko myši pre zmenu hrúbky vybraného nástroja.
+Stlačte medzerník pre otvorenie postranného panelu.</translation>
     </message>
 </context>
 <context>
@@ -149,12 +148,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/circle/circletool.cpp" line="34"/>
         <source>Circle</source>
-        <translation>圆环</translation>
+        <translation>Kruh</translation>
     </message>
     <message>
         <location filename="../src/tools/circle/circletool.cpp" line="42"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>选择圆环作为绘画工具</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -162,22 +161,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/configwindow.cpp" line="41"/>
         <source>Configuration</source>
-        <translation>配置</translation>
+        <translation>Konfigurácia</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="63"/>
         <source>Interface</source>
-        <translation>界面</translation>
+        <translation>Interfejs</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="68"/>
         <source>Filename Editor</source>
-        <translation>文件名编辑器</translation>
+        <translation>Editor názvov súborov</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="73"/>
         <source>General</source>
-        <translation>常规</translation>
+        <translation>Všeobecné</translation>
     </message>
 </context>
 <context>
@@ -185,27 +184,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="175"/>
         <source>&amp;Take Screenshot</source>
-        <translation>进行截图(&amp;T)</translation>
+        <translation>&amp;Vytvoriť snímku</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Open Launcher</source>
-        <translation>打开启动器(&amp;O)</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="183"/>
         <source>&amp;Configuration</source>
-        <translation>配置(&amp;C)</translation>
+        <translation>&amp;Konfigurácia</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="186"/>
         <source>&amp;Information</source>
-        <translation>信息(&amp;I)</translation>
+        <translation>&amp;Informácie</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="189"/>
         <source>&amp;Quit</source>
-        <translation>退出(&amp;Q)</translation>
+        <translation>&amp;Ukončiť</translation>
     </message>
 </context>
 <context>
@@ -213,12 +212,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="35"/>
         <source>Copy</source>
-        <translation>复制</translation>
+        <translation>Kopírovať</translation>
     </message>
     <message>
         <location filename="../src/tools/copy/copytool.cpp" line="43"/>
         <source>Copy the selection into the clipboard</source>
-        <translation>复制选择到剪贴板</translation>
+        <translation>Kopírovať výber do schránky</translation>
     </message>
 </context>
 <context>
@@ -226,7 +225,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/dbusutils.cpp" line="43"/>
         <source>Unable to connect via DBus</source>
-        <translation>无法通过 DBus 进行连接</translation>
+        <translation>Nie je možné pripojiť sa prostredníctvom DBus</translation>
     </message>
 </context>
 <context>
@@ -234,12 +233,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/exit/exittool.cpp" line="34"/>
         <source>Exit</source>
-        <translation>退出</translation>
+        <translation>Ukončiť</translation>
     </message>
     <message>
         <location filename="../src/tools/exit/exittool.cpp" line="42"/>
         <source>Leave the capture screen</source>
-        <translation>离开屏幕捕获</translation>
+        <translation>Opustiť obrazovku so zachytávaním obrazovky</translation>
     </message>
 </context>
 <context>
@@ -247,150 +246,150 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="35"/>
         <source>Edit the name of your captures:</source>
-        <translation>编辑您的截图名称:</translation>
+        <translation>Upraviť meno vašich snímok obrazovky:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="39"/>
         <source>Edit:</source>
-        <translation>编辑器:</translation>
+        <translation>Upraviť:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="41"/>
         <source>Preview:</source>
-        <translation>预览:</translation>
+        <translation>Náhľad:</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="78"/>
         <source>Save</source>
-        <translation>保存</translation>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="80"/>
         <source>Saves the pattern</source>
-        <translation>保存样式</translation>
+        <translation>Uloží vzor</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="82"/>
         <source>Reset</source>
-        <translation>恢复</translation>
+        <translation>Resetovať</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="85"/>
         <source>Restores the saved pattern</source>
-        <translation>恢复保存的样式</translation>
+        <translation>Vráti zmeny</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="87"/>
         <source>Clear</source>
-        <translation>清空</translation>
+        <translation>Vyčistiť</translation>
     </message>
     <message>
         <location filename="../src/config/filenameeditor.cpp" line="91"/>
         <source>Deletes the name</source>
-        <translation>删除这个名字</translation>
+        <translation>Vymaže meno</translation>
     </message>
 </context>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="138"/>
-        <source>Show help message</source>
-        <translation>显示帮助文档</translation>
-    </message>
-    <message>
-        <location filename="../src/config/geneneralconf.cpp" line="142"/>
-        <source>Show the help message at the beginning in the capture mode.</source>
-        <translation>在捕获之前显示帮助信息。</translation>
-    </message>
-    <message>
-        <location filename="../src/config/geneneralconf.cpp" line="152"/>
-        <location filename="../src/config/geneneralconf.cpp" line="156"/>
-        <source>Show desktop notifications</source>
-        <translation>显示桌面通知</translation>
-    </message>
-    <message>
-        <location filename="../src/config/geneneralconf.cpp" line="165"/>
-        <source>Show tray icon</source>
-        <translation>显示托盘图标</translation>
-    </message>
-    <message>
-        <location filename="../src/config/geneneralconf.cpp" line="169"/>
-        <source>Show the systemtray icon</source>
-        <translation>显示任务栏图标</translation>
-    </message>
-    <message>
         <location filename="../src/config/geneneralconf.cpp" line="84"/>
         <location filename="../src/config/geneneralconf.cpp" line="190"/>
         <source>Import</source>
-        <translation>导入</translation>
+        <translation>Importovať</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="91"/>
         <location filename="../src/config/geneneralconf.cpp" line="99"/>
         <location filename="../src/config/geneneralconf.cpp" line="121"/>
         <source>Error</source>
-        <translation>错误</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="91"/>
         <source>Unable to read file.</source>
-        <translation>无法读取文件。</translation>
+        <translation>Zlyhalo čítanie súboru.</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="99"/>
         <location filename="../src/config/geneneralconf.cpp" line="121"/>
         <source>Unable to write file.</source>
-        <translation>无法写入文件。</translation>
+        <translation>Zlyhal zápis do súboru.</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="107"/>
         <source>Save File</source>
-        <translation>保存到文件</translation>
+        <translation>Uložiť súbor</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Confirm Reset</source>
-        <translation>确定重置</translation>
+        <translation>Potvrdiť Reset</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="129"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>你确定你想要重置配置？</translation>
+        <translation>Naozaj si želáte resetovať aktuálnu konfiguráciu?</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="138"/>
+        <source>Show help message</source>
+        <translation>Zobraziť nápovedu</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="142"/>
+        <source>Show the help message at the beginning in the capture mode.</source>
+        <translation>Zobraziť nápovedu na začiatku počas režimu zachytávania obrazovky.</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="152"/>
+        <location filename="../src/config/geneneralconf.cpp" line="156"/>
+        <source>Show desktop notifications</source>
+        <translation>Zobraziť systémové upozornenia</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="165"/>
+        <source>Show tray icon</source>
+        <translation>Zobraziť stavovú ikonu</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
+        <source>Show the systemtray icon</source>
+        <translation>Zobraziť ikonu v stavovej oblasti</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="180"/>
         <source>Configuration File</source>
-        <translation>配置文件</translation>
+        <translation>Súbor s konfiguráciou</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="185"/>
         <source>Export</source>
-        <translation>导出</translation>
+        <translation>Exportovať</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="195"/>
         <source>Reset</source>
-        <translation>重置</translation>
+        <translation>Resetovať</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="203"/>
         <source>Launch at startup</source>
-        <translation>开机时启动</translation>
+        <translation>Spúšťať pri štarte</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="207"/>
         <source>Launch Flameshot</source>
-        <translation>启动 Flameshot</translation>
+        <translation>Spustiť Flameshot</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="215"/>
         <source>Close after capture</source>
-        <translation>捕获后关闭</translation>
+        <translation>Zavrieť po vytvorení snímky</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="219"/>
         <source>Close after taking a screenshot</source>
-        <translation>获取屏幕截图后关闭</translation>
+        <translation>Zatvoriť po vytvorení snímky obrazovky</translation>
     </message>
 </context>
 <context>
@@ -398,48 +397,48 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
         <source>Upload to Imgur</source>
-        <translation>上传到Imgur</translation>
+        <translation>Nahrať na Imgur</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>正在上传</translation>
+        <translation>Nahrávam obrázok</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
         <source>Copy URL</source>
-        <translation>复制链接</translation>
+        <translation>Kopírovať URL</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
         <source>Open URL</source>
-        <translation>打开链接</translation>
+        <translation>Otvoriť URL</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
         <source>Delete image</source>
-        <translation>删除图像</translation>
+        <translation>Vymazať obrázok</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
         <source>Image to Clipboard.</source>
-        <translation>保存文件到剪贴板。</translation>
+        <translation>Obrázok do schránky.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Unable to open the URL.</source>
-        <translation>无法打开此链接。</translation>
+        <translation>Nepodarilo sa otvoriť URL.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
         <source>URL copied to clipboard.</source>
-        <translation>复制链接到剪贴板。</translation>
+        <translation>URL skopírovaná do schránky.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>截图复制到剪贴板。</translation>
+        <translation>Snímka obrazovky bola skopírovaná do schránky.</translation>
     </message>
 </context>
 <context>
@@ -447,12 +446,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="35"/>
         <source>Image Uploader</source>
-        <translation>上传图片</translation>
+        <translation>Uploader obrázkov</translation>
     </message>
     <message>
         <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
         <source>Upload the selection to Imgur</source>
-        <translation>上传选择到 Imgur</translation>
+        <translation>Nahrať výber na Imgur</translation>
     </message>
 </context>
 <context>
@@ -460,97 +459,97 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
-        <translation>关于</translation>
+        <translation>O programe</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation>空格</translation>
+        <translation>MEDZERNÍK</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>右键</translation>
+        <translation>Kliknutie pravým tlačidlom</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>鼠标滑轮</translation>
+        <translation>Kolečko myši</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="68"/>
         <source>Move selection 1px</source>
-        <translation>移动选择 1 px</translation>
+        <translation>Presunúť výber o 1 px</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>Resize selection 1px</source>
-        <translation>调整选择大小 1 px</translation>
+        <translation>Zmeniť rozmery výberu o 1 px</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Quit capture</source>
-        <translation>退出捕获</translation>
+        <translation>Ukončiť zachytávanie obrazovky</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Copy to clipboard</source>
-        <translation>复制到剪贴板</translation>
+        <translation>Kopírovať do schránky</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Save selection as a file</source>
-        <translation>将选择保存为文件</translation>
+        <translation>Zapísať výber do súboru</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Undo the last modification</source>
-        <translation>撤消上次修改</translation>
+        <translation>Vrátiť poslednú úpravu</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>切换侧边栏可见性</translation>
+        <translation>Prepnúť viditeľnosť bočnej lišty s možnosťami vybraného nástroja</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
-        <translation>显示颜色选择器</translation>
+        <translation>Zobraziť dialóg na výber farby</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>改变工具的厚度</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
-        <source>Key</source>
-        <translation>键</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
-        <source>Description</source>
-        <translation>描述</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="123"/>
-        <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;许可证&lt;/b&gt;&lt;/u&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="131"/>
-        <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;版本&lt;/b&gt;&lt;/u&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="141"/>
-        <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;快捷键&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>Zmena hrúbky nástroja</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="81"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>屏幕捕捉模式中的可用快捷键。</translation>
+        <translation>Dostupné klávesové skratky v režime zachytávania obrazovky.</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <source>Key</source>
+        <translation>Kláves</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <source>Description</source>
+        <translation>Popis</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="123"/>
+        <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;Licencia&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="131"/>
+        <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;Verzia&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="141"/>
+        <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
+        <translation>&lt;u&gt;&lt;b&gt;Klávesové skratky&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
 </context>
 <context>
@@ -558,12 +557,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/line/linetool.cpp" line="37"/>
         <source>Line</source>
-        <translation>直线</translation>
+        <translation>Čiara</translation>
     </message>
     <message>
         <location filename="../src/tools/line/linetool.cpp" line="45"/>
         <source>Set the Line as the paint tool</source>
-        <translation>将直线线设置为绘画工具</translation>
+        <translation>Nastaviť Čiaru ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -571,12 +570,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="37"/>
         <source>Marker</source>
-        <translation>标记</translation>
+        <translation>Fixka</translation>
     </message>
     <message>
         <location filename="../src/tools/marker/markertool.cpp" line="45"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>将标记设置为绘画工具</translation>
+        <translation>Nastaviť Fixku ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -584,12 +583,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/move/movetool.cpp" line="34"/>
         <source>Move</source>
-        <translation>移动</translation>
+        <translation>Presun</translation>
     </message>
     <message>
         <location filename="../src/tools/move/movetool.cpp" line="42"/>
         <source>Move the selection area</source>
-        <translation>移动选择区域</translation>
+        <translation>Presunúť oblasť výberu</translation>
     </message>
 </context>
 <context>
@@ -597,12 +596,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/pencil/penciltool.cpp" line="30"/>
         <source>Pencil</source>
-        <translation>铅笔</translation>
+        <translation>Ceruzka</translation>
     </message>
     <message>
         <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>将铅笔设置为绘画工具</translation>
+        <translation>Nastaviť Ceruzku ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -610,38 +609,16 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="34"/>
         <source>Pin Tool</source>
-        <translation>贴图工具</translation>
+        <translation>Špendlík</translation>
     </message>
     <message>
         <location filename="../src/tools/pin/pintool.cpp" line="42"/>
         <source>Pin image on the desktop</source>
-        <translation>在桌面上固定图像</translation>
+        <translation>Pripnúť obrázok na plochu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="90"/>
-        <source>Save Error</source>
-        <translation>保存错误</translation>
-    </message>
-    <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
-        <source>Capture saved as </source>
-        <translation>捕获已保存为 </translation>
-    </message>
-    <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
-        <source>Capture saved to clipboard</source>
-        <translation>捕获已保存至剪贴板</translation>
-    </message>
-    <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="87"/>
-        <source>Error trying to save as </source>
-        <translation>尝试另存为时出错 </translation>
-    </message>
     <message>
         <location filename="../src/main.cpp" line="77"/>
         <location filename="../src/main.cpp" line="227"/>
@@ -649,17 +626,39 @@ Press Space to open the side panel.</source>
         <location filename="../src/main.cpp" line="400"/>
         <location filename="../src/main.cpp" line="429"/>
         <source>Unable to connect via DBus</source>
-        <translation>无法通过DBus进行连接</translation>
+        <translation>Nie je možné pripojiť sa prostredníctvom DBus</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="39"/>
         <source>Error</source>
-        <translation>错误</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
-        <translation>无法写入</translation>
+        <translation>Zlyhal zápis do</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
+        <source>Capture saved to clipboard</source>
+        <translation>Snímka uložená do schránky</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
+        <source>Capture saved as </source>
+        <translation>Snímka uložená ako </translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="87"/>
+        <source>Error trying to save as </source>
+        <translation>Chyba pri ukladaní do </translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="90"/>
+        <source>Save Error</source>
+        <translation>Chyba pri ukladaní</translation>
     </message>
 </context>
 <context>
@@ -667,12 +666,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/rectangle/rectangletool.cpp" line="34"/>
         <source>Rectangle</source>
-        <translation>实心矩形</translation>
+        <translation>Obdĺžnik</translation>
     </message>
     <message>
         <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>将实心矩形设置为绘画工具</translation>
+        <translation>Nastaviť Obdĺžnik ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -680,12 +679,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="34"/>
         <source>Redo</source>
-        <translation>重做</translation>
+        <translation>Znova</translation>
     </message>
     <message>
         <location filename="../src/tools/redo/redotool.cpp" line="42"/>
         <source>Redo the next modification</source>
-        <translation>重做上次修改</translation>
+        <translation>Zopakovať úpravu</translation>
     </message>
 </context>
 <context>
@@ -693,12 +692,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/save/savetool.cpp" line="35"/>
         <source>Save</source>
-        <translation>保存</translation>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../src/tools/save/savetool.cpp" line="43"/>
         <source>Save the capture</source>
-        <translation>保存捕获</translation>
+        <translation>Uložiť snímku obrazovky</translation>
     </message>
 </context>
 <context>
@@ -706,7 +705,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/screengrabber.cpp" line="76"/>
         <source>Unable to capture screen</source>
-        <translation>无法捕获屏幕</translation>
+        <translation>Nepodarilo sa zachytiť obrazovku</translation>
     </message>
 </context>
 <context>
@@ -714,12 +713,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="38"/>
         <source>Rectangular Selection</source>
-        <translation>矩形选择</translation>
+        <translation>Obdĺžnikový výber</translation>
     </message>
     <message>
         <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
         <source>Set Selection as the paint tool</source>
-        <translation>将矩形选择设置为绘画工具</translation>
+        <translation>Nastaviť Výber ako nástroj pre úpravy</translation>
     </message>
 </context>
 <context>
@@ -727,22 +726,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
         <source>Active thickness:</source>
-        <translation>当前宽度：</translation>
+        <translation>Aktívna hrúbka:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
         <source>Active color:</source>
-        <translation>活动颜色：</translation>
+        <translation>Aktívna farba:</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
         <source>Press ESC to cancel</source>
-        <translation>按下 ESC 键以取消</translation>
+        <translation>Stlačte ESC pre zrušenie</translation>
     </message>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
         <source>Grab Color</source>
-        <translation>获取颜色</translation>
+        <translation>Snímať farbu</translation>
     </message>
 </context>
 <context>
@@ -750,12 +749,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="34"/>
         <source>Selection Size Indicator</source>
-        <translation>选择尺寸指示</translation>
+        <translation>Ukazovateľ veľkosti výberu</translation>
     </message>
     <message>
         <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation>显示选择的尺寸 (X Y)</translation>
+        <translation>Zobraziť rozmery výberu (X Y)</translation>
     </message>
 </context>
 <context>
@@ -763,107 +762,107 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Century (00-99)</source>
-        <translation>世纪（00-99）</translation>
+        <translation>Storočie (00-99)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="48"/>
         <source>Year (00-99)</source>
-        <translation>年（00-99）</translation>
+        <translation>Rok (00-99)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="49"/>
         <source>Year (2000)</source>
-        <translation>年（2000）</translation>
+        <translation>Rok (2000)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Month Name (jan)</source>
-        <translation>月（1月 - 12月）</translation>
+        <translation>Meno mesiaca (jan)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Month Name (january)</source>
-        <translation>月（一月 - 十二月）</translation>
+        <translation>Meno mesiaca (január)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Month (01-12)</source>
-        <translation>月 (01-12)</translation>
+        <translation>Mesiac (01-12)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Week Day (1-7)</source>
-        <translation>周内的日（1-7）</translation>
+        <translation>Deň v týždni (1-7)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Week (01-53)</source>
-        <translation>周（01-53）</translation>
+        <translation>Týždeň (01-53)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day Name (mon)</source>
-        <translation>星期（一 - 七）</translation>
+        <translation>Meno dňa (pon)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Day Name (monday)</source>
-        <translation>星期（星期一 - 星期日）</translation>
+        <translation>Meno dňa (pondelok)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Day (01-31)</source>
-        <translation>天（01-31）</translation>
+        <translation>Deň (01-31)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
         <source>Day of Month (1-31)</source>
-        <translation>一月中的某天（1-31）</translation>
+        <translation>Deň v mesiaci (1-31)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day (001-366)</source>
-        <translation>天（001-366）</translation>
+        <translation>Deň (001-366)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Time (%H-%M-%S)</source>
-        <translation>时间（%H-%M-%S）</translation>
+        <translation>Čas (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Time (%H-%M)</source>
-        <translation>时间（%H-%M）</translation>
+        <translation>Čas (%H-%M)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Hour (00-23)</source>
-        <translation>小时（00-23）</translation>
+        <translation>Hodina (00-23)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Hour (01-12)</source>
-        <translation>小时（01-12）</translation>
+        <translation>Hodina (01-12)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Minute (00-59)</source>
-        <translation>分钟（00-59）</translation>
+        <translation>Minúta (00-59)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Second (00-59)</source>
-        <translation>秒（00-59）</translation>
+        <translation>Sekunda (00-59)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>完整日期（%m/%d/%y）</translation>
+        <translation>Celý dátum (%m/%d/%y)</translation>
     </message>
     <message>
         <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>完整日期（%Y-%m-%d）</translation>
+        <translation>Celý dátum (%Y-%m-%d)</translation>
     </message>
 </context>
 <context>
@@ -871,7 +870,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/utils/systemnotification.cpp" line="29"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot 消息</translation>
+        <translation>Informácie o programe Flameshot</translation>
     </message>
 </context>
 <context>
@@ -879,22 +878,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="49"/>
         <source>StrikeOut</source>
-        <translation>删除线</translation>
+        <translation>Preškrtnuté</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
-        <translation>下划线</translation>
+        <translation>Podčiarknuté</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation>粗体</translation>
+        <translation>Tučné</translation>
     </message>
     <message>
         <location filename="../src/tools/text/textconfig.cpp" line="70"/>
         <source>Italic</source>
-        <translation>斜体</translation>
+        <translation>Kurzíva</translation>
     </message>
 </context>
 <context>
@@ -902,12 +901,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="50"/>
         <source>Text</source>
-        <translation>文本</translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../src/tools/text/texttool.cpp" line="58"/>
         <source>Add text to your capture</source>
-        <translation>在您的捕获中添加文本</translation>
+        <translation>Pridať text do snímky</translation>
     </message>
 </context>
 <context>
@@ -915,37 +914,37 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="30"/>
         <source>UI Color Editor</source>
-        <translation>用户界面颜色编辑器</translation>
+        <translation>Editor farieb interfejsu</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="93"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>移动颜色选择并在预览按钮查看。</translation>
+        <translation>Presunom bežcov nastavte farbu a sledujte tieto zmeny v náhľade.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="103"/>
         <source>Select a Button to modify it</source>
-        <translation>选择一个按钮以进行修改</translation>
+        <translation>Kliknite na tlačidlo pre jeho úpravu</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="112"/>
         <source>Main Color</source>
-        <translation>主色</translation>
+        <translation>Hlavná farba</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="116"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>点击按钮设置主色。</translation>
+        <translation>Pre nastavenie hlavnej farby kliknite na toto tlačidlo.</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="127"/>
         <source>Contrast Color</source>
-        <translation>对比色</translation>
+        <translation>Kontrastná farba</translation>
     </message>
     <message>
         <location filename="../src/config/uicoloreditor.cpp" line="132"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>点击按钮设置对比色。</translation>
+        <translation>Pre nastavenie kontrastnej farby kliknite na toto tlačidlo.</translation>
     </message>
 </context>
 <context>
@@ -953,12 +952,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/tools/undo/undotool.cpp" line="34"/>
         <source>Undo</source>
-        <translation>撤消</translation>
+        <translation>Späť</translation>
     </message>
     <message>
         <location filename="../src/tools/undo/undotool.cpp" line="42"/>
         <source>Undo the last modification</source>
-        <translation>撤消上次修改</translation>
+        <translation>Vrátiť poslednú úpravu</translation>
     </message>
 </context>
 <context>
@@ -966,17 +965,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="53"/>
         <source>Opacity of area outside selection:</source>
-        <translation>选中区域之外的不透明度：</translation>
+        <translation>Priehľadnosť oblasti mimo výberu:</translation>
     </message>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="77"/>
         <source>Button Selection</source>
-        <translation>按钮选择</translation>
+        <translation>Výber tlačidiel</translation>
     </message>
     <message>
         <location filename="../src/config/visualseditor.cpp" line="83"/>
         <source>Select All</source>
-        <translation>全选</translation>
+        <translation>Vybrať všetky</translation>
     </message>
 </context>
 </TS>

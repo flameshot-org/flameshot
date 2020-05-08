@@ -201,7 +201,7 @@ int main(int argc, char *argv[]) {
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
     parser.AddOptions({ pathOption, delayOption, rawImageOption }, guiArgument);
-    parser.AddOptions({ screenNumberOption, clipboardOption,pathOption,
+    parser.AddOptions({ screenNumberOption, clipboardOption, pathOption,
                         delayOption, rawImageOption },
                       screenArgument);
     parser.AddOptions({ pathOption, clipboardOption, delayOption, rawImageOption },

@@ -45,6 +45,7 @@ ImgurUploader::ImgurUploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
     setWindowTitle(tr("Upload to Imgur"));
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
     m_spinner = new LoadSpinner(this);
     m_spinner->setColor(ConfigHandler().uiMainColorValue());
@@ -76,7 +77,13 @@ void ImgurUploader::handleReply(QNetworkReply *reply) {
         m_imageURL.setUrl(data[QStringLiteral("link")].toString());
         m_deleteImageURL.setUrl(QStringLiteral("https://imgur.com/delete/%1").arg(
                                     data[QStringLiteral("deletehash")].toString()));
-        onUploadOk();
+        if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
+            QApplication::clipboard()->setText(m_imageURL.toString());
+            SystemNotification().sendMessage(QObject::tr("URL copied to clipboard."));
+            close();
+        } else {
+            onUploadOk();
+        }
     } else {
         m_infoLabel->setText(reply->errorString());
     }

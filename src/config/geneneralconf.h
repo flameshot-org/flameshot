@@ -52,6 +52,7 @@ private:
     QCheckBox *m_helpMessage;
     QCheckBox *m_autostart;
     QCheckBox *m_closeAfterCapture;
+    QCheckBox *m_copyAndCloseAfterUpload;
     QPushButton *m_importButton;
     QPushButton *m_exportButton;
     QPushButton *m_resetButton;
@@ -65,5 +66,6 @@ private:
     void initConfingButtons();
     void initAutostart();
     void initCloseAfterCapture();
+    void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
 };
