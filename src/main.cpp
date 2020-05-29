@@ -16,13 +16,13 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "src/core/controller.h"
-#include "singleapplication.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
 #include "src/cli/commandlineparser.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/pathinfo.h"
 #include "src/core/capturerequest.h"
+#include <QtSingleApplication>
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QTranslator>
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
-        SingleApplication app(argc, argv);
+        QtSingleApplication app(argc, argv);
 
         QTranslator translator, qtTranslator;
         QStringList trPaths = PathInfo::translationsPaths();

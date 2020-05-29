@@ -18,7 +18,7 @@ unix:!macx {
     QT  += dbus
 }
 
-CONFIG += c++11 link_pkgconfig
+CONFIG += c++11 link_pkgconfig qtsingleapplication
 
 #CONFIG += packaging   # Enables "make install" for packaging paths
 
@@ -69,7 +69,6 @@ for(tsfile, TRANSLATIONS) {
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-include(src/third-party/singleapplication/singleapplication.pri)
 include(src/third-party/Qt-Color-Widgets//color_widgets.pri)
 
 DEFINES += QAPPLICATION_CLASS=QApplication
