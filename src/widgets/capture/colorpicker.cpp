@@ -92,7 +92,7 @@ void ColorPicker::paintEvent(QPaintEvent *) {
 
 void ColorPicker::mouseMoveEvent(QMouseEvent *e) {
     for (int i = 0; i < m_colorList.size(); ++i) {
-        if (m_colorAreaList.at(i).contains(e->pos())) {
+        if (m_colorAreaList.at(i).contains(e->pos()) && m_drawColor != m_colorList.at(i)) {
             m_drawColor = m_colorList.at(i);
             emit colorSelected(m_drawColor);
             update();
