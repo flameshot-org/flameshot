@@ -21,6 +21,7 @@
 #include "copy/copytool.h"
 #include "exit/exittool.h"
 #include "imgur/imguruploadertool.h"
+#include "imgs3/imgs3uploadertool.h"
 #include "line/linetool.h"
 #include "marker/markertool.h"
 #include "move/movetool.h"
@@ -59,7 +60,8 @@ CaptureTool* ToolFactory::CreateTool(
         tool = new ExitTool(parent);
         break;
     case CaptureButton::TYPE_IMAGEUPLOADER:
-        tool = new ImgurUploaderTool(parent);
+//        tool = new ImgurUploaderTool(parent);
+        tool = new ImgS3UploaderTool(parent);
         break;
     case CaptureButton::TYPE_DRAWER:
         tool = new LineTool(parent);
