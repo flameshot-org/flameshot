@@ -52,7 +52,7 @@ void RectangleTool::process(QPainter &painter, const QPixmap &pixmap, bool recor
     }
     painter.setPen(QPen(m_color, m_thickness));
     painter.setBrush(QBrush(m_color));
-    painter.drawRect(QRect(m_points.first, m_points.second));
+    painter.drawRoundedRect(QRect(m_points.first, m_points.second), m_thickness, m_thickness);
 }
 
 void RectangleTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
