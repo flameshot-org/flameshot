@@ -1,4 +1,4 @@
-image: Visual Studio 2017
+image: Visual Studio 2015
 
 version: 0.6.{build}.0
 # Major_Version_Number.Minor_Version_Number.Build_Number.Revision_Number
@@ -9,12 +9,12 @@ branches:
 
 environment:
     COMPILER: msvc
-    VSVER: 14.16
+    VSVER: 14
 
     matrix:
-        - QT: C:\Qt\5.12\msvc2017_64
+        - QT: C:\Qt\5.9\msvc2015_64
           PLATFORM: amd64
-        - QT: C:\Qt\5.12\msvc2017
+        - QT: C:\Qt\5.9\msvc2015
           PLATFORM: x86
 init:
     - ps: |
@@ -30,6 +30,8 @@ install:
 # scripts that run before build
 before_build:
     - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
+    - appveyor DownloadFile http://mlaan2.home.xs4all.nl/ispack/innosetup-6.0.5.exe
+    - innosetup-6.0.5.exe /VERYSILENT /ALLUSERS /DIR=C:\InnoSetup
     # After calling vcvarsall.bat, %PLATFORM% will be X64 or x86
     - qmake --version
     - mkdir build
@@ -63,6 +65,9 @@ after_build:
     - cd distrib
     - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
     - appveyor-retry curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
+    - cp ..\..\win_setup\flameshot.iss flameshot.iss
+    - C:\InnoSetup\Compil32.exe /cc flameshot.iss
+    - appveyor-retry curl --upload-file ./Output/FlameShot-Setup-is.exe https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%_setup.exe
 
 
 # artifacts:
