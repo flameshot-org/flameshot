@@ -1,4 +1,4 @@
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 version: 0.6.{build}.0
 # Major_Version_Number.Minor_Version_Number.Build_Number.Revision_Number
@@ -9,12 +9,12 @@ branches:
 
 environment:
     COMPILER: msvc
-    VSVER: 14
+    VSVER: 14.16
 
     matrix:
-        - QT: C:\Qt\5.9\msvc2015_64
+        - QT: C:\Qt\5.12\msvc2017_64
           PLATFORM: amd64
-        - QT: C:\Qt\5.9\msvc2015
+        - QT: C:\Qt\5.12\msvc2017
           PLATFORM: x86
 init:
     - ps: |
