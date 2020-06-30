@@ -1,6 +1,6 @@
 image: Visual Studio 2015
 
-version: 0.6.{build}.0
+version: 0.7.0.{build}
 # Major_Version_Number.Minor_Version_Number.Build_Number.Revision_Number
 
 branches:
@@ -19,7 +19,7 @@ environment:
 init:
     - ps: |
         $version = new-object System.Version $env:APPVEYOR_BUILD_VERSION
-        $packageVersion = "{0}.{1}.{2}" -f $version.Major, $version.Minor, $version.Revision
+        $packageVersion = "{0}.{1}.{2}.{3}" -f $version.Major, $version.Minor, $version.Build, $version.Revision
         $env:build_number = $version.Build
         $env:flameshot_version = $packageVersion
 
@@ -65,6 +65,7 @@ after_build:
     - cd distrib
     - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
     - appveyor-retry curl --upload-file ./flameshot_%flameshot_version%_win_%PLATFORM%.zip https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%.zip
+    # build installation
     - cp ..\..\win_setup\flameshot.iss flameshot.iss
     - C:\InnoSetup\Compil32.exe /cc flameshot.iss
     - appveyor-retry curl --upload-file ./Output/FlameShot-Setup-is.exe https://transfer.sh/flameshot_%flameshot_version%_win_%PLATFORM%_setup.exe

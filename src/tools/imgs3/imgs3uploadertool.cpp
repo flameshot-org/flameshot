@@ -17,10 +17,17 @@
 
 #include "imgs3uploadertool.h"
 #include "imgs3uploader.h"
+#include <QDebug>
+#include <QDir>
 #include <QPainter>
+#include <QSettings>
+
 
 ImgS3UploaderTool::ImgS3UploaderTool(QObject *parent) : AbstractActionTool(parent) {
-
+    QSettings *pSettings = new QSettings(QDir::currentPath() + "/config.ini", QSettings::IniFormat);
+    pSettings->beginGroup("S3");
+    m_s3CredsUrl = pSettings->value("S3_CREDS_URL").toString();
+    m_s3XApiKey = pSettings->value("S3_X_API_KEY").toString();
 }
 
 bool ImgS3UploaderTool::closeOnButtonPressed() const {
@@ -44,7 +51,7 @@ QString ImgS3UploaderTool::description() const {
 }
 
 QWidget* ImgS3UploaderTool::widget() {
-    return new ImgS3Uploader(capture);
+    return new ImgS3Uploader(capture, m_s3CredsUrl, m_s3XApiKey);
 }
 
 CaptureTool* ImgS3UploaderTool::copy(QObject *parent) {

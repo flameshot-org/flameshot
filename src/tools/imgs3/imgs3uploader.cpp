@@ -42,9 +42,15 @@
 #include <QJsonObject>
 #include <QHttpMultiPart>
 
-ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
+ImgS3Uploader::ImgS3Uploader(const QPixmap &capture,
+                             const QString &s3CredsUrl,
+                             const QString &s3XApiKey,
+                             QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
+    m_s3CredsUrl = s3CredsUrl;
+    m_s3XApiKey = s3XApiKey;
+
     setWindowTitle(tr("Upload to ImgS3"));
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
@@ -108,7 +114,12 @@ void ImgS3Uploader::handleCredsReply(QNetworkReply *reply){
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         uploadToS3(response);
     } else {
-        m_infoLabel->setText(reply->errorString());
+        if(m_s3CredsUrl.length() == 0){
+            m_infoLabel->setText("S3 Creds URL is not found in your configuration file");
+        }
+        else {
+            m_infoLabel->setText(reply->errorString());
+        }
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
@@ -209,8 +220,11 @@ void ImgS3Uploader::uploadToS3(QJsonDocument &response) {
 
 void ImgS3Uploader::upload() {
     // get creads
-    QUrl creds("https://api.img.rnd.namecheap.net/");
+    QUrl creds(m_s3CredsUrl);
     QNetworkRequest requestCreds(creds);
+    if(m_s3XApiKey.length() > 0) {
+        requestCreds.setRawHeader(QByteArray("X-API-Key"), QByteArray(m_s3XApiKey.toLocal8Bit()));
+    }
     m_NetworkAMCreds->get(requestCreds);
 }
 
