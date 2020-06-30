@@ -40,4 +40,6 @@ public slots:
 
 private:
     QPixmap capture;
+    QString m_s3CredsUrl;
+    QString m_s3XApiKey;
 };
