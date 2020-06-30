@@ -33,7 +33,11 @@ class NotificationWidget;
 class ImgS3Uploader : public QWidget {
     Q_OBJECT
 public:
-    explicit ImgS3Uploader(const QPixmap &capture, QWidget *parent = nullptr);
+    explicit ImgS3Uploader(const QPixmap &capture,
+                           const QString &s3CredsUrl,
+                           const QString &s3XApiKey,
+                           QWidget *parent = nullptr
+);
 
 private slots:
     void handleReply(QNetworkReply *reply);
@@ -49,6 +53,9 @@ private:
     void uploadToS3(QJsonDocument &response);
 
 private:
+    QString m_s3CredsUrl;
+    QString m_s3XApiKey;
+
     QString m_hostName;
     QPixmap m_pixmap;
     QNetworkAccessManager *m_NetworkAM;
