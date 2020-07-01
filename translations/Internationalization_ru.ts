@@ -99,12 +99,12 @@
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
         <source> second</source>
-        <translation> второй</translation>
+        <translation> секунда</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
         <source> seconds</source>
-        <translation> вторые</translation>
+        <translation> секунд</translation>
     </message>
     <message>
         <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
@@ -189,7 +189,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="180"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Открыть</translation>
+        <translation>&amp;Открыть</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="183"/>
