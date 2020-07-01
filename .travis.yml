@@ -6,6 +6,7 @@ language: cpp
 branches:
   only:
     - master
+    - master_nc
 
 cache:
     directories:
@@ -15,7 +16,8 @@ env:
     global:
       # Environment variables for packaging
       - PRODUCT=flameshot
-      - VERSION=0.6.0
+      #TODO: we should take version from the last tag in git history + build number
+      - VERSION=0.7.0
       - RELEASE=1
       - ARCH=x86_64
       # Dockerfile from https://github.com/flameshotapp/flameshot-docker-images
@@ -40,16 +42,16 @@ matrix:
           env: OS=fedora DIST=30 EXTEN=rpm
           services: docker
         - os: linux
-          # 16.04 LTS
+          # Ubuntu 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
           services: docker
         - os: linux
-          # 18.04 LTS
+          # Ubuntu 18.04 LTS
           env: OS=ubuntu DIST=bionic EXTEN=deb
           services: docker
         - os: linux
-          # 19.04
-          env: OS=ubuntu DIST=disco EXTEN=deb
+          # Ubuntu 20.04 LTS
+          env: OS=ubuntu DIST=focal EXTEN=deb
           services: docker
         - os: linux
           # 8
