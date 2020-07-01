@@ -384,7 +384,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="215"/>
-        <source>Close after capture</source>
+        <source>Close application after capture</source>
         <translation>捕获后关闭</translation>
     </message>
     <message>
