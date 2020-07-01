@@ -137,7 +137,7 @@ Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation>Выберите область с помощью мыши или нажмите Esc чтобы выйти.
-Нажмите Enter чтобы захватить экран.
+Нажмите Enter чтобы скопировать выделенную область в буфер обмена.
 Нажмите правую кнопку мыши чтобы показать выбор цвета.
 Используйте колесо мыши чтобы выбрать толщину текущего инструмента.
 Нажмите Пробел чтобы открыть боковую панель.</translation>
