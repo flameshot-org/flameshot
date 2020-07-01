@@ -214,7 +214,7 @@ void GeneneralConf::initAutostart() {
 }
 
 void GeneneralConf::initCloseAfterCapture() {
-    m_closeAfterCapture = new QCheckBox(tr("Close after capture"), this);
+    m_closeAfterCapture = new QCheckBox(tr("Close application after capture"), this);
     ConfigHandler config;
     bool checked = config.closeAfterScreenshotValue();
     m_closeAfterCapture->setChecked(checked);
