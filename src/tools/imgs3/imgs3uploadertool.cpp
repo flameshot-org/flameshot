@@ -47,7 +47,7 @@ QString ImgS3UploaderTool::nameID() {
 }
 
 QString ImgS3UploaderTool::description() const {
-    return tr("Upload the selection to ImgS3");
+    return tr("Upload the selection to S3 bucket");
 }
 
 QWidget* ImgS3UploaderTool::widget() {
