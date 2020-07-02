@@ -348,7 +348,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="215"/>
-        <source>Close after capture</source>
+        <source>Close application after capture</source>
         <translation>Fermer après une capture</translation>
     </message>
     <message>

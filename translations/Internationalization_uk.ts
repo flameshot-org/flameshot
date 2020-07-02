@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA">
+<TS version="2.1" language="uk_UA">
 <context>
     <name>AppLauncher</name>
     <message>
@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../src/tools/arrow/arrowtool.cpp" line="80"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Arrow</source>
         <translation>Стрілка</translation>
     </message>
     <message>
-        <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="90"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Вибрати стрілку інструментом малювання</translation>
     </message>
@@ -72,6 +72,54 @@
         <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
         <source>Set Blur as the paint tool</source>
         <translation>Вибрати розмиття інструментом малювання</translation>
+    </message>
+</context>
+<context>
+    <name>CaptureLauncher</name>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
+        <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Режим захвату&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
+        <source>Rectangular Region</source>
+        <translation>Квадратна область</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
+        <source>Full Screen (All Monitors)</source>
+        <translation>Увесь екран (усі монітори)</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
+        <source>No Delay</source>
+        <translation>Без затримки</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <source> second</source>
+        <translation> секунда</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <source> seconds</source>
+        <translation> секунд</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
+        <source>Take new screenshot</source>
+        <translation>Зробити новий скріншот</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
+        <source>Area:</source>
+        <translation>Область:</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
+        <source>Delay:</source>
+        <translation>Затримка:</translation>
     </message>
 </context>
 <context>
@@ -134,22 +182,27 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="169"/>
+        <location filename="../src/core/controller.cpp" line="175"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Зробити знімок</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="174"/>
+        <location filename="../src/core/controller.cpp" line="180"/>
+        <source>&amp;Open Launcher</source>
+        <translation>&amp;Відчинити</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="183"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Налаштування</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="177"/>
+        <location filename="../src/core/controller.cpp" line="186"/>
         <source>&amp;Information</source>
         <translation>&amp;Інформація</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="189"/>
         <source>&amp;Quit</source>
         <translation>Ви&amp;йти</translation>
     </message>
@@ -239,94 +292,176 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="78"/>
-        <location filename="../src/config/geneneralconf.cpp" line="184"/>
+        <location filename="../src/config/geneneralconf.cpp" line="86"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Import</source>
         <translation>Імпорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="85"/>
         <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="115"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="85"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
         <source>Unable to read file.</source>
         <translation>Не вдалось прочитати файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="115"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Unable to write file.</source>
         <translation>Не вдалось записати файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Save File</source>
         <translation>Зберегти файл</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="122"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Confirm Reset</source>
         <translation>Підтвердити скидання</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="131"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Ви дійсно хочете скинути налаштування?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="132"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show help message</source>
         <translation>Показувати повідомлення довідки</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="144"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Показувати повідомлення довідки на початку режиму захоплення.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="146"/>
-        <location filename="../src/config/geneneralconf.cpp" line="150"/>
+        <location filename="../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../src/config/geneneralconf.cpp" line="158"/>
         <source>Show desktop notifications</source>
         <translation>Показувати повідомлення</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="159"/>
+        <location filename="../src/config/geneneralconf.cpp" line="167"/>
         <source>Show tray icon</source>
         <translation>Показувати значок на панелі</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="171"/>
         <source>Show the systemtray icon</source>
         <translation>Показувати значок на панелі повідомленнь</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="174"/>
+        <location filename="../src/config/geneneralconf.cpp" line="182"/>
         <source>Configuration File</source>
         <translation>Файл налаштувань</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="179"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Export</source>
         <translation>Експорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="189"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Reset</source>
         <translation>Скинути</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="205"/>
         <source>Launch at startup</source>
         <translation>Запускати при старті системи</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="201"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch Flameshot</source>
         <translation>Запускати Flameshot</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="217"/>
+        <source>Close application after capture</source>
+        <translation>Закрити прогрму після захвату</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <source>Close after taking a screenshot</source>
+        <translation>Закрити програму після отримання скріншоту</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <source>Copy URL after upload</source>
+        <translation>Копіювати URL після завантаження</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <source>Copy URL and close window after upload</source>
+        <translation>Копіювати URL та закрити вікно після завантаження</translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
+        <source>Upload to ImgS3</source>
+        <translation>Вивантажити на S3</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <source>Uploading Image</source>
+        <translation>Вивантаження зображення</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <source>Copy URL</source>
+        <translation>Скопіювати URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <source>Open URL</source>
+        <translation>Відкрити URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
+        <source>Delete image</source>
+        <translation>Видалити зображення</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="249"/>
+        <source>Image to Clipboard.</source>
+        <translation>Зображення до буферу обміну.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="268"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="281"/>
+        <source>Unable to open the URL.</source>
+        <translation>Не вдалось відкрити URL.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="274"/>
+        <source>URL copied to clipboard.</source>
+        <translation>URL скопійовано до буферу обміну.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="287"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation>Знімок скопійовано до буферу обміну.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="42"/>
+        <source>Image Uploader</source>
+        <translation>Вивантаження зображень</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
+        <source>Upload the selection to ImgS3</source>
+        <translation>Вивантажити виділення на S3</translation>
     </message>
 </context>
 <context>
@@ -337,43 +472,43 @@ Press Space to open the side panel.</source>
         <translation>Вивантажити до Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation>Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="140"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="141"/>
         <source>Open URL</source>
         <translation>Відкрити URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="142"/>
         <source>Delete image</source>
         <translation>Видалити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="143"/>
         <source>Image to Clipboard.</source>
         <translation>Зображення до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Unable to open the URL.</source>
         <translation>Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="181"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Знімок скопійовано до буферу обміну.</translation>
     </message>
@@ -397,6 +532,11 @@ Press Space to open the side panel.</source>
         <location filename="../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
         <translation>Про...</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="62"/>
+        <source>SPACEBAR</source>
+        <translation>ПРОБІЛ</translation>
     </message>
     <message>
         <location filename="../src/widgets/infowindow.cpp" line="63"/>
@@ -487,12 +627,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../src/tools/line/linetool.cpp" line="42"/>
+        <location filename="../src/tools/line/linetool.cpp" line="37"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
     <message>
-        <location filename="../src/tools/line/linetool.cpp" line="50"/>
+        <location filename="../src/tools/line/linetool.cpp" line="45"/>
         <source>Set the Line as the paint tool</source>
         <translation>Вибрати лінію інструментом малювання</translation>
     </message>
@@ -500,12 +640,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../src/tools/marker/markertool.cpp" line="42"/>
+        <location filename="../src/tools/marker/markertool.cpp" line="37"/>
         <source>Marker</source>
         <translation>Маркер</translation>
     </message>
     <message>
-        <location filename="../src/tools/marker/markertool.cpp" line="50"/>
+        <location filename="../src/tools/marker/markertool.cpp" line="45"/>
         <source>Set the Marker as the paint tool</source>
         <translation>Вибрати маркер інструментом малювання</translation>
     </message>
@@ -552,13 +692,13 @@ Press Space to open the side panel.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="90"/>
         <source>Save Error</source>
         <translation>Помилка збереження</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="78"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
         <source>Capture saved as </source>
         <translation>Знімок збережено як </translation>
     </message>
@@ -568,16 +708,17 @@ Press Space to open the side panel.</source>
         <translation>Знімок збережено до буферу обміну</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="81"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="87"/>
         <source>Error trying to save as </source>
         <translation>Помилка під час збереження як </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="72"/>
-        <location filename="../src/main.cpp" line="359"/>
-        <location filename="../src/main.cpp" line="383"/>
-        <location filename="../src/main.cpp" line="412"/>
+        <location filename="../src/main.cpp" line="77"/>
+        <location filename="../src/main.cpp" line="227"/>
+        <location filename="../src/main.cpp" line="376"/>
+        <location filename="../src/main.cpp" line="400"/>
+        <location filename="../src/main.cpp" line="429"/>
         <source>Unable to connect via DBus</source>
         <translation>Не вдалось підключитись через DBus</translation>
     </message>
@@ -590,6 +731,12 @@ Press Space to open the side panel.</source>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
         <translation>Не вдалось зберегти</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="84"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <source>URL copied to clipboard.</source>
+        <translation>URL скопійовано до буферу обміну.</translation>
     </message>
 </context>
 <context>
@@ -799,7 +946,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../src/utils/systemnotification.cpp" line="28"/>
+        <location filename="../src/utils/systemnotification.cpp" line="29"/>
         <source>Flameshot Info</source>
         <translation>Довідка Flameshot</translation>
     </message>
