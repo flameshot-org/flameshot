@@ -54,6 +54,10 @@ QWidget* ImgS3UploaderTool::widget() {
     return new ImgS3Uploader(capture, m_s3CredsUrl, m_s3XApiKey);
 }
 
+void ImgS3UploaderTool::setCapture(const QPixmap &pixmap) {
+    capture = pixmap;
+}
+
 CaptureTool* ImgS3UploaderTool::copy(QObject *parent) {
     return new ImgS3UploaderTool(parent);
 }
