@@ -125,12 +125,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="82"/>
         <source>Unable to capture screen</source>
         <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="232"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -460,8 +460,12 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
-        <source>Upload the selection to ImgS3</source>
+        <source>Upload the selection to S3 bucket</source>
         <translation>Загрузить выделение на S3</translation>
+    </message>
+    <message>
+        <source>Upload the selection to ImgS3</source>
+        <translation type="vanished">Загрузить выделение на S3</translation>
     </message>
 </context>
 <context>
