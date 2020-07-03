@@ -34,6 +34,7 @@ public:
     QWidget* widget() override;
 
     CaptureTool* copy(QObject *parent = nullptr) override;
+    void setCapture(const QPixmap &pixmap);
 
 public slots:
     void pressed(const CaptureContext &context) override;
