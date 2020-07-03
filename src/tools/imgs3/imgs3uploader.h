@@ -46,7 +46,6 @@ private slots:
 
     void openURL();
     void copyURL();
-    void openDeleteURL();
     void copyImage();
 
 private:
@@ -68,11 +67,9 @@ private:
     LoadSpinner *m_spinner;
     // uploaded
     QPushButton *m_openUrlButton;
-    QPushButton *m_openDeleteUrlButton;
     QPushButton *m_copyUrlButton;
     QPushButton *m_toClipboardButton;
     QUrl m_imageURL;
-    QUrl m_deleteImageURL;
     NotificationWidget *m_notification;
 
     void upload();

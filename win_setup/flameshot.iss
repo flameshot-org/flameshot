@@ -6,9 +6,9 @@
 
 [Setup]
 AppName=FlameShot
-AppVersion=1.0.0.1
+AppVersion=0.7.2
 AppCopyright=NameCheap inc.
-VersionInfoVersion=1.0.0.1
+VersionInfoVersion=0.7.2
 WizardStyle=modern
 DefaultDirName={autopf}\FlameShot
 DefaultGroupName=FlameShot
@@ -34,7 +34,8 @@ Source: "flameshot\platforms\*"; DestDir: "{app}\platforms"
 Source: "flameshot\translations\*"; DestDir: "{app}\translations"
 
 [Icons]
-Name: "{group}\FlameShot"; Filename: "{app}\flameshot.exe"
+Name: "{group}\FlameShot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
+Name: "{commondesktop}\FlameShot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
 
 ; NOTE: Most apps do not need registry entries to be pre-created. If you
 ; don't know what the registry is or if you need to use it, then chances are
