@@ -245,19 +245,15 @@ void ImgS3Uploader::onUploadOk() {
 
     m_copyUrlButton = new QPushButton(tr("Copy URL"));
     m_openUrlButton = new QPushButton(tr("Open URL"));
-    m_openDeleteUrlButton = new QPushButton(tr("Delete image"));
     m_toClipboardButton = new QPushButton(tr("Image to Clipboard."));
     m_hLayout->addWidget(m_copyUrlButton);
     m_hLayout->addWidget(m_openUrlButton);
-    m_hLayout->addWidget(m_openDeleteUrlButton);
     m_hLayout->addWidget(m_toClipboardButton);
 
     connect(m_copyUrlButton, &QPushButton::clicked,
             this, &ImgS3Uploader::copyURL);
     connect(m_openUrlButton, &QPushButton::clicked,
             this, &ImgS3Uploader::openURL);
-    connect(m_openDeleteUrlButton, &QPushButton::clicked,
-            this, &ImgS3Uploader::openDeleteURL);
     connect(m_toClipboardButton, &QPushButton::clicked,
             this, &ImgS3Uploader::copyImage);
 }
@@ -272,14 +268,6 @@ void ImgS3Uploader::openURL() {
 void ImgS3Uploader::copyURL() {
     QApplication::clipboard()->setText(m_imageURL.toString());
     m_notification->showMessage(tr("URL copied to clipboard."));
-}
-
-void ImgS3Uploader::openDeleteURL()
-{
-    bool successful = QDesktopServices::openUrl(m_deleteImageURL);
-    if (!successful) {
-        m_notification->showMessage(tr("Unable to open the URL."));
-    }
 }
 
 void ImgS3Uploader::copyImage() {
