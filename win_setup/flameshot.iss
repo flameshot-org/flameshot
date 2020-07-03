@@ -6,9 +6,9 @@
 
 [Setup]
 AppName=FlameShot
-AppVersion=0.7.1
+AppVersion=0.7.2
 AppCopyright=NameCheap inc.
-VersionInfoVersion=0.7.1
+VersionInfoVersion=0.7.2
 WizardStyle=modern
 DefaultDirName={autopf}\FlameShot
 DefaultGroupName=FlameShot

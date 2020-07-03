@@ -6,7 +6,7 @@
 
 win32:LIBS += -luser32 -lshell32
 
-BASE_VERSION = 0.7.1
+BASE_VERSION = 0.7.2
 TAG_VERSION = "$$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)"
 isEmpty(TAG_VERSION){
     TAG_VERSION = $$BASE_VERSION
