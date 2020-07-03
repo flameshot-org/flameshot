@@ -66,10 +66,11 @@ after_build:
   # Build installation
   - cp ..\..\win_setup\flameshot.iss flameshot.iss
   - C:\InnoSetup\Compil32.exe /cc flameshot.iss
+  - mv Output\FlameShot-Setup.exe Output\FlameShot-Setup-%PLATFORM%.exe
 
 
 artifacts:
   - path: build\distrib\flameshot_%flameshot_version%_win_%PLATFORM%.zip
     name: exe_only
-  - path: build\distrib\Output\FlameShot-Setup-is.exe
+  - path: build\distrib\Output\FlameShot-Setup-%PLATFORM%.exe
     name: installer
