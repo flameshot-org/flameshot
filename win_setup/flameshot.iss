@@ -34,7 +34,8 @@ Source: "flameshot\platforms\*"; DestDir: "{app}\platforms"
 Source: "flameshot\translations\*"; DestDir: "{app}\translations"
 
 [Icons]
-Name: "{group}\FlameShot"; Filename: "{app}\flameshot.exe"
+Name: "{group}\FlameShot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
+Name: "{commondesktop}\FlameShot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
 
 ; NOTE: Most apps do not need registry entries to be pre-created. If you
 ; don't know what the registry is or if you need to use it, then chances are
