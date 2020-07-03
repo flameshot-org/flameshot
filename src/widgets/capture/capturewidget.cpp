@@ -33,6 +33,8 @@
 #include "src/utils/screenshotsaver.h"
 #include "src/core/controller.h"
 #include "src/widgets/capture/modificationcommand.h"
+#include "src/tools/imgs3/imgs3uploadertool.h"
+#include "src/tools/toolfactory.h"
 #include <QUndoView>
 #include <QScreen>
 #include <QGuiApplication>
@@ -778,8 +780,11 @@ void CaptureWidget::initShortcuts() {
     new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
     new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
-    new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
-    new QShortcut(Qt::Key_Enter, this, SLOT(copyScreenshot()));
+
+//    new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
+//    new QShortcut(Qt::Key_Enter, this, SLOT(copyScreenshot()));
+    new QShortcut(Qt::Key_Return, this, SLOT(uploadScreenshot()));
+    new QShortcut(Qt::Key_Enter, this, SLOT(uploadScreenshot()));
 }
 
 void CaptureWidget::updateSizeIndicator() {
@@ -859,6 +864,13 @@ void CaptureWidget::childEnter() {
 void CaptureWidget::childLeave() {
     m_previewEnabled = true;
     update();
+}
+
+void CaptureWidget::uploadScreenshot() {
+    m_activeTool = new ImgS3UploaderTool();
+    m_activeTool->setCapture(pixmap());
+    handleButtonSignal(CaptureTool::REQ_ADD_EXTERNAL_WIDGETS);
+    close();
 }
 
 void CaptureWidget::copyScreenshot() {
