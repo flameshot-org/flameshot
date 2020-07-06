@@ -21,10 +21,18 @@
 #include <QDir>
 #include <QPainter>
 #include <QSettings>
+#include <QFileInfo>
 
 
 ImgS3UploaderTool::ImgS3UploaderTool(QObject *parent) : AbstractActionTool(parent) {
-    QSettings *pSettings = new QSettings(QDir::currentPath() + "/config.ini", QSettings::IniFormat);
+    QSettings *pSettings = nullptr;
+    QString configIniPath = QDir::currentPath() + "/config.ini";
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if(!(QFileInfo::exists(configIniPath) && QFileInfo(configIniPath).isFile())) {
+        configIniPath = "/etc/flameshot/config.ini";
+    }
+#endif
+    pSettings = new QSettings(configIniPath, QSettings::IniFormat);
     pSettings->beginGroup("S3");
     m_s3CredsUrl = pSettings->value("S3_CREDS_URL").toString();
     m_s3XApiKey = pSettings->value("S3_X_API_KEY").toString();
@@ -38,6 +46,7 @@ QIcon ImgS3UploaderTool::icon(const QColor &background, bool inEditor) const {
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "cloud-upload.svg");
 }
+
 QString ImgS3UploaderTool::name() const {
     return tr("Image Uploader");
 }
@@ -50,7 +59,7 @@ QString ImgS3UploaderTool::description() const {
     return tr("Upload the selection to S3 bucket");
 }
 
-QWidget* ImgS3UploaderTool::widget() {
+QWidget *ImgS3UploaderTool::widget() {
     return new ImgS3Uploader(capture, m_s3CredsUrl, m_s3XApiKey);
 }
 
@@ -58,7 +67,7 @@ void ImgS3UploaderTool::setCapture(const QPixmap &pixmap) {
     capture = pixmap;
 }
 
-CaptureTool* ImgS3UploaderTool::copy(QObject *parent) {
+CaptureTool *ImgS3UploaderTool::copy(QObject *parent) {
     return new ImgS3UploaderTool(parent);
 }
 
