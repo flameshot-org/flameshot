@@ -326,7 +326,11 @@ void ConfigHandler::setCloseAfterScreenshot(const bool close) {
 }
 
 bool ConfigHandler::copyAndCloseAfterUploadEnabled() {
-    return m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("copyAndCloseAfterUpload"))) {
+        res = m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
+    }
+    return res;
 }
 
 void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value) {
