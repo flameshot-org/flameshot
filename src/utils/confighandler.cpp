@@ -54,7 +54,9 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
                 << CaptureButton::TYPE_SAVE
                 << CaptureButton::TYPE_EXIT
                 << CaptureButton::TYPE_IMAGEUPLOADER
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
                 << CaptureButton::TYPE_OPEN_APP
+#endif
                 << CaptureButton::TYPE_PIN
                 << CaptureButton::TYPE_TEXT;
     }
