@@ -5,18 +5,18 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
 
 [Setup]
-AppName=FlameShot
+AppName=Flameshot
 AppVersion=0.7.3
 AppCopyright=NameCheap inc.
 VersionInfoVersion=0.7.3
 WizardStyle=modern
-DefaultDirName={autopf}\FlameShot
-DefaultGroupName=FlameShot
+DefaultDirName={autopf}\Flameshot
+DefaultGroupName=Flameshot
 UninstallDisplayIcon={app}\flameshot.exe
 Compression=lzma2
 SolidCompression=yes
 ;OutputDir=userdocs:Inno Setup Examples Output
-OutputBaseFilename=FlameShot-Setup
+OutputBaseFilename=Flameshot-Setup
 ChangesAssociations=yes
 UserInfoPage=yes
 PrivilegesRequiredOverridesAllowed=dialog
@@ -34,8 +34,8 @@ Source: "flameshot\platforms\*"; DestDir: "{app}\platforms"
 Source: "flameshot\translations\*"; DestDir: "{app}\translations"
 
 [Icons]
-Name: "{group}\FlameShot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
-Name: "{commondesktop}\FlameShot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
+Name: "{group}\Flameshot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
+Name: "{commondesktop}\Flameshot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
 
 ; NOTE: Most apps do not need registry entries to be pre-created. If you
 ; don't know what the registry is or if you need to use it, then chances are
