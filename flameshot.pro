@@ -32,7 +32,7 @@ TEMPLATE = app
 win32:RC_ICONS += img/app/flameshot.ico
 QMAKE_TARGET_COMPANY = "NameCheap"
 QMAKE_TARGET_COPYRIGHT = "GNU General Public License v3.0"
-QMAKE_TARGET_DESCRIPTION = "FlameShot - S3 bucket edition"
+QMAKE_TARGET_DESCRIPTION = "Flameshot - S3 bucket edition"
 VERSION = $$BASE_VERSION + "." + $$TAG_VERSION
 
 #release: DESTDIR = build/release
