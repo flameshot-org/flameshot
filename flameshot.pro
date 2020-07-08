@@ -6,15 +6,17 @@
 
 win32:LIBS += -luser32 -lshell32
 
-BASE_VERSION = 0.7.4
-TAG_VERSION = "$$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)"
-isEmpty(TAG_VERSION){
-    TAG_VERSION = $$BASE_VERSION
-    DEFINES += APP_VERSION=\\\"$$BASE_VERSION\\\"
-}
-else {
-    DEFINES += APP_VERSION=\\\"$$BASE_VERSION-$$TAG_VERSION\\\"
-}
+BASE_VERSION = 0.7.3-74e563e
+#TAG_VERSION = "$$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)"
+#isEmpty(TAG_VERSION){
+#    TAG_VERSION = $$BASE_VERSION
+#    DEFINES += APP_VERSION=\\\"$$BASE_VERSION\\\"
+#}
+#else {
+#    DEFINES += APP_VERSION=\\\"$$BASE_VERSION-$$TAG_VERSION\\\"
+#}
+
+DEFINES += APP_VERSION=\\\"$$BASE_VERSION\\\"
 
 QT  += core gui widgets network svg
 
