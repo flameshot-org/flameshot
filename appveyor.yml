@@ -1,7 +1,7 @@
 image: Visual Studio 2015
 
 #TODO: we should take version from the last tag in git history + build number
-version: 0.7.3.{build}
+version: 0.7.4.{build}
 # Major_Version_Number.Minor_Version_Number.Patch_Number.Build_Number
 
 skip_branch_with_pr: true
@@ -51,6 +51,7 @@ after_build:
   - copy "%APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe" "distrib\flameshot\flameshot.exe"
   - copy "%APPVEYOR_BUILD_FOLDER%\README.md" "distrib\flameshot\README.md"
   - copy "%APPVEYOR_BUILD_FOLDER%\LICENSE" "distrib\flameshot\LICENSE.txt"
+  - copy "%APPVEYOR_BUILD_FOLDER%\docs\flameshot-documentation.pdf" "distrib\flameshot\flameshot-documentation.pdf"
   - echo %flameshot_version% > "distrib\flameshot\version.txt"
   - echo Build:%build_number% >> "distrib\flameshot\version.txt"
   - echo %APPVEYOR_REPO_COMMIT% >> "distrib\flameshot\version.txt"
