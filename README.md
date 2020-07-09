@@ -348,15 +348,11 @@ Info: If I take code from your project and that implies a relicense to GPLv3, yo
 
 If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Donations
-I improve Flameshot in my free time because I want to create something good for everyone to use. 
-If you want you can donate some bucks with the following options: 
-- [Paypal](https://www.paypal.me/lupoDharkael)
-- bitcoin:1K6oiUKWVjP3x9ZuW9C7NbDfcFkMx3G8ue
 
 
 ## Acknowledgment
 I really appreciate those who have shown interest in the early development process:
+- [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)
 - [XerTheSquirrel](https://github.com/XerTheSquirrel)
 - [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)
