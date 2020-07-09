@@ -49,6 +49,8 @@ stage/
 .snapcraft/
 flameshot*.tar.bz2
 
+.vscode/
+build/
 
 # NVIM
 *~
