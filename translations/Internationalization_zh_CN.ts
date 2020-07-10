@@ -125,13 +125,13 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="81"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="83"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="231"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="233"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -293,104 +293,170 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="138"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show help message</source>
         <translation>显示帮助文档</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="142"/>
+        <location filename="../src/config/geneneralconf.cpp" line="144"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>在捕获之前显示帮助信息。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="152"/>
-        <location filename="../src/config/geneneralconf.cpp" line="156"/>
+        <location filename="../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../src/config/geneneralconf.cpp" line="158"/>
         <source>Show desktop notifications</source>
         <translation>显示桌面通知</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="165"/>
+        <location filename="../src/config/geneneralconf.cpp" line="167"/>
         <source>Show tray icon</source>
         <translation>显示托盘图标</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="169"/>
+        <location filename="../src/config/geneneralconf.cpp" line="171"/>
         <source>Show the systemtray icon</source>
         <translation>显示任务栏图标</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="84"/>
-        <location filename="../src/config/geneneralconf.cpp" line="190"/>
+        <location filename="../src/config/geneneralconf.cpp" line="86"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="91"/>
-        <location filename="../src/config/geneneralconf.cpp" line="99"/>
-        <location filename="../src/config/geneneralconf.cpp" line="121"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="91"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
         <source>Unable to read file.</source>
         <translation>无法读取文件。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="99"/>
-        <location filename="../src/config/geneneralconf.cpp" line="121"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Unable to write file.</source>
         <translation>无法写入文件。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="107"/>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Save File</source>
         <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Confirm Reset</source>
         <translation>确定重置</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="129"/>
+        <location filename="../src/config/geneneralconf.cpp" line="131"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>你确定你想要重置配置？</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="180"/>
+        <location filename="../src/config/geneneralconf.cpp" line="182"/>
         <source>Configuration File</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="185"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="195"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="203"/>
+        <location filename="../src/config/geneneralconf.cpp" line="205"/>
         <source>Launch at startup</source>
         <translation>开机时启动</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="207"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch Flameshot</source>
         <translation>启动 Flameshot</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="215"/>
+        <location filename="../src/config/geneneralconf.cpp" line="217"/>
         <source>Close application after capture</source>
         <translation>捕获后关闭</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="219"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
         <source>Close after taking a screenshot</source>
         <translation>获取屏幕截图后关闭</translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <source>Copy URL after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <source>Copy URL and close window after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
+        <source>Upload to ImgS3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <source>Uploading Image</source>
+        <translation type="unfinished">正在上传</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">复制链接</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <source>Open URL</source>
+        <translation type="unfinished">打开链接</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">保存文件到剪贴板。</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="264"/>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">无法打开此链接。</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="270"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">复制链接到剪贴板。</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="275"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">截图复制到剪贴板。</translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="51"/>
+        <source>Image Uploader</source>
+        <translation type="unfinished">上传图片</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="59"/>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -401,43 +467,43 @@ Press Space to open the side panel.</source>
         <translation>上传到Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="53"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation>正在上传</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="133"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="140"/>
         <source>Copy URL</source>
         <translation>复制链接</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="134"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="141"/>
         <source>Open URL</source>
         <translation>打开链接</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="135"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="142"/>
         <source>Delete image</source>
         <translation>删除图像</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="136"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="143"/>
         <source>Image to Clipboard.</source>
         <translation>保存文件到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="155"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Unable to open the URL.</source>
         <translation>无法打开此链接。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="161"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>URL copied to clipboard.</source>
         <translation>复制链接到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="174"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="181"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>截图复制到剪贴板。</translation>
     </message>
@@ -660,6 +726,12 @@ Press Space to open the side panel.</source>
         <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Unable to write in</source>
         <translation>无法写入</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="84"/>
+        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">复制链接到剪贴板。</translation>
     </message>
 </context>
 <context>
