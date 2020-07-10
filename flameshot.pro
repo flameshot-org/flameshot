@@ -6,10 +6,9 @@
 
 win32:LIBS += -luser32 -lshell32
 
-BASE_VERSION = 0.7.4
-TAG_VERSION = "$$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)"
+BASE_VERSION = 0.7.3
+TAG_VERSION = "$$system(git --git-dir $$PWD/.git rev-parse --short HEAD)"
 isEmpty(TAG_VERSION){
-    TAG_VERSION = $$BASE_VERSION
     DEFINES += APP_VERSION=\\\"$$BASE_VERSION\\\"
 }
 else {
@@ -33,7 +32,7 @@ win32:RC_ICONS += img/app/flameshot.ico
 QMAKE_TARGET_COMPANY = "NameCheap"
 QMAKE_TARGET_COPYRIGHT = "GNU General Public License v3.0"
 QMAKE_TARGET_DESCRIPTION = "Flameshot - S3 bucket edition"
-VERSION = $$BASE_VERSION + "." + $$TAG_VERSION
+VERSION = $$BASE_VERSION
 
 #release: DESTDIR = build/release
 #debug:   DESTDIR = build/debug
