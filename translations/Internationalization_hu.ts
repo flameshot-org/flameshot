@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="hu_HU" sourcelanguage="en">
+<TS version="2.1" language="hu_HU" sourcelanguage="en">
 <context>
     <name>AppLauncher</name>
     <message>
@@ -62,13 +62,52 @@
     </message>
 </context>
 <context>
+    <name>CaptureLauncher</name>
+    <message>
+        <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangular Region</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Screen (All Monitors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Take new screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Area:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CaptureWidget</name>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.</source>
-        <translation>Válassz egy területet egérrel, vagy nyomj Esc-et a kilépéshez.
+        <translation type="vanished">Válassz egy területet egérrel, vagy nyomj Esc-et a kilépéshez.
 Nyomj entert a felvételhez.
 Kattints job egérgombal a szín választásához.
 Használd a görgőt az eszköz vastagságának állítására.</translation>
@@ -76,6 +115,14 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     <message>
         <source>Unable to capture screen</source>
         <translation>Nem lehet felvételt készíteni</translation>
+    </message>
+    <message>
+        <source>Select an area with the mouse, or press Esc to exit.
+Press Enter to capture the screen.
+Press Right Click to show the color picker.
+Use the Mouse Wheel to change the thickness of your tool.
+Press Space to open the side panel.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -122,6 +169,14 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <source>&amp;Quit</source>
         <translation>&amp;Bezár</translation>
     </message>
+    <message>
+        <source>&amp;Take Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -131,7 +186,11 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     </message>
     <message>
         <source>Copies the selecion into the clipboard</source>
-        <translation>Másolja a kiválasztott területet</translation>
+        <translation type="vanished">Másolja a kiválasztott területet</translation>
+    </message>
+    <message>
+        <source>Copy the selection into the clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -195,14 +254,14 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     <name>FileNameHandler</name>
     <message>
         <source>screenshot</source>
-        <translation>Képernyőmentés</translation>
+        <translation type="vanished">Képernyőmentés</translation>
     </message>
 </context>
 <context>
     <name>FlameshotDBusAdapter</name>
     <message>
         <source>Unable to capture screen</source>
-        <translation>Nem lehet képernyőképet készíteni</translation>
+        <translation type="vanished">Nem lehet képernyőképet készíteni</translation>
     </message>
 </context>
 <context>
@@ -275,6 +334,68 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <source>Launch Flameshot</source>
         <translation>Flameshot indítása</translation>
     </message>
+    <message>
+        <source>Close application after capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close after taking a screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL and close window after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <source>Upload to ImgS3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Kép felötlése</translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
+    <message>
+        <source>Open URL</source>
+        <translation type="unfinished">URL megnyitása</translation>
+    </message>
+    <message>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">Kép a vágolapra.</translation>
+    </message>
+    <message>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <source>Image Uploader</source>
+        <translation type="unfinished">Kép feltöltő</translation>
+    </message>
+    <message>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImgurUploader</name>
@@ -309,6 +430,10 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     <message>
         <source>Screenshot copied to clipboard.</source>
         <translation>Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -392,6 +517,14 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
     </message>
+    <message>
+        <source>SPACEBAR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LineTool</name>
@@ -438,6 +571,17 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     </message>
 </context>
 <context>
+    <name>PinTool</name>
+    <message>
+        <source>Pin Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pin image on the desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Save Error</source>
@@ -468,6 +612,10 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <source>Capture saved to clipboard</source>
         <translation>Felvétel mentve a vágólapra</translation>
     </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -486,6 +634,10 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
         <source>Redo</source>
         <translation>Újra</translation>
     </message>
+    <message>
+        <source>Redo the next modification</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SaveTool</name>
@@ -499,6 +651,13 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     </message>
 </context>
 <context>
+    <name>ScreenGrabber</name>
+    <message>
+        <source>Unable to capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SelectionTool</name>
     <message>
         <source>Rectangular Selection</source>
@@ -507,6 +666,25 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     <message>
         <source>Set Selection as the paint tool</source>
         <translation>Beállítja a Téglalapos kijelölő eszközt Festő eszközként</translation>
+    </message>
+</context>
+<context>
+    <name>SidePanelWidget</name>
+    <message>
+        <source>Active thickness:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press ESC to cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grab Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -576,11 +754,11 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     </message>
     <message>
         <source>Time (%H:%M:%S)</source>
-        <translation>Idő (%H:%M:%S)</translation>
+        <translation type="vanished">Idő (%H:%M:%S)</translation>
     </message>
     <message>
         <source>Time (%H:%M)</source>
-        <translation>Idő (%H:%M)</translation>
+        <translation type="vanished">Idő (%H:%M)</translation>
     </message>
     <message>
         <source>Hour (00-23)</source>
@@ -605,6 +783,51 @@ Használd a görgőt az eszköz vastagságának állítására.</translation>
     <message>
         <source>Full Date (%Y-%m-%d)</source>
         <translation>Teljes dátum (%Y-%m-%d)</translation>
+    </message>
+    <message>
+        <source>Time (%H-%M-%S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time (%H-%M)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SystemNotification</name>
+    <message>
+        <source>Flameshot Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextConfig</name>
+    <message>
+        <source>StrikeOut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextTool</name>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add text to your capture</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -125,12 +125,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="82"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="83"/>
         <source>Unable to capture screen</source>
         <translation>Не вдалось захопити екран</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="232"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="233"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -425,28 +425,26 @@ Press Space to open the side panel.</source>
         <translation>Відкрити URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
         <source>Delete image</source>
-        <translation>Видалити зображення</translation>
+        <translation type="vanished">Видалити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="249"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
         <source>Image to Clipboard.</source>
         <translation>Зображення до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="268"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="281"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="264"/>
         <source>Unable to open the URL.</source>
         <translation>Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="274"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="270"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="287"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="275"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Знімок скопійовано до буферу обміну.</translation>
     </message>
@@ -454,12 +452,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="42"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="51"/>
         <source>Image Uploader</source>
         <translation>Вивантаження зображень</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="59"/>
         <source>Upload the selection to S3 bucket</source>
         <translation>Вивантажити виділення на S3</translation>
     </message>
