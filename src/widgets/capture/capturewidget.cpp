@@ -263,7 +263,7 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setBrush(m_uiColor);
         for(auto r: m_selection->handlerAreas()) {
-            painter.drawRoundRect(r, 100, 100);
+            painter.drawRoundedRect(r, 100, 100);
         }
     }
 }
@@ -510,7 +510,7 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent *e) {
 }
 
 void CaptureWidget::wheelEvent(QWheelEvent *e) {
-    m_context.thickness += e->delta() / 120;
+    m_context.thickness += e->angleDelta().y() / 120;
     m_context.thickness = qBound(0, m_context.thickness, 100);
     QPoint topLeft = qApp->desktop()->screenGeometry(
                 qApp->desktop()->screenNumber(QCursor::pos())).topLeft();

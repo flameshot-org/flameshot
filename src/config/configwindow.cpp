@@ -52,7 +52,7 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     connect(m_configWatcher, &QFileSystemWatcher::fileChanged,
             this, changedSlot);
 
-    QColor background = this->palette().background().color();
+    QColor background = this->palette().window().color();
     bool isDark = ColorUtils::colorIsDark(background);
     QString modifier = isDark ? PathInfo::whiteIconPath() :
                                 PathInfo::blackIconPath();

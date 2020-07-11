@@ -58,7 +58,7 @@ int PinWidget::margin() const {
 }
 
 void PinWidget::wheelEvent(QWheelEvent *e) {
-    int val = e->delta() > 0 ? 15 : -15;
+    int val = e->angleDelta().y() > 0 ? 15 : -15;
     int newWidth = qBound(50, m_label->width() + val, maximumWidth());
     int newHeight = qBound(50, m_label->height() + val, maximumHeight());
 
