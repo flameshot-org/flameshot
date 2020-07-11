@@ -83,6 +83,7 @@ void Controller::requestCapture(const CaptureRequest &request) {
             this->startFullscreenCapture(id);
         });
         break;
+    // TODO: Figure out the code path that gets here so the deprated warning can be fixed
     case CaptureRequest::SCREEN_MODE: {
         int &&number = request.data().toInt();
         doLater(request.delay(), this, [this, id, number](){

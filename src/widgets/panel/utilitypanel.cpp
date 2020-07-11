@@ -90,7 +90,7 @@ void UtilityPanel::initInternalPanel() {
     m_layout->addLayout(m_upLayout);
     widget->setLayout(m_layout);
 
-    QColor bgColor = palette().background().color();
+    QColor bgColor = palette().window().color();
     bgColor.setAlphaF(0.0);
     m_internalPanel->setStyleSheet(QStringLiteral("QScrollArea {background-color: %1}")
                                    .arg(bgColor.name()));

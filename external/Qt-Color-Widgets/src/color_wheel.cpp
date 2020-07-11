@@ -66,7 +66,7 @@ public:
         display_flags(FLAGS_DEFAULT),
         color_from(&QColor::fromHsvF), rainbow_from_hue(&detail::rainbow_hsv)
     {
-        QColor bgColor = widget->palette().background().color();
+        QColor bgColor = widget->palette().window().color();
         bgBrightness = color_widgets::detail::color_lumaF(bgColor);
     }
 
