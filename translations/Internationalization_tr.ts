@@ -175,6 +175,11 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="73"/>
+        <source>Path Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="78"/>
         <source>General</source>
         <translation>Genel</translation>
     </message>
@@ -287,6 +292,34 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../src/config/filenameeditor.cpp" line="91"/>
         <source>Deletes the name</source>
         <translation>İsmi siler</translation>
+    </message>
+</context>
+<context>
+    <name>FilePathConfiguration</name>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="24"/>
+        <source>Screenshot path default:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="39"/>
+        <source>Use fixed path for screenshots to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="45"/>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="48"/>
+        <source>Clear</source>
+        <translation type="unfinished">Temizle</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="62"/>
+        <source>Select default path for Screenshots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
