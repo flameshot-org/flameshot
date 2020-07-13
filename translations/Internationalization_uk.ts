@@ -175,6 +175,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/config/configwindow.cpp" line="73"/>
+        <source>Path Default</source>
+        <translation>Шлях</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="78"/>
         <source>General</source>
         <translation>Загальне</translation>
     </message>
@@ -287,6 +292,34 @@ Press Space to open the side panel.</source>
         <location filename="../src/config/filenameeditor.cpp" line="91"/>
         <source>Deletes the name</source>
         <translation>Видаляє ім&apos;я</translation>
+    </message>
+</context>
+<context>
+    <name>FilePathConfiguration</name>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="24"/>
+        <source>Screenshot path default:</source>
+        <translation>Шлях за замовчуванням</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="39"/>
+        <source>Use fixed path for screenshots to save</source>
+        <translation>Використовувати шлях за замовчуванням</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="45"/>
+        <source>Browse</source>
+        <translation>Обрати</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="48"/>
+        <source>Clear</source>
+        <translation>Очистити</translation>
+    </message>
+    <message>
+        <location filename="../src/config/filepathconfiguration.cpp" line="62"/>
+        <source>Select default path for Screenshots</source>
+        <translation>Обрати шлях за замовчуванням</translation>
     </message>
 </context>
 <context>

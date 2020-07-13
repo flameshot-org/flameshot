@@ -27,7 +27,11 @@ BASE_VERSION_CUR_EXT=$(cat ./win_setup/flameshot.iss |grep "AppVersion=[0-9]\+\.
 echo "BASE_VERSION_CUR_EXT: ${BASE_VERSION_CUR_EXT}"
 sed -i "s/AppVersion=${BASE_VERSION_CUR_EXT}/AppVersion=${BASE_VERSION_NEW_EXT}/g" ./win_setup/flameshot.iss
 
+# Run qmake and generate Makefile
 qmake
+
+# update qt translations, ignore if no `lupdate` utils is installed
+lupdate -recursive ./ -ts ./translations/* || true
 
 # push current release
 git add flameshot.pro ./win_setup/flameshot.iss appveyor.yml .travis.yml
