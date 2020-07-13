@@ -27,7 +27,7 @@
 
 FileNameEditor::FileNameEditor(QWidget *parent) : QWidget(parent) {
     initWidgets();
-    initLayout();    
+    initLayout();
 }
 
 void FileNameEditor::initLayout() {
