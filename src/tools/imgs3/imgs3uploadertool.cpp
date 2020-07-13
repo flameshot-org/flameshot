@@ -17,7 +17,6 @@
 
 #include "imgs3uploadertool.h"
 #include "imgs3uploader.h"
-#include <QDebug>
 #include <QDir>
 #include <QPainter>
 #include <QSettings>

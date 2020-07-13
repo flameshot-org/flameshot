@@ -32,8 +32,12 @@ QString FileNameHandler::parsedPattern() {
 
 QString FileNameHandler::parseFilename(const QString &name) {
     QString res = name;
+    // remove trailing characters '%' in the pattern
     if (name.isEmpty()) {
         res = QLatin1String("%F_%H-%M");
+    }
+    while(res.endsWith('%')) {
+        res.chop(1);
     }
     std::time_t t = std::time(NULL);
 
