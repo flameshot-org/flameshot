@@ -88,10 +88,6 @@ void ImgS3Uploader::handleReply(QNetworkReply *reply) {
         }
     } else {
         QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
-        qDebug() << reply->header(QNetworkRequest::ContentDispositionHeader);
-        qDebug() << reply->header(QNetworkRequest::ContentTypeHeader);
-        qDebug() << reply->readAll();
-        qDebug() << reason;
         m_infoLabel->setText(reply->errorString());
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
