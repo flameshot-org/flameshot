@@ -20,6 +20,7 @@
 #include <QTabWidget>
 
 class FileNameEditor;
+class FilePathConfiguration;
 class GeneneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
@@ -37,6 +38,7 @@ protected:
 
 private:
     FileNameEditor *m_filenameEditor;
+    FilePathConfiguration *m_filePathConfiguration;
     GeneneralConf *m_generalConfig;
     VisualsEditor *m_visuals;
     QFileSystemWatcher *m_configWatcher;
