@@ -118,11 +118,26 @@ void ConfigHandler::setUserColors(const QVector<QColor> &l) {
 }
 
 QString ConfigHandler::savePathValue() {
-    return m_settings.value(QStringLiteral("savePath")).toString();
+    QString savePath = m_settings.value(QStringLiteral("savePathFixed")).toString();
+    if( savePath.isEmpty() ) {
+        savePath = m_settings.value(QStringLiteral("savePath")).toString();
+    }
+    return savePath;
 }
 
 void ConfigHandler::setSavePath(const QString &savePath) {
-    m_settings.setValue(QStringLiteral("savePath"), savePath);
+    QString savePathFixed = m_settings.value(QStringLiteral("savePathFixed")).toString();
+    if( savePathFixed.isEmpty() ) {
+        m_settings.setValue(QStringLiteral("savePath"), savePath);
+    }
+}
+
+QString ConfigHandler::savePathFixed() {
+    return m_settings.value(QStringLiteral("savePathFixed")).toString();
+}
+
+void ConfigHandler::setSavePathFixed(const QString &savePathFixed) {
+    m_settings.setValue(QStringLiteral("savePathFixed"), savePathFixed);
 }
 
 QColor ConfigHandler::uiMainColorValue() {
