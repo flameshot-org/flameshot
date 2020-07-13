@@ -154,6 +154,10 @@ Press Space to open the side panel.</source>
         <source>General</source>
         <translation>Általános</translation>
     </message>
+    <message>
+        <source>Path Default</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -255,6 +259,29 @@ Press Space to open the side panel.</source>
     <message>
         <source>screenshot</source>
         <translation type="vanished">Képernyőmentés</translation>
+    </message>
+</context>
+<context>
+    <name>FilePathConfiguration</name>
+    <message>
+        <source>Screenshot path default:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use fixed path for screenshots to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished">Töröl</translation>
+    </message>
+    <message>
+        <source>Select default path for Screenshots</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

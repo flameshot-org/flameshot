@@ -22,6 +22,7 @@
 #include "src/widgets/capture/capturebutton.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/filenameeditor.h"
+#include "src/config/filepathconfiguration.h"
 #include "src/config/strftimechooserwidget.h"
 #include "src/config/visualseditor.h"
 #include "src/utils/globalvalues.h"
@@ -35,8 +36,7 @@
 
 ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     setAttribute(Qt::WA_DeleteOnClose);
-    const int size = GlobalValues::buttonBaseSize() * 12;
-    setMinimumSize(size, size);
+    setMinimumSize(GlobalValues::buttonBaseSize() * 14, GlobalValues::buttonBaseSize() * 12);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("Configuration"));
 
@@ -66,6 +66,11 @@ ConfigWindow::ConfigWindow(QWidget *parent) : QTabWidget(parent) {
     m_filenameEditor = new FileNameEditor();
     addTab(m_filenameEditor, QIcon(modifier + "name_edition.svg"),
            tr("Filename Editor"));
+
+    // filepath
+    m_filePathConfiguration = new FilePathConfiguration();
+    addTab(m_filePathConfiguration, QIcon(modifier + "name_edition.svg"),
+           tr("Path Default"));
 
     // general
     m_generalConfig = new GeneneralConf();

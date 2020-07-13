@@ -4,14 +4,6 @@
 
 ### Step 1
 
-Update translations
-
-```
-lupdate -recursive ./ -ts ./translations/*
-```
-
-### Step 2
-
 Example update from `0.7.2` to `0.7.3`.
 
 Update lines in the file `update_version_everywhere.sh`
@@ -26,12 +18,12 @@ with:
 BASE_VERSION_NEW=0.7.3
 ```
 
-### Step 3
+### Step 2
 
 Run script `update_version_everywhere.sh`. 
 
 
-### Step 4
+### Step 3
 
 Upload binaries from `appveyour` to github
 

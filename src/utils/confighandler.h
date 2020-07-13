@@ -33,6 +33,8 @@ public:
 
     QString savePathValue();
     void setSavePath(const QString &);
+    QString savePathFixed();
+    void setSavePathFixed(const QString &);
 
     QColor uiMainColorValue();
     void setUIMainColor(const QColor &);
