@@ -1,6 +1,9 @@
 #!/bin/bash
 
-BASE_VERSION_NEW="0.7.3"
+set -x
+
+GIT_REMOTE=origin
+BASE_VERSION_NEW="0.7.4"
 BASE_VERSION_CUR=$(cat flameshot.pro |grep "[0-9]\+\.[0-9]\+\.[0-9]\+" |awk "{print \$3}")
 
 if [ "${BASE_VERSION_CUR}" == "${BASE_VERSION_NEW}" ]; then
@@ -9,12 +12,18 @@ if [ "${BASE_VERSION_CUR}" == "${BASE_VERSION_NEW}" ]; then
 fi
 
 
-TAG_EXISTS=$(git ls-remote --tags origin |grep "refs/tags/v${BASE_VERSION_NEW}")
+TAG_EXISTS=$(git ls-remote --tags ${GIT_REMOTE} |grep "refs/tags/v${BASE_VERSION_NEW}")
 if [ "" != "${TAG_EXISTS}" ]; then
   echo "Tag already exists: ${TAG_EXISTS}"
   echo "Please update to another version or remove git tag"
   exit 1
 fi
+
+# stop on any error
+set -e
+
+# create release branch
+git checkout -b release/${BASE_VERSION_NEW}
 
 # update version to a new one
 sed -i "s/BASE_VERSION = ${BASE_VERSION_CUR}/BASE_VERSION = ${BASE_VERSION_NEW}/g" flameshot.pro
@@ -34,12 +43,12 @@ qmake
 lupdate -recursive ./ -ts ./translations/* || true
 
 # push current release
-git add flameshot.pro ./win_setup/flameshot.iss appveyor.yml .travis.yml
+git add flameshot.pro ./win_setup/flameshot.iss appveyor.yml .travis.yml update_release_version.sh translations/
 git commit -m "Update version to ${BASE_VERSION_NEW}"
-git push
+git push ${GIT_REMOTE} -u release/${BASE_VERSION_NEW}
 
 # add new release tag
 git tag "v${BASE_VERSION_NEW}"
-git push origin --tags
+git push ${GIT_REMOTE} --tags
 
 echo "New Flameshot version is: ${BASE_VERSION_NEW}"

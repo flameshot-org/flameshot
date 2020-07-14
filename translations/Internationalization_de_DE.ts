@@ -448,32 +448,32 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
         <translation type="unfinished">Bild hochladen</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="242"/>
         <source>Copy URL</source>
         <translation type="unfinished">URL kopieren</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
         <source>Open URL</source>
         <translation type="unfinished">URL öffnen</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Bild in Zwischenablage.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="264"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="260"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Kann URL nicht öffnen.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="270"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="266"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL kopiert.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="275"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="271"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Bildschirmaufnahme in Zwischenablage kopiert.</translation>
     </message>
@@ -481,12 +481,12 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="51"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
         <source>Image Uploader</source>
         <translation type="unfinished">Bild hochladen</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="58"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
