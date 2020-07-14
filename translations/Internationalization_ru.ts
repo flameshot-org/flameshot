@@ -448,12 +448,12 @@ Press Space to open the side panel.</source>
         <translation>Загрузка изображения</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="242"/>
         <source>Copy URL</source>
         <translation>Скопировать URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
         <source>Open URL</source>
         <translation>Открыть URL</translation>
     </message>
@@ -462,22 +462,22 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Удалить изображение</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
         <source>Image to Clipboard.</source>
         <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="264"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="260"/>
         <source>Unable to open the URL.</source>
         <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="270"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="266"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="275"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="271"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
@@ -485,12 +485,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="51"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
         <source>Image Uploader</source>
         <translation>Отправка изображений</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="58"/>
         <source>Upload the selection to S3 bucket</source>
         <translation>Загрузить выделение на S3</translation>
     </message>
