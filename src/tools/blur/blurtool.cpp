@@ -68,8 +68,9 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
 
     scene.render(&painter, selection, QRectF());
     blur->setBlurRadius(12);
-    scene.render(&painter, selection, QRectF());
-    scene.render(&painter, selection, QRectF());
+    for(int cnt = 100; cnt > 0; cnt--){
+        scene.render(&painter, selection, QRectF());
+    }
 }
 
 void BlurTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
