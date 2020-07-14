@@ -32,6 +32,7 @@ Source: "flameshot\iconengines\*"; DestDir: "{app}\iconengines"
 Source: "flameshot\imageformats\*"; DestDir: "{app}\imageformats"
 Source: "flameshot\platforms\*"; DestDir: "{app}\platforms"
 Source: "flameshot\translations\*"; DestDir: "{app}\translations"
+Source: "flameshot\vcredist.exe"; DestDir: {app}
 
 [Icons]
 Name: "{commondesktop}\Flameshot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
@@ -42,6 +43,10 @@ Name: "{group}\FlameShot Documentation"; Filename: "{app}\flameshot-documentatio
 ; don't know what the registry is or if you need to use it, then chances are
 ; you don't need a [Registry] section.
 
+[Run]
+Filename: {app}\vcredist.exe; \
+    Parameters: "/q /passive /Q:a /c:""msiexec /q /i vcredist.msi"""; \
+    StatusMsg: "Installing VC++ 2015 Redistributables..."
 
 [UninstallRun]
 Filename: "taskkill"; Parameters: "/im ""flameshot.exe"" /f"; Flags: runhidden
