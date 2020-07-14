@@ -448,32 +448,32 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="unfinished">Resim Yükleniyor</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="242"/>
         <source>Copy URL</source>
         <translation type="unfinished">URL Kopyala</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
         <source>Open URL</source>
         <translation type="unfinished">URL Aç</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Resim Pano&apos;ya.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="264"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="260"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">URL açılamıyor.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="270"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="266"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="275"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="271"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Ekran görüntüsü panoya kopyalandı.</translation>
     </message>
@@ -481,12 +481,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="51"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
         <source>Image Uploader</source>
         <translation type="unfinished">Resim Yükleme Aracı</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="58"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
