@@ -21,6 +21,7 @@
 #include <QUrl>
 
 class QNetworkReply;
+class QNetworkProxy;
 class QNetworkAccessManager;
 class QHBoxLayout;
 class QVBoxLayout;
@@ -33,11 +34,7 @@ class NotificationWidget;
 class ImgS3Uploader : public QWidget {
     Q_OBJECT
 public:
-    explicit ImgS3Uploader(const QPixmap &capture,
-                           const QString &s3CredsUrl,
-                           const QString &s3XApiKey,
-                           QWidget *parent = nullptr
-);
+    explicit ImgS3Uploader(const QPixmap &capture, QWidget *parent = nullptr);
 
 private slots:
     void handleReply(QNetworkReply *reply);
@@ -57,6 +54,7 @@ private:
 
     QString m_hostName;
     QPixmap m_pixmap;
+    QNetworkProxy *m_proxy;
     QNetworkAccessManager *m_NetworkAM;
     QNetworkAccessManager *m_NetworkAMCreds;
 
