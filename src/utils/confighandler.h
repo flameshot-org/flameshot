@@ -81,6 +81,7 @@ public:
     void setAllTheButtons();
 
     QString configFilePath() const;
+    const QString userUuid();
 
 private:
     QSettings m_settings;

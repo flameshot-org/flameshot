@@ -20,6 +20,7 @@
 #include <QFile>
 #include <QDir>
 #include <QCoreApplication>
+#include <QUuid>
 
 ConfigHandler::ConfigHandler(){
     m_settings.setDefaultFormat(QSettings::IniFormat);
@@ -370,6 +371,18 @@ void ConfigHandler::setAllTheButtons() {
 
 QString ConfigHandler::configFilePath() const {
     return m_settings.fileName();
+}
+
+const QString ConfigHandler::userUuid() {
+    QString userUuid;
+    if (m_settings.contains(QStringLiteral("userUuid"))) {
+        userUuid = m_settings.value(QStringLiteral("userUuid")).toString();
+    } else {
+        userUuid = QUuid::createUuid().toString();
+        userUuid = userUuid.replace("{", "").replace("}", "");
+        m_settings.setValue(QStringLiteral("userUuid"), userUuid);
+    }
+    return userUuid;
 }
 
 bool ConfigHandler::normalizeButtons(QVector<int> &buttons) {

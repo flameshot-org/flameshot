@@ -24,10 +24,17 @@
 #include <QMap>
 #include <QTimer>
 #include <functional>
+#include <QAction>
+
+#include <QSpinBox>
+#include <QLabel>
+#include <QHBoxLayout>
+#include <QWidgetAction>
 
 class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
+class QMenu;
 class QSystemTrayIcon;
 
 using lambda = std::function<void(void)>;
@@ -60,6 +67,8 @@ public slots:
                               const int timeout = 5000);
 
     void updateConfigComponents();
+
+    void showRecentScreenshots();
 
 private slots:
     void startFullscreenCapture(const uint id = 0);
