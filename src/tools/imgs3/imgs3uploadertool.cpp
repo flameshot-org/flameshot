@@ -17,24 +17,12 @@
 
 #include "imgs3uploadertool.h"
 #include "imgs3uploader.h"
-#include <QDir>
 #include <QPainter>
 #include <QSettings>
 #include <QFileInfo>
 
 
 ImgS3UploaderTool::ImgS3UploaderTool(QObject *parent) : AbstractActionTool(parent) {
-    QSettings *pSettings = nullptr;
-    QString configIniPath = QDir::currentPath() + "/config.ini";
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if(!(QFileInfo::exists(configIniPath) && QFileInfo(configIniPath).isFile())) {
-        configIniPath = "/etc/flameshot/config.ini";
-    }
-#endif
-    pSettings = new QSettings(configIniPath, QSettings::IniFormat);
-    pSettings->beginGroup("S3");
-    m_s3CredsUrl = pSettings->value("S3_CREDS_URL").toString();
-    m_s3XApiKey = pSettings->value("S3_X_API_KEY").toString();
 }
 
 bool ImgS3UploaderTool::closeOnButtonPressed() const {
@@ -59,7 +47,7 @@ QString ImgS3UploaderTool::description() const {
 }
 
 QWidget *ImgS3UploaderTool::widget() {
-    return new ImgS3Uploader(capture, m_s3CredsUrl, m_s3XApiKey);
+    return new ImgS3Uploader(capture);
 }
 
 void ImgS3UploaderTool::setCapture(const QPixmap &pixmap) {

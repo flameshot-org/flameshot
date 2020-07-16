@@ -239,6 +239,37 @@ There are packages available for a few distros:
   </a>
 </details>
 
+### S3 bucket configuration
+
+S3 bucket credentials are placed in the file `config.ini` and cannot be configured with UI.
+This file is not included into installation and should be placed into the installation directory manually.
+On `linux` systems it can be placed at `/etc/flameshot/config.ini`.
+
+You can also add `proxy` server settings. If you don't need a proxy server just remove or comment lines with a proxy settings.
+
+Configuration file example:
+```
+[General]
+HTTP_PROXY_HOST=10.0.0.1
+HTTP_PROXY_PORT=3128
+
+; No authentification USER and PASSWORD should be empty
+HTTP_PROXY_USER=
+HTTP_PROXY_PASSWORD=
+
+HTTP_PROXY_TYPE=0
+; Proxy Types (0 is default):
+; 0	Proxy is determined based on the application proxy set using setApplicationProxy()
+; 1	Socks5 proxying is used
+; 3	HTTP transparent proxying is used
+; 4	Proxying for HTTP requests only
+; 5	Proxying for FTP requests only
+
+[S3]
+S3_CREDS_URL=https://api.img.example.com/
+S3_X_API_KEY=seckret_key
+```
+
 ## Compilation
 
 To build the application in your system, you'll need to install the dependencies needed for it and Package names might be different for each distribution, see [Dependencies](#dependencies) below for more information.

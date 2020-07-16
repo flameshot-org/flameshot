@@ -41,15 +41,25 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QHttpMultiPart>
+#include <QNetworkProxy>
+#include <QDir>
 
-ImgS3Uploader::ImgS3Uploader(const QPixmap &capture,
-                             const QString &s3CredsUrl,
-                             const QString &s3XApiKey,
-                             QWidget *parent) :
+
+ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
-    m_s3CredsUrl = s3CredsUrl;
-    m_s3XApiKey = s3XApiKey;
+    QSettings *pSettings = nullptr;
+    QString configIniPath = QDir(QDir::currentPath()).filePath("config.ini");
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if(!(QFileInfo::exists(configIniPath) && QFileInfo(configIniPath).isFile())) {
+        configIniPath = "/etc/flameshot/config.ini";
+    }
+#endif
+    pSettings = new QSettings(configIniPath, QSettings::IniFormat);
+    pSettings->beginGroup("S3");
+    m_s3CredsUrl = pSettings->value("S3_CREDS_URL").toString();
+    m_s3XApiKey = pSettings->value("S3_X_API_KEY").toString();
+    pSettings->endGroup();
 
     setWindowTitle(tr("Upload to ImgS3"));
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
@@ -72,6 +82,52 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture,
     connect(m_NetworkAMCreds, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleCredsReply);
 
     setAttribute(Qt::WA_DeleteOnClose);
+
+    QString httpProxyHost = pSettings->value("HTTP_PROXY_HOST").toString();
+    if(httpProxyHost.length() > 0) {
+        qDebug() << "Using proxy server";
+        m_proxy = new QNetworkProxy();
+
+        if(pSettings->contains("HTTP_PROXY_TYPE")) {
+            switch (pSettings->value("HTTP_PROXY_TYPE").toInt()) {
+            case 0:
+                m_proxy->setType(QNetworkProxy::DefaultProxy);
+                break;
+            case 1:
+                m_proxy->setType(QNetworkProxy::Socks5Proxy);
+                break;
+            case 2:
+                m_proxy->setType(QNetworkProxy::NoProxy);
+                break;
+            case 4:
+                m_proxy->setType(QNetworkProxy::HttpCachingProxy);
+                break;
+            case 5:
+                m_proxy->setType(QNetworkProxy::FtpCachingProxy);
+                break;
+            case 3:
+            default:
+                m_proxy->setType(QNetworkProxy::HttpProxy);
+                break;
+            }
+        }
+
+        m_proxy->setHostName(httpProxyHost);
+        if(pSettings->contains("HTTP_PROXY_PORT")) {
+            m_proxy->setPort(pSettings->value("HTTP_PROXY_PORT").toInt());
+        } else {
+            m_proxy->setPort(3128);
+        }
+
+        if(pSettings->contains("HTTP_PROXY_USER")) {
+            m_proxy->setUser(pSettings->value("HTTP_PROXY_USER").toString());
+        }
+        if(pSettings->contains("HTTP_PROXY_PASSWORD")) {
+            m_proxy->setPassword(pSettings->value("HTTP_PROXY_PASSWORD").toString());
+        }
+        QNetworkProxy::setApplicationProxy(*m_proxy);
+        m_NetworkAM->setProxy(*m_proxy);
+    }
 
     upload();
 }
