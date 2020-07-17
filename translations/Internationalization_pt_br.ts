@@ -438,42 +438,42 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
         <source>Upload to ImgS3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
         <source>Uploading Image</source>
         <translation type="unfinished">Upando Imagem</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="242"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
         <source>Open URL</source>
         <translation type="unfinished">Abrir URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Imagem no Clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="260"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Não foi possível abrir a URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="266"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="271"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Screenshot copiada para o clipboard.</translation>
     </message>
@@ -481,12 +481,12 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
         <translation type="unfinished">Uploader de imagens</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="58"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="46"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
@@ -760,7 +760,7 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Não foi possível escrever em</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="84"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
