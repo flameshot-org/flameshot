@@ -435,42 +435,42 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
         <source>Upload to ImgS3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
         <source>Uploading Image</source>
         <translation type="unfinished">S&apos;està pujant la imatge</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="242"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copia l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
         <source>Open URL</source>
         <translation type="unfinished">Obri l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Imatge al porta-retalls.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="260"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">No es pot obrir l&apos;URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="266"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="271"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">La captura s&apos;ha copiat al porta-retalls.</translation>
     </message>
@@ -478,12 +478,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
         <translation type="unfinished">Puja la imatge</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="58"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="46"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
@@ -757,7 +757,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="84"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
