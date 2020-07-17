@@ -438,22 +438,22 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
         <source>Upload to ImgS3</source>
         <translation>Вивантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
         <source>Uploading Image</source>
         <translation>Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="242"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
         <source>Open URL</source>
         <translation>Відкрити URL</translation>
     </message>
@@ -462,22 +462,22 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Видалити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
         <source>Image to Clipboard.</source>
         <translation>Зображення до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="260"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
         <source>Unable to open the URL.</source>
         <translation>Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="266"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="271"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Знімок скопійовано до буферу обміну.</translation>
     </message>
@@ -485,12 +485,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="50"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
         <translation>Вивантаження зображень</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="58"/>
+        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="46"/>
         <source>Upload the selection to S3 bucket</source>
         <translation>Вивантажити виділення на S3</translation>
     </message>
@@ -768,7 +768,7 @@ Press Space to open the side panel.</source>
         <translation>Не вдалось зберегти</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="84"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
