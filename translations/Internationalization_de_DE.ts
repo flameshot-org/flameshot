@@ -187,29 +187,34 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="175"/>
+        <location filename="../src/core/controller.cpp" line="182"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Bildschirmaufnahme anfertigen</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="187"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="183"/>
+        <location filename="../src/core/controller.cpp" line="191"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="186"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Information</source>
         <translation>&amp;Informationen</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="189"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Quit</source>
         <translation>&amp;Beenden</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="202"/>
+        <source>&amp;Recent Screenshot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -436,44 +441,57 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     </message>
 </context>
 <context>
+    <name>HistoryWidget</name>
+    <message>
+        <location filename="../src/tools/historywidget.cpp" line="23"/>
+        <source>Screenshots history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/historywidget.cpp" line="69"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL kopiert.</translation>
+    </message>
+</context>
+<context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
         <source>Upload to ImgS3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
         <source>Uploading Image</source>
         <translation type="unfinished">Bild hochladen</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="312"/>
         <source>Copy URL</source>
         <translation type="unfinished">URL kopieren</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="313"/>
         <source>Open URL</source>
         <translation type="unfinished">URL öffnen</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="314"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Bild in Zwischenablage.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="330"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Kann URL nicht öffnen.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL kopiert.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="341"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Bildschirmaufnahme in Zwischenablage kopiert.</translation>
     </message>
@@ -760,7 +778,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
         <translation>Kein Schreibzugriff auf</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="154"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL kopiert.</translation>

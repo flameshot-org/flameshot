@@ -1,12 +1,16 @@
 #ifndef HISTORYWIDGET_H
 #define HISTORYWIDGET_H
 
+#define HISTORYWIDGET_MAX_PREVIEW_HEIGHT 120
+
 #include <QObject>
 #include <QWidget>
+#include <QDialog>
 
 class QVBoxLayout;
+class NotificationWidget;
 
-class HistoryWidget : public QWidget
+class HistoryWidget : public QDialog
 {
     Q_OBJECT
 public:
@@ -19,6 +23,7 @@ private:
 
 private:
     QVBoxLayout *m_pVBox;
+    NotificationWidget *m_notification;
 };
 
 #endif // HISTORYWIDGET_H
