@@ -83,7 +83,7 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp \
     src/config/filepathconfiguration.cpp \
-    src/tools/historywidget.cpp \
+    src/widgets/historywidget.cpp \
     src/utils/configenterprise.cpp \
     src/utils/history.cpp \
     src/widgets/capture/buttonhandler.cpp \
@@ -162,7 +162,7 @@ SOURCES += src/main.cpp \
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/config/filepathconfiguration.h \
-    src/tools/historywidget.h \
+    src/widgets/historywidget.h \
     src/utils/configenterprise.h \
     src/utils/history.h \
     src/widgets/infowindow.h \

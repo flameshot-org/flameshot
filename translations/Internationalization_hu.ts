@@ -181,6 +181,10 @@ Press Space to open the side panel.</source>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Recent Screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -376,6 +380,17 @@ Press Space to open the side panel.</source>
     <message>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HistoryWidget</name>
+    <message>
+        <source>Screenshots history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
 </context>
 <context>

@@ -27,7 +27,7 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/history.h"
 #include "src/utils/configenterprise.h"
-#include "src/tools/historywidget.h"
+#include "src/widgets/historywidget.h"
 #include <QFile>
 #include <QApplication>
 #include <QSystemTrayIcon>
@@ -255,7 +255,7 @@ void Controller::updateConfigComponents() {
 
 void Controller::showRecentScreenshots() {
     HistoryWidget *pHistory = new HistoryWidget();
-    pHistory->show();
+    pHistory->exec();
 }
 
 void Controller::startFullscreenCapture(const uint id) {
