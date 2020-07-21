@@ -2,8 +2,6 @@
 #include "src/utils/confighandler.h"
 #include <QDir>
 #include <QFile>
-#include <QString>
-#include <QPixmap>
 #include <QDebug>
 
 

@@ -17,6 +17,7 @@
 #include <QDesktopWidget>
 #include <QDesktopServices>
 #include <QClipboard>
+#include <QUrl>
 
 
 HistoryWidget::HistoryWidget(QWidget *parent) : QDialog(parent)
