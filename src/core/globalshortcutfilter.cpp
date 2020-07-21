@@ -19,7 +19,6 @@
 #include "src/core/controller.h"
 #include "src/widgets/historywidget.h"
 #include <qt_windows.h>
-#include <QDebug>
 
 GlobalShortcutFilter::GlobalShortcutFilter(QObject *parent) :
     QObject(parent)
@@ -51,7 +50,6 @@ bool GlobalShortcutFilter::nativeEventFilter(
 
         // Show screenshots history
         if(VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
-            qDebug() << "Show screenshots history";
             HistoryWidget *pHistory = new HistoryWidget();
             pHistory->show();
         }
