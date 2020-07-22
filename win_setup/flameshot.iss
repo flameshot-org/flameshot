@@ -32,6 +32,7 @@ Source: "flameshot\iconengines\*"; DestDir: "{app}\iconengines"
 Source: "flameshot\imageformats\*"; DestDir: "{app}\imageformats"
 Source: "flameshot\platforms\*"; DestDir: "{app}\platforms"
 Source: "flameshot\translations\*"; DestDir: "{app}\translations"
+Source: "flameshot\vcredist-2013.exe"; DestDir: {app}
 Source: "flameshot\vcredist.exe"; DestDir: {app}
 
 [Icons]
@@ -44,6 +45,9 @@ Name: "{group}\FlameShot Documentation"; Filename: "{app}\flameshot-documentatio
 ; you don't need a [Registry] section.
 
 [Run]
+Filename: {app}\vcredist-2013.exe; \
+    Parameters: "/q /passive /Q:a /c:""msiexec /q /i vcredist.msi"""; \
+    StatusMsg: "Installing VC++ 2013 Redistributables..."
 Filename: {app}\vcredist.exe; \
     Parameters: "/q /passive /Q:a /c:""msiexec /q /i vcredist.msi"""; \
     StatusMsg: "Installing VC++ 2015 Redistributables..."
