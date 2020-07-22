@@ -37,7 +37,8 @@ Source: "flameshot\vcredist.exe"; DestDir: {app}
 [Icons]
 Name: "{commondesktop}\Flameshot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
 Name: "{group}\Flameshot"; Filename: "{app}\flameshot.exe"; WorkingDir: "{app}"
-Name: "{group}\FlameShot Documentation"; Filename: "{app}\flameshot-documentation.pdf"; WorkingDir: "{app}"
+Name: "{group}\FlameShot Documentation"; Filename: "https://collab.namecheap.net/display/~anastasiamelnik/Flameshot%3A+Screenshot+tool"; WorkingDir: "{app}"
+;Name: "{group}\FlameShot Documentation"; Filename: "{app}\flameshot-documentation.pdf"; WorkingDir: "{app}"
 
 ; NOTE: Most apps do not need registry entries to be pre-created. If you
 ; don't know what the registry is or if you need to use it, then chances are
