@@ -116,16 +116,22 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     // set proxy server parameters
     if(httpProxyHost.length() > 0) {
         m_proxy->setHostName(httpProxyHost);
+
+        int nProxyPort = 3128;
         if(settings->contains("HTTP_PROXY_PORT")) {
-            m_proxy->setPort(settings->value("HTTP_PROXY_PORT").toInt());
-        } else {
-            m_proxy->setPort(3128);
+            nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
         }
+        m_proxy->setPort(nProxyPort);
+
+        qDebug() << "Proxy Host" << httpProxyHost;
+        qDebug() << "Proxy Port" << nProxyPort;
 
         if(settings->contains("HTTP_PROXY_USER")) {
+            qDebug() << "Proxy user" << settings->value("HTTP_PROXY_PASSWORD").toString();
             m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
         }
         if(settings->contains("HTTP_PROXY_PASSWORD")) {
+            qDebug() << "Proxy password is not empty";
             m_proxy->setPassword(settings->value("HTTP_PROXY_PASSWORD").toString());
         }
         QNetworkProxy::setApplicationProxy(*m_proxy);
