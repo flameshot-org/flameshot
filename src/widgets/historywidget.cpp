@@ -22,11 +22,13 @@
 
 HistoryWidget::HistoryWidget(QWidget *parent) : QDialog(parent)
 {
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Screenshots history"));
     setFixedSize(this->size());
     m_notification = new NotificationWidget();
 
     m_pVBox = new QVBoxLayout(this);
+    m_pVBox->setAlignment(Qt::AlignTop);
 
     QScrollArea *scrollArea = new QScrollArea( this );
     scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -50,6 +52,16 @@ void HistoryWidget::loadHistory() {
     QString s3BaseUrl = settings->value("S3_URL").toString();
     settings->endGroup();
 
+    if(historyFiles.isEmpty()) {
+        QPushButton *buttonEmpty = new QPushButton;
+        buttonEmpty->setText(tr("Screenshots history is epmty"));
+        buttonEmpty->setMinimumSize(1, HISTORYWIDGET_MAX_PREVIEW_HEIGHT);
+        connect(buttonEmpty, &QPushButton::clicked, this, [=](){
+            this->close();
+        });
+        m_pVBox->addWidget(buttonEmpty);
+        return;
+    }
     foreach(QString fileName, historyFiles) {
         // generate url
         QString fullFileName = history.path() + fileName;
