@@ -205,7 +205,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="202"/>
-        <source>&amp;Recent Screenshots</source>
+        <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -446,7 +446,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/widgets/historywidget.cpp" line="57"/>
-        <source>Screenshots history is epmty</source>
+        <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -473,32 +473,32 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">S&apos;està pujant la imatge</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="312"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copia l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="313"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
         <source>Open URL</source>
         <translation type="unfinished">Obri l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="314"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Imatge al porta-retalls.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="330"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">No es pot obrir l&apos;URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="341"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">La captura s&apos;ha copiat al porta-retalls.</translation>
     </message>
@@ -795,7 +795,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="154"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>

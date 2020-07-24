@@ -54,7 +54,7 @@ void HistoryWidget::loadHistory() {
 
     if(historyFiles.isEmpty()) {
         QPushButton *buttonEmpty = new QPushButton;
-        buttonEmpty->setText(tr("Screenshots history is epmty"));
+        buttonEmpty->setText(tr("Screenshots history is empty"));
         buttonEmpty->setMinimumSize(1, HISTORYWIDGET_MAX_PREVIEW_HEIGHT);
         connect(buttonEmpty, &QPushButton::clicked, this, [=](){
             this->close();

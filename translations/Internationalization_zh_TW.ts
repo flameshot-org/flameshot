@@ -209,7 +209,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="202"/>
-        <source>&amp;Recent Screenshots</source>
+        <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -445,7 +445,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/widgets/historywidget.cpp" line="57"/>
-        <source>Screenshots history is epmty</source>
+        <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -472,32 +472,32 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">正在上傳</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="312"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
         <source>Copy URL</source>
         <translation type="unfinished">複製連結</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="313"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
         <source>Open URL</source>
         <translation type="unfinished">打開連結</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="314"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">將檔案複製到剪貼簿</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="330"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">無法打開此連結</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">連結已複製到剪貼簿</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="341"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">截圖已複製到剪貼簿</translation>
     </message>
@@ -794,7 +794,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">無法寫入</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="154"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">連結已複製到剪貼簿</translation>
