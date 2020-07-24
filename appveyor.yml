@@ -45,7 +45,7 @@ build_script:
 # scripts that run after build
 after_build:
   # Clone OpenSSL DLLs
-  - git clone https://github.com/tamlok/openssl-utils.git openssl-utils.git
+#  - git clone https://github.com/tamlok/openssl-utils.git openssl-utils.git
   - mkdir distrib\flameshot
   - windeployqt.exe --dir .\distrib\flameshot %APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe
   - copy "%APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe" "distrib\flameshot\flameshot.exe"
@@ -60,13 +60,22 @@ after_build:
   # Delete translations\qt_*.qm
   - del /F /Q "distrib\flameshot\translations\qt_*.qm"
   # Copy OpenSSL DLLs ()
-  - if "%PLATFORM%" EQU "X64" (xcopy "openssl-utils.git\win64\*.dll" "distrib\flameshot")
-  - if "%PLATFORM%" EQU "x86" (xcopy "openssl-utils.git\win32\*.dll" "distrib\flameshot")
+#  - if "%PLATFORM%" EQU "X64" (xcopy "openssl-utils.git\win64\*.dll" "distrib\flameshot")
+#  - if "%PLATFORM%" EQU "x86" (xcopy "openssl-utils.git\win32\*.dll" "distrib\flameshot")
   - cd distrib
   - if "%PLATFORM%" EQU "X64" (mv flameshot\vcredist_x64.exe flameshot\vcredist.exe)
   - if "%PLATFORM%" EQU "x86" (mv flameshot\vcredist_x86.exe flameshot\vcredist.exe)
   - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
   # Download and install vcredist-2013 for OpenSSL binnaries
+  - if "%PLATFORM%" EQU "X64" appveyor DownloadFile https://slproweb.com/download/Win64OpenSSL_Light-1_0_2u.exe
+  - if "%PLATFORM%" EQU "X64" (mv Win64OpenSSL_Light-1_0_2u.exe flameshot\OpenSSL_Light-1_0_2u.exe)
+  - if "%PLATFORM%" EQU "x86" appveyor DownloadFile https://slproweb.com/download/Win32OpenSSL_Light-1_0_2u.exe
+  - if "%PLATFORM%" EQU "x86" (mv Win32OpenSSL_Light-1_0_2u.exe flameshot\OpenSSL_Light-1_0_2u.exe)
+  - flameshot\OpenSSL_Light-1_0_2u.exe /VERYSILENT /DIR="C:\OpenSSL_Temp"
+  - cp C:\OpenSSL_Temp\libeay32.dll flameshot\libeay32.dll
+  - cp C:\OpenSSL_Temp\libssl32.dll flameshot\libssl32.dll
+  - cp C:\OpenSSL_Temp\ssleay32.dll flameshot\ssleay32.dll
+  - rm flameshot\OpenSSL_Light-1_0_2u.exe
   - if "%PLATFORM%" EQU "X64" appveyor DownloadFile https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe
   - if "%PLATFORM%" EQU "X64" (mv vcredist_x64.exe flameshot\vcredist-2013.exe)
   - if "%PLATFORM%" EQU "x86" appveyor DownloadFile https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe
