@@ -182,7 +182,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Recent Screenshots</source>
+        <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -397,7 +397,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Screenshots history is epmty</source>
+        <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

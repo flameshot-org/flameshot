@@ -213,7 +213,7 @@ Enter を押すと画面をキャプチャー。
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="202"/>
-        <source>&amp;Recent Screenshots</source>
+        <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -449,7 +449,7 @@ Enter を押すと画面をキャプチャー。
     </message>
     <message>
         <location filename="../src/widgets/historywidget.cpp" line="57"/>
-        <source>Screenshots history is epmty</source>
+        <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -476,32 +476,32 @@ Enter を押すと画面をキャプチャー。
         <translation type="unfinished">画像をアップロード中</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="312"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
         <source>Copy URL</source>
         <translation type="unfinished">URL をコピー</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="313"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
         <source>Open URL</source>
         <translation type="unfinished">URL を開く</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="314"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">画像をクリップボードへ。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="330"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">URL を開けません。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL をクリップボードにコピーしました。</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="341"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">スクリーンショットをクリップボードにコピーしました。</translation>
     </message>
@@ -798,7 +798,7 @@ Enter を押すと画面をキャプチャー。
         <translation>書き込めません:</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="154"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL をクリップボードにコピーしました。</translation>

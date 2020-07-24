@@ -213,7 +213,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     </message>
     <message>
         <location filename="../src/core/controller.cpp" line="202"/>
-        <source>&amp;Recent Screenshots</source>
+        <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -449,7 +449,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     </message>
     <message>
         <location filename="../src/widgets/historywidget.cpp" line="57"/>
-        <source>Screenshots history is epmty</source>
+        <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -476,32 +476,32 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <translation type="unfinished">Mise en ligne de l&apos;image</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="312"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copier l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="313"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
         <source>Open URL</source>
         <translation type="unfinished">Ouvrir l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="314"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Image dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="330"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Impossible d&apos;ouvrir l&apos;URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiée dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="341"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Capture d&apos;écran copiée dans le Presse-papier.</translation>
     </message>
@@ -798,7 +798,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <translation>Imposible d&apos;écrire par dessus</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="154"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiée dans le Presse-papier.</translation>

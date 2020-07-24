@@ -199,7 +199,7 @@ void Controller::enableTrayIcon() {
             &QCoreApplication::quit);
 
     // recent screenshots
-    QAction *recentAction = new QAction(tr("&Recent Screenshots"), this);
+    QAction *recentAction = new QAction(tr("&Latest Uploads"), this);
     connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
 
     // generate menu
