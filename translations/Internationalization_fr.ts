@@ -453,12 +453,17 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="89"/>
+        <location filename="../src/widgets/historywidget.cpp" line="98"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">Copier l&apos;URL</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="102"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiée dans le Presse-papier.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="95"/>
+        <location filename="../src/widgets/historywidget.cpp" line="108"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>

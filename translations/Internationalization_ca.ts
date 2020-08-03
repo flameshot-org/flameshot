@@ -450,12 +450,17 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="89"/>
+        <location filename="../src/widgets/historywidget.cpp" line="98"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">Copia l&apos;URL</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="102"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="95"/>
+        <location filename="../src/widgets/historywidget.cpp" line="108"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>

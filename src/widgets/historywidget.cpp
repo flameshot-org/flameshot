@@ -24,7 +24,7 @@ HistoryWidget::HistoryWidget(QWidget *parent) : QDialog(parent)
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Screenshots history"));
-    setFixedSize(this->size());
+    setFixedSize(800, this->height());
     m_notification = new NotificationWidget();
 
     m_pVBox = new QVBoxLayout(this);
@@ -55,7 +55,7 @@ void HistoryWidget::loadHistory() {
     if(historyFiles.isEmpty()) {
         QPushButton *buttonEmpty = new QPushButton;
         buttonEmpty->setText(tr("Screenshots history is empty"));
-        buttonEmpty->setMinimumSize(1, HISTORYWIDGET_MAX_PREVIEW_HEIGHT);
+        buttonEmpty->setMinimumSize(1, HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
         connect(buttonEmpty, &QPushButton::clicked, this, [=](){
             this->close();
         });
@@ -70,20 +70,33 @@ void HistoryWidget::loadHistory() {
         // load pixmap
         QPixmap pixmap;
         pixmap.load( fullFileName, "png" );
-        pixmap = pixmap.scaledToWidth(HISTORYWIDGET_MAX_PREVIEW_HEIGHT);
+
+        if (pixmap.height() / HISTORYPIXMAP_MAX_PREVIEW_HEIGHT >= pixmap.width() / HISTORYPIXMAP_MAX_PREVIEW_WIDTH) {
+            pixmap = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
+        } else {
+            pixmap = pixmap.scaledToWidth(HISTORYPIXMAP_MAX_PREVIEW_WIDTH);
+        }
 
         // get file info
         QFileInfo *pFileInfo = new QFileInfo(fullFileName);
         QString lastModified = pFileInfo->lastModified().toString(" yyyy-MM-dd hh:mm:ss");
 
+        // screenshot preview
+        QLabel *pScreenshot = new QLabel();
+        pScreenshot->setStyleSheet("padding: 5px;");
+        pScreenshot->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
+        pScreenshot->setPixmap(pixmap);
+
+        // screenshot datetime
+        QLabel *pScreenshotText = new QLabel();
+        pScreenshotText->setStyleSheet("padding: 5px;");
+        pScreenshotText->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
+        pScreenshotText->setText(lastModified);
+
         // copy url
         QPushButton *buttonCopyUrl = new QPushButton;
-        buttonCopyUrl->setStyleSheet("text-align:left");
-        QIcon buttonIcon(fullFileName);
-        buttonCopyUrl->setIcon(buttonIcon);
-        buttonCopyUrl->setStyleSheet("padding: 5px;");
-        buttonCopyUrl->setIconSize(pixmap.rect().size());
-        buttonCopyUrl->setText(lastModified);
+        buttonCopyUrl->setText(tr("Copy URL"));
+        buttonCopyUrl->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
         connect(buttonCopyUrl, &QPushButton::clicked, this, [=](){
             QApplication::clipboard()->setText(url);
             m_notification->showMessage(tr("URL copied to clipboard."));
@@ -93,6 +106,7 @@ void HistoryWidget::loadHistory() {
         // open in browser
         QPushButton *buttonOpen = new QPushButton;
         buttonOpen->setText(tr("Open in browser"));
+        buttonOpen->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
         connect(buttonOpen, &QPushButton::clicked, this, [=](){
             QDesktopServices::openUrl(QUrl(url));
             this->close();
@@ -100,15 +114,15 @@ void HistoryWidget::loadHistory() {
 
         // layout
         QHBoxLayout *phbl = new QHBoxLayout();
+        phbl->addWidget(pScreenshot);
+        phbl->addWidget(pScreenshotText);
         phbl->addWidget(buttonCopyUrl);
         phbl->addWidget(buttonOpen);
 
-        int nHeight = pixmap.rect().size().height() >= HISTORYWIDGET_MAX_PREVIEW_HEIGHT
-                ? HISTORYWIDGET_MAX_PREVIEW_HEIGHT
-                : pixmap.rect().size().height();
-        buttonOpen->setMinimumSize(1, nHeight + 5 * 2 + 2); // padding 5px*2 + border
-        phbl->setStretchFactor(buttonCopyUrl, 7);
-        phbl->setStretchFactor(buttonOpen, 3);
+        phbl->setStretchFactor(pScreenshot, 3);
+        phbl->setStretchFactor(pScreenshotText, 2);
+        phbl->setStretchFactor(buttonCopyUrl, 2);
+        phbl->setStretchFactor(buttonOpen, 2);
 
         // add to scroll
         m_pVBox->addLayout(phbl);

@@ -400,6 +400,10 @@ Press Space to open the side panel.</source>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
 </context>
 <context>
     <name>ImgS3Uploader</name>
