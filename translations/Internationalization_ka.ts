@@ -183,29 +183,34 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="175"/>
+        <location filename="../src/core/controller.cpp" line="182"/>
         <source>&amp;Take Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="187"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="183"/>
+        <location filename="../src/core/controller.cpp" line="191"/>
         <source>&amp;Configuration</source>
         <translation>&amp;პარამეტრები</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="186"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Information</source>
         <translation>&amp;ინფორმაცია</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="189"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Quit</source>
         <translation>&amp;გამოსვლა</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="202"/>
+        <source>&amp;Latest Uploads</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -432,44 +437,72 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
-    <name>ImgS3Uploader</name>
+    <name>HistoryWidget</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
-        <source>Upload to ImgS3</source>
+        <location filename="../src/widgets/historywidget.cpp" line="26"/>
+        <source>Screenshots history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
-        <source>Uploading Image</source>
-        <translation type="unfinished">სურათის ატვირთვა</translation>
+        <location filename="../src/widgets/historywidget.cpp" line="57"/>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
+        <location filename="../src/widgets/historywidget.cpp" line="98"/>
         <source>Copy URL</source>
         <translation type="unfinished">URL-ის კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
-        <source>Open URL</source>
-        <translation type="unfinished">URL-ის გახსნა</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
-        <source>Image to Clipboard.</source>
-        <translation type="unfinished">სურათის გაცვლის ბუფერში გაგზავნა</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
-        <source>Unable to open the URL.</source>
-        <translation type="unfinished">URL-ის გახსნა ვერ მოხერხდა.</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
+        <location filename="../src/widgets/historywidget.cpp" line="102"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
+        <location filename="../src/widgets/historywidget.cpp" line="108"/>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <source>Upload to ImgS3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
+        <source>Uploading Image</source>
+        <translation type="unfinished">სურათის ატვირთვა</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL-ის კოპირება</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
+        <source>Open URL</source>
+        <translation type="unfinished">URL-ის გახსნა</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">სურათის გაცვლის ბუფერში გაგზავნა</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">URL-ის გახსნა ვერ მოხერხდა.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
@@ -572,77 +605,87 @@ Press Space to open the side panel.</source>
         <translation>მაუსის გორგოლაჭი</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="68"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Move selection 1px</source>
         <translation>შერჩეულის გადაადგილება 1px-ით</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="69"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Resize selection 1px</source>
         <translation>შერჩეულის ზომის შეცვლა 1px-ით</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Quit capture</source>
         <translation>გადაღებიდან გამოსვლა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
         <translation>გაცვლის ბუფერში კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
         <translation>შერჩეულის ფაილად შენახვა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
         <translation>ბოლო ცვლილების გაუქმება</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
+        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
         <translation>ფერის შესარჩევის ჩვენება</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>ხელსაწყოს სისქის შეცვლა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="81"/>
+        <location filename="../src/widgets/infowindow.cpp" line="79"/>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="80"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="85"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>გადაღების რეჟიმში ხელმისაწვდომი მალსახმობები.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Key</source>
         <translation>კლავიში</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Description</source>
         <translation>აღწერა</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="123"/>
+        <location filename="../src/widgets/infowindow.cpp" line="127"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;ლიცენზია&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="131"/>
+        <location filename="../src/widgets/infowindow.cpp" line="135"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;ვერსია&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="141"/>
+        <location filename="../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;მალსახმობები&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -756,7 +799,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">შემდეგ მისამართზე ჩაწერა ვერ მოხერხდა:</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>

@@ -22,14 +22,19 @@
 #include "src/config/configwindow.h"
 #include "src/widgets/capture/capturebutton.h"
 #include "src/widgets/capturelauncher.h"
+#include "src/widgets/notificationwidget.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/screengrabber.h"
+#include "src/utils/history.h"
+#include "src/utils/configenterprise.h"
+#include "src/widgets/historywidget.h"
 #include <QFile>
 #include <QApplication>
 #include <QSystemTrayIcon>
 #include <QAction>
 #include <QMenu>
 #include <QDesktopWidget>
+#include <QClipboard>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -171,6 +176,8 @@ void Controller::enableTrayIcon() {
     if (m_trayIcon) {
         return;
     }
+    QMenu *trayIconMenu = new QMenu();
+
     ConfigHandler().setDisabledTrayIcon(false);
     QAction *captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this](){
@@ -180,6 +187,7 @@ void Controller::enableTrayIcon() {
     QAction *launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction, &QAction::triggered, this,
             &Controller::openLauncherWindow);
+
     QAction *configAction = new QAction(tr("&Configuration"), this);
     connect(configAction, &QAction::triggered, this,
             &Controller::openConfigWindow);
@@ -190,9 +198,15 @@ void Controller::enableTrayIcon() {
     connect(quitAction, &QAction::triggered, qApp,
             &QCoreApplication::quit);
 
-    QMenu *trayIconMenu = new QMenu();
+    // recent screenshots
+    QAction *recentAction = new QAction(tr("&Latest Uploads"), this);
+    connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
+
+    // generate menu
     trayIconMenu->addAction(captureAction);
     trayIconMenu->addAction(launcherAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(recentAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(configAction);
     trayIconMenu->addAction(infoAction);
@@ -237,6 +251,11 @@ void Controller::updateConfigComponents() {
     if (m_configWindow) {
         m_configWindow->updateChildren();
     }
+}
+
+void Controller::showRecentScreenshots() {
+    HistoryWidget *pHistory = new HistoryWidget();
+    pHistory->exec();
 }
 
 void Controller::startFullscreenCapture(const uint id) {
