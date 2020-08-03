@@ -454,12 +454,17 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="89"/>
+        <location filename="../src/widgets/historywidget.cpp" line="98"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">复制链接</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="102"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">复制链接到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="95"/>
+        <location filename="../src/widgets/historywidget.cpp" line="108"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
