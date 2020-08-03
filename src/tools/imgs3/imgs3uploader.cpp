@@ -22,6 +22,8 @@
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/notificationwidget.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/history.h"
+#include "src/utils/configenterprise.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDesktopServices>
@@ -48,19 +50,6 @@
 ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
-    QSettings *pSettings = nullptr;
-    QString configIniPath = QDir(QDir::currentPath()).filePath("config.ini");
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if(!(QFileInfo::exists(configIniPath) && QFileInfo(configIniPath).isFile())) {
-        configIniPath = "/etc/flameshot/config.ini";
-    }
-#endif
-    pSettings = new QSettings(configIniPath, QSettings::IniFormat);
-    pSettings->beginGroup("S3");
-    m_s3CredsUrl = pSettings->value("S3_CREDS_URL").toString();
-    m_s3XApiKey = pSettings->value("S3_X_API_KEY").toString();
-    pSettings->endGroup();
-
     setWindowTitle(tr("Upload to ImgS3"));
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
@@ -83,13 +72,24 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
 
     setAttribute(Qt::WA_DeleteOnClose);
 
-    QString httpProxyHost = pSettings->value("HTTP_PROXY_HOST").toString();
+    // get enterprise settings
+    m_configEnterprise = new ConfigEnterprise();
+    QSettings *settings = m_configEnterprise->settings();
+
+    // get s3 credentials
+    settings->beginGroup("S3");
+    m_s3CredsUrl = settings->value("S3_CREDS_URL").toString();
+    m_s3XApiKey = settings->value("S3_X_API_KEY").toString();
+    settings->endGroup();
+
+    // set proxy server parameters
+    QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
     if(httpProxyHost.length() > 0) {
         qDebug() << "Using proxy server";
         m_proxy = new QNetworkProxy();
 
-        if(pSettings->contains("HTTP_PROXY_TYPE")) {
-            switch (pSettings->value("HTTP_PROXY_TYPE").toInt()) {
+        if(settings->contains("HTTP_PROXY_TYPE")) {
+            switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
             case 0:
                 m_proxy->setType(QNetworkProxy::DefaultProxy);
                 break;
@@ -111,22 +111,32 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
                 break;
             }
         }
+    }
 
+    // set proxy server parameters
+    if(httpProxyHost.length() > 0) {
         m_proxy->setHostName(httpProxyHost);
-        if(pSettings->contains("HTTP_PROXY_PORT")) {
-            m_proxy->setPort(pSettings->value("HTTP_PROXY_PORT").toInt());
-        } else {
-            m_proxy->setPort(3128);
-        }
 
-        if(pSettings->contains("HTTP_PROXY_USER")) {
-            m_proxy->setUser(pSettings->value("HTTP_PROXY_USER").toString());
+        int nProxyPort = 3128;
+        if(settings->contains("HTTP_PROXY_PORT")) {
+            nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
         }
-        if(pSettings->contains("HTTP_PROXY_PASSWORD")) {
-            m_proxy->setPassword(pSettings->value("HTTP_PROXY_PASSWORD").toString());
+        m_proxy->setPort(nProxyPort);
+
+        qDebug() << "Proxy Host" << httpProxyHost;
+        qDebug() << "Proxy Port" << nProxyPort;
+
+        if(settings->contains("HTTP_PROXY_USER")) {
+            qDebug() << "Proxy user" << settings->value("HTTP_PROXY_PASSWORD").toString();
+            m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
+        }
+        if(settings->contains("HTTP_PROXY_PASSWORD")) {
+            qDebug() << "Proxy password is not empty";
+            m_proxy->setPassword(settings->value("HTTP_PROXY_PASSWORD").toString());
         }
         QNetworkProxy::setApplicationProxy(*m_proxy);
         m_NetworkAM->setProxy(*m_proxy);
+        m_NetworkAMCreds->setProxy(*m_proxy);
     }
 
     upload();
@@ -135,6 +145,16 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
 void ImgS3Uploader::handleReply(QNetworkReply *reply) {
     m_spinner->deleteLater();
     if (reply->error() == QNetworkReply::NoError) {
+        // save history
+        QString imageName = m_imageURL.toString();
+        int lastSlash = imageName.lastIndexOf("/");
+        if (lastSlash >= 0) {
+            imageName = imageName.mid(lastSlash);
+        }
+        History history;
+        history.save(m_pixmap, imageName);
+
+        // Copy url to clipboard if required
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(m_imageURL.toString());
             SystemNotification().sendMessage(QObject::tr("URL copied to clipboard."));

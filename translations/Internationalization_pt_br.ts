@@ -187,29 +187,34 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="175"/>
+        <location filename="../src/core/controller.cpp" line="182"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Tirar Screenshot</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="187"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="183"/>
+        <location filename="../src/core/controller.cpp" line="191"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuração</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="186"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Information</source>
         <translation>&amp;Informações</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="189"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Quit</source>
         <translation>&amp;Sair</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="202"/>
+        <source>&amp;Latest Uploads</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -436,44 +441,72 @@ Pressione espaço abrir o painel lateral.</translation>
     </message>
 </context>
 <context>
-    <name>ImgS3Uploader</name>
+    <name>HistoryWidget</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
-        <source>Upload to ImgS3</source>
+        <location filename="../src/widgets/historywidget.cpp" line="26"/>
+        <source>Screenshots history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
-        <source>Uploading Image</source>
-        <translation type="unfinished">Upando Imagem</translation>
+        <location filename="../src/widgets/historywidget.cpp" line="57"/>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
+        <location filename="../src/widgets/historywidget.cpp" line="98"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
-        <source>Open URL</source>
-        <translation type="unfinished">Abrir URL</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
-        <source>Image to Clipboard.</source>
-        <translation type="unfinished">Imagem no Clipboard.</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
-        <source>Unable to open the URL.</source>
-        <translation type="unfinished">Não foi possível abrir a URL.</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
+        <location filename="../src/widgets/historywidget.cpp" line="102"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
+        <location filename="../src/widgets/historywidget.cpp" line="108"/>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <source>Upload to ImgS3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Upando Imagem</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">Copiar URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
+        <source>Open URL</source>
+        <translation type="unfinished">Abrir URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">Imagem no Clipboard.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">Não foi possível abrir a URL.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL copiada para o clipboard.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Screenshot copiada para o clipboard.</translation>
     </message>
@@ -576,77 +609,87 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Roda do mouse</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="68"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Move selection 1px</source>
         <translation>Move a seleção em 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="69"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Resize selection 1px</source>
         <translation>Redimensiona a seleção em 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Quit capture</source>
         <translation>Sair da captura</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
         <translation>Copiar ao clipboard</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
         <translation>Salva seleção em um arquivo</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
         <translation>Desfazer última modificação</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
+        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
         <translation>Mostra seletor de cores</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Muda a grossura do pincel</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="81"/>
+        <location filename="../src/widgets/infowindow.cpp" line="79"/>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="80"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="85"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Atalhos disponívels na tela de captura.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Key</source>
         <translation>Tecla</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="123"/>
+        <location filename="../src/widgets/infowindow.cpp" line="127"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licença&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="131"/>
+        <location filename="../src/widgets/infowindow.cpp" line="135"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Versão&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="141"/>
+        <location filename="../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Atalhos&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -760,7 +803,7 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Não foi possível escrever em</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>

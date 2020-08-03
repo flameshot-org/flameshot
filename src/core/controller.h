@@ -61,6 +61,8 @@ public slots:
 
     void updateConfigComponents();
 
+    void showRecentScreenshots();
+
 private slots:
     void startFullscreenCapture(const uint id = 0);
     void startVisualCapture(const uint id = 0,

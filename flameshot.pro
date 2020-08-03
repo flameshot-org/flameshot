@@ -6,6 +6,8 @@
 
 win32:LIBS += -luser32 -lshell32
 
+LIBS += -Llibeay32 -Lssleay32
+
 BASE_VERSION = 0.7.5
 TAG_VERSION = "$$system(git --git-dir $$PWD/.git rev-parse --short HEAD)"
 isEmpty(TAG_VERSION){
@@ -83,6 +85,9 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp \
     src/config/filepathconfiguration.cpp \
+    src/widgets/historywidget.cpp \
+    src/utils/configenterprise.cpp \
+    src/utils/history.cpp \
     src/widgets/capture/buttonhandler.cpp \
     src/widgets/infowindow.cpp \
     src/config/configwindow.cpp \
@@ -159,6 +164,9 @@ SOURCES += src/main.cpp \
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/config/filepathconfiguration.h \
+    src/widgets/historywidget.h \
+    src/utils/configenterprise.h \
+    src/utils/history.h \
     src/widgets/infowindow.h \
     src/config/configwindow.h \
     src/widgets/capture/capturewidget.h \
