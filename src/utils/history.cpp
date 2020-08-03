@@ -9,8 +9,11 @@ History::History()
 {
     // Get cache history path
     ConfigHandler config;
-    QString userUuid = config.userUuid();
-    m_historyPath = QDir::homePath() + "/.cache/flameshot/history/"+ userUuid + "/";
+#ifdef Q_OS_WIN
+    m_historyPath = QDir::homePath() + "/AppData/Roaming/flameshot/history/";
+#else
+    m_historyPath = QDir::homePath() + "/.cache/flameshot/history/";
+#endif
 
     // Check if directory for history exists and create if doesn't
     QDir dir = QDir(m_historyPath);
