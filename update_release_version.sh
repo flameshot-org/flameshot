@@ -41,14 +41,16 @@ qmake
 
 # update qt translations, ignore if no `lupdate` utils is installed
 lupdate -recursive ./ -ts ./translations/* || true
+lrelease flameshot.pro
 
 # push current release
 git add flameshot.pro ./win_setup/flameshot.iss appveyor.yml .travis.yml update_release_version.sh translations/
 git commit -m "Update version to ${BASE_VERSION_NEW}"
-git push ${GIT_REMOTE} -u release/${BASE_VERSION_NEW}
+#git push ${GIT_REMOTE} -u release/${BASE_VERSION_NEW}
 
 # add new release tag
 git tag "v${BASE_VERSION_NEW}"
-git push ${GIT_REMOTE} --tags
+git push ${GIT_REMOTE} -u release/${BASE_VERSION_NEW} --tags
+#git push ${GIT_REMOTE} --tags
 
 echo "New Flameshot version is: ${BASE_VERSION_NEW}"

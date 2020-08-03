@@ -30,6 +30,7 @@ class LoadSpinner;
 class QPushButton;
 class QUrl;
 class NotificationWidget;
+class ConfigEnterprise;
 
 class ImgS3Uploader : public QWidget {
     Q_OBJECT
@@ -49,6 +50,7 @@ private:
     void uploadToS3(QJsonDocument &response);
 
 private:
+    ConfigEnterprise *m_configEnterprise;
     QString m_s3CredsUrl;
     QString m_s3XApiKey;
 

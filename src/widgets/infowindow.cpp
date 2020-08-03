@@ -61,7 +61,9 @@ QVector<const char *> InfoWindow::m_keys = {
     "CTRL + Z",
     QT_TR_NOOP("SPACEBAR"),
     QT_TR_NOOP("Right Click"),
-    QT_TR_NOOP("Mouse Wheel")
+    QT_TR_NOOP("Mouse Wheel"),
+    "Print Screen",
+    "SHIFT + Print Screen"
 };
 
 QVector<const char *> InfoWindow::m_description = {
@@ -73,7 +75,9 @@ QVector<const char *> InfoWindow::m_description = {
     QT_TR_NOOP("Undo the last modification"),
     QT_TR_NOOP("Toggle visibility of sidebar with options of the selected tool"),
     QT_TR_NOOP("Show color picker"),
-    QT_TR_NOOP("Change the tool's thickness")
+    QT_TR_NOOP("Change the tool's thickness"),
+    QT_TR_NOOP("Capture screen"),
+    QT_TR_NOOP("Screenshot history")
 };
 
 void InfoWindow::initInfoTable() {
