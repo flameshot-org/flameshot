@@ -187,29 +187,42 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="175"/>
+        <location filename="../src/core/controller.cpp" line="182"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../src/core/controller.cpp" line="187"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Открыть</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="183"/>
+        <location filename="../src/core/controller.cpp" line="191"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Настройка</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="186"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Information</source>
         <translation>&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="189"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выход</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="202"/>
+        <source>&amp;Latest Uploads</source>
+        <translation>Последние загрузки</translation>
+    </message>
+    <message>
+        <source>&amp;Recent Screenshots</source>
+        <translation type="vanished">Последние скриншоты</translation>
+    </message>
+    <message>
+        <source>&amp;Recent Screenshot</source>
+        <translation type="vanished">&amp;Недавние скриншоты</translation>
     </message>
 </context>
 <context>
@@ -436,24 +449,56 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
-    <name>ImgS3Uploader</name>
+    <name>HistoryWidget</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="64"/>
-        <source>Upload to ImgS3</source>
-        <translation>Загрузить на S3</translation>
+        <location filename="../src/widgets/historywidget.cpp" line="26"/>
+        <source>Screenshots history</source>
+        <translation>История скриншотов</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="71"/>
-        <source>Uploading Image</source>
-        <translation>Загрузка изображения</translation>
+        <source>Screenshots history is epmty</source>
+        <translation type="vanished">История скриншотов пустая</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="298"/>
+        <location filename="../src/widgets/historywidget.cpp" line="57"/>
+        <source>Screenshots history is empty</source>
+        <translation>История скриншотов пуста</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="98"/>
         <source>Copy URL</source>
         <translation>Скопировать URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="299"/>
+        <location filename="../src/widgets/historywidget.cpp" line="102"/>
+        <source>URL copied to clipboard.</source>
+        <translation>URL скопирован в буфер обмена.</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="108"/>
+        <source>Open in browser</source>
+        <translation>Открыть в браузере</translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <source>Upload to ImgS3</source>
+        <translation>Загрузить на S3</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
+        <source>Uploading Image</source>
+        <translation>Загрузка изображения</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
+        <source>Copy URL</source>
+        <translation>Скопировать URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
         <source>Open URL</source>
         <translation>Открыть URL</translation>
     </message>
@@ -462,22 +507,22 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Удалить изображение</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="300"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
         <source>Image to Clipboard.</source>
         <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="316"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
         <source>Unable to open the URL.</source>
         <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="322"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
@@ -584,77 +629,87 @@ Press Space to open the side panel.</source>
         <translation>Колесико мыши</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="68"/>
+        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Move selection 1px</source>
         <translation>Переместить выделение на 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="69"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Resize selection 1px</source>
         <translation>Изменить размер выделения на 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
+        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Quit capture</source>
         <translation>Выйти из захвата экрана</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
+        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
         <translation>Скопировать в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
+        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
         <translation>Сохранить выделение в файл</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
+        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
         <translation>Отменить последнее изменение</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
+        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
         <translation>Показать боковую панель с настройками выбранного инструмента</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
+        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
         <translation>Показать выбор цвета</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
+        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Изменить толщину инструмента</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="81"/>
+        <location filename="../src/widgets/infowindow.cpp" line="79"/>
+        <source>Capture screen</source>
+        <translation>Захватить экран</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="80"/>
+        <source>Screenshot history</source>
+        <translation>История скриншотов</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/infowindow.cpp" line="85"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Доступные горячие клавиши в режиме захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Key</source>
         <translation>Клавиша</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="92"/>
+        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="123"/>
+        <location filename="../src/widgets/infowindow.cpp" line="127"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Лицензия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="131"/>
+        <location filename="../src/widgets/infowindow.cpp" line="135"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Версия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="141"/>
+        <location filename="../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -768,7 +823,7 @@ Press Space to open the side panel.</source>
         <translation>Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="140"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>

@@ -181,6 +181,10 @@ Press Space to open the side panel.</source>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Latest Uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -379,6 +383,29 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
+    <name>HistoryWidget</name>
+    <message>
+        <source>Screenshots history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
+</context>
+<context>
     <name>ImgS3Uploader</name>
     <message>
         <source>Upload to ImgS3</source>
@@ -550,6 +577,14 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screenshot history</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
