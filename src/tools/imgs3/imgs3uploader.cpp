@@ -50,6 +50,7 @@
 ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
+    m_proxy = nullptr;
     setWindowTitle(tr("Upload to ImgS3"));
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
@@ -64,83 +65,110 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     m_vLayout->addWidget(m_spinner, 0, Qt::AlignHCenter);
     m_vLayout->addWidget(m_infoLabel);
 
+    setAttribute(Qt::WA_DeleteOnClose);
+
+    // get enterprise settings
+    m_configEnterprise = new ConfigEnterprise();
+
+    // get s3 credentials
+    QSettings *settings = m_configEnterprise->settings();
+    settings->beginGroup("S3");
+    m_s3CredsUrl = settings->value("S3_CREDS_URL").toString();
+    m_s3XApiKey = settings->value("S3_X_API_KEY").toString();
+    settings->endGroup();
+
+    initNetwork();
+    upload();
+}
+
+void ImgS3Uploader::initNetwork() {
+    // Init network
     m_NetworkAM = new QNetworkAccessManager(this);
     connect(m_NetworkAM, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleReply);
 
     m_NetworkAMCreds = new QNetworkAccessManager(this);
     connect(m_NetworkAMCreds, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleCredsReply);
 
-    setAttribute(Qt::WA_DeleteOnClose);
-
-    // get enterprise settings
-    m_configEnterprise = new ConfigEnterprise();
     QSettings *settings = m_configEnterprise->settings();
 
-    // get s3 credentials
-    settings->beginGroup("S3");
-    m_s3CredsUrl = settings->value("S3_CREDS_URL").toString();
-    m_s3XApiKey = settings->value("S3_X_API_KEY").toString();
-    settings->endGroup();
+    // Get proxy settings from OS settings
+    QNetworkProxyQuery q(QUrl(m_s3CredsUrl.toUtf8()));
+    q.setQueryType(QNetworkProxyQuery::UrlRequest);
+    q.setProtocolTag("http");
 
-    // set proxy server parameters
-    QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
-    if(httpProxyHost.length() > 0) {
-        qDebug() << "Using proxy server";
-        m_proxy = new QNetworkProxy();
+    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(q);
+    if( proxies.size() > 0 && proxies[0].type() != QNetworkProxy::NoProxy ){
+        m_proxy = &proxies[0];
+    }
+    else {
+        // get proxy settings from "config.ini" file
+        QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
+        if(httpProxyHost.length() > 0) {
+            m_proxy = new QNetworkProxy();
 
-        if(settings->contains("HTTP_PROXY_TYPE")) {
-            switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
-            case 0:
-                m_proxy->setType(QNetworkProxy::DefaultProxy);
-                break;
-            case 1:
-                m_proxy->setType(QNetworkProxy::Socks5Proxy);
-                break;
-            case 2:
-                m_proxy->setType(QNetworkProxy::NoProxy);
-                break;
-            case 4:
-                m_proxy->setType(QNetworkProxy::HttpCachingProxy);
-                break;
-            case 5:
-                m_proxy->setType(QNetworkProxy::FtpCachingProxy);
-                break;
-            case 3:
-            default:
-                m_proxy->setType(QNetworkProxy::HttpProxy);
-                break;
+            if(settings->contains("HTTP_PROXY_TYPE")) {
+                switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
+                case 0:
+                    m_proxy->setType(QNetworkProxy::DefaultProxy);
+                    break;
+                case 1:
+                    m_proxy->setType(QNetworkProxy::Socks5Proxy);
+                    break;
+                case 2:
+                    m_proxy->setType(QNetworkProxy::NoProxy);
+                    break;
+                case 4:
+                    m_proxy->setType(QNetworkProxy::HttpCachingProxy);
+                    break;
+                case 5:
+                    m_proxy->setType(QNetworkProxy::FtpCachingProxy);
+                    break;
+                case 3:
+                default:
+                    m_proxy->setType(QNetworkProxy::HttpProxy);
+                    break;
+                }
+            }
+        }
+
+        // set proxy server parameters
+        if(httpProxyHost.length() > 0) {
+            m_proxy->setHostName(httpProxyHost);
+
+            int nProxyPort = 3128;
+            if(settings->contains("HTTP_PROXY_PORT")) {
+                nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
+            }
+            m_proxy->setPort(nProxyPort);
+
+            if(settings->contains("HTTP_PROXY_USER")) {
+                qDebug() << "Proxy user" << settings->value("HTTP_PROXY_PASSWORD").toString();
+                m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
+            }
+            if(settings->contains("HTTP_PROXY_PASSWORD")) {
+                qDebug() << "Proxy password is not empty";
+                m_proxy->setPassword(settings->value("HTTP_PROXY_PASSWORD").toString());
             }
         }
     }
 
-    // set proxy server parameters
-    if(httpProxyHost.length() > 0) {
-        m_proxy->setHostName(httpProxyHost);
+    if(m_proxy != nullptr) {
+        qDebug() << "Using proxy server";
+        qDebug() << "proxy host:" << m_proxy->hostName();
+        qDebug() << "proxy port:" << m_proxy->port();
+        qDebug() << "proxy type:" << m_proxy->type();
+        qDebug() << "proxy user:" << (m_proxy->user().length() > 0 ? m_proxy->user() : "no user");
+        qDebug() << "proxy password:" << (m_proxy->password().length() > 0 ? "***" : "no password");
 
-        int nProxyPort = 3128;
-        if(settings->contains("HTTP_PROXY_PORT")) {
-            nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
-        }
-        m_proxy->setPort(nProxyPort);
-
-        qDebug() << "Proxy Host" << httpProxyHost;
-        qDebug() << "Proxy Port" << nProxyPort;
-
-        if(settings->contains("HTTP_PROXY_USER")) {
-            qDebug() << "Proxy user" << settings->value("HTTP_PROXY_PASSWORD").toString();
-            m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
-        }
-        if(settings->contains("HTTP_PROXY_PASSWORD")) {
-            qDebug() << "Proxy password is not empty";
-            m_proxy->setPassword(settings->value("HTTP_PROXY_PASSWORD").toString());
-        }
         QNetworkProxy::setApplicationProxy(*m_proxy);
         m_NetworkAM->setProxy(*m_proxy);
         m_NetworkAMCreds->setProxy(*m_proxy);
     }
-
-    upload();
+    else {
+        qDebug() << "No proxy";
+    }
 }
+
 
 void ImgS3Uploader::handleReply(QNetworkReply *reply) {
     m_spinner->deleteLater();
