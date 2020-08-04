@@ -7,7 +7,9 @@
 #include <QObject>
 #include <QWidget>
 #include <QDialog>
+#include <QString>
 
+class QLayout;
 class QVBoxLayout;
 class NotificationWidget;
 
@@ -21,6 +23,9 @@ signals:
 
 private:
     void loadHistory();
+    void addLine(const QString &, const QString &);
+    void removeItem(QLayout *, const QString &);
+    void setEmptyMessage();
 
 private:
     QVBoxLayout *m_pVBox;
