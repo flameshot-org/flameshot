@@ -48,6 +48,7 @@ private slots:
 
 private:
     void uploadToS3(QJsonDocument &response);
+    void initNetwork();
 
 private:
     ConfigEnterprise *m_configEnterprise;
