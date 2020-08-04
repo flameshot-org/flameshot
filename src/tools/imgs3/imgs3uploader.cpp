@@ -89,66 +89,62 @@ void ImgS3Uploader::initNetwork() {
     m_NetworkAMCreds = new QNetworkAccessManager(this);
     connect(m_NetworkAMCreds, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleCredsReply);
 
+    // get proxy settings from "config.ini" file
     QSettings *settings = m_configEnterprise->settings();
+    QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
+    if(httpProxyHost.length() > 0) {
+        m_proxy = new QNetworkProxy();
 
-    // Get proxy settings from OS settings
-    QNetworkProxyQuery q(QUrl(m_s3CredsUrl.toUtf8()));
-    q.setQueryType(QNetworkProxyQuery::UrlRequest);
-    q.setProtocolTag("http");
-
-    QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(q);
-    if( proxies.size() > 0 && proxies[0].type() != QNetworkProxy::NoProxy ){
-        m_proxy = &proxies[0];
-    }
-    else {
-        // get proxy settings from "config.ini" file
-        QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
-        if(httpProxyHost.length() > 0) {
-            m_proxy = new QNetworkProxy();
-
-            if(settings->contains("HTTP_PROXY_TYPE")) {
-                switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
-                case 0:
-                    m_proxy->setType(QNetworkProxy::DefaultProxy);
-                    break;
-                case 1:
-                    m_proxy->setType(QNetworkProxy::Socks5Proxy);
-                    break;
-                case 2:
-                    m_proxy->setType(QNetworkProxy::NoProxy);
-                    break;
-                case 4:
-                    m_proxy->setType(QNetworkProxy::HttpCachingProxy);
-                    break;
-                case 5:
-                    m_proxy->setType(QNetworkProxy::FtpCachingProxy);
-                    break;
-                case 3:
-                default:
-                    m_proxy->setType(QNetworkProxy::HttpProxy);
-                    break;
-                }
+        if(settings->contains("HTTP_PROXY_TYPE")) {
+            switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
+            case 0:
+                m_proxy->setType(QNetworkProxy::DefaultProxy);
+                break;
+            case 1:
+                m_proxy->setType(QNetworkProxy::Socks5Proxy);
+                break;
+            case 2:
+                m_proxy->setType(QNetworkProxy::NoProxy);
+                break;
+            case 4:
+                m_proxy->setType(QNetworkProxy::HttpCachingProxy);
+                break;
+            case 5:
+                m_proxy->setType(QNetworkProxy::FtpCachingProxy);
+                break;
+            case 3:
+            default:
+                m_proxy->setType(QNetworkProxy::HttpProxy);
+                break;
             }
         }
 
-        // set proxy server parameters
-        if(httpProxyHost.length() > 0) {
-            m_proxy->setHostName(httpProxyHost);
+        m_proxy->setHostName(httpProxyHost);
+        int nProxyPort = 3128;
+        if(settings->contains("HTTP_PROXY_PORT")) {
+            nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
+        }
+        m_proxy->setPort(nProxyPort);
 
-            int nProxyPort = 3128;
-            if(settings->contains("HTTP_PROXY_PORT")) {
-                nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
-            }
-            m_proxy->setPort(nProxyPort);
+        if(settings->contains("HTTP_PROXY_USER")) {
+            qDebug() << "Proxy user" << settings->value("HTTP_PROXY_PASSWORD").toString();
+            m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
+        }
+        if(settings->contains("HTTP_PROXY_PASSWORD")) {
+            qDebug() << "Proxy password is not empty";
+            m_proxy->setPassword(settings->value("HTTP_PROXY_PASSWORD").toString());
+        }
+    }
 
-            if(settings->contains("HTTP_PROXY_USER")) {
-                qDebug() << "Proxy user" << settings->value("HTTP_PROXY_PASSWORD").toString();
-                m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
-            }
-            if(settings->contains("HTTP_PROXY_PASSWORD")) {
-                qDebug() << "Proxy password is not empty";
-                m_proxy->setPassword(settings->value("HTTP_PROXY_PASSWORD").toString());
-            }
+    if(m_proxy == nullptr) {
+        // Get proxy settings from OS settings
+        QNetworkProxyQuery q(QUrl(m_s3CredsUrl.toUtf8()));
+        q.setQueryType(QNetworkProxyQuery::UrlRequest);
+        q.setProtocolTag("http");
+
+        QList<QNetworkProxy> proxies = QNetworkProxyFactory::systemProxyForQuery(q);
+        if( proxies.size() > 0 && proxies[0].type() != QNetworkProxy::NoProxy ){
+            m_proxy = &proxies[0];
         }
     }
 
