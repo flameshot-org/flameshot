@@ -158,7 +158,7 @@ void ConfigHandler::setUIMainColor(const QColor &c) {
 }
 
 QColor ConfigHandler::uiContrastColorValue() {
-    QColor res = QColor(86, 0, 120);
+    QColor res = QColor(39, 0, 50);
 
     if (m_settings.contains(QStringLiteral("contastUiColor"))) {
         QString hex = m_settings.value(QStringLiteral("contastUiColor")).toString();
