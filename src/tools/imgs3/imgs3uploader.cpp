@@ -226,78 +226,23 @@ void ImgS3Uploader::handleCredsReply(QNetworkReply *reply){
 }
 
 void ImgS3Uploader::uploadToS3(QJsonDocument &response) {
-    QJsonObject json = response.object();
-    QJsonObject formData = json["formData"].toObject();
-    QJsonObject fields = formData["fields"].toObject();
-
-    QString resultURL = json["resultURL"].toString();
-
-    QString url = formData["url"].toString();
-
-    QString acl = fields["acl"].toString();
-    QString contentType = fields["Content-Type"].toString();
-    QString key = fields["Key"].toString();
-    QString bucket = fields["bucket"].toString();
-    QString xAmzAlgorithm = fields["X-Amz-Algorithm"].toString();
-    QString xAmzCredential = fields["X-Amz-Credential"].toString();
-    QString xAmzDate = fields["X-Amz-Date"].toString();
-    QString xAmzSecurityToken = fields["X-Amz-Security-Token"].toString();
-    QString policy = fields["Policy"].toString();
-    QString xAmzSignature = fields["X-Amz-Signature"].toString();
-
-    //
+    // set paramets from "fields"
     QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
-    QHttpPart aclPart;
-    aclPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"acl\""));
-    aclPart.setBody(acl.toLatin1());
-    multiPart->append(aclPart);
+    // read JSON response
+    QJsonObject json = response.object();
+    QString resultURL = json["resultURL"].toString();
+    QJsonObject formData = json["formData"].toObject();
+    QString url = formData["url"].toString();
 
-    QHttpPart contentTypePart;
-    contentTypePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"Content-Type\""));
-    contentTypePart.setBody(contentType.toLatin1());
-    multiPart->append(contentTypePart);
-
-    QHttpPart keyPart;
-    keyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"Key\""));
-    keyPart.setBody(key.toLatin1());
-    multiPart->append(keyPart);
-
-    QHttpPart bucketPart;
-    bucketPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"bucket\""));
-    bucketPart.setBody(bucket.toLatin1());
-    multiPart->append(bucketPart);
-
-    QHttpPart xAmzAlgorithmPart;
-    xAmzAlgorithmPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"X-Amz-Algorithm\""));
-    xAmzAlgorithmPart.setBody(xAmzAlgorithm.toLatin1());
-    multiPart->append(xAmzAlgorithmPart);
-
-    QHttpPart xAmzCredentialPart;
-    xAmzCredentialPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"X-Amz-Credential\""));
-    xAmzCredentialPart.setBody(xAmzCredential.toLatin1());
-    multiPart->append(xAmzCredentialPart);
-
-    QHttpPart xAmzDatePart;
-    xAmzDatePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"X-Amz-Date\""));
-    xAmzDatePart.setBody(xAmzDate.toLatin1());
-    multiPart->append(xAmzDatePart);
-
-    QHttpPart xAmzSecurityTokenPart;
-    xAmzSecurityTokenPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"X-Amz-Security-Token\""));
-    xAmzSecurityTokenPart.setBody(xAmzSecurityToken.toLatin1());
-    multiPart->append(xAmzSecurityTokenPart);
-
-    QHttpPart policyPart;
-    policyPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"Policy\""));
-    policyPart.setBody(policy.toLatin1());
-    multiPart->append(policyPart);
-
-    QHttpPart xAmzSignaturePart;
-    xAmzSignaturePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"X-Amz-Signature\""));
-    xAmzSignaturePart.setBody(xAmzSignature.toLatin1());
-    multiPart->append(xAmzSignaturePart);
-
+    QJsonObject fields = formData["fields"].toObject();
+    foreach (auto key, fields.keys()) {
+        QString field = fields[key].toString();
+        QHttpPart part;
+        part.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"" + key + "\""));
+        part.setBody(field.toLatin1());
+        multiPart->append(part);
+    }
 
     QHttpPart imagePart;
     imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("image/png"));
