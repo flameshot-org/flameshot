@@ -85,7 +85,6 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     }
     QString url = m_s3Settings.url() + s3FileName;
 
-
     // load pixmap
     QPixmap pixmap;
     pixmap.load( fullFileName, "png" );
