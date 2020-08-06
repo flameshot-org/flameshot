@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QFile>
 #include <QDebug>
+#include <QStringList>
 
 
 History::History()
@@ -47,4 +48,46 @@ const QList<QString> &History::history() {
         }
     }
     return m_thumbs;
+}
+
+const HISTORY_FILE_NAME &History::unpackFileName(const QString &fileNamePacked) {
+    int nPathIndex = fileNamePacked.lastIndexOf("/");
+    QStringList unpackedFileName;
+    if(nPathIndex == -1) {
+        unpackedFileName = fileNamePacked.split("-");
+    } else {
+        unpackedFileName = fileNamePacked.mid(nPathIndex + 1).split("-");
+    }
+
+    switch (unpackedFileName.length()) {
+    case 3:
+        m_unpackedFileName.file = unpackedFileName[2];
+        m_unpackedFileName.token = unpackedFileName[1];
+        m_unpackedFileName.type = unpackedFileName[0];
+        break;
+    case 2:
+        m_unpackedFileName.file = unpackedFileName[1];
+        m_unpackedFileName.token = "";
+        m_unpackedFileName.type = unpackedFileName[0];
+        break;
+    default:
+        m_unpackedFileName.file = unpackedFileName[0];
+        m_unpackedFileName.token = "";
+        m_unpackedFileName.type = SCREENSHOT_STORAGE_TYPE_LOCAL;
+        break;
+    }
+    return m_unpackedFileName;
+}
+
+const QString &History::packFileName(const QString &storageType, const QString &deleteToken, const QString &fileName) {
+    m_packedFileName = fileName;
+    if(storageType.length() > 0) {
+        if(deleteToken.length() > 0) {
+            m_packedFileName = storageType + "-" + deleteToken + "-" + m_packedFileName;
+        }
+        else {
+            m_packedFileName = storageType + "-" + m_packedFileName;
+        }
+    }
+    return m_packedFileName;
 }

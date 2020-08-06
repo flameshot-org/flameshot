@@ -453,17 +453,17 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="117"/>
+        <location filename="../src/widgets/historywidget.cpp" line="112"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="121"/>
+        <location filename="../src/widgets/historywidget.cpp" line="116"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="127"/>
+        <location filename="../src/widgets/historywidget.cpp" line="122"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>

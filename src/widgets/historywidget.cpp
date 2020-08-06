@@ -44,8 +44,6 @@ HistoryWidget::HistoryWidget(QWidget *parent) : QDialog(parent)
 }
 
 void HistoryWidget::loadHistory() {
-    // get settings
-
     // read history files
     History history = History();
     QList<QString> historyFiles = history.history();
@@ -74,16 +72,11 @@ void HistoryWidget::setEmptyMessage() {
 void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     QHBoxLayout *phbl = new QHBoxLayout();
     QString fullFileName = path + fileName;
-    QString s3FileName = fileName;
 
-    //
-    QString deleteToken;
-    int nSeparatorIndex = s3FileName.indexOf("-");
-    if(nSeparatorIndex >= 0) {
-        deleteToken = s3FileName.mid(0, nSeparatorIndex);
-        s3FileName = s3FileName.mid(nSeparatorIndex + 1, s3FileName.size());
-    }
-    QString url = m_s3Settings.url() + s3FileName;
+    History history;
+    HISTORY_FILE_NAME unpackFileName = history.unpackFileName(fileName);
+
+    QString url = m_s3Settings.url() + unpackFileName.file;
 
     // load pixmap
     QPixmap pixmap;
@@ -136,7 +129,7 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonDelete, &QPushButton::clicked, this, [=](){
-        removeItem(phbl, fullFileName, s3FileName, deleteToken);
+        removeItem(phbl, fullFileName, unpackFileName.file, unpackFileName.token);
     });
 
     // layout

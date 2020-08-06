@@ -187,14 +187,14 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
         if (lastSlash >= 0) {
             imageName = imageName.mid(lastSlash + 1);
         }
-        imageName = m_deleteToken + "-" + imageName;
         History history;
+        imageName = history.packFileName(SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, imageName);
         history.save(m_pixmap, imageName);
 
         // Copy url to clipboard if required
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(m_imageURL.toString());
-            SystemNotification().sendMessage(QObject::tr("URL copied to clipboard."));
+            SystemNotification().sendMessage(tr("URL copied to clipboard."));
             m_success = true;
             close();
         } else {
@@ -212,7 +212,7 @@ void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             m_success = true;
-            SystemNotification().sendMessage(QObject::tr("File is deleted from S3"));
+            SystemNotification().sendMessage(tr("File is deleted from S3"));
             close();
         }
     } else {
