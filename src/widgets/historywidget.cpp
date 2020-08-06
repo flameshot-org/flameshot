@@ -1,7 +1,7 @@
 #include "historywidget.h"
 #include "src/utils/history.h"
-#include "src/utils/configenterprise.h"
 #include "src/widgets/notificationwidget.h"
+#include "src/tools/imgs3/imgs3uploader.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPixmap>
@@ -45,11 +45,6 @@ HistoryWidget::HistoryWidget(QWidget *parent) : QDialog(parent)
 
 void HistoryWidget::loadHistory() {
     // get settings
-    ConfigEnterprise configEnterprise;
-    QSettings *settings = configEnterprise.settings();
-    settings->beginGroup("S3");
-    QString s3BaseUrl = settings->value("S3_URL").toString();
-    settings->endGroup();
 
     // read history files
     History history = History();
@@ -61,7 +56,7 @@ void HistoryWidget::loadHistory() {
     else {
         // generate history list
         foreach(QString fileName, historyFiles) {
-            addLine(s3BaseUrl + fileName, history.path() + fileName);
+            addLine(history.path(), fileName);
         }
     }
 }
@@ -76,8 +71,20 @@ void HistoryWidget::setEmptyMessage() {
     m_pVBox->addWidget(buttonEmpty);
 }
 
-void HistoryWidget::addLine(const QString &url, const QString &fullFileName) {
+void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     QHBoxLayout *phbl = new QHBoxLayout();
+    QString fullFileName = path + fileName;
+    QString s3FileName = fileName;
+
+    //
+    QString deleteToken;
+    int nSeparatorIndex = s3FileName.indexOf("-");
+    if(nSeparatorIndex >= 0) {
+        deleteToken = s3FileName.mid(0, nSeparatorIndex);
+        s3FileName = s3FileName.mid(nSeparatorIndex + 1, s3FileName.size());
+    }
+    QString url = m_s3Settings.url() + s3FileName;
+
 
     // load pixmap
     QPixmap pixmap;
@@ -129,9 +136,14 @@ void HistoryWidget::addLine(const QString &url, const QString &fullFileName) {
     QPushButton *buttonDelete = new QPushButton;
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
-    connect(buttonDelete, &QPushButton::clicked, this, [=](){
-        removeItem(phbl, fullFileName);
-    });
+    if(deleteToken.size() > 0) {
+        connect(buttonDelete, &QPushButton::clicked, this, [=](){
+            removeItem(phbl, fullFileName, s3FileName, deleteToken);
+        });
+    }
+    else {
+        buttonDelete->setDisabled(true);
+    }
 
     // layout
     phbl->addWidget(pScreenshot);
@@ -151,26 +163,29 @@ void HistoryWidget::addLine(const QString &url, const QString &fullFileName) {
     m_pVBox->addLayout(phbl);
 }
 
-void HistoryWidget::removeItem(QLayout *pl, const QString &fullFileName) {
-    // TODO - send delete request
-    qDebug() << "Delete image on S3";
+void HistoryWidget::removeItem(QLayout *pl, const QString &fullFileName, const QString& s3FileName, const QString& deleteToken) {
+    ImgS3Uploader *uploader = new ImgS3Uploader();
+    uploader->show();
+    uploader->deleteResource(s3FileName, deleteToken);
 
-    // delete cached image on local dist
-    QFile file(fullFileName);
-    file.remove();
+    connect(uploader, &QWidget::destroyed, this, [=](){
+        // delete cached image on local dist
+        QFile file(fullFileName);
+        file.remove();
 
-    // remove current row or refresh list
-    while(pl->count() > 0)
-    {
-      QLayoutItem *item = pl->takeAt(0);
-      delete item->widget();
-      delete item;
-    }
-    m_pVBox->removeItem(pl);
-    delete pl;
+        // remove current row or refresh list
+        while(pl->count() > 0)
+        {
+          QLayoutItem *item = pl->takeAt(0);
+          delete item->widget();
+          delete item;
+        }
+        m_pVBox->removeItem(pl);
+        delete pl;
 
-    // set "empty" message if no items left
-    if(m_pVBox->count() == 0) {
-        setEmptyMessage();
-    }
+        // set "empty" message if no items left
+        if(m_pVBox->count() == 0) {
+            setEmptyMessage();
+        }
+    });
 }

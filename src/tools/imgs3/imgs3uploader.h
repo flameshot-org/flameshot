@@ -17,6 +17,9 @@
 
 #pragma once
 
+#define S3_API_IMG_PATH "v2/image/"
+
+#include "imgs3settings.h"
 #include <QWidget>
 #include <QUrl>
 
@@ -36,10 +39,14 @@ class ImgS3Uploader : public QWidget {
     Q_OBJECT
 public:
     explicit ImgS3Uploader(const QPixmap &capture, QWidget *parent = nullptr);
+    explicit ImgS3Uploader(QWidget *parent = nullptr);
+    void upload();
+    void deleteResource(const QString &, const QString &);
 
 private slots:
-    void handleReply(QNetworkReply *reply);
-    void handleCredsReply(QNetworkReply *reply);
+    void handleReplyUpload(QNetworkReply *reply);
+    void handleReplyGetCreds(QNetworkReply *reply);
+    void handleReplyDeleteResource(QNetworkReply *reply);
     void startDrag();
 
     void openURL();
@@ -47,19 +54,24 @@ private slots:
     void copyImage();
 
 private:
+    void init(const QString &title, const QString &label);
     void uploadToS3(QJsonDocument &response);
     void initNetwork();
 
+    void onUploadOk();
+
+// class members
 private:
     ConfigEnterprise *m_configEnterprise;
-    QString m_s3CredsUrl;
-    QString m_s3XApiKey;
+    ImgS3Settings m_s3Settings;
+    QString m_deleteToken;
 
     QString m_hostName;
     QPixmap m_pixmap;
     QNetworkProxy *m_proxy;
-    QNetworkAccessManager *m_NetworkAM;
-    QNetworkAccessManager *m_NetworkAMCreds;
+    QNetworkAccessManager *m_NetworkAMUpload;
+    QNetworkAccessManager *m_NetworkAMGetCreds;
+    QNetworkAccessManager *m_NetworkAMRemove;
 
     QVBoxLayout *m_vLayout;
     QHBoxLayout *m_hLayout;
@@ -73,6 +85,4 @@ private:
     QUrl m_imageURL;
     NotificationWidget *m_notification;
 
-    void upload();
-    void onUploadOk();
 };

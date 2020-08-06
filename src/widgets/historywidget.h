@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QDialog>
 #include <QString>
+#include "src/tools/imgs3/imgs3settings.h"
 
 class QLayout;
 class QVBoxLayout;
@@ -24,10 +25,11 @@ signals:
 private:
     void loadHistory();
     void addLine(const QString &, const QString &);
-    void removeItem(QLayout *, const QString &);
+    void removeItem(QLayout *, const QString &, const QString &, const QString &);
     void setEmptyMessage();
 
 private:
+    ImgS3Settings m_s3Settings;
     QVBoxLayout *m_pVBox;
     NotificationWidget *m_notification;
 };
