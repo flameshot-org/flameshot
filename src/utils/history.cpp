@@ -28,11 +28,7 @@ const QString &History::path() {
 void History::save(const QPixmap &pixmap, const QString &fileName) {
     QFile file(path() + fileName);
     file.open(QIODevice::WriteOnly);
-    pixmap.scaled(HISTORY_THUNB_WIDTH,
-                  HISTORY_THUNB_HEIGH,
-                  Qt::KeepAspectRatio,
-                  Qt::SmoothTransformation
-                  ).save(&file, "PNG");
+    pixmap.save(&file, "PNG");
     history();
 }
 
