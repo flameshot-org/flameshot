@@ -61,6 +61,7 @@ ImgS3Uploader::ImgS3Uploader(QWidget *parent) :
 
 void ImgS3Uploader::init(const QString &title, const QString &label) {
     m_proxy = nullptr;
+    m_success = false;
     setWindowTitle(title);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
@@ -194,6 +195,7 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(m_imageURL.toString());
             SystemNotification().sendMessage(QObject::tr("URL copied to clipboard."));
+            m_success = true;
             close();
         } else {
             onUploadOk();
@@ -209,6 +211,7 @@ void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
     m_spinner->deleteLater();
     if (reply->error() == QNetworkReply::NoError) {
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
+            m_success = true;
             SystemNotification().sendMessage(QObject::tr("File is deleted from S3"));
             close();
         }
@@ -350,4 +353,8 @@ void ImgS3Uploader::copyURL() {
 void ImgS3Uploader::copyImage() {
     QApplication::clipboard()->setPixmap(m_pixmap);
     m_notification->showMessage(tr("Screenshot copied to clipboard."));
+}
+
+bool ImgS3Uploader::success() {
+    return m_success;
 }

@@ -42,6 +42,7 @@ public:
     explicit ImgS3Uploader(QWidget *parent = nullptr);
     void upload();
     void deleteResource(const QString &, const QString &);
+    bool success();
 
 private slots:
     void handleReplyUpload(QNetworkReply *reply);
@@ -62,6 +63,7 @@ private:
 
 // class members
 private:
+    bool m_success;
     ConfigEnterprise *m_configEnterprise;
     ImgS3Settings m_s3Settings;
     QString m_deleteToken;
