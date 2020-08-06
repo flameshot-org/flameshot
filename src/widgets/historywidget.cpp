@@ -136,14 +136,9 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     QPushButton *buttonDelete = new QPushButton;
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
-    if(deleteToken.size() > 0) {
-        connect(buttonDelete, &QPushButton::clicked, this, [=](){
-            removeItem(phbl, fullFileName, s3FileName, deleteToken);
-        });
-    }
-    else {
-        buttonDelete->setDisabled(true);
-    }
+    connect(buttonDelete, &QPushButton::clicked, this, [=](){
+        removeItem(phbl, fullFileName, s3FileName, deleteToken);
+    });
 
     // layout
     phbl->addWidget(pScreenshot);
@@ -158,34 +153,40 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     phbl->setStretchFactor(buttonOpen, 4);
     phbl->setStretchFactor(buttonDelete, 1);
 
-
     // add to scroll
     m_pVBox->addLayout(phbl);
 }
 
 void HistoryWidget::removeItem(QLayout *pl, const QString &fullFileName, const QString& s3FileName, const QString& deleteToken) {
-    ImgS3Uploader *uploader = new ImgS3Uploader();
-    uploader->show();
-    uploader->deleteResource(s3FileName, deleteToken);
+    if (deleteToken.length() > 0) {
+        ImgS3Uploader *uploader = new ImgS3Uploader();
+        uploader->show();
+        uploader->deleteResource(s3FileName, deleteToken);
+        connect(uploader, &QWidget::destroyed, this, [=](){
+            removeLocalItem(pl, fullFileName);
+        });
+    }
+    else {
+        removeLocalItem(pl, fullFileName);
+    }
+}
 
-    connect(uploader, &QWidget::destroyed, this, [=](){
-        // delete cached image on local dist
-        QFile file(fullFileName);
-        file.remove();
+void HistoryWidget::removeLocalItem(QLayout *pl, const QString &fullFileName) {
+    QFile file(fullFileName);
+    file.remove();
 
-        // remove current row or refresh list
-        while(pl->count() > 0)
-        {
-          QLayoutItem *item = pl->takeAt(0);
-          delete item->widget();
-          delete item;
-        }
-        m_pVBox->removeItem(pl);
-        delete pl;
+    // remove current row or refresh list
+    while(pl->count() > 0)
+    {
+      QLayoutItem *item = pl->takeAt(0);
+      delete item->widget();
+      delete item;
+    }
+    m_pVBox->removeItem(pl);
+    delete pl;
 
-        // set "empty" message if no items left
-        if(m_pVBox->count() == 0) {
-            setEmptyMessage();
-        }
-    });
+    // set "empty" message if no items left
+    if(m_pVBox->count() == 0) {
+        setEmptyMessage();
+    }
 }

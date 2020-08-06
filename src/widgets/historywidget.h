@@ -26,6 +26,7 @@ private:
     void loadHistory();
     void addLine(const QString &, const QString &);
     void removeItem(QLayout *, const QString &, const QString &, const QString &);
+    void removeLocalItem(QLayout *, const QString &);
     void setEmptyMessage();
 
 private:
