@@ -50,15 +50,25 @@
 ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     QWidget(parent), m_pixmap(capture)
 {
+    init(tr("Upload image to S3"), tr("Uploading Image"));
+}
+
+ImgS3Uploader::ImgS3Uploader(QWidget *parent) :
+    QWidget(parent)
+{
+    init(tr("Delete image from S3"), tr("Deleting Image"));
+}
+
+void ImgS3Uploader::init(const QString &title, const QString &label) {
     m_proxy = nullptr;
-    setWindowTitle(tr("Upload to ImgS3"));
+    setWindowTitle(title);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
     m_spinner = new LoadSpinner(this);
     m_spinner->setColor(ConfigHandler().uiMainColorValue());
     m_spinner->start();
 
-    m_infoLabel = new QLabel(tr("Uploading Image"));
+    m_infoLabel = new QLabel(label);
 
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
@@ -71,23 +81,19 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
     m_configEnterprise = new ConfigEnterprise();
 
     // get s3 credentials
-    QSettings *settings = m_configEnterprise->settings();
-    settings->beginGroup("S3");
-    m_s3CredsUrl = settings->value("S3_CREDS_URL").toString();
-    m_s3XApiKey = settings->value("S3_X_API_KEY").toString();
-    settings->endGroup();
-
     initNetwork();
-    upload();
 }
 
 void ImgS3Uploader::initNetwork() {
     // Init network
-    m_NetworkAM = new QNetworkAccessManager(this);
-    connect(m_NetworkAM, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleReply);
+    m_NetworkAMUpload = new QNetworkAccessManager(this);
+    connect(m_NetworkAMUpload, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleReplyUpload);
 
-    m_NetworkAMCreds = new QNetworkAccessManager(this);
-    connect(m_NetworkAMCreds, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleCredsReply);
+    m_NetworkAMGetCreds = new QNetworkAccessManager(this);
+    connect(m_NetworkAMGetCreds, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleReplyGetCreds);
+
+    m_NetworkAMRemove = new QNetworkAccessManager(this);
+    connect(m_NetworkAMRemove, &QNetworkAccessManager::finished, this, &ImgS3Uploader::handleReplyDeleteResource);
 
     // get proxy settings from "config.ini" file
     QSettings *settings = m_configEnterprise->settings();
@@ -137,7 +143,7 @@ void ImgS3Uploader::initNetwork() {
     }
     else {
         // Get proxy settings from OS settings
-        QNetworkProxyQuery q(QUrl(m_s3CredsUrl.toUtf8()));
+        QNetworkProxyQuery q(QUrl(m_s3Settings.credsUrl().toUtf8()));
         q.setQueryType(QNetworkProxyQuery::UrlRequest);
         q.setProtocolTag("http");
 
@@ -160,10 +166,10 @@ void ImgS3Uploader::initNetwork() {
         qDebug() << "proxy user:" << (m_proxy->user().length() > 0 ? m_proxy->user() : "no user");
         qDebug() << "proxy password:" << (m_proxy->password().length() > 0 ? "***" : "no password");
 
-
         QNetworkProxy::setApplicationProxy(*m_proxy);
-        m_NetworkAM->setProxy(*m_proxy);
-        m_NetworkAMCreds->setProxy(*m_proxy);
+        m_NetworkAMUpload->setProxy(*m_proxy);
+        m_NetworkAMGetCreds->setProxy(*m_proxy);
+        m_NetworkAMRemove->setProxy(*m_proxy);
     }
     else {
         qDebug() << "No proxy";
@@ -171,15 +177,16 @@ void ImgS3Uploader::initNetwork() {
 }
 
 
-void ImgS3Uploader::handleReply(QNetworkReply *reply) {
+void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
     m_spinner->deleteLater();
     if (reply->error() == QNetworkReply::NoError) {
         // save history
         QString imageName = m_imageURL.toString();
         int lastSlash = imageName.lastIndexOf("/");
         if (lastSlash >= 0) {
-            imageName = imageName.mid(lastSlash);
+            imageName = imageName.mid(lastSlash + 1);
         }
+        imageName = m_deleteToken + "-" + imageName;
         History history;
         history.save(m_pixmap, imageName);
 
@@ -190,6 +197,20 @@ void ImgS3Uploader::handleReply(QNetworkReply *reply) {
             close();
         } else {
             onUploadOk();
+        }
+    } else {
+        QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
+        m_infoLabel->setText(reply->errorString());
+    }
+    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+}
+
+void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
+    m_spinner->deleteLater();
+    if (reply->error() == QNetworkReply::NoError) {
+        if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
+            SystemNotification().sendMessage(QObject::tr("File is deleted from S3"));
+            close();
         }
     } else {
         QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
@@ -210,12 +231,12 @@ void ImgS3Uploader::startDrag() {
     dragHandler->exec();
 }
 
-void ImgS3Uploader::handleCredsReply(QNetworkReply *reply){
+void ImgS3Uploader::handleReplyGetCreds(QNetworkReply *reply){
     if (reply->error() == QNetworkReply::NoError) {
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         uploadToS3(response);
     } else {
-        if(m_s3CredsUrl.length() == 0){
+        if(m_s3Settings.credsUrl().length() == 0){
             m_infoLabel->setText("S3 Creds URL is not found in your configuration file");
         }
         else {
@@ -234,6 +255,7 @@ void ImgS3Uploader::uploadToS3(QJsonDocument &response) {
     QString resultURL = json["resultURL"].toString();
     QJsonObject formData = json["formData"].toObject();
     QString url = formData["url"].toString();
+    m_deleteToken = json["deleteToken"].toString();
 
     QJsonObject fields = formData["fields"].toObject();
     foreach (auto key, fields.keys()) {
@@ -261,17 +283,26 @@ void ImgS3Uploader::uploadToS3(QJsonDocument &response) {
 
     QUrl qUrl(url);
     QNetworkRequest request(qUrl);
-    m_NetworkAM->post(request, multiPart);
+    m_NetworkAMUpload->post(request, multiPart);
+}
+
+void ImgS3Uploader::deleteResource(const QString &fileName, const QString &deleteToken) {
+    QNetworkRequest request;
+    request.setUrl(m_s3Settings.credsUrl().toUtf8() + fileName);
+    request.setRawHeader("X-API-Key", m_s3Settings.xApiKey().toLatin1());
+    request.setRawHeader("Authorization", "Bearer " + deleteToken.toLatin1());
+    m_NetworkAMRemove->deleteResource(request);
 }
 
 void ImgS3Uploader::upload() {
     // get creads
-    QUrl creds(m_s3CredsUrl);
+    QUrl creds(m_s3Settings.credsUrl());
     QNetworkRequest requestCreds(creds);
-    if(m_s3XApiKey.length() > 0) {
-        requestCreds.setRawHeader(QByteArray("X-API-Key"), QByteArray(m_s3XApiKey.toLocal8Bit()));
+    if(m_s3Settings.xApiKey().length() > 0) {
+        requestCreds.setRawHeader(QByteArray("X-API-Key"), QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
     }
-    m_NetworkAMCreds->get(requestCreds);
+    m_deleteToken.clear();
+    m_NetworkAMGetCreds->get(requestCreds);
 }
 
 void ImgS3Uploader::onUploadOk() {
