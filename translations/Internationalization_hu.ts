@@ -408,10 +408,6 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <source>Upload to ImgS3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uploading Image</source>
         <translation type="unfinished">Kép felötlése</translation>
     </message>
@@ -438,6 +434,18 @@ Press Space to open the side panel.</source>
     <message>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting Image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -677,6 +685,10 @@ Press Space to open the side panel.</source>
     <message>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>File is deleted from S3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
