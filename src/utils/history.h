@@ -8,6 +8,16 @@
 #include <QPixmap>
 
 
+#define SCREENSHOT_STORAGE_TYPE_LOCAL ""
+#define SCREENSHOT_STORAGE_TYPE_S3 "s3"
+#define SCREENSHOT_STORAGE_TYPE_IMGUR "imgur"
+
+struct HISTORY_FILE_NAME {
+    QString file;
+    QString token;
+    QString type;
+};
+
 class History
 {
 public:
@@ -17,9 +27,16 @@ public:
     const QList<QString> &history();
     const QString &path();
 
+    const HISTORY_FILE_NAME &unpackFileName(const QString &);
+    const QString &packFileName(const QString &, const QString &, const QString &);
+
 private:
     QString m_historyPath;
     QList<QString> m_thumbs;
+
+    // temporary variables
+    QString m_packedFileName;
+    HISTORY_FILE_NAME m_unpackedFileName;
 };
 
 #endif // HISTORY_H

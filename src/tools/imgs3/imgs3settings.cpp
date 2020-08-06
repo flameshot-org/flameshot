@@ -19,7 +19,6 @@ ImgS3Settings::ImgS3Settings()
     m_url = m_url + (m_url.length() > 0 && m_url.at(m_url.length() - 1) == "/" ? "" : "/");
 
     settings->endGroup();
-
 }
 
 const QString &ImgS3Settings::credsUrl() {

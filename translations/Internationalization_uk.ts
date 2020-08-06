@@ -465,17 +465,17 @@ Press Space to open the side panel.</source>
         <translation>Історія скріншотів пуста</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="117"/>
+        <location filename="../src/widgets/historywidget.cpp" line="112"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="121"/>
+        <location filename="../src/widgets/historywidget.cpp" line="116"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="127"/>
+        <location filename="../src/widgets/historywidget.cpp" line="122"/>
         <source>Open in browser</source>
         <translation>Відкрити у браузері</translation>
     </message>
