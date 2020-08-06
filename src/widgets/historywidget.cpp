@@ -159,10 +159,14 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
 void HistoryWidget::removeItem(QLayout *pl, const QString &fullFileName, const QString& s3FileName, const QString& deleteToken) {
     if (deleteToken.length() > 0) {
         ImgS3Uploader *uploader = new ImgS3Uploader();
+        hide();
         uploader->show();
         uploader->deleteResource(s3FileName, deleteToken);
         connect(uploader, &QWidget::destroyed, this, [=](){
-            removeLocalItem(pl, fullFileName);
+            if(uploader->success()) {
+                removeLocalItem(pl, fullFileName);
+            }
+            show();
         });
     }
     else {
@@ -175,11 +179,10 @@ void HistoryWidget::removeLocalItem(QLayout *pl, const QString &fullFileName) {
     file.remove();
 
     // remove current row or refresh list
-    while(pl->count() > 0)
-    {
-      QLayoutItem *item = pl->takeAt(0);
-      delete item->widget();
-      delete item;
+    while(pl->count() > 0) {
+        QLayoutItem *item = pl->takeAt(0);
+        delete item->widget();
+        delete item;
     }
     m_pVBox->removeItem(pl);
     delete pl;
