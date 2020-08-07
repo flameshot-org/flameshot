@@ -56,11 +56,15 @@ ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
 ImgS3Uploader::ImgS3Uploader(QWidget *parent) :
     QWidget(parent)
 {
-    init(tr("Delete image from S3"), tr("Deleting Image"));
+    init(tr("Delete image from S3"), tr("Deleting image..."));
 }
 
 void ImgS3Uploader::init(const QString &title, const QString &label) {
     m_proxy = nullptr;
+
+    m_imageLabel = nullptr;
+    m_spinner = nullptr;
+
     m_success = false;
     setWindowTitle(title);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
@@ -70,6 +74,7 @@ void ImgS3Uploader::init(const QString &title, const QString &label) {
     m_spinner->start();
 
     m_infoLabel = new QLabel(label);
+    m_infoLabel->setAlignment(Qt::AlignCenter);
 
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
@@ -179,7 +184,8 @@ void ImgS3Uploader::initNetwork() {
 
 
 void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
-    m_spinner->deleteLater();
+    hideSpinner();
+    m_s3ImageName.clear();
     if (reply->error() == QNetworkReply::NoError) {
         // save history
         QString imageName = m_imageURL.toString();
@@ -187,6 +193,7 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
         if (lastSlash >= 0) {
             imageName = imageName.mid(lastSlash + 1);
         }
+        m_s3ImageName = imageName;
         History history;
         imageName = history.packFileName(SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, imageName);
         history.save(m_pixmap, imageName);
@@ -202,19 +209,30 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
         }
     } else {
         QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
-        m_infoLabel->setText(reply->errorString());
+        setInfoLabelText(reply->errorString());
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
 
 void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
-    m_spinner->deleteLater();
     if (reply->error() == QNetworkReply::NoError) {
         m_success = true;
+
+        // remove local file
+        History history;
+        QString packedFileName = history.packFileName(SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, m_s3ImageName);
+        QString fullFileName = history.path() + packedFileName;
+
+        QFile file(fullFileName);
+        if (file.exists()) {
+            file.remove();
+        }
+        m_deleteToken.clear();
+        m_s3ImageName.clear();
         close();
     } else {
         QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
-        m_infoLabel->setText(reply->errorString());
+        setInfoLabelText(reply->errorString());
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
@@ -237,10 +255,10 @@ void ImgS3Uploader::handleReplyGetCreds(QNetworkReply *reply){
         uploadToS3(response);
     } else {
         if(m_s3Settings.credsUrl().length() == 0){
-            m_infoLabel->setText("S3 Creds URL is not found in your configuration file");
+            setInfoLabelText(tr("S3 Creds URL is not found in your configuration file"));
         }
         else {
-            m_infoLabel->setText(reply->errorString());
+            setInfoLabelText(reply->errorString());
         }
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
@@ -288,6 +306,8 @@ void ImgS3Uploader::uploadToS3(QJsonDocument &response) {
 
 void ImgS3Uploader::deleteResource(const QString &fileName, const QString &deleteToken) {
     QNetworkRequest request;
+    m_s3ImageName = fileName;
+    m_deleteToken = deleteToken;
     request.setUrl(m_s3Settings.credsUrl().toUtf8() + fileName);
     request.setRawHeader("X-API-Key", m_s3Settings.xApiKey().toLatin1());
     request.setRawHeader("Authorization", "Bearer " + deleteToken.toLatin1());
@@ -295,42 +315,50 @@ void ImgS3Uploader::deleteResource(const QString &fileName, const QString &delet
 }
 
 void ImgS3Uploader::upload() {
+    m_deleteToken.clear();
+    m_s3ImageName.clear();
+
     // get creads
     QUrl creds(m_s3Settings.credsUrl());
     QNetworkRequest requestCreds(creds);
     if(m_s3Settings.xApiKey().length() > 0) {
         requestCreds.setRawHeader(QByteArray("X-API-Key"), QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
     }
-    m_deleteToken.clear();
     m_NetworkAMGetCreds->get(requestCreds);
 }
 
 void ImgS3Uploader::onUploadOk() {
-    m_infoLabel->deleteLater();
+    hideSpinner();
 
     m_notification = new NotificationWidget();
     m_vLayout->addWidget(m_notification);
 
-    ImageLabel *imageLabel = new ImageLabel();
-    imageLabel->setScreenshot(m_pixmap);
-    imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    connect(imageLabel, &ImageLabel::dragInitiated, this, &ImgS3Uploader::startDrag);
-    m_vLayout->addWidget(imageLabel);
+    if(nullptr == m_imageLabel) {
+        m_imageLabel = new ImageLabel();
+        m_imageLabel->setScreenshot(m_pixmap);
+        m_imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        connect(m_imageLabel, &ImageLabel::dragInitiated, this, &ImgS3Uploader::startDrag);
+        m_vLayout->addWidget(m_imageLabel);
+    }
 
     m_hLayout = new QHBoxLayout();
     m_vLayout->addLayout(m_hLayout);
 
     m_copyUrlButton = new QPushButton(tr("Copy URL"));
     m_openUrlButton = new QPushButton(tr("Open URL"));
+    m_deleteImageOnS3 = new QPushButton(tr("Delete image"));
     m_toClipboardButton = new QPushButton(tr("Image to Clipboard."));
     m_hLayout->addWidget(m_copyUrlButton);
     m_hLayout->addWidget(m_openUrlButton);
+    m_hLayout->addWidget(m_deleteImageOnS3);
     m_hLayout->addWidget(m_toClipboardButton);
 
     connect(m_copyUrlButton, &QPushButton::clicked,
             this, &ImgS3Uploader::copyURL);
     connect(m_openUrlButton, &QPushButton::clicked,
             this, &ImgS3Uploader::openURL);
+    connect(m_deleteImageOnS3, &QPushButton::clicked,
+            this, &ImgS3Uploader::deleteImageOnS3);
     connect(m_toClipboardButton, &QPushButton::clicked,
             this, &ImgS3Uploader::copyImage);
 }
@@ -352,6 +380,29 @@ void ImgS3Uploader::copyImage() {
     m_notification->showMessage(tr("Screenshot copied to clipboard."));
 }
 
+void ImgS3Uploader::deleteImageOnS3() {
+    if(nullptr != m_imageLabel) {
+        m_imageLabel->hide();
+    }
+    m_spinner->show();
+    setInfoLabelText(tr("Deleting image..."));
+    deleteResource(m_s3ImageName, m_deleteToken);
+}
+
 bool ImgS3Uploader::success() {
     return m_success;
+}
+
+void ImgS3Uploader::hideSpinner() {
+    if(nullptr != m_spinner) {
+        m_spinner->hide();
+    }
+    if(nullptr != m_imageLabel) {
+        m_imageLabel->hide();
+    }
+}
+
+void ImgS3Uploader::setInfoLabelText(const QString &infoText) {
+    m_infoLabel->setText(infoText);
+    m_infoLabel->show();
 }

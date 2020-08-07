@@ -24,7 +24,7 @@
 HistoryWidget::HistoryWidget(QWidget *parent) : QDialog(parent)
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    setWindowTitle(tr("Screenshots history"));
+    setWindowTitle(tr("Latest Uploads"));
     setFixedSize(800, this->height());
     m_notification = new NotificationWidget();
 
@@ -129,7 +129,17 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonDelete, &QPushButton::clicked, this, [=](){
-        removeItem(phbl, fullFileName, unpackFileName.file, unpackFileName.token);
+        if (unpackFileName.token.length() > 0) {
+            removeItem(phbl, unpackFileName.file, unpackFileName.token);
+        }
+        else {
+            // for compatibility with previous versions and to be able to remove previous screenshots
+            QFile file(fullFileName);
+            if (file.exists()) {
+                file.remove();
+            }
+            removeLocalItem(phbl);
+        }
     });
 
     // layout
@@ -149,28 +159,20 @@ void HistoryWidget::addLine(const QString &path, const QString& fileName) {
     m_pVBox->addLayout(phbl);
 }
 
-void HistoryWidget::removeItem(QLayout *pl, const QString &fullFileName, const QString& s3FileName, const QString& deleteToken) {
-    if (deleteToken.length() > 0) {
-        ImgS3Uploader *uploader = new ImgS3Uploader();
-        hide();
-        uploader->show();
-        uploader->deleteResource(s3FileName, deleteToken);
-        connect(uploader, &QWidget::destroyed, this, [=](){
-            if(uploader->success()) {
-                removeLocalItem(pl, fullFileName);
-            }
-            show();
-        });
-    }
-    else {
-        removeLocalItem(pl, fullFileName);
-    }
+void HistoryWidget::removeItem(QLayout *pl, const QString& s3FileName, const QString& deleteToken) {
+    ImgS3Uploader *uploader = new ImgS3Uploader();
+    hide();
+    uploader->show();
+    uploader->deleteResource(s3FileName, deleteToken);
+    connect(uploader, &QWidget::destroyed, this, [=](){
+        if(uploader->success()) {
+            removeLocalItem(pl);
+        }
+        show();
+    });
 }
 
-void HistoryWidget::removeLocalItem(QLayout *pl, const QString &fullFileName) {
-    QFile file(fullFileName);
-    file.remove();
-
+void HistoryWidget::removeLocalItem(QLayout *pl) {
     // remove current row or refresh list
     while(pl->count() > 0) {
         QLayoutItem *item = pl->takeAt(0);

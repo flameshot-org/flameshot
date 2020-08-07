@@ -34,6 +34,7 @@ class QPushButton;
 class QUrl;
 class NotificationWidget;
 class ConfigEnterprise;
+class ImageLabel;
 
 class ImgS3Uploader : public QWidget {
     Q_OBJECT
@@ -53,6 +54,7 @@ private slots:
     void openURL();
     void copyURL();
     void copyImage();
+    void deleteImageOnS3();
 
 private:
     void init(const QString &title, const QString &label);
@@ -61,12 +63,17 @@ private:
 
     void onUploadOk();
 
+    void hideSpinner();
+    void setInfoLabelText(const QString &);
+
+
 // class members
 private:
     bool m_success;
     ConfigEnterprise *m_configEnterprise;
     ImgS3Settings m_s3Settings;
-    QString m_deleteToken;
+
+    ImageLabel *m_imageLabel;
 
     QString m_hostName;
     QPixmap m_pixmap;
@@ -84,7 +91,11 @@ private:
     QPushButton *m_openUrlButton;
     QPushButton *m_copyUrlButton;
     QPushButton *m_toClipboardButton;
+    QPushButton *m_deleteImageOnS3;
     QUrl m_imageURL;
     NotificationWidget *m_notification;
 
+    // Temporary variables
+    QString m_deleteToken;
+    QString m_s3ImageName;
 };

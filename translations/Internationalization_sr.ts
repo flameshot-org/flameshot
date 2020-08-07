@@ -444,26 +444,26 @@ Press Space to open the side panel.</source>
     <name>HistoryWidget</name>
     <message>
         <location filename="../src/widgets/historywidget.cpp" line="27"/>
-        <source>Screenshots history</source>
+        <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="66"/>
+        <location filename="../src/widgets/historywidget.cpp" line="64"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="112"/>
+        <location filename="../src/widgets/historywidget.cpp" line="110"/>
         <source>Copy URL</source>
         <translation type="unfinished">Запамти интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="116"/>
+        <location filename="../src/widgets/historywidget.cpp" line="114"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="122"/>
+        <location filename="../src/widgets/historywidget.cpp" line="120"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -486,37 +486,49 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
-        <source>Deleting Image</source>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="258"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="326"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Copy URL</source>
         <translation type="unfinished">Запамти интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="348"/>
         <source>Open URL</source>
         <translation type="unfinished">Посети интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="328"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="349"/>
+        <source>Delete image</source>
+        <translation type="unfinished">Избриши слику</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Сачувај у привремену меморију.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="344"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="369"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Нисам успео да посетим интернет адресу.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="205"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="375"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="355"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="388"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="380"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Слика је сачувана у привременој меморији.</translation>
     </message>
@@ -813,15 +825,9 @@ Press Space to open the side panel.</source>
         <translation>Нисам успео са сачувам</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="197"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="215"/>
-        <source>File is deleted from S3</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

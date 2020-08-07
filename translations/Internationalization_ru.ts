@@ -451,31 +451,35 @@ Press Space to open the side panel.</source>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="27"/>
         <source>Screenshots history</source>
-        <translation>История скриншотов</translation>
+        <translation type="vanished">История скриншотов</translation>
     </message>
     <message>
         <source>Screenshots history is epmty</source>
         <translation type="vanished">История скриншотов пустая</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="66"/>
+        <location filename="../src/widgets/historywidget.cpp" line="27"/>
+        <source>Latest Uploads</source>
+        <translation>Последние загрузки</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="64"/>
         <source>Screenshots history is empty</source>
         <translation>История скриншотов пуста</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="112"/>
+        <location filename="../src/widgets/historywidget.cpp" line="110"/>
         <source>Copy URL</source>
         <translation>Скопировать URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="116"/>
+        <location filename="../src/widgets/historywidget.cpp" line="114"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="122"/>
+        <location filename="../src/widgets/historywidget.cpp" line="120"/>
         <source>Open in browser</source>
         <translation>Открыть в браузере</translation>
     </message>
@@ -502,41 +506,53 @@ Press Space to open the side panel.</source>
         <translation>Удалить скриншот с S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
         <source>Deleting Image</source>
-        <translation>Удалить скриншот</translation>
+        <translation type="vanished">Удалить скриншот</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="326"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="258"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation>Параметры доступов к S3 не найдены в конфигурационном файле</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Copy URL</source>
         <translation>Скопировать URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="327"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="348"/>
         <source>Open URL</source>
         <translation>Открыть URL</translation>
     </message>
     <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="349"/>
         <source>Delete image</source>
-        <translation type="vanished">Удалить изображение</translation>
+        <translation>Удалить изображение</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="328"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
         <source>Image to Clipboard.</source>
         <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="344"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="369"/>
         <source>Unable to open the URL.</source>
         <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="205"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="375"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="355"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="388"/>
+        <source>Deleting image...</source>
+        <translation>Удаление скриншота...</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="380"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
@@ -837,15 +853,13 @@ Press Space to open the side panel.</source>
         <translation>Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="197"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="215"/>
         <source>File is deleted from S3</source>
-        <translation>Файл удален с S3</translation>
+        <translation type="vanished">Файл удален с S3</translation>
     </message>
 </context>
 <context>
