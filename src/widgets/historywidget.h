@@ -25,8 +25,8 @@ signals:
 private:
     void loadHistory();
     void addLine(const QString &, const QString &);
-    void removeItem(QLayout *, const QString &, const QString &, const QString &);
-    void removeLocalItem(QLayout *, const QString &);
+    void removeItem(QLayout *pl, const QString& s3FileName, const QString& deleteToken);
+    void removeLocalItem(QLayout *pl);
     void setEmptyMessage();
 
 private:
