@@ -190,12 +190,12 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
         History history;
         imageName = history.packFileName(SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, imageName);
         history.save(m_pixmap, imageName);
+        m_success = true;
 
         // Copy url to clipboard if required
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(m_imageURL.toString());
             SystemNotification().sendMessage(tr("URL copied to clipboard."));
-            m_success = true;
             close();
         } else {
             onUploadOk();
@@ -210,11 +210,8 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
 void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
     m_spinner->deleteLater();
     if (reply->error() == QNetworkReply::NoError) {
-        if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
-            m_success = true;
-            SystemNotification().sendMessage(tr("File is deleted from S3"));
-            close();
-        }
+        m_success = true;
+        close();
     } else {
         QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
         m_infoLabel->setText(reply->errorString());
