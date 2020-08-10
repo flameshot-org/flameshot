@@ -8,7 +8,7 @@ win32:LIBS += -luser32 -lshell32
 
 LIBS += -Llibeay32 -Lssleay32
 
-BASE_VERSION = 0.7.6
+BASE_VERSION = 0.7.7
 TAG_VERSION = "$$system(git --git-dir $$PWD/.git rev-parse --short HEAD)"
 isEmpty(TAG_VERSION){
     DEFINES += APP_VERSION=\\\"$$BASE_VERSION\\\"
