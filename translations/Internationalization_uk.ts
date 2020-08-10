@@ -451,31 +451,35 @@ Press Space to open the side panel.</source>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="26"/>
         <source>Screenshots history</source>
-        <translation>Історія скріншотів</translation>
+        <translation type="vanished">Історія скріншотів</translation>
     </message>
     <message>
         <source>Screenshots history is epmty</source>
         <translation type="vanished">Історія скріншотів пуста</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="57"/>
+        <location filename="../src/widgets/historywidget.cpp" line="27"/>
+        <source>Latest Uploads</source>
+        <translation>Останні завантаження</translation>
+    </message>
+    <message>
+        <location filename="../src/widgets/historywidget.cpp" line="64"/>
         <source>Screenshots history is empty</source>
         <translation>Історія скріншотів пуста</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="98"/>
+        <location filename="../src/widgets/historywidget.cpp" line="110"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="102"/>
+        <location filename="../src/widgets/historywidget.cpp" line="114"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="108"/>
+        <location filename="../src/widgets/historywidget.cpp" line="120"/>
         <source>Open in browser</source>
         <translation>Відкрити у браузері</translation>
     </message>
@@ -483,46 +487,72 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
         <source>Upload to ImgS3</source>
-        <translation>Вивантажити на S3</translation>
+        <translation type="vanished">Вивантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
         <source>Uploading Image</source>
         <translation>Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <source>Upload image to S3</source>
+        <translation>Завантажити на S3</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <source>Delete image from S3</source>
+        <translation>Видалити скріншот з S3</translation>
+    </message>
+    <message>
+        <source>Deleting Image</source>
+        <translation type="vanished">Видалити скіншот</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="258"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation>Параметри доступів до S3 не знайдені у конфігураціонному файлі</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="348"/>
         <source>Open URL</source>
         <translation>Відкрити URL</translation>
     </message>
     <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="349"/>
         <source>Delete image</source>
-        <translation type="vanished">Видалити зображення</translation>
+        <translation>Видалити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
         <source>Image to Clipboard.</source>
         <translation>Зображення до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="369"/>
         <source>Unable to open the URL.</source>
         <translation>Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="205"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="375"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="388"/>
+        <source>Deleting image...</source>
+        <translation>Видалення скріншоту...</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="380"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Знімок скопійовано до буферу обміну.</translation>
     </message>
@@ -823,10 +853,13 @@ Press Space to open the side panel.</source>
         <translation>Не вдалось зберегти</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
+    </message>
+    <message>
+        <source>File is deleted from S3</source>
+        <translation type="vanished">Файл видален з S3</translation>
     </message>
 </context>
 <context>

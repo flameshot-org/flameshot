@@ -443,27 +443,27 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="26"/>
-        <source>Screenshots history</source>
+        <location filename="../src/widgets/historywidget.cpp" line="27"/>
+        <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="57"/>
+        <location filename="../src/widgets/historywidget.cpp" line="64"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="98"/>
+        <location filename="../src/widgets/historywidget.cpp" line="110"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="102"/>
+        <location filename="../src/widgets/historywidget.cpp" line="114"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="108"/>
+        <location filename="../src/widgets/historywidget.cpp" line="120"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -472,41 +472,63 @@ Pressione espaço abrir o painel lateral.</translation>
     <name>ImgS3Uploader</name>
     <message>
         <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
-        <source>Upload to ImgS3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
         <source>Uploading Image</source>
         <translation type="unfinished">Upando Imagem</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="318"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="258"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="319"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="348"/>
         <source>Open URL</source>
         <translation type="unfinished">Abrir URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="320"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="349"/>
+        <source>Delete image</source>
+        <translation type="unfinished">Deletar imagem</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Imagem no Clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="336"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="369"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Não foi possível abrir a URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="342"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="205"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="375"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="388"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="380"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Screenshot copiada para o clipboard.</translation>
     </message>
@@ -803,7 +825,6 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Não foi possível escrever em</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="160"/>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
