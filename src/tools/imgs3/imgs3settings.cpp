@@ -11,12 +11,12 @@ ImgS3Settings::ImgS3Settings()
     settings->beginGroup("S3");
 
     m_credsUrl = settings->value("S3_CREDS_URL").toString();
-    m_credsUrl = m_credsUrl + (m_credsUrl.length() > 0 && m_credsUrl.at(m_credsUrl.length() - 1) == "/" ? "" : "/") + S3_API_IMG_PATH;
+    m_credsUrl = m_credsUrl + ((m_credsUrl.length() > 0 && m_credsUrl[m_credsUrl.length() - 1] == '/') ? "" : "/") + S3_API_IMG_PATH;
 
     m_xApiKey = settings->value("S3_X_API_KEY").toString();
 
     m_url = settings->value("S3_URL").toString();
-    m_url = m_url + (m_url.length() > 0 && m_url.at(m_url.length() - 1) == "/" ? "" : "/");
+    m_url = m_url + ((m_url.length() > 0 && m_url[m_url.length() - 1] == '/') ? "" : "/");
 
     settings->endGroup();
 }
