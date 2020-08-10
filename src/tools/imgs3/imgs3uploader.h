@@ -17,6 +17,9 @@
 
 #pragma once
 
+#define S3_API_IMG_PATH "v2/image/"
+
+#include "imgs3settings.h"
 #include <QWidget>
 #include <QUrl>
 
@@ -31,35 +34,53 @@ class QPushButton;
 class QUrl;
 class NotificationWidget;
 class ConfigEnterprise;
+class ImageLabel;
 
 class ImgS3Uploader : public QWidget {
     Q_OBJECT
 public:
     explicit ImgS3Uploader(const QPixmap &capture, QWidget *parent = nullptr);
+    explicit ImgS3Uploader(QWidget *parent = nullptr);
+    void upload();
+    void deleteResource(const QString &, const QString &);
+    bool success();
 
 private slots:
-    void handleReply(QNetworkReply *reply);
-    void handleCredsReply(QNetworkReply *reply);
+    void handleReplyUpload(QNetworkReply *reply);
+    void handleReplyGetCreds(QNetworkReply *reply);
+    void handleReplyDeleteResource(QNetworkReply *reply);
     void startDrag();
 
     void openURL();
     void copyURL();
     void copyImage();
+    void deleteImageOnS3();
 
 private:
+    void init(const QString &title, const QString &label);
     void uploadToS3(QJsonDocument &response);
     void initNetwork();
 
+    void onUploadOk();
+
+    void hideSpinner();
+    void setInfoLabelText(const QString &);
+
+
+// class members
 private:
+    bool m_success;
     ConfigEnterprise *m_configEnterprise;
-    QString m_s3CredsUrl;
-    QString m_s3XApiKey;
+    ImgS3Settings m_s3Settings;
+
+    ImageLabel *m_imageLabel;
 
     QString m_hostName;
     QPixmap m_pixmap;
     QNetworkProxy *m_proxy;
-    QNetworkAccessManager *m_NetworkAM;
-    QNetworkAccessManager *m_NetworkAMCreds;
+    QNetworkAccessManager *m_NetworkAMUpload;
+    QNetworkAccessManager *m_NetworkAMGetCreds;
+    QNetworkAccessManager *m_NetworkAMRemove;
 
     QVBoxLayout *m_vLayout;
     QHBoxLayout *m_hLayout;
@@ -70,9 +91,11 @@ private:
     QPushButton *m_openUrlButton;
     QPushButton *m_copyUrlButton;
     QPushButton *m_toClipboardButton;
+    QPushButton *m_deleteImageOnS3;
     QUrl m_imageURL;
     NotificationWidget *m_notification;
 
-    void upload();
-    void onUploadOk();
+    // Temporary variables
+    QString m_deleteToken;
+    QString m_s3ImageName;
 };

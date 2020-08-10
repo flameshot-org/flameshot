@@ -47,7 +47,9 @@ QString ImgS3UploaderTool::description() const {
 }
 
 QWidget *ImgS3UploaderTool::widget() {
-    return new ImgS3Uploader(capture);
+    ImgS3Uploader *p = new ImgS3Uploader(capture);
+    p->upload();
+    return p;
 }
 
 void ImgS3UploaderTool::setCapture(const QPixmap &pixmap) {

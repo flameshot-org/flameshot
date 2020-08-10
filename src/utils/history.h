@@ -1,15 +1,22 @@
 #ifndef HISTORY_H
 #define HISTORY_H
 
-#define HISTORY_MAX_SIZE 10
-#define HISTORY_THUNB_SCALE 1.5
-#define HISTORY_THUNB_WIDTH 160*HISTORY_THUNB_SCALE
-#define HISTORY_THUNB_HEIGH 90*HISTORY_THUNB_SCALE
+#define HISTORY_MAX_SIZE 25
 
 #include <QList>
 #include <QString>
 #include <QPixmap>
 
+
+#define SCREENSHOT_STORAGE_TYPE_LOCAL ""
+#define SCREENSHOT_STORAGE_TYPE_S3 "s3"
+#define SCREENSHOT_STORAGE_TYPE_IMGUR "imgur"
+
+struct HISTORY_FILE_NAME {
+    QString file;
+    QString token;
+    QString type;
+};
 
 class History
 {
@@ -20,9 +27,16 @@ public:
     const QList<QString> &history();
     const QString &path();
 
+    const HISTORY_FILE_NAME &unpackFileName(const QString &);
+    const QString &packFileName(const QString &, const QString &, const QString &);
+
 private:
     QString m_historyPath;
     QList<QString> m_thumbs;
+
+    // temporary variables
+    QString m_packedFileName;
+    HISTORY_FILE_NAME m_unpackedFileName;
 };
 
 #endif // HISTORY_H
