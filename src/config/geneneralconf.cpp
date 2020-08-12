@@ -218,7 +218,7 @@ void GeneneralConf::initAutostart() {
 }
 
 void GeneneralConf::initShowStartupLaunchMessage() {
-    m_showStartupLaunchMessage = new QCheckBox(tr("Show startup message on launch"), this);
+    m_showStartupLaunchMessage = new QCheckBox(tr("Show welcome message on launch"), this);
     ConfigHandler config;
     bool checked = config.showStartupLaunchMessage();
     m_showStartupLaunchMessage->setChecked(checked);
