@@ -829,6 +829,11 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL skopírovaná do schránky.</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

@@ -830,6 +830,11 @@ Press Space to open the side panel.</source>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">复制链接到剪贴板。</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

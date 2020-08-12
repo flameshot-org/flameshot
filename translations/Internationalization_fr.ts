@@ -829,6 +829,11 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiée dans le Presse-papier.</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

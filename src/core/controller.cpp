@@ -226,6 +226,12 @@ void Controller::enableTrayIcon() {
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
     m_trayIcon->show();
+    if (!ConfigHandler().startupLaunchValue()) {
+        m_trayIcon->showMessage("Flameshot",
+                                QObject::tr("Application is started successfully"),
+                                QSystemTrayIcon::Information,
+                                3000);
+    }
 }
 
 void Controller::disableTrayIcon() {

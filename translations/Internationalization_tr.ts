@@ -829,6 +829,11 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL panoya kopyalandı.</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

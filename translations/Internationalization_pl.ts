@@ -828,6 +828,11 @@ Spacja, aby pokazać panel boczny.</translation>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL skopiowany do schowka.</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
