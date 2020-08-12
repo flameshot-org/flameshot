@@ -381,6 +381,10 @@ Press Space to open the side panel.</source>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show startup message on launch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>

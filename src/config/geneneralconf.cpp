@@ -36,6 +36,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initShowStartupLaunchMessage();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
 
@@ -76,6 +77,10 @@ void GeneneralConf::showTrayIconChanged(bool checked) {
 
 void GeneneralConf::autostartChanged(bool checked) {
     ConfigHandler().setStartupLaunch(checked);
+}
+
+void GeneneralConf::showStartupLaunchMessageChanged(bool checked) {
+    ConfigHandler().setShowStartupLaunchMessage(checked);
 }
 
 void GeneneralConf::closeAfterCaptureChanged(bool checked) {
@@ -201,8 +206,7 @@ void GeneneralConf::initConfingButtons() {
 }
 
 void GeneneralConf::initAutostart() {
-    m_autostart =
-            new QCheckBox(tr("Launch at startup"), this);
+    m_autostart = new QCheckBox(tr("Launch at startup"), this);
     ConfigHandler config;
     bool checked = config.startupLaunchValue();
     m_autostart->setChecked(checked);
@@ -211,6 +215,19 @@ void GeneneralConf::initAutostart() {
 
     connect(m_autostart, &QCheckBox::clicked, this,
             &GeneneralConf::autostartChanged);
+}
+
+void GeneneralConf::initShowStartupLaunchMessage() {
+    m_showStartupLaunchMessage = new QCheckBox(tr("Show startup message on launch"), this);
+    ConfigHandler config;
+    bool checked = config.showStartupLaunchMessage();
+    m_showStartupLaunchMessage->setChecked(checked);
+    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
+    m_layout->addWidget(m_showStartupLaunchMessage);
+
+    connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowStartupLaunchMessage(checked);
+    });
 }
 
 void GeneneralConf::initCloseAfterCapture() {

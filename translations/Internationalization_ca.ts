@@ -327,112 +327,118 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
+        <location filename="../src/config/geneneralconf.cpp" line="145"/>
         <source>Show help message</source>
         <translation>Mostra el missatge d&apos;ajuda</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Mostra el missatge d&apos;ajuda en iniciar el mode de captura.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="154"/>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show desktop notifications</source>
         <translation>Mostra les notificacions d&apos;escriptori</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="167"/>
+        <location filename="../src/config/geneneralconf.cpp" line="172"/>
         <source>Show tray icon</source>
         <translation>Mostra la icona en la barra de tasques</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="171"/>
+        <location filename="../src/config/geneneralconf.cpp" line="176"/>
         <source>Show the systemtray icon</source>
         <translation>Mostra la icona en la barra de tasques</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="86"/>
-        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../src/config/geneneralconf.cpp" line="91"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
         <source>Unable to read file.</source>
         <translation>Impossible llegir el fitxer.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Unable to write file.</source>
         <translation>Impossible escriure al fitxer.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="114"/>
         <source>Save File</source>
         <translation>Guardar Arxiu</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="135"/>
         <source>Confirm Reset</source>
         <translation>Confirmar Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="131"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Esteu segur que voleu reiniciar la configuració?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="182"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Configuration File</source>
         <translation>Fitxer de Configuració</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="202"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="205"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch at startup</source>
         <translation>Llançament a l&apos;inici</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <location filename="../src/config/geneneralconf.cpp" line="213"/>
+        <location filename="../src/config/geneneralconf.cpp" line="225"/>
         <source>Launch Flameshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="217"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <source>Show startup message on launch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="234"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <location filename="../src/config/geneneralconf.cpp" line="238"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <location filename="../src/config/geneneralconf.cpp" line="247"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <location filename="../src/config/geneneralconf.cpp" line="250"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
