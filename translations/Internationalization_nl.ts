@@ -829,6 +829,11 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL gekopieerd naar klembord.</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

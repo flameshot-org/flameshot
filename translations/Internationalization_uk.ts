@@ -861,6 +861,11 @@ Press Space to open the side panel.</source>
         <source>File is deleted from S3</source>
         <translation type="vanished">Файл видален з S3</translation>
     </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Application is started successfully</source>
+        <translation>Запуск програми успішно виконано</translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
