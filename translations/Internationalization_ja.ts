@@ -330,112 +330,118 @@ Enter を押すと画面をキャプチャー。
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
+        <location filename="../src/config/geneneralconf.cpp" line="145"/>
         <source>Show help message</source>
         <translation>ヘルプメッセージを表示する</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>キャプチャーモード開始時にヘルプメッセージを表示する。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="154"/>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show desktop notifications</source>
         <translation>デスクトップの通知を表示する</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="167"/>
+        <location filename="../src/config/geneneralconf.cpp" line="172"/>
         <source>Show tray icon</source>
         <translation>トレイアイコンを表示する</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="171"/>
+        <location filename="../src/config/geneneralconf.cpp" line="176"/>
         <source>Show the systemtray icon</source>
         <translation>システムトレイアイコンを表示する</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="86"/>
-        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../src/config/geneneralconf.cpp" line="91"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Import</source>
         <translation>インポート</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
         <source>Unable to read file.</source>
         <translation>ファイルを読み込めません。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Unable to write file.</source>
         <translation>ファイルに書き込めません。</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="114"/>
         <source>Save File</source>
         <translation>ファイルを保存</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="135"/>
         <source>Confirm Reset</source>
         <translation>リセットの確認</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="131"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>設定をリセットしてもよろしいですか?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="182"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Configuration File</source>
         <translation>設定ファイル</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="202"/>
         <source>Reset</source>
         <translation>リセット</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="205"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch at startup</source>
         <translation>スタートアップ時に起動する</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <location filename="../src/config/geneneralconf.cpp" line="213"/>
+        <location filename="../src/config/geneneralconf.cpp" line="225"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot を起動する</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="217"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <source>Show startup message on launch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="234"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <location filename="../src/config/geneneralconf.cpp" line="238"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <location filename="../src/config/geneneralconf.cpp" line="247"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <location filename="../src/config/geneneralconf.cpp" line="250"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
