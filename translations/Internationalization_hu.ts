@@ -382,7 +382,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show startup message on launch</source>
+        <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -699,7 +699,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
     <message>
-        <source>Application is started successfully</source>
+        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -430,8 +430,12 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <source>Show welcome message on launch</source>
+        <translation>Показывать приветствие при старте</translation>
+    </message>
+    <message>
         <source>Show startup message on launch</source>
-        <translation>Показывать сообщение о запуске при старте</translation>
+        <translation type="vanished">Показывать сообщение о запуске при старте</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="234"/>
@@ -868,9 +872,13 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Файл удален с S3</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="231"/>
         <source>Application is started successfully</source>
-        <translation>Приложение успешно запущено</translation>
+        <translation type="vanished">Приложение успешно запущено</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
+        <translation>Привет, я здесь! Кликните по иконке в трэе для получения скриншота или правой кнопкой мышки для просмотра опций.</translation>
     </message>
 </context>
 <context>
