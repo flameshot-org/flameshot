@@ -806,11 +806,11 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Erro tentando salvar como </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="77"/>
-        <location filename="../src/main.cpp" line="227"/>
-        <location filename="../src/main.cpp" line="376"/>
-        <location filename="../src/main.cpp" line="400"/>
-        <location filename="../src/main.cpp" line="429"/>
+        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="229"/>
+        <location filename="../src/main.cpp" line="378"/>
+        <location filename="../src/main.cpp" line="402"/>
+        <location filename="../src/main.cpp" line="431"/>
         <source>Unable to connect via DBus</source>
         <translation>Não foi possível conectar via DBus</translation>
     </message>
@@ -828,6 +828,12 @@ Pressione espaço abrir o painel lateral.</translation>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
+    </message>
+    <message>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="427"/>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
