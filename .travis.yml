@@ -3,10 +3,14 @@ sudo: required
 
 language: cpp
 
+addons:
+  artifacts: true
+
 branches:
   only:
     - master
     - master_nc
+    - bugfix/RND-467-screenshot-ubuntu-packages-are-broken-18.04-20.04
 
 cache:
     directories:
@@ -84,9 +88,9 @@ script:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_script.sh; fi
 # - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then source .travis/osx_script.sh; fi
 
-after_success:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_after_success.sh; fi
-  - echo "Download URL is $TEMP_DOWNLOAD_URL ."
+#after_success:
+#  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_after_success.sh; fi
+#  - echo "Download URL is ${TEMP_DOWNLOAD_URL} "
 
 # deploy:
 #    # Deploy packages to Github Release
