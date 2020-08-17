@@ -338,122 +338,112 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="91"/>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="86"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Import</source>
         <translation>Импорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
         <source>Unable to read file.</source>
         <translation>Не удалось прочитать файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Unable to write file.</source>
         <translation>Не удалось записать файл.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="114"/>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="135"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Confirm Reset</source>
         <translation>Подтвердить сброс</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="131"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Вы действительно хотите сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="145"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show help message</source>
         <translation>Показывать справочное сообщение</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="149"/>
+        <location filename="../src/config/geneneralconf.cpp" line="144"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Показывать справочное сообщение перед началом захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="159"/>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../src/config/geneneralconf.cpp" line="158"/>
         <source>Show desktop notifications</source>
         <translation>Показывать уведомления</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="172"/>
+        <location filename="../src/config/geneneralconf.cpp" line="167"/>
         <source>Show tray icon</source>
         <translation>Показывать значок в трее</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="176"/>
+        <location filename="../src/config/geneneralconf.cpp" line="171"/>
         <source>Show the systemtray icon</source>
         <translation>Показать значок в системном трее</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="182"/>
         <source>Configuration File</source>
         <translation>Файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="202"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Reset</source>
         <translation>Сброс</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <location filename="../src/config/geneneralconf.cpp" line="205"/>
         <source>Launch at startup</source>
         <translation>Запускать при старте системы</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="213"/>
-        <location filename="../src/config/geneneralconf.cpp" line="225"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch Flameshot</source>
         <translation>Запустить Flameshot</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
-        <source>Show welcome message on launch</source>
-        <translation>Показывать приветствие при старте</translation>
-    </message>
-    <message>
-        <source>Show startup message on launch</source>
-        <translation type="vanished">Показывать сообщение о запуске при старте</translation>
-    </message>
-    <message>
-        <location filename="../src/config/geneneralconf.cpp" line="234"/>
+        <location filename="../src/config/geneneralconf.cpp" line="217"/>
         <source>Close application after capture</source>
         <translation>Закрыть приложение после захвата</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="238"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
         <source>Close after taking a screenshot</source>
         <translation>Закрыть после получения скриншота</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="247"/>
+        <location filename="../src/config/geneneralconf.cpp" line="230"/>
         <source>Copy URL after upload</source>
         <translation>Скопировать URL после загрузки</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="250"/>
+        <location filename="../src/config/geneneralconf.cpp" line="233"/>
         <source>Copy URL and close window after upload</source>
         <translation>Скопировать URL после загрузки и закрыть окно</translation>
     </message>
@@ -844,11 +834,11 @@ Press Space to open the side panel.</source>
         <translation>Ошибка при попытке сохранить как </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="77"/>
-        <location filename="../src/main.cpp" line="227"/>
-        <location filename="../src/main.cpp" line="376"/>
-        <location filename="../src/main.cpp" line="400"/>
-        <location filename="../src/main.cpp" line="429"/>
+        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="229"/>
+        <location filename="../src/main.cpp" line="378"/>
+        <location filename="../src/main.cpp" line="402"/>
+        <location filename="../src/main.cpp" line="431"/>
         <source>Unable to connect via DBus</source>
         <translation>Не удалось подключиться через DBus</translation>
     </message>
@@ -872,13 +862,10 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Файл удален с S3</translation>
     </message>
     <message>
-        <source>Application is started successfully</source>
-        <translation type="vanished">Приложение успешно запущено</translation>
-    </message>
-    <message>
-        <location filename="../src/core/controller.cpp" line="231"/>
-        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет, я здесь! Кликните по иконке в трэе для получения скриншота или правой кнопкой мышки для просмотра опций.</translation>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="427"/>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation>Привет, а я уже работаю!\nВы можете найти меня в системном трэе.</translation>
     </message>
 </context>
 <context>

@@ -330,118 +330,112 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="91"/>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="86"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
         <source>Unable to read file.</source>
         <translation>Não foi possível ler o arquivo.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="101"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
         <source>Unable to write file.</source>
         <translation>Não foi possível escrever no arquivo.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="114"/>
+        <location filename="../src/config/geneneralconf.cpp" line="109"/>
         <source>Save File</source>
         <translation>Salvar Arquivo</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="135"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Confirm Reset</source>
         <translation>Confirmar Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="131"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Tem certeza que deseja resetar a configuração?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="145"/>
+        <location filename="../src/config/geneneralconf.cpp" line="140"/>
         <source>Show help message</source>
         <translation>Mostrar mensagem de ajuda</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="149"/>
+        <location filename="../src/config/geneneralconf.cpp" line="144"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Mostrar mensagem de ajuda no início do modo de captura.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="159"/>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../src/config/geneneralconf.cpp" line="158"/>
         <source>Show desktop notifications</source>
         <translation>Mostrar notificações de Desktop</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="172"/>
+        <location filename="../src/config/geneneralconf.cpp" line="167"/>
         <source>Show tray icon</source>
         <translation>Mostrar ícone de tray</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="176"/>
+        <location filename="../src/config/geneneralconf.cpp" line="171"/>
         <source>Show the systemtray icon</source>
         <translation>Mosrar ícone na barra de aplicações</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="182"/>
         <source>Configuration File</source>
         <translation>Arquivo de Configurações</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="202"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <location filename="../src/config/geneneralconf.cpp" line="205"/>
         <source>Launch at startup</source>
         <translation>Iniciar junto com o sistema</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="213"/>
-        <location filename="../src/config/geneneralconf.cpp" line="225"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch Flameshot</source>
         <translation>Iniciar Flameshot</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
-        <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/config/geneneralconf.cpp" line="234"/>
+        <location filename="../src/config/geneneralconf.cpp" line="217"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="238"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="247"/>
+        <location filename="../src/config/geneneralconf.cpp" line="230"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="250"/>
+        <location filename="../src/config/geneneralconf.cpp" line="233"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
@@ -812,11 +806,11 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Erro tentando salvar como </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="77"/>
-        <location filename="../src/main.cpp" line="227"/>
-        <location filename="../src/main.cpp" line="376"/>
-        <location filename="../src/main.cpp" line="400"/>
-        <location filename="../src/main.cpp" line="429"/>
+        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="229"/>
+        <location filename="../src/main.cpp" line="378"/>
+        <location filename="../src/main.cpp" line="402"/>
+        <location filename="../src/main.cpp" line="431"/>
         <source>Unable to connect via DBus</source>
         <translation>Não foi possível conectar via DBus</translation>
     </message>
@@ -836,8 +830,9 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="231"/>
-        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="427"/>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
