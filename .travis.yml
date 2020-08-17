@@ -34,18 +34,6 @@ env:
 matrix:
     include:
         - os: linux
-          # 28
-          env: OS=fedora DIST=28 EXTEN=rpm
-          services: docker
-        - os: linux
-          # 29
-          env: OS=fedora DIST=29 EXTEN=rpm
-          services: docker
-        - os: linux
-          # 30
-          env: OS=fedora DIST=30 EXTEN=rpm
-          services: docker
-        - os: linux
           # 31
           env: OS=fedora DIST=31 EXTEN=rpm
           services: docker
@@ -64,10 +52,6 @@ matrix:
         - os: linux
           # Ubuntu 20.04 LTS
           env: OS=ubuntu DIST=focal EXTEN=deb
-          services: docker
-        - os: linux
-          # 8
-          env: OS=debian DIST=jessie EXTEN=deb
           services: docker
         - os: linux
           # 9
