@@ -802,11 +802,11 @@ Press Space to open the side panel.</source>
         <translation>嘗試另存新檔時發生錯誤 </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="77"/>
-        <location filename="../src/main.cpp" line="227"/>
-        <location filename="../src/main.cpp" line="376"/>
-        <location filename="../src/main.cpp" line="400"/>
-        <location filename="../src/main.cpp" line="429"/>
+        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="229"/>
+        <location filename="../src/main.cpp" line="378"/>
+        <location filename="../src/main.cpp" line="402"/>
+        <location filename="../src/main.cpp" line="431"/>
         <source>Unable to connect via DBus</source>
         <translation>無法透過 DBus 進行連接</translation>
     </message>
@@ -824,6 +824,12 @@ Press Space to open the side panel.</source>
         <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">連結已複製到剪貼簿</translation>
+    </message>
+    <message>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="427"/>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

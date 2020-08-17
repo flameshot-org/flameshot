@@ -694,6 +694,11 @@ Press Space to open the side panel.</source>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
+    <message>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>

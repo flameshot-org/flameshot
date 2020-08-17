@@ -834,11 +834,11 @@ Press Space to open the side panel.</source>
         <translation>Помилка під час збереження як </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="77"/>
-        <location filename="../src/main.cpp" line="227"/>
-        <location filename="../src/main.cpp" line="376"/>
-        <location filename="../src/main.cpp" line="400"/>
-        <location filename="../src/main.cpp" line="429"/>
+        <location filename="../src/main.cpp" line="79"/>
+        <location filename="../src/main.cpp" line="229"/>
+        <location filename="../src/main.cpp" line="378"/>
+        <location filename="../src/main.cpp" line="402"/>
+        <location filename="../src/main.cpp" line="431"/>
         <source>Unable to connect via DBus</source>
         <translation>Не вдалось підключитись через DBus</translation>
     </message>
@@ -860,6 +860,12 @@ Press Space to open the side panel.</source>
     <message>
         <source>File is deleted from S3</source>
         <translation type="vanished">Файл видален з S3</translation>
+    </message>
+    <message>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="427"/>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation>Привіт, а я вже працюю!\nВи можете знайти мене у системному трэї.</translation>
     </message>
 </context>
 <context>
