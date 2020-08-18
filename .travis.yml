@@ -61,9 +61,9 @@ matrix:
           # No docker environment, just for CI build & test
           # ubuntu xenial;  default Qt version is 5.6.1
           env: OS=ubuntu DIST=xenial EXTEN=other
-#       - os: osx
-#         compiler: clang
-#         osx_image: xcode9.2
+       - os: osx
+         compiler: clang
+         osx_image: xcode9.2
 
 before_install:
   - export ROOT_PATH="$(pwd)"
