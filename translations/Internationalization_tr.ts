@@ -330,112 +330,118 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="86"/>
-        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../src/config/geneneralconf.cpp" line="91"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Import</source>
         <translation>Dışa aktar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="98"/>
         <source>Unable to read file.</source>
         <translation>Dosya okunamıyor.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="101"/>
-        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="106"/>
+        <location filename="../src/config/geneneralconf.cpp" line="128"/>
         <source>Unable to write file.</source>
         <translation>Dosya yazılamıyor.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../src/config/geneneralconf.cpp" line="114"/>
         <source>Save File</source>
         <translation>Dosyayı Kaydet</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="135"/>
         <source>Confirm Reset</source>
         <translation>Sıfırlamayı Onayla</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="131"/>
+        <location filename="../src/config/geneneralconf.cpp" line="136"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Ayarları sıfırlamak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="140"/>
+        <location filename="../src/config/geneneralconf.cpp" line="145"/>
         <source>Show help message</source>
         <translation>Yardım mesajını göster</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="144"/>
+        <location filename="../src/config/geneneralconf.cpp" line="149"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Yakalama modunda başında yardım mesajını gösterin.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="154"/>
-        <location filename="../src/config/geneneralconf.cpp" line="158"/>
+        <location filename="../src/config/geneneralconf.cpp" line="159"/>
+        <location filename="../src/config/geneneralconf.cpp" line="163"/>
         <source>Show desktop notifications</source>
         <translation>Masaüstü bildirimlerini göster</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="167"/>
+        <location filename="../src/config/geneneralconf.cpp" line="172"/>
         <source>Show tray icon</source>
         <translation>Tepsi simgesini göster</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="171"/>
+        <location filename="../src/config/geneneralconf.cpp" line="176"/>
         <source>Show the systemtray icon</source>
         <translation>Sistem tepsisi simgesini göster</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="182"/>
+        <location filename="../src/config/geneneralconf.cpp" line="187"/>
         <source>Configuration File</source>
         <translation>Yapılandırma Dosyası</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="192"/>
         <source>Export</source>
         <translation>Dışa aktar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="202"/>
         <source>Reset</source>
         <translation>Sıfırla</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="205"/>
+        <location filename="../src/config/geneneralconf.cpp" line="209"/>
         <source>Launch at startup</source>
         <translation>Başlangıçta başlatın</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <location filename="../src/config/geneneralconf.cpp" line="213"/>
+        <location filename="../src/config/geneneralconf.cpp" line="225"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot&apos;ı başlat</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="217"/>
+        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <source>Show welcome message on launch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="234"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <location filename="../src/config/geneneralconf.cpp" line="238"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <location filename="../src/config/geneneralconf.cpp" line="247"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <location filename="../src/config/geneneralconf.cpp" line="250"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
@@ -806,11 +812,11 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation>Farklı kaydetmeye çalışılırken hata oluştu </translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="79"/>
-        <location filename="../src/main.cpp" line="229"/>
-        <location filename="../src/main.cpp" line="378"/>
-        <location filename="../src/main.cpp" line="402"/>
-        <location filename="../src/main.cpp" line="431"/>
+        <location filename="../src/main.cpp" line="77"/>
+        <location filename="../src/main.cpp" line="227"/>
+        <location filename="../src/main.cpp" line="376"/>
+        <location filename="../src/main.cpp" line="400"/>
+        <location filename="../src/main.cpp" line="429"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus ile bağlanılamadı</translation>
     </message>
@@ -830,9 +836,14 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="unfinished">URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="427"/>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="423"/>
         <source>Hi, I&apos;m already running!
 You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/controller.cpp" line="231"/>
+        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
