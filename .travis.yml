@@ -3,6 +3,9 @@ sudo: required
 
 language: cpp
 
+addons:
+  artifacts: true
+
 branches:
   only:
     - master
@@ -30,42 +33,44 @@ env:
 matrix:
     include:
         - os: linux
-          # 28
-          env: OS=fedora DIST=28 EXTEN=rpm
+          # 1 - Fedora 31
+          env: OS=fedora DIST=31 EXTEN=rpm
           services: docker
         - os: linux
-          # 29
-          env: OS=fedora DIST=29 EXTEN=rpm
+          # 2 - Fedora 32
+          env: OS=fedora DIST=32 EXTEN=rpm
           services: docker
         - os: linux
-          # 30
-          env: OS=fedora DIST=30 EXTEN=rpm
-          services: docker
-        - os: linux
-          # Ubuntu 16.04 LTS
+          # 3 - Ubuntu 16.04 LTS
           env: OS=ubuntu DIST=xenial EXTEN=deb
           services: docker
         - os: linux
-          # Ubuntu 18.04 LTS
+          # 4 - Ubuntu 18.04 LTS
           env: OS=ubuntu DIST=bionic EXTEN=deb
           services: docker
         - os: linux
-          # Ubuntu 20.04 LTS
+          # 5 - Ubuntu 20.04 LTS
           env: OS=ubuntu DIST=focal EXTEN=deb
           services: docker
         - os: linux
-          # 8
-          env: OS=debian DIST=jessie EXTEN=deb
-          services: docker
-        - os: linux
-          # 9
+          # 6 - Debian stretch
           env: OS=debian DIST=stretch EXTEN=deb
           services: docker
         - os: linux
+          # 7 - Debian 9 (stretch)
+          env: OS=debian DIST=stretch EXTEN=deb
+          services: docker
+        - os: linux
+          # 8 - Debian 10 (buster)
+          env: OS=debian DIST=buster EXTEN=deb
+          services: docker
+        - os: linux
+          # 8
           # No docker environment, just for CI build & test
           # ubuntu xenial;  default Qt version is 5.6.1
           env: OS=ubuntu DIST=xenial EXTEN=other
 #       - os: osx
+#         # 9 - MacOS
 #         compiler: clang
 #         osx_image: xcode9.2
 
@@ -84,9 +89,9 @@ script:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_script.sh; fi
 # - if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then source .travis/osx_script.sh; fi
 
-after_success:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_after_success.sh; fi
-  - echo "Download URL is $TEMP_DOWNLOAD_URL ."
+#after_success:
+#  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source .travis/linux_after_success.sh; fi
+#  - echo "Download URL is ${TEMP_DOWNLOAD_URL} "
 
 # deploy:
 #    # Deploy packages to Github Release
