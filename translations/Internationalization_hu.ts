@@ -381,6 +381,10 @@ Press Space to open the side panel.</source>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show welcome message on launch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
@@ -697,6 +701,10 @@ Press Space to open the side panel.</source>
     <message>
         <source>Hi, I&apos;m already running!
 You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
