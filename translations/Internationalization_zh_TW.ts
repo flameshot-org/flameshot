@@ -473,64 +473,89 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation type="unfinished">正在上傳</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
         <source>Upload image to S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
         <source>Delete image from S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="258"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="245"/>
+        <source>Unable to remove screenshot from the remote storage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <source>Network error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="250"/>
+        <source>Possibly it doesn&apos;t exist anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="253"/>
+        <source>Do you want to remove screenshot from local history anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="283"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
         <source>Copy URL</source>
         <translation type="unfinished">複製連結</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="348"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
         <source>Open URL</source>
         <translation type="unfinished">打開連結</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="349"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="409"/>
         <source>Delete image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="410"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">將檔案複製到剪貼簿</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="369"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="429"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">無法打開此連結</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="205"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="375"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="208"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="435"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">連結已複製到剪貼簿</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="388"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="448"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="380"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="256"/>
+        <source>Remove screenshot from history?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="440"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">截圖已複製到剪貼簿</translation>
     </message>

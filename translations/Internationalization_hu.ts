@@ -459,6 +459,26 @@ Press Space to open the side panel.</source>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to remove screenshot from the remote storage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Possibly it doesn&apos;t exist anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to remove screenshot from local history anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove screenshot from history?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
