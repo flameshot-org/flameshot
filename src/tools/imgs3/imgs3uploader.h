@@ -59,18 +59,19 @@ private slots:
 private:
     void init(const QString &title, const QString &label);
     void uploadToS3(QJsonDocument &response);
-    void initNetwork();
+    QNetworkProxy *initProxy();
+    void clearProxy();
 
     void onUploadOk();
 
     void hideSpinner();
     void setInfoLabelText(const QString &);
+    QNetworkProxy *proxy();
 
 
 // class members
 private:
     bool m_success;
-    ConfigEnterprise *m_configEnterprise;
     ImgS3Settings m_s3Settings;
 
     ImageLabel *m_imageLabel;
