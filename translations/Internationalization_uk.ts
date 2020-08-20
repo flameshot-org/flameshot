@@ -431,7 +431,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="221"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати привітання при запуску</translation>
     </message>
     <message>
         <location filename="../src/config/geneneralconf.cpp" line="234"/>
@@ -497,17 +497,17 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Вивантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation>Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="53"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="54"/>
         <source>Upload image to S3</source>
         <translation>Завантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
         <source>Delete image from S3</source>
         <translation>Видалити скріншот з S3</translation>
     </message>
@@ -516,49 +516,74 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Видалити скіншот</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="258"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="256"/>
+        <source>Remove screenshot from history?</source>
+        <translation>Видалити скріншот із історії?</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="283"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation>Параметри доступів до S3 не знайдені у конфігураціонному файлі</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="347"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="348"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
         <source>Open URL</source>
         <translation>Відкрити URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="349"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="409"/>
         <source>Delete image</source>
         <translation>Видалити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="350"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="410"/>
         <source>Image to Clipboard.</source>
         <translation>Зображення до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="369"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="429"/>
         <source>Unable to open the URL.</source>
         <translation>Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="205"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="375"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="208"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="435"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="59"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="388"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="448"/>
         <source>Deleting image...</source>
         <translation>Видалення скріншоту...</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="380"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="245"/>
+        <source>Unable to remove screenshot from the remote storage.</source>
+        <translation>Не вдалося видалити скріншот із віддаленого сховища.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <source>Network error</source>
+        <translation>Помилка мережі</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="250"/>
+        <source>Possibly it doesn&apos;t exist anymore</source>
+        <translation>Можливо, його більше не існує</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="253"/>
+        <source>Do you want to remove screenshot from local history anyway?</source>
+        <translation>Ви все одно хочете видалити скріншот із локальної історії?</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="440"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Знімок скопійовано до буферу обміну.</translation>
     </message>
@@ -876,7 +901,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../src/core/controller.cpp" line="231"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Привіт, я тут! Клацніть піктограму в лотку, щоб зробити знімок екрана, або натисніть правою кнопкою, щоб переглянути додаткові параметри.</translation>
     </message>
 </context>
 <context>
