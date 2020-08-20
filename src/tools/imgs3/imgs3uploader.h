@@ -61,6 +61,7 @@ private:
     void uploadToS3(QJsonDocument &response);
     QNetworkProxy *initProxy();
     void clearProxy();
+    void removeImagePreview();
 
     void onUploadOk();
 

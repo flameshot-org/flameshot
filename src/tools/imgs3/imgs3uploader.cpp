@@ -45,6 +45,7 @@
 #include <QHttpMultiPart>
 #include <QNetworkProxy>
 #include <QDir>
+#include <QMessageBox>
 
 
 ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :
@@ -216,27 +217,47 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply *reply) {
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
 
-void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
-    if (reply->error() == QNetworkReply::NoError) {
-        m_success = true;
+void ImgS3Uploader::removeImagePreview() {
+    // remove local file
+    History history;
+    QString packedFileName = history.packFileName(SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, m_s3ImageName);
+    QString fullFileName = history.path() + packedFileName;
 
-        // remove local file
-        History history;
-        QString packedFileName = history.packFileName(SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, m_s3ImageName);
-        QString fullFileName = history.path() + packedFileName;
-
-        QFile file(fullFileName);
-        if (file.exists()) {
-            file.remove();
-        }
-        m_deleteToken.clear();
-        m_s3ImageName.clear();
-        close();
-    } else {
-        QString reason = reply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ).toString();
-        setInfoLabelText(reply->errorString());
+    QFile file(fullFileName);
+    if (file.exists()) {
+        file.remove();
     }
-    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+    m_deleteToken.clear();
+    m_s3ImageName.clear();
+    m_success = true;
+}
+
+void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply *reply) {
+    auto replyError = reply->error();
+    if (replyError == QNetworkReply::NoError) {
+        removeImagePreview();
+    } else {
+        hide();
+
+        // generate error message
+        QString message = tr("Unable to remove screenshot from the remote storage.");
+        if(replyError == QNetworkReply::UnknownNetworkError) {
+            message += "\n" + tr("Network error");
+        }
+        else if(replyError == QNetworkReply::UnknownServerError) {
+            message += "\n" + tr("Possibly it doesn't exist anymore");
+        }
+        message += "\n\n" + reply->errorString();
+        message += "\n\n" + tr("Do you want to remove screenshot from local history anyway?");
+
+        if (QMessageBox::Yes == QMessageBox::question(NULL,
+                                                      tr("Remove screenshot from history?"),
+                                                      message,
+                                                      QMessageBox::Yes|QMessageBox::No)) {
+            removeImagePreview();
+        }
+    }
+    close();
 }
 
 void ImgS3Uploader::startDrag() {
