@@ -51,7 +51,7 @@ flameshot*.tar.bz2
 
 .vscode/
 build/
-
+data/flatpak/.flatpak-builder
 # NVIM
 *~
 
