@@ -516,74 +516,74 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Удалить скриншот</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="256"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="254"/>
         <source>Remove screenshot from history?</source>
         <translation>Удалить скриншот из истории?</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="283"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="281"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation>Параметры доступов к S3 не найдены в конфигурационном файле</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="405"/>
         <source>Copy URL</source>
         <translation>Скопировать URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="406"/>
         <source>Open URL</source>
         <translation>Открыть URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="409"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
         <source>Delete image</source>
         <translation>Удалить изображение</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="410"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
         <source>Image to Clipboard.</source>
         <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="429"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="427"/>
         <source>Unable to open the URL.</source>
         <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="208"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="435"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="433"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="60"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="448"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="446"/>
         <source>Deleting image...</source>
         <translation>Удаление скриншота...</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="245"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="243"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation>Невозможно удалить снимок экрана из удаленного хранилища.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="247"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="245"/>
         <source>Network error</source>
         <translation>Ошибка сети</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="250"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="248"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation>Возможно, его больше не существует</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="253"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="251"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation>Вы все равно хотите удалить скриншот из локальной истории?</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="440"/>
+        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="438"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
