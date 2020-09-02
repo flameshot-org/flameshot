@@ -13,6 +13,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 add_executable(flameshot)
+add_executable(Flameshot::flameshot ALIAS flameshot)
+
 
 add_subdirectory(cli)
 add_subdirectory(config)
@@ -81,3 +83,16 @@ target_compile_definitions(flameshot PRIVATE APP_PREFIX="/usr")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v0.8.0")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
 target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
+
+
+
+##############################################
+# Installation instructions
+
+include(GNUInstallDirs)
+set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Flameshot)
+
+install(TARGETS flameshot
+    EXPORT flameshot-targets
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
