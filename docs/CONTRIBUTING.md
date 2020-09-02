@@ -30,6 +30,7 @@ Check this nice official documentation from Qt docs as it explains how to transl
 
 ## Code
 
+For small fixes or incremental improvements simply fork the repo and follow the process below. For larger changes submit an [RFC:](RFC.md)
 1. [Fork](https://help.github.com/articles/fork-a-repo/) the repository and [clone](https://help.github.com/articles/cloning-a-repository/) your fork.
 
 2. Start coding!
