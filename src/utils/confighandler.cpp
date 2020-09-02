@@ -310,12 +310,26 @@ void ConfigHandler::setStartupLaunch(const bool start) {
     QSettings bootUpSettings(
                 "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
                 QSettings::NativeFormat);
+    QSettings bootUpPath(
+                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths",
+                QSettings::NativeFormat);
     if (start) {
         QString app_path =
                 QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
         bootUpSettings.setValue("Flameshot", app_path);
+
+        // set application workdir
+        bootUpPath.beginGroup("flameshot.exe");
+        bootUpPath.setValue("Path", QCoreApplication::applicationFilePath());
+        bootUpPath.endGroup();
+
     } else {
         bootUpSettings.remove("Flameshot");
+
+        // remove application workdir
+        bootUpPath.beginGroup("flameshot.exe");
+        bootUpPath.remove("");
+        bootUpPath.endGroup();
     }
 #endif
     m_settings.setValue(QStringLiteral("startupLaunch"), start);
