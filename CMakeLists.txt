@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.13)
 
-project(flameshot CXX)
+project(flameshot VERSION 0.8.0 LANGUAGES CXX)
+
+
+
 include(cmake/StandardProjectSettings.cmake)
 
 
