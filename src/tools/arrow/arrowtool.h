@@ -18,6 +18,7 @@
 #pragma once
 
 #include "src/tools/abstracttwopointtool.h"
+#include <QPainterPath>
 #include <QPainter>
 
 class ArrowTool : public AbstractTwoPointTool {
