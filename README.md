@@ -247,9 +247,9 @@ To build the application in your system, you'll need to install the dependencies
 
 #### Compile-time
 
-- Qt >= 5.3
+- Qt >= 5.9
   + Development tools
-- GCC >= 4.9.2
+- GCC >= 7.4 
 
 #### Run-time
 
@@ -308,30 +308,13 @@ After installing all the dependencies, finally run the following commands in the
 ```shell
 mkdir build
 cd build
-qmake ../
+cmake ../
 make
 ```
 
 ### Install
 
 Simply use `make install` with privileges.
-
-## Packaging
-
-Having `git` installed is required if you're building Flameshot from a snapshot to have precise version information.
-
-In order to generate the instructions in the `Makefile` to install the application in `/usr` instead of in `/usr/local` you can pass the `packaging` option to `qmake` (`qmake CONFIG+=packaging`).
-
-If you want to install in a custom directory you can use the `INSTALL_ROOT` variable.
-
-**Example**:
-
-If you want to install Flameshot in `~/myBuilds/test`, you can execute the following to do so:
-
-```shell
-qmake CONFIG+=packaging
-make INSTALL_ROOT=~/myBuilds/test install
-```
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
@@ -351,7 +334,7 @@ If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
 
 
 ## Acknowledgment
-I really appreciate those who have shown interest in the early development process:
+Thanks to those who have shown interest in the early development process:
 - [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)
 - [XerTheSquirrel](https://github.com/XerTheSquirrel)
