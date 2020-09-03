@@ -330,119 +330,125 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="91"/>
-        <location filename="../src/config/geneneralconf.cpp" line="197"/>
+        <location filename="../src/config/geneneralconf.cpp" line="93"/>
+        <location filename="../src/config/geneneralconf.cpp" line="199"/>
         <source>Import</source>
         <translation>Importeren</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="100"/>
+        <location filename="../src/config/geneneralconf.cpp" line="108"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="98"/>
+        <location filename="../src/config/geneneralconf.cpp" line="100"/>
         <source>Unable to read file.</source>
         <translation>Kan bestand niet uitlezen.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="106"/>
-        <location filename="../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../src/config/geneneralconf.cpp" line="108"/>
+        <location filename="../src/config/geneneralconf.cpp" line="130"/>
         <source>Unable to write file.</source>
         <translation>Kan bestand niet wegschrijven.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="114"/>
+        <location filename="../src/config/geneneralconf.cpp" line="116"/>
         <source>Save File</source>
         <translation>Bestand opslaan</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="135"/>
+        <location filename="../src/config/geneneralconf.cpp" line="137"/>
         <source>Confirm Reset</source>
         <translation>Herstellen bevestigen</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../src/config/geneneralconf.cpp" line="138"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Weet je zeker dat je de standwaardwaarden van de configuratie wilt herstellen?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="145"/>
+        <location filename="../src/config/geneneralconf.cpp" line="147"/>
         <source>Show help message</source>
         <translation>Uitleg tonen</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="149"/>
+        <location filename="../src/config/geneneralconf.cpp" line="151"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Toont een bericht met uitleg bij het openen van de vastlegmodus.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="159"/>
-        <location filename="../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../src/config/geneneralconf.cpp" line="161"/>
+        <location filename="../src/config/geneneralconf.cpp" line="165"/>
         <source>Show desktop notifications</source>
         <translation>Bureaubladmeldingen tonen</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="172"/>
+        <location filename="../src/config/geneneralconf.cpp" line="174"/>
         <source>Show tray icon</source>
         <translation>Systeemvakpictogram tonen</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="176"/>
+        <location filename="../src/config/geneneralconf.cpp" line="178"/>
         <source>Show the systemtray icon</source>
         <translation>Toont het systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="187"/>
+        <location filename="../src/config/geneneralconf.cpp" line="189"/>
         <source>Configuration File</source>
         <translation>Configuratiebestand</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../src/config/geneneralconf.cpp" line="194"/>
         <source>Export</source>
         <translation>Exporteren</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="202"/>
+        <location filename="../src/config/geneneralconf.cpp" line="204"/>
         <source>Reset</source>
         <translation>Standaardwaarden</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="209"/>
+        <location filename="../src/config/geneneralconf.cpp" line="211"/>
         <source>Launch at startup</source>
         <translation>Automatisch opstarten</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="213"/>
-        <location filename="../src/config/geneneralconf.cpp" line="225"/>
+        <location filename="../src/config/geneneralconf.cpp" line="215"/>
+        <location filename="../src/config/geneneralconf.cpp" line="227"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot openen</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <location filename="../src/config/geneneralconf.cpp" line="223"/>
         <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="234"/>
+        <location filename="../src/config/geneneralconf.cpp" line="236"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="238"/>
+        <location filename="../src/config/geneneralconf.cpp" line="240"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="247"/>
+        <location filename="../src/config/geneneralconf.cpp" line="248"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="250"/>
+        <location filename="../src/config/geneneralconf.cpp" line="251"/>
         <source>Copy URL and close window after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="260"/>
+        <location filename="../src/config/geneneralconf.cpp" line="263"/>
+        <source>Copy file path after save</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -815,13 +821,13 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="90"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="95"/>
         <source>Save Error</source>
         <translation>Fout tijdens opslaan</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="84"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="85"/>
         <source>Capture saved as </source>
         <translation>Schermafdruk opgeslagen als </translation>
     </message>
@@ -832,9 +838,14 @@ Druk op spatie om het zijpaneel te openen.</translation>
     </message>
     <message>
         <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="87"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
         <source>Error trying to save as </source>
         <translation>Fout tijdens opslaan als </translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="88"/>
+        <source>Capture saved and copied to the clipboard as </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="77"/>
