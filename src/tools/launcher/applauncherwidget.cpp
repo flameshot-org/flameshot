@@ -114,7 +114,7 @@ void AppLauncherWidget::launch(const QModelIndex &index) {
                                tr("Unable to launch in terminal."));
         }
     } else {
-         QProcess::startDetached(app_name,{m_tempFile});
+        QProcess::startDetached(app_name,{m_tempFile});
     }
     if (!m_keepOpen) {
         close();

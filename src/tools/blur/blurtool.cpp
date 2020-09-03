@@ -62,10 +62,10 @@ QRgb calculate_block_averge(QImage &image, int x_start, int y_start,
   assert(x_start + pixel_size < image.width());
   assert(y_start + pixel_size < image.height());
 
-  auto red_count = 0;
-  auto blue_count = 0;
-  auto green_count = 0;
-  auto pixel_count = 0;
+  int red_count = 0;
+  int blue_count = 0;
+  int green_count = 0;
+  int pixel_count = 0;
   for (auto x = x_start; x < x_start + pixel_size; x++)
   {
     for (auto y = y_start; y < y_start + pixel_size; y++)
@@ -100,6 +100,11 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap,
   QImage original_image{source->toImage()};
   QImage imageResult{source->toImage()};
   unsigned int pixel_size = m_thickness;
+  if (pixel_size < 1)
+  {
+    pixel_size =1;
+  }
+
 
   const unsigned int width = source->width();
   const unsigned int height = source->height();

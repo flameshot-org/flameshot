@@ -20,6 +20,7 @@
 #include "src/tools/abstracttwopointtool.h"
 #include <QPainter>
 #include <QPainterPath>
+
 class ArrowTool : public AbstractTwoPointTool {
     Q_OBJECT
 public:

@@ -7,14 +7,16 @@ find_package(
   Widgets
   Network
   Svg
-  DBus)
+  DBus
+  LinguistTools)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 add_executable(flameshot)
-add_executable(Flameshot::flameshot ALIAS flameshot)
 
+add_executable(Flameshot::flameshot ALIAS flameshot)
 
 add_subdirectory(cli)
 add_subdirectory(config)
@@ -23,6 +25,27 @@ add_subdirectory(utils)
 add_subdirectory(widgets)
 add_subdirectory(tools)
 
+qt5_create_translation(
+  QM_FILES
+  ${CMAKE_SOURCE_DIR}
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_br.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+
 target_sources(
   flameshot
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication/singleapplication.cpp
@@ -30,6 +53,7 @@ target_sources(
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_wheel.cpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/color_wheel.hpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../data/graphics.qrc
+          ${QM_FILES}
           main.cpp)
 
 target_include_directories(
@@ -67,8 +91,7 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/panel>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/capture>
-         $<INSTALL_INTERFACE:include/mylib> # <prefix>/include/mylib
-)
+         $<INSTALL_INTERFACE:include/mylib>)
 
 target_link_libraries(
   flameshot
@@ -84,15 +107,21 @@ target_compile_definitions(flameshot PRIVATE APP_VERSION="v0.8.0")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
 target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
 
-
-
-##############################################
+foreach(FILE ${QM_FILES})
+  get_filename_component(F_NAME ${FILE} NAME)
+  add_custom_command(
+    TARGET flameshot
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/${F_NAME}
+            ${CMAKE_CURRENT_BINARY_DIR}/translations/${F_NAME})
+endforeach()
+# ######################################################################################################################
 # Installation instructions
 
 include(GNUInstallDirs)
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Flameshot)
 
-install(TARGETS flameshot
-    EXPORT flameshot-targets
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+install(
+  TARGETS flameshot
+  EXPORT flameshot-targets
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
