@@ -1,8 +1,8 @@
 <div align="center">
   <p>
     <h1>
-      <a href="https://github.com/lupoDharkael/flameshot">
-        <img src="img/app/flameshot.svg" alt="Flameshot" />
+      <a href="https://github.com/flameshot-org/flameshot">
+        <img src="data/img/app/flameshot.svg" alt="Flameshot" />
       </a>
       <br />
       Flameshot
