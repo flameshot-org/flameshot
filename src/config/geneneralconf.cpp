@@ -39,6 +39,7 @@ GeneneralConf::GeneneralConf(QWidget *parent) : QWidget(parent) {
     initShowStartupLaunchMessage();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
+    initCopyPathAfterSave();
 
     // this has to be at the end
     initConfingButtons();
@@ -52,6 +53,7 @@ void GeneneralConf::updateComponents() {
     m_autostart->setChecked(config.startupLaunchValue());
     m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -242,8 +244,7 @@ void GeneneralConf::initCloseAfterCapture() {
             &GeneneralConf::closeAfterCaptureChanged);
 }
 
-void GeneneralConf::initCopyAndCloseAfterUpload()
-{
+void GeneneralConf::initCopyAndCloseAfterUpload() {
     m_copyAndCloseAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
     ConfigHandler config;
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUploadEnabled());
@@ -252,5 +253,16 @@ void GeneneralConf::initCopyAndCloseAfterUpload()
 
     connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+    });
+}
+
+void GeneneralConf::initCopyPathAfterSave() {
+    m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
+    ConfigHandler config;
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
+    m_layout->addWidget(m_copyPathAfterSave);
+    connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
     });
 }
