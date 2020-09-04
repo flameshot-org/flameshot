@@ -1,5 +1,5 @@
-flameshot (0.6.0-1) unstable; urgency=medium
+flameshot (0.8.0~dev0) unstable; urgency=medium
 
-  * Initial deb package.
+  * Placeholder deb package.
 
  -- Boyuan Yang <byang@debian.org>  Wed, 27 Feb 2019 13:19:39 -0500

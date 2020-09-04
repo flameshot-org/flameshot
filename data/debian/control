@@ -5,15 +5,16 @@ Maintainer: Juanma Navarro Mañez <juanma1980@gmail.com>
 Uploaders:
  Boyuan Yang <byang@debian.org>,
 Build-Depends:
+ cmake (>= 3.13~),
  debhelper (>= 9),
- qt5-qmake,
  qtbase5-dev,
+ qttools5-dev,
  qttools5-dev-tools,
  libqt5svg5-dev,
-Standards-Version: 4.3.0
-Homepage: https://github.com/lupoDharkael/flameshot
-Vcs-Browser: https://github.com/lupoDharkael/flameshot
-Vcs-Git: https://github.com/lupoDharkael/flameshot.git
+Standards-Version: 4.5.0
+Homepage: https://github.com/flameshot-org/flameshot
+Vcs-Browser: https://github.com/flameshot-org/flameshot
+Vcs-Git: https://github.com/flameshot-org/flameshot.git
 
 Package: flameshot
 Architecture: any
