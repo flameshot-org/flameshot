@@ -1,5 +1,5 @@
 Name: flameshot
-Version: 0.6.0
+Version: 0.8.0
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 Summary(eu-ES): Potente pero simple de usar software de capturas
@@ -8,8 +8,8 @@ Summary(eu-ES): Potente pero simple de usar software de capturas
 
 Group: Application
 License: GPLv3
-URL: https://github.com/lupoDharkael/%{sourcename}
-Source0: https://github.com/lupoDharkael/%{sourcename}/archive/v%{version}.tar.gz
+URL: https://github.com/flameshot-org/%{sourcename}
+Source0: https://github.com/flameshot-org/%{sourcename}/archive/v%{version}.tar.gz
 
 #%%define _binaries_in_noarch_packages_terminate_build   0
 #BuildArch: noarch
