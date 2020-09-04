@@ -22,6 +22,7 @@
 #include <QGraphicsScene>
 #include <QImage>
 #include <QPainter>
+#include <cassert>
 
 BlurTool::BlurTool(QObject* parent)
   : AbstractTwoPointTool(parent)
