@@ -385,6 +385,10 @@ Press Space to open the side panel.</source>
         <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copy file path after save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
@@ -725,6 +729,10 @@ You can find me in the system tray.</source>
     </message>
     <message>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
