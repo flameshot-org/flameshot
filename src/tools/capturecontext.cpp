@@ -24,3 +24,4 @@ QPixmap CaptureContext::selectedScreenshotArea() const {
         return screenshot.copy(selection);
     }
 }
+

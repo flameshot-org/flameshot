@@ -56,5 +56,5 @@ TerminalApp TerminalLauncher::getPreferedTerminal() {
 bool TerminalLauncher::launchDetached(const QString &command) {
     TerminalApp app = getPreferedTerminal();
     QString s = app.name + " " + app.arg + " " + command;
-    return QProcess::startDetached(s);
+    return QProcess::startDetached(app.name, {app.arg,command});
 }
