@@ -79,6 +79,9 @@ public:
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
 
+    bool copyPathAfterSaveEnabled();
+    void setCopyPathAfterSaveEnabled(const bool);
+
 
     void setDefaults();
     void setAllTheButtons();
