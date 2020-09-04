@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshotsaver.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/systemnotification.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/confighandler.h"
@@ -57,24 +58,27 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
 
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
     bool ok = false;
-
     while (!ok) {
-        QString savePath = QFileDialog::getSaveFileName(
-                    nullptr,
-                    QString(),
-                    FileNameHandler().absoluteSavePath() + ".png",
-					QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)"));
+        ConfigHandler config;
+        QString savePath = FileNameHandler().absoluteSavePath();
+        if(config.savePathFixed().size() == 0) {
+            savePath = QFileDialog::getSaveFileName(
+                        nullptr,
+                        QObject::tr("Save screenshot"),
+                        FileNameHandler().absoluteSavePath(),
+                        QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)"));
+        }
 
         if (savePath.isNull()) {
             break;
         }
 
-	if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
-	    !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
-	    !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
+        if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
+            !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
+            !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
 
-	    savePath += QLatin1String(".png");
-	}
+            savePath += QLatin1String(".png");
+        }
 
         ok = capture.save(savePath);
 
