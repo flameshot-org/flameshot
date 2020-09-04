@@ -62,12 +62,13 @@ void FilePathConfiguration::screenshotPathFixedSet() {
     QFileDialog *dirDialog = new QFileDialog(this, tr("Select default path for Screenshots"));
     dirDialog->setFileMode(QFileDialog::DirectoryOnly);
     dirDialog->setOption(QFileDialog::ShowDirsOnly, true);
-    QString filePath = dirDialog->getOpenFileName();
-    QDir d = QFileInfo(filePath).absoluteDir();
-    QString absolutePath = d.absolutePath();
-    m_screenshotPathFixedDefault->setText(absolutePath);
-    ConfigHandler config;
-    config.setSavePathFixed(absolutePath);
+    if (dirDialog->exec()) {
+        QDir d = dirDialog->directory();
+        QString absolutePath = d.absolutePath();
+        m_screenshotPathFixedDefault->setText(absolutePath);
+        ConfigHandler config;
+        config.setSavePathFixed(absolutePath);
+    }
 }
 
 void FilePathConfiguration::screenshotPathFixedClear() {
