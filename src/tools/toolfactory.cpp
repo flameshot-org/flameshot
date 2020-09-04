@@ -18,6 +18,7 @@
 #include "toolfactory.h"
 #include "arrow/arrowtool.h"
 #include "circle/circletool.h"
+#include "circlecount/circlecounttool.h"
 #include "copy/copytool.h"
 #include "exit/exittool.h"
 #include "imgur/imguruploadertool.h"
@@ -103,6 +104,10 @@ CaptureTool* ToolFactory::CreateTool(
     case CaptureButton::TYPE_TEXT:
         tool = new TextTool(parent);
         break;
+    case CaptureButton::TYPE_CIRCLECOUNT:
+        tool = new CircleCountTool(parent);
+        break;
+
     default:
         tool = nullptr;
         break;

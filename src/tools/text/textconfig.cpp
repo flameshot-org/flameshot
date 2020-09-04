@@ -36,7 +36,7 @@ TextConfig::TextConfig(QWidget *parent) : QWidget(parent) {
     int index = fontsCB->findText(font().family());
     fontsCB->setCurrentIndex(index);
 
-    QColor bgColor(palette().background().color());
+    QColor bgColor(palette().windowText().color());
     QString iconPrefix = ColorUtils::colorIsDark(bgColor) ?
                 PathInfo::whiteIconPath() :
                 PathInfo::blackIconPath();

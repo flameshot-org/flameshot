@@ -131,6 +131,7 @@ void InfoWindow::initLabels() {
     QLabel *versionTitleLabel = new QLabel(tr("<u><b>Version</b></u>"), this);
     versionTitleLabel->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(versionTitleLabel);
+    
     QString versionMsg = "Flameshot " + QStringLiteral(APP_VERSION) + "\nCompiled with Qt "
             + QT_VERSION_STR;
     QLabel *versionLabel = new QLabel(versionMsg, this);
