@@ -121,7 +121,37 @@ endforeach()
 include(GNUInstallDirs)
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Flameshot)
 
+# Install binary
 install(
   TARGETS flameshot
   EXPORT flameshot-targets
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+# Install desktop files, completion and dbus files
+configure_file(${CMAKE_SOURCE_DIR}/docs/desktopEntry/package/flameshot.desktop
+               ${CMAKE_CURRENT_BINARY_DIR}/share/applications/flameshot.desktop COPYONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/docs/bash-completion/flameshot
+               ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completions/completions/flameshot COPYONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
+               ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/interfaces/org.flameshot.Flameshot.xml COPYONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/data/dbus/package/org.flameshot.Flameshot.service
+               ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service COPYONLY)
+
+# Install Icons
+configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/flameshot.png
+               ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/flameshot.png COPYONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/flameshot.png
+               ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/128x128/apps/flameshot.png COPYONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/flameshot.svg
+               ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/flameshot.svg COPYONLY)
+
+# Install assets
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
+
+# Install Translations
+install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)
