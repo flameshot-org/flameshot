@@ -19,4 +19,5 @@
 
 #include <QPixmap>
 
-void showOpenWithMenu(const QPixmap &capture);
+void
+showOpenWithMenu(const QPixmap& capture);

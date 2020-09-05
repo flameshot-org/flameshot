@@ -23,41 +23,59 @@
 #include <QImage>
 #include <QPainter>
 
-BlurTool::BlurTool(QObject *parent) : AbstractTwoPointTool(parent) {}
+BlurTool::BlurTool(QObject* parent)
+  : AbstractTwoPointTool(parent)
+{}
 
-QIcon BlurTool::icon(const QColor &background, bool inEditor) const
+QIcon
+BlurTool::icon(const QColor& background, bool inEditor) const
 {
   Q_UNUSED(inEditor);
   return QIcon(iconPath(background) + "blur.svg");
 }
-QString BlurTool::name() const { return tr("Blur"); }
+QString
+BlurTool::name() const
+{
+  return tr("Blur");
+}
 
-QString BlurTool::nameID() { return QLatin1String(""); }
+QString
+BlurTool::nameID()
+{
+  return QLatin1String("");
+}
 
-QString BlurTool::description() const
+QString
+BlurTool::description() const
 {
   return tr("Set Blur as the paint tool");
 }
 
-CaptureTool *BlurTool::copy(QObject *parent) { return new BlurTool(parent); }
+CaptureTool*
+BlurTool::copy(QObject* parent)
+{
+  return new BlurTool(parent);
+}
 
-void write_block(QImage &image, int x_start, int y_start, int pixel_size,
-                 QRgb block_color)
+void
+write_block(QImage& image,
+            int x_start,
+            int y_start,
+            int pixel_size,
+            QRgb block_color)
 {
   assert(x_start + pixel_size < image.width());
   assert(y_start + pixel_size < image.height());
 
-  for (auto x = x_start; x < x_start + pixel_size; x++)
-  {
-    for (auto y = y_start; y < y_start + pixel_size; y++)
-    {
+  for (auto x = x_start; x < x_start + pixel_size; x++) {
+    for (auto y = y_start; y < y_start + pixel_size; y++) {
       image.setPixel(x, y, block_color);
     }
   }
 }
 
-QRgb calculate_block_averge(QImage &image, int x_start, int y_start,
-                            int pixel_size)
+QRgb
+calculate_block_averge(QImage& image, int x_start, int y_start, int pixel_size)
 {
   assert(x_start + pixel_size < image.width());
   assert(y_start + pixel_size < image.height());
@@ -66,10 +84,8 @@ QRgb calculate_block_averge(QImage &image, int x_start, int y_start,
   int blue_count = 0;
   int green_count = 0;
   int pixel_count = 0;
-  for (auto x = x_start; x < x_start + pixel_size; x++)
-  {
-    for (auto y = y_start; y < y_start + pixel_size; y++)
-    {
+  for (auto x = x_start; x < x_start + pixel_size; x++) {
+    for (auto y = y_start; y < y_start + pixel_size; y++) {
       auto pixel = image.pixel(x, y);
 
       red_count += qRed(pixel);
@@ -78,51 +94,46 @@ QRgb calculate_block_averge(QImage &image, int x_start, int y_start,
       pixel_count++;
     }
   }
-  return (qRgb(red_count / pixel_count, green_count / pixel_count,
+  return (qRgb(red_count / pixel_count,
+               green_count / pixel_count,
                blue_count / pixel_count));
 }
-void BlurTool::process(QPainter &painter, const QPixmap &pixmap,
-                       bool recordUndo)
+void
+BlurTool::process(QPainter& painter, const QPixmap& pixmap, bool recordUndo)
 {
-  if (recordUndo)
-  {
+  if (recordUndo) {
     updateBackup(pixmap);
   }
-  QPoint &p0 = m_points.first;
-  QPoint &p1 = m_points.second;
+  QPoint& p0 = m_points.first;
+  QPoint& p1 = m_points.second;
   auto pixelRatio = pixmap.devicePixelRatio();
 
   QRect selection = QRect(p0, p1).normalized();
   QRect selectionScaled = QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
-  QPixmap *source = new QPixmap(pixmap.copy(selectionScaled));
+  QPixmap* source = new QPixmap(pixmap.copy(selectionScaled));
 
-  QImage original_image{source->toImage()};
-  QImage imageResult{source->toImage()};
+  QImage original_image{ source->toImage() };
+  QImage imageResult{ source->toImage() };
   unsigned int pixel_size = m_thickness;
-  if (pixel_size < 1)
-  {
-    pixel_size =1;
+  if (pixel_size < 1) {
+    pixel_size = 1;
   }
-
 
   const unsigned int width = source->width();
   const unsigned int height = source->height();
 
   // Don't start pixelating until the region is at least as big as the pixel
-  if ((width > pixel_size) && (height > pixel_size))
-  {
-    for (unsigned int x = 0; x < (width - pixel_size); x += pixel_size)
-    {
-      for (unsigned int y = 0; y < (height - pixel_size); y += pixel_size)
-      {
+  if ((width > pixel_size) && (height > pixel_size)) {
+    for (unsigned int x = 0; x < (width - pixel_size); x += pixel_size) {
+      for (unsigned int y = 0; y < (height - pixel_size); y += pixel_size) {
         auto block_color =
           calculate_block_averge(original_image, x, y, pixel_size);
         write_block(imageResult, x, y, pixel_size, block_color);
       }
     }
   }
-  QPixmap result{QPixmap::fromImage(imageResult)};
+  QPixmap result{ QPixmap::fromImage(imageResult) };
 
   QGraphicsScene scene;
   scene.addPixmap(result);
@@ -130,18 +141,23 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap,
   scene.render(&painter, selection, QRectF());
 }
 
-void BlurTool::paintMousePreview(QPainter &painter,
-                                 const CaptureContext &context)
+void
+BlurTool::paintMousePreview(QPainter& painter, const CaptureContext& context)
 {
   Q_UNUSED(context);
   Q_UNUSED(painter);
 }
 
-void BlurTool::drawStart(const CaptureContext &context)
+void
+BlurTool::drawStart(const CaptureContext& context)
 {
   m_thickness = context.thickness;
   m_points.first = context.mousePos;
   m_points.second = context.mousePos;
 }
 
-void BlurTool::pressed(const CaptureContext &context) { Q_UNUSED(context); }
+void
+BlurTool::pressed(const CaptureContext& context)
+{
+  Q_UNUSED(context);
+}

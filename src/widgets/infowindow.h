@@ -21,19 +21,20 @@
 
 class QVBoxLayout;
 
-class InfoWindow : public QWidget {
-    Q_OBJECT
+class InfoWindow : public QWidget
+{
+  Q_OBJECT
 public:
-    explicit InfoWindow(QWidget *parent = nullptr);
+  explicit InfoWindow(QWidget* parent = nullptr);
 
 protected:
-    void keyPressEvent(QKeyEvent *);
+  void keyPressEvent(QKeyEvent*);
 
 private:
-    void initInfoTable();
-    void initLabels();
-    QVBoxLayout *m_layout;
+  void initInfoTable();
+  void initLabels();
+  QVBoxLayout* m_layout;
 
-    static QVector<const char *> m_keys;
-    static QVector<const char *> m_description;
+  static QVector<const char*> m_keys;
+  static QVector<const char*> m_description;
 };

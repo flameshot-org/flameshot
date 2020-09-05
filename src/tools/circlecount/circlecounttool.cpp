@@ -21,55 +21,82 @@ namespace {
 #define PADDING_VALUE 2
 }
 
-CircleCountTool::CircleCountTool(QObject *parent) : AbstractTwoPointTool(parent) {
-    m_count = 0;
+CircleCountTool::CircleCountTool(QObject* parent)
+  : AbstractTwoPointTool(parent)
+{
+  m_count = 0;
 }
 
-QIcon CircleCountTool::icon(const QColor &background, bool inEditor) const {
-    Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "circlecount-outline.svg");
+QIcon
+CircleCountTool::icon(const QColor& background, bool inEditor) const
+{
+  Q_UNUSED(inEditor);
+  return QIcon(iconPath(background) + "circlecount-outline.svg");
 }
-QString CircleCountTool::name() const {
-    return tr("Circle Counter");
-}
-
-QString CircleCountTool::nameID() {
-    return QLatin1String("");
-}
-
-QString CircleCountTool::description() const {
-    return tr("Add an autoincrementing counter bubble");
+QString
+CircleCountTool::name() const
+{
+  return tr("Circle Counter");
 }
 
-CaptureTool* CircleCountTool::copy(QObject *parent) {
-    return new CircleCountTool(parent);
+QString
+CircleCountTool::nameID()
+{
+  return QLatin1String("");
 }
 
-void CircleCountTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo) {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
-    painter.setBrush(m_color);
-
-    int bubble_size=16;
-    painter.drawEllipse(m_points.first,bubble_size,bubble_size);
-    painter.drawText(QRectF(m_points.first.x()-bubble_size/2, m_points.first.y()-bubble_size/2, bubble_size, bubble_size), Qt::AlignCenter, QString::number(m_count));
+QString
+CircleCountTool::description() const
+{
+  return tr("Add an autoincrementing counter bubble");
 }
 
-void CircleCountTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
+CaptureTool*
+CircleCountTool::copy(QObject* parent)
+{
+  return new CircleCountTool(parent);
 }
 
-void CircleCountTool::drawStart(const CaptureContext &context) {
-    m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
-    m_points.first = context.mousePos;
-    m_count = context.circleCount;
-    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
+void
+CircleCountTool::process(QPainter& painter,
+                         const QPixmap& pixmap,
+                         bool recordUndo)
+{
+  if (recordUndo) {
+    updateBackup(pixmap);
+  }
+  painter.setBrush(m_color);
 
+  int bubble_size = 16;
+  painter.drawEllipse(m_points.first, bubble_size, bubble_size);
+  painter.drawText(QRectF(m_points.first.x() - bubble_size / 2,
+                          m_points.first.y() - bubble_size / 2,
+                          bubble_size,
+                          bubble_size),
+                   Qt::AlignCenter,
+                   QString::number(m_count));
 }
 
-void CircleCountTool::pressed(const CaptureContext &context) {
-    Q_UNUSED(context);
+void
+CircleCountTool::paintMousePreview(QPainter& painter,
+                                   const CaptureContext& context)
+{
+  painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
+  painter.drawLine(context.mousePos, context.mousePos);
+}
+
+void
+CircleCountTool::drawStart(const CaptureContext& context)
+{
+  m_color = context.color;
+  m_thickness = context.thickness + PADDING_VALUE;
+  m_points.first = context.mousePos;
+  m_count = context.circleCount;
+  emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
+}
+
+void
+CircleCountTool::pressed(const CaptureContext& context)
+{
+  Q_UNUSED(context);
 }

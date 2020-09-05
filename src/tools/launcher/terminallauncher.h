@@ -19,17 +19,20 @@
 
 #include <QObject>
 
-struct TerminalApp {
-    QString name;
-    QString arg;
+struct TerminalApp
+{
+  QString name;
+  QString arg;
 };
 
-class TerminalLauncher : public QObject {
-    Q_OBJECT
+class TerminalLauncher : public QObject
+{
+  Q_OBJECT
 public:
-    explicit TerminalLauncher(QObject *parent = nullptr);
+  explicit TerminalLauncher(QObject* parent = nullptr);
 
-    static bool launchDetached(const QString &command);
+  static bool launchDetached(const QString& command);
+
 private:
-    static TerminalApp getPreferedTerminal();
+  static TerminalApp getPreferedTerminal();
 };
