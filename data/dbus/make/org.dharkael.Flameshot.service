@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.flameshot.Flameshot
-Exec=/usr/local/bin/flameshot
