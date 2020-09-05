@@ -64,14 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
         <source>Blur</source>
-        <translation>Розмиття</translation>
+        <translation type="vanished">Розмиття</translation>
     </message>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
         <source>Set Blur as the paint tool</source>
-        <translation>Вибрати розмиття інструментом малювання</translation>
+        <translation type="vanished">Вибрати розмиття інструментом малювання</translation>
     </message>
 </context>
 <context>
@@ -638,6 +636,19 @@ Press Space to open the side panel.</source>
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
         <translation>Прикріпити зображення до робочого столу</translation>
+    </message>
+</context>
+<context>
+    <name>PixelateTool</name>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
+        <source>Set Pixelate as the paint tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

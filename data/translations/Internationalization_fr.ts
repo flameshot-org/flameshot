@@ -64,14 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
         <source>Blur</source>
-        <translation>Flou</translation>
+        <translation type="vanished">Flou</translation>
     </message>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
         <source>Set Blur as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Flou</translation>
+        <translation type="vanished">Sélectionner l&apos;outil Flou</translation>
     </message>
 </context>
 <context>
@@ -638,6 +636,19 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
         <translation>Épingler l&apos;image sur le bureau</translation>
+    </message>
+</context>
+<context>
+    <name>PixelateTool</name>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
+        <source>Set Pixelate as the paint tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

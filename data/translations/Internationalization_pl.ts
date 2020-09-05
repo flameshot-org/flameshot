@@ -64,14 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
         <source>Blur</source>
-        <translation>Rozmycie</translation>
+        <translation type="vanished">Rozmycie</translation>
     </message>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
         <source>Set Blur as the paint tool</source>
-        <translation>Rozmywanie obszarów</translation>
+        <translation type="vanished">Rozmywanie obszarów</translation>
     </message>
 </context>
 <context>
@@ -637,6 +635,19 @@ Spacja, aby pokazać panel boczny.</translation>
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
         <translation>Przypnij obrazek do pulpitu</translation>
+    </message>
+</context>
+<context>
+    <name>PixelateTool</name>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
+        <source>Set Pixelate as the paint tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -64,14 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
         <source>Blur</source>
-        <translation>ぼかし</translation>
+        <translation type="vanished">ぼかし</translation>
     </message>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
         <source>Set Blur as the paint tool</source>
-        <translation>ペイントツールとして「ぼかし」をセットする</translation>
+        <translation type="vanished">ペイントツールとして「ぼかし」をセットする</translation>
     </message>
 </context>
 <context>
@@ -638,6 +636,19 @@ Enter を押すと画面をキャプチャー。
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
         <translation>選択範囲をデスクトップ上に配置する</translation>
+    </message>
+</context>
+<context>
+    <name>PixelateTool</name>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
+        <source>Set Pixelate as the paint tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
