@@ -17,23 +17,28 @@
 
 #include "colorutils.h"
 
-inline qreal getColorLuma(const QColor &c) {
-    return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
+inline qreal
+getColorLuma(const QColor& c)
+{
+  return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
 }
 
-bool ColorUtils::colorIsDark(const QColor &c) {
-    bool isWhite = false;
-    if (getColorLuma(c) <= 0.60) {
-        isWhite = true;
-    }
-    return isWhite;
+bool
+ColorUtils::colorIsDark(const QColor& c)
+{
+  bool isWhite = false;
+  if (getColorLuma(c) <= 0.60) {
+    isWhite = true;
+  }
+  return isWhite;
 }
 
-QColor ColorUtils::contrastColor(const QColor &c) {
-    int change = colorIsDark(c) ? 30 : -45;
+QColor
+ColorUtils::contrastColor(const QColor& c)
+{
+  int change = colorIsDark(c) ? 30 : -45;
 
-    return QColor(qBound(0, c.red() + change, 255),
-                  qBound(0, c.green() + change, 255),
-                  qBound(0, c.blue() + change, 255));
+  return QColor(qBound(0, c.red() + change, 255),
+                qBound(0, c.green() + change, 255),
+                qBound(0, c.blue() + change, 255));
 }
-

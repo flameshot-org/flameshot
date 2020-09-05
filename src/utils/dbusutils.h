@@ -21,19 +21,19 @@
 #include <QDBusConnection>
 #include <QObject>
 
-class DBusUtils : public QObject {
-    Q_OBJECT
+class DBusUtils : public QObject
+{
+  Q_OBJECT
 public:
-    explicit DBusUtils(QObject *parent = nullptr);
+  explicit DBusUtils(QObject* parent = nullptr);
 
-    void connectPrintCapture(QDBusConnection &session, uint id);
-    void checkDBusConnection(const QDBusConnection &connection);
+  void connectPrintCapture(QDBusConnection& session, uint id);
+  void checkDBusConnection(const QDBusConnection& connection);
 
 public slots:
-    void captureTaken(uint id, QByteArray rawImage);
-    void captureFailed(uint id);
+  void captureTaken(uint id, QByteArray rawImage);
+  void captureFailed(uint id);
 
 private:
-
-    uint m_id;
+  uint m_id;
 };

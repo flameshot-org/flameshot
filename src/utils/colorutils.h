@@ -21,8 +21,10 @@
 
 namespace ColorUtils { // namespace
 
-bool colorIsDark(const QColor &c);
+bool
+colorIsDark(const QColor& c);
 
-QColor contrastColor(const QColor &c);
+QColor
+contrastColor(const QColor& c);
 
 } // namespace
