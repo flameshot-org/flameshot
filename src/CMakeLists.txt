@@ -102,7 +102,7 @@ target_link_libraries(
   Qt5::Network
   Qt5::Widgets)
 
-target_compile_definitions(flameshot PRIVATE APP_PREFIX="/usr")
+target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v0.8.0")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
 target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
@@ -137,8 +137,8 @@ configure_file(${CMAKE_SOURCE_DIR}/docs/bash-completion/flameshot
 configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
                ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/interfaces/org.flameshot.Flameshot.xml COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/dbus/package/org.flameshot.Flameshot.service
-               ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.service.in
+               ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service)
 
 # Install Icons
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/flameshot.png
