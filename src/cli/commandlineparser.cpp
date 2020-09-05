@@ -340,6 +340,7 @@ CommandLineParser::printHelp(QStringList args, const Node* node)
 {
   args.removeLast(); // remove the help, it's always the last
   QString helpText;
+
   // add usage info
   QString argName = node->argument.name();
   if (argName.isEmpty()) {
@@ -350,6 +351,10 @@ CommandLineParser::printHelp(QStringList args, const Node* node)
                 .arg(args.join(QStringLiteral(" ")))
                 .arg(argName)
                 .arg(argText);
+
+  // short section about default behavior
+  helpText += QStringLiteral("Per default runs Flameshot in the background and adds a tray icon for configuration.\n\n");
+
   // add command options and subarguments
   QList<CommandArgument> subArgs;
   for (const Node& n : node->subNodes)
