@@ -149,12 +149,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="39"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>圆圈计数</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="51"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>添加数字自动递增的计数圆圈</translation>
     </message>
 </context>
 <context>
@@ -408,12 +408,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="273"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>上传后复制 URL</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="278"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>上传后复制 URL 并关闭窗口</translation>
     </message>
 </context>
 <context>
@@ -687,7 +687,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">复制链接到剪贴板。</translation>
+        <translation>URL 已复制到剪贴板。</translation>
     </message>
 </context>
 <context>
