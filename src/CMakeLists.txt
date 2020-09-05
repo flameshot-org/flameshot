@@ -103,7 +103,7 @@ target_link_libraries(
   Qt5::Widgets)
 
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
-target_compile_definitions(flameshot PRIVATE APP_VERSION="v0.8.0")
+target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
 target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
 
