@@ -19,11 +19,11 @@
 
 #include "src/tools/abstracttwopointtool.h"
 
-class BlurTool : public AbstractTwoPointTool
+class PixelateTool : public AbstractTwoPointTool
 {
   Q_OBJECT
 public:
-  explicit BlurTool(QObject* parent = nullptr);
+  explicit PixelateTool(QObject* parent = nullptr);
 
   QIcon icon(const QColor& background, bool inEditor) const override;
   QString name() const override;
