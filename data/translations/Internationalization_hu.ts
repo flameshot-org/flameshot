@@ -54,11 +54,11 @@
     <name>BlurTool</name>
     <message>
         <source>Blur</source>
-        <translation>Homályosítás</translation>
+        <translation type="vanished">Homályosítás</translation>
     </message>
     <message>
         <source>Set Blur as the paint tool</source>
-        <translation>Beállítja a Homályosítás eszközt festő eszközként</translation>
+        <translation type="vanished">Beállítja a Homályosítás eszközt festő eszközként</translation>
     </message>
 </context>
 <context>
@@ -543,6 +543,17 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Pin image on the desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PixelateTool</name>
+    <message>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Pixelate as the paint tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

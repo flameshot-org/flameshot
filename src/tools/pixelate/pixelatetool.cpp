@@ -15,47 +15,46 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "blurtool.h"
+#include "pixelatetool.h"
 #include <QApplication>
-#include <QGraphicsBlurEffect>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
 #include <QPainter>
 #include <cassert>
 
-BlurTool::BlurTool(QObject* parent)
+PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {}
 
 QIcon
-BlurTool::icon(const QColor& background, bool inEditor) const
+PixelateTool::icon(const QColor& background, bool inEditor) const
 {
   Q_UNUSED(inEditor);
   return QIcon(iconPath(background) + "blur.svg");
 }
 QString
-BlurTool::name() const
+PixelateTool::name() const
 {
-  return tr("Blur");
+  return tr("Pixelate");
 }
 
 QString
-BlurTool::nameID()
+PixelateTool::nameID()
 {
   return QLatin1String("");
 }
 
 QString
-BlurTool::description() const
+PixelateTool::description() const
 {
-  return tr("Set Blur as the paint tool");
+  return tr("Set Pixelate as the paint tool");
 }
 
 CaptureTool*
-BlurTool::copy(QObject* parent)
+PixelateTool::copy(QObject* parent)
 {
-  return new BlurTool(parent);
+  return new PixelateTool(parent);
 }
 
 void
@@ -100,7 +99,7 @@ calculate_block_averge(QImage& image, int x_start, int y_start, int pixel_size)
                blue_count / pixel_count));
 }
 void
-BlurTool::process(QPainter& painter, const QPixmap& pixmap, bool recordUndo)
+PixelateTool::process(QPainter& painter, const QPixmap& pixmap, bool recordUndo)
 {
   if (recordUndo) {
     updateBackup(pixmap);
@@ -143,14 +142,15 @@ BlurTool::process(QPainter& painter, const QPixmap& pixmap, bool recordUndo)
 }
 
 void
-BlurTool::paintMousePreview(QPainter& painter, const CaptureContext& context)
+PixelateTool::paintMousePreview(QPainter& painter,
+                                const CaptureContext& context)
 {
   Q_UNUSED(context);
   Q_UNUSED(painter);
 }
 
 void
-BlurTool::drawStart(const CaptureContext& context)
+PixelateTool::drawStart(const CaptureContext& context)
 {
   m_thickness = context.thickness;
   m_points.first = context.mousePos;
@@ -158,7 +158,7 @@ BlurTool::drawStart(const CaptureContext& context)
 }
 
 void
-BlurTool::pressed(const CaptureContext& context)
+PixelateTool::pressed(const CaptureContext& context)
 {
   Q_UNUSED(context);
 }

@@ -64,14 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
         <source>Blur</source>
-        <translation>Vervaging</translation>
+        <translation type="vanished">Vervaging</translation>
     </message>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
         <source>Set Blur as the paint tool</source>
-        <translation>Vervaging instellen als verfgereedschap</translation>
+        <translation type="vanished">Vervaging instellen als verfgereedschap</translation>
     </message>
 </context>
 <context>
@@ -638,6 +636,19 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
         <translation>Afbeelding vastmaken op bureaublad</translation>
+    </message>
+</context>
+<context>
+    <name>PixelateTool</name>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
+        <source>Pixelate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
+        <source>Set Pixelate as the paint tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

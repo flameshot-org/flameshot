@@ -17,7 +17,6 @@
 
 #include "toolfactory.h"
 #include "arrow/arrowtool.h"
-#include "blur/blurtool.h"
 #include "circle/circletool.h"
 #include "circlecount/circlecounttool.h"
 #include "copy/copytool.h"
@@ -29,6 +28,7 @@
 #include "move/movetool.h"
 #include "pencil/penciltool.h"
 #include "pin/pintool.h"
+#include "pixelate/pixelatetool.h"
 #include "rectangle/rectangletool.h"
 #include "redo/redotool.h"
 #include "save/savetool.h"
@@ -95,7 +95,7 @@ ToolFactory::CreateTool(CaptureButton::ButtonType t, QObject* parent)
       tool = new AppLauncher(parent);
       break;
     case CaptureButton::TYPE_BLUR:
-      tool = new BlurTool(parent);
+      tool = new PixelateTool(parent);
       break;
     case CaptureButton::TYPE_PIN:
       tool = new PinTool(parent);
