@@ -25,9 +25,7 @@ add_subdirectory(utils)
 add_subdirectory(widgets)
 add_subdirectory(tools)
 
-qt5_create_translation(
-  QM_FILES
-  ${CMAKE_SOURCE_DIR}
+set(FLAMESHOT_TS_FILES
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
@@ -45,6 +43,12 @@ qt5_create_translation(
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+
+qt5_add_translation(
+  QM_FILES
+  ${FLAMESHOT_TS_FILES}
+)
+add_custom_target(translations DEPENDS ${QM_FILES})
 
 target_sources(
   flameshot
