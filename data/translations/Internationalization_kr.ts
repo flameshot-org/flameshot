@@ -65,11 +65,11 @@
     <name>BlurTool</name>
     <message>
         <source>Blur</source>
-        <translation type="vanished">ぼかし</translation>
+        <translation type="vanished">블러</translation>
     </message>
     <message>
         <source>Set Blur as the paint tool</source>
-        <translation type="vanished">ペイントツールとして「ぼかし」をセットする</translation>
+        <translation type="vanished">페인트 도구를 블러로 </translation>
     </message>
 </context>
 <context>
