@@ -242,7 +242,11 @@ There are packages available for a few distros:
 
 ## Compilation
 
-To build the application in your system, you'll need to install the dependencies needed for it and Package names might be different for each distribution, see [Dependencies](#dependencies) below for more information.
+To build the application in your system, you'll need to install the dependencies needed for it and package names might be different for each distribution, see [Dependencies](#dependencies) below for more information. You can also install most of the Qt dependencies via [their installer](https://www.qt.io/download-qt-installer). If you were developing Qt apps before, you probably already have them.
+
+This project uses [CMake](https://cmake.org/) build system, so you need to install it in order to build the project (on most Linux distributions it is available in the standard repositories as a package called `cmake`). If your distribution provides too old version of CMake (e.g. Ubuntu 18.04) you can [download it on the official website](https://cmake.org/download/).
+
+Also you can open and build/debug the project in a C++ IDE. For example, in Qt Creator you should be able to simply open `CMakeLists.txt` via `Open File or Project` in the menu after installing CMake into your system. [More information about CMake projects in Qt Creator](https://doc.qt.io/qtcreator/creator-project-cmake.html).
 
 ### Dependencies
 
@@ -251,6 +255,7 @@ To build the application in your system, you'll need to install the dependencies
 - Qt >= 5.9
   + Development tools
 - GCC >= 7.4 
+- CMake >= 3.13
 
 #### Run-time
 
@@ -267,7 +272,7 @@ To build the application in your system, you'll need to install the dependencies
 
 ```shell
 # Compile-time
-apt install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools
+apt install g++ cmake build-essential qt5-default qttools5-dev-tools
 
 # Run-time
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev
@@ -280,7 +285,7 @@ apt install git openssl ca-certificates
 
 ```shell
 # Compile-time
-dnf install gcc-c++ qt5-devel qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ cmake qt5-devel qt5-qtbase-devel qt5-linguist
 
 # Run-time
 dnf install qt5-qtbase qt5-qtsvg-devel
@@ -293,7 +298,7 @@ dnf install git openssl ca-certificates
 
 ```shell
 # Compile-time
-pacman -S base-devel git qt5-base qt5-tools
+pacman -S cmake base-devel git qt5-base qt5-tools
 
 # Run-time
 pacman -S qt5-svg
