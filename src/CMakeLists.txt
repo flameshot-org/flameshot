@@ -25,26 +25,30 @@ add_subdirectory(utils)
 add_subdirectory(widgets)
 add_subdirectory(tools)
 
-qt5_create_translation(
-  QM_FILES
-  ${CMAKE_SOURCE_DIR}
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_br.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+set(FLAMESHOT_TS_FILES
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_br.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+
+if(GENERATE_TS)
+  qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
+else()
+  qt5_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
+endif()
 
 target_sources(
   flameshot
