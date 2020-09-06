@@ -18,6 +18,10 @@ add_executable(flameshot)
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
 
+IF(WIN32)
+  set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
+ENDIF()
+
 add_subdirectory(cli)
 add_subdirectory(config)
 add_subdirectory(core)
