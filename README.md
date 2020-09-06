@@ -255,7 +255,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 - Qt >= 5.9
   + Development tools
 - GCC >= 7.4 
-- CMake
+- CMake >= 3.13
 
 #### Run-time
 
