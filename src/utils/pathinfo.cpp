@@ -17,29 +17,32 @@
 
 #include "pathinfo.h"
 #include <QApplication>
-#include <QFileInfo>
 #include <QDir>
+#include <QFileInfo>
 
-const QString PathInfo::whiteIconPath() {
-    return QStringLiteral(":/img/material/white/");
+const QString
+PathInfo::whiteIconPath()
+{
+  return QStringLiteral(":/img/material/white/");
 }
 
-const QString PathInfo::blackIconPath() {
-    return QStringLiteral(":/img/material/black/");
+const QString
+PathInfo::blackIconPath()
+{
+  return QStringLiteral(":/img/material/black/");
 }
 
-QStringList PathInfo::translationsPaths() {
-    QString binaryPath = QFileInfo(qApp->applicationDirPath())
-            .absoluteFilePath();
-    QString trPath = QDir::toNativeSeparators(binaryPath + "/translations") ;
+QStringList
+PathInfo::translationsPaths()
+{
+  QString binaryPath = QFileInfo(qApp->applicationDirPath()).absoluteFilePath();
+  QString trPath = QDir::toNativeSeparators(binaryPath + "/translations");
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    return QStringList()
-            << QStringLiteral(APP_PREFIX) + "/share/flameshot/translations"
-            << trPath
-            << QStringLiteral("/usr/share/flameshot/translations")
-            << QStringLiteral("/usr/local/share/flameshot/translations");
+  return QStringList()
+         << QStringLiteral(APP_PREFIX) + "/share/flameshot/translations"
+         << trPath << QStringLiteral("/usr/share/flameshot/translations")
+         << QStringLiteral("/usr/local/share/flameshot/translations");
 #elif defined(Q_OS_WIN)
-    return QStringList()
-            << trPath;
+  return QStringList() << trPath;
 #endif
 }

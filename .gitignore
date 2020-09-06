@@ -49,5 +49,10 @@ stage/
 .snapcraft/
 flameshot*.tar.bz2
 
+.vscode/
+build/
+data/flatpak/.flatpak-builder
+# NVIM
+*~
 
 # End of https://www.gitignore.io/api/snapcraft

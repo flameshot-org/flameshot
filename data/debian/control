@@ -1,0 +1,32 @@
+Source: flameshot
+Section: graphics
+Priority: optional
+Maintainer: Juanma Navarro Mañez <juanma1980@gmail.com>
+Uploaders:
+ Boyuan Yang <byang@debian.org>,
+Build-Depends:
+ cmake (>= 3.13~),
+ debhelper (>= 9),
+ qtbase5-dev,
+ qttools5-dev,
+ qttools5-dev-tools,
+ libqt5svg5-dev,
+Standards-Version: 4.5.0
+Homepage: https://github.com/flameshot-org/flameshot
+Vcs-Browser: https://github.com/flameshot-org/flameshot
+Vcs-Git: https://github.com/flameshot-org/flameshot.git
+
+Package: flameshot
+Architecture: any
+Depends:
+ libqt5svg5,
+ ${shlibs:Depends},
+ ${misc:Depends},
+Suggests:
+ ca-certificates,
+ openssl,
+Description: Powerful yet simple-to-use screenshot software
+ Flameshot is a powerful yet simple-to-use screenshot software.
+ Notable features include customizable appearance, in-app screenshot editing,
+ D-Bus interface, experimental GNOME/KDE Wayland support, integration with
+ Imgur and support for both GUI and CLI interface.
