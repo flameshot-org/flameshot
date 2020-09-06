@@ -101,59 +101,58 @@ main(int argc, char* argv[])
   CommandLineParser parser;
   // Add description
   parser.setDescription(
-    QStringLiteral("Powerful yet simple to use screenshot software."));
-  parser.setGeneralErrorMessage(QStringLiteral("See 'flameshot --help'."));
+    QObject::tr("Powerful yet simple to use screenshot software."));
+  parser.setGeneralErrorMessage(QObject::tr("See")+" flameshot --help.");
   // Arguments
   CommandArgument fullArgument(QStringLiteral("full"),
-                               QStringLiteral("Capture the entire desktop."));
+                               QObject::tr("Capture the entire desktop."));
   CommandArgument launcherArgument(
-    QStringLiteral("launcher"), QStringLiteral("Open the capture launcher."));
+    QStringLiteral("launcher"), QObject::tr("Open the capture launcher."));
   CommandArgument guiArgument(
     QStringLiteral("gui"),
-    QStringLiteral("Start a manual capture in GUI mode."));
+    QObject::tr("Start a manual capture in GUI mode."));
   CommandArgument configArgument(QStringLiteral("config"),
-                                 QStringLiteral("Configure flameshot."));
+                                QObject::tr("Configure")+" flameshot.");
   CommandArgument screenArgument(QStringLiteral("screen"),
-                                 QStringLiteral("Capture a single screen."));
+                                QObject::tr("Capture a single screen."));
 
   // Options
   CommandOption pathOption(
     { "p", "path" },
-    QStringLiteral("Path where the capture will be saved"),
+    QObject::tr("Path where the capture will be saved"),
     QStringLiteral("path"));
   CommandOption clipboardOption(
-    { "c", "clipboard" }, QStringLiteral("Save the capture to the clipboard"));
+    { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
   CommandOption delayOption({ "d", "delay" },
-                            QStringLiteral("Delay time in milliseconds"),
+                            QObject::tr("Delay time in milliseconds"),
                             QStringLiteral("milliseconds"));
   CommandOption filenameOption({ "f", "filename" },
-                               QStringLiteral("Set the filename pattern"),
+                               QObject::tr("Set the filename pattern"),
                                QStringLiteral("pattern"));
   CommandOption trayOption({ "t", "trayicon" },
-                           QStringLiteral("Enable or disable the trayicon"),
+                           QObject::tr("Enable or disable the trayicon"),
                            QStringLiteral("bool"));
   CommandOption autostartOption(
     { "a", "autostart" },
-    QStringLiteral("Enable or disable run at startup"),
+    QObject::tr("Enable or disable run at startup"),
     QStringLiteral("bool"));
   CommandOption showHelpOption(
     { "s", "showhelp" },
-    QStringLiteral("Show the help message in the capture mode"),
+    QObject::tr("Show the help message in the capture mode"),
     QStringLiteral("bool"));
   CommandOption mainColorOption({ "m", "maincolor" },
-                                QStringLiteral("Define the main UI color"),
+                                QObject::tr("Define the main UI color"),
                                 QStringLiteral("color-code"));
   CommandOption contrastColorOption(
     { "k", "contrastcolor" },
-    QStringLiteral("Define the contrast UI color"),
+    QObject::tr("Define the contrast UI color"),
     QStringLiteral("color-code"));
   CommandOption rawImageOption({ "r", "raw" },
-                               QStringLiteral("Print raw PNG capture"));
+                              QObject::tr("Print raw PNG capture"));
   CommandOption screenNumberOption(
     { "n", "number" },
-    QStringLiteral(
-      "Define the screen to capture,\ndefault: screen containing the cursor"),
-    QStringLiteral("Screen number"),
+    QObject::tr("Define the screen to capture")+",\n"+QObject::tr("default: screen containing the cursor"),
+    QObject::tr("Screen number"),
     QStringLiteral("-1"));
 
   // Add checkers
@@ -161,25 +160,26 @@ main(int argc, char* argv[])
     QColor parsedColor(colorCode);
     return parsedColor.isValid() && parsedColor.alphaF() == 1.0;
   };
-  QString colorErr = "Invalid color, "
-                     "this flag supports the following formats:\n"
-                     "- #RGB (each of R, G, and B is a single hex digit)\n"
-                     "- #RRGGBB\n- #RRRGGGBBB\n"
-                     "- #RRRRGGGGBBBB\n"
-                     "- Named colors like 'blue' or 'red'\n"
-                     "You may need to escape the '#' sign as in '\\#FFF'";
+  QString colorErr = QObject::tr("Invalid color, "
+                                "this flag supports the following formats:\n"
+                                "- #RGB (each of R, G, and B is a single hex digit)\n"
+                                "- #RRGGBB\n- #RRRGGGBBB\n"
+                                "- #RRRRGGGGBBBB\n"
+                                "- Named colors like 'blue' or 'red'\n"
+                                "You may need to escape the '#' sign as in '\\#FFF'"
+                                );
 
   const QString delayErr =
-    QStringLiteral("Invalid delay, it must be higher than 0");
+    QObject::tr("Invalid delay, it must be higher than 0");
   const QString numberErr =
-    QStringLiteral("Invalid screen number, it must be non negative");
+    QObject::tr("Invalid screen number, it must be non negative");
   auto numericChecker = [](const QString& delayValue) -> bool {
     int value = delayValue.toInt();
     return value >= 0;
   };
 
   const QString pathErr =
-    QStringLiteral("Invalid path, it must be a real path in the system");
+    QObject::tr("Invalid path, it must be a real path in the system");
   auto pathChecker = [pathErr](const QString& pathValue) -> bool {
     bool res = QDir(pathValue).exists();
     if (!res) {
@@ -189,7 +189,7 @@ main(int argc, char* argv[])
   };
 
   const QString booleanErr =
-    QStringLiteral("Invalid value, it must be defined as 'true' or 'false'");
+    QObject::tr("Invalid value, it must be defined as 'true' or 'false'");
   auto booleanChecker = [](const QString& value) -> bool {
     return value == QLatin1String("true") || value == QLatin1String("false");
   };
