@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Set Blur as the paint tool</source>
-        <translation type="vanished">페인트 도구를 블러로 </translation>
+        <translation type="vanished">페인트 도구를 블러로 설정</translation>
     </message>
 </context>
 <context>
