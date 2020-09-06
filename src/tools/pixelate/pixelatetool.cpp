@@ -31,7 +31,7 @@ QIcon
 PixelateTool::icon(const QColor& background, bool inEditor) const
 {
   Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "blur.svg");
+  return QIcon(iconPath(background) + "pixelate.svg");
 }
 QString
 PixelateTool::name() const

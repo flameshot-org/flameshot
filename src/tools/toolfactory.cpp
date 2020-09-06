@@ -94,7 +94,7 @@ ToolFactory::CreateTool(CaptureButton::ButtonType t, QObject* parent)
     case CaptureButton::TYPE_OPEN_APP:
       tool = new AppLauncher(parent);
       break;
-    case CaptureButton::TYPE_BLUR:
+    case CaptureButton::TYPE_PIXELATE:
       tool = new PixelateTool(parent);
       break;
     case CaptureButton::TYPE_PIN:
