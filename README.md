@@ -1,8 +1,8 @@
 <div align="center">
   <p>
     <h1>
-      <a href="https://github.com/lupoDharkael/flameshot">
-        <img src="img/app/flameshot.svg" alt="Flameshot" />
+      <a href="https://github.com/flameshot-org/flameshot">
+        <img src="data/img/app/flameshot.svg" alt="Flameshot" />
       </a>
       <br />
       Flameshot
@@ -16,14 +16,14 @@
     <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot">
       <img src="https://img.shields.io/appveyor/ci/lupoDharkael/flameshot.svg?style=flat-square&label=windows" alt="Windows Build Status" />
     </a>
-    <a href="https://github.com/lupoDharkael/flameshot/releases">
-      <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
+    <a href="https://github.com/flameshot-org/flameshot/releases">
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
     </a>
-    <a href="https://github.com/lupoDharkael/flameshot/releases">
-      <img src="https://img.shields.io/github/downloads/lupoDharkael/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
+    <a href="https://github.com/flameshot-org/flameshot/releases">
+      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
     </a>
-    <a href="https://github.com/lupoDharkael/flameshot/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/lupoDharkael/flameshot.svg?style=flat-square" alt="License" />
+    <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
     </a>
     <a href="https://github.com/flameshotapp/flameshotapp.github.io">
       <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
@@ -74,6 +74,9 @@
 
 ## Usage
 
+Execute the command `flameshot` without parameters to launch a running instance of the program without taking actions.  
+Also adds a tray icon for configuration and management.
+
 Example commands:
 
 - Capture with GUI:
@@ -88,7 +91,7 @@ Example commands:
     flameshot gui -p ~/myStuff/captures
     ```
 
-- Open GUI with a delay of 2 seconds:
+- Capture with GUI after 2 seconds delay (can be useful to take screenshots of mouse hover tooltips, etc.):
 
     ```shell
     flameshot gui -d 2000
@@ -196,7 +199,7 @@ Steps for using the configuration:
 
     ```shell
     cd ~/Desktop
-    wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+    wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
     ```
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
@@ -213,8 +216,6 @@ Steps for using the configuration:
 - In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
 
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
-
-- Execute the command `flameshot` without parameters to launch a running instance of the program without taking actions.
 
 ## Installation
 
@@ -251,9 +252,9 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 #### Compile-time
 
-- Qt >= 5.3
+- Qt >= 5.9
   + Development tools
-- GCC >= 4.9.2
+- GCC >= 7.4 
 - CMake
 
 #### Run-time
@@ -313,30 +314,13 @@ After installing all the dependencies, finally run the following commands in the
 ```shell
 mkdir build
 cd build
-qmake ../
+cmake ../
 make
 ```
 
 ### Install
 
 Simply use `make install` with privileges.
-
-## Packaging
-
-Having `git` installed is required if you're building Flameshot from a snapshot to have precise version information.
-
-In order to generate the instructions in the `Makefile` to install the application in `/usr` instead of in `/usr/local` you can pass the `packaging` option to `qmake` (`qmake CONFIG+=packaging`).
-
-If you want to install in a custom directory you can use the `INSTALL_ROOT` variable.
-
-**Example**:
-
-If you want to install Flameshot in `~/myBuilds/test`, you can execute the following to do so:
-
-```shell
-qmake CONFIG+=packaging
-make INSTALL_ROOT=~/myBuilds/test install
-```
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
@@ -353,15 +337,11 @@ Info: If I take code from your project and that implies a relicense to GPLv3, yo
 
 If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Donations
-I improve Flameshot in my free time because I want to create something good for everyone to use. 
-If you want you can donate some bucks with the following options: 
-- [Paypal](https://www.paypal.me/lupoDharkael)
-- bitcoin:1K6oiUKWVjP3x9ZuW9C7NbDfcFkMx3G8ue
 
 
 ## Acknowledgment
-I really appreciate those who have shown interest in the early development process:
+Thanks to those who have shown interest in the early development process:
+- [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)
 - [XerTheSquirrel](https://github.com/XerTheSquirrel)
 - [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)

@@ -16,9 +16,11 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "globalvalues.h"
-#include <QFontMetrics>
 #include <QApplication>
+#include <QFontMetrics>
 
-int GlobalValues::buttonBaseSize() {
-    return QApplication::fontMetrics().lineSpacing() * 2.2;
+int
+GlobalValues::buttonBaseSize()
+{
+  return QApplication::fontMetrics().lineSpacing() * 2.2;
 }

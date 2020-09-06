@@ -14,12 +14,12 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/lupoDharkael/flameshot/master/img/preview/usageStatic.png</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/usageStatic.png</image>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/lupoDharkael/flameshot/master/img/preview/animatedUsage.gif</image>
+      <image>https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/animatedUsage.gif</image>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://github.com/lupoDharkael/flameshot</url>
-  <update_contact>https://github.com/lupoDharkael</update_contact>
+  <url type="homepage">https://github.com/flameshot-org/flameshot</url>
+  <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
 </component>
