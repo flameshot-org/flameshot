@@ -35,7 +35,7 @@
 
 ## Preview
 
-![image](img/preview/animatedUsage.gif)
+![image](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/_media/animatedUsage.gif)
 
 ## Index
 
