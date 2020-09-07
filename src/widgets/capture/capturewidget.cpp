@@ -709,6 +709,10 @@ CaptureWidget::handleButtonSignal(CaptureTool::Request r)
       incrementCircleCount();
       break;
 
+    case CaptureTool::REQ_DECREMENT_CIRCLE_COUNT:
+      decrementCircleCount();
+      break;
+
     case CaptureTool::REQ_CLOSE_GUI:
       close();
       break;
@@ -794,6 +798,12 @@ void
 CaptureWidget::incrementCircleCount()
 {
   m_context.circleCount++;
+}
+
+void
+CaptureWidget::decrementCircleCount()
+{
+  m_context.circleCount--;
 }
 
 void

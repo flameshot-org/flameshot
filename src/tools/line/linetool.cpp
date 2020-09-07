@@ -43,10 +43,10 @@ LineTool::name() const
   return tr("Line");
 }
 
-QString
-LineTool::nameID()
+ToolType
+LineTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::LINE;
 }
 
 QString

@@ -40,10 +40,10 @@ AppLauncher::name() const
   return tr("App Launcher");
 }
 
-QString
-AppLauncher::nameID()
+ToolType
+AppLauncher::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::LAUNCHER;
 }
 
 QString
