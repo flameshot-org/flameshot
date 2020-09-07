@@ -821,29 +821,34 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="95"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
         <source>Save Error</source>
         <translation>Erreur lors de la sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="85"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="89"/>
         <source>Capture saved as </source>
         <translation>Capture d&apos;écran sauvegardée sous </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
         <source>Capture saved to clipboard</source>
         <translation>Capture d&apos;écran copiée dans le Presse-papier</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="51"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="96"/>
         <source>Error trying to save as </source>
         <translation>Erreur lors de la sauvegarde sous </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="67"/>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
         <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>

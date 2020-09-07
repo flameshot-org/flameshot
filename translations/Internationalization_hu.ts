@@ -735,6 +735,10 @@ You can find me in the system tray.</source>
         <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
