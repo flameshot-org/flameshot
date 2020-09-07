@@ -67,21 +67,29 @@ CircleCountTool::process(QPainter& painter,
   }
   painter.setBrush(m_color);
 
-  int bubble_size = 16;
+  int bubble_size = m_thickness;
   painter.drawEllipse(m_points.first, bubble_size, bubble_size);
+  auto orig_font = painter.font();
+  auto new_font = orig_font;
+  new_font.setPixelSize(m_thickness);
+  painter.setFont(new_font);
   painter.drawText(QRectF(m_points.first.x() - bubble_size / 2,
                           m_points.first.y() - bubble_size / 2,
                           bubble_size,
                           bubble_size),
                    Qt::AlignCenter,
                    QString::number(m_count));
+  painter.setFont(orig_font);
 }
 
 void
 CircleCountTool::paintMousePreview(QPainter& painter,
                                    const CaptureContext& context)
 {
-  painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
+  painter.setPen(QPen(context.color,
+                      PADDING_VALUE + context.thickness,
+                      Qt::SolidLine,
+                      Qt::RoundCap));
   painter.drawLine(context.mousePos, context.mousePos);
 }
 
