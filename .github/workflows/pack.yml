@@ -1,0 +1,87 @@
+name: Packing
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  PRODUCT: flameshot
+  VERSION: 0.8.0
+  RELEASE: 1
+  ARCH: x86_64
+  # dockerfiles, see https://github.com/flameshot-org/flameshot-docker-images
+  # docker images, see https://hub.docker.com/r/vitzy/flameshot
+  DOCKER_REPO: vitzy/flameshot
+  # upload services: 0x0.st, file.io, transfer.sh, wetransfer.com
+  UPLOAD_SERVICE: file.io
+
+jobs:
+  deb-pack:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        dist: [debian-10, ubuntu-20.04]
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v2
+      - name: Get packpack tool
+        uses: actions/checkout@v2
+        with:
+          repository: flameshot-org/packpack
+          path: tools
+      - name: Pack on ${{ matrix.dist }}
+        if: matrix.dist == 'debian-10'
+        run: |
+          cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
+          bash $GITHUB_WORKSPACE/tools/packpack
+        env:
+          OS: debian 
+          DIST: buster
+      - name: Pack on ${{ matrix.dist }}
+        if: matrix.dist == 'ubuntu-20.04'
+        run: |
+          cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
+          bash $GITHUB_WORKSPACE/tools/packpack
+        env:
+          OS: ubuntu 
+          DIST: focal
+      - name: Upload ${{ matrix.dist }} package for daily build
+        run: |
+          TEMP_DOWNLOAD_URL=$(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb)
+          echo Download URL is $TEMP_DOWNLOAD_URL. 
+
+  rpm-pack:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        dist: [fedora-31, fedora-32]
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v2
+      - name: Get packpack tool
+        uses: actions/checkout@v2
+        with:
+          repository: flameshot-org/packpack
+          path: tools
+      - name: Pack on ${{ matrix.dist }}
+        if: matrix.dist == 'fedora-31'
+        run: |
+          cp -r $GITHUB_WORKSPACE/data/rpm $GITHUB_WORKSPACE
+          bash $GITHUB_WORKSPACE/tools/packpack
+        env:
+          OS: fedora
+          DIST: 31
+      - name: Pack on ${{ matrix.dist }}
+        if: matrix.dist == 'fedora-32'
+        run: |
+          cp -r $GITHUB_WORKSPACE/data/rpm $GITHUB_WORKSPACE
+          bash $GITHUB_WORKSPACE/tools/packpack
+        env:
+          OS: fedora
+          DIST: 32
+      - name: Upload ${{ matrix.dist }} package for daily build
+        run: |
+          TEMP_DOWNLOAD_URL=$(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm)
+          echo Download URL is $TEMP_DOWNLOAD_URL. 
