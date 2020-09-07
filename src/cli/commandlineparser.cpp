@@ -61,7 +61,7 @@ optionsToString(const QList<CommandOption>& options,
   // generate the text
   QString result;
   if (!dashedOptionList.isEmpty()) {
-    result += QLatin1String("Options:\n");
+    result += QObject::tr("Options") + ":\n";
     QString linePadding = QStringLiteral(" ").repeated(size + 4).prepend("\n");
     for (int i = 0; i < options.length(); ++i) {
       result += QStringLiteral("  %1  %2\n")
@@ -74,7 +74,7 @@ optionsToString(const QList<CommandOption>& options,
     }
   }
   if (!arguments.isEmpty()) {
-    result += QLatin1String("Arguments:\n");
+    result += QObject::tr("Arguments") + ":\n";
   }
   for (int i = 0; i < arguments.length(); ++i) {
     result += QStringLiteral("  %1  %2\n")
@@ -346,15 +346,18 @@ CommandLineParser::printHelp(QStringList args, const Node* node)
   if (argName.isEmpty()) {
     argName = qApp->applicationName();
   }
-  QString argText = node->subNodes.isEmpty() ? "" : "[arguments]";
-  helpText += QStringLiteral("Usage: %1 [%2-options] %3\n\n")
+  QString argText =
+    node->subNodes.isEmpty() ? "" : "[" + QObject::tr("arguments") + "]";
+  helpText += QObject::tr("Usage") + ": %1 [%2-" + QObject::tr("options") +
+              QStringLiteral("] %3\n\n")
                 .arg(args.join(QStringLiteral(" ")))
                 .arg(argName)
                 .arg(argText);
 
   // short section about default behavior
-  helpText += QStringLiteral("Per default runs Flameshot in the background and \
-  adds a tray icon for configuration.\n\n");
+  helpText += QObject::tr("Per default runs Flameshot in the background and \
+  adds a tray icon for configuration.");
+  helpText += "\n\n";
 
   // add command options and subarguments
   QList<CommandArgument> subArgs;

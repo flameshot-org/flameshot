@@ -592,6 +592,136 @@ Press Space to open the side panel.</source>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Powerful yet simple to use screenshot software.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>See</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture the entire desktop.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the capture launcher.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start a manual capture in GUI mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture a single screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path where the capture will be saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save the capture to the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay time in milliseconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the filename pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable or disable the trayicon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable or disable run at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the help message in the capture mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define the main UI color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define the contrast UI color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print raw PNG capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define the screen to capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default: screen containing the cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screen number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid color, this flag supports the following formats:
+- #RGB (each of R, G, and B is a single hex digit)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- Named colors like &apos;blue&apos; or &apos;red&apos;
+You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid delay, it must be higher than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid screen number, it must be non negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid path, it must be a real path in the system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
