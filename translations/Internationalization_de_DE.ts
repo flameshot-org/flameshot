@@ -821,29 +821,34 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="95"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
         <source>Save Error</source>
         <translation>Speicherfehler</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="85"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="89"/>
         <source>Capture saved as </source>
         <translation>Aufnahme gespeichert als </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
         <source>Capture saved to clipboard</source>
         <translation>Aufnahme in Zwischenablage gespeichert</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="51"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="96"/>
         <source>Error trying to save as </source>
         <translation>Fehler beim Speichern unter </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="67"/>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
         <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>

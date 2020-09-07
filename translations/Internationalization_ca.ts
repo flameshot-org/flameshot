@@ -818,24 +818,29 @@ Press Space to open the side panel.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="95"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
         <source>Save Error</source>
         <translation>S&apos;ha produït un error en guardar</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="85"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="89"/>
         <source>Capture saved as </source>
         <translation>Anomena i guarda la captura </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="51"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="96"/>
         <source>Error trying to save as </source>
         <translation>S&apos;ha produït un error en anomenar i guardar </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="67"/>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
         <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
@@ -859,7 +864,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">No es pot escriure a</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
         <source>Capture saved to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
