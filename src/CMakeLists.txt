@@ -44,7 +44,8 @@ qt5_create_translation(
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
   ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
-  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts
+  ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts)
 
 target_sources(
   flameshot
