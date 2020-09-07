@@ -275,6 +275,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent *e) {
         m_rightClick = true;
         m_colorPicker->move(e->pos().x()-m_colorPicker->width()/2,
                             e->pos().y()-m_colorPicker->height()/2);
+        m_colorPicker->raise();
         m_colorPicker->show();
     } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
@@ -427,7 +428,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent *e) {
 }
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
-    if (e->button() == Qt::RightButton) {
+    if (e->button() == Qt::RightButton || m_colorPicker->isVisible()) {
         m_colorPicker->hide();
         m_rightClick = false;
     // when we end the drawing we have to register the last  point and
@@ -665,7 +666,6 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
         m_panel->toggle();
         break;
     case CaptureTool::REQ_SHOW_COLOR_PICKER:
-        // TODO
         break;
     case CaptureTool::REQ_MOVE_MODE:
         setState(m_activeButton); // Disable the actual button
