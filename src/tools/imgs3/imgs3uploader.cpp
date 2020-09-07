@@ -46,6 +46,7 @@
 #include <QNetworkProxy>
 #include <QDir>
 #include <QMessageBox>
+#include <QDebug>
 
 
 ImgS3Uploader::ImgS3Uploader(const QPixmap &capture, QWidget *parent) :

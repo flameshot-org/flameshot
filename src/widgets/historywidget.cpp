@@ -7,7 +7,6 @@
 #include <QPixmap>
 #include <QLabel>
 #include <QScrollArea>
-#include <QDebug>
 #include <QFileInfo>
 #include <QDateTime>
 #include <QPushButton>
