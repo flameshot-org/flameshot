@@ -21,8 +21,12 @@
 #include "src/utils/filenamehandler.h"
 #include <QDir>
 #include <QMessageBox>
-#include <Shlobj.h>
 #include <windows.h>
+#ifdef _WIN32_WINNT
+#undef _WIN32_WINNT
+#define _WIN32_WINNT 0x601
+#endif
+#include <Shlobj.h>
 
 #pragma comment(lib, "Shell32.lib")
 #else
