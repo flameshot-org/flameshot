@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.13)
-#cmake_policy(SET CMP0076 OLD)
+# cmake_policy(SET CMP0076 OLD)
 
 project(
   flameshot
   VERSION 0.8.0
   LANGUAGES CXX)
+
+option(GENERATE_TS "Regenerate translation source files" OFF)
 
 include(cmake/StandardProjectSettings.cmake)
 

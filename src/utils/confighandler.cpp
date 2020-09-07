@@ -46,7 +46,7 @@ ConfigHandler::getButtons()
     buttons << CaptureButton::TYPE_PENCIL << CaptureButton::TYPE_DRAWER
             << CaptureButton::TYPE_ARROW << CaptureButton::TYPE_SELECTION
             << CaptureButton::TYPE_RECTANGLE << CaptureButton::TYPE_CIRCLE
-            << CaptureButton::TYPE_MARKER << CaptureButton::TYPE_BLUR
+            << CaptureButton::TYPE_MARKER << CaptureButton::TYPE_PIXELATE
             << CaptureButton::TYPE_SELECTIONINDICATOR
             << CaptureButton::TYPE_MOVESELECTION << CaptureButton::TYPE_UNDO
             << CaptureButton::TYPE_REDO << CaptureButton::TYPE_COPY
