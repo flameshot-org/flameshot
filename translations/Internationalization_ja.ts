@@ -821,29 +821,34 @@ Enter を押すと画面をキャプチャー。
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="95"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
         <source>Save Error</source>
         <translation>保存エラー</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="85"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="89"/>
         <source>Capture saved as </source>
         <translation>キャプチャーを保存しました: </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
         <source>Capture saved to clipboard</source>
         <translation>キャプチャーをクリップボードに保存しました</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="51"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="96"/>
         <source>Error trying to save as </source>
         <translation>保存時にエラーが発生しました: </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="67"/>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
         <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
