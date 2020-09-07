@@ -71,7 +71,7 @@ main(int argc, char* argv[])
     app.installTranslator(&qtTranslator);
     app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
     app.setApplicationName(QStringLiteral("flameshot"));
-    app.setOrganizationName(QStringLiteral("flameshot"));
+    app.setOrganizationName(QStringLiteral("Dharkael"));
 
     auto c = Controller::getInstance();
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -82,7 +82,7 @@ main(int argc, char* argv[])
         QObject::tr("Unable to connect via DBus"));
     }
     dbus.registerObject(QStringLiteral("/"), c);
-    dbus.registerService(QStringLiteral("org.flameshot.Flameshot"));
+    dbus.registerService(QStringLiteral("org.flameshot-org.Flameshot"));
 #endif
     // Exporting captures must be connected after the dbus interface
     // or the dbus signal gets blocked until we end the exports.
@@ -96,7 +96,7 @@ main(int argc, char* argv[])
    * ------------*/
   QCoreApplication app(argc, argv);
   app.setApplicationName(QStringLiteral("flameshot"));
-  app.setOrganizationName(QStringLiteral("flameshot"));
+  app.setOrganizationName(QStringLiteral("Dharkael"));
   app.setApplicationVersion(qApp->applicationVersion());
   CommandLineParser parser;
   // Add description
@@ -233,11 +233,11 @@ main(int argc, char* argv[])
   //--------------
   if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
   } else if (parser.isSet(launcherArgument)) { // LAUNCHER
-    QDBusMessage m =
-      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
-                                     QStringLiteral("/"),
-                                     QLatin1String(""),
-                                     QStringLiteral("openLauncher"));
+    QDBusMessage m = QDBusMessage::createMethodCall(
+      QStringLiteral("org.flameshot-org.Flameshot"),
+      QStringLiteral("/"),
+      QLatin1String(""),
+      QStringLiteral("openLauncher"));
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     if (!sessionBus.isConnected()) {
       SystemNotification().sendMessage(
@@ -253,11 +253,11 @@ main(int argc, char* argv[])
     uint id = req.id();
 
     // Send message
-    QDBusMessage m =
-      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
-                                     QStringLiteral("/"),
-                                     QLatin1String(""),
-                                     QStringLiteral("graphicCapture"));
+    QDBusMessage m = QDBusMessage::createMethodCall(
+      QStringLiteral("org.flameshot-org.Flameshot"),
+      QStringLiteral("/"),
+      QLatin1String(""),
+      QStringLiteral("graphicCapture"));
     m << pathValue << delay << id;
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     dbusUtils.checkDBusConnection(sessionBus);
@@ -301,11 +301,11 @@ main(int argc, char* argv[])
     DBusUtils dbusUtils;
 
     // Send message
-    QDBusMessage m =
-      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
-                                     QStringLiteral("/"),
-                                     QLatin1String(""),
-                                     QStringLiteral("fullScreen"));
+    QDBusMessage m = QDBusMessage::createMethodCall(
+      QStringLiteral("org.flameshot-org.Flameshot"),
+      QStringLiteral("/"),
+      QLatin1String(""),
+      QStringLiteral("fullScreen"));
     m << pathValue << toClipboard << delay << id;
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     dbusUtils.checkDBusConnection(sessionBus);
@@ -353,11 +353,11 @@ main(int argc, char* argv[])
     DBusUtils dbusUtils;
 
     // Send message
-    QDBusMessage m =
-      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
-                                     QStringLiteral("/"),
-                                     QLatin1String(""),
-                                     QStringLiteral("captureScreen"));
+    QDBusMessage m = QDBusMessage::createMethodCall(
+      QStringLiteral("org.flameshot-org.Flameshot"),
+      QStringLiteral("/"),
+      QLatin1String(""),
+      QStringLiteral("captureScreen"));
     m << number << pathValue << toClipboard << delay << id;
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     dbusUtils.checkDBusConnection(sessionBus);
@@ -384,7 +384,7 @@ main(int argc, char* argv[])
     ConfigHandler config;
     if (autostart) {
       QDBusMessage m = QDBusMessage::createMethodCall(
-        QStringLiteral("org.flameshot.Flameshot"),
+        QStringLiteral("org.flameshot-org.Flameshot"),
         QStringLiteral("/"),
         QLatin1String(""),
         QStringLiteral("autostartEnabled"));
@@ -411,7 +411,7 @@ main(int argc, char* argv[])
     }
     if (tray) {
       QDBusMessage m = QDBusMessage::createMethodCall(
-        QStringLiteral("org.flameshot.Flameshot"),
+        QStringLiteral("org.flameshot-org.Flameshot"),
         QStringLiteral("/"),
         QLatin1String(""),
         QStringLiteral("trayIconEnabled"));
@@ -448,7 +448,7 @@ main(int argc, char* argv[])
     // Open gui when no options
     if (!someFlagSet) {
       QDBusMessage m = QDBusMessage::createMethodCall(
-        QStringLiteral("org.flameshot.Flameshot"),
+        QStringLiteral("org.flameshot-org.Flameshot"),
         QStringLiteral("/"),
         QLatin1String(""),
         QStringLiteral("openConfig"));
