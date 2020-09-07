@@ -21,7 +21,7 @@ BuildRequires: pkgconfig(Qt5Widgets)  >= 5.3.0
 BuildRequires: qt5-qttools-devel
 BuildRequires: qt5-linguist
 BuildRequires: qt5-qtsvg-devel
-BuildRequires: git
+BuildRequires: cmake  >= 3.13.0
 
 Requires: qt5-qtbase >= 5.3.0
 Requires: qt5-qttools
@@ -35,8 +35,7 @@ powerful yet simple to use for GNU/Linux
 %setup -q -n v%{version}
 
 %build
-#%%qmake_qt5 PREFIX=%{_prefix}
-%qmake_qt5 CONFIG+=packaging CONFIG-=debug CONFIG+=release
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr
 make %{?_smp_mflags}
 
 %install
@@ -49,15 +48,16 @@ make %{?_smp_mflags}
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
-%{_datadir}/dbus-1/interfaces/org.dharkael.Flameshot.xml
-%{_datadir}/metainfo/flameshot.appdata.xml
-%{_datadir}/dbus-1/services/org.dharkael.Flameshot.service
-%{_datadir}/flameshot/translations/Internationalization_*.qm
+%{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
+%{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
+%{_datadir}/flameshot/translations
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/bash-completion/completions/%{name}
+%{_datadir}/bash-completions/completions/%{name}
 %{_datadir}/icons/hicolor
 
 %changelog
+* Mon Sep 07 2020 Zetao Yang <vitzys@outlook.com> - 0.8.0-1
+- Updated for flameshot 0.8.0
 * Sat Aug 18 2018 Zetao Yang <vitzys@outlook.com> - 0.6.0-1
 - Updated for flameshot 0.6.0
 - More details, please see https://flameshot.js.org/#/changelog?id=v060
