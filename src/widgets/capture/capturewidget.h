@@ -92,6 +92,7 @@ private slots:
   void setDrawColor(const QColor& c);
   void setDrawThickness(const int& t);
   void incrementCircleCount();
+  void decrementCircleCount();
 
 protected:
   void paintEvent(QPaintEvent*);

@@ -39,10 +39,10 @@ PixelateTool::name() const
   return tr("Pixelate");
 }
 
-QString
-PixelateTool::nameID()
+ToolType
+PixelateTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::PIXELATE;
 }
 
 QString

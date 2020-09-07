@@ -40,10 +40,10 @@ MoveTool::name() const
   return tr("Move");
 }
 
-QString
-MoveTool::nameID()
+ToolType
+MoveTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::MOVE;
 }
 
 QString

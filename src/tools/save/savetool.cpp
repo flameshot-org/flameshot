@@ -41,10 +41,10 @@ SaveTool::name() const
   return tr("Save");
 }
 
-QString
-SaveTool::nameID()
+ToolType
+SaveTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::SAVE;
 }
 
 QString

@@ -63,10 +63,10 @@ TextTool::name() const
   return tr("Text");
 }
 
-QString
-TextTool::nameID()
+ToolType
+TextTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::TEXT;
 }
 
 QString

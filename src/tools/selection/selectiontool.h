@@ -29,7 +29,6 @@ public:
 
   QIcon icon(const QColor& background, bool inEditor) const override;
   QString name() const override;
-  static QString nameID();
   QString description() const override;
 
   CaptureTool* copy(QObject* parent = nullptr) override;
@@ -38,6 +37,9 @@ public:
                bool recordUndo = false) override;
   void paintMousePreview(QPainter& painter,
                          const CaptureContext& context) override;
+
+protected:
+  ToolType nameID() const override;
 
 public slots:
   void drawStart(const CaptureContext& context) override;
