@@ -50,7 +50,7 @@ For small fixes or incremental improvements simply fork the repo and follow the 
 ## Issues
 
 1. Do a quick search on GitHub to check if the issue has already been reported.
-2. [Open an issue](https://github.com/lupoDharkael/flameshot/issues/new) and describe the issue you are having - you could include:
+2. [Open an issue](https://github.com/flameshot-org/flameshot/issues/new) and describe the issue you are having - you could include:
      - Screenshots
      - Ways to reproduce the issue.
      - Your Flameshot version.
