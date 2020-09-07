@@ -40,10 +40,10 @@ CircleTool::name() const
   return tr("Circle");
 }
 
-QString
-CircleTool::nameID()
+ToolType
+CircleTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::CIRCLE;
 }
 
 QString

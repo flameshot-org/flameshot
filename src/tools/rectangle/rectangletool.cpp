@@ -40,10 +40,10 @@ RectangleTool::name() const
   return tr("Rectangle");
 }
 
-QString
-RectangleTool::nameID()
+ToolType
+RectangleTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::RECTANGLE;
 }
 
 QString

@@ -41,10 +41,10 @@ ImgurUploaderTool::name() const
   return tr("Image Uploader");
 }
 
-QString
-ImgurUploaderTool::nameID()
+ToolType
+ImgurUploaderTool::nameID() const
 {
-  return QLatin1String("");
+  return ToolType::IMGUR;
 }
 
 QString
