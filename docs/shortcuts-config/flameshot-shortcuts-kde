@@ -25,7 +25,7 @@ ActionsCount=1
 [Data_1_1Actions0]
 Arguments='Pictures/Screenshots' 0 0
 Call=graphicCapture
-RemoteApp=org.dharkael.Flameshot
+RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
 Type=DBUS
 
@@ -54,7 +54,7 @@ ActionsCount=1
 [Data_1_2Actions0]
 Arguments='Pictures/Screenshots' 3000 0
 Call=graphicCapture
-RemoteApp=org.dharkael.Flameshot
+RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
 Type=DBUS
 
@@ -83,7 +83,7 @@ ActionsCount=1
 [Data_1_3Actions0]
 Arguments='Pictures/Screenshots' false 0 0
 Call=fullScreen
-RemoteApp=org.dharkael.Flameshot
+RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
 Type=DBUS
 
@@ -112,7 +112,7 @@ ActionsCount=1
 [Data_1_4Actions0]
 Arguments='' true 0 0
 Call=fullScreen
-RemoteApp=org.dharkael.Flameshot
+RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
 Type=DBUS
 

@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: flameshot
-Source: https://github.com/lupoDharkael/flameshot/
+Source: https://github.com/flameshot-org/flameshot/
 
 Files: *
 Copyright: 2016-2019 lupoDharkael <izhe@hotmail.es>
