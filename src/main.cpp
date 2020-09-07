@@ -102,25 +102,23 @@ main(int argc, char* argv[])
   // Add description
   parser.setDescription(
     QObject::tr("Powerful yet simple to use screenshot software."));
-  parser.setGeneralErrorMessage(QObject::tr("See")+" flameshot --help.");
+  parser.setGeneralErrorMessage(QObject::tr("See") + " flameshot --help.");
   // Arguments
   CommandArgument fullArgument(QStringLiteral("full"),
                                QObject::tr("Capture the entire desktop."));
-  CommandArgument launcherArgument(
-    QStringLiteral("launcher"), QObject::tr("Open the capture launcher."));
+  CommandArgument launcherArgument(QStringLiteral("launcher"),
+                                   QObject::tr("Open the capture launcher."));
   CommandArgument guiArgument(
-    QStringLiteral("gui"),
-    QObject::tr("Start a manual capture in GUI mode."));
+    QStringLiteral("gui"), QObject::tr("Start a manual capture in GUI mode."));
   CommandArgument configArgument(QStringLiteral("config"),
-                                QObject::tr("Configure")+" flameshot.");
+                                 QObject::tr("Configure") + " flameshot.");
   CommandArgument screenArgument(QStringLiteral("screen"),
-                                QObject::tr("Capture a single screen."));
+                                 QObject::tr("Capture a single screen."));
 
   // Options
-  CommandOption pathOption(
-    { "p", "path" },
-    QObject::tr("Path where the capture will be saved"),
-    QStringLiteral("path"));
+  CommandOption pathOption({ "p", "path" },
+                           QObject::tr("Path where the capture will be saved"),
+                           QStringLiteral("path"));
   CommandOption clipboardOption(
     { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
   CommandOption delayOption({ "d", "delay" },
@@ -132,10 +130,9 @@ main(int argc, char* argv[])
   CommandOption trayOption({ "t", "trayicon" },
                            QObject::tr("Enable or disable the trayicon"),
                            QStringLiteral("bool"));
-  CommandOption autostartOption(
-    { "a", "autostart" },
-    QObject::tr("Enable or disable run at startup"),
-    QStringLiteral("bool"));
+  CommandOption autostartOption({ "a", "autostart" },
+                                QObject::tr("Enable or disable run at startup"),
+                                QStringLiteral("bool"));
   CommandOption showHelpOption(
     { "s", "showhelp" },
     QObject::tr("Show the help message in the capture mode"),
@@ -143,15 +140,15 @@ main(int argc, char* argv[])
   CommandOption mainColorOption({ "m", "maincolor" },
                                 QObject::tr("Define the main UI color"),
                                 QStringLiteral("color-code"));
-  CommandOption contrastColorOption(
-    { "k", "contrastcolor" },
-    QObject::tr("Define the contrast UI color"),
-    QStringLiteral("color-code"));
+  CommandOption contrastColorOption({ "k", "contrastcolor" },
+                                    QObject::tr("Define the contrast UI color"),
+                                    QStringLiteral("color-code"));
   CommandOption rawImageOption({ "r", "raw" },
-                              QObject::tr("Print raw PNG capture"));
+                               QObject::tr("Print raw PNG capture"));
   CommandOption screenNumberOption(
     { "n", "number" },
-    QObject::tr("Define the screen to capture")+",\n"+QObject::tr("default: screen containing the cursor"),
+    QObject::tr("Define the screen to capture") + ",\n" +
+      QObject::tr("default: screen containing the cursor"),
     QObject::tr("Screen number"),
     QStringLiteral("-1"));
 
@@ -160,14 +157,14 @@ main(int argc, char* argv[])
     QColor parsedColor(colorCode);
     return parsedColor.isValid() && parsedColor.alphaF() == 1.0;
   };
-  QString colorErr = QObject::tr("Invalid color, "
-                                "this flag supports the following formats:\n"
-                                "- #RGB (each of R, G, and B is a single hex digit)\n"
-                                "- #RRGGBB\n- #RRRGGGBBB\n"
-                                "- #RRRRGGGGBBBB\n"
-                                "- Named colors like 'blue' or 'red'\n"
-                                "You may need to escape the '#' sign as in '\\#FFF'"
-                                );
+  QString colorErr =
+    QObject::tr("Invalid color, "
+                "this flag supports the following formats:\n"
+                "- #RGB (each of R, G, and B is a single hex digit)\n"
+                "- #RRGGBB\n- #RRRGGGBBB\n"
+                "- #RRRRGGGGBBBB\n"
+                "- Named colors like 'blue' or 'red'\n"
+                "You may need to escape the '#' sign as in '\\#FFF'");
 
   const QString delayErr =
     QObject::tr("Invalid delay, it must be higher than 0");
