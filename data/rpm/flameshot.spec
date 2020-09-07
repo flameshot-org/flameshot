@@ -50,6 +50,7 @@ make %{?_smp_mflags}
 %{_bindir}/%{name}
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
+%{_datadir}/metainfo/flameshot.appdata.xml
 %{_datadir}/flameshot/translations
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completions/completions/%{name}
