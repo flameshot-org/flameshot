@@ -1,6 +1,6 @@
-app-id: org.flameshot.app
+app-id: org.flameshot.flameshot
 runtime: org.kde.Platform
-runtime-version: '5.14'
+runtime-version: '5.15'
 sdk: org.kde.Sdk
 command: flameshot
 finish-args:
@@ -15,5 +15,5 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: git
-        url: https://github.com/borgmanJeremy/flameshot/
+        url: https://github.com/flameshot-org/flameshot
         branch: master 
