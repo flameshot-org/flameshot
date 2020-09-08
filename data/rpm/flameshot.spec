@@ -14,18 +14,46 @@ Source0: https://github.com/flameshot-org/%{sourcename}/archive/v%{version}.tar.
 #%%define _binaries_in_noarch_packages_terminate_build   0
 #BuildArch: noarch
 
+%if 0%{?is_opensuse}
+%if 0%{?suse_version} >= 1500
+BuildRequires: gcc-c++ >= 4.9.2
+BuildRequires: update-desktop-files 
+%else
+BuildRequires: gcc7
+BuildRequires: gcc7-c++
+%endif
+BuildRequires: libqt5-qttools-devel
+BuildRequires: libqt5-linguist
+%else
 BuildRequires: gcc-c++  >= 4.9.2  
-BuildRequires: pkgconfig(Qt5Core) >= 5.3.0
-BuildRequires: pkgconfig(Qt5Gui)  >= 5.3.0
-BuildRequires: pkgconfig(Qt5Widgets)  >= 5.3.0
+%endif 
+
+%if 0%{?fedora} || 0%{?rhel_version} || 0%{?centos_version}
 BuildRequires: qt5-qttools-devel
 BuildRequires: qt5-linguist
-BuildRequires: qt5-qtsvg-devel
-BuildRequires: cmake  >= 3.13.0
+%endif
 
+BuildRequires: cmake  >= 3.13.0
+BuildRequires: pkgconfig
+BuildRequires: pkgconfig(Qt5Core) >= 5.3.0
+BuildRequires: pkgconfig(Qt5Gui)  >= 5.3.0
+BuildRequires: pkgconfig(Qt5DBus) >= 5.3.0
+BuildRequires: pkgconfig(Qt5Network) >= 5.3.0
+BuildRequires: pkgconfig(Qt5Widgets)  >= 5.3.0
+BuildRequires: pkgconfig(Qt5Svg)  >= 5.3.0
+
+
+%if 0%{?fedora} || 0%{?rhel_version} || 0%{?centos_version}
 Requires: qt5-qtbase >= 5.3.0
 Requires: qt5-qttools
 Requires: qt5-qtsvg
+%endif
+%if 0%{?is_opensuse}
+Requires: libQt5Core5 >= 5.3.0
+Requires: libqt5-qttools
+Requires: libQt5Svg5
+%endif
+Requires: hicolor-icon-theme
 
 %description
 Flameshot is a screenshot software, it's
@@ -41,16 +69,25 @@ make %{?_smp_mflags}
 %install
 %make_install INSTALL_ROOT=%{buildroot}
 
+%if 0%{?is_opensuse}
+%if 0%{?suse_version} >= 1500
+%suse_update_desktop_file %{name} Graphics
+%endif
+%endif
+
+%if 0%{?fedora}
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
+%endif
 
 %files
 %doc README.md
 %license LICENSE
 %{_bindir}/%{name}
+%{_datadir}/%{name}
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
-%{_datadir}/metainfo/flameshot.appdata.xml
+%{_datadir}/metainfo/flameshot.metainfo.xml
 %{_datadir}/flameshot/translations
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completions/completions/%{name}
