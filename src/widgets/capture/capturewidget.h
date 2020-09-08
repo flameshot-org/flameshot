@@ -86,6 +86,11 @@ private slots:
     void upResize();
     void downResize();
 
+    void leftMove();
+    void rightMove();
+    void upMove();
+    void downMove();
+
     void setState(CaptureButton *b);
     void processTool(CaptureTool *t);
     void handleButtonSignal(CaptureTool::Request r);
@@ -133,9 +138,11 @@ private:
     void pushToolToStack();
     void makeChild(QWidget *w);
 
+private:
     QRect extendedSelection() const;
     QRect extendedRect(QRect *r) const;
 
+private:
     QUndoStack m_undoStack;
     QPointer<CaptureButton> m_sizeIndButton;
     // Last pressed button
