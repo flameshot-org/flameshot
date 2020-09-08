@@ -99,6 +99,7 @@ def download_url(url: str) -> str:
         return None
 
     j = {
+        "intent": "entire_transfer",
         "security_hash": security_hash,
     }
     if recipient_id:
