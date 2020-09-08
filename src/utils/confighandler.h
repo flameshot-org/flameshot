@@ -19,9 +19,11 @@
 
 #include "src/widgets/capture/capturebutton.h"
 #include <QVector>
+#include <QStringList>
 #include <QSettings>
 
-class ConfigHandler {
+class ConfigHandler : public QObject {
+
 public:
     explicit ConfigHandler();
 
@@ -85,10 +87,17 @@ public:
     void setDefaults();
     void setAllTheButtons();
 
+    QVector<QStringList> shortcuts();
+    void setShortcutsDefault();
+    bool setShortcut(const QString&, const QString&);
+    const QString& shortcut(const QString&);
+
     QString configFilePath() const;
 
 private:
+    QString m_strRes;
     QSettings m_settings;
+    QVector<QStringList> m_shortcuts;
 
     bool normalizeButtons(QVector<int> &);
 

@@ -130,7 +130,7 @@
         <translation>Kan scherm niet vastleggen</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="236"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="258"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -159,27 +159,32 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="41"/>
+        <location filename="../src/config/configwindow.cpp" line="42"/>
         <source>Configuration</source>
         <translation>Configuratie</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Interface</source>
         <translation>Uiterlijk</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
         <translation>Bestandsnaambewerker</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="73"/>
+        <location filename="../src/config/configwindow.cpp" line="79"/>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="84"/>
         <source>Path Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="78"/>
+        <location filename="../src/config/configwindow.cpp" line="74"/>
         <source>General</source>
         <translation>Algemeen</translation>
     </message>
@@ -187,32 +192,32 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="182"/>
+        <location filename="../src/core/controller.cpp" line="185"/>
         <source>&amp;Take Screenshot</source>
         <translation>Schermafdruk &amp;maken</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="187"/>
+        <location filename="../src/core/controller.cpp" line="190"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="191"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuratie</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="194"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Information</source>
         <translation>&amp;Informatie</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="197"/>
+        <location filename="../src/core/controller.cpp" line="200"/>
         <source>&amp;Quit</source>
         <translation>&amp;Afsluiten</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="202"/>
+        <location filename="../src/core/controller.cpp" line="205"/>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,104 +658,74 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <translation>Over</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="62"/>
-        <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>Rechtsklikken</translation>
+        <translation type="vanished">Rechtsklikken</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>Muiswiel</translation>
+        <translation type="vanished">Muiswiel</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Move selection 1px</source>
-        <translation>Selectie 1px verplaatsen</translation>
+        <translation type="vanished">Selectie 1px verplaatsen</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Resize selection 1px</source>
-        <translation>Afmetingen van selectie 1px aanpassen</translation>
+        <translation type="vanished">Afmetingen van selectie 1px aanpassen</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Quit capture</source>
-        <translation>Vastleggen afsluiten</translation>
+        <translation type="vanished">Vastleggen afsluiten</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
-        <translation>Kopiëren naar klembord</translation>
+        <translation type="vanished">Kopiëren naar klembord</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
-        <translation>Selectie opslaan als bestand</translation>
+        <translation type="vanished">Selectie opslaan als bestand</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
-        <translation>Laatste wijziging ongedaan maken</translation>
+        <translation type="vanished">Laatste wijziging ongedaan maken</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>Zijbalk met gereedschapsopties tonen/verbergen</translation>
+        <translation type="vanished">Zijbalk met gereedschapsopties tonen/verbergen</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
-        <translation>Kleurkiezer tonen</translation>
+        <translation type="vanished">Kleurkiezer tonen</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Wijzig de gereedschapsdikte</translation>
+        <translation type="vanished">Wijzig de gereedschapsdikte</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="79"/>
-        <source>Capture screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="80"/>
-        <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="85"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Beschikbare sneltoetsen in de vastlegmodus.</translation>
+        <translation type="vanished">Beschikbare sneltoetsen in de vastlegmodus.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Key</source>
-        <translation>Toets</translation>
+        <translation type="vanished">Toets</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Description</source>
-        <translation>Omschrijving</translation>
+        <translation type="vanished">Omschrijving</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="127"/>
+        <location filename="../src/widgets/infowindow.cpp" line="60"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Лиценца&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="135"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Верзија&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Пречице&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Пречице&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
 </context>
 <context>
@@ -883,9 +858,83 @@ You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="231"/>
+        <location filename="../src/core/controller.cpp" line="234"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="28"/>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="26"/>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="30"/>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="32"/>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="23"/>
+        <source>Toggle side panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="35"/>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="37"/>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="39"/>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="41"/>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="44"/>
+        <source>Quit capture</source>
+        <translation type="unfinished">Vastleggen afsluiten</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="45"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="46"/>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection 1px</source>
+        <translation type="obsolete">Selectie 1px verplaatsen</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="47"/>
+        <source>Show color picker</source>
+        <translation type="unfinished">Kleurkiezer tonen</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="48"/>
+        <source>Change the tool&apos;s thickness</source>
+        <translation type="unfinished">Wijzig de gereedschapsdikte</translation>
     </message>
 </context>
 <context>
@@ -950,6 +999,47 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="12"/>
+        <source>Set Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="18"/>
+        <source>Enter new shortcut to change </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="30"/>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="25"/>
+        <source>Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="48"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">Beschikbare sneltoetsen in de vastlegmodus.</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <source>Description</source>
+        <translation type="unfinished">Omschrijving</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <source>Key</source>
+        <translation type="unfinished">Toets</translation>
+    </message>
+</context>
+<context>
     <name>SidePanelWidget</name>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
@@ -962,12 +1052,12 @@ You can find me in the system tray.</source>
         <translation>Actieve kleur:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="182"/>
         <source>Press ESC to cancel</source>
         <translation>Druk op Esc om te annuleren</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
         <source>Grab Color</source>
         <translation>Kleur opnemen</translation>
     </message>

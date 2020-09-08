@@ -65,5 +65,10 @@
         <file>img/material/white/circle-outline.svg</file>
         <file>img/material/white/blur.svg</file>
         <file>img/material/white/arrow-bottom-left.svg</file>
+        <file>img/app/keyboard.svg</file>
+        <file>img/material/black/shortcut.svg</file>
+        <file>img/material/white/shortcut.svg</file>
+        <file>img/material/black/filepath.svg</file>
+        <file>img/material/white/filepath.svg</file>
     </qresource>
 </RCC>
