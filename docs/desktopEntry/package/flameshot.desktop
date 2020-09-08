@@ -28,6 +28,11 @@ Type=Application
 Categories=Graphics;
 StartupNotify=false
 Actions=Configure;Capture;Launcher;
+X-DBUS-StartupType=Unique
+X-DBUS-ServiceName=org.flameshot.Flameshot
+X-KDE-DBUS-Restricted-Interfaces=org_kde_kwin_effect-screenshot
+
+
 
 [Desktop Action Configure]
 Name=Configure
