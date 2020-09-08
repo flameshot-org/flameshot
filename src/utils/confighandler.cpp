@@ -79,15 +79,23 @@ void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons
 QVector<QColor> ConfigHandler::getUserColors() {
     QVector<QColor> colors;
     const QVector<QColor> &defaultColors = {
-        Qt::darkRed,
+        Qt::white,
         Qt::red,
-        Qt::yellow,
         Qt::green,
-        Qt::darkGreen,
-        Qt::cyan,
         Qt::blue,
+        Qt::black,
+        Qt::darkRed,
+        Qt::darkGreen,
+        Qt::darkBlue,
+        Qt::darkGray,
+        Qt::cyan,
         Qt::magenta,
-        Qt::darkMagenta
+        Qt::yellow,
+        Qt::lightGray,
+        Qt::darkCyan,
+        Qt::darkMagenta,
+        Qt::darkYellow,
+        QColor()
     };
 
     if (m_settings.contains(QStringLiteral("userColors"))) {

@@ -996,6 +996,13 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>UtilityPanel</name>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisualsEditor</name>
     <message>
         <source>Opacity of area outside selection:</source>

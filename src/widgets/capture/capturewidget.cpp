@@ -189,7 +189,10 @@ QPixmap CaptureWidget::pixmap() {
 }
 
 void CaptureWidget::deleteToolwidgetOrClose() {
-    if (m_toolWidget) {
+    if(m_panel->isVisible()){
+        m_panel->hide();
+    }
+    else if (m_toolWidget) {
         m_toolWidget->deleteLater();
         m_toolWidget = nullptr;
     } else {
@@ -273,8 +276,8 @@ void CaptureWidget::paintEvent(QPaintEvent *) {
 void CaptureWidget::mousePressEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
-        m_colorPicker->move(e->pos().x()-m_colorPicker->width()/2,
-                            e->pos().y()-m_colorPicker->height()/2);
+        m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
+                            e->pos().y() - m_colorPicker->height() / 2);
         m_colorPicker->raise();
         m_colorPicker->show();
     } else if (e->button() == Qt::LeftButton) {
@@ -431,6 +434,9 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     if (e->button() == Qt::RightButton || m_colorPicker->isVisible()) {
         m_colorPicker->hide();
         m_rightClick = false;
+        if(!m_context.color.isValid()) {
+            m_panel->show();
+        }
     // when we end the drawing we have to register the last  point and
     //add the temp modification to the list of modifications
     } else if (m_mouseIsClicked && m_activeTool) {
@@ -559,7 +565,7 @@ void CaptureWidget::initPanel() {
         panelRect = QGuiApplication::primaryScreen()->geometry();
     }
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
-    panelRect.setWidth(m_colorPicker->width() * 3);
+    panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
 
     SidePanelWidget *sidePanel =
@@ -713,8 +719,10 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r) {
 
 void CaptureWidget::setDrawColor(const QColor &c) {
     m_context.color = c;
-    ConfigHandler().setDrawColor(m_context.color);
-    emit colorChanged(c);
+    if(m_context.color.isValid()) {
+        ConfigHandler().setDrawColor(m_context.color);
+        emit colorChanged(c);
+    }
 }
 
 void CaptureWidget::setDrawThickness(const int &t)

@@ -23,6 +23,7 @@
 class QVBoxLayout;
 class QPropertyAnimation;
 class QScrollArea;
+class QPushButton;
 
 class UtilityPanel : public QWidget {
     Q_OBJECT
@@ -33,6 +34,8 @@ public:
     void addToolWidget(QWidget *w);
     void clearToolWidget();
     void pushWidget(QWidget *w);
+    void hide();
+    void show();
 
 signals:
     void mouseEnter();
@@ -40,6 +43,7 @@ signals:
 
 public slots:
     void toggle();
+    void slotHidePanel();
 
 private:
     void initInternalPanel();
@@ -50,4 +54,5 @@ private:
     QVBoxLayout *m_layout;
     QPropertyAnimation *m_showAnimation;
     QPropertyAnimation *m_hideAnimation;
+    QPushButton *m_hide;
 };

@@ -21,6 +21,7 @@
 #include <QTimer>
 #include <QScrollArea>
 #include <QWheelEvent>
+#include <QPushButton>
 
 UtilityPanel::UtilityPanel(QWidget *parent) : QWidget(parent) {
     initInternalPanel();
@@ -63,18 +64,29 @@ void UtilityPanel::pushWidget(QWidget *w) {
     m_layout->addWidget(w);
 }
 
+void UtilityPanel::show() {
+    setAttribute(Qt::WA_TransparentForMouseEvents, false);
+    m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
+    m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
+    m_internalPanel->show();
+    m_showAnimation->start();
+    QWidget::show();
+}
+
+void UtilityPanel::hide() {
+    setAttribute(Qt::WA_TransparentForMouseEvents);
+    m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
+    m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
+    m_hideAnimation->start();
+    m_internalPanel->hide();
+    QWidget::hide();
+}
+
 void UtilityPanel::toggle() {
     if (m_internalPanel->isHidden()) {
-        setAttribute(Qt::WA_TransparentForMouseEvents, false);
-        m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
-        m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
-        m_internalPanel->show();
-        m_showAnimation->start();
+        show();
     } else {
-        setAttribute(Qt::WA_TransparentForMouseEvents);
-        m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
-        m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
-        m_hideAnimation->start();
+        hide();
     }
 }
 
@@ -95,4 +107,13 @@ void UtilityPanel::initInternalPanel() {
     m_internalPanel->setStyleSheet(QStringLiteral("QScrollArea {background-color: %1}")
                                    .arg(bgColor.name()));
     m_internalPanel->hide();
+
+    m_hide = new QPushButton();
+    m_hide->setText(tr("Hide"));
+    m_upLayout->addWidget(m_hide);
+    connect(m_hide, SIGNAL(clicked()), this, SLOT(slotHidePanel()));
+}
+
+void UtilityPanel::slotHidePanel() {
+    hide();
 }
