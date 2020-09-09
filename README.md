@@ -11,7 +11,7 @@
   </p>
   <p>
     <a href="https://github.com/flameshot-org/flameshot/actions">
-      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging&label=gnu/linux" alt="GNU/Linux Build Status" />
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging?label=gnu%2Flinux" alt="GNU/Linux Build Status" />
     </a>
     <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot">
       <img src="https://img.shields.io/appveyor/ci/lupoDharkael/flameshot.svg?style=flat-square&label=windows" alt="Windows Build Status" />
