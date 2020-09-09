@@ -74,8 +74,10 @@
 
 ## Usage
 
-Execute the command `flameshot` without parameters to launch a running instance of the program without taking actions.  
-Also adds a tray icon for configuration and management.
+Executing the command `flameshot` without parameters will launch a running
+instance of the program in background without taking actions.
+If your desktop environment provides tray area, a tray icon will also
+appear in the tray for users to perform configuration and management.
 
 Example commands:
 
@@ -125,7 +127,7 @@ In case of doubt choose the first or the second command as shortcut in your favo
 
 A systray icon will be in your system's panel while Flameshot is running.
 Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
-Check out the information window to see all the available shortcuts in the graphical capture mode.
+Check out the About window to see all available shortcuts in the graphical capture mode.
 
 ### CLI configuration
 
