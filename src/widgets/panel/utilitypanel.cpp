@@ -58,6 +58,7 @@ UtilityPanel::addToolWidget(QWidget* w)
   }
   if (w) {
     m_toolWidget = w;
+    m_toolWidget->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
     m_upLayout->addWidget(w);
   }
 }
