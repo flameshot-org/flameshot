@@ -731,6 +731,9 @@ CaptureWidget::handleButtonSignal(CaptureTool::Request r)
       m_undoStack.undo();
       break;
     case CaptureTool::REQ_REDO_MODIFICATION:
+      if (m_undoStack.redoText() == "Circle Counter") {
+        this->incrementCircleCount();
+      }
       m_undoStack.redo();
       break;
     case CaptureTool::REQ_REDRAW:
