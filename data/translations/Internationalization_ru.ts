@@ -77,95 +77,47 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Режим захвата&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Прямоугольная область</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Весь экран (все мониторы)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="81"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Без задержки</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> сек</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> сек</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="92"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сделать новый снимок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Область:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="102"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CaptureLauncher</name>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
-        <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Режим захвата&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
-        <source>Rectangular Region</source>
-        <translation>Прямоугольная область</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
-        <source>Full Screen (All Monitors)</source>
-        <translation>Весь экран (все мониторы)</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
-        <source>No Delay</source>
-        <translation>Без задержки</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
-        <source> second</source>
-        <translation> сек</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
-        <source> seconds</source>
-        <translation> сек</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
-        <source>Take new screenshot</source>
-        <translation>Сделать новый снимок</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
-        <source>Area:</source>
-        <translation>Область:</translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
-        <source>Delay:</source>
-        <translation>Задержка:</translation>
+        <translation type="unfinished">Задержка:</translation>
     </message>
 </context>
 <context>
@@ -246,19 +198,23 @@ Press Space to open the side panel.</source>
         <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="180"/>
+        <location filename="../../src/core/controller.cpp" line="207"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Открыть лаунчер</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="183"/>
+        <location filename="../../src/core/controller.cpp" line="210"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Настройка</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Information</source>
-        <translation>&amp;Информация</translation>
+        <translation type="vanished">&amp;Информация</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
@@ -441,22 +397,22 @@ Press Space to open the side panel.</source>
         <translation>Запустить Flameshot</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="217"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="257"/>
         <source>Close after capture</source>
         <translation>Закрыть после снимка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="221"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="261"/>
         <source>Close after taking a screenshot</source>
         <translation>Закрыть после снимка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="230"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="273"/>
         <source>Copy URL after upload</source>
         <translation>Копировать URL после загрузки</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="233"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="278"/>
         <source>Copy URL and close window after upload</source>
         <translation>Копировать URL и закрыть окно после загрузки</translation>
     </message>
@@ -531,12 +487,12 @@ Press Space to open the side panel.</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="62"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
         <translation>Пробел</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="63"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
         <translation>Правый клик</translation>
     </message>
@@ -725,10 +681,10 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="82"/>
-        <location filename="../../src/main.cpp" line="247"/>
-        <location filename="../../src/main.cpp" line="402"/>
-        <location filename="../../src/main.cpp" line="429"/>
-        <location filename="../../src/main.cpp" line="461"/>
+        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="399"/>
+        <location filename="../../src/main.cpp" line="426"/>
+        <location filename="../../src/main.cpp" line="458"/>
         <source>Unable to connect via DBus</source>
         <translation>Не удалось подключиться через DBus</translation>
     </message>
@@ -753,87 +709,87 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="113"/>
+        <location filename="../../src/main.cpp" line="112"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="115"/>
+        <location filename="../../src/main.cpp" line="114"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="117"/>
+        <location filename="../../src/main.cpp" line="116"/>
         <source>Capture a single screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="122"/>
+        <location filename="../../src/main.cpp" line="120"/>
         <source>Path where the capture will be saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="125"/>
+        <location filename="../../src/main.cpp" line="123"/>
         <source>Save the capture to the clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="127"/>
+        <location filename="../../src/main.cpp" line="125"/>
         <source>Delay time in milliseconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="130"/>
+        <location filename="../../src/main.cpp" line="128"/>
         <source>Set the filename pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="133"/>
+        <location filename="../../src/main.cpp" line="131"/>
         <source>Enable or disable the trayicon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="137"/>
+        <location filename="../../src/main.cpp" line="134"/>
         <source>Enable or disable run at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="141"/>
+        <location filename="../../src/main.cpp" line="138"/>
         <source>Show the help message in the capture mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="144"/>
+        <location filename="../../src/main.cpp" line="141"/>
         <source>Define the main UI color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="148"/>
+        <location filename="../../src/main.cpp" line="144"/>
         <source>Define the contrast UI color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="151"/>
+        <location filename="../../src/main.cpp" line="147"/>
         <source>Print raw PNG capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="154"/>
+        <location filename="../../src/main.cpp" line="150"/>
         <source>Define the screen to capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="154"/>
+        <location filename="../../src/main.cpp" line="151"/>
         <source>default: screen containing the cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="155"/>
+        <location filename="../../src/main.cpp" line="152"/>
         <source>Screen number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="163"/>
+        <location filename="../../src/main.cpp" line="161"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -844,39 +800,69 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="173"/>
+        <location filename="../../src/main.cpp" line="170"/>
         <source>Invalid delay, it must be higher than 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="175"/>
+        <location filename="../../src/main.cpp" line="172"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="182"/>
+        <location filename="../../src/main.cpp" line="179"/>
         <source>Invalid path, it must be a real path in the system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="192"/>
+        <location filename="../../src/main.cpp" line="189"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="41"/>
+        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="45"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="42"/>
+        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="46"/>
         <source>Unable to write in</source>
         <translation>Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопирован в буфер обмена.</translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="77"/>
+        <source>Arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
+        <source>arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
+        <source>Usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
+        <source>options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="358"/>
+        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

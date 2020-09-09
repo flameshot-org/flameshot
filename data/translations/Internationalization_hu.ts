@@ -174,7 +174,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation>&amp;Információ</translation>
+        <translation type="vanished">&amp;Információ</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -186,6 +186,10 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>&amp;Open Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
