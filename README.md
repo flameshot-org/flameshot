@@ -10,8 +10,8 @@
     <h4>Powerful yet simple to use screenshot software.</h4>
   </p>
   <p>
-    <a href="https://travis-ci.org/lupoDharkael/flameshot">
-      <img src="https://img.shields.io/travis/lupoDharkael/flameshot.svg?style=flat-square&label=gnu/linux" alt="GNU/Linux Build Status" />
+    <a href="https://github.com/flameshot-org/flameshot/actions">
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging&label=gnu/linux" alt="GNU/Linux Build Status" />
     </a>
     <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot">
       <img src="https://img.shields.io/appveyor/ci/lupoDharkael/flameshot.svg?style=flat-square&label=windows" alt="Windows Build Status" />
@@ -25,8 +25,8 @@
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
     </a>
-    <a href="https://github.com/flameshotapp/flameshotapp.github.io">
-      <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
+    <a href="https://flameshot-org.github.io">
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
   </p>
 </div>
