@@ -6,7 +6,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="40"/>
         <source>App Launcher</source>
-        <translation>App Launcher</translation>
+        <translation>Iniciar app</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="52"/>
@@ -58,7 +58,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="104"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Usa a Flecha como ferramenta de desenho</translation>
+        <translation>Usar a Flecha como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Set Blur as the paint tool</source>
-        <translation type="vanished">Usa o Desfoque como ferramenta de desenho</translation>
+        <translation type="vanished">Usar o Desfoque como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -164,7 +164,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="52"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Usa o Círculo como ferramenta de desenho</translation>
+        <translation>Usar o Círculo como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -209,8 +209,12 @@ Pressione espaço abrir o painel lateral.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Information</source>
-        <translation>&amp;Informações</translation>
+        <translation type="vanished">&amp;Informações</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
@@ -228,7 +232,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="53"/>
         <source>Copy the selection into the clipboard</source>
-        <translation>Copia a seleção para o clipboard</translation>
+        <translation>Copia a seleção para a área de transferência</translation>
     </message>
 </context>
 <context>
@@ -443,7 +447,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="159"/>
         <source>Image to Clipboard.</source>
-        <translation>Imagem no Clipboard.</translation>
+        <translation>Imagem na área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="184"/>
@@ -454,12 +458,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copiada para o clipboard.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="208"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Screenshot copiada para o clipboard.</translation>
+        <translation>Screenshot copiada para a área de transferência.</translation>
     </message>
 </context>
 <context>
@@ -515,12 +519,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="70"/>
         <source>Copy to clipboard</source>
-        <translation>Copiar ao clipboard</translation>
+        <translation>Copiar para área de transferência</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="71"/>
         <source>Save selection as a file</source>
-        <translation>Salva seleção em um arquivo</translation>
+        <translation>Salvar seleção em um arquivo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="72"/>
@@ -530,17 +534,17 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="73"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar barra lateral com as opções da ferramenta selecionada</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="74"/>
         <source>Show color picker</source>
-        <translation>Mostra seletor de cores</translation>
+        <translation>Mostrar seletor de cores</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="75"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Muda a grossura do pincel</translation>
+        <translation>Mudar a grossura do pincel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="82"/>
@@ -583,7 +587,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="55"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Usa a Linha como ferramenta de desenho</translation>
+        <translation>Usar a Linha como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -596,7 +600,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="55"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Usa o marcador como ferramenta de desenho</translation>
+        <translation>Usar o marcador como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -609,7 +613,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="52"/>
         <source>Move the selection area</source>
-        <translation>Move a área de seleção</translation>
+        <translation>Mover a área de seleção</translation>
     </message>
 </context>
 <context>
@@ -622,7 +626,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="46"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Usa o Lápis como ferramenta de desenho</translation>
+        <translation>Usar o Lápis como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -630,12 +634,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="40"/>
         <source>Pin Tool</source>
-        <translation>Ferramenta de Pin</translation>
+        <translation>Ferramenta de fixação</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
-        <translation>Pinnar imagem no desktop</translation>
+        <translation>Fixar imagem no desktop</translation>
     </message>
 </context>
 <context>
@@ -656,7 +660,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="93"/>
         <source>Save Error</source>
-        <translation>Salvar erro</translation>
+        <translation>Erro ao salvar</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
@@ -667,20 +671,20 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="33"/>
         <source>Capture saved to clipboard</source>
-        <translation>Captura salva no clipboard</translation>
+        <translation>Captura salva na área de transferência</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="91"/>
         <source>Error trying to save as </source>
-        <translation>Erro tentando salvar como </translation>
+        <translation>Erro ao tentar salvar como </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="82"/>
-        <location filename="../../src/main.cpp" line="247"/>
-        <location filename="../../src/main.cpp" line="402"/>
-        <location filename="../../src/main.cpp" line="429"/>
-        <location filename="../../src/main.cpp" line="461"/>
+        <location filename="../../src/main.cpp" line="244"/>
+        <location filename="../../src/main.cpp" line="399"/>
+        <location filename="../../src/main.cpp" line="426"/>
+        <location filename="../../src/main.cpp" line="458"/>
         <source>Unable to connect via DBus</source>
         <translation>Não foi possível conectar via DBus</translation>
     </message>
@@ -705,87 +709,87 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="113"/>
+        <location filename="../../src/main.cpp" line="112"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="115"/>
+        <location filename="../../src/main.cpp" line="114"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="117"/>
+        <location filename="../../src/main.cpp" line="116"/>
         <source>Capture a single screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="122"/>
+        <location filename="../../src/main.cpp" line="120"/>
         <source>Path where the capture will be saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="125"/>
+        <location filename="../../src/main.cpp" line="123"/>
         <source>Save the capture to the clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="127"/>
+        <location filename="../../src/main.cpp" line="125"/>
         <source>Delay time in milliseconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="130"/>
+        <location filename="../../src/main.cpp" line="128"/>
         <source>Set the filename pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="133"/>
+        <location filename="../../src/main.cpp" line="131"/>
         <source>Enable or disable the trayicon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="137"/>
+        <location filename="../../src/main.cpp" line="134"/>
         <source>Enable or disable run at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="141"/>
+        <location filename="../../src/main.cpp" line="138"/>
         <source>Show the help message in the capture mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="144"/>
+        <location filename="../../src/main.cpp" line="141"/>
         <source>Define the main UI color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="148"/>
+        <location filename="../../src/main.cpp" line="144"/>
         <source>Define the contrast UI color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="151"/>
+        <location filename="../../src/main.cpp" line="147"/>
         <source>Print raw PNG capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="154"/>
+        <location filename="../../src/main.cpp" line="150"/>
         <source>Define the screen to capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="154"/>
+        <location filename="../../src/main.cpp" line="151"/>
         <source>default: screen containing the cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="155"/>
+        <location filename="../../src/main.cpp" line="152"/>
         <source>Screen number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="163"/>
+        <location filename="../../src/main.cpp" line="161"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -796,39 +800,34 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="173"/>
+        <location filename="../../src/main.cpp" line="170"/>
         <source>Invalid delay, it must be higher than 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="175"/>
+        <location filename="../../src/main.cpp" line="172"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="182"/>
+        <location filename="../../src/main.cpp" line="179"/>
         <source>Invalid path, it must be a real path in the system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="192"/>
+        <location filename="../../src/main.cpp" line="189"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="41"/>
+        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="45"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="42"/>
+        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="46"/>
         <source>Unable to write in</source>
         <translation>Não foi possível escrever em</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
-        <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
@@ -841,24 +840,29 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="349"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
         <source>arguments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
         <source>Usage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
         <source>options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="356"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="358"/>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL copiada para a área de transferência.</translation>
     </message>
 </context>
 <context>
@@ -871,7 +875,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="52"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Seta o Retângulo como ferramenta de desenho</translation>
+        <translation>Usar o Retângulo como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -897,7 +901,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="53"/>
         <source>Save the capture</source>
-        <translation>Salva a captura</translation>
+        <translation>Salvar a captura</translation>
     </message>
 </context>
 <context>
@@ -918,7 +922,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="58"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Estabelece o Selecionador como ferramenta de desenho</translation>
+        <translation>Usar o Selecionador como ferramenta de desenho</translation>
     </message>
 </context>
 <context>
@@ -926,12 +930,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="71"/>
         <source>Active thickness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grossura:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="72"/>
         <source>Active color:</source>
-        <translation>Cor ativa:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="217"/>
@@ -954,7 +958,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="52"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation>Mostra a dimensão da seleção  (X Y)</translation>
+        <translation>Mostra as dimenções da seleção (X Y)</translation>
     </message>
 </context>
 <context>
@@ -1157,7 +1161,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="52"/>
         <source>Undo the last modification</source>
-        <translation>Desfaz a última modificação</translation>
+        <translation>Desfazer a última modificação</translation>
     </message>
 </context>
 <context>

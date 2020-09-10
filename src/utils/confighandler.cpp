@@ -401,6 +401,29 @@ ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
 {
   m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
 }
+bool
+ConfigHandler::saveAfterCopyValue()
+{
+  return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
+}
+
+void
+ConfigHandler::setSaveAfterCopy(const bool save)
+{
+  m_settings.setValue(QStringLiteral("saveAfterCopy"), save);
+}
+
+QString
+ConfigHandler::saveAfterCopyPathValue()
+{
+  return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
+}
+
+void
+ConfigHandler::setSaveAfterCopyPath(const QString& path)
+{
+  m_settings.setValue(QStringLiteral("saveAfterCopyPath"), path);
+}
 
 void
 ConfigHandler::setDefaults()
