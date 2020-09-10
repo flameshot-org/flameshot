@@ -30,12 +30,27 @@ ScreenshotSaver::ScreenshotSaver() {}
 void
 ScreenshotSaver::saveToClipboard(const QPixmap& capture)
 {
-  SystemNotification().sendMessage(QObject::tr("Capture saved to clipboard"));
-  QApplication::clipboard()->setPixmap(capture);
+
+  // If we are able to properly save the file, save the file and copy to
+  // clipboard.
+  if ((ConfigHandler().saveAfterCopyValue()) &&
+      (!ConfigHandler().saveAfterCopyPathValue().isEmpty())) {
+    QApplication::clipboard()->setPixmap(capture);
+    saveToFilesystem(capture,
+                     ConfigHandler().saveAfterCopyPathValue(),
+                     QObject::tr("Capture saved to clipboard. "));
+  }
+  // Otherwise only save to clipboard
+  else {
+    QApplication::clipboard()->setPixmap(capture);
+    SystemNotification().sendMessage(QObject::tr("Capture saved to clipboard"));
+  }
 }
 
 bool
-ScreenshotSaver::saveToFilesystem(const QPixmap& capture, const QString& path)
+ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
+                                  const QString& path,
+                                  const QString& messagePrefix)
 {
   QString completePath = FileNameHandler().generateAbsolutePath(path);
   completePath += QLatin1String(".png");
@@ -45,9 +60,11 @@ ScreenshotSaver::saveToFilesystem(const QPixmap& capture, const QString& path)
 
   if (ok) {
     ConfigHandler().setSavePath(path);
-    saveMessage = QObject::tr("Capture saved as ") + completePath;
+    saveMessage =
+      messagePrefix + QObject::tr("Capture saved as ") + completePath;
   } else {
-    saveMessage = QObject::tr("Error trying to save as ") + completePath;
+    saveMessage =
+      messagePrefix + QObject::tr("Error trying to save as ") + completePath;
     notificationPath = "";
   }
 
