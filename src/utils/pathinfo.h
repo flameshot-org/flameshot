@@ -21,10 +21,13 @@
 
 namespace PathInfo { // namespace
 
-const QString whiteIconPath();
+const QString
+whiteIconPath();
 
-const QString blackIconPath();
+const QString
+blackIconPath();
 
-QStringList translationsPaths();
+QStringList
+translationsPaths();
 
 } // namespace

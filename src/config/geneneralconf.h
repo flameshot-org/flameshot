@@ -23,39 +23,42 @@ class QVBoxLayout;
 class QCheckBox;
 class QPushButton;
 
-class GeneneralConf : public QWidget {
-    Q_OBJECT
+class GeneneralConf : public QWidget
+{
+  Q_OBJECT
 public:
-    explicit GeneneralConf(QWidget *parent = nullptr);
+  explicit GeneneralConf(QWidget* parent = nullptr);
 
 public slots:
-    void updateComponents();
+  void updateComponents();
 
 private slots:
-   void showHelpChanged(bool checked);
-   void showDesktopNotificationChanged(bool checked);
-   void showTrayIconChanged(bool checked);
-   void autostartChanged(bool checked);
-   void closeAfterCaptureChanged(bool checked);
-   void importConfiguration();
-   void exportFileConfiguration();
-   void resetConfiguration();
+  void showHelpChanged(bool checked);
+  void showDesktopNotificationChanged(bool checked);
+  void showTrayIconChanged(bool checked);
+  void autostartChanged(bool checked);
+  void closeAfterCaptureChanged(bool checked);
+  void importConfiguration();
+  void exportFileConfiguration();
+  void resetConfiguration();
 
 private:
-    QVBoxLayout *m_layout;
-    QCheckBox *m_sysNotifications;
-    QCheckBox *m_showTray;
-    QCheckBox *m_helpMessage;
-    QCheckBox *m_autostart;
-    QCheckBox *m_closeAfterCapture;
-    QPushButton *m_importButton;
-    QPushButton *m_exportButton;
-    QPushButton *m_resetButton;
+  QVBoxLayout* m_layout;
+  QCheckBox* m_sysNotifications;
+  QCheckBox* m_showTray;
+  QCheckBox* m_helpMessage;
+  QCheckBox* m_autostart;
+  QCheckBox* m_closeAfterCapture;
+  QCheckBox* m_copyAndCloseAfterUpload;
+  QPushButton* m_importButton;
+  QPushButton* m_exportButton;
+  QPushButton* m_resetButton;
 
-    void initShowHelp();
-    void initShowDesktopNotification();
-    void initShowTrayIcon();
-    void initConfingButtons();
-    void initAutostart();
-    void initCloseAfterCapture();
+  void initShowHelp();
+  void initShowDesktopNotification();
+  void initShowTrayIcon();
+  void initConfingButtons();
+  void initAutostart();
+  void initCloseAfterCapture();
+  void initCopyAndCloseAfterUpload();
 };

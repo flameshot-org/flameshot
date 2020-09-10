@@ -25,25 +25,26 @@ class QVBoxLayout;
 class ButtonListView;
 class UIcolorEditor;
 
-class VisualsEditor : public QWidget {
-    Q_OBJECT
+class VisualsEditor : public QWidget
+{
+  Q_OBJECT
 public:
-    explicit VisualsEditor(QWidget *parent = nullptr);
+  explicit VisualsEditor(QWidget* parent = nullptr);
 
 public slots:
-    void updateComponents();
+  void updateComponents();
 
 private slots:
-    void saveOpacity();
+  void saveOpacity();
 
 private:
-    QVBoxLayout *m_layout;
-    ButtonListView *m_buttonList;
-    UIcolorEditor *m_colorEditor;
-    ExtendedSlider *m_opacitySlider;
+  QVBoxLayout* m_layout;
+  ButtonListView* m_buttonList;
+  UIcolorEditor* m_colorEditor;
+  ExtendedSlider* m_opacitySlider;
     QSpinBox *m_pinBorderWidthSpinBox;
 
-    void initWidgets();
-    void initOpacitySlider();
-    void initPinBorderEditor();
+  void initWidgets();
+  void initOpacitySlider();
+  void initPinBorderEditor();
 };
