@@ -1,0 +1,44 @@
+name: Windows Build
+
+on: [push, pull_request]
+
+
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - {
+            name: "Windows Latest MSVC", artifact: "Windows-MSVC.tar.xz",
+            os: windows-latest,
+            cc: "cl", cxx: "cl",
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          }
+        - {
+            name: "Windows Latest MinGW", artifact: "Windows-MinGW.tar.xz",
+            os: windows-latest,
+            cc: "gcc", cxx: "g++"
+          }
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+
+    - name: Configure
+      shell: powershell
+      run: |
+            mkdir build
+            cd build 
+            cmake  -D CMAKE_BUILD_TYPE=Release ../
+    - name: Build
+      shell: powershell
+      run: | 
+            cd build
+            cmake --build . --config Release
+
