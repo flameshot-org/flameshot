@@ -1167,17 +1167,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="61"/>
+        <location filename="../../src/config/visualseditor.cpp" line="62"/>
         <source>Opacity of area outside selection:</source>
         <translation>Затемнение невыделенной области:</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="89"/>
+        <location filename="../../src/config/visualseditor.cpp" line="77"/>
+        <source>Pin border width:</source>
+        <translation>Размер рамки прикрепленного изображения:</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="116"/>
         <source>Button Selection</source>
         <translation>Выбор кнопок</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="95"/>
+        <location filename="../../src/config/visualseditor.cpp" line="122"/>
         <source>Select All</source>
         <translation>Выбрать все</translation>
     </message>
