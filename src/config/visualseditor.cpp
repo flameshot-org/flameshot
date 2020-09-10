@@ -22,6 +22,7 @@
 #include "src/utils/confighandler.h"
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QSpinBox>
 #include <QVBoxLayout>
 
 VisualsEditor::VisualsEditor(QWidget* parent)
@@ -71,6 +72,30 @@ VisualsEditor::initOpacitySlider()
 }
 
 void
+VisualsEditor::initPinBorderEditor()
+{
+  QLabel* label = new QLabel(tr("Pin border width:"));
+  label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+  m_pinBorderWidthSpinBox = new QSpinBox();
+  m_pinBorderWidthSpinBox->setRange(0, 20);
+  m_pinBorderWidthSpinBox->setSizePolicy(QSizePolicy::Fixed,
+                                         QSizePolicy::Fixed);
+  m_pinBorderWidthSpinBox->setValue(ConfigHandler().pinBorderWidthValue());
+  connect(m_pinBorderWidthSpinBox,
+          QOverload<int>::of(&QSpinBox::valueChanged),
+          this,
+          [](int val) { ConfigHandler().setPinBorderWidth(val); });
+
+  QHBoxLayout* localLayout = new QHBoxLayout();
+  localLayout->addWidget(label);
+  localLayout->addWidget(m_pinBorderWidthSpinBox);
+  localLayout->addItem(
+    new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
+  m_layout->addLayout(localLayout);
+}
+
+void
 VisualsEditor::saveOpacity()
 {
   int value = m_opacitySlider->mappedValue(0, 255);
@@ -84,6 +109,8 @@ VisualsEditor::initWidgets()
   m_layout->addWidget(m_colorEditor);
 
   initOpacitySlider();
+
+  initPinBorderEditor();
 
   auto boxButtons = new QGroupBox();
   boxButtons->setTitle(tr("Button Selection"));
