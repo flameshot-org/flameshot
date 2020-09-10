@@ -1011,7 +1011,7 @@ CaptureWidget::saveScreenshot()
   if (m_context.savePath.isEmpty()) {
     ScreenshotSaver().saveToFilesystemGUI(pixmap());
   } else {
-    ScreenshotSaver().saveToFilesystem(pixmap(), m_context.savePath);
+    ScreenshotSaver().saveToFilesystem(pixmap(), m_context.savePath, "");
   }
   close();
 }
