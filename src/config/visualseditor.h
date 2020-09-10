@@ -42,7 +42,7 @@ private:
   ButtonListView* m_buttonList;
   UIcolorEditor* m_colorEditor;
   ExtendedSlider* m_opacitySlider;
-    QSpinBox *m_pinBorderWidthSpinBox;
+  QSpinBox* m_pinBorderWidthSpinBox;
 
   void initWidgets();
   void initOpacitySlider();

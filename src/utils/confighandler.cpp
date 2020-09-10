@@ -281,8 +281,10 @@ ConfigHandler::setPinBorderWidth(const int value)
   m_settings.setValue(QStringLiteral("pinBorderWidth"), value);
 }
 
-bool ConfigHandler::keepOpenAppLauncherValue() {
-    return m_settings.value(QStringLiteral("keepOpenAppLauncher")).toBool();
+bool
+ConfigHandler::keepOpenAppLauncherValue()
+{
+  return m_settings.value(QStringLiteral("keepOpenAppLauncher")).toBool();
 }
 
 void
