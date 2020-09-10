@@ -71,7 +71,7 @@ SaveTool::pressed(const CaptureContext& context)
     }
   } else {
     bool ok = ScreenshotSaver().saveToFilesystem(
-      context.selectedScreenshotArea(), context.savePath);
+      context.selectedScreenshotArea(), context.savePath, "");
     if (ok) {
       emit requestAction(REQ_CAPTURE_DONE_OK);
     }
