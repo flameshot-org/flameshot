@@ -1,0 +1,148 @@
+---
+
+name: flameshot
+adopt-info: flameshot
+base: core20
+summary: Powerful yet simple to use screenshot software
+description: |
+  A powerful open source screenshot and annotation tool for Linux, Flameshot
+  has a varied set of markup tools available, which include Freehand drawing,
+  Lines, Arrows, Boxes, Circles, Highlighting, Blur. Additionally, you can
+  customise the color, size and/or thickness of many of these image annotation
+  tools.
+grade: stable  # must be 'stable' to release into candidate/stable channels
+confinement: strict  # use 'strict' once you have the right plugs and slots
+architectures:
+  - build-on: amd64
+  - build-on: i386
+
+
+apps:
+  flameshot:
+    adapter: full
+    command: usr/bin/flameshot
+    desktop: usr/share/applications/flameshot.desktop
+    environment:
+      DISABLE_WAYLAND: 1
+      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+    slots: [dbus-flameshot]
+    plugs:
+      - desktop
+      - desktop-legacy
+      - gsettings
+      - home
+      - network
+      - network-bind
+      - opengl
+      - pulseaudio
+      - unity7
+      - wayland
+      - x11
+
+
+plugs:
+  # Gtk Common Themes support
+  # https://forum.snapcraft.io/t/how-to-use-the-system-gtk-theme-via-the-gtk-common-themes-snap/6235
+  gsettings:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
+
+
+parts:
+  desktop-qt5:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
+    plugin: make
+    make-parameters: ["FLAVOR=qt5"]
+    build-packages:
+      - qtbase5-dev
+      - dpkg-dev
+    stage-packages:
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libqt5gui5
+      - libgdk-pixbuf2.0-0
+      - libgtk2.0-0
+      - libqt5svg5
+      - try:
+          - appmenu-qt5
+      - locales-all
+      - xdg-user-dirs
+      - fcitx-frontend-qt5
+
+  libappindicator:
+    plugin: nil
+    stage-packages:
+      - libappindicator3-1
+    after: [desktop-qt5]
+    prime:
+      - usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libdbusmenu*.so*
+      - usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libappindicator*.so*
+      - usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libindicator*.so*
+
+  launchers:  # custom launcher to set QT_QPA_PLATFORMTHEME=gtk3 correctly
+    source: .
+    source-subdir: snap/local/launchers
+    plugin: dump
+    organize:
+      '*': bin/
+    stage:
+      - -bin/README.*
+
+  flameshot:
+    after:
+      - desktop-qt5
+    plugin: cmake
+    cmake-parameters:
+      - '-DCMAKE_BUILD_TYPE=RelWithDebInfo'
+      - '-DCMAKE_INSTALL_PREFIX=/usr'
+    source: https://github.com/flameshot-org/flameshot.git
+    source-type: git
+    override-pull: |
+      snapcraftctl pull
+      last_committed_tag="$(git tag -l --sort=-v:refname | head -1)"
+      git_revno="$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)"
+      git_hash="$(git rev-parse --short HEAD)"
+      snapcraftctl set-version "${last_committed_tag}+git${git_revno}.${git_hash}"
+    override-build: |
+      snapcraftctl build
+      # Correct the Icon path
+      sed -i 's|^Exec=flameshot|Exec=/snap/bin/flameshot.flameshot|' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/flameshot.desktop
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/flameshot.svg|' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/flameshot.desktop
+      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snappy Edition)/g' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/flameshot.desktop
+    build-packages:
+      - qt5-default
+      - qttools5-dev-tools
+      - qttools5-dev
+      - libqt5svg5-dev
+    stage-packages:
+      - dbus-x11
+      - libgtk2.0-0
+      - openssl
+      - ca-certificates
+      - qtwayland5
+      - qt5-gtk-platformtheme  # for theming, font settings, cursor and to use gtk3 file chooser
+
+slots:
+  # Depending on in which environment we're running we either need
+  # to use the system or session DBus so we also need to have one
+  # slot for each.
+  dbus-flameshot:
+    interface: dbus
+    bus: session
+    name: org.flameshot.Flameshot

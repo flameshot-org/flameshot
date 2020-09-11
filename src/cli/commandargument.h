@@ -19,22 +19,23 @@
 
 #include <QString>
 
-class CommandArgument {
+class CommandArgument
+{
 public:
-    CommandArgument();
-    explicit CommandArgument(const QString &name, const QString &description);
+  CommandArgument();
+  explicit CommandArgument(const QString& name, const QString& description);
 
-    void setName(const QString &name);
-    QString name() const;
+  void setName(const QString& name);
+  QString name() const;
 
-    void setDescription(const QString &description);
-    QString description() const;
+  void setDescription(const QString& description);
+  QString description() const;
 
-    bool isRoot() const;
+  bool isRoot() const;
 
-    bool operator ==(const CommandArgument &arg) const;
+  bool operator==(const CommandArgument& arg) const;
 
 private:
-    QString m_name;
-    QString m_description;
+  QString m_name;
+  QString m_description;
 };

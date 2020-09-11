@@ -9,6 +9,7 @@ GenericName[ja]=スクリーンショットツール
 GenericName[ru]=Создание скриншотов
 GenericName[sr]=Снимач екрана
 GenericName[uk]=Інструмент скриншотів
+GenericName[es]=Herramienta de captura de pantalla
 Comment=Powerful yet simple to use screenshot software.
 Comment[zh_CN]=强大又易用的屏幕截图软件
 Comment[pl]=Proste w użyciu narzędzie do zrzutów ekranu
@@ -17,17 +18,24 @@ Comment[ja]=パワフルで使いやすいスクリーンショットソフト�
 Comment[ru]=Простой и функциональный инструмент для создания скриншотов
 Comment[sr]=Једноставан, а моћан алат за снимање екрана
 Comment[uk]=Потужний простий у використанні додаток для створення знімків екрану.
+Comment[es]=Software de captura de pantalla potente y fácil de usar.
 Keywords=flameshot;screenshot;capture;shutter;
 Keywords[zh_CN]=flameshot;screenshot;capture;shutter;截图;屏幕;
 Keywords[fr]=flameshot;capture d'écran;capter;shutter;
 Keywords[ja]=flameshot;screenshot;capture;shutter;スクリーンショット;キャプチャー;
+Keywords[es]=flameshot;screenshot;capture;shutter;captura;
 Exec=flameshot
 Icon=flameshot
 Terminal=false
 Type=Application
 Categories=Graphics;
 StartupNotify=false
-Actions=Configure;Capture;
+Actions=Configure;Capture;Launcher;
+X-DBUS-StartupType=Unique
+X-DBUS-ServiceName=org.flameshot.Flameshot
+X-KDE-DBUS-Restricted-Interfaces=org_kde_kwin_effect-screenshot
+
+
 
 [Desktop Action Configure]
 Name=Configure
@@ -38,6 +46,7 @@ Name[ja]=設定
 Name[ru]=Настройки
 Name[sr]=Подешавања
 Name[uk]=Налаштувати
+Name[es]=Configurar
 Exec=flameshot config
 
 [Desktop Action Capture]
@@ -49,4 +58,10 @@ Name[ja]=スクリーンショットを撮る
 Name[ru]=Сделать скриншот
 Name[sr]=Сними екран
 Name[uk]=Зробити знімок
+Name[es]=Tomar captura de pantalla
 Exec=flameshot gui --delay 500
+
+[Desktop Action Launcher]
+Name=Open launcher
+Name[de]=Starter öffnen
+Exec=flameshot launcher

@@ -19,47 +19,61 @@
 #include "src/utils/screenshotsaver.h"
 #include <QPainter>
 
-SaveTool::SaveTool(QObject *parent) : AbstractActionTool(parent) {
+SaveTool::SaveTool(QObject* parent)
+  : AbstractActionTool(parent)
+{}
 
+bool
+SaveTool::closeOnButtonPressed() const
+{
+  return true;
 }
 
-bool SaveTool::closeOnButtonPressed() const {
-    return true;
+QIcon
+SaveTool::icon(const QColor& background, bool inEditor) const
+{
+  Q_UNUSED(inEditor);
+  return QIcon(iconPath(background) + "content-save.svg");
+}
+QString
+SaveTool::name() const
+{
+  return tr("Save");
 }
 
-QIcon SaveTool::icon(const QColor &background, bool inEditor) const {
-    Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "content-save.svg");
-}
-QString SaveTool::name() const {
-    return tr("Save");
+ToolType
+SaveTool::nameID() const
+{
+  return ToolType::SAVE;
 }
 
-QString SaveTool::nameID() {
-    return QLatin1String("");
+QString
+SaveTool::description() const
+{
+  return tr("Save the capture");
 }
 
-QString SaveTool::description() const {
-    return tr("Save the capture");
+CaptureTool*
+SaveTool::copy(QObject* parent)
+{
+  return new SaveTool(parent);
 }
 
-CaptureTool* SaveTool::copy(QObject *parent) {
-    return new SaveTool(parent);
-}
-
-void SaveTool::pressed(const CaptureContext &context) {
-    if (context.savePath.isEmpty()) {
-        emit requestAction(REQ_HIDE_GUI);
-        bool ok = ScreenshotSaver().saveToFilesystemGUI(
-                    context.selectedScreenshotArea());
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    } else {
-        bool ok = ScreenshotSaver().saveToFilesystem(
-                    context.selectedScreenshotArea(), context.savePath);
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
+void
+SaveTool::pressed(const CaptureContext& context)
+{
+  if (context.savePath.isEmpty()) {
+    emit requestAction(REQ_HIDE_GUI);
+    bool ok =
+      ScreenshotSaver().saveToFilesystemGUI(context.selectedScreenshotArea());
+    if (ok) {
+      emit requestAction(REQ_CAPTURE_DONE_OK);
     }
+  } else {
+    bool ok = ScreenshotSaver().saveToFilesystem(
+      context.selectedScreenshotArea(), context.savePath, "");
+    if (ok) {
+      emit requestAction(REQ_CAPTURE_DONE_OK);
+    }
+  }
 }

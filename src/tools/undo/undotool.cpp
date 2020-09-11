@@ -18,35 +18,49 @@
 #include "undotool.h"
 #include <QPainter>
 
-UndoTool::UndoTool(QObject *parent) : AbstractActionTool(parent) {
+UndoTool::UndoTool(QObject* parent)
+  : AbstractActionTool(parent)
+{}
 
+bool
+UndoTool::closeOnButtonPressed() const
+{
+  return false;
 }
 
-bool UndoTool::closeOnButtonPressed() const {
-    return false;
+QIcon
+UndoTool::icon(const QColor& background, bool inEditor) const
+{
+  Q_UNUSED(inEditor);
+  return QIcon(iconPath(background) + "undo-variant.svg");
+}
+QString
+UndoTool::name() const
+{
+  return tr("Undo");
 }
 
-QIcon UndoTool::icon(const QColor &background, bool inEditor) const {
-    Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "undo-variant.svg");
-}
-QString UndoTool::name() const {
-    return tr("Undo");
+ToolType
+UndoTool::nameID() const
+{
+  return ToolType::UNDO;
 }
 
-QString UndoTool::nameID() {
-    return QLatin1String("");
+QString
+UndoTool::description() const
+{
+  return tr("Undo the last modification");
 }
 
-QString UndoTool::description() const {
-    return tr("Undo the last modification");
+CaptureTool*
+UndoTool::copy(QObject* parent)
+{
+  return new UndoTool(parent);
 }
 
-CaptureTool* UndoTool::copy(QObject *parent) {
-    return new UndoTool(parent);
-}
-
-void UndoTool::pressed(const CaptureContext &context) {
-    Q_UNUSED(context);
-    emit requestAction(REQ_UNDO_MODIFICATION);
+void
+UndoTool::pressed(const CaptureContext& context)
+{
+  Q_UNUSED(context);
+  emit requestAction(REQ_UNDO_MODIFICATION);
 }
