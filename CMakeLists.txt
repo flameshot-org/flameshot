@@ -21,7 +21,7 @@ include(cmake/CompilerWarnings.cmake)
 
 # sanitizer options if supported by compiler
 include(cmake/Sanitizers.cmake)
-# enable_sanitizers(project_options)
+enable_sanitizers(project_options)
 
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
