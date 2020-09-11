@@ -139,6 +139,8 @@ PixelateTool::process(QPainter& painter, const QPixmap& pixmap, bool recordUndo)
   scene.addPixmap(result);
 
   scene.render(&painter, selection, QRectF());
+
+  delete source;
 }
 
 void
