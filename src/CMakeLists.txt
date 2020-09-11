@@ -32,27 +32,27 @@ add_subdirectory(tools)
 set(FLAMESHOT_TS_FILES
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de-DE.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu-ES.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu_ES.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it-IT.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it_IT.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl-NL.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt-BR.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr-SP.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv-SE.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh-CN.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh-TW.ts)
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
 
 if(GENERATE_TS)
   qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
