@@ -17,7 +17,7 @@ Source0: https://github.com/flameshot-org/%{sourcename}/archive/v%{version}.tar.
 %if 0%{?is_opensuse}
 %if 0%{?suse_version} >= 1500
 BuildRequires: gcc-c++ >= 4.9.2
-BuildRequires: update-desktop-files 
+BuildRequires: update-desktop-files
 %else
 BuildRequires: gcc7
 BuildRequires: gcc7-c++
@@ -25,8 +25,8 @@ BuildRequires: gcc7-c++
 BuildRequires: libqt5-qttools-devel
 BuildRequires: libqt5-linguist
 %else
-BuildRequires: gcc-c++  >= 4.9.2  
-%endif 
+BuildRequires: gcc-c++  >= 4.9.2
+%endif
 
 %if 0%{?fedora} || 0%{?rhel_version} || 0%{?centos_version}
 BuildRequires: qt5-qttools-devel
@@ -90,7 +90,8 @@ make %{?_smp_mflags}
 %{_datadir}/metainfo/flameshot.metainfo.xml
 %{_datadir}/flameshot/translations
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/bash-completions/completions/%{name}
+%{_datadir}/bash-completion/completions/%{name}
+%{_datadir}/zsh/site-functions/_%{name}
 %{_datadir}/icons/hicolor
 
 %changelog
