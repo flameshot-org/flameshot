@@ -219,6 +219,8 @@ Steps for using the configuration:
 
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
+- Flameshot works best with a desktop environment that includes dbus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc)
+
 ## Installation
 
 There are packages available for a few distros:
@@ -323,7 +325,8 @@ make
 
 ### Install
 
-Simply use `make install` with privileges.
+Simply use `make install` with privileges. 
+Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
