@@ -34,6 +34,7 @@
 #include "src/widgets/capture/hovereventfilter.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
+#include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include <QApplication>
 #include <QBuffer>
@@ -45,6 +46,7 @@
 #include <QScreen>
 #include <QShortcut>
 #include <QUndoView>
+#include <draggablewidgetmaker.h>
 
 // CaptureWidget is the main component used to capture the screen. It contains
 // an are of selection with its respective buttons.
@@ -602,12 +604,42 @@ CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 void
 CaptureWidget::initPanel()
 {
-  m_panel = new UtilityPanel(this);
-  makeChild(m_panel);
   QRect panelRect = rect();
   if (m_context.fullscreen) {
     panelRect = QGuiApplication::primaryScreen()->geometry();
   }
+
+  ConfigHandler config;
+
+  if (config.showSidePanelButtonValue()) {
+    auto* panelToggleButton =
+      new OrientablePushButton(tr("Tool Settings"), this);
+    makeChild(panelToggleButton);
+    panelToggleButton->setOrientation(
+      OrientablePushButton::VerticalBottomToTop);
+    panelToggleButton->move(panelRect.x(),
+                            panelRect.y() + panelRect.height() / 2 -
+                              panelToggleButton->width() / 2);
+    panelToggleButton->setCursor(Qt::ArrowCursor);
+    (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
+    connect(panelToggleButton,
+            &QPushButton::clicked,
+            this,
+            &CaptureWidget::togglePanel);
+
+    QColor mainColor = config.uiMainColorValue();
+    QColor textColor =
+      ColorUtils::colorIsDark(mainColor) ? Qt::white : Qt::black;
+    QPalette palette = panelToggleButton->palette();
+    palette.setColor(QPalette::Button, mainColor);
+    palette.setColor(QPalette::ButtonText, textColor);
+    panelToggleButton->setAutoFillBackground(true);
+    panelToggleButton->setPalette(palette);
+    panelToggleButton->update();
+  }
+
+  m_panel = new UtilityPanel(this);
+  makeChild(m_panel);
   panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
   panelRect.setWidth(m_colorPicker->width() * 3);
   m_panel->setGeometry(panelRect);

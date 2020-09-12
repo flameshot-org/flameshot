@@ -17,39 +17,25 @@
 
 #pragma once
 
-#include <QPointer>
+#include <QEvent>
+#include <QObject>
+#include <QPoint>
 #include <QWidget>
 
-class QVBoxLayout;
-class QPropertyAnimation;
-class QScrollArea;
-
-class UtilityPanel : public QWidget
+class DraggableWidgetMaker : public QObject
 {
   Q_OBJECT
 public:
-  explicit UtilityPanel(QWidget* parent = nullptr);
+  DraggableWidgetMaker(QObject* parent = nullptr);
 
-  QWidget* toolWidget() const;
-  void addToolWidget(QWidget* w);
-  void clearToolWidget();
-  void pushWidget(QWidget* w);
+  void makeDraggable(QWidget* widget);
 
-signals:
-  void mouseEnter();
-  void mouseLeave();
-
-public slots:
-  void toggle();
+protected:
+  bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
-  void initInternalPanel();
-
-  QPointer<QWidget> m_toolWidget;
-  QScrollArea* m_internalPanel;
-  QVBoxLayout* m_upLayout;
-  QVBoxLayout* m_bottomLayout;
-  QVBoxLayout* m_layout;
-  QPropertyAnimation* m_showAnimation;
-  QPropertyAnimation* m_hideAnimation;
+  bool m_isPressing = false;
+  bool m_isDragging = false;
+  QPoint m_mouseMovePos;
+  QPoint m_mousePressPos;
 };
