@@ -32,22 +32,22 @@ add_subdirectory(tools)
 set(FLAMESHOT_TS_FILES
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu_ES.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it_IT.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_br.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
-    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts

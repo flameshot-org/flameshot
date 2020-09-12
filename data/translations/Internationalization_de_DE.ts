@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="de">
 <context>
     <name>AppLauncher</name>
     <message>
@@ -136,7 +136,7 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation>Wähle einen Bereich mit der Maus oder drücke ESC um zu beenden.
 Drücke Eingabe um den Bereich aufzunehmen.
-Drücke die rechte Maustacke um die Farbe auszuwählen.
+Drücke die rechte Maustaste um die Farbe auszuwählen.
 Benutze das Mausrad um die Dicke des Werkzeugs auszuwählen.
 Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     </message>
@@ -639,7 +639,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
         <source>Pin image on the desktop</source>
-        <translation>Pinne Bild auf den Dekstop</translation>
+        <translation>Pinne Bild auf den Desktop</translation>
     </message>
 </context>
 <context>
@@ -830,11 +830,6 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Kein Schreibzugriff auf</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
-        <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL kopiert.</translation>
-    </message>
-    <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Options</source>
         <translation type="unfinished"></translation>
@@ -863,6 +858,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/cli/commandlineparser.cpp" line="358"/>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL kopiert.</translation>
     </message>
 </context>
 <context>
@@ -1006,12 +1006,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
         <source>Day Name (mon)</source>
-        <translation>Tagesname (Mon)</translation>
+        <translation>Wochentag (Mon)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day Name (monday)</source>
-        <translation>Tagesname (Montag)</translation>
+        <translation>Wochentag (Montag)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
@@ -1118,7 +1118,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="32"/>
         <source>UI Color Editor</source>
-        <translation>UI Farb Editor</translation>
+        <translation>Grafischer Farbeditor</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="107"/>
