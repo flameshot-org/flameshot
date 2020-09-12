@@ -148,8 +148,11 @@ configure_file(${CMAKE_SOURCE_DIR}/docs/desktopEntry/package/flameshot.desktop
 configure_file(${CMAKE_SOURCE_DIR}/docs/appdata/flameshot.metainfo.xml
                ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/flameshot.metainfo.xml COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/docs/bash-completion/flameshot
-               ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completions/completions/flameshot COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/docs/shell-completion/flameshot
+               ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
+
+configure_file(${CMAKE_SOURCE_DIR}/docs/shell-completion/flameshot
+               ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
 
 configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
                ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/interfaces/org.flameshot.Flameshot.xml COPYONLY)
