@@ -17,6 +17,7 @@
 
 #include "utilitypanel.h"
 #include <QPropertyAnimation>
+#include <QPushButton>
 #include <QScrollArea>
 #include <QTimer>
 #include <QVBoxLayout>
@@ -72,7 +73,7 @@ UtilityPanel::clearToolWidget()
 void
 UtilityPanel::pushWidget(QWidget* w)
 {
-  m_layout->addWidget(w);
+  m_layout->insertWidget(m_layout->count() - 1, w);
 }
 
 void
@@ -103,8 +104,15 @@ UtilityPanel::initInternalPanel()
 
   m_layout = new QVBoxLayout();
   m_upLayout = new QVBoxLayout();
+  m_bottomLayout = new QVBoxLayout();
   m_layout->addLayout(m_upLayout);
+  m_layout->addLayout(m_bottomLayout);
   widget->setLayout(m_layout);
+
+  QPushButton* closeButton = new QPushButton(this);
+  closeButton->setText(tr("Close"));
+  connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
+  m_bottomLayout->addWidget(closeButton);
 
   QColor bgColor = palette().window().color();
   bgColor.setAlphaF(0.0);
