@@ -46,6 +46,7 @@
 #include <QScreen>
 #include <QShortcut>
 #include <QUndoView>
+#include <draggablewidgetmaker.h>
 
 // CaptureWidget is the main component used to capture the screen. It contains
 // an are of selection with its respective buttons.
@@ -620,6 +621,7 @@ CaptureWidget::initPanel()
                             panelRect.y() + panelRect.height() / 2 -
                               panelToggleButton->width() / 2);
     panelToggleButton->setCursor(Qt::ArrowCursor);
+    (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
     connect(panelToggleButton,
             &QPushButton::clicked,
             this,

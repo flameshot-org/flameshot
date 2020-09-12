@@ -5,6 +5,7 @@ add_subdirectory(capture)
 target_sources(
   flameshot
   PRIVATE capturelauncher.h
+          draggablewidgetmaker.h
           imagelabel.h
           infowindow.h
           loadspinner.h
@@ -14,6 +15,7 @@ target_sources(
 target_sources(
   flameshot
   PRIVATE capturelauncher.cpp
+          draggablewidgetmaker.cpp
           imagelabel.cpp
           infowindow.cpp
           loadspinner.cpp
