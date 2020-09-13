@@ -67,6 +67,7 @@ target_sources(
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_wheel.cpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/color_wheel.hpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../data/graphics.qrc
+          ${CMAKE_CURRENT_SOURCE_DIR}/../data/icon.rc # flamshot binary icon resource file
           ${QM_FILES}
           main.cpp)
 
@@ -172,3 +173,33 @@ install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL
 
 # Install Translations
 install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)
+
+
+# windeployqt
+if(WIN32)
+  if(EXISTS $ENV{QTDIR}/bin/windeployqt.exe)
+    if(CMAKE_BUILD_TYPE MATCHES Release)
+      set(BINARIES_TYPE --release)
+    else()
+      set(BINARIES_TYPE --debug)
+    endif()
+
+    add_custom_command(
+      TARGET flameshot POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
+      COMMAND $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations  --compiler-runtime --no-system-d3d-compiler --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
+      # copy translations manually
+      # QM_FILES
+      COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
+    )
+
+    install(
+      DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/
+      DESTINATION bin
+    )
+
+  else()
+    message("Unable to find executable QTDIR/bin/windeployqt.")
+  endif()
+endif()
