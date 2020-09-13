@@ -24,7 +24,8 @@
 // ButtonHandler is a habdler for every active button. It makes easier to
 // manipulate the buttons as a unit.
 
-ButtonHandler::ButtonHandler(const QVector<CaptureButton*>& v, QObject* parent)
+ButtonHandler::ButtonHandler(const QVector<CaptureToolButton*>& v,
+                             QObject* parent)
   : QObject(parent)
 {
   setButtons(v);
@@ -40,7 +41,7 @@ ButtonHandler::ButtonHandler(QObject* parent)
 void
 ButtonHandler::hide()
 {
-  for (CaptureButton* b : m_vectorButtons)
+  for (CaptureToolButton* b : m_vectorButtons)
     b->hide();
 }
 
@@ -50,7 +51,7 @@ ButtonHandler::show()
   if (m_vectorButtons.isEmpty() || m_vectorButtons.first()->isVisible()) {
     return;
   }
-  for (CaptureButton* b : m_vectorButtons)
+  for (CaptureToolButton* b : m_vectorButtons)
     b->animatedShow();
 }
 
@@ -58,7 +59,7 @@ bool
 ButtonHandler::isVisible() const
 {
   bool ret = true;
-  for (const CaptureButton* b : m_vectorButtons) {
+  for (const CaptureToolButton* b : m_vectorButtons) {
     if (!b->isVisible()) {
       ret = false;
       break;
@@ -370,12 +371,12 @@ ButtonHandler::adjustHorizontalCenter(QPoint& center)
 
 // setButtons redefines the buttons of the button handler
 void
-ButtonHandler::setButtons(const QVector<CaptureButton*> v)
+ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
 {
   if (v.isEmpty())
     return;
 
-  for (CaptureButton* b : m_vectorButtons)
+  for (CaptureToolButton* b : m_vectorButtons)
     delete (b);
   m_vectorButtons = v;
   m_buttonBaseSize = GlobalValues::buttonBaseSize();
