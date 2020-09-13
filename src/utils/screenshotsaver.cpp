@@ -27,6 +27,8 @@
 
 ScreenshotSaver::ScreenshotSaver() {}
 
+// TODO: If data is saved to the clipboard before the notification is sent via
+// dbus, the application freezes.
 void
 ScreenshotSaver::saveToClipboard(const QPixmap& capture)
 {
@@ -35,15 +37,15 @@ ScreenshotSaver::saveToClipboard(const QPixmap& capture)
   // clipboard.
   if ((ConfigHandler().saveAfterCopyValue()) &&
       (!ConfigHandler().saveAfterCopyPathValue().isEmpty())) {
-    QApplication::clipboard()->setPixmap(capture);
     saveToFilesystem(capture,
                      ConfigHandler().saveAfterCopyPathValue(),
                      QObject::tr("Capture saved to clipboard. "));
+    QApplication::clipboard()->setPixmap(capture);
   }
   // Otherwise only save to clipboard
   else {
-    QApplication::clipboard()->setPixmap(capture);
     SystemNotification().sendMessage(QObject::tr("Capture saved to clipboard"));
+    QApplication::clipboard()->setPixmap(capture);
   }
 }
 
