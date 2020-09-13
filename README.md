@@ -11,10 +11,10 @@
   </p>
   <p>
     <a href="https://github.com/flameshot-org/flameshot/actions">
-      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging?label=gnu%2Flinux" alt="GNU/Linux Build Status" />
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Linux)?label=gnu%2Flinux" alt="GNU/Linux Build Status" />
     </a>
-    <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot">
-      <img src="https://img.shields.io/appveyor/ci/lupoDharkael/flameshot.svg?style=flat-square&label=windows" alt="Windows Build Status" />
+    <a href="https://github.com/flameshot-org/flameshot/actions">
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Windows)?label=windows" alt="Windows Build Status" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
@@ -25,7 +25,7 @@
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
     </a>
-    <a href="https://flameshot-org.github.io">
+    <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
   </p>

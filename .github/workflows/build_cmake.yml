@@ -35,7 +35,6 @@ jobs:
             extra-cmake-modules \
             build-essential \
             qt5-default \
-            qt5-qmake \
             qttools5-dev-tools \
             qttools5-dev \
             libqt5dbus5 \
