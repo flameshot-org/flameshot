@@ -1,0 +1,131 @@
+name: Packaging(Windows)
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+
+env:
+  PRODUCT: flameshot
+  VERSION: 0.8.0
+
+jobs:
+  windows-pack:
+    name: VS 2019 ${{ matrix.config.arch }}-${{ matrix.type }}
+    runs-on: windows-2019
+    strategy:
+      fail-fast: false
+      matrix:
+        qt_ver: [5.15.0]
+        qt_target: [desktop]
+        config:
+          - {
+              arch: x86,
+              generator: "-G'Visual Studio 16 2019' -A Win32",
+              vcpkg_triplet: x86-windows,
+              qt_arch: win32_msvc2019,
+              qt_arch_install: msvc2019,
+              pak_arch: win32
+            }
+          - {
+              arch: x64,
+              generator: "-G'Visual Studio 16 2019' -A x64",
+              vcpkg_triplet: x64-windows,
+              qt_arch: win64_msvc2019_64,
+              qt_arch_install: msvc2019_64,
+              pak_arch: win64
+            }
+        type: [portable, installer]
+    env:
+      VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
+      Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
+      QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
+
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v2
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ./build/Qt/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch_install }}
+          key: ${{ runner.os }}-QtCache/${{ matrix.qt_ver }}/${{ matrix.config.qt_arch }}
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt_ver }}
+          target:  ${{ matrix.qt_target }}
+          arch: ${{ matrix.config.qt_arch }}
+          dir: '${{ github.workspace }}/build/'
+          modules: 'qtscript'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - name: Configure
+        working-directory: build
+        shell: pwsh
+        run: |
+          cmake ..  ${{matrix.config.generator}}  `
+          -DCMAKE_BUILD_TYPE=Release  `
+          -DRUN_IN_PLACE=${{ contains(matrix.type, 'portable') }}
+
+      - name: Compile
+        working-directory: build
+        shell: pwsh
+        run: cmake --build . --config Release
+
+      - name: CPack
+        working-directory: build
+        shell: pwsh
+        run: |
+          If ($env:TYPE -eq "installer")
+          {
+            cpack -G WIX -B "$env:GITHUB_WORKSPACE\build\Package"
+          }
+          ElseIf($env:TYPE -eq "portable")
+          {
+            cpack -G ZIP -B "$env:GITHUB_WORKSPACE\build\Package"
+          }
+        env:
+          TYPE: ${{matrix.type}}
+
+      - name: Package Clean
+        run: rm -r $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages
+
+      - name: SHA256Sum of Windows installer(daily build)
+        if:  matrix.type == 'installer'
+        shell: bash
+        run: |
+          sha256sum $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
+
+      - name: SHA256Sum of Windows portable(daily build)
+        if:  matrix.type == 'portable'
+        shell: bash
+        run: |
+          sha256sum $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
+
+      - name: Upload Windows installer(daily build)
+        if:  matrix.type == 'installer'
+        shell: bash
+        run: |
+          python -m pip install -U -q requests
+          echo "================Windows installer downlod link================"
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi)
+          echo "=====no operation for you can see link in the log console====="
+
+      - name: Upload Windows portable(daily build)
+        if:  matrix.type == 'portable'
+        shell: bash
+        run: |
+          python -m pip install -U -q requests
+          echo "================Windows portable downlod link================"
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
+          echo "=====no operation for you can see link in the log console====="
