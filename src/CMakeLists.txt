@@ -67,7 +67,7 @@ target_sources(
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_wheel.cpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/color_wheel.hpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../data/graphics.qrc
-          ${CMAKE_CURRENT_SOURCE_DIR}/../data/icon.rc # flamshot binary icon resource file
+          ${CMAKE_CURRENT_SOURCE_DIR}/../data/icon.rc # windows binary icon resource file
           ${QM_FILES}
           main.cpp)
 
