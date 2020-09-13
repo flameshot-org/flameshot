@@ -77,68 +77,73 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Режим захвата&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Режим захвата&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished">Прямоугольная область</translation>
+        <translation>Прямоугольная область</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished">Весь экран (все мониторы)</translation>
+        <translation>Весь экран (все мониторы)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="81"/>
         <source>No Delay</source>
-        <translation type="unfinished">Без задержки</translation>
+        <translation>Без задержки</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
         <source> second</source>
-        <translation type="unfinished"> сек</translation>
+        <translation> сек</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
         <source> seconds</source>
-        <translation type="unfinished"> сек</translation>
+        <translation> сек</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="92"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished">Сделать новый снимок</translation>
+        <translation>Сделать новый снимок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Area:</source>
-        <translation type="unfinished">Область:</translation>
+        <translation>Область:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="102"/>
         <source>Delay:</source>
-        <translation type="unfinished">Задержка:</translation>
+        <translation>Задержка:</translation>
     </message>
 </context>
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="257"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="259"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Выберите область с помощью мыши или нажмите Esc чтобы выйти.
-Нажмите Enter чтобы захватить экран.
-Нажмите правую кнопку мыши чтобы показать выбор цвета.
-Используйте колесо мыши чтобы выбрать толщину текущего инструмента.
-Нажмите Пробел чтобы открыть боковую панель.</translation>
+        <translation>Выберите область с помощью мыши, или нажмите Esc, чтобы выйти.
+Нажмите Enter, чтобы захватить экран.
+Нажмите правую кнопку мыши, чтобы показать выбор цвета.
+Используйте колесо мыши, чтобы выбрать толщину текущего инструмента.
+Нажмите Пробел, чтобы открыть боковую панель.</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="616"/>
+        <source>Tool Settings</source>
+        <translation>Настройки инструмента</translation>
     </message>
 </context>
 <context>
@@ -146,12 +151,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="39"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>Нумерация</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="51"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить круг с автоинкрементирующимся счетчиком</translation>
     </message>
 </context>
 <context>
@@ -210,7 +215,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Информация</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -307,114 +312,155 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="102"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="225"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="121"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="258"/>
         <source>Import</source>
         <translation>Импорт</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="109"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="117"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="141"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="160"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="370"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
         <source>Unable to read file.</source>
         <translation>Не удалось прочитать файл.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="117"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="141"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="160"/>
         <source>Unable to write file.</source>
         <translation>Не удалось записать файл.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="147"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="151"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="170"/>
         <source>Confirm Reset</source>
         <translation>Подтвердить сброс</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="152"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="171"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Вы действительно хотите сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="162"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="181"/>
         <source>Show help message</source>
         <translation>Показывать справочное сообщение</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="166"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="185"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Показывать справочное сообщение перед началом захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="177"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="196"/>
+        <source>Show the side panel button</source>
+        <translation>Показывать кнопку боковой панели</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="199"/>
+        <source>Show the side panel toggle button in the capture mode.</source>
+        <translation>Показывать кнопку открытия боковой панели в режиме захвата.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="210"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="214"/>
         <source>Show desktop notifications</source>
         <translation>Показывать уведомления</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="194"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="227"/>
         <source>Show tray icon</source>
         <translation>Показывать значок в трее</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="198"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="231"/>
         <source>Show the systemtray icon</source>
         <translation>Показать значок в системном трее</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="213"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="246"/>
         <source>Configuration File</source>
         <translation>Файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="218"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="251"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="232"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="265"/>
         <source>Reset</source>
         <translation>Сброс</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="243"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="276"/>
         <source>Launch at startup</source>
         <translation>Запускать при старте системы</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="247"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="280"/>
         <source>Launch Flameshot</source>
         <translation>Запустить Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="257"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="290"/>
         <source>Close after capture</source>
         <translation>Закрыть после снимка</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="261"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="294"/>
         <source>Close after taking a screenshot</source>
         <translation>Закрыть после снимка</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="273"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="306"/>
         <source>Copy URL after upload</source>
         <translation>Копировать URL после загрузки</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="278"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="311"/>
         <source>Copy URL and close window after upload</source>
         <translation>Копировать URL и закрыть окно после загрузки</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="322"/>
+        <source>Save image after copy</source>
+        <translation>Сохранять изображение после копирования</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="323"/>
+        <source>Save image file after copying it</source>
+        <translation>Сохранять файл изображения после копирования</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="332"/>
+        <source>Save Path</source>
+        <translation>Путь сохранения</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="344"/>
+        <source>Change...</source>
+        <translation>Сменить...</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="363"/>
+        <source>Choose a Folder</source>
+        <translation>Выберите папку</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="370"/>
+        <source>Unable to write to directory.</source>
+        <translation>Не удалось записать в папку.</translation>
     </message>
 </context>
 <context>
@@ -652,30 +698,35 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="51"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать Pixelate инструментом для рисования</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="93"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="110"/>
         <source>Save Error</source>
         <translation>Ошибка сохранения</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="64"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="105"/>
         <source>Capture saved as </source>
         <translation>Снимок сохранён как </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="41"/>
+        <source>Capture saved to clipboard. </source>
+        <translation>Снимок сохранён в буфер обмена. </translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="46"/>
         <source>Capture saved to clipboard</source>
         <translation>Снимок сохранён в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="91"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="67"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="108"/>
         <source>Error trying to save as </source>
         <translation>Ошибка при попытке сохранить как </translation>
     </message>
@@ -1162,6 +1213,14 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/tools/undo/undotool.cpp" line="52"/>
         <source>Undo the last modification</source>
         <translation>Отменить последнее изменение</translation>
+    </message>
+</context>
+<context>
+    <name>UtilityPanel</name>
+    <message>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="113"/>
+        <source>Close</source>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
