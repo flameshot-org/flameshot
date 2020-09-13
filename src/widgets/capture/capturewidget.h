@@ -26,7 +26,7 @@
 #pragma once
 
 #include "buttonhandler.h"
-#include "capturebutton.h"
+#include "capturetoolbutton.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
@@ -86,7 +86,7 @@ private slots:
   void upResize();
   void downResize();
 
-  void setState(CaptureButton* b);
+  void setState(CaptureToolButton* b);
   void processTool(CaptureTool* t);
   void handleButtonSignal(CaptureTool::Request r);
   void setDrawColor(const QColor& c);
@@ -140,9 +140,9 @@ private:
   QRect extendedRect(QRect* r) const;
 
   QUndoStack m_undoStack;
-  QPointer<CaptureButton> m_sizeIndButton;
+  QPointer<CaptureToolButton> m_sizeIndButton;
   // Last pressed button
-  QPointer<CaptureButton> m_activeButton;
+  QPointer<CaptureToolButton> m_activeButton;
   QPointer<CaptureTool> m_activeTool;
   QPointer<QWidget> m_toolWidget;
 

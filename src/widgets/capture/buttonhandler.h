@@ -17,12 +17,12 @@
 
 #pragma once
 
-#include "capturebutton.h"
+#include "capturetoolbutton.h"
 #include <QObject>
 #include <QRegion>
 #include <QVector>
 
-class CaptureButton;
+class CaptureToolButton;
 class QRect;
 class QPoint;
 
@@ -30,7 +30,7 @@ class ButtonHandler : public QObject
 {
   Q_OBJECT
 public:
-  ButtonHandler(const QVector<CaptureButton*>&, QObject* parent = nullptr);
+  ButtonHandler(const QVector<CaptureToolButton*>&, QObject* parent = nullptr);
   explicit ButtonHandler(QObject* parent = nullptr);
 
   void hideSectionUnderMouse(const QPoint& p);
@@ -39,7 +39,7 @@ public:
   bool buttonsAreInside() const;
   size_t size() const;
 
-  void setButtons(const QVector<CaptureButton*>);
+  void setButtons(const QVector<CaptureToolButton*>);
   bool contains(const QPoint& p) const;
   void updateScreenRegions(const QVector<QRect>& rects);
   void updateScreenRegions(const QRect& rect);
@@ -59,7 +59,7 @@ private:
 
   QRect intersectWithAreas(const QRect& rect);
 
-  QVector<CaptureButton*> m_vectorButtons;
+  QVector<CaptureToolButton*> m_vectorButtons;
 
   QRegion m_screenRegions;
 

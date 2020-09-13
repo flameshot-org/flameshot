@@ -24,7 +24,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/pathinfo.h"
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QFileSystemWatcher>
 #include <QIcon>
 #include <QKeyEvent>

@@ -19,9 +19,10 @@
 
 #pragma once
 
+#include "capture/capturebutton.h"
 #include <QPushButton>
 
-class OrientablePushButton : public QPushButton
+class OrientablePushButton : public CaptureButton
 {
   Q_OBJECT
 public:

@@ -20,7 +20,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/infowindow.h"

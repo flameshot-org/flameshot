@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QSettings>
 #include <QVector>
 
@@ -26,8 +26,8 @@ class ConfigHandler
 public:
   explicit ConfigHandler();
 
-  QVector<CaptureButton::ButtonType> getButtons();
-  void setButtons(const QVector<CaptureButton::ButtonType>&);
+  QVector<CaptureToolButton::ButtonType> getButtons();
+  void setButtons(const QVector<CaptureToolButton::ButtonType>&);
 
   QVector<QColor> getUserColors();
   void setUserColors(const QVector<QColor>&);
@@ -93,6 +93,6 @@ private:
 
   bool normalizeButtons(QVector<int>&);
 
-  QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int>& l);
-  QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType>& l);
+  QVector<CaptureToolButton::ButtonType> fromIntToButton(const QVector<int>& l);
+  QVector<int> fromButtonToInt(const QVector<CaptureToolButton::ButtonType>& l);
 };
