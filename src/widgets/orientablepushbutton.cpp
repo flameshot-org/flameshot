@@ -24,17 +24,17 @@
 #include <QStylePainter>
 
 OrientablePushButton::OrientablePushButton(QWidget* parent)
-  : QPushButton(parent)
+  : CaptureButton(parent)
 {}
 
 OrientablePushButton::OrientablePushButton(const QString& text, QWidget* parent)
-  : QPushButton(text, parent)
+  : CaptureButton(text, parent)
 {}
 
 OrientablePushButton::OrientablePushButton(const QIcon& icon,
                                            const QString& text,
                                            QWidget* parent)
-  : QPushButton(icon, text, parent)
+  : CaptureButton(icon, text, parent)
 {}
 
 QSize

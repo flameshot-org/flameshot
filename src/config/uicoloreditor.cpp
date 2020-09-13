@@ -121,7 +121,7 @@ UIcolorEditor::initButtons()
   QGroupBox* frame = new QGroupBox();
   frame->setFixedSize(frameSize, frameSize);
 
-  m_buttonMainColor = new CaptureButton(m_buttonIconType, frame);
+  m_buttonMainColor = new CaptureToolButton(m_buttonIconType, frame);
   m_buttonMainColor->move(m_buttonMainColor->x() + extraSize / 2,
                           m_buttonMainColor->y() + extraSize / 2);
   QHBoxLayout* h1 = new QHBoxLayout();
@@ -134,7 +134,7 @@ UIcolorEditor::initButtons()
                                    " mode of the main color."));
 
   QGroupBox* frame2 = new QGroupBox();
-  m_buttonContrast = new CaptureButton(m_buttonIconType, frame2);
+  m_buttonContrast = new CaptureToolButton(m_buttonIconType, frame2);
   m_buttonContrast->move(m_buttonContrast->x() + extraSize / 2,
                          m_buttonContrast->y() + extraSize / 2);
 
@@ -150,11 +150,11 @@ UIcolorEditor::initButtons()
                                   " mode of the contrast color."));
 
   connect(m_buttonMainColor,
-          &CaptureButton::pressedButton,
+          &CaptureToolButton::pressedButton,
           this,
           &UIcolorEditor::changeLastButton);
   connect(m_buttonContrast,
-          &CaptureButton::pressedButton,
+          &CaptureToolButton::pressedButton,
           this,
           &UIcolorEditor::changeLastButton);
   // clicking the labels changes the button too
@@ -169,7 +169,7 @@ UIcolorEditor::initButtons()
 
 // visual update for the selected button
 void
-UIcolorEditor::changeLastButton(CaptureButton* b)
+UIcolorEditor::changeLastButton(CaptureToolButton* b)
 {
   if (m_lastButtonPressed != b) {
     m_lastButtonPressed = b;

@@ -176,17 +176,18 @@ CaptureWidget::updateButtons()
   m_contrastUiColor = m_config.uiContrastColorValue();
 
   auto buttons = m_config.getButtons();
-  QVector<CaptureButton*> vectorButtons;
+  QVector<CaptureToolButton*> vectorButtons;
 
-  for (const CaptureButton::ButtonType& t : buttons) {
-    CaptureButton* b = new CaptureButton(t, this);
-    if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
+  for (const CaptureToolButton::ButtonType& t : buttons) {
+    CaptureToolButton* b = new CaptureToolButton(t, this);
+    if (t == CaptureToolButton::TYPE_SELECTIONINDICATOR) {
       m_sizeIndButton = b;
     }
     b->setColor(m_uiColor);
     makeChild(b);
 
-    connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
+    connect(
+      b, &CaptureToolButton::pressedButton, this, &CaptureWidget::setState);
     connect(b->tool(),
             &CaptureTool::requestAction,
             this,
@@ -626,16 +627,6 @@ CaptureWidget::initPanel()
             &QPushButton::clicked,
             this,
             &CaptureWidget::togglePanel);
-
-    QColor mainColor = config.uiMainColorValue();
-    QColor textColor =
-      ColorUtils::colorIsDark(mainColor) ? Qt::white : Qt::black;
-    QPalette palette = panelToggleButton->palette();
-    palette.setColor(QPalette::Button, mainColor);
-    palette.setColor(QPalette::ButtonText, textColor);
-    panelToggleButton->setAutoFillBackground(true);
-    panelToggleButton->setPalette(palette);
-    panelToggleButton->update();
   }
 
   m_panel = new UtilityPanel(this);
@@ -681,7 +672,7 @@ CaptureWidget::initSelection()
 }
 
 void
-CaptureWidget::setState(CaptureButton* b)
+CaptureWidget::setState(CaptureToolButton* b)
 {
   if (!b) {
     return;

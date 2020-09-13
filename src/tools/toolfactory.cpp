@@ -42,68 +42,68 @@ ToolFactory::ToolFactory(QObject* parent)
 {}
 
 CaptureTool*
-ToolFactory::CreateTool(CaptureButton::ButtonType t, QObject* parent)
+ToolFactory::CreateTool(CaptureToolButton::ButtonType t, QObject* parent)
 {
   CaptureTool* tool;
   switch (t) {
-    case CaptureButton::TYPE_ARROW:
+    case CaptureToolButton::TYPE_ARROW:
       tool = new ArrowTool(parent);
       break;
-    case CaptureButton::TYPE_CIRCLE:
+    case CaptureToolButton::TYPE_CIRCLE:
       tool = new CircleTool(parent);
       break;
-    case CaptureButton::TYPE_COPY:
+    case CaptureToolButton::TYPE_COPY:
       tool = new CopyTool(parent);
       break;
-    case CaptureButton::TYPE_EXIT:
+    case CaptureToolButton::TYPE_EXIT:
       tool = new ExitTool(parent);
       break;
-    case CaptureButton::TYPE_IMAGEUPLOADER:
+    case CaptureToolButton::TYPE_IMAGEUPLOADER:
       tool = new ImgurUploaderTool(parent);
       break;
-    case CaptureButton::TYPE_DRAWER:
+    case CaptureToolButton::TYPE_DRAWER:
       tool = new LineTool(parent);
       break;
-    case CaptureButton::TYPE_MARKER:
+    case CaptureToolButton::TYPE_MARKER:
       tool = new MarkerTool(parent);
       break;
-    case CaptureButton::TYPE_MOVESELECTION:
+    case CaptureToolButton::TYPE_MOVESELECTION:
       tool = new MoveTool(parent);
       break;
-    case CaptureButton::TYPE_PENCIL:
+    case CaptureToolButton::TYPE_PENCIL:
       tool = new PencilTool(parent);
       break;
-    case CaptureButton::TYPE_RECTANGLE:
+    case CaptureToolButton::TYPE_RECTANGLE:
       tool = new RectangleTool(parent);
       break;
-    case CaptureButton::TYPE_SAVE:
+    case CaptureToolButton::TYPE_SAVE:
       tool = new SaveTool(parent);
       break;
-    case CaptureButton::TYPE_SELECTION:
+    case CaptureToolButton::TYPE_SELECTION:
       tool = new SelectionTool(parent);
       break;
-    case CaptureButton::TYPE_SELECTIONINDICATOR:
+    case CaptureToolButton::TYPE_SELECTIONINDICATOR:
       tool = new SizeIndicatorTool(parent);
       break;
-    case CaptureButton::TYPE_UNDO:
+    case CaptureToolButton::TYPE_UNDO:
       tool = new UndoTool(parent);
       break;
-    case CaptureButton::TYPE_REDO:
+    case CaptureToolButton::TYPE_REDO:
       tool = new RedoTool(parent);
       break;
-    case CaptureButton::TYPE_OPEN_APP:
+    case CaptureToolButton::TYPE_OPEN_APP:
       tool = new AppLauncher(parent);
       break;
-    case CaptureButton::TYPE_PIXELATE:
+    case CaptureToolButton::TYPE_PIXELATE:
       tool = new PixelateTool(parent);
       break;
-    case CaptureButton::TYPE_PIN:
+    case CaptureToolButton::TYPE_PIN:
       tool = new PinTool(parent);
       break;
-    case CaptureButton::TYPE_TEXT:
+    case CaptureToolButton::TYPE_TEXT:
       tool = new TextTool(parent);
       break;
-    case CaptureButton::TYPE_CIRCLECOUNT:
+    case CaptureToolButton::TYPE_CIRCLECOUNT:
       tool = new CircleCountTool(parent);
       break;
 
