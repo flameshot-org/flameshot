@@ -5,25 +5,29 @@ Source: https://github.com/flameshot-org/flameshot/
 Files: *
 Copyright: 2016-2019 lupoDharkael <izhe@hotmail.es>
 License: GPL-3+
-Comments:
+Comment:
  The author copied a few lines of code from KSnapshot regiongrabber.cpp
  revision 796531 (LGPL).
 
 Files: debian/*
 Copyright: 2017 Juanma Navarro Mañez <juanma1980@gmail.com>
-           2018-2019 Boyuan Yang <byang@debian.org>
+           2018 Boyuan Yang <byang@debian.org>
 License: GPL-3+
 
-Files: img/flameshot.*
+Files:
+ data/img/app/flameshot.*
+ data/img/hicolor/*
 Copyright: 2017 lupoDharkael <izhe@hotmail.es>
 License: Free-Art-License-1.3
 
 Files:
- docs/appdata/flameshot.appdata.xml
+ docs/appdata/flameshot.metainfo.xml
 Copyright: 2017-2019 lupoDharkael <izhe@hotmail.es>
 License: CC0-1.0
 
-Files: img/buttonIconsBlack/* img/buttonIconsWhite/*
+Files:
+ data/img/material/black/*
+ data/img/material/white/*
 Copyright: Google Inc.
 License: Apache-2.0
 
@@ -32,7 +36,7 @@ Copyright: 2017 Alejandro Sirgo Rica
            2017 Christian Kaiser <info@ckaiser.com.ar>
            2007 Luca Gugelmann <lucag@student.ethz.ch>
 License: GPL-3+
-Comments:
+Comment:
  Relicensed under GPL-3+ under flameshot project.
  .
  Originally based on Lightscreen areadialog.h,
@@ -43,14 +47,14 @@ Comments:
  Copyright 2007 Luca Gugelmann <lucag@student.ethz.ch>
  released under the GNU LGPL  <http://www.gnu.org/licenses/old-licenses/library.txt>
 
-Files: src/third-party/singleapplication/*
+Files: external/singleapplication/*
 Copyright: 2015 - 2016 Itay Grudev
 License: Expat
 
-Files: src/third-party/Qt-Color-Widgets/*
+Files: external/Qt-Color-Widgets/*
 Copyright: 2013-2017 Mattia Basaglia <mattia.basaglia@gmail.com>
 License: LGPL-3+
-Comments:
+Comment:
  As a special exception, this library can be included in any project under the
  terms of any of the GNU licenses, distributing the whole project under a
  different GNU license, see LICENSE-EXCEPTION for details.
@@ -362,8 +366,8 @@ License: Free-Art-License-1.3
  (without any changes).
  .
      Translation : Jonathan Clarke, Benjamin Jean, Griselda Jung, Fanny
-     Mourguet, Antoine Pitrou.  Thanks to framalang.org 
- 
+     Mourguet, Antoine Pitrou.  Thanks to framalang.org
+
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
