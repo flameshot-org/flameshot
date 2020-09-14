@@ -35,8 +35,6 @@ X-DBUS-StartupType=Unique
 X-DBUS-ServiceName=org.flameshot.Flameshot
 X-KDE-DBUS-Restricted-Interfaces=org_kde_kwin_effect-screenshot
 
-
-
 [Desktop Action Configure]
 Name=Configure
 Name[zh_CN]=配置
@@ -64,4 +62,5 @@ Exec=flameshot gui --delay 500
 [Desktop Action Launcher]
 Name=Open launcher
 Name[de]=Starter öffnen
+Name[zh_CN]=打开启动器
 Exec=flameshot launcher
