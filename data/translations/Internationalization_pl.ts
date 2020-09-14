@@ -77,47 +77,47 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Tryb przechwytywania&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznaczony obszar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pełny ekran (Wszystkie monitory)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="81"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez opóźnienia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> sekunda</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> sekundy</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="92"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Wykonaj nowy zrzut ekranu</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Obszar:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="102"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opóźnienie:</translation>
     </message>
 </context>
 <context>
@@ -145,12 +145,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="39"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>Licznik</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="51"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj automatycznie zwiększający się bąbelek licznika</translation>
     </message>
 </context>
 <context>
@@ -199,7 +199,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="207"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż &amp;okno</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="210"/>
@@ -209,7 +209,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>O progr&amp;amie</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -231,7 +231,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="53"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiuj zaznaczony obszar do schowka</translation>
     </message>
 </context>
 <context>
@@ -398,22 +398,22 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="257"/>
         <source>Close after capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij po wykonaniu zrzutu</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="261"/>
         <source>Close after taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij po wykonaniu zrzutu ekranu</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="273"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiuj adres URL po wysłaniu</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="278"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiuj adres URL po wysłaniu i zamknij okno</translation>
     </message>
 </context>
 <context>
@@ -488,7 +488,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
+        <translation>SPACJA</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="63"/>
@@ -533,7 +533,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="73"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Przełącz widoczność paska bocznego z opcjami wybranego narzędzia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="74"/>
@@ -646,12 +646,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="39"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamazywanie</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="51"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw Zamazywanie jako narzędzie malowania</translation>
     </message>
 </context>
 <context>
@@ -690,7 +690,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/main.cpp" line="104"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowany lecz prosty w użyciu program do zrzutów ekranu.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="105"/>
@@ -831,37 +831,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL skopiowany do schowka.</translation>
+        <translation>URL skopiowany do schowka.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="77"/>
         <source>Arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumenty</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
         <source>arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>argumenty</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Użycie</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation>opcje</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="358"/>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku systemowym do konfiguracji.</translation>
     </message>
 </context>
 <context>
@@ -882,12 +882,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="40"/>
         <source>Redo</source>
-        <translation>Cofnij</translation>
+        <translation>Ponów</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="52"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponów następną modyfikację</translation>
     </message>
 </context>
 <context>
@@ -929,12 +929,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="71"/>
         <source>Active thickness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grubość:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="72"/>
         <source>Active color:</source>
-        <translation>Aktywny kolor:</translation>
+        <translation>Kolor:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="217"/>
