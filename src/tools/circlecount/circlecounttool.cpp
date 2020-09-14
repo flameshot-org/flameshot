@@ -68,17 +68,35 @@ CircleCountTool::process(QPainter& painter,
   painter.setBrush(m_color);
 
   int bubble_size = m_thickness;
-  painter.drawEllipse(m_points.first, bubble_size, bubble_size);
+  // Decrease by 1px so the border is properly ereased when doing undo
+  painter.drawEllipse(m_points.first, bubble_size - 1, bubble_size - 1);
+  QRect textRect = QRect(m_points.first.x() - bubble_size / 2,
+                         m_points.first.y() - bubble_size / 2,
+                         bubble_size,
+                         bubble_size);
   auto orig_font = painter.font();
   auto new_font = orig_font;
-  new_font.setPixelSize(m_thickness);
+  auto fontSize = bubble_size;
+  new_font.setPixelSize(fontSize);
   painter.setFont(new_font);
-  painter.drawText(QRectF(m_points.first.x() - bubble_size / 2,
-                          m_points.first.y() - bubble_size / 2,
-                          bubble_size,
-                          bubble_size),
-                   Qt::AlignCenter,
-                   QString::number(m_count));
+
+  QRect bRect =
+    painter.boundingRect(textRect, Qt::AlignCenter, QString::number(m_count));
+
+  while (bRect.width() > textRect.width()) {
+    fontSize--;
+    if (fontSize == 0) {
+      break;
+    }
+    new_font.setPixelSize(fontSize);
+    painter.setFont(new_font);
+
+    bRect =
+      painter.boundingRect(textRect, Qt::AlignCenter, QString::number(m_count));
+  }
+
+  painter.drawText(textRect, Qt::AlignCenter, QString::number(m_count));
+
   painter.setFont(orig_font);
 }
 
@@ -98,6 +116,9 @@ CircleCountTool::drawStart(const CaptureContext& context)
 {
   m_color = context.color;
   m_thickness = context.thickness + PADDING_VALUE;
+  if (m_thickness < 15) {
+    m_thickness = 15;
+  }
   m_points.first = context.mousePos;
   m_count = context.circleCount;
   emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
