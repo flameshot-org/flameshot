@@ -8,6 +8,7 @@ finish-args:
   - --socket=x11
   - --socket=wayland
   - --filesystem=host
+  - --talk-name=org.kde.StatusNotifierWatcher
 modules:
   - name: flameshot
     buildsystem: cmake-ninja
