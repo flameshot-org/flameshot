@@ -85,7 +85,10 @@ DEFINES += QAPPLICATION_CLASS=QApplication
 
 SOURCES += src/main.cpp \
     src/config/filepathconfiguration.cpp \
+    src/config/setshortcutwidget.cpp \
+    src/config/shortcutswidget.cpp \
     src/tools/imgs3/imgs3settings.cpp \
+    src/utils/configshortcuts.cpp \
     src/widgets/historywidget.cpp \
     src/utils/configenterprise.cpp \
     src/utils/history.cpp \
@@ -165,7 +168,10 @@ SOURCES += src/main.cpp \
 
 HEADERS  += src/widgets/capture/buttonhandler.h \
     src/config/filepathconfiguration.h \
+    src/config/setshortcutwidget.h \
+    src/config/shortcutswidget.h \
     src/tools/imgs3/imgs3settings.h \
+    src/utils/configshortcuts.h \
     src/widgets/historywidget.h \
     src/utils/configenterprise.h \
     src/utils/history.h \

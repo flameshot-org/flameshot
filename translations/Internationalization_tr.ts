@@ -130,7 +130,7 @@
         <translation>Ekran resmi alınamadı</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="236"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="258"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -159,27 +159,32 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="41"/>
+        <location filename="../src/config/configwindow.cpp" line="42"/>
         <source>Configuration</source>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Interface</source>
         <translation>Arayüz</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
         <translation>Dosya Adı Düzenleyici</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="73"/>
+        <location filename="../src/config/configwindow.cpp" line="79"/>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="84"/>
         <source>Path Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="78"/>
+        <location filename="../src/config/configwindow.cpp" line="74"/>
         <source>General</source>
         <translation>Genel</translation>
     </message>
@@ -187,32 +192,32 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="182"/>
+        <location filename="../src/core/controller.cpp" line="185"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Ekran Resmi Al</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="187"/>
+        <location filename="../src/core/controller.cpp" line="190"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="191"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Ayarlar</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="194"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Information</source>
         <translation>&amp;Bilgi</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="197"/>
+        <location filename="../src/core/controller.cpp" line="200"/>
         <source>&amp;Quit</source>
         <translation>&amp;Çıkış</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="202"/>
+        <location filename="../src/core/controller.cpp" line="205"/>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,104 +658,70 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation>Hakkında</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="62"/>
-        <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>Sağ Tık</translation>
+        <translation type="vanished">Sağ Tık</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>Fare Tekerleği</translation>
+        <translation type="vanished">Fare Tekerleği</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Move selection 1px</source>
-        <translation>1px seçimini hareket ettir</translation>
+        <translation type="vanished">1px seçimini hareket ettir</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Resize selection 1px</source>
-        <translation>1px seçimini yeniden boyutlandır</translation>
+        <translation type="vanished">1px seçimini yeniden boyutlandır</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Quit capture</source>
-        <translation>Çıkış</translation>
+        <translation type="vanished">Çıkış</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
-        <translation>Panoya kopyala</translation>
+        <translation type="vanished">Panoya kopyala</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
-        <translation>Seçimi dosya olarak kaydet</translation>
+        <translation type="vanished">Seçimi dosya olarak kaydet</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
-        <translation>Son değişikliği geri al</translation>
+        <translation type="vanished">Son değişikliği geri al</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
-        <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
-        <translation>Renk seçici göster</translation>
+        <translation type="vanished">Renk seçici göster</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Araç  kalınlığını değiştirin</translation>
+        <translation type="vanished">Araç  kalınlığını değiştirin</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="79"/>
-        <source>Capture screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="80"/>
-        <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/widgets/infowindow.cpp" line="85"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Ekran yakalama modunda kullanılabilir kısayollar.</translation>
+        <translation type="vanished">Ekran yakalama modunda kullanılabilir kısayollar.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Key</source>
-        <translation>Anahtar</translation>
+        <translation type="vanished">Anahtar</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Description</source>
-        <translation>Tanım</translation>
+        <translation type="vanished">Tanım</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="127"/>
+        <location filename="../src/widgets/infowindow.cpp" line="60"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Lisans&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="135"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Sürüm&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Kısayollar&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Kısayollar&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
 </context>
 <context>
@@ -883,9 +854,83 @@ You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="231"/>
+        <location filename="../src/core/controller.cpp" line="234"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="28"/>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="26"/>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="30"/>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="32"/>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="23"/>
+        <source>Toggle side panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="35"/>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="37"/>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="39"/>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="41"/>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="44"/>
+        <source>Quit capture</source>
+        <translation type="unfinished">Çıkış</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="45"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="46"/>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection 1px</source>
+        <translation type="obsolete">1px seçimini hareket ettir</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="47"/>
+        <source>Show color picker</source>
+        <translation type="unfinished">Renk seçici göster</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="48"/>
+        <source>Change the tool&apos;s thickness</source>
+        <translation type="unfinished">Araç  kalınlığını değiştirin</translation>
     </message>
 </context>
 <context>
@@ -949,6 +994,47 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="12"/>
+        <source>Set Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="18"/>
+        <source>Enter new shortcut to change </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="30"/>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="25"/>
+        <source>Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="48"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">Ekran yakalama modunda kullanılabilir kısayollar.</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <source>Description</source>
+        <translation type="unfinished">Tanım</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <source>Key</source>
+        <translation type="unfinished">Anahtar</translation>
+    </message>
+</context>
+<context>
     <name>SidePanelWidget</name>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
@@ -961,12 +1047,12 @@ You can find me in the system tray.</source>
         <translation>Aktif Renk:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="182"/>
         <source>Press ESC to cancel</source>
         <translation>Çıkmak için ESC&apos;ye tıklayın</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
         <source>Grab Color</source>
         <translation type="unfinished"></translation>
     </message>

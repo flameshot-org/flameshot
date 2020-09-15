@@ -158,6 +158,10 @@ Press Space to open the side panel.</source>
         <source>Path Default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -553,51 +557,51 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Right Click</source>
-        <translation>jobb egérgomb</translation>
+        <translation type="vanished">jobb egérgomb</translation>
     </message>
     <message>
         <source>Mouse Wheel</source>
-        <translation>Görgő</translation>
+        <translation type="vanished">Görgő</translation>
     </message>
     <message>
         <source>Move selection 1px</source>
-        <translation>Kijelölés mozgatása 1px</translation>
+        <translation type="vanished">Kijelölés mozgatása 1px</translation>
     </message>
     <message>
         <source>Resize selection 1px</source>
-        <translation>Kijelölés méretezése 1 px</translation>
+        <translation type="vanished">Kijelölés méretezése 1 px</translation>
     </message>
     <message>
         <source>Quit capture</source>
-        <translation>Felvétel bezárása</translation>
+        <translation type="vanished">Felvétel bezárása</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation>Másolás vágólapra</translation>
+        <translation type="vanished">Másolás vágólapra</translation>
     </message>
     <message>
         <source>Save selection as a file</source>
-        <translation>Kijelölés mentése fájlba</translation>
+        <translation type="vanished">Kijelölés mentése fájlba</translation>
     </message>
     <message>
         <source>Undo the last modification</source>
-        <translation>Utolsó módosítás visszavonása</translation>
+        <translation type="vanished">Utolsó módosítás visszavonása</translation>
     </message>
     <message>
         <source>Show color picker</source>
-        <translation>Színválasztó mutatása</translation>
+        <translation type="vanished">Színválasztó mutatása</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Vastagság állítása</translation>
+        <translation type="vanished">Vastagság állítása</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Kulcs</translation>
+        <translation type="vanished">Kulcs</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Leírás</translation>
+        <translation type="vanished">Leírás</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
@@ -609,27 +613,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Gyorsbillentyűk&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Gyorsbillentyűk&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
-    </message>
-    <message>
-        <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Capture screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
     </message>
 </context>
 <context>
@@ -739,6 +727,66 @@ You can find me in the system tray.</source>
         <source>Save screenshot</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle side panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit capture</source>
+        <translation type="unfinished">Felvétel bezárása</translation>
+    </message>
+    <message>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection 1px</source>
+        <translation type="obsolete">Kijelölés mozgatása 1px</translation>
+    </message>
+    <message>
+        <source>Show color picker</source>
+        <translation type="unfinished">Színválasztó mutatása</translation>
+    </message>
+    <message>
+        <source>Change the tool&apos;s thickness</source>
+        <translation type="unfinished">Vastagság állítása</translation>
+    </message>
+    <message>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -789,6 +837,40 @@ You can find me in the system tray.</source>
     <message>
         <source>Set Selection as the paint tool</source>
         <translation>Beállítja a Téglalapos kijelölő eszközt Festő eszközként</translation>
+    </message>
+</context>
+<context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <source>Set Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter new shortcut to change </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <source>Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Leírás</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation type="unfinished">Kulcs</translation>
     </message>
 </context>
 <context>
