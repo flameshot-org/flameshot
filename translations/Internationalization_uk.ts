@@ -476,27 +476,27 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Історія скріншотів пуста</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="26"/>
+        <location filename="../src/widgets/historywidget.cpp" line="28"/>
         <source>Latest Uploads</source>
         <translation>Останні завантаження</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="63"/>
+        <location filename="../src/widgets/historywidget.cpp" line="66"/>
         <source>Screenshots history is empty</source>
         <translation>Історія скріншотів пуста</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="109"/>
+        <location filename="../src/widgets/historywidget.cpp" line="113"/>
         <source>Copy URL</source>
         <translation>Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="113"/>
+        <location filename="../src/widgets/historywidget.cpp" line="117"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="119"/>
+        <location filename="../src/widgets/historywidget.cpp" line="123"/>
         <source>Open in browser</source>
         <translation>Відкрити у браузері</translation>
     </message>
@@ -508,17 +508,17 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Вивантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation>Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="54"/>
         <source>Upload image to S3</source>
         <translation>Завантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="60"/>
         <source>Delete image from S3</source>
         <translation>Видалити скріншот з S3</translation>
     </message>
@@ -527,87 +527,79 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Видалити скіншот</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="255"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="237"/>
         <source>Remove screenshot from history?</source>
         <translation>Видалити скріншот із історії?</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="282"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="254"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation>Параметри доступів до S3 не знайдені у конфігураціонному файлі</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="406"/>
         <source>Copy URL</source>
-        <translation>Скопіювати URL</translation>
+        <translation type="vanished">Скопіювати URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
         <source>Open URL</source>
-        <translation>Відкрити URL</translation>
+        <translation type="vanished">Відкрити URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
         <source>Delete image</source>
-        <translation>Видалити зображення</translation>
+        <translation type="vanished">Видалити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="409"/>
         <source>Image to Clipboard.</source>
-        <translation>Зображення до буферу обміну.</translation>
+        <translation type="vanished">Зображення до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="428"/>
         <source>Unable to open the URL.</source>
-        <translation>Не вдалось відкрити URL.</translation>
+        <translation type="vanished">Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="209"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="434"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="200"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="447"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="60"/>
         <source>Deleting image...</source>
         <translation>Видалення скріншоту...</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="224"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation>Не вдалося видалити скріншот із віддаленого сховища.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="226"/>
         <source>Network error</source>
         <translation>Помилка мережі</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="249"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="228"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation>Можливо, його більше не існує</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="252"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="233"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation>Ви все одно хочете видалити скріншот із локальної історії?</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="439"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Знімок скопійовано до буферу обміну.</translation>
+        <translation type="vanished">Знімок скопійовано до буферу обміну.</translation>
     </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="38"/>
+        <location filename="../src/tools/storage/imgs3uploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
         <translation>Вивантаження зображень</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="46"/>
+        <location filename="../src/tools/storage/imgs3uploadertool.cpp" line="46"/>
         <source>Upload the selection to S3 bucket</source>
         <translation>Вивантажити виділення на S3</translation>
     </message>
@@ -617,50 +609,109 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
-    <name>ImgurUploader</name>
+    <name>ImgUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
-        <source>Upload to Imgur</source>
-        <translation>Вивантажити до Imgur</translation>
+        <location filename="../src/tools/storage/imguploader.cpp" line="55"/>
+        <source>Upload image to S3</source>
+        <translation>Завантажити на S3</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="54"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="61"/>
         <source>Uploading Image</source>
         <translation>Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="140"/>
-        <source>Copy URL</source>
-        <translation>Скопіювати URL</translation>
+        <location filename="../src/tools/storage/imguploader.cpp" line="61"/>
+        <source>Upload image</source>
+        <translation>Вивантажити зображення</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="141"/>
-        <source>Open URL</source>
-        <translation>Відкрити URL</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="142"/>
-        <source>Delete image</source>
-        <translation>Видалити зображення</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="143"/>
-        <source>Image to Clipboard.</source>
-        <translation>Зображення до буферу обміну.</translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="109"/>
         <source>Unable to open the URL.</source>
         <translation>Не вдалось відкрити URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="116"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="181"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="122"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation>Знімок скопійовано до буферу обміну.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="131"/>
+        <source>Deleting image...</source>
+        <translation>Видалення скріншоту...</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="191"/>
+        <source>Copy URL</source>
+        <translation>Скопіювати URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="192"/>
+        <source>Open URL</source>
+        <translation>Відкрити URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="193"/>
+        <source>Delete image</source>
+        <translation>Видалити зображення</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="194"/>
+        <source>Image to Clipboard.</source>
+        <translation>Зображення до буферу обміну.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploader</name>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="47"/>
+        <source>Upload to Imgur</source>
+        <translation>Вивантажити до Imgur</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="54"/>
+        <source>Uploading Image</source>
+        <translation>Вивантаження зображення</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="140"/>
+        <source>Copy URL</source>
+        <translation>Скопіювати URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="141"/>
+        <source>Open URL</source>
+        <translation>Відкрити URL</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="142"/>
+        <source>Delete image</source>
+        <translation>Видалити зображення</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="143"/>
+        <source>Image to Clipboard.</source>
+        <translation>Зображення до буферу обміну.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="175"/>
+        <source>Unable to open the URL.</source>
+        <translation>Не вдалось відкрити URL.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="168"/>
+        <source>URL copied to clipboard.</source>
+        <translation>URL скопійовано до буферу обміну.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="181"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Знімок скопійовано до буферу обміну.</translation>
     </message>
@@ -668,12 +719,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="35"/>
+        <location filename="../src/tools/storage/imguruploadertool.cpp" line="35"/>
         <source>Image Uploader</source>
         <translation>Вивантаження зображень</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
+        <location filename="../src/tools/storage/imguruploadertool.cpp" line="43"/>
         <source>Upload the selection to Imgur</source>
         <translation>Вивантажити вибране до Imgur</translation>
     </message>
@@ -887,7 +938,7 @@ Press Space to open the side panel.</source>
         <translation>Не вдалось зберегти</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>

@@ -17,51 +17,53 @@
 
 #pragma once
 
-#include <QWidget>
+#define S3_API_IMG_PATH "v2/image/"
+
+#include "imgs3settings.h"
+#include "imguploader.h"
 #include <QUrl>
+#include <QWidget>
 
 class QNetworkReply;
+class QNetworkProxy;
 class QNetworkAccessManager;
 class QHBoxLayout;
 class QVBoxLayout;
 class QLabel;
-class LoadSpinner;
 class QPushButton;
 class QUrl;
 class NotificationWidget;
+class ConfigEnterprise;
+class ImageLabel;
 
-class ImgurUploader : public QWidget {
+class ImgS3Uploader : public ImgUploader
+{
     Q_OBJECT
 public:
-    explicit ImgurUploader(const QPixmap &capture, QWidget *parent = nullptr);
+    explicit ImgS3Uploader(const QPixmap& capture, QWidget* parent = nullptr);
+    explicit ImgS3Uploader(QWidget* parent = nullptr);
+    void upload();
+    void deleteResource(const QString&, const QString&);
 
 private slots:
-    void handleReply(QNetworkReply *reply);
-    void startDrag();
-
-    void openURL();
-    void copyURL();
-    void openDeleteURL();
-    void copyImage();
+    void handleReplyUpload(QNetworkReply* reply);
+    void handleReplyGetCreds(QNetworkReply* reply);
+    void handleReplyDeleteResource(QNetworkReply* reply);
 
 private:
-    QPixmap m_pixmap;
-    QNetworkAccessManager *m_NetworkAM;
+    void init(const QString& title, const QString& label);
+    void uploadToS3(QJsonDocument& response);
 
-    QVBoxLayout *m_vLayout;
-    QHBoxLayout *m_hLayout;
-    // loading
-    QLabel *m_infoLabel;
-    LoadSpinner *m_spinner;
-    // uploaded
-    QPushButton *m_openUrlButton;
-    QPushButton *m_openDeleteUrlButton;
-    QPushButton *m_copyUrlButton;
-    QPushButton *m_toClipboardButton;
-    QUrl m_imageURL;
-    QUrl m_deleteImageURL;
-    NotificationWidget *m_notification;
+    QNetworkProxy* initProxy();
+    void clearProxy();
+    QNetworkProxy* proxy();
 
-    void upload();
-    void onUploadOk();
+    // class members
+private:
+    ImgS3Settings m_s3Settings;
+
+    QNetworkProxy* m_proxy;
+    QNetworkAccessManager* m_NetworkAMUpload;
+    QNetworkAccessManager* m_NetworkAMGetCreds;
+    QNetworkAccessManager* m_NetworkAMRemove;
 };
