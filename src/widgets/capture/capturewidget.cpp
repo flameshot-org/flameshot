@@ -577,8 +577,8 @@ CaptureWidget::resizeEvent(QResizeEvent* e)
   QWidget::resizeEvent(e);
   m_context.widgetDimensions = rect();
   m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
-  m_panel->setFixedHeight(height());
   if (!m_context.fullscreen) {
+    m_panel->setFixedHeight(height());
     m_buttonHandler->updateScreenRegions(rect());
   }
 }
