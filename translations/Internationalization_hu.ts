@@ -425,19 +425,19 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="unfinished">URL másolása</translation>
+        <translation type="obsolete">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="unfinished">URL megnyitása</translation>
+        <translation type="obsolete">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Kép a vágolapra.</translation>
+        <translation type="obsolete">Kép a vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
+        <translation type="obsolete">Nem lehet az URL-t megnyitni.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -445,7 +445,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+        <translation type="obsolete">Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Upload image to S3</source>
@@ -453,10 +453,6 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -497,6 +493,53 @@ Press Space to open the side panel.</source>
     <message>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploader</name>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Kép felötlése</translation>
+    </message>
+    <message>
+        <source>Upload image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
+    <message>
+        <source>Open URL</source>
+        <translation type="unfinished">URL megnyitása</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">Kép a vágolapra.</translation>
     </message>
 </context>
 <context>

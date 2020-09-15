@@ -15,52 +15,59 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "imgs3uploadertool.h"
-#include "imgs3uploader.h"
+#include "imguruploadertool.h"
+#include "imguruploader.h"
 #include <QPainter>
-#include <QSettings>
-#include <QFileInfo>
 
+ImgurUploaderTool::ImgurUploaderTool(QObject* parent)
+  : AbstractActionTool(parent)
+{}
 
-ImgS3UploaderTool::ImgS3UploaderTool(QObject *parent) : AbstractActionTool(parent) {
-}
-
-bool ImgS3UploaderTool::closeOnButtonPressed() const {
+bool ImgurUploaderTool::closeOnButtonPressed() const
+{
     return true;
 }
 
-QIcon ImgS3UploaderTool::icon(const QColor &background, bool inEditor) const {
+QIcon ImgurUploaderTool::icon(const QColor& background, bool inEditor) const
+{
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "cloud-upload.svg");
 }
 
-QString ImgS3UploaderTool::name() const {
+QString ImgurUploaderTool::name() const
+{
     return tr("Image Uploader");
 }
 
-QString ImgS3UploaderTool::nameID() {
+QString ImgurUploaderTool::nameID()
+{
     return QLatin1String("");
 }
 
-QString ImgS3UploaderTool::description() const {
-    return tr("Upload the selection to S3 bucket");
+QString ImgurUploaderTool::description() const
+{
+    return tr("Upload the selection to Imgur");
 }
 
-QWidget *ImgS3UploaderTool::widget() {
-    ImgS3Uploader *p = new ImgS3Uploader(capture);
+QWidget* ImgurUploaderTool::widget()
+{
+    ImgurUploader* p = new ImgurUploader(capture);
     p->upload();
     return p;
 }
 
-void ImgS3UploaderTool::setCapture(const QPixmap &pixmap) {
+void ImgurUploaderTool::setCapture(const QPixmap& pixmap)
+{
     capture = pixmap;
 }
 
-CaptureTool *ImgS3UploaderTool::copy(QObject *parent) {
-    return new ImgS3UploaderTool(parent);
+CaptureTool* ImgurUploaderTool::copy(QObject* parent)
+{
+    return new ImgurUploaderTool(parent);
 }
 
-void ImgS3UploaderTool::pressed(const CaptureContext &context) {
+void ImgurUploaderTool::pressed(const CaptureContext& context)
+{
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);

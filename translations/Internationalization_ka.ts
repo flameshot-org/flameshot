@@ -456,27 +456,27 @@ Press Space to open the side panel.</source>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="26"/>
+        <location filename="../src/widgets/historywidget.cpp" line="28"/>
         <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="63"/>
+        <location filename="../src/widgets/historywidget.cpp" line="66"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="109"/>
+        <location filename="../src/widgets/historywidget.cpp" line="113"/>
         <source>Copy URL</source>
         <translation type="unfinished">URL-ის კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="113"/>
+        <location filename="../src/widgets/historywidget.cpp" line="117"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="119"/>
+        <location filename="../src/widgets/historywidget.cpp" line="123"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -484,151 +484,198 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation type="unfinished">სურათის ატვირთვა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="54"/>
         <source>Upload image to S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="60"/>
         <source>Delete image from S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="224"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="226"/>
         <source>Network error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="249"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="228"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="252"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="233"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="282"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="254"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="406"/>
         <source>Copy URL</source>
-        <translation type="unfinished">URL-ის კოპირება</translation>
+        <translation type="obsolete">URL-ის კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
         <source>Open URL</source>
-        <translation type="unfinished">URL-ის გახსნა</translation>
+        <translation type="obsolete">URL-ის გახსნა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
-        <source>Delete image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="409"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">სურათის გაცვლის ბუფერში გაგზავნა</translation>
+        <translation type="obsolete">სურათის გაცვლის ბუფერში გაგზავნა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="428"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">URL-ის გახსნა ვერ მოხერხდა.</translation>
+        <translation type="obsolete">URL-ის გახსნა ვერ მოხერხდა.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="209"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="434"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="200"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="447"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="60"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="255"/>
+        <location filename="../src/tools/storage/imgs3uploader.cpp" line="237"/>
         <source>Remove screenshot from history?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="439"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
+        <translation type="obsolete">სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="38"/>
+        <location filename="../src/tools/storage/imgs3uploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
         <translation type="unfinished">სურათის ამტვირთველი</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="46"/>
+        <location filename="../src/tools/storage/imgs3uploadertool.cpp" line="46"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ImgurUploader</name>
+    <name>ImgUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
-        <source>Upload to Imgur</source>
-        <translation>Imgur-ზე ატვირთვა</translation>
+        <location filename="../src/tools/storage/imguploader.cpp" line="55"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="54"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="61"/>
         <source>Uploading Image</source>
-        <translation>სურათის ატვირთვა</translation>
+        <translation type="unfinished">სურათის ატვირთვა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="140"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="61"/>
+        <source>Upload image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="109"/>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">URL-ის გახსნა ვერ მოხერხდა.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="116"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="122"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="131"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="191"/>
         <source>Copy URL</source>
-        <translation>URL-ის კოპირება</translation>
+        <translation type="unfinished">URL-ის კოპირება</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="141"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="192"/>
         <source>Open URL</source>
-        <translation>URL-ის გახსნა</translation>
+        <translation type="unfinished">URL-ის გახსნა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="142"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="193"/>
         <source>Delete image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="143"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="194"/>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">სურათის გაცვლის ბუფერში გაგზავნა</translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploader</name>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="47"/>
+        <source>Upload to Imgur</source>
+        <translation>Imgur-ზე ატვირთვა</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="54"/>
+        <source>Uploading Image</source>
+        <translation>სურათის ატვირთვა</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="140"/>
+        <source>Copy URL</source>
+        <translation>URL-ის კოპირება</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="141"/>
+        <source>Open URL</source>
+        <translation>URL-ის გახსნა</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="142"/>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="143"/>
         <source>Image to Clipboard.</source>
         <translation>სურათის გაცვლის ბუფერში გაგზავნა</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="162"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="175"/>
         <source>Unable to open the URL.</source>
         <translation>URL-ის გახსნა ვერ მოხერხდა.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="168"/>
         <source>URL copied to clipboard.</source>
         <translation>URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="181"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="181"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>სურათი დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>
@@ -636,12 +683,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="35"/>
+        <location filename="../src/tools/storage/imguruploadertool.cpp" line="35"/>
         <source>Image Uploader</source>
         <translation>სურათის ამტვირთველი</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
+        <location filename="../src/tools/storage/imguruploadertool.cpp" line="43"/>
         <source>Upload the selection to Imgur</source>
         <translation>შერჩეულის Imgur-ზე ატვირთვა</translation>
     </message>
@@ -839,7 +886,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">შემდეგ მისამართზე ჩაწერა ვერ მოხერხდა:</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <location filename="../src/tools/storage/imguruploader.cpp" line="82"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL დაკოპირდა გაცვლის ბუფერში.</translation>
     </message>

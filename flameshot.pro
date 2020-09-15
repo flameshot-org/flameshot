@@ -87,7 +87,6 @@ SOURCES += src/main.cpp \
     src/config/filepathconfiguration.cpp \
     src/config/setshortcutwidget.cpp \
     src/config/shortcutswidget.cpp \
-    src/tools/imgs3/imgs3settings.cpp \
     src/utils/configshortcuts.cpp \
     src/widgets/historywidget.cpp \
     src/utils/configenterprise.cpp \
@@ -112,8 +111,6 @@ SOURCES += src/main.cpp \
     src/tools/circle/circletool.cpp \
     src/tools/copy/copytool.cpp \
     src/tools/exit/exittool.cpp \
-    src/tools/imgur/imguruploadertool.cpp \
-    src/tools/imgs3/imgs3uploadertool.cpp \
     src/tools/line/linetool.cpp \
     src/tools/marker/markertool.cpp \
     src/tools/move/movetool.cpp \
@@ -130,8 +127,12 @@ SOURCES += src/main.cpp \
     src/cli/commandoption.cpp \
     src/cli/commandargument.cpp \
     src/utils/screenshotsaver.cpp \
-    src/tools/imgur/imguruploader.cpp \
-    src/tools/imgs3/imgs3uploader.cpp \
+    src/tools/storage/imguploader.cpp \
+    src/tools/storage/imguruploadertool.cpp \
+    src/tools/storage/imguruploader.cpp \
+    src/tools/storage/imgs3uploadertool.cpp \
+    src/tools/storage/imgs3uploader.cpp \
+    src/tools/storage/imgs3settings.cpp \
     src/widgets/loadspinner.cpp \
     src/widgets/imagelabel.cpp \
     src/widgets/notificationwidget.cpp \
@@ -170,7 +171,6 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/config/filepathconfiguration.h \
     src/config/setshortcutwidget.h \
     src/config/shortcutswidget.h \
-    src/tools/imgs3/imgs3settings.h \
     src/utils/configshortcuts.h \
     src/widgets/historywidget.h \
     src/utils/configenterprise.h \
@@ -196,8 +196,6 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/tools/circle/circletool.h \
     src/tools/copy/copytool.h \
     src/tools/exit/exittool.h \
-    src/tools/imgur/imguruploadertool.h \
-    src/tools/imgs3/imgs3uploadertool.h \
     src/tools/line/linetool.h \
     src/tools/marker/markertool.h \
     src/tools/move/movetool.h \
@@ -213,8 +211,12 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/cli/commandoption.h \
     src/cli/commandargument.h \
     src/utils/screenshotsaver.h \
-    src/tools/imgur/imguruploader.h \
-    src/tools/imgs3/imgs3uploader.h \
+    src/tools/storage/imguploader.h \
+    src/tools/storage/imguruploadertool.h \
+    src/tools/storage/imguruploader.h \
+    src/tools/storage/imgs3uploader.h \
+    src/tools/storage/imgs3uploadertool.h \
+    src/tools/storage/imgs3settings.h \
     src/widgets/loadspinner.h \
     src/widgets/imagelabel.h \
     src/widgets/notificationwidget.h \
