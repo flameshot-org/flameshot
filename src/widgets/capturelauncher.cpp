@@ -18,7 +18,9 @@
 #include "capturelauncher.h"
 #include "src/core/controller.h"
 #include "src/utils/screengrabber.h"
+#include "src/utils/screenshotsaver.h"
 #include "src/widgets/imagelabel.h"
+
 #include "src/widgets/notificationwidget.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -147,6 +149,13 @@ CaptureLauncher::captureTaken(uint id, QPixmap p)
     m_id = 0;
     m_imageLabel->setScreenshot(p);
     show();
+  }
+
+  auto mode = static_cast<CaptureRequest::CaptureMode>(
+    m_captureType->currentData().toInt());
+
+  if (mode == CaptureRequest::FULLSCREEN_MODE) {
+    ScreenshotSaver().saveToFilesystemGUI(p);
   }
 }
 
