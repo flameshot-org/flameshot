@@ -16,10 +16,13 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "confighandler.h"
+#include "src/tools/capturetool.h"
+#include "src/utils/configshortcuts.h"
 #include <algorithm>
 #include <QFile>
 #include <QDir>
 #include <QCoreApplication>
+#include <QKeySequence>
 
 ConfigHandler::ConfigHandler(){
     m_settings.setDefaultFormat(QSettings::IniFormat);
@@ -450,4 +453,77 @@ QVector<int> ConfigHandler::fromButtonToInt(
     for (auto const i: l)
         buttons << static_cast<int>(i);
     return buttons;
+}
+
+QVector<QStringList> ConfigHandler::shortcuts() {
+    ConfigShortcuts configShortcuts;
+    m_shortcuts = configShortcuts.captureShortcutsDefault(getButtons());
+    return m_shortcuts;
+}
+
+void ConfigHandler::setShortcutsDefault() {
+    ConfigShortcuts configShortcuts;
+    for (auto shortcutItem: shortcuts()) {
+        QString shortcutName = shortcutItem.at(0);
+        QString shortcutDescription = shortcutItem.at(1);
+        QString shortcutValueDefault = shortcutItem.at(2);
+
+        QString shortcutValue = shortcut(shortcutName);
+
+        QKeySequence ks = QKeySequence();
+        if(shortcutValue.isNull()) {
+            ks = QKeySequence(shortcutValueDefault);
+            if (!setShortcut(shortcutName, ks.toString())) {
+                shortcutValue = shortcutValueDefault;
+            }
+        }
+
+        m_shortcuts << (QStringList()
+                        << shortcutName
+                        << shortcutDescription
+                        << shortcutValue);
+    }
+}
+
+bool ConfigHandler::setShortcut(const QString& shortcutName, const QString& shortutValue) {
+    bool error = false;
+    m_settings.beginGroup("Shortcuts");
+
+    QVector<QKeySequence> reservedShortcuts;
+    reservedShortcuts << QKeySequence(Qt::Key_Backspace) << QKeySequence(Qt::Key_Escape);
+    if(shortutValue.isEmpty()){
+        m_settings.setValue(shortcutName, "");
+    }
+    else if (reservedShortcuts.contains(QKeySequence(shortutValue))) {
+        // do not allow to set reserved shortcuts
+        error = true;
+    }
+    else {
+        // Make no difference for Return and Enter keys
+        QString shortcutItem = shortutValue;
+        if(shortcutItem == "Enter") {
+            shortcutItem = QKeySequence(Qt::Key_Return).toString();
+        }
+
+        // do not allow to set overlapped shortcuts
+        foreach (auto currentShortcutName, m_settings.allKeys()) {
+            if(m_settings.value(currentShortcutName) == shortcutItem) {
+                m_settings.setValue(shortcutName, "");
+                error = true;
+                break;
+            }
+        }
+        if(!error) {
+            m_settings.setValue(shortcutName, shortcutItem);
+        }
+    }
+    m_settings.endGroup();
+    return !error;
+}
+
+const QString& ConfigHandler::shortcut(const QString& shortcutName) {
+    m_settings.beginGroup("Shortcuts");
+    m_strRes = m_settings.value(shortcutName).toString();
+    m_settings.endGroup();
+    return m_strRes;
 }

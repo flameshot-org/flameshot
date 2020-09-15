@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+﻿// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -157,20 +157,42 @@ void CaptureWidget::updateButtons() {
     m_uiColor = m_config.uiMainColorValue();
     m_contrastUiColor = m_config.uiContrastColorValue();
 
-    auto buttons = m_config.getButtons();
     QVector<CaptureButton*> vectorButtons;
-
-    for (const CaptureButton::ButtonType &t: buttons) {
+    for (const CaptureButton::ButtonType &t: m_config.getButtons()) {
         CaptureButton *b = new CaptureButton(t, this);
         if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }
+
         b->setColor(m_uiColor);
         makeChild(b);
+
+        switch (t) {
+        case CaptureButton::ButtonType::TYPE_EXIT:
+        case CaptureButton::ButtonType::TYPE_SAVE:
+        case CaptureButton::ButtonType::TYPE_COPY:
+        case CaptureButton::ButtonType::TYPE_UNDO:
+        case CaptureButton::ButtonType::TYPE_REDO:
+        case CaptureButton::ButtonType::TYPE_IMAGEUPLOADER:
+            // nothing to do, just skip non-dynamic buttons with existing hard coded slots
+            break;
+        default:
+            // Set shortcuts for a tool
+            QString shortcut = ConfigHandler().shortcut(QVariant::fromValue(t).toString());
+            if( !shortcut.isNull() ){
+                QShortcut *key = new QShortcut(QKeySequence(shortcut), this);
+                CaptureWidget *captureWidget = this;
+                connect(key, &QShortcut::activated, this, [=]() {
+                    emit captureWidget->setState(b);
+                });
+            }
+            break;
+        }
 
         connect(b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
         connect(b->tool(), &CaptureTool::requestAction,
                 this, &CaptureWidget::handleButtonSignal);
+
         vectorButtons << b;
     }
     m_buttonHandler->setButtons(vectorButtons);
@@ -478,37 +500,54 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent *e) {
     updateCursor();
 }
 
-void CaptureWidget::keyPressEvent(QKeyEvent *e) {
-    if (!m_selection->isVisible()) {
-        return;
-    } else if (e->key() == Qt::Key_Up
-               && m_selection->geometry().top() > rect().top()) {
-        m_selection->move(QPoint(m_selection->x(), m_selection->y() -1));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
+void CaptureWidget::leftMove() {
+    if (m_selection->geometry().left() > rect().left()) {
+        m_selection->move(QPoint(m_selection->x() - 1, m_selection->y()));
         m_buttonHandler->updatePosition(m_selection->geometry());
         update();
-    } else if (e->key() == Qt::Key_Down
-               && m_selection->geometry().bottom() < rect().bottom()) {
-        m_selection->move(QPoint(m_selection->x(), m_selection->y() +1));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        update();
-    } else if (e->key() == Qt::Key_Left
-               && m_selection->geometry().left() > rect().left()) {
-        m_selection->move(QPoint(m_selection->x() -1, m_selection->y()));
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        update();
-    } else if (e->key() == Qt::Key_Right
-               && m_selection->geometry().right() < rect().right()) {
+    }
+}
+
+void CaptureWidget::rightMove() {
+    if (m_selection->geometry().right() < rect().right()) {
         m_selection->move(QPoint(m_selection->x() +1, m_selection->y()));
         QRect newGeometry = m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         update();
+    }
+}
+
+void CaptureWidget::upMove() {
+    if (m_selection->geometry().top() > rect().top()) {
+        m_selection->move(QPoint(m_selection->x(), m_selection->y() -1));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
+        m_buttonHandler->updatePosition(m_selection->geometry());
+        update();
+    }
+}
+
+void CaptureWidget::downMove() {
+    if (m_selection->geometry().bottom() < rect().bottom()) {
+        m_selection->move(QPoint(m_selection->x(), m_selection->y() +1));
+        QRect newGeometry = m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(&newGeometry);
+        m_buttonHandler->updatePosition(m_selection->geometry());
+        update();
+    }
+}
+
+
+void CaptureWidget::keyPressEvent(QKeyEvent *e) {
+    if (!m_selection->isVisible()) {
+        return;
     } else if (e->key() == Qt::Key_Control) {
         m_adjustmentButtonPressed = true;
+    } else if (e->key() == Qt::Key_Enter) {
+        // Make no difference for Return and Enter keys
+        QKeyEvent * keyReturn = new QKeyEvent (QEvent::KeyPress, Qt::Key_Return, Qt::NoModifier);
+        QCoreApplication::postEvent (this, keyReturn);
     }
 }
 
@@ -627,6 +666,7 @@ void CaptureWidget::setState(CaptureButton *b) {
             m_activeButton->setColor(m_uiColor);
             m_activeButton = nullptr;
         }
+        updateCursor();
         update(); // clear mouse preview
     }
 }
@@ -777,22 +817,37 @@ void CaptureWidget::downResize() {
 }
 
 void CaptureWidget::initShortcuts() {
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_S), this, SLOT(saveScreenshot()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_C), this, SLOT(copyScreenshot()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Z), this, SLOT(undo()));
-    new QShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z), this, SLOT(redo()));
-    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Right), this, SLOT(rightResize()));
-    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Left), this, SLOT(leftResize()));
-    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Up), this, SLOT(upResize()));
-    new QShortcut(QKeySequence(Qt::SHIFT + Qt::Key_Down), this, SLOT(downResize()));
-    new QShortcut(Qt::Key_Space, this, SLOT(togglePanel()));
-    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
+    QString shortcut = ConfigHandler().shortcut(QVariant::fromValue(CaptureButton::ButtonType::TYPE_EXIT).toString());
+    new QShortcut(QKeySequence(shortcut), this, SLOT(close()));
 
-//    new QShortcut(Qt::Key_Return, this, SLOT(copyScreenshot()));
-//    new QShortcut(Qt::Key_Enter, this, SLOT(copyScreenshot()));
-    new QShortcut(Qt::Key_Return, this, SLOT(uploadScreenshot()));
-    new QShortcut(Qt::Key_Enter, this, SLOT(uploadScreenshot()));
+    shortcut = ConfigHandler().shortcut(QVariant::fromValue(CaptureButton::ButtonType::TYPE_SAVE).toString());
+    new QShortcut(QKeySequence(shortcut), this, SLOT(saveScreenshot()));
+
+    shortcut = ConfigHandler().shortcut(QVariant::fromValue(CaptureButton::ButtonType::TYPE_COPY).toString());
+    new QShortcut(QKeySequence(shortcut), this, SLOT(copyScreenshot()));
+
+    shortcut = ConfigHandler().shortcut(QVariant::fromValue(CaptureButton::ButtonType::TYPE_UNDO).toString());
+    new QShortcut(QKeySequence(shortcut), this, SLOT(undo()));
+
+    shortcut = ConfigHandler().shortcut(QVariant::fromValue(CaptureButton::ButtonType::TYPE_REDO).toString());
+    new QShortcut(QKeySequence(shortcut), this, SLOT(redo()));
+
+    shortcut = ConfigHandler().shortcut(QVariant::fromValue(CaptureButton::ButtonType::TYPE_IMAGEUPLOADER).toString());
+    new QShortcut(shortcut, this, SLOT(uploadScreenshot()));
+
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")), this, SLOT(togglePanel()));
+
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")), this, SLOT(leftResize()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")), this, SLOT(rightResize()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")), this, SLOT(upResize()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")), this, SLOT(downResize()));
+
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")), this, SLOT(leftMove()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")), this, SLOT(rightMove()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")), this, SLOT(upMove()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")), this, SLOT(downMove()));
+
+    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
 }
 
 void CaptureWidget::updateSizeIndicator() {

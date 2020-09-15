@@ -130,7 +130,7 @@
         <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="236"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="258"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -159,27 +159,32 @@ Press Space to open the side panel.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="41"/>
+        <location filename="../src/config/configwindow.cpp" line="42"/>
         <source>Configuration</source>
         <translation>Настройка</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="63"/>
+        <location filename="../src/config/configwindow.cpp" line="64"/>
         <source>Interface</source>
         <translation>Интерфейс</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="68"/>
+        <location filename="../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
         <translation>Редактор имен файлов</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="73"/>
+        <location filename="../src/config/configwindow.cpp" line="79"/>
+        <source>Shortcuts</source>
+        <translation>Горячие клавиши</translation>
+    </message>
+    <message>
+        <location filename="../src/config/configwindow.cpp" line="84"/>
         <source>Path Default</source>
         <translation>Путь</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="78"/>
+        <location filename="../src/config/configwindow.cpp" line="74"/>
         <source>General</source>
         <translation>Общие</translation>
     </message>
@@ -187,32 +192,32 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="182"/>
+        <location filename="../src/core/controller.cpp" line="185"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="187"/>
+        <location filename="../src/core/controller.cpp" line="190"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Открыть</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="191"/>
+        <location filename="../src/core/controller.cpp" line="194"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Настройка</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="194"/>
+        <location filename="../src/core/controller.cpp" line="197"/>
         <source>&amp;Information</source>
         <translation>&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="197"/>
+        <location filename="../src/core/controller.cpp" line="200"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выход</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="202"/>
+        <location filename="../src/core/controller.cpp" line="205"/>
         <source>&amp;Latest Uploads</source>
         <translation>Последние загрузки</translation>
     </message>
@@ -681,104 +686,86 @@ Press Space to open the side panel.</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation>ПРОБЕЛ</translation>
+        <translation type="vanished">ПРОБЕЛ</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>Правый клик</translation>
+        <translation type="vanished">Правый клик</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>Колесико мыши</translation>
+        <translation type="vanished">Колесико мыши</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="70"/>
         <source>Move selection 1px</source>
-        <translation>Переместить выделение на 1px</translation>
+        <translation type="vanished">Переместить выделение на 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>Resize selection 1px</source>
-        <translation>Изменить размер выделения на 1px</translation>
+        <translation type="vanished">Изменить размер выделения на 1px</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="72"/>
         <source>Quit capture</source>
-        <translation>Выйти из захвата экрана</translation>
+        <translation type="vanished">Выйти из захвата экрана</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="73"/>
         <source>Copy to clipboard</source>
-        <translation>Скопировать в буфер обмена</translation>
+        <translation type="vanished">Скопировать в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="74"/>
         <source>Save selection as a file</source>
-        <translation>Сохранить выделение в файл</translation>
+        <translation type="vanished">Сохранить выделение в файл</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="75"/>
         <source>Undo the last modification</source>
-        <translation>Отменить последнее изменение</translation>
+        <translation type="vanished">Отменить последнее изменение</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="76"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>Показать боковую панель с настройками выбранного инструмента</translation>
+        <translation type="vanished">Показать боковую панель с настройками выбранного инструмента</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="77"/>
         <source>Show color picker</source>
-        <translation>Показать выбор цвета</translation>
+        <translation type="vanished">Показать выбор цвета</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="78"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Изменить толщину инструмента</translation>
+        <translation type="vanished">Изменить толщину инструмента</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="79"/>
         <source>Capture screen</source>
-        <translation>Захватить экран</translation>
+        <translation type="vanished">Захватить экран</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="80"/>
         <source>Screenshot history</source>
-        <translation>История скриншотов</translation>
+        <translation type="vanished">История скриншотов</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="85"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Доступные горячие клавиши в режиме захвата экрана.</translation>
+        <translation type="vanished">Доступные горячие клавиши в режиме захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Key</source>
-        <translation>Клавиша</translation>
+        <translation type="vanished">Клавиша</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="96"/>
         <source>Description</source>
-        <translation>Описание</translation>
+        <translation type="vanished">Описание</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="127"/>
+        <location filename="../src/widgets/infowindow.cpp" line="60"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Лицензия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="135"/>
+        <location filename="../src/widgets/infowindow.cpp" line="69"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Версия&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Горячие клавиши&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
 </context>
 <context>
@@ -915,9 +902,83 @@ You can find me in the system tray.</source>
         <translation>Привет, а я уже работаю!\nВы можете найти меня в системном трэе.</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="231"/>
+        <location filename="../src/core/controller.cpp" line="234"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Привет я тут! Щелкните значок на панели задач, чтобы сделать снимок экрана, или щелкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="28"/>
+        <source>Resize selection right 1px</source>
+        <translation>Изменить размер выделения вправо на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="26"/>
+        <source>Resize selection left 1px</source>
+        <translation>Изменить размер выделения влево на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="30"/>
+        <source>Resize selection up 1px</source>
+        <translation>Изменить размер выделения вверх на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="32"/>
+        <source>Resize selection down 1px</source>
+        <translation>Изменить размер выделения вниз на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="23"/>
+        <source>Toggle side panel</source>
+        <translation>Вызвать боковую панель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="35"/>
+        <source>Move selection left 1px</source>
+        <translation>Переместить выделение влево на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="37"/>
+        <source>Move selection right 1px</source>
+        <translation>Переместить выделение вправо на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="39"/>
+        <source>Move selection up 1px</source>
+        <translation>Переместить выделение вверх на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="41"/>
+        <source>Move selection down 1px</source>
+        <translation>Переместить выделение вниз на 1 пиксель</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="44"/>
+        <source>Quit capture</source>
+        <translation>Выйти из захвата экрана</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="45"/>
+        <source>Screenshot history</source>
+        <translation>История скриншотов</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="46"/>
+        <source>Capture screen</source>
+        <translation>Захватить экран</translation>
+    </message>
+    <message>
+        <source>Move selection 1px</source>
+        <translation type="vanished">Переместить выделение на 1px</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="47"/>
+        <source>Show color picker</source>
+        <translation>Показать выбор цвета</translation>
+    </message>
+    <message>
+        <location filename="../src/utils/configshortcuts.cpp" line="48"/>
+        <source>Change the tool&apos;s thickness</source>
+        <translation>Изменить толщину инструмента</translation>
     </message>
 </context>
 <context>
@@ -981,6 +1042,47 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="12"/>
+        <source>Set Shortcut</source>
+        <translation>Выбрать горячую клавишу</translation>
+    </message>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="18"/>
+        <source>Enter new shortcut to change </source>
+        <translation>Выберите новую горячую клавишу </translation>
+    </message>
+    <message>
+        <location filename="../src/config/setshortcutwidget.cpp" line="30"/>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation>Нажмите Esc для отмены или Backspace для удаления горячей клавиши</translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="25"/>
+        <source>Hot Keys</source>
+        <translation>Горячие клавиши</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="48"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation>Доступные горячие клавиши в режиме захвата экрана.</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <source>Description</source>
+        <translation>Описание</translation>
+    </message>
+    <message>
+        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <source>Key</source>
+        <translation>Клавиша</translation>
+    </message>
+</context>
+<context>
     <name>SidePanelWidget</name>
     <message>
         <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
@@ -993,12 +1095,12 @@ You can find me in the system tray.</source>
         <translation>Активный цвет:</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="182"/>
         <source>Press ESC to cancel</source>
         <translation>Нажмите Esc для отмены</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="186"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
         <source>Grab Color</source>
         <translation>Захватить цвет с экрана</translation>
     </message>
