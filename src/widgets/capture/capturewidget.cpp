@@ -25,8 +25,7 @@
 
 #include "capturewidget.h"
 #include "src/core/controller.h"
-#include "src/tools/storage/imgs3uploadertool.h"
-#include "src/tools/storage/imguruploadertool.h"
+#include "src/tools/storage/storagemanager.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/globalvalues.h"
@@ -1048,8 +1047,9 @@ void CaptureWidget::childLeave()
 
 void CaptureWidget::uploadScreenshot()
 {
-    //    m_activeTool = new ImgS3UploaderTool();
-    m_activeTool = new ImgurUploaderTool();
+    StorageManager storageManager;
+    m_activeTool =
+      storageManager.imgUploaderTool(ConfigHandler().uploadStorage());
     m_activeTool->setCapture(pixmap());
     handleButtonSignal(CaptureTool::REQ_ADD_EXTERNAL_WIDGETS);
     close();

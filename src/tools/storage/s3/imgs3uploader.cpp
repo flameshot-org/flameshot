@@ -188,6 +188,8 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply* reply)
             imageName = imageName.mid(lastSlash + 1);
         }
         m_storageImageName = imageName;
+
+        // save image to history
         History history;
         imageName = history.packFileName(
           SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, imageName);
@@ -374,4 +376,21 @@ void ImgS3Uploader::upload()
           QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
     }
     m_NetworkAMGetCreds->get(requestCreds);
+}
+
+void ImgS3Uploader::removeImagePreview()
+{
+    // remove local file
+    History history;
+    QString packedFileName = history.packFileName(
+      SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, m_storageImageName);
+    QString fullFileName = history.path() + packedFileName;
+
+    QFile file(fullFileName);
+    if (file.exists()) {
+        file.remove();
+    }
+    m_deleteToken.clear();
+    m_storageImageName.clear();
+    resultStatus = true;
 }

@@ -19,8 +19,8 @@
 
 #define S3_API_IMG_PATH "v2/image/"
 
+#include "../imguploader.h"
 #include "imgs3settings.h"
-#include "imguploader.h"
 #include <QUrl>
 #include <QWidget>
 
@@ -53,6 +53,7 @@ private slots:
 private:
     void init(const QString& title, const QString& label);
     void uploadToS3(QJsonDocument& response);
+    void removeImagePreview();
 
     QNetworkProxy* initProxy();
     void clearProxy();

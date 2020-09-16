@@ -1,5 +1,7 @@
 #include "historywidget.h"
-#include "src/tools/storage/imgs3uploader.h"
+#include "src/tools/storage/storagemanager.h"
+#include "src/tools/storage/imguploader.h"
+#include "src/tools/storage/s3/imgs3uploader.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
@@ -77,7 +79,10 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     History history;
     HISTORY_FILE_NAME unpackFileName = history.unpackFileName(fileName);
 
-    QString url = m_s3Settings.url() + unpackFileName.file;
+    QString url;
+
+    StorageManager storageManager;
+    url = storageManager.storageUrl(unpackFileName.type) + unpackFileName.file;
 
     // load pixmap
     QPixmap pixmap;
@@ -132,16 +137,25 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonDelete, &QPushButton::clicked, this, [=]() {
-        if (unpackFileName.token.length() > 0) {
-            removeItem(phbl, unpackFileName.file, unpackFileName.token);
-        } else {
-            // for compatibility with previous versions and to be able to remove
-            // previous screenshots
-            QFile file(fullFileName);
-            if (file.exists()) {
-                file.remove();
+        // TODO - remove dependency injection (s3 & imgur)
+        if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_S3) == 0) {
+            if (unpackFileName.token.length() > 0) {
+                ImgS3Uploader* uploader = new ImgS3Uploader();
+                removeItem(
+                  uploader, phbl, unpackFileName.file, unpackFileName.token);
+            } else {
+                // for compatibility with previous versions and to be able to
+                // remove previous screenshots
+                removeCacheFile(fullFileName);
+                removeLayoutItem(phbl);
             }
-            removeLocalItem(phbl);
+        } else if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_IMGUR) ==
+                   0) {
+            QDesktopServices::openUrl(
+              QUrl(QStringLiteral("https://imgur.com/delete/%1")
+                     .arg(unpackFileName.token)));
+            removeCacheFile(fullFileName);
+            removeLayoutItem(phbl);
         }
     });
 
@@ -162,23 +176,23 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     m_pVBox->addLayout(phbl);
 }
 
-void HistoryWidget::removeItem(QLayout* pl,
-                               const QString& s3FileName,
+void HistoryWidget::removeItem(ImgUploader* imgUploader,
+                               QLayout* pl,
+                               const QString& fileName,
                                const QString& deleteToken)
 {
-    ImgS3Uploader* uploader = new ImgS3Uploader();
     hide();
-    uploader->show();
-    uploader->deleteResource(s3FileName, deleteToken);
-    connect(uploader, &QWidget::destroyed, this, [=]() {
-        if (uploader->resultStatus) {
-            removeLocalItem(pl);
+    imgUploader->show();
+    imgUploader->deleteResource(fileName, deleteToken);
+    connect(imgUploader, &QWidget::destroyed, this, [=]() {
+        if (imgUploader->resultStatus) {
+            removeLayoutItem(pl);
         }
         show();
     });
 }
 
-void HistoryWidget::removeLocalItem(QLayout* pl)
+void HistoryWidget::removeLayoutItem(QLayout* pl)
 {
     // remove current row or refresh list
     while (pl->count() > 0) {
@@ -192,5 +206,14 @@ void HistoryWidget::removeLocalItem(QLayout* pl)
     // set "empty" message if no items left
     if (m_pVBox->count() == 0) {
         setEmptyMessage();
+    }
+}
+
+void HistoryWidget::removeCacheFile(const QString& fullFileName)
+{
+    // premove history preview
+    QFile file(fullFileName);
+    if (file.exists()) {
+        file.remove();
     }
 }

@@ -155,10 +155,6 @@ Press Space to open the side panel.</source>
         <translation>Általános</translation>
     </message>
     <message>
-        <source>Path Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -393,6 +389,18 @@ Press Space to open the side panel.</source>
         <source>Copy file path after save</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
@@ -550,19 +558,19 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation>Kép felötlése</translation>
+        <translation type="vanished">Kép felötlése</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation>URL másolása</translation>
+        <translation type="vanished">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>URL megnyitása</translation>
+        <translation type="vanished">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation>Kép a vágolapra.</translation>
+        <translation type="vanished">Kép a vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -570,15 +578,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation>URL másolva a vágólapra.</translation>
+        <translation type="vanished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Képernyőmentés másolva a vágólapra.</translation>
-    </message>
-    <message>
-        <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Képernyőmentés másolva a vágólapra.</translation>
     </message>
 </context>
 <context>

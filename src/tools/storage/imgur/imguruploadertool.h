@@ -17,36 +17,29 @@
 
 #pragma once
 
-#include "imguploader.h"
-#include <QUrl>
-#include <QWidget>
+#include "src/tools/abstractactiontool.h"
 
-class QNetworkReply;
-class QNetworkAccessManager;
-class QHBoxLayout;
-class QVBoxLayout;
-class QLabel;
-class LoadSpinner;
-class QPushButton;
-class QUrl;
-class NotificationWidget;
-
-class ImgurUploader : public ImgUploader
+class ImgurUploaderTool : public AbstractActionTool
 {
     Q_OBJECT
 public:
-    explicit ImgurUploader(const QPixmap& capture, QWidget* parent = nullptr);
-    void upload();
+    explicit ImgurUploaderTool(QObject* parent = nullptr);
 
-private slots:
-    void handleReply(QNetworkReply* reply);
-    //    void openDeleteURL();
+    bool closeOnButtonPressed() const;
 
-protected slots:
-    void deleteImageOnStorage();
+    QIcon icon(const QColor& background, bool inEditor) const override;
+    QString name() const override;
+    static QString nameID();
+    QString description() const override;
 
-    // class members
+    QWidget* widget() override;
+
+    CaptureTool* copy(QObject* parent = nullptr) override;
+    void setCapture(const QPixmap&);
+
+public slots:
+    void pressed(const CaptureContext& context) override;
+
 private:
-    QNetworkAccessManager* m_NetworkAM;
-    QUrl m_deleteImageURL;
+    QPixmap capture;
 };

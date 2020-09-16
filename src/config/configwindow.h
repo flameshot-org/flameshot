@@ -26,22 +26,22 @@ class GeneneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
 
-class ConfigWindow : public QTabWidget {
+class ConfigWindow : public QTabWidget
+{
     Q_OBJECT
 public:
-    explicit ConfigWindow(QWidget *parent = nullptr);
+    explicit ConfigWindow(QWidget* parent = nullptr);
 
 signals:
     void updateChildren();
 
 protected:
-    void keyPressEvent(QKeyEvent *);
+    void keyPressEvent(QKeyEvent*);
 
 private:
-    FileNameEditor *m_filenameEditor;
-    FilePathConfiguration *m_filePathConfiguration;
-    ShortcutsWidget *m_shortcuts;
-    GeneneralConf *m_generalConfig;
-    VisualsEditor *m_visuals;
-    QFileSystemWatcher *m_configWatcher;
+    FileNameEditor* m_filenameEditor;
+    ShortcutsWidget* m_shortcuts;
+    GeneneralConf* m_generalConfig;
+    VisualsEditor* m_visuals;
+    QFileSystemWatcher* m_configWatcher;
 };
