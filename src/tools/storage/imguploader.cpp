@@ -85,23 +85,6 @@ void ImgUploader::init(const QString& title, const QString& label)
     setAttribute(Qt::WA_DeleteOnClose);
 }
 
-void ImgUploader::removeImagePreview()
-{
-    // remove local file
-    History history;
-    QString packedFileName = history.packFileName(
-      SCREENSHOT_STORAGE_TYPE_S3, m_deleteToken, m_storageImageName);
-    QString fullFileName = history.path() + packedFileName;
-
-    QFile file(fullFileName);
-    if (file.exists()) {
-        file.remove();
-    }
-    m_deleteToken.clear();
-    m_storageImageName.clear();
-    resultStatus = true;
-}
-
 void ImgUploader::openURL()
 {
     bool successful = QDesktopServices::openUrl(imageUrl());

@@ -19,25 +19,26 @@
 
 #include "src/tools/abstractactiontool.h"
 
-class ImgS3UploaderTool : public AbstractActionTool {
+class ImgS3UploaderTool : public AbstractActionTool
+{
     Q_OBJECT
 public:
-    explicit ImgS3UploaderTool(QObject *parent = nullptr);
+    explicit ImgS3UploaderTool(QObject* parent = nullptr);
 
     bool closeOnButtonPressed() const;
 
-    QIcon icon(const QColor &background, bool inEditor) const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     static QString nameID();
     QString description() const override;
 
     QWidget* widget() override;
 
-    CaptureTool* copy(QObject *parent = nullptr) override;
-    void setCapture(const QPixmap &pixmap);
+    CaptureTool* copy(QObject* parent = nullptr) override;
+    void setCapture(const QPixmap& pixmap);
 
 public slots:
-    void pressed(const CaptureContext &context) override;
+    void pressed(const CaptureContext& context) override;
 
 private:
     QPixmap capture;

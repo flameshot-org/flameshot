@@ -87,6 +87,7 @@ SOURCES += src/main.cpp \
     src/config/filepathconfiguration.cpp \
     src/config/setshortcutwidget.cpp \
     src/config/shortcutswidget.cpp \
+    src/tools/storage/storagemanager.cpp \
     src/utils/configshortcuts.cpp \
     src/widgets/historywidget.cpp \
     src/utils/configenterprise.cpp \
@@ -128,11 +129,11 @@ SOURCES += src/main.cpp \
     src/cli/commandargument.cpp \
     src/utils/screenshotsaver.cpp \
     src/tools/storage/imguploader.cpp \
-    src/tools/storage/imguruploadertool.cpp \
-    src/tools/storage/imguruploader.cpp \
-    src/tools/storage/imgs3uploadertool.cpp \
-    src/tools/storage/imgs3uploader.cpp \
-    src/tools/storage/imgs3settings.cpp \
+    src/tools/storage/imgur/imguruploadertool.cpp \
+    src/tools/storage/imgur/imguruploader.cpp \
+    src/tools/storage/s3/imgs3uploadertool.cpp \
+    src/tools/storage/s3/imgs3uploader.cpp \
+    src/tools/storage/s3/imgs3settings.cpp \
     src/widgets/loadspinner.cpp \
     src/widgets/imagelabel.cpp \
     src/widgets/notificationwidget.cpp \
@@ -171,6 +172,8 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/config/filepathconfiguration.h \
     src/config/setshortcutwidget.h \
     src/config/shortcutswidget.h \
+    src/tools/storage/imgstorages.h \
+    src/tools/storage/storagemanager.h \
     src/utils/configshortcuts.h \
     src/widgets/historywidget.h \
     src/utils/configenterprise.h \
@@ -212,11 +215,11 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/cli/commandargument.h \
     src/utils/screenshotsaver.h \
     src/tools/storage/imguploader.h \
-    src/tools/storage/imguruploadertool.h \
-    src/tools/storage/imguruploader.h \
-    src/tools/storage/imgs3uploader.h \
-    src/tools/storage/imgs3uploadertool.h \
-    src/tools/storage/imgs3settings.h \
+    src/tools/storage/imgur/imguruploadertool.h \
+    src/tools/storage/imgur/imguruploader.h \
+    src/tools/storage/s3/imgs3uploader.h \
+    src/tools/storage/s3/imgs3uploadertool.h \
+    src/tools/storage/s3/imgs3settings.h \
     src/widgets/loadspinner.h \
     src/widgets/imagelabel.h \
     src/widgets/notificationwidget.h \

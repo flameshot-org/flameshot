@@ -18,34 +18,35 @@
 #pragma once
 
 #include "src/widgets/capture/capturebutton.h"
-#include <QVector>
-#include <QStringList>
 #include <QSettings>
+#include <QStringList>
+#include <QVector>
 
-class ConfigHandler : public QObject {
+class ConfigHandler : public QObject
+{
 
 public:
     explicit ConfigHandler();
 
     QVector<CaptureButton::ButtonType> getButtons();
-    void setButtons(const QVector<CaptureButton::ButtonType> &);
+    void setButtons(const QVector<CaptureButton::ButtonType>&);
 
     QVector<QColor> getUserColors();
-    void setUserColors(const QVector<QColor> &);
+    void setUserColors(const QVector<QColor>&);
 
     QString savePathValue();
-    void setSavePath(const QString &);
+    void setSavePath(const QString&);
     QString savePathFixed();
-    void setSavePathFixed(const QString &);
+    void setSavePathFixed(const QString&);
 
     QColor uiMainColorValue();
-    void setUIMainColor(const QColor &);
+    void setUIMainColor(const QColor&);
 
     QColor uiContrastColorValue();
-    void setUIContrastColor(const QColor &);
+    void setUIContrastColor(const QColor&);
 
     QColor drawColorValue();
-    void setDrawColor(const QColor &);
+    void setDrawColor(const QColor&);
 
     bool showHelpValue();
     void setShowHelp(const bool);
@@ -54,7 +55,7 @@ public:
     void setDesktopNotification(const bool);
 
     QString filenamePatternValue();
-    void setFilenamePattern(const QString &);
+    void setFilenamePattern(const QString&);
 
     bool disabledTrayIconValue();
     void setDisabledTrayIcon(const bool);
@@ -84,6 +85,9 @@ public:
     bool copyPathAfterSaveEnabled();
     void setCopyPathAfterSaveEnabled(const bool);
 
+    void setUploadStorage(const QString&);
+    const QString& uploadStorage();
+
     void setDefaults();
     void setAllTheButtons();
 
@@ -99,8 +103,8 @@ private:
     QSettings m_settings;
     QVector<QStringList> m_shortcuts;
 
-    bool normalizeButtons(QVector<int> &);
+    bool normalizeButtons(QVector<int>&);
 
-    QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
-    QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
+    QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int>& l);
+    QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType>& l);
 };

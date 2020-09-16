@@ -4,7 +4,6 @@
 #include <QFile>
 #include <QStringList>
 
-
 History::History()
 {
     // Get cache history path
@@ -21,27 +20,32 @@ History::History()
         dir.mkpath(".");
 }
 
-const QString &History::path() {
+const QString& History::path()
+{
     return m_historyPath;
 }
 
-void History::save(const QPixmap &pixmap, const QString &fileName) {
+void History::save(const QPixmap& pixmap, const QString& fileName)
+{
     QFile file(path() + fileName);
     file.open(QIODevice::WriteOnly);
     pixmap.save(&file, "PNG");
     history();
 }
 
-const QList<QString> &History::history() {
+const QList<QString>& History::history()
+{
     QDir directory(path());
-    QStringList images = directory.entryList(QStringList() << "*.png" << "*.PNG", QDir::Files, QDir::Time);
+    QStringList images = directory.entryList(QStringList() << "*.png"
+                                                           << "*.PNG",
+                                             QDir::Files,
+                                             QDir::Time);
     int cnt = 0;
     m_thumbs.clear();
-    foreach(QString fileName, images) {
-        if(++cnt <= HISTORY_MAX_SIZE) {
+    foreach (QString fileName, images) {
+        if (++cnt <= HISTORY_MAX_SIZE) {
             m_thumbs.append(fileName);
-        }
-        else {
+        } else {
             QFile file(path() + fileName);
             file.remove();
         }
@@ -49,42 +53,46 @@ const QList<QString> &History::history() {
     return m_thumbs;
 }
 
-const HISTORY_FILE_NAME &History::unpackFileName(const QString &fileNamePacked) {
+const HISTORY_FILE_NAME& History::unpackFileName(const QString& fileNamePacked)
+{
     int nPathIndex = fileNamePacked.lastIndexOf("/");
     QStringList unpackedFileName;
-    if(nPathIndex == -1) {
+    if (nPathIndex == -1) {
         unpackedFileName = fileNamePacked.split("-");
     } else {
         unpackedFileName = fileNamePacked.mid(nPathIndex + 1).split("-");
     }
 
     switch (unpackedFileName.length()) {
-    case 3:
-        m_unpackedFileName.file = unpackedFileName[2];
-        m_unpackedFileName.token = unpackedFileName[1];
-        m_unpackedFileName.type = unpackedFileName[0];
-        break;
-    case 2:
-        m_unpackedFileName.file = unpackedFileName[1];
-        m_unpackedFileName.token = "";
-        m_unpackedFileName.type = unpackedFileName[0];
-        break;
-    default:
-        m_unpackedFileName.file = unpackedFileName[0];
-        m_unpackedFileName.token = "";
-        m_unpackedFileName.type = SCREENSHOT_STORAGE_TYPE_LOCAL;
-        break;
+        case 3:
+            m_unpackedFileName.file = unpackedFileName[2];
+            m_unpackedFileName.token = unpackedFileName[1];
+            m_unpackedFileName.type = unpackedFileName[0];
+            break;
+        case 2:
+            m_unpackedFileName.file = unpackedFileName[1];
+            m_unpackedFileName.token = "";
+            m_unpackedFileName.type = unpackedFileName[0];
+            break;
+        default:
+            m_unpackedFileName.file = unpackedFileName[0];
+            m_unpackedFileName.token = "";
+            m_unpackedFileName.type = "";
+            break;
     }
     return m_unpackedFileName;
 }
 
-const QString &History::packFileName(const QString &storageType, const QString &deleteToken, const QString &fileName) {
+const QString& History::packFileName(const QString& storageType,
+                                     const QString& deleteToken,
+                                     const QString& fileName)
+{
     m_packedFileName = fileName;
-    if(storageType.length() > 0) {
-        if(deleteToken.length() > 0) {
-            m_packedFileName = storageType + "-" + deleteToken + "-" + m_packedFileName;
-        }
-        else {
+    if (storageType.length() > 0) {
+        if (deleteToken.length() > 0) {
+            m_packedFileName =
+              storageType + "-" + deleteToken + "-" + m_packedFileName;
+        } else {
             m_packedFileName = storageType + "-" + m_packedFileName;
         }
     }

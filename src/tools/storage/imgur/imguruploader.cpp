@@ -18,6 +18,7 @@
 #include "imguruploader.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
+#include "src/utils/history.h"
 #include "src/utils/systemnotification.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
@@ -61,9 +62,26 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         QJsonObject json = response.object();
         QJsonObject data = json[QStringLiteral("data")].toObject();
         setImageUrl(data[QStringLiteral("link")].toString());
+        m_deleteToken = data[QStringLiteral("deletehash")].toString();
+
         m_deleteImageURL.setUrl(
-          QStringLiteral("https://imgur.com/delete/%1")
-            .arg(data[QStringLiteral("deletehash")].toString()));
+          QStringLiteral("https://imgur.com/delete/%1").arg(m_deleteToken));
+
+        // save history
+        QString imageName = imageUrl().toString();
+        int lastSlash = imageName.lastIndexOf("/");
+        if (lastSlash >= 0) {
+            imageName = imageName.mid(lastSlash + 1);
+        }
+        m_storageImageName = imageName;
+
+        // save image to history
+        History history;
+        imageName = history.packFileName(
+          SCREENSHOT_STORAGE_TYPE_IMGUR, m_deleteToken, imageName);
+        history.save(pixmap(), imageName);
+        resultStatus = true;
+
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(imageUrl().toString());
             SystemNotification().sendMessage(

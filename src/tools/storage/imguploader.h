@@ -17,9 +17,8 @@
 
 #pragma once
 
-#define S3_API_IMG_PATH "v2/image/"
-
-#include "imgs3settings.h"
+#include "imgstorages.h"
+#include "s3/imgs3settings.h"
 #include <QUrl>
 #include <QWidget>
 
@@ -53,7 +52,6 @@ protected:
     void onUploadOk();
     void hideSpinner();
     void setInfoLabelText(const QString&);
-    void removeImagePreview();
     void showNotificationMessage(const QString&);
 
 public slots:

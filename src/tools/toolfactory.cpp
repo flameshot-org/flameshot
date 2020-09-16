@@ -32,8 +32,8 @@
 #include "save/savetool.h"
 #include "selection/selectiontool.h"
 #include "sizeindicator/sizeindicatortool.h"
-#include "storage/imgs3uploadertool.h"
-#include "storage/imguruploadertool.h"
+#include "src/utils/confighandler.h"
+#include "storage/storagemanager.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
 
@@ -44,6 +44,8 @@ ToolFactory::ToolFactory(QObject* parent)
 CaptureTool* ToolFactory::CreateTool(CaptureButton::ButtonType t,
                                      QObject* parent)
 {
+    StorageManager storageManager;
+
     CaptureTool* tool;
     switch (t) {
         case CaptureButton::TYPE_ARROW:
@@ -59,8 +61,8 @@ CaptureTool* ToolFactory::CreateTool(CaptureButton::ButtonType t,
             tool = new ExitTool(parent);
             break;
         case CaptureButton::TYPE_IMAGEUPLOADER:
-            tool = new ImgurUploaderTool(parent);
-            //        tool = new ImgS3UploaderTool(parent);
+            tool = storageManager.imgUploaderTool(
+              ConfigHandler().uploadStorage(), parent);
             break;
         case CaptureButton::TYPE_DRAWER:
             tool = new LineTool(parent);

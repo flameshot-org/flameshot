@@ -125,12 +125,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="83"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translation>Não foi possível capturar a tela</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="258"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="284"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -159,32 +159,27 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="42"/>
+        <location filename="../src/config/configwindow.cpp" line="45"/>
         <source>Configuration</source>
         <translation>Configuração</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="64"/>
+        <location filename="../src/config/configwindow.cpp" line="66"/>
         <source>Interface</source>
         <translation>Interface</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="69"/>
+        <location filename="../src/config/configwindow.cpp" line="72"/>
         <source>Filename Editor</source>
         <translation>Editor de nome de arquivo</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="79"/>
+        <location filename="../src/config/configwindow.cpp" line="80"/>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="84"/>
-        <source>Path Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/config/configwindow.cpp" line="74"/>
+        <location filename="../src/config/configwindow.cpp" line="76"/>
         <source>General</source>
         <translation>Geral</translation>
     </message>
@@ -335,152 +330,167 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="199"/>
+        <location filename="../src/config/geneneralconf.cpp" line="108"/>
+        <location filename="../src/config/geneneralconf.cpp" line="227"/>
         <source>Import</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="100"/>
-        <location filename="../src/config/geneneralconf.cpp" line="108"/>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="100"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Unable to read file.</source>
         <translation>Não foi possível ler o arquivo.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="108"/>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
         <source>Unable to write file.</source>
         <translation>Não foi possível escrever no arquivo.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="133"/>
         <source>Save File</source>
         <translation>Salvar Arquivo</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="137"/>
+        <location filename="../src/config/geneneralconf.cpp" line="155"/>
         <source>Confirm Reset</source>
         <translation>Confirmar Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="138"/>
+        <location filename="../src/config/geneneralconf.cpp" line="156"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Tem certeza que deseja resetar a configuração?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="147"/>
+        <location filename="../src/config/geneneralconf.cpp" line="165"/>
         <source>Show help message</source>
         <translation>Mostrar mensagem de ajuda</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="151"/>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Mostrar mensagem de ajuda no início do modo de captura.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="161"/>
-        <location filename="../src/config/geneneralconf.cpp" line="165"/>
+        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../src/config/geneneralconf.cpp" line="185"/>
         <source>Show desktop notifications</source>
         <translation>Mostrar notificações de Desktop</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="174"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Show tray icon</source>
         <translation>Mostrar ícone de tray</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="178"/>
+        <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Show the systemtray icon</source>
         <translation>Mosrar ícone na barra de aplicações</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="189"/>
+        <location filename="../src/config/geneneralconf.cpp" line="215"/>
         <source>Configuration File</source>
         <translation>Arquivo de Configurações</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="194"/>
+        <location filename="../src/config/geneneralconf.cpp" line="220"/>
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="204"/>
+        <location filename="../src/config/geneneralconf.cpp" line="234"/>
         <source>Reset</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="211"/>
+        <location filename="../src/config/geneneralconf.cpp" line="244"/>
         <source>Launch at startup</source>
         <translation>Iniciar junto com o sistema</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="215"/>
-        <location filename="../src/config/geneneralconf.cpp" line="227"/>
+        <location filename="../src/config/geneneralconf.cpp" line="248"/>
+        <location filename="../src/config/geneneralconf.cpp" line="262"/>
         <source>Launch Flameshot</source>
         <translation>Iniciar Flameshot</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="223"/>
+        <location filename="../src/config/geneneralconf.cpp" line="258"/>
         <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="236"/>
+        <location filename="../src/config/geneneralconf.cpp" line="273"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="240"/>
+        <location filename="../src/config/geneneralconf.cpp" line="277"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="248"/>
+        <location filename="../src/config/geneneralconf.cpp" line="289"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="251"/>
+        <location filename="../src/config/geneneralconf.cpp" line="294"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="260"/>
-        <location filename="../src/config/geneneralconf.cpp" line="263"/>
+        <location filename="../src/config/geneneralconf.cpp" line="304"/>
+        <location filename="../src/config/geneneralconf.cpp" line="307"/>
         <source>Copy file path after save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="316"/>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="320"/>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="327"/>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="28"/>
+        <location filename="../src/widgets/historywidget.cpp" line="30"/>
         <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="66"/>
+        <location filename="../src/widgets/historywidget.cpp" line="68"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="113"/>
+        <location filename="../src/widgets/historywidget.cpp" line="118"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="117"/>
+        <location filename="../src/widgets/historywidget.cpp" line="122"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="123"/>
+        <location filename="../src/widgets/historywidget.cpp" line="128"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -488,42 +498,42 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="54"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation type="unfinished">Upando Imagem</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="54"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="54"/>
         <source>Upload image to S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="60"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="60"/>
         <source>Delete image from S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="224"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="226"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="226"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="228"/>
         <source>Network error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="228"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="230"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="233"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="235"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="254"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="256"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -548,17 +558,17 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation type="obsolete">Não foi possível abrir a URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="200"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="202"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="60"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="60"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploader.cpp" line="237"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="239"/>
         <source>Remove screenshot from history?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -570,12 +580,12 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/storage/imgs3uploadertool.cpp" line="38"/>
+        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="39"/>
         <source>Image Uploader</source>
         <translation type="unfinished">Uploader de imagens</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgs3uploadertool.cpp" line="46"/>
+        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="49"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
@@ -599,42 +609,42 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="109"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="92"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Não foi possível abrir a URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="116"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="122"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="105"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Screenshot copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="131"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="114"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="191"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Copy URL</source>
         <translation type="unfinished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="192"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="175"/>
         <source>Open URL</source>
         <translation type="unfinished">Abrir URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="193"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="176"/>
         <source>Delete image</source>
         <translation type="unfinished">Deletar imagem</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguploader.cpp" line="194"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="177"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Imagem no Clipboard.</translation>
     </message>
@@ -642,61 +652,53 @@ Pressione espaço abrir o painel lateral.</translation>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="47"/>
+        <location filename="../src/tools/storage/imgur/imguruploader.cpp" line="48"/>
         <source>Upload to Imgur</source>
         <translation>Upload no Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="54"/>
         <source>Uploading Image</source>
-        <translation>Upando Imagem</translation>
+        <translation type="vanished">Upando Imagem</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="140"/>
         <source>Copy URL</source>
-        <translation>Copiar URL</translation>
+        <translation type="vanished">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="141"/>
         <source>Open URL</source>
-        <translation>Abrir URL</translation>
+        <translation type="vanished">Abrir URL</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="142"/>
         <source>Delete image</source>
-        <translation>Deletar imagem</translation>
+        <translation type="vanished">Deletar imagem</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="143"/>
         <source>Image to Clipboard.</source>
-        <translation>Imagem no Clipboard.</translation>
+        <translation type="vanished">Imagem no Clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="162"/>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/storage/imgur/imguruploader.cpp" line="127"/>
         <source>Unable to open the URL.</source>
         <translation>Não foi possível abrir a URL.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="168"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copiada para o clipboard.</translation>
+        <translation type="vanished">URL copiada para o clipboard.</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="181"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Screenshot copiada para o clipboard.</translation>
+        <translation type="vanished">Screenshot copiada para o clipboard.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../src/tools/storage/imguruploadertool.cpp" line="35"/>
+        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="39"/>
         <source>Image Uploader</source>
         <translation>Uploader de imagens</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploadertool.cpp" line="43"/>
+        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="49"/>
         <source>Upload the selection to Imgur</source>
         <translation>Upa a seleção no Imgur</translation>
     </message>
@@ -894,7 +896,7 @@ Pressione espaço abrir o painel lateral.</translation>
         <translation>Não foi possível escrever em</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imguruploader.cpp" line="82"/>
+        <location filename="../src/tools/storage/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL copiada para o clipboard.</translation>
     </message>
