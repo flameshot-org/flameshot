@@ -341,7 +341,7 @@ Info: If I take code from your project and that implies a relicense to GPLv3, yo
 
 ## Contribute
 
-If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
+If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 
 
