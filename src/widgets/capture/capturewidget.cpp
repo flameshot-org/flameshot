@@ -49,7 +49,7 @@
 #include <draggablewidgetmaker.h>
 
 // CaptureWidget is the main component used to capture the screen. It contains
-// an are of selection with its respective buttons.
+// an area of selection with its respective buttons.
 
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id,
