@@ -277,7 +277,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 ```shell
 # Compile-time
-apt install g++ cmake build-essential qt5-default qttools5-dev-tools libqt5svg5-dev
+apt install g++ cmake build-essential qt5-default qttools5-dev-tools libqt5svg5-dev qttools5-dev
 
 # Run-time
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5
