@@ -188,8 +188,10 @@ Controller::openInfoWindow()
 void
 Controller::openLauncherWindow()
 {
-  CaptureLauncher* w = new CaptureLauncher();
-  w->show();
+  if (!m_launcherWindow) {
+    m_launcherWindow = new CaptureLauncher();
+  }
+  m_launcherWindow->show();
 }
 
 void
