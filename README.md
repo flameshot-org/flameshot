@@ -215,11 +215,15 @@ Steps for using the configuration:
 
 - If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the systemtray icon.
 
-- In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
-
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
 - Flameshot works best with a desktop environment that includes dbus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc)
+
+- In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
+    - Quick tip: If you don't have Flameshot to autostart at boot and you want to set keyboard shortcut, use the following as the command for the keybinding:
+    ```sh
+    ( flameshot &; ) && ( sleep 0.5s && flameshot gui )
+    ```
 
 ## Installation
 
