@@ -104,11 +104,15 @@ void
 CircleCountTool::paintMousePreview(QPainter& painter,
                                    const CaptureContext& context)
 {
-  painter.setPen(QPen(context.color,
-                      PADDING_VALUE + context.thickness,
-                      Qt::SolidLine,
-                      Qt::RoundCap));
-  painter.drawLine(context.mousePos, context.mousePos);
+  m_thickness = context.thickness + PADDING_VALUE;
+  if (m_thickness < 15) {
+    m_thickness = 15;
+  }
+
+  painter.setPen(
+    QPen(context.color, m_thickness * 2, Qt::SolidLine, Qt::RoundCap));
+  painter.drawLine(context.mousePos,
+                   { context.mousePos.x() + 1, context.mousePos.y() + 1 });
 }
 
 void
