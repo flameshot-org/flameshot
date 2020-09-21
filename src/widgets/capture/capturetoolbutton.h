@@ -54,6 +54,7 @@ public:
     TYPE_PIN = 17,
     TYPE_TEXT = 18,
     TYPE_CIRCLECOUNT = 19,
+    TYPE_EYEDROPPER = 20,
 
   };
   Q_ENUM(ButtonType)

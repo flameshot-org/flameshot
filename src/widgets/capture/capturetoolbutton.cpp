@@ -141,6 +141,7 @@ static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder{
   { CaptureToolButton::TYPE_IMAGEUPLOADER, 17 },
   { CaptureToolButton::TYPE_OPEN_APP, 18 },
   { CaptureToolButton::TYPE_PIN, 19 },
+  { CaptureToolButton::TYPE_EYEDROPPER, 20 },
 };
 
 int
@@ -173,4 +174,5 @@ QVector<CaptureToolButton::ButtonType>
     CaptureToolButton::TYPE_OPEN_APP,
     CaptureToolButton::TYPE_PIN,
     CaptureToolButton::TYPE_CIRCLECOUNT,
+    CaptureToolButton::TYPE_EYEDROPPER,
   };

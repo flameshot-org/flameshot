@@ -36,6 +36,7 @@
 #include "sizeindicator/sizeindicatortool.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
+#include "eyedropper/eyedroppertool.h"
 
 ToolFactory::ToolFactory(QObject* parent)
   : QObject(parent)
@@ -105,6 +106,9 @@ ToolFactory::CreateTool(CaptureToolButton::ButtonType t, QObject* parent)
       break;
     case CaptureToolButton::TYPE_CIRCLECOUNT:
       tool = new CircleCountTool(parent);
+      break;
+    case CaptureToolButton::TYPE_EYEDROPPER:
+      tool = new EyedropperTool(parent);
       break;
 
     default:
