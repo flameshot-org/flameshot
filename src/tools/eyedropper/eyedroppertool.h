@@ -19,11 +19,14 @@
 
 #include "src/tools/capturetool.h"
 
+class EyedropperWidget;
+
 class EyedropperTool : public CaptureTool
 {
   Q_OBJECT;
 public:
   explicit EyedropperTool(QObject* parent = nullptr);
+  ~EyedropperTool() override;
 
   bool isValid() const override;
   bool closeOnButtonPressed() const override;
@@ -46,4 +49,8 @@ public slots:
   void pressed(const CaptureContext& context) override;
   void colorChanged(const QColor& c) override;
   void thicknessChanged(const int th) override;
+  QWidget* widget() override;
+
+private:
+  EyedropperWidget* m_widget { nullptr };
 };
