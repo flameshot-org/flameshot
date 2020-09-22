@@ -20,19 +20,8 @@
 #include <QPainter>
 
 ImgS3UploaderTool::ImgS3UploaderTool(QObject* parent)
-  : AbstractActionTool(parent)
+  : ImgUploaderTool(parent)
 {}
-
-bool ImgS3UploaderTool::closeOnButtonPressed() const
-{
-    return true;
-}
-
-QIcon ImgS3UploaderTool::icon(const QColor& background, bool inEditor) const
-{
-    Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "cloud-upload.svg");
-}
 
 QString ImgS3UploaderTool::name() const
 {
@@ -51,24 +40,12 @@ QString ImgS3UploaderTool::description() const
 
 QWidget* ImgS3UploaderTool::widget()
 {
-    ImgS3Uploader* p = new ImgS3Uploader(capture);
+    ImgS3Uploader* p = new ImgS3Uploader(capture());
     p->upload();
     return p;
-}
-
-void ImgS3UploaderTool::setCapture(const QPixmap& pixmap)
-{
-    capture = pixmap;
 }
 
 CaptureTool* ImgS3UploaderTool::copy(QObject* parent)
 {
     return new ImgS3UploaderTool(parent);
-}
-
-void ImgS3UploaderTool::pressed(const CaptureContext& context)
-{
-    capture = context.selectedScreenshotArea();
-    emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
 }
