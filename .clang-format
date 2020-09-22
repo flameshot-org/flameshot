@@ -1,0 +1,6 @@
+Language: Cpp
+BasedOnStyle: Mozilla
+IndentWidth: 4
+AccessModifierOffset: -4
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None

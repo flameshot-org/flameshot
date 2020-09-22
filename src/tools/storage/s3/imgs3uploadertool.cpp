@@ -15,43 +15,59 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "imguruploadertool.h"
-#include "imguruploader.h"
+#include "imgs3uploadertool.h"
+#include "imgs3uploader.h"
 #include <QPainter>
 
-ImgurUploaderTool::ImgurUploaderTool(QObject *parent) : AbstractActionTool(parent) {
+ImgS3UploaderTool::ImgS3UploaderTool(QObject* parent)
+  : AbstractActionTool(parent)
+{}
 
-}
-
-bool ImgurUploaderTool::closeOnButtonPressed() const {
+bool ImgS3UploaderTool::closeOnButtonPressed() const
+{
     return true;
 }
 
-QIcon ImgurUploaderTool::icon(const QColor &background, bool inEditor) const {
+QIcon ImgS3UploaderTool::icon(const QColor& background, bool inEditor) const
+{
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "cloud-upload.svg");
 }
-QString ImgurUploaderTool::name() const {
+
+QString ImgS3UploaderTool::name() const
+{
     return tr("Image Uploader");
 }
 
-QString ImgurUploaderTool::nameID() {
+QString ImgS3UploaderTool::nameID()
+{
     return QLatin1String("");
 }
 
-QString ImgurUploaderTool::description() const {
-    return tr("Upload the selection to Imgur");
+QString ImgS3UploaderTool::description() const
+{
+    return tr("Upload the selection to S3 bucket");
 }
 
-QWidget* ImgurUploaderTool::widget() {
-    return new ImgurUploader(capture);
+QWidget* ImgS3UploaderTool::widget()
+{
+    ImgS3Uploader* p = new ImgS3Uploader(capture);
+    p->upload();
+    return p;
 }
 
-CaptureTool* ImgurUploaderTool::copy(QObject *parent) {
-    return new ImgurUploaderTool(parent);
+void ImgS3UploaderTool::setCapture(const QPixmap& pixmap)
+{
+    capture = pixmap;
 }
 
-void ImgurUploaderTool::pressed(const CaptureContext &context) {
+CaptureTool* ImgS3UploaderTool::copy(QObject* parent)
+{
+    return new ImgS3UploaderTool(parent);
+}
+
+void ImgS3UploaderTool::pressed(const CaptureContext& context)
+{
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);

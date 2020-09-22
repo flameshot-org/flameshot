@@ -4,15 +4,11 @@
 #define HISTORY_MAX_SIZE 25
 
 #include <QList>
-#include <QString>
 #include <QPixmap>
+#include <QString>
 
-
-#define SCREENSHOT_STORAGE_TYPE_LOCAL ""
-#define SCREENSHOT_STORAGE_TYPE_S3 "s3"
-#define SCREENSHOT_STORAGE_TYPE_IMGUR "imgur"
-
-struct HISTORY_FILE_NAME {
+struct HISTORY_FILE_NAME
+{
     QString file;
     QString token;
     QString type;
@@ -23,12 +19,12 @@ class History
 public:
     History();
 
-    void save(const QPixmap &, const QString &);
-    const QList<QString> &history();
-    const QString &path();
+    void save(const QPixmap&, const QString&);
+    const QList<QString>& history();
+    const QString& path();
 
-    const HISTORY_FILE_NAME &unpackFileName(const QString &);
-    const QString &packFileName(const QString &, const QString &, const QString &);
+    const HISTORY_FILE_NAME& unpackFileName(const QString&);
+    const QString& packFileName(const QString&, const QString&, const QString&);
 
 private:
     QString m_historyPath;
