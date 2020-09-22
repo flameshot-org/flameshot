@@ -125,12 +125,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="83"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translation>Нисам успео да снимим екран</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capture/capturewidget.cpp" line="258"/>
+        <location filename="../src/widgets/capture/capturewidget.cpp" line="284"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -159,32 +159,27 @@ Press Space to open the side panel.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="42"/>
+        <location filename="../src/config/configwindow.cpp" line="45"/>
         <source>Configuration</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="64"/>
+        <location filename="../src/config/configwindow.cpp" line="66"/>
         <source>Interface</source>
         <translation>Изглед</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="69"/>
+        <location filename="../src/config/configwindow.cpp" line="72"/>
         <source>Filename Editor</source>
         <translation>Избор имена датотеке</translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="79"/>
+        <location filename="../src/config/configwindow.cpp" line="80"/>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/configwindow.cpp" line="84"/>
-        <source>Path Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/config/configwindow.cpp" line="74"/>
+        <location filename="../src/config/configwindow.cpp" line="76"/>
         <source>General</source>
         <translation>Опште</translation>
     </message>
@@ -335,152 +330,167 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="93"/>
-        <location filename="../src/config/geneneralconf.cpp" line="199"/>
+        <location filename="../src/config/geneneralconf.cpp" line="108"/>
+        <location filename="../src/config/geneneralconf.cpp" line="227"/>
         <source>Import</source>
         <translation>Увоз</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="100"/>
-        <location filename="../src/config/geneneralconf.cpp" line="108"/>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="100"/>
+        <location filename="../src/config/geneneralconf.cpp" line="115"/>
         <source>Unable to read file.</source>
         <translation>Нисам успео да прочитам датотеку.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="108"/>
-        <location filename="../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../src/config/geneneralconf.cpp" line="146"/>
         <source>Unable to write file.</source>
         <translation>Нисам успео да сачувам датотеку.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../src/config/geneneralconf.cpp" line="133"/>
         <source>Save File</source>
         <translation>Сачувај датотеку</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="137"/>
+        <location filename="../src/config/geneneralconf.cpp" line="155"/>
         <source>Confirm Reset</source>
         <translation>Потврда поништавања</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="138"/>
+        <location filename="../src/config/geneneralconf.cpp" line="156"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Да ли сте сигурни да желите да поништите сва прилагођена подешавања?</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="147"/>
+        <location filename="../src/config/geneneralconf.cpp" line="165"/>
         <source>Show help message</source>
         <translation>Приказуј поруку са упутством</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="151"/>
+        <location filename="../src/config/geneneralconf.cpp" line="169"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Приказуј поруку са кратким упутством на почетку снимања екрана.</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="161"/>
-        <location filename="../src/config/geneneralconf.cpp" line="165"/>
+        <location filename="../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../src/config/geneneralconf.cpp" line="185"/>
         <source>Show desktop notifications</source>
         <translation>Користи системска обавештења</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="174"/>
+        <location filename="../src/config/geneneralconf.cpp" line="197"/>
         <source>Show tray icon</source>
         <translation>Иконица на системској полици</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="178"/>
+        <location filename="../src/config/geneneralconf.cpp" line="201"/>
         <source>Show the systemtray icon</source>
         <translation>Приказуј иконицу на системској полици</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="189"/>
+        <location filename="../src/config/geneneralconf.cpp" line="215"/>
         <source>Configuration File</source>
         <translation>Датотека са подешавањима</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="194"/>
+        <location filename="../src/config/geneneralconf.cpp" line="220"/>
         <source>Export</source>
         <translation>Извоз</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="204"/>
+        <location filename="../src/config/geneneralconf.cpp" line="234"/>
         <source>Reset</source>
         <translation>Поништи</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="211"/>
+        <location filename="../src/config/geneneralconf.cpp" line="244"/>
         <source>Launch at startup</source>
         <translation>Покрени на почетку</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="215"/>
-        <location filename="../src/config/geneneralconf.cpp" line="227"/>
+        <location filename="../src/config/geneneralconf.cpp" line="248"/>
+        <location filename="../src/config/geneneralconf.cpp" line="262"/>
         <source>Launch Flameshot</source>
         <translation>Покрени Flameshot</translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="223"/>
+        <location filename="../src/config/geneneralconf.cpp" line="258"/>
         <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="236"/>
+        <location filename="../src/config/geneneralconf.cpp" line="273"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="240"/>
+        <location filename="../src/config/geneneralconf.cpp" line="277"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="248"/>
+        <location filename="../src/config/geneneralconf.cpp" line="289"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="251"/>
+        <location filename="../src/config/geneneralconf.cpp" line="294"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/geneneralconf.cpp" line="260"/>
-        <location filename="../src/config/geneneralconf.cpp" line="263"/>
+        <location filename="../src/config/geneneralconf.cpp" line="304"/>
+        <location filename="../src/config/geneneralconf.cpp" line="307"/>
         <source>Copy file path after save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="316"/>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="320"/>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/config/geneneralconf.cpp" line="327"/>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="26"/>
+        <location filename="../src/widgets/historywidget.cpp" line="30"/>
         <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="63"/>
+        <location filename="../src/widgets/historywidget.cpp" line="68"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="109"/>
+        <location filename="../src/widgets/historywidget.cpp" line="118"/>
         <source>Copy URL</source>
         <translation type="unfinished">Запамти интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="113"/>
+        <location filename="../src/widgets/historywidget.cpp" line="122"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
     </message>
     <message>
-        <location filename="../src/widgets/historywidget.cpp" line="119"/>
+        <location filename="../src/widgets/historywidget.cpp" line="128"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -488,164 +498,207 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="54"/>
         <source>Uploading Image</source>
         <translation type="unfinished">Објављујем слику</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="54"/>
         <source>Upload image to S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="60"/>
         <source>Delete image from S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="244"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="226"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="246"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="228"/>
         <source>Network error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="249"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="230"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="252"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="235"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="282"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="256"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="406"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Запамти интернет адресу</translation>
+        <translation type="obsolete">Запамти интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="407"/>
         <source>Open URL</source>
-        <translation type="unfinished">Посети интернет адресу</translation>
+        <translation type="obsolete">Посети интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="408"/>
         <source>Delete image</source>
-        <translation type="unfinished">Избриши слику</translation>
+        <translation type="obsolete">Избриши слику</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="409"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Сачувај у привремену меморију.</translation>
+        <translation type="obsolete">Сачувај у привремену меморију.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="428"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Нисам успео да посетим интернет адресу.</translation>
+        <translation type="obsolete">Нисам успео да посетим интернет адресу.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="209"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="434"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="202"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="61"/>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="447"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="60"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="255"/>
+        <location filename="../src/tools/storage/s3/imgs3uploader.cpp" line="239"/>
         <source>Remove screenshot from history?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploader.cpp" line="439"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Слика је сачувана у привременој меморији.</translation>
+        <translation type="obsolete">Слика је сачувана у привременој меморији.</translation>
     </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="38"/>
+        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="39"/>
         <source>Image Uploader</source>
         <translation type="unfinished">Објављивање слике</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgs3/imgs3uploadertool.cpp" line="46"/>
+        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="49"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
+    <name>ImgUploader</name>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="55"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="55"/>
+        <location filename="../src/tools/storage/imguploader.cpp" line="61"/>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Објављујем слику</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="61"/>
+        <source>Upload image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="92"/>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">Нисам успео да посетим интернет адресу.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="99"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="105"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">Слика је сачувана у привременој меморији.</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="114"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="174"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">Запамти интернет адресу</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="175"/>
+        <source>Open URL</source>
+        <translation type="unfinished">Посети интернет адресу</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="176"/>
+        <source>Delete image</source>
+        <translation type="unfinished">Избриши слику</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/storage/imguploader.cpp" line="177"/>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">Сачувај у привремену меморију.</translation>
+    </message>
+</context>
+<context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="47"/>
+        <location filename="../src/tools/storage/imgur/imguruploader.cpp" line="48"/>
         <source>Upload to Imgur</source>
         <translation>Објави на Imgur</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="54"/>
         <source>Uploading Image</source>
-        <translation>Објављујем слику</translation>
+        <translation type="vanished">Објављујем слику</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="140"/>
         <source>Copy URL</source>
-        <translation>Запамти интернет адресу</translation>
+        <translation type="vanished">Запамти интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="141"/>
         <source>Open URL</source>
-        <translation>Посети интернет адресу</translation>
+        <translation type="vanished">Посети интернет адресу</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="142"/>
         <source>Delete image</source>
-        <translation>Избриши слику</translation>
+        <translation type="vanished">Избриши слику</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="143"/>
         <source>Image to Clipboard.</source>
-        <translation>Сачувај у привремену меморију.</translation>
+        <translation type="vanished">Сачувај у привремену меморију.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="162"/>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="175"/>
+        <location filename="../src/tools/storage/imgur/imguruploader.cpp" line="127"/>
         <source>Unable to open the URL.</source>
         <translation>Нисам успео да посетим интернет адресу.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>URL copied to clipboard.</source>
-        <translation>Интернет адреса је сачувана у привременој меморији.</translation>
+        <translation type="vanished">Интернет адреса је сачувана у привременој меморији.</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="181"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Слика је сачувана у привременој меморији.</translation>
+        <translation type="vanished">Слика је сачувана у привременој меморији.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="35"/>
+        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="39"/>
         <source>Image Uploader</source>
         <translation>Објављивање слике</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploadertool.cpp" line="43"/>
+        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="49"/>
         <source>Upload the selection to Imgur</source>
         <translation>Објави избор на Imgur сајту</translation>
     </message>
@@ -843,7 +896,7 @@ Press Space to open the side panel.</source>
         <translation>Нисам успео са сачувам</translation>
     </message>
     <message>
-        <location filename="../src/tools/imgur/imguruploader.cpp" line="82"/>
+        <location filename="../src/tools/storage/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Интернет адреса је сачувана у привременој меморији.</translation>
     </message>

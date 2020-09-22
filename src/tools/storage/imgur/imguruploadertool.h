@@ -19,24 +19,26 @@
 
 #include "src/tools/abstractactiontool.h"
 
-class ImgurUploaderTool : public AbstractActionTool {
+class ImgurUploaderTool : public AbstractActionTool
+{
     Q_OBJECT
 public:
-    explicit ImgurUploaderTool(QObject *parent = nullptr);
+    explicit ImgurUploaderTool(QObject* parent = nullptr);
 
     bool closeOnButtonPressed() const;
 
-    QIcon icon(const QColor &background, bool inEditor) const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     static QString nameID();
     QString description() const override;
 
     QWidget* widget() override;
 
-    CaptureTool* copy(QObject *parent = nullptr) override;
+    CaptureTool* copy(QObject* parent = nullptr) override;
+    void setCapture(const QPixmap&);
 
 public slots:
-    void pressed(const CaptureContext &context) override;
+    void pressed(const CaptureContext& context) override;
 
 private:
     QPixmap capture;
