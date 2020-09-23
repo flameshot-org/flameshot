@@ -16,34 +16,36 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "terminallauncher.h"
-#include <QProcess>
 #include <QDir>
-#include <QStandardPaths>
+#include <QProcess>
 #include <QProcessEnvironment>
+#include <QStandardPaths>
 
 namespace {
-    static const TerminalApp terminalApps[] = {
-        { "x-terminal-emulator", "-e" },
-        { "xfce4-terminal",         "-x" },
-        { "konsole",             "-e" },
-        { "gnome-terminal",         "--" },
-        { "terminator",             "-e" },
-        { "terminology",         "-e" },
-        { "tilix",                 "-e" },
-        { "xterm",                 "-e" },
-        { "aterm",                 "-e" },
-        { "Eterm",                 "-e" },
-        { "rxvt",                 "-e" },
-        { "urxvt",                 "-e" },
-    };
+static const TerminalApp terminalApps[] = {
+    { "x-terminal-emulator", "-e" },
+    { "xfce4-terminal", "-x" },
+    { "konsole", "-e" },
+    { "gnome-terminal", "--" },
+    { "terminator", "-e" },
+    { "terminology", "-e" },
+    { "tilix", "-e" },
+    { "xterm", "-e" },
+    { "aterm", "-e" },
+    { "Eterm", "-e" },
+    { "rxvt", "-e" },
+    { "urxvt", "-e" },
+};
 }
 
-TerminalLauncher::TerminalLauncher(QObject *parent) : QObject(parent) {
-}
+TerminalLauncher::TerminalLauncher(QObject* parent)
+  : QObject(parent)
+{}
 
-TerminalApp TerminalLauncher::getPreferedTerminal() {
+TerminalApp TerminalLauncher::getPreferedTerminal()
+{
     TerminalApp res;
-    for (const TerminalApp &app : terminalApps) {
+    for (const TerminalApp& app : terminalApps) {
         QString path = QStandardPaths::findExecutable(app.name);
         if (!path.isEmpty()) {
             res = app;
@@ -53,7 +55,8 @@ TerminalApp TerminalLauncher::getPreferedTerminal() {
     return res;
 }
 
-bool TerminalLauncher::launchDetached(const QString &command) {
+bool TerminalLauncher::launchDetached(const QString& command)
+{
     TerminalApp app = getPreferedTerminal();
     QString s = app.name + " " + app.arg + " " + command;
     return QProcess::startDetached(s);

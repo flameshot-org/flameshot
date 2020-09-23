@@ -9,17 +9,18 @@ class QCheckBox;
 class FileNameHandler;
 class QPushButton;
 
-class FilePathConfiguration : public QWidget {
+class FilePathConfiguration : public QWidget
+{
     Q_OBJECT
 public:
-    explicit FilePathConfiguration(QWidget *parent = nullptr);
+    explicit FilePathConfiguration(QWidget* parent = nullptr);
 
 private:
-    QVBoxLayout *m_layout;
-    QCheckBox *m_screenshotPathFixed;
-    QLineEdit *m_screenshotPathFixedDefault;
-    QPushButton *m_screenshotPathFixedBrowse;
-    QPushButton *m_screenshotPathFixedClear;
+    QVBoxLayout* m_layout;
+    QCheckBox* m_screenshotPathFixed;
+    QLineEdit* m_screenshotPathFixedDefault;
+    QPushButton* m_screenshotPathFixedBrowse;
+    QPushButton* m_screenshotPathFixedClear;
 
     void initLayout();
     void initWidgets();

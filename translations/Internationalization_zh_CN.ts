@@ -4,12 +4,12 @@
 <context>
     <name>AppLauncher</name>
     <message>
-        <location filename="../src/tools/launcher/applaunchertool.cpp" line="34"/>
+        <location filename="../src/tools/launcher/applaunchertool.cpp" line="37"/>
         <source>App Launcher</source>
         <translation>应用启动器</translation>
     </message>
     <message>
-        <location filename="../src/tools/launcher/applaunchertool.cpp" line="42"/>
+        <location filename="../src/tools/launcher/applaunchertool.cpp" line="47"/>
         <source>Choose an app to open the capture</source>
         <translation>选择一个应用打开此截图</translation>
     </message>
@@ -32,18 +32,18 @@
         <translation>选择后保持此窗口打开</translation>
     </message>
     <message>
-        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
-        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="111"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="108"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="121"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="112"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="121"/>
         <source>Unable to launch in terminal.</source>
         <translation>无法在终端中启动。</translation>
     </message>
     <message>
-        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="99"/>
+        <location filename="../src/tools/launcher/applauncherwidget.cpp" line="108"/>
         <source>Unable to write in</source>
         <translation>无法写入</translation>
     </message>
@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../src/tools/arrow/arrowtool.cpp" line="82"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Arrow</source>
         <translation>箭头</translation>
     </message>
     <message>
-        <location filename="../src/tools/arrow/arrowtool.cpp" line="90"/>
+        <location filename="../src/tools/arrow/arrowtool.cpp" line="98"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>选择箭头作为绘画工具</translation>
     </message>
@@ -64,12 +64,12 @@
 <context>
     <name>BlurTool</name>
     <message>
-        <location filename="../src/tools/blur/blurtool.cpp" line="34"/>
+        <location filename="../src/tools/blur/blurtool.cpp" line="36"/>
         <source>Blur</source>
         <translation>模糊</translation>
     </message>
     <message>
-        <location filename="../src/tools/blur/blurtool.cpp" line="42"/>
+        <location filename="../src/tools/blur/blurtool.cpp" line="46"/>
         <source>Set Blur as the paint tool</source>
         <translation>选择模糊作为绘画工具</translation>
     </message>
@@ -77,47 +77,47 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="59"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
         <translation>&lt;b&gt;捕获模式&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="64"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="71"/>
         <source>Rectangular Region</source>
         <translation>方形区域</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="65"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Full Screen (All Monitors)</source>
         <translation>全屏（所有显示器）</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="72"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="81"/>
         <source>No Delay</source>
         <translation>无延迟</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="88"/>
         <source> second</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="79"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="88"/>
         <source> seconds</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="83"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="92"/>
         <source>Take new screenshot</source>
         <translation>获取新屏幕截图</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="90"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Area:</source>
         <translation>区域：</translation>
     </message>
     <message>
-        <location filename="../src/widgets/capturelauncher.cpp" line="91"/>
+        <location filename="../src/widgets/capturelauncher.cpp" line="102"/>
         <source>Delay:</source>
         <translation>延迟：</translation>
     </message>
@@ -147,12 +147,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>CircleTool</name>
     <message>
-        <location filename="../src/tools/circle/circletool.cpp" line="34"/>
+        <location filename="../src/tools/circle/circletool.cpp" line="38"/>
         <source>Circle</source>
         <translation>圆环</translation>
     </message>
     <message>
-        <location filename="../src/tools/circle/circletool.cpp" line="42"/>
+        <location filename="../src/tools/circle/circletool.cpp" line="48"/>
         <source>Set the Circle as the paint tool</source>
         <translation>选择圆环作为绘画工具</translation>
     </message>
@@ -188,32 +188,32 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../src/core/controller.cpp" line="185"/>
+        <location filename="../src/core/controller.cpp" line="203"/>
         <source>&amp;Take Screenshot</source>
         <translation>进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="190"/>
+        <location filename="../src/core/controller.cpp" line="208"/>
         <source>&amp;Open Launcher</source>
         <translation>打开启动器(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="194"/>
+        <location filename="../src/core/controller.cpp" line="214"/>
         <source>&amp;Configuration</source>
         <translation>配置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="197"/>
+        <location filename="../src/core/controller.cpp" line="217"/>
         <source>&amp;Information</source>
         <translation>信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="200"/>
+        <location filename="../src/core/controller.cpp" line="219"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="205"/>
+        <location filename="../src/core/controller.cpp" line="223"/>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -221,12 +221,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>CopyTool</name>
     <message>
-        <location filename="../src/tools/copy/copytool.cpp" line="35"/>
+        <location filename="../src/tools/copy/copytool.cpp" line="38"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/tools/copy/copytool.cpp" line="43"/>
+        <location filename="../src/tools/copy/copytool.cpp" line="48"/>
         <source>Copy the selection into the clipboard</source>
         <translation>复制选择到剪贴板</translation>
     </message>
@@ -234,7 +234,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../src/utils/dbusutils.cpp" line="43"/>
+        <location filename="../src/utils/dbusutils.cpp" line="50"/>
         <source>Unable to connect via DBus</source>
         <translation>无法通过 DBus 进行连接</translation>
     </message>
@@ -242,12 +242,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ExitTool</name>
     <message>
-        <location filename="../src/tools/exit/exittool.cpp" line="34"/>
+        <location filename="../src/tools/exit/exittool.cpp" line="37"/>
         <source>Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../src/tools/exit/exittool.cpp" line="42"/>
+        <location filename="../src/tools/exit/exittool.cpp" line="47"/>
         <source>Leave the capture screen</source>
         <translation>离开屏幕捕获</translation>
     </message>
@@ -255,47 +255,47 @@ Press Space to open the side panel.</source>
 <context>
     <name>FileNameEditor</name>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="35"/>
+        <location filename="../src/config/filenameeditor.cpp" line="38"/>
         <source>Edit the name of your captures:</source>
         <translation>编辑您的截图名称:</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="39"/>
+        <location filename="../src/config/filenameeditor.cpp" line="42"/>
         <source>Edit:</source>
         <translation>编辑器:</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="41"/>
+        <location filename="../src/config/filenameeditor.cpp" line="44"/>
         <source>Preview:</source>
         <translation>预览:</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="78"/>
+        <location filename="../src/config/filenameeditor.cpp" line="87"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="80"/>
+        <location filename="../src/config/filenameeditor.cpp" line="90"/>
         <source>Saves the pattern</source>
         <translation>保存样式</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="82"/>
+        <location filename="../src/config/filenameeditor.cpp" line="92"/>
         <source>Reset</source>
         <translation>恢复</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="85"/>
+        <location filename="../src/config/filenameeditor.cpp" line="95"/>
         <source>Restores the saved pattern</source>
         <translation>恢复保存的样式</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="87"/>
+        <location filename="../src/config/filenameeditor.cpp" line="97"/>
         <source>Clear</source>
         <translation>清空</translation>
     </message>
     <message>
-        <location filename="../src/config/filenameeditor.cpp" line="91"/>
+        <location filename="../src/config/filenameeditor.cpp" line="101"/>
         <source>Deletes the name</source>
         <translation>删除这个名字</translation>
     </message>
@@ -303,27 +303,27 @@ Press Space to open the side panel.</source>
 <context>
     <name>FilePathConfiguration</name>
     <message>
-        <location filename="../src/config/filepathconfiguration.cpp" line="24"/>
+        <location filename="../src/config/filepathconfiguration.cpp" line="25"/>
         <source>Screenshot path default:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/filepathconfiguration.cpp" line="39"/>
+        <location filename="../src/config/filepathconfiguration.cpp" line="42"/>
         <source>Use fixed path for screenshots to save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/filepathconfiguration.cpp" line="45"/>
+        <location filename="../src/config/filepathconfiguration.cpp" line="51"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/filepathconfiguration.cpp" line="48"/>
+        <location filename="../src/config/filepathconfiguration.cpp" line="57"/>
         <source>Clear</source>
         <translation type="unfinished">清空</translation>
     </message>
     <message>
-        <location filename="../src/config/filepathconfiguration.cpp" line="62"/>
+        <location filename="../src/config/filepathconfiguration.cpp" line="77"/>
         <source>Select default path for Screenshots</source>
         <translation type="unfinished"></translation>
     </message>
@@ -581,12 +581,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="39"/>
+        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
         <source>Image Uploader</source>
         <translation type="unfinished">上传图片</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="49"/>
+        <location filename="../src/tools/storage/s3/imgs3uploadertool.cpp" line="38"/>
         <source>Upload the selection to S3 bucket</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,12 +694,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="39"/>
+        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="28"/>
         <source>Image Uploader</source>
         <translation>上传图片</translation>
     </message>
     <message>
-        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="49"/>
+        <location filename="../src/tools/storage/imgur/imguruploadertool.cpp" line="38"/>
         <source>Upload the selection to Imgur</source>
         <translation>上传选择到 Imgur</translation>
     </message>
@@ -707,7 +707,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="38"/>
+        <location filename="../src/widgets/infowindow.cpp" line="40"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -768,12 +768,12 @@ Press Space to open the side panel.</source>
         <translation type="vanished">描述</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="60"/>
+        <location filename="../src/widgets/infowindow.cpp" line="62"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;许可证&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../src/widgets/infowindow.cpp" line="69"/>
+        <location filename="../src/widgets/infowindow.cpp" line="71"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;版本&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -789,12 +789,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../src/tools/line/linetool.cpp" line="37"/>
+        <location filename="../src/tools/line/linetool.cpp" line="41"/>
         <source>Line</source>
         <translation>直线</translation>
     </message>
     <message>
-        <location filename="../src/tools/line/linetool.cpp" line="45"/>
+        <location filename="../src/tools/line/linetool.cpp" line="51"/>
         <source>Set the Line as the paint tool</source>
         <translation>将直线线设置为绘画工具</translation>
     </message>
@@ -802,12 +802,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../src/tools/marker/markertool.cpp" line="37"/>
+        <location filename="../src/tools/marker/markertool.cpp" line="41"/>
         <source>Marker</source>
         <translation>标记</translation>
     </message>
     <message>
-        <location filename="../src/tools/marker/markertool.cpp" line="45"/>
+        <location filename="../src/tools/marker/markertool.cpp" line="51"/>
         <source>Set the Marker as the paint tool</source>
         <translation>将标记设置为绘画工具</translation>
     </message>
@@ -815,12 +815,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>MoveTool</name>
     <message>
-        <location filename="../src/tools/move/movetool.cpp" line="34"/>
+        <location filename="../src/tools/move/movetool.cpp" line="37"/>
         <source>Move</source>
         <translation>移动</translation>
     </message>
     <message>
-        <location filename="../src/tools/move/movetool.cpp" line="42"/>
+        <location filename="../src/tools/move/movetool.cpp" line="47"/>
         <source>Move the selection area</source>
         <translation>移动选择区域</translation>
     </message>
@@ -828,12 +828,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>PencilTool</name>
     <message>
-        <location filename="../src/tools/pencil/penciltool.cpp" line="30"/>
+        <location filename="../src/tools/pencil/penciltool.cpp" line="32"/>
         <source>Pencil</source>
         <translation>铅笔</translation>
     </message>
     <message>
-        <location filename="../src/tools/pencil/penciltool.cpp" line="38"/>
+        <location filename="../src/tools/pencil/penciltool.cpp" line="42"/>
         <source>Set the Pencil as the paint tool</source>
         <translation>将铅笔设置为绘画工具</translation>
     </message>
@@ -841,12 +841,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>PinTool</name>
     <message>
-        <location filename="../src/tools/pin/pintool.cpp" line="34"/>
+        <location filename="../src/tools/pin/pintool.cpp" line="37"/>
         <source>Pin Tool</source>
         <translation>贴图工具</translation>
     </message>
     <message>
-        <location filename="../src/tools/pin/pintool.cpp" line="42"/>
+        <location filename="../src/tools/pin/pintool.cpp" line="47"/>
         <source>Pin image on the desktop</source>
         <translation>在桌面上固定图像</translation>
     </message>
@@ -854,53 +854,53 @@ Press Space to open the side panel.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="101"/>
         <source>Save Error</source>
         <translation>保存错误</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="89"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="90"/>
         <source>Capture saved as </source>
         <translation>捕获已保存为 </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="34"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="32"/>
         <source>Capture saved to clipboard</source>
         <translation>捕获已保存至剪贴板</translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="51"/>
-        <location filename="../src/utils/screenshotsaver.cpp" line="96"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="49"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="99"/>
         <source>Error trying to save as </source>
         <translation>尝试另存为时出错 </translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="67"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="66"/>
         <source>Save screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/screenshotsaver.cpp" line="92"/>
+        <location filename="../src/utils/screenshotsaver.cpp" line="94"/>
         <source>Capture saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="77"/>
-        <location filename="../src/main.cpp" line="227"/>
-        <location filename="../src/main.cpp" line="376"/>
-        <location filename="../src/main.cpp" line="400"/>
-        <location filename="../src/main.cpp" line="429"/>
+        <location filename="../src/main.cpp" line="82"/>
+        <location filename="../src/main.cpp" line="251"/>
+        <location filename="../src/main.cpp" line="415"/>
+        <location filename="../src/main.cpp" line="443"/>
+        <location filename="../src/main.cpp" line="475"/>
         <source>Unable to connect via DBus</source>
         <translation>无法通过DBus进行连接</translation>
     </message>
     <message>
-        <location filename="../src/tools/launcher/openwithprogram.cpp" line="39"/>
+        <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../src/tools/launcher/openwithprogram.cpp" line="40"/>
+        <location filename="../src/tools/launcher/openwithprogram.cpp" line="41"/>
         <source>Unable to write in</source>
         <translation>无法写入</translation>
     </message>
@@ -910,73 +910,73 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">复制链接到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="423"/>
+        <location filename="../src/third-party/singleapplication/singleapplication.cpp" line="441"/>
         <source>Hi, I&apos;m already running!
 You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/controller.cpp" line="234"/>
+        <location filename="../src/core/controller.cpp" line="255"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="28"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="26"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="30"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="32"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="23"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="24"/>
         <source>Toggle side panel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="35"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="45"/>
         <source>Move selection left 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="37"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="48"/>
         <source>Move selection right 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="39"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="51"/>
         <source>Move selection up 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="41"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="54"/>
         <source>Move selection down 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="44"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="57"/>
         <source>Quit capture</source>
         <translation type="unfinished">退出捕获</translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="45"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="59"/>
         <source>Screenshot history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="46"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="62"/>
         <source>Capture screen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -985,12 +985,12 @@ You can find me in the system tray.</source>
         <translation type="obsolete">移动选择 1 px</translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="47"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="64"/>
         <source>Show color picker</source>
         <translation type="unfinished">显示颜色选择器</translation>
     </message>
     <message>
-        <location filename="../src/utils/configshortcuts.cpp" line="48"/>
+        <location filename="../src/utils/configshortcuts.cpp" line="66"/>
         <source>Change the tool&apos;s thickness</source>
         <translation type="unfinished">改变工具的厚度</translation>
     </message>
@@ -998,12 +998,12 @@ You can find me in the system tray.</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../src/tools/rectangle/rectangletool.cpp" line="34"/>
+        <location filename="../src/tools/rectangle/rectangletool.cpp" line="38"/>
         <source>Rectangle</source>
         <translation>实心矩形</translation>
     </message>
     <message>
-        <location filename="../src/tools/rectangle/rectangletool.cpp" line="42"/>
+        <location filename="../src/tools/rectangle/rectangletool.cpp" line="48"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>将实心矩形设置为绘画工具</translation>
     </message>
@@ -1011,12 +1011,12 @@ You can find me in the system tray.</source>
 <context>
     <name>RedoTool</name>
     <message>
-        <location filename="../src/tools/redo/redotool.cpp" line="34"/>
+        <location filename="../src/tools/redo/redotool.cpp" line="37"/>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
     <message>
-        <location filename="../src/tools/redo/redotool.cpp" line="42"/>
+        <location filename="../src/tools/redo/redotool.cpp" line="47"/>
         <source>Redo the next modification</source>
         <translation>重做上次修改</translation>
     </message>
@@ -1024,12 +1024,12 @@ You can find me in the system tray.</source>
 <context>
     <name>SaveTool</name>
     <message>
-        <location filename="../src/tools/save/savetool.cpp" line="35"/>
+        <location filename="../src/tools/save/savetool.cpp" line="38"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../src/tools/save/savetool.cpp" line="43"/>
+        <location filename="../src/tools/save/savetool.cpp" line="48"/>
         <source>Save the capture</source>
         <translation>保存捕获</translation>
     </message>
@@ -1037,7 +1037,7 @@ You can find me in the system tray.</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../src/utils/screengrabber.cpp" line="76"/>
+        <location filename="../src/utils/screengrabber.cpp" line="85"/>
         <source>Unable to capture screen</source>
         <translation>无法捕获屏幕</translation>
     </message>
@@ -1045,12 +1045,12 @@ You can find me in the system tray.</source>
 <context>
     <name>SelectionTool</name>
     <message>
-        <location filename="../src/tools/selection/selectiontool.cpp" line="38"/>
+        <location filename="../src/tools/selection/selectiontool.cpp" line="43"/>
         <source>Rectangular Selection</source>
         <translation>矩形选择</translation>
     </message>
     <message>
-        <location filename="../src/tools/selection/selectiontool.cpp" line="46"/>
+        <location filename="../src/tools/selection/selectiontool.cpp" line="53"/>
         <source>Set Selection as the paint tool</source>
         <translation>将矩形选择设置为绘画工具</translation>
     </message>
@@ -1058,17 +1058,17 @@ You can find me in the system tray.</source>
 <context>
     <name>SetShortcutDialog</name>
     <message>
-        <location filename="../src/config/setshortcutwidget.cpp" line="12"/>
+        <location filename="../src/config/setshortcutwidget.cpp" line="13"/>
         <source>Set Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/setshortcutwidget.cpp" line="18"/>
+        <location filename="../src/config/setshortcutwidget.cpp" line="19"/>
         <source>Enter new shortcut to change </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/setshortcutwidget.cpp" line="30"/>
+        <location filename="../src/config/setshortcutwidget.cpp" line="32"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1076,22 +1076,22 @@ You can find me in the system tray.</source>
 <context>
     <name>ShortcutsWidget</name>
     <message>
-        <location filename="../src/config/shortcutswidget.cpp" line="25"/>
+        <location filename="../src/config/shortcutswidget.cpp" line="26"/>
         <source>Hot Keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/config/shortcutswidget.cpp" line="48"/>
+        <location filename="../src/config/shortcutswidget.cpp" line="51"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation type="unfinished">屏幕捕捉模式中的可用快捷键。</translation>
     </message>
     <message>
-        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <location filename="../src/config/shortcutswidget.cpp" line="63"/>
         <source>Description</source>
         <translation type="unfinished">描述</translation>
     </message>
     <message>
-        <location filename="../src/config/shortcutswidget.cpp" line="60"/>
+        <location filename="../src/config/shortcutswidget.cpp" line="63"/>
         <source>Key</source>
         <translation type="unfinished">键</translation>
     </message>
@@ -1099,22 +1099,22 @@ You can find me in the system tray.</source>
 <context>
     <name>SidePanelWidget</name>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="67"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="72"/>
         <source>Active thickness:</source>
         <translation>当前宽度：</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="73"/>
         <source>Active color:</source>
         <translation>活动颜色：</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="182"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="205"/>
         <source>Press ESC to cancel</source>
         <translation>按下 ESC 键以取消</translation>
     </message>
     <message>
-        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="184"/>
+        <location filename="../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
         <source>Grab Color</source>
         <translation>获取颜色</translation>
     </message>
@@ -1122,12 +1122,12 @@ You can find me in the system tray.</source>
 <context>
     <name>SizeIndicatorTool</name>
     <message>
-        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="34"/>
+        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="37"/>
         <source>Selection Size Indicator</source>
         <translation>选择尺寸指示</translation>
     </message>
     <message>
-        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="42"/>
+        <location filename="../src/tools/sizeindicator/sizeindicatortool.cpp" line="47"/>
         <source>Show the dimensions of the selection (X Y)</source>
         <translation>显示选择的尺寸 (X Y)</translation>
     </message>
@@ -1135,107 +1135,107 @@ You can find me in the system tray.</source>
 <context>
     <name>StrftimeChooserWidget</name>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="47"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Century (00-99)</source>
         <translation>世纪（00-99）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="48"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Year (00-99)</source>
         <translation>年（00-99）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="49"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Year (2000)</source>
         <translation>年（2000）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="50"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Month Name (jan)</source>
         <translation>月（1月 - 12月）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="51"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Month Name (january)</source>
         <translation>月（一月 - 十二月）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="52"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Month (01-12)</source>
         <translation>月 (01-12)</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="53"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Week Day (1-7)</source>
         <translation>周内的日（1-7）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="54"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
         <source>Week (01-53)</source>
         <translation>周（01-53）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="55"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Day Name (mon)</source>
         <translation>星期（一 - 七）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="56"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Day Name (monday)</source>
         <translation>星期（星期一 - 星期日）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="57"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Day (01-31)</source>
         <translation>天（01-31）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="58"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Day of Month (1-31)</source>
         <translation>一月中的某天（1-31）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="59"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Day (001-366)</source>
         <translation>天（001-366）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="60"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Time (%H-%M-%S)</source>
         <translation>时间（%H-%M-%S）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="61"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Time (%H-%M)</source>
         <translation>时间（%H-%M）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="62"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
         <source>Hour (00-23)</source>
         <translation>小时（00-23）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="63"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Hour (01-12)</source>
         <translation>小时（01-12）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="64"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Minute (00-59)</source>
         <translation>分钟（00-59）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="65"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Second (00-59)</source>
         <translation>秒（00-59）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="66"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="70"/>
         <source>Full Date (%m/%d/%y)</source>
         <translation>完整日期（%m/%d/%y）</translation>
     </message>
     <message>
-        <location filename="../src/config/strftimechooserwidget.cpp" line="67"/>
+        <location filename="../src/config/strftimechooserwidget.cpp" line="71"/>
         <source>Full Date (%Y-%m-%d)</source>
         <translation>完整日期（%Y-%m-%d）</translation>
     </message>
@@ -1243,7 +1243,7 @@ You can find me in the system tray.</source>
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../src/utils/systemnotification.cpp" line="29"/>
+        <location filename="../src/utils/systemnotification.cpp" line="36"/>
         <source>Flameshot Info</source>
         <translation>Flameshot 消息</translation>
     </message>
@@ -1251,22 +1251,22 @@ You can find me in the system tray.</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../src/tools/text/textconfig.cpp" line="49"/>
+        <location filename="../src/tools/text/textconfig.cpp" line="55"/>
         <source>StrikeOut</source>
         <translation>删除线</translation>
     </message>
     <message>
-        <location filename="../src/tools/text/textconfig.cpp" line="56"/>
+        <location filename="../src/tools/text/textconfig.cpp" line="64"/>
         <source>Underline</source>
         <translation>下划线</translation>
     </message>
     <message>
-        <location filename="../src/tools/text/textconfig.cpp" line="63"/>
+        <location filename="../src/tools/text/textconfig.cpp" line="73"/>
         <source>Bold</source>
         <translation>粗体</translation>
     </message>
     <message>
-        <location filename="../src/tools/text/textconfig.cpp" line="70"/>
+        <location filename="../src/tools/text/textconfig.cpp" line="82"/>
         <source>Italic</source>
         <translation>斜体</translation>
     </message>
@@ -1274,12 +1274,12 @@ You can find me in the system tray.</source>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../src/tools/text/texttool.cpp" line="50"/>
+        <location filename="../src/tools/text/texttool.cpp" line="57"/>
         <source>Text</source>
         <translation>文本</translation>
     </message>
     <message>
-        <location filename="../src/tools/text/texttool.cpp" line="58"/>
+        <location filename="../src/tools/text/texttool.cpp" line="67"/>
         <source>Add text to your capture</source>
         <translation>在您的捕获中添加文本</translation>
     </message>
@@ -1287,37 +1287,37 @@ You can find me in the system tray.</source>
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="30"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="32"/>
         <source>UI Color Editor</source>
         <translation>用户界面颜色编辑器</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="93"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="103"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>移动颜色选择并在预览按钮查看。</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="103"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="114"/>
         <source>Select a Button to modify it</source>
         <translation>选择一个按钮以进行修改</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="112"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="124"/>
         <source>Main Color</source>
         <translation>主色</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="116"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="128"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>点击按钮设置主色。</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="127"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="139"/>
         <source>Contrast Color</source>
         <translation>对比色</translation>
     </message>
     <message>
-        <location filename="../src/config/uicoloreditor.cpp" line="132"/>
+        <location filename="../src/config/uicoloreditor.cpp" line="144"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>点击按钮设置对比色。</translation>
     </message>
@@ -1325,12 +1325,12 @@ You can find me in the system tray.</source>
 <context>
     <name>UndoTool</name>
     <message>
-        <location filename="../src/tools/undo/undotool.cpp" line="34"/>
+        <location filename="../src/tools/undo/undotool.cpp" line="37"/>
         <source>Undo</source>
         <translation>撤消</translation>
     </message>
     <message>
-        <location filename="../src/tools/undo/undotool.cpp" line="42"/>
+        <location filename="../src/tools/undo/undotool.cpp" line="47"/>
         <source>Undo the last modification</source>
         <translation>撤消上次修改</translation>
     </message>
@@ -1338,7 +1338,7 @@ You can find me in the system tray.</source>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../src/widgets/panel/utilitypanel.cpp" line="112"/>
+        <location filename="../src/widgets/panel/utilitypanel.cpp" line="124"/>
         <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1346,17 +1346,17 @@ You can find me in the system tray.</source>
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="53"/>
+        <location filename="../src/config/visualseditor.cpp" line="59"/>
         <source>Opacity of area outside selection:</source>
         <translation>选中区域之外的不透明度：</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="77"/>
+        <location filename="../src/config/visualseditor.cpp" line="85"/>
         <source>Button Selection</source>
         <translation>按钮选择</translation>
     </message>
     <message>
-        <location filename="../src/config/visualseditor.cpp" line="83"/>
+        <location filename="../src/config/visualseditor.cpp" line="91"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>

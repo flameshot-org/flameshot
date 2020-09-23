@@ -19,31 +19,32 @@
 
 #include <QWidget>
 
-class LoadSpinner : public QWidget {
+class LoadSpinner : public QWidget
+{
     Q_OBJECT
 public:
-    explicit LoadSpinner(QWidget *parent = nullptr);
+    explicit LoadSpinner(QWidget* parent = nullptr);
 
-    void setColor(const QColor &c);
+    void setColor(const QColor& c);
     void setWidth(int w);
     void setHeight(int h);
     void start();
     void stop();
 
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent*);
 
 private slots:
     void rotate();
 
 private:
     QColor m_color;
-    QTimer *m_timer;
+    QTimer* m_timer;
 
     int m_startAngle = 0;
-    int m_span =180;
+    int m_span = 180;
     bool m_growing;
 
-    QRect  m_frame;
+    QRect m_frame;
     void updateFrame();
 };

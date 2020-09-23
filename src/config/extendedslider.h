@@ -20,10 +20,11 @@
 #include <QSlider>
 #include <QTimer>
 
-class ExtendedSlider : public QSlider {
+class ExtendedSlider : public QSlider
+{
     Q_OBJECT
 public:
-    explicit ExtendedSlider(QWidget *parent = nullptr);
+    explicit ExtendedSlider(QWidget* parent = nullptr);
 
     int mappedValue(int min, int max);
     void setMapedValue(int min, int val, int max);
