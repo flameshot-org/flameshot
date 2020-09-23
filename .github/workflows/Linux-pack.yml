@@ -26,15 +26,16 @@ env:
 
 jobs:
   deb-pack:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
       matrix:
-        dist: [debian-10, ubuntu-20.04]
+        dist: [debian-10, ubuntu-18.04, ubuntu-20.04]
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
       - name: Get packpack tool
+        if: matrix.dist != 'ubuntu-18.04'
         uses: actions/checkout@v2
         with:
           # flameshot-org/packpack or packpack/packpack
@@ -48,6 +49,38 @@ jobs:
         env:
           OS: debian 
           DIST: buster
+      # Please note packaging on ubuntu 18.04 will base on github actions Ubuntu 18.04.5 LTS images, 
+      # it already has cmake installed(cmake version 3.17.0). 
+      # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md
+      - name: Packaging on ${{ matrix.dist }}
+        if: matrix.dist == 'ubuntu-18.04'
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/build
+          cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
+
+          sudo apt-get -y -qq update
+          sudo apt-get -y --no-install-recommends install \
+            build-essential \
+            debhelper \
+            fakeroot \
+            qt5-default \
+            qttools5-dev-tools \
+            qttools5-dev \
+            libqt5dbus5 \
+            libqt5network5 \
+            libqt5core5a \
+            libqt5widgets5 \
+            libqt5gui5 \
+            libqt5svg5-dev
+
+          echo "=======CMAKE VERSION========"
+          cmake --version
+          echo "============================"
+
+          sed -e "/cmake (>= 3.13~),/d" -i $GITHUB_WORKSPACE/debian/control
+          dpkg-buildpackage -b
+
+          cp $GITHUB_WORKSPACE/../${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb
       - name: Packaging on ${{ matrix.dist }}
         if: matrix.dist == 'ubuntu-20.04'
         run: |
