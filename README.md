@@ -48,6 +48,8 @@
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
 - [Considerations](#considerations)
 - [Installation](#installation)
+  - [Prebuilt Packages](#prebuilt-packages)
+  - [Packages from Repository](#packages-from-repository)
 - [Compilation](#compilation)
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
@@ -227,7 +229,21 @@ Steps for using the configuration:
 
 ## Installation
 
-There are packages available for a few distros:
+Flameshot can be installed on Linux and Microsoft Windows currently.
+
+There are no macOS port of flameshot now. Please participate in the development 
+of flameshot and help us make a macOS port.
+
+### Prebuilt packages
+
+Some prebuilt packages are provided on the release page of the GitHub project
+repository.
+[Click here to visit the release page.](https://github.com/flameshot-org/flameshot/releases).
+
+### Packages from Repository
+
+There are packages available in the repository of
+some Linux distributions:
 
 - [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
