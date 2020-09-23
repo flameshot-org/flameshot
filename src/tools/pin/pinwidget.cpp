@@ -17,18 +17,18 @@
 
 #include "pinwidget.h"
 #include "src/utils/confighandler.h"
+#include <QApplication>
 #include <QLabel>
+#include <QShortcut>
 #include <QVBoxLayout>
 #include <QWheelEvent>
-#include <QApplication>
-#include <QShortcut>
 
-PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
-    QWidget(parent), m_pixmap(pixmap)
+PinWidget::PinWidget(const QPixmap& pixmap, QWidget* parent)
+  : QWidget(parent)
+  , m_pixmap(pixmap)
 {
-    setWindowFlags(Qt::WindowStaysOnTopHint
-                   | Qt::FramelessWindowHint);
-    //set the bottom widget background transparent
+    setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
 
     ConfigHandler conf;
@@ -53,11 +53,13 @@ PinWidget::PinWidget(const QPixmap &pixmap, QWidget *parent) :
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
 
-int PinWidget::margin() const {
+int PinWidget::margin() const
+{
     return 7;
 }
 
-void PinWidget::wheelEvent(QWheelEvent *e) {
+void PinWidget::wheelEvent(QWheelEvent* e)
+{
     int val = e->delta() > 0 ? 15 : -15;
     int newWidth = qBound(50, m_label->width() + val, maximumWidth());
     int newHeight = qBound(50, m_label->height() + val, maximumHeight());
@@ -69,34 +71,41 @@ void PinWidget::wheelEvent(QWheelEvent *e) {
     e->accept();
 }
 
-void PinWidget::enterEvent(QEvent *) {
+void PinWidget::enterEvent(QEvent*)
+{
     m_shadowEffect->setColor(m_hoverColor);
 }
-void PinWidget::leaveEvent(QEvent *) {
+void PinWidget::leaveEvent(QEvent*)
+{
     m_shadowEffect->setColor(m_baseColor);
 }
 
-void PinWidget::mouseDoubleClickEvent(QMouseEvent *) {
+void PinWidget::mouseDoubleClickEvent(QMouseEvent*)
+{
     close();
 }
 
-void PinWidget::mousePressEvent(QMouseEvent *e) {
+void PinWidget::mousePressEvent(QMouseEvent* e)
+{
     m_dragStart = e->globalPos();
-    m_offsetX =  e->localPos().x() / width();
+    m_offsetX = e->localPos().x() / width();
     m_offsetY = e->localPos().y() / height();
 }
 
-void PinWidget::mouseMoveEvent(QMouseEvent *e) {
+void PinWidget::mouseMoveEvent(QMouseEvent* e)
+{
     const QPoint delta = e->globalPos() - m_dragStart;
     int offsetW = width() * m_offsetX;
     int offsetH = height() * m_offsetY;
-    move(m_dragStart.x() + delta.x() - offsetW, m_dragStart.y() + delta.y() - offsetH);
+    move(m_dragStart.x() + delta.x() - offsetW,
+         m_dragStart.y() + delta.y() - offsetH);
 }
 
-void PinWidget::setScaledPixmap(const QSize &size) {
+void PinWidget::setScaledPixmap(const QSize& size)
+{
     const qreal scale = qApp->devicePixelRatio();
-    QPixmap scaledPixmap = m_pixmap.scaled(size * scale, Qt::KeepAspectRatio,
-                                           Qt::SmoothTransformation);
+    QPixmap scaledPixmap = m_pixmap.scaled(
+      size * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     scaledPixmap.setDevicePixelRatio(scale);
     m_label->setPixmap(scaledPixmap);
 }

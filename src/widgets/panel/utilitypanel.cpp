@@ -17,13 +17,15 @@
 
 #include "utilitypanel.h"
 #include <QPropertyAnimation>
-#include <QVBoxLayout>
-#include <QTimer>
-#include <QScrollArea>
-#include <QWheelEvent>
 #include <QPushButton>
+#include <QScrollArea>
+#include <QTimer>
+#include <QVBoxLayout>
+#include <QWheelEvent>
 
-UtilityPanel::UtilityPanel(QWidget *parent) : QWidget(parent) {
+UtilityPanel::UtilityPanel(QWidget* parent)
+  : QWidget(parent)
+{
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setCursor(Qt::ArrowCursor);
@@ -36,15 +38,19 @@ UtilityPanel::UtilityPanel(QWidget *parent) : QWidget(parent) {
     m_hideAnimation->setEasingCurve(QEasingCurve::InOutQuad);
     m_hideAnimation->setDuration(300);
 
-    connect(m_hideAnimation, &QPropertyAnimation::finished,
-            m_internalPanel, &QWidget::hide);
+    connect(m_hideAnimation,
+            &QPropertyAnimation::finished,
+            m_internalPanel,
+            &QWidget::hide);
 }
 
-QWidget *UtilityPanel::toolWidget() const {
+QWidget* UtilityPanel::toolWidget() const
+{
     return m_toolWidget;
 }
 
-void UtilityPanel::addToolWidget(QWidget *w) {
+void UtilityPanel::addToolWidget(QWidget* w)
+{
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
     }
@@ -54,17 +60,20 @@ void UtilityPanel::addToolWidget(QWidget *w) {
     }
 }
 
-void UtilityPanel::clearToolWidget() {
+void UtilityPanel::clearToolWidget()
+{
     if (m_toolWidget) {
         m_toolWidget->deleteLater();
     }
 }
 
-void UtilityPanel::pushWidget(QWidget *w) {
+void UtilityPanel::pushWidget(QWidget* w)
+{
     m_layout->addWidget(w);
 }
 
-void UtilityPanel::show() {
+void UtilityPanel::show()
+{
     setAttribute(Qt::WA_TransparentForMouseEvents, false);
     m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
     m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
@@ -73,7 +82,8 @@ void UtilityPanel::show() {
     QWidget::show();
 }
 
-void UtilityPanel::hide() {
+void UtilityPanel::hide()
+{
     setAttribute(Qt::WA_TransparentForMouseEvents);
     m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
     m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
@@ -82,7 +92,8 @@ void UtilityPanel::hide() {
     QWidget::hide();
 }
 
-void UtilityPanel::toggle() {
+void UtilityPanel::toggle()
+{
     if (m_internalPanel->isHidden()) {
         show();
     } else {
@@ -90,10 +101,11 @@ void UtilityPanel::toggle() {
     }
 }
 
-void UtilityPanel::initInternalPanel() {
+void UtilityPanel::initInternalPanel()
+{
     m_internalPanel = new QScrollArea(this);
     m_internalPanel->setAttribute(Qt::WA_NoMousePropagation);
-    QWidget *widget = new QWidget();
+    QWidget* widget = new QWidget();
     m_internalPanel->setWidget(widget);
     m_internalPanel->setWidgetResizable(true);
 
@@ -104,8 +116,8 @@ void UtilityPanel::initInternalPanel() {
 
     QColor bgColor = palette().background().color();
     bgColor.setAlphaF(0.0);
-    m_internalPanel->setStyleSheet(QStringLiteral("QScrollArea {background-color: %1}")
-                                   .arg(bgColor.name()));
+    m_internalPanel->setStyleSheet(
+      QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
     m_internalPanel->hide();
 
     m_hide = new QPushButton();
@@ -114,6 +126,7 @@ void UtilityPanel::initInternalPanel() {
     connect(m_hide, SIGNAL(clicked()), this, SLOT(slotHidePanel()));
 }
 
-void UtilityPanel::slotHidePanel() {
+void UtilityPanel::slotHidePanel()
+{
     hide();
 }

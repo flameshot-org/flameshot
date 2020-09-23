@@ -16,51 +16,60 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "blurtool.h"
-#include <QPainter>
+#include <QApplication>
 #include <QGraphicsBlurEffect>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
-#include <QApplication>
+#include <QPainter>
 
-BlurTool::BlurTool(QObject *parent) : AbstractTwoPointTool(parent) {
+BlurTool::BlurTool(QObject* parent)
+  : AbstractTwoPointTool(parent)
+{}
 
-}
-
-QIcon BlurTool::icon(const QColor &background, bool inEditor) const {
+QIcon BlurTool::icon(const QColor& background, bool inEditor) const
+{
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "blur.svg");
 }
-QString BlurTool::name() const {
+QString BlurTool::name() const
+{
     return tr("Blur");
 }
 
-QString BlurTool::nameID() {
+QString BlurTool::nameID()
+{
     return QLatin1String("");
 }
 
-QString BlurTool::description() const {
+QString BlurTool::description() const
+{
     return tr("Set Blur as the paint tool");
 }
 
-CaptureTool* BlurTool::copy(QObject *parent) {
+CaptureTool* BlurTool::copy(QObject* parent)
+{
     return new BlurTool(parent);
 }
 
-void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo) {
+void BlurTool::process(QPainter& painter,
+                       const QPixmap& pixmap,
+                       bool recordUndo)
+{
     if (recordUndo) {
         updateBackup(pixmap);
     }
-    QPoint &p0 = m_points.first;
-    QPoint &p1 = m_points.second;
+    QPoint& p0 = m_points.first;
+    QPoint& p1 = m_points.second;
     auto pixelRatio = pixmap.devicePixelRatio();
 
     QRect selection = QRect(p0, p1).normalized();
-    QRect selectionScaled = QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
+    QRect selectionScaled =
+      QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
-    QGraphicsBlurEffect *blur = new QGraphicsBlurEffect;
+    QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
     blur->setBlurRadius(10);
-    QGraphicsPixmapItem *item = new QGraphicsPixmapItem (
-                pixmap.copy(selectionScaled));
+    QGraphicsPixmapItem* item =
+      new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
     item->setGraphicsEffect(blur);
 
     QGraphicsScene scene;
@@ -68,22 +77,26 @@ void BlurTool::process(QPainter &painter, const QPixmap &pixmap, bool recordUndo
 
     scene.render(&painter, selection, QRectF());
     blur->setBlurRadius(12);
-    for(int cnt = 100; cnt > 0; cnt--){
+    for (int cnt = 100; cnt > 0; cnt--) {
         scene.render(&painter, selection, QRectF());
     }
 }
 
-void BlurTool::paintMousePreview(QPainter &painter, const CaptureContext &context) {
+void BlurTool::paintMousePreview(QPainter& painter,
+                                 const CaptureContext& context)
+{
     Q_UNUSED(context);
     Q_UNUSED(painter);
 }
 
-void BlurTool::drawStart(const CaptureContext &context) {
+void BlurTool::drawStart(const CaptureContext& context)
+{
     m_thickness = context.thickness;
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
 }
 
-void BlurTool::pressed(const CaptureContext &context) {
+void BlurTool::pressed(const CaptureContext& context)
+{
     Q_UNUSED(context);
 }

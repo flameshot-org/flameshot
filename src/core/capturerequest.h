@@ -17,19 +17,22 @@
 
 #pragma once
 
-#include <QString>
 #include <QPixmap>
+#include <QString>
 #include <QVariant>
 
-class CaptureRequest {
+class CaptureRequest
+{
 public:
-    enum CaptureMode {
+    enum CaptureMode
+    {
         FULLSCREEN_MODE,
         GRAPHICAL_MODE,
         SCREEN_MODE,
     };
 
-    enum ExportTask {
+    enum ExportTask
+    {
         NO_TASK = 0,
         CLIPBOARD_SAVE_TASK = 1,
         FILESYSTEM_SAVE_TASK = 2,
@@ -37,8 +40,8 @@ public:
 
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
-                   const QString &path = QLatin1String(""),
-                   const QVariant &data = QVariant(),
+                   const QString& path = QLatin1String(""),
+                   const QVariant& data = QVariant(),
                    ExportTask tasks = NO_TASK);
 
     void setStaticID(uint id);
@@ -50,7 +53,7 @@ public:
     CaptureMode captureMode() const;
 
     void addTask(ExportTask task);
-    void exportCapture(const QPixmap &p);
+    void exportCapture(const QPixmap& p);
 
 private:
     CaptureMode m_mode;
@@ -65,16 +68,18 @@ private:
 
 using eTask = CaptureRequest::ExportTask;
 
-inline eTask operator|(const eTask &a, const eTask &b) {
+inline eTask operator|(const eTask& a, const eTask& b)
+{
     return static_cast<eTask>(static_cast<int>(a) | static_cast<int>(b));
 }
 
-inline eTask operator&(const eTask &a, const eTask &b) {
+inline eTask operator&(const eTask& a, const eTask& b)
+{
     return static_cast<eTask>(static_cast<int>(a) & static_cast<int>(b));
 }
 
-inline eTask& operator|=(eTask &a, const eTask &b) {
+inline eTask& operator|=(eTask& a, const eTask& b)
+{
     a = static_cast<eTask>(static_cast<int>(a) | static_cast<int>(b));
     return a;
 }
-

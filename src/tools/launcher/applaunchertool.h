@@ -19,24 +19,25 @@
 
 #include "src/tools/abstractactiontool.h"
 
-class AppLauncher : public AbstractActionTool {
+class AppLauncher : public AbstractActionTool
+{
     Q_OBJECT
 public:
-    explicit AppLauncher(QObject *parent = nullptr);
+    explicit AppLauncher(QObject* parent = nullptr);
 
     bool closeOnButtonPressed() const;
 
-    QIcon icon(const QColor &background, bool inEditor) const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     static QString nameID();
     QString description() const override;
 
     QWidget* widget() override;
 
-    CaptureTool* copy(QObject *parent = nullptr) override;
+    CaptureTool* copy(QObject* parent = nullptr) override;
 
 public slots:
-    void pressed(const CaptureContext &context) override;
+    void pressed(const CaptureContext& context) override;
 
 private:
     QPixmap capture;

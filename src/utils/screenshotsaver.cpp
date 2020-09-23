@@ -17,26 +17,24 @@
 
 #include "screenshotsaver.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/systemnotification.h"
 #include "src/utils/filenamehandler.h"
-#include "src/utils/confighandler.h"
-#include <QClipboard>
+#include "src/utils/systemnotification.h"
 #include <QApplication>
-#include <QMessageBox>
+#include <QClipboard>
 #include <QFileDialog>
 #include <QImageWriter>
+#include <QMessageBox>
 
-ScreenshotSaver::ScreenshotSaver() {
-}
+ScreenshotSaver::ScreenshotSaver() {}
 
-void ScreenshotSaver::saveToClipboard(const QPixmap &capture) {
-    SystemNotification().sendMessage(
-                QObject::tr("Capture saved to clipboard"));
+void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
+{
+    SystemNotification().sendMessage(QObject::tr("Capture saved to clipboard"));
     QApplication::clipboard()->setPixmap(capture);
 }
 
-bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
-                                       const QString &path)
+bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
+                                       const QString& path)
 {
     QString completePath = FileNameHandler().generateAbsolutePath(path);
     completePath += QLatin1String(".png");
@@ -56,17 +54,19 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap &capture,
     return ok;
 }
 
-bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
+bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
+{
     bool ok = false;
     while (!ok) {
         ConfigHandler config;
         QString savePath = FileNameHandler().absoluteSavePath();
-        if(config.savePathFixed().size() == 0) {
+        if (config.savePathFixed().size() == 0) {
             savePath = QFileDialog::getSaveFileName(
-                        nullptr,
-                        QObject::tr("Save screenshot"),
-                        FileNameHandler().absoluteSavePath(),
-                        QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file (*.bmp);;JPEG file (*.jpg)"));
+              nullptr,
+              QObject::tr("Save screenshot"),
+              FileNameHandler().absoluteSavePath(),
+              QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
+                            "file (*.bmp);;JPEG file (*.jpg)"));
         }
 
         if (savePath.isNull()) {
@@ -84,20 +84,21 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap &capture) {
 
         if (ok) {
             ConfigHandler config;
-            QString pathNoFile = savePath.left(savePath.lastIndexOf(QLatin1String("/")));
+            QString pathNoFile =
+              savePath.left(savePath.lastIndexOf(QLatin1String("/")));
             config.setSavePath(pathNoFile);
             QString msg = QObject::tr("Capture saved as ") + savePath;
-            if(config.copyPathAfterSaveEnabled()) {
+            if (config.copyPathAfterSaveEnabled()) {
                 QApplication::clipboard()->setText(savePath);
-                msg = QObject::tr("Capture saved and copied to the clipboard as ") + savePath;
+                msg =
+                  QObject::tr("Capture saved and copied to the clipboard as ") +
+                  savePath;
             }
             SystemNotification().sendMessage(msg, savePath);
         } else {
             QString msg = QObject::tr("Error trying to save as ") + savePath;
             QMessageBox saveErrBox(
-                        QMessageBox::Warning,
-                        QObject::tr("Save Error"),
-                        msg);
+              QMessageBox::Warning, QObject::tr("Save Error"), msg);
             saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
             saveErrBox.exec();
         }
