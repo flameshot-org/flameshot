@@ -17,21 +17,23 @@
 
 #pragma once
 
-#include <QPushButton>
 #include <QMap>
+#include <QPushButton>
 #include <QVector>
 
 class QWidget;
 class QPropertyAnimation;
 class CaptureTool;
 
-class CaptureButton : public QPushButton {
+class CaptureButton : public QPushButton
+{
     Q_OBJECT
 
 public:
     // Don't forget to add the new types to CaptureButton::iterableButtonTypes
     // in the .cpp and the order value in the private array buttonTypeOrder
-    enum ButtonType {
+    enum ButtonType
+    {
         TYPE_PENCIL = 0,
         TYPE_DRAWER = 1,
         TYPE_ARROW = 2,
@@ -60,7 +62,7 @@ public:
 #endif
 
     CaptureButton() = delete;
-    explicit CaptureButton(const ButtonType, QWidget *parent = nullptr);
+    explicit CaptureButton(const ButtonType, QWidget* parent = nullptr);
 
     static QString globalStyleSheet();
     static QVector<CaptureButton::ButtonType> getIterableButtonTypes();
@@ -72,23 +74,23 @@ public:
     QString styleSheet() const;
     CaptureTool* tool() const;
 
-    void setColor(const QColor &c);
+    void setColor(const QColor& c);
     void animatedShow();
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mousePressEvent(QMouseEvent*);
     static QVector<ButtonType> iterableButtonTypes;
 
-    CaptureTool *m_tool;
+    CaptureTool* m_tool;
 
 signals:
-    void pressedButton(CaptureButton *);
+    void pressedButton(CaptureButton*);
 
 private:
-    CaptureButton(QWidget *parent = nullptr);
+    CaptureButton(QWidget* parent = nullptr);
     ButtonType m_buttonType;
 
-    QPropertyAnimation *m_emergeAnimation;
+    QPropertyAnimation* m_emergeAnimation;
 
     static QColor m_mainColor;
 

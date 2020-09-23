@@ -3,16 +3,15 @@
 
 class QSettings;
 
-
 class ConfigEnterprise
 {
 public:
     ConfigEnterprise();
 
-    QSettings *settings();
+    QSettings* settings();
 
 private:
-    QSettings *m_settings;
+    QSettings* m_settings;
 };
 
 #endif // CONFIGENTERPRISE_H

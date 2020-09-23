@@ -19,28 +19,29 @@
 
 #include "capturetool.h"
 
-class AbstractTwoPointTool : public CaptureTool {
+class AbstractTwoPointTool : public CaptureTool
+{
     Q_OBJECT
 public:
-    explicit AbstractTwoPointTool(QObject *parent = nullptr);
+    explicit AbstractTwoPointTool(QObject* parent = nullptr);
 
     bool isValid() const override;
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
 
-    void undo(QPixmap &pixmap) override;
+    void undo(QPixmap& pixmap) override;
 
 public slots:
-    void drawEnd(const QPoint &p) override;
-    void drawMove(const QPoint &p) override;
-    void drawMoveWithAdjustment(const QPoint &p) override;
-    void colorChanged(const QColor &c) override;
+    void drawEnd(const QPoint& p) override;
+    void drawMove(const QPoint& p) override;
+    void drawMoveWithAdjustment(const QPoint& p) override;
+    void colorChanged(const QColor& c) override;
     void thicknessChanged(const int th) override;
 
 protected:
-    void updateBackup(const QPixmap &pixmap);
-    QRect backupRect(const QRect &limits) const;
+    void updateBackup(const QPixmap& pixmap);
+    QRect backupRect(const QRect& limits) const;
 
     QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;

@@ -19,11 +19,13 @@
 
 #include <QString>
 
-class DesktopInfo {
+class DesktopInfo
+{
 public:
     DesktopInfo();
 
-    enum WM {
+    enum WM
+    {
         GNOME,
         KDE,
         OTHER

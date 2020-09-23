@@ -21,34 +21,38 @@
 #include <QListWidgetItem>
 #include <algorithm>
 
-ButtonListView::ButtonListView(QWidget *parent) : QListWidget(parent) {
+ButtonListView::ButtonListView(QWidget* parent)
+  : QListWidget(parent)
+{
     setMouseTracking(true);
     setFlow(QListWidget::TopToBottom);
     initButtonList();
     updateComponents();
-    connect(this, &QListWidget::itemClicked, this,
-            &ButtonListView::reverseItemCheck);
+    connect(
+      this, &QListWidget::itemClicked, this, &ButtonListView::reverseItemCheck);
 }
 
-void ButtonListView::initButtonList() {
+void ButtonListView::initButtonList()
+{
     ToolFactory factory;
     auto listTypes = CaptureButton::getIterableButtonTypes();
 
-    for (const CaptureButton::ButtonType t: listTypes) {
-        CaptureTool *tool = factory.CreateTool(t);
+    for (const CaptureButton::ButtonType t : listTypes) {
+        CaptureTool* tool = factory.CreateTool(t);
 
         // add element to the local map
         m_buttonTypeByName.insert(tool->name(), t);
 
         // init the menu option
-        QListWidgetItem *m_buttonItem = new QListWidgetItem(this);
+        QListWidgetItem* m_buttonItem = new QListWidgetItem(this);
 
         // when the background is lighter than gray, it uses the white icons
         QColor bgColor = this->palette().color(QWidget::backgroundRole());
         m_buttonItem->setIcon(tool->icon(bgColor, false));
 
         m_buttonItem->setFlags(Qt::ItemIsUserCheckable);
-        QColor foregroundColor = this->palette().color(QWidget::foregroundRole());
+        QColor foregroundColor =
+          this->palette().color(QWidget::foregroundRole());
         m_buttonItem->setForeground(foregroundColor);
 
         m_buttonItem->setText(tool->name());
@@ -57,15 +61,16 @@ void ButtonListView::initButtonList() {
     }
 }
 
-void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
+void ButtonListView::updateActiveButtons(QListWidgetItem* item)
+{
     CaptureButton::ButtonType bType = m_buttonTypeByName[item->text()];
     if (item->checkState() == Qt::Checked) {
         m_listButtons.append(bType);
         // TODO refactor so we don't need external sorts
         using bt = CaptureButton::ButtonType;
-        std::sort(m_listButtons.begin(), m_listButtons.end(), [](bt a, bt b){
+        std::sort(m_listButtons.begin(), m_listButtons.end(), [](bt a, bt b) {
             return CaptureButton::getPriorityByButton(a) <
-                    CaptureButton::getPriorityByButton(b);
+                   CaptureButton::getPriorityByButton(b);
         });
     } else {
         m_listButtons.remove(m_listButtons.indexOf(bType));
@@ -73,7 +78,8 @@ void ButtonListView::updateActiveButtons(QListWidgetItem *item) {
     ConfigHandler().setButtons(m_listButtons);
 }
 
-void ButtonListView::reverseItemCheck(QListWidgetItem *item){
+void ButtonListView::reverseItemCheck(QListWidgetItem* item)
+{
     if (item->checkState() == Qt::Checked) {
         item->setCheckState(Qt::Unchecked);
     } else {
@@ -82,18 +88,20 @@ void ButtonListView::reverseItemCheck(QListWidgetItem *item){
     updateActiveButtons(item);
 }
 
-void ButtonListView::selectAll() {
+void ButtonListView::selectAll()
+{
     ConfigHandler().setAllTheButtons();
-    for(int i = 0; i < this->count(); ++i) {
+    for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
         item->setCheckState(Qt::Checked);
     }
 }
 
-void ButtonListView::updateComponents() {
+void ButtonListView::updateComponents()
+{
     m_listButtons = ConfigHandler().getButtons();
     auto listTypes = CaptureButton::getIterableButtonTypes();
-    for(int i = 0; i < this->count(); ++i) {
+    for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
         auto elem = static_cast<CaptureButton::ButtonType>(listTypes.at(i));
         if (m_listButtons.contains(elem)) {

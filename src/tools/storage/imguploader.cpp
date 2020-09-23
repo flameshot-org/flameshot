@@ -203,7 +203,7 @@ const QUrl& ImgUploader::imageUrl()
     return m_imageURL;
 }
 
-void ImgUploader::showNotificationMessage(const QString& notificationMessage) {
+void ImgUploader::showNotificationMessage(const QString& notificationMessage)
+{
     m_notification->showMessage(notificationMessage);
 }
-

@@ -17,17 +17,18 @@
 
 #pragma once
 
-#include <QUndoCommand>
 #include "src/tools/capturetool.h"
+#include <QUndoCommand>
 
-class ModificationCommand : public QUndoCommand {
+class ModificationCommand : public QUndoCommand
+{
 public:
-    ModificationCommand(QPixmap *, CaptureTool *);
+    ModificationCommand(QPixmap*, CaptureTool*);
 
     virtual void undo() override;
     virtual void redo() override;
 
 private:
-    QPixmap *m_pixmap;
+    QPixmap* m_pixmap;
     QScopedPointer<CaptureTool> m_tool;
 };

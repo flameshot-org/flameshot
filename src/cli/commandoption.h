@@ -22,36 +22,40 @@
 
 using std::function;
 
-class CommandOption {
+class CommandOption
+{
 public:
-    CommandOption(const QString &name, const QString &description,
-                  const QString &valueName = QString(),
-                  const QString &defaultValue = QString());
+    CommandOption(const QString& name,
+                  const QString& description,
+                  const QString& valueName = QString(),
+                  const QString& defaultValue = QString());
 
-    CommandOption(const QStringList &names, const QString &description,
-                  const QString &valueName = QString(),
-                  const QString &defaultValue = QString());
+    CommandOption(const QStringList& names,
+                  const QString& description,
+                  const QString& valueName = QString(),
+                  const QString& defaultValue = QString());
 
-    void setName(const QString &name);
-    void setNames(const QStringList &names);
+    void setName(const QString& name);
+    void setNames(const QStringList& names);
     QStringList names() const;
     QStringList dashedNames() const;
 
-    void setValueName(const QString &name);
+    void setValueName(const QString& name);
     QString valueName() const;
 
-    void setValue(const QString &value);
+    void setValue(const QString& value);
     QString value() const;
 
-    void addChecker(const function<bool(QString const&)> checker, const QString &errMsg);
-    bool checkValue(const QString &value) const;
+    void addChecker(const function<bool(QString const&)> checker,
+                    const QString& errMsg);
+    bool checkValue(const QString& value) const;
 
     QString description() const;
-    void setDescription(const QString &description);
+    void setDescription(const QString& description);
 
     QString errorMsg() const;
 
-    bool operator==(const CommandOption &option) const;
+    bool operator==(const CommandOption& option) const;
 
 private:
     QStringList m_names;

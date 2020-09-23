@@ -20,16 +20,17 @@
 #include "src/widgets/capture/capturebutton.h"
 #include <QListWidget>
 
-class ButtonListView : public QListWidget {
+class ButtonListView : public QListWidget
+{
 public:
-    explicit ButtonListView(QWidget *parent= nullptr);
+    explicit ButtonListView(QWidget* parent = nullptr);
 
 public slots:
     void selectAll();
     void updateComponents();
 
 private slots:
-    void reverseItemCheck(QListWidgetItem *);
+    void reverseItemCheck(QListWidgetItem*);
 
 protected:
     void initButtonList();
@@ -38,5 +39,5 @@ private:
     QVector<CaptureButton::ButtonType> m_listButtons;
     QMap<QString, CaptureButton::ButtonType> m_buttonTypeByName;
 
-    void updateActiveButtons(QListWidgetItem *);
+    void updateActiveButtons(QListWidgetItem*);
 };
