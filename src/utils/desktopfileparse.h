@@ -18,29 +18,32 @@
 #pragma once
 
 #include <QIcon>
-#include <QStringList>
 #include <QMap>
+#include <QStringList>
 
 class QDir;
 class QString;
 class QTextStream;
 
-struct DesktopAppData {
-    DesktopAppData() : showInTerminal() {}
-
-    DesktopAppData(
-            const QString &name,
-            const QString &description,
-            const QString &exec,
-            QIcon icon) :
-        name(name),
-        description(description),
-        exec(exec),
-        icon(icon),
-        showInTerminal(false)
+struct DesktopAppData
+{
+    DesktopAppData()
+      : showInTerminal()
     {}
 
-    bool operator==(const DesktopAppData &other) const {
+    DesktopAppData(const QString& name,
+                   const QString& description,
+                   const QString& exec,
+                   QIcon icon)
+      : name(name)
+      , description(description)
+      , exec(exec)
+      , icon(icon)
+      , showInTerminal(false)
+    {}
+
+    bool operator==(const DesktopAppData& other) const
+    {
         return name == other.name;
     }
 
@@ -52,14 +55,15 @@ struct DesktopAppData {
     bool showInTerminal;
 };
 
-struct DesktopFileParser {
+struct DesktopFileParser
+{
     DesktopFileParser();
-    DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
-    int processDirectory(const QDir &dir);
+    DesktopAppData parseDesktopFile(const QString& fileName, bool& ok) const;
+    int processDirectory(const QDir& dir);
 
-    QVector<DesktopAppData> getAppsByCategory(const QString &category);
+    QVector<DesktopAppData> getAppsByCategory(const QString& category);
     QMap<QString, QVector<DesktopAppData>> getAppsByCategory(
-            const QStringList &categories);
+      const QStringList& categories);
 
 private:
     QString m_localeName;

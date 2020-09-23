@@ -17,23 +17,24 @@
 
 #pragma once
 
-#include <QWidget>
 #include <QPointer>
+#include <QWidget>
 
 class QVBoxLayout;
 class QPropertyAnimation;
 class QScrollArea;
 class QPushButton;
 
-class UtilityPanel : public QWidget {
+class UtilityPanel : public QWidget
+{
     Q_OBJECT
 public:
-    explicit UtilityPanel(QWidget *parent = nullptr);
+    explicit UtilityPanel(QWidget* parent = nullptr);
 
     QWidget* toolWidget() const;
-    void addToolWidget(QWidget *w);
+    void addToolWidget(QWidget* w);
     void clearToolWidget();
-    void pushWidget(QWidget *w);
+    void pushWidget(QWidget* w);
     void hide();
     void show();
 
@@ -49,10 +50,10 @@ private:
     void initInternalPanel();
 
     QPointer<QWidget> m_toolWidget;
-    QScrollArea *m_internalPanel;
-    QVBoxLayout *m_upLayout;
-    QVBoxLayout *m_layout;
-    QPropertyAnimation *m_showAnimation;
-    QPropertyAnimation *m_hideAnimation;
-    QPushButton *m_hide;
+    QScrollArea* m_internalPanel;
+    QVBoxLayout* m_upLayout;
+    QVBoxLayout* m_layout;
+    QPropertyAnimation* m_showAnimation;
+    QPropertyAnimation* m_hideAnimation;
+    QPushButton* m_hide;
 };

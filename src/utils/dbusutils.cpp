@@ -18,34 +18,42 @@
 #include "dbusutils.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
-#include <QTextStream>
 #include <QFile>
+#include <QTextStream>
 
-DBusUtils::DBusUtils(QObject *parent) : QObject(parent) {
-}
+DBusUtils::DBusUtils(QObject* parent)
+  : QObject(parent)
+{}
 
-void DBusUtils::connectPrintCapture(QDBusConnection &session, uint id) {
+void DBusUtils::connectPrintCapture(QDBusConnection& session, uint id)
+{
     m_id = id;
     // captureTaken
     session.connect(QStringLiteral("org.dharkael.Flameshot"),
-                       QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureTaken"),
-                       this,
-                       SLOT(captureTaken(uint, QByteArray)));
+                    QStringLiteral("/"),
+                    QLatin1String(""),
+                    QStringLiteral("captureTaken"),
+                    this,
+                    SLOT(captureTaken(uint, QByteArray)));
     // captureFailed
     session.connect(QStringLiteral("org.dharkael.Flameshot"),
-                       QStringLiteral("/"), QLatin1String(""), QStringLiteral("captureFailed"),
-                       this,
-                       SLOT(captureFailed(uint)));
+                    QStringLiteral("/"),
+                    QLatin1String(""),
+                    QStringLiteral("captureFailed"),
+                    this,
+                    SLOT(captureFailed(uint)));
 }
 
-void DBusUtils::checkDBusConnection(const QDBusConnection &connection) {
+void DBusUtils::checkDBusConnection(const QDBusConnection& connection)
+{
     if (!connection.isConnected()) {
         SystemNotification().sendMessage(tr("Unable to connect via DBus"));
         qApp->exit(1);
     }
 }
 
-void DBusUtils::captureTaken(uint id, QByteArray rawImage) {
+void DBusUtils::captureTaken(uint id, QByteArray rawImage)
+{
     if (m_id == id) {
         QFile file;
         file.open(stdout, QIODevice::WriteOnly);
@@ -55,7 +63,8 @@ void DBusUtils::captureTaken(uint id, QByteArray rawImage) {
     }
 }
 
-void DBusUtils::captureFailed(uint id) {
+void DBusUtils::captureFailed(uint id)
+{
     if (m_id == id) {
         QTextStream(stdout) << "screenshot aborted\n";
         qApp->exit(1);

@@ -1,10 +1,8 @@
 #include "imguploadertool.h"
 
 ImgUploaderTool::ImgUploaderTool(QObject* parent)
-    : AbstractActionTool(parent)
-{
-
-}
+  : AbstractActionTool(parent)
+{}
 
 void ImgUploaderTool::setCapture(const QPixmap& pixmap)
 {
@@ -18,7 +16,8 @@ void ImgUploaderTool::pressed(const CaptureContext& context)
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
 }
 
-const QPixmap& ImgUploaderTool::capture() {
+const QPixmap& ImgUploaderTool::capture()
+{
     return m_capture;
 }
 
@@ -28,9 +27,7 @@ QIcon ImgUploaderTool::icon(const QColor& background, bool inEditor) const
     return QIcon(iconPath(background) + "cloud-upload.svg");
 }
 
-
 bool ImgUploaderTool::closeOnButtonPressed() const
 {
     return true;
 }
-

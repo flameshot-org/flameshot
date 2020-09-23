@@ -26,10 +26,11 @@ class QHBoxLayout;
 class CaptureButton;
 class ClickableLabel;
 
-class UIcolorEditor : public QGroupBox {
+class UIcolorEditor : public QGroupBox
+{
     Q_OBJECT
 public:
-    explicit UIcolorEditor(QWidget *parent = nullptr);
+    explicit UIcolorEditor(QWidget* parent = nullptr);
 
 public slots:
     void updateComponents();
@@ -37,21 +38,22 @@ public slots:
 private slots:
     void updateUIcolor();
     void updateLocalColor(const QColor);
-    void changeLastButton(CaptureButton *);
+    void changeLastButton(CaptureButton*);
 
 private:
     QColor m_uiColor, m_contrastColor;
-    CaptureButton *m_buttonMainColor;
-    ClickableLabel *m_labelMain;
-    CaptureButton *m_buttonContrast;
-    ClickableLabel *m_labelContrast;
-    CaptureButton *m_lastButtonPressed;
-    color_widgets::ColorWheel *m_colorWheel;
+    CaptureButton* m_buttonMainColor;
+    ClickableLabel* m_labelMain;
+    CaptureButton* m_buttonContrast;
+    ClickableLabel* m_labelContrast;
+    CaptureButton* m_lastButtonPressed;
+    color_widgets::ColorWheel* m_colorWheel;
 
-    static const CaptureButton::ButtonType m_buttonIconType = CaptureButton::TYPE_CIRCLE;
+    static const CaptureButton::ButtonType m_buttonIconType =
+      CaptureButton::TYPE_CIRCLE;
 
-    QHBoxLayout *m_hLayout;
-    QVBoxLayout *m_vLayout;
+    QHBoxLayout* m_hLayout;
+    QVBoxLayout* m_vLayout;
 
     void initColorWheel();
     void initButtons();

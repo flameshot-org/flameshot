@@ -2,10 +2,9 @@
 #define HOTKEYSCONFIG_H
 
 #include "src/utils/confighandler.h"
-#include <QWidget>
-#include <QVector>
 #include <QStringList>
-
+#include <QVector>
+#include <QWidget>
 
 class SetShortcutDialog;
 class QTableWidget;
@@ -15,8 +14,8 @@ class ShortcutsWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ShortcutsWidget(QWidget *parent = nullptr);
-    const QVector<QStringList> &shortcuts();
+    explicit ShortcutsWidget(QWidget* parent = nullptr);
+    const QVector<QStringList>& shortcuts();
 
 private:
     void initInfoTable();
@@ -26,8 +25,8 @@ private slots:
 
 private:
     ConfigHandler m_config;
-    QTableWidget *m_table;
-    QVBoxLayout *m_layout;
+    QTableWidget* m_table;
+    QVBoxLayout* m_layout;
     QVector<QStringList> m_shortcuts;
 };
 

@@ -17,15 +17,16 @@
 
 #pragma once
 
-#include <QtDBus/QDBusAbstractAdaptor>
 #include "src/core/controller.h"
+#include <QtDBus/QDBusAbstractAdaptor>
 
-class FlameshotDBusAdapter : public QDBusAbstractAdaptor {
+class FlameshotDBusAdapter : public QDBusAbstractAdaptor
+{
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.dharkael.Flameshot")
 
 public:
-    explicit FlameshotDBusAdapter(QObject *parent = nullptr);
+    explicit FlameshotDBusAdapter(QObject* parent = nullptr);
     virtual ~FlameshotDBusAdapter();
 
 signals:
@@ -34,13 +35,20 @@ signals:
 
 public slots:
     Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
-    Q_NOREPLY void fullScreen(QString path, bool toClipboard, int delay, uint id);
-    Q_NOREPLY void captureScreen(int number, QString path, bool toClipboard, int delay, uint id);
+    Q_NOREPLY void fullScreen(QString path,
+                              bool toClipboard,
+                              int delay,
+                              uint id);
+    Q_NOREPLY void captureScreen(int number,
+                                 QString path,
+                                 bool toClipboard,
+                                 int delay,
+                                 uint id);
     Q_NOREPLY void openLauncher();
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
     Q_NOREPLY void autostartEnabled(bool enabled);
 
 private slots:
-    void handleCaptureTaken(uint id, const QPixmap &p);
+    void handleCaptureTaken(uint id, const QPixmap& p);
 };

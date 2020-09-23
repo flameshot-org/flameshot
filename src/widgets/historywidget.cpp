@@ -1,7 +1,7 @@
 #include "historywidget.h"
-#include "src/tools/storage/storagemanager.h"
 #include "src/tools/storage/imguploader.h"
 #include "src/tools/storage/s3/imgs3uploader.h"
+#include "src/tools/storage/storagemanager.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>

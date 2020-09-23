@@ -3,7 +3,6 @@
 
 #include "src/tools/abstractactiontool.h"
 
-
 class ImgUploaderTool : public AbstractActionTool
 {
     Q_OBJECT

@@ -1,32 +1,33 @@
 #include "shortcutswidget.h"
 #include "setshortcutwidget.h"
-#include <QIcon>
-#include <QVBoxLayout>
-#include <QTableWidget>
 #include <QHeaderView>
-#include <QLabel>
+#include <QIcon>
 #include <QKeyEvent>
+#include <QLabel>
 #include <QStringList>
+#include <QTableWidget>
+#include <QVBoxLayout>
 #include <QVector>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #include <QCursor>
+#include <QGuiApplication>
 #include <QRect>
 #include <QScreen>
-#include <QGuiApplication>
 #endif
 
 #include <QDebug>
 
-
-ShortcutsWidget::ShortcutsWidget(QWidget *parent) : QWidget(parent) {
+ShortcutsWidget::ShortcutsWidget(QWidget* parent)
+  : QWidget(parent)
+{
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("Hot Keys"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
-    QScreen *screen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
 #endif
@@ -39,11 +40,13 @@ ShortcutsWidget::ShortcutsWidget(QWidget *parent) : QWidget(parent) {
     show();
 }
 
-const QVector<QStringList> &ShortcutsWidget::shortcuts() {
+const QVector<QStringList>& ShortcutsWidget::shortcuts()
+{
     return m_shortcuts;
 }
 
-void ShortcutsWidget::initInfoTable() {
+void ShortcutsWidget::initInfoTable()
+{
     m_table = new QTableWidget(this);
     m_table->setToolTip(tr("Available shortcuts in the screen capture mode."));
 
@@ -59,17 +62,20 @@ void ShortcutsWidget::initInfoTable() {
     QStringList names;
     names << tr("Description") << tr("Key");
     m_table->setHorizontalHeaderLabels(names);
-    connect(m_table, SIGNAL(cellClicked(int, int)), this, SLOT(slotShortcutCellClicked(int, int)));
+    connect(m_table,
+            SIGNAL(cellClicked(int, int)),
+            this,
+            SLOT(slotShortcutCellClicked(int, int)));
 
-    //add content
-    for (int i= 0; i < shortcuts().size(); ++i){
+    // add content
+    for (int i = 0; i < shortcuts().size(); ++i) {
         m_table->setItem(i, 0, new QTableWidgetItem(m_shortcuts.at(i).at(1)));
 
         QTableWidgetItem* item = new QTableWidgetItem(m_shortcuts.at(i).at(2));
-        item->setTextAlignment( Qt::AlignCenter );
+        item->setTextAlignment(Qt::AlignCenter);
         m_table->setItem(i, 1, item);
 
-        if( m_shortcuts.at(i).at(0).isEmpty() ) {
+        if (m_shortcuts.at(i).at(0).isEmpty()) {
             QFont font;
             font.setBold(true);
             item->setFont(font);
@@ -81,7 +87,7 @@ void ShortcutsWidget::initInfoTable() {
     // Read-only table items
     for (int x = 0; x < m_table->rowCount(); ++x) {
         for (int y = 0; y < m_table->columnCount(); ++y) {
-            QTableWidgetItem *item = m_table->item(x, y);
+            QTableWidgetItem* item = m_table->item(x, y);
             item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         }
     }
@@ -97,14 +103,16 @@ void ShortcutsWidget::initInfoTable() {
                                                QSizePolicy::Expanding);
 }
 
-void ShortcutsWidget::slotShortcutCellClicked(int row, int col) {
+void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
+{
     if (col == 1) {
         // Ignore non-changable shortcuts
-        if( Qt::ItemIsEnabled != (Qt::ItemIsEnabled & m_table->item(row, col)->flags()) ) {
+        if (Qt::ItemIsEnabled !=
+            (Qt::ItemIsEnabled & m_table->item(row, col)->flags())) {
             return;
         }
 
-        SetShortcutDialog *setShortcutDialog = new SetShortcutDialog();
+        SetShortcutDialog* setShortcutDialog = new SetShortcutDialog();
         if (0 != setShortcutDialog->exec()) {
             QString shortcutName = m_shortcuts.at(row).at(0);
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
@@ -115,8 +123,9 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col) {
             }
 
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
-                QTableWidgetItem* item = new QTableWidgetItem(shortcutValue.toString());
-                item->setTextAlignment( Qt::AlignCenter );
+                QTableWidgetItem* item =
+                  new QTableWidgetItem(shortcutValue.toString());
+                item->setTextAlignment(Qt::AlignCenter);
                 item->setFlags(item->flags() ^ Qt::ItemIsEditable);
                 m_table->setItem(row, col, item);
             }

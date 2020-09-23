@@ -25,7 +25,8 @@ class SelectionWidget : public QWidget
 {
     Q_OBJECT
 public:
-    enum SideType {
+    enum SideType
+    {
         TOPLEFT_SIDE,
         BOTTONLEFT_SIDE,
         TOPRIGHT_SIDE,
@@ -37,30 +38,30 @@ public:
         NO_SIDE,
     };
 
-    explicit SelectionWidget(const QColor &c, QWidget *parent = nullptr);
+    explicit SelectionWidget(const QColor& c, QWidget* parent = nullptr);
 
-    SideType getMouseSide(const QPoint &point) const;
+    SideType getMouseSide(const QPoint& point) const;
     QVector<QRect> handlerAreas();
 
-    void setGeometryAnimated(const QRect &r);
+    void setGeometryAnimated(const QRect& r);
     void saveGeometry();
     QRect savedGeometry();
 
 protected:
-    void paintEvent(QPaintEvent *);
-    void resizeEvent(QResizeEvent *);
-    void moveEvent(QMoveEvent *);
+    void paintEvent(QPaintEvent*);
+    void resizeEvent(QResizeEvent*);
+    void moveEvent(QMoveEvent*);
 
 signals:
     void animationEnded();
 
 public slots:
-    void updateColor(const QColor &c);
+    void updateColor(const QColor& c);
 
 private:
     void updateAreas();
 
-    QPropertyAnimation *m_animation;
+    QPropertyAnimation* m_animation;
 
     QColor m_color;
     QPoint m_areaOffset;

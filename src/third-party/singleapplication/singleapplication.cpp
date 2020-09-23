@@ -22,48 +22,49 @@
 
 #include <cstdlib>
 
+#include <QMessageBox>
+#include <QTimer>
+#include <QtCore/QByteArray>
+#include <QtCore/QCryptographicHash>
+#include <QtCore/QDataStream>
 #include <QtCore/QDir>
 #include <QtCore/QProcess>
-#include <QtCore/QByteArray>
 #include <QtCore/QSemaphore>
 #include <QtCore/QSharedMemory>
 #include <QtCore/QStandardPaths>
-#include <QtCore/QCryptographicHash>
-#include <QtCore/QDataStream>
 #include <QtNetwork/QLocalServer>
 #include <QtNetwork/QLocalSocket>
-#include <QMessageBox>
-#include <QTimer>
 
 #ifdef Q_OS_UNIX
-    #include <signal.h>
-    #include <unistd.h>
+#include <signal.h>
+#include <unistd.h>
 #endif
 
 #ifdef Q_OS_WIN
-    #include <windows.h>
-    #include <lmcons.h>
+#include <lmcons.h>
+#include <windows.h>
 #endif
 
 #include "singleapplication.h"
 #include "singleapplication_p.h"
 
-
-SingleApplicationPrivate::SingleApplicationPrivate( SingleApplication *q_ptr ) : q_ptr( q_ptr ) {
+SingleApplicationPrivate::SingleApplicationPrivate(SingleApplication* q_ptr)
+  : q_ptr(q_ptr)
+{
     server = nullptr;
     socket = nullptr;
 }
 
 SingleApplicationPrivate::~SingleApplicationPrivate()
 {
-    if( socket != nullptr ) {
+    if (socket != nullptr) {
         socket->close();
         delete socket;
     }
 
     memory->lock();
     InstancesInfo* inst = static_cast<InstancesInfo*>(memory->data());
-    if( server != nullptr ) {
+    if (server != nullptr) {
         server->close();
         delete server;
         inst->primary = false;
@@ -74,51 +75,57 @@ SingleApplicationPrivate::~SingleApplicationPrivate()
     delete memory;
 }
 
-void SingleApplicationPrivate::genBlockServerName( int timeout )
+void SingleApplicationPrivate::genBlockServerName(int timeout)
 {
-    QCryptographicHash appData( QCryptographicHash::Sha256 );
-    appData.addData( "SingleApplication", 17 );
-    appData.addData( SingleApplication::app_t::applicationName().toUtf8() );
-    appData.addData( SingleApplication::app_t::organizationName().toUtf8() );
-    appData.addData( SingleApplication::app_t::organizationDomain().toUtf8() );
+    QCryptographicHash appData(QCryptographicHash::Sha256);
+    appData.addData("SingleApplication", 17);
+    appData.addData(SingleApplication::app_t::applicationName().toUtf8());
+    appData.addData(SingleApplication::app_t::organizationName().toUtf8());
+    appData.addData(SingleApplication::app_t::organizationDomain().toUtf8());
 
-    if( ! (options & SingleApplication::Mode::ExcludeAppVersion) ) {
-        appData.addData( SingleApplication::app_t::applicationVersion().toUtf8() );
+    if (!(options & SingleApplication::Mode::ExcludeAppVersion)) {
+        appData.addData(
+          SingleApplication::app_t::applicationVersion().toUtf8());
     }
 
-    if( ! (options & SingleApplication::Mode::ExcludeAppPath) ) {
+    if (!(options & SingleApplication::Mode::ExcludeAppPath)) {
 #ifdef Q_OS_WIN
-        appData.addData( SingleApplication::app_t::applicationFilePath().toLower().toUtf8() );
+        appData.addData(
+          SingleApplication::app_t::applicationFilePath().toLower().toUtf8());
 #else
-        appData.addData( SingleApplication::app_t::applicationFilePath().toUtf8() );
+        appData.addData(
+          SingleApplication::app_t::applicationFilePath().toUtf8());
 #endif
     }
 
     // User level block requires a user specific data in the hash
-    if( options & SingleApplication::Mode::User ) {
+    if (options & SingleApplication::Mode::User) {
 #ifdef Q_OS_WIN
         Q_UNUSED(timeout);
-        wchar_t username [ UNLEN + 1 ];
+        wchar_t username[UNLEN + 1];
         // Specifies size of the buffer on input
         DWORD usernameLength = UNLEN + 1;
-        if( GetUserNameW( username, &usernameLength ) ) {
-            appData.addData( QString::fromWCharArray(username).toUtf8() );
+        if (GetUserNameW(username, &usernameLength)) {
+            appData.addData(QString::fromWCharArray(username).toUtf8());
         } else {
-            appData.addData( QStandardPaths::standardLocations( QStandardPaths::HomeLocation ).join("").toUtf8() );
+            appData.addData(
+              QStandardPaths::standardLocations(QStandardPaths::HomeLocation)
+                .join("")
+                .toUtf8());
         }
 #endif
 #ifdef Q_OS_UNIX
         QProcess process;
-        process.start( QStringLiteral("whoami") );
-        if( process.waitForFinished( timeout ) &&
+        process.start(QStringLiteral("whoami"));
+        if (process.waitForFinished(timeout) &&
             process.exitCode() == QProcess::NormalExit) {
-            appData.addData( process.readLine() );
+            appData.addData(process.readLine());
         } else {
-            appData.addData(
-                QDir(
-                    QStandardPaths::standardLocations( QStandardPaths::HomeLocation ).first()
-                ).absolutePath().toUtf8()
-            );
+            appData.addData(QDir(QStandardPaths::standardLocations(
+                                   QStandardPaths::HomeLocation)
+                                   .first())
+                              .absolutePath()
+                              .toUtf8());
         }
 #endif
     }
@@ -128,7 +135,7 @@ void SingleApplicationPrivate::genBlockServerName( int timeout )
     blockServerName = appData.result().toBase64().replace("/", "_");
 }
 
-void SingleApplicationPrivate::startPrimary( bool resetMemory )
+void SingleApplicationPrivate::startPrimary(bool resetMemory)
 {
     Q_Q(SingleApplication);
 
@@ -139,30 +146,28 @@ void SingleApplicationPrivate::startPrimary( bool resetMemory )
 #endif
     // Successful creation means that no main process exists
     // So we start a QLocalServer to listen for connections
-    QLocalServer::removeServer( blockServerName );
+    QLocalServer::removeServer(blockServerName);
     server = new QLocalServer();
 
     // Restrict access to the socket according to the
     // SingleApplication::Mode::User flag on User level or no restrictions
-    if( options & SingleApplication::Mode::User ) {
-      server->setSocketOptions( QLocalServer::UserAccessOption );
+    if (options & SingleApplication::Mode::User) {
+        server->setSocketOptions(QLocalServer::UserAccessOption);
     } else {
-      server->setSocketOptions( QLocalServer::WorldAccessOption );
+        server->setSocketOptions(QLocalServer::WorldAccessOption);
     }
 
-    server->listen( blockServerName );
-    QObject::connect(
-        server,
-        &QLocalServer::newConnection,
-        this,
-        &SingleApplicationPrivate::slotConnectionEstablished
-    );
+    server->listen(blockServerName);
+    QObject::connect(server,
+                     &QLocalServer::newConnection,
+                     this,
+                     &SingleApplicationPrivate::slotConnectionEstablished);
 
     // Reset the number of connections
     memory->lock();
     InstancesInfo* inst = static_cast<InstancesInfo*>(memory->data());
 
-    if( resetMemory ) {
+    if (resetMemory) {
         inst->secondary = 0;
     }
 
@@ -183,31 +188,32 @@ void SingleApplicationPrivate::startSecondary()
 #endif
 }
 
-void SingleApplicationPrivate::connectToPrimary( int msecs, ConnectionType connectionType )
+void SingleApplicationPrivate::connectToPrimary(int msecs,
+                                                ConnectionType connectionType)
 {
     // Connect to the Local Server of the Primary Instance if not already
     // connected.
-    if( socket == nullptr ) {
+    if (socket == nullptr) {
         socket = new QLocalSocket();
     }
 
     // If already connected - we are done;
-    if( socket->state() == QLocalSocket::ConnectedState )
+    if (socket->state() == QLocalSocket::ConnectedState)
         return;
 
     // If not connect
-    if( socket->state() == QLocalSocket::UnconnectedState ||
-        socket->state() == QLocalSocket::ClosingState ) {
-        socket->connectToServer( blockServerName );
+    if (socket->state() == QLocalSocket::UnconnectedState ||
+        socket->state() == QLocalSocket::ClosingState) {
+        socket->connectToServer(blockServerName);
     }
 
     // Wait for being connected
-    if( socket->state() == QLocalSocket::ConnectingState ) {
-        socket->waitForConnected( msecs );
+    if (socket->state() == QLocalSocket::ConnectingState) {
+        socket->waitForConnected(msecs);
     }
 
     // Initialisation message according to the SingleApplication protocol
-    if( socket->state() == QLocalSocket::ConnectedState ) {
+    if (socket->state() == QLocalSocket::ConnectedState) {
         // Notify the parent that a new instance had been started;
         QByteArray initMsg;
         QDataStream writeStream(&initMsg, QIODevice::WriteOnly);
@@ -215,12 +221,13 @@ void SingleApplicationPrivate::connectToPrimary( int msecs, ConnectionType conne
         writeStream << blockServerName.toLatin1();
         writeStream << static_cast<quint8>(connectionType);
         writeStream << instanceNumber;
-        quint16 checksum = qChecksum(initMsg.constData(), static_cast<quint32>(initMsg.length()));
+        quint16 checksum = qChecksum(initMsg.constData(),
+                                     static_cast<quint32>(initMsg.length()));
         writeStream << checksum;
 
-        socket->write( initMsg );
+        socket->write(initMsg);
         socket->flush();
-        socket->waitForBytesWritten( msecs );
+        socket->waitForBytesWritten(msecs);
     }
 }
 
@@ -237,31 +244,31 @@ qint64 SingleApplicationPrivate::primaryPid()
 }
 
 #ifdef Q_OS_UNIX
-    void SingleApplicationPrivate::crashHandler()
-    {
-        // Handle any further termination signals to ensure the
-        // QSharedMemory block is deleted even if the process crashes
-        signal( SIGHUP,  SingleApplicationPrivate::terminate ); // 1
-        signal( SIGINT,  SingleApplicationPrivate::terminate ); // 2
-        signal( SIGQUIT, SingleApplicationPrivate::terminate ); // 3
-        signal( SIGILL,  SingleApplicationPrivate::terminate ); // 4
-        signal( SIGABRT, SingleApplicationPrivate::terminate ); // 6
-        signal( SIGFPE,  SingleApplicationPrivate::terminate ); // 8
-        signal( SIGBUS,  SingleApplicationPrivate::terminate ); // 10
-        signal( SIGSEGV, SingleApplicationPrivate::terminate ); // 11
-        signal( SIGSYS,  SingleApplicationPrivate::terminate ); // 12
-        signal( SIGPIPE, SingleApplicationPrivate::terminate ); // 13
-        signal( SIGALRM, SingleApplicationPrivate::terminate ); // 14
-        signal( SIGTERM, SingleApplicationPrivate::terminate ); // 15
-        signal( SIGXCPU, SingleApplicationPrivate::terminate ); // 24
-        signal( SIGXFSZ, SingleApplicationPrivate::terminate ); // 25
-    }
+void SingleApplicationPrivate::crashHandler()
+{
+    // Handle any further termination signals to ensure the
+    // QSharedMemory block is deleted even if the process crashes
+    signal(SIGHUP, SingleApplicationPrivate::terminate);  // 1
+    signal(SIGINT, SingleApplicationPrivate::terminate);  // 2
+    signal(SIGQUIT, SingleApplicationPrivate::terminate); // 3
+    signal(SIGILL, SingleApplicationPrivate::terminate);  // 4
+    signal(SIGABRT, SingleApplicationPrivate::terminate); // 6
+    signal(SIGFPE, SingleApplicationPrivate::terminate);  // 8
+    signal(SIGBUS, SingleApplicationPrivate::terminate);  // 10
+    signal(SIGSEGV, SingleApplicationPrivate::terminate); // 11
+    signal(SIGSYS, SingleApplicationPrivate::terminate);  // 12
+    signal(SIGPIPE, SingleApplicationPrivate::terminate); // 13
+    signal(SIGALRM, SingleApplicationPrivate::terminate); // 14
+    signal(SIGTERM, SingleApplicationPrivate::terminate); // 15
+    signal(SIGXCPU, SingleApplicationPrivate::terminate); // 24
+    signal(SIGXFSZ, SingleApplicationPrivate::terminate); // 25
+}
 
-    void SingleApplicationPrivate::terminate( int signum )
-    {
-        delete ((SingleApplication*)QCoreApplication::instance())->d_ptr;
-        ::exit( 128 + signum );
-    }
+void SingleApplicationPrivate::terminate(int signum)
+{
+    delete ((SingleApplication*)QCoreApplication::instance())->d_ptr;
+    ::exit(128 + signum);
+}
 #endif
 
 /**
@@ -271,13 +278,15 @@ void SingleApplicationPrivate::slotConnectionEstablished()
 {
     Q_Q(SingleApplication);
 
-    QLocalSocket *nextConnSocket = server->nextPendingConnection();
+    QLocalSocket* nextConnSocket = server->nextPendingConnection();
 
     quint32 instanceId = 0;
     ConnectionType connectionType = InvalidConnection;
-    if( nextConnSocket->waitForReadyRead( 100 ) ) {
+    if (nextConnSocket->waitForReadyRead(100)) {
         // read all data from message in same order/format as written
-        QByteArray msgBytes = nextConnSocket->read(nextConnSocket->bytesAvailable() - static_cast<qint64>(sizeof(quint16)));
+        QByteArray msgBytes =
+          nextConnSocket->read(nextConnSocket->bytesAvailable() -
+                               static_cast<qint64>(sizeof(quint16)));
         QByteArray checksumBytes = nextConnSocket->read(sizeof(quint16));
         QDataStream readStream(msgBytes);
         readStream.setVersion(QDataStream::Qt_5_2);
@@ -297,60 +306,62 @@ void SingleApplicationPrivate::slotConnectionEstablished()
         checksumStream.setVersion(QDataStream::Qt_5_2);
         checksumStream >> msgChecksum;
 
-        const quint16 actualChecksum = qChecksum(msgBytes.constData(), static_cast<quint32>(msgBytes.length()));
+        const quint16 actualChecksum = qChecksum(
+          msgBytes.constData(), static_cast<quint32>(msgBytes.length()));
 
-        if (readStream.status() != QDataStream::Ok || QLatin1String(latin1Name) != blockServerName || msgChecksum != actualChecksum) {
-          connectionType = InvalidConnection;
+        if (readStream.status() != QDataStream::Ok ||
+            QLatin1String(latin1Name) != blockServerName ||
+            msgChecksum != actualChecksum) {
+            connectionType = InvalidConnection;
         }
     }
 
-    if( connectionType == InvalidConnection ) {
+    if (connectionType == InvalidConnection) {
         nextConnSocket->close();
         delete nextConnSocket;
         return;
     }
 
-    QObject::connect(
-        nextConnSocket,
-        &QLocalSocket::aboutToClose,
-        this,
-        [nextConnSocket, instanceId, this]() {
-            emit this->slotClientConnectionClosed( nextConnSocket, instanceId );
-        }
-    );
+    QObject::connect(nextConnSocket,
+                     &QLocalSocket::aboutToClose,
+                     this,
+                     [nextConnSocket, instanceId, this]() {
+                         emit this->slotClientConnectionClosed(nextConnSocket,
+                                                               instanceId);
+                     });
 
-    QObject::connect(
-        nextConnSocket,
-        &QLocalSocket::readyRead,
-        this,
-        [nextConnSocket, instanceId, this]() {
-            emit this->slotDataAvailable( nextConnSocket, instanceId );
-        }
-    );
+    QObject::connect(nextConnSocket,
+                     &QLocalSocket::readyRead,
+                     this,
+                     [nextConnSocket, instanceId, this]() {
+                         emit this->slotDataAvailable(nextConnSocket,
+                                                      instanceId);
+                     });
 
-    if( connectionType == NewInstance || (
-            connectionType == SecondaryInstance &&
-            options & SingleApplication::Mode::SecondaryNotification
-        )
-    ) {
+    if (connectionType == NewInstance ||
+        (connectionType == SecondaryInstance &&
+         options & SingleApplication::Mode::SecondaryNotification)) {
         emit q->instanceStarted();
     }
 
-    if( nextConnSocket->bytesAvailable() > 0 ) {
-        emit this->slotDataAvailable( nextConnSocket, instanceId );
+    if (nextConnSocket->bytesAvailable() > 0) {
+        emit this->slotDataAvailable(nextConnSocket, instanceId);
     }
 }
 
-void SingleApplicationPrivate::slotDataAvailable( QLocalSocket *dataSocket, quint32 instanceId )
+void SingleApplicationPrivate::slotDataAvailable(QLocalSocket* dataSocket,
+                                                 quint32 instanceId)
 {
     Q_Q(SingleApplication);
-    emit q->receivedMessage( instanceId, dataSocket->readAll() );
+    emit q->receivedMessage(instanceId, dataSocket->readAll());
 }
 
-void SingleApplicationPrivate::slotClientConnectionClosed( QLocalSocket *closedSocket, quint32 instanceId )
+void SingleApplicationPrivate::slotClientConnectionClosed(
+  QLocalSocket* closedSocket,
+  quint32 instanceId)
 {
-    if( closedSocket->bytesAvailable() > 0 )
-        emit slotDataAvailable( closedSocket, instanceId  );
+    if (closedSocket->bytesAvailable() > 0)
+        emit slotDataAvailable(closedSocket, instanceId);
     closedSocket->deleteLater();
 }
 
@@ -361,8 +372,13 @@ void SingleApplicationPrivate::slotClientConnectionClosed( QLocalSocket *closedS
  * @param argv
  * @param {bool} allowSecondaryInstances
  */
-SingleApplication::SingleApplication( int &argc, char *argv[], bool allowSecondary, Options options, int timeout )
-    : app_t( argc, argv ), d_ptr( new SingleApplicationPrivate( this ) )
+SingleApplication::SingleApplication(int& argc,
+                                     char* argv[],
+                                     bool allowSecondary,
+                                     Options options,
+                                     int timeout)
+  : app_t(argc, argv)
+  , d_ptr(new SingleApplicationPrivate(this))
 {
     Q_D(SingleApplication);
 
@@ -371,41 +387,43 @@ SingleApplication::SingleApplication( int &argc, char *argv[], bool allowSeconda
 
     // Generating an application ID used for identifying the shared memory
     // block and QLocalServer
-    d->genBlockServerName( timeout );
+    d->genBlockServerName(timeout);
 
     // Guarantee thread safe behaviour with a shared memory block. Also by
     // explicitly attaching it and then deleting it we make sure that the
     // memory is deleted even if the process had crashed on Unix.
 #ifdef Q_OS_UNIX
-    d->memory = new QSharedMemory( d->blockServerName );
+    d->memory = new QSharedMemory(d->blockServerName);
     d->memory->attach();
     delete d->memory;
 #endif
-    d->memory = new QSharedMemory( d->blockServerName );
+    d->memory = new QSharedMemory(d->blockServerName);
 
     // Create a shared memory block
-    if( d->memory->create( sizeof( InstancesInfo ) ) ) {
-        d->startPrimary( true );
+    if (d->memory->create(sizeof(InstancesInfo))) {
+        d->startPrimary(true);
         return;
     } else {
         // Attempt to attach to the memory segment
-        if( d->memory->attach() ) {
+        if (d->memory->attach()) {
             d->memory->lock();
-            InstancesInfo* inst = static_cast<InstancesInfo*>(d->memory->data());
+            InstancesInfo* inst =
+              static_cast<InstancesInfo*>(d->memory->data());
 
-            if( ! inst->primary ) {
-                d->startPrimary( false );
+            if (!inst->primary) {
+                d->startPrimary(false);
                 d->memory->unlock();
                 return;
             }
 
             // Check if another instance can be started
-            if( allowSecondary ) {
+            if (allowSecondary) {
                 inst->secondary += 1;
                 d->instanceNumber = inst->secondary;
                 d->startSecondary();
-                if( d->options & Mode::SecondaryNotification ) {
-                    d->connectToPrimary( timeout, SingleApplicationPrivate::SecondaryInstance );
+                if (d->options & Mode::SecondaryNotification) {
+                    d->connectToPrimary(
+                      timeout, SingleApplicationPrivate::SecondaryInstance);
                 }
                 d->memory->unlock();
                 return;
@@ -415,29 +433,28 @@ SingleApplication::SingleApplication( int &argc, char *argv[], bool allowSeconda
         }
     }
 
-    d->connectToPrimary( timeout, SingleApplicationPrivate::NewInstance );
+    d->connectToPrimary(timeout, SingleApplicationPrivate::NewInstance);
     delete d;
 
     // show message box with inforation that Flameshot is already launched
     QMessageBox msgBox;
-    msgBox.setText(QObject::tr("Hi, I'm already running!\nYou can find me in the system tray."));
+    msgBox.setText(QObject::tr(
+      "Hi, I'm already running!\nYou can find me in the system tray."));
     int cnt = 3;
     QTimer cntDown;
     QObject::connect(
-                &cntDown,
-                &QTimer::timeout,
-                [&msgBox,&cnt, &cntDown]()->void{
-                    if(--cnt < 0){
-                         cntDown.stop();
-                         msgBox.close();
-                     } else {
-                        msgBox.setWindowTitle(QString("Flameshot (%1)").arg(cnt + 1));
-                     }
-                 });
+      &cntDown, &QTimer::timeout, [&msgBox, &cnt, &cntDown]() -> void {
+          if (--cnt < 0) {
+              cntDown.stop();
+              msgBox.close();
+          } else {
+              msgBox.setWindowTitle(QString("Flameshot (%1)").arg(cnt + 1));
+          }
+      });
     cntDown.start(1000);
     msgBox.exec();
 
-    ::exit( EXIT_SUCCESS );
+    ::exit(EXIT_SUCCESS);
 }
 
 /**
@@ -473,18 +490,19 @@ qint64 SingleApplication::primaryPid()
     return d->primaryPid();
 }
 
-bool SingleApplication::sendMessage( QByteArray message, int timeout )
+bool SingleApplication::sendMessage(QByteArray message, int timeout)
 {
     Q_D(SingleApplication);
 
     // Nobody to connect to
-    if( isPrimary() ) return false;
+    if (isPrimary())
+        return false;
 
     // Make sure the socket is connected
-    d->connectToPrimary( timeout,  SingleApplicationPrivate::Reconnect );
+    d->connectToPrimary(timeout, SingleApplicationPrivate::Reconnect);
 
-    d->socket->write( message );
+    d->socket->write(message);
     bool dataWritten = d->socket->flush();
-    d->socket->waitForBytesWritten( timeout );
+    d->socket->waitForBytesWritten(timeout);
     return dataWritten;
 }

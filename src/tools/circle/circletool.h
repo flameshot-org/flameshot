@@ -19,22 +19,25 @@
 
 #include "src/tools/abstracttwopointtool.h"
 
-class CircleTool : public AbstractTwoPointTool {
+class CircleTool : public AbstractTwoPointTool
+{
     Q_OBJECT
 public:
-    explicit CircleTool(QObject *parent = nullptr);
+    explicit CircleTool(QObject* parent = nullptr);
 
-    QIcon icon(const QColor &background, bool inEditor) const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     static QString nameID();
     QString description() const override;
 
-    CaptureTool* copy(QObject *parent = nullptr) override;
-    void process(
-            QPainter &painter, const QPixmap &pixmap, bool recordUndo = false) override;
-    void paintMousePreview(QPainter &painter, const CaptureContext &context) override;
+    CaptureTool* copy(QObject* parent = nullptr) override;
+    void process(QPainter& painter,
+                 const QPixmap& pixmap,
+                 bool recordUndo = false) override;
+    void paintMousePreview(QPainter& painter,
+                           const CaptureContext& context) override;
 
 public slots:
-    void drawStart(const CaptureContext &context) override;
-    void pressed(const CaptureContext &context) override;
+    void drawStart(const CaptureContext& context) override;
+    void pressed(const CaptureContext& context) override;
 };

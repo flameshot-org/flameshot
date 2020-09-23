@@ -20,8 +20,8 @@
 #include "src/widgets/historywidget.h"
 #include <qt_windows.h>
 
-GlobalShortcutFilter::GlobalShortcutFilter(QObject *parent) :
-    QObject(parent)
+GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
+  : QObject(parent)
 {
     // Forced Print Screen
     if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
@@ -33,10 +33,9 @@ GlobalShortcutFilter::GlobalShortcutFilter(QObject *parent) :
     }
 }
 
-bool GlobalShortcutFilter::nativeEventFilter(
-        const QByteArray &eventType,
-        void *message,
-        long *result)
+bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
+                                             void* message,
+                                             long* result)
 {
     Q_UNUSED(eventType);
     Q_UNUSED(result);
@@ -49,15 +48,15 @@ bool GlobalShortcutFilter::nativeEventFilter(
         const quint32 modifiers = LOWORD(msg->lParam);
 
         // Show screenshots history
-        if(VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
-            HistoryWidget *pHistory = new HistoryWidget();
+        if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
+            HistoryWidget* pHistory = new HistoryWidget();
             pHistory->show();
         }
 
         // Capture screen
-        if(VK_SNAPSHOT == keycode && 0 == modifiers) {
+        if (VK_SNAPSHOT == keycode && 0 == modifiers) {
             Controller::getInstance()->requestCapture(
-                        CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
+              CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
         }
 
         return true;
