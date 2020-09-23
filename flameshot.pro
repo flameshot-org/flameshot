@@ -87,6 +87,7 @@ SOURCES += src/main.cpp \
     src/config/filepathconfiguration.cpp \
     src/config/setshortcutwidget.cpp \
     src/config/shortcutswidget.cpp \
+    src/tools/storage/imguploadertool.cpp \
     src/tools/storage/storagemanager.cpp \
     src/utils/configshortcuts.cpp \
     src/widgets/historywidget.cpp \
@@ -173,6 +174,7 @@ HEADERS  += src/widgets/capture/buttonhandler.h \
     src/config/setshortcutwidget.h \
     src/config/shortcutswidget.h \
     src/tools/storage/imgstorages.h \
+    src/tools/storage/imguploadertool.h \
     src/tools/storage/storagemanager.h \
     src/utils/configshortcuts.h \
     src/widgets/historywidget.h \
