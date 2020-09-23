@@ -20,19 +20,8 @@
 #include <QPainter>
 
 ImgurUploaderTool::ImgurUploaderTool(QObject* parent)
-  : AbstractActionTool(parent)
+  : ImgUploaderTool(parent)
 {}
-
-bool ImgurUploaderTool::closeOnButtonPressed() const
-{
-    return true;
-}
-
-QIcon ImgurUploaderTool::icon(const QColor& background, bool inEditor) const
-{
-    Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "cloud-upload.svg");
-}
 
 QString ImgurUploaderTool::name() const
 {
@@ -51,24 +40,12 @@ QString ImgurUploaderTool::description() const
 
 QWidget* ImgurUploaderTool::widget()
 {
-    ImgurUploader* p = new ImgurUploader(capture);
+    ImgurUploader* p = new ImgurUploader(capture());
     p->upload();
     return p;
-}
-
-void ImgurUploaderTool::setCapture(const QPixmap& pixmap)
-{
-    capture = pixmap;
 }
 
 CaptureTool* ImgurUploaderTool::copy(QObject* parent)
 {
     return new ImgurUploaderTool(parent);
-}
-
-void ImgurUploaderTool::pressed(const CaptureContext& context)
-{
-    capture = context.selectedScreenshotArea();
-    emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
 }
