@@ -124,6 +124,10 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CircleCountTool</name>
@@ -363,6 +367,38 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the side panel button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the side panel toggle button in the capture mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save image after copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save image file after copying it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to write to directory.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -726,6 +762,10 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Capture saved to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -980,6 +1020,13 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <source>Undo the last modification</source>
         <translation>Visszavonja az utolsó módosítást</translation>
+    </message>
+</context>
+<context>
+    <name>UtilityPanel</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
