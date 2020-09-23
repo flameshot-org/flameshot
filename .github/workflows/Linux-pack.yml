@@ -58,6 +58,13 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/build
           cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
 
+          apt-cache policy gcc-7
+          apt-cache policy gcc-8
+          apt-cache policy gcc-9
+          apt-cache policy gcc-10
+          apt-cache policy libcc1-0
+          apt-cache policy libgcc-s1
+
           sudo apt-get -y -qq update
           sudo apt-get -y --no-install-recommends install \
             build-essential \
@@ -71,7 +78,12 @@ jobs:
             libqt5core5a \
             libqt5widgets5 \
             libqt5gui5 \
-            libqt5svg5-dev
+            libqt5svg5-dev \
+            libgcc-s1- \
+            gcc-7- \
+            gcc-8 \
+            gcc-9- \
+            gcc-10-
 
           echo "=======CMAKE VERSION========"
           cmake --version
