@@ -75,47 +75,47 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
         <translation>&lt;b&gt;捕获模式&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Rectangular Region</source>
         <translation>方形区域</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="75"/>
         <source>Full Screen (All Monitors)</source>
         <translation>全屏（所有显示器）</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="81"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="83"/>
         <source>No Delay</source>
         <translation>无延迟</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> second</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> seconds</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="92"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="94"/>
         <source>Take new screenshot</source>
         <translation>获取新屏幕截图</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="103"/>
         <source>Area:</source>
         <translation>区域：</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="102"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="104"/>
         <source>Delay:</source>
         <translation>延迟：</translation>
     </message>
@@ -199,22 +199,22 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="202"/>
+        <location filename="../../src/core/controller.cpp" line="204"/>
         <source>&amp;Take Screenshot</source>
         <translation>进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="207"/>
+        <location filename="../../src/core/controller.cpp" line="209"/>
         <source>&amp;Open Launcher</source>
         <translation>打开启动器(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="210"/>
+        <location filename="../../src/core/controller.cpp" line="212"/>
         <source>&amp;Configuration</source>
         <translation>配置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="213"/>
+        <location filename="../../src/core/controller.cpp" line="215"/>
         <source>&amp;About</source>
         <translation>关于(&amp;A)</translation>
     </message>
@@ -223,7 +223,7 @@ Press Space to open the side panel.</source>
         <translation type="vanished">信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="215"/>
+        <location filename="../../src/core/controller.cpp" line="217"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
@@ -692,12 +692,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="39"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="40"/>
         <source>Pixelate</source>
         <translation>像素化</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="51"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="52"/>
         <source>Set Pixelate as the paint tool</source>
         <translation>将像素化设置为绘画工具</translation>
     </message>
@@ -717,7 +717,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="42"/>
-        <source>Capture saved to clipboard. </source>
+        <source>Capture saved to clipboard.</source>
         <translation>捕获已保存至剪贴板。</translation>
     </message>
     <message>

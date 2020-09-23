@@ -75,47 +75,47 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Rectangular Region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="75"/>
         <source>Full Screen (All Monitors)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="81"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="83"/>
         <source>No Delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="92"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="94"/>
         <source>Take new screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="103"/>
         <source>Area:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="102"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="104"/>
         <source>Delay:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -123,12 +123,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translation>画面をキャプチャーできません</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="257"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="260"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -139,6 +139,11 @@ Enter を押すと画面をキャプチャー。
 マウスの右ボタンでカラーピッカーを表示。
 マウスホイールでツールの太さ等を変更。
 スペースを押すとサイドパネルを開く。</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="617"/>
+        <source>Tool Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -193,22 +198,22 @@ Enter を押すと画面をキャプチャー。
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="202"/>
+        <location filename="../../src/core/controller.cpp" line="204"/>
         <source>&amp;Take Screenshot</source>
         <translation>スクリーンショットを撮る(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="207"/>
+        <location filename="../../src/core/controller.cpp" line="209"/>
         <source>&amp;Open Launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="210"/>
+        <location filename="../../src/core/controller.cpp" line="212"/>
         <source>&amp;Configuration</source>
         <translation>設定(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="213"/>
+        <location filename="../../src/core/controller.cpp" line="215"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -217,7 +222,7 @@ Enter を押すと画面をキャプチャー。
         <translation type="vanished">情報(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="215"/>
+        <location filename="../../src/core/controller.cpp" line="217"/>
         <source>&amp;Quit</source>
         <translation>終了(&amp;Q)</translation>
     </message>
@@ -307,113 +312,154 @@ Enter を押すと画面をキャプチャー。
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="162"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="181"/>
         <source>Show help message</source>
         <translation>ヘルプメッセージを表示する</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="166"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="185"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>キャプチャーモード開始時にヘルプメッセージを表示する。</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="177"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="210"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="214"/>
         <source>Show desktop notifications</source>
         <translation>デスクトップの通知を表示する</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="194"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="227"/>
         <source>Show tray icon</source>
         <translation>トレイアイコンを表示する</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="198"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="231"/>
         <source>Show the systemtray icon</source>
         <translation>システムトレイアイコンを表示する</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="102"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="225"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="121"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="258"/>
         <source>Import</source>
         <translation>インポート</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="109"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="117"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="141"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="160"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="370"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
         <source>Unable to read file.</source>
         <translation>ファイルを読み込めません。</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="117"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="141"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="136"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="160"/>
         <source>Unable to write file.</source>
         <translation>ファイルに書き込めません。</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="147"/>
         <source>Save File</source>
         <translation>ファイルを保存</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="151"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="170"/>
         <source>Confirm Reset</source>
         <translation>リセットの確認</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="152"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="171"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>設定をリセットしてもよろしいですか?</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="213"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="196"/>
+        <source>Show the side panel button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="199"/>
+        <source>Show the side panel toggle button in the capture mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="246"/>
         <source>Configuration File</source>
         <translation>設定ファイル</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="218"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="251"/>
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="232"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="265"/>
         <source>Reset</source>
         <translation>リセット</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="243"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="276"/>
         <source>Launch at startup</source>
         <translation>スタートアップ時に起動する</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="247"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="280"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot を起動する</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="257"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="290"/>
         <source>Close after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="261"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="294"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="273"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="306"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="278"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="311"/>
         <source>Copy URL and close window after upload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="322"/>
+        <source>Save image after copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="323"/>
+        <source>Save image file after copying it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="332"/>
+        <source>Save Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="344"/>
+        <source>Change...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="363"/>
+        <source>Choose a Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="370"/>
+        <source>Unable to write to directory.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -645,12 +691,12 @@ Enter を押すと画面をキャプチャー。
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="39"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="40"/>
         <source>Pixelate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="51"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="52"/>
         <source>Set Pixelate as the paint tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -658,24 +704,29 @@ Enter を押すと画面をキャプチャー。
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="93"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
         <source>Save Error</source>
         <translation>保存エラー</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="66"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="107"/>
         <source>Capture saved as </source>
         <translation>キャプチャーを保存しました: </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="42"/>
+        <source>Capture saved to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="47"/>
         <source>Capture saved to clipboard</source>
         <translation>キャプチャーをクリップボードに保存しました</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="91"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="110"/>
         <source>Error trying to save as </source>
         <translation>保存時にエラーが発生しました: </translation>
     </message>
@@ -1080,22 +1131,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="55"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>StrikeOut</source>
         <translation>取り消し線</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="64"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Underline</source>
         <translation>下線</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="73"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Bold</source>
         <translation>太字</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="82"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
         <source>Italic</source>
         <translation>斜体</translation>
     </message>
@@ -1162,6 +1213,14 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/tools/undo/undotool.cpp" line="52"/>
         <source>Undo the last modification</source>
         <translation>最後の変更を元に戻す</translation>
+    </message>
+</context>
+<context>
+    <name>UtilityPanel</name>
+    <message>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="114"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
