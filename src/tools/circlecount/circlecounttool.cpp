@@ -72,6 +72,7 @@ void CircleCountTool::process(QPainter& painter,
     auto new_font = orig_font;
     auto fontSize = bubble_size;
     new_font.setPixelSize(fontSize);
+    new_font.setBold(true);
     painter.setFont(new_font);
 
     QRect bRect =
