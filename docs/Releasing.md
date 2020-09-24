@@ -3,8 +3,8 @@
 These are the code changes that need to take place
 - [ ] Create and push git tag
 - [ ] Update version in CMakeLists.txt
-- [ ] Update changelog at data/debian/changelog
-- [ ] Update changelog at data/rpm/flameshot.spec
+- [ ] Update version and changelog at data/debian/changelog
+- [ ] Update version and changelog at data/rpm/flameshot.spec
 - [ ] Update docs/appdata/flameshot.metainfo.xml
 
 These are the steps for actually making the release
@@ -13,3 +13,5 @@ These are the steps for actually making the release
 - [ ] Create a new "New Release" in githhub and explain changes in release notes
 - [ ] Upload all binaries and sha's
 - [ ] Update change log on [website](https://github.com/flameshot-org/flameshot-org.github.io/) data/changelog.md
+- [ ] Update version on [website](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/_coverpage.md)
+
