@@ -107,7 +107,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: 5.15.0
+          version: 5.15.1
           target:  desktop
           dir: '${{ github.workspace }}/build/'
 
