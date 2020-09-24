@@ -2,19 +2,21 @@ name: Packaging(Linux)
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
 
 env:
   PRODUCT: flameshot
-  VERSION: 0.8.1
   RELEASE: 1
   ARCH: x86_64
   # dockerfiles, see https://github.com/flameshot-org/flameshot-docker-images
@@ -26,7 +28,7 @@ env:
 
 jobs:
   deb-pack:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
@@ -34,6 +36,20 @@ jobs:
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
       - name: Get packpack tool
         uses: actions/checkout@v2
         with:
@@ -45,6 +61,7 @@ jobs:
         run: |
           cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb
         env:
           OS: debian 
           DIST: buster
@@ -53,17 +70,22 @@ jobs:
         run: |
           cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb
         env:
           OS: ubuntu 
           DIST: focal
       - name: SHA256Sum of ${{ matrix.dist }} package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb.sha256sum
+          echo "=============${{ matrix.dist }} sha256sum download link============"
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb.sha256sum)
+          echo "========no operation for you can see link in the log console======="
       - name: Upload ${{ matrix.dist }} package(daily build)
         run: |
-          echo "================${{ matrix.dist }} downlod link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb)
-          echo "=====no operation for you can see link in the log console====="
+          echo "================${{ matrix.dist }} download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb)
+          echo "======no operation for you can see link in the log console====="
 
   deb-pack-extra:
     name: ubuntu-18.04(extra job to packaging deb)
@@ -72,7 +94,23 @@ jobs:
       image: vitzy/flameshot:ubuntu-bionic
     steps:
       - name: Checkout Source code
-        uses: actions/checkout@v2
+        # Because git version < 2.18(ubuntu 18.04), so only actions/checkout@v1 can be used.
+        # If you use actions/checkout@v2, you will have no .git folder.
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
       - name: Install dependencies
         run: |
           apt-get -y -qq update
@@ -91,30 +129,37 @@ jobs:
       - name: Prepare cmake(>=3.13.0)
         run: |
           apt-get -y autoremove cmake
-          wget https://github.com/Kitware/CMake/releases/download/v3.18.3/cmake-3.18.3-Linux-x86_64.tar.gz
-          tar -xvf cmake-3.18.3-Linux-x86_64.tar.gz
-          cd ./cmake-3.18.3-Linux-x86_64
+          wget https://github.com/Kitware/CMake/releases/download/v3.18.3/cmake-3.18.3-Linux-${ARCH}.tar.gz
+          tar -xf cmake-3.18.3-Linux-${ARCH}.tar.gz
+          cd ./cmake-3.18.3-Linux-${ARCH}
           cp -r bin /usr/
           cp -r share /usr/
           cp -r doc /usr/share/
           cp -r man /usr/share/
           cd ..
-          rm -rf cmake-3.18.3-Linux-x86_64 cmake-3.18.3-Linux-x86_64.tar.gz
+          rm -rf cmake-3.18.3-Linux-${ARCH} cmake-3.18.3-Linux-${ARCH}.tar.gz
+          echo "======CMAKE VERSION======"
+          cmake --version
+          echo "========================="
       - name: Packaging on ubuntu-18.04
         run: |
           cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
           mkdir -p $GITHUB_WORKSPACE/build
           sed -e "/cmake (>= 3.13~),/d" -i $GITHUB_WORKSPACE/debian/control
           dpkg-buildpackage -b
-          cp $GITHUB_WORKSPACE/../${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb
+          cp $GITHUB_WORKSPACE/../${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
       - name: SHA256Sum of ubuntu-18.04 package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum
+          echo "============ubuntu-18.04 sha256sum download link=============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum)
+          echo "=====no operation for you can see link in the log console====="
       - name: Upload ubuntu-18.04 package(daily build)
         run: |
-          echo "===================ubuntu-18.04 downlod link=================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb)
-          echo "=====no operation for you can see link in the log console====="
+          echo "===================ubuntu-18.04 download link=================="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb)
+          echo "======no operation for you can see link in the log console====="
 
   rpm-pack:
     runs-on: ubuntu-20.04
@@ -125,6 +170,20 @@ jobs:
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
       - name: Get packpack tool
         uses: actions/checkout@v2
         with:
@@ -158,29 +217,51 @@ jobs:
       - name: SHA256Sum of ${{ matrix.dist }} package(daily build)
         if: startsWith(matrix.dist, 'fedora')
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm          
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm.sha256sum
+          echo "============${{ matrix.dist }} sha256sum download link============"
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm.sha256sum)
+          echo "=======no operation for you can see link in the log console======="
       - name: SHA256Sum of ${{ matrix.dist }} package(daily build)
         if: startsWith(matrix.dist, 'opensuse-leap')
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm          
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm.sha256sum
+          echo "============${{ matrix.dist }} sha256sum download link==========="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm.sha256sum)
+          echo "=======no operation for you can see link in the log console======"
       - name: Upload ${{ matrix.dist }} package(daily build)
         if: startsWith(matrix.dist, 'fedora')
         run: |
-          echo "================${{ matrix.dist }} downlod link==============="
+          echo "================${{ matrix.dist }} download link==============="
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm)
-          echo "=====no operation for you can see link in the log console====="
+          echo "======no operation for you can see link in the log console====="
       - name: Upload ${{ matrix.dist }} package(daily build)
         if: startsWith(matrix.dist, 'opensuse-leap')
         run: |
-          echo "================${{ matrix.dist }} downlod link==============="
+          echo "================${{ matrix.dist }} download link==============="
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm)
-          echo "=====no operation for you can see link in the log console====="
+          echo "======no operation for you can see link in the log console====="
 
   appimage-pack:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
@@ -234,17 +315,35 @@ jobs:
       - name: SHA256Sum of appimage package(daily build)
         run: |
           sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage
+          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage > $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage.sha256sum
+          echo "================appimage sha256sum download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage.sha256sum)
+          echo "======no operation for you can see link in the log console====="
       - name: Upload appimage package for daily build
         run: |
-          echo "====================appimage downlod link====================="
+          echo "====================appimage download link====================="
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage)
-          echo "=====no operation for you can see link in the log console====="
+          echo "======no operation for you can see link in the log console====="
 
   flatpak-pack:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
       - name: Setup flatpak
         run: |
           sudo apt-get -y -qq update
@@ -266,17 +365,35 @@ jobs:
       - name: SHA256Sum of flatpak package(daily build)
         run: |
           sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak.sha256sum
+          echo "================flatpak sha256sum download link===================="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak.sha256sum) 
+          echo "========no operation for you can see link in the log console======="
       - name: Upload flatpak package(daily build)
         run: |
-          echo "=====================flatpak downlod link====================="
+          echo "=====================flatpak download link====================="
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak) 
-          echo "=====no operation for you can see link in the log console====="
+          echo "======no operation for you can see link in the log console====="
 
   snap-pack:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
@@ -285,8 +402,12 @@ jobs:
       - name: SHA256Sum of snap package(daily build)
         run: |
           sha256sum ${{ steps.snapcraft.outputs.snap }}
+          sha256sum ${{ steps.snapcraft.outputs.snap }} > ${{ steps.snapcraft.outputs.snap }}.sha256sum
+          echo "================snap sha256sum download link=================="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${{ steps.snapcraft.outputs.snap }}.sha256sum)
+          echo "=====no operation for you can see link in the log console====="
       - name: Upload snap package(daily build)
         run: |
-          echo "=======================snap downlod link======================"
+          echo "=======================snap download link======================"
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${{ steps.snapcraft.outputs.snap }})
-          echo "=====no operation for you can see link in the log console====="
+          echo "======no operation for you can see link in the log console====="

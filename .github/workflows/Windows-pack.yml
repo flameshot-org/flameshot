@@ -2,19 +2,21 @@ name: Packaging(Windows)
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
 
 env:
   PRODUCT: flameshot
-  VERSION: 0.8.1
 
 jobs:
   windows-pack:
@@ -23,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt_ver: [5.15.0]
+        qt_ver: [5.15.1]
         qt_target: [desktop]
         config:
           - {
@@ -51,6 +53,21 @@ jobs:
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: master
+
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
 
       - name: Cache Qt
         id: cache-qt
@@ -105,19 +122,29 @@ jobs:
         shell: bash
         run: |
           sha256sum $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
+          sha256sum $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum
+          python -m pip install -U -q requests
+          echo "============Windows installer sha256sum download link============"
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum)
+          echo "=======no operation for you can see link in the log console====="
 
       - name: SHA256Sum of Windows portable(daily build)
         if:  matrix.type == 'portable'
         shell: bash
         run: |
           sha256sum $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
+          sha256sum $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum
+          python -m pip install -U -q requests
+          echo "===========Windows portable sha256sum download link============"
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum)
+          echo "=====no operation for you can see link in the log console====="
 
       - name: Upload Windows installer(daily build)
         if:  matrix.type == 'installer'
         shell: bash
         run: |
           python -m pip install -U -q requests
-          echo "================Windows installer downlod link================"
+          echo "================Windows installer download link================"
           echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi)
           echo "=====no operation for you can see link in the log console====="
 
@@ -126,6 +153,6 @@ jobs:
         shell: bash
         run: |
           python -m pip install -U -q requests
-          echo "================Windows portable downlod link================"
+          echo "=================Windows portable download link================"
           echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
           echo "=====no operation for you can see link in the log console====="
