@@ -189,12 +189,12 @@ void CaptureWidget::updateButtons()
         makeChild(b);
 
         switch (t) {
-            case CaptureButton::ButtonType::TYPE_EXIT:
-            case CaptureButton::ButtonType::TYPE_SAVE:
-            case CaptureButton::ButtonType::TYPE_COPY:
-            case CaptureButton::ButtonType::TYPE_UNDO:
-            case CaptureButton::ButtonType::TYPE_REDO:
-            case CaptureButton::ButtonType::TYPE_IMAGEUPLOADER:
+            case CaptureToolButton::ButtonType::TYPE_EXIT:
+            case CaptureToolButton::ButtonType::TYPE_SAVE:
+            case CaptureToolButton::ButtonType::TYPE_COPY:
+            case CaptureToolButton::ButtonType::TYPE_UNDO:
+            case CaptureToolButton::ButtonType::TYPE_REDO:
+            case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
                 break;
@@ -214,7 +214,7 @@ void CaptureWidget::updateButtons()
         }
 
         connect(
-          b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
+          b, &CaptureToolButton::pressedButton, this, &CaptureWidget::setState);
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
@@ -942,27 +942,27 @@ void CaptureWidget::downResize()
 void CaptureWidget::initShortcuts()
 {
     QString shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_EXIT).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_EXIT).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(close()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_SAVE).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_SAVE).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(saveScreenshot()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_COPY).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_COPY).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(copyScreenshot()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_UNDO).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_UNDO).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(undo()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_REDO).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_REDO).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(redo()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_IMAGEUPLOADER)
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER)
         .toString());
     new QShortcut(shortcut, this, SLOT(uploadScreenshot()));
 

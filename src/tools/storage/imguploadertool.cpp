@@ -16,6 +16,11 @@ void ImgUploaderTool::pressed(const CaptureContext& context)
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
 }
 
+QString ImgUploaderTool::name() const
+{
+    return tr("Imgage uploader tool");
+}
+
 const QPixmap& ImgUploaderTool::capture()
 {
     return m_capture;
@@ -30,4 +35,9 @@ QIcon ImgUploaderTool::icon(const QColor& background, bool inEditor) const
 bool ImgUploaderTool::closeOnButtonPressed() const
 {
     return true;
+}
+
+ToolType ImgUploaderTool::nameID() const
+{
+    return ToolType::UPLOAD;
 }

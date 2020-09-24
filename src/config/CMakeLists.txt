@@ -8,4 +8,8 @@ target_sources(
           geneneralconf.cpp
           strftimechooserwidget.cpp
           uicoloreditor.cpp
-          visualseditor.cpp)
+          visualseditor.cpp
+          filepathconfiguration.cpp
+          shortcutswidget.cpp
+          setshortcutwidget.cpp
+)

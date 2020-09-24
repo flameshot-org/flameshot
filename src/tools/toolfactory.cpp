@@ -46,7 +46,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
                                      QObject* parent)
 {
     StorageManager storageManager;
-    CaptureTool *tool;
+    CaptureTool* tool;
     switch (t) {
         case CaptureToolButton::TYPE_ARROW:
             tool = new ArrowTool(parent);
@@ -60,7 +60,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
         case CaptureToolButton::TYPE_EXIT:
             tool = new ExitTool(parent);
             break;
-        case CaptureButton::TYPE_IMAGEUPLOADER:
+        case CaptureToolButton::TYPE_IMAGEUPLOADER:
             tool = storageManager.imgUploaderTool(
               ConfigHandler().uploadStorage(), parent);
             break;
