@@ -17,6 +17,7 @@
 
 #include "singleapplication.h"
 #include "src/cli/commandlineparser.h"
+#include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
@@ -39,6 +40,7 @@
 
 int main(int argc, char* argv[])
 {
+    QApplication::setStyle(new StyleOverride);
     // required for the button serialization
     // TODO: change to QVector in v1.0
     qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
