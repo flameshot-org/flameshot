@@ -1,17 +1,5 @@
 flameshot (0.8.1-1) unstable; urgency=medium
 
-  * add: added translation:Japanese, Brazilian Portuguese, Serbian, Dutch, Ukrainian, German, Slovak, Basque, Czech, Swedish, Italian, Korean, Dutch
-  * add: allow enter key to copy image to clipboard
-  * add: side panel add thickness slider
-  * add: support for saving as JPG and BMP files
-  * add: allow 45 degree adjustment for some tools
-  * add: add option to close after capture (WARNING: this function is buggy! It may not work well if you are going to copy the image to clipboard! If you encounter problems related to clipboard, please disable this feature in the configuration and try again.)
-  * add: a basic launcher panel.
-  * add: add option to auto copy URL after upload
-  * add: a circle counter tool.
-  * add: replace the blur tool with pixelate tool
-  * add: convert buildsystem from QMake to CMake
-  * add: add launcher action into .desktop file
-  * fix: fix capture after pressing ctrl + S during textarea input
+  * New stable release.
 
- -- Boyuan Yang <byang@debian.org>  Sun, 13 Sep 2020 19:33:20 -0400
+ -- Boyuan Yang <byang@debian.org>  Wed, 23 Sep 2020 20:39:29 -0400
