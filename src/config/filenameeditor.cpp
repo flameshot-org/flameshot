@@ -62,7 +62,7 @@ void FileNameEditor::initWidgets()
     // preview
     m_outputLabel = new QLineEdit(this);
     m_outputLabel->setDisabled(true);
-    QString foreground = this->palette().foreground().color().name();
+    QString foreground = this->palette().windowText().color().name();
     m_outputLabel->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
     QPalette pal = m_outputLabel->palette();
     QColor color =

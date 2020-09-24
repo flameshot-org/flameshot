@@ -89,7 +89,7 @@ void ColorPicker::paintEvent(QPaintEvent*)
             highlight.moveTo(highlight.x() - 3, highlight.y() - 3);
             highlight.setHeight(highlight.height() + 6);
             highlight.setWidth(highlight.width() + 6);
-            painter.drawRoundRect(highlight, 100, 100);
+            painter.drawRoundedRect(highlight, 100, 100);
             painter.setPen(QColor(Qt::black));
         }
 

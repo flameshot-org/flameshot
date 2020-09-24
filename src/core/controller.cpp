@@ -22,7 +22,7 @@
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/historywidget.h"
@@ -95,6 +95,8 @@ void Controller::requestCapture(const CaptureRequest& request)
                 this->startFullscreenCapture(id);
             });
             break;
+        // TODO: Figure out the code path that gets here so the deprated warning
+        // can be fixed
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
             doLater(request.delay(), this, [this, id, number]() {
@@ -188,8 +190,10 @@ void Controller::openInfoWindow()
 
 void Controller::openLauncherWindow()
 {
-    CaptureLauncher* w = new CaptureLauncher();
-    w->show();
+    if (!m_launcherWindow) {
+        m_launcherWindow = new CaptureLauncher();
+    }
+    m_launcherWindow->show();
 }
 
 void Controller::enableTrayIcon()
@@ -210,11 +214,10 @@ void Controller::enableTrayIcon()
             &QAction::triggered,
             this,
             &Controller::openLauncherWindow);
-
     QAction* configAction = new QAction(tr("&Configuration"), this);
     connect(
       configAction, &QAction::triggered, this, &Controller::openConfigWindow);
-    QAction* infoAction = new QAction(tr("&Information"), this);
+    QAction* infoAction = new QAction(tr("&About"), this);
     connect(infoAction, &QAction::triggered, this, &Controller::openInfoWindow);
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);

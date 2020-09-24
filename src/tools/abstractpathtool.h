@@ -42,6 +42,8 @@ protected:
     void updateBackup(const QPixmap& pixmap);
     void addPoint(const QPoint& point);
 
+    virtual ToolType nameID() const = 0;
+
     QPixmap m_pixmapBackup;
     QRect m_backupArea;
     QColor m_color;

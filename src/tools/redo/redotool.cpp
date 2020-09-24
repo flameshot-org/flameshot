@@ -37,9 +37,9 @@ QString RedoTool::name() const
     return tr("Redo");
 }
 
-QString RedoTool::nameID()
+ToolType RedoTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::REDO;
 }
 
 QString RedoTool::description() const

@@ -112,6 +112,8 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     QString command = index.data(Qt::UserRole)
                         .toString()
                         .replace(QRegExp("(\\%.)"), '"' + m_tempFile + '"');
+
+    QString app_name = index.data(Qt::UserRole).toString().split(" ").at(0);
     bool inTerminal =
       index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (inTerminal) {
@@ -121,7 +123,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
               this, tr("Error"), tr("Unable to launch in terminal."));
         }
     } else {
-        QProcess::startDetached(command);
+        QProcess::startDetached(app_name, { m_tempFile });
     }
     if (!m_keepOpen) {
         close();

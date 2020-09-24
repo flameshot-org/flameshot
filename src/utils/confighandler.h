@@ -17,19 +17,18 @@
 
 #pragma once
 
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QSettings>
 #include <QStringList>
 #include <QVector>
 
-class ConfigHandler : public QObject
+class ConfigHandler
 {
-
 public:
     explicit ConfigHandler();
 
-    QVector<CaptureButton::ButtonType> getButtons();
-    void setButtons(const QVector<CaptureButton::ButtonType>&);
+    QVector<CaptureToolButton::ButtonType> getButtons();
+    void setButtons(const QVector<CaptureToolButton::ButtonType>&);
 
     QVector<QColor> getUserColors();
     void setUserColors(const QVector<QColor>&);
@@ -50,6 +49,9 @@ public:
 
     bool showHelpValue();
     void setShowHelp(const bool);
+
+    bool showSidePanelButtonValue();
+    void setShowSidePanelButton(const bool);
 
     bool desktopNotificationValue();
     void setDesktopNotification(const bool);
@@ -81,6 +83,11 @@ public:
 
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
+    bool saveAfterCopyValue();
+    void setSaveAfterCopy(const bool);
+
+    QString saveAfterCopyPathValue();
+    void setSaveAfterCopyPath(const QString&);
 
     bool copyPathAfterSaveEnabled();
     void setCopyPathAfterSaveEnabled(const bool);
@@ -105,6 +112,8 @@ private:
 
     bool normalizeButtons(QVector<int>&);
 
-    QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int>& l);
-    QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType>& l);
+    QVector<CaptureToolButton::ButtonType> fromIntToButton(
+      const QVector<int>& l);
+    QVector<int> fromButtonToInt(
+      const QVector<CaptureToolButton::ButtonType>& l);
 };

@@ -38,9 +38,9 @@ QString SaveTool::name() const
     return tr("Save");
 }
 
-QString SaveTool::nameID()
+ToolType SaveTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::SAVE;
 }
 
 QString SaveTool::description() const
@@ -64,7 +64,7 @@ void SaveTool::pressed(const CaptureContext& context)
         }
     } else {
         bool ok = ScreenshotSaver().saveToFilesystem(
-          context.selectedScreenshotArea(), context.savePath);
+          context.selectedScreenshotArea(), context.savePath, "");
         if (ok) {
             emit requestAction(REQ_CAPTURE_DONE_OK);
         }

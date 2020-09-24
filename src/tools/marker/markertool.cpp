@@ -41,9 +41,9 @@ QString MarkerTool::name() const
     return tr("Marker");
 }
 
-QString MarkerTool::nameID()
+ToolType MarkerTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::MARKER;
 }
 
 QString MarkerTool::description() const

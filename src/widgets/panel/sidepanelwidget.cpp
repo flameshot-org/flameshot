@@ -82,7 +82,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             this,
             &SidePanelWidget::updateThickness);
 
-    QColor background = this->palette().background().color();
+    QColor background = this->palette().window().color();
     bool isDark = ColorUtils::colorIsDark(background);
     QString modifier =
       isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
