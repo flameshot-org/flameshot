@@ -126,6 +126,8 @@ CaptureWidget::CaptureWidget(const uint id,
     if (m_context.fullscreen) {
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
+            r.moveTo(r.x() / screen->devicePixelRatio(),
+                     r.y() / screen->devicePixelRatio());
 #ifdef Q_OS_WIN
             r.moveTo(r.topLeft() - topLeft);
 #endif
@@ -600,6 +602,10 @@ void CaptureWidget::initPanel()
     QRect panelRect = rect();
     if (m_context.fullscreen) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
+        auto devicePixelRatio =
+          QGuiApplication::primaryScreen()->devicePixelRatio();
+        panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                         panelRect.y() / devicePixelRatio);
     }
 
     ConfigHandler config;
