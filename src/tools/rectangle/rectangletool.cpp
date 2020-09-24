@@ -25,71 +25,62 @@ namespace {
 RectangleTool::RectangleTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {
-  m_supportsDiagonalAdj = true;
+    m_supportsDiagonalAdj = true;
 }
 
-QIcon
-RectangleTool::icon(const QColor& background, bool inEditor) const
+QIcon RectangleTool::icon(const QColor& background, bool inEditor) const
 {
-  Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "square.svg");
+    Q_UNUSED(inEditor);
+    return QIcon(iconPath(background) + "square.svg");
 }
-QString
-RectangleTool::name() const
+QString RectangleTool::name() const
 {
-  return tr("Rectangle");
+    return tr("Rectangle");
 }
 
-ToolType
-RectangleTool::nameID() const
+ToolType RectangleTool::nameID() const
 {
-  return ToolType::RECTANGLE;
+    return ToolType::RECTANGLE;
 }
 
-QString
-RectangleTool::description() const
+QString RectangleTool::description() const
 {
-  return tr("Set the Rectangle as the paint tool");
+    return tr("Set the Rectangle as the paint tool");
 }
 
-CaptureTool*
-RectangleTool::copy(QObject* parent)
+CaptureTool* RectangleTool::copy(QObject* parent)
 {
-  return new RectangleTool(parent);
+    return new RectangleTool(parent);
 }
 
-void
-RectangleTool::process(QPainter& painter,
-                       const QPixmap& pixmap,
-                       bool recordUndo)
+void RectangleTool::process(QPainter& painter,
+                            const QPixmap& pixmap,
+                            bool recordUndo)
 {
-  if (recordUndo) {
-    updateBackup(pixmap);
-  }
-  painter.setPen(QPen(m_color, m_thickness));
-  painter.setBrush(QBrush(m_color));
-  painter.drawRect(QRect(m_points.first, m_points.second));
+    if (recordUndo) {
+        updateBackup(pixmap);
+    }
+    painter.setPen(QPen(m_color, m_thickness));
+    painter.setBrush(QBrush(m_color));
+    painter.drawRect(QRect(m_points.first, m_points.second));
 }
 
-void
-RectangleTool::paintMousePreview(QPainter& painter,
-                                 const CaptureContext& context)
+void RectangleTool::paintMousePreview(QPainter& painter,
+                                      const CaptureContext& context)
 {
-  painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
-  painter.drawLine(context.mousePos, context.mousePos);
+    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
+    painter.drawLine(context.mousePos, context.mousePos);
 }
 
-void
-RectangleTool::drawStart(const CaptureContext& context)
+void RectangleTool::drawStart(const CaptureContext& context)
 {
-  m_color = context.color;
-  m_thickness = context.thickness + PADDING_VALUE;
-  m_points.first = context.mousePos;
-  m_points.second = context.mousePos;
+    m_color = context.color;
+    m_thickness = context.thickness + PADDING_VALUE;
+    m_points.first = context.mousePos;
+    m_points.second = context.mousePos;
 }
 
-void
-RectangleTool::pressed(const CaptureContext& context)
+void RectangleTool::pressed(const CaptureContext& context)
 {
-  Q_UNUSED(context);
+    Q_UNUSED(context);
 }

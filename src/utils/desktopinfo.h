@@ -22,24 +22,24 @@
 class DesktopInfo
 {
 public:
-  DesktopInfo();
+    DesktopInfo();
 
-  enum WM
-  {
-    GNOME,
-    KDE,
-    OTHER
-  };
+    enum WM
+    {
+        GNOME,
+        KDE,
+        OTHER
+    };
 
-  bool waylandDectected();
-  WM windowManager();
+    bool waylandDectected();
+    WM windowManager();
 
 private:
-  QString XDG_CURRENT_DESKTOP;
-  QString XDG_SESSION_TYPE;
-  QString WAYLAND_DISPLAY;
-  QString KDE_FULL_SESSION;
-  QString GNOME_DESKTOP_SESSION_ID;
-  QString GDMSESSION;
-  QString DESKTOP_SESSION;
+    QString XDG_CURRENT_DESKTOP;
+    QString XDG_SESSION_TYPE;
+    QString WAYLAND_DISPLAY;
+    QString KDE_FULL_SESSION;
+    QString GNOME_DESKTOP_SESSION_ID;
+    QString GDMSESSION;
+    QString DESKTOP_SESSION;
 };

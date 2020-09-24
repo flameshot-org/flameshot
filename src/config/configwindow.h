@@ -26,19 +26,19 @@ class VisualsEditor;
 
 class ConfigWindow : public QTabWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit ConfigWindow(QWidget* parent = nullptr);
+    explicit ConfigWindow(QWidget* parent = nullptr);
 
 signals:
-  void updateChildren();
+    void updateChildren();
 
 protected:
-  void keyPressEvent(QKeyEvent*);
+    void keyPressEvent(QKeyEvent*);
 
 private:
-  FileNameEditor* m_filenameEditor;
-  GeneneralConf* m_generalConfig;
-  VisualsEditor* m_visuals;
-  QFileSystemWatcher* m_configWatcher;
+    FileNameEditor* m_filenameEditor;
+    GeneneralConf* m_generalConfig;
+    VisualsEditor* m_visuals;
+    QFileSystemWatcher* m_configWatcher;
 };

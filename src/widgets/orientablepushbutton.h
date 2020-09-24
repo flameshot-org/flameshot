@@ -24,29 +24,29 @@
 
 class OrientablePushButton : public CaptureButton
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  enum Orientation
-  {
-    Horizontal,
-    VerticalTopToBottom,
-    VerticalBottomToTop
-  };
+    enum Orientation
+    {
+        Horizontal,
+        VerticalTopToBottom,
+        VerticalBottomToTop
+    };
 
-  OrientablePushButton(QWidget* parent = nullptr);
-  OrientablePushButton(const QString& text, QWidget* parent = nullptr);
-  OrientablePushButton(const QIcon& icon,
-                       const QString& text,
-                       QWidget* parent = nullptr);
+    OrientablePushButton(QWidget* parent = nullptr);
+    OrientablePushButton(const QString& text, QWidget* parent = nullptr);
+    OrientablePushButton(const QIcon& icon,
+                         const QString& text,
+                         QWidget* parent = nullptr);
 
-  QSize sizeHint() const;
+    QSize sizeHint() const;
 
-  OrientablePushButton::Orientation orientation() const;
-  void setOrientation(const OrientablePushButton::Orientation& orientation);
+    OrientablePushButton::Orientation orientation() const;
+    void setOrientation(const OrientablePushButton::Orientation& orientation);
 
 protected:
-  void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event);
 
 private:
-  Orientation m_orientation = Horizontal;
+    Orientation m_orientation = Horizontal;
 };

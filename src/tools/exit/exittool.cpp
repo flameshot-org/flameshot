@@ -22,45 +22,38 @@ ExitTool::ExitTool(QObject* parent)
   : AbstractActionTool(parent)
 {}
 
-bool
-ExitTool::closeOnButtonPressed() const
+bool ExitTool::closeOnButtonPressed() const
 {
-  return true;
+    return true;
 }
 
-QIcon
-ExitTool::icon(const QColor& background, bool inEditor) const
+QIcon ExitTool::icon(const QColor& background, bool inEditor) const
 {
-  Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "close.svg");
+    Q_UNUSED(inEditor);
+    return QIcon(iconPath(background) + "close.svg");
 }
-QString
-ExitTool::name() const
+QString ExitTool::name() const
 {
-  return tr("Exit");
+    return tr("Exit");
 }
 
-ToolType
-ExitTool::nameID() const
+ToolType ExitTool::nameID() const
 {
-  return ToolType::EXIT;
+    return ToolType::EXIT;
 }
 
-QString
-ExitTool::description() const
+QString ExitTool::description() const
 {
-  return tr("Leave the capture screen");
+    return tr("Leave the capture screen");
 }
 
-CaptureTool*
-ExitTool::copy(QObject* parent)
+CaptureTool* ExitTool::copy(QObject* parent)
 {
-  return new ExitTool(parent);
+    return new ExitTool(parent);
 }
 
-void
-ExitTool::pressed(const CaptureContext& context)
+void ExitTool::pressed(const CaptureContext& context)
 {
-  Q_UNUSED(context);
-  emit requestAction(REQ_CLOSE_GUI);
+    Q_UNUSED(context);
+    emit requestAction(REQ_CLOSE_GUI);
 }

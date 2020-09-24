@@ -23,17 +23,17 @@ class QDBusInterface;
 
 class SystemNotification : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit SystemNotification(QObject* parent = nullptr);
+    explicit SystemNotification(QObject* parent = nullptr);
 
-  void sendMessage(const QString& text, const QString& savePath = {});
+    void sendMessage(const QString& text, const QString& savePath = {});
 
-  void sendMessage(const QString& text,
-                   const QString& title,
-                   const QString& savePath,
-                   const int timeout = 5000);
+    void sendMessage(const QString& text,
+                     const QString& title,
+                     const QString& savePath,
+                     const int timeout = 5000);
 
 private:
-  QDBusInterface* m_interface;
+    QDBusInterface* m_interface;
 };

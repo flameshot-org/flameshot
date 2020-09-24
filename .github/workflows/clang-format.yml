@@ -14,4 +14,4 @@ jobs:
         #exclude: './third_party ./external'
         extensions: 'h,cpp'
         clangFormatVersion: 11
-        style: mozilla
+        style: file

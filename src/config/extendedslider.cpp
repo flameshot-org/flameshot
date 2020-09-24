@@ -20,38 +20,37 @@
 ExtendedSlider::ExtendedSlider(QWidget* parent)
   : QSlider(parent)
 {
-  connect(
-    this, &ExtendedSlider::valueChanged, this, &ExtendedSlider::updateTooltip);
-  connect(this, &ExtendedSlider::sliderMoved, this, &ExtendedSlider::fireTimer);
-  m_timer.setSingleShot(true);
-  connect(
-    &m_timer, &QTimer::timeout, this, &ExtendedSlider::modificationsEnded);
+    connect(this,
+            &ExtendedSlider::valueChanged,
+            this,
+            &ExtendedSlider::updateTooltip);
+    connect(
+      this, &ExtendedSlider::sliderMoved, this, &ExtendedSlider::fireTimer);
+    m_timer.setSingleShot(true);
+    connect(
+      &m_timer, &QTimer::timeout, this, &ExtendedSlider::modificationsEnded);
 }
 
-int
-ExtendedSlider::mappedValue(int min, int max)
+int ExtendedSlider::mappedValue(int min, int max)
 {
-  qreal progress =
-    ((value() - minimum())) / static_cast<qreal>(maximum() - minimum());
-  return min + (max - min) * progress;
+    qreal progress =
+      ((value() - minimum())) / static_cast<qreal>(maximum() - minimum());
+    return min + (max - min) * progress;
 }
 
-void
-ExtendedSlider::setMapedValue(int min, int val, int max)
+void ExtendedSlider::setMapedValue(int min, int val, int max)
 {
-  qreal progress = ((val - min) + 1) / static_cast<qreal>(max - min);
-  int value = minimum() + (maximum() - minimum()) * progress;
-  setValue(value);
+    qreal progress = ((val - min) + 1) / static_cast<qreal>(max - min);
+    int value = minimum() + (maximum() - minimum()) * progress;
+    setValue(value);
 }
 
-void
-ExtendedSlider::updateTooltip()
+void ExtendedSlider::updateTooltip()
 {
-  setToolTip(QString::number(value()) + "%");
+    setToolTip(QString::number(value()) + "%");
 }
 
-void
-ExtendedSlider::fireTimer()
+void ExtendedSlider::fireTimer()
 {
-  m_timer.start(500);
+    m_timer.start(500);
 }

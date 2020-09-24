@@ -26,98 +26,93 @@
 UtilityPanel::UtilityPanel(QWidget* parent)
   : QWidget(parent)
 {
-  initInternalPanel();
-  setAttribute(Qt::WA_TransparentForMouseEvents);
-  setCursor(Qt::ArrowCursor);
-
-  m_showAnimation = new QPropertyAnimation(m_internalPanel, "geometry", this);
-  m_showAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-  m_showAnimation->setDuration(300);
-
-  m_hideAnimation = new QPropertyAnimation(m_internalPanel, "geometry", this);
-  m_hideAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-  m_hideAnimation->setDuration(300);
-
-  connect(m_hideAnimation,
-          &QPropertyAnimation::finished,
-          m_internalPanel,
-          &QWidget::hide);
-}
-
-QWidget*
-UtilityPanel::toolWidget() const
-{
-  return m_toolWidget;
-}
-
-void
-UtilityPanel::addToolWidget(QWidget* w)
-{
-  if (m_toolWidget) {
-    m_toolWidget->deleteLater();
-  }
-  if (w) {
-    m_toolWidget = w;
-    m_toolWidget->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
-    m_upLayout->addWidget(w);
-  }
-}
-
-void
-UtilityPanel::clearToolWidget()
-{
-  if (m_toolWidget) {
-    m_toolWidget->deleteLater();
-  }
-}
-
-void
-UtilityPanel::pushWidget(QWidget* w)
-{
-  m_layout->insertWidget(m_layout->count() - 1, w);
-}
-
-void
-UtilityPanel::toggle()
-{
-  if (m_internalPanel->isHidden()) {
-    setAttribute(Qt::WA_TransparentForMouseEvents, false);
-    m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
-    m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
-    m_internalPanel->show();
-    m_showAnimation->start();
-  } else {
+    initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
-    m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
-    m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
-    m_hideAnimation->start();
-  }
+    setCursor(Qt::ArrowCursor);
+
+    m_showAnimation = new QPropertyAnimation(m_internalPanel, "geometry", this);
+    m_showAnimation->setEasingCurve(QEasingCurve::InOutQuad);
+    m_showAnimation->setDuration(300);
+
+    m_hideAnimation = new QPropertyAnimation(m_internalPanel, "geometry", this);
+    m_hideAnimation->setEasingCurve(QEasingCurve::InOutQuad);
+    m_hideAnimation->setDuration(300);
+
+    connect(m_hideAnimation,
+            &QPropertyAnimation::finished,
+            m_internalPanel,
+            &QWidget::hide);
 }
 
-void
-UtilityPanel::initInternalPanel()
+QWidget* UtilityPanel::toolWidget() const
 {
-  m_internalPanel = new QScrollArea(this);
-  m_internalPanel->setAttribute(Qt::WA_NoMousePropagation);
-  QWidget* widget = new QWidget();
-  m_internalPanel->setWidget(widget);
-  m_internalPanel->setWidgetResizable(true);
+    return m_toolWidget;
+}
 
-  m_layout = new QVBoxLayout();
-  m_upLayout = new QVBoxLayout();
-  m_bottomLayout = new QVBoxLayout();
-  m_layout->addLayout(m_upLayout);
-  m_layout->addLayout(m_bottomLayout);
-  widget->setLayout(m_layout);
+void UtilityPanel::addToolWidget(QWidget* w)
+{
+    if (m_toolWidget) {
+        m_toolWidget->deleteLater();
+    }
+    if (w) {
+        m_toolWidget = w;
+        m_toolWidget->setSizePolicy(QSizePolicy::Ignored,
+                                    QSizePolicy::Preferred);
+        m_upLayout->addWidget(w);
+    }
+}
 
-  QPushButton* closeButton = new QPushButton(this);
-  closeButton->setText(tr("Close"));
-  connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
-  m_bottomLayout->addWidget(closeButton);
+void UtilityPanel::clearToolWidget()
+{
+    if (m_toolWidget) {
+        m_toolWidget->deleteLater();
+    }
+}
 
-  QColor bgColor = palette().window().color();
-  bgColor.setAlphaF(0.0);
-  m_internalPanel->setStyleSheet(
-    QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
-  m_internalPanel->hide();
+void UtilityPanel::pushWidget(QWidget* w)
+{
+    m_layout->insertWidget(m_layout->count() - 1, w);
+}
+
+void UtilityPanel::toggle()
+{
+    if (m_internalPanel->isHidden()) {
+        setAttribute(Qt::WA_TransparentForMouseEvents, false);
+        m_showAnimation->setStartValue(QRect(-width(), 0, 0, height()));
+        m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
+        m_internalPanel->show();
+        m_showAnimation->start();
+    } else {
+        setAttribute(Qt::WA_TransparentForMouseEvents);
+        m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
+        m_hideAnimation->setEndValue(QRect(-width(), 0, 0, height()));
+        m_hideAnimation->start();
+    }
+}
+
+void UtilityPanel::initInternalPanel()
+{
+    m_internalPanel = new QScrollArea(this);
+    m_internalPanel->setAttribute(Qt::WA_NoMousePropagation);
+    QWidget* widget = new QWidget();
+    m_internalPanel->setWidget(widget);
+    m_internalPanel->setWidgetResizable(true);
+
+    m_layout = new QVBoxLayout();
+    m_upLayout = new QVBoxLayout();
+    m_bottomLayout = new QVBoxLayout();
+    m_layout->addLayout(m_upLayout);
+    m_layout->addLayout(m_bottomLayout);
+    widget->setLayout(m_layout);
+
+    QPushButton* closeButton = new QPushButton(this);
+    closeButton->setText(tr("Close"));
+    connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
+    m_bottomLayout->addWidget(closeButton);
+
+    QColor bgColor = palette().window().color();
+    bgColor.setAlphaF(0.0);
+    m_internalPanel->setStyleSheet(
+      QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
+    m_internalPanel->hide();
 }

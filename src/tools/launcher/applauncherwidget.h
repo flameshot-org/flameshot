@@ -29,31 +29,31 @@ class QListWidget;
 
 class AppLauncherWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AppLauncherWidget(const QPixmap& p, QWidget* parent = nullptr);
+    explicit AppLauncherWidget(const QPixmap& p, QWidget* parent = nullptr);
 
 private slots:
-  void launch(const QModelIndex& index);
-  void checkboxClicked(const bool enabled);
-  void searchChanged(const QString& text);
+    void launch(const QModelIndex& index);
+    void checkboxClicked(const bool enabled);
+    void searchChanged(const QString& text);
 
 private:
-  void initListWidget();
-  void initAppMap();
-  void configureListView(QListWidget* widget);
-  void addAppsToListWidget(QListWidget* widget,
-                           const QVector<DesktopAppData>& appList);
+    void initListWidget();
+    void initAppMap();
+    void configureListView(QListWidget* widget);
+    void addAppsToListWidget(QListWidget* widget,
+                             const QVector<DesktopAppData>& appList);
 
-  DesktopFileParser m_parser;
-  QPixmap m_pixmap;
-  QString m_tempFile;
-  bool m_keepOpen;
-  QMap<QString, QVector<DesktopAppData>> m_appsMap;
-  QCheckBox* m_keepOpenCheckbox;
-  QCheckBox* m_terminalCheckbox;
-  QVBoxLayout* m_layout;
-  QLineEdit* m_lineEdit;
-  QListWidget* m_filterList;
-  QTabWidget* m_tabWidget;
+    DesktopFileParser m_parser;
+    QPixmap m_pixmap;
+    QString m_tempFile;
+    bool m_keepOpen;
+    QMap<QString, QVector<DesktopAppData>> m_appsMap;
+    QCheckBox* m_keepOpenCheckbox;
+    QCheckBox* m_terminalCheckbox;
+    QVBoxLayout* m_layout;
+    QLineEdit* m_lineEdit;
+    QListWidget* m_filterList;
+    QTabWidget* m_tabWidget;
 };

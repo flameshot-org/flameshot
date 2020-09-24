@@ -22,30 +22,29 @@
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
   : QObject(parent)
 {
-  // Forced Print Screen
-  if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
-    // ok
-  }
+    // Forced Print Screen
+    if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
+        // ok
+    }
 }
 
-bool
-GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
-                                        void* message,
-                                        long* result)
+bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
+                                             void* message,
+                                             long* result)
 {
-  Q_UNUSED(eventType);
-  Q_UNUSED(result);
+    Q_UNUSED(eventType);
+    Q_UNUSED(result);
 
-  MSG* msg = static_cast<MSG*>(message);
-  if (msg->message == WM_HOTKEY) {
-    // const quint32 keycode = HIWORD(msg->lParam);
-    // const quint32 modifiers = LOWORD(msg->lParam);
+    MSG* msg = static_cast<MSG*>(message);
+    if (msg->message == WM_HOTKEY) {
+        // const quint32 keycode = HIWORD(msg->lParam);
+        // const quint32 modifiers = LOWORD(msg->lParam);
 
-    // TODO: this is just a temporal workwrround, proper global
-    // support would need custom shortcuts defined by the user.
-    Controller::getInstance()->requestCapture(
-      CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
-    return true;
-  }
-  return false;
+        // TODO: this is just a temporal workwrround, proper global
+        // support would need custom shortcuts defined by the user.
+        Controller::getInstance()->requestCapture(
+          CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
+        return true;
+    }
+    return false;
 }

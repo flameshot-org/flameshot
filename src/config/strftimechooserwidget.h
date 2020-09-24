@@ -21,13 +21,13 @@
 
 class StrftimeChooserWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit StrftimeChooserWidget(QWidget* parent = nullptr);
+    explicit StrftimeChooserWidget(QWidget* parent = nullptr);
 
 signals:
-  void variableEmitted(const QString&);
+    void variableEmitted(const QString&);
 
 private:
-  static QMap<QString, QString> m_buttonData;
+    static QMap<QString, QString> m_buttonData;
 };

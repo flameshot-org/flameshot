@@ -25,38 +25,32 @@ CommandArgument::CommandArgument(const QString& name,
   , m_description(description)
 {}
 
-void
-CommandArgument::setName(const QString& name)
+void CommandArgument::setName(const QString& name)
 {
-  m_name = name;
+    m_name = name;
 }
 
-QString
-CommandArgument::name() const
+QString CommandArgument::name() const
 {
-  return m_name;
+    return m_name;
 }
 
-void
-CommandArgument::setDescription(const QString& description)
+void CommandArgument::setDescription(const QString& description)
 {
-  m_description = description;
+    m_description = description;
 }
 
-QString
-CommandArgument::description() const
+QString CommandArgument::description() const
 {
-  return m_description;
+    return m_description;
 }
 
-bool
-CommandArgument::isRoot() const
+bool CommandArgument::isRoot() const
 {
-  return m_name.isEmpty() && m_description.isEmpty();
+    return m_name.isEmpty() && m_description.isEmpty();
 }
 
-bool
-CommandArgument::operator==(const CommandArgument& arg) const
+bool CommandArgument::operator==(const CommandArgument& arg) const
 {
-  return m_description == arg.m_description && m_name == arg.m_name;
+    return m_description == arg.m_description && m_name == arg.m_name;
 }
