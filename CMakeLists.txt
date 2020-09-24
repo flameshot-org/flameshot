@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.13)
 # This can be read from ${PROJECT_NAME} after project() is called
 project(
   flameshot
-  VERSION 0.8.0
+  VERSION 0.8.1
   LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
