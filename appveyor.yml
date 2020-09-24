@@ -1,90 +1,20 @@
-image: Visual Studio 2015
-
-#TODO: we should take version from the last tag in git history + build number
-version: 0.7.12.{build}
-# Major_Version_Number.Minor_Version_Number.Patch_Number.Build_Number
-
-skip_branch_with_pr: true
+image:
+  - Visual Studio 2019
+clone_folder: c:\projects\source
 
 environment:
-  COMPILER: msvc
-  VSVER: 14
-
-  matrix:
-    - QT: C:\Qt\5.9\msvc2015_64
-      PLATFORM: amd64
-    - QT: C:\Qt\5.9\msvc2015
-      PLATFORM: x86
-init:
-  - ps: |
-      $version = new-object System.Version $env:APPVEYOR_BUILD_VERSION
-      $packageVersion = "{0}.{1}.{2}.{3}" -f $version.Major, $version.Minor, $version.Build, $version.Revision
-      $env:build_number = $version.Build
-      $env:flameshot_version = $packageVersion
-
-# scripts that run after cloning repository
-install:
-  - set PATH=%QT%\bin\;C:\Qt\Tools\QtCreator\bin\;C:\Qt\QtIFW3.0.1\bin\;%PATH%
-
-# scripts that run before build
-before_build:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
-  - appveyor DownloadFile http://mlaan2.home.xs4all.nl/ispack/innosetup-6.0.5.exe
-  - innosetup-6.0.5.exe /VERYSILENT /ALLUSERS /DIR=C:\InnoSetup
-  # After calling vcvarsall.bat, %PLATFORM% will be X64 or x86
-  - qmake --version
-  - mkdir build
-  - cd build
-  - if "%PLATFORM%" EQU "X64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ../flameshot.pro)
-  - if "%PLATFORM%" EQU "x86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ../flameshot.pro)
-
-# custom build scripts
+  Qt5_INSTALL_DIR: 'C:\Qt\5.15.0\msvc2019_64'
+  PATH: '%Qt5_INSTALL_DIR%\bin;%PATH%'
 build_script:
-  - nmake
+- cmd: >-
 
-# scripts that run after build
-after_build:
-  # Clone OpenSSL DLLs
-  - mkdir distrib\flameshot
-  - windeployqt.exe --dir .\distrib\flameshot %APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe
-  - copy "%APPVEYOR_BUILD_FOLDER%\build\release\flameshot.exe" "distrib\flameshot\flameshot.exe"
-  - copy "%APPVEYOR_BUILD_FOLDER%\README.md" "distrib\flameshot\README.md"
-  - copy "%APPVEYOR_BUILD_FOLDER%\LICENSE" "distrib\flameshot\LICENSE.txt"
-  - copy "%APPVEYOR_BUILD_FOLDER%\docs\flameshot-documentation.pdf" "distrib\flameshot\flameshot-documentation.pdf"
-  - echo %flameshot_version% > "distrib\flameshot\version.txt"
-  - echo Build:%build_number% >> "distrib\flameshot\version.txt"
-  - echo %APPVEYOR_REPO_COMMIT% >> "distrib\flameshot\version.txt"
-  - copy "distrib\flameshot\flameshot.exe" "distrib\flameshot_win_%PLATFORM%.exe"
-  - copy "%APPVEYOR_BUILD_FOLDER%\build\translations\Internationalization_*.qm" "distrib\flameshot\translations"
-  # Delete translations\qt_*.qm
-  - del /F /Q "distrib\flameshot\translations\qt_*.qm"
-  # install vcredist-2015
-  - cd distrib
-  - if "%PLATFORM%" EQU "X64" (mv flameshot\vcredist_x64.exe flameshot\vcredist.exe)
-  - if "%PLATFORM%" EQU "x86" (mv flameshot\vcredist_x86.exe flameshot\vcredist.exe)
-  - 7z a flameshot_%flameshot_version%_win_%PLATFORM%.zip flameshot
-  # Download and install vcredist-2013 for OpenSSL binnaries
-  - if "%PLATFORM%" EQU "X64" appveyor DownloadFile https://slproweb.com/download/Win64OpenSSL_Light-1_0_2u.exe
-  - if "%PLATFORM%" EQU "X64" (mv Win64OpenSSL_Light-1_0_2u.exe flameshot\OpenSSL_Light-1_0_2u.exe)
-  - if "%PLATFORM%" EQU "x86" appveyor DownloadFile https://slproweb.com/download/Win32OpenSSL_Light-1_0_2u.exe
-  - if "%PLATFORM%" EQU "x86" (mv Win32OpenSSL_Light-1_0_2u.exe flameshot\OpenSSL_Light-1_0_2u.exe)
-  - flameshot\OpenSSL_Light-1_0_2u.exe /VERYSILENT /DIR="C:\OpenSSL_Temp"
-  - cp C:\OpenSSL_Temp\libeay32.dll flameshot\libeay32.dll
-  - cp C:\OpenSSL_Temp\libssl32.dll flameshot\libssl32.dll
-  - cp C:\OpenSSL_Temp\ssleay32.dll flameshot\ssleay32.dll
-  - rm flameshot\OpenSSL_Light-1_0_2u.exe
-  - if "%PLATFORM%" EQU "X64" appveyor DownloadFile https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe
-  - if "%PLATFORM%" EQU "X64" (mv vcredist_x64.exe flameshot\vcredist-2013.exe)
-  - if "%PLATFORM%" EQU "x86" appveyor DownloadFile https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x86.exe
-  - if "%PLATFORM%" EQU "x86" (mv vcredist_x86.exe flameshot\vcredist-2013.exe)
-  # Build installation
-  - cp ..\..\win_setup\flameshot.iss flameshot.iss
-  - C:\InnoSetup\Compil32.exe /cc flameshot.iss
-  - mv Output\Flameshot-Setup.exe Output\Flameshot-Setup-%PLATFORM%-%flameshot_version%.exe
+    mkdir build
 
+    cd build
 
-artifacts:
-  - path: build\distrib\flameshot_%flameshot_version%_win_%PLATFORM%.zip
-    name: exe_only
-  - path: build\distrib\Output\Flameshot-Setup-%PLATFORM%-%flameshot_version%.exe
-    name: installer
+    echo %PATH%
+
+    cmake c:\projects\source -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
+
+    cmake --build . --config "Release"
+

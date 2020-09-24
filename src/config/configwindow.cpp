@@ -26,7 +26,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/pathinfo.h"
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QFileSystemWatcher>
 #include <QIcon>
 #include <QKeyEvent>
@@ -56,7 +56,7 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     connect(
       m_configWatcher, &QFileSystemWatcher::fileChanged, this, changedSlot);
 
-    QColor background = this->palette().background().color();
+    QColor background = this->palette().window().color();
     bool isDark = ColorUtils::colorIsDark(background);
     QString modifier =
       isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();

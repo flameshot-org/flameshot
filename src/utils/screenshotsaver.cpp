@@ -27,14 +27,31 @@
 
 ScreenshotSaver::ScreenshotSaver() {}
 
+// TODO: If data is saved to the clipboard before the notification is sent via
+// dbus, the application freezes.
 void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
 {
-    SystemNotification().sendMessage(QObject::tr("Capture saved to clipboard"));
-    QApplication::clipboard()->setPixmap(capture);
+
+    // If we are able to properly save the file, save the file and copy to
+    // clipboard.
+    if ((ConfigHandler().saveAfterCopyValue()) &&
+        (!ConfigHandler().saveAfterCopyPathValue().isEmpty())) {
+        saveToFilesystem(capture,
+                         ConfigHandler().saveAfterCopyPathValue(),
+                         QObject::tr("Capture saved to clipboard."));
+        QApplication::clipboard()->setPixmap(capture);
+    }
+    // Otherwise only save to clipboard
+    else {
+        SystemNotification().sendMessage(
+          QObject::tr("Capture saved to clipboard"));
+        QApplication::clipboard()->setPixmap(capture);
+    }
 }
 
 bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
-                                       const QString& path)
+                                       const QString& path,
+                                       const QString& messagePrefix)
 {
     QString completePath = FileNameHandler().generateAbsolutePath(path);
     completePath += QLatin1String(".png");
@@ -44,9 +61,11 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 
     if (ok) {
         ConfigHandler().setSavePath(path);
-        saveMessage = QObject::tr("Capture saved as ") + completePath;
+        saveMessage =
+          messagePrefix + QObject::tr("Capture saved as ") + completePath;
     } else {
-        saveMessage = QObject::tr("Error trying to save as ") + completePath;
+        saveMessage = messagePrefix + QObject::tr("Error trying to save as ") +
+                      completePath;
         notificationPath = "";
     }
 
@@ -83,10 +102,9 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         ok = capture.save(savePath);
 
         if (ok) {
-            ConfigHandler config;
             QString pathNoFile =
               savePath.left(savePath.lastIndexOf(QLatin1String("/")));
-            config.setSavePath(pathNoFile);
+            ConfigHandler().setSavePath(pathNoFile);
             QString msg = QObject::tr("Capture saved as ") + savePath;
             if (config.copyPathAfterSaveEnabled()) {
                 QApplication::clipboard()->setText(savePath);

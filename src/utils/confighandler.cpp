@@ -30,9 +30,9 @@ ConfigHandler::ConfigHandler()
     m_settings.setDefaultFormat(QSettings::IniFormat);
 }
 
-QVector<CaptureButton::ButtonType> ConfigHandler::getButtons()
+QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
 {
-    QVector<CaptureButton::ButtonType> buttons;
+    QVector<CaptureToolButton::ButtonType> buttons;
     if (m_settings.contains(QStringLiteral("buttons"))) {
         // TODO: remove toList in v1.0
         QVector<int> buttonsInt = m_settings.value(QStringLiteral("buttons"))
@@ -46,31 +46,35 @@ QVector<CaptureButton::ButtonType> ConfigHandler::getButtons()
         buttons = fromIntToButton(buttonsInt);
     } else {
         // Default tools
-        buttons << CaptureButton::TYPE_PENCIL << CaptureButton::TYPE_DRAWER
-                << CaptureButton::TYPE_ARROW << CaptureButton::TYPE_SELECTION
-                << CaptureButton::TYPE_RECTANGLE << CaptureButton::TYPE_CIRCLE
-                << CaptureButton::TYPE_MARKER << CaptureButton::TYPE_BLUR
-                << CaptureButton::TYPE_SELECTIONINDICATOR
-                << CaptureButton::TYPE_MOVESELECTION << CaptureButton::TYPE_UNDO
-                << CaptureButton::TYPE_REDO << CaptureButton::TYPE_COPY
-                << CaptureButton::TYPE_SAVE << CaptureButton::TYPE_EXIT
-                << CaptureButton::TYPE_IMAGEUPLOADER
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-                << CaptureButton::TYPE_OPEN_APP
-#endif
-                << CaptureButton::TYPE_PIN << CaptureButton::TYPE_TEXT;
+        buttons << CaptureToolButton::TYPE_PENCIL
+                << CaptureToolButton::TYPE_DRAWER
+                << CaptureToolButton::TYPE_ARROW
+                << CaptureToolButton::TYPE_SELECTION
+                << CaptureToolButton::TYPE_RECTANGLE
+                << CaptureToolButton::TYPE_CIRCLE
+                << CaptureToolButton::TYPE_MARKER
+                << CaptureToolButton::TYPE_PIXELATE
+                << CaptureToolButton::TYPE_SELECTIONINDICATOR
+                << CaptureToolButton::TYPE_MOVESELECTION
+                << CaptureToolButton::TYPE_UNDO << CaptureToolButton::TYPE_REDO
+                << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
+                << CaptureToolButton::TYPE_EXIT
+                << CaptureToolButton::TYPE_IMAGEUPLOADER
+                << CaptureToolButton::TYPE_OPEN_APP
+                << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
+                << CaptureToolButton::TYPE_CIRCLECOUNT;
     }
 
-    using bt = CaptureButton::ButtonType;
+    using bt = CaptureToolButton::ButtonType;
     std::sort(buttons.begin(), buttons.end(), [](bt a, bt b) {
-        return CaptureButton::getPriorityByButton(a) <
-               CaptureButton::getPriorityByButton(b);
+        return CaptureToolButton::getPriorityByButton(a) <
+               CaptureToolButton::getPriorityByButton(b);
     });
     return buttons;
 }
 
 void ConfigHandler::setButtons(
-  const QVector<CaptureButton::ButtonType>& buttons)
+  const QVector<CaptureToolButton::ButtonType>& buttons)
 {
     QVector<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
@@ -172,9 +176,9 @@ QColor ConfigHandler::uiContrastColorValue()
 {
     QColor res = QColor(39, 0, 50);
 
-    if (m_settings.contains(QStringLiteral("contastUiColor"))) {
+    if (m_settings.contains(QStringLiteral("contrastUiColor"))) {
         QString hex =
-          m_settings.value(QStringLiteral("contastUiColor")).toString();
+          m_settings.value(QStringLiteral("contrastUiColor")).toString();
 
         if (QColor::isValidColor(hex)) {
             res = QColor(hex);
@@ -186,7 +190,7 @@ QColor ConfigHandler::uiContrastColorValue()
 
 void ConfigHandler::setUIContrastColor(const QColor& c)
 {
-    m_settings.setValue(QStringLiteral("contastUiColor"), c.name());
+    m_settings.setValue(QStringLiteral("contrastUiColor"), c.name());
 }
 
 QColor ConfigHandler::drawColorValue()
@@ -221,6 +225,18 @@ bool ConfigHandler::showHelpValue()
 void ConfigHandler::setShowHelp(const bool showHelp)
 {
     m_settings.setValue(QStringLiteral("showHelp"), showHelp);
+}
+
+bool ConfigHandler::showSidePanelButtonValue()
+{
+    return m_settings.value(QStringLiteral("showSidePanelButton"), true)
+      .toBool();
+}
+
+void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton)
+{
+    m_settings.setValue(QStringLiteral("showSidePanelButton"),
+                        showSidePanelButton);
 }
 
 bool ConfigHandler::desktopNotificationValue()
@@ -425,6 +441,15 @@ void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
 {
     m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
 }
+bool ConfigHandler::saveAfterCopyValue()
+{
+    return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
+}
+
+void ConfigHandler::setSaveAfterCopy(const bool save)
+{
+    m_settings.setValue(QStringLiteral("saveAfterCopy"), save);
+}
 
 bool ConfigHandler::copyPathAfterSaveEnabled()
 {
@@ -455,6 +480,16 @@ const QString& ConfigHandler::uploadStorage()
     return m_strRes;
 }
 
+QString ConfigHandler::saveAfterCopyPathValue()
+{
+    return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
+}
+
+void ConfigHandler::setSaveAfterCopyPath(const QString& path)
+{
+    m_settings.setValue(QStringLiteral("saveAfterCopyPath"), path);
+}
+
 void ConfigHandler::setDefaults()
 {
     m_settings.clear();
@@ -463,8 +498,8 @@ void ConfigHandler::setDefaults()
 void ConfigHandler::setAllTheButtons()
 {
     QVector<int> buttons;
-    auto listTypes = CaptureButton::getIterableButtonTypes();
-    for (const CaptureButton::ButtonType t : listTypes) {
+    auto listTypes = CaptureToolButton::getIterableButtonTypes();
+    for (const CaptureToolButton::ButtonType t : listTypes) {
         buttons << static_cast<int>(t);
     }
     // TODO: remove toList in v1.0
@@ -479,7 +514,7 @@ QString ConfigHandler::configFilePath() const
 
 bool ConfigHandler::normalizeButtons(QVector<int>& buttons)
 {
-    auto listTypes = CaptureButton::getIterableButtonTypes();
+    auto listTypes = CaptureToolButton::getIterableButtonTypes();
     QVector<int> listTypesInt;
     for (auto i : listTypes)
         listTypesInt << static_cast<int>(i);
@@ -494,17 +529,17 @@ bool ConfigHandler::normalizeButtons(QVector<int>& buttons)
     return hasChanged;
 }
 
-QVector<CaptureButton::ButtonType> ConfigHandler::fromIntToButton(
+QVector<CaptureToolButton::ButtonType> ConfigHandler::fromIntToButton(
   const QVector<int>& l)
 {
-    QVector<CaptureButton::ButtonType> buttons;
+    QVector<CaptureToolButton::ButtonType> buttons;
     for (auto const i : l)
-        buttons << static_cast<CaptureButton::ButtonType>(i);
+        buttons << static_cast<CaptureToolButton::ButtonType>(i);
     return buttons;
 }
 
 QVector<int> ConfigHandler::fromButtonToInt(
-  const QVector<CaptureButton::ButtonType>& l)
+  const QVector<CaptureToolButton::ButtonType>& l)
 {
     QVector<int> buttons;
     for (auto const i : l)

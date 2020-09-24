@@ -26,7 +26,7 @@
 #pragma once
 
 #include "buttonhandler.h"
-#include "capturebutton.h"
+#include "capturetoolbutton.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
@@ -92,11 +92,14 @@ private slots:
     void upMove();
     void downMove();
 
-    void setState(CaptureButton* b);
+    void setState(CaptureToolButton* b);
     void processTool(CaptureTool* t);
     void handleButtonSignal(CaptureTool::Request r);
-    void setDrawColor(const QColor& c);
-    void setDrawThickness(const int& t);
+    void setDrawColor(const QColor &c);
+    void setDrawThickness(const int &t);
+    void incrementCircleCount();
+    void decrementCircleCount();
+
 
 protected:
     void paintEvent(QPaintEvent*);
@@ -119,6 +122,7 @@ protected:
 
     // Outside selection opacity
     int m_opacity;
+
     // utility flags
     bool m_mouseIsClicked;
     bool m_rightClick;
@@ -145,9 +149,9 @@ private:
 
 private:
     QUndoStack m_undoStack;
-    QPointer<CaptureButton> m_sizeIndButton;
+    QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button
-    QPointer<CaptureButton> m_activeButton;
+    QPointer<CaptureToolButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
     QPointer<QWidget> m_toolWidget;
 

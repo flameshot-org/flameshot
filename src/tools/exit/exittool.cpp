@@ -37,9 +37,9 @@ QString ExitTool::name() const
     return tr("Exit");
 }
 
-QString ExitTool::nameID()
+ToolType ExitTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::EXIT;
 }
 
 QString ExitTool::description() const

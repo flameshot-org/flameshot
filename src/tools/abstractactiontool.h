@@ -36,6 +36,9 @@ public:
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
+protected:
+    virtual ToolType nameID() const = 0;
+
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
