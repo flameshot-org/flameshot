@@ -3,7 +3,7 @@
 set -x
 
 GIT_REMOTE=origin
-BASE_VERSION_NEW="0.7.11"
+BASE_VERSION_NEW="0.7.12"
 BASE_VERSION_CUR=$(cat flameshot.pro |grep "[0-9]\+\.[0-9]\+\.[0-9]\+" |awk "{print \$3}")
 
 if [ "${BASE_VERSION_CUR}" == "${BASE_VERSION_NEW}" ]; then
