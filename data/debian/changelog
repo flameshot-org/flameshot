@@ -1,4 +1,4 @@
-flameshot (0.8.0-1) unstable; urgency=medium
+flameshot (0.8.1-1) unstable; urgency=medium
 
   * add: added translation:Japanese, Brazilian Portuguese, Serbian, Dutch, Ukrainian, German, Slovak, Basque, Czech, Swedish, Italian, Korean, Dutch
   * add: allow enter key to copy image to clipboard
