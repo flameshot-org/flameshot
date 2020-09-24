@@ -49,112 +49,112 @@ class HoverEventFilter;
 
 class CaptureWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CaptureWidget(const uint id = 0,
-                         const QString& savePath = QString(),
-                         bool fullScreen = true,
-                         QWidget* parent = nullptr);
-  ~CaptureWidget();
+    explicit CaptureWidget(const uint id = 0,
+                           const QString& savePath = QString(),
+                           bool fullScreen = true,
+                           QWidget* parent = nullptr);
+    ~CaptureWidget();
 
-  void updateButtons();
-  QPixmap pixmap();
+    void updateButtons();
+    QPixmap pixmap();
 
 public slots:
-  void deleteToolwidgetOrClose();
+    void deleteToolwidgetOrClose();
 
 signals:
-  void captureTaken(uint id, QPixmap p);
-  void captureFailed(uint id);
-  void colorChanged(const QColor& c);
-  void thicknessChanged(const int thickness);
+    void captureTaken(uint id, QPixmap p);
+    void captureFailed(uint id);
+    void colorChanged(const QColor& c);
+    void thicknessChanged(const int thickness);
 
 private slots:
 
-  // TODO replace with tools
-  void copyScreenshot();
-  void saveScreenshot();
-  void undo();
-  void redo();
-  void togglePanel();
-  void childEnter();
-  void childLeave();
+    // TODO replace with tools
+    void copyScreenshot();
+    void saveScreenshot();
+    void undo();
+    void redo();
+    void togglePanel();
+    void childEnter();
+    void childLeave();
 
-  void leftResize();
-  void rightResize();
-  void upResize();
-  void downResize();
+    void leftResize();
+    void rightResize();
+    void upResize();
+    void downResize();
 
-  void setState(CaptureToolButton* b);
-  void processTool(CaptureTool* t);
-  void handleButtonSignal(CaptureTool::Request r);
-  void setDrawColor(const QColor& c);
-  void setDrawThickness(const int& t);
-  void incrementCircleCount();
-  void decrementCircleCount();
+    void setState(CaptureToolButton* b);
+    void processTool(CaptureTool* t);
+    void handleButtonSignal(CaptureTool::Request r);
+    void setDrawColor(const QColor& c);
+    void setDrawThickness(const int& t);
+    void incrementCircleCount();
+    void decrementCircleCount();
 
 protected:
-  void paintEvent(QPaintEvent*);
-  void mousePressEvent(QMouseEvent*);
-  void mouseMoveEvent(QMouseEvent*);
-  void mouseReleaseEvent(QMouseEvent*);
-  void keyPressEvent(QKeyEvent*);
-  void keyReleaseEvent(QKeyEvent*);
-  void wheelEvent(QWheelEvent*);
-  void resizeEvent(QResizeEvent*);
-  void moveEvent(QMoveEvent*);
+    void paintEvent(QPaintEvent*);
+    void mousePressEvent(QMouseEvent*);
+    void mouseMoveEvent(QMouseEvent*);
+    void mouseReleaseEvent(QMouseEvent*);
+    void keyPressEvent(QKeyEvent*);
+    void keyReleaseEvent(QKeyEvent*);
+    void wheelEvent(QWheelEvent*);
+    void resizeEvent(QResizeEvent*);
+    void moveEvent(QMoveEvent*);
 
-  // Context information
-  CaptureContext m_context;
+    // Context information
+    CaptureContext m_context;
 
-  // Main ui color
-  QColor m_uiColor;
-  // Secondary ui color
-  QColor m_contrastUiColor;
+    // Main ui color
+    QColor m_uiColor;
+    // Secondary ui color
+    QColor m_contrastUiColor;
 
-  // Outside selection opacity
-  int m_opacity;
+    // Outside selection opacity
+    int m_opacity;
 
-  // utility flags
-  bool m_mouseIsClicked;
-  bool m_rightClick;
-  bool m_newSelection;
-  bool m_grabbing;
-  bool m_showInitialMsg;
-  bool m_captureDone;
-  bool m_previewEnabled;
-  bool m_adjustmentButtonPressed;
+    // utility flags
+    bool m_mouseIsClicked;
+    bool m_rightClick;
+    bool m_newSelection;
+    bool m_grabbing;
+    bool m_showInitialMsg;
+    bool m_captureDone;
+    bool m_previewEnabled;
+    bool m_adjustmentButtonPressed;
 
 private:
-  void initContext(const QString& savePath, bool fullscreen);
-  void initPanel();
-  void initSelection();
-  void initShortcuts();
-  void updateSizeIndicator();
-  void updateCursor();
-  void pushToolToStack();
-  void makeChild(QWidget* w);
+    void initContext(const QString& savePath, bool fullscreen);
+    void initPanel();
+    void initSelection();
+    void initShortcuts();
+    void updateSizeIndicator();
+    void updateCursor();
+    void pushToolToStack();
+    void makeChild(QWidget* w);
 
-  QRect extendedSelection() const;
-  QRect extendedRect(QRect* r) const;
+    QRect extendedSelection() const;
+    QRect extendedRect(QRect* r) const;
 
-  QUndoStack m_undoStack;
-  QPointer<CaptureToolButton> m_sizeIndButton;
-  // Last pressed button
-  QPointer<CaptureToolButton> m_activeButton;
-  QPointer<CaptureTool> m_activeTool;
-  QPointer<QWidget> m_toolWidget;
+    QUndoStack m_undoStack;
+    QPointer<CaptureToolButton> m_sizeIndButton;
+    // Last pressed button
+    QPointer<CaptureToolButton> m_activeButton;
+    QPointer<CaptureTool> m_activeTool;
+    QPointer<QWidget> m_toolWidget;
 
-  ButtonHandler* m_buttonHandler;
-  UtilityPanel* m_panel;
-  ColorPicker* m_colorPicker;
-  ConfigHandler m_config;
-  NotifierBox* m_notifierBox;
-  HoverEventFilter* m_eventFilter;
-  SelectionWidget* m_selection;
+    ButtonHandler* m_buttonHandler;
+    UtilityPanel* m_panel;
+    ColorPicker* m_colorPicker;
+    ConfigHandler m_config;
+    NotifierBox* m_notifierBox;
+    HoverEventFilter* m_eventFilter;
+    SelectionWidget* m_selection;
 
-  QPoint m_dragStartPoint;
-  SelectionWidget::SideType m_mouseOverHandle;
-  uint m_id;
+    QPoint m_dragStartPoint;
+    SelectionWidget::SideType m_mouseOverHandle;
+    uint m_id;
 };

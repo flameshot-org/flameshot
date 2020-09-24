@@ -28,95 +28,88 @@ PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {}
 
-QIcon
-PixelateTool::icon(const QColor& background, bool inEditor) const
+QIcon PixelateTool::icon(const QColor& background, bool inEditor) const
 {
-  Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "pixelate.svg");
+    Q_UNUSED(inEditor);
+    return QIcon(iconPath(background) + "pixelate.svg");
 }
-QString
-PixelateTool::name() const
+QString PixelateTool::name() const
 {
-  return tr("Pixelate");
+    return tr("Pixelate");
 }
 
-ToolType
-PixelateTool::nameID() const
+ToolType PixelateTool::nameID() const
 {
-  return ToolType::PIXELATE;
+    return ToolType::PIXELATE;
 }
 
-QString
-PixelateTool::description() const
+QString PixelateTool::description() const
 {
-  return tr("Set Pixelate as the paint tool");
+    return tr("Set Pixelate as the paint tool");
 }
 
-CaptureTool*
-PixelateTool::copy(QObject* parent)
+CaptureTool* PixelateTool::copy(QObject* parent)
 {
-  return new PixelateTool(parent);
+    return new PixelateTool(parent);
 }
 
-void
-PixelateTool::process(QPainter& painter, const QPixmap& pixmap, bool recordUndo)
+void PixelateTool::process(QPainter& painter,
+                           const QPixmap& pixmap,
+                           bool recordUndo)
 {
 
-  if (recordUndo) {
-    updateBackup(pixmap);
-  }
+    if (recordUndo) {
+        updateBackup(pixmap);
+    }
 
-  QPoint& p0 = m_points.first;
-  QPoint& p1 = m_points.second;
-  QRect selection = QRect(p0, p1).normalized();
+    QPoint& p0 = m_points.first;
+    QPoint& p1 = m_points.second;
+    QRect selection = QRect(p0, p1).normalized();
 
-  // If thickness is less than 1, use old blur process
-  if (m_thickness <= 1) {
-    auto pixelRatio = pixmap.devicePixelRatio();
+    // If thickness is less than 1, use old blur process
+    if (m_thickness <= 1) {
+        auto pixelRatio = pixmap.devicePixelRatio();
 
-    QRect selectionScaled =
-      QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
+        QRect selectionScaled =
+          QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
-    QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
-    blur->setBlurRadius(10);
-    QGraphicsPixmapItem* item =
-      new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
-    item->setGraphicsEffect(blur);
+        QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
+        blur->setBlurRadius(10);
+        QGraphicsPixmapItem* item =
+          new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
+        item->setGraphicsEffect(blur);
 
-    QGraphicsScene scene;
-    scene.addItem(item);
+        QGraphicsScene scene;
+        scene.addItem(item);
 
-    scene.render(&painter, selection, QRectF());
-    blur->setBlurRadius(12);
-    scene.render(&painter, selection, QRectF());
-  } else {
-    int width = selection.width() * (0.5 / qMax(1, m_thickness));
+        scene.render(&painter, selection, QRectF());
+        blur->setBlurRadius(12);
+        scene.render(&painter, selection, QRectF());
+    } else {
+        int width = selection.width() * (0.5 / qMax(1, m_thickness));
 
-    QPixmap t = pixmap.copy(selection);
-    t = t.scaledToWidth(qMax(width, 10), Qt::SmoothTransformation);
-    t = t.scaledToWidth(selection.width());
-    painter.drawImage(selection, t.toImage());
-  }
+        QPixmap t = pixmap.copy(selection);
+        t = t.scaledToWidth(qMax(width, 10), Qt::SmoothTransformation);
+        t = t.scaledToWidth(selection.width());
+        painter.drawImage(selection, t.toImage());
+    }
 }
 
-void
-PixelateTool::paintMousePreview(QPainter& painter,
-                                const CaptureContext& context)
+void PixelateTool::paintMousePreview(QPainter& painter,
+                                     const CaptureContext& context)
 {
-  Q_UNUSED(context);
-  Q_UNUSED(painter);
+    Q_UNUSED(context);
+    Q_UNUSED(painter);
 }
 
-void
-PixelateTool::drawStart(const CaptureContext& context)
+void PixelateTool::drawStart(const CaptureContext& context)
 {
-  m_thickness = context.thickness;
-  m_points.first = context.mousePos;
-  m_points.second = context.mousePos;
+    m_thickness = context.thickness;
+    m_points.first = context.mousePos;
+    m_points.second = context.mousePos;
 }
 
-void
-PixelateTool::pressed(const CaptureContext& context)
+void PixelateTool::pressed(const CaptureContext& context)
 {
-  Q_UNUSED(context);
+    Q_UNUSED(context);
 }

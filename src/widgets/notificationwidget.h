@@ -27,20 +27,20 @@ class QFrame;
 
 class NotificationWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit NotificationWidget(QWidget* parent = nullptr);
+    explicit NotificationWidget(QWidget* parent = nullptr);
 
-  void showMessage(const QString& msg);
+    void showMessage(const QString& msg);
 
 private:
-  QLabel* m_label;
-  QPropertyAnimation* m_showAnimation;
-  QPropertyAnimation* m_hideAnimation;
-  QVBoxLayout* m_layout;
-  QFrame* m_content;
-  QTimer* m_timer;
+    QLabel* m_label;
+    QPropertyAnimation* m_showAnimation;
+    QPropertyAnimation* m_hideAnimation;
+    QVBoxLayout* m_layout;
+    QFrame* m_content;
+    QTimer* m_timer;
 
-  void animatedShow();
-  void animatedHide();
+    void animatedShow();
+    void animatedHide();
 };

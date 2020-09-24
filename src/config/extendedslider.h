@@ -22,20 +22,20 @@
 
 class ExtendedSlider : public QSlider
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit ExtendedSlider(QWidget* parent = nullptr);
+    explicit ExtendedSlider(QWidget* parent = nullptr);
 
-  int mappedValue(int min, int max);
-  void setMapedValue(int min, int val, int max);
+    int mappedValue(int min, int max);
+    void setMapedValue(int min, int val, int max);
 
 signals:
-  void modificationsEnded();
+    void modificationsEnded();
 
 private slots:
-  void updateTooltip();
-  void fireTimer();
+    void updateTooltip();
+    void fireTimer();
 
 private:
-  QTimer m_timer;
+    QTimer m_timer;
 };

@@ -24,18 +24,18 @@
 
 class DraggableWidgetMaker : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  DraggableWidgetMaker(QObject* parent = nullptr);
+    DraggableWidgetMaker(QObject* parent = nullptr);
 
-  void makeDraggable(QWidget* widget);
+    void makeDraggable(QWidget* widget);
 
 protected:
-  bool eventFilter(QObject* obj, QEvent* event) override;
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
 private:
-  bool m_isPressing = false;
-  bool m_isDragging = false;
-  QPoint m_mouseMovePos;
-  QPoint m_mousePressPos;
+    bool m_isPressing = false;
+    bool m_isDragging = false;
+    QPoint m_mouseMovePos;
+    QPoint m_mousePressPos;
 };

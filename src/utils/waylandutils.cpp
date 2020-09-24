@@ -2,6 +2,4 @@
 
 WaylandUtils::WaylandUtils() {}
 
-bool
-WaylandUtils::waylandDetected()
-{}
+bool WaylandUtils::waylandDetected() {}

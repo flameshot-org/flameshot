@@ -24,11 +24,10 @@ ClickableLabel::ClickableLabel(QWidget* parent)
 ClickableLabel::ClickableLabel(QString s, QWidget* parent)
   : QLabel(parent)
 {
-  setText(s);
+    setText(s);
 }
 
-void
-ClickableLabel::mousePressEvent(QMouseEvent*)
+void ClickableLabel::mousePressEvent(QMouseEvent*)
 {
-  emit clicked();
+    emit clicked();
 }

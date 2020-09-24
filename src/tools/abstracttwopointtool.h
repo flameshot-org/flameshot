@@ -21,40 +21,40 @@
 
 class AbstractTwoPointTool : public CaptureTool
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AbstractTwoPointTool(QObject* parent = nullptr);
+    explicit AbstractTwoPointTool(QObject* parent = nullptr);
 
-  bool isValid() const override;
-  bool closeOnButtonPressed() const override;
-  bool isSelectable() const override;
-  bool showMousePreview() const override;
+    bool isValid() const override;
+    bool closeOnButtonPressed() const override;
+    bool isSelectable() const override;
+    bool showMousePreview() const override;
 
-  void undo(QPixmap& pixmap) override;
+    void undo(QPixmap& pixmap) override;
 
 public slots:
-  void drawEnd(const QPoint& p) override;
-  void drawMove(const QPoint& p) override;
-  void drawMoveWithAdjustment(const QPoint& p) override;
-  void colorChanged(const QColor& c) override;
-  void thicknessChanged(const int th) override;
+    void drawEnd(const QPoint& p) override;
+    void drawMove(const QPoint& p) override;
+    void drawMoveWithAdjustment(const QPoint& p) override;
+    void colorChanged(const QColor& c) override;
+    void thicknessChanged(const int th) override;
 
 protected:
-  void updateBackup(const QPixmap& pixmap);
-  QRect backupRect(const QRect& limits) const;
+    void updateBackup(const QPixmap& pixmap);
+    QRect backupRect(const QRect& limits) const;
 
-  QPixmap m_pixmapBackup;
-  QPair<QPoint, QPoint> m_points;
-  QColor m_color;
-  int m_thickness;
-  // use m_padding to extend the area of the backup
-  int m_padding;
+    QPixmap m_pixmapBackup;
+    QPair<QPoint, QPoint> m_points;
+    QColor m_color;
+    int m_thickness;
+    // use m_padding to extend the area of the backup
+    int m_padding;
 
-  bool m_supportsOrthogonalAdj = false;
-  bool m_supportsDiagonalAdj = false;
+    bool m_supportsOrthogonalAdj = false;
+    bool m_supportsDiagonalAdj = false;
 
-  virtual ToolType nameID() const = 0;
+    virtual ToolType nameID() const = 0;
 
 private:
-  QPoint adjustedVector(QPoint v) const;
+    QPoint adjustedVector(QPoint v) const;
 };

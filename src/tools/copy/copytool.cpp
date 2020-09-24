@@ -23,45 +23,38 @@ CopyTool::CopyTool(QObject* parent)
   : AbstractActionTool(parent)
 {}
 
-bool
-CopyTool::closeOnButtonPressed() const
+bool CopyTool::closeOnButtonPressed() const
 {
-  return true;
+    return true;
 }
 
-QIcon
-CopyTool::icon(const QColor& background, bool inEditor) const
+QIcon CopyTool::icon(const QColor& background, bool inEditor) const
 {
-  Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "content-copy.svg");
+    Q_UNUSED(inEditor);
+    return QIcon(iconPath(background) + "content-copy.svg");
 }
-QString
-CopyTool::name() const
+QString CopyTool::name() const
 {
-  return tr("Copy");
+    return tr("Copy");
 }
 
-ToolType
-CopyTool::nameID() const
+ToolType CopyTool::nameID() const
 {
-  return ToolType::COPY;
+    return ToolType::COPY;
 }
 
-QString
-CopyTool::description() const
+QString CopyTool::description() const
 {
-  return tr("Copy the selection into the clipboard");
+    return tr("Copy the selection into the clipboard");
 }
 
-CaptureTool*
-CopyTool::copy(QObject* parent)
+CaptureTool* CopyTool::copy(QObject* parent)
 {
-  return new CopyTool(parent);
+    return new CopyTool(parent);
 }
 
-void
-CopyTool::pressed(const CaptureContext& context)
+void CopyTool::pressed(const CaptureContext& context)
 {
-  emit requestAction(REQ_CAPTURE_DONE_OK);
-  ScreenshotSaver().saveToClipboard(context.selectedScreenshotArea());
+    emit requestAction(REQ_CAPTURE_DONE_OK);
+    ScreenshotSaver().saveToClipboard(context.selectedScreenshotArea());
 }

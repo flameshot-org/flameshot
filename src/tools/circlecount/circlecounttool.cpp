@@ -24,120 +24,111 @@ namespace {
 CircleCountTool::CircleCountTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {
-  m_count = 0;
+    m_count = 0;
 }
 
-QIcon
-CircleCountTool::icon(const QColor& background, bool inEditor) const
+QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
 {
-  Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "circlecount-outline.svg");
+    Q_UNUSED(inEditor);
+    return QIcon(iconPath(background) + "circlecount-outline.svg");
 }
-QString
-CircleCountTool::name() const
+QString CircleCountTool::name() const
 {
-  return tr("Circle Counter");
+    return tr("Circle Counter");
 }
 
-ToolType
-CircleCountTool::nameID() const
+ToolType CircleCountTool::nameID() const
 {
-  return ToolType::CIRCLECOUNT;
+    return ToolType::CIRCLECOUNT;
 }
 
-QString
-CircleCountTool::description() const
+QString CircleCountTool::description() const
 {
-  return tr("Add an autoincrementing counter bubble");
+    return tr("Add an autoincrementing counter bubble");
 }
 
-CaptureTool*
-CircleCountTool::copy(QObject* parent)
+CaptureTool* CircleCountTool::copy(QObject* parent)
 {
-  return new CircleCountTool(parent);
+    return new CircleCountTool(parent);
 }
 
-void
-CircleCountTool::process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo)
+void CircleCountTool::process(QPainter& painter,
+                              const QPixmap& pixmap,
+                              bool recordUndo)
 {
-  if (recordUndo) {
-    updateBackup(pixmap);
-  }
-  painter.setBrush(m_color);
-
-  int bubble_size = m_thickness;
-  // Decrease by 1px so the border is properly ereased when doing undo
-  painter.drawEllipse(m_points.first, bubble_size - 1, bubble_size - 1);
-  QRect textRect = QRect(m_points.first.x() - bubble_size / 2,
-                         m_points.first.y() - bubble_size / 2,
-                         bubble_size,
-                         bubble_size);
-  auto orig_font = painter.font();
-  auto new_font = orig_font;
-  auto fontSize = bubble_size;
-  new_font.setPixelSize(fontSize);
-  painter.setFont(new_font);
-
-  QRect bRect =
-    painter.boundingRect(textRect, Qt::AlignCenter, QString::number(m_count));
-
-  while (bRect.width() > textRect.width()) {
-    fontSize--;
-    if (fontSize == 0) {
-      break;
+    if (recordUndo) {
+        updateBackup(pixmap);
     }
+    painter.setBrush(m_color);
+
+    int bubble_size = m_thickness;
+    // Decrease by 1px so the border is properly ereased when doing undo
+    painter.drawEllipse(m_points.first, bubble_size - 1, bubble_size - 1);
+    QRect textRect = QRect(m_points.first.x() - bubble_size / 2,
+                           m_points.first.y() - bubble_size / 2,
+                           bubble_size,
+                           bubble_size);
+    auto orig_font = painter.font();
+    auto new_font = orig_font;
+    auto fontSize = bubble_size;
     new_font.setPixelSize(fontSize);
     painter.setFont(new_font);
 
-    bRect =
+    QRect bRect =
       painter.boundingRect(textRect, Qt::AlignCenter, QString::number(m_count));
-  }
 
-  // Lightness value ranges from 0-255, we split at 75 as this looks best
-  if (m_color.lightness() <= 75) {
-    painter.setPen(Qt::white);
-  } else {
-    painter.setPen(Qt::black);
-  }
+    while (bRect.width() > textRect.width()) {
+        fontSize--;
+        if (fontSize == 0) {
+            break;
+        }
+        new_font.setPixelSize(fontSize);
+        painter.setFont(new_font);
 
-  painter.drawText(textRect, Qt::AlignCenter, QString::number(m_count));
-  painter.setFont(orig_font);
+        bRect = painter.boundingRect(
+          textRect, Qt::AlignCenter, QString::number(m_count));
+    }
+
+    // Lightness value ranges from 0-255, we split at 75 as this looks best
+    if (m_color.lightness() <= 75) {
+        painter.setPen(Qt::white);
+    } else {
+        painter.setPen(Qt::black);
+    }
+
+    painter.drawText(textRect, Qt::AlignCenter, QString::number(m_count));
+    painter.setFont(orig_font);
 }
 
-void
-CircleCountTool::paintMousePreview(QPainter& painter,
-                                   const CaptureContext& context)
+void CircleCountTool::paintMousePreview(QPainter& painter,
+                                        const CaptureContext& context)
 {
-  m_thickness = context.thickness + PADDING_VALUE;
-  if (m_thickness < 15) {
-    m_thickness = 15;
-  }
+    m_thickness = context.thickness + PADDING_VALUE;
+    if (m_thickness < 15) {
+        m_thickness = 15;
+    }
 
-  // Thickness for pen is *2 to range from radius to diameter to match the
-  // ellipse draw function
-  painter.setPen(
-    QPen(context.color, m_thickness * 2, Qt::SolidLine, Qt::RoundCap));
-  painter.drawLine(context.mousePos,
-                   { context.mousePos.x() + 1, context.mousePos.y() + 1 });
+    // Thickness for pen is *2 to range from radius to diameter to match the
+    // ellipse draw function
+    painter.setPen(
+      QPen(context.color, m_thickness * 2, Qt::SolidLine, Qt::RoundCap));
+    painter.drawLine(context.mousePos,
+                     { context.mousePos.x() + 1, context.mousePos.y() + 1 });
 }
 
-void
-CircleCountTool::drawStart(const CaptureContext& context)
+void CircleCountTool::drawStart(const CaptureContext& context)
 {
-  m_color = context.color;
-  m_thickness = context.thickness + PADDING_VALUE;
-  if (m_thickness < 15) {
-    m_thickness = 15;
-  }
-  m_points.first = context.mousePos;
-  m_count = context.circleCount;
-  emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
+    m_color = context.color;
+    m_thickness = context.thickness + PADDING_VALUE;
+    if (m_thickness < 15) {
+        m_thickness = 15;
+    }
+    m_points.first = context.mousePos;
+    m_count = context.circleCount;
+    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
-void
-CircleCountTool::pressed(const CaptureContext& context)
+void CircleCountTool::pressed(const CaptureContext& context)
 {
-  Q_UNUSED(context);
+    Q_UNUSED(context);
 }

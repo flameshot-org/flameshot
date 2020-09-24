@@ -19,8 +19,7 @@
 #include <QApplication>
 #include <QFontMetrics>
 
-int
-GlobalValues::buttonBaseSize()
+int GlobalValues::buttonBaseSize()
 {
-  return QApplication::fontMetrics().lineSpacing() * 2.2;
+    return QApplication::fontMetrics().lineSpacing() * 2.2;
 }

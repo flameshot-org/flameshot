@@ -17,12 +17,11 @@
 
 #include "capturecontext.h"
 
-QPixmap
-CaptureContext::selectedScreenshotArea() const
+QPixmap CaptureContext::selectedScreenshotArea() const
 {
-  if (selection.isNull()) {
-    return screenshot;
-  } else {
-    return screenshot.copy(selection);
-  }
+    if (selection.isNull()) {
+        return screenshot;
+    } else {
+        return screenshot.copy(selection);
+    }
 }

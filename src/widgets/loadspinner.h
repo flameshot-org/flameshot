@@ -21,30 +21,30 @@
 
 class LoadSpinner : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit LoadSpinner(QWidget* parent = nullptr);
+    explicit LoadSpinner(QWidget* parent = nullptr);
 
-  void setColor(const QColor& c);
-  void setWidth(int w);
-  void setHeight(int h);
-  void start();
-  void stop();
+    void setColor(const QColor& c);
+    void setWidth(int w);
+    void setHeight(int h);
+    void start();
+    void stop();
 
 protected:
-  void paintEvent(QPaintEvent*);
+    void paintEvent(QPaintEvent*);
 
 private slots:
-  void rotate();
+    void rotate();
 
 private:
-  QColor m_color;
-  QTimer* m_timer;
+    QColor m_color;
+    QTimer* m_timer;
 
-  int m_startAngle = 0;
-  int m_span = 180;
-  bool m_growing;
+    int m_startAngle = 0;
+    int m_span = 180;
+    bool m_growing;
 
-  QRect m_frame;
-  void updateFrame();
+    QRect m_frame;
+    void updateFrame();
 };

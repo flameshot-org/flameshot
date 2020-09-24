@@ -37,51 +37,47 @@ OrientablePushButton::OrientablePushButton(const QIcon& icon,
   : CaptureButton(icon, text, parent)
 {}
 
-QSize
-OrientablePushButton::sizeHint() const
+QSize OrientablePushButton::sizeHint() const
 {
-  QSize sh = QPushButton::sizeHint();
+    QSize sh = QPushButton::sizeHint();
 
-  if (m_orientation != OrientablePushButton::Horizontal) {
-    sh.transpose();
-  }
+    if (m_orientation != OrientablePushButton::Horizontal) {
+        sh.transpose();
+    }
 
-  return sh;
+    return sh;
 }
 
-void
-OrientablePushButton::paintEvent(QPaintEvent* event)
+void OrientablePushButton::paintEvent(QPaintEvent* event)
 {
-  Q_UNUSED(event)
+    Q_UNUSED(event)
 
-  QStylePainter painter(this);
-  QStyleOptionButton option;
-  initStyleOption(&option);
+    QStylePainter painter(this);
+    QStyleOptionButton option;
+    initStyleOption(&option);
 
-  if (m_orientation == OrientablePushButton::VerticalTopToBottom) {
-    painter.rotate(90);
-    painter.translate(0, -1 * width());
-    option.rect = option.rect.transposed();
-  }
+    if (m_orientation == OrientablePushButton::VerticalTopToBottom) {
+        painter.rotate(90);
+        painter.translate(0, -1 * width());
+        option.rect = option.rect.transposed();
+    }
 
-  else if (m_orientation == OrientablePushButton::VerticalBottomToTop) {
-    painter.rotate(-90);
-    painter.translate(-1 * height(), 0);
-    option.rect = option.rect.transposed();
-  }
+    else if (m_orientation == OrientablePushButton::VerticalBottomToTop) {
+        painter.rotate(-90);
+        painter.translate(-1 * height(), 0);
+        option.rect = option.rect.transposed();
+    }
 
-  painter.drawControl(QStyle::CE_PushButton, option);
+    painter.drawControl(QStyle::CE_PushButton, option);
 }
 
-OrientablePushButton::Orientation
-OrientablePushButton::orientation() const
+OrientablePushButton::Orientation OrientablePushButton::orientation() const
 {
-  return m_orientation;
+    return m_orientation;
 }
 
-void
-OrientablePushButton::setOrientation(
+void OrientablePushButton::setOrientation(
   const OrientablePushButton::Orientation& orientation)
 {
-  m_orientation = orientation;
+    m_orientation = orientation;
 }

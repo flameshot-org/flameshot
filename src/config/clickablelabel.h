@@ -21,14 +21,14 @@
 
 class ClickableLabel : public QLabel
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit ClickableLabel(QWidget* parent = nullptr);
-  ClickableLabel(QString s, QWidget* parent = nullptr);
+    explicit ClickableLabel(QWidget* parent = nullptr);
+    ClickableLabel(QString s, QWidget* parent = nullptr);
 
 signals:
-  void clicked();
+    void clicked();
 
 private:
-  void mousePressEvent(QMouseEvent*);
+    void mousePressEvent(QMouseEvent*);
 };

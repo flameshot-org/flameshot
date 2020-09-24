@@ -23,21 +23,21 @@
 class ButtonListView : public QListWidget
 {
 public:
-  explicit ButtonListView(QWidget* parent = nullptr);
+    explicit ButtonListView(QWidget* parent = nullptr);
 
 public slots:
-  void selectAll();
-  void updateComponents();
+    void selectAll();
+    void updateComponents();
 
 private slots:
-  void reverseItemCheck(QListWidgetItem*);
+    void reverseItemCheck(QListWidgetItem*);
 
 protected:
-  void initButtonList();
+    void initButtonList();
 
 private:
-  QVector<CaptureToolButton::ButtonType> m_listButtons;
-  QMap<QString, CaptureToolButton::ButtonType> m_buttonTypeByName;
+    QVector<CaptureToolButton::ButtonType> m_listButtons;
+    QMap<QString, CaptureToolButton::ButtonType> m_buttonTypeByName;
 
-  void updateActiveButtons(QListWidgetItem*);
+    void updateActiveButtons(QListWidgetItem*);
 };

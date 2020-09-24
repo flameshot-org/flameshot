@@ -35,22 +35,22 @@
 InfoWindow::InfoWindow(QWidget* parent)
   : QWidget(parent)
 {
-  setAttribute(Qt::WA_DeleteOnClose);
-  setWindowIcon(QIcon(":img/app/flameshot.svg"));
-  setWindowTitle(tr("About"));
+    setAttribute(Qt::WA_DeleteOnClose);
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowTitle(tr("About"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-  QRect position = frameGeometry();
-  QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
-  position.moveCenter(screen->availableGeometry().center());
-  move(position.topLeft());
+    QRect position = frameGeometry();
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    position.moveCenter(screen->availableGeometry().center());
+    move(position.topLeft());
 #endif
 
-  m_layout = new QVBoxLayout(this);
-  m_layout->setAlignment(Qt::AlignHCenter);
-  initLabels();
-  initInfoTable();
-  show();
+    m_layout = new QVBoxLayout(this);
+    m_layout->setAlignment(Qt::AlignHCenter);
+    initLabels();
+    initInfoTable();
+    show();
 }
 
 QVector<const char*> InfoWindow::m_keys = { "←↓↑→",
@@ -64,94 +64,93 @@ QVector<const char*> InfoWindow::m_keys = { "←↓↑→",
                                             QT_TR_NOOP("Mouse Wheel") };
 
 QVector<const char*> InfoWindow::m_description = {
-  QT_TR_NOOP("Move selection 1px"),
-  QT_TR_NOOP("Resize selection 1px"),
-  QT_TR_NOOP("Quit capture"),
-  QT_TR_NOOP("Copy to clipboard"),
-  QT_TR_NOOP("Save selection as a file"),
-  QT_TR_NOOP("Undo the last modification"),
-  QT_TR_NOOP("Toggle visibility of sidebar with options of the selected tool"),
-  QT_TR_NOOP("Show color picker"),
-  QT_TR_NOOP("Change the tool's thickness")
+    QT_TR_NOOP("Move selection 1px"),
+    QT_TR_NOOP("Resize selection 1px"),
+    QT_TR_NOOP("Quit capture"),
+    QT_TR_NOOP("Copy to clipboard"),
+    QT_TR_NOOP("Save selection as a file"),
+    QT_TR_NOOP("Undo the last modification"),
+    QT_TR_NOOP(
+      "Toggle visibility of sidebar with options of the selected tool"),
+    QT_TR_NOOP("Show color picker"),
+    QT_TR_NOOP("Change the tool's thickness")
 };
 
-void
-InfoWindow::initInfoTable()
+void InfoWindow::initInfoTable()
 {
-  QTableWidget* table = new QTableWidget(this);
-  table->setToolTip(tr("Available shortcuts in the screen capture mode."));
+    QTableWidget* table = new QTableWidget(this);
+    table->setToolTip(tr("Available shortcuts in the screen capture mode."));
 
-  m_layout->addWidget(table);
+    m_layout->addWidget(table);
 
-  table->setColumnCount(2);
-  table->setRowCount(m_keys.size());
-  table->setSelectionMode(QAbstractItemView::NoSelection);
-  table->setFocusPolicy(Qt::NoFocus);
-  table->verticalHeader()->hide();
-  // header creation
-  QStringList names;
-  names << tr("Key") << tr("Description");
-  table->setHorizontalHeaderLabels(names);
+    table->setColumnCount(2);
+    table->setRowCount(m_keys.size());
+    table->setSelectionMode(QAbstractItemView::NoSelection);
+    table->setFocusPolicy(Qt::NoFocus);
+    table->verticalHeader()->hide();
+    // header creation
+    QStringList names;
+    names << tr("Key") << tr("Description");
+    table->setHorizontalHeaderLabels(names);
 
-  // add content
-  for (int i = 0; i < m_keys.size(); ++i) {
-    table->setItem(i, 0, new QTableWidgetItem(tr(m_keys.at(i))));
-    table->setItem(i, 1, new QTableWidgetItem(tr(m_description.at(i))));
-  }
-
-  // Read-only table items
-  for (int x = 0; x < table->rowCount(); ++x) {
-    for (int y = 0; y < table->columnCount(); ++y) {
-      QTableWidgetItem* item = table->item(x, y);
-      item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+    // add content
+    for (int i = 0; i < m_keys.size(); ++i) {
+        table->setItem(i, 0, new QTableWidgetItem(tr(m_keys.at(i))));
+        table->setItem(i, 1, new QTableWidgetItem(tr(m_description.at(i))));
     }
-  }
 
-  // adjust size
-  table->resizeColumnsToContents();
-  table->resizeRowsToContents();
-  table->setMinimumWidth(400);
-  table->setMaximumWidth(600);
+    // Read-only table items
+    for (int x = 0; x < table->rowCount(); ++x) {
+        for (int y = 0; y < table->columnCount(); ++y) {
+            QTableWidgetItem* item = table->item(x, y);
+            item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+        }
+    }
 
-  table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
-  table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
-                                           QSizePolicy::Expanding);
-  m_layout->addStretch();
+    // adjust size
+    table->resizeColumnsToContents();
+    table->resizeRowsToContents();
+    table->setMinimumWidth(400);
+    table->setMaximumWidth(600);
+
+    table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
+                                             QSizePolicy::Expanding);
+    m_layout->addStretch();
 }
 
-void
-InfoWindow::initLabels()
+void InfoWindow::initLabels()
 {
-  m_layout->addStretch();
-  QLabel* licenseTitleLabel = new QLabel(tr("<u><b>License</b></u>"), this);
-  licenseTitleLabel->setAlignment(Qt::AlignHCenter);
-  m_layout->addWidget(licenseTitleLabel);
-  QLabel* licenseLabel = new QLabel(QStringLiteral("GPLv3+"), this);
-  licenseLabel->setAlignment(Qt::AlignHCenter);
-  m_layout->addWidget(licenseLabel);
-  m_layout->addStretch();
+    m_layout->addStretch();
+    QLabel* licenseTitleLabel = new QLabel(tr("<u><b>License</b></u>"), this);
+    licenseTitleLabel->setAlignment(Qt::AlignHCenter);
+    m_layout->addWidget(licenseTitleLabel);
+    QLabel* licenseLabel = new QLabel(QStringLiteral("GPLv3+"), this);
+    licenseLabel->setAlignment(Qt::AlignHCenter);
+    m_layout->addWidget(licenseLabel);
+    m_layout->addStretch();
 
-  QLabel* versionTitleLabel = new QLabel(tr("<u><b>Version</b></u>"), this);
-  versionTitleLabel->setAlignment(Qt::AlignHCenter);
-  m_layout->addWidget(versionTitleLabel);
+    QLabel* versionTitleLabel = new QLabel(tr("<u><b>Version</b></u>"), this);
+    versionTitleLabel->setAlignment(Qt::AlignHCenter);
+    m_layout->addWidget(versionTitleLabel);
 
-  QString versionMsg = "Flameshot " + QStringLiteral(APP_VERSION) +
-                       "\nCompiled with Qt " + QT_VERSION_STR;
-  QLabel* versionLabel = new QLabel(versionMsg, this);
-  versionLabel->setAlignment(Qt::AlignHCenter);
-  m_layout->addWidget(versionLabel);
-  m_layout->addStretch();
-  m_layout->addSpacing(10);
-  QLabel* shortcutsTitleLabel = new QLabel(tr("<u><b>Shortcuts</b></u>"), this);
-  shortcutsTitleLabel->setAlignment(Qt::AlignHCenter);
-  ;
-  m_layout->addWidget(shortcutsTitleLabel);
+    QString versionMsg = "Flameshot " + QStringLiteral(APP_VERSION) +
+                         "\nCompiled with Qt " + QT_VERSION_STR;
+    QLabel* versionLabel = new QLabel(versionMsg, this);
+    versionLabel->setAlignment(Qt::AlignHCenter);
+    m_layout->addWidget(versionLabel);
+    m_layout->addStretch();
+    m_layout->addSpacing(10);
+    QLabel* shortcutsTitleLabel =
+      new QLabel(tr("<u><b>Shortcuts</b></u>"), this);
+    shortcutsTitleLabel->setAlignment(Qt::AlignHCenter);
+    ;
+    m_layout->addWidget(shortcutsTitleLabel);
 }
 
-void
-InfoWindow::keyPressEvent(QKeyEvent* e)
+void InfoWindow::keyPressEvent(QKeyEvent* e)
 {
-  if (e->key() == Qt::Key_Escape) {
-    close();
-  }
+    if (e->key() == Qt::Key_Escape) {
+        close();
+    }
 }

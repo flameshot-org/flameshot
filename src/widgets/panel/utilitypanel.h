@@ -26,30 +26,30 @@ class QScrollArea;
 
 class UtilityPanel : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit UtilityPanel(QWidget* parent = nullptr);
+    explicit UtilityPanel(QWidget* parent = nullptr);
 
-  QWidget* toolWidget() const;
-  void addToolWidget(QWidget* w);
-  void clearToolWidget();
-  void pushWidget(QWidget* w);
+    QWidget* toolWidget() const;
+    void addToolWidget(QWidget* w);
+    void clearToolWidget();
+    void pushWidget(QWidget* w);
 
 signals:
-  void mouseEnter();
-  void mouseLeave();
+    void mouseEnter();
+    void mouseLeave();
 
 public slots:
-  void toggle();
+    void toggle();
 
 private:
-  void initInternalPanel();
+    void initInternalPanel();
 
-  QPointer<QWidget> m_toolWidget;
-  QScrollArea* m_internalPanel;
-  QVBoxLayout* m_upLayout;
-  QVBoxLayout* m_bottomLayout;
-  QVBoxLayout* m_layout;
-  QPropertyAnimation* m_showAnimation;
-  QPropertyAnimation* m_hideAnimation;
+    QPointer<QWidget> m_toolWidget;
+    QScrollArea* m_internalPanel;
+    QVBoxLayout* m_upLayout;
+    QVBoxLayout* m_bottomLayout;
+    QVBoxLayout* m_layout;
+    QPropertyAnimation* m_showAnimation;
+    QPropertyAnimation* m_hideAnimation;
 };

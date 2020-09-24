@@ -23,58 +23,58 @@ class QPropertyAnimation;
 
 class SelectionWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  enum SideType
-  {
-    TOPLEFT_SIDE,
-    BOTTONLEFT_SIDE,
-    TOPRIGHT_SIDE,
-    BOTTONRIGHT_SIDE,
-    TOP_SIDE,
-    BOTTON_SIDE,
-    RIGHT_SIDE,
-    LEFT_SIDE,
-    NO_SIDE,
-  };
+    enum SideType
+    {
+        TOPLEFT_SIDE,
+        BOTTONLEFT_SIDE,
+        TOPRIGHT_SIDE,
+        BOTTONRIGHT_SIDE,
+        TOP_SIDE,
+        BOTTON_SIDE,
+        RIGHT_SIDE,
+        LEFT_SIDE,
+        NO_SIDE,
+    };
 
-  explicit SelectionWidget(const QColor& c, QWidget* parent = nullptr);
+    explicit SelectionWidget(const QColor& c, QWidget* parent = nullptr);
 
-  SideType getMouseSide(const QPoint& point) const;
-  QVector<QRect> handlerAreas();
+    SideType getMouseSide(const QPoint& point) const;
+    QVector<QRect> handlerAreas();
 
-  void setGeometryAnimated(const QRect& r);
-  void saveGeometry();
-  QRect savedGeometry();
+    void setGeometryAnimated(const QRect& r);
+    void saveGeometry();
+    QRect savedGeometry();
 
 protected:
-  void paintEvent(QPaintEvent*);
-  void resizeEvent(QResizeEvent*);
-  void moveEvent(QMoveEvent*);
+    void paintEvent(QPaintEvent*);
+    void resizeEvent(QResizeEvent*);
+    void moveEvent(QMoveEvent*);
 
 signals:
-  void animationEnded();
+    void animationEnded();
 
 public slots:
-  void updateColor(const QColor& c);
+    void updateColor(const QColor& c);
 
 private:
-  void updateAreas();
+    void updateAreas();
 
-  QPropertyAnimation* m_animation;
+    QPropertyAnimation* m_animation;
 
-  QColor m_color;
-  QPoint m_areaOffset;
-  QPoint m_handleOffset;
-  QRect m_geometryBackup;
+    QColor m_color;
+    QPoint m_areaOffset;
+    QPoint m_handleOffset;
+    QRect m_geometryBackup;
 
-  // naming convention for handles
-  // T top, B bottom, R Right, L left
-  // 2 letters: a corner
-  // 1 letter: the handle on the middle of the corresponding side
-  QRect m_TLHandle, m_TRHandle, m_BLHandle, m_BRHandle;
-  QRect m_LHandle, m_THandle, m_RHandle, m_BHandle;
+    // naming convention for handles
+    // T top, B bottom, R Right, L left
+    // 2 letters: a corner
+    // 1 letter: the handle on the middle of the corresponding side
+    QRect m_TLHandle, m_TRHandle, m_BLHandle, m_BRHandle;
+    QRect m_LHandle, m_THandle, m_RHandle, m_BHandle;
 
-  QRect m_TLArea, m_TRArea, m_BLArea, m_BRArea;
-  QRect m_LArea, m_TArea, m_RArea, m_BArea;
+    QRect m_TLArea, m_TRArea, m_BLArea, m_BRArea;
+    QRect m_LArea, m_TArea, m_RArea, m_BArea;
 };

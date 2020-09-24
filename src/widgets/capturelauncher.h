@@ -29,22 +29,22 @@ class ImageLabel;
 
 class CaptureLauncher : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit CaptureLauncher(QWidget* parent = nullptr);
+    explicit CaptureLauncher(QWidget* parent = nullptr);
 
 private slots:
-  void startCapture();
-  void startDrag();
-  void captureTaken(uint id, QPixmap p);
-  void captureFailed(uint id);
+    void startCapture();
+    void startDrag();
+    void captureTaken(uint id, QPixmap p);
+    void captureFailed(uint id);
 
 private:
-  QSpinBox* m_delaySpinBox;
-  QComboBox* m_captureType;
-  QVBoxLayout* m_mainLayout;
-  QPushButton* m_launchButton;
-  QLabel* m_CaptureModeLabel;
-  ImageLabel* m_imageLabel;
-  uint m_id;
+    QSpinBox* m_delaySpinBox;
+    QComboBox* m_captureType;
+    QVBoxLayout* m_mainLayout;
+    QPushButton* m_launchButton;
+    QLabel* m_CaptureModeLabel;
+    ImageLabel* m_imageLabel;
+    uint m_id;
 };

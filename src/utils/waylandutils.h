@@ -4,9 +4,9 @@
 class WaylandUtils
 {
 public:
-  WaylandUtils();
+    WaylandUtils();
 
-  static bool waylandDetected();
+    static bool waylandDetected();
 
 private:
 };
