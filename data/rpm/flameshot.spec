@@ -1,5 +1,5 @@
 Name: flameshot
-Version: 0.8.0
+Version: 0.8.1
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 Summary(eu-ES): Potente pero simple de usar software de capturas
