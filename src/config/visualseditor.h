@@ -26,22 +26,22 @@ class UIcolorEditor;
 
 class VisualsEditor : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit VisualsEditor(QWidget* parent = nullptr);
+    explicit VisualsEditor(QWidget* parent = nullptr);
 
 public slots:
-  void updateComponents();
+    void updateComponents();
 
 private slots:
-  void saveOpacity();
+    void saveOpacity();
 
 private:
-  QVBoxLayout* m_layout;
-  ButtonListView* m_buttonList;
-  UIcolorEditor* m_colorEditor;
-  ExtendedSlider* m_opacitySlider;
+    QVBoxLayout* m_layout;
+    ButtonListView* m_buttonList;
+    UIcolorEditor* m_colorEditor;
+    ExtendedSlider* m_opacitySlider;
 
-  void initWidgets();
-  void initOpacitySlider();
+    void initWidgets();
+    void initOpacitySlider();
 };

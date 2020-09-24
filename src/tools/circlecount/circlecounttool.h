@@ -21,27 +21,27 @@
 
 class CircleCountTool : public AbstractTwoPointTool
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit CircleCountTool(QObject* parent = nullptr);
+    explicit CircleCountTool(QObject* parent = nullptr);
 
-  QIcon icon(const QColor& background, bool inEditor) const override;
-  QString name() const override;
-  QString description() const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
+    QString name() const override;
+    QString description() const override;
 
-  CaptureTool* copy(QObject* parent = nullptr) override;
-  void process(QPainter& painter,
-               const QPixmap& pixmap,
-               bool recordUndo = false) override;
-  void paintMousePreview(QPainter& painter,
-                         const CaptureContext& context) override;
+    CaptureTool* copy(QObject* parent = nullptr) override;
+    void process(QPainter& painter,
+                 const QPixmap& pixmap,
+                 bool recordUndo = false) override;
+    void paintMousePreview(QPainter& painter,
+                           const CaptureContext& context) override;
 
 protected:
-  ToolType nameID() const override;
+    ToolType nameID() const override;
 
 private:
-  unsigned int m_count;
+    unsigned int m_count;
 public slots:
-  void drawStart(const CaptureContext& context) override;
-  void pressed(const CaptureContext& context) override;
+    void drawStart(const CaptureContext& context) override;
+    void pressed(const CaptureContext& context) override;
 };

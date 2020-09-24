@@ -20,85 +20,77 @@
 TextWidget::TextWidget(QWidget* parent)
   : QTextEdit(parent)
 {
-  setStyleSheet(QStringLiteral("TextWidget { background: transparent; }"));
-  connect(this, &TextWidget::textChanged, this, &TextWidget::adjustSize);
-  connect(this, &TextWidget::textChanged, this, &TextWidget::emitTextUpdated);
-  setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  setContextMenuPolicy(Qt::NoContextMenu);
+    setStyleSheet(QStringLiteral("TextWidget { background: transparent; }"));
+    connect(this, &TextWidget::textChanged, this, &TextWidget::adjustSize);
+    connect(this, &TextWidget::textChanged, this, &TextWidget::emitTextUpdated);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setContextMenuPolicy(Qt::NoContextMenu);
 }
 
-void
-TextWidget::showEvent(QShowEvent* e)
+void TextWidget::showEvent(QShowEvent* e)
 {
-  QFont font;
-  QFontMetrics fm(font);
-  setFixedWidth(fm.lineSpacing() * 6);
-  setFixedHeight(fm.lineSpacing() * 2.5);
-  m_baseSize = size();
-  m_minSize = m_baseSize;
-  QTextEdit::showEvent(e);
-  adjustSize();
+    QFont font;
+    QFontMetrics fm(font);
+    setFixedWidth(fm.lineSpacing() * 6);
+    setFixedHeight(fm.lineSpacing() * 2.5);
+    m_baseSize = size();
+    m_minSize = m_baseSize;
+    QTextEdit::showEvent(e);
+    adjustSize();
 }
 
-void
-TextWidget::resizeEvent(QResizeEvent* e)
+void TextWidget::resizeEvent(QResizeEvent* e)
 {
-  m_minSize.setHeight(qMin(m_baseSize.height(), height()));
-  m_minSize.setWidth(qMin(m_baseSize.width(), width()));
-  QTextEdit::resizeEvent(e);
+    m_minSize.setHeight(qMin(m_baseSize.height(), height()));
+    m_minSize.setWidth(qMin(m_baseSize.width(), width()));
+    QTextEdit::resizeEvent(e);
 }
 
-void
-TextWidget::setFont(const QFont& f)
+void TextWidget::setFont(const QFont& f)
 {
-  QTextEdit::setFont(f);
-  adjustSize();
+    QTextEdit::setFont(f);
+    adjustSize();
 }
 
-void
-TextWidget::updateFont(const QFont& f)
+void TextWidget::updateFont(const QFont& f)
 {
-  setFont(f);
+    setFont(f);
 }
 
-void
-TextWidget::setFontPointSize(qreal s)
+void TextWidget::setFontPointSize(qreal s)
 {
-  QFont f = font();
-  f.setPointSize(s);
-  setFont(f);
+    QFont f = font();
+    f.setPointSize(s);
+    setFont(f);
 }
 
-void
-TextWidget::setTextColor(const QColor& c)
+void TextWidget::setTextColor(const QColor& c)
 {
-  QString s(
-    QStringLiteral("TextWidget { background: transparent; color: %1; }"));
-  setStyleSheet(s.arg(c.name()));
+    QString s(
+      QStringLiteral("TextWidget { background: transparent; color: %1; }"));
+    setStyleSheet(s.arg(c.name()));
 }
 
-void
-TextWidget::adjustSize()
+void TextWidget::adjustSize()
 {
-  QString&& text = this->toPlainText();
+    QString&& text = this->toPlainText();
 
-  QFontMetrics fm(font());
-  QRect bounds = fm.boundingRect(QRect(), 0, text);
-  int pixelsWide = bounds.width() + fm.lineSpacing();
-  int pixelsHigh = bounds.height() * 1.15 + fm.lineSpacing();
-  if (pixelsWide < m_minSize.width()) {
-    pixelsWide = m_minSize.width();
-  }
-  if (pixelsHigh < m_minSize.height()) {
-    pixelsHigh = m_minSize.height();
-  }
+    QFontMetrics fm(font());
+    QRect bounds = fm.boundingRect(QRect(), 0, text);
+    int pixelsWide = bounds.width() + fm.lineSpacing();
+    int pixelsHigh = bounds.height() * 1.15 + fm.lineSpacing();
+    if (pixelsWide < m_minSize.width()) {
+        pixelsWide = m_minSize.width();
+    }
+    if (pixelsHigh < m_minSize.height()) {
+        pixelsHigh = m_minSize.height();
+    }
 
-  this->setFixedSize(pixelsWide, pixelsHigh);
+    this->setFixedSize(pixelsWide, pixelsHigh);
 }
 
-void
-TextWidget::emitTextUpdated()
+void TextWidget::emitTextUpdated()
 {
-  emit textUpdated(this->toPlainText());
+    emit textUpdated(this->toPlainText());
 }

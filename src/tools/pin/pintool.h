@@ -21,27 +21,27 @@
 
 class PinTool : public AbstractActionTool
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit PinTool(QObject* parent = nullptr);
+    explicit PinTool(QObject* parent = nullptr);
 
-  bool closeOnButtonPressed() const;
+    bool closeOnButtonPressed() const;
 
-  QIcon icon(const QColor& background, bool inEditor) const override;
-  QString name() const override;
-  QString description() const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
+    QString name() const override;
+    QString description() const override;
 
-  QWidget* widget() override;
+    QWidget* widget() override;
 
-  CaptureTool* copy(QObject* parent = nullptr) override;
+    CaptureTool* copy(QObject* parent = nullptr) override;
 
 protected:
-  ToolType nameID() const override;
+    ToolType nameID() const override;
 
 public slots:
-  void pressed(const CaptureContext& context) override;
+    void pressed(const CaptureContext& context) override;
 
 private:
-  QRect m_geometry;
-  QPixmap m_pixmap;
+    QRect m_geometry;
+    QPixmap m_pixmap;
 };

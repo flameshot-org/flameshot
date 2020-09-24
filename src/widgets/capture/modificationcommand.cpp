@@ -22,19 +22,17 @@ ModificationCommand::ModificationCommand(QPixmap* p, CaptureTool* t)
   : m_pixmap(p)
   , m_tool(t)
 {
-  setText(t->name());
+    setText(t->name());
 }
 
-void
-ModificationCommand::undo()
+void ModificationCommand::undo()
 {
-  m_tool->undo(*m_pixmap);
+    m_tool->undo(*m_pixmap);
 }
 
-void
-ModificationCommand::redo()
+void ModificationCommand::redo()
 {
-  QPainter p(m_pixmap);
-  p.setRenderHint(QPainter::Antialiasing);
-  m_tool->process(p, *m_pixmap, true);
+    QPainter p(m_pixmap);
+    p.setRenderHint(QPainter::Antialiasing);
+    m_tool->process(p, *m_pixmap, true);
 }

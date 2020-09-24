@@ -21,28 +21,28 @@
 
 class AbstractActionTool : public CaptureTool
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit AbstractActionTool(QObject* parent = nullptr);
+    explicit AbstractActionTool(QObject* parent = nullptr);
 
-  bool isValid() const override;
-  bool isSelectable() const override;
-  bool showMousePreview() const override;
+    bool isValid() const override;
+    bool isSelectable() const override;
+    bool showMousePreview() const override;
 
-  void undo(QPixmap& pixmap) override;
-  void process(QPainter& painter,
-               const QPixmap& pixmap,
-               bool recordUndo = false) override;
-  void paintMousePreview(QPainter& painter,
-                         const CaptureContext& context) override;
+    void undo(QPixmap& pixmap) override;
+    void process(QPainter& painter,
+                 const QPixmap& pixmap,
+                 bool recordUndo = false) override;
+    void paintMousePreview(QPainter& painter,
+                           const CaptureContext& context) override;
 
 protected:
-  virtual ToolType nameID() const = 0;
+    virtual ToolType nameID() const = 0;
 
 public slots:
-  void drawEnd(const QPoint& p) override;
-  void drawMove(const QPoint& p) override;
-  void drawStart(const CaptureContext& context) override;
-  void colorChanged(const QColor& c) override;
-  void thicknessChanged(const int th) override;
+    void drawEnd(const QPoint& p) override;
+    void drawMove(const QPoint& p) override;
+    void drawStart(const CaptureContext& context) override;
+    void colorChanged(const QColor& c) override;
+    void thicknessChanged(const int th) override;
 };

@@ -26,7 +26,7 @@ CommandOption::CommandOption(const QString& name,
   , m_valueName(valueName)
   , m_value(defaultValue)
 {
-  m_checker = [](QString const&) { return true; };
+    m_checker = [](QString const&) { return true; };
 }
 
 CommandOption::CommandOption(const QStringList& names,
@@ -38,103 +38,89 @@ CommandOption::CommandOption(const QStringList& names,
   , m_valueName(valueName)
   , m_value(defaultValue)
 {
-  m_checker = [](QString const&) -> bool { return true; };
+    m_checker = [](QString const&) -> bool { return true; };
 }
 
-void
-CommandOption::setName(const QString& name)
+void CommandOption::setName(const QString& name)
 {
-  m_names = QStringList() << name;
+    m_names = QStringList() << name;
 }
 
-void
-CommandOption::setNames(const QStringList& names)
+void CommandOption::setNames(const QStringList& names)
 {
-  m_names = names;
+    m_names = names;
 }
 
-QStringList
-CommandOption::names() const
+QStringList CommandOption::names() const
 {
-  return m_names;
+    return m_names;
 }
 
-QStringList
-CommandOption::dashedNames() const
+QStringList CommandOption::dashedNames() const
 {
-  QStringList dashedNames;
-  for (const QString& name : m_names) {
-    // prepend "-" to single character options, and "--" to the others
-    QString dashedName = (name.length() == 1)
-                           ? QStringLiteral("-%1").arg(name)
-                           : QStringLiteral("--%1").arg(name);
-    dashedNames << dashedName;
-  }
-  return dashedNames;
+    QStringList dashedNames;
+    for (const QString& name : m_names) {
+        // prepend "-" to single character options, and "--" to the others
+        QString dashedName = (name.length() == 1)
+                               ? QStringLiteral("-%1").arg(name)
+                               : QStringLiteral("--%1").arg(name);
+        dashedNames << dashedName;
+    }
+    return dashedNames;
 }
 
-void
-CommandOption::setValueName(const QString& name)
+void CommandOption::setValueName(const QString& name)
 {
-  m_valueName = name;
+    m_valueName = name;
 }
 
-QString
-CommandOption::valueName() const
+QString CommandOption::valueName() const
 {
-  return m_valueName;
+    return m_valueName;
 }
 
-void
-CommandOption::setValue(const QString& value)
+void CommandOption::setValue(const QString& value)
 {
-  if (m_valueName.isEmpty()) {
-    m_valueName = QLatin1String("value");
-  }
-  m_value = value;
+    if (m_valueName.isEmpty()) {
+        m_valueName = QLatin1String("value");
+    }
+    m_value = value;
 }
 
-QString
-CommandOption::value() const
+QString CommandOption::value() const
 {
-  return m_value;
+    return m_value;
 }
 
-void
-CommandOption::addChecker(const function<bool(const QString&)> checker,
-                          const QString& errMsg)
+void CommandOption::addChecker(const function<bool(const QString&)> checker,
+                               const QString& errMsg)
 {
-  m_checker = checker;
-  m_errorMsg = errMsg;
+    m_checker = checker;
+    m_errorMsg = errMsg;
 }
 
-bool
-CommandOption::checkValue(const QString& value) const
+bool CommandOption::checkValue(const QString& value) const
 {
-  return m_checker(value);
+    return m_checker(value);
 }
 
-QString
-CommandOption::description() const
+QString CommandOption::description() const
 {
-  return m_description;
+    return m_description;
 }
 
-void
-CommandOption::setDescription(const QString& description)
+void CommandOption::setDescription(const QString& description)
 {
-  m_description = description;
+    m_description = description;
 }
 
-QString
-CommandOption::errorMsg() const
+QString CommandOption::errorMsg() const
 {
-  return m_errorMsg;
+    return m_errorMsg;
 }
 
-bool
-CommandOption::operator==(const CommandOption& option) const
+bool CommandOption::operator==(const CommandOption& option) const
 {
-  return m_description == option.m_description && m_names == option.m_names &&
-         m_valueName == option.m_valueName;
+    return m_description == option.m_description && m_names == option.m_names &&
+           m_valueName == option.m_valueName;
 }

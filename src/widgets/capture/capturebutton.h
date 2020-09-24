@@ -21,24 +21,24 @@
 
 class CaptureButton : public QPushButton
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  CaptureButton() = delete;
-  CaptureButton(QWidget* parent = nullptr);
-  CaptureButton(const QString& text, QWidget* parent = nullptr);
-  CaptureButton(const QIcon& icon,
-                const QString& text,
-                QWidget* parent = nullptr);
+    CaptureButton() = delete;
+    CaptureButton(QWidget* parent = nullptr);
+    CaptureButton(const QString& text, QWidget* parent = nullptr);
+    CaptureButton(const QIcon& icon,
+                  const QString& text,
+                  QWidget* parent = nullptr);
 
-  static QString globalStyleSheet();
+    static QString globalStyleSheet();
 
-  QString styleSheet() const;
+    QString styleSheet() const;
 
-  void setColor(const QColor& c);
+    void setColor(const QColor& c);
 
 private:
-  static QColor m_mainColor;
+    static QColor m_mainColor;
 
-  void init();
+    void init();
 };

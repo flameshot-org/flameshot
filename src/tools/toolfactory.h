@@ -25,14 +25,14 @@ class CaptureTool;
 
 class ToolFactory : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit ToolFactory(QObject* parent = nullptr);
+    explicit ToolFactory(QObject* parent = nullptr);
 
-  ToolFactory(const ToolFactory&) = delete;
-  ToolFactory& operator=(const ToolFactory&) = delete;
+    ToolFactory(const ToolFactory&) = delete;
+    ToolFactory& operator=(const ToolFactory&) = delete;
 
-  CaptureTool* CreateTool(CaptureToolButton::ButtonType t,
-                          QObject* parent = nullptr);
+    CaptureTool* CreateTool(CaptureToolButton::ButtonType t,
+                            QObject* parent = nullptr);
 };

@@ -22,45 +22,38 @@ RedoTool::RedoTool(QObject* parent)
   : AbstractActionTool(parent)
 {}
 
-bool
-RedoTool::closeOnButtonPressed() const
+bool RedoTool::closeOnButtonPressed() const
 {
-  return false;
+    return false;
 }
 
-QIcon
-RedoTool::icon(const QColor& background, bool inEditor) const
+QIcon RedoTool::icon(const QColor& background, bool inEditor) const
 {
-  Q_UNUSED(inEditor);
-  return QIcon(iconPath(background) + "redo-variant.svg");
+    Q_UNUSED(inEditor);
+    return QIcon(iconPath(background) + "redo-variant.svg");
 }
-QString
-RedoTool::name() const
+QString RedoTool::name() const
 {
-  return tr("Redo");
+    return tr("Redo");
 }
 
-ToolType
-RedoTool::nameID() const
+ToolType RedoTool::nameID() const
 {
-  return ToolType::REDO;
+    return ToolType::REDO;
 }
 
-QString
-RedoTool::description() const
+QString RedoTool::description() const
 {
-  return tr("Redo the next modification");
+    return tr("Redo the next modification");
 }
 
-CaptureTool*
-RedoTool::copy(QObject* parent)
+CaptureTool* RedoTool::copy(QObject* parent)
 {
-  return new RedoTool(parent);
+    return new RedoTool(parent);
 }
 
-void
-RedoTool::pressed(const CaptureContext& context)
+void RedoTool::pressed(const CaptureContext& context)
 {
-  Q_UNUSED(context);
-  emit requestAction(REQ_REDO_MODIFICATION);
+    Q_UNUSED(context);
+    emit requestAction(REQ_REDO_MODIFICATION);
 }
