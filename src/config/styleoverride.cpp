@@ -9,7 +9,7 @@ int StyleOverride::styleHint(StyleHint hint,
                              QStyleHintReturn* returnData) const
 {
     if (hint == SH_ToolTip_WakeUpDelay) {
-        return 500;
+        return 600;
     } else {
         return baseStyle()->styleHint(hint, option, widget, returnData);
     }
