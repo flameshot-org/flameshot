@@ -14,7 +14,7 @@ on:
 
 env:
   PRODUCT: flameshot
-  VERSION: 0.8.0
+  VERSION: 0.8.1
   RELEASE: 1
   ARCH: x86_64
   # dockerfiles, see https://github.com/flameshot-org/flameshot-docker-images
