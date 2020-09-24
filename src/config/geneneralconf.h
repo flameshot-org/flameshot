@@ -26,7 +26,6 @@ class QLabel;
 class QLineEdit;
 class FilePathConfiguration;
 
-
 class GeneneralConf : public QWidget
 {
     Q_OBJECT

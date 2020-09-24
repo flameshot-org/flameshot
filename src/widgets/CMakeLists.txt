@@ -10,7 +10,9 @@ target_sources(
           infowindow.h
           loadspinner.h
           notificationwidget.h
-          orientablepushbutton.h)
+          orientablepushbutton.h
+          historywidget.h
+)
 
 target_sources(
   flameshot
@@ -20,4 +22,6 @@ target_sources(
           infowindow.cpp
           loadspinner.cpp
           notificationwidget.cpp
-          orientablepushbutton.cpp)
+          orientablepushbutton.cpp
+          historywidget.cpp
+)

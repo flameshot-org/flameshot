@@ -4,7 +4,9 @@ target_sources(
   PRIVATE dbusutils.h
           filenamehandler.h
           screengrabber.h
-          systemnotification.h)
+          systemnotification.h
+          configshortcuts.h
+)
 
 target_sources(
   flameshot
@@ -18,4 +20,8 @@ target_sources(
           desktopfileparse.cpp
           desktopinfo.cpp
           pathinfo.cpp
-          colorutils.cpp)
+          colorutils.cpp
+          history.cpp
+          configenterprise.cpp
+          configshortcuts.cpp
+)

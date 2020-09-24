@@ -18,10 +18,9 @@
 #include "geneneralconf.h"
 #include "filepathconfiguration.h"
 #include "src/core/controller.h"
-#include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
 #include "src/tools/storage/imgstorages.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/filenamehandler.h"
 #include <QCheckBox>
 #include <QFile>
 #include <QFileDialog>

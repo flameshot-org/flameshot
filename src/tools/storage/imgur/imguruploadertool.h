@@ -26,7 +26,6 @@ public:
     explicit ImgurUploaderTool(QObject* parent = nullptr);
 
     QString name() const override;
-    static QString nameID();
     QString description() const override;
 
     QWidget* widget() override;

@@ -2,10 +2,10 @@
 #include "imguploader.h"
 #include "imgur/imguruploader.h"
 #include "imgur/imguruploadertool.h"
+#include "s3/imgs3settings.h"
 #include "s3/imgs3uploader.h"
 #include "s3/imgs3uploadertool.h"
 #include "src/tools/capturetool.h"
-#include "src/tools/storage/s3/imgs3settings.h"
 
 #include <QWidget>
 
