@@ -17,7 +17,6 @@
 
 #include "controller.h"
 #include "src/config/configwindow.h"
-#include "src/utils/configenterprise.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
@@ -32,7 +31,6 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QDesktopWidget>
-#include <QFile>
 #include <QMenu>
 #include <QSystemTrayIcon>
 

@@ -22,6 +22,5 @@ target_sources(
           pathinfo.cpp
           colorutils.cpp
           history.cpp
-          configenterprise.cpp
           configshortcuts.cpp
 )
