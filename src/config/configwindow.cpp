@@ -21,16 +21,15 @@
 #include "src/config/geneneralconf.h"
 #include "src/config/shortcutswidget.h"
 #include "src/config/strftimechooserwidget.h"
+#include "src/config/uploadstorageconfig.h"
 #include "src/config/visualseditor.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/pathinfo.h"
-#include "src/widgets/capture/capturetoolbutton.h"
 #include <QFileSystemWatcher>
 #include <QIcon>
 #include <QKeyEvent>
-#include <QLabel>
 #include <QVBoxLayout>
 
 // ConfigWindow contains the menus where you can configure the application
@@ -78,6 +77,12 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
     addTab(m_shortcuts, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
+
+    // upload storage configuration
+    m_uploadStorageConfig = new UploadStorageConfig();
+    addTab(m_uploadStorageConfig,
+           QIcon(modifier + "cloud-upload.svg"),
+           tr("Storage"));
 
     // connect update sigslots
     connect(this,
