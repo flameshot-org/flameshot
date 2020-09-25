@@ -89,8 +89,11 @@ void CircleCountTool::process(QPainter& painter,
           textRect, Qt::AlignCenter, QString::number(m_count));
     }
 
-    // Lightness value ranges from 0-255, we split at 75 as this looks best
-    if (m_color.lightness() <= 75) {
+    // Calculate the perceptive luminance - human eye favors green color
+    double luma = ((0.299 * m_color.red()) + (0.587 * m_color.green()) +
+                   (0.114 * m_color.blue())) /
+                  255;
+    if (luma <= 0.5) {
         painter.setPen(Qt::white);
     } else {
         painter.setPen(Qt::black);
