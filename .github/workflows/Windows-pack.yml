@@ -156,3 +156,8 @@ jobs:
           echo "=================Windows portable download link================"
           echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
           echo "=====no operation for you can see link in the log console====="
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows-artifact
+          path: ${{ github.workspace }}/build/Package/*
