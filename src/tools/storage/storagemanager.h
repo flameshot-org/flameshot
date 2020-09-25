@@ -16,9 +16,10 @@ public:
     CaptureTool* imgUploaderTool(const QString& imgUploaderType,
                                  QObject* parent = nullptr);
     const QString& storageUrl(const QString& imgUploaderType);
+    const QString& storageDefault();
 
-    // class members
 private:
+    // class members
     QString m_qstr;
 };
 
