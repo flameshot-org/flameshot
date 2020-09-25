@@ -16,32 +16,20 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imguploader.h"
-#include "src/utils/configenterprise.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
-#include "src/utils/history.h"
-#include "src/utils/systemnotification.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
-#include <QBuffer>
 #include <QClipboard>
-#include <QDebug>
 #include <QDesktopServices>
-#include <QDir>
 #include <QDrag>
 #include <QHBoxLayout>
-#include <QHttpMultiPart>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLabel>
-#include <QMessageBox>
 #include <QMimeData>
 #include <QNetworkAccessManager>
-#include <QNetworkProxy>
-#include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QPushButton>
 #include <QShortcut>
 #include <QTimer>

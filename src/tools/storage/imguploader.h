@@ -32,7 +32,6 @@ class LoadSpinner;
 class QPushButton;
 class QUrl;
 class NotificationWidget;
-class ConfigEnterprise;
 class ImageLabel;
 
 class ImgUploader : public QWidget
