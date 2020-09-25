@@ -16,7 +16,6 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "geneneralconf.h"
-#include "filepathconfiguration.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
@@ -43,8 +42,8 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowStartupLaunchMessage();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
-    initSaveAfterCopy();
     initCopyPathAfterSave();
+    initSaveAfterCopy();
     initFilePathConfiguration();
 
     // this has to be at the end
@@ -105,11 +104,6 @@ void GeneneralConf::showTrayIconChanged(bool checked)
 void GeneneralConf::autostartChanged(bool checked)
 {
     ConfigHandler().setStartupLaunch(checked);
-}
-
-void GeneneralConf::showStartupLaunchMessageChanged(bool checked)
-{
-    ConfigHandler().setShowStartupLaunchMessage(checked);
 }
 
 void GeneneralConf::closeAfterCaptureChanged(bool checked)
@@ -365,21 +359,12 @@ void GeneneralConf::saveAfterCopyChanged(bool checked)
 
 void GeneneralConf::changeSavePath()
 {
-    QString path = QFileDialog::getExistingDirectory(
-      this,
-      tr("Choose a Folder"),
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation),
-      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    if (path.isEmpty()) {
-        return;
+    QString path = chooseFolder(
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    if (!path.isEmpty()) {
+        m_savePath->setText(path);
+        ConfigHandler().setSaveAfterCopyPath(path);
     }
-    if (!QFileInfo(path).isWritable()) {
-        QMessageBox::about(
-          this, tr("Error"), tr("Unable to write to directory."));
-        return;
-    }
-    m_savePath->setText(path);
-    ConfigHandler().setSaveAfterCopyPath(path);
 }
 
 void GeneneralConf::initCopyPathAfterSave()
@@ -396,6 +381,92 @@ void GeneneralConf::initCopyPathAfterSave()
 
 void GeneneralConf::initFilePathConfiguration()
 {
-    m_filePathConfiguration = new FilePathConfiguration();
-    m_layout->addWidget(m_filePathConfiguration);
+    QGroupBox* box = new QGroupBox(tr("Select default path for Screenshots"));
+    box->setFlat(true);
+
+    QVBoxLayout* boxLayout = new QVBoxLayout();
+    box->setLayout(boxLayout);
+
+    QHBoxLayout* pathBrowseLayout = new QHBoxLayout();
+
+    m_screenshotPathFixedCheck =
+      new QCheckBox(tr("Use fixed path for screenshots to save"), this);
+    m_screenshotPathFixedCheck->setChecked(
+      !ConfigHandler().savePathFixed().isEmpty());
+    connect(m_screenshotPathFixedCheck,
+            SIGNAL(toggled(bool)),
+            this,
+            SLOT(pathFixed()));
+
+    m_screenshotPathFixedText =
+      new QLineEdit(ConfigHandler().savePathFixed(), this);
+    m_screenshotPathFixedText->setDisabled(true);
+    QString foreground = this->palette().foreground().color().name();
+    m_screenshotPathFixedText->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+
+    m_screenshotPathFixedBrowse = new QPushButton(tr("Change..."), this);
+    m_screenshotPathFixedBrowse->setEnabled(
+      m_screenshotPathFixedCheck->isChecked());
+    connect(m_screenshotPathFixedBrowse,
+            &QPushButton::clicked,
+            this,
+            &GeneneralConf::setPathFixed);
+
+    pathBrowseLayout->addWidget(m_screenshotPathFixedText);
+    pathBrowseLayout->addWidget(m_screenshotPathFixedBrowse);
+
+    boxLayout->addWidget(m_screenshotPathFixedCheck);
+    boxLayout->addLayout(pathBrowseLayout);
+
+    m_layout->addStretch();
+    m_layout->addWidget(box);
+}
+
+const QString GeneneralConf::chooseFolder(const QString pathDefault)
+{
+    QString path;
+    if (pathDefault.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    path = QFileDialog::getExistingDirectory(
+      this,
+      tr("Choose a Folder"),
+      path,
+      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (path.isEmpty()) {
+        return path;
+    }
+    if (!path.isEmpty()) {
+        if (!QFileInfo(path).isWritable()) {
+            QMessageBox::about(
+              this, tr("Error"), tr("Unable to write to directory."));
+            return QString();
+        }
+    }
+    return path;
+}
+
+void GeneneralConf::setPathFixed()
+{
+    QString pathDefault = m_screenshotPathFixedText->text();
+    QString path = chooseFolder(pathDefault);
+    if (path.isNull()) {
+        return;
+    }
+    m_screenshotPathFixedText->setText(path);
+    ConfigHandler().setSavePathFixed(path);
+}
+
+void GeneneralConf::pathFixed()
+{
+    bool status = m_screenshotPathFixedCheck->isChecked();
+    m_screenshotPathFixedBrowse->setEnabled(status);
+    if (!status) {
+        m_screenshotPathFixedText->setText("");
+        ConfigHandler().setSavePathFixed(m_screenshotPathFixedText->text());
+    } else {
+        emit setPathFixed();
+    }
 }

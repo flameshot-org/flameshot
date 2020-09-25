@@ -20,7 +20,6 @@
 #include <QTabWidget>
 
 class FileNameEditor;
-class FilePathConfiguration;
 class ShortcutsWidget;
 class GeneneralConf;
 class QFileSystemWatcher;

@@ -24,7 +24,6 @@ class QCheckBox;
 class QPushButton;
 class QLabel;
 class QLineEdit;
-class FilePathConfiguration;
 
 class GeneneralConf : public QWidget
 {
@@ -47,9 +46,26 @@ private slots:
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
-    void showStartupLaunchMessageChanged(bool checked);
+    void setPathFixed();
+    void pathFixed();
 
 private:
+    const QString chooseFolder(const QString currentPath = "");
+
+    void initShowHelp();
+    void initShowSidePanelButton();
+    void initShowDesktopNotification();
+    void initShowTrayIcon();
+    void initConfingButtons();
+    void initAutostart();
+    void initShowStartupLaunchMessage();
+    void initCloseAfterCapture();
+    void initCopyAndCloseAfterUpload();
+    void initSaveAfterCopy();
+    void initCopyPathAfterSave();
+    void initFilePathConfiguration();
+
+    // class members
     QVBoxLayout* m_layout;
     QCheckBox* m_sysNotifications;
     QCheckBox* m_showTray;
@@ -66,18 +82,7 @@ private:
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
-    FilePathConfiguration* m_filePathConfiguration;
-
-    void initShowHelp();
-    void initShowSidePanelButton();
-    void initShowDesktopNotification();
-    void initShowTrayIcon();
-    void initConfingButtons();
-    void initAutostart();
-    void initShowStartupLaunchMessage();
-    void initCloseAfterCapture();
-    void initCopyAndCloseAfterUpload();
-    void initSaveAfterCopy();
-    void initCopyPathAfterSave();
-    void initFilePathConfiguration();
+    QLineEdit* m_screenshotPathFixedText;
+    QCheckBox* m_screenshotPathFixedCheck;
+    QPushButton* m_screenshotPathFixedBrowse;
 };

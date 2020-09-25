@@ -17,7 +17,6 @@
 
 #include "configwindow.h"
 #include "src/config/filenameeditor.h"
-#include "src/config/filepathconfiguration.h"
 #include "src/config/geneneralconf.h"
 #include "src/config/shortcutswidget.h"
 #include "src/config/strftimechooserwidget.h"

@@ -9,7 +9,6 @@ target_sources(
           strftimechooserwidget.cpp
           uicoloreditor.cpp
           visualseditor.cpp
-          filepathconfiguration.cpp
           shortcutswidget.cpp
           setshortcutwidget.cpp
           uploadstorageconfig.cpp
