@@ -18,21 +18,18 @@
 #include "geneneralconf.h"
 #include "filepathconfiguration.h"
 #include "src/core/controller.h"
-#include "src/tools/storage/imgstorages.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
 #include <QCheckBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
-#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QRadioButton>
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+
 GeneneralConf::GeneneralConf(QWidget* parent)
   : QWidget(parent)
 {
@@ -48,7 +45,6 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initCopyAndCloseAfterUpload();
     initSaveAfterCopy();
     initCopyPathAfterSave();
-    initUploadStorage();
     initFilePathConfiguration();
 
     // this has to be at the end
@@ -396,41 +392,6 @@ void GeneneralConf::initCopyPathAfterSave()
     connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyPathAfterSaveEnabled(checked);
     });
-}
-
-void GeneneralConf::initUploadStorage()
-{
-    QGroupBox* groupBox = new QGroupBox(tr("Upload storage"));
-
-    // TODO - remove dependency injection (s3 & imgur)
-    // imgur
-    QRadioButton* storageImgUr = new QRadioButton(tr("Imgur storage"));
-    connect(storageImgUr, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setUploadStorage(SCREENSHOT_STORAGE_TYPE_IMGUR);
-    });
-
-    // s3
-    QRadioButton* storageImgS3 = new QRadioButton(
-      tr("S3 storage (require config.ini file with s3 credentials)"));
-    connect(storageImgS3, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setUploadStorage(SCREENSHOT_STORAGE_TYPE_S3);
-    });
-
-    // set current storage radiobutton active
-    if (ConfigHandler().uploadStorage() == SCREENSHOT_STORAGE_TYPE_IMGUR) {
-        storageImgUr->setChecked(true);
-
-    } else {
-        storageImgS3->setChecked(true);
-    }
-
-    // draw configuration options for uploadStorage
-    QVBoxLayout* vbox = new QVBoxLayout;
-    vbox->addWidget(storageImgUr);
-    vbox->addWidget(storageImgS3);
-    vbox->addStretch(1);
-    groupBox->setLayout(vbox);
-    m_layout->addWidget(groupBox);
 }
 
 void GeneneralConf::initFilePathConfiguration()

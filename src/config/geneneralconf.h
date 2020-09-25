@@ -79,6 +79,5 @@ private:
     void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
     void initCopyPathAfterSave();
-    void initUploadStorage();
     void initFilePathConfiguration();
 };

@@ -12,4 +12,5 @@ target_sources(
           filepathconfiguration.cpp
           shortcutswidget.cpp
           setshortcutwidget.cpp
+          uploadstorageconfig.cpp
 )

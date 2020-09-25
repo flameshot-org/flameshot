@@ -15,36 +15,22 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef HOTKEYSCONFIG_H
-#define HOTKEYSCONFIG_H
+#ifndef FLAMESHOT_UPLOADSTORAGECONFIG_H
+#define FLAMESHOT_UPLOADSTORAGECONFIG_H
 
-#include "src/utils/confighandler.h"
-#include <QStringList>
-#include <QVector>
+#include <QObject>
 #include <QWidget>
 
-class SetShortcutDialog;
-class QTableWidget;
 class QVBoxLayout;
 
-class ShortcutsWidget : public QWidget
+class UploadStorageConfig : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ShortcutsWidget(QWidget* parent = nullptr);
-    const QVector<QStringList>& shortcuts();
+    explicit UploadStorageConfig(QWidget* parent = nullptr);
 
 private:
-    void initInfoTable();
-
-private slots:
-    void slotShortcutCellClicked(int, int);
-
-private:
-    ConfigHandler m_config;
-    QTableWidget* m_table;
     QVBoxLayout* m_layout;
-    QVector<QStringList> m_shortcuts;
 };
 
-#endif // HOTKEYSCONFIG_H
+#endif // FLAMESHOT_UPLOADSTORAGECONFIG_H
