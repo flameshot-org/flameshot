@@ -1,13 +1,9 @@
 #include "storagemanager.h"
 #include "imguploader.h"
-#include "imgur/imguruploader.h"
 #include "imgur/imguruploadertool.h"
 #include "s3/imgs3settings.h"
-#include "s3/imgs3uploader.h"
 #include "s3/imgs3uploadertool.h"
 #include "src/tools/capturetool.h"
-
-#include <QWidget>
 
 StorageManager::StorageManager() {}
 
@@ -29,6 +25,17 @@ const QString& StorageManager::storageUrl(const QString& imgUploaderType)
         m_qstr = s3Settings.url();
     } else if (imgUploaderType == SCREENSHOT_STORAGE_TYPE_IMGUR) {
         m_qstr = "https://i.imgur.com/";
+    }
+    return m_qstr;
+}
+
+const QString& StorageManager::storageDefault()
+{
+    ImgS3Settings imgS3Settings;
+    if (!imgS3Settings.xApiKey().isEmpty()) {
+        m_qstr = SCREENSHOT_STORAGE_TYPE_S3;
+    } else {
+        m_qstr = SCREENSHOT_STORAGE_TYPE_IMGUR;
     }
     return m_qstr;
 }

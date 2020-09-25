@@ -17,7 +17,7 @@
 
 #include "confighandler.h"
 #include "src/tools/capturetool.h"
-#include "src/tools/storage/imgstorages.h"
+#include "src/tools/storage/storagemanager.h"
 #include "src/utils/configshortcuts.h"
 #include <QCoreApplication>
 #include <QDir>
@@ -474,7 +474,8 @@ const QString& ConfigHandler::uploadStorage()
 {
     m_strRes = m_settings.value(QStringLiteral("uploadStorage")).toString();
     if (m_strRes.isEmpty()) {
-        m_strRes = SCREENSHOT_STORAGE_TYPE_IMGUR;
+        StorageManager storageManager;
+        m_strRes = storageManager.storageDefault();
         setUploadStorage(m_strRes);
     }
     return m_strRes;
