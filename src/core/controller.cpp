@@ -234,6 +234,13 @@ void Controller::enableTrayIcon()
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+
+#ifdef Q_OS_WIN
+    // Ensure proper removal of tray icon when program quits on Windows.
+    connect(
+      qApp, &QCoreApplication::aboutToQuit, m_trayIcon, &QSystemTrayIcon::hide);
+#endif
+
     m_trayIcon->show();
 }
 
