@@ -297,7 +297,11 @@ bool ConfigHandler::verifyLaunchFile()
     bool res = false;
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
+    QString path;
+    path = qgetenv("XDG_CONFIG_DIRS") + "/autostart/Flameshot.desktop";
+    if (!QFile(path).exists()) {
+        path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
+    }
     res = QFile(path).exists();
 #elif defined(Q_OS_WIN)
     QSettings bootUpSettings(
@@ -312,7 +316,12 @@ bool ConfigHandler::verifyLaunchFile()
 void ConfigHandler::setStartupLaunch(const bool start)
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/";
+    QString path;
+    path = qgetenv("XDG_CONFIG_DIRS") + "/autostart";
+    if (!QFile(path).exists()) {
+        path = QDir::homePath() + "/.config/autostart/";
+    }
+
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
         autostartDir.mkpath(".");
