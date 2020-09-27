@@ -28,7 +28,7 @@ bool ColorUtils::colorIsDark(const QColor& c)
     if (getColorLuma(c) <= 0.60) {
         isWhite = true;
     }
-    return isWhite;
+    return !isWhite;
 }
 
 QColor ColorUtils::contrastColor(const QColor& c)
