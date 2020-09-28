@@ -6,15 +6,14 @@ environment:
   Qt5_INSTALL_DIR: 'C:\Qt\5.15.0\msvc2019_64'
   PATH: '%Qt5_INSTALL_DIR%\bin;%PATH%'
 build_script:
-- cmd: >-
+  - cmd: >-
 
-    mkdir build
+      mkdir build
 
-    cd build
+      cd build
 
-    echo %PATH%
+      echo %PATH%
 
-    cmake c:\projects\source -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
+      cmake c:\projects\source -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
 
-    cmake --build . --config "Release"
-
+      cmake --build . --config "Release"
