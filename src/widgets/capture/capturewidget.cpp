@@ -614,6 +614,7 @@ void CaptureWidget::initPanel()
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
         makeChild(panelToggleButton);
+        panelToggleButton->setColor(m_uiColor);
         panelToggleButton->setOrientation(
           OrientablePushButton::VerticalBottomToTop);
         panelToggleButton->move(panelRect.x(),
