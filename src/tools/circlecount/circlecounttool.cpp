@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "circlecounttool.h"
+#include "colorutils.h"
 #include <QPainter>
 namespace {
 #define PADDING_VALUE 2
@@ -90,11 +91,7 @@ void CircleCountTool::process(QPainter& painter,
           textRect, Qt::AlignCenter, QString::number(m_count));
     }
 
-    // Calculate the perceptive luminance - human eye favors green color
-    double luma = ((0.299 * m_color.red()) + (0.587 * m_color.green()) +
-                   (0.114 * m_color.blue())) /
-                  255;
-    if (luma <= 0.5) {
+    if (ColorUtils::colorIsDark(m_color)) {
         painter.setPen(Qt::white);
     } else {
         painter.setPen(Qt::black);
