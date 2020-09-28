@@ -917,7 +917,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
-        <source>Capture saved and copied to the clipboard as </source>
+        <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1108,8 +1108,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation>默认情况下，火焰截图启动后将在后台运行，并在托盘显示一个图标。</translation>
+        <translation type="vanished">默认情况下，火焰截图启动后将在后台运行，并在托盘显示一个图标。</translation>
     </message>
     <message>
         <location filename="../../external/singleapplication/singleapplication.cpp" line="442"/>

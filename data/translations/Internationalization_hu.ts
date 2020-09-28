@@ -800,10 +800,6 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -983,7 +979,11 @@ You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Capture saved and copied to the clipboard as </source>
+        <source>Capture is saved and copied to the clipboard as </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

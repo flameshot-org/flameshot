@@ -510,27 +510,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="30"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Последние загрузки</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="68"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>История скриншотов пуста</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="118"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Скопировать URL</translation>
+        <translation>Скопировать URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="122"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL скопирован в буфер обмена.</translation>
+        <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="128"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть в браузере</translation>
     </message>
 </context>
 <context>
@@ -538,57 +538,57 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
         <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка изображения на S3</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Загрузка изображения</translation>
+        <translation>Загрузка изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
         <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить изображение из S3</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
         <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление изображения...</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="198"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL скопирован в буфер обмена.</translation>
+        <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="222"/>
         <source>Unable to remove screenshot from the remote storage.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно удалить снимок экрана из удаленного хранилища.</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="224"/>
         <source>Network error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка сети</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="226"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
-        <translation type="unfinished"></translation>
+        <translation>Возможно, его больше не существует</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="231"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы все равно хотите удалить скриншот из локальной истории?</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="235"/>
         <source>Remove screenshot from history?</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить скриншот из истории?</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="252"/>
         <source>S3 Creds URL is not found in your configuration file</source>
-        <translation type="unfinished"></translation>
+        <translation>S3 Creds URL не найден в вашем файле конфигурации</translation>
     </message>
 </context>
 <context>
@@ -596,7 +596,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
         <source>Upload the selection to S3 bucket</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить выделение в корзину S3</translation>
     </message>
 </context>
 <context>
@@ -604,58 +604,58 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="43"/>
         <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить изображение в S3</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="43"/>
         <location filename="../../src/tools/storage/imguploader.cpp" line="49"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Загрузка изображения</translation>
+        <translation>Загрузка изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="49"/>
         <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить изображение</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="80"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Не удалось открыть URL.</translation>
+        <translation>Не удалось открыть URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="87"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL скопирован в буфер обмена.</translation>
+        <translation>URL скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="93"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Снимок скопирован в буфер обмена.</translation>
+        <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление изображения...</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="162"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Скопировать URL</translation>
+        <translation>Скопировать URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="163"/>
         <source>Open URL</source>
-        <translation type="unfinished">Открыть URL</translation>
+        <translation>Открыть URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="164"/>
         <source>Delete image</source>
-        <translation type="unfinished">Удалить изображение</translation>
+        <translation>Удалить изображение</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imguploader.cpp" line="165"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Изображение в буфер обмена.</translation>
+        <translation>Изображение в буфер обмена.</translation>
     </message>
 </context>
 <context>
@@ -663,7 +663,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/storage/imguploadertool.cpp" line="21"/>
         <source>Imgage uploader tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструмент загрузки изображений</translation>
     </message>
 </context>
 <context>
@@ -912,12 +912,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="85"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить скриншот</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
-        <source>Capture saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <source>Capture is saved and copied to the clipboard as </source>
+        <translation>Скриншот сохранен на диск и скопирован в буфер обмена как </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="82"/>
@@ -936,97 +936,97 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="105"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотреть</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="108"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Захватить весь рабочий стол.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="110"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть программу запуска захвата.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="113"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запустить ручной захват в режиме графического интерфейса.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="115"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="117"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Захват одного экрана.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="122"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь, куда будет сохранен скриншот</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="125"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить снимок в буфер обмена</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="127"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Время задержки в миллисекундах</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="130"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить шаблон имени файла</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить или отключить значок в трее</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
         <source>Enable or disable run at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Включение или отключение запуска при старте</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="141"/>
         <source>Show the help message in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать справочный сообщения в режиме захвата</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Задать основной цвет пользовательского интерфейса</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="148"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Определить цвет контраста пользовательского интерфейса</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Необработанное изображения PNG</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="154"/>
         <source>Define the screen to capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите экран для захвата</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="155"/>
         <source>default: screen containing the cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>по умолчанию: экран, содержащий курсор мыши</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Screen number</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер экрана</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="165"/>
@@ -1037,27 +1037,33 @@ Press Space to open the side panel.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный цвет, этот флаг поддерживает следующие форматы:
+- #RGB (каждый из R, G и B представляет собой одну шестнадцатеричную цифру)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- Именованные цвета, такие как &quot;синий&quot; или &quot;красный&quot;
+Возможно, вам потребуется экранировать знак &apos;#&apos;, как в &apos;\ #FFF&apos;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Недействительная задержка, она должна быть больше 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="176"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Недействительный номер экрана, он должен быть неотрицательным</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный путь, это должен быть реальный путь в системе</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Недействительное значение, оно должно быть определено как &quot;true&quot; или &quot;false&quot;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="44"/>
@@ -1077,113 +1083,114 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="78"/>
         <source>Arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>Аргументы</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="337"/>
         <source>arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>аргументы</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="338"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Использование</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="338"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation>параметры</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
-        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation>По умолчанию запускает Flameshot в фоновом режиме и добавляет значок в трее для настройки.</translation>
     </message>
     <message>
         <location filename="../../external/singleapplication/singleapplication.cpp" line="442"/>
         <source>Hi, I&apos;m already running!
 You can find me in the system tray.</source>
-        <translation type="unfinished"></translation>
+        <translation>Привет, я уже работаю!
+Вы можете найти меня в системном трее.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="256"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Привет я тут! Щелкните значок на панели задач, чтобы сделать снимок экрана, или щелкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="24"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Вызвать/спрятать боковую панель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер выделения влево на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер выделения вправо на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер выделения вверх на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер выделения вниз на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить выделение влево на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="48"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить выделение вправо на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="51"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить выделение вверх на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="54"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить выделение вниз на 1 пиксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="57"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Выйти из захвата экрана</translation>
+        <translation>Выйти из захвата экрана</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="59"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation>История скриншотов</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Захватить экран</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="64"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Показать выбор цвета</translation>
+        <translation>Показать выбор цвета</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Изменить толщину инструмента</translation>
+        <translation>Изменить толщину инструмента</translation>
     </message>
 </context>
 <context>
@@ -1251,17 +1258,17 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить горячую клавишу</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>Введите новую горячую клавишу </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите Esc, чтобы отменить, или Backspace, чтобы отключить сочетание клавиш.</translation>
     </message>
 </context>
 <context>
@@ -1269,22 +1276,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="43"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Горячие клавиши</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="68"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Доступные горячие клавиши в режиме захвата экрана.</translation>
+        <translation>Доступные горячие клавиши в режиме захвата экрана.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="80"/>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="80"/>
         <source>Key</source>
-        <translation type="unfinished">Клавиша</translation>
+        <translation>Клавиша</translation>
     </message>
 </context>
 <context>
@@ -1531,17 +1538,17 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uploadstorageconfig.cpp" line="33"/>
         <source>Upload storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище загрузок</translation>
     </message>
     <message>
         <location filename="../../src/config/uploadstorageconfig.cpp" line="37"/>
         <source>Imgur storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/uploadstorageconfig.cpp" line="44"/>
         <source>S3 storage (require config.ini file with s3 credentials)</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище S3 (требуется файл config.ini с учетными данными s3)</translation>
     </message>
 </context>
 <context>
@@ -1554,7 +1561,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="133"/>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Спрятать</translation>
     </message>
 </context>
 <context>
