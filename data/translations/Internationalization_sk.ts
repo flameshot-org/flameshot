@@ -1067,7 +1067,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
-        <source>Capture saved and copied to the clipboard as </source>
+        <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1107,8 +1107,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation>Štandardne sa Flameshot spúšťa na pozadí a pridáva do lišty ikonu, ktorou je ho možné ovládať.</translation>
+        <translation type="vanished">Štandardne sa Flameshot spúšťa na pozadí a pridáva do lišty ikonu, ktorou je ho možné ovládať.</translation>
     </message>
     <message>
         <location filename="../../external/singleapplication/singleapplication.cpp" line="442"/>

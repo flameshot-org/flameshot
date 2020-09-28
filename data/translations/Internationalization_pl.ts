@@ -915,7 +915,7 @@ Spacja, aby pokazać panel boczny.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
-        <source>Capture saved and copied to the clipboard as </source>
+        <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1100,8 +1100,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation>Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku systemowym do konfiguracji.</translation>
+        <translation type="vanished">Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku systemowym do konfiguracji.</translation>
     </message>
     <message>
         <location filename="../../external/singleapplication/singleapplication.cpp" line="442"/>

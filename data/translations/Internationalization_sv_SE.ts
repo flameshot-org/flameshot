@@ -908,7 +908,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
-        <source>Capture saved and copied to the clipboard as </source>
+        <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1088,7 +1088,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
-        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

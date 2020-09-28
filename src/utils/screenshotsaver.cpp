@@ -108,9 +108,9 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
             QString msg = QObject::tr("Capture saved as ") + savePath;
             if (config.copyPathAfterSaveEnabled()) {
                 QApplication::clipboard()->setText(savePath);
-                msg =
-                  QObject::tr("Capture saved and copied to the clipboard as ") +
-                  savePath;
+                msg = QObject::tr(
+                        "Capture is saved and copied to the clipboard as ") +
+                      savePath;
             }
             SystemNotification().sendMessage(msg, savePath);
         } else {
