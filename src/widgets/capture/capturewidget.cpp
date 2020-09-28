@@ -26,7 +26,6 @@
 #include "capturewidget.h"
 #include "src/core/controller.h"
 #include "src/utils/colorutils.h"
-#include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
@@ -37,17 +36,14 @@
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include <QApplication>
-#include <QBuffer>
 #include <QDesktopWidget>
 #include <QGuiApplication>
-#include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
 #include <QUndoView>
 #include <draggablewidgetmaker.h>
-
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
 
@@ -1005,6 +1001,11 @@ void CaptureWidget::childLeave()
 void CaptureWidget::copyScreenshot()
 {
     m_captureDone = true;
+    if (m_activeTool != nullptr) {
+        QPainter painter(&m_context.screenshot);
+        m_activeTool->process(painter, m_context.screenshot, true);
+    }
+
     ScreenshotSaver().saveToClipboard(pixmap());
     close();
 }
@@ -1012,6 +1013,10 @@ void CaptureWidget::copyScreenshot()
 void CaptureWidget::saveScreenshot()
 {
     m_captureDone = true;
+    if (m_activeTool != nullptr) {
+        QPainter painter(&m_context.screenshot);
+        m_activeTool->process(painter, m_context.screenshot, true);
+    }
     hide();
     if (m_context.savePath.isEmpty()) {
         ScreenshotSaver().saveToFilesystemGUI(pixmap());
