@@ -77,47 +77,47 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Modo Captura&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Região Retangular</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="75"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tela Inteira (Todos os Monitores)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="83"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem atraso</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> segundo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="94"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Tirar uma nova screenshot</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="103"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Area:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="104"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atraso:</translation>
     </message>
 </context>
 <context>
@@ -143,7 +143,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="617"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações da ferramenta</translation>
     </message>
 </context>
 <context>
@@ -151,12 +151,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="39"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>Contorno do círculo</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="51"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar uma bolha de incremento automático</translation>
     </message>
 </context>
 <context>
@@ -205,7 +205,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="209"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abrir carregador</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="212"/>
@@ -215,7 +215,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -364,12 +364,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="196"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar botão no painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="199"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar altenador do painel lateral.</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="210"/>
@@ -415,52 +415,52 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="290"/>
         <source>Close after capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar após captura</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="294"/>
         <source>Close after taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar após tirar uma screenshot</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="306"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar URL após upload</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="311"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar URL e fechar janela após upload</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="322"/>
         <source>Save image after copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar imagem após copiar</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="323"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar imagem após copiar</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="332"/>
         <source>Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar Caminho</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="344"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar...</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="363"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione uma pasta</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="370"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível escrever no diretório.</translation>
     </message>
 </context>
 <context>
@@ -535,7 +535,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de Espaço</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="63"/>
@@ -693,12 +693,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="40"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixelar</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="52"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar Pixelar na ferramenta de pintura</translation>
     </message>
 </context>
 <context>
@@ -717,7 +717,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="42"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar Salvar na Área de Trabalho.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="47"/>
@@ -742,102 +742,102 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/main.cpp" line="104"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poderoso, porém simples de utilizar software de screenshot.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="105"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation>Veja</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="108"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar toda tela.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="110"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir a ferramente de captura.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="112"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar uma captura manual no modo GUI.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="114"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="116"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar apenas uma tela.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="120"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Caminho para salvar a captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="123"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar a captura na Área de Transferência</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="125"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo do atraso em milissegundos</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="128"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar o padrão do nome do arquivo</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="131"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ativar ou desativar o ícone de bandeja</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="134"/>
         <source>Enable or disable run at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Ativar ou desativar rodar na inicialização</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="138"/>
         <source>Show the help message in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a mensagem de ajuda no modo captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="141"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir a cor principal</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir o contrasto da cor</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="147"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar captura PNG &quot;crua&quot;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="150"/>
         <source>Define the screen to capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir a tela para captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>default: screen containing the cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>padrão: tela contendo o cursor</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="152"/>
         <source>Screen number</source>
-        <translation type="unfinished"></translation>
+        <translation>Número da tela</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="161"/>
@@ -848,27 +848,33 @@ Pressione espaço abrir o painel lateral.</translation>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor inválida, formatos suportados:
+- #RGB (sendo R, G, e B simbolos hexadecimal simples)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- Nome de cores como &apos;azul&apos; ou &apos;vermelho&apos;
+Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="170"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Atraso inválido, deve ser maior que 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de tela inválido, deve ser maior que zero</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="179"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="unfinished"></translation>
+        <translation>Caminho inválido, deve ser um caminho real no sistema</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor inválido, deve ser definido como &apos;verdadeiro&apos; ou &apos;falso&apos;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="45"/>
@@ -883,37 +889,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="77"/>
         <source>Arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>Argumentos</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="350"/>
         <source>arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>argumentos</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>Uso</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="351"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation>opções</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="358"/>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão roda Flameshot no background e   adiciona um ícone na bandeija para configuração.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para a área de transferência.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
 </context>
 <context>
@@ -1220,7 +1226,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="114"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar</translation>
     </message>
 </context>
 <context>
