@@ -74,5 +74,9 @@
         <file>img/material/white/shortcut.svg</file>
         <file>img/material/black/filepath.svg</file>
         <file>img/material/white/filepath.svg</file>
+        <file>img/material/black/plus.svg</file>
+        <file>img/material/white/plus.svg</file>
+        <file>img/material/black/minus.svg</file>
+        <file>img/material/white/minus.svg</file>
     </qresource>
 </RCC>
