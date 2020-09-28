@@ -15,12 +15,12 @@
    xml:space="preserve"
    id="svg8"
    sodipodi:docname="delete.svg"
-   width="24"
-   height="24"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   inkscape:export-filename="/home/martin/custom/github/flameshot/data/img/material/black/delete.png"
+   inkscape:export-filename="/home/martin/custom/github/flameshot/data/img/material/white/delete.png"
    inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"><defs
+   inkscape:export-ydpi="96"
+   width="24"
+   height="24"><defs
    id="defs12" /><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
@@ -31,13 +31,14 @@
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
    inkscape:window-width="1920"
-   inkscape:window-height="1055"
+   inkscape:window-height="1027"
    id="namedview10"
    showgrid="false"
-   inkscape:zoom="6.6714359"
-   inkscape:cx="26.410099"
-   inkscape:cy="39.672267"
-   inkscape:window-x="0"
+   inkscape:pagecheckerboard="true"
+   inkscape:zoom="18.250993"
+   inkscape:cx="9.5139227"
+   inkscape:cy="17.399017"
+   inkscape:window-x="1920"
    inkscape:window-y="0"
    inkscape:window-maximized="1"
    inkscape:current-layer="svg8" />
@@ -47,7 +48,9 @@
        rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
 <g
    id="g6"
+   style="fill:#ffffff"
    transform="matrix(0.02091837,0,0,0.02091837,1.5408163,1.5408163)"><path
      d="m 876.9,311.5 c -20.8,0 -37.7,16.9 -37.7,37.7 v 490 c 0,41.6 -33.8,75.4 -75.4,75.4 H 236.2 c -41.6,0 -75.4,-33.8 -75.4,-75.4 v -490 c 0,-20.8 -16.9,-37.7 -37.7,-37.7 -20.8,0 -37.7,16.9 -37.7,37.7 v 490 c 0,83.3 67.5,150.8 150.8,150.8 h 527.7 c 83.3,0 150.8,-67.5 150.8,-150.8 v -490 c -0.1,-20.8 -16.9,-37.7 -37.8,-37.7 z M 349.2,763.8 V 349.2 c 0,-20.8 -16.9,-37.7 -37.7,-37.7 -20.8,0 -37.7,16.9 -37.7,37.7 v 414.6 c 0,20.8 16.9,37.7 37.7,37.7 20.8,0 37.7,-16.8 37.7,-37.7 z m 603.1,-603 H 650.8 V 47.7 C 650.8,26.9 634,10 613.1,10 H 386.9 c -20.8,0 -37.7,16.9 -37.7,37.7 V 160.8 H 47.7 c -20.8,0 -37.7,16.9 -37.7,37.7 0,20.8 16.9,37.7 37.7,37.7 h 904.6 c 20.8,0 37.7,-16.8 37.7,-37.7 0,-20.8 -16.8,-37.7 -37.7,-37.7 z m -376.9,0 H 424.6 V 85.4 h 150.8 z m 150.8,603 V 349.2 c 0,-20.8 -16.8,-37.7 -37.7,-37.7 -20.8,0 -37.7,16.9 -37.7,37.7 v 414.6 c 0,20.8 16.8,37.7 37.7,37.7 20.8,0 37.7,-16.8 37.7,-37.7 z m -188.5,0 V 349.2 c 0,-20.8 -16.8,-37.7 -37.7,-37.7 -20.8,0 -37.7,16.9 -37.7,37.7 v 414.6 c 0,20.8 16.9,37.7 37.7,37.7 20.8,0 37.7,-16.8 37.7,-37.7 z"
-     id="path4" /></g>
+     id="path4"
+     style="fill:#ffffff" /></g>
 </svg>
