@@ -28,6 +28,10 @@
     <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
+    <br>
+    <a href="https://snapcraft.io/flameshot">
+  <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
+</a>
   </p>
 </div>
 
@@ -60,10 +64,8 @@
     - [Arch](#arch)
   - [Build](#build)
   - [Install](#install)
-- [Packaging](#packaging)
 - [License](#license)
 - [Contribute](#contribute)
-- [Donations](#donations)
 - [Acknowledgment](#acknowledgment)
 
 ## Features
