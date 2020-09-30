@@ -25,8 +25,10 @@
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
+#include <QCursor>
 #include <QDesktopServices>
 #include <QDrag>
+#include <QGuiApplication>
 #include <QHBoxLayout>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -36,6 +38,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QPushButton>
+#include <QRect>
+#include <QScreen>
 #include <QShortcut>
 #include <QTimer>
 #include <QUrlQuery>
@@ -47,6 +51,13 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
 {
     setWindowTitle(tr("Upload to Imgur"));
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    QRect position = frameGeometry();
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    position.moveCenter(screen->availableGeometry().center());
+    move(position.topLeft());
+#endif
 
     m_spinner = new LoadSpinner(this);
     m_spinner->setColor(ConfigHandler().uiMainColorValue());
