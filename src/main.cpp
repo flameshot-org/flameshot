@@ -40,7 +40,6 @@
 
 int main(int argc, char* argv[])
 {
-    QApplication::setStyle(new StyleOverride);
     // required for the button serialization
     // TODO: change to QVector in v1.0
     qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
@@ -49,6 +48,7 @@ int main(int argc, char* argv[])
     // no arguments, just launch Flameshot
     if (argc == 1) {
         SingleApplication app(argc, argv);
+        QApplication::setStyle(new StyleOverride);
 
         QTranslator translator, qtTranslator;
         QStringList trPaths = PathInfo::translationsPaths();
