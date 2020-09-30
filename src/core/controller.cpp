@@ -253,7 +253,7 @@ void Controller::sendTrayNotification(const QString& text,
 {
     if (m_trayIcon) {
         m_trayIcon->showMessage(
-          title, text, QSystemTrayIcon::Information, timeout);
+          title, text, QIcon(":img/app/flameshot.svg"), timeout);
     }
 }
 
