@@ -27,6 +27,7 @@ Check this nice official documentation from Qt docs as it explains how to transl
 | Serbian               | sr | :bookmark:v0.6.0 | [cobisimo](https://github.com/cobisimo) |
 | Ukrainian             | uk | :bookmark:v0.6.0 | [vboden](https://github.com/vboden) |
 | German                | de | :bookmark:v0.6.0 | [DaVukovic](https://github.com/DaVukovic) |
+| Portuguese (Brazil)                | pt_BR | :bookmark:v0.1.0 | [trinaldi](https://github.com/trinaldi) |
 
 ## Code
 
