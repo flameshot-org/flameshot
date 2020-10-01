@@ -258,7 +258,6 @@ some Linux distributions:
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
-- Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
