@@ -254,10 +254,10 @@ some Linux distributions:
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
-- [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
-- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
+- [Docker](https://github.com/ManuelLR/docker-flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
