@@ -1,5 +1,0 @@
-flameshot (0.6.0-1) unstable; urgency=medium
-
-  * Initial deb package.
-
- -- Boyuan Yang <byang@debian.org>  Wed, 27 Feb 2019 13:19:39 -0500

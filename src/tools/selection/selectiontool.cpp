@@ -43,9 +43,9 @@ QString SelectionTool::name() const
     return tr("Rectangular Selection");
 }
 
-QString SelectionTool::nameID()
+ToolType SelectionTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::SELECTION;
 }
 
 QString SelectionTool::description() const

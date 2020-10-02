@@ -35,9 +35,9 @@ ButtonListView::ButtonListView(QWidget* parent)
 void ButtonListView::initButtonList()
 {
     ToolFactory factory;
-    auto listTypes = CaptureButton::getIterableButtonTypes();
+    auto listTypes = CaptureToolButton::getIterableButtonTypes();
 
-    for (const CaptureButton::ButtonType t : listTypes) {
+    for (const CaptureToolButton::ButtonType t : listTypes) {
         CaptureTool* tool = factory.CreateTool(t);
 
         // add element to the local map
@@ -63,14 +63,14 @@ void ButtonListView::initButtonList()
 
 void ButtonListView::updateActiveButtons(QListWidgetItem* item)
 {
-    CaptureButton::ButtonType bType = m_buttonTypeByName[item->text()];
+    CaptureToolButton::ButtonType bType = m_buttonTypeByName[item->text()];
     if (item->checkState() == Qt::Checked) {
         m_listButtons.append(bType);
         // TODO refactor so we don't need external sorts
-        using bt = CaptureButton::ButtonType;
+        using bt = CaptureToolButton::ButtonType;
         std::sort(m_listButtons.begin(), m_listButtons.end(), [](bt a, bt b) {
-            return CaptureButton::getPriorityByButton(a) <
-                   CaptureButton::getPriorityByButton(b);
+            return CaptureToolButton::getPriorityByButton(a) <
+                   CaptureToolButton::getPriorityByButton(b);
         });
     } else {
         m_listButtons.remove(m_listButtons.indexOf(bType));
@@ -100,10 +100,10 @@ void ButtonListView::selectAll()
 void ButtonListView::updateComponents()
 {
     m_listButtons = ConfigHandler().getButtons();
-    auto listTypes = CaptureButton::getIterableButtonTypes();
+    auto listTypes = CaptureToolButton::getIterableButtonTypes();
     for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);
-        auto elem = static_cast<CaptureButton::ButtonType>(listTypes.at(i));
+        auto elem = static_cast<CaptureToolButton::ButtonType>(listTypes.at(i));
         if (m_listButtons.contains(elem)) {
             item->setCheckState(Qt::Checked);
         } else {

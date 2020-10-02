@@ -24,7 +24,8 @@
 // ButtonHandler is a habdler for every active button. It makes easier to
 // manipulate the buttons as a unit.
 
-ButtonHandler::ButtonHandler(const QVector<CaptureButton*>& v, QObject* parent)
+ButtonHandler::ButtonHandler(const QVector<CaptureToolButton*>& v,
+                             QObject* parent)
   : QObject(parent)
 {
     setButtons(v);
@@ -39,7 +40,7 @@ ButtonHandler::ButtonHandler(QObject* parent)
 
 void ButtonHandler::hide()
 {
-    for (CaptureButton* b : m_vectorButtons)
+    for (CaptureToolButton* b : m_vectorButtons)
         b->hide();
 }
 
@@ -48,14 +49,14 @@ void ButtonHandler::show()
     if (m_vectorButtons.isEmpty() || m_vectorButtons.first()->isVisible()) {
         return;
     }
-    for (CaptureButton* b : m_vectorButtons)
+    for (CaptureToolButton* b : m_vectorButtons)
         b->animatedShow();
 }
 
 bool ButtonHandler::isVisible() const
 {
     bool ret = true;
-    for (const CaptureButton* b : m_vectorButtons) {
+    for (const CaptureToolButton* b : m_vectorButtons) {
         if (!b->isVisible()) {
             ret = false;
             break;
@@ -239,7 +240,7 @@ QVector<QPoint> ButtonHandler::verticalPoints(const QPoint& center,
 QRect ButtonHandler::intersectWithAreas(const QRect& rect)
 {
     QRect res;
-    for (const QRect& r : m_screenRegions.rects()) {
+    for (const QRect& r : m_screenRegions) {
         QRect temp = rect.intersected(r);
         if (temp.height() * temp.width() > res.height() * res.width()) {
             res = temp;
@@ -361,12 +362,12 @@ void ButtonHandler::adjustHorizontalCenter(QPoint& center)
 }
 
 // setButtons redefines the buttons of the button handler
-void ButtonHandler::setButtons(const QVector<CaptureButton*> v)
+void ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
 {
     if (v.isEmpty())
         return;
 
-    for (CaptureButton* b : m_vectorButtons)
+    for (CaptureToolButton* b : m_vectorButtons)
         delete (b);
     m_vectorButtons = v;
     m_buttonBaseSize = GlobalValues::buttonBaseSize();

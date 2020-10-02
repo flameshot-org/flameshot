@@ -4,14 +4,14 @@
 
 ConfigShortcuts::ConfigShortcuts() {}
 
-// QVector<CaptureButton::ButtonType> getButtons()
+// QVector<CaptureToolButton::ButtonType> getButtons()
 
 const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
-  const QVector<CaptureButton::ButtonType>& buttons)
+  const QVector<CaptureToolButton::ButtonType>& buttons)
 {
     // get shortcuts names from tools
-    for (const CaptureButton::ButtonType& t : buttons) {
-        CaptureButton* b = new CaptureButton(t, nullptr);
+    for (const CaptureToolButton::ButtonType& t : buttons) {
+        CaptureToolButton* b = new CaptureToolButton(t, nullptr);
         QString shortcutName = QVariant::fromValue(t).toString();
         QKeySequence ks = captureShortcutDefault(t);
         m_shortcuts << (QStringList()
@@ -70,61 +70,61 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
 }
 
 const QKeySequence& ConfigShortcuts::captureShortcutDefault(
-  const CaptureButton::ButtonType& buttonType)
+  const CaptureToolButton::ButtonType& buttonType)
 {
     m_ks = QKeySequence();
     switch (buttonType) {
-        case CaptureButton::ButtonType::TYPE_PENCIL:
+        case CaptureToolButton::ButtonType::TYPE_PENCIL:
             m_ks = QKeySequence(Qt::Key_P);
             break;
-        case CaptureButton::ButtonType::TYPE_DRAWER:
+        case CaptureToolButton::ButtonType::TYPE_DRAWER:
             m_ks = QKeySequence(Qt::Key_D);
             break;
-        case CaptureButton::ButtonType::TYPE_ARROW:
+        case CaptureToolButton::ButtonType::TYPE_ARROW:
             m_ks = QKeySequence(Qt::Key_A);
             break;
-        case CaptureButton::ButtonType::TYPE_SELECTION:
+        case CaptureToolButton::ButtonType::TYPE_SELECTION:
             m_ks = QKeySequence(Qt::Key_S);
             break;
-        case CaptureButton::ButtonType::TYPE_RECTANGLE:
+        case CaptureToolButton::ButtonType::TYPE_RECTANGLE:
             m_ks = QKeySequence(Qt::Key_R);
             break;
-        case CaptureButton::ButtonType::TYPE_CIRCLE:
+        case CaptureToolButton::ButtonType::TYPE_CIRCLE:
             m_ks = QKeySequence(Qt::Key_C);
             break;
-        case CaptureButton::ButtonType::TYPE_MARKER:
+        case CaptureToolButton::ButtonType::TYPE_MARKER:
             m_ks = QKeySequence(Qt::Key_M);
             break;
-            //    case CaptureButton::ButtonType::TYPE_SELECTIONINDICATOR:
-        case CaptureButton::ButtonType::TYPE_MOVESELECTION:
+            //    case CaptureToolButton::ButtonType::TYPE_SELECTIONINDICATOR:
+        case CaptureToolButton::ButtonType::TYPE_MOVESELECTION:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_M);
             break;
-        case CaptureButton::ButtonType::TYPE_UNDO:
+        case CaptureToolButton::ButtonType::TYPE_UNDO:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_Z);
             break;
-        case CaptureButton::ButtonType::TYPE_COPY:
+        case CaptureToolButton::ButtonType::TYPE_COPY:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_C);
             break;
-        case CaptureButton::ButtonType::TYPE_SAVE:
+        case CaptureToolButton::ButtonType::TYPE_SAVE:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_S);
             break;
-        case CaptureButton::ButtonType::TYPE_EXIT:
+        case CaptureToolButton::ButtonType::TYPE_EXIT:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_Q);
             break;
-        case CaptureButton::ButtonType::TYPE_IMAGEUPLOADER:
+        case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
             m_ks = QKeySequence(Qt::Key_Return);
             break;
-        case CaptureButton::ButtonType::TYPE_OPEN_APP:
+        case CaptureToolButton::ButtonType::TYPE_OPEN_APP:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_O);
             break;
-        case CaptureButton::ButtonType::TYPE_BLUR:
+        case CaptureToolButton::ButtonType::TYPE_PIXELATE:
             m_ks = QKeySequence(Qt::Key_B);
             break;
-        case CaptureButton::ButtonType::TYPE_REDO:
+        case CaptureToolButton::ButtonType::TYPE_REDO:
             m_ks = QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z);
             break;
-            //    case CaptureButton::ButtonType::TYPE_PIN:
-        case CaptureButton::ButtonType::TYPE_TEXT:
+            //    case CaptureToolButton::ButtonType::TYPE_PIN:
+        case CaptureToolButton::ButtonType::TYPE_TEXT:
             m_ks = QKeySequence(Qt::Key_T);
             break;
         default:

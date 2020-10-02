@@ -36,6 +36,7 @@
 #include "src/widgets/capture/hovereventfilter.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
+#include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include <QApplication>
 #include <QBuffer>
@@ -47,9 +48,10 @@
 #include <QScreen>
 #include <QShortcut>
 #include <QUndoView>
+#include <draggablewidgetmaker.h>
 
 // CaptureWidget is the main component used to capture the screen. It contains
-// an are of selection with its respective buttons.
+// an area of selection with its respective buttons.
 
 // enableSaveWIndow
 CaptureWidget::CaptureWidget(const uint id,
@@ -86,7 +88,7 @@ CaptureWidget::CaptureWidget(const uint id,
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
-
+    m_context.circleCount = 1;
 #ifdef Q_OS_WIN
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -175,23 +177,24 @@ void CaptureWidget::updateButtons()
     m_uiColor = m_config.uiMainColorValue();
     m_contrastUiColor = m_config.uiContrastColorValue();
 
-    QVector<CaptureButton*> vectorButtons;
-    for (const CaptureButton::ButtonType& t : m_config.getButtons()) {
-        CaptureButton* b = new CaptureButton(t, this);
-        if (t == CaptureButton::TYPE_SELECTIONINDICATOR) {
+    auto buttons = m_config.getButtons();
+    QVector<CaptureToolButton*> vectorButtons;
+
+    for (const CaptureToolButton::ButtonType& t : buttons) {
+        CaptureToolButton* b = new CaptureToolButton(t, this);
+        if (t == CaptureToolButton::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }
-
         b->setColor(m_uiColor);
         makeChild(b);
 
         switch (t) {
-            case CaptureButton::ButtonType::TYPE_EXIT:
-            case CaptureButton::ButtonType::TYPE_SAVE:
-            case CaptureButton::ButtonType::TYPE_COPY:
-            case CaptureButton::ButtonType::TYPE_UNDO:
-            case CaptureButton::ButtonType::TYPE_REDO:
-            case CaptureButton::ButtonType::TYPE_IMAGEUPLOADER:
+            case CaptureToolButton::ButtonType::TYPE_EXIT:
+            case CaptureToolButton::ButtonType::TYPE_SAVE:
+            case CaptureToolButton::ButtonType::TYPE_COPY:
+            case CaptureToolButton::ButtonType::TYPE_UNDO:
+            case CaptureToolButton::ButtonType::TYPE_REDO:
+            case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
                 break;
@@ -211,7 +214,7 @@ void CaptureWidget::updateButtons()
         }
 
         connect(
-          b, &CaptureButton::pressedButton, this, &CaptureWidget::setState);
+          b, &CaptureToolButton::pressedButton, this, &CaptureWidget::setState);
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
@@ -317,7 +320,7 @@ void CaptureWidget::paintEvent(QPaintEvent*)
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setBrush(m_uiColor);
         for (auto r : m_selection->handlerAreas()) {
-            painter.drawRoundRect(r, 100, 100);
+            painter.drawRoundedRect(r, 100, 100);
         }
     }
 }
@@ -604,7 +607,7 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 
 void CaptureWidget::wheelEvent(QWheelEvent* e)
 {
-    m_context.thickness += e->delta() / 120;
+    m_context.thickness += e->angleDelta().y() / 120;
     m_context.thickness = qBound(0, m_context.thickness, 100);
     QPoint topLeft =
       qApp->desktop()
@@ -624,8 +627,8 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
     QWidget::resizeEvent(e);
     m_context.widgetDimensions = rect();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
-    m_panel->setFixedHeight(height());
     if (!m_context.fullscreen) {
+        m_panel->setFixedHeight(height());
         m_buttonHandler->updateScreenRegions(rect());
     }
 }
@@ -649,12 +652,32 @@ void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 
 void CaptureWidget::initPanel()
 {
-    m_panel = new UtilityPanel(this);
-    makeChild(m_panel);
     QRect panelRect = rect();
     if (m_context.fullscreen) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
     }
+
+    ConfigHandler config;
+
+    if (config.showSidePanelButtonValue()) {
+        auto* panelToggleButton =
+          new OrientablePushButton(tr("Tool Settings"), this);
+        makeChild(panelToggleButton);
+        panelToggleButton->setOrientation(
+          OrientablePushButton::VerticalBottomToTop);
+        panelToggleButton->move(panelRect.x(),
+                                panelRect.y() + panelRect.height() / 2 -
+                                  panelToggleButton->width() / 2);
+        panelToggleButton->setCursor(Qt::ArrowCursor);
+        (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
+        connect(panelToggleButton,
+                &QPushButton::clicked,
+                this,
+                &CaptureWidget::togglePanel);
+    }
+
+    m_panel = new UtilityPanel(this);
+    makeChild(m_panel);
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
@@ -694,7 +717,7 @@ void CaptureWidget::initSelection()
     m_selection->setGeometry(QRect());
 }
 
-void CaptureWidget::setState(CaptureButton* b)
+void CaptureWidget::setState(CaptureToolButton* b)
 {
     if (!b) {
         return;
@@ -748,6 +771,15 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             m_undoStack.setIndex(0);
             update();
             break;
+
+        case CaptureTool::REQ_INCREMENT_CIRCLE_COUNT:
+            incrementCircleCount();
+            break;
+
+        case CaptureTool::REQ_DECREMENT_CIRCLE_COUNT:
+            decrementCircleCount();
+            break;
+
         case CaptureTool::REQ_CLOSE_GUI:
             close();
             break;
@@ -766,6 +798,9 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             m_undoStack.undo();
             break;
         case CaptureTool::REQ_REDO_MODIFICATION:
+            if (m_undoStack.redoText() == "Circle Counter") {
+                this->incrementCircleCount();
+            }
             m_undoStack.redo();
             break;
         case CaptureTool::REQ_REDRAW:
@@ -775,6 +810,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             m_panel->toggle();
             break;
         case CaptureTool::REQ_SHOW_COLOR_PICKER:
+            // TODO
             break;
         case CaptureTool::REQ_MOVE_MODE:
             setState(m_activeButton); // Disable the actual button
@@ -828,6 +864,16 @@ void CaptureWidget::setDrawColor(const QColor& c)
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
     }
+}
+
+void CaptureWidget::incrementCircleCount()
+{
+    m_context.circleCount++;
+}
+
+void CaptureWidget::decrementCircleCount()
+{
+    m_context.circleCount--;
 }
 
 void CaptureWidget::setDrawThickness(const int& t)
@@ -896,27 +942,27 @@ void CaptureWidget::downResize()
 void CaptureWidget::initShortcuts()
 {
     QString shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_EXIT).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_EXIT).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(close()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_SAVE).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_SAVE).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(saveScreenshot()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_COPY).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_COPY).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(copyScreenshot()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_UNDO).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_UNDO).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(undo()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_REDO).toString());
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_REDO).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(redo()));
 
     shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureButton::ButtonType::TYPE_IMAGEUPLOADER)
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER)
         .toString());
     new QShortcut(shortcut, this, SLOT(uploadScreenshot()));
 
@@ -1069,7 +1115,7 @@ void CaptureWidget::saveScreenshot()
     if (m_context.savePath.isEmpty()) {
         ScreenshotSaver().saveToFilesystemGUI(pixmap());
     } else {
-        ScreenshotSaver().saveToFilesystem(pixmap(), m_context.savePath);
+        ScreenshotSaver().saveToFilesystem(pixmap(), m_context.savePath, "");
     }
     close();
 }

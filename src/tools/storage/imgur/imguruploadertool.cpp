@@ -28,11 +28,6 @@ QString ImgurUploaderTool::name() const
     return tr("Image Uploader");
 }
 
-QString ImgurUploaderTool::nameID()
-{
-    return QLatin1String("");
-}
-
 QString ImgurUploaderTool::description() const
 {
     return tr("Upload the selection to Imgur");

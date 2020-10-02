@@ -5,7 +5,7 @@
 
 #include <QString>
 
-class ConfigEnterprise;
+class QSettings;
 
 class ImgS3Settings
 {
@@ -15,9 +15,13 @@ public:
     const QString& credsUrl();
     const QString& xApiKey();
     const QString& url();
+    QSettings* settings();
 
 private:
-    ConfigEnterprise* m_configEnterprise;
+    void initSettings();
+
+    // class members
+    QSettings* m_settings;
     QString m_credsUrl;
     QString m_xApiKey;
     QString m_url;

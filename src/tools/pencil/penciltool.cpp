@@ -32,9 +32,9 @@ QString PencilTool::name() const
     return tr("Pencil");
 }
 
-QString PencilTool::nameID()
+ToolType PencilTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::PENCIL;
 }
 
 QString PencilTool::description() const

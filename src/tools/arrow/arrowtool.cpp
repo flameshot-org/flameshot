@@ -88,9 +88,9 @@ QString ArrowTool::name() const
     return tr("Arrow");
 }
 
-QString ArrowTool::nameID()
+ToolType ArrowTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::ARROW;
 }
 
 QString ArrowTool::description() const
