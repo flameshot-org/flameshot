@@ -24,6 +24,7 @@ set(RUN_IN_PLACE ${DEFAULT_RUN_IN_PLACE} CACHE BOOL
 
 
 option(GENERATE_TS "Regenerate translation source files" OFF)
+option(ENABLE_OPENSSL "Enable OpenSSL support for uploading screenshot to imgur" OFF)
 
 include(cmake/StandardProjectSettings.cmake)
 
