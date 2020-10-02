@@ -17,6 +17,7 @@
 
 #include "singleapplication.h"
 #include "src/cli/commandlineparser.h"
+#include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
@@ -47,6 +48,7 @@ int main(int argc, char* argv[])
     // no arguments, just launch Flameshot
     if (argc == 1) {
         SingleApplication app(argc, argv);
+        QApplication::setStyle(new StyleOverride);
 
         QTranslator translator, qtTranslator;
         QStringList trPaths = PathInfo::translationsPaths();
