@@ -1,4 +1,5 @@
 // Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -16,9 +17,8 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imgs3uploader.h"
-#include "src/utils/configenterprise.h"
+#include "imgs3settings.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
 #include "src/utils/history.h"
 #include "src/utils/systemnotification.h"
 #include "src/widgets/imagelabel.h"
@@ -27,11 +27,7 @@
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
-#include <QDebug>
-#include <QDesktopServices>
 #include <QDir>
-#include <QDrag>
-#include <QHBoxLayout>
 #include <QHttpMultiPart>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -82,11 +78,11 @@ QNetworkProxy* ImgS3Uploader::proxy()
 
 QNetworkProxy* ImgS3Uploader::initProxy()
 {
-    // get enterprise settings
-    ConfigEnterprise* configEnterprise = new ConfigEnterprise();
+    // get s3 settings
+    ImgS3Settings imgS3Settings;
 
     // get proxy settings from "config.ini" file
-    QSettings* settings = configEnterprise->settings();
+    QSettings* settings = imgS3Settings.settings();
     QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
 
     if (httpProxyHost.length() > 0) {

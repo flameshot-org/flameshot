@@ -23,16 +23,6 @@ ImgS3UploaderTool::ImgS3UploaderTool(QObject* parent)
   : ImgUploaderTool(parent)
 {}
 
-QString ImgS3UploaderTool::name() const
-{
-    return tr("Image Uploader");
-}
-
-QString ImgS3UploaderTool::nameID()
-{
-    return QLatin1String("");
-}
-
 QString ImgS3UploaderTool::description() const
 {
     return tr("Upload the selection to S3 bucket");

@@ -1,0 +1,18 @@
+{
+  "name": "none",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node testHarness.js",
+    "pack": "zip -r ../.infrastructure/lambda.zip ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "aws-sdk": "^2.478.0",
+    "short-uuid": "^3.1.1"
+  }
+}

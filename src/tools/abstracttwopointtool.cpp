@@ -72,6 +72,9 @@ void AbstractTwoPointTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
     p.drawPixmap(backupRect(pixmap.rect()).topLeft(), m_pixmapBackup);
+    if (this->nameID() == ToolType::CIRCLECOUNT) {
+        emit requestAction(REQ_DECREMENT_CIRCLE_COUNT);
+    }
 }
 
 void AbstractTwoPointTool::drawEnd(const QPoint& p)

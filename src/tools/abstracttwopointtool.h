@@ -53,6 +53,8 @@ protected:
     bool m_supportsOrthogonalAdj = false;
     bool m_supportsDiagonalAdj = false;
 
+    virtual ToolType nameID() const = 0;
+
 private:
     QPoint adjustedVector(QPoint v) const;
 };

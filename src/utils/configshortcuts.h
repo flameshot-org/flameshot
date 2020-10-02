@@ -1,7 +1,7 @@
 #ifndef CONFIGSHORTCUTS_H
 #define CONFIGSHORTCUTS_H
 
-#include "src/widgets/capture/capturebutton.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QKeySequence>
 #include <QString>
 #include <QStringList>
@@ -13,9 +13,9 @@ public:
     ConfigShortcuts();
 
     const QVector<QStringList>& captureShortcutsDefault(
-      const QVector<CaptureButton::ButtonType>& buttons);
+      const QVector<CaptureToolButton::ButtonType>& buttons);
     const QKeySequence& captureShortcutDefault(
-      const CaptureButton::ButtonType& buttonType);
+      const CaptureToolButton::ButtonType& buttonType);
 
 private:
     QVector<QStringList> m_shortcuts;

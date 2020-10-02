@@ -56,6 +56,8 @@ void UtilityPanel::addToolWidget(QWidget* w)
     }
     if (w) {
         m_toolWidget = w;
+        m_toolWidget->setSizePolicy(QSizePolicy::Ignored,
+                                    QSizePolicy::Preferred);
         m_upLayout->addWidget(w);
     }
 }
@@ -69,7 +71,7 @@ void UtilityPanel::clearToolWidget()
 
 void UtilityPanel::pushWidget(QWidget* w)
 {
-    m_layout->addWidget(w);
+    m_layout->insertWidget(m_layout->count() - 1, w);
 }
 
 void UtilityPanel::show()
@@ -111,10 +113,17 @@ void UtilityPanel::initInternalPanel()
 
     m_layout = new QVBoxLayout();
     m_upLayout = new QVBoxLayout();
+    m_bottomLayout = new QVBoxLayout();
     m_layout->addLayout(m_upLayout);
+    m_layout->addLayout(m_bottomLayout);
     widget->setLayout(m_layout);
 
-    QColor bgColor = palette().background().color();
+    QPushButton* closeButton = new QPushButton(this);
+    closeButton->setText(tr("Close"));
+    connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
+    m_bottomLayout->addWidget(closeButton);
+
+    QColor bgColor = palette().window().color();
     bgColor.setAlphaF(0.0);
     m_internalPanel->setStyleSheet(
       QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));

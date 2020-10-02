@@ -37,9 +37,9 @@ QString PinTool::name() const
     return tr("Pin Tool");
 }
 
-QString PinTool::nameID()
+ToolType PinTool::nameID() const
 {
-    return QLatin1String("");
+    return ToolType::PIN;
 }
 
 QString PinTool::description() const

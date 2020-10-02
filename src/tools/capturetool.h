@@ -23,6 +23,31 @@
 #include <QIcon>
 #include <QPainter>
 
+enum class ToolType
+{
+    ARROW,
+    CIRCLE,
+    CIRCLECOUNT,
+    COPY,
+    EXIT,
+    IMGUR,
+    LAUNCHER,
+    LINE,
+    MARKER,
+    MOVE,
+    PENCIL,
+    PIN,
+    PIXELATE,
+    RECTANGLE,
+    REDO,
+    SAVE,
+    SELECTION,
+    SIZEINDICATOR,
+    TEXT,
+    UNDO,
+    UPLOAD
+};
+
 class CaptureTool : public QObject
 {
     Q_OBJECT
@@ -64,6 +89,10 @@ public:
         REQ_ADD_CHILD_WINDOW,
         // Instance this->widget()'s widget which handles its own lifetime.
         REQ_ADD_EXTERNAL_WIDGETS,
+
+        REQ_INCREMENT_CIRCLE_COUNT,
+
+        REQ_DECREMENT_CIRCLE_COUNT,
     };
 
     explicit CaptureTool(QObject* parent = nullptr)
@@ -91,7 +120,7 @@ public:
     virtual QString name() const = 0;
     // Codename for the tool, this hsouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
-    static QString nameID();
+    virtual ToolType nameID() const = 0;
     // Short description of the tool.
     virtual QString description() const = 0;
 

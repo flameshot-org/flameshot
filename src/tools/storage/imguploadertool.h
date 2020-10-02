@@ -11,6 +11,7 @@ public:
 
     bool closeOnButtonPressed() const;
 
+    QString name() const override;
     QIcon icon(const QColor& background, bool inEditor) const override;
 
     void setCapture(const QPixmap& pixmap);
@@ -18,6 +19,9 @@ public:
 
 public slots:
     void pressed(const CaptureContext& context) override;
+
+protected:
+    ToolType nameID() const override;
 
 private:
     QPixmap m_capture;

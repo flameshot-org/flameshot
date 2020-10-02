@@ -23,10 +23,8 @@ class ImgS3UploaderTool : public ImgUploaderTool
 {
     Q_OBJECT
 public:
-    explicit ImgS3UploaderTool(QObject* parent = nullptr);
+    ImgS3UploaderTool(QObject* parent = nullptr);
 
-    QString name() const override;
-    static QString nameID();
     QString description() const override;
 
     QWidget* widget() override;

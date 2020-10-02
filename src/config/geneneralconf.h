@@ -22,7 +22,8 @@
 class QVBoxLayout;
 class QCheckBox;
 class QPushButton;
-class FilePathConfiguration;
+class QLabel;
+class QLineEdit;
 
 class GeneneralConf : public QWidget
 {
@@ -35,20 +36,41 @@ public slots:
 
 private slots:
     void showHelpChanged(bool checked);
+    void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void showTrayIconChanged(bool checked);
     void autostartChanged(bool checked);
-    void showStartupLaunchMessageChanged(bool checked);
     void closeAfterCaptureChanged(bool checked);
+    void saveAfterCopyChanged(bool checked);
+    void changeSavePath();
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
+    void setPathFixed();
+    void pathFixed();
 
 private:
+    const QString chooseFolder(const QString currentPath = "");
+
+    void initShowHelp();
+    void initShowSidePanelButton();
+    void initShowDesktopNotification();
+    void initShowTrayIcon();
+    void initConfingButtons();
+    void initAutostart();
+    void initShowStartupLaunchMessage();
+    void initCloseAfterCapture();
+    void initCopyAndCloseAfterUpload();
+    void initSaveAfterCopy();
+    void initCopyPathAfterSave();
+    void initFilePathConfiguration();
+
+    // class members
     QVBoxLayout* m_layout;
     QCheckBox* m_sysNotifications;
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
+    QCheckBox* m_sidePanelButton;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_closeAfterCapture;
@@ -57,17 +79,10 @@ private:
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;
-    FilePathConfiguration* m_filePathConfiguration;
-
-    void initShowHelp();
-    void initShowDesktopNotification();
-    void initShowTrayIcon();
-    void initConfingButtons();
-    void initAutostart();
-    void initShowStartupLaunchMessage();
-    void initCloseAfterCapture();
-    void initCopyAndCloseAfterUpload();
-    void initCopyPathAfterSave();
-    void initUploadStorage();
-    void initFilePathConfiguration();
+    QCheckBox* m_saveAfterCopy;
+    QLineEdit* m_savePath;
+    QPushButton* m_changeSaveButton;
+    QLineEdit* m_screenshotPathFixedText;
+    QCheckBox* m_screenshotPathFixedCheck;
+    QPushButton* m_screenshotPathFixedBrowse;
 };

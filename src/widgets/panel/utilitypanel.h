@@ -52,6 +52,7 @@ private:
     QPointer<QWidget> m_toolWidget;
     QScrollArea* m_internalPanel;
     QVBoxLayout* m_upLayout;
+    QVBoxLayout* m_bottomLayout;
     QVBoxLayout* m_layout;
     QPropertyAnimation* m_showAnimation;
     QPropertyAnimation* m_hideAnimation;

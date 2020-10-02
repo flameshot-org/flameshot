@@ -16,18 +16,16 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "geneneralconf.h"
-#include "filepathconfiguration.h"
 #include "src/core/controller.h"
-#include "src/tools/storage/imgstorages.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
-#include <QHBoxLayout>
+#include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
-#include <QRadioButton>
+#include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
 
@@ -37,6 +35,7 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
     initShowHelp();
+    initShowSidePanelButton();
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
@@ -44,7 +43,7 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
-    initUploadStorage();
+    initSaveAfterCopy();
     initFilePathConfiguration();
 
     // this has to be at the end
@@ -56,11 +55,20 @@ void GeneneralConf::updateComponents()
 {
     ConfigHandler config;
     m_helpMessage->setChecked(config.showHelpValue());
+    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
     m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
     m_copyAndCloseAfterUpload->setChecked(
       config.copyAndCloseAfterUploadEnabled());
+    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
+
+    if (!config.saveAfterCopyPathValue().isEmpty()) {
+        m_savePath->setText(config.saveAfterCopyPathValue());
+    } else {
+        ConfigHandler().setSaveAfterCopyPath(
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    }
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -71,6 +79,11 @@ void GeneneralConf::updateComponents()
 void GeneneralConf::showHelpChanged(bool checked)
 {
     ConfigHandler().setShowHelp(checked);
+}
+
+void GeneneralConf::showSidePanelButtonChanged(bool checked)
+{
+    ConfigHandler().setShowSidePanelButton(checked);
 }
 
 void GeneneralConf::showDesktopNotificationChanged(bool checked)
@@ -91,11 +104,6 @@ void GeneneralConf::showTrayIconChanged(bool checked)
 void GeneneralConf::autostartChanged(bool checked)
 {
     ConfigHandler().setStartupLaunch(checked);
-}
-
-void GeneneralConf::showStartupLaunchMessageChanged(bool checked)
-{
-    ConfigHandler().setShowStartupLaunchMessage(checked);
 }
 
 void GeneneralConf::closeAfterCaptureChanged(bool checked)
@@ -176,6 +184,19 @@ void GeneneralConf::initShowHelp()
             &GeneneralConf::showHelpChanged);
 }
 
+void GeneneralConf::initShowSidePanelButton()
+{
+    m_sidePanelButton = new QCheckBox(tr("Show the side panel button"), this);
+    m_sidePanelButton->setChecked(ConfigHandler().showSidePanelButtonValue());
+    m_sidePanelButton->setToolTip(
+      tr("Show the side panel toggle button in the capture mode."));
+    m_layout->addWidget(m_sidePanelButton);
+
+    connect(m_sidePanelButton,
+            &QCheckBox::clicked,
+            this,
+            &GeneneralConf::showSidePanelButtonChanged);
+}
 void GeneneralConf::initShowDesktopNotification()
 {
     m_sysNotifications = new QCheckBox(tr("Show desktop notifications"), this);
@@ -299,6 +320,53 @@ void GeneneralConf::initCopyAndCloseAfterUpload()
     });
 }
 
+void GeneneralConf::initSaveAfterCopy()
+{
+    m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
+    m_saveAfterCopy->setToolTip(tr("Save image file after copying it"));
+    m_layout->addWidget(m_saveAfterCopy);
+    connect(m_saveAfterCopy,
+            &QCheckBox::clicked,
+            this,
+            &GeneneralConf::saveAfterCopyChanged);
+
+    QHBoxLayout* pathLayout = new QHBoxLayout();
+    m_layout->addStretch();
+    QGroupBox* box = new QGroupBox(tr("Save Path"));
+    box->setFlat(true);
+    box->setLayout(pathLayout);
+    m_layout->addWidget(box);
+
+    m_savePath = new QLineEdit(
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation), this);
+    m_savePath->setDisabled(true);
+    QString foreground = this->palette().foreground().color().name();
+    m_savePath->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
+    pathLayout->addWidget(m_savePath);
+
+    m_changeSaveButton = new QPushButton(tr("Change..."), this);
+    pathLayout->addWidget(m_changeSaveButton);
+    connect(m_changeSaveButton,
+            &QPushButton::clicked,
+            this,
+            &GeneneralConf::changeSavePath);
+}
+
+void GeneneralConf::saveAfterCopyChanged(bool checked)
+{
+    ConfigHandler().setSaveAfterCopy(checked);
+}
+
+void GeneneralConf::changeSavePath()
+{
+    QString path = chooseFolder(
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    if (!path.isEmpty()) {
+        m_savePath->setText(path);
+        ConfigHandler().setSaveAfterCopyPath(path);
+    }
+}
+
 void GeneneralConf::initCopyPathAfterSave()
 {
     m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
@@ -311,43 +379,94 @@ void GeneneralConf::initCopyPathAfterSave()
     });
 }
 
-void GeneneralConf::initUploadStorage()
-{
-    QGroupBox* groupBox = new QGroupBox(tr("Upload storage"));
-
-    // TODO - remove dependency injection (s3 & imgur)
-    // imgur
-    QRadioButton* storageImgUr = new QRadioButton(tr("Imgur storage"));
-    connect(storageImgUr, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setUploadStorage(SCREENSHOT_STORAGE_TYPE_IMGUR);
-    });
-
-    // s3
-    QRadioButton* storageImgS3 = new QRadioButton(
-      tr("S3 storage (require config.ini file with s3 credentials)"));
-    connect(storageImgS3, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setUploadStorage(SCREENSHOT_STORAGE_TYPE_S3);
-    });
-
-    // set current storage radiobutton active
-    if (ConfigHandler().uploadStorage() == SCREENSHOT_STORAGE_TYPE_IMGUR) {
-        storageImgUr->setChecked(true);
-
-    } else {
-        storageImgS3->setChecked(true);
-    }
-
-    // draw configuration options for uploadStorage
-    QVBoxLayout* vbox = new QVBoxLayout;
-    vbox->addWidget(storageImgUr);
-    vbox->addWidget(storageImgS3);
-    vbox->addStretch(1);
-    groupBox->setLayout(vbox);
-    m_layout->addWidget(groupBox);
-}
-
 void GeneneralConf::initFilePathConfiguration()
 {
-    m_filePathConfiguration = new FilePathConfiguration();
-    m_layout->addWidget(m_filePathConfiguration);
+    QGroupBox* box = new QGroupBox(tr("Select default path for Screenshots"));
+    box->setFlat(true);
+
+    QVBoxLayout* boxLayout = new QVBoxLayout();
+    box->setLayout(boxLayout);
+
+    QHBoxLayout* pathBrowseLayout = new QHBoxLayout();
+
+    m_screenshotPathFixedCheck =
+      new QCheckBox(tr("Use fixed path for screenshots to save"), this);
+    m_screenshotPathFixedCheck->setChecked(
+      !ConfigHandler().savePathFixed().isEmpty());
+    connect(m_screenshotPathFixedCheck,
+            SIGNAL(toggled(bool)),
+            this,
+            SLOT(pathFixed()));
+
+    m_screenshotPathFixedText =
+      new QLineEdit(ConfigHandler().savePathFixed(), this);
+    m_screenshotPathFixedText->setDisabled(true);
+    QString foreground = this->palette().foreground().color().name();
+    m_screenshotPathFixedText->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+
+    m_screenshotPathFixedBrowse = new QPushButton(tr("Change..."), this);
+    m_screenshotPathFixedBrowse->setEnabled(
+      m_screenshotPathFixedCheck->isChecked());
+    connect(m_screenshotPathFixedBrowse,
+            &QPushButton::clicked,
+            this,
+            &GeneneralConf::setPathFixed);
+
+    pathBrowseLayout->addWidget(m_screenshotPathFixedText);
+    pathBrowseLayout->addWidget(m_screenshotPathFixedBrowse);
+
+    boxLayout->addWidget(m_screenshotPathFixedCheck);
+    boxLayout->addLayout(pathBrowseLayout);
+
+    m_layout->addStretch();
+    m_layout->addWidget(box);
+}
+
+const QString GeneneralConf::chooseFolder(const QString pathDefault)
+{
+    QString path;
+    if (pathDefault.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    path = QFileDialog::getExistingDirectory(
+      this,
+      tr("Choose a Folder"),
+      path,
+      QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (path.isEmpty()) {
+        return path;
+    }
+    if (!path.isEmpty()) {
+        if (!QFileInfo(path).isWritable()) {
+            QMessageBox::about(
+              this, tr("Error"), tr("Unable to write to directory."));
+            return QString();
+        }
+    }
+    return path;
+}
+
+void GeneneralConf::setPathFixed()
+{
+    QString pathDefault = m_screenshotPathFixedText->text();
+    QString path = chooseFolder(pathDefault);
+    if (path.isNull()) {
+        return;
+    }
+    m_screenshotPathFixedText->setText(path);
+    ConfigHandler().setSavePathFixed(path);
+}
+
+void GeneneralConf::pathFixed()
+{
+    bool status = m_screenshotPathFixedCheck->isChecked();
+    m_screenshotPathFixedBrowse->setEnabled(status);
+    if (!status) {
+        m_screenshotPathFixedText->setText("");
+        ConfigHandler().setSavePathFixed(m_screenshotPathFixedText->text());
+    } else {
+        emit setPathFixed();
+    }
 }

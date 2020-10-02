@@ -40,10 +40,9 @@ TextConfig::TextConfig(QWidget* parent)
     int index = fontsCB->findText(font().family());
     fontsCB->setCurrentIndex(index);
 
-    QColor bgColor(palette().background().color());
-    QString iconPrefix = ColorUtils::colorIsDark(bgColor)
-                           ? PathInfo::whiteIconPath()
-                           : PathInfo::blackIconPath();
+    QString iconPrefix = ColorUtils::colorIsDark(palette().windowText().color())
+                           ? PathInfo::blackIconPath()
+                           : PathInfo::whiteIconPath();
 
     m_strikeOutButton = new QPushButton(
       QIcon(iconPrefix + "format_strikethrough.svg"), QLatin1String(""));

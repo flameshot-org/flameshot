@@ -33,7 +33,6 @@ class QLabel;
 class QPushButton;
 class QUrl;
 class NotificationWidget;
-class ConfigEnterprise;
 class ImageLabel;
 
 class ImgS3Uploader : public ImgUploader
