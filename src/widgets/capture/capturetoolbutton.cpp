@@ -108,6 +108,7 @@ CaptureTool* CaptureToolButton::tool() const
 
 void CaptureToolButton::setColor(const QColor& c)
 {
+    m_mainColor = c;
     CaptureButton::setColor(c);
     updateIcon();
 }

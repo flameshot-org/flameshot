@@ -9,24 +9,7 @@ Contributions are welcome! Here's how you can help:
 
 ## Translations
 
-Check this nice official documentation from Qt docs as it explains how to translate for a project written with Qt: https://doc.qt.io/qt-5/linguist-translators.html
-
-#### Status:
-
-| Language              | Code  | Status      | Contributors |
-| --------------------- | ----- | ----------- | ------------ |
-| Spanish | es |  :bookmark:v0.1.0    | [lupoDharkael](https://github.com/lupoDharkael) |
-| Catalan | ca |  :bookmark:v0.5.0    | [joamuran](https://github.com/joamuran) |
-| Russian | ru |  :bookmark:v0.5.1   | [Shatur95](https://github.com/Shatur95) |
-| Chinese (Simplified)  | zh_CN | :bookmark:v0.5.1 | [copie](https://github.com/copie), [hosiet](https://github.com/hosiet) |
-| Chinese (Traditional) | zh_TW | :bookmark:v0.5.1 | [PeterDaveHello](https://github.com/PeterDaveHello) |
-| Turkish               | tr | :bookmark:v0.5.1 | [oltulu](https://github.com/oltulu) |
-| Georgian              | ge | :bookmark:v0.5.1 | [giogziro95](https://github.com/giogziro95) |
-| French                | fr | :bookmark:v0.5.1 | [ld892012](https://github.com/ld892012) |
-| Polish                | pl | :bookmark:v0.5.1 | [napcok](https://github.com/napcok) |
-| Serbian               | sr | :bookmark:v0.6.0 | [cobisimo](https://github.com/cobisimo) |
-| Ukrainian             | uk | :bookmark:v0.6.0 | [vboden](https://github.com/vboden) |
-| German                | de | :bookmark:v0.6.0 | [DaVukovic](https://github.com/DaVukovic) |
+See [translation instructions](https://github.com/flameshot-org/translation-instruction).
 
 ## Code
 

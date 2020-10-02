@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.13)
 # This can be read from ${PROJECT_NAME} after project() is called
 project(
   flameshot
-  VERSION 0.8.1.1
+  VERSION 0.8.3.1
   LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
@@ -12,12 +12,17 @@ set(PROJECT_NAME_CAPITALIZED "Flameshot")
 set(DEFAULT_RUN_IN_PLACE FALSE)
 if(WIN32)
 	set(DEFAULT_RUN_IN_PLACE TRUE)
+    # For Windows RC file.
+    add_definitions(-DFLAMESHOT_VERSION_MAJOR=${CMAKE_PROJECT_VERSION_MAJOR})
+    add_definitions(-DFLAMESHOT_VERSION_MINOR=${CMAKE_PROJECT_VERSION_MINOR})
+    add_definitions(-DFLAMESHOT_VERSION_BUGFIX=${CMAKE_PROJECT_VERSION_PATCH})
+    add_definitions(-DFLAMESHOT_VERSION_BUILD=1)
+    add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
 endif()
 set(RUN_IN_PLACE ${DEFAULT_RUN_IN_PLACE} CACHE BOOL
 	"Run directly in source directory structure")
 
 
-option(GENERATE_TS "Regenerate translation source files" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 
 include(cmake/StandardProjectSettings.cmake)
