@@ -90,7 +90,10 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 
     QRect geometry;
     for (QScreen* const screen : QGuiApplication::screens()) {
-        geometry = geometry.united(screen->geometry());
+        QRect scrRect = screen->geometry();
+        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
+                       scrRect.y() / screen->devicePixelRatio());
+        geometry = geometry.united(scrRect);
     }
 
     QPixmap p(QApplication::primaryScreen()->grabWindow(

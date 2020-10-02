@@ -7,6 +7,7 @@ target_sources(
           filenameeditor.cpp
           geneneralconf.cpp
           strftimechooserwidget.cpp
+          styleoverride.cpp
           uicoloreditor.cpp
           visualseditor.cpp
           shortcutswidget.cpp

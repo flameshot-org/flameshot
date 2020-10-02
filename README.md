@@ -28,6 +28,10 @@
     <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
+    <br>
+    <a href="https://snapcraft.io/flameshot">
+  <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
+</a>
   </p>
 </div>
 
@@ -60,10 +64,8 @@
     - [Arch](#arch)
   - [Build](#build)
   - [Install](#install)
-- [Packaging](#packaging)
 - [License](#license)
 - [Contribute](#contribute)
-- [Donations](#donations)
 - [Acknowledgment](#acknowledgment)
 
 ## Features
@@ -252,11 +254,10 @@ some Linux distributions:
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
-- [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
-- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
-- Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
+- [Docker](https://github.com/ManuelLR/docker-flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
@@ -264,6 +265,13 @@ some Linux distributions:
     <img src="https://repology.org/badge/vertical-allrepos/flameshot.svg" alt="Packaging status">
   </a>
 </details>
+
+### Tray icon
+
+**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/index.php/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/index.php/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some softwares, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
+
+
+Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
 
 ### S3 bucket configuration
 

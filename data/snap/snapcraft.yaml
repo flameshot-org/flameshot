@@ -20,14 +20,14 @@ architectures:
 
 apps:
   flameshot:
-    adapter: full
-    command: usr/bin/flameshot
+    command: flameshot
     desktop: usr/share/applications/flameshot.desktop
     extensions:
       - kde-neon
     environment:
       DISABLE_WAYLAND: 1
       XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+      QT_QPA_PLATFORMTHEME: gtk3
     slots: [dbus-flameshot]
     plugs:
       - kde-frameworks-5-plug
@@ -38,6 +38,7 @@ apps:
       - opengl
       - pulseaudio
       - wayland
+      - unity7
       - x11
 
 parts:
