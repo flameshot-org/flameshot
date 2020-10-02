@@ -155,7 +155,7 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/build
           sed -e "/cmake (>= 3.13~),/d" -i $GITHUB_WORKSPACE/debian/control
           dpkg-buildpackage -b
-          cp $GITHUB_WORKSPACE/../${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
+          cp $GITHUB_WORKSPACE/../${PRODUCT}_*-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
       - name: SHA256Sum of ubuntu-18.04 package(daily build)
         run: |
           sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
