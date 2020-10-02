@@ -24,11 +24,8 @@ inline qreal getColorLuma(const QColor& c)
 
 bool ColorUtils::colorIsDark(const QColor& c)
 {
-    bool isWhite = false;
-    if (getColorLuma(c) <= 0.60) {
-        isWhite = true;
-    }
-    return isWhite;
+    // when luma <= 0.5, we considor it as a dark color
+    return getColorLuma(c) <= 0.5;
 }
 
 QColor ColorUtils::contrastColor(const QColor& c)

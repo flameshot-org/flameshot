@@ -28,17 +28,28 @@ env:
 
 jobs:
   deb-pack:
+    name: ${{ matrix.dist.name }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
-        dist: [debian-10, ubuntu-20.04]
+        dist:
+          - {
+              name: debian-10,
+              os: debian,
+              symbol: buster
+            }
+          - {
+              name: ubuntu-20.04,
+              os: ubuntu,
+              symbol: focal
+            }
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master_nc_merge_upstream_test
+#          ref: master
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -56,38 +67,33 @@ jobs:
           # flameshot-org/packpack or packpack/packpack
           repository: flameshot-org/packpack
           path: tools
-      - name: Packaging on ${{ matrix.dist }}
-        if: matrix.dist == 'debian-10'
+      - name: Packaging on ${{ matrix.dist.name }}
         run: |
           cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
-          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb
         env:
-          OS: debian 
-          DIST: buster
-      - name: Packaging on ${{ matrix.dist }}
-        if: matrix.dist == 'ubuntu-20.04'
+          OS: ${{ matrix.dist.os }}
+          DIST: ${{ matrix.dist.symbol }}
+      - name: SHA256Sum of ${{ matrix.dist.name }} package(daily build)
         run: |
-          pwd
-          ls -la
-          cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
-          bash $GITHUB_WORKSPACE/tools/packpack
-          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb
-        env:
-          OS: ubuntu 
-          DIST: focal
-      - name: SHA256Sum of ${{ matrix.dist }} package(daily build)
-        run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb.sha256sum
-          echo "=============${{ matrix.dist }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb.sha256sum)
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb.sha256sum
+          echo "=============${{ matrix.dist.name }} sha256sum download link============"
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb.sha256sum)
           echo "========no operation for you can see link in the log console======="
-      - name: Upload ${{ matrix.dist }} package(daily build)
+      - name: Upload ${{ matrix.dist.name }} package(daily build)
         run: |
-          echo "================${{ matrix.dist }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist }}.amd64.deb)
+          echo "================${{ matrix.dist.name }} download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb)
           echo "======no operation for you can see link in the log console====="
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.amd64.deb
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.amd64.deb.sha256sum
 
   deb-pack-extra:
     name: ubuntu-18.04(extra job to packaging deb)
@@ -101,7 +107,7 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
-#          ref: master_nc_merge_upstream_test
+#          ref: master
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -149,33 +155,54 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/build
           sed -e "/cmake (>= 3.13~),/d" -i $GITHUB_WORKSPACE/debian/control
           dpkg-buildpackage -b
-          cp $GITHUB_WORKSPACE/../${PRODUCT}_*_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
-#          cp $GITHUB_WORKSPACE/../${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
+          cp $GITHUB_WORKSPACE/../${PRODUCT}_*-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
       - name: SHA256Sum of ubuntu-18.04 package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum
           echo "============ubuntu-18.04 sha256sum download link=============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum)
           echo "=====no operation for you can see link in the log console====="
       - name: Upload ubuntu-18.04 package(daily build)
         run: |
           echo "===================ubuntu-18.04 download link=================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb)
           echo "======no operation for you can see link in the log console====="
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/build/*
 
   rpm-pack:
+    name: ${{ matrix.dist.name }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
-        dist: [fedora-31, fedora-32, opensuse-leap-15.2]
+        dist:
+          - {
+              name: fedora-31,
+              os: fedora,
+              symbol: 31
+            }
+          - {
+              name: fedora-32,
+              os: fedora,
+              symbol: 32
+            }
+          - {
+              name: opensuse-leap-15.2,
+              os: opensuse-leap,
+              symbol: 15.2
+            }
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master_nc_merge_upstream_test
+#          ref: master
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -193,67 +220,75 @@ jobs:
           # flameshot-org/packpack or packpack/packpack
           repository: flameshot-org/packpack
           path: tools
-      - name: Packaging on ${{ matrix.dist }}
-        if: matrix.dist == 'fedora-31'
+      - name: Packaging on ${{ matrix.dist.name }}
         run: |
           cp -r $GITHUB_WORKSPACE/data/rpm $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
         env:
-          OS: fedora
-          DIST: 31
-      - name: Packaging on ${{ matrix.dist }}
-        if: matrix.dist == 'fedora-32'
+          OS: ${{ matrix.dist.os }}
+          DIST: ${{ matrix.dist.symbol }}
+      - name: Package Clean
+        if: matrix.dist.os == 'fedora'
         run: |
-          cp -r $GITHUB_WORKSPACE/data/rpm $GITHUB_WORKSPACE
-          bash $GITHUB_WORKSPACE/tools/packpack
-        env:
-          OS: fedora
-          DIST: 32
-      - name: Packaging on ${{ matrix.dist }}
-        if: matrix.dist == 'opensuse-leap-15.2'
+          rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debuginfo-*.rpm
+          rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debugsource-*.rpm
+          rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-*.src.rpm
+          rm -f ${{ github.workspace }}/build/build.log
+      - name: SHA256Sum of ${{ matrix.dist.name }} package(daily build)
+        if: matrix.dist.os == 'fedora'
         run: |
-          cp -r $GITHUB_WORKSPACE/data/rpm $GITHUB_WORKSPACE
-          bash $GITHUB_WORKSPACE/tools/packpack
-        env:
-          OS: opensuse-leap
-          DIST: 15.2
-      - name: SHA256Sum of ${{ matrix.dist }} package(daily build)
-        if: startsWith(matrix.dist, 'fedora')
-        run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm          
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm.sha256sum
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${ARCH}.rpm.sha256sum
           echo "============${{ matrix.dist }} sha256sum download link============"
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm.sha256sum)
           echo "=======no operation for you can see link in the log console======="
-      - name: SHA256Sum of ${{ matrix.dist }} package(daily build)
-        if: startsWith(matrix.dist, 'opensuse-leap')
+      - name: SHA256Sum of ${{ matrix.dist.name }} package(daily build)
+        if: matrix.dist.os == 'opensuse-leap'
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm          
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm.sha256sum
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm.sha256sum
           echo "============${{ matrix.dist }} sha256sum download link==========="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm.sha256sum)
           echo "=======no operation for you can see link in the log console======"
-      - name: Upload ${{ matrix.dist }} package(daily build)
-        if: startsWith(matrix.dist, 'fedora')
+      - name: Upload ${{ matrix.dist.name }} package(daily build)
+        if: matrix.dist.os == 'fedora'
         run: |
-          echo "================${{ matrix.dist }} download link==============="
+          echo "================${{ matrix.dist.name }} download link==============="
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm)
           echo "======no operation for you can see link in the log console====="
-      - name: Upload ${{ matrix.dist }} package(daily build)
-        if: startsWith(matrix.dist, 'opensuse-leap')
+      - name: Upload ${{ matrix.dist.name }} package(daily build)
+        if: matrix.dist.os == 'opensuse-leap'
         run: |
-          echo "================${{ matrix.dist }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm)
+          echo "================${{ matrix.dist.name }} download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm)
           echo "======no operation for you can see link in the log console====="
+      - name: Artifact Upload
+        if: matrix.dist.os == 'fedora'
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/build/
+
+      - name: Artifact Upload
+        if: matrix.dist.os == 'opensuse-leap'
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ env.ARCH }}.rpm
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ env.ARCH }}.rpm.sha256sum
 
   appimage-pack:
+    name: appimage
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master_nc_merge_upstream_test
+#          ref: master
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -315,77 +350,95 @@ jobs:
             ${APPIMAGE_DST_PATH}/
 
           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool ${APPIMAGE_DST_PATH}
+          mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage
       - name: SHA256Sum of appimage package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage
-          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage > $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage.sha256sum
+          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage
+          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage > $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage.sha256sum
           echo "================appimage sha256sum download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage.sha256sum)
           echo "======no operation for you can see link in the log console====="
       - name: Upload appimage package for daily build
         run: |
           echo "====================appimage download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage)
           echo "======no operation for you can see link in the log console====="
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/Flameshot-*.${{ env.ARCH }}.AppImage
+            ${{ github.workspace }}/Flameshot-*.${{ env.ARCH }}.AppImage.sha256sum
 
-#  flatpak-pack:
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - name: Checkout Source code
-#        uses: actions/checkout@v2
-#        with:
-#          fetch-depth: 0
-##          ref: master_nc_merge_upstream_test
-#      - name: Set env & Print flameshot version
-#        shell: bash
-#        run: |
-#          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
-#          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-#          git_hash=$(git rev-parse --short HEAD)
-#          echo "=======FLAMESHOT VERSION========"
-#          echo ${last_committed_tag:1}
-#          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
-#          echo "================================"
-#          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
-#      - name: Setup flatpak
-#        run: |
-#          sudo apt-get -y -qq update
-#          sudo apt-get install -y flatpak flatpak-builder
-#      - name: Setup Flathub
-#        run: |
-#          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-#          flatpak install -y --noninteractive flathub org.kde.Sdk//5.15 org.kde.Platform//5.15
-#      - name: Packaging flatpak
-#        run: |
-#          BUNDLE="org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak"
-#          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.flameshot.yml
-#          RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
-#          APP_ID="org.flameshot.flameshot"
-#          BRANCH="master_nc_merge_upstream_test"
-#
-#          flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
-#          flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
-#      - name: SHA256Sum of flatpak package(daily build)
-#        run: |
-#          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak
-#          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak.sha256sum
-#          echo "================flatpak sha256sum download link===================="
-#          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak.sha256sum)
-#          echo "========no operation for you can see link in the log console======="
-#      - name: Upload flatpak package(daily build)
-#        run: |
-#          echo "=====================flatpak download link====================="
-#          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak)
-#          echo "======no operation for you can see link in the log console====="
+  flatpak-pack:
+    name: flatpak
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+#          ref: master
+      - name: Set env & Print flameshot version
+        shell: bash
+        run: |
+          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
+          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
+          git_hash=$(git rev-parse --short HEAD)
+          echo "=======FLAMESHOT VERSION========"
+          echo ${last_committed_tag:1}
+          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
+          echo "================================"
+          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+      - name: Setup flatpak
+        run: |
+          sudo apt-get -y -qq update
+          sudo apt-get install -y flatpak flatpak-builder
+      - name: Setup Flathub
+        run: |
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y --noninteractive flathub org.kde.Sdk//5.15 org.kde.Platform//5.15
+      - name: Packaging flatpak
+        run: |
+          BUNDLE="org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak"
+          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.flameshot.yml
+          RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
+          APP_ID="org.flameshot.flameshot"
+          BRANCH="master"
+
+          flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
+          flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
+          mv $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak
+      - name: SHA256Sum of flatpak package(daily build)
+        run: |
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak.sha256sum
+          echo "================flatpak sha256sum download link===================="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak.sha256sum)
+          echo "========no operation for you can see link in the log console======="
+      - name: Upload flatpak package(daily build)
+        run: |
+          echo "=====================flatpak download link====================="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak)
+          echo "======no operation for you can see link in the log console====="
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/org.flameshot.flameshot-*.${{ env.ARCH }}.flatpak
+            ${{ github.workspace }}/org.flameshot.flameshot-*.${{ env.ARCH }}.flatpak.sha256sum
 
   snap-pack:
+    name: snap
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master_nc_merge_upstream_test
+#          ref: master
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -402,16 +455,27 @@ jobs:
         id: snapcraft
         with:
           path: data
+      - name: Rename snap name
+        shell: bash
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/build
+          cp ${{ steps.snapcraft.outputs.snap }} $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap
       - name: SHA256Sum of snap package(daily build)
         run: |
-          sha256sum ${{ steps.snapcraft.outputs.snap }}
-          sha256sum ${{ steps.snapcraft.outputs.snap }} > ${{ steps.snapcraft.outputs.snap }}.sha256sum
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap.sha256sum
           echo "================snap sha256sum download link=================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${{ steps.snapcraft.outputs.snap }}.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap.sha256sum)
           echo "=====no operation for you can see link in the log console====="
       - name: Upload snap package(daily build)
         run: |
           echo "=======================snap download link======================"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh ${{ steps.snapcraft.outputs.snap }})
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap)
           echo "======no operation for you can see link in the log console====="
-
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux-distribution-artifact
+          path: |
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.amd64.snap.sha256sum

@@ -22,15 +22,18 @@
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
 #include <QClipboard>
+#include <QCursor>
 #include <QDesktopServices>
 #include <QDrag>
-#include <QHBoxLayout>
+#include <QGuiApplication>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLabel>
 #include <QMimeData>
 #include <QNetworkAccessManager>
 #include <QPushButton>
+#include <QRect>
+#include <QScreen>
 #include <QShortcut>
 #include <QTimer>
 #include <QUrlQuery>
@@ -57,6 +60,13 @@ void ImgUploader::init(const QString& title, const QString& label)
     resultStatus = false;
     setWindowTitle(title);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    QRect position = frameGeometry();
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    position.moveCenter(screen->availableGeometry().center());
+    move(position.topLeft());
+#endif
 
     m_spinner = new LoadSpinner(this);
     m_spinner->setColor(ConfigHandler().uiMainColorValue());

@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "circlecounttool.h"
+#include "colorutils.h"
 #include <QPainter>
 namespace {
 #define PADDING_VALUE 2
@@ -72,6 +73,7 @@ void CircleCountTool::process(QPainter& painter,
     auto new_font = orig_font;
     auto fontSize = bubble_size;
     new_font.setPixelSize(fontSize);
+    new_font.setBold(true);
     painter.setFont(new_font);
 
     QRect bRect =
@@ -89,8 +91,7 @@ void CircleCountTool::process(QPainter& painter,
           textRect, Qt::AlignCenter, QString::number(m_count));
     }
 
-    // Lightness value ranges from 0-255, we split at 75 as this looks best
-    if (m_color.lightness() <= 75) {
+    if (ColorUtils::colorIsDark(m_color)) {
         painter.setPen(Qt::white);
     } else {
         painter.setPen(Qt::black);

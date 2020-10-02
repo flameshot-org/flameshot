@@ -28,7 +28,6 @@
 #include "src/tools/storage/storagemanager.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
-#include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
@@ -39,17 +38,14 @@
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include <QApplication>
-#include <QBuffer>
 #include <QDesktopWidget>
 #include <QGuiApplication>
-#include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
 #include <QUndoView>
 #include <draggablewidgetmaker.h>
-
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
 
@@ -128,6 +124,8 @@ CaptureWidget::CaptureWidget(const uint id,
     if (m_context.fullscreen) {
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
+            r.moveTo(r.x() / screen->devicePixelRatio(),
+                     r.y() / screen->devicePixelRatio());
 #ifdef Q_OS_WIN
             r.moveTo(r.topLeft() - topLeft);
 #endif
@@ -655,6 +653,10 @@ void CaptureWidget::initPanel()
     QRect panelRect = rect();
     if (m_context.fullscreen) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
+        auto devicePixelRatio =
+          QGuiApplication::primaryScreen()->devicePixelRatio();
+        panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                         panelRect.y() / devicePixelRatio);
     }
 
     ConfigHandler config;
@@ -663,6 +665,7 @@ void CaptureWidget::initPanel()
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
         makeChild(panelToggleButton);
+        panelToggleButton->setColor(m_uiColor);
         panelToggleButton->setOrientation(
           OrientablePushButton::VerticalBottomToTop);
         panelToggleButton->move(panelRect.x(),
@@ -1104,6 +1107,11 @@ void CaptureWidget::uploadScreenshot()
 void CaptureWidget::copyScreenshot()
 {
     m_captureDone = true;
+    if (m_activeTool != nullptr) {
+        QPainter painter(&m_context.screenshot);
+        m_activeTool->process(painter, m_context.screenshot, true);
+    }
+
     ScreenshotSaver().saveToClipboard(pixmap());
     close();
 }
@@ -1111,6 +1119,10 @@ void CaptureWidget::copyScreenshot()
 void CaptureWidget::saveScreenshot()
 {
     m_captureDone = true;
+    if (m_activeTool != nullptr) {
+        QPainter painter(&m_context.screenshot);
+        m_activeTool->process(painter, m_context.screenshot, true);
+    }
     hide();
     if (m_context.savePath.isEmpty()) {
         ScreenshotSaver().saveToFilesystemGUI(pixmap());
