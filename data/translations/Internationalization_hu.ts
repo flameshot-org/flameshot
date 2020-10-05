@@ -557,7 +557,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgUploaderTool</name>
     <message>
-        <source>Imgage uploader tool</source>
+        <source>Image uploader tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
