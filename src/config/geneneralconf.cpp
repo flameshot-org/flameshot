@@ -44,7 +44,6 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
     initSaveAfterCopy();
-    initFilePathConfiguration();
 
     // this has to be at the end
     initConfingButtons();
@@ -330,12 +329,15 @@ void GeneneralConf::initSaveAfterCopy()
             this,
             &GeneneralConf::saveAfterCopyChanged);
 
-    QHBoxLayout* pathLayout = new QHBoxLayout();
-    m_layout->addStretch();
     QGroupBox* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
-    box->setLayout(pathLayout);
     m_layout->addWidget(box);
+    m_layout->addStretch();
+
+    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    QHBoxLayout* pathLayout = new QHBoxLayout();
 
     m_savePath = new QLineEdit(
       QStandardPaths::writableLocation(QStandardPaths::PicturesLocation), this);
@@ -350,6 +352,17 @@ void GeneneralConf::initSaveAfterCopy()
             &QPushButton::clicked,
             this,
             &GeneneralConf::changeSavePath);
+
+    m_screenshotPathFixedCheck =
+      new QCheckBox(tr("Use fixed path for screenshots to save"), this);
+    m_screenshotPathFixedCheck->setChecked(ConfigHandler().savePathFixed());
+    connect(m_screenshotPathFixedCheck,
+            SIGNAL(toggled(bool)),
+            this,
+            SLOT(togglePathFixed()));
+
+    vboxLayout->addLayout(pathLayout);
+    vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
 void GeneneralConf::saveAfterCopyChanged(bool checked)
@@ -379,50 +392,6 @@ void GeneneralConf::initCopyPathAfterSave()
     });
 }
 
-void GeneneralConf::initFilePathConfiguration()
-{
-    QGroupBox* box = new QGroupBox(tr("Select default path for Screenshots"));
-    box->setFlat(true);
-
-    QVBoxLayout* boxLayout = new QVBoxLayout();
-    box->setLayout(boxLayout);
-
-    QHBoxLayout* pathBrowseLayout = new QHBoxLayout();
-
-    m_screenshotPathFixedCheck =
-      new QCheckBox(tr("Use fixed path for screenshots to save"), this);
-    m_screenshotPathFixedCheck->setChecked(
-      !ConfigHandler().savePathFixed().isEmpty());
-    connect(m_screenshotPathFixedCheck,
-            SIGNAL(toggled(bool)),
-            this,
-            SLOT(pathFixed()));
-
-    m_screenshotPathFixedText =
-      new QLineEdit(ConfigHandler().savePathFixed(), this);
-    m_screenshotPathFixedText->setDisabled(true);
-    QString foreground = this->palette().foreground().color().name();
-    m_screenshotPathFixedText->setStyleSheet(
-      QStringLiteral("color: %1").arg(foreground));
-
-    m_screenshotPathFixedBrowse = new QPushButton(tr("Change..."), this);
-    m_screenshotPathFixedBrowse->setEnabled(
-      m_screenshotPathFixedCheck->isChecked());
-    connect(m_screenshotPathFixedBrowse,
-            &QPushButton::clicked,
-            this,
-            &GeneneralConf::setPathFixed);
-
-    pathBrowseLayout->addWidget(m_screenshotPathFixedText);
-    pathBrowseLayout->addWidget(m_screenshotPathFixedBrowse);
-
-    boxLayout->addWidget(m_screenshotPathFixedCheck);
-    boxLayout->addLayout(pathBrowseLayout);
-
-    m_layout->addStretch();
-    m_layout->addWidget(box);
-}
-
 const QString GeneneralConf::chooseFolder(const QString pathDefault)
 {
     QString path;
@@ -448,25 +417,7 @@ const QString GeneneralConf::chooseFolder(const QString pathDefault)
     return path;
 }
 
-void GeneneralConf::setPathFixed()
+void GeneneralConf::togglePathFixed()
 {
-    QString pathDefault = m_screenshotPathFixedText->text();
-    QString path = chooseFolder(pathDefault);
-    if (path.isNull()) {
-        return;
-    }
-    m_screenshotPathFixedText->setText(path);
-    ConfigHandler().setSavePathFixed(path);
-}
-
-void GeneneralConf::pathFixed()
-{
-    bool status = m_screenshotPathFixedCheck->isChecked();
-    m_screenshotPathFixedBrowse->setEnabled(status);
-    if (!status) {
-        m_screenshotPathFixedText->setText("");
-        ConfigHandler().setSavePathFixed(m_screenshotPathFixedText->text());
-    } else {
-        emit setPathFixed();
-    }
+    ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }

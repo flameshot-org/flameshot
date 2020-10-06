@@ -33,10 +33,11 @@ public:
     QVector<QColor> getUserColors();
     void setUserColors(const QVector<QColor>&);
 
-    QString savePathValue();
+    QString savePath();
     void setSavePath(const QString&);
-    QString savePathFixed();
-    void setSavePathFixed(const QString&);
+
+    bool savePathFixed();
+    void setSavePathFixed(bool);
 
     QColor uiMainColorValue();
     void setUIMainColor(const QColor&);

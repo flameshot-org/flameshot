@@ -46,8 +46,7 @@ private slots:
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
-    void setPathFixed();
-    void pathFixed();
+    void togglePathFixed();
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -63,7 +62,6 @@ private:
     void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
     void initCopyPathAfterSave();
-    void initFilePathConfiguration();
 
     // class members
     QVBoxLayout* m_layout;
@@ -82,7 +80,5 @@ private:
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
-    QLineEdit* m_screenshotPathFixedText;
     QCheckBox* m_screenshotPathFixedCheck;
-    QPushButton* m_screenshotPathFixedBrowse;
 };
