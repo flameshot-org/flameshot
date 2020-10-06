@@ -4,6 +4,8 @@
 #include "s3/imgs3settings.h"
 #include "s3/imgs3uploadertool.h"
 #include "src/tools/capturetool.h"
+#include <QSettings>
+#include <QStringLiteral>
 
 StorageManager::StorageManager() {}
 
@@ -38,4 +40,18 @@ const QString& StorageManager::storageDefault()
         m_qstr = SCREENSHOT_STORAGE_TYPE_IMGUR;
     }
     return m_qstr;
+}
+
+bool StorageManager::storageLocked()
+{
+    // TODO - move this to some common config file, not a storage specific
+    // configuration file
+    bool res = false;
+    ImgS3Settings imgS3Settings;
+    if (imgS3Settings.settings()->contains("STORAGE_LOCK")) {
+        res = imgS3Settings.settings()
+                ->value(QStringLiteral("STORAGE_LOCK"))
+                .toBool();
+    }
+    return res;
 }
