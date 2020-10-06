@@ -305,16 +305,13 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
 
 bool ConfigHandler::startupLaunchValue()
 {
-    bool res = false;
-
+    bool res = true;
     if (m_settings.contains(QStringLiteral("startupLaunch"))) {
         res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
     }
-
     if (res != verifyLaunchFile()) {
         setStartupLaunch(res);
     }
-
     return res;
 }
 
