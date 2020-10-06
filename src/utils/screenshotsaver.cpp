@@ -79,7 +79,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     while (!ok) {
         ConfigHandler config;
         QString savePath = FileNameHandler().absoluteSavePath();
-        if (config.savePathFixed().size() == 0) {
+        if (!config.savePathFixed()) {
             savePath = QFileDialog::getSaveFileName(
               nullptr,
               QObject::tr("Save screenshot"),
@@ -95,7 +95,6 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
             !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
             !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
-
             savePath += QLatin1String(".png");
         }
 
