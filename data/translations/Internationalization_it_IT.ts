@@ -1414,17 +1414,17 @@ You can find me in the system tray.</source>
 <context>
     <name>UploadStorageConfig</name>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="33"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
         <source>Upload storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="37"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
         <source>Imgur storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="44"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
         <source>S3 storage (require config.ini file with s3 credentials)</source>
         <translation type="unfinished"></translation>
     </message>
