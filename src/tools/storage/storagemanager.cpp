@@ -5,7 +5,6 @@
 #include "s3/imgs3uploadertool.h"
 #include "src/tools/capturetool.h"
 #include <QSettings>
-#include <QStringLiteral>
 
 StorageManager::StorageManager() {}
 
