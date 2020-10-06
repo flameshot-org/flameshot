@@ -17,6 +17,7 @@ public:
                                  QObject* parent = nullptr);
     const QString& storageUrl(const QString& imgUploaderType);
     const QString& storageDefault();
+    bool storageLocked();
 
 private:
     // class members
