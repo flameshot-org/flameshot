@@ -123,12 +123,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="95"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
         <source>Unable to capture screen</source>
         <translation>Ezin da pantailaren argazkia egin</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="255"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="285"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -141,7 +141,7 @@ Erabili saguaren gurpila hautatutako tresnaren lodiera aldatzeko.
 Sakatu Zuriunea alboko panela irekitzeko.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="611"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="666"/>
         <source>Tool Settings</source>
         <translation>Tresna-aukerak</translation>
     </message>
@@ -194,35 +194,50 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
         <source>General</source>
         <translation>Orokorra</translation>
     </message>
+    <message>
+        <location filename="../../src/config/configwindow.cpp" line="78"/>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/configwindow.cpp" line="84"/>
+        <source>Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="197"/>
+        <location filename="../../src/core/controller.cpp" line="205"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Pantaila-argazkia egin</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="202"/>
+        <location filename="../../src/core/controller.cpp" line="210"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Abiarazlea ireki</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="207"/>
+        <location filename="../../src/core/controller.cpp" line="215"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Ezarpenak</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="210"/>
+        <location filename="../../src/core/controller.cpp" line="218"/>
         <source>&amp;About</source>
         <translation>&amp;Honi buruz</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="224"/>
+        <source>&amp;Latest Uploads</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Information</source>
         <translation type="vanished">&amp;Informazioa</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="212"/>
+        <location filename="../../src/core/controller.cpp" line="220"/>
         <source>&amp;Quit</source>
         <translation>&amp;Irten</translation>
     </message>
@@ -312,215 +327,395 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="113"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="245"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="116"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="248"/>
         <source>Import</source>
         <translation>Inportatu</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="120"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="151"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="353"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="131"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="444"/>
         <source>Error</source>
         <translation>Errorea</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="120"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="123"/>
         <source>Unable to read file.</source>
         <translation>Ezin da fitxategia irakurri.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="128"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="151"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="131"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="154"/>
         <source>Unable to write file.</source>
         <translation>Ezin da fitxategian idatzi.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="138"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="141"/>
         <source>Save File</source>
         <translation>Gorde fitxategia</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="160"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="163"/>
         <source>Confirm Reset</source>
         <translation>Baieztatu berrezartzea</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="161"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="164"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Ziur ezarpenak berrezarri nahi dituzula?</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="170"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="173"/>
         <source>Show help message</source>
         <translation>Erakutsi laguntza-mezua</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="174"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="177"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Erakutsi laguntza-mezua argazki-hartze modua irekitzean.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="186"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="189"/>
         <source>Show the side panel button</source>
         <translation>Erakutsi aldeko paneleko botoia</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="189"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="192"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation>Erakutsi aldeko panela erakusteko botoia argazki-hartze moduan.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="199"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="203"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="202"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="206"/>
         <source>Show desktop notifications</source>
         <translation>Erakutsi mahaigaineko jakinarazpenak</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="215"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="218"/>
         <source>Show tray icon</source>
         <translation>Erakutsi ikonoa erretiluan</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="219"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="222"/>
         <source>Show the systemtray icon</source>
         <translation>Erakutsi ikonoa sistemako erretiluan</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="233"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="236"/>
         <source>Configuration File</source>
         <translation>Konfigurazio-fitxategia</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="238"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="241"/>
         <source>Export</source>
         <translation>Esportatu</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="252"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="255"/>
         <source>Reset</source>
         <translation>Berrezarri</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="262"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="265"/>
         <source>Launch at startup</source>
         <translation>Abiarazi saio-hasieran</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="266"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="269"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="283"/>
         <source>Launch Flameshot</source>
         <translation>Abiarazi Flamsehot</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="275"/>
-        <source>Close after capture</source>
-        <translation>Itxi argazkia egin ostean</translation>
+        <location filename="../../src/config/geneneralconf.cpp" line="279"/>
+        <source>Show welcome message on launch</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="279"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="294"/>
+        <source>Close application after capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close after capture</source>
+        <translation type="vanished">Itxi argazkia egin ostean</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="298"/>
         <source>Close after taking a screenshot</source>
         <translation>Itxi pantaila-argazkia egin ostean</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="291"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="310"/>
         <source>Copy URL after upload</source>
         <translation>Kopiatu URLa igo ostean</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="296"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="315"/>
         <source>Copy URL and close window after upload</source>
         <translation>Kopiatu URLa eta itxi leihoa igo ostean</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="306"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="325"/>
         <source>Save image after copy</source>
         <translation>Gorde irudia kopiatu ostean</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="307"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="326"/>
         <source>Save image file after copying it</source>
         <translation>Gorde irudia fitxategian kopiatu ostean</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="316"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="335"/>
         <source>Save Path</source>
         <translation>Gordetzeko bidea</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="328"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="347"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="408"/>
         <source>Change...</source>
         <translation>Aldatu...</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="345"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="372"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="375"/>
+        <source>Copy file path after save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="384"/>
+        <source>Select default path for Screenshots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="393"/>
+        <source>Use fixed path for screenshots to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="435"/>
         <source>Choose a Folder</source>
         <translation>Aukeratu karpeta</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="353"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="444"/>
         <source>Unable to write to directory.</source>
         <translation>Ezin da direktorioan idatzi.</translation>
     </message>
 </context>
 <context>
+    <name>HistoryWidget</name>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="30"/>
+        <source>Latest Uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="68"/>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="118"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">Kopiatu URLa</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="122"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">Arbelean kopiatu da URLa.</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="128"/>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Irudia igotzen</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="198"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">Arbelean kopiatu da URLa.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="222"/>
+        <source>Unable to remove screenshot from the remote storage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="224"/>
+        <source>Network error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="226"/>
+        <source>Possibly it doesn&apos;t exist anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="231"/>
+        <source>Do you want to remove screenshot from local history anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="235"/>
+        <source>Remove screenshot from history?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="252"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploader</name>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="46"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="46"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="52"/>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Irudia igotzen</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="52"/>
+        <source>Upload image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="90"/>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">Ezin da ireki URLa.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="97"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">Arbelean kopiatu da URLa.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="103"/>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">Arbelean kopiatu da pantaila-argazkia.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="112"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">Kopiatu URLa</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
+        <source>Open URL</source>
+        <translation type="unfinished">Ireki URLa</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
+        <source>Delete image</source>
+        <translation type="unfinished">Ezabatu irudia</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="175"/>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">Irudia arbelera.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
+    <message>
+        <location filename="../../src/tools/storage/imguploadertool.cpp" line="21"/>
+        <source>Image uploader tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="52"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="48"/>
         <source>Upload to Imgur</source>
         <translation>Igo Imgur-era</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="66"/>
         <source>Uploading Image</source>
-        <translation>Irudia igotzen</translation>
+        <translation type="vanished">Irudia igotzen</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="164"/>
         <source>Copy URL</source>
-        <translation>Kopiatu URLa</translation>
+        <translation type="vanished">Kopiatu URLa</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Open URL</source>
-        <translation>Ireki URLa</translation>
+        <translation type="vanished">Ireki URLa</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Delete image</source>
-        <translation>Ezabatu irudia</translation>
+        <translation type="vanished">Ezabatu irudia</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Image to Clipboard.</source>
-        <translation>Irudia arbelera.</translation>
+        <translation type="vanished">Irudia arbelera.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="191"/>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="205"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="127"/>
         <source>Unable to open the URL.</source>
         <translation>Ezin da ireki URLa.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="198"/>
         <source>URL copied to clipboard.</source>
-        <translation>Arbelean kopiatu da URLa.</translation>
+        <translation type="vanished">Arbelean kopiatu da URLa.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="212"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Arbelean kopiatu da pantaila-argazkia.</translation>
+        <translation type="vanished">Arbelean kopiatu da pantaila-argazkia.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="38"/>
+        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="28"/>
         <source>Image Uploader</source>
         <translation>Irudi igotzailea</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="48"/>
+        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="33"/>
         <source>Upload the selection to Imgur</source>
         <translation>Igo hautapena Imgur-era</translation>
     </message>
@@ -533,94 +728,78 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
         <translation>Honi buruz</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation>ZURIUNEA</translation>
+        <translation type="vanished">ZURIUNEA</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>Eskuin-klika</translation>
+        <translation type="vanished">Eskuin-klika</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>Saguaren gurpila</translation>
+        <translation type="vanished">Saguaren gurpila</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="67"/>
         <source>Move selection 1px</source>
-        <translation>Mugitu azalera 1px</translation>
+        <translation type="vanished">Mugitu azalera 1px</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="68"/>
         <source>Resize selection 1px</source>
-        <translation>Aldatu hautapenaren tamaina 1px</translation>
+        <translation type="vanished">Aldatu hautapenaren tamaina 1px</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="69"/>
         <source>Quit capture</source>
-        <translation>Irten argazki-hartzetik</translation>
+        <translation type="vanished">Irten argazki-hartzetik</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="70"/>
         <source>Copy to clipboard</source>
-        <translation>Kopiatu arbelean</translation>
+        <translation type="vanished">Kopiatu arbelean</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="71"/>
         <source>Save selection as a file</source>
-        <translation>Gorde hautapena fitxategi gisa</translation>
+        <translation type="vanished">Gorde hautapena fitxategi gisa</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="72"/>
         <source>Undo the last modification</source>
-        <translation>Desegin azken aldaketa</translation>
+        <translation type="vanished">Desegin azken aldaketa</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="73"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>Erakutsi/Ezkutatu alboko barra, hautatutako tresnaren aukerak erakusten dituena</translation>
+        <translation type="vanished">Erakutsi/Ezkutatu alboko barra, hautatutako tresnaren aukerak erakusten dituena</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="75"/>
         <source>Show color picker</source>
-        <translation>Erakutsi kolore hautagailua</translation>
+        <translation type="vanished">Erakutsi kolore hautagailua</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="76"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Aldatu tresnaren lodiera</translation>
+        <translation type="vanished">Aldatu tresnaren lodiera</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="82"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Argazki-hartze moduan erabili daitezken laster-teklak.</translation>
+        <translation type="vanished">Argazki-hartze moduan erabili daitezken laster-teklak.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="93"/>
         <source>Key</source>
-        <translation>Tekla</translation>
+        <translation type="vanished">Tekla</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="93"/>
         <source>Description</source>
-        <translation>Deskribapena</translation>
+        <translation type="vanished">Deskribapena</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="125"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="62"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Lizentzia&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="133"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="71"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Bertsioa&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Laster-teklak&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Laster-teklak&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
 </context>
 <context>
@@ -704,13 +883,13 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="110"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="119"/>
         <source>Save Error</source>
         <translation>Errorea gordetzean</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="105"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="108"/>
         <source>Capture saved as </source>
         <translation>Argazkia honela gorde da:</translation>
     </message>
@@ -726,9 +905,19 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="67"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="108"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="117"/>
         <source>Error trying to save as </source>
         <translation>Errorea honela gordetzean:</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="85"/>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="111"/>
+        <source>Capture is saved and copied to the clipboard as </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="84"/>
@@ -887,7 +1076,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
         <translation>Ezin da hemen idatzi:</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
         <translation>Arbelean kopiatu da URLa.</translation>
     </message>
@@ -918,8 +1107,93 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation>Lehenetsita Flameshot atzealdean abiarazten du   eta erretilu ikono bat gehitzen du ezarpenetarako.</translation>
+        <translation type="vanished">Lehenetsita Flameshot atzealdean abiarazten du   eta erretilu ikono bat gehitzen du ezarpenetarako.</translation>
+    </message>
+    <message>
+        <location filename="../../external/singleapplication/singleapplication.cpp" line="442"/>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="256"/>
+        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="24"/>
+        <source>Toggle side panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="48"/>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="51"/>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="54"/>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="57"/>
+        <source>Quit capture</source>
+        <translation type="unfinished">Irten argazki-hartzetik</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="59"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="64"/>
+        <source>Show color picker</source>
+        <translation type="unfinished">Erakutsi kolore hautagailua</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
+        <source>Change the tool&apos;s thickness</source>
+        <translation type="unfinished">Aldatu tresnaren lodiera</translation>
     </message>
 </context>
 <context>
@@ -983,6 +1257,47 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     </message>
 </context>
 <context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
+        <source>Set Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
+        <source>Enter new shortcut to change </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="43"/>
+        <source>Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="68"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">Argazki-hartze moduan erabili daitezken laster-teklak.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="80"/>
+        <source>Description</source>
+        <translation type="unfinished">Deskribapena</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="80"/>
+        <source>Key</source>
+        <translation type="unfinished">Tekla</translation>
+    </message>
+</context>
+<context>
     <name>SidePanelWidget</name>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="72"/>
@@ -995,12 +1310,12 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
         <translation>Uneko kolorea:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="205"/>
         <source>Press ESC to cancel</source>
         <translation>Sakatu IHES uzteko</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="209"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
         <source>Grab Color</source>
         <translation>Hartu kolorea</translation>
     </message>
@@ -1222,11 +1537,34 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     </message>
 </context>
 <context>
+    <name>UploadStorageConfig</name>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="109"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="122"/>
         <source>Close</source>
         <translation>Itxi</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="133"/>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

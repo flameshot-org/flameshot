@@ -1540,17 +1540,17 @@ You can find me in the system tray.</source>
 <context>
     <name>UploadStorageConfig</name>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="33"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
         <source>Upload storage</source>
         <translation>Сховище завантажень</translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="37"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
         <source>Imgur storage</source>
         <translation>Сховище Imgur</translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="44"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
         <source>S3 storage (require config.ini file with s3 credentials)</source>
         <translation>Сховище S3 (потрібен файл config.ini з обліковими даними s3)</translation>
     </message>
