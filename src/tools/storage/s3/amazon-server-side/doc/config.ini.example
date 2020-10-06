@@ -1,4 +1,9 @@
 [General]
+; Lock storage selection for the enterprise users
+; (it will lock to the default storage)
+STORAGE_LOCK=true
+
+; PROXY SETTINGS
 ;HTTP_PROXY_HOST=0.0.0.0
 ;HTTP_PROXY_PORT=3128
 
@@ -6,7 +11,7 @@
 ;HTTP_PROXY_USER=
 ;HTTP_PROXY_PASSWORD=
 
-HTTP_PROXY_TYPE=3
+;HTTP_PROXY_TYPE=3
 ; Proxy Types (3 is default):
 ; 0	Proxy is determined based on the application proxy set using setApplicationProxy()
 ; 1	Socks5 proxying is used

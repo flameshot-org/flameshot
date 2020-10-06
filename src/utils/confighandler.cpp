@@ -458,11 +458,24 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 
 void ConfigHandler::setUploadStorage(const QString& uploadStorage)
 {
-    m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
+    StorageManager storageManager;
+    if (storageManager.storageLocked()) {
+        m_settings.setValue(QStringLiteral("uploadStorage"),
+                            storageManager.storageDefault());
+    } else {
+        m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
+    }
 }
 
 const QString& ConfigHandler::uploadStorage()
 {
+    StorageManager storageManager;
+    // check for storage lock
+    if (storageManager.storageLocked()) {
+        setUploadStorage(storageManager.storageDefault());
+    }
+
+    // get storage
     m_strRes = m_settings.value(QStringLiteral("uploadStorage")).toString();
     if (m_strRes.isEmpty()) {
         StorageManager storageManager;
