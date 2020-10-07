@@ -374,7 +374,7 @@ jobs:
             ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
 
           cp \
-            $GITHUB_WORKSPACE/data/img/app/flameshot.png \
+            $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
             ${APPIMAGE_DST_PATH}/
 
           rm  ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
@@ -438,21 +438,21 @@ jobs:
           flatpak install -y --noninteractive flathub org.kde.Sdk//5.15 org.kde.Platform//5.15
       - name: Packaging flatpak
         run: |
-          BUNDLE="org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak"
-          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.flameshot.yml
+          BUNDLE="org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak"
+          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.Flameshot.yml
           RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
-          APP_ID="org.flameshot.flameshot"
+          APP_ID="org.flameshot.Flameshot"
           BRANCH="master"
 
           flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
           flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
-          mv $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak
+          mv $GITHUB_WORKSPACE/org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak
       - name: SHA256Sum of flatpak package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak
-          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak.sha256sum
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak.sha256sum
           echo "================flatpak sha256sum download link===================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak.sha256sum) 
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak.sha256sum)
           echo "========no operation for you can see link in the log console======="
       - name: Upload flatpak package(daily build)
         run: |
@@ -464,8 +464,8 @@ jobs:
         with:
           name: Linux-distribution-artifact
           path: |
-            ${{ github.workspace }}/org.flameshot.flameshot-*.${{ env.ARCH }}.flatpak
-            ${{ github.workspace }}/org.flameshot.flameshot-*.${{ env.ARCH }}.flatpak.sha256sum
+            ${{ github.workspace }}/org.flameshot.Flameshot-*.${{ env.ARCH }}.flatpak
+            ${{ github.workspace }}/org.flameshot.Flameshot-*.${{ env.ARCH }}.flatpak.sha256sum
 
   snap-pack:
     name: snap

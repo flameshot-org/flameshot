@@ -87,7 +87,7 @@ make %{?_smp_mflags}
 %{_datadir}/%{name}
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
-%{_datadir}/metainfo/flameshot.metainfo.xml
+%{_datadir}/metainfo/org.flameshot.Flameshot.metainfo.xml
 %{_datadir}/flameshot/translations
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completion/completions/%{name}
