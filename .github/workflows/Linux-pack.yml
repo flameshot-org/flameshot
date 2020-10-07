@@ -349,6 +349,8 @@ jobs:
             $GITHUB_WORKSPACE/data/img/app/flameshot.png \
             ${APPIMAGE_DST_PATH}/
 
+          rm  ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
+
           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool ${APPIMAGE_DST_PATH}
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage
       - name: SHA256Sum of appimage package(daily build)
