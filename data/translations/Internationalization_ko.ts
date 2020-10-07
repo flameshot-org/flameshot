@@ -305,28 +305,28 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="162"/>
         <source>Show help message</source>
-        <translation>도움 메세지를 보여줍니다</translation>
+        <translation type="unfinished">도움 메세지 보기</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="166"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation>캡처 모드 시작에 도움 메세지를 보여줍니다.</translation>
+        <translation>캡처 모드 시작에 도움 메세지 보기.</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="177"/>
         <location filename="../../src/config/geneneralconf.cpp" line="181"/>
         <source>Show desktop notifications</source>
-        <translation>데스크톱 알림을 사용합니다</translation>
+        <translation>데스크톱 알림 사용</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="194"/>
         <source>Show tray icon</source>
-        <translation>트레이 아이콘을 보임</translation>
+        <translation>트레이 아이콘 보기</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="198"/>
         <source>Show the systemtray icon</source>
-        <translation>시스템 트레이 아이콘을 보여줍니다</translation>
+        <translation>시스템 트레이 아이콘 보기</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="102"/>
@@ -386,7 +386,7 @@ Space로 사이드 패널을 엽니다.</translation>
         <location filename="../../src/config/geneneralconf.cpp" line="243"/>
         <source>Launch at startup</source>
         <translatorcomment>startup의 적절한 번역이 필요합니다.</translatorcomment>
-        <translation>시작할때 실행</translation>
+        <translation>컴퓨터를 시작할 때 실행</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="247"/>
@@ -396,22 +396,22 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="257"/>
         <source>Close after capture</source>
-        <translation type="unfinished">캡처 후 닫기</translation>
+        <translation>캡처 후 닫기</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="261"/>
         <source>Close after taking a screenshot</source>
-        <translation>스크린샷을 찍은 이후 닫기</translation>
+        <translation>스크린샷을 찍은 후 닫기</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="273"/>
         <source>Copy URL after upload</source>
-        <translation>업로드 이후 URL을 복사</translation>
+        <translation>업로드 이후 URL 복사</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="278"/>
         <source>Copy URL and close window after upload</source>
-        <translation>업로드 이후 URL을 복사하고 창을 닫음</translation>
+        <translation>업로드 이후 URL을 복사하고 창 닫기</translation>
     </message>
 </context>
 <context>
@@ -531,7 +531,7 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="73"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation></translation>
+        <translation>사이드바를 열어 선택한 도구의 옵션보기</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="74"/>
@@ -541,7 +541,7 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="75"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>도구의 두께를 바꿉니다</translation>
+        <translation>도구 두께 변경</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="93"/>
@@ -753,7 +753,8 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="46"/>
         <source>Rectangular Selection</source>
-        <translation>직사각형 선택</translation>
+        <translatorcomment>selection에 대한 적절한 번역이 필요합니다.</translatorcomment>
+        <translation>직사각형 Selection</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="58"/>
@@ -964,7 +965,7 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="119"/>
         <source>Select a Button to modify it</source>
-        <translation>변경할 버튼을 선택하세요</translation>
+        <translation>변경 할 버튼 선택</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
@@ -979,7 +980,7 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="144"/>
         <source>Contrast Color</source>
-        <translation>콘트래스트 색상</translation>
+        <translation>대비 색상</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="149"/>
@@ -1005,12 +1006,12 @@ Space로 사이드 패널을 엽니다.</translation>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="61"/>
         <source>Opacity of area outside selection:</source>
-        <translation>선택 영역 외의 불투명도:</translation>
+        <translation>선택 영역 외 불투명도:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="89"/>
         <source>Button Selection</source>
-        <translation>버튼 셀렉션</translation>
+        <translation>버튼 선택</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="95"/>
