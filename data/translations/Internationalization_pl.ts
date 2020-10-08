@@ -123,12 +123,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="101"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
         <source>Unable to capture screen</source>
         <translation>Nie można przechwycić ekranu</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="287"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="285"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -140,7 +140,7 @@ Prawy klik, aby pokazać próbnik kolorów.
 Spacja, aby pokazać panel boczny.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="664"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="666"/>
         <source>Tool Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,12 +148,12 @@ Spacja, aby pokazać panel boczny.</translation>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="37"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="38"/>
         <source>Circle Counter</source>
         <translation>Licznik</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="47"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="48"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Dodaj automatycznie zwiększający się bąbelek licznika</translation>
     </message>
@@ -601,58 +601,58 @@ Spacja, aby pokazać panel boczny.</translation>
 <context>
     <name>ImgUploader</name>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="43"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="46"/>
         <source>Upload image to S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="43"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="49"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="46"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="52"/>
         <source>Uploading Image</source>
         <translation type="unfinished">Wysyłanie obrazka</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="49"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="52"/>
         <source>Upload image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="80"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="90"/>
         <source>Unable to open the URL.</source>
         <translation type="unfinished">Nie można otworzyć adresu URL.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="87"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="97"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL skopiowany do schowka.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="93"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="103"/>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Zrzut ekranu skopiowany do schowka.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="112"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="162"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
         <source>Copy URL</source>
         <translation type="unfinished">Kopiuj URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="163"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
         <source>Open URL</source>
         <translation type="unfinished">Otwórz URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="164"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Delete image</source>
         <translation type="unfinished">Usuń obrazek</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="165"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="175"/>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Obrazek do schowka.</translation>
     </message>
@@ -661,7 +661,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <name>ImgUploaderTool</name>
     <message>
         <location filename="../../src/tools/storage/imguploadertool.cpp" line="21"/>
-        <source>Imgage uploader tool</source>
+        <source>Image uploader tool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -914,121 +914,121 @@ Spacja, aby pokazać panel boczny.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="112"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="111"/>
         <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="82"/>
-        <location filename="../../src/main.cpp" line="251"/>
-        <location filename="../../src/main.cpp" line="415"/>
-        <location filename="../../src/main.cpp" line="443"/>
-        <location filename="../../src/main.cpp" line="475"/>
+        <location filename="../../src/main.cpp" line="84"/>
+        <location filename="../../src/main.cpp" line="253"/>
+        <location filename="../../src/main.cpp" line="417"/>
+        <location filename="../../src/main.cpp" line="445"/>
+        <location filename="../../src/main.cpp" line="477"/>
         <source>Unable to connect via DBus</source>
         <translation>Nie udało się połączyć za pomocą DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="104"/>
+        <location filename="../../src/main.cpp" line="106"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Zaawansowany lecz prosty w użyciu program do zrzutów ekranu.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="105"/>
+        <location filename="../../src/main.cpp" line="107"/>
         <source>See</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="108"/>
+        <location filename="../../src/main.cpp" line="110"/>
         <source>Capture the entire desktop.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="110"/>
+        <location filename="../../src/main.cpp" line="112"/>
         <source>Open the capture launcher.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="113"/>
+        <location filename="../../src/main.cpp" line="115"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="115"/>
+        <location filename="../../src/main.cpp" line="117"/>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="117"/>
+        <location filename="../../src/main.cpp" line="119"/>
         <source>Capture a single screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="122"/>
+        <location filename="../../src/main.cpp" line="124"/>
         <source>Path where the capture will be saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="125"/>
+        <location filename="../../src/main.cpp" line="127"/>
         <source>Save the capture to the clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="127"/>
+        <location filename="../../src/main.cpp" line="129"/>
         <source>Delay time in milliseconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="130"/>
+        <location filename="../../src/main.cpp" line="132"/>
         <source>Set the filename pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="133"/>
+        <location filename="../../src/main.cpp" line="135"/>
         <source>Enable or disable the trayicon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="137"/>
+        <location filename="../../src/main.cpp" line="139"/>
         <source>Enable or disable run at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="141"/>
+        <location filename="../../src/main.cpp" line="143"/>
         <source>Show the help message in the capture mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="144"/>
+        <location filename="../../src/main.cpp" line="146"/>
         <source>Define the main UI color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="148"/>
+        <location filename="../../src/main.cpp" line="150"/>
         <source>Define the contrast UI color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="151"/>
+        <location filename="../../src/main.cpp" line="153"/>
         <source>Print raw PNG capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="154"/>
+        <location filename="../../src/main.cpp" line="156"/>
         <source>Define the screen to capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="155"/>
+        <location filename="../../src/main.cpp" line="157"/>
         <source>default: screen containing the cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="156"/>
+        <location filename="../../src/main.cpp" line="158"/>
         <source>Screen number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="165"/>
+        <location filename="../../src/main.cpp" line="167"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -1039,22 +1039,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="174"/>
+        <location filename="../../src/main.cpp" line="176"/>
         <source>Invalid delay, it must be higher than 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="176"/>
+        <location filename="../../src/main.cpp" line="178"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="183"/>
+        <location filename="../../src/main.cpp" line="185"/>
         <source>Invalid path, it must be a real path in the system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="194"/>
+        <location filename="../../src/main.cpp" line="196"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1532,17 +1532,17 @@ You can find me in the system tray.</source>
 <context>
     <name>UploadStorageConfig</name>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="33"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
         <source>Upload storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="37"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
         <source>Imgur storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="44"/>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
         <source>S3 storage (require config.ini file with s3 credentials)</source>
         <translation type="unfinished"></translation>
     </message>

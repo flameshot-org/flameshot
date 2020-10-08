@@ -18,7 +18,7 @@ void ImgUploaderTool::pressed(const CaptureContext& context)
 
 QString ImgUploaderTool::name() const
 {
-    return tr("Imgage uploader tool");
+    return tr("Image uploader tool");
 }
 
 const QPixmap& ImgUploaderTool::capture()

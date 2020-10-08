@@ -17,6 +17,7 @@
 
 #include "uploadstorageconfig.h"
 #include "src/tools/storage/imgstorages.h"
+#include "src/tools/storage/storagemanager.h"
 #include "src/utils/confighandler.h"
 
 #include <QCheckBox>
@@ -45,6 +46,13 @@ UploadStorageConfig::UploadStorageConfig(QWidget* parent)
     connect(storageImgS3, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadStorage(SCREENSHOT_STORAGE_TYPE_S3);
     });
+
+    StorageManager storageManager;
+    if (storageManager.storageLocked()) {
+        ConfigHandler().setUploadStorage(storageManager.storageDefault());
+        storageImgUr->setDisabled(true);
+        storageImgS3->setDisabled(true);
+    }
 
     // set current storage radiobutton active
     if (ConfigHandler().uploadStorage() == SCREENSHOT_STORAGE_TYPE_IMGUR) {

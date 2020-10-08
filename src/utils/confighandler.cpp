@@ -124,31 +124,25 @@ void ConfigHandler::setUserColors(const QVector<QColor>& l)
                         QVariant::fromValue(hexColors));
 }
 
-QString ConfigHandler::savePathValue()
+QString ConfigHandler::savePath()
 {
-    QString savePath =
-      m_settings.value(QStringLiteral("savePathFixed")).toString();
-    if (savePath.isEmpty()) {
-        savePath = m_settings.value(QStringLiteral("savePath")).toString();
-    }
-    return savePath;
+    return m_settings.value(QStringLiteral("savePath")).toString();
 }
 
 void ConfigHandler::setSavePath(const QString& savePath)
 {
-    QString savePathFixed =
-      m_settings.value(QStringLiteral("savePathFixed")).toString();
-    if (savePathFixed.isEmpty()) {
-        m_settings.setValue(QStringLiteral("savePath"), savePath);
-    }
+    m_settings.setValue(QStringLiteral("savePath"), savePath);
 }
 
-QString ConfigHandler::savePathFixed()
+bool ConfigHandler::savePathFixed()
 {
-    return m_settings.value(QStringLiteral("savePathFixed")).toString();
+    if (!m_settings.contains(QStringLiteral("savePathFixed"))) {
+        m_settings.setValue(QStringLiteral("savePathFixed"), false);
+    }
+    return m_settings.value(QStringLiteral("savePathFixed")).toBool();
 }
 
-void ConfigHandler::setSavePathFixed(const QString& savePathFixed)
+void ConfigHandler::setSavePathFixed(bool savePathFixed)
 {
     m_settings.setValue(QStringLiteral("savePathFixed"), savePathFixed);
 }
@@ -305,16 +299,13 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
 
 bool ConfigHandler::startupLaunchValue()
 {
-    bool res = false;
-
+    bool res = true;
     if (m_settings.contains(QStringLiteral("startupLaunch"))) {
         res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
     }
-
     if (res != verifyLaunchFile()) {
         setStartupLaunch(res);
     }
-
     return res;
 }
 
@@ -467,11 +458,24 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 
 void ConfigHandler::setUploadStorage(const QString& uploadStorage)
 {
-    m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
+    StorageManager storageManager;
+    if (storageManager.storageLocked()) {
+        m_settings.setValue(QStringLiteral("uploadStorage"),
+                            storageManager.storageDefault());
+    } else {
+        m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
+    }
 }
 
 const QString& ConfigHandler::uploadStorage()
 {
+    StorageManager storageManager;
+    // check for storage lock
+    if (storageManager.storageLocked()) {
+        setUploadStorage(storageManager.storageDefault());
+    }
+
+    // get storage
     m_strRes = m_settings.value(QStringLiteral("uploadStorage")).toString();
     if (m_strRes.isEmpty()) {
         StorageManager storageManager;
