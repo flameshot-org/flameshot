@@ -73,7 +73,7 @@ void FileNameHandler::setPattern(const QString& pattern)
 QString FileNameHandler::absoluteSavePath(QString& directory, QString& filename)
 {
     ConfigHandler config;
-    directory = config.savePathValue();
+    directory = config.savePath();
     if (directory.isEmpty() || !QDir(directory).exists() ||
         !QFileInfo(directory).isWritable()) {
         directory =
