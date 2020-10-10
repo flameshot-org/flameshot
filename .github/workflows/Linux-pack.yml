@@ -46,10 +46,17 @@ jobs:
             }
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
           ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -102,12 +109,19 @@ jobs:
       image: vitzy/flameshot:ubuntu-bionic
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         # Because git version < 2.18(ubuntu 18.04), so only actions/checkout@v1 can be used.
         # If you use actions/checkout@v2, you will have no .git folder.
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
           ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v1
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -199,10 +213,17 @@ jobs:
             }
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
           ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -285,10 +306,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
           ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -378,10 +406,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
           ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -437,10 +472,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
           ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
