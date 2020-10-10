@@ -224,8 +224,8 @@ void Controller::enableTrayIcon()
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
     m_trayIcon->setContextMenu(trayIconMenu);
-    QIcon trayicon =
-      QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
+    QIcon trayicon = QIcon::fromTheme(
+      "flameshot-tray", QIcon(":img/app/org.flameshot.Flameshot.png"));
     m_trayIcon->setIcon(trayicon);
 
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
@@ -260,7 +260,7 @@ void Controller::sendTrayNotification(const QString& text,
 {
     if (m_trayIcon) {
         m_trayIcon->showMessage(
-          title, text, QIcon(":img/app/flameshot.svg"), timeout);
+          title, text, QIcon(":img/app/org.flameshot.Flameshot.svg"), timeout);
     }
 }
 
