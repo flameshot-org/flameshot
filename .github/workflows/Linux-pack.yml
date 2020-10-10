@@ -121,7 +121,7 @@ jobs:
         uses: actions/checkout@v1
         with: 
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: refs/pull/${{ github.event.number }}/head
       - name: Set env & Print flameshot version
         shell: bash
         run: |
