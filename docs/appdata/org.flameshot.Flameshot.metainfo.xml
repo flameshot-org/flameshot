@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>org.flameshot.flameshot</id>
+  <id>org.flameshot.Flameshot</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Flameshot</name>
@@ -28,6 +28,6 @@
   </screenshots>
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
-  <launchable type="desktop-id">flameshot.desktop</launchable>
+  <launchable type="desktop-id">org.flameshot.Flameshot.desktop</launchable>
 
 </component>
