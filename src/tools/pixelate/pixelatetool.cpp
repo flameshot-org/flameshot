@@ -89,7 +89,7 @@ void PixelateTool::process(QPainter& painter,
         int width = selection.width() * (0.5 / qMax(1, m_thickness));
 
         QPixmap t = pixmap.copy(selection);
-        t = t.scaledToWidth(qMax(width, 10), Qt::SmoothTransformation);
+        t = t.scaledToWidth(qMax(width, 1), Qt::SmoothTransformation);
         t = t.scaledToWidth(selection.width());
         painter.drawImage(selection, t.toImage());
     }
