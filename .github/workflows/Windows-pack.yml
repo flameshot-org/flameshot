@@ -52,10 +52,18 @@ jobs:
 
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
           ref: master
+
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set env & Print flameshot version
         shell: bash
