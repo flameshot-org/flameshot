@@ -7,7 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Source code
+      if: github.event_name == 'push'
+      uses: actions/checkout@v2
+    - name: Checkout Source code
+      if: github.event_name == 'pull_request'
+      uses: actions/checkout@v2
+      with: 
+        ref: ${{ github.event.pull_request.head.sha }}
     - uses: DoozyX/clang-format-lint-action@v0.9
       with:
         source: './src'
