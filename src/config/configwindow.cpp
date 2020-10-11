@@ -37,9 +37,9 @@ ConfigWindow::ConfigWindow(QWidget* parent)
   : QTabWidget(parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setMinimumSize(GlobalValues::buttonBaseSize() * 14,
-                   GlobalValues::buttonBaseSize() * 12);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    const int size = GlobalValues::buttonBaseSize() * 12;
+    setMinimumSize(size, size);
+    setWindowIcon(QIcon(":img/app/org.flameshot.Flameshot.svg"));
     setWindowTitle(tr("Configuration"));
 
     auto changedSlot = [this](QString s) {

@@ -1,5 +1,5 @@
 Name: flameshot
-Version: 0.8.3
+Version: 0.8.4
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 Summary(eu-ES): Potente pero simple de usar software de capturas
@@ -71,7 +71,7 @@ make %{?_smp_mflags}
 
 %if 0%{?is_opensuse}
 %if 0%{?suse_version} >= 1500
-%suse_update_desktop_file %{name} Graphics
+%suse_update_desktop_file org.flameshot.Flameshot Graphics
 %endif
 %endif
 
@@ -87,14 +87,16 @@ make %{?_smp_mflags}
 %{_datadir}/%{name}
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
-%{_datadir}/metainfo/flameshot.metainfo.xml
+%{_datadir}/metainfo/org.flameshot.Flameshot.metainfo.xml
 %{_datadir}/flameshot/translations
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/org.flameshot.Flameshot.desktop
 %{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/zsh/site-functions/_%{name}
 %{_datadir}/icons/hicolor
 
 %changelog
+* Sat Oct 10 2020 Jeremy Borgman <borgman.jeremy@pm.me> - 0.8.4-1
+- Updated for flameshot 0.8.4
 * Mon Sep 19 2020 Jeremy Borgman <borgman.jeremy@pm.me> - 0.8.3-1
 - Updated for flameshot 0.8.3
 * Mon Sep 07 2020 Zetao Yang <vitzys@outlook.com> - 0.8.0-1
