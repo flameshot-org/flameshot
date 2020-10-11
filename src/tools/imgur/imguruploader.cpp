@@ -50,7 +50,7 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
   , m_pixmap(capture)
 {
     setWindowTitle(tr("Upload to Imgur"));
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(":img/app/org.flameshot.Flameshot.svg"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
