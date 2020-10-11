@@ -108,7 +108,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
             QString msg = QObject::tr("Error trying to save as ") + savePath;
             QMessageBox saveErrBox(
               QMessageBox::Warning, QObject::tr("Save Error"), msg);
-            saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
+            saveErrBox.setWindowIcon(
+              QIcon(":img/app/org.flameshot.Flameshot.svg"));
             saveErrBox.exec();
         }
     }
