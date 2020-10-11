@@ -46,10 +46,17 @@ jobs:
             }
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
 #          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -102,12 +109,19 @@ jobs:
       image: vitzy/flameshot:ubuntu-bionic
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         # Because git version < 2.18(ubuntu 18.04), so only actions/checkout@v1 can be used.
         # If you use actions/checkout@v2, you will have no .git folder.
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
 #          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+          ref: refs/pull/${{ github.event.number }}/head
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -199,10 +213,17 @@ jobs:
             }
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
 #          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -285,10 +306,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
 #          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -338,7 +366,7 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr
           make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
 
-          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/flameshot.desktop
+          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop
 
           mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
           cp \
@@ -346,8 +374,10 @@ jobs:
             ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
 
           cp \
-            $GITHUB_WORKSPACE/data/img/app/flameshot.png \
+            $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
             ${APPIMAGE_DST_PATH}/
+
+          rm  ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
 
           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool ${APPIMAGE_DST_PATH}
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage
@@ -376,10 +406,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 #          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
@@ -401,21 +438,21 @@ jobs:
           flatpak install -y --noninteractive flathub org.kde.Sdk//5.15 org.kde.Platform//5.15
       - name: Packaging flatpak
         run: |
-          BUNDLE="org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak"
-          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.flameshot.yml
+          BUNDLE="org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak"
+          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.Flameshot.yml
           RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
-          APP_ID="org.flameshot.flameshot"
+          APP_ID="org.flameshot.Flameshot"
           BRANCH="master"
 
           flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
           flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
-          mv $GITHUB_WORKSPACE/org.flameshot.flameshot_${VERSION}_${ARCH}.flatpak $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak
+          mv $GITHUB_WORKSPACE/org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak
       - name: SHA256Sum of flatpak package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak
-          sha256sum $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak.sha256sum
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak.sha256sum
           echo "================flatpak sha256sum download link===================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak.sha256sum)
           echo "========no operation for you can see link in the log console======="
       - name: Upload flatpak package(daily build)
         run: |
@@ -427,18 +464,25 @@ jobs:
         with:
           name: Linux-distribution-artifact
           path: |
-            ${{ github.workspace }}/org.flameshot.flameshot-*.${{ env.ARCH }}.flatpak
-            ${{ github.workspace }}/org.flameshot.flameshot-*.${{ env.ARCH }}.flatpak.sha256sum
+            ${{ github.workspace }}/org.flameshot.Flameshot-*.${{ env.ARCH }}.flatpak
+            ${{ github.workspace }}/org.flameshot.Flameshot-*.${{ env.ARCH }}.flatpak.sha256sum
 
   snap-pack:
     name: snap
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
 #          ref: master
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Set env & Print flameshot version
         shell: bash
         run: |
