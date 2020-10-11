@@ -1,5 +1,5 @@
 Name: flameshot
-Version: 0.8.3
+Version: 0.8.4
 Release: 1%{?dist}
 Summary: Powerful yet simple to use screenshot software
 Summary(eu-ES): Potente pero simple de usar software de capturas
@@ -95,6 +95,8 @@ make %{?_smp_mflags}
 %{_datadir}/icons/hicolor
 
 %changelog
+* Sat Oct 10 2020 Jeremy Borgman <borgman.jeremy@pm.me> - 0.8.4-1
+- Updated for flameshot 0.8.4
 * Mon Sep 19 2020 Jeremy Borgman <borgman.jeremy@pm.me> - 0.8.3-1
 - Updated for flameshot 0.8.3
 * Mon Sep 07 2020 Zetao Yang <vitzys@outlook.com> - 0.8.0-1
