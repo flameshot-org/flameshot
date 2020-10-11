@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>img/app/org.flameshot.Flameshot.svg</file>
         <file>img/app/org.flameshot.Flameshot.png</file>
+        <file>img/app/keyboard.svg</file>
         <file>img/material/black/delete.svg</file>
         <file>img/material/black/undo-variant.svg</file>
         <file>img/material/black/text.svg</file>
