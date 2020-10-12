@@ -36,7 +36,7 @@ InfoWindow::InfoWindow(QWidget* parent)
   : QWidget(parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/org.flameshot.Flameshot.svg"));
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("About"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
