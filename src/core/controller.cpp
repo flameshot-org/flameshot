@@ -239,8 +239,8 @@ void Controller::enableTrayIcon()
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
     m_trayIcon->setContextMenu(trayIconMenu);
-    QIcon trayicon =
-      QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
+    QIcon trayicon = QIcon::fromTheme(
+      "flameshot-tray", QIcon(":img/app/org.flameshot.Flameshot.png"));
     m_trayIcon->setIcon(trayicon);
 
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
@@ -249,6 +249,13 @@ void Controller::enableTrayIcon()
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+
+#ifdef Q_OS_WIN
+    // Ensure proper removal of tray icon when program quits on Windows.
+    connect(
+      qApp, &QCoreApplication::aboutToQuit, m_trayIcon, &QSystemTrayIcon::hide);
+#endif
+
     m_trayIcon->show();
     if (ConfigHandler().showStartupLaunchMessage()) {
         m_trayIcon->showMessage(
@@ -277,7 +284,7 @@ void Controller::sendTrayNotification(const QString& text,
 {
     if (m_trayIcon) {
         m_trayIcon->showMessage(
-          title, text, QIcon(":img/app/flameshot.svg"), timeout);
+          title, text, QIcon(":img/app/org.flameshot.Flameshot.svg"), timeout);
     }
 }
 

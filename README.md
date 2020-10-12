@@ -2,7 +2,7 @@
   <p>
     <h1>
       <a href="https://github.com/flameshot-org/flameshot">
-        <img src="data/img/app/flameshot.svg" alt="Flameshot" />
+        <img src="data/img/app/org.flameshot.Flameshot.svg" alt="Flameshot" />
       </a>
       <br />
       Flameshot

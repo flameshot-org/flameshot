@@ -17,7 +17,7 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
         m_shortcuts << (QStringList()
                         << shortcutName << b->tool()->description()
                         << ks.toString());
-        b->close();
+        delete b;
     }
 
     m_shortcuts << (QStringList()
