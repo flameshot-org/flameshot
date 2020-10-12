@@ -26,7 +26,7 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent)
   : QDialog(parent)
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(":img/app/org.flameshot.Flameshot.svg"));
     setWindowTitle(tr("Set Shortcut"));
     m_ks = QKeySequence();
 
