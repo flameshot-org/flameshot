@@ -20,7 +20,6 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
-#include <QTableWidget>
 #include <QVBoxLayout>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
