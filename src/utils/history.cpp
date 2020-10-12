@@ -2,6 +2,7 @@
 #include "src/utils/confighandler.h"
 #include <QDir>
 #include <QFile>
+#include <QProcessEnvironment>
 #include <QStringList>
 
 History::History()
@@ -11,7 +12,9 @@ History::History()
 #ifdef Q_OS_WIN
     m_historyPath = QDir::homePath() + "/AppData/Roaming/flameshot/history/";
 #else
-    m_historyPath = QDir::homePath() + "/.cache/flameshot/history/";
+    QString path = QProcessEnvironment::systemEnvironment().value(
+      "XDG_CACHE_HOME", QDir::homePath() + "/.cache");
+    m_historyPath = path + "/flameshot/history/";
 #endif
 
     // Check if directory for history exists and create if doesn't
