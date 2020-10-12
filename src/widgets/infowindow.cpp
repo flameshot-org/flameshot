@@ -20,7 +20,6 @@
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
-#include <QTableWidget>
 #include <QVBoxLayout>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
@@ -55,7 +54,7 @@ InfoWindow::InfoWindow(QWidget* parent)
 void InfoWindow::initLabels()
 {
     QLabel* icon = new QLabel();
-    icon->setPixmap(QPixmap(":img/app/flameshot.svg"));
+    icon->setPixmap(QPixmap(":img/app/org.flameshot.Flameshot.svg"));
     icon->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(icon);
 
