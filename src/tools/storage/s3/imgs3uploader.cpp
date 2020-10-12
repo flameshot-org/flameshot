@@ -65,7 +65,7 @@ void ImgS3Uploader::init(const QString& title, const QString& label)
 
     resultStatus = false;
     setWindowTitle(title);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(":img/app/org.flameshot.Flameshot.svg"));
 }
 
 QNetworkProxy* ImgS3Uploader::proxy()
