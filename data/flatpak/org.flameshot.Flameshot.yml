@@ -3,6 +3,9 @@ runtime: org.kde.Platform
 runtime-version: '5.15'
 sdk: org.kde.Sdk
 command: flameshot
+rename-icon: "flameshot"
+rename-desktop-file: "flameshot.desktop"
+rename-appdata-file: "flameshot.metainfo.xml"
 finish-args:
   # X11 + XShm access
   - --share=ipc

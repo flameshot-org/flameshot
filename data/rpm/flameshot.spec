@@ -71,7 +71,7 @@ make %{?_smp_mflags}
 
 %if 0%{?is_opensuse}
 %if 0%{?suse_version} >= 1500
-%suse_update_desktop_file org.flameshot.Flameshot Graphics
+%suse_update_desktop_file %{name} Graphics
 %endif
 %endif
 
@@ -87,9 +87,9 @@ make %{?_smp_mflags}
 %{_datadir}/%{name}
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
-%{_datadir}/metainfo/org.flameshot.Flameshot.metainfo.xml
+%{_datadir}/metainfo/flameshot.metainfo.xml
 %{_datadir}/flameshot/translations
-%{_datadir}/applications/org.flameshot.Flameshot.desktop
+%{_datadir}/applications/%{name}.desktop
 %{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/zsh/site-functions/_%{name}
 %{_datadir}/icons/hicolor

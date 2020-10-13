@@ -29,6 +29,6 @@
   </screenshots>
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
-  <launchable type="desktop-id">org.flameshot.Flameshot.desktop</launchable>
+  <launchable type="desktop-id">flameshot.desktop</launchable>
 
 </component>

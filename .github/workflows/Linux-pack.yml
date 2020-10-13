@@ -366,7 +366,7 @@ jobs:
           cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr
           make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
 
-          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop
+          $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/flameshot.desktop
 
           mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
           cp \
@@ -374,7 +374,7 @@ jobs:
             ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
 
           cp \
-            $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
+            $GITHUB_WORKSPACE/data/img/app/flameshot.png \
             ${APPIMAGE_DST_PATH}/
 
           rm  ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
@@ -457,7 +457,7 @@ jobs:
       - name: Upload flatpak package(daily build)
         run: |
           echo "=====================flatpak download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak) 
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak) 
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2

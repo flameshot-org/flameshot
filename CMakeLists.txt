@@ -53,7 +53,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Powerful yet simple to use screenshot sof
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_HOMEPAGE_URL "https://flameshot.org")
 set(CPACK_PACKAGE_CONTACT "flameshot-org developers <info@flameshot.org>")
-set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/data/img/app/org.flameshot.Flameshot.svg") # TODO: Can any generator make use of this?
+set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/data/img/app/flameshot.svg") # TODO: Can any generator make use of this?
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md") # TODO: Where is this used? Do we need a better source?
 
 if(WIN32)
