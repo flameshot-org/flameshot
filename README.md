@@ -65,6 +65,8 @@
   - [Build](#build)
   - [Install](#install)
 - [License](#license)
+- [Privacy Policy](#privacy-policy)
+- [Code Signing Policy](#code-signing-policy)
 - [Contribute](#contribute)
 - [Acknowledgment](#acknowledgment)
 
@@ -367,11 +369,17 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
+## Privacy Policy
+This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
+
+
+## Code Signing Policy
+Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
+
+Code signing is currently a manual process so not every patch release will be signed. 
+
 ## Contribute
-
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
-
-
 
 ## Acknowledgment
 Thanks to those who have shown interest in the early development process:
@@ -380,3 +388,7 @@ Thanks to those who have shown interest in the early development process:
 - [XerTheSquirrel](https://github.com/XerTheSquirrel)
 - [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)
 - ismatori
+
+Thanks to sponsors:
+- JetBrains
+- SignPath
