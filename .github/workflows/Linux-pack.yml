@@ -457,7 +457,7 @@ jobs:
       - name: Upload flatpak package(daily build)
         run: |
           echo "=====================flatpak download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak) 
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2
