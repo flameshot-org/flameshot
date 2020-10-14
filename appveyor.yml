@@ -5,6 +5,7 @@ clone_folder: c:\projects\source
 environment:
   Qt5_INSTALL_DIR: 'C:\Qt\5.15.0\msvc2019_64'
   PATH: '%Qt5_INSTALL_DIR%\bin;%PATH%'
+
 build_script:
 - cmd: >-
 
@@ -16,5 +17,30 @@ build_script:
 
     cmake c:\projects\source -G "Visual Studio 16 2019" -DCMAKE_BUILD_TYPE:STRING=Release
 
-    cmake --build . --config "Release"
+    cmake --build . --parallel 2 --config "Release"
+ 
+    cpack -G WIX -B package
 
+    mkdir artifact
+    
+    dir
+
+    cp package/*.msi artifact/.
+
+    cp src/Release/*.exe artifact/.
+
+    7z a -tzip artifact.zip artifact/
+
+artifacts:
+- path: build\package\*.msi
+  name: installer
+- path: build\src\Release\*.exe
+  name: executable
+- path: build\artifact.zip
+  name: archive
+
+deploy:
+- provider: Webhook
+  url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=test-signing
+  authorization:
+    secure: G5nNnkfRSJ+EEx+7LlUSSoEyoL+pHYItvjrNxbWITE7RB+cm9qzuHRdwmrZdEDjdVCLZ2TkNawynMxYcGMZAQA== 
