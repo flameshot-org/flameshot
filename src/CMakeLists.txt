@@ -13,6 +13,9 @@ find_package(
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(QAPPLICATION_CLASS
+    QApplication
+    CACHE STRING "Inheritance class for SingleApplication")
 
 add_executable(flameshot)
 
@@ -116,7 +119,8 @@ target_link_libraries(
   Qt5::Svg
   Qt5::DBus
   Qt5::Network
-  Qt5::Widgets)
+  Qt5::Widgets
+  SingleApplication::SingleApplication)
 
 set(USE_OPENSSL FALSE)
 if(ENABLE_OPENSSL)
@@ -149,6 +153,7 @@ endforeach()
 
 # ######################################################################################################################
 # Installation instructions
+# ######################################################################################################################
 
 include(GNUInstallDirs)
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Flameshot)
@@ -188,7 +193,7 @@ configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/org.flameshot.F
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/org.flameshot.Flameshot.svg
                ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg COPYONLY)
 
-## Install icon with both names
+# Install icon with both names
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/flameshot.png
                ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/flameshot.png COPYONLY)
 
@@ -198,13 +203,11 @@ configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/flameshot.png
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/flameshot.svg
                ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/flameshot.svg COPYONLY)
 
-
 # Install assets
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
 
 # Install Translations
 install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)
-
 
 # windeployqt
 if(WIN32)
@@ -216,19 +219,18 @@ if(WIN32)
     endif()
 
     add_custom_command(
-      TARGET flameshot POST_BUILD
+      TARGET flameshot
+      POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
-      COMMAND $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations  --compiler-runtime --no-system-d3d-compiler --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
-      # copy translations manually
-      # QM_FILES
+      COMMAND
+        $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
+        --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
+      # copy translations manually QM_FILES
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
-      COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
-    )
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations
+              ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations)
 
-    install(
-      DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/
-      DESTINATION bin
-    )
+    install(DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/ DESTINATION bin)
 
     if (ENABLE_OPENSSL)
       if (EXISTS $ENV{OPENSSL_ROOT_DIR}/bin)
