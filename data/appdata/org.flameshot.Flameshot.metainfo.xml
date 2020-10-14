@@ -5,6 +5,7 @@
   <project_license>GPL-3.0-or-later</project_license>
   <name>Flameshot</name>
   <releases> 
+    <release version="0.8.5" date="2020-10-14"/>
     <release version="0.8.4" date="2020-10-10"/>
     <release version="0.8.3" date="2020-09-28"/>
     <release version="0.8.1" date="2020-09-23"/>

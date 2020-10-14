@@ -15,8 +15,6 @@ confinement: strict  # use 'strict' once you have the right plugs and slots
 #confinement: devmode  # use 'strict' once you have the right plugs and slots
 architectures:
   - build-on: amd64
-  - build-on: i386
-
 
 apps:
   flameshot:
