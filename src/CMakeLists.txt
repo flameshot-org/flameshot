@@ -130,6 +130,7 @@ foreach(FILE ${QM_FILES})
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/${F_NAME}
             ${CMAKE_CURRENT_BINARY_DIR}/translations/${F_NAME})
 endforeach()
+
 # ######################################################################################################################
 # Installation instructions
 
@@ -143,16 +144,16 @@ install(
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install desktop files, completion and dbus files
-configure_file(${CMAKE_SOURCE_DIR}/docs/desktopEntry/package/org.flameshot.Flameshot.desktop
+configure_file(${CMAKE_SOURCE_DIR}/data/desktopEntry/package/org.flameshot.Flameshot.desktop
                ${CMAKE_CURRENT_BINARY_DIR}/share/applications/org.flameshot.Flameshot.desktop COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/docs/appdata/org.flameshot.Flameshot.metainfo.xml
+configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
                ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/docs/shell-completion/flameshot
+configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
                ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/docs/shell-completion/flameshot
+configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
                ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
 
 configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
