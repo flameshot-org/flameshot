@@ -23,7 +23,7 @@ env:
   # docker images, see https://hub.docker.com/r/vitzy/flameshot
   # vitzy/flameshot or packpack/packpack
   DOCKER_REPO: vitzy/flameshot
-  # upload services: 0x0.st, file.io, transfer.sh, wetransfer.com
+  # upload services: wetransfer.com, file.io, 0x0.st
   UPLOAD_SERVICE: wetransfer.com
 
 jobs:
@@ -67,7 +67,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v2
         with:
@@ -132,7 +132,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
           apt-get -y -qq update
@@ -234,7 +234,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Get packpack tool
         uses: actions/checkout@v2
         with:
@@ -327,7 +327,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Install Dependencies
         run: |
           sudo apt-get -y -qq update
@@ -427,7 +427,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Setup flatpak
         run: |
           sudo apt-get -y -qq update
@@ -493,8 +493,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
-
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
