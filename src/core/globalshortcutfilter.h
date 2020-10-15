@@ -17,15 +17,20 @@
 
 #pragma once
 
-#include <QObject>
 #include <QAbstractNativeEventFilter>
+#include <QObject>
 
-class GlobalShortcutFilter : public QObject, public QAbstractNativeEventFilter {
+class GlobalShortcutFilter
+  : public QObject
+  , public QAbstractNativeEventFilter
+{
     Q_OBJECT
 public:
-    explicit GlobalShortcutFilter(QObject *parent = nullptr);
+    explicit GlobalShortcutFilter(QObject* parent = nullptr);
 
-    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result);
+    bool nativeEventFilter(const QByteArray& eventType,
+                           void* message,
+                           long* result);
 
 signals:
     void printPressed();

@@ -17,46 +17,50 @@
 
 #pragma once
 
-#include "capturebutton.h"
-#include <QVector>
+#include "capturetoolbutton.h"
 #include <QObject>
 #include <QRegion>
+#include <QVector>
 
-class CaptureButton;
+class CaptureToolButton;
 class QRect;
 class QPoint;
 
-class ButtonHandler : public QObject {
+class ButtonHandler : public QObject
+{
     Q_OBJECT
 public:
-    ButtonHandler(const QVector<CaptureButton*>&, QObject *parent = nullptr);
-    explicit ButtonHandler(QObject *parent = nullptr);
+    ButtonHandler(const QVector<CaptureToolButton*>&,
+                  QObject* parent = nullptr);
+    explicit ButtonHandler(QObject* parent = nullptr);
 
-    void hideSectionUnderMouse(const QPoint &p);
+    void hideSectionUnderMouse(const QPoint& p);
 
     bool isVisible() const;
     bool buttonsAreInside() const;
     size_t size() const;
 
-    void setButtons(const QVector<CaptureButton*>);
-    bool contains(const QPoint &p) const;
-    void updateScreenRegions(const QVector<QRect> &rects);
-    void updateScreenRegions(const QRect &rect);
+    void setButtons(const QVector<CaptureToolButton*>);
+    bool contains(const QPoint& p) const;
+    void updateScreenRegions(const QVector<QRect>& rects);
+    void updateScreenRegions(const QRect& rect);
 
 public slots:
-    void updatePosition(const QRect &selection);
+    void updatePosition(const QRect& selection);
     void hide();
     void show();
 
 private:
-    QVector<QPoint> horizontalPoints(const QPoint &center, const int elements,
-                               const bool leftToRight) const;
-    QVector<QPoint> verticalPoints(const QPoint &center, const int elements,
-                               const bool upToDown) const;
+    QVector<QPoint> horizontalPoints(const QPoint& center,
+                                     const int elements,
+                                     const bool leftToRight) const;
+    QVector<QPoint> verticalPoints(const QPoint& center,
+                                   const int elements,
+                                   const bool upToDown) const;
 
-    QRect intersectWithAreas(const QRect &rect);
+    QRect intersectWithAreas(const QRect& rect);
 
-    QVector<CaptureButton*> m_vectorButtons;
+    QVector<CaptureToolButton*> m_vectorButtons;
 
     QRegion m_screenRegions;
 
@@ -82,6 +86,6 @@ private:
     void expandSelection();
     void positionButtonsInside(int index);
     void ensureSelectionMinimunSize();
-    void moveButtonsToPoints(const QVector<QPoint> &points, int &index);
-    void adjustHorizontalCenter(QPoint &center);
+    void moveButtonsToPoints(const QVector<QPoint>& points, int& index);
+    void adjustHorizontalCenter(QPoint& center);
 };

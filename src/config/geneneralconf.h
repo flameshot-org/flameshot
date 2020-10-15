@@ -22,42 +22,63 @@
 class QVBoxLayout;
 class QCheckBox;
 class QPushButton;
+class QLabel;
+class QLineEdit;
 
-class GeneneralConf : public QWidget {
+class GeneneralConf : public QWidget
+{
     Q_OBJECT
 public:
-    explicit GeneneralConf(QWidget *parent = nullptr);
+    explicit GeneneralConf(QWidget* parent = nullptr);
 
 public slots:
     void updateComponents();
 
 private slots:
-   void showHelpChanged(bool checked);
-   void showDesktopNotificationChanged(bool checked);
-   void showTrayIconChanged(bool checked);
-   void autostartChanged(bool checked);
-   void closeAfterCaptureChanged(bool checked);
-   void importConfiguration();
-   void exportFileConfiguration();
-   void resetConfiguration();
+    void showHelpChanged(bool checked);
+    void showSidePanelButtonChanged(bool checked);
+    void showDesktopNotificationChanged(bool checked);
+    void showTrayIconChanged(bool checked);
+    void autostartChanged(bool checked);
+    void closeAfterCaptureChanged(bool checked);
+    void saveAfterCopyChanged(bool checked);
+    void changeSavePath();
+    void importConfiguration();
+    void exportFileConfiguration();
+    void resetConfiguration();
+    void togglePathFixed();
 
 private:
-    QVBoxLayout *m_layout;
-    QCheckBox *m_sysNotifications;
-    QCheckBox *m_showTray;
-    QCheckBox *m_helpMessage;
-    QCheckBox *m_autostart;
-    QCheckBox *m_closeAfterCapture;
-    QCheckBox *m_copyAndCloseAfterUpload;
-    QPushButton *m_importButton;
-    QPushButton *m_exportButton;
-    QPushButton *m_resetButton;
+    const QString chooseFolder(const QString currentPath = "");
 
     void initShowHelp();
+    void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
     void initConfingButtons();
     void initAutostart();
+    void initShowStartupLaunchMessage();
     void initCloseAfterCapture();
     void initCopyAndCloseAfterUpload();
+    void initSaveAfterCopy();
+    void initCopyPathAfterSave();
+
+    // class members
+    QVBoxLayout* m_layout;
+    QCheckBox* m_sysNotifications;
+    QCheckBox* m_showTray;
+    QCheckBox* m_helpMessage;
+    QCheckBox* m_sidePanelButton;
+    QCheckBox* m_autostart;
+    QCheckBox* m_showStartupLaunchMessage;
+    QCheckBox* m_closeAfterCapture;
+    QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyPathAfterSave;
+    QPushButton* m_importButton;
+    QPushButton* m_exportButton;
+    QPushButton* m_resetButton;
+    QCheckBox* m_saveAfterCopy;
+    QLineEdit* m_savePath;
+    QPushButton* m_changeSaveButton;
+    QCheckBox* m_screenshotPathFixedCheck;
 };

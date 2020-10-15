@@ -18,47 +18,54 @@
 #include "pintool.h"
 #include "src/tools/pin/pinwidget.h"
 
-PinTool::PinTool(QObject *parent) : AbstractActionTool(parent) {
+PinTool::PinTool(QObject* parent)
+  : AbstractActionTool(parent)
+{}
 
-}
-
-bool PinTool::closeOnButtonPressed() const {
+bool PinTool::closeOnButtonPressed() const
+{
     return true;
 }
 
-QIcon PinTool::icon(const QColor &background, bool inEditor) const {
+QIcon PinTool::icon(const QColor& background, bool inEditor) const
+{
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "pin.svg");
 }
-QString PinTool::name() const {
+QString PinTool::name() const
+{
     return tr("Pin Tool");
 }
 
-QString PinTool::nameID() {
-    return QLatin1String("");
+ToolType PinTool::nameID() const
+{
+    return ToolType::PIN;
 }
 
-QString PinTool::description() const {
+QString PinTool::description() const
+{
     return tr("Pin image on the desktop");
 }
 
-QWidget* PinTool::widget() {
-    PinWidget *w = new PinWidget(m_pixmap);
-    const int &&m = w->margin();
+QWidget* PinTool::widget()
+{
+    PinWidget* w = new PinWidget(m_pixmap);
+    const int&& m = w->margin();
     QRect adjusted_pos = m_geometry + QMargins(m, m, m, m);
     w->setGeometry(adjusted_pos);
     return w;
 }
 
-CaptureTool* PinTool::copy(QObject *parent) {
+CaptureTool* PinTool::copy(QObject* parent)
+{
     return new PinTool(parent);
 }
 
-void PinTool::pressed(const CaptureContext &context) {
+void PinTool::pressed(const CaptureContext& context)
+{
     emit requestAction(REQ_CAPTURE_DONE_OK);
     m_geometry = context.selection;
     m_geometry.setTopLeft(m_geometry.topLeft() + context.widgetOffset);
     m_pixmap = context.selectedScreenshotArea();
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
-
 }

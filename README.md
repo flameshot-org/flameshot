@@ -1,8 +1,8 @@
 <div align="center">
   <p>
     <h1>
-      <a href="https://github.com/lupoDharkael/flameshot">
-        <img src="img/app/flameshot.svg" alt="Flameshot" />
+      <a href="https://github.com/flameshot-org/flameshot">
+        <img src="data/img/app/org.flameshot.Flameshot.svg" alt="Flameshot" />
       </a>
       <br />
       Flameshot
@@ -10,24 +10,28 @@
     <h4>Powerful yet simple to use screenshot software.</h4>
   </p>
   <p>
-    <a href="https://travis-ci.org/lupoDharkael/flameshot">
-      <img src="https://img.shields.io/travis/lupoDharkael/flameshot.svg?style=flat-square&label=gnu/linux" alt="GNU/Linux Build Status" />
+    <a href="https://github.com/flameshot-org/flameshot/actions">
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Linux)?label=gnu%2Flinux" alt="GNU/Linux Build Status" />
     </a>
-    <a href="https://ci.appveyor.com/project/lupoDharkael/flameshot">
-      <img src="https://img.shields.io/appveyor/ci/lupoDharkael/flameshot.svg?style=flat-square&label=windows" alt="Windows Build Status" />
+    <a href="https://github.com/flameshot-org/flameshot/actions">
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Windows)?label=windows" alt="Windows Build Status" />
     </a>
-    <a href="https://github.com/lupoDharkael/flameshot/releases">
-      <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
+    <a href="https://github.com/flameshot-org/flameshot/releases">
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
     </a>
-    <a href="https://github.com/lupoDharkael/flameshot/releases">
-      <img src="https://img.shields.io/github/downloads/lupoDharkael/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
+    <a href="https://github.com/flameshot-org/flameshot/releases">
+      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
     </a>
-    <a href="https://github.com/lupoDharkael/flameshot/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/lupoDharkael/flameshot.svg?style=flat-square" alt="License" />
+    <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
     </a>
-    <a href="https://github.com/flameshotapp/flameshotapp.github.io">
-      <img src="https://img.shields.io/github/release/lupoDharkael/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
+    <a href="https://flameshot.org">
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
+    <br>
+    <a href="https://snapcraft.io/flameshot">
+  <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
+</a>
   </p>
 </div>
 
@@ -35,7 +39,7 @@
 
 ## Preview
 
-![image](img/preview/animatedUsage.gif)
+![image](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/_media/animatedUsage.gif)
 
 ## Index
 
@@ -48,6 +52,8 @@
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
 - [Considerations](#considerations)
 - [Installation](#installation)
+  - [Prebuilt Packages](#prebuilt-packages)
+  - [Packages from Repository](#packages-from-repository)
 - [Compilation](#compilation)
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
@@ -58,10 +64,8 @@
     - [Arch](#arch)
   - [Build](#build)
   - [Install](#install)
-- [Packaging](#packaging)
 - [License](#license)
 - [Contribute](#contribute)
-- [Donations](#donations)
 - [Acknowledgment](#acknowledgment)
 
 ## Features
@@ -73,6 +77,11 @@
 - Upload to Imgur.
 
 ## Usage
+
+Executing the command `flameshot` without parameters will launch a running
+instance of the program in background without taking actions.
+If your desktop environment provides tray area, a tray icon will also
+appear in the tray for users to perform configuration and management.
 
 Example commands:
 
@@ -122,7 +131,7 @@ In case of doubt choose the first or the second command as shortcut in your favo
 
 A systray icon will be in your system's panel while Flameshot is running.
 Do a right click on the tray icon and you'll see some menu items to open the configuration window and the information window.
-Check out the information window to see all the available shortcuts in the graphical capture mode.
+Check out the About window to see all available shortcuts in the graphical capture mode.
 
 ### CLI configuration
 
@@ -196,7 +205,7 @@ Steps for using the configuration:
 
     ```shell
     cd ~/Desktop
-    wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+    wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
     ```
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
@@ -210,15 +219,33 @@ Steps for using the configuration:
 
 - If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the systemtray icon.
 
+- Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#keyboard-shortcuts) for more information.
+
+- Flameshot works best with a desktop environment that includes dbus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc)
+
 - In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
-
-- Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#shortcuts) for more information.
-
-- Execute the command `flameshot` without parameters to launch a running instance of the program without taking actions.
+    - Quick tip: If you don't have Flameshot to autostart at boot and you want to set keyboard shortcut, use the following as the command for the keybinding:
+    ```sh
+    ( flameshot &; ) && ( sleep 0.5s && flameshot gui )
+    ```
 
 ## Installation
 
-There are packages available for a few distros:
+Flameshot can be installed on Linux and Microsoft Windows currently.
+
+There are no macOS port of flameshot now. Please participate in the development 
+of flameshot and help us make a macOS port.
+
+### Prebuilt packages
+
+Some prebuilt packages are provided on the release page of the GitHub project
+repository.
+[Click here to visit the release page.](https://github.com/flameshot-org/flameshot/releases).
+
+### Packages from Repository
+
+There are packages available in the repository of
+some Linux distributions:
 
 - [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
@@ -227,10 +254,10 @@ There are packages available for a few distros:
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
-- [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
-- Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
+- [Docker](https://github.com/ManuelLR/docker-flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
@@ -239,17 +266,60 @@ There are packages available for a few distros:
   </a>
 </details>
 
+### Tray icon
+
+**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/index.php/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/index.php/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some softwares, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
+
+
+Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
+
+### S3 bucket configuration
+
+S3 bucket credentials are placed in the file `config.ini` and cannot be configured with UI.
+This file is not included into installation and should be placed into the installation directory manually.
+On `linux` systems it can be placed at `/etc/flameshot/config.ini`.
+
+You can also add `proxy` server settings. If you don't need a proxy server just remove or comment lines with a proxy settings.
+
+Configuration file example:
+```
+[General]
+HTTP_PROXY_HOST=10.0.0.1
+HTTP_PROXY_PORT=3128
+
+; No authentification USER and PASSWORD should be empty
+HTTP_PROXY_USER=
+HTTP_PROXY_PASSWORD=
+
+HTTP_PROXY_TYPE=0
+; Proxy Types (0 is default):
+; 0	Proxy is determined based on the application proxy set using setApplicationProxy()
+; 1	Socks5 proxying is used
+; 3	HTTP transparent proxying is used
+; 4	Proxying for HTTP requests only
+; 5	Proxying for FTP requests only
+
+[S3]
+S3_CREDS_URL=https://api.img.example.com/
+S3_X_API_KEY=seckret_key
+```
+
 ## Compilation
 
-To build the application in your system, you'll need to install the dependencies needed for it and Package names might be different for each distribution, see [Dependencies](#dependencies) below for more information.
+To build the application in your system, you'll need to install the dependencies needed for it and package names might be different for each distribution, see [Dependencies](#dependencies) below for more information. You can also install most of the Qt dependencies via [their installer](https://www.qt.io/download-qt-installer). If you were developing Qt apps before, you probably already have them.
+
+This project uses [CMake](https://cmake.org/) build system, so you need to install it in order to build the project (on most Linux distributions it is available in the standard repositories as a package called `cmake`). If your distribution provides too old version of CMake (e.g. Ubuntu 18.04) you can [download it on the official website](https://cmake.org/download/).
+
+Also you can open and build/debug the project in a C++ IDE. For example, in Qt Creator you should be able to simply open `CMakeLists.txt` via `Open File or Project` in the menu after installing CMake into your system. [More information about CMake projects in Qt Creator](https://doc.qt.io/qtcreator/creator-project-cmake.html).
 
 ### Dependencies
 
 #### Compile-time
 
-- Qt >= 5.3
+- Qt >= 5.9
   + Development tools
-- GCC >= 4.9.2
+- GCC >= 7.4 
+- CMake >= 3.13
 
 #### Run-time
 
@@ -266,10 +336,10 @@ To build the application in your system, you'll need to install the dependencies
 
 ```shell
 # Compile-time
-apt install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools
+apt install g++ cmake build-essential qt5-default qttools5-dev-tools libqt5svg5-dev qttools5-dev
 
 # Run-time
-apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev
+apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5
 
 # Optional
 apt install git openssl ca-certificates
@@ -279,7 +349,7 @@ apt install git openssl ca-certificates
 
 ```shell
 # Compile-time
-dnf install gcc-c++ qt5-devel qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ cmake qt5-devel qt5-qtbase-devel qt5-linguist
 
 # Run-time
 dnf install qt5-qtbase qt5-qtsvg-devel
@@ -292,7 +362,7 @@ dnf install git openssl ca-certificates
 
 ```shell
 # Compile-time
-pacman -S base-devel git qt5-base qt5-tools
+pacman -S cmake base-devel git qt5-base qt5-tools
 
 # Run-time
 pacman -S qt5-svg
@@ -308,30 +378,14 @@ After installing all the dependencies, finally run the following commands in the
 ```shell
 mkdir build
 cd build
-qmake ../
+cmake ../
 make
 ```
 
 ### Install
 
-Simply use `make install` with privileges.
-
-## Packaging
-
-Having `git` installed is required if you're building Flameshot from a snapshot to have precise version information.
-
-In order to generate the instructions in the `Makefile` to install the application in `/usr` instead of in `/usr/local` you can pass the `packaging` option to `qmake` (`qmake CONFIG+=packaging`).
-
-If you want to install in a custom directory you can use the `INSTALL_ROOT` variable.
-
-**Example**:
-
-If you want to install Flameshot in `~/myBuilds/test`, you can execute the following to do so:
-
-```shell
-qmake CONFIG+=packaging
-make INSTALL_ROOT=~/myBuilds/test install
-```
+Simply use `make install` with privileges. 
+Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
@@ -346,17 +400,13 @@ Info: If I take code from your project and that implies a relicense to GPLv3, yo
 
 ## Contribute
 
-If you want to contribute check the [CONTRIBUTING.md](CONTRIBUTING.md)
+If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
-## Donations
-I improve Flameshot in my free time because I want to create something good for everyone to use. 
-If you want you can donate some bucks with the following options: 
-- [Paypal](https://www.paypal.me/lupoDharkael)
-- bitcoin:1K6oiUKWVjP3x9ZuW9C7NbDfcFkMx3G8ue
 
 
 ## Acknowledgment
-I really appreciate those who have shown interest in the early development process:
+Thanks to those who have shown interest in the early development process:
+- [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)
 - [XerTheSquirrel](https://github.com/XerTheSquirrel)
 - [The members of Sugus GNU/Linux](https://github.com/SUGUS-GNULinux)

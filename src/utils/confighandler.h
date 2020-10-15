@@ -17,40 +17,48 @@
 
 #pragma once
 
-#include "src/widgets/capture/capturebutton.h"
-#include <QVector>
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QSettings>
+#include <QStringList>
+#include <QVector>
 
-class ConfigHandler {
+class ConfigHandler
+{
 public:
     explicit ConfigHandler();
 
-    QVector<CaptureButton::ButtonType> getButtons();
-    void setButtons(const QVector<CaptureButton::ButtonType> &);
+    QVector<CaptureToolButton::ButtonType> getButtons();
+    void setButtons(const QVector<CaptureToolButton::ButtonType>&);
 
     QVector<QColor> getUserColors();
-    void setUserColors(const QVector<QColor> &);
+    void setUserColors(const QVector<QColor>&);
 
-    QString savePathValue();
-    void setSavePath(const QString &);
+    QString savePath();
+    void setSavePath(const QString&);
+
+    bool savePathFixed();
+    void setSavePathFixed(bool);
 
     QColor uiMainColorValue();
-    void setUIMainColor(const QColor &);
+    void setUIMainColor(const QColor&);
 
     QColor uiContrastColorValue();
-    void setUIContrastColor(const QColor &);
+    void setUIContrastColor(const QColor&);
 
     QColor drawColorValue();
-    void setDrawColor(const QColor &);
+    void setDrawColor(const QColor&);
 
     bool showHelpValue();
     void setShowHelp(const bool);
+
+    bool showSidePanelButtonValue();
+    void setShowSidePanelButton(const bool);
 
     bool desktopNotificationValue();
     void setDesktopNotification(const bool);
 
     QString filenamePatternValue();
-    void setFilenamePattern(const QString &);
+    void setFilenamePattern(const QString&);
 
     bool disabledTrayIconValue();
     void setDisabledTrayIcon(const bool);
@@ -65,6 +73,9 @@ public:
     bool startupLaunchValue();
     void setStartupLaunch(const bool);
 
+    bool showStartupLaunchMessage();
+    void setShowStartupLaunchMessage(const bool);
+
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
@@ -73,18 +84,37 @@ public:
 
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
+    bool saveAfterCopyValue();
+    void setSaveAfterCopy(const bool);
 
+    QString saveAfterCopyPathValue();
+    void setSaveAfterCopyPath(const QString&);
+
+    bool copyPathAfterSaveEnabled();
+    void setCopyPathAfterSaveEnabled(const bool);
+
+    void setUploadStorage(const QString&);
+    const QString& uploadStorage();
 
     void setDefaults();
     void setAllTheButtons();
 
+    QVector<QStringList> shortcuts();
+    void setShortcutsDefault();
+    bool setShortcut(const QString&, const QString&);
+    const QString& shortcut(const QString&);
+
     QString configFilePath() const;
 
 private:
+    QString m_strRes;
     QSettings m_settings;
+    QVector<QStringList> m_shortcuts;
 
-    bool normalizeButtons(QVector<int> &);
+    bool normalizeButtons(QVector<int>&);
 
-    QVector<CaptureButton::ButtonType> fromIntToButton(const QVector<int> &l);
-    QVector<int> fromButtonToInt(const QVector<CaptureButton::ButtonType> &l);
+    QVector<CaptureToolButton::ButtonType> fromIntToButton(
+      const QVector<int>& l);
+    QVector<int> fromButtonToInt(
+      const QVector<CaptureToolButton::ButtonType>& l);
 };

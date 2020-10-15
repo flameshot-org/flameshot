@@ -18,10 +18,10 @@
 #pragma once
 
 #include "src/core/capturerequest.h"
-#include <QObject>
-#include <QPointer>
-#include <QPixmap>
 #include <QMap>
+#include <QObject>
+#include <QPixmap>
+#include <QPointer>
 #include <QTimer>
 #include <functional>
 
@@ -29,17 +29,18 @@ class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class QSystemTrayIcon;
-
+class CaptureLauncher;
 using lambda = std::function<void(void)>;
 
-class Controller : public QObject {
+class Controller : public QObject
+{
     Q_OBJECT
 
 public:
     static Controller* getInstance();
 
     Controller(const Controller&) = delete;
-    void operator =(const Controller&) = delete;
+    void operator=(const Controller&) = delete;
 
     void enableExports();
 
@@ -48,23 +49,26 @@ signals:
     void captureFailed(uint id);
 
 public slots:
-    void requestCapture(const CaptureRequest &request);
+    void requestCapture(const CaptureRequest& request);
 
     void openConfigWindow();
     void openInfoWindow();
     void openLauncherWindow();
     void enableTrayIcon();
     void disableTrayIcon();
-    void sendTrayNotification(const QString &text,
-                              const QString &title = QStringLiteral("Flameshot Info"),
-                              const int timeout = 5000);
+    void sendTrayNotification(
+      const QString& text,
+      const QString& title = QStringLiteral("Flameshot Info"),
+      const int timeout = 5000);
 
     void updateConfigComponents();
+
+    void showRecentScreenshots();
 
 private slots:
     void startFullscreenCapture(const uint id = 0);
     void startVisualCapture(const uint id = 0,
-                             const QString &forcedSavePath = QString());
+                            const QString& forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
 
     void handleCaptureTaken(uint id, QPixmap p);
@@ -75,11 +79,12 @@ private:
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
-    void doLater(int msec, QObject *receiver, lambda func);
+    void doLater(int msec, QObject* receiver, lambda func);
 
     QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;
+    QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
 };

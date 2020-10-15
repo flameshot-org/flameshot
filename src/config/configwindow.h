@@ -20,24 +20,29 @@
 #include <QTabWidget>
 
 class FileNameEditor;
+class ShortcutsWidget;
 class GeneneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
+class UploadStorageConfig;
 
-class ConfigWindow : public QTabWidget {
+class ConfigWindow : public QTabWidget
+{
     Q_OBJECT
 public:
-    explicit ConfigWindow(QWidget *parent = nullptr);
+    explicit ConfigWindow(QWidget* parent = nullptr);
 
 signals:
     void updateChildren();
 
 protected:
-    void keyPressEvent(QKeyEvent *);
+    void keyPressEvent(QKeyEvent*);
 
 private:
-    FileNameEditor *m_filenameEditor;
-    GeneneralConf *m_generalConfig;
-    VisualsEditor *m_visuals;
-    QFileSystemWatcher *m_configWatcher;
+    FileNameEditor* m_filenameEditor;
+    ShortcutsWidget* m_shortcuts;
+    GeneneralConf* m_generalConfig;
+    UploadStorageConfig* m_uploadStorageConfig;
+    VisualsEditor* m_visuals;
+    QFileSystemWatcher* m_configWatcher;
 };
