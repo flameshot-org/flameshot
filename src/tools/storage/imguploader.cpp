@@ -59,7 +59,7 @@ void ImgUploader::init(const QString& title, const QString& label)
 
     resultStatus = false;
     setWindowTitle(title);
-    setWindowIcon(QIcon(":img/app/org.flameshot.Flameshot.svg"));
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();

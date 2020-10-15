@@ -54,7 +54,7 @@ InfoWindow::InfoWindow(QWidget* parent)
 void InfoWindow::initLabels()
 {
     QLabel* icon = new QLabel();
-    icon->setPixmap(QPixmap(":img/app/org.flameshot.Flameshot.svg"));
+    icon->setPixmap(QPixmap(":img/app/flameshot.svg"));
     icon->setAlignment(Qt::AlignHCenter);
     m_layout->addWidget(icon);
 
