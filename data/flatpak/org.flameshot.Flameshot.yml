@@ -1,0 +1,33 @@
+app-id: org.flameshot.Flameshot
+runtime: org.kde.Platform
+runtime-version: '5.15'
+sdk: org.kde.Sdk
+command: flameshot
+finish-args:
+  # X11 + XShm access
+  - --share=ipc
+  - --socket=x11
+  # Wayland access
+  - --socket=wayland
+  - --device=dri
+  # Connectivity
+  - --share=network
+  # QtSingleApplication, allow other instances to see log files
+  - --env=TMPDIR=/var/tmp
+  # Allow loading/saving files from anywhere
+  - --filesystem=host
+  # Notification access
+  - --talk-name=org.freedesktop.Notifications
+  # System Tray Icon
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --own-name=org.kde.*
+  - --own-name=org.flameshot.Flameshot
+modules:
+  - name: flameshot
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: git
+        url: https://github.com/flameshot-org/flameshot.git
+        branch: master

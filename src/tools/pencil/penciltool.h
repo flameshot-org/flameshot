@@ -19,23 +19,28 @@
 
 #include "src/tools/abstractpathtool.h"
 
-class PencilTool : public AbstractPathTool {
+class PencilTool : public AbstractPathTool
+{
     Q_OBJECT
 public:
-    explicit PencilTool(QObject *parent = nullptr);
+    explicit PencilTool(QObject* parent = nullptr);
 
-    QIcon icon(const QColor &background, bool inEditor) const override;
+    QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
-    static QString nameID();
     QString description() const override;
 
-    CaptureTool* copy(QObject *parent = nullptr) override;
+    CaptureTool* copy(QObject* parent = nullptr) override;
 
-    void process(
-            QPainter &painter, const QPixmap &pixmap, bool recordUndo = false) override;
-    void paintMousePreview(QPainter &painter, const CaptureContext &context) override;
+    void process(QPainter& painter,
+                 const QPixmap& pixmap,
+                 bool recordUndo = false) override;
+    void paintMousePreview(QPainter& painter,
+                           const CaptureContext& context) override;
+
+protected:
+    ToolType nameID() const override;
 
 public slots:
-    void drawStart(const CaptureContext &context) override;
-    void pressed(const CaptureContext &context) override;
+    void drawStart(const CaptureContext& context) override;
+    void pressed(const CaptureContext& context) override;
 };

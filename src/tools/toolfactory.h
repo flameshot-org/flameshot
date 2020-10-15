@@ -17,23 +17,22 @@
 
 #pragma once
 
-#include "src/widgets/capture/capturebutton.h"
 #include "src/tools/capturetool.h"
+#include "src/widgets/capture/capturetoolbutton.h"
 #include <QObject>
 
 class CaptureTool;
 
-class ToolFactory : public QObject {
+class ToolFactory : public QObject
+{
     Q_OBJECT
 
 public:
+    explicit ToolFactory(QObject* parent = nullptr);
 
-    explicit ToolFactory(QObject *parent = nullptr);
+    ToolFactory(const ToolFactory&) = delete;
+    ToolFactory& operator=(const ToolFactory&) = delete;
 
-    ToolFactory(const ToolFactory &) = delete;
-    ToolFactory & operator=(const ToolFactory &) = delete;
-
-    CaptureTool* CreateTool(
-            CaptureButton::ButtonType t,
-            QObject *parent = nullptr);
+    CaptureTool* CreateTool(CaptureToolButton::ButtonType t,
+                            QObject* parent = nullptr);
 };

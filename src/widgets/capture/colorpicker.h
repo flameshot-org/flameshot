@@ -19,10 +19,11 @@
 
 #include <QWidget>
 
-class ColorPicker : public QWidget {
+class ColorPicker : public QWidget
+{
     Q_OBJECT
 public:
-    explicit ColorPicker(QWidget *parent = nullptr);
+    explicit ColorPicker(QWidget* parent = nullptr);
 
     QColor drawColor();
 
@@ -33,8 +34,8 @@ signals:
     void colorSelected(QColor c);
 
 protected:
-    void paintEvent(QPaintEvent *);
-    void mouseMoveEvent(QMouseEvent *);
+    void paintEvent(QPaintEvent*);
+    void mouseMoveEvent(QMouseEvent*);
 
     QVector<QRect> handleMask() const;
 

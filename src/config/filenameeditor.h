@@ -17,8 +17,8 @@
 
 #pragma once
 
-#include <QWidget>
 #include <QPointer>
+#include <QWidget>
 
 class QVBoxLayout;
 class QLineEdit;
@@ -26,20 +26,21 @@ class FileNameHandler;
 class QPushButton;
 class StrftimeChooserWidget;
 
-class FileNameEditor : public QWidget {
+class FileNameEditor : public QWidget
+{
     Q_OBJECT
 public:
-    explicit FileNameEditor(QWidget *parent = nullptr);
+    explicit FileNameEditor(QWidget* parent = nullptr);
 
 private:
-    QVBoxLayout *m_layout;
-    QLineEdit *m_outputLabel;
-    QLineEdit *m_nameEditor;
-    FileNameHandler *m_nameHandler;
-    StrftimeChooserWidget *m_helperButtons;
-    QPushButton *m_saveButton;
-    QPushButton *m_resetButton;
-    QPushButton *m_clearButton;
+    QVBoxLayout* m_layout;
+    QLineEdit* m_outputLabel;
+    QLineEdit* m_nameEditor;
+    FileNameHandler* m_nameHandler;
+    StrftimeChooserWidget* m_helperButtons;
+    QPushButton* m_saveButton;
+    QPushButton* m_resetButton;
+    QPushButton* m_clearButton;
 
     void initLayout();
     void initWidgets();
@@ -50,6 +51,6 @@ public slots:
 
 private slots:
     void savePattern();
-    void showParsedPattern(const QString &);
+    void showParsedPattern(const QString&);
     void resetName();
 };

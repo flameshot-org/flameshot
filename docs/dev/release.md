@@ -7,3 +7,4 @@
  - Update .pro hardcoded version.
  - Run cppcheck --enable=all 2> err.txt
  - Run codespell
+ 
