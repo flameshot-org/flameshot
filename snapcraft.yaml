@@ -1,0 +1,105 @@
+---
+
+name: flameshot
+adopt-info: flameshot
+base: core18
+summary: Powerful yet simple to use screenshot software
+description: |
+  A powerful open source screenshot and annotation tool for Linux, Flameshot
+  has a varied set of markup tools available, which include Freehand drawing,
+  Lines, Arrows, Boxes, Circles, Highlighting, Blur. Additionally, you can
+  customise the color, size and/or thickness of many of these image annotation
+  tools.
+grade: stable  # must be 'stable' to release into candidate/stable channels
+confinement: strict  # use 'strict' once you have the right plugs and slots
+#confinement: devmode  # use 'strict' once you have the right plugs and slots
+architectures:
+  - build-on: amd64
+
+apps:
+  flameshot:
+    command: flameshot
+    desktop: usr/share/applications/org.flameshot.Flameshot.desktop
+    extensions:
+      - kde-neon
+    environment:
+      DISABLE_WAYLAND: 1
+      XDG_DATA_DIRS: $SNAP/share:$XDG_DATA_DIRS
+      QT_QPA_PLATFORMTHEME: gtk3
+    slots: [dbus-flameshot]
+    plugs:
+      - kde-frameworks-5-plug
+      - home
+      - removable-media
+      - network
+      - network-bind
+      - opengl
+      - pulseaudio
+      - wayland
+      - unity7
+      - x11
+
+parts:
+  flameshot:
+    build-snaps:
+      - kde-frameworks-5-core18-sdk
+      - kde-frameworks-5-core18
+      - cmake #core18 does not have new enough cmake so install from snap
+    plugin: cmake
+    configflags:
+      - '-DCMAKE_BUILD_TYPE=RelWithDebInfo'
+      - '-DCMAKE_INSTALL_PREFIX=/usr'
+    source: https://github.com/flameshot-org/flameshot.git
+    source-type: git
+    override-pull: |
+      snapcraftctl pull
+      last_committed_tag="$(git tag -l --sort=-v:refname | head -1)"
+      git_revno="$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)"
+      git_hash="$(git rev-parse --short HEAD)"
+      snapcraftctl set-version "${last_committed_tag}+git${git_revno}.${git_hash}"
+    override-build: |
+      snapcraftctl build
+      # Correct the Icon path
+      sed -i 's|^Exec=flameshot|Exec=/snap/bin/org.flameshot.Flameshot|' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snappy Edition)/g' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+    build-packages:
+      - g++
+      - make
+      - qt5-default 
+      - qttools5-dev-tools 
+      - libqt5svg5-dev
+    stage-packages:
+      - dbus-x11
+      - libgtk2.0-0
+      - openssl
+      - ca-certificates
+      - qtwayland5
+      - libqt5dbus5 
+      - libqt5network5 
+      - libqt5core5a 
+      - libqt5widgets5 
+      - libqt5gui5 
+      - libqt5svg5
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgdk-pixbuf2.0-0
+    prime:
+      # libquazip5-1 pulls in Qt5 from bionic as a dependency. We don't
+      # want it in our snap, however, because we get a newer Qt5 from the
+      # kde-kf5 platform snap.
+      - "-usr/lib/x86_64-linux-gnu/libQt5*"
+      - "-usr/lib/x86_64-linux-gnu/libqt5*"
+slots:
+  # Depending on in which environment we're running we either need
+  # to use the system or session DBus so we also need to have one
+  # slot for each.
+  dbus-flameshot:
+    interface: dbus
+    bus: session
+    name: org.flameshot.Flameshot
