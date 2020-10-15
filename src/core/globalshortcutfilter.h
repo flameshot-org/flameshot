@@ -20,6 +20,8 @@
 #include <QAbstractNativeEventFilter>
 #include <QObject>
 
+class HistoryWidget;
+
 class GlobalShortcutFilter
   : public QObject
   , public QAbstractNativeEventFilter
@@ -27,6 +29,7 @@ class GlobalShortcutFilter
     Q_OBJECT
 public:
     explicit GlobalShortcutFilter(QObject* parent = nullptr);
+    ~GlobalShortcutFilter();
 
     bool nativeEventFilter(const QByteArray& eventType,
                            void* message,
@@ -40,4 +43,5 @@ private:
     quint32 nativeKeycode(Qt::Key key);
     bool registerShortcut(quint32 nativeKey, quint32 nativeMods);
     bool unregisterShortcut(quint32 nativeKey, quint32 nativeMods);
+    HistoryWidget* m_history;
 };
