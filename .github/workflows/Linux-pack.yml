@@ -2,15 +2,15 @@ name: Packaging(Linux)
 
 on:
   push:
-    branches:
-      - master*
+    branches: 
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
 
   pull_request:
     branches:
-      - master*
+      - master
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master
+          ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v2
@@ -76,7 +76,7 @@ jobs:
           path: tools
       - name: Packaging on ${{ matrix.dist.name }}
         run: |
-          cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
+          cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
           mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb
         env:
@@ -115,7 +115,7 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
-#          ref: master
+          ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v1
@@ -165,7 +165,7 @@ jobs:
           echo "========================="
       - name: Packaging on ubuntu-18.04
         run: |
-          cp -r $GITHUB_WORKSPACE/data/debian $GITHUB_WORKSPACE
+          cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           mkdir -p $GITHUB_WORKSPACE/build
           sed -e "/cmake (>= 3.13~),/d" -i $GITHUB_WORKSPACE/debian/control
           dpkg-buildpackage -b
@@ -217,7 +217,7 @@ jobs:
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master
+          ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v2
@@ -243,7 +243,7 @@ jobs:
           path: tools
       - name: Packaging on ${{ matrix.dist.name }}
         run: |
-          cp -r $GITHUB_WORKSPACE/data/rpm $GITHUB_WORKSPACE
+          cp -r $GITHUB_WORKSPACE/packaging/rpm $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
         env:
           OS: ${{ matrix.dist.os }}
@@ -310,7 +310,7 @@ jobs:
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master
+          ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v2
@@ -410,7 +410,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-#          ref: master
+          ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v2
@@ -439,7 +439,7 @@ jobs:
       - name: Packaging flatpak
         run: |
           BUNDLE="org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak"
-          MANIFEST_PATH=$GITHUB_WORKSPACE/data/flatpak/org.flameshot.Flameshot.yml
+          MANIFEST_PATH=$GITHUB_WORKSPACE/packaging/flatpak/org.flameshot.Flameshot.yml
           RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
           APP_ID="org.flameshot.Flameshot"
           BRANCH="master"
@@ -457,7 +457,7 @@ jobs:
       - name: Upload flatpak package(daily build)
         run: |
           echo "=====================flatpak download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.flameshot-${VERSION}.${ARCH}.flatpak)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2
@@ -476,7 +476,7 @@ jobs:
         uses: actions/checkout@v2
         with: 
           fetch-depth: 0
-#          ref: master
+          ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v2
@@ -494,11 +494,10 @@ jobs:
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
           echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
-        with:
-          path: data
       - name: Rename snap name
         shell: bash
         run: |

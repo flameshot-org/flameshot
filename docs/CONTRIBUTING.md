@@ -19,6 +19,7 @@ For small fixes or incremental improvements simply fork the repo and follow the 
 2. Start coding!
     - Implement your feature.
     - Check your code works as expected.
+    - Run the code formatter: `clang-format -i $(git ls-files "*.cpp" "*.h")`
 
 3. Commit your changes to a new branch (not `master`, one change per branch) and push it:
     - Commit messages should:

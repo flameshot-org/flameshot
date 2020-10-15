@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.13)
 # This can be read from ${PROJECT_NAME} after project() is called
 project(
   flameshot
-  VERSION 0.8.4.1
+  VERSION 0.8.5.1
   LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
@@ -82,15 +82,15 @@ if(WIN32)
     # Supported languages can be found at 
     # http://wixtoolset.org/documentation/manual/v3/wixui/wixui_localization.html
     #set(CPACK_WIX_CULTURES "ar-SA,bg-BG,ca-ES,hr-HR,cs-CZ,da-DK,nl-NL,en-US,et-EE,fi-FI,fr-FR,de-DE")
-    set(CPACK_WIX_UI_BANNER "${CMAKE_SOURCE_DIR}/data/win-installer/Bitmaps/CPACK_WIX_UI_BANNER.BMP")
-    set(CPACK_WIX_UI_DIALOG "${CMAKE_SOURCE_DIR}/data/win-installer/Bitmaps/CPACK_WIX_UI_DIALOG.BMP")
+    set(CPACK_WIX_UI_BANNER "${CMAKE_SOURCE_DIR}/packaging/win-installer/Bitmaps/CPACK_WIX_UI_BANNER.BMP")
+    set(CPACK_WIX_UI_DIALOG "${CMAKE_SOURCE_DIR}/packaging/win-installer/Bitmaps/CPACK_WIX_UI_DIALOG.BMP")
     set(CPACK_WIX_PROPERTY_ARPHELPLINK "${CPACK_PACKAGE_HOMEPAGE_URL}")
 		set(CPACK_WIX_PROPERTY_ARPURLINFOABOUT "${CPACK_PACKAGE_HOMEPAGE_URL}")
 		set(CPACK_WIX_ROOT_FEATURE_DESCRIPTION "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
 		set(CPACK_WIX_LIGHT_EXTRA_FLAGS "-dcl:high") # set high compression
 
     
-    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/data/win-installer/LICENSE/GPL-3.0.txt")
+    set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/packaging/win-installer/LICENSE/GPL-3.0.txt")
     set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
 
     # The correct way would be to include both x32 and x64 into one installer

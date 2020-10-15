@@ -327,176 +327,170 @@ Tryck Space för att öppna sidopanelen.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="116"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="248"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="115"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="247"/>
         <source>Import</source>
         <translation>Importera</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="123"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="131"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="154"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="444"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="122"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="153"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="413"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="123"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="122"/>
         <source>Unable to read file.</source>
         <translation>Kunde inte läsa filen.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="131"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="154"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="130"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="153"/>
         <source>Unable to write file.</source>
         <translation>Kunde inte skriva till filen.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="141"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="140"/>
         <source>Save File</source>
         <translation>Spara fil</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="163"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="162"/>
         <source>Confirm Reset</source>
         <translation>Bekräfta återställning</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="164"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="163"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Är du säker på att du vill återställa konfigurationen?</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="173"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="172"/>
         <source>Show help message</source>
         <translation>Visa hjälpmeddelande</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="177"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="176"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Visa hjälpmeddelande vid början av skärmklippsläge.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="189"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="188"/>
         <source>Show the side panel button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="192"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="191"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="202"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="206"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="201"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="205"/>
         <source>Show desktop notifications</source>
         <translation>Visa skrivbordsnotifieringar</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="218"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="217"/>
         <source>Show tray icon</source>
         <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="222"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="221"/>
         <source>Show the systemtray icon</source>
         <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="236"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="235"/>
         <source>Configuration File</source>
         <translation>Konfigurationsfil</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="241"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="240"/>
         <source>Export</source>
         <translation>Exportera</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="255"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="254"/>
         <source>Reset</source>
         <translation>Återställ</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="265"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="264"/>
         <source>Launch at startup</source>
         <translation>Starta vid uppstart</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="269"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="283"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="268"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="282"/>
         <source>Launch Flameshot</source>
         <translation>Starta Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="279"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="278"/>
         <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="294"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="293"/>
         <source>Close application after capture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="298"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="297"/>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="310"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="309"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="315"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="314"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="325"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="324"/>
         <source>Save image after copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="326"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="325"/>
         <source>Save image file after copying it</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="335"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="332"/>
         <source>Save Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="347"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="408"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="349"/>
         <source>Change...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="372"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="375"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="385"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="388"/>
         <source>Copy file path after save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="384"/>
-        <source>Select default path for Screenshots</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="393"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="357"/>
         <source>Use fixed path for screenshots to save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="435"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="404"/>
         <source>Choose a Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="444"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="413"/>
         <source>Unable to write to directory.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -504,27 +498,27 @@ Tryck Space för att öppna sidopanelen.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="30"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
         <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="68"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="72"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="118"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="122"/>
         <source>Copy URL</source>
         <translation type="unfinished">Kopiera URL</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="122"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="126"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL kopierad till klippbord.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="128"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="132"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
@@ -552,37 +546,37 @@ Tryck Space för att öppna sidopanelen.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="198"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="202"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">URL kopierad till klippbord.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="222"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="226"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="224"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="228"/>
         <source>Network error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="226"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="230"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="231"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="235"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="235"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="239"/>
         <source>Remove screenshot from history?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="252"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="256"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -719,7 +713,7 @@ Tryck Space för att öppna sidopanelen.</translation>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="40"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="39"/>
         <source>About</source>
         <translation>Om</translation>
     </message>
@@ -780,12 +774,12 @@ Tryck Space för att öppna sidopanelen.</translation>
         <translation type="vanished">Beskrivning</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="62"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="61"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Licens&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="71"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="70"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
@@ -875,13 +869,13 @@ Tryck Space för att öppna sidopanelen.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="119"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="118"/>
         <source>Save Error</source>
         <translation>Spara fel</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="108"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="107"/>
         <source>Capture saved as </source>
         <translation>Urval sparad som </translation>
     </message>
@@ -897,7 +891,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="67"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="117"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="116"/>
         <source>Error trying to save as </source>
         <translation>Fel vid spara som </translation>
     </message>
@@ -907,7 +901,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="111"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="110"/>
         <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1103,7 +1097,7 @@ You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="256"/>
+        <location filename="../../src/core/controller.cpp" line="263"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
