@@ -23,6 +23,8 @@
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
   : QObject(parent)
 {
+    m_history = nullptr;
+
     // Forced Print Screen
     if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
         // ok - capture screen
@@ -31,6 +33,11 @@ GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
     if (RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT)) {
         // ok - show screenshots history
     }
+}
+
+GlobalShortcutFilter::~GlobalShortcutFilter()
+{
+    delete m_history;
 }
 
 bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
@@ -49,8 +56,10 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
 
         // Show screenshots history
         if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
-            HistoryWidget* pHistory = new HistoryWidget();
-            pHistory->show();
+            if (m_history == nullptr) {
+                m_history = new HistoryWidget();
+            }
+            m_history->show();
         }
 
         // Capture screen

@@ -10,7 +10,6 @@
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFileInfo>
-#include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
 #include <QLayoutItem>
@@ -44,6 +43,11 @@ HistoryWidget::HistoryWidget(QWidget* parent)
     widget->setLayout(m_pVBox);
 
     loadHistory();
+}
+
+HistoryWidget::~HistoryWidget()
+{
+    delete m_notification;
 }
 
 void HistoryWidget::loadHistory()
@@ -140,9 +144,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
         // TODO - remove dependency injection (s3 & imgur)
         if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_S3) == 0) {
             if (unpackFileName.token.length() > 0) {
-                ImgS3Uploader* uploader = new ImgS3Uploader();
-                removeItem(
-                  uploader, phbl, unpackFileName.file, unpackFileName.token);
+                removeItem(phbl, unpackFileName.file, unpackFileName.token);
             } else {
                 // for compatibility with previous versions and to be able to
                 // remove previous screenshots
@@ -176,18 +178,19 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     m_pVBox->addLayout(phbl);
 }
 
-void HistoryWidget::removeItem(ImgUploader* imgUploader,
-                               QLayout* pl,
+void HistoryWidget::removeItem(QLayout* pl,
                                const QString& fileName,
                                const QString& deleteToken)
 {
     hide();
+    ImgS3Uploader* imgUploader = new ImgS3Uploader();
     imgUploader->show();
     imgUploader->deleteResource(fileName, deleteToken);
     connect(imgUploader, &QWidget::destroyed, this, [=]() {
         if (imgUploader->resultStatus) {
             removeLayoutItem(pl);
         }
+        imgUploader->deleteLater();
         show();
     });
 }
