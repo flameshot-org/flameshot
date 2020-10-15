@@ -56,6 +56,11 @@ ImgS3Uploader::ImgS3Uploader(QWidget* parent)
     init(tr("Delete image from S3"), tr("Deleting image..."));
 }
 
+ImgS3Uploader::~ImgS3Uploader()
+{
+    clearProxy();
+}
+
 void ImgS3Uploader::init(const QString& title, const QString& label)
 {
     m_proxy = nullptr;
@@ -87,7 +92,6 @@ QNetworkProxy* ImgS3Uploader::initProxy()
 
     if (httpProxyHost.length() > 0) {
         m_proxy = new QNetworkProxy();
-
         if (settings->contains("HTTP_PROXY_TYPE")) {
             switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
                 case 0:
