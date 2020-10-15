@@ -41,6 +41,7 @@ class ImgS3Uploader : public ImgUploader
 public:
     explicit ImgS3Uploader(const QPixmap& capture, QWidget* parent = nullptr);
     explicit ImgS3Uploader(QWidget* parent = nullptr);
+    ~ImgS3Uploader();
     void upload();
     void deleteResource(const QString&, const QString&);
 
