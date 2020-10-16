@@ -39,11 +39,9 @@
 class QPaintEvent;
 class QResizeEvent;
 class QMouseEvent;
-class CaptureModification;
 class QNetworkAccessManager;
 class QNetworkReply;
 class ColorPicker;
-class Screenshot;
 class NotifierBox;
 class HoverEventFilter;
 

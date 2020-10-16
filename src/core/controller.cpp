@@ -302,6 +302,15 @@ void Controller::updateConfigComponents()
     }
 }
 
+void Controller::updateRecentScreenshots()
+{
+    if (nullptr != m_history) {
+        if (m_history->isVisible()) {
+            m_history->loadHistory();
+        }
+    }
+}
+
 void Controller::showRecentScreenshots()
 {
     if (nullptr == m_history) {
