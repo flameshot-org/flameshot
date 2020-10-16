@@ -20,8 +20,6 @@
 #include <QUrl>
 #include <QVBoxLayout>
 
-#include <QDebug>
-
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
 {
