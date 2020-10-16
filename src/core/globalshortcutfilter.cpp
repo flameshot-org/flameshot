@@ -58,8 +58,8 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
         if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
             if (m_history == nullptr) {
                 m_history = new HistoryWidget();
-                m_history->loadHistory();
             }
+            m_history->loadHistory();
             m_history->show();
         }
 
