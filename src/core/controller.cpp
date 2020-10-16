@@ -298,6 +298,7 @@ void Controller::updateConfigComponents()
 void Controller::showRecentScreenshots()
 {
     HistoryWidget* pHistory = new HistoryWidget();
+    pHistory->loadHistory();
     pHistory->exec();
 }
 
