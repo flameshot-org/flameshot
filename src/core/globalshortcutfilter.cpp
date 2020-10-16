@@ -17,14 +17,11 @@
 
 #include "globalshortcutfilter.h"
 #include "src/core/controller.h"
-#include "src/widgets/historywidget.h"
 #include <qt_windows.h>
 
 GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
   : QObject(parent)
 {
-    m_history = nullptr;
-
     // Forced Print Screen
     if (RegisterHotKey(NULL, 1, 0, VK_SNAPSHOT)) {
         // ok - capture screen
@@ -33,11 +30,6 @@ GlobalShortcutFilter::GlobalShortcutFilter(QObject* parent)
     if (RegisterHotKey(NULL, 2, MOD_SHIFT, VK_SNAPSHOT)) {
         // ok - show screenshots history
     }
-}
-
-GlobalShortcutFilter::~GlobalShortcutFilter()
-{
-    delete m_history;
 }
 
 bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
@@ -56,11 +48,7 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
 
         // Show screenshots history
         if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
-            if (m_history == nullptr) {
-                m_history = new HistoryWidget();
-            }
-            m_history->loadHistory();
-            m_history->show();
+            Controller::getInstance()->showRecentScreenshots();
         }
 
         // Capture screen
