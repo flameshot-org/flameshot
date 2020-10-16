@@ -18,6 +18,7 @@
 
 #include "imgs3uploader.h"
 #include "imgs3settings.h"
+#include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/systemnotification.h"
@@ -200,6 +201,7 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply* reply)
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(imageUrl().toString());
             SystemNotification().sendMessage(tr("URL copied to clipboard."));
+            Controller::getInstance()->updateRecentScreenshots();
             close();
         } else {
             onUploadOk();

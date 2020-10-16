@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imguruploader.h"
+#include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/history.h"
@@ -86,6 +87,7 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
             QApplication::clipboard()->setText(imageUrl().toString());
             SystemNotification().sendMessage(
               QObject::tr("URL copied to clipboard."));
+            Controller::getInstance()->updateRecentScreenshots();
             close();
         } else {
             onUploadOk();
