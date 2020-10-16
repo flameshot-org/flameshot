@@ -45,6 +45,7 @@ public:
     void operator=(const Controller&) = delete;
 
     void enableExports();
+    void updateRecentScreenshots();
 
 signals:
     void captureTaken(uint id, QPixmap p);
