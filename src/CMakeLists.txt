@@ -52,6 +52,7 @@ set(FLAMESHOT_TS_FILES
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
+    ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_HK.ts
     ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
 
 if(GENERATE_TS)
