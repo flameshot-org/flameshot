@@ -41,7 +41,6 @@
 #include <QNetworkRequest>
 #include <QPushButton>
 #include <QShortcut>
-#include <QTimer>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 

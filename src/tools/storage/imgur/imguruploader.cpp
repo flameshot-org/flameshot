@@ -28,8 +28,6 @@
 #include <QBuffer>
 #include <QClipboard>
 #include <QDesktopServices>
-#include <QDrag>
-#include <QHBoxLayout>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLabel>
@@ -37,9 +35,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QPushButton>
 #include <QShortcut>
-#include <QTimer>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 
@@ -53,7 +49,6 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
             &QNetworkAccessManager::finished,
             this,
             &ImgurUploader::handleReply);
-    // QTimer::singleShot(2000, this, &ImgurUploader::onUploadOk); // testing
 }
 
 void ImgurUploader::handleReply(QNetworkReply* reply)
