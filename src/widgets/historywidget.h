@@ -21,10 +21,11 @@ public:
     explicit HistoryWidget(QWidget* parent = nullptr);
     ~HistoryWidget();
 
-signals:
+    void loadHistory();
 
 private:
-    void loadHistory();
+    void clearHistoryLayout(QLayout* layout);
+
     void addLine(const QString&, const QString&);
     void setEmptyMessage();
     void removeItem(QLayout* pl,

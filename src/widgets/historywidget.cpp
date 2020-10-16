@@ -20,8 +20,6 @@
 #include <QUrl>
 #include <QVBoxLayout>
 
-#include <QDebug>
-
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
 {
@@ -41,8 +39,6 @@ HistoryWidget::HistoryWidget(QWidget* parent)
     QWidget* widget = new QWidget();
     scrollArea->setWidget(widget);
     widget->setLayout(m_pVBox);
-
-    loadHistory();
 }
 
 HistoryWidget::~HistoryWidget()
@@ -50,8 +46,26 @@ HistoryWidget::~HistoryWidget()
     delete m_notification;
 }
 
+void HistoryWidget::clearHistoryLayout(QLayout* layout)
+{
+    QLayoutItem* child;
+    while (layout->count() != 0) {
+        child = layout->takeAt(0);
+        if (child->layout() != 0) {
+            clearHistoryLayout(child->layout());
+        } else if (child->widget() != 0) {
+            delete child->widget();
+        }
+
+        delete child;
+    }
+}
+
 void HistoryWidget::loadHistory()
 {
+    // clear old history if exists
+    clearHistoryLayout(m_pVBox);
+
     // read history files
     History history = History();
     QList<QString> historyFiles = history.history();

@@ -33,8 +33,6 @@
 #include <QScreen>
 #endif
 
-#include <QDebug>
-
 ShortcutsWidget::ShortcutsWidget(QWidget* parent)
   : QWidget(parent)
 {
