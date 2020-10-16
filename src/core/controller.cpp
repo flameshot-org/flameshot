@@ -44,6 +44,8 @@
 Controller::Controller()
   : m_captureWindow(nullptr)
 {
+    m_history = nullptr;
+
     qApp->setQuitOnLastWindowClosed(false);
 
     // set default shortcusts if not set yet
@@ -66,6 +68,11 @@ Controller::Controller()
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
+}
+
+Controller::~Controller()
+{
+    delete m_history;
 }
 
 Controller* Controller::getInstance()
@@ -297,9 +304,11 @@ void Controller::updateConfigComponents()
 
 void Controller::showRecentScreenshots()
 {
-    HistoryWidget* pHistory = new HistoryWidget();
-    pHistory->loadHistory();
-    pHistory->exec();
+    if (nullptr == m_history) {
+        m_history = new HistoryWidget();
+    }
+    m_history->loadHistory();
+    m_history->show();
 }
 
 void Controller::startFullscreenCapture(const uint id)
