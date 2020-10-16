@@ -1,10 +1,8 @@
 #include "configshortcuts.h"
 #include "src/tools/capturetool.h"
-#include <QDebug>
+#include <QVariant>
 
 ConfigShortcuts::ConfigShortcuts() {}
-
-// QVector<CaptureToolButton::ButtonType> getButtons()
 
 const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
   const QVector<CaptureToolButton::ButtonType>& buttons)
