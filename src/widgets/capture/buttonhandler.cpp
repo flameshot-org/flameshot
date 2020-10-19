@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+﻿// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
 //
 // This file is part of Flameshot.
 //
@@ -20,6 +20,8 @@
 #include <QGuiApplication>
 #include <QPoint>
 #include <QScreen>
+
+#include <QDebug>
 
 // ButtonHandler is a habdler for every active button. It makes easier to
 // manipulate the buttons as a unit.
@@ -240,8 +242,8 @@ QVector<QPoint> ButtonHandler::verticalPoints(const QPoint& center,
 QRect ButtonHandler::intersectWithAreas(const QRect& rect)
 {
     QRect res;
-    for (const QRect& r : m_screenRegions) {
-        QRect temp = rect.intersected(r);
+    for (const QRegion& r : m_screenRegions) {
+        QRect temp = rect.intersected(r.boundingRect());
         if (temp.height() * temp.width() > res.height() * res.width()) {
             res = temp;
         }
@@ -262,32 +264,45 @@ void ButtonHandler::resetRegionTrack()
 void ButtonHandler::updateBlockedSides()
 {
     const int EXTENSION = m_separator * 2 + m_buttonBaseSize;
+    QRegion region;
+    for (const QRegion& r : m_screenRegions) {
+        if (r.contains(m_selection)) {
+            qDebug() << "found screen";
+            region = r;
+        }
+    }
+
     // Right
     QPoint pointA(m_selection.right() + EXTENSION, m_selection.bottom());
     QPoint pointB(pointA.x(), m_selection.top());
-    m_blockedRight =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedRight = !(region.contains(pointA) && region.contains(pointB));
     // Left
     pointA.setX(m_selection.left() - EXTENSION);
     pointB.setX(pointA.x());
-    m_blockedLeft =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedLeft = !(region.contains(pointA) && region.contains(pointB));
     // Bottom
     pointA = QPoint(m_selection.left(), m_selection.bottom() + EXTENSION);
     pointB = QPoint(m_selection.right(), pointA.y());
-    m_blockedBotton =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedBotton = !(region.contains(pointA) && region.contains(pointB));
+
+    if (m_blockedBotton) {
+        qDebug() << "bottom blocked";
+    }
+
     // Top
     pointA.setY(m_selection.top() - EXTENSION);
     pointB.setY(pointA.y());
-    m_blockedTop =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedTop = !(region.contains(pointA) && region.contains(pointB));
     // Auxiliary
     m_oneHorizontalBlocked =
       (!m_blockedRight && m_blockedLeft) || (m_blockedRight && !m_blockedLeft);
     m_horizontalyBlocked = (m_blockedRight && m_blockedLeft);
     m_allSidesBlocked =
       (m_blockedBotton && m_horizontalyBlocked && m_blockedTop);
+
+    if (m_allSidesBlocked) {
+        qDebug() << "blocked";
+    }
 }
 
 void ButtonHandler::expandSelection()
@@ -380,22 +395,25 @@ bool ButtonHandler::contains(const QPoint& p) const
     QPoint last(m_vectorButtons.last()->pos());
     bool firstIsTopLeft = (first.x() <= last.x() && first.y() <= last.y());
     QPoint topLeft = firstIsTopLeft ? first : last;
-    QPoint bottonRight = firstIsTopLeft ? last : first;
+    QPoint bottomRight = firstIsTopLeft ? last : first;
     topLeft += QPoint(-m_separator, -m_separator);
-    bottonRight += QPoint(m_buttonExtendedSize, m_buttonExtendedSize);
-    QRegion r(QRect(topLeft, bottonRight).normalized());
+    bottomRight += QPoint(m_buttonExtendedSize, m_buttonExtendedSize);
+    QRegion r(QRect(topLeft, bottomRight).normalized());
     return r.contains(p);
 }
 
 void ButtonHandler::updateScreenRegions(const QVector<QRect>& rects)
 {
-    m_screenRegions = QRegion();
+    m_screenRegions.clear();
+
     for (const QRect& rect : rects) {
-        m_screenRegions += rect;
+        m_screenRegions.push_back(QRegion(rect));
+        qDebug() << rect;
     }
 }
 
 void ButtonHandler::updateScreenRegions(const QRect& rect)
 {
-    m_screenRegions = QRegion(rect);
+    m_screenRegions.clear();
+    m_screenRegions.push_back(rect);
 }
