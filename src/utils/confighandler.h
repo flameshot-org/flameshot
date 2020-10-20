@@ -93,9 +93,6 @@ public:
     bool copyPathAfterSaveEnabled();
     void setCopyPathAfterSaveEnabled(const bool);
 
-    void setUploadStorage(const QString&);
-    const QString& uploadStorage();
-
     void setDefaults();
     void setAllTheButtons();
 

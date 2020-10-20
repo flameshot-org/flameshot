@@ -17,7 +17,6 @@
 
 #include "confighandler.h"
 #include "src/tools/capturetool.h"
-#include "src/tools/storage/storagemanager.h"
 #include "src/utils/configshortcuts.h"
 #include <QCoreApplication>
 #include <QDir>
@@ -87,11 +86,8 @@ QVector<QColor> ConfigHandler::getUserColors()
 {
     QVector<QColor> colors;
     const QVector<QColor>& defaultColors = {
-        Qt::white,     Qt::red,      Qt::green,       Qt::blue,
-        Qt::black,     Qt::darkRed,  Qt::darkGreen,   Qt::darkBlue,
-        Qt::darkGray,  Qt::cyan,     Qt::magenta,     Qt::yellow,
-        Qt::lightGray, Qt::darkCyan, Qt::darkMagenta, Qt::darkYellow,
-        QColor()
+        Qt::darkRed, Qt::red,  Qt::yellow,  Qt::green,       Qt::darkGreen,
+        Qt::cyan,    Qt::blue, Qt::magenta, Qt::darkMagenta, QColor()
     };
 
     if (m_settings.contains(QStringLiteral("userColors"))) {
@@ -456,34 +452,6 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
     m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
 }
 
-void ConfigHandler::setUploadStorage(const QString& uploadStorage)
-{
-    StorageManager storageManager;
-    if (storageManager.storageLocked()) {
-        m_settings.setValue(QStringLiteral("uploadStorage"),
-                            storageManager.storageDefault());
-    } else {
-        m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
-    }
-}
-
-const QString& ConfigHandler::uploadStorage()
-{
-    StorageManager storageManager;
-    // check for storage lock
-    if (storageManager.storageLocked()) {
-        setUploadStorage(storageManager.storageDefault());
-    }
-
-    // get storage
-    m_strRes = m_settings.value(QStringLiteral("uploadStorage")).toString();
-    if (m_strRes.isEmpty()) {
-        StorageManager storageManager;
-        m_strRes = storageManager.storageDefault();
-        setUploadStorage(m_strRes);
-    }
-    return m_strRes;
-}
 
 QString ConfigHandler::saveAfterCopyPathValue()
 {

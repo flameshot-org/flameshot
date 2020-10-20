@@ -25,7 +25,6 @@
 
 #include "capturewidget.h"
 #include "src/core/controller.h"
-#include "src/tools/storage/storagemanager.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/screengrabber.h"
@@ -1092,16 +1091,6 @@ void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
     update();
-}
-
-void CaptureWidget::uploadScreenshot()
-{
-    StorageManager storageManager;
-    m_activeTool =
-      storageManager.imgUploaderTool(ConfigHandler().uploadStorage());
-    m_activeTool->setCapture(pixmap());
-    handleButtonSignal(CaptureTool::REQ_ADD_EXTERNAL_WIDGETS);
-    close();
 }
 
 void CaptureWidget::copyScreenshot()

@@ -24,7 +24,6 @@ class ShortcutsWidget;
 class GeneneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
-class UploadStorageConfig;
 
 class ConfigWindow : public QTabWidget
 {
@@ -42,7 +41,6 @@ private:
     FileNameEditor* m_filenameEditor;
     ShortcutsWidget* m_shortcuts;
     GeneneralConf* m_generalConfig;
-    UploadStorageConfig* m_uploadStorageConfig;
     VisualsEditor* m_visuals;
     QFileSystemWatcher* m_configWatcher;
 };

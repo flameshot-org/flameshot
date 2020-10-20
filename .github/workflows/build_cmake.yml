@@ -2,12 +2,12 @@ name: Building(CMake)
 
 on:
   push:
-    branches: [ master, master_nc_merge_upstream_test ]
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
   pull_request:
-    branches: [ master, master_nc_merge_upstream_test ]
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
