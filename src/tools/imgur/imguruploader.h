@@ -17,7 +17,6 @@
 
 #pragma once
 
-#include "../imguploader.h"
 #include <QUrl>
 #include <QWidget>
 
@@ -31,21 +30,39 @@ class QPushButton;
 class QUrl;
 class NotificationWidget;
 
-class ImgurUploader : public ImgUploader
+class ImgurUploader : public QWidget
 {
     Q_OBJECT
 public:
     explicit ImgurUploader(const QPixmap& capture, QWidget* parent = nullptr);
-    void upload();
 
 private slots:
     void handleReply(QNetworkReply* reply);
+    void startDrag();
 
-protected slots:
-    void deleteImageOnStorage();
+    void openURL();
+    void copyURL();
+    void openDeleteURL();
+    void copyImage();
 
-    // class members
 private:
+    QPixmap m_pixmap;
     QNetworkAccessManager* m_NetworkAM;
+
+    QVBoxLayout* m_vLayout;
+    QHBoxLayout* m_hLayout;
+    // loading
+    QLabel* m_infoLabel;
+    LoadSpinner* m_spinner;
+    // uploaded
+    QPushButton* m_openUrlButton;
+    QPushButton* m_openDeleteUrlButton;
+    QPushButton* m_copyUrlButton;
+    QPushButton* m_toClipboardButton;
+    QUrl m_imageURL;
     QUrl m_deleteImageURL;
+    NotificationWidget* m_notification;
+
+    void upload();
+    void onUploadOk();
 };

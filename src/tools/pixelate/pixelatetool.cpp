@@ -85,9 +85,8 @@ void PixelateTool::process(QPainter& painter,
         scene.render(&painter, selection, QRectF());
         blur->setBlurRadius(12);
         // multiple repeat for make blur effect stronger
-        for (int cnt = 100; cnt > 0; cnt--) {
-            scene.render(&painter, selection, QRectF());
-        }
+        scene.render(&painter, selection, QRectF());
+
     } else {
         int width = selection.width() * (0.5 / qMax(1, m_thickness));
         int height = selection.height() * (0.5 / qMax(1, m_thickness));

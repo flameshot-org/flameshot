@@ -17,18 +17,30 @@
 
 #pragma once
 
-#include "src/tools/storage/imguploadertool.h"
+#include "src/tools/abstractactiontool.h"
 
-class ImgurUploaderTool : public ImgUploaderTool
+class ImgurUploaderTool : public AbstractActionTool
 {
     Q_OBJECT
 public:
     explicit ImgurUploaderTool(QObject* parent = nullptr);
 
+    bool closeOnButtonPressed() const;
+
+    QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
 
     QWidget* widget() override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
+
+protected:
+    ToolType nameID() const override;
+
+public slots:
+    void pressed(const CaptureContext& context) override;
+
+private:
+    QPixmap capture;
 };
