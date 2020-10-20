@@ -966,7 +966,6 @@ void CaptureWidget::initShortcuts()
     shortcut = ConfigHandler().shortcut(
       QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER)
         .toString());
-    new QShortcut(shortcut, this, SLOT(uploadScreenshot()));
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                   this,
