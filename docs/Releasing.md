@@ -12,6 +12,9 @@ These are the steps for actually making the release
 - [ ] Create sha256 for each binary and compare against sha256 shown in the CI to verify there was no corruption or inserted malware.
 - [ ] Create a new "New Release" in githhub and explain changes in release notes
 - [ ] Upload all binaries and sha's
+- [ ] Update flatpak manifest for flathub: https://github.com/flathub/org.flameshot.Flameshot 
+- [ ] Push snapcraft edge release to stable
+- [ ] If this is a major release coordinate with sign path on signed windows binaries 
 - [ ] Update change log on [website](https://github.com/flameshot-org/flameshot-org.github.io/) data/changelog.md
 - [ ] Update version on [website](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/_coverpage.md)
 

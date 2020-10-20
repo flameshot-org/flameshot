@@ -18,6 +18,7 @@
 
 #include "imgs3uploader.h"
 #include "imgs3settings.h"
+#include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/systemnotification.h"
@@ -40,7 +41,6 @@
 #include <QNetworkRequest>
 #include <QPushButton>
 #include <QShortcut>
-#include <QTimer>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 
@@ -54,6 +54,11 @@ ImgS3Uploader::ImgS3Uploader(QWidget* parent)
   : ImgUploader(parent)
 {
     init(tr("Delete image from S3"), tr("Deleting image..."));
+}
+
+ImgS3Uploader::~ImgS3Uploader()
+{
+    clearProxy();
 }
 
 void ImgS3Uploader::init(const QString& title, const QString& label)
@@ -87,7 +92,6 @@ QNetworkProxy* ImgS3Uploader::initProxy()
 
     if (httpProxyHost.length() > 0) {
         m_proxy = new QNetworkProxy();
-
         if (settings->contains("HTTP_PROXY_TYPE")) {
             switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
                 case 0:
@@ -196,6 +200,7 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply* reply)
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
             QApplication::clipboard()->setText(imageUrl().toString());
             SystemNotification().sendMessage(tr("URL copied to clipboard."));
+            Controller::getInstance()->updateRecentScreenshots();
             close();
         } else {
             onUploadOk();

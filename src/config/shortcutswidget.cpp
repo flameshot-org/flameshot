@@ -33,8 +33,6 @@
 #include <QScreen>
 #endif
 
-#include <QDebug>
-
 ShortcutsWidget::ShortcutsWidget(QWidget* parent)
   : QWidget(parent)
 {
@@ -147,5 +145,6 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
                 m_table->setItem(row, col, item);
             }
         }
+        delete setShortcutDialog;
     }
 }

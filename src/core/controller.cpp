@@ -44,6 +44,8 @@
 Controller::Controller()
   : m_captureWindow(nullptr)
 {
+    m_history = nullptr;
+
     qApp->setQuitOnLastWindowClosed(false);
 
     // set default shortcusts if not set yet
@@ -66,6 +68,11 @@ Controller::Controller()
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
+}
+
+Controller::~Controller()
+{
+    delete m_history;
 }
 
 Controller* Controller::getInstance()
@@ -249,6 +256,13 @@ void Controller::enableTrayIcon()
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+
+#ifdef Q_OS_WIN
+    // Ensure proper removal of tray icon when program quits on Windows.
+    connect(
+      qApp, &QCoreApplication::aboutToQuit, m_trayIcon, &QSystemTrayIcon::hide);
+#endif
+
     m_trayIcon->show();
     if (ConfigHandler().showStartupLaunchMessage()) {
         m_trayIcon->showMessage(
@@ -288,10 +302,22 @@ void Controller::updateConfigComponents()
     }
 }
 
+void Controller::updateRecentScreenshots()
+{
+    if (nullptr != m_history) {
+        if (m_history->isVisible()) {
+            m_history->loadHistory();
+        }
+    }
+}
+
 void Controller::showRecentScreenshots()
 {
-    HistoryWidget* pHistory = new HistoryWidget();
-    pHistory->exec();
+    if (nullptr == m_history) {
+        m_history = new HistoryWidget();
+    }
+    m_history->loadHistory();
+    m_history->show();
 }
 
 void Controller::startFullscreenCapture(const uint id)

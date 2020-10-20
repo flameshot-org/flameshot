@@ -422,10 +422,6 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select default path for Screenshots</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use fixed path for screenshots to save</source>
         <translation type="unfinished"></translation>
     </message>

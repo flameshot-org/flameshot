@@ -10,7 +10,6 @@
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFileInfo>
-#include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
 #include <QLayoutItem>
@@ -20,8 +19,6 @@
 #include <QSettings>
 #include <QUrl>
 #include <QVBoxLayout>
-
-#include <QDebug>
 
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
@@ -42,12 +39,33 @@ HistoryWidget::HistoryWidget(QWidget* parent)
     QWidget* widget = new QWidget();
     scrollArea->setWidget(widget);
     widget->setLayout(m_pVBox);
+}
 
-    loadHistory();
+HistoryWidget::~HistoryWidget()
+{
+    delete m_notification;
+}
+
+void HistoryWidget::clearHistoryLayout(QLayout* layout)
+{
+    QLayoutItem* child;
+    while (layout->count() != 0) {
+        child = layout->takeAt(0);
+        if (child->layout() != 0) {
+            clearHistoryLayout(child->layout());
+        } else if (child->widget() != 0) {
+            delete child->widget();
+        }
+
+        delete child;
+    }
 }
 
 void HistoryWidget::loadHistory()
 {
+    // clear old history if exists
+    clearHistoryLayout(m_pVBox);
+
     // read history files
     History history = History();
     QList<QString> historyFiles = history.history();
@@ -140,9 +158,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
         // TODO - remove dependency injection (s3 & imgur)
         if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_S3) == 0) {
             if (unpackFileName.token.length() > 0) {
-                ImgS3Uploader* uploader = new ImgS3Uploader();
-                removeItem(
-                  uploader, phbl, unpackFileName.file, unpackFileName.token);
+                removeItem(phbl, unpackFileName.file, unpackFileName.token);
             } else {
                 // for compatibility with previous versions and to be able to
                 // remove previous screenshots
@@ -176,18 +192,19 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     m_pVBox->addLayout(phbl);
 }
 
-void HistoryWidget::removeItem(ImgUploader* imgUploader,
-                               QLayout* pl,
+void HistoryWidget::removeItem(QLayout* pl,
                                const QString& fileName,
                                const QString& deleteToken)
 {
     hide();
+    ImgS3Uploader* imgUploader = new ImgS3Uploader();
     imgUploader->show();
     imgUploader->deleteResource(fileName, deleteToken);
     connect(imgUploader, &QWidget::destroyed, this, [=]() {
         if (imgUploader->resultStatus) {
             removeLayoutItem(pl);
         }
+        imgUploader->deleteLater();
         show();
     });
 }

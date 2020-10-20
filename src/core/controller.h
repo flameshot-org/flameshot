@@ -30,6 +30,7 @@ class ConfigWindow;
 class InfoWindow;
 class QSystemTrayIcon;
 class CaptureLauncher;
+class HistoryWidget;
 using lambda = std::function<void(void)>;
 
 class Controller : public QObject
@@ -40,9 +41,11 @@ public:
     static Controller* getInstance();
 
     Controller(const Controller&) = delete;
+    ~Controller();
     void operator=(const Controller&) = delete;
 
     void enableExports();
+    void updateRecentScreenshots();
 
 signals:
     void captureTaken(uint id, QPixmap p);
@@ -87,4 +90,6 @@ private:
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
+
+    HistoryWidget* m_history;
 };

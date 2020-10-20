@@ -55,10 +55,18 @@ jobs:
         type: [portable, installer]
     steps:
       - name: Checkout Source code
+        if: github.event_name == 'push'
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 #          ref: master
+
+      - name: Checkout Source code
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set env & Print flameshot version
         shell: bash
@@ -70,7 +78,7 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo ::set-env name=VERSION::$(echo ${last_committed_tag:1})
+          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
 
       - name: Restore from cache and run vcpkg
         uses: lukka/run-vcpkg@v4

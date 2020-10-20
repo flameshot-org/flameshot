@@ -19,15 +19,16 @@ class HistoryWidget : public QDialog
     Q_OBJECT
 public:
     explicit HistoryWidget(QWidget* parent = nullptr);
+    ~HistoryWidget();
 
-signals:
+    void loadHistory();
 
 private:
-    void loadHistory();
+    void clearHistoryLayout(QLayout* layout);
+
     void addLine(const QString&, const QString&);
     void setEmptyMessage();
-    void removeItem(ImgUploader* imgUploader,
-                    QLayout* pl,
+    void removeItem(QLayout* pl,
                     const QString& s3FileName,
                     const QString& deleteToken);
     void removeLayoutItem(QLayout* pl);
