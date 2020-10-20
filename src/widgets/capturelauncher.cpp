@@ -20,9 +20,6 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/widgets/imagelabel.h"
-
-#include "src/widgets/notificationwidget.h"
-#include <QCheckBox>
 #include <QComboBox>
 #include <QDrag>
 #include <QFormLayout>

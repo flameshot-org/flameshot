@@ -1248,4 +1248,3 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     </message>
 </context>
 </TS>
-
