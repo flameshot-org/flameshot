@@ -452,7 +452,6 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
     m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
 }
 
-
 QString ConfigHandler::saveAfterCopyPathValue()
 {
     return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
