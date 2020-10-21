@@ -342,8 +342,8 @@ void CommandLineParser::printHelp(QStringList args, const Node* node)
                   .arg(argText);
 
     // short section about default behavior
-    helpText += QObject::tr("Per default runs Flameshot in the background and \
-  adds a tray icon for configuration.");
+    helpText += QObject::tr("Per default runs Flameshot in the background and "
+                            "adds a tray icon for configuration.");
     helpText += "\n\n";
 
     // add command options and subarguments

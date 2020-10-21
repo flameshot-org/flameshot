@@ -18,18 +18,17 @@
 #include "geneneralconf.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
 #include <QCheckBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
-#include <QHBoxLayout>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+
 GeneneralConf::GeneneralConf(QWidget* parent)
   : QWidget(parent)
 {
@@ -40,8 +39,10 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initShowStartupLaunchMessage();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
+    initCopyPathAfterSave();
     initSaveAfterCopy();
 
     // this has to be at the end
@@ -67,6 +68,7 @@ void GeneneralConf::updateComponents()
         ConfigHandler().setSaveAfterCopyPath(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     }
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -270,9 +272,25 @@ void GeneneralConf::initAutostart()
       m_autostart, &QCheckBox::clicked, this, &GeneneralConf::autostartChanged);
 }
 
+void GeneneralConf::initShowStartupLaunchMessage()
+{
+    m_showStartupLaunchMessage =
+      new QCheckBox(tr("Show welcome message on launch"), this);
+    ConfigHandler config;
+    bool checked = config.showStartupLaunchMessage();
+    m_showStartupLaunchMessage->setChecked(checked);
+    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
+    m_layout->addWidget(m_showStartupLaunchMessage);
+
+    connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowStartupLaunchMessage(checked);
+    });
+}
+
 void GeneneralConf::initCloseAfterCapture()
 {
-    m_closeAfterCapture = new QCheckBox(tr("Close after capture"), this);
+    m_closeAfterCapture =
+      new QCheckBox(tr("Close application after capture"), this);
     ConfigHandler config;
     bool checked = config.closeAfterScreenshotValue();
     m_closeAfterCapture->setChecked(checked);
@@ -311,12 +329,15 @@ void GeneneralConf::initSaveAfterCopy()
             this,
             &GeneneralConf::saveAfterCopyChanged);
 
-    QHBoxLayout* pathLayout = new QHBoxLayout();
-    m_layout->addStretch();
     QGroupBox* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
-    box->setLayout(pathLayout);
     m_layout->addWidget(box);
+    m_layout->addStretch();
+
+    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    QHBoxLayout* pathLayout = new QHBoxLayout();
 
     m_savePath = new QLineEdit(
       QStandardPaths::writableLocation(QStandardPaths::PicturesLocation), this);
@@ -331,6 +352,17 @@ void GeneneralConf::initSaveAfterCopy()
             &QPushButton::clicked,
             this,
             &GeneneralConf::changeSavePath);
+
+    m_screenshotPathFixedCheck =
+      new QCheckBox(tr("Use fixed path for screenshots to save"), this);
+    m_screenshotPathFixedCheck->setChecked(ConfigHandler().savePathFixed());
+    connect(m_screenshotPathFixedCheck,
+            SIGNAL(toggled(bool)),
+            this,
+            SLOT(togglePathFixed()));
+
+    vboxLayout->addLayout(pathLayout);
+    vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
 void GeneneralConf::saveAfterCopyChanged(bool checked)
@@ -340,19 +372,52 @@ void GeneneralConf::saveAfterCopyChanged(bool checked)
 
 void GeneneralConf::changeSavePath()
 {
-    QString path = QFileDialog::getExistingDirectory(
+    QString path = chooseFolder(
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    if (!path.isEmpty()) {
+        m_savePath->setText(path);
+        ConfigHandler().setSaveAfterCopyPath(path);
+    }
+}
+
+void GeneneralConf::initCopyPathAfterSave()
+{
+    m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
+    ConfigHandler config;
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
+    m_layout->addWidget(m_copyPathAfterSave);
+    connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
+    });
+}
+
+const QString GeneneralConf::chooseFolder(const QString pathDefault)
+{
+    QString path;
+    if (pathDefault.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    path = QFileDialog::getExistingDirectory(
       this,
       tr("Choose a Folder"),
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation),
+      path,
       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (path.isEmpty()) {
-        return;
+        return path;
     }
-    if (!QFileInfo(path).isWritable()) {
-        QMessageBox::about(
-          this, tr("Error"), tr("Unable to write to directory."));
-        return;
+    if (!path.isEmpty()) {
+        if (!QFileInfo(path).isWritable()) {
+            QMessageBox::about(
+              this, tr("Error"), tr("Unable to write to directory."));
+            return QString();
+        }
     }
-    m_savePath->setText(path);
-    ConfigHandler().setSaveAfterCopyPath(path);
+    return path;
+}
+
+void GeneneralConf::togglePathFixed()
+{
+    ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }

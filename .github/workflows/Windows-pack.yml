@@ -2,15 +2,15 @@ name: Packaging(Windows)
 
 on:
   push:
-    branches: 
-      - master
+    branches:
+      - master*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
 
   pull_request:
     branches:
-      - master
+      - master*
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -22,6 +22,14 @@ jobs:
   windows-pack:
     name: VS 2019 ${{ matrix.config.arch }}-${{ matrix.type }}
     runs-on: windows-2019
+    env:
+      VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
+      Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
+      QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
+      # 2020.07
+      VCPKG_VERSION: 56fffbe49dfb4dd8fae0940f272c5fd2b86be991
+      VCPKG_PACKAGES: openssl-windows
+      OPENSSL_ROOT_DIR: ${{ github.workspace }}\vcpkg\installed\${{ matrix.config.vcpkg_triplet }}\
     strategy:
       fail-fast: false
       matrix:
@@ -29,34 +37,29 @@ jobs:
         qt_target: [desktop]
         config:
           - {
-              arch: x86,
-              generator: "-G'Visual Studio 16 2019' -A Win32",
-              vcpkg_triplet: x86-windows,
-              qt_arch: win32_msvc2019,
-              qt_arch_install: msvc2019,
-              pak_arch: win32
-            }
+            arch: x86,
+            generator: "-G'Visual Studio 16 2019' -A Win32",
+            vcpkg_triplet: x86-windows,
+            qt_arch: win32_msvc2019,
+            qt_arch_install: msvc2019,
+            pak_arch: win32
+          }
           - {
-              arch: x64,
-              generator: "-G'Visual Studio 16 2019' -A x64",
-              vcpkg_triplet: x64-windows,
-              qt_arch: win64_msvc2019_64,
-              qt_arch_install: msvc2019_64,
-              pak_arch: win64
-            }
+            arch: x64,
+            generator: "-G'Visual Studio 16 2019' -A x64",
+            vcpkg_triplet: x64-windows,
+            qt_arch: win64_msvc2019_64,
+            qt_arch_install: msvc2019_64,
+            pak_arch: win64
+          }
         type: [portable, installer]
-    env:
-      VCINSTALLDIR: C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/
-      Qt5_DIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\lib\cmake\Qt5\
-      QTDIR: ${{ github.workspace }}\build\Qt\${{ matrix.qt_ver }}\${{ matrix.config.qt_arch_install }}\
-
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
-          ref: master
+#          ref: master
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
@@ -76,6 +79,15 @@ jobs:
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+
+      - name: Restore from cache and run vcpkg
+        uses: lukka/run-vcpkg@v4
+        with:
+          vcpkgArguments: ${{env.VCPKG_PACKAGES}}
+          vcpkgDirectory: '${{ github.workspace }}\vcpkg'
+          appendedCacheKey: ${{ matrix.config.vcpkg_triplet }}
+          vcpkgGitCommitId: ${{ env.VCPKG_VERSION }}
+          vcpkgTriplet: ${{ matrix.config.vcpkg_triplet }}
 
       - name: Cache Qt
         id: cache-qt
@@ -99,6 +111,8 @@ jobs:
         shell: pwsh
         run: |
           cmake ..  ${{matrix.config.generator}}  `
+          -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake"  `
+          -DENABLE_OPENSSL=ON `
           -DCMAKE_BUILD_TYPE=Release  `
           -DRUN_IN_PLACE=${{ contains(matrix.type, 'portable') }}
 

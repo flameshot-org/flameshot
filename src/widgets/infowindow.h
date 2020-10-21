@@ -31,10 +31,6 @@ protected:
     void keyPressEvent(QKeyEvent*);
 
 private:
-    void initInfoTable();
     void initLabels();
     QVBoxLayout* m_layout;
-
-    static QVector<const char*> m_keys;
-    static QVector<const char*> m_description;
 };

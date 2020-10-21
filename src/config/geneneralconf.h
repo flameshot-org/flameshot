@@ -46,22 +46,10 @@ private slots:
     void importConfiguration();
     void exportFileConfiguration();
     void resetConfiguration();
+    void togglePathFixed();
 
 private:
-    QVBoxLayout* m_layout;
-    QCheckBox* m_sysNotifications;
-    QCheckBox* m_showTray;
-    QCheckBox* m_helpMessage;
-    QCheckBox* m_sidePanelButton;
-    QCheckBox* m_autostart;
-    QCheckBox* m_closeAfterCapture;
-    QCheckBox* m_copyAndCloseAfterUpload;
-    QPushButton* m_importButton;
-    QPushButton* m_exportButton;
-    QPushButton* m_resetButton;
-    QCheckBox* m_saveAfterCopy;
-    QLineEdit* m_savePath;
-    QPushButton* m_changeSaveButton;
+    const QString chooseFolder(const QString currentPath = "");
 
     void initShowHelp();
     void initShowSidePanelButton();
@@ -69,7 +57,28 @@ private:
     void initShowTrayIcon();
     void initConfingButtons();
     void initAutostart();
+    void initShowStartupLaunchMessage();
     void initCloseAfterCapture();
     void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
+    void initCopyPathAfterSave();
+
+    // class members
+    QVBoxLayout* m_layout;
+    QCheckBox* m_sysNotifications;
+    QCheckBox* m_showTray;
+    QCheckBox* m_helpMessage;
+    QCheckBox* m_sidePanelButton;
+    QCheckBox* m_autostart;
+    QCheckBox* m_showStartupLaunchMessage;
+    QCheckBox* m_closeAfterCapture;
+    QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyPathAfterSave;
+    QPushButton* m_importButton;
+    QPushButton* m_exportButton;
+    QPushButton* m_resetButton;
+    QCheckBox* m_saveAfterCopy;
+    QLineEdit* m_savePath;
+    QPushButton* m_changeSaveButton;
+    QCheckBox* m_screenshotPathFixedCheck;
 };

@@ -76,14 +76,17 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 {
     bool ok = false;
-
     while (!ok) {
-        QString savePath = QFileDialog::getSaveFileName(
-          nullptr,
-          QString(),
-          FileNameHandler().absoluteSavePath() + ".png",
-          QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP file "
-                        "(*.bmp);;JPEG file (*.jpg)"));
+        ConfigHandler config;
+        QString savePath = FileNameHandler().absoluteSavePath();
+        if (!config.savePathFixed()) {
+            savePath = QFileDialog::getSaveFileName(
+              nullptr,
+              QObject::tr("Save screenshot"),
+              FileNameHandler().absoluteSavePath(),
+              QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
+                            "file (*.bmp);;JPEG file (*.jpg)"));
+        }
 
         if (savePath.isNull()) {
             break;
@@ -92,7 +95,6 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
             !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
             !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
-
             savePath += QLatin1String(".png");
         }
 
@@ -103,6 +105,12 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
               savePath.left(savePath.lastIndexOf(QLatin1String("/")));
             ConfigHandler().setSavePath(pathNoFile);
             QString msg = QObject::tr("Capture saved as ") + savePath;
+            if (config.copyPathAfterSaveEnabled()) {
+                QApplication::clipboard()->setText(savePath);
+                msg = QObject::tr(
+                        "Capture is saved and copied to the clipboard as ") +
+                      savePath;
+            }
             SystemNotification().sendMessage(msg, savePath);
         } else {
             QString msg = QObject::tr("Error trying to save as ") + savePath;

@@ -4,6 +4,8 @@
         <file>img/app/flameshot.svg</file>
         <file>img/app/org.flameshot.Flameshot.png</file>
         <file>img/app/flameshot.png</file>
+        <file>img/app/keyboard.svg</file>
+        <file>img/material/black/delete.svg</file>
         <file>img/material/black/undo-variant.svg</file>
         <file>img/material/black/text.svg</file>
         <file>img/material/black/square.svg</file>
@@ -68,5 +70,9 @@
         <file>img/material/white/arrow-bottom-left.svg</file>
         <file>img/material/black/circlecount-outline.svg</file>
         <file>img/material/white/circlecount-outline.svg</file>
+        <file>img/material/black/shortcut.svg</file>
+        <file>img/material/white/shortcut.svg</file>
+        <file>img/material/black/filepath.svg</file>
+        <file>img/material/white/filepath.svg</file>
     </qresource>
 </RCC>
