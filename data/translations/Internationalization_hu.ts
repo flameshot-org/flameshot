@@ -169,6 +169,14 @@ Press Space to open the side panel.</source>
         <source>General</source>
         <translation>Általános</translation>
     </message>
+    <message>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -194,6 +202,10 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -354,10 +366,6 @@ Press Space to open the side panel.</source>
         <translation>Flameshot indítása</translation>
     </message>
     <message>
-        <source>Close after capture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close after taking a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -401,6 +409,153 @@ Press Space to open the side panel.</source>
         <source>Unable to write to directory.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show welcome message on launch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close application after capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy file path after save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use fixed path for screenshots to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HistoryWidget</name>
+    <message>
+        <source>Latest Uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3Uploader</name>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Kép felötlése</translation>
+    </message>
+    <message>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Unable to remove screenshot from the remote storage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Possibly it doesn&apos;t exist anymore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to remove screenshot from local history anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove screenshot from history?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploader</name>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image</source>
+        <translation type="unfinished">Kép felötlése</translation>
+    </message>
+    <message>
+        <source>Upload image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open the URL.</source>
+        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
+    <message>
+        <source>Open URL</source>
+        <translation type="unfinished">URL megnyitása</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image to Clipboard.</source>
+        <translation type="unfinished">Kép a vágolapra.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
+    <message>
+        <source>Image uploader tool</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImgurUploader</name>
@@ -410,19 +565,19 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation>Kép felötlése</translation>
+        <translation type="vanished">Kép felötlése</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation>URL másolása</translation>
+        <translation type="vanished">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>URL megnyitása</translation>
+        <translation type="vanished">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation>Kép a vágolapra.</translation>
+        <translation type="vanished">Kép a vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -430,15 +585,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation>URL másolva a vágólapra.</translation>
+        <translation type="vanished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Képernyőmentés másolva a vágólapra.</translation>
-    </message>
-    <message>
-        <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Képernyőmentés másolva a vágólapra.</translation>
     </message>
 </context>
 <context>
@@ -460,51 +611,51 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Right Click</source>
-        <translation>jobb egérgomb</translation>
+        <translation type="vanished">jobb egérgomb</translation>
     </message>
     <message>
         <source>Mouse Wheel</source>
-        <translation>Görgő</translation>
+        <translation type="vanished">Görgő</translation>
     </message>
     <message>
         <source>Move selection 1px</source>
-        <translation>Kijelölés mozgatása 1px</translation>
+        <translation type="vanished">Kijelölés mozgatása 1px</translation>
     </message>
     <message>
         <source>Resize selection 1px</source>
-        <translation>Kijelölés méretezése 1 px</translation>
+        <translation type="vanished">Kijelölés méretezése 1 px</translation>
     </message>
     <message>
         <source>Quit capture</source>
-        <translation>Felvétel bezárása</translation>
+        <translation type="vanished">Felvétel bezárása</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation>Másolás vágólapra</translation>
+        <translation type="vanished">Másolás vágólapra</translation>
     </message>
     <message>
         <source>Save selection as a file</source>
-        <translation>Kijelölés mentése fájlba</translation>
+        <translation type="vanished">Kijelölés mentése fájlba</translation>
     </message>
     <message>
         <source>Undo the last modification</source>
-        <translation>Utolsó módosítás visszavonása</translation>
+        <translation type="vanished">Utolsó módosítás visszavonása</translation>
     </message>
     <message>
         <source>Show color picker</source>
-        <translation>Színválasztó mutatása</translation>
+        <translation type="vanished">Színválasztó mutatása</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Vastagság állítása</translation>
+        <translation type="vanished">Vastagság állítása</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Kulcs</translation>
+        <translation type="vanished">Kulcs</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Leírás</translation>
+        <translation type="vanished">Leírás</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
@@ -516,19 +667,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Gyorsbillentyűk&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Gyorsbillentyűk&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
-    </message>
-    <message>
-        <source>SPACEBAR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
     </message>
 </context>
 <context>
@@ -653,10 +796,6 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,6 +905,83 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <source>Capture saved to clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hi, I&apos;m already running!
+You can find me in the system tray.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle side panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit capture</source>
+        <translation type="unfinished">Felvétel bezárása</translation>
+    </message>
+    <message>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show color picker</source>
+        <translation type="unfinished">Színválasztó mutatása</translation>
+    </message>
+    <message>
+        <source>Change the tool&apos;s thickness</source>
+        <translation type="unfinished">Vastagság állítása</translation>
+    </message>
+    <message>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture is saved and copied to the clipboard as </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -816,6 +1032,40 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <source>Set Selection as the paint tool</source>
         <translation>Beállítja a Téglalapos kijelölő eszközt Festő eszközként</translation>
+    </message>
+</context>
+<context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <source>Set Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter new shortcut to change </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <source>Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Leírás</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation type="unfinished">Kulcs</translation>
     </message>
 </context>
 <context>
@@ -1023,9 +1273,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
 </context>
 <context>
+    <name>UploadStorageConfig</name>
+    <message>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
         <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

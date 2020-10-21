@@ -9,4 +9,7 @@ target_sources(
           strftimechooserwidget.cpp
           styleoverride.cpp
           uicoloreditor.cpp
-          visualseditor.cpp)
+          visualseditor.cpp
+          shortcutswidget.cpp
+          setshortcutwidget.cpp
+)

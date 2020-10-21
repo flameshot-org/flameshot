@@ -22,6 +22,8 @@
 
 #include <cstdlib>
 
+#include <QMessageBox>
+#include <QTimer>
 #include <QtCore/QByteArray>
 #include <QtCore/QCryptographicHash>
 #include <QtCore/QDataStream>
@@ -434,6 +436,25 @@ SingleApplication::SingleApplication(int& argc,
 
     d->connectToPrimary(timeout, SingleApplicationPrivate::NewInstance);
     delete d;
+
+    // show message box with inforation that Flameshot is already launched
+    QMessageBox msgBox;
+    msgBox.setText(QObject::tr(
+      "Hi, I'm already running!\nYou can find me in the system tray."));
+    int cnt = 3;
+    QTimer cntDown;
+    QObject::connect(
+      &cntDown, &QTimer::timeout, [&msgBox, &cnt, &cntDown]() -> void {
+          if (--cnt < 0) {
+              cntDown.stop();
+              msgBox.close();
+          } else {
+              msgBox.setWindowTitle(QString("Flameshot (%1)").arg(cnt + 1));
+          }
+      });
+    cntDown.start(1000);
+    msgBox.exec();
+
     ::exit(EXIT_SUCCESS);
 }
 

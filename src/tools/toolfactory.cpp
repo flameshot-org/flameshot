@@ -34,6 +34,7 @@
 #include "save/savetool.h"
 #include "selection/selectiontool.h"
 #include "sizeindicator/sizeindicatortool.h"
+#include "src/utils/confighandler.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
 

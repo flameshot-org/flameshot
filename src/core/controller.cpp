@@ -18,16 +18,19 @@
 #include "controller.h"
 #include "src/config/configwindow.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
 #include "src/widgets/capture/capturetoolbutton.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
+#include "src/widgets/historywidget.h"
 #include "src/widgets/infowindow.h"
+#include "src/widgets/notificationwidget.h"
 #include <QAction>
 #include <QApplication>
+#include <QClipboard>
 #include <QDesktopWidget>
-#include <QFile>
 #include <QMenu>
 #include <QSystemTrayIcon>
 
@@ -41,7 +44,12 @@
 Controller::Controller()
   : m_captureWindow(nullptr)
 {
+    m_history = nullptr;
+
     qApp->setQuitOnLastWindowClosed(false);
+
+    // set default shortcusts if not set yet
+    ConfigHandler().setShortcutsDefault();
 
     // init tray icon
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -60,6 +68,11 @@ Controller::Controller()
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
+}
+
+Controller::~Controller()
+{
+    delete m_history;
 }
 
 Controller* Controller::getInstance()
@@ -193,6 +206,8 @@ void Controller::enableTrayIcon()
     if (m_trayIcon) {
         return;
     }
+    QMenu* trayIconMenu = new QMenu();
+
     ConfigHandler().setDisabledTrayIcon(false);
     QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this]() {
@@ -212,9 +227,16 @@ void Controller::enableTrayIcon()
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
-    QMenu* trayIconMenu = new QMenu();
+    // recent screenshots
+    QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
+    connect(
+      recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
+
+    // generate menu
     trayIconMenu->addAction(captureAction);
     trayIconMenu->addAction(launcherAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(recentAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(configAction);
     trayIconMenu->addAction(infoAction);
@@ -242,6 +264,15 @@ void Controller::enableTrayIcon()
 #endif
 
     m_trayIcon->show();
+    if (ConfigHandler().showStartupLaunchMessage()) {
+        m_trayIcon->showMessage(
+          "Flameshot",
+          QObject::tr(
+            "Hello, I'm here! Click icon in the tray to take a screenshot or "
+            "click with a right button to see more options."),
+          QSystemTrayIcon::Information,
+          3000);
+    }
 }
 
 void Controller::disableTrayIcon()
@@ -269,6 +300,24 @@ void Controller::updateConfigComponents()
     if (m_configWindow) {
         m_configWindow->updateChildren();
     }
+}
+
+void Controller::updateRecentScreenshots()
+{
+    if (nullptr != m_history) {
+        if (m_history->isVisible()) {
+            m_history->loadHistory();
+        }
+    }
+}
+
+void Controller::showRecentScreenshots()
+{
+    if (nullptr == m_history) {
+        m_history = new HistoryWidget();
+    }
+    m_history->loadHistory();
+    m_history->show();
 }
 
 void Controller::startFullscreenCapture(const uint id)

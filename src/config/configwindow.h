@@ -20,6 +20,7 @@
 #include <QTabWidget>
 
 class FileNameEditor;
+class ShortcutsWidget;
 class GeneneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
@@ -38,6 +39,7 @@ protected:
 
 private:
     FileNameEditor* m_filenameEditor;
+    ShortcutsWidget* m_shortcuts;
     GeneneralConf* m_generalConfig;
     VisualsEditor* m_visuals;
     QFileSystemWatcher* m_configWatcher;
