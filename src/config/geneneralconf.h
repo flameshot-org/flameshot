@@ -57,7 +57,6 @@ private:
     void initShowTrayIcon();
     void initConfingButtons();
     void initAutostart();
-    void initShowStartupLaunchMessage();
     void initCloseAfterCapture();
     void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
@@ -70,7 +69,6 @@ private:
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
     QCheckBox* m_autostart;
-    QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_closeAfterCapture;
     QCheckBox* m_copyAndCloseAfterUpload;
     QCheckBox* m_copyPathAfterSave;

@@ -39,7 +39,6 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
-    initShowStartupLaunchMessage();
     initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
@@ -270,21 +269,6 @@ void GeneneralConf::initAutostart()
 
     connect(
       m_autostart, &QCheckBox::clicked, this, &GeneneralConf::autostartChanged);
-}
-
-void GeneneralConf::initShowStartupLaunchMessage()
-{
-    m_showStartupLaunchMessage =
-      new QCheckBox(tr("Show welcome message on launch"), this);
-    ConfigHandler config;
-    bool checked = config.showStartupLaunchMessage();
-    m_showStartupLaunchMessage->setChecked(checked);
-    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
-    m_layout->addWidget(m_showStartupLaunchMessage);
-
-    connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setShowStartupLaunchMessage(checked);
-    });
 }
 
 void GeneneralConf::initCloseAfterCapture()

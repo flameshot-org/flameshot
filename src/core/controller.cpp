@@ -264,15 +264,6 @@ void Controller::enableTrayIcon()
 #endif
 
     m_trayIcon->show();
-    if (ConfigHandler().showStartupLaunchMessage()) {
-        m_trayIcon->showMessage(
-          "Flameshot",
-          QObject::tr(
-            "Hello, I'm here! Click icon in the tray to take a screenshot or "
-            "click with a right button to see more options."),
-          QSystemTrayIcon::Information,
-          3000);
-    }
 }
 
 void Controller::disableTrayIcon()

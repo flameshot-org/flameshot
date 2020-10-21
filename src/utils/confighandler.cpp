@@ -373,22 +373,6 @@ void ConfigHandler::setStartupLaunch(const bool start)
     m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
-bool ConfigHandler::showStartupLaunchMessage()
-{
-    if (!m_settings.contains(QStringLiteral("showStartupLaunchMessage"))) {
-        m_settings.setValue(QStringLiteral("showStartupLaunchMessage"), true);
-    }
-    return m_settings.value(QStringLiteral("showStartupLaunchMessage"))
-      .toBool();
-}
-
-void ConfigHandler::setShowStartupLaunchMessage(
-  const bool showStartupLaunchMessage)
-{
-    m_settings.setValue(QStringLiteral("showStartupLaunchMessage"),
-                        showStartupLaunchMessage);
-}
-
 int ConfigHandler::contrastOpacityValue()
 {
     int opacity = 190;
