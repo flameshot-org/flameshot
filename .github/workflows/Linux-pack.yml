@@ -137,6 +137,7 @@ jobs:
         run: |
           apt-get -y -qq update
           apt-get -y --no-install-recommends install \
+            libssl-dev \
             qt5-default \
             qttools5-dev-tools \
             qttools5-dev \
@@ -333,6 +334,7 @@ jobs:
           sudo apt-get -y -qq update
           sudo apt-get -y --no-install-recommends install \
             cmake \
+            libssl-dev \
             extra-cmake-modules \
             build-essential \
             qt5-default \

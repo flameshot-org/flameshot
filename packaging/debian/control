@@ -9,6 +9,7 @@ Build-Depends:
  qttools5-dev (>= 5.9.0~),
  qttools5-dev-tools (>= 5.9.0~),
  libqt5svg5-dev (>= 5.9.0~),
+ libssl-dev,
 Standards-Version: 4.5.0
 Homepage: https://github.com/flameshot-org/flameshot
 Vcs-Browser: https://github.com/flameshot-org/flameshot
@@ -21,9 +22,9 @@ Depends:
  libqt5svg5 (>= 5.9.0~),
  ${shlibs:Depends},
  ${misc:Depends},
+ openssl,
 Suggests:
  ca-certificates,
- openssl,
 Description: Powerful yet simple-to-use screenshot software
  Flameshot is a powerful yet simple-to-use screenshot software.
  Notable features include customizable appearance, in-app screenshot editing,

@@ -40,6 +40,7 @@ jobs:
           sudo apt-get -y -qq update
           sudo apt-get -y --no-install-recommends install \
             cmake \
+            libssl-dev \
             extra-cmake-modules \
             build-essential \
             qt5-default \

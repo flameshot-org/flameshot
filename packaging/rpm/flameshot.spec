@@ -15,6 +15,7 @@ Source0: https://github.com/flameshot-org/%{sourcename}/archive/v%{version}.tar.
 #BuildArch: noarch
 
 %if 0%{?is_opensuse}
+BuildRequires: gcc-c++ >= 7
 %if 0%{?suse_version} >= 1500
 BuildRequires: gcc-c++ >= 7
 BuildRequires: update-desktop-files
@@ -41,7 +42,7 @@ BuildRequires: pkgconfig(Qt5DBus) >= 5.9.0
 BuildRequires: pkgconfig(Qt5Network) >= 5.9.0
 BuildRequires: pkgconfig(Qt5Widgets)  >= 5.9.0
 BuildRequires: pkgconfig(Qt5Svg)  >= 5.9.0
-
+BuildRequires: openssl-devel
 
 %if 0%{?fedora} || 0%{?rhel_version} || 0%{?centos_version}
 Requires: qt5-qtbase >= 5.9.0
