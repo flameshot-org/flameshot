@@ -59,7 +59,6 @@ private:
     void initAutostart();
     void initShowStartupLaunchMessage();
     void initCloseAfterCapture();
-    void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
     void initCopyPathAfterSave();
 
