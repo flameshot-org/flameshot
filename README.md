@@ -168,15 +168,31 @@ These shortcuts are available in GUI mode:
 
 |  Keys                                                                     |  Description                                                   |
 |---                                                                        |---                                                             |
+| <kbd>P</kbd>                                          | Set the Pencil as paint tool |
+| <kbd>D</kbd>                                          | Set the Line as paint tool |
+| <kbd>A</kbd>                                          | Set the Arrow as paint tool |
+| <kbd>S</kbd>                                          | Set Selection as paint tool |
+| <kbd>R</kbd>                                          | Set the Rectangle as paint tool |
+| <kbd>C</kbd>                                          | Set the Circle as paint tool |
+| <kbd>M</kbd>                                          | Set the Marker as paint tool |
+| <kbd>T</kbd>                                          | Add text to your capture |
+| <kbd>B</kbd>                                          | Set Pixalate as the paint tool |
 | <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd>                    | Move selection 1px                                             |
 | <kbd>Shift</kbd> + <kbd>←</kbd>, <kbd>↓</kbd>, <kbd>↑</kbd>, <kbd>→</kbd> | Resize selection 1px                                           |
 | <kbd>Esc</kbd>                                                            | Quit capture                                                   |
+| <kbd>Ctrl</kbd> + <kbd>M</kbd>                                            | Move the selection area                                              |
 | <kbd>Ctrl</kbd> + <kbd>C</kbd>                                            | Copy to clipboard                                              |
 | <kbd>Ctrl</kbd> + <kbd>S</kbd>                                            | Save selection as a file                                       |
 | <kbd>Ctrl</kbd> + <kbd>Z</kbd>                                            | Undo the last modification                                     |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd>                                            | Redo the next modification                    |
+| <kbd>Ctrl</kbd> + <kbd>Q</kbd>                                            | Leave the capture screen                                         |
+| <kbd>Ctrl</kbd> + <kbd>O</kbd>                                            | Choose an app to open the capture                                |
+| <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
 | Right Click                                                               | Show the color wheel                                              |
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
+| <kbd>Print screen</kbd>                                          | Capture Screen |
+| <kbd>Shift</kbd> + <kbd>Print</kbd>                                            | Screenshot History                                     |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
 
