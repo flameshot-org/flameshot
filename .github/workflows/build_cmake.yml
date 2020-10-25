@@ -7,7 +7,6 @@ on:
       - 'README.md'
       - 'LICENSE'
   pull_request:
-    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
