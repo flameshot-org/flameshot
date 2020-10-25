@@ -289,18 +289,11 @@ void Controller::handleCaptureTaken(uint id, QPixmap p)
         it.value().exportCapture(p);
         m_requestMap.erase(it);
     }
-    if (ConfigHandler().closeAfterScreenshotValue()) {
-        QApplication::quit();
-    }
 }
 
 void Controller::handleCaptureFailed(uint id)
 {
     m_requestMap.remove(id);
-
-    if (ConfigHandler().closeAfterScreenshotValue()) {
-        QApplication::quit();
-    }
 }
 
 void Controller::doLater(int msec, QObject* receiver, lambda func)
