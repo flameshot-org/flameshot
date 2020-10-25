@@ -40,7 +40,6 @@ private slots:
     void showDesktopNotificationChanged(bool checked);
     void showTrayIconChanged(bool checked);
     void autostartChanged(bool checked);
-    void closeAfterCaptureChanged(bool checked);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
     void importConfiguration();
@@ -54,8 +53,6 @@ private:
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
     QCheckBox* m_autostart;
-    QCheckBox* m_closeAfterCapture;
-    QCheckBox* m_copyAndCloseAfterUpload;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;

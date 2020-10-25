@@ -359,25 +359,6 @@ void ConfigHandler::setContrastOpacity(const int transparency)
     m_settings.setValue(QStringLiteral("contrastOpacity"), transparency);
 }
 
-bool ConfigHandler::closeAfterScreenshotValue()
-{
-    return m_settings.value(QStringLiteral("closeAfterScreenshot")).toBool();
-}
-
-void ConfigHandler::setCloseAfterScreenshot(const bool close)
-{
-    m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
-}
-
-bool ConfigHandler::copyAndCloseAfterUploadEnabled()
-{
-    return m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
-}
-
-void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
-{
-    m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
-}
 bool ConfigHandler::saveAfterCopyValue()
 {
     return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
