@@ -79,11 +79,6 @@ public:
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
-    bool closeAfterScreenshotValue();
-    void setCloseAfterScreenshot(const bool);
-
-    bool copyAndCloseAfterUploadEnabled();
-    void setCopyAndCloseAfterUploadEnabled(const bool);
     bool saveAfterCopyValue();
     void setSaveAfterCopy(const bool);
 

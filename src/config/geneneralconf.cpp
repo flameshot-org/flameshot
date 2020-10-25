@@ -39,10 +39,6 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
-    initShowStartupLaunchMessage();
-    initCloseAfterCapture();
-    initCopyAndCloseAfterUpload();
-    initCopyPathAfterSave();
     initSaveAfterCopy();
 
     // this has to be at the end
@@ -57,9 +53,6 @@ void GeneneralConf::updateComponents()
     m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
-    m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
 
     if (!config.saveAfterCopyPathValue().isEmpty()) {
@@ -103,11 +96,6 @@ void GeneneralConf::showTrayIconChanged(bool checked)
 void GeneneralConf::autostartChanged(bool checked)
 {
     ConfigHandler().setStartupLaunch(checked);
-}
-
-void GeneneralConf::closeAfterCaptureChanged(bool checked)
-{
-    ConfigHandler().setCloseAfterScreenshot(checked);
 }
 
 void GeneneralConf::importConfiguration()
@@ -270,53 +258,6 @@ void GeneneralConf::initAutostart()
 
     connect(
       m_autostart, &QCheckBox::clicked, this, &GeneneralConf::autostartChanged);
-}
-
-void GeneneralConf::initShowStartupLaunchMessage()
-{
-    m_showStartupLaunchMessage =
-      new QCheckBox(tr("Show welcome message on launch"), this);
-    ConfigHandler config;
-    bool checked = config.showStartupLaunchMessage();
-    m_showStartupLaunchMessage->setChecked(checked);
-    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
-    m_layout->addWidget(m_showStartupLaunchMessage);
-
-    connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setShowStartupLaunchMessage(checked);
-    });
-}
-
-void GeneneralConf::initCloseAfterCapture()
-{
-    m_closeAfterCapture =
-      new QCheckBox(tr("Close application after capture"), this);
-    ConfigHandler config;
-    bool checked = config.closeAfterScreenshotValue();
-    m_closeAfterCapture->setChecked(checked);
-    m_closeAfterCapture->setToolTip(tr("Close after taking a screenshot"));
-    m_layout->addWidget(m_closeAfterCapture);
-
-    connect(m_closeAfterCapture,
-            &QCheckBox::clicked,
-            this,
-            &GeneneralConf::closeAfterCaptureChanged);
-}
-
-void GeneneralConf::initCopyAndCloseAfterUpload()
-{
-    m_copyAndCloseAfterUpload =
-      new QCheckBox(tr("Copy URL after upload"), this);
-    ConfigHandler config;
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
-    m_copyAndCloseAfterUpload->setToolTip(
-      tr("Copy URL and close window after upload"));
-    m_layout->addWidget(m_copyAndCloseAfterUpload);
-
-    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
-    });
 }
 
 void GeneneralConf::initSaveAfterCopy()
