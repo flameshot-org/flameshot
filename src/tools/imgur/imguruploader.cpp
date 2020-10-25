@@ -93,14 +93,9 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         m_deleteImageURL.setUrl(
           QStringLiteral("https://imgur.com/delete/%1")
             .arg(data[QStringLiteral("deletehash")].toString()));
-        if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
-            SystemNotification().sendMessage(
-              QObject::tr("URL copied to clipboard."));
-            QApplication::clipboard()->setText(m_imageURL.toString());
-            close();
-        } else {
-            onUploadOk();
-        }
+
+        onUploadOk();
+
     } else {
         m_infoLabel->setText(reply->errorString());
     }
