@@ -84,6 +84,8 @@ private slots:
     void upResize();
     void downResize();
 
+    void selectAll();
+
     void leftMove();
     void rightMove();
     void upMove();
