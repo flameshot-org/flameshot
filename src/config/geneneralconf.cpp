@@ -61,8 +61,6 @@ void GeneneralConf::updateComponents()
         ConfigHandler().setSaveAfterCopyPath(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     }
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
 #endif
@@ -319,18 +317,6 @@ void GeneneralConf::changeSavePath()
         m_savePath->setText(path);
         ConfigHandler().setSaveAfterCopyPath(path);
     }
-}
-
-void GeneneralConf::initCopyPathAfterSave()
-{
-    m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
-    ConfigHandler config;
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
-    m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
-    m_layout->addWidget(m_copyPathAfterSave);
-    connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
-    });
 }
 
 const QString GeneneralConf::chooseFolder(const QString pathDefault)
