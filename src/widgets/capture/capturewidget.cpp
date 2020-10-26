@@ -539,7 +539,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     updateCursor();
 }
 
-void CaptureWidget::leftMove()
+void CaptureWidget::moveLeft()
 {
     if (m_selection->geometry().left() > rect().left()) {
         m_selection->move(QPoint(m_selection->x() - 1, m_selection->y()));
@@ -548,7 +548,7 @@ void CaptureWidget::leftMove()
     }
 }
 
-void CaptureWidget::rightMove()
+void CaptureWidget::moveRight()
 {
     if (m_selection->geometry().right() < rect().right()) {
         m_selection->move(QPoint(m_selection->x() + 1, m_selection->y()));
@@ -559,7 +559,7 @@ void CaptureWidget::rightMove()
     }
 }
 
-void CaptureWidget::upMove()
+void CaptureWidget::moveUp()
 {
     if (m_selection->geometry().top() > rect().top()) {
         m_selection->move(QPoint(m_selection->x(), m_selection->y() - 1));
@@ -570,7 +570,7 @@ void CaptureWidget::upMove()
     }
 }
 
-void CaptureWidget::downMove()
+void CaptureWidget::moveDown()
 {
     if (m_selection->geometry().bottom() < rect().bottom()) {
         m_selection->move(QPoint(m_selection->x(), m_selection->y() + 1));
@@ -885,7 +885,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     emit thicknessChanged(m_context.thickness);
 }
 
-void CaptureWidget::leftResize()
+void CaptureWidget::resizeLeft()
 {
     if (m_selection->isVisible() &&
         m_selection->geometry().right() > m_selection->geometry().left()) {
@@ -899,7 +899,7 @@ void CaptureWidget::leftResize()
     }
 }
 
-void CaptureWidget::rightResize()
+void CaptureWidget::resizeRight()
 {
     if (m_selection->isVisible() &&
         m_selection->geometry().right() < rect().right()) {
@@ -913,7 +913,7 @@ void CaptureWidget::rightResize()
     }
 }
 
-void CaptureWidget::upResize()
+void CaptureWidget::resizeUp()
 {
     if (m_selection->isVisible() &&
         m_selection->geometry().bottom() > m_selection->geometry().top()) {
@@ -927,7 +927,7 @@ void CaptureWidget::upResize()
     }
 }
 
-void CaptureWidget::downResize()
+void CaptureWidget::resizeDown()
 {
     if (m_selection->isVisible() &&
         m_selection->geometry().bottom() < rect().bottom()) {
@@ -973,29 +973,29 @@ void CaptureWidget::initShortcuts()
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
                   this,
-                  SLOT(leftResize()));
+                  SLOT(resizeLeft()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
                   this,
-                  SLOT(rightResize()));
+                  SLOT(resizeRight()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
                   this,
-                  SLOT(upResize()));
+                  SLOT(resizeUp()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
                   this,
-                  SLOT(downResize()));
+                  SLOT(resizeDown()));
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
                   this,
-                  SLOT(leftMove()));
+                  SLOT(moveLeft()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
                   this,
-                  SLOT(rightMove()));
+                  SLOT(moveRight()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
                   this,
-                  SLOT(upMove()));
+                  SLOT(moveUp()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                   this,
-                  SLOT(downMove()));
+                  SLOT(moveDown()));
 
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
 }
