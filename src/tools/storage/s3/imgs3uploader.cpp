@@ -198,9 +198,9 @@ void ImgS3Uploader::handleReplyUpload(QNetworkReply* reply)
 
         // Copy url to clipboard if required
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
-            QApplication::clipboard()->setText(imageUrl().toString());
             SystemNotification().sendMessage(tr("URL copied to clipboard."));
             Controller::getInstance()->updateRecentScreenshots();
+            QApplication::clipboard()->setText(imageUrl().toString());
             close();
         } else {
             onUploadOk();
