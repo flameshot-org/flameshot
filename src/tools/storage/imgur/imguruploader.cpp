@@ -79,10 +79,10 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         resultStatus = true;
 
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
-            QApplication::clipboard()->setText(imageUrl().toString());
             SystemNotification().sendMessage(
               QObject::tr("URL copied to clipboard."));
             Controller::getInstance()->updateRecentScreenshots();
+            QApplication::clipboard()->setText(imageUrl().toString());
             close();
         } else {
             onUploadOk();
