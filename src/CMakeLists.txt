@@ -118,20 +118,6 @@ target_link_libraries(
   Qt5::Network
   Qt5::Widgets)
 
-set(USE_OPENSSL FALSE)
-if(ENABLE_OPENSSL)
-  find_package(OpenSSL)
-  if (OPENSSL_FOUND)
-    message(STATUS "OpenSSL support enabled.")
-    set(USE_OPENSSL TRUE)
-  endif()
-else()
-  mark_as_advanced(CLEAR OPENSSL_LIBRARIES OPENSSL_INCLUDE_DIR)
-endif()
-
-if(NOT USE_OPENSSL)
-  message(WARNING "OpenSSL is required to upload screenshot to imgur")
-endif()
 
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
@@ -229,17 +215,6 @@ if(WIN32)
       DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/
       DESTINATION bin
     )
-
-    if (ENABLE_OPENSSL)
-      if (EXISTS $ENV{OPENSSL_ROOT_DIR}/bin)
-        install(DIRECTORY $ENV{OPENSSL_ROOT_DIR}/bin/
-                DESTINATION bin
-                FILES_MATCHING PATTERN "*.dll"
-                )
-      else()
-        message(WARNING "Unable to find OpenSSL dlls.")
-      endif()
-    endif()
 
   else()
     message("Unable to find executable QTDIR/bin/windeployqt.")

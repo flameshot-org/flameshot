@@ -123,6 +123,8 @@ jobs:
         working-directory: build
         shell: pwsh
         run: |
+          dir $OPENSSL_ROOT_DIR
+          cp $OPENSSL_ROOT_DIR\*.dll $env:GITHUB_WORKSPACE\build\Package\.
           If ($env:TYPE -eq "installer")
           {
             cpack -G WIX -B "$env:GITHUB_WORKSPACE\build\Package"
