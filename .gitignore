@@ -61,5 +61,6 @@ data/flatpak/.flatpak-builder
 
 # Jetbrains
 .idea/
+.run
 
 # End of https://www.gitignore.io/api/snapcraft
