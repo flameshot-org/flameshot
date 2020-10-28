@@ -60,6 +60,7 @@ public:
     QPixmap pixmap();
 
 public slots:
+    bool commitCurrentTool();
     void deleteToolwidgetOrClose();
 
 signals:
