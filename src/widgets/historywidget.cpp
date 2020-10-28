@@ -106,6 +106,8 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     QPixmap pixmap;
     pixmap.load(fullFileName, "png");
 
+    // TODO - remove much later, it is still required to keep old previews works
+    // fine
     if (pixmap.height() / HISTORYPIXMAP_MAX_PREVIEW_HEIGHT >=
         pixmap.width() / HISTORYPIXMAP_MAX_PREVIEW_WIDTH) {
         pixmap = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
