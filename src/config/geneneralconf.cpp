@@ -61,13 +61,6 @@ void GeneneralConf::updateComponents()
     m_copyAndCloseAfterUpload->setChecked(
       config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-
-    if (!config.saveAfterCopyPathValue().isEmpty()) {
-        m_savePath->setText(config.saveAfterCopyPathValue());
-    } else {
-        ConfigHandler().setSaveAfterCopyPath(
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
-    }
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
@@ -376,7 +369,7 @@ void GeneneralConf::changeSavePath()
       QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     if (!path.isEmpty()) {
         m_savePath->setText(path);
-        ConfigHandler().setSaveAfterCopyPath(path);
+        ConfigHandler().setSavePath(path);
     }
 }
 
