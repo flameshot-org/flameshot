@@ -42,6 +42,8 @@ UtilityPanel::UtilityPanel(QWidget* parent)
             &QPropertyAnimation::finished,
             m_internalPanel,
             &QWidget::hide);
+
+    hide();
 }
 
 QWidget* UtilityPanel::toolWidget() const
@@ -127,7 +129,6 @@ void UtilityPanel::initInternalPanel()
     bgColor.setAlphaF(0.0);
     m_internalPanel->setStyleSheet(
       QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
-    m_internalPanel->hide();
 
     m_hide = new QPushButton();
     m_hide->setText(tr("Hide"));
