@@ -51,6 +51,10 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
     m_shortcuts << (QStringList() << "TYPE_MOVE_DOWN"
                                   << QObject::tr("Move selection down 1px")
                                   << QKeySequence(Qt::Key_Down).toString());
+    m_shortcuts << (QStringList()
+                    << "TYPE_COMMIT_CURRENT_TOOL"
+                    << QObject::tr("Commit text in text area")
+                    << QKeySequence(Qt::CTRL + Qt::Key_Return).toString());
 
     m_shortcuts << (QStringList() << "" << QObject::tr("Quit capture")
                                   << QKeySequence(Qt::Key_Escape).toString());
