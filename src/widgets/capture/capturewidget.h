@@ -63,6 +63,7 @@ public:
                                    const QString& appLatestUrl);
 
 public slots:
+    bool commitCurrentTool();
     void deleteToolwidgetOrClose();
 
 signals:
