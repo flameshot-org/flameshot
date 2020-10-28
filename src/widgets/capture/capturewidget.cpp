@@ -235,6 +235,26 @@ QPixmap CaptureWidget::pixmap()
     return m_context.selectedScreenshotArea();
 }
 
+// Finish whatever the current tool is doing, if there is a current active
+// tool.
+bool CaptureWidget::commitCurrentTool()
+{
+    if (m_activeButton) {
+        if (m_activeTool) {
+            if (m_activeTool->isValid() && m_toolWidget) {
+                pushToolToStack();
+            } else {
+                m_activeTool->deleteLater();
+            }
+            if (m_toolWidget) {
+                m_toolWidget->deleteLater();
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void CaptureWidget::deleteToolwidgetOrClose()
 {
     if (m_panel->isVisible()) {
@@ -335,16 +355,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         m_mouseIsClicked = true;
         // Click using a tool
         if (m_activeButton) {
-            if (m_activeTool) {
-                if (m_activeTool->isValid() && m_toolWidget) {
-                    pushToolToStack();
-                } else {
-                    m_activeTool->deleteLater();
-                }
-                if (m_toolWidget) {
-                    m_toolWidget->deleteLater();
-                    return;
-                }
+            if (commitCurrentTool()) {
+                return;
             }
             m_activeTool = m_activeButton->tool()->copy(this);
 
@@ -996,6 +1008,11 @@ void CaptureWidget::initShortcuts()
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                   this,
                   SLOT(downMove()));
+
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_COMMIT_CURRENT_TOOL")),
+      this,
+      SLOT(commitCurrentTool()));
 
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
 }
