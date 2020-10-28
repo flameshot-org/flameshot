@@ -87,9 +87,6 @@ public:
     bool saveAfterCopyValue();
     void setSaveAfterCopy(const bool);
 
-    QString saveAfterCopyPathValue();
-    void setSaveAfterCopyPath(const QString&);
-
     bool copyPathAfterSaveEnabled();
     void setCopyPathAfterSaveEnabled(const bool);
 
