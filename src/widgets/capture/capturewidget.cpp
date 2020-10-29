@@ -546,30 +546,22 @@ void CaptureWidget::moveSelection(QPoint p)
 
 void CaptureWidget::moveLeft()
 {
-    if (m_selection->geometry().left() > rect().left()) {
-        moveSelection(QPoint(-1, 0));
-    }
+    moveSelection(QPoint(-1, 0));
 }
 
 void CaptureWidget::moveRight()
 {
-    if (m_selection->geometry().right() < rect().right()) {
-        moveSelection(QPoint(1, 0));
-    }
+    moveSelection(QPoint(1, 0));
 }
 
 void CaptureWidget::moveUp()
 {
-    if (m_selection->geometry().top() > rect().top()) {
-        moveSelection(QPoint(0, -1));
-    }
+    moveSelection(QPoint(0, -1));
 }
 
 void CaptureWidget::moveDown()
 {
-    if (m_selection->geometry().bottom() < rect().bottom()) {
-        moveSelection(QPoint(0, 1));
-    }
+    moveSelection(QPoint(0, 1));
 }
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
@@ -891,37 +883,29 @@ void CaptureWidget::repositionSelection(QRect r)
 void CaptureWidget::adjustSelection(QMargins m)
 {
     QRect newGeometry = m_selection->geometry() + m;
-    // if (rect().contains(newGeometry)) {
+    if (rect().contains(newGeometry)) {
         repositionSelection(newGeometry);
-    // }
+    }
 }
 
 void CaptureWidget::resizeLeft()
 {
-    if (m_selection->geometry().right() > m_selection->geometry().left()) {
-        adjustSelection(QMargins(0, 0, -1, 0));
-    }
+    adjustSelection(QMargins(0, 0, -1, 0));
 }
 
 void CaptureWidget::resizeRight()
 {
-    if (m_selection->geometry().right() < rect().right()) {
-        adjustSelection(QMargins(0, 0, 1, 0));
-    }
+    adjustSelection(QMargins(0, 0, 1, 0));
 }
 
 void CaptureWidget::resizeUp()
 {
-    if (m_selection->geometry().bottom() > m_selection->geometry().top()) {
-        adjustSelection(QMargins(0, 0, 0, -1));
-    }
+    adjustSelection(QMargins(0, 0, 0, -1));
 }
 
 void CaptureWidget::resizeDown()
 {
-    if (m_selection->geometry().bottom() < rect().bottom()) {
-        adjustSelection(QMargins(0, 0, 0, 1));
-    }
+    adjustSelection(QMargins(0, 0, 0, 1));
 }
 
 void CaptureWidget::initShortcuts()
