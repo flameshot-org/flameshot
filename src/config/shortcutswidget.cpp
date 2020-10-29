@@ -84,13 +84,20 @@ void ShortcutsWidget::initInfoTable()
 
     // add content
     for (int i = 0; i < shortcuts().size(); ++i) {
-        m_table->setItem(i, 0, new QTableWidgetItem(m_shortcuts.at(i).at(1)));
+        const auto current_shortcut = m_shortcuts.at(i);
+        const auto identifier = current_shortcut.at(0);
+        const auto description = current_shortcut.at(1);
+        const auto default_key_sequence = current_shortcut.at(2);
+        m_table->setItem(i, 0, new QTableWidgetItem(description));
 
-        QTableWidgetItem* item = new QTableWidgetItem(m_shortcuts.at(i).at(2));
+        const auto key_sequence = identifier.isEmpty()
+                                    ? default_key_sequence
+                                    : m_config.shortcut(identifier);
+        QTableWidgetItem* item = new QTableWidgetItem(key_sequence);
         item->setTextAlignment(Qt::AlignCenter);
         m_table->setItem(i, 1, item);
 
-        if (m_shortcuts.at(i).at(0).isEmpty()) {
+        if (identifier.isEmpty()) {
             QFont font;
             font.setBold(true);
             item->setFont(font);

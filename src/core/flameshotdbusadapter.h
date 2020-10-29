@@ -30,7 +30,7 @@ public:
     virtual ~FlameshotDBusAdapter();
 
 signals:
-    void captureTaken(uint id, QByteArray rawImage);
+    void captureTaken(uint id, QByteArray rawImage, QRect selection);
     void captureFailed(uint id);
 
 public slots:
@@ -50,5 +50,5 @@ public slots:
     Q_NOREPLY void autostartEnabled(bool enabled);
 
 private slots:
-    void handleCaptureTaken(uint id, const QPixmap& p);
+    void handleCaptureTaken(uint id, const QPixmap& p, QRect selection);
 };

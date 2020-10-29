@@ -60,10 +60,11 @@ public:
     QPixmap pixmap();
 
 public slots:
+    bool commitCurrentTool();
     void deleteToolwidgetOrClose();
 
 signals:
-    void captureTaken(uint id, QPixmap p);
+    void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
     void thicknessChanged(const int thickness);
@@ -79,17 +80,17 @@ private slots:
     void childEnter();
     void childLeave();
 
-    void leftResize();
-    void rightResize();
-    void upResize();
-    void downResize();
-
     void selectAll();
 
-    void leftMove();
-    void rightMove();
-    void upMove();
-    void downMove();
+    void resizeLeft();
+    void resizeRight();
+    void resizeUp();
+    void resizeDown();
+
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
 
     void setState(CaptureToolButton* b);
     void processTool(CaptureTool* t);
@@ -140,6 +141,10 @@ private:
     void updateCursor();
     void pushToolToStack();
     void makeChild(QWidget* w);
+
+    void repositionSelection(QRect r);
+    void adjustSelection(QMargins m);
+    void moveSelection(QPoint p);
 
 private:
     QRect extendedSelection() const;
