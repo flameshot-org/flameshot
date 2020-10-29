@@ -416,25 +416,12 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             QPoint newTopLeft =
               initialRect.topLeft() + (e->pos() - m_dragStartPoint);
             QRect finalRect(newTopLeft, initialRect.size());
-
-            if (finalRect.left() < rect().left()) {
-                finalRect.setLeft(rect().left());
-            } else if (finalRect.right() > rect().right()) {
-                finalRect.setRight(rect().right());
-            }
-            if (finalRect.top() < rect().top()) {
-                finalRect.setTop(rect().top());
-            } else if (finalRect.bottom() > rect().bottom()) {
-                finalRect.setBottom(rect().bottom());
-            }
-            m_selection->setGeometry(
-              finalRect.normalized().intersected(rect()));
+            m_selection->setGeometry(finalRect.normalized().intersected(rect()));
         } else {
             // Dragging a handle
             QRect r = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
             
-
             using sw = SelectionWidget;
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
                 m_mouseOverHandle == sw::TOP_SIDE ||
