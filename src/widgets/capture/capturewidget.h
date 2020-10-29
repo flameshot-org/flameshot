@@ -79,13 +79,11 @@ private slots:
     void childEnter();
     void childLeave();
 
-    void resizeSelection(QMargins m);
     void resizeLeft();
     void resizeRight();
     void resizeUp();
     void resizeDown();
 
-    void moveSelection(QPoint p);
     void moveLeft();
     void moveRight();
     void moveUp();
@@ -140,6 +138,10 @@ private:
     void updateCursor();
     void pushToolToStack();
     void makeChild(QWidget* w);
+
+    void repositionSelection(QRect r);
+    void adjustSelection(QMargins m);
+    void moveSelection(QPoint p);
 
 private:
     QRect extendedSelection() const;

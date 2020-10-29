@@ -541,11 +541,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 
 void CaptureWidget::moveSelection(QPoint p)
 {
-    m_selection->move(QPoint(m_selection->x(), m_selection->y()) + p);
-    QRect newGeometry = m_selection->geometry().intersected(rect());
-    m_context.selection = extendedRect(&newGeometry);
-    m_buttonHandler->updatePosition(m_selection->geometry());
-    update();
+    adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
 }
 
 void CaptureWidget::moveLeft()
@@ -880,10 +876,10 @@ void CaptureWidget::setDrawThickness(const int& t)
     emit thicknessChanged(m_context.thickness);
 }
 
-void CaptureWidget::resizeSelection(QMargins m)
+void CaptureWidget::repositionSelection(QRect r)
 {
     if (m_selection->isVisible()) {
-        m_selection->setGeometry(m_selection->geometry() + m);
+        m_selection->setGeometry(r);
         QRect newGeometry = m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
@@ -892,31 +888,39 @@ void CaptureWidget::resizeSelection(QMargins m)
     }
 }
 
+void CaptureWidget::adjustSelection(QMargins m)
+{
+    QRect newGeometry = m_selection->geometry() + m;
+    // if (rect().contains(newGeometry)) {
+        repositionSelection(newGeometry);
+    // }
+}
+
 void CaptureWidget::resizeLeft()
 {
     if (m_selection->geometry().right() > m_selection->geometry().left()) {
-        resizeSelection(QMargins(0, 0, -1, 0));
+        adjustSelection(QMargins(0, 0, -1, 0));
     }
 }
 
 void CaptureWidget::resizeRight()
 {
     if (m_selection->geometry().right() < rect().right()) {
-        resizeSelection(QMargins(0, 0, 1, 0));
+        adjustSelection(QMargins(0, 0, 1, 0));
     }
 }
 
 void CaptureWidget::resizeUp()
 {
     if (m_selection->geometry().bottom() > m_selection->geometry().top()) {
-        resizeSelection(QMargins(0, 0, 0, -1));
+        adjustSelection(QMargins(0, 0, 0, -1));
     }
 }
 
 void CaptureWidget::resizeDown()
 {
     if (m_selection->geometry().bottom() < rect().bottom()) {
-        resizeSelection(QMargins(0, 0, 0, 1));
+        adjustSelection(QMargins(0, 0, 0, 1));
     }
 }
 
