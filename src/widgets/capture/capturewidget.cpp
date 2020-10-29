@@ -396,16 +396,20 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
+    bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
     if (m_mouseIsClicked && !m_activeButton) {
+        // Drawing, moving, or stretching a selection
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
+        QRect inputRect;
+        m_selection->setVisible(true);
         if (m_newSelection) {
-            m_selection->setVisible(true);
-            m_selection->setGeometry(
-              QRect(m_dragStartPoint, m_context.mousePos).normalized());
-            update();
+            inputRect = symmetryMod 
+                ? QRect(m_dragStartPoint*2 - m_context.mousePos, m_context.mousePos)
+                : QRect(m_dragStartPoint, m_context.mousePos);
+            m_selection->setGeometry(inputRect.normalized());
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
             QRect initialRect = m_selection->savedGeometry().normalized();
@@ -425,12 +429,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             m_selection->setGeometry(
               finalRect.normalized().intersected(rect()));
-            update();
         } else {
             // Dragging a handle
             QRect r = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
-            bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
+            
 
             using sw = SelectionWidget;
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
@@ -470,8 +473,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 }
             }
             m_selection->setGeometry(r.intersected(rect()).normalized());
-            update();
         }
+        update();
     } else if (m_mouseIsClicked && m_activeTool) {
         // drawing with a tool
         if (m_adjustmentButtonPressed) {
