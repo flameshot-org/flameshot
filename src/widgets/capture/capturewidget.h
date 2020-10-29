@@ -79,11 +79,13 @@ private slots:
     void childEnter();
     void childLeave();
 
+    void resizeSelection(QMargins m);
     void resizeLeft();
     void resizeRight();
     void resizeUp();
     void resizeDown();
 
+    void moveSelection(QPoint p);
     void moveLeft();
     void moveRight();
     void moveUp();

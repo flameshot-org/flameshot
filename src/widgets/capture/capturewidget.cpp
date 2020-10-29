@@ -539,45 +539,40 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     updateCursor();
 }
 
+void CaptureWidget::moveSelection(QPoint p)
+{
+    m_selection->move(QPoint(m_selection->x(), m_selection->y()) + p);
+    QRect newGeometry = m_selection->geometry().intersected(rect());
+    m_context.selection = extendedRect(&newGeometry);
+    m_buttonHandler->updatePosition(m_selection->geometry());
+    update();
+}
+
 void CaptureWidget::moveLeft()
 {
     if (m_selection->geometry().left() > rect().left()) {
-        m_selection->move(QPoint(m_selection->x() - 1, m_selection->y()));
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        update();
+        moveSelection(QPoint(-1, 0));
     }
 }
 
 void CaptureWidget::moveRight()
 {
     if (m_selection->geometry().right() < rect().right()) {
-        m_selection->move(QPoint(m_selection->x() + 1, m_selection->y()));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        update();
+        moveSelection(QPoint(1, 0));
     }
 }
 
 void CaptureWidget::moveUp()
 {
     if (m_selection->geometry().top() > rect().top()) {
-        m_selection->move(QPoint(m_selection->x(), m_selection->y() - 1));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        update();
+        moveSelection(QPoint(0, -1));
     }
 }
 
 void CaptureWidget::moveDown()
 {
     if (m_selection->geometry().bottom() < rect().bottom()) {
-        m_selection->move(QPoint(m_selection->x(), m_selection->y() + 1));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        update();
+        moveSelection(QPoint(0, 1));
     }
 }
 
@@ -885,59 +880,43 @@ void CaptureWidget::setDrawThickness(const int& t)
     emit thicknessChanged(m_context.thickness);
 }
 
-void CaptureWidget::resizeLeft()
+void CaptureWidget::resizeSelection(QMargins m)
 {
-    if (m_selection->isVisible() &&
-        m_selection->geometry().right() > m_selection->geometry().left()) {
-        m_selection->setGeometry(m_selection->geometry() +
-                                 QMargins(0, 0, -1, 0));
+    if (m_selection->isVisible()) {
+        m_selection->setGeometry(m_selection->geometry() + m);
         QRect newGeometry = m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(&newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
+    }
+}
+
+void CaptureWidget::resizeLeft()
+{
+    if (m_selection->geometry().right() > m_selection->geometry().left()) {
+        resizeSelection(QMargins(0, 0, -1, 0));
     }
 }
 
 void CaptureWidget::resizeRight()
 {
-    if (m_selection->isVisible() &&
-        m_selection->geometry().right() < rect().right()) {
-        m_selection->setGeometry(m_selection->geometry() +
-                                 QMargins(0, 0, 1, 0));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        updateSizeIndicator();
-        update();
+    if (m_selection->geometry().right() < rect().right()) {
+        resizeSelection(QMargins(0, 0, 1, 0));
     }
 }
 
 void CaptureWidget::resizeUp()
 {
-    if (m_selection->isVisible() &&
-        m_selection->geometry().bottom() > m_selection->geometry().top()) {
-        m_selection->setGeometry(m_selection->geometry() +
-                                 QMargins(0, 0, 0, -1));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        updateSizeIndicator();
-        update();
+    if (m_selection->geometry().bottom() > m_selection->geometry().top()) {
+        resizeSelection(QMargins(0, 0, 0, -1));
     }
 }
 
 void CaptureWidget::resizeDown()
 {
-    if (m_selection->isVisible() &&
-        m_selection->geometry().bottom() < rect().bottom()) {
-        m_selection->setGeometry(m_selection->geometry() +
-                                 QMargins(0, 0, 0, 1));
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
-        m_buttonHandler->updatePosition(m_selection->geometry());
-        updateSizeIndicator();
-        update();
+    if (m_selection->geometry().bottom() < rect().bottom()) {
+        resizeSelection(QMargins(0, 0, 0, 1));
     }
 }
 
