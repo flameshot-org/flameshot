@@ -436,16 +436,16 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
                 m_mouseOverHandle == sw::LEFT_SIDE ||
-                m_mouseOverHandle == sw::BOTTONLEFT_SIDE) {
+                m_mouseOverHandle == sw::BOTTOMLEFT_SIDE) {
                 // dragging one of the left handles
                 r.setLeft(r.left() + offset.x());
                 if (symmetryMod) {
                     r.setRight(r.right() - offset.x());
                 }
             }
-            if (m_mouseOverHandle == sw::BOTTONLEFT_SIDE ||
-                m_mouseOverHandle == sw::BOTTON_SIDE ||
-                m_mouseOverHandle == sw::BOTTONRIGHT_SIDE) { 
+            if (m_mouseOverHandle == sw::BOTTOMLEFT_SIDE ||
+                m_mouseOverHandle == sw::BOTTOM_SIDE ||
+                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) { 
                 // dragging one of the bottom handles
                 r.setBottom(r.bottom() + offset.y());
                 if (symmetryMod) {
@@ -454,7 +454,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::TOPRIGHT_SIDE ||
                 m_mouseOverHandle == sw::RIGHT_SIDE ||
-                m_mouseOverHandle == sw::BOTTONRIGHT_SIDE) {
+                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) {
                 // dragging one of the right handles
                 r.setRight(r.right() + offset.x());
                 if (symmetryMod) {
@@ -998,11 +998,11 @@ void CaptureWidget::updateCursor()
             // cursor on the handlers
             switch (m_mouseOverHandle) {
                 case sw::TOPLEFT_SIDE:
-                case sw::BOTTONRIGHT_SIDE:
+                case sw::BOTTOMRIGHT_SIDE:
                     setCursor(Qt::SizeFDiagCursor);
                     break;
                 case sw::TOPRIGHT_SIDE:
-                case sw::BOTTONLEFT_SIDE:
+                case sw::BOTTOMLEFT_SIDE:
                     setCursor(Qt::SizeBDiagCursor);
                     break;
                 case sw::LEFT_SIDE:
@@ -1010,7 +1010,7 @@ void CaptureWidget::updateCursor()
                     setCursor(Qt::SizeHorCursor);
                     break;
                 case sw::TOP_SIDE:
-                case sw::BOTTON_SIDE:
+                case sw::BOTTOM_SIDE:
                     setCursor(Qt::SizeVerCursor);
                     break;
                 default:
