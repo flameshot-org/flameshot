@@ -407,22 +407,23 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         QRect inputRect;
         if (m_newSelection) {
             // Drawing a new selection
-            inputRect = symmetryMod 
-                ? QRect(m_dragStartPoint*2 - m_context.mousePos, m_context.mousePos)
-                : QRect(m_dragStartPoint, m_context.mousePos);
+            inputRect = symmetryMod
+                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
+                                  m_context.mousePos)
+                          : QRect(m_dragStartPoint, m_context.mousePos);
 
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
             QRect initialRect = m_selection->savedGeometry().normalized();
             QPoint newTopLeft =
-                initialRect.topLeft() + (e->pos() - m_dragStartPoint);
+              initialRect.topLeft() + (e->pos() - m_dragStartPoint);
             inputRect = QRect(newTopLeft, initialRect.size());
 
         } else {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
-            
+
             using sw = SelectionWidget;
             QRect& r = inputRect;
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
@@ -445,7 +446,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::BOTTOMLEFT_SIDE ||
                 m_mouseOverHandle == sw::BOTTOM_SIDE ||
-                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) { 
+                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) {
                 // dragging one of the bottom handles
                 r.setBottom(r.bottom() + offset.y());
                 if (symmetryMod) {
