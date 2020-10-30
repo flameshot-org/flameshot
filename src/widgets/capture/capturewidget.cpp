@@ -400,33 +400,35 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
     if (m_mouseIsClicked && !m_activeButton) {
         // Drawing, moving, or stretching a selection
+        m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
         QRect inputRect;
-        m_selection->setVisible(true);
         if (m_newSelection) {
+            // Drawing a new selection
             inputRect = symmetryMod 
                 ? QRect(m_dragStartPoint*2 - m_context.mousePos, m_context.mousePos)
                 : QRect(m_dragStartPoint, m_context.mousePos);
-            m_selection->setGeometry(inputRect.normalized());
+
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
             QRect initialRect = m_selection->savedGeometry().normalized();
             QPoint newTopLeft =
-              initialRect.topLeft() + (e->pos() - m_dragStartPoint);
-            QRect finalRect(newTopLeft, initialRect.size());
-            m_selection->setGeometry(finalRect.normalized().intersected(rect()));
+                initialRect.topLeft() + (e->pos() - m_dragStartPoint);
+            inputRect = QRect(newTopLeft, initialRect.size());
+
         } else {
             // Dragging a handle
-            QRect r = m_selection->savedGeometry();
+            inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
             
             using sw = SelectionWidget;
+            QRect& r = inputRect;
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
                 m_mouseOverHandle == sw::TOP_SIDE ||
-                m_mouseOverHandle ==
-                  sw::TOPRIGHT_SIDE) { // dragging one of the top handles
+                m_mouseOverHandle == sw::TOPRIGHT_SIDE) {
+                // dragging one of the top handles
                 r.setTop(r.top() + offset.y());
                 if (symmetryMod) {
                     r.setBottom(r.bottom() - offset.y());
@@ -434,8 +436,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
                 m_mouseOverHandle == sw::LEFT_SIDE ||
-                m_mouseOverHandle ==
-                  sw::BOTTONLEFT_SIDE) { // dragging one of the left handles
+                m_mouseOverHandle == sw::BOTTONLEFT_SIDE) {
+                // dragging one of the left handles
                 r.setLeft(r.left() + offset.x());
                 if (symmetryMod) {
                     r.setRight(r.right() - offset.x());
@@ -443,8 +445,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::BOTTONLEFT_SIDE ||
                 m_mouseOverHandle == sw::BOTTON_SIDE ||
-                m_mouseOverHandle ==
-                  sw::BOTTONRIGHT_SIDE) { // dragging one of the bottom handles
+                m_mouseOverHandle == sw::BOTTONRIGHT_SIDE) { 
+                // dragging one of the bottom handles
                 r.setBottom(r.bottom() + offset.y());
                 if (symmetryMod) {
                     r.setTop(r.top() - offset.y());
@@ -452,15 +454,15 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::TOPRIGHT_SIDE ||
                 m_mouseOverHandle == sw::RIGHT_SIDE ||
-                m_mouseOverHandle ==
-                  sw::BOTTONRIGHT_SIDE) { // dragging one of the right handles
+                m_mouseOverHandle == sw::BOTTONRIGHT_SIDE) {
+                // dragging one of the right handles
                 r.setRight(r.right() + offset.x());
                 if (symmetryMod) {
                     r.setLeft(r.left() - offset.x());
                 }
             }
-            m_selection->setGeometry(r.intersected(rect()).normalized());
         }
+        m_selection->setGeometry(inputRect.intersected(rect()).normalized());
         update();
     } else if (m_mouseIsClicked && m_activeTool) {
         // drawing with a tool
