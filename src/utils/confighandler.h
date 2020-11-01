@@ -73,9 +73,6 @@ public:
     bool startupLaunchValue();
     void setStartupLaunch(const bool);
 
-    bool showStartupLaunchMessage();
-    void setShowStartupLaunchMessage(const bool);
-
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
