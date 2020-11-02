@@ -273,8 +273,9 @@ Now everytime You press <kbd>Prt Sc</kbd> it will start the flameshot gui instea
 
 Flameshot can be installed on Linux and Microsoft Windows currently.
 
-There are no macOS port of flameshot now. Please participate in the development 
-of flameshot and help us make a macOS port.
+There are no macOS port of flameshot now that can be easy installed. But you can build flameshot
+by yourself and use it. Please participate in the development of flameshot and help us make a
+macOS version.
 
 ### Prebuilt packages
 
@@ -381,6 +382,14 @@ pacman -S qt5-svg
 pacman -S openssl ca-certificates
 ```
 
+#### MacOS
+
+First of all you need to install [brew](https://brew.sh) and than install dependencies
+```shell
+brew install qt5
+brew install cmake
+```
+
 ### Build
 
 After installing all the dependencies, finally run the following commands in the sources root directory:
@@ -391,6 +400,20 @@ cd build
 cmake ../
 make
 ```
+
+NOTE: for macOS you should replace command
+
+```shell
+cmake ../
+```
+
+to
+
+```shell
+cmake ../ -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+```
+
+When `make` command completed you can launch flameshot from `project_folder/build/src` folder
 
 ### Install
 
