@@ -17,7 +17,6 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imgs3uploader.h"
-#include "imgs3settings.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
@@ -41,13 +40,14 @@
 #include <QNetworkRequest>
 #include <QPushButton>
 #include <QShortcut>
+#include <QThread>
 #include <QUrlQuery>
 #include <QVBoxLayout>
 
 ImgS3Uploader::ImgS3Uploader(const QPixmap& capture, QWidget* parent)
   : ImgUploader(capture, parent)
 {
-    init(tr("Upload image to S3"), tr("Uploading Image"));
+    init(tr("Upload image to S3"), tr("Uploading Image..."));
 }
 
 ImgS3Uploader::ImgS3Uploader(QWidget* parent)
@@ -63,10 +63,10 @@ ImgS3Uploader::~ImgS3Uploader()
 
 void ImgS3Uploader::init(const QString& title, const QString& label)
 {
-    m_proxy = nullptr;
-    m_NetworkAMUpload = nullptr;
-    m_NetworkAMGetCreds = nullptr;
-    m_NetworkAMRemove = nullptr;
+    m_multiPart = nullptr;
+    m_networkAMUpload = nullptr;
+    m_networkAMGetCreds = nullptr;
+    m_networkAMRemove = nullptr;
 
     resultStatus = false;
     setWindowTitle(title);
@@ -75,108 +75,15 @@ void ImgS3Uploader::init(const QString& title, const QString& label)
 
 QNetworkProxy* ImgS3Uploader::proxy()
 {
-    if (m_proxy == nullptr) {
-        initProxy();
-    }
-    return m_proxy;
-}
-
-QNetworkProxy* ImgS3Uploader::initProxy()
-{
-    // get s3 settings
-    ImgS3Settings imgS3Settings;
-
-    // get proxy settings from "config.ini" file
-    QSettings* settings = imgS3Settings.settings();
-    QString httpProxyHost = settings->value("HTTP_PROXY_HOST").toString();
-
-    if (httpProxyHost.length() > 0) {
-        m_proxy = new QNetworkProxy();
-        if (settings->contains("HTTP_PROXY_TYPE")) {
-            switch (settings->value("HTTP_PROXY_TYPE").toInt()) {
-                case 0:
-                    m_proxy->setType(QNetworkProxy::DefaultProxy);
-                    break;
-                case 1:
-                    m_proxy->setType(QNetworkProxy::Socks5Proxy);
-                    break;
-                case 2:
-                    m_proxy->setType(QNetworkProxy::NoProxy);
-                    break;
-                case 4:
-                    m_proxy->setType(QNetworkProxy::HttpCachingProxy);
-                    break;
-                case 5:
-                    m_proxy->setType(QNetworkProxy::FtpCachingProxy);
-                    break;
-                case 3:
-                default:
-                    m_proxy->setType(QNetworkProxy::HttpProxy);
-                    break;
-            }
-        }
-
-        m_proxy->setHostName(httpProxyHost);
-        int nProxyPort = 3128;
-        if (settings->contains("HTTP_PROXY_PORT")) {
-            nProxyPort = settings->value("HTTP_PROXY_PORT").toInt();
-        }
-        m_proxy->setPort(nProxyPort);
-
-        if (settings->contains("HTTP_PROXY_USER")) {
-            qDebug() << "Proxy user"
-                     << settings->value("HTTP_PROXY_PASSWORD").toString();
-            m_proxy->setUser(settings->value("HTTP_PROXY_USER").toString());
-        }
-        if (settings->contains("HTTP_PROXY_PASSWORD")) {
-            qDebug() << "Proxy password is not empty";
-            m_proxy->setPassword(
-              settings->value("HTTP_PROXY_PASSWORD").toString());
-        }
-    } else {
-        // Get proxy settings from OS settings
-        QNetworkProxyQuery q(QUrl(m_s3Settings.credsUrl().toUtf8()));
-        q.setQueryType(QNetworkProxyQuery::UrlRequest);
-        q.setProtocolTag("http");
-
-        QList<QNetworkProxy> proxies =
-          QNetworkProxyFactory::systemProxyForQuery(q);
-        if (proxies.size() > 0 && proxies[0].type() != QNetworkProxy::NoProxy) {
-            m_proxy = new QNetworkProxy();
-            m_proxy->setHostName(proxies[0].hostName());
-            m_proxy->setPort(proxies[0].port());
-            m_proxy->setType(proxies[0].type());
-            m_proxy->setUser(proxies[0].user());
-            m_proxy->setPassword(proxies[0].password());
-        }
-    }
-#ifdef QT_DEBUG
-    if (m_proxy != nullptr) {
-        qDebug() << "Using proxy server";
-        qDebug() << "proxy host:" << m_proxy->hostName();
-        qDebug() << "proxy port:" << m_proxy->port();
-        qDebug() << "proxy type:" << m_proxy->type();
-        qDebug() << "proxy user:"
-                 << (m_proxy->user().length() > 0 ? m_proxy->user()
-                                                  : "no user");
-        qDebug() << "proxy password:"
-                 << (m_proxy->password().length() > 0 ? "***" : "no password");
-    } else {
-        qDebug() << "No proxy";
-    }
-#endif
-    return m_proxy;
+    return m_s3Settings.proxy();
 }
 
 void ImgS3Uploader::clearProxy()
 {
-    if (m_proxy != nullptr) {
-        delete m_proxy;
-        m_proxy = nullptr;
-    }
+    m_s3Settings.clearProxy();
 }
 
-void ImgS3Uploader::handleReplyUpload(QNetworkReply* reply)
+void ImgS3Uploader::handleReplyPostUpload(QNetworkReply* reply)
 {
     hideSpinner();
     m_storageImageName.clear();
@@ -254,19 +161,52 @@ void ImgS3Uploader::handleReplyGetCreds(QNetworkReply* reply)
     } else {
         if (m_s3Settings.credsUrl().length() == 0) {
             setInfoLabelText(
-              tr("S3 Creds URL is not found in your configuration file"));
+              tr("Retrieving configuration file with s3 creds..."));
+            if (!m_s3Settings.getConfigRemote()) {
+                retry();
+            }
+            hide();
+
+            if (!m_s3Settings.credsUrl().isEmpty()) {
+                setInfoLabelText(tr("Uploading Image..."));
+                upload();
+                return;
+            }
         } else {
             setInfoLabelText(reply->errorString());
         }
+        // FIXME - remove not uploaded preview
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
 }
 
+void ImgS3Uploader::retry()
+{
+    setInfoLabelText(
+      tr("S3 Creds URL is not found in your configuration file"));
+    if (QMessageBox::Retry ==
+        QMessageBox::question(nullptr,
+                              tr("Error"),
+                              tr("Unable to get s3 credentials, please check "
+                                 "your VPN connection and try again"),
+                              QMessageBox::Retry | QMessageBox::Cancel)) {
+        setInfoLabelText(tr("Retrieving configuration file with s3 creds..."));
+        if (!m_s3Settings.getConfigRemote()) {
+            retry();
+        }
+    } else {
+        hide();
+    }
+}
+
 void ImgS3Uploader::uploadToS3(QJsonDocument& response)
 {
-    // set paramets from "fields"
-    QHttpMultiPart* multiPart =
-      new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    // set parameters from "fields"
+    if (nullptr != m_multiPart) {
+        delete m_multiPart;
+        m_multiPart = nullptr;
+    }
+    m_multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
     // read JSON response
     QJsonObject json = response.object();
@@ -282,7 +222,7 @@ void ImgS3Uploader::uploadToS3(QJsonDocument& response)
         part.setHeader(QNetworkRequest::ContentDispositionHeader,
                        QVariant("form-data; name=\"" + key + "\""));
         part.setBody(field.toLatin1());
-        multiPart->append(part);
+        m_multiPart->append(part);
     }
 
     QHttpPart imagePart;
@@ -297,7 +237,7 @@ void ImgS3Uploader::uploadToS3(QJsonDocument& response)
     pixmap().save(&buffer, "PNG");
 
     imagePart.setBody(byteArray);
-    multiPart->append(imagePart);
+    m_multiPart->append(imagePart);
 
     setImageUrl(QUrl(resultUrl));
 
@@ -305,7 +245,7 @@ void ImgS3Uploader::uploadToS3(QJsonDocument& response)
     QNetworkRequest request(qUrl);
 
     // upload
-    m_NetworkAMUpload->post(request, multiPart);
+    m_networkAMUpload->post(request, m_multiPart);
 }
 
 void ImgS3Uploader::deleteResource(const QString& fileName,
@@ -314,69 +254,64 @@ void ImgS3Uploader::deleteResource(const QString& fileName,
     // read network settings on each call to simplify configuration management
     // without restarting
     clearProxy();
-    if (m_NetworkAMRemove != nullptr) {
-        delete m_NetworkAMRemove;
-        m_NetworkAMRemove = nullptr;
+    if (m_networkAMRemove != nullptr) {
+        delete m_networkAMRemove;
+        m_networkAMRemove = nullptr;
     }
-    m_NetworkAMRemove = new QNetworkAccessManager(this);
-    connect(m_NetworkAMRemove,
+    m_networkAMRemove = new QNetworkAccessManager(this);
+    connect(m_networkAMRemove,
             &QNetworkAccessManager::finished,
             this,
             &ImgS3Uploader::handleReplyDeleteResource);
     if (proxy() != nullptr) {
-        m_NetworkAMRemove->setProxy(*proxy());
+        m_networkAMRemove->setProxy(*proxy());
     }
 
     QNetworkRequest request;
     m_storageImageName = fileName;
     m_deleteToken = deleteToken;
+
     request.setUrl(m_s3Settings.credsUrl().toUtf8() + fileName);
     request.setRawHeader("X-API-Key", m_s3Settings.xApiKey().toLatin1());
     request.setRawHeader("Authorization", "Bearer " + deleteToken.toLatin1());
-    m_NetworkAMRemove->deleteResource(request);
+    m_networkAMRemove->deleteResource(request);
 }
 
 void ImgS3Uploader::upload()
 {
     m_deleteToken.clear();
     m_storageImageName.clear();
+    show();
 
     // read network settings on each call to simplify configuration management
     // without restarting init creds and upload network access managers
     clearProxy();
-    if (m_NetworkAMGetCreds != nullptr) {
-        delete m_NetworkAMGetCreds;
-        m_NetworkAMGetCreds = nullptr;
-    }
-    m_NetworkAMGetCreds = new QNetworkAccessManager(this);
-    connect(m_NetworkAMGetCreds,
+    cleanNetworkAccessManagers();
+
+    m_networkAMGetCreds = new QNetworkAccessManager(this);
+    connect(m_networkAMGetCreds,
             &QNetworkAccessManager::finished,
             this,
             &ImgS3Uploader::handleReplyGetCreds);
 
-    if (m_NetworkAMUpload != nullptr) {
-        delete m_NetworkAMUpload;
-        m_NetworkAMUpload = nullptr;
-    }
-    m_NetworkAMUpload = new QNetworkAccessManager(this);
-    connect(m_NetworkAMUpload,
+    m_networkAMUpload = new QNetworkAccessManager(this);
+    connect(m_networkAMUpload,
             &QNetworkAccessManager::finished,
             this,
-            &ImgS3Uploader::handleReplyUpload);
+            &ImgS3Uploader::handleReplyPostUpload);
     if (proxy() != nullptr) {
-        m_NetworkAMGetCreds->setProxy(*proxy());
-        m_NetworkAMUpload->setProxy(*proxy());
+        m_networkAMGetCreds->setProxy(*proxy());
+        m_networkAMUpload->setProxy(*proxy());
     }
 
     // get creads
-    QUrl creds(m_s3Settings.credsUrl());
-    QNetworkRequest requestCreds(creds);
+    QNetworkRequest requestCreds(QUrl(m_s3Settings.credsUrl()));
     if (m_s3Settings.xApiKey().length() > 0) {
         requestCreds.setRawHeader(
           QByteArray("X-API-Key"),
           QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
     }
-    m_NetworkAMGetCreds->get(requestCreds);
+    m_networkAMGetCreds->get(requestCreds);
 }
 
 void ImgS3Uploader::removeImagePreview()
@@ -394,4 +329,20 @@ void ImgS3Uploader::removeImagePreview()
     m_deleteToken.clear();
     m_storageImageName.clear();
     resultStatus = true;
+}
+
+void ImgS3Uploader::cleanNetworkAccessManagers()
+{
+    if (nullptr != m_networkAMUpload) {
+        delete m_networkAMUpload;
+        m_networkAMUpload = nullptr;
+    }
+    if (nullptr != m_networkAMGetCreds) {
+        delete m_networkAMGetCreds;
+        m_networkAMGetCreds = nullptr;
+    }
+    if (nullptr != m_networkAMRemove) {
+        delete m_networkAMRemove;
+        m_networkAMRemove = nullptr;
+    }
 }

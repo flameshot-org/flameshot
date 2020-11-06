@@ -1,45 +1,187 @@
 #include "imgs3settings.h"
+#include "src/tools/storage/imgstorages.h"
+#include "src/utils/confighandler.h"
+#include <QByteArray>
+#include <QDateTime>
 #include <QDir>
+#include <QEventLoop>
 #include <QFileInfo>
+#include <QNetworkAccessManager>
+#include <QNetworkProxy>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QObject>
 #include <QSettings>
+#include <QTemporaryFile>
+#include <QTimer>
 
-ImgS3Settings::ImgS3Settings()
+ImgS3Settings::ImgS3Settings(QObject* parent)
+  : QObject(parent)
 {
+    m_proxy = nullptr;
+    m_networkConfig = nullptr;
     initSettings();
 
-    // get s3 credentials
-    m_settings->beginGroup("S3");
-    m_credsUrl = m_settings->value("S3_CREDS_URL").toString();
-    m_credsUrl =
-      m_credsUrl +
-      ((m_credsUrl.length() > 0 && m_credsUrl[m_credsUrl.length() - 1] == '/')
-         ? ""
-         : "/") +
-      S3_API_IMG_PATH;
+    // get remote config url
+    if (m_localSettings->contains("STORAGE_CONFIG_URL")) {
+        m_s3ConfigUrl =
+          QUrl(m_localSettings->value("STORAGE_CONFIG_URL").toString());
+    } else {
+        // set default value if STORAGE_CONFIG_URL not found in the config.ini
+        m_s3ConfigUrl = QUrl("https://git.namecheap.net/projects/RND/repos/"
+                             "flameshot_config/raw/config.ini");
+    }
 
-    m_xApiKey = m_settings->value("S3_X_API_KEY").toString();
-
-    m_url = m_settings->value("S3_URL").toString();
-    m_url =
-      m_url +
-      ((m_url.length() > 0 && m_url[m_url.length() - 1] == '/') ? "" : "/");
-
-    m_settings->endGroup();
+    // proxy settings
+    m_proxyType = -1;
+    m_proxyHost = QString();
+    m_proxyPort = -1;
+    m_proxyUser = QString();
+    m_proxyPassword = QString();
 }
 
-QSettings* ImgS3Settings::settings()
+void ImgS3Settings::initS3Creds()
 {
-    return m_settings;
+    ConfigHandler configHandler;
+    m_credsUrl = configHandler.value("S3", "S3_CREDS_URL").toString();
+    m_xApiKey = configHandler.value("S3", "S3_X_API_KEY").toString();
+    m_url = configHandler.value("S3", "S3_URL").toString();
+    normalizeS3Creds();
+    updateConfigFromRemote();
 }
 
-void ImgS3Settings::initSettings()
+bool ImgS3Settings::getConfigRemote(int timeout)
+{
+    if (!m_url.isEmpty() && !m_credsUrl.isEmpty()) {
+        updateConfigFromRemote();
+        return true;
+    }
+    QNetworkAccessManager* networkConfig = new QNetworkAccessManager(this);
+    if (proxy() != nullptr) {
+        networkConfig->setProxy(*m_proxy);
+    }
+    QNetworkReply* reply = networkConfig->get(QNetworkRequest(m_s3ConfigUrl));
+
+    QEventLoop loop;
+    QTimer timer;
+    timer.setSingleShot(true);
+    connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+    connect(reply, SIGNAL(readyRead()), &loop, SLOT(quit()));
+    timer.start(timeout * 1000); // 30 secs. timeout
+    loop.exec();
+    QString data = QString(reply->readAll());
+    parseConfigurationData(data);
+
+    delete reply;
+    delete networkConfig;
+
+    return !data.isEmpty();
+}
+
+void ImgS3Settings::parseConfigurationData(const QString& data)
+{
+    // read remote and save to the temporary file
+    QTemporaryFile file;
+    file.open();
+    QTextStream stream(&file);
+    stream << data;
+    stream.flush();
+
+    // parse and get configuration data
+    QSettings remoteConfig(file.fileName(), QSettings::IniFormat, this);
+    remoteConfig.beginGroup("S3");
+    m_url = remoteConfig.value("S3_URL").toString();
+    m_credsUrl = remoteConfig.value("S3_CREDS_URL").toString();
+    m_xApiKey = remoteConfig.value("S3_X_API_KEY").toString();
+    normalizeS3Creds();
+    remoteConfig.endGroup();
+
+    // close and remove temporary file
+    file.close();
+
+    // cache configuration at the local storage
+    ConfigHandler configHandler;
+    configHandler.setValue("S3", "S3_URL", m_url);
+    configHandler.setValue("S3", "S3_CREDS_URL", m_credsUrl);
+    configHandler.setValue("S3", "S3_X_API_KEY", m_xApiKey);
+
+    // set last update date
+    QString currentDateTime =
+      QDateTime::currentDateTime().toString(Qt::ISODate);
+    configHandler.setValue("S3", "S3_CREDS_UPDATED", QVariant(currentDateTime));
+}
+
+void ImgS3Settings::normalizeS3Creds()
+{
+    if (!m_url.isEmpty() && m_url.right(1) != "/") {
+        m_url += "/";
+    }
+    if (!m_credsUrl.isEmpty() && m_credsUrl.right(1) != "/") {
+        m_credsUrl += "/";
+    }
+}
+
+void ImgS3Settings::updateConfigFromRemote()
+{
+    // check for outdated s3 creds
+    ConfigHandler configHandler;
+    QString credsUpdated =
+      configHandler.value("S3", "S3_CREDS_UPDATED").toString();
+    QDateTime dtCredsUpdated =
+      QDateTime::currentDateTime().fromString(credsUpdated, Qt::ISODate);
+    QDateTime now = QDateTime::currentDateTime();
+    dtCredsUpdated = dtCredsUpdated.addDays(1);
+    if (dtCredsUpdated <= now) {
+        // Do update config from remote
+        if (nullptr == m_networkConfig) {
+            m_networkConfig = new QNetworkAccessManager(this);
+            if (proxy() != nullptr) {
+                m_networkConfig->setProxy(*m_proxy);
+            }
+            connect(m_networkConfig,
+                    &QNetworkAccessManager::finished,
+                    this,
+                    &ImgS3Settings::handleReplyUpdateConfigFromRemote);
+        }
+        m_networkConfig->get(QNetworkRequest(m_s3ConfigUrl));
+    }
+}
+
+void ImgS3Settings::handleReplyUpdateConfigFromRemote(QNetworkReply* reply)
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        QString configData = QString(reply->readAll());
+        parseConfigurationData(configData);
+    } else {
+        QString reason =
+          reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+            .toString();
+        QString error = reply->errorString();
+        qWarning() << "Update config from remote status:" << error;
+        qWarning() << reason;
+    }
+}
+
+const QString& ImgS3Settings::storageLocked()
+{
+    if (m_localSettings->contains("STORAGE_LOCKED")) {
+        m_storageLocked =
+          m_localSettings->value(QStringLiteral("STORAGE_LOCKED")).toString();
+    } else {
+        // FIXME - remove hardcode and add configuration file to the
+        //  installation
+        m_storageLocked = SCREENSHOT_STORAGE_TYPE_S3;
+    }
+    return m_storageLocked;
+}
+
+const QString& ImgS3Settings::localConfigFilePath(const QString& fileName)
 {
     // get s3 settings
-    QString configIniPath = QDir(QDir::currentPath()).filePath("config.ini");
-    if (!(QFileInfo::exists(configIniPath) &&
-          QFileInfo(configIniPath).isFile())) {
+    m_qstr = QDir(QDir::currentPath()).filePath(fileName);
+    if (!(QFileInfo::exists(m_qstr) && QFileInfo(m_qstr).isFile())) {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-        configIniPath = "/etc/flameshot/config.ini";
+        m_qstr = "/etc/flameshot/" + fileName;
 #elif defined(Q_OS_WIN)
         // calculate workdir for flameshot on startup if is not set yet
         QSettings bootUpSettings(
@@ -47,23 +189,165 @@ void ImgS3Settings::initSettings()
           "USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
           QSettings::NativeFormat);
         QFileInfo fi(bootUpSettings.value("Flameshot").toString());
-        configIniPath = QDir(fi.absolutePath()).filePath("config.ini");
+        m_qstr = QDir(fi.absolutePath()).filePath(fileName);
 #endif
     }
-    m_settings = new QSettings(configIniPath, QSettings::IniFormat);
+    return m_qstr;
+}
+
+void ImgS3Settings::initSettings()
+{
+    m_localSettings =
+      new QSettings(localConfigFilePath(S3_CONFIG_LOCAL), QSettings::IniFormat);
+    m_proxySettings =
+      new QSettings(localConfigFilePath(S3_CONFIG_PROXY), QSettings::IniFormat);
 }
 
 const QString& ImgS3Settings::credsUrl()
 {
+    if (m_credsUrl.isEmpty()) {
+        initS3Creds();
+        if (!m_credsUrl.isEmpty()) {
+            m_credsUrl += S3_API_IMG_PATH;
+        }
+    }
     return m_credsUrl;
 }
 
 const QString& ImgS3Settings::xApiKey()
 {
+    if (m_xApiKey.isEmpty()) {
+        initS3Creds();
+    }
     return m_xApiKey;
 }
 
 const QString& ImgS3Settings::url()
 {
+    if (m_url.isEmpty()) {
+        initS3Creds();
+    }
     return m_url;
+}
+
+QNetworkProxy* ImgS3Settings::proxy()
+{
+    if (proxyHost().length() > 0) {
+        m_proxy = new QNetworkProxy();
+        switch (proxyType()) {
+            case 0:
+                m_proxy->setType(QNetworkProxy::DefaultProxy);
+                break;
+            case 1:
+                m_proxy->setType(QNetworkProxy::Socks5Proxy);
+                break;
+            case 2:
+                m_proxy->setType(QNetworkProxy::NoProxy);
+                break;
+            case 4:
+                m_proxy->setType(QNetworkProxy::HttpCachingProxy);
+                break;
+            case 5:
+                m_proxy->setType(QNetworkProxy::FtpCachingProxy);
+                break;
+            case 3:
+            default:
+                m_proxy->setType(QNetworkProxy::HttpProxy);
+                break;
+        }
+        m_proxy->setHostName(proxyHost());
+        m_proxy->setPort(proxyPort());
+        if (proxyUser().length() > 0) {
+            m_proxy->setUser(proxyUser());
+            m_proxy->setPassword(proxyPassword());
+        }
+
+    } else {
+        // Get proxy settings from OS settings
+        QNetworkProxyQuery q(QUrl(credsUrl().toUtf8()));
+        q.setQueryType(QNetworkProxyQuery::UrlRequest);
+        q.setProtocolTag("http");
+
+        QList<QNetworkProxy> proxies =
+          QNetworkProxyFactory::systemProxyForQuery(q);
+        if (proxies.size() > 0 && proxies[0].type() != QNetworkProxy::NoProxy) {
+            m_proxy = new QNetworkProxy();
+            m_proxy->setHostName(proxies[0].hostName());
+            m_proxy->setPort(proxies[0].port());
+            m_proxy->setType(proxies[0].type());
+            m_proxy->setUser(proxies[0].user());
+            m_proxy->setPassword(proxies[0].password());
+        }
+    }
+    return m_proxy;
+}
+
+void ImgS3Settings::clearProxy()
+{
+    if (m_proxy != nullptr) {
+        delete m_proxy;
+        m_proxy = nullptr;
+    }
+}
+
+int ImgS3Settings::proxyType()
+{
+    if (-1 == m_proxyType) {
+        m_proxyType = 3; // default - HTTP transparent proxying is used
+        if (m_proxySettings->contains("HTTP_PROXY_TYPE")) {
+            m_proxyType = m_proxySettings->value("HTTP_PROXY_TYPE").toInt();
+            if (m_proxyType < 0 || m_proxyType > 5) {
+                m_proxyType = 3; // default - HTTP transparent proxying is used
+            }
+        }
+    }
+    return m_proxyType;
+}
+
+const QString& ImgS3Settings::proxyHost()
+{
+    if (m_proxyHost.isNull()) {
+        if (m_proxySettings->contains("HTTP_PROXY_HOST")) {
+            m_proxyHost = m_proxySettings->value("HTTP_PROXY_HOST").toString();
+        } else {
+            m_proxyHost = "";
+        }
+    }
+    return m_proxyHost;
+}
+
+int ImgS3Settings::proxyPort()
+{
+    if (-1 == m_proxyPort) {
+        m_proxyPort = 3128;
+        if (m_proxySettings->contains("HTTP_PROXY_PORT")) {
+            m_proxyPort = m_proxySettings->value("HTTP_PROXY_PORT").toInt();
+        }
+    }
+    return m_proxyPort;
+}
+
+const QString& ImgS3Settings::proxyUser()
+{
+    if (m_proxyUser.isNull()) {
+        if (m_proxySettings->contains("HTTP_PROXY_USER")) {
+            m_proxyUser = m_proxySettings->value("HTTP_PROXY_USER").toString();
+        } else {
+            m_proxyUser = "";
+        }
+    }
+    return m_proxyUser;
+}
+
+const QString& ImgS3Settings::proxyPassword()
+{
+    if (m_proxyPassword.isNull()) {
+        if (m_proxySettings->contains("HTTP_PROXY_PASSWORD")) {
+            m_proxyPassword =
+              m_proxySettings->value("HTTP_PROXY_PASSWORD").toString();
+        } else {
+            m_proxyPassword = "";
+        }
+    }
+    return m_proxyPassword;
 }
