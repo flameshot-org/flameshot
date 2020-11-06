@@ -459,11 +459,11 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 void ConfigHandler::setUploadStorage(const QString& uploadStorage)
 {
     StorageManager storageManager;
-    if (storageManager.storageLocked()) {
-        m_settings.setValue(QStringLiteral("uploadStorage"),
-                            storageManager.storageDefault());
-    } else {
+    if (storageManager.storageLocked().isEmpty()) {
         m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
+    } else {
+        m_settings.setValue(QStringLiteral("uploadStorage"),
+                            storageManager.storageLocked());
     }
 }
 
@@ -471,8 +471,8 @@ const QString& ConfigHandler::uploadStorage()
 {
     StorageManager storageManager;
     // check for storage lock
-    if (storageManager.storageLocked()) {
-        setUploadStorage(storageManager.storageDefault());
+    if (!storageManager.storageLocked().isEmpty()) {
+        setUploadStorage(storageManager.storageLocked());
     }
 
     // get storage
@@ -615,4 +615,29 @@ const QString& ConfigHandler::shortcut(const QString& shortcutName)
     m_strRes = m_settings.value(shortcutName).toString();
     m_settings.endGroup();
     return m_strRes;
+}
+
+void ConfigHandler::setValue(const QString& group,
+                             const QString& key,
+                             const QVariant& value)
+{
+    if (!group.isEmpty()) {
+        m_settings.beginGroup(group);
+    }
+    m_settings.setValue(key, value);
+    if (!group.isEmpty()) {
+        m_settings.endGroup();
+    }
+}
+
+QVariant& ConfigHandler::value(const QString& group, const QString& key)
+{
+    if (!group.isEmpty()) {
+        m_settings.beginGroup(group);
+    }
+    m_varRes = m_settings.value(key);
+    if (!group.isEmpty()) {
+        m_settings.endGroup();
+    }
+    return m_varRes;
 }

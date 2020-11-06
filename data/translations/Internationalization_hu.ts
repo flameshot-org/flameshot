@@ -457,7 +457,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="unfinished">Kép felötlése</translation>
+        <translation type="obsolete">Kép felötlése</translation>
     </message>
     <message>
         <source>Delete image from S3</source>
@@ -495,6 +495,22 @@ Press Space to open the side panel.</source>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retrieving configuration file with s3 creds...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
@@ -511,11 +527,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="unfinished">Kép felötlése</translation>
-    </message>
-    <message>
-        <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kép felötlése</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -548,6 +560,10 @@ Press Space to open the side panel.</source>
     <message>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Kép a vágolapra.</translation>
+    </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

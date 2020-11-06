@@ -22,7 +22,7 @@ if (m_s3Settings.xApiKey().length() > 0) {
       QByteArray("X-API-Key"),
       QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
 }
-m_NetworkAMGetCreds->get(requestCreds);
+m_networkAMGetCreds->get(requestCreds);
 ```
 
 Shell example:
@@ -108,7 +108,7 @@ void ImgS3Uploader::uploadToS3(QJsonDocument& response)
     QNetworkRequest request(qUrl);
 
     // upload
-    m_NetworkAMUpload->post(request, multiPart);
+    m_networkAMUpload->post(request, multiPart);
 }
 ```
 
@@ -131,5 +131,5 @@ m_deleteToken = deleteToken;
 request.setUrl(m_s3Settings.credsUrl().toUtf8() + fileName);
 request.setRawHeader("X-API-Key", m_s3Settings.xApiKey().toLatin1());
 request.setRawHeader("Authorization", "Bearer " + deleteToken.toLatin1());
-m_NetworkAMRemove->deleteResource(request);
+m_networkAMRemove->deleteResource(request);
 ```
