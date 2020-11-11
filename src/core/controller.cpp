@@ -215,6 +215,14 @@ void Controller::enableTrayIcon()
         // Wait 400 ms to hide the QMenu
         doLater(400, this, [this]() { this->startVisualCapture(); });
     });
+    QAction* captureActionInterval1s = new QAction(tr("&Take Screenshot 1s"), this);
+    connect(captureActionInterval1s, &QAction::triggered, this, [this]() {
+        doLater(1400, this, [this]() { this->startVisualCapture(); });
+    });
+    QAction* captureActionInterval3s = new QAction(tr("&Take Screenshot 3s"), this);
+    connect(captureActionInterval3s, &QAction::triggered, this, [this]() {
+        doLater(3400, this, [this]() { this->startVisualCapture(); });
+    });
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
             &QAction::triggered,
@@ -235,6 +243,8 @@ void Controller::enableTrayIcon()
 
     // generate menu
     trayIconMenu->addAction(captureAction);
+    trayIconMenu->addAction(captureActionInterval1s);
+    trayIconMenu->addAction(captureActionInterval3s);
     trayIconMenu->addAction(launcherAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(recentAction);
