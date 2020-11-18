@@ -4,22 +4,14 @@
 #include <QByteArray>
 #include <QDateTime>
 #include <QDir>
-#include <QEventLoop>
 #include <QFileInfo>
-#include <QNetworkAccessManager>
 #include <QNetworkProxy>
-#include <QNetworkReply>
-#include <QNetworkRequest>
-#include <QObject>
 #include <QSettings>
 #include <QTemporaryFile>
-#include <QTimer>
 
-ImgS3Settings::ImgS3Settings(QObject* parent)
-  : QObject(parent)
+ImgS3Settings::ImgS3Settings()
 {
     m_proxy = nullptr;
-    m_networkConfig = nullptr;
     initSettings();
 
     // get remote config url
@@ -47,38 +39,9 @@ void ImgS3Settings::initS3Creds()
     m_xApiKey = configHandler.value("S3", "S3_X_API_KEY").toString();
     m_url = configHandler.value("S3", "S3_URL").toString();
     normalizeS3Creds();
-    updateConfigFromRemote();
 }
 
-bool ImgS3Settings::getConfigRemote(int timeout)
-{
-    if (!m_url.isEmpty() && !m_credsUrl.isEmpty()) {
-        updateConfigFromRemote();
-        return true;
-    }
-    QNetworkAccessManager* networkConfig = new QNetworkAccessManager(this);
-    if (proxy() != nullptr) {
-        networkConfig->setProxy(*m_proxy);
-    }
-    QNetworkReply* reply = networkConfig->get(QNetworkRequest(m_s3ConfigUrl));
-
-    QEventLoop loop;
-    QTimer timer;
-    timer.setSingleShot(true);
-    connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-    connect(reply, SIGNAL(readyRead()), &loop, SLOT(quit()));
-    timer.start(timeout * 1000); // 30 secs. timeout
-    loop.exec();
-    QString data = QString(reply->readAll());
-    parseConfigurationData(data);
-
-    delete reply;
-    delete networkConfig;
-
-    return !data.isEmpty();
-}
-
-void ImgS3Settings::parseConfigurationData(const QString& data)
+void ImgS3Settings::updateConfigurationData(const QString& data)
 {
     // read remote and save to the temporary file
     QTemporaryFile file;
@@ -88,11 +51,11 @@ void ImgS3Settings::parseConfigurationData(const QString& data)
     stream.flush();
 
     // parse and get configuration data
-    QSettings remoteConfig(file.fileName(), QSettings::IniFormat, this);
+    QSettings remoteConfig(file.fileName(), QSettings::IniFormat);
     remoteConfig.beginGroup("S3");
-    m_url = remoteConfig.value("S3_URL").toString();
-    m_credsUrl = remoteConfig.value("S3_CREDS_URL").toString();
-    m_xApiKey = remoteConfig.value("S3_X_API_KEY").toString();
+    QString url = remoteConfig.value("S3_URL").toString();
+    QString credsUrl = remoteConfig.value("S3_CREDS_URL").toString();
+    QString xApiKey = remoteConfig.value("S3_X_API_KEY").toString();
     normalizeS3Creds();
     remoteConfig.endGroup();
 
@@ -101,9 +64,9 @@ void ImgS3Settings::parseConfigurationData(const QString& data)
 
     // cache configuration at the local storage
     ConfigHandler configHandler;
-    configHandler.setValue("S3", "S3_URL", m_url);
-    configHandler.setValue("S3", "S3_CREDS_URL", m_credsUrl);
-    configHandler.setValue("S3", "S3_X_API_KEY", m_xApiKey);
+    configHandler.setValue("S3", "S3_URL", url);
+    configHandler.setValue("S3", "S3_CREDS_URL", credsUrl);
+    configHandler.setValue("S3", "S3_X_API_KEY", xApiKey);
 
     // set last update date
     QString currentDateTime =
@@ -118,47 +81,6 @@ void ImgS3Settings::normalizeS3Creds()
     }
     if (!m_credsUrl.isEmpty() && m_credsUrl.right(1) != "/") {
         m_credsUrl += "/";
-    }
-}
-
-void ImgS3Settings::updateConfigFromRemote()
-{
-    // check for outdated s3 creds
-    ConfigHandler configHandler;
-    QString credsUpdated =
-      configHandler.value("S3", "S3_CREDS_UPDATED").toString();
-    QDateTime dtCredsUpdated =
-      QDateTime::currentDateTime().fromString(credsUpdated, Qt::ISODate);
-    QDateTime now = QDateTime::currentDateTime();
-    dtCredsUpdated = dtCredsUpdated.addDays(1);
-    if (dtCredsUpdated <= now) {
-        // Do update config from remote
-        if (nullptr == m_networkConfig) {
-            m_networkConfig = new QNetworkAccessManager(this);
-            if (proxy() != nullptr) {
-                m_networkConfig->setProxy(*m_proxy);
-            }
-            connect(m_networkConfig,
-                    &QNetworkAccessManager::finished,
-                    this,
-                    &ImgS3Settings::handleReplyUpdateConfigFromRemote);
-        }
-        m_networkConfig->get(QNetworkRequest(m_s3ConfigUrl));
-    }
-}
-
-void ImgS3Settings::handleReplyUpdateConfigFromRemote(QNetworkReply* reply)
-{
-    if (reply->error() == QNetworkReply::NoError) {
-        QString configData = QString(reply->readAll());
-        parseConfigurationData(configData);
-    } else {
-        QString reason =
-          reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-            .toString();
-        QString error = reply->errorString();
-        qWarning() << "Update config from remote status:" << error;
-        qWarning() << reason;
     }
 }
 
