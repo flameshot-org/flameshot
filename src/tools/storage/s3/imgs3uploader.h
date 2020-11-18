@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Namecheap inc.
 //
 // This file is part of Flameshot.
 //
@@ -21,6 +21,10 @@
 #include "imgs3settings.h"
 #include <QUrl>
 #include <QWidget>
+
+#define S3_REMOTE_CONFIG_URL                                                   \
+    "https://git.namecheap.net/projects/RND/repos/flameshot_config/raw/"       \
+    "config.ini"
 
 class QNetworkReply;
 class QNetworkProxy;
@@ -48,12 +52,13 @@ private slots:
     void handleReplyPostUpload(QNetworkReply* reply);
     void handleReplyGetCreds(QNetworkReply* reply);
     void handleReplyDeleteResource(QNetworkReply* reply);
+    void handleReplyGetConfig(QNetworkReply* reply);
 
 private:
     void init(const QString& title, const QString& label);
     void uploadToS3(QJsonDocument& response);
     void removeImagePreview();
-    void retry();
+    void getConfigRemote();
 
     void clearProxy();
     QNetworkProxy* proxy();
@@ -67,4 +72,5 @@ private:
     QNetworkAccessManager* m_networkAMGetCreds;
     QNetworkAccessManager* m_networkAMRemove;
     QHttpMultiPart* m_multiPart;
+    QNetworkAccessManager* m_networkAMConfig;
 };

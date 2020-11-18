@@ -2,7 +2,6 @@
 #define IMG_S3_SETTINGS_H
 
 #define S3_API_IMG_PATH "v2/image/"
-#define S3_GET_REMOTE_SETTINGS_TIMEOUT 10
 
 #define S3_CONFIG_LOCAL "config.ini"
 #define S3_CONFIG_PROXY "config_proxy.ini"
@@ -13,22 +12,12 @@
 
 class QSettings;
 class QNetworkProxy;
-class QNetworkAccessManager;
-class QNetworkRequest;
-class QNetworkReply;
 
-class ImgS3Settings : public QObject
+class ImgS3Settings
 {
-    Q_OBJECT
-
-private slots:
-    void handleReplyUpdateConfigFromRemote(QNetworkReply* reply);
 
 public:
-    ImgS3Settings(QObject* parent = nullptr);
-
-    bool getConfigRemote(int timeout = S3_GET_REMOTE_SETTINGS_TIMEOUT);
-    void updateConfigFromRemote();
+    ImgS3Settings();
 
     const QString& storageLocked();
 
@@ -39,6 +28,8 @@ public:
     QNetworkProxy* proxy();
     void clearProxy();
 
+    void updateConfigurationData(const QString& data);
+
 private:
     int proxyType();
     const QString& proxyHost();
@@ -48,7 +39,6 @@ private:
 
     void initSettings();
     const QString& localConfigFilePath(const QString& fileName);
-    void parseConfigurationData(const QString& data);
     void initS3Creds();
     void normalizeS3Creds();
 
@@ -71,9 +61,6 @@ private:
     int m_proxyPort;
     QString m_proxyUser;
     QString m_proxyPassword;
-
-    //
-    QNetworkAccessManager* m_networkConfig;
 };
 
 #endif // IMG_S3_SETTINGS_H

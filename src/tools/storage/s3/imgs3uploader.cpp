@@ -1,5 +1,4 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Namecheap inc.
 //
 // This file is part of Flameshot.
 //
@@ -59,6 +58,10 @@ ImgS3Uploader::ImgS3Uploader(QWidget* parent)
 ImgS3Uploader::~ImgS3Uploader()
 {
     clearProxy();
+    cleanNetworkAccessManagers();
+    if (nullptr != m_networkAMConfig) {
+        delete m_networkAMConfig;
+    }
 }
 
 void ImgS3Uploader::init(const QString& title, const QString& label)
@@ -67,6 +70,7 @@ void ImgS3Uploader::init(const QString& title, const QString& label)
     m_networkAMUpload = nullptr;
     m_networkAMGetCreds = nullptr;
     m_networkAMRemove = nullptr;
+    m_networkAMConfig = nullptr;
 
     resultStatus = false;
     setWindowTitle(title);
@@ -161,42 +165,13 @@ void ImgS3Uploader::handleReplyGetCreds(QNetworkReply* reply)
     } else {
         if (m_s3Settings.credsUrl().length() == 0) {
             setInfoLabelText(
-              tr("Retrieving configuration file with s3 creds..."));
-            if (!m_s3Settings.getConfigRemote()) {
-                retry();
-            }
-            hide();
-
-            if (!m_s3Settings.credsUrl().isEmpty()) {
-                setInfoLabelText(tr("Uploading Image..."));
-                upload();
-                return;
-            }
+              tr("S3 Creds URL is not found in your configuration file"));
         } else {
             setInfoLabelText(reply->errorString());
         }
         // FIXME - remove not uploaded preview
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
-}
-
-void ImgS3Uploader::retry()
-{
-    setInfoLabelText(
-      tr("S3 Creds URL is not found in your configuration file"));
-    if (QMessageBox::Retry ==
-        QMessageBox::question(nullptr,
-                              tr("Error"),
-                              tr("Unable to get s3 credentials, please check "
-                                 "your VPN connection and try again"),
-                              QMessageBox::Retry | QMessageBox::Cancel)) {
-        setInfoLabelText(tr("Retrieving configuration file with s3 creds..."));
-        if (!m_s3Settings.getConfigRemote()) {
-            retry();
-        }
-    } else {
-        hide();
-    }
 }
 
 void ImgS3Uploader::uploadToS3(QJsonDocument& response)
@@ -281,11 +256,25 @@ void ImgS3Uploader::upload()
 {
     m_deleteToken.clear();
     m_storageImageName.clear();
-    show();
 
     // read network settings on each call to simplify configuration management
     // without restarting init creds and upload network access managers
     clearProxy();
+
+    // check for outdated s3 creds
+    ConfigHandler configHandler;
+    QString credsUpdated =
+      configHandler.value("S3", "S3_CREDS_UPDATED").toString();
+    QDateTime dtCredsUpdated =
+      QDateTime::currentDateTime().fromString(credsUpdated, Qt::ISODate);
+    QDateTime now = QDateTime::currentDateTime();
+    dtCredsUpdated = dtCredsUpdated.addDays(1);
+    if (m_s3Settings.credsUrl().isEmpty() || dtCredsUpdated <= now) {
+        getConfigRemote();
+        return;
+    }
+
+    // clean old network connections and start uploading
     cleanNetworkAccessManagers();
 
     m_networkAMGetCreds = new QNetworkAccessManager(this);
@@ -344,5 +333,54 @@ void ImgS3Uploader::cleanNetworkAccessManagers()
     if (nullptr != m_networkAMRemove) {
         delete m_networkAMRemove;
         m_networkAMRemove = nullptr;
+    }
+    if (nullptr != m_multiPart) {
+        delete m_multiPart;
+        m_multiPart = nullptr;
+    }
+}
+
+void ImgS3Uploader::getConfigRemote()
+{
+    if (nullptr == m_networkAMConfig) {
+        m_networkAMConfig = new QNetworkAccessManager(this);
+        connect(m_networkAMConfig,
+                &QNetworkAccessManager::finished,
+                this,
+                &ImgS3Uploader::handleReplyGetConfig);
+        if (proxy() != nullptr) {
+            m_networkAMConfig->setProxy(*proxy());
+        }
+    }
+    QNetworkRequest requestConfig(QUrl(S3_REMOTE_CONFIG_URL));
+    m_networkAMConfig->get(requestConfig);
+}
+
+void ImgS3Uploader::handleReplyGetConfig(QNetworkReply* reply)
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        bool doUpload = m_s3Settings.credsUrl().isEmpty();
+        QString data = QString(reply->readAll());
+        m_s3Settings.updateConfigurationData(data);
+        if (doUpload) {
+            upload();
+        } else {
+            hide();
+        }
+    } else {
+        QString message = reply->errorString() + "\n\n" +
+                          tr("Unable to get s3 credentials, please check "
+                             "your VPN connection and try again");
+        if (QMessageBox::Retry ==
+            QMessageBox::question(nullptr,
+                                  tr("Error"),
+                                  message,
+                                  QMessageBox::Retry | QMessageBox::Cancel)) {
+            setInfoLabelText(
+              tr("Retrieving configuration file with s3 creds..."));
+            getConfigRemote();
+            return;
+        }
+        hide();
     }
 }

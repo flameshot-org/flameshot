@@ -522,7 +522,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="49"/>
         <source>Upload image to S3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -531,69 +531,67 @@ Press Space to open the side panel.</source>
         <translation type="obsolete">正在上傳</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="169"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="49"/>
         <source>Uploading Image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="55"/>
         <source>Delete image from S3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="55"/>
         <source>Deleting image...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="108"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="112"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">連結已複製到剪貼簿</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="134"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="138"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="136"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="140"/>
         <source>Network error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="138"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="142"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="143"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="147"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="147"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="151"/>
         <source>Remove screenshot from history?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="164"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="191"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="380"/>
         <source>Retrieving configuration file with s3 creds...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="184"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="168"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="187"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="376"/>
         <source>Error</source>
         <translation type="unfinished">錯誤</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="188"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="372"/>
         <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
         <translation type="unfinished"></translation>
     </message>

@@ -534,7 +534,7 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="49"/>
         <source>Upload image to S3</source>
         <translation>Вивантаження зображення на S3</translation>
     </message>
@@ -543,69 +543,67 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Вивантаження зображення</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="50"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="169"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="49"/>
         <source>Uploading Image...</source>
         <translation>Вивантаження зображення...</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="55"/>
         <source>Delete image from S3</source>
         <translation>Видаліть зображення з S3</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="56"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="55"/>
         <source>Deleting image...</source>
         <translation>Видалення зображення...</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="108"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="112"/>
         <source>URL copied to clipboard.</source>
         <translation>URL скопійовано до буферу обміну.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="134"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="138"/>
         <source>Unable to remove screenshot from the remote storage.</source>
         <translation>Не вдалося видалити знімок екрана з віддаленого сховища.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="136"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="140"/>
         <source>Network error</source>
         <translation>Помилка мережі</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="138"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="142"/>
         <source>Possibly it doesn&apos;t exist anymore</source>
         <translation>Можливо, його вже не існує</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="143"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="147"/>
         <source>Do you want to remove screenshot from local history anyway?</source>
         <translation>Ви все одно хочете видалити знімок екрана з місцевої історії?</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="147"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="151"/>
         <source>Remove screenshot from history?</source>
         <translation>Видалити знімок екрана з історії?</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="164"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="191"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="380"/>
         <source>Retrieving configuration file with s3 creds...</source>
         <translation>Отримання конфігураційного файлу з параметрами доступу до s3 ...</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="184"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="168"/>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation>S3 Creds URL не знайдено у вашому файлі конфігурації</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="187"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="376"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="188"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="372"/>
         <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
         <translation>Не вдалося отримати конфігурацію для s3, перевірити своє з&apos;єднання VPN і повторити спробу</translation>
     </message>
