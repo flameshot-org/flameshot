@@ -43,13 +43,13 @@ ImgUploader::ImgUploader(const QPixmap& capture, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(capture)
 {
-    init(tr("Upload image to S3"), tr("Uploading Image"));
+    init(tr("Upload image to S3"), tr("Uploading Image..."));
 }
 
 ImgUploader::ImgUploader(QWidget* parent)
   : QWidget(parent)
 {
-    init(tr("Upload image"), tr("Uploading Image"));
+    init(tr("Delete image"), tr("Deleting image..."));
 }
 
 void ImgUploader::init(const QString& title, const QString& label)

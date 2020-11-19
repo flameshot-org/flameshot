@@ -48,8 +48,8 @@ UploadStorageConfig::UploadStorageConfig(QWidget* parent)
     });
 
     StorageManager storageManager;
-    if (storageManager.storageLocked()) {
-        ConfigHandler().setUploadStorage(storageManager.storageDefault());
+    if (!storageManager.storageLocked().isEmpty()) {
+        ConfigHandler().setUploadStorage(storageManager.storageLocked());
         storageImgUr->setDisabled(true);
         storageImgS3->setDisabled(true);
     }
