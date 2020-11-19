@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
 # This can be read from ${PROJECT_NAME} after project() is called
+if(APPLE)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
+endif()
+
 project(
   flameshot
   VERSION 0.8.5.4
@@ -18,6 +22,10 @@ if(WIN32)
     add_definitions(-DFLAMESHOT_VERSION_BUGFIX=${CMAKE_PROJECT_VERSION_PATCH})
     add_definitions(-DFLAMESHOT_VERSION_BUILD=1)
     add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
+elseif(APPLE)
+  set(Qt5_DIR "$(brew --prefix qt5)/lib/cmake/Qt5/" CACHE PATH "directory where Qt5Config.cmake exists.")
+  set(CMAKE_MACOSX_BUNDLE ON)
+  set(CMAKE_MACOSX_RPATH ON)
 endif()
 set(RUN_IN_PLACE ${DEFAULT_RUN_IN_PLACE} CACHE BOOL
 	"Run directly in source directory structure")
