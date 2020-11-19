@@ -20,6 +20,7 @@
 #include "src/widgets/capture/capturetoolbutton.h"
 #include <QSettings>
 #include <QStringList>
+#include <QVariant>
 #include <QVector>
 
 class ConfigHandler
@@ -103,8 +104,14 @@ public:
 
     QString configFilePath() const;
 
+    void setValue(const QString& group,
+                  const QString& key,
+                  const QVariant& value);
+    QVariant& value(const QString& group, const QString& key);
+
 private:
     QString m_strRes;
+    QVariant m_varRes;
     QSettings m_settings;
     QVector<QStringList> m_shortcuts;
 

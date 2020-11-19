@@ -1,6 +1,7 @@
 #ifndef STORAGEMANAGER_H
 #define STORAGEMANAGER_H
 
+#include "s3/imgs3settings.h"
 #include <QPixmap>
 #include <QString>
 
@@ -17,11 +18,12 @@ public:
                                  QObject* parent = nullptr);
     const QString& storageUrl(const QString& imgUploaderType);
     const QString& storageDefault();
-    bool storageLocked();
+    const QString& storageLocked();
 
 private:
     // class members
     QString m_qstr;
+    ImgS3Settings m_imgS3Settings;
 };
 
 #endif // STORAGEMANAGER_H

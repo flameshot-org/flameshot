@@ -1,4 +1,4 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
+// Copyright(c) 2017-2019 Namecheap inc.
 //
 // This file is part of Flameshot.
 //
@@ -17,12 +17,14 @@
 
 #pragma once
 
-#define S3_API_IMG_PATH "v2/image/"
-
 #include "../imguploader.h"
 #include "imgs3settings.h"
 #include <QUrl>
 #include <QWidget>
+
+#define S3_REMOTE_CONFIG_URL                                                   \
+    "https://git.namecheap.net/projects/RND/repos/flameshot_config/raw/"       \
+    "config.ini"
 
 class QNetworkReply;
 class QNetworkProxy;
@@ -34,6 +36,7 @@ class QPushButton;
 class QUrl;
 class NotificationWidget;
 class ImageLabel;
+class QHttpMultiPart;
 
 class ImgS3Uploader : public ImgUploader
 {
@@ -46,25 +49,28 @@ public:
     void deleteResource(const QString&, const QString&);
 
 private slots:
-    void handleReplyUpload(QNetworkReply* reply);
+    void handleReplyPostUpload(QNetworkReply* reply);
     void handleReplyGetCreds(QNetworkReply* reply);
     void handleReplyDeleteResource(QNetworkReply* reply);
+    void handleReplyGetConfig(QNetworkReply* reply);
 
 private:
     void init(const QString& title, const QString& label);
     void uploadToS3(QJsonDocument& response);
     void removeImagePreview();
+    void getConfigRemote();
 
-    QNetworkProxy* initProxy();
     void clearProxy();
     QNetworkProxy* proxy();
+    void cleanNetworkAccessManagers();
 
     // class members
 private:
     ImgS3Settings m_s3Settings;
 
-    QNetworkProxy* m_proxy;
-    QNetworkAccessManager* m_NetworkAMUpload;
-    QNetworkAccessManager* m_NetworkAMGetCreds;
-    QNetworkAccessManager* m_NetworkAMRemove;
+    QNetworkAccessManager* m_networkAMUpload;
+    QNetworkAccessManager* m_networkAMGetCreds;
+    QNetworkAccessManager* m_networkAMRemove;
+    QHttpMultiPart* m_multiPart;
+    QNetworkAccessManager* m_networkAMConfig;
 };
