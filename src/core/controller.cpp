@@ -150,9 +150,12 @@ void Controller::startVisualCapture(const uint id,
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
+#elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
+       defined(Q_OS_MACX))
+        m_captureWindow->show();
+        m_captureWindow->activateWindow();
 #else
         m_captureWindow->showFullScreen();
-        // m_captureWindow->show(); // Debug
 #endif
     } else {
         emit captureFailed(id);
@@ -250,12 +253,15 @@ void Controller::enableTrayIcon()
       QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
     m_trayIcon->setIcon(trayicon);
 
+#if not(defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||       \
+        defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
         if (r == QSystemTrayIcon::Trigger) {
             startVisualCapture();
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+#endif
 
 #ifdef Q_OS_WIN
     // Ensure proper removal of tray icon when program quits on Windows.
