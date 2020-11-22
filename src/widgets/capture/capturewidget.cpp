@@ -117,7 +117,7 @@ CaptureWidget::CaptureWidget(const uint id,
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
 #endif
-        resize(pixmap().size());
+        resize(pixmap().size() / window()->devicePixelRatio());
     }
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
