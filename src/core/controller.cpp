@@ -152,7 +152,9 @@ void Controller::startVisualCapture(const uint id,
         m_captureWindow->show();
 #elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
        defined(Q_OS_MACX))
-        m_captureWindow->show();
+        // In "Emulate fullscreen mode"
+        //        m_captureWindow->show();
+        m_captureWindow->showFullScreen();
         m_captureWindow->activateWindow();
 #else
         m_captureWindow->showFullScreen();
@@ -185,6 +187,10 @@ void Controller::openConfigWindow()
     if (!m_configWindow) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        m_configWindow->activateWindow();
+#endif
     }
 }
 
@@ -202,6 +208,10 @@ void Controller::openLauncherWindow()
         m_launcherWindow = new CaptureLauncher();
     }
     m_launcherWindow->show();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    m_launcherWindow->activateWindow();
+#endif
 }
 
 void Controller::enableTrayIcon()
@@ -324,6 +334,10 @@ void Controller::showRecentScreenshots()
     }
     m_history->loadHistory();
     m_history->show();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    m_history->activateWindow();
+#endif
 }
 
 void Controller::startFullscreenCapture(const uint id)

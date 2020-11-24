@@ -115,10 +115,13 @@ CaptureWidget::CaptureWidget(const uint id,
         resize(pixmap().size());
 #elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
        defined(Q_OS_MACX))
-        setWindowFlags(Qt::WindowStaysOnTopHint | Qt::BypassWindowManagerHint |
-                       Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint |
-                       Qt::ToolTip | Qt::Popup);
-
+        // Emulate fullscreen mode
+        //        setWindowFlags(Qt::WindowStaysOnTopHint |
+        //        Qt::BypassWindowManagerHint |
+        //                       Qt::FramelessWindowHint |
+        //                       Qt::NoDropShadowWindowHint | Qt::ToolTip |
+        //                       Qt::Popup
+        //                       );
         QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
