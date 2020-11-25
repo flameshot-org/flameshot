@@ -37,7 +37,18 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QPixmap screenPixmap(
+      currentScreen->grabWindow(QApplication::desktop()->winId(),
+                                currentScreen->geometry().x(),
+                                currentScreen->geometry().y(),
+                                currentScreen->geometry().width(),
+                                currentScreen->geometry().height()));
+    screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
+    return screenPixmap;
+#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (m_info.waylandDectected()) {
         QPixmap res;
         // handle screenshot based on DE
@@ -87,7 +98,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         return res;
     }
 #endif
-
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
     QRect geometry;
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
@@ -106,6 +117,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     QScreen* screen = QApplication::screens()[screenNumber];
     p.setDevicePixelRatio(screen->devicePixelRatio());
     return p;
+#endif
 }
 
 QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
