@@ -242,7 +242,7 @@ Taken from [adaptation](https://askubuntu.com/posts/1039949/revisions) of [Pavel
 1. Release the binding on <kbd>Prt Sc</kbd> using the following command.
 
   ```shell
-  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
   ```
 
 2. Go to Settings > Device > Keyboard and press the '+' button at the bottom.
