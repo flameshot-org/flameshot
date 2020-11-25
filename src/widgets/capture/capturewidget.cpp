@@ -85,7 +85,8 @@ CaptureWidget::CaptureWidget(const uint id,
     initContext(savePath, fullScreen);
     initShortcuts();
     m_context.circleCount = 1;
-#ifdef Q_OS_WIN
+#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
+     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
 #endif
@@ -99,7 +100,7 @@ CaptureWidget::CaptureWidget(const uint id,
         }
         m_context.origScreenshot = m_context.screenshot;
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                        Qt::Popup);
 
@@ -111,11 +112,24 @@ CaptureWidget::CaptureWidget(const uint id,
             }
         }
         move(topLeft);
+        resize(pixmap().size());
+#elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
+       defined(Q_OS_MACX))
+        // Emulate fullscreen mode
+        //        setWindowFlags(Qt::WindowStaysOnTopHint |
+        //        Qt::BypassWindowManagerHint |
+        //                       Qt::FramelessWindowHint |
+        //                       Qt::NoDropShadowWindowHint | Qt::ToolTip |
+        //                       Qt::Popup
+        //                       );
+        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        move(currentScreen->geometry().x(), currentScreen->geometry().y());
+        resize(currentScreen->size());
 #else
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-#endif
         resize(pixmap().size());
+#endif
     }
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
@@ -126,7 +140,7 @@ CaptureWidget::CaptureWidget(const uint id,
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
                      r.y() / screen->devicePixelRatio());
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
             r.moveTo(r.topLeft() - topLeft);
 #endif
             areas.append(r);
