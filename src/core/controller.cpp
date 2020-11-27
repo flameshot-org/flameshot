@@ -156,6 +156,7 @@ void Controller::startVisualCapture(const uint id,
         //        m_captureWindow->show();
         m_captureWindow->showFullScreen();
         m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
 #endif
@@ -190,6 +191,7 @@ void Controller::openConfigWindow()
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
         m_configWindow->activateWindow();
+        m_configWindow->raise();
 #endif
     }
 }
@@ -199,6 +201,11 @@ void Controller::openInfoWindow()
 {
     if (!m_infoWindow) {
         m_infoWindow = new InfoWindow();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        m_infoWindow->activateWindow();
+        m_infoWindow->raise();
+#endif
     }
 }
 
@@ -211,6 +218,7 @@ void Controller::openLauncherWindow()
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
     m_launcherWindow->activateWindow();
+    m_launcherWindow->raise();
 #endif
 }
 
@@ -337,6 +345,7 @@ void Controller::showRecentScreenshots()
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
     m_history->activateWindow();
+    m_history->raise();
 #endif
 }
 

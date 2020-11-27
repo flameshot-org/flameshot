@@ -36,5 +36,11 @@
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
+	<key>LSUIElement</key>
+    <string>1</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Application requires access to save screenshots to your gallery</string>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
 </dict>
 </plist>
