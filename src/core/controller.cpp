@@ -38,6 +38,11 @@
 #include "src/core/globalshortcutfilter.h"
 #endif
 
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+#include <QScreen>
+#endif
+
 // Controller is the core component of Flameshot, creates the trayIcon and
 // launches the capture widget
 
@@ -68,6 +73,15 @@ Controller::Controller()
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
+
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Try to take a test screenshot, MacOS will request a "Screen Recording"
+    // permissions on the first run. Otherwise it will be hidden under the
+    // CaptureWidget
+    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
+#endif
 }
 
 Controller::~Controller()
