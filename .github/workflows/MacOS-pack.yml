@@ -41,12 +41,17 @@ jobs:
           cd build
           make
 
-      - name: Build dmg image
+      - name: Build dmg package
         run: |
           cd build
           /usr/local/opt/qt5/bin/macdeployqt src/flameshot.app -dmg
 
-      - name: Upload dmg image
+      - name: Update dmg package links
+        run: |
+          cd build/src
+          ../../packaging/macos/update_package.sh
+
+      - name: Upload dmg package
         shell: bash
         run: |
           python3 -m pip install -U -q requests
