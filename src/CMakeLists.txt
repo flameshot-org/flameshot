@@ -167,7 +167,7 @@ else()
 endif()
 
 if(NOT USE_OPENSSL)
-  message(WARNING "OpenSSL is required to upload screenshot to imgur")
+  message(WARNING "OpenSSL is required to upload screenshots")
 endif()
 
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
