@@ -50,6 +50,7 @@ Controller::Controller()
   : m_captureWindow(nullptr)
 {
     m_history = nullptr;
+    m_trayIconMenu = nullptr;
 
     qApp->setQuitOnLastWindowClosed(false);
 
@@ -87,6 +88,7 @@ Controller::Controller()
 Controller::~Controller()
 {
     delete m_history;
+    delete m_trayIconMenu;
 }
 
 Controller* Controller::getInstance()
@@ -241,7 +243,7 @@ void Controller::enableTrayIcon()
     if (m_trayIcon) {
         return;
     }
-    QMenu* trayIconMenu = new QMenu();
+    m_trayIconMenu = new QMenu();
 
     ConfigHandler().setDisabledTrayIcon(false);
     QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
@@ -268,19 +270,22 @@ void Controller::enableTrayIcon()
       recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
 
     // generate menu
-    trayIconMenu->addAction(captureAction);
-    trayIconMenu->addAction(launcherAction);
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(recentAction);
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(configAction);
-    trayIconMenu->addAction(infoAction);
-    trayIconMenu->addSeparator();
-    trayIconMenu->addAction(quitAction);
+    m_trayIconMenu->addAction(captureAction);
+    m_trayIconMenu->addAction(launcherAction);
+    m_trayIconMenu->addSeparator();
+    m_trayIconMenu->addAction(recentAction);
+    m_trayIconMenu->addSeparator();
+    m_trayIconMenu->addAction(configAction);
+    m_trayIconMenu->addAction(infoAction);
+    m_trayIconMenu->addSeparator();
+    m_trayIconMenu->addAction(quitAction);
 
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
-    m_trayIcon->setContextMenu(trayIconMenu);
+#if not(defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||       \
+        defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+    m_trayIcon->setContextMenu(m_trayIconMenu);
+#endif
     QIcon trayicon =
       QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
     m_trayIcon->setIcon(trayicon);
@@ -290,6 +295,18 @@ void Controller::enableTrayIcon()
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
         if (r == QSystemTrayIcon::Trigger) {
             startVisualCapture();
+        }
+    };
+    connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+#else
+    // Because of the following issues:
+    // https://bugreports.qt.io/browse/QTBUG-86393
+    // https://developer.apple.com/forums/thread/126072
+    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
+        if (m_trayIconMenu->isVisible()) {
+            m_trayIconMenu->hide();
+        } else {
+            m_trayIconMenu->popup(QPoint(QCursor::pos().x(), 0));
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);

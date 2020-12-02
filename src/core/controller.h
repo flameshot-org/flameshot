@@ -19,6 +19,7 @@
 
 #include "src/core/capturerequest.h"
 #include <QMap>
+#include <QMenu>
 #include <QObject>
 #include <QPixmap>
 #include <QPointer>
@@ -92,4 +93,5 @@ private:
     QPointer<QSystemTrayIcon> m_trayIcon;
 
     HistoryWidget* m_history;
+    QMenu* m_trayIconMenu;
 };
