@@ -14,13 +14,50 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-add_executable(flameshot)
+# set application icon
+if (APPLE)
+    # generate iconset
+    execute_process(
+            COMMAND bash "-c" "mkdir -p flameshot.iconset"
+    )
+    execute_process(
+            COMMAND bash "-c" "sips -z 16 16     ../data/img/app/flameshot.png --out flameshot.iconset/icon_16x16.png"
+            COMMAND bash "-c" "sips -z 32 32     ../data/img/app/flameshot.png --out flameshot.iconset/icon_16x16@2x.png"
+            COMMAND bash "-c" "sips -z 32 32     ../data/img/app/flameshot.png --out flameshot.iconset/icon_32x32.png"
+            COMMAND bash "-c" "sips -z 64 64     ../data/img/app/flameshot.png --out flameshot.iconset/icon_32x32@2x.png"
+            COMMAND bash "-c" "sips -z 64 64     ../data/img/app/flameshot.png --out flameshot.iconset/icon_64x64x.png"
+            COMMAND bash "-c" "sips -z 128 128   ../data/img/app/flameshot.png --out flameshot.iconset/icon_64x64@2.png"
+            COMMAND bash "-c" "sips -z 128 128   ../data/img/app/flameshot.png --out flameshot.iconset/icon_128x128.png"
+            COMMAND bash "-c" "sips -z 256 256   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_128x128@2x.png"
+            COMMAND bash "-c" "sips -z 256 256   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256.png"
+            COMMAND bash "-c" "sips -z 512 512   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256@2x.png"
+            COMMAND bash "-c" "sips -z 512 512   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512.png"
+            COMMAND bash "-c" "sips -z 1024 1024 ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512@2x.png"
+            COMMAND bash "-c" "iconutil -c icns flameshot.iconset"
+    )
+
+    execute_process(
+            COMMAND bash "-c" "rm -R flameshot.iconset"
+    )
+
+    # Set application icon
+    set(MACOSX_BUNDLE_ICON_FILE flameshot.icns)
+
+    # And this part tells CMake where to find and install the file itself
+    set(APP_ICON_MACOSX ${CMAKE_BINARY_DIR}/flameshot.icns)
+    set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    add_executable(flameshot MACOSX_BUNDLE main.cpp ${APP_ICON_MACOSX})
+else()
+    add_executable(flameshot)
+endif()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
 
 if(WIN32)
   set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
 endif()
+
 
 add_subdirectory(cli)
 add_subdirectory(config)
@@ -130,7 +167,7 @@ else()
 endif()
 
 if(NOT USE_OPENSSL)
-  message(WARNING "OpenSSL is required to upload screenshot to imgur")
+  message(WARNING "OpenSSL is required to upload screenshots")
 endif()
 
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
@@ -154,10 +191,10 @@ include(GNUInstallDirs)
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Flameshot)
 
 # Install binary
-install(
-  TARGETS flameshot
-  EXPORT flameshot-targets
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS flameshot
+        EXPORT flameshot-targets
+        BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 # Install desktop files, completion and dbus files
 configure_file(${CMAKE_SOURCE_DIR}/data/desktopEntry/package/org.flameshot.Flameshot.desktop
@@ -245,3 +282,21 @@ if(WIN32)
     message("Unable to find executable QTDIR/bin/windeployqt.")
   endif()
 endif()
+
+# macdeployqt
+if (APPLE)
+    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+    execute_process(COMMAND brew --prefix qt5 OUTPUT_VARIABLE QTDIR)
+    string(REGEX REPLACE "\n$" "" QTDIR "${QTDIR}")
+    set(MAC_DEPLOY_QT ${QTDIR}/bin/macdeployqt)
+    if (EXISTS ${MAC_DEPLOY_QT})
+        set_source_files_properties(resources/icon.icns PROPERTIES
+                MACOSX_PACKAGE_LOCATION Resources)
+
+        set_target_properties(${target} PROPERTIES
+                MACOSX_BUNDLE TRUE
+                )
+    else ()
+        message("Unable to find executable ${MAC_DEPLOY_QT}.")
+    endif ()
+endif ()
