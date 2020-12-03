@@ -65,9 +65,8 @@ void SaveTool::pressed(const CaptureContext& context)
      defined(Q_OS_MACX))
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
-        //        if (className.compare("CaptureWidget") == 0) {
-        if (className.compare(CaptureWidget::staticMetaObject.className()) ==
-            0) {
+        if (0 ==
+            className.compare(CaptureWidget::staticMetaObject.className())) {
             widget->showNormal();
             break;
         }
