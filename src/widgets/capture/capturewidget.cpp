@@ -1132,6 +1132,10 @@ void CaptureWidget::copyScreenshot()
 
 void CaptureWidget::saveScreenshot()
 {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    showNormal();
+#endif
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
