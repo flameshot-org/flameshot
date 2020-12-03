@@ -112,7 +112,6 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
         case CaptureToolButton::TYPE_CIRCLECOUNT:
             tool = new CircleCountTool(parent);
             break;
-
         default:
             tool = nullptr;
             break;
