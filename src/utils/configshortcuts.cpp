@@ -112,9 +112,12 @@ const QKeySequence& ConfigShortcuts::captureShortcutDefault(
         case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
             m_ks = QKeySequence(Qt::Key_Return);
             break;
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
         case CaptureToolButton::ButtonType::TYPE_OPEN_APP:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_O);
             break;
+#endif
         case CaptureToolButton::ButtonType::TYPE_PIXELATE:
             m_ks = QKeySequence(Qt::Key_B);
             break;

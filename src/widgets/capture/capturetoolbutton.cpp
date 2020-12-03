@@ -115,27 +115,32 @@ void CaptureToolButton::setColor(const QColor& c)
 
 QColor CaptureToolButton::m_mainColor = ConfigHandler().uiMainColorValue();
 
-static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder{
+static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
+{
     { CaptureToolButton::TYPE_PENCIL, 0 },
-    { CaptureToolButton::TYPE_DRAWER, 1 },
-    { CaptureToolButton::TYPE_ARROW, 2 },
-    { CaptureToolButton::TYPE_SELECTION, 3 },
-    { CaptureToolButton::TYPE_RECTANGLE, 4 },
-    { CaptureToolButton::TYPE_CIRCLE, 5 },
-    { CaptureToolButton::TYPE_MARKER, 6 },
-    { CaptureToolButton::TYPE_TEXT, 7 },
-    { CaptureToolButton::TYPE_PIXELATE, 8 },
-    { CaptureToolButton::TYPE_CIRCLECOUNT, 9 },
-    { CaptureToolButton::TYPE_SELECTIONINDICATOR, 10 },
-    { CaptureToolButton::TYPE_MOVESELECTION, 11 },
-    { CaptureToolButton::TYPE_UNDO, 12 },
-    { CaptureToolButton::TYPE_REDO, 13 },
-    { CaptureToolButton::TYPE_COPY, 14 },
-    { CaptureToolButton::TYPE_SAVE, 15 },
-    { CaptureToolButton::TYPE_EXIT, 16 },
-    { CaptureToolButton::TYPE_IMAGEUPLOADER, 17 },
-    { CaptureToolButton::TYPE_OPEN_APP, 18 },
-    { CaptureToolButton::TYPE_PIN, 19 },
+      { CaptureToolButton::TYPE_DRAWER, 1 },
+      { CaptureToolButton::TYPE_ARROW, 2 },
+      { CaptureToolButton::TYPE_SELECTION, 3 },
+      { CaptureToolButton::TYPE_RECTANGLE, 4 },
+      { CaptureToolButton::TYPE_CIRCLE, 5 },
+      { CaptureToolButton::TYPE_MARKER, 6 },
+      { CaptureToolButton::TYPE_TEXT, 7 },
+      { CaptureToolButton::TYPE_PIXELATE, 8 },
+      { CaptureToolButton::TYPE_CIRCLECOUNT, 9 },
+      { CaptureToolButton::TYPE_SELECTIONINDICATOR, 10 },
+      { CaptureToolButton::TYPE_MOVESELECTION, 11 },
+      { CaptureToolButton::TYPE_UNDO, 12 },
+      { CaptureToolButton::TYPE_REDO, 13 },
+      { CaptureToolButton::TYPE_COPY, 14 },
+      { CaptureToolButton::TYPE_SAVE, 15 },
+      { CaptureToolButton::TYPE_IMAGEUPLOADER, 16 },
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
+      { CaptureToolButton::TYPE_OPEN_APP, 17 },
+      { CaptureToolButton::TYPE_EXIT, 18 }, { CaptureToolButton::TYPE_PIN, 19 },
+#else
+      { CaptureToolButton::TYPE_EXIT, 17 }, { CaptureToolButton::TYPE_PIN, 18 },
+#endif
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureToolButton::ButtonType b)
@@ -164,7 +169,10 @@ QVector<CaptureToolButton::ButtonType>
       CaptureToolButton::TYPE_SAVE,
       CaptureToolButton::TYPE_EXIT,
       CaptureToolButton::TYPE_IMAGEUPLOADER,
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
       CaptureToolButton::TYPE_OPEN_APP,
+#endif
       CaptureToolButton::TYPE_PIN,
       CaptureToolButton::TYPE_CIRCLECOUNT,
   };
