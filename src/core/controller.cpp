@@ -282,16 +282,16 @@ void Controller::enableTrayIcon()
 
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
-#if not(defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||       \
-        defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
     m_trayIcon->setContextMenu(m_trayIconMenu);
 #endif
     QIcon trayicon =
       QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
     m_trayIcon->setIcon(trayicon);
 
-#if not(defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||       \
-        defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
         if (r == QSystemTrayIcon::Trigger) {
             startVisualCapture();
@@ -306,7 +306,7 @@ void Controller::enableTrayIcon()
         if (m_trayIconMenu->isVisible()) {
             m_trayIconMenu->hide();
         } else {
-            m_trayIconMenu->popup(QPoint(QCursor::pos().x(), 0));
+            m_trayIconMenu->popup(QCursor::pos());
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
