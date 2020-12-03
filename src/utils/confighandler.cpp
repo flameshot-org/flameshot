@@ -60,7 +60,10 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
                 << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
                 << CaptureToolButton::TYPE_EXIT
                 << CaptureToolButton::TYPE_IMAGEUPLOADER
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
                 << CaptureToolButton::TYPE_OPEN_APP
+#endif
                 << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
                 << CaptureToolButton::TYPE_CIRCLECOUNT;
     }
