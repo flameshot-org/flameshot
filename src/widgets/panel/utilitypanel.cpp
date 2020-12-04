@@ -137,14 +137,4 @@ void UtilityPanel::initInternalPanel()
     m_internalPanel->setStyleSheet(
       QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
     m_internalPanel->hide();
-
-    m_hide = new QPushButton();
-    m_hide->setText(tr("Hide"));
-    m_upLayout->addWidget(m_hide);
-    connect(m_hide, SIGNAL(clicked()), this, SLOT(slotHidePanel()));
-}
-
-void UtilityPanel::slotHidePanel()
-{
-    hide();
 }
