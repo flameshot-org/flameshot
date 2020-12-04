@@ -695,9 +695,17 @@ void CaptureWidget::initPanel()
 
     m_panel = new UtilityPanel(this);
     makeChild(m_panel);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
+    m_panel->setFixedWidth(m_colorPicker->width() * 1.5);
+    m_panel->setFixedHeight(currentScreen->geometry().height());
+#else
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
+#endif
 
     SidePanelWidget* sidePanel = new SidePanelWidget(&m_context.screenshot);
     connect(sidePanel,
