@@ -40,6 +40,7 @@
 
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
+#include <QOperatingSystemVersion>
 #include <QScreen>
 #endif
 
@@ -282,31 +283,42 @@ void Controller::enableTrayIcon()
 
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX))
+#if defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||         \
+  defined(Q_OS_MACX)
+    // Because of the following issues on MacOS "Catalina":
+    // https://bugreports.qt.io/browse/QTBUG-86393
+    // https://developer.apple.com/forums/thread/126072
+    auto currentMacOsVersion = QOperatingSystemVersion::current();
+    if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
+        m_trayIcon->setContextMenu(m_trayIconMenu);
+    }
+#else
     m_trayIcon->setContextMenu(m_trayIconMenu);
 #endif
     QIcon trayicon =
       QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
     m_trayIcon->setIcon(trayicon);
 
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX))
+#if defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||         \
+  defined(Q_OS_MACX)
+    if (currentMacOsVersion < currentMacOsVersion.MacOSBigSur) {
+        // Because of the following issues on MacOS "Catalina":
+        // https://bugreports.qt.io/browse/QTBUG-86393
+        // https://developer.apple.com/forums/thread/126072
+        auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
+            if (m_trayIconMenu->isVisible()) {
+                m_trayIconMenu->hide();
+            } else {
+                m_trayIconMenu->popup(QCursor::pos());
+            }
+        };
+        connect(
+          m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+    }
+#else
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
         if (r == QSystemTrayIcon::Trigger) {
             startVisualCapture();
-        }
-    };
-    connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
-#else
-    // Because of the following issues:
-    // https://bugreports.qt.io/browse/QTBUG-86393
-    // https://developer.apple.com/forums/thread/126072
-    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
-        if (m_trayIconMenu->isVisible()) {
-            m_trayIconMenu->hide();
-        } else {
-            m_trayIconMenu->popup(QCursor::pos());
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
