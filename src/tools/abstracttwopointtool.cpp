@@ -139,8 +139,7 @@ QRect AbstractTwoPointTool::backupRect(const QRect& limits) const
     //    }
     //    const int val = (m_thickness + m_padding);
     //    r += QMargins(val, val, val, val);
-    //    return r.intersected(limits);;
-
+    //    return r.intersected(limits);
     return limits;
 #else
     QRect r = QRect(m_points.first, m_points.second).normalized();
