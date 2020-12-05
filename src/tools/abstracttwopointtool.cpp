@@ -16,6 +16,9 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "abstracttwopointtool.h"
+#include <QCursor>
+#include <QGuiApplication>
+#include <QScreen>
 #include <cmath>
 
 namespace {
@@ -71,7 +74,19 @@ bool AbstractTwoPointTool::showMousePreview() const
 void AbstractTwoPointTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    int devicePixelRatio = 1;
+    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    if (currentScreen) {
+        // on edge borders MacOS can return nullptr instead of current screen
+        devicePixelRatio = currentScreen->devicePixelRatio();
+    }
+    p.drawPixmap(backupRect(pixmap.rect()).topLeft() / devicePixelRatio,
+                 m_pixmapBackup);
+#else
     p.drawPixmap(backupRect(pixmap.rect()).topLeft(), m_pixmapBackup);
+#endif
     if (this->nameID() == ToolType::CIRCLECOUNT) {
         emit requestAction(REQ_DECREMENT_CIRCLE_COUNT);
     }
@@ -109,10 +124,30 @@ void AbstractTwoPointTool::updateBackup(const QPixmap& pixmap)
 
 QRect AbstractTwoPointTool::backupRect(const QRect& limits) const
 {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // On edge borders MacOS returns nullptr instead of current screen,
+    // it means that we cannot get devicePixelRatio for the current screen,
+    // so we have no choice and have to save the whole screen in the
+    // history. Possibly commented code will work on a "Big Sur".
+    //    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    //    int devicePixelRatio = currentScreen->devicePixelRatio();
+    //    QRect r = QRect(m_points.first, m_points.second).normalized();
+    //    if (1 != devicePixelRatio) {
+    //        r.moveTo(r.topLeft() * devicePixelRatio);
+    //        r.setSize(r.size() * devicePixelRatio);
+    //    }
+    //    const int val = (m_thickness + m_padding);
+    //    r += QMargins(val, val, val, val);
+    //    return r.intersected(limits);;
+
+    return limits;
+#else
     QRect r = QRect(m_points.first, m_points.second).normalized();
-    const int val = m_thickness + m_padding;
+    const int val = (m_thickness + m_padding);
     r += QMargins(val, val, val, val);
     return r.intersected(limits);
+#endif
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
