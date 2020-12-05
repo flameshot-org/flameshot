@@ -47,8 +47,17 @@ void AbstractPathTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
     const int val = m_thickness + m_padding;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // On edge borders MacOS returns nullptr instead of current screen,
+    // it means that we cannot get devicePixelRatio for the current screen,
+    // so we have no choice and have to save the whole screen in the
+    // history.
+    p.drawPixmap(QPoint(0, 0), m_pixmapBackup);
+#else
     QRect area = m_backupArea + QMargins(val, val, val, val);
     p.drawPixmap(area.intersected(pixmap.rect()).topLeft(), m_pixmapBackup);
+#endif
 }
 
 void AbstractPathTool::drawEnd(const QPoint& p)
@@ -73,9 +82,18 @@ void AbstractPathTool::thicknessChanged(const int th)
 
 void AbstractPathTool::updateBackup(const QPixmap& pixmap)
 {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // On edge borders MacOS returns nullptr instead of current screen,
+    // it means that we cannot get devicePixelRatio for the current screen,
+    // so we have no choice and have to save the whole screen in the
+    // history.
+    m_pixmapBackup = pixmap;
+#else
     const int val = m_thickness + m_padding;
     QRect area = m_backupArea.normalized() + QMargins(val, val, val, val);
     m_pixmapBackup = pixmap.copy(area);
+#endif
 }
 
 void AbstractPathTool::addPoint(const QPoint& point)
