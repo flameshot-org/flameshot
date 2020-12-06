@@ -76,16 +76,12 @@ void AbstractTwoPointTool::undo(QPixmap& pixmap)
     QPainter p(&pixmap);
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-    int devicePixelRatio = 1;
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
-    if (currentScreen) {
-        // on edge borders MacOS can return nullptr instead of current screen
-        devicePixelRatio = currentScreen->devicePixelRatio();
-    }
-    p.drawPixmap(backupRect(pixmap.rect()).topLeft() / devicePixelRatio,
-                 m_pixmapBackup);
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
+    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
 #else
-    p.drawPixmap(backupRect(pixmap.rect()).topLeft(), m_pixmapBackup);
+    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
+    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
 #endif
     if (this->nameID() == ToolType::CIRCLECOUNT) {
         emit requestAction(REQ_DECREMENT_CIRCLE_COUNT);
@@ -119,34 +115,29 @@ void AbstractTwoPointTool::thicknessChanged(const int th)
 
 void AbstractTwoPointTool::updateBackup(const QPixmap& pixmap)
 {
-    m_pixmapBackup = pixmap.copy(backupRect(pixmap.rect()));
+    m_pixmapBackup = pixmap.copy(backupRect(pixmap));
 }
 
-QRect AbstractTwoPointTool::backupRect(const QRect& limits) const
+QRect AbstractTwoPointTool::backupRect(const QPixmap& pixmap) const
 {
+    const QRect& limits = pixmap.rect();
+    QRect r = QRect(m_points.first, m_points.second).normalized();
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-    // On edge borders MacOS returns nullptr instead of current screen,
-    // it means that we cannot get devicePixelRatio for the current screen,
-    // so we have no choice and have to save the whole screen in the
-    // history. Possibly commented code will work on a "Big Sur".
-    //    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
-    //    int devicePixelRatio = currentScreen->devicePixelRatio();
-    //    QRect r = QRect(m_points.first, m_points.second).normalized();
-    //    if (1 != devicePixelRatio) {
-    //        r.moveTo(r.topLeft() * devicePixelRatio);
-    //        r.setSize(r.size() * devicePixelRatio);
-    //    }
-    //    const int val = (m_thickness + m_padding);
-    //    r += QMargins(val, val, val, val);
-    //    return r.intersected(limits);
-    return limits;
+    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
+    // capture of different displays with different DPI, so let it be MacOS
+    // specific only.
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    if (1 != pixelRatio) {
+        r.moveTo(r.topLeft() * pixelRatio);
+        r.setSize(r.size() * pixelRatio);
+    }
+    const int val = (m_thickness + m_padding) * pixelRatio;
 #else
-    QRect r = QRect(m_points.first, m_points.second).normalized();
     const int val = (m_thickness + m_padding);
+#endif
     r += QMargins(val, val, val, val);
     return r.intersected(limits);
-#endif
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
