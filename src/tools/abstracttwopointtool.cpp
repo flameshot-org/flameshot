@@ -16,6 +16,9 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "abstracttwopointtool.h"
+#include <QCursor>
+#include <QGuiApplication>
+#include <QScreen>
 #include <cmath>
 
 namespace {
@@ -71,7 +74,16 @@ bool AbstractTwoPointTool::showMousePreview() const
 void AbstractTwoPointTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
-    p.drawPixmap(backupRect(pixmap.rect()).topLeft(), m_pixmapBackup);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
+    // capture of different displays with different DPI, so let it be MacOS
+    // specific only.
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
+#else
+    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
+#endif
     if (this->nameID() == ToolType::CIRCLECOUNT) {
         emit requestAction(REQ_DECREMENT_CIRCLE_COUNT);
     }
@@ -104,13 +116,27 @@ void AbstractTwoPointTool::thicknessChanged(const int th)
 
 void AbstractTwoPointTool::updateBackup(const QPixmap& pixmap)
 {
-    m_pixmapBackup = pixmap.copy(backupRect(pixmap.rect()));
+    m_pixmapBackup = pixmap.copy(backupRect(pixmap));
 }
 
-QRect AbstractTwoPointTool::backupRect(const QRect& limits) const
+QRect AbstractTwoPointTool::backupRect(const QPixmap& pixmap) const
 {
+    const QRect& limits = pixmap.rect();
     QRect r = QRect(m_points.first, m_points.second).normalized();
-    const int val = m_thickness + m_padding;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
+    // capture of different displays with different DPI, so let it be MacOS
+    // specific only.
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    if (1 != pixelRatio) {
+        r.moveTo(r.topLeft() * pixelRatio);
+        r.setSize(r.size() * pixelRatio);
+    }
+    const int val = (m_thickness + m_padding) * pixelRatio;
+#else
+    const int val = (m_thickness + m_padding);
+#endif
     r += QMargins(val, val, val, val);
     return r.intersected(limits);
 }

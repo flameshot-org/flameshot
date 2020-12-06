@@ -130,7 +130,16 @@ CaptureTool* TextTool::copy(QObject* parent)
 void TextTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
+    // capture of different displays with different DPI, so let it be MacOS
+    // specific only.
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
+#else
     p.drawPixmap(m_backupArea.topLeft(), m_pixmapBackup);
+#endif
 }
 
 void TextTool::process(QPainter& painter,
@@ -144,12 +153,32 @@ void TextTool::process(QPainter& painter,
     QSize size(fm.boundingRect(QRect(), 0, m_text).size());
     m_backupArea.setSize(size);
     if (recordUndo) {
-        m_pixmapBackup = pixmap.copy(m_backupArea + QMargins(0, 0, 5, 5));
+        m_pixmapBackup = pixmap.copy(backupRect(pixmap));
     }
     // draw text
     painter.setFont(m_font);
     painter.setPen(m_color);
-    painter.drawText(m_backupArea + QMargins(-5, -5, 5, 5), m_text);
+    const int val = 5;
+    painter.drawText(m_backupArea + QMargins(-val, -val, val, val), m_text);
+}
+
+QRect TextTool::backupRect(const QPixmap& pixmap) const
+{
+    const QRect& limits = pixmap.rect();
+    QRect r = m_backupArea.normalized();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    const int val = 5 * pixelRatio;
+    if (1 != pixelRatio) {
+        r.moveTo(r.topLeft() * pixelRatio);
+        r.setSize(r.size() * pixelRatio);
+    }
+#else
+    const int val = 5;
+#endif
+    r += QMargins(0, 0, val, val);
+    return r.intersected(limits);
 }
 
 void TextTool::paintMousePreview(QPainter& painter,

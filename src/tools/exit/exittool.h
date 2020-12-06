@@ -25,7 +25,7 @@ class ExitTool : public AbstractActionTool
 public:
     explicit ExitTool(QObject* parent = nullptr);
 
-    bool closeOnButtonPressed() const;
+    bool closeOnButtonPressed() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
