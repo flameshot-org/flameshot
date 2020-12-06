@@ -130,7 +130,16 @@ CaptureTool* TextTool::copy(QObject* parent)
 void TextTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // On edge borders MacOS returns nullptr instead of current screen,
+    // it means that we cannot get devicePixelRatio for the current screen,
+    // so we have no choice and have to save the whole screen in the
+    // history.
+    p.drawPixmap(QPoint(0, 0), m_pixmapBackup);
+#else
     p.drawPixmap(m_backupArea.topLeft(), m_pixmapBackup);
+#endif
 }
 
 void TextTool::process(QPainter& painter,
@@ -144,7 +153,16 @@ void TextTool::process(QPainter& painter,
     QSize size(fm.boundingRect(QRect(), 0, m_text).size());
     m_backupArea.setSize(size);
     if (recordUndo) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        // On edge borders MacOS returns nullptr instead of current screen,
+        // it means that we cannot get devicePixelRatio for the current screen,
+        // so we have no choice and have to save the whole screen in the
+        // history.
+        m_pixmapBackup = pixmap;
+#else
         m_pixmapBackup = pixmap.copy(m_backupArea + QMargins(0, 0, 5, 5));
+#endif
     }
     // draw text
     painter.setFont(m_font);
