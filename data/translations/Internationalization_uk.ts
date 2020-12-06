@@ -117,7 +117,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Delay:</source>
-        <translation>Затримка: </translation>
+        <translation>Затримка:</translation>
     </message>
 </context>
 <context>

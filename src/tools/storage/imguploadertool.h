@@ -9,12 +9,12 @@ class ImgUploaderTool : public AbstractActionTool
 public:
     explicit ImgUploaderTool(QObject* parent = nullptr);
 
-    bool closeOnButtonPressed() const;
+    bool closeOnButtonPressed() const override;
 
     QString name() const override;
     QIcon icon(const QColor& background, bool inEditor) const override;
 
-    void setCapture(const QPixmap& pixmap);
+    void setCapture(const QPixmap& pixmap) override;
     const QPixmap& capture();
 
 public slots:
