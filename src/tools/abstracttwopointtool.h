@@ -41,7 +41,7 @@ public slots:
 
 protected:
     void updateBackup(const QPixmap& pixmap);
-    QRect backupRect(const QRect& limits) const;
+    QRect backupRect(const QPixmap& pixmap) const;
 
     QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;
