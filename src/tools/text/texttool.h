@@ -51,6 +51,7 @@ public:
 
 protected:
     ToolType nameID() const override;
+    QRect backupRect(const QPixmap& pixmap) const;
 
 public slots:
     void drawEnd(const QPoint& p) override;
