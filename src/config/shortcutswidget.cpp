@@ -48,7 +48,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
 #endif
 
     m_layout = new QVBoxLayout(this);
-    m_layout->setAlignment(Qt::AlignHCenter);
+    m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     m_shortcuts = m_config.shortcuts();
     initInfoTable();
@@ -116,10 +116,8 @@ void ShortcutsWidget::initInfoTable()
     // adjust size
     m_table->resizeColumnsToContents();
     m_table->resizeRowsToContents();
-    m_table->setMinimumWidth(400);
-    m_table->setMaximumWidth(600);
-
-    m_table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    m_table->horizontalHeader()->setMinimumSectionSize(200);
+    m_table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     m_table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
                                                QSizePolicy::Expanding);
 }
