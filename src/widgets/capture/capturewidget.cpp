@@ -725,6 +725,7 @@ void CaptureWidget::initPanel()
     }
 
     m_panel = new UtilityPanel(this);
+    m_panel->hide();
     makeChild(m_panel);
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
