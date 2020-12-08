@@ -38,6 +38,7 @@
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include <QApplication>
+#include <QDateTime>
 #include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QPaintEvent>
@@ -68,6 +69,7 @@ CaptureWidget::CaptureWidget(const uint id,
   , m_mouseOverHandle(SelectionWidget::NO_SIDE)
   , m_id(id)
 {
+    m_lastMouseWheel = 0;
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
     connect(m_eventFilter,
@@ -619,7 +621,36 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 
 void CaptureWidget::wheelEvent(QWheelEvent* e)
 {
-    m_context.thickness += e->angleDelta().y() / 120;
+    /* Mouse scroll usually gives value 120, not more or less, just how many
+     * times.
+     * Touchpad gives the value 2 or more (usually 2-8), it doesn't give
+     * too big values like mouse wheel on normal scrolling, so it is almost
+     * impossible to scroll. It's easier to calculate number of requests and do
+     * not accept events faster that one in 200ms.
+     * */
+    int thicknessOffset = 0;
+    if (e->angleDelta().y() >= 60) {
+        // mouse scroll (wheel) increment
+        thicknessOffset = 1;
+    } else if (e->angleDelta().y() <= -60) {
+        // mouse scroll (wheel) decrement
+        thicknessOffset = -1;
+    } else {
+        // touchpad scroll
+        qint64 current = QDateTime::currentMSecsSinceEpoch();
+        if ((current - m_lastMouseWheel) > 200) {
+            if (e->angleDelta().y() > 0) {
+                thicknessOffset = 1;
+            } else if (e->angleDelta().y() < 0) {
+                thicknessOffset = -1;
+            }
+            m_lastMouseWheel = current;
+        } else {
+            return;
+        }
+    }
+
+    m_context.thickness += thicknessOffset;
     m_context.thickness = qBound(0, m_context.thickness, 100);
     QPoint topLeft =
       qApp->desktop()

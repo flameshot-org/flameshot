@@ -145,6 +145,7 @@ private:
     QRect extendedRect(QRect* r) const;
 
 private:
+    quint64 m_lastMouseWheel;
     QUndoStack m_undoStack;
     QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button
