@@ -86,7 +86,13 @@ void ShortcutsWidget::initInfoTable()
     for (int i = 0; i < shortcuts().size(); ++i) {
         m_table->setItem(i, 0, new QTableWidgetItem(m_shortcuts.at(i).at(1)));
 
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        QTableWidgetItem* item =
+          new QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
+#else
         QTableWidgetItem* item = new QTableWidgetItem(m_shortcuts.at(i).at(2));
+#endif
         item->setTextAlignment(Qt::AlignCenter);
         m_table->setItem(i, 1, item);
 
@@ -138,8 +144,14 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
             }
 
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+                QTableWidgetItem* item = new QTableWidgetItem(
+                  nativeOSHotKeyText(shortcutValue.toString()));
+#else
                 QTableWidgetItem* item =
                   new QTableWidgetItem(shortcutValue.toString());
+#endif
                 item->setTextAlignment(Qt::AlignCenter);
                 item->setFlags(item->flags() ^ Qt::ItemIsEditable);
                 m_table->setItem(row, col, item);
@@ -148,3 +160,16 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
         delete setShortcutDialog;
     }
 }
+
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+const QString& ShortcutsWidget::nativeOSHotKeyText(const QString& text)
+{
+    m_res = text;
+    m_res.replace("Ctrl+", "⌘");
+    m_res.replace("Alt+", "⌥");
+    m_res.replace("Meta+", "⌃");
+    m_res.replace("Shift+", "⇧");
+    return m_res;
+}
+#endif
