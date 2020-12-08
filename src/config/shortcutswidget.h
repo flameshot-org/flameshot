@@ -36,11 +36,19 @@ public:
 
 private:
     void initInfoTable();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    const QString& nativeOSHotKeyText(const QString& text);
+#endif
 
 private slots:
     void slotShortcutCellClicked(int, int);
 
 private:
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QString m_res;
+#endif
     ConfigHandler m_config;
     QTableWidget* m_table;
     QVBoxLayout* m_layout;
