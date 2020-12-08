@@ -8,7 +8,7 @@ endif()
 
 project(
   flameshot
-  VERSION 0.8.5.4
+  VERSION 0.8.5.5
   LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
