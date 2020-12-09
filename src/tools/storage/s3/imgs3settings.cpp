@@ -1,4 +1,5 @@
 #include "imgs3settings.h"
+#include "src/core/controller.h"
 #include "src/tools/storage/imgstorages.h"
 #include "src/utils/confighandler.h"
 #include <QByteArray>

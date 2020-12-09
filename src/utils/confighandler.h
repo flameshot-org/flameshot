@@ -97,6 +97,9 @@ public:
     void setDefaults();
     void setAllTheButtons();
 
+    void setIgnoreUpdateToVersion(const QString& text);
+    QString ignoreUpdateToVersion();
+
     QVector<QStringList> shortcuts();
     void setShortcutsDefault();
     bool setShortcut(const QString&, const QString&);

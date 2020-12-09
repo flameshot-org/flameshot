@@ -236,6 +236,16 @@ void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton)
                         showSidePanelButton);
 }
 
+void ConfigHandler::setIgnoreUpdateToVersion(const QString& text)
+{
+    m_settings.setValue(QStringLiteral("ignoreUpdateToVersion"), text);
+}
+
+QString ConfigHandler::ignoreUpdateToVersion()
+{
+    return m_settings.value(QStringLiteral("ignoreUpdateToVersion")).toString();
+}
+
 bool ConfigHandler::desktopNotificationValue()
 {
     bool res = true;
