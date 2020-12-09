@@ -30,8 +30,14 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopServices>
 #include <QDesktopWidget>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QMenu>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QSystemTrayIcon>
 
 #ifdef Q_OS_WIN
@@ -49,10 +55,12 @@
 
 Controller::Controller()
   : m_captureWindow(nullptr)
+  , m_history(nullptr)
+  , m_trayIconMenu(nullptr)
+  , m_networkCheckUpdates(nullptr)
+  , m_showCheckAppUpdateStatus(false)
 {
-    m_history = nullptr;
-    m_trayIconMenu = nullptr;
-
+    m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
     qApp->setQuitOnLastWindowClosed(false);
 
     // set default shortcusts if not set yet
@@ -84,6 +92,7 @@ Controller::Controller()
     QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
 #endif
+    getLatestAvailableVersion();
 }
 
 Controller::~Controller()
@@ -104,6 +113,58 @@ void Controller::enableExports()
       this, &Controller::captureTaken, this, &Controller::handleCaptureTaken);
     connect(
       this, &Controller::captureFailed, this, &Controller::handleCaptureFailed);
+}
+
+void Controller::getLatestAvailableVersion()
+{
+    // This features is required for MacOS and Windows user and for Linux users
+    // who installed Flameshot not from the repository.
+    m_networkCheckUpdates = new QNetworkAccessManager();
+    m_networkCheckUpdates = new QNetworkAccessManager(this);
+    QNetworkRequest requestCheckUpdates(QUrl(FLAMESHOT_APP_VERSION_URL));
+    connect(m_networkCheckUpdates,
+            &QNetworkAccessManager::finished,
+            this,
+            &Controller::handleReplyCheckUpdates);
+    m_networkCheckUpdates->get(requestCheckUpdates);
+}
+
+void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
+{
+    if (reply->error() == QNetworkReply::NoError) {
+        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject json = response.object();
+        m_appLatestVersion = json["tag_name"].toString().replace("v", "");
+        if (m_appLatestVersion.compare(
+              QStringLiteral(APP_VERSION).replace("v", "")) < 0) {
+            // Next commented lines are for debugging
+            //        if (m_appLatestVersion.compare(
+            //              QStringLiteral("v0.8.5.4").replace("v", "")) > 0) {
+            m_appLatestUrl = json["html_url"].toString();
+            QString newVersion =
+              tr("New version %1 is available").arg(m_appLatestVersion);
+            m_appUpdates->setText(newVersion);
+            if (m_showCheckAppUpdateStatus) {
+                sendTrayNotification(newVersion, "Flameshot", 5);
+                QDesktopServices::openUrl(QUrl(m_appLatestUrl));
+            }
+        } else if (m_showCheckAppUpdateStatus) {
+            sendTrayNotification(
+              tr("You have the latest version"), "Flameshot", 5);
+        }
+    }
+    // nothing to do on fails, is not critical for checking for updates
+    m_showCheckAppUpdateStatus = false;
+}
+
+void Controller::appUpdates()
+{
+    if (m_appLatestUrl.isEmpty()) {
+        m_showCheckAppUpdateStatus = true;
+        getLatestAvailableVersion();
+    } else {
+        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
+    }
 }
 
 void Controller::requestCapture(const CaptureRequest& request)
@@ -170,13 +231,18 @@ void Controller::startVisualCapture(const uint id,
 #elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
        defined(Q_OS_MACX))
         // In "Emulate fullscreen mode"
-        //        m_captureWindow->show();
         m_captureWindow->showFullScreen();
         m_captureWindow->activateWindow();
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
 #endif
+        if (!m_appLatestUrl.isEmpty() &&
+            0 != m_appLatestVersion.compare(
+                   ConfigHandler().ignoreUpdateToVersion())) {
+            m_captureWindow->showAppUpdateNotification(m_appLatestVersion,
+                                                       m_appLatestUrl);
+        }
     } else {
         emit captureFailed(id);
     }
@@ -262,6 +328,10 @@ void Controller::enableTrayIcon()
       configAction, &QAction::triggered, this, &Controller::openConfigWindow);
     QAction* infoAction = new QAction(tr("&About"), this);
     connect(infoAction, &QAction::triggered, this, &Controller::openInfoWindow);
+
+    m_appUpdates = new QAction(tr("Check for updates"), this);
+    connect(m_appUpdates, &QAction::triggered, this, &Controller::appUpdates);
+
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
@@ -277,6 +347,8 @@ void Controller::enableTrayIcon()
     m_trayIconMenu->addAction(recentAction);
     m_trayIconMenu->addSeparator();
     m_trayIconMenu->addAction(configAction);
+    m_trayIconMenu->addSeparator();
+    m_trayIconMenu->addAction(m_appUpdates);
     m_trayIconMenu->addAction(infoAction);
     m_trayIconMenu->addSeparator();
     m_trayIconMenu->addAction(quitAction);
