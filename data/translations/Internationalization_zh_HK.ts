@@ -123,12 +123,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="101"/>
         <source>Unable to capture screen</source>
         <translation>無法捕獲屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="285"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="314"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -141,7 +141,7 @@ Press Space to open the side panel.</source>
 按Space以打開側方面板。</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="666"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="724"/>
         <source>Tool Settings</source>
         <translation>工具選項</translation>
     </message>
@@ -208,27 +208,42 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="212"/>
+        <location filename="../../src/core/controller.cpp" line="145"/>
+        <source>New version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="153"/>
+        <source>You have the latest version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="316"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;捕獲截圖</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="217"/>
+        <location filename="../../src/core/controller.cpp" line="321"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;開啓啓動器</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="222"/>
+        <location filename="../../src/core/controller.cpp" line="326"/>
         <source>&amp;Configuration</source>
         <translation>&amp;設定</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="225"/>
+        <location filename="../../src/core/controller.cpp" line="329"/>
         <source>&amp;About</source>
         <translation>&amp;關於</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="231"/>
+        <location filename="../../src/core/controller.cpp" line="332"/>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="339"/>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,7 +252,7 @@ Press Space to open the side panel.</source>
         <translation type="vanished">&amp;資訊</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="227"/>
+        <location filename="../../src/core/controller.cpp" line="335"/>
         <source>&amp;Quit</source>
         <translation>&amp;結束</translation>
     </message>
@@ -871,12 +886,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Pixelate</source>
         <translation>馬賽克工具</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="48"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="47"/>
         <source>Set Pixelate as the paint tool</source>
         <translation>將馬賽克工具設定為繪畫工具</translation>
     </message>
@@ -1112,7 +1127,7 @@ You can find me in the system tray.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="270"/>
+        <location filename="../../src/core/controller.cpp" line="409"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1167,22 +1182,22 @@ You can find me in the system tray.</source>
         <translation type="unfinished">結束擷取</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="57"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="59"/>
         <source>Screenshot history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Capture screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="65"/>
         <source>Show color picker</source>
         <translation type="unfinished">顯示顏色選擇器</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="64"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
         <source>Change the tool&apos;s thickness</source>
         <translation type="unfinished">改變工具的寬度</translation>
     </message>
@@ -1216,12 +1231,12 @@ You can find me in the system tray.</source>
 <context>
     <name>SaveTool</name>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="38"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="44"/>
         <source>Save</source>
         <translation>儲存</translation>
     </message>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="48"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="54"/>
         <source>Save the capture</source>
         <translation>儲存螢幕捕獲</translation>
     </message>
@@ -1229,7 +1244,7 @@ You can find me in the system tray.</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="85"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="96"/>
         <source>Unable to capture screen</source>
         <translation>無法捕獲螢幕</translation>
     </message>
@@ -1528,6 +1543,29 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>UpdateNotificationWidget</name>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
+        <source>New Flameshot version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="119"/>
+        <source>Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="127"/>
+        <source>Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="135"/>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UploadStorageConfig</name>
     <message>
         <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
@@ -1548,14 +1586,9 @@ You can find me in the system tray.</source>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="122"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="131"/>
         <source>Close</source>
         <translation>關閉</translation>
-    </message>
-    <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="133"/>
-        <source>Hide</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
