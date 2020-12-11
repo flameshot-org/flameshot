@@ -119,7 +119,6 @@ void Controller::getLatestAvailableVersion()
 {
     // This features is required for MacOS and Windows user and for Linux users
     // who installed Flameshot not from the repository.
-    m_networkCheckUpdates = new QNetworkAccessManager();
     m_networkCheckUpdates = new QNetworkAccessManager(this);
     QNetworkRequest requestCheckUpdates(QUrl(FLAMESHOT_APP_VERSION_URL));
     connect(m_networkCheckUpdates,
@@ -127,6 +126,11 @@ void Controller::getLatestAvailableVersion()
             this,
             &Controller::handleReplyCheckUpdates);
     m_networkCheckUpdates->get(requestCheckUpdates);
+
+    // check for updates each 24 hours
+    doLater(1000 * 60 * 60 * 24, this, [this]() {
+        this->getLatestAvailableVersion();
+    });
 }
 
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
@@ -137,9 +141,6 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
         if (m_appLatestVersion.compare(
               QStringLiteral(APP_VERSION).replace("v", "")) < 0) {
-            // Next commented lines are for debugging
-            //        if (m_appLatestVersion.compare(
-            //              QStringLiteral("v0.8.5.4").replace("v", "")) > 0) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
@@ -152,8 +153,16 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
             sendTrayNotification(
               tr("You have the latest version"), "Flameshot", 5);
         }
+    } else {
+        qWarning() << "Failed to get information about the latest version. "
+                   << reply->errorString();
+        if (m_showCheckAppUpdateStatus) {
+            sendTrayNotification(
+              tr("Failed to get information about the latest version."),
+              "Flameshot",
+              5);
+        }
     }
-    // nothing to do on fails, is not critical for checking for updates
     m_showCheckAppUpdateStatus = false;
 }
 
