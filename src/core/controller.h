@@ -17,9 +17,6 @@
 
 #pragma once
 
-#define FLAMESHOT_APP_VERSION_URL                                              \
-    "https://api.github.com/repos/namecheap/flameshot/releases/latest"
-
 #include "src/core/capturerequest.h"
 #include <QMap>
 #include <QMenu>
