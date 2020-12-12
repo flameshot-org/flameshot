@@ -1,16 +1,46 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
+set(FLAMESHOT_VERSION 0.8.5.5)
+
+# Flameshot-org
+#set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
+# Namecheap
+set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
+
+# TODO - fix it for all linux distros
+# find_package (Git)
+#if (GIT_FOUND)
+#  message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
+#
+#  # set flameshot updates url
+#  execute_process(COMMAND ${GIT_EXECUTABLE} ls-remote --get-url OUTPUT_VARIABLE GIT_ORIGIN_REMOTE)
+#  message("GIT_ORIGIN_REMOTE: ${GIT_ORIGIN_REMOTE}")
+#  string(REGEX REPLACE ".git\r*\n*$" "/releases/latest" GIT_API_URL ${GIT_ORIGIN_REMOTE})
+#  string(REGEX REPLACE "^.*:" "https://api.github.com/repos/" GIT_API_URL ${GIT_API_URL})
+#  message("GIT_API_URL: '${GIT_API_URL}'")
+#
+#  # get application version
+#  execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags --abbrev=0 --match v[0-9]* OUTPUT_VARIABLE FLAMESHOT_VERSION)
+#  string(REGEX REPLACE "\r" "" FLAMESHOT_VERSION ${FLAMESHOT_VERSION})
+#  string(REGEX REPLACE "\n" "" FLAMESHOT_VERSION ${FLAMESHOT_VERSION})
+#  string(REGEX REPLACE "^v" "" FLAMESHOT_VERSION ${FLAMESHOT_VERSION})
+#  message("FLAMESHOT_VERSION: '${FLAMESHOT_VERSION}'")
+#else()
+#  message("git command is not found")
+#endif ()
+
+project(
+  flameshot
+  VERSION ${FLAMESHOT_VERSION}
+  LANGUAGES CXX)
+set(PROJECT_NAME_CAPITALIZED "Flameshot")
+
 # This can be read from ${PROJECT_NAME} after project() is called
 if(APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
 endif()
 
-project(
-  flameshot
-  VERSION 0.8.5.5
-  LANGUAGES CXX)
-set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 # Configuration options
 set(DEFAULT_RUN_IN_PLACE FALSE)
