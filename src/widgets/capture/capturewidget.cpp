@@ -24,7 +24,6 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
-#include "src/core/controller.h"
 #include "src/tools/storage/storagemanager.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
@@ -37,6 +36,7 @@
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
+#include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopWidget>
@@ -68,8 +68,9 @@ CaptureWidget::CaptureWidget(const uint id,
   , m_toolWidget(nullptr)
   , m_mouseOverHandle(SelectionWidget::NO_SIDE)
   , m_id(id)
+  , m_lastMouseWheel(0)
+  , m_updateNotificationWidget(nullptr)
 {
-    m_lastMouseWheel = 0;
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
     connect(m_eventFilter,
@@ -294,7 +295,19 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        QRect helpRect;
+        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        if (currentScreen) {
+            helpRect = currentScreen->geometry();
+        } else {
+            helpRect = QGuiApplication::primaryScreen()->geometry();
+        }
+#else
         QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+#endif
+
         helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
 
         QString helpTxt =
@@ -762,6 +775,19 @@ void CaptureWidget::initPanel()
     sidePanel->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(sidePanel);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
+}
+
+void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
+                                              const QString& appLatestUrl)
+{
+    if (nullptr == m_updateNotificationWidget) {
+        m_updateNotificationWidget =
+          new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
+    }
+    m_updateNotificationWidget->move(
+      (width() - m_updateNotificationWidget->width()) / 2, 0);
+    makeChild(m_updateNotificationWidget);
+    m_updateNotificationWidget->show();
 }
 
 void CaptureWidget::initSelection()
