@@ -208,6 +208,18 @@ Press Space to open the side panel.</source>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have the latest version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -1289,6 +1301,25 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>UpdateNotificationWidget</name>
+    <message>
+        <source>New Flameshot version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UploadStorageConfig</name>
     <message>
         <source>Upload storage</source>
@@ -1307,10 +1338,6 @@ You can find me in the system tray.</source>
     <name>UtilityPanel</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

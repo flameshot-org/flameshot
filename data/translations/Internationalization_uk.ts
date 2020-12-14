@@ -123,12 +123,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="101"/>
         <source>Unable to capture screen</source>
         <translation>Не вдалось захопити екран</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="285"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="314"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -141,7 +141,7 @@ Press Space to open the side panel.</source>
 Натисніть Пробіл, щоб відкрити бічну панель.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="666"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="724"/>
         <source>Tool Settings</source>
         <translation>Налаштування інструменту</translation>
     </message>
@@ -208,27 +208,42 @@ Press Space to open the side panel.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="212"/>
+        <location filename="../../src/core/controller.cpp" line="145"/>
+        <source>New version %1 is available</source>
+        <translation>Доступна нова версія %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="153"/>
+        <source>You have the latest version</source>
+        <translation>Ви маєте найпізнішу версію</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="316"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Зробити знімок</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="217"/>
+        <location filename="../../src/core/controller.cpp" line="321"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp; Відкрити лаунчер</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="222"/>
+        <location filename="../../src/core/controller.cpp" line="326"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Налаштування</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="225"/>
+        <location filename="../../src/core/controller.cpp" line="329"/>
         <source>&amp;About</source>
         <translation>Про</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="231"/>
+        <location filename="../../src/core/controller.cpp" line="332"/>
+        <source>Check for updates</source>
+        <translation>Перевірити оновлення</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="339"/>
         <source>&amp;Latest Uploads</source>
         <translation>Останні завантаження</translation>
     </message>
@@ -237,7 +252,7 @@ Press Space to open the side panel.</source>
         <translation type="vanished">&amp;Інформація</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="227"/>
+        <location filename="../../src/core/controller.cpp" line="335"/>
         <source>&amp;Quit</source>
         <translation>Ви&amp;йти</translation>
     </message>
@@ -895,12 +910,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Pixelate</source>
         <translation>Розмиття</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="48"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="47"/>
         <source>Set Pixelate as the paint tool</source>
         <translation>Обрати Pixelate інструментом для малювання</translation>
     </message>
@@ -1143,7 +1158,7 @@ You can find me in the system tray.</source>
 Ви можете знайти мене в системному треї.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="270"/>
+        <location filename="../../src/core/controller.cpp" line="409"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Привіт, я тут! Клацніть піктограму в треї, щоб зробити знімок екрана, або клацніть правою кнопкою, щоб побачити більше опцій.</translation>
     </message>
@@ -1198,22 +1213,22 @@ You can find me in the system tray.</source>
         <translation>Вийти із захоплення екрану</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="57"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="59"/>
         <source>Screenshot history</source>
         <translation>Історія знімків екрану</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Capture screen</source>
         <translation>Захоплення екрану</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="65"/>
         <source>Show color picker</source>
         <translation>Показати вибір кольору</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="64"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Змінити товщину інструменту</translation>
     </message>
@@ -1247,12 +1262,12 @@ You can find me in the system tray.</source>
 <context>
     <name>SaveTool</name>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="38"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="44"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="48"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="54"/>
         <source>Save the capture</source>
         <translation>Зберегти знімок</translation>
     </message>
@@ -1260,7 +1275,7 @@ You can find me in the system tray.</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="85"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="96"/>
         <source>Unable to capture screen</source>
         <translation>Не вдалось захопити екран</translation>
     </message>
@@ -1559,6 +1574,29 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>UpdateNotificationWidget</name>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
+        <source>New Flameshot version %1 is available</source>
+        <translation>Доступна нова версія Flameshot %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="119"/>
+        <source>Ignore</source>
+        <translation>Ігнорувати</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="127"/>
+        <source>Later</source>
+        <translation>Пізніше</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="135"/>
+        <source>Update</source>
+        <translation>Оновити</translation>
+    </message>
+</context>
+<context>
     <name>UploadStorageConfig</name>
     <message>
         <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
@@ -1579,14 +1617,13 @@ You can find me in the system tray.</source>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="122"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="131"/>
         <source>Close</source>
         <translation>Затворити</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="133"/>
         <source>Hide</source>
-        <translation>Сховати</translation>
+        <translation type="vanished">Сховати</translation>
     </message>
 </context>
 <context>

@@ -32,6 +32,8 @@ class InfoWindow;
 class QSystemTrayIcon;
 class CaptureLauncher;
 class HistoryWidget;
+class QNetworkAccessManager;
+class QNetworkReply;
 using lambda = std::function<void(void)>;
 
 class Controller : public QObject
@@ -57,6 +59,7 @@ public slots:
 
     void openConfigWindow();
     void openInfoWindow();
+    void appUpdates();
     void openLauncherWindow();
     void enableTrayIcon();
     void disableTrayIcon();
@@ -78,12 +81,21 @@ private slots:
     void handleCaptureTaken(uint id, QPixmap p);
     void handleCaptureFailed(uint id);
 
+    void handleReplyCheckUpdates(QNetworkReply* reply);
+
 private:
     Controller();
+    void getLatestAvailableVersion();
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
     void doLater(int msec, QObject* receiver, lambda func);
+
+    // class members
+    QAction* m_appUpdates;
+    QString m_appLatestUrl;
+    QString m_appLatestVersion;
+    bool m_showCheckAppUpdateStatus;
 
     QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
@@ -94,4 +106,6 @@ private:
 
     HistoryWidget* m_history;
     QMenu* m_trayIconMenu;
+
+    QNetworkAccessManager* m_networkCheckUpdates;
 };
