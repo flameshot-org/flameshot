@@ -43,8 +43,8 @@ jobs:
 
       - name: Build dmg package
         run: |
-          cd build
-          /usr/local/opt/qt5/bin/macdeployqt src/flameshot.app -dmg
+          cd build/src
+          /usr/local/opt/qt5/bin/macdeployqt flameshot.app -dmg
 
       - name: Update dmg package links
         run: |
