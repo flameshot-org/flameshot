@@ -8,7 +8,7 @@ DEVICE=$(hdiutil attach -readwrite -noverify "flameshot_rw.dmg" | egrep '^/dev/'
 sleep 5
 
 echo "Create the sysmbolic link to application folder"
-PATH_AT_VOLUME="/Volumes/src:flameshot/"
+PATH_AT_VOLUME="/Volumes/flameshot/"
 CURRENT_PATH="$(pwd)"
 cd "${PATH_AT_VOLUME}"
 ln -s /Applications
