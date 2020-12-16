@@ -34,6 +34,10 @@ class CaptureLauncher;
 class HistoryWidget;
 class QNetworkAccessManager;
 class QNetworkReply;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+class QHotkey;
+#endif
 using lambda = std::function<void(void)>;
 
 class Controller : public QObject
@@ -108,4 +112,9 @@ private:
     QMenu* m_trayIconMenu;
 
     QNetworkAccessManager* m_networkCheckUpdates;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QHotkey* m_HotkeyScreenshotCapture;
+    QHotkey* m_HotkeyScreenshotHistory;
+#endif
 };
