@@ -62,7 +62,8 @@ private:
 
     void clearProxy();
     QNetworkProxy* proxy();
-    void cleanNetworkAccessManagers();
+
+    void onUploadError(QNetworkReply* reply);
 
     // class members
 private:
