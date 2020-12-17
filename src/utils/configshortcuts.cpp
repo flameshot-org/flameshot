@@ -54,8 +54,13 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
 
     m_shortcuts << (QStringList() << "" << QObject::tr("Quit capture")
                                   << QKeySequence(Qt::Key_Escape).toString());
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Screenshot history") << "⇧⌘⌥H");
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Capture screen") << "⇧⌘⌥4");
+#else
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
     m_shortcuts << (QStringList()

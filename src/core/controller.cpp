@@ -17,6 +17,7 @@
 
 #include "controller.h"
 #include "src/config/configwindow.h"
+#include "src/core/QHotkey/QHotkey"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
@@ -59,6 +60,11 @@ Controller::Controller()
   , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
   , m_showCheckAppUpdateStatus(false)
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+  , m_HotkeyScreenshotCapture(nullptr)
+  , m_HotkeyScreenshotHistory(nullptr)
+#endif
 {
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
     qApp->setQuitOnLastWindowClosed(false);
@@ -91,6 +97,20 @@ Controller::Controller()
     // CaptureWidget
     QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
+
+    // set global shortcuts for MacOS
+    m_HotkeyScreenshotCapture =
+      new QHotkey(QKeySequence("Ctrl+Alt+Shift+4"), true, this);
+    QObject::connect(m_HotkeyScreenshotCapture,
+                     &QHotkey::activated,
+                     qApp,
+                     [&]() { this->startVisualCapture(); });
+    m_HotkeyScreenshotHistory =
+      new QHotkey(QKeySequence("Ctrl+Alt+Shift+H"), true, this);
+    QObject::connect(m_HotkeyScreenshotHistory,
+                     &QHotkey::activated,
+                     qApp,
+                     [&]() { this->showRecentScreenshots(); });
 #endif
     getLatestAvailableVersion();
 }
