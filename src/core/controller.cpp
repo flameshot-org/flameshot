@@ -159,6 +159,7 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
+        m_appLatestVersion = "0.8.5.7";
         if (QStringLiteral(APP_VERSION)
               .replace("v", "")
               .compare(m_appLatestVersion) < 0) {
