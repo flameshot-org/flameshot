@@ -159,7 +159,6 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
-        m_appLatestVersion = "0.8.5.7";
         if (QStringLiteral(APP_VERSION)
               .replace("v", "")
               .compare(m_appLatestVersion) < 0) {
@@ -269,8 +268,8 @@ void Controller::startVisualCapture(const uint id,
         m_captureWindow->showFullScreen();
 #endif
         if (!m_appLatestUrl.isEmpty() &&
-            0 != m_appLatestVersion.compare(
-                   ConfigHandler().ignoreUpdateToVersion())) {
+            ConfigHandler().ignoreUpdateToVersion().compare(
+              m_appLatestVersion) < 0) {
             m_captureWindow->showAppUpdateNotification(m_appLatestVersion,
                                                        m_appLatestUrl);
         }
