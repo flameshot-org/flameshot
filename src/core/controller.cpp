@@ -159,8 +159,9 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
-        if (m_appLatestVersion.compare(
-              QStringLiteral(APP_VERSION).replace("v", "")) < 0) {
+        if (QStringLiteral(APP_VERSION)
+              .replace("v", "")
+              .compare(m_appLatestVersion) < 0) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
