@@ -85,6 +85,9 @@ void UpdateNotificationWidget::updateButton()
 {
     QDesktopServices::openUrl(m_appLatestUrl);
     hide();
+    if (parentWidget()) {
+        parentWidget()->close();
+    }
 }
 
 void UpdateNotificationWidget::initInternalPanel()
