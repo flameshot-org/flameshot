@@ -42,6 +42,11 @@
 #include <QThread>
 #include <QUrlQuery>
 #include <QVBoxLayout>
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+#include "src/widgets/capture/capturewidget.h"
+#include <QWidget>
+#endif
 
 ImgS3Uploader::ImgS3Uploader(const QPixmap& capture, QWidget* parent)
   : ImgUploader(capture, parent)
@@ -58,9 +63,23 @@ ImgS3Uploader::ImgS3Uploader(QWidget* parent)
 ImgS3Uploader::~ImgS3Uploader()
 {
     clearProxy();
-    cleanNetworkAccessManagers();
     if (nullptr != m_networkAMConfig) {
         delete m_networkAMConfig;
+    }
+    if (nullptr != m_networkAMUpload) {
+        m_networkAMUpload->disconnect();
+        delete m_networkAMUpload;
+    }
+    if (nullptr != m_networkAMGetCreds) {
+        m_networkAMGetCreds->disconnect();
+        delete m_networkAMGetCreds;
+    }
+    if (nullptr != m_networkAMRemove) {
+        m_networkAMRemove->disconnect();
+        delete m_networkAMRemove;
+    }
+    if (nullptr != m_multiPart) {
+        delete m_multiPart;
     }
 }
 
@@ -117,12 +136,23 @@ void ImgS3Uploader::handleReplyPostUpload(QNetworkReply* reply)
             onUploadOk();
         }
     } else {
-        QString reason =
-          reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-            .toString();
-        setInfoLabelText(reply->errorString());
+        onUploadError(reply);
     }
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+}
+
+void ImgS3Uploader::onUploadError(QNetworkReply* reply)
+{
+    hideSpinner();
+    if (QMessageBox::Retry ==
+        QMessageBox::question(nullptr,
+                              tr("Error"),
+                              tr("Unable to upload screenshot, please check "
+                                 "your internet connection and try again"),
+                              QMessageBox::Retry | QMessageBox::Cancel)) {
+        upload();
+        return;
+    }
 }
 
 void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply* reply)
@@ -141,7 +171,6 @@ void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply* reply)
         } else if (replyError == QNetworkReply::UnknownServerError) {
             message += "\n" + tr("Possibly it doesn't exist anymore");
         }
-        message += "\n\n" + reply->errorString();
         message +=
           "\n\n" +
           tr("Do you want to remove screenshot from local history anyway?");
@@ -167,7 +196,8 @@ void ImgS3Uploader::handleReplyGetCreds(QNetworkReply* reply)
             setInfoLabelText(
               tr("S3 Creds URL is not found in your configuration file"));
         } else {
-            setInfoLabelText(reply->errorString());
+            onUploadError(reply);
+            return;
         }
         // FIXME - remove not uploaded preview
     }
@@ -176,6 +206,19 @@ void ImgS3Uploader::handleReplyGetCreds(QNetworkReply* reply)
 
 void ImgS3Uploader::uploadToS3(QJsonDocument& response)
 {
+    if (nullptr == m_networkAMUpload) {
+        m_networkAMUpload = new QNetworkAccessManager(this);
+        connect(m_networkAMUpload,
+                &QNetworkAccessManager::finished,
+                this,
+                &ImgS3Uploader::handleReplyPostUpload);
+    }
+    if (proxy() != nullptr) {
+        m_networkAMUpload->setProxy(*proxy());
+    } else {
+        m_networkAMUpload->setProxy(QNetworkProxy());
+    }
+
     // set parameters from "fields"
     if (nullptr != m_multiPart) {
         delete m_multiPart;
@@ -229,17 +272,17 @@ void ImgS3Uploader::deleteResource(const QString& fileName,
     // read network settings on each call to simplify configuration management
     // without restarting
     clearProxy();
-    if (m_networkAMRemove != nullptr) {
-        delete m_networkAMRemove;
-        m_networkAMRemove = nullptr;
+    if (m_networkAMRemove == nullptr) {
+        m_networkAMRemove = new QNetworkAccessManager(this);
+        connect(m_networkAMRemove,
+                &QNetworkAccessManager::finished,
+                this,
+                &ImgS3Uploader::handleReplyDeleteResource);
     }
-    m_networkAMRemove = new QNetworkAccessManager(this);
-    connect(m_networkAMRemove,
-            &QNetworkAccessManager::finished,
-            this,
-            &ImgS3Uploader::handleReplyDeleteResource);
     if (proxy() != nullptr) {
         m_networkAMRemove->setProxy(*proxy());
+    } else {
+        m_networkAMRemove->setProxy(QNetworkProxy());
     }
 
     QNetworkRequest request;
@@ -271,29 +314,27 @@ void ImgS3Uploader::upload()
     dtCredsUpdated = dtCredsUpdated.addDays(1);
     if (m_s3Settings.credsUrl().isEmpty() || dtCredsUpdated <= now) {
         getConfigRemote();
-        return;
+        if (m_s3Settings.credsUrl().isEmpty()) {
+            // no creds, even outdated, need to get creds first, cannot continue
+            return;
+        }
     }
 
     // clean old network connections and start uploading
-    cleanNetworkAccessManagers();
-
-    m_networkAMGetCreds = new QNetworkAccessManager(this);
-    connect(m_networkAMGetCreds,
-            &QNetworkAccessManager::finished,
-            this,
-            &ImgS3Uploader::handleReplyGetCreds);
-
-    m_networkAMUpload = new QNetworkAccessManager(this);
-    connect(m_networkAMUpload,
-            &QNetworkAccessManager::finished,
-            this,
-            &ImgS3Uploader::handleReplyPostUpload);
+    if (nullptr == m_networkAMGetCreds) {
+        m_networkAMGetCreds = new QNetworkAccessManager(this);
+        connect(m_networkAMGetCreds,
+                &QNetworkAccessManager::finished,
+                this,
+                &ImgS3Uploader::handleReplyGetCreds);
+    }
     if (proxy() != nullptr) {
         m_networkAMGetCreds->setProxy(*proxy());
-        m_networkAMUpload->setProxy(*proxy());
+    } else {
+        m_networkAMGetCreds->setProxy(QNetworkProxy());
     }
 
-    // get creads
+    // get creds
     QNetworkRequest requestCreds(QUrl(m_s3Settings.credsUrl()));
     if (m_s3Settings.xApiKey().length() > 0) {
         requestCreds.setRawHeader(
@@ -301,6 +342,19 @@ void ImgS3Uploader::upload()
           QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
     }
     m_networkAMGetCreds->get(requestCreds);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Hide capture widget on MacOS
+    for (QWidget* widget : qApp->topLevelWidgets()) {
+        QString className(widget->metaObject()->className());
+        if (0 ==
+            className.compare(CaptureWidget::staticMetaObject.className())) {
+            widget->showNormal();
+            widget->hide();
+            break;
+        }
+    }
+#endif
 }
 
 void ImgS3Uploader::removeImagePreview()
@@ -320,26 +374,6 @@ void ImgS3Uploader::removeImagePreview()
     resultStatus = true;
 }
 
-void ImgS3Uploader::cleanNetworkAccessManagers()
-{
-    if (nullptr != m_networkAMUpload) {
-        delete m_networkAMUpload;
-        m_networkAMUpload = nullptr;
-    }
-    if (nullptr != m_networkAMGetCreds) {
-        delete m_networkAMGetCreds;
-        m_networkAMGetCreds = nullptr;
-    }
-    if (nullptr != m_networkAMRemove) {
-        delete m_networkAMRemove;
-        m_networkAMRemove = nullptr;
-    }
-    if (nullptr != m_multiPart) {
-        delete m_multiPart;
-        m_multiPart = nullptr;
-    }
-}
-
 void ImgS3Uploader::getConfigRemote()
 {
     if (nullptr == m_networkAMConfig) {
@@ -348,9 +382,11 @@ void ImgS3Uploader::getConfigRemote()
                 &QNetworkAccessManager::finished,
                 this,
                 &ImgS3Uploader::handleReplyGetConfig);
-        if (proxy() != nullptr) {
-            m_networkAMConfig->setProxy(*proxy());
-        }
+    }
+    if (proxy() != nullptr) {
+        m_networkAMConfig->setProxy(*proxy());
+    } else {
+        m_networkAMConfig->setProxy(QNetworkProxy());
     }
     QNetworkRequest requestConfig(QUrl(S3_REMOTE_CONFIG_URL));
     m_networkAMConfig->get(requestConfig);
@@ -358,6 +394,10 @@ void ImgS3Uploader::getConfigRemote()
 
 void ImgS3Uploader::handleReplyGetConfig(QNetworkReply* reply)
 {
+    if (nullptr == m_networkAMConfig) {
+        delete m_networkAMConfig;
+        m_networkAMConfig = nullptr;
+    }
     if (reply->error() == QNetworkReply::NoError) {
         bool doUpload = m_s3Settings.credsUrl().isEmpty();
         QString data = QString(reply->readAll());
