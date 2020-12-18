@@ -784,8 +784,15 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
         m_updateNotificationWidget =
           new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
     }
-    m_updateNotificationWidget->move(
-      (width() - m_updateNotificationWidget->width()) / 2, 0);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    int ax = (width() - m_updateNotificationWidget->width()) / 2;
+#else
+    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+    int ax = helpRect.left() +
+             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
+#endif
+    m_updateNotificationWidget->move(ax, 0);
     makeChild(m_updateNotificationWidget);
     m_updateNotificationWidget->show();
 }
