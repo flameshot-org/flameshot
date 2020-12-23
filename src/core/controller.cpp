@@ -167,12 +167,12 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
               tr("New version %1 is available").arg(m_appLatestVersion);
             m_appUpdates->setText(newVersion);
             if (m_showCheckAppUpdateStatus) {
-                sendTrayNotification(newVersion, "Flameshot", 5);
+                sendTrayNotification(newVersion, "Flameshot");
                 QDesktopServices::openUrl(QUrl(m_appLatestUrl));
             }
         } else if (m_showCheckAppUpdateStatus) {
-            sendTrayNotification(
-              tr("You have the latest version"), "Flameshot", 5);
+            sendTrayNotification(tr("You have the latest version"),
+                                 "Flameshot");
         }
     } else {
         qWarning() << "Failed to get information about the latest version. "
@@ -180,8 +180,7 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         if (m_showCheckAppUpdateStatus) {
             sendTrayNotification(
               tr("Failed to get information about the latest version."),
-              "Flameshot",
-              5);
+              "Flameshot");
         }
     }
     m_showCheckAppUpdateStatus = false;
