@@ -48,7 +48,7 @@ void NotifierBox::enterEvent(QEvent*)
 void NotifierBox::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
-    // draw Elipse
+    // draw Ellipse
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setBrush(QBrush(m_bgColor, Qt::SolidPattern));
     painter.setPen(QPen(Qt::transparent));

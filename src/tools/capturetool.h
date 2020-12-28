@@ -118,7 +118,7 @@ public:
     virtual QIcon icon(const QColor& background, bool inEditor) const = 0;
     // Name displayed for the tool, this could be translated with tr()
     virtual QString name() const = 0;
-    // Codename for the tool, this hsouldn't change as it is used as ID
+    // Codename for the tool, this shouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
     virtual ToolType nameID() const = 0;
     // Short description of the tool.
