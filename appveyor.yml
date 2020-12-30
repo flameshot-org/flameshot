@@ -3,7 +3,7 @@ image:
 clone_folder: c:\projects\source
 
 environment:
-  Qt5_INSTALL_DIR: 'C:\Qt\5.15.0\msvc2019_64'
+  Qt5_INSTALL_DIR: 'C:\Qt\5.15.2\msvc2019_64'
   PATH: '%Qt5_INSTALL_DIR%\bin;%PATH%'
 
 build_script:
