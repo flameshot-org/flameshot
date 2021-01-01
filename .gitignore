@@ -63,3 +63,6 @@ data/flatpak/.flatpak-builder
 .idea/
 
 # End of https://www.gitignore.io/api/snapcraft
+
+#MacOS Crap
+.DS_Store
