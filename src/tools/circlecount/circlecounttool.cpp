@@ -19,8 +19,8 @@
 #include "colorutils.h"
 #include <QPainter>
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/spdlog.h"
 #include "spdlog/cfg/env.h"
+#include "spdlog/spdlog.h"
 
 namespace {
 #define PADDING_VALUE 2
