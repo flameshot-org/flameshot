@@ -89,6 +89,7 @@ set(QAPPLICATION_CLASS
     QApplication
     CACHE STRING "Inheritance class for SingleApplication")
 add_subdirectory(external/singleapplication)
+add_subdirectory(external/spdlog)
 add_subdirectory(src)
 
 # CPack

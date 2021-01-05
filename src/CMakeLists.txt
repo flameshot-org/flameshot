@@ -158,7 +158,8 @@ if (APPLE)
             Qt5::DBus
             Qt5::Network
             Qt5::Widgets
-            SingleApplication::SingleApplication)
+            SingleApplication::SingleApplication
+            spdlog::spdlog)
 else ()
     target_link_libraries(
             flameshot
@@ -168,7 +169,8 @@ else ()
             Qt5::DBus
             Qt5::Network
             Qt5::Widgets
-            SingleApplication::SingleApplication)
+            SingleApplication::SingleApplication
+            spdlog::spdlog)
 endif ()
 
 set(USE_OPENSSL FALSE)

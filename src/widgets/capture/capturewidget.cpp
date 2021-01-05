@@ -47,6 +47,10 @@
 #include <QShortcut>
 #include <QUndoView>
 #include <draggablewidgetmaker.h>
+
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#include "spdlog/spdlog.h"
+
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
 
@@ -903,6 +907,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             break;
         case CaptureTool::REQ_REDO_MODIFICATION:
             if (m_undoStack.redoText() == "Circle Counter") {
+                SPDLOG_DEBUG("Redo Circle Increment.");
                 this->incrementCircleCount();
             }
             m_undoStack.redo();
@@ -973,10 +978,13 @@ void CaptureWidget::setDrawColor(const QColor& c)
 void CaptureWidget::incrementCircleCount()
 {
     m_context.circleCount++;
+    SPDLOG_DEBUG("Incrementing Circle to {}.", m_context.circleCount);
 }
 
 void CaptureWidget::decrementCircleCount()
 {
+
+    SPDLOG_DEBUG("Decrementing Circle.");
     m_context.circleCount--;
 }
 

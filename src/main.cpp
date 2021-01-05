@@ -31,6 +31,9 @@
 #include <QTimer>
 #include <QTranslator>
 
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#include "spdlog/spdlog.h"
+
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "src/core/flameshotdbusadapter.h"
 #include "src/utils/dbusutils.h"
@@ -40,6 +43,10 @@
 
 int main(int argc, char* argv[])
 {
+
+    spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+    spdlog::set_pattern("[source %s] [function %!] [line %#] %v");
+
     // required for the button serialization
     // TODO: change to QVector in v1.0
     qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
