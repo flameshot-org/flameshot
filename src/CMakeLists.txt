@@ -13,7 +13,6 @@ find_package(
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-
 add_executable(flameshot)
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
@@ -120,7 +119,8 @@ target_link_libraries(
   Qt5::DBus
   Qt5::Network
   Qt5::Widgets
-  SingleApplication::SingleApplication)
+  SingleApplication::SingleApplication
+        spdlog::spdlog)
 
 set(USE_OPENSSL FALSE)
 if(ENABLE_OPENSSL)
