@@ -19,6 +19,7 @@
 
 #include "src/core/capturerequest.h"
 #include <QMap>
+#include <QMenu>
 #include <QObject>
 #include <QPixmap>
 #include <QPointer>
@@ -31,6 +32,12 @@ class InfoWindow;
 class QSystemTrayIcon;
 class CaptureLauncher;
 class HistoryWidget;
+class QNetworkAccessManager;
+class QNetworkReply;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+class QHotkey;
+#endif
 using lambda = std::function<void(void)>;
 
 class Controller : public QObject
@@ -56,6 +63,7 @@ public slots:
 
     void openConfigWindow();
     void openInfoWindow();
+    void appUpdates();
     void openLauncherWindow();
     void enableTrayIcon();
     void disableTrayIcon();
@@ -77,12 +85,21 @@ private slots:
     void handleCaptureTaken(uint id, QPixmap p, QRect selection);
     void handleCaptureFailed(uint id);
 
+    void handleReplyCheckUpdates(QNetworkReply* reply);
+
 private:
     Controller();
+    void getLatestAvailableVersion();
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
     void doLater(int msec, QObject* receiver, lambda func);
+
+    // class members
+    QAction* m_appUpdates;
+    QString m_appLatestUrl;
+    QString m_appLatestVersion;
+    bool m_showCheckAppUpdateStatus;
 
     QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
@@ -92,4 +109,12 @@ private:
     QPointer<QSystemTrayIcon> m_trayIcon;
 
     HistoryWidget* m_history;
+    QMenu* m_trayIconMenu;
+
+    QNetworkAccessManager* m_networkCheckUpdates;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QHotkey* m_HotkeyScreenshotCapture;
+    QHotkey* m_HotkeyScreenshotHistory;
+#endif
 };

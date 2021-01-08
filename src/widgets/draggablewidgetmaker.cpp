@@ -73,6 +73,8 @@ bool DraggableWidgetMaker::eventFilter(QObject* obj, QEvent* event)
                 return true;
             }
         } break;
+        default:
+            break;
     }
 
     return QObject::eventFilter(obj, event);

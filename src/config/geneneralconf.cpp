@@ -315,7 +315,7 @@ void GeneneralConf::changeSavePath()
       QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     if (!path.isEmpty()) {
         m_savePath->setText(path);
-        ConfigHandler().setSaveAfterCopyPath(path);
+        ConfigHandler().setSavePath(path);
     }
 }
 
