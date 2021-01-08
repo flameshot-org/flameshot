@@ -41,7 +41,7 @@ public slots:
 
 protected:
     void updateBackup(const QPixmap& pixmap);
-    QRect backupRect(const QRect& limits) const;
+    QRect backupRect(const QPixmap& pixmap) const;
 
     QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;
@@ -52,8 +52,6 @@ protected:
 
     bool m_supportsOrthogonalAdj = false;
     bool m_supportsDiagonalAdj = false;
-
-    virtual ToolType nameID() const = 0;
 
 private:
     QPoint adjustedVector(QPoint v) const;

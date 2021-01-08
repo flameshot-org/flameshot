@@ -75,47 +75,47 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="64"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
         <translation>&lt;b&gt;Argazki-modua&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
         <source>Rectangular Region</source>
         <translation>Eremu laukizuzena</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="75"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source>Full Screen (All Monitors)</source>
         <translation>Pantaila osoa (pantaila guztiak)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="83"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="80"/>
         <source>No Delay</source>
         <translation>Atzerapenik ez</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
         <source> second</source>
         <translation> segundo</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
         <source> seconds</source>
         <translation> segundo</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="94"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="91"/>
         <source>Take new screenshot</source>
         <translation>Egin pantaila-argazki berria</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="103"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="100"/>
         <source>Area:</source>
         <translation>Eremua:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="104"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Delay:</source>
         <translation>Atzerapena:</translation>
     </message>
@@ -691,12 +691,12 @@ Sakatu Zuriunea alboko panela irekitzeko.</translation>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="38"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Pixelate</source>
         <translation>Pixelatu</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="48"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="47"/>
         <source>Set Pixelate as the paint tool</source>
         <translation>Ezarri Pixelatu margotzeko tresna gisa</translation>
     </message>
@@ -951,12 +951,12 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
 <context>
     <name>SaveTool</name>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="38"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="44"/>
         <source>Save</source>
         <translation>Gorde</translation>
     </message>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="48"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="54"/>
         <source>Save the capture</source>
         <translation>Gorde argazkia</translation>
     </message>
@@ -964,7 +964,7 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="85"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="96"/>
         <source>Unable to capture screen</source>
         <translation>Ezin da pantailaren argazkia egin</translation>
     </message>
@@ -1036,92 +1036,92 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
         <translation>Urtea (2000)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="54"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Month Name (jan)</source>
         <translation>Hilabetearen izena (ira)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="55"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Month Name (january)</source>
         <translation>Hilabetearen izena (iraila)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Month (01-12)</source>
         <translation>Hilabetea (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Week Day (1-7)</source>
         <translation>Asteko eguna (1-7)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Week (01-53)</source>
         <translation>Astea (01-53)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Day Name (mon)</source>
         <translation>Egunaren izena (ar.)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Day Name (monday)</source>
         <translation>Egunaren izena (asteartea)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Day (01-31)</source>
         <translation>Eguna (01-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="62"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Day of Month (1-31)</source>
         <translation>Hilabeteko eguna (1-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Day (001-366)</source>
         <translation>Urteko eguna (001-366)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="72"/>
         <source>Time (%H-%M-%S)</source>
         <translation>Ordua (%H-%M-%S)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Time (%H-%M)</source>
         <translation>Ordua (%H-%M)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="66"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
         <source>Hour (00-23)</source>
         <translation>Eguneko ordua (00-23)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Hour (01-12)</source>
         <translation>Eguneko ordua (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="77"/>
         <source>Minute (00-59)</source>
         <translation>Minutua (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="78"/>
         <source>Second (00-59)</source>
         <translation>Segundoa (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="70"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="81"/>
         <source>Full Date (%m/%d/%y)</source>
         <translation>Data (%h/%e/%u)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="71"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="83"/>
         <source>Full Date (%Y-%m-%d)</source>
         <translation>Data (%U-%h-%e)</translation>
     </message>

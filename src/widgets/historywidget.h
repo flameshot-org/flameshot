@@ -1,9 +1,6 @@
 #ifndef HISTORYWIDGET_H
 #define HISTORYWIDGET_H
 
-#define HISTORYPIXMAP_MAX_PREVIEW_WIDTH 160
-#define HISTORYPIXMAP_MAX_PREVIEW_HEIGHT 90
-
 #include <QDialog>
 #include <QObject>
 #include <QString>

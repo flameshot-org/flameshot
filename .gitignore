@@ -61,6 +61,10 @@ data/flatpak/.flatpak-builder
 
 # Jetbrains
 .idea/
+.run
+
+# MacOS
+.DS_Store
 
 # End of https://www.gitignore.io/api/snapcraft
 

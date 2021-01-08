@@ -3,6 +3,9 @@
 
 #define HISTORY_MAX_SIZE 25
 
+#define HISTORYPIXMAP_MAX_PREVIEW_WIDTH 160
+#define HISTORYPIXMAP_MAX_PREVIEW_HEIGHT 90
+
 #include <QList>
 #include <QPixmap>
 #include <QString>

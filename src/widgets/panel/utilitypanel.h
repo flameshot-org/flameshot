@@ -38,13 +38,8 @@ public:
     void hide();
     void show();
 
-signals:
-    void mouseEnter();
-    void mouseLeave();
-
 public slots:
     void toggle();
-    void slotHidePanel();
 
 private:
     void initInternalPanel();

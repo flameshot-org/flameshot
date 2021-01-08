@@ -60,7 +60,10 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
                 << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
                 << CaptureToolButton::TYPE_EXIT
                 << CaptureToolButton::TYPE_IMAGEUPLOADER
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
                 << CaptureToolButton::TYPE_OPEN_APP
+#endif
                 << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
                 << CaptureToolButton::TYPE_CIRCLECOUNT;
     }
@@ -228,6 +231,16 @@ void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton)
 {
     m_settings.setValue(QStringLiteral("showSidePanelButton"),
                         showSidePanelButton);
+}
+
+void ConfigHandler::setIgnoreUpdateToVersion(const QString& text)
+{
+    m_settings.setValue(QStringLiteral("ignoreUpdateToVersion"), text);
+}
+
+QString ConfigHandler::ignoreUpdateToVersion()
+{
+    return m_settings.value(QStringLiteral("ignoreUpdateToVersion")).toString();
 }
 
 bool ConfigHandler::desktopNotificationValue()
@@ -558,4 +571,29 @@ const QString& ConfigHandler::shortcut(const QString& shortcutName)
     m_strRes = m_settings.value(shortcutName).toString();
     m_settings.endGroup();
     return m_strRes;
+}
+
+void ConfigHandler::setValue(const QString& group,
+                             const QString& key,
+                             const QVariant& value)
+{
+    if (!group.isEmpty()) {
+        m_settings.beginGroup(group);
+    }
+    m_settings.setValue(key, value);
+    if (!group.isEmpty()) {
+        m_settings.endGroup();
+    }
+}
+
+QVariant& ConfigHandler::value(const QString& group, const QString& key)
+{
+    if (!group.isEmpty()) {
+        m_settings.beginGroup(group);
+    }
+    m_varRes = m_settings.value(key);
+    if (!group.isEmpty()) {
+        m_settings.endGroup();
+    }
+    return m_varRes;
 }

@@ -30,9 +30,20 @@ const QString& History::path()
 
 void History::save(const QPixmap& pixmap, const QString& fileName)
 {
+    // scale preview only in local disk
+    QPixmap pixmapScaled = QPixmap(pixmap);
+    if (pixmap.height() / HISTORYPIXMAP_MAX_PREVIEW_HEIGHT >=
+        pixmap.width() / HISTORYPIXMAP_MAX_PREVIEW_WIDTH) {
+        pixmapScaled = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
+    } else {
+        pixmapScaled = pixmap.scaledToWidth(HISTORYPIXMAP_MAX_PREVIEW_WIDTH);
+    }
+
+    // save preview
     QFile file(path() + fileName);
     file.open(QIODevice::WriteOnly);
-    pixmap.save(&file, "PNG");
+    pixmapScaled.save(&file, "PNG");
+
     history();
 }
 
