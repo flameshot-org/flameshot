@@ -58,8 +58,17 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     // TODO remember number
     m_captureType->insertItem(
       1, tr("Rectangular Region"), CaptureRequest::GRAPHICAL_MODE);
+
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Following to MacOS philosophy (one application cannot be displayed on
+    // more than one display)
+    m_captureType->insertItem(
+      2, tr("Full Screen (Current Display)"), CaptureRequest::FULLSCREEN_MODE);
+#else
     m_captureType->insertItem(
       2, tr("Full Screen (All Monitors)"), CaptureRequest::FULLSCREEN_MODE);
+#endif
     // m_captureType->insertItem(3, tr("Single Screen"),
     // CaptureRequest::SCREEN_MODE);
 
