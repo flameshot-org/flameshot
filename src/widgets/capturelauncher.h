@@ -17,7 +17,7 @@
 
 #pragma once
 
-#include <QWidget>
+#include <QDialog>
 
 class QCheckBox;
 class QPushButton;
@@ -27,11 +27,15 @@ class QSpinBox;
 class QLabel;
 class ImageLabel;
 
-class CaptureLauncher : public QWidget
+class CaptureLauncher : public QDialog
 {
     Q_OBJECT
 public:
-    explicit CaptureLauncher(QWidget* parent = nullptr);
+    explicit CaptureLauncher(QDialog* parent = nullptr);
+
+private:
+    void connectCaptureSlots();
+    void disconnectCaptureSlots();
 
 private slots:
     void startCapture();
