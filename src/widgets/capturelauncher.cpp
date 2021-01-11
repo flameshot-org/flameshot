@@ -28,25 +28,15 @@
 #include <QMimeData>
 #include <QPushButton>
 #include <QSpinBox>
-#include <QVBoxLayout>
 
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSWidget.cpp
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSMainWindow.cpp
 
-CaptureLauncher::CaptureLauncher(QWidget* parent)
-  : QWidget(parent)
+CaptureLauncher::CaptureLauncher(QDialog* parent)
+  : QDialog(parent)
   , m_id(0)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    connect(Controller::getInstance(),
-            &Controller::captureTaken,
-            this,
-            &CaptureLauncher::captureTaken);
-    connect(Controller::getInstance(),
-            &Controller::captureFailed,
-            this,
-            &CaptureLauncher::captureFailed);
-
     m_imageLabel = new ImageLabel(this);
     bool ok;
     m_imageLabel->setScreenshot(ScreenGrabber().grabEntireDesktop(ok));
@@ -91,7 +81,7 @@ CaptureLauncher::CaptureLauncher(QWidget* parent)
     m_launchButton = new QPushButton(tr("Take new screenshot"));
     m_launchButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     connect(m_launchButton,
-            &QPushButton::pressed,
+            &QPushButton::clicked,
             this,
             &CaptureLauncher::startCapture);
     m_launchButton->setFocus();
@@ -117,11 +107,13 @@ CaptureLauncher::CaptureLauncher(QWidget* parent)
 // https://github.com/KDE/spectacle/blob/fa1e780b8bf3df3ac36c410b9ece4ace041f401b/src/Gui/KSMainWindow.cpp#L70
 void CaptureLauncher::startCapture()
 {
+    m_launchButton->setEnabled(false);
     hide();
     auto mode = static_cast<CaptureRequest::CaptureMode>(
       m_captureType->currentData().toInt());
     CaptureRequest req(mode, 600 + m_delaySpinBox->value() * 1000);
     m_id = req.id();
+    connectCaptureSlots();
     Controller::getInstance()->requestCapture(req);
 }
 
@@ -137,8 +129,40 @@ void CaptureLauncher::startDrag()
     dragHandler->exec();
 }
 
+void CaptureLauncher::connectCaptureSlots()
+{
+    connect(Controller::getInstance(),
+            &Controller::captureTaken,
+            this,
+            &CaptureLauncher::captureTaken);
+    connect(Controller::getInstance(),
+            &Controller::captureFailed,
+            this,
+            &CaptureLauncher::captureFailed);
+}
+
+void CaptureLauncher::disconnectCaptureSlots()
+{
+    // Hack for MacOS
+    // for some strange reasons MacOS sends multiple "captureTaken" signals
+    // (random number, usually from 1 up to 20).
+    // So no it enables signal on "Capture new screenshot" button and disables
+    // on first success of fail.
+    disconnect(Controller::getInstance(),
+               &Controller::captureTaken,
+               this,
+               &CaptureLauncher::captureTaken);
+    disconnect(Controller::getInstance(),
+               &Controller::captureFailed,
+               this,
+               &CaptureLauncher::captureFailed);
+}
+
 void CaptureLauncher::captureTaken(uint id, QPixmap p)
 {
+    // MacOS specific, more details in the function disconnectCaptureSlots()
+    disconnectCaptureSlots();
+
     if (id == m_id) {
         m_id = 0;
         m_imageLabel->setScreenshot(p);
@@ -151,12 +175,17 @@ void CaptureLauncher::captureTaken(uint id, QPixmap p)
     if (mode == CaptureRequest::FULLSCREEN_MODE) {
         ScreenshotSaver().saveToFilesystemGUI(p);
     }
+    m_launchButton->setEnabled(true);
 }
 
 void CaptureLauncher::captureFailed(uint id)
 {
+    // MacOS specific, more details in the function disconnectCaptureSlots()
+    disconnectCaptureSlots();
+
     if (id == m_id) {
         m_id = 0;
         show();
     }
+    m_launchButton->setEnabled(true);
 }
