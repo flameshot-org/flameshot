@@ -157,33 +157,41 @@ void ImgS3Uploader::onUploadError(QNetworkReply* reply)
 
 void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply* reply)
 {
-    auto replyError = reply->error();
-    if (replyError == QNetworkReply::NoError) {
-        removeImagePreview();
-    } else {
-        hide();
-
-        // generate error message
-        QString message =
-          tr("Unable to remove screenshot from the remote storage.");
-        if (replyError == QNetworkReply::UnknownNetworkError) {
-            message += "\n" + tr("Network error");
-        } else if (replyError == QNetworkReply::UnknownServerError) {
-            message += "\n" + tr("Possibly it doesn't exist anymore");
-        }
-        message +=
-          "\n\n" +
-          tr("Do you want to remove screenshot from local history anyway?");
-
-        if (QMessageBox::Yes ==
-            QMessageBox::question(NULL,
-                                  tr("Remove screenshot from history?"),
-                                  message,
-                                  QMessageBox::Yes | QMessageBox::No)) {
-            removeImagePreview();
-        }
-    }
+    // Just remove image preview on fail because it can be outdated and removed
+    // on server.
+    removeImagePreview();
     close();
+
+    /* The following code possibly will be required later so it is just
+     * commented here */
+    //    auto replyError = reply->error();
+    //    if (replyError == QNetworkReply::NoError) {
+    //        removeImagePreview();
+    //    } else {
+    //        hide();
+    //
+    //        // generate error message
+    //        QString message =
+    //          tr("Unable to remove screenshot from the remote storage.");
+    //        if (replyError == QNetworkReply::UnknownNetworkError) {
+    //            message += "\n" + tr("Network error");
+    //        } else if (replyError == QNetworkReply::UnknownServerError) {
+    //            message += "\n" + tr("Possibly it doesn't exist anymore");
+    //        }
+    //        message +=
+    //          "\n\n" +
+    //          tr("Do you want to remove screenshot from local history
+    //          anyway?");
+    //
+    //        if (QMessageBox::Yes ==
+    //            QMessageBox::question(NULL,
+    //                                  tr("Remove screenshot from history?"),
+    //                                  message,
+    //                                  QMessageBox::Yes | QMessageBox::No)) {
+    //            removeImagePreview();
+    //        }
+    //    }
+    //    close();
 }
 
 void ImgS3Uploader::handleReplyGetCreds(QNetworkReply* reply)
