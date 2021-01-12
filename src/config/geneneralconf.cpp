@@ -40,7 +40,6 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowTrayIcon();
     initAutostart();
     initShowStartupLaunchMessage();
-    initCloseAfterCapture();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
     initSaveAfterCopy();
@@ -57,7 +56,6 @@ void GeneneralConf::updateComponents()
     m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
-    m_closeAfterCapture->setChecked(config.closeAfterScreenshotValue());
     m_copyAndCloseAfterUpload->setChecked(
       config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
@@ -96,11 +94,6 @@ void GeneneralConf::showTrayIconChanged(bool checked)
 void GeneneralConf::autostartChanged(bool checked)
 {
     ConfigHandler().setStartupLaunch(checked);
-}
-
-void GeneneralConf::closeAfterCaptureChanged(bool checked)
-{
-    ConfigHandler().setCloseAfterScreenshot(checked);
 }
 
 void GeneneralConf::importConfiguration()
@@ -156,6 +149,8 @@ void GeneneralConf::resetConfiguration()
       tr("Are you sure you want to reset the configuration?"),
       QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes) {
+        m_savePath->setText(
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
         ConfigHandler().setDefaults();
     }
 }
@@ -280,22 +275,6 @@ void GeneneralConf::initShowStartupLaunchMessage()
     });
 }
 
-void GeneneralConf::initCloseAfterCapture()
-{
-    m_closeAfterCapture =
-      new QCheckBox(tr("Close application after capture"), this);
-    ConfigHandler config;
-    bool checked = config.closeAfterScreenshotValue();
-    m_closeAfterCapture->setChecked(checked);
-    m_closeAfterCapture->setToolTip(tr("Close after taking a screenshot"));
-    m_layout->addWidget(m_closeAfterCapture);
-
-    connect(m_closeAfterCapture,
-            &QCheckBox::clicked,
-            this,
-            &GeneneralConf::closeAfterCaptureChanged);
-}
-
 void GeneneralConf::initCopyAndCloseAfterUpload()
 {
     m_copyAndCloseAfterUpload =
@@ -332,8 +311,12 @@ void GeneneralConf::initSaveAfterCopy()
 
     QHBoxLayout* pathLayout = new QHBoxLayout();
 
-    m_savePath = new QLineEdit(
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation), this);
+    QString path = ConfigHandler().savePath();
+    if (path.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
     QString foreground = this->palette().foreground().color().name();
     m_savePath->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
@@ -365,8 +348,12 @@ void GeneneralConf::saveAfterCopyChanged(bool checked)
 
 void GeneneralConf::changeSavePath()
 {
-    QString path = chooseFolder(
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    QString path = ConfigHandler().savePath();
+    if (path.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
         ConfigHandler().setSavePath(path);
