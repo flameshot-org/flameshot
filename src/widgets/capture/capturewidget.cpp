@@ -390,6 +390,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
                     &CaptureTool::requestAction,
                     this,
                     &CaptureWidget::handleButtonSignal);
+            m_context.mousePos = e->pos();
             m_activeTool->drawStart(m_context);
             return;
         }
