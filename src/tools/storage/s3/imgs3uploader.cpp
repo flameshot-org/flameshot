@@ -153,6 +153,7 @@ void ImgS3Uploader::onUploadError(QNetworkReply* reply)
         upload();
         return;
     }
+    hide();
 }
 
 void ImgS3Uploader::handleReplyDeleteResource(QNetworkReply* reply)
@@ -415,7 +416,21 @@ void ImgS3Uploader::handleReplyGetConfig(QNetworkReply* reply)
         } else {
             hide();
         }
-    } else {
+    } else if (m_s3Settings.credsUrl().isEmpty()) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        // Hide capture widget on MacOS (exit from full-screen mode & hide)
+        for (QWidget* widget : qApp->topLevelWidgets()) {
+            QString className(widget->metaObject()->className());
+            if (0 == className.compare(
+                       CaptureWidget::staticMetaObject.className())) {
+                widget->showNormal();
+                widget->hide();
+                break;
+            }
+        }
+#endif
+
         QString message = reply->errorString() + "\n\n" +
                           tr("Unable to get s3 credentials, please check "
                              "your VPN connection and try again");
