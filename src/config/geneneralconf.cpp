@@ -156,6 +156,8 @@ void GeneneralConf::resetConfiguration()
       tr("Are you sure you want to reset the configuration?"),
       QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes) {
+        m_savePath->setText(
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
         ConfigHandler().setDefaults();
     }
 }
@@ -332,8 +334,12 @@ void GeneneralConf::initSaveAfterCopy()
 
     QHBoxLayout* pathLayout = new QHBoxLayout();
 
-    m_savePath = new QLineEdit(
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation), this);
+    QString path = ConfigHandler().savePath();
+    if (path.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
     QString foreground = this->palette().foreground().color().name();
     m_savePath->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
@@ -365,8 +371,12 @@ void GeneneralConf::saveAfterCopyChanged(bool checked)
 
 void GeneneralConf::changeSavePath()
 {
-    QString path = chooseFolder(
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    QString path = ConfigHandler().savePath();
+    if (path.isEmpty()) {
+        path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
+    chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
         ConfigHandler().setSavePath(path);
