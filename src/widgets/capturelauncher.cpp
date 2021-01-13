@@ -37,6 +37,7 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
   , m_id(0)
 {
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
     m_imageLabel = new ImageLabel(this);
     bool ok;
     m_imageLabel->setScreenshot(ScreenGrabber().grabEntireDesktop(ok));

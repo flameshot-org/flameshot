@@ -20,6 +20,7 @@
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
 {
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Latest Uploads"));
     setFixedSize(800, this->height());
