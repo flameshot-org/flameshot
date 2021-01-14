@@ -32,6 +32,7 @@ public:
 signals:
     void captureTaken(uint id, QByteArray rawImage, QRect selection);
     void captureFailed(uint id);
+    void captureSaved(uint id, QString savePath);
 
 public slots:
     Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
