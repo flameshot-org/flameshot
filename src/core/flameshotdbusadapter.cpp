@@ -34,6 +34,10 @@ FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
             &Controller::captureTaken,
             this,
             &FlameshotDBusAdapter::handleCaptureTaken);
+    connect(controller,
+            &Controller::captureSaved,
+            this,
+            &FlameshotDBusAdapter::captureSaved);
 }
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
