@@ -49,6 +49,7 @@
 - [Features](#features)
 - [Usage](#usage)
   - [CLI configuration](#cli-configuration)
+  - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
   - [Local](#local)
   - [Global](#global)
@@ -160,6 +161,10 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```shell
     flameshot config -h
     ```
+
+### Config file
+You can also edit some of the settings (like overriding the default colors) in the configuration file located at `~/.config/flameshot/flameshot.ini`.
+
 
 ## Keyboard shortcuts
 
