@@ -138,8 +138,10 @@ static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
         defined(Q_OS_MACX))
       { CaptureToolButton::TYPE_OPEN_APP, 17 },
       { CaptureToolButton::TYPE_EXIT, 18 }, { CaptureToolButton::TYPE_PIN, 19 },
+      { CaptureToolButton::TYPE_OCR, 20 },
 #else
       { CaptureToolButton::TYPE_EXIT, 17 }, { CaptureToolButton::TYPE_PIN, 18 },
+      { CaptureToolButton::TYPE_OCR, 19 },
 #endif
 };
 
@@ -175,4 +177,5 @@ QVector<CaptureToolButton::ButtonType>
 #endif
       CaptureToolButton::TYPE_PIN,
       CaptureToolButton::TYPE_CIRCLECOUNT,
+      CaptureToolButton::TYPE_OCR
   };

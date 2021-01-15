@@ -65,7 +65,8 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
                 << CaptureToolButton::TYPE_OPEN_APP
 #endif
                 << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
-                << CaptureToolButton::TYPE_CIRCLECOUNT;
+                << CaptureToolButton::TYPE_CIRCLECOUNT
+                << CaptureToolButton::TYPE_OCR;
     }
 
     using bt = CaptureToolButton::ButtonType;

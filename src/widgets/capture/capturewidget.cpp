@@ -217,6 +217,7 @@ void CaptureWidget::updateButtons()
             case CaptureToolButton::ButtonType::TYPE_UNDO:
             case CaptureToolButton::ButtonType::TYPE_REDO:
             case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
+            case CaptureToolButton::ButtonType::TYPE_OCR:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
                 break;
@@ -1045,6 +1046,10 @@ void CaptureWidget::initShortcuts()
       QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER)
         .toString());
 
+    shortcut = ConfigHandler().shortcut(
+      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_OCR).toString());
+    new QShortcut(QKeySequence(shortcut), this, SLOT(ocr()));
+
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                   this,
                   SLOT(togglePanel()));
@@ -1205,6 +1210,18 @@ void CaptureWidget::saveScreenshot()
         ScreenshotSaver(m_id).saveToFilesystem(
           pixmap(), m_context.savePath, "");
     }
+    close();
+}
+
+void CaptureWidget::ocr()
+{
+    m_captureDone = true;
+    if (m_activeTool != nullptr) {
+        QPainter painter(&m_context.screenshot);
+        m_activeTool->process(painter, m_context.screenshot, true);
+    }
+    hide();
+    // Process here!
     close();
 }
 

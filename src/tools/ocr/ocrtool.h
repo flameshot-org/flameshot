@@ -17,22 +17,25 @@
 
 #pragma once
 
-class QPixmap;
-class QString;
+#include "src/tools/abstractactiontool.h"
 
-class ScreenshotSaver
+class OcrTool : public AbstractActionTool
 {
+    Q_OBJECT
 public:
-    ScreenshotSaver();
-    ScreenshotSaver(const unsigned id);
+    explicit OcrTool(QObject* parent = nullptr);
 
-    void saveToClipboard(const QPixmap& capture);
-    void saveToClipboard(const QString& text);
-    bool saveToFilesystem(const QPixmap& capture,
-                          const QString& path,
-                          const QString& messagePrefix);
-    bool saveToFilesystemGUI(const QPixmap& capture);
+    bool closeOnButtonPressed() const;
 
-private:
-    unsigned m_id;
+    QIcon icon(const QColor& background, bool inEditor) const override;
+    QString name() const override;
+    QString description() const override;
+
+    CaptureTool* copy(QObject* parent = nullptr) override;
+
+protected:
+    ToolType nameID() const override;
+
+public slots:
+    void pressed(const CaptureContext& context) override;
 };

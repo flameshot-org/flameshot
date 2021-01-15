@@ -35,6 +35,8 @@ target_sources(
 target_sources(flameshot PRIVATE rectangle/rectangletool.h rectangle/rectangletool.cpp)
 target_sources(flameshot PRIVATE redo/redotool.h redo/redotool.cpp)
 target_sources(flameshot PRIVATE save/savetool.h save/savetool.cpp)
+target_sources(flameshot PRIVATE ocr/ocrtool.h ocr/ocrtool.cpp)
+target_sources(flameshot PRIVATE ocr/tesseract_tool.h)
 target_sources(flameshot PRIVATE selection/selectiontool.h selection/selectiontool.cpp)
 target_sources(flameshot PRIVATE sizeindicator/sizeindicatortool.h sizeindicator/sizeindicatortool.cpp)
 target_sources(

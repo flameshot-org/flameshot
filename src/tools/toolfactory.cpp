@@ -32,6 +32,7 @@
 #include "rectangle/rectangletool.h"
 #include "redo/redotool.h"
 #include "save/savetool.h"
+#include "ocr/ocrtool.h"
 #include "selection/selectiontool.h"
 #include "sizeindicator/sizeindicatortool.h"
 #include "src/utils/confighandler.h"
@@ -109,6 +110,9 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
             break;
         case CaptureToolButton::TYPE_CIRCLECOUNT:
             tool = new CircleCountTool(parent);
+            break;
+        case CaptureToolButton::TYPE_OCR:
+            tool = new OcrTool(parent);
             break;
         default:
             tool = nullptr;

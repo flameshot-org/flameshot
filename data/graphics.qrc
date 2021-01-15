@@ -37,6 +37,7 @@
         <file>img/material/black/circle-outline.svg</file>
         <file>img/material/black/pixelate.svg</file>
         <file>img/material/black/arrow-bottom-left.svg</file>
+        <file>img/material/black/ocr.svg</file>
         <file>img/material/white/undo-variant.svg</file>
         <file>img/material/white/text.svg</file>
         <file>img/material/white/square.svg</file>
@@ -74,5 +75,6 @@
         <file>img/material/white/shortcut.svg</file>
         <file>img/material/black/filepath.svg</file>
         <file>img/material/white/filepath.svg</file>
+        <file>img/material/white/ocr.svg</file>
     </qresource>
 </RCC>

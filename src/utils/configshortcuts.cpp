@@ -140,6 +140,9 @@ const QKeySequence& ConfigShortcuts::captureShortcutDefault(
         case CaptureToolButton::ButtonType::TYPE_TEXT:
             m_ks = QKeySequence(Qt::Key_T);
             break;
+        case CaptureToolButton::ButtonType::TYPE_OCR:
+            m_ks = QKeySequence(Qt::CTRL + Qt::Key_T);
+            break;
         default:
             break;
     }
