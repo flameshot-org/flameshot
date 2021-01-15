@@ -115,5 +115,17 @@
       <arg name="id" type="u" direction="out"/>
     </signal>
 
+    <!--
+        captureSaved:
+        @id: identificator of the call.
+        @savePath: canonical path of the newly created image file.
+
+        An image was written to disk after capture.
+    -->
+    <signal name="captureSaved">
+      <arg name="id" type="u" direction="out"/>
+      <arg name="savePath" type="s" direction="out"/>
+    </signal>
+
   </interface>
 </node>
