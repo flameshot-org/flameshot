@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshotsaver.h"
+#include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
@@ -25,7 +26,13 @@
 #include <QImageWriter>
 #include <QMessageBox>
 
-ScreenshotSaver::ScreenshotSaver() {}
+ScreenshotSaver::ScreenshotSaver()
+  : m_id(0)
+{}
+
+ScreenshotSaver::ScreenshotSaver(const unsigned id)
+  : m_id(id)
+{}
 
 // TODO: If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
@@ -63,6 +70,8 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
         ConfigHandler().setSavePath(path);
         saveMessage =
           messagePrefix + QObject::tr("Capture saved as ") + completePath;
+        Controller::getInstance()->sendCaptureSaved(
+          m_id, QFileInfo(completePath).canonicalFilePath());
     } else {
         saveMessage = messagePrefix + QObject::tr("Error trying to save as ") +
                       completePath;
@@ -112,6 +121,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
                       savePath;
             }
             SystemNotification().sendMessage(msg, savePath);
+            Controller::getInstance()->sendCaptureSaved(
+              m_id, QFileInfo(savePath).canonicalFilePath());
         } else {
             QString msg = QObject::tr("Error trying to save as ") + savePath;
             QMessageBox saveErrBox(

@@ -85,9 +85,9 @@ void CaptureRequest::exportCapture(const QPixmap& p)
 {
     if ((m_tasks & ExportTask::FILESYSTEM_SAVE_TASK) != ExportTask::NO_TASK) {
         if (m_path.isEmpty()) {
-            ScreenshotSaver().saveToFilesystemGUI(p);
+            ScreenshotSaver(m_id).saveToFilesystemGUI(p);
         } else {
-            ScreenshotSaver().saveToFilesystem(p, m_path, "");
+            ScreenshotSaver(m_id).saveToFilesystem(p, m_path, "");
         }
     }
 
