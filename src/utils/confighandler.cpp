@@ -20,9 +20,11 @@
 #include "src/tools/storage/storagemanager.h"
 #include "src/utils/configshortcuts.h"
 #include <QCoreApplication>
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QKeySequence>
+#include <QProcess>
 #include <algorithm>
 
 ConfigHandler::ConfigHandler()
@@ -312,7 +314,12 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
 
 bool ConfigHandler::startupLaunchValue()
 {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    bool res = false;
+#else
     bool res = true;
+#endif
     if (m_settings.contains(QStringLiteral("startupLaunch"))) {
         res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
     }
@@ -341,7 +348,39 @@ bool ConfigHandler::verifyLaunchFile()
 
 void ConfigHandler::setStartupLaunch(const bool start)
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
+        return;
+    }
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    /* TODO - there should be more correct way via API, but didn't find it
+     without extra dependencies, there should be something like that:
+     https://stackoverflow.com/questions/3358410/programmatically-run-at-startup-on-mac-os-x
+     But files with this features differs on different MacOS versions and it
+     doesn't work not on a BigSur at lease.
+     */
+    QProcess process;
+    if (start) {
+        process.start("osascript",
+                      QStringList()
+                        << "-e"
+                        << "tell application \"System Events\" to make login "
+                           "item at end with properties {name: "
+                           "\"Flameshot\",path:\"/Applications/"
+                           "flameshot.app\", hidden:false}");
+    } else {
+        process.start("osascript",
+                      QStringList() << "-e"
+                                    << "tell application \"System Events\" to "
+                                       "delete login item \"Flameshot\"");
+    }
+    if (!process.waitForFinished()) {
+        qWarning() << "Login items is changed. " << process.errorString();
+    } else {
+        qWarning() << "Unable to change login items, error:"
+                   << process.readAll();
+    }
+#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QDir::homePath() + "/.config/autostart/";
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
