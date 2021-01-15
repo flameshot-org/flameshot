@@ -73,12 +73,8 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
         ConfigHandler().setSavePath(path);
         saveMessage =
           messagePrefix + QObject::tr("Capture saved as ") + completePath;
-        QString fileNoPath =
-          completePath.right(completePath.lastIndexOf(QLatin1String("/")));
         Controller::getInstance()->sendCaptureSaved(
-          m_id,
-          QFileInfo(completePath).canonicalPath() + QLatin1String("/") +
-            fileNoPath);
+          m_id, QFileInfo(completePath).canonicalFilePath());
     } else {
         saveMessage = messagePrefix + QObject::tr("Error trying to save as ") +
                       completePath;
@@ -130,8 +126,6 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         if (ok) {
             QString pathNoFile =
               savePath.left(savePath.lastIndexOf(QLatin1String("/")));
-            QString fileNoPath =
-              savePath.right(savePath.lastIndexOf(QLatin1String("/")));
             ConfigHandler().setSavePath(pathNoFile);
             QString msg = QObject::tr("Capture saved as ") + savePath;
             if (config.copyPathAfterSaveEnabled()) {
@@ -142,9 +136,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
             }
             SystemNotification().sendMessage(msg, savePath);
             Controller::getInstance()->sendCaptureSaved(
-              m_id,
-              QFileInfo(savePath).canonicalPath() + QLatin1String("/") +
-                fileNoPath);
+              m_id, QFileInfo(savePath).canonicalFilePath());
         } else {
             QString msg = QObject::tr("Error trying to save as ") + savePath;
             QMessageBox saveErrBox(
