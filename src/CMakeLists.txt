@@ -149,29 +149,22 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/capture>
          $<INSTALL_INTERFACE:include/mylib>)
 
+target_link_libraries(
+        flameshot
+        project_warnings
+        project_options
+        Qt5::Svg
+        Qt5::DBus
+        Qt5::Network
+        Qt5::Widgets
+        SingleApplication::SingleApplication
+        spdlog::spdlog
+)
+
 if (APPLE)
     target_link_libraries(
             flameshot
-            project_warnings
-            project_options
             qhotkey
-            Qt5::Svg
-            Qt5::DBus
-            Qt5::Network
-            Qt5::Widgets
-            SingleApplication::SingleApplication
-            spdlog::spdlog)
-else ()
-    target_link_libraries(
-            flameshot
-            project_warnings
-            project_options
-            Qt5::Svg
-            Qt5::DBus
-            Qt5::Network
-            Qt5::Widgets
-            SingleApplication::SingleApplication
-            spdlog::spdlog
     )
 endif ()
 
