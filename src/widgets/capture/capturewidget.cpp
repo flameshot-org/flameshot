@@ -36,7 +36,9 @@
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
+#include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
+#include <QDateTime>
 #include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QPaintEvent>
@@ -70,6 +72,8 @@ CaptureWidget::CaptureWidget(const uint id,
   , m_toolWidget(nullptr)
   , m_mouseOverHandle(SelectionWidget::NO_SIDE)
   , m_id(id)
+  , m_lastMouseWheel(0)
+  , m_updateNotificationWidget(nullptr)
 {
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
@@ -88,7 +92,8 @@ CaptureWidget::CaptureWidget(const uint id,
     initContext(savePath, fullScreen);
     initShortcuts();
     m_context.circleCount = 1;
-#ifdef Q_OS_WIN
+#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
+     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
 #endif
@@ -102,7 +107,7 @@ CaptureWidget::CaptureWidget(const uint id,
         }
         m_context.origScreenshot = m_context.screenshot;
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
                        Qt::Popup);
 
@@ -117,11 +122,24 @@ CaptureWidget::CaptureWidget(const uint id,
             }
         }
         move(topLeft);
+        resize(pixmap().size());
+#elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
+       defined(Q_OS_MACX))
+        // Emulate fullscreen mode
+        //        setWindowFlags(Qt::WindowStaysOnTopHint |
+        //        Qt::BypassWindowManagerHint |
+        //                       Qt::FramelessWindowHint |
+        //                       Qt::NoDropShadowWindowHint | Qt::ToolTip |
+        //                       Qt::Popup
+        //                       );
+        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        move(currentScreen->geometry().x(), currentScreen->geometry().y());
+        resize(currentScreen->size());
 #else
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
-#endif
         resize(pixmap().size());
+#endif
     }
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
@@ -132,7 +150,7 @@ CaptureWidget::CaptureWidget(const uint id,
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
                      r.y() / screen->devicePixelRatio());
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
             r.moveTo(r.topLeft() - topLeft);
 #endif
             areas.append(r);
@@ -304,7 +322,19 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        QRect helpRect;
+        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        if (currentScreen) {
+            helpRect = currentScreen->geometry();
+        } else {
+            helpRect = QGuiApplication::primaryScreen()->geometry();
+        }
+#else
         QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+#endif
+
         helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
 
         QString helpTxt =
@@ -606,7 +636,36 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 
 void CaptureWidget::wheelEvent(QWheelEvent* e)
 {
-    m_context.thickness += e->angleDelta().y() / 120;
+    /* Mouse scroll usually gives value 120, not more or less, just how many
+     * times.
+     * Touchpad gives the value 2 or more (usually 2-8), it doesn't give
+     * too big values like mouse wheel on normal scrolling, so it is almost
+     * impossible to scroll. It's easier to calculate number of requests and do
+     * not accept events faster that one in 200ms.
+     * */
+    int thicknessOffset = 0;
+    if (e->angleDelta().y() >= 60) {
+        // mouse scroll (wheel) increment
+        thicknessOffset = 1;
+    } else if (e->angleDelta().y() <= -60) {
+        // mouse scroll (wheel) decrement
+        thicknessOffset = -1;
+    } else {
+        // touchpad scroll
+        qint64 current = QDateTime::currentMSecsSinceEpoch();
+        if ((current - m_lastMouseWheel) > 200) {
+            if (e->angleDelta().y() > 0) {
+                thicknessOffset = 1;
+            } else if (e->angleDelta().y() < 0) {
+                thicknessOffset = -1;
+            }
+            m_lastMouseWheel = current;
+        } else {
+            return;
+        }
+    }
+
+    m_context.thickness += thicknessOffset;
     m_context.thickness = qBound(0, m_context.thickness, 100);
     QPoint topLeft =
       qApp->desktop()
@@ -681,10 +740,19 @@ void CaptureWidget::initPanel()
     }
 
     m_panel = new UtilityPanel(this);
+    m_panel->hide();
     makeChild(m_panel);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
+    m_panel->setFixedWidth(m_colorPicker->width() * 1.5);
+    m_panel->setFixedHeight(currentScreen->geometry().height());
+#else
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
+#endif
 
     SidePanelWidget* sidePanel = new SidePanelWidget(&m_context.screenshot);
     connect(sidePanel,
@@ -709,6 +777,26 @@ void CaptureWidget::initPanel()
     sidePanel->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(sidePanel);
     m_panel->pushWidget(new QUndoView(&m_undoStack, this));
+}
+
+void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
+                                              const QString& appLatestUrl)
+{
+    if (nullptr == m_updateNotificationWidget) {
+        m_updateNotificationWidget =
+          new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
+    }
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    int ax = (width() - m_updateNotificationWidget->width()) / 2;
+#else
+    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+    int ax = helpRect.left() +
+             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
+#endif
+    m_updateNotificationWidget->move(ax, 0);
+    makeChild(m_updateNotificationWidget);
+    m_updateNotificationWidget->show();
 }
 
 void CaptureWidget::initSelection()
@@ -1101,6 +1189,10 @@ void CaptureWidget::copyScreenshot()
 
 void CaptureWidget::saveScreenshot()
 {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    showNormal();
+#endif
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);

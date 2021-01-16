@@ -46,9 +46,16 @@ bool AbstractPathTool::showMousePreview() const
 void AbstractPathTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
-    const int val = m_thickness + m_padding;
-    QRect area = m_backupArea + QMargins(val, val, val, val);
-    p.drawPixmap(area.intersected(pixmap.rect()).topLeft(), m_pixmapBackup);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
+    // capture of different displays with different DPI, so let it be MacOS
+    // specific only.
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
+#else
+    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
+#endif
 }
 
 void AbstractPathTool::drawEnd(const QPoint& p)
@@ -73,9 +80,30 @@ void AbstractPathTool::thicknessChanged(const int th)
 
 void AbstractPathTool::updateBackup(const QPixmap& pixmap)
 {
+    m_pixmapBackup = pixmap.copy(backupRect(pixmap));
+}
+
+QRect AbstractPathTool::backupRect(const QPixmap& pixmap) const
+{
+    const QRect& limits = pixmap.rect();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
+    // capture of different displays with different DPI, so let it be MacOS
+    // specific only.
+    const qreal pixelRatio = pixmap.devicePixelRatio();
+    const int val = (m_thickness + m_padding) * pixelRatio;
+    QRect r = m_backupArea.normalized();
+    if (1 != pixelRatio) {
+        r.moveTo(r.topLeft() * pixelRatio);
+        r.setSize(r.size() * pixelRatio);
+    }
+#else
     const int val = m_thickness + m_padding;
-    QRect area = m_backupArea.normalized() + QMargins(val, val, val, val);
-    m_pixmapBackup = pixmap.copy(area);
+    QRect r = m_backupArea.normalized();
+#endif
+    r += QMargins(val, val, val, val);
+    return r.intersected(limits);
 }
 
 void AbstractPathTool::addPoint(const QPoint& point)

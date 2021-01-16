@@ -43,7 +43,10 @@ UtilityPanel::UtilityPanel(QWidget* parent)
             m_internalPanel,
             &QWidget::hide);
 
-    hide();
+#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
+     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+    move(0, 0);
+#endif
 }
 
 QWidget* UtilityPanel::toolWidget() const
@@ -83,6 +86,10 @@ void UtilityPanel::show()
     m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
     m_internalPanel->show();
     m_showAnimation->start();
+#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
+     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+    move(0, 0);
+#endif
     QWidget::show();
 }
 
@@ -129,14 +136,5 @@ void UtilityPanel::initInternalPanel()
     bgColor.setAlphaF(0.0);
     m_internalPanel->setStyleSheet(
       QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
-
-    m_hide = new QPushButton();
-    m_hide->setText(tr("Hide"));
-    m_upLayout->addWidget(m_hide);
-    connect(m_hide, SIGNAL(clicked()), this, SLOT(slotHidePanel()));
-}
-
-void UtilityPanel::slotHidePanel()
-{
-    hide();
+    m_internalPanel->hide();
 }

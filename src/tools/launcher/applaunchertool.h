@@ -25,7 +25,7 @@ class AppLauncher : public AbstractActionTool
 public:
     explicit AppLauncher(QObject* parent = nullptr);
 
-    bool closeOnButtonPressed() const;
+    bool closeOnButtonPressed() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;

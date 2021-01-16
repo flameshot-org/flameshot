@@ -92,9 +92,12 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
         case CaptureToolButton::TYPE_REDO:
             tool = new RedoTool(parent);
             break;
+#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
+        defined(Q_OS_MACX))
         case CaptureToolButton::TYPE_OPEN_APP:
             tool = new AppLauncher(parent);
             break;
+#endif
         case CaptureToolButton::TYPE_PIXELATE:
             tool = new PixelateTool(parent);
             break;
@@ -107,7 +110,6 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
         case CaptureToolButton::TYPE_CIRCLECOUNT:
             tool = new CircleCountTool(parent);
             break;
-
         default:
             tool = nullptr;
             break;
