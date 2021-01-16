@@ -88,6 +88,9 @@ set(QAPPLICATION_CLASS
     CACHE STRING "Inheritance class for SingleApplication")
 add_subdirectory(external/singleapplication)
 add_subdirectory(external/spdlog)
+IF (APPLE)
+  add_subdirectory(external/QHotkey)
+ENDIF ()
 add_subdirectory(src)
 
 # CPack
