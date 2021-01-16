@@ -12,6 +12,7 @@ target_sources(
           notificationwidget.h
           orientablepushbutton.h
           historywidget.h
+          updatenotificationwidget.h
 )
 
 target_sources(
@@ -24,4 +25,5 @@ target_sources(
           notificationwidget.cpp
           orientablepushbutton.cpp
           historywidget.cpp
+          updatenotificationwidget.cpp
 )

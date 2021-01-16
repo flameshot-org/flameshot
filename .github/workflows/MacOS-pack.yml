@@ -1,0 +1,66 @@
+name: Packaging(MacOS)
+
+on:
+  push:
+    branches:
+      - master
+      - feature/RND-680-macos-.dmg-package-build
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+
+env:
+  PRODUCT: flameshot
+
+jobs:
+  catalina:
+    name: macOS Catalina 10.15
+    runs-on: macos-10.15
+
+    steps:
+      - name: Checkout Source code
+        uses: actions/checkout@v1
+
+      - name: Install Qt
+        run: brew install qt cmake
+
+      - name: Configure
+        run: |
+          mkdir build
+          cd build
+          rm -rf ./src/flameshot.dmg ./src/flameshot.app/
+          cmake .. -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+
+      - name: Compile
+        run: |
+          cd build
+          make
+
+      - name: Build dmg package
+        run: |
+          cd build/src
+          /usr/local/opt/qt5/bin/macdeployqt flameshot.app -dmg
+
+      - name: Update dmg package links
+        run: |
+          cd build/src
+          ../../packaging/macos/update_package.sh
+
+      - name: Upload dmg package
+        shell: bash
+        run: |
+          python3 -m pip install -U -q requests
+          echo "================MacOS dmg image download link================"
+          echo $(python3 $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/src/flameshot.dmg)
+          echo "=====no operation for you can see link in the log console====="
+
+      - name: Artifact Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: MacOS-artifact
+          path: ${{ github.workspace }}/build/src/flameshot.dmg

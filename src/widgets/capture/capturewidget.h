@@ -44,6 +44,7 @@ class QNetworkReply;
 class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
+class UpdateNotificationWidget;
 
 class CaptureWidget : public QWidget
 {
@@ -58,6 +59,8 @@ public:
 
     void updateButtons();
     QPixmap pixmap();
+    void showAppUpdateNotification(const QString& appLatestVersion,
+                                   const QString& appLatestUrl);
 
 public slots:
     bool commitCurrentTool();
@@ -149,6 +152,8 @@ private:
     QRect extendedRect(QRect* r) const;
 
 private:
+    UpdateNotificationWidget* m_updateNotificationWidget;
+    quint64 m_lastMouseWheel;
     QUndoStack m_undoStack;
     QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button

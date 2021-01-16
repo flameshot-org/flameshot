@@ -42,9 +42,9 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
     if ((ConfigHandler().saveAfterCopyValue()) &&
-        (!ConfigHandler().saveAfterCopyPathValue().isEmpty())) {
+        (!ConfigHandler().savePath().isEmpty())) {
         saveToFilesystem(capture,
-                         ConfigHandler().saveAfterCopyPathValue(),
+                         ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
         QApplication::clipboard()->setPixmap(capture);
     }

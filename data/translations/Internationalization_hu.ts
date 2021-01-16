@@ -208,6 +208,18 @@ Press Space to open the side panel.</source>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have the latest version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -457,7 +469,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="unfinished">Kép felötlése</translation>
+        <translation type="obsolete">Kép felötlése</translation>
     </message>
     <message>
         <source>Delete image from S3</source>
@@ -495,6 +507,22 @@ Press Space to open the side panel.</source>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retrieving configuration file with s3 creds...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
@@ -511,11 +539,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="unfinished">Kép felötlése</translation>
-    </message>
-    <message>
-        <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kép felötlése</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -548,6 +572,10 @@ Press Space to open the side panel.</source>
     <message>
         <source>Image to Clipboard.</source>
         <translation type="unfinished">Kép a vágolapra.</translation>
+    </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1273,6 +1301,25 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
+    <name>UpdateNotificationWidget</name>
+    <message>
+        <source>New Flameshot version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UploadStorageConfig</name>
     <message>
         <source>Upload storage</source>
@@ -1291,10 +1338,6 @@ You can find me in the system tray.</source>
     <name>UtilityPanel</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

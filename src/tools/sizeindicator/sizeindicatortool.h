@@ -25,7 +25,7 @@ class SizeIndicatorTool : public AbstractActionTool
 public:
     explicit SizeIndicatorTool(QObject* parent = nullptr);
 
-    bool closeOnButtonPressed() const;
+    bool closeOnButtonPressed() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
