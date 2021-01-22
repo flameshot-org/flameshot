@@ -130,9 +130,6 @@ void CircleCountTool::drawStart(const CaptureContext& context)
     }
     m_points.first = context.mousePos;
     m_count = context.circleCount;
-
-    SPDLOG_DEBUG("Requesting Circle Increment.");
-    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)
