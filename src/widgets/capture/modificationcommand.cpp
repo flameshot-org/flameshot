@@ -35,4 +35,8 @@ void ModificationCommand::redo()
     QPainter p(m_pixmap);
     p.setRenderHint(QPainter::Antialiasing);
     m_tool->process(p, *m_pixmap, true);
+    if (m_tool->nameID() == ToolType::CIRCLECOUNT) {
+        emit this->m_tool->requestAction(
+          CaptureTool::Request::REQ_INCREMENT_CIRCLE_COUNT);
+    }
 }
