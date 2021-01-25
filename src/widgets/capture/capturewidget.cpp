@@ -322,9 +322,9 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) &&                               \
-     (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||       \
-      defined(Q_OS_MACX) || defined(Q_OS_LINUX)))
+#if ((QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) && defined(Q_OS_LINUX)) ||      \
+     defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
         QRect helpRect;
         QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
         if (currentScreen) {
@@ -713,9 +713,9 @@ void CaptureWidget::initPanel()
 {
     QRect panelRect = rect();
     if (m_context.fullscreen) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) &&                               \
-     (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||       \
-      defined(Q_OS_MACX) || defined(Q_OS_LINUX)))
+#if ((QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) && defined(Q_OS_LINUX)) ||      \
+     defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
         QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
         if (currentScreen) {
             panelRect = currentScreen->geometry();
