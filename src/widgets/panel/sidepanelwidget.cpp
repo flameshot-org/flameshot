@@ -24,6 +24,11 @@
 #include <QPushButton>
 #include <QSlider>
 #include <QVBoxLayout>
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+#include <QGuiApplication>
+#include <QScreen>
+#endif
 
 class QColorPickingEventFilter : public QObject
 {
@@ -161,8 +166,20 @@ QColor SidePanelWidget::grabPixmapColor(const QPoint& p)
 {
     QColor c;
     if (m_pixmap) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QPoint point = p;
+        if (currentScreen) {
+            point = QPoint((p.x() - currentScreen->geometry().x()) *
+                             currentScreen->devicePixelRatio(),
+                           (p.y() - currentScreen->geometry().y()) *
+                             currentScreen->devicePixelRatio());
+        }
+        QPixmap pixel = m_pixmap->copy(QRect(point, point));
+#else
         QPixmap pixel = m_pixmap->copy(QRect(p, p));
-        c = pixel.toImage().pixel(0, 0);
+#endif
     }
     return c;
 }
