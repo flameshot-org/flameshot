@@ -27,6 +27,7 @@ PinWidget::PinWidget(const QPixmap& pixmap, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(pixmap)
 {
+    setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
