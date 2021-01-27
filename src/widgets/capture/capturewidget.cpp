@@ -139,33 +139,32 @@ CaptureWidget::CaptureWidget(const uint id,
     updateButtons();
     QVector<QRect> areas;
     if (m_context.fullscreen) {
+        QPoint topLeftOffset = QPoint(0, 0);
+#if defined(Q_OS_WIN)
+        topLeftOffset - topLeft;
+#endif
+
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
         QPoint currentPos = QCursor::pos();
-#endif
+        // MacOS works just with one active display, so we need to append
+        // just one current display and keep multiple displays logic for
+        // other OS
+        QScreen* const screen = qGuiApp->screenAt(currentPos);
+        QRect r = screen->geometry();
+        // all calculations are processed according to (0, 0) start
+        // point so we need to move current object to (0, 0)
+        r.moveTo(0, 0);
+        areas.append(r);
+#else
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
                      r.y() / screen->devicePixelRatio());
-#if defined(Q_OS_WIN)
-            r.moveTo(r.topLeft() - topLeft);
-#endif
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
-            // MacOS works just with one active display, so we need to append
-            // just one current display and keep multiple displays logic for
-            // other OS
-            if (r.contains(currentPos)) {
-                // all calculations are processed according to (0, 0) start
-                // point so we need to move current object to (0, 0)
-                r.moveTo(0, 0);
-                areas.append(r);
-                break;
-            }
-#else
+            r.moveTo(r.topLeft() - topLeftOffset);
             areas.append(r);
-#endif
         }
+#endif
     } else {
         areas.append(rect());
     }
