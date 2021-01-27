@@ -17,6 +17,8 @@
 
 #include "pintool.h"
 #include "src/tools/pin/pinwidget.h"
+#include <QGuiApplication>
+#include <QScreen>
 
 PinTool::PinTool(QObject* parent)
   : AbstractActionTool(parent)
@@ -49,10 +51,33 @@ QString PinTool::description() const
 
 QWidget* PinTool::widget()
 {
+    qreal devicePixelRatio = 1;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    if (currentScreen) {
+        devicePixelRatio = currentScreen->devicePixelRatio();
+    }
+#endif
     PinWidget* w = new PinWidget(m_pixmap);
-    const int&& m = w->margin();
+    const int m = w->margin() * devicePixelRatio;
     QRect adjusted_pos = m_geometry + QMargins(m, m, m, m);
     w->setGeometry(adjusted_pos);
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    if (currentScreen) {
+        QPoint topLeft = currentScreen->geometry().topLeft();
+        adjusted_pos.setX((adjusted_pos.x() - topLeft.x()) / devicePixelRatio +
+                          topLeft.x());
+
+        adjusted_pos.setY((adjusted_pos.y() - topLeft.y()) / devicePixelRatio +
+                          topLeft.y());
+        adjusted_pos.setWidth(adjusted_pos.size().width() / devicePixelRatio);
+        adjusted_pos.setHeight(adjusted_pos.size().height() / devicePixelRatio);
+        w->resize(0, 0);
+        w->move(adjusted_pos.x(), adjusted_pos.y());
+    }
+#endif
     return w;
 }
 
