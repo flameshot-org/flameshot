@@ -60,11 +60,15 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
                     << "" << QObject::tr("Screenshot history") << "⇧⌘⌥H");
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Capture screen") << "⇧⌘⌥4");
-#else
+#elif defined(Q_OS_WIN)
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Capture screen") << "Print Screen");
+#else
+    // TODO - Linux doesn't support global shortcuts for (XServer and Wayland),
+    // possibly it will be solved in the QHotKey library later. So it is
+    // disabled for now.
 #endif
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Show color picker") << "Right Click");
