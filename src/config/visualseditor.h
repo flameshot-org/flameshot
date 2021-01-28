@@ -33,9 +33,6 @@ public:
 public slots:
     void updateComponents();
 
-private slots:
-    void saveOpacity();
-
 private:
     QVBoxLayout* m_layout;
     ButtonListView* m_buttonList;
