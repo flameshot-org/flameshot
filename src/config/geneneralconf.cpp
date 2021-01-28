@@ -353,7 +353,7 @@ void GeneneralConf::changeSavePath()
         path =
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
-    chooseFolder(path);
+    path = chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
         ConfigHandler().setSavePath(path);
