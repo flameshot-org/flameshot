@@ -22,7 +22,6 @@
 #include "src/utils/confighandler.h"
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QVBoxLayout>
 
 VisualsEditor::VisualsEditor(QWidget* parent)
   : QWidget(parent)
@@ -46,10 +45,6 @@ void VisualsEditor::initOpacitySlider()
     m_opacitySlider->setFocusPolicy(Qt::NoFocus);
     m_opacitySlider->setOrientation(Qt::Horizontal);
     m_opacitySlider->setRange(0, 100);
-    connect(m_opacitySlider,
-            &ExtendedSlider::modificationsEnded,
-            this,
-            &VisualsEditor::saveOpacity);
     QHBoxLayout* localLayout = new QHBoxLayout();
     localLayout->addWidget(new QLabel(QStringLiteral("0%")));
     localLayout->addWidget(m_opacitySlider);
@@ -57,21 +52,20 @@ void VisualsEditor::initOpacitySlider()
 
     QLabel* label = new QLabel();
     QString labelMsg = tr("Opacity of area outside selection:") + " %1%";
+    ExtendedSlider* opacitySlider = m_opacitySlider;
     connect(m_opacitySlider,
             &ExtendedSlider::valueChanged,
             this,
-            [labelMsg, label](int val) { label->setText(labelMsg.arg(val)); });
+            [labelMsg, label, opacitySlider](int val) {
+                label->setText(labelMsg.arg(val));
+                ConfigHandler().setContrastOpacity(
+                  opacitySlider->mappedValue(0, 255));
+            });
     m_layout->addWidget(label);
     m_layout->addLayout(localLayout);
 
     int opacity = ConfigHandler().contrastOpacityValue();
     m_opacitySlider->setMapedValue(0, opacity, 255);
-}
-
-void VisualsEditor::saveOpacity()
-{
-    int value = m_opacitySlider->mappedValue(0, 255);
-    ConfigHandler().setContrastOpacity(value);
 }
 
 void VisualsEditor::initWidgets()
