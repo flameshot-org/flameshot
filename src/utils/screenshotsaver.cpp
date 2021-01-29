@@ -21,6 +21,7 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
+#include <QBuffer>
 #include <QClipboard>
 #include <QFileDialog>
 #include <QImageWriter>
@@ -54,8 +55,22 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     // Otherwise only save to clipboard
     else {
         SystemNotification().sendMessage(
-          QObject::tr("Capture saved to clipboard"));
-        QApplication::clipboard()->setPixmap(capture);
+                    QObject::tr("Capture saved to clipboard"));
+
+        QByteArray array;
+        QBuffer buffer{&array};
+        QImageWriter imageWriter{&buffer, "JPG"};
+        imageWriter.write(capture.toImage());
+
+        QPixmap jpgPixmap;
+        bool isLoaded = jpgPixmap.loadFromData(
+                    reinterpret_cast<uchar*>(array.data()), array.size(), "JPG");
+        if(isLoaded) {
+            QApplication::clipboard()->setPixmap(jpgPixmap);
+        }
+        else {
+            QApplication::clipboard()->setPixmap(capture);
+        }
     }
 }
 
