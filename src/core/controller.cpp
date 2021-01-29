@@ -233,6 +233,19 @@ void Controller::requestCapture(const CaptureRequest& request)
 void Controller::startVisualCapture(const uint id,
                                     const QString& forcedSavePath)
 {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    // This is required on MacOS because of Mission Control. If you'll switch to
+    // another Desktop you cannot take a new screenshot from the tray, you have
+    // to switch back to the Flameshot Desktop manually. It is not obvious and a
+    // large number of users are confused and report a bug.
+    if (m_captureWindow) {
+        m_captureWindow->close();
+        delete m_captureWindow;
+        m_captureWindow = nullptr;
+    }
+#endif
+
     if (!m_captureWindow) {
         QWidget* modalWidget = nullptr;
         do {
@@ -344,8 +357,14 @@ void Controller::enableTrayIcon()
     ConfigHandler().setDisabledTrayIcon(false);
     QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this]() {
-        // Wait 400 ms to hide the QMenu
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        // It seems it is not relevant for MacOS (Wait 400 ms to hide the QMenu)
+        startVisualCapture();
+#else
+      // Wait 400 ms to hide the QMenu
         doLater(400, this, [this]() { this->startVisualCapture(); });
+#endif
     });
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
