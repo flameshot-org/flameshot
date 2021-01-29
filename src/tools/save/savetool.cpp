@@ -68,6 +68,7 @@ void SaveTool::pressed(const CaptureContext& context)
         if (0 ==
             className.compare(CaptureWidget::staticMetaObject.className())) {
             widget->showNormal();
+            widget->hide();
             break;
         }
     }
