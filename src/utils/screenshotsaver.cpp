@@ -55,20 +55,19 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     // Otherwise only save to clipboard
     else {
         SystemNotification().sendMessage(
-                    QObject::tr("Capture saved to clipboard"));
+          QObject::tr("Capture saved to clipboard"));
 
         QByteArray array;
-        QBuffer buffer{&array};
-        QImageWriter imageWriter{&buffer, "JPG"};
+        QBuffer buffer{ &array };
+        QImageWriter imageWriter{ &buffer, "JPG" };
         imageWriter.write(capture.toImage());
 
         QPixmap jpgPixmap;
         bool isLoaded = jpgPixmap.loadFromData(
-                    reinterpret_cast<uchar*>(array.data()), array.size(), "JPG");
-        if(isLoaded) {
+          reinterpret_cast<uchar*>(array.data()), array.size(), "JPG");
+        if (isLoaded) {
             QApplication::clipboard()->setPixmap(jpgPixmap);
-        }
-        else {
+        } else {
             QApplication::clipboard()->setPixmap(capture);
         }
     }
