@@ -86,6 +86,9 @@ public:
     bool copyPathAfterSaveEnabled();
     void setCopyPathAfterSaveEnabled(const bool);
 
+    bool useJpgInsteadPngWhenCopy() const;
+    void setUseJpgInsteadPngWhenCopy(const bool);
+
     void setDefaults();
     void setAllTheButtons();
 
