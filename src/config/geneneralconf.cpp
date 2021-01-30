@@ -39,6 +39,7 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
+    initUseJpgInsteadPngWhenCopy();
     initSaveAfterCopy();
 
     // this has to be at the end
@@ -54,6 +55,7 @@ void GeneneralConf::updateComponents()
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
+    m_useJpgInsteadPngCheck->setChecked(config.useJpgInsteadPngWhenCopy());
 
     if (!config.saveAfterCopyPathValue().isEmpty()) {
         m_savePath->setText(config.saveAfterCopyPathValue());
@@ -304,6 +306,23 @@ void GeneneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
+void GeneneralConf::initUseJpgInsteadPngWhenCopy()
+{
+    m_useJpgInsteadPngCheck =
+      new QCheckBox(tr("Use JPG format instead of PNG when copy"), this);
+    ConfigHandler config;
+    bool checked = config.useJpgInsteadPngWhenCopy();
+    m_useJpgInsteadPngCheck->setChecked(checked);
+    m_useJpgInsteadPngCheck->setToolTip(
+      tr("Use JPG format instead of PNG when copy"));
+    m_layout->addWidget(m_useJpgInsteadPngCheck);
+
+    connect(m_useJpgInsteadPngCheck,
+            &QCheckBox::clicked,
+            this,
+            &GeneneralConf::useJpgInsteadPngChanged);
+}
+
 void GeneneralConf::saveAfterCopyChanged(bool checked)
 {
     ConfigHandler().setSaveAfterCopy(checked);
@@ -347,4 +366,9 @@ const QString GeneneralConf::chooseFolder(const QString pathDefault)
 void GeneneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
+}
+
+void GeneneralConf::useJpgInsteadPngChanged(bool checked)
+{
+    ConfigHandler().setUseJpgInsteadPngWhenCopy(checked);
 }
