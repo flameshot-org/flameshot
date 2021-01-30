@@ -431,6 +431,20 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
     m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
 }
 
+bool ConfigHandler::useJpgInsteadPngWhenCopy() const
+{
+    if (m_settings.contains(QStringLiteral("useJpgInsteadPngWhenCopy"))) {
+        return m_settings.value(QStringLiteral("useJpgInsteadPngWhenCopy"))
+          .toBool();
+    }
+    return false;
+}
+
+void ConfigHandler::setUseJpgInsteadPngWhenCopy(const bool value)
+{
+    m_settings.setValue(QStringLiteral("useJpgInsteadPngWhenCopy"), value);
+}
+
 QString ConfigHandler::saveAfterCopyPathValue()
 {
     return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
