@@ -15,7 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "geneneralconf.h"
+#include "generalconf.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
@@ -29,7 +29,7 @@
 #include <QTextCodec>
 #include <QVBoxLayout>
 
-GeneneralConf::GeneneralConf(QWidget* parent)
+GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
 {
     m_layout = new QVBoxLayout(this);
@@ -47,7 +47,7 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     updateComponents();
 }
 
-void GeneneralConf::updateComponents()
+void GeneralConf::updateComponents()
 {
     ConfigHandler config;
     m_helpMessage->setChecked(config.showHelpValue());
@@ -68,22 +68,22 @@ void GeneneralConf::updateComponents()
 #endif
 }
 
-void GeneneralConf::showHelpChanged(bool checked)
+void GeneralConf::showHelpChanged(bool checked)
 {
     ConfigHandler().setShowHelp(checked);
 }
 
-void GeneneralConf::showSidePanelButtonChanged(bool checked)
+void GeneralConf::showSidePanelButtonChanged(bool checked)
 {
     ConfigHandler().setShowSidePanelButton(checked);
 }
 
-void GeneneralConf::showDesktopNotificationChanged(bool checked)
+void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
     ConfigHandler().setDesktopNotification(checked);
 }
 
-void GeneneralConf::showTrayIconChanged(bool checked)
+void GeneralConf::showTrayIconChanged(bool checked)
 {
     auto controller = Controller::getInstance();
     if (checked) {
@@ -93,12 +93,12 @@ void GeneneralConf::showTrayIconChanged(bool checked)
     }
 }
 
-void GeneneralConf::autostartChanged(bool checked)
+void GeneralConf::autostartChanged(bool checked)
 {
     ConfigHandler().setStartupLaunch(checked);
 }
 
-void GeneneralConf::importConfiguration()
+void GeneralConf::importConfiguration()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
     if (fileName.isEmpty()) {
@@ -122,7 +122,7 @@ void GeneneralConf::importConfiguration()
     config.close();
 }
 
-void GeneneralConf::exportFileConfiguration()
+void GeneralConf::exportFileConfiguration()
 {
     QString fileName = QFileDialog::getSaveFileName(
       this, tr("Save File"), QStringLiteral("flameshot.conf"));
@@ -142,7 +142,7 @@ void GeneneralConf::exportFileConfiguration()
     }
 }
 
-void GeneneralConf::resetConfiguration()
+void GeneralConf::resetConfiguration()
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(
@@ -157,7 +157,7 @@ void GeneneralConf::resetConfiguration()
     }
 }
 
-void GeneneralConf::initShowHelp()
+void GeneralConf::initShowHelp()
 {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
     ConfigHandler config;
@@ -167,13 +167,11 @@ void GeneneralConf::initShowHelp()
                                  "in the capture mode."));
     m_layout->addWidget(m_helpMessage);
 
-    connect(m_helpMessage,
-            &QCheckBox::clicked,
-            this,
-            &GeneneralConf::showHelpChanged);
+    connect(
+      m_helpMessage, &QCheckBox::clicked, this, &GeneralConf::showHelpChanged);
 }
 
-void GeneneralConf::initShowSidePanelButton()
+void GeneralConf::initShowSidePanelButton()
 {
     m_sidePanelButton = new QCheckBox(tr("Show the side panel button"), this);
     m_sidePanelButton->setChecked(ConfigHandler().showSidePanelButtonValue());
@@ -184,9 +182,9 @@ void GeneneralConf::initShowSidePanelButton()
     connect(m_sidePanelButton,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::showSidePanelButtonChanged);
+            &GeneralConf::showSidePanelButtonChanged);
 }
-void GeneneralConf::initShowDesktopNotification()
+void GeneralConf::initShowDesktopNotification()
 {
     m_sysNotifications = new QCheckBox(tr("Show desktop notifications"), this);
     ConfigHandler config;
@@ -198,10 +196,10 @@ void GeneneralConf::initShowDesktopNotification()
     connect(m_sysNotifications,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::showDesktopNotificationChanged);
+            &GeneralConf::showDesktopNotificationChanged);
 }
 
-void GeneneralConf::initShowTrayIcon()
+void GeneralConf::initShowTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
@@ -214,11 +212,11 @@ void GeneneralConf::initShowTrayIcon()
     connect(m_showTray,
             &QCheckBox::stateChanged,
             this,
-            &GeneneralConf::showTrayIconChanged);
+            &GeneralConf::showTrayIconChanged);
 #endif
 }
 
-void GeneneralConf::initConfigButtons()
+void GeneralConf::initConfigButtons()
 {
     QHBoxLayout* buttonLayout = new QHBoxLayout();
     m_layout->addStretch();
@@ -232,24 +230,24 @@ void GeneneralConf::initConfigButtons()
     connect(m_exportButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::exportFileConfiguration);
+            &GeneralConf::exportFileConfiguration);
 
     m_importButton = new QPushButton(tr("Import"));
     buttonLayout->addWidget(m_importButton);
     connect(m_importButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::importConfiguration);
+            &GeneralConf::importConfiguration);
 
     m_resetButton = new QPushButton(tr("Reset"));
     buttonLayout->addWidget(m_resetButton);
     connect(m_resetButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::resetConfiguration);
+            &GeneralConf::resetConfiguration);
 }
 
-void GeneneralConf::initAutostart()
+void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
     ConfigHandler config;
@@ -259,10 +257,10 @@ void GeneneralConf::initAutostart()
     m_layout->addWidget(m_autostart);
 
     connect(
-      m_autostart, &QCheckBox::clicked, this, &GeneneralConf::autostartChanged);
+      m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
 }
 
-void GeneneralConf::initSaveAfterCopy()
+void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
     m_saveAfterCopy->setToolTip(tr("Save image file after copying it"));
@@ -270,7 +268,7 @@ void GeneneralConf::initSaveAfterCopy()
     connect(m_saveAfterCopy,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::saveAfterCopyChanged);
+            &GeneralConf::saveAfterCopyChanged);
 
     QGroupBox* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
@@ -298,7 +296,7 @@ void GeneneralConf::initSaveAfterCopy()
     connect(m_changeSaveButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::changeSavePath);
+            &GeneralConf::changeSavePath);
 
     m_screenshotPathFixedCheck =
       new QCheckBox(tr("Use fixed path for screenshots to save"), this);
@@ -312,7 +310,7 @@ void GeneneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
-void GeneneralConf::initUseJpgForClipboard()
+void GeneralConf::initUseJpgForClipboard()
 {
     m_useJpgForClipboard =
       new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
@@ -326,15 +324,15 @@ void GeneneralConf::initUseJpgForClipboard()
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::useJpgForClipboardChanged);
+            &GeneralConf::useJpgForClipboardChanged);
 }
 
-void GeneneralConf::saveAfterCopyChanged(bool checked)
+void GeneralConf::saveAfterCopyChanged(bool checked)
 {
     ConfigHandler().setSaveAfterCopy(checked);
 }
 
-void GeneneralConf::changeSavePath()
+void GeneralConf::changeSavePath()
 {
     QString path = ConfigHandler().savePath();
     if (path.isEmpty()) {
@@ -348,7 +346,7 @@ void GeneneralConf::changeSavePath()
     }
 }
 
-const QString GeneneralConf::chooseFolder(const QString pathDefault)
+const QString GeneralConf::chooseFolder(const QString pathDefault)
 {
     QString path;
     if (pathDefault.isEmpty()) {
@@ -373,12 +371,12 @@ const QString GeneneralConf::chooseFolder(const QString pathDefault)
     return path;
 }
 
-void GeneneralConf::togglePathFixed()
+void GeneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneneralConf::useJpgForClipboardChanged(bool checked)
+void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
     ConfigHandler().setUseJpgForClipboard(checked);
 }

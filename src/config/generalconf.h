@@ -25,11 +25,11 @@ class QPushButton;
 class QLabel;
 class QLineEdit;
 
-class GeneneralConf : public QWidget
+class GeneralConf : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GeneneralConf(QWidget* parent = nullptr);
+    explicit GeneralConf(QWidget* parent = nullptr);
 
 public slots:
     void updateComponents();

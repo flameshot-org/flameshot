@@ -21,7 +21,7 @@
 
 class FileNameEditor;
 class ShortcutsWidget;
-class GeneneralConf;
+class GeneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
 
@@ -40,7 +40,7 @@ protected:
 private:
     FileNameEditor* m_filenameEditor;
     ShortcutsWidget* m_shortcuts;
-    GeneneralConf* m_generalConfig;
+    GeneralConf* m_generalConfig;
     VisualsEditor* m_visuals;
     QFileSystemWatcher* m_configWatcher;
 };
