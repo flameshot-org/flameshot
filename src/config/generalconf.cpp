@@ -38,6 +38,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowSidePanelButton();
     initShowDesktopNotification();
     initShowTrayIcon();
+    initCheckForUpdates();
     initAutostart();
     initUseJpgForClipboard();
     initSaveAfterCopy();
@@ -91,6 +92,12 @@ void GeneralConf::showTrayIconChanged(bool checked)
     } else {
         controller->disableTrayIcon();
     }
+}
+
+void GeneralConf::checkForUpdatesChanged(bool checked)
+{
+    ConfigHandler().setCheckForUpdates(checked);
+    Controller::getInstance()->setCheckForUpdatesEnabled(checked);
 }
 
 void GeneralConf::autostartChanged(bool checked)
@@ -245,6 +252,19 @@ void GeneralConf::initConfigButtons()
             &QPushButton::clicked,
             this,
             &GeneralConf::resetConfiguration);
+}
+
+void GeneralConf::initCheckForUpdates()
+{
+    m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
+    m_checkForUpdates->setChecked(ConfigHandler().checkForUpdates());
+    m_checkForUpdates->setToolTip(tr("Automatic check for updates"));
+    m_layout->addWidget(m_checkForUpdates);
+
+    connect(m_checkForUpdates,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::checkForUpdatesChanged);
 }
 
 void GeneralConf::initAutostart()
