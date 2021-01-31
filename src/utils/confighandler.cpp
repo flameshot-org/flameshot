@@ -309,6 +309,20 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
     m_settings.setValue(QStringLiteral("keepOpenAppLauncher"), keepOpen);
 }
 
+bool ConfigHandler::checkForUpdates()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("checkForUpdates"))) {
+        res = m_settings.value(QStringLiteral("checkForUpdates")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCheckForUpdates(const bool checkForUpdates)
+{
+    m_settings.setValue(QStringLiteral("checkForUpdates"), checkForUpdates);
+}
+
 bool ConfigHandler::startupLaunchValue()
 {
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \

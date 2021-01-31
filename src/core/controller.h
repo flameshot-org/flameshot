@@ -54,6 +54,8 @@ public:
     void enableExports();
     void updateRecentScreenshots();
 
+    void setCheckForUpdatesEnabled(const bool enabled);
+
 signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
