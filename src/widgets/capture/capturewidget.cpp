@@ -798,6 +798,10 @@ void CaptureWidget::initPanel()
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
                                               const QString& appLatestUrl)
 {
+    if (!ConfigHandler().checkForUpdates()) {
+        // option check for updates disabled
+        return;
+    }
     if (nullptr == m_updateNotificationWidget) {
         m_updateNotificationWidget =
           new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
