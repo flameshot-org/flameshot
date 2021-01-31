@@ -5,7 +5,7 @@ target_sources(
           configwindow.cpp
           extendedslider.cpp
           filenameeditor.cpp
-          geneneralconf.cpp
+          generalconf.cpp
           strftimechooserwidget.cpp
           styleoverride.cpp
           uicoloreditor.cpp
