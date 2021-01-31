@@ -17,7 +17,7 @@
 
 #include "configwindow.h"
 #include "src/config/filenameeditor.h"
-#include "src/config/geneneralconf.h"
+#include "src/config/generalconf.h"
 #include "src/config/shortcutswidget.h"
 #include "src/config/strftimechooserwidget.h"
 #include "src/config/uploadstorageconfig.h"
@@ -70,7 +70,7 @@ ConfigWindow::ConfigWindow(QWidget* parent)
            tr("Filename Editor"));
 
     // general
-    m_generalConfig = new GeneneralConf();
+    m_generalConfig = new GeneralConf();
     addTab(m_generalConfig, QIcon(modifier + "config.svg"), tr("General"));
 
     // shortcuts
@@ -95,7 +95,7 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     connect(this,
             &ConfigWindow::updateChildren,
             m_generalConfig,
-            &GeneneralConf::updateComponents);
+            &GeneralConf::updateComponents);
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
