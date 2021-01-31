@@ -135,6 +135,15 @@ void Controller::enableExports()
       this, &Controller::captureFailed, this, &Controller::handleCaptureFailed);
 }
 
+void Controller::setCheckForUpdatesEnabled(const bool enabled)
+{
+    m_appUpdates->setVisible(enabled);
+    m_appUpdates->setEnabled(enabled);
+    if (enabled) {
+        getLatestAvailableVersion();
+    }
+}
+
 void Controller::getLatestAvailableVersion()
 {
     // This features is required for MacOS and Windows user and for Linux users
@@ -149,12 +158,17 @@ void Controller::getLatestAvailableVersion()
 
     // check for updates each 24 hours
     doLater(1000 * 60 * 60 * 24, this, [this]() {
-        this->getLatestAvailableVersion();
+        if (ConfigHandler().checkForUpdates()) {
+            this->getLatestAvailableVersion();
+        }
     });
 }
 
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 {
+    if (!ConfigHandler().checkForUpdates()) {
+        return;
+    }
     if (reply->error() == QNetworkReply::NoError) {
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
@@ -400,6 +414,7 @@ void Controller::enableTrayIcon()
     m_trayIconMenu->addAction(infoAction);
     m_trayIconMenu->addSeparator();
     m_trayIconMenu->addAction(quitAction);
+    setCheckForUpdatesEnabled(ConfigHandler().checkForUpdates());
 
     m_trayIcon = new QSystemTrayIcon();
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));

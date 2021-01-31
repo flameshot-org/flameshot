@@ -70,6 +70,9 @@ public:
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);
 
+    bool checkForUpdates();
+    void setCheckForUpdates(const bool);
+
     bool verifyLaunchFile();
     bool startupLaunchValue();
     void setStartupLaunch(const bool);

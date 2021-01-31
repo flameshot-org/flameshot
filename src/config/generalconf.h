@@ -25,11 +25,11 @@ class QPushButton;
 class QLabel;
 class QLineEdit;
 
-class GeneneralConf : public QWidget
+class GeneralConf : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GeneneralConf(QWidget* parent = nullptr);
+    explicit GeneralConf(QWidget* parent = nullptr);
 
 public slots:
     void updateComponents();
@@ -39,6 +39,7 @@ private slots:
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void showTrayIconChanged(bool checked);
+    void checkForUpdatesChanged(bool checked);
     void autostartChanged(bool checked);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
@@ -54,7 +55,8 @@ private:
     void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
-    void initConfingButtons();
+    void initConfigButtons();
+    void initCheckForUpdates();
     void initAutostart();
     void initShowStartupLaunchMessage();
     void initCopyAndCloseAfterUpload();
@@ -67,6 +69,7 @@ private:
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
+    QCheckBox* m_checkForUpdates;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_copyAndCloseAfterUpload;
