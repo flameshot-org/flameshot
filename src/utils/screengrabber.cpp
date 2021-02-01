@@ -29,6 +29,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDir>
+#include "request.h"
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
@@ -85,6 +86,46 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 if (!res.isNull()) {
                     QFile dbusResult(reply.value());
                     dbusResult.remove();
+                }
+                break;
+            }
+            case DesktopInfo::SWAY: {
+                qDebug("Sway");
+                QDBusInterface screenshotInterface(
+                  QStringLiteral("org.freedesktop.portal.Desktop"),
+                  QStringLiteral("/org/freedesktop/portal/desktop"),
+                  QStringLiteral("org.freedesktop.portal.Screenshot"));
+
+                QDBusReply<QDBusObjectPath> reply =
+                  screenshotInterface.call(QStringLiteral("Screenshot"),
+                                           "",
+                                           QMap<QString, QVariant>());
+                OrgFreedesktopPortalRequestInterface request(
+                  QStringLiteral("org.freedesktop.portal.Desktop"),
+                  reply.value().path(),
+                  QDBusConnection::sessionBus(),
+                  this);
+                QEventLoop loop;
+                const auto gotSignal =
+                  [&res, &loop](uint status,
+                                const QVariantMap &map) {
+                    qDebug() << "Signal" << status << map;
+                      if (status == 0) {
+                          QString uri = map.value("uri").toString().remove(0, 7);
+                          qDebug() << uri;
+                          res = QPixmap(uri);
+                          QFile imgFile(uri);
+                          imgFile.remove();
+                          loop.quit();
+                      }
+                  };
+                connect(&request,
+                        &org::freedesktop::portal::Request::Response,
+                        gotSignal);
+                loop.exec();
+                request.Close();
+                if (res.isNull()) {
+                    ok = false;
                 }
                 break;
             }
