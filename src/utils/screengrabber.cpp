@@ -109,21 +109,19 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 const auto gotSignal =
                   [&res, &loop](uint status,
                                 const QVariantMap &map) {
-                    qDebug() << "Signal" << status << map;
                       if (status == 0) {
                           QString uri = map.value("uri").toString().remove(0, 7);
-                          qDebug() << uri;
                           res = QPixmap(uri);
                           QFile imgFile(uri);
                           imgFile.remove();
-                          loop.quit();
                       }
+                      loop.quit();
                   };
                 connect(&request,
                         &org::freedesktop::portal::Request::Response,
                         gotSignal);
                 loop.exec();
-                request.Close();
+                request.Close().waitForFinished();
                 if (res.isNull()) {
                     ok = false;
                 }
