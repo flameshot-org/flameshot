@@ -10,10 +10,10 @@
 
 #ifndef RESPONSE_CPP
 #define RESPONSE_CPP
-#include <QtCore/QObject>
 #include <QtCore/QByteArray>
 #include <QtCore/QList>
 #include <QtCore/QMap>
+#include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
@@ -22,15 +22,20 @@
 /*
  * Proxy class for interface org.freedesktop.portal.Request
  */
-class OrgFreedesktopPortalRequestInterface: public QDBusAbstractInterface
+class OrgFreedesktopPortalRequestInterface : public QDBusAbstractInterface
 {
     Q_OBJECT
 public:
-    static inline const char *staticInterfaceName()
-    { return "org.freedesktop.portal.Request"; }
+    static inline const char* staticInterfaceName()
+    {
+        return "org.freedesktop.portal.Request";
+    }
 
 public:
-    OrgFreedesktopPortalRequestInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = nullptr);
+    OrgFreedesktopPortalRequestInterface(const QString& service,
+                                         const QString& path,
+                                         const QDBusConnection& connection,
+                                         QObject* parent = nullptr);
 
     ~OrgFreedesktopPortalRequestInterface();
 
@@ -46,11 +51,10 @@ Q_SIGNALS: // SIGNALS
 };
 
 namespace org {
-  namespace freedesktop {
-    namespace portal {
-      typedef ::OrgFreedesktopPortalRequestInterface Request;
-    }
-  }
+namespace freedesktop {
+namespace portal {
+typedef ::OrgFreedesktopPortalRequestInterface Request;
+}
+}
 }
 #endif
-
