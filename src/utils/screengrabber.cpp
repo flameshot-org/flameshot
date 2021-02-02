@@ -100,7 +100,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                   screenshotInterface.call(QStringLiteral("Screenshot"),
                                            "",
                                            QMap<QString, QVariant>());
-                OrgFreedesktopPortalRequestInterface request(
+                auto *request = new OrgFreedesktopPortalRequestInterface(
                   QStringLiteral("org.freedesktop.portal.Desktop"),
                   reply.value().path(),
                   QDBusConnection::sessionBus(),
@@ -117,11 +117,14 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                       }
                       loop.quit();
                   };
-                connect(&request,
+                QMetaObject::Connection conn = QObject::connect(request,
                         &org::freedesktop::portal::Request::Response,
                         gotSignal);
                 loop.exec();
-                request.Close().waitForFinished();
+                QObject::disconnect(conn);
+                request->Close().waitForFinished();
+                request->deleteLater();
+
                 if (res.isNull()) {
                     ok = false;
                 }
