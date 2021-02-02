@@ -46,7 +46,7 @@ private slots:
     void exportFileConfiguration();
     void resetConfiguration();
     void togglePathFixed();
-    void useJpgInsteadPngChanged(bool checked);
+    void useJpgForClipboardChanged(bool checked);
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -55,10 +55,10 @@ private:
     void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
-    void initConfingButtons();
+    void initConfigButtons();
     void initAutostart();
     void initSaveAfterCopy();
-    void initUseJpgInsteadPngWhenCopy();
+    void initUseJpgForClipboard();
 
     // class members
     QVBoxLayout* m_layout;
@@ -74,5 +74,5 @@ private:
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
-    QCheckBox* m_useJpgInsteadPngCheck;
+    QCheckBox* m_useJpgForClipboard;
 };

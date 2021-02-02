@@ -39,11 +39,11 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowDesktopNotification();
     initShowTrayIcon();
     initAutostart();
-    initUseJpgInsteadPngWhenCopy();
+    initUseJpgForClipboard();
     initSaveAfterCopy();
 
     // this has to be at the end
-    initConfingButtons();
+    initConfigButtons();
     updateComponents();
 }
 
@@ -55,7 +55,7 @@ void GeneneralConf::updateComponents()
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-    m_useJpgInsteadPngCheck->setChecked(config.useJpgInsteadPngWhenCopy());
+    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 
     if (!config.saveAfterCopyPathValue().isEmpty()) {
         m_savePath->setText(config.saveAfterCopyPathValue());
@@ -216,7 +216,7 @@ void GeneneralConf::initShowTrayIcon()
 #endif
 }
 
-void GeneneralConf::initConfingButtons()
+void GeneneralConf::initConfigButtons()
 {
     QHBoxLayout* buttonLayout = new QHBoxLayout();
     m_layout->addStretch();
@@ -306,21 +306,21 @@ void GeneneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
-void GeneneralConf::initUseJpgInsteadPngWhenCopy()
+void GeneneralConf::initUseJpgForClipboard()
 {
-    m_useJpgInsteadPngCheck =
-      new QCheckBox(tr("Use JPG format instead of PNG when copy"), this);
+    m_useJpgForClipboard =
+      new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
     ConfigHandler config;
-    bool checked = config.useJpgInsteadPngWhenCopy();
-    m_useJpgInsteadPngCheck->setChecked(checked);
-    m_useJpgInsteadPngCheck->setToolTip(
-      tr("Use JPG format instead of PNG when copy"));
-    m_layout->addWidget(m_useJpgInsteadPngCheck);
+    bool checked = config.useJpgForClipboard();
+    m_useJpgForClipboard->setChecked(checked);
+    m_useJpgForClipboard->setToolTip(
+      tr("Use JPG format for clipboard (PNG default)"));
+    m_layout->addWidget(m_useJpgForClipboard);
 
-    connect(m_useJpgInsteadPngCheck,
+    connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::useJpgInsteadPngChanged);
+            &GeneneralConf::useJpgForClipboardChanged);
 }
 
 void GeneneralConf::saveAfterCopyChanged(bool checked)
@@ -368,7 +368,7 @@ void GeneneralConf::togglePathFixed()
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneneralConf::useJpgInsteadPngChanged(bool checked)
+void GeneneralConf::useJpgForClipboardChanged(bool checked)
 {
-    ConfigHandler().setUseJpgInsteadPngWhenCopy(checked);
+    ConfigHandler().setUseJpgForClipboard(checked);
 }
