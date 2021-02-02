@@ -1,6 +1,5 @@
 #include "imgs3settings.h"
 #include "src/core/controller.h"
-#include "src/tools/storage/imgstorages.h"
 #include "src/utils/confighandler.h"
 #include <QByteArray>
 #include <QDateTime>
@@ -13,6 +12,7 @@
 ImgS3Settings::ImgS3Settings()
 {
     m_proxy = nullptr;
+    m_localSettings = nullptr;
     initSettings();
 
     // get remote config url
@@ -21,8 +21,7 @@ ImgS3Settings::ImgS3Settings()
           QUrl(m_localSettings->value("STORAGE_CONFIG_URL").toString());
     } else {
         // set default value if STORAGE_CONFIG_URL not found in the config.ini
-        m_s3ConfigUrl = QUrl("https://git.namecheap.net/projects/RND/repos/"
-                             "flameshot_config/raw/config.ini");
+        m_s3ConfigUrl = QUrl(S3_REMOTE_CONFIG_URL);
     }
 
     // proxy settings
@@ -36,7 +35,7 @@ ImgS3Settings::ImgS3Settings()
 void ImgS3Settings::initS3Creds()
 {
     ConfigHandler configHandler;
-    m_credsUrl = configHandler.value("S3", "S3_CREDS_URL").toString();
+    m_credsUrl = ConfigHandler().value("S3", "S3_CREDS_URL").toString();
     m_xApiKey = configHandler.value("S3", "S3_X_API_KEY").toString();
     m_url = configHandler.value("S3", "S3_URL").toString();
     normalizeS3Creds();
@@ -63,6 +62,9 @@ void ImgS3Settings::updateConfigurationData(const QString& data)
     // close and remove temporary file
     file.close();
 
+    // update fixed settings
+    updateSettingsFromRemoteConfig(&remoteConfig);
+
     // cache configuration at the local storage
     ConfigHandler configHandler;
     configHandler.setValue("S3", "S3_URL", url);
@@ -85,15 +87,22 @@ void ImgS3Settings::normalizeS3Creds()
     }
 }
 
+void ImgS3Settings::updateSettingsFromRemoteConfig(const QSettings* settings)
+{
+    if (settings->contains("checkForUpdates")) {
+        bool checkForUpdates = settings->value("checkForUpdates").toBool();
+        ConfigHandler().setCheckForUpdates(checkForUpdates);
+        Controller::getInstance()->setCheckForUpdatesEnabled(checkForUpdates);
+    }
+}
+
 const QString& ImgS3Settings::storageLocked()
 {
     if (m_localSettings->contains("STORAGE_LOCKED")) {
         m_storageLocked =
           m_localSettings->value(QStringLiteral("STORAGE_LOCKED")).toString();
     } else {
-        // FIXME - remove hardcode and add configuration file to the
-        //  installation
-        m_storageLocked = SCREENSHOT_STORAGE_TYPE_S3;
+        m_storageLocked.clear();
     }
     return m_storageLocked;
 }
@@ -120,8 +129,13 @@ const QString& ImgS3Settings::localConfigFilePath(const QString& fileName)
 
 void ImgS3Settings::initSettings()
 {
-    m_localSettings =
-      new QSettings(localConfigFilePath(S3_CONFIG_LOCAL), QSettings::IniFormat);
+    if (QFile::exists(S3_CONFIG_LOCAL)) {
+        m_localSettings = new QSettings(localConfigFilePath(S3_CONFIG_LOCAL),
+                                        QSettings::IniFormat);
+        updateSettingsFromRemoteConfig(m_localSettings);
+    } else {
+        m_localSettings = new QSettings();
+    }
     m_proxySettings =
       new QSettings(localConfigFilePath(S3_CONFIG_PROXY), QSettings::IniFormat);
 }
@@ -273,4 +287,9 @@ const QString& ImgS3Settings::proxyPassword()
         }
     }
     return m_proxyPassword;
+}
+
+const QUrl& ImgS3Settings::configUrl()
+{
+    return m_s3ConfigUrl;
 }

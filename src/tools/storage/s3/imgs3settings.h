@@ -3,6 +3,9 @@
 
 #define S3_API_IMG_PATH "v2/image/"
 
+#define S3_REMOTE_CONFIG_URL                                                   \
+    "https://git.namecheap.net/projects/RND/repos/flameshot_config/raw/teams/" \
+    "others/config.ini"
 #define S3_CONFIG_LOCAL "config.ini"
 #define S3_CONFIG_PROXY "config_proxy.ini"
 
@@ -24,6 +27,7 @@ public:
     const QString& credsUrl();
     const QString& xApiKey();
     const QString& url();
+    const QUrl& configUrl();
 
     QNetworkProxy* proxy();
     void clearProxy();
@@ -41,6 +45,7 @@ private:
     const QString& localConfigFilePath(const QString& fileName);
     void initS3Creds();
     void normalizeS3Creds();
+    void updateSettingsFromRemoteConfig(const QSettings* settings);
 
     // class members
     QSettings* m_localSettings;

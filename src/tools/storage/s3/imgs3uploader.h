@@ -22,10 +22,6 @@
 #include <QUrl>
 #include <QWidget>
 
-#define S3_REMOTE_CONFIG_URL                                                   \
-    "https://git.namecheap.net/projects/RND/repos/flameshot_config/raw/"       \
-    "config.ini"
-
 class QNetworkReply;
 class QNetworkProxy;
 class QNetworkAccessManager;

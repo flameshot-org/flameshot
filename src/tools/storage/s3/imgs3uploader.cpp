@@ -397,7 +397,7 @@ void ImgS3Uploader::getConfigRemote()
     } else {
         m_networkAMConfig->setProxy(QNetworkProxy());
     }
-    QNetworkRequest requestConfig(QUrl(S3_REMOTE_CONFIG_URL));
+    QNetworkRequest requestConfig(m_s3Settings.configUrl());
     m_networkAMConfig->get(requestConfig);
 }
 
