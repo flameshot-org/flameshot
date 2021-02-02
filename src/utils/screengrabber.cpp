@@ -112,6 +112,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                       if (status == 0) {
                           QString uri = map.value("uri").toString().remove(0, 7);
                           res = QPixmap(uri);
+                          res.setDevicePixelRatio(qApp->devicePixelRatio());
                           QFile imgFile(uri);
                           imgFile.remove();
                       }
