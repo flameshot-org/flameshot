@@ -44,9 +44,10 @@ DesktopInfo::WM DesktopInfo::windowManager()
                                      Qt::CaseInsensitive) ||
         !GNOME_DESKTOP_SESSION_ID.isEmpty()) {
         res = DesktopInfo::GNOME;
-    } else if (XDG_CURRENT_DESKTOP.contains(QLatin1String("sway"), Qt::CaseInsensitive)) {
+    } else if (XDG_CURRENT_DESKTOP.contains(QLatin1String("sway"),
+                                            Qt::CaseInsensitive)) {
         res = DesktopInfo::SWAY;
-    }else if (!KDE_FULL_SESSION.isEmpty() ||
+    } else if (!KDE_FULL_SESSION.isEmpty() ||
                DESKTOP_SESSION == QLatin1String("kde-plasma")) {
         res = DesktopInfo::KDE;
     }
