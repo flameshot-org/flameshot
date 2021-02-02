@@ -431,18 +431,17 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
     m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
 }
 
-bool ConfigHandler::useJpgInsteadPngWhenCopy() const
+bool ConfigHandler::useJpgForClipboard() const
 {
-    if (m_settings.contains(QStringLiteral("useJpgInsteadPngWhenCopy"))) {
-        return m_settings.value(QStringLiteral("useJpgInsteadPngWhenCopy"))
-          .toBool();
+    if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
+        return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
     }
     return false;
 }
 
-void ConfigHandler::setUseJpgInsteadPngWhenCopy(const bool value)
+void ConfigHandler::setUseJpgForClipboard(const bool value)
 {
-    m_settings.setValue(QStringLiteral("useJpgInsteadPngWhenCopy"), value);
+    m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
 }
 
 QString ConfigHandler::saveAfterCopyPathValue()
