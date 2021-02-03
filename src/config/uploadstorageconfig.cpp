@@ -57,7 +57,6 @@ UploadStorageConfig::UploadStorageConfig(QWidget* parent)
     // set current storage radiobutton active
     if (ConfigHandler().uploadStorage() == SCREENSHOT_STORAGE_TYPE_IMGUR) {
         storageImgUr->setChecked(true);
-
     } else {
         storageImgS3->setChecked(true);
     }

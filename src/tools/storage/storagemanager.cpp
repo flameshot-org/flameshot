@@ -33,7 +33,7 @@ const QString& StorageManager::storageDefault()
     if (!m_imgS3Settings.storageLocked().isEmpty()) {
         m_qstr = m_imgS3Settings.storageLocked();
     } else {
-        m_qstr = SCREENSHOT_STORAGE_TYPE_IMGUR;
+        m_qstr = SCREENSHOT_STORAGE_TYPE_S3;
     }
     return m_qstr;
 }
