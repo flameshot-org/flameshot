@@ -36,7 +36,8 @@ echo "--> Start Notarization process"
 response=$(xcrun altool -t osx -f "${APP_NAME}.dmg" --primary-bundle-id "org.namecheap.${APP_NAME}" --notarize-app -u "${APPLE_DEV_USER}" -p "${APPLE_DEV_PASS}")
 requestUUID=$(echo "${response}" | tr ' ' '\n' | tail -1)
 
-while true; do
+for ((ATTEMPT=5; ATTEMPT>=1; ATTEMPT--))
+do
   echo "--> Checking notarization status"
   statusCheckResponse=$(xcrun altool --notarization-info "${requestUUID}" -u "${APPLE_DEV_USER}" -p "${APPLE_DEV_PASS}")
 
@@ -67,6 +68,11 @@ while true; do
     echo "Elapsed: ${num}0 sec"
   done
 done
+
+if [[ "${ATTEMPT}" == 0 ]]; then
+  echo "ERROR: notarization check failed"
+  exit 1
+fi
 
 echo "--> Start verify signing process"
 codesign -dv --verbose=4 "${APP_NAME}.dmg"
