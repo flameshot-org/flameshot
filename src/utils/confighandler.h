@@ -77,9 +77,16 @@ public:
     bool startupLaunchValue();
     void setStartupLaunch(const bool);
 
+    bool showStartupLaunchMessage();
+    void setShowStartupLaunchMessage(const bool);
+
     int contrastOpacityValue();
     void setContrastOpacity(const int);
 
+    bool copyAndCloseAfterUploadEnabled();
+    void setCopyAndCloseAfterUploadEnabled(const bool);
+    bool historyConfirmationToDelete();
+    void setHistoryConfirmationToDelete(const bool save);
     bool saveAfterCopyValue();
     void setSaveAfterCopy(const bool);
 

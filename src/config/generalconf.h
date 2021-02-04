@@ -41,6 +41,7 @@ private slots:
     void showTrayIconChanged(bool checked);
     void checkForUpdatesChanged(bool checked);
     void autostartChanged(bool checked);
+    void historyConfirmationToDelete(bool checked);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
     void importConfiguration();
@@ -56,10 +57,14 @@ private:
     void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
+    void initHistoryConfirmationToDelete();
     void initConfigButtons();
     void initCheckForUpdates();
     void initAutostart();
+    void initShowStartupLaunchMessage();
+    void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
+    void initCopyPathAfterSave();
     void initUseJpgForClipboard();
 
     // class members
@@ -70,6 +75,9 @@ private:
     QCheckBox* m_sidePanelButton;
     QCheckBox* m_checkForUpdates;
     QCheckBox* m_autostart;
+    QCheckBox* m_showStartupLaunchMessage;
+    QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyPathAfterSave;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;
@@ -77,5 +85,6 @@ private:
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
+    QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
 };

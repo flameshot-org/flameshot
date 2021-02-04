@@ -31,6 +31,7 @@
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
+  , m_historyConfirmationToDelete(nullptr)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
@@ -38,8 +39,12 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowSidePanelButton();
     initShowDesktopNotification();
     initShowTrayIcon();
+    initHistoryConfirmationToDelete();
     initCheckForUpdates();
     initAutostart();
+    initShowStartupLaunchMessage();
+    initCopyAndCloseAfterUpload();
+    initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
 
@@ -55,7 +60,10 @@ void GeneralConf::updateComponents()
     m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+    m_copyAndCloseAfterUpload->setChecked(
+      config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 
     if (!config.savePath().isEmpty()) {
@@ -223,6 +231,23 @@ void GeneralConf::initShowTrayIcon()
 #endif
 }
 
+void GeneralConf::initHistoryConfirmationToDelete()
+{
+    m_historyConfirmationToDelete = new QCheckBox(
+      tr("Confirmation required on delete screenshot from the latest uploads"),
+      this);
+    m_historyConfirmationToDelete->setChecked(
+      ConfigHandler().historyConfirmationToDelete());
+    m_historyConfirmationToDelete->setToolTip(
+      tr("Confirmation required to delete screenshot from the latest uploads"));
+    m_layout->addWidget(m_historyConfirmationToDelete);
+
+    connect(m_historyConfirmationToDelete,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::historyConfirmationToDelete);
+}
+
 void GeneralConf::initConfigButtons()
 {
     QHBoxLayout* buttonLayout = new QHBoxLayout();
@@ -280,6 +305,37 @@ void GeneralConf::initAutostart()
       m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
 }
 
+void GeneralConf::initShowStartupLaunchMessage()
+{
+    m_showStartupLaunchMessage =
+      new QCheckBox(tr("Show welcome message on launch"), this);
+    ConfigHandler config;
+    bool checked = config.showStartupLaunchMessage();
+    m_showStartupLaunchMessage->setChecked(checked);
+    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
+    m_layout->addWidget(m_showStartupLaunchMessage);
+
+    connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowStartupLaunchMessage(checked);
+    });
+}
+
+void GeneralConf::initCopyAndCloseAfterUpload()
+{
+    m_copyAndCloseAfterUpload =
+      new QCheckBox(tr("Copy URL after upload"), this);
+    ConfigHandler config;
+    m_copyAndCloseAfterUpload->setChecked(
+      config.copyAndCloseAfterUploadEnabled());
+    m_copyAndCloseAfterUpload->setToolTip(
+      tr("Copy URL and close window after upload"));
+    m_layout->addWidget(m_copyAndCloseAfterUpload);
+
+    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+    });
+}
+
 void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
@@ -330,6 +386,11 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
+void GeneralConf::historyConfirmationToDelete(bool checked)
+{
+    ConfigHandler().setHistoryConfirmationToDelete(checked);
+}
+
 void GeneralConf::initUseJpgForClipboard()
 {
     m_useJpgForClipboard =
@@ -364,6 +425,18 @@ void GeneralConf::changeSavePath()
         m_savePath->setText(path);
         ConfigHandler().setSavePath(path);
     }
+}
+
+void GeneralConf::initCopyPathAfterSave()
+{
+    m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
+    ConfigHandler config;
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
+    m_layout->addWidget(m_copyPathAfterSave);
+    connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
+    });
 }
 
 const QString GeneralConf::chooseFolder(const QString pathDefault)

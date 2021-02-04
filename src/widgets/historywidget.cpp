@@ -1,4 +1,5 @@
 #include "historywidget.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
@@ -10,10 +11,10 @@
 #include <QIcon>
 #include <QLabel>
 #include <QLayoutItem>
+#include <QMessageBox>
 #include <QPixmap>
 #include <QPushButton>
 #include <QScrollArea>
-#include <QSettings>
 #include <QUrl>
 #include <QVBoxLayout>
 
