@@ -85,6 +85,8 @@ public:
 
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
+    bool historyConfirmationToDelete();
+    void setHistoryConfirmationToDelete(const bool save);
     bool saveAfterCopyValue();
     void setSaveAfterCopy(const bool);
 

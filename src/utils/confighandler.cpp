@@ -488,6 +488,22 @@ void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
 {
     m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
 }
+
+bool ConfigHandler::historyConfirmationToDelete()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("historyConfirmationToDelete"))) {
+        res = m_settings.value(QStringLiteral("historyConfirmationToDelete"))
+                .toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
+{
+    m_settings.setValue(QStringLiteral("historyConfirmationToDelete"), check);
+}
+
 bool ConfigHandler::saveAfterCopyValue()
 {
     return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
