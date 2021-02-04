@@ -31,6 +31,7 @@
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
+  , m_historyConfirmationToDelete(nullptr)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
@@ -38,6 +39,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowSidePanelButton();
     initShowDesktopNotification();
     initShowTrayIcon();
+    initHistoryConfirmationToDelete();
     initCheckForUpdates();
     initAutostart();
     initShowStartupLaunchMessage();
@@ -221,6 +223,23 @@ void GeneralConf::initShowTrayIcon()
 #endif
 }
 
+void GeneralConf::initHistoryConfirmationToDelete()
+{
+    m_historyConfirmationToDelete = new QCheckBox(
+      tr("Confirmation required to delete screenshot from the latest uploads"),
+      this);
+    m_historyConfirmationToDelete->setChecked(
+      ConfigHandler().historyConfirmationToDelete());
+    m_historyConfirmationToDelete->setToolTip(
+      tr("Confirmation required to delete screenshot from the latest uploads"));
+    m_layout->addWidget(m_historyConfirmationToDelete);
+
+    connect(m_historyConfirmationToDelete,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::historyConfirmationToDelete);
+}
+
 void GeneralConf::initConfigButtons()
 {
     QHBoxLayout* buttonLayout = new QHBoxLayout();
@@ -357,6 +376,11 @@ void GeneralConf::initSaveAfterCopy()
 
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
+}
+
+void GeneralConf::historyConfirmationToDelete(bool checked)
+{
+    ConfigHandler().setHistoryConfirmationToDelete(checked);
 }
 
 void GeneralConf::saveAfterCopyChanged(bool checked)

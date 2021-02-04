@@ -41,6 +41,7 @@ private slots:
     void showTrayIconChanged(bool checked);
     void checkForUpdatesChanged(bool checked);
     void autostartChanged(bool checked);
+    void historyConfirmationToDelete(bool checked);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
     void importConfiguration();
@@ -55,6 +56,7 @@ private:
     void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
+    void initHistoryConfirmationToDelete();
     void initConfigButtons();
     void initCheckForUpdates();
     void initAutostart();
@@ -81,4 +83,5 @@ private:
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
+    QCheckBox* m_historyConfirmationToDelete;
 };

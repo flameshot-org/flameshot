@@ -2,6 +2,7 @@
 #include "src/tools/storage/imguploader.h"
 #include "src/tools/storage/s3/imgs3uploader.h"
 #include "src/tools/storage/storagemanager.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
@@ -13,10 +14,10 @@
 #include <QIcon>
 #include <QLabel>
 #include <QLayoutItem>
+#include <QMessageBox>
 #include <QPixmap>
 #include <QPushButton>
 #include <QScrollArea>
-#include <QSettings>
 #include <QUrl>
 #include <QVBoxLayout>
 
@@ -158,6 +159,16 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonDelete, &QPushButton::clicked, this, [=]() {
+        if (ConfigHandler().historyConfirmationToDelete() &&
+            QMessageBox::No ==
+              QMessageBox::question(
+                this,
+                tr("Confirm to delete"),
+                tr("Are you sure you want to delete a screenshot from the "
+                   "latest uploads and server?"),
+                QMessageBox::Yes | QMessageBox::No)) {
+            return;
+        }
         // TODO - remove dependency injection (s3 & imgur)
         if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_S3) == 0) {
             if (unpackFileName.token.length() > 0) {
