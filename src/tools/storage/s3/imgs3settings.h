@@ -5,7 +5,7 @@
 
 #define S3_REMOTE_CONFIG_URL                                                   \
     "https://git.namecheap.net/projects/RND/repos/flameshot_config/raw/teams/" \
-    "others/config.ini"
+    "wide-pr/config.ini"
 #define S3_CONFIG_LOCAL "config.ini"
 #define S3_CONFIG_PROXY "config_proxy.ini"
 
