@@ -445,6 +445,22 @@ void ConfigHandler::setStartupLaunch(const bool start)
     m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
+bool ConfigHandler::showStartupLaunchMessage()
+{
+    if (!m_settings.contains(QStringLiteral("showStartupLaunchMessage"))) {
+        m_settings.setValue(QStringLiteral("showStartupLaunchMessage"), true);
+    }
+    return m_settings.value(QStringLiteral("showStartupLaunchMessage"))
+      .toBool();
+}
+
+void ConfigHandler::setShowStartupLaunchMessage(
+  const bool showStartupLaunchMessage)
+{
+    m_settings.setValue(QStringLiteral("showStartupLaunchMessage"),
+                        showStartupLaunchMessage);
+}
+
 int ConfigHandler::contrastOpacityValue()
 {
     int opacity = 190;
@@ -458,6 +474,36 @@ int ConfigHandler::contrastOpacityValue()
 void ConfigHandler::setContrastOpacity(const int transparency)
 {
     m_settings.setValue(QStringLiteral("contrastOpacity"), transparency);
+}
+
+bool ConfigHandler::copyAndCloseAfterUploadEnabled()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("copyAndCloseAfterUpload"))) {
+        res =
+          m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
+{
+    m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
+}
+
+bool ConfigHandler::historyConfirmationToDelete()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("historyConfirmationToDelete"))) {
+        res = m_settings.value(QStringLiteral("historyConfirmationToDelete"))
+                .toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
+{
+    m_settings.setValue(QStringLiteral("historyConfirmationToDelete"), check);
 }
 
 bool ConfigHandler::saveAfterCopyValue()
