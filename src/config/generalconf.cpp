@@ -226,7 +226,7 @@ void GeneralConf::initShowTrayIcon()
 void GeneralConf::initHistoryConfirmationToDelete()
 {
     m_historyConfirmationToDelete = new QCheckBox(
-      tr("Confirmation required on delete screenshot from the latest uploads"),
+      tr("Confirmation required to delete screenshot from the latest uploads"),
       this);
     m_historyConfirmationToDelete->setChecked(
       ConfigHandler().historyConfirmationToDelete());

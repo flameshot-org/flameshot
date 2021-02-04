@@ -99,6 +99,10 @@
         <source>Delay:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Full Screen (Current Display)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CaptureWidget</name>
@@ -220,6 +224,10 @@ Press Space to open the side panel.</source>
         <source>Check for updates</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Failed to get information about the latest version.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -311,74 +319,161 @@ Press Space to open the side panel.</source>
     <name>GeneneralConf</name>
     <message>
         <source>Show help message</source>
-        <translation>Mutassa a segítséget</translation>
+        <translation type="vanished">Mutassa a segítséget</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation>Mutassa a segítséget a felvevő mód kezdetekor.</translation>
+        <translation type="vanished">Mutassa a segítséget a felvevő mód kezdetekor.</translation>
     </message>
     <message>
         <source>Show desktop notifications</source>
-        <translation>Mutassa az asztali üzeneteket</translation>
+        <translation type="vanished">Mutassa az asztali üzeneteket</translation>
     </message>
     <message>
         <source>Show tray icon</source>
-        <translation>Tray ikon mutatása</translation>
+        <translation type="vanished">Tray ikon mutatása</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
-        <translation>Systemtray ikon mutatása</translation>
+        <translation type="vanished">Systemtray ikon mutatása</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importálás</translation>
+        <translation type="vanished">Importálás</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hiba</translation>
+        <translation type="vanished">Hiba</translation>
     </message>
     <message>
         <source>Unable to read file.</source>
-        <translation>Nem lehet olvasni a fájlt.</translation>
+        <translation type="vanished">Nem lehet olvasni a fájlt.</translation>
     </message>
     <message>
         <source>Unable to write file.</source>
-        <translation>Nem lehet írni a fájlt.</translation>
+        <translation type="vanished">Nem lehet írni a fájlt.</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation>Fájl mentése</translation>
+        <translation type="vanished">Fájl mentése</translation>
     </message>
     <message>
         <source>Confirm Reset</source>
-        <translation>Visszaállítás elfogadása</translation>
+        <translation type="vanished">Visszaállítás elfogadása</translation>
     </message>
     <message>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Biztos vagy benne hogy viszaállítod a beállításokat?</translation>
+        <translation type="vanished">Biztos vagy benne hogy viszaállítod a beállításokat?</translation>
     </message>
     <message>
         <source>Configuration File</source>
-        <translation>Konfigurációs fájl</translation>
+        <translation type="vanished">Konfigurációs fájl</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation type="vanished">Export</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation>Visszaállítás</translation>
+        <translation type="vanished">Visszaállítás</translation>
     </message>
     <message>
         <source>Launch at startup</source>
-        <translation>Indítás rendszerinduláskor</translation>
+        <translation type="vanished">Indítás rendszerinduláskor</translation>
     </message>
     <message>
         <source>Launch Flameshot</source>
-        <translation>Flameshot indítása</translation>
+        <translation type="vanished">Flameshot indítása</translation>
+    </message>
+</context>
+<context>
+    <name>GeneralConf</name>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished">Importálás</translation>
     </message>
     <message>
-        <source>Close after taking a screenshot</source>
+        <source>Error</source>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Unable to read file.</source>
+        <translation type="unfinished">Nem lehet olvasni a fájlt.</translation>
+    </message>
+    <message>
+        <source>Unable to write file.</source>
+        <translation type="unfinished">Nem lehet írni a fájlt.</translation>
+    </message>
+    <message>
+        <source>Save File</source>
+        <translation type="unfinished">Fájl mentése</translation>
+    </message>
+    <message>
+        <source>Confirm Reset</source>
+        <translation type="unfinished">Visszaállítás elfogadása</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to reset the configuration?</source>
+        <translation type="unfinished">Biztos vagy benne hogy viszaállítod a beállításokat?</translation>
+    </message>
+    <message>
+        <source>Show help message</source>
+        <translation type="unfinished">Mutassa a segítséget</translation>
+    </message>
+    <message>
+        <source>Show the help message at the beginning in the capture mode.</source>
+        <translation type="unfinished">Mutassa a segítséget a felvevő mód kezdetekor.</translation>
+    </message>
+    <message>
+        <source>Show the side panel button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the side panel toggle button in the capture mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show desktop notifications</source>
+        <translation type="unfinished">Mutassa az asztali üzeneteket</translation>
+    </message>
+    <message>
+        <source>Show tray icon</source>
+        <translation type="unfinished">Tray ikon mutatása</translation>
+    </message>
+    <message>
+        <source>Show the systemtray icon</source>
+        <translation type="unfinished">Systemtray ikon mutatása</translation>
+    </message>
+    <message>
+        <source>Confirmation required to delete screenshot from the latest uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configuration File</source>
+        <translation type="unfinished">Konfigurációs fájl</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished">Export</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished">Visszaállítás</translation>
+    </message>
+    <message>
+        <source>Automatic check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch at startup</source>
+        <translation type="unfinished">Indítás rendszerinduláskor</translation>
+    </message>
+    <message>
+        <source>Launch Flameshot</source>
+        <translation type="unfinished">Flameshot indítása</translation>
+    </message>
+    <message>
+        <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -387,14 +482,6 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show the side panel toggle button in the capture mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -414,19 +501,7 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close application after capture</source>
+        <source>Use fixed path for screenshots to save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -434,7 +509,11 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use fixed path for screenshots to save</source>
+        <source>Choose a Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to write to directory.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -458,6 +537,14 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm to delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -484,26 +571,6 @@ Press Space to open the side panel.</source>
         <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
     <message>
-        <source>Unable to remove screenshot from the remote storage.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Network error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Possibly it doesn&apos;t exist anymore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to remove screenshot from local history anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove screenshot from history?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>S3 Creds URL is not found in your configuration file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -521,6 +588,10 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to upload screenshot, please check your internet connection and try again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -765,6 +836,17 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QHotkey</name>
+    <message>
+        <source>Failed to register %1. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to unregister %1. Error: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
