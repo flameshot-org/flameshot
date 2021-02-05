@@ -136,6 +136,15 @@ void ImgS3Settings::initSettings()
         : QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
             QDir::separator() + "flameshot" + QDir::separator() +
             S3_CONFIG_LOCAL;
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    if (!QFile::exists(configIniPath)) {
+        configIniPath =
+          QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +
+          QDir::separator() + ".config" + QDir::separator() + "flameshot" +
+          QDir::separator() + S3_CONFIG_LOCAL;
+    }
+#endif
 
     if (QFile::exists(configIniPath)) {
         m_localSettings = new QSettings(localConfigFilePath(configIniPath),
