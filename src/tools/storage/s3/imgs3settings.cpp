@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QNetworkProxy>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QTemporaryFile>
 
 ImgS3Settings::ImgS3Settings()
@@ -129,8 +130,15 @@ const QString& ImgS3Settings::localConfigFilePath(const QString& fileName)
 
 void ImgS3Settings::initSettings()
 {
-    if (QFile::exists(S3_CONFIG_LOCAL)) {
-        m_localSettings = new QSettings(localConfigFilePath(S3_CONFIG_LOCAL),
+    QString configIniPath =
+      QFile::exists(S3_CONFIG_LOCAL)
+        ? QDir::currentPath() + QDir::separator() + S3_CONFIG_LOCAL
+        : QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
+            QDir::separator() + "flameshot" + QDir::separator() +
+            S3_CONFIG_LOCAL;
+
+    if (QFile::exists(configIniPath)) {
+        m_localSettings = new QSettings(localConfigFilePath(configIniPath),
                                         QSettings::IniFormat);
         updateSettingsFromRemoteConfig(m_localSettings);
     } else {
