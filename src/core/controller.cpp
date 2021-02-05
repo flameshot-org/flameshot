@@ -39,6 +39,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QOperatingSystemVersion>
 #include <QSystemTrayIcon>
 
 #ifdef Q_OS_WIN
@@ -373,8 +374,14 @@ void Controller::enableTrayIcon()
     connect(captureAction, &QAction::triggered, this, [this]() {
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-        // It seems it is not relevant for MacOS (Wait 400 ms to hide the QMenu)
-        startVisualCapture();
+        auto currentMacOsVersion = QOperatingSystemVersion::current();
+        if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
+            startVisualCapture();
+        } else {
+            // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
+            // the QMenu)
+            doLater(400, this, [this]() { this->startVisualCapture(); });
+        }
 #else
       // Wait 400 ms to hide the QMenu
         doLater(400, this, [this]() { this->startVisualCapture(); });
