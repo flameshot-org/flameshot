@@ -180,6 +180,7 @@ QColor SidePanelWidget::grabPixmapColor(const QPoint& p)
 #else
         QPixmap pixel = m_pixmap->copy(QRect(p, p));
 #endif
+        c = pixel.toImage().pixel(0, 0);
     }
     return c;
 }
