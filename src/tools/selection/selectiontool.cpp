@@ -67,10 +67,10 @@ void SelectionTool::process(QPainter& painter,
     }
     painter.setPen(QPen(m_color, PADDING_VALUE + m_thickness));
     if (m_thickness == 0) {
-       painter.drawRect(QRect(m_points.first, m_points.second));
-    }
-    else {
-       painter.drawRoundedRect(QRect(m_points.first, m_points.second), m_thickness, m_thickness);
+        painter.drawRect(QRect(m_points.first, m_points.second));
+    } else {
+        painter.drawRoundedRect(
+          QRect(m_points.first, m_points.second), m_thickness, m_thickness);
     }
 }
 
