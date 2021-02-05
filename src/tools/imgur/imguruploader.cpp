@@ -18,6 +18,7 @@
 #include "imguruploader.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
+#include "src/utils/history.h"
 #include "src/utils/systemnotification.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
@@ -90,9 +91,22 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         QJsonObject json = response.object();
         QJsonObject data = json[QStringLiteral("data")].toObject();
         m_imageURL.setUrl(data[QStringLiteral("link")].toString());
+
+        auto deleteToken = data[QStringLiteral("deletehash")].toString();
         m_deleteImageURL.setUrl(
-          QStringLiteral("https://imgur.com/delete/%1")
-            .arg(data[QStringLiteral("deletehash")].toString()));
+          QStringLiteral("https://imgur.com/delete/%1").arg(deleteToken));
+
+        // save history
+        QString imageName = m_imageURL.toString();
+        int lastSlash = imageName.lastIndexOf("/");
+        if (lastSlash >= 0) {
+            imageName = imageName.mid(lastSlash + 1);
+        }
+
+        // save image to history
+        History history;
+        imageName = history.packFileName("imgur", deleteToken, imageName);
+        history.save(m_pixmap, imageName);
 
         onUploadOk();
 
