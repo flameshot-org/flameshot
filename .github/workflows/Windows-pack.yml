@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt_ver: [5.15.1]
+        qt_ver: [5.15.2]
         qt_target: [desktop]
         config:
           - {

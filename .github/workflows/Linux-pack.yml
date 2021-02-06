@@ -16,17 +16,16 @@ on:
 env:
   PRODUCT: flameshot
   RELEASE: 1
-  ARCH: x86_64
-  # dockerfiles, see https://github.com/flameshot-org/flameshot-docker-images
-  # docker images, see https://hub.docker.com/r/vitzy/flameshot
-  # vitzy/flameshot or packpack/packpack
-  DOCKER_REPO: vitzy/flameshot
-  # upload services: wetransfer.com, file.io, 0x0.st
+  # dockerfiles, see https://github.com/flameshot-org/flameshot-dockerfiles
+  # docker images, see https://hub.docker.com/r/flameshotorg/ci-building-images
+  # flameshotorg/ci-building-images or packpack/packpack
+  DOCKER_REPO: flameshotorg/ci-building-images
+  # available upload services: wetransfer.com, file.io, 0x0.st
   UPLOAD_SERVICE: wetransfer.com
 
 jobs:
   deb-pack:
-    name: ${{ matrix.dist.name }}
+    name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
@@ -35,12 +34,14 @@ jobs:
           - {
               name: debian-10,
               os: debian,
-              symbol: buster
+              symbol: buster,
+              arch: amd64
             }
           - {
               name: ubuntu-20.04,
               os: ubuntu,
-              symbol: focal
+              symbol: focal,
+              arch: amd64
             }
     steps:
       - name: Checkout Source code
@@ -72,39 +73,39 @@ jobs:
           # flameshot-org/packpack or packpack/packpack
           repository: flameshot-org/packpack
           path: tools
-      - name: Packaging on ${{ matrix.dist.name }}
+      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
         run: |
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
-          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}_${VERSION}-${RELEASE}_${{ matrix.dist.arch }}.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
         env:
           OS: ${{ matrix.dist.os }}
           DIST: ${{ matrix.dist.symbol }}
-      - name: SHA256Sum of ${{ matrix.dist.name }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb.sha256sum
-          echo "=============${{ matrix.dist.name }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb.sha256sum)
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
+          echo "=============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link============"
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum)
           echo "========no operation for you can see link in the log console======="
-      - name: Upload ${{ matrix.dist.name }} package(daily build)
+      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
         run: |
-          echo "================${{ matrix.dist.name }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.amd64.deb)
+          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2
         with:
           name: Linux-distribution-artifact
           path: |
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.amd64.deb
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.amd64.deb.sha256sum
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
 
   deb-pack-extra:
-    name: ubuntu-18.04(extra job to packaging deb)
+    name: Build deb on ubuntu-18.04 (extra job to packaging deb)
     runs-on: ubuntu-20.04
     container:
-      image: vitzy/flameshot:ubuntu-bionic
+      image: flameshotorg/ci-building-images:ubuntu-bionic
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -149,18 +150,21 @@ jobs:
       - name: Prepare cmake(>=3.13.0)
         run: |
           apt-get -y autoremove cmake
-          wget https://github.com/Kitware/CMake/releases/download/v3.18.3/cmake-3.18.3-Linux-${ARCH}.tar.gz
-          tar -xf cmake-3.18.3-Linux-${ARCH}.tar.gz
-          cd ./cmake-3.18.3-Linux-${ARCH}
+          wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}.tar.gz
+          tar -xf cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}.tar.gz
+          cd ./cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}
           cp -r bin /usr/
           cp -r share /usr/
           cp -r doc /usr/share/
           cp -r man /usr/share/
           cd ..
-          rm -rf cmake-3.18.3-Linux-${ARCH} cmake-3.18.3-Linux-${ARCH}.tar.gz
+          rm -rf cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH} cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}.tar.gz
           echo "======CMAKE VERSION======"
           cmake --version
           echo "========================="
+        env:
+          CMAKE_VERSION: "3.19.4"
+          CMAKE_ARCH: x86_64
       - name: Packaging on ubuntu-18.04
         run: |
           cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
@@ -188,26 +192,29 @@ jobs:
             ${{ github.workspace }}/build/*
 
   rpm-pack:
-    name: ${{ matrix.dist.name }}
+    name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
         dist:
           - {
-              name: fedora-31,
-              os: fedora,
-              symbol: 31
-            }
-          - {
               name: fedora-32,
               os: fedora,
-              symbol: 32
+              symbol: 32,
+              arch: x86_64
+            }
+          - {
+              name: fedora-33,
+              os: fedora,
+              symbol: 33,
+              arch: x86_64
             }
           - {
               name: opensuse-leap-15.2,
               os: opensuse-leap,
-              symbol: 15.2
+              symbol: 15.2,
+              arch: x86_64
             }
     steps:
       - name: Checkout Source code
@@ -239,7 +246,7 @@ jobs:
           # flameshot-org/packpack or packpack/packpack
           repository: flameshot-org/packpack
           path: tools
-      - name: Packaging on ${{ matrix.dist.name }}
+      - name: Packaging on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
         run: |
           cp -r $GITHUB_WORKSPACE/packaging/rpm $GITHUB_WORKSPACE
           bash $GITHUB_WORKSPACE/tools/packpack
@@ -253,34 +260,34 @@ jobs:
           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-debugsource-*.rpm
           rm -f ${{ github.workspace }}/build/${{ env.PRODUCT }}-*.src.rpm
           rm -f ${{ github.workspace }}/build/build.log
-      - name: SHA256Sum of ${{ matrix.dist.name }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
         if: matrix.dist.os == 'fedora'
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${ARCH}.rpm.sha256sum
-          echo "============${{ matrix.dist }} sha256sum download link============"
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm.sha256sum)
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
+          echo "============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link============"
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm.sha256sum)
           echo "=======no operation for you can see link in the log console======="
-      - name: SHA256Sum of ${{ matrix.dist.name }} package(daily build)
+      - name: SHA256Sum of ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
         if: matrix.dist.os == 'opensuse-leap'
         run: |
-          mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${ARCH}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm.sha256sum
-          echo "============${{ matrix.dist }} sha256sum download link==========="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm.sha256sum)
+          mv $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-lp*.${{ matrix.dist.arch }}.rpm $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
+          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
+          echo "============${{ matrix.dist.name }} ${{ matrix.dist.arch }} sha256sum download link==========="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum)
           echo "=======no operation for you can see link in the log console======"
-      - name: Upload ${{ matrix.dist.name }} package(daily build)
+      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
         if: matrix.dist.os == 'fedora'
         run: |
-          echo "================${{ matrix.dist.name }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${ARCH}.rpm)
+          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.fc*.${{ matrix.dist.arch }}.rpm)
           echo "======no operation for you can see link in the log console====="
-      - name: Upload ${{ matrix.dist.name }} package(daily build)
+      - name: Upload ${{ matrix.dist.name }} ${{ matrix.dist.arch }} package(daily build)
         if: matrix.dist.os == 'opensuse-leap'
         run: |
-          echo "================${{ matrix.dist.name }} download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${ARCH}.rpm)
+          echo "================${{ matrix.dist.name }} ${{ matrix.dist.arch }} download link==============="
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         if: matrix.dist.os == 'fedora'
@@ -296,11 +303,11 @@ jobs:
         with:
           name: Linux-distribution-artifact
           path: |
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ env.ARCH }}.rpm
-            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ env.ARCH }}.rpm.sha256sum
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm
+            ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
 
   appimage-pack:
-    name: appimage
+    name: Build appimage on ubuntu-20.04
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
@@ -353,8 +360,10 @@ jobs:
       # Will try new tool https://github.com/probonopd/go-appimage written in golang by the inventor of the AppImage format.
         run: |
           wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - \
-          | grep "appimagetool-.*-${ARCH}.AppImage" | head -n 1 | cut -d '"' -f 2) -O appimagetool
+          | grep "appimagetool-.*-${APPIMAGETOOL_ARCH}.AppImage" | head -n 1 | cut -d '"' -f 2) -O appimagetool
           chmod +x appimagetool
+        env:
+          APPIMAGETOOL_ARCH: x86_64
       - name: Packaging appimage
         run: |
           APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
@@ -368,7 +377,7 @@ jobs:
 
           mkdir -p ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts
           cp \
-            /usr/lib/${ARCH}-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
+            /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so \
             ${APPIMAGE_DST_PATH}/usr/plugins/platforminputcontexts/
 
           cp \
@@ -378,29 +387,29 @@ jobs:
           rm  ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
 
           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool ${APPIMAGE_DST_PATH}
-          mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-${ARCH}.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage
+          mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
       - name: SHA256Sum of appimage package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage
-          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage > $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage.sha256sum
+          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
+          sha256sum $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage > $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage.sha256sum
           echo "================appimage sha256sum download link==============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage.sha256sum)
           echo "======no operation for you can see link in the log console====="
       - name: Upload appimage package for daily build
         run: |
           echo "====================appimage download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.${ARCH}.AppImage)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2
         with:
           name: Linux-distribution-artifact
           path: |
-            ${{ github.workspace }}/Flameshot-*.${{ env.ARCH }}.AppImage
-            ${{ github.workspace }}/Flameshot-*.${{ env.ARCH }}.AppImage.sha256sum
+            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage
+            ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
 
   flatpak-pack:
-    name: flatpak
+    name: Build flatpak on ubuntu-20.04
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
@@ -436,7 +445,7 @@ jobs:
           flatpak install -y --noninteractive flathub org.kde.Sdk//5.15 org.kde.Platform//5.15
       - name: Packaging flatpak
         run: |
-          BUNDLE="org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak"
+          BUNDLE="org.flameshot.Flameshot_${VERSION}_x86_64.flatpak"
           MANIFEST_PATH=$GITHUB_WORKSPACE/packaging/flatpak/org.flameshot.Flameshot.yml
           RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
           APP_ID="org.flameshot.Flameshot"
@@ -444,29 +453,29 @@ jobs:
 
           flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
           flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
-          mv $GITHUB_WORKSPACE/org.flameshot.Flameshot_${VERSION}_${ARCH}.flatpak $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak
+          mv $GITHUB_WORKSPACE/org.flameshot.Flameshot_${VERSION}_x86_64.flatpak $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak
       - name: SHA256Sum of flatpak package(daily build)
         run: |
-          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak
-          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak > $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak.sha256sum
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak
+          sha256sum $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak > $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak.sha256sum
           echo "================flatpak sha256sum download link===================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak.sha256sum)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak.sha256sum)
           echo "========no operation for you can see link in the log console======="
       - name: Upload flatpak package(daily build)
         run: |
           echo "=====================flatpak download link====================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.${ARCH}.flatpak)
+          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2
         with:
           name: Linux-distribution-artifact
           path: |
-            ${{ github.workspace }}/org.flameshot.Flameshot-*.${{ env.ARCH }}.flatpak
-            ${{ github.workspace }}/org.flameshot.Flameshot-*.${{ env.ARCH }}.flatpak.sha256sum
+            ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak
+            ${{ github.workspace }}/org.flameshot.Flameshot-*.x86_64.flatpak.sha256sum
 
   snap-pack:
-    name: snap
+    name: Build snap on ubuntu-20.04
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
