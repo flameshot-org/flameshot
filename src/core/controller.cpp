@@ -58,6 +58,7 @@
 Controller::Controller()
   : m_captureWindow(nullptr)
   , m_history(nullptr)
+  , m_trayIcon(nullptr)
   , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
   , m_showCheckAppUpdateStatus(false)
@@ -369,7 +370,10 @@ void Controller::enableTrayIcon()
     if (m_trayIcon) {
         return;
     }
-    m_trayIconMenu = new QMenu();
+    if (nullptr == m_trayIconMenu) {
+        m_trayIconMenu = new QMenu();
+        Q_ASSERT(m_trayIconMenu);
+    }
 
     ConfigHandler().setDisabledTrayIcon(false);
     QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
@@ -425,7 +429,10 @@ void Controller::enableTrayIcon()
     m_trayIconMenu->addAction(quitAction);
     setCheckForUpdatesEnabled(ConfigHandler().checkForUpdates());
 
-    m_trayIcon = new QSystemTrayIcon();
+    if (nullptr == m_trayIcon) {
+        m_trayIcon = new QSystemTrayIcon();
+        Q_ASSERT(m_trayIcon);
+    }
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
 #if defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||         \
   defined(Q_OS_MACX)
@@ -439,9 +446,9 @@ void Controller::enableTrayIcon()
 #else
     m_trayIcon->setContextMenu(m_trayIconMenu);
 #endif
-    QIcon trayicon =
+    QIcon trayIcon =
       QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
-    m_trayIcon->setIcon(trayicon);
+    m_trayIcon->setIcon(trayIcon);
 
 #if defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||         \
   defined(Q_OS_MACX)
