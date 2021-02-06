@@ -27,6 +27,10 @@
 #include <QImageWriter>
 #include <QMessageBox>
 #include <QMimeData>
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+#include "src/widgets/capture/capturewidget.h"
+#endif
 
 ScreenshotSaver::ScreenshotSaver()
   : m_id(0)
@@ -117,6 +121,18 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     while (!ok) {
         ConfigHandler config;
         QString savePath = FileNameHandler().absoluteSavePath();
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        for (QWidget* widget : qApp->topLevelWidgets()) {
+            QString className(widget->metaObject()->className());
+            if (0 == className.compare(
+                       CaptureWidget::staticMetaObject.className())) {
+                widget->showNormal();
+                widget->hide();
+                break;
+            }
+        }
+#endif
         if (!config.savePathFixed()) {
             savePath = QFileDialog::getSaveFileName(
               nullptr,
