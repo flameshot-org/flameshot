@@ -26,6 +26,7 @@
 #include <QFileDialog>
 #include <QImageWriter>
 #include <QMessageBox>
+#include <QMimeData>
 
 ScreenshotSaver::ScreenshotSaver()
   : m_id(0)
@@ -54,17 +55,21 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
         if (ConfigHandler().useJpgForClipboard()) {
             QByteArray array;
             QBuffer buffer{ &array };
-            QImageWriter imageWriter{ &buffer, "JPG" };
+            QImageWriter imageWriter{ &buffer, "JPEG" };
             imageWriter.write(capture.toImage());
 
             QPixmap jpgPixmap;
             bool isLoaded = jpgPixmap.loadFromData(
-              reinterpret_cast<uchar*>(array.data()), array.size(), "JPG");
+              reinterpret_cast<uchar*>(array.data()), array.size(), "JPEG");
             if (isLoaded) {
                 // Need to send message before copying to clipboard
                 SystemNotification().sendMessage(
                   QObject::tr("Capture saved to clipboard"));
-                QApplication::clipboard()->setPixmap(jpgPixmap);
+
+                QMimeData* mimeData = new QMimeData;
+                mimeData->setData("image/jpeg", array);
+                QApplication::clipboard()->setMimeData(mimeData);
+
             } else {
                 SystemNotification().sendMessage(
                   QObject::tr("Error while saving to clipboard"));
