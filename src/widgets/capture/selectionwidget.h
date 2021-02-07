@@ -28,11 +28,11 @@ public:
     enum SideType
     {
         TOPLEFT_SIDE,
-        BOTTONLEFT_SIDE,
+        BOTTOMLEFT_SIDE,
         TOPRIGHT_SIDE,
-        BOTTONRIGHT_SIDE,
+        BOTTOMRIGHT_SIDE,
         TOP_SIDE,
-        BOTTON_SIDE,
+        BOTTOM_SIDE,
         RIGHT_SIDE,
         LEFT_SIDE,
         NO_SIDE,

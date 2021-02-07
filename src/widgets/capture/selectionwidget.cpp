@@ -53,9 +53,9 @@ SelectionWidget::SideType SelectionWidget::getMouseSide(
     } else if (m_TRArea.contains(point)) {
         return TOPRIGHT_SIDE;
     } else if (m_BLArea.contains(point)) {
-        return BOTTONLEFT_SIDE;
+        return BOTTOMLEFT_SIDE;
     } else if (m_BRArea.contains(point)) {
-        return BOTTONRIGHT_SIDE;
+        return BOTTOMRIGHT_SIDE;
     } else if (m_LArea.contains(point)) {
         return LEFT_SIDE;
     } else if (m_TArea.contains(point)) {
@@ -63,7 +63,7 @@ SelectionWidget::SideType SelectionWidget::getMouseSide(
     } else if (m_RArea.contains(point)) {
         return RIGHT_SIDE;
     } else if (m_BArea.contains(point)) {
-        return BOTTON_SIDE;
+        return BOTTOM_SIDE;
     } else {
         return NO_SIDE;
     }
