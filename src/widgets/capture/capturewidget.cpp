@@ -432,47 +432,40 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
+    bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
     if (m_mouseIsClicked && !m_activeButton) {
+        // Drawing, moving, or stretching a selection
+        m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
+        QRect inputRect;
         if (m_newSelection) {
-            m_selection->setVisible(true);
-            m_selection->setGeometry(
-              QRect(m_dragStartPoint, m_context.mousePos).normalized());
-            update();
+            // Drawing a new selection
+            inputRect = symmetryMod
+                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
+                                  m_context.mousePos)
+                          : QRect(m_dragStartPoint, m_context.mousePos);
+
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
             QRect initialRect = m_selection->savedGeometry().normalized();
             QPoint newTopLeft =
               initialRect.topLeft() + (e->pos() - m_dragStartPoint);
-            QRect finalRect(newTopLeft, initialRect.size());
+            inputRect = QRect(newTopLeft, initialRect.size());
 
-            if (finalRect.left() < rect().left()) {
-                finalRect.setLeft(rect().left());
-            } else if (finalRect.right() > rect().right()) {
-                finalRect.setRight(rect().right());
-            }
-            if (finalRect.top() < rect().top()) {
-                finalRect.setTop(rect().top());
-            } else if (finalRect.bottom() > rect().bottom()) {
-                finalRect.setBottom(rect().bottom());
-            }
-            m_selection->setGeometry(
-              finalRect.normalized().intersected(rect()));
-            update();
         } else {
             // Dragging a handle
-            QRect r = m_selection->savedGeometry();
+            inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
-            bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
             using sw = SelectionWidget;
+            QRect& r = inputRect;
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
                 m_mouseOverHandle == sw::TOP_SIDE ||
-                m_mouseOverHandle ==
-                  sw::TOPRIGHT_SIDE) { // dragging one of the top handles
+                m_mouseOverHandle == sw::TOPRIGHT_SIDE) {
+                // dragging one of the top handles
                 r.setTop(r.top() + offset.y());
                 if (symmetryMod) {
                     r.setBottom(r.bottom() - offset.y());
@@ -480,17 +473,17 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
                 m_mouseOverHandle == sw::LEFT_SIDE ||
-                m_mouseOverHandle ==
-                  sw::BOTTONLEFT_SIDE) { // dragging one of the left handles
+                m_mouseOverHandle == sw::BOTTOMLEFT_SIDE) {
+                // dragging one of the left handles
                 r.setLeft(r.left() + offset.x());
                 if (symmetryMod) {
                     r.setRight(r.right() - offset.x());
                 }
             }
-            if (m_mouseOverHandle == sw::BOTTONLEFT_SIDE ||
-                m_mouseOverHandle == sw::BOTTON_SIDE ||
-                m_mouseOverHandle ==
-                  sw::BOTTONRIGHT_SIDE) { // dragging one of the bottom handles
+            if (m_mouseOverHandle == sw::BOTTOMLEFT_SIDE ||
+                m_mouseOverHandle == sw::BOTTOM_SIDE ||
+                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) {
+                // dragging one of the bottom handles
                 r.setBottom(r.bottom() + offset.y());
                 if (symmetryMod) {
                     r.setTop(r.top() - offset.y());
@@ -498,16 +491,16 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             }
             if (m_mouseOverHandle == sw::TOPRIGHT_SIDE ||
                 m_mouseOverHandle == sw::RIGHT_SIDE ||
-                m_mouseOverHandle ==
-                  sw::BOTTONRIGHT_SIDE) { // dragging one of the right handles
+                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) {
+                // dragging one of the right handles
                 r.setRight(r.right() + offset.x());
                 if (symmetryMod) {
                     r.setLeft(r.left() - offset.x());
                 }
             }
-            m_selection->setGeometry(r.intersected(rect()).normalized());
-            update();
         }
+        m_selection->setGeometry(inputRect.intersected(rect()).normalized());
+        update();
     } else if (m_mouseIsClicked && m_activeTool) {
         // drawing with a tool
         if (m_adjustmentButtonPressed) {
@@ -1139,11 +1132,11 @@ void CaptureWidget::updateCursor()
             // cursor on the handlers
             switch (m_mouseOverHandle) {
                 case sw::TOPLEFT_SIDE:
-                case sw::BOTTONRIGHT_SIDE:
+                case sw::BOTTOMRIGHT_SIDE:
                     setCursor(Qt::SizeFDiagCursor);
                     break;
                 case sw::TOPRIGHT_SIDE:
-                case sw::BOTTONLEFT_SIDE:
+                case sw::BOTTOMLEFT_SIDE:
                     setCursor(Qt::SizeBDiagCursor);
                     break;
                 case sw::LEFT_SIDE:
@@ -1151,7 +1144,7 @@ void CaptureWidget::updateCursor()
                     setCursor(Qt::SizeHorCursor);
                     break;
                 case sw::TOP_SIDE:
-                case sw::BOTTON_SIDE:
+                case sw::BOTTOM_SIDE:
                     setCursor(Qt::SizeVerCursor);
                     break;
                 default:
