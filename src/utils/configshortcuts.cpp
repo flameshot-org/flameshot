@@ -39,6 +39,10 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
                     << QObject::tr("Resize selection down 1px")
                     << QKeySequence(Qt::SHIFT + Qt::Key_Down).toString());
 
+    m_shortcuts << (QStringList()
+                    << "TYPE_SELECT_ALL" << QObject::tr("Select entire screen")
+                    << QKeySequence(Qt::CTRL + Qt::Key_A).toString());
+
     m_shortcuts << (QStringList() << "TYPE_MOVE_LEFT"
                                   << QObject::tr("Move selection left 1px")
                                   << QKeySequence(Qt::Key_Left).toString());
