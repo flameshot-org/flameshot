@@ -1048,6 +1048,19 @@ void CaptureWidget::resizeDown()
     adjustSelection(QMargins(0, 0, 0, 1));
 }
 
+void CaptureWidget::selectAll()
+{
+    QRect newGeometry = rect();
+    m_selection->setGeometry(newGeometry);
+    m_context.selection = extendedRect(&newGeometry);
+    m_selection->setVisible(true);
+    m_showInitialMsg = false;
+    m_buttonHandler->updatePosition(m_selection->geometry());
+    updateSizeIndicator();
+    m_buttonHandler->show();
+    update();
+}
+
 void CaptureWidget::initShortcuts()
 {
     QString shortcut = ConfigHandler().shortcut(
@@ -1109,6 +1122,10 @@ void CaptureWidget::initShortcuts()
       QKeySequence(ConfigHandler().shortcut("TYPE_COMMIT_CURRENT_TOOL")),
       this,
       SLOT(commitCurrentTool()));
+
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SELECT_ALL")),
+                  this,
+                  SLOT(selectAll()));
 
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
 }
