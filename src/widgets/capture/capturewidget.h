@@ -83,6 +83,8 @@ private slots:
     void childEnter();
     void childLeave();
 
+    void selectAll();
+
     void resizeLeft();
     void resizeRight();
     void resizeUp();
