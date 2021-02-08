@@ -36,11 +36,13 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMenu>
+#include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QOperatingSystemVersion>
 #include <QSystemTrayIcon>
+#include <QThread>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -262,15 +264,29 @@ void Controller::startVisualCapture(const uint id,
     }
 #endif
 
-    if (!m_captureWindow) {
-        QWidget* modalWidget = nullptr;
-        do {
-            modalWidget = qApp->activeModalWidget();
+    if (nullptr == m_captureWindow) {
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+        // It seems that the following code is not required for MacOS because it
+        // has another type of CaptureWidget editor (FullScreen instead Flags:
+        // Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Popup
+        int timeout = 5000; // 5 seconds
+        for (; timeout >= 0; timeout -= 10) {
+            qDebug() << "timeout" << timeout;
+            QWidget* modalWidget = qApp->activeModalWidget();
             if (modalWidget) {
                 modalWidget->close();
                 modalWidget->deleteLater();
+            } else {
+                break;
             }
-        } while (modalWidget);
+            QThread::msleep(10);
+        }
+        if (0 == timeout) {
+            QMessageBox::warning(
+              nullptr, tr("Error"), tr("Unable to close active modal widgets"));
+        }
+#endif
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         // m_captureWindow = new CaptureWidget(id, forcedSavePath, false); //
