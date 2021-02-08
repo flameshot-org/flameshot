@@ -18,6 +18,7 @@
 #include "controller.h"
 #include "src/config/configwindow.h"
 #include "src/core/QHotkey/QHotkey"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
@@ -99,7 +100,7 @@ Controller::Controller()
     // Try to take a test screenshot, MacOS will request a "Screen Recording"
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
 
     // set global shortcuts for MacOS
@@ -266,15 +267,16 @@ void Controller::startVisualCapture(const uint id,
 
     if (nullptr == m_captureWindow) {
         int timeout = 5000; // 5 seconds
-        for (; timeout >= 0; timeout -= 10) {
-            QWidget* modalWidget = qApp->activeModalWidget();
-            if (modalWidget) {
-                modalWidget->close();
-                modalWidget->deleteLater();
-            } else {
+        const int delay = 100;
+        QWidget* modalWidget = nullptr;
+        for (; timeout >= 0; timeout -= delay) {
+            modalWidget = qApp->activeModalWidget();
+            if (nullptr == modalWidget) {
                 break;
             }
-            QThread::msleep(10);
+            modalWidget->close();
+            modalWidget->deleteLater();
+            QThread::msleep(delay);
         }
         if (0 == timeout) {
             QMessageBox::warning(

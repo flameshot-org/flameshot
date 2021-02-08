@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "infowindow.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -23,8 +24,6 @@
 #include <QVBoxLayout>
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-#include <QCursor>
-#include <QGuiApplication>
 #include <QRect>
 #include <QScreen>
 #endif
@@ -40,7 +39,7 @@ InfoWindow::InfoWindow(QWidget* parent)
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
-    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* screen = QGuiAppCurrentScreen().currentScreen();
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
 #endif
