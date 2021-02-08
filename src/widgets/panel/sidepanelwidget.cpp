@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "sidepanelwidget.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
 #include <QFormLayout>
@@ -26,7 +27,6 @@
 #include <QVBoxLayout>
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-#include <QGuiApplication>
 #include <QScreen>
 #endif
 
@@ -168,7 +168,7 @@ QColor SidePanelWidget::grabPixmapColor(const QPoint& p)
     if (m_pixmap) {
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         QPoint point = p;
         if (currentScreen) {
             point = QPoint((p.x() - currentScreen->geometry().x()) *

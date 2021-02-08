@@ -17,7 +17,6 @@
 
 #include "buttonhandler.h"
 #include "src/utils/globalvalues.h"
-#include <QGuiApplication>
 #include <QPoint>
 #include <QScreen>
 

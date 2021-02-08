@@ -25,6 +25,7 @@
 
 #include "capturewidget.h"
 #include "src/core/controller.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/screengrabber.h"
@@ -40,7 +41,6 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopWidget>
-#include <QGuiApplication>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -113,12 +113,9 @@ CaptureWidget::CaptureWidget(const uint id,
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
-
-            if (topLeftScreen.x() < topLeft.x()) {
-                topLeft.setX(topLeftScreen.x());
-            }
-            if (topLeftScreen.y() < topLeft.y()) {
-                topLeft.setY(topLeftScreen.y());
+            if (topLeft.x() > topLeftScreen.x() ||
+                topLeft.y() > topLeftScreen.y()) {
+                topLeft = topLeftScreen;
             }
         }
         move(topLeft);
@@ -132,7 +129,7 @@ CaptureWidget::CaptureWidget(const uint id,
         //                       Qt::NoDropShadowWindowHint | Qt::ToolTip |
         //                       Qt::Popup
         //                       );
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
@@ -153,12 +150,12 @@ CaptureWidget::CaptureWidget(const uint id,
 
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-        QPoint currentPos = QCursor::pos();
         // MacOS works just with one active display, so we need to append
         // just one current display and keep multiple displays logic for
         // other OS
-        QScreen* const screen = qGuiApp->screenAt(currentPos);
-        QRect r = screen->geometry();
+        QRect r;
+        QScreen* screen = QGuiAppCurrentScreen().currentScreen();
+        r = screen->geometry();
         // all calculations are processed according to (0, 0) start
         // point so we need to move current object to (0, 0)
         r.moveTo(0, 0);
@@ -339,16 +336,17 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
-#if (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#else
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
         QRect helpRect;
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         if (currentScreen) {
             helpRect = currentScreen->geometry();
         } else {
             helpRect = QGuiApplication::primaryScreen()->geometry();
         }
+#else
+        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
 #endif
 
         helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
@@ -472,7 +470,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             QPoint newTopLeft =
               initialRect.topLeft() + (e->pos() - m_dragStartPoint);
             inputRect = QRect(newTopLeft, initialRect.size());
-
         } else {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
@@ -729,7 +726,8 @@ void CaptureWidget::initPanel()
         panelRect.moveTo(panelRect.x() / devicePixelRatio,
                          panelRect.y() / devicePixelRatio);
 #else
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+
         if (currentScreen) {
             panelRect = currentScreen->geometry();
             auto devicePixelRatio = currentScreen->devicePixelRatio();
@@ -770,7 +768,7 @@ void CaptureWidget::initPanel()
     makeChild(m_panel);
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     m_panel->setFixedWidth(m_colorPicker->width() * 1.5);
     m_panel->setFixedHeight(currentScreen->geometry().height());
@@ -816,7 +814,10 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
         m_updateNotificationWidget =
           new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
     }
-#if (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
+     defined(Q_OS_MACX))
+    int ax = (width() - m_updateNotificationWidget->width()) / 2;
+#elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     QRect helpRect = QGuiApplication::primaryScreen()->geometry();
 #else
     QRect helpRect;
@@ -826,10 +827,9 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     } else {
         helpRect = QGuiApplication::primaryScreen()->geometry();
     }
-#endif
     int ax = helpRect.left() +
              ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
-
+#endif
     m_updateNotificationWidget->move(ax, 0);
     makeChild(m_updateNotificationWidget);
     m_updateNotificationWidget->show();
