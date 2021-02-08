@@ -335,8 +335,8 @@ void CommandLineParser::printHelp(QStringList args, const Node* node)
     }
     QString argText =
       node->subNodes.isEmpty() ? "" : "[" + QObject::tr("arguments") + "]";
-    helpText += QObject::tr("Usage") + ": %1 [%2-" + QObject::tr("options") +
-                QStringLiteral("] %3\n\n")
+    helpText += (QObject::tr("Usage") + ": %1 [%2-" + QObject::tr("options") +
+                 QStringLiteral("] %3\n\n"))
                   .arg(args.join(QStringLiteral(" ")))
                   .arg(argName)
                   .arg(argText);
