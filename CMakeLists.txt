@@ -89,7 +89,17 @@ set(QAPPLICATION_CLASS
     QApplication
     CACHE STRING "Inheritance class for SingleApplication")
 add_subdirectory(external/singleapplication)
-add_subdirectory(external/spdlog)
+
+if(USE_EXTERNAL_SPDLOG)
+    find_package(spdlog REQUIRED)
+    message(STATUS "Using external spdlog library")
+else()
+    add_subdirectory(external/spdlog)
+endif()
+
+IF (APPLE)
+  add_subdirectory(external/QHotkey)
+ENDIF ()
 add_subdirectory(src)
 
 # CPack
