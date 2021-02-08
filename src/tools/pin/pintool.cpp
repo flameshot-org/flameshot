@@ -16,8 +16,8 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "pintool.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/pin/pinwidget.h"
-#include <QGuiApplication>
 #include <QScreen>
 
 PinTool::PinTool(QObject* parent)
@@ -54,7 +54,7 @@ QWidget* PinTool::widget()
     qreal devicePixelRatio = 1;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (currentScreen) {
         devicePixelRatio = currentScreen->devicePixelRatio();
     }
