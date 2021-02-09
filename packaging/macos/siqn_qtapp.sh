@@ -70,8 +70,10 @@ do
 done
 
 if [[ "${ATTEMPT}" == 0 ]]; then
-  echo "ERROR: notarization check failed"
-  exit 1
+  export NOTARIZATION_CHECK="false"
+  echo "::warning Notarization check failed"
+else
+  export NOTARIZATION_CHECK="true"
 fi
 
 echo "--> Start verify signing process"
