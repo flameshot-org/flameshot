@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screengrabber.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
@@ -39,7 +40,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     ok = true;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     QPixmap screenPixmap(
       currentScreen->grabWindow(QApplication::desktop()->winId(),
                                 currentScreen->geometry().x(),

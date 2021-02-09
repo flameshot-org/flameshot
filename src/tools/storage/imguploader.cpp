@@ -16,16 +16,15 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imguploader.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
 #include <QClipboard>
-#include <QCursor>
 #include <QDesktopServices>
 #include <QDrag>
-#include <QGuiApplication>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLabel>
@@ -63,7 +62,7 @@ void ImgUploader::init(const QString& title, const QString& label)
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
-    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* screen = QGuiAppCurrentScreen().currentScreen();
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
 #endif

@@ -17,7 +17,6 @@
 
 #include "abstracttwopointtool.h"
 #include <QCursor>
-#include <QGuiApplication>
 #include <QScreen>
 #include <cmath>
 

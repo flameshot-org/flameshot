@@ -18,6 +18,7 @@
 #include "controller.h"
 #include "src/config/configwindow.h"
 #include "src/core/QHotkey/QHotkey"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
@@ -36,11 +37,13 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMenu>
+#include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QOperatingSystemVersion>
 #include <QSystemTrayIcon>
+#include <QThread>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -97,7 +100,7 @@ Controller::Controller()
     // Try to take a test screenshot, MacOS will request a "Screen Recording"
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
 
     // set global shortcuts for MacOS
@@ -262,15 +265,24 @@ void Controller::startVisualCapture(const uint id,
     }
 #endif
 
-    if (!m_captureWindow) {
+    if (nullptr == m_captureWindow) {
+        int timeout = 5000; // 5 seconds
+        const int delay = 100;
         QWidget* modalWidget = nullptr;
-        do {
+        for (; timeout >= 0; timeout -= delay) {
             modalWidget = qApp->activeModalWidget();
-            if (modalWidget) {
-                modalWidget->close();
-                modalWidget->deleteLater();
+            if (nullptr == modalWidget) {
+                break;
             }
-        } while (modalWidget);
+            modalWidget->close();
+            modalWidget->deleteLater();
+            QThread::msleep(delay);
+        }
+        if (0 == timeout) {
+            QMessageBox::warning(
+              nullptr, tr("Error"), tr("Unable to close active modal widgets"));
+            return;
+        }
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         // m_captureWindow = new CaptureWidget(id, forcedSavePath, false); //
