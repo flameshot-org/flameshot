@@ -40,6 +40,8 @@ jobs:
       APPLE_DEVELOPER_ID_APPLICATION_CERT_PASS: ${{ secrets.APPLE_DEVELOPER_ID_APPLICATION_CERT_PASS }}
       # Any temporary password for keychain, which will be created on github actions CI
       APPLE_TEMP_CI_KEYCHAIN_PASS: ${{ secrets.APPLE_TEMP_CI_KEYCHAIN_PASS }}
+      # Temporary variable for internal use, it will be set on the "Build dmg" step
+      NOTARIZATION_CHECK: false
 
     steps:
       - name: Checkout Source code
@@ -70,13 +72,6 @@ jobs:
           cd "${DIR_PKG}"
           ${HELPERS_SCRIPTS_PATH}/siqn_qtapp.sh flameshot
 
-#          /usr/local/opt/qt5/bin/macdeployqt flameshot.app -dmg
-
-#      - name: Update dmg package links
-#        run: |
-#          cd build/src
-#          ../../packaging/macos/update_package.sh
-
       - name: Upload dmg package
         shell: bash
         run: |
@@ -90,3 +85,13 @@ jobs:
         with:
           name: MacOS-artifact
           path: ${{ github.workspace }}/build/src/flameshot.dmg
+
+      - name: Notarization status
+        shell: bash
+        run: |
+          if [[ "${NOTARIZATION_CHECK}" == "true" ]]; then
+            echo "Notarization check succeed"
+          else
+            echo "::warning Notarization check failed"
+            # exit 1
+          fi
