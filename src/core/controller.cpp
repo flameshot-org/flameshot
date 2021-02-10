@@ -51,7 +51,6 @@
 
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
-#include <QOperatingSystemVersion>
 #include <QScreen>
 #endif
 
@@ -178,9 +177,30 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
-        if (QStringLiteral(APP_VERSION)
-              .replace("v", "")
-              .compare(m_appLatestVersion) < 0) {
+
+        // Transform strings version for correct comparison
+        QStringList appLatestVersion =
+          m_appLatestVersion.replace("v", "").split(".");
+        QStringList currentVersion =
+          QStringLiteral(APP_VERSION).replace("v", "").split(".");
+        // transform versions to the string which can be compared correctly,
+        // example: versions "0.8.5.9" and "0.8.5.10" are transformed into:
+        // "0000.0008.0005.0009" and "0000.0008.0005.0010"
+        // For string comparison you'll get:
+        // "0.8.5.9" < "0.8.5.10" INCORRECT (lower version is bigger)
+        // "0000.0008.0005.0009" > "0000.0008.0005.0010" CORRECT
+        std::transform(
+          appLatestVersion.begin(),
+          appLatestVersion.end(),
+          appLatestVersion.begin(),
+          [](QString c) -> QString { return c = ("0000" + c).right(4); });
+        std::transform(
+          currentVersion.begin(),
+          currentVersion.end(),
+          currentVersion.begin(),
+          [](QString c) -> QString { return c = ("0000" + c).right(4); });
+
+        if (currentVersion.join(".").compare(appLatestVersion.join(".")) < 0) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
