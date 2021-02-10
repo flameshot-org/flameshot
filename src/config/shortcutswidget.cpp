@@ -90,7 +90,7 @@ void ShortcutsWidget::initInfoTable()
         const auto default_key_sequence = current_shortcut.at(2);
         m_table->setItem(i, 0, new QTableWidgetItem(description));
 
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         QTableWidgetItem* item =
           new QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
 #else
@@ -145,7 +145,7 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
             }
 
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
                 QTableWidgetItem* item = new QTableWidgetItem(
                   nativeOSHotKeyText(shortcutValue.toString()));
 #else
@@ -161,7 +161,7 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
     }
 }
 
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
 const QString& ShortcutsWidget::nativeOSHotKeyText(const QString& text)
 {
     m_res = text;
