@@ -108,8 +108,8 @@ int main(int argc, char* argv[])
         app.setOrganizationName(QStringLiteral("flameshot"));
 
         auto c = Controller::getInstance();
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX) || defined(Q_OS_WIN))
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX) ||    \
+        defined(Q_OS_WIN))
         new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
@@ -125,8 +125,8 @@ int main(int argc, char* argv[])
         return app.exec();
     }
 
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX) || defined(Q_OS_WIN))
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX) ||    \
+        defined(Q_OS_WIN))
     /*--------------|
      * CLI parsing  |
      * ------------*/
