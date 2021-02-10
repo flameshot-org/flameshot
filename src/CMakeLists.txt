@@ -151,7 +151,7 @@ if (APPLE)
             flameshot
             project_warnings
             project_options
-            qhotkey
+            QHotkey
             Qt5::Svg
             Qt5::DBus
             Qt5::Network
