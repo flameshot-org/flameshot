@@ -52,7 +52,7 @@ QString PinTool::description() const
 QWidget* PinTool::widget()
 {
     qreal devicePixelRatio = 1;
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (currentScreen) {
         devicePixelRatio = currentScreen->devicePixelRatio();
@@ -62,7 +62,7 @@ QWidget* PinTool::widget()
     const int m = w->margin() * devicePixelRatio;
     QRect adjusted_pos = m_geometry + QMargins(m, m, m, m);
     w->setGeometry(adjusted_pos);
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     if (currentScreen) {
         QPoint topLeft = currentScreen->geometry().topLeft();
         adjusted_pos.setX((adjusted_pos.x() - topLeft.x()) / devicePixelRatio +

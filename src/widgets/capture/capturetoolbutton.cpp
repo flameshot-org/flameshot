@@ -134,7 +134,7 @@ static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
       { CaptureToolButton::TYPE_COPY, 14 },
       { CaptureToolButton::TYPE_SAVE, 15 },
       { CaptureToolButton::TYPE_IMAGEUPLOADER, 16 },
-#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
       { CaptureToolButton::TYPE_OPEN_APP, 17 },
       { CaptureToolButton::TYPE_EXIT, 18 }, { CaptureToolButton::TYPE_PIN, 19 },
 #else
@@ -168,7 +168,7 @@ QVector<CaptureToolButton::ButtonType>
       CaptureToolButton::TYPE_SAVE,
       CaptureToolButton::TYPE_EXIT,
       CaptureToolButton::TYPE_IMAGEUPLOADER,
-#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
       CaptureToolButton::TYPE_OPEN_APP,
 #endif
       CaptureToolButton::TYPE_PIN,
