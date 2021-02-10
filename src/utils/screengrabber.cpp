@@ -39,8 +39,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     QPixmap screenPixmap(
       currentScreen->grabWindow(QApplication::desktop()->winId(),

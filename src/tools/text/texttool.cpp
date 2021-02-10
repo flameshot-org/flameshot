@@ -130,8 +130,7 @@ CaptureTool* TextTool::copy(QObject* parent)
 void TextTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     // Not sure how will it work on 4k and fullHd on Linux or Windows with a
     // capture of different displays with different DPI, so let it be MacOS
     // specific only.
@@ -166,8 +165,7 @@ QRect TextTool::backupRect(const QPixmap& pixmap) const
 {
     const QRect& limits = pixmap.rect();
     QRect r = m_backupArea.normalized();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     const qreal pixelRatio = pixmap.devicePixelRatio();
     const int val = 5 * pixelRatio;
     if (1 != pixelRatio) {
