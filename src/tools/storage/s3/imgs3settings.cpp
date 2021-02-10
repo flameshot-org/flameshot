@@ -136,7 +136,7 @@ void ImgS3Settings::initSettings()
         : QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
             QDir::separator() + "flameshot" + QDir::separator() +
             S3_CONFIG_LOCAL;
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
+#if defined(Q_OS_MACOS)
     if (!QFile::exists(configIniPath)) {
         configIniPath =
           QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +

@@ -46,7 +46,7 @@ bool AbstractPathTool::showMousePreview() const
 void AbstractPathTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
+#if defined(Q_OS_MACOS)
     // Not sure how will it work on 4k and fullHd on Linux or Windows with a
     // capture of different displays with different DPI, so let it be MacOS
     // specific only.
@@ -85,7 +85,7 @@ void AbstractPathTool::updateBackup(const QPixmap& pixmap)
 QRect AbstractPathTool::backupRect(const QPixmap& pixmap) const
 {
     const QRect& limits = pixmap.rect();
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
+#if defined(Q_OS_MACOS)
     // Not sure how will it work on 4k and fullHd on Linux or Windows with a
     // capture of different displays with different DPI, so let it be MacOS
     // specific only.
