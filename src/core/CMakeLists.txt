@@ -1,8 +1,3 @@
-# Required to generate MOC
-IF (APPLE)
-    add_subdirectory(QHotkey)
-ENDIF ()
-
 target_sources(flameshot PRIVATE controller.h flameshotdbusadapter.h qguiappcurrentscreen.h)
 
 target_sources(flameshot PRIVATE capturerequest.cpp controller.cpp flameshotdbusadapter.cpp qguiappcurrentscreen.cpp)

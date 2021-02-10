@@ -37,8 +37,10 @@ project(
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 # This can be read from ${PROJECT_NAME} after project() is called
-if(APPLE)
+if (APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
+  # Required to generate MOC
+  add_subdirectory(external/QHotkey)
 endif()
 
 
@@ -117,7 +119,7 @@ if(WIN32)
 		# WIX (Windows .msi installer)
     # 48x48 pixels
     set(CPACK_WIX_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/data/img/app/flameshot.ico")
-    # Supported languages can be found at 
+    # Supported languages can be found at
     # http://wixtoolset.org/documentation/manual/v3/wixui/wixui_localization.html
     #set(CPACK_WIX_CULTURES "ar-SA,bg-BG,ca-ES,hr-HR,cs-CZ,da-DK,nl-NL,en-US,et-EE,fi-FI,fr-FR,de-DE")
     set(CPACK_WIX_UI_BANNER "${CMAKE_SOURCE_DIR}/packaging/win-installer/Bitmaps/CPACK_WIX_UI_BANNER.BMP")
@@ -127,7 +129,7 @@ if(WIN32)
 		set(CPACK_WIX_ROOT_FEATURE_DESCRIPTION "${CPACK_PACKAGE_DESCRIPTION_SUMMARY}")
 		set(CPACK_WIX_LIGHT_EXTRA_FLAGS "-dcl:high") # set high compression
 
-    
+
     set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/packaging/win-installer/LICENSE/GPL-3.0.txt")
     set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
 

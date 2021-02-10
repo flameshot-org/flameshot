@@ -16,8 +16,8 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
+#include "external/QHotkey/QHotkey"
 #include "src/config/configwindow.h"
-#include "src/core/QHotkey/QHotkey"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
