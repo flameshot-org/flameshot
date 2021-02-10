@@ -18,8 +18,7 @@
 #include "savetool.h"
 #include "src/utils/screenshotsaver.h"
 #include <QPainter>
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
 #include <QApplication>
 #include <QWidget>
@@ -61,8 +60,7 @@ CaptureTool* SaveTool::copy(QObject* parent)
 
 void SaveTool::pressed(const CaptureContext& context)
 {
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
         if (0 ==

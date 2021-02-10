@@ -73,8 +73,7 @@ bool AbstractTwoPointTool::showMousePreview() const
 void AbstractTwoPointTool::undo(QPixmap& pixmap)
 {
     QPainter p(&pixmap);
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     // Not sure how will it work on 4k and fullHd on Linux or Windows with a
     // capture of different displays with different DPI, so let it be MacOS
     // specific only.
@@ -122,8 +121,7 @@ QRect AbstractTwoPointTool::backupRect(const QPixmap& pixmap) const
 {
     const QRect& limits = pixmap.rect();
     QRect r = QRect(m_points.first, m_points.second).normalized();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     // Not sure how will it work on 4k and fullHd on Linux or Windows with a
     // capture of different displays with different DPI, so let it be MacOS
     // specific only.

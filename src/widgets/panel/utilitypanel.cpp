@@ -43,8 +43,7 @@ UtilityPanel::UtilityPanel(QWidget* parent)
             m_internalPanel,
             &QWidget::hide);
 
-#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
-     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     move(0, 0);
 #endif
 }
@@ -86,8 +85,7 @@ void UtilityPanel::show()
     m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
     m_internalPanel->show();
     m_showAnimation->start();
-#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
-     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     move(0, 0);
 #endif
     QWidget::show();
