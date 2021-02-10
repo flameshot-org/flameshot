@@ -62,8 +62,7 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
                 << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
                 << CaptureToolButton::TYPE_EXIT
                 << CaptureToolButton::TYPE_IMAGEUPLOADER
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX))
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
                 << CaptureToolButton::TYPE_OPEN_APP
 #endif
                 << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
@@ -328,8 +327,7 @@ void ConfigHandler::setCheckForUpdates(const bool checkForUpdates)
 
 bool ConfigHandler::startupLaunchValue()
 {
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     bool res = false;
 #else
     bool res = true;
@@ -365,8 +363,7 @@ void ConfigHandler::setStartupLaunch(const bool start)
     if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
         return;
     }
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
     /* TODO - there should be more correct way via API, but didn't find it
      without extra dependencies, there should be something like that:
      https://stackoverflow.com/questions/3358410/programmatically-run-at-startup-on-mac-os-x
