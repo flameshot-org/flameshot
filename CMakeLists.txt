@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
-set(FLAMESHOT_VERSION 0.9.0)
+set(FLAMESHOT_VERSION 0.8.5.10)
 
 # Flameshot-org
-set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
+#set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
 # Namecheap
-# set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
+set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
 # find_package (Git)
@@ -37,7 +37,7 @@ project(
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 # This can be read from ${PROJECT_NAME} after project() is called
-if(APPLE)
+if (APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
 endif()
 
