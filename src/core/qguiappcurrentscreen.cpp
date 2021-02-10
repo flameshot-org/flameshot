@@ -22,7 +22,7 @@ QScreen* QGuiAppCurrentScreen::currentScreen()
 QScreen* QGuiAppCurrentScreen::currentScreen(const QPoint& pos)
 {
     m_currentScreen = screenAt(pos);
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     // On the MacOS if mouse position is at the edge of bottom or right sides
     // qGuiApp->screenAt will return nullptr, so we need to try to find current
     // screen by moving 1 pixel inside to the current desktop area

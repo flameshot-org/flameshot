@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QUrl>
 
-#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX) ||    \
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||    \
         defined(Q_OS_WIN))
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -15,7 +15,7 @@ SystemNotification::SystemNotification(QObject* parent)
   : QObject(parent)
   , m_interface(nullptr)
 {
-#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX) ||    \
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||    \
         defined(Q_OS_WIN))
     m_interface =
       new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
@@ -41,7 +41,7 @@ void SystemNotification::sendMessage(const QString& text,
         return;
     }
 
-#if defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX) ||        \
+#if defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
   defined(Q_OS_WIN)
     Controller::getInstance()->sendTrayNotification(text, title, timeout);
 #else

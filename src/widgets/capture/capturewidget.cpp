@@ -116,7 +116,7 @@ CaptureWidget::CaptureWidget(const uint id,
         }
         move(topLeft);
         resize(pixmap().size());
-#elif (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#elif (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |
         //        Qt::BypassWindowManagerHint |
@@ -143,7 +143,7 @@ CaptureWidget::CaptureWidget(const uint id,
         topLeftOffset - topLeft;
 #endif
 
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         // MacOS works just with one active display, so we need to append
         // just one current display and keep multiple displays logic for
         // other OS
@@ -310,7 +310,7 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         QRect helpRect;
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         if (currentScreen) {
@@ -755,7 +755,7 @@ void CaptureWidget::initPanel()
     m_panel = new UtilityPanel(this);
     m_panel->hide();
     makeChild(m_panel);
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     m_panel->setFixedWidth(m_colorPicker->width() * 1.5);
@@ -802,7 +802,7 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
         m_updateNotificationWidget =
           new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
     }
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     int ax = (width() - m_updateNotificationWidget->width()) / 2;
 #else
     QRect helpRect = QGuiApplication::primaryScreen()->geometry();
@@ -1222,7 +1222,7 @@ void CaptureWidget::copyScreenshot()
 
 void CaptureWidget::saveScreenshot()
 {
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     showNormal();
 #endif
     m_captureDone = true;

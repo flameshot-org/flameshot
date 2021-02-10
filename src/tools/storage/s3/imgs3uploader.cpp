@@ -42,7 +42,7 @@
 #include <QThread>
 #include <QUrlQuery>
 #include <QVBoxLayout>
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
 #include "src/widgets/capture/capturewidget.h"
 #include <QWidget>
 #endif
@@ -350,7 +350,7 @@ void ImgS3Uploader::upload()
           QByteArray(m_s3Settings.xApiKey().toLocal8Bit()));
     }
     m_networkAMGetCreds->get(requestCreds);
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
     // Hide capture widget on MacOS
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
@@ -415,7 +415,7 @@ void ImgS3Uploader::handleReplyGetConfig(QNetworkReply* reply)
             hide();
         }
     } else if (m_s3Settings.credsUrl().isEmpty()) {
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         // Hide capture widget on MacOS (exit from full-screen mode & hide)
         for (QWidget* widget : qApp->topLevelWidgets()) {
             QString className(widget->metaObject()->className());

@@ -25,7 +25,7 @@
 #include <QPushButton>
 #include <QSlider>
 #include <QVBoxLayout>
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
 #include <QScreen>
 #endif
 
@@ -165,7 +165,7 @@ QColor SidePanelWidget::grabPixmapColor(const QPoint& p)
 {
     QColor c;
     if (m_pixmap) {
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         QPoint point = p;
         if (currentScreen) {

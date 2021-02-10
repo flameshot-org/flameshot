@@ -94,7 +94,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
         case CaptureToolButton::TYPE_REDO:
             tool = new RedoTool(parent);
             break;
-#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if not(defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
         case CaptureToolButton::TYPE_OPEN_APP:
             tool = new AppLauncher(parent);
             break;
