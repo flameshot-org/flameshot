@@ -60,7 +60,7 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
     m_captureType->insertItem(
       1, tr("Rectangular Region"), CaptureRequest::GRAPHICAL_MODE);
 
-#if (defined(Q_OS_MAC64) || defined(Q_OS_MACOS))
+#if defined(Q_OS_MACOS)
     // Following to MacOS philosophy (one application cannot be displayed on
     // more than one display)
     m_captureType->insertItem(
