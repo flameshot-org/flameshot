@@ -138,9 +138,8 @@ CaptureWidget::CaptureWidget(const uint id,
 #else
         // Disable Qt::BypassWindowManagerHint. Workaround for #583 #517
         setWindowFlags(/* Qt::BypassWindowManagerHint */
-                       Qt::WindowStaysOnTopHint
-                       | Qt::FramelessWindowHint
-                       | Qt::Tool);
+                       Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
+                       Qt::Tool);
 #endif
     }
     // Create buttons
