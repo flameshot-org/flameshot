@@ -91,11 +91,12 @@ void ShortcutsWidget::initInfoTable()
         m_table->setItem(i, 0, new QTableWidgetItem(description));
 
         const auto key_sequence = identifier.isEmpty()
-                                  ? default_key_sequence
-                                  : m_config.shortcut(identifier);
+                                    ? default_key_sequence
+                                    : m_config.shortcut(identifier);
 #if defined(Q_OS_MACOS)
-//        QTableWidgetItem* item =
-//          new QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
+        //        QTableWidgetItem* item =
+        //          new
+        //          QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
         QTableWidgetItem* item =
           new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
 #else
