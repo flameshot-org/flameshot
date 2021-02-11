@@ -66,7 +66,12 @@ void RectangleTool::process(QPainter& painter,
         painter.drawRect(QRect(m_points.first, m_points.second));
     } else {
         painter.drawRoundedRect(
-          QRect(m_points.first, m_points.second), m_thickness, m_thickness);
+          std::min(m_points.first.x(), m_points.second.x()),
+          std::min(m_points.first.y(), m_points.second.y()),
+          std::abs(m_points.first.x() - m_points.second.x()),
+          std::abs(m_points.first.y() - m_points.second.y()),
+          m_thickness,
+          m_thickness);
     }
 }
 
