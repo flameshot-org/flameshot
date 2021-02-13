@@ -357,7 +357,7 @@ jobs:
       - name: Get go-appimage tool
       # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution, 
       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
-      # Will try new tool https://github.com/probonopd/go-appimage written in golang by the inventor of the AppImage format.
+      # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
         run: |
           wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases -O - \
           | grep "appimagetool-.*-${APPIMAGETOOL_ARCH}.AppImage" | head -n 1 | cut -d '"' -f 2) -O appimagetool
@@ -384,7 +384,11 @@ jobs:
             $GITHUB_WORKSPACE/data/img/app/org.flameshot.Flameshot.png \
             ${APPIMAGE_DST_PATH}/
 
-          rm  ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
+          if [ -f "${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0" ]; then
+            rm ${APPIMAGE_DST_PATH}/lib/x86_64-linux-gnu/libxcb-glx.so.0
+          fi
+
+          chmod +x ${APPIMAGE_DST_PATH}/usr/lib64/ld-*.so.*
 
           VERSION=${VERSION} $GITHUB_WORKSPACE/appimagetool ${APPIMAGE_DST_PATH}
           mv $GITHUB_WORKSPACE/Flameshot-${VERSION}-x86_64.AppImage $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage
