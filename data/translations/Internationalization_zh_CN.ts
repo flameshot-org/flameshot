@@ -198,7 +198,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>快捷键</translation>
     </message>
 </context>
 <context>
@@ -206,17 +206,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="167"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>新版本 %1 已经可用</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="174"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>您正在运行最新版本</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="182"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法获取最近版本的信息。</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="347"/>
@@ -241,12 +241,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="363"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>检查更新</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="370"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>最近的上传(&amp;L)</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -482,13 +482,13 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="298"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>存储截图时使用固定路径</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="312"/>
         <location filename="../../src/config/geneneralconf.cpp" line="317"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>剪贴板使用 JPG 格式图片（默认为 PNG）</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="350"/>
@@ -506,27 +506,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="24"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>最近的上传</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="83"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>截图历史为空</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="132"/>
         <source>Copy URL</source>
-        <translation type="unfinished">复制链接</translation>
+        <translation>复制链接</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="136"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>链接已复制至剪贴板。</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="142"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>在浏览器中打开</translation>
     </message>
 </context>
 <context>
@@ -798,12 +798,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>注册 %1 失败；错误：%2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>解除注册 %1 失败；错误：%2</translation>
     </message>
 </context>
 <context>
@@ -833,7 +833,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="75"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>保存到剪贴板时出错</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="105"/>
@@ -844,12 +844,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="123"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>保存屏幕截图</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="148"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>捕获已保存并复制到剪贴板 </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="117"/>
@@ -948,7 +948,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>以 W H X Y 的格式输出选区几何参数。如果已指定 raw 参数则什么都不做</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
@@ -1044,7 +1044,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，火焰截图启动后将在后台运行，并在托盘显示一个图标。</translation>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
@@ -1053,84 +1053,84 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>切换侧面板</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向左调整选取大小 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向右调整选取大小 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向上调整选取大小 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向下调整选取大小 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>选择整个屏幕</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向左移动选区 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向右移动选区 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向上移动选区 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>向下移动选区 1 像素</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>在文本区域提交文本</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
         <source>Quit capture</source>
-        <translation type="unfinished">退出捕获</translation>
+        <translation>退出捕获</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation>屏幕截图历史</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="75"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>捕获屏幕</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="78"/>
         <source>Show color picker</source>
-        <translation type="unfinished">显示颜色选择器</translation>
+        <translation>显示颜色选择器</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">改变工具的厚度</translation>
+        <translation>改变工具的厚度</translation>
     </message>
 </context>
 <context>
@@ -1198,17 +1198,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>设置快捷键</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>输入新的快捷键以进行改变 </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>按下 Esc 键以取消，或按下退格键以禁用键盘快捷键。</translation>
     </message>
 </context>
 <context>
@@ -1216,22 +1216,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="41"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>热键</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">屏幕捕捉模式中的可用快捷键。</translation>
+        <translation>屏幕捕捉模式中的可用快捷键。</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Description</source>
-        <translation type="unfinished">描述</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Key</source>
-        <translation type="unfinished">键</translation>
+        <translation>键</translation>
     </message>
 </context>
 <context>
@@ -1478,22 +1478,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>新的 Flameshot %1 版已经可用</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>推迟</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
 </context>
 <context>
