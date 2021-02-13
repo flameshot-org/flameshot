@@ -3,9 +3,9 @@
 These are the code changes that need to take place
 - [ ] Create and push git tag
 - [ ] Update version in CMakeLists.txt
-- [ ] Update version and changelog at data/debian/changelog
-- [ ] Update version and changelog at data/rpm/flameshot.spec
-- [ ] Update docs/appdata/flameshot.metainfo.xml
+- [ ] Update version and changelog at packaging/debian/changelog
+- [ ] Update version and changelog at packaging/rpm/flameshot.spec
+- [ ] Update data/appdata/flameshot.metainfo.xml
 
 These are the steps for actually making the release
 - [ ] Download all binaries from CI run started from PR related to code changes shown above
