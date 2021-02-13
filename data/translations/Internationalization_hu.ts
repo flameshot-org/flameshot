@@ -173,10 +173,6 @@ Press Space to open the side panel.</source>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Storage</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -218,6 +214,10 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to get information about the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -378,18 +378,6 @@ Press Space to open the side panel.</source>
         <translation>Flameshot indítása</translation>
     </message>
     <message>
-        <source>Close after taking a screenshot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show the side panel button</source>
         <translation type="unfinished"></translation>
     </message>
@@ -422,19 +410,11 @@ Press Space to open the side panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close application after capture</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use fixed path for screenshots to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JPG format for clipboard (PNG default)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -464,125 +444,47 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Uploading Image</source>
         <translation type="obsolete">Kép felötlése</translation>
     </message>
     <message>
-        <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL másolva a vágólapra.</translation>
-    </message>
-    <message>
-        <source>Unable to remove screenshot from the remote storage.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Network error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Possibly it doesn&apos;t exist anymore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to remove screenshot from local history anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove screenshot from history?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S3 Creds URL is not found in your configuration file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Retrieving configuration file with s3 creds...</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Hiba</translation>
-    </message>
-    <message>
-        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgS3UploaderTool</name>
-    <message>
-        <source>Upload the selection to S3 bucket</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Hiba</translation>
     </message>
 </context>
 <context>
     <name>ImgUploader</name>
-    <message>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Uploading Image</source>
         <translation type="obsolete">Kép felötlése</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
+        <translation type="obsolete">Nem lehet az URL-t megnyitni.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL másolva a vágólapra.</translation>
+        <translation type="obsolete">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
-    </message>
-    <message>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="unfinished">URL másolása</translation>
+        <translation type="obsolete">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="unfinished">URL megnyitása</translation>
-    </message>
-    <message>
-        <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Kép a vágolapra.</translation>
-    </message>
-    <message>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgUploaderTool</name>
-    <message>
-        <source>Image uploader tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kép a vágolapra.</translation>
     </message>
 </context>
 <context>
@@ -593,19 +495,19 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="vanished">Kép felötlése</translation>
+        <translation>Kép felötlése</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="vanished">URL másolása</translation>
+        <translation>URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="vanished">URL megnyitása</translation>
+        <translation>URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="vanished">Kép a vágolapra.</translation>
+        <translation>Kép a vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -613,11 +515,15 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL másolva a vágólapra.</translation>
+        <translation>URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Képernyőmentés másolva a vágólapra.</translation>
+        <translation>Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -769,6 +675,17 @@ Press Space to open the side panel.</source>
     </message>
 </context>
 <context>
+    <name>QHotkey</name>
+    <message>
+        <source>Failed to register %1. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to unregister %1. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Save Error</source>
@@ -801,7 +718,7 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL másolva a vágólapra.</translation>
+        <translation type="obsolete">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Options</source>
@@ -934,15 +851,6 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hi, I&apos;m already running!
-You can find me in the system tray.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle side panel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1008,6 +916,22 @@ You can find me in the system tray.</source>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select entire screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Commit text in text area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while saving to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1316,21 +1240,6 @@ You can find me in the system tray.</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>UploadStorageConfig</name>
-    <message>
-        <source>Upload storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Imgur storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S3 storage (require config.ini file with s3 credentials)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
