@@ -336,7 +336,7 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
-#if defined(Q_OS_MACOS)
+#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
         QRect helpRect;
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         if (currentScreen) {
@@ -726,11 +726,23 @@ void CaptureWidget::initPanel()
 {
     QRect panelRect = rect();
     if (m_context.fullscreen) {
+#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        if (currentScreen) {
+            panelRect = currentScreen->geometry();
+            auto devicePixelRatio = currentScreen->devicePixelRatio();
+            panelRect.moveTo(panelRect.x() / devicePixelRatio, panelRect.y() / devicePixelRatio);
+
+        } else {
+            panelRect = QGuiApplication::primaryScreen()->geometry();
+            auto devicePixelRatio = QGuiApplication::primaryScreen()->devicePixelRatio();
+            panelRect.moveTo(panelRect.x() / devicePixelRatio, panelRect.y() / devicePixelRatio);
+        }
+#else
         panelRect = QGuiApplication::primaryScreen()->geometry();
-        auto devicePixelRatio =
-          QGuiApplication::primaryScreen()->devicePixelRatio();
-        panelRect.moveTo(panelRect.x() / devicePixelRatio,
-                         panelRect.y() / devicePixelRatio);
+        auto devicePixelRatio = QGuiApplication::primaryScreen()->devicePixelRatio();
+        panelRect.moveTo(panelRect.x() / devicePixelRatio, panelRect.y() / devicePixelRatio);
+#endif
     }
 
     ConfigHandler config;
