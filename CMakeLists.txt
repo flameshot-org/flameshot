@@ -97,9 +97,6 @@ else()
     add_subdirectory(external/spdlog)
 endif()
 
-IF (APPLE)
-  add_subdirectory(external/QHotkey)
-ENDIF ()
 add_subdirectory(src)
 
 # CPack
