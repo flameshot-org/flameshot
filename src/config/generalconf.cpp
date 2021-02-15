@@ -42,7 +42,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initHistoryConfirmationToDelete();
     initCheckForUpdates();
     initAutostart();
-    initUseJpgInsteadPngWhenCopy();
+    initUseJpgForClipboard();
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
@@ -64,7 +64,7 @@ void GeneralConf::updateComponents()
       config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
-    m_useJpgInsteadPngCheck->setChecked(config.useJpgInsteadPngWhenCopy());
+    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -380,21 +380,21 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
-void GeneralConf::initUseJpgInsteadPngWhenCopy()
+void GeneralConf::initUseJpgForClipboard()
 {
-    m_useJpgInsteadPngCheck =
-      new QCheckBox(tr("Use JPG format instead of PNG when copy"), this);
+    m_useJpgForClipboard =
+      new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
     ConfigHandler config;
-    bool checked = config.useJpgInsteadPngWhenCopy();
-    m_useJpgInsteadPngCheck->setChecked(checked);
-    m_useJpgInsteadPngCheck->setToolTip(
-      tr("Use JPG format instead of PNG when copy"));
-    m_layout->addWidget(m_useJpgInsteadPngCheck);
+    bool checked = config.useJpgForClipboard();
+    m_useJpgForClipboard->setChecked(checked);
+    m_useJpgForClipboard->setToolTip(
+      tr("Use JPG format for clipboard (PNG default)"));
+    m_layout->addWidget(m_useJpgForClipboard);
 
-    connect(m_useJpgInsteadPngCheck,
+    connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
-            &GeneralConf::useJpgInsteadPngChanged);
+            &GeneralConf::useJpgForClipboardChanged);
 }
 
 void GeneralConf::historyConfirmationToDelete(bool checked)
@@ -463,7 +463,7 @@ void GeneralConf::togglePathFixed()
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneralConf::useJpgInsteadPngChanged(bool checked)
+void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
-    ConfigHandler().setUseJpgInsteadPngWhenCopy(checked);
+    ConfigHandler().setUseJpgForClipboard(checked);
 }

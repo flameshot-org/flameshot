@@ -96,8 +96,8 @@ public:
     void setUploadStorage(const QString&);
     const QString& uploadStorage();
 
-    bool useJpgInsteadPngWhenCopy() const;
-    void setUseJpgInsteadPngWhenCopy(const bool);
+    bool useJpgForClipboard() const;
+    void setUseJpgForClipboard(const bool);
 
     void setDefaults();
     void setAllTheButtons();
