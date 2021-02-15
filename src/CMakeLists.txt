@@ -40,6 +40,11 @@ if (APPLE)
             COMMAND bash "-c" "rm -R flameshot.iconset"
     )
 
+    execute_process(
+            # copy icon from cache generated on the localhost if generation on CI failed
+            COMMAND bash "-c" "[[ -r 'flameshot.icns' ]] || cp ../packaging/macos/flameshot.icns ./"
+    )
+
     # Set application icon
     set(MACOSX_BUNDLE_ICON_FILE flameshot.icns)
 
