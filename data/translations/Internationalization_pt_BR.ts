@@ -197,7 +197,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalhos</translation>
     </message>
 </context>
 <context>
@@ -205,17 +205,17 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="167"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova versão %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="174"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Você tem a última versão</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="182"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao obter informações sobre a versão mais recente.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="347"/>
@@ -240,12 +240,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="363"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar se há atualizações</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="370"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Últimos uploads</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -481,13 +481,13 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="298"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar um caminho fixo para salvar as capturas de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="312"/>
         <location filename="../../src/config/geneneralconf.cpp" line="317"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar o formato JPG para a área de transferência (PNG por padrão)</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="350"/>
@@ -505,27 +505,27 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="24"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Últimos uploads</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="83"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>O histórico de capturas de tela está vazio</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="132"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copiar URL</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="136"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para a área de transferência.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="142"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir no navegador</translation>
     </message>
 </context>
 <context>
@@ -801,19 +801,6 @@ Pressione espaço abrir o painel lateral.</translation>
     </message>
 </context>
 <context>
-    <name>QHotkey</name>
-    <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
-        <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
-        <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="158"/>
@@ -840,7 +827,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="75"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao salvar na área de transferência</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="105"/>
@@ -851,12 +838,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="123"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="148"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>A captura é salva e copiada para a área de transferência como </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="117"/>
@@ -955,7 +942,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Imprime a geometria da seleção no formato W H X Y. Não faz nada se raw for especificado</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
@@ -1047,7 +1034,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, o Flameshot é executado em segundo plano e adiciona um ícone de bandeja para configuração.</translation>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
@@ -1060,84 +1047,84 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternar painel lateral</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionar a seleção 1px à esquerda</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionar a seleção 1px à direita</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionar a seleção 1px para cima</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Redimensionar seleção 1px para baixo</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar a tela inteira</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover a seleção 1px à esquerda</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover a seleção 1px à direita</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover a seleção 1px para cima</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover a seleção 1px para baixo</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar texto na área de texto</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Sair da captura</translation>
+        <translation>Sair da captura</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation>Histórico de capturas de tela</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="75"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar tela</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="78"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostrar seletor de cores</translation>
+        <translation>Mostrar seletor de cores</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Mudar a grossura do pincel</translation>
+        <translation>Alterar a grossura da ferramenta</translation>
     </message>
 </context>
 <context>
@@ -1205,17 +1192,17 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir atalho</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>Insira um novo atalho para alterar </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pressione Esc para cancelar ou Backspace para desabilitar o atalho de teclado.</translation>
     </message>
 </context>
 <context>
@@ -1223,22 +1210,22 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="41"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclas de atalho</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Atalhos disponívels na tela de captura.</translation>
+        <translation>Atalhos disponívels no modo de captura de tela.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Description</source>
-        <translation type="unfinished">Descrição</translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Key</source>
-        <translation type="unfinished">Tecla</translation>
+        <translation>Tecla</translation>
     </message>
 </context>
 <context>
@@ -1485,22 +1472,22 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova versão Flameshot %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais tarde</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Atualizar</translation>
     </message>
 </context>
 <context>
