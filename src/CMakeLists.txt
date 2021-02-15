@@ -58,7 +58,6 @@ if(WIN32)
   set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
 endif()
 
-
 add_subdirectory(cli)
 add_subdirectory(config)
 add_subdirectory(core)
@@ -100,7 +99,7 @@ endif()
 
 target_sources(
   flameshot
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication/singleapplication.cpp
+  PRIVATE # ${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication/singleapplication.cpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_utils.cpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_wheel.cpp
           ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/color_wheel.hpp
@@ -155,7 +154,8 @@ if (APPLE)
             Qt5::Svg
             Qt5::DBus
             Qt5::Network
-            Qt5::Widgets)
+            Qt5::Widgets
+            SingleApplication::SingleApplication)
 else ()
     target_link_libraries(
             flameshot
@@ -164,13 +164,14 @@ else ()
             Qt5::Svg
             Qt5::DBus
             Qt5::Network
-            Qt5::Widgets)
+            Qt5::Widgets
+            SingleApplication::SingleApplication)
 endif ()
 
 set(USE_OPENSSL FALSE)
 if(ENABLE_OPENSSL)
   find_package(OpenSSL)
-  if (OPENSSL_FOUND)
+  if(OPENSSL_FOUND)
     message(STATUS "OpenSSL support enabled.")
     set(USE_OPENSSL TRUE)
   endif()
@@ -185,7 +186,7 @@ endif()
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
-target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
+#target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
 target_compile_definitions(flameshot PRIVATE FLAMESHOT_APP_VERSION_URL="${GIT_API_URL}")
 
 foreach(FILE ${QM_FILES})
@@ -238,7 +239,7 @@ configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/org.flameshot.F
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/org.flameshot.Flameshot.svg
                ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg COPYONLY)
 
-## Install icon with both names
+# Install icon with both names
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/flameshot.png
                ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/flameshot.png COPYONLY)
 
@@ -248,13 +249,11 @@ configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/flameshot.png
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/flameshot.svg
                ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/flameshot.svg COPYONLY)
 
-
 # Install assets
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
 
 # Install Translations
 install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)
-
 
 # windeployqt
 if(WIN32)
@@ -266,26 +265,26 @@ if(WIN32)
     endif()
 
     add_custom_command(
-      TARGET flameshot POST_BUILD
+      TARGET flameshot
+      POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff
-      COMMAND $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations  --compiler-runtime --no-system-d3d-compiler --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
-      # copy translations manually
-      # QM_FILES
+      COMMAND
+        $ENV{QTDIR}/bin/windeployqt.exe ${BINARIES_TYPE} --no-translations --compiler-runtime --no-system-d3d-compiler
+        --no-angle --no-webkit2 --no-quick-import --dir ${CMAKE_BINARY_DIR}/windeployqt_stuff $<TARGET_FILE:flameshot>
+      # copy translations manually QM_FILES
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
-      COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations
-    )
+      COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/src/translations
+              ${CMAKE_BINARY_DIR}/windeployqt_stuff/translations)
 
-    install(
-      DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/
-      DESTINATION bin
-    )
+    install(DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/ DESTINATION bin)
 
-    if (ENABLE_OPENSSL)
-      if (EXISTS $ENV{OPENSSL_ROOT_DIR}/bin)
-        install(DIRECTORY $ENV{OPENSSL_ROOT_DIR}/bin/
-                DESTINATION bin
-                FILES_MATCHING PATTERN "*.dll"
-                )
+    if(ENABLE_OPENSSL)
+      if(EXISTS $ENV{OPENSSL_ROOT_DIR}/bin)
+        install(
+          DIRECTORY $ENV{OPENSSL_ROOT_DIR}/bin/
+          DESTINATION bin
+          FILES_MATCHING
+          PATTERN "*.dll")
       else()
         message(WARNING "Unable to find OpenSSL dlls.")
       endif()
