@@ -209,17 +209,17 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="167"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een nieuwe versie beschikbaar: %1</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="174"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Je beschikt over de nieuwste versie</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="182"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er kan geen informatie over de nieuwste versie worden opgehaald.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="347"/>
@@ -244,7 +244,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="363"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Controleren op updates</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="370"/>
@@ -499,7 +499,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../src/config/geneneralconf.cpp" line="312"/>
         <location filename="../../src/config/geneneralconf.cpp" line="317"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>JPG-bestand van klembord gebruiken (standaard: png)</translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="350"/>
@@ -875,12 +875,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kan niet worden vastgelegd. Foutmelding: &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; kan niet worden gewist. Foutmelding: &apos;%2&apos;</translation>
     </message>
 </context>
 <context>
@@ -910,7 +910,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="75"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout tijdens opslaan op klembord</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="105"/>
@@ -1025,7 +1025,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de afmetingen van de selectie in de opmaak B H X Y. Niet van toepassing als &apos;raw&apos; is opgegeven.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
@@ -1161,7 +1161,7 @@ Zoek me op in het systeemvak.</translation>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehele scherm selecteren</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
@@ -1186,7 +1186,7 @@ Zoek me op in het systeemvak.</translation>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst in tekstvak</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
@@ -1561,22 +1561,22 @@ Zoek me op in het systeemvak.</translation>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een nieuwe Flameshot-versie beschikbaar: &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Negeren</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Later</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijwerken</translation>
     </message>
 </context>
 <context>
