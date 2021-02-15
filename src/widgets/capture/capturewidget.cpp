@@ -731,17 +731,22 @@ void CaptureWidget::initPanel()
         if (currentScreen) {
             panelRect = currentScreen->geometry();
             auto devicePixelRatio = currentScreen->devicePixelRatio();
-            panelRect.moveTo(panelRect.x() / devicePixelRatio, panelRect.y() / devicePixelRatio);
+            panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                             panelRect.y() / devicePixelRatio);
 
         } else {
             panelRect = QGuiApplication::primaryScreen()->geometry();
-            auto devicePixelRatio = QGuiApplication::primaryScreen()->devicePixelRatio();
-            panelRect.moveTo(panelRect.x() / devicePixelRatio, panelRect.y() / devicePixelRatio);
+            auto devicePixelRatio =
+              QGuiApplication::primaryScreen()->devicePixelRatio();
+            panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                             panelRect.y() / devicePixelRatio);
         }
 #else
         panelRect = QGuiApplication::primaryScreen()->geometry();
-        auto devicePixelRatio = QGuiApplication::primaryScreen()->devicePixelRatio();
-        panelRect.moveTo(panelRect.x() / devicePixelRatio, panelRect.y() / devicePixelRatio);
+        auto devicePixelRatio =
+          QGuiApplication::primaryScreen()->devicePixelRatio();
+        panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                         panelRect.y() / devicePixelRatio);
 #endif
     }
 
