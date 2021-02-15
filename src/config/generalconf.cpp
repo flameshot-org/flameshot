@@ -42,6 +42,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initHistoryConfirmationToDelete();
     initCheckForUpdates();
     initAutostart();
+    initUseJpgInsteadPngWhenCopy();
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
@@ -63,6 +64,7 @@ void GeneralConf::updateComponents()
       config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_useJpgInsteadPngCheck->setChecked(config.useJpgInsteadPngWhenCopy());
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -378,6 +380,23 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
+void GeneralConf::initUseJpgInsteadPngWhenCopy()
+{
+    m_useJpgInsteadPngCheck =
+      new QCheckBox(tr("Use JPG format instead of PNG when copy"), this);
+    ConfigHandler config;
+    bool checked = config.useJpgInsteadPngWhenCopy();
+    m_useJpgInsteadPngCheck->setChecked(checked);
+    m_useJpgInsteadPngCheck->setToolTip(
+      tr("Use JPG format instead of PNG when copy"));
+    m_layout->addWidget(m_useJpgInsteadPngCheck);
+
+    connect(m_useJpgInsteadPngCheck,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::useJpgInsteadPngChanged);
+}
+
 void GeneralConf::historyConfirmationToDelete(bool checked)
 {
     ConfigHandler().setHistoryConfirmationToDelete(checked);
@@ -442,4 +461,9 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
 void GeneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
+}
+
+void GeneralConf::useJpgInsteadPngChanged(bool checked)
+{
+    ConfigHandler().setUseJpgInsteadPngWhenCopy(checked);
 }

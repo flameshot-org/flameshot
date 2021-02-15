@@ -96,6 +96,9 @@ public:
     void setUploadStorage(const QString&);
     const QString& uploadStorage();
 
+    bool useJpgInsteadPngWhenCopy() const;
+    void setUseJpgInsteadPngWhenCopy(const bool);
+
     void setDefaults();
     void setAllTheButtons();
 
