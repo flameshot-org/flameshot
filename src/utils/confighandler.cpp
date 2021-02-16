@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QKeySequence>
 #include <QProcess>
+#include <QStandardPaths>
 #include <algorithm>
 
 ConfigHandler::ConfigHandler()
@@ -346,7 +347,10 @@ bool ConfigHandler::verifyLaunchFile()
     bool res = false;
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
+    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
+                                          "autostart/",
+                                          QStandardPaths::LocateDirectory) +
+                   "Flameshot.desktop";
     res = QFile(path).exists();
 #elif defined(Q_OS_WIN)
     QSettings bootUpSettings(
@@ -392,7 +396,9 @@ void ConfigHandler::setStartupLaunch(const bool start)
                    << process.readAll();
     }
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/";
+    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
+                                          "autostart/",
+                                          QStandardPaths::LocateDirectory);
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
         autostartDir.mkpath(".");
@@ -523,6 +529,19 @@ bool ConfigHandler::copyPathAfterSaveEnabled()
 void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 {
     m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
+}
+
+bool ConfigHandler::useJpgForClipboard() const
+{
+    if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
+        return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
+    }
+    return false;
+}
+
+void ConfigHandler::setUseJpgForClipboard(const bool value)
+{
+    m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
 }
 
 void ConfigHandler::setUploadStorage(const QString& uploadStorage)

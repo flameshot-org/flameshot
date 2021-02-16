@@ -11,6 +11,7 @@ GenericName[sk]=Nástroj na zachytávanie obrazovky
 GenericName[sr]=Снимач екрана
 GenericName[uk]=Інструмент скриншотів
 GenericName[es]=Herramienta de captura de pantalla
+GenericName[pt_BR]=Ferramenta de captura de tela
 Comment=Powerful yet simple to use screenshot software.
 Comment[zh_CN]=强大又易用的屏幕截图软件
 Comment[pl]=Proste w użyciu narzędzie do zrzutów ekranu
@@ -22,12 +23,14 @@ Comment[sr]=Једноставан, а моћан алат за снимање �
 Comment[uk]=Потужний простий у використанні додаток для створення знімків екрану.
 Comment[es]=Software de captura de pantalla potente y fácil de usar.
 Comment[de]=Schlichte, leistungsstarke Screenshot-Software
+Comment[pt_BR]=Software de captura de tela poderoso, mas simples de usar.
 Keywords=flameshot;screenshot;capture;shutter;
 Keywords[zh_CN]=flameshot;screenshot;capture;shutter;截图;屏幕;
 Keywords[fr]=flameshot;capture d'écran;capter;shutter;
 Keywords[ja]=flameshot;screenshot;capture;shutter;スクリーンショット;キャプチャー;
 Keywords[es]=flameshot;screenshot;capture;shutter;captura;
 Keywords[de]=flameshot;screenshot;Bildschirmfoto;Aufnahme;
+Keywords[pt_BR]=flameshot;screenshot;captura de tela;captura;shutter;
 Exec=flameshot
 Icon=org.flameshot.Flameshot
 Terminal=false
@@ -51,6 +54,7 @@ Name[sr]=Подешавања
 Name[uk]=Налаштувати
 Name[es]=Configurar
 Name[de]=Einstellungen
+Name[pt_BR]=Configurar
 Exec=flameshot config
 
 [Desktop Action Capture]
@@ -65,6 +69,7 @@ Name[sr]=Сними екран
 Name[uk]=Зробити знімок
 Name[es]=Tomar captura de pantalla
 Name[de]=Bildschirmfoto aufnehmen
+Name[pt_BR]=Capturar tela
 Exec=flameshot gui --delay 500
 
 [Desktop Action Launcher]
@@ -72,4 +77,5 @@ Name=Open launcher
 Name[de]=Starter öffnen
 Name[sk]=Otvoriť spúšťač
 Name[zh_CN]=打开启动器
+Name[pt_BR]=Abrir lançador
 Exec=flameshot launcher

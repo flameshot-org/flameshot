@@ -16,19 +16,28 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "screenshotsaver.h"
+#include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
 #include <QApplication>
+#include <QBuffer>
 #include <QClipboard>
 #include <QFileDialog>
 #include <QImageWriter>
 #include <QMessageBox>
+#include <QMimeData>
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
 #endif
 
-ScreenshotSaver::ScreenshotSaver() {}
+ScreenshotSaver::ScreenshotSaver()
+  : m_id(0)
+{}
+
+ScreenshotSaver::ScreenshotSaver(const unsigned id)
+  : m_id(id)
+{}
 
 // TODO: If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
@@ -46,9 +55,36 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     }
     // Otherwise only save to clipboard
     else {
-        SystemNotification().sendMessage(
-          QObject::tr("Capture saved to clipboard"));
-        QApplication::clipboard()->setPixmap(capture);
+        if (ConfigHandler().useJpgForClipboard()) {
+            QByteArray array;
+            QBuffer buffer{ &array };
+            QImageWriter imageWriter{ &buffer, "JPEG" };
+            imageWriter.write(capture.toImage());
+
+            QPixmap jpgPixmap;
+            bool isLoaded = jpgPixmap.loadFromData(
+              reinterpret_cast<uchar*>(array.data()), array.size(), "JPEG");
+            if (isLoaded) {
+                // Need to send message before copying to clipboard
+                SystemNotification().sendMessage(
+                  QObject::tr("Capture saved to clipboard"));
+
+                QMimeData* mimeData = new QMimeData;
+                mimeData->setData("image/jpeg", array);
+                QApplication::clipboard()->setMimeData(mimeData);
+
+            } else {
+                SystemNotification().sendMessage(
+                  QObject::tr("Error while saving to clipboard"));
+                return;
+            }
+        } else {
+
+            // Need to send message before copying to clipboard
+            SystemNotification().sendMessage(
+              QObject::tr("Capture saved to clipboard"));
+            QApplication::clipboard()->setPixmap(capture);
+        }
     }
 }
 
@@ -59,16 +95,19 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
     QString completePath = FileNameHandler().generateAbsolutePath(path);
     completePath += QLatin1String(".png");
     bool ok = capture.save(completePath);
-    QString saveMessage;
+    QString saveMessage = messagePrefix;
     QString notificationPath = completePath;
+    if (!saveMessage.isEmpty()) {
+        saveMessage += " ";
+    }
 
     if (ok) {
         ConfigHandler().setSavePath(path);
-        saveMessage =
-          messagePrefix + QObject::tr("Capture saved as ") + completePath;
+        saveMessage += QObject::tr("Capture saved as ") + completePath;
+        Controller::getInstance()->sendCaptureSaved(
+          m_id, QFileInfo(completePath).canonicalFilePath());
     } else {
-        saveMessage = messagePrefix + QObject::tr("Error trying to save as ") +
-                      completePath;
+        saveMessage += QObject::tr("Error trying to save as ") + completePath;
         notificationPath = "";
     }
 
@@ -126,6 +165,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
                       savePath;
             }
             SystemNotification().sendMessage(msg, savePath);
+            Controller::getInstance()->sendCaptureSaved(
+              m_id, QFileInfo(savePath).canonicalFilePath());
         } else {
             QString msg = QObject::tr("Error trying to save as ") + savePath;
             QMessageBox saveErrBox(

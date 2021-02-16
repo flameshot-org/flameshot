@@ -20,12 +20,23 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <ctime>
+#include <exception>
 #include <locale>
+
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#include "spdlog/cfg/env.h"
+#include "spdlog/spdlog.h"
 
 FileNameHandler::FileNameHandler(QObject* parent)
   : QObject(parent)
 {
-    std::locale::global(std::locale(""));
+    try {
+        std::locale::global(std::locale(""));
+    } catch (std::exception& e) {
+        spdlog::error("Locales on your system are not properly configured. "
+                      "Falling back to defaults");
+        std::locale::global(std::locale("en_US.UTF-8"));
+    }
 }
 
 QString FileNameHandler::parsedPattern()

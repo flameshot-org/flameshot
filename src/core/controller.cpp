@@ -561,6 +561,11 @@ void Controller::showRecentScreenshots()
 #endif
 }
 
+void Controller::sendCaptureSaved(uint id, const QString& savePath)
+{
+    emit captureSaved(id, savePath);
+}
+
 void Controller::startFullscreenCapture(const uint id)
 {
     bool ok = true;

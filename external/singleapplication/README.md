@@ -1,5 +1,6 @@
 SingleApplication
 =================
+[![CI](https://github.com/itay-grudev/SingleApplication/workflows/CI:%20Build%20Test/badge.svg)](https://github.com/itay-grudev/SingleApplication/actions)
 
 This is a replacement of the QtSingleApplication for `Qt5`.
 
@@ -14,18 +15,6 @@ The `SingleApplication` class inherits from whatever `Q[Core|Gui]Application`
 class you specify via the `QAPPLICATION_CLASS` macro (`QCoreApplication` is the
 default). Further usage is similar to the use of the `Q[Core|Gui]Application`
 classes.
-
-The library sets up a `QLocalServer` and a `QSharedMemory` block. The first
-instance of your Application is your Primary Instance. It would check if the
-shared memory block exists and if not it will start a `QLocalServer` and listen
-for connections. Each subsequent instance of your application would check if the
-shared memory block exists and if it does, it will connect to the QLocalServer
-to notify the primary instance that a new instance had been started, after which
-it would terminate with status code `0`. In the Primary Instance
-`SingleApplication` would emit the `instanceStarted()` signal upon detecting
-that a new instance had been started.
-
-The library uses `stdlib` to terminate the program with the `exit()` function.
 
 You can use the library as if you use any other `QCoreApplication` derived
 class:
@@ -43,24 +32,49 @@ int main( int argc, char* argv[] )
 ```
 
 To include the library files I would recommend that you add it as a git
-submodule to your project and include it's contents with a `.pri` file. Here is
-how:
+submodule to your project. Here is how:
 
 ```bash
 git submodule add git@github.com:itay-grudev/SingleApplication.git singleapplication
 ```
 
-Then include the `singleapplication.pri` file in your `.pro` project file. Also
-don't forget to specify which `QCoreApplication` class your app is using if it
-is not `QCoreApplication`.
+**Qmake:**
+
+Then include the `singleapplication.pri` file in your `.pro` project file.
 
 ```qmake
 include(singleapplication/singleapplication.pri)
 DEFINES += QAPPLICATION_CLASS=QApplication
 ```
 
+**CMake:**
+
+Then include the subdirectory in your `CMakeLists.txt` project file.
+
+```cmake
+set(QAPPLICATION_CLASS QApplication CACHE STRING "Inheritance class for SingleApplication")
+add_subdirectory(src/third-party/singleapplication)
+target_link_libraries(${PROJECT_NAME} SingleApplication::SingleApplication)
+```
+
+
+The library sets up a `QLocalServer` and a `QSharedMemory` block. The first
+instance of your Application is your Primary Instance. It would check if the
+shared memory block exists and if not it will start a `QLocalServer` and listen
+for connections. Each subsequent instance of your application would check if the
+shared memory block exists and if it does, it will connect to the QLocalServer
+to notify the primary instance that a new instance had been started, after which
+it would terminate with status code `0`. In the Primary Instance
+`SingleApplication` would emit the `instanceStarted()` signal upon detecting
+that a new instance had been started.
+
+The library uses `stdlib` to terminate the program with the `exit()` function.
+
+Also don't forget to specify which `QCoreApplication` class your app is using if it
+is not `QCoreApplication` as in examples above.
+
 The `Instance Started` signal
-------------------------
+-----------------------------
 
 The SingleApplication class implements a `instanceStarted()` signal. You can
 bind to that signal to raise your application's window when a new instance had
@@ -124,6 +138,15 @@ app.isSecondary();
 
 *__Note:__ If your Primary Instance is terminated a newly launched instance
 will replace the Primary one even if the Secondary flag has been set.*
+
+Examples
+--------
+
+There are three examples provided in this repository:
+
+* Basic example that prevents a secondary instance from starting [`examples/basic`](https://github.com/itay-grudev/SingleApplication/tree/master/examples/basic)
+* An example of a graphical application raising it's parent window [`examples/calculator`](https://github.com/itay-grudev/SingleApplication/tree/master/examples/calculator)
+* A console application sending the primary instance it's command line parameters [`examples/sending_arguments`](https://github.com/itay-grudev/SingleApplication/tree/master/examples/sending_arguments)
 
 API
 ---
@@ -192,6 +215,22 @@ qint64 SingleApplication::primaryPid()
 
 Returns the process ID (PID) of the primary instance.
 
+---
+
+```cpp
+QString SingleApplication::primaryUser()
+```
+
+Returns the username the primary instance is running as.
+
+---
+
+```cpp
+QString SingleApplication::currentUser()
+```
+
+Returns the username the current instance is running as.
+
 ### Signals
 
 ```cpp
@@ -252,36 +291,14 @@ Implementation
 The library is implemented with a QSharedMemory block which is thread safe and
 guarantees a race condition will not occur. It also uses a QLocalSocket to
 notify the main process that a new instance had been spawned and thus invoke the
-`instanceStarted()` signal.
+`instanceStarted()` signal and for messaging the primary instance.
 
-To handle an issue on `*nix` systems, where the operating system owns the shared
-memory block and if the program crashes the memory remains untouched, the
-library binds to the following signals and closes the program with
-`error code = 128 + signum` where signum is the number representation of the
-signal listed below. Handling the signal is required in order to safely delete
-the `QSharedMemory` block. Each of these signals are potentially lethal and will
-results in process termination.
-
-*   `SIGHUP` - `1`, Hangup.
-*   `SIGINT` - `2`, Terminal interrupt signal
-*   `SIGQUIT` - `3`, Terminal quit signal.
-*   `SIGILL` - `4`, Illegal instruction.
-*   `SIGABRT` - `6`, Process abort signal.
-*   `SIGBUS` - `7`, Access to an undefined portion of a memory object.
-*   `SIGFPE` - `8`, Erroneous arithmetic operation (such as division by zero).
-*   `SIGSEGV` - `11`, Invalid memory reference.
-*   `SIGSYS` - `12`, Bad system call.
-*   `SIGPIPE` - `13`, Write on a pipe with no one to read it.
-*   `SIGALRM` - `14`, Alarm clock.
-*   `SIGTERM` - `15`, Termination signal.
-*   `SIGXCPU` - `24`, CPU time limit exceeded.
-*   `SIGXFSZ` - `25`, File size limit exceeded.
-
-Additionally the library can recover from being killed with uncatchable signals
-and will reset the memory block given that there are no other instances running.
+Additionally the library can recover from being forcefully killed on *nix
+systems and will reset the memory block given that there are no other
+instances running.
 
 License
 -------
 This library and it's supporting documentation are released under
-`The MIT License (MIT)` with the exception of some of the examples distributed
-under the BSD license.
+`The MIT License (MIT)` with the exception of the Qt calculator examples which
+is distributed under the BSD license.

@@ -10,11 +10,14 @@
     <h4>Powerful yet simple to use screenshot software.</h4>
   </p>
   <p>
-    <a href="https://github.com/flameshot-org/flameshot/actions">
+    <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28Linux%29">
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Linux)?label=gnu%2Flinux" alt="GNU/Linux Build Status" />
     </a>
-    <a href="https://github.com/flameshot-org/flameshot/actions">
+    <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28Windows%29">
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(Windows)?label=windows" alt="Windows Build Status" />
+    </a>
+    <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28MacOS%29">
+      <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
@@ -42,17 +45,19 @@
 
 ## Preview
 
-![image](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/_media/animatedUsage.gif)
+![image](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/docs/media/animatedUsage.gif)
 
 ## Index
 
 - [Features](#features)
 - [Usage](#usage)
   - [CLI configuration](#cli-configuration)
+  - [Config file](#config-file)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
   - [Local](#local)
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
+    - [On Ubuntu](#on-ubuntu-tested-on-1804)
 - [Considerations](#considerations)
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
@@ -160,6 +165,10 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     flameshot config -h
     ```
 
+### Config file
+You can also edit some of the settings (like overriding the default colors) in the configuration file located at `~/.config/flameshot/flameshot.ini`.
+
+
 ## Keyboard shortcuts
 
 ### Local
@@ -234,14 +243,14 @@ Steps for using the configuration:
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty mush self-explanatory.
 
-### On Ubuntu (Tested on 18.04)
+#### On Ubuntu (Tested on 18.04)
 
-Taken from [adaptation](https://askubuntu.com/posts/1039949/revisions) of [Pavel Answer on askubuntu](https://askubuntu.com/revisions/1036473/1). To use flameshot instead of default screenshot application in ubuntu we need to release the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui`.
+To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1). 
 
-1. Release the binding on <kbd>Prt Sc</kbd> using the following command.
+1. Remove the binding on <kbd>Prt Sc</kbd> using the following command.
 
   ```shell
-  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
+  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
   ```
 
 2. Go to Settings > Device > Keyboard and press the '+' button at the bottom.
@@ -250,19 +259,19 @@ Taken from [adaptation](https://askubuntu.com/posts/1039949/revisions) of [Pavel
 
 4. Then click "_Set Shortcut.._" and press <kbd>Prt Sc</kbd>. This will show as "_print_".
 
-Now everytime You press <kbd>Prt Sc</kbd> it will start the flameshot gui instead of the default application
+Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
 
 ## Considerations
 
 - Experimental Gnome Wayland and Plasma Wayland support.
 
-- If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the systemtray icon.
+- If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the system tray icon.
 
-- Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#keyboard-shortcuts) for more information.
+- Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard. Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture to a file. Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
-- Flameshot works best with a desktop environment that includes dbus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc)
+- Flameshot works best with a desktop environment that includes D-Bus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc).
 
-- In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
+- In order to speed up the first launch of Flameshot (D-Bus init of the app can be slow), consider starting the application automatically on boot.
     - Quick tip: If you don't have Flameshot to autostart at boot and you want to set keyboard shortcut, use the following as the command for the keybinding:
     ```sh
     ( flameshot &; ) && ( sleep 0.5s && flameshot gui )
@@ -272,19 +281,15 @@ Now everytime You press <kbd>Prt Sc</kbd> it will start the flameshot gui instea
 
 Flameshot can be installed on Linux and Microsoft Windows currently.
 
-There are no macOS port of flameshot now. Please participate in the development 
-of flameshot and help us make a macOS port.
+There is no macOS port of Flameshot currently that can be easily installed. But you can build Flameshot yourself and use it. Please participate in the development of Flameshot and help us make a macOS version.
 
 ### Prebuilt packages
 
-Some prebuilt packages are provided on the release page of the GitHub project
-repository.
-[Click here to visit the release page.](https://github.com/flameshot-org/flameshot/releases).
+Some prebuilt packages are provided on [the release page of the GitHub project repository](https://github.com/flameshot-org/flameshot/releases).
 
 ### Packages from Repository
 
-There are packages available in the repository of
-some Linux distributions:
+There are packages available in the repository of some Linux distributions:
 
 - [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
@@ -443,6 +448,14 @@ pacman -S qt5-svg
 pacman -S openssl ca-certificates
 ```
 
+#### MacOS
+
+First of all you need to install [brew](https://brew.sh) and than install dependencies
+```shell
+brew install qt5
+brew install cmake
+```
+
 ### Build
 
 After installing all the dependencies, finally run the following commands in the sources root directory:
@@ -453,6 +466,20 @@ cd build
 cmake ../
 make
 ```
+
+NOTE: for macOS you should replace command
+
+```shell
+cmake ../
+```
+
+to
+
+```shell
+cmake ../ -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+```
+
+When `make` command completed you can launch flameshot from `project_folder/build/src` folder
 
 ### Install
 

@@ -96,6 +96,9 @@ public:
     void setUploadStorage(const QString&);
     const QString& uploadStorage();
 
+    bool useJpgForClipboard() const;
+    void setUseJpgForClipboard(const bool);
+
     void setDefaults();
     void setAllTheButtons();
 

@@ -31,6 +31,9 @@
 #include <QTimer>
 #include <QTranslator>
 
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#include "spdlog/spdlog.h"
+
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "src/core/flameshotdbusadapter.h"
 #include "src/utils/dbusutils.h"
@@ -38,8 +41,37 @@
 #include <QDBusMessage>
 #endif
 
+int waitAfterConnecting(int delay, QCoreApplication& app)
+{
+    QTimer t;
+    t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
+    QObject::connect(&t, &QTimer::timeout, qApp, &QCoreApplication::quit);
+    t.start();
+    // wait
+    return app.exec();
+}
+
+// source: https://github.com/ksnip/ksnip/issues/416
+void wayland_hacks()
+{
+    // Workaround to https://github.com/ksnip/ksnip/issues/416
+    QByteArray currentDesktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
+    QByteArray sessionDesktop = qgetenv("XDG_SESSION_DESKTOP").toLower();
+    QByteArray sessionType = qgetenv("XDG_SESSION_TYPE").toLower();
+    if (sessionType.contains("wayland") && (currentDesktop.contains("gnome") ||
+                                            sessionDesktop.contains("gnome"))) {
+        qputenv("QT_QPA_PLATFORM", "xcb");
+    }
+}
+
 int main(int argc, char* argv[])
 {
+#ifdef Q_OS_LINUX
+    wayland_hacks();
+#endif
+    spdlog::set_level(spdlog::level::debug); // Set global log level to debug
+    spdlog::set_pattern("[source %s] [function %!] [line %#] %v");
+
     // required for the button serialization
     // TODO: change to QVector in v1.0
     qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");

@@ -59,6 +59,7 @@ public:
 signals:
     void captureTaken(uint id, QPixmap p);
     void captureFailed(uint id);
+    void captureSaved(uint id, QString savePath);
 
 public slots:
     void requestCapture(const CaptureRequest& request);
@@ -77,6 +78,8 @@ public slots:
     void updateConfigComponents();
 
     void showRecentScreenshots();
+
+    void sendCaptureSaved(uint id, const QString& savePath);
 
 private slots:
     void startFullscreenCapture(const uint id = 0);

@@ -18,6 +18,10 @@
 #include "circlecounttool.h"
 #include "colorutils.h"
 #include <QPainter>
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#include "spdlog/cfg/env.h"
+#include "spdlog/spdlog.h"
+
 namespace {
 #define PADDING_VALUE 2
 }
@@ -126,7 +130,6 @@ void CircleCountTool::drawStart(const CaptureContext& context)
     }
     m_points.first = context.mousePos;
     m_count = context.circleCount;
-    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)

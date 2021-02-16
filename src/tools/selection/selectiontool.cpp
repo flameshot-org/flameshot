@@ -65,7 +65,7 @@ void SelectionTool::process(QPainter& painter,
     if (recordUndo) {
         updateBackup(pixmap);
     }
-    painter.setPen(QPen(m_color, m_thickness));
+    painter.setPen(QPen(m_color, PADDING_VALUE + m_thickness));
     painter.drawRect(QRect(m_points.first, m_points.second));
 }
 
@@ -79,7 +79,7 @@ void SelectionTool::paintMousePreview(QPainter& painter,
 void SelectionTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
+    m_thickness = context.thickness;
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
 }

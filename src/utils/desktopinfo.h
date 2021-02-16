@@ -28,7 +28,8 @@ public:
     {
         GNOME,
         KDE,
-        OTHER
+        OTHER,
+        SWAY
     };
 
     bool waylandDectected();

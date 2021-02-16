@@ -119,7 +119,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
         elemsAtCorners -= elemCornersTop;
         int elemCornersBotton = qBound(0, elemsAtCorners, maxExtra);
 
-        // Add buttons at the button of the seletion
+        // Add buttons at the button of the selection
         if (!m_blockedBotton) {
             int addCounter = buttonsPerRow + elemCornersBotton;
             // Don't add more than we have
@@ -134,7 +134,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
               horizontalPoints(center, addCounter, true);
             moveButtonsToPoints(positions, elemIndicator);
         }
-        // Add buttons at the right side of the seletion
+        // Add buttons at the right side of the selection
         if (!m_blockedRight && elemIndicator < vecLength) {
             int addCounter = buttonsPerCol;
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);
@@ -145,7 +145,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
               verticalPoints(center, addCounter, false);
             moveButtonsToPoints(positions, elemIndicator);
         }
-        // Add buttons at the top of the seletion
+        // Add buttons at the top of the selection
         if (!m_blockedTop && elemIndicator < vecLength) {
             int addCounter = buttonsPerRow + elemCornersTop;
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);
@@ -158,7 +158,7 @@ void ButtonHandler::updatePosition(const QRect& selection)
               horizontalPoints(center, addCounter, false);
             moveButtonsToPoints(positions, elemIndicator);
         }
-        // Add buttons at the left side of the seletion
+        // Add buttons at the left side of the selection
         if (!m_blockedLeft && elemIndicator < vecLength) {
             int addCounter = buttonsPerCol;
             addCounter = qBound(0, addCounter, vecLength - elemIndicator);

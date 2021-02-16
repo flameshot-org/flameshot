@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="kr_KR">
+<TS version="2.1" language="ko_KR">
 <context>
     <name>AppLauncher</name>
     <message>
-        <location filename="../../src/tools/launcher/applaunchertool.cpp" line="40"/>
+        <location filename="../../src/tools/launcher/applaunchertool.cpp" line="37"/>
         <source>App Launcher</source>
         <translation>프로그램 런처</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applaunchertool.cpp" line="52"/>
+        <location filename="../../src/tools/launcher/applaunchertool.cpp" line="47"/>
         <source>Choose an app to open the capture</source>
         <translation>캡처를 열 프로그램을 선택</translation>
     </message>
@@ -32,18 +32,18 @@
         <translation>선택한 뒤에도 열어두기</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="124"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="108"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="123"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="124"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="123"/>
         <source>Unable to launch in terminal.</source>
         <translation>터미널로 실행할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="108"/>
         <source>Unable to write in</source>
         <translation>작성할 수 없음</translation>
     </message>
@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="92"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="88"/>
         <source>Arrow</source>
         <translation>화살표</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="104"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="98"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>페인트 도구를 화살표로 설정</translation>
     </message>
@@ -75,47 +75,47 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="64"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
         <translation>캡처 모드</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="71"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
         <source>Rectangular Region</source>
         <translation>사각 영역</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source>Full Screen (All Monitors)</source>
         <translation>전체화면 (모든 모니터)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="81"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="80"/>
         <source>No Delay</source>
         <translation>지연 없음</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
         <source> second</source>
         <translation> 초</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="88"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
         <source> seconds</source>
         <translation> 초</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="92"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="91"/>
         <source>Take new screenshot</source>
         <translation>새로운 스크린샷</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="100"/>
         <source>Area:</source>
         <translation>영역:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="102"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="101"/>
         <source>Delay:</source>
         <translation>지연:</translation>
     </message>
@@ -123,12 +123,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="97"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="105"/>
         <source>Unable to capture screen</source>
         <translation>화면을 캡처할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="257"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="340"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -140,16 +140,21 @@ Enter로 눌러 화면을 캡처합니다.
 마우스 휠로 사용자 도구의 두께를 바꿉니다.
 Space로 사이드 패널을 엽니다.</translation>
     </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="734"/>
+        <source>Tool Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="39"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="42"/>
         <source>Circle Counter</source>
         <translation>원형 카운터</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="51"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="52"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation type="unfinished"></translation>
     </message>
@@ -157,12 +162,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>CircleTool</name>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="40"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="38"/>
         <source>Circle</source>
         <translation>원형</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="52"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="48"/>
         <source>Set the Circle as the paint tool</source>
         <translation>페인트 도구로 원형을 선택</translation>
     </message>
@@ -170,7 +175,7 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="43"/>
+        <location filename="../../src/config/configwindow.cpp" line="42"/>
         <source>Configuration</source>
         <translation>설정</translation>
     </message>
@@ -189,31 +194,65 @@ Space로 사이드 패널을 엽니다.</translation>
         <source>General</source>
         <translation>일반</translation>
     </message>
+    <message>
+        <location filename="../../src/config/configwindow.cpp" line="77"/>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="202"/>
+        <location filename="../../src/core/controller.cpp" line="167"/>
+        <source>New version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="174"/>
+        <source>You have the latest version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="182"/>
+        <source>Failed to get information about the latest version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="347"/>
         <source>&amp;Take Screenshot</source>
         <translation>스크린샷 촬영(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="207"/>
+        <location filename="../../src/core/controller.cpp" line="352"/>
         <source>&amp;Open Launcher</source>
         <translation>런처 열기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="210"/>
+        <location filename="../../src/core/controller.cpp" line="357"/>
         <source>&amp;Configuration</source>
         <translation>설정(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="213"/>
-        <source>&amp;Information</source>
-        <translation>정보(&amp;I)</translation>
+        <location filename="../../src/core/controller.cpp" line="360"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="215"/>
+        <location filename="../../src/core/controller.cpp" line="363"/>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="370"/>
+        <source>&amp;Latest Uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Information</source>
+        <translation type="vanished">정보(&amp;I)</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="366"/>
         <source>&amp;Quit</source>
         <translation>종료(&amp;Q)</translation>
     </message>
@@ -221,12 +260,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>CopyTool</name>
     <message>
-        <location filename="../../src/tools/copy/copytool.cpp" line="41"/>
+        <location filename="../../src/tools/copy/copytool.cpp" line="38"/>
         <source>Copy</source>
         <translation>복사</translation>
     </message>
     <message>
-        <location filename="../../src/tools/copy/copytool.cpp" line="53"/>
+        <location filename="../../src/tools/copy/copytool.cpp" line="48"/>
         <source>Copy the selection into the clipboard</source>
         <translation>선택 영역을 클립보드에 복사</translation>
     </message>
@@ -234,7 +273,7 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../../src/utils/dbusutils.cpp" line="52"/>
+        <location filename="../../src/utils/dbusutils.cpp" line="70"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus에 접속할 수 없습니다</translation>
     </message>
@@ -242,12 +281,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>ExitTool</name>
     <message>
-        <location filename="../../src/tools/exit/exittool.cpp" line="40"/>
+        <location filename="../../src/tools/exit/exittool.cpp" line="37"/>
         <source>Exit</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../../src/tools/exit/exittool.cpp" line="52"/>
+        <location filename="../../src/tools/exit/exittool.cpp" line="47"/>
         <source>Leave the capture screen</source>
         <translation>화면 캡쳐를 종료</translation>
     </message>
@@ -255,47 +294,47 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>FileNameEditor</name>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="39"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="38"/>
         <source>Edit the name of your captures:</source>
         <translation>캡처 파일명 수정:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="43"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="42"/>
         <source>Edit:</source>
         <translation>편집:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="45"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="44"/>
         <source>Preview:</source>
         <translation>미리보기:</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="88"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="87"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="91"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="90"/>
         <source>Saves the pattern</source>
         <translation>패턴을 저장</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="93"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="92"/>
         <source>Reset</source>
         <translation>초기화</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="96"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="95"/>
         <source>Restores the saved pattern</source>
         <translation>저장된 패턴으로 되돌리기</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="98"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="97"/>
         <source>Clear</source>
         <translation>지우기</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="102"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="101"/>
         <source>Deletes the name</source>
         <translation>이름을 삭제하다</translation>
     </message>
@@ -303,51 +342,52 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="162"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="160"/>
         <source>Show help message</source>
         <translation type="unfinished">도움 메세지 보기</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="166"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="164"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>캡처 모드 시작에 도움 메세지 보기.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="177"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="181"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="189"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="193"/>
         <source>Show desktop notifications</source>
         <translation>데스크톱 알림 사용</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="194"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="205"/>
         <source>Show tray icon</source>
         <translation>트레이 아이콘 보기</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="198"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="209"/>
         <source>Show the systemtray icon</source>
         <translation>시스템 트레이 아이콘 보기</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="102"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="225"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="103"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="235"/>
         <source>Import</source>
         <translation>불러오기</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="109"/>
-        <location filename="../../src/config/geneneralconf.cpp" line="117"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="110"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="118"/>
         <location filename="../../src/config/geneneralconf.cpp" line="141"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="359"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="109"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="110"/>
         <source>Unable to read file.</source>
         <translation>파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="117"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="118"/>
         <location filename="../../src/config/geneneralconf.cpp" line="141"/>
         <source>Unable to write file.</source>
         <translation>파일을 작성할 수 없습니다.</translation>
@@ -358,107 +398,182 @@ Space로 사이드 패널을 엽니다.</translation>
         <translation>파일을 저장</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="151"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="150"/>
         <source>Confirm Reset</source>
         <translation>초기화 확인</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="152"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="151"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>설정을 초기화해도 괜찮습니까?</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="213"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="176"/>
+        <source>Show the side panel button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="179"/>
+        <source>Show the side panel toggle button in the capture mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="223"/>
         <source>Configuration File</source>
         <translation>설정 파일</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="218"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="228"/>
         <source>Export</source>
         <translation>내보내기</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="232"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="242"/>
         <source>Reset</source>
         <translation>초기화</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="243"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="252"/>
         <source>Launch at startup</source>
         <translatorcomment>startup의 적절한 번역이 필요합니다.</translatorcomment>
         <translation>컴퓨터를 시작할 때 실행</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="247"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="256"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot을 실행</translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="257"/>
-        <source>Close after capture</source>
-        <translation>캡처 후 닫기</translation>
+        <location filename="../../src/config/geneneralconf.cpp" line="265"/>
+        <source>Save image after copy</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="261"/>
-        <source>Close after taking a screenshot</source>
-        <translation>스크린샷을 찍은 후 닫기</translation>
+        <location filename="../../src/config/geneneralconf.cpp" line="266"/>
+        <source>Save image file after copying it</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/geneneralconf.cpp" line="273"/>
-        <source>Copy URL after upload</source>
-        <translation>업로드 이후 URL 복사</translation>
+        <source>Save Path</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/geneneralconf.cpp" line="278"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="290"/>
+        <source>Change...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="298"/>
+        <source>Use fixed path for screenshots to save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="312"/>
+        <location filename="../../src/config/geneneralconf.cpp" line="317"/>
+        <source>Use JPG format for clipboard (PNG default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="350"/>
+        <source>Choose a Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/geneneralconf.cpp" line="359"/>
+        <source>Unable to write to directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close after capture</source>
+        <translation type="vanished">캡처 후 닫기</translation>
+    </message>
+    <message>
+        <source>Close after taking a screenshot</source>
+        <translation type="vanished">스크린샷을 찍은 후 닫기</translation>
+    </message>
+    <message>
+        <source>Copy URL after upload</source>
+        <translation type="vanished">업로드 이후 URL 복사</translation>
+    </message>
+    <message>
         <source>Copy URL and close window after upload</source>
-        <translation>업로드 이후 URL을 복사하고 창 닫기</translation>
+        <translation type="vanished">업로드 이후 URL을 복사하고 창 닫기</translation>
+    </message>
+</context>
+<context>
+    <name>HistoryWidget</name>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="24"/>
+        <source>Latest Uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="83"/>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="132"/>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL을 복사</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="136"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL을 클립보드에 복사했습니다.</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/historywidget.cpp" line="142"/>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="48"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Upload to Imgur</source>
         <translation>Imgur에 업로드</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="55"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="67"/>
         <source>Uploading Image</source>
         <translation>이미지를 업로드하는 중</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="156"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="173"/>
         <source>Copy URL</source>
         <translation>URL을 복사</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="157"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="174"/>
         <source>Open URL</source>
         <translation>URL 열기</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="158"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="175"/>
         <source>Delete image</source>
         <translation>이미지를 삭제</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="159"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="176"/>
         <source>Image to Clipboard.</source>
         <translation>이미지를 클립보드로.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="184"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="200"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="214"/>
         <source>Unable to open the URL.</source>
         <translation>URL을 열 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="207"/>
         <source>URL copied to clipboard.</source>
         <translation>URL을 클립보드에 복사했습니다.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="208"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="221"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>스크린샷을 클립보드에 복사했습니다.</translation>
     </message>
@@ -466,12 +581,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="41"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
         <translation>이미지 업로더</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="53"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="48"/>
         <source>Upload the selection to Imgur</source>
         <translation>Imgur에 선택영역을 업로드</translation>
     </message>
@@ -479,110 +594,94 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="40"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="39"/>
         <source>About</source>
         <translation>이 어플리케이션에 대하여</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="62"/>
         <source>SPACEBAR</source>
-        <translation>스페이스바</translation>
+        <translation type="vanished">스페이스바</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="63"/>
         <source>Right Click</source>
-        <translation>우클릭</translation>
+        <translation type="vanished">우클릭</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="64"/>
         <source>Mouse Wheel</source>
-        <translation>마우스 휠</translation>
+        <translation type="vanished">마우스 휠</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="67"/>
         <source>Move selection 1px</source>
-        <translation>선택 영역을 1px 이동</translation>
+        <translation type="vanished">선택 영역을 1px 이동</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="68"/>
         <source>Resize selection 1px</source>
-        <translation>선택 영역을 1px 조정</translation>
+        <translation type="vanished">선택 영역을 1px 조정</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="69"/>
         <source>Quit capture</source>
-        <translation>캡처를 종료</translation>
+        <translation type="vanished">캡처를 종료</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="70"/>
         <source>Copy to clipboard</source>
-        <translation>클립보드에 복사</translation>
+        <translation type="vanished">클립보드에 복사</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="71"/>
         <source>Save selection as a file</source>
-        <translation>선택 영역을 파일로 저장</translation>
+        <translation type="vanished">선택 영역을 파일로 저장</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="72"/>
         <source>Undo the last modification</source>
-        <translation>마지막 변경 되돌리기</translation>
+        <translation type="vanished">마지막 변경 되돌리기</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="73"/>
         <source>Toggle visibility of sidebar with options of the selected tool</source>
-        <translation>사이드바를 열어 선택한 도구의 옵션보기</translation>
+        <translation type="vanished">사이드바를 열어 선택한 도구의 옵션보기</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="74"/>
         <source>Show color picker</source>
-        <translation>색상 선택기를 표시</translation>
+        <translation type="vanished">색상 선택기를 표시</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="75"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>도구 두께 변경</translation>
+        <translation type="vanished">도구 두께 변경</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="93"/>
         <source>Key</source>
-        <translation>키</translation>
+        <translation type="vanished">키</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="93"/>
         <source>Description</source>
-        <translation>설명</translation>
+        <translation type="vanished">설명</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="126"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="61"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;라이센스&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="134"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="70"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;버전&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="145"/>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;단축키&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;단축키&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="82"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>화면 캡처 모드에서 단축키를 사용할 수 있습니다.</translation>
+        <translation type="vanished">화면 캡처 모드에서 단축키를 사용할 수 있습니다.</translation>
     </message>
 </context>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="43"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="41"/>
         <source>Line</source>
         <translation>직선</translation>
     </message>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="55"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="51"/>
         <source>Set the Line as the paint tool</source>
         <translation>페인트 도구로 직선을 설정</translation>
     </message>
@@ -590,12 +689,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="43"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="41"/>
         <source>Marker</source>
         <translation>마커</translation>
     </message>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="55"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="51"/>
         <source>Set the Marker as the paint tool</source>
         <translation>페인트 도구로 마커를 설정</translation>
     </message>
@@ -603,12 +702,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>MoveTool</name>
     <message>
-        <location filename="../../src/tools/move/movetool.cpp" line="40"/>
+        <location filename="../../src/tools/move/movetool.cpp" line="37"/>
         <source>Move</source>
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../../src/tools/move/movetool.cpp" line="52"/>
+        <location filename="../../src/tools/move/movetool.cpp" line="47"/>
         <source>Move the selection area</source>
         <translation>선택 영역을 이동</translation>
     </message>
@@ -616,12 +715,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>PencilTool</name>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="34"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="32"/>
         <source>Pencil</source>
         <translation>연필</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="46"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="42"/>
         <source>Set the Pencil as the paint tool</source>
         <translation>페인트 도구로 연필을 설정</translation>
     </message>
@@ -629,12 +728,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>PinTool</name>
     <message>
-        <location filename="../../src/tools/pin/pintool.cpp" line="40"/>
+        <location filename="../../src/tools/pin/pintool.cpp" line="37"/>
         <source>Pin Tool</source>
         <translation>고정 도구</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pin/pintool.cpp" line="52"/>
+        <location filename="../../src/tools/pin/pintool.cpp" line="47"/>
         <source>Pin image on the desktop</source>
         <translation>선택 영역을 데스크톱 위에 고정</translation>
     </message>
@@ -642,74 +741,355 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="39"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Pixelate</source>
         <translation>픽셀화</translation>
     </message>
     <message>
-        <location filename="../../src/tools/blur/blurtool.cpp" line="51"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="47"/>
         <source>Set Pixelate as the paint tool</source>
         <translation>페인트 도구로 픽셀화를 설정</translation>
     </message>
 </context>
 <context>
+    <name>QHotkey</name>
+    <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
+        <source>Failed to register %1. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
+        <source>Failed to unregister %1. Error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="93"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="158"/>
         <source>Save Error</source>
         <translation>저장 오류</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="88"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="101"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="145"/>
         <source>Capture saved as </source>
         <translation>캡처를 저장했습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="33"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
+        <source>Capture saved to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="67"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="82"/>
         <source>Capture saved to clipboard</source>
         <translation>캡처를 클립보드에 저장했습니다</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="91"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="75"/>
+        <source>Error while saving to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="105"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="156"/>
         <source>Error trying to save as </source>
         <translation>저장에 오류가 발생했습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="82"/>
-        <location filename="../../src/main.cpp" line="247"/>
-        <location filename="../../src/main.cpp" line="402"/>
-        <location filename="../../src/main.cpp" line="429"/>
-        <location filename="../../src/main.cpp" line="461"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="123"/>
+        <source>Save screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="148"/>
+        <source>Capture is saved and copied to the clipboard as </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="117"/>
+        <location filename="../../src/main.cpp" line="293"/>
+        <location filename="../../src/main.cpp" line="455"/>
+        <location filename="../../src/main.cpp" line="483"/>
+        <location filename="../../src/main.cpp" line="515"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus에 접속할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="41"/>
+        <location filename="../../src/main.cpp" line="140"/>
+        <source>Powerful yet simple to use screenshot software.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="141"/>
+        <source>See</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="144"/>
+        <source>Capture the entire desktop.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="146"/>
+        <source>Open the capture launcher.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="149"/>
+        <source>Start a manual capture in GUI mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="151"/>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="153"/>
+        <source>Capture a single screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="158"/>
+        <source>Path where the capture will be saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="161"/>
+        <source>Save the capture to the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="163"/>
+        <source>Delay time in milliseconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="166"/>
+        <source>Set the filename pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="169"/>
+        <source>Enable or disable the trayicon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="173"/>
+        <source>Enable or disable run at startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="177"/>
+        <source>Show the help message in the capture mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="180"/>
+        <source>Define the main UI color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="184"/>
+        <source>Define the contrast UI color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="187"/>
+        <source>Print raw PNG capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="190"/>
+        <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="194"/>
+        <source>Define the screen to capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="195"/>
+        <source>default: screen containing the cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="196"/>
+        <source>Screen number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="205"/>
+        <source>Invalid color, this flag supports the following formats:
+- #RGB (each of R, G, and B is a single hex digit)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- Named colors like &apos;blue&apos; or &apos;red&apos;
+You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="214"/>
+        <source>Invalid delay, it must be higher than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="216"/>
+        <source>Invalid screen number, it must be non negative</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="223"/>
+        <source>Invalid path, it must be a real path in the system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="234"/>
+        <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="44"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="42"/>
+        <location filename="../../src/tools/launcher/openwithprogram.cpp" line="45"/>
         <source>Unable to write in</source>
         <translation>작성할 수 없습니다:</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="88"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL을 클립보드에 복사했습니다.</translation>
+        <translation type="vanished">URL을 클립보드에 복사했습니다.</translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="78"/>
+        <source>Arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="337"/>
+        <source>arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="338"/>
+        <source>Usage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="338"/>
+        <source>options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
+        <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
+        <source>Toggle side panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
+        <source>Select entire screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
+        <source>Commit text in text area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
+        <source>Quit capture</source>
+        <translation type="unfinished">캡처를 종료</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="75"/>
+        <source>Capture screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="78"/>
+        <source>Show color picker</source>
+        <translation type="unfinished">색상 선택기를 표시</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
+        <source>Change the tool&apos;s thickness</source>
+        <translation type="unfinished">도구 두께 변경</translation>
     </message>
 </context>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="40"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="38"/>
         <source>Rectangle</source>
         <translation>직사각형</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="52"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="48"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>페인트 도구로 직사각형을 설정</translation>
     </message>
@@ -717,12 +1097,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>RedoTool</name>
     <message>
-        <location filename="../../src/tools/redo/redotool.cpp" line="40"/>
+        <location filename="../../src/tools/redo/redotool.cpp" line="37"/>
         <source>Redo</source>
         <translation>되돌리기</translation>
     </message>
     <message>
-        <location filename="../../src/tools/redo/redotool.cpp" line="52"/>
+        <location filename="../../src/tools/redo/redotool.cpp" line="47"/>
         <source>Redo the next modification</source>
         <translation>다음 변경을 되돌리기</translation>
     </message>
@@ -730,12 +1110,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>SaveTool</name>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="41"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="44"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="53"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="54"/>
         <source>Save the capture</source>
         <translation>캡처를 저장</translation>
     </message>
@@ -743,7 +1123,7 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="84"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="136"/>
         <source>Unable to capture screen</source>
         <translation>화면을 캡처할 수 없음</translation>
     </message>
@@ -751,36 +1131,77 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>SelectionTool</name>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="46"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="43"/>
         <source>Rectangular Selection</source>
         <translatorcomment>selection에 대한 적절한 번역이 필요합니다.</translatorcomment>
         <translation>직사각형 Selection</translation>
     </message>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="58"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="53"/>
         <source>Set Selection as the paint tool</source>
         <translation>페인트 도구로 직사각형 선택을 설정</translation>
     </message>
 </context>
 <context>
+    <name>SetShortcutDialog</name>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
+        <source>Set Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
+        <source>Enter new shortcut to change </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
+        <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutsWidget</name>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="41"/>
+        <source>Hot Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="unfinished">화면 캡처 모드에서 단축키를 사용할 수 있습니다.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
+        <source>Description</source>
+        <translation type="unfinished">설명</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
+        <source>Key</source>
+        <translation type="unfinished">키</translation>
+    </message>
+</context>
+<context>
     <name>SidePanelWidget</name>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="71"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="72"/>
         <source>Active thickness:</source>
         <translation>활성 두께:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="72"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="73"/>
         <source>Active color:</source>
         <translation>활성 색상:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="217"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="205"/>
         <source>Press ESC to cancel</source>
         <translation>ESC를 눌러 취소</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="219"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
         <source>Grab Color</source>
         <translation>색상 취득</translation>
     </message>
@@ -788,12 +1209,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>SizeIndicatorTool</name>
     <message>
-        <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="40"/>
+        <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="37"/>
         <source>Selection Size Indicator</source>
         <translation>선택 크기 표시기</translation>
     </message>
     <message>
-        <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="52"/>
+        <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="47"/>
         <source>Show the dimensions of the selection (X Y)</source>
         <translation>선택 범위의 치수 (X Y)를 표시</translation>
     </message>
@@ -801,107 +1222,107 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>StrftimeChooserWidget</name>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="50"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Century (00-99)</source>
         <translation>세기 (00-99)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="52"/>
         <source>Year (00-99)</source>
         <translation>년도 (00-99)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="52"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Year (2000)</source>
         <translation>년도 (2000)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Month Name (jan)</source>
         <translation>달 이름 (jan)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="54"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Month Name (january)</source>
         <translation>달 이름 (january)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="55"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
         <source>Month (01-12)</source>
         <translation>달 (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
         <source>Week Day (1-7)</source>
         <translation>주일 (1-7)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Week (01-53)</source>
         <translation>주 (01-53)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Day Name (mon)</source>
         <translation>요일 (월)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Day Name (monday)</source>
         <translation>요일 (월요일)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="60"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Day (01-31)</source>
         <translation>일 (01-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
         <source>Day of Month (1-31)</source>
         <translation>일 (1-31)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="62"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Day (001-366)</source>
         <translation>일 (001-366)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="72"/>
         <source>Time (%H-%M-%S)</source>
         <translation>시각 (%H-%M-%S)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Time (%H-%M)</source>
         <translation>시각 (%H-%M)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
         <source>Hour (00-23)</source>
         <translation>시각 (00-23)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="66"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="76"/>
         <source>Hour (01-12)</source>
         <translation>시각 (01-12)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="77"/>
         <source>Minute (00-59)</source>
         <translation>분 (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="68"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="78"/>
         <source>Second (00-59)</source>
         <translation>초 (00-59)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="81"/>
         <source>Full Date (%m/%d/%y)</source>
         <translation>연 월 일 (%m/%d/%y)</translation>
     </message>
     <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="70"/>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="83"/>
         <source>Full Date (%Y-%m-%d)</source>
         <translation>연 월 일 (%Y-%m-%d)</translation>
     </message>
@@ -909,7 +1330,7 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../../src/utils/systemnotification.cpp" line="36"/>
+        <location filename="../../src/utils/systemnotification.cpp" line="32"/>
         <source>Flameshot Info</source>
         <translation>Flameshot 정보</translation>
     </message>
@@ -917,22 +1338,22 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="55"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>StrikeOut</source>
         <translation>취소선</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="64"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Underline</source>
         <translation>밑줄</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="73"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Bold</source>
         <translation>볼드체</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="82"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
         <source>Italic</source>
         <translation>이탈릭체</translation>
     </message>
@@ -940,12 +1361,12 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="63"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="57"/>
         <source>Text</source>
         <translation>텍스트</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="75"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="67"/>
         <source>Add text to your capture</source>
         <translation>캡처에 텍스트를 추가</translation>
     </message>
@@ -958,32 +1379,32 @@ Space로 사이드 패널을 엽니다.</translation>
         <translation>UI 컬러 편집기</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="107"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="103"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>선택기를 움직여 색상을 변경하고 미리보기 버튼에서 변경사항을 확인하세요.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="119"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Select a Button to modify it</source>
         <translation>변경 할 버튼 선택</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
         <source>Main Color</source>
         <translation>메인 색상</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="133"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="128"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="144"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="139"/>
         <source>Contrast Color</source>
         <translation>대비 색상</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="149"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="144"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation></translation>
     </message>
@@ -991,30 +1412,61 @@ Space로 사이드 패널을 엽니다.</translation>
 <context>
     <name>UndoTool</name>
     <message>
-        <location filename="../../src/tools/undo/undotool.cpp" line="40"/>
+        <location filename="../../src/tools/undo/undotool.cpp" line="37"/>
         <source>Undo</source>
         <translation>원상태로 되돌리기</translation>
     </message>
     <message>
-        <location filename="../../src/tools/undo/undotool.cpp" line="52"/>
+        <location filename="../../src/tools/undo/undotool.cpp" line="47"/>
         <source>Undo the last modification</source>
         <translation>마지막 변경을 원상태로 되돌리기</translation>
     </message>
 </context>
 <context>
+    <name>UpdateNotificationWidget</name>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
+        <source>New Flameshot version %1 is available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
+        <source>Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
+        <source>Later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>UtilityPanel</name>
+    <message>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="131"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="61"/>
+        <location filename="../../src/config/visualseditor.cpp" line="59"/>
         <source>Opacity of area outside selection:</source>
         <translation>선택 영역 외 불투명도:</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="89"/>
+        <location filename="../../src/config/visualseditor.cpp" line="85"/>
         <source>Button Selection</source>
         <translation>버튼 선택</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="95"/>
+        <location filename="../../src/config/visualseditor.cpp" line="91"/>
         <source>Select All</source>
         <translation>모두 선택</translation>
     </message>

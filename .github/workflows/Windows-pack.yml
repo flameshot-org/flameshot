@@ -76,7 +76,9 @@ jobs:
           echo ${last_committed_tag:1}
           echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
           echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          # This will allow to build pre-preleases without git tag
+          # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
+          echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
 
       - name: Restore from cache and run vcpkg
         uses: lukka/run-vcpkg@v4
@@ -135,28 +137,44 @@ jobs:
           TYPE: ${{matrix.type}}
 
       - name: Package Clean
-        run: rm -r $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages
+        shell: pwsh
+        run: |
+          Remove-Item $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages -Recurse
+          New-Item -Path $env:GITHUB_WORKSPACE\build\Package\installer -ItemType Directory
+          New-Item -Path $env:GITHUB_WORKSPACE\build\Package\portable -ItemType Directory
+
+      - name: Package Prepare (installer)
+        if:  matrix.type == 'installer'
+        shell: pwsh
+        run: |
+          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.msi
+
+      - name: Package Prepare (portable)
+        if:  matrix.type == 'portable'
+        shell: pwsh
+        run: |
+          Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.zip
 
       - name: SHA256Sum of Windows installer(daily build)
         if:  matrix.type == 'installer'
         shell: bash
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
-          sha256sum $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum
+          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
+          sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi > $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum
           python -m pip install -U -q requests
           echo "============Windows installer sha256sum download link============"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum)
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi.sha256sum)
           echo "=======no operation for you can see link in the log console====="
 
       - name: SHA256Sum of Windows portable(daily build)
         if:  matrix.type == 'portable'
         shell: bash
         run: |
-          sha256sum $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
-          sha256sum $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum
+          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
+          sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip > $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum
           python -m pip install -U -q requests
           echo "===========Windows portable sha256sum download link============"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum)
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip.sha256sum)
           echo "=====no operation for you can see link in the log console====="
 
       - name: Upload Windows installer(daily build)
@@ -165,7 +183,7 @@ jobs:
         run: |
           python -m pip install -U -q requests
           echo "================Windows installer download link================"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi)
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi)
           echo "=====no operation for you can see link in the log console====="
 
       - name: Upload Windows portable(daily build)
@@ -174,7 +192,7 @@ jobs:
         run: |
           python -m pip install -U -q requests
           echo "=================Windows portable download link================"
-          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
+          echo $(python $GITHUB_WORKSPACE/scripts/upload_services/transferwee.py upload $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip)
           echo "=====no operation for you can see link in the log console====="
       - name: Artifact Upload
         uses: actions/upload-artifact@v2

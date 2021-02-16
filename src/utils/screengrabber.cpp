@@ -26,6 +26,7 @@
 #include <QScreen>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#include "request.h"
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDir>
@@ -85,6 +86,45 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 if (!res.isNull()) {
                     QFile dbusResult(reply.value());
                     dbusResult.remove();
+                }
+                break;
+            }
+            case DesktopInfo::SWAY: {
+                QDBusInterface screenshotInterface(
+                  QStringLiteral("org.freedesktop.portal.Desktop"),
+                  QStringLiteral("/org/freedesktop/portal/desktop"),
+                  QStringLiteral("org.freedesktop.portal.Screenshot"));
+
+                QDBusReply<QDBusObjectPath> reply = screenshotInterface.call(
+                  QStringLiteral("Screenshot"), "", QMap<QString, QVariant>());
+                auto* request = new OrgFreedesktopPortalRequestInterface(
+                  QStringLiteral("org.freedesktop.portal.Desktop"),
+                  reply.value().path(),
+                  QDBusConnection::sessionBus(),
+                  this);
+                QEventLoop loop;
+                const auto gotSignal = [&res, &loop](uint status,
+                                                     const QVariantMap& map) {
+                    if (status == 0) {
+                        QString uri = map.value("uri").toString().remove(0, 7);
+                        res = QPixmap(uri);
+                        res.setDevicePixelRatio(qApp->devicePixelRatio());
+                        QFile imgFile(uri);
+                        imgFile.remove();
+                    }
+                    loop.quit();
+                };
+                QMetaObject::Connection conn =
+                  QObject::connect(request,
+                                   &org::freedesktop::portal::Request::Response,
+                                   gotSignal);
+                loop.exec();
+                QObject::disconnect(conn);
+                request->Close().waitForFinished();
+                request->deleteLater();
+
+                if (res.isNull()) {
+                    ok = false;
                 }
                 break;
             }

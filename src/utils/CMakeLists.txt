@@ -6,6 +6,7 @@ target_sources(
           screengrabber.h
           systemnotification.h
           configshortcuts.h
+          request.h
 )
 
 target_sources(
@@ -23,4 +24,5 @@ target_sources(
           colorutils.cpp
           history.cpp
           configshortcuts.cpp
+        request.cpp
 )
