@@ -444,16 +444,6 @@ void ConfigHandler::setUseJpgForClipboard(const bool value)
     m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
 }
 
-QString ConfigHandler::saveAfterCopyPathValue()
-{
-    return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
-}
-
-void ConfigHandler::setSaveAfterCopyPath(const QString& path)
-{
-    m_settings.setValue(QStringLiteral("saveAfterCopyPath"), path);
-}
-
 void ConfigHandler::setDefaults()
 {
     m_settings.clear();
