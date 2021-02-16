@@ -573,6 +573,16 @@ const QString& ConfigHandler::uploadStorage()
     return m_strRes;
 }
 
+//QString ConfigHandler::saveAfterCopyPathValue()
+//{
+//    return m_settings.value(QStringLiteral("saveAfterCopyPath")).toString();
+//}
+//
+//void ConfigHandler::setSaveAfterCopyPath(const QString& path)
+//{
+//    m_settings.setValue(QStringLiteral("saveAfterCopyPath"), path);
+//}
+//
 void ConfigHandler::setDefaults()
 {
     m_settings.clear();

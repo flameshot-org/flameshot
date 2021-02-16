@@ -66,6 +66,12 @@ void GeneralConf::updateComponents()
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 
+    if (!config.savePath().isEmpty()) {
+        m_savePath->setText(config.savePath());
+    } else {
+        ConfigHandler().setSavePath(
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
+    }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
 #endif
