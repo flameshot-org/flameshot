@@ -57,10 +57,10 @@ void GeneneralConf::updateComponents()
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 
-    if (!config.saveAfterCopyPathValue().isEmpty()) {
-        m_savePath->setText(config.saveAfterCopyPathValue());
+    if (!config.savePath().isEmpty()) {
+        m_savePath->setText(config.savePath());
     } else {
-        ConfigHandler().setSaveAfterCopyPath(
+        ConfigHandler().setSavePath(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
