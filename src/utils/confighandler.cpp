@@ -23,8 +23,8 @@
 #include <QDir>
 #include <QFile>
 #include <QKeySequence>
-#include <QStandardPaths>
 #include <QProcess>
+#include <QStandardPaths>
 #include <algorithm>
 
 ConfigHandler::ConfigHandler()
