@@ -39,6 +39,8 @@ public:
 protected:
     ToolType nameID() const override;
 
+private:
+    int context_thickness;
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
