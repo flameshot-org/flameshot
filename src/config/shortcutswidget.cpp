@@ -90,12 +90,17 @@ void ShortcutsWidget::initInfoTable()
         const auto default_key_sequence = current_shortcut.at(2);
         m_table->setItem(i, 0, new QTableWidgetItem(description));
 
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+        const auto key_sequence = identifier.isEmpty()
+                                    ? default_key_sequence
+                                    : m_config.shortcut(identifier);
+#if defined(Q_OS_MACOS)
+        //        QTableWidgetItem* item =
+        //          new
+        //          QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
         QTableWidgetItem* item =
-          new QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
+          new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
 #else
-        QTableWidgetItem* item = new QTableWidgetItem(m_shortcuts.at(i).at(2));
+        QTableWidgetItem* item = new QTableWidgetItem(key_sequence);
 #endif
         item->setTextAlignment(Qt::AlignCenter);
         m_table->setItem(i, 1, item);
