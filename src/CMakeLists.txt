@@ -40,6 +40,11 @@ if (APPLE)
             COMMAND bash "-c" "rm -R flameshot.iconset"
     )
 
+    execute_process(
+            # copy icon from cache generated on the localhost if generation on CI failed
+            COMMAND bash "-c" "[[ -r 'flameshot.icns' ]] || cp ../packaging/macos/flameshot.icns ./"
+    )
+
     # Set application icon
     set(MACOSX_BUNDLE_ICON_FILE flameshot.icns)
 
@@ -60,7 +65,6 @@ if (WIN32)
         target_compile_options(flameshot PRIVATE /source-charset:utf-8)
     endif ()
 endif ()
-
 
 add_subdirectory(cli)
 add_subdirectory(config)
@@ -188,7 +192,7 @@ endif ()
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
-target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
+#target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
 target_compile_definitions(flameshot PRIVATE FLAMESHOT_APP_VERSION_URL="${GIT_API_URL}")
 
 foreach (FILE ${QM_FILES})
