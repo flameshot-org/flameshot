@@ -813,9 +813,11 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     int ax = (width() - m_updateNotificationWidget->width()) / 2;
 #elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+    int ax = helpRect.left() +
+             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
 #else
     QRect helpRect;
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (currentScreen) {
         helpRect = currentScreen->geometry();
     } else {
