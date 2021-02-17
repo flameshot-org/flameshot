@@ -26,6 +26,7 @@ RectangleTool::RectangleTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {
     m_supportsDiagonalAdj = true;
+    context_thickness = 0;
 }
 
 QIcon RectangleTool::icon(const QColor& background, bool inEditor) const
@@ -60,9 +61,9 @@ void RectangleTool::process(QPainter& painter,
     if (recordUndo) {
         updateBackup(pixmap);
     }
-    painter.setPen(QPen(m_color, PADDING_VALUE + m_thickness));
+    painter.setPen(QPen(m_color, m_thickness));
     painter.setBrush(QBrush(m_color));
-    if (m_thickness == 0) {
+    if (context_thickness == 0) {
         painter.drawRect(QRect(m_points.first, m_points.second));
     } else {
         painter.drawRoundedRect(
@@ -78,14 +79,15 @@ void RectangleTool::process(QPainter& painter,
 void RectangleTool::paintMousePreview(QPainter& painter,
                                       const CaptureContext& context)
 {
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
+    painter.setPen(QPen(context.color, context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
 }
 
 void RectangleTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_thickness = context.thickness;
+    m_thickness = context.thickness + PADDING_VALUE;
+    context_thickness = context.thickness;
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
 }
