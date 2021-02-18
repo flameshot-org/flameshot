@@ -393,6 +393,7 @@ void Controller::openLauncherWindow()
 void Controller::enableTrayIcon()
 {
     if (m_trayIcon) {
+        m_trayIcon->show();
         return;
     }
     if (nullptr == m_trayIconMenu) {
@@ -519,7 +520,7 @@ void Controller::disableTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (m_trayIcon) {
-        m_trayIcon->deleteLater();
+        m_trayIcon->hide();
     }
     ConfigHandler().setDisabledTrayIcon(true);
 #endif
