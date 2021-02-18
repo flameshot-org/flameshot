@@ -108,8 +108,14 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         imageName = history.packFileName("imgur", deleteToken, imageName);
         history.save(m_pixmap, imageName);
 
-        onUploadOk();
-
+        if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
+            QApplication::clipboard()->setText(m_imageURL.toString());
+            SystemNotification().sendMessage(
+              QObject::tr("URL copied to clipboard."));
+            close();
+        } else {
+            onUploadOk();
+        }
     } else {
         m_infoLabel->setText(reply->errorString());
     }

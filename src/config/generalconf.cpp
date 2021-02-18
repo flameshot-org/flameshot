@@ -15,7 +15,7 @@
 //     You should have received a copy of the GNU General Public License
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "geneneralconf.h"
+#include "generalconf.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
@@ -29,8 +29,9 @@
 #include <QTextCodec>
 #include <QVBoxLayout>
 
-GeneneralConf::GeneneralConf(QWidget* parent)
+GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
+  , m_historyConfirmationToDelete(nullptr)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
@@ -38,7 +39,12 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     initShowSidePanelButton();
     initShowDesktopNotification();
     initShowTrayIcon();
+    initHistoryConfirmationToDelete();
+    initCheckForUpdates();
     initAutostart();
+    initShowStartupLaunchMessage();
+    initCopyAndCloseAfterUpload();
+    initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
 
@@ -47,14 +53,17 @@ GeneneralConf::GeneneralConf(QWidget* parent)
     updateComponents();
 }
 
-void GeneneralConf::updateComponents()
+void GeneralConf::updateComponents()
 {
     ConfigHandler config;
     m_helpMessage->setChecked(config.showHelpValue());
     m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
     m_sysNotifications->setChecked(config.desktopNotificationValue());
     m_autostart->setChecked(config.startupLaunchValue());
+    m_copyAndCloseAfterUpload->setChecked(
+      config.copyAndCloseAfterUploadEnabled());
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 
     if (!config.savePath().isEmpty()) {
@@ -68,22 +77,22 @@ void GeneneralConf::updateComponents()
 #endif
 }
 
-void GeneneralConf::showHelpChanged(bool checked)
+void GeneralConf::showHelpChanged(bool checked)
 {
     ConfigHandler().setShowHelp(checked);
 }
 
-void GeneneralConf::showSidePanelButtonChanged(bool checked)
+void GeneralConf::showSidePanelButtonChanged(bool checked)
 {
     ConfigHandler().setShowSidePanelButton(checked);
 }
 
-void GeneneralConf::showDesktopNotificationChanged(bool checked)
+void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
     ConfigHandler().setDesktopNotification(checked);
 }
 
-void GeneneralConf::showTrayIconChanged(bool checked)
+void GeneralConf::showTrayIconChanged(bool checked)
 {
     auto controller = Controller::getInstance();
     if (checked) {
@@ -93,12 +102,18 @@ void GeneneralConf::showTrayIconChanged(bool checked)
     }
 }
 
-void GeneneralConf::autostartChanged(bool checked)
+void GeneralConf::checkForUpdatesChanged(bool checked)
+{
+    ConfigHandler().setCheckForUpdates(checked);
+    Controller::getInstance()->setCheckForUpdatesEnabled(checked);
+}
+
+void GeneralConf::autostartChanged(bool checked)
 {
     ConfigHandler().setStartupLaunch(checked);
 }
 
-void GeneneralConf::importConfiguration()
+void GeneralConf::importConfiguration()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import"));
     if (fileName.isEmpty()) {
@@ -122,7 +137,7 @@ void GeneneralConf::importConfiguration()
     config.close();
 }
 
-void GeneneralConf::exportFileConfiguration()
+void GeneralConf::exportFileConfiguration()
 {
     QString fileName = QFileDialog::getSaveFileName(
       this, tr("Save File"), QStringLiteral("flameshot.conf"));
@@ -142,7 +157,7 @@ void GeneneralConf::exportFileConfiguration()
     }
 }
 
-void GeneneralConf::resetConfiguration()
+void GeneralConf::resetConfiguration()
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(
@@ -157,7 +172,7 @@ void GeneneralConf::resetConfiguration()
     }
 }
 
-void GeneneralConf::initShowHelp()
+void GeneralConf::initShowHelp()
 {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
     ConfigHandler config;
@@ -167,13 +182,11 @@ void GeneneralConf::initShowHelp()
                                  "in the capture mode."));
     m_layout->addWidget(m_helpMessage);
 
-    connect(m_helpMessage,
-            &QCheckBox::clicked,
-            this,
-            &GeneneralConf::showHelpChanged);
+    connect(
+      m_helpMessage, &QCheckBox::clicked, this, &GeneralConf::showHelpChanged);
 }
 
-void GeneneralConf::initShowSidePanelButton()
+void GeneralConf::initShowSidePanelButton()
 {
     m_sidePanelButton = new QCheckBox(tr("Show the side panel button"), this);
     m_sidePanelButton->setChecked(ConfigHandler().showSidePanelButtonValue());
@@ -184,9 +197,9 @@ void GeneneralConf::initShowSidePanelButton()
     connect(m_sidePanelButton,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::showSidePanelButtonChanged);
+            &GeneralConf::showSidePanelButtonChanged);
 }
-void GeneneralConf::initShowDesktopNotification()
+void GeneralConf::initShowDesktopNotification()
 {
     m_sysNotifications = new QCheckBox(tr("Show desktop notifications"), this);
     ConfigHandler config;
@@ -198,10 +211,10 @@ void GeneneralConf::initShowDesktopNotification()
     connect(m_sysNotifications,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::showDesktopNotificationChanged);
+            &GeneralConf::showDesktopNotificationChanged);
 }
 
-void GeneneralConf::initShowTrayIcon()
+void GeneralConf::initShowTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
@@ -214,11 +227,28 @@ void GeneneralConf::initShowTrayIcon()
     connect(m_showTray,
             &QCheckBox::stateChanged,
             this,
-            &GeneneralConf::showTrayIconChanged);
+            &GeneralConf::showTrayIconChanged);
 #endif
 }
 
-void GeneneralConf::initConfigButtons()
+void GeneralConf::initHistoryConfirmationToDelete()
+{
+    m_historyConfirmationToDelete = new QCheckBox(
+      tr("Confirmation required to delete screenshot from the latest uploads"),
+      this);
+    m_historyConfirmationToDelete->setChecked(
+      ConfigHandler().historyConfirmationToDelete());
+    m_historyConfirmationToDelete->setToolTip(
+      tr("Confirmation required to delete screenshot from the latest uploads"));
+    m_layout->addWidget(m_historyConfirmationToDelete);
+
+    connect(m_historyConfirmationToDelete,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::historyConfirmationToDelete);
+}
+
+void GeneralConf::initConfigButtons()
 {
     QHBoxLayout* buttonLayout = new QHBoxLayout();
     m_layout->addStretch();
@@ -232,24 +262,37 @@ void GeneneralConf::initConfigButtons()
     connect(m_exportButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::exportFileConfiguration);
+            &GeneralConf::exportFileConfiguration);
 
     m_importButton = new QPushButton(tr("Import"));
     buttonLayout->addWidget(m_importButton);
     connect(m_importButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::importConfiguration);
+            &GeneralConf::importConfiguration);
 
     m_resetButton = new QPushButton(tr("Reset"));
     buttonLayout->addWidget(m_resetButton);
     connect(m_resetButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::resetConfiguration);
+            &GeneralConf::resetConfiguration);
 }
 
-void GeneneralConf::initAutostart()
+void GeneralConf::initCheckForUpdates()
+{
+    m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
+    m_checkForUpdates->setChecked(ConfigHandler().checkForUpdates());
+    m_checkForUpdates->setToolTip(tr("Automatic check for updates"));
+    m_layout->addWidget(m_checkForUpdates);
+
+    connect(m_checkForUpdates,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::checkForUpdatesChanged);
+}
+
+void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
     ConfigHandler config;
@@ -259,10 +302,41 @@ void GeneneralConf::initAutostart()
     m_layout->addWidget(m_autostart);
 
     connect(
-      m_autostart, &QCheckBox::clicked, this, &GeneneralConf::autostartChanged);
+      m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
 }
 
-void GeneneralConf::initSaveAfterCopy()
+void GeneralConf::initShowStartupLaunchMessage()
+{
+    m_showStartupLaunchMessage =
+      new QCheckBox(tr("Show welcome message on launch"), this);
+    ConfigHandler config;
+    bool checked = config.showStartupLaunchMessage();
+    m_showStartupLaunchMessage->setChecked(checked);
+    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
+    m_layout->addWidget(m_showStartupLaunchMessage);
+
+    connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowStartupLaunchMessage(checked);
+    });
+}
+
+void GeneralConf::initCopyAndCloseAfterUpload()
+{
+    m_copyAndCloseAfterUpload =
+      new QCheckBox(tr("Copy URL after upload"), this);
+    ConfigHandler config;
+    m_copyAndCloseAfterUpload->setChecked(
+      config.copyAndCloseAfterUploadEnabled());
+    m_copyAndCloseAfterUpload->setToolTip(
+      tr("Copy URL and close window after upload"));
+    m_layout->addWidget(m_copyAndCloseAfterUpload);
+
+    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+    });
+}
+
+void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
     m_saveAfterCopy->setToolTip(tr("Save image file after copying it"));
@@ -270,7 +344,7 @@ void GeneneralConf::initSaveAfterCopy()
     connect(m_saveAfterCopy,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::saveAfterCopyChanged);
+            &GeneralConf::saveAfterCopyChanged);
 
     QGroupBox* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
@@ -298,7 +372,7 @@ void GeneneralConf::initSaveAfterCopy()
     connect(m_changeSaveButton,
             &QPushButton::clicked,
             this,
-            &GeneneralConf::changeSavePath);
+            &GeneralConf::changeSavePath);
 
     m_screenshotPathFixedCheck =
       new QCheckBox(tr("Use fixed path for screenshots to save"), this);
@@ -312,7 +386,12 @@ void GeneneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
-void GeneneralConf::initUseJpgForClipboard()
+void GeneralConf::historyConfirmationToDelete(bool checked)
+{
+    ConfigHandler().setHistoryConfirmationToDelete(checked);
+}
+
+void GeneralConf::initUseJpgForClipboard()
 {
     m_useJpgForClipboard =
       new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
@@ -326,29 +405,41 @@ void GeneneralConf::initUseJpgForClipboard()
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
-            &GeneneralConf::useJpgForClipboardChanged);
+            &GeneralConf::useJpgForClipboardChanged);
 }
 
-void GeneneralConf::saveAfterCopyChanged(bool checked)
+void GeneralConf::saveAfterCopyChanged(bool checked)
 {
     ConfigHandler().setSaveAfterCopy(checked);
 }
 
-void GeneneralConf::changeSavePath()
+void GeneralConf::changeSavePath()
 {
     QString path = ConfigHandler().savePath();
     if (path.isEmpty()) {
         path =
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
-    chooseFolder(path);
+    path = chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
         ConfigHandler().setSavePath(path);
     }
 }
 
-const QString GeneneralConf::chooseFolder(const QString pathDefault)
+void GeneralConf::initCopyPathAfterSave()
+{
+    m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
+    ConfigHandler config;
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
+    m_layout->addWidget(m_copyPathAfterSave);
+    connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
+    });
+}
+
+const QString GeneralConf::chooseFolder(const QString pathDefault)
 {
     QString path;
     if (pathDefault.isEmpty()) {
@@ -373,12 +464,12 @@ const QString GeneneralConf::chooseFolder(const QString pathDefault)
     return path;
 }
 
-void GeneneralConf::togglePathFixed()
+void GeneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneneralConf::useJpgForClipboardChanged(bool checked)
+void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
     ConfigHandler().setUseJpgForClipboard(checked);
 }

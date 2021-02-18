@@ -25,6 +25,7 @@
 
 #include "capturewidget.h"
 #include "src/core/controller.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/screengrabber.h"
@@ -40,7 +41,6 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopWidget>
-#include <QGuiApplication>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -92,8 +92,7 @@ CaptureWidget::CaptureWidget(const uint id,
     initContext(savePath, fullScreen);
     initShortcuts();
     m_context.circleCount = 1;
-#if (defined(Q_OS_WIN) || defined(Q_OS_MAC) || defined(Q_OS_MAC64) ||          \
-     defined(Q_OS_MACOS) || defined(Q_OS_MACX))
+#if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
 #endif
@@ -113,18 +112,14 @@ CaptureWidget::CaptureWidget(const uint id,
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
-
-            if (topLeftScreen.x() < topLeft.x()) {
-                topLeft.setX(topLeftScreen.x());
-            }
-            if (topLeftScreen.y() < topLeft.y()) {
-                topLeft.setY(topLeftScreen.y());
+            if (topLeft.x() > topLeftScreen.x() ||
+                topLeft.y() > topLeftScreen.y()) {
+                topLeft = topLeftScreen;
             }
         }
         move(topLeft);
         resize(pixmap().size());
-#elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
-       defined(Q_OS_MACX))
+#elif defined(Q_OS_MACOS)
         // Emulate fullscreen mode
         //        setWindowFlags(Qt::WindowStaysOnTopHint |
         //        Qt::BypassWindowManagerHint |
@@ -132,7 +127,7 @@ CaptureWidget::CaptureWidget(const uint id,
         //                       Qt::NoDropShadowWindowHint | Qt::ToolTip |
         //                       Qt::Popup
         //                       );
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
@@ -146,33 +141,31 @@ CaptureWidget::CaptureWidget(const uint id,
     updateButtons();
     QVector<QRect> areas;
     if (m_context.fullscreen) {
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
-        QPoint currentPos = QCursor::pos();
+        QPoint topLeftOffset = QPoint(0, 0);
+#if defined(Q_OS_WIN)
+        topLeftOffset - topLeft;
 #endif
+
+#if defined(Q_OS_MACOS)
+        // MacOS works just with one active display, so we need to append
+        // just one current display and keep multiple displays logic for
+        // other OS
+        QRect r;
+        QScreen* screen = QGuiAppCurrentScreen().currentScreen();
+        r = screen->geometry();
+        // all calculations are processed according to (0, 0) start
+        // point so we need to move current object to (0, 0)
+        r.moveTo(0, 0);
+        areas.append(r);
+#else
         for (QScreen* const screen : QGuiApplication::screens()) {
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
                      r.y() / screen->devicePixelRatio());
-#if defined(Q_OS_WIN)
-            r.moveTo(r.topLeft() - topLeft);
-#endif
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
-            // MacOS works just with one active display, so we need to append
-            // just one current display and keep multiple displays logic for
-            // other OS
-            if (r.contains(currentPos)) {
-                // all calculations are processed according to (0, 0) start
-                // point so we need to move current object to (0, 0)
-                r.moveTo(0, 0);
-                areas.append(r);
-                break;
-            }
-#else
+            r.moveTo(r.topLeft() - topLeftOffset);
             areas.append(r);
-#endif
         }
+#endif
     } else {
         areas.append(rect());
     }
@@ -340,16 +333,16 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.setClipRect(rect());
 
     if (m_showInitialMsg) {
-#if (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#else
+#if defined(Q_OS_MACOS)
         QRect helpRect;
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
         if (currentScreen) {
             helpRect = currentScreen->geometry();
         } else {
             helpRect = QGuiApplication::primaryScreen()->geometry();
         }
+#else
+        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
 #endif
 
         helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
@@ -473,7 +466,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             QPoint newTopLeft =
               initialRect.topLeft() + (e->pos() - m_dragStartPoint);
             inputRect = QRect(newTopLeft, initialRect.size());
-
         } else {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
@@ -730,7 +722,8 @@ void CaptureWidget::initPanel()
         panelRect.moveTo(panelRect.x() / devicePixelRatio,
                          panelRect.y() / devicePixelRatio);
 #else
-        QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+
         if (currentScreen) {
             panelRect = currentScreen->geometry();
             auto devicePixelRatio = currentScreen->devicePixelRatio();
@@ -769,9 +762,8 @@ void CaptureWidget::initPanel()
     m_panel = new UtilityPanel(this);
     m_panel->hide();
     makeChild(m_panel);
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+#if defined(Q_OS_MACOS)
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
     m_panel->setFixedWidth(m_colorPicker->width() * 1.5);
     m_panel->setFixedHeight(currentScreen->geometry().height());
@@ -809,24 +801,31 @@ void CaptureWidget::initPanel()
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
                                               const QString& appLatestUrl)
 {
+    if (!ConfigHandler().checkForUpdates()) {
+        // option check for updates disabled
+        return;
+    }
     if (nullptr == m_updateNotificationWidget) {
         m_updateNotificationWidget =
           new UpdateNotificationWidget(this, appLatestVersion, appLatestUrl);
     }
-#if (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+#if defined(Q_OS_MACOS)
+    int ax = (width() - m_updateNotificationWidget->width()) / 2;
+#elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+    int ax = helpRect.left() +
+             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
 #else
     QRect helpRect;
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     if (currentScreen) {
         helpRect = currentScreen->geometry();
     } else {
         helpRect = QGuiApplication::primaryScreen()->geometry();
     }
-#endif
     int ax = helpRect.left() +
              ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
-
+#endif
     m_updateNotificationWidget->move(ax, 0);
     makeChild(m_updateNotificationWidget);
     m_updateNotificationWidget->show();
@@ -1235,8 +1234,7 @@ void CaptureWidget::copyScreenshot()
 
 void CaptureWidget::saveScreenshot()
 {
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     showNormal();
 #endif
     m_captureDone = true;

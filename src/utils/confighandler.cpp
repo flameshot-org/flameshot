@@ -62,8 +62,7 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
                 << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
                 << CaptureToolButton::TYPE_EXIT
                 << CaptureToolButton::TYPE_IMAGEUPLOADER
-#if not(defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||     \
-        defined(Q_OS_MACX))
+#if not defined(Q_OS_MACOS)
                 << CaptureToolButton::TYPE_OPEN_APP
 #endif
                 << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
@@ -309,10 +308,23 @@ void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
     m_settings.setValue(QStringLiteral("keepOpenAppLauncher"), keepOpen);
 }
 
+bool ConfigHandler::checkForUpdates()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("checkForUpdates"))) {
+        res = m_settings.value(QStringLiteral("checkForUpdates")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCheckForUpdates(const bool checkForUpdates)
+{
+    m_settings.setValue(QStringLiteral("checkForUpdates"), checkForUpdates);
+}
+
 bool ConfigHandler::startupLaunchValue()
 {
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     bool res = false;
 #else
     bool res = true;
@@ -351,8 +363,7 @@ void ConfigHandler::setStartupLaunch(const bool start)
     if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
         return;
     }
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     /* TODO - there should be more correct way via API, but didn't find it
      without extra dependencies, there should be something like that:
      https://stackoverflow.com/questions/3358410/programmatically-run-at-startup-on-mac-os-x
@@ -431,6 +442,22 @@ void ConfigHandler::setStartupLaunch(const bool start)
     m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
+bool ConfigHandler::showStartupLaunchMessage()
+{
+    if (!m_settings.contains(QStringLiteral("showStartupLaunchMessage"))) {
+        m_settings.setValue(QStringLiteral("showStartupLaunchMessage"), true);
+    }
+    return m_settings.value(QStringLiteral("showStartupLaunchMessage"))
+      .toBool();
+}
+
+void ConfigHandler::setShowStartupLaunchMessage(
+  const bool showStartupLaunchMessage)
+{
+    m_settings.setValue(QStringLiteral("showStartupLaunchMessage"),
+                        showStartupLaunchMessage);
+}
+
 int ConfigHandler::contrastOpacityValue()
 {
     int opacity = 190;
@@ -444,6 +471,36 @@ int ConfigHandler::contrastOpacityValue()
 void ConfigHandler::setContrastOpacity(const int transparency)
 {
     m_settings.setValue(QStringLiteral("contrastOpacity"), transparency);
+}
+
+bool ConfigHandler::copyAndCloseAfterUploadEnabled()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("copyAndCloseAfterUpload"))) {
+        res =
+          m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
+{
+    m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
+}
+
+bool ConfigHandler::historyConfirmationToDelete()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("historyConfirmationToDelete"))) {
+        res = m_settings.value(QStringLiteral("historyConfirmationToDelete"))
+                .toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
+{
+    m_settings.setValue(QStringLiteral("historyConfirmationToDelete"), check);
 }
 
 bool ConfigHandler::saveAfterCopyValue()

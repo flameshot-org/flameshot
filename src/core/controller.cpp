@@ -18,6 +18,7 @@
 #include "controller.h"
 #include "external/QHotkey/QHotkey"
 #include "src/config/configwindow.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
@@ -36,17 +37,19 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMenu>
+#include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QOperatingSystemVersion>
 #include <QSystemTrayIcon>
+#include <QThread>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
 #endif
 
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
 #include <QOperatingSystemVersion>
 #include <QScreen>
 #endif
@@ -57,11 +60,11 @@
 Controller::Controller()
   : m_captureWindow(nullptr)
   , m_history(nullptr)
+  , m_trayIcon(nullptr)
   , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
   , m_showCheckAppUpdateStatus(false)
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
   , m_HotkeyScreenshotCapture(nullptr)
   , m_HotkeyScreenshotHistory(nullptr)
 #endif
@@ -90,12 +93,11 @@ Controller::Controller()
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     // Try to take a test screenshot, MacOS will request a "Screen Recording"
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
-    QScreen* currentScreen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
 
     // set global shortcuts for MacOS
@@ -135,6 +137,15 @@ void Controller::enableExports()
       this, &Controller::captureFailed, this, &Controller::handleCaptureFailed);
 }
 
+void Controller::setCheckForUpdatesEnabled(const bool enabled)
+{
+    m_appUpdates->setVisible(enabled);
+    m_appUpdates->setEnabled(enabled);
+    if (enabled) {
+        getLatestAvailableVersion();
+    }
+}
+
 void Controller::getLatestAvailableVersion()
 {
     // This features is required for MacOS and Windows user and for Linux users
@@ -149,19 +160,45 @@ void Controller::getLatestAvailableVersion()
 
     // check for updates each 24 hours
     doLater(1000 * 60 * 60 * 24, this, [this]() {
-        this->getLatestAvailableVersion();
+        if (ConfigHandler().checkForUpdates()) {
+            this->getLatestAvailableVersion();
+        }
     });
 }
 
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 {
+    if (!ConfigHandler().checkForUpdates()) {
+        return;
+    }
     if (reply->error() == QNetworkReply::NoError) {
         QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
-        if (QStringLiteral(APP_VERSION)
-              .replace("v", "")
-              .compare(m_appLatestVersion) < 0) {
+
+        // Transform strings version for correct comparison
+        QStringList appLatestVersion =
+          m_appLatestVersion.replace("v", "").split(".");
+        QStringList currentVersion =
+          QStringLiteral(APP_VERSION).replace("v", "").split(".");
+        // transform versions to the string which can be compared correctly,
+        // example: versions "0.8.5.9" and "0.8.5.10" are transformed into:
+        // "0000.0008.0005.0009" and "0000.0008.0005.0010"
+        // For string comparison you'll get:
+        // "0.8.5.9" < "0.8.5.10" INCORRECT (lower version is bigger)
+        // "0000.0008.0005.0009" > "0000.0008.0005.0010" CORRECT
+        std::transform(
+          appLatestVersion.begin(),
+          appLatestVersion.end(),
+          appLatestVersion.begin(),
+          [](QString c) -> QString { return c = ("0000" + c).right(4); });
+        std::transform(
+          currentVersion.begin(),
+          currentVersion.end(),
+          currentVersion.begin(),
+          [](QString c) -> QString { return c = ("0000" + c).right(4); });
+
+        if (currentVersion.join(".").compare(appLatestVersion.join(".")) < 0) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
@@ -233,15 +270,36 @@ void Controller::requestCapture(const CaptureRequest& request)
 void Controller::startVisualCapture(const uint id,
                                     const QString& forcedSavePath)
 {
-    if (!m_captureWindow) {
+#if defined(Q_OS_MACOS)
+    // This is required on MacOS because of Mission Control. If you'll switch to
+    // another Desktop you cannot take a new screenshot from the tray, you have
+    // to switch back to the Flameshot Desktop manually. It is not obvious and a
+    // large number of users are confused and report a bug.
+    if (m_captureWindow) {
+        m_captureWindow->close();
+        delete m_captureWindow;
+        m_captureWindow = nullptr;
+    }
+#endif
+
+    if (nullptr == m_captureWindow) {
+        int timeout = 5000; // 5 seconds
+        const int delay = 100;
         QWidget* modalWidget = nullptr;
-        do {
+        for (; timeout >= 0; timeout -= delay) {
             modalWidget = qApp->activeModalWidget();
-            if (modalWidget) {
-                modalWidget->close();
-                modalWidget->deleteLater();
+            if (nullptr == modalWidget) {
+                break;
             }
-        } while (modalWidget);
+            modalWidget->close();
+            modalWidget->deleteLater();
+            QThread::msleep(delay);
+        }
+        if (0 == timeout) {
+            QMessageBox::warning(
+              nullptr, tr("Error"), tr("Unable to close active modal widgets"));
+            return;
+        }
 
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         // m_captureWindow = new CaptureWidget(id, forcedSavePath, false); //
@@ -257,8 +315,7 @@ void Controller::startVisualCapture(const uint id,
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
-#elif (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||      \
-       defined(Q_OS_MACX))
+#elif defined(Q_OS_MACOS)
         // In "Emulate fullscreen mode"
         m_captureWindow->showFullScreen();
         m_captureWindow->activateWindow();
@@ -302,8 +359,7 @@ void Controller::openConfigWindow()
     if (!m_configWindow) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
         m_configWindow->activateWindow();
         m_configWindow->raise();
 #endif
@@ -315,8 +371,7 @@ void Controller::openInfoWindow()
 {
     if (!m_infoWindow) {
         m_infoWindow = new InfoWindow();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
         m_infoWindow->activateWindow();
         m_infoWindow->raise();
 #endif
@@ -329,8 +384,7 @@ void Controller::openLauncherWindow()
         m_launcherWindow = new CaptureLauncher();
     }
     m_launcherWindow->show();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     m_launcherWindow->activateWindow();
     m_launcherWindow->raise();
 #endif
@@ -341,13 +395,27 @@ void Controller::enableTrayIcon()
     if (m_trayIcon) {
         return;
     }
-    m_trayIconMenu = new QMenu();
+    if (nullptr == m_trayIconMenu) {
+        m_trayIconMenu = new QMenu();
+        Q_ASSERT(m_trayIconMenu);
+    }
 
     ConfigHandler().setDisabledTrayIcon(false);
     QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this]() {
-        // Wait 400 ms to hide the QMenu
+#if defined(Q_OS_MACOS)
+        auto currentMacOsVersion = QOperatingSystemVersion::current();
+        if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
+            startVisualCapture();
+        } else {
+            // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
+            // the QMenu)
+            doLater(400, this, [this]() { this->startVisualCapture(); });
+        }
+#else
+      // Wait 400 ms to hide the QMenu
         doLater(400, this, [this]() { this->startVisualCapture(); });
+#endif
     });
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
@@ -383,11 +451,14 @@ void Controller::enableTrayIcon()
     m_trayIconMenu->addAction(infoAction);
     m_trayIconMenu->addSeparator();
     m_trayIconMenu->addAction(quitAction);
+    setCheckForUpdatesEnabled(ConfigHandler().checkForUpdates());
 
-    m_trayIcon = new QSystemTrayIcon();
+    if (nullptr == m_trayIcon) {
+        m_trayIcon = new QSystemTrayIcon();
+        Q_ASSERT(m_trayIcon);
+    }
     m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
-#if defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||         \
-  defined(Q_OS_MACX)
+#if defined(Q_OS_MACOS)
     // Because of the following issues on MacOS "Catalina":
     // https://bugreports.qt.io/browse/QTBUG-86393
     // https://developer.apple.com/forums/thread/126072
@@ -398,12 +469,11 @@ void Controller::enableTrayIcon()
 #else
     m_trayIcon->setContextMenu(m_trayIconMenu);
 #endif
-    QIcon trayicon =
+    QIcon trayIcon =
       QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
-    m_trayIcon->setIcon(trayicon);
+    m_trayIcon->setIcon(trayIcon);
 
-#if defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||         \
-  defined(Q_OS_MACX)
+#if defined(Q_OS_MACOS)
     if (currentMacOsVersion < currentMacOsVersion.MacOSBigSur) {
         // Because of the following issues on MacOS "Catalina":
         // https://bugreports.qt.io/browse/QTBUG-86393
@@ -434,6 +504,15 @@ void Controller::enableTrayIcon()
 #endif
 
     m_trayIcon->show();
+    if (ConfigHandler().showStartupLaunchMessage()) {
+        m_trayIcon->showMessage(
+          "Flameshot",
+          QObject::tr(
+            "Hello, I'm here! Click icon in the tray to take a screenshot or "
+            "click with a right button to see more options."),
+          QSystemTrayIcon::Information,
+          3000);
+    }
 }
 
 void Controller::disableTrayIcon()
@@ -479,8 +558,7 @@ void Controller::showRecentScreenshots()
     }
     m_history->loadHistory();
     m_history->show();
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
     m_history->activateWindow();
     m_history->raise();
 #endif

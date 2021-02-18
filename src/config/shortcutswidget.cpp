@@ -17,6 +17,7 @@
 
 #include "shortcutswidget.h"
 #include "setshortcutwidget.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -28,7 +29,6 @@
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
 #include <QCursor>
-#include <QGuiApplication>
 #include <QRect>
 #include <QScreen>
 #endif
@@ -42,7 +42,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();
-    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    QScreen* screen = QGuiAppCurrentScreen().currentScreen();
     position.moveCenter(screen->availableGeometry().center());
     move(position.topLeft());
 #endif
@@ -94,9 +94,6 @@ void ShortcutsWidget::initInfoTable()
                                     ? default_key_sequence
                                     : m_config.shortcut(identifier);
 #if defined(Q_OS_MACOS)
-        //        QTableWidgetItem* item =
-        //          new
-        //          QTableWidgetItem(nativeOSHotKeyText(m_shortcuts.at(i).at(2)));
         QTableWidgetItem* item =
           new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
 #else
@@ -151,8 +148,7 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
             }
 
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
                 QTableWidgetItem* item = new QTableWidgetItem(
                   nativeOSHotKeyText(shortcutValue.toString()));
 #else
@@ -168,8 +164,7 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
     }
 }
 
-#if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
-     defined(Q_OS_MACX))
+#if defined(Q_OS_MACOS)
 const QString& ShortcutsWidget::nativeOSHotKeyText(const QString& text)
 {
     m_res = text;

@@ -16,6 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "sidepanelwidget.h"
+#include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
 #include <QFormLayout>
@@ -24,6 +25,9 @@
 #include <QPushButton>
 #include <QSlider>
 #include <QVBoxLayout>
+#if defined(Q_OS_MACOS)
+#include <QScreen>
+#endif
 
 class QColorPickingEventFilter : public QObject
 {
@@ -161,7 +165,19 @@ QColor SidePanelWidget::grabPixmapColor(const QPoint& p)
 {
     QColor c;
     if (m_pixmap) {
+#if defined(Q_OS_MACOS)
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        QPoint point = p;
+        if (currentScreen) {
+            point = QPoint((p.x() - currentScreen->geometry().x()) *
+                             currentScreen->devicePixelRatio(),
+                           (p.y() - currentScreen->geometry().y()) *
+                             currentScreen->devicePixelRatio());
+        }
+        QPixmap pixel = m_pixmap->copy(QRect(point, point));
+#else
         QPixmap pixel = m_pixmap->copy(QRect(p, p));
+#endif
         c = pixel.toImage().pixel(0, 0);
     }
     return c;

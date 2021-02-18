@@ -1,4 +1,5 @@
 #include "historywidget.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
@@ -10,10 +11,10 @@
 #include <QIcon>
 #include <QLabel>
 #include <QLayoutItem>
+#include <QMessageBox>
 #include <QPixmap>
 #include <QPushButton>
 #include <QScrollArea>
-#include <QSettings>
 #include <QUrl>
 #include <QVBoxLayout>
 
@@ -95,7 +96,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     History history;
     HISTORY_FILE_NAME unpackFileName = history.unpackFileName(fileName);
 
-    QString url;
+    QString url = "https://imgur.com/" + unpackFileName.file;
 
     // load pixmap
     QPixmap pixmap;
@@ -152,6 +153,16 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
     buttonDelete->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonDelete, &QPushButton::clicked, this, [=]() {
+        if (ConfigHandler().historyConfirmationToDelete() &&
+            QMessageBox::No ==
+              QMessageBox::question(
+                this,
+                tr("Confirm to delete"),
+                tr("Are you sure you want to delete a screenshot from the "
+                   "latest uploads and server?"),
+                QMessageBox::Yes | QMessageBox::No)) {
+            return;
+        }
         QDesktopServices::openUrl(
           QUrl(QStringLiteral("https://imgur.com/delete/%1")
                  .arg(unpackFileName.token)));
