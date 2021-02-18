@@ -25,11 +25,11 @@ class QPushButton;
 class QLabel;
 class QLineEdit;
 
-class GeneneralConf : public QWidget
+class GeneralConf : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GeneneralConf(QWidget* parent = nullptr);
+    explicit GeneralConf(QWidget* parent = nullptr);
 
 public slots:
     void updateComponents();
@@ -39,7 +39,9 @@ private slots:
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void showTrayIconChanged(bool checked);
+    void checkForUpdatesChanged(bool checked);
     void autostartChanged(bool checked);
+    void historyConfirmationToDelete(bool checked);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
     void importConfiguration();
@@ -55,9 +57,14 @@ private:
     void initShowSidePanelButton();
     void initShowDesktopNotification();
     void initShowTrayIcon();
+    void initHistoryConfirmationToDelete();
     void initConfigButtons();
+    void initCheckForUpdates();
     void initAutostart();
+    void initShowStartupLaunchMessage();
+    void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
+    void initCopyPathAfterSave();
     void initUseJpgForClipboard();
 
     // class members
@@ -66,7 +73,11 @@ private:
     QCheckBox* m_showTray;
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
+    QCheckBox* m_checkForUpdates;
     QCheckBox* m_autostart;
+    QCheckBox* m_showStartupLaunchMessage;
+    QCheckBox* m_copyAndCloseAfterUpload;
+    QCheckBox* m_copyPathAfterSave;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;
@@ -74,5 +85,6 @@ private:
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
+    QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
 };
