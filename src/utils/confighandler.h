@@ -99,7 +99,7 @@ public:
     bool useJpgForClipboard() const;
     void setUseJpgForClipboard(const bool);
 
-    void setDefaults();
+    void setDefaultSettings();
     void setAllTheButtons();
 
     void setIgnoreUpdateToVersion(const QString& text);
