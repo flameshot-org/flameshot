@@ -100,6 +100,8 @@ QVector<QColor> ConfigHandler::getUserColors()
              m_settings.value(QStringLiteral("userColors")).toStringList()) {
             if (QColor::isValidColor(hex)) {
                 colors.append(QColor(hex));
+            } else if (hex == QStringLiteral("picker")) {
+                colors.append(QColor());
             }
         }
 
@@ -118,7 +120,11 @@ void ConfigHandler::setUserColors(const QVector<QColor>& l)
     QStringList hexColors;
 
     for (const QColor& color : l) {
-        hexColors.append(color.name());
+        if (color.isValid()) {
+            hexColors.append(color.name());
+        } else {
+            hexColors.append(QStringLiteral("picker"));
+        }
     }
 
     m_settings.setValue(QStringLiteral("userColors"),
