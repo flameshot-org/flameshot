@@ -24,9 +24,11 @@
 #include <QDir>
 #include <QFile>
 #include <QKeySequence>
-#include <QProcess>
 #include <QStandardPaths>
 #include <algorithm>
+#if defined(Q_OS_MACOS)
+#include <QProcess>
+#endif
 
 ConfigHandler::ConfigHandler()
 {
@@ -573,9 +575,16 @@ const QString& ConfigHandler::uploadStorage()
     return m_strRes;
 }
 
-void ConfigHandler::setDefaults()
+void ConfigHandler::setDefaultSettings()
 {
-    m_settings.clear();
+    foreach (const QString& key, m_settings.allKeys()) {
+        if (key.startsWith("Shortcuts/")) {
+            // Do not reset Shortcuts
+            continue;
+        }
+        m_settings.remove(key);
+    }
+    m_settings.sync();
 }
 
 void ConfigHandler::setAllTheButtons()

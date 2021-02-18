@@ -168,7 +168,7 @@ void GeneralConf::resetConfiguration()
     if (reply == QMessageBox::Yes) {
         m_savePath->setText(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
-        ConfigHandler().setDefaults();
+        ConfigHandler().setDefaultSettings();
     }
 }
 
