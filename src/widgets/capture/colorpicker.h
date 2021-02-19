@@ -25,8 +25,6 @@ class ColorPicker : public QWidget
 public:
     explicit ColorPicker(QWidget* parent = nullptr);
 
-    QColor drawColor();
-
     void show();
     void hide();
 
