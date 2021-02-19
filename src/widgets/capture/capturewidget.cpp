@@ -203,7 +203,7 @@ CaptureWidget::~CaptureWidget()
     } else {
         emit captureFailed(m_id);
     }
-    m_config.setdrawThickness(m_context.thickness);
+    m_config.setDrawThickness(m_context.thickness);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -552,6 +552,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         m_colorPicker->hide();
         m_rightClick = false;
         if (!m_context.color.isValid()) {
+            m_context.color = ConfigHandler().drawColorValue();
             m_panel->show();
         }
         // when we end the drawing we have to register the last  point and
@@ -997,7 +998,7 @@ void CaptureWidget::decrementCircleCount()
 void CaptureWidget::setDrawThickness(const int& t)
 {
     m_context.thickness = qBound(0, t, 100);
-    ConfigHandler().setdrawThickness(m_context.thickness);
+    ConfigHandler().setDrawThickness(m_context.thickness);
     emit thicknessChanged(m_context.thickness);
 }
 
