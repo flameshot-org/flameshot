@@ -117,22 +117,6 @@ QVector<QColor> ConfigHandler::getUserColors()
     return colors;
 }
 
-void ConfigHandler::setUserColors(const QVector<QColor>& l)
-{
-    QStringList hexColors;
-
-    for (const QColor& color : l) {
-        if (color.isValid()) {
-            hexColors.append(color.name());
-        } else {
-            hexColors.append(QStringLiteral("picker"));
-        }
-    }
-
-    m_settings.setValue(QStringLiteral("userColors"),
-                        QVariant::fromValue(hexColors));
-}
-
 QString ConfigHandler::savePath()
 {
     return m_settings.value(QStringLiteral("savePath")).toString();
@@ -301,7 +285,7 @@ int ConfigHandler::drawThicknessValue()
     return res;
 }
 
-void ConfigHandler::setdrawThickness(const int thickness)
+void ConfigHandler::setDrawThickness(const int thickness)
 {
     m_settings.setValue(QStringLiteral("drawThickness"), thickness);
 }
