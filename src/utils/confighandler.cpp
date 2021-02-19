@@ -368,6 +368,8 @@ bool ConfigHandler::verifyLaunchFile()
 
 void ConfigHandler::setStartupLaunch(const bool start)
 {
+
+    m_settings.setValue(QStringLiteral("startupLaunch"), start);
     if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
         return;
     }
@@ -447,7 +449,6 @@ void ConfigHandler::setStartupLaunch(const bool start)
         bootUpPath.endGroup();
     }
 #endif
-    m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
 bool ConfigHandler::showStartupLaunchMessage()
