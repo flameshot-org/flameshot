@@ -53,11 +53,6 @@ ColorPicker::ColorPicker(QWidget* parent)
     }
 }
 
-QColor ColorPicker::drawColor()
-{
-    return m_drawColor;
-}
-
 void ColorPicker::show()
 {
     grabMouse();
@@ -131,8 +126,7 @@ void ColorPicker::mouseMoveEvent(QMouseEvent* e)
 {
     for (int i = 0; i < m_colorList.size(); ++i) {
         if (m_colorAreaList.at(i).contains(e->pos())) {
-            m_drawColor = m_colorList.at(i);
-            emit colorSelected(m_drawColor);
+            emit colorSelected(m_colorList.at(i));
             update();
             break;
         }

@@ -32,7 +32,6 @@ public:
     void setButtons(const QVector<CaptureToolButton::ButtonType>&);
 
     QVector<QColor> getUserColors();
-    void setUserColors(const QVector<QColor>&);
 
     QString savePath();
     void setSavePath(const QString&);
@@ -65,7 +64,7 @@ public:
     void setDisabledTrayIcon(const bool);
 
     int drawThicknessValue();
-    void setdrawThickness(const int);
+    void setDrawThickness(const int);
 
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);
