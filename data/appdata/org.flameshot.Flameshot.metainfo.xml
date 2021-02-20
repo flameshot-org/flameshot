@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: none
+SPDX-License-Identifier: CC0-1.0
+-->
 <component type="desktop-application">
   <id>org.flameshot.Flameshot</id>
   <metadata_license>CC0-1.0</metadata_license>
