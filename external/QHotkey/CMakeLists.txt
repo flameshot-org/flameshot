@@ -33,11 +33,11 @@ else()
     set(SRC_FILES ${SRC_FILES} qhotkey_x11.cpp)
 endif()
 
-add_library(QHotkey ${SRC_FILES} ${MOC_HEADERS})
-add_library(QHotkey::QHotkey ALIAS QHotkey)
-target_link_libraries(QHotkey ${LIBS})
+add_library(qhotkey ${SRC_FILES} ${MOC_HEADERS})
+add_library(QHotkey::QHotkey ALIAS qhotkey)
+target_link_libraries(qhotkey ${LIBS})
 
-target_include_directories(QHotkey
+target_include_directories(qhotkey
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:include>)

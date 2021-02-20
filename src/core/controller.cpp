@@ -50,6 +50,7 @@
 #endif
 
 #if defined(Q_OS_MACOS)
+#include <QOperatingSystemVersion>
 #include <QScreen>
 #endif
 
@@ -243,8 +244,8 @@ void Controller::requestCapture(const CaptureRequest& request)
                 this->startFullscreenCapture(id);
             });
             break;
-        // TODO: Figure out the code path that gets here so the deprated warning
-        // can be fixed
+            // TODO: Figure out the code path that gets here so the deprated
+            // warning can be fixed
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
             doLater(request.delay(), this, [this, id, number]() {
@@ -321,6 +322,7 @@ void Controller::startVisualCapture(const uint id,
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
+        // m_captureWindow->show(); //Debug
 #endif
         if (!m_appLatestUrl.isEmpty() &&
             ConfigHandler().ignoreUpdateToVersion().compare(
@@ -344,7 +346,8 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     }
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
-        emit captureTaken(id, p);
+        QRect selection; // `flameshot screen` does not support --selection
+        emit captureTaken(id, p, selection);
     } else {
         emit captureFailed(id);
     }
@@ -572,13 +575,14 @@ void Controller::startFullscreenCapture(const uint id)
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     if (ok) {
-        emit captureTaken(id, p);
+        QRect selection; // `flameshot full` does not support --selection
+        emit captureTaken(id, p, selection);
     } else {
         emit captureFailed(id);
     }
 }
 
-void Controller::handleCaptureTaken(uint id, QPixmap p)
+void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
 {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {

@@ -85,6 +85,6 @@ private:
     QLineEdit* m_savePath;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
-    QCheckBox* m_useJpgForClipboard;
     QCheckBox* m_historyConfirmationToDelete;
+    QCheckBox* m_useJpgForClipboard;
 };

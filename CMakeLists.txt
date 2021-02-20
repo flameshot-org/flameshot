@@ -31,16 +31,14 @@ set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/l
 #endif ()
 
 project(
-  flameshot
-  VERSION ${FLAMESHOT_VERSION}
-  LANGUAGES CXX)
+        flameshot
+        VERSION ${FLAMESHOT_VERSION}
+        LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
-#  # Required to generate MOC
-#  add_subdirectory(external/QHotkey)
 endif()
 
 
@@ -60,8 +58,8 @@ elseif(APPLE)
   set(CMAKE_MACOSX_RPATH ON)
 endif()
 set(RUN_IN_PLACE
-    ${DEFAULT_RUN_IN_PLACE}
-    CACHE BOOL "Run directly in source directory structure")
+        ${DEFAULT_RUN_IN_PLACE}
+        CACHE BOOL "Run directly in source directory structure")
 
 option(GENERATE_TS "Regenerate translation source files" OFF)
 
@@ -86,15 +84,15 @@ enable_sanitizers(project_options)
 # allow for static analysis options include(cmake/StaticAnalyzers.cmake)
 
 set(QAPPLICATION_CLASS
-    QApplication
-    CACHE STRING "Inheritance class for SingleApplication")
+        QApplication
+        CACHE STRING "Inheritance class for SingleApplication")
 add_subdirectory(external/singleapplication)
 
 if(USE_EXTERNAL_SPDLOG)
-    find_package(spdlog REQUIRED)
-    message(STATUS "Using external spdlog library")
+  find_package(spdlog REQUIRED)
+  message(STATUS "Using external spdlog library")
 else()
-    add_subdirectory(external/spdlog)
+  add_subdirectory(external/spdlog)
 endif()
 
 if (APPLE)
@@ -109,9 +107,9 @@ set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_HOMEPAGE_URL "https://flameshot.org")
 set(CPACK_PACKAGE_CONTACT "flameshot-org developers <info@flameshot.org>")
 set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/data/img/app/org.flameshot.Flameshot.svg") # TODO: Can any generator make
-                                                                                       # use of this?
+# use of this?
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/README.md") # TODO: Where is this used? Do we need a better
-                                                                    # source?
+# source?
 
 if(WIN32)
   # Include all dynamically linked runtime libraries such as MSVCRxxx.dll
