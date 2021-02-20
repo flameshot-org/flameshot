@@ -46,6 +46,7 @@ UtilityPanel::UtilityPanel(QWidget* parent)
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     move(0, 0);
 #endif
+    hide();
 }
 
 QWidget* UtilityPanel::toolWidget() const

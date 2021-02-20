@@ -39,8 +39,6 @@ set(PROJECT_NAME_CAPITALIZED "Flameshot")
 # This can be read from ${PROJECT_NAME} after project() is called
 if (APPLE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")
-  #  # Required to generate MOC
-  #  add_subdirectory(external/QHotkey)
 endif()
 
 
