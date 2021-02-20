@@ -24,6 +24,7 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
+#include "src/core/controller.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/storage/storagemanager.h"
 #include "src/tools/toolfactory.h"
@@ -199,7 +200,7 @@ CaptureWidget::CaptureWidget(const uint id,
 CaptureWidget::~CaptureWidget()
 {
     if (m_captureDone) {
-        emit captureTaken(m_id, this->pixmap());
+        emit captureTaken(m_id, this->pixmap(), m_context.selection);
     } else {
         emit captureFailed(m_id);
     }
@@ -469,7 +470,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             QPoint newTopLeft =
               initialRect.topLeft() + (e->pos() - m_dragStartPoint);
             inputRect = QRect(newTopLeft, initialRect.size());
-
         } else {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
@@ -722,12 +722,12 @@ void CaptureWidget::initPanel()
     if (m_context.fullscreen) {
 #if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+
         if (currentScreen) {
             panelRect = currentScreen->geometry();
             auto devicePixelRatio = currentScreen->devicePixelRatio();
             panelRect.moveTo(panelRect.x() / devicePixelRatio,
                              panelRect.y() / devicePixelRatio);
-
         } else {
             panelRect = QGuiApplication::primaryScreen()->geometry();
             auto devicePixelRatio =
@@ -816,8 +816,18 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
     }
 #if defined(Q_OS_MACOS)
     int ax = (width() - m_updateNotificationWidget->width()) / 2;
-#else
+#elif (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
     QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+    int ax = helpRect.left() +
+             ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
+#else
+    QRect helpRect;
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    if (currentScreen) {
+        helpRect = currentScreen->geometry();
+    } else {
+        helpRect = QGuiApplication::primaryScreen()->geometry();
+    }
     int ax = helpRect.left() +
              ((helpRect.width() - m_updateNotificationWidget->width()) / 2);
 #endif
