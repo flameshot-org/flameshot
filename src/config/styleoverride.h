@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2020 Jeremy Borgman <borgman.jeremy@pm.me>
 //
 // Created by jeremy on 9/24/20.
-//
 
 #ifndef FLAMESHOT_STYLEOVERRIDE_H
 #define FLAMESHOT_STYLEOVERRIDE_H
