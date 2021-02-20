@@ -42,10 +42,10 @@ GeneralConf::GeneralConf(QWidget* parent)
     initHistoryConfirmationToDelete();
     initCheckForUpdates();
     initAutostart();
-    initUseJpgForClipboard();
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
+    initUseJpgForClipboard();
     initSaveAfterCopy();
 
     // this has to be at the end
@@ -386,6 +386,11 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 }
 
+void GeneralConf::historyConfirmationToDelete(bool checked)
+{
+    ConfigHandler().setHistoryConfirmationToDelete(checked);
+}
+
 void GeneralConf::initUseJpgForClipboard()
 {
     m_useJpgForClipboard =
@@ -401,11 +406,6 @@ void GeneralConf::initUseJpgForClipboard()
             &QCheckBox::clicked,
             this,
             &GeneralConf::useJpgForClipboardChanged);
-}
-
-void GeneralConf::historyConfirmationToDelete(bool checked)
-{
-    ConfigHandler().setHistoryConfirmationToDelete(checked);
 }
 
 void GeneralConf::saveAfterCopyChanged(bool checked)
