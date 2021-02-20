@@ -51,5 +51,4 @@ private:
     QVBoxLayout* m_layout;
     QPropertyAnimation* m_showAnimation;
     QPropertyAnimation* m_hideAnimation;
-    QPushButton* m_hide;
 };

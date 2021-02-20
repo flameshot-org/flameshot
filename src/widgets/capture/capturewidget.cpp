@@ -112,9 +112,12 @@ CaptureWidget::CaptureWidget(const uint id,
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
-            if (topLeft.x() > topLeftScreen.x() ||
-                topLeft.y() > topLeftScreen.y()) {
-                topLeft = topLeftScreen;
+
+            if (topLeftScreen.x() < topLeft.x()) {
+                topLeft.setX(topLeftScreen.x());
+            }
+            if (topLeftScreen.y() < topLeft.y()) {
+                topLeft.setY(topLeftScreen.y());
             }
         }
         move(topLeft);
@@ -716,13 +719,7 @@ void CaptureWidget::initPanel()
 {
     QRect panelRect = rect();
     if (m_context.fullscreen) {
-#if (defined(Q_OS_LINUX) && QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
-        panelRect = QGuiApplication::primaryScreen()->geometry();
-        auto devicePixelRatio =
-          QGuiApplication::primaryScreen()->devicePixelRatio();
-        panelRect.moveTo(panelRect.x() / devicePixelRatio,
-                         panelRect.y() / devicePixelRatio);
-#else
+#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
 
         if (currentScreen) {
@@ -737,6 +734,12 @@ void CaptureWidget::initPanel()
             panelRect.moveTo(panelRect.x() / devicePixelRatio,
                              panelRect.y() / devicePixelRatio);
         }
+#else
+        panelRect = QGuiApplication::primaryScreen()->geometry();
+        auto devicePixelRatio =
+          QGuiApplication::primaryScreen()->devicePixelRatio();
+        panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                         panelRect.y() / devicePixelRatio);
 #endif
     }
 
