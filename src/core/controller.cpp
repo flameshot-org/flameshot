@@ -16,7 +16,11 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "controller.h"
+
+#if defined(Q_OS_MACOS)
 #include "external/QHotkey/QHotkey"
+#endif
+
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
