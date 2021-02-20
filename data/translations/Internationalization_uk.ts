@@ -87,7 +87,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Весь екран (поточний дисплей)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
@@ -224,17 +224,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="219"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося отримати інформацію про останню версію.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
+        <translation>Помилка</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдається закрити активні модальні віджети</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="405"/>
@@ -503,7 +503,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="118"/>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Import</source>
-        <translation type="unfinished">Імпорт</translation>
+        <translation>Імпорт</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
@@ -511,169 +511,169 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
+        <translation>Помилка</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Не вдалось прочитати файл.</translation>
+        <translation>Не вдалось прочитати файл.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="133"/>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Не вдалось записати файл.</translation>
+        <translation>Не вдалось записати файл.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="143"/>
         <source>Save File</source>
-        <translation type="unfinished">Зберегти файл</translation>
+        <translation>Зберегти файл</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="165"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Підтвердити скидання</translation>
+        <translation>Підтвердити скидання</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="166"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Ви дійсно хочете скинути налаштування?</translation>
+        <translation>Ви дійсно хочете скинути налаштування?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="177"/>
         <source>Show help message</source>
-        <translation type="unfinished">Показувати повідомлення довідки</translation>
+        <translation>Показувати повідомлення довідки</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="181"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">Показувати повідомлення довідки на початку режиму захоплення.</translation>
+        <translation>Показувати повідомлення довідки на початку режиму захоплення.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="191"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished">Показувати кнопку бічній панелі</translation>
+        <translation>Показувати кнопку бічній панелі</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished">Показувати кнопку відкриття бічної панелі в режимі захоплення.</translation>
+        <translation>Показувати кнопку відкриття бічної панелі в режимі захоплення.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
         <location filename="../../src/config/generalconf.cpp" line="208"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Показувати повідомлення</translation>
+        <translation>Показувати повідомлення</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">Показувати значок на панелі</translation>
+        <translation>Показувати значок у треї</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="224"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">Показувати значок на панелі повідомленнь</translation>
+        <translation>Показувати значок на панелі повідомленнь</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Потрібне підтвердження, щоб видалити знімок екрана з останніх завантажень</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Файл налаштувань</translation>
+        <translation>Файл налаштувань</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Export</source>
-        <translation type="unfinished">Експорт</translation>
+        <translation>Експорт</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Reset</source>
-        <translation type="unfinished">Скинути</translation>
+        <translation>Скинути</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматична перевірка наявності оновлень</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="297"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">Запускати при старті системи</translation>
+        <translation>Запускати при старті системи</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished">Запускати Flameshot</translation>
+        <translation>Запускати Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished">Показувати вітання під час запуску</translation>
+        <translation>Показувати вітання під час запуску</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished">Копіювати URL після завантаження</translation>
+        <translation>Копіювати URL після завантаження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished">Копіювати URL і закрити вікно після завантаження</translation>
+        <translation>Копіювати URL і закрити вікно після завантаження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Save image after copy</source>
-        <translation type="unfinished">Зберігати зображення після копіювання</translation>
+        <translation>Зберігати зображення після копіювання</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished">Зберігати файл зображення після копіювання</translation>
+        <translation>Зберігати файл зображення після копіювання</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="349"/>
         <source>Save Path</source>
-        <translation type="unfinished">Шлях збереження</translation>
+        <translation>Шлях збереження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
         <source>Change...</source>
-        <translation type="unfinished">Змінити...</translation>
+        <translation>Змінити...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished">Використовувати фіксований шлях для знімків екрана для збереження</translation>
+        <translation>Використовувати фіксований шлях для знімків екрана для збереження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <location filename="../../src/config/generalconf.cpp" line="402"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовуйте формат JPG для буфера обміну (за замовчуванням PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <location filename="../../src/config/generalconf.cpp" line="435"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished">Скопіювати шлях до файлу після збереження</translation>
+        <translation>Скопіювати шлях до файлу після збереження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished">Обрати папку</translation>
+        <translation>Обрати папку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished">Не вдалося записати в папку.</translation>
+        <translation>Не вдалося записати в папку.</translation>
     </message>
 </context>
 <context>
@@ -706,12 +706,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="160"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Підтвердьте видалення</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="161"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви впевнені, що хочете видалити знімок екрана з останніх завантажень та сервера?</translation>
     </message>
 </context>
 <context>
@@ -1073,12 +1073,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося зареєструвати %1. Помилка: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося скасувати реєстрацію %1. Помилка: %2</translation>
     </message>
 </context>
 <context>
@@ -1108,7 +1108,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка під час збереження в буфер обміну</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="108"/>
@@ -1223,7 +1223,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Геометрія друку виділеного файлу у форматі W H X Y. Якщо нічого не вказано, нічого не робиться</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="192"/>
@@ -1361,7 +1361,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть весь екран</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
@@ -1386,7 +1386,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>Фіксувати текст у текстовій області</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
