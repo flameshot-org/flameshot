@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2021 Yuriy Puchkov <yuriy.puchkov@namecheap.com>
 //
 // Created by yuriypuchkov on 09.02.2021.
-//
 
 #include "qguiappcurrentscreen.h"
 #include <QCursor>
