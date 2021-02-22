@@ -169,7 +169,12 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
             p = p.copy(geometry);
         }
     } else {
-        p = QApplication::desktop()->screen(screenNumber)->grab();
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        p = currentScreen->grabWindow(screenNumber,
+                                      currentScreen->geometry().x(),
+                                      currentScreen->geometry().y(),
+                                      currentScreen->geometry().width(),
+                                      currentScreen->geometry().height());
         ok = true;
     }
     return p;
