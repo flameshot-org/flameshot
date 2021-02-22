@@ -7,6 +7,7 @@
 #include "circlecount/circlecounttool.h"
 #include "copy/copytool.h"
 #include "exit/exittool.h"
+#include "imgur/imguruploadertool.h"
 #include "launcher/applaunchertool.h"
 #include "line/linetool.h"
 #include "marker/markertool.h"
@@ -20,7 +21,6 @@
 #include "selection/selectiontool.h"
 #include "sizeindicator/sizeindicatortool.h"
 #include "src/utils/confighandler.h"
-#include "storage/storagemanager.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
 
@@ -31,7 +31,6 @@ ToolFactory::ToolFactory(QObject* parent)
 CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
                                      QObject* parent)
 {
-    StorageManager storageManager;
     CaptureTool* tool;
     switch (t) {
         case CaptureToolButton::TYPE_ARROW:
@@ -47,8 +46,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
             tool = new ExitTool(parent);
             break;
         case CaptureToolButton::TYPE_IMAGEUPLOADER:
-            tool = storageManager.imgUploaderTool(
-              ConfigHandler().uploadStorage(), parent);
+            tool = new ImgurUploaderTool(parent);
             break;
         case CaptureToolButton::TYPE_DRAWER:
             tool = new LineTool(parent);
