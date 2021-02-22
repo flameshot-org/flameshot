@@ -116,12 +116,24 @@ void CaptureLauncher::startDrag()
 {
     QDrag* dragHandler = new QDrag(this);
     QMimeData* mimeData = new QMimeData;
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+    mimeData->setImageData(m_imageLabel->pixmap(Qt::ReturnByValue));
+#else
     mimeData->setImageData(m_imageLabel->pixmap());
+#endif
     dragHandler->setMimeData(mimeData);
 
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+    dragHandler->setPixmap(
+      m_imageLabel->pixmap(Qt::ReturnByValue)
+        .scaled(
+          256, 256, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
+    dragHandler->exec();
+#else
     dragHandler->setPixmap(m_imageLabel->pixmap()->scaled(
       256, 256, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     dragHandler->exec();
+#endif
 }
 
 void CaptureLauncher::connectCaptureSlots()
