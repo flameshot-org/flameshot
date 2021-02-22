@@ -6,6 +6,7 @@
 #include "src/config/generalconf.h"
 #include "src/config/shortcutswidget.h"
 #include "src/config/strftimechooserwidget.h"
+#include "src/config/uploadstorageconfig.h"
 #include "src/config/visualseditor.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/confighandler.h"
@@ -61,6 +62,12 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
     addTab(m_shortcuts, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
+
+    // upload storage configuration
+    m_uploadStorageConfig = new UploadStorageConfig();
+    addTab(m_uploadStorageConfig,
+           QIcon(modifier + "cloud-upload.svg"),
+           tr("Storage"));
 
     // connect update sigslots
     connect(this,

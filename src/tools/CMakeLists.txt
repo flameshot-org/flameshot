@@ -6,10 +6,22 @@ target_sources(flameshot PRIVATE copy/copytool.h copy/copytool.cpp)
 target_sources(flameshot PRIVATE exit/exittool.h exit/exittool.cpp)
 target_sources(
   flameshot
-        PRIVATE imgur/imguruploader.h
-        imgur/imguruploadertool.h
-        imgur/imguruploader.cpp
-        imgur/imguruploadertool.cpp
+  PRIVATE storage/storagemanager.h
+          storage/storagemanager.cpp
+          storage/imguploader.h
+          storage/imguploadertool.h
+          storage/imguploader.cpp
+          storage/imguploadertool.cpp
+          storage/imgur/imguruploader.h
+          storage/imgur/imguruploadertool.h
+          storage/imgur/imguruploader.cpp
+          storage/imgur/imguruploadertool.cpp
+          storage/s3/imgs3settings.h
+          storage/s3/imgs3settings.cpp
+          storage/s3/imgs3uploader.h
+          storage/s3/imgs3uploadertool.h
+          storage/s3/imgs3uploader.cpp
+          storage/s3/imgs3uploadertool.cpp
 )
 target_sources(
   flameshot
