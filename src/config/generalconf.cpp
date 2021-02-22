@@ -370,7 +370,10 @@ void GeneralConf::initSaveAfterCopy()
     }
     m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
-    QString foreground = this->palette().foreground().color().name();
+    // #if QT_DEPRECATED_SINCE(5, 13)
+    //    QT_DEPRECATED_X("Use QPalette::windowText() instead")
+    //    inline const QBrush &foreground() const { return windowText(); }
+    QString foreground = this->palette().windowText().color().name();
     m_savePath->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
     pathLayout->addWidget(m_savePath);
 
