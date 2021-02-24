@@ -707,19 +707,10 @@ void CaptureWidget::initPanel()
     if (m_context.fullscreen) {
 #if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-
-        if (currentScreen) {
-            panelRect = currentScreen->geometry();
-            auto devicePixelRatio = currentScreen->devicePixelRatio();
-            panelRect.moveTo(panelRect.x() / devicePixelRatio,
-                             panelRect.y() / devicePixelRatio);
-        } else {
-            panelRect = QGuiApplication::primaryScreen()->geometry();
-            auto devicePixelRatio =
-              QGuiApplication::primaryScreen()->devicePixelRatio();
-            panelRect.moveTo(panelRect.x() / devicePixelRatio,
-                             panelRect.y() / devicePixelRatio);
-        }
+        panelRect = currentScreen->geometry();
+        auto devicePixelRatio = currentScreen->devicePixelRatio();
+        panelRect.moveTo(panelRect.x() / devicePixelRatio,
+                         panelRect.y() / devicePixelRatio);
 #else
         panelRect = QGuiApplication::primaryScreen()->geometry();
         auto devicePixelRatio =
@@ -729,18 +720,22 @@ void CaptureWidget::initPanel()
 #endif
     }
 
-    ConfigHandler config;
-
-    if (config.showSidePanelButtonValue()) {
+    if (ConfigHandler().showSidePanelButtonValue()) {
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
         makeChild(panelToggleButton);
         panelToggleButton->setColor(m_uiColor);
         panelToggleButton->setOrientation(
           OrientablePushButton::VerticalBottomToTop);
+#if defined(Q_OS_MACOS)
+        panelToggleButton->move(0,
+                                panelRect.y() + panelRect.height() / 2 -
+                                  panelToggleButton->width() / 2);
+#else
         panelToggleButton->move(panelRect.x(),
                                 panelRect.y() + panelRect.height() / 2 -
                                   panelToggleButton->width() / 2);
+#endif
         panelToggleButton->setCursor(Qt::ArrowCursor);
         (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
         connect(panelToggleButton,
