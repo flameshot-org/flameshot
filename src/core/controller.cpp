@@ -382,6 +382,7 @@ void Controller::openLauncherWindow()
 
 void Controller::enableTrayIcon()
 {
+    ConfigHandler().setDisabledTrayIcon(false);
     if (m_trayIcon) {
         m_trayIcon->show();
         return;
@@ -391,7 +392,6 @@ void Controller::enableTrayIcon()
         Q_ASSERT(m_trayIconMenu);
     }
 
-    ConfigHandler().setDisabledTrayIcon(false);
     QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
@@ -508,7 +508,7 @@ void Controller::enableTrayIcon()
 
 void Controller::disableTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
     if (m_trayIcon) {
         m_trayIcon->hide();
     }
