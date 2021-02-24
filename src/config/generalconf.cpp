@@ -204,8 +204,7 @@ void GeneralConf::initShowTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
-    ConfigHandler config;
-    bool checked = !config.disabledTrayIconValue();
+    bool checked = !ConfigHandler().disabledTrayIconValue();
     m_showTray->setChecked(checked);
     m_showTray->setToolTip(tr("Show the systemtray icon"));
     m_layout->addWidget(m_showTray);
@@ -281,8 +280,7 @@ void GeneralConf::initCheckForUpdates()
 void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
-    ConfigHandler config;
-    bool checked = config.startupLaunchValue();
+    bool checked = ConfigHandler().startupLaunchValue();
     m_autostart->setChecked(checked);
     m_autostart->setToolTip(tr("Launch Flameshot"));
     m_layout->addWidget(m_autostart);
