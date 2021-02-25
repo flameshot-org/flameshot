@@ -386,6 +386,10 @@ void GeneralConf::initUseJpgForClipboard()
       tr("Use JPG format for clipboard (PNG default)"));
     m_layout->addWidget(m_useJpgForClipboard);
 
+#if defined(Q_OS_MACOS)
+    // FIXME - temporary fix to disable option for MacOS
+    m_useJpgForClipboard->hide();
+#endif
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,
