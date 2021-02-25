@@ -25,7 +25,7 @@ public slots:
 private:
     // using charArr = char[MAX_CHARACTERS];
     QString charArrToQString(const char* c);
-    char* QStringTocharArr(const QString& s);
+    char* QStringToCharArr(const QString& s);
 
     void fixPath(QString& directory, QString& filename);
 };
