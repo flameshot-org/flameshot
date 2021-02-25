@@ -104,62 +104,57 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 {
     bool ok = false;
-    while (!ok) {
-        ConfigHandler config;
-        QString savePath = FileNameHandler().absoluteSavePath();
+    ConfigHandler config;
+    QString savePath = FileNameHandler().absoluteSavePath();
 #if defined(Q_OS_MACOS)
-        for (QWidget* widget : qApp->topLevelWidgets()) {
-            QString className(widget->metaObject()->className());
-            if (0 == className.compare(
-                       CaptureWidget::staticMetaObject.className())) {
-                widget->showNormal();
-                widget->hide();
-                break;
-            }
-        }
-#endif
-        if (!config.savePathFixed()) {
-            savePath = QFileDialog::getSaveFileName(
-              nullptr,
-              QObject::tr("Save screenshot"),
-              FileNameHandler().absoluteSavePath(),
-              QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
-                            "file (*.bmp);;JPEG file (*.jpg)"));
-        }
-
-        if (savePath.isNull()) {
+    for (QWidget* widget : qApp->topLevelWidgets()) {
+        QString className(widget->metaObject()->className());
+        if (0 ==
+            className.compare(CaptureWidget::staticMetaObject.className())) {
+            widget->showNormal();
+            widget->hide();
             break;
         }
-
-        if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
-            !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
-            !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
-            savePath += QLatin1String(".png");
-        }
-
-        ok = capture.save(savePath);
-
-        if (ok) {
-            QString pathNoFile =
-              savePath.left(savePath.lastIndexOf(QLatin1String("/")));
-            ConfigHandler().setSavePath(pathNoFile);
-            QString msg = QObject::tr("Capture saved as ") + savePath;
-            if (config.copyPathAfterSaveEnabled()) {
-                QApplication::clipboard()->setText(savePath);
-                msg = QObject::tr(
-                        "Capture is saved and copied to the clipboard as ") +
-                      savePath;
-            }
-            SystemNotification().sendMessage(msg, savePath);
-            Controller::getInstance()->sendCaptureSaved(
-              m_id, QFileInfo(savePath).canonicalFilePath());
-        } else {
-            QString msg = QObject::tr("Error trying to save as ") + savePath;
-            QMessageBox saveErrBox(
-              QMessageBox::Warning, QObject::tr("Save Error"), msg);
-            saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
-            saveErrBox.exec();
-        }
     }
+#endif
+    if (!config.savePathFixed()) {
+        savePath = QFileDialog::getSaveFileName(
+          nullptr,
+          QObject::tr("Save screenshot"),
+          FileNameHandler().absoluteSavePath(),
+          QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
+                        "file (*.bmp);;JPEG file (*.jpg)"));
+    }
+
+    if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
+        !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
+        !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
+        savePath += QLatin1String(".png");
+    }
+
+    ok = capture.save(savePath);
+
+    if (ok) {
+        QString pathNoFile =
+          savePath.left(savePath.lastIndexOf(QLatin1String("/")));
+        ConfigHandler().setSavePath(pathNoFile);
+        QString msg = QObject::tr("Capture saved as ") + savePath;
+        if (config.copyPathAfterSaveEnabled()) {
+            QApplication::clipboard()->setText(savePath);
+            msg =
+              QObject::tr("Capture is saved and copied to the clipboard as ") +
+              savePath;
+        }
+        SystemNotification().sendMessage(msg, savePath);
+        Controller::getInstance()->sendCaptureSaved(
+          m_id, QFileInfo(savePath).canonicalFilePath());
+    } else {
+        QString msg = QObject::tr("Error trying to save as ") + savePath;
+        QMessageBox saveErrBox(
+          QMessageBox::Warning, QObject::tr("Save Error"), msg);
+        saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
+        saveErrBox.exec();
+    }
+
     return ok;
 }
