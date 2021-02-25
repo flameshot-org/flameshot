@@ -238,9 +238,19 @@ void ConfigHandler::setDesktopNotification(const bool showDesktopNotification)
                         showDesktopNotification);
 }
 
+QString ConfigHandler::filenamePatternDefault()
+{
+    m_strRes = QLatin1String("%F_%H-%M");
+    return m_strRes;
+}
+
 QString ConfigHandler::filenamePatternValue()
 {
-    return m_settings.value(QStringLiteral("filenamePattern")).toString();
+    m_strRes = m_settings.value(QStringLiteral("filenamePattern")).toString();
+    if (m_strRes.isEmpty()) {
+        m_strRes = filenamePatternDefault();
+    }
+    return m_strRes;
 }
 
 void ConfigHandler::setFilenamePattern(const QString& pattern)
