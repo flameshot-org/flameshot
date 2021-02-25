@@ -1,7 +1,7 @@
 # common
 
 .idea
-
+.cache
 # C++ objects and libs
 
 *.slo
