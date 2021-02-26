@@ -238,9 +238,19 @@ void ConfigHandler::setDesktopNotification(const bool showDesktopNotification)
                         showDesktopNotification);
 }
 
+QString ConfigHandler::filenamePatternDefault()
+{
+    m_strRes = QLatin1String("%F_%H-%M");
+    return m_strRes;
+}
+
 QString ConfigHandler::filenamePatternValue()
 {
-    return m_settings.value(QStringLiteral("filenamePattern")).toString();
+    m_strRes = m_settings.value(QStringLiteral("filenamePattern")).toString();
+    if (m_strRes.isEmpty()) {
+        m_strRes = filenamePatternDefault();
+    }
+    return m_strRes;
 }
 
 void ConfigHandler::setFilenamePattern(const QString& pattern)
@@ -318,31 +328,29 @@ bool ConfigHandler::startupLaunchValue()
 
 bool ConfigHandler::verifyLaunchFile()
 {
-    bool res = false;
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
                                           "autostart/",
                                           QStandardPaths::LocateDirectory) +
                    "Flameshot.desktop";
-    res = QFile(path).exists();
+    bool res = QFile(path).exists();
 #elif defined(Q_OS_WIN)
     QSettings bootUpSettings(
       "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
       QSettings::NativeFormat);
-    res = bootUpSettings.value("Flameshot").toString() ==
-          QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
+    bool res =
+      bootUpSettings.value("Flameshot").toString() ==
+      QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
 #endif
     return res;
 }
 
 void ConfigHandler::setStartupLaunch(const bool start)
 {
-
-    m_settings.setValue(QStringLiteral("startupLaunch"), start);
     if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
         return;
     }
+    m_settings.setValue(QStringLiteral("startupLaunch"), start);
 #if defined(Q_OS_MACOS)
     /* TODO - there should be more correct way via API, but didn't find it
      without extra dependencies, there should be something like that:
@@ -508,9 +516,12 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 
 bool ConfigHandler::useJpgForClipboard() const
 {
+#if not defined(Q_OS_MACOS)
+    // FIXME - temporary fix to disable option for MacOS
     if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
         return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
     }
+#endif
     return false;
 }
 
