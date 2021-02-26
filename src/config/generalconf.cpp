@@ -155,7 +155,30 @@ void GeneralConf::resetConfiguration()
         m_savePath->setText(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
         ConfigHandler().setDefaultSettings();
+        setActualFormData();
     }
+}
+
+void GeneralConf::setActualFormData()
+{
+    // read and set current settings
+    ConfigHandler config;
+    m_sysNotifications->setChecked(config.desktopNotificationValue());
+    m_showTray->setChecked(!config.disabledTrayIconValue());
+    m_helpMessage->setChecked(config.showHelpValue());
+    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
+    m_checkForUpdates->setChecked(config.checkForUpdates());
+    m_autostart->setChecked(config.startupLaunchValue());
+    m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
+    m_copyAndCloseAfterUpload->setChecked(
+      config.copyAndCloseAfterUploadEnabled());
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
+    m_savePath->setText(config.savePath());
+    m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
+    m_historyConfirmationToDelete->setChecked(
+      config.historyConfirmationToDelete());
+    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 }
 
 void GeneralConf::initShowHelp()
@@ -386,6 +409,10 @@ void GeneralConf::initUseJpgForClipboard()
       tr("Use JPG format for clipboard (PNG default)"));
     m_layout->addWidget(m_useJpgForClipboard);
 
+#if defined(Q_OS_MACOS)
+    // FIXME - temporary fix to disable option for MacOS
+    m_useJpgForClipboard->hide();
+#endif
     connect(m_useJpgForClipboard,
             &QCheckBox::clicked,
             this,

@@ -43,6 +43,7 @@ public:
     bool desktopNotificationValue();
     void setDesktopNotification(const bool);
 
+    QString filenamePatternDefault();
     QString filenamePatternValue();
     void setFilenamePattern(const QString&);
 

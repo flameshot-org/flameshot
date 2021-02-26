@@ -29,7 +29,6 @@ ScreenshotSaver::ScreenshotSaver(const unsigned id)
 // dbus, the application freezes.
 void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
 {
-
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
     if ((ConfigHandler().saveAfterCopyValue()) &&
@@ -42,6 +41,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     // Otherwise only save to clipboard
     else {
         if (ConfigHandler().useJpgForClipboard()) {
+            // FIXME - it doesn't work on MacOS
             QByteArray array;
             QBuffer buffer{ &array };
             QImageWriter imageWriter{ &buffer, "JPEG" };
@@ -58,14 +58,12 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
                 QMimeData* mimeData = new QMimeData;
                 mimeData->setData("image/jpeg", array);
                 QApplication::clipboard()->setMimeData(mimeData);
-
             } else {
                 SystemNotification().sendMessage(
                   QObject::tr("Error while saving to clipboard"));
                 return;
             }
         } else {
-
             // Need to send message before copying to clipboard
             SystemNotification().sendMessage(
               QObject::tr("Capture saved to clipboard"));

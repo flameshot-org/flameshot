@@ -53,6 +53,8 @@ private:
     void initCopyPathAfterSave();
     void initUseJpgForClipboard();
 
+    void setActualFormData();
+
     // class members
     QVBoxLayout* m_layout;
     QCheckBox* m_sysNotifications;
