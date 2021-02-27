@@ -95,7 +95,7 @@ make %{?_smp_mflags}
 %{_datadir}/icons/hicolor
 
 %changelog
-* Sat Feb 13 2021 Jeremy Borgman <borgman.jeremy@pm.me> - 0.9.0-1
+* Sat Feb 27 2021 Jeremy Borgman <borgman.jeremy@pm.me> - 0.9.0-1
 - Updated for flameshot 0.9.0
 * Sat Oct 14 2020 Jeremy Borgman <borgman.jeremy@pm.me> - 0.8.5-1
 - Updated for flameshot 0.8.5
