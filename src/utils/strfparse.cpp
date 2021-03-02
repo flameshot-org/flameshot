@@ -42,7 +42,7 @@ std::vector<char> match_specifiers(std::string const& specifier,
 
     std::vector<char> spec_list;
 
-    for (uint i = 0; i < specifier.size() - 1; i++) {
+    for (size_t i = 0; i < specifier.size() - 1; i++) {
         if (specifier[i] == '%') {
             spec_list.push_back(specifier[i + 1]);
         }
