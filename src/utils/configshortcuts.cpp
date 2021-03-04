@@ -112,7 +112,6 @@ const QKeySequence& ConfigShortcuts::captureShortcutDefault(
         case CaptureToolButton::ButtonType::TYPE_MARKER:
             m_ks = QKeySequence(Qt::Key_M);
             break;
-            //    case CaptureToolButton::ButtonType::TYPE_SELECTIONINDICATOR:
         case CaptureToolButton::ButtonType::TYPE_MOVESELECTION:
             m_ks = QKeySequence(Qt::CTRL + Qt::Key_M);
             break;
