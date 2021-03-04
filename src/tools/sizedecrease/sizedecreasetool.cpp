@@ -34,7 +34,7 @@ QIcon SizeDecreaseTool::icon(const QColor& background, bool inEditor) const
 }
 QString SizeDecreaseTool::name() const
 {
-    return tr("Increase Tool Size");
+    return tr("Decrease Tool Size");
 }
 
 ToolType SizeDecreaseTool::nameID() const
