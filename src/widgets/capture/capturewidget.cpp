@@ -216,7 +216,6 @@ void CaptureWidget::updateButtons()
             case CaptureToolButton::ButtonType::TYPE_COPY:
             case CaptureToolButton::ButtonType::TYPE_UNDO:
             case CaptureToolButton::ButtonType::TYPE_REDO:
-            case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
                 break;
@@ -1086,10 +1085,6 @@ void CaptureWidget::initShortcuts()
     shortcut = ConfigHandler().shortcut(
       QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_REDO).toString());
     new QShortcut(QKeySequence(shortcut), this, SLOT(redo()));
-
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER)
-        .toString());
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                   this,
