@@ -95,9 +95,9 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         history.save(m_pixmap, imageName);
 
         if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
-            QApplication::clipboard()->setText(m_imageURL.toString());
             SystemNotification().sendMessage(
               QObject::tr("URL copied to clipboard."));
+            QApplication::clipboard()->setText(m_imageURL.toString());
             close();
         } else {
             onUploadOk();
