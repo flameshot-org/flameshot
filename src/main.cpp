@@ -38,6 +38,7 @@ int waitAfterConnecting(int delay, QCoreApplication& app)
     return app.exec();
 }
 
+#ifdef Q_OS_LINUX
 // source: https://github.com/ksnip/ksnip/issues/416
 void wayland_hacks()
 {
@@ -47,6 +48,7 @@ void wayland_hacks()
         qputenv("QT_QPA_PLATFORM", "xcb");
     }
 }
+#endif
 
 int main(int argc, char* argv[])
 {
