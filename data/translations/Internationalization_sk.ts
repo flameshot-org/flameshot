@@ -87,7 +87,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá obrazovka (aktívny monitor)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
@@ -202,7 +202,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesové skratky</translation>
     </message>
 </context>
 <context>
@@ -210,27 +210,27 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="204"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Je dostupná nová verzia: %1</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="211"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Používate najnovšiu verziu</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="219"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa získať informácie o najnovšej verzii.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa zatvoriť aktívne modálne ovládacie prvky</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="405"/>
@@ -255,12 +255,12 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Skontrolovať aktualizácie</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="439"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Posledné nahratia</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -303,7 +303,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="47"/>
         <source>Leave the capture screen</source>
-        <translation>Opustiť obrazovku so zachytávaním obrazovky</translation>
+        <translation>Opustiť obrazovku so zachytávaním</translation>
     </message>
 </context>
 <context>
@@ -479,7 +479,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
         <location filename="../../src/config/generalconf.cpp" line="118"/>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Import</source>
-        <translation type="unfinished">Importovať</translation>
+        <translation>Importovať</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
@@ -487,169 +487,169 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Zlyhalo čítanie súboru.</translation>
+        <translation>Zlyhalo čítanie súboru.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="133"/>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Zlyhal zápis do súboru.</translation>
+        <translation>Zlyhal zápis do súboru.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="143"/>
         <source>Save File</source>
-        <translation type="unfinished">Uložiť súbor</translation>
+        <translation>Uložiť súbor</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="165"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Potvrdiť Reset</translation>
+        <translation>Potvrdiť Reset</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="166"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Naozaj si želáte resetovať aktuálnu konfiguráciu?</translation>
+        <translation>Naozaj si želáte resetovať aktuálnu konfiguráciu?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="177"/>
         <source>Show help message</source>
-        <translation type="unfinished">Zobraziť nápovedu</translation>
+        <translation>Zobraziť nápovedu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="181"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">Zobraziť nápovedu na začiatku počas režimu zachytávania obrazovky.</translation>
+        <translation>Zobraziť nápovedu na začiatku počas režimu zachytávania obrazovky.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="191"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished">Zobraziť tlačidlo na postrannom paneli</translation>
+        <translation>Zobraziť tlačidlo na postrannom paneli</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished">V režime zachytávania zobrazovať tlačidlo na postrannom paneli.</translation>
+        <translation>V režime zachytávania zobrazovať tlačidlo na postrannom paneli.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
         <location filename="../../src/config/generalconf.cpp" line="208"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Zobraziť systémové upozornenia</translation>
+        <translation>Zobraziť systémové upozornenia</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">Zobraziť stavovú ikonu</translation>
+        <translation>Zobraziť stavovú ikonu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="224"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">Zobraziť ikonu v stavovej oblasti</translation>
+        <translation>Zobraziť ikonu v stavovej oblasti</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstránenie snímky z posledných nahraní je vyžadované potvrdenie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Súbor s konfiguráciou</translation>
+        <translation>Súbor s konfiguráciou</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Export</source>
-        <translation type="unfinished">Exportovať</translation>
+        <translation>Exportovať</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Reset</source>
-        <translation type="unfinished">Resetovať</translation>
+        <translation>Resetovať</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatická kontrola aktualizácií</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="297"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">Spúšťať pri štarte</translation>
+        <translation>Spustiť pri štarte</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished">Spustiť Flameshot</translation>
+        <translation>Spustiť Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>Pri spustení zobraziť uvítaciu správu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished">Kopírovať URL po uploade</translation>
+        <translation>Kopírovať URL po nahratí</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished">Po nahratí skopírovať URL a zavrieť okno</translation>
+        <translation>Po nahratí skopírovať URL a zavrieť okno</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Save image after copy</source>
-        <translation type="unfinished">Uložiť obrázok po kopírovaní</translation>
+        <translation>Uložiť obrázok po kopírovaní</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished">Uložiť obrázok so súborom po jeho skopírovaní</translation>
+        <translation>Uložiť obrázok so súborom po jeho skopírovaní</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="349"/>
         <source>Save Path</source>
-        <translation type="unfinished">Cesta pre ukladanie</translation>
+        <translation>Cesta pre ukladanie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
         <source>Change...</source>
-        <translation type="unfinished">Zmeniť...</translation>
+        <translation>Zmeniť...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>Pre ukladanie snímok obrazovky používať rovnakú cestu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <location filename="../../src/config/generalconf.cpp" line="402"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pre schránku používať JPG (štandardne PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <location filename="../../src/config/generalconf.cpp" line="435"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>Po uložení skopírovať cestu k súboru</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished">Vyberte priečinok</translation>
+        <translation>Vyberte priečinok</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished">Zápis do adresára nie je možný.</translation>
+        <translation>Zápis do adresára nie je možný.</translation>
     </message>
 </context>
 <context>
@@ -657,37 +657,37 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Posledné nahratia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="85"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>História snímok obrazovky je prázdna</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="134"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Kopírovať URL</translation>
+        <translation>Kopírovať URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="138"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL skopírovaná do schránky.</translation>
+        <translation>URL skopírovaná do schránky.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="144"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť v prehliadači</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="160"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrďte odstránenie</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="161"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Naozaj chcete odstrániť snímku obrazovky zo zoznamu posledných nahratí a zo servera?</translation>
     </message>
 </context>
 <context>
@@ -967,12 +967,12 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa zaregistrovať %1. Chyba: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa odregistrovať %1. Chyba: %2</translation>
     </message>
 </context>
 <context>
@@ -989,7 +989,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/main.cpp" line="138"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>Mocný, no zároveň tiež jednoduchý softvér na zachytávanie obrazovky.</translation>
+        <translation>Mocný, no zároveň jednoduchý softvér na zachytávanie obrazovky.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="139"/>
@@ -1074,7 +1074,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť geometriu výberu vo formáte Š D X Y. Neurobí nič pri nastavení raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="192"/>
@@ -1152,7 +1152,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba pri ukladaní do schránky</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="104"/>
@@ -1169,12 +1169,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="137"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť snímku</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="162"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>Snímka je uložená a skopírovaná do schránky ako </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
@@ -1214,7 +1214,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>Štandardne sa spúšťa Flameshot na pozadí a nastavuje sa pomocou ikony v systémovej lište.</translation>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
@@ -1223,89 +1223,89 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/core/controller.cpp" line="511"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ahoj, som tu! Pre vytvorenie snímky kliknite na ikonu v lište a k ďalším možnostiam sa dostanete kliknutím pravým tlačidlom.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prepnúť zobrazenie postranného panelu</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel vľavo</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel vpravo</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel nahor</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmeniť rozmery výberu o 1 pixel nadol</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať celú obrazovku</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Presunúť výber vľavo o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Presunúť výber vpravo o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Presunúť výber nahor o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>Presunúť výber nadol o 1 pixel</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrdiť pridanie textu</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Ukončiť zachytávanie obrazovky</translation>
+        <translation>Ukončiť zachytávanie</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="71"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation>História snímok</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="69"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachytiť obrazovku</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="81"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Zobraziť dialóg na výber farby</translation>
+        <translation>Zobraziť dialóg na výber farby</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="83"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Zmena hrúbky nástroja</translation>
+        <translation>Zmeniť hrúbku nástroja</translation>
     </message>
 </context>
 <context>
@@ -1373,17 +1373,17 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť klávesovú skratku</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>Pre zmenu zadajte novú klávesovú skratku </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ak chcete zrušiť klávesovú skratku stlačte Esc alebo Backspace.</translation>
     </message>
 </context>
 <context>
@@ -1391,22 +1391,22 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="41"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesové skratky</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Dostupné klávesové skratky v režime zachytávania obrazovky.</translation>
+        <translation>Dostupné klávesové skratky v režime zachytávania obrazovky.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Description</source>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Key</source>
-        <translation type="unfinished">Kláves</translation>
+        <translation>Kláves</translation>
     </message>
 </context>
 <context>
@@ -1653,22 +1653,22 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Je dostupná nová verzia Flameshotu: %1</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorovať</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Neskôr</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovať</translation>
     </message>
 </context>
 <context>
