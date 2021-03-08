@@ -27,11 +27,11 @@ DesktopInfo::WM DesktopInfo::windowManager()
 {
     DesktopInfo::WM res = DesktopInfo::OTHER;
     QStringList desktops = XDG_CURRENT_DESKTOP.split(QChar(':'));
-    for (auto & desktop : desktops) {
-        if (desktop.contains(QLatin1String("GNOME"),Qt::CaseInsensitive)) {
+    for (auto& desktop : desktops) {
+        if (desktop.contains(QLatin1String("GNOME"), Qt::CaseInsensitive)) {
             return DesktopInfo::GNOME;
         }
-        if (desktop.contains(QLatin1String("sway"),Qt::CaseInsensitive)) {
+        if (desktop.contains(QLatin1String("sway"), Qt::CaseInsensitive)) {
             return DesktopInfo::SWAY;
         }
         if (desktop.contains(QLatin1String("kde-plasma"))) {
