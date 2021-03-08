@@ -83,7 +83,9 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                   QStringLiteral("org.freedesktop.portal.Screenshot"));
 
                 // unique token
-                QString token = QUuid::createUuid().toString().remove('-').remove('{').remove('}');
+                QString token =
+                  QUuid::createUuid().toString().remove('-').remove('{').remove(
+                    '}');
 
                 // premake interface
                 auto* request = new OrgFreedesktopPortalRequestInterface(
