@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install Qt
-        run: brew install qt cmake
+        run: brew install qt@5 cmake
 
       - name: Configure
         run: |

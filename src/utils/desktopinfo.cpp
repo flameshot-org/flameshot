@@ -26,16 +26,26 @@ bool DesktopInfo::waylandDectected()
 DesktopInfo::WM DesktopInfo::windowManager()
 {
     DesktopInfo::WM res = DesktopInfo::OTHER;
-    if (XDG_CURRENT_DESKTOP.contains(QLatin1String("GNOME"),
-                                     Qt::CaseInsensitive) ||
-        !GNOME_DESKTOP_SESSION_ID.isEmpty()) {
-        res = DesktopInfo::GNOME;
-    } else if (XDG_CURRENT_DESKTOP.contains(QLatin1String("sway"),
-                                            Qt::CaseInsensitive)) {
-        res = DesktopInfo::SWAY;
-    } else if (!KDE_FULL_SESSION.isEmpty() ||
-               DESKTOP_SESSION == QLatin1String("kde-plasma")) {
-        res = DesktopInfo::KDE;
+    QStringList desktops = XDG_CURRENT_DESKTOP.split(QChar(':'));
+    for (auto& desktop : desktops) {
+        if (desktop.contains(QLatin1String("GNOME"), Qt::CaseInsensitive)) {
+            return DesktopInfo::GNOME;
+        }
+        if (desktop.contains(QLatin1String("sway"), Qt::CaseInsensitive)) {
+            return DesktopInfo::SWAY;
+        }
+        if (desktop.contains(QLatin1String("kde-plasma"))) {
+            return DesktopInfo::KDE;
+        }
     }
+
+    if (!GNOME_DESKTOP_SESSION_ID.isEmpty()) {
+        return DesktopInfo::GNOME;
+    }
+
+    if (!KDE_FULL_SESSION.isEmpty()) {
+        return DesktopInfo::KDE;
+    }
+
     return res;
 }

@@ -16,6 +16,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDir>
+#include <QUuid>
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
@@ -81,13 +82,23 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                   QStringLiteral("/org/freedesktop/portal/desktop"),
                   QStringLiteral("org.freedesktop.portal.Screenshot"));
 
-                QDBusReply<QDBusObjectPath> reply = screenshotInterface.call(
-                  QStringLiteral("Screenshot"), "", QMap<QString, QVariant>());
+                // unique token
+                QString token =
+                  QUuid::createUuid().toString().remove('-').remove('{').remove(
+                    '}');
+
+                // premake interface
                 auto* request = new OrgFreedesktopPortalRequestInterface(
                   QStringLiteral("org.freedesktop.portal.Desktop"),
-                  reply.value().path(),
+                  "/org/freedesktop/portal/desktop/request/" +
+                    QDBusConnection::sessionBus()
+                      .baseService()
+                      .remove(':')
+                      .replace('.', '_') +
+                    "/" + token,
                   QDBusConnection::sessionBus(),
                   this);
+
                 QEventLoop loop;
                 const auto gotSignal = [&res, &loop](uint status,
                                                      const QVariantMap& map) {
@@ -100,10 +111,20 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                     }
                     loop.quit();
                 };
+
+                // prevent racy situations and listen before calling screenshot
                 QMetaObject::Connection conn =
                   QObject::connect(request,
                                    &org::freedesktop::portal::Request::Response,
                                    gotSignal);
+
+                screenshotInterface.call(
+                  QStringLiteral("Screenshot"),
+                  "",
+                  QMap<QString, QVariant>(
+                    { { "handle_token", QVariant(token) },
+                      { "interactive", QVariant(false) } }));
+
                 loop.exec();
                 QObject::disconnect(conn);
                 request->Close().waitForFinished();
