@@ -25,6 +25,7 @@
 #include "src/utils/dbusutils.h"
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <desktopinfo.h>
 #endif
 
 int waitAfterConnecting(int delay, QCoreApplication& app)
@@ -37,18 +38,17 @@ int waitAfterConnecting(int delay, QCoreApplication& app)
     return app.exec();
 }
 
+#ifdef Q_OS_LINUX
 // source: https://github.com/ksnip/ksnip/issues/416
 void wayland_hacks()
 {
     // Workaround to https://github.com/ksnip/ksnip/issues/416
-    QByteArray currentDesktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
-    QByteArray sessionDesktop = qgetenv("XDG_SESSION_DESKTOP").toLower();
-    QByteArray sessionType = qgetenv("XDG_SESSION_TYPE").toLower();
-    if (sessionType.contains("wayland") && (currentDesktop.contains("gnome") ||
-                                            sessionDesktop.contains("gnome"))) {
+    DesktopInfo info;
+    if (info.windowManager() == DesktopInfo::GNOME) {
         qputenv("QT_QPA_PLATFORM", "xcb");
     }
 }
+#endif
 
 int main(int argc, char* argv[])
 {

@@ -7,6 +7,7 @@ target_sources(
           systemnotification.h
           configshortcuts.h
           request.h
+          strfparse.h
 )
 
 target_sources(
@@ -24,5 +25,6 @@ target_sources(
           colorutils.cpp
           history.cpp
           configshortcuts.cpp
+          strfparse.cpp
         request.cpp
 )

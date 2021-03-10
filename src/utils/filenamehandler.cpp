@@ -3,6 +3,7 @@
 
 #include "filenamehandler.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/strfparse.h"
 #include <QDir>
 #include <QStandardPaths>
 #include <ctime>
@@ -41,13 +42,9 @@ QString FileNameHandler::parseFilename(const QString& name)
     while (res.endsWith('%')) {
         res.chop(1);
     }
-    std::time_t t = std::time(NULL);
 
-    char* tempData = QStringToCharArr(res);
-    char data[MAX_CHARACTERS] = { 0 };
-    std::strftime(data, sizeof(data), tempData, std::localtime(&t));
-    res = QString::fromLocal8Bit(data, (int)strlen(data));
-    free(tempData);
+    res =
+      QString::fromStdString(strfparse::format_time_string(name.toStdString()));
 
     // add the parsed pattern in a correct format for the filesystem
     res = res.replace(QLatin1String("/"), QStringLiteral("⁄"))
