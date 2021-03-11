@@ -82,6 +82,7 @@ make %{?_smp_mflags}
 
 %files
 %doc README.md
+%doc %{_mandir}/man*/*
 %license LICENSE
 %{_bindir}/%{name}
 %{_datadir}/%{name}
