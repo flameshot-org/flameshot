@@ -89,5 +89,6 @@ Name[nl]=Starter openen
 Name[nl_NL]=Starter openen
 Name[sk]=Otvoriť spúšťač
 Name[zh_CN]=打开启动器
+Name[es]=Abrir lanzador
 Name[pt_BR]=Abrir lançador
 Exec=flameshot launcher
