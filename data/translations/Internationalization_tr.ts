@@ -19,7 +19,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation>ile Aç</translation>
+        <translation>Birlikte aç</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Keep open after selection</source>
-        <translation>Seçimden sonra açık tutun</translation>
+        <translation>Seçimden sonra açık tut</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <source>Unable to write in</source>
-        <translation>Yazma mümkün değil</translation>
+        <translation>Yazılamadı</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
@@ -58,7 +58,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="84"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Oku çizim aracı olarak ayarlar</translation>
+        <translation>Oku boyama aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -87,7 +87,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Tam Ekran (Mevcut Ekran)</translation>
+        <translation>Tam Ekran (Geçerli Ekran)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
@@ -260,7 +260,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
         <source>Check for updates</source>
-        <translation>Güncellemeleri kontrol et</translation>
+        <translation>Güncellemeleri denetle</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
@@ -287,7 +287,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation>Seçimi panoya kopyalar</translation>
+        <translation>Seçimi panoya kopyala</translation>
     </message>
 </context>
 <context>
@@ -326,7 +326,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation>Önizleme:</translation>
+        <translation>Ön izleme:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
@@ -480,7 +480,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="190"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation>Yakalama modunda başında yardım mesajını gösterin.</translation>
+        <translation>Yakalama modunda başlangıçta yardım mesajını göster.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="200"/>
@@ -490,7 +490,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="203"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation>Çekim modunda yan panel geçiş düğmesini gösterin.</translation>
+        <translation>Çekim modunda yan panel geçiş düğmesini göster.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="213"/>
@@ -533,12 +533,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../src/config/generalconf.cpp" line="292"/>
         <location filename="../../src/config/generalconf.cpp" line="294"/>
         <source>Automatic check for updates</source>
-        <translation>Otomatik güncelleme kontrolü</translation>
+        <translation>Otomatik güncelleme denetimi</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="305"/>
         <source>Launch at startup</source>
-        <translation>Başlangıçta başlatın</translation>
+        <translation>Başlangıçta başlat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="308"/>
@@ -564,7 +564,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="348"/>
         <source>Save image after copy</source>
-        <translation>Kopyaladıktan sonra görüntüyü kaydedin</translation>
+        <translation>Kopyaladıktan sonra görüntüyü kaydet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="349"/>
@@ -574,7 +574,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Save Path</source>
-        <translation>Yol Kaydet</translation>
+        <translation>Kaydetme Yolu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
@@ -831,7 +831,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
         <source>Upload the selection to Imgur</source>
-        <translation>Seçimi Imgur&apos;a yükler</translation>
+        <translation>Seçimi Imgur&apos;a yükle</translation>
     </message>
 </context>
 <context>
@@ -918,7 +918,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="37"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Çizgiyi boyama aracı olarak ayarlar</translation>
+        <translation>Çizgiyi boyama aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -931,7 +931,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>İşaretleyiciyi boyama aracı olarak ayarlar</translation>
+        <translation>İşaretleyiciyi boyama aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -957,7 +957,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Kurşun Kalemi çizim aracı olarak ayarlar</translation>
+        <translation>Kurşun Kalemi çizim aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -965,12 +965,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
         <source>Pin Tool</source>
-        <translation>Pin Aracı</translation>
+        <translation>Sabitleme Aracı</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Masaüstündeki PIN resmi</translation>
+        <translation>Resmi masaüstüne sabitle</translation>
     </message>
 </context>
 <context>
@@ -978,12 +978,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="23"/>
         <source>Pixelate</source>
-        <translation>Pikselleştirme</translation>
+        <translation>Pikselleştir</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="33"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Pixelate&apos;i boyama aracı olarak ayarlayın</translation>
+        <translation>Piksellleştirmeyi boyama aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -1024,7 +1024,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
         <source>Error while saving to clipboard</source>
-        <translation>Panoya kaydederken hata</translation>
+        <translation>Panoya kaydederken hata oluştu</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
@@ -1074,7 +1074,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>GUI modunda manuel yakalama başlatın.</translation>
+        <translation>GUI modunda elle yakalama başlatın.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="135"/>
@@ -1109,7 +1109,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/main.cpp" line="153"/>
         <source>Enable or disable the trayicon</source>
-        <translation>Trayicon&apos;u etkinleştirin veya devre dışı bırakın</translation>
+        <translation>Tepsi simgesini etkinleştirin veya devre dışı bırakın</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="157"/>
@@ -1119,7 +1119,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/main.cpp" line="161"/>
         <source>Show the help message in the capture mode</source>
-        <translation>Yardım mesajını çekim modunda göster</translation>
+        <translation>Çekim modunda yardım mesajını göster</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="164"/>
@@ -1165,13 +1165,13 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>Geçersiz renk, bu bayrak aşağıdaki formatları destekler:
-- #RGB (each of R, G, and B is a single hex digit)
+        <translation>Geçersiz renk, bu seçenek aşağıdaki biçimleri destekler:
+- #RGB (R, G, ve B onaltılık tabanda rakamlardır)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- &apos;Mavi&apos; veya &apos;kırmızı&apos; gibi adlandırılmış renkler
-&apos;#&apos; İşaretinden kaldırmanız gerekebilir &apos;\#FFF&apos;</translation>
+- &apos;blue&apos; veya &apos;red&apos; gibi adlandırılmış renkler
+&apos;#&apos; işaretini &apos;\#FFF&apos; şeklinde kaçırmanız gerekebilir</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
@@ -1186,12 +1186,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation>Geçersiz yol, sistemde gerçek bir yol olmalı</translation>
+        <translation>Geçersiz yol, sistemde gerçek bir yol olmalıdır</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Geçersiz değer, &quot;doğru&quot; veya &quot;yanlış&quot; olarak tanımlanmalıdır</translation>
+        <translation>Geçersiz değer, &apos;true&apos; veya &apos;false&apos; olarak tanımlanmalıdır</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1201,7 +1201,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation>Yazma mümkün değil</translation>
+        <translation>Yazılamadı</translation>
     </message>
     <message>
         <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
@@ -1226,7 +1226,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>Usage</source>
-        <translation>Kullanımı</translation>
+        <translation>Kullanım</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
@@ -1307,7 +1307,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="71"/>
         <source>Screenshot history</source>
-        <translation>Ekran kaydı geçmişi</translation>
+        <translation>Ekran görüntüsü geçmişi</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="69"/>
@@ -1323,7 +1323,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="83"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Araç  kalınlığını değiştirin</translation>
+        <translation>Araç kalınlığını değiştir</translation>
     </message>
 </context>
 <context>
@@ -1336,7 +1336,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="35"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Dikdörtgeni boyama aracı olarak ayarlar</translation>
+        <translation>Dikdörtgeni boyama aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -1344,12 +1344,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation>Yeniden</translation>
+        <translation>Tekrarla</translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>Sonraki değişikliği yeniden yap</translation>
+        <translation>Sonraki değişikliği tekrarla</translation>
     </message>
 </context>
 <context>
@@ -1383,7 +1383,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="39"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Seçimi boyama aracı olarak ayarlar</translation>
+        <translation>Seçimi boyama aracı olarak ayarla</translation>
     </message>
 </context>
 <context>
@@ -1419,7 +1419,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Description</source>
-        <translation>Tanım</translation>
+        <translation>Açıklama</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
@@ -1432,17 +1432,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="62"/>
         <source>Active thickness:</source>
-        <translation>Aktif kalınlık:</translation>
+        <translation>Etkin kalınlık:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
         <source>Active color:</source>
-        <translation>Aktif Renk:</translation>
+        <translation>Etkin renk:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
         <source>Press ESC to cancel</source>
-        <translation>Çıkmak için ESC&apos;ye tıklayın</translation>
+        <translation>İptal etmek için ESC&apos;ye basın</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="209"/>
@@ -1494,7 +1494,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="37"/>
         <source>Century (00-99)</source>
-        <translation>Ülke (00-99)</translation>
+        <translation>Yüzyıl (00-99)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="38"/>
@@ -1509,12 +1509,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="42"/>
         <source>Month Name (jan)</source>
-        <translation>Ay Adı (Oca)</translation>
+        <translation>Ay Adı (oca)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Month Name (january)</source>
-        <translation>Ay Adı (Ocak)</translation>
+        <translation>Ay Adı (ocak)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
@@ -1646,17 +1646,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="18"/>
         <source>UI Color Editor</source>
-        <translation>UI Renk Editörü</translation>
+        <translation>Kullanıcı Arayüzü Renk Düzenleyicisi</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Seçicileri hareket ettiren rengi değiştirin ve önizleme düğmelerindeki değişiklikleri görün.</translation>
+        <translation>Seçicileri hareket ettiren rengi değiştirin ve ön izleme düğmelerindeki değişiklikleri görün.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation>Değiştirmek için bir buton seçin</translation>
+        <translation>Değiştirmek için bir düğme seçin</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
@@ -1666,7 +1666,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Ana rengin baskı modunu ayarlamak için bu butonu tıklayın.</translation>
+        <translation>Ana rengin düzenleme modunu ayarlamak için bu düğmeye tıklayın.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
@@ -1676,7 +1676,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Kontrast renginin baskı modunu ayarlamak için bu butonu tıklayın.</translation>
+        <translation>Kontrast renginin düzenleme modunu ayarlamak için bu düğmeye tıklayın.</translation>
     </message>
 </context>
 <context>
@@ -1684,7 +1684,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
         <source>Undo</source>
-        <translation>Geri</translation>
+        <translation>Geri al</translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
@@ -1702,7 +1702,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation>Görmezden gel</translation>
+        <translation>Yok say</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
@@ -1756,7 +1756,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>
         <source>Button Selection</source>
-        <translation>Buton Seçimi</translation>
+        <translation>Düğme Seçimi</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="71"/>
