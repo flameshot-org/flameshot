@@ -522,7 +522,7 @@ Spacja, aby pokazać panel boczny.</translation>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished">Potwierdzenie jest wymagane aby usunąć zrzuty z ostatnio wysłanych</translation>
+        <translation>Potwierdź aby usunąć zrzuty z ostatnio wysłanych</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
@@ -1368,7 +1368,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
         <source>Description</source>
-        <translation type="unfinished">Opis</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
