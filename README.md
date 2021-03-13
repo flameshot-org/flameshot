@@ -279,9 +279,7 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 
 ## Installation
 
-Flameshot can be installed on Linux and Microsoft Windows currently.
-
-There is no macOS port of Flameshot currently that can be easily installed. But you can build Flameshot yourself and use it. Please participate in the development of Flameshot and help us make a macOS version.
+Flameshot can be installed on Linux, Microsoft Windows, and macOS currently.
 
 ### Prebuilt packages
 
