@@ -77,7 +77,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="55"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Aufnahme Modus&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Aufnahmemodus&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="61"/>
@@ -481,12 +481,12 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="191"/>
         <source>Show the side panel button</source>
-        <translation>Den Seitenpanelbutton anzeigen</translation>
+        <translation>Den Seitenpanelknopf anzeigen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation>Den Button zum Umschalten des Seitenpanels im Aufnahmemodus anzeigen.</translation>
+        <translation>Den Knopf zum Umschalten des Seitenpanels im Aufnahmemodus anzeigen.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
@@ -497,7 +497,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show tray icon</source>
-        <translation>Zeige Taskleistensymbol</translation>
+        <translation>Taskleistensymbol zeigen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="224"/>
@@ -1027,7 +1027,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/main.cpp" line="167"/>
         <source>Enable or disable the trayicon</source>
-        <translation>Aktiviere oder Deaktiviere das Taskleistensymbol</translation>
+        <translation>Das Taskleistensymbol aktivieren oder deaktivieren</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="171"/>
@@ -1159,7 +1159,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/core/controller.cpp" line="511"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Hallo, hier bin ich! Auf das Icon in der Taskleiste linksklicken, um eine Aufnahme zu starten, oder rechtsklicken für mehr Optionen.</translation>
+        <translation>Hallo, hier bin ich! Auf das Symbol in der Taskleiste linksklicken, um eine Aufnahme zu starten, oder rechtsklicken für mehr Optionen.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
@@ -1543,12 +1543,12 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="103"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Ändere die Farbauswahl und betrachte die Vorschau in den Vorschau-Buttons.</translation>
+        <translation>Ändere die Farbauswahl und betrachte die Vorschau in den Vorschau-Knöpfe.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Select a Button to modify it</source>
-        <translation>Wähle einen Button um ihn zu verändern</translation>
+        <translation>Wähle einen Knopf, um ihn zu verändern</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
@@ -1558,7 +1558,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="128"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Wähle diesen Button um den Bearbeitungsmodus der Hauptfarbe zu wählen.</translation>
+        <translation>Wähle diesen Knopf, um den Bearbeitungsmodus der Hauptfarbe zu wählen.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="139"/>
@@ -1568,7 +1568,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="144"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Wähle diesen Button um den Bearbeitungsmodus der Kontrastfarbe zu wählen.</translation>
+        <translation>Wähle diesen Knopf, um den Bearbeitungsmodus der Kontrastfarbe zu wählen.</translation>
     </message>
 </context>
 <context>
@@ -1604,7 +1604,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation>Updaten</translation>
+        <translation>Aktualisieren</translation>
     </message>
 </context>
 <context>
@@ -1625,7 +1625,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Button Selection</source>
-        <translation>Button Auswahl</translation>
+        <translation>Knopfauswahl</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="85"/>
