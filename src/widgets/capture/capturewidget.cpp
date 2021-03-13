@@ -132,7 +132,7 @@ CaptureWidget::CaptureWidget(const uint id,
     if (m_context.fullscreen) {
         QPoint topLeftOffset = QPoint(0, 0);
 #if defined(Q_OS_WIN)
-        topLeftOffset - topLeft;
+        topLeftOffset = topLeft;
 #endif
 
 #if defined(Q_OS_MACOS)
