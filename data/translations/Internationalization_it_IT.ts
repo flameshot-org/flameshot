@@ -693,12 +693,12 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="39"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocca Strumento</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="49"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Blocca immagine sul desktop</translation>
     </message>
 </context>
 <context>
@@ -821,12 +821,12 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/main.cpp" line="164"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta il modello del nome del file</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="167"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>Abilita o disabilita l&apos;icona della barra delle applicazioni</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="171"/>
@@ -851,7 +851,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/main.cpp" line="185"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Stampa l&apos;acquisizione raw PNG</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
@@ -882,7 +882,13 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Colore non valido, questo flag supporta i seguenti formati:
+- #RGB (ciascuno di R, G e B è una singola cifra esadecimale)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- Colori denominati come &apos;blu&apos; o &apos;rosso&apos;
+You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="212"/>
@@ -1115,17 +1121,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta Scorciatoia</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci una nuova scorciatoia da cambiare </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premi Esc per annullare o Backspace per disabilitare la scorciatoia da tastiera.</translation>
     </message>
 </context>
 <context>
@@ -1138,7 +1144,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scorciatoie disponibili nella modalità di cattura dello schermo.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
@@ -1308,7 +1314,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
