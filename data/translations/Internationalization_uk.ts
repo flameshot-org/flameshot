@@ -24,7 +24,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
-        <translation>Запустити у терміналі</translation>
+        <translation>Запустити в терміналі</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="72"/>
@@ -45,7 +45,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="123"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Не вдалось запустити у терміналі.</translation>
+        <translation>Не вдалося запустити в терміналі.</translation>
     </message>
 </context>
 <context>
@@ -77,7 +77,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="55"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Режим захвату&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Режим захоплення&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="61"/>
@@ -87,12 +87,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Весь екран (поточний дисплей)</translation>
+        <translation>Не весь екран (поточний дисплей)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>Весь екран (всі монітори)</translation>
+        <translation>На весь екран (усі монітори)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="79"/>
@@ -161,7 +161,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="52"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Додати коло з автоінкрементірующімся лічильником</translation>
+        <translation>Додати коло з автоінкрементованим лічильником</translation>
     </message>
 </context>
 <context>
@@ -192,7 +192,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
-        <translation>Редактор імені файлів</translation>
+        <translation>Редактор назв файлів</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="73"/>
@@ -202,7 +202,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation>Гарячі кнопки</translation>
+        <translation>Комбінації клавіш</translation>
     </message>
     <message>
         <source>Storage</source>
@@ -219,7 +219,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="211"/>
         <source>You have the latest version</source>
-        <translation>Ви маєте найпізнішу версію</translation>
+        <translation>У вас найпізніша версія</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="219"/>
@@ -244,7 +244,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="421"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp; Відкрити лаунчер</translation>
+        <translation>&amp;Відкрити запускач</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
@@ -254,7 +254,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;About</source>
-        <translation>Про</translation>
+        <translation>&amp;Про програму</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
@@ -264,7 +264,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="439"/>
         <source>&amp;Latest Uploads</source>
-        <translation>Останні завантаження</translation>
+        <translation>&amp;Останні відвантаження</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -286,7 +286,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="48"/>
         <source>Copy the selection into the clipboard</source>
-        <translation>Копіювати вибране до буферу обміну</translation>
+        <translation>Копіювати вибране до буфера обміну</translation>
     </message>
 </context>
 <context>
@@ -294,7 +294,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="70"/>
         <source>Unable to connect via DBus</source>
-        <translation>Не вдалось підключитись через DBus</translation>
+        <translation>Не вдалося підключитися через DBus</translation>
     </message>
 </context>
 <context>
@@ -315,7 +315,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="38"/>
         <source>Edit the name of your captures:</source>
-        <translation>Відредагуйте ім&apos;я ваших знімків:</translation>
+        <translation>Відредагуйте назву ваших знімків:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="42"/>
@@ -355,7 +355,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="101"/>
         <source>Deletes the name</source>
-        <translation>Видаляє ім&apos;я</translation>
+        <translation>Видаляє назву</translation>
     </message>
 </context>
 <context>
@@ -516,13 +516,13 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
         <source>Unable to read file.</source>
-        <translation>Не вдалось прочитати файл.</translation>
+        <translation>Не вдалося прочитати файл.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="133"/>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <source>Unable to write file.</source>
-        <translation>Не вдалось записати файл.</translation>
+        <translation>Не вдалося записати файл.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="143"/>
@@ -552,7 +552,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="191"/>
         <source>Show the side panel button</source>
-        <translation>Показувати кнопку бічній панелі</translation>
+        <translation>Показувати кнопку бічної панелі</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
@@ -563,17 +563,17 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
         <location filename="../../src/config/generalconf.cpp" line="208"/>
         <source>Show desktop notifications</source>
-        <translation>Показувати повідомлення</translation>
+        <translation>Показувати сповіщення</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show tray icon</source>
-        <translation>Показувати значок у треї</translation>
+        <translation>Показувати значок у лотку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="224"/>
         <source>Show the systemtray icon</source>
-        <translation>Показувати значок на панелі повідомленнь</translation>
+        <translation>Показувати значок у системному лотку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
@@ -651,7 +651,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Використовувати фіксований шлях для знімків екрана для збереження</translation>
+        <translation>Використовувати фіксований шлях знімків екрана для збереження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
@@ -668,12 +668,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Choose a Folder</source>
-        <translation>Обрати папку</translation>
+        <translation>Обрати теку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Unable to write to directory.</source>
-        <translation>Не вдалося записати в папку.</translation>
+        <translation>Не вдалося записати в каталог.</translation>
     </message>
 </context>
 <context>
@@ -681,7 +681,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation>Останні завантаження</translation>
+        <translation>Останні відвантаження</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="85"/>
@@ -691,17 +691,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="134"/>
         <source>Copy URL</source>
-        <translation>Скопіювати URL</translation>
+        <translation>Копіювати URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="138"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL скопійовано до буферу обміну.</translation>
+        <translation>URL скопійовано до буфера обміну.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="144"/>
         <source>Open in browser</source>
-        <translation>Відкрити в браузері</translation>
+        <translation>Відкрити у вебоглядачі</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="160"/>
@@ -851,17 +851,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Upload to Imgur</source>
-        <translation>Вивантажити до Imgur</translation>
+        <translation>Відвантажити на Imgur</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="67"/>
         <source>Uploading Image</source>
-        <translation>Вивантаження зображення</translation>
+        <translation>Відвантаження зображення</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="179"/>
         <source>Copy URL</source>
-        <translation>Скопіювати URL</translation>
+        <translation>Копіювати URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="180"/>
@@ -876,7 +876,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="182"/>
         <source>Image to Clipboard.</source>
-        <translation>Зображення до буферу обміну.</translation>
+        <translation>Зображення до буфера обміну.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
@@ -887,12 +887,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL скопійовано до буферу обміну.</translation>
+        <translation>URL скопійовано до буфера обміну.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="227"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Знімок скопійовано до буферу обміну.</translation>
+        <translation>Знімок скопійовано до буфера обміну.</translation>
     </message>
 </context>
 <context>
@@ -900,12 +900,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="38"/>
         <source>Image Uploader</source>
-        <translation>Вивантаження зображень</translation>
+        <translation>Відвантаження зображень</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="48"/>
         <source>Upload the selection to Imgur</source>
-        <translation>Вивантажити вибране до Imgur</translation>
+        <translation>Відвантажити вибране на Imgur</translation>
     </message>
 </context>
 <context>
@@ -913,7 +913,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="38"/>
         <source>About</source>
-        <translation>Про...</translation>
+        <translation>Про програму</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
@@ -1052,7 +1052,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="49"/>
         <source>Pin image on the desktop</source>
-        <translation>Прикріпити зображення до робочого столу</translation>
+        <translation>Прикріпити зображення до стільниці</translation>
     </message>
 </context>
 <context>
@@ -1097,13 +1097,13 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="53"/>
         <source>Capture saved to clipboard.</source>
-        <translation>Знімок збережений в буфер обміну.</translation>
+        <translation>Знімок збережено в буфер обміну.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="70"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="85"/>
         <source>Capture saved to clipboard</source>
-        <translation>Знімок збережено до буферу обміну</translation>
+        <translation>Знімок збережено до буфера обміну</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="78"/>
@@ -1124,7 +1124,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="162"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation>Скріншот збережен на диск та скопійован у буфер обміну як </translation>
+        <translation>Захоплення збережено і скопійовано в буфер обміну як </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="116"/>
@@ -1133,7 +1133,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/main.cpp" line="481"/>
         <location filename="../../src/main.cpp" line="513"/>
         <source>Unable to connect via DBus</source>
-        <translation>Не вдалось підключитись через DBus</translation>
+        <translation>Не вдалось підключитися через DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="138"/>
@@ -1148,7 +1148,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Capture the entire desktop.</source>
-        <translation>Захоплення всього робочого столу.</translation>
+        <translation>Захоплення всієї стільниці.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
@@ -1158,22 +1158,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="147"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>Запустити захват экрану вручну в режимі графічного інтерфейсу.</translation>
+        <translation>Запустити ручне захоплення в графічному режимі.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="149"/>
         <source>Configure</source>
-        <translation>Налаштвати</translation>
+        <translation>Налаштувати</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Capture a single screen.</source>
-        <translation>Захват одного екрану.</translation>
+        <translation>Захоплення одного екрана.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Path where the capture will be saved</source>
-        <translation>Шлях, куди буде збережено скріншот</translation>
+        <translation>Шлях, куди збережеться знімок</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
@@ -1188,22 +1188,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="164"/>
         <source>Set the filename pattern</source>
-        <translation>Встановити шаблон імені файлу</translation>
+        <translation>Задати шаблон назви файлу</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="167"/>
         <source>Enable or disable the trayicon</source>
-        <translation>Увімкніть або вимкніть значок у треї</translation>
+        <translation>Увімкніть або вимкніть значок у лотку</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="171"/>
         <source>Enable or disable run at startup</source>
-        <translation>Вмикання або вимикання запуск під час старту</translation>
+        <translation>Дозволити або заборонити запуск при завантаженні</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="175"/>
         <source>Show the help message in the capture mode</source>
-        <translation>Показувати довідкові повідомлення в режимі захвату</translation>
+        <translation>Показувати довідкові повідомлення в режимі захоплення</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1233,12 +1233,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="193"/>
         <source>default: screen containing the cursor</source>
-        <translation>за замовчуванням: екран, що містить курсор миші</translation>
+        <translation>типово: екран, що містить курсор миші</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Screen number</source>
-        <translation>Номер екрану</translation>
+        <translation>Номер екрана</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
@@ -1249,18 +1249,18 @@ Press Space to open the side panel.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>Неіснуючий колір, цей прапор підтримує такі формати:
+        <translation>Не існуючий колір, цей прапор підтримує такі формати:
 - #RGB (кожен з R, G і B - це одна шістнадцяткова цифра)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
 - Такі кольори, як &quot;синій&quot; або &quot;червоний&quot;
-Можливо, вам доведеться уникнути знака &quot;#&quot;, як у &quot;\ #FFF&quot;</translation>
+Можливо, вам доведеться уникнути знаку &quot;#&quot;, як у &quot;\ #FFF&quot;</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="212"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation>Неіснуюча затримка, вона повинна бути вищою за 0</translation>
+        <translation>Не існуюча затримка, вона повинна бути вищою за 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="214"/>
@@ -1290,7 +1290,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="114"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL скопійовано до буферу обміну.</translation>
+        <translation>URL скопійовано до буфера обміну.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
@@ -1320,7 +1320,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="345"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>За замовчуванням запускається Flameshot у фоновому режимі та додається піктограма лотка для конфігурації.</translation>
+        <translation>Flameshot за замовчуванням запускається у фоновому режимі та додається піктограма лотка для конфігурації.</translation>
     </message>
     <message>
         <source>Hi, I&apos;m already running!
@@ -1331,7 +1331,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="511"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привіт, я тут! Клацніть піктограму в треї, щоб зробити знімок екрана, або клацніть правою кнопкою, щоб побачити більше опцій.</translation>
+        <translation>Привіт, я тут! Клацніть по значку в лотку, щоб зробити знімок екрана, або клацніть правою кнопкою, щоб побачити більше опцій.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
@@ -1391,19 +1391,19 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
         <source>Quit capture</source>
-        <translation>Вийти із захоплення екрану</translation>
+        <translation>Вийти із захоплення екрана</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="71"/>
         <source>Screenshot history</source>
-        <translation>Історія знімків екрану</translation>
+        <translation>Історія знімків екрана</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="69"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
         <source>Capture screen</source>
-        <translation>Захоплення екрану</translation>
+        <translation>Захоплення екрана</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="81"/>
@@ -1413,7 +1413,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="83"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Змінити товщину інструменту</translation>
+        <translation>Змінити товщину інструмента</translation>
     </message>
 </context>
 <context>
@@ -1460,7 +1460,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="136"/>
         <source>Unable to capture screen</source>
-        <translation>Не вдалось захопити екран</translation>
+        <translation>Не вдалося захопити екран</translation>
     </message>
 </context>
 <context>
@@ -1481,12 +1481,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="30"/>
         <source>Set Shortcut</source>
-        <translation>Встановити гарячу клавішу</translation>
+        <translation>Задати комбінацію клавіш</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="36"/>
         <source>Enter new shortcut to change </source>
-        <translation>Введіть нову гарячу клавішу </translation>
+        <translation>Введіть нову комбінацію </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="49"/>
@@ -1499,12 +1499,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="41"/>
         <source>Hot Keys</source>
-        <translation>Гарячі клавиші</translation>
+        <translation>Гарячі клавіші</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation>Доступні комбінації клавіш у режимі захоплення екрану.</translation>
+        <translation>Доступні комбінації клавіш у режимі захоплення екрана.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
@@ -1537,7 +1537,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="223"/>
         <source>Grab Color</source>
-        <translation>Визначити колір з екрану</translation>
+        <translation>Визначити колір з екрана</translation>
     </message>
 </context>
 <context>
@@ -1658,7 +1658,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="83"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Повна дата  (%Y-%m-%d)</translation>
+        <translation>Повна дата (%Y-%m-%d)</translation>
     </message>
 </context>
 <context>
@@ -1715,7 +1715,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="103"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Змініть колір пересуваючи виділення та перегляньте зміни у кнопках перегляду.</translation>
+        <translation>Змініть колір пересуваючи виділення та перегляньте зміни в кнопках перегляду.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
@@ -1811,7 +1811,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="54"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Нерозорість області за межами вибору:</translation>
+        <translation>Непрозорість області за межами вибору:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
