@@ -206,7 +206,11 @@ int main(int argc, char* argv[])
     const QString pathErr =
       QObject::tr("Invalid path, it must be a real path in the system");
     auto pathChecker = [pathErr](const QString& pathValue) -> bool {
-        bool res = QDir(pathValue).exists();
+    	QString pathToCheck = pathValue;
+    	if ((pathValue == "~") || (pathValue.startsWith("~/"))) {
+            pathToCheck.replace (0, 1, QDir::homePath());
+    	}
+        bool res = QDir(pathToCheck).exists();
         if (!res) {
             SystemNotification().sendMessage(
               QObject::tr(pathErr.toLatin1().data()));
