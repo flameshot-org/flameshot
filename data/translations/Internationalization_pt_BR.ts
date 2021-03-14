@@ -87,7 +87,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tela Inteira (Monitor Atual)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
@@ -202,7 +202,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalhos</translation>
     </message>
 </context>
 <context>
@@ -210,17 +210,17 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="204"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova versão %1 está disponível</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="211"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Você está com a versão mais recente</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="219"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível obter informações sobre a versão mais recente.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
@@ -255,12 +255,12 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Checar por atualizações</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="439"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Últimos Envios</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -750,7 +750,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="67"/>
         <source>Uploading Image</source>
-        <translation>Upando Imagem</translation>
+        <translation>Enviando Imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="179"/>
@@ -799,7 +799,7 @@ Pressione espaço abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="48"/>
         <source>Upload the selection to Imgur</source>
-        <translation>Upa a seleção no Imgur</translation>
+        <translation>Envia a seleção ao Imgur</translation>
     </message>
 </context>
 <context>
