@@ -105,7 +105,10 @@ Controller::Controller()
                      qApp,
                      [&]() { this->showRecentScreenshots(); });
 #endif
-    getLatestAvailableVersion();
+
+    if (ConfigHandler().checkForUpdates()) {
+        getLatestAvailableVersion();
+    }
 }
 
 Controller::~Controller()
@@ -216,14 +219,11 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 
 void Controller::appUpdates()
 {
-    if (ConfigHandler().checkForUpdates()) {
-
-        if (m_appLatestUrl.isEmpty()) {
-            m_showCheckAppUpdateStatus = true;
-            getLatestAvailableVersion();
-        } else {
-            QDesktopServices::openUrl(QUrl(m_appLatestUrl));
-        }
+    if (m_appLatestUrl.isEmpty()) {
+        m_showCheckAppUpdateStatus = true;
+        getLatestAvailableVersion();
+    } else {
+        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
     }
 }
 
