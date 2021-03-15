@@ -301,6 +301,10 @@ There are packages available in the repository of some Linux distributions:
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 
+There are also options for installing on macOS:
+
+- [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
+
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
   <a href="https://repology.org/metapackage/flameshot/versions">
