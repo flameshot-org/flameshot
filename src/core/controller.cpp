@@ -216,11 +216,14 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 
 void Controller::appUpdates()
 {
-    if (m_appLatestUrl.isEmpty()) {
-        m_showCheckAppUpdateStatus = true;
-        getLatestAvailableVersion();
-    } else {
-        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
+    if (ConfigHandler().checkForUpdates()) {
+
+        if (m_appLatestUrl.isEmpty()) {
+            m_showCheckAppUpdateStatus = true;
+            getLatestAvailableVersion();
+        } else {
+            QDesktopServices::openUrl(QUrl(m_appLatestUrl));
+        }
     }
 }
 
