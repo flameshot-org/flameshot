@@ -50,7 +50,7 @@ public:
 
 public slots:
     bool commitCurrentTool();
-    void deleteToolwidgetOrClose();
+    void deleteToolWidgetOrClose();
 
 signals:
     void captureTaken(uint id, QPixmap p, QRect selection);

@@ -279,7 +279,7 @@ bool CaptureWidget::commitCurrentTool()
     return false;
 }
 
-void CaptureWidget::deleteToolwidgetOrClose()
+void CaptureWidget::deleteToolWidgetOrClose()
 {
     if (m_panel->isVisible()) {
         m_panel->hide();
@@ -1125,7 +1125,7 @@ void CaptureWidget::initShortcuts()
                   this,
                   SLOT(selectAll()));
 
-    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolwidgetOrClose()));
+    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
 }
 
 void CaptureWidget::updateSizeIndicator()
