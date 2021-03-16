@@ -309,33 +309,13 @@ void CaptureWidget::paintEvent(QPaintEvent*)
         painter.restore();
     }
 
-    QColor overlayColor(0, 0, 0, m_opacity);
-    painter.setBrush(overlayColor);
-    QRect r;
-    if (m_selection->isVisible()) {
-        r = m_selection->geometry().normalized().adjusted(0, 0, -1, -1);
-    }
-    QRegion grey(rect());
-    grey = grey.subtracted(r);
-
-    painter.setClipRegion(grey);
-    painter.drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
-    painter.setClipRect(rect());
-
-    if (m_selection->isVisible()) {
-        // paint handlers
-        painter.setPen(m_uiColor);
-        painter.setRenderHint(QPainter::Antialiasing);
-        painter.setBrush(m_uiColor);
-        for (auto r : m_selection->handlerAreas()) {
-            painter.drawRoundedRect(r, 100, 100);
-        }
-    }
+    // draw inactive region
+    drawInactiveRegion(&painter);
 
     // show initial message on screen capture call if required (before selecting
     // area)
     if (m_showInitialMsg) {
-        showInitialMessage(&painter);
+        drawInitialMessage(&painter);
     }
 }
 
@@ -1256,7 +1236,7 @@ QRect CaptureWidget::extendedRect(QRect* r) const
                  r->height() * devicePixelRatio);
 }
 
-void CaptureWidget::showInitialMessage(QPainter* painter)
+void CaptureWidget::drawInitialMessage(QPainter* painter)
 {
     if (nullptr == painter) {
         return;
@@ -1304,4 +1284,30 @@ void CaptureWidget::showInitialMessage(QPainter* painter)
 
     painter->drawRect(bRect);
     painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
+}
+
+void CaptureWidget::drawInactiveRegion(QPainter* painter)
+{
+    QColor overlayColor(0, 0, 0, m_opacity);
+    painter->setBrush(overlayColor);
+    QRect r;
+    if (m_selection->isVisible()) {
+        r = m_selection->geometry().normalized().adjusted(0, 0, -1, -1);
+    }
+    QRegion grey(rect());
+    grey = grey.subtracted(r);
+
+    painter->setClipRegion(grey);
+    painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
+    painter->setClipRect(rect());
+
+    if (m_selection->isVisible()) {
+        // paint handlers
+        painter->setPen(m_uiColor);
+        painter->setRenderHint(QPainter::Antialiasing);
+        painter->setBrush(m_uiColor);
+        for (auto r : m_selection->handlerAreas()) {
+            painter->drawRoundedRect(r, 100, 100);
+        }
+    }
 }
