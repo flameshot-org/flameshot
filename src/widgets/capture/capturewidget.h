@@ -138,6 +138,7 @@ private:
 private:
     QRect extendedSelection() const;
     QRect extendedRect(QRect* r) const;
+    void showInitialMessage(QPainter* painter);
 
 private:
     UpdateNotificationWidget* m_updateNotificationWidget;
