@@ -322,52 +322,6 @@ void CaptureWidget::paintEvent(QPaintEvent*)
     painter.drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
     painter.setClipRect(rect());
 
-    if (m_showInitialMsg) {
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-        QRect helpRect;
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        if (currentScreen) {
-            helpRect = currentScreen->geometry();
-        } else {
-            helpRect = QGuiApplication::primaryScreen()->geometry();
-        }
-#else
-        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#endif
-
-        helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
-
-        QString helpTxt =
-          tr("Select an area with the mouse, or press Esc to exit."
-             "\nPress Enter to capture the screen."
-             "\nPress Right Click to show the color picker."
-             "\nUse the Mouse Wheel to change the thickness of your tool."
-             "\nPress Space to open the side panel.");
-
-        // We draw the white contrasting background for the text, using the
-        // same text and options to get the boundingRect that the text will
-        // have.
-        QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
-
-        // These four calls provide padding for the rect
-        const int margin = QApplication::fontMetrics().height() / 2;
-        bRect.setWidth(bRect.width() + margin);
-        bRect.setHeight(bRect.height() + margin);
-        bRect.setX(bRect.x() - margin);
-        bRect.setY(bRect.y() - margin);
-
-        QColor rectColor(m_uiColor);
-        rectColor.setAlpha(180);
-        QColor textColor(
-          (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
-
-        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
-        painter.setPen(QPen(textColor));
-
-        painter.drawRect(bRect);
-        painter.drawText(helpRect, Qt::AlignCenter, helpTxt);
-    }
-
     if (m_selection->isVisible()) {
         // paint handlers
         painter.setPen(m_uiColor);
@@ -376,6 +330,12 @@ void CaptureWidget::paintEvent(QPaintEvent*)
         for (auto r : m_selection->handlerAreas()) {
             painter.drawRoundedRect(r, 100, 100);
         }
+    }
+
+    // show initial message on screen capture call if required (before selecting
+    // area)
+    if (m_showInitialMsg) {
+        showInitialMessage(&painter);
     }
 }
 
@@ -1294,4 +1254,54 @@ QRect CaptureWidget::extendedRect(QRect* r) const
                  r->top() * devicePixelRatio,
                  r->width() * devicePixelRatio,
                  r->height() * devicePixelRatio);
+}
+
+void CaptureWidget::showInitialMessage(QPainter* painter)
+{
+    if (nullptr == painter) {
+        return;
+    }
+#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
+    QRect helpRect;
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    if (currentScreen) {
+        helpRect = currentScreen->geometry();
+    } else {
+        helpRect = QGuiApplication::primaryScreen()->geometry();
+    }
+#else
+    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+#endif
+
+    helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
+
+    QString helpTxt =
+      tr("Select an area with the mouse, or press Esc to exit."
+         "\nPress Enter to capture the screen."
+         "\nPress Right Click to show the color picker."
+         "\nUse the Mouse Wheel to change the thickness of your tool."
+         "\nPress Space to open the side panel.");
+
+    // We draw the white contrasting background for the text, using the
+    // same text and options to get the boundingRect that the text will
+    // have.
+    QRectF bRect = painter->boundingRect(helpRect, Qt::AlignCenter, helpTxt);
+
+    // These four calls provide padding for the rect
+    const int margin = QApplication::fontMetrics().height() / 2;
+    bRect.setWidth(bRect.width() + margin);
+    bRect.setHeight(bRect.height() + margin);
+    bRect.setX(bRect.x() - margin);
+    bRect.setY(bRect.y() - margin);
+
+    QColor rectColor(m_uiColor);
+    rectColor.setAlpha(180);
+    QColor textColor(
+      (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
+
+    painter->setBrush(QBrush(rectColor, Qt::SolidPattern));
+    painter->setPen(QPen(textColor));
+
+    painter->drawRect(bRect);
+    painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
 }
