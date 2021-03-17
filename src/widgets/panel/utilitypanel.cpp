@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "utilitypanel.h"
+#include <QListWidget>
 #include <QPropertyAnimation>
 #include <QPushButton>
 #include <QScrollArea>
@@ -11,6 +12,13 @@
 
 UtilityPanel::UtilityPanel(QWidget* parent)
   : QWidget(parent)
+  , m_internalPanel(nullptr)
+  , m_upLayout(nullptr)
+  , m_bottomLayout(nullptr)
+  , m_layout(nullptr)
+  , m_showAnimation(nullptr)
+  , m_hideAnimation(nullptr)
+  , m_captureTools(nullptr)
 {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -122,4 +130,17 @@ void UtilityPanel::initInternalPanel()
     m_internalPanel->setStyleSheet(
       QStringLiteral("QScrollArea {background-color: %1}").arg(bgColor.name()));
     m_internalPanel->hide();
+
+    m_captureTools = new QListWidget(this);
+    m_bottomLayout->addWidget(m_captureTools);
+}
+
+void UtilityPanel::fillCaptureTools(
+  QList<QPointer<CaptureTool>> captureToolObjects)
+{
+    m_captureTools->clear();
+    m_captureTools->addItem(tr("<Empty>"));
+    for (auto toolItem : captureToolObjects) {
+        m_captureTools->addItem(toolItem->name());
+    }
 }

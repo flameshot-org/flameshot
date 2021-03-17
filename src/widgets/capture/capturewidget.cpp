@@ -19,7 +19,6 @@
 #include "src/utils/systemnotification.h"
 #include "src/widgets/capture/colorpicker.h"
 #include "src/widgets/capture/hovereventfilter.h"
-#include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
@@ -176,9 +175,6 @@ CaptureWidget::CaptureWidget(const uint id,
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
 
-    connect(&m_undoStack, &QUndoStack::indexChanged, this, [this](int) {
-        this->update();
-    });
     initPanel();
 }
 
@@ -717,7 +713,9 @@ void CaptureWidget::initPanel()
     sidePanel->colorChanged(m_context.color);
     sidePanel->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(sidePanel);
-    m_panel->pushWidget(new QUndoView(&m_undoStack, this));
+
+    // Fill undo/redo/history list widget
+    m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
 
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
@@ -816,7 +814,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
 {
     switch (r) {
         case CaptureTool::REQ_CLEAR_MODIFICATIONS:
-            m_undoStack.setIndex(0);
+            m_captureToolObjects.clear();
             update();
             break;
 
@@ -843,10 +841,10 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             m_selection->setGeometryAnimated(rect());
             break;
         case CaptureTool::REQ_UNDO_MODIFICATION:
-            m_undoStack.undo();
+            undo();
             break;
         case CaptureTool::REQ_REDO_MODIFICATION:
-            m_undoStack.redo();
+            redo();
             break;
         case CaptureTool::REQ_REDRAW:
             update();
@@ -1121,7 +1119,6 @@ void CaptureWidget::updateCursor()
 
 void CaptureWidget::pushToolToStack()
 {
-    auto mod = new ModificationCommand(&m_context.screenshot, m_activeTool);
     disconnect(this,
                &CaptureWidget::colorChanged,
                m_activeTool,
@@ -1133,8 +1130,25 @@ void CaptureWidget::pushToolToStack()
     if (m_panel->toolWidget()) {
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
-    m_undoStack.push(mod);
+
+    // append current tool and update undo history position
+    m_captureToolObjects.append(m_activeTool);
     m_activeTool = nullptr;
+
+    // TODO - draw pixmap in new style
+    drawToolsData();
+}
+
+void CaptureWidget::drawToolsData()
+{
+    QPixmap pixmapItem = m_context.origScreenshot.copy();
+    QPainter painter(&pixmapItem);
+    for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
+        toolItem->process(painter, pixmapItem, false);
+    }
+    m_context.screenshot = pixmapItem.copy();
+    update();
+    m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
 
 void CaptureWidget::makeChild(QWidget* w)
@@ -1194,12 +1208,14 @@ void CaptureWidget::saveScreenshot()
 
 void CaptureWidget::undo()
 {
-    m_undoStack.undo();
+    m_captureToolObjects.undo();
+    drawToolsData();
 }
 
 void CaptureWidget::redo()
 {
-    m_undoStack.redo();
+    m_captureToolObjects.redo();
+    drawToolsData();
 }
 
 QRect CaptureWidget::extendedSelection() const

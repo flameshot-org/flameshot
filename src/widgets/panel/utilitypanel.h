@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "src/tools/capturetool.h"
 #include <QPointer>
 #include <QWidget>
 
@@ -10,6 +11,8 @@ class QVBoxLayout;
 class QPropertyAnimation;
 class QScrollArea;
 class QPushButton;
+class QListWidget;
+class CaptureTool;
 
 class UtilityPanel : public QWidget
 {
@@ -23,6 +26,8 @@ public:
     void pushWidget(QWidget* w);
     void hide();
     void show();
+    void fillCaptureTools(
+      QList<QPointer<CaptureTool>> captureToolObjectsHistory);
 
 public slots:
     void toggle();
@@ -37,4 +42,5 @@ private:
     QVBoxLayout* m_layout;
     QPropertyAnimation* m_showAnimation;
     QPropertyAnimation* m_hideAnimation;
+    QListWidget* m_captureTools;
 };
