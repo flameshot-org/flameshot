@@ -28,7 +28,6 @@ public:
     QWidget* configurationWidget() override;
     CaptureTool* copy(QObject* parent = nullptr) override;
 
-    void undo(QPixmap& pixmap) override;
     void process(QPainter& painter,
                  const QPixmap& pixmap,
                  bool recordUndo = false) override;

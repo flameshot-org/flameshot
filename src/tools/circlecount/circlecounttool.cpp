@@ -50,6 +50,8 @@ void CircleCountTool::process(QPainter& painter,
     if (recordUndo) {
         updateBackup(pixmap);
     }
+    auto pen = painter.pen();
+    QBrush brush = painter.brush();
     painter.setBrush(m_color);
 
     int bubble_size = m_thickness;
@@ -89,6 +91,8 @@ void CircleCountTool::process(QPainter& painter,
 
     painter.drawText(textRect, Qt::AlignCenter, QString::number(m_count));
     painter.setFont(orig_font);
+    painter.setBrush(brush);
+    painter.setPen(pen);
 }
 
 void CircleCountTool::paintMousePreview(QPainter& painter,
@@ -116,9 +120,20 @@ void CircleCountTool::drawStart(const CaptureContext& context)
     }
     m_points.first = context.mousePos;
     m_count = context.circleCount;
+    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context);
+}
+
+void CircleCountTool::undo()
+{
+    emit requestAction(CaptureTool::Request::REQ_DECREMENT_CIRCLE_COUNT);
+}
+
+void CircleCountTool::redo()
+{
+    emit requestAction(CaptureTool::Request::REQ_INCREMENT_CIRCLE_COUNT);
 }

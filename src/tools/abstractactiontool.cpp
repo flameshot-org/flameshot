@@ -22,11 +22,6 @@ bool AbstractActionTool::showMousePreview() const
     return false;
 }
 
-void AbstractActionTool::undo(QPixmap& pixmap)
-{
-    Q_UNUSED(pixmap);
-}
-
 void AbstractActionTool::process(QPainter& painter,
                                  const QPixmap& pixmap,
                                  bool recordUndo)

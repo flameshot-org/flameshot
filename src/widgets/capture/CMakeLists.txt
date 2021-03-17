@@ -18,6 +18,5 @@ target_sources(
           capturewidget.cpp
           colorpicker.cpp
           hovereventfilter.cpp
-          modificationcommand.cpp
           notifierbox.cpp
           selectionwidget.cpp)

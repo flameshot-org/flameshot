@@ -56,23 +56,6 @@ bool AbstractTwoPointTool::showMousePreview() const
     return true;
 }
 
-void AbstractTwoPointTool::undo(QPixmap& pixmap)
-{
-    QPainter p(&pixmap);
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
-#else
-    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
-#endif
-    if (this->nameID() == ToolType::CIRCLECOUNT) {
-        emit requestAction(REQ_DECREMENT_CIRCLE_COUNT);
-    }
-}
-
 void AbstractTwoPointTool::drawEnd(const QPoint& p)
 {
     Q_UNUSED(p);
