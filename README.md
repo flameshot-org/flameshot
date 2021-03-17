@@ -82,7 +82,7 @@
 
 - Customizable appearance.
 - Easy to use.
-- In-app screenshot edition.
+- In-app screenshot editing.
 - DBus interface.
 - Upload to Imgur.
 
