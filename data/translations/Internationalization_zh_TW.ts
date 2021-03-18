@@ -77,22 +77,22 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="55"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;擷取模式&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="61"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>矩形區域</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>全螢幕（目前螢幕）</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>全螢幕（所有螢幕）</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="79"/>
@@ -210,7 +210,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="204"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>已有新版本 %1 可取得</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="211"/>
@@ -225,7 +225,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Error</source>
-        <translation type="unfinished">錯誤</translation>
+        <translation>錯誤</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
@@ -575,7 +575,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>使用固定的路徑來儲存螢幕截圖</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
@@ -597,7 +597,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Unable to write to directory.</source>
-        <translation>無法寫入路徑</translation>
+        <translation>無法寫入至資料夾。</translation>
     </message>
 </context>
 <context>
@@ -610,7 +610,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="85"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>無螢幕截圖歷史紀錄</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="134"/>
@@ -620,7 +620,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="138"/>
         <source>URL copied to clipboard.</source>
-        <translation>網址已複製到剪貼簿</translation>
+        <translation>網址已複製到剪貼簿。</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="144"/>
@@ -630,7 +630,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="160"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>確認刪除</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="161"/>
@@ -714,23 +714,23 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="182"/>
         <source>Image to Clipboard.</source>
-        <translation>將檔案複製到剪貼簿</translation>
+        <translation>將檔案複製到剪貼簿。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="220"/>
         <source>Unable to open the URL.</source>
-        <translation>無法打開此連結</translation>
+        <translation>無法打開此連結。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>URL copied to clipboard.</source>
-        <translation>連結已複製到剪貼簿</translation>
+        <translation>連結已複製到剪貼簿。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="227"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>截圖已複製到剪貼簿</translation>
+        <translation>截圖已複製到剪貼簿。</translation>
     </message>
 </context>
 <context>
@@ -1114,7 +1114,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="114"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">連結已複製到剪貼簿</translation>
+        <translation>連結已複製到剪貼簿。</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
@@ -1322,7 +1322,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="66"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">螢幕擷取模式中的可用快速鍵</translation>
+        <translation>螢幕擷取模式中的可用快速鍵。</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="78"/>
@@ -1533,7 +1533,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="103"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>移動顏色選擇並在預覽按鈕檢視</translation>
+        <translation>移動顏色選擇並在預覽按鈕檢視。</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
@@ -1548,7 +1548,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="128"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>點選按鈕設定主色</translation>
+        <translation>點選按鈕來設定主要顏色。</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="139"/>
@@ -1558,7 +1558,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="144"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>點選按鈕設定對比色</translation>
+        <translation>點選按鈕來設定對比顏色。</translation>
     </message>
 </context>
 <context>
@@ -1602,7 +1602,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="129"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉</translation>
     </message>
 </context>
 <context>
@@ -1610,7 +1610,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="54"/>
         <source>Opacity of area outside selection:</source>
-        <translation>選擇區域以外的不透明度</translation>
+        <translation>選擇區域以外的不透明度：</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
