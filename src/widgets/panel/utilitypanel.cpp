@@ -120,11 +120,6 @@ void UtilityPanel::initInternalPanel()
     m_layout->addLayout(m_bottomLayout);
     widget->setLayout(m_layout);
 
-    QPushButton* closeButton = new QPushButton(this);
-    closeButton->setText(tr("Close"));
-    connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
-    m_bottomLayout->addWidget(closeButton);
-
     QColor bgColor = palette().window().color();
     bgColor.setAlphaF(0.0);
     m_internalPanel->setStyleSheet(
@@ -133,6 +128,11 @@ void UtilityPanel::initInternalPanel()
 
     m_captureTools = new QListWidget(this);
     m_bottomLayout->addWidget(m_captureTools);
+
+    QPushButton* closeButton = new QPushButton(this);
+    closeButton->setText(tr("Close"));
+    connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
+    m_bottomLayout->addWidget(closeButton);
 }
 
 void UtilityPanel::fillCaptureTools(
@@ -140,7 +140,10 @@ void UtilityPanel::fillCaptureTools(
 {
     m_captureTools->clear();
     m_captureTools->addItem(tr("<Empty>"));
+
     for (auto toolItem : captureToolObjects) {
-        m_captureTools->addItem(toolItem->name());
+        QListWidgetItem* item = new QListWidgetItem(
+          toolItem->icon(QColor(Qt::white), false), toolItem->name());
+        m_captureTools->addItem(item);
     }
 }
