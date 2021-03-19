@@ -177,6 +177,9 @@ CaptureWidget::CaptureWidget(const uint id,
     m_notifierBox->hide();
 
     initPanel();
+    //    connect(&m_toolWidget, &QUndoStack::indexChanged, this, [this](int) {
+    //      this->update();
+    //    });
 }
 
 CaptureWidget::~CaptureWidget()
@@ -1142,7 +1145,6 @@ void CaptureWidget::pushToolToStack()
     m_captureToolObjects.append(m_activeTool);
     m_activeTool = nullptr;
 
-    // TODO - draw pixmap in new style
     drawToolsData();
 }
 
