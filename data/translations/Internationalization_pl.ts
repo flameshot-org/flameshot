@@ -1110,7 +1110,7 @@ Spacja, aby pokazać panel boczny.</translation>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished">Niepoprawny kolor, ta flaga wspiera następujące formaty:
+        <translation>Niepoprawny kolor, wspierane są następujące formaty:
 - #RGB (każdy R, G, i B jest pojedynczym numerem szesnastkowym)
 - #RRGGBB
 - #RRRGGGBBB
@@ -1136,7 +1136,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/main.cpp" line="232"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished">Niepoprawna wartość, musi być zdefiniowana jako &apos;true&apos; lub &apos;false&apos;</translation>
+        <translation>Niepoprawna wartość, musi być zdefiniowana jako &apos;true&apos; lub &apos;false&apos;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="44"/>
