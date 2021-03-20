@@ -71,8 +71,13 @@ public:
 
     bool copyAndCloseAfterUploadEnabled();
     void setCopyAndCloseAfterUploadEnabled(const bool);
+
     bool historyConfirmationToDelete();
     void setHistoryConfirmationToDelete(const bool save);
+
+    int uploadHistoryMaxSizeValue();
+    void setUploadHistoryMaxSize(const int);
+
     bool saveAfterCopyValue();
     void setSaveAfterCopy(const bool);
 

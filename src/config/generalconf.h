@@ -10,6 +10,7 @@ class QCheckBox;
 class QPushButton;
 class QLabel;
 class QLineEdit;
+class QSpinBox;
 
 class GeneralConf : public QWidget
 {
@@ -28,6 +29,7 @@ private slots:
     void checkForUpdatesChanged(bool checked);
     void autostartChanged(bool checked);
     void historyConfirmationToDelete(bool checked);
+    void uploadHistoryMaxSizeChanged(int max);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
     void importConfiguration();
@@ -44,6 +46,7 @@ private:
     void initShowDesktopNotification();
     void initShowTrayIcon();
     void initHistoryConfirmationToDelete();
+    void initUploadHistoryMaxSize();
     void initConfigButtons();
     void initCheckForUpdates();
     void initAutostart();
@@ -75,4 +78,5 @@ private:
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
+    QSpinBox* m_uploadHistoryMaxSize;
 };
