@@ -34,9 +34,11 @@ void History::save(const QPixmap& pixmap, const QString& fileName)
     QPixmap pixmapScaled = QPixmap(pixmap);
     if (pixmap.height() / HISTORYPIXMAP_MAX_PREVIEW_HEIGHT >=
         pixmap.width() / HISTORYPIXMAP_MAX_PREVIEW_WIDTH) {
-        pixmapScaled = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
+        pixmapScaled = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT,
+                                             Qt::SmoothTransformation);
     } else {
-        pixmapScaled = pixmap.scaledToWidth(HISTORYPIXMAP_MAX_PREVIEW_WIDTH);
+        pixmapScaled = pixmap.scaledToWidth(HISTORYPIXMAP_MAX_PREVIEW_WIDTH,
+                                            Qt::SmoothTransformation);
     }
 
     // save preview
@@ -55,9 +57,10 @@ const QList<QString>& History::history()
                                              QDir::Files,
                                              QDir::Time);
     int cnt = 0;
+    int max = ConfigHandler().uploadHistoryMaxSizeValue();
     m_thumbs.clear();
     foreach (QString fileName, images) {
-        if (++cnt <= HISTORY_MAX_SIZE) {
+        if (++cnt <= max) {
             m_thumbs.append(fileName);
         } else {
             QFile file(path() + fileName);
