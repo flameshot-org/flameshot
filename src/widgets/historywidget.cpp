@@ -24,8 +24,12 @@ HistoryWidget::HistoryWidget(QWidget* parent)
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Latest Uploads"));
-    setFixedSize(800, this->height());
+    resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
     m_notification = new NotificationWidget();
+
+    QGridLayout* layout = new QGridLayout(this);
+    layout->setContentsMargins(QMargins(0, 0, 0, 0));
+    setLayout(layout);
 
     m_pVBox = new QVBoxLayout(this);
     m_pVBox->setAlignment(Qt::AlignTop);
@@ -38,6 +42,7 @@ HistoryWidget::HistoryWidget(QWidget* parent)
     QWidget* widget = new QWidget();
     scrollArea->setWidget(widget);
     widget->setLayout(m_pVBox);
+    layout->addWidget(scrollArea);
 }
 
 HistoryWidget::~HistoryWidget()
@@ -106,15 +111,17 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     // fine
     if (pixmap.height() / HISTORYPIXMAP_MAX_PREVIEW_HEIGHT >=
         pixmap.width() / HISTORYPIXMAP_MAX_PREVIEW_WIDTH) {
-        pixmap = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
+        pixmap = pixmap.scaledToHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT,
+                                       Qt::SmoothTransformation);
     } else {
-        pixmap = pixmap.scaledToWidth(HISTORYPIXMAP_MAX_PREVIEW_WIDTH);
+        pixmap = pixmap.scaledToWidth(HISTORYPIXMAP_MAX_PREVIEW_WIDTH,
+                                      Qt::SmoothTransformation);
     }
 
     // get file info
     QFileInfo* pFileInfo = new QFileInfo(fullFileName);
     QString lastModified =
-      pFileInfo->lastModified().toString(" yyyy-MM-dd\nhh:mm:ss");
+      pFileInfo->lastModified().toString("yyyy-MM-dd\nhh:mm:ss");
 
     // screenshot preview
     QLabel* pScreenshot = new QLabel();
