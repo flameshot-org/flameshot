@@ -16,7 +16,7 @@
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
 #endif
-
+#include <fstream>
 ScreenshotSaver::ScreenshotSaver()
   : m_id(0)
 {}
@@ -99,6 +99,51 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
     return ok;
 }
 
+
+QString ShowSaveFileDialog(QWidget *parent,
+                           const QString &title,
+                           const QString &directory,
+                           const QString &filter) {
+#if defined(Q_WS_WIN) || defined(Q_WS_MAC)
+  return QFileDialog::getSaveFileName(parent,
+                                      title,
+                                      directory,
+                                      filter);
+#else
+
+  QFileDialog dialog(parent, title, directory, filter);
+  if (parent) {
+    dialog.setWindowModality(Qt::WindowModal);
+  }
+
+  QRegExp filter_regex(QLatin1String("(?:^\\*\\.(?!.*\\()|\\(\\*\\.)(\\w+)"));
+  QStringList filters = filter.split(QLatin1String(";;"));
+
+  dialog.setAcceptMode(QFileDialog::AcceptSave);
+
+
+  if (dialog.exec() == QDialog::Accepted) {
+
+    QString file_name = dialog.selectedFiles().first();
+    QFileInfo info(file_name);
+    if (info.suffix().isEmpty()){
+		if ( !dialog.selectedNameFilter().isEmpty()) {
+			  if (filter_regex.indexIn(dialog.selectedNameFilter()) != -1) {
+				QString extension = filter_regex.cap(1);
+				file_name += QLatin1String(".") + extension;
+			  }
+		}
+    }
+
+    return file_name;
+  } else {
+
+    return QString();
+  }
+#endif  // Q_WS_MAC || Q_WS_WIN
+}
+
+
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 {
     bool ok = false;
@@ -116,20 +161,23 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        savePath = QFileDialog::getSaveFileName(
-          nullptr,
-          QObject::tr("Save screenshot"),
-          FileNameHandler().absoluteSavePath(),
-          QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
-                        "file (*.bmp);;JPEG file (*.jpg)"));
-    }
+//        savePath = QFileDialog::getSaveFileName(
+//          nullptr,
+//          QObject::tr("Save screenshot"),
+//          FileNameHandler().absoluteSavePath(),
+//          QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
+//                        "file (*.bmp);;JPEG file (*.jpg);;By extension"), &selectedFilter);
 
+
+    	savePath = ShowSaveFileDialog(nullptr,  QObject::tr("Save screenshot"), FileNameHandler().absoluteSavePath(),QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
+    			                        "file (*.bmp);;JPEG file (*.jpg);;By extension"));
+
+    }
     if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
         !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
         !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
         savePath += QLatin1String(".png");
     }
-
     ok = capture.save(savePath);
 
     if (ok) {
