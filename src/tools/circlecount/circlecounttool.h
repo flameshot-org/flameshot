@@ -22,6 +22,9 @@ public:
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
+    void undo() override;
+    void redo() override;
+
 protected:
     ToolType nameID() const override;
 

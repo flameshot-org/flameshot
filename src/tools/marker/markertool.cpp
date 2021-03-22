@@ -49,19 +49,31 @@ void MarkerTool::process(QPainter& painter,
     if (recordUndo) {
         updateBackup(pixmap);
     }
+    auto compositionMode = painter.compositionMode();
+    qreal opacity = painter.opacity();
+    auto pen = painter.pen();
     painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(m_points.first, m_points.second);
+    painter.setPen(pen);
+    painter.setOpacity(opacity);
+    painter.setCompositionMode(compositionMode);
 }
 
 void MarkerTool::paintMousePreview(QPainter& painter,
                                    const CaptureContext& context)
 {
+    auto compositionMode = painter.compositionMode();
+    qreal opacity = painter.opacity();
+    auto pen = painter.pen();
     painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
+    painter.setPen(pen);
+    painter.setOpacity(opacity);
+    painter.setCompositionMode(compositionMode);
 }
 
 void MarkerTool::drawStart(const CaptureContext& context)

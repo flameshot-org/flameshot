@@ -177,6 +177,10 @@ Press Space to open the side panel.</source>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -564,11 +568,50 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL másolva a vágólapra.</translation>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Hiba</translation>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to upload screenshot, please check your internet connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retrieving configuration file with s3 creds...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -579,27 +622,50 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="obsolete">Nem lehet az URL-t megnyitni.</translation>
+        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL másolva a vágólapra.</translation>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="obsolete">Képernyőmentés másolva a vágólapra.</translation>
+        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="obsolete">URL másolása</translation>
+        <translation type="unfinished">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="obsolete">URL megnyitása</translation>
+        <translation type="unfinished">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="obsolete">Kép a vágolapra.</translation>
+        <translation type="unfinished">Kép a vágolapra.</translation>
+    </message>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
+    <message>
+        <source>Image uploader tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -610,19 +676,19 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation>Kép felötlése</translation>
+        <translation type="vanished">Kép felötlése</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation>URL másolása</translation>
+        <translation type="vanished">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>URL megnyitása</translation>
+        <translation type="vanished">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation>Kép a vágolapra.</translation>
+        <translation type="vanished">Kép a vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -630,15 +696,11 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation>URL másolva a vágólapra.</translation>
+        <translation type="vanished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Képernyőmentés másolva a vágólapra.</translation>
-    </message>
-    <message>
-        <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Képernyőmentés másolva a vágólapra.</translation>
     </message>
 </context>
 <context>
@@ -786,17 +848,6 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QHotkey</name>
-    <message>
-        <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Failed to unregister %1. Error: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1159,6 +1210,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
 </context>
 <context>
+    <name>SizeDecreaseTool</name>
+    <message>
+        <source>Decrease Tool Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease the size of the other tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SizeIncreaseTool</name>
+    <message>
+        <source>Increase Tool Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase the size of the other tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SizeIndicatorTool</name>
     <message>
         <source>Selection Size Indicator</source>
@@ -1363,9 +1436,28 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
 </context>
 <context>
+    <name>UploadStorageConfig</name>
+    <message>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
         <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

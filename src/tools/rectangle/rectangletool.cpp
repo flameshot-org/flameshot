@@ -47,6 +47,8 @@ void RectangleTool::process(QPainter& painter,
     if (recordUndo) {
         updateBackup(pixmap);
     }
+    QPen orig_pen = painter.pen();
+    QBrush orig_brush = painter.brush();
     painter.setPen(QPen(m_color, m_thickness));
     painter.setBrush(QBrush(m_color));
     if (context_thickness == 0) {
@@ -60,6 +62,8 @@ void RectangleTool::process(QPainter& painter,
           m_thickness,
           m_thickness);
     }
+    painter.setPen(orig_pen);
+    painter.setBrush(orig_brush);
 }
 
 void RectangleTool::paintMousePreview(QPainter& painter,

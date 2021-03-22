@@ -16,8 +16,6 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
 
-    void undo(QPixmap& pixmap) override;
-
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;

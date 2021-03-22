@@ -113,20 +113,6 @@ CaptureTool* TextTool::copy(QObject* parent)
     return tt;
 }
 
-void TextTool::undo(QPixmap& pixmap)
-{
-    QPainter p(&pixmap);
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
-#else
-    p.drawPixmap(m_backupArea.topLeft(), m_pixmapBackup);
-#endif
-}
-
 void TextTool::process(QPainter& painter,
                        const QPixmap& pixmap,
                        bool recordUndo)

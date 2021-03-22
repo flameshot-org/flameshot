@@ -13,13 +13,13 @@
 
 #include "buttonhandler.h"
 #include "capturetoolbutton.h"
+#include "capturetoolobjectshistory.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QPointer>
-#include <QUndoStack>
 #include <QWidget>
 
 class QPaintEvent;
@@ -140,11 +140,13 @@ private:
 private:
     QRect extendedSelection() const;
     QRect extendedRect(QRect* r) const;
+    void drawInitialMessage(QPainter* painter);
+    void drawInactiveRegion(QPainter* painter);
+    void drawToolsData();
 
 private:
     UpdateNotificationWidget* m_updateNotificationWidget;
     quint64 m_lastMouseWheel;
-    QUndoStack m_undoStack;
     QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button
     QPointer<CaptureToolButton> m_activeButton;
@@ -162,4 +164,6 @@ private:
     QPoint m_dragStartPoint;
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
+
+    CaptureToolObjectsHistory m_captureToolObjects;
 };

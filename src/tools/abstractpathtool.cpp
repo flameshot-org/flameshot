@@ -29,20 +29,6 @@ bool AbstractPathTool::showMousePreview() const
     return true;
 }
 
-void AbstractPathTool::undo(QPixmap& pixmap)
-{
-    QPainter p(&pixmap);
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
-#else
-    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
-#endif
-}
-
 void AbstractPathTool::drawEnd(const QPoint& p)
 {
     Q_UNUSED(p);

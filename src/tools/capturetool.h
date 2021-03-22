@@ -129,8 +129,10 @@ public:
     // Return a copy of the tool
     virtual CaptureTool* copy(QObject* parent = nullptr) = 0;
 
-    // revert changes
-    virtual void undo(QPixmap& pixmap) = 0;
+    // undo/redo changes
+    virtual void undo(){};
+    virtual void redo(){};
+
     // Called every time the tool has to draw
     // recordUndo indicates when the tool should save the information
     // for the undo(), if the value is false calling undo() after

@@ -20,7 +20,6 @@
 #include "src/utils/systemnotification.h"
 #include "src/widgets/capture/colorpicker.h"
 #include "src/widgets/capture/hovereventfilter.h"
-#include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
@@ -177,9 +176,6 @@ CaptureWidget::CaptureWidget(const uint id,
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
 
-    connect(&m_undoStack, &QUndoStack::indexChanged, this, [this](int) {
-        this->update();
-    });
     initPanel();
 }
 
@@ -309,73 +305,13 @@ void CaptureWidget::paintEvent(QPaintEvent*)
         painter.restore();
     }
 
-    QColor overlayColor(0, 0, 0, m_opacity);
-    painter.setBrush(overlayColor);
-    QRect r;
-    if (m_selection->isVisible()) {
-        r = m_selection->geometry().normalized().adjusted(0, 0, -1, -1);
-    }
-    QRegion grey(rect());
-    grey = grey.subtracted(r);
+    // draw inactive region
+    drawInactiveRegion(&painter);
 
-    painter.setClipRegion(grey);
-    painter.drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
-    painter.setClipRect(rect());
-
+    // show initial message on screen capture call if required (before selecting
+    // area)
     if (m_showInitialMsg) {
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-        QRect helpRect;
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        if (currentScreen) {
-            helpRect = currentScreen->geometry();
-        } else {
-            helpRect = QGuiApplication::primaryScreen()->geometry();
-        }
-#else
-        QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#endif
-
-        helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
-
-        QString helpTxt =
-          tr("Select an area with the mouse, or press Esc to exit."
-             "\nPress Enter to capture the screen."
-             "\nPress Right Click to show the color picker."
-             "\nUse the Mouse Wheel to change the thickness of your tool."
-             "\nPress Space to open the side panel.");
-
-        // We draw the white contrasting background for the text, using the
-        // same text and options to get the boundingRect that the text will
-        // have.
-        QRectF bRect = painter.boundingRect(helpRect, Qt::AlignCenter, helpTxt);
-
-        // These four calls provide padding for the rect
-        const int margin = QApplication::fontMetrics().height() / 2;
-        bRect.setWidth(bRect.width() + margin);
-        bRect.setHeight(bRect.height() + margin);
-        bRect.setX(bRect.x() - margin);
-        bRect.setY(bRect.y() - margin);
-
-        QColor rectColor(m_uiColor);
-        rectColor.setAlpha(180);
-        QColor textColor(
-          (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
-
-        painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
-        painter.setPen(QPen(textColor));
-
-        painter.drawRect(bRect);
-        painter.drawText(helpRect, Qt::AlignCenter, helpTxt);
-    }
-
-    if (m_selection->isVisible()) {
-        // paint handlers
-        painter.setPen(m_uiColor);
-        painter.setRenderHint(QPainter::Antialiasing);
-        painter.setBrush(m_uiColor);
-        for (auto r : m_selection->handlerAreas()) {
-            painter.drawRoundedRect(r, 100, 100);
-        }
+        drawInitialMessage(&painter);
     }
 }
 
@@ -779,7 +715,9 @@ void CaptureWidget::initPanel()
     sidePanel->colorChanged(m_context.color);
     sidePanel->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(sidePanel);
-    m_panel->pushWidget(new QUndoView(&m_undoStack, this));
+
+    // Fill undo/redo/history list widget
+    m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
 
 void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
@@ -878,7 +816,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
 {
     switch (r) {
         case CaptureTool::REQ_CLEAR_MODIFICATIONS:
-            m_undoStack.setIndex(0);
+            m_captureToolObjects.clear();
             update();
             break;
 
@@ -905,10 +843,10 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             m_selection->setGeometryAnimated(rect());
             break;
         case CaptureTool::REQ_UNDO_MODIFICATION:
-            m_undoStack.undo();
+            undo();
             break;
         case CaptureTool::REQ_REDO_MODIFICATION:
-            m_undoStack.redo();
+            redo();
             break;
         case CaptureTool::REQ_REDRAW:
             update();
@@ -1188,7 +1126,6 @@ void CaptureWidget::updateCursor()
 
 void CaptureWidget::pushToolToStack()
 {
-    auto mod = new ModificationCommand(&m_context.screenshot, m_activeTool);
     disconnect(this,
                &CaptureWidget::colorChanged,
                m_activeTool,
@@ -1200,8 +1137,24 @@ void CaptureWidget::pushToolToStack()
     if (m_panel->toolWidget()) {
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
-    m_undoStack.push(mod);
+
+    // append current tool and update undo history position
+    m_captureToolObjects.append(m_activeTool);
     m_activeTool = nullptr;
+
+    drawToolsData();
+}
+
+void CaptureWidget::drawToolsData()
+{
+    QPixmap pixmapItem = m_context.origScreenshot.copy();
+    QPainter painter(&pixmapItem);
+    for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
+        toolItem->process(painter, pixmapItem, false);
+    }
+    m_context.screenshot = pixmapItem.copy();
+    update();
+    m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
 }
 
 void CaptureWidget::makeChild(QWidget* w)
@@ -1271,12 +1224,14 @@ void CaptureWidget::saveScreenshot()
 
 void CaptureWidget::undo()
 {
-    m_undoStack.undo();
+    m_captureToolObjects.undo();
+    drawToolsData();
 }
 
 void CaptureWidget::redo()
 {
-    m_undoStack.redo();
+    m_captureToolObjects.redo();
+    drawToolsData();
 }
 
 QRect CaptureWidget::extendedSelection() const
@@ -1294,4 +1249,80 @@ QRect CaptureWidget::extendedRect(QRect* r) const
                  r->top() * devicePixelRatio,
                  r->width() * devicePixelRatio,
                  r->height() * devicePixelRatio);
+}
+
+void CaptureWidget::drawInitialMessage(QPainter* painter)
+{
+    if (nullptr == painter) {
+        return;
+    }
+#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
+    QRect helpRect;
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    if (currentScreen) {
+        helpRect = currentScreen->geometry();
+    } else {
+        helpRect = QGuiApplication::primaryScreen()->geometry();
+    }
+#else
+    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
+#endif
+
+    helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
+
+    QString helpTxt =
+      tr("Select an area with the mouse, or press Esc to exit."
+         "\nPress Enter to capture the screen."
+         "\nPress Right Click to show the color picker."
+         "\nUse the Mouse Wheel to change the thickness of your tool."
+         "\nPress Space to open the side panel.");
+
+    // We draw the white contrasting background for the text, using the
+    // same text and options to get the boundingRect that the text will
+    // have.
+    QRectF bRect = painter->boundingRect(helpRect, Qt::AlignCenter, helpTxt);
+
+    // These four calls provide padding for the rect
+    const int margin = QApplication::fontMetrics().height() / 2;
+    bRect.setWidth(bRect.width() + margin);
+    bRect.setHeight(bRect.height() + margin);
+    bRect.setX(bRect.x() - margin);
+    bRect.setY(bRect.y() - margin);
+
+    QColor rectColor(m_uiColor);
+    rectColor.setAlpha(180);
+    QColor textColor(
+      (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
+
+    painter->setBrush(QBrush(rectColor, Qt::SolidPattern));
+    painter->setPen(QPen(textColor));
+
+    painter->drawRect(bRect);
+    painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
+}
+
+void CaptureWidget::drawInactiveRegion(QPainter* painter)
+{
+    QColor overlayColor(0, 0, 0, m_opacity);
+    painter->setBrush(overlayColor);
+    QRect r;
+    if (m_selection->isVisible()) {
+        r = m_selection->geometry().normalized().adjusted(0, 0, -1, -1);
+    }
+    QRegion grey(rect());
+    grey = grey.subtracted(r);
+
+    painter->setClipRegion(grey);
+    painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
+    painter->setClipRect(rect());
+
+    if (m_selection->isVisible()) {
+        // paint handlers
+        painter->setPen(m_uiColor);
+        painter->setRenderHint(QPainter::Antialiasing);
+        painter->setBrush(m_uiColor);
+        for (auto r : m_selection->handlerAreas()) {
+            painter->drawRoundedRect(r, 100, 100);
+        }
+    }
 }

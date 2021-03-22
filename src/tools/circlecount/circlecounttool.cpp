@@ -50,11 +50,12 @@ void CircleCountTool::process(QPainter& painter,
     if (recordUndo) {
         updateBackup(pixmap);
     }
+    auto orig_pen = painter.pen();
+    QBrush orig_brush = painter.brush();
     painter.setBrush(m_color);
 
     int bubble_size = m_thickness;
-    // Decrease by 1px so the border is properly ereased when doing undo
-    painter.drawEllipse(m_points.first, bubble_size - 1, bubble_size - 1);
+    painter.drawEllipse(m_points.first, bubble_size, bubble_size);
     QRect textRect = QRect(m_points.first.x() - bubble_size / 2,
                            m_points.first.y() - bubble_size / 2,
                            bubble_size,
@@ -76,7 +77,6 @@ void CircleCountTool::process(QPainter& painter,
         }
         new_font.setPixelSize(fontSize);
         painter.setFont(new_font);
-
         bRect = painter.boundingRect(
           textRect, Qt::AlignCenter, QString::number(m_count));
     }
@@ -89,6 +89,8 @@ void CircleCountTool::process(QPainter& painter,
 
     painter.drawText(textRect, Qt::AlignCenter, QString::number(m_count));
     painter.setFont(orig_font);
+    painter.setBrush(orig_brush);
+    painter.setPen(orig_pen);
 }
 
 void CircleCountTool::paintMousePreview(QPainter& painter,
@@ -116,9 +118,20 @@ void CircleCountTool::drawStart(const CaptureContext& context)
     }
     m_points.first = context.mousePos;
     m_count = context.circleCount;
+    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context);
+}
+
+void CircleCountTool::undo()
+{
+    emit requestAction(CaptureTool::Request::REQ_DECREMENT_CIRCLE_COUNT);
+}
+
+void CircleCountTool::redo()
+{
+    emit requestAction(CaptureTool::Request::REQ_INCREMENT_CIRCLE_COUNT);
 }
