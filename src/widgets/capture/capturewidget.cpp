@@ -120,6 +120,7 @@ CaptureWidget::CaptureWidget(const uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
+        // Comment For CaptureWidget Debugging under Linux
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
         resize(pixmap().size());
@@ -937,9 +938,35 @@ void CaptureWidget::incrementCircleCount()
     SPDLOG_DEBUG("Incrementing Circle to {}.", m_context.circleCount);
 }
 
+void CaptureWidget::removeToolObject(int index)
+{
+    --index;
+    if (index >= 0 && index < m_captureToolObjects.size()) {
+        const ToolType currentToolType =
+          m_captureToolObjects.at(index)->nameID();
+        m_captureToolObjects.removeAt(index);
+        if (currentToolType == ToolType::CIRCLECOUNT) {
+            int circleCount = 1;
+            for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
+                auto toolItem = m_captureToolObjects.at(cnt);
+                if (toolItem->nameID() != ToolType::CIRCLECOUNT) {
+                    continue;
+                }
+                if (cnt >= index) {
+                    m_captureToolObjects.at(cnt)->setCount(circleCount);
+                }
+                circleCount++;
+            }
+            m_context.circleCount = circleCount;
+        }
+        drawToolsData();
+    }
+}
+
+void CaptureWidget::editToolObject(int index) {}
+
 void CaptureWidget::decrementCircleCount()
 {
-
     SPDLOG_DEBUG("Decrementing Circle.");
     m_context.circleCount--;
 }
