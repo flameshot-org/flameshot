@@ -177,9 +177,6 @@ CaptureWidget::CaptureWidget(const uint id,
     m_notifierBox->hide();
 
     initPanel();
-    //    connect(&m_toolWidget, &QUndoStack::indexChanged, this, [this](int) {
-    //      this->update();
-    //    });
 }
 
 CaptureWidget::~CaptureWidget()
