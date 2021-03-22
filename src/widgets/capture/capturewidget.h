@@ -89,6 +89,10 @@ private slots:
     void incrementCircleCount();
     void decrementCircleCount();
 
+public:
+    void removeToolObject(int index = -1);
+    void editToolObject(int index = -1);
+
 protected:
     void paintEvent(QPaintEvent*);
     void mousePressEvent(QMouseEvent*);

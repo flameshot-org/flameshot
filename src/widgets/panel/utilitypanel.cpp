@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "utilitypanel.h"
+#include "capturewidget.h"
+#include <QHBoxLayout>
 #include <QListWidget>
 #include <QPropertyAnimation>
 #include <QPushButton>
@@ -10,14 +12,16 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
-UtilityPanel::UtilityPanel(QWidget* parent)
-  : QWidget(parent)
+UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
+  : QWidget(captureWidget)
+  , m_captureWidget(captureWidget)
   , m_internalPanel(nullptr)
   , m_upLayout(nullptr)
   , m_bottomLayout(nullptr)
   , m_layout(nullptr)
   , m_showAnimation(nullptr)
   , m_hideAnimation(nullptr)
+  , m_layersLayout(nullptr)
   , m_captureTools(nullptr)
 {
     initInternalPanel();
@@ -116,8 +120,10 @@ void UtilityPanel::initInternalPanel()
     m_layout = new QVBoxLayout();
     m_upLayout = new QVBoxLayout();
     m_bottomLayout = new QVBoxLayout();
+    m_layersLayout = new QVBoxLayout();
     m_layout->addLayout(m_upLayout);
     m_layout->addLayout(m_bottomLayout);
+    m_bottomLayout->addLayout(m_layersLayout);
     widget->setLayout(m_layout);
 
     QColor bgColor = palette().window().color();
@@ -127,8 +133,27 @@ void UtilityPanel::initInternalPanel()
     m_internalPanel->hide();
 
     m_captureTools = new QListWidget(this);
-    m_bottomLayout->addWidget(m_captureTools);
+    connect(m_captureTools,
+            SIGNAL(currentRowChanged(int)),
+            this,
+            SLOT(slotCaptureToolsCurrentRowChanged(int)));
 
+    QHBoxLayout* layersButtons = new QHBoxLayout();
+    m_layersLayout->addLayout(layersButtons);
+    m_layersLayout->addWidget(m_captureTools);
+
+    m_buttonDelete = new QPushButton(this);
+    m_buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
+    m_buttonDelete->setDisabled(true);
+    layersButtons->addWidget(m_buttonDelete);
+    layersButtons->addStretch();
+
+    connect(m_buttonDelete,
+            SIGNAL(clicked(bool)),
+            this,
+            SLOT(slotButtonDelete(bool)));
+
+    // Bottom
     QPushButton* closeButton = new QPushButton(this);
     closeButton->setText(tr("Close"));
     connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
@@ -146,4 +171,28 @@ void UtilityPanel::fillCaptureTools(
           toolItem->icon(QColor(Qt::white), false), toolItem->name());
         m_captureTools->addItem(item);
     }
+}
+
+void UtilityPanel::slotCaptureToolsCurrentRowChanged(int currentRow)
+{
+    if (currentRow > 0) {
+        m_buttonDelete->setDisabled(false);
+    } else {
+        m_buttonDelete->setDisabled(true);
+    }
+}
+
+void UtilityPanel::slotButtonDelete(bool clicked)
+{
+    int currentRow = m_captureTools->currentRow();
+    if (currentRow > 0) {
+        m_captureWidget->removeToolObject(currentRow);
+        // TODO - set selection to the next item
+        if (currentRow >= m_captureTools->count()) {
+            currentRow = m_captureTools->count() - 1;
+        }
+    } else {
+        currentRow = 0;
+    }
+    m_captureTools->setCurrentRow(currentRow);
 }

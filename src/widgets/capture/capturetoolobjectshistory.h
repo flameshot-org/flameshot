@@ -19,6 +19,9 @@ public:
     void redo();
     QList<QPointer<CaptureTool>> captureToolObjects();
     int pos();
+    QPointer<CaptureTool> at(int index);
+    void removeAt(int index);
+    int size();
 
 private:
     QList<QPointer<CaptureTool>> m_captureToolObjects;

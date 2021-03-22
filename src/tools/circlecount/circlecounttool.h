@@ -28,8 +28,6 @@ public:
 protected:
     ToolType nameID() const override;
 
-private:
-    unsigned int m_count;
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
