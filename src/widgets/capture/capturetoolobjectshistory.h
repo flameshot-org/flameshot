@@ -18,12 +18,19 @@ public:
     void undo();
     void redo();
     QList<QPointer<CaptureTool>> captureToolObjects();
-    int pos();
+    int historyIndex();
     QPointer<CaptureTool> at(int index);
     void removeAt(int index);
     int size();
+    int find(const QPoint& pos, const QSize& captureSize);
 
 private:
+    int findWithRadius(QPainter& painter,
+                       QPixmap& pixmap,
+                       const QPoint& pos,
+                       const QSize& captureSize,
+                       const int radius = 0);
+
     QList<QPointer<CaptureTool>> m_captureToolObjects;
     QList<QPointer<CaptureTool>> m_captureToolObjectsTemp;
     int m_historyPos;

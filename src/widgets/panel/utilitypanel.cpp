@@ -10,7 +10,6 @@
 #include <QScrollArea>
 #include <QTimer>
 #include <QVBoxLayout>
-#include <QWheelEvent>
 
 UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   : QWidget(captureWidget)
@@ -170,6 +169,14 @@ void UtilityPanel::fillCaptureTools(
         QListWidgetItem* item = new QListWidgetItem(
           toolItem->icon(QColor(Qt::white), false), toolItem->name());
         m_captureTools->addItem(item);
+    }
+}
+
+void UtilityPanel::setActiveLayer(int index)
+{
+    index++;
+    if (index >= 0 && index < m_captureTools->count()) {
+        m_captureTools->setCurrentRow(index);
     }
 }
 
