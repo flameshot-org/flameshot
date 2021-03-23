@@ -318,6 +318,7 @@ void CaptureWidget::paintEvent(QPaintEvent*)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
+    m_mousePressedPos = e->pos();
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
@@ -480,13 +481,22 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         }
         // when we end the drawing we have to register the last  point and
         // add the temp modification to the list of modifications
-    } else if (m_mouseIsClicked && m_activeTool) {
-        m_activeTool->drawEnd(m_context.mousePos);
-        if (m_activeTool->isValid()) {
-            pushToolToStack();
-        } else if (!m_toolWidget) {
-            m_activeTool->deleteLater();
-            m_activeTool = nullptr;
+    } else if (m_mouseIsClicked) {
+        if (m_activeTool) {
+            // end draw/edit
+            m_activeTool->drawEnd(m_context.mousePos);
+            if (m_activeTool->isValid()) {
+                pushToolToStack();
+            } else if (!m_toolWidget) {
+                m_activeTool->deleteLater();
+                m_activeTool = nullptr;
+            }
+        } else {
+            if (e->pos() == m_mousePressedPos) {
+                // mouse clicked even
+                int historyPos = m_captureToolObjects.find(e->pos(), size());
+                m_panel->setActiveLayer(historyPos);
+            }
         }
     }
 

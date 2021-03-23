@@ -30,6 +30,7 @@ public:
     void show();
     void fillCaptureTools(
       QList<QPointer<CaptureTool>> captureToolObjectsHistory);
+    void setActiveLayer(int index);
 
 public slots:
     void toggle();
