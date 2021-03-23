@@ -75,7 +75,7 @@ QList<QPointer<CaptureTool>> CaptureToolObjectsHistory::captureToolObjects()
     return m_captureToolObjectsTemp;
 }
 
-int CaptureToolObjectsHistory::pos()
+int CaptureToolObjectsHistory::historyIndex()
 {
     return m_historyPos;
 }
@@ -98,4 +98,51 @@ void CaptureToolObjectsHistory::removeAt(int index)
             m_historyPos = m_captureToolObjects.size() - 1;
         }
     }
+}
+
+int CaptureToolObjectsHistory::find(const QPoint& pos, const QSize& captureSize)
+{
+    if (0 == m_captureToolObjects.size()) {
+        return -1;
+    }
+    QPixmap pixmap(captureSize);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    // first attempt to find at exact position
+    int index = findWithRadius(painter, pixmap, pos, captureSize);
+    if (-1 == index) {
+        // second attempt to find at position with radius
+        int radius = 1;
+        pixmap.fill(Qt::transparent);
+        index = findWithRadius(painter, pixmap, pos, captureSize, radius);
+    }
+    return index;
+}
+
+int CaptureToolObjectsHistory::findWithRadius(QPainter& painter,
+                                              QPixmap& pixmap,
+                                              const QPoint& pos,
+                                              const QSize& captureSize,
+                                              const int radius)
+{
+    int index = m_captureToolObjects.size() - 1;
+    for (; index >= 0; --index) {
+        auto toolItem = m_captureToolObjects.at(index);
+
+        // create transparent image in memory and draw toolItem on it
+        toolItem->process(painter, pixmap, false);
+
+        // get color at mouse clicked position in area +/- radius
+        for (int x = pos.x() - radius; x <= pos.x() + radius; ++x) {
+            for (int y = pos.y() - radius; y <= pos.y() + radius; ++y) {
+                QRgb rgb = pixmap.toImage().pixel(x, y);
+                if (rgb != 0) {
+                    // object was found, return it index (layer index)
+                    return index;
+                }
+            }
+        }
+    }
+    // no object at current pos found
+    return -1;
 }

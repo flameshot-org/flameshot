@@ -170,4 +170,6 @@ private:
     uint m_id;
 
     CaptureToolObjectsHistory m_captureToolObjects;
+
+    QPoint m_mousePressedPos;
 };

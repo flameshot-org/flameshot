@@ -22,6 +22,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
+#include <QDebug>
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QJsonDocument>
