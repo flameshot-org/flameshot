@@ -993,7 +993,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="149"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
@@ -1149,7 +1149,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="511"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
@@ -1391,12 +1391,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="56"/>
         <source>Month Name (jan)</source>
-        <translation>月 (jul)</translation>
+        <translation>月 (一)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="57"/>
         <source>Month Name (january)</source>
-        <translation>月 (juliol)</translation>
+        <translation>月 (一月)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
@@ -1416,12 +1416,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Day Name (mon)</source>
-        <translation>星期 (dg)</translation>
+        <translation>星期 (一)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="65"/>
         <source>Day Name (monday)</source>
-        <translation>星期 (diumenge)</translation>
+        <translation>星期 (一)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
@@ -1441,12 +1441,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="72"/>
         <source>Time (%H-%M-%S)</source>
-        <translation type="unfinished"></translation>
+        <translation>時間 (%H-%M-%S)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="73"/>
         <source>Time (%H-%M)</source>
-        <translation type="unfinished"></translation>
+        <translation>時間 (%H-%M)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="75"/>
@@ -1492,22 +1492,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除線</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Underline</source>
-        <translation type="unfinished"></translation>
+        <translation>底線</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>粗體</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="81"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>斜體</translation>
     </message>
 </context>
 <context>
@@ -1584,17 +1584,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>之後再說</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>更新</translation>
     </message>
 </context>
 <context>
