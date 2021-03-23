@@ -312,7 +312,7 @@ void Controller::startVisualCapture(const uint id,
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
-        // m_captureWindow->show(); // For CaptureWidget Debugging
+//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
 #endif
         if (!m_appLatestUrl.isEmpty() &&
             ConfigHandler().ignoreUpdateToVersion().compare(

@@ -89,6 +89,7 @@ public:
 
     explicit CaptureTool(QObject* parent = nullptr)
       : QObject(parent)
+      , m_count(0)
     {}
 
     virtual void setCapture(const QPixmap& pixmap){};
@@ -133,6 +134,10 @@ public:
     virtual void undo(){};
     virtual void redo(){};
 
+    // counter for all objects
+    virtual void setCount(int count) { m_count = count; };
+    virtual int count() { return m_count; };
+
     // Called every time the tool has to draw
     // recordUndo indicates when the tool should save the information
     // for the undo(), if the value is false calling undo() after
@@ -170,4 +175,7 @@ public slots:
     virtual void colorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.
     virtual void thicknessChanged(const int th) = 0;
+
+private:
+    unsigned int m_count;
 };

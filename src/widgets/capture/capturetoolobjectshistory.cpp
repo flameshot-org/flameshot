@@ -12,10 +12,10 @@ void CaptureToolObjectsHistory::append(QPointer<CaptureTool> captureTool)
 {
     // cleanup undo history if required
     if (m_historyPos < 0 && m_captureToolObjects.size() > 0) {
-        // clear all history and start from the begining
+        // clear all history and start from the beginning
         m_captureToolObjects.clear();
     } else {
-        // clear all history and start from the begining
+        // clear all history and start from the beginning
         while (m_captureToolObjects.size() - 1 > m_historyPos &&
                m_historyPos >= 0) {
             m_captureToolObjects.removeLast();
@@ -78,4 +78,24 @@ QList<QPointer<CaptureTool>> CaptureToolObjectsHistory::captureToolObjects()
 int CaptureToolObjectsHistory::pos()
 {
     return m_historyPos;
+}
+
+int CaptureToolObjectsHistory::size()
+{
+    return m_captureToolObjects.size();
+}
+
+QPointer<CaptureTool> CaptureToolObjectsHistory::at(int index)
+{
+    return m_captureToolObjects[index];
+}
+
+void CaptureToolObjectsHistory::removeAt(int index)
+{
+    if (index >= 0 && index < m_captureToolObjects.size()) {
+        m_captureToolObjects.removeAt(index);
+        if (m_historyPos >= m_captureToolObjects.size()) {
+            m_historyPos = m_captureToolObjects.size() - 1;
+        }
+    }
 }

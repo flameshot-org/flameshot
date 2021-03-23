@@ -14,9 +14,7 @@ namespace {
 
 CircleCountTool::CircleCountTool(QObject* parent)
   : AbstractTwoPointTool(parent)
-{
-    m_count = 0;
-}
+{}
 
 QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
 {
@@ -68,7 +66,7 @@ void CircleCountTool::process(QPainter& painter,
     painter.setFont(new_font);
 
     QRect bRect =
-      painter.boundingRect(textRect, Qt::AlignCenter, QString::number(m_count));
+      painter.boundingRect(textRect, Qt::AlignCenter, QString::number(count()));
 
     while (bRect.width() > textRect.width()) {
         fontSize--;
@@ -78,7 +76,7 @@ void CircleCountTool::process(QPainter& painter,
         new_font.setPixelSize(fontSize);
         painter.setFont(new_font);
         bRect = painter.boundingRect(
-          textRect, Qt::AlignCenter, QString::number(m_count));
+          textRect, Qt::AlignCenter, QString::number(count()));
     }
 
     if (ColorUtils::colorIsDark(m_color)) {
@@ -87,7 +85,7 @@ void CircleCountTool::process(QPainter& painter,
         painter.setPen(Qt::black);
     }
 
-    painter.drawText(textRect, Qt::AlignCenter, QString::number(m_count));
+    painter.drawText(textRect, Qt::AlignCenter, QString::number(count()));
     painter.setFont(orig_font);
     painter.setBrush(orig_brush);
     painter.setPen(orig_pen);
@@ -117,7 +115,7 @@ void CircleCountTool::drawStart(const CaptureContext& context)
         m_thickness = 15;
     }
     m_points.first = context.mousePos;
-    m_count = context.circleCount;
+    setCount(context.circleCount);
     emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
