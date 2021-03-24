@@ -112,7 +112,7 @@ int CaptureToolObjectsHistory::find(const QPoint& pos, const QSize& captureSize)
     int index = findWithRadius(painter, pixmap, pos, captureSize);
     if (-1 == index) {
         // second attempt to find at position with radius
-        int radius = 1;
+        int radius = 3;
         pixmap.fill(Qt::transparent);
         index = findWithRadius(painter, pixmap, pos, captureSize, radius);
     }
@@ -133,9 +133,10 @@ int CaptureToolObjectsHistory::findWithRadius(QPainter& painter,
         toolItem->process(painter, pixmap, false);
 
         // get color at mouse clicked position in area +/- radius
+        QImage image = pixmap.toImage();
         for (int x = pos.x() - radius; x <= pos.x() + radius; ++x) {
             for (int y = pos.y() - radius; y <= pos.y() + radius; ++y) {
-                QRgb rgb = pixmap.toImage().pixel(x, y);
+                QRgb rgb = image.pixel(x, y);
                 if (rgb != 0) {
                     // object was found, return it index (layer index)
                     return index;
