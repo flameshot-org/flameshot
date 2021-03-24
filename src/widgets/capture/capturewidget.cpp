@@ -40,7 +40,7 @@
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
 
-// enableSaveWIndow
+// enableSaveWindow
 CaptureWidget::CaptureWidget(const uint id,
                              const QString& savePath,
                              bool fullScreen,
