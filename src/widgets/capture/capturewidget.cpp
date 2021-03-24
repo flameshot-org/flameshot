@@ -388,10 +388,14 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
-            QRect initialRect = m_selection->savedGeometry().normalized();
-            QPoint newTopLeft =
-              initialRect.topLeft() + (e->pos() - m_dragStartPoint);
-            inputRect = QRect(newTopLeft, initialRect.size());
+            if (m_adjustmentButtonPressed) {
+                QRect initialRect = m_selection->savedGeometry().normalized();
+                QPoint newTopLeft =
+                  initialRect.topLeft() + (e->pos() - m_dragStartPoint);
+                inputRect = QRect(newTopLeft, initialRect.size());
+            } else {
+                return;
+            }
         } else {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
@@ -558,6 +562,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
         return;
     } else if (e->key() == Qt::Key_Control) {
         m_adjustmentButtonPressed = true;
+        updateCursor();
     } else if (e->key() == Qt::Key_Enter) {
         // Make no difference for Return and Enter keys
         QKeyEvent* keyReturn =
@@ -570,6 +575,7 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 {
     if (e->key() == Qt::Key_Control) {
         m_adjustmentButtonPressed = false;
+        updateCursor();
     }
 }
 
@@ -1118,7 +1124,11 @@ void CaptureWidget::updateCursor()
     if (m_rightClick) {
         setCursor(Qt::ArrowCursor);
     } else if (m_grabbing) {
-        setCursor(Qt::ClosedHandCursor);
+        if (m_adjustmentButtonPressed) {
+            setCursor(Qt::OpenHandCursor);
+        } else {
+            setCursor(Qt::ArrowCursor);
+        }
     } else if (!m_activeButton) {
         using sw = SelectionWidget;
         if (m_mouseOverHandle != sw::NO_SIDE) {
@@ -1145,7 +1155,11 @@ void CaptureWidget::updateCursor()
             }
         } else if (m_selection->isVisible() &&
                    m_selection->geometry().contains(m_context.mousePos)) {
-            setCursor(Qt::OpenHandCursor);
+            if (m_adjustmentButtonPressed) {
+                setCursor(Qt::OpenHandCursor);
+            } else {
+                setCursor(Qt::ArrowCursor);
+            }
         } else {
             setCursor(Qt::CrossCursor);
         }
