@@ -77,52 +77,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="55"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;キャプチャーモード&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="61"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>四角形選択</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>全画面（このディスプレイ）</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>全画面（すべてのディスプレイ）</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="79"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレイなし</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> 秒</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> 秒</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいキャプチャー</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="99"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>選択タイプ：</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="100"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>ディレイ：</translation>
     </message>
 </context>
 <context>
@@ -148,7 +148,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="747"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール設定</translation>
     </message>
 </context>
 <context>
@@ -156,12 +156,12 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="42"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>丸カウンター</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="52"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>自動的に増加する丸カウンターを追加する</translation>
     </message>
 </context>
 <context>
@@ -202,7 +202,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>ショートカット</translation>
     </message>
 </context>
 <context>
@@ -210,27 +210,27 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/core/controller.cpp" line="204"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいバージョン%1が公開されました</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="211"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>最新バージョンです</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="219"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>最新バージョン情報を取得に失敗しました。</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Error</source>
-        <translation type="unfinished">エラー</translation>
+        <translation>エラー</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>アクティブなモーダルを閉じることができません</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="405"/>
@@ -240,7 +240,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/core/controller.cpp" line="421"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>ランチャーを開く(&amp;O)</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
@@ -250,17 +250,17 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>ついて(&amp;A)</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>更新をチェックする</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="439"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>最新アップロード(&amp;L)</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -431,7 +431,7 @@ Enter を押すと画面をキャプチャー。
         <location filename="../../src/config/generalconf.cpp" line="118"/>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Import</source>
-        <translation type="unfinished">インポート</translation>
+        <translation>インポート</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
@@ -439,169 +439,169 @@ Enter を押すと画面をキャプチャー。
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Error</source>
-        <translation type="unfinished">エラー</translation>
+        <translation>エラー</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">ファイルを読み込めません。</translation>
+        <translation>ファイルを読み込みに失敗しました。</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="133"/>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">ファイルに書き込めません。</translation>
+        <translation>ファイルを書き込みに失敗しました。</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="143"/>
         <source>Save File</source>
-        <translation type="unfinished">ファイルを保存</translation>
+        <translation>ファイルを保存する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="165"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">リセットの確認</translation>
+        <translation>よろしい</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="166"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">設定をリセットしてもよろしいですか?</translation>
+        <translation>設定をリセットしてよろしいですか?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="177"/>
         <source>Show help message</source>
-        <translation type="unfinished">ヘルプメッセージを表示する</translation>
+        <translation>ヘルプメッセージを表示する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="181"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">キャプチャーモード開始時にヘルプメッセージを表示する。</translation>
+        <translation>キャプチャーモード開始時にヘルプメッセージを表示する。</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="191"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>サイドパネルのボタンを表示する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーモードでサイドパネルのトグルボタンを表示する。</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
         <location filename="../../src/config/generalconf.cpp" line="208"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">デスクトップの通知を表示する</translation>
+        <translation>デスクトップ通知を表示する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">トレイアイコンを表示する</translation>
+        <translation>トレイアイコンを表示する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="224"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">システムトレイアイコンを表示する</translation>
+        <translation>システムトレイにアプリアイコンを表示する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>最新アップロードからのキャプチャーを削除する前に確認が必要</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
         <source>Configuration File</source>
-        <translation type="unfinished">設定ファイル</translation>
+        <translation>設定ファイル</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Export</source>
-        <translation type="unfinished">エクスポート</translation>
+        <translation>エクスポート</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Reset</source>
-        <translation type="unfinished">リセット</translation>
+        <translation>リセット</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>自動的に更新を検索する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="297"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">スタートアップ時に起動する</translation>
+        <translation>システム起動時に起動する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished">Flameshot を起動する</translation>
+        <translation>Flameshotを起動する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>起動時にようこそメッセージを表示する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>アップロードあとでURLをコピーする</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>アップロードあとでURLをコピーしてウィンドウを閉じる</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Save image after copy</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーあとで画像を保存する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーあとで、画像ファイルを保存する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="349"/>
         <source>Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>パスを保存する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>変更…</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>一定なパスにキャプチャーを保存する</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <location filename="../../src/config/generalconf.cpp" line="402"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEGフォーマットでクリップボードにコピーする（PNG規定）</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <location filename="../../src/config/generalconf.cpp" line="435"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存するあとでファイルパスをコピーする</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダーを選択</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダーで書き込みに失敗しました。</translation>
     </message>
 </context>
 <context>
@@ -609,37 +609,37 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>最新のアップロード</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="85"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャー歴史がない</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="134"/>
         <source>Copy URL</source>
-        <translation type="unfinished">URL をコピー</translation>
+        <translation>URL をコピーする</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="138"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL をクリップボードにコピーしました。</translation>
+        <translation>URL がクリップボードにコピーされました。</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="144"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>ブラウザーで開く</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="160"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>よろしい</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="161"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>サーバーとローカルからのキャプチャーを削除してよろしいですか？</translation>
     </message>
 </context>
 <context>
@@ -898,12 +898,12 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>ピクセル化する</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="47"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>ピクセル化がペイントツールとして設定する</translation>
     </message>
 </context>
 <context>
@@ -911,12 +911,12 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ショートカット%1を設定に失敗しました。エラー%2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ショートカット%1を削除に失敗しました。エラー%2</translation>
     </message>
 </context>
 <context>
@@ -935,7 +935,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="53"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーがクリップボードにコピーされました。</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="70"/>
@@ -946,7 +946,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>コピーに失敗しました</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="108"/>
@@ -957,12 +957,12 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="137"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーを保存する</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="162"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーがコピーされて として保存されました </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="116"/>
@@ -981,82 +981,82 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/main.cpp" line="139"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation>見る</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>デスクトップをキャプチャー。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーランチャーを開く。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="147"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>手動的にGUIキャプチャーを開始する。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="149"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>単一のディスプレイをキャプチャー。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーの保存パス</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーがクリップボードにコピーする</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="161"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>ミリ秒でディレイ時間</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="164"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル名のパターンを設定する</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="167"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>トレイアイコンを無効・有効</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="171"/>
         <source>Enable or disable run at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>スタートアップに起動を無効・有効</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="175"/>
         <source>Show the help message in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>キャプチャーでヘルプメッセージを表示</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>マインのUI色を設定する</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="182"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>コントラストのUI色を設定する</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="185"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PNGのキャプチャーを印刷する</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
