@@ -110,7 +110,6 @@ QString ShowSaveFileDialog(QWidget *parent,
                                       directory,
                                       filter);
 #else
-
   QFileDialog dialog(parent, title, directory, filter);
   if (parent) {
     dialog.setWindowModality(Qt::WindowModal);
@@ -126,18 +125,19 @@ QString ShowSaveFileDialog(QWidget *parent,
 
     QString file_name = dialog.selectedFiles().first();
     QFileInfo info(file_name);
-    if (info.suffix().isEmpty()){
-		if ( !dialog.selectedNameFilter().isEmpty()) {
-			  if (filter_regex.indexIn(dialog.selectedNameFilter()) != -1) {
-				QString extension = filter_regex.cap(1);
-				file_name += QLatin1String(".") + extension;
-			  }
-		}
-    }
 
-    return file_name;
+   if ((dialog.selectedNameFilter() == "By extension (default: *.png)")){//if no sufix change to default, otherwise leave it as it is
+	   if (info.suffix().isEmpty()){
+		   file_name = info.completeBaseName() + QLatin1String(".") + "png";;
+	   }
+   }
+   else	if ( !dialog.selectedNameFilter().isEmpty()) {//if selected sufix from menu is not an empty entry
+	   if (filter_regex.indexIn(dialog.selectedNameFilter()) != -1) {//check for sure if exist on the suffix list
+		   file_name = info.completeBaseName() + QLatin1String(".") + filter_regex.cap(1);//recreate full filename with chosen suffix
+	   }
+   }
+   return file_name;
   } else {
-
     return QString();
   }
 #endif  // Q_WS_MAC || Q_WS_WIN
@@ -170,14 +170,14 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 
 
     	savePath = ShowSaveFileDialog(nullptr,  QObject::tr("Save screenshot"), FileNameHandler().absoluteSavePath(),QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
-    			                        "file (*.bmp);;JPEG file (*.jpg);;By extension"));
+    			                        "file (*.bmp);;JPEG file (*.jpg);;By extension (default: *.png)"));
 
     }
-    if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
-        !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
-        !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
-        savePath += QLatin1String(".png");
-    }
+//    if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
+//        !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
+//        !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
+//        savePath += QLatin1String(".png");
+//    }
     ok = capture.save(savePath);
 
     if (ok) {

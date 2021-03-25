@@ -530,6 +530,16 @@ void ConfigHandler::setUseJpgForClipboard(const bool value)
     m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
 }
 
+void ConfigHandler::setSaveAsFileExtension(const QString& extension)
+{
+    m_settings.setValue(QStringLiteral("setSaveAsFileExtension"), extension);
+}
+
+QString ConfigHandler::getSaveAsFileExtension()
+{
+    return m_settings.value(QStringLiteral("setSaveAsFileExtension"), QString(".png")).toString();
+}
+
 void ConfigHandler::setDefaultSettings()
 {
     foreach (const QString& key, m_settings.allKeys()) {

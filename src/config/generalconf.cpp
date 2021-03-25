@@ -33,6 +33,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
+    initSaveAsFileExtension();
+
 
     // this has to be at the end
     initConfigButtons();
@@ -422,6 +424,12 @@ void GeneralConf::initUseJpgForClipboard()
             &GeneralConf::useJpgForClipboardChanged);
 }
 
+void GeneralConf::initSaveAsFileExtension()
+{
+	;
+}
+
+
 void GeneralConf::saveAfterCopyChanged(bool checked)
 {
     ConfigHandler().setSaveAfterCopy(checked);
@@ -486,4 +494,9 @@ void GeneralConf::togglePathFixed()
 void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
     ConfigHandler().setUseJpgForClipboard(checked);
+}
+
+void GeneralConf::saveAsFileExtension(const QString& extension)
+{
+    ConfigHandler().setSaveAsFileExtension(extension);
 }

@@ -35,6 +35,7 @@ private slots:
     void resetConfiguration();
     void togglePathFixed();
     void useJpgForClipboardChanged(bool checked);
+    void saveAsFileExtension(const QString& extension);
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -52,6 +53,7 @@ private:
     void initSaveAfterCopy();
     void initCopyPathAfterSave();
     void initUseJpgForClipboard();
+    void initSaveAsFileExtension();
 
     void setActualFormData();
 
@@ -75,4 +77,5 @@ private:
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
+    QLineEdit* m_saveExtension;
 };
