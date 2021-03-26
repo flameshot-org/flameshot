@@ -123,9 +123,9 @@ void TextTool::process(QPainter& painter,
     QFontMetrics fm(m_font);
     QSize size(fm.boundingRect(QRect(), 0, m_text).size());
     m_backupArea.setSize(size);
-    if (recordUndo) {
-        m_pixmapBackup = pixmap.copy(backupRect(pixmap));
-    }
+    //    if (recordUndo) {
+    //        m_pixmapBackup = pixmap.copy(backupRect(pixmap));
+    //    }
     // draw text
     painter.setFont(m_font);
     painter.setPen(m_color);
@@ -248,4 +248,15 @@ void TextTool::updateFontItalic(const bool italic)
     if (m_widget) {
         m_widget->setFont(m_font);
     }
+}
+
+void TextTool::move(const QPoint& pos)
+{
+    m_backupArea.moveTo(pos);
+}
+
+const QPoint& TextTool::pos()
+{
+    m_currentPos = m_backupArea.topLeft();
+    return m_currentPos;
 }
