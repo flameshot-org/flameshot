@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturetoolobjectshistory.h"
-#include <QDebug>
 
 CaptureToolObjectsHistory::CaptureToolObjectsHistory(QObject* parent)
   : QObject(parent)
