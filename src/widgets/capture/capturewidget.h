@@ -146,7 +146,7 @@ private:
     QRect extendedRect(QRect* r) const;
     void drawInitialMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData();
+    void drawToolsData(const bool updateLayersPanel = true);
 
 private:
     UpdateNotificationWidget* m_updateNotificationWidget;
@@ -172,4 +172,5 @@ private:
     CaptureToolObjectsHistory m_captureToolObjects;
 
     QPoint m_mousePressedPos;
+    QPoint m_activeToolOffsetToMouseOnStart;
 };

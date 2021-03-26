@@ -26,6 +26,7 @@
 #include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QPaintEvent>
 #include <QPainter>
@@ -319,6 +320,7 @@ void CaptureWidget::paintEvent(QPaintEvent*)
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
     m_mousePressedPos = e->pos();
+    m_activeToolOffsetToMouseOnStart = QPoint();
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
@@ -374,7 +376,18 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     m_context.mousePos = e->pos();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
-    if (m_mouseIsClicked && !m_activeButton) {
+    int activeLayerIndex = m_panel->activeLayerIndex();
+    if (m_mouseIsClicked && !m_activeButton && activeLayerIndex >= 0) {
+        QPointer<CaptureTool> activeTool =
+          m_captureToolObjects.toolAt(activeLayerIndex);
+        if (m_activeToolOffsetToMouseOnStart.isNull()) {
+            setCursor(Qt::OpenHandCursor);
+            m_activeToolOffsetToMouseOnStart = e->pos() - activeTool->pos();
+        }
+        QPoint pos = e->pos() - m_activeToolOffsetToMouseOnStart;
+        activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
+        drawToolsData(false);
+    } else if (m_mouseIsClicked && !m_activeButton) {
         // Drawing, moving, or stretching a selection
         m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
@@ -1196,7 +1209,7 @@ void CaptureWidget::pushToolToStack()
     drawToolsData();
 }
 
-void CaptureWidget::drawToolsData()
+void CaptureWidget::drawToolsData(const bool updateLayersPanel)
 {
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
@@ -1205,7 +1218,9 @@ void CaptureWidget::drawToolsData()
     }
     m_context.screenshot = pixmapItem.copy();
     update();
-    m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
+    if (updateLayersPanel) {
+        m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
+    }
 }
 
 void CaptureWidget::makeChild(QWidget* w)

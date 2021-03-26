@@ -148,6 +148,10 @@ public:
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
+    // TODO - Should be pure-virtual later
+    virtual void move(const QPoint& pos) { Q_UNUSED(pos); };
+    virtual const QPoint& pos() { return m_startPoint; };
+    QPoint m_startPoint;
 
 signals:
     void requestAction(Request r);
