@@ -90,3 +90,36 @@ void AbstractPathTool::addPoint(const QPoint& point)
     }
     m_points.append(point);
 }
+
+void AbstractPathTool::move(const QPoint& mousePos)
+{
+    if (m_points.size() <= 0) {
+        return;
+    }
+    QPoint basePos = pos();
+    QPoint offset = mousePos - basePos;
+    for (int index = 0; index < m_points.size(); ++index) {
+        m_points[index] += offset;
+    }
+}
+
+const QPoint& AbstractPathTool::pos()
+{
+    if (m_points.size() <= 0) {
+        m_pos = QPoint();
+        return m_pos;
+    }
+    int x = m_points.at(0).x();
+    int y = m_points.at(0).y();
+    for (auto point : m_points) {
+        if (point.x() < x) {
+            x = point.x();
+        }
+        if (point.y() < y) {
+            y = point.y();
+        }
+    }
+    m_pos.setX(x);
+    m_pos.setY(y);
+    return m_pos;
+}

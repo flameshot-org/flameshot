@@ -15,6 +15,8 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    void move(const QPoint& mousePos) override;
+    const QPoint& pos() override;
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -34,4 +36,5 @@ protected:
     int m_thickness;
     // use m_padding to extend the area of the backup
     int m_padding;
+    QPoint m_pos;
 };
