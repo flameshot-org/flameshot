@@ -3,7 +3,6 @@
 
 #include "abstracttwopointtool.h"
 #include <QCursor>
-#include <QDebug>
 #include <QScreen>
 #include <cmath>
 
@@ -157,7 +156,7 @@ void AbstractTwoPointTool::move(const QPoint& pos)
     m_points.second = m_points.first + offset;
 }
 
-const QPoint& AbstractTwoPointTool::pos()
+const QPoint* AbstractTwoPointTool::pos()
 {
-    return m_points.first;
+    return &m_points.first;
 }

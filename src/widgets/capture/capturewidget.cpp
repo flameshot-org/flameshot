@@ -25,7 +25,6 @@
 #include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
-#include <QDebug>
 #include <QDesktopWidget>
 #include <QPaintEvent>
 #include <QPainter>
@@ -380,7 +379,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
           m_captureToolObjects.toolAt(activeLayerIndex);
         if (m_activeToolOffsetToMouseOnStart.isNull()) {
             setCursor(Qt::OpenHandCursor);
-            m_activeToolOffsetToMouseOnStart = e->pos() - activeTool->pos();
+            m_activeToolOffsetToMouseOnStart = e->pos() - *activeTool->pos();
         }
         QPoint pos = e->pos() - m_activeToolOffsetToMouseOnStart;
         activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
