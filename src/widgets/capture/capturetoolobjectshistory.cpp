@@ -147,3 +147,11 @@ int CaptureToolObjectsHistory::findWithRadius(QPainter& painter,
     // no object at current pos found
     return -1;
 }
+
+QPointer<CaptureTool> CaptureToolObjectsHistory::toolAt(int index)
+{
+    if (index >= 0 && index < m_captureToolObjects.size()) {
+        return m_captureToolObjects[index];
+    }
+    return nullptr;
+}

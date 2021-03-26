@@ -23,6 +23,7 @@ public:
     void removeAt(int index);
     int size();
     int find(const QPoint& pos, const QSize& captureSize);
+    QPointer<CaptureTool> toolAt(int index);
 
 private:
     int findWithRadius(QPainter& painter,

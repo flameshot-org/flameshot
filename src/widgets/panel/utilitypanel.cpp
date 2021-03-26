@@ -162,6 +162,7 @@ void UtilityPanel::initInternalPanel()
 void UtilityPanel::fillCaptureTools(
   QList<QPointer<CaptureTool>> captureToolObjects)
 {
+    int currentSelection = m_captureTools->currentRow();
     m_captureTools->clear();
     m_captureTools->addItem(tr("<Empty>"));
 
@@ -169,6 +170,9 @@ void UtilityPanel::fillCaptureTools(
         QListWidgetItem* item = new QListWidgetItem(
           toolItem->icon(QColor(Qt::white), false), toolItem->name());
         m_captureTools->addItem(item);
+    }
+    if (currentSelection >= 0 && currentSelection < m_captureTools->count()) {
+        m_captureTools->setCurrentRow(currentSelection);
     }
 }
 
@@ -178,6 +182,12 @@ void UtilityPanel::setActiveLayer(int index)
     if (index >= 0 && index < m_captureTools->count()) {
         m_captureTools->setCurrentRow(index);
     }
+}
+
+int UtilityPanel::activeLayerIndex()
+{
+    return m_captureTools->currentRow() >= 0 ? m_captureTools->currentRow() - 1
+                                             : -1;
 }
 
 void UtilityPanel::slotCaptureToolsCurrentRowChanged(int currentRow)
@@ -194,7 +204,6 @@ void UtilityPanel::slotButtonDelete(bool clicked)
     int currentRow = m_captureTools->currentRow();
     if (currentRow > 0) {
         m_captureWidget->removeToolObject(currentRow);
-        // TODO - set selection to the next item
         if (currentRow >= m_captureTools->count()) {
             currentRow = m_captureTools->count() - 1;
         }

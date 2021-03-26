@@ -148,3 +148,15 @@ QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
     }
     return v;
 }
+
+void AbstractTwoPointTool::move(const QPoint& pos)
+{
+    QPoint offset = m_points.second - m_points.first;
+    m_points.first = pos;
+    m_points.second = m_points.first + offset;
+}
+
+const QPoint* AbstractTwoPointTool::pos()
+{
+    return &m_points.first;
+}

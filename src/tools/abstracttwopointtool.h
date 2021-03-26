@@ -15,6 +15,8 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    void move(const QPoint& pos) override;
+    const QPoint* pos() override;
 
 public slots:
     void drawEnd(const QPoint& p) override;

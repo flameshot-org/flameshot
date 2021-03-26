@@ -149,6 +149,10 @@ public:
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
 
+    // Move tool objects
+    virtual void move(const QPoint& pos) { Q_UNUSED(pos); };
+    virtual const QPoint* pos() { return nullptr; };
+
 signals:
     void requestAction(Request r);
 
