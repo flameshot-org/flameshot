@@ -4,6 +4,7 @@
 #pragma once
 
 #include "src/tools/capturetool.h"
+#include <QPoint>
 #include <QPointer>
 
 class TextWidget;
@@ -33,6 +34,8 @@ public:
                  bool recordUndo = false) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
+    void move(const QPoint& pos) override;
+    const QPoint& pos() override;
 
 protected:
     ToolType nameID() const override;
@@ -60,8 +63,9 @@ private:
     QString m_text;
     int m_size;
     QColor m_color;
-    QPixmap m_pixmapBackup;
+    //    QPixmap m_pixmapBackup;
     QRect m_backupArea;
     QPointer<TextWidget> m_widget;
     QPointer<TextConfig> m_confW;
+    QPoint m_currentPos;
 };
