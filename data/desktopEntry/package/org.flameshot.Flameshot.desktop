@@ -37,7 +37,7 @@ Keywords[nl_NL]=flameshot;schermfoto;screenshot;schermafdruk;vastleggen;schermop
 Keywords[es]=flameshot;screenshot;capture;shutter;captura;
 Keywords[de]=flameshot;screenshot;Bildschirmfoto;Aufnahme;
 Keywords[pt_BR]=flameshot;screenshot;captura de tela;captura;shutter;
-Exec=flameshot
+Exec=/usr/bin/flameshot
 Icon=org.flameshot.Flameshot
 Terminal=false
 Type=Application
@@ -46,7 +46,7 @@ StartupNotify=false
 Actions=Configure;Capture;Launcher;
 X-DBUS-StartupType=Unique
 X-DBUS-ServiceName=org.flameshot.Flameshot
-X-KDE-DBUS-Restricted-Interfaces=org_kde_kwin_effect-screenshot
+X-KDE-DBUS-Restricted-Interfaces=org.kde.kwin.Screenshot
 
 [Desktop Action Configure]
 Name=Configure
