@@ -24,12 +24,12 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="71"/>
         <source>Launch in terminal</source>
-        <translation>Llançament a la terminal</translation>
+        <translation>Llança a la terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="72"/>
         <source>Keep open after selection</source>
-        <translation>Segueix obert després de la selecció</translation>
+        <translation>Mantén obert després d&apos;una selecció</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="108"/>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="123"/>
         <source>Unable to launch in terminal.</source>
-        <translation>No es pot iniciar a la terminal.</translation>
+        <translation>No s&apos;ha pogut iniciar a la terminal.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="108"/>
@@ -77,52 +77,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="55"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Mode de captura&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="61"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Regió rectangular</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="67"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla completa (monitor actual)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="70"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla completa (tots els monitors)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="79"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Sense demora</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> segon</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> segons</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="90"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes una nova captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="99"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Àrea:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="100"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Demora:</translation>
     </message>
 </context>
 <context>
@@ -131,7 +131,7 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="104"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>Imposible capturar la pantalla</translation>
+        <translation>Impossible capturar la pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="351"/>
@@ -140,12 +140,16 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolliu una àrea amb el ratolí, o premeu Esc per sortir.
+Premeu Entrar per capturar la pantalla.
+Premeu clic dret per mostrar l&apos;eina de selecció de color.
+Gireu la rodeta del ratolí per canviar el gruix de l&apos;eina de dibuix.
+Premeu Espai per obrir el calaix lateral.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="747"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustaments de l&apos;eina</translation>
     </message>
 </context>
 <context>
@@ -153,12 +157,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="42"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>Comptador circular</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="52"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegeix-hi un comptador automàtic</translation>
     </message>
 </context>
 <context>
@@ -179,7 +183,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="42"/>
         <source>Configuration</source>
-        <translation>Configuració</translation>
+        <translation>Ajustaments</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
@@ -189,7 +193,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
-        <translation>Editor de noms</translation>
+        <translation>Editor de noms de fitxer</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="73"/>
@@ -199,7 +203,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="77"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Dreceres</translation>
     </message>
 </context>
 <context>
@@ -207,17 +211,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="204"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>La nova versió %1 ja és disponible</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="211"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Teniu la versió més recent</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="219"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error a l&apos;intentar obtenir informació sobre actualitzacions.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
@@ -227,32 +231,32 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="300"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;han pogut tancar els widgets modals actius</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="421"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Obre el llançador d&apos;aplicacions</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;Configuració</translation>
+        <translation>&amp;Ajustaments</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Quant a</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprova si hi ha actualitzacions disponibles</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="439"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Últimes càrregues</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -261,12 +265,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Ix</translation>
+        <translation>&amp;Surt</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="405"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Captura</translation>
     </message>
 </context>
 <context>
@@ -279,7 +283,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="48"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia la selecció al porta-retalls</translation>
     </message>
 </context>
 <context>
@@ -287,7 +291,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="70"/>
         <source>Unable to connect via DBus</source>
-        <translation>Impossible connectar mitjançant DBus</translation>
+        <translation>No s&apos;ha pogut connectar mitjançant DBus</translation>
     </message>
 </context>
 <context>
@@ -295,12 +299,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="37"/>
         <source>Exit</source>
-        <translation>Ix</translation>
+        <translation>Surt</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="47"/>
         <source>Leave the capture screen</source>
-        <translation>Ix de la pantalla de captura</translation>
+        <translation>Surt de la pantalla de captura</translation>
     </message>
 </context>
 <context>
@@ -323,12 +327,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="87"/>
         <source>Save</source>
-        <translation>Guarda</translation>
+        <translation>Desa</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="90"/>
         <source>Saves the pattern</source>
-        <translation>Guarda el patró</translation>
+        <translation>Desa el patró</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="92"/>
@@ -338,7 +342,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="95"/>
         <source>Restores the saved pattern</source>
-        <translation>Restaura el patró guardat</translation>
+        <translation>Restaura el patró desat</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="97"/>
@@ -348,7 +352,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="101"/>
         <source>Deletes the name</source>
-        <translation>Elimina el patró</translation>
+        <translation>Elimina el nom</translation>
     </message>
 </context>
 <context>
@@ -424,7 +428,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="118"/>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Import</source>
-        <translation type="unfinished">Importar</translation>
+        <translation>Importa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
@@ -437,28 +441,28 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="125"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Impossible llegir el fitxer.</translation>
+        <translation>No s&apos;ha pogut llegir el fitxer.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="133"/>
         <location filename="../../src/config/generalconf.cpp" line="156"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Impossible escriure al fitxer.</translation>
+        <translation>No s&apos;ha pogut escriure al fitxer.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="143"/>
         <source>Save File</source>
-        <translation type="unfinished">Guardar Arxiu</translation>
+        <translation>Desa l&apos;arxiu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="165"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Confirmar Reset</translation>
+        <translation>Confirma la reinicialització</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="166"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Esteu segur que voleu reiniciar la configuració?</translation>
+        <translation>Esteu segur de voler reinicialitzar els ajustaments?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="177"/>
@@ -473,12 +477,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="191"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el botó del calaix lateral</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el botó del calaix lateral en el mode de captura.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
@@ -489,112 +493,112 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">Mostra la icona en la barra de tasques</translation>
+        <translation>Mostra la icona a la barra de tasques</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="224"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">Mostra la icona en la barra de tasques</translation>
+        <translation>Mostra la icona a la barra de tasques del sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Es requereix confirmació per esborrar la captura de pantalla de les darreres càrregues</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Fitxer de Configuració</translation>
+        <translation>Fitxer d&apos;Ajustaments</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Export</source>
-        <translation type="unfinished">Exportar</translation>
+        <translation>Exporta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicialitza</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprova les actualitzacions de forma automàtica</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="297"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">Llançament a l&apos;inici</translation>
+        <translation>Llança a l&apos;inici</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <location filename="../../src/config/generalconf.cpp" line="315"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicia el Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el missatge de benvinguda a l&apos;inici</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia l&apos;URL després de la càrrega</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia la URL i tanca la finestra després de la càrrega</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Save image after copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa la imatge després d&apos;haver-la copiat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa el fitxer d&apos;imatge després d&apos;haver-lo copiat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="349"/>
         <source>Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa el camí</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="370"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes servir un camí fixat per desar-hi les captures de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="397"/>
         <location filename="../../src/config/generalconf.cpp" line="402"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes servir el format JPG per les imatges del porta-retalls (per defecte és PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <location filename="../../src/config/generalconf.cpp" line="435"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia el camí a l&apos;arxiu després d&apos;haver-lo desat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="451"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Escull una carpeta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="460"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut escriure al directori.</translation>
     </message>
 </context>
 <context>
@@ -602,12 +606,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Últimes càrregues</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="85"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;historial de captures de pantalla és buit</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="134"/>
@@ -622,17 +626,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="144"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Obre al navegador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="160"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmeu per esborrar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="161"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Esteu segur de voler esborrar la captura de les últimes càrregues i del servidor?</translation>
     </message>
 </context>
 <context>
@@ -701,12 +705,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="180"/>
         <source>Open URL</source>
-        <translation>Obri l&apos;URL</translation>
+        <translation>Obre l&apos;URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="181"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Esborra la imatge</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="182"/>
@@ -717,7 +721,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="220"/>
         <source>Unable to open the URL.</source>
-        <translation>No es pot obrir l&apos;URL.</translation>
+        <translation>No s&apos;ha pogut obrir l&apos;URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
@@ -874,12 +878,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="39"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancora l&apos;eina</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="49"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancora l&apos;imatge a l&apos;escriptori</translation>
     </message>
 </context>
 <context>
@@ -887,12 +891,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="37"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixel·la</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="47"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Estableix l&apos;eina de pixel·lament com a eina de dibuix</translation>
     </message>
 </context>
 <context>
@@ -900,12 +904,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut registrar %1. Error: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogut desregistrar %1. Error: %2</translation>
     </message>
 </context>
 <context>
@@ -913,22 +917,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="53"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura copiada al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="78"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha produït un error mentre es copiava al porta-retalls</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="137"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa la captura</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="162"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>La captura serà desada i copiada al porta-retalls com a </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
@@ -959,57 +963,57 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="138"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>Un programa de captures complert i versàtil.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="139"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation>Vegeu</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>Captureu l&apos;escriptori sencer.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obriu el llançador de captures.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="147"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Comença una captura manual en mode d&apos;interfície.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="149"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustaments del</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura una sola pantalla.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Camí on es desarà la captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa la captura al porta-retalls</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="161"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps de demora en mil·lisegons</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="164"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Estableix el patró de camins</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="167"/>
