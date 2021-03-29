@@ -13,13 +13,12 @@ class CaptureToolObjectsHistory : public QObject
 public:
     explicit CaptureToolObjectsHistory(QObject* parent = nullptr);
     void append(QPointer<CaptureTool> captureTool);
-    QPointer<CaptureTool> at(uint index);
+    QPointer<CaptureTool> at(int index);
     void clear();
     void undo();
     void redo();
     QList<QPointer<CaptureTool>> captureToolObjects();
     int historyIndex();
-    QPointer<CaptureTool> at(int index);
     void removeAt(int index);
     int size();
     int find(const QPoint& pos, const QSize& captureSize);
