@@ -10,6 +10,7 @@ class QCheckBox;
 class QPushButton;
 class QLabel;
 class QLineEdit;
+class QComboBox;
 
 class GeneralConf : public QWidget
 {
@@ -77,5 +78,5 @@ private:
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
-    QLineEdit* m_saveExtension;
+    QComboBox* m_saveExtension;
 };

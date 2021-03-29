@@ -115,23 +115,27 @@ QString ShowSaveFileDialog(QWidget *parent,
     dialog.setWindowModality(Qt::WindowModal);
   }
 
+
   QRegExp filter_regex(QLatin1String("(?:^\\*\\.(?!.*\\()|\\(\\*\\.)(\\w+)"));
   QStringList filters = filter.split(QLatin1String(";;"));
 
   dialog.setAcceptMode(QFileDialog::AcceptSave);
 
-
+  dialog.selectNameFilter(ConfigHandler().getSaveAsFileExtension());
   if (dialog.exec() == QDialog::Accepted) {
+
+	ConfigHandler().setSaveAsFileExtension(dialog.selectedNameFilter());
 
     QString file_name = dialog.selectedFiles().first();
     QFileInfo info(file_name);
 
-   if ((dialog.selectedNameFilter() == "By extension (default: *.png)")){//if no sufix change to default, otherwise leave it as it is
+
+   if ((dialog.selectedNameFilter() == "By extension (default: *.png)")){//change to default if no suffix given, otherwise leave it as it is
 	   if (info.suffix().isEmpty()){
 		   file_name = info.completeBaseName() + QLatin1String(".") + "png";;
 	   }
    }
-   else	if ( !dialog.selectedNameFilter().isEmpty()) {//if selected sufix from menu is not an empty entry
+   else	if ( !dialog.selectedNameFilter().isEmpty()) {//if selected suffix from menu is not an empty entry
 	   if (filter_regex.indexIn(dialog.selectedNameFilter()) != -1) {//check for sure if exist on the suffix list
 		   file_name = info.completeBaseName() + QLatin1String(".") + filter_regex.cap(1);//recreate full filename with chosen suffix
 	   }
