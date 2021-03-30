@@ -17,6 +17,8 @@ public:
     bool showMousePreview() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
+    virtual void drawObjectSelection(QPainter& painter,
+                                     const QPixmap& pixmap) override;
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -26,10 +28,6 @@ public slots:
     void thicknessChanged(const int th) override;
 
 protected:
-    void updateBackup(const QPixmap& pixmap);
-    QRect backupRect(const QPixmap& pixmap) const;
-
-    QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;
     QColor m_color;
     int m_thickness;

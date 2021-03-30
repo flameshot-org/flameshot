@@ -142,12 +142,15 @@ public:
     // recordUndo indicates when the tool should save the information
     // for the undo(), if the value is false calling undo() after
     // that process should not modify revert the changes.
-    virtual void process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo = false) = 0;
+    virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
     {
         process(painter, pixmap);
+    };
+    virtual void drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
+    {
+        Q_UNUSED(painter);
+        Q_UNUSED(pixmap);
     };
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,

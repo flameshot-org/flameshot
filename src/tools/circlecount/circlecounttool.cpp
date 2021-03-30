@@ -41,13 +41,8 @@ CaptureTool* CircleCountTool::copy(QObject* parent)
     return new CircleCountTool(parent);
 }
 
-void CircleCountTool::process(QPainter& painter,
-                              const QPixmap& pixmap,
-                              bool recordUndo)
+void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     auto orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
     painter.setBrush(m_color);
@@ -88,6 +83,19 @@ void CircleCountTool::process(QPainter& painter,
     painter.drawText(textRect, Qt::AlignCenter, QString::number(count()));
     painter.setFont(orig_font);
     painter.setBrush(orig_brush);
+    painter.setPen(orig_pen);
+}
+
+void CircleCountTool::drawObjectSelection(QPainter& painter,
+                                          const QPixmap& pixmap)
+{
+    QPen orig_pen = painter.pen();
+    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
+    int bubble_size = m_thickness;
+    painter.drawRect(m_points.first.x() - bubble_size,
+                     m_points.first.y() - bubble_size,
+                     bubble_size * 2,
+                     bubble_size * 2);
     painter.setPen(orig_pen);
 }
 

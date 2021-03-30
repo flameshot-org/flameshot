@@ -146,7 +146,9 @@ private:
     QRect extendedRect(QRect* r) const;
     void drawInitialMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(const bool updateLayersPanel = true);
+    void drawToolsData(const bool updateLayersPanel = true,
+                       const bool drawSelection = false);
+    void drawObjectSelection();
 
 private:
     UpdateNotificationWidget* m_updateNotificationWidget;

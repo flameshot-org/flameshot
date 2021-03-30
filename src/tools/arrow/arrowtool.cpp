@@ -89,13 +89,8 @@ CaptureTool* ArrowTool::copy(QObject* parent)
     return new ArrowTool(parent);
 }
 
-void ArrowTool::process(QPainter& painter,
-                        const QPixmap& pixmap,
-                        bool recordUndo)
+void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(
       getShorterLine(m_points.first, m_points.second, m_thickness));

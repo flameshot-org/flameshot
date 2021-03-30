@@ -513,6 +513,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
                 int historyPos = m_captureToolObjects.find(e->pos(), size());
                 m_panel->setActiveLayer(historyPos);
             }
+            drawToolsData(true, true);
         }
     }
 
@@ -1208,17 +1209,38 @@ void CaptureWidget::pushToolToStack()
     drawToolsData();
 }
 
-void CaptureWidget::drawToolsData(const bool updateLayersPanel)
+void CaptureWidget::drawToolsData(const bool updateLayersPanel,
+                                  const bool drawSelection)
 {
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
+    int index = 0;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        toolItem->process(painter, pixmapItem, false);
+        toolItem->process(painter, pixmapItem);
+        if (drawSelection) {
+            if (m_panel->activeLayerIndex() == index) {
+                toolItem->drawObjectSelection(painter, pixmapItem);
+            }
+            index++;
+        }
     }
+
     m_context.screenshot = pixmapItem.copy();
     update();
     if (updateLayersPanel) {
         m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
+    }
+}
+
+void CaptureWidget::drawObjectSelection()
+{
+    int layerIndex = m_panel->activeLayerIndex();
+    if (layerIndex > 0 && layerIndex < m_captureToolObjects.size()) {
+        auto toolItem = m_captureToolObjects.at(layerIndex);
+        if (toolItem) {
+            QPainter painter(&m_context.screenshot);
+            toolItem->drawObjectSelection(painter, m_context.screenshot);
+        }
     }
 }
 
@@ -1260,7 +1282,7 @@ void CaptureWidget::copyScreenshot()
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
-        m_activeTool->process(painter, m_context.screenshot, true);
+        m_activeTool->process(painter, m_context.screenshot);
     }
 
     ScreenshotSaver().saveToClipboard(pixmap());
@@ -1275,7 +1297,7 @@ void CaptureWidget::saveScreenshot()
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
-        m_activeTool->process(painter, m_context.screenshot, true);
+        m_activeTool->process(painter, m_context.screenshot);
     }
     hide();
     if (m_context.savePath.isEmpty()) {

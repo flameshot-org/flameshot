@@ -33,13 +33,8 @@ CaptureTool* PencilTool::copy(QObject* parent)
     return new PencilTool(parent);
 }
 
-void PencilTool::process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo)
+void PencilTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawPolyline(m_points.data(), m_points.size());
 }
