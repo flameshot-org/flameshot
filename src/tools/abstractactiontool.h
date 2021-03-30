@@ -15,9 +15,7 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
 
-    void process(QPainter& painter,
-                 const QPixmap& pixmap,
-                 bool recordUndo = false) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 

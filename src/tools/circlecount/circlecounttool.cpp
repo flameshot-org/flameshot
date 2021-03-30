@@ -41,13 +41,8 @@ CaptureTool* CircleCountTool::copy(QObject* parent)
     return new CircleCountTool(parent);
 }
 
-void CircleCountTool::process(QPainter& painter,
-                              const QPixmap& pixmap,
-                              bool recordUndo)
+void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     auto orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
     painter.setBrush(m_color);

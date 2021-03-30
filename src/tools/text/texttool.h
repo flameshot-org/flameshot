@@ -29,9 +29,7 @@ public:
     QWidget* configurationWidget() override;
     CaptureTool* copy(QObject* parent = nullptr) override;
 
-    void process(QPainter& painter,
-                 const QPixmap& pixmap,
-                 bool recordUndo = false) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
     void move(const QPoint& pos) override;

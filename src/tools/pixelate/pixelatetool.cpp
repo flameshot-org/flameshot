@@ -38,14 +38,8 @@ CaptureTool* PixelateTool::copy(QObject* parent)
     return new PixelateTool(parent);
 }
 
-void PixelateTool::process(QPainter& painter,
-                           const QPixmap& pixmap,
-                           bool recordUndo)
+void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
-
     QPoint& p0 = m_points.first;
     QPoint& p1 = m_points.second;
     QRect selection = QRect(p0, p1).normalized();

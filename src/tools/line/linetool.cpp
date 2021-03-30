@@ -42,13 +42,8 @@ CaptureTool* LineTool::copy(QObject* parent)
     return new LineTool(parent);
 }
 
-void LineTool::process(QPainter& painter,
-                       const QPixmap& pixmap,
-                       bool recordUndo)
+void LineTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(m_points.first, m_points.second);
 }

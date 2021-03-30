@@ -42,13 +42,8 @@ CaptureTool* MarkerTool::copy(QObject* parent)
     return new MarkerTool(parent);
 }
 
-void MarkerTool::process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo)
+void MarkerTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     auto compositionMode = painter.compositionMode();
     qreal opacity = painter.opacity();
     auto pen = painter.pen();

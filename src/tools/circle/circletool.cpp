@@ -39,13 +39,8 @@ CaptureTool* CircleTool::copy(QObject* parent)
     return new CircleTool(parent);
 }
 
-void CircleTool::process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo)
+void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawEllipse(QRect(m_points.first, m_points.second));
 }
