@@ -19,6 +19,7 @@ public:
     void process(QPainter& painter,
                  const QPixmap& pixmap,
                  bool recordUndo = false) override;
+    void drawSearchArea(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 

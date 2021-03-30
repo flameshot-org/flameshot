@@ -145,6 +145,10 @@ public:
     virtual void process(QPainter& painter,
                          const QPixmap& pixmap,
                          bool recordUndo = false) = 0;
+    virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
+    {
+        process(painter, pixmap);
+    };
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
