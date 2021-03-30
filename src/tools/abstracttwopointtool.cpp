@@ -81,27 +81,6 @@ void AbstractTwoPointTool::thicknessChanged(const int th)
     m_thickness = th;
 }
 
-QRect AbstractTwoPointTool::backupRect(const QPixmap& pixmap) const
-{
-    const QRect& limits = pixmap.rect();
-    QRect r = QRect(m_points.first, m_points.second).normalized();
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    if (1 != pixelRatio) {
-        r.moveTo(r.topLeft() * pixelRatio);
-        r.setSize(r.size() * pixelRatio);
-    }
-    const int val = (m_thickness + m_padding) * pixelRatio;
-#else
-    const int val = (m_thickness + m_padding);
-#endif
-    r += QMargins(val, val, val, val);
-    return r.intersected(limits);
-}
-
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
 {
     if (m_supportsOrthogonalAdj && m_supportsDiagonalAdj) {
@@ -154,4 +133,17 @@ void AbstractTwoPointTool::move(const QPoint& pos)
 const QPoint* AbstractTwoPointTool::pos()
 {
     return &m_points.first;
+}
+
+void AbstractTwoPointTool::drawObjectSelection(QPainter& painter,
+                                               const QPixmap& pixmap)
+{
+    QPen orig_pen = painter.pen();
+    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
+    painter.drawRect(std::min(m_points.first.x(), m_points.second.x()),
+                     std::min(m_points.first.y(), m_points.second.y()),
+                     std::abs(m_points.first.x() - m_points.second.x()),
+                     std::abs(m_points.first.y() - m_points.second.y()));
+
+    painter.setPen(orig_pen);
 }

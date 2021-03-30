@@ -86,6 +86,19 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.setPen(orig_pen);
 }
 
+void CircleCountTool::drawObjectSelection(QPainter& painter,
+                                          const QPixmap& pixmap)
+{
+    QPen orig_pen = painter.pen();
+    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
+    int bubble_size = m_thickness;
+    painter.drawRect(m_points.first.x() - bubble_size,
+                     m_points.first.y() - bubble_size,
+                     bubble_size * 2,
+                     bubble_size * 2);
+    painter.setPen(orig_pen);
+}
+
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
