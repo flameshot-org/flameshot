@@ -26,10 +26,10 @@ void CaptureToolObjectsHistory::append(QPointer<CaptureTool> captureTool)
     m_historyPos = m_captureToolObjects.size() - 1;
 }
 
-QPointer<CaptureTool> CaptureToolObjectsHistory::at(uint index)
+QPointer<CaptureTool> CaptureToolObjectsHistory::at(int index)
 {
     if (index >= 0 && index < m_captureToolObjects.size() - 1) {
-        return m_captureToolObjects.at(index);
+        return m_captureToolObjects[index];
     }
     return nullptr;
 }
@@ -68,7 +68,7 @@ QList<QPointer<CaptureTool>> CaptureToolObjectsHistory::captureToolObjects()
 {
     m_captureToolObjectsTemp.clear();
     if (m_historyPos >= 0) {
-        for (uint cnt = 0; cnt <= m_historyPos; ++cnt) {
+        for (int cnt = 0; cnt <= m_historyPos; ++cnt) {
             m_captureToolObjectsTemp.append(m_captureToolObjects.at(cnt));
         }
     }
@@ -83,11 +83,6 @@ int CaptureToolObjectsHistory::historyIndex()
 int CaptureToolObjectsHistory::size()
 {
     return m_captureToolObjects.size();
-}
-
-QPointer<CaptureTool> CaptureToolObjectsHistory::at(int index)
-{
-    return m_captureToolObjects[index];
 }
 
 void CaptureToolObjectsHistory::removeAt(int index)
