@@ -26,10 +26,8 @@ public slots:
     void thicknessChanged(const int th) override;
 
 protected:
-    void updateBackup(const QPixmap& pixmap);
     QRect backupRect(const QPixmap& pixmap) const;
 
-    QPixmap m_pixmapBackup;
     QPair<QPoint, QPoint> m_points;
     QColor m_color;
     int m_thickness;

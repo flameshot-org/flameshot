@@ -81,11 +81,6 @@ void AbstractTwoPointTool::thicknessChanged(const int th)
     m_thickness = th;
 }
 
-void AbstractTwoPointTool::updateBackup(const QPixmap& pixmap)
-{
-    m_pixmapBackup = pixmap.copy(backupRect(pixmap));
-}
-
 QRect AbstractTwoPointTool::backupRect(const QPixmap& pixmap) const
 {
     const QRect& limits = pixmap.rect();

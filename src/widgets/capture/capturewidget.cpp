@@ -1213,7 +1213,7 @@ void CaptureWidget::drawToolsData(const bool updateLayersPanel)
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        toolItem->process(painter, pixmapItem, false);
+        toolItem->process(painter, pixmapItem);
     }
     m_context.screenshot = pixmapItem.copy();
     update();
@@ -1260,7 +1260,7 @@ void CaptureWidget::copyScreenshot()
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
-        m_activeTool->process(painter, m_context.screenshot, true);
+        m_activeTool->process(painter, m_context.screenshot);
     }
 
     ScreenshotSaver().saveToClipboard(pixmap());
@@ -1275,7 +1275,7 @@ void CaptureWidget::saveScreenshot()
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
-        m_activeTool->process(painter, m_context.screenshot, true);
+        m_activeTool->process(painter, m_context.screenshot);
     }
     hide();
     if (m_context.savePath.isEmpty()) {

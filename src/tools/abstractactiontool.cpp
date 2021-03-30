@@ -22,13 +22,10 @@ bool AbstractActionTool::showMousePreview() const
     return false;
 }
 
-void AbstractActionTool::process(QPainter& painter,
-                                 const QPixmap& pixmap,
-                                 bool recordUndo)
+void AbstractActionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(painter);
     Q_UNUSED(pixmap);
-    Q_UNUSED(recordUndo);
 }
 
 void AbstractActionTool::paintMousePreview(QPainter& painter,

@@ -113,9 +113,7 @@ CaptureTool* TextTool::copy(QObject* parent)
     return tt;
 }
 
-void TextTool::process(QPainter& painter,
-                       const QPixmap& pixmap,
-                       bool recordUndo)
+void TextTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     if (m_text.isEmpty()) {
         return;

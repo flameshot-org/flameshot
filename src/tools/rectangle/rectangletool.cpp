@@ -40,13 +40,8 @@ CaptureTool* RectangleTool::copy(QObject* parent)
     return new RectangleTool(parent);
 }
 
-void RectangleTool::process(QPainter& painter,
-                            const QPixmap& pixmap,
-                            bool recordUndo)
+void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     QPen orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
     painter.setPen(QPen(m_color, m_thickness));

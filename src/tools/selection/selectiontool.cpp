@@ -44,13 +44,8 @@ CaptureTool* SelectionTool::copy(QObject* parent)
     return new SelectionTool(parent);
 }
 
-void SelectionTool::process(QPainter& painter,
-                            const QPixmap& pixmap,
-                            bool recordUndo)
+void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawRect(QRect(m_points.first, m_points.second));
 }
