@@ -957,6 +957,14 @@ void CaptureWidget::setDrawColor(const QColor& c)
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
     }
+    int activeLayerIndex = m_panel->activeLayerIndex();
+    if (activeLayerIndex >= 0) {
+        auto toolItem = m_captureToolObjects.at(activeLayerIndex);
+        if (toolItem) {
+            emit toolItem->colorChanged(c);
+            drawToolsData(false, true);
+        }
+    }
 }
 
 void CaptureWidget::incrementCircleCount()
