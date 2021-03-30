@@ -28,7 +28,7 @@ void CaptureToolObjectsHistory::append(QPointer<CaptureTool> captureTool)
 
 QPointer<CaptureTool> CaptureToolObjectsHistory::at(int index)
 {
-    if (index >= 0 && index < m_captureToolObjects.size() - 1) {
+    if (index >= 0 && index < m_captureToolObjects.size()) {
         return m_captureToolObjects[index];
     }
     return nullptr;

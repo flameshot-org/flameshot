@@ -147,6 +147,11 @@ public:
     {
         process(painter, pixmap);
     };
+    virtual void drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
+    {
+        Q_UNUSED(painter);
+        Q_UNUSED(pixmap);
+    };
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
