@@ -130,7 +130,7 @@ int CaptureToolObjectsHistory::findWithRadius(QPainter& painter,
         auto toolItem = m_captureToolObjects.at(index);
 
         // create transparent image in memory and draw toolItem on it
-        toolItem->process(painter, pixmap, false);
+        toolItem->drawSearchArea(painter, pixmap);
 
         // get color at mouse clicked position in area +/- radius
         QImage image = pixmap.toImage();

@@ -42,7 +42,6 @@ void PixelateTool::process(QPainter& painter,
                            const QPixmap& pixmap,
                            bool recordUndo)
 {
-
     if (recordUndo) {
         updateBackup(pixmap);
     }
@@ -82,6 +81,15 @@ void PixelateTool::process(QPainter& painter,
         t = t.scaled(selection.width(), selection.height());
         painter.drawImage(selection, t.toImage());
     }
+}
+
+void PixelateTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
+{
+    painter.fillRect(std::min(m_points.first.x(), m_points.second.x()),
+                     std::min(m_points.first.y(), m_points.second.y()),
+                     std::abs(m_points.first.x() - m_points.second.x()),
+                     std::abs(m_points.first.y() - m_points.second.y()),
+                     QBrush(Qt::black));
 }
 
 void PixelateTool::paintMousePreview(QPainter& painter,
