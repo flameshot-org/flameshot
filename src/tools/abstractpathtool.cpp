@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "abstractpathtool.h"
+#include <QDebug>
 
 AbstractPathTool::AbstractPathTool(QObject* parent)
   : CaptureTool(parent)
@@ -101,6 +102,35 @@ void AbstractPathTool::move(const QPoint& mousePos)
     for (int index = 0; index < m_points.size(); ++index) {
         m_points[index] += offset;
     }
+}
+
+void AbstractPathTool::drawObjectSelection(QPainter& painter,
+                                           const QPixmap& pixmap)
+{
+    int min_x = m_points.at(0).x();
+    int min_y = m_points.at(0).y();
+    int max_x = m_points.at(0).x();
+    int max_y = m_points.at(0).y();
+    for (auto point : m_points) {
+        if (point.x() < min_x) {
+            min_x = point.x();
+        }
+        if (point.y() < min_y) {
+            min_y = point.y();
+        }
+        if (point.x() > max_x) {
+            max_x = point.x();
+        }
+        if (point.y() > max_y) {
+            max_y = point.y();
+        }
+    }
+
+    QPen orig_pen = painter.pen();
+    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
+    painter.drawRect(
+      min_x, min_y, std::abs(min_x - max_x), std::abs(min_y - max_y));
+    painter.setPen(orig_pen);
 }
 
 const QPoint* AbstractPathTool::pos()
