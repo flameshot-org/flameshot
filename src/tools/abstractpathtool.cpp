@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "abstractpathtool.h"
-#include <QDebug>
 
 AbstractPathTool::AbstractPathTool(QObject* parent)
   : CaptureTool(parent)
