@@ -29,7 +29,7 @@ private:
                        QPixmap& pixmap,
                        const QPoint& pos,
                        const QSize& captureSize,
-                       const int radius = 0);
+                       int radius = 0);
 
     QList<QPointer<CaptureTool>> m_captureToolObjects;
     QList<QPointer<CaptureTool>> m_captureToolObjectsTemp;
