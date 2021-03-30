@@ -5,6 +5,7 @@
 
 class QPixmap;
 class QString;
+class QWidget;
 
 class ScreenshotSaver
 {
@@ -20,4 +21,8 @@ public:
 
 private:
     unsigned m_id;
+    QString ShowSaveFileDialog(QWidget *parent,
+    		const QString &title,
+    		const QString &directory,
+    		const QString &filter);
 };

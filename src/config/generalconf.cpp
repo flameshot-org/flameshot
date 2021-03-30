@@ -34,7 +34,6 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
-    initSaveAsFileExtension();
 
 
     // this has to be at the end
@@ -424,29 +423,6 @@ void GeneralConf::initUseJpgForClipboard()
             this,
             &GeneralConf::useJpgForClipboardChanged);
 }
-
-void GeneralConf::initSaveAsFileExtension()
-{
-    QGroupBox* box = new QGroupBox(tr("Default file extension to save"));
-    box->setFlat(true);
-    m_layout->addWidget(box);
-    m_layout->addStretch();
-
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
-    box->setLayout(vboxLayout);
-
-    QHBoxLayout* pathLayout = new QHBoxLayout();
-
-
-	m_saveExtension = new QComboBox(this);
-	QStringList extensionsList = {"Portable Network Graphic file (PNG) (*.png)", "BMP file (*.bmp)", "JPEG file (*.jpg)", "By extension (default: *.png)"};
-	m_saveExtension->addItems(extensionsList);
-	pathLayout->addWidget(m_saveExtension);
-
-	 vboxLayout->addLayout(pathLayout);
-
-}
-
 
 void GeneralConf::saveAfterCopyChanged(bool checked)
 {
