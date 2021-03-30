@@ -537,7 +537,9 @@ void ConfigHandler::setSaveAsFileExtension(const QString& extension)
 
 QString ConfigHandler::getSaveAsFileExtension()
 {
-    return m_settings.value(QStringLiteral("setSaveAsFileExtension"), QString(".png")).toString();
+    return m_settings
+      .value(QStringLiteral("setSaveAsFileExtension"), QString(".png"))
+      .toString();
 }
 
 void ConfigHandler::setDefaultSettings()

@@ -21,8 +21,8 @@ public:
 
 private:
     unsigned m_id;
-    QString ShowSaveFileDialog(QWidget *parent,
-    		const QString &title,
-    		const QString &directory,
-    		const QString &filter);
+    QString ShowSaveFileDialog(QWidget* parent,
+                               const QString& title,
+                               const QString& directory,
+                               const QString& filter);
 };
