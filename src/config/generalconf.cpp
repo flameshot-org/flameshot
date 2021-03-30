@@ -14,7 +14,6 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
-#include <QComboBox>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -34,7 +33,6 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
-
 
     // this has to be at the end
     initConfigButtons();
@@ -488,9 +486,4 @@ void GeneralConf::togglePathFixed()
 void GeneralConf::useJpgForClipboardChanged(bool checked)
 {
     ConfigHandler().setUseJpgForClipboard(checked);
-}
-
-void GeneralConf::saveAsFileExtension(const QString& extension)
-{
-    ConfigHandler().setSaveAsFileExtension(extension);
 }

@@ -17,7 +17,6 @@
 #include "src/widgets/capture/capturewidget.h"
 #endif
 
-
 ScreenshotSaver::ScreenshotSaver()
   : m_id(0)
 {}
@@ -126,7 +125,6 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget *parent,
 	if (dialog.exec() == QDialog::Accepted) {
 
 		ConfigHandler().setSaveAsFileExtension(dialog.selectedNameFilter());
-
 		QString file_name = dialog.selectedFiles().first();
 		QFileInfo info(file_name);
 
