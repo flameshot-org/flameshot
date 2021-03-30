@@ -1214,8 +1214,8 @@ void CaptureWidget::drawToolsData(const bool updateLayersPanel,
             if (m_panel->activeLayerIndex() == index) {
                 toolItem->drawObjectSelection(painter, pixmapItem);
             }
+            index++;
         }
-        index++;
     }
 
     m_context.screenshot = pixmapItem.copy();
