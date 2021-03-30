@@ -118,7 +118,7 @@ int CaptureToolObjectsHistory::findWithRadius(QPainter& painter,
                                               QPixmap& pixmap,
                                               const QPoint& pos,
                                               const QSize& captureSize,
-                                              const int radius)
+                                              int radius)
 {
     int index = m_captureToolObjects.size() - 1;
     for (; index >= 0; --index) {
@@ -126,6 +126,12 @@ int CaptureToolObjectsHistory::findWithRadius(QPainter& painter,
 
         // create transparent image in memory and draw toolItem on it
         toolItem->drawSearchArea(painter, pixmap);
+
+        if (toolItem->nameID() == ToolType::TEXT) {
+            // Text has spaces inside to need to take a bigger radius for text
+            // objects search
+            radius += 3;
+        }
 
         // get color at mouse clicked position in area +/- radius
         QImage image = pixmap.toImage();
