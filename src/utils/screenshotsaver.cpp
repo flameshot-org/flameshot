@@ -169,9 +169,9 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
           nullptr,
           QObject::tr("Save screenshot"),
           FileNameHandler().absoluteSavePath(),
-          QLatin1String(
-            "Portable Network Graphic file (PNG) (*.png);;BMP "
-            "file (*.bmp);;JPEG file (*.jpg);;By extension [default: *.png]"));
+          QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
+                        "file (*.bmp);;JPEG file (*.jpg);;By extension "
+                        "[default: *.png] (*.png)"));
     }
     ok = capture.save(savePath);
 
