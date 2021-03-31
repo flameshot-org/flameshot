@@ -133,7 +133,7 @@
         <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1274"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="339"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Press Space to open the side panel.</source>
 Нажмите Пробел, чтобы открыть боковую панель.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="660"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="722"/>
         <source>Tool Settings</source>
         <translation>Настройки инструмента</translation>
     </message>
@@ -180,90 +180,89 @@ Press Space to open the side panel.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="29"/>
+        <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="50"/>
+        <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
         <translation>Интерфейс</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="56"/>
+        <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
         <translation>Редактор имён файлов</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="60"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
         <translation>Общие</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="64"/>
+        <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
         <translation>Горячие кнопки</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="70"/>
         <source>Storage</source>
-        <translation>Хранилище</translation>
+        <translation type="vanished">Хранилище</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="194"/>
+        <location filename="../../src/core/controller.cpp" line="197"/>
         <source>New version %1 is available</source>
         <translation>Доступна новая версия %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="201"/>
+        <location filename="../../src/core/controller.cpp" line="204"/>
         <source>You have the latest version</source>
         <translation>У вас самая последняя версия</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="209"/>
+        <location filename="../../src/core/controller.cpp" line="212"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Не удалось получить информацию о последней версии.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="290"/>
+        <location filename="../../src/core/controller.cpp" line="293"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="290"/>
+        <location filename="../../src/core/controller.cpp" line="293"/>
         <source>Unable to close active modal widgets</source>
         <translation>Невозможно закрыть активные модальные виджеты</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="395"/>
+        <location filename="../../src/core/controller.cpp" line="398"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Сделать снимок</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="411"/>
+        <location filename="../../src/core/controller.cpp" line="414"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Приложение захвата</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="416"/>
+        <location filename="../../src/core/controller.cpp" line="419"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="419"/>
+        <location filename="../../src/core/controller.cpp" line="422"/>
         <source>&amp;About</source>
         <translation>&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="422"/>
+        <location filename="../../src/core/controller.cpp" line="425"/>
         <source>Check for updates</source>
         <translation>Проверить обновления</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="429"/>
+        <location filename="../../src/core/controller.cpp" line="432"/>
         <source>&amp;Latest Uploads</source>
         <translation>Последние загрузки</translation>
     </message>
@@ -272,7 +271,7 @@ Press Space to open the side panel.</source>
         <translation type="vanished">&amp;Информация</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="425"/>
+        <location filename="../../src/core/controller.cpp" line="428"/>
         <source>&amp;Quit</source>
         <translation>&amp;Выход</translation>
     </message>
@@ -501,178 +500,183 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="104"/>
-        <location filename="../../src/config/generalconf.cpp" line="275"/>
+        <location filename="../../src/config/generalconf.cpp" line="106"/>
+        <location filename="../../src/config/generalconf.cpp" line="278"/>
         <source>Import</source>
         <translation>Импорт</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="111"/>
-        <location filename="../../src/config/generalconf.cpp" line="119"/>
-        <location filename="../../src/config/generalconf.cpp" line="142"/>
-        <location filename="../../src/config/generalconf.cpp" line="474"/>
+        <location filename="../../src/config/generalconf.cpp" line="113"/>
+        <location filename="../../src/config/generalconf.cpp" line="121"/>
+        <location filename="../../src/config/generalconf.cpp" line="144"/>
+        <location filename="../../src/config/generalconf.cpp" line="509"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="111"/>
+        <location filename="../../src/config/generalconf.cpp" line="113"/>
         <source>Unable to read file.</source>
         <translation>Не удалось прочитать файл.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="119"/>
-        <location filename="../../src/config/generalconf.cpp" line="142"/>
+        <location filename="../../src/config/generalconf.cpp" line="121"/>
+        <location filename="../../src/config/generalconf.cpp" line="144"/>
         <source>Unable to write file.</source>
         <translation>Не удалось записать файл.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="129"/>
+        <location filename="../../src/config/generalconf.cpp" line="131"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="151"/>
+        <location filename="../../src/config/generalconf.cpp" line="153"/>
         <source>Confirm Reset</source>
         <translation>Подтвердить сброс</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="152"/>
+        <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Вы действительно хотите сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="186"/>
+        <location filename="../../src/config/generalconf.cpp" line="189"/>
         <source>Show help message</source>
         <translation>Показывать справочное сообщение</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="190"/>
+        <location filename="../../src/config/generalconf.cpp" line="193"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Показывать справочное сообщение перед началом захвата экрана.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="200"/>
+        <location filename="../../src/config/generalconf.cpp" line="203"/>
         <source>Show the side panel button</source>
         <translation>Показывать кнопку боковой панели</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="203"/>
+        <location filename="../../src/config/generalconf.cpp" line="206"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation>Показывать кнопку открытия боковой панели в режиме захвата.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="213"/>
-        <location filename="../../src/config/generalconf.cpp" line="217"/>
+        <location filename="../../src/config/generalconf.cpp" line="216"/>
+        <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show desktop notifications</source>
         <translation>Показывать уведомления</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="229"/>
+        <location filename="../../src/config/generalconf.cpp" line="232"/>
         <source>Show tray icon</source>
         <translation>Показывать значок в трее</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Show the systemtray icon</source>
         <translation>Показать значок в системном трее</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="245"/>
-        <location filename="../../src/config/generalconf.cpp" line="250"/>
+        <location filename="../../src/config/generalconf.cpp" line="248"/>
+        <location filename="../../src/config/generalconf.cpp" line="253"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Для удаления снимка экрана из последних загрузок требуется подтверждение</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="263"/>
+        <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Configuration File</source>
         <translation>Файл конфигурации</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="268"/>
+        <location filename="../../src/config/generalconf.cpp" line="271"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="282"/>
+        <location filename="../../src/config/generalconf.cpp" line="285"/>
         <source>Reset</source>
         <translation>Сбросить</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="292"/>
-        <location filename="../../src/config/generalconf.cpp" line="294"/>
+        <location filename="../../src/config/generalconf.cpp" line="295"/>
+        <location filename="../../src/config/generalconf.cpp" line="297"/>
         <source>Automatic check for updates</source>
         <translation>Автоматическая проверка обновлений</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="305"/>
+        <location filename="../../src/config/generalconf.cpp" line="308"/>
         <source>Launch at startup</source>
         <translation>Запускать при старте системы</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="308"/>
-        <location filename="../../src/config/generalconf.cpp" line="322"/>
+        <location filename="../../src/config/generalconf.cpp" line="311"/>
+        <location filename="../../src/config/generalconf.cpp" line="325"/>
         <source>Launch Flameshot</source>
         <translation>Запустить Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="318"/>
+        <location filename="../../src/config/generalconf.cpp" line="321"/>
         <source>Show welcome message on launch</source>
         <translation>Показывать приветствие при запуске</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="333"/>
+        <location filename="../../src/config/generalconf.cpp" line="336"/>
         <source>Copy URL after upload</source>
         <translation>Копировать ссылку после загрузки</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="338"/>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Copy URL and close window after upload</source>
         <translation>Копировать ссылку и закрыть окно после загрузки</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="348"/>
+        <location filename="../../src/config/generalconf.cpp" line="351"/>
         <source>Save image after copy</source>
         <translation>Сохранять изображение после копирования</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="349"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image file after copying it</source>
         <translation>Сохранять файл изображения после копирования</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="356"/>
+        <location filename="../../src/config/generalconf.cpp" line="359"/>
         <source>Save Path</source>
         <translation>Путь сохранения</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="380"/>
+        <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Change...</source>
         <translation>Сменить…</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="388"/>
+        <location filename="../../src/config/generalconf.cpp" line="391"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Использовать фиксированный путь для сохранения снимков экрана</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="407"/>
-        <location filename="../../src/config/generalconf.cpp" line="412"/>
+        <location filename="../../src/config/generalconf.cpp" line="409"/>
+        <source>Latest Uploads Max Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="442"/>
+        <location filename="../../src/config/generalconf.cpp" line="447"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Использовать формат JPG для буфера обмена (по умолчанию PNG)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="446"/>
-        <location filename="../../src/config/generalconf.cpp" line="449"/>
+        <location filename="../../src/config/generalconf.cpp" line="481"/>
+        <location filename="../../src/config/generalconf.cpp" line="484"/>
         <source>Copy file path after save</source>
         <translation>Скопировать путь к файлу после сохранения</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="465"/>
+        <location filename="../../src/config/generalconf.cpp" line="500"/>
         <source>Choose a Folder</source>
         <translation>Выберите папку</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="474"/>
+        <location filename="../../src/config/generalconf.cpp" line="509"/>
         <source>Unable to write to directory.</source>
         <translation>Не удалось записать в папку.</translation>
     </message>
@@ -680,37 +684,37 @@ Press Space to open the side panel.</source>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
         <translation>Последние загрузки</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="88"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
         <translation>История снимков пуста</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="140"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
         <translation>Копировать ссылку</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="144"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
         <translation>Ссылка скопирована в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="150"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
         <translation>Открыть в браузере</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="166"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
         <translation>Подтвердите удаление</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation>Вы уверены, что хотите удалить снимок экрана с последних загрузок и с сервера?</translation>
     </message>
@@ -718,33 +722,28 @@ Press Space to open the side panel.</source>
 <context>
     <name>ImgS3Uploader</name>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
         <source>Upload image to S3</source>
-        <translation>Загрузка изображения в S3</translation>
+        <translation type="vanished">Загрузка изображения в S3</translation>
     </message>
     <message>
         <source>Uploading Image</source>
         <translation type="vanished">Загрузка изображения</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
         <source>Uploading Image...</source>
-        <translation>Выгрузка изображения…</translation>
+        <translation type="vanished">Выгрузка изображения…</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
         <source>Delete image from S3</source>
-        <translation>Удалить изображение из S3</translation>
+        <translation type="vanished">Удалить изображение из S3</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
         <source>Deleting image...</source>
-        <translation>Удаление изображения…</translation>
+        <translation type="vanished">Удаление изображения…</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="130"/>
         <source>URL copied to clipboard.</source>
-        <translation>Ссылка скопирована в буфер обмена.</translation>
+        <translation type="vanished">Ссылка скопирована в буфер обмена.</translation>
     </message>
     <message>
         <source>Unable to remove screenshot from the remote storage.</source>
@@ -767,46 +766,34 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Удалить снимок из истории?</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="440"/>
         <source>Retrieving configuration file with s3 creds...</source>
-        <translation>Получение конфигурационного файла с параметрами доступа к s3…</translation>
+        <translation type="vanished">Получение конфигурационного файла с параметрами доступа к s3…</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="205"/>
         <source>S3 Creds URL is not found in your configuration file</source>
-        <translation>Адрес данных S3 не найден в вашем файле конфигурации</translation>
+        <translation type="vanished">Адрес данных S3 не найден в вашем файле конфигурации</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="148"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="436"/>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="149"/>
-        <source>Unable to upload screenshot, please check your internet connection and try again</source>
-        <translation>Не удалось выгрузить снимок экрана. Проверьте подключение к Интернету и повторите попытку</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="432"/>
         <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
-        <translation>Не удалось получить данные S3, проверьте своё VPN-соединение и повторите попытку</translation>
+        <translation type="vanished">Не удалось получить данные S3, проверьте своё VPN-соединение и повторите попытку</translation>
     </message>
 </context>
 <context>
     <name>ImgS3UploaderTool</name>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
         <source>Upload the selection to S3 bucket</source>
-        <translation>Загрузить выделение в корзину S3</translation>
+        <translation type="vanished">Загрузить выделение в корзину S3</translation>
     </message>
 </context>
 <context>
     <name>ImgUploader</name>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
         <source>Upload image to S3</source>
-        <translation>Загрузить изображение в S3</translation>
+        <translation type="vanished">Загрузить изображение в S3</translation>
     </message>
     <message>
         <source>Uploading Image</source>
@@ -817,75 +804,24 @@ Press Space to open the side panel.</source>
         <translation type="vanished">Загрузить изображение</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="89"/>
         <source>Unable to open the URL.</source>
-        <translation>Не удалось открыть ссылку.</translation>
+        <translation type="vanished">Не удалось открыть ссылку.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="96"/>
         <source>URL copied to clipboard.</source>
-        <translation>Ссылка скопирована в буфер обмена.</translation>
+        <translation type="vanished">Ссылка скопирована в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Снимок скопирован в буфер обмена.</translation>
+        <translation type="vanished">Снимок скопирован в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="111"/>
         <source>Deleting image...</source>
-        <translation>Удаление изображения…</translation>
+        <translation type="vanished">Удаление изображения…</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
         <source>Uploading Image...</source>
-        <translation>Выгрузка изображения…</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="171"/>
-        <source>Copy URL</source>
-        <translation>Копировать ссылку</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
-        <source>Open URL</source>
-        <translation>Открыть ссылку</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
-        <source>Delete image</source>
-        <translation>Удалить изображение</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
-        <source>Image to Clipboard.</source>
-        <translation>Изображение в буфер обмена.</translation>
-    </message>
-</context>
-<context>
-    <name>ImgUploaderTool</name>
-    <message>
-        <source>Imgage uploader tool</source>
-        <translation type="vanished">Инструмент загрузки изображений</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploadertool.cpp" line="21"/>
-        <source>Image uploader tool</source>
-        <translation>Инструмент загрузки изображений</translation>
-    </message>
-</context>
-<context>
-    <name>ImgurUploader</name>
-    <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="45"/>
-        <source>Upload to Imgur</source>
-        <translation>Загрузить в Imgur</translation>
-    </message>
-    <message>
-        <source>Uploading Image</source>
-        <translation type="vanished">Загрузка изображения</translation>
+        <translation type="vanished">Выгрузка изображения…</translation>
     </message>
     <message>
         <source>Copy URL</source>
@@ -903,29 +839,76 @@ Press Space to open the side panel.</source>
         <source>Image to Clipboard.</source>
         <translation type="vanished">Изображение в буфер обмена.</translation>
     </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="124"/>
+        <source>Imgage uploader tool</source>
+        <translation type="vanished">Инструмент загрузки изображений</translation>
+    </message>
+    <message>
+        <source>Image uploader tool</source>
+        <translation type="vanished">Инструмент загрузки изображений</translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploader</name>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
+        <source>Upload to Imgur</source>
+        <translation>Загрузить в Imgur</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
+        <source>Uploading Image</source>
+        <translation>Загрузка изображения</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
+        <source>Copy URL</source>
+        <translation>Копировать ссылку</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
+        <source>Open URL</source>
+        <translation>Открыть ссылку</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
+        <source>Delete image</source>
+        <translation>Удалить изображение</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <source>Image to Clipboard.</source>
+        <translation>Изображение в буфер обмена.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
         <translation>Не удалось открыть ссылку.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">Ссылка скопирована в буфер обмена.</translation>
+        <translation>Ссылка скопирована в буфер обмена.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Снимок скопирован в буфер обмена.</translation>
+        <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="14"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
         <translation>Отправка изображений</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
         <translation>Загрузить выделение в Imgur</translation>
     </message>
@@ -1093,12 +1076,14 @@ Press Space to open the side panel.</source>
 <context>
     <name>QHotkey</name>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">Не удалось зарегистрировать %1. Ошибка: %2</translation>
+        <translation>Не удалось зарегистрировать %1. Ошибка: %2</translation>
     </message>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">Не удалось отменить регистрацию %1. Ошибка: %2</translation>
+        <translation>Не удалось отменить регистрацию %1. Ошибка: %2</translation>
     </message>
 </context>
 <context>
@@ -1308,7 +1293,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Не удалось сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
         <translation>Ссылка скопирована в буфер обмена.</translation>
     </message>
@@ -1349,7 +1334,7 @@ You can find me in the system tray.</source>
 Вы можете найти меня в системном трее.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="501"/>
+        <location filename="../../src/core/controller.cpp" line="505"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Привет, я тут! Щёлкните по значку на панели задач, чтобы сделать снимок экрана, или щёлкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
     </message>
@@ -1565,12 +1550,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation>Уменьшить размер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Уменьшите размер других инструментов</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1578,12 +1563,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation>Увеличить размер</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation>Увеличьте размер других инструментов</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1828,32 +1813,24 @@ You can find me in the system tray.</source>
 <context>
     <name>UploadStorageConfig</name>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
         <source>Upload storage</source>
-        <translation>Хранилище загрузок</translation>
+        <translation type="vanished">Хранилище загрузок</translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
         <source>Imgur storage</source>
-        <translation>Хранилище Imgur</translation>
+        <translation type="vanished">Хранилище Imgur</translation>
     </message>
     <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
         <source>S3 storage (require config.ini file with s3 credentials)</source>
-        <translation>Хранилище S3 (требуется файл config.ini с учётными данными s3)</translation>
+        <translation type="vanished">Хранилище S3 (требуется файл config.ini с учётными данными s3)</translation>
     </message>
 </context>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="133"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="116"/>
         <source>Close</source>
         <translation>Закрыть</translation>
-    </message>
-    <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="142"/>
-        <source>&lt;Empty&gt;</source>
-        <translation>&lt;Пусто&gt;</translation>
     </message>
     <message>
         <source>Hide</source>

@@ -133,7 +133,7 @@
         <translation>Kan scherm niet vastleggen</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1274"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="339"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Gebruik het muiswiel om de gereedschapsdikte aan te passen.
 Druk op spatie om het zijpaneel te openen.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="660"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="722"/>
         <source>Tool Settings</source>
         <translation>Gereedschapsinstellingen</translation>
     </message>
@@ -180,90 +180,85 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="29"/>
+        <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
         <translation>Configuratie</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="50"/>
+        <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
         <translation>Uiterlijk</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="56"/>
+        <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
         <translation>Bestandsnaambewerker</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="60"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
         <translation>Algemeen</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="64"/>
+        <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
         <translation>Sneltoetsen</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/configwindow.cpp" line="70"/>
-        <source>Storage</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="194"/>
+        <location filename="../../src/core/controller.cpp" line="197"/>
         <source>New version %1 is available</source>
         <translation>Er is een nieuwe versie beschikbaar: %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="201"/>
+        <location filename="../../src/core/controller.cpp" line="204"/>
         <source>You have the latest version</source>
         <translation>Je beschikt over de nieuwste versie</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="209"/>
+        <location filename="../../src/core/controller.cpp" line="212"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Er kan geen versie-informatie worden opgehaald.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="290"/>
+        <location filename="../../src/core/controller.cpp" line="293"/>
         <source>Error</source>
         <translation>Foutmelding</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="290"/>
+        <location filename="../../src/core/controller.cpp" line="293"/>
         <source>Unable to close active modal widgets</source>
         <translation>De actieve, modale widgets kunnen niet worden gesloten</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="395"/>
+        <location filename="../../src/core/controller.cpp" line="398"/>
         <source>&amp;Take Screenshot</source>
         <translation>Schermafdruk &amp;maken</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="411"/>
+        <location filename="../../src/core/controller.cpp" line="414"/>
         <source>&amp;Open Launcher</source>
         <translation>Starter &amp;openen</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="416"/>
+        <location filename="../../src/core/controller.cpp" line="419"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuratie</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="419"/>
+        <location filename="../../src/core/controller.cpp" line="422"/>
         <source>&amp;About</source>
         <translation>&amp;Over</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="422"/>
+        <location filename="../../src/core/controller.cpp" line="425"/>
         <source>Check for updates</source>
         <translation>Controleren op updates</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="429"/>
+        <location filename="../../src/core/controller.cpp" line="432"/>
         <source>&amp;Latest Uploads</source>
         <translation>Recentste up&amp;loads</translation>
     </message>
@@ -272,7 +267,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <translation type="vanished">&amp;Informatie</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="425"/>
+        <location filename="../../src/core/controller.cpp" line="428"/>
         <source>&amp;Quit</source>
         <translation>&amp;Afsluiten</translation>
     </message>
@@ -433,178 +428,183 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="104"/>
-        <location filename="../../src/config/generalconf.cpp" line="275"/>
+        <location filename="../../src/config/generalconf.cpp" line="106"/>
+        <location filename="../../src/config/generalconf.cpp" line="278"/>
         <source>Import</source>
         <translation>Importeren</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="111"/>
-        <location filename="../../src/config/generalconf.cpp" line="119"/>
-        <location filename="../../src/config/generalconf.cpp" line="142"/>
-        <location filename="../../src/config/generalconf.cpp" line="474"/>
+        <location filename="../../src/config/generalconf.cpp" line="113"/>
+        <location filename="../../src/config/generalconf.cpp" line="121"/>
+        <location filename="../../src/config/generalconf.cpp" line="144"/>
+        <location filename="../../src/config/generalconf.cpp" line="509"/>
         <source>Error</source>
         <translation>Foutmelding</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="111"/>
+        <location filename="../../src/config/generalconf.cpp" line="113"/>
         <source>Unable to read file.</source>
         <translation>Kan bestand niet uitlezen.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="119"/>
-        <location filename="../../src/config/generalconf.cpp" line="142"/>
+        <location filename="../../src/config/generalconf.cpp" line="121"/>
+        <location filename="../../src/config/generalconf.cpp" line="144"/>
         <source>Unable to write file.</source>
         <translation>Kan bestand niet wegschrijven.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="129"/>
+        <location filename="../../src/config/generalconf.cpp" line="131"/>
         <source>Save File</source>
         <translation>Bestand opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="151"/>
+        <location filename="../../src/config/generalconf.cpp" line="153"/>
         <source>Confirm Reset</source>
         <translation>Herstellen bevestigen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="152"/>
+        <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Weet je zeker dat je de standwaardwaarden van de configuratie wilt herstellen?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="186"/>
+        <location filename="../../src/config/generalconf.cpp" line="189"/>
         <source>Show help message</source>
         <translation>Uitleg tonen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="190"/>
+        <location filename="../../src/config/generalconf.cpp" line="193"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Toont een bericht met uitleg bij het openen van de vastlegmodus.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="200"/>
+        <location filename="../../src/config/generalconf.cpp" line="203"/>
         <source>Show the side panel button</source>
         <translation>Zijpaneelknop tonen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="203"/>
+        <location filename="../../src/config/generalconf.cpp" line="206"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation>Toont de zijpaneelknop in de vastlegmodus.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="213"/>
-        <location filename="../../src/config/generalconf.cpp" line="217"/>
+        <location filename="../../src/config/generalconf.cpp" line="216"/>
+        <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show desktop notifications</source>
         <translation>Bureaubladmeldingen tonen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="229"/>
+        <location filename="../../src/config/generalconf.cpp" line="232"/>
         <source>Show tray icon</source>
         <translation>Systeemvakpictogram tonen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
+        <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Show the systemtray icon</source>
         <translation>Toont het systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="245"/>
-        <location filename="../../src/config/generalconf.cpp" line="250"/>
+        <location filename="../../src/config/generalconf.cpp" line="248"/>
+        <location filename="../../src/config/generalconf.cpp" line="253"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Schermfoto verwijderen uit recentste uploads bevestigen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="263"/>
+        <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Configuration File</source>
         <translation>Configuratiebestand</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="268"/>
+        <location filename="../../src/config/generalconf.cpp" line="271"/>
         <source>Export</source>
         <translation>Exporteren</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="282"/>
+        <location filename="../../src/config/generalconf.cpp" line="285"/>
         <source>Reset</source>
         <translation>Standaardwaarden</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="292"/>
-        <location filename="../../src/config/generalconf.cpp" line="294"/>
+        <location filename="../../src/config/generalconf.cpp" line="295"/>
+        <location filename="../../src/config/generalconf.cpp" line="297"/>
         <source>Automatic check for updates</source>
         <translation>Automatisch controleren op updates</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="305"/>
+        <location filename="../../src/config/generalconf.cpp" line="308"/>
         <source>Launch at startup</source>
         <translation>Automatisch opstarten</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="308"/>
-        <location filename="../../src/config/generalconf.cpp" line="322"/>
+        <location filename="../../src/config/generalconf.cpp" line="311"/>
+        <location filename="../../src/config/generalconf.cpp" line="325"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot openen</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="318"/>
+        <location filename="../../src/config/generalconf.cpp" line="321"/>
         <source>Show welcome message on launch</source>
         <translation>Welkomstbericht tonen na opstarten</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="333"/>
+        <location filename="../../src/config/generalconf.cpp" line="336"/>
         <source>Copy URL after upload</source>
         <translation>URL kopiëren na uploaden</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="338"/>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Copy URL and close window after upload</source>
         <translation>Kopieer de url en sluit het venster na het uploaden</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="348"/>
+        <location filename="../../src/config/generalconf.cpp" line="351"/>
         <source>Save image after copy</source>
         <translation>Afbeelding opslaan na kopiëren</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="349"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image file after copying it</source>
         <translation>Sla de afbeelding op na deze gekopieerd te hebben</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="356"/>
+        <location filename="../../src/config/generalconf.cpp" line="359"/>
         <source>Save Path</source>
         <translation>Opslaglocatie</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="380"/>
+        <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Change...</source>
         <translation>Wijzigen...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="388"/>
+        <location filename="../../src/config/generalconf.cpp" line="391"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Schermfoto&apos;s altijd opslaan op dezelfde locatie</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="407"/>
-        <location filename="../../src/config/generalconf.cpp" line="412"/>
+        <location filename="../../src/config/generalconf.cpp" line="409"/>
+        <source>Latest Uploads Max Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="442"/>
+        <location filename="../../src/config/generalconf.cpp" line="447"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>JPG-formaat gebruiken op klembord (standaard: png)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="446"/>
-        <location filename="../../src/config/generalconf.cpp" line="449"/>
+        <location filename="../../src/config/generalconf.cpp" line="481"/>
+        <location filename="../../src/config/generalconf.cpp" line="484"/>
         <source>Copy file path after save</source>
         <translation>Bestandspad kopiëren na opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="465"/>
+        <location filename="../../src/config/generalconf.cpp" line="500"/>
         <source>Choose a Folder</source>
         <translation>Kies een map</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="474"/>
+        <location filename="../../src/config/generalconf.cpp" line="509"/>
         <source>Unable to write to directory.</source>
         <translation>Kan niet wegschrijven naar map.</translation>
     </message>
@@ -612,37 +612,37 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
         <translation>Recentste uploads</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="88"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
         <translation>Er zijn nog geen schermfoto&apos;s gemaakt</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="140"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
         <translation>URL kopiëren</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="144"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
         <translation>URL gekopieerd naar klembord.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="150"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
         <translation>Openen in browser</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="166"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
         <translation>Verwijderen bevestigen</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation>Weet je zeker dat je de schermfoto wilt verwijderen uit de recentste uploads en van de server?</translation>
     </message>
@@ -654,63 +654,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <translation type="obsolete">Bezig met uploaden van afbeelding...</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
-        <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="130"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL gekopieerd naar klembord.</translation>
+        <translation type="obsolete">URL gekopieerd naar klembord.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="148"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="436"/>
         <source>Error</source>
-        <translation type="unfinished">Fout</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="149"/>
-        <source>Unable to upload screenshot, please check your internet connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="205"/>
-        <source>S3 Creds URL is not found in your configuration file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="432"/>
-        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="440"/>
-        <source>Retrieving configuration file with s3 creds...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgS3UploaderTool</name>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
-        <source>Upload the selection to S3 bucket</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Fout</translation>
     </message>
 </context>
 <context>
@@ -720,116 +669,92 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <translation type="obsolete">Bezig met uploaden van afbeelding...</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="89"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Kan URL niet openen.</translation>
+        <translation type="obsolete">Kan URL niet openen.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="96"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL gekopieerd naar klembord.</translation>
+        <translation type="obsolete">URL gekopieerd naar klembord.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Schermafdruk gekopieerd naar klembord.</translation>
+        <translation type="obsolete">Schermafdruk gekopieerd naar klembord.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="171"/>
         <source>Copy URL</source>
-        <translation type="unfinished">URL kopiëren</translation>
+        <translation type="obsolete">URL kopiëren</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
         <source>Open URL</source>
-        <translation type="unfinished">URL openen</translation>
+        <translation type="obsolete">URL openen</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
         <source>Delete image</source>
-        <translation type="unfinished">Afbeelding verwijderen</translation>
+        <translation type="obsolete">Afbeelding verwijderen</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="111"/>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Afbeelding naar klembord.</translation>
-    </message>
-</context>
-<context>
-    <name>ImgUploaderTool</name>
-    <message>
-        <location filename="../../src/tools/storage/imguploadertool.cpp" line="21"/>
-        <source>Image uploader tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Afbeelding naar klembord.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
         <translation>Uploaden naar Imgur</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation type="vanished">Bezig met uploaden van afbeelding...</translation>
+        <translation>Bezig met uploaden van afbeelding...</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation type="vanished">URL kopiëren</translation>
+        <translation>URL kopiëren</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation type="vanished">URL openen</translation>
+        <translation>URL openen</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation type="vanished">Afbeelding verwijderen</translation>
+        <translation>Afbeelding verwijderen</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation type="vanished">Afbeelding naar klembord.</translation>
+        <translation>Afbeelding naar klembord.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="124"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
         <translation>Kan URL niet openen.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL gekopieerd naar klembord.</translation>
+        <translation>URL gekopieerd naar klembord.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Schermafdruk gekopieerd naar klembord.</translation>
+        <translation>Schermafdruk gekopieerd naar klembord.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="14"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
         <translation>Afbeeldingsuploader</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
         <translation>Upload de selectie naar Imgur</translation>
     </message>
@@ -993,12 +918,14 @@ Druk op spatie om het zijpaneel te openen.</translation>
 <context>
     <name>QHotkey</name>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">&apos;%1&apos; kan niet worden ingesteld. Foutmelding: %2</translation>
+        <translation>&apos;%1&apos; kan niet worden ingesteld. Foutmelding: %2</translation>
     </message>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">&apos;%1&apos; kan niet worden vrijgegeven. Foutmelding: %2</translation>
+        <translation>&apos;%1&apos; kan niet worden vrijgegeven. Foutmelding: %2</translation>
     </message>
 </context>
 <context>
@@ -1208,7 +1135,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <translation>Kan niet wegschrijven naar</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
         <translation>URL gekopieerd naar klembord.</translation>
     </message>
@@ -1243,7 +1170,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <translation>Standaard wordt Flameshot op de achtergrond uitgevoerd en toont daarbij een systeemvakpictogram.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="501"/>
+        <location filename="../../src/core/controller.cpp" line="505"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Hallo, hier ben ik! Klik op het systeemvakpictogram om een schermfoto te maken of rechtsklik om meer opties te tonen.</translation>
     </message>
@@ -1721,34 +1648,11 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     </message>
 </context>
 <context>
-    <name>UploadStorageConfig</name>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
-        <source>Upload storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
-        <source>Imgur storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
-        <source>S3 storage (require config.ini file with s3 credentials)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="133"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="116"/>
         <source>Close</source>
         <translation>Sluiten</translation>
-    </message>
-    <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="142"/>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
