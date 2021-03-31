@@ -68,7 +68,7 @@ void OcrTool::pressed(const CaptureContext& context)
         return;
     }
 
-    Pix *image = TesseractTool::qImage2PIX(context.selectedScreenshotArea().toImage());
+    Pix *image = TesseractTool::qImagetoPIX(context.selectedScreenshotArea().toImage());
     tesseractApi->SetImage(image);
 
     outText = tesseractApi->GetUTF8Text();
