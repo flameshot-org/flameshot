@@ -156,14 +156,17 @@ def _file_name_and_size(file: str) -> dict:
 def _prepare_session() -> requests.Session:
     """Prepare a wetransfer.com session.
 
-    Return a requests session that will always pass the initial X-CSRF-Token:
+    Return a requests session that will always pass the required headers
     and with cookies properly populated that can be used for wetransfer
     requests.
     """
     s = requests.Session()
     r = s.get('https://wetransfer.com/')
     m = re.search('name="csrf-token" content="([^"]+)"', r.text)
-    s.headers.update({'X-CSRF-Token': m.group(1)})
+    s.headers.update({
+        'x-csrf-token': m.group(1),
+        'x-requested-with': 'XMLHttpRequest',
+    })
 
     return s
 
