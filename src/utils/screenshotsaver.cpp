@@ -173,6 +173,15 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
                         "file (*.bmp);;JPEG file (*.jpg);;By extension "
                         "[default: *.png] (*.png)"));
     }
+    if (savePath == "") {
+        QString msg = QObject::tr("Saving canceled");
+        QMessageBox saveInfoBox(
+          QMessageBox::Information, QObject::tr("Save canceled"), msg);
+        saveInfoBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
+        saveInfoBox.exec();
+        return ok;
+    }
+
     ok = capture.save(savePath);
 
     if (ok) {
