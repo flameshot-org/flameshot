@@ -38,7 +38,6 @@ public:
 
 protected:
     ToolType nameID() const override;
-    QRect backupRect(const QPixmap& pixmap) const;
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -62,7 +61,7 @@ private:
     QString m_text;
     int m_size;
     QColor m_color;
-    QRect m_backupArea;
+    QRect m_textArea;
     QPointer<TextWidget> m_widget;
     QPointer<TextConfig> m_confW;
     QPoint m_currentPos;
