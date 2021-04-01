@@ -29,4 +29,7 @@ protected:
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
+
+private:
+    QPainterPath m_arrowPath;
 };

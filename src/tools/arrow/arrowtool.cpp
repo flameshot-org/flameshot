@@ -95,8 +95,8 @@ void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(
       getShorterLine(m_points.first, m_points.second, m_thickness));
-    painter.fillPath(getArrowHead(m_points.first, m_points.second, m_thickness),
-                     QBrush(m_color));
+    m_arrowPath = getArrowHead(m_points.first, m_points.second, m_thickness);
+    painter.fillPath(m_arrowPath, QBrush(m_color));
 }
 
 void ArrowTool::paintMousePreview(QPainter& painter,
@@ -123,19 +123,41 @@ void ArrowTool::drawObjectSelection(QPainter& painter)
 {
     int offset =
       m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
-    QRect rect =
-      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
-            std::min(m_points.first.y(), m_points.second.y()) - offset,
-            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
-            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
 
-    if (rect.width() < ArrowWidth + m_thickness) {
-        rect.setX(rect.x() - (ArrowWidth / 2 + offset));
-        rect.setWidth(rect.width() + (ArrowWidth / 2 + offset));
+    // get min and max arrow pos
+    int min_x = m_points.first.x();
+    int min_y = m_points.first.y();
+    int max_x = m_points.first.x();
+    int max_y = m_points.first.y();
+    for (int i = 0; i < m_arrowPath.elementCount(); i++) {
+        QPointF pt = m_arrowPath.elementAt(i);
+        if (static_cast<int>(pt.x()) < min_x) {
+            min_x = static_cast<int>(pt.x());
+        }
+        if (static_cast<int>(pt.y()) < min_y) {
+            min_y = static_cast<int>(pt.y());
+        }
+        if (static_cast<int>(pt.x()) > max_x) {
+            max_x = static_cast<int>(pt.x());
+        }
+        if (static_cast<int>(pt.y()) > max_y) {
+            max_y = static_cast<int>(pt.y());
+        }
     }
-    if (rect.height() < ArrowWidth + m_thickness) {
-        rect.setY(rect.y() - (ArrowWidth / 2 + offset));
-        rect.setHeight(rect.height() + (ArrowWidth / 2 + offset));
-    }
+
+    // get min and max line pos
+    int line_pos_min_x =
+      std::min(std::min(m_points.first.x(), m_points.second.x()), min_x);
+    int line_pos_min_y =
+      std::min(std::min(m_points.first.y(), m_points.second.y()), min_y);
+    int line_pos_max_x =
+      std::max(std::max(m_points.first.x(), m_points.second.x()), max_x);
+    int line_pos_max_y =
+      std::max(std::max(m_points.first.y(), m_points.second.y()), max_y);
+
+    QRect rect = QRect(line_pos_min_x - offset,
+                       line_pos_min_y - offset,
+                       line_pos_max_x - line_pos_min_x + offset * 2,
+                       line_pos_max_y - line_pos_min_y + offset * 2);
     drawObjectSelectionRect(painter, rect);
 }
