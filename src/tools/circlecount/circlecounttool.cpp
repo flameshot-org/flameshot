@@ -86,8 +86,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.setPen(orig_pen);
 }
 
-void CircleCountTool::drawObjectSelection(QPainter& painter,
-                                          const QPixmap& pixmap)
+void CircleCountTool::drawObjectSelection(QPainter& painter)
 {
     QPen orig_pen = painter.pen();
     painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));

@@ -76,8 +76,7 @@ void AbstractPathTool::move(const QPoint& mousePos)
     }
 }
 
-void AbstractPathTool::drawObjectSelection(QPainter& painter,
-                                           const QPixmap& pixmap)
+void AbstractPathTool::drawObjectSelection(QPainter& painter)
 {
     int min_x = m_points.at(0).x();
     int min_y = m_points.at(0).y();
@@ -98,7 +97,6 @@ void AbstractPathTool::drawObjectSelection(QPainter& painter,
         }
     }
 
-    QPen orig_pen = painter.pen();
     int offset =
       m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
     QRect rect = QRect(min_x - offset,
@@ -106,8 +104,6 @@ void AbstractPathTool::drawObjectSelection(QPainter& painter,
                        std::abs(min_x - max_x) + offset * 2,
                        std::abs(min_y - max_y) + offset * 2);
     drawObjectSelectionRect(painter, rect);
-
-    painter.setPen(orig_pen);
 }
 
 const QPoint* AbstractPathTool::pos()
