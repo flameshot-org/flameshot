@@ -135,10 +135,7 @@ void TextTool::drawObjectSelection(QPainter& painter)
     if (m_text.isEmpty()) {
         return;
     }
-    QPen orig_pen = painter.pen();
-    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
-    painter.drawRect(m_textArea);
-    painter.setPen(orig_pen);
+    drawObjectSelectionRect(painter, m_textArea);
 }
 
 void TextTool::paintMousePreview(QPainter& painter,
