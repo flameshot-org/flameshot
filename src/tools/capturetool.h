@@ -169,6 +169,13 @@ protected:
         return ColorUtils::colorIsDark(c) ? PathInfo::whiteIconPath()
                                           : PathInfo::blackIconPath();
     }
+    void drawObjectSelectionRect(QPainter& painter, QRect rect)
+    {
+        painter.setPen(QPen(Qt::black, 3));
+        painter.drawRect(rect);
+        painter.setPen(QPen(Qt::white, 1, Qt::DotLine));
+        painter.drawRect(rect);
+    }
 
 public slots:
     // On mouse release.
