@@ -118,14 +118,16 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     if (m_text.isEmpty()) {
         return;
     }
+    const int val = 5;
     QFontMetrics fm(m_font);
     QSize size(fm.boundingRect(QRect(), 0, m_text).size());
-    m_backupArea.setSize(size);
+    size.setWidth(size.width() + val * 2);
+    size.setHeight(size.height() + val * 2);
+    m_textArea.setSize(size);
     // draw text
     painter.setFont(m_font);
     painter.setPen(m_color);
-    const int val = 5;
-    painter.drawText(m_backupArea + QMargins(-val, -val, val, val), m_text);
+    painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
 }
 
 void TextTool::drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
@@ -135,26 +137,8 @@ void TextTool::drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
     }
     QPen orig_pen = painter.pen();
     painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
-    painter.drawRect(m_backupArea);
+    painter.drawRect(m_textArea);
     painter.setPen(orig_pen);
-}
-
-QRect TextTool::backupRect(const QPixmap& pixmap) const
-{
-    const QRect& limits = pixmap.rect();
-    QRect r = m_backupArea.normalized();
-#if defined(Q_OS_MACOS)
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    const int val = 5 * pixelRatio;
-    if (1 != pixelRatio) {
-        r.moveTo(r.topLeft() * pixelRatio);
-        r.setSize(r.size() * pixelRatio);
-    }
-#else
-    const int val = 5;
-#endif
-    r += QMargins(0, 0, val, val);
-    return r.intersected(limits);
 }
 
 void TextTool::paintMousePreview(QPainter& painter,
@@ -166,7 +150,7 @@ void TextTool::paintMousePreview(QPainter& painter,
 
 void TextTool::drawEnd(const QPoint& p)
 {
-    m_backupArea.moveTo(p);
+    m_textArea.moveTo(p);
 }
 
 void TextTool::drawMove(const QPoint& p)
@@ -258,11 +242,11 @@ void TextTool::updateFontItalic(const bool italic)
 
 void TextTool::move(const QPoint& pos)
 {
-    m_backupArea.moveTo(pos);
+    m_textArea.moveTo(pos);
 }
 
 const QPoint* TextTool::pos()
 {
-    m_currentPos = m_backupArea.topLeft();
+    m_currentPos = m_textArea.topLeft();
     return &m_currentPos;
 }
