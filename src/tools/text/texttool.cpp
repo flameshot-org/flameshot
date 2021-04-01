@@ -130,7 +130,7 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
 }
 
-void TextTool::drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
+void TextTool::drawObjectSelection(QPainter& painter)
 {
     if (m_text.isEmpty()) {
         return;

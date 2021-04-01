@@ -34,7 +34,7 @@ public:
                            const CaptureContext& context) override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
-    void drawObjectSelection(QPainter& painter, const QPixmap& pixmap) override;
+    void drawObjectSelection(QPainter& painter) override;
 
 protected:
     ToolType nameID() const override;

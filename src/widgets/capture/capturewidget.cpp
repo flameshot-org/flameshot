@@ -1227,7 +1227,7 @@ void CaptureWidget::drawToolsData(const bool updateLayersPanel,
         toolItem->process(painter, pixmapItem);
         if (drawSelection) {
             if (m_panel->activeLayerIndex() == index) {
-                toolItem->drawObjectSelection(painter, pixmapItem);
+                toolItem->drawObjectSelection(painter);
             }
             index++;
         }
@@ -1247,7 +1247,7 @@ void CaptureWidget::drawObjectSelection()
         auto toolItem = m_captureToolObjects.at(layerIndex);
         if (toolItem) {
             QPainter painter(&m_context.screenshot);
-            toolItem->drawObjectSelection(painter, m_context.screenshot);
+            toolItem->drawObjectSelection(painter);
         }
     }
 }

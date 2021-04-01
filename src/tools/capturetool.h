@@ -147,11 +147,7 @@ public:
     {
         process(painter, pixmap);
     };
-    virtual void drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
-    {
-        Q_UNUSED(painter);
-        Q_UNUSED(pixmap);
-    };
+    virtual void drawObjectSelection(QPainter& painter) { Q_UNUSED(painter) };
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
@@ -171,10 +167,12 @@ protected:
     }
     void drawObjectSelectionRect(QPainter& painter, QRect rect)
     {
+        QPen orig_pen = painter.pen();
         painter.setPen(QPen(Qt::black, 3));
         painter.drawRect(rect);
         painter.setPen(QPen(Qt::white, 1, Qt::DotLine));
         painter.drawRect(rect);
+        painter.setPen(orig_pen);
     }
 
 public slots:
