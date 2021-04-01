@@ -21,6 +21,7 @@ public:
     void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
+    void drawObjectSelection(QPainter& painter) override;
 
 protected:
     ToolType nameID() const override;
@@ -28,4 +29,7 @@ protected:
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
+
+private:
+    QPainterPath m_arrowPath;
 };

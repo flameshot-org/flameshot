@@ -17,8 +17,7 @@ public:
     bool showMousePreview() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
-    virtual void drawObjectSelection(QPainter& painter,
-                                     const QPixmap& pixmap) override;
+    virtual void drawObjectSelection(QPainter& painter) override;
 
 public slots:
     void drawEnd(const QPoint& p) override;

@@ -135,15 +135,14 @@ const QPoint* AbstractTwoPointTool::pos()
     return &m_points.first;
 }
 
-void AbstractTwoPointTool::drawObjectSelection(QPainter& painter,
-                                               const QPixmap& pixmap)
+void AbstractTwoPointTool::drawObjectSelection(QPainter& painter)
 {
-    QPen orig_pen = painter.pen();
-    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
-    painter.drawRect(std::min(m_points.first.x(), m_points.second.x()),
-                     std::min(m_points.first.y(), m_points.second.y()),
-                     std::abs(m_points.first.x() - m_points.second.x()),
-                     std::abs(m_points.first.y() - m_points.second.y()));
-
-    painter.setPen(orig_pen);
+    int offset =
+      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
+    QRect rect =
+      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
+            std::min(m_points.first.y(), m_points.second.y()) - offset,
+            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
+            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
+    drawObjectSelectionRect(painter, rect);
 }

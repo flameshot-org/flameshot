@@ -130,15 +130,12 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
 }
 
-void TextTool::drawObjectSelection(QPainter& painter, const QPixmap& pixmap)
+void TextTool::drawObjectSelection(QPainter& painter)
 {
     if (m_text.isEmpty()) {
         return;
     }
-    QPen orig_pen = painter.pen();
-    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
-    painter.drawRect(m_textArea);
-    painter.setPen(orig_pen);
+    drawObjectSelectionRect(painter, m_textArea);
 }
 
 void TextTool::paintMousePreview(QPainter& painter,
