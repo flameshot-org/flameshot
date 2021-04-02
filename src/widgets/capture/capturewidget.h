@@ -13,7 +13,7 @@
 
 #include "buttonhandler.h"
 #include "capturetoolbutton.h"
-#include "capturetoolobjectshistory.h"
+#include "capturetoolobjects.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
@@ -173,7 +173,7 @@ private:
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
 
-    CaptureToolObjectsHistory m_captureToolObjects;
+    CaptureToolObjects m_captureToolObjects;
 
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;

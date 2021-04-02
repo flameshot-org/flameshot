@@ -510,8 +510,9 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         } else {
             if (e->pos() == m_mousePressedPos) {
                 // mouse clicked even
-                int historyPos = m_captureToolObjects.find(e->pos(), size());
-                m_panel->setActiveLayer(historyPos);
+                int activeLayerIndex =
+                  m_captureToolObjects.find(e->pos(), size());
+                m_panel->setActiveLayer(activeLayerIndex);
             }
             drawToolsData(true, true);
         }
@@ -1144,6 +1145,7 @@ void CaptureWidget::initShortcuts()
 void CaptureWidget::deleteCurrentTool()
 {
     emit m_panel->slotButtonDelete(true);
+    drawObjectSelection();
 }
 
 void CaptureWidget::updateSizeIndicator()
@@ -1246,6 +1248,7 @@ void CaptureWidget::drawToolsData(const bool updateLayersPanel,
     update();
     if (updateLayersPanel) {
         m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
+        drawObjectSelection();
     }
 }
 
@@ -1328,13 +1331,13 @@ void CaptureWidget::saveScreenshot()
 
 void CaptureWidget::undo()
 {
-    m_captureToolObjects.undo();
+    //    m_captureToolObjects.undo();
     drawToolsData();
 }
 
 void CaptureWidget::redo()
 {
-    m_captureToolObjects.redo();
+    //    m_captureToolObjects.redo();
     drawToolsData();
 }
 
