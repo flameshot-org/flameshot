@@ -13,7 +13,7 @@ target_sources(
         orientablepushbutton.h
         historywidget.h
         updatenotificationwidget.h
-        capture/capturetoolobjectshistory.h
+        capture/capturetoolobjects.h
 )
 
 target_sources(
@@ -27,5 +27,5 @@ target_sources(
         orientablepushbutton.cpp
         historywidget.cpp
         updatenotificationwidget.cpp
-        capture/capturetoolobjectshistory.cpp
+        capture/capturetoolobjects.cpp
 )
