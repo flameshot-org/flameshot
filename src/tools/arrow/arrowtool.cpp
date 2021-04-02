@@ -65,6 +65,12 @@ ArrowTool::ArrowTool(QObject* parent)
     m_supportsDiagonalAdj = true;
 }
 
+ArrowTool& ArrowTool::operator=(const ArrowTool& other)
+{
+    this->m_arrowPath = other.m_arrowPath;
+    return *this;
+}
+
 QIcon ArrowTool::icon(const QColor& background, bool inEditor) const
 {
     Q_UNUSED(inEditor)

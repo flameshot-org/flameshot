@@ -20,6 +20,7 @@
 #include "src/widgets/capture/selectionwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QPointer>
+#include <QUndoStack>
 #include <QWidget>
 
 class QPaintEvent;
@@ -175,4 +176,6 @@ private:
 
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;
+
+    QUndoStack m_undoStack;
 };

@@ -51,8 +51,8 @@ void PencilTool::drawStart(const CaptureContext& context)
     m_color = context.color;
     m_thickness = context.thickness + 2;
     m_points.append(context.mousePos);
-    m_backupArea.setTopLeft(context.mousePos);
-    m_backupArea.setBottomRight(context.mousePos);
+    m_pathArea.setTopLeft(context.mousePos);
+    m_pathArea.setBottomRight(context.mousePos);
 }
 
 void PencilTool::pressed(const CaptureContext& context)

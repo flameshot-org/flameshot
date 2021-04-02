@@ -36,6 +36,19 @@ AbstractTwoPointTool::AbstractTwoPointTool(QObject* parent)
   , m_padding(0)
 {}
 
+AbstractTwoPointTool& AbstractTwoPointTool::operator=(
+  const AbstractTwoPointTool& other)
+{
+    this->m_points = QPair(m_points.first, m_points.second);
+    this->m_color = other.m_color;
+    this->m_thickness = other.m_thickness;
+    this->m_padding = other.m_padding;
+    this->m_supportsOrthogonalAdj = other.m_supportsOrthogonalAdj;
+    this->m_supportsDiagonalAdj = other.m_supportsDiagonalAdj;
+
+    return *this;
+}
+
 bool AbstractTwoPointTool::isValid() const
 {
     return (m_points.first != m_points.second);

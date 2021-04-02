@@ -92,6 +92,12 @@ public:
       , m_count(0)
     {}
 
+    CaptureTool& operator=(const CaptureTool& other)
+    {
+        this->m_count = other.m_count;
+        return *this;
+    }
+
     virtual void setCapture(const QPixmap& pixmap){};
 
     // Returns false when the tool is in an inconsistent state and shouldn't

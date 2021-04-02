@@ -20,6 +20,7 @@ public:
     int size();
     int find(const QPoint& pos, const QSize& captureSize);
     QPointer<CaptureTool> toolAt(int index);
+    CaptureToolObjects& operator=(const CaptureToolObjects& other);
 
 private:
     int findWithRadius(QPainter& painter,
@@ -27,6 +28,7 @@ private:
                        const QPoint& pos,
                        int radius = 0);
 
+    // class members
     QList<QPointer<CaptureTool>> m_captureToolObjects;
     QVector<QImage> m_imageCache;
 };
