@@ -1124,6 +1124,10 @@ void CaptureWidget::initShortcuts()
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                   this,
                   SLOT(moveDown()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
+      this,
+      SLOT(deleteCurrentTool()));
 
     new QShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_COMMIT_CURRENT_TOOL")),
@@ -1135,6 +1139,11 @@ void CaptureWidget::initShortcuts()
                   SLOT(selectAll()));
 
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+}
+
+void CaptureWidget::deleteCurrentTool()
+{
+    emit m_panel->slotButtonDelete(true);
 }
 
 void CaptureWidget::updateSizeIndicator()
