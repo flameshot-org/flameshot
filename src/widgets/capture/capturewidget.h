@@ -81,6 +81,8 @@ private slots:
     void moveUp();
     void moveDown();
 
+    void deleteCurrentTool();
+
     void uploadScreenshot();
 
     void setState(CaptureToolButton* b);
