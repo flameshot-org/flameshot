@@ -12,6 +12,22 @@ TextTool::TextTool(QObject* parent)
   , m_size(1)
 {}
 
+TextTool& TextTool::operator=(const TextTool& other)
+{
+    this->m_font = other.m_font;
+    this->m_text = other.m_text;
+    this->m_size = other.m_size;
+    this->m_color = other.m_color;
+    this->m_textArea = other.m_textArea;
+    this->m_currentPos = other.m_currentPos;
+
+    // TODO - need to think what to do with it
+    //    QPointer<TextWidget> m_widget;
+    //    QPointer<TextConfig> m_confW;
+
+    return *this;
+}
+
 bool TextTool::isValid() const
 {
     return !m_text.isEmpty();

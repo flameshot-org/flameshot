@@ -18,6 +18,19 @@ public:
     void move(const QPoint& mousePos) override;
     const QPoint* pos() override;
     void drawObjectSelection(QPainter& painter) override;
+    AbstractPathTool& operator=(const AbstractPathTool& other)
+    {
+        this->m_points = other.m_points;
+        this->m_color = other.m_color;
+        this->m_thickness = other.m_thickness;
+        this->m_padding = other.m_padding;
+        this->m_pos = other.m_pos;
+
+        // TODO - check that it objects are really coping
+        // QVector<QPoint> m_points;
+        this->m_points = other.m_points;
+        return *this;
+    }
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -28,8 +41,8 @@ public slots:
 protected:
     void addPoint(const QPoint& point);
 
-    QPixmap m_pixmapBackup;
-    QRect m_backupArea;
+    // class members
+    QRect m_pathArea;
     QColor m_color;
     QVector<QPoint> m_points;
     int m_thickness;

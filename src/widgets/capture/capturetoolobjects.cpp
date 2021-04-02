@@ -114,3 +114,12 @@ QPointer<CaptureTool> CaptureToolObjects::toolAt(int index)
     }
     return nullptr;
 }
+
+CaptureToolObjects& CaptureToolObjects::operator=(
+  const CaptureToolObjects& other)
+{
+    for (auto item : other.m_captureToolObjects) {
+        auto itemCopy = item;
+        this->m_captureToolObjects.append(itemCopy);
+    }
+}

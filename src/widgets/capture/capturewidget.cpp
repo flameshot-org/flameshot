@@ -177,6 +177,9 @@ CaptureWidget::CaptureWidget(const uint id,
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
 
+    connect(&m_undoStack, &QUndoStack::indexChanged, this, [this](int) {
+        this->drawToolsData(true, true);
+    });
     initPanel();
 }
 
@@ -848,6 +851,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
     switch (r) {
         case CaptureTool::REQ_CLEAR_MODIFICATIONS:
             m_captureToolObjects.clear();
+            m_undoStack.setIndex(0);
             update();
             break;
 
@@ -1221,10 +1225,26 @@ void CaptureWidget::pushToolToStack()
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
 
-    // append current tool and update undo history position
+    // append current tool to current state
     m_captureToolObjects.append(m_activeTool);
-    m_activeTool = nullptr;
 
+    // push to undo stack
+    //    auto mod = new ModificationCommand(&m_context.screenshot,
+    //    m_activeTool); disconnect(this,
+    //               &CaptureWidget::colorChanged,
+    //               m_activeTool,
+    //               &CaptureTool::colorChanged);
+    //    disconnect(this,
+    //               &CaptureWidget::thicknessChanged,
+    //               m_activeTool,
+    //               &CaptureTool::thicknessChanged);
+    //    if (m_panel->toolWidget()) {
+    //        disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
+    //    }
+    //    m_undoStack.push(mod);
+
+    //
+    m_activeTool = nullptr;
     drawToolsData();
 }
 
@@ -1331,12 +1351,14 @@ void CaptureWidget::saveScreenshot()
 
 void CaptureWidget::undo()
 {
+    m_undoStack.undo();
     //    m_captureToolObjects.undo();
     drawToolsData();
 }
 
 void CaptureWidget::redo()
 {
+    m_undoStack.redo();
     //    m_captureToolObjects.redo();
     drawToolsData();
 }

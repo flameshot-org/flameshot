@@ -16,6 +16,8 @@ class TextTool : public CaptureTool
 public:
     explicit TextTool(QObject* parent = nullptr);
 
+    TextTool& operator=(const TextTool& other);
+
     bool isValid() const override;
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;

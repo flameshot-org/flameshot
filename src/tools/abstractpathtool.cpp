@@ -52,15 +52,15 @@ void AbstractPathTool::thicknessChanged(const int th)
 
 void AbstractPathTool::addPoint(const QPoint& point)
 {
-    if (m_backupArea.left() > point.x()) {
-        m_backupArea.setLeft(point.x());
-    } else if (m_backupArea.right() < point.x()) {
-        m_backupArea.setRight(point.x());
+    if (m_pathArea.left() > point.x()) {
+        m_pathArea.setLeft(point.x());
+    } else if (m_pathArea.right() < point.x()) {
+        m_pathArea.setRight(point.x());
     }
-    if (m_backupArea.top() > point.y()) {
-        m_backupArea.setTop(point.y());
-    } else if (m_backupArea.bottom() < point.y()) {
-        m_backupArea.setBottom(point.y());
+    if (m_pathArea.top() > point.y()) {
+        m_pathArea.setTop(point.y());
+    } else if (m_pathArea.bottom() < point.y()) {
+        m_pathArea.setBottom(point.y());
     }
     m_points.append(point);
 }
