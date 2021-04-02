@@ -9,7 +9,6 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QTimer>
-#include <QVBoxLayout>
 
 UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   : QWidget(captureWidget)
@@ -22,6 +21,7 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   , m_hideAnimation(nullptr)
   , m_layersLayout(nullptr)
   , m_captureTools(nullptr)
+  , m_buttonDelete(nullptr)
 {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -201,6 +201,7 @@ void UtilityPanel::slotCaptureToolsCurrentRowChanged(int currentRow)
 
 void UtilityPanel::slotButtonDelete(bool clicked)
 {
+    Q_UNUSED(clicked)
     int currentRow = m_captureTools->currentRow();
     if (currentRow > 0) {
         m_captureWidget->removeToolObject(currentRow);
