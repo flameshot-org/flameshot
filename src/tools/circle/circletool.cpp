@@ -36,7 +36,9 @@ QString CircleTool::description() const
 
 CaptureTool* CircleTool::copy(QObject* parent)
 {
-    return new CircleTool(parent);
+    CircleTool* tool = new CircleTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void CircleTool::process(QPainter& painter, const QPixmap& pixmap)

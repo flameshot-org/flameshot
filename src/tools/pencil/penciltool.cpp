@@ -30,7 +30,9 @@ QString PencilTool::description() const
 
 CaptureTool* PencilTool::copy(QObject* parent)
 {
-    return new PencilTool(parent);
+    PencilTool* tool = new PencilTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void PencilTool::process(QPainter& painter, const QPixmap& pixmap)

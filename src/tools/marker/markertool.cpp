@@ -39,7 +39,9 @@ QString MarkerTool::description() const
 
 CaptureTool* MarkerTool::copy(QObject* parent)
 {
-    return new MarkerTool(parent);
+    MarkerTool* tool = new MarkerTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void MarkerTool::process(QPainter& painter, const QPixmap& pixmap)

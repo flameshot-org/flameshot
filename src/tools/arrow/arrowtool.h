@@ -13,8 +13,6 @@ class ArrowTool : public AbstractTwoPointTool
 public:
     explicit ArrowTool(QObject* parent = nullptr);
 
-    ArrowTool& operator=(const ArrowTool& other);
-
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
@@ -26,6 +24,7 @@ public:
     void drawObjectSelection(QPainter& painter) override;
 
 protected:
+    void copyParams(const ArrowTool* from, ArrowTool* to);
     ToolType nameID() const override;
 
 public slots:

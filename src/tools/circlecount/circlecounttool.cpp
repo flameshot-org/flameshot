@@ -38,7 +38,9 @@ QString CircleCountTool::description() const
 
 CaptureTool* CircleCountTool::copy(QObject* parent)
 {
-    return new CircleCountTool(parent);
+    CircleCountTool* tool = new CircleCountTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)

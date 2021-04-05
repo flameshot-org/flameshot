@@ -18,7 +18,6 @@ public:
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
     virtual void drawObjectSelection(QPainter& painter) override;
-    AbstractTwoPointTool& operator=(const AbstractTwoPointTool& other);
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -30,8 +29,10 @@ public slots:
 private:
     QPoint adjustedVector(QPoint v) const;
 
-    // class members
 protected:
+    void copyParams(const AbstractTwoPointTool* from, AbstractTwoPointTool* to);
+
+    // class members
     QPair<QPoint, QPoint> m_points;
     QColor m_color;
     int m_thickness;

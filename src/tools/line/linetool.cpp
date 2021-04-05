@@ -22,6 +22,7 @@ QIcon LineTool::icon(const QColor& background, bool inEditor) const
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "line.svg");
 }
+
 QString LineTool::name() const
 {
     return tr("Line");
@@ -39,7 +40,9 @@ QString LineTool::description() const
 
 CaptureTool* LineTool::copy(QObject* parent)
 {
-    return new LineTool(parent);
+    LineTool* tool = new LineTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void LineTool::process(QPainter& painter, const QPixmap& pixmap)

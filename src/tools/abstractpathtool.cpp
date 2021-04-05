@@ -10,20 +10,18 @@ AbstractPathTool::AbstractPathTool(QObject* parent)
   , m_padding(0)
 {}
 
-AbstractPathTool& AbstractPathTool::operator=(const AbstractPathTool& other)
+void AbstractPathTool::copyParams(const AbstractPathTool* from,
+                                  AbstractPathTool* to)
 {
-    CaptureTool::operator=(other);
+    to->m_color = from->m_color;
+    to->m_thickness = from->m_thickness;
+    to->m_padding = from->m_padding;
+    to->m_pos = from->m_pos;
 
-    this->m_points = other.m_points;
-    this->m_color = other.m_color;
-    this->m_thickness = other.m_thickness;
-    this->m_padding = other.m_padding;
-    this->m_pos = other.m_pos;
-
-    // TODO - check that it objects are really coping
-    // QVector<QPoint> m_points;
-    this->m_points = other.m_points;
-    return *this;
+    to->m_points.clear();
+    for (auto point : from->m_points) {
+        to->m_points.append(point);
+    }
 }
 
 bool AbstractPathTool::isValid() const

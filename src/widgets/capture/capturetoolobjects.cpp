@@ -118,10 +118,21 @@ QPointer<CaptureTool> CaptureToolObjects::toolAt(int index)
 CaptureToolObjects& CaptureToolObjects::operator=(
   const CaptureToolObjects& other)
 {
-    this->m_captureToolObjects.clear();
+    // remove extra items for this if size is bigger
+    while (this->m_captureToolObjects.size() >
+           other.m_captureToolObjects.size()) {
+        this->m_captureToolObjects.removeLast();
+    }
+
+    int count = 0;
     for (auto item : other.m_captureToolObjects) {
-        auto itemCopy = item;
-        this->m_captureToolObjects.append(itemCopy);
+        QPointer<CaptureTool> itemCopy = item->copy(item->parent());
+        if (count < this->m_captureToolObjects.size()) {
+            this->m_captureToolObjects[count] = itemCopy;
+        } else {
+            this->m_captureToolObjects.append(itemCopy);
+        }
+        count++;
     }
     return *this;
 }
