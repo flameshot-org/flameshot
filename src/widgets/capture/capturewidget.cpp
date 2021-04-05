@@ -19,6 +19,7 @@
 #include "src/utils/systemnotification.h"
 #include "src/widgets/capture/colorpicker.h"
 #include "src/widgets/capture/hovereventfilter.h"
+#include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
@@ -176,9 +177,6 @@ CaptureWidget::CaptureWidget(const uint id,
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
 
-    connect(&m_undoStack, &QUndoStack::indexChanged, this, [this](int) {
-        this->drawToolsData(true, true);
-    });
     initPanel();
 }
 
@@ -378,6 +376,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
     int activeLayerIndex = m_panel->activeLayerIndex();
     if (m_mouseIsClicked && !m_activeButton && activeLayerIndex >= 0) {
+        // Move existing object
         QPointer<CaptureTool> activeTool =
           m_captureToolObjects.toolAt(activeLayerIndex);
         if (m_activeToolOffsetToMouseOnStart.isNull()) {
@@ -1218,25 +1217,12 @@ void CaptureWidget::pushToolToStack()
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
 
-    // append current tool to current state
+    // push current state to the undo stack
+    m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
+
+    // append current tool to the new state
     m_captureToolObjects.append(m_activeTool);
 
-    // push to undo stack
-    //    auto mod = new ModificationCommand(&m_context.screenshot,
-    //    m_activeTool); disconnect(this,
-    //               &CaptureWidget::colorChanged,
-    //               m_activeTool,
-    //               &CaptureTool::colorChanged);
-    //    disconnect(this,
-    //               &CaptureWidget::thicknessChanged,
-    //               m_activeTool,
-    //               &CaptureTool::thicknessChanged);
-    //    if (m_panel->toolWidget()) {
-    //        disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
-    //    }
-    //    m_undoStack.push(mod);
-
-    //
     m_activeTool = nullptr;
     drawToolsData();
 }
@@ -1332,18 +1318,21 @@ void CaptureWidget::saveScreenshot()
     close();
 }
 
+void CaptureWidget::setCaptureToolObjects(
+  const CaptureToolObjects& captureToolObjects)
+{
+    m_captureToolObjects = captureToolObjects;
+    drawToolsData(true, true);
+}
+
 void CaptureWidget::undo()
 {
     m_undoStack.undo();
-    //    m_captureToolObjects.undo();
-    drawToolsData();
 }
 
 void CaptureWidget::redo()
 {
     m_undoStack.redo();
-    //    m_captureToolObjects.redo();
-    drawToolsData();
 }
 
 QRect CaptureWidget::extendedSelection() const

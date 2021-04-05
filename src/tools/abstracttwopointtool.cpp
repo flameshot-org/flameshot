@@ -39,6 +39,8 @@ AbstractTwoPointTool::AbstractTwoPointTool(QObject* parent)
 AbstractTwoPointTool& AbstractTwoPointTool::operator=(
   const AbstractTwoPointTool& other)
 {
+    CaptureTool::operator=(other);
+
     this->m_points = QPair(m_points.first, m_points.second);
     this->m_color = other.m_color;
     this->m_thickness = other.m_thickness;

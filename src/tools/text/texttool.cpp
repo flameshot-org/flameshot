@@ -14,6 +14,8 @@ TextTool::TextTool(QObject* parent)
 
 TextTool& TextTool::operator=(const TextTool& other)
 {
+    CaptureTool::operator=(other);
+
     this->m_font = other.m_font;
     this->m_text = other.m_text;
     this->m_size = other.m_size;
