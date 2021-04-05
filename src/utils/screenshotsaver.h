@@ -3,8 +3,9 @@
 
 #pragma once
 
+#include <QString>
+
 class QPixmap;
-class QString;
 class QWidget;
 
 class ScreenshotSaver
@@ -25,4 +26,10 @@ private:
                                const QString& title,
                                const QString& directory,
                                const QString& filter);
+
+    QString pngFilter = "Portable Network Graphic file (PNG) (*.png)";
+    QString bmpFilter = "BMP file (*.bmp)";
+    QString jpgFilter = "JPEG file (*.jpg)";
+    QString defaultFilter = "By extension [default: *.png] (*.png)";
+    QString separator = ";;";
 };
