@@ -21,6 +21,7 @@ public:
 private:
     CaptureToolObjects m_captureToolObjects;
     CaptureWidget* m_captureWidget;
+    bool m_firstRun;
 };
 
 #endif // FLAMESHOT_MODIFICATIONCOMMAND_H

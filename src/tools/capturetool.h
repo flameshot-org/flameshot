@@ -162,10 +162,17 @@ public:
     virtual void move(const QPoint& pos) { Q_UNUSED(pos); };
     virtual const QPoint* pos() { return nullptr; };
 
+    virtual void params(){};
+
 signals:
     void requestAction(Request r);
 
 protected:
+    void copyParams(const CaptureTool* from, CaptureTool* to)
+    {
+        to->m_count = from->m_count;
+    }
+
     QString iconPath(const QColor& c) const
     {
         return ColorUtils::colorIsDark(c) ? PathInfo::whiteIconPath()

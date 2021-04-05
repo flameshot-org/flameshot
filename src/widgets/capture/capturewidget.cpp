@@ -496,6 +496,10 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         if (!m_context.color.isValid()) {
             m_context.color = ConfigHandler().drawColorValue();
             m_panel->show();
+        } else {
+            // push current state to the undo stack
+            m_undoStack.push(
+              new ModificationCommand(this, m_captureToolObjects));
         }
         // when we end the drawing we have to register the last  point and
         // add the temp modification to the list of modifications
@@ -967,6 +971,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
     if (activeLayerIndex >= 0) {
         auto toolItem = m_captureToolObjects.at(activeLayerIndex);
         if (toolItem) {
+            // Change color
             emit toolItem->colorChanged(c);
             drawToolsData(false, true);
         }

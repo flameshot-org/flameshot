@@ -18,7 +18,6 @@ public:
     void move(const QPoint& mousePos) override;
     const QPoint* pos() override;
     void drawObjectSelection(QPainter& painter) override;
-    AbstractPathTool& operator=(const AbstractPathTool& other);
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -27,6 +26,7 @@ public slots:
     void thicknessChanged(const int th) override;
 
 protected:
+    void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
     void addPoint(const QPoint& point);
 
     // class members

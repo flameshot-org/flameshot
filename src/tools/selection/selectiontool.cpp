@@ -41,7 +41,9 @@ QString SelectionTool::description() const
 
 CaptureTool* SelectionTool::copy(QObject* parent)
 {
-    return new SelectionTool(parent);
+    SelectionTool* tool = new SelectionTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)

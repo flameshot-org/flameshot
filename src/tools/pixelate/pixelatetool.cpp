@@ -35,7 +35,9 @@ QString PixelateTool::description() const
 
 CaptureTool* PixelateTool::copy(QObject* parent)
 {
-    return new PixelateTool(parent);
+    PixelateTool* tool = new PixelateTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
