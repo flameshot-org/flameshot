@@ -58,6 +58,7 @@
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
     - [On Ubuntu](#on-ubuntu-tested-on-1804)
+    - [On XFCE 4](#on-xfce-4)
 - [Considerations](#considerations)
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
@@ -260,6 +261,22 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
 4. Then click "_Set Shortcut.._" and press <kbd>Prt Sc</kbd>. This will show as "_print_".
 
 Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
+
+
+#### On XFCE 4
+
+1. Go to `Keyboard` settings
+2. Switch to the tab `Application Shortcuts`
+3. Find the entry
+        
+    ```text
+    Command                        Shortcut
+    xfce4-screenshooter -fd 1      Print
+    ````
+4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
+
+Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
+
 
 ## Considerations
 
