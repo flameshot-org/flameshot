@@ -67,6 +67,7 @@ ArrowTool::ArrowTool(QObject* parent)
 
 ArrowTool& ArrowTool::operator=(const ArrowTool& other)
 {
+    AbstractTwoPointTool::operator=(other);
     this->m_arrowPath = other.m_arrowPath;
     return *this;
 }

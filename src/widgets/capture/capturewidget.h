@@ -48,6 +48,7 @@ public:
     QPixmap pixmap();
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
+    void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
 
 public slots:
     bool commitCurrentTool();

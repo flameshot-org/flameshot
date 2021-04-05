@@ -118,8 +118,10 @@ QPointer<CaptureTool> CaptureToolObjects::toolAt(int index)
 CaptureToolObjects& CaptureToolObjects::operator=(
   const CaptureToolObjects& other)
 {
+    this->m_captureToolObjects.clear();
     for (auto item : other.m_captureToolObjects) {
         auto itemCopy = item;
         this->m_captureToolObjects.append(itemCopy);
     }
+    return *this;
 }
