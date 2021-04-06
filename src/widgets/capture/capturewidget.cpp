@@ -339,6 +339,18 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     m_activeToolOffsetToMouseOnStart = QPoint();
 
     if (e->button() == Qt::RightButton) {
+        int activeLayerIndex = m_panel->activeLayerIndex();
+        if (activeLayerIndex >= 0) {
+            // Reset selection if mouse pos is not in selection area
+            auto toolItem = m_captureToolObjects.at(activeLayerIndex);
+            if (toolItem) {
+                if (!toolItem->selectionRect().contains(e->pos())) {
+                    m_panel->setActiveLayer(-1);
+                    drawToolsData(false, true);
+                }
+            }
+        }
+
         m_rightClick = true;
         m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
                             e->pos().y() - m_colorPicker->height() / 2);
