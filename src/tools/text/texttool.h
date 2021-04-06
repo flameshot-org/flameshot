@@ -47,6 +47,7 @@ public slots:
     void pressed(const CaptureContext& context) override;
     void colorChanged(const QColor& c) override;
     void thicknessChanged(const int th) override;
+    virtual int thickness() override { return m_size; };
 
 private slots:
     void updateText(const QString& s);

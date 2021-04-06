@@ -201,6 +201,7 @@ public slots:
     virtual void colorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.
     virtual void thicknessChanged(const int th) = 0;
+    virtual int thickness() { return -1; };
 
 private:
     unsigned int m_count;
