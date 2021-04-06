@@ -8,7 +8,6 @@ ModificationCommand::ModificationCommand(
   CaptureWidget* captureWidget,
   const CaptureToolObjects& captureToolObjects)
   : m_captureWidget(captureWidget)
-  , m_firstRun(true)
 {
     m_captureToolObjects = captureToolObjects;
 }
@@ -20,8 +19,5 @@ void ModificationCommand::undo()
 
 void ModificationCommand::redo()
 {
-    if (!m_firstRun) {
-        m_captureWidget->setCaptureToolObjects(m_captureToolObjects);
-    }
-    m_firstRun = false;
+    m_captureWidget->setCaptureToolObjects(m_captureToolObjects);
 }

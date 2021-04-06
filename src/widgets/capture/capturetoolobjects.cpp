@@ -67,6 +67,7 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
 {
     int index = m_captureToolObjects.size() - 1;
     bool useCache = true;
+    m_imageCache.clear();
     if (m_imageCache.size() != m_captureToolObjects.size() && index >= 0) {
         // TODO - is not optimal and cache will be used just after first tool
         // object selecting

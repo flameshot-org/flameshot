@@ -60,8 +60,10 @@ CaptureWidget::CaptureWidget(const uint id,
   , m_id(id)
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
-  , m_cmdCurrentState(nullptr)
   , m_activeToolIsMoved(false)
+  , m_lastPressedUndo(false)
+  , m_lastPressedRedo(false)
+
 {
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
@@ -188,9 +190,6 @@ CaptureWidget::~CaptureWidget()
         emit captureTaken(m_id, this->pixmap(), m_context.selection);
     } else {
         emit captureFailed(m_id);
-    }
-    if (m_cmdCurrentState) {
-        delete m_cmdCurrentState;
     }
     m_config.setDrawThickness(m_context.thickness);
 }
@@ -324,13 +323,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
     m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
-
-    // Save current object state (before color or other changes) for the
-    // undo/redo stack
-    if (m_cmdCurrentState) {
-        delete m_cmdCurrentState;
-    }
-    m_cmdCurrentState = new ModificationCommand(this, m_captureToolObjects);
 
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
@@ -509,11 +501,9 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             m_context.color = ConfigHandler().drawColorValue();
             m_panel->show();
         } else {
-            // push current state (before changes) to the undo stack
-            if (m_cmdCurrentState) {
-                m_undoStack.push(m_cmdCurrentState);
-                m_cmdCurrentState = nullptr;
-            }
+            // push current state to the undo stack
+            m_undoStack.push(
+              new ModificationCommand(this, m_captureToolObjects));
         }
         // when we end the drawing we have to register the last  point and
         // add the temp modification to the list of modifications
@@ -528,10 +518,10 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
                 m_activeTool = nullptr;
             }
         } else {
-            if (m_activeToolIsMoved && m_cmdCurrentState) {
-                // push current state (before changes) to the undo stack
-                m_undoStack.push(m_cmdCurrentState);
-                m_cmdCurrentState = nullptr;
+            if (m_activeToolIsMoved) {
+                // push current state to the undo stack
+                m_undoStack.push(
+                  new ModificationCommand(this, m_captureToolObjects));
             }
 
             if (e->pos() == m_mousePressedPos) {
@@ -1245,11 +1235,16 @@ void CaptureWidget::pushToolToStack()
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
 
-    // push current state to the undo stack
-    m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
+    // push zero state to be able to do a complete undo
+    if (m_undoStack.count() == 0) {
+        m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
+    }
 
     // append current tool to the new state
     m_captureToolObjects.append(m_activeTool);
+
+    // push current state to the undo stack
+    m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
 
     m_activeTool = nullptr;
     drawToolsData();
@@ -1355,11 +1350,27 @@ void CaptureWidget::setCaptureToolObjects(
 
 void CaptureWidget::undo()
 {
+    // FIXME - m_lastPressedUndo and m_lastPressedRedo is a brutal hack, cannot
+    // understand why first undo/redo has no effect so need to do it twice if it
+    // is the firs operation
+    if (!m_lastPressedUndo) {
+        m_undoStack.undo();
+    }
+    m_lastPressedUndo = true;
+    m_lastPressedRedo = false;
     m_undoStack.undo();
 }
 
 void CaptureWidget::redo()
 {
+    // FIXME - m_lastPressedUndo and m_lastPressedRedo is a brutal hack, cannot
+    // understand why first undo/redo has no effect so need to do it twice if it
+    // is the firs operation
+    if (!m_lastPressedRedo) {
+        m_undoStack.redo();
+    }
+    m_lastPressedUndo = false;
+    m_lastPressedRedo = true;
     m_undoStack.redo();
 }
 
