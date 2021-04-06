@@ -62,6 +62,7 @@ CaptureWidget::CaptureWidget(const uint id,
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
   , m_cmdCurrentState(nullptr)
+  , m_activeToolIsMoved(false)
 {
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
@@ -399,6 +400,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         }
         QPoint pos = e->pos() - m_activeToolOffsetToMouseOnStart;
         activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
+        m_activeToolIsMoved = true;
         drawToolsData(false);
     } else if (m_mouseIsClicked && !m_activeButton) {
         // Drawing, moving, or stretching a selection
@@ -528,6 +530,12 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
                 m_activeTool = nullptr;
             }
         } else {
+            if (m_activeToolIsMoved && m_cmdCurrentState) {
+                // push current state (before changes) to the undo stack
+                m_undoStack.push(m_cmdCurrentState);
+                m_cmdCurrentState = nullptr;
+            }
+
             if (e->pos() == m_mousePressedPos) {
                 // mouse clicked even
                 int activeLayerIndex =
@@ -561,6 +569,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         m_buttonHandler->show();
     }
     m_mouseIsClicked = false;
+    m_activeToolIsMoved = false;
     m_newSelection = false;
     m_grabbing = false;
 
