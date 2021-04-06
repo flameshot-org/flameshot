@@ -32,6 +32,7 @@ class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
 class UpdateNotificationWidget;
+class ModificationCommand;
 
 class CaptureWidget : public QWidget
 {
@@ -159,6 +160,7 @@ private:
     // Last pressed button
     QPointer<CaptureToolButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
+    ModificationCommand* m_cmdCurrentState;
     QPointer<QWidget> m_toolWidget;
 
     ButtonHandler* m_buttonHandler;
