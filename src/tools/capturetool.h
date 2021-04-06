@@ -157,6 +157,7 @@ public:
     virtual const QPoint* pos() { return nullptr; };
 
     virtual void params(){};
+    const QRect& selectionRect() { return m_selectionRect; };
 
 signals:
     void requestAction(Request r);
@@ -172,6 +173,7 @@ protected:
         return ColorUtils::colorIsDark(c) ? PathInfo::whiteIconPath()
                                           : PathInfo::blackIconPath();
     }
+
     void drawObjectSelectionRect(QPainter& painter, QRect rect)
     {
         QPen orig_pen = painter.pen();
@@ -180,6 +182,7 @@ protected:
         painter.setPen(QPen(Qt::white, 1, Qt::DotLine));
         painter.drawRect(rect);
         painter.setPen(orig_pen);
+        m_selectionRect = rect;
     }
 
 public slots:
@@ -201,4 +204,5 @@ public slots:
 
 private:
     unsigned int m_count;
+    QRect m_selectionRect;
 };
