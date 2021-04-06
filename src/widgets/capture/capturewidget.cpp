@@ -682,6 +682,21 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         update();
     }
     emit thicknessChanged(m_context.thickness);
+
+    // update selected object thickness
+    int activeLayerIndex = m_panel->activeLayerIndex();
+    if (activeLayerIndex >= 0) {
+        // Reset selection if mouse pos is not in selection area
+        auto toolItem = m_captureToolObjects.at(activeLayerIndex);
+        if (toolItem) {
+            toolItem->thicknessChanged(m_context.thickness);
+            drawToolsData(false, true);
+
+            // TODO - save thickness update, but not immediately
+            m_undoStack.push(
+              new ModificationCommand(this, m_captureToolObjects));
+        }
+    }
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
