@@ -62,7 +62,6 @@ signals:
     void thicknessChanged(const int thickness);
 
 private slots:
-
     // TODO replace with tools
     void copyScreenshot();
     void saveScreenshot();
@@ -161,6 +160,7 @@ private:
     QPointer<CaptureToolButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
     ModificationCommand* m_cmdCurrentState;
+    bool m_activeToolIsMoved;
     QPointer<QWidget> m_toolWidget;
 
     ButtonHandler* m_buttonHandler;
