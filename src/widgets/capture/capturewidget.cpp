@@ -283,12 +283,26 @@ bool CaptureWidget::commitCurrentTool()
 
 void CaptureWidget::deleteToolWidgetOrClose()
 {
-    if (m_panel->isVisible()) {
+    if (!m_activeButton.isNull()) {
+        // uncheck active tool
+        m_activeButton->setColor(m_uiColor);
+        m_activeButton = nullptr;
+        updateCursor();
+        update(); // clear mouse preview
+    } else if (m_panel->activeLayerIndex() >= 0) {
+        // remove active tool selection
+        int activeLayerIndex = m_panel->activeLayerIndex();
+        m_panel->setActiveLayer(-1);
+        drawToolsData(false, true);
+    } else if (m_panel->isVisible()) {
+        // hide panel if visible
         m_panel->hide();
     } else if (m_toolWidget) {
+        // delete toolWidget if exists
         m_toolWidget->deleteLater();
         m_toolWidget = nullptr;
     } else {
+        // close CaptureWidget
         close();
     }
 }
@@ -841,6 +855,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
             }
             m_activeButton = b;
             m_activeButton->setColor(m_contrastUiColor);
+            m_panel->setActiveLayer(-1);
         } else if (m_activeButton) {
             m_panel->clearToolWidget();
             m_activeButton->setColor(m_uiColor);
