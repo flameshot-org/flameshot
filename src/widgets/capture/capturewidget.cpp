@@ -1331,6 +1331,8 @@ void CaptureWidget::drawObjectSelection()
         if (toolItem) {
             QPainter painter(&m_context.screenshot);
             toolItem->drawObjectSelection(painter);
+            m_context.thickness =
+              toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
         }
     }
 }

@@ -18,6 +18,7 @@ public:
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
     virtual void drawObjectSelection(QPainter& painter) override;
+    virtual int thickness() override { return m_thickness; };
 
 public slots:
     void drawEnd(const QPoint& p) override;
