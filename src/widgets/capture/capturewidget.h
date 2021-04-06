@@ -32,7 +32,6 @@ class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
 class UpdateNotificationWidget;
-class ModificationCommand;
 
 class CaptureWidget : public QWidget
 {
@@ -161,7 +160,6 @@ private:
     // Last pressed button
     QPointer<CaptureToolButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
-    ModificationCommand* m_cmdCurrentState;
     bool m_activeToolIsMoved;
     QPointer<QWidget> m_toolWidget;
 
@@ -183,4 +181,8 @@ private:
     QPoint m_activeToolOffsetToMouseOnStart;
 
     QUndoStack m_undoStack;
+
+    // TODO - should be remove after fixing undo()/redo() functions
+    bool m_lastPressedUndo;
+    bool m_lastPressedRedo;
 };
