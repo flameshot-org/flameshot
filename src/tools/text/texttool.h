@@ -37,6 +37,7 @@ public:
     void drawObjectSelection(QPainter& painter) override;
 
 protected:
+    void copyParams(const TextTool* from, TextTool* to);
     ToolType nameID() const override;
 
 public slots:

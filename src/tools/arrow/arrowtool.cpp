@@ -87,7 +87,15 @@ QString ArrowTool::description() const
 
 CaptureTool* ArrowTool::copy(QObject* parent)
 {
-    return new ArrowTool(parent);
+    ArrowTool* tool = new ArrowTool(parent);
+    copyParams(this, tool);
+    return tool;
+}
+
+void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
+{
+    AbstractTwoPointTool::copyParams(from, to);
+    to->m_arrowPath = this->m_arrowPath;
 }
 
 void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)

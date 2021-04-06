@@ -20,6 +20,7 @@
 #include "src/widgets/capture/selectionwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
 #include <QPointer>
+#include <QUndoStack>
 #include <QWidget>
 
 class QPaintEvent;
@@ -47,6 +48,7 @@ public:
     QPixmap pixmap();
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
+    void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
 
 public slots:
     bool commitCurrentTool();
@@ -59,7 +61,6 @@ signals:
     void thicknessChanged(const int thickness);
 
 private slots:
-
     // TODO replace with tools
     void copyScreenshot();
     void saveScreenshot();
@@ -159,6 +160,7 @@ private:
     // Last pressed button
     QPointer<CaptureToolButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
+    bool m_activeToolIsMoved;
     QPointer<QWidget> m_toolWidget;
 
     ButtonHandler* m_buttonHandler;
@@ -177,4 +179,10 @@ private:
 
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;
+
+    QUndoStack m_undoStack;
+
+    // TODO - should be remove after fixing undo()/redo() functions
+    bool m_lastPressedUndo;
+    bool m_lastPressedRedo;
 };

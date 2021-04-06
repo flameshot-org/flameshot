@@ -10,6 +10,20 @@ AbstractPathTool::AbstractPathTool(QObject* parent)
   , m_padding(0)
 {}
 
+void AbstractPathTool::copyParams(const AbstractPathTool* from,
+                                  AbstractPathTool* to)
+{
+    to->m_color = from->m_color;
+    to->m_thickness = from->m_thickness;
+    to->m_padding = from->m_padding;
+    to->m_pos = from->m_pos;
+
+    to->m_points.clear();
+    for (auto point : from->m_points) {
+        to->m_points.append(point);
+    }
+}
+
 bool AbstractPathTool::isValid() const
 {
     return m_points.length() > 1;
@@ -52,15 +66,15 @@ void AbstractPathTool::thicknessChanged(const int th)
 
 void AbstractPathTool::addPoint(const QPoint& point)
 {
-    if (m_backupArea.left() > point.x()) {
-        m_backupArea.setLeft(point.x());
-    } else if (m_backupArea.right() < point.x()) {
-        m_backupArea.setRight(point.x());
+    if (m_pathArea.left() > point.x()) {
+        m_pathArea.setLeft(point.x());
+    } else if (m_pathArea.right() < point.x()) {
+        m_pathArea.setRight(point.x());
     }
-    if (m_backupArea.top() > point.y()) {
-        m_backupArea.setTop(point.y());
-    } else if (m_backupArea.bottom() < point.y()) {
-        m_backupArea.setBottom(point.y());
+    if (m_pathArea.top() > point.y()) {
+        m_pathArea.setTop(point.y());
+    } else if (m_pathArea.bottom() < point.y()) {
+        m_pathArea.setBottom(point.y());
     }
     m_points.append(point);
 }

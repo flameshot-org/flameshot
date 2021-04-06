@@ -37,7 +37,9 @@ QString RectangleTool::description() const
 
 CaptureTool* RectangleTool::copy(QObject* parent)
 {
-    return new RectangleTool(parent);
+    RectangleTool* tool = new RectangleTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
 void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)

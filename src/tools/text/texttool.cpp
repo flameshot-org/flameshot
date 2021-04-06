@@ -12,6 +12,21 @@ TextTool::TextTool(QObject* parent)
   , m_size(1)
 {}
 
+void TextTool::copyParams(const TextTool* from, TextTool* to)
+{
+    CaptureTool::copyParams(from, to);
+    to->m_font = from->m_font;
+    to->m_text = from->m_text;
+    to->m_size = from->m_size;
+    to->m_color = from->m_color;
+    to->m_textArea = from->m_textArea;
+    to->m_currentPos = from->m_currentPos;
+
+    // TODO - need to think what to do with it
+    //    QPointer<TextWidget> m_widget;
+    //    QPointer<TextConfig> m_confW;
+}
+
 bool TextTool::isValid() const
 {
     return !m_text.isEmpty();
@@ -95,21 +110,27 @@ QWidget* TextTool::configurationWidget()
 CaptureTool* TextTool::copy(QObject* parent)
 {
     TextTool* tt = new TextTool(parent);
-    connect(
-      m_confW, &TextConfig::fontFamilyChanged, tt, &TextTool::updateFamily);
-    connect(
-      m_confW, &TextConfig::fontItalicChanged, tt, &TextTool::updateFontItalic);
-    connect(m_confW,
-            &TextConfig::fontStrikeOutChanged,
-            tt,
-            &TextTool::updateFontStrikeOut);
-    connect(m_confW,
-            &TextConfig::fontUnderlineChanged,
-            tt,
-            &TextTool::updateFontUnderline);
-    connect(
-      m_confW, &TextConfig::fontWeightChanged, tt, &TextTool::updateFontWeight);
-    tt->m_font = m_font;
+    if (m_confW) {
+        connect(
+          m_confW, &TextConfig::fontFamilyChanged, tt, &TextTool::updateFamily);
+        connect(m_confW,
+                &TextConfig::fontItalicChanged,
+                tt,
+                &TextTool::updateFontItalic);
+        connect(m_confW,
+                &TextConfig::fontStrikeOutChanged,
+                tt,
+                &TextTool::updateFontStrikeOut);
+        connect(m_confW,
+                &TextConfig::fontUnderlineChanged,
+                tt,
+                &TextTool::updateFontUnderline);
+        connect(m_confW,
+                &TextConfig::fontWeightChanged,
+                tt,
+                &TextTool::updateFontWeight);
+    }
+    copyParams(this, tt);
     return tt;
 }
 

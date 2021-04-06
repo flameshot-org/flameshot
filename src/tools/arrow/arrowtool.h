@@ -24,6 +24,7 @@ public:
     void drawObjectSelection(QPainter& painter) override;
 
 protected:
+    void copyParams(const ArrowTool* from, ArrowTool* to);
     ToolType nameID() const override;
 
 public slots:

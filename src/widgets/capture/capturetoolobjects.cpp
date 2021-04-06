@@ -67,6 +67,7 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
 {
     int index = m_captureToolObjects.size() - 1;
     bool useCache = true;
+    m_imageCache.clear();
     if (m_imageCache.size() != m_captureToolObjects.size() && index >= 0) {
         // TODO - is not optimal and cache will be used just after first tool
         // object selecting
@@ -113,4 +114,26 @@ QPointer<CaptureTool> CaptureToolObjects::toolAt(int index)
         return m_captureToolObjects[index];
     }
     return nullptr;
+}
+
+CaptureToolObjects& CaptureToolObjects::operator=(
+  const CaptureToolObjects& other)
+{
+    // remove extra items for this if size is bigger
+    while (this->m_captureToolObjects.size() >
+           other.m_captureToolObjects.size()) {
+        this->m_captureToolObjects.removeLast();
+    }
+
+    int count = 0;
+    for (auto item : other.m_captureToolObjects) {
+        QPointer<CaptureTool> itemCopy = item->copy(item->parent());
+        if (count < this->m_captureToolObjects.size()) {
+            this->m_captureToolObjects[count] = itemCopy;
+        } else {
+            this->m_captureToolObjects.append(itemCopy);
+        }
+        count++;
+    }
+    return *this;
 }

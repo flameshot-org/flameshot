@@ -26,16 +26,20 @@ public slots:
     void colorChanged(const QColor& c) override;
     void thicknessChanged(const int th) override;
 
+private:
+    QPoint adjustedVector(QPoint v) const;
+
 protected:
+    void copyParams(const AbstractTwoPointTool* from, AbstractTwoPointTool* to);
+
+    // class members
     QPair<QPoint, QPoint> m_points;
     QColor m_color;
     int m_thickness;
+
     // use m_padding to extend the area of the backup
     int m_padding;
 
     bool m_supportsOrthogonalAdj = false;
     bool m_supportsDiagonalAdj = false;
-
-private:
-    QPoint adjustedVector(QPoint v) const;
 };

@@ -26,10 +26,11 @@ public slots:
     void thicknessChanged(const int th) override;
 
 protected:
+    void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
     void addPoint(const QPoint& point);
 
-    QPixmap m_pixmapBackup;
-    QRect m_backupArea;
+    // class members
+    QRect m_pathArea;
     QColor m_color;
     QVector<QPoint> m_points;
     int m_thickness;
