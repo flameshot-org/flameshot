@@ -61,6 +61,7 @@ CaptureWidget::CaptureWidget(const uint id,
   , m_id(id)
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
+  , m_cmdCurrentState(nullptr)
 {
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
@@ -187,6 +188,9 @@ CaptureWidget::~CaptureWidget()
         emit captureTaken(m_id, this->pixmap(), m_context.selection);
     } else {
         emit captureFailed(m_id);
+    }
+    if (m_cmdCurrentState) {
+        delete m_cmdCurrentState;
     }
     m_config.setDrawThickness(m_context.thickness);
 }
@@ -321,6 +325,14 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
     m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
+
+    // Save current object state (before color or other changes) for the
+    // undo/redo stack
+    if (m_cmdCurrentState) {
+        delete m_cmdCurrentState;
+    }
+    m_cmdCurrentState = new ModificationCommand(this, m_captureToolObjects);
+
     if (e->button() == Qt::RightButton) {
         m_rightClick = true;
         m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
@@ -497,9 +509,11 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             m_context.color = ConfigHandler().drawColorValue();
             m_panel->show();
         } else {
-            // push current state to the undo stack
-            m_undoStack.push(
-              new ModificationCommand(this, m_captureToolObjects));
+            // push current state (before changes) to the undo stack
+            if (m_cmdCurrentState) {
+                m_undoStack.push(m_cmdCurrentState);
+                m_cmdCurrentState = nullptr;
+            }
         }
         // when we end the drawing we have to register the last  point and
         // add the temp modification to the list of modifications
