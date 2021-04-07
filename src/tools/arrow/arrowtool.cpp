@@ -101,10 +101,10 @@ void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
 void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(m_color, m_thickness));
+    painter.setPen(QPen(m_color, thickness()));
     painter.drawLine(
-      getShorterLine(m_points.first, m_points.second, m_thickness));
-    m_arrowPath = getArrowHead(m_points.first, m_points.second, m_thickness);
+      getShorterLine(m_points.first, m_points.second, thickness()));
+    m_arrowPath = getArrowHead(m_points.first, m_points.second, thickness());
     painter.fillPath(m_arrowPath, QBrush(m_color));
 }
 
@@ -118,7 +118,7 @@ void ArrowTool::paintMousePreview(QPainter& painter,
 void ArrowTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
+    setThickness(context.thickness + PADDING_VALUE);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
 }
@@ -131,7 +131,7 @@ void ArrowTool::pressed(const CaptureContext& context)
 void ArrowTool::drawObjectSelection(QPainter& painter)
 {
     int offset =
-      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
+      thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
 
     // get min and max arrow pos
     int min_x = m_points.first.x();

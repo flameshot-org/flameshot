@@ -59,7 +59,7 @@ void AbstractPathTool::colorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractPathTool::thicknessChanged(int th)
+void AbstractPathTool::setThickness(int th)
 {
     m_thickness = th;
 }

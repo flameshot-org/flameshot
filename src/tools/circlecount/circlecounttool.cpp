@@ -49,7 +49,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QBrush orig_brush = painter.brush();
     painter.setBrush(m_color);
 
-    int bubble_size = m_thickness;
+    int bubble_size = thickness();
     painter.drawEllipse(m_points.first, bubble_size, bubble_size);
     QRect textRect = QRect(m_points.first.x() - bubble_size / 2,
                            m_points.first.y() - bubble_size / 2,
@@ -92,7 +92,7 @@ void CircleCountTool::drawObjectSelection(QPainter& painter)
 {
     QPen orig_pen = painter.pen();
     painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
-    int bubble_size = m_thickness;
+    int bubble_size = thickness();
     painter.drawRect(m_points.first.x() - bubble_size,
                      m_points.first.y() - bubble_size,
                      bubble_size * 2,
@@ -103,15 +103,15 @@ void CircleCountTool::drawObjectSelection(QPainter& painter)
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
-    m_thickness = context.thickness + PADDING_VALUE;
-    if (m_thickness < 15) {
-        m_thickness = 15;
+    setThickness(context.thickness + PADDING_VALUE);
+    if (thickness() < 15) {
+        setThickness(15);
     }
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function
     painter.setPen(
-      QPen(context.color, m_thickness * 2, Qt::SolidLine, Qt::RoundCap));
+      QPen(context.color, thickness() * 2, Qt::SolidLine, Qt::RoundCap));
     painter.drawLine(context.mousePos,
                      { context.mousePos.x() + 1, context.mousePos.y() + 1 });
 }
@@ -119,9 +119,9 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
-    if (m_thickness < 15) {
-        m_thickness = 15;
+    setThickness(context.thickness + PADDING_VALUE);
+    if (thickness() < 15) {
+        setThickness(15);
     }
     m_points.first = context.mousePos;
     setCount(context.circleCount);

@@ -24,7 +24,7 @@ public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
+    void setThickness(int th) override;
 
 protected:
     void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
@@ -34,8 +34,10 @@ protected:
     QRect m_pathArea;
     QColor m_color;
     QVector<QPoint> m_points;
-    int m_thickness;
     // use m_padding to extend the area of the backup
     int m_padding;
     QPoint m_pos;
+
+private:
+    int m_thickness;
 };

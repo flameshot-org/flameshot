@@ -50,7 +50,7 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
       QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
     // If thickness is less than 1, use old blur process
-    if (m_thickness <= 1) {
+    if (thickness() <= 1) {
 
         QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
         blur->setBlurRadius(10);
@@ -68,9 +68,9 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 
     } else {
         int width =
-          static_cast<int>(selection.width() * (0.5 / qMax(1, m_thickness)));
+          static_cast<int>(selection.width() * (0.5 / qMax(1, thickness())));
         int height =
-          static_cast<int>(selection.height() * (0.5 / qMax(1, m_thickness)));
+          static_cast<int>(selection.height() * (0.5 / qMax(1, thickness())));
         QSize size = QSize(qMax(width, 1), qMax(height, 1));
 
         QPixmap t = pixmap.copy(selectionScaled);
@@ -99,7 +99,7 @@ void PixelateTool::paintMousePreview(QPainter& painter,
 
 void PixelateTool::drawStart(const CaptureContext& context)
 {
-    m_thickness = context.thickness;
+    setThickness(context.thickness);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
 }
