@@ -494,6 +494,20 @@ void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
     m_settings.setValue(QStringLiteral("historyConfirmationToDelete"), check);
 }
 
+int ConfigHandler::uploadHistoryMaxSizeValue()
+{
+    int max = 25;
+    if (m_settings.contains(QStringLiteral("uploadHistoryMax"))) {
+        max = m_settings.value(QStringLiteral("uploadHistoryMax")).toInt();
+    }
+    return max;
+}
+
+void ConfigHandler::setUploadHistoryMaxSize(const int max)
+{
+    m_settings.setValue(QStringLiteral("uploadHistoryMax"), max);
+}
+
 bool ConfigHandler::saveAfterCopyValue()
 {
     return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();

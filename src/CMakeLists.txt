@@ -73,10 +73,14 @@ add_subdirectory(utils)
 add_subdirectory(widgets)
 add_subdirectory(tools)
 
+
+
+
 set(FLAMESHOT_TS_FILES
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
+        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
@@ -86,7 +90,9 @@ set(FLAMESHOT_TS_FILES
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nb_NO.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
+        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
         ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
@@ -237,6 +243,10 @@ configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
 configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.service.in
         ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service)
 
+# Install man pages
+configure_file(${CMAKE_SOURCE_DIR}/data/man/man1/flameshot.1
+        ${CMAKE_CURRENT_BINARY_DIR}/share/man/man1/flameshot.1 COPYONLY)
+
 # Install Icons
 configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/org.flameshot.Flameshot.png
         ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/org.flameshot.Flameshot.png COPYONLY)
@@ -286,10 +296,14 @@ if (WIN32)
 
         install(DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/ DESTINATION bin)
 
+
+        STRING(REGEX REPLACE "\\\\" "/" OPENSSL_ROOT_DIR $ENV{OPENSSL_ROOT_DIR} )
+ 
         if (ENABLE_OPENSSL)
-            if (EXISTS $ENV{OPENSSL_ROOT_DIR}/bin)
-                install(
-                        DIRECTORY $ENV{OPENSSL_ROOT_DIR}/bin/
+            if (EXISTS ${OPENSSL_ROOT_DIR}/bin)
+
+             install(
+                        DIRECTORY ${OPENSSL_ROOT_DIR}/bin/
                         DESTINATION bin
                         FILES_MATCHING
                         PATTERN "*.dll")

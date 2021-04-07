@@ -1,0 +1,140 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2018 Boyuan Yang <073plan@gmail.com>,
+.\" This file is released under CC0 1.0 Universal (CC0-1.0) license.
+.\"
+.TH "FLAMESHOT" "1" "2021-03-11"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+flameshot \- Powerful yet simple-to-use screenshot software
+.SH SYNOPSIS
+.B flameshot
+[arguments] [flameshot\-options]
+.br
+.B flameshot gui
+[gui options]
+.br
+.B flameshot launcher
+.br
+.B flameshot full
+[fullscreen capture options]
+.br
+.B flameshot screen
+[screen\-options]
+.br
+.B flameshot config
+[config options]
+.SH DESCRIPTION
+This manual page documents briefly the
+.B flameshot
+command as provided by
+.B flameshot
+package.
+.PP
+\fBflameshot\fP is a screenshot tool that aims to be powerful yet simple-to-use.
+Its notable features include customizable appearance, in-app screenshot editing,
+D-Bus interface, tray icon support, experimental GNOME/KDE Wayland support,
+integration with Imgur and support for both GUI and CLI interface.
+.PP
+Besides the brief information about \fBflameshot\fR here, The detailed
+usage of \fBflameshot\fP is documented in the \fIREADME.md\fR file distributed
+alongside this software. Typically you may find this file under
+\fI/usr/share/doc/flameshot/\fR directory.
+.
+.SH GUI USAGE
+.PP
+This section lists some of the most common usage of \fBflameshot\fR via
+command line.
+.
+.TP
+.B flameshot
+Start flameshot and have it running in background. If enabled,
+an icon will appear in the tray area of current desktop environment.
+.
+.TP
+.B flameshot gui
+Capture with GUI.
+.
+.TP
+\fBflameshot gui\fR \-p /path/to/captures
+Capture with GUI and custom save path.
+.
+.TP
+\fBflameshot gui\fR \-d 2000
+Open GUI with a delay of 2 seconds.
+.
+.TP
+.B flameshot launcher
+Open a launcher dialog for advanced screenshot, such as custom
+time delay, etc.
+.
+.TP
+.B flameshot full \-\-help
+Shows help for \fBflameshot full\fR subcommand.
+.
+.TP
+\fB flameshot full\fR -p /path/to/captures -d 5000
+Fullscreen capture with custom save path (no GUI) and time delay.
+.
+.TP
+\fB flameshot full\fR -c -p /path/to/captures
+Fullscreen capture with custom savepath copying to clipboard.
+.
+.TP
+\fB flameshot screen\fR \-\-number <screen number>
+Define the screen to capture. Will capture the screen containing the
+cursor by default.
+.
+.TP
+\fB flameshot screen\fR \-\-help
+Shows help for \fBflameshot screen\fR subcommand.
+.SH CLI CONFIGURATION
+.PP
+You may use the graphical menu to configure flameshot.
+Alternatively, you can also use terminal or scripts to do so.
+.
+.TP
+.B flameshot config
+Open the configuration menu (GUI).
+.
+.TP
+\fBflameshot config\fR \-h
+Use the help flag to show more information about the available options.
+.SH SEE ALSO
+.PP
+The program is further documented in the
+.IR README.md
+as typically provided under
+.IR /usr/share/doc/flameshot/
+directory.
+You may also find more detailed online documentation on upstream
+project homepage.
+.
+.PP
+Upstream project homepage:
+<\fBhttps://flameshot.org/\fR>.
+.
+.SH AUTHOR
+.PP
+.B flameshot
+was initially written by
+.MT izhe@\:hotmail.es
+lupoDharkael
+.ME .
+.
+.PP
+This manual page is written by
+.MT byang@\:debian.org
+Boyuan Yang
+.ME
+for the Debian Project (but may be used by others).

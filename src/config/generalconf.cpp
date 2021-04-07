@@ -11,6 +11,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSpinBox>
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
@@ -33,6 +34,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
+    initUploadHistoryMaxSize();
 
     // this has to be at the end
     initConfigButtons();
@@ -178,6 +180,7 @@ void GeneralConf::setActualFormData()
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
+    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 }
 
@@ -399,6 +402,38 @@ void GeneralConf::initSaveAfterCopy()
 void GeneralConf::historyConfirmationToDelete(bool checked)
 {
     ConfigHandler().setHistoryConfirmationToDelete(checked);
+}
+
+void GeneralConf::initUploadHistoryMaxSize()
+{
+    QGroupBox* box = new QGroupBox(tr("Latest Uploads Max Size"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+    m_layout->addStretch();
+
+    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    int max = ConfigHandler().uploadHistoryMaxSizeValue();
+
+    m_uploadHistoryMaxSize = new QSpinBox(this);
+    m_uploadHistoryMaxSize->setMaximum(1000);
+    m_uploadHistoryMaxSize->setValue(max);
+    QString foreground = this->palette().windowText().color().name();
+    m_uploadHistoryMaxSize->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+
+    connect(m_uploadHistoryMaxSize,
+            SIGNAL(valueChanged(int)),
+            this,
+            SLOT(uploadHistoryMaxSizeChanged(int)));
+
+    vboxLayout->addWidget(m_uploadHistoryMaxSize);
+}
+
+void GeneralConf::uploadHistoryMaxSizeChanged(int max)
+{
+    ConfigHandler().setUploadHistoryMaxSize(max);
 }
 
 void GeneralConf::initUseJpgForClipboard()

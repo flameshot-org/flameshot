@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.1" language="nb_NO">
 <context>
     <name>AppLauncher</name>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>Lanceur d&apos;applications</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Sélectionner une application pour ouvrir la capture</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19,33 +19,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation>Ouvrir Avec</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
         <source>Launch in terminal</source>
-        <translation>Lancer dans le terminal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Keep open after selection</source>
-        <translation>Maintenir ouvert après la sélection</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Error</source>
-        <translation>Erreur</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
-        <source>Unable to write in</source>
-        <translation>Impossible d&apos;écrire dessus</translation>
+        <translation type="unfinished">Error</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Impossible de lancer dans le terminal.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
+        <source>Unable to write in</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -53,23 +53,23 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="74"/>
         <source>Arrow</source>
-        <translation>Flèche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="84"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Flèche</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>BlurTool</name>
     <message>
         <source>Blur</source>
-        <translation type="vanished">Flou</translation>
+        <translation type="vanished">Desenfocament</translation>
     </message>
     <message>
         <source>Set Blur as the paint tool</source>
-        <translation type="vanished">Sélectionner l&apos;outil Flou</translation>
+        <translation type="vanished">Estableix el desenfocament com a eina de dibuix</translation>
     </message>
 </context>
 <context>
@@ -77,52 +77,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Mode de capture&lt;/b&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="47"/>
         <source>Rectangular Region</source>
-        <translation>Région rectangulaire</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Plein écran (affichage actuel)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>Plein écran (tous les moniteurs)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>No Delay</source>
-        <translation>Aucun retard</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> second</source>
-        <translation> seconde</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> seconds</source>
-        <translation> secondes</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="76"/>
         <source>Take new screenshot</source>
-        <translation>Prendre une nouvelle capture</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="85"/>
         <source>Area:</source>
-        <translation>Zone&#xa0;:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Delay:</source>
-        <translation>Retard&#xa0;:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -130,7 +130,8 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="90"/>
         <source>Unable to capture screen</source>
-        <translation>Impossible de capturer l&apos;écran</translation>
+        <translatorcomment>Impossible capturar la pantalla</translatorcomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="339"/>
@@ -139,16 +140,12 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Sélectionner une zone avec la souris ou appuyer sur Echap pour quitter
-Appuyer sur Entrée pour capturer l&apos;écran
-Effectuer un clic droit pour afficher le sélecteur de couleurs.
-Utiliser la molette de la souris pour changer l&apos;épaisseur de l&apos;outil.
-Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="722"/>
         <source>Tool Settings</source>
-        <translation>Réglages des outils</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -169,12 +166,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="24"/>
         <source>Circle</source>
-        <translation>Ellipse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Ellipse</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -182,22 +179,22 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
-        <translation>Configuration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
-        <translation>Interface</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
-        <translation>Editeur de Noms</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation>Général</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
@@ -225,17 +222,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="293"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation type="unfinished">Error</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="293"/>
         <source>Unable to close active modal widgets</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/core/controller.cpp" line="398"/>
-        <source>&amp;Take Screenshot</source>
-        <translation>&amp;Capturer l&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="414"/>
@@ -245,7 +237,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="419"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;Configuration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
@@ -264,12 +256,17 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation type="vanished">&amp;Informations</translation>
+        <translation type="vanished">&amp;Informació</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="428"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Quitter</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="398"/>
+        <source>&amp;Take Screenshot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -277,12 +274,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation>Copier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation>Copier la sélection dans le presse-papier</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -290,7 +287,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation>Impossible de se connecter via DBus</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -298,12 +295,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation>Sortir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Quitter l&apos;écran de capture</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -311,126 +308,114 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Editer le nom des captures:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation>Editer:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation>Prévisualisation:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation>Sauvegarder le modèle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Reset</source>
-        <translation>Réinitialiser</translation>
+        <translation type="unfinished">Reset</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation>Réstaurer le modèle sauvegardé</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation>Purger</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="87"/>
         <source>Deletes the name</source>
-        <translation>Supprime le nom</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GeneneralConf</name>
     <message>
-        <source>Import</source>
-        <translation type="vanished">Importer</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Erreur</translation>
-    </message>
-    <message>
-        <source>Unable to read file.</source>
-        <translation type="vanished">Impossible de lire le fichier.</translation>
-    </message>
-    <message>
-        <source>Unable to write file.</source>
-        <translation type="vanished">Impossible d&apos;écrire le fichier.</translation>
-    </message>
-    <message>
-        <source>Save File</source>
-        <translation type="vanished">Sauvegarder le fichier</translation>
-    </message>
-    <message>
-        <source>Confirm Reset</source>
-        <translation type="vanished">Confirmer la Réinitialisation</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to reset the configuration?</source>
-        <translation type="vanished">Êtes-vous sûr de vouloir réinitialiser la configuration ?</translation>
-    </message>
-    <message>
         <source>Show help message</source>
-        <translation type="vanished">Montrer le message d&apos;aide</translation>
+        <translation type="vanished">Mostra el missatge d&apos;ajuda</translation>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="vanished">Afficher ce message au lancement du mode capture.</translation>
+        <translation type="vanished">Mostra el missatge d&apos;ajuda en iniciar el mode de captura.</translation>
     </message>
     <message>
         <source>Show desktop notifications</source>
-        <translation type="vanished">Afficher les notifications du bureau</translation>
+        <translation type="vanished">Mostra les notificacions d&apos;escriptori</translation>
     </message>
     <message>
         <source>Show tray icon</source>
-        <translation type="vanished">Afficher les icones de la barre d&apos;état</translation>
+        <translation type="vanished">Mostra la icona en la barra de tasques</translation>
     </message>
     <message>
         <source>Show the systemtray icon</source>
-        <translation type="vanished">Afficher l&apos;icône dans la barre de tâches</translation>
+        <translation type="vanished">Mostra la icona en la barra de tasques</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="vanished">Importar</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="vanished">Error</translation>
+    </message>
+    <message>
+        <source>Unable to read file.</source>
+        <translation type="vanished">Impossible llegir el fitxer.</translation>
+    </message>
+    <message>
+        <source>Unable to write file.</source>
+        <translation type="vanished">Impossible escriure al fitxer.</translation>
+    </message>
+    <message>
+        <source>Save File</source>
+        <translation type="vanished">Guardar Arxiu</translation>
+    </message>
+    <message>
+        <source>Confirm Reset</source>
+        <translation type="vanished">Confirmar Reset</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to reset the configuration?</source>
+        <translation type="vanished">Esteu segur que voleu reiniciar la configuració?</translation>
     </message>
     <message>
         <source>Configuration File</source>
-        <translation type="vanished">Fichier de Configuration</translation>
+        <translation type="vanished">Fitxer de Configuració</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="vanished">Exporter</translation>
+        <translation type="vanished">Exportar</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Réinitialiser</translation>
+        <translation type="vanished">Reset</translation>
     </message>
     <message>
         <source>Launch at startup</source>
-        <translation type="vanished">Lancer au démarrage</translation>
-    </message>
-    <message>
-        <source>Launch Flameshot</source>
-        <translation type="vanished">Démarrer Flameshot</translation>
-    </message>
-    <message>
-        <source>Close after capture</source>
-        <translation type="vanished">Fermer après une capture</translation>
-    </message>
-    <message>
-        <source>Close after taking a screenshot</source>
-        <translation type="vanished">Fermer l&apos;application après une capture d&apos;écran</translation>
+        <translation type="vanished">Llançament a l&apos;inici</translation>
     </message>
 </context>
 <context>
@@ -439,7 +424,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <location filename="../../src/config/generalconf.cpp" line="106"/>
         <location filename="../../src/config/generalconf.cpp" line="278"/>
         <source>Import</source>
-        <translation type="unfinished">Importer</translation>
+        <translation type="unfinished">Importar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="113"/>
@@ -447,43 +432,43 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <location filename="../../src/config/generalconf.cpp" line="144"/>
         <location filename="../../src/config/generalconf.cpp" line="509"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation type="unfinished">Error</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="113"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Impossible de lire le fichier.</translation>
+        <translation type="unfinished">Impossible llegir el fitxer.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="121"/>
         <location filename="../../src/config/generalconf.cpp" line="144"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Impossible d&apos;écrire le fichier.</translation>
+        <translation type="unfinished">Impossible escriure al fitxer.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="131"/>
         <source>Save File</source>
-        <translation type="unfinished">Sauvegarder le fichier</translation>
+        <translation type="unfinished">Guardar Arxiu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="153"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Confirmer la Réinitialisation</translation>
+        <translation type="unfinished">Confirmar Reset</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Êtes-vous sûr de vouloir réinitialiser la configuration ?</translation>
+        <translation type="unfinished">Esteu segur que voleu reiniciar la configuració?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="189"/>
         <source>Show help message</source>
-        <translation type="unfinished">Montrer le message d&apos;aide</translation>
+        <translation type="unfinished">Mostra el missatge d&apos;ajuda</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="193"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">Afficher ce message au lancement du mode capture.</translation>
+        <translation type="unfinished">Mostra el missatge d&apos;ajuda en iniciar el mode de captura.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="203"/>
@@ -499,17 +484,17 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <location filename="../../src/config/generalconf.cpp" line="216"/>
         <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Afficher les notifications du bureau</translation>
+        <translation type="unfinished">Mostra les notificacions d&apos;escriptori</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="232"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">Afficher les icones de la barre d&apos;état</translation>
+        <translation type="unfinished">Mostra la icona en la barra de tasques</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="235"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">Afficher l&apos;icône dans la barre de tâches</translation>
+        <translation type="unfinished">Mostra la icona en la barra de tasques</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
@@ -520,17 +505,17 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Fichier de Configuration</translation>
+        <translation type="unfinished">Fitxer de Configuració</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="271"/>
         <source>Export</source>
-        <translation type="unfinished">Exporter</translation>
+        <translation type="unfinished">Exportar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="285"/>
         <source>Reset</source>
-        <translation type="unfinished">Réinitialiser</translation>
+        <translation type="unfinished">Reset</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="295"/>
@@ -541,13 +526,13 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="308"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">Lancer au démarrage</translation>
+        <translation type="unfinished">Llançament a l&apos;inici</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="311"/>
         <location filename="../../src/config/generalconf.cpp" line="325"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished">Démarrer Flameshot</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="321"/>
@@ -632,12 +617,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copier l&apos;URL</translation>
+        <translation type="unfinished">Copia l&apos;URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiée dans le Presse-papier.</translation>
+        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
@@ -659,46 +644,46 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <name>ImgS3Uploader</name>
     <message>
         <source>Uploading Image</source>
-        <translation type="obsolete">Mise en ligne de l&apos;image</translation>
+        <translation type="obsolete">S&apos;està pujant la imatge</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL copiée dans le Presse-papier.</translation>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Erreur</translation>
+        <translation type="obsolete">Error</translation>
     </message>
 </context>
 <context>
     <name>ImgUploader</name>
     <message>
         <source>Uploading Image</source>
-        <translation type="obsolete">Mise en ligne de l&apos;image</translation>
+        <translation type="obsolete">S&apos;està pujant la imatge</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="obsolete">Impossible d&apos;ouvrir l&apos;URL.</translation>
+        <translation type="obsolete">No es pot obrir l&apos;URL.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL copiée dans le Presse-papier.</translation>
+        <translation type="obsolete">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="obsolete">Capture d&apos;écran copiée dans le Presse-papier.</translation>
+        <translation type="obsolete">La captura s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="obsolete">Copier l&apos;URL</translation>
+        <translation type="obsolete">Copia l&apos;URL</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="obsolete">Ouvrir l&apos;URL</translation>
+        <translation type="obsolete">Obri l&apos;URL</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="obsolete">Image dans le Presse-papier.</translation>
+        <translation type="obsolete">Imatge al porta-retalls.</translation>
     </message>
 </context>
 <context>
@@ -706,22 +691,22 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
-        <translation>Mettre en ligne vers Imgur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>Mise en ligne de l&apos;image</translation>
+        <translation type="unfinished">S&apos;està pujant la imatge</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation>Copier l&apos;URL</translation>
+        <translation type="unfinished">Copia l&apos;URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation>Ouvrir l&apos;URL</translation>
+        <translation type="unfinished">Obri l&apos;URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
@@ -731,23 +716,23 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation>Image dans le Presse-papier.</translation>
+        <translation type="unfinished">Imatge al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
-        <translation>Impossible d&apos;ouvrir l&apos;URL.</translation>
+        <translation type="unfinished">No es pot obrir l&apos;URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL copiée dans le Presse-papier.</translation>
+        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Capture d&apos;écran copiée dans le Presse-papier.</translation>
+        <translation type="unfinished">La captura s&apos;ha copiat al porta-retalls.</translation>
     </message>
 </context>
 <context>
@@ -755,12 +740,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation>Mise en ligne d&apos;images</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
-        <translation>Mettre en ligne la sélection vers Imgur</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -768,73 +753,73 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="24"/>
         <source>About</source>
-        <translation>À propos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right Click</source>
-        <translation type="vanished">Clic Droit</translation>
+        <translation type="vanished">Clic dret</translation>
     </message>
     <message>
         <source>Mouse Wheel</source>
-        <translation type="vanished">Molette de la Souris</translation>
+        <translation type="vanished">Roda del ratolí</translation>
     </message>
     <message>
         <source>Move selection 1px</source>
-        <translation type="vanished">Déplacer la sélection 1px</translation>
+        <translation type="vanished">Mou la selecció 1 px</translation>
     </message>
     <message>
         <source>Resize selection 1px</source>
-        <translation type="vanished">Redimensionner la sélection 1px</translation>
+        <translation type="vanished">Redimensiona la selecció 1 px</translation>
     </message>
     <message>
         <source>Quit capture</source>
-        <translation type="vanished">Quitter la capture d&apos;écran</translation>
+        <translation type="vanished">Ix de la captura</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
-        <translation type="vanished">Copier vers le Presse-papier</translation>
+        <translation type="vanished">Copia al porta-retalls</translation>
     </message>
     <message>
         <source>Save selection as a file</source>
-        <translation type="vanished">Sauvegarder la sélection vers un fichier</translation>
+        <translation type="vanished">Guarda la selecció com a fitxer</translation>
     </message>
     <message>
         <source>Undo the last modification</source>
-        <translation type="vanished">Annuler la dernière modification</translation>
+        <translation type="vanished">Desfés l&apos;última modificació</translation>
     </message>
     <message>
         <source>Show color picker</source>
-        <translation type="vanished">Afficher la palette de couleurs</translation>
+        <translation type="vanished">Mostra el selector de color</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="vanished">Changer l&apos;épaisseur des outils</translation>
-    </message>
-    <message>
-        <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="vanished">Raccourcis disponibles en mode capture d&apos;écran.</translation>
+        <translation type="vanished">Canvia el gruix de l&apos;eina</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="vanished">Clé</translation>
+        <translation type="vanished">Tecla</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="vanished">Description</translation>
+        <translation type="vanished">Descripció</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="46"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Licences&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="55"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="vanished">&lt;u&gt;&lt;b&gt;Raccourci&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Dreceres&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+    <message>
+        <source>Available shortcuts in the screen capture mode.</source>
+        <translation type="vanished">Dreceres disponibles en el mode de captura de pantalla.</translation>
     </message>
 </context>
 <context>
@@ -842,12 +827,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="27"/>
         <source>Line</source>
-        <translation>Ligne</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="37"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Ligne</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -855,12 +840,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="27"/>
         <source>Marker</source>
-        <translation>Surligneur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Surligneur</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -868,12 +853,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="23"/>
         <source>Move</source>
-        <translation>Déplacer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Déplacer la sélection</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -881,12 +866,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
-        <translation>Crayon</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Crayon</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -894,12 +879,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
         <source>Pin Tool</source>
-        <translation>Outil Épinglage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Épingler l&apos;image sur le bureau</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -931,37 +916,14 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="152"/>
-        <source>Save Error</source>
-        <translation>Erreur lors de la sauvegarde</translation>
-    </message>
-    <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="139"/>
-        <source>Capture saved as </source>
-        <translation>Capture d&apos;écran sauvegardée sous </translation>
-    </message>
-    <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
         <source>Capture saved to clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
-        <source>Capture saved to clipboard</source>
-        <translation>Capture d&apos;écran copiée dans le Presse-papier</translation>
-    </message>
-    <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
         <source>Error while saving to clipboard</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="150"/>
-        <source>Error trying to save as </source>
-        <translation>Erreur lors de la sauvegarde sous </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="121"/>
@@ -974,13 +936,30 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="152"/>
+        <source>Save Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="139"/>
+        <source>Capture saved as </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="150"/>
+        <source>Error trying to save as </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/main.cpp" line="102"/>
         <location filename="../../src/main.cpp" line="277"/>
         <location filename="../../src/main.cpp" line="439"/>
         <location filename="../../src/main.cpp" line="467"/>
         <location filename="../../src/main.cpp" line="499"/>
         <source>Unable to connect via DBus</source>
-        <translation>Impossible de se connecter via DBus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="124"/>
@@ -1121,17 +1100,23 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation>Erreur</translation>
+        <translation type="unfinished">Error</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation>Impossible d&apos;écrire par dessus</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
+        <source>Capture saved to clipboard</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiée dans le Presse-papier.</translation>
+        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="50"/>
@@ -1226,7 +1211,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Quitter la capture d&apos;écran</translation>
+        <translation type="unfinished">Ix de la captura</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
@@ -1243,12 +1228,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="81"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Afficher la palette de couleurs</translation>
+        <translation type="unfinished">Mostra el selector de color</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="83"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Changer l&apos;épaisseur des outils</translation>
+        <translation type="unfinished">Canvia el gruix de l&apos;eina</translation>
     </message>
 </context>
 <context>
@@ -1256,12 +1241,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="25"/>
         <source>Rectangle</source>
-        <translation>Rectangle plein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="35"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Rectangle plein</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1269,12 +1254,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation>Rétablir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>Refaire la prochaine modification</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1282,12 +1267,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="29"/>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="39"/>
         <source>Save the capture</source>
-        <translation>Sauvegarder la capture d&apos;écran</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1295,7 +1280,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>
         <source>Unable to capture screen</source>
-        <translation>Impossible de capturer l&apos;écran</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1303,12 +1288,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="29"/>
         <source>Rectangular Selection</source>
-        <translation>Rectangle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="39"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Sélectionner l&apos;outil Rectangle</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1339,39 +1324,39 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Raccourcis disponibles en mode capture d&apos;écran.</translation>
+        <translation type="unfinished">Dreceres disponibles en el mode de captura de pantalla.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Description</source>
-        <translation type="unfinished">Description</translation>
+        <translation type="unfinished">Descripció</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation type="unfinished">Clé</translation>
+        <translation type="unfinished">Tecla</translation>
     </message>
 </context>
 <context>
     <name>SidePanelWidget</name>
     <message>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="62"/>
+        <source>Active thickness:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
         <source>Active color:</source>
-        <translation>Couleur actuelle:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
         <source>Press ESC to cancel</source>
-        <translation>Appuyer sur Echap pour annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="209"/>
         <source>Grab Color</source>
-        <translation>Saisir la couleur</translation>
-    </message>
-    <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="62"/>
-        <source>Active thickness:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1406,12 +1391,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation>Indicateur de la taille de la sélection</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation>Montrer les dimensions de la sélection (X Y)</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1419,107 +1404,107 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="37"/>
         <source>Century (00-99)</source>
-        <translation>Siècle (00-99)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="38"/>
         <source>Year (00-99)</source>
-        <translation>Année (00-99)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="39"/>
         <source>Year (2000)</source>
-        <translation>Année (2000)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="42"/>
         <source>Month Name (jan)</source>
-        <translation>Nom des Mois (jan)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="43"/>
         <source>Month Name (january)</source>
-        <translation>nom des Mois (janvier)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="45"/>
         <source>Month (01-12)</source>
-        <translation>Mois (01-12)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="46"/>
         <source>Week Day (1-7)</source>
-        <translation>Jour de la Semaine (1-7)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Week (01-53)</source>
-        <translation>Semaine (01-53)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="50"/>
         <source>Day Name (mon)</source>
-        <translation>Nom du Jour (lun)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="51"/>
         <source>Day Name (monday)</source>
-        <translation>Nom du Jour (lundi)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="53"/>
         <source>Day (01-31)</source>
-        <translation>Jour (01-31)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="54"/>
         <source>Day of Month (1-31)</source>
-        <translation>Jour du Mois (1-31)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="55"/>
         <source>Day (001-366)</source>
-        <translation>Jour de l&apos;année (001-366)</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
-        <source>Time (%H-%M-%S)</source>
-        <translation>Heure (%H-%M-%S)</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
-        <source>Time (%H-%M)</source>
-        <translation>Heure (%H-%M)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="61"/>
         <source>Hour (00-23)</source>
-        <translation>Heure (00-23)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="62"/>
         <source>Hour (01-12)</source>
-        <translation>Heure (01-12)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Minute (00-59)</source>
-        <translation>Minute (00-59)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Second (00-59)</source>
-        <translation>Seconde (00-59)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
         <source>Full Date (%m/%d/%y)</source>
-        <translation>Date (%m/%d/%y)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="69"/>
         <source>Full Date (%Y-%m-%d)</source>
-        <translation>Date Complête (%Y-%m-%d)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="58"/>
+        <source>Time (%H-%M-%S)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/strftimechooserwidget.cpp" line="59"/>
+        <source>Time (%H-%M)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1527,7 +1512,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="30"/>
         <source>Flameshot Info</source>
-        <translation>Info Flameshot</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1535,22 +1520,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="40"/>
         <source>StrikeOut</source>
-        <translation>Rayer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="49"/>
         <source>Underline</source>
-        <translation>Souligner</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="58"/>
         <source>Bold</source>
-        <translation>Gras</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="67"/>
         <source>Italic</source>
-        <translation>Italique</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1558,12 +1543,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="43"/>
         <source>Text</source>
-        <translation>Texte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="53"/>
         <source>Add text to your capture</source>
-        <translation>Ajouter du texte à la capture</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1571,37 +1556,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="18"/>
         <source>UI Color Editor</source>
-        <translation>Editeur de la Couleur de l&apos;interface</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Modifier la couleur en déplaçant les sélecteur et voir les changements dans les boutons de prévisualisation.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation>Sélectionner un bouton pour le modifier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
         <source>Main Color</source>
-        <translation>Couleur principale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Cliquer sur ce bouton pour définir le mode édition de la couleur principale.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
         <source>Contrast Color</source>
-        <translation>Couleur de contraste</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Cliquer sur ce bouton pour définir le mode édition de la couleur de contraste.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1609,12 +1594,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
         <source>Undo</source>
-        <translation>Annuler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
         <source>Undo the last modification</source>
-        <translation>Annuler la dernière modification</translation>
+        <translation type="unfinished">Desfés l&apos;última modificació</translation>
     </message>
 </context>
 <context>
@@ -1627,17 +1612,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation>Ignorer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation>Plus tard</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation>Mettre à jour</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1645,7 +1630,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="116"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1653,17 +1638,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="40"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Opacité de la zone en dehors de la sélection:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>
         <source>Button Selection</source>
-        <translation>Sélection du bouton</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="71"/>
         <source>Select All</source>
-        <translation>Tout sélectionner</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

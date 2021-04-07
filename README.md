@@ -58,6 +58,7 @@
   - [Global](#global)
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
     - [On Ubuntu](#on-ubuntu-tested-on-1804)
+    - [On XFCE 4](#on-xfce-4)
 - [Considerations](#considerations)
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
@@ -82,7 +83,7 @@
 
 - Customizable appearance.
 - Easy to use.
-- In-app screenshot edition.
+- In-app screenshot editing.
 - DBus interface.
 - Upload to Imgur.
 
@@ -261,6 +262,22 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
 
 Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
 
+
+#### On XFCE 4
+
+1. Go to `Keyboard` settings
+2. Switch to the tab `Application Shortcuts`
+3. Find the entry
+        
+    ```text
+    Command                        Shortcut
+    xfce4-screenshooter -fd 1      Print
+    ````
+4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
+
+Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
+
+
 ## Considerations
 
 - Experimental Gnome Wayland and Plasma Wayland support.
@@ -279,9 +296,7 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 
 ## Installation
 
-Flameshot can be installed on Linux and Microsoft Windows currently.
-
-There is no macOS port of Flameshot currently that can be easily installed. But you can build Flameshot yourself and use it. Please participate in the development of Flameshot and help us make a macOS version.
+Flameshot can be installed on Linux, Microsoft Windows, and macOS.
 
 ### Prebuilt packages
 
@@ -302,6 +317,10 @@ There are packages available in the repository of some Linux distributions:
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
+
+There are also options for installing on macOS:
+
+- [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
