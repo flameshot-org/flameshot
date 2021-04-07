@@ -904,15 +904,6 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             m_undoStack.setIndex(0);
             update();
             break;
-
-        case CaptureTool::REQ_INCREMENT_CIRCLE_COUNT:
-            incrementCircleCount();
-            break;
-
-        case CaptureTool::REQ_DECREMENT_CIRCLE_COUNT:
-            decrementCircleCount();
-            break;
-
         case CaptureTool::REQ_CLOSE_GUI:
             close();
             break;
@@ -1022,12 +1013,6 @@ void CaptureWidget::setDrawColor(const QColor& c)
     }
 }
 
-void CaptureWidget::incrementCircleCount()
-{
-    m_context.circleCount++;
-    SPDLOG_DEBUG("Incrementing Circle to {}.", m_context.circleCount);
-}
-
 void CaptureWidget::removeToolObject(int index)
 {
     --index;
@@ -1052,12 +1037,6 @@ void CaptureWidget::removeToolObject(int index)
         }
         drawToolsData();
     }
-}
-
-void CaptureWidget::decrementCircleCount()
-{
-    SPDLOG_DEBUG("Decrementing Circle.");
-    m_context.circleCount--;
 }
 
 void CaptureWidget::setDrawThickness(const int& t)
@@ -1287,7 +1266,12 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
     int index = 0;
+    m_context.circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
+        if (toolItem->nameID() == ToolType::CIRCLECOUNT) {
+            toolItem->setCount(m_context.circleCount);
+            m_context.circleCount++;
+        }
         toolItem->process(painter, pixmapItem);
         if (drawSelection) {
             if (m_panel->activeLayerIndex() == index) {
