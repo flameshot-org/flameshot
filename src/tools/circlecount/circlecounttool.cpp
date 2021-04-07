@@ -47,12 +47,12 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     Q_UNUSED(pixmap)
     auto orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
-    painter.setBrush(m_color);
+    painter.setBrush(color());
 
     int bubble_size = thickness();
-    painter.drawEllipse(m_points.first, bubble_size, bubble_size);
-    QRect textRect = QRect(m_points.first.x() - bubble_size / 2,
-                           m_points.first.y() - bubble_size / 2,
+    painter.drawEllipse(points().first, bubble_size, bubble_size);
+    QRect textRect = QRect(points().first.x() - bubble_size / 2,
+                           points().first.y() - bubble_size / 2,
                            bubble_size,
                            bubble_size);
     auto orig_font = painter.font();
@@ -76,7 +76,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
           textRect, Qt::AlignCenter, QString::number(count()));
     }
 
-    if (ColorUtils::colorIsDark(m_color)) {
+    if (ColorUtils::colorIsDark(color())) {
         painter.setPen(Qt::white);
     } else {
         painter.setPen(Qt::black);
@@ -93,8 +93,8 @@ void CircleCountTool::drawObjectSelection(QPainter& painter)
     QPen orig_pen = painter.pen();
     painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
     int bubble_size = thickness();
-    painter.drawRect(m_points.first.x() - bubble_size,
-                     m_points.first.y() - bubble_size,
+    painter.drawRect(points().first.x() - bubble_size,
+                     points().first.y() - bubble_size,
                      bubble_size * 2,
                      bubble_size * 2);
     painter.setPen(orig_pen);
@@ -103,9 +103,9 @@ void CircleCountTool::drawObjectSelection(QPainter& painter)
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
-    setThickness(context.thickness + PADDING_VALUE);
+    thicknessChanged(context.thickness + PADDING_VALUE);
     if (thickness() < 15) {
-        setThickness(15);
+        thicknessChanged(15);
     }
 
     // Thickness for pen is *2 to range from radius to diameter to match the
@@ -118,12 +118,10 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
-    m_color = context.color;
-    setThickness(context.thickness + PADDING_VALUE);
+    AbstractTwoPointTool::drawStart(context);
     if (thickness() < 15) {
-        setThickness(15);
+        thicknessChanged(15);
     }
-    m_points.first = context.mousePos;
     setCount(context.circleCount);
 }
 

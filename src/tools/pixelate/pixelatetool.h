@@ -25,6 +25,5 @@ protected:
     ToolType nameID() const override;
 
 public slots:
-    void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
 };

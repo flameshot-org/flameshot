@@ -371,13 +371,24 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             connect(this,
                     &CaptureWidget::thicknessChanged,
                     m_activeTool,
-                    &CaptureTool::setThickness);
+                    &CaptureTool::thicknessChanged);
             connect(m_activeTool,
                     &CaptureTool::requestAction,
                     this,
                     &CaptureWidget::handleButtonSignal);
             m_context.mousePos = e->pos();
             m_activeTool->drawStart(m_context);
+            if (m_activeTool->nameID() == ToolType::CIRCLECOUNT) {
+                // While it is based on AbstractTwoPointTool it has the only one
+                // point and shouldn't wait for second point and move event
+                m_activeTool->drawEnd(m_context.mousePos);
+                m_captureToolObjects.append(m_activeTool);
+                m_undoStack.push(
+                  new ModificationCommand(this, m_captureToolObjects));
+                m_activeTool = nullptr;
+                m_mouseIsClicked = false;
+                drawToolsData(true);
+            }
             return;
         }
 
@@ -682,7 +693,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     // Reset selection if mouse pos is not in selection area
     auto toolItem = activeToolObject();
     if (toolItem) {
-        toolItem->setThickness(m_context.thickness);
+        toolItem->thicknessChanged(m_context.thickness);
         drawToolsData(false, true);
 
         // TODO - save thickness update, but not immediately
@@ -1241,7 +1252,7 @@ void CaptureWidget::pushToolToStack()
     disconnect(this,
                &CaptureWidget::thicknessChanged,
                m_activeTool,
-               &CaptureTool::setThickness);
+               &CaptureTool::thicknessChanged);
     if (m_panel->toolWidget()) {
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }

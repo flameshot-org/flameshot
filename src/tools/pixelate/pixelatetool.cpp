@@ -42,8 +42,8 @@ CaptureTool* PixelateTool::copy(QObject* parent)
 
 void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    QPoint& p0 = m_points.first;
-    QPoint& p1 = m_points.second;
+    QPoint p0 = points().first;
+    QPoint p1 = points().second;
     QRect selection = QRect(p0, p1).normalized();
     auto pixelRatio = pixmap.devicePixelRatio();
     QRect selectionScaled =
@@ -83,10 +83,10 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 void PixelateTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.fillRect(std::min(m_points.first.x(), m_points.second.x()),
-                     std::min(m_points.first.y(), m_points.second.y()),
-                     std::abs(m_points.first.x() - m_points.second.x()),
-                     std::abs(m_points.first.y() - m_points.second.y()),
+    painter.fillRect(std::min(points().first.x(), points().second.x()),
+                     std::min(points().first.y(), points().second.y()),
+                     std::abs(points().first.x() - points().second.x()),
+                     std::abs(points().first.y() - points().second.y()),
                      QBrush(Qt::black));
 }
 
@@ -95,13 +95,6 @@ void PixelateTool::paintMousePreview(QPainter& painter,
 {
     Q_UNUSED(context)
     Q_UNUSED(painter)
-}
-
-void PixelateTool::drawStart(const CaptureContext& context)
-{
-    setThickness(context.thickness);
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
 }
 
 void PixelateTool::pressed(const CaptureContext& context)

@@ -24,7 +24,7 @@ public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
-    void setThickness(int th) override;
+    void thicknessChanged(int th) override;
 
 protected:
     void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
