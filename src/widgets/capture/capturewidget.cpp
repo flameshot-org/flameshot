@@ -339,15 +339,12 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     m_activeToolOffsetToMouseOnStart = QPoint();
 
     if (e->button() == Qt::RightButton) {
-        int activeLayerIndex = m_panel->activeLayerIndex();
-        if (activeLayerIndex >= 0) {
-            // Reset selection if mouse pos is not in selection area
-            auto toolItem = m_captureToolObjects.at(activeLayerIndex);
-            if (toolItem) {
-                if (!toolItem->selectionRect().contains(e->pos())) {
-                    m_panel->setActiveLayer(-1);
-                    drawToolsData(false, true);
-                }
+        // Reset selection if mouse pos is not in selection area
+        auto toolItem = activeToolObject();
+        if (toolItem) {
+            if (!toolItem->selectionRect().contains(e->pos())) {
+                m_panel->setActiveLayer(-1);
+                drawToolsData(false, true);
             }
         }
 
@@ -682,18 +679,14 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     emit thicknessChanged(m_context.thickness);
 
     // update selected object thickness
-    int activeLayerIndex = m_panel->activeLayerIndex();
-    if (activeLayerIndex >= 0) {
-        // Reset selection if mouse pos is not in selection area
-        auto toolItem = m_captureToolObjects.at(activeLayerIndex);
-        if (toolItem) {
-            toolItem->thicknessChanged(m_context.thickness);
-            drawToolsData(false, true);
+    // Reset selection if mouse pos is not in selection area
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        toolItem->thicknessChanged(m_context.thickness);
+        drawToolsData(false, true);
 
-            // TODO - save thickness update, but not immediately
-            m_undoStack.push(
-              new ModificationCommand(this, m_captureToolObjects));
-        }
+        // TODO - save thickness update, but not immediately
+        m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
     }
 }
 
@@ -1020,14 +1013,11 @@ void CaptureWidget::setDrawColor(const QColor& c)
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
     }
-    int activeLayerIndex = m_panel->activeLayerIndex();
-    if (activeLayerIndex >= 0) {
-        auto toolItem = m_captureToolObjects.at(activeLayerIndex);
-        if (toolItem) {
-            // Change color
-            emit toolItem->colorChanged(c);
-            drawToolsData(false, true);
-        }
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        // Change color
+        emit toolItem->colorChanged(c);
+        drawToolsData(false, true);
     }
 }
 
@@ -1316,17 +1306,19 @@ void CaptureWidget::drawToolsData(const bool updateLayersPanel,
     }
 }
 
+QPointer<CaptureTool> CaptureWidget::activeToolObject()
+{
+    return m_captureToolObjects.at(m_panel->activeLayerIndex());
+}
+
 void CaptureWidget::drawObjectSelection()
 {
-    int layerIndex = m_panel->activeLayerIndex();
-    if (layerIndex > 0 && layerIndex < m_captureToolObjects.size()) {
-        auto toolItem = m_captureToolObjects.at(layerIndex);
-        if (toolItem) {
-            QPainter painter(&m_context.screenshot);
-            toolItem->drawObjectSelection(painter);
-            m_context.thickness =
-              toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
-        }
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        QPainter painter(&m_context.screenshot);
+        toolItem->drawObjectSelection(painter);
+        m_context.thickness =
+          toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
     }
 }
 
