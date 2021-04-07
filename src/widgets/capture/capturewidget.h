@@ -91,8 +91,6 @@ private slots:
     void handleButtonSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
     void setDrawThickness(const int& t);
-    void incrementCircleCount();
-    void decrementCircleCount();
 
 public:
     void removeToolObject(int index = -1);

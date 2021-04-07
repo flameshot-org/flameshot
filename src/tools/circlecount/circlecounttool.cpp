@@ -125,20 +125,9 @@ void CircleCountTool::drawStart(const CaptureContext& context)
     }
     m_points.first = context.mousePos;
     setCount(context.circleCount);
-    emit requestAction(REQ_INCREMENT_CIRCLE_COUNT);
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)
-}
-
-void CircleCountTool::undo()
-{
-    emit requestAction(CaptureTool::Request::REQ_DECREMENT_CIRCLE_COUNT);
-}
-
-void CircleCountTool::redo()
-{
-    emit requestAction(CaptureTool::Request::REQ_INCREMENT_CIRCLE_COUNT);
 }
