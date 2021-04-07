@@ -81,6 +81,8 @@ private slots:
     void moveUp();
     void moveDown();
 
+    void deleteCurrentTool();
+
     void setState(CaptureToolButton* b);
     void processTool(CaptureTool* t);
     void handleButtonSignal(CaptureTool::Request r);

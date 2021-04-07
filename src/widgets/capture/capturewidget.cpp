@@ -1134,6 +1134,11 @@ void CaptureWidget::initShortcuts()
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
 }
 
+void CaptureWidget::deleteCurrentTool()
+{
+    emit m_panel->slotButtonDelete(true);
+}
+
 void CaptureWidget::updateSizeIndicator()
 {
     if (m_sizeIndButton) {
