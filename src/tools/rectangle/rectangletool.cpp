@@ -47,7 +47,7 @@ void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
     Q_UNUSED(pixmap)
     QPen orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
-    painter.setPen(QPen(m_color, m_thickness));
+    painter.setPen(QPen(m_color, thickness()));
     painter.setBrush(QBrush(m_color));
     if (context_thickness == 0) {
         painter.drawRect(QRect(m_points.first, m_points.second));
@@ -57,8 +57,8 @@ void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
           std::min(m_points.first.y(), m_points.second.y()),
           std::abs(m_points.first.x() - m_points.second.x()),
           std::abs(m_points.first.y() - m_points.second.y()),
-          m_thickness,
-          m_thickness);
+          thickness(),
+          thickness());
     }
     painter.setPen(orig_pen);
     painter.setBrush(orig_brush);
@@ -74,7 +74,7 @@ void RectangleTool::paintMousePreview(QPainter& painter,
 void RectangleTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
+    setThickness(context.thickness + PADDING_VALUE);
     context_thickness = context.thickness;
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;

@@ -373,7 +373,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             connect(this,
                     &CaptureWidget::thicknessChanged,
                     m_activeTool,
-                    &CaptureTool::thicknessChanged);
+                    &CaptureTool::setThickness);
             connect(m_activeTool,
                     &CaptureTool::requestAction,
                     this,
@@ -684,7 +684,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     // Reset selection if mouse pos is not in selection area
     auto toolItem = activeToolObject();
     if (toolItem) {
-        toolItem->thicknessChanged(m_context.thickness);
+        toolItem->setThickness(m_context.thickness);
         drawToolsData(false, true);
 
         // TODO - save thickness update, but not immediately
@@ -1248,7 +1248,7 @@ void CaptureWidget::pushToolToStack()
     disconnect(this,
                &CaptureWidget::thicknessChanged,
                m_activeTool,
-               &CaptureTool::thicknessChanged);
+               &CaptureTool::setThickness);
     if (m_panel->toolWidget()) {
         disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
     }
@@ -1296,11 +1296,6 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     }
 }
 
-QPointer<CaptureTool> CaptureWidget::activeToolObject()
-{
-    return m_captureToolObjects.at(m_panel->activeLayerIndex());
-}
-
 void CaptureWidget::drawObjectSelection()
 {
     auto toolItem = activeToolObject();
@@ -1310,6 +1305,11 @@ void CaptureWidget::drawObjectSelection()
         m_context.thickness =
           toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
     }
+}
+
+QPointer<CaptureTool> CaptureWidget::activeToolObject()
+{
+    return m_captureToolObjects.at(m_panel->activeLayerIndex());
 }
 
 void CaptureWidget::makeChild(QWidget* w)

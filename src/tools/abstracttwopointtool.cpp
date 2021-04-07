@@ -87,7 +87,7 @@ void AbstractTwoPointTool::colorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractTwoPointTool::thicknessChanged(int th)
+void AbstractTwoPointTool::setThickness(int th)
 {
     m_thickness = th;
 }

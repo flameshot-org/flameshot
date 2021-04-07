@@ -25,7 +25,7 @@ public slots:
     void drawMove(const QPoint& p) override;
     void drawMoveWithAdjustment(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
+    void setThickness(int th) override;
 
 private:
     QPoint adjustedVector(QPoint v) const;
@@ -33,10 +33,13 @@ private:
 protected:
     void copyParams(const AbstractTwoPointTool* from, AbstractTwoPointTool* to);
 
+private:
     // class members
+    int m_thickness;
+
+protected:
     QPair<QPoint, QPoint> m_points;
     QColor m_color;
-    int m_thickness;
 
     // use m_padding to extend the area of the backup
     int m_padding;
