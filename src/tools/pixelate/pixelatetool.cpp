@@ -15,7 +15,7 @@ PixelateTool::PixelateTool(QObject* parent)
 
 QIcon PixelateTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "pixelate.svg");
 }
 QString PixelateTool::name() const
@@ -35,7 +35,7 @@ QString PixelateTool::description() const
 
 CaptureTool* PixelateTool::copy(QObject* parent)
 {
-    PixelateTool* tool = new PixelateTool(parent);
+    auto* tool = new PixelateTool(parent);
     copyParams(this, tool);
     return tool;
 }
@@ -68,8 +68,10 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
             scene.render(&painter, selection, QRectF());
         }
     } else {
-        int width = selection.width() * (0.5 / qMax(1, m_thickness));
-        int height = selection.height() * (0.5 / qMax(1, m_thickness));
+        int width =
+          static_cast<int>(selection.width() * (0.5 / qMax(1, m_thickness)));
+        int height =
+          static_cast<int>(selection.height() * (0.5 / qMax(1, m_thickness)));
         QSize size = QSize(qMax(width, 1), qMax(height, 1));
 
         QPixmap t = pixmap.copy(selectionScaled);
@@ -81,6 +83,7 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 
 void PixelateTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     painter.fillRect(std::min(m_points.first.x(), m_points.second.x()),
                      std::min(m_points.first.y(), m_points.second.y()),
                      std::abs(m_points.first.x() - m_points.second.x()),
@@ -91,8 +94,8 @@ void PixelateTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 void PixelateTool::paintMousePreview(QPainter& painter,
                                      const CaptureContext& context)
 {
-    Q_UNUSED(context);
-    Q_UNUSED(painter);
+    Q_UNUSED(context)
+    Q_UNUSED(painter)
 }
 
 void PixelateTool::drawStart(const CaptureContext& context)
@@ -104,5 +107,5 @@ void PixelateTool::drawStart(const CaptureContext& context)
 
 void PixelateTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

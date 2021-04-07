@@ -17,7 +17,7 @@ RectangleTool::RectangleTool(QObject* parent)
 
 QIcon RectangleTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "square.svg");
 }
 QString RectangleTool::name() const
@@ -37,13 +37,14 @@ QString RectangleTool::description() const
 
 CaptureTool* RectangleTool::copy(QObject* parent)
 {
-    RectangleTool* tool = new RectangleTool(parent);
+    auto* tool = new RectangleTool(parent);
     copyParams(this, tool);
     return tool;
 }
 
 void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     QPen orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
     painter.setPen(QPen(m_color, m_thickness));
@@ -81,5 +82,5 @@ void RectangleTool::drawStart(const CaptureContext& context)
 
 void RectangleTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

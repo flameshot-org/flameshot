@@ -28,7 +28,7 @@ const QPixmap& ImgUploaderTool::capture()
 
 QIcon ImgUploaderTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "cloud-upload.svg");
 }
 

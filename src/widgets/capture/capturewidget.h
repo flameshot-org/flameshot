@@ -38,7 +38,7 @@ class CaptureWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit CaptureWidget(const uint id = 0,
+    explicit CaptureWidget(uint id = 0,
                            const QString& savePath = QString(),
                            bool fullScreen = true,
                            QWidget* parent = nullptr);
@@ -58,7 +58,7 @@ signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
-    void thicknessChanged(const int thickness);
+    void thicknessChanged(int thickness);
 
 private slots:
     // TODO replace with tools
@@ -96,19 +96,19 @@ private slots:
 
 public:
     void removeToolObject(int index = -1);
-    void editToolObject(int index = -1);
 
 protected:
-    void paintEvent(QPaintEvent*);
-    void mousePressEvent(QMouseEvent*);
-    void mouseMoveEvent(QMouseEvent*);
-    void mouseReleaseEvent(QMouseEvent*);
-    void keyPressEvent(QKeyEvent*);
-    void keyReleaseEvent(QKeyEvent*);
-    void wheelEvent(QWheelEvent*);
-    void resizeEvent(QResizeEvent*);
-    void moveEvent(QMoveEvent*);
+    void paintEvent(QPaintEvent* paintEvent) override;
+    void mousePressEvent(QMouseEvent* mouseEvent) override;
+    void mouseMoveEvent(QMouseEvent* mouseEvent) override;
+    void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
+    void keyPressEvent(QKeyEvent* keyEvent) override;
+    void keyReleaseEvent(QKeyEvent* keyEvent) override;
+    void wheelEvent(QWheelEvent* wheelEvent) override;
+    void resizeEvent(QResizeEvent* resizeEvent) override;
+    void moveEvent(QMoveEvent* moveEvent) override;
 
+private:
     // Context information
     CaptureContext m_context;
 
@@ -130,7 +130,6 @@ protected:
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;
 
-private:
     QPointer<CaptureTool> activeToolObject();
     void initContext(const QString& savePath, bool fullscreen);
     void initPanel();
@@ -145,16 +144,14 @@ private:
     void adjustSelection(QMargins m);
     void moveSelection(QPoint p);
 
-private:
     QRect extendedSelection() const;
     QRect extendedRect(QRect* r) const;
     void drawInitialMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(const bool updateLayersPanel = true,
-                       const bool drawSelection = false);
+    void drawToolsData(bool updateLayersPanel = true,
+                       bool drawSelection = false);
     void drawObjectSelection();
 
-private:
     UpdateNotificationWidget* m_updateNotificationWidget;
     quint64 m_lastMouseWheel;
     QPointer<CaptureToolButton> m_sizeIndButton;

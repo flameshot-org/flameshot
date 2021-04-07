@@ -46,7 +46,7 @@ bool AbstractPathTool::showMousePreview() const
 
 void AbstractPathTool::drawEnd(const QPoint& p)
 {
-    Q_UNUSED(p);
+    Q_UNUSED(p)
 }
 
 void AbstractPathTool::drawMove(const QPoint& p)
@@ -59,7 +59,7 @@ void AbstractPathTool::colorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractPathTool::thicknessChanged(const int th)
+void AbstractPathTool::thicknessChanged(int th)
 {
     m_thickness = th;
 }
@@ -81,7 +81,7 @@ void AbstractPathTool::addPoint(const QPoint& point)
 
 void AbstractPathTool::move(const QPoint& mousePos)
 {
-    if (m_points.size() <= 0) {
+    if (m_points.empty()) {
         return;
     }
     QPoint basePos = *pos();
@@ -123,7 +123,7 @@ void AbstractPathTool::drawObjectSelection(QPainter& painter)
 
 const QPoint* AbstractPathTool::pos()
 {
-    if (m_points.size() <= 0) {
+    if (m_points.empty()) {
         m_pos = QPoint();
         return &m_pos;
     }

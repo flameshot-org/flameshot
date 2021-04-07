@@ -18,13 +18,13 @@ public:
     void move(const QPoint& mousePos) override;
     const QPoint* pos() override;
     void drawObjectSelection(QPainter& painter) override;
-    virtual int thickness() override { return m_thickness; };
+    int thickness() override { return m_thickness; };
 
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(const int th) override;
+    void thicknessChanged(int th) override;
 
 protected:
     void copyParams(const AbstractPathTool* from, AbstractPathTool* to);

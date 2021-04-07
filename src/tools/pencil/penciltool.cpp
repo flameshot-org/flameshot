@@ -10,7 +10,7 @@ PencilTool::PencilTool(QObject* parent)
 
 QIcon PencilTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "pencil.svg");
 }
 QString PencilTool::name() const
@@ -30,13 +30,14 @@ QString PencilTool::description() const
 
 CaptureTool* PencilTool::copy(QObject* parent)
 {
-    PencilTool* tool = new PencilTool(parent);
+    auto* tool = new PencilTool(parent);
     copyParams(this, tool);
     return tool;
 }
 
 void PencilTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawPolyline(m_points.data(), m_points.size());
 }
@@ -59,5 +60,5 @@ void PencilTool::drawStart(const CaptureContext& context)
 
 void PencilTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

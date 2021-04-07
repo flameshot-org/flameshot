@@ -66,8 +66,6 @@ public:
         REQ_TOGGLE_SIDEBAR,
         // Call update() in the editor.
         REQ_REDRAW,
-        // Append this tool to the undo/redo stack
-        REQ_APPEND_TO_STACK,
         // Notify is the screenshot has been saved.
         REQ_CAPTURE_DONE_OK,
         // Instance this->widget()'s widget inside the editor under the mouse.
@@ -124,9 +122,6 @@ public:
     // When the tool is selected this method is called and the widget is added
     // to the configuration panel inside the main widget.
     virtual QWidget* configurationWidget() { return nullptr; }
-    // Permanent configuration used in the configuration outside of the
-    // capture.
-    virtual QWidget* permanentConfigurationWidget() { return nullptr; }
     // Return a copy of the tool
     virtual CaptureTool* copy(QObject* parent = nullptr) = 0;
 
@@ -153,10 +148,10 @@ public:
                                    const CaptureContext& context) = 0;
 
     // Move tool objects
-    virtual void move(const QPoint& pos) { Q_UNUSED(pos); };
+    virtual void move(const QPoint& pos) { Q_UNUSED(pos) };
     virtual const QPoint* pos() { return nullptr; };
 
-    virtual void params(){};
+    // get selection region
     const QRect& selectionRect() { return m_selectionRect; };
 
 signals:
@@ -200,7 +195,7 @@ public slots:
     // Called when the color is changed in the editor.
     virtual void colorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.
-    virtual void thicknessChanged(const int th) = 0;
+    virtual void thicknessChanged(int th) = 0;
     virtual int thickness() { return -1; };
 
 private:

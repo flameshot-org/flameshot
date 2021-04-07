@@ -25,7 +25,7 @@ public slots:
     void drawMove(const QPoint& p) override;
     void drawMoveWithAdjustment(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(const int th) override;
+    void thicknessChanged(int th) override;
 
 private:
     QPoint adjustedVector(QPoint v) const;

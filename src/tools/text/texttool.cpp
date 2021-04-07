@@ -21,10 +21,6 @@ void TextTool::copyParams(const TextTool* from, TextTool* to)
     to->m_color = from->m_color;
     to->m_textArea = from->m_textArea;
     to->m_currentPos = from->m_currentPos;
-
-    // TODO - need to think what to do with it
-    //    QPointer<TextWidget> m_widget;
-    //    QPointer<TextConfig> m_confW;
 }
 
 bool TextTool::isValid() const
@@ -49,7 +45,7 @@ bool TextTool::showMousePreview() const
 
 QIcon TextTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "text.svg");
 }
 
@@ -136,6 +132,7 @@ CaptureTool* TextTool::copy(QObject* parent)
 
 void TextTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     if (m_text.isEmpty()) {
         return;
     }
@@ -162,8 +159,8 @@ void TextTool::drawObjectSelection(QPainter& painter)
 void TextTool::paintMousePreview(QPainter& painter,
                                  const CaptureContext& context)
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(context);
+    Q_UNUSED(painter)
+    Q_UNUSED(context)
 }
 
 void TextTool::drawEnd(const QPoint& p)
@@ -185,7 +182,7 @@ void TextTool::drawStart(const CaptureContext& context)
 
 void TextTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }
 
 void TextTool::colorChanged(const QColor& c)
@@ -196,7 +193,7 @@ void TextTool::colorChanged(const QColor& c)
     }
 }
 
-void TextTool::thicknessChanged(const int th)
+void TextTool::thicknessChanged(int th)
 {
     m_size = th;
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
@@ -208,14 +205,6 @@ void TextTool::thicknessChanged(const int th)
 void TextTool::updateText(const QString& s)
 {
     m_text = s;
-}
-
-void TextTool::setFont(const QFont& f)
-{
-    m_font = f;
-    if (m_widget) {
-        m_widget->setFont(f);
-    }
 }
 
 void TextTool::updateFamily(const QString& s)
