@@ -75,10 +75,6 @@ public:
         REQ_ADD_CHILD_WINDOW,
         // Instance this->widget()'s widget which handles its own lifetime.
         REQ_ADD_EXTERNAL_WIDGETS,
-
-        REQ_INCREMENT_CIRCLE_COUNT,
-
-        REQ_DECREMENT_CIRCLE_COUNT,
         // increase tool size for all tools
         REQ_INCREASE_TOOL_SIZE,
         // decrease tool size for all tools
@@ -125,11 +121,8 @@ public:
     // Return a copy of the tool
     virtual CaptureTool* copy(QObject* parent = nullptr) = 0;
 
-    // undo/redo changes
-    virtual void undo(){};
-    virtual void redo(){};
-
-    // counter for all objects
+    // Counter for all object types (currently is used for the CircleCounter
+    // only)
     virtual void setCount(int count) { m_count = count; };
     virtual int count() { return m_count; };
 
