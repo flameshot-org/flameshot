@@ -131,6 +131,7 @@ protected:
     bool m_adjustmentButtonPressed;
 
 private:
+    QPointer<CaptureTool> activeToolObject();
     void initContext(const QString& savePath, bool fullscreen);
     void initPanel();
     void initSelection();
