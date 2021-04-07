@@ -49,8 +49,8 @@ CaptureTool* SelectionTool::copy(QObject* parent)
 void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(m_color, m_thickness));
-    painter.drawRect(QRect(m_points.first, m_points.second));
+    painter.setPen(QPen(color(), thickness()));
+    painter.drawRect(QRect(points().first, points().second));
 }
 
 void SelectionTool::paintMousePreview(QPainter& painter,
@@ -58,14 +58,6 @@ void SelectionTool::paintMousePreview(QPainter& painter,
 {
     painter.setPen(QPen(context.color, context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void SelectionTool::drawStart(const CaptureContext& context)
-{
-    m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
 }
 
 void SelectionTool::pressed(const CaptureContext& context)

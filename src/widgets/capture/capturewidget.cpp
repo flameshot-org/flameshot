@@ -380,6 +380,17 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
                     &CaptureWidget::handleButtonSignal);
             m_context.mousePos = e->pos();
             m_activeTool->drawStart(m_context);
+            if (m_activeTool->nameID() == ToolType::CIRCLECOUNT) {
+                // While it is based on AbstractTwoPointTool it has the only one
+                // point and shouldn't wait for second point and move event
+                m_activeTool->drawEnd(m_context.mousePos);
+                m_captureToolObjects.append(m_activeTool);
+                m_undoStack.push(
+                  new ModificationCommand(this, m_captureToolObjects));
+                m_activeTool = nullptr;
+                m_mouseIsClicked = false;
+                drawToolsData(true);
+            }
             return;
         }
 
@@ -1296,11 +1307,6 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     }
 }
 
-QPointer<CaptureTool> CaptureWidget::activeToolObject()
-{
-    return m_captureToolObjects.at(m_panel->activeLayerIndex());
-}
-
 void CaptureWidget::drawObjectSelection()
 {
     auto toolItem = activeToolObject();
@@ -1310,6 +1316,11 @@ void CaptureWidget::drawObjectSelection()
         m_context.thickness =
           toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
     }
+}
+
+QPointer<CaptureTool> CaptureWidget::activeToolObject()
+{
+    return m_captureToolObjects.at(m_panel->activeLayerIndex());
 }
 
 void CaptureWidget::makeChild(QWidget* w)

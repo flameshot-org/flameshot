@@ -17,8 +17,10 @@ public:
     bool showMousePreview() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
-    virtual void drawObjectSelection(QPainter& painter) override;
-    virtual int thickness() override { return m_thickness; };
+    void drawObjectSelection(QPainter& painter) override;
+    int thickness() override { return m_thickness; };
+    const QColor& color() { return m_color; };
+    const QPair<QPoint, QPoint> points() { return m_points; };
 
 public slots:
     void drawEnd(const QPoint& p) override;
@@ -26,21 +28,24 @@ public slots:
     void drawMoveWithAdjustment(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
     void thicknessChanged(int th) override;
+    virtual void drawStart(const CaptureContext& context) override;
 
 private:
     QPoint adjustedVector(QPoint v) const;
 
 protected:
     void copyParams(const AbstractTwoPointTool* from, AbstractTwoPointTool* to);
+    void setPadding(int padding) { m_padding = padding; };
 
+private:
     // class members
-    QPair<QPoint, QPoint> m_points;
-    QColor m_color;
     int m_thickness;
-
-    // use m_padding to extend the area of the backup
     int m_padding;
+    QColor m_color;
+    QPair<QPoint, QPoint> m_points;
 
+protected:
+    // use m_padding to extend the area of the backup
     bool m_supportsOrthogonalAdj = false;
     bool m_supportsDiagonalAdj = false;
 };

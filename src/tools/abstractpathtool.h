@@ -34,8 +34,10 @@ protected:
     QRect m_pathArea;
     QColor m_color;
     QVector<QPoint> m_points;
-    int m_thickness;
     // use m_padding to extend the area of the backup
     int m_padding;
     QPoint m_pos;
+
+private:
+    int m_thickness;
 };
