@@ -19,7 +19,7 @@ LineTool::LineTool(QObject* parent)
 
 QIcon LineTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "line.svg");
 }
 
@@ -40,13 +40,14 @@ QString LineTool::description() const
 
 CaptureTool* LineTool::copy(QObject* parent)
 {
-    LineTool* tool = new LineTool(parent);
+    auto* tool = new LineTool(parent);
     copyParams(this, tool);
     return tool;
 }
 
 void LineTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawLine(m_points.first, m_points.second);
 }
@@ -68,5 +69,5 @@ void LineTool::drawStart(const CaptureContext& context)
 
 void LineTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

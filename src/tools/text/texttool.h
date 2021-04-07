@@ -46,12 +46,11 @@ public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(const int th) override;
+    void thicknessChanged(int th) override;
     virtual int thickness() override { return m_size; };
 
 private slots:
     void updateText(const QString& s);
-    void setFont(const QFont& f);
     void updateFamily(const QString& s);
     void updateFontUnderline(const bool underlined);
     void updateFontStrikeOut(const bool s);

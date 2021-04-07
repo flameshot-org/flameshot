@@ -19,7 +19,7 @@ MarkerTool::MarkerTool(QObject* parent)
 
 QIcon MarkerTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "marker.svg");
 }
 QString MarkerTool::name() const
@@ -39,13 +39,14 @@ QString MarkerTool::description() const
 
 CaptureTool* MarkerTool::copy(QObject* parent)
 {
-    MarkerTool* tool = new MarkerTool(parent);
+    auto* tool = new MarkerTool(parent);
     copyParams(this, tool);
     return tool;
 }
 
 void MarkerTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     auto compositionMode = painter.compositionMode();
     qreal opacity = painter.opacity();
     auto pen = painter.pen();
@@ -83,10 +84,10 @@ void MarkerTool::drawStart(const CaptureContext& context)
 
 void MarkerTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }
 
-void MarkerTool::thicknessChanged(const int th)
+void MarkerTool::thicknessChanged(int th)
 {
     m_thickness = th + PADDING_VALUE;
 }

@@ -15,8 +15,7 @@ enum UNIT
 {
     HORIZ_DIR = 0,
     DIAG1_DIR = 1,
-    VERT_DIR = 2,
-    DIAG2_DIR = 3
+    VERT_DIR = 2
 };
 
 const double ADJ_DIAG_UNIT = 2 * ADJ_UNIT;
@@ -24,8 +23,7 @@ const int DIAG_DIRS_NUMBER = 2;
 
 enum DIAG_UNIT
 {
-    DIR1 = 0,
-    DIR2 = 1
+    DIR1 = 0
 };
 
 }
@@ -71,7 +69,7 @@ bool AbstractTwoPointTool::showMousePreview() const
 
 void AbstractTwoPointTool::drawEnd(const QPoint& p)
 {
-    Q_UNUSED(p);
+    Q_UNUSED(p)
 }
 
 void AbstractTwoPointTool::drawMove(const QPoint& p)
@@ -89,7 +87,7 @@ void AbstractTwoPointTool::colorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractTwoPointTool::thicknessChanged(const int th)
+void AbstractTwoPointTool::thicknessChanged(int th)
 {
     m_thickness = th;
 }

@@ -3,7 +3,7 @@
 
 #include "capturetoolobjects.h"
 
-void CaptureToolObjects::append(QPointer<CaptureTool> captureTool)
+void CaptureToolObjects::append(const QPointer<CaptureTool>& captureTool)
 {
     m_captureToolObjects.append(captureTool);
     m_imageCache.clear();
@@ -42,7 +42,7 @@ void CaptureToolObjects::removeAt(int index)
 
 int CaptureToolObjects::find(const QPoint& pos, const QSize& captureSize)
 {
-    if (0 == m_captureToolObjects.size()) {
+    if (m_captureToolObjects.empty()) {
         return -1;
     }
     QPixmap pixmap(captureSize);
@@ -126,7 +126,7 @@ CaptureToolObjects& CaptureToolObjects::operator=(
     }
 
     int count = 0;
-    for (auto item : other.m_captureToolObjects) {
+    for (const auto& item : other.m_captureToolObjects) {
         QPointer<CaptureTool> itemCopy = item->copy(item->parent());
         if (count < this->m_captureToolObjects.size()) {
             this->m_captureToolObjects[count] = itemCopy;

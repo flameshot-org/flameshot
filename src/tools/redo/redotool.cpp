@@ -15,7 +15,7 @@ bool RedoTool::closeOnButtonPressed() const
 
 QIcon RedoTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "redo-variant.svg");
 }
 QString RedoTool::name() const
@@ -40,6 +40,6 @@ CaptureTool* RedoTool::copy(QObject* parent)
 
 void RedoTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
     emit requestAction(REQ_REDO_MODIFICATION);
 }
