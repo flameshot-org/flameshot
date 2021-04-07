@@ -44,8 +44,8 @@ CaptureTool* CircleTool::copy(QObject* parent)
 void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(m_color, thickness()));
-    painter.drawEllipse(QRect(m_points.first, m_points.second));
+    painter.setPen(QPen(color(), thickness()));
+    painter.drawEllipse(QRect(points().first, points().second));
 }
 
 void CircleTool::paintMousePreview(QPainter& painter,
@@ -53,14 +53,6 @@ void CircleTool::paintMousePreview(QPainter& painter,
 {
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void CircleTool::drawStart(const CaptureContext& context)
-{
-    m_color = context.color;
-    setThickness(context.thickness + PADDING_VALUE);
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
 }
 
 void CircleTool::pressed(const CaptureContext& context)

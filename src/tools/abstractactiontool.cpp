@@ -55,7 +55,7 @@ void AbstractActionTool::colorChanged(const QColor& c)
     Q_UNUSED(c)
 }
 
-void AbstractActionTool::setThickness(int th)
+void AbstractActionTool::thicknessChanged(int th)
 {
     Q_UNUSED(th)
 }

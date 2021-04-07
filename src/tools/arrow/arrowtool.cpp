@@ -60,7 +60,7 @@ QLine getShorterLine(QPoint p1, QPoint p2, const int thickness)
 ArrowTool::ArrowTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {
-    m_padding = ArrowWidth / 2;
+    setPadding(ArrowWidth / 2);
     m_supportsOrthogonalAdj = true;
     m_supportsDiagonalAdj = true;
 }
@@ -101,11 +101,11 @@ void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
 void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(m_color, thickness()));
+    painter.setPen(QPen(color(), thickness()));
     painter.drawLine(
-      getShorterLine(m_points.first, m_points.second, thickness()));
-    m_arrowPath = getArrowHead(m_points.first, m_points.second, thickness());
-    painter.fillPath(m_arrowPath, QBrush(m_color));
+      getShorterLine(points().first, points().second, thickness()));
+    m_arrowPath = getArrowHead(points().first, points().second, thickness());
+    painter.fillPath(m_arrowPath, QBrush(color()));
 }
 
 void ArrowTool::paintMousePreview(QPainter& painter,
@@ -113,14 +113,6 @@ void ArrowTool::paintMousePreview(QPainter& painter,
 {
     painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void ArrowTool::drawStart(const CaptureContext& context)
-{
-    m_color = context.color;
-    setThickness(context.thickness + PADDING_VALUE);
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
 }
 
 void ArrowTool::pressed(const CaptureContext& context)
@@ -134,10 +126,10 @@ void ArrowTool::drawObjectSelection(QPainter& painter)
       thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
 
     // get min and max arrow pos
-    int min_x = m_points.first.x();
-    int min_y = m_points.first.y();
-    int max_x = m_points.first.x();
-    int max_y = m_points.first.y();
+    int min_x = points().first.x();
+    int min_y = points().first.y();
+    int max_x = points().first.x();
+    int max_y = points().first.y();
     for (int i = 0; i < m_arrowPath.elementCount(); i++) {
         QPointF pt = m_arrowPath.elementAt(i);
         if (static_cast<int>(pt.x()) < min_x) {
@@ -156,13 +148,13 @@ void ArrowTool::drawObjectSelection(QPainter& painter)
 
     // get min and max line pos
     int line_pos_min_x =
-      std::min(std::min(m_points.first.x(), m_points.second.x()), min_x);
+      std::min(std::min(points().first.x(), points().second.x()), min_x);
     int line_pos_min_y =
-      std::min(std::min(m_points.first.y(), m_points.second.y()), min_y);
+      std::min(std::min(points().first.y(), points().second.y()), min_y);
     int line_pos_max_x =
-      std::max(std::max(m_points.first.x(), m_points.second.x()), max_x);
+      std::max(std::max(points().first.x(), points().second.x()), max_x);
     int line_pos_max_y =
-      std::max(std::max(m_points.first.y(), m_points.second.y()), max_y);
+      std::max(std::max(points().first.y(), points().second.y()), max_y);
 
     QRect rect = QRect(line_pos_min_x - offset,
                        line_pos_min_y - offset,

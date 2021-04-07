@@ -26,5 +26,4 @@ protected:
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
-    void setThickness(int th) override;
 };
