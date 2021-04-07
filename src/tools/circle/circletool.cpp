@@ -16,7 +16,7 @@ CircleTool::CircleTool(QObject* parent)
 
 QIcon CircleTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "circle-outline.svg");
 }
 QString CircleTool::name() const
@@ -36,13 +36,14 @@ QString CircleTool::description() const
 
 CaptureTool* CircleTool::copy(QObject* parent)
 {
-    CircleTool* tool = new CircleTool(parent);
+    auto* tool = new CircleTool(parent);
     copyParams(this, tool);
     return tool;
 }
 
 void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawEllipse(QRect(m_points.first, m_points.second));
 }
@@ -64,5 +65,5 @@ void CircleTool::drawStart(const CaptureContext& context)
 
 void CircleTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

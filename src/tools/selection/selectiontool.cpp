@@ -21,7 +21,7 @@ bool SelectionTool::closeOnButtonPressed() const
 
 QIcon SelectionTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "square-outline.svg");
 }
 QString SelectionTool::name() const
@@ -48,6 +48,7 @@ CaptureTool* SelectionTool::copy(QObject* parent)
 
 void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     painter.setPen(QPen(m_color, m_thickness));
     painter.drawRect(QRect(m_points.first, m_points.second));
 }
@@ -69,5 +70,5 @@ void SelectionTool::drawStart(const CaptureContext& context)
 
 void SelectionTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

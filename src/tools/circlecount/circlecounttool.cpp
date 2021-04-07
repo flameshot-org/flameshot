@@ -6,7 +6,6 @@
 #include <QPainter>
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
 #include "spdlog/cfg/env.h"
-#include "spdlog/spdlog.h"
 
 namespace {
 #define PADDING_VALUE 2
@@ -18,7 +17,7 @@ CircleCountTool::CircleCountTool(QObject* parent)
 
 QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "circlecount-outline.svg");
 }
 QString CircleCountTool::name() const
@@ -38,13 +37,14 @@ QString CircleCountTool::description() const
 
 CaptureTool* CircleCountTool::copy(QObject* parent)
 {
-    CircleCountTool* tool = new CircleCountTool(parent);
+    auto* tool = new CircleCountTool(parent);
     copyParams(this, tool);
     return tool;
 }
 
 void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 {
+    Q_UNUSED(pixmap)
     auto orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
     painter.setBrush(m_color);
@@ -130,7 +130,7 @@ void CircleCountTool::drawStart(const CaptureContext& context)
 
 void CircleCountTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }
 
 void CircleCountTool::undo()
