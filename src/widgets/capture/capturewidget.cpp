@@ -360,7 +360,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
         // Click using a tool
-        if (m_activeButton) {
+        if (m_activeButton &&
+            m_activeButton->tool()->nameID() != ToolType::MOVE) {
             if (commitCurrentTool()) {
                 return;
             }
@@ -397,15 +398,17 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         m_dragStartPoint = e->pos();
         m_selection->saveGeometry();
         // New selection
-        if (!m_selection->geometry().contains(e->pos()) &&
-            m_mouseOverHandle == SelectionWidget::NO_SIDE) {
-            m_selection->setGeometry(QRect(e->pos(), e->pos()));
-            m_selection->setVisible(false);
-            m_newSelection = true;
-            m_buttonHandler->hide();
-            update();
-        } else {
-            m_grabbing = true;
+        if (m_captureToolObjects.captureToolObjects().size() == 0) {
+            if (!m_selection->geometry().contains(e->pos()) &&
+                m_mouseOverHandle == SelectionWidget::NO_SIDE) {
+                m_selection->setGeometry(QRect(e->pos(), e->pos()));
+                m_selection->setVisible(false);
+                m_newSelection = true;
+                m_buttonHandler->hide();
+                update();
+            } else {
+                m_grabbing = true;
+            }
         }
     }
     updateCursor();
@@ -428,7 +431,10 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
         m_activeToolIsMoved = true;
         drawToolsData(false);
-    } else if (m_mouseIsClicked && !m_activeButton) {
+    } else if (m_mouseIsClicked &&
+               (!m_activeButton ||
+                (m_activeButton &&
+                 m_activeButton->tool()->nameID() == ToolType::MOVE))) {
         // Drawing, moving, or stretching a selection
         m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
@@ -444,7 +450,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
             // Moving the whole selection
-            if (m_adjustmentButtonPressed) {
+            if (m_adjustmentButtonPressed || activeToolObject().isNull()) {
+                setCursor(Qt::OpenHandCursor);
                 QRect initialRect = m_selection->savedGeometry().normalized();
                 QPoint newTopLeft =
                   initialRect.topLeft() + (e->pos() - m_dragStartPoint);
@@ -1211,6 +1218,9 @@ void CaptureWidget::updateCursor()
         } else {
             setCursor(Qt::ArrowCursor);
         }
+    } else if (m_activeButton &&
+               m_activeButton->tool()->nameID() == ToolType::MOVE) {
+        setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
         using sw = SelectionWidget;
         if (m_mouseOverHandle != sw::NO_SIDE) {
@@ -1242,6 +1252,10 @@ void CaptureWidget::updateCursor()
             } else {
                 setCursor(Qt::ArrowCursor);
             }
+        } else if (m_selection->isVisible() &&
+                   m_captureToolObjects.captureToolObjects().size() > 0 &&
+                   m_activeTool.isNull()) {
+            setCursor(Qt::ArrowCursor);
         } else {
             setCursor(Qt::CrossCursor);
         }
