@@ -99,6 +99,51 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
     return ok;
 }
 
+QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
+                                            const QString& title,
+                                            const QString& directory,
+                                            const QString& filter)
+{
+#if defined(Q_WS_WIN) || defined(Q_WS_MAC)
+    return QFileDialog::getSaveFileName(parent, title, directory, filter);
+#else
+    QFileDialog dialog(parent, title, directory, filter);
+    if (parent) {
+        dialog.setWindowModality(Qt::WindowModal);
+    }
+
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+    dialog.selectNameFilter(ConfigHandler().getSaveAsFileExtension());
+    if (dialog.exec() == QDialog::Accepted) {
+
+        ConfigHandler().setSaveAsFileExtension(dialog.selectedNameFilter());
+        QString file_name = dialog.selectedFiles().first();
+        QFileInfo info(file_name);
+
+        if ((dialog.selectedNameFilter() == defaultFilter)) {
+            if (info.suffix().isEmpty()) { // change to png if no suffix given,
+                                           // otherwise leave it as it is
+                file_name = info.filePath() + QLatin1String(".") + "png";
+                ;
+            }
+        } else if (!dialog.selectedNameFilter()
+                      .isEmpty()) { // if selected suffix from menu is not an
+                                    // empty entry
+            QString selectedExtension =
+              dialog.selectedNameFilter().section('.', -1);
+            selectedExtension.remove(QChar(')'));
+            file_name =
+              info.path() + QLatin1String("/") + info.baseName() +
+              QLatin1String(".") +
+              selectedExtension; // recreate full filename with chosen suffix
+        }
+        return file_name;
+    } else {
+        return QString();
+    }
+#endif // Q_WS_MAC || Q_WS_WIN
+}
+
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 {
     bool ok = false;
@@ -116,18 +161,20 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        savePath = QFileDialog::getSaveFileName(
+        savePath = ShowSaveFileDialog(
           nullptr,
           QObject::tr("Save screenshot"),
           FileNameHandler().absoluteSavePath(),
-          QLatin1String("Portable Network Graphic file (PNG) (*.png);;BMP "
-                        "file (*.bmp);;JPEG file (*.jpg)"));
+          QString(pngFilter + separator + bmpFilter + separator + jpgFilter +
+                  separator + defaultFilter));
     }
-
-    if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
-        !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
-        !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
-        savePath += QLatin1String(".png");
+    if (savePath == "") {
+        QString msg = QObject::tr("Saving canceled");
+        QMessageBox saveInfoBox(
+          QMessageBox::Information, QObject::tr("Save canceled"), msg);
+        saveInfoBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
+        saveInfoBox.exec();
+        return ok;
     }
 
     ok = capture.save(savePath);

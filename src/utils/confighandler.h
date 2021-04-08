@@ -89,6 +89,8 @@ public:
 
     bool useJpgForClipboard() const;
     void setUseJpgForClipboard(const bool);
+    void setSaveAsFileExtension(const QString& extension);
+    QString getSaveAsFileExtension();
 
     void setDefaultSettings();
     void setAllTheButtons();
