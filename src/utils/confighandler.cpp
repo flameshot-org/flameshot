@@ -657,8 +657,7 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
     m_settings.beginGroup("Shortcuts");
 
     QVector<QKeySequence> reservedShortcuts;
-    reservedShortcuts << QKeySequence(Qt::Key_Backspace)
-                      << QKeySequence(Qt::Key_Escape);
+    reservedShortcuts << QKeySequence(Qt::Key_Escape);
     if (shortutValue.isEmpty()) {
         m_settings.setValue(shortcutName, "");
     } else if (reservedShortcuts.contains(QKeySequence(shortutValue))) {
