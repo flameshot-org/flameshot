@@ -47,7 +47,8 @@ void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
     Q_UNUSED(pixmap)
     QPen orig_pen = painter.pen();
     QBrush orig_brush = painter.brush();
-    painter.setPen(QPen(color(), thickness()));
+    painter.setPen(
+      QPen(color(), thickness(), Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin));
     painter.setBrush(QBrush(color()));
     if (context_thickness == 0) {
         painter.drawRect(QRect(points().first, points().second));

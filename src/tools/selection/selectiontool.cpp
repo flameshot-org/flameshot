@@ -49,7 +49,8 @@ CaptureTool* SelectionTool::copy(QObject* parent)
 void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(color(), thickness()));
+    painter.setPen(
+      QPen(color(), thickness(), Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
     painter.drawRect(QRect(points().first, points().second));
 }
 
