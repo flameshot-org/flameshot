@@ -202,7 +202,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation>Горячие кнопки</translation>
+        <translation>Горячие клавиши</translation>
     </message>
     <message>
         <source>Storage</source>
@@ -254,7 +254,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
         <source>&amp;About</source>
-        <translation>&amp;Информация</translation>
+        <translation>&amp;О программе</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="425"/>
@@ -264,7 +264,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
         <source>&amp;Latest Uploads</source>
-        <translation>Последние загрузки</translation>
+        <translation>&amp;Последние загрузки</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -579,7 +579,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <location filename="../../src/config/generalconf.cpp" line="253"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Для удаления снимка экрана из последних загрузок требуется подтверждение</translation>
+        <translation>Требовать подтверждение при удалении снимка из последних загрузок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="266"/>
@@ -716,7 +716,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Вы уверены, что хотите удалить снимок экрана с последних загрузок и с сервера?</translation>
+        <translation>Вы уверены, что хотите удалить снимок экрана из последних загрузок и с сервера?</translation>
     </message>
 </context>
 <context>
@@ -905,7 +905,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation>Отправка изображений</translation>
+        <translation>Загрузка изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
@@ -918,7 +918,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="24"/>
         <source>About</source>
-        <translation>Информация</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
@@ -1697,7 +1697,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="30"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot Инфо</translation>
+        <translation>Уведомление Flameshot</translation>
     </message>
 </context>
 <context>
