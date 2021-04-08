@@ -64,7 +64,7 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
     m_shortcuts << (QStringList()
                     << "TYPE_DELETE_CURRENT_TOOL"
                     << QObject::tr("Delete current tool")
-                    << QKeySequence(Qt::CTRL + Qt::Key_Backspace).toString());
+                    << QKeySequence(Qt::Key_Backspace).toString());
 #else
     m_shortcuts << (QStringList() << "TYPE_DELETE_CURRENT_TOOL"
                                   << QObject::tr("Delete current tool")
