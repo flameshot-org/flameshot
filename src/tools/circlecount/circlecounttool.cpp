@@ -9,6 +9,7 @@
 
 namespace {
 #define PADDING_VALUE 2
+#define THICKNESS_OFFSET 15
 }
 
 CircleCountTool::CircleCountTool(QObject* parent)
@@ -55,7 +56,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QColor antiContrastColor =
       ColorUtils::colorIsDark(color()) ? Qt::black : Qt::white;
 
-    int bubble_size = thickness() > 10 ? thickness() : 10;
+    int bubble_size = thickness() + THICKNESS_OFFSET;
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
     painter.drawEllipse(
@@ -100,31 +101,28 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 
 void CircleCountTool::drawObjectSelection(QPainter& painter)
 {
-    QPen orig_pen = painter.pen();
-    painter.setPen(QPen(Qt::blue, 1, Qt::DashLine));
-    int bubble_size = thickness() + PADDING_VALUE;
-    painter.drawRect(points().first.x() - bubble_size,
-                     points().first.y() - bubble_size,
-                     bubble_size * 2,
-                     bubble_size * 2);
-    painter.setPen(orig_pen);
+    int bubble_size = thickness() + THICKNESS_OFFSET + PADDING_VALUE;
+    drawObjectSelectionRect(painter,
+                            QRect(points().first.x() - bubble_size,
+                                  points().first.y() - bubble_size,
+                                  bubble_size * 2,
+                                  bubble_size * 2));
 }
 
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
     thicknessChanged(context.thickness + PADDING_VALUE);
-    if (thickness() < 15) {
-        thicknessChanged(15);
-    }
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function
     auto orig_pen = painter.pen();
     auto orig_opacity = painter.opacity();
     painter.setOpacity(0.35);
-    painter.setPen(
-      QPen(context.color, thickness() * 2, Qt::SolidLine, Qt::RoundCap));
+    painter.setPen(QPen(context.color,
+                        (thickness() + THICKNESS_OFFSET) * 2,
+                        Qt::SolidLine,
+                        Qt::RoundCap));
     painter.drawLine(context.mousePos,
                      { context.mousePos.x() + 1, context.mousePos.y() + 1 });
     painter.setOpacity(orig_opacity);
@@ -134,9 +132,6 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    if (thickness() < 15) {
-        thicknessChanged(15);
-    }
     setCount(context.circleCount);
 }
 
