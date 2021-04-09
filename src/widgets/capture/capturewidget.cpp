@@ -793,6 +793,10 @@ void CaptureWidget::initPanel()
     panelRect.setWidth(m_colorPicker->width() * 1.5);
     m_panel->setGeometry(panelRect);
 #endif
+    connect(m_panel,
+            &UtilityPanel::layerChanged,
+            this,
+            &CaptureWidget::setActiveLayer);
 
     SidePanelWidget* sidePanel = new SidePanelWidget(&m_context.screenshot);
     connect(sidePanel,
@@ -1029,6 +1033,11 @@ void CaptureWidget::setDrawColor(const QColor& c)
         emit toolItem->colorChanged(c);
         drawToolsData(false, true);
     }
+}
+
+void CaptureWidget::setActiveLayer(const int& layer)
+{
+    drawToolsData(false, true);
 }
 
 void CaptureWidget::removeToolObject(int index)

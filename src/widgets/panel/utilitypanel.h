@@ -33,6 +33,9 @@ public:
     void setActiveLayer(int index);
     int activeLayerIndex();
 
+signals:
+    void layerChanged(int layer);
+
 public slots:
     void toggle();
     void slotButtonDelete(bool clicked);
