@@ -106,27 +106,6 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
 
 private:
-    // Context information
-    CaptureContext m_context;
-
-    // Main ui color
-    QColor m_uiColor;
-    // Secondary ui color
-    QColor m_contrastUiColor;
-
-    // Outside selection opacity
-    int m_opacity;
-
-    // utility flags
-    bool m_mouseIsClicked;
-    bool m_rightClick;
-    bool m_newSelection;
-    bool m_grabbing;
-    bool m_showInitialMsg;
-    bool m_captureDone;
-    bool m_previewEnabled;
-    bool m_adjustmentButtonPressed;
-
     QPointer<CaptureTool> activeToolObject();
     void initContext(const QString& savePath, bool fullscreen);
     void initPanel();
@@ -148,6 +127,30 @@ private:
     void drawToolsData(bool updateLayersPanel = true,
                        bool drawSelection = false);
     void drawObjectSelection();
+
+    ////////////////////////////////////////
+    // Class members
+
+    // Context information
+    CaptureContext m_context;
+
+    // Main ui color
+    QColor m_uiColor;
+    // Secondary ui color
+    QColor m_contrastUiColor;
+
+    // Outside selection opacity
+    int m_opacity;
+
+    // utility flags
+    bool m_mouseIsClicked;
+    bool m_rightClick;
+    bool m_newSelection;
+    bool m_grabbing;
+    bool m_showInitialMsg;
+    bool m_captureDone;
+    bool m_previewEnabled;
+    bool m_adjustmentButtonPressed;
 
     UpdateNotificationWidget* m_updateNotificationWidget;
     quint64 m_lastMouseWheel;
