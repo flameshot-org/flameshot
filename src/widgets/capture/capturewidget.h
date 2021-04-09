@@ -146,7 +146,6 @@ private:
 
     // utility flags
     bool m_mouseIsClicked;
-    bool m_rightClick;
     bool m_newSelection;
     bool m_grabbing;
     bool m_showInitialMsg;

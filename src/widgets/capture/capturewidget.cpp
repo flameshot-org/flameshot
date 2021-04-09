@@ -48,7 +48,6 @@ CaptureWidget::CaptureWidget(uint id,
                              QWidget* parent)
   : QWidget(parent)
   , m_mouseIsClicked(false)
-  , m_rightClick(false)
   , m_newSelection(false)
   , m_grabbing(false)
   , m_captureDone(false)
@@ -57,6 +56,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
+  , m_colorPicker(nullptr)
   , m_mouseOverHandle(SelectionWidget::NO_SIDE)
   , m_id(id)
   , m_lastMouseWheel(0)
@@ -353,7 +353,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         }
 
         // Call color picker
-        m_rightClick = true;
         m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
                             e->pos().y() - m_colorPicker->height() / 2);
         m_colorPicker->raise();
@@ -554,7 +553,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 {
     if (e->button() == Qt::RightButton || m_colorPicker->isVisible()) {
         m_colorPicker->hide();
-        m_rightClick = false;
         if (!m_context.color.isValid()) {
             m_context.color = ConfigHandler().drawColorValue();
             m_panel->show();
@@ -563,8 +561,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             m_undoStack.push(
               new ModificationCommand(this, m_captureToolObjects));
         }
-        // when we end the drawing we have to register the last  point and
-        // add the temp modification to the list of modifications
     } else if (m_mouseIsClicked) {
         if (m_activeTool) {
             // end draw/edit
@@ -1241,7 +1237,7 @@ void CaptureWidget::updateSizeIndicator()
 
 void CaptureWidget::updateCursor()
 {
-    if (m_rightClick) {
+    if (m_colorPicker && m_colorPicker->isVisible()) {
         setCursor(Qt::ArrowCursor);
     } else if (m_grabbing) {
         if (m_adjustmentButtonPressed) {
