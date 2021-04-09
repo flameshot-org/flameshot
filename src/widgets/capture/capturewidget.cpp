@@ -339,11 +339,12 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
     m_mousePressedPos = e->pos();
+    m_dragStartPoint = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
 
+    auto toolItem = activeToolObject();
     if (e->button() == Qt::RightButton) {
         // Reset selection if mouse pos is not in selection area
-        auto toolItem = activeToolObject();
         if (toolItem) {
             if (!toolItem->selectionRect().contains(e->pos())) {
                 m_panel->setActiveLayer(-1);
@@ -351,6 +352,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             }
         }
 
+        // Call color picker
         m_rightClick = true;
         m_colorPicker->move(e->pos().x() - m_colorPicker->width() / 2,
                             e->pos().y() - m_colorPicker->height() / 2);
@@ -359,7 +361,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
-        // Click using a tool
+
+        // Click using a tool excluding tool MOVE
         if (m_activeButton &&
             m_activeButton->tool()->nameID() != ToolType::MOVE) {
             if (commitCurrentTool()) {
@@ -395,7 +398,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             return;
         }
 
-        m_dragStartPoint = e->pos();
         m_selection->saveGeometry();
         // New selection
         if (m_captureToolObjects.captureToolObjects().size() == 0) {
@@ -411,6 +413,19 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             }
         }
     }
+
+    // Try to select existing tool
+    if (!m_activeButton &&
+        m_captureToolObjects.captureToolObjects().size() > 0) {
+        if (!toolItem ||
+            (toolItem && !toolItem->selectionRect().contains(e->pos()))) {
+            int activeLayerIndex = m_captureToolObjects.find(e->pos(), size());
+            m_panel->setActiveLayer(activeLayerIndex);
+            drawToolsData(true, true);
+            return;
+        }
+    }
+
     updateCursor();
 }
 
@@ -567,11 +582,11 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
                   new ModificationCommand(this, m_captureToolObjects));
             }
 
-            if (e->pos() == m_mousePressedPos) {
-                // mouse clicked even
-                int activeLayerIndex =
-                  m_captureToolObjects.find(e->pos(), size());
-                m_panel->setActiveLayer(activeLayerIndex);
+            // Try to select existing tool if it was in the selection area but
+            // need to select another one
+            if (e->pos() == m_mousePressedPos && !m_activeToolIsMoved) {
+                m_panel->setActiveLayer(
+                  m_captureToolObjects.find(e->pos(), size()));
             }
             drawToolsData(true, true);
         }
