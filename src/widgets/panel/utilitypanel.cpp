@@ -197,6 +197,7 @@ void UtilityPanel::slotCaptureToolsCurrentRowChanged(int currentRow)
     } else {
         m_buttonDelete->setDisabled(true);
     }
+    emit layerChanged(currentRow);
 }
 
 void UtilityPanel::slotButtonDelete(bool clicked)
