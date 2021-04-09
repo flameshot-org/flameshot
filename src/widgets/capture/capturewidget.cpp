@@ -1064,6 +1064,13 @@ void CaptureWidget::setDrawThickness(const int& t)
     m_context.thickness = qBound(0, t, 100);
     ConfigHandler().setDrawThickness(m_context.thickness);
     emit thicknessChanged(m_context.thickness);
+
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        // Change thickness
+        emit toolItem->thicknessChanged(t);
+        drawToolsData(false, true);
+    }
 }
 
 void CaptureWidget::repositionSelection(QRect r)
