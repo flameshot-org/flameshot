@@ -4,6 +4,8 @@
 #include "penciltool.h"
 #include <QPainter>
 
+#define PADDING_VALUE 2
+
 PencilTool::PencilTool(QObject* parent)
   : AbstractPathTool(parent)
 {}
@@ -52,7 +54,7 @@ void PencilTool::paintMousePreview(QPainter& painter,
 void PencilTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    thicknessChanged(context.thickness + 2);
+    thicknessChanged(context.thickness + PADDING_VALUE);
     m_points.append(context.mousePos);
     m_pathArea.setTopLeft(context.mousePos);
     m_pathArea.setBottomRight(context.mousePos);

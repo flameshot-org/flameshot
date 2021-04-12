@@ -54,13 +54,6 @@ void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawRect(QRect(points().first, points().second));
 }
 
-void SelectionTool::paintMousePreview(QPainter& painter,
-                                      const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
-}
-
 void SelectionTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)

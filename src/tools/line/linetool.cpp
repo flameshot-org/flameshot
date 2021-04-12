@@ -52,13 +52,6 @@ void LineTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawLine(points().first, points().second);
 }
 
-void LineTool::paintMousePreview(QPainter& painter,
-                                 const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
-}
-
 void LineTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)
