@@ -94,6 +94,14 @@ void AbstractTwoPointTool::thicknessChanged(int th)
     m_thickness = th;
 }
 
+void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
+                                             const CaptureContext& context)
+{
+    painter.setPen(
+      QPen(context.color, context.thickness + PADDING_VALUE_DEFAULT));
+    painter.drawLine(context.mousePos, context.mousePos);
+}
+
 void AbstractTwoPointTool::drawStart(const CaptureContext& context)
 {
     colorChanged(context.color);
