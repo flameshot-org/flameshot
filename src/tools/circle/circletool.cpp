@@ -48,13 +48,6 @@ void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawEllipse(QRect(points().first, points().second));
 }
 
-void CircleTool::paintMousePreview(QPainter& painter,
-                                   const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
-}
-
 void CircleTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)

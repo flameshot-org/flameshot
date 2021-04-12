@@ -108,13 +108,6 @@ void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.fillPath(m_arrowPath, QBrush(color()));
 }
 
-void ArrowTool::paintMousePreview(QPainter& painter,
-                                  const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
-}
-
 void ArrowTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)

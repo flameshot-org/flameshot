@@ -19,8 +19,6 @@ public:
 
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
-    void paintMousePreview(QPainter& painter,
-                           const CaptureContext& context) override;
     void drawObjectSelection(QPainter& painter) override;
 
 protected:

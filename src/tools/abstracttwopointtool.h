@@ -21,6 +21,8 @@ public:
     int thickness() override { return m_thickness; };
     const QColor& color() { return m_color; };
     const QPair<QPoint, QPoint> points() { return m_points; };
+    void paintMousePreview(QPainter& painter,
+                           const CaptureContext& context) override;
 
 public slots:
     void drawEnd(const QPoint& p) override;
