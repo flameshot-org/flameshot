@@ -50,7 +50,7 @@
      inkscape:current-layer="svg4" />
   <path
      d="M 13.65234,2.0859629 V 10.34766 h 8.261697 c 0,3.30468 0,0 0,3.30468 H 13.65234 v 8.261697 c -3.30468,0 0,0 -3.30468,0 V 13.65234 H 2.0859629 c 0,-3.30468 0,0 0,-3.30468 H 10.34766 V 2.0859629 c 3.30468,0 0,0 3.30468,0 z"
-     fill="#ffffff"
+     fill="#000000"
      id="path2"
      sodipodi:nodetypes="ccccccccccccc"
      style="stroke-width:1.65234;fill:#000000" />
