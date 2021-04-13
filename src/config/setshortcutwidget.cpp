@@ -31,8 +31,13 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent)
 
     m_layout->addWidget(infoIcon);
 
+#if defined(Q_OS_MAC)
+    QLabel* infoBottom = new QLabel(tr(
+      "Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut."));
+#else
     QLabel* infoBottom = new QLabel(
       tr("Press Esc to cancel or Backspace to disable the keyboard shortcut."));
+#endif
     infoBottom->setMargin(10);
     infoBottom->setAlignment(Qt::AlignCenter);
     m_layout->addWidget(infoBottom);
