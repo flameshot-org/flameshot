@@ -175,6 +175,10 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         saveInfoBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
         saveInfoBox.exec();
         return ok;
+    } else if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
+               !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
+               !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
+        savePath += QLatin1String(".png");
     }
 
     ok = capture.save(savePath);
