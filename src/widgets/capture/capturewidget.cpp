@@ -340,6 +340,11 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     m_dragStartPoint = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
 
+    // reset object selection of selection are is active
+    if (m_selection->getMouseSide(e->pos()) != SelectionWidget::NO_SIDE) {
+        m_panel->setActiveLayer(-1);
+    }
+
     auto toolItem = activeToolObject();
     if (e->button() == Qt::RightButton) {
         // Reset selection if mouse pos is not in selection area
@@ -413,7 +418,8 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 
     // Try to select existing tool
     if (!m_activeButton &&
-        m_captureToolObjects.captureToolObjects().size() > 0) {
+        m_captureToolObjects.captureToolObjects().size() > 0 &&
+        m_selection->getMouseSide(e->pos()) == SelectionWidget::NO_SIDE) {
         if (!toolItem ||
             (toolItem && !toolItem->selectionRect().contains(e->pos()))) {
             int activeLayerIndex = m_captureToolObjects.find(e->pos(), size());
