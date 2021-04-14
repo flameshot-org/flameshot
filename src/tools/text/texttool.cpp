@@ -66,14 +66,18 @@ QString TextTool::description() const
 
 QWidget* TextTool::widget()
 {
-    if (m_widget.isNull()) {
-        m_widget = new TextWidget();
-        m_widget->setTextColor(m_color);
-        m_font.setPointSize(m_size + BASE_POINT_SIZE);
-        m_widget->setFont(m_font);
-        connect(
+    if (!m_widget.isNull()) {
+        disconnect(
           m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
+        m_widget->close();
+        delete m_widget;
+        m_widget = nullptr;
     }
+    m_widget = new TextWidget();
+    m_widget->setTextColor(m_color);
+    m_font.setPointSize(m_size + BASE_POINT_SIZE);
+    m_widget->setFont(m_font);
+    connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
     return m_widget;
 }
 
