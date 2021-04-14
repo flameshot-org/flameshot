@@ -417,7 +417,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
 
     // Try to select existing tool
-    if (!m_activeButton &&
+    if (m_activeButton.isNull() &&
         m_captureToolObjects.captureToolObjects().size() > 0 &&
         m_selection->getMouseSide(e->pos()) == SelectionWidget::NO_SIDE) {
         if (!toolItem ||
@@ -584,7 +584,8 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 
             // Try to select existing tool if it was in the selection area but
             // need to select another one
-            if (e->pos() == m_mousePressedPos && !m_activeToolIsMoved) {
+            if (e->pos() == m_mousePressedPos && !m_activeToolIsMoved &&
+                m_activeButton.isNull()) {
                 m_panel->setActiveLayer(
                   m_captureToolObjects.find(e->pos(), size()));
             }
