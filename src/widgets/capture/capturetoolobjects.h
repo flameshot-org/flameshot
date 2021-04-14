@@ -14,12 +14,11 @@ public:
     explicit CaptureToolObjects(QObject* parent = nullptr) { Q_UNUSED(parent) };
     QList<QPointer<CaptureTool>> captureToolObjects();
     void append(const QPointer<CaptureTool>& captureTool);
-    QPointer<CaptureTool> at(int index);
     void removeAt(int index);
     void clear();
     int size();
     int find(const QPoint& pos, const QSize& captureSize);
-    QPointer<CaptureTool> toolAt(int index);
+    QPointer<CaptureTool> at(int index);
     CaptureToolObjects& operator=(const CaptureToolObjects& other);
 
 private:

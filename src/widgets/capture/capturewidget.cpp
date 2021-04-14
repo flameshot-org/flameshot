@@ -441,7 +441,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     if (m_mouseIsClicked && !m_activeButton && activeLayerIndex >= 0) {
         // Move existing object
         QPointer<CaptureTool> activeTool =
-          m_captureToolObjects.toolAt(activeLayerIndex);
+          m_captureToolObjects.at(activeLayerIndex);
         if (m_activeToolOffsetToMouseOnStart.isNull()) {
             setCursor(Qt::OpenHandCursor);
             m_activeToolOffsetToMouseOnStart = e->pos() - *activeTool->pos();
