@@ -108,6 +108,9 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
 
 private:
+    void selectToolItemAtPos(const QPoint& pos);
+    void showColorPicker(const QPoint& pos);
+    bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
     void initContext(const QString& savePath, bool fullscreen);
     void initPanel();
