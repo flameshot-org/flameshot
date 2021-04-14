@@ -342,11 +342,8 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 {
     // Reset object selection if mouse pos is not in selection area
     auto toolItem = activeToolObject();
-    if (toolItem) {
-        if (!toolItem->selectionRect().contains(pos)) {
-            m_panel->setActiveLayer(-1);
-            drawToolsData(false, true);
-        }
+    if (toolItem && !toolItem->selectionRect().contains(pos)) {
+        m_panel->setActiveLayer(-1);
     }
 
     // Call color picker
@@ -387,7 +384,6 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
               new ModificationCommand(this, m_captureToolObjects));
             m_activeTool = nullptr;
             m_mouseIsClicked = false;
-            drawToolsData(true);
         }
         return true;
     }
@@ -405,7 +401,7 @@ void CaptureWidget::selectToolItemAtPos(const QPoint& pos)
             (toolItem && !toolItem->selectionRect().contains(pos))) {
             int activeLayerIndex = m_captureToolObjects.find(pos, size());
             m_panel->setActiveLayer(activeLayerIndex);
-            drawToolsData(true, true);
+            drawObjectSelection();
         }
     }
 }
@@ -742,7 +738,6 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     auto toolItem = activeToolObject();
     if (toolItem) {
         toolItem->thicknessChanged(m_context.thickness);
-        drawToolsData(false, true);
 
         // TODO - save thickness update, but not immediately
         m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
@@ -837,7 +832,7 @@ void CaptureWidget::initPanel()
     connect(m_panel,
             &UtilityPanel::layerChanged,
             this,
-            &CaptureWidget::setActiveLayer);
+            &CaptureWidget::updateActiveLayer);
 
     SidePanelWidget* sidePanel = new SidePanelWidget(&m_context.screenshot);
     connect(sidePanel,
@@ -1076,7 +1071,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
     }
 }
 
-void CaptureWidget::setActiveLayer(const int& layer)
+void CaptureWidget::updateActiveLayer(const int& layer)
 {
     drawToolsData(false, true);
 }
@@ -1346,8 +1341,6 @@ void CaptureWidget::pushToolToStack()
 
     // push current state to the undo stack
     m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
-
-    drawToolsData();
 }
 
 void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
@@ -1462,6 +1455,7 @@ void CaptureWidget::saveScreenshot()
 void CaptureWidget::setCaptureToolObjects(
   const CaptureToolObjects& captureToolObjects)
 {
+    // Used for undo/redo
     m_captureToolObjects = captureToolObjects;
     drawToolsData(true, true);
 }
