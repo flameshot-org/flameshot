@@ -108,14 +108,6 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
     return -1;
 }
 
-QPointer<CaptureTool> CaptureToolObjects::toolAt(int index)
-{
-    if (index >= 0 && index < m_captureToolObjects.size()) {
-        return m_captureToolObjects[index];
-    }
-    return nullptr;
-}
-
 CaptureToolObjects& CaptureToolObjects::operator=(
   const CaptureToolObjects& other)
 {
