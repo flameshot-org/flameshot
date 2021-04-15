@@ -999,6 +999,10 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             setState(m_activeButton); // Disable the actual button
             break;
         case CaptureTool::REQ_CAPTURE_DONE_OK:
+            if (m_panel->activeLayerIndex() >= 0) {
+                m_panel->setActiveLayer(-1);
+                drawToolsData(false, false);
+            }
             m_captureDone = true;
             break;
         case CaptureTool::REQ_ADD_CHILD_WIDGET:
