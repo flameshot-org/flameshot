@@ -378,6 +378,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
             m_captureToolObjects.append(m_activeTool);
             m_undoStack.push(
               new ModificationCommand(this, m_captureToolObjects));
+            m_activeTool->deleteLater();
             m_activeTool = nullptr;
             m_mouseIsClicked = false;
         }
@@ -1327,6 +1328,7 @@ void CaptureWidget::pushToolToStack()
         }
 
         m_captureToolObjects.append(m_activeTool);
+        m_activeTool->deleteLater();
         m_activeTool = nullptr;
     }
 
@@ -1346,18 +1348,15 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
             m_context.circleCount++;
         }
         toolItem->process(painter, pixmapItem);
-        if (drawSelection) {
-            if (m_panel->activeLayerIndex() == index) {
-                toolItem->drawObjectSelection(painter);
-            }
-            index++;
-        }
     }
 
     m_context.screenshot = pixmapItem.copy();
     update();
     if (updateLayersPanel) {
         m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
+    }
+
+    if (drawSelection) {
         drawObjectSelection();
     }
 }
@@ -1370,6 +1369,13 @@ void CaptureWidget::drawObjectSelection()
         toolItem->drawObjectSelection(painter);
         m_context.thickness =
           toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
+        if (activeToolObject() && m_activeButton) {
+            // uncheck active tool
+            m_activeButton->setColor(m_uiColor);
+            m_activeButton = nullptr;
+            m_activeTool->deleteLater();
+            m_activeTool = nullptr;
+        }
     }
 }
 
