@@ -12,6 +12,11 @@ TextTool::TextTool(QObject* parent)
   , m_size(1)
 {}
 
+TextTool::~TextTool()
+{
+    closeEditor();
+}
+
 void TextTool::copyParams(const TextTool* from, TextTool* to)
 {
     CaptureTool::copyParams(from, to);
@@ -66,6 +71,17 @@ QString TextTool::description() const
 
 QWidget* TextTool::widget()
 {
+    closeEditor();
+    m_widget = new TextWidget();
+    m_widget->setTextColor(m_color);
+    m_font.setPointSize(m_size + BASE_POINT_SIZE);
+    m_widget->setFont(m_font);
+    connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
+    return m_widget;
+}
+
+void TextTool::closeEditor()
+{
     if (!m_widget.isNull()) {
         disconnect(
           m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
@@ -73,12 +89,6 @@ QWidget* TextTool::widget()
         delete m_widget;
         m_widget = nullptr;
     }
-    m_widget = new TextWidget();
-    m_widget->setTextColor(m_color);
-    m_font.setPointSize(m_size + BASE_POINT_SIZE);
-    m_widget->setFont(m_font);
-    connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
-    return m_widget;
 }
 
 QWidget* TextTool::configurationWidget()
