@@ -15,6 +15,7 @@ class TextTool : public CaptureTool
     Q_OBJECT
 public:
     explicit TextTool(QObject* parent = nullptr);
+    ~TextTool();
 
     bool isValid() const override;
     bool closeOnButtonPressed() const override;
@@ -58,6 +59,8 @@ private slots:
     void updateFontItalic(const bool italic);
 
 private:
+    void closeEditor();
+
     QFont m_font;
     QString m_text;
     int m_size;
