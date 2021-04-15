@@ -49,8 +49,8 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
     QRect selectionScaled =
       QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
-    // If thickness is less than 1, use old blur process
-    if (thickness() <= 1) {
+    // If thickness is 0, use old blur process
+    if (thickness() <= 0) {
 
         QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
         blur->setBlurRadius(10);
@@ -67,10 +67,10 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
         scene.render(&painter, selection, QRectF());
 
     } else {
-        int width =
-          static_cast<int>(selection.width() * (0.5 / qMax(1, thickness())));
-        int height =
-          static_cast<int>(selection.height() * (0.5 / qMax(1, thickness())));
+        int width = static_cast<int>(selection.width() *
+                                     (0.5 / qMax(1, thickness() + 1)));
+        int height = static_cast<int>(selection.height() *
+                                      (0.5 / qMax(1, thickness() + 1)));
         QSize size = QSize(qMax(width, 1), qMax(height, 1));
 
         QPixmap t = pixmap.copy(selectionScaled);
