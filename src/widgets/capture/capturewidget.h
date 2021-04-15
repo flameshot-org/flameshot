@@ -106,6 +106,7 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
 
 private:
+    void uncheckActiveTool();
     void selectToolItemAtPos(const QPoint& pos);
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);

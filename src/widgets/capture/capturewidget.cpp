@@ -266,17 +266,16 @@ QPixmap CaptureWidget::pixmap()
 // tool.
 bool CaptureWidget::commitCurrentTool()
 {
-    if (m_activeButton) {
-        if (m_activeTool) {
-            if (m_activeTool->isValid() && m_toolWidget) {
-                pushToolToStack();
-            } else {
-                m_activeTool->deleteLater();
-            }
-            if (m_toolWidget) {
-                m_toolWidget->deleteLater();
-                return true;
-            }
+    if (m_activeButton && m_activeTool) {
+        if (m_activeTool->isValid() && m_toolWidget) {
+            pushToolToStack();
+        } else {
+            m_activeTool->deleteLater();
+            m_activeTool = nullptr;
+        }
+        if (m_toolWidget) {
+            m_toolWidget->deleteLater();
+            return true;
         }
     }
     return false;
@@ -286,10 +285,7 @@ void CaptureWidget::deleteToolWidgetOrClose()
 {
     if (!m_activeButton.isNull()) {
         // uncheck active tool
-        m_activeButton->setColor(m_uiColor);
-        m_activeButton = nullptr;
-        updateCursor();
-        update(); // clear mouse preview
+        uncheckActiveTool();
     } else if (m_panel->activeLayerIndex() >= 0) {
         // remove active tool selection
         m_panel->setActiveLayer(-1);
@@ -305,6 +301,17 @@ void CaptureWidget::deleteToolWidgetOrClose()
         // close CaptureWidget
         close();
     }
+}
+
+void CaptureWidget::uncheckActiveTool()
+{
+    // uncheck active tool
+    m_activeButton->setColor(m_uiColor);
+    m_activeButton = nullptr;
+    m_activeTool->deleteLater();
+    m_activeTool = nullptr;
+    updateCursor();
+    update(); // clear mouse preview
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
@@ -1370,11 +1377,7 @@ void CaptureWidget::drawObjectSelection()
         m_context.thickness =
           toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
         if (activeToolObject() && m_activeButton) {
-            // uncheck active tool
-            m_activeButton->setColor(m_uiColor);
-            m_activeButton = nullptr;
-            m_activeTool->deleteLater();
-            m_activeTool = nullptr;
+            uncheckActiveTool();
         }
     }
 }
