@@ -284,7 +284,6 @@ bool CaptureWidget::commitCurrentTool()
 void CaptureWidget::deleteToolWidgetOrClose()
 {
     if (!m_activeButton.isNull()) {
-        // uncheck active tool
         uncheckActiveTool();
     } else if (m_panel->activeLayerIndex() >= 0) {
         // remove active tool selection
@@ -404,8 +403,12 @@ void CaptureWidget::selectToolItemAtPos(const QPoint& pos)
         if (!toolItem ||
             (toolItem && !toolItem->selectionRect().contains(pos))) {
             int activeLayerIndex = m_captureToolObjects.find(pos, size());
+            int thickness_old = m_context.thickness;
             m_panel->setActiveLayer(activeLayerIndex);
             drawObjectSelection();
+            if (thickness_old != m_context.thickness) {
+                emit thicknessChanged(m_context.thickness);
+            }
         }
     }
 }
@@ -1247,8 +1250,12 @@ void CaptureWidget::initShortcuts()
 
 void CaptureWidget::deleteCurrentTool()
 {
+    int thickness_old = m_context.thickness;
     emit m_panel->slotButtonDelete(true);
     drawObjectSelection();
+    if (thickness_old != m_context.thickness) {
+        emit thicknessChanged(m_context.thickness);
+    }
 }
 
 void CaptureWidget::updateSizeIndicator()
@@ -1368,7 +1375,11 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     }
 
     if (drawSelection) {
+        int thickness_old = m_context.thickness;
         drawObjectSelection();
+        if (thickness_old != m_context.thickness) {
+            emit thicknessChanged(m_context.thickness);
+        }
     }
 }
 
@@ -1378,8 +1389,10 @@ void CaptureWidget::drawObjectSelection()
     if (toolItem) {
         QPainter painter(&m_context.screenshot);
         toolItem->drawObjectSelection(painter);
-        m_context.thickness =
-          toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
+        if (m_context.thickness != toolItem->thickness()) {
+            m_context.thickness =
+              toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
+        }
         if (activeToolObject() && m_activeButton) {
             uncheckActiveTool();
         }
