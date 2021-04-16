@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="74"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="75"/>
         <source>Arrow</source>
         <translation>箭头</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="84"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>选择箭头作为绘画工具</translation>
     </message>
@@ -128,13 +128,13 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="90"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="96"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="339"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1555"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -147,7 +147,7 @@ Press Space to open the side panel.</source>
 按下空格键以打开侧边面板。</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="722"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="807"/>
         <source>Tool Settings</source>
         <translation>工具设置</translation>
     </message>
@@ -155,12 +155,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="28"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="26"/>
         <source>Circle Counter</source>
         <translation>圆圈计数</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="38"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>添加数字自动递增的计数圆圈</translation>
     </message>
@@ -181,85 +181,90 @@ Press Space to open the side panel.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="28"/>
+        <location filename="../../src/config/configwindow.cpp" line="29"/>
         <source>Configuration</source>
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="49"/>
+        <location filename="../../src/config/configwindow.cpp" line="50"/>
         <source>Interface</source>
         <translation>界面</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="55"/>
+        <location filename="../../src/config/configwindow.cpp" line="56"/>
         <source>Filename Editor</source>
         <translation>文件名编辑器</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="59"/>
+        <location filename="../../src/config/configwindow.cpp" line="60"/>
         <source>General</source>
         <translation>常规</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="63"/>
+        <location filename="../../src/config/configwindow.cpp" line="64"/>
         <source>Shortcuts</source>
         <translation>快捷键</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/configwindow.cpp" line="70"/>
+        <source>Storage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="197"/>
+        <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
         <translation>新版本 %1 已经可用</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="204"/>
+        <location filename="../../src/core/controller.cpp" line="205"/>
         <source>You have the latest version</source>
         <translation>您正在运行最新版本</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="212"/>
+        <location filename="../../src/core/controller.cpp" line="213"/>
         <source>Failed to get information about the latest version.</source>
         <translation>获取最新版本信息时失败。</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="293"/>
+        <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="293"/>
+        <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Unable to close active modal widgets</source>
         <translation>无法关闭活动模态组件</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="398"/>
+        <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
         <translation>进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="414"/>
+        <location filename="../../src/core/controller.cpp" line="415"/>
         <source>&amp;Open Launcher</source>
         <translation>打开启动器(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="419"/>
+        <location filename="../../src/core/controller.cpp" line="420"/>
         <source>&amp;Configuration</source>
         <translation>配置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="422"/>
+        <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
         <translation>关于(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="425"/>
+        <location filename="../../src/core/controller.cpp" line="426"/>
         <source>Check for updates</source>
         <translation>检查更新</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="432"/>
+        <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
         <translation>最近的上传(&amp;L)</translation>
     </message>
@@ -268,7 +273,7 @@ Press Space to open the side panel.</source>
         <translation type="vanished">信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="428"/>
+        <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;Quit</source>
         <translation>退出(&amp;Q)</translation>
     </message>
@@ -336,8 +341,12 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Reset</source>
-        <translation>恢复</translation>
+        <translation type="vanished">恢复</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
@@ -350,7 +359,7 @@ Press Space to open the side panel.</source>
         <translation>清空</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="87"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
         <translation>删除这个名字</translation>
     </message>
@@ -477,183 +486,183 @@ Press Space to open the side panel.</source>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="106"/>
-        <location filename="../../src/config/generalconf.cpp" line="278"/>
+        <location filename="../../src/config/generalconf.cpp" line="107"/>
+        <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="113"/>
-        <location filename="../../src/config/generalconf.cpp" line="121"/>
-        <location filename="../../src/config/generalconf.cpp" line="144"/>
-        <location filename="../../src/config/generalconf.cpp" line="509"/>
+        <location filename="../../src/config/generalconf.cpp" line="114"/>
+        <location filename="../../src/config/generalconf.cpp" line="122"/>
+        <location filename="../../src/config/generalconf.cpp" line="145"/>
+        <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="113"/>
+        <location filename="../../src/config/generalconf.cpp" line="114"/>
         <source>Unable to read file.</source>
         <translation>无法读取文件。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="121"/>
-        <location filename="../../src/config/generalconf.cpp" line="144"/>
+        <location filename="../../src/config/generalconf.cpp" line="122"/>
+        <location filename="../../src/config/generalconf.cpp" line="145"/>
         <source>Unable to write file.</source>
         <translation>无法写入文件。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="131"/>
+        <location filename="../../src/config/generalconf.cpp" line="132"/>
         <source>Save File</source>
         <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="153"/>
+        <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Confirm Reset</source>
         <translation>确定重置</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="154"/>
+        <location filename="../../src/config/generalconf.cpp" line="155"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>你确定你想要重置配置？</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="189"/>
+        <location filename="../../src/config/generalconf.cpp" line="190"/>
         <source>Show help message</source>
         <translation>显示帮助信息</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="193"/>
+        <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>在捕获之前显示帮助信息。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="203"/>
+        <location filename="../../src/config/generalconf.cpp" line="204"/>
         <source>Show the side panel button</source>
         <translation>显示侧边栏按钮</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="206"/>
+        <location filename="../../src/config/generalconf.cpp" line="207"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation>在捕获模式下显示侧边栏切换按钮。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="216"/>
-        <location filename="../../src/config/generalconf.cpp" line="220"/>
+        <location filename="../../src/config/generalconf.cpp" line="217"/>
+        <location filename="../../src/config/generalconf.cpp" line="221"/>
         <source>Show desktop notifications</source>
         <translation>显示桌面通知</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
+        <location filename="../../src/config/generalconf.cpp" line="233"/>
         <source>Show tray icon</source>
         <translation>显示托盘图标</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="235"/>
+        <location filename="../../src/config/generalconf.cpp" line="236"/>
         <source>Show the systemtray icon</source>
         <translation>显示任务栏图标</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <location filename="../../src/config/generalconf.cpp" line="253"/>
+        <location filename="../../src/config/generalconf.cpp" line="249"/>
+        <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>从最近的上传历史中删除屏幕截图需要进行确认</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="266"/>
+        <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="271"/>
+        <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="285"/>
+        <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="295"/>
-        <location filename="../../src/config/generalconf.cpp" line="297"/>
+        <location filename="../../src/config/generalconf.cpp" line="296"/>
+        <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Automatic check for updates</source>
         <translation>自动检查更新</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="308"/>
+        <location filename="../../src/config/generalconf.cpp" line="309"/>
         <source>Launch at startup</source>
         <translation>开机时启动</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="311"/>
-        <location filename="../../src/config/generalconf.cpp" line="325"/>
+        <location filename="../../src/config/generalconf.cpp" line="312"/>
+        <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Launch Flameshot</source>
         <translation>启动火焰截图</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="321"/>
+        <location filename="../../src/config/generalconf.cpp" line="322"/>
         <source>Show welcome message on launch</source>
         <translation>启动时显示欢迎消息</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="336"/>
+        <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>Copy URL after upload</source>
         <translation>上传后复制 URL</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL and close window after upload</source>
         <translation>上传后复制 URL 并关闭窗口</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="351"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image after copy</source>
         <translation>复制后保存图像</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="352"/>
+        <location filename="../../src/config/generalconf.cpp" line="353"/>
         <source>Save image file after copying it</source>
         <translation>复制到剪贴板后保存图像文件</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="359"/>
+        <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Save Path</source>
         <translation>保存路径</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="383"/>
+        <location filename="../../src/config/generalconf.cpp" line="384"/>
         <source>Change...</source>
         <translation>变更…</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="391"/>
+        <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>使用固定的屏幕截图保存路径</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="409"/>
+        <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="442"/>
-        <location filename="../../src/config/generalconf.cpp" line="447"/>
+        <location filename="../../src/config/generalconf.cpp" line="443"/>
+        <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>剪贴板使用 JPG 格式（默认为 PNG）</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="481"/>
-        <location filename="../../src/config/generalconf.cpp" line="484"/>
+        <location filename="../../src/config/generalconf.cpp" line="482"/>
+        <location filename="../../src/config/generalconf.cpp" line="485"/>
         <source>Copy file path after save</source>
         <translation>保存文件后复制文件路径</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="500"/>
+        <location filename="../../src/config/generalconf.cpp" line="501"/>
         <source>Choose a Folder</source>
         <translation>选择文件夹</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="509"/>
+        <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Unable to write to directory.</source>
         <translation>无法写入目录。</translation>
     </message>
@@ -661,37 +670,37 @@ Press Space to open the side panel.</source>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
         <source>Latest Uploads</source>
         <translation>最近的上传</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="93"/>
         <source>Screenshots history is empty</source>
         <translation>屏幕截图历史为空</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="147"/>
         <source>Copy URL</source>
         <translation>复制链接</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>URL copied to clipboard.</source>
         <translation>链接已复制到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="157"/>
         <source>Open in browser</source>
         <translation>在浏览器中打开</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="173"/>
         <source>Confirm to delete</source>
         <translation>确认进行删除</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="174"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation>您确认要从最近的上传历史和服务器上删除该屏幕截图吗？</translation>
     </message>
@@ -703,8 +712,63 @@ Press Space to open the side panel.</source>
         <translation type="obsolete">正在上传</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="130"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="148"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="436"/>
         <source>Error</source>
-        <translation type="obsolete">错误</translation>
+        <translation type="unfinished">错误</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="149"/>
+        <source>Unable to upload screenshot, please check your internet connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="205"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="432"/>
+        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="440"/>
+        <source>Retrieving configuration file with s3 creds...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -714,88 +778,116 @@ Press Space to open the side panel.</source>
         <translation type="obsolete">正在上传</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="89"/>
         <source>Unable to open the URL.</source>
-        <translation type="obsolete">无法打开此链接。</translation>
+        <translation type="unfinished">无法打开此链接。</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="obsolete">截图复制到剪贴板。</translation>
+        <translation type="unfinished">截图复制到剪贴板。</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="171"/>
         <source>Copy URL</source>
-        <translation type="obsolete">复制链接</translation>
+        <translation type="unfinished">复制链接</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
         <source>Open URL</source>
-        <translation type="obsolete">打开链接</translation>
+        <translation type="unfinished">打开链接</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
         <source>Delete image</source>
-        <translation type="obsolete">删除图像</translation>
+        <translation type="unfinished">删除图像</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="111"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="96"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Image to Clipboard.</source>
-        <translation type="obsolete">保存文件到剪贴板。</translation>
+        <translation type="unfinished">保存文件到剪贴板。</translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
+    <message>
+        <location filename="../../src/tools/storage/imguploadertool.cpp" line="22"/>
+        <source>Image uploader tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="45"/>
         <source>Upload to Imgur</source>
         <translation>上传到Imgur</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>正在上传</translation>
+        <translation type="vanished">正在上传</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation>复制链接</translation>
+        <translation type="vanished">复制链接</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation>打开链接</translation>
+        <translation type="vanished">打开链接</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation>删除图像</translation>
+        <translation type="vanished">删除图像</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation>保存文件到剪贴板。</translation>
+        <translation type="vanished">保存文件到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="124"/>
         <source>Unable to open the URL.</source>
         <translation>无法打开此链接。</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation>复制链接到剪贴板。</translation>
+        <translation type="vanished">复制链接到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>截图复制到剪贴板。</translation>
+        <translation type="vanished">截图复制到剪贴板。</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
+        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="14"/>
         <source>Image Uploader</source>
         <translation>上传图片</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
+        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
         <source>Upload the selection to Imgur</source>
         <translation>上传选择到 Imgur</translation>
     </message>
@@ -885,12 +977,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="27"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="28"/>
         <source>Line</source>
         <translation>直线</translation>
     </message>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="37"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="38"/>
         <source>Set the Line as the paint tool</source>
         <translation>将直线线设置为绘画工具</translation>
     </message>
@@ -924,12 +1016,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>PencilTool</name>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="20"/>
         <source>Pencil</source>
         <translation>铅笔</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
         <source>Set the Pencil as the paint tool</source>
         <translation>将铅笔设置为绘画工具</translation>
     </message>
@@ -963,26 +1055,24 @@ Press Space to open the side panel.</source>
 <context>
     <name>QHotkey</name>
     <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation>注册 %1 失败。错误：%2</translation>
+        <translation type="vanished">注册 %1 失败。错误：%2</translation>
     </message>
     <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation>取消注册 %1 失败。错误：%2</translation>
+        <translation type="vanished">取消注册 %1 失败。错误：%2</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="152"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="212"/>
         <source>Save Error</source>
         <translation>保存错误</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="139"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Capture saved as </source>
         <translation>捕获已保存为 </translation>
     </message>
@@ -1004,17 +1094,27 @@ Press Space to open the side panel.</source>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="150"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="210"/>
         <source>Error trying to save as </source>
         <translation>尝试另存为时出错 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="121"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="166"/>
         <source>Save screenshot</source>
         <translation>保存屏幕截图</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="143"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
+        <source>Saving canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
+        <source>Save canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <source>Capture is saved and copied to the clipboard as </source>
         <translation>捕获已保存并复制到剪贴板，作为 </translation>
     </message>
@@ -1180,7 +1280,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>无法写入</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
         <source>URL copied to clipboard.</source>
         <translation>URL 已复制到剪贴板。</translation>
     </message>
@@ -1219,7 +1319,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">默认情况下，火焰截图启动后将在后台运行，并在托盘显示一个图标。</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="505"/>
+        <location filename="../../src/core/controller.cpp" line="506"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>我已启动并在后台运行！点击托盘图标即可进行屏幕截图，右键点击托盘图标可查看更多选项。</translation>
     </message>
@@ -1279,29 +1379,35 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>在文本区域提交文本</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
+        <source>Delete current tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
         <source>Quit capture</source>
         <translation>退出捕获</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="71"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
         <source>Screenshot history</source>
         <translation>屏幕截图历史</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="69"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="87"/>
         <source>Capture screen</source>
         <translation>捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="81"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="94"/>
         <source>Show color picker</source>
         <translation>显示颜色选择器</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="83"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>改变工具的厚度</translation>
     </message>
@@ -1309,12 +1415,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="25"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="24"/>
         <source>Rectangle</source>
         <translation>实心矩形</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="35"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="34"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>将实心矩形设置为绘画工具</translation>
     </message>
@@ -1380,6 +1486,11 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
+        <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation>按下 Esc 键以取消或按下退格键以禁用键盘快捷键。</translation>
     </message>
@@ -1611,12 +1722,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="43"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="59"/>
         <source>Text</source>
         <translation>文本</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="53"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="69"/>
         <source>Add text to your capture</source>
         <translation>在您的捕获中添加文本</translation>
     </message>
@@ -1696,11 +1807,34 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
 </context>
 <context>
+    <name>UploadStorageConfig</name>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="116"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="157"/>
         <source>Close</source>
         <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="167"/>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

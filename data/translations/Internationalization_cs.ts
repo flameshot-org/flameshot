@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="74"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="75"/>
         <source>Arrow</source>
         <translation>Šipka</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="84"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Nastavit šipku jako malovací nástroj</translation>
     </message>
@@ -128,12 +128,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="90"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="96"/>
         <source>Unable to capture screen</source>
         <translation>Nelze zachytit obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="339"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1555"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Použijte kolečko myši pro změnu tloušťky nástroje.
 Stiskněte mezerník pro otevření postranního panelu.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="722"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="807"/>
         <source>Tool Settings</source>
         <translation>Nastavení nástrojů</translation>
     </message>
@@ -154,12 +154,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="28"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="26"/>
         <source>Circle Counter</source>
         <translation>Kruhové počítadlo</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="38"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Přidá bublinu s číslem (vždy zvýšeným o jednotku)</translation>
     </message>
@@ -180,85 +180,90 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="28"/>
+        <location filename="../../src/config/configwindow.cpp" line="29"/>
         <source>Configuration</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="49"/>
+        <location filename="../../src/config/configwindow.cpp" line="50"/>
         <source>Interface</source>
         <translation>Rozhraní</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="55"/>
+        <location filename="../../src/config/configwindow.cpp" line="56"/>
         <source>Filename Editor</source>
         <translation>Editor názvů souborů</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="59"/>
+        <location filename="../../src/config/configwindow.cpp" line="60"/>
         <source>General</source>
         <translation>Obecné</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="63"/>
+        <location filename="../../src/config/configwindow.cpp" line="64"/>
         <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/configwindow.cpp" line="70"/>
+        <source>Storage</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="197"/>
+        <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="204"/>
+        <location filename="../../src/core/controller.cpp" line="205"/>
         <source>You have the latest version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="212"/>
+        <location filename="../../src/core/controller.cpp" line="213"/>
         <source>Failed to get information about the latest version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="293"/>
+        <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="293"/>
+        <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Unable to close active modal widgets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="398"/>
+        <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Zachytit obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="414"/>
+        <location filename="../../src/core/controller.cpp" line="415"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Otevřít spouštěč</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="419"/>
+        <location filename="../../src/core/controller.cpp" line="420"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="422"/>
+        <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
         <translation>O &amp;programu</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="425"/>
+        <location filename="../../src/core/controller.cpp" line="426"/>
         <source>Check for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="432"/>
+        <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
@@ -267,7 +272,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
         <translation type="vanished">&amp;Informace</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="428"/>
+        <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;Quit</source>
         <translation>&amp;Ukončit</translation>
     </message>
@@ -335,8 +340,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Reset</source>
-        <translation>Nastavit znovu</translation>
+        <translation type="vanished">Nastavit znovu</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
@@ -349,7 +358,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
         <translation>Vyprázdnit</translation>
     </message>
     <message>
-        <location filename="../../src/config/filenameeditor.cpp" line="87"/>
+        <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
         <translation>Smaže název</translation>
     </message>
@@ -476,183 +485,183 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="106"/>
-        <location filename="../../src/config/generalconf.cpp" line="278"/>
+        <location filename="../../src/config/generalconf.cpp" line="107"/>
+        <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Import</source>
         <translation type="unfinished">Zavést</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="113"/>
-        <location filename="../../src/config/generalconf.cpp" line="121"/>
-        <location filename="../../src/config/generalconf.cpp" line="144"/>
-        <location filename="../../src/config/generalconf.cpp" line="509"/>
+        <location filename="../../src/config/generalconf.cpp" line="114"/>
+        <location filename="../../src/config/generalconf.cpp" line="122"/>
+        <location filename="../../src/config/generalconf.cpp" line="145"/>
+        <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="113"/>
+        <location filename="../../src/config/generalconf.cpp" line="114"/>
         <source>Unable to read file.</source>
         <translation type="unfinished">Nelze přečíst soubor.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="121"/>
-        <location filename="../../src/config/generalconf.cpp" line="144"/>
+        <location filename="../../src/config/generalconf.cpp" line="122"/>
+        <location filename="../../src/config/generalconf.cpp" line="145"/>
         <source>Unable to write file.</source>
         <translation type="unfinished">Nelze zapsat soubor.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="131"/>
+        <location filename="../../src/config/generalconf.cpp" line="132"/>
         <source>Save File</source>
         <translation type="unfinished">Uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="153"/>
+        <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Confirm Reset</source>
         <translation type="unfinished">Potvrdit vrácení na výchozí</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="154"/>
+        <location filename="../../src/config/generalconf.cpp" line="155"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation type="unfinished">Opravdu chcete nastavení vrátit do výchozího stavu?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="189"/>
+        <location filename="../../src/config/generalconf.cpp" line="190"/>
         <source>Show help message</source>
         <translation type="unfinished">Ukázat zprávu s nápovědou</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="193"/>
+        <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation type="unfinished">Ukázat zprávu s nápovědou na začátku v režimu zachytávání.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="203"/>
+        <location filename="../../src/config/generalconf.cpp" line="204"/>
         <source>Show the side panel button</source>
         <translation type="unfinished">Ukázat tlačítko na postranním panelu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="206"/>
+        <location filename="../../src/config/generalconf.cpp" line="207"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation type="unfinished">V režimu zachytávání ukazovat tlačítko na postranním panelu.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="216"/>
-        <location filename="../../src/config/generalconf.cpp" line="220"/>
+        <location filename="../../src/config/generalconf.cpp" line="217"/>
+        <location filename="../../src/config/generalconf.cpp" line="221"/>
         <source>Show desktop notifications</source>
         <translation type="unfinished">Ukázat oznámení</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="232"/>
+        <location filename="../../src/config/generalconf.cpp" line="233"/>
         <source>Show tray icon</source>
         <translation type="unfinished">Ukázat ikonu v oznamovací oblasti panelu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="235"/>
+        <location filename="../../src/config/generalconf.cpp" line="236"/>
         <source>Show the systemtray icon</source>
         <translation type="unfinished">Ukázat ikonu v oznamovací oblasti panelu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="248"/>
-        <location filename="../../src/config/generalconf.cpp" line="253"/>
+        <location filename="../../src/config/generalconf.cpp" line="249"/>
+        <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="266"/>
+        <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
         <translation type="unfinished">Soubor s nastavením</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="271"/>
+        <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Export</source>
         <translation type="unfinished">Vyvést</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="285"/>
+        <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Reset</source>
         <translation type="unfinished">Nastavit znovu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="295"/>
-        <location filename="../../src/config/generalconf.cpp" line="297"/>
+        <location filename="../../src/config/generalconf.cpp" line="296"/>
+        <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Automatic check for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="308"/>
+        <location filename="../../src/config/generalconf.cpp" line="309"/>
         <source>Launch at startup</source>
         <translation type="unfinished">Spustit při spuštění</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="311"/>
-        <location filename="../../src/config/generalconf.cpp" line="325"/>
+        <location filename="../../src/config/generalconf.cpp" line="312"/>
+        <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Launch Flameshot</source>
         <translation type="unfinished">Spustit Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="321"/>
+        <location filename="../../src/config/generalconf.cpp" line="322"/>
         <source>Show welcome message on launch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="336"/>
+        <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>Copy URL after upload</source>
         <translation type="unfinished">Kopírovat adresu (URL) po nahrání</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL and close window after upload</source>
         <translation type="unfinished">Po nahrání zkopírovat URL a zavřít okno</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="351"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image after copy</source>
         <translation type="unfinished">Uložit obrázek po kopírování</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="352"/>
+        <location filename="../../src/config/generalconf.cpp" line="353"/>
         <source>Save image file after copying it</source>
         <translation type="unfinished">Uložit obrázek se souborem po jeho zkopírování</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="359"/>
+        <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Save Path</source>
         <translation type="unfinished">Cesta pro ukládání</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="383"/>
+        <location filename="../../src/config/generalconf.cpp" line="384"/>
         <source>Change...</source>
         <translation type="unfinished">Změnit...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="391"/>
+        <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="409"/>
+        <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="442"/>
-        <location filename="../../src/config/generalconf.cpp" line="447"/>
+        <location filename="../../src/config/generalconf.cpp" line="443"/>
+        <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="481"/>
-        <location filename="../../src/config/generalconf.cpp" line="484"/>
+        <location filename="../../src/config/generalconf.cpp" line="482"/>
+        <location filename="../../src/config/generalconf.cpp" line="485"/>
         <source>Copy file path after save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="500"/>
+        <location filename="../../src/config/generalconf.cpp" line="501"/>
         <source>Choose a Folder</source>
         <translation type="unfinished">Vyberte složku</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="509"/>
+        <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Unable to write to directory.</source>
         <translation type="unfinished">Nelze zapsat do adresáře.</translation>
     </message>
@@ -660,37 +669,37 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
         <source>Latest Uploads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="93"/>
         <source>Screenshots history is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="147"/>
         <source>Copy URL</source>
         <translation type="unfinished">Kopírovat adresu (URL)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>URL copied to clipboard.</source>
         <translation type="unfinished">Adresa (URL) zkopírována do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="157"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="173"/>
         <source>Confirm to delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="174"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -702,12 +711,63 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
         <translation type="obsolete">Nahrává se obrázek</translation>
     </message>
     <message>
-        <source>URL copied to clipboard.</source>
-        <translation type="obsolete">Adresa (URL) zkopírována do schránky.</translation>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="130"/>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">Adresa (URL) zkopírována do schránky.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="148"/>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="436"/>
         <source>Error</source>
-        <translation type="obsolete">Chyba</translation>
+        <translation type="unfinished">Chyba</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="149"/>
+        <source>Unable to upload screenshot, please check your internet connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="205"/>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="432"/>
+        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="440"/>
+        <source>Retrieving configuration file with s3 creds...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -717,92 +777,116 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
         <translation type="obsolete">Nahrává se obrázek</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="89"/>
         <source>Unable to open the URL.</source>
-        <translation type="obsolete">Nelze otevřít adresu (URL).</translation>
+        <translation type="unfinished">Nelze otevřít adresu (URL).</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="96"/>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">Adresa (URL) zkopírována do schránky.</translation>
+        <translation type="unfinished">Adresa (URL) zkopírována do schránky.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="obsolete">Snímek obrazovky zkopírován do schránky.</translation>
+        <translation type="unfinished">Snímek obrazovky zkopírován do schránky.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="171"/>
         <source>Copy URL</source>
-        <translation type="obsolete">Kopírovat adresu (URL)</translation>
+        <translation type="unfinished">Kopírovat adresu (URL)</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
         <source>Open URL</source>
-        <translation type="obsolete">Otevřít adresu (URL)</translation>
+        <translation type="unfinished">Otevřít adresu (URL)</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
         <source>Delete image</source>
-        <translation type="obsolete">Smazat obrázek</translation>
+        <translation type="unfinished">Smazat obrázek</translation>
     </message>
     <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="111"/>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Image to Clipboard.</source>
-        <translation type="obsolete">Obrázek do schránky.</translation>
+        <translation type="unfinished">Obrázek do schránky.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
+    <message>
+        <location filename="../../src/tools/storage/imguploadertool.cpp" line="22"/>
+        <source>Image uploader tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="45"/>
         <source>Upload to Imgur</source>
         <translation>Nahrát do Imgur</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>Nahrává se obrázek</translation>
+        <translation type="vanished">Nahrává se obrázek</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation>Kopírovat adresu (URL)</translation>
+        <translation type="vanished">Kopírovat adresu (URL)</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation>Otevřít adresu (URL)</translation>
+        <translation type="vanished">Otevřít adresu (URL)</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation>Smazat obrázek</translation>
+        <translation type="vanished">Smazat obrázek</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation>Obrázek do schránky.</translation>
+        <translation type="vanished">Obrázek do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="124"/>
         <source>Unable to open the URL.</source>
         <translation>Nelze otevřít adresu (URL).</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation>Adresa (URL) zkopírována do schránky.</translation>
+        <translation type="vanished">Adresa (URL) zkopírována do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Snímek obrazovky zkopírován do schránky.</translation>
+        <translation type="vanished">Snímek obrazovky zkopírován do schránky.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
+        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="14"/>
         <source>Image Uploader</source>
         <translation>Nahrávač obrázků</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
+        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
         <source>Upload the selection to Imgur</source>
         <translation>Nahrát výběr do Imgur</translation>
     </message>
@@ -892,12 +976,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="27"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="28"/>
         <source>Line</source>
         <translation>Čára</translation>
     </message>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="37"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="38"/>
         <source>Set the Line as the paint tool</source>
         <translation>Nastavit čáru jako malovací nástroj</translation>
     </message>
@@ -931,12 +1015,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
 <context>
     <name>PencilTool</name>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="20"/>
         <source>Pencil</source>
         <translation>Tužka</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
         <source>Set the Pencil as the paint tool</source>
         <translation>Nastavit tužku jako malovací nástroj</translation>
     </message>
@@ -968,28 +1052,15 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     </message>
 </context>
 <context>
-    <name>QHotkey</name>
-    <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
-        <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
-        <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="152"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="212"/>
         <source>Save Error</source>
         <translation>Chyba při ukládání</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="139"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Capture saved as </source>
         <translation>Zachycená obrazovka uložena jako </translation>
     </message>
@@ -1011,17 +1082,27 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="150"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="210"/>
         <source>Error trying to save as </source>
         <translation>Chyba při ukládání jako </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="121"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="166"/>
         <source>Save screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="143"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
+        <source>Saving canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
+        <source>Save canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <source>Capture is saved and copied to the clipboard as </source>
         <translation type="unfinished"></translation>
     </message>
@@ -1221,12 +1302,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <translation type="vanished">Obvykle se Flameshot spouští na pozadí a přidává do oznamovací oblasti panelu ikonu, kterou je ho možné ovládat.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
+        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
         <source>URL copied to clipboard.</source>
         <translation>Adresa (URL) zkopírována do schránky.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="505"/>
+        <location filename="../../src/core/controller.cpp" line="506"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1286,29 +1367,35 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="63"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
+        <source>Delete current tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
         <source>Quit capture</source>
         <translation type="unfinished">Ukončit zachytávání obrazovky</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="67"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="71"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
         <source>Screenshot history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="69"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="87"/>
         <source>Capture screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="81"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="94"/>
         <source>Show color picker</source>
         <translation type="unfinished">Ukázat volič barev</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="83"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
         <source>Change the tool&apos;s thickness</source>
         <translation type="unfinished">Změnit tloušťku nástroje</translation>
     </message>
@@ -1316,12 +1403,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="25"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="24"/>
         <source>Rectangle</source>
         <translation>Obdélník</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="35"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="34"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Nastavit obdélník jako malovací nástroj</translation>
     </message>
@@ -1387,6 +1474,11 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
+        <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1618,12 +1710,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="43"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="59"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="53"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="69"/>
         <source>Add text to your capture</source>
         <translation>Přidat text do zachyceného</translation>
     </message>
@@ -1703,11 +1795,34 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     </message>
 </context>
 <context>
+    <name>UploadStorageConfig</name>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="116"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="157"/>
         <source>Close</source>
         <translation>Zavřít</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="167"/>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
