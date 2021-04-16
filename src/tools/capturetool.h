@@ -66,6 +66,8 @@ public:
         REQ_TOGGLE_SIDEBAR,
         // Call update() in the editor.
         REQ_REDRAW,
+        // Notify to redraw screenshot with tools without object selection.
+        REQ_CLEAR_SELECTION,
         // Notify is the screenshot has been saved.
         REQ_CAPTURE_DONE_OK,
         // Instance this->widget()'s widget inside the editor under the mouse.
