@@ -181,6 +181,10 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
         <source>Shortcuts</source>
         <translation>Gyorsbillentyűk</translation>
     </message>
+    <message>
+        <source>Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -294,7 +298,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation>Visszaállítás</translation>
+        <translation type="vanished">Visszaállítás</translation>
     </message>
     <message>
         <source>Restores the saved pattern</source>
@@ -307,6 +311,10 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <message>
         <source>Deletes the name</source>
         <translation>Törli a nevet</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -528,6 +536,10 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>JPG formátum használata vágolapra másoláskor (PNG az alapértelmezett)</translation>
     </message>
+    <message>
+        <source>Latest Uploads Max Size</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
@@ -568,11 +580,50 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL másolva a vágólapra.</translation>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="obsolete">Hiba</translation>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete image from S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to upload screenshot, please check your internet connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 Creds URL is not found in your configuration file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retrieving configuration file with s3 creds...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgS3UploaderTool</name>
+    <message>
+        <source>Upload the selection to S3 bucket</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -583,27 +634,50 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="obsolete">Nem lehet az URL-t megnyitni.</translation>
+        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="obsolete">URL másolva a vágólapra.</translation>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="obsolete">Képernyőmentés másolva a vágólapra.</translation>
+        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="obsolete">URL másolása</translation>
+        <translation type="unfinished">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="obsolete">URL megnyitása</translation>
+        <translation type="unfinished">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="obsolete">Kép a vágolapra.</translation>
+        <translation type="unfinished">Kép a vágolapra.</translation>
+    </message>
+    <message>
+        <source>Upload image to S3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uploading Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="unfinished">Kép törlése</translation>
+    </message>
+    <message>
+        <source>Deleting image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploaderTool</name>
+    <message>
+        <source>Image uploader tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -614,19 +688,19 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation>Kép feltöltése</translation>
+        <translation type="vanished">Kép feltöltése</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation>URL másolása</translation>
+        <translation type="vanished">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation>URL megnyitása</translation>
+        <translation type="vanished">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation>Kép másolása a Vágolapra.</translation>
+        <translation type="vanished">Kép másolása a Vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -634,15 +708,15 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation>URL másolva a vágólapra.</translation>
+        <translation type="vanished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Képernyőmentés másolva a vágólapra.</translation>
+        <translation type="vanished">Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation>Kép törlése</translation>
+        <translation type="vanished">Kép törlése</translation>
     </message>
 </context>
 <context>
@@ -797,11 +871,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>QHotkey</name>
     <message>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Nem sikerült %1 rögzítése. %2 Hiba</translation>
+        <translation type="vanished">Nem sikerült %1 rögzítése. %2 Hiba</translation>
     </message>
     <message>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation>Sikertelen rögzítés törlés %1 -nél. %2 Hiba</translation>
+        <translation type="vanished">Sikertelen rögzítés törlés %1 -nél. %2 Hiba</translation>
     </message>
 </context>
 <context>
@@ -1063,6 +1137,18 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <source>Error while saving to clipboard</source>
         <translation>Hiba a vágolapra másolás közben</translation>
     </message>
+    <message>
+        <source>Delete current tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -1129,6 +1215,10 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation>Nyomd meg az Esc billentyűt a kilépéshet vagy a Backspace-t a gyorsbillentyűk kikapcsolásához.</translation>
     </message>
+    <message>
+        <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShortcutsWidget</name>
@@ -1166,6 +1256,28 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Grab Color</source>
         <translation>Szín választása</translation>
+    </message>
+</context>
+<context>
+    <name>SizeDecreaseTool</name>
+    <message>
+        <source>Decrease Tool Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease the size of the other tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SizeIncreaseTool</name>
+    <message>
+        <source>Increase Tool Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase the size of the other tools</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1373,10 +1485,29 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
 </context>
 <context>
+    <name>UploadStorageConfig</name>
+    <message>
+        <source>Upload storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imgur storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S3 storage (require config.ini file with s3 credentials)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
         <source>Close</source>
         <translation>Bezárás</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
