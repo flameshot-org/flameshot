@@ -72,6 +72,7 @@ CaptureTool* PinTool::copy(QObject* parent)
 
 void PinTool::pressed(const CaptureContext& context)
 {
+    emit requestAction(REQ_CLEAR_SELECTION);
     emit requestAction(REQ_CAPTURE_DONE_OK);
     m_geometry = context.selection;
     m_geometry.setTopLeft(m_geometry.topLeft() + context.widgetOffset);

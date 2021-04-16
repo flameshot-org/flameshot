@@ -57,6 +57,7 @@ void SaveTool::pressed(const CaptureContext& context)
         }
     }
 #endif
+    emit requestAction(REQ_CLEAR_SELECTION);
     if (context.savePath.isEmpty()) {
         emit requestAction(REQ_HIDE_GUI);
         bool ok = ScreenshotSaver().saveToFilesystemGUI(
