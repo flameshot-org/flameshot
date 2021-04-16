@@ -11,6 +11,7 @@ void ImgUploaderTool::setCapture(const QPixmap& pixmap)
 
 void ImgUploaderTool::pressed(const CaptureContext& context)
 {
+    emit requestAction(REQ_CLEAR_SELECTION);
     m_capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
