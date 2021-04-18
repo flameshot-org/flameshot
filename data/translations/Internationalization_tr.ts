@@ -148,7 +148,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="722"/>
         <source>Tool Settings</source>
-        <translation>Alet Ayarları</translation>
+        <translation>Araç Ayarları</translation>
     </message>
 </context>
 <context>
@@ -260,7 +260,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="432"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;En Son Güncelleme</translation>
+        <translation>&amp;Son Yüklenenler</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -507,7 +507,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <location filename="../../src/config/generalconf.cpp" line="253"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>En son yüklemelerden ekran görüntüsünü silmek için onay gerekli</translation>
+        <translation>Son yüklenenlerden ekran görüntüsünü silmek için onay gerekli</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="266"/>
@@ -584,7 +584,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="409"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Son Yüklenenler Azami Boyutu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="442"/>
@@ -1382,12 +1382,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Boyutunu Küçült</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer araçların boyutunu küçült</translation>
     </message>
 </context>
 <context>
@@ -1395,12 +1395,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Boyutunu Büyüt</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer araçların boyutunu büyüt</translation>
     </message>
 </context>
 <context>

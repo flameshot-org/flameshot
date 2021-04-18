@@ -656,7 +656,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="409"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Найбільший розмір останніх відвантажень</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="442"/>
@@ -1550,12 +1550,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Зменшити розмір засобу</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Зменшити розмір інших засобів</translation>
     </message>
 </context>
 <context>
@@ -1563,12 +1563,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Збільшити розмір засобу</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Збільшити розмір інших засобів</translation>
     </message>
 </context>
 <context>
