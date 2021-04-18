@@ -5,7 +5,7 @@ about: Create a report to help us improve
 ---
 
 <!--
-First read the FAQ: https://github.com/flameshot-org/flameshot/blob/master/docs/faq.m
+First read the FAQ: https://flameshot.org/faq/
 
 If you don't know how to get some of the following information from your
 computer, visit:
