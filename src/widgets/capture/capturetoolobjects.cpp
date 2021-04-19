@@ -3,6 +3,10 @@
 
 #include "capturetoolobjects.h"
 
+#define SEARCH_RADIUS_NEAR 3
+#define SEARCH_RADIUS_FAR 5
+#define SEARCH_RADIUS_TEXT_HANDICAP 3
+
 void CaptureToolObjects::append(const QPointer<CaptureTool>& captureTool)
 {
     m_captureToolObjects.append(captureTool);
@@ -49,11 +53,11 @@ int CaptureToolObjects::find(const QPoint& pos, const QSize& captureSize)
     pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);
     // first attempt to find at exact position
-    int radius = 3;
+    int radius = SEARCH_RADIUS_NEAR;
     int index = findWithRadius(painter, pixmap, pos, radius);
     if (-1 == index) {
         // second attempt to find at position with radius
-        radius = 5;
+        radius = SEARCH_RADIUS_FAR;
         pixmap.fill(Qt::transparent);
         index = findWithRadius(painter, pixmap, pos, radius);
     }
@@ -91,7 +95,7 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
         if (toolItem->nameID() == ToolType::TEXT) {
             // Text has spaces inside to need to take a bigger radius for
             // text objects search
-            radius += 3;
+            radius += SEARCH_RADIUS_TEXT_HANDICAP;
         }
 
         for (int x = pos.x() - radius; x <= pos.x() + radius; ++x) {
