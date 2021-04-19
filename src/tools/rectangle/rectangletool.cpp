@@ -4,6 +4,7 @@
 #include "rectangletool.h"
 #include <QPainter>
 #include <QPainterPath>
+#include <cmath>
 
 namespace {
 #define PADDING_VALUE 2
@@ -55,11 +56,14 @@ void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
     } else {
         painter.setRenderHint(QPainter::Antialiasing);
         QPainterPath path;
+        int offset =
+          thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
         path.addRoundedRect(
-          QRectF(std::min(points().first.x(), points().second.x()),
-                 std::min(points().first.y(), points().second.y()),
-                 std::abs(points().first.x() - points().second.x()),
-                 std::abs(points().first.y() - points().second.y())),
+          QRectF(
+            std::min(points().first.x(), points().second.x()) - offset,
+            std::min(points().first.y(), points().second.y()) - offset,
+            std::abs(points().first.x() - points().second.x()) + offset * 2,
+            std::abs(points().first.y() - points().second.y()) + offset * 2),
           thickness(),
           thickness());
         painter.fillPath(path, color());
