@@ -58,7 +58,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Выбрать «Стрелку» инструментом для рисования</translation>
+        <translation>Выбрать «Стрелку» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -161,7 +161,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Добавить круг с автоматически приращающимся счётчиком</translation>
+        <translation>Добавить круг с автоприращающимся счётчиком</translation>
     </message>
 </context>
 <context>
@@ -174,7 +174,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Выбрать «Окружность» инструментом для рисования</translation>
+        <translation>Выбрать «Окружность» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -202,7 +202,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation>Горячие кнопки</translation>
+        <translation>Горячие клавиши</translation>
     </message>
     <message>
         <source>Storage</source>
@@ -254,7 +254,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation>&amp;Информация</translation>
+        <translation>&amp;О программе</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
@@ -264,7 +264,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation>Последние загрузки</translation>
+        <translation>&amp;Последние загрузки</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -315,7 +315,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Измените имя ваших снимков:</translation>
+        <translation>Укажите название для ваших снимков:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -583,12 +583,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="249"/>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Для удаления снимка экрана из последних загрузок требуется подтверждение</translation>
+        <translation>Требовать подтверждение при удалении снимка из последних загрузок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
-        <translation>Файл конфигурации</translation>
+        <translation>Файл настроек</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
@@ -655,12 +655,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Использовать фиксированный путь для сохранения снимков экрана</translation>
+        <translation>Использовать постоянный путь сохранения для снимков экрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Максимальный размер последних загрузок</translation>
+        <translation>Максимальное число последних загрузок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
@@ -720,7 +720,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Вы уверены, что хотите удалить снимок экрана с последних загрузок и с сервера?</translation>
+        <translation>Вы уверены, что хотите удалить снимок экрана из последних загрузок и с сервера?</translation>
     </message>
 </context>
 <context>
@@ -913,7 +913,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation>Отправка изображений</translation>
+        <translation>Загрузка изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
@@ -926,7 +926,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="24"/>
         <source>About</source>
-        <translation>Информация</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
@@ -1013,7 +1013,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="38"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Выбрать «Линию» инструментом для рисования</translation>
+        <translation>Выбрать «Линию» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1026,7 +1026,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Выбрать «Маркер» инструментом для рисования</translation>
+        <translation>Выбрать «Маркер» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1039,7 +1039,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Выбрать «Перемещение» инструментом для рисования</translation>
+        <translation>Переместить выделенную область</translation>
     </message>
 </context>
 <context>
@@ -1352,7 +1352,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="506"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет, я тут! Щёлкните по значку на панели задач, чтобы сделать снимок экрана, или щёлкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
+        <translation>Привет! Щёлкните по значку на трее для создания снимка или щёлкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
@@ -1582,7 +1582,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Уменьшите размер других инструментов</translation>
+        <translation>Уменьшить размер других инструментов</translation>
     </message>
 </context>
 <context>
@@ -1724,7 +1724,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="30"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot Инфо</translation>
+        <translation>Уведомление Flameshot</translation>
     </message>
 </context>
 <context>
@@ -1874,7 +1874,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="40"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Затемнение невыделенной области:</translation>
+        <translation>Затененность области вне выделенной:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>
