@@ -729,7 +729,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     }
 
     m_context.thickness += thicknessOffset;
-    m_context.thickness = qBound(0, m_context.thickness, 100);
+    m_context.thickness = qBound(1, m_context.thickness, 100);
     QPoint topLeft =
       QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
     int offset = m_notifierBox->width() / 4;
@@ -1045,9 +1045,8 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
-
             // increase thickness
-            m_context.thickness = qBound(0, m_context.thickness + 1, 100);
+            m_context.thickness = qBound(1, m_context.thickness + 1, 100);
 
             // show notifier circle
             m_notifierBox->showMessage(QString::number(m_context.thickness));
@@ -1055,9 +1054,8 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             emit thicknessChanged(m_context.thickness);
             break;
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
-
             // decrease thickness
-            m_context.thickness = qBound(0, m_context.thickness - 1, 100);
+            m_context.thickness = qBound(1, m_context.thickness - 1, 100);
 
             // show notifier circle
             m_notifierBox->showMessage(QString::number(m_context.thickness));
@@ -1117,7 +1115,7 @@ void CaptureWidget::removeToolObject(int index)
 
 void CaptureWidget::setDrawThickness(const int& t)
 {
-    m_context.thickness = qBound(0, t, 100);
+    m_context.thickness = qBound(1, t, 100);
     ConfigHandler().setDrawThickness(m_context.thickness);
     emit thicknessChanged(m_context.thickness);
 
