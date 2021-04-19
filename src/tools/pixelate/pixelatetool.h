@@ -20,6 +20,7 @@ public:
     void drawSearchArea(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
+    void drawObjectSelection(QPainter& painter) override;
 
 protected:
     ToolType nameID() const override;
