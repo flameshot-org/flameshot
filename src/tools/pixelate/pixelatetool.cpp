@@ -49,9 +49,8 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
     QRect selectionScaled =
       QRect(p0 * pixelRatio, p1 * pixelRatio).normalized();
 
-    // If thickness is 0, use old blur process
-    if (thickness() <= 0) {
-
+    // If thickness is less than 1, use old blur process
+    if (thickness() <= 1) {
         QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
         blur->setBlurRadius(10);
         QGraphicsPixmapItem* item =

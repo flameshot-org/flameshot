@@ -32,7 +32,7 @@ enum DIAG_UNIT
 
 AbstractTwoPointTool::AbstractTwoPointTool(QObject* parent)
   : CaptureTool(parent)
-  , m_thickness(0)
+  , m_thickness(1)
   , m_padding(0)
 {}
 
