@@ -808,7 +808,7 @@ void CaptureWidget::initPanel()
 #if defined(Q_OS_MACOS)
         panelToggleButton->move(
           0,
-          panelRect.y() + static_cast<int>(panelRect.height() / 2) -
+          static_cast<int>(panelRect.height() / 2) -
             static_cast<int>(panelToggleButton->width() / 2));
 #else
         panelToggleButton->move(panelRect.x(),
