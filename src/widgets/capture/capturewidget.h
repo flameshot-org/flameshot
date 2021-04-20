@@ -13,6 +13,7 @@
 
 #include "buttonhandler.h"
 #include "capturetoolbutton.h"
+#include "capturetoolobjects.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
@@ -37,7 +38,7 @@ class CaptureWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit CaptureWidget(const uint id = 0,
+    explicit CaptureWidget(uint id = 0,
                            const QString& savePath = QString(),
                            bool fullScreen = true,
                            QWidget* parent = nullptr);
@@ -47,19 +48,19 @@ public:
     QPixmap pixmap();
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
+    void setCaptureToolObjects(const CaptureToolObjects& captureToolObjects);
 
 public slots:
     bool commitCurrentTool();
-    void deleteToolwidgetOrClose();
+    void deleteToolWidgetOrClose();
 
 signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
-    void thicknessChanged(const int thickness);
+    void thicknessChanged(int thickness);
 
 private slots:
-
     // TODO replace with tools
     void copyScreenshot();
     void saveScreenshot();
@@ -81,24 +82,58 @@ private slots:
     void moveUp();
     void moveDown();
 
+    void deleteCurrentTool();
+
     void setState(CaptureToolButton* b);
     void processTool(CaptureTool* t);
     void handleButtonSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
     void setDrawThickness(const int& t);
-    void incrementCircleCount();
-    void decrementCircleCount();
+    void updateActiveLayer(const int& layer);
+
+public:
+    void removeToolObject(int index = -1);
 
 protected:
-    void paintEvent(QPaintEvent*);
-    void mousePressEvent(QMouseEvent*);
-    void mouseMoveEvent(QMouseEvent*);
-    void mouseReleaseEvent(QMouseEvent*);
-    void keyPressEvent(QKeyEvent*);
-    void keyReleaseEvent(QKeyEvent*);
-    void wheelEvent(QWheelEvent*);
-    void resizeEvent(QResizeEvent*);
-    void moveEvent(QMoveEvent*);
+    void paintEvent(QPaintEvent* paintEvent) override;
+    void mousePressEvent(QMouseEvent* mouseEvent) override;
+    void mouseMoveEvent(QMouseEvent* mouseEvent) override;
+    void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
+    void keyPressEvent(QKeyEvent* keyEvent) override;
+    void keyReleaseEvent(QKeyEvent* keyEvent) override;
+    void wheelEvent(QWheelEvent* wheelEvent) override;
+    void resizeEvent(QResizeEvent* resizeEvent) override;
+    void moveEvent(QMoveEvent* moveEvent) override;
+
+private:
+    void uncheckActiveTool();
+    void selectToolItemAtPos(const QPoint& pos);
+    void showColorPicker(const QPoint& pos);
+    bool startDrawObjectTool(const QPoint& pos);
+    QPointer<CaptureTool> activeToolObject();
+    void initContext(const QString& savePath, bool fullscreen);
+    void initPanel();
+    void initSelection();
+    void initShortcuts();
+    void updateSizeIndicator();
+    void updateCursor();
+    void pushToolToStack();
+    void makeChild(QWidget* w);
+
+    void repositionSelection(QRect r);
+    void adjustSelection(QMargins m);
+    void moveSelection(QPoint p);
+
+    QRect extendedSelection() const;
+    QRect extendedRect(QRect* r) const;
+    void drawInitialMessage(QPainter* painter);
+    void drawInactiveRegion(QPainter* painter);
+    void drawToolsData(bool updateLayersPanel = true,
+                       bool drawSelection = false);
+    void drawObjectSelection();
+
+    ////////////////////////////////////////
+    // Class members
 
     // Context information
     CaptureContext m_context;
@@ -113,7 +148,6 @@ protected:
 
     // utility flags
     bool m_mouseIsClicked;
-    bool m_rightClick;
     bool m_newSelection;
     bool m_grabbing;
     bool m_showInitialMsg;
@@ -121,32 +155,13 @@ protected:
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;
 
-private:
-    void initContext(const QString& savePath, bool fullscreen);
-    void initPanel();
-    void initSelection();
-    void initShortcuts();
-    void updateSizeIndicator();
-    void updateCursor();
-    void pushToolToStack();
-    void makeChild(QWidget* w);
-
-    void repositionSelection(QRect r);
-    void adjustSelection(QMargins m);
-    void moveSelection(QPoint p);
-
-private:
-    QRect extendedSelection() const;
-    QRect extendedRect(QRect* r) const;
-
-private:
     UpdateNotificationWidget* m_updateNotificationWidget;
     quint64 m_lastMouseWheel;
-    QUndoStack m_undoStack;
     QPointer<CaptureToolButton> m_sizeIndButton;
     // Last pressed button
     QPointer<CaptureToolButton> m_activeButton;
     QPointer<CaptureTool> m_activeTool;
+    bool m_activeToolIsMoved;
     QPointer<QWidget> m_toolWidget;
 
     ButtonHandler* m_buttonHandler;
@@ -160,4 +175,15 @@ private:
     QPoint m_dragStartPoint;
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
+
+    CaptureToolObjects m_captureToolObjects;
+
+    QPoint m_mousePressedPos;
+    QPoint m_activeToolOffsetToMouseOnStart;
+
+    QUndoStack m_undoStack;
+
+    // TODO - should be remove after fixing undo()/redo() functions
+    bool m_lastPressedUndo;
+    bool m_lastPressedRedo;
 };

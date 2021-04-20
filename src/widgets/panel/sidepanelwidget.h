@@ -23,7 +23,7 @@ public:
 
 signals:
     void colorChanged(const QColor& c);
-    void thicknessChanged(const int& t);
+    void thicknessChanged(int t);
     void togglePanel();
 
 public slots:

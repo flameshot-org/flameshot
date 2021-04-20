@@ -129,9 +129,15 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
 
             // set no shortcut is Backspace
+#if defined(Q_OS_MACOS)
+            if (shortcutValue == QKeySequence(Qt::CTRL + Qt::Key_Backspace)) {
+                shortcutValue = QKeySequence("");
+            }
+#else
             if (shortcutValue == QKeySequence(Qt::Key_Backspace)) {
                 shortcutValue = QKeySequence("");
             }
+#endif
 
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
 #if defined(Q_OS_MACOS)

@@ -53,6 +53,7 @@ void GeneralConf::updateComponents()
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
 
     if (!config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());

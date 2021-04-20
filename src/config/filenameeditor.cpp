@@ -74,15 +74,17 @@ void FileNameEditor::initWidgets()
     connect(
       m_saveButton, &QPushButton::clicked, this, &FileNameEditor::savePattern);
     m_saveButton->setToolTip(tr("Saves the pattern"));
-    // reset
-    m_resetButton = new QPushButton(tr("Reset"), this);
+    // restore previous saved values
+    m_resetButton = new QPushButton(tr("Restore"), this);
     connect(
       m_resetButton, &QPushButton::clicked, this, &FileNameEditor::resetName);
     m_resetButton->setToolTip(tr("Restores the saved pattern"));
     // clear
     m_clearButton = new QPushButton(tr("Clear"), this);
     connect(m_clearButton, &QPushButton::clicked, this, [this]() {
-        m_nameEditor->setText(QString());
+        m_nameEditor->setText(ConfigHandler().filenamePatternDefault());
+        m_nameEditor->selectAll();
+        m_nameEditor->setFocus();
     });
     m_clearButton->setToolTip(tr("Deletes the name"));
 }

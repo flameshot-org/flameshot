@@ -22,48 +22,40 @@ bool AbstractActionTool::showMousePreview() const
     return false;
 }
 
-void AbstractActionTool::undo(QPixmap& pixmap)
+void AbstractActionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    Q_UNUSED(pixmap);
-}
-
-void AbstractActionTool::process(QPainter& painter,
-                                 const QPixmap& pixmap,
-                                 bool recordUndo)
-{
-    Q_UNUSED(painter);
-    Q_UNUSED(pixmap);
-    Q_UNUSED(recordUndo);
+    Q_UNUSED(painter)
+    Q_UNUSED(pixmap)
 }
 
 void AbstractActionTool::paintMousePreview(QPainter& painter,
                                            const CaptureContext& context)
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(context);
+    Q_UNUSED(painter)
+    Q_UNUSED(context)
 }
 
 void AbstractActionTool::drawEnd(const QPoint& p)
 {
-    Q_UNUSED(p);
+    Q_UNUSED(p)
 }
 
 void AbstractActionTool::drawMove(const QPoint& p)
 {
-    Q_UNUSED(p);
+    Q_UNUSED(p)
 }
 
 void AbstractActionTool::drawStart(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }
 
 void AbstractActionTool::colorChanged(const QColor& c)
 {
-    Q_UNUSED(c);
+    Q_UNUSED(c)
 }
 
-void AbstractActionTool::thicknessChanged(const int th)
+void AbstractActionTool::thicknessChanged(int th)
 {
-    Q_UNUSED(th);
+    Q_UNUSED(th)
 }

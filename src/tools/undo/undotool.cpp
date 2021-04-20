@@ -15,7 +15,7 @@ bool UndoTool::closeOnButtonPressed() const
 
 QIcon UndoTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "undo-variant.svg");
 }
 QString UndoTool::name() const
@@ -40,6 +40,6 @@ CaptureTool* UndoTool::copy(QObject* parent)
 
 void UndoTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
     emit requestAction(REQ_UNDO_MODIFICATION);
 }

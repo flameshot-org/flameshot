@@ -6,6 +6,8 @@
 #include <QScreen>
 #include <cmath>
 
+#define PADDING_VALUE_DEFAULT 2
+
 namespace {
 
 const double ADJ_UNIT = std::atan(1.0);
@@ -15,8 +17,7 @@ enum UNIT
 {
     HORIZ_DIR = 0,
     DIAG1_DIR = 1,
-    VERT_DIR = 2,
-    DIAG2_DIR = 3
+    VERT_DIR = 2
 };
 
 const double ADJ_DIAG_UNIT = 2 * ADJ_UNIT;
@@ -24,17 +25,29 @@ const int DIAG_DIRS_NUMBER = 2;
 
 enum DIAG_UNIT
 {
-    DIR1 = 0,
-    DIR2 = 1
+    DIR1 = 0
 };
 
 }
 
 AbstractTwoPointTool::AbstractTwoPointTool(QObject* parent)
   : CaptureTool(parent)
-  , m_thickness(0)
+  , m_thickness(1)
   , m_padding(0)
 {}
+
+void AbstractTwoPointTool::copyParams(const AbstractTwoPointTool* from,
+                                      AbstractTwoPointTool* to)
+{
+    CaptureTool::copyParams(from, to);
+    to->m_points.first = from->m_points.first;
+    to->m_points.second = from->m_points.second;
+    to->m_color = from->m_color;
+    to->m_thickness = from->m_thickness;
+    to->m_padding = from->m_padding;
+    to->m_supportsOrthogonalAdj = from->m_supportsOrthogonalAdj;
+    to->m_supportsDiagonalAdj = from->m_supportsDiagonalAdj;
+}
 
 bool AbstractTwoPointTool::isValid() const
 {
@@ -56,26 +69,9 @@ bool AbstractTwoPointTool::showMousePreview() const
     return true;
 }
 
-void AbstractTwoPointTool::undo(QPixmap& pixmap)
-{
-    QPainter p(&pixmap);
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
-#else
-    p.drawPixmap(backupRect(pixmap).topLeft(), m_pixmapBackup);
-#endif
-    if (this->nameID() == ToolType::CIRCLECOUNT) {
-        emit requestAction(REQ_DECREMENT_CIRCLE_COUNT);
-    }
-}
-
 void AbstractTwoPointTool::drawEnd(const QPoint& p)
 {
-    Q_UNUSED(p);
+    Q_UNUSED(p)
 }
 
 void AbstractTwoPointTool::drawMove(const QPoint& p)
@@ -93,35 +89,25 @@ void AbstractTwoPointTool::colorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractTwoPointTool::thicknessChanged(const int th)
+void AbstractTwoPointTool::thicknessChanged(int th)
 {
     m_thickness = th;
 }
 
-void AbstractTwoPointTool::updateBackup(const QPixmap& pixmap)
+void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
+                                             const CaptureContext& context)
 {
-    m_pixmapBackup = pixmap.copy(backupRect(pixmap));
+    painter.setPen(
+      QPen(context.color, context.thickness + PADDING_VALUE_DEFAULT));
+    painter.drawLine(context.mousePos, context.mousePos);
 }
 
-QRect AbstractTwoPointTool::backupRect(const QPixmap& pixmap) const
+void AbstractTwoPointTool::drawStart(const CaptureContext& context)
 {
-    const QRect& limits = pixmap.rect();
-    QRect r = QRect(m_points.first, m_points.second).normalized();
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    if (1 != pixelRatio) {
-        r.moveTo(r.topLeft() * pixelRatio);
-        r.setSize(r.size() * pixelRatio);
-    }
-    const int val = (m_thickness + m_padding) * pixelRatio;
-#else
-    const int val = (m_thickness + m_padding);
-#endif
-    r += QMargins(val, val, val, val);
-    return r.intersected(limits);
+    colorChanged(context.color);
+    m_points.first = context.mousePos;
+    m_points.second = context.mousePos;
+    thicknessChanged(context.thickness + PADDING_VALUE_DEFAULT);
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
@@ -164,4 +150,28 @@ QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
         }
     }
     return v;
+}
+
+void AbstractTwoPointTool::move(const QPoint& pos)
+{
+    QPoint offset = m_points.second - m_points.first;
+    m_points.first = pos;
+    m_points.second = m_points.first + offset;
+}
+
+const QPoint* AbstractTwoPointTool::pos()
+{
+    return &m_points.first;
+}
+
+void AbstractTwoPointTool::drawObjectSelection(QPainter& painter)
+{
+    int offset =
+      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
+    QRect rect =
+      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
+            std::min(m_points.first.y(), m_points.second.y()) - offset,
+            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
+            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
+    drawObjectSelectionRect(painter, rect);
 }

@@ -16,9 +16,7 @@ public:
     QString description() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
-    void process(QPainter& painter,
-                 const QPixmap& pixmap,
-                 bool recordUndo = false) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
@@ -28,5 +26,4 @@ protected:
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
-    void thicknessChanged(const int th) override;
 };

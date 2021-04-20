@@ -3,6 +3,8 @@
 
 #include "rectangletool.h"
 #include <QPainter>
+#include <QPainterPath>
+#include <cmath>
 
 namespace {
 #define PADDING_VALUE 2
@@ -12,12 +14,11 @@ RectangleTool::RectangleTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {
     m_supportsDiagonalAdj = true;
-    context_thickness = 0;
 }
 
 QIcon RectangleTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "square.svg");
 }
 QString RectangleTool::name() const
@@ -37,48 +38,47 @@ QString RectangleTool::description() const
 
 CaptureTool* RectangleTool::copy(QObject* parent)
 {
-    return new RectangleTool(parent);
+    auto* tool = new RectangleTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
-void RectangleTool::process(QPainter& painter,
-                            const QPixmap& pixmap,
-                            bool recordUndo)
+void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
-    painter.setPen(QPen(m_color, m_thickness));
-    painter.setBrush(QBrush(m_color));
-    if (context_thickness == 0) {
-        painter.drawRect(QRect(m_points.first, m_points.second));
+    Q_UNUSED(pixmap)
+    QPen orig_pen = painter.pen();
+    QBrush orig_brush = painter.brush();
+    painter.setPen(
+      QPen(color(), thickness(), Qt::SolidLine, Qt::SquareCap, Qt::RoundJoin));
+    painter.setBrush(QBrush(color()));
+    if (thickness() == 0) {
+        painter.drawRect(QRect(points().first, points().second));
     } else {
-        painter.drawRoundedRect(
-          std::min(m_points.first.x(), m_points.second.x()),
-          std::min(m_points.first.y(), m_points.second.y()),
-          std::abs(m_points.first.x() - m_points.second.x()),
-          std::abs(m_points.first.y() - m_points.second.y()),
-          m_thickness,
-          m_thickness);
+        painter.setRenderHint(QPainter::Antialiasing);
+        QPainterPath path;
+        int offset =
+          thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
+        path.addRoundedRect(
+          QRectF(
+            std::min(points().first.x(), points().second.x()) - offset,
+            std::min(points().first.y(), points().second.y()) - offset,
+            std::abs(points().first.x() - points().second.x()) + offset * 2,
+            std::abs(points().first.y() - points().second.y()) + offset * 2),
+          thickness(),
+          thickness());
+        painter.fillPath(path, color());
     }
-}
-
-void RectangleTool::paintMousePreview(QPainter& painter,
-                                      const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
+    painter.setPen(orig_pen);
+    painter.setBrush(orig_brush);
 }
 
 void RectangleTool::drawStart(const CaptureContext& context)
 {
-    m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
-    context_thickness = context.thickness;
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
+    AbstractTwoPointTool::drawStart(context);
+    thicknessChanged(context.thickness);
 }
 
 void RectangleTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

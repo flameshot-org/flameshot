@@ -15,7 +15,7 @@ bool MoveTool::closeOnButtonPressed() const
 
 QIcon MoveTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "cursor-move.svg");
 }
 QString MoveTool::name() const
@@ -40,6 +40,11 @@ CaptureTool* MoveTool::copy(QObject* parent)
 
 void MoveTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
     emit requestAction(REQ_MOVE_MODE);
+}
+
+bool MoveTool::isSelectable() const
+{
+    return true;
 }

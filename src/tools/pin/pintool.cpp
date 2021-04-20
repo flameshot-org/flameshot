@@ -17,7 +17,7 @@ bool PinTool::closeOnButtonPressed() const
 
 QIcon PinTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "pin.svg");
 }
 QString PinTool::name() const
@@ -45,7 +45,7 @@ QWidget* PinTool::widget()
     }
 #endif
     PinWidget* w = new PinWidget(m_pixmap);
-    const int m = w->margin() * devicePixelRatio;
+    const int m = static_cast<int>(w->margin() * devicePixelRatio);
     QRect adjusted_pos = m_geometry + QMargins(m, m, m, m);
     w->setGeometry(adjusted_pos);
 #if defined(Q_OS_MACOS)
@@ -72,6 +72,7 @@ CaptureTool* PinTool::copy(QObject* parent)
 
 void PinTool::pressed(const CaptureContext& context)
 {
+    emit requestAction(REQ_CLEAR_SELECTION);
     emit requestAction(REQ_CAPTURE_DONE_OK);
     m_geometry = context.selection;
     m_geometry.setTopLeft(m_geometry.topLeft() + context.widgetOffset);

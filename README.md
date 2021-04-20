@@ -244,7 +244,7 @@ Steps for using the configuration:
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty mush self-explanatory.
 
-#### On Ubuntu (Tested on 18.04)
+#### On Ubuntu (Tested on 18.04, 20.04)
 
 To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)). 
 
@@ -254,7 +254,8 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
   gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
   ```
 
-2. Go to Settings > Device > Keyboard and press the '+' button at the bottom.
+2. Ubuntu 18.04: Go to Settings > Device > Keyboard and press the '+' button at the bottom.
+   Ubuntu 20.04: Go to Settings > Keyboard and press the '+' button at the bottom.
 
 3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
 

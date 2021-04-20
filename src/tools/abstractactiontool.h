@@ -15,10 +15,7 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
 
-    void undo(QPixmap& pixmap) override;
-    void process(QPainter& painter,
-                 const QPixmap& pixmap,
-                 bool recordUndo = false) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
@@ -27,5 +24,5 @@ public slots:
     void drawMove(const QPoint& p) override;
     void drawStart(const CaptureContext& context) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(const int th) override;
+    void thicknessChanged(int th) override;
 };

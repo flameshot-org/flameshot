@@ -21,7 +21,7 @@ bool SaveTool::closeOnButtonPressed() const
 
 QIcon SaveTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "content-save.svg");
 }
 QString SaveTool::name() const
@@ -57,6 +57,7 @@ void SaveTool::pressed(const CaptureContext& context)
         }
     }
 #endif
+    emit requestAction(REQ_CLEAR_SELECTION);
     if (context.savePath.isEmpty()) {
         emit requestAction(REQ_HIDE_GUI);
         bool ok = ScreenshotSaver().saveToFilesystemGUI(
