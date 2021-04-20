@@ -257,6 +257,7 @@ QPixmap CaptureWidget::pixmap()
     if (m_toolWidget && m_activeTool) {
         p = m_context.selectedScreenshotArea().copy();
         QPainter painter(&p);
+        painter.setRenderHint(QPainter::Antialiasing);
         m_activeTool->process(painter, p);
     } else {
         p = m_context.selectedScreenshotArea();
@@ -1367,6 +1368,7 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
 {
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
+    painter.setRenderHint(QPainter::Antialiasing);
     int index = 0;
     m_context.circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
@@ -1451,6 +1453,7 @@ void CaptureWidget::copyScreenshot()
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
+        painter.setRenderHint(QPainter::Antialiasing);
         m_activeTool->process(painter, m_context.screenshot);
     }
 
@@ -1466,6 +1469,7 @@ void CaptureWidget::saveScreenshot()
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
+        painter.setRenderHint(QPainter::Antialiasing);
         m_activeTool->process(painter, m_context.screenshot);
     }
     hide();
