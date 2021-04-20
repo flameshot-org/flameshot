@@ -1074,12 +1074,13 @@ void CaptureWidget::setDrawColor(const QColor& c)
     if (m_context.color.isValid()) {
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
-    }
-    auto toolItem = activeToolObject();
-    if (toolItem) {
-        // Change color
-        emit toolItem->colorChanged(c);
-        drawToolsData(false, true);
+        // change color for the active tool
+        auto toolItem = activeToolObject();
+        if (toolItem) {
+            // Change color
+            emit toolItem->colorChanged(c);
+            drawToolsData(false, true);
+        }
     }
 }
 
