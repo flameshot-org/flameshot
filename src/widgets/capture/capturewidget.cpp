@@ -231,7 +231,7 @@ void CaptureWidget::updateButtons()
                       new QShortcut(QKeySequence(shortcut), this);
                     CaptureWidget* captureWidget = this;
                     connect(key, &QShortcut::activated, this, [=]() {
-                        emit captureWidget->setState(b);
+                        captureWidget->setState(b);
                     });
                 }
                 break;
@@ -275,7 +275,9 @@ bool CaptureWidget::commitCurrentTool()
             m_activeTool = nullptr;
         }
         if (m_toolWidget) {
-            m_toolWidget->deleteLater();
+            m_toolWidget->close();
+            delete m_toolWidget;
+            m_toolWidget = nullptr;
             return true;
         }
     }
@@ -295,7 +297,8 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_panel->hide();
     } else if (m_toolWidget) {
         // delete toolWidget if exists
-        m_toolWidget->deleteLater();
+        m_toolWidget->close();
+        delete m_toolWidget;
         m_toolWidget = nullptr;
     } else {
         // close CaptureWidget
@@ -324,8 +327,8 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
         painter.restore();
-    } else if (m_activeButton && m_activeButton->tool()->showMousePreview() &&
-               m_previewEnabled) {
+    } else if (m_previewEnabled && m_activeButton && m_activeButton->tool() &&
+               m_activeButton->tool()->showMousePreview()) {
         painter.save();
         m_activeButton->tool()->paintMousePreview(painter, m_context);
         painter.restore();
@@ -358,7 +361,8 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 
 bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 {
-    if (m_activeButton && m_activeButton->tool()->nameID() != ToolType::MOVE) {
+    if (m_activeButton && m_activeButton->tool() &&
+        m_activeButton->tool()->nameID() != ToolType::MOVE) {
         if (commitCurrentTool()) {
             return false;
         }
@@ -478,7 +482,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         drawToolsData(false);
     } else if (m_mouseIsClicked &&
                (!m_activeButton ||
-                (m_activeButton &&
+                (m_activeButton && m_activeButton->tool() &&
                  m_activeButton->tool()->nameID() == ToolType::MOVE))) {
         // Drawing, moving, or stretching a selection
         m_selection->setVisible(true);
@@ -569,7 +573,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (m_activeButton && m_activeButton->tool()->showMousePreview()) {
+    } else if (m_activeButton && m_activeButton->tool() &&
+               m_activeButton->tool()->showMousePreview()) {
         update();
     } else {
         if (!m_selection->isVisible()) {
@@ -736,7 +741,8 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     int offset = m_notifierBox->width() / 4;
     m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
     m_notifierBox->showMessage(QString::number(m_context.thickness));
-    if (m_activeButton && m_activeButton->tool()->showMousePreview()) {
+    if (m_activeButton && m_activeButton->tool() &&
+        m_activeButton->tool()->showMousePreview()) {
         update();
     }
     emit thicknessChanged(m_context.thickness);
@@ -917,8 +923,11 @@ void CaptureWidget::setState(CaptureToolButton* b)
     if (!b) {
         return;
     }
+
     if (m_toolWidget) {
-        m_toolWidget->deleteLater();
+        m_toolWidget->close();
+        delete m_toolWidget;
+        m_toolWidget = nullptr;
         if (m_activeTool != nullptr) {
             if (m_activeTool->isValid()) {
                 pushToolToStack();
@@ -928,6 +937,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
     if (m_activeButton != b) {
         processTool(b->tool());
     }
+
     // Only close activated from button
     if (b->tool()->closeOnButtonPressed()) {
         close();
@@ -1016,7 +1026,9 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
                 break;
             }
             if (m_toolWidget) {
-                m_toolWidget->deleteLater();
+                m_toolWidget->close();
+                delete m_toolWidget;
+                m_toolWidget = nullptr;
             }
             m_toolWidget = m_activeTool->widget();
             if (m_toolWidget) {
@@ -1074,6 +1086,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
     if (m_context.color.isValid()) {
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
+
         // change color for the active tool
         auto toolItem = activeToolObject();
         if (toolItem) {
@@ -1280,7 +1293,7 @@ void CaptureWidget::updateCursor()
         } else {
             setCursor(Qt::ArrowCursor);
         }
-    } else if (m_activeButton &&
+    } else if (m_activeButton && m_activeButton->tool() &&
                m_activeButton->tool()->nameID() == ToolType::MOVE) {
         setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
