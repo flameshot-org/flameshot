@@ -7,7 +7,6 @@
 #include "src/utils/colorutils.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include "src/widgets/capture/capturewidget.h"
 #include <QApplication>
 #include <QIcon>
 #include <QMouseEvent>
@@ -20,6 +19,8 @@
 CaptureToolButton::CaptureToolButton(const ButtonType t, QWidget* parent)
   : CaptureButton(parent)
   , m_buttonType(t)
+  , m_tool(nullptr)
+  , m_emergeAnimation(nullptr)
 {
     initButton();
     if (t == TYPE_SELECTIONINDICATOR) {
@@ -27,6 +28,18 @@ CaptureToolButton::CaptureToolButton(const ButtonType t, QWidget* parent)
         setFont(QFont(f.family(), 7, QFont::Bold));
     } else {
         updateIcon();
+    }
+}
+
+CaptureToolButton::~CaptureToolButton()
+{
+    if (m_tool) {
+        delete m_tool;
+        m_tool = nullptr;
+    }
+    if (m_emergeAnimation) {
+        delete m_emergeAnimation;
+        m_emergeAnimation = nullptr;
     }
 }
 
