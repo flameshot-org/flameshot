@@ -17,6 +17,7 @@ public:
     QString name() const override;
     ToolType nameID() const override;
     QString description() const override;
+    bool isSelectable() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
 

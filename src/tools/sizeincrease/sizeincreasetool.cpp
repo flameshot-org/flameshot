@@ -29,7 +29,7 @@ bool SizeIncreaseTool::closeOnButtonPressed() const
 
 QIcon SizeIncreaseTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "plus.svg");
 }
 QString SizeIncreaseTool::name() const
@@ -54,6 +54,6 @@ CaptureTool* SizeIncreaseTool::copy(QObject* parent)
 
 void SizeIncreaseTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
     emit requestAction(REQ_INCREASE_TOOL_SIZE);
 }

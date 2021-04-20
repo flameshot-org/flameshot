@@ -29,7 +29,7 @@ bool SizeDecreaseTool::closeOnButtonPressed() const
 
 QIcon SizeDecreaseTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "minus.svg");
 }
 QString SizeDecreaseTool::name() const
@@ -54,6 +54,6 @@ CaptureTool* SizeDecreaseTool::copy(QObject* parent)
 
 void SizeDecreaseTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
     emit requestAction(REQ_DECREASE_TOOL_SIZE);
 }

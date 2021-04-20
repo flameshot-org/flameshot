@@ -18,16 +18,16 @@ public:
     QString description() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
-    void process(QPainter& painter,
-                 const QPixmap& pixmap,
-                 bool recordUndo = false) override;
-    void paintMousePreview(QPainter& painter,
-                           const CaptureContext& context) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
+    void drawObjectSelection(QPainter& painter) override;
 
 protected:
+    void copyParams(const ArrowTool* from, ArrowTool* to);
     ToolType nameID() const override;
 
 public slots:
-    void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
+
+private:
+    QPainterPath m_arrowPath;
 };

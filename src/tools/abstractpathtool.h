@@ -15,25 +15,29 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
-
-    void undo(QPixmap& pixmap) override;
+    void move(const QPoint& mousePos) override;
+    const QPoint* pos() override;
+    void drawObjectSelection(QPainter& painter) override;
+    int thickness() override { return m_thickness; };
 
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void colorChanged(const QColor& c) override;
-    void thicknessChanged(const int th) override;
+    void thicknessChanged(int th) override;
 
 protected:
-    void updateBackup(const QPixmap& pixmap);
+    void copyParams(const AbstractPathTool* from, AbstractPathTool* to);
     void addPoint(const QPoint& point);
-    QRect backupRect(const QPixmap& pixmap) const;
 
-    QPixmap m_pixmapBackup;
-    QRect m_backupArea;
+    // class members
+    QRect m_pathArea;
     QColor m_color;
     QVector<QPoint> m_points;
-    int m_thickness;
     // use m_padding to extend the area of the backup
     int m_padding;
+    QPoint m_pos;
+
+private:
+    int m_thickness;
 };

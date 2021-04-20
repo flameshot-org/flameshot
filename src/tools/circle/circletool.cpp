@@ -16,7 +16,7 @@ CircleTool::CircleTool(QObject* parent)
 
 QIcon CircleTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "circle-outline.svg");
 }
 QString CircleTool::name() const
@@ -36,36 +36,19 @@ QString CircleTool::description() const
 
 CaptureTool* CircleTool::copy(QObject* parent)
 {
-    return new CircleTool(parent);
+    auto* tool = new CircleTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
-void CircleTool::process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo)
+void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
-    painter.setPen(QPen(m_color, m_thickness));
-    painter.drawEllipse(QRect(m_points.first, m_points.second));
-}
-
-void CircleTool::paintMousePreview(QPainter& painter,
-                                   const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void CircleTool::drawStart(const CaptureContext& context)
-{
-    m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
+    Q_UNUSED(pixmap)
+    painter.setPen(QPen(color(), thickness()));
+    painter.drawEllipse(QRect(points().first, points().second));
 }
 
 void CircleTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

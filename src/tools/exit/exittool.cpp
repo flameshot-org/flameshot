@@ -15,7 +15,7 @@ bool ExitTool::closeOnButtonPressed() const
 
 QIcon ExitTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "close.svg");
 }
 QString ExitTool::name() const
@@ -40,6 +40,6 @@ CaptureTool* ExitTool::copy(QObject* parent)
 
 void ExitTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
     emit requestAction(REQ_CLOSE_GUI);
 }

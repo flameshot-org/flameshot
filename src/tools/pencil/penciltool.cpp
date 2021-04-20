@@ -4,13 +4,15 @@
 #include "penciltool.h"
 #include <QPainter>
 
+#define PADDING_VALUE 2
+
 PencilTool::PencilTool(QObject* parent)
   : AbstractPathTool(parent)
 {}
 
 QIcon PencilTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "pencil.svg");
 }
 QString PencilTool::name() const
@@ -30,17 +32,15 @@ QString PencilTool::description() const
 
 CaptureTool* PencilTool::copy(QObject* parent)
 {
-    return new PencilTool(parent);
+    auto* tool = new PencilTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
-void PencilTool::process(QPainter& painter,
-                         const QPixmap& pixmap,
-                         bool recordUndo)
+void PencilTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
-    painter.setPen(QPen(m_color, m_thickness));
+    Q_UNUSED(pixmap)
+    painter.setPen(QPen(m_color, thickness()));
     painter.drawPolyline(m_points.data(), m_points.size());
 }
 
@@ -54,13 +54,13 @@ void PencilTool::paintMousePreview(QPainter& painter,
 void PencilTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_thickness = context.thickness + 2;
+    thicknessChanged(context.thickness + PADDING_VALUE);
     m_points.append(context.mousePos);
-    m_backupArea.setTopLeft(context.mousePos);
-    m_backupArea.setBottomRight(context.mousePos);
+    m_pathArea.setTopLeft(context.mousePos);
+    m_pathArea.setBottomRight(context.mousePos);
 }
 
 void PencilTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

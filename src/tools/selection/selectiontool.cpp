@@ -21,7 +21,7 @@ bool SelectionTool::closeOnButtonPressed() const
 
 QIcon SelectionTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "square-outline.svg");
 }
 QString SelectionTool::name() const
@@ -41,36 +41,20 @@ QString SelectionTool::description() const
 
 CaptureTool* SelectionTool::copy(QObject* parent)
 {
-    return new SelectionTool(parent);
+    SelectionTool* tool = new SelectionTool(parent);
+    copyParams(this, tool);
+    return tool;
 }
 
-void SelectionTool::process(QPainter& painter,
-                            const QPixmap& pixmap,
-                            bool recordUndo)
+void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    if (recordUndo) {
-        updateBackup(pixmap);
-    }
-    painter.setPen(QPen(m_color, m_thickness));
-    painter.drawRect(QRect(m_points.first, m_points.second));
-}
-
-void SelectionTool::paintMousePreview(QPainter& painter,
-                                      const CaptureContext& context)
-{
-    painter.setPen(QPen(context.color, context.thickness));
-    painter.drawLine(context.mousePos, context.mousePos);
-}
-
-void SelectionTool::drawStart(const CaptureContext& context)
-{
-    m_color = context.color;
-    m_thickness = context.thickness + PADDING_VALUE;
-    m_points.first = context.mousePos;
-    m_points.second = context.mousePos;
+    Q_UNUSED(pixmap)
+    painter.setPen(
+      QPen(color(), thickness(), Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
+    painter.drawRect(QRect(points().first, points().second));
 }
 
 void SelectionTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

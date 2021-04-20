@@ -60,8 +60,21 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
                     << QObject::tr("Commit text in text area")
                     << QKeySequence(Qt::CTRL + Qt::Key_Return).toString());
 
+#if defined(Q_OS_MACOS)
+    m_shortcuts << (QStringList()
+                    << "TYPE_DELETE_CURRENT_TOOL"
+                    << QObject::tr("Delete current tool")
+                    << QKeySequence(Qt::Key_Backspace).toString());
+#else
+    m_shortcuts << (QStringList() << "TYPE_DELETE_CURRENT_TOOL"
+                                  << QObject::tr("Delete current tool")
+                                  << QKeySequence(Qt::Key_Delete).toString());
+#endif
+
     m_shortcuts << (QStringList() << "" << QObject::tr("Quit capture")
                                   << QKeySequence(Qt::Key_Escape).toString());
+
+    // Global hotkeys
 #if defined(Q_OS_MACOS)
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Screenshot history") << "⇧⌘⌥H");

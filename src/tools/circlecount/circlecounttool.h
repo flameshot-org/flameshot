@@ -16,17 +16,14 @@ public:
     QString description() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
-    void process(QPainter& painter,
-                 const QPixmap& pixmap,
-                 bool recordUndo = false) override;
+    void process(QPainter& painter, const QPixmap& pixmap) override;
+    void drawObjectSelection(QPainter& painter) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
 protected:
     ToolType nameID() const override;
 
-private:
-    unsigned int m_count;
 public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;

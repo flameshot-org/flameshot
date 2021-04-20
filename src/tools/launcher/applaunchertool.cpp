@@ -15,7 +15,7 @@ bool AppLauncher::closeOnButtonPressed() const
 
 QIcon AppLauncher::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "open_with.svg");
 }
 QString AppLauncher::name() const

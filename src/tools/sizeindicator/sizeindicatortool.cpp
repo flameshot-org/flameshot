@@ -40,5 +40,5 @@ CaptureTool* SizeIndicatorTool::copy(QObject* parent)
 
 void SizeIndicatorTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }

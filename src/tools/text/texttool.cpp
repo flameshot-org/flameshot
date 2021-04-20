@@ -12,6 +12,22 @@ TextTool::TextTool(QObject* parent)
   , m_size(1)
 {}
 
+TextTool::~TextTool()
+{
+    closeEditor();
+}
+
+void TextTool::copyParams(const TextTool* from, TextTool* to)
+{
+    CaptureTool::copyParams(from, to);
+    to->m_font = from->m_font;
+    to->m_text = from->m_text;
+    to->m_size = from->m_size;
+    to->m_color = from->m_color;
+    to->m_textArea = from->m_textArea;
+    to->m_currentPos = from->m_currentPos;
+}
+
 bool TextTool::isValid() const
 {
     return !m_text.isEmpty();
@@ -34,7 +50,7 @@ bool TextTool::showMousePreview() const
 
 QIcon TextTool::icon(const QColor& background, bool inEditor) const
 {
-    Q_UNUSED(inEditor);
+    Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "text.svg");
 }
 
@@ -55,13 +71,24 @@ QString TextTool::description() const
 
 QWidget* TextTool::widget()
 {
-    TextWidget* w = new TextWidget();
-    w->setTextColor(m_color);
+    closeEditor();
+    m_widget = new TextWidget();
+    m_widget->setTextColor(m_color);
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
-    w->setFont(m_font);
-    connect(w, &TextWidget::textUpdated, this, &TextTool::updateText);
-    m_widget = w;
-    return w;
+    m_widget->setFont(m_font);
+    connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
+    return m_widget;
+}
+
+void TextTool::closeEditor()
+{
+    if (!m_widget.isNull()) {
+        disconnect(
+          m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
+        m_widget->close();
+        delete m_widget;
+        m_widget = nullptr;
+    }
 }
 
 QWidget* TextTool::configurationWidget()
@@ -95,86 +122,66 @@ QWidget* TextTool::configurationWidget()
 CaptureTool* TextTool::copy(QObject* parent)
 {
     TextTool* tt = new TextTool(parent);
-    connect(
-      m_confW, &TextConfig::fontFamilyChanged, tt, &TextTool::updateFamily);
-    connect(
-      m_confW, &TextConfig::fontItalicChanged, tt, &TextTool::updateFontItalic);
-    connect(m_confW,
-            &TextConfig::fontStrikeOutChanged,
-            tt,
-            &TextTool::updateFontStrikeOut);
-    connect(m_confW,
-            &TextConfig::fontUnderlineChanged,
-            tt,
-            &TextTool::updateFontUnderline);
-    connect(
-      m_confW, &TextConfig::fontWeightChanged, tt, &TextTool::updateFontWeight);
-    tt->m_font = m_font;
+    if (m_confW) {
+        connect(
+          m_confW, &TextConfig::fontFamilyChanged, tt, &TextTool::updateFamily);
+        connect(m_confW,
+                &TextConfig::fontItalicChanged,
+                tt,
+                &TextTool::updateFontItalic);
+        connect(m_confW,
+                &TextConfig::fontStrikeOutChanged,
+                tt,
+                &TextTool::updateFontStrikeOut);
+        connect(m_confW,
+                &TextConfig::fontUnderlineChanged,
+                tt,
+                &TextTool::updateFontUnderline);
+        connect(m_confW,
+                &TextConfig::fontWeightChanged,
+                tt,
+                &TextTool::updateFontWeight);
+    }
+    copyParams(this, tt);
     return tt;
 }
 
-void TextTool::undo(QPixmap& pixmap)
+void TextTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    QPainter p(&pixmap);
-#if defined(Q_OS_MACOS)
-    // Not sure how will it work on 4k and fullHd on Linux or Windows with a
-    // capture of different displays with different DPI, so let it be MacOS
-    // specific only.
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    p.drawPixmap(backupRect(pixmap).topLeft() / pixelRatio, m_pixmapBackup);
-#else
-    p.drawPixmap(m_backupArea.topLeft(), m_pixmapBackup);
-#endif
+    Q_UNUSED(pixmap)
+    if (m_text.isEmpty()) {
+        return;
+    }
+    const int val = 5;
+    QFontMetrics fm(m_font);
+    QSize size(fm.boundingRect(QRect(), 0, m_text).size());
+    size.setWidth(size.width() + val * 2);
+    size.setHeight(size.height() + val * 2);
+    m_textArea.setSize(size);
+    // draw text
+    painter.setFont(m_font);
+    painter.setPen(m_color);
+    painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
 }
 
-void TextTool::process(QPainter& painter,
-                       const QPixmap& pixmap,
-                       bool recordUndo)
+void TextTool::drawObjectSelection(QPainter& painter)
 {
     if (m_text.isEmpty()) {
         return;
     }
-    QFontMetrics fm(m_font);
-    QSize size(fm.boundingRect(QRect(), 0, m_text).size());
-    m_backupArea.setSize(size);
-    if (recordUndo) {
-        m_pixmapBackup = pixmap.copy(backupRect(pixmap));
-    }
-    // draw text
-    painter.setFont(m_font);
-    painter.setPen(m_color);
-    const int val = 5;
-    painter.drawText(m_backupArea + QMargins(-val, -val, val, val), m_text);
-}
-
-QRect TextTool::backupRect(const QPixmap& pixmap) const
-{
-    const QRect& limits = pixmap.rect();
-    QRect r = m_backupArea.normalized();
-#if defined(Q_OS_MACOS)
-    const qreal pixelRatio = pixmap.devicePixelRatio();
-    const int val = 5 * pixelRatio;
-    if (1 != pixelRatio) {
-        r.moveTo(r.topLeft() * pixelRatio);
-        r.setSize(r.size() * pixelRatio);
-    }
-#else
-    const int val = 5;
-#endif
-    r += QMargins(0, 0, val, val);
-    return r.intersected(limits);
+    drawObjectSelectionRect(painter, m_textArea);
 }
 
 void TextTool::paintMousePreview(QPainter& painter,
                                  const CaptureContext& context)
 {
-    Q_UNUSED(painter);
-    Q_UNUSED(context);
+    Q_UNUSED(painter)
+    Q_UNUSED(context)
 }
 
 void TextTool::drawEnd(const QPoint& p)
 {
-    m_backupArea.moveTo(p);
+    m_textArea.moveTo(p);
 }
 
 void TextTool::drawMove(const QPoint& p)
@@ -191,7 +198,7 @@ void TextTool::drawStart(const CaptureContext& context)
 
 void TextTool::pressed(const CaptureContext& context)
 {
-    Q_UNUSED(context);
+    Q_UNUSED(context)
 }
 
 void TextTool::colorChanged(const QColor& c)
@@ -202,7 +209,7 @@ void TextTool::colorChanged(const QColor& c)
     }
 }
 
-void TextTool::thicknessChanged(const int th)
+void TextTool::thicknessChanged(int th)
 {
     m_size = th;
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
@@ -214,14 +221,6 @@ void TextTool::thicknessChanged(const int th)
 void TextTool::updateText(const QString& s)
 {
     m_text = s;
-}
-
-void TextTool::setFont(const QFont& f)
-{
-    m_font = f;
-    if (m_widget) {
-        m_widget->setFont(f);
-    }
 }
 
 void TextTool::updateFamily(const QString& s)
@@ -262,4 +261,15 @@ void TextTool::updateFontItalic(const bool italic)
     if (m_widget) {
         m_widget->setFont(m_font);
     }
+}
+
+void TextTool::move(const QPoint& pos)
+{
+    m_textArea.moveTo(pos);
+}
+
+const QPoint* TextTool::pos()
+{
+    m_currentPos = m_textArea.topLeft();
+    return &m_currentPos;
 }

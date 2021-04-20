@@ -22,6 +22,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QClipboard>
+#include <QDebug>
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QJsonDocument>
@@ -315,7 +316,7 @@ void Controller::startVisualCapture(const uint id,
         m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
-        // m_captureWindow->show(); //Debug
+//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
 #endif
         if (!m_appLatestUrl.isEmpty() &&
             ConfigHandler().ignoreUpdateToVersion().compare(

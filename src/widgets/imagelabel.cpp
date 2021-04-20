@@ -73,6 +73,6 @@ void ImageLabel::mouseMoveEvent(QMouseEvent* event)
 // resize handler
 void ImageLabel::resizeEvent(QResizeEvent* event)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
     setScaledPixmap();
 }

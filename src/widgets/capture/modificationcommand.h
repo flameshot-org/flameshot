@@ -1,20 +1,26 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
-#pragma once
-
-#include "src/tools/capturetool.h"
+#include "capturetoolobjects.h"
 #include <QUndoCommand>
+
+#ifndef FLAMESHOT_MODIFICATIONCOMMAND_H
+#define FLAMESHOT_MODIFICATIONCOMMAND_H
+
+class CaptureWidget;
 
 class ModificationCommand : public QUndoCommand
 {
 public:
-    ModificationCommand(QPixmap*, CaptureTool*);
+    ModificationCommand(CaptureWidget* captureWidget,
+                        const CaptureToolObjects& captureToolObjects);
 
     virtual void undo() override;
     virtual void redo() override;
 
 private:
-    QPixmap* m_pixmap;
-    QScopedPointer<CaptureTool> m_tool;
+    CaptureToolObjects m_captureToolObjects;
+    CaptureWidget* m_captureWidget;
 };
+
+#endif // FLAMESHOT_MODIFICATIONCOMMAND_H
