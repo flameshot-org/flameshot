@@ -46,6 +46,7 @@ public:
     Q_ENUM(ButtonType)
 
     explicit CaptureToolButton(const ButtonType, QWidget* parent = nullptr);
+    ~CaptureToolButton();
 
     static QVector<CaptureToolButton::ButtonType> getIterableButtonTypes();
     static int getPriorityByButton(CaptureToolButton::ButtonType);
