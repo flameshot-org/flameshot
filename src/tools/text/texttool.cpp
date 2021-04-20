@@ -83,11 +83,14 @@ QWidget* TextTool::widget()
 void TextTool::closeEditor()
 {
     if (!m_widget.isNull()) {
-        disconnect(
-          m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
         m_widget->close();
         delete m_widget;
         m_widget = nullptr;
+    }
+    if (!m_confW.isNull()) {
+        m_confW->close();
+        delete m_confW;
+        m_confW = nullptr;
     }
 }
 
