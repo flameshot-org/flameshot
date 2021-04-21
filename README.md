@@ -443,6 +443,9 @@ When `make` command completed you can launch flameshot from `project_folder/buil
 Simply use `make install` with privileges. 
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
 
+### FAQ
+https://flameshot.org/faq/
+
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
 - The logo of Flameshot is licensed under [Free Art License v1.3](img/app/flameshotLogoLicense.txt)
