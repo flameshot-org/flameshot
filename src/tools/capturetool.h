@@ -86,6 +86,7 @@ public:
     explicit CaptureTool(QObject* parent = nullptr)
       : QObject(parent)
       , m_count(0)
+      , m_editMode(false)
     {}
 
     virtual void setCapture(const QPixmap& pixmap){};
@@ -122,6 +123,9 @@ public:
     virtual QWidget* configurationWidget() { return nullptr; }
     // Return a copy of the tool
     virtual CaptureTool* copy(QObject* parent = nullptr) = 0;
+
+    virtual void setEditMode(bool b) { m_editMode = b; };
+    virtual bool editMode() { return m_editMode; };
 
     // Counter for all object types (currently is used for the CircleCounter
     // only)
@@ -195,5 +199,6 @@ public slots:
 
 private:
     unsigned int m_count;
+    bool m_editMode;
     QRect m_selectionRect;
 };

@@ -76,6 +76,8 @@ QWidget* TextTool::widget()
     m_widget->setTextColor(m_color);
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
     m_widget->setFont(m_font);
+    m_widget->setText(m_text);
+    m_widget->selectAll();
     connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
     return m_widget;
 }
@@ -164,7 +166,9 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     // draw text
     painter.setFont(m_font);
     painter.setPen(m_color);
-    painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
+    if (!editMode()) {
+        painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
+    }
 }
 
 void TextTool::drawObjectSelection(QPainter& painter)
