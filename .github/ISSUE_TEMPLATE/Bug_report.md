@@ -5,6 +5,8 @@ about: Create a report to help us improve
 ---
 
 <!--
+First read the FAQ: https://flameshot.org/faq/
+
 If you don't know how to get some of the following information from your
 computer, visit:
 https://flameshot.org/issue-reporting/
