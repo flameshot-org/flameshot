@@ -1097,18 +1097,18 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="139"/>
         <source>Capture saved as </source>
-        <translation>Снимок сохранён как </translation>
+        <translation>Снимок сохранён в </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
         <source>Capture saved to clipboard.</source>
-        <translation>Снимок сохранён в буфер обмена.</translation>
+        <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved to clipboard</source>
-        <translation>Снимок сохранён в буфер обмена</translation>
+        <translation>Снимок скопирован в буфер обмена</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
@@ -1178,7 +1178,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Path where the capture will be saved</source>
-        <translation>Путь, куда будет сохранён снимок</translation>
+        <translation>Путь сохранения снимка</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="145"/>
@@ -1336,12 +1336,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="505"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет! Щёлкните по значку на трее для создания снимка или щёлкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
+        <translation>Привет! Для создания снимка щёлкните по значку в трее. Иные возможности доступны по щелчку правой кнопкой.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
         <source>Toggle side panel</source>
-        <translation>Вызвать/спрятать боковую панель</translation>
+        <translation>Показать/скрыть боковую панель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
