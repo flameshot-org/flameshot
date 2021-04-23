@@ -113,6 +113,8 @@ public:
     virtual ToolType nameID() const = 0;
     // Short description of the tool.
     virtual QString description() const = 0;
+    // Short tool item info
+    virtual QString info() { return name(); };
 
     // if the type is TYPE_WIDGET the widget is loaded in the main widget.
     // If the type is TYPE_EXTERNAL_WIDGET it is created outside as an

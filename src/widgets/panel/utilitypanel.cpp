@@ -168,7 +168,7 @@ void UtilityPanel::fillCaptureTools(
 
     for (auto toolItem : captureToolObjects) {
         QListWidgetItem* item = new QListWidgetItem(
-          toolItem->icon(QColor(Qt::white), false), toolItem->name());
+          toolItem->icon(QColor(Qt::white), false), toolItem->info());
         m_captureTools->addItem(item);
     }
     if (currentSelection >= 0 && currentSelection < m_captureTools->count()) {
