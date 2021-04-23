@@ -6,6 +6,7 @@
 #include "textwidget.h"
 
 #define BASE_POINT_SIZE 8
+#define MAX_INFO_LENGTH 24
 
 TextTool::TextTool(QObject* parent)
   : CaptureTool(parent)
@@ -57,6 +58,20 @@ QIcon TextTool::icon(const QColor& background, bool inEditor) const
 QString TextTool::name() const
 {
     return tr("Text");
+}
+
+QString TextTool::info()
+{
+    if (m_text.length() > 0) {
+        m_tempString = QString("%1 - %2").arg(name()).arg(m_text.trimmed());
+        m_tempString = m_tempString.split("\n").at(0);
+        if (m_tempString.length() > MAX_INFO_LENGTH) {
+            m_tempString.truncate(MAX_INFO_LENGTH);
+            m_tempString += "…";
+        }
+        return m_tempString;
+    }
+    return name();
 }
 
 ToolType TextTool::nameID() const
