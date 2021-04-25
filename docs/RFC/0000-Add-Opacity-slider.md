@@ -1,10 +1,12 @@
-# Add an opacity slider for colour-picker
+# Add an opacity slider to the Tool Settings
 
 ### To be Reviewed By
 
 * borgmanJeremy
 * mmahmoudian
 * Flameshot developers
+
+<br>
 
 ### Authors
 
@@ -23,6 +25,8 @@
 ### Superseded by
 
 N/A
+
+<br>
 
 ### Related
 
@@ -67,7 +71,7 @@ Here is a comparison of Flameshot's Marker tool with Microsoft's **Snip & Sketch
 
 ## Anti-Goals
 
-The Marker tool does a very good job at keeping the text readable so this is not linked to this request.
+Flameshot's Marker tool does a very good job at keeping the text readable so this is not linked to this request.
 
 ![image](https://user-images.githubusercontent.com/59576952/96624043-806b8f00-130c-11eb-9eb3-ce01d19234df.png)
 
