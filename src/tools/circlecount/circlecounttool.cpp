@@ -21,6 +21,13 @@ QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
     Q_UNUSED(inEditor)
     return QIcon(iconPath(background) + "circlecount-outline.svg");
 }
+
+QString CircleCountTool::info()
+{
+    m_tempString = QString("%1 - %2").arg(name()).arg(count());
+    return m_tempString;
+}
+
 QString CircleCountTool::name() const
 {
     return tr("Circle Counter");

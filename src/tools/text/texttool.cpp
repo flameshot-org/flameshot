@@ -6,6 +6,7 @@
 #include "textwidget.h"
 
 #define BASE_POINT_SIZE 8
+#define MAX_INFO_LENGTH 24
 
 TextTool::TextTool(QObject* parent)
   : CaptureTool(parent)
@@ -59,6 +60,20 @@ QString TextTool::name() const
     return tr("Text");
 }
 
+QString TextTool::info()
+{
+    if (m_text.length() > 0) {
+        m_tempString = QString("%1 - %2").arg(name()).arg(m_text.trimmed());
+        m_tempString = m_tempString.split("\n").at(0);
+        if (m_tempString.length() > MAX_INFO_LENGTH) {
+            m_tempString.truncate(MAX_INFO_LENGTH);
+            m_tempString += "…";
+        }
+        return m_tempString;
+    }
+    return name();
+}
+
 ToolType TextTool::nameID() const
 {
     return ToolType::TEXT;
@@ -76,6 +91,8 @@ QWidget* TextTool::widget()
     m_widget->setTextColor(m_color);
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
     m_widget->setFont(m_font);
+    m_widget->setText(m_text);
+    m_widget->selectAll();
     connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
     return m_widget;
 }
@@ -115,6 +132,7 @@ QWidget* TextTool::configurationWidget()
             &TextConfig::fontWeightChanged,
             this,
             &TextTool::updateFontWeight);
+    m_confW->setFontFamily(m_font.family());
     m_confW->setItalic(m_font.italic());
     m_confW->setUnderline(m_font.underline());
     m_confW->setStrikeOut(m_font.strikeOut());
@@ -164,7 +182,9 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     // draw text
     painter.setFont(m_font);
     painter.setPen(m_color);
-    painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
+    if (!editMode()) {
+        painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
+    }
 }
 
 void TextTool::drawObjectSelection(QPainter& painter)

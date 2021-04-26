@@ -51,10 +51,12 @@ QWidget* UtilityPanel::toolWidget() const
     return m_toolWidget;
 }
 
-void UtilityPanel::addToolWidget(QWidget* w)
+void UtilityPanel::setToolWidget(QWidget* w)
 {
     if (m_toolWidget) {
-        m_toolWidget->deleteLater();
+        m_toolWidget->close();
+        delete m_toolWidget;
+        m_toolWidget = nullptr;
     }
     if (w) {
         m_toolWidget = w;
@@ -168,7 +170,7 @@ void UtilityPanel::fillCaptureTools(
 
     for (auto toolItem : captureToolObjects) {
         QListWidgetItem* item = new QListWidgetItem(
-          toolItem->icon(QColor(Qt::white), false), toolItem->name());
+          toolItem->icon(QColor(Qt::white), false), toolItem->info());
         m_captureTools->addItem(item);
     }
     if (currentSelection >= 0 && currentSelection < m_captureTools->count()) {

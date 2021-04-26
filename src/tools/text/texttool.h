@@ -25,6 +25,7 @@ public:
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
+    QString info() override;
 
     QWidget* widget() override;
     QWidget* configurationWidget() override;
@@ -69,4 +70,6 @@ private:
     QPointer<TextWidget> m_widget;
     QPointer<TextConfig> m_confW;
     QPoint m_currentPos;
+
+    QString m_tempString;
 };

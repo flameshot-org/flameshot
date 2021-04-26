@@ -7,6 +7,7 @@
 
 class QVBoxLayout;
 class QPushButton;
+class QComboBox;
 
 class TextConfig : public QWidget
 {
@@ -14,6 +15,7 @@ class TextConfig : public QWidget
 public:
     explicit TextConfig(QWidget* parent = nullptr);
 
+    void setFontFamily(const QString& fontFamily);
     void setUnderline(const bool u);
     void setStrikeOut(const bool s);
     void setWeight(const int w);
@@ -33,6 +35,7 @@ private slots:
 
 private:
     QVBoxLayout* m_layout;
+    QComboBox* m_fontsCB;
     QPushButton* m_strikeOutButton;
     QPushButton* m_underlineButton;
     QPushButton* m_weightButton;
