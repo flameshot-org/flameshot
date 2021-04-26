@@ -12,19 +12,24 @@
 
 TextConfig::TextConfig(QWidget* parent)
   : QWidget(parent)
+  , m_layout(nullptr)
+  , m_fontsCB(nullptr)
+  , m_strikeOutButton(nullptr)
+  , m_underlineButton(nullptr)
+  , m_weightButton(nullptr)
+  , m_italicButton(nullptr)
 {
     m_layout = new QVBoxLayout(this);
 
     QFontDatabase fontDB;
-    QComboBox* fontsCB = new QComboBox();
-    connect(fontsCB,
+    m_fontsCB = new QComboBox();
+    connect(m_fontsCB,
             &QComboBox::currentTextChanged,
             this,
             &TextConfig::fontFamilyChanged);
-    fontsCB->addItems(fontDB.families());
+    m_fontsCB->addItems(fontDB.families());
     // TODO save family in config
-    int index = fontsCB->findText(font().family());
-    fontsCB->setCurrentIndex(index);
+    setFontFamily(font().family());
 
     QString iconPrefix = ColorUtils::colorIsDark(palette().windowText().color())
                            ? PathInfo::blackIconPath()
@@ -67,12 +72,17 @@ TextConfig::TextConfig(QWidget* parent)
     m_italicButton->setToolTip(tr("Italic"));
     QHBoxLayout* modifiersLayout = new QHBoxLayout();
 
-    m_layout->addWidget(fontsCB);
+    m_layout->addWidget(m_fontsCB);
     modifiersLayout->addWidget(m_strikeOutButton);
     modifiersLayout->addWidget(m_underlineButton);
     modifiersLayout->addWidget(m_weightButton);
     modifiersLayout->addWidget(m_italicButton);
     m_layout->addLayout(modifiersLayout);
+}
+
+void TextConfig::setFontFamily(const QString& fontFamily)
+{
+    m_fontsCB->setCurrentIndex(m_fontsCB->findText(fontFamily));
 }
 
 void TextConfig::setUnderline(const bool u)
