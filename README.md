@@ -322,6 +322,7 @@ There are packages available in the repository of some Linux distributions:
 There are also options for installing on macOS:
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
+- [Homebrew](https://brew.sh): `brew install --cask flameshot`
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
