@@ -51,10 +51,12 @@ QWidget* UtilityPanel::toolWidget() const
     return m_toolWidget;
 }
 
-void UtilityPanel::addToolWidget(QWidget* w)
+void UtilityPanel::setToolWidget(QWidget* w)
 {
     if (m_toolWidget) {
-        m_toolWidget->deleteLater();
+        m_toolWidget->close();
+        delete m_toolWidget;
+        m_toolWidget = nullptr;
     }
     if (w) {
         m_toolWidget = w;

@@ -23,7 +23,7 @@ public:
     explicit UtilityPanel(CaptureWidget* captureWidget);
 
     QWidget* toolWidget() const;
-    void addToolWidget(QWidget* w);
+    void setToolWidget(QWidget* w);
     void clearToolWidget();
     void pushWidget(QWidget* w);
     void hide();
