@@ -475,6 +475,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     // it
     if (m_toolWidget && !m_toolWidget->geometry().contains(e->pos())) {
         commitCurrentTool();
+        m_panel->setToolWidget(nullptr);
         drawToolsData();
         update();
     }
@@ -497,6 +498,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             drawToolsData(true, false);
             m_mouseIsClicked = false;
             handleButtonSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
+            m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     }
 }
@@ -978,7 +980,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
     if (b->tool()->isSelectable()) {
         if (m_activeButton != b) {
             QWidget* confW = b->tool()->configurationWidget();
-            m_panel->addToolWidget(confW);
+            m_panel->setToolWidget(confW);
             if (m_activeButton) {
                 m_activeButton->setColor(m_uiColor);
             }
