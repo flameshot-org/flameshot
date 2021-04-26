@@ -99,6 +99,7 @@ protected:
     void mousePressEvent(QMouseEvent* mouseEvent) override;
     void mouseMoveEvent(QMouseEvent* mouseEvent) override;
     void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
     void keyPressEvent(QKeyEvent* keyEvent) override;
     void keyReleaseEvent(QKeyEvent* keyEvent) override;
     void wheelEvent(QWheelEvent* wheelEvent) override;
@@ -106,8 +107,9 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
 
 private:
+    void releaseActiveTool();
     void uncheckActiveTool();
-    void selectToolItemAtPos(const QPoint& pos);
+    int selectToolItemAtPos(const QPoint& pos);
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
