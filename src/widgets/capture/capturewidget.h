@@ -109,6 +109,7 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
 
 private:
+    void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
     int selectToolItemAtPos(const QPoint& pos);
@@ -186,6 +187,8 @@ private:
     QPoint m_activeToolOffsetToMouseOnStart;
 
     QUndoStack m_undoStack;
+
+    bool m_thicknessForExistingObjectIsChanged;
 
     // TODO - should be remove after fixing undo()/redo() functions
     bool m_lastPressedUndo;
