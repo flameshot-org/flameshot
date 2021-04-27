@@ -416,6 +416,10 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 void CaptureWidget::pushObjectsStateToUndoStack()
 {
     m_existingObjectIsChanged = false;
+    // push zero state to be able to do a complete undo
+    if (m_undoStack.count() == 0 || m_undoStack.index() == 0) {
+        m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
+    }
     m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
 }
 
@@ -1400,11 +1404,6 @@ void CaptureWidget::updateCursor()
 
 void CaptureWidget::pushToolToStack()
 {
-    // push zero state to be able to do a complete undo
-    if (m_undoStack.count() == 0) {
-        pushObjectsStateToUndoStack();
-    }
-
     // append current tool to the new state
     if (m_activeTool && m_activeButton) {
         disconnect(this,
@@ -1554,6 +1553,11 @@ void CaptureWidget::undo()
     m_lastPressedUndo = true;
     m_lastPressedRedo = false;
     m_undoStack.undo();
+    if (m_undoStack.index() == 0 && m_captureToolObjects.size() > 0) {
+        m_lastPressedUndo = false;
+        m_captureToolObjects.clear();
+        drawToolsData();
+    }
 }
 
 void CaptureWidget::redo()
