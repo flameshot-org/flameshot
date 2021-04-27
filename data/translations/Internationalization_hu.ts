@@ -871,11 +871,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>QHotkey</name>
     <message>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">Nem sikerült %1 rögzítése. %2 Hiba</translation>
+        <translation>Nem sikerült %1 rögzítése. %2 Hiba</translation>
     </message>
     <message>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">Sikertelen rögzítés törlés %1 -nél. %2 Hiba</translation>
+        <translation>Sikertelen rögzítés törlés %1 -nél. %2 Hiba</translation>
     </message>
 </context>
 <context>
