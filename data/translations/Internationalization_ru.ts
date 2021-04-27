@@ -58,7 +58,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Выбрать «Стрелку» инструментом для рисования</translation>
+        <translation>Выбрать «Стрелку» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -133,7 +133,7 @@
         <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1536"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Press Space to open the side panel.</source>
 Нажмите Пробел, чтобы открыть боковую панель.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="803"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
         <source>Tool Settings</source>
         <translation>Настройки инструмента</translation>
     </message>
@@ -154,14 +154,14 @@ Press Space to open the side panel.</source>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="26"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
         <translation>Нумерация</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Добавить круг с автоматически приращающимся счётчиком</translation>
+        <translation>Добавить круг с автоприращающимся счётчиком</translation>
     </message>
 </context>
 <context>
@@ -174,7 +174,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Выбрать «Окружность» инструментом для рисования</translation>
+        <translation>Выбрать «Окружность» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -202,7 +202,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation>Горячие кнопки</translation>
+        <translation>Горячие клавиши</translation>
     </message>
     <message>
         <source>Storage</source>
@@ -254,7 +254,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation>&amp;Информация</translation>
+        <translation>&amp;О программе</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
@@ -264,7 +264,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation>Последние загрузки</translation>
+        <translation>&amp;Последние загрузки</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -315,7 +315,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Измените имя ваших снимков:</translation>
+        <translation>Укажите название для ваших снимков:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -583,12 +583,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="249"/>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Для удаления снимка экрана из последних загрузок требуется подтверждение</translation>
+        <translation>Требовать подтверждение при удалении снимка из последних загрузок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
-        <translation>Файл конфигурации</translation>
+        <translation>Файл настроек</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
@@ -655,7 +655,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Использовать фиксированный путь для сохранения снимков экрана</translation>
+        <translation>Использовать постоянный путь сохранения для снимков экрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
@@ -720,7 +720,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Вы уверены, что хотите удалить снимок экрана с последних загрузок и с сервера?</translation>
+        <translation>Вы уверены, что хотите удалить снимок экрана из последних загрузок и с сервера?</translation>
     </message>
 </context>
 <context>
@@ -913,7 +913,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation>Отправка изображений</translation>
+        <translation>Загрузка изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
@@ -926,7 +926,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="24"/>
         <source>About</source>
-        <translation>Информация</translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <source>SPACEBAR</source>
@@ -1013,7 +1013,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="38"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Выбрать «Линию» инструментом для рисования</translation>
+        <translation>Выбрать «Линию» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1026,7 +1026,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Выбрать «Маркер» инструментом для рисования</translation>
+        <translation>Выбрать «Маркер» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1039,7 +1039,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Выбрать «Перемещение» инструментом для рисования</translation>
+        <translation>Переместить выделенную область</translation>
     </message>
 </context>
 <context>
@@ -1084,12 +1084,14 @@ Press Space to open the side panel.</source>
 <context>
     <name>QHotkey</name>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">Не удалось зарегистрировать %1. Ошибка: %2</translation>
+        <translation>Не удалось зарегистрировать %1. Ошибка: %2</translation>
     </message>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">Не удалось отменить регистрацию %1. Ошибка: %2</translation>
+        <translation>Не удалось отменить регистрацию %1. Ошибка: %2</translation>
     </message>
 </context>
 <context>
@@ -1103,18 +1105,18 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Capture saved as </source>
-        <translation>Снимок сохранён как </translation>
+        <translation>Снимок сохранён в </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
         <source>Capture saved to clipboard.</source>
-        <translation>Снимок сохранён в буфер обмена.</translation>
+        <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved to clipboard</source>
-        <translation>Снимок сохранён в буфер обмена</translation>
+        <translation>Снимок скопирован в буфер обмена</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
@@ -1194,7 +1196,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Path where the capture will be saved</source>
-        <translation>Путь, куда будет сохранён снимок</translation>
+        <translation>Путь сохранения снимка</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="145"/>
@@ -1352,12 +1354,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="506"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет, я тут! Щёлкните по значку на панели задач, чтобы сделать снимок экрана, или щёлкните правой кнопкой, чтобы увидеть дополнительные параметры.</translation>
+        <translation>Привет! Для создания снимка щёлкните по значку в трее. Иные возможности доступны по щелчку правой кнопкой.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
         <source>Toggle side panel</source>
-        <translation>Вызвать/спрятать боковую панель</translation>
+        <translation>Показать/скрыть боковую панель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
@@ -1446,12 +1448,12 @@ You can find me in the system tray.</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="24"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="26"/>
         <source>Rectangle</source>
         <translation>Прямоугольник</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="34"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="36"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Выбрать «Прямоугольник» инструментом для рисования</translation>
     </message>
@@ -1724,28 +1726,28 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="30"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot Инфо</translation>
+        <translation>Уведомление Flameshot</translation>
     </message>
 </context>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="40"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
         <translation>Зачёркнутый</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="49"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
         <translation>Подчёркнутый</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="58"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
         <translation>Полужирный</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="67"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
@@ -1753,12 +1755,12 @@ You can find me in the system tray.</source>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="59"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="60"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="69"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="84"/>
         <source>Add text to your capture</source>
         <translation>Добавить текст на снимок</translation>
     </message>
@@ -1855,12 +1857,12 @@ You can find me in the system tray.</source>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="157"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="167"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Пусто&gt;</translation>
     </message>
@@ -1874,7 +1876,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="40"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Затемнение невыделенной области:</translation>
+        <translation>Затененность области вне выделенной:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>
