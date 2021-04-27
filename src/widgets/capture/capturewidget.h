@@ -188,7 +188,11 @@ private:
 
     QUndoStack m_undoStack;
 
-    bool m_thicknessForExistingObjectIsChanged;
+    bool m_existingObjectIsChanged;
+
+    // For start moving after more than X offset
+    QPoint m_startMovePos;
+    bool m_startMove;
 
     // TODO - should be remove after fixing undo()/redo() functions
     bool m_lastPressedUndo;
