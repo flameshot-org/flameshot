@@ -28,7 +28,10 @@
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
     </a>
-    <a href="https://flameshot.org">
+  <a href="https://hosted.weblate.org/engage/flameshot/">
+    <img src="https://hosted.weblate.org/widgets/flameshot/-/flameshot/svg-badge.svg" alt="Translation status" />
+  </a>
+  <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
     <br>
