@@ -174,6 +174,8 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
         return;
     }
     const int val = 5;
+    QFont orig_font = painter.font();
+    QPen orig_pen = painter.pen();
     QFontMetrics fm(m_font);
     QSize size(fm.boundingRect(QRect(), 0, m_text).size());
     size.setWidth(size.width() + val * 2);
@@ -185,6 +187,8 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     if (!editMode()) {
         painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
     }
+    painter.setFont(orig_font);
+    painter.setPen(orig_pen);
 }
 
 void TextTool::drawObjectSelection(QPainter& painter)
