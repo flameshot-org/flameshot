@@ -133,7 +133,7 @@
         <translation>Не удалось захватить экран</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1536"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Press Space to open the side panel.</source>
 Нажмите Пробел, чтобы открыть боковую панель.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="803"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
         <source>Tool Settings</source>
         <translation>Настройки инструмента</translation>
     </message>
@@ -154,12 +154,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="26"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
         <translation>Нумерация</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Добавить круг с автоприращающимся счётчиком</translation>
     </message>
@@ -1084,12 +1084,14 @@ Press Space to open the side panel.</source>
 <context>
     <name>QHotkey</name>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">Не удалось зарегистрировать %1. Ошибка: %2</translation>
+        <translation>Не удалось зарегистрировать %1. Ошибка: %2</translation>
     </message>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">Не удалось отменить регистрацию %1. Ошибка: %2</translation>
+        <translation>Не удалось отменить регистрацию %1. Ошибка: %2</translation>
     </message>
 </context>
 <context>
@@ -1446,12 +1448,12 @@ You can find me in the system tray.</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="24"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="26"/>
         <source>Rectangle</source>
         <translation>Прямоугольник</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="34"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="36"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Выбрать «Прямоугольник» инструментом для рисования</translation>
     </message>
@@ -1730,22 +1732,22 @@ You can find me in the system tray.</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="40"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
         <translation>Зачёркнутый</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="49"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
         <translation>Подчёркнутый</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="58"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
         <translation>Полужирный</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="67"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
@@ -1753,12 +1755,12 @@ You can find me in the system tray.</source>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="59"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="60"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="69"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="84"/>
         <source>Add text to your capture</source>
         <translation>Добавить текст на снимок</translation>
     </message>
@@ -1855,12 +1857,12 @@ You can find me in the system tray.</source>
 <context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="157"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="167"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Пусто&gt;</translation>
     </message>
