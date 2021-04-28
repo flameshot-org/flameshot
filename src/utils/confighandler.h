@@ -98,6 +98,9 @@ public:
     void setIgnoreUpdateToVersion(const QString& text);
     QString ignoreUpdateToVersion();
 
+    void setUndoLimit(int value);
+    int undoLimit();
+
     QVector<QStringList> shortcuts();
     void setShortcutsDefault();
     bool setShortcut(const QString&, const QString&);
