@@ -452,19 +452,21 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
-    bool colorPickerIsAlreadyActive = m_colorPicker->isVisible();
     m_startMove = false;
     m_startMovePos = QPoint();
     m_dragStartPoint = m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
+    if (m_colorPicker->isVisible()) {
+        updateCursor();
+        return;
+    }
 
     // reset object selection if capture area selection is active
-    if (m_selection->getMouseSide(e->pos()) != SelectionWidget::NO_SIDE &&
-        !colorPickerIsAlreadyActive) {
+    if (m_selection->getMouseSide(e->pos()) != SelectionWidget::NO_SIDE) {
         m_panel->setActiveLayer(-1);
     }
 
-    if (e->button() == Qt::RightButton && !colorPickerIsAlreadyActive) {
+    if (e->button() == Qt::RightButton) {
         showColorPicker(m_mousePressedPos);
     } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
@@ -493,18 +495,16 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         }
     }
 
-    if (!colorPickerIsAlreadyActive) {
-        // Commit current tool if it has edit widget and mouse click is outside
-        // of it
-        if (m_toolWidget && !m_toolWidget->geometry().contains(e->pos())) {
-            commitCurrentTool();
-            m_panel->setToolWidget(nullptr);
-            drawToolsData();
-            update();
-        }
-
-        selectToolItemAtPos(m_mousePressedPos);
+    // Commit current tool if it has edit widget and mouse click is outside
+    // of it
+    if (m_toolWidget && !m_toolWidget->geometry().contains(e->pos())) {
+        commitCurrentTool();
+        m_panel->setToolWidget(nullptr);
+        drawToolsData();
+        update();
     }
+
+    selectToolItemAtPos(m_mousePressedPos);
 
     updateCursor();
 }
@@ -532,7 +532,10 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     m_context.mousePos = e->pos();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
-    int activeLayerIndex = m_panel->activeLayerIndex();
+    int activeLayerIndex = -1;
+    if (m_mouseIsClicked) {
+        activeLayerIndex = m_panel->activeLayerIndex();
+    }
     if (m_mouseIsClicked && !m_activeButton && activeLayerIndex >= 0) {
         // Move existing object
         if (!m_startMove) {
