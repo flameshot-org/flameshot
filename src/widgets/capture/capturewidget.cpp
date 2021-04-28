@@ -1192,6 +1192,7 @@ void CaptureWidget::removeToolObject(int index)
             }
             m_context.circleCount = circleCount;
         }
+        pushObjectsStateToUndoStack();
         drawToolsData();
     }
 }
