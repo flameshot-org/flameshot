@@ -31,7 +31,6 @@
 #include <QPainter>
 #include <QScreen>
 #include <QShortcut>
-#include <QUndoView>
 #include <draggablewidgetmaker.h>
 
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
@@ -70,6 +69,8 @@ CaptureWidget::CaptureWidget(uint id,
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
 {
+    m_undoStack.setUndoLimit(ConfigHandler().undoLimit() + 1);
+
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
     connect(m_eventFilter,
@@ -1553,7 +1554,8 @@ void CaptureWidget::undo()
     m_lastPressedUndo = true;
     m_lastPressedRedo = false;
     m_undoStack.undo();
-    if (m_undoStack.index() == 0 && m_captureToolObjects.size() > 0) {
+    if (m_undoStack.index() == 0 && m_captureToolObjects.size() > 0 &&
+        (m_undoStack.count() - 1) != ConfigHandler().undoLimit()) {
         m_lastPressedUndo = false;
         m_captureToolObjects.clear();
         drawToolsData();

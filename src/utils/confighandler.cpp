@@ -222,6 +222,21 @@ QString ConfigHandler::ignoreUpdateToVersion()
     return m_settings.value(QStringLiteral("ignoreUpdateToVersion")).toString();
 }
 
+void ConfigHandler::setUndoLimit(int value)
+{
+    m_settings.setValue(QStringLiteral("undoLimit"), value);
+}
+
+int ConfigHandler::undoLimit()
+{
+    int limit = 50;
+    if (m_settings.contains(QStringLiteral("undoLimit"))) {
+        limit = m_settings.value(QStringLiteral("undoLimit")).toInt();
+        limit = qBound(1, limit, 999);
+    }
+    return limit;
+}
+
 bool ConfigHandler::desktopNotificationValue()
 {
     bool res = true;

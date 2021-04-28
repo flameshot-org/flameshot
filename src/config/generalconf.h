@@ -30,6 +30,7 @@ private slots:
     void autostartChanged(bool checked);
     void historyConfirmationToDelete(bool checked);
     void uploadHistoryMaxSizeChanged(int max);
+    void undoLimit(int limit);
     void saveAfterCopyChanged(bool checked);
     void changeSavePath();
     void importConfiguration();
@@ -47,6 +48,7 @@ private:
     void initShowTrayIcon();
     void initHistoryConfirmationToDelete();
     void initUploadHistoryMaxSize();
+    void initUndoLimit();
     void initConfigButtons();
     void initCheckForUpdates();
     void initAutostart();
@@ -79,4 +81,5 @@ private:
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
     QSpinBox* m_uploadHistoryMaxSize;
+    QSpinBox* m_undoLimit;
 };
