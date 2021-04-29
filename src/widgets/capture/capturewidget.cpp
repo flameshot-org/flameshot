@@ -308,6 +308,9 @@ void CaptureWidget::deleteToolWidgetOrClose()
 void CaptureWidget::releaseActiveTool()
 {
     if (m_activeTool) {
+        if (m_activeTool->editMode()) {
+            m_activeTool->setEditMode(false);
+        }
         if (-1 == m_panel->activeLayerIndex() && m_activeButton) {
             // delete tool if no active selection, otherwise object shouldn't be
             // deleted, because it is in undo/redo stack
@@ -460,6 +463,9 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
 
     if (e->button() == Qt::RightButton) {
+        if (m_activeTool && m_activeTool->editMode()) {
+            return;
+        }
         showColorPicker(m_mousePressedPos);
     } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
@@ -1402,6 +1408,9 @@ void CaptureWidget::updateCursor()
 void CaptureWidget::pushToolToStack()
 {
     // append current tool to the new state
+    if (m_activeTool && m_activeTool->editMode()) {
+        m_activeTool->setEditMode(false);
+    }
     if (m_activeTool && m_activeButton) {
         disconnect(this,
                    &CaptureWidget::colorChanged,
@@ -1415,7 +1424,6 @@ void CaptureWidget::pushToolToStack()
             disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
         }
 
-        m_activeTool->setEditMode(false);
         m_captureToolObjects.append(m_activeTool);
         releaseActiveTool();
     }
