@@ -1167,6 +1167,12 @@ void CaptureWidget::setDrawColor(const QColor& c)
 
 void CaptureWidget::updateActiveLayer(const int& layer)
 {
+    // TODO - refactor this part, make all objects to work with
+    // m_activeTool->isChanged() and remove m_existingObjectIsChanged
+    if (m_activeTool && m_activeTool->nameID() == ToolType::TEXT &&
+        m_activeTool->isChanged()) {
+        commitCurrentTool();
+    }
     if (m_existingObjectIsChanged) {
         pushObjectsStateToUndoStack();
     }
