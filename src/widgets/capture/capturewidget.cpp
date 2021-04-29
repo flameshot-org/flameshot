@@ -1590,8 +1590,7 @@ void CaptureWidget::undo()
     m_lastPressedUndo = true;
     m_lastPressedRedo = false;
     m_undoStack.undo();
-    if (m_undoStack.index() == 0 && m_captureToolObjects.size() > 0 &&
-        (m_undoStack.count() - 1) != ConfigHandler().undoLimit()) {
+    if (m_undoStack.index() == 0 && m_captureToolObjects.size() > 0) {
         m_lastPressedUndo = false;
         m_captureToolObjects.clear();
         drawToolsData();
