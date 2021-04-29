@@ -72,9 +72,6 @@ public:
         REQ_CAPTURE_DONE_OK,
         // Instance this->widget()'s widget inside the editor under the mouse.
         REQ_ADD_CHILD_WIDGET,
-        // Instance this->widget()'s widget as a window which closes after
-        // closing the editor.
-        REQ_ADD_CHILD_WINDOW,
         // Instance this->widget()'s widget which handles its own lifetime.
         REQ_ADD_EXTERNAL_WIDGETS,
         // increase tool size for all tools
