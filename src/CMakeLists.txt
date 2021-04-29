@@ -113,7 +113,7 @@ endif ()
 
 target_sources(
         flameshot
-        PRIVATE # ${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication/singleapplication.cpp
+        PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_utils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/color_wheel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/color_wheel.hpp
@@ -126,7 +126,6 @@ target_include_directories(
   flameshot
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../dbus/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cli>
@@ -161,6 +160,15 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/capture>
          $<INSTALL_INTERFACE:include/mylib>)
 
+if (USE_EXTERNAL_SINGLEAPPLICATION)
+    add_compile_definitions(USE_EXTERNAL_SINGLEAPPLICATION=1)
+else ()
+    target_include_directories(
+        flameshot
+        PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication>)
+endif()
+
 target_link_libraries(
         flameshot
         project_warnings
@@ -169,7 +177,7 @@ target_link_libraries(
         Qt5::DBus
         Qt5::Network
         Qt5::Widgets
-        SingleApplication::SingleApplication
+        ${QTSINGLEAPPLICATION_LIBRARY}
         spdlog::spdlog
 )
 
