@@ -300,3 +300,16 @@ const QPoint* TextTool::pos()
     m_currentPos = m_textArea.topLeft();
     return &m_currentPos;
 }
+
+void TextTool::setEditMode(bool b)
+{
+    if (b) {
+        m_textOld = m_text;
+    }
+    CaptureTool::setEditMode(b);
+}
+
+bool TextTool::isChanged()
+{
+    return QString::compare(m_text, m_textOld, Qt::CaseInsensitive) != 0;
+}

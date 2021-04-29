@@ -314,6 +314,9 @@ void CaptureWidget::releaseActiveTool()
     if (m_activeTool) {
         if (m_activeTool->editMode()) {
             m_activeTool->setEditMode(false);
+            if (m_activeTool->isChanged()) {
+                pushObjectsStateToUndoStack();
+            }
         }
         if (-1 == m_panel->activeLayerIndex() && m_activeButton) {
             // delete tool if no active selection, otherwise object shouldn't be
@@ -1417,8 +1420,10 @@ void CaptureWidget::updateCursor()
 void CaptureWidget::pushToolToStack()
 {
     // append current tool to the new state
+    bool isChanged = true;
     if (m_activeTool && m_activeTool->editMode()) {
         m_activeTool->setEditMode(false);
+        isChanged = m_activeTool->isChanged();
     }
     if (m_activeTool && m_activeButton) {
         disconnect(this,
@@ -1437,7 +1442,9 @@ void CaptureWidget::pushToolToStack()
         releaseActiveTool();
     }
 
-    pushObjectsStateToUndoStack();
+    if (isChanged) {
+        pushObjectsStateToUndoStack();
+    }
 }
 
 void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
