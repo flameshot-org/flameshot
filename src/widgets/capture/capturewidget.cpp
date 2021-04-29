@@ -279,9 +279,6 @@ bool CaptureWidget::commitCurrentTool()
             m_toolWidget) {
             pushToolToStack();
         }
-        if (m_activeTool) {
-            m_activeTool->setEditMode(false);
-        }
         releaseActiveTool();
         return true;
     }
@@ -999,8 +996,12 @@ void CaptureWidget::setState(CaptureToolButton* b)
         return;
     }
 
-    if (m_toolWidget && m_activeTool && m_activeTool->isValid()) {
-        pushToolToStack();
+    if (m_toolWidget && m_activeTool) {
+        if (m_activeTool->isValid()) {
+            pushToolToStack();
+        } else {
+            releaseActiveTool();
+        }
     }
     if (m_activeButton != b) {
         processTool(b->tool());
@@ -1104,16 +1105,6 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
                 m_toolWidget->move(m_context.mousePos);
                 m_toolWidget->show();
                 m_toolWidget->setFocus();
-            }
-            break;
-        case CaptureTool::REQ_ADD_CHILD_WINDOW:
-            if (!m_activeTool) {
-                break;
-            } else {
-                QWidget* w = m_activeTool->widget();
-                connect(
-                  this, &CaptureWidget::destroyed, w, &QWidget::deleteLater);
-                w->show();
             }
             break;
         case CaptureTool::REQ_ADD_EXTERNAL_WIDGETS:
