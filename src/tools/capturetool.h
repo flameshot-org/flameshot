@@ -126,6 +126,9 @@ public:
     virtual void setEditMode(bool b) { m_editMode = b; };
     virtual bool editMode() { return m_editMode; };
 
+    // return true if object was change after editMode
+    virtual bool isChanged() { return true; };
+
     // Counter for all object types (currently is used for the CircleCounter
     // only)
     virtual void setCount(int count) { m_count = count; };
