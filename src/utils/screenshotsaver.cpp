@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
+#include "utils/desktopinfo.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
@@ -25,6 +26,30 @@ ScreenshotSaver::ScreenshotSaver(const unsigned id)
   : m_id(id)
 {}
 
+void ScreenshotSaver::saveToClipboardPng(const QPixmap& capture) {
+    QByteArray array;
+    QBuffer buffer{ &array };
+    QImageWriter imageWriter{ &buffer, "PNG" };
+    imageWriter.write(capture.toImage());
+
+    QPixmap pngPixmap;
+    bool isLoaded = pngPixmap.loadFromData(
+      reinterpret_cast<uchar*>(array.data()), array.size(), "PNG");
+    if (isLoaded) {
+        // Need to send message before copying to clipboard
+        SystemNotification().sendMessage(
+          QObject::tr("Capture saved to clipboard"));
+
+        QMimeData* mimeData = new QMimeData;
+        mimeData->setData("image/png", array);
+        QApplication::clipboard()->setMimeData(mimeData);
+    } else {
+        SystemNotification().sendMessage(
+          QObject::tr("Error while saving to clipboard"));
+        return;
+    }
+}
+
 // TODO: If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
 void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
@@ -36,7 +61,11 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
         saveToFilesystem(capture,
                          ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
-        QApplication::clipboard()->setPixmap(capture);
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+        if (DesktopInfo().waylandDectected()) saveToClipboardPng(capture);
+        else
+#endif
+        saveToClipboardPng(capture);
     }
     // Otherwise only save to clipboard
     else {
@@ -67,6 +96,10 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
             // Need to send message before copying to clipboard
             SystemNotification().sendMessage(
               QObject::tr("Capture saved to clipboard"));
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+            if (DesktopInfo().waylandDectected()) saveToClipboardPng(capture);
+            else
+#endif
             QApplication::clipboard()->setPixmap(capture);
         }
     }
