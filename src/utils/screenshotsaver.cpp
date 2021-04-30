@@ -65,7 +65,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
         if (DesktopInfo().waylandDectected()) saveToClipboardPng(capture);
         else
 #endif
-        saveToClipboardPng(capture);
+        QApplication::clipboard()->setPixmap(capture);
     }
     // Otherwise only save to clipboard
     else {
