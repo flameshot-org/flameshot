@@ -418,7 +418,7 @@ void GeneralConf::initUploadHistoryMaxSize()
     int max = ConfigHandler().uploadHistoryMaxSizeValue();
 
     m_uploadHistoryMaxSize = new QSpinBox(this);
-    m_uploadHistoryMaxSize->setMaximum(1000);
+    m_uploadHistoryMaxSize->setMaximum(50);
     m_uploadHistoryMaxSize->setValue(max);
     QString foreground = this->palette().windowText().color().name();
     m_uploadHistoryMaxSize->setStyleSheet(
