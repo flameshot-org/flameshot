@@ -28,7 +28,10 @@
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
     </a>
-    <a href="https://flameshot.org">
+  <a href="https://hosted.weblate.org/engage/flameshot/">
+    <img src="https://hosted.weblate.org/widgets/flameshot/-/flameshot/svg-badge.svg" alt="Translation status" />
+  </a>
+  <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
     <br>
@@ -322,6 +325,7 @@ There are packages available in the repository of some Linux distributions:
 There are also options for installing on macOS:
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
+- [Homebrew](https://brew.sh): `brew install --cask flameshot`
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
@@ -541,5 +545,6 @@ Thanks to those who have shown interest in the early development process:
 - ismatori
 
 Thanks to sponsors:
+- Namecheap
 - JetBrains
 - SignPath

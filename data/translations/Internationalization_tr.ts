@@ -128,12 +128,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="96"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="95"/>
         <source>Unable to capture screen</source>
         <translation>Ekran resmi alınamadı</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1555"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,20 +146,20 @@ Aracınızın kalınlığını değiştirmek için Fare Tekerleğini kullanın.
 Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="807"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
         <source>Tool Settings</source>
-        <translation>Alet Ayarları</translation>
+        <translation>Araç Ayarları</translation>
     </message>
 </context>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="26"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
         <translation>Daire Sayacı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Otomatik artan bir sayaç balonu ekleyin</translation>
     </message>
@@ -180,34 +180,29 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="29"/>
+        <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="50"/>
+        <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
         <translation>Arayüz</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="56"/>
+        <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
         <translation>Dosya Adı Düzenleyici</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="60"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
         <translation>Genel</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="64"/>
+        <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
         <translation>Kısayollar</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/configwindow.cpp" line="70"/>
-        <source>Storage</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -265,7 +260,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;En Son Güncelleme</translation>
+        <translation>&amp;Son Yüklenenler</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -516,7 +511,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../src/config/generalconf.cpp" line="249"/>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>En son yüklemelerden ekran görüntüsünü silmek için onay gerekli</translation>
+        <translation>Son yüklenenlerden ekran görüntüsünü silmek için onay gerekli</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
@@ -593,7 +588,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Son Yüklenenler Azami Boyutu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
@@ -621,37 +616,37 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
         <translation>Son Yüklenenler</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="93"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
         <translation>Ekran görüntüsü geçmişi boş</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="147"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
         <translation>URL Kopyala</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
         <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="157"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
         <translation>Tarayıcıda aç</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="173"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
         <translation>Silmeyi onayla</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="174"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation>En son yüklemelerden ve sunucudan bir ekran görüntüsünü silmek istediğinizden emin misiniz?</translation>
     </message>
@@ -663,63 +658,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="obsolete">Resim Yükleniyor</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
-        <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="130"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL panoya kopyalandı.</translation>
+        <translation type="obsolete">URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="148"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="436"/>
         <source>Error</source>
-        <translation type="unfinished">Hata</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="149"/>
-        <source>Unable to upload screenshot, please check your internet connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="205"/>
-        <source>S3 Creds URL is not found in your configuration file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="432"/>
-        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="440"/>
-        <source>Retrieving configuration file with s3 creds...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgS3UploaderTool</name>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
-        <source>Upload the selection to S3 bucket</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Hata</translation>
     </message>
 </context>
 <context>
@@ -729,116 +673,92 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="obsolete">Resim Yükleniyor</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="89"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">URL açılamıyor.</translation>
+        <translation type="obsolete">URL açılamıyor.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="96"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL panoya kopyalandı.</translation>
+        <translation type="obsolete">URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Ekran görüntüsü panoya kopyalandı.</translation>
+        <translation type="obsolete">Ekran görüntüsü panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="171"/>
         <source>Copy URL</source>
-        <translation type="unfinished">URL Kopyala</translation>
+        <translation type="obsolete">URL Kopyala</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
         <source>Open URL</source>
-        <translation type="unfinished">URL Aç</translation>
+        <translation type="obsolete">URL Aç</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
         <source>Delete image</source>
-        <translation type="unfinished">Resmi sil</translation>
+        <translation type="obsolete">Resmi sil</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="111"/>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Resim Pano&apos;ya.</translation>
-    </message>
-</context>
-<context>
-    <name>ImgUploaderTool</name>
-    <message>
-        <location filename="../../src/tools/storage/imguploadertool.cpp" line="22"/>
-        <source>Image uploader tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Resim Pano&apos;ya.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
         <translation>Imgur&apos;a yükle</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation type="vanished">Resim Yükleniyor</translation>
+        <translation>Resim Yükleniyor</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation type="vanished">URL Kopyala</translation>
+        <translation>URL Kopyala</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation type="vanished">URL Aç</translation>
+        <translation>URL Aç</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation type="vanished">Resmi sil</translation>
+        <translation>Resmi sil</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation type="vanished">Resim Pano&apos;ya.</translation>
+        <translation>Resim Pano&apos;ya.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="124"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
         <translation>URL açılamıyor.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL panoya kopyalandı.</translation>
+        <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Ekran görüntüsü panoya kopyalandı.</translation>
+        <translation>Ekran görüntüsü panoya kopyalandı.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="14"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
         <translation>Resim Yükleme Aracı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
         <translation>Seçimi Imgur&apos;a yükle</translation>
     </message>
@@ -998,12 +918,14 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>QHotkey</name>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">%1 kaydedilemedi. Hata:%2</translation>
+        <translation>%1 kaydedilemedi. Hata:%2</translation>
     </message>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">%1 kaydı silinemedi. Hata:%2</translation>
+        <translation>%1 kaydı silinemedi. Hata:%2</translation>
     </message>
 </context>
 <context>
@@ -1223,7 +1145,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Yazılamadı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
         <translation>URL panoya kopyalandı.</translation>
     </message>
@@ -1354,12 +1276,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="24"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="26"/>
         <source>Rectangle</source>
         <translation>Dikdörtgen</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="34"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="36"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Dikdörtgeni boyama aracı olarak ayarla</translation>
     </message>
@@ -1485,12 +1407,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Boyutunu Küçült</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer araçların boyutunu küçült</translation>
     </message>
 </context>
 <context>
@@ -1498,12 +1420,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Boyutunu Büyüt</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer araçların boyutunu büyüt</translation>
     </message>
 </context>
 <context>
@@ -1638,22 +1560,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="40"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
         <translation>Üstçizgi</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="49"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
         <translation>Altçizgi</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="58"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
         <translation>Kalın</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="67"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
         <translation>Eğik</translation>
     </message>
@@ -1661,12 +1583,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="59"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="60"/>
         <source>Text</source>
         <translation>Metin</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="69"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="84"/>
         <source>Add text to your capture</source>
         <translation>Bilgisayardan yazı ekle</translation>
     </message>
@@ -1746,32 +1668,14 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
 </context>
 <context>
-    <name>UploadStorageConfig</name>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
-        <source>Upload storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
-        <source>Imgur storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
-        <source>S3 storage (require config.ini file with s3 credentials)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="157"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
         <translation>Kapat</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="167"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>

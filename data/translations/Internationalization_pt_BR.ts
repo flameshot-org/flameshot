@@ -128,12 +128,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="96"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="95"/>
         <source>Unable to capture screen</source>
         <translation>Não foi possível capturar a tela</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1555"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Use a roda do mouse para aumentar a grossura do pincel.
 Pressione espaço para abrir o painel lateral.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="807"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
         <source>Tool Settings</source>
         <translation>Configurações das ferramentas</translation>
     </message>
@@ -154,12 +154,12 @@ Pressione espaço para abrir o painel lateral.</translation>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="26"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
         <translation>Contorno do círculo</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="36"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Adicionar um balão de contador de incremento automático</translation>
     </message>
@@ -180,34 +180,29 @@ Pressione espaço para abrir o painel lateral.</translation>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="29"/>
+        <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
         <translation>Configuração</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="50"/>
+        <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
         <translation>Interface</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="56"/>
+        <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
         <translation>Editor de nome de arquivo</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="60"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
         <translation>Geral</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="64"/>
+        <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
         <translation>Atalhos</translation>
-    </message>
-    <message>
-        <location filename="../../src/config/configwindow.cpp" line="70"/>
-        <source>Storage</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -669,37 +664,37 @@ Pressione espaço para abrir o painel lateral.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="29"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
         <translation>Últimos Envios</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="93"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
         <translation>O histórico de capturas de tela está vazio</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="147"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
         <translation>Copiar URL</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
         <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="157"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
         <translation>Abrir no navegador</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="173"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
         <translation>Confirme para deletar</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="174"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation>Tem certeza de que deseja deletar uma captura de tela dos últimos uploads e servidor?</translation>
     </message>
@@ -711,63 +706,12 @@ Pressione espaço para abrir o painel lateral.</translation>
         <translation type="obsolete">Upando Imagem</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="53"/>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
-        <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="59"/>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="130"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para a área de transferência.</translation>
+        <translation type="obsolete">URL copiada para a área de transferência.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="148"/>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="436"/>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="149"/>
-        <source>Unable to upload screenshot, please check your internet connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="205"/>
-        <source>S3 Creds URL is not found in your configuration file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="432"/>
-        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploader.cpp" line="440"/>
-        <source>Retrieving configuration file with s3 creds...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgS3UploaderTool</name>
-    <message>
-        <location filename="../../src/tools/storage/s3/imgs3uploadertool.cpp" line="28"/>
-        <source>Upload the selection to S3 bucket</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Erro</translation>
     </message>
 </context>
 <context>
@@ -777,116 +721,92 @@ Pressione espaço para abrir o painel lateral.</translation>
         <translation type="obsolete">Upando Imagem</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="89"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Não foi possível abrir a URL.</translation>
+        <translation type="obsolete">Não foi possível abrir a URL.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="96"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para a área de transferência.</translation>
+        <translation type="obsolete">URL copiada para a área de transferência.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="102"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Screenshot copiada para a área de transferência.</translation>
+        <translation type="obsolete">Screenshot copiada para a área de transferência.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="171"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copiar URL</translation>
+        <translation type="obsolete">Copiar URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="172"/>
         <source>Open URL</source>
-        <translation type="unfinished">Abrir URL</translation>
+        <translation type="obsolete">Abrir URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="173"/>
         <source>Delete image</source>
-        <translation type="unfinished">Deletar imagem</translation>
+        <translation type="obsolete">Deletar imagem</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="45"/>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="51"/>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="111"/>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/storage/imguploader.cpp" line="174"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Imagem na área de transferência.</translation>
-    </message>
-</context>
-<context>
-    <name>ImgUploaderTool</name>
-    <message>
-        <location filename="../../src/tools/storage/imguploadertool.cpp" line="22"/>
-        <source>Image uploader tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Imagem na área de transferência.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploader</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="45"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
         <translation>Enviar para Imgur</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation type="vanished">Enviando Imagem</translation>
+        <translation>Enviando Imagem</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation type="vanished">Copiar URL</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation type="vanished">Abrir URL</translation>
+        <translation>Abrir URL</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation type="vanished">Deletar imagem</translation>
+        <translation>Deletar imagem</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation type="vanished">Imagem na área de transferência.</translation>
+        <translation>Imagem na área de transferência.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="124"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
         <translation>Não foi possível abrir a URL.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL copiada para a área de transferência.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Captura de tela copiada para a área de transferência.</translation>
+        <translation>Captura de tela copiada para a área de transferência.</translation>
     </message>
 </context>
 <context>
     <name>ImgurUploaderTool</name>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="14"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
         <translation>Enviador de imagens</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploadertool.cpp" line="19"/>
+        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
         <translation>Envia a seleção ao Imgur</translation>
     </message>
@@ -1054,12 +974,14 @@ Pressione espaço para abrir o painel lateral.</translation>
 <context>
     <name>QHotkey</name>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="vanished">Falha ao registrar %1. Erro: %2</translation>
+        <translation>Falha ao registrar %1. Erro: %2</translation>
     </message>
     <message>
+        <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="vanished">Falha ao cancelar o registro %1. Erro: %2</translation>
+        <translation>Falha ao cancelar o registro %1. Erro: %2</translation>
     </message>
 </context>
 <context>
@@ -1313,7 +1235,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <translation type="vanished">Por padrão roda Flameshot no background e   adiciona um ícone na bandeija para configuração.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/storage/imgur/imguruploader.cpp" line="83"/>
+        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
         <translation>URL copiada para a área de transferência.</translation>
     </message>
@@ -1414,12 +1336,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="24"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="26"/>
         <source>Rectangle</source>
         <translation>Retângulo</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="34"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="36"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Usar o Retângulo como ferramenta de desenho</translation>
     </message>
@@ -1698,22 +1620,22 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="40"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
         <translation>Sobrescrito</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="49"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
         <source>Underline</source>
         <translation>Sublinhado</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="58"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
         <translation>Negrito</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="67"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
         <translation>Itálico</translation>
     </message>
@@ -1721,12 +1643,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="59"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="60"/>
         <source>Text</source>
         <translation>Texto</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="69"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="84"/>
         <source>Add text to your capture</source>
         <translation>Adicionar texto à captura</translation>
     </message>
@@ -1806,32 +1728,14 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     </message>
 </context>
 <context>
-    <name>UploadStorageConfig</name>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="34"/>
-        <source>Upload storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="38"/>
-        <source>Imgur storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/config/uploadstorageconfig.cpp" line="45"/>
-        <source>S3 storage (require config.ini file with s3 credentials)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="157"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="167"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
