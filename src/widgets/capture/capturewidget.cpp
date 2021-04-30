@@ -299,6 +299,8 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_toolWidget->close();
         delete m_toolWidget;
         m_toolWidget = nullptr;
+    } else if (m_colorPicker && m_colorPicker->isVisible()) {
+        m_colorPicker->hide();
     } else {
         // close CaptureWidget
         close();
@@ -669,7 +671,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 {
-    if (e->button() == Qt::RightButton || m_colorPicker->isVisible()) {
+    if (e->button() == Qt::LeftButton && m_colorPicker->isVisible()) {
         // Color picker
         m_colorPicker->hide();
         if (!m_context.color.isValid()) {
