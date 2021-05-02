@@ -72,9 +72,6 @@ public:
         REQ_CAPTURE_DONE_OK,
         // Instance this->widget()'s widget inside the editor under the mouse.
         REQ_ADD_CHILD_WIDGET,
-        // Instance this->widget()'s widget as a window which closes after
-        // closing the editor.
-        REQ_ADD_CHILD_WINDOW,
         // Instance this->widget()'s widget which handles its own lifetime.
         REQ_ADD_EXTERNAL_WIDGETS,
         // increase tool size for all tools
@@ -128,6 +125,9 @@ public:
 
     virtual void setEditMode(bool b) { m_editMode = b; };
     virtual bool editMode() { return m_editMode; };
+
+    // return true if object was change after editMode
+    virtual bool isChanged() { return true; };
 
     // Counter for all object types (currently is used for the CircleCounter
     // only)
