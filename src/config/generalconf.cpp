@@ -19,6 +19,7 @@
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
   , m_historyConfirmationToDelete(nullptr)
+  , m_undoLimit(nullptr)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
@@ -35,6 +36,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUseJpgForClipboard();
     initSaveAfterCopy();
     initUploadHistoryMaxSize();
+    initUndoLimit();
 
     // this has to be at the end
     initConfigButtons();
@@ -54,6 +56,7 @@ void GeneralConf::updateComponents()
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
+    m_undoLimit->setValue(config.undoLimit());
 
     if (!config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
@@ -182,6 +185,7 @@ void GeneralConf::setActualFormData()
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
+    m_undoLimit->setValue(config.undoLimit());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 }
 
@@ -428,13 +432,41 @@ void GeneralConf::initUploadHistoryMaxSize()
             SIGNAL(valueChanged(int)),
             this,
             SLOT(uploadHistoryMaxSizeChanged(int)));
-
     vboxLayout->addWidget(m_uploadHistoryMaxSize);
 }
 
 void GeneralConf::uploadHistoryMaxSizeChanged(int max)
 {
     ConfigHandler().setUploadHistoryMaxSize(max);
+}
+
+void GeneralConf::initUndoLimit()
+{
+    QGroupBox* box = new QGroupBox(tr("Undo limit"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+    m_layout->addStretch();
+
+    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    int limit = ConfigHandler().undoLimit();
+
+    m_undoLimit = new QSpinBox(this);
+    m_undoLimit->setMinimum(1);
+    m_undoLimit->setMaximum(999);
+    m_undoLimit->setValue(limit);
+    QString foreground = this->palette().windowText().color().name();
+    m_undoLimit->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
+
+    connect(m_undoLimit, SIGNAL(valueChanged(int)), this, SLOT(undoLimit(int)));
+
+    vboxLayout->addWidget(m_undoLimit);
+}
+
+void GeneralConf::undoLimit(int limit)
+{
+    ConfigHandler().setUndoLimit(limit);
 }
 
 void GeneralConf::initUseJpgForClipboard()

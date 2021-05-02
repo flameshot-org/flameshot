@@ -56,6 +56,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
 
     QFormLayout* colorForm = new QFormLayout();
     m_thicknessSlider = new QSlider(Qt::Horizontal);
+    m_thicknessSlider->setRange(1, 100);
     m_thicknessSlider->setValue(m_thickness);
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);

@@ -9,7 +9,7 @@ set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/l
 # set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
-# find_package (Git)
+#find_package (Git)
 #if (GIT_FOUND)
 #  message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
 #

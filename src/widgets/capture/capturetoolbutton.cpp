@@ -45,6 +45,10 @@ CaptureToolButton::~CaptureToolButton()
 
 void CaptureToolButton::initButton()
 {
+    if (m_tool) {
+        delete m_tool;
+        m_tool = nullptr;
+    }
     m_tool = ToolFactory().CreateTool(m_buttonType, this);
 
     resize(GlobalValues::buttonBaseSize(), GlobalValues::buttonBaseSize());

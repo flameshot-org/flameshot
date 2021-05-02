@@ -38,6 +38,9 @@ public:
     const QPoint* pos() override;
     void drawObjectSelection(QPainter& painter) override;
 
+    void setEditMode(bool b) override;
+    bool isChanged() override;
+
 protected:
     void copyParams(const TextTool* from, TextTool* to);
     ToolType nameID() const override;
@@ -64,6 +67,7 @@ private:
 
     QFont m_font;
     QString m_text;
+    QString m_textOld;
     int m_size;
     QColor m_color;
     QRect m_textArea;
