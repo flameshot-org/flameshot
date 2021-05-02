@@ -452,6 +452,7 @@ jobs:
           APPIMAGETOOL_ARCH: x86_64
       - name: Packaging appimage
         run: |
+          sed  -i 's|Exec=/usr/bin/flameshot|Exec=flameshot|g' data/desktopEntry/package/org.flameshot.Flameshot.desktop
           APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
           mkdir -p ${APPIMAGE_DST_PATH}
 
