@@ -2,11 +2,11 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
-#include "utils/desktopinfo.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
+#include "utils/desktopinfo.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
@@ -26,7 +26,8 @@ ScreenshotSaver::ScreenshotSaver(const unsigned id)
   : m_id(id)
 {}
 
-void ScreenshotSaver::saveToClipboardPng(const QPixmap& capture) {
+void ScreenshotSaver::saveToClipboardPng(const QPixmap& capture)
+{
     QByteArray array;
     QBuffer buffer{ &array };
     QImageWriter imageWriter{ &buffer, "PNG" };
@@ -62,10 +63,15 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
                          ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-        if (DesktopInfo().waylandDectected()) saveToClipboardPng(capture);
-        else
-#endif
+        if (DesktopInfo().waylandDectected()) {
+            saveToClipboardPng(capture);
+        } else {
+            QApplication::clipboard()->setPixmap(capture);
+        }
+#else
         QApplication::clipboard()->setPixmap(capture);
+#endif
+
     }
     // Otherwise only save to clipboard
     else {
@@ -97,10 +103,14 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
             SystemNotification().sendMessage(
               QObject::tr("Capture saved to clipboard"));
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-            if (DesktopInfo().waylandDectected()) saveToClipboardPng(capture);
-            else
-#endif
+            if (DesktopInfo().waylandDectected()) {
+                saveToClipboardPng(capture);
+            } else {
+                QApplication::clipboard()->setPixmap(capture);
+            }
+#else
             QApplication::clipboard()->setPixmap(capture);
+#endif
         }
     }
 }
