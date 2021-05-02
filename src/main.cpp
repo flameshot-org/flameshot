@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
+#ifndef USE_EXTERNAL_SINGLEAPPLICATION
 #include "singleapplication.h"
+#else
+#include "QtSolutions/qtsingleapplication.h"
+#endif
+
 #include "src/cli/commandlineparser.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
@@ -65,7 +70,11 @@ int main(int argc, char* argv[])
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
+#ifndef USE_EXTERNAL_SINGLEAPPLICATION
         SingleApplication app(argc, argv);
+#else
+        QtSingleApplication app(argc, argv);
+#endif
         QApplication::setStyle(new StyleOverride);
 
         QTranslator translator, qtTranslator;
