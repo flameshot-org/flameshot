@@ -26,7 +26,8 @@ ScreenshotSaver::ScreenshotSaver(const unsigned id)
   : m_id(id)
 {}
 
-void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture, const QString& imageType)
+void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
+                                          const QString& imageType)
 {
     QByteArray array;
     QBuffer buffer{ &array };
@@ -34,8 +35,10 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture, const QString&
     imageWriter.write(capture.toImage());
 
     QPixmap pngPixmap;
-    bool isLoaded = pngPixmap.loadFromData(
-      reinterpret_cast<uchar*>(array.data()), array.size(), imageType.toUpper().toUtf8());
+    bool isLoaded =
+      pngPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
+                             array.size(),
+                             imageType.toUpper().toUtf8());
     if (isLoaded) {
         QMimeData* mimeData = new QMimeData;
         mimeData->setData("image/" + imageType, array);
@@ -58,7 +61,8 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
                          ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
     } else {
-        SystemNotification().sendMessage(QObject::tr("Capture saved to clipboard."));
+        SystemNotification().sendMessage(
+          QObject::tr("Capture saved to clipboard."));
     }
     if (ConfigHandler().useJpgForClipboard()) {
         // FIXME - it doesn't work on MacOS
