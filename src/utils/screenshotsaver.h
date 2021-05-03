@@ -15,7 +15,7 @@ public:
     ScreenshotSaver(const unsigned id);
 
     void saveToClipboard(const QPixmap& capture);
-    void saveToClipboardPng(const QPixmap& capture);
+    void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
     bool saveToFilesystem(const QPixmap& capture,
                           const QString& path,
                           const QString& messagePrefix);
