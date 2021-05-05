@@ -6,6 +6,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
+#include "utils/desktopinfo.h"
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
@@ -25,6 +26,29 @@ ScreenshotSaver::ScreenshotSaver(const unsigned id)
   : m_id(id)
 {}
 
+void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
+                                          const QString& imageType)
+{
+    QByteArray array;
+    QBuffer buffer{ &array };
+    QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
+    imageWriter.write(capture.toImage());
+
+    QPixmap pngPixmap;
+    bool isLoaded =
+      pngPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
+                             array.size(),
+                             imageType.toUpper().toUtf8());
+    if (isLoaded) {
+        QMimeData* mimeData = new QMimeData;
+        mimeData->setData("image/" + imageType, array);
+        QApplication::clipboard()->setMimeData(mimeData);
+    } else {
+        SystemNotification().sendMessage(
+          QObject::tr("Error while saving to clipboard"));
+    }
+}
+
 // TODO: If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
 void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
@@ -36,39 +60,24 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
         saveToFilesystem(capture,
                          ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
-        QApplication::clipboard()->setPixmap(capture);
+    } else {
+        SystemNotification().sendMessage(
+          QObject::tr("Capture saved to clipboard."));
     }
-    // Otherwise only save to clipboard
-    else {
-        if (ConfigHandler().useJpgForClipboard()) {
-            // FIXME - it doesn't work on MacOS
-            QByteArray array;
-            QBuffer buffer{ &array };
-            QImageWriter imageWriter{ &buffer, "JPEG" };
-            imageWriter.write(capture.toImage());
-
-            QPixmap jpgPixmap;
-            bool isLoaded = jpgPixmap.loadFromData(
-              reinterpret_cast<uchar*>(array.data()), array.size(), "JPEG");
-            if (isLoaded) {
-                // Need to send message before copying to clipboard
-                SystemNotification().sendMessage(
-                  QObject::tr("Capture saved to clipboard"));
-
-                QMimeData* mimeData = new QMimeData;
-                mimeData->setData("image/jpeg", array);
-                QApplication::clipboard()->setMimeData(mimeData);
-            } else {
-                SystemNotification().sendMessage(
-                  QObject::tr("Error while saving to clipboard"));
-                return;
-            }
+    if (ConfigHandler().useJpgForClipboard()) {
+        // FIXME - it doesn't work on MacOS
+        saveToClipboardMime(capture, "jpeg");
+    } else {
+        // Need to send message before copying to clipboard
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+        if (DesktopInfo().waylandDectected()) {
+            saveToClipboardMime(capture, "png");
         } else {
-            // Need to send message before copying to clipboard
-            SystemNotification().sendMessage(
-              QObject::tr("Capture saved to clipboard"));
             QApplication::clipboard()->setPixmap(capture);
         }
+#else
+        QApplication::clipboard()->setPixmap(capture);
+#endif
     }
 }
 
