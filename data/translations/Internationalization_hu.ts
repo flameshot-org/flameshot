@@ -181,10 +181,6 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
         <source>Shortcuts</source>
         <translation>Gyorsbillentyűk</translation>
     </message>
-    <message>
-        <source>Storage</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Controller</name>
@@ -580,50 +576,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL másolva a vágólapra.</translation>
+        <translation type="obsolete">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Hiba</translation>
-    </message>
-    <message>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete image from S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to upload screenshot, please check your internet connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S3 Creds URL is not found in your configuration file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to get s3 credentials, please check your VPN connection and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Retrieving configuration file with s3 creds...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgS3UploaderTool</name>
-    <message>
-        <source>Upload the selection to S3 bucket</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Hiba</translation>
     </message>
 </context>
 <context>
@@ -634,50 +591,31 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Nem lehet az URL-t megnyitni.</translation>
+        <translation type="obsolete">Nem lehet az URL-t megnyitni.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL másolva a vágólapra.</translation>
+        <translation type="obsolete">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+        <translation type="obsolete">Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="unfinished">URL másolása</translation>
+        <translation type="obsolete">URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="unfinished">URL megnyitása</translation>
+        <translation type="obsolete">URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Kép a vágolapra.</translation>
-    </message>
-    <message>
-        <source>Upload image to S3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uploading Image...</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kép a vágolapra.</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation type="unfinished">Kép törlése</translation>
-    </message>
-    <message>
-        <source>Deleting image...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImgUploaderTool</name>
-    <message>
-        <source>Image uploader tool</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kép törlése</translation>
     </message>
 </context>
 <context>
@@ -688,19 +626,19 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Uploading Image</source>
-        <translation type="vanished">Kép feltöltése</translation>
+        <translation>Kép feltöltése</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation type="vanished">URL másolása</translation>
+        <translation>URL másolása</translation>
     </message>
     <message>
         <source>Open URL</source>
-        <translation type="vanished">URL megnyitása</translation>
+        <translation>URL megnyitása</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="vanished">Kép másolása a Vágolapra.</translation>
+        <translation>Kép másolása a Vágolapra.</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
@@ -708,15 +646,15 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="vanished">URL másolva a vágólapra.</translation>
+        <translation>URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="vanished">Képernyőmentés másolva a vágólapra.</translation>
+        <translation>Képernyőmentés másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Delete image</source>
-        <translation type="vanished">Kép törlése</translation>
+        <translation>Kép törlése</translation>
     </message>
 </context>
 <context>
@@ -1482,21 +1420,6 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Update</source>
         <translation>Frissítés</translation>
-    </message>
-</context>
-<context>
-    <name>UploadStorageConfig</name>
-    <message>
-        <source>Upload storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Imgur storage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S3 storage (require config.ini file with s3 credentials)</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
