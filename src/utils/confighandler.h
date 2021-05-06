@@ -4,9 +4,9 @@
 #pragma once
 
 #include "src/widgets/capture/capturetoolbutton.h"
-#include <QUrl>
 #include <QSettings>
 #include <QStringList>
+#include <QUrl>
 #include <QVariant>
 #include <QVector>
 
@@ -27,7 +27,7 @@ public:
     void setSavePathFixed(bool);
 
     QUrl uploadUrlValue();
-    void setUploadUrl(const QString &);
+    void setUploadUrl(const QString&);
     bool isCustomHosting();
 
     QColor uiMainColorValue();

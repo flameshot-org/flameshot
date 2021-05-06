@@ -142,7 +142,7 @@ int main(int argc, char* argv[])
       QObject::tr("Path where the capture will be saved"),
       QStringLiteral("path"));
     CommandOption urlOption(
-      {"u", "uploadurl"},
+      { "u", "uploadurl" },
       QObject::tr("Set the upload URL of Imgur compatible hosting"),
       QStringLiteral("URL"));
     CommandOption clipboardOption(
@@ -218,11 +218,13 @@ int main(int argc, char* argv[])
         return res;
     };
 
-    const QString urlErr = QObject::tr("Invalid URL format or unsupported scheme");
-    auto urlChecker = [](const QString &uploadUrl) -> bool {
+    const QString urlErr =
+      QObject::tr("Invalid URL format or unsupported scheme");
+    auto urlChecker = [](const QString& uploadUrl) -> bool {
         QUrl url(uploadUrl);
 
-        if (url.scheme() == QLatin1String("http") || url.scheme() == QLatin1String("https")) {
+        if (url.scheme() == QLatin1String("http") ||
+            url.scheme() == QLatin1String("https")) {
             return url.isValid();
         }
 
@@ -272,7 +274,7 @@ int main(int argc, char* argv[])
                         showHelpOption,
                         mainColorOption,
                         contrastColorOption,
-                        urlOption},
+                        urlOption },
                       configArgument);
     // Parse
     if (!parser.parse(app.arguments())) {

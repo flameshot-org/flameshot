@@ -17,13 +17,11 @@
 #include <QDrag>
 #include <QGuiApplication>
 #include <QHBoxLayout>
+#include <QHttpMultiPart>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLabel>
 #include <QMimeData>
-#include <QBuffer>
-#include <QHttpMultiPart>
-#include <QNetworkRequest>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
@@ -131,20 +129,26 @@ void ImgurUploader::upload()
     QBuffer buffer(&byteArray);
     m_pixmap.save(&buffer, "PNG");
 
-    QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    QHttpMultiPart* multiPart =
+      new QHttpMultiPart(QHttpMultiPart::FormDataType);
 
     QHttpPart titlePart;
-    titlePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"title\""));
+    titlePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                        QVariant("form-data; name=\"title\""));
     titlePart.setBody("flameshot_screenshot");
 
     QHttpPart descPart;
     QString desc = FileNameHandler().parsedPattern();
-    descPart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"description\""));
+    descPart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       QVariant("form-data; name=\"description\""));
     descPart.setBody(desc.toLatin1());
 
     QHttpPart imagePart;
-    imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("image/png"));
-    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"image\"; filename=\"" + desc.toLatin1() + "\""));
+    imagePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                        QVariant("image/png"));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                        QVariant("form-data; name=\"image\"; filename=\"" +
+                                 desc.toLatin1() + "\""));
     imagePart.setBody(byteArray);
 
     multiPart->append(titlePart);
@@ -154,7 +158,9 @@ void ImgurUploader::upload()
     QUrl url = ConfigHandler().uploadUrlValue();
     QNetworkRequest request(url);
     if (!ConfigHandler().isCustomHosting()) {
-        request.setRawHeader("Authorization", QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
+        request.setRawHeader(
+          "Authorization",
+          QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
     }
 
     m_NetworkAM->post(request, multiPart);
