@@ -1,19 +1,5 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #pragma once
 
@@ -23,12 +9,39 @@
 #include <QIcon>
 #include <QPainter>
 
-class CaptureTool : public QObject {
+enum class ToolType
+{
+    ARROW,
+    CIRCLE,
+    CIRCLECOUNT,
+    COPY,
+    EXIT,
+    IMGUR,
+    LAUNCHER,
+    LINE,
+    MARKER,
+    MOVE,
+    PENCIL,
+    PIN,
+    PIXELATE,
+    RECTANGLE,
+    REDO,
+    SAVE,
+    SELECTION,
+    SIZEINDICATOR,
+    TEXT,
+    UNDO,
+    UPLOAD
+};
+
+class CaptureTool : public QObject
+{
     Q_OBJECT
 
 public:
     // Request actions on the main widget
-    enum Request {
+    enum Request
+    {
         // Call close() in the editor.
         REQ_CLOSE_GUI,
         // Call hide() in the editor.
@@ -62,9 +75,17 @@ public:
         REQ_ADD_CHILD_WINDOW,
         // Instance this->widget()'s widget which handles its own lifetime.
         REQ_ADD_EXTERNAL_WIDGETS,
+
+        REQ_INCREMENT_CIRCLE_COUNT,
+
+        REQ_DECREMENT_CIRCLE_COUNT,
     };
 
-    explicit CaptureTool(QObject *parent = nullptr) : QObject(parent){}
+    explicit CaptureTool(QObject* parent = nullptr)
+      : QObject(parent)
+    {}
+
+    virtual void setCapture(const QPixmap& pixmap){};
 
     // Returns false when the tool is in an inconsistent state and shouldn't
     // be included in the tool undo/redo stack.
@@ -80,72 +101,65 @@ public:
     // The icon of the tool.
     // inEditor is true when the icon is requested inside the editor
     // and false otherwise.
-    virtual QIcon icon(const QColor &background,
-                       bool inEditor) const = 0;
+    virtual QIcon icon(const QColor& background, bool inEditor) const = 0;
     // Name displayed for the tool, this could be translated with tr()
     virtual QString name() const = 0;
-    // Codename for the tool, this hsouldn't change as it is used as ID
+    // Codename for the tool, this shouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
-    static QString nameID();
+    virtual ToolType nameID() const = 0;
     // Short description of the tool.
     virtual QString description() const = 0;
 
     // if the type is TYPE_WIDGET the widget is loaded in the main widget.
     // If the type is TYPE_EXTERNAL_WIDGET it is created outside as an
     // individual widget.
-    virtual QWidget* widget() {
-        return nullptr;
-    }
+    virtual QWidget* widget() { return nullptr; }
     // When the tool is selected this method is called and the widget is added
     // to the configuration panel inside the main widget.
-    virtual QWidget* configurationWidget() {
-        return nullptr;
-    }
+    virtual QWidget* configurationWidget() { return nullptr; }
     // Permanent configuration used in the configuration outside of the
     // capture.
-    virtual QWidget* permanentConfigurationWidget() {
-        return nullptr;
-    }
+    virtual QWidget* permanentConfigurationWidget() { return nullptr; }
     // Return a copy of the tool
-    virtual CaptureTool* copy(QObject *parent = nullptr) = 0;
+    virtual CaptureTool* copy(QObject* parent = nullptr) = 0;
 
     // revert changes
-    virtual void undo(QPixmap &pixmap) = 0;
+    virtual void undo(QPixmap& pixmap) = 0;
     // Called every time the tool has to draw
     // recordUndo indicates when the tool should save the information
     // for the undo(), if the value is false calling undo() after
     // that process should not modify revert the changes.
-    virtual void process(QPainter &painter,
-                         const QPixmap &pixmap,
+    virtual void process(QPainter& painter,
+                         const QPixmap& pixmap,
                          bool recordUndo = false) = 0;
     // When the tool is selected, this is called when the mouse moves
-    virtual void paintMousePreview(QPainter &painter, const CaptureContext &context) = 0;
+    virtual void paintMousePreview(QPainter& painter,
+                                   const CaptureContext& context) = 0;
 
 signals:
     void requestAction(Request r);
 
 protected:
-    QString iconPath(const QColor &c) const {
-        return ColorUtils::colorIsDark(c) ?
-                    PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+    QString iconPath(const QColor& c) const
+    {
+        return ColorUtils::colorIsDark(c) ? PathInfo::whiteIconPath()
+                                          : PathInfo::blackIconPath();
     }
 
 public slots:
     // On mouse release.
-    virtual void drawEnd(const QPoint &p) = 0;
+    virtual void drawEnd(const QPoint& p) = 0;
     // Mouse pressed and moving, called once a pixel.
-    virtual void drawMove(const QPoint &p) = 0;
+    virtual void drawMove(const QPoint& p) = 0;
     // Called when drawMove is needed with an adjustment;
     // should be overridden in case an adjustment is applicable.
-    virtual void drawMoveWithAdjustment(const QPoint &p) {
-        drawMove(p);
-    }
+    virtual void drawMoveWithAdjustment(const QPoint& p) { drawMove(p); }
     // Called when the tool is activated.
-    virtual void drawStart(const CaptureContext &context) = 0;
+    virtual void drawStart(const CaptureContext& context) = 0;
     // Called right after pressign the button which activates the tool.
-    virtual void pressed(const CaptureContext &context) = 0;
+    virtual void pressed(const CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
-    virtual void colorChanged(const QColor &c) = 0;
+    virtual void colorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.
     virtual void thicknessChanged(const int th) = 0;
 };

@@ -1,91 +1,106 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "filenamehandler.h"
 #include "src/utils/confighandler.h"
-#include <ctime>
-#include <locale>
-#include <QStandardPaths>
 #include <QDir>
+#include <QStandardPaths>
+#include <ctime>
+#include <exception>
+#include <locale>
 
-FileNameHandler::FileNameHandler(QObject *parent) : QObject(parent) {
-    std::locale::global(std::locale(""));
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
+#include "spdlog/cfg/env.h"
+#include "spdlog/spdlog.h"
+
+FileNameHandler::FileNameHandler(QObject* parent)
+  : QObject(parent)
+{
+    try {
+        std::locale::global(std::locale(""));
+    } catch (std::exception& e) {
+        spdlog::error("Locales on your system are not properly configured. "
+                      "Falling back to defaults");
+        std::locale::global(std::locale("en_US.UTF-8"));
+    }
 }
 
-QString FileNameHandler::parsedPattern() {
+QString FileNameHandler::parsedPattern()
+{
     return parseFilename(ConfigHandler().filenamePatternValue());
 }
 
-QString FileNameHandler::parseFilename(const QString &name) {
+QString FileNameHandler::parseFilename(const QString& name)
+{
     QString res = name;
     if (name.isEmpty()) {
-        res = QLatin1String("%F_%H-%M");
+        res = ConfigHandler().filenamePatternDefault();
+    }
+
+    // remove trailing characters '%' in the pattern
+    while (res.endsWith('%')) {
+        res.chop(1);
     }
     std::time_t t = std::time(NULL);
 
-    char *tempData = QStringTocharArr(res);
-    char data[MAX_CHARACTERS] = {0};
-    std::strftime(data, sizeof(data),
-                  tempData, std::localtime(&t));
+    char* tempData = QStringToCharArr(res);
+    char data[MAX_CHARACTERS] = { 0 };
+    std::strftime(data, sizeof(data), tempData, std::localtime(&t));
     res = QString::fromLocal8Bit(data, (int)strlen(data));
     free(tempData);
 
     // add the parsed pattern in a correct format for the filesystem
-    res = res.replace(QLatin1String("/"), QStringLiteral("⁄")).replace(QLatin1String(":"), QLatin1String("-"));
+    res = res.replace(QLatin1String("/"), QStringLiteral("⁄"))
+            .replace(QLatin1String(":"), QLatin1String("-"));
     return res;
 }
 
-QString FileNameHandler::generateAbsolutePath(const QString &path) {
+QString FileNameHandler::generateAbsolutePath(const QString& path)
+{
     QString directory = path;
     QString filename = parsedPattern();
     fixPath(directory, filename);
     return directory + filename;
 }
 // path a images si no existe, add numeration
-void FileNameHandler::setPattern(const QString &pattern) {
+void FileNameHandler::setPattern(const QString& pattern)
+{
     ConfigHandler().setFilenamePattern(pattern);
 }
 
-QString FileNameHandler::absoluteSavePath(QString &directory, QString &filename) {
+QString FileNameHandler::absoluteSavePath(QString& directory, QString& filename)
+{
     ConfigHandler config;
-    directory = config.savePathValue();
-    if (directory.isEmpty() || !QDir(directory).exists() || !QFileInfo(directory).isWritable()) {
-        directory = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    directory = config.savePath();
+    if (directory.isEmpty() || !QDir(directory).exists() ||
+        !QFileInfo(directory).isWritable()) {
+        directory =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
     filename = parsedPattern();
     fixPath(directory, filename);
     return directory + filename;
 }
 
-QString FileNameHandler::absoluteSavePath() {
+QString FileNameHandler::absoluteSavePath()
+{
     QString dir, file;
     return absoluteSavePath(dir, file);
 }
 
-QString FileNameHandler::charArrToQString(const char *c) {
+QString FileNameHandler::charArrToQString(const char* c)
+{
     return QString::fromLocal8Bit(c, MAX_CHARACTERS);
 }
 
-char * FileNameHandler::QStringTocharArr(const QString &s) {
+char* FileNameHandler::QStringToCharArr(const QString& s)
+{
     QByteArray ba = s.toLocal8Bit();
-    return const_cast<char *>(strdup(ba.constData()));
+    return const_cast<char*>(strdup(ba.constData()));
 }
 
-void FileNameHandler::fixPath(QString &directory, QString &filename) {
+void FileNameHandler::fixPath(QString& directory, QString& filename)
+{
     // add '/' at the end of the directory
     if (!directory.endsWith(QLatin1String("/"))) {
         directory += QLatin1String("/");
@@ -97,8 +112,8 @@ void FileNameHandler::fixPath(QString &directory, QString &filename) {
         filename += QLatin1String("_");
         int i = 1;
         while (true) {
-            checkFile.setFile(
-                        directory + filename + QString::number(i) + ".png");
+            checkFile.setFile(directory + filename + QString::number(i) +
+                              ".png");
             if (!checkFile.exists()) {
                 filename += QString::number(i);
                 break;

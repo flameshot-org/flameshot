@@ -1,28 +1,15 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #pragma once
 
-#include <QRect>
-#include <QPoint>
-#include <QPixmap>
 #include <QPainter>
+#include <QPixmap>
+#include <QPoint>
+#include <QRect>
 
-struct CaptureContext {
+struct CaptureContext
+{
     // screenshot with modifications
     QPixmap screenshot;
     // unmodified screenshot
@@ -41,8 +28,9 @@ struct CaptureContext {
     QPoint mousePos;
     // Value of the desired thickness
     int thickness;
+    int circleCount;
     // Mode of the capture widget
     bool fullscreen;
 
-    QPixmap selectedScreenshotArea() const ;
+    QPixmap selectedScreenshotArea() const;
 };

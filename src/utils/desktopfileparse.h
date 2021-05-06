@@ -1,46 +1,35 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #pragma once
 
 #include <QIcon>
-#include <QStringList>
 #include <QMap>
+#include <QStringList>
 
 class QDir;
 class QString;
 class QTextStream;
 
-struct DesktopAppData {
-    DesktopAppData() : showInTerminal() {}
-
-    DesktopAppData(
-            const QString &name,
-            const QString &description,
-            const QString &exec,
-            QIcon icon) :
-        name(name),
-        description(description),
-        exec(exec),
-        icon(icon),
-        showInTerminal(false)
+struct DesktopAppData
+{
+    DesktopAppData()
+      : showInTerminal()
     {}
 
-    bool operator==(const DesktopAppData &other) const {
+    DesktopAppData(const QString& name,
+                   const QString& description,
+                   const QString& exec,
+                   QIcon icon)
+      : name(name)
+      , description(description)
+      , exec(exec)
+      , icon(icon)
+      , showInTerminal(false)
+    {}
+
+    bool operator==(const DesktopAppData& other) const
+    {
         return name == other.name;
     }
 
@@ -52,14 +41,15 @@ struct DesktopAppData {
     bool showInTerminal;
 };
 
-struct DesktopFileParser {
+struct DesktopFileParser
+{
     DesktopFileParser();
-    DesktopAppData parseDesktopFile(const QString &fileName, bool &ok) const;
-    int processDirectory(const QDir &dir);
+    DesktopAppData parseDesktopFile(const QString& fileName, bool& ok) const;
+    int processDirectory(const QDir& dir);
 
-    QVector<DesktopAppData> getAppsByCategory(const QString &category);
+    QVector<DesktopAppData> getAppsByCategory(const QString& category);
     QMap<QString, QVector<DesktopAppData>> getAppsByCategory(
-            const QStringList &categories);
+      const QStringList& categories);
 
 private:
     QString m_localeName;

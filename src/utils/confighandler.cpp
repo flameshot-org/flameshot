@@ -1,97 +1,95 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "confighandler.h"
-#include <algorithm>
-#include <QFile>
-#include <QDir>
+#include "src/tools/capturetool.h"
+#include "src/utils/configshortcuts.h"
 #include <QCoreApplication>
+#include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QKeySequence>
+#include <QStandardPaths>
+#include <algorithm>
+#if defined(Q_OS_MACOS)
+#include <QProcess>
+#endif
 
-ConfigHandler::ConfigHandler(){
+ConfigHandler::ConfigHandler()
+{
     m_settings.setDefaultFormat(QSettings::IniFormat);
 }
 
-QVector<CaptureButton::ButtonType> ConfigHandler::getButtons() {
-    QVector<CaptureButton::ButtonType> buttons;
+QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
+{
+    QVector<CaptureToolButton::ButtonType> buttons;
     if (m_settings.contains(QStringLiteral("buttons"))) {
         // TODO: remove toList in v1.0
-        QVector<int> buttonsInt =
-                m_settings.value(QStringLiteral("buttons")).value<QList<int> >().toVector();
+        QVector<int> buttonsInt = m_settings.value(QStringLiteral("buttons"))
+                                    .value<QList<int>>()
+                                    .toVector();
         bool modified = normalizeButtons(buttonsInt);
         if (modified) {
-            m_settings.setValue(QStringLiteral("buttons"), QVariant::fromValue(buttonsInt.toList()));
+            m_settings.setValue(QStringLiteral("buttons"),
+                                QVariant::fromValue(buttonsInt.toList()));
         }
         buttons = fromIntToButton(buttonsInt);
     } else {
         // Default tools
-        buttons << CaptureButton::TYPE_PENCIL
-                << CaptureButton::TYPE_DRAWER
-                << CaptureButton::TYPE_ARROW
-                << CaptureButton::TYPE_SELECTION
-                << CaptureButton::TYPE_RECTANGLE
-                << CaptureButton::TYPE_CIRCLE
-                << CaptureButton::TYPE_MARKER
-                << CaptureButton::TYPE_BLUR
-                << CaptureButton::TYPE_SELECTIONINDICATOR
-                << CaptureButton::TYPE_MOVESELECTION
-                << CaptureButton::TYPE_UNDO
-                << CaptureButton::TYPE_REDO
-                << CaptureButton::TYPE_COPY
-                << CaptureButton::TYPE_SAVE
-                << CaptureButton::TYPE_EXIT
-                << CaptureButton::TYPE_IMAGEUPLOADER
-                << CaptureButton::TYPE_OPEN_APP
-                << CaptureButton::TYPE_PIN
-                << CaptureButton::TYPE_TEXT;
+        buttons << CaptureToolButton::TYPE_PENCIL
+                << CaptureToolButton::TYPE_DRAWER
+                << CaptureToolButton::TYPE_ARROW
+                << CaptureToolButton::TYPE_SELECTION
+                << CaptureToolButton::TYPE_RECTANGLE
+                << CaptureToolButton::TYPE_CIRCLE
+                << CaptureToolButton::TYPE_MARKER
+                << CaptureToolButton::TYPE_PIXELATE
+                << CaptureToolButton::TYPE_SELECTIONINDICATOR
+                << CaptureToolButton::TYPE_MOVESELECTION
+                << CaptureToolButton::TYPE_UNDO << CaptureToolButton::TYPE_REDO
+                << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
+                << CaptureToolButton::TYPE_EXIT
+                << CaptureToolButton::TYPE_IMAGEUPLOADER
+#if not defined(Q_OS_MACOS)
+                << CaptureToolButton::TYPE_OPEN_APP
+#endif
+                << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
+                << CaptureToolButton::TYPE_CIRCLECOUNT;
     }
 
-    using bt = CaptureButton::ButtonType;
-    std::sort(buttons.begin(), buttons.end(), [](bt a, bt b){
-        return CaptureButton::getPriorityByButton(a) <
-                CaptureButton::getPriorityByButton(b);
+    using bt = CaptureToolButton::ButtonType;
+    std::sort(buttons.begin(), buttons.end(), [](bt a, bt b) {
+        return CaptureToolButton::getPriorityByButton(a) <
+               CaptureToolButton::getPriorityByButton(b);
     });
     return buttons;
 }
 
-void ConfigHandler::setButtons(const QVector<CaptureButton::ButtonType> &buttons) {
+void ConfigHandler::setButtons(
+  const QVector<CaptureToolButton::ButtonType>& buttons)
+{
     QVector<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
     // TODO: remove toList in v1.0
-    m_settings.setValue(QStringLiteral("buttons"), QVariant::fromValue(l.toList()));
+    m_settings.setValue(QStringLiteral("buttons"),
+                        QVariant::fromValue(l.toList()));
 }
 
-QVector<QColor> ConfigHandler::getUserColors() {
+QVector<QColor> ConfigHandler::getUserColors()
+{
     QVector<QColor> colors;
-    const QVector<QColor> &defaultColors = {
-        Qt::darkRed,
-        Qt::red,
-        Qt::yellow,
-        Qt::green,
-        Qt::darkGreen,
-        Qt::cyan,
-        Qt::blue,
-        Qt::magenta,
-        Qt::darkMagenta
+    const QVector<QColor>& defaultColors = {
+        Qt::darkRed, Qt::red,  Qt::yellow,  Qt::green,       Qt::darkGreen,
+        Qt::cyan,    Qt::blue, Qt::magenta, Qt::darkMagenta, QColor()
     };
 
     if (m_settings.contains(QStringLiteral("userColors"))) {
-        for (const QString &hex : m_settings.value(QStringLiteral("userColors")).toStringList()) {
+        for (const QString& hex :
+             m_settings.value(QStringLiteral("userColors")).toStringList()) {
             if (QColor::isValidColor(hex)) {
                 colors.append(QColor(hex));
+            } else if (hex == QStringLiteral("picker")) {
+                colors.append(QColor());
             }
         }
 
@@ -105,22 +103,27 @@ QVector<QColor> ConfigHandler::getUserColors() {
     return colors;
 }
 
-void ConfigHandler::setUserColors(const QVector<QColor> &l) {
-    QStringList hexColors;
-
-    for (const QColor &color : l) {
-        hexColors.append(color.name());
-    }
-
-    m_settings.setValue(QStringLiteral("userColors"), QVariant::fromValue(hexColors));
-}
-
-QString ConfigHandler::savePathValue() {
+QString ConfigHandler::savePath()
+{
     return m_settings.value(QStringLiteral("savePath")).toString();
 }
 
-void ConfigHandler::setSavePath(const QString &savePath) {
+void ConfigHandler::setSavePath(const QString& savePath)
+{
     m_settings.setValue(QStringLiteral("savePath"), savePath);
+}
+
+bool ConfigHandler::savePathFixed()
+{
+    if (!m_settings.contains(QStringLiteral("savePathFixed"))) {
+        m_settings.setValue(QStringLiteral("savePathFixed"), false);
+    }
+    return m_settings.value(QStringLiteral("savePathFixed")).toBool();
+}
+
+void ConfigHandler::setSavePathFixed(bool savePathFixed)
+{
+    m_settings.setValue(QStringLiteral("savePathFixed"), savePathFixed);
 }
 
 QUrl ConfigHandler::uploadUrlValue() {
@@ -146,7 +149,8 @@ bool ConfigHandler::isCustomHosting() {
     return m_settings.contains(QStringLiteral("uploadUrl"));
 }
 
-QColor ConfigHandler::uiMainColorValue() {
+QColor ConfigHandler::uiMainColorValue()
+{
     QColor res = QColor(116, 0, 150);
 
     if (m_settings.contains(QStringLiteral("uiColor"))) {
@@ -159,15 +163,18 @@ QColor ConfigHandler::uiMainColorValue() {
     return res;
 }
 
-void ConfigHandler::setUIMainColor(const QColor &c) {
+void ConfigHandler::setUIMainColor(const QColor& c)
+{
     m_settings.setValue(QStringLiteral("uiColor"), c.name());
 }
 
-QColor ConfigHandler::uiContrastColorValue() {
-    QColor res = QColor(86, 0, 120);
+QColor ConfigHandler::uiContrastColorValue()
+{
+    QColor res = QColor(39, 0, 50);
 
-    if (m_settings.contains(QStringLiteral("contastUiColor"))) {
-        QString hex = m_settings.value(QStringLiteral("contastUiColor")).toString();
+    if (m_settings.contains(QStringLiteral("contrastUiColor"))) {
+        QString hex =
+          m_settings.value(QStringLiteral("contrastUiColor")).toString();
 
         if (QColor::isValidColor(hex)) {
             res = QColor(hex);
@@ -177,11 +184,13 @@ QColor ConfigHandler::uiContrastColorValue() {
     return res;
 }
 
-void ConfigHandler::setUIContrastColor(const QColor &c) {
-    m_settings.setValue(QStringLiteral("contastUiColor"), c.name());
+void ConfigHandler::setUIContrastColor(const QColor& c)
+{
+    m_settings.setValue(QStringLiteral("contrastUiColor"), c.name());
 }
 
-QColor ConfigHandler::drawColorValue() {
+QColor ConfigHandler::drawColorValue()
+{
     QColor res(Qt::red);
 
     if (m_settings.contains(QStringLiteral("drawColor"))) {
@@ -195,11 +204,13 @@ QColor ConfigHandler::drawColorValue() {
     return res;
 }
 
-void ConfigHandler::setDrawColor(const QColor &c) {
+void ConfigHandler::setDrawColor(const QColor& c)
+{
     m_settings.setValue(QStringLiteral("drawColor"), c.name());
 }
 
-bool ConfigHandler::showHelpValue() {
+bool ConfigHandler::showHelpValue()
+{
     bool res = true;
     if (m_settings.contains(QStringLiteral("showHelp"))) {
         res = m_settings.value(QStringLiteral("showHelp")).toBool();
@@ -207,31 +218,71 @@ bool ConfigHandler::showHelpValue() {
     return res;
 }
 
-void ConfigHandler::setShowHelp(const bool showHelp) {
+void ConfigHandler::setShowHelp(const bool showHelp)
+{
     m_settings.setValue(QStringLiteral("showHelp"), showHelp);
 }
 
-bool ConfigHandler::desktopNotificationValue() {
+bool ConfigHandler::showSidePanelButtonValue()
+{
+    return m_settings.value(QStringLiteral("showSidePanelButton"), true)
+      .toBool();
+}
+
+void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton)
+{
+    m_settings.setValue(QStringLiteral("showSidePanelButton"),
+                        showSidePanelButton);
+}
+
+void ConfigHandler::setIgnoreUpdateToVersion(const QString& text)
+{
+    m_settings.setValue(QStringLiteral("ignoreUpdateToVersion"), text);
+}
+
+QString ConfigHandler::ignoreUpdateToVersion()
+{
+    return m_settings.value(QStringLiteral("ignoreUpdateToVersion")).toString();
+}
+
+bool ConfigHandler::desktopNotificationValue()
+{
     bool res = true;
     if (m_settings.contains(QStringLiteral("showDesktopNotification"))) {
-        res = m_settings.value(QStringLiteral("showDesktopNotification")).toBool();
+        res =
+          m_settings.value(QStringLiteral("showDesktopNotification")).toBool();
     }
     return res;
 }
 
-void ConfigHandler::setDesktopNotification(const bool showDesktopNotification) {
-    m_settings.setValue(QStringLiteral("showDesktopNotification"), showDesktopNotification);
+void ConfigHandler::setDesktopNotification(const bool showDesktopNotification)
+{
+    m_settings.setValue(QStringLiteral("showDesktopNotification"),
+                        showDesktopNotification);
 }
 
-QString ConfigHandler::filenamePatternValue() {
-    return m_settings.value(QStringLiteral("filenamePattern")).toString();
+QString ConfigHandler::filenamePatternDefault()
+{
+    m_strRes = QLatin1String("%F_%H-%M");
+    return m_strRes;
 }
 
-void ConfigHandler::setFilenamePattern(const QString &pattern) {
+QString ConfigHandler::filenamePatternValue()
+{
+    m_strRes = m_settings.value(QStringLiteral("filenamePattern")).toString();
+    if (m_strRes.isEmpty()) {
+        m_strRes = filenamePatternDefault();
+    }
+    return m_strRes;
+}
+
+void ConfigHandler::setFilenamePattern(const QString& pattern)
+{
     return m_settings.setValue(QStringLiteral("filenamePattern"), pattern);
 }
 
-bool ConfigHandler::disabledTrayIconValue() {
+bool ConfigHandler::disabledTrayIconValue()
+{
     bool res = false;
     if (m_settings.contains(QStringLiteral("disabledTrayIcon"))) {
         res = m_settings.value(QStringLiteral("disabledTrayIcon")).toBool();
@@ -239,11 +290,13 @@ bool ConfigHandler::disabledTrayIconValue() {
     return res;
 }
 
-void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon) {
+void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon)
+{
     m_settings.setValue(QStringLiteral("disabledTrayIcon"), disabledTrayIcon);
 }
 
-int ConfigHandler::drawThicknessValue() {
+int ConfigHandler::drawThicknessValue()
+{
     int res = 0;
     if (m_settings.contains(QStringLiteral("drawThickness"))) {
         res = m_settings.value(QStringLiteral("drawThickness")).toInt();
@@ -251,51 +304,108 @@ int ConfigHandler::drawThicknessValue() {
     return res;
 }
 
-void ConfigHandler::setdrawThickness(const int thickness) {
+void ConfigHandler::setDrawThickness(const int thickness)
+{
     m_settings.setValue(QStringLiteral("drawThickness"), thickness);
 }
 
-bool ConfigHandler::keepOpenAppLauncherValue() {
+bool ConfigHandler::keepOpenAppLauncherValue()
+{
     return m_settings.value(QStringLiteral("keepOpenAppLauncher")).toBool();
 }
 
-void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen) {
+void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
+{
     m_settings.setValue(QStringLiteral("keepOpenAppLauncher"), keepOpen);
 }
 
-bool ConfigHandler::startupLaunchValue() {
-    bool res = false;
-
-    if (m_settings.contains(QStringLiteral("startupLaunch"))) {
-        res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
+bool ConfigHandler::checkForUpdates()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("checkForUpdates"))) {
+        res = m_settings.value(QStringLiteral("checkForUpdates")).toBool();
     }
-
-    if (res != verifyLaunchFile()) {
-        setStartupLaunch(res);
-    }
-
     return res;
 }
 
-bool ConfigHandler::verifyLaunchFile() {
-    bool res = false;
+void ConfigHandler::setCheckForUpdates(const bool checkForUpdates)
+{
+    m_settings.setValue(QStringLiteral("checkForUpdates"), checkForUpdates);
+}
 
+bool ConfigHandler::startupLaunchValue()
+{
+#if defined(Q_OS_MACOS)
+    bool res = false;
+#else
+    bool res = true;
+#endif
+    if (m_settings.contains(QStringLiteral("startupLaunch"))) {
+        res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
+    }
+    if (res != verifyLaunchFile()) {
+        setStartupLaunch(res);
+    }
+    return res;
+}
+
+bool ConfigHandler::verifyLaunchFile()
+{
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/Flameshot.desktop";
-    res = QFile(path).exists();
+    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
+                                          "autostart/",
+                                          QStandardPaths::LocateDirectory) +
+                   "Flameshot.desktop";
+    bool res = QFile(path).exists();
 #elif defined(Q_OS_WIN)
     QSettings bootUpSettings(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-                QSettings::NativeFormat);
-    res = bootUpSettings.value("Flameshot").toString() ==
-            QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
+      "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      QSettings::NativeFormat);
+    bool res =
+      bootUpSettings.value("Flameshot").toString() ==
+      QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
 #endif
     return res;
 }
 
-void ConfigHandler::setStartupLaunch(const bool start) {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QDir::homePath() + "/.config/autostart/";
+void ConfigHandler::setStartupLaunch(const bool start)
+{
+    if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
+        return;
+    }
+    m_settings.setValue(QStringLiteral("startupLaunch"), start);
+#if defined(Q_OS_MACOS)
+    /* TODO - there should be more correct way via API, but didn't find it
+     without extra dependencies, there should be something like that:
+     https://stackoverflow.com/questions/3358410/programmatically-run-at-startup-on-mac-os-x
+     But files with this features differs on different MacOS versions and it
+     doesn't work not on a BigSur at lease.
+     */
+    QProcess process;
+    if (start) {
+        process.start("osascript",
+                      QStringList()
+                        << "-e"
+                        << "tell application \"System Events\" to make login "
+                           "item at end with properties {name: "
+                           "\"Flameshot\",path:\"/Applications/"
+                           "flameshot.app\", hidden:false}");
+    } else {
+        process.start("osascript",
+                      QStringList() << "-e"
+                                    << "tell application \"System Events\" to "
+                                       "delete login item \"Flameshot\"");
+    }
+    if (!process.waitForFinished()) {
+        qWarning() << "Login items is changed. " << process.errorString();
+    } else {
+        qWarning() << "Unable to change login items, error:"
+                   << process.readAll();
+    }
+#elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
+                                          "autostart/",
+                                          QStandardPaths::LocateDirectory);
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
         autostartDir.mkpath(".");
@@ -314,20 +424,52 @@ void ConfigHandler::setStartupLaunch(const bool start) {
     }
 #elif defined(Q_OS_WIN)
     QSettings bootUpSettings(
-                "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-                QSettings::NativeFormat);
+      "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      QSettings::NativeFormat);
+    // set workdir for flameshot on startup
+    QSettings bootUpPath(
+      "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App "
+      "Paths",
+      QSettings::NativeFormat);
     if (start) {
         QString app_path =
-                QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
+          QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
         bootUpSettings.setValue("Flameshot", app_path);
+
+        // set application workdir
+        bootUpPath.beginGroup("flameshot.exe");
+        bootUpPath.setValue("Path", QCoreApplication::applicationDirPath());
+        bootUpPath.endGroup();
+
     } else {
         bootUpSettings.remove("Flameshot");
+
+        // remove application workdir
+        bootUpPath.beginGroup("flameshot.exe");
+        bootUpPath.remove("");
+        bootUpPath.endGroup();
     }
 #endif
-    m_settings.setValue(QStringLiteral("startupLaunch"), start);
 }
 
-int ConfigHandler::contrastOpacityValue() {
+bool ConfigHandler::showStartupLaunchMessage()
+{
+    if (!m_settings.contains(QStringLiteral("showStartupLaunchMessage"))) {
+        m_settings.setValue(QStringLiteral("showStartupLaunchMessage"), true);
+    }
+    return m_settings.value(QStringLiteral("showStartupLaunchMessage"))
+      .toBool();
+}
+
+void ConfigHandler::setShowStartupLaunchMessage(
+  const bool showStartupLaunchMessage)
+{
+    m_settings.setValue(QStringLiteral("showStartupLaunchMessage"),
+                        showStartupLaunchMessage);
+}
+
+int ConfigHandler::contrastOpacityValue()
+{
     int opacity = 190;
     if (m_settings.contains(QStringLiteral("contrastOpacity"))) {
         opacity = m_settings.value(QStringLiteral("contrastOpacity")).toInt();
@@ -336,48 +478,115 @@ int ConfigHandler::contrastOpacityValue() {
     return opacity;
 }
 
-void ConfigHandler::setContrastOpacity(const int transparency) {
+void ConfigHandler::setContrastOpacity(const int transparency)
+{
     m_settings.setValue(QStringLiteral("contrastOpacity"), transparency);
 }
 
-bool ConfigHandler::closeAfterScreenshotValue() {
-    return m_settings.value(QStringLiteral("closeAfterScreenshot")).toBool();
+bool ConfigHandler::copyAndCloseAfterUploadEnabled()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("copyAndCloseAfterUpload"))) {
+        res =
+          m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
+    }
+    return res;
 }
 
-void ConfigHandler::setCloseAfterScreenshot(const bool close) {
-    m_settings.setValue(QStringLiteral("closeAfterScreenshot"), close);
-}
-
-bool ConfigHandler::copyAndCloseAfterUploadEnabled() {
-    return m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
-}
-
-void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value) {
+void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
+{
     m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
 }
 
-void ConfigHandler::setDefaults() {
-    m_settings.clear();
+bool ConfigHandler::historyConfirmationToDelete()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("historyConfirmationToDelete"))) {
+        res = m_settings.value(QStringLiteral("historyConfirmationToDelete"))
+                .toBool();
+    }
+    return res;
 }
 
-void ConfigHandler::setAllTheButtons() {
+void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
+{
+    m_settings.setValue(QStringLiteral("historyConfirmationToDelete"), check);
+}
+
+bool ConfigHandler::saveAfterCopyValue()
+{
+    return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
+}
+
+void ConfigHandler::setSaveAfterCopy(const bool save)
+{
+    m_settings.setValue(QStringLiteral("saveAfterCopy"), save);
+}
+
+bool ConfigHandler::copyPathAfterSaveEnabled()
+{
+    bool res = false;
+    if (m_settings.contains(QStringLiteral("copyPathAfterSave"))) {
+        res = m_settings.value(QStringLiteral("copyPathAfterSave")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
+{
+    m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
+}
+
+bool ConfigHandler::useJpgForClipboard() const
+{
+#if not defined(Q_OS_MACOS)
+    // FIXME - temporary fix to disable option for MacOS
+    if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
+        return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
+    }
+#endif
+    return false;
+}
+
+void ConfigHandler::setUseJpgForClipboard(const bool value)
+{
+    m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
+}
+
+void ConfigHandler::setDefaultSettings()
+{
+    foreach (const QString& key, m_settings.allKeys()) {
+        if (key.startsWith("Shortcuts/")) {
+            // Do not reset Shortcuts
+            continue;
+        }
+        m_settings.remove(key);
+    }
+    m_settings.sync();
+}
+
+void ConfigHandler::setAllTheButtons()
+{
     QVector<int> buttons;
-    auto listTypes = CaptureButton::getIterableButtonTypes();
-    for (const CaptureButton::ButtonType t: listTypes) {
+    auto listTypes = CaptureToolButton::getIterableButtonTypes();
+    for (const CaptureToolButton::ButtonType t : listTypes) {
         buttons << static_cast<int>(t);
     }
     // TODO: remove toList in v1.0
-    m_settings.setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons.toList()));
+    m_settings.setValue(QStringLiteral("buttons"),
+                        QVariant::fromValue(buttons.toList()));
 }
 
-QString ConfigHandler::configFilePath() const {
+QString ConfigHandler::configFilePath() const
+{
     return m_settings.fileName();
 }
 
-bool ConfigHandler::normalizeButtons(QVector<int> &buttons) {
-    auto listTypes = CaptureButton::getIterableButtonTypes();
+bool ConfigHandler::normalizeButtons(QVector<int>& buttons)
+{
+    auto listTypes = CaptureToolButton::getIterableButtonTypes();
     QVector<int> listTypesInt;
-    for(auto i: listTypes)
+    for (auto i : listTypes)
         listTypesInt << static_cast<int>(i);
 
     bool hasChanged = false;
@@ -390,20 +599,120 @@ bool ConfigHandler::normalizeButtons(QVector<int> &buttons) {
     return hasChanged;
 }
 
-QVector<CaptureButton::ButtonType> ConfigHandler::fromIntToButton(
-        const QVector<int> &l)
+QVector<CaptureToolButton::ButtonType> ConfigHandler::fromIntToButton(
+  const QVector<int>& l)
 {
-    QVector<CaptureButton::ButtonType> buttons;
-    for (auto const i: l)
-        buttons << static_cast<CaptureButton::ButtonType>(i);
+    QVector<CaptureToolButton::ButtonType> buttons;
+    for (auto const i : l)
+        buttons << static_cast<CaptureToolButton::ButtonType>(i);
     return buttons;
 }
 
 QVector<int> ConfigHandler::fromButtonToInt(
-        const QVector<CaptureButton::ButtonType> &l)
+  const QVector<CaptureToolButton::ButtonType>& l)
 {
     QVector<int> buttons;
-    for (auto const i: l)
+    for (auto const i : l)
         buttons << static_cast<int>(i);
     return buttons;
+}
+
+QVector<QStringList> ConfigHandler::shortcuts()
+{
+    ConfigShortcuts configShortcuts;
+    m_shortcuts = configShortcuts.captureShortcutsDefault(getButtons());
+    return m_shortcuts;
+}
+
+void ConfigHandler::setShortcutsDefault()
+{
+    ConfigShortcuts configShortcuts;
+    for (auto shortcutItem : shortcuts()) {
+        QString shortcutName = shortcutItem.at(0);
+        QString shortcutDescription = shortcutItem.at(1);
+        QString shortcutValueDefault = shortcutItem.at(2);
+
+        QString shortcutValue = shortcut(shortcutName);
+
+        QKeySequence ks = QKeySequence();
+        if (shortcutValue.isNull()) {
+            ks = QKeySequence(shortcutValueDefault);
+            if (!setShortcut(shortcutName, ks.toString())) {
+                shortcutValue = shortcutValueDefault;
+            }
+        }
+
+        m_shortcuts << (QStringList() << shortcutName << shortcutDescription
+                                      << shortcutValue);
+    }
+}
+
+bool ConfigHandler::setShortcut(const QString& shortcutName,
+                                const QString& shortutValue)
+{
+    bool error = false;
+    m_settings.beginGroup("Shortcuts");
+
+    QVector<QKeySequence> reservedShortcuts;
+    reservedShortcuts << QKeySequence(Qt::Key_Backspace)
+                      << QKeySequence(Qt::Key_Escape);
+    if (shortutValue.isEmpty()) {
+        m_settings.setValue(shortcutName, "");
+    } else if (reservedShortcuts.contains(QKeySequence(shortutValue))) {
+        // do not allow to set reserved shortcuts
+        error = true;
+    } else {
+        // Make no difference for Return and Enter keys
+        QString shortcutItem = shortutValue;
+        if (shortcutItem == "Enter") {
+            shortcutItem = QKeySequence(Qt::Key_Return).toString();
+        }
+
+        // do not allow to set overlapped shortcuts
+        foreach (auto currentShortcutName, m_settings.allKeys()) {
+            if (m_settings.value(currentShortcutName) == shortcutItem) {
+                m_settings.setValue(shortcutName, "");
+                error = true;
+                break;
+            }
+        }
+        if (!error) {
+            m_settings.setValue(shortcutName, shortcutItem);
+        }
+    }
+    m_settings.endGroup();
+    return !error;
+}
+
+const QString& ConfigHandler::shortcut(const QString& shortcutName)
+{
+    m_settings.beginGroup("Shortcuts");
+    m_strRes = m_settings.value(shortcutName).toString();
+    m_settings.endGroup();
+    return m_strRes;
+}
+
+void ConfigHandler::setValue(const QString& group,
+                             const QString& key,
+                             const QVariant& value)
+{
+    if (!group.isEmpty()) {
+        m_settings.beginGroup(group);
+    }
+    m_settings.setValue(key, value);
+    if (!group.isEmpty()) {
+        m_settings.endGroup();
+    }
+}
+
+QVariant& ConfigHandler::value(const QString& group, const QString& key)
+{
+    if (!group.isEmpty()) {
+        m_settings.beginGroup(group);
+    }
+    m_varRes = m_settings.value(key);
+    if (!group.isEmpty()) {
+        m_settings.endGroup();
+    }
+    return m_varRes;
 }

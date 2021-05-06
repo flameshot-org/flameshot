@@ -1,52 +1,38 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "commandlineparser.h"
 #include <QApplication>
 #include <QTextStream>
 
-CommandLineParser::CommandLineParser() :
-    m_description(qApp->applicationName())
-{
-
-}
+CommandLineParser::CommandLineParser()
+  : m_description(qApp->applicationName())
+{}
 
 namespace {
 
 QTextStream out(stdout);
 QTextStream err(stderr);
 
-auto versionOption = CommandOption({"v", "version"},
-                                   QStringLiteral("Displays version information"));
-auto helpOption = CommandOption({"h", "help"},
-                                QStringLiteral("Displays this help"));
+auto versionOption =
+  CommandOption({ "v", "version" },
+                QStringLiteral("Displays version information"));
+auto helpOption =
+  CommandOption({ "h", "help" }, QStringLiteral("Displays this help"));
 
-QString optionsToString(const QList<CommandOption> &options,
-                        const QList<CommandArgument> &arguments) {
+QString optionsToString(const QList<CommandOption>& options,
+                        const QList<CommandArgument>& arguments)
+{
     int size = 0; // track the largest size
     QStringList dashedOptionList;
     // save the dashed options and its size in order to print the description
     // of every option at the same horizontal character position.
-    for (auto const &option: options) {
+    for (auto const& option : options) {
         QStringList dashedOptions = option.dashedNames();
         QString joinedDashedOptions = dashedOptions.join(QStringLiteral(", "));
         if (!option.valueName().isEmpty()) {
-            joinedDashedOptions += QStringLiteral(" <%1>")
-                    .arg(option.valueName());
+            joinedDashedOptions +=
+              QStringLiteral(" <%1>").arg(option.valueName());
         }
         if (joinedDashedOptions.length() > size) {
             size = joinedDashedOptions.length();
@@ -54,46 +40,47 @@ QString optionsToString(const QList<CommandOption> &options,
         dashedOptionList << joinedDashedOptions;
     }
     // check the length of the arguments
-    for (auto const &arg: arguments) {
-        if(arg.name().length() > size)
+    for (auto const& arg : arguments) {
+        if (arg.name().length() > size)
             size = arg.name().length();
     }
     // generate the text
     QString result;
-    if(!dashedOptionList.isEmpty()) {
-        result += QLatin1String("Options:\n");
-        QString linePadding = QStringLiteral(" ").repeated(size + 4).prepend("\n");
+    if (!dashedOptionList.isEmpty()) {
+        result += QObject::tr("Options") + ":\n";
+        QString linePadding =
+          QStringLiteral(" ").repeated(size + 4).prepend("\n");
         for (int i = 0; i < options.length(); ++i) {
             result += QStringLiteral("  %1  %2\n")
-                    .arg(dashedOptionList.at(i).leftJustified(size, ' '))
-                    .arg(options.at(i).description()
-                         .replace(QLatin1String("\n"), linePadding));
+                        .arg(dashedOptionList.at(i).leftJustified(size, ' '))
+                        .arg(options.at(i).description().replace(
+                          QLatin1String("\n"), linePadding));
         }
         if (!arguments.isEmpty()) {
             result += QLatin1String("\n");
         }
     }
     if (!arguments.isEmpty()) {
-        result += QLatin1String("Arguments:\n");
+        result += QObject::tr("Arguments") + ":\n";
     }
     for (int i = 0; i < arguments.length(); ++i) {
         result += QStringLiteral("  %1  %2\n")
-                .arg(arguments.at(i).name().leftJustified(size, ' '))
-                .arg(arguments.at(i).description());
+                    .arg(arguments.at(i).name().leftJustified(size, ' '))
+                    .arg(arguments.at(i).description());
     }
     return result;
 }
 
 } // unnamed namespace
 
-bool CommandLineParser::processArgs(const QStringList &args,
-                                    QStringList::const_iterator &actualIt,
-                                    Node * &actualNode)
+bool CommandLineParser::processArgs(const QStringList& args,
+                                    QStringList::const_iterator& actualIt,
+                                    Node*& actualNode)
 {
     QString argument = *actualIt;
     bool ok = true;
     bool isValidArg = false;
-    for (Node &n: actualNode->subNodes) {
+    for (Node& n : actualNode->subNodes) {
         if (n.argument.name() == argument) {
             actualNode = &n;
             isValidArg = true;
@@ -114,9 +101,9 @@ bool CommandLineParser::processArgs(const QStringList &args,
     return ok;
 }
 
-bool CommandLineParser::processOptions(const QStringList &args,
-                                       QStringList::const_iterator &actualIt,
-                                       Node *const actualNode)
+bool CommandLineParser::processOptions(const QStringList& args,
+                                       QStringList::const_iterator& actualIt,
+                                       Node* const actualNode)
 {
     QString arg = *actualIt;
     bool ok = true;
@@ -124,20 +111,17 @@ bool CommandLineParser::processOptions(const QStringList &args,
     int equalsPos = arg.indexOf(QLatin1String("="));
     QString valueStr;
     if (equalsPos != -1) {
-        valueStr = arg.mid(equalsPos +1); // right
-        arg = arg.mid(0, equalsPos); // left
+        valueStr = arg.mid(equalsPos + 1); // right
+        arg = arg.mid(0, equalsPos);       // left
     }
     // check format -x --xx...
     bool isDoubleDashed = arg.startsWith(QLatin1String("--"));
-    ok =  isDoubleDashed ? arg.length() > 3 :
-                arg.length() == 2;
+    ok = isDoubleDashed ? arg.length() > 3 : arg.length() == 2;
     if (!ok) {
         out << QStringLiteral("the option %1 has a wrong format.").arg(arg);
         return ok;
     }
-    arg = isDoubleDashed ?
-                arg.remove(0, 2) :
-                arg.remove(0, 1);
+    arg = isDoubleDashed ? arg.remove(0, 2) : arg.remove(0, 1);
     // get option
     auto endIt = actualNode->options.cend();
     auto optionIt = endIt;
@@ -153,8 +137,9 @@ bool CommandLineParser::processOptions(const QStringList &args,
             argName = qApp->applicationName();
         }
         out << QStringLiteral("the option '%1' is not a valid option "
-                         "for the argument '%2'.").arg(arg)
-                .arg(argName);
+                              "for the argument '%2'.")
+                 .arg(arg)
+                 .arg(argName);
         ok = false;
         return ok;
     }
@@ -163,15 +148,17 @@ bool CommandLineParser::processOptions(const QStringList &args,
     bool requiresValue = !(option.valueName().isEmpty());
     if (!requiresValue && equalsPos != -1) {
         out << QStringLiteral("the option '%1' contains a '=' and it doesn't "
-                         "require a value.").arg(arg);
+                              "require a value.")
+                 .arg(arg);
         ok = false;
         return ok;
     } else if (requiresValue && valueStr.isEmpty()) {
         // find in the next
-        if (actualIt+1 != args.cend()) {
+        if (actualIt + 1 != args.cend()) {
             ++actualIt;
         } else {
-            out << QStringLiteral("Expected value after the option '%1'.").arg(arg);
+            out << QStringLiteral("Expected value after the option '%1'.")
+                     .arg(arg);
             ok = false;
             return ok;
         }
@@ -193,17 +180,17 @@ bool CommandLineParser::processOptions(const QStringList &args,
     return ok;
 }
 
-bool CommandLineParser::parse(const QStringList &args) {
+bool CommandLineParser::parse(const QStringList& args)
+{
     m_foundArgs.clear();
     m_foundOptions.clear();
     bool ok = true;
-    Node *actualNode = &m_parseTree;
+    Node* actualNode = &m_parseTree;
     auto it = ++args.cbegin();
     // check  version option
     QStringList dashedVersion = versionOption.dashedNames();
     if (m_withVersion && args.length() > 1 &&
-            dashedVersion.contains(args.at(1)))
-    {
+        dashedVersion.contains(args.at(1))) {
         if (args.length() == 2) {
             printVersion();
             m_foundOptions << versionOption;
@@ -212,13 +199,12 @@ bool CommandLineParser::parse(const QStringList &args) {
             ok = false;
         }
         return ok;
-
     }
     // check  help option
     ok = processIfOptionIsHelp(args, it, actualNode);
     // process the other args
     for (; it != args.cend() && ok; ++it) {
-        const QString &value = *it;
+        const QString& value = *it;
         if (value.startsWith(QLatin1String("-"))) {
             ok = processOptions(args, it, actualNode);
 
@@ -232,21 +218,23 @@ bool CommandLineParser::parse(const QStringList &args) {
     return ok;
 }
 
-CommandOption CommandLineParser::addVersionOption() {
+CommandOption CommandLineParser::addVersionOption()
+{
     m_withVersion = true;
     return versionOption;
 }
 
-CommandOption CommandLineParser::addHelpOption() {
+CommandOption CommandLineParser::addHelpOption()
+{
     m_withHelp = true;
     return helpOption;
 }
 
-bool CommandLineParser::AddArgument(const CommandArgument &arg,
-                                    const CommandArgument &parent)
+bool CommandLineParser::AddArgument(const CommandArgument& arg,
+                                    const CommandArgument& parent)
 {
     bool res = true;
-    Node *n = findParent(parent);
+    Node* n = findParent(parent);
     if (n == nullptr) {
         res = false;
     } else {
@@ -257,11 +245,11 @@ bool CommandLineParser::AddArgument(const CommandArgument &arg,
     return res;
 }
 
-bool CommandLineParser::AddOption(const CommandOption &option,
-                                  const CommandArgument &parent)
+bool CommandLineParser::AddOption(const CommandOption& option,
+                                  const CommandArgument& parent)
 {
     bool res = true;
-    Node *n = findParent(parent);
+    Node* n = findParent(parent);
     if (n == nullptr) {
         res = false;
     } else {
@@ -270,11 +258,11 @@ bool CommandLineParser::AddOption(const CommandOption &option,
     return res;
 }
 
-bool CommandLineParser::AddOptions(const QList<CommandOption> &options,
-                                   const CommandArgument &parent)
+bool CommandLineParser::AddOptions(const QList<CommandOption>& options,
+                                   const CommandArgument& parent)
 {
     bool res = true;
-    for (auto const &option: options) {
+    for (auto const& option : options) {
         if (!AddOption(option, parent)) {
             res = false;
             break;
@@ -283,26 +271,30 @@ bool CommandLineParser::AddOptions(const QList<CommandOption> &options,
     return res;
 }
 
-void CommandLineParser::setGeneralErrorMessage(const QString &msg) {
+void CommandLineParser::setGeneralErrorMessage(const QString& msg)
+{
     m_generalErrorMessage = msg;
 }
 
-void CommandLineParser::setDescription(const QString &description) {
+void CommandLineParser::setDescription(const QString& description)
+{
     m_description = description;
 }
 
-bool CommandLineParser::isSet(const CommandArgument &arg) const {
+bool CommandLineParser::isSet(const CommandArgument& arg) const
+{
     return m_foundArgs.contains(arg);
 }
 
-
-bool CommandLineParser::isSet(const CommandOption &option) const {
+bool CommandLineParser::isSet(const CommandOption& option) const
+{
     return m_foundOptions.contains(option);
 }
 
-QString CommandLineParser::value(const CommandOption &option) const {
+QString CommandLineParser::value(const CommandOption& option) const
+{
     QString value = option.value();
-    for (const CommandOption &fOption: m_foundOptions) {
+    for (const CommandOption& fOption : m_foundOptions) {
         if (option == fOption) {
             value = fOption.value();
             break;
@@ -311,26 +303,38 @@ QString CommandLineParser::value(const CommandOption &option) const {
     return value;
 }
 
-void CommandLineParser::printVersion() {
+void CommandLineParser::printVersion()
+{
     out << "Flameshot " << qApp->applicationVersion() << "\nCompiled with Qt "
         << static_cast<QString>(QT_VERSION_STR) << "\n";
 }
 
-void CommandLineParser::printHelp(QStringList args, const Node *node) {
+void CommandLineParser::printHelp(QStringList args, const Node* node)
+{
     args.removeLast(); // remove the help, it's always the last
     QString helpText;
+
     // add usage info
     QString argName = node->argument.name();
     if (argName.isEmpty()) {
         argName = qApp->applicationName();
     }
-    QString argText = node->subNodes.isEmpty() ? "" : "[arguments]";
-    helpText += QStringLiteral("Usage: %1 [%2-options] %3\n\n")
-            .arg(args.join(QStringLiteral(" ")))
-            .arg(argName).arg(argText);
+    QString argText =
+      node->subNodes.isEmpty() ? "" : "[" + QObject::tr("arguments") + "]";
+    helpText += (QObject::tr("Usage") + ": %1 [%2-" + QObject::tr("options") +
+                 QStringLiteral("] %3\n\n"))
+                  .arg(args.join(QStringLiteral(" ")))
+                  .arg(argName)
+                  .arg(argText);
+
+    // short section about default behavior
+    helpText += QObject::tr("Per default runs Flameshot in the background and "
+                            "adds a tray icon for configuration.");
+    helpText += "\n\n";
+
     // add command options and subarguments
     QList<CommandArgument> subArgs;
-    for (const Node &n: node->subNodes)
+    for (const Node& n : node->subNodes)
         subArgs.append(n.argument);
     auto modifiedOptions = node->options;
     if (m_withHelp)
@@ -344,16 +348,15 @@ void CommandLineParser::printHelp(QStringList args, const Node *node) {
 }
 
 CommandLineParser::Node* CommandLineParser::findParent(
-        const CommandArgument &parent)
+  const CommandArgument& parent)
 {
     if (parent == CommandArgument()) {
         return &m_parseTree;
     }
-    //find the parent in the subNodes recursively
-    Node *res = nullptr;
-    for (auto i = m_parseTree.subNodes.begin();
-        i != m_parseTree.subNodes.end(); ++i)
-    {
+    // find the parent in the subNodes recursively
+    Node* res = nullptr;
+    for (auto i = m_parseTree.subNodes.begin(); i != m_parseTree.subNodes.end();
+         ++i) {
         res = recursiveParentSearch(parent, *i);
         if (res != nullptr) {
             break;
@@ -363,13 +366,14 @@ CommandLineParser::Node* CommandLineParser::findParent(
 }
 
 CommandLineParser::Node* CommandLineParser::recursiveParentSearch(
-        const CommandArgument &parent, Node &node) const
+  const CommandArgument& parent,
+  Node& node) const
 {
-    Node * res = nullptr;
+    Node* res = nullptr;
     if (node.argument == parent) {
         res = &node;
     } else {
-        for (auto i = node.subNodes.begin(); i != node.subNodes.end(); ++i){
+        for (auto i = node.subNodes.begin(); i != node.subNodes.end(); ++i) {
             res = recursiveParentSearch(parent, *i);
             if (res != nullptr) {
                 break;
@@ -380,16 +384,15 @@ CommandLineParser::Node* CommandLineParser::recursiveParentSearch(
 }
 
 bool CommandLineParser::processIfOptionIsHelp(
-        const QStringList &args,
-        QStringList::const_iterator &actualIt,
-        Node * &actualNode)
+  const QStringList& args,
+  QStringList::const_iterator& actualIt,
+  Node*& actualNode)
 {
     bool ok = true;
     auto dashedHelpNames = helpOption.dashedNames();
     if (m_withHelp && actualIt != args.cend() &&
-            dashedHelpNames.contains(*actualIt))
-    {
-        if (actualIt+1 == args.cend()) {
+        dashedHelpNames.contains(*actualIt)) {
+        if (actualIt + 1 == args.cend()) {
             m_foundOptions << helpOption;
             printHelp(args, actualNode);
             actualIt++;

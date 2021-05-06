@@ -1,30 +1,17 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "notificationwidget.h"
-#include <QLabel>
-#include <QTimer>
-#include <QLabel>
-#include <QPropertyAnimation>
-#include <QVBoxLayout>
 #include <QFrame>
 #include <QIcon>
+#include <QLabel>
+#include <QPropertyAnimation>
+#include <QTimer>
+#include <QVBoxLayout>
 
-NotificationWidget::NotificationWidget(QWidget *parent) : QWidget(parent) {
+NotificationWidget::NotificationWidget(QWidget* parent)
+  : QWidget(parent)
+{
     m_timer = new QTimer(this);
     m_timer->setSingleShot(true);
     m_timer->setInterval(7000);
@@ -40,7 +27,8 @@ NotificationWidget::NotificationWidget(QWidget *parent) : QWidget(parent) {
 
     m_hideAnimation = new QPropertyAnimation(m_content, "geometry", this);
     m_hideAnimation->setDuration(300);
-    connect(m_hideAnimation, &QPropertyAnimation::finished, m_label, &QLabel::hide);
+    connect(
+      m_hideAnimation, &QPropertyAnimation::finished, m_label, &QLabel::hide);
 
     auto mainLayout = new QVBoxLayout();
     setLayout(mainLayout);
@@ -52,20 +40,23 @@ NotificationWidget::NotificationWidget(QWidget *parent) : QWidget(parent) {
     setFixedHeight(40);
 }
 
-void NotificationWidget::showMessage(const QString &msg) {
+void NotificationWidget::showMessage(const QString& msg)
+{
     m_label->setText(msg);
     m_label->show();
     animatedShow();
 }
 
-void NotificationWidget::animatedShow() {
+void NotificationWidget::animatedShow()
+{
     m_showAnimation->setStartValue(QRect(0, 0, width(), 0));
     m_showAnimation->setEndValue(QRect(0, 0, width(), height()));
     m_showAnimation->start();
     m_timer->start();
 }
 
-void NotificationWidget::animatedHide() {
+void NotificationWidget::animatedHide()
+{
     m_hideAnimation->setStartValue(QRect(0, 0, width(), height()));
     m_hideAnimation->setEndValue(QRect(0, 0, width(), 0));
     m_hideAnimation->start();

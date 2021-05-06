@@ -1,52 +1,47 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "flameshotdbusadapter.h"
+#include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
-#include "src/core/controller.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/utils/systemnotification.h"
 #include <QBuffer>
-FlameshotDBusAdapter::FlameshotDBusAdapter(QObject *parent)
-    : QDBusAbstractAdaptor(parent)
+FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
+  : QDBusAbstractAdaptor(parent)
 {
-    auto controller =  Controller::getInstance();
-    connect(controller, &Controller::captureFailed,
-            this, &FlameshotDBusAdapter::captureFailed);
-    connect(controller, &Controller::captureTaken,
-            this, &FlameshotDBusAdapter::handleCaptureTaken);
+    auto controller = Controller::getInstance();
+    connect(controller,
+            &Controller::captureFailed,
+            this,
+            &FlameshotDBusAdapter::captureFailed);
+    connect(controller,
+            &Controller::captureTaken,
+            this,
+            &FlameshotDBusAdapter::handleCaptureTaken);
+    connect(controller,
+            &Controller::captureSaved,
+            this,
+            &FlameshotDBusAdapter::captureSaved);
 }
 
-FlameshotDBusAdapter::~FlameshotDBusAdapter() {
+FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 
-}
-
-void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id) {
+void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id)
+{
     CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
-//    if (toClipboard) {
-//        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-//    }
+    //    if (toClipboard) {
+    //        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+    //    }
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
 }
 
-void FlameshotDBusAdapter::fullScreen(
-        QString path, bool toClipboard, int delay, uint id)
+void FlameshotDBusAdapter::fullScreen(QString path,
+                                      bool toClipboard,
+                                      int delay,
+                                      uint id)
 {
     CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, path);
     if (toClipboard) {
@@ -59,12 +54,16 @@ void FlameshotDBusAdapter::fullScreen(
     Controller::getInstance()->requestCapture(req);
 }
 
-void FlameshotDBusAdapter::openLauncher() {
+void FlameshotDBusAdapter::openLauncher()
+{
     Controller::getInstance()->openLauncherWindow();
 }
 
-void FlameshotDBusAdapter::captureScreen(int number, QString path,
-                                         bool toClipboard, int delay, uint id)
+void FlameshotDBusAdapter::captureScreen(int number,
+                                         QString path,
+                                         bool toClipboard,
+                                         int delay,
+                                         uint id)
 {
     CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, path, number);
     if (toClipboard) {
@@ -77,12 +76,14 @@ void FlameshotDBusAdapter::captureScreen(int number, QString path,
     Controller::getInstance()->requestCapture(req);
 }
 
-void FlameshotDBusAdapter::openConfig() {
+void FlameshotDBusAdapter::openConfig()
+{
     Controller::getInstance()->openConfigWindow();
 }
 
-void FlameshotDBusAdapter::trayIconEnabled(bool enabled) {
-    auto controller =  Controller::getInstance();
+void FlameshotDBusAdapter::trayIconEnabled(bool enabled)
+{
+    auto controller = Controller::getInstance();
     if (enabled) {
         controller->enableTrayIcon();
     } else {
@@ -90,16 +91,20 @@ void FlameshotDBusAdapter::trayIconEnabled(bool enabled) {
     }
 }
 
-void FlameshotDBusAdapter::autostartEnabled(bool enabled) {
+void FlameshotDBusAdapter::autostartEnabled(bool enabled)
+{
     ConfigHandler().setStartupLaunch(enabled);
-    auto controller =  Controller::getInstance();
+    auto controller = Controller::getInstance();
     // Autostart is not saved in a .ini file, requires manual update
     controller->updateConfigComponents();
 }
 
-void FlameshotDBusAdapter::handleCaptureTaken(uint id, const QPixmap &p) {
+void FlameshotDBusAdapter::handleCaptureTaken(uint id,
+                                              const QPixmap& p,
+                                              QRect selection)
+{
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     p.save(&buffer, "PNG");
-    emit captureTaken(id, byteArray);
+    emit captureTaken(id, byteArray, selection);
 }

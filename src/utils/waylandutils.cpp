@@ -1,10 +1,5 @@
 #include "waylandutils.h"
 
-WaylandUtils::WaylandUtils()
-{
+WaylandUtils::WaylandUtils() {}
 
-}
-
-bool WaylandUtils::waylandDetected() {
-
-}
+bool WaylandUtils::waylandDetected() {}

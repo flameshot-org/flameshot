@@ -1,50 +1,40 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "notifierbox.h"
-#include "src/utils/confighandler.h"
 #include "src/utils/colorutils.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include <QTimer>
-#include <QPainter>
 #include <QApplication>
+#include <QPainter>
+#include <QTimer>
 
-NotifierBox::NotifierBox(QWidget *parent) : QWidget(parent) {
+NotifierBox::NotifierBox(QWidget* parent)
+  : QWidget(parent)
+{
     m_timer = new QTimer(this);
     m_timer->setSingleShot(true);
     m_timer->setInterval(1200);
     connect(m_timer, &QTimer::timeout, this, &NotifierBox::hide);
     m_bgColor = ConfigHandler().uiMainColorValue();
-    m_foregroundColor = (ColorUtils::colorIsDark(m_bgColor) ?
-                             Qt::white : Qt::black);
+    m_foregroundColor =
+      (ColorUtils::colorIsDark(m_bgColor) ? Qt::white : Qt::black);
     m_bgColor.setAlpha(180);
-    const int size = (GlobalValues::buttonBaseSize() +
-                      GlobalValues::buttonBaseSize()/2) *
-            qApp->devicePixelRatio();
+    const int size =
+      (GlobalValues::buttonBaseSize() + GlobalValues::buttonBaseSize() / 2) *
+      qApp->devicePixelRatio();
     setFixedSize(QSize(size, size));
 }
 
-void NotifierBox::enterEvent(QEvent *) {
+void NotifierBox::enterEvent(QEvent*)
+{
     hide();
 }
 
-void NotifierBox::paintEvent(QPaintEvent *) {
+void NotifierBox::paintEvent(QPaintEvent*)
+{
     QPainter painter(this);
-    // draw Elipse
+    // draw Ellipse
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setBrush(QBrush(m_bgColor, Qt::SolidPattern));
     painter.setPen(QPen(Qt::transparent));
@@ -54,14 +44,16 @@ void NotifierBox::paintEvent(QPaintEvent *) {
     painter.drawText(rect(), Qt::AlignCenter, m_message);
 }
 
-void NotifierBox::showMessage(const QString &msg) {
+void NotifierBox::showMessage(const QString& msg)
+{
     m_message = msg;
     update();
     show();
     m_timer->start();
 }
 
-void NotifierBox::showColor(const QColor &color) {
+void NotifierBox::showColor(const QColor& color)
+{
     Q_UNUSED(color);
     m_message = QLatin1String("");
 }

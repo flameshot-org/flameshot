@@ -1,3 +1,7 @@
+# common
+
+.idea
+.cache
 # C++ objects and libs
 
 *.slo
@@ -49,5 +53,20 @@ stage/
 .snapcraft/
 flameshot*.tar.bz2
 
+.vscode/
+build/
+data/flatpak/.flatpak-builder
+# NVIM
+*~
+
+# Jetbrains
+.idea/
+.run
+
+# MacOS
+.DS_Store
 
 # End of https://www.gitignore.io/api/snapcraft
+
+#MacOS Crap
+.DS_Store

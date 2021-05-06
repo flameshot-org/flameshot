@@ -1,40 +1,27 @@
-// Copyright(c) 2017-2019 Alejandro Sirgo Rica & Contributors
-//
-// This file is part of Flameshot.
-//
-//     Flameshot is free software: you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation, either version 3 of the License, or
-//     (at your option) any later version.
-//
-//     Flameshot is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-//
-//     You should have received a copy of the GNU General Public License
-//     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "desktopfileparse.h"
-#include <QFile>
 #include <QDir>
+#include <QFile>
+#include <QLocale>
 #include <QString>
 #include <QTextStream>
-#include <QLocale>
 
-DesktopFileParser::DesktopFileParser() {
+DesktopFileParser::DesktopFileParser()
+{
     QString locale = QLocale().name();
     QString localeShort = QLocale().name().left(2);
     m_localeName = QStringLiteral("Name[%1]").arg(locale);
     m_localeDescription = QStringLiteral("Comment[%1]").arg(locale);
     m_localeNameShort = QStringLiteral("Name[%1]").arg(localeShort);
-    m_localeDescriptionShort = QStringLiteral("Comment[%1]")
-            .arg(localeShort);
-    m_defaultIcon = QIcon::fromTheme(QStringLiteral("application-x-executable"));
+    m_localeDescriptionShort = QStringLiteral("Comment[%1]").arg(localeShort);
+    m_defaultIcon =
+      QIcon::fromTheme(QStringLiteral("application-x-executable"));
 }
 
-DesktopAppData DesktopFileParser::parseDesktopFile(
-        const QString &fileName, bool &ok) const
+DesktopAppData DesktopFileParser::parseDesktopFile(const QString& fileName,
+                                                   bool& ok) const
 {
     DesktopAppData res;
     ok = true;
@@ -55,51 +42,48 @@ DesktopAppData DesktopFileParser::parseDesktopFile(
         QString line = in.readLine();
         if (line.startsWith(QLatin1String("Icon"))) {
             res.icon = QIcon::fromTheme(
-                      line.mid(line.indexOf(QLatin1String("="))+1).trimmed(),
-                        m_defaultIcon);
-        }
-        else if (!nameLocaleSet && line.startsWith(QLatin1String("Name"))) {
+              line.mid(line.indexOf(QLatin1String("=")) + 1).trimmed(),
+              m_defaultIcon);
+        } else if (!nameLocaleSet && line.startsWith(QLatin1String("Name"))) {
             if (line.startsWith(m_localeName) ||
-                    line.startsWith(m_localeNameShort))
-            {
-                res.name = line.mid(line.indexOf(QLatin1String("="))+1).trimmed();
+                line.startsWith(m_localeNameShort)) {
+                res.name =
+                  line.mid(line.indexOf(QLatin1String("=")) + 1).trimmed();
                 nameLocaleSet = true;
             } else if (line.startsWith(QLatin1String("Name="))) {
-                res.name = line.mid(line.indexOf(QLatin1String("="))+1).trimmed();
+                res.name =
+                  line.mid(line.indexOf(QLatin1String("=")) + 1).trimmed();
             }
-        }
-        else if (!descriptionLocaleSet && line.startsWith(QLatin1String("Comment"))) {
+        } else if (!descriptionLocaleSet &&
+                   line.startsWith(QLatin1String("Comment"))) {
             if (line.startsWith(m_localeDescription) ||
-                    line.startsWith(m_localeDescriptionShort))
-            {
-                res.description = line.mid(line.indexOf(QLatin1String("="))+1).trimmed();
+                line.startsWith(m_localeDescriptionShort)) {
+                res.description =
+                  line.mid(line.indexOf(QLatin1String("=")) + 1).trimmed();
                 descriptionLocaleSet = true;
             } else if (line.startsWith(QLatin1String("Comment="))) {
-                res.description = line.mid(line.indexOf(QLatin1String("="))+1).trimmed();
+                res.description =
+                  line.mid(line.indexOf(QLatin1String("=")) + 1).trimmed();
             }
-        }
-        else if (line.startsWith(QLatin1String("Exec"))) {
+        } else if (line.startsWith(QLatin1String("Exec"))) {
             if (line.contains(QLatin1String("%"))) {
-                res.exec = line.mid(line.indexOf(QLatin1String("="))+1)
-                        .trimmed();
+                res.exec =
+                  line.mid(line.indexOf(QLatin1String("=")) + 1).trimmed();
             } else {
                 ok = false;
                 break;
             }
-        }
-        else if (line.startsWith(QLatin1String("Type"))) {
+        } else if (line.startsWith(QLatin1String("Type"))) {
             if (line.contains(QLatin1String("Application"))) {
                 isApplication = true;
             }
-        }
-        else if (line.startsWith(QLatin1String("Categories"))) {
-            res.categories = line.mid(line.indexOf(QLatin1String("="))+1).split(QStringLiteral(";"));
-        }
-        else if (line == QLatin1String("NoDisplay=true")) {
+        } else if (line.startsWith(QLatin1String("Categories"))) {
+            res.categories = line.mid(line.indexOf(QLatin1String("=")) + 1)
+                               .split(QStringLiteral(";"));
+        } else if (line == QLatin1String("NoDisplay=true")) {
             ok = false;
             break;
-        }
-        else if (line == QLatin1String("Terminal=true")) {
+        } else if (line == QLatin1String("Terminal=true")) {
             res.showInTerminal = true;
         }
         // ignore the other entries
@@ -114,11 +98,12 @@ DesktopAppData DesktopFileParser::parseDesktopFile(
     return res;
 }
 
-int DesktopFileParser::processDirectory(const QDir &dir) {
+int DesktopFileParser::processDirectory(const QDir& dir)
+{
     QStringList entries = dir.entryList(QDir::NoDotAndDotDot | QDir::Files);
     bool ok;
     int length = m_appList.length();
-    for (QString file: entries){
+    for (QString file : entries) {
         DesktopAppData app = parseDesktopFile(dir.absoluteFilePath(file), ok);
         if (ok) {
             m_appList.append(app);
@@ -127,9 +112,11 @@ int DesktopFileParser::processDirectory(const QDir &dir) {
     return m_appList.length() - length;
 }
 
-QVector<DesktopAppData> DesktopFileParser::getAppsByCategory(const QString &category) {
+QVector<DesktopAppData> DesktopFileParser::getAppsByCategory(
+  const QString& category)
+{
     QVector<DesktopAppData> res;
-    for (const DesktopAppData &app : m_appList) {
+    for (const DesktopAppData& app : m_appList) {
         if (app.categories.contains(category)) {
             res.append(app);
         }
@@ -138,11 +125,11 @@ QVector<DesktopAppData> DesktopFileParser::getAppsByCategory(const QString &cate
 }
 
 QMap<QString, QVector<DesktopAppData>> DesktopFileParser::getAppsByCategory(
-        const QStringList &categories)
+  const QStringList& categories)
 {
     QMap<QString, QVector<DesktopAppData>> res;
-    for (const DesktopAppData &app : m_appList) {
-        for (const QString &category: categories) {
+    for (const DesktopAppData& app : m_appList) {
+        for (const QString& category : categories) {
             if (app.categories.contains(category)) {
                 res[category].append(app);
             }
