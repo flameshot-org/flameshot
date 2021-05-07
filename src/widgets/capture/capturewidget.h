@@ -182,6 +182,7 @@ private:
     uint m_id;
 
     CaptureToolObjects m_captureToolObjects;
+    CaptureToolObjects m_captureToolObjectsBackup;
 
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;
@@ -193,8 +194,4 @@ private:
     // For start moving after more than X offset
     QPoint m_startMovePos;
     bool m_startMove;
-
-    // TODO - should be remove after fixing undo()/redo() functions
-    bool m_lastPressedUndo;
-    bool m_lastPressedRedo;
 };
