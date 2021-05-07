@@ -7,10 +7,16 @@
 #define SEARCH_RADIUS_FAR 5
 #define SEARCH_RADIUS_TEXT_HANDICAP 3
 
+CaptureToolObjects::CaptureToolObjects(QObject* parent)
+  : QObject(parent)
+{}
+
 void CaptureToolObjects::append(const QPointer<CaptureTool>& captureTool)
 {
-    m_captureToolObjects.append(captureTool);
-    m_imageCache.clear();
+    if (!captureTool.isNull()) {
+        m_captureToolObjects.append(captureTool->copy(captureTool->parent()));
+        m_imageCache.clear();
+    }
 }
 
 QPointer<CaptureTool> CaptureToolObjects::at(int index)
