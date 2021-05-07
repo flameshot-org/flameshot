@@ -179,27 +179,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
-        <translation>Konfigurasi</translation>
+        <translation>Pengaturan</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Antarmuka</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Pengaturan Nama File</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Umum</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Pintasan</translation>
     </message>
 </context>
 <context>
@@ -207,17 +207,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>Versi baru %1 tersedia</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="205"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Anda telah menggunakan versi terbaru</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gagal mengambil informasi versi terbaru.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
@@ -232,12 +232,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="415"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Buka Peluncur</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="420"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pengaturan</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
@@ -261,7 +261,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Berhenti</translation>
+        <translation>&amp;Hentikan Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="399"/>
@@ -279,7 +279,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Salin seleksi terpilih ke papan klip</translation>
     </message>
 </context>
 <context>
@@ -287,7 +287,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat terhubung melalui DBus</translation>
     </message>
 </context>
 <context>
@@ -313,12 +313,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunting:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pratinjau:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
@@ -347,7 +347,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosongkan</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
