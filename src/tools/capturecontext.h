@@ -16,8 +16,6 @@ struct CaptureContext
     QPixmap origScreenshot;
     // Selection area
     QRect selection;
-    // Widget dimensions
-    QRect widgetDimensions;
     // Selected tool color
     QColor color;
     // Path where the content has to be saved
