@@ -303,7 +303,7 @@ void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon)
 
 int ConfigHandler::drawThicknessValue()
 {
-    int res = 0;
+    int res = 1;
     if (m_settings.contains(QStringLiteral("drawThickness"))) {
         res = m_settings.value(QStringLiteral("drawThickness")).toInt();
     }
@@ -313,6 +313,20 @@ int ConfigHandler::drawThicknessValue()
 void ConfigHandler::setDrawThickness(const int thickness)
 {
     m_settings.setValue(QStringLiteral("drawThickness"), thickness);
+}
+
+int ConfigHandler::drawFontSizeValue()
+{
+    int res = 8;
+    if (m_settings.contains(QStringLiteral("drawFontSize"))) {
+        res = m_settings.value(QStringLiteral("drawFontSize")).toInt();
+    }
+    return res;
+}
+
+void ConfigHandler::setDrawFontSize(const int fontSize)
+{
+    m_settings.setValue(QStringLiteral("drawFontSize"), fontSize);
 }
 
 bool ConfigHandler::keepOpenAppLauncherValue()

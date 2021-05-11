@@ -18,7 +18,6 @@
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/selectionwidget.h"
-#include "src/widgets/panel/utilitypanel.h"
 #include <QPointer>
 #include <QUndoStack>
 #include <QWidget>
@@ -32,6 +31,8 @@ class ColorPicker;
 class NotifierBox;
 class HoverEventFilter;
 class UpdateNotificationWidget;
+class UtilityPanel;
+class SidePanelWidget;
 
 class CaptureWidget : public QWidget
 {
@@ -107,6 +108,7 @@ protected:
     void moveEvent(QMoveEvent* moveEvent) override;
 
 private:
+    void loadDrawThickness();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
@@ -169,6 +171,7 @@ private:
 
     ButtonHandler* m_buttonHandler;
     UtilityPanel* m_panel;
+    SidePanelWidget* m_sidePanel;
     ColorPicker* m_colorPicker;
     ConfigHandler m_config;
     NotifierBox* m_notifierBox;

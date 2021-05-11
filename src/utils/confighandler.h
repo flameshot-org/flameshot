@@ -56,6 +56,9 @@ public:
     int drawThicknessValue();
     void setDrawThickness(const int);
 
+    int drawFontSizeValue();
+    void setDrawFontSize(const int);
+
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);
 
