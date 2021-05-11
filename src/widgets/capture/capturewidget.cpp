@@ -24,6 +24,7 @@
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
+#include "src/widgets/panel/utilitypanel.h"
 #include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
@@ -64,6 +65,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
   , m_panel(nullptr)
+  , m_sidePanel(nullptr)
   , m_selection(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
@@ -195,7 +197,6 @@ CaptureWidget::~CaptureWidget()
     } else {
         emit captureFailed(m_id);
     }
-    m_config.setDrawThickness(m_context.thickness);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -940,28 +941,30 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::updateActiveLayer);
 
-    SidePanelWidget* sidePanel = new SidePanelWidget(&m_context.screenshot);
-    connect(sidePanel,
+    m_sidePanel = new SidePanelWidget(&m_context.screenshot);
+    connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,
             &CaptureWidget::setDrawColor);
-    connect(sidePanel,
+    connect(m_sidePanel,
             &SidePanelWidget::thicknessChanged,
             this,
             &CaptureWidget::setDrawThickness);
     connect(this,
             &CaptureWidget::colorChanged,
-            sidePanel,
+            m_sidePanel,
             &SidePanelWidget::updateColor);
     connect(this,
             &CaptureWidget::thicknessChanged,
-            sidePanel,
+            m_sidePanel,
             &SidePanelWidget::updateThickness);
-    connect(
-      sidePanel, &SidePanelWidget::togglePanel, m_panel, &UtilityPanel::toggle);
-    sidePanel->colorChanged(m_context.color);
-    sidePanel->thicknessChanged(m_context.thickness);
-    m_panel->pushWidget(sidePanel);
+    connect(m_sidePanel,
+            &SidePanelWidget::togglePanel,
+            m_panel,
+            &UtilityPanel::toggle);
+    m_sidePanel->colorChanged(m_context.color);
+    m_sidePanel->thicknessChanged(m_context.thickness);
+    m_panel->pushWidget(m_sidePanel);
 
     // Fill undo/redo/history list widget
     m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
@@ -1047,9 +1050,21 @@ void CaptureWidget::setState(CaptureToolButton* b)
             m_activeButton->setColor(m_uiColor);
             m_activeButton = nullptr;
         }
+        loadDrawThickness();
         updateCursor();
         update(); // clear mouse preview
     }
+}
+
+void CaptureWidget::loadDrawThickness()
+{
+    if (m_activeButton && m_activeButton->tool() &&
+        m_activeButton->tool()->nameID() == ToolType::TEXT) {
+        m_context.thickness = m_config.drawFontSizeValue();
+    } else {
+        m_context.thickness = m_config.drawThicknessValue();
+    }
+    m_sidePanel->thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::processTool(CaptureTool* t)
@@ -1221,7 +1236,14 @@ void CaptureWidget::removeToolObject(int index)
 void CaptureWidget::setDrawThickness(const int& t)
 {
     m_context.thickness = qBound(1, t, 100);
-    ConfigHandler().setDrawThickness(m_context.thickness);
+    // save draw thickness for text and other tool separately
+    if ((m_activeButton && m_activeButton->tool() &&
+         m_activeButton->tool()->nameID() == ToolType::TEXT) ||
+        (m_activeTool && m_activeTool->nameID() == ToolType::TEXT)) {
+        m_config.setDrawFontSize(m_context.thickness);
+    } else {
+        m_config.setDrawThickness(m_context.thickness);
+    }
 
     auto toolItem = activeToolObject();
     if (toolItem) {
