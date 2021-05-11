@@ -853,7 +853,6 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
 void CaptureWidget::resizeEvent(QResizeEvent* e)
 {
     QWidget::resizeEvent(e);
-    m_context.widgetDimensions = rect();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     if (!m_context.fullscreen) {
         m_panel->setFixedHeight(height());
@@ -869,7 +868,6 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 
 void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 {
-    m_context.widgetDimensions = rect();
     m_context.color = m_config.drawColorValue();
     m_context.savePath = savePath;
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
