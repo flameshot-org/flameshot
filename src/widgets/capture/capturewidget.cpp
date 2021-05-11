@@ -85,7 +85,6 @@ CaptureWidget::CaptureWidget(uint id,
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
-    m_context.circleCount = 1;
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -1213,7 +1212,6 @@ void CaptureWidget::removeToolObject(int index)
                 }
                 circleCount++;
             }
-            m_context.circleCount = circleCount;
         }
         pushObjectsStateToUndoStack();
         drawToolsData();
@@ -1474,12 +1472,10 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
     painter.setRenderHint(QPainter::Antialiasing);
-    int index = 0;
-    m_context.circleCount = 1;
+    int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
         if (toolItem->nameID() == ToolType::CIRCLECOUNT) {
-            toolItem->setCount(m_context.circleCount);
-            m_context.circleCount++;
+            toolItem->setCount(circleCount++);
         }
         toolItem->process(painter, pixmapItem);
     }

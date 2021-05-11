@@ -34,6 +34,9 @@ public:
     QColor drawColorValue();
     void setDrawColor(const QColor&);
 
+    void setFontFamily(const QString&);
+    const QString& fontFamily();
+
     bool showHelpValue();
     void setShowHelp(const bool);
 

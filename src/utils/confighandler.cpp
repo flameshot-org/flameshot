@@ -186,6 +186,20 @@ void ConfigHandler::setDrawColor(const QColor& c)
     m_settings.setValue(QStringLiteral("drawColor"), c.name());
 }
 
+void ConfigHandler::setFontFamily(const QString& fontFamily)
+{
+    m_settings.setValue(QStringLiteral("fontFamily"), fontFamily);
+}
+
+const QString& ConfigHandler::fontFamily()
+{
+    m_strRes.clear();
+    if (m_settings.contains(QStringLiteral("fontFamily"))) {
+        m_strRes = m_settings.value(QStringLiteral("fontFamily")).toString();
+    }
+    return m_strRes;
+}
+
 bool ConfigHandler::showHelpValue()
 {
     bool res = true;
