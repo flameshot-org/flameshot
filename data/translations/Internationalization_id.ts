@@ -835,7 +835,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="28"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Baris</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="38"/>
@@ -874,7 +874,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="20"/>
         <source>Pencil</source>
-        <translation type="unfinished"></translation>
+        <translation>Pencil</translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
@@ -1559,12 +1559,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Bold</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Italic</translation>
     </message>
 </context>
 <context>
