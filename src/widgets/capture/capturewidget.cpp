@@ -331,6 +331,7 @@ void CaptureWidget::releaseActiveTool()
 void CaptureWidget::uncheckActiveTool()
 {
     // uncheck active tool
+    m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
     m_activeButton = nullptr;
     releaseActiveTool();
