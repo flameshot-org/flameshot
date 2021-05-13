@@ -6,8 +6,6 @@
 #include <QScreen>
 #include <cmath>
 
-#define PADDING_VALUE_DEFAULT 2
-
 namespace {
 
 const double ADJ_UNIT = std::atan(1.0);
@@ -97,8 +95,7 @@ void AbstractTwoPointTool::thicknessChanged(int th)
 void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
                                              const CaptureContext& context)
 {
-    painter.setPen(
-      QPen(context.color, context.thickness + PADDING_VALUE_DEFAULT));
+    painter.setPen(QPen(context.color, context.thickness));
     painter.drawLine(context.mousePos, context.mousePos);
 }
 
@@ -107,7 +104,7 @@ void AbstractTwoPointTool::drawStart(const CaptureContext& context)
     colorChanged(context.color);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
-    thicknessChanged(context.thickness + PADDING_VALUE_DEFAULT);
+    thicknessChanged(context.thickness);
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
