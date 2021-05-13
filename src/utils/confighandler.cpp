@@ -307,7 +307,7 @@ void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon)
 
 int ConfigHandler::drawThicknessValue()
 {
-    int res = 1;
+    int res = 3;
     if (m_settings.contains(QStringLiteral("drawThickness"))) {
         res = m_settings.value(QStringLiteral("drawThickness")).toInt();
     }

@@ -1059,8 +1059,9 @@ void CaptureWidget::setState(CaptureToolButton* b)
 
 void CaptureWidget::loadDrawThickness()
 {
-    if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->nameID() == ToolType::TEXT) {
+    if ((m_activeButton && m_activeButton->tool() &&
+         m_activeButton->tool()->nameID() == ToolType::TEXT) ||
+        (m_activeTool && m_activeTool->nameID() == ToolType::TEXT)) {
         m_context.thickness = m_config.drawFontSizeValue();
     } else {
         m_context.thickness = m_config.drawThicknessValue();
@@ -1238,12 +1239,13 @@ void CaptureWidget::setDrawThickness(const int& t)
 {
     m_context.thickness = qBound(1, t, 100);
     // save draw thickness for text and other tool separately
-    if ((m_activeButton && m_activeButton->tool() &&
-         m_activeButton->tool()->nameID() == ToolType::TEXT) ||
-        (m_activeTool && m_activeTool->nameID() == ToolType::TEXT)) {
-        m_config.setDrawFontSize(m_context.thickness);
-    } else {
-        m_config.setDrawThickness(m_context.thickness);
+    if (m_activeButton) {
+        if (m_activeButton->tool() &&
+            m_activeButton->tool()->nameID() == ToolType::TEXT) {
+            m_config.setDrawFontSize(m_context.thickness);
+        } else {
+            m_config.setDrawThickness(m_context.thickness);
+        }
     }
 
     auto toolItem = activeToolObject();
