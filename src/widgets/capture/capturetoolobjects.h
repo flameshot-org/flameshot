@@ -11,7 +11,7 @@
 class CaptureToolObjects : public QObject
 {
 public:
-    explicit CaptureToolObjects(QObject* parent = nullptr) { Q_UNUSED(parent) };
+    explicit CaptureToolObjects(QObject* parent = nullptr);
     QList<QPointer<CaptureTool>> captureToolObjects();
     void append(const QPointer<CaptureTool>& captureTool);
     void removeAt(int index);

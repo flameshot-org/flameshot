@@ -4,10 +4,6 @@
 #include "selectiontool.h"
 #include <QPainter>
 
-namespace {
-#define PADDING_VALUE 2
-}
-
 SelectionTool::SelectionTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {

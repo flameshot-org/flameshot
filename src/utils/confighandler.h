@@ -34,6 +34,9 @@ public:
     QColor drawColorValue();
     void setDrawColor(const QColor&);
 
+    void setFontFamily(const QString&);
+    const QString& fontFamily();
+
     bool showHelpValue();
     void setShowHelp(const bool);
 
@@ -52,6 +55,9 @@ public:
 
     int drawThicknessValue();
     void setDrawThickness(const int);
+
+    int drawFontSizeValue();
+    void setDrawFontSize(const int);
 
     bool keepOpenAppLauncherValue();
     void setKeepOpenAppLauncher(const bool);

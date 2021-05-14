@@ -4,12 +4,6 @@
 #include "linetool.h"
 #include <QPainter>
 
-namespace {
-
-#define PADDING_VALUE 2
-
-}
-
 LineTool::LineTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {

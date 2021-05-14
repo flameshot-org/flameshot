@@ -6,10 +6,6 @@
 #include <QPainterPath>
 #include <cmath>
 
-namespace {
-#define PADDING_VALUE 2
-}
-
 RectangleTool::RectangleTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {

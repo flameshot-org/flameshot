@@ -5,9 +5,6 @@
 #include <cmath>
 
 namespace {
-
-#define PADDING_VALUE 2
-
 const int ArrowWidth = 10;
 const int ArrowHeight = 18;
 

@@ -3,12 +3,12 @@
 
 #include "textconfig.h"
 #include "src/utils/colorutils.h"
+#include "src/utils/confighandler.h"
 #include "src/utils/pathinfo.h"
 #include <QComboBox>
 #include <QFontDatabase>
 #include <QHBoxLayout>
 #include <QPushButton>
-#include <QVBoxLayout>
 
 TextConfig::TextConfig(QWidget* parent)
   : QWidget(parent)
@@ -28,8 +28,7 @@ TextConfig::TextConfig(QWidget* parent)
             this,
             &TextConfig::fontFamilyChanged);
     m_fontsCB->addItems(fontDB.families());
-    // TODO save family in config
-    setFontFamily(font().family());
+    setFontFamily(ConfigHandler().fontFamily());
 
     QString iconPrefix = ColorUtils::colorIsDark(palette().windowText().color())
                            ? PathInfo::blackIconPath()
@@ -82,7 +81,8 @@ TextConfig::TextConfig(QWidget* parent)
 
 void TextConfig::setFontFamily(const QString& fontFamily)
 {
-    m_fontsCB->setCurrentIndex(m_fontsCB->findText(fontFamily));
+    m_fontsCB->setCurrentIndex(
+      m_fontsCB->findText(fontFamily.isEmpty() ? font().family() : fontFamily));
 }
 
 void TextConfig::setUnderline(const bool u)

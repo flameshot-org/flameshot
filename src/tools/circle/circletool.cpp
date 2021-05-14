@@ -4,10 +4,6 @@
 #include "circletool.h"
 #include <QPainter>
 
-namespace {
-#define PADDING_VALUE 2
-}
-
 CircleTool::CircleTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {

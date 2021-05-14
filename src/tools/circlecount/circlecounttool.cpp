@@ -139,7 +139,6 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    setCount(context.circleCount);
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)
