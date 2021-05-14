@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "texttool.h"
+#include "src/utils/confighandler.h"
 #include "textconfig.h"
 #include "textwidget.h"
 
@@ -11,7 +12,12 @@
 TextTool::TextTool(QObject* parent)
   : CaptureTool(parent)
   , m_size(1)
-{}
+{
+    QString fontFamily = ConfigHandler().fontFamily();
+    if (!fontFamily.isEmpty()) {
+        m_font.setFamily(ConfigHandler().fontFamily());
+    }
+}
 
 TextTool::~TextTool()
 {
@@ -253,6 +259,9 @@ void TextTool::updateText(const QString& s)
 void TextTool::updateFamily(const QString& s)
 {
     m_font.setFamily(s);
+    if (m_textOld.isEmpty()) {
+        ConfigHandler().setFontFamily(m_font.family());
+    }
     if (m_widget) {
         m_widget->setFont(m_font);
     }

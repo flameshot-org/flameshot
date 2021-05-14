@@ -38,6 +38,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadHistoryMaxSize();
     initUndoLimit();
 
+    m_layout->addStretch();
+
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -267,7 +269,6 @@ void GeneralConf::initHistoryConfirmationToDelete()
 void GeneralConf::initConfigButtons()
 {
     QHBoxLayout* buttonLayout = new QHBoxLayout();
-    m_layout->addStretch();
     QGroupBox* box = new QGroupBox(tr("Configuration File"));
     box->setFlat(true);
     box->setLayout(buttonLayout);
@@ -364,7 +365,6 @@ void GeneralConf::initSaveAfterCopy()
     QGroupBox* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
     m_layout->addWidget(box);
-    m_layout->addStretch();
 
     QVBoxLayout* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
@@ -378,9 +378,6 @@ void GeneralConf::initSaveAfterCopy()
     }
     m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
-    // #if QT_DEPRECATED_SINCE(5, 13)
-    //    QT_DEPRECATED_X("Use QPalette::windowText() instead")
-    //    inline const QBrush &foreground() const { return windowText(); }
     QString foreground = this->palette().windowText().color().name();
     m_savePath->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
     pathLayout->addWidget(m_savePath);
@@ -414,7 +411,6 @@ void GeneralConf::initUploadHistoryMaxSize()
     QGroupBox* box = new QGroupBox(tr("Latest Uploads Max Size"));
     box->setFlat(true);
     m_layout->addWidget(box);
-    m_layout->addStretch();
 
     QVBoxLayout* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
@@ -422,7 +418,7 @@ void GeneralConf::initUploadHistoryMaxSize()
     int max = ConfigHandler().uploadHistoryMaxSizeValue();
 
     m_uploadHistoryMaxSize = new QSpinBox(this);
-    m_uploadHistoryMaxSize->setMaximum(1000);
+    m_uploadHistoryMaxSize->setMaximum(50);
     m_uploadHistoryMaxSize->setValue(max);
     QString foreground = this->palette().windowText().color().name();
     m_uploadHistoryMaxSize->setStyleSheet(
@@ -445,7 +441,6 @@ void GeneralConf::initUndoLimit()
     QGroupBox* box = new QGroupBox(tr("Undo limit"));
     box->setFlat(true);
     m_layout->addWidget(box);
-    m_layout->addStretch();
 
     QVBoxLayout* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);

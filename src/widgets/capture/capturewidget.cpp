@@ -23,6 +23,7 @@
 #include "src/widgets/capture/notifierbox.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
+#include "src/widgets/panel/utilitypanel.h"
 #include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
@@ -62,14 +63,13 @@ CaptureWidget::CaptureWidget(uint id,
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
-  , m_lastPressedUndo(false)
-  , m_lastPressedRedo(false)
   , m_panel(nullptr)
+  , m_sidePanel(nullptr)
   , m_selection(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
 {
-    m_undoStack.setUndoLimit(ConfigHandler().undoLimit() + 1);
+    m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
 
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
@@ -87,7 +87,6 @@ CaptureWidget::CaptureWidget(uint id,
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
-    m_context.circleCount = 1;
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -197,7 +196,6 @@ CaptureWidget::~CaptureWidget()
     } else {
         emit captureFailed(m_id);
     }
-    m_config.setDrawThickness(m_context.thickness);
 }
 
 // redefineButtons retrieves the buttons configured to be shown with the
@@ -333,6 +331,7 @@ void CaptureWidget::releaseActiveTool()
 void CaptureWidget::uncheckActiveTool()
 {
     // uncheck active tool
+    m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
     m_activeButton = nullptr;
     releaseActiveTool();
@@ -369,10 +368,15 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
 {
-    // Reset object selection if mouse pos is not in selection area
+    // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
-    if (toolItem && !toolItem->selectionRect().contains(pos)) {
-        m_panel->setActiveLayer(-1);
+    if (!toolItem || toolItem && !toolItem->selectionRect().contains(pos)) {
+        selectToolItemAtPos(pos);
+    }
+
+    // save current state for undo/redo stack
+    if (m_panel->activeLayerIndex() >= 0) {
+        m_captureToolObjectsBackup = m_captureToolObjects;
     }
 
     // Call color picker
@@ -409,9 +413,13 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
             // While it is based on AbstractTwoPointTool it has the only one
             // point and shouldn't wait for second point and move event
             m_activeTool->drawEnd(m_context.mousePos);
+
+            m_captureToolObjectsBackup = m_captureToolObjects;
             m_captureToolObjects.append(m_activeTool);
             pushObjectsStateToUndoStack();
             releaseActiveTool();
+            drawToolsData();
+
             m_mouseIsClicked = false;
         }
         return true;
@@ -421,12 +429,9 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 
 void CaptureWidget::pushObjectsStateToUndoStack()
 {
-    m_existingObjectIsChanged = false;
-    // push zero state to be able to do a complete undo
-    if (m_undoStack.count() == 0 || m_undoStack.index() == 0) {
-        m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
-    }
-    m_undoStack.push(new ModificationCommand(this, m_captureToolObjects));
+    m_undoStack.push(new ModificationCommand(
+      this, m_captureToolObjects, m_captureToolObjectsBackup));
+    m_captureToolObjectsBackup.clear();
 }
 
 int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
@@ -472,6 +477,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             return;
         }
         showColorPicker(m_mousePressedPos);
+        return;
     } else if (e->button() == Qt::LeftButton) {
         m_showInitialMsg = false;
         m_mouseIsClicked = true;
@@ -522,6 +528,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
         if (m_activeTool && m_activeTool->nameID() == ToolType::TEXT) {
             m_mouseIsClicked = false;
             m_context.mousePos = *m_activeTool->pos();
+            m_captureToolObjectsBackup = m_captureToolObjects;
             m_activeTool->setEditMode(true);
             drawToolsData(true, false);
             m_mouseIsClicked = false;
@@ -560,8 +567,12 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_activeToolOffsetToMouseOnStart =
                   e->pos() - *activeTool->pos();
             }
-            activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
+            if (!m_activeToolIsMoved) {
+                // save state before movement for undo stack
+                m_captureToolObjectsBackup = m_captureToolObjects;
+            }
             m_activeToolIsMoved = true;
+            activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
             drawToolsData(false);
         }
     } else if (m_mouseIsClicked &&
@@ -673,12 +684,14 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 {
     if (e->button() == Qt::LeftButton && m_colorPicker->isVisible()) {
         // Color picker
+        if (m_colorPicker->isVisible() && m_panel->activeLayerIndex() >= 0 &&
+            m_context.color.isValid()) {
+            pushObjectsStateToUndoStack();
+        }
         m_colorPicker->hide();
         if (!m_context.color.isValid()) {
             m_context.color = ConfigHandler().drawColorValue();
             m_panel->show();
-        } else if (m_panel->activeLayerIndex() >= 0) {
-            pushObjectsStateToUndoStack();
         }
     } else if (m_mouseIsClicked) {
         if (m_activeTool) {
@@ -691,13 +704,12 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             }
         } else {
             if (m_activeToolIsMoved) {
+                m_activeToolIsMoved = false;
                 pushObjectsStateToUndoStack();
-            }
-
-            // Try to select existing tool if it was in the selection area but
-            // need to select another one
-            if (e->pos() == m_mousePressedPos && !m_activeToolIsMoved &&
-                m_activeButton.isNull()) {
+            } else if (e->pos() == m_mousePressedPos &&
+                       m_activeButton.isNull()) {
+                // Try to select existing tool if it was in the selection area
+                // but need to select another one
                 m_panel->setActiveLayer(
                   m_captureToolObjects.find(e->pos(), size()));
             }
@@ -832,7 +844,10 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
     auto toolItem = activeToolObject();
     if (toolItem) {
         toolItem->thicknessChanged(m_context.thickness);
-        m_existingObjectIsChanged = true;
+        if (!m_existingObjectIsChanged) {
+            m_captureToolObjectsBackup = m_captureToolObjects;
+            m_existingObjectIsChanged = true;
+        }
     }
     emit thicknessChanged(m_context.thickness);
 }
@@ -840,7 +855,6 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
 void CaptureWidget::resizeEvent(QResizeEvent* e)
 {
     QWidget::resizeEvent(e);
-    m_context.widgetDimensions = rect();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     if (!m_context.fullscreen) {
         m_panel->setFixedHeight(height());
@@ -856,7 +870,6 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 
 void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 {
-    m_context.widgetDimensions = rect();
     m_context.color = m_config.drawColorValue();
     m_context.savePath = savePath;
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
@@ -927,28 +940,30 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::updateActiveLayer);
 
-    SidePanelWidget* sidePanel = new SidePanelWidget(&m_context.screenshot);
-    connect(sidePanel,
+    m_sidePanel = new SidePanelWidget(&m_context.screenshot);
+    connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,
             &CaptureWidget::setDrawColor);
-    connect(sidePanel,
+    connect(m_sidePanel,
             &SidePanelWidget::thicknessChanged,
             this,
             &CaptureWidget::setDrawThickness);
     connect(this,
             &CaptureWidget::colorChanged,
-            sidePanel,
+            m_sidePanel,
             &SidePanelWidget::updateColor);
     connect(this,
             &CaptureWidget::thicknessChanged,
-            sidePanel,
+            m_sidePanel,
             &SidePanelWidget::updateThickness);
-    connect(
-      sidePanel, &SidePanelWidget::togglePanel, m_panel, &UtilityPanel::toggle);
-    sidePanel->colorChanged(m_context.color);
-    sidePanel->thicknessChanged(m_context.thickness);
-    m_panel->pushWidget(sidePanel);
+    connect(m_sidePanel,
+            &SidePanelWidget::togglePanel,
+            m_panel,
+            &UtilityPanel::toggle);
+    m_sidePanel->colorChanged(m_context.color);
+    m_sidePanel->thicknessChanged(m_context.thickness);
+    m_panel->pushWidget(m_sidePanel);
 
     // Fill undo/redo/history list widget
     m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
@@ -1034,9 +1049,22 @@ void CaptureWidget::setState(CaptureToolButton* b)
             m_activeButton->setColor(m_uiColor);
             m_activeButton = nullptr;
         }
+        loadDrawThickness();
         updateCursor();
         update(); // clear mouse preview
     }
+}
+
+void CaptureWidget::loadDrawThickness()
+{
+    if ((m_activeButton && m_activeButton->tool() &&
+         m_activeButton->tool()->nameID() == ToolType::TEXT) ||
+        (m_activeTool && m_activeTool->nameID() == ToolType::TEXT)) {
+        m_context.thickness = m_config.drawFontSizeValue();
+    } else {
+        m_context.thickness = m_config.drawThicknessValue();
+    }
+    m_sidePanel->thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::processTool(CaptureTool* t)
@@ -1172,6 +1200,7 @@ void CaptureWidget::updateActiveLayer(const int& layer)
         commitCurrentTool();
     }
     if (m_existingObjectIsChanged) {
+        m_existingObjectIsChanged = false;
         pushObjectsStateToUndoStack();
     }
     drawToolsData(false, true);
@@ -1183,6 +1212,7 @@ void CaptureWidget::removeToolObject(int index)
     if (index >= 0 && index < m_captureToolObjects.size()) {
         const ToolType currentToolType =
           m_captureToolObjects.at(index)->nameID();
+        m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.removeAt(index);
         if (currentToolType == ToolType::CIRCLECOUNT) {
             // Do circle count reindex
@@ -1197,7 +1227,6 @@ void CaptureWidget::removeToolObject(int index)
                 }
                 circleCount++;
             }
-            m_context.circleCount = circleCount;
         }
         pushObjectsStateToUndoStack();
         drawToolsData();
@@ -1207,7 +1236,15 @@ void CaptureWidget::removeToolObject(int index)
 void CaptureWidget::setDrawThickness(const int& t)
 {
     m_context.thickness = qBound(1, t, 100);
-    ConfigHandler().setDrawThickness(m_context.thickness);
+    // save draw thickness for text and other tool separately
+    if (m_activeButton) {
+        if (m_activeButton->tool() &&
+            m_activeButton->tool()->nameID() == ToolType::TEXT) {
+            m_config.setDrawFontSize(m_context.thickness);
+        } else {
+            m_config.setDrawThickness(m_context.thickness);
+        }
+    }
 
     auto toolItem = activeToolObject();
     if (toolItem) {
@@ -1419,11 +1456,6 @@ void CaptureWidget::updateCursor()
 void CaptureWidget::pushToolToStack()
 {
     // append current tool to the new state
-    bool isChanged = true;
-    if (m_activeTool && m_activeTool->editMode()) {
-        m_activeTool->setEditMode(false);
-        isChanged = m_activeTool->isChanged();
-    }
     if (m_activeTool && m_activeButton) {
         disconnect(this,
                    &CaptureWidget::colorChanged,
@@ -1437,12 +1469,24 @@ void CaptureWidget::pushToolToStack()
             disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
         }
 
-        m_captureToolObjects.append(m_activeTool);
-        releaseActiveTool();
-    }
+        // disable signal connect for updating layer because it may call this
+        // function again on text objects
+        disconnect(m_panel,
+                   &UtilityPanel::layerChanged,
+                   this,
+                   &CaptureWidget::updateActiveLayer);
 
-    if (isChanged) {
+        m_captureToolObjectsBackup = m_captureToolObjects;
+        m_captureToolObjects.append(m_activeTool);
         pushObjectsStateToUndoStack();
+        releaseActiveTool();
+        drawToolsData();
+
+        // restore signal connection for updating layer
+        connect(m_panel,
+                &UtilityPanel::layerChanged,
+                this,
+                &CaptureWidget::updateActiveLayer);
     }
 }
 
@@ -1451,12 +1495,10 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     QPainter painter(&pixmapItem);
     painter.setRenderHint(QPainter::Antialiasing);
-    int index = 0;
-    m_context.circleCount = 1;
+    int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
         if (toolItem->nameID() == ToolType::CIRCLECOUNT) {
-            toolItem->setCount(m_context.circleCount);
-            m_context.circleCount++;
+            toolItem->setCount(circleCount++);
         }
         toolItem->process(painter, pixmapItem);
     }
@@ -1564,33 +1606,14 @@ void CaptureWidget::setCaptureToolObjects(
 
 void CaptureWidget::undo()
 {
-    // FIXME - m_lastPressedUndo and m_lastPressedRedo is a brutal hack, cannot
-    // understand why first undo/redo has no effect so need to do it twice if it
-    // is the firs operation
-    if (!m_lastPressedUndo) {
-        m_undoStack.undo();
-    }
-    m_lastPressedUndo = true;
-    m_lastPressedRedo = false;
     m_undoStack.undo();
-    if (m_undoStack.index() == 0 && m_captureToolObjects.size() > 0) {
-        m_lastPressedUndo = false;
-        m_captureToolObjects.clear();
-        drawToolsData();
-    }
+    drawToolsData();
 }
 
 void CaptureWidget::redo()
 {
-    // FIXME - m_lastPressedUndo and m_lastPressedRedo is a brutal hack, cannot
-    // understand why first undo/redo has no effect so need to do it twice if it
-    // is the firs operation
-    if (!m_lastPressedRedo) {
-        m_undoStack.redo();
-    }
-    m_lastPressedUndo = false;
-    m_lastPressedRedo = true;
     m_undoStack.redo();
+    drawToolsData();
 }
 
 QRect CaptureWidget::extendedSelection() const
