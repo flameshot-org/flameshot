@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="id">
+<TS version="2.1" language="gl">
 <context>
     <name>AppLauncher</name>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>Peluncur Aplikasi</translation>
+        <translation>Lanzador de aplicacións</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Pilih aplikasi untuk membuka cuplikan layar</translation>
+        <translation>Escolle unha aplicación para abrir a captura</translation>
     </message>
 </context>
 <context>
@@ -19,33 +19,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation>Buka Dengan</translation>
+        <translation>Abrir con</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
         <source>Launch in terminal</source>
-        <translation>Luncurkan di terminal</translation>
+        <translation>Abrir no terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Keep open after selection</source>
-        <translation>Tetap buka setelah memilih</translation>
+        <translation>Manter aberto após a selección</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Error</source>
-        <translation>Galat</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Unable to launch in terminal.</source>
-        <translation>Tidak dapat meluncurkan pada terminal.</translation>
+        <translation>Non foi posíbel abrir no terminal.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>Non é posíbel escribir en</translation>
     </message>
 </context>
 <context>
@@ -53,12 +53,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="75"/>
         <source>Arrow</source>
-        <translation>Panah</translation>
+        <translation>Frecha</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar a Frecha como ferramenta de deseño</translation>
     </message>
 </context>
 <context>
@@ -77,52 +77,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Mode Cuplikan Layar&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Modo de captura&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="47"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Rexión rectangular</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation>Layar Penuh (Tampilan saat ini)</translation>
+        <translation>Pantalla enteira (Monitor actual)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>Layar Penuh (Semua Monitor)</translation>
+        <translation>Pantalla enteira (Todos os monitores)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>No Delay</source>
-        <translation>Tanpa Jeda</translation>
+        <translation>Sen atraso</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> second</source>
-        <translation> detik</translation>
+        <translation> segundo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> seconds</source>
-        <translation> detik</translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="76"/>
         <source>Take new screenshot</source>
-        <translation>Ambil tangkapan layar baru</translation>
+        <translation>Tirar unha nova captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="85"/>
         <source>Area:</source>
-        <translation>Area:</translation>
+        <translation>Área:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atraso:</translation>
     </message>
 </context>
 <context>
@@ -131,7 +131,7 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="95"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>Tidak dapat menangkap layar</translation>
+        <translation>Non foi posíbel capturar a pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
@@ -140,12 +140,16 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona unha área co rato, ou preme Esc para saír.
+Preme Enter para capturar a pantalla.
+Preme Click Dereito para mostrar o selector de cor.
+Usa a roda do rato para cambiar o grosor da ferramenta.
+Preme Espacio para abrir o panel lateral.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
         <source>Tool Settings</source>
-        <translation>Pengaturan Alat</translation>
+        <translation>Configuración das ferramentas</translation>
     </message>
 </context>
 <context>
@@ -153,12 +157,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
-        <translation>Penghitung Lingkaran</translation>
+        <translation>Contorno do círculo</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Tambahkan gelembung penghitung autoincrementing</translation>
+        <translation>Engade unha burbulla de contador autoincrementante</translation>
     </message>
 </context>
 <context>
@@ -166,12 +170,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="24"/>
         <source>Circle</source>
-        <translation>Lingkaran</translation>
+        <translation>Círculo</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Atur Lingkaran sebagai paint tool</translation>
+        <translation>Usa o círculo como ferramenta de deseño</translation>
     </message>
 </context>
 <context>
@@ -179,27 +183,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
-        <translation>Pengaturan</translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
-        <translation>Antarmuka</translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
-        <translation>Pengaturan Nama File</translation>
+        <translation>Editor do nome do arquivo</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation>Umum</translation>
+        <translation>Xeral</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation>Pintasan</translation>
+        <translation>Atallos</translation>
     </message>
 </context>
 <context>
@@ -207,22 +211,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
-        <translation>Versi baru %1 tersedia</translation>
+        <translation>Nova versión %1 está dispoñíbel</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="205"/>
         <source>You have the latest version</source>
-        <translation>Anda telah menggunakan versi terbaru</translation>
+        <translation>Tes a versión máis recente</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
         <source>Failed to get information about the latest version.</source>
-        <translation>Gagal mengambil informasi versi terbaru.</translation>
+        <translation>Non foi posíbel obter informacións sobre a versión máis recente.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Error</source>
-        <translation>Galat</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
@@ -232,27 +236,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="415"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;Buka Peluncur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="420"/>
         <source>&amp;Configuration</source>
-        <translation>&amp;Pengaturan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation>&amp;Ihwal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
         <source>Check for updates</source>
-        <translation>Periksa pembaruan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;Unggahan Terbaru</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -261,12 +265,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Hentikan Flameshot</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;Ambil Cuplikan Layar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -274,12 +278,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation>Salin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation>Salin seleksi terpilih ke papan klip</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -287,7 +291,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation>Tidak dapat terhubung melalui DBus</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -295,7 +299,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation>Keluar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
@@ -308,32 +312,32 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Ubah nama hasil tangkapan:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation>Sunting:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation>Pratinjau:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation>Simpan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation>Simpan pola</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation>Pulihkan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Reset</source>
@@ -342,17 +346,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation>Pulihkan pola yang tersimpan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation>Kosongkan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation>Hapus nama</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -428,7 +432,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="107"/>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Import</source>
-        <translation>Impor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="114"/>
@@ -436,23 +440,23 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="145"/>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Error</source>
-        <translation>Galat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="114"/>
         <source>Unable to read file.</source>
-        <translation>Tidak bisa membaca berkas.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="122"/>
         <location filename="../../src/config/generalconf.cpp" line="145"/>
         <source>Unable to write file.</source>
-        <translation>Tak bisa menulis berkas.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="132"/>
         <source>Save File</source>
-        <translation>Simpan File</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="154"/>
@@ -467,7 +471,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="190"/>
         <source>Show help message</source>
-        <translation>Tampilkan pesan bantuan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
@@ -509,101 +513,101 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
-        <translation>Konfigurasi Berkas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Export</source>
-        <translation>Ekspor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Reset</source>
-        <translation>Setel ulang</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="296"/>
         <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Automatic check for updates</source>
-        <translation>Pemeriksaan otomatis pembaruan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="309"/>
         <source>Launch at startup</source>
-        <translation>Luncurkan saat startup</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="312"/>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Launch Flameshot</source>
-        <translation>Luncurkan Flameshot</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="322"/>
         <source>Show welcome message on launch</source>
-        <translation>Tampilkan pesan selamat datang saat peluncuran</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>Copy URL after upload</source>
-        <translation>Salin URL setelah mengunggah</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL and close window after upload</source>
-        <translation>Salin URL dan tutup jendela setelah mengunggah</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image after copy</source>
-        <translation>Simpan gambar setelah menyalin</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="353"/>
         <source>Save image file after copying it</source>
-        <translation>Simpan file gambar setelah menyalinnya</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Save Path</source>
-        <translation>Simpan Jalur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="384"/>
         <source>Change...</source>
-        <translation>Ubah...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Gunakan lokasi tetap untuk menyimpan tangkapan layar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Ukuran Maksimal Unggahan Terbaru</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Gunakan format JPG untuk clipboard (PNG default)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="482"/>
         <location filename="../../src/config/generalconf.cpp" line="485"/>
         <source>Copy file path after save</source>
-        <translation>Salin lokasi file setelah menyimpan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="501"/>
         <source>Choose a Folder</source>
-        <translation>Pilih Folder</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Unable to write to directory.</source>
-        <translation>Tidak dapat menulis ke direktori.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -611,32 +615,32 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation>Upload Terbaru</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
-        <translation>Riwayat cuplikan layar kosong</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation>Salin URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL disalin ke papan klip.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
-        <translation>Buka di peramban</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
-        <translation>Konfirmasi hapus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
@@ -699,27 +703,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
-        <translation>Unggah ke Imgur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>Mengunggah Gambar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation>Salin URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation>Buka URL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation>Hapus gambar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
@@ -730,17 +734,17 @@ Press Space to open the side panel.</source>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
-        <translation>Tidak dapat membuka URL.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL disalin ke papan klip.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Cuplikan layar disalin ke papan klip.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -748,7 +752,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation>Pengunggah Gambar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
@@ -761,7 +765,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="24"/>
         <source>About</source>
-        <translation>Ihwal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -814,12 +818,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="46"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Lisensi&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="55"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Versi&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
@@ -835,12 +839,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="28"/>
         <source>Line</source>
-        <translation>Baris</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="38"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Atur garis sebagai alat gambar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -861,12 +865,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="23"/>
         <source>Move</source>
-        <translation>Geser</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Geser daerah terseleksi</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -874,12 +878,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="20"/>
         <source>Pencil</source>
-        <translation>Pensil</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Atur pensil sebagai alat gambar</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -887,12 +891,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
         <source>Pin Tool</source>
-        <translation>Alat Semat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Sematkan gambar ke desktop</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -926,43 +930,43 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
         <source>Capture saved to clipboard.</source>
-        <translation>Cuplikan layar tersimpan ke papan klip.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
         <source>Error while saving to clipboard</source>
-        <translation>Gagal saat menyimpan ke papan klip</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="166"/>
         <source>Save screenshot</source>
-        <translation>Simpan cuplikan layar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
         <source>Saving canceled</source>
-        <translation>Menyimpan dibatalkan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
         <source>Save canceled</source>
-        <translation>Simpan dibatalkan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation>Cuplikan layar tersimpan dan disalin ke papan klip sebagai </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="212"/>
         <source>Save Error</source>
-        <translation>Gagal menyimpan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Capture saved as </source>
-        <translation>Cuplikan layar disimpan sebagai </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
@@ -977,7 +981,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/main.cpp" line="467"/>
         <location filename="../../src/main.cpp" line="499"/>
         <source>Unable to connect via DBus</source>
-        <translation>Tidak daapt terhubung melalui DBus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="124"/>
@@ -992,7 +996,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="128"/>
         <source>Capture the entire desktop.</source>
-        <translation>Ambil cuplikan layar seluruh desktop.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="130"/>
@@ -1022,12 +1026,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="145"/>
         <source>Save the capture to the clipboard</source>
-        <translation>Simpan cuplikan layar ke papan klip</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="147"/>
         <source>Delay time in milliseconds</source>
-        <translation>Waktu jeda dalam milidetik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="150"/>
@@ -1098,7 +1102,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation>Waktu jeda tidak valid, harus lebih besar dari 0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -1113,12 +1117,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Nilai tidak valid, harus bernilai &apos;true&apos; atau &apos;false&apos;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation>Galat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
@@ -1129,12 +1133,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved to clipboard</source>
-        <translation>Cuplikan layar tersimpan ke papan klip</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL disalin ke papan klip.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="50"/>
@@ -1144,12 +1148,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Arguments</source>
-        <translation>Argumen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="323"/>
         <source>arguments</source>
-        <translation>argumen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
@@ -1179,47 +1183,47 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
         <source>Resize selection left 1px</source>
-        <translation>Ubah ukuran seleksi sebesar 1px ke kiri</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
         <source>Resize selection right 1px</source>
-        <translation>Ubah ukuran seleksi sebesar 1px ke kanan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
         <source>Resize selection up 1px</source>
-        <translation>Ubah ukuran seleksi sebesar 1px ke atas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
         <source>Resize selection down 1px</source>
-        <translation>Ubah ukuran seleksi sebesar 1px ke bawah</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation>Seleksi seluruh layar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
         <source>Move selection left 1px</source>
-        <translation>Geser seleksi sebesar 1px ke kiri</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
         <source>Move selection right 1px</source>
-        <translation>Geser seleksi sebesar 1px ke kanan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
         <source>Move selection up 1px</source>
-        <translation>Geser seleksi sebesar 1px ke atas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
         <source>Move selection down 1px</source>
-        <translation>Geser seleksi sebesar 1px ke bawah</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
@@ -1241,13 +1245,13 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
         <source>Screenshot history</source>
-        <translation>Riwayat cuplikan layar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="87"/>
         <source>Capture screen</source>
-        <translation>Ambil cuplikan layar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="94"/>
@@ -1559,12 +1563,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation>Tebalkan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
         <source>Italic</source>
-        <translation>Miringkan</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1572,12 +1576,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="60"/>
         <source>Text</source>
-        <translation>Teks</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="84"/>
         <source>Add text to your capture</source>
-        <translation>Tambahkan teks ke cuplikan layar anda</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1600,7 +1604,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
         <source>Main Color</source>
-        <translation>Warna Utama</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
@@ -1659,12 +1663,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
-        <translation>Tutup</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation>&lt;Kosong&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
