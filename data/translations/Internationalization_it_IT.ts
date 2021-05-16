@@ -254,7 +254,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;Ultimi Uploads</translation>
+        <translation>&amp;Ultimi caricamenti</translation>
     </message>
 </context>
 <context>
@@ -373,7 +373,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="132"/>
         <source>Save File</source>
-        <translation>Salva File</translation>
+        <translation>Salva il file</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="154"/>
@@ -383,7 +383,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="155"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Sei sicuro di voler ripristinare la configurazione?</translation>
+        <translation>Sei sicuro/a di voler ripristinare la configurazione?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="190"/>
@@ -1270,7 +1270,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation>Aumenta la Dimensione dello Strumento</translation>
+        <translation>Aumenta la dimensione dello strumento</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
