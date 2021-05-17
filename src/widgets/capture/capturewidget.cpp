@@ -1201,6 +1201,13 @@ void CaptureWidget::updateActiveLayer(const int& layer)
         m_activeTool->isChanged()) {
         commitCurrentTool();
     }
+
+    if (m_toolWidget) {
+        // Release active tool if it is in the editing mode but not changed and
+        // has editing widget (ex: text tool)
+        releaseActiveTool();
+    }
+
     if (m_existingObjectIsChanged) {
         m_existingObjectIsChanged = false;
         pushObjectsStateToUndoStack();
