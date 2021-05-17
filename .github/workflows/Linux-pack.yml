@@ -297,6 +297,12 @@ jobs:
               arch: x86_64
             }
           - {
+              name: fedora-34,
+              os: fedora,
+              symbol: 34,
+              arch: x86_64
+            }
+          - {
               name: opensuse-leap-15.2,
               os: opensuse-leap,
               symbol: 15.2,
