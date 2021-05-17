@@ -1614,6 +1614,13 @@ void CaptureWidget::setCaptureToolObjects(
 
 void CaptureWidget::undo()
 {
+    if (m_activeTool &&
+        (m_activeTool->isChanged() || m_activeTool->editMode())) {
+        // Remove selection on undo, at the same time commit current tool will
+        // be called
+        m_panel->setActiveLayer(-1);
+    }
+
     m_undoStack.undo();
     drawToolsData();
 }
