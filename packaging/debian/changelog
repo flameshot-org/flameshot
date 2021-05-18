@@ -1,5 +1,5 @@
-flameshot (0.9.0-1) unstable; urgency=medium
+flameshot (0.10.0-1) unstable; urgency=medium
 
   * New stable release.
 
- -- Jeremy Borgman <borgman.jeremy@pm.me>  Sat, 27 Feb 2021 18:24:29 -0600
+ -- Jeremy Borgman <borgman.jeremy@pm.me>  Sun, 16 May 2021 18:24:29 -0600
