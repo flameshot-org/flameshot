@@ -524,8 +524,9 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
     int activeLayerIndex = m_panel->activeLayerIndex();
     if (activeLayerIndex != -1) {
         // Start object editing
-        m_activeTool = m_captureToolObjects.at(activeLayerIndex);
-        if (m_activeTool && m_activeTool->nameID() == ToolType::TEXT) {
+        auto activeTool = m_captureToolObjects.at(activeLayerIndex);
+        if (activeTool && activeTool->nameID() == ToolType::TEXT) {
+            m_activeTool = activeTool;
             m_mouseIsClicked = false;
             m_context.mousePos = *m_activeTool->pos();
             m_captureToolObjectsBackup = m_captureToolObjects;
@@ -1199,6 +1200,13 @@ void CaptureWidget::updateActiveLayer(const int& layer)
         m_activeTool->isChanged()) {
         commitCurrentTool();
     }
+
+    if (m_toolWidget) {
+        // Release active tool if it is in the editing mode but not changed and
+        // has editing widget (ex: text tool)
+        releaseActiveTool();
+    }
+
     if (m_existingObjectIsChanged) {
         m_existingObjectIsChanged = false;
         pushObjectsStateToUndoStack();
@@ -1606,6 +1614,13 @@ void CaptureWidget::setCaptureToolObjects(
 
 void CaptureWidget::undo()
 {
+    if (m_activeTool &&
+        (m_activeTool->isChanged() || m_activeTool->editMode())) {
+        // Remove selection on undo, at the same time commit current tool will
+        // be called
+        m_panel->setActiveLayer(-1);
+    }
+
     m_undoStack.undo();
     drawToolsData();
 }
