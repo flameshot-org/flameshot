@@ -309,15 +309,14 @@ void CaptureWidget::releaseActiveTool()
 {
     if (m_activeTool) {
         if (m_activeTool->editMode()) {
+            // Object shouldn't be deleted here because it is in the undo/redo
+            // stack, just set current pointer to null
             m_activeTool->setEditMode(false);
             if (m_activeTool->isChanged()) {
                 pushObjectsStateToUndoStack();
             }
-        }
-        if (-1 == m_panel->activeLayerIndex() && m_activeButton) {
-            // delete tool if no active selection, otherwise object shouldn't be
-            // deleted, because it is in undo/redo stack
-            m_activeTool->deleteLater();
+        } else {
+            delete m_activeTool;
         }
         m_activeTool = nullptr;
     }
