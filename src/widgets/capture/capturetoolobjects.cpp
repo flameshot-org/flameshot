@@ -85,6 +85,7 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
         useCache = false;
     }
     for (; index >= 0; --index) {
+        int currentRadius = radius;
         QImage image;
         auto toolItem = m_captureToolObjects.at(index);
         if (useCache) {
@@ -93,26 +94,28 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
             // create transparent image in memory and draw toolItem on it
             toolItem->drawSearchArea(painter, pixmap);
 
-            // get color at mouse clicked position in area +/- radius
+            // get color at mouse clicked position in area +/- currentRadius
             image = pixmap.toImage();
             m_imageCache.insert(0, image);
         }
 
         if (toolItem->nameID() == ToolType::TEXT) {
-            if (radius > SEARCH_RADIUS_NEAR) {
-                // Text already has a big radius and no need to search with a
-                // bit bigger radius than SEARCH_RADIUS_TEXT_HANDICAP +
-                // SEARCH_RADIUS_NEAR
+            if (currentRadius > SEARCH_RADIUS_NEAR) {
+                // Text already has a big currentRadius and no need to search
+                // with a bit bigger currentRadius than
+                // SEARCH_RADIUS_TEXT_HANDICAP + SEARCH_RADIUS_NEAR
                 continue;
             }
 
-            // Text has spaces inside to need to take a bigger radius for
+            // Text has spaces inside to need to take a bigger currentRadius for
             // text objects search
-            radius += SEARCH_RADIUS_TEXT_HANDICAP;
+            currentRadius += SEARCH_RADIUS_TEXT_HANDICAP;
         }
 
-        for (int x = pos.x() - radius; x <= pos.x() + radius; ++x) {
-            for (int y = pos.y() - radius; y <= pos.y() + radius; ++y) {
+        for (int x = pos.x() - currentRadius; x <= pos.x() + currentRadius;
+             ++x) {
+            for (int y = pos.y() - currentRadius; y <= pos.y() + currentRadius;
+                 ++y) {
                 QRgb rgb = image.pixel(x, y);
                 if (rgb != 0) {
                     // object was found, return it index (layer index)
