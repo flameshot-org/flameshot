@@ -5,7 +5,7 @@
 
 #define SEARCH_RADIUS_NEAR 3
 #define SEARCH_RADIUS_FAR 5
-#define SEARCH_RADIUS_TEXT_HANDICAP 3
+#define SEARCH_RADIUS_TEXT_HANDICAP 5
 
 CaptureToolObjects::CaptureToolObjects(QObject* parent)
   : QObject(parent)
@@ -99,6 +99,13 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
         }
 
         if (toolItem->nameID() == ToolType::TEXT) {
+            if (radius > SEARCH_RADIUS_NEAR) {
+                // Text already has a big radius and no need to search with a
+                // bit bigger radius than SEARCH_RADIUS_TEXT_HANDICAP +
+                // SEARCH_RADIUS_NEAR
+                continue;
+            }
+
             // Text has spaces inside to need to take a bigger radius for
             // text objects search
             radius += SEARCH_RADIUS_TEXT_HANDICAP;
