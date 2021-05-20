@@ -1071,7 +1071,8 @@ void CaptureWidget::loadDrawThickness()
 
 void CaptureWidget::processTool(CaptureTool* t)
 {
-    t->pressed(m_context);
+    m_activeTool = t;
+    m_activeTool->pressed(m_context);
 }
 
 void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
