@@ -1069,8 +1069,11 @@ void CaptureWidget::loadDrawThickness()
 
 void CaptureWidget::processTool(CaptureTool* t)
 {
+    auto backup = m_activeTool;
+    // The tool is active during the pressed().
     m_activeTool = t;
-    m_activeTool->pressed(m_context);
+    t->pressed(m_context);
+    m_activeTool = backup;
 }
 
 void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
