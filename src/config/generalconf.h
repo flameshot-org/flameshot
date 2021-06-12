@@ -12,6 +12,7 @@ class QPushButton;
 class QLabel;
 class QLineEdit;
 class QSpinBox;
+class QComboBox;
 
 class GeneralConf : public QWidget
 {
@@ -39,6 +40,7 @@ private slots:
     void resetConfiguration();
     void togglePathFixed();
     void useJpgForClipboardChanged(bool checked);
+    void windowModeChanged();
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -59,6 +61,7 @@ private:
     void initSaveAfterCopy();
     void initCopyPathAfterSave();
     void initUseJpgForClipboard();
+    void initWindowMode();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -84,6 +87,7 @@ private:
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
     QCheckBox* m_useJpgForClipboard;
+    QComboBox* m_windowMode;
     QSpinBox* m_uploadHistoryMax;
     QSpinBox* m_undoLimit;
 };

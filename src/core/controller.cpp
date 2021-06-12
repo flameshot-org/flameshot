@@ -285,7 +285,7 @@ void Controller::startVisualCapture(const uint id,
             return;
         }
 
-        m_captureWindow = new CaptureWidget(id, forcedSavePath);
+        m_captureWindow = new CaptureWidget(id, forcedSavePath, ConfigHandler().windowMode());
         // m_captureWindow = new CaptureWidget(id, forcedSavePath, false); //
         // debug
         connect(m_captureWindow,
@@ -297,17 +297,8 @@ void Controller::startVisualCapture(const uint id,
                 this,
                 &Controller::captureTaken);
 
-#ifdef Q_OS_WIN
-        m_captureWindow->show();
-#elif defined(Q_OS_MACOS)
-        // In "Emulate fullscreen mode"
-        m_captureWindow->showFullScreen();
-        m_captureWindow->activateWindow();
-        m_captureWindow->raise();
-#else
-        m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
-#endif
+        m_captureWindow->OpenAndShow();
+
         if (!m_appLatestUrl.isEmpty() &&
             ConfigHandler().ignoreUpdateToVersion().compare(
               m_appLatestVersion) < 0) {

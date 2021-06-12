@@ -55,6 +55,9 @@ int CaptureToolObjects::find(const QPoint& pos, const QSize& captureSize)
     if (m_captureToolObjects.empty()) {
         return -1;
     }
+    if (!QRect(QPoint(0, 0), captureSize).contains(pos)) {
+        return -1;
+    }
     QPixmap pixmap(captureSize);
     pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);

@@ -16,6 +16,7 @@
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QVector>
+#include <QMetaEnum>
 #include <algorithm>
 #if defined(Q_OS_MACOS)
 #include <QProcess>
@@ -310,6 +311,27 @@ void ConfigHandler::setAllTheButtons()
     QList<CaptureTool::Type> buttons =
       CaptureToolButton::getIterableButtonTypes();
     setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
+}
+
+CaptureConfig::CaptureWindowMode ConfigHandler::windowMode()
+{
+    auto modeEnum = QMetaEnum::fromType<CaptureConfig::CaptureWindowMode>();
+    auto modeString = m_settings.value("windowMode", "").toString().toUtf8();
+    bool ok = false;
+    CaptureConfig::CaptureWindowMode result = static_cast<CaptureConfig::CaptureWindowMode>(modeEnum.keyToValue(modeString.constData(), &ok));
+    if (ok) {
+        return result;
+    }
+#if defined(Q_OS_MACOS)
+    return CaptureConfig::CaptureWindowMode::FullScreenCurrent;
+#endif
+    return CaptureConfig::CaptureWindowMode::FullScreenAll;
+}
+
+void ConfigHandler::setWindowMode(CaptureConfig::CaptureWindowMode mode)
+{
+    auto modeEnum = QMetaEnum::fromType<CaptureConfig::CaptureWindowMode>();
+    m_settings.setValue("windowMode", modeEnum.valueToKey(static_cast<int>(mode)));
 }
 
 // DEFAULTS

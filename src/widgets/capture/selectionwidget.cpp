@@ -121,9 +121,10 @@ void SelectionWidget::setIdleCentralCursor(const QCursor& cursor)
 
 void SelectionWidget::setGeometryAnimated(const QRect& r)
 {
+    m_captureGeometry = r;
     if (isVisible()) {
         m_animation->setStartValue(geometry());
-        m_animation->setEndValue(r);
+        m_animation->setEndValue(captureToWidgetRect(r));
         m_animation->start();
     }
 }
@@ -272,6 +273,28 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
         m_activeSide = getProperSide(m_activeSide, geom);
     }
     m_dragStartPos = pos;
+}
+
+QRect SelectionWidget::captureGeomtry()
+{
+    return m_captureGeometry;
+}
+
+void SelectionWidget::setCaptureGeometry(QRect rect)
+{
+    m_captureGeometry = rect;
+    setGeometry(captureToWidgetRect(rect));
+    emit resized();
+}
+
+void SelectionWidget::SetScale(float v)
+{
+    transform = QTransform::fromScale(v, v);
+}
+
+QRect SelectionWidget::captureToWidgetRect(QRect rect)
+{
+    return transform.mapRect(rect);
 }
 
 void SelectionWidget::paintEvent(QPaintEvent*)

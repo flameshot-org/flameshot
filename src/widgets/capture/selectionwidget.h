@@ -40,6 +40,11 @@ public:
 
     QRect rect() const;
 
+    QRect captureGeomtry();
+    void setCaptureGeometry(QRect rect);
+    void SetScale(float v);
+    QRect captureToWidgetRect(QRect rect);
+
 protected:
     bool eventFilter(QObject*, QEvent*) override;
     void parentMousePressEvent(QMouseEvent* e);
@@ -84,6 +89,9 @@ private:
     QCursor m_idleCentralCursor;
     bool m_ignoreMouse;
     bool m_mouseStartMove;
+
+    QRect m_captureGeometry;
+    QTransform transform;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

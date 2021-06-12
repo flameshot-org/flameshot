@@ -4,6 +4,7 @@
 #pragma once
 
 #include "src/widgets/capture/capturetoolbutton.h"
+#include "src/widgets/capture/captureconfig.h"
 #include <QSettings>
 #include <QStringList>
 #include <QVariant>
@@ -101,6 +102,8 @@ public:
     QString saveAsFileExtension();
     CONFIG_SETTER(setSaveAsFileExtension, setSaveAsFileExtension, QString)
     void setAllTheButtons();
+    CaptureConfig::CaptureWindowMode windowMode();
+    void setWindowMode(CaptureConfig::CaptureWindowMode);
 
     // DEFAULTS
     QString filenamePatternDefault();
