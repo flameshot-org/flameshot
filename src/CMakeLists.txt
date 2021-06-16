@@ -316,7 +316,7 @@ if (WIN32)
         install(DIRECTORY ${CMAKE_BINARY_DIR}/windeployqt_stuff/ DESTINATION bin)
 
 
-        STRING(REGEX REPLACE "\\\\" "/" OPENSSL_ROOT_DIR $ENV{OPENSSL_ROOT_DIR} )
+        STRING(REGEX REPLACE "\\\\" "/" OPENSSL_ROOT_DIR "$ENV{OPENSSL_ROOT_DIR}" )
  
         if (ENABLE_OPENSSL)
             if (EXISTS ${OPENSSL_ROOT_DIR}/bin)
