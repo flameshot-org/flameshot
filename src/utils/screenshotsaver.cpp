@@ -174,8 +174,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
           nullptr,
           QObject::tr("Save screenshot"),
           FileNameHandler().absoluteSavePath(),
-          QString(pngFilter + separator + bmpFilter + separator + jpgFilter +
-                  separator + defaultFilter));
+          QString(pngFilter + separator + bmpFilter + separator + webpFilter +
+                  separator + jpgFilter + separator + defaultFilter));
     }
     if (savePath == "") {
         QString msg = QObject::tr("Saving canceled");
@@ -186,6 +186,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         return ok;
     } else if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
                !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
+               !savePath.endsWith(QLatin1String(".webp"),
+                                  Qt::CaseInsensitive) &&
                !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
         savePath += QLatin1String(".png");
     }

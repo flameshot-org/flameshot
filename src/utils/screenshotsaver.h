@@ -30,6 +30,7 @@ private:
 
     const QString pngFilter = "Portable Network Graphic file (PNG) (*.png)";
     const QString bmpFilter = "BMP file (*.bmp)";
+    const QString webpFilter = "WebP file (*.webp)";
     const QString jpgFilter = "JPEG file (*.jpg)";
     const QString defaultFilter = "By extension [default: *.png] (*.png)";
     const QString separator = ";;";
