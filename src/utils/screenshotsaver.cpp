@@ -14,6 +14,8 @@
 #include <QImageWriter>
 #include <QMessageBox>
 #include <QMimeData>
+#include <qimagewriter.h>
+#include <qmimedatabase.h>
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
 #endif
@@ -110,47 +112,31 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 
 QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
                                             const QString& title,
-                                            const QString& directory,
-                                            const QString& filter)
+                                            const QString& directory)
 {
-#if defined(Q_WS_WIN) || defined(Q_WS_MAC)
-    return QFileDialog::getSaveFileName(parent, title, directory, filter);
-#else
-    QFileDialog dialog(parent, title, directory, filter);
+    QFileDialog dialog(parent, title, directory);
     if (parent) {
         dialog.setWindowModality(Qt::WindowModal);
     }
 
     dialog.setAcceptMode(QFileDialog::AcceptSave);
-    dialog.selectNameFilter(ConfigHandler().getSaveAsFileExtension());
+
+    // Build string list of supported image formats
+    QStringList mimeTypeList;
+    foreach (auto mimeType, QImageWriter::supportedMimeTypes())
+        mimeTypeList.append(mimeType);
+    dialog.setMimeTypeFilters(mimeTypeList);
+
+    QString suffix = ConfigHandler().getSaveAsFileExtension();
+    QString defaultMimeType =
+      QMimeDatabase().mimeTypeForFile("image" + suffix).name();
+    dialog.selectMimeTypeFilter(defaultMimeType);
+
     if (dialog.exec() == QDialog::Accepted) {
-
-        ConfigHandler().setSaveAsFileExtension(dialog.selectedNameFilter());
-        QString file_name = dialog.selectedFiles().first();
-        QFileInfo info(file_name);
-
-        if ((dialog.selectedNameFilter() == defaultFilter)) {
-            if (info.suffix().isEmpty()) { // change to png if no suffix given,
-                                           // otherwise leave it as it is
-                file_name = info.filePath() + QLatin1String(".") + "png";
-                ;
-            }
-        } else if (!dialog.selectedNameFilter()
-                      .isEmpty()) { // if selected suffix from menu is not an
-                                    // empty entry
-            QString selectedExtension =
-              dialog.selectedNameFilter().section('.', -1);
-            selectedExtension.remove(QChar(')'));
-            file_name =
-              info.path() + QLatin1String("/") + info.baseName() +
-              QLatin1String(".") +
-              selectedExtension; // recreate full filename with chosen suffix
-        }
-        return file_name;
+        return dialog.selectedFiles().first();
     } else {
         return QString();
     }
-#endif // Q_WS_MAC || Q_WS_WIN
 }
 
 bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
@@ -170,24 +156,15 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        savePath = ShowSaveFileDialog(
-          nullptr,
-          QObject::tr("Save screenshot"),
-          FileNameHandler().absoluteSavePath(),
-          QString(pngFilter + separator + bmpFilter + separator + jpgFilter +
-                  separator + defaultFilter));
+        // auto imageFormats = QImageWriter::supportedImageFormats();
+        savePath =
+          ShowSaveFileDialog(nullptr,
+                             QObject::tr("Save screenshot"),
+                             FileNameHandler().absoluteSavePath() +
+                               ConfigHandler().getSaveAsFileExtension());
     }
     if (savePath == "") {
-        QString msg = QObject::tr("Saving canceled");
-        QMessageBox saveInfoBox(
-          QMessageBox::Information, QObject::tr("Save canceled"), msg);
-        saveInfoBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
-        saveInfoBox.exec();
         return ok;
-    } else if (!savePath.endsWith(QLatin1String(".png"), Qt::CaseInsensitive) &&
-               !savePath.endsWith(QLatin1String(".bmp"), Qt::CaseInsensitive) &&
-               !savePath.endsWith(QLatin1String(".jpg"), Qt::CaseInsensitive)) {
-        savePath += QLatin1String(".png");
     }
 
     ok = capture.save(savePath);
