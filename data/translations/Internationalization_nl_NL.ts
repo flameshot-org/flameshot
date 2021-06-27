@@ -11,7 +11,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Kies een app om de schermafdruk mee te openen</translation>
+        <translation>Kies een programma om de schermfoto mee te openen</translation>
     </message>
 </context>
 <context>
@@ -235,7 +235,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
-        <translation>Schermafdruk &amp;maken</translation>
+        <translation>Schermfo&amp;to maken</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="415"/>
@@ -311,7 +311,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Bewerk de naam van je schermafdrukken:</translation>
+        <translation>Bewerk de naam van je schermfoto&apos;s:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -336,7 +336,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -588,7 +588,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. grootte van recentste uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
@@ -711,7 +711,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>Bezig met uploaden van afbeelding...</translation>
+        <translation>Bezig met uploaden van afbeelding…</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
@@ -747,7 +747,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>Schermafdruk gekopieerd naar klembord.</translation>
+        <translation>De schermfoto is gekopieerd naar het klembord.</translation>
     </message>
 </context>
 <context>
@@ -943,7 +943,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Capture saved as </source>
-        <translation>Schermafdruk opgeslagen als </translation>
+        <translation>De schermfoto is opgeslagen als </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
@@ -954,7 +954,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved to clipboard</source>
-        <translation>Schermafdruk vastgelegd op klembord</translation>
+        <translation>De schermfoto is vastgelegd op het klembord</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
@@ -975,12 +975,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Het opslaan is afgebroken</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Het opslaan is afgebroken</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
@@ -1084,7 +1084,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Afmetingen van de selectie tonen in B H X Y. Niet van toepassing als &apos;onbewerkt&apos; is opgegeven.</translation>
+        <translation>Afmetingen van de selectie tonen in B H X Y. Niet van toepassing als ‘onbewerkt’ is opgegeven.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1247,7 +1247,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
         <source>Delete current tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidig gereedschap verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
@@ -1314,7 +1314,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="39"/>
         <source>Save the capture</source>
-        <translation>Schermafdruk opslaan</translation>
+        <translation>Schermfoto opslaan</translation>
     </message>
 </context>
 <context>
@@ -1353,7 +1353,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk op Esc om af te breken of ⌘+Backspace om deze sneltoets uit te schakelen.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
@@ -1412,12 +1412,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschapsomvang verlagen</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaag de omvang van andere gereedschappen</translation>
     </message>
 </context>
 <context>
@@ -1425,12 +1425,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschapsomvang verhogen</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Verhoog de omvang van andere gereedschappen</translation>
     </message>
 </context>
 <context>
@@ -1595,7 +1595,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="84"/>
         <source>Add text to your capture</source>
-        <translation>Voeg tekst toe aan je schermafdruk</translation>
+        <translation>Voeg tekst toe aan je schermfoto</translation>
     </message>
 </context>
 <context>
@@ -1682,7 +1682,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Leeg&gt;</translation>
     </message>
 </context>
 <context>
