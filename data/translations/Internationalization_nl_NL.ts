@@ -711,7 +711,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation>Bezig met uploaden van afbeelding…</translation>
+        <translation>Uploaden van afbeelding</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
@@ -755,7 +755,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation>Afbeeldingsuploader</translation>
+        <translation>Afbeelding uploader</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
@@ -829,12 +829,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="46"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Лиценца&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;Overeenkomst&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="55"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Верзија&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;Versie&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
@@ -1079,12 +1079,12 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/main.cpp" line="171"/>
         <source>Print raw PNG capture</source>
-        <translation>Onbewerkte png-schermfoto tonen</translation>
+        <translation>Onbewerkte PNG schermfoto tonen</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation>Afmetingen van de selectie tonen in B H X Y. Niet van toepassing als ‘onbewerkt’ is opgegeven.</translation>
+        <translation>Print de geometrie van de selectie in het formaat W H X Y. Doet niets als raw is opgegeven</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1161,12 +1161,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Arguments</source>
-        <translation>Aanvullende opties</translation>
+        <translation>Argumenten</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="323"/>
         <source>arguments</source>
-        <translation>aanvullende opties</translation>
+        <translation>argumenten</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
@@ -1438,7 +1438,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation>Grootteindicatie van selectie</translation>
+        <translation>Grootte indicatie van selectie</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
@@ -1559,7 +1559,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="30"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot-informatie</translation>
+        <translation>Flameshot informatie</translation>
     </message>
 </context>
 <context>
@@ -1623,7 +1623,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Klik op deze knop om de hoofdkleur te bwerken.</translation>
+        <translation>Klik op deze knop om de hoofdkleur te bewerken.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
@@ -1641,7 +1641,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="23"/>
         <source>Undo</source>
-        <translation>Ongedaan mken</translation>
+        <translation>Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../../src/tools/undo/undotool.cpp" line="33"/>
