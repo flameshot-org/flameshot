@@ -1273,12 +1273,12 @@ Press Space to open the side panel.</source>
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Недійсний колір, цей прапорець підтримує такі формати:
-- #RGB (кожен з R, G і B — це одна шістнадцяткова цифра)
+- #RGB (кожне з R, G і B — це одна шістнадцяткова цифра)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
 - Такі кольори, як «синій» або «червоний»
-Можливо, вам доведеться уникнути знаку «#», як у «\ #FFF»</translation>
+Можливо, вам доведеться екранувати знак «#» отак «\ #FFF»</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
@@ -1288,17 +1288,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Недійсний номер екрана, він повинен бути додатним</translation>
+        <translation>Недійсний номер екрана, він має бути додатним</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation>Недійсний шлях, він повинен бути реальним шляхом у системі</translation>
+        <translation>Недійсний шлях, він має бути наявним шляхом у системі</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Недійсне значення, воно має бути визначене як «true» або «false»</translation>
+        <translation>Недійсне значення, воно має визначатися як «true» або «false»</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
