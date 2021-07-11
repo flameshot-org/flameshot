@@ -6,12 +6,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>משגר יישום</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>בחירת יישום לפתיחת הלכידה</translation>
     </message>
 </context>
 <context>
@@ -19,33 +19,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation type="unfinished"></translation>
+        <translation>פתיחה באמצעות</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>שיגור במסוף</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished"></translation>
+        <translation>להשאיר פתוח לאחר בחירה</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Unable to launch in terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לשגר במסוף.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לכתוב ב־</translation>
     </message>
 </context>
 <context>
@@ -53,12 +53,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="75"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>חץ</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת החץ ככלי לצבע</translation>
     </message>
 </context>
 <context>
@@ -77,52 +77,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;מצב לכידה&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="47"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>אזור מרובע</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>מסך מלא (מצג נוכחי)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>מסך מלא (כל הצגים)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>ללא השהייה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> שניה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> שניות</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="76"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידת מסך חדשה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="85"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>אזור:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>אזור:</translation>
     </message>
 </context>
 <context>
@@ -131,7 +131,7 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="95"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן ללכוד מסך</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
@@ -140,12 +140,16 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחירת אזור באמצעות העכבר, או הקשה על &apos;Esc&apos; כדי לצאת.
+הקשה על &apos;Enter&apos; כדי ללכוד את המסך.
+לחצה באמצעות לחצן העכבר הימני כדי להציג את דוגם הצבע.
+נא להשתמש בגלגל העכבר כדי לשנות את עובי כלי הציור.
+הקשה על &apos;Space&apos; לפתיחת חלונית הצד.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרות כלי</translation>
     </message>
 </context>
 <context>
@@ -153,12 +157,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>מונה עיגולים</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>הוספת בועת־מניה אוטומטית</translation>
     </message>
 </context>
 <context>
@@ -166,12 +170,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="24"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>עיגול</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
         <source>Set the Circle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת העיגול ככלי לצביעה</translation>
     </message>
 </context>
 <context>
@@ -179,27 +183,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="28"/>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>תצור</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="49"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>מנשק</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="55"/>
         <source>Filename Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>עורך שם קובץ</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>כללי</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>קיצורי־דרך</translation>
     </message>
 </context>
 <context>
@@ -207,22 +211,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>זמינה גרסה חדשה %1</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="205"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation>הגרסה העדכנית ביותר כבר מותקנת</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="213"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>קבלת מידע אודות הגרסה העדכנית ביותר, כשלה.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
@@ -232,27 +236,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="415"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;פתיחת משגר</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="420"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;תצור</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;אודות</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>בדיקת זמינות עדכונים</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;עדכונים אחרונים</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -261,12 +265,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;יציאה</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;לכידת מסך</translation>
     </message>
 </context>
 <context>
@@ -274,12 +278,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקה</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת הבחירה ללוח־הגזירים</translation>
     </message>
 </context>
 <context>
@@ -287,7 +291,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן להתחבר דרך DBus</translation>
     </message>
 </context>
 <context>
@@ -295,12 +299,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>יציאה</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>עזיבת מסך הלכידה</translation>
     </message>
 </context>
 <context>
@@ -308,32 +312,32 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished"></translation>
+        <translation>עריכת שם הלכידות:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation type="unfinished"></translation>
+        <translation>עריכה:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת הדפוס</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>שחזור</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -342,17 +346,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>שחזור דפוס שמור</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>ניקוי</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation type="unfinished"></translation>
+        <translation>מחיקת השם</translation>
     </message>
 </context>
 <context>
@@ -428,7 +432,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="107"/>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>ייבוא</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="114"/>
@@ -436,48 +440,48 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="145"/>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="114"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לקרוא קובץ.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="122"/>
         <location filename="../../src/config/generalconf.cpp" line="145"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לכתוב קובץ.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="132"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת קובץ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>אישור איפוס</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="155"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished"></translation>
+        <translation>האם לאפס את התצורה?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="190"/>
         <source>Show help message</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת הודעת עזרה זו</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת הודעת העזרה באתחול, במצב לכידה.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת לחצן חלונית־הצד</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="207"/>
@@ -488,122 +492,122 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="217"/>
         <location filename="../../src/config/generalconf.cpp" line="221"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת התראות שולחן־עבודה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="233"/>
         <source>Show tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת סמל מגש</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="236"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת סמל מגש־מערכת</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="249"/>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>נדרש אישור למחיקת צילום מסך, מההעלאות האחרונות</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
-        <translation type="unfinished"></translation>
+        <translation>קובץ תצורה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>ייצוא</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>איפוס</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="296"/>
         <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>בדיקת עדכונים אוטומטית</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="309"/>
         <source>Launch at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>שיגור באתחול</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="312"/>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>שיגור Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="322"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת הודעת ברכה בעת השיגור</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת מען URL לאחר ההעלאה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת מען URL וסגירת חלון לאחר ההעלאה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image after copy</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת תמונה לאחר העתקה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="353"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת קובץ תמונה לאחר העתקתו</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת נתיב</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="384"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>שינוי...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>שימוש בנתיב קבוע לשמירת צילומי מסך</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>גודל מרבי של העלאות אחרונות</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>שימוש בתבנית JPG עבור לוח־הגזירים (ברירת המחדל היא PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="482"/>
         <location filename="../../src/config/generalconf.cpp" line="485"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת נתיב קובץ לאחר השמירה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="501"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>בחירת תיקייה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לכתוב למחיצה.</translation>
     </message>
 </context>
 <context>
@@ -611,37 +615,37 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>עדכונים אחרונים</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>היסטוריית צילומי מסך ריקה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת מען URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>מען URL הועתק ללוח הגזירים.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>פתיחה בדפדפן</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>אישור מחיקה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>האם למחוק צילום מסך מההעלאות האחרונות ומהשרת?</translation>
     </message>
 </context>
 <context>
@@ -699,38 +703,38 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
-        <translation type="unfinished"></translation>
+        <translation>העלאה ל־Imgur</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation type="unfinished"></translation>
+        <translation>העלאת תמונה</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>העתקת מען URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation type="unfinished"></translation>
+        <translation>פתיחת מען URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>מחיקת תמונה</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>תמונה ללוח־גזירים.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לפתוח את מען ה־URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
@@ -761,7 +765,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="24"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>אודות</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -835,7 +839,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="28"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>קו</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="38"/>
@@ -861,7 +865,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="23"/>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>העברה</translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
@@ -874,7 +878,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="20"/>
         <source>Pencil</source>
-        <translation type="unfinished"></translation>
+        <translation>עפרון</translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
@@ -887,7 +891,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>
         <source>Pin Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>נעיצת כלי</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
@@ -936,17 +940,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="166"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת לכידה</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה בוטלה</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה בוטלה</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
@@ -956,13 +960,13 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="212"/>
         <source>Save Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאת שמירה</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Capture saved as </source>
-        <translation type="unfinished"></translation>
+        <translation>לכידה נשמרה כ־ </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
@@ -1007,7 +1011,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="135"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>תצור</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
@@ -1082,7 +1086,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Screen number</source>
-        <translation type="unfinished"></translation>
+        <translation>מספר צג</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
@@ -1118,7 +1122,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
@@ -1129,7 +1133,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידה נשמרה ללוח־הגזירים</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
@@ -1139,27 +1143,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="50"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>משתנים</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="323"/>
         <source>arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>משתנים</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation>שימוש</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation>אפשרויות</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
@@ -1291,12 +1295,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="29"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירה</translation>
     </message>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="39"/>
         <source>Save the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>שמירת הלכידה</translation>
     </message>
 </context>
 <context>
@@ -1363,7 +1367,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>מקש</translation>
     </message>
 </context>
 <context>
@@ -1549,7 +1553,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
         <source>StrikeOut</source>
-        <translation type="unfinished"></translation>
+        <translation>קו־חוצה</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
