@@ -231,7 +231,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן לסגור ווידג&apos;טים מודאליים</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="415"/>
@@ -486,7 +486,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="207"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת לחצן ברר לוחית־צד במצב הלכידה.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="217"/>
@@ -739,12 +739,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>מען URL הועתק ללוח הגזירים.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>צילום מסך הועתק ללוח.</translation>
     </message>
 </context>
 <context>
@@ -752,12 +752,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
         <source>Image Uploader</source>
-        <translation type="unfinished"></translation>
+        <translation>מעלה תמונות</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
-        <translation type="unfinished"></translation>
+        <translation>העלאת הבחירה ל־Imgur</translation>
     </message>
 </context>
 <context>
@@ -818,12 +818,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="46"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;u&gt; &lt;b&gt;רישיון&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="55"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;u&gt; &lt;b&gt;גרסה&lt;/b&gt; &lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
@@ -844,7 +844,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="38"/>
         <source>Set the Line as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת &apos;קו&apos; ככלי הצביעה</translation>
     </message>
 </context>
 <context>
@@ -852,12 +852,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="27"/>
         <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <translation>מדגש</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
         <source>Set the Marker as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת &apos;מדגש&apos; ככלי הצביע</translation>
     </message>
 </context>
 <context>
@@ -870,7 +870,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation type="unfinished"></translation>
+        <translation>העברת אזור הבחירה</translation>
     </message>
 </context>
 <context>
@@ -883,7 +883,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת &apos;עיפרון&apos; ככלי הצביע</translation>
     </message>
 </context>
 <context>
@@ -896,7 +896,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>נעיצת תמונה על שולחן־העבודה</translation>
     </message>
 </context>
 <context>
@@ -904,12 +904,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="23"/>
         <source>Pixelate</source>
-        <translation type="unfinished"></translation>
+        <translation>פיקסול</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="33"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת &apos;פיקסול&apos; ככלי הצביע</translation>
     </message>
 </context>
 <context>
@@ -917,12 +917,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>רישום %1 כשל. שגיאה: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>ביטול רישום %1 כשל. שגיאה: %2</translation>
     </message>
 </context>
 <context>
@@ -930,12 +930,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידה נשמרה בלוח־הגזירים.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה בעת שמירה בלוח־הגזירים</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="166"/>
@@ -955,7 +955,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>הלכידה נשמרת והועתקה ללוח־הגזירים כ־ </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="212"/>
@@ -972,7 +972,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="210"/>
         <source>Error trying to save as </source>
-        <translation type="unfinished"></translation>
+        <translation>שגיאה בניסיון שמירה כ־ </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="102"/>
@@ -981,12 +981,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/main.cpp" line="467"/>
         <location filename="../../src/main.cpp" line="499"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן להתחבר דרך DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="124"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>בתכנת לכידת־מסך רבת עצמה אך פשוטה לשימוש.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="125"/>
@@ -996,7 +996,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="128"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידת שולחן־העבודה כולו.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="130"/>
@@ -1016,7 +1016,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>לכידת מסך יחיד.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
