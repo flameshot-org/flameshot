@@ -256,7 +256,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
         <source>Check for updates</source>
-        <translation>Auf Updates überprüfen</translation>
+        <translation>Auf Aktualisierungen überprüfen</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>

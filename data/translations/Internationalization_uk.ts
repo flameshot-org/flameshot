@@ -140,7 +140,7 @@ Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation>Виберіть область мишкою або натисніть Esc для виходу.
-Натисніть Enter щоб захопити екран.
+Натисніть Enter, щоб захопити екран.
 Натисніть праву кнопку миші, щоб показати вибір кольору.
 Використовуйте колесо миші для зміни товщини вибраного інструменту.
 Натисніть Пробіл, щоб відкрити бічну панель.</translation>
@@ -315,7 +315,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Відредагуйте назву ваших знімків:</translation>
+        <translation>Змініть назву ваших знімків:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -666,7 +666,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Використовуйте формат JPG для буфера обміну (за замовчуванням PNG)</translation>
+        <translation>Використовуйте формат JPG для буфера обміну (типово PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="482"/>
@@ -1272,33 +1272,33 @@ Press Space to open the side panel.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation>Не існуючий колір, цей прапор підтримує такі формати:
-- #RGB (кожен з R, G і B - це одна шістнадцяткова цифра)
+        <translation>Недійсний колір, цей прапорець підтримує такі формати:
+- #RGB (кожне з R, G і B — це одна шістнадцяткова цифра)
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- Такі кольори, як &quot;синій&quot; або &quot;червоний&quot;
-Можливо, вам доведеться уникнути знаку &quot;#&quot;, як у &quot;\ #FFF&quot;</translation>
+- Такі кольори, як «синій» або «червоний»
+Можливо, вам доведеться екранувати знак «#» отак «\ #FFF»</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation>Не існуюча затримка, вона повинна бути вищою за 0</translation>
+        <translation>Недійсна затримка, вона повинна бути вищою за 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Неіснуючий номер екрана, він повинен бути не негативним</translation>
+        <translation>Недійсний номер екрана, він має бути додатним</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation>Неіснуючий шлях, він повинен бути реальним шляхом у системі</translation>
+        <translation>Недійсний шлях, він має бути наявним шляхом у системі</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Недійсне значення, воно має бути визначене як &quot;true&quot; або &quot;false&quot;</translation>
+        <translation>Недійсне значення, воно має визначатися як «true» або «false»</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1343,7 +1343,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Flameshot за замовчуванням запускається у фоновому режимі та додається піктограма лотка для конфігурації.</translation>
+        <translation>Flameshot типово запускається у фоновому режимі та додається піктограма лотка для конфігурації.</translation>
     </message>
     <message>
         <source>Hi, I&apos;m already running!
@@ -1354,32 +1354,32 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="506"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привіт, я тут! Клацніть по значку в лотку, щоб зробити знімок екрана, або клацніть правою кнопкою, щоб побачити більше опцій.</translation>
+        <translation>Привіт, я тут! Клацніть по значку в лотку, щоб зробити знімок екрана, або клацніть правою кнопкою, щоб побачити більше параметрів.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
         <source>Toggle side panel</source>
-        <translation>Визвати/сховати бічну панель</translation>
+        <translation>Показати/сховати бічну панель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
         <source>Resize selection left 1px</source>
-        <translation>Змінити розмір виділення ліворуч на 1 пікс</translation>
+        <translation>Змінити розмір виділення ліворуч на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
         <source>Resize selection right 1px</source>
-        <translation>Змінити розмір виділення праворуч на 1 пікс</translation>
+        <translation>Змінити розмір виділення праворуч на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
         <source>Resize selection up 1px</source>
-        <translation>Змінити розмір виділення вгору на 1 пікс</translation>
+        <translation>Змінити розмір виділення вгору на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
         <source>Resize selection down 1px</source>
-        <translation>Змінити розмір виділення вниз на 1 пікс</translation>
+        <translation>Змінити розмір виділення вниз на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
@@ -1389,22 +1389,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
         <source>Move selection left 1px</source>
-        <translation>Перемістити виділення вліво на 1 пікс</translation>
+        <translation>Перемістити виділення вліво на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
         <source>Move selection right 1px</source>
-        <translation>Перемістити виділення вправо на 1 пікс</translation>
+        <translation>Перемістити виділення вправо на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
         <source>Move selection up 1px</source>
-        <translation>Перемістити виділення вгору на 1 пікс</translation>
+        <translation>Перемістити виділення вгору на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
         <source>Move selection down 1px</source>
-        <translation>Перемістити виділення вниз на 1 пікс</translation>
+        <translation>Перемістити виділення вниз на 1 піксель</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
@@ -1510,7 +1510,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="16"/>
         <source>Set Shortcut</source>
-        <translation>Задати комбінацію клавіш</translation>
+        <translation>Встановити комбінацію клавіш</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
@@ -1744,7 +1744,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
         <source>Bold</source>
-        <translation>Жирний</translation>
+        <translation>Грубий</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
@@ -1826,7 +1826,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation>Ігнорувати</translation>
+        <translation>Нехтувати</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
@@ -1859,7 +1859,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
-        <translation>Затворити</translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>

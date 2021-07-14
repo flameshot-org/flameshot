@@ -19,7 +19,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation>Ouvrir Avec</translation>
+        <translation>Ouvrir avec</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
@@ -250,7 +250,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation>&amp;A propos</translation>
+        <translation>&amp;À propos</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
@@ -311,12 +311,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Editer le nom des captures:</translation>
+        <translation>Modifier le nom des captures&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation>Editer :</translation>
+        <translation>Modifier&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
@@ -477,7 +477,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="155"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>Êtes-vous sûr de vouloir réinitialiser la configuration ?</translation>
+        <translation>Êtes-vous sûr(e) de vouloir réinitialiser la configuration&#xa0;?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="190"/>
@@ -1388,12 +1388,12 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
         <source>Active color:</source>
-        <translation>Couleur actuelle:</translation>
+        <translation>Couleur actuelle&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
         <source>Press ESC to cancel</source>
-        <translation>Appuyer sur Echap pour annuler</translation>
+        <translation>Appuyer sur Échap pour annuler</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="209"/>

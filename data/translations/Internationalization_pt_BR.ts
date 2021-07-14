@@ -336,7 +336,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurar</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -636,7 +636,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho máximo dos uploads mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
@@ -1027,12 +1027,12 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvamento cancelado</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar cancelado</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
@@ -1303,7 +1303,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
         <source>Delete current tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Excluir ferramenta atual</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
@@ -1408,7 +1408,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pressione Esc para cancelar ou ⌘+Backspace para desativar o atalho de teclado.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
@@ -1467,12 +1467,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuir tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminui o tamanho das outras ferramentas</translation>
     </message>
 </context>
 <context>
@@ -1480,12 +1480,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar tamanho da ferramenta</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumenta o tamanho das outras ferramentas</translation>
     </message>
 </context>
 <context>
@@ -1737,7 +1737,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Vazio&gt;</translation>
     </message>
 </context>
 <context>
