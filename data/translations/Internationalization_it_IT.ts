@@ -51,12 +51,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="75"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="72"/>
         <source>Arrow</source>
         <translation>Freccia</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>Imposta la freccia come strumento di disegno</translation>
     </message>
@@ -117,12 +117,12 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="95"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translation>Impossibile acquisire lo schermo</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1586"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1671"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -135,7 +135,7 @@ Usa la rotellina del mouse per modificare lo spessore del tuo strumento.
 Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="851"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="902"/>
         <source>Tool Settings</source>
         <translation>Impostazioni Strumento</translation>
     </message>
@@ -156,12 +156,12 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
 <context>
     <name>CircleTool</name>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="24"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
         <source>Circle</source>
         <translation>Cerchio</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
+        <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
         <translation>Imposta il cerchio come strumento di disegno</translation>
     </message>
@@ -346,183 +346,188 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="107"/>
-        <location filename="../../src/config/generalconf.cpp" line="279"/>
+        <location filename="../../src/config/generalconf.cpp" line="112"/>
+        <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Import</source>
         <translation>Importa</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="114"/>
-        <location filename="../../src/config/generalconf.cpp" line="122"/>
-        <location filename="../../src/config/generalconf.cpp" line="145"/>
-        <location filename="../../src/config/generalconf.cpp" line="510"/>
+        <location filename="../../src/config/generalconf.cpp" line="119"/>
+        <location filename="../../src/config/generalconf.cpp" line="127"/>
+        <location filename="../../src/config/generalconf.cpp" line="150"/>
+        <location filename="../../src/config/generalconf.cpp" line="537"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="114"/>
+        <location filename="../../src/config/generalconf.cpp" line="119"/>
         <source>Unable to read file.</source>
         <translation>Impossibile leggere il file.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="122"/>
-        <location filename="../../src/config/generalconf.cpp" line="145"/>
+        <location filename="../../src/config/generalconf.cpp" line="127"/>
+        <location filename="../../src/config/generalconf.cpp" line="150"/>
         <source>Unable to write file.</source>
         <translation>Impossibile scrivere il file.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="132"/>
+        <location filename="../../src/config/generalconf.cpp" line="137"/>
         <source>Save File</source>
         <translation>Salva File</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="154"/>
+        <location filename="../../src/config/generalconf.cpp" line="159"/>
         <source>Confirm Reset</source>
         <translation>Conferma il ripristino</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="155"/>
+        <location filename="../../src/config/generalconf.cpp" line="160"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Sei sicuro di voler ripristinare la configurazione?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="190"/>
+        <location filename="../../src/config/generalconf.cpp" line="196"/>
         <source>Show help message</source>
         <translation>Mostra messaggio di aiuto</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="194"/>
+        <location filename="../../src/config/generalconf.cpp" line="200"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Mostra il messaggio di aiuto all&apos;inizio nella modalità di acquisizione.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="204"/>
+        <location filename="../../src/config/generalconf.cpp" line="210"/>
         <source>Show the side panel button</source>
         <translation>Mostra il pulsante del pannello laterale</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="207"/>
+        <location filename="../../src/config/generalconf.cpp" line="213"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation>Mostra il pulsante di attivazione/disattivazione del pannello laterale nella modalità di acquisizione.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="217"/>
-        <location filename="../../src/config/generalconf.cpp" line="221"/>
+        <location filename="../../src/config/generalconf.cpp" line="223"/>
+        <location filename="../../src/config/generalconf.cpp" line="227"/>
         <source>Show desktop notifications</source>
         <translation>Mostra notifiche desktop</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="233"/>
+        <location filename="../../src/config/generalconf.cpp" line="239"/>
         <source>Show tray icon</source>
         <translation>Mostra icona nella barra delle applicazioni</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="236"/>
+        <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the systemtray icon</source>
         <translation>Mostra l&apos;icona sulla barra delle applicazioni</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="249"/>
-        <location filename="../../src/config/generalconf.cpp" line="254"/>
+        <location filename="../../src/config/generalconf.cpp" line="255"/>
+        <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Conferma richiesta per eliminare screenshot dagli ultimi caricamenti</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="267"/>
+        <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Configuration File</source>
         <translation>File di Configurazione</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="272"/>
+        <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Export</source>
         <translation>Esporta</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="286"/>
+        <location filename="../../src/config/generalconf.cpp" line="291"/>
         <source>Reset</source>
         <translation>Ripristina</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="296"/>
-        <location filename="../../src/config/generalconf.cpp" line="298"/>
+        <location filename="../../src/config/generalconf.cpp" line="301"/>
+        <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Automatic check for updates</source>
         <translation>Controllo automatico degli aggiornamenti</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="309"/>
+        <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Launch at startup</source>
         <translation>Esegui all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="312"/>
-        <location filename="../../src/config/generalconf.cpp" line="326"/>
+        <location filename="../../src/config/generalconf.cpp" line="317"/>
+        <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Launch Flameshot</source>
         <translation>Esegui Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="322"/>
+        <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Show welcome message on launch</source>
         <translation>Mostra il messaggio di benvenuto all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="337"/>
+        <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL after upload</source>
         <translation>Copia l&apos;URL dopo il caricamento</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="342"/>
+        <location filename="../../src/config/generalconf.cpp" line="347"/>
         <source>Copy URL and close window after upload</source>
         <translation>Copia l&apos;URL e chiudi la finestra dopo il caricamento</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="352"/>
+        <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>Save image after copy</source>
         <translation>Salva l&apos;immagine dopo la copia</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="353"/>
+        <location filename="../../src/config/generalconf.cpp" line="358"/>
         <source>Save image file after copying it</source>
         <translation>Salva il file immagine dopo averlo copiato</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="360"/>
+        <location filename="../../src/config/generalconf.cpp" line="365"/>
         <source>Save Path</source>
         <translation>Salva Percorso</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="384"/>
+        <location filename="../../src/config/generalconf.cpp" line="385"/>
         <source>Change...</source>
         <translation>Cambia...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="392"/>
+        <location filename="../../src/config/generalconf.cpp" line="393"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Usa percorso fisso per salvare gli screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="410"/>
+        <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
         <translation>Dimensione Massima Ultimi Caricamenti</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="443"/>
-        <location filename="../../src/config/generalconf.cpp" line="448"/>
+        <location filename="../../src/config/generalconf.cpp" line="441"/>
+        <source>Undo limit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="470"/>
+        <location filename="../../src/config/generalconf.cpp" line="475"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Usa il formato JPG per gli appunti (impostazione predefinita PNG)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="482"/>
-        <location filename="../../src/config/generalconf.cpp" line="485"/>
+        <location filename="../../src/config/generalconf.cpp" line="509"/>
+        <location filename="../../src/config/generalconf.cpp" line="512"/>
         <source>Copy file path after save</source>
         <translation>Copia il percorso del file dopo il salvataggio</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="501"/>
+        <location filename="../../src/config/generalconf.cpp" line="528"/>
         <source>Choose a Folder</source>
         <translation>Scegli una Cartella</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="510"/>
+        <location filename="../../src/config/generalconf.cpp" line="537"/>
         <source>Unable to write to directory.</source>
         <translation>Impossibile scrivere nella directory.</translation>
     </message>
@@ -690,12 +695,12 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
 <context>
     <name>LineTool</name>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="28"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
         <translation>Linea</translation>
     </message>
     <message>
-        <location filename="../../src/tools/line/linetool.cpp" line="38"/>
+        <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
         <translation>Imposta la Linea come strumento di disegno</translation>
     </message>
@@ -729,12 +734,12 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
 <context>
     <name>PencilTool</name>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="20"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
         <translation>Matita</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pencil/penciltool.cpp" line="30"/>
+        <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
         <translation>Imposta la matita come strumento di pittura</translation>
     </message>
@@ -811,121 +816,121 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <translation>Per impostazione predefinita, Flameshot viene eseguito in background e aggiunge un&apos;icona nella barra per la configurazione.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="102"/>
-        <location filename="../../src/main.cpp" line="277"/>
-        <location filename="../../src/main.cpp" line="439"/>
-        <location filename="../../src/main.cpp" line="467"/>
-        <location filename="../../src/main.cpp" line="499"/>
+        <location filename="../../src/main.cpp" line="111"/>
+        <location filename="../../src/main.cpp" line="286"/>
+        <location filename="../../src/main.cpp" line="448"/>
+        <location filename="../../src/main.cpp" line="476"/>
+        <location filename="../../src/main.cpp" line="508"/>
         <source>Unable to connect via DBus</source>
         <translation>Impossibile connettersi tramite DBus</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="124"/>
+        <location filename="../../src/main.cpp" line="133"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Software di screenshot potente ma semplice da usare.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="125"/>
+        <location filename="../../src/main.cpp" line="134"/>
         <source>See</source>
         <translation>Vedi</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="128"/>
+        <location filename="../../src/main.cpp" line="137"/>
         <source>Capture the entire desktop.</source>
         <translation>Cattura l&apos;intero desktop.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="130"/>
+        <location filename="../../src/main.cpp" line="139"/>
         <source>Open the capture launcher.</source>
         <translation>Apri il programma di avvio per l&apos;acquisizione.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="133"/>
+        <location filename="../../src/main.cpp" line="142"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>Avvia un&apos;acquisizione manuale in modalità GUI.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="135"/>
+        <location filename="../../src/main.cpp" line="144"/>
         <source>Configure</source>
         <translation>Configura</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="137"/>
+        <location filename="../../src/main.cpp" line="146"/>
         <source>Capture a single screen.</source>
         <translation>Cattura una singola schermata.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="142"/>
+        <location filename="../../src/main.cpp" line="151"/>
         <source>Path where the capture will be saved</source>
         <translation>Percorso in cui verrà salvata l&apos;acquisizione</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="145"/>
+        <location filename="../../src/main.cpp" line="154"/>
         <source>Save the capture to the clipboard</source>
         <translation>Salva la cattura negli appunti</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="147"/>
+        <location filename="../../src/main.cpp" line="156"/>
         <source>Delay time in milliseconds</source>
         <translation>Tempo di ritardo in millisecondi</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="150"/>
+        <location filename="../../src/main.cpp" line="159"/>
         <source>Set the filename pattern</source>
         <translation>Imposta il modello del nome del file</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="153"/>
+        <location filename="../../src/main.cpp" line="162"/>
         <source>Enable or disable the trayicon</source>
         <translation>Abilita o disabilita l&apos;icona della barra delle applicazioni</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="157"/>
+        <location filename="../../src/main.cpp" line="166"/>
         <source>Enable or disable run at startup</source>
         <translation>Abilita o disabilita l&apos;esecuzione all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="161"/>
+        <location filename="../../src/main.cpp" line="170"/>
         <source>Show the help message in the capture mode</source>
         <translation>Mostra il messaggio di aiuto nella modalità di acquisizione</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="164"/>
+        <location filename="../../src/main.cpp" line="173"/>
         <source>Define the main UI color</source>
         <translation>Definisci il colore dell&apos;interfaccia utente principale</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="168"/>
+        <location filename="../../src/main.cpp" line="177"/>
         <source>Define the contrast UI color</source>
         <translation>Definisci il colore dell&apos;interfaccia utente del contrasto</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="171"/>
+        <location filename="../../src/main.cpp" line="180"/>
         <source>Print raw PNG capture</source>
         <translation>Stampa l&apos;acquisizione raw PNG</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="174"/>
+        <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
         <translation>Stampa la geometria della selezione nel formato W H X Y. Non fa nulla se raw è specificato</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="178"/>
+        <location filename="../../src/main.cpp" line="187"/>
         <source>Define the screen to capture</source>
         <translation>Definisci lo schermo da catturare</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="179"/>
+        <location filename="../../src/main.cpp" line="188"/>
         <source>default: screen containing the cursor</source>
         <translation>default: schermata contenente il cursore</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="180"/>
+        <location filename="../../src/main.cpp" line="189"/>
         <source>Screen number</source>
         <translation>Numero di schermo</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="189"/>
+        <location filename="../../src/main.cpp" line="198"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -942,22 +947,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="198"/>
+        <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid delay, it must be higher than 0</source>
         <translation>Ritardo non valido, deve essere maggiore di 0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="200"/>
+        <location filename="../../src/main.cpp" line="209"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Numero di schermo non valido, deve essere non negativo</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="207"/>
+        <location filename="../../src/main.cpp" line="216"/>
         <source>Invalid path, it must be a real path in the system</source>
         <translation>Percorso non valido, deve essere un percorso reale nel sistema</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="218"/>
+        <location filename="../../src/main.cpp" line="227"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Valore non valido, deve essere definito come &quot;vero&quot; o &quot;falso&quot;</translation>
     </message>
@@ -977,55 +982,54 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <translation>Impossibile scrivere</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="38"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
         <source>Capture saved to clipboard.</source>
         <translation>Cattura salvata negli appunti.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="56"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="69"/>
         <source>Capture saved to clipboard</source>
-        <translation>Cattura salvata negli appunti</translation>
+        <translation type="vanished">Cattura salvata negli appunti</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
         <source>Error while saving to clipboard</source>
         <translation>Errore durante il salvataggio negli appunti</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="90"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="99"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="201"/>
         <source>Capture saved as </source>
         <translation>Cattura salvata come </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="94"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="210"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="219"/>
         <source>Error trying to save as </source>
         <translation>Errore durante il tentativo di salvare come </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="166"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="175"/>
         <source>Save screenshot</source>
         <translation>Salva screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Saving canceled</source>
         <translation>Salvataggio annullato</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="174"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
         <translation>Salvataggio annullato</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
         <source>Capture is saved and copied to the clipboard as </source>
         <translation>L&apos;acquisizione viene salvata e copiata negli appunti come </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="212"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="221"/>
         <source>Save Error</source>
         <translation>Salva errore</translation>
     </message>
@@ -1126,12 +1130,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
 <context>
     <name>RectangleTool</name>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="26"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="22"/>
         <source>Rectangle</source>
         <translation>Rettangolo</translation>
     </message>
     <message>
-        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="36"/>
+        <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
         <translation>Imposta il rettangolo come strumento di disegno</translation>
     </message>
@@ -1173,12 +1177,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
 <context>
     <name>SelectionTool</name>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="29"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
         <translation>Selezione rettangolare</translation>
     </message>
     <message>
-        <location filename="../../src/tools/selection/selectiontool.cpp" line="39"/>
+        <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
         <translation>Imposta Selezione come strumento di disegno</translation>
     </message>
@@ -1232,22 +1236,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
 <context>
     <name>SidePanelWidget</name>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="62"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
         <source>Active thickness:</source>
         <translation>Spessore attivo:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
         <translation>Colore attivo:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="207"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="208"/>
         <source>Press ESC to cancel</source>
         <translation>Premere ESC per annullare</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="209"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="210"/>
         <source>Grab Color</source>
         <translation>Prendi il colore</translation>
     </message>
@@ -1410,22 +1414,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="45"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="44"/>
         <source>StrikeOut</source>
         <translation>Cancella</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="54"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="53"/>
         <source>Underline</source>
         <translation>Sottolineare</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="63"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="62"/>
         <source>Bold</source>
         <translation>Grassetto</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="72"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="71"/>
         <source>Italic</source>
         <translation>Corsivo</translation>
     </message>
@@ -1433,12 +1437,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="60"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="66"/>
         <source>Text</source>
         <translation>Testo</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="84"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="90"/>
         <source>Add text to your capture</source>
         <translation>Aggiungi testo alla tua cattura</translation>
     </message>
