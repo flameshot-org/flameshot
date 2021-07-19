@@ -315,10 +315,10 @@ There are packages available in the repository of some Linux distributions:
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
-- [openSUSE](https://software.opensuse.org/package/flameshot)
-- [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
+- [openSUSE](https://software.opensuse.org/package/flameshot): `zypper install flameshot`
+- [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot): `xbps-install flameshot`
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
-- Fedora: `dnf install flameshot`
+- [Fedora](https://src.fedoraproject.org/rpms/flameshot): `dnf install flameshot`
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
