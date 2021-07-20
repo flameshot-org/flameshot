@@ -24,7 +24,7 @@ Type=SIMPLE_ACTION_DATA
 ActionsCount=1
 
 [Data_1_1Actions0]
-Arguments='Pictures/Screenshots' 0 0
+Arguments='' 0 0
 Call=graphicCapture
 RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
