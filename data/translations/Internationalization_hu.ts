@@ -576,7 +576,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ImgS3Uploader</name>
     <message>
         <source>Uploading Image</source>
-        <translation type="obsolete">Kép felötlése</translation>
+        <translation type="obsolete">Kép feltöltése</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -591,7 +591,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ImgUploader</name>
     <message>
         <source>Uploading Image</source>
-        <translation type="obsolete">Kép felötlése</translation>
+        <translation type="obsolete">Kép feltöltése</translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
