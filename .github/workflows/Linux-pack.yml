@@ -399,8 +399,29 @@ jobs:
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-lp${{ matrix.dist.symbol }}.${{ matrix.dist.arch }}.rpm.sha256sum
 
   appimage-pack:
-    name: Build appimage on ubuntu-20.04
+    name: Build appimage on ${{ matrix.config.name }}
     runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {
+              name: ubuntu-20.04,
+              os: ubuntu,
+              symbol: focal,
+              arch: amd64,
+              image_repo: flameshotorg/ci-building-images
+            }
+          # - {
+          #     name: ubuntu-20.04,
+          #     os: ubuntu,
+          #     symbol: focal,
+          #     arch: arm64,
+          #     image_repo: flameshotorg/ci-building-images
+          #   }
+    container:
+      image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
+      options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
@@ -429,6 +450,10 @@ jobs:
         run: |
           sudo apt-get -y -qq update
           sudo apt-get -y --no-install-recommends install \
+            python3 \
+            python3-pip \
+            fuse \
+            patchelf \
             cmake \
             extra-cmake-modules \
             build-essential \
