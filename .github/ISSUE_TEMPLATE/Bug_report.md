@@ -5,7 +5,7 @@ about: Create a report to help us improve
 ---
 
 <!--
-First read the FAQ: https://flameshot.org/faq/
+First read the FAQ: https://flameshot.org/guide/faq/
 
 If you don't know how to get some of the following information from your
 computer, visit:
