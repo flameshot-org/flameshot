@@ -196,7 +196,9 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
-            m_appUpdates->setText(newVersion);
+            if (m_appUpdates != nullptr) {
+                m_appUpdates->setText(newVersion);
+            }
             if (m_showCheckAppUpdateStatus) {
                 sendTrayNotification(newVersion, "Flameshot");
                 QDesktopServices::openUrl(QUrl(m_appLatestUrl));
