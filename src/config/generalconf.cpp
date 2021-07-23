@@ -5,6 +5,7 @@
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
+#include <QComboBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
@@ -34,6 +35,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
     initUseJpgForClipboard();
+    initWindowMode();
     initSaveAfterCopy();
     initUploadHistoryMaxSize();
     initUndoLimit();
@@ -57,6 +59,13 @@ void GeneralConf::updateComponents()
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    auto configWindowMode = config.windowMode();
+    for (int i = 0; i < m_windowMode->count(); i++) {
+        if (m_windowMode->itemData(i) == configWindowMode) {
+            m_windowMode->setCurrentIndex(i);
+            break;
+        }
+    }
     m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
     m_undoLimit->setValue(config.undoLimit());
 
@@ -483,6 +492,44 @@ void GeneralConf::initUseJpgForClipboard()
             &QCheckBox::clicked,
             this,
             &GeneralConf::useJpgForClipboardChanged);
+}
+
+void GeneralConf::initWindowMode()
+{
+    m_windowMode = new QComboBox(this);
+    m_layout->addWidget(m_windowMode);
+    struct
+    {
+        QString label;
+        CaptureConfig::CaptureWindowMode mode;
+    } modes[] = {
+#if !defined(Q_OS_MACOS)
+        { tr("All screens"), CaptureConfig::CaptureWindowMode::FullScreenAll },
+#endif
+        { tr("Current screen"),
+          CaptureConfig::CaptureWindowMode::FullScreenCurrent },
+        { tr("Maximized window"),
+          CaptureConfig::CaptureWindowMode::MaximizeWindow },
+        { tr("Debug window"),
+          CaptureConfig::CaptureWindowMode::DebugNonFullScreen },
+    };
+    for (auto& item : modes) {
+        m_windowMode->addItem(item.label, item.mode);
+    }
+    connect(m_windowMode,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &GeneralConf::windowModeChanged);
+}
+
+void GeneralConf::windowModeChanged()
+{
+    auto selectedData = m_windowMode->currentData();
+    if (selectedData.canConvert<CaptureConfig::CaptureWindowMode>()) {
+        auto selectedMode =
+          selectedData.value<CaptureConfig::CaptureWindowMode>();
+        ConfigHandler().setWindowMode(selectedMode);
+    }
 }
 
 void GeneralConf::saveAfterCopyChanged(bool checked)

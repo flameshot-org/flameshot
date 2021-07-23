@@ -32,6 +32,10 @@ public:
     void setGeometryAnimated(const QRect& r);
     void saveGeometry();
     QRect savedGeometry();
+    QRect captureGeomtry();
+    void setCaptureGeometry(QRect rect);
+    void SetScale(float v);
+    QRect captureToWidgetRect(QRect rect);
 
 protected:
     void paintEvent(QPaintEvent*);
@@ -53,6 +57,8 @@ private:
     QPoint m_areaOffset;
     QPoint m_handleOffset;
     QRect m_geometryBackup;
+    QRect m_captureGeometry;
+    QTransform transform;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

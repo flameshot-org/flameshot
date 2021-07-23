@@ -65,21 +65,43 @@ QVector<QRect> SelectionWidget::handlerAreas()
 
 void SelectionWidget::setGeometryAnimated(const QRect& r)
 {
+    m_captureGeometry = r;
     if (isVisible()) {
         m_animation->setStartValue(geometry());
-        m_animation->setEndValue(r);
+        m_animation->setEndValue(captureToWidgetRect(r));
         m_animation->start();
     }
 }
 
 void SelectionWidget::saveGeometry()
 {
-    m_geometryBackup = geometry();
+    m_geometryBackup = m_captureGeometry;
 }
 
 QRect SelectionWidget::savedGeometry()
 {
     return m_geometryBackup;
+}
+
+QRect SelectionWidget::captureGeomtry()
+{
+    return m_captureGeometry;
+}
+
+void SelectionWidget::setCaptureGeometry(QRect rect)
+{
+    m_captureGeometry = rect;
+    setGeometry(captureToWidgetRect(rect));
+}
+
+void SelectionWidget::SetScale(float v)
+{
+    transform = QTransform::fromScale(v, v);
+}
+
+QRect SelectionWidget::captureToWidgetRect(QRect rect)
+{
+    return transform.mapRect(rect);
 }
 
 void SelectionWidget::paintEvent(QPaintEvent*)

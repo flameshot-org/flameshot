@@ -4,6 +4,7 @@ target_sources(
         PRIVATE buttonhandler.h
         capturebutton.h
         capturetoolbutton.h
+        captureconfig.h
         capturewidget.h
         colorpicker.h
         hovereventfilter.h
