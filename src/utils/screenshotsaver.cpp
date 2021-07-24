@@ -70,7 +70,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     QString format = ConfigHandler().clipboardFormat();
     if (DesktopInfo().waylandDectected()) {
         // FIXME - format JPEG doesn't work on MacOS
-        if( format == "auto" ){
+        if (format == "auto") {
             QApplication::clipboard()->setPixmap(capture);
         } else {
             saveToClipboardMime(capture, format);
