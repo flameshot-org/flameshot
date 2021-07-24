@@ -571,20 +571,20 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
     m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
 }
 
-bool ConfigHandler::useJpgForClipboard() const
+QString ConfigHandler::clipboardFormat() const
 {
 #if not defined(Q_OS_MACOS)
-    // FIXME - temporary fix to disable option for MacOS
-    if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
-        return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
+    if (m_settings.contains(QStringLiteral("clipboardFormat"))) {
+        return m_settings.value(QStringLiteral("clipboardFormat")).toString();
     }
 #endif
-    return false;
+    // FIXME - temporary fix to disable option for MacOS
+    return QString("png");
 }
 
-void ConfigHandler::setUseJpgForClipboard(const bool value)
+void ConfigHandler::setClipboardFormat(const QString& format)
 {
-    m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
+    m_settings.setValue(QStringLiteral("clipboardFormat"), format);
 }
 
 void ConfigHandler::setSaveAsFileExtension(const QString& extension)

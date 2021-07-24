@@ -15,6 +15,7 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
+#include <QComboBox>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -33,7 +34,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
-    initUseJpgForClipboard();
+    initClipboardFormat();
     initSaveAfterCopy();
     initUploadHistoryMaxSize();
     initUndoLimit();
@@ -48,17 +49,8 @@ GeneralConf::GeneralConf(QWidget* parent)
 void GeneralConf::updateComponents()
 {
     ConfigHandler config;
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_autostart->setChecked(config.startupLaunchValue());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
-    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
-    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
-    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
-    m_undoLimit->setValue(config.undoLimit());
+
+    setActualFormData();
 
     if (!config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
@@ -188,7 +180,11 @@ void GeneralConf::setActualFormData()
       config.historyConfirmationToDelete());
     m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
     m_undoLimit->setValue(config.undoLimit());
-    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+
+    QString format = ConfigHandler().clipboardFormat();
+    m_clipboardFormat->setCurrentIndex(
+            m_clipboardFormat->findData(format)
+            );
 }
 
 void GeneralConf::initShowHelp()
@@ -464,25 +460,42 @@ void GeneralConf::undoLimit(int limit)
     ConfigHandler().setUndoLimit(limit);
 }
 
-void GeneralConf::initUseJpgForClipboard()
+void GeneralConf::initClipboardFormat()
 {
-    m_useJpgForClipboard =
-      new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
+    m_clipboardFormat = new QComboBox(this);
     ConfigHandler config;
-    bool checked = config.useJpgForClipboard();
-    m_useJpgForClipboard->setChecked(checked);
-    m_useJpgForClipboard->setToolTip(
-      tr("Use JPG format for clipboard (PNG default)"));
-    m_layout->addWidget(m_useJpgForClipboard);
+
+    m_clipboardFormat->setToolTip(tr("Clipboard foramt (only for Wayland)"));
+    m_clipboardFormat->addItem("PNG", "png");
+    m_clipboardFormat->addItem("JPEG", "jpeg");
+    m_clipboardFormat->addItem("BMP", "bmp");
+
+    QString format = ConfigHandler().clipboardFormat();
+    m_clipboardFormat->setCurrentIndex(
+            m_clipboardFormat->findData(format)
+            );
+
+    m_layout->addWidget(m_clipboardFormat);
+
+    QGroupBox* box = new QGroupBox(tr("Clipboard foramt (only for Wayland)"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    vboxLayout->addWidget(m_clipboardFormat);
 
 #if defined(Q_OS_MACOS)
     // FIXME - temporary fix to disable option for MacOS
-    m_useJpgForClipboard->hide();
+    box->hide();
 #endif
-    connect(m_useJpgForClipboard,
-            &QCheckBox::clicked,
+
+    connect(m_clipboardFormat,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
             this,
-            &GeneralConf::useJpgForClipboardChanged);
+            &GeneralConf::setClipboardFormatChanged
+            );
 }
 
 void GeneralConf::saveAfterCopyChanged(bool checked)
@@ -546,7 +559,8 @@ void GeneralConf::togglePathFixed()
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneralConf::useJpgForClipboardChanged(bool checked)
+void GeneralConf::setClipboardFormatChanged(int index)
 {
-    ConfigHandler().setUseJpgForClipboard(checked);
+    QString format = m_clipboardFormat->itemData(index).toString();
+    ConfigHandler().setClipboardFormat(format);
 }

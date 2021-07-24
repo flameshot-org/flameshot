@@ -90,8 +90,8 @@ public:
     bool copyPathAfterSaveEnabled();
     void setCopyPathAfterSaveEnabled(const bool);
 
-    bool useJpgForClipboard() const;
-    void setUseJpgForClipboard(const bool);
+    QString clipboardFormat() const;
+    void setClipboardFormat(const QString& format);
     void setSaveAsFileExtension(const QString& extension);
     QString getSaveAsFileExtension();
 
