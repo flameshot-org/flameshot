@@ -48,19 +48,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 
 void GeneralConf::updateComponents()
 {
-    ConfigHandler config;
-
     setActualFormData();
-
-    if (!config.savePath().isEmpty()) {
-        m_savePath->setText(config.savePath());
-    } else {
-        ConfigHandler().setSavePath(
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
-    }
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    m_showTray->setChecked(!config.disabledTrayIconValue());
-#endif
 }
 
 void GeneralConf::showHelpChanged(bool checked)
@@ -152,8 +140,6 @@ void GeneralConf::resetConfiguration()
       tr("Are you sure you want to reset the configuration?"),
       QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes) {
-        m_savePath->setText(
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
         ConfigHandler().setDefaultSettings();
         setActualFormData();
     }
@@ -164,7 +150,9 @@ void GeneralConf::setActualFormData()
     // read and set current settings
     ConfigHandler config;
     m_sysNotifications->setChecked(config.desktopNotificationValue());
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
+#endif
     m_helpMessage->setChecked(config.showHelpValue());
     m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -367,12 +355,7 @@ void GeneralConf::initSaveAfterCopy()
 
     QHBoxLayout* pathLayout = new QHBoxLayout();
 
-    QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
-    m_savePath = new QLineEdit(path, this);
+    m_savePath = new QLineEdit(ConfigHandler().savePath(), this);
     m_savePath->setDisabled(true);
     QString foreground = this->palette().windowText().color().name();
     m_savePath->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
@@ -505,12 +488,7 @@ void GeneralConf::saveAfterCopyChanged(bool checked)
 
 void GeneralConf::changeSavePath()
 {
-    QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
-    path = chooseFolder(path);
+    QString path = chooseFolder(ConfigHandler().savePath());
     if (!path.isEmpty()) {
         m_savePath->setText(path);
         ConfigHandler().setSavePath(path);
@@ -532,14 +510,10 @@ void GeneralConf::initCopyPathAfterSave()
 const QString GeneralConf::chooseFolder(const QString pathDefault)
 {
     QString path;
-    if (pathDefault.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     path = QFileDialog::getExistingDirectory(
       this,
       tr("Choose a Folder"),
-      path,
+      pathDefault,
       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (path.isEmpty()) {
         return path;

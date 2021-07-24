@@ -105,7 +105,9 @@ QVector<QColor> ConfigHandler::getUserColors()
 
 QString ConfigHandler::savePath()
 {
-    return m_settings.value(QStringLiteral("savePath")).toString();
+    return m_settings.value(QStringLiteral("savePath"),
+            QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)
+            ).toString();
 }
 
 void ConfigHandler::setSavePath(const QString& savePath)
@@ -574,11 +576,11 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 QString ConfigHandler::clipboardFormat() const
 {
 #if not defined(Q_OS_MACOS)
+    // FIXME - temporary fix to disable option for MacOS
     if (m_settings.contains(QStringLiteral("clipboardFormat"))) {
         return m_settings.value(QStringLiteral("clipboardFormat")).toString();
     }
 #endif
-    // FIXME - temporary fix to disable option for MacOS
     return QString("png");
 }
 
