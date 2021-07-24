@@ -721,23 +721,9 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         // Show the buttons after the resize of the selection or the creation
         // of a new one.
 
-        // Don't go outside
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        // normalize
-        if (newGeometry.width() <= 0) {
-            int left = newGeometry.left();
-            newGeometry.setLeft(newGeometry.right());
-            newGeometry.setRight(left);
-        }
-        if (newGeometry.height() <= 0) {
-            int top = newGeometry.top();
-            newGeometry.setTop(newGeometry.bottom());
-            newGeometry.setBottom(top);
-        }
-        m_selection->setGeometry(newGeometry);
-        m_context.selection = extendedRect(&newGeometry);
+        updateGeometry();
         updateSizeIndicator();
-        m_buttonHandler->updatePosition(newGeometry);
+        m_buttonHandler->updatePosition(m_selection->geometry());
         m_buttonHandler->show();
     }
     m_mouseIsClicked = false;
@@ -1569,8 +1555,34 @@ void CaptureWidget::childLeave()
     update();
 }
 
+void CaptureWidget::updateGeometry()
+{
+    // Don't go outside
+    QRect newGeometry = m_selection->geometry().intersected(rect());
+    // normalize
+    if (newGeometry.width() <= 0) {
+        int left = newGeometry.left();
+        newGeometry.setLeft(newGeometry.right());
+        newGeometry.setRight(left);
+    }
+    if (newGeometry.height() <= 0) {
+        int top = newGeometry.top();
+        newGeometry.setTop(newGeometry.bottom());
+        newGeometry.setBottom(top);
+    }
+    m_selection->setGeometry(newGeometry);
+    m_context.selection = extendedRect(&newGeometry);
+}
+
 void CaptureWidget::copyScreenshot()
 {
+    // This condition is fulfilled when the selection is ongoing and the mouse
+    // has not been released, meaning the selection would be visible while the
+    // buttons are not. We update geometry as though the selection stops now.
+    if (!m_buttonHandler->isVisible() && m_selection->isVisible()) {
+        updateGeometry();
+    }
+
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);
@@ -1587,6 +1599,14 @@ void CaptureWidget::saveScreenshot()
 #if defined(Q_OS_MACOS)
     showNormal();
 #endif
+
+    // This condition is fulfilled when the selection is ongoing and the mouse
+    // has not been released, meaning the selection would be visible while the
+    // buttons are not. We update geometry as though the selection stops now.
+    if (!m_buttonHandler->isVisible() && m_selection->isVisible()) {
+        updateGeometry();
+    }
+
     m_captureDone = true;
     if (m_activeTool != nullptr) {
         QPainter painter(&m_context.screenshot);

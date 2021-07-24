@@ -120,6 +120,7 @@ private:
     void initPanel();
     void initSelection();
     void initShortcuts();
+    void updateGeometry();
     void updateSizeIndicator();
     void updateCursor();
     void pushToolToStack();
