@@ -34,8 +34,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
-    initClipboardFormat();
     initSaveAfterCopy();
+    initClipboardFormat();
     initUploadHistoryMaxSize();
     initUndoLimit();
 
