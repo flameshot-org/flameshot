@@ -5,6 +5,7 @@
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
+#include <QComboBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
@@ -15,7 +16,6 @@
 #include <QStandardPaths>
 #include <QTextCodec>
 #include <QVBoxLayout>
-#include <QComboBox>
 
 GeneralConf::GeneralConf(QWidget* parent)
   : QWidget(parent)
@@ -170,9 +170,7 @@ void GeneralConf::setActualFormData()
     m_undoLimit->setValue(config.undoLimit());
 
     QString format = ConfigHandler().clipboardFormat();
-    m_clipboardFormat->setCurrentIndex(
-            m_clipboardFormat->findData(format)
-            );
+    m_clipboardFormat->setCurrentIndex(m_clipboardFormat->findData(format));
 }
 
 void GeneralConf::initShowHelp()
@@ -454,9 +452,7 @@ void GeneralConf::initClipboardFormat()
     m_clipboardFormat->addItem("BMP", "bmp");
 
     QString format = ConfigHandler().clipboardFormat();
-    m_clipboardFormat->setCurrentIndex(
-            m_clipboardFormat->findData(format)
-            );
+    m_clipboardFormat->setCurrentIndex(m_clipboardFormat->findData(format));
 
     m_layout->addWidget(m_clipboardFormat);
 
@@ -477,8 +473,7 @@ void GeneralConf::initClipboardFormat()
     connect(m_clipboardFormat,
             QOverload<int>::of(&QComboBox::currentIndexChanged),
             this,
-            &GeneralConf::setClipboardFormatChanged
-            );
+            &GeneralConf::setClipboardFormatChanged);
 }
 
 void GeneralConf::saveAfterCopyChanged(bool checked)

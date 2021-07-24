@@ -105,9 +105,10 @@ QVector<QColor> ConfigHandler::getUserColors()
 
 QString ConfigHandler::savePath()
 {
-    return m_settings.value(QStringLiteral("savePath"),
-            QStandardPaths::writableLocation(QStandardPaths::PicturesLocation)
-            ).toString();
+    return m_settings
+      .value(QStringLiteral("savePath"),
+             QStandardPaths::writableLocation(QStandardPaths::PicturesLocation))
+      .toString();
 }
 
 void ConfigHandler::setSavePath(const QString& savePath)

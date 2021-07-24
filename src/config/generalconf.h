@@ -80,7 +80,7 @@ private:
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
-    //QCheckBox* m_clipboardFormat;
+    // QCheckBox* m_clipboardFormat;
     QComboBox* m_clipboardFormat;
     QSpinBox* m_uploadHistoryMaxSize;
     QSpinBox* m_undoLimit;
