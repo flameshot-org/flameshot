@@ -67,10 +67,14 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
 
     // Need to send message before copying to clipboard
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QString format = ConfigHandler().clipboardFormat();
     if (DesktopInfo().waylandDectected()) {
-        QString format = ConfigHandler().clipboardFormat();
         // FIXME - format JPEG doesn't work on MacOS
-        saveToClipboardMime(capture, format);
+        if( format == "auto" ){
+            QApplication::clipboard()->setPixmap(capture);
+        } else {
+            saveToClipboardMime(capture, format);
+        }
     } else {
         QApplication::clipboard()->setPixmap(capture);
     }

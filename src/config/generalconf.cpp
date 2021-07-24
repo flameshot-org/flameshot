@@ -447,9 +447,10 @@ void GeneralConf::initClipboardFormat()
     ConfigHandler config;
 
     m_clipboardFormat->setToolTip(tr("Clipboard foramt (only for Wayland)"));
-    m_clipboardFormat->addItem("PNG", "png");
-    m_clipboardFormat->addItem("JPEG", "jpeg");
-    m_clipboardFormat->addItem("BMP", "bmp");
+    m_clipboardFormat->addItem(tr("Auto"), "auto");
+    m_clipboardFormat->addItem(tr("PNG"), "png");
+    m_clipboardFormat->addItem(tr("JPEG"), "jpeg");
+    m_clipboardFormat->addItem(tr("BMP"), "bmp");
 
     QString format = ConfigHandler().clipboardFormat();
     m_clipboardFormat->setCurrentIndex(m_clipboardFormat->findData(format));
