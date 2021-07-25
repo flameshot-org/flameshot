@@ -12,9 +12,11 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
         CaptureToolButton* b = new CaptureToolButton(t, nullptr);
         QString shortcutName = QVariant::fromValue(t).toString();
         QKeySequence ks = captureShortcutDefault(t);
-        m_shortcuts << (QStringList()
-                        << shortcutName << b->tool()->description()
-                        << ks.toString());
+        if (shortcutName != "TYPE_IMAGEUPLOADER") {
+            m_shortcuts << (QStringList()
+                            << shortcutName << b->tool()->description()
+                            << ks.toString());
+        }
         delete b;
     }
 
