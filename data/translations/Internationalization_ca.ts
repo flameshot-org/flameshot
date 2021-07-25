@@ -134,7 +134,7 @@
         <translation>Impossible capturar la pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1671"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1672"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -147,7 +147,7 @@ Gireu la rodeta del ratolí per canviar el gruix de l&apos;eina de dibuix.
 Premeu Espai per obrir el calaix lateral.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="902"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
         <source>Tool Settings</source>
         <translation>Ajustaments de l&apos;eina</translation>
     </message>
@@ -214,47 +214,47 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <translation>La nova versió %1 ja és disponible</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="205"/>
+        <location filename="../../src/core/controller.cpp" line="207"/>
         <source>You have the latest version</source>
         <translation>Teniu la versió més recent</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="213"/>
+        <location filename="../../src/core/controller.cpp" line="215"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Error a l&apos;intentar obtenir informació sobre actualitzacions.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="294"/>
+        <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="294"/>
+        <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Unable to close active modal widgets</source>
         <translation>No s&apos;han pogut tancar els widgets modals actius</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="415"/>
+        <location filename="../../src/core/controller.cpp" line="417"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Obre el llançador d&apos;aplicacions</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="420"/>
+        <location filename="../../src/core/controller.cpp" line="422"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Ajustaments</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="423"/>
+        <location filename="../../src/core/controller.cpp" line="425"/>
         <source>&amp;About</source>
         <translation>&amp;Quant a</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="426"/>
+        <location filename="../../src/core/controller.cpp" line="428"/>
         <source>Check for updates</source>
         <translation>Comprova si hi ha actualitzacions disponibles</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="433"/>
+        <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Latest Uploads</source>
         <translation>&amp;Últimes càrregues</translation>
     </message>
@@ -263,12 +263,12 @@ Premeu Espai per obrir el calaix lateral.</translation>
         <translation type="vanished">&amp;Informació</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="429"/>
+        <location filename="../../src/core/controller.cpp" line="431"/>
         <source>&amp;Quit</source>
         <translation>&amp;Surt</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="399"/>
+        <location filename="../../src/core/controller.cpp" line="401"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Captura</translation>
     </message>
@@ -1171,95 +1171,95 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="506"/>
+        <location filename="../../src/core/controller.cpp" line="508"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="24"/>
         <source>Toggle side panel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
         <source>Move selection left 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="52"/>
         <source>Move selection right 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="55"/>
         <source>Move selection up 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="58"/>
         <source>Move selection down 1px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
         <source>Quit capture</source>
         <translation type="unfinished">Ix de la captura</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="86"/>
         <source>Screenshot history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="87"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="89"/>
         <source>Capture screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="94"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
         <source>Show color picker</source>
         <translation type="unfinished">Mostra el selector de color</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="98"/>
         <source>Change the tool&apos;s thickness</source>
         <translation type="unfinished">Canvia el gruix de l&apos;eina</translation>
     </message>
