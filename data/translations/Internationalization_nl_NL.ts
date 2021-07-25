@@ -133,7 +133,7 @@
         <translation>Kan scherm niet vastleggen</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1671"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1672"/>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
@@ -146,7 +146,7 @@ Gebruik het muiswiel om de gereedschapsdikte aan te passen.
 Druk op spatie om het zijpaneel te openen.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="902"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
         <source>Tool Settings</source>
         <translation>Gereedschapsinstellingen</translation>
     </message>
@@ -213,52 +213,52 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <translation>Er is een nieuwe versie beschikbaar: %1</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="205"/>
+        <location filename="../../src/core/controller.cpp" line="207"/>
         <source>You have the latest version</source>
         <translation>Je beschikt over de nieuwste versie</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="213"/>
+        <location filename="../../src/core/controller.cpp" line="215"/>
         <source>Failed to get information about the latest version.</source>
         <translation>Er kan geen versie-informatie worden opgehaald.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="294"/>
+        <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Error</source>
         <translation>Foutmelding</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="294"/>
+        <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Unable to close active modal widgets</source>
         <translation>De actieve, modale widgets kunnen niet worden gesloten</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="399"/>
+        <location filename="../../src/core/controller.cpp" line="401"/>
         <source>&amp;Take Screenshot</source>
         <translation>Schermfo&amp;to maken</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="415"/>
+        <location filename="../../src/core/controller.cpp" line="417"/>
         <source>&amp;Open Launcher</source>
         <translation>Starter &amp;openen</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="420"/>
+        <location filename="../../src/core/controller.cpp" line="422"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Configuratie</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="423"/>
+        <location filename="../../src/core/controller.cpp" line="425"/>
         <source>&amp;About</source>
         <translation>&amp;Over</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="426"/>
+        <location filename="../../src/core/controller.cpp" line="428"/>
         <source>Check for updates</source>
         <translation>Controleren op updates</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="433"/>
+        <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Latest Uploads</source>
         <translation>Recentste up&amp;loads</translation>
     </message>
@@ -267,7 +267,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <translation type="vanished">&amp;Informatie</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="429"/>
+        <location filename="../../src/core/controller.cpp" line="431"/>
         <source>&amp;Quit</source>
         <translation>&amp;Afsluiten</translation>
     </message>
@@ -1188,95 +1188,95 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <translation>Standaard wordt Flameshot op de achtergrond uitgevoerd en toont daarbij een systeemvakpictogram.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="506"/>
+        <location filename="../../src/core/controller.cpp" line="508"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Hallo, hier ben ik! Klik op het systeemvakpictogram om een schermfoto te maken of rechtsklik om meer opties te tonen.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="24"/>
         <source>Toggle side panel</source>
         <translation>Zijpaneel in-/uitklappen</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
         <translation>Afmetingen van selectie 1px aanpassen (links)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
         <translation>Afmetingen van selectie 1px aanpassen (rechts</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
         <translation>Afmetingen van selectie 1px aanpassen (omhoog)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
         <translation>Afmetingen van selectie 1px aanpassen (omlaag)</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
         <translation>Gehele scherm selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
         <source>Move selection left 1px</source>
         <translation>Selectie 1px naar links verschuiven</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="50"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="52"/>
         <source>Move selection right 1px</source>
         <translation>Selectie 1px naar rechts verschuiven</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="53"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="55"/>
         <source>Move selection up 1px</source>
         <translation>Selectie 1px omhoog verschuiven</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="56"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="58"/>
         <source>Move selection down 1px</source>
         <translation>Selectie 1px omlaag verschuiven</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="60"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
         <translation>Tekst in tekstvak</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="66"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="70"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
         <translation>Huidig gereedschap verwijderen</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="74"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
         <source>Quit capture</source>
         <translation>Vastleggen afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="80"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="86"/>
         <source>Screenshot history</source>
         <translation>Schermfotogeschiedenis</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="87"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="89"/>
         <source>Capture screen</source>
         <translation>Scherm vastleggen</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="94"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
         <source>Show color picker</source>
         <translation>Kleurkiezer tonen</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
+        <location filename="../../src/utils/configshortcuts.cpp" line="98"/>
         <source>Change the tool&apos;s thickness</source>
         <translation>Wijzig de gereedschapsdikte</translation>
     </message>
