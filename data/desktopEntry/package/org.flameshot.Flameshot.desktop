@@ -43,6 +43,7 @@ Terminal=false
 Type=Application
 Categories=Graphics;
 StartupNotify=false
+StartupWMClass=flameshot
 Actions=Configure;Capture;Launcher;
 X-DBUS-StartupType=Unique
 X-DBUS-ServiceName=org.flameshot.Flameshot
