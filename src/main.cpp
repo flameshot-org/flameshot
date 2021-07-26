@@ -36,7 +36,7 @@
 int waitAfterConnecting(int delay, QCoreApplication& app)
 {
     QTimer t;
-    t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
+    t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout.
     QObject::connect(&t, &QTimer::timeout, qApp, &QCoreApplication::quit);
     t.start();
     // wait
