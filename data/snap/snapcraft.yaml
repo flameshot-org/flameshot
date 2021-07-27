@@ -51,6 +51,7 @@ parts:
     configflags:
       - '-DCMAKE_BUILD_TYPE=RelWithDebInfo'
       - '-DCMAKE_INSTALL_PREFIX=/usr'
+      - '-DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF'
     source: https://github.com/flameshot-org/flameshot.git
     source-type: git
     override-pull: |
