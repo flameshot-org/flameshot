@@ -129,7 +129,7 @@ void ImgurUploader::upload()
 
     QUrlQuery urlQuery;
     urlQuery.addQueryItem(QStringLiteral("title"),
-                          QStringLiteral("flameshot_screenshot"));
+                          QStringLiteral(""));
     QString description = FileNameHandler().parsedPattern();
     urlQuery.addQueryItem(QStringLiteral("description"), description);
 
