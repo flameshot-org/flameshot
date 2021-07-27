@@ -11,7 +11,7 @@
 *.la
 *.lai
 *.so
-*.dll
+#*.dll
 *.dylib
 
 # Qt-es
