@@ -245,7 +245,7 @@ Steps for using the configuration:
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
-7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty mush self-explanatory.
+7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
@@ -286,7 +286,7 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
 - Experimental Gnome Wayland and Plasma Wayland support.
 
-- If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the system tray icon.
+- If you are using Gnome you need to install the [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/) extension in order to see the system tray icon.
 
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard. Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture to a file. Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
@@ -315,10 +315,11 @@ There are packages available in the repository of some Linux distributions:
 - [Debian 10+](https://tracker.debian.org/pkg/flameshot): `apt install flameshot`
   + Package for Debian 9 ("Stretch") also [available via stretch-backports](https://backports.debian.org/).
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
-- [openSUSE](https://software.opensuse.org/package/flameshot)
-- [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
+- [openSUSE](https://software.opensuse.org/package/flameshot): `zypper install flameshot`
+- [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot): `xbps-install flameshot`
 - [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
-- Fedora: `dnf install flameshot`
+- [Fedora](https://src.fedoraproject.org/rpms/flameshot): `dnf install flameshot`
+- [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
 
@@ -511,7 +512,7 @@ Simply use `make install` with privileges.
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
 
 ### FAQ
-https://flameshot.org/faq/
+https://flameshot.org/guide/faq/
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)

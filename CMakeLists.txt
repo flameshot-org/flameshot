@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
-set(FLAMESHOT_VERSION 0.10.0.1)
+set(FLAMESHOT_VERSION 0.10.1.1)
 
 # Flameshot-org
 if(DEFINED ENV{FLAMESHOT_GIT_API_URL})
