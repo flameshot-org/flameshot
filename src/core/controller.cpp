@@ -35,6 +35,7 @@
 #include <QOperatingSystemVersion>
 #include <QSystemTrayIcon>
 #include <QThread>
+#include <QVersionNumber>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -170,29 +171,12 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
 
-        // Transform strings version for correct comparison
-        QStringList appLatestVersion =
-          m_appLatestVersion.replace("v", "").split(".");
-        QStringList currentVersion =
-          QStringLiteral(APP_VERSION).replace("v", "").split(".");
-        // transform versions to the string which can be compared correctly,
-        // example: versions "0.8.5.9" and "0.8.5.10" are transformed into:
-        // "0000.0008.0005.0009" and "0000.0008.0005.0010"
-        // For string comparison you'll get:
-        // "0.8.5.9" < "0.8.5.10" INCORRECT (lower version is bigger)
-        // "0000.0008.0005.0009" > "0000.0008.0005.0010" CORRECT
-        std::transform(
-          appLatestVersion.begin(),
-          appLatestVersion.end(),
-          appLatestVersion.begin(),
-          [](QString c) -> QString { return c = ("0000" + c).right(4); });
-        std::transform(
-          currentVersion.begin(),
-          currentVersion.end(),
-          currentVersion.begin(),
-          [](QString c) -> QString { return c = ("0000" + c).right(4); });
+        QVersionNumber appLatestVersion =
+          QVersionNumber::fromString(m_appLatestVersion);
+        QVersionNumber currentVersion = QVersionNumber::fromString(
+          QStringLiteral(APP_VERSION).replace("v", ""));
 
-        if (currentVersion.join(".").compare(appLatestVersion.join(".")) < 0) {
+        if (currentVersion < appLatestVersion) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
