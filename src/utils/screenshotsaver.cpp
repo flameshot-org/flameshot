@@ -142,7 +142,7 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
               dialog.selectedNameFilter().section('.', -1);
             selectedExtension.remove(QChar(')'));
             file_name =
-              info.path() + QLatin1String("/") + info.baseName() +
+              info.path() + QLatin1String("/") + info.completeBaseName() +
               QLatin1String(".") +
               selectedExtension; // recreate full filename with chosen suffix
         }
