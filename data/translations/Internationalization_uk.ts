@@ -665,7 +665,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Скасувати обмеження</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
