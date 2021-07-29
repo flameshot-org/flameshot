@@ -19,11 +19,13 @@
 // ConfigWindow contains the menus where you can configure the application
 
 ConfigWindow::ConfigWindow(QWidget* parent)
-  : QTabWidget(parent)
+  : QWidget(parent)
 {
+    auto layout = new QVBoxLayout(this);
+    m_tabs = new QTabWidget();
+    layout->addWidget(m_tabs);
+
     setAttribute(Qt::WA_DeleteOnClose);
-    setMinimumSize(GlobalValues::buttonBaseSize() * 15,
-                   GlobalValues::buttonBaseSize() * 18);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("Configuration"));
 
@@ -46,21 +48,24 @@ ConfigWindow::ConfigWindow(QWidget* parent)
 
     // visuals
     m_visuals = new VisualsEditor();
-    addTab(m_visuals, QIcon(modifier + "graphics.svg"), tr("Interface"));
+    m_tabs->addTab(
+      m_visuals, QIcon(modifier + "graphics.svg"), tr("Interface"));
 
     // filename
     m_filenameEditor = new FileNameEditor();
-    addTab(m_filenameEditor,
-           QIcon(modifier + "name_edition.svg"),
-           tr("Filename Editor"));
+    m_tabs->addTab(m_filenameEditor,
+                   QIcon(modifier + "name_edition.svg"),
+                   tr("Filename Editor"));
 
     // general
     m_generalConfig = new GeneralConf();
-    addTab(m_generalConfig, QIcon(modifier + "config.svg"), tr("General"));
+    m_tabs->addTab(
+      m_generalConfig, QIcon(modifier + "config.svg"), tr("General"));
 
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
-    addTab(m_shortcuts, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
+    m_tabs->addTab(
+      m_shortcuts, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
 
     // connect update sigslots
     connect(this,
