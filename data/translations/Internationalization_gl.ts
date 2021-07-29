@@ -492,122 +492,122 @@ Preme Espacio para abrir o panel lateral.</translation>
         <location filename="../../src/config/generalconf.cpp" line="217"/>
         <location filename="../../src/config/generalconf.cpp" line="221"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Amosar as notificacións no escritorio</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="233"/>
         <source>Show tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar icono na barra de tarefas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="236"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar o icono na barra de tarefas do sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="249"/>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmación necesaria para excluir a captura de pantalla dos uploads mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Configuration File</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo de configuración</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="296"/>
         <location filename="../../src/config/generalconf.cpp" line="298"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificación automática de actualizacións</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="309"/>
         <source>Launch at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar no inicio do sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="312"/>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="322"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation>Amosar mensaxe de benvida no inicio</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>Copy URL after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar a URL despois da subida</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL and close window after upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar a URL e pechar a xanela despois da subida</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Save image after copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar a imaxe despois de copiar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="353"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar o arquivo de imaxe despois de copialo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="360"/>
         <source>Save Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar ruta</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="384"/>
         <source>Change...</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar...</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar unha ruta fixa para gardar a captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño máximo das subidas mais recentes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="443"/>
         <location filename="../../src/config/generalconf.cpp" line="448"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa o formato JPG para a área de transferencia (PNG por defecto)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="482"/>
         <location filename="../../src/config/generalconf.cpp" line="485"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia a ruta do arquivo despois de gardar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="501"/>
         <source>Choose a Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolle un directorio</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Unable to write to directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de escribir no directorio.</translation>
     </message>
 </context>
 <context>
@@ -615,37 +615,37 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Últimos envíos</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>O histórico de capturas de pantalla está valeiro</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar a URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL copiada para a área de transferencia.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir no navegador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirma para borrar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tes certeza de que desexas borrar unha captura de pantalla das últimas subidas e do servidor?</translation>
     </message>
 </context>
 <context>
@@ -703,48 +703,48 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
         <source>Upload to Imgur</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar para Imgur</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviando imaxe</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
         <source>Delete image</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar imaxe</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Imaxe a área de transeferencia.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non foi posible abrir a URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL copiada para a área de transferencia.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura de pantalla copiada para a área de transferencia.</translation>
     </message>
 </context>
 <context>
