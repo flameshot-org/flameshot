@@ -14,6 +14,7 @@
 #include <QFileSystemWatcher>
 #include <QIcon>
 #include <QKeyEvent>
+#include <QTabBar>
 #include <QVBoxLayout>
 
 // ConfigWindow contains the menus where you can configure the application
@@ -21,8 +22,10 @@
 ConfigWindow::ConfigWindow(QWidget* parent)
   : QWidget(parent)
 {
+    // We wrap QTabWidget in a QWidget because of a Qt bug
     auto layout = new QVBoxLayout(this);
     m_tabs = new QTabWidget();
+    m_tabs->tabBar()->setUsesScrollButtons(false);
     layout->addWidget(m_tabs);
 
     setAttribute(Qt::WA_DeleteOnClose);
