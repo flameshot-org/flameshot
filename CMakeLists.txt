@@ -62,6 +62,9 @@ set(RUN_IN_PLACE
         CACHE BOOL "Run directly in source directory structure")
 
 option(GENERATE_TS "Regenerate translation source files" OFF)
+option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
+option(USE_EXTERNAL_SPDLOG "Use external spdlog library" OFF)
+option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 
 include(cmake/StandardProjectSettings.cmake)
 

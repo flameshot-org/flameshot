@@ -231,32 +231,32 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="294"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de pechar widgets modais activos</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="415"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abrir o lanzador de aplicativos</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="420"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Configuración</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar se hai actualizacións</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Últimos envíos</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -265,12 +265,12 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="429"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saír</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tirar unha captura de pantalla</translation>
     </message>
 </context>
 <context>
@@ -278,12 +278,12 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia a selección para a área de transferencia</translation>
     </message>
 </context>
 <context>
@@ -291,7 +291,7 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>Non foi posible conectar vía DBus</translation>
     </message>
 </context>
 <context>
@@ -299,12 +299,12 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="23"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Saír</translation>
     </message>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Saír da pantalla de captura</translation>
     </message>
 </context>
 <context>
@@ -312,32 +312,32 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Edita o nome das túas capturas:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
         <source>Preview:</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsualización:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="73"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Garda o patrón</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurar</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -346,17 +346,17 @@ Preme Espacio para abrir o panel lateral.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaura o padrón gardado</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation type="unfinished"></translation>
+        <translation>Apaga o padrón</translation>
     </message>
 </context>
 <context>
@@ -432,7 +432,7 @@ Preme Espacio para abrir o panel lateral.</translation>
         <location filename="../../src/config/generalconf.cpp" line="107"/>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="114"/>
@@ -440,53 +440,53 @@ Preme Espacio para abrir o panel lateral.</translation>
         <location filename="../../src/config/generalconf.cpp" line="145"/>
         <location filename="../../src/config/generalconf.cpp" line="510"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="114"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de ler o arquivo.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="122"/>
         <location filename="../../src/config/generalconf.cpp" line="145"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de gardar o arquivo.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="132"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Gardar arquivo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="154"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirma a reinicialización</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="155"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tes certeza que queres reinicializar a configuración?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="190"/>
         <source>Show help message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra a mensaxe de axuda</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="194"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra a mensaxe de axuda no inicio do modo de captura.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="204"/>
         <source>Show the side panel button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra o botón no panel lateral</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="207"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra o botón de alternancia do panel lateral no modo de captura.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="217"/>

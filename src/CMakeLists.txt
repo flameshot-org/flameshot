@@ -237,6 +237,12 @@ endforeach ()
 include(GNUInstallDirs)
 set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/Flameshot)
 
+if(USE_LAUNCHER_ABSOLUTE_PATH)
+    set(LAUNCHER_EXECUTABLE "${CMAKE_INSTALL_FULL_BINDIR}/flameshot")
+else()
+    set(LAUNCHER_EXECUTABLE "flameshot")
+endif()
+
 # Install binary
 install(TARGETS flameshot
         EXPORT flameshot-targets
@@ -245,7 +251,7 @@ install(TARGETS flameshot
 
 # Install desktop files, completion and dbus files
 configure_file(${CMAKE_SOURCE_DIR}/data/desktopEntry/package/org.flameshot.Flameshot.desktop
-        ${CMAKE_CURRENT_BINARY_DIR}/share/applications/org.flameshot.Flameshot.desktop COPYONLY)
+        ${CMAKE_CURRENT_BINARY_DIR}/share/applications/org.flameshot.Flameshot.desktop @ONLY)
 
 configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
         ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)

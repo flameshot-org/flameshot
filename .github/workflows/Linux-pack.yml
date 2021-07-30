@@ -483,12 +483,11 @@ jobs:
           APPIMAGETOOL_ARCH: x86_64
       - name: Packaging appimage
         run: |
-          sed  -i 's|Exec=/usr/bin/flameshot|Exec=flameshot|g' data/desktopEntry/package/org.flameshot.Flameshot.desktop
           APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
           mkdir -p ${APPIMAGE_DST_PATH}
 
           cd $GITHUB_WORKSPACE
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
           make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
 
           $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop
