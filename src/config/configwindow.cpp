@@ -24,7 +24,7 @@ ConfigWindow::ConfigWindow(QWidget* parent)
 {
     // We wrap QTabWidget in a QWidget because of a Qt bug
     auto layout = new QVBoxLayout(this);
-    m_tabs = new QTabWidget();
+    m_tabs = new QTabWidget(this);
     m_tabs->tabBar()->setUsesScrollButtons(false);
     layout->addWidget(m_tabs);
 
