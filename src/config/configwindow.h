@@ -11,7 +11,7 @@ class GeneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
 
-class ConfigWindow : public QTabWidget
+class ConfigWindow : public QWidget
 {
     Q_OBJECT
 public:
@@ -24,6 +24,7 @@ protected:
     void keyPressEvent(QKeyEvent*);
 
 private:
+    QTabWidget* m_tabs;
     FileNameEditor* m_filenameEditor;
     ShortcutsWidget* m_shortcuts;
     GeneralConf* m_generalConfig;
