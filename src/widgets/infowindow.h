@@ -16,7 +16,13 @@ public:
 protected:
     void keyPressEvent(QKeyEvent*);
 
+private slots:
+    void copyInfo();
+
 private:
     void initLabels();
     QVBoxLayout* m_layout;
 };
+
+QString generateVersionString();
+QString generateKernelString();
