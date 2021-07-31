@@ -51,7 +51,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     updateComponents();
 }
 
-void GeneralConf::updateComponents()
+void GeneralConf::_updateComponents(bool allowEmptySavePath)
 {
     ConfigHandler config;
     m_helpMessage->setChecked(config.showHelpValue());
@@ -63,14 +63,15 @@ void GeneralConf::updateComponents()
     m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
-    m_historyConfirmationToDelete->setChecked(config.historyConfirmationToDelete());
+    m_historyConfirmationToDelete->setChecked(
+      config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
     m_undoLimit->setValue(config.undoLimit());
 
-    if (!config.savePath().isEmpty()) {
+    if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     } else {
         ConfigHandler().setSavePath(
@@ -79,6 +80,11 @@ void GeneralConf::updateComponents()
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
 #endif
+}
+
+void GeneralConf::updateComponents()
+{
+    _updateComponents(false);
 }
 
 void GeneralConf::showHelpChanged(bool checked)
@@ -173,32 +179,8 @@ void GeneralConf::resetConfiguration()
         m_savePath->setText(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
         ConfigHandler().setDefaultSettings();
-        setActualFormData();
+        _updateComponents(true);
     }
-}
-
-void GeneralConf::setActualFormData()
-{
-    // read and set current settings
-    ConfigHandler config;
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_showTray->setChecked(!config.disabledTrayIconValue());
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
-    m_checkForUpdates->setChecked(config.checkForUpdates());
-    m_autostart->setChecked(config.startupLaunchValue());
-    m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
-    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-    m_savePath->setText(config.savePath());
-    m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
-    m_historyConfirmationToDelete->setChecked(
-      config.historyConfirmationToDelete());
-    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
-    m_undoLimit->setValue(config.undoLimit());
-    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 }
 
 void GeneralConf::initScrollArea()
