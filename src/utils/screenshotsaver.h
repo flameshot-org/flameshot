@@ -25,12 +25,5 @@ private:
     unsigned m_id;
     QString ShowSaveFileDialog(QWidget* parent,
                                const QString& title,
-                               const QString& directory,
-                               const QString& filter);
-
-    const QString pngFilter = "Portable Network Graphic file (PNG) (*.png)";
-    const QString bmpFilter = "BMP file (*.bmp)";
-    const QString jpgFilter = "JPEG file (*.jpg)";
-    const QString defaultFilter = "By extension [default: *.png] (*.png)";
-    const QString separator = ";;";
+                               const QString& directory);
 };
