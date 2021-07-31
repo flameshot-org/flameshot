@@ -6,12 +6,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>راه‌انداز برنامه</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>برنامه‌ای را برای باز کردن ضبط انتخاب کنید</translation>
     </message>
 </context>
 <context>
@@ -19,33 +19,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation type="unfinished"></translation>
+        <translation>بازکردن با</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>راه‌اندازی در پایانه</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished"></translation>
+        <translation>پس از انتخاب باز بماند</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطا</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Unable to launch in terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>راه‌اندازی در پایانه امکان پذیر نیست.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>نوشتن امکان پذیر نیست</translation>
     </message>
 </context>
 <context>
@@ -53,12 +53,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="72"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">پیکان</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم پیکان به عنوان ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -77,52 +77,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;حالت ضبط&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="47"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>منطقه مستطیلی</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>تمام صفحه (نمایشگر فعلی)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>تمام صفحه (همه نمایشگرها)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">بدون تاخیر</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> ثانیه</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="72"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> ثانیه</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="76"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>گرفتن نماگرفت جدید</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="85"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>مساحت:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">تاخیر:</translation>
     </message>
 </context>
 <context>
@@ -131,7 +131,7 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>ضبط صفحه نمایش امکان پذیر نیست</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1672"/>
@@ -140,12 +140,16 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation type="unfinished"></translation>
+        <translation>ناحیه‌ای را با ماوس انتخاب کنید یا برای خروج Esc را فشار دهید.
+برای ضبط صفحه، کلید اینتر را فشار دهید.
+برای نمایش انتخابگر رنگ، راست کلیک کنید.
+از لغزنده ماوس برای تغییر ضخامت ابزار خود استفاده کنید.
+برای بازکردن پانل کناری، کلید فاصله را فشار دهید.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
         <source>Tool Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات ابزار</translation>
     </message>
 </context>
 <context>
@@ -153,7 +157,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation>شمارنده دایره‌ای</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
