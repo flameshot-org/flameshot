@@ -11,6 +11,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
 #include <QTextCodec>
@@ -23,6 +24,11 @@ GeneralConf::GeneralConf(QWidget* parent)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
+
+    // Scroll area adapts the size of the content on small screens.
+    // It must be initialized before the checkboxes.
+    initScrollArea();
+
     initShowHelp();
     initShowSidePanelButton();
     initShowDesktopNotification();
@@ -191,6 +197,25 @@ void GeneralConf::setActualFormData()
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
 }
 
+void GeneralConf::initScrollArea()
+{
+    m_scrollArea = new QScrollArea(this);
+    m_layout->addWidget(m_scrollArea);
+
+    QWidget* content = new QWidget(m_scrollArea);
+    m_scrollArea->setWidget(content);
+    m_scrollArea->setWidgetResizable(true);
+    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    content->setObjectName("content");
+    m_scrollArea->setObjectName("scrollArea");
+    m_scrollArea->setStyleSheet(
+      "#content, #scrollArea { background: transparent; border: 0px; }");
+    m_scrollAreaLayout = new QVBoxLayout(content);
+    m_scrollAreaLayout->setContentsMargins(0, 0, 20, 0);
+}
+
 void GeneralConf::initShowHelp()
 {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
@@ -199,7 +224,7 @@ void GeneralConf::initShowHelp()
     m_helpMessage->setChecked(checked);
     m_helpMessage->setToolTip(tr("Show the help message at the beginning "
                                  "in the capture mode."));
-    m_layout->addWidget(m_helpMessage);
+    m_scrollAreaLayout->addWidget(m_helpMessage);
 
     connect(
       m_helpMessage, &QCheckBox::clicked, this, &GeneralConf::showHelpChanged);
@@ -211,7 +236,7 @@ void GeneralConf::initShowSidePanelButton()
     m_sidePanelButton->setChecked(ConfigHandler().showSidePanelButtonValue());
     m_sidePanelButton->setToolTip(
       tr("Show the side panel toggle button in the capture mode."));
-    m_layout->addWidget(m_sidePanelButton);
+    m_scrollAreaLayout->addWidget(m_sidePanelButton);
 
     connect(m_sidePanelButton,
             &QCheckBox::clicked,
@@ -225,7 +250,7 @@ void GeneralConf::initShowDesktopNotification()
     bool checked = config.desktopNotificationValue();
     m_sysNotifications->setChecked(checked);
     m_sysNotifications->setToolTip(tr("Show desktop notifications"));
-    m_layout->addWidget(m_sysNotifications);
+    m_scrollAreaLayout->addWidget(m_sysNotifications);
 
     connect(m_sysNotifications,
             &QCheckBox::clicked,
@@ -240,7 +265,7 @@ void GeneralConf::initShowTrayIcon()
     bool checked = !ConfigHandler().disabledTrayIconValue();
     m_showTray->setChecked(checked);
     m_showTray->setToolTip(tr("Show the systemtray icon"));
-    m_layout->addWidget(m_showTray);
+    m_scrollAreaLayout->addWidget(m_showTray);
 
     connect(m_showTray,
             &QCheckBox::stateChanged,
@@ -258,7 +283,7 @@ void GeneralConf::initHistoryConfirmationToDelete()
       ConfigHandler().historyConfirmationToDelete());
     m_historyConfirmationToDelete->setToolTip(
       tr("Confirmation required to delete screenshot from the latest uploads"));
-    m_layout->addWidget(m_historyConfirmationToDelete);
+    m_scrollAreaLayout->addWidget(m_historyConfirmationToDelete);
 
     connect(m_historyConfirmationToDelete,
             &QCheckBox::clicked,
@@ -301,7 +326,7 @@ void GeneralConf::initCheckForUpdates()
     m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
     m_checkForUpdates->setChecked(ConfigHandler().checkForUpdates());
     m_checkForUpdates->setToolTip(tr("Automatic check for updates"));
-    m_layout->addWidget(m_checkForUpdates);
+    m_scrollAreaLayout->addWidget(m_checkForUpdates);
 
     connect(m_checkForUpdates,
             &QCheckBox::clicked,
@@ -315,7 +340,7 @@ void GeneralConf::initAutostart()
     bool checked = ConfigHandler().startupLaunchValue();
     m_autostart->setChecked(checked);
     m_autostart->setToolTip(tr("Launch Flameshot"));
-    m_layout->addWidget(m_autostart);
+    m_scrollAreaLayout->addWidget(m_autostart);
 
     connect(
       m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
@@ -329,7 +354,7 @@ void GeneralConf::initShowStartupLaunchMessage()
     bool checked = config.showStartupLaunchMessage();
     m_showStartupLaunchMessage->setChecked(checked);
     m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
-    m_layout->addWidget(m_showStartupLaunchMessage);
+    m_scrollAreaLayout->addWidget(m_showStartupLaunchMessage);
 
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowStartupLaunchMessage(checked);
@@ -345,7 +370,7 @@ void GeneralConf::initCopyAndCloseAfterUpload()
       config.copyAndCloseAfterUploadEnabled());
     m_copyAndCloseAfterUpload->setToolTip(
       tr("Copy URL and close window after upload"));
-    m_layout->addWidget(m_copyAndCloseAfterUpload);
+    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
 
     connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
@@ -356,7 +381,7 @@ void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
     m_saveAfterCopy->setToolTip(tr("Save image file after copying it"));
-    m_layout->addWidget(m_saveAfterCopy);
+    m_scrollAreaLayout->addWidget(m_saveAfterCopy);
     connect(m_saveAfterCopy,
             &QCheckBox::clicked,
             this,
@@ -473,7 +498,7 @@ void GeneralConf::initUseJpgForClipboard()
     m_useJpgForClipboard->setChecked(checked);
     m_useJpgForClipboard->setToolTip(
       tr("Use JPG format for clipboard (PNG default)"));
-    m_layout->addWidget(m_useJpgForClipboard);
+    m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 
 #if defined(Q_OS_MACOS)
     // FIXME - temporary fix to disable option for MacOS
@@ -510,7 +535,7 @@ void GeneralConf::initCopyPathAfterSave()
     ConfigHandler config;
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
-    m_layout->addWidget(m_copyPathAfterSave);
+    m_scrollAreaLayout->addWidget(m_copyPathAfterSave);
     connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyPathAfterSaveEnabled(checked);
     });
