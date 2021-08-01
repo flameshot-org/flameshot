@@ -225,6 +225,7 @@ void GeneralConf::initShowSidePanelButton()
             this,
             &GeneralConf::showSidePanelButtonChanged);
 }
+
 void GeneralConf::initShowDesktopNotification()
 {
     m_sysNotifications = new QCheckBox(tr("Show desktop notifications"), this);
@@ -323,7 +324,8 @@ void GeneralConf::initShowStartupLaunchMessage()
     m_showStartupLaunchMessage =
       new QCheckBox(tr("Show welcome message on launch"), this);
     ConfigHandler config;
-    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
+    m_showStartupLaunchMessage->setToolTip(
+      tr("Show welcome message on launch"));
     m_scrollAreaLayout->addWidget(m_showStartupLaunchMessage);
 
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
