@@ -446,7 +446,7 @@ void GeneralConf::initClipboardFormat()
     m_clipboardFormat = new QComboBox(this);
     ConfigHandler config;
 
-    m_clipboardFormat->setToolTip(tr("Clipboard format (only for Wayland)"));
+    m_clipboardFormat->setToolTip(tr("Clipboard format"));
     m_clipboardFormat->addItem(tr("Auto"), "auto");
     m_clipboardFormat->addItem(tr("PNG"), "png");
     m_clipboardFormat->addItem(tr("JPEG"), "jpeg");
@@ -457,7 +457,7 @@ void GeneralConf::initClipboardFormat()
 
     m_layout->addWidget(m_clipboardFormat);
 
-    QGroupBox* box = new QGroupBox(tr("Clipboard format (only for Wayland)"));
+    QGroupBox* box = new QGroupBox(tr("Clipboard format"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
