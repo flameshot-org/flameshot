@@ -134,8 +134,10 @@ void Controller::enableExports()
 
 void Controller::setCheckForUpdatesEnabled(const bool enabled)
 {
-    m_appUpdates->setVisible(enabled);
-    m_appUpdates->setEnabled(enabled);
+    if (m_appUpdates != nullptr) {
+        m_appUpdates->setVisible(enabled);
+        m_appUpdates->setEnabled(enabled);
+    }
     if (enabled) {
         getLatestAvailableVersion();
     }
