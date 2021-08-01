@@ -573,7 +573,7 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 
 bool ConfigHandler::useJpgForClipboard() const
 {
-#if not defined(Q_OS_MACOS)
+#if !defined(Q_OS_MACOS)
     // FIXME - temporary fix to disable option for MacOS
     if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
         return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
