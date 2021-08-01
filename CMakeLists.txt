@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
-set(FLAMESHOT_VERSION 0.10.0)
+set(FLAMESHOT_VERSION 0.10.1)
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
@@ -62,6 +62,9 @@ set(RUN_IN_PLACE
         CACHE BOOL "Run directly in source directory structure")
 
 option(GENERATE_TS "Regenerate translation source files" OFF)
+option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
+option(USE_EXTERNAL_SPDLOG "Use external spdlog library" OFF)
+option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 
 include(cmake/StandardProjectSettings.cmake)
 

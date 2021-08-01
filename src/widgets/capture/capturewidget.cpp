@@ -221,6 +221,7 @@ void CaptureWidget::updateButtons()
             case CaptureToolButton::ButtonType::TYPE_SAVE:
             case CaptureToolButton::ButtonType::TYPE_COPY:
             case CaptureToolButton::ButtonType::TYPE_UNDO:
+            case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
             case CaptureToolButton::ButtonType::TYPE_REDO:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
