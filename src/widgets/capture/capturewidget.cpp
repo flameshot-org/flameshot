@@ -1213,8 +1213,7 @@ void CaptureWidget::removeToolObject(int index)
 {
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
-        const ToolType currentToolType =
-          m_captureToolObjects.at(index)->type();
+        const ToolType currentToolType = m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.removeAt(index);
         if (currentToolType == ToolType::CIRCLECOUNT) {
