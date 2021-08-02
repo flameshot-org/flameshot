@@ -2,7 +2,7 @@
 
 name: flameshot
 adopt-info: flameshot
-base: core18
+base: core20
 summary: Powerful yet simple to use screenshot software
 description: |
   A powerful open source screenshot and annotation tool for Linux, Flameshot
@@ -18,8 +18,8 @@ architectures:
 
 apps:
   flameshot:
-    command: flameshot
-    desktop: usr/share/applications/org.flameshot.Flameshot.desktop
+    command: usr/local/bin/flameshot
+    desktop: usr/local/share/applications/org.flameshot.Flameshot.desktop
     extensions:
       - kde-neon
     environment:
@@ -34,22 +34,15 @@ apps:
       - network
       - network-bind
       - opengl
-      - pulseaudio
-      - wayland
-      - unity7
       - x11
+      - wayland
 
 parts:
   flameshot:
     build-snaps:
-      - kde-frameworks-5-core18-sdk
-      - kde-frameworks-5-core18
-      - cmake #core18 does not have new enough cmake so install from snap
-    plugin: cmake
-    configflags:
-      - '-DCMAKE_BUILD_TYPE=RelWithDebInfo'
-      - '-DCMAKE_INSTALL_PREFIX=/usr'
+      - kde-frameworks-5-qt-5-15-core20
     source: https://github.com/flameshot-org/flameshot.git
+    plugin: cmake
     source-type: git
     override-pull: |
       snapcraftctl pull
@@ -60,27 +53,19 @@ parts:
     override-build: |
       snapcraftctl build
       # Correct the Icon path
-      sed -i 's|^Exec=flameshot|Exec=/snap/bin/org.flameshot.Flameshot|' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
-      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
-      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snappy Edition)/g' ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's|^Exec=flameshot|Exec=/snap/bin/org.flameshot.Flameshot|' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/local/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg|' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
+      sed -i 's/^\(Name\(\[.\+\]\)\?=.*\)$/\1 (Snappy Edition)/g' ${SNAPCRAFT_PART_INSTALL}/usr/local/share/applications/org.flameshot.Flameshot.desktop
     build-packages:
       - g++
       - make
-      - qt5-default 
-      - qttools5-dev-tools 
-      - libqt5svg5-dev
+      - qt5-default
+      - git
     stage-packages:
       - dbus-x11
       - libgtk2.0-0
       - openssl
       - ca-certificates
-      - qtwayland5
-      - libqt5dbus5 
-      - libqt5network5 
-      - libqt5core5a 
-      - libqt5widgets5 
-      - libqt5gui5 
-      - libqt5svg5
       - libxkbcommon0
       - ttf-ubuntu-font-family
       - dmz-cursor-theme
@@ -89,12 +74,6 @@ parts:
       - gnome-themes-standard
       - shared-mime-info
       - libgdk-pixbuf2.0-0
-    prime:
-      # libquazip5-1 pulls in Qt5 from bionic as a dependency. We don't
-      # want it in our snap, however, because we get a newer Qt5 from the
-      # kde-kf5 platform snap.
-      - "-usr/lib/x86_64-linux-gnu/libQt5*"
-      - "-usr/lib/x86_64-linux-gnu/libqt5*"
 slots:
   # Depending on in which environment we're running we either need
   # to use the system or session DBus so we also need to have one

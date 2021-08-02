@@ -37,8 +37,8 @@ UIcolorEditor::UIcolorEditor(QWidget* parent)
 void UIcolorEditor::updateComponents()
 {
     ConfigHandler config;
-    m_uiColor = config.uiMainColorValue();
-    m_contrastColor = config.uiContrastColorValue();
+    m_uiColor = config.uiColor();
+    m_contrastColor = config.contrastUiColor();
     m_buttonContrast->setColor(m_contrastColor);
     m_buttonMainColor->setColor(m_uiColor);
     if (m_lastButtonPressed == m_buttonMainColor) {
@@ -53,9 +53,9 @@ void UIcolorEditor::updateUIcolor()
 {
     ConfigHandler config;
     if (m_lastButtonPressed == m_buttonMainColor) {
-        config.setUIMainColor(m_uiColor);
+        config.setUiColor(m_uiColor);
     } else {
-        config.setUIContrastColor(m_contrastColor);
+        config.setContrastUiColor(m_contrastColor);
     }
 }
 
@@ -74,7 +74,7 @@ void UIcolorEditor::initColorWheel()
 {
     m_colorWheel = new color_widgets::ColorWheel(this);
     connect(m_colorWheel,
-            &color_widgets::ColorWheel::mouseReleaseOnColor,
+            &color_widgets::ColorWheel::colorSelected,
             this,
             &UIcolorEditor::updateUIcolor);
     connect(m_colorWheel,
@@ -131,11 +131,11 @@ void UIcolorEditor::initButtons()
                                     " mode of the contrast color."));
 
     connect(m_buttonMainColor,
-            &CaptureToolButton::pressedButton,
+            &CaptureToolButton::pressedButtonLeftClick,
             this,
             &UIcolorEditor::changeLastButton);
     connect(m_buttonContrast,
-            &CaptureToolButton::pressedButton,
+            &CaptureToolButton::pressedButtonLeftClick,
             this,
             &UIcolorEditor::changeLastButton);
     // clicking the labels changes the button too

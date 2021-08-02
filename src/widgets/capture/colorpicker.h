@@ -11,22 +11,21 @@ class ColorPicker : public QWidget
 public:
     explicit ColorPicker(QWidget* parent = nullptr);
 
-    void show();
-    void hide();
-
 signals:
     void colorSelected(QColor c);
 
 protected:
-    void paintEvent(QPaintEvent*);
-    void mouseMoveEvent(QMouseEvent*);
-
-    QVector<QRect> handleMask() const;
+    void paintEvent(QPaintEvent* event) override;
+    void repaint(int i, QPainter& painter);
+    void mouseMoveEvent(QMouseEvent*) override;
+    void showEvent(QShowEvent* event) override;
+    void hideEvent(QHideEvent* event) override;
 
 private:
     int m_colorAreaSize;
+    int m_selectedIndex, m_lastIndex;
     QVector<QRect> m_colorAreaList;
     QVector<QColor> m_colorList;
 
-    QColor m_uiColor, m_drawColor;
+    QColor m_uiColor;
 };

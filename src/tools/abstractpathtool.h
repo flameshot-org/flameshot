@@ -15,16 +15,17 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect mousePreviewRect(const CaptureContext& context) const override;
+    QRect boundingRect() const override;
     void move(const QPoint& mousePos) override;
     const QPoint* pos() override;
-    void drawObjectSelection(QPainter& painter) override;
-    int thickness() override { return m_thickness; };
+    int size() const override { return m_thickness; };
 
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
-    void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
+    void onColorChanged(const QColor& c) override;
+    void onSizeChanged(int size) override;
 
 protected:
     void copyParams(const AbstractPathTool* from, AbstractPathTool* to);

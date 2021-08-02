@@ -6,12 +6,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>Anwendungs Starter</translation>
+        <translation>Anwendungsstarter</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>Wähle eine Anwendung um die Aufnahme zu öffnen</translation>
+        <translation>Wähle eine Anwendung, um die Aufnahme zu öffnen</translation>
     </message>
 </context>
 <context>
@@ -92,7 +92,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>Gesamter Bildschrim (alle Monitore)</translation>
+        <translation>Gesamter Bildschirm (alle Monitore)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="76"/>
         <source>Take new screenshot</source>
-        <translation>eine neue Aufnahme beginnen</translation>
+        <translation>Neues Bildschirmfoto erstellen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="85"/>
@@ -148,7 +148,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
         <source>Tool Settings</source>
-        <translation>Wekzeugeinstellungen</translation>
+        <translation>Werkzeugeinstellungen</translation>
     </message>
 </context>
 <context>
@@ -241,7 +241,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="417"/>
         <source>&amp;Open Launcher</source>
-        <translation>Applauncher &amp;Oeffnen</translation>
+        <translation>Anwendung öffnen</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
@@ -261,7 +261,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Latest Uploads</source>
-        <translation>zu&amp;letzt Hochgeladenes</translation>
+        <translation>&amp;Letzte Uploads</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -317,7 +317,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
         <source>Edit:</source>
-        <translation>Bearbeite:</translation>
+        <translation>Namensmuster:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="30"/>
@@ -337,7 +337,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -485,7 +485,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
         <source>Show the side panel button</source>
-        <translation>Den Seitenpanelknopf anzeigen</translation>
+        <translation>Schaltfläche für Seitenpanel anzeigen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="213"/>
@@ -589,12 +589,12 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Größe der letzten Uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellbare Schritte</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
@@ -934,12 +934,12 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Registrierung von %1 ist fehlgeschlagen. Fehler: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Registrierung von %1 konnte nicht aufgehoben werden. Fehler: %2</translation>
     </message>
 </context>
 <context>
@@ -984,12 +984,12 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern abbrechen</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern abgebrochen</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
@@ -1256,7 +1256,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelles Werkzeug löschen</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
@@ -1361,12 +1361,12 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen mit Esc oder ⌘+Rücktaste zum Deaktivieren des Tastaturkürzels.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>Zum Deaktivieren des Tastenkürzels ESC oder die Backspacetaste drücken.</translation>
+        <translation>Abbrechen mit Esc oder die Rücktaste zum Deaktivieren des Tastaturkürzels.</translation>
     </message>
 </context>
 <context>
@@ -1446,7 +1446,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation>Auswahlgrößen Indentifikator</translation>
+        <translation>Größe der Auswahl</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
@@ -1690,7 +1690,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Leer&gt;</translation>
     </message>
 </context>
 <context>

@@ -19,9 +19,9 @@ public:
     void process(QPainter& painter, const QPixmap& pixmap) override;
 
 protected:
-    ToolType nameID() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void drawStart(const CaptureContext& context) override;
-    void pressed(const CaptureContext& context) override;
+    void pressed(CaptureContext& context) override;
 };

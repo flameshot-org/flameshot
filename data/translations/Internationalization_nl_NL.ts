@@ -593,7 +593,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Beperking ongedaan maken</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>

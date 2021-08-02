@@ -5,12 +5,17 @@
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
+#include <QComboBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
+#include <QImageWriter>
+#include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSettings>
+#include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
 #include <QTextCodec>
@@ -23,6 +28,11 @@ GeneralConf::GeneralConf(QWidget* parent)
 {
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignTop);
+
+    // Scroll area adapts the size of the content on small screens.
+    // It must be initialized before the checkboxes.
+    initScrollArea();
+
     initShowHelp();
     initShowSidePanelButton();
     initShowDesktopNotification();
@@ -33,10 +43,16 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
+    initAntialiasingPinZoom();
+    initUploadWithoutConfirmation();
     initUseJpgForClipboard();
     initSaveAfterCopy();
-    initUploadHistoryMaxSize();
+    inituploadHistoryMax();
     initUndoLimit();
+    initAllowMultipleGuiInstances();
+#if !defined(Q_OS_WIN)
+    initAutoCloseIdleDaemon();
+#endif
 
     m_layout->addStretch();
 
@@ -45,30 +61,40 @@ GeneralConf::GeneralConf(QWidget* parent)
     updateComponents();
 }
 
-void GeneralConf::updateComponents()
+void GeneralConf::_updateComponents(bool allowEmptySavePath)
 {
     ConfigHandler config;
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_autostart->setChecked(config.startupLaunchValue());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
-    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_helpMessage->setChecked(config.showHelp());
+    m_sidePanelButton->setChecked(config.showSidePanelButton());
+    m_sysNotifications->setChecked(config.showDesktopNotification());
+    m_autostart->setChecked(config.startupLaunch());
+    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
+    m_saveAfterCopy->setChecked(config.saveAfterCopy());
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
+    m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
-    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
+    m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
+    m_historyConfirmationToDelete->setChecked(
+      config.historyConfirmationToDelete());
+    m_checkForUpdates->setChecked(config.checkForUpdates());
+    m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
+    m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
+    m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
+    m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
+    m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
 
-    if (!config.savePath().isEmpty()) {
+    if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
-    } else {
-        ConfigHandler().setSavePath(
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    m_showTray->setChecked(!config.disabledTrayIconValue());
+    m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
+}
+
+void GeneralConf::updateComponents()
+{
+    _updateComponents(false);
 }
 
 void GeneralConf::showHelpChanged(bool checked)
@@ -83,23 +109,23 @@ void GeneralConf::showSidePanelButtonChanged(bool checked)
 
 void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
-    ConfigHandler().setDesktopNotification(checked);
-}
-
-void GeneralConf::showTrayIconChanged(bool checked)
-{
-    auto controller = Controller::getInstance();
-    if (checked) {
-        controller->enableTrayIcon();
-    } else {
-        controller->disableTrayIcon();
-    }
+    ConfigHandler().setShowDesktopNotification(checked);
 }
 
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
     Controller::getInstance()->setCheckForUpdatesEnabled(checked);
+}
+
+void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
+{
+    ConfigHandler().setAllowMultipleGuiInstances(checked);
+}
+
+void GeneralConf::autoCloseIdleDaemonChanged(bool checked)
+{
+    ConfigHandler().setAutoCloseIdleDaemon(checked);
 }
 
 void GeneralConf::autostartChanged(bool checked)
@@ -133,11 +159,12 @@ void GeneralConf::importConfiguration()
 
 void GeneralConf::exportFileConfiguration()
 {
-    QString fileName = QFileDialog::getSaveFileName(
-      this, tr("Save File"), QStringLiteral("flameshot.conf"));
+    QString defaultFileName = QSettings().fileName();
+    QString fileName =
+      QFileDialog::getSaveFileName(this, tr("Save File"), defaultFileName);
 
-    // Cancel button
-    if (fileName.isNull()) {
+    // Cancel button or target same as source
+    if (fileName.isNull() || fileName == defaultFileName) {
         return;
     }
 
@@ -163,43 +190,35 @@ void GeneralConf::resetConfiguration()
         m_savePath->setText(
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
         ConfigHandler().setDefaultSettings();
-        setActualFormData();
+        _updateComponents(true);
     }
 }
 
-void GeneralConf::setActualFormData()
+void GeneralConf::initScrollArea()
 {
-    // read and set current settings
-    ConfigHandler config;
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_showTray->setChecked(!config.disabledTrayIconValue());
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
-    m_checkForUpdates->setChecked(config.checkForUpdates());
-    m_autostart->setChecked(config.startupLaunchValue());
-    m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
-    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-    m_savePath->setText(config.savePath());
-    m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
-    m_historyConfirmationToDelete->setChecked(
-      config.historyConfirmationToDelete());
-    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
-    m_undoLimit->setValue(config.undoLimit());
-    m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    m_scrollArea = new QScrollArea(this);
+    m_layout->addWidget(m_scrollArea);
+
+    QWidget* content = new QWidget(m_scrollArea);
+    m_scrollArea->setWidget(content);
+    m_scrollArea->setWidgetResizable(true);
+    m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    content->setObjectName("content");
+    m_scrollArea->setObjectName("scrollArea");
+    m_scrollArea->setStyleSheet(
+      "#content, #scrollArea { background: transparent; border: 0px; }");
+    m_scrollAreaLayout = new QVBoxLayout(content);
+    m_scrollAreaLayout->setContentsMargins(0, 0, 20, 0);
 }
 
 void GeneralConf::initShowHelp()
 {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
-    ConfigHandler config;
-    bool checked = config.showHelpValue();
-    m_helpMessage->setChecked(checked);
     m_helpMessage->setToolTip(tr("Show the help message at the beginning "
                                  "in the capture mode."));
-    m_layout->addWidget(m_helpMessage);
+    m_scrollAreaLayout->addWidget(m_helpMessage);
 
     connect(
       m_helpMessage, &QCheckBox::clicked, this, &GeneralConf::showHelpChanged);
@@ -208,24 +227,21 @@ void GeneralConf::initShowHelp()
 void GeneralConf::initShowSidePanelButton()
 {
     m_sidePanelButton = new QCheckBox(tr("Show the side panel button"), this);
-    m_sidePanelButton->setChecked(ConfigHandler().showSidePanelButtonValue());
     m_sidePanelButton->setToolTip(
       tr("Show the side panel toggle button in the capture mode."));
-    m_layout->addWidget(m_sidePanelButton);
+    m_scrollAreaLayout->addWidget(m_sidePanelButton);
 
     connect(m_sidePanelButton,
             &QCheckBox::clicked,
             this,
             &GeneralConf::showSidePanelButtonChanged);
 }
+
 void GeneralConf::initShowDesktopNotification()
 {
     m_sysNotifications = new QCheckBox(tr("Show desktop notifications"), this);
-    ConfigHandler config;
-    bool checked = config.desktopNotificationValue();
-    m_sysNotifications->setChecked(checked);
     m_sysNotifications->setToolTip(tr("Show desktop notifications"));
-    m_layout->addWidget(m_sysNotifications);
+    m_scrollAreaLayout->addWidget(m_sysNotifications);
 
     connect(m_sysNotifications,
             &QCheckBox::clicked,
@@ -237,15 +253,12 @@ void GeneralConf::initShowTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
-    bool checked = !ConfigHandler().disabledTrayIconValue();
-    m_showTray->setChecked(checked);
     m_showTray->setToolTip(tr("Show the systemtray icon"));
-    m_layout->addWidget(m_showTray);
+    m_scrollAreaLayout->addWidget(m_showTray);
 
-    connect(m_showTray,
-            &QCheckBox::stateChanged,
-            this,
-            &GeneralConf::showTrayIconChanged);
+    connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
+        ConfigHandler().setDisabledTrayIcon(!checked);
+    });
 #endif
 }
 
@@ -254,11 +267,9 @@ void GeneralConf::initHistoryConfirmationToDelete()
     m_historyConfirmationToDelete = new QCheckBox(
       tr("Confirmation required to delete screenshot from the latest uploads"),
       this);
-    m_historyConfirmationToDelete->setChecked(
-      ConfigHandler().historyConfirmationToDelete());
     m_historyConfirmationToDelete->setToolTip(
       tr("Confirmation required to delete screenshot from the latest uploads"));
-    m_layout->addWidget(m_historyConfirmationToDelete);
+    m_scrollAreaLayout->addWidget(m_historyConfirmationToDelete);
 
     connect(m_historyConfirmationToDelete,
             &QCheckBox::clicked,
@@ -299,9 +310,8 @@ void GeneralConf::initConfigButtons()
 void GeneralConf::initCheckForUpdates()
 {
     m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
-    m_checkForUpdates->setChecked(ConfigHandler().checkForUpdates());
     m_checkForUpdates->setToolTip(tr("Automatic check for updates"));
-    m_layout->addWidget(m_checkForUpdates);
+    m_scrollAreaLayout->addWidget(m_checkForUpdates);
 
     connect(m_checkForUpdates,
             &QCheckBox::clicked,
@@ -309,13 +319,37 @@ void GeneralConf::initCheckForUpdates()
             &GeneralConf::checkForUpdatesChanged);
 }
 
+void GeneralConf::initAllowMultipleGuiInstances()
+{
+    m_allowMultipleGuiInstances = new QCheckBox(
+      tr("Allow multiple flameshot GUI instances simultaneously"), this);
+    m_allowMultipleGuiInstances->setToolTip(tr(
+      "This allows you to take screenshots of flameshot itself for example."));
+    m_scrollAreaLayout->addWidget(m_allowMultipleGuiInstances);
+    connect(m_allowMultipleGuiInstances,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::allowMultipleGuiInstancesChanged);
+}
+
+void GeneralConf::initAutoCloseIdleDaemon()
+{
+    m_autoCloseIdleDaemon = new QCheckBox(
+      tr("Automatically close daemon when it is not needed"), this);
+    m_autoCloseIdleDaemon->setToolTip(
+      tr("Automatically close daemon when it is not needed"));
+    m_scrollAreaLayout->addWidget(m_autoCloseIdleDaemon);
+    connect(m_autoCloseIdleDaemon,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::autoCloseIdleDaemonChanged);
+}
+
 void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
-    bool checked = ConfigHandler().startupLaunchValue();
-    m_autostart->setChecked(checked);
     m_autostart->setToolTip(tr("Launch Flameshot"));
-    m_layout->addWidget(m_autostart);
+    m_scrollAreaLayout->addWidget(m_autostart);
 
     connect(
       m_autostart, &QCheckBox::clicked, this, &GeneralConf::autostartChanged);
@@ -326,10 +360,9 @@ void GeneralConf::initShowStartupLaunchMessage()
     m_showStartupLaunchMessage =
       new QCheckBox(tr("Show welcome message on launch"), this);
     ConfigHandler config;
-    bool checked = config.showStartupLaunchMessage();
-    m_showStartupLaunchMessage->setChecked(checked);
-    m_showStartupLaunchMessage->setToolTip(tr("Launch Flameshot"));
-    m_layout->addWidget(m_showStartupLaunchMessage);
+    m_showStartupLaunchMessage->setToolTip(
+      tr("Show welcome message on launch"));
+    m_scrollAreaLayout->addWidget(m_showStartupLaunchMessage);
 
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowStartupLaunchMessage(checked);
@@ -340,15 +373,12 @@ void GeneralConf::initCopyAndCloseAfterUpload()
 {
     m_copyAndCloseAfterUpload =
       new QCheckBox(tr("Copy URL after upload"), this);
-    ConfigHandler config;
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
     m_copyAndCloseAfterUpload->setToolTip(
       tr("Copy URL and close window after upload"));
-    m_layout->addWidget(m_copyAndCloseAfterUpload);
+    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
 
     connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+        ConfigHandler().setCopyAndCloseAfterUpload(checked);
     });
 }
 
@@ -356,7 +386,7 @@ void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
     m_saveAfterCopy->setToolTip(tr("Save image file after copying it"));
-    m_layout->addWidget(m_saveAfterCopy);
+    m_scrollAreaLayout->addWidget(m_saveAfterCopy);
     connect(m_saveAfterCopy,
             &QCheckBox::clicked,
             this,
@@ -372,10 +402,6 @@ void GeneralConf::initSaveAfterCopy()
     QHBoxLayout* pathLayout = new QHBoxLayout();
 
     QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
     QString foreground = this->palette().windowText().color().name();
@@ -391,7 +417,6 @@ void GeneralConf::initSaveAfterCopy()
 
     m_screenshotPathFixedCheck =
       new QCheckBox(tr("Use fixed path for screenshots to save"), this);
-    m_screenshotPathFixedCheck->setChecked(ConfigHandler().savePathFixed());
     connect(m_screenshotPathFixedCheck,
             SIGNAL(toggled(bool)),
             this,
@@ -399,6 +424,31 @@ void GeneralConf::initSaveAfterCopy()
 
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
+
+    QHBoxLayout* extensionLayout = new QHBoxLayout();
+
+    extensionLayout->addWidget(
+      new QLabel(tr("Preferred save file extension:")));
+    m_setSaveAsFileExtension = new QComboBox(this);
+    m_setSaveAsFileExtension->addItem("");
+
+    QStringList imageFormatList;
+    foreach (auto mimeType, QImageWriter::supportedImageFormats())
+        imageFormatList.append(mimeType);
+
+    m_setSaveAsFileExtension->addItems(imageFormatList);
+
+    int currentIndex = m_setSaveAsFileExtension->findText(
+      ConfigHandler().setSaveAsFileExtension());
+    m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
+
+    connect(m_setSaveAsFileExtension,
+            SIGNAL(currentTextChanged(QString)),
+            this,
+            SLOT(setSaveAsFileExtension(QString)));
+
+    extensionLayout->addWidget(m_setSaveAsFileExtension);
+    vboxLayout->addLayout(extensionLayout);
 }
 
 void GeneralConf::historyConfirmationToDelete(bool checked)
@@ -406,7 +456,7 @@ void GeneralConf::historyConfirmationToDelete(bool checked)
     ConfigHandler().setHistoryConfirmationToDelete(checked);
 }
 
-void GeneralConf::initUploadHistoryMaxSize()
+void GeneralConf::inituploadHistoryMax()
 {
     QGroupBox* box = new QGroupBox(tr("Latest Uploads Max Size"));
     box->setFlat(true);
@@ -415,25 +465,22 @@ void GeneralConf::initUploadHistoryMaxSize()
     QVBoxLayout* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
-    int max = ConfigHandler().uploadHistoryMaxSizeValue();
-
-    m_uploadHistoryMaxSize = new QSpinBox(this);
-    m_uploadHistoryMaxSize->setMaximum(50);
-    m_uploadHistoryMaxSize->setValue(max);
+    m_uploadHistoryMax = new QSpinBox(this);
+    m_uploadHistoryMax->setMaximum(50);
     QString foreground = this->palette().windowText().color().name();
-    m_uploadHistoryMaxSize->setStyleSheet(
+    m_uploadHistoryMax->setStyleSheet(
       QStringLiteral("color: %1").arg(foreground));
 
-    connect(m_uploadHistoryMaxSize,
+    connect(m_uploadHistoryMax,
             SIGNAL(valueChanged(int)),
             this,
-            SLOT(uploadHistoryMaxSizeChanged(int)));
-    vboxLayout->addWidget(m_uploadHistoryMaxSize);
+            SLOT(uploadHistoryMaxChanged(int)));
+    vboxLayout->addWidget(m_uploadHistoryMax);
 }
 
-void GeneralConf::uploadHistoryMaxSizeChanged(int max)
+void GeneralConf::uploadHistoryMaxChanged(int max)
 {
-    ConfigHandler().setUploadHistoryMaxSize(max);
+    ConfigHandler().setUploadHistoryMax(max);
 }
 
 void GeneralConf::initUndoLimit()
@@ -445,12 +492,9 @@ void GeneralConf::initUndoLimit()
     QVBoxLayout* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
-    int limit = ConfigHandler().undoLimit();
-
     m_undoLimit = new QSpinBox(this);
     m_undoLimit->setMinimum(1);
     m_undoLimit->setMaximum(999);
-    m_undoLimit->setValue(limit);
     QString foreground = this->palette().windowText().color().name();
     m_undoLimit->setStyleSheet(QStringLiteral("color: %1").arg(foreground));
 
@@ -468,12 +512,9 @@ void GeneralConf::initUseJpgForClipboard()
 {
     m_useJpgForClipboard =
       new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
-    ConfigHandler config;
-    bool checked = config.useJpgForClipboard();
-    m_useJpgForClipboard->setChecked(checked);
     m_useJpgForClipboard->setToolTip(
       tr("Use JPG format for clipboard (PNG default)"));
-    m_layout->addWidget(m_useJpgForClipboard);
+    m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 
 #if defined(Q_OS_MACOS)
     // FIXME - temporary fix to disable option for MacOS
@@ -493,10 +534,6 @@ void GeneralConf::saveAfterCopyChanged(bool checked)
 void GeneralConf::changeSavePath()
 {
     QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     path = chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
@@ -507,12 +544,35 @@ void GeneralConf::changeSavePath()
 void GeneralConf::initCopyPathAfterSave()
 {
     m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
-    ConfigHandler config;
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
-    m_layout->addWidget(m_copyPathAfterSave);
+    m_scrollAreaLayout->addWidget(m_copyPathAfterSave);
     connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
+        ConfigHandler().setCopyPathAfterSave(checked);
+    });
+}
+
+void GeneralConf::initAntialiasingPinZoom()
+{
+    m_antialiasingPinZoom =
+      new QCheckBox(tr("Anti-aliasing image when zoom the pinned image"), this);
+    m_antialiasingPinZoom->setToolTip(
+      tr("After zooming the pinned image, should the image get smoothened or "
+         "stay pixelated"));
+    m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
+    connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
+void GeneralConf::initUploadWithoutConfirmation()
+{
+    m_uploadWithoutConfirmation =
+      new QCheckBox(tr("Upload image without confirmation"), this);
+    m_uploadWithoutConfirmation->setToolTip(
+      tr("Upload image without confirmation"));
+    m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
+    connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUploadWithoutConfirmation(checked);
     });
 }
 
@@ -544,6 +604,11 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
 void GeneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
+}
+
+void GeneralConf::setSaveAsFileExtension(QString extension)
+{
+    ConfigHandler().setSaveAsFileExtension(extension);
 }
 
 void GeneralConf::useJpgForClipboardChanged(bool checked)

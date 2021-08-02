@@ -2,10 +2,8 @@
 #define HISTORYWIDGET_H
 
 #include <QDialog>
-#include <QObject>
-#include <QString>
-#include <QWidget>
 
+class QString;
 class QLayout;
 class QVBoxLayout;
 class NotificationWidget;

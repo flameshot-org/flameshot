@@ -9,3 +9,27 @@ int GlobalValues::buttonBaseSize()
 {
     return QApplication::fontMetrics().lineSpacing() * 2.2;
 }
+
+QString GlobalValues::versionInfo()
+{
+    return QStringLiteral("Flameshot " APP_VERSION " (" FLAMESHOT_GIT_HASH ")"
+                          "\nCompiled with Qt " QT_VERSION_STR);
+}
+
+QString GlobalValues::iconPath()
+{
+#if USE_MONOCHROME_ICON
+    return QString(":img/app/flameshot.monochrome.svg");
+#else
+    return QString(":img/app/flameshot.svg");
+#endif
+}
+
+QString GlobalValues::iconPathPNG()
+{
+#if USE_MONOCHROME_ICON
+    return QString(":img/app/flameshot.monochrome.png");
+#else
+    return QString(":img/app/flameshot.png");
+#endif
+}

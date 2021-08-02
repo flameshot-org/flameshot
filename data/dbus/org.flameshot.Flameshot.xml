@@ -2,130 +2,39 @@
 <node>
   <interface name="org.flameshot.Flameshot">
 
-      <!--
-        graphicCapture:
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
-        @delay: delay time in milliseconds.
-        @id: identificator of the call.
+    <!--
+        attachPin:
+        @data: Byte array containing the screenshot and geometry information.
 
-        Open the user interface used to capture the screen. Sends a captureTaken signal with the raw image after closing the GUI
-        due to a capture taken. It could send a captureFailed signal if the screenshot can't be retrieved.
+        Attach a pinned screenshot widget to the daemon.
     -->
-    <method name="graphicCapture">
-      <arg name="path" type="s" direction="in"/>
-      <arg name="delay" type="i" direction="in"/>
-      <arg name="id" type="u" direction="in"/>
+    <method name="attachPin">
+      <arg name="data" type="ay" direction="in"/>
     </method>
 
     <!--
-        fullScreen:
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
-        @toClipboard: Whether to copy the screenshot to clipboard or not.
-        @delay: delay time in milliseconds, both return the @id defined in the call of this method.
-        @id: identificator of the call.
+        attachScreenshotToClipboard:
+        @screenshot: Byte array containing the screenshot pixmap.
 
-        Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
+        Copy the screenshot to the daemon's clipboard, to prevent losing the
+        clipboard when a flameshot subcommand exits.
     -->
-    <method name="fullScreen">
-      <arg name="path" type="s" direction="in"/>
-      <arg name="toClipboard" type="b" direction="in"/>
-      <arg name="delay" type="i" direction="in"/>
-      <arg name="id" type="u" direction="in"/>
+    <method name="attachScreenshotToClipboard">
+      <arg name="screenshot" type="ay" direction="in"/>
     </method>
 
     <!--
-        openLauncher:
+        attachTextToClipboard:
+        @text: Text to be copied to the clipboard.
+        @notification: Optional notification to send.
 
-        Opens the capture launcher.
+        Copy the text to the daemon's clipboard, to prevent losing the
+        clipboard when a flameshot subcommand exits.
     -->
-    <method name="openLauncher">
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    <method name="attachTextToClipboard">
+      <arg name="text" type="s" direction="in"/>
+      <arg name="notification" type="s" direction="in"/>
     </method>
-
-    <!--
-        captureScreen:
-        @number: number of the screen to be captured.
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
-        @toClipboard: Whether to copy the screenshot to clipboard or not.
-        @delay: delay time in milliseconds, both return the @id defined in the call of this method.
-        @id: identificator of the call.
-
-        Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
-    -->
-    <method name="captureScreen">
-      <arg name="number" type="i" direction="in"/>
-      <arg name="path" type="s" direction="in"/>
-      <arg name="toClipboard" type="b" direction="in"/>
-      <arg name="delay" type="i" direction="in"/>
-      <arg name="id" type="u" direction="in"/>
-    </method>
-
-    <!--
-        openConfig:
-
-        Opens the configuration window.
-    -->
-    <method name="openConfig">
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
-        trayIconEnabled:
-        @enabled: The new state for the trayIcon.
-
-        Enable or disable the trayIcon.
-    -->
-    <method name="trayIconEnabled">
-      <arg name="enabled" type="b" direction="in"/>
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
-        autostartEnabled:
-        @enabled: The new state for the autostart.
-
-        Enable or disable the autostart of the program.
-    -->
-    <method name="autostartEnabled">
-      <arg name="enabled" type="b" direction="in"/>
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
-        captureTaken:
-        @id: identificator of the call.
-        @rawImage: raw image in PNG format.
-        @selection: QRect selection geometry.
-
-        Successful capture signal returning the image.
-    -->
-    <signal name="captureTaken">
-      <arg name="id" type="u" direction="out"/>
-      <arg name="rawImage" type="ay" direction="out"/>
-      <arg name="selection" type="(iiii)" direction="out"/>
-    </signal>
-
-    <!--
-        captureFailed:
-        @id: identificator of the call.
-
-        Whenever the capture fails.
-    -->
-    <signal name="captureFailed">
-      <arg name="id" type="u" direction="out"/>
-    </signal>
-
-    <!--
-        captureSaved:
-        @id: identificator of the call.
-        @savePath: canonical path of the newly created image file.
-
-        An image was written to disk after capture.
-    -->
-    <signal name="captureSaved">
-      <arg name="id" type="u" direction="out"/>
-      <arg name="savePath" type="s" direction="out"/>
-    </signal>
 
   </interface>
 </node>

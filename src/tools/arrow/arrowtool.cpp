@@ -72,9 +72,9 @@ QString ArrowTool::name() const
     return tr("Arrow");
 }
 
-ToolType ArrowTool::nameID() const
+CaptureTool::Type ArrowTool::type() const
 {
-    return ToolType::ARROW;
+    return CaptureTool::TYPE_ARROW;
 }
 
 QString ArrowTool::description() const
@@ -82,38 +82,13 @@ QString ArrowTool::description() const
     return tr("Set the Arrow as the paint tool");
 }
 
-CaptureTool* ArrowTool::copy(QObject* parent)
+QRect ArrowTool::boundingRect() const
 {
-    ArrowTool* tool = new ArrowTool(parent);
-    copyParams(this, tool);
-    return tool;
-}
+    if (!isValid()) {
+        return {};
+    }
 
-void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
-{
-    AbstractTwoPointTool::copyParams(from, to);
-    to->m_arrowPath = this->m_arrowPath;
-}
-
-void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
-{
-    Q_UNUSED(pixmap)
-    painter.setPen(QPen(color(), thickness()));
-    painter.drawLine(
-      getShorterLine(points().first, points().second, thickness()));
-    m_arrowPath = getArrowHead(points().first, points().second, thickness());
-    painter.fillPath(m_arrowPath, QBrush(color()));
-}
-
-void ArrowTool::pressed(const CaptureContext& context)
-{
-    Q_UNUSED(context)
-}
-
-void ArrowTool::drawObjectSelection(QPainter& painter)
-{
-    int offset =
-      thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
+    int offset = size() <= 1 ? 1 : static_cast<int>(round(size() / 2 + 0.5));
 
     // get min and max arrow pos
     int min_x = points().first.x();
@@ -150,5 +125,33 @@ void ArrowTool::drawObjectSelection(QPainter& painter)
                        line_pos_min_y - offset,
                        line_pos_max_x - line_pos_min_x + offset * 2,
                        line_pos_max_y - line_pos_min_y + offset * 2);
-    drawObjectSelectionRect(painter, rect);
+
+    return rect.normalized();
+}
+
+CaptureTool* ArrowTool::copy(QObject* parent)
+{
+    ArrowTool* tool = new ArrowTool(parent);
+    copyParams(this, tool);
+    return tool;
+}
+
+void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
+{
+    AbstractTwoPointTool::copyParams(from, to);
+    to->m_arrowPath = this->m_arrowPath;
+}
+
+void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
+{
+    Q_UNUSED(pixmap)
+    painter.setPen(QPen(color(), size()));
+    painter.drawLine(getShorterLine(points().first, points().second, size()));
+    m_arrowPath = getArrowHead(points().first, points().second, size());
+    painter.fillPath(m_arrowPath, QBrush(color()));
+}
+
+void ArrowTool::pressed(CaptureContext& context)
+{
+    Q_UNUSED(context)
 }

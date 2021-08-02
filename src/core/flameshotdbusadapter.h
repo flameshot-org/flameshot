@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "src/core/controller.h"
 #include <QtDBus/QDBusAbstractAdaptor>
 
 class FlameshotDBusAdapter : public QDBusAbstractAdaptor
@@ -15,27 +14,8 @@ public:
     explicit FlameshotDBusAdapter(QObject* parent = nullptr);
     virtual ~FlameshotDBusAdapter();
 
-signals:
-    void captureTaken(uint id, QByteArray rawImage, QRect selection);
-    void captureFailed(uint id);
-    void captureSaved(uint id, QString savePath);
-
 public slots:
-    Q_NOREPLY void graphicCapture(QString path, int delay, uint id);
-    Q_NOREPLY void fullScreen(QString path,
-                              bool toClipboard,
-                              int delay,
-                              uint id);
-    Q_NOREPLY void captureScreen(int number,
-                                 QString path,
-                                 bool toClipboard,
-                                 int delay,
-                                 uint id);
-    Q_NOREPLY void openLauncher();
-    Q_NOREPLY void openConfig();
-    Q_NOREPLY void trayIconEnabled(bool enabled);
-    Q_NOREPLY void autostartEnabled(bool enabled);
-
-private slots:
-    void handleCaptureTaken(uint id, const QPixmap& p, QRect selection);
+    Q_NOREPLY void attachScreenshotToClipboard(const QByteArray& data);
+    Q_NOREPLY void attachTextToClipboard(QString text, QString notification);
+    Q_NOREPLY void attachPin(const QByteArray& data);
 };

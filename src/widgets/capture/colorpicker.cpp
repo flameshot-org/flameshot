@@ -9,14 +9,23 @@
 
 ColorPicker::ColorPicker(QWidget* parent)
   : QWidget(parent)
+  , m_selectedIndex(0)
+  , m_lastIndex(0)
 {
     ConfigHandler config;
-    m_colorList = config.getUserColors();
+    m_colorList = config.userColors();
     m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
     setMouseTracking(true);
     // save the color values in member variables for faster access
-    m_uiColor = config.uiMainColorValue();
-    m_drawColor = config.drawColorValue();
+    m_uiColor = config.uiColor();
+    QColor drawColor = config.drawColor();
+    for (int i = 0; i < m_colorList.size(); ++i) {
+        if (m_colorList.at(i) == drawColor) {
+            m_selectedIndex = i;
+            m_lastIndex = i;
+            break;
+        }
+    }
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;
@@ -39,71 +48,66 @@ ColorPicker::ColorPicker(QWidget* parent)
     }
 }
 
-void ColorPicker::show()
-{
-    grabMouse();
-    QWidget::show();
-}
-
-void ColorPicker::hide()
-{
-    releaseMouse();
-    QWidget::hide();
-}
-
-void ColorPicker::paintEvent(QPaintEvent*)
+void ColorPicker::paintEvent(QPaintEvent* e)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-
-    QVector<QRect> rects = handleMask();
     painter.setPen(QColor(Qt::black));
-    for (int i = 0; i < rects.size(); ++i) {
-        // draw the highlight when we have to draw the selected color
-        if (m_drawColor == QColor(m_colorList.at(i))) {
-            QColor c = QColor(m_uiColor);
-            c.setAlpha(155);
-            painter.setBrush(c);
-            c.setAlpha(100);
-            painter.setPen(c);
-            QRect highlight = rects.at(i);
-            highlight.moveTo(highlight.x() - 3, highlight.y() - 3);
-            highlight.setHeight(highlight.height() + 6);
-            highlight.setWidth(highlight.width() + 6);
-            painter.drawRoundedRect(highlight, 100, 100);
-            painter.setPen(QColor(Qt::black));
+
+    for (int i = 0; i < m_colorAreaList.size(); ++i) {
+        if (e->region().contains(m_colorAreaList.at(i))) {
+            painter.setClipRegion(e->region());
+            repaint(i, painter);
         }
+    }
+}
 
-        // draw available colors
-        if (m_colorList.at(i).isValid()) {
-            // draw preset color
-            painter.setBrush(QColor(m_colorList.at(i)));
-            painter.drawRoundedRect(rects.at(i), 100, 100);
-        } else {
-            // draw rainbow (part) for custom color
-            QRect lastRect = rects.at(i);
-            int nStep = 1;
-            int nSteps = lastRect.height() / nStep;
-            // 0.02 - start rainbow color, 0.33 - end rainbow color from range:
-            // 0.0 - 1.0
-            float h = 0.02;
-            for (int radius = nSteps; radius > 0; radius -= nStep * 2) {
-                // calculate color
-                float fHStep = (0.33 - h) / (nSteps / nStep / 2);
-                QColor color = QColor::fromHslF(h, 0.95, 0.5);
+void ColorPicker::repaint(int i, QPainter& painter)
+{
+    // draw the highlight when we have to draw the selected color
+    if (i == m_selectedIndex) {
+        QColor c = QColor(m_uiColor);
+        c.setAlpha(155);
+        painter.setBrush(c);
+        c.setAlpha(100);
+        painter.setPen(c);
+        QRect highlight = m_colorAreaList.at(i);
+        highlight.moveTo(highlight.x() - 3, highlight.y() - 3);
+        highlight.setHeight(highlight.height() + 6);
+        highlight.setWidth(highlight.width() + 6);
+        painter.drawRoundedRect(highlight, 100, 100);
+        painter.setPen(QColor(Qt::black));
+    }
 
-                // set color and draw circle
-                painter.setPen(color);
-                painter.setBrush(color);
-                painter.drawRoundedRect(lastRect, 100, 100);
+    // draw available colors
+    if (m_colorList.at(i).isValid()) {
+        // draw preset color
+        painter.setBrush(QColor(m_colorList.at(i)));
+        painter.drawRoundedRect(m_colorAreaList.at(i), 100, 100);
+    } else {
+        // draw rainbow (part) for custom color
+        QRect lastRect = m_colorAreaList.at(i);
+        int nStep = 1;
+        int nSteps = lastRect.height() / nStep;
+        // 0.02 - start rainbow color, 0.33 - end rainbow color from range:
+        // 0.0 - 1.0
+        float h = 0.02;
+        for (int radius = nSteps; radius > 0; radius -= nStep * 2) {
+            // calculate color
+            float fHStep = (0.33 - h) / (nSteps / nStep / 2);
+            QColor color = QColor::fromHslF(h, 0.95, 0.5);
 
-                // set next color, circle geometry
-                h += fHStep;
-                lastRect.setX(lastRect.x() + nStep);
-                lastRect.setY(lastRect.y() + nStep);
-                lastRect.setHeight(lastRect.height() - nStep);
-                lastRect.setWidth(lastRect.width() - nStep);
-            }
+            // set color and draw circle
+            painter.setPen(color);
+            painter.setBrush(color);
+            painter.drawRoundedRect(lastRect, 100, 100);
+
+            // set next color, circle geometry
+            h += fHStep;
+            lastRect.setX(lastRect.x() + nStep);
+            lastRect.setY(lastRect.y() + nStep);
+            lastRect.setHeight(lastRect.height() - nStep);
+            lastRect.setWidth(lastRect.width() - nStep);
         }
     }
 }
@@ -112,19 +116,22 @@ void ColorPicker::mouseMoveEvent(QMouseEvent* e)
 {
     for (int i = 0; i < m_colorList.size(); ++i) {
         if (m_colorAreaList.at(i).contains(e->pos())) {
-            m_drawColor = m_colorList.at(i);
-            emit colorSelected(m_drawColor);
-            update();
+            m_selectedIndex = i;
+            update(m_colorAreaList.at(i) + QMargins(10, 10, 10, 10));
+            update(m_colorAreaList.at(m_lastIndex) + QMargins(10, 10, 10, 10));
+            m_lastIndex = i;
             break;
         }
     }
 }
 
-QVector<QRect> ColorPicker::handleMask() const
+void ColorPicker::showEvent(QShowEvent* event)
 {
-    QVector<QRect> areas;
-    for (const QRect& rect : m_colorAreaList) {
-        areas.append(rect);
-    }
-    return areas;
+    grabMouse();
+}
+
+void ColorPicker::hideEvent(QHideEvent* event)
+{
+    releaseMouse();
+    emit colorSelected(m_colorList.at(m_selectedIndex));
 }

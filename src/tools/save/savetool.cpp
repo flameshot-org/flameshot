@@ -4,11 +4,6 @@
 #include "savetool.h"
 #include "src/utils/screenshotsaver.h"
 #include <QPainter>
-#if defined(Q_OS_MACOS)
-#include "src/widgets/capture/capturewidget.h"
-#include <QApplication>
-#include <QWidget>
-#endif
 
 SaveTool::SaveTool(QObject* parent)
   : AbstractActionTool(parent)
@@ -29,14 +24,14 @@ QString SaveTool::name() const
     return tr("Save");
 }
 
-ToolType SaveTool::nameID() const
+CaptureTool::Type SaveTool::type() const
 {
-    return ToolType::SAVE;
+    return CaptureTool::TYPE_SAVE;
 }
 
 QString SaveTool::description() const
 {
-    return tr("Save the capture");
+    return tr("Save screenshot to a file");
 }
 
 CaptureTool* SaveTool::copy(QObject* parent)
@@ -44,32 +39,9 @@ CaptureTool* SaveTool::copy(QObject* parent)
     return new SaveTool(parent);
 }
 
-void SaveTool::pressed(const CaptureContext& context)
+void SaveTool::pressed(CaptureContext& context)
 {
-#if defined(Q_OS_MACOS)
-    for (QWidget* widget : qApp->topLevelWidgets()) {
-        QString className(widget->metaObject()->className());
-        if (0 ==
-            className.compare(CaptureWidget::staticMetaObject.className())) {
-            widget->showNormal();
-            widget->hide();
-            break;
-        }
-    }
-#endif
-    emit requestAction(REQ_CLEAR_SELECTION);
-    if (context.savePath.isEmpty()) {
-        emit requestAction(REQ_HIDE_GUI);
-        bool ok = ScreenshotSaver().saveToFilesystemGUI(
-          context.selectedScreenshotArea());
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    } else {
-        bool ok = ScreenshotSaver().saveToFilesystem(
-          context.selectedScreenshotArea(), context.savePath, "");
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    }
+    context.request.addSaveTask();
+    emit requestAction(REQ_CAPTURE_DONE_OK);
+    emit requestAction(REQ_CLOSE_GUI);
 }

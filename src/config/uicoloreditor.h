@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "color_wheel.hpp"
+#include "QtColorWidgets/color_wheel.hpp"
 #include "src/widgets/capture/capturetoolbutton.h"
 #include <QGroupBox>
 
@@ -35,8 +35,7 @@ private:
     CaptureToolButton* m_lastButtonPressed;
     color_widgets::ColorWheel* m_colorWheel;
 
-    static const CaptureToolButton::ButtonType m_buttonIconType =
-      CaptureToolButton::TYPE_CIRCLE;
+    static const CaptureTool::Type m_buttonIconType = CaptureTool::TYPE_CIRCLE;
 
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;

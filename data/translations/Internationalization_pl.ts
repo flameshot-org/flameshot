@@ -142,6 +142,7 @@ Press Space to open the side panel.</source>
         <translation>Wybierz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
 Wciśnij Enter, aby wykonać zrzut ekranu.
 Prawy klik, aby pokazać próbnik kolorów.
+Użyj kółka myszy aby zmienić grubość narzędzia.
 Spacja, aby pokazać panel boczny.</translation>
     </message>
     <message>
@@ -335,7 +336,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Reset</source>
@@ -603,12 +604,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
@@ -998,12 +999,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
@@ -1107,7 +1108,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished">Wydrukuj geometrię zaznaczenia w formacie W H X Y. Nic nie robi jeśli określono źródła</translation>
+        <translation>Drukuje geometrię zaznaczenia w formacie W H X Y. Nie robi nic, jeśli podano raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1204,7 +1205,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku do konfiguracji</translation>
+        <translation>Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku do konfiguracji.</translation>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
@@ -1274,7 +1275,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
@@ -1379,7 +1380,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
@@ -1438,12 +1439,12 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1451,12 +1452,12 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1708,7 +1709,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

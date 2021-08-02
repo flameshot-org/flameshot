@@ -1,17 +1,12 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
-set(FLAMESHOT_VERSION 0.10.1.1)
+set(FLAMESHOT_VERSION 0.10.1)
 
 # Flameshot-org
-if(DEFINED ENV{FLAMESHOT_GIT_API_URL})
-  # Can be set in github secrets
-  set(GIT_API_URL "$ENV{FLAMESHOT_GIT_API_URL}")
-  # Namecheap default:
-  # set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
-else()
-  set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
-endif()
+set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
+# Namecheap
+# set(GIT_API_URL "https://api.github.com/repos/namecheap/flameshot/releases/latest")
 
 # TODO - fix it for all linux distros
 #find_package (Git)
@@ -66,7 +61,13 @@ set(RUN_IN_PLACE
         ${DEFAULT_RUN_IN_PLACE}
         CACHE BOOL "Run directly in source directory structure")
 
+
+option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
+option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
+option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
+option(USE_EXTERNAL_SPDLOG "Use external spdlog library" OFF)
+option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 
 include(cmake/StandardProjectSettings.cmake)
 
@@ -109,6 +110,11 @@ if(USE_EXTERNAL_SPDLOG)
 else()
   add_subdirectory(external/spdlog)
 endif()
+
+
+option(BUILD_STATIC_LIBS ON)
+option(BUILD_SHARED_LIBS OFF)
+add_subdirectory(external/Qt-Color-Widgets EXCLUDE_FROM_ALL) 
 
 if (APPLE)
   add_subdirectory(external/QHotkey)

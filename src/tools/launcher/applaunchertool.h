@@ -22,10 +22,10 @@ public:
     CaptureTool* copy(QObject* parent = nullptr) override;
 
 protected:
-    ToolType nameID() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
-    void pressed(const CaptureContext& context) override;
+    void pressed(CaptureContext& context) override;
 
 private:
     QPixmap capture;

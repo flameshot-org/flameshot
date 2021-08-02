@@ -2,45 +2,28 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
+#include "confighandler.h"
+#include "controller.h"
+#include "imgupload/imguploadermanager.h"
+#include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
+#include "src/widgets/imguploaddialog.h"
+#include "systemnotification.h"
+#include <QApplication>
+#include <QClipboard>
 #include <QDateTime>
 #include <QVector>
+#include <stdexcept>
 
 CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
                                const uint delay,
-                               const QString& path,
                                const QVariant& data,
                                CaptureRequest::ExportTask tasks)
   : m_mode(mode)
   , m_delay(delay)
-  , m_path(path)
   , m_tasks(tasks)
   , m_data(data)
-  , m_forcedID(false)
-  , m_id(0)
 {}
-
-void CaptureRequest::setStaticID(uint id)
-{
-    m_forcedID = true;
-    m_id = id;
-}
-
-uint CaptureRequest::id() const
-{
-    if (m_forcedID) {
-        return m_id;
-    }
-
-    uint id = 0;
-    QVector<uint> v;
-    v << qHash(m_mode) << qHash(m_delay * QDateTime::currentMSecsSinceEpoch())
-      << qHash(m_path) << qHash(m_tasks) << m_data.toInt();
-    for (uint i : v) {
-        id ^= i + 0x9e3779b9 + (id << 6) + (id >> 2);
-    }
-    return id;
-}
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
 {
@@ -62,22 +45,42 @@ QVariant CaptureRequest::data() const
     return m_data;
 }
 
+CaptureRequest::ExportTask CaptureRequest::tasks() const
+{
+    return m_tasks;
+}
+
+QRect CaptureRequest::initialSelection() const
+{
+    return m_initialSelection;
+}
+
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
+    if (task == SAVE) {
+        throw std::logic_error("SAVE task must be added using addSaveTask");
+    }
     m_tasks |= task;
 }
 
-void CaptureRequest::exportCapture(const QPixmap& p)
+void CaptureRequest::removeTask(ExportTask task)
 {
-    if ((m_tasks & ExportTask::FILESYSTEM_SAVE_TASK) != ExportTask::NO_TASK) {
-        if (m_path.isEmpty()) {
-            ScreenshotSaver(m_id).saveToFilesystemGUI(p);
-        } else {
-            ScreenshotSaver(m_id).saveToFilesystem(p, m_path, "");
-        }
-    }
+    ((int&)m_tasks) &= ~task;
+}
 
-    if ((m_tasks & ExportTask::CLIPBOARD_SAVE_TASK) != ExportTask::NO_TASK) {
-        ScreenshotSaver().saveToClipboard(p);
-    }
+void CaptureRequest::addSaveTask(const QString& path)
+{
+    m_tasks |= SAVE;
+    m_path = path;
+}
+
+void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
+{
+    m_tasks |= PIN;
+    m_pinWindowGeometry = pinWindowGeometry;
+}
+
+void CaptureRequest::setInitialSelection(const QRect& selection)
+{
+    m_initialSelection = selection;
 }

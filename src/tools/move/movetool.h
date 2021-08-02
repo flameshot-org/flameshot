@@ -15,12 +15,12 @@ public:
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
-    ToolType nameID() const override;
+    CaptureTool::Type type() const override;
     QString description() const override;
     bool isSelectable() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
 
 public slots:
-    void pressed(const CaptureContext& context) override;
+    void pressed(CaptureContext& context) override;
 };
