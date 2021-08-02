@@ -60,7 +60,7 @@ private:
     void initCopyPathAfterSave();
     void initUseJpgForClipboard();
 
-    void setActualFormData();
+    void _updateComponents(bool allowEmptySavePath);
 
     // class members
     QVBoxLayout* m_layout;
