@@ -50,7 +50,7 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
                 << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
                 << CaptureToolButton::TYPE_EXIT
                 << CaptureToolButton::TYPE_IMAGEUPLOADER
-#if not defined(Q_OS_MACOS)
+#if !defined(Q_OS_MACOS)
                 << CaptureToolButton::TYPE_OPEN_APP
 #endif
                 << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
@@ -573,7 +573,7 @@ void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
 
 bool ConfigHandler::useJpgForClipboard() const
 {
-#if not defined(Q_OS_MACOS)
+#if !defined(Q_OS_MACOS)
     // FIXME - temporary fix to disable option for MacOS
     if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
         return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
