@@ -37,7 +37,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenPixmap;
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if (m_info.waylandDectected()) {
+    if (m_info.waylandDetected()) {
         QPixmap res;
         // handle screenshot based on DE
         switch (m_info.windowManager()) {
@@ -171,7 +171,7 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
 {
     QPixmap p;
     bool isVirtual = QApplication::desktop()->isVirtualDesktop();
-    if (isVirtual || m_info.waylandDectected()) {
+    if (isVirtual || m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
             QPoint topLeft(0, 0);
