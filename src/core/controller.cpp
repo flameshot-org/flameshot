@@ -64,9 +64,6 @@ Controller::Controller()
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
     qApp->setQuitOnLastWindowClosed(false);
 
-    // set default shortcusts if not set yet
-    ConfigHandler().setShortcutsDefault();
-
     // init tray icon
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!ConfigHandler().disabledTrayIconValue()) {
