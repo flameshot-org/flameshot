@@ -72,7 +72,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     } else {
         // Need to send message before copying to clipboard
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-        if (DesktopInfo().waylandDectected()) {
+        if (DesktopInfo().waylandDetected()) {
             saveToClipboardMime(capture, "png");
         } else {
             QApplication::clipboard()->setPixmap(capture);

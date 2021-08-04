@@ -18,7 +18,7 @@ public:
         SWAY
     };
 
-    bool waylandDectected();
+    bool waylandDetected();
     WM windowManager();
 
 private:
