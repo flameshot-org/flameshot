@@ -136,6 +136,8 @@ private:
                        bool drawSelection = false);
     void drawObjectSelection();
 
+    void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
+
     ////////////////////////////////////////
     // Class members
 

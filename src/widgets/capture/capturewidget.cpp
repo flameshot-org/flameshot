@@ -1494,14 +1494,12 @@ void CaptureWidget::pushToolToStack()
 void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
 {
     QPixmap pixmapItem = m_context.origScreenshot.copy();
-    QPainter painter(&pixmapItem);
-    painter.setRenderHint(QPainter::Antialiasing);
     int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
         if (toolItem->nameID() == ToolType::CIRCLECOUNT) {
             toolItem->setCount(circleCount++);
         }
-        toolItem->process(painter, pixmapItem);
+        processPixmapWithTool(&pixmapItem, toolItem);
     }
 
     m_context.screenshot = pixmapItem.copy();
@@ -1533,6 +1531,13 @@ void CaptureWidget::drawObjectSelection()
             uncheckActiveTool();
         }
     }
+}
+
+void CaptureWidget::processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool)
+{
+    QPainter painter(pixmap);
+    painter.setRenderHint(QPainter::Antialiasing);
+    tool->process(painter, *pixmap);
 }
 
 QPointer<CaptureTool> CaptureWidget::activeToolObject()
@@ -1567,9 +1572,7 @@ void CaptureWidget::copyScreenshot()
 {
     m_captureDone = true;
     if (m_activeTool != nullptr) {
-        QPainter painter(&m_context.screenshot);
-        painter.setRenderHint(QPainter::Antialiasing);
-        m_activeTool->process(painter, m_context.screenshot);
+        processPixmapWithTool(&m_context.screenshot, m_activeTool);
     }
 
     ScreenshotSaver().saveToClipboard(pixmap());
@@ -1583,9 +1586,7 @@ void CaptureWidget::saveScreenshot()
 #endif
     m_captureDone = true;
     if (m_activeTool != nullptr) {
-        QPainter painter(&m_context.screenshot);
-        painter.setRenderHint(QPainter::Antialiasing);
-        m_activeTool->process(painter, m_context.screenshot);
+        processPixmapWithTool(&m_context.screenshot, m_activeTool);
     }
     hide();
     if (m_context.savePath.isEmpty()) {
