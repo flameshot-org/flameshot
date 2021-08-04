@@ -1328,25 +1328,22 @@ void CaptureWidget::selectAll()
 
 void CaptureWidget::initShortcuts()
 {
-    QString shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_EXIT).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(close()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_EXIT")), this, SLOT(close()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_SAVE).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(saveScreenshot()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SAVE")),
+                  this,
+                  SLOT(saveScreenshot()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_COPY).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(copyScreenshot()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_COPY")),
+                  this,
+                  SLOT(copyScreenshot()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_UNDO).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(undo()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_REDO).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(redo()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_REDO")), this, SLOT(redo()));
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                   this,
@@ -1377,6 +1374,7 @@ void CaptureWidget::initShortcuts()
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                   this,
                   SLOT(moveDown()));
+
     new QShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
