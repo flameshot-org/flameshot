@@ -1026,7 +1026,12 @@ void CaptureWidget::setState(CaptureToolButton* b)
         }
     }
     if (m_activeButton != b) {
-        processTool(b->tool());
+        auto backup = m_activeTool;
+        // The tool is active during the pressed().
+        // This must be done in order to handle tool requests correctly.
+        m_activeTool = b->tool();
+        m_activeTool->pressed(m_context);
+        m_activeTool = backup;
     }
 
     // Only close activated from button
@@ -1065,15 +1070,6 @@ void CaptureWidget::loadDrawThickness()
         m_context.thickness = m_config.drawThicknessValue();
     }
     m_sidePanel->thicknessChanged(m_context.thickness);
-}
-
-void CaptureWidget::processTool(CaptureTool* t)
-{
-    auto backup = m_activeTool;
-    // The tool is active during the pressed().
-    m_activeTool = t;
-    t->pressed(m_context);
-    m_activeTool = backup;
 }
 
 void CaptureWidget::handleToolSignal(CaptureTool::Request r)

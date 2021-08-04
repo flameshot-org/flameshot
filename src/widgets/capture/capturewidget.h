@@ -85,7 +85,6 @@ private slots:
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
-    void processTool(CaptureTool* t);
     void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
     void setDrawThickness(const int& t);
