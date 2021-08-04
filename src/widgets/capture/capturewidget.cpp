@@ -246,7 +246,7 @@ void CaptureWidget::initButtons()
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
-                &CaptureWidget::handleButtonSignal);
+                &CaptureWidget::handleToolSignal);
 
         if (visibleButtonTypes.contains(t)) {
             connect(b,
@@ -414,7 +414,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         connect(m_activeTool,
                 &CaptureTool::requestAction,
                 this,
-                &CaptureWidget::handleButtonSignal);
+                &CaptureWidget::handleToolSignal);
         m_context.mousePos = pos;
         m_activeTool->drawStart(m_context);
         if (m_activeTool->nameID() == ToolType::CIRCLECOUNT) {
@@ -541,7 +541,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_activeTool->setEditMode(true);
             drawToolsData(true, false);
             m_mouseIsClicked = false;
-            handleButtonSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
+            handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     }
@@ -1085,7 +1085,7 @@ void CaptureWidget::processTool(CaptureTool* t)
     m_activeTool = backup;
 }
 
-void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
+void CaptureWidget::handleToolSignal(CaptureTool::Request r)
 {
     switch (r) {
         case CaptureTool::REQ_CLEAR_MODIFICATIONS:
