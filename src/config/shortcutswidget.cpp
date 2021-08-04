@@ -4,6 +4,7 @@
 #include "shortcutswidget.h"
 #include "setshortcutwidget.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/configshortcuts.h"
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -36,7 +37,8 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    m_shortcuts = m_config.shortcuts();
+    m_shortcuts = ConfigShortcuts().captureShortcutsDefault(
+      CaptureToolButton::getIterableButtonTypes());
     initInfoTable();
     show();
 }

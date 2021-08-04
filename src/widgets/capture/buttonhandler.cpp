@@ -361,6 +361,9 @@ void ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
 
 bool ButtonHandler::contains(const QPoint& p) const
 {
+    if (m_vectorButtons.isEmpty()) {
+        return false;
+    }
     QPoint first(m_vectorButtons.first()->pos());
     QPoint last(m_vectorButtons.last()->pos());
     bool firstIsTopLeft = (first.x() <= last.x() && first.y() <= last.y());

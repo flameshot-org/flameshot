@@ -205,10 +205,13 @@ void CaptureWidget::updateButtons()
     m_uiColor = m_config.uiMainColorValue();
     m_contrastUiColor = m_config.uiContrastColorValue();
 
-    auto buttons = m_config.getButtons();
+    auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
+    auto visibleButtonTypes = m_config.getButtons();
     QVector<CaptureToolButton*> vectorButtons;
 
-    for (const CaptureToolButton::ButtonType& t : buttons) {
+    // Add all buttons but hide those that were disabled in the Interface config
+    // This will allow keyboard shortcuts for those buttons to work
+    for (const CaptureToolButton::ButtonType& t : allButtonTypes) {
         CaptureToolButton* b = new CaptureToolButton(t, this);
         if (t == CaptureToolButton::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
@@ -241,14 +244,20 @@ void CaptureWidget::updateButtons()
                 break;
         }
 
-        connect(
-          b, &CaptureToolButton::pressedButton, this, &CaptureWidget::setState);
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
                 &CaptureWidget::handleButtonSignal);
 
-        vectorButtons << b;
+        if (visibleButtonTypes.contains(t)) {
+            connect(b,
+                    &CaptureToolButton::pressedButton,
+                    this,
+                    &CaptureWidget::setState);
+            vectorButtons << b;
+        } else {
+            b->hide();
+        }
     }
     m_buttonHandler->setButtons(vectorButtons);
 }
