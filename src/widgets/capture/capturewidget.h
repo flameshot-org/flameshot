@@ -130,7 +130,7 @@ private:
     void moveSelection(QPoint p);
 
     QRect extendedSelection() const;
-    QRect extendedRect(QRect* r) const;
+    QRect extendedRect(const QRect& r) const;
     void drawInitialMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool updateLayersPanel = true,

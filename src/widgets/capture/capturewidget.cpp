@@ -747,7 +747,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             newGeometry.setBottom(top);
         }
         m_selection->setGeometry(newGeometry);
-        m_context.selection = extendedRect(&newGeometry);
+        m_context.selection = extendedRect(newGeometry);
         updateSizeIndicator();
         m_buttonHandler->updatePosition(newGeometry);
         m_buttonHandler->show();
@@ -1280,7 +1280,7 @@ void CaptureWidget::repositionSelection(QRect r)
     if (m_selection->isVisible()) {
         m_selection->setGeometry(r);
         QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
+        m_context.selection = extendedRect(newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -1319,7 +1319,7 @@ void CaptureWidget::selectAll()
 {
     QRect newGeometry = rect();
     m_selection->setGeometry(newGeometry);
-    m_context.selection = extendedRect(&newGeometry);
+    m_context.selection = extendedRect(newGeometry);
     m_selection->setVisible(true);
     m_showInitialMsg = false;
     m_buttonHandler->updatePosition(m_selection->geometry());
@@ -1646,16 +1646,16 @@ QRect CaptureWidget::extendedSelection() const
         return QRect();
     }
     QRect r = m_selection->geometry();
-    return extendedRect(&r);
+    return extendedRect(r);
 }
 
-QRect CaptureWidget::extendedRect(QRect* r) const
+QRect CaptureWidget::extendedRect(const QRect& r) const
 {
     auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
-    return QRect(r->left() * devicePixelRatio,
-                 r->top() * devicePixelRatio,
-                 r->width() * devicePixelRatio,
-                 r->height() * devicePixelRatio);
+    return QRect(r.left() * devicePixelRatio,
+                 r.top() * devicePixelRatio,
+                 r.width() * devicePixelRatio,
+                 r.height() * devicePixelRatio);
 }
 
 void CaptureWidget::drawInitialMessage(QPainter* painter)
