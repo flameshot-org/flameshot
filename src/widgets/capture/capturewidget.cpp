@@ -263,15 +263,6 @@ void CaptureWidget::initButtons()
 
 QPixmap CaptureWidget::pixmap()
 {
-    QPixmap p;
-    if (m_toolWidget && m_activeTool) {
-        p = m_context.selectedScreenshotArea().copy();
-        QPainter painter(&p);
-        painter.setRenderHint(QPainter::Antialiasing);
-        m_activeTool->process(painter, p);
-    } else {
-        p = m_context.selectedScreenshotArea();
-    }
     return m_context.selectedScreenshotArea();
 }
 
