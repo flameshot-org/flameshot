@@ -38,7 +38,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     m_shortcuts = ConfigShortcuts().captureShortcutsDefault(
-                CaptureToolButton::getIterableButtonTypes());
+      CaptureToolButton::getIterableButtonTypes());
     initInfoTable();
     show();
 }

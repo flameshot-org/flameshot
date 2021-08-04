@@ -250,13 +250,14 @@ void CaptureWidget::updateButtons()
                 &CaptureWidget::handleButtonSignal);
 
         if (visibleButtonTypes.contains(t)) {
-            connect(
-              b, &CaptureToolButton::pressedButton, this, &CaptureWidget::setState);
+            connect(b,
+                    &CaptureToolButton::pressedButton,
+                    this,
+                    &CaptureWidget::setState);
             vectorButtons << b;
         } else {
             b->hide();
         }
-
     }
     m_buttonHandler->setButtons(vectorButtons);
 }

@@ -667,7 +667,7 @@ QVector<QStringList> ConfigHandler::shortcuts()
 {
     ConfigShortcuts configShortcuts;
     m_shortcuts = configShortcuts.captureShortcutsDefault(
-                CaptureToolButton::getIterableButtonTypes());
+      CaptureToolButton::getIterableButtonTypes());
     return m_shortcuts;
 }
 
