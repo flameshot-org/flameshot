@@ -84,6 +84,8 @@ CaptureWidget::CaptureWidget(uint id,
     setAttribute(Qt::WA_DeleteOnClose);
     m_showInitialMsg = m_config.showHelpValue();
     m_opacity = m_config.contrastOpacityValue();
+    m_uiColor = m_config.uiMainColorValue();
+    m_contrastUiColor = m_config.uiContrastColorValue();
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
@@ -204,9 +206,6 @@ CaptureWidget::~CaptureWidget()
 // selection in the capture
 void CaptureWidget::updateButtons()
 {
-    m_uiColor = m_config.uiMainColorValue();
-    m_contrastUiColor = m_config.uiContrastColorValue();
-
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.getButtons();
     QVector<CaptureToolButton*> vectorButtons;
