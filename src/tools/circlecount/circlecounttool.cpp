@@ -33,7 +33,7 @@ QString CircleCountTool::name() const
     return tr("Circle Counter");
 }
 
-ToolType CircleCountTool::nameID() const
+ToolType CircleCountTool::type() const
 {
     return ToolType::CIRCLECOUNT;
 }

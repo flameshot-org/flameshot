@@ -23,7 +23,7 @@ QString SizeIndicatorTool::name() const
     return tr("Selection Size Indicator");
 }
 
-ToolType SizeIndicatorTool::nameID() const
+ToolType SizeIndicatorTool::type() const
 {
     return ToolType::SIZEINDICATOR;
 }

@@ -107,7 +107,7 @@ public:
     virtual QString name() const = 0;
     // Codename for the tool, this shouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
-    virtual ToolType nameID() const = 0;
+    virtual ToolType type() const = 0;
     // Short description of the tool.
     virtual QString description() const = 0;
     // Short tool item info
