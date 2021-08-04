@@ -129,9 +129,11 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-        // Comment For CaptureWidget Debugging under Linux
+
+#if (defined(QT_NO_DEBUG) && defined(Q_OS_LINUX))
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
+#endif
         resize(pixmap().size());
 #endif
     }
