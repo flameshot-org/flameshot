@@ -141,7 +141,7 @@ CaptureWidget::CaptureWidget(uint id,
     }
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
-    updateButtons();
+    initButtons();
     QVector<QRect> areas;
     if (m_context.fullscreen) {
         QPoint topLeftOffset = QPoint(0, 0);
@@ -202,9 +202,7 @@ CaptureWidget::~CaptureWidget()
     }
 }
 
-// redefineButtons retrieves the buttons configured to be shown with the
-// selection in the capture
-void CaptureWidget::updateButtons()
+void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.getButtons();

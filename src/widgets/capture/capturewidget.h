@@ -45,7 +45,6 @@ public:
                            QWidget* parent = nullptr);
     ~CaptureWidget();
 
-    void updateButtons();
     QPixmap pixmap();
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
@@ -120,6 +119,7 @@ private:
     void initPanel();
     void initSelection();
     void initShortcuts();
+    void initButtons();
     void updateSizeIndicator();
     void updateCursor();
     void pushToolToStack();
