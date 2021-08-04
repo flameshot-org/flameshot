@@ -961,8 +961,8 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::togglePanel,
             m_panel,
             &UtilityPanel::toggle);
-    m_sidePanel->colorChanged(m_context.color);
-    m_sidePanel->thicknessChanged(m_context.thickness);
+    emit m_sidePanel->colorChanged(m_context.color);
+    emit m_sidePanel->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(m_sidePanel);
 
     // Fill undo/redo/history list widget
@@ -1069,7 +1069,7 @@ void CaptureWidget::loadDrawThickness()
     } else {
         m_context.thickness = m_config.drawThicknessValue();
     }
-    m_sidePanel->thicknessChanged(m_context.thickness);
+    emit m_sidePanel->thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::handleToolSignal(CaptureTool::Request r)
@@ -1181,7 +1181,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
         auto toolItem = activeToolObject();
         if (toolItem) {
             // Change color
-            emit toolItem->colorChanged(c);
+            toolItem->colorChanged(c);
             drawToolsData(false, true);
         }
     }
@@ -1252,7 +1252,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     auto toolItem = activeToolObject();
     if (toolItem) {
         // Change thickness
-        emit toolItem->thicknessChanged(t);
+        toolItem->thicknessChanged(t);
         drawToolsData(false, true);
     } else {
         emit thicknessChanged(m_context.thickness);
@@ -1381,7 +1381,7 @@ void CaptureWidget::initShortcuts()
 void CaptureWidget::deleteCurrentTool()
 {
     int thickness_old = m_context.thickness;
-    emit m_panel->slotButtonDelete(true);
+    m_panel->slotButtonDelete(true);
     drawObjectSelection();
     if (thickness_old != m_context.thickness) {
         emit thicknessChanged(m_context.thickness);
