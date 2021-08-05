@@ -466,7 +466,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="160"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation>مطمئنید که می‌خواهید پیکربندی را بازنشانی کنید؟</translation>
+        <translation>مطمئن هستید که می‌خواهید پیکربندی را بازنشانی کنید؟</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="196"/>
@@ -486,7 +486,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="213"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation>نمایش دکمهٔ تغییر وضعیت تابلوی کناری در حالت ضبط.</translation>
+        <translation>نمایش دکمهٔ تغییر وضعیت تابلوی کناری در حالت نماگرفت.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="223"/>
