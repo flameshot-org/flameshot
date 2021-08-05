@@ -221,7 +221,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>شکست در گرفتن اطلاعات آخرین ورژن.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
@@ -291,7 +291,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>عدم توانایی در اتصال به DBus</translation>
     </message>
 </context>
 <context>
