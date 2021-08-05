@@ -18,6 +18,7 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QTabWidget>
+#include <QKeyEvent>
 
 namespace {
 
@@ -245,5 +246,14 @@ void AppLauncherWidget::addAppsToListWidget(
         buttonItem->setIcon(app.icon);
         buttonItem->setText(app.name);
         buttonItem->setToolTip(app.description);
+    }
+}
+
+void AppLauncherWidget::keyPressEvent(QKeyEvent *keyEvent)
+{
+    if (keyEvent->key() == Qt::Key_Escape) {
+        close();
+    } else {
+        QWidget::keyPressEvent(keyEvent);
     }
 }
