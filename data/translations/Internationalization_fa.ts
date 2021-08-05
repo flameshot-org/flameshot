@@ -1002,17 +1002,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
         <source>Capture the entire desktop.</source>
-        <translation>ضبط کل میزکار.</translation>
+        <translation>نماگرفت از کل میزکار.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="139"/>
         <source>Open the capture launcher.</source>
-        <translation>گشودن اجراگر ضبط.</translation>
+        <translation>گشودن اجراگر نماگرفت.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">شروع نماگرفت دستی در حالت GUI.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
@@ -1022,22 +1022,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="146"/>
         <source>Capture a single screen.</source>
-        <translation>ضبط تک‌صفحه.</translation>
+        <translation>نماگرفت از یک صفحه.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>مسیری که در آن تصویر ذخیره می شود</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="154"/>
         <source>Save the capture to the clipboard</source>
-        <translation>ذخیرهٔ ضبط در تخته‌گیره</translation>
+        <translation>ذخیرهٔ نماگرفت در بُریده‌دان</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان تاخیر به میلی ثانیه</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
@@ -1047,17 +1047,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="162"/>
         <source>Enable or disable the trayicon</source>
-        <translation>از یا به کار انداختن نقشک سینی</translation>
+        <translation>فعال کردن یا غیر فعال کردن trayicon</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="166"/>
         <source>Enable or disable run at startup</source>
-        <translation>از یا به کار انداختن اجرا هنگام آغاز</translation>
+        <translation>فعال کردن یا غیرفعال کردن اجرا در راه اندازی</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="170"/>
         <source>Show the help message in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش پیام راهنما در حالت نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="173"/>
@@ -1072,7 +1072,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Print raw PNG capture</source>
-        <translation>چاپ ضبط PNG خام</translation>
+        <translation>چاپ نماگرفت PNG خام</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
@@ -1082,7 +1082,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Define the screen to capture</source>
-        <translation>تعریف صفحه برای ضبط</translation>
+        <translation>صفحه را برای نماگرفت مشخص کنید</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
@@ -1092,7 +1092,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
         <source>Screen number</source>
-        <translation>شمارهٔ صفحه</translation>
+        <translation>شماره صفحه نمایش</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
@@ -1108,22 +1108,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>تأخیر نامعتبر است ،مقدار باید بیشتر از 0 باشد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="209"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation>شماره صفحه نمایش نامعتبراست، باید غیر منفی باشد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="unfinished"></translation>
+        <translation>مسیر نامعتبر است ، باید یک مسیر واقعی در سیستم باشد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="227"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>مقدار نامعتبر است ، باید به عنوان &quot;true&quot; یا &quot;false&quot; تعریف شود</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1203,7 +1203,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
-        <translation>گزینش کل صفحه</translation>
+        <translation>انتخاب کل صفحه نمایش</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
@@ -1228,7 +1228,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
-        <translation>متن ثبت در ناحیهٔ متنی</translation>
+        <translation type="unfinished">متن ثبت در ناحیهٔ متنی</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
@@ -1274,7 +1274,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>انتخاب مستطیل به عنوان ابزار</translation>
     </message>
 </context>
 <context>
@@ -1308,7 +1308,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>
         <source>Unable to capture screen</source>
-        <translation>ناتوان در ضبط صفحه</translation>
+        <translation>قادر به نماگرفت از صفحه نمایش نیست</translation>
     </message>
 </context>
 <context>
@@ -1316,7 +1316,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation>گزینش مستطیلی</translation>
+        <translation type="unfinished">گزینش ناحیه ی مستطیلی</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
