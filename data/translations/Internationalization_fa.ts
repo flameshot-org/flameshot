@@ -936,12 +936,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
         <source>Capture saved to clipboard.</source>
-        <translation>ضبط در تخته‌گیره ذخیره شد.</translation>
+        <translation>نماگرفت در بُریده‌دان ذخیره شد.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
         <source>Error while saving to clipboard</source>
-        <translation>خطا هنگام ذخیره در تخته‌گیره</translation>
+        <translation>خطا هنگام ذخیره در بُریده‌دان</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="175"/>
@@ -961,7 +961,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت ذخیره شد و در بُریده‌دان رونوشت شد به عنوان </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="221"/>
@@ -972,7 +972,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="99"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="201"/>
         <source>Capture saved as </source>
-        <translation>ضبط ذخیره شد با نام </translation>
+        <translation>نماگرفت ذخیره شد با نام </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
@@ -987,7 +987,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/main.cpp" line="476"/>
         <location filename="../../src/main.cpp" line="508"/>
         <source>Unable to connect via DBus</source>
-        <translation>ناتوان در وصل شدن با DBus</translation>
+        <translation>عدم توانایی در اتصال به DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
