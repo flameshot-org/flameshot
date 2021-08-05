@@ -565,7 +565,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="358"/>
         <source>Save image file after copying it</source>
-        <translation>ذخیرهٔ پروندهٔ تصویر پس از رونویسیش</translation>
+        <translation>ذخیرهٔ پروندهٔ تصویر پس از رونویسی آن</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="365"/>
@@ -596,7 +596,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <location filename="../../src/config/generalconf.cpp" line="475"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>استفاده از قالب JPG برای تخته‌گیره (پیش‌گزیده PNG)</translation>
+        <translation>استفاده از قالب JPG برای بُریده‌دان (پیش‌گزیده PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="509"/>
