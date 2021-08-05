@@ -992,7 +992,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>نرم‌افزار نماگرفتی قدرتمند و در عین حال، ساده.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="134"/>
@@ -1032,7 +1032,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="154"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ ضبط در تخته‌گیره</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
@@ -1052,7 +1052,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="166"/>
         <source>Enable or disable run at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>از یا به کار انداختن اجرا هنگام آغاز</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="170"/>
@@ -1321,7 +1321,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم گزیده به عنوان ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -1334,7 +1334,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>ورود میان‌بر جدید برای تغییر </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
@@ -1581,7 +1581,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="90"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن متن به ضبطتان</translation>
     </message>
 </context>
 <context>
@@ -1599,7 +1599,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation type="unfinished"></translation>
+        <translation>دکمه‌ای را برای نغییرش برگزینید</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
