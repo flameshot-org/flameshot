@@ -162,7 +162,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن حباب شمارنده‌ای با افزایش خودکار</translation>
     </message>
 </context>
 <context>
@@ -231,7 +231,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>ناتوان در بستن ابزارک‌های پرکاربرد فعّال</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="417"/>
@@ -283,7 +283,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>رونوشت گزیده در تخته‌گیره</translation>
     </message>
 </context>
 <context>
@@ -304,7 +304,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ترک صفحهٔ ضبط</translation>
     </message>
 </context>
 <context>
@@ -312,7 +312,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished"></translation>
+        <translation>ویرایش نام ضبط‌هایتان:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -332,7 +332,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>الگو را ذخیره می‌کند</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
@@ -346,7 +346,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>الگوی ذخیره شده را بازمی‌گرداند</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
@@ -356,7 +356,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation type="unfinished"></translation>
+        <translation>نام را حذف می‌کند</translation>
     </message>
 </context>
 <context>
@@ -466,7 +466,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="160"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished"></translation>
+        <translation>مطمئنید که می‌خواهید پیکربندی را بازنشانی کنید؟</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="196"/>
@@ -476,7 +476,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="200"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش پیام راهنما در آغاز حالت ضبط.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
@@ -486,7 +486,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="213"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش دکمهٔ تغییر وضعیت تابلوی کناری در حالت ضبط.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="223"/>
