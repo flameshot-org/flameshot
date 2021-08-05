@@ -909,12 +909,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="23"/>
         <source>Pixelate</source>
-        <translation>پیکسلیت</translation>
+        <translation>شطرنجی</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="33"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>تنظیم پیکسلیت(Pixelate) به عنوان ابزار نقاشی</translation>
+        <translation>تنظیم شطرنجی به عنوان یک ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -936,12 +936,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>ضبط در تخته‌گیره ذخیره شد.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>خطا هنگام ذخیره در تخته‌گیره</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="175"/>
@@ -978,7 +978,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="219"/>
         <source>Error trying to save as </source>
-        <translation type="unfinished"></translation>
+        <translation>خطا هنگام‌تلاش برای ذخیره به عنوان </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="111"/>
@@ -987,7 +987,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/main.cpp" line="476"/>
         <location filename="../../src/main.cpp" line="508"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>ناتوان در وصل شدن با DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
@@ -1002,12 +1002,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>ضبط کل میزکار.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="139"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>گشودن اجراگر ضبط.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
@@ -1022,7 +1022,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="146"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>ضبط تک‌صفحه.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
@@ -1042,12 +1042,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم الگوی نام پرونده</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="162"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>از یا به کار انداختن نقشک سینی</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="166"/>
@@ -1062,17 +1062,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="173"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>تعریف رنگ اصلی رابط کاربری</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="177"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>تعریف رنگ متضاد رابط کاربری</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation>چاپ ضبط PNG خام</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
@@ -1082,12 +1082,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Define the screen to capture</source>
-        <translation type="unfinished"></translation>
+        <translation>تعریف صفحه برای ضبط</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>default: screen containing the cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>پیش‌گزیده: صفحه شامل اشاره‌گر</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
@@ -1228,7 +1228,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>متن ثبت در ناحیهٔ متنی</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
@@ -1308,7 +1308,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ناتوان در ضبط صفحه</translation>
     </message>
 </context>
 <context>
