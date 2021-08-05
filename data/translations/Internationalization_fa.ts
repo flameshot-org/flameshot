@@ -492,7 +492,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="223"/>
         <location filename="../../src/config/generalconf.cpp" line="227"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش آگاهی‌های میزکار</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="239"/>
@@ -565,7 +565,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="358"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ پروندهٔ تصویر پس از رونویسیش</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="365"/>
@@ -580,12 +580,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="393"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>استفاده از مسیر ثابت برای ذخیرهٔ نماگرفت‌ها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ اندازهٔ جدیدترین بارگذاری‌ها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
@@ -596,7 +596,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <location filename="../../src/config/generalconf.cpp" line="475"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>استفاده از قالب JPG برای تخته‌گیره (پیش‌گزیده PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="509"/>
@@ -922,7 +922,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>شکست در ثبت %1. خطا: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
@@ -972,7 +972,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="99"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="201"/>
         <source>Capture saved as </source>
-        <translation type="unfinished"></translation>
+        <translation>ضبط ذخیره شد با نام </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
@@ -1092,7 +1092,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
         <source>Screen number</source>
-        <translation type="unfinished"></translation>
+        <translation>شمارهٔ صفحه</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
@@ -1203,7 +1203,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش کل صفحه</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
@@ -1316,7 +1316,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش مستطیلی</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
@@ -1424,7 +1424,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>نشانگر اندازهٔ گزینش</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
