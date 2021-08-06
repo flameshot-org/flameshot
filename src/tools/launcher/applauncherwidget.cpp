@@ -10,6 +10,7 @@
 #include <QCheckBox>
 #include <QDir>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QLineEdit>
 #include <QList>
 #include <QListView>
@@ -18,7 +19,6 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QTabWidget>
-#include <QKeyEvent>
 
 namespace {
 
@@ -249,7 +249,7 @@ void AppLauncherWidget::addAppsToListWidget(
     }
 }
 
-void AppLauncherWidget::keyPressEvent(QKeyEvent *keyEvent)
+void AppLauncherWidget::keyPressEvent(QKeyEvent* keyEvent)
 {
     if (keyEvent->key() == Qt::Key_Escape) {
         close();
