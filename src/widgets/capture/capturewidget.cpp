@@ -1158,6 +1158,7 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             } else {
                 QWidget* w = m_activeTool->widget();
                 w->setAttribute(Qt::WA_DeleteOnClose);
+                w->activateWindow();
                 w->show();
             }
             break;
