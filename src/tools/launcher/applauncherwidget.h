@@ -30,6 +30,7 @@ private:
     void configureListView(QListWidget* widget);
     void addAppsToListWidget(QListWidget* widget,
                              const QVector<DesktopAppData>& appList);
+    void keyPressEvent(QKeyEvent* keyEvent) override;
 
     DesktopFileParser m_parser;
     QPixmap m_pixmap;
