@@ -6,12 +6,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation>راه‌انداز برنامه</translation>
+        <translation>اجراگر برنامه</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>برنامه‌ای را برای باز کردن ضبط انتخاب کنید</translation>
+        <translation>برنامه‌ای را برای گشودن نماگرفت انتخاب کنید</translation>
     </message>
 </context>
 <context>
@@ -19,12 +19,12 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
         <source>Open With</source>
-        <translation>بازکردن با</translation>
+        <translation>گشودن با</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
         <source>Launch in terminal</source>
-        <translation>راه‌اندازی در پایانه</translation>
+        <translation>اجرا در پایانه</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
         <source>Unable to launch in terminal.</source>
-        <translation>راه‌اندازی در پایانه امکان پذیر نیست.</translation>
+        <translation>اجرا در پایانه امکان پذیر نیست.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
@@ -77,7 +77,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;حالت ضبط&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;حالت نماگرفت&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="47"/>
@@ -131,7 +131,7 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="99"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation>ضبط صفحه نمایش امکان پذیر نیست</translation>
+        <translation>نماگرفت از صفحه امکان پذیر نیست</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="1672"/>
@@ -141,10 +141,10 @@ Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
         <translation>ناحیه‌ای را با ماوس انتخاب کنید یا برای خروج Esc را فشار دهید.
-برای ضبط صفحه، کلید اینتر را فشار دهید.
-برای نمایش انتخابگر رنگ، راست کلیک کنید.
+برای نماگرفت از صفحه، کلید ورود را فشار دهید.
+برای نمایش گزینشگر رنگ، راست کلیک کنید.
 از لغزنده ماوس برای تغییر ضخامت ابزار خود استفاده کنید.
-برای بازکردن پانل کناری، کلید فاصله را فشار دهید.</translation>
+برای بازکردن تابلو کناری، کلید فاصله را فشار دهید.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
@@ -162,7 +162,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن حباب شمارش با افزایش خودکار</translation>
     </message>
 </context>
 <context>
@@ -221,7 +221,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>دریافت اطلاعات درباره آخرین نگارش شکست خورد.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
@@ -231,12 +231,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>ناتوان در بستن ابزارک‌های پرکاربرد فعّال</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="417"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;گشودن راه‌انداز</translation>
+        <translation>&amp;گشودن اجراگر</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
@@ -256,7 +256,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;آخرین بارگذاری‌ها</translation>
+        <translation>&amp;جدیدترین بارگذاری‌ها</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -283,7 +283,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy the selection into the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>رونوشت گزیده در بُریده‌دان</translation>
     </message>
 </context>
 <context>
@@ -291,7 +291,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>عدم توانایی در اتصال به DBus</translation>
     </message>
 </context>
 <context>
@@ -304,7 +304,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>ترک صفحهٔ نماگرفت</translation>
     </message>
 </context>
 <context>
@@ -312,7 +312,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation type="unfinished"></translation>
+        <translation>ویرایش نام نماگرفت‌هایتان:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -332,7 +332,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="76"/>
         <source>Saves the pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>الگو را ذخیره می‌کند</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
@@ -346,7 +346,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="81"/>
         <source>Restores the saved pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>الگوی ذخیره شده را بازمی‌گرداند</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="83"/>
@@ -356,7 +356,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation type="unfinished"></translation>
+        <translation>نام را حذف می‌کند</translation>
     </message>
 </context>
 <context>
@@ -466,7 +466,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="160"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished"></translation>
+        <translation>مطمئنید که می‌خواهید پیکربندی را بازنشانی کنید؟</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="196"/>
@@ -476,7 +476,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="200"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش پیام راهنما در آغاز حالت نماگرفت.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
@@ -486,13 +486,13 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="213"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش دکمهٔ تغییر وضعیت تابلوی کناری در حالت نماگرفت.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="223"/>
         <location filename="../../src/config/generalconf.cpp" line="227"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش آگاهی‌های میزکار</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="239"/>
@@ -502,13 +502,13 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the systemtray icon</source>
-        <translation>نمایش آیکون در سینی سیستم</translation>
+        <translation>نمایش آیکون در سینی سامانه</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>نیاز به تایید برای حذف نماگرفت از آخرین بارگذاری‌ها</translation>
+        <translation>نیاز به تایید برای حذف نماگرفت از جدیدترین بارگذاری‌ها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
@@ -534,28 +534,28 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Launch at startup</source>
-        <translation>راه‌اندازی در هنگام شروع سیستم</translation>
+        <translation>اجرا در هنگام شروع سامانه</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Launch Flameshot</source>
-        <translation>راه‌اندازی فلیم‌شات</translation>
+        <translation>اجرای فلیم‌شات</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Show welcome message on launch</source>
-        <translation>نمایش پیام خوشامدگویی هنگام راه‌اندازی</translation>
+        <translation>نمایش پیام خوشامدگویی در هنگام اجرا</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
         <source>Copy URL after upload</source>
-        <translation>رونوشت از URL پس از بارگذاری</translation>
+        <translation>رونوشت از نشانی پس از بارگذاری</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="347"/>
         <source>Copy URL and close window after upload</source>
-        <translation>رونوشت از URL و بستن پنجره، پس از بارگذاری</translation>
+        <translation>رونوشت از نشانی و بستن پنجره، پس از بارگذاری</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="357"/>
@@ -565,7 +565,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="358"/>
         <source>Save image file after copying it</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ پروندهٔ تصویر پس از رونویسی آن</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="365"/>
@@ -580,12 +580,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="393"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation>استفاده از مسیر ثابت برای ذخیرهٔ نماگرفت‌ها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>بیشینهٔ اندازهٔ جدیدترین بارگذاری‌ها</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
@@ -596,7 +596,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <location filename="../../src/config/generalconf.cpp" line="475"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation>استفاده از قالب JPG برای بُریده‌دان (پیش‌گزیده PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="509"/>
@@ -620,7 +620,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation>آخرین بارگذاری‌ها</translation>
+        <translation>جدیدترین بارگذاری‌ها</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="90"/>
@@ -630,12 +630,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation>رونوشت URL</translation>
+        <translation>رونوشت نشانی</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL به تخته‌گیره رونوشت شد.</translation>
+        <translation>نشانی به بُریده‌دان رونوشت شد.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
@@ -650,7 +650,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>آیا مطمئن هستید که می‌خواهید نماگرفت را از آخرین بارگذاری‌ها و سرور حذف کنید؟</translation>
+        <translation>آیا مطمئنید که می‌خواهید نماگرفت را از جدیدترین بارگذاری‌ها و سرور حذف کنید؟</translation>
     </message>
 </context>
 <context>
@@ -718,12 +718,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation>رونوشت URL</translation>
+        <translation>رونوشت نشانی</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation>گشودن URL</translation>
+        <translation>گشودن نشانی</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
@@ -733,23 +733,23 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation>تصویر به تخته‌گیره.</translation>
+        <translation>تصویر به بُریده‌دان.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
-        <translation>گشودن URL امکان پذیر نیست.</translation>
+        <translation>گشودن نشانی امکان پذیر نیست.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL به تخته‌گیره رونوشت شد.</translation>
+        <translation>نشانی به بُریده‌دان رونوشت شد.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation>نماگرفت به تخته‌گیره رونوشت شد.</translation>
+        <translation>نماگرفت به بُریده‌دان رونوشت شد.</translation>
     </message>
 </context>
 <context>
@@ -762,7 +762,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
         <source>Upload the selection to Imgur</source>
-        <translation>بارگذاری محوطه گزیده شده به Imgur</translation>
+        <translation>بارگذاری گزیده به Imgur</translation>
     </message>
 </context>
 <context>
@@ -857,12 +857,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="27"/>
         <source>Marker</source>
-        <translation>نشان گذار</translation>
+        <translation>نشانه‌گذار</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>تنظیم نشان گذار به عنوان ابزار نقاشی</translation>
+        <translation>تنظیم نشانه‌گذار به عنوان ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -909,12 +909,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="23"/>
         <source>Pixelate</source>
-        <translation>پیکسلیت</translation>
+        <translation>شطرنجی</translation>
     </message>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="33"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>تنظیم پیکسلیت(Pixelate) به عنوان ابزار نقاشی</translation>
+        <translation>تنظیم شطرنجی به عنوان ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -922,12 +922,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>شکست در ثبت %1. خطا: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>شکست در لغو ثبت %1. خطا: %2</translation>
     </message>
 </context>
 <context>
@@ -936,12 +936,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
         <source>Capture saved to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت در بُریده‌دان ذخیره شد.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>خطا هنگام ذخیره در بُریده‌دان</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="175"/>
@@ -961,7 +961,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت ذخیره شد و در بُریده‌دان رونوشت شد به عنوان </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="221"/>
@@ -972,13 +972,13 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/screenshotsaver.cpp" line="99"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="201"/>
         <source>Capture saved as </source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت ذخیره شد با نام </translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
         <location filename="../../src/utils/screenshotsaver.cpp" line="219"/>
         <source>Error trying to save as </source>
-        <translation type="unfinished"></translation>
+        <translation>خطا هنگام تلاش برای ذخیره به عنوان </translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="111"/>
@@ -987,12 +987,12 @@ Press Space to open the side panel.</source>
         <location filename="../../src/main.cpp" line="476"/>
         <location filename="../../src/main.cpp" line="508"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>عدم توانایی در اتصال به DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation>نرم‌افزار نماگرفتی قدرتمند و در عین حال، ساده.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="134"/>
@@ -1002,17 +1002,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت از کل میزکار.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="139"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>گشودن اجراگر نماگرفت.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>شروع نماگرفت دستی در حالت GUI.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
@@ -1022,77 +1022,77 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="146"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت از یک صفحه.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation>مسیری که نماگرفت در آن ذخیره خواهد شد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="154"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>ذخیرهٔ نماگرفت در بُریده‌دان</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>زمان تاخیر به میلی‌ثانیه</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
         <source>Set the filename pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم الگوی نام پرونده</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="162"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation>فعال یا غیرفعال کردن آیکون سینی</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="166"/>
         <source>Enable or disable run at startup</source>
-        <translation type="unfinished"></translation>
+        <translation>فعال یا غیرفعال کردن اجرا هنگام شروع سامانه</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="170"/>
         <source>Show the help message in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش پیام راهنما در حالت نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="173"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>تعریف رنگ اصلی رابط کاربری</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="177"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation>تعریف رنگ متضاد رابط کاربری</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation>چاپ نماگرفت PNG خام</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation>مختصات گزیده را در قالب &quot;W H X Y&quot; چاپ می‌کند. اگر چیزی مشخص نشده باشد، هیچ کاری انجام نمی‌دهد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Define the screen to capture</source>
-        <translation type="unfinished"></translation>
+        <translation>صفحه را برای نماگرفت مشخص کنید</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>default: screen containing the cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>پیش‌گزیده: صفحه شامل اشاره‌گر</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
         <source>Screen number</source>
-        <translation type="unfinished"></translation>
+        <translation>شمارهٔ صفحه</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
@@ -1103,27 +1103,33 @@ Press Space to open the side panel.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>رنگ نامعتبر، این پرچم از قالب‌های زیر پشتیبانی می‌کند:
+- #RGB (هر یک از R، G و B یک رقم هگز هستند)
+- #RRGGBB
+- #RRRGGGBBB
+- #RRRRGGGGBBBB
+- رنگ‌های نامگذاری شده مانند &quot;blue&quot; یا &quot;red&quot;
+ممکن است لازم باشد از علامت &quot;#&quot; مانند &quot;‎\#FFF&quot; فرار کنید</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>تأخیر نامعتبر است، مقدار باید بیشتر از 0 باشد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="209"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation>شماره صفحه نامعتبر است، باید مثبت باشد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="unfinished"></translation>
+        <translation>مسیر نامعتبر است، باید یک مسیر واقعی در سامانه باشد</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="227"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>مقدار نامعتبر است، باید به عنوان &quot;true&quot; یا &quot;false&quot; تعریف شود</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1138,7 +1144,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL به تخته‌گیره رونوشت شد.</translation>
+        <translation>نشانی به بُریده‌دان رونوشت شد.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="50"/>
@@ -1148,17 +1154,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Arguments</source>
-        <translation>آرگومان</translation>
+        <translation>آرگومان‌ها</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="323"/>
         <source>arguments</source>
-        <translation>آرگومان</translation>
+        <translation>آرگومان‌ها</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>Usage</source>
-        <translation>روش استفاده</translation>
+        <translation>کارکرد</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
@@ -1203,7 +1209,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش کل صفحه</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
@@ -1228,7 +1234,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation>متن ثبت در ناحیهٔ متنی</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
@@ -1239,7 +1245,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
         <source>Quit capture</source>
-        <translation>خروج از ضبط</translation>
+        <translation>خروج از نماگرفت</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
@@ -1251,7 +1257,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="89"/>
         <source>Capture screen</source>
-        <translation>ضبط صفحه</translation>
+        <translation>نماگرفت از صفحه</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
@@ -1274,7 +1280,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم مستطیل به عنوان ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -1287,7 +1293,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation>انجام دوباره آخرین تغییر</translation>
+        <translation>انجام دوباره تغییر بعدی</translation>
     </message>
 </context>
 <context>
@@ -1300,7 +1306,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="39"/>
         <source>Save the capture</source>
-        <translation>ذخیره ضبط</translation>
+        <translation>ذخیره نماگرفت</translation>
     </message>
 </context>
 <context>
@@ -1308,7 +1314,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>
         <source>Unable to capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت از صفحه امکان پذیر نیست</translation>
     </message>
 </context>
 <context>
@@ -1316,12 +1322,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>گزینش مستطیلی</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیم گزینش مستطیلی به عنوان ابزار نقاشی</translation>
     </message>
 </context>
 <context>
@@ -1334,17 +1340,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>ورود میان‌بر جدید برای تغییر </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای لغو Esc را فشار دهید یا برای غیرفعال کردن میان‌بر صفحه‌کلید ‎⌘+Backspace را فشار دهید.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای لغو Esc را فشار دهید یا برای غیرفعال کردن میان‌بر صفحه‌کلید Backspace را فشار دهید.</translation>
     </message>
 </context>
 <context>
@@ -1357,7 +1363,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>میان‌برهایی که در حالت نماگرفت از صفحه در دسترس هستند.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
@@ -1403,7 +1409,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>کاهش اندازهٔ سایر ابزارها</translation>
     </message>
 </context>
 <context>
@@ -1416,7 +1422,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>افزایش اندازهٔ سایر ابزارها</translation>
     </message>
 </context>
 <context>
@@ -1424,12 +1430,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>نشانگر اندازهٔ گزینش</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>نمایش ابعاد گزیده (X Y)</translation>
     </message>
 </context>
 <context>
@@ -1581,7 +1587,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/texttool.cpp" line="90"/>
         <source>Add text to your capture</source>
-        <translation type="unfinished"></translation>
+        <translation>افزودن متن به نماگرفتتان</translation>
     </message>
 </context>
 <context>
@@ -1594,12 +1600,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای تغییر رنگ، گزینشگرها را جابه‌جا کنید و تغییرات را در دکمه‌های پیش‌نمایش مشاهده کنید.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation type="unfinished"></translation>
+        <translation>دکمه‌ای را برای تغییرش برگزینید</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
@@ -1609,7 +1615,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای رفتن به حالت ویرایش رنگ اصلی، روی این دکمه کلیک کنید.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
@@ -1619,7 +1625,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای رفتن به حالت ویرایش رنگ متضاد، روی این دکمه کلیک کنید.</translation>
     </message>
 </context>
 <context>
@@ -1681,7 +1687,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>
         <source>Button Selection</source>
-        <translation>انتخاب دکمه</translation>
+        <translation>گزینش دکمه</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="71"/>
