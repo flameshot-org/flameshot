@@ -9,6 +9,7 @@
 class QVBoxLayout;
 class QPushButton;
 class QLabel;
+class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
 
@@ -35,26 +36,24 @@ private slots:
     void updateCurrentThickness(int value);
 
 private slots:
-    void colorGrabberActivated();
-    void releaseColorGrab();
+    void startColorGrab();
+    void onColorGrabFinished();
+    void onColorGrabAborted();
+    void onColorUpdated(const QColor& color);
 
 private:
-    QColor grabPixmapColor(const QPoint& p);
-
     bool handleKeyPress(QKeyEvent* e);
     bool handleMouseButtonPressed(QMouseEvent* e);
-    bool handleMouseMove(QMouseEvent* e);
 
     void updateGrabButton(const bool activated);
 
     QVBoxLayout* m_layout;
     QPushButton* m_colorGrabButton;
+    ColorGrabWidget* m_colorGrabber;
     color_widgets::ColorWheel* m_colorWheel;
     QLabel* m_colorLabel;
     QPixmap* m_pixmap;
-    QColor m_colorBackup;
     QColor m_color;
     QSlider* m_thicknessSlider;
     int m_thickness;
-    QColorPickingEventFilter* m_eventFilter;
 };

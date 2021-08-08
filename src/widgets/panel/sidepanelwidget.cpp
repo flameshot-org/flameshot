@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "sidepanelwidget.h"
+#include "colorgrabwidget.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
@@ -15,42 +16,9 @@
 #include <QScreen>
 #endif
 
-class QColorPickingEventFilter : public QObject
-{
-public:
-    explicit QColorPickingEventFilter(SidePanelWidget* pw,
-                                      QObject* parent = nullptr)
-      : QObject(parent)
-      , m_pw(pw)
-    {}
-
-    bool eventFilter(QObject*, QEvent* event) override
-    {
-        event->accept();
-        switch (event->type()) {
-            case QEvent::MouseMove:
-                return m_pw->handleMouseMove(static_cast<QMouseEvent*>(event));
-            case QEvent::MouseButtonPress:
-                return m_pw->handleMouseButtonPressed(
-                  static_cast<QMouseEvent*>(event));
-            case QEvent::KeyPress:
-                return m_pw->handleKeyPress(static_cast<QKeyEvent*>(event));
-            default:
-                break;
-        }
-        return false;
-    }
-
-private:
-    SidePanelWidget* m_pw;
-};
-
-////////////////////////
-
 SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
-  , m_eventFilter(nullptr)
 {
     m_layout = new QVBoxLayout(this);
 
@@ -64,6 +32,21 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     colorForm->addRow(tr("Active color:"), m_colorLabel);
     m_layout->addLayout(colorForm);
 
+    m_colorWheel = new color_widgets::ColorWheel(this);
+    m_colorWheel->setColor(m_color);
+
+    QColor background = this->palette().window().color();
+    bool isDark = ColorUtils::colorIsDark(background);
+    QString modifier =
+      isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+    QIcon grabIcon(modifier + "colorize.svg");
+    m_colorGrabButton = new QPushButton(grabIcon, QLatin1String(""));
+    m_colorGrabber = new ColorGrabWidget(m_pixmap, this);
+    updateGrabButton(false);
+    m_layout->addWidget(m_colorGrabButton);
+    m_layout->addWidget(m_colorWheel);
+
+    // thickness sigslots
     connect(m_thicknessSlider,
             &QSlider::valueChanged,
             this,
@@ -72,22 +55,24 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::thicknessChanged,
             this,
             &SidePanelWidget::updateThickness);
-
-    QColor background = this->palette().window().color();
-    bool isDark = ColorUtils::colorIsDark(background);
-    QString modifier =
-      isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
-    QIcon grabIcon(modifier + "colorize.svg");
-    m_colorGrabButton = new QPushButton(grabIcon, QLatin1String(""));
-    updateGrabButton(false);
+    // color grab sigslots
     connect(m_colorGrabButton,
             &QPushButton::pressed,
             this,
-            &SidePanelWidget::colorGrabberActivated);
-    m_layout->addWidget(m_colorGrabButton);
-
-    m_colorWheel = new color_widgets::ColorWheel(this);
-    m_colorWheel->setColor(m_color);
+            &SidePanelWidget::startColorGrab);
+    connect(m_colorGrabber,
+            &ColorGrabWidget::colorUpdated,
+            this,
+            &SidePanelWidget::onColorUpdated);
+    connect(m_colorGrabber,
+            &ColorGrabWidget::colorGrabbed,
+            this,
+            &SidePanelWidget::onColorGrabFinished);
+    connect(m_colorGrabber,
+            &ColorGrabWidget::grabAborted,
+            this,
+            &SidePanelWidget::onColorGrabAborted);
+    // color wheel sigslots
     connect(m_colorWheel,
             &color_widgets::ColorWheel::mouseReleaseOnColor,
             this,
@@ -96,7 +81,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &color_widgets::ColorWheel::colorChanged,
             this,
             &SidePanelWidget::updateColorNoWheel);
-    m_layout->addWidget(m_colorWheel);
+
 }
 
 void SidePanelWidget::updateColor(const QColor& c)
@@ -125,81 +110,39 @@ void SidePanelWidget::updateCurrentThickness(int value)
     emit thicknessChanged(value);
 }
 
-void SidePanelWidget::colorGrabberActivated()
+void SidePanelWidget::startColorGrab()
 {
-    grabKeyboard();
-    grabMouse(Qt::CrossCursor);
-    setMouseTracking(true);
-    m_colorBackup = m_color;
-    if (!m_eventFilter) {
-        m_eventFilter = new QColorPickingEventFilter(this, this);
-    }
-    installEventFilter(m_eventFilter);
     updateGrabButton(true);
+    m_colorGrabber->startGrabbing();
 }
 
-void SidePanelWidget::releaseColorGrab()
+void SidePanelWidget::onColorGrabFinished()
 {
-    setMouseTracking(false);
-    removeEventFilter(m_eventFilter);
-    releaseMouse();
-    releaseKeyboard();
     setFocus();
     updateGrabButton(false);
+    m_color = m_colorGrabber->color();
+    emit colorChanged(m_color);
 }
 
-QColor SidePanelWidget::grabPixmapColor(const QPoint& p)
+void SidePanelWidget::onColorGrabAborted()
 {
-    QColor c;
-    if (m_pixmap) {
-#if defined(Q_OS_MACOS)
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        QPoint point = p;
-        if (currentScreen) {
-            point = QPoint((p.x() - currentScreen->geometry().x()) *
-                             currentScreen->devicePixelRatio(),
-                           (p.y() - currentScreen->geometry().y()) *
-                             currentScreen->devicePixelRatio());
-        }
-        QPixmap pixel = m_pixmap->copy(QRect(point, point));
-#else
-        QPixmap pixel = m_pixmap->copy(QRect(p, p));
-#endif
-        c = pixel.toImage().pixel(0, 0);
-    }
-    return c;
-}
-
-bool SidePanelWidget::handleKeyPress(QKeyEvent* e)
-{
-    if (e->key() == Qt::Key_Escape) {
-        releaseColorGrab();
-        updateColor(m_colorBackup);
-    } else if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter) {
-        updateColor(grabPixmapColor(QCursor::pos()));
-        releaseColorGrab();
-        emit colorChanged(m_color);
-    }
-    return true;
+    // Restore color that was selected before we started grabbing
+    updateColor(m_color);
+    updateGrabButton(false);
 }
 
 bool SidePanelWidget::handleMouseButtonPressed(QMouseEvent* e)
 {
-    if (m_colorGrabButton->geometry().contains(e->pos()) ||
-        e->button() == Qt::RightButton) {
-        updateColorNoWheel(m_colorBackup);
-    } else if (e->button() == Qt::LeftButton) {
-        updateColor(grabPixmapColor(QCursor::pos()));
-    }
-    releaseColorGrab();
-    emit colorChanged(m_color);
+// TODO what is this
+//    if (m_colorGrabButton->geometry().contains(e->pos()) ||
+//        e->button() == Qt::RightButton)
+//        updateColorNoWheel(m_color);
     return true;
 }
 
-bool SidePanelWidget::handleMouseMove(QMouseEvent* e)
+void SidePanelWidget::onColorUpdated(const QColor& color)
 {
-    updateColorNoWheel(grabPixmapColor(e->globalPos()));
-    return true;
+    updateColorNoWheel(color);
 }
 
 void SidePanelWidget::updateGrabButton(const bool activated)
