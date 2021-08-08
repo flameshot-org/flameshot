@@ -23,7 +23,7 @@ QString UndoTool::name() const
     return tr("Undo");
 }
 
-ToolType UndoTool::nameID() const
+ToolType UndoTool::type() const
 {
     return ToolType::UNDO;
 }

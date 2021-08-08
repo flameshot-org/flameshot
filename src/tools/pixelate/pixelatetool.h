@@ -23,7 +23,7 @@ public:
     void drawObjectSelection(QPainter& painter) override;
 
 protected:
-    ToolType nameID() const override;
+    ToolType type() const override;
 
 public slots:
     void pressed(const CaptureContext& context) override;
