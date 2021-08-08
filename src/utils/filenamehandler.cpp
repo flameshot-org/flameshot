@@ -26,6 +26,12 @@ FileNameHandler::FileNameHandler(QObject* parent)
     }
 }
 
+/** Convert path to absolute path, no strings attached. */
+QString FileNameHandler::absolutePath(const QString& path)
+{
+    return QFileInfo(path).absoluteFilePath();
+}
+
 QString FileNameHandler::parsedPattern()
 {
     return parseFilename(ConfigHandler().filenamePatternValue());
