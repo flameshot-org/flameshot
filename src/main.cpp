@@ -215,8 +215,8 @@ int main(int argc, char* argv[])
     const QString pathErr =
       QObject::tr("Invalid path, it must be a real path in the system");
     auto pathChecker = [pathErr](const QString& pathValue) -> bool {
-        QDir dir = FileNameHandler().absolutePath(pathValue);
-        bool res = dir.exists();
+        QFileInfo info = QFileInfo(pathValue);
+        bool res = info.isDir() || (info.dir().exists() && !info.exists());
         if (!res) {
             SystemNotification().sendMessage(
               QObject::tr(pathErr.toLatin1().data()));
@@ -289,7 +289,7 @@ int main(int argc, char* argv[])
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
         QString pathValue =
-          FileNameHandler().absolutePath(parser.value(pathOption));
+          QFileInfo(parser.value(pathOption)).absoluteFilePath();
         int delay = parser.value(delayOption).toInt();
         bool isRaw = parser.isSet(rawImageOption);
         bool isSelection = parser.isSet(selectionOption);
@@ -317,7 +317,7 @@ int main(int argc, char* argv[])
         }
     } else if (parser.isSet(fullArgument)) { // FULL
         QString pathValue =
-          FileNameHandler().absolutePath(parser.value(pathOption));
+          QFileInfo(parser.value(pathOption)).absoluteFilePath();
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
@@ -373,7 +373,7 @@ int main(int argc, char* argv[])
         int number =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
         QString pathValue =
-          FileNameHandler().absolutePath(parser.value(pathOption));
+          QFileInfo(parser.value(pathOption)).absoluteFilePath();
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);

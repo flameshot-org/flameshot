@@ -11,7 +11,7 @@ class FileNameHandler : public QObject
 public:
     explicit FileNameHandler(QObject* parent = nullptr);
 
-    QString absolutePath(const QString &path);
+    QString absolutePath(const QString& path);
     QString parsedPattern();
     QString parseFilename(const QString& name);
     QString generateAbsolutePath(const QString& path);
