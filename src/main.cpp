@@ -337,12 +337,6 @@ int main(int argc, char* argv[])
         }
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, pathValue);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-        }
-        if (!pathValue.isEmpty()) {
-            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-        }
         uint id = req.id();
         DBusUtils dbusUtils;
 
@@ -394,12 +388,6 @@ int main(int argc, char* argv[])
 
         CaptureRequest req(
           CaptureRequest::SCREEN_MODE, delay, pathValue, number);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-        }
-        if (!pathValue.isEmpty()) {
-            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-        }
         uint id = req.id();
         DBusUtils dbusUtils;
 
