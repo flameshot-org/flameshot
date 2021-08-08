@@ -23,7 +23,7 @@ public:
 
 protected:
     void copyParams(const ArrowTool* from, ArrowTool* to);
-    ToolType nameID() const override;
+    ToolType type() const override;
 
 public slots:
     void pressed(const CaptureContext& context) override;

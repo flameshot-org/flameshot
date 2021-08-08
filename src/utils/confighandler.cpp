@@ -36,25 +36,9 @@ QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
         buttons = fromIntToButton(buttonsInt);
     } else {
         // Default tools
-        buttons << CaptureToolButton::TYPE_PENCIL
-                << CaptureToolButton::TYPE_DRAWER
-                << CaptureToolButton::TYPE_ARROW
-                << CaptureToolButton::TYPE_SELECTION
-                << CaptureToolButton::TYPE_RECTANGLE
-                << CaptureToolButton::TYPE_CIRCLE
-                << CaptureToolButton::TYPE_MARKER
-                << CaptureToolButton::TYPE_PIXELATE
-                << CaptureToolButton::TYPE_SELECTIONINDICATOR
-                << CaptureToolButton::TYPE_MOVESELECTION
-                << CaptureToolButton::TYPE_UNDO << CaptureToolButton::TYPE_REDO
-                << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
-                << CaptureToolButton::TYPE_EXIT
-                << CaptureToolButton::TYPE_IMAGEUPLOADER
-#if !defined(Q_OS_MACOS)
-                << CaptureToolButton::TYPE_OPEN_APP
-#endif
-                << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
-                << CaptureToolButton::TYPE_CIRCLECOUNT;
+        buttons = CaptureToolButton::getIterableButtonTypes();
+        buttons.removeOne(CaptureToolButton::TYPE_SIZEDECREASE);
+        buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
     }
 
     using bt = CaptureToolButton::ButtonType;
@@ -613,11 +597,8 @@ void ConfigHandler::setDefaultSettings()
 
 void ConfigHandler::setAllTheButtons()
 {
-    QVector<int> buttons;
-    auto listTypes = CaptureToolButton::getIterableButtonTypes();
-    for (const CaptureToolButton::ButtonType t : listTypes) {
-        buttons << static_cast<int>(t);
-    }
+    QVector<int> buttons =
+      fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
     // TODO: remove toList in v1.0
     m_settings.setValue(QStringLiteral("buttons"),
                         QVariant::fromValue(buttons.toList()));
@@ -630,10 +611,8 @@ QString ConfigHandler::configFilePath() const
 
 bool ConfigHandler::normalizeButtons(QVector<int>& buttons)
 {
-    auto listTypes = CaptureToolButton::getIterableButtonTypes();
-    QVector<int> listTypesInt;
-    for (auto i : listTypes)
-        listTypesInt << static_cast<int>(i);
+    QVector<int> listTypesInt =
+      fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
 
     bool hasChanged = false;
     for (int i = 0; i < buttons.size(); i++) {

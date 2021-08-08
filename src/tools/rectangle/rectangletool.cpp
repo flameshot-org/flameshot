@@ -22,7 +22,7 @@ QString RectangleTool::name() const
     return tr("Rectangle");
 }
 
-ToolType RectangleTool::nameID() const
+ToolType RectangleTool::type() const
 {
     return ToolType::RECTANGLE;
 }

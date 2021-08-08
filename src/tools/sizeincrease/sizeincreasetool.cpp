@@ -37,7 +37,7 @@ QString SizeIncreaseTool::name() const
     return tr("Increase Tool Size");
 }
 
-ToolType SizeIncreaseTool::nameID() const
+ToolType SizeIncreaseTool::type() const
 {
     return ToolType::SIZEINCREASE;
 }

@@ -27,7 +27,7 @@ QString MarkerTool::name() const
     return tr("Marker");
 }
 
-ToolType MarkerTool::nameID() const
+ToolType MarkerTool::type() const
 {
     return ToolType::MARKER;
 }

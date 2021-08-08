@@ -22,7 +22,7 @@ public:
     CaptureTool* copy(QObject* parent = nullptr) override;
 
 protected:
-    ToolType nameID() const override;
+    ToolType type() const override;
 
 public slots:
     void pressed(const CaptureContext& context) override;

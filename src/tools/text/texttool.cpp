@@ -80,7 +80,7 @@ QString TextTool::info()
     return name();
 }
 
-ToolType TextTool::nameID() const
+ToolType TextTool::type() const
 {
     return ToolType::TEXT;
 }

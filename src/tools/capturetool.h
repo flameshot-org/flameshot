@@ -107,7 +107,7 @@ public:
     virtual QString name() const = 0;
     // Codename for the tool, this shouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
-    virtual ToolType nameID() const = 0;
+    virtual ToolType type() const = 0;
     // Short description of the tool.
     virtual QString description() const = 0;
     // Short tool item info
@@ -135,9 +135,6 @@ public:
     virtual int count() { return m_count; };
 
     // Called every time the tool has to draw
-    // recordUndo indicates when the tool should save the information
-    // for the undo(), if the value is false calling undo() after
-    // that process should not modify revert the changes.
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
     virtual void drawSearchArea(QPainter& painter, const QPixmap& pixmap)
     {

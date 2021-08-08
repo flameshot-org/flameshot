@@ -24,7 +24,7 @@ QString CopyTool::name() const
     return tr("Copy");
 }
 
-ToolType CopyTool::nameID() const
+ToolType CopyTool::type() const
 {
     return ToolType::COPY;
 }

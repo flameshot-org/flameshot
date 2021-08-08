@@ -21,7 +21,7 @@ public:
                            const CaptureContext& context) override;
 
 protected:
-    ToolType nameID() const override;
+    ToolType type() const override;
 
 public slots:
     void drawStart(const CaptureContext& context) override;

@@ -45,7 +45,6 @@ public:
                            QWidget* parent = nullptr);
     ~CaptureWidget();
 
-    void updateButtons();
     QPixmap pixmap();
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
@@ -86,8 +85,7 @@ private slots:
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
-    void processTool(CaptureTool* t);
-    void handleButtonSignal(CaptureTool::Request r);
+    void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
     void setDrawThickness(const int& t);
     void updateActiveLayer(const int& layer);
@@ -120,6 +118,7 @@ private:
     void initPanel();
     void initSelection();
     void initShortcuts();
+    void initButtons();
     void updateSizeIndicator();
     void updateCursor();
     void pushToolToStack();
@@ -130,12 +129,14 @@ private:
     void moveSelection(QPoint p);
 
     QRect extendedSelection() const;
-    QRect extendedRect(QRect* r) const;
+    QRect extendedRect(const QRect& r) const;
     void drawInitialMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool updateLayersPanel = true,
                        bool drawSelection = false);
     void drawObjectSelection();
+
+    void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
 
     ////////////////////////////////////////
     // Class members

@@ -15,7 +15,7 @@ public:
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
-    ToolType nameID() const override;
+    ToolType type() const override;
     QString description() const override;
     bool isSelectable() const override;
 
