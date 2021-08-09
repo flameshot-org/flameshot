@@ -47,9 +47,7 @@ void FlameshotDBusAdapter::fullScreen(QString path,
     if (toClipboard) {
         req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
     }
-    if (!path.isEmpty()) {
-        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-    }
+    req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
 }
@@ -69,9 +67,7 @@ void FlameshotDBusAdapter::captureScreen(int number,
     if (toClipboard) {
         req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
     }
-    if (!path.isEmpty()) {
-        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-    }
+    req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
 }
