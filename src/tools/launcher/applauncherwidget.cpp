@@ -88,7 +88,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
 {
     if (!QFileInfo(m_tempFile).isReadable()) {
         m_tempFile =
-          FileNameHandler().generateAbsolutePath(QDir::tempPath()) + ".png";
+          FileNameHandler().properScreenshotPath(QDir::tempPath(), "png");
         bool ok = m_pixmap.save(m_tempFile);
         if (!ok) {
             QMessageBox::about(

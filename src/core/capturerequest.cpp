@@ -73,7 +73,7 @@ void CaptureRequest::exportCapture(const QPixmap& p)
         if (m_path.isEmpty()) {
             ScreenshotSaver(m_id).saveToFilesystemGUI(p);
         } else {
-            ScreenshotSaver(m_id).saveToFilesystem(p, m_path, "");
+            ScreenshotSaver(m_id).saveToFilesystem(p, m_path);
         }
     }
 

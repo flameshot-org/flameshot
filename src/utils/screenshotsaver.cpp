@@ -87,8 +87,7 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
                                        const QString& path,
                                        const QString& messagePrefix)
 {
-    QString completePath = FileNameHandler().generateAbsolutePath(path);
-    completePath += QLatin1String(".png");
+    QString completePath = FileNameHandler().properScreenshotPath(path, "png");
     bool ok = capture.save(completePath);
     QString saveMessage = messagePrefix;
     QString notificationPath = completePath;
@@ -97,7 +96,8 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
     }
 
     if (ok) {
-        ConfigHandler().setSavePath(path);
+        ConfigHandler().setSavePath(
+          QFileInfo(completePath).dir().absolutePath());
         saveMessage += QObject::tr("Capture saved as ") + completePath;
         Controller::getInstance()->sendCaptureSaved(
           m_id, QFileInfo(completePath).canonicalFilePath());
@@ -143,7 +143,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 {
     bool ok = false;
     ConfigHandler config;
-    QString savePath = FileNameHandler().absoluteSavePath();
+    QString savePath =
+      FileNameHandler().properScreenshotPath(ConfigHandler().savePath(), "png");
 #if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
@@ -158,10 +159,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     if (!config.savePathFixed()) {
         // auto imageFormats = QImageWriter::supportedImageFormats();
         savePath =
-          ShowSaveFileDialog(nullptr,
-                             QObject::tr("Save screenshot"),
-                             FileNameHandler().absoluteSavePath() +
-                               ConfigHandler().getSaveAsFileExtension());
+          ShowSaveFileDialog(nullptr, QObject::tr("Save screenshot"), savePath);
     }
     if (savePath == "") {
         return ok;

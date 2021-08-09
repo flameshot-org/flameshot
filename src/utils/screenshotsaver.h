@@ -18,7 +18,7 @@ public:
     void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
     bool saveToFilesystem(const QPixmap& capture,
                           const QString& path,
-                          const QString& messagePrefix);
+                          const QString& messagePrefix = "");
     bool saveToFilesystemGUI(const QPixmap& capture);
 
 private:

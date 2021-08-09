@@ -43,9 +43,8 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         switch (m_info.windowManager()) {
             case DesktopInfo::GNOME: {
                 // https://github.com/GNOME/gnome-shell/blob/695bfb96160033be55cfb5ac41c121998f98c328/data/org.gnome.Shell.Screenshot.xml
-                QString path =
-                  FileNameHandler().generateAbsolutePath(QDir::tempPath()) +
-                  ".png";
+                QString path = FileNameHandler().properScreenshotPath(
+                  QDir::tempPath(), "png");
                 QDBusInterface gnomeInterface(
                   QStringLiteral("org.gnome.Shell"),
                   QStringLiteral("/org/gnome/Shell/Screenshot"),
