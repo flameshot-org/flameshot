@@ -15,6 +15,8 @@ cd _out
 HOME="$PWD"
 mkdir -p subdir
 
+echo Nonexistent directory is not a valid path
+flameshot screen -p ~/blah/blah
 echo Saved relative to PWD
 flameshot screen -p relative.png
 echo Absolute paths work too
