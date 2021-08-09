@@ -534,6 +534,10 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
+    } else {
+        if (m_selection->geometry().contains(event->pos())) {
+            copyScreenshot();
+        }
     }
 }
 

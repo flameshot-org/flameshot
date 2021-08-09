@@ -16,6 +16,11 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
             m_shortcuts << (QStringList()
                             << shortcutName << b->tool()->description()
                             << ks.toString());
+            if (shortcutName == "TYPE_COPY") {
+                m_shortcuts << (QStringList()
+                                << "" << b->tool()->description()
+                                << "Left Double-click");
+            }
         }
         delete b;
     }
