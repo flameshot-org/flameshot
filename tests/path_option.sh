@@ -1,39 +1,52 @@
 #!/usr/bin/env sh
 
-pkill flameshot
-flameshot &
+# Before running the script make sure a flameshot daemon with a matching version
+# is running
 
-sleep 4
+# The first argument to this script is a path to the flameshot executable
+[ -n "$1" ] && flameshot="$1" || flameshot='flameshot'
 
-# Create a directory for file output
-rm -rf _out 2>/dev/null
-mkdir -p _out
-cd _out
+# TODO Before proper stderr logging is implemented, you will have to look at the
+# system notifications
 
-# NOTE THIS
-# The dir _out will be have as the home directory
-HOME="$PWD"
-mkdir -p subdir
+rm -rf /tmp/flameshot_path_test 2>/dev/null
+mkdir -p /tmp/flameshot_path_test
+cd /tmp/flameshot_path_test
 
-echo Nonexistent directory is not a valid path
-flameshot screen -p ~/blah/blah
-echo Saved relative to PWD
-flameshot screen -p relative.png
-echo Absolute paths work too
-flameshot screen -p ~/absolute.png
-echo Redundancy in the path will be removed
-flameshot screen -p ~/subdir/..///redundancy_removed.png
-echo If the destionation is a directory, the file name is generated from strf from the config
-flameshot screen -p ./
-echo If the output file has no suffix, it will be added
-flameshot screen -p ~/without_suffix
-echo If the suffix does not match the output format, it will be overwritten
-flameshot screen -p ~/wrong_suffix.jpg
-echo If the destination path exists, it will have _NUM appended to the base name
-flameshot screen -p ~/absolute.png
-echo We will do that again but without a suffix
-flameshot screen -p ~/absolute
+echo ">> Nonexistent directory. This command should give an invalid path error."
+"$flameshot" screen -p blah/blah
 
-sleep 3
+sleep 2
+echo ">> The output file is specified relative to PWD"
+"$flameshot" screen -p relative.png
 
-pkill flameshot
+sleep 2
+echo ">> Absolute paths work too"
+"$flameshot" screen -p /tmp/flameshot_path_test/absolute.png
+
+sleep 2
+mkdir subdir
+echo ">> Redundancy in the path will be removed"
+"$flameshot" screen -p /tmp/flameshot_path_test/subdir/..///redundancy_removed.png
+
+sleep 2
+echo ">> If the destionation is a directory, the file name is generated from strf from the config"
+"$flameshot" screen -p ./
+
+sleep 2
+echo ">> If the output file has no suffix, it will be added (png)"
+"$flameshot" screen -p /tmp/flameshot_path_test/without_suffix
+
+sleep 2
+echo ">> If the suffix does not match the output format, it will be overwritten (png)"
+"$flameshot" screen -p /tmp/flameshot_path_test/wrong_suffix.jpg
+
+sleep 2
+echo ">> If the destination path exists, it will have _NUM appended to the base name"
+"$flameshot" screen -p /tmp/flameshot_path_test/absolute.png
+
+sleep 2
+echo ">> Same thing again but without specifying a suffix"
+"$flameshot" screen -p /tmp/flameshot_path_test/absolute
+
+sleep 2
