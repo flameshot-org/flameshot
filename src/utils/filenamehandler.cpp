@@ -5,7 +5,6 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/strfparse.h"
 #include <QDir>
-#include <QStandardPaths>
 #include <ctime>
 #include <exception>
 #include <locale>

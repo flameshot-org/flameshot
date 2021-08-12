@@ -14,6 +14,7 @@
 #include <QImageWriter>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QStandardPaths>
 #include <qimagewriter.h>
 #include <qmimedatabase.h>
 #if defined(Q_OS_MACOS)
@@ -143,8 +144,14 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 {
     bool ok = false;
     ConfigHandler config;
+    QString defaultSavePath = ConfigHandler().savePath();
+    if (defaultSavePath.isEmpty() || !QDir(defaultSavePath).exists() ||
+        !QFileInfo(defaultSavePath).isWritable()) {
+        defaultSavePath =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    }
     QString savePath =
-      FileNameHandler().properScreenshotPath(ConfigHandler().savePath(), "png");
+      FileNameHandler().properScreenshotPath(defaultSavePath, "png");
 #if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
