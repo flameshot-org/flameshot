@@ -303,12 +303,6 @@ jobs:
       matrix:
         dist:
           - {
-              name: fedora-32,
-              os: fedora,
-              symbol: 32,
-              arch: x86_64
-            }
-          - {
               name: fedora-33,
               os: fedora,
               symbol: 33,
