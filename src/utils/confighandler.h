@@ -9,8 +9,9 @@
 #include <QVariant>
 #include <QVector>
 
-class ConfigHandler
+class ConfigHandler : public QObject
 {
+    Q_OBJECT
 public:
     explicit ConfigHandler();
 
@@ -110,10 +111,12 @@ public:
 
     QString configFilePath() const;
 
-    void setValue(const QString& group,
-                  const QString& key,
-                  const QVariant& value);
-    QVariant& value(const QString& group, const QString& key);
+    void setValue(const QString& key, const QVariant& value);
+    QVariant value(const QString& key, const QVariant& fallback = {});
+
+    void handleError();
+signals:
+    void error(const QString& message);
 
 private:
     QString m_strRes;

@@ -4,6 +4,7 @@
 #include "confighandler.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/configshortcuts.h"
+#include "systemnotification.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
@@ -702,27 +703,29 @@ const QString& ConfigHandler::shortcut(const QString& shortcutName)
     return m_strRes;
 }
 
-void ConfigHandler::setValue(const QString& group,
-                             const QString& key,
-                             const QVariant& value)
+void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
-    if (!group.isEmpty()) {
-        m_settings.beginGroup(group);
-    }
     m_settings.setValue(key, value);
-    if (!group.isEmpty()) {
-        m_settings.endGroup();
+    auto status = m_settings.status();
+    if (status != QSettings::NoError) {
+        handleError();
     }
 }
 
-QVariant& ConfigHandler::value(const QString& group, const QString& key)
+QVariant ConfigHandler::value(const QString& key, const QVariant& fallback)
 {
-    if (!group.isEmpty()) {
-        m_settings.beginGroup(group);
+    auto val = m_settings.value(key, fallback);
+    auto status = m_settings.status();
+    if (status != QSettings::NoError) {
+        handleError();
+        return fallback;
     }
-    m_varRes = m_settings.value(key);
-    if (!group.isEmpty()) {
-        m_settings.endGroup();
-    }
-    return m_varRes;
+    return val;
+}
+
+void ConfigHandler::handleError()
+{
+    auto msg = "The configuration contains an error. Falling back to default.";
+    SystemNotification().sendMessage(msg);
+    emit error(msg);
 }
