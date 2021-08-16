@@ -112,11 +112,11 @@ public:
     QString configFilePath() const;
 
     void setValue(const QString& key, const QVariant& value);
-    QVariant value(const QString& key, const QVariant& fallback = {});
+    QVariant value(const QString& key, const QVariant& fallback = {}) const;
 
-    void handleError();
+    void handleError() const;
 signals:
-    void error(const QString& message);
+    void error(const QString& message) const;
 
 private:
     QString m_strRes;
