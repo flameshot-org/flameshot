@@ -51,6 +51,24 @@ jobs:
               arch: armhf
             }
           - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
+              arch: amd64
+            }          
+          - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
+              arch: arm64
+            }       
+          - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
+              arch: armhf
+            }
+          - {
               name: ubuntu-20.04,
               os: ubuntu,
               symbol: focal,
