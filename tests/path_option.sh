@@ -38,8 +38,8 @@ echo ">> If the output file has no suffix, it will be added (png)"
 "$flameshot" screen -p /tmp/flameshot_path_test/without_suffix
 
 sleep 2
-echo ">> If the suffix does not match the output format, it will be overwritten (png)"
-"$flameshot" screen -p /tmp/flameshot_path_test/wrong_suffix.jpg
+echo ">> Other suffixes are supported, and the image format will match it"
+"$flameshot" screen -p /tmp/flameshot_path_test/jpg_suffix.jpg
 
 sleep 2
 echo ">> If the destination path exists, it will have _NUM appended to the base name"
