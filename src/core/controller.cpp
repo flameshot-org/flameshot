@@ -140,6 +140,11 @@ void Controller::setCheckForUpdatesEnabled(const bool enabled)
     }
 }
 
+QMap<uint, CaptureRequest>& Controller::requests()
+{
+    return m_requestMap;
+}
+
 void Controller::getLatestAvailableVersion()
 {
     // This features is required for MacOS and Windows user and for Linux users

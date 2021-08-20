@@ -247,9 +247,12 @@ int main(int argc, char* argv[])
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
-    parser.AddOptions(
-      { pathOption, delayOption, rawImageOption, selectionOption },
-      guiArgument);
+    parser.AddOptions({ pathOption,
+                        clipboardOption,
+                        delayOption,
+                        rawImageOption,
+                        selectionOption },
+                      guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
                         pathOption,
@@ -289,10 +292,14 @@ int main(int argc, char* argv[])
     } else if (parser.isSet(guiArgument)) { // GUI
         QString pathValue = parser.value(pathOption);
         int delay = parser.value(delayOption).toInt();
+        bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
         bool isSelection = parser.isSet(selectionOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
+        if (toClipboard) {
+            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        }
         uint id = req.id();
 
         // Send message
@@ -301,7 +308,7 @@ int main(int argc, char* argv[])
           QStringLiteral("/"),
           QLatin1String(""),
           QStringLiteral("graphicCapture"));
-        m << pathValue << delay << id;
+        m << pathValue << toClipboard << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
