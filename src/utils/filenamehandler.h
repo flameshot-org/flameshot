@@ -13,19 +13,12 @@ public:
 
     QString parsedPattern();
     QString parseFilename(const QString& name);
-    QString generateAbsolutePath(const QString& path);
-    QString absoluteSavePath(QString& directory, QString& filename);
-    QString absoluteSavePath();
+
+    QString properScreenshotPath(QString filename,
+                                 const QString& format = QString());
 
     static const int MAX_CHARACTERS = 70;
 
-public slots:
-    void setPattern(const QString& pattern);
-
 private:
-    // using charArr = char[MAX_CHARACTERS];
-    QString charArrToQString(const char* c);
-    char* QStringToCharArr(const QString& s);
-
-    void fixPath(QString& directory, QString& filename);
+    QString autoNumerateDuplicate(QString path);
 };

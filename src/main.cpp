@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
     // Options
     CommandOption pathOption(
       { "p", "path" },
-      QObject::tr("Path where the capture will be saved"),
+      QObject::tr("Existing directory or new file to save to"),
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
@@ -213,14 +213,17 @@ int main(int argc, char* argv[])
     };
 
     const QString pathErr =
-      QObject::tr("Invalid path, it must be a real path in the system");
+      QObject::tr("Invalid path, must be an existing directory or a new file "
+                  "in an existing directory");
     auto pathChecker = [pathErr](const QString& pathValue) -> bool {
-        bool res = QDir(pathValue).exists();
-        if (!res) {
+        QFileInfo fileInfo(pathValue);
+        if (fileInfo.isDir() || fileInfo.dir().exists()) {
+            return true;
+        } else {
             SystemNotification().sendMessage(
               QObject::tr(pathErr.toLatin1().data()));
+            return false;
         }
-        return res;
     };
 
     const QString booleanErr =
@@ -290,7 +293,7 @@ int main(int argc, char* argv[])
         }
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
-        QString pathValue = parser.value(pathOption);
+        QString pathValue = QDir(parser.value(pathOption)).absolutePath();
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
@@ -321,7 +324,7 @@ int main(int argc, char* argv[])
             return waitAfterConnecting(delay, app);
         }
     } else if (parser.isSet(fullArgument)) { // FULL
-        QString pathValue = parser.value(pathOption);
+        QString pathValue = QDir(parser.value(pathOption)).absolutePath();
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
@@ -376,7 +379,7 @@ int main(int argc, char* argv[])
         QString numberStr = parser.value(screenNumberOption);
         int number =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
-        QString pathValue = parser.value(pathOption);
+        QString pathValue = QDir(parser.value(pathOption)).absolutePath();
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
