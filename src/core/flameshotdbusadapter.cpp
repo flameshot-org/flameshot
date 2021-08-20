@@ -28,12 +28,15 @@ FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 
-void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id)
+void FlameshotDBusAdapter::graphicCapture(QString path,
+                                          bool toClipboard,
+                                          int delay,
+                                          uint id)
 {
     CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
-    //    if (toClipboard) {
-    //        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-    //    }
+    if (toClipboard) {
+        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+    }
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
 }

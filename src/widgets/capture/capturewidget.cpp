@@ -1574,7 +1574,9 @@ void CaptureWidget::copyScreenshot()
         processPixmapWithTool(&m_context.screenshot, m_activeTool);
     }
 
-    ScreenshotSaver().saveToClipboard(pixmap());
+    auto req = Controller::getInstance()->requests().find(m_id);
+    req->addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+
     close();
 }
 
