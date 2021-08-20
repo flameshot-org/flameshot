@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
     // Options
     CommandOption pathOption(
       { "p", "path" },
-      QObject::tr("Path where the capture will be saved"),
+      QObject::tr("Existing directory or new file to save to"),
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
