@@ -47,10 +47,9 @@ and add the following on your config such as in `$HOME/.config/river/init`
 
 ```
 riverctl float-filter-add "flameshot"
-riverctl csd-filter-add "flameshot"
 ```
 
-Otherwise, flameshot will not take all of the screen and tiles its window instead like a normal application.
+Otherwise, flameshot will not take all of the screen and tiles its window instead like a normal application. Note however, that some clipboard stuff is broken so it might be good to save your screenshot as a file while having it copied to a clipboard in case if clipboard does some weird stuff like not pasting the overall screenshot.
 
 #### For more information, please refer to https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
 
