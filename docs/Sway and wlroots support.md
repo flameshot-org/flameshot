@@ -34,3 +34,23 @@ This is usually caused by flameshot receiving no response from the desktop porta
 Q) Flameshot takes one screenshot, then won't take anymore!
 
 A) There is a bug in xdg-desktop-portal-wlr and Flameshot causing calls with the same token to fail. If you see a sdbus vtable error in the xdpw logs, either used the [patched version](https://github.com/nullobsi/xdg-desktop-portal-wlr/tree/improve-screenshot) or update Flameshot to the latest master.
+
+# River wlroots support
+
+Like mentioned above, flameshot now works on wlroots based Wayland compositors, however, there is a weird problem with river and that is when setting `XDG_CURRENT_DESKTOP=river`, flameshot won't work. The fix is you need to trick flameshot that you are on `sway`. Hence, you need to run river like so:
+
+```sh
+XDG_CURRENT_DESKTOP=sway dbus-run-session river
+```
+
+and add the following on your config such as in `$HOME/.config/river/init`
+
+```
+riverctl float-filter-add "flameshot"
+riverctl csd-filter-add "flameshot"
+```
+
+Otherwise, flameshot will not take all of the screen and tiles its window instead like a normal application.
+
+#### For more information, please refer to https://github.com/emersion/xdg-desktop-portal-wlr/wiki/%22It-doesn't-work%22-Troubleshooting-Checklist
+
