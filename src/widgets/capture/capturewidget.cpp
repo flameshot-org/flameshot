@@ -49,7 +49,7 @@ CaptureWidget::CaptureWidget(uint id,
                              QWidget* parent)
   : QWidget(parent)
   , m_mouseIsClicked(false)
-  , m_newSelection(false)
+  , m_newSelection(true)
   , m_grabbing(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
@@ -493,7 +493,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
                 m_selection->setGeometry(
                   QRect(m_mousePressedPos, m_mousePressedPos));
                 m_selection->setVisible(false);
-                m_newSelection = true;
                 m_buttonHandler->hide();
                 update();
             } else {
@@ -740,8 +739,10 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     }
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
-    m_newSelection = false;
     m_grabbing = false;
+    if (m_selection->isVisible()) {
+        m_newSelection = false;
+    }
 
     updateCursor();
 }
