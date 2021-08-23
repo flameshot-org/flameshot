@@ -188,6 +188,10 @@ CaptureWidget::CaptureWidget(uint id,
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
+    connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
+        // Show cursor if it was hidden while adjusting tool thickness
+        updateCursor();
+    });
 
     initPanel();
 }
@@ -765,6 +769,7 @@ void CaptureWidget::updateThickness(int thicknessOffset)
 
     if (m_activeButton && m_activeButton->tool() &&
         m_activeButton->tool()->showMousePreview()) {
+        setCursor(Qt::BlankCursor);
         update();
     }
 
