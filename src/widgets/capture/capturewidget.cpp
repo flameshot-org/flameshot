@@ -215,6 +215,7 @@ void CaptureWidget::initButtons()
             m_sizeIndButton = b;
         }
         b->setColor(m_uiColor);
+        b->hide();
         makeChild(b);
 
         switch (t) {
@@ -253,8 +254,6 @@ void CaptureWidget::initButtons()
                     this,
                     &CaptureWidget::setState);
             vectorButtons << b;
-        } else {
-            b->hide();
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
@@ -663,7 +662,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
               m_buttonHandler->contains(m_context.mousePos);
             if (containsMouse) {
                 m_buttonHandler->hide();
-            } else {
+            } else if (m_selection->isVisible()) {
                 m_buttonHandler->show();
             }
         }
