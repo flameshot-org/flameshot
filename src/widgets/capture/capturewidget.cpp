@@ -752,6 +752,35 @@ void CaptureWidget::moveSelection(QPoint p)
     adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
 }
 
+void CaptureWidget::updateThickness(int thicknessOffset)
+{
+    m_context.thickness += thicknessOffset;
+    m_context.thickness = qBound(1, m_context.thickness, 100);
+
+    QPoint topLeft =
+      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
+    int offset = m_notifierBox->width() / 4;
+    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    m_notifierBox->showMessage(QString::number(m_context.thickness));
+
+    if (m_activeButton && m_activeButton->tool() &&
+        m_activeButton->tool()->showMousePreview()) {
+        update();
+    }
+
+    // update selected object thickness
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        toolItem->thicknessChanged(m_context.thickness);
+        if (!m_existingObjectIsChanged) {
+            m_captureToolObjectsBackup = m_captureToolObjects;
+            m_existingObjectIsChanged = true;
+        }
+    }
+
+    emit thicknessChanged(m_context.thickness);
+}
+
 void CaptureWidget::moveLeft()
 {
     moveSelection(QPoint(-1, 0));
@@ -826,29 +855,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    m_context.thickness += thicknessOffset;
-    m_context.thickness = qBound(1, m_context.thickness, 100);
-    QPoint topLeft =
-      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
-    int offset = m_notifierBox->width() / 4;
-    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
-    m_notifierBox->showMessage(QString::number(m_context.thickness));
-    if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->showMousePreview()) {
-        update();
-    }
-
-    // update selected object thickness
-    // Reset selection if mouse pos is not in selection area
-    auto toolItem = activeToolObject();
-    if (toolItem) {
-        toolItem->thicknessChanged(m_context.thickness);
-        if (!m_existingObjectIsChanged) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_existingObjectIsChanged = true;
-        }
-    }
-    emit thicknessChanged(m_context.thickness);
+    updateThickness(thicknessOffset);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
@@ -1148,22 +1155,10 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
-            // increase thickness
-            m_context.thickness = qBound(1, m_context.thickness + 1, 100);
-
-            // show notifier circle
-            m_notifierBox->showMessage(QString::number(m_context.thickness));
-
-            emit thicknessChanged(m_context.thickness);
+            updateThickness(1);
             break;
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
-            // decrease thickness
-            m_context.thickness = qBound(1, m_context.thickness - 1, 100);
-
-            // show notifier circle
-            m_notifierBox->showMessage(QString::number(m_context.thickness));
-
-            emit thicknessChanged(m_context.thickness);
+            updateThickness(-1);
             break;
         default:
             break;
