@@ -293,7 +293,10 @@ int main(int argc, char* argv[])
         }
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
-        QString pathValue = QDir(parser.value(pathOption)).absolutePath();
+        QString pathValue = parser.value(pathOption);
+        if (!pathValue.isEmpty()) {
+            pathValue = QDir(pathValue).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
@@ -324,7 +327,10 @@ int main(int argc, char* argv[])
             return waitAfterConnecting(delay, app);
         }
     } else if (parser.isSet(fullArgument)) { // FULL
-        QString pathValue = QDir(parser.value(pathOption)).absolutePath();
+        QString pathValue = parser.value(pathOption);
+        if (!pathValue.isEmpty()) {
+            pathValue = QDir(pathValue).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
@@ -379,7 +385,10 @@ int main(int argc, char* argv[])
         QString numberStr = parser.value(screenNumberOption);
         int number =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
-        QString pathValue = QDir(parser.value(pathOption)).absolutePath();
+        QString pathValue = parser.value(pathOption);
+        if (!pathValue.isEmpty()) {
+            pathValue = QDir(pathValue).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
