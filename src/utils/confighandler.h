@@ -116,6 +116,7 @@ public:
 
     const QStringList& recognizedGeneralOptions() const;
     QStringList recognizedShortcutNames() const;
+    QStringList keysFromGroup(const QString& group) const;
     bool isValidShortcutName(const QString& name) const;
 
     bool checkAndHandleError() const;

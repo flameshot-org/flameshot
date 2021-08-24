@@ -710,19 +710,34 @@ QVariant ConfigHandler::value(const QString& key,
 
 const QStringList& ConfigHandler::recognizedGeneralOptions() const
 {
-    static QStringList options = {
-        // General tab in config window
-        "showHelp", "showSidePanelButton", "showDesktopNotification",
-        "disabledTrayIcon", "historyConfirmationToDelete", "checkForUpdates",
-        "startupLaunch", "showStartupLaunchMessage", "copyAndCloseAfterUpload",
-        "copyPathAfterSave", "useJpgForClipboard", "saveAfterCopy", "savePath",
-        "savePathFixed", "uploadHistoryMax", "undoLimit",
-        // Interface tab
-        "uiColor", "contrastUiColor", "contrastOpacity", "buttons",
-        // Filename Editor tab
-        "filenamePattern",
-        // Others
-        "saveAfterCopyPath", "drawThickness", "drawColor"
+    static QStringList options = { // General tab in config window
+                                   "showHelp",
+                                   "showSidePanelButton",
+                                   "showDesktopNotification",
+                                   "disabledTrayIcon",
+                                   "historyConfirmationToDelete",
+                                   "checkForUpdates",
+                                   "startupLaunch",
+                                   "showStartupLaunchMessage",
+                                   "copyAndCloseAfterUpload",
+                                   "copyPathAfterSave",
+                                   "useJpgForClipboard",
+                                   "saveAfterCopy",
+                                   "savePath",
+                                   "savePathFixed",
+                                   "uploadHistoryMax",
+                                   "undoLimit",
+                                   // Interface tab
+                                   "uiColor",
+                                   "contrastUiColor",
+                                   "contrastOpacity",
+                                   "buttons",
+                                   // Filename Editor tab
+                                   "filenamePattern",
+                                   // Others
+                                   "saveAfterCopyPath",
+                                   "drawThickness",
+                                   "drawColor"
     };
     return options;
 }
@@ -733,7 +748,21 @@ QStringList ConfigHandler::recognizedShortcutNames() const
     return {};
 }
 
-bool ConfigHandler::isValidShortcutName(const QString &name) const
+/// Return keys from group `group`. Use "General" for general settings.
+QStringList ConfigHandler::keysFromGroup(const QString& group) const
+{
+    QStringList keys;
+    for (const QString& key : m_settings.allKeys()) {
+        if (group == "General" && !key.contains('/')) {
+            keys.append(key);
+        } else if (key.startsWith(group + "/")) {
+            keys.append(key.mid(group.size() + 1));
+        }
+    }
+    return keys;
+}
+
+bool ConfigHandler::isValidShortcutName(const QString& name) const
 {
     // TODO
     return false;
@@ -742,7 +771,8 @@ bool ConfigHandler::isValidShortcutName(const QString &name) const
 bool ConfigHandler::checkAndHandleError() const
 {
     if (!checkUnrecognizedSettings()) {
-        auto msg = "The configuration contains an error. Falling back to default.";
+        auto msg =
+          "The configuration contains an error. Falling back to default.";
         SystemNotification().sendMessage(msg);
         emit error(msg);
     }
@@ -751,24 +781,16 @@ bool ConfigHandler::checkAndHandleError() const
 
 bool ConfigHandler::checkUnrecognizedSettings() const
 {
-    QStringList allKeys = m_settings.allKeys();
-    QStringList generalKeys,
-            shortcutKeys,
-            recognizedGeneralKeys = recognizedGeneralOptions();
-
     // sort the keys by group
-    for (const QString &key : allKeys) {
-        if (key.startsWith("Shortcuts/")) {
-            shortcutKeys.append(key.mid(10));
-        } else {
-            generalKeys.append(key);
-        }
-    }
+    QStringList generalKeys = keysFromGroup("General"),
+                shortcutKeys = keysFromGroup("Shortcuts"),
+                recognizedGeneralKeys = recognizedGeneralOptions();
 
     auto generalKeySet = QSet(generalKeys.begin(), generalKeys.end());
-    generalKeySet.subtract(QSet(recognizedGeneralKeys.begin(), recognizedGeneralKeys.end()));
+    generalKeySet.subtract(
+      QSet(recognizedGeneralKeys.begin(), recognizedGeneralKeys.end()));
 
-    // check for extra [General] keys
+    // check for outliers in [General]
     if (!generalKeySet.isEmpty()) {
         return false;
     }
