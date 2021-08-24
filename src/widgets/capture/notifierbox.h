@@ -17,6 +17,9 @@ protected:
     virtual void enterEvent(QEvent*);
     virtual void paintEvent(QPaintEvent*);
 
+signals:
+    void hidden();
+
 public slots:
     void showMessage(const QString& msg);
     void showColor(const QColor& color);
@@ -26,4 +29,6 @@ private:
     QString m_message;
     QColor m_bgColor;
     QColor m_foregroundColor;
+
+    void hideEvent(QHideEvent* event) override;
 };

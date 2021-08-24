@@ -57,3 +57,8 @@ void NotifierBox::showColor(const QColor& color)
     Q_UNUSED(color)
     m_message = QLatin1String("");
 }
+
+void NotifierBox::hideEvent(QHideEvent* event)
+{
+    emit hidden();
+}

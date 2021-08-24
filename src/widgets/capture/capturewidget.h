@@ -127,6 +127,7 @@ private:
     void repositionSelection(QRect r);
     void adjustSelection(QMargins m);
     void moveSelection(QPoint p);
+    void updateThickness(int thicknessOffset);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
