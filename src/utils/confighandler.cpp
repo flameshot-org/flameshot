@@ -776,13 +776,20 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
 
 bool ConfigHandler::checkAndHandleError() const
 {
+    static bool errorFlag = false;
     if (!checkUnrecognizedSettings()) {
-        auto msg =
-          "The configuration contains an error. Falling back to default.";
-        SystemNotification().sendMessage(msg);
-        emit error(msg);
+        if (!errorFlag) {
+            // do not spam the user with notifications
+            auto msg =
+              "The configuration contains an error. Falling back to default.";
+            SystemNotification().sendMessage(msg);
+            emit error(msg);
+        }
+        errorFlag = true;
+        return false;
     }
-    return false;
+    errorFlag = false;
+    return true;
 }
 
 bool ConfigHandler::checkUnrecognizedSettings() const
