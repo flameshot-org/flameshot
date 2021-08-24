@@ -114,14 +114,19 @@ public:
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key, const QVariant& fallback = {}) const;
 
-    void handleError() const;
+    const QStringList& recognizedGeneralOptions() const;
+    QStringList recognizedShortcutNames() const;
+    bool isValidShortcutName(const QString& name) const;
+
+    bool checkAndHandleError() const;
+    bool checkUnrecognizedSettings() const;
 signals:
     void error(const QString& message) const;
 
 private:
     QString m_strRes;
     QVariant m_varRes;
-    QSettings m_settings;
+    mutable QSettings m_settings;
     QVector<QStringList> m_shortcuts;
 
     bool normalizeButtons(QVector<int>&);

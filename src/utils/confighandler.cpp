@@ -695,26 +695,82 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
     m_settings.setValue(key, value);
     auto status = m_settings.status();
-    if (status != QSettings::NoError) {
-        handleError();
-    }
+    checkAndHandleError();
 }
 
 QVariant ConfigHandler::value(const QString& key,
                               const QVariant& fallback) const
 {
     auto val = m_settings.value(key, fallback);
-    auto status = m_settings.status();
-    if (status != QSettings::NoError) {
-        handleError();
+    if (!checkAndHandleError()) {
         return fallback;
     }
     return val;
 }
 
-void ConfigHandler::handleError() const
+const QStringList& ConfigHandler::recognizedGeneralOptions() const
 {
-    auto msg = "The configuration contains an error. Falling back to default.";
-    SystemNotification().sendMessage(msg);
-    emit error(msg);
+    static QStringList options = {
+        // General tab in config window
+        "showHelp", "showSidePanelButton", "showDesktopNotification",
+        "disabledTrayIcon", "historyConfirmationToDelete", "checkForUpdates",
+        "startupLaunch", "showStartupLaunchMessage", "copyAndCloseAfterUpload",
+        "copyPathAfterSave", "useJpgForClipboard", "saveAfterCopy", "savePath",
+        "savePathFixed", "uploadHistoryMax", "undoLimit",
+        // Interface tab
+        "uiColor", "contrastUiColor", "contrastOpacity", "buttons",
+        // Filename Editor tab
+        "filenamePattern",
+        // Others
+        "saveAfterCopyPath", "drawThickness", "drawColor"
+    };
+    return options;
+}
+
+QStringList ConfigHandler::recognizedShortcutNames() const
+{
+    // TODO
+    return {};
+}
+
+bool ConfigHandler::isValidShortcutName(const QString &name) const
+{
+    // TODO
+    return false;
+}
+
+bool ConfigHandler::checkAndHandleError() const
+{
+    if (!checkUnrecognizedSettings()) {
+        auto msg = "The configuration contains an error. Falling back to default.";
+        SystemNotification().sendMessage(msg);
+        emit error(msg);
+    }
+    return false;
+}
+
+bool ConfigHandler::checkUnrecognizedSettings() const
+{
+    QStringList allKeys = m_settings.allKeys();
+    QStringList generalKeys,
+            shortcutKeys,
+            recognizedGeneralKeys = recognizedGeneralOptions();
+
+    // sort the keys by group
+    for (const QString &key : allKeys) {
+        if (key.startsWith("Shortcuts/")) {
+            shortcutKeys.append(key.mid(10));
+        } else {
+            generalKeys.append(key);
+        }
+    }
+
+    auto generalKeySet = QSet(generalKeys.begin(), generalKeys.end());
+    generalKeySet.subtract(QSet(recognizedGeneralKeys.begin(), recognizedGeneralKeys.end()));
+
+    // check for extra [General] keys
+    if (!generalKeySet.isEmpty()) {
+        return false;
+    }
+    return true;
 }
