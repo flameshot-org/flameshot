@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QFile>
 #include <QKeySequence>
+#include <QMetaEnum>
 #include <QStandardPaths>
 #include <algorithm>
 #if defined(Q_OS_MACOS)
@@ -697,7 +698,17 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
 const QString& ConfigHandler::shortcut(const QString& shortcutName)
 {
     m_settings.beginGroup("Shortcuts");
-    m_strRes = m_settings.value(shortcutName).toString();
+    if (m_settings.contains(shortcutName)) {
+        m_strRes = m_settings.value(shortcutName).toString();
+    } else {
+        // Fall back to default value
+        auto metaEnum = QMetaEnum::fromType<CaptureToolButton::ButtonType>();
+        // Convert shortcut name to CaptureToolButton::ButtonType
+        auto type = static_cast<CaptureToolButton::ButtonType>(
+          metaEnum.keyToValue(shortcutName.toStdString().c_str()));
+
+        m_strRes = ConfigShortcuts().captureShortcutDefault(type).toString();
+    }
     m_settings.endGroup();
     return m_strRes;
 }
