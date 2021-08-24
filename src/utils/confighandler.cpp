@@ -642,14 +642,6 @@ QVector<int> ConfigHandler::fromButtonToInt(
     return buttons;
 }
 
-QVector<QStringList> ConfigHandler::shortcuts()
-{
-    ConfigShortcuts configShortcuts;
-    m_shortcuts = configShortcuts.captureShortcutsDefault(
-      CaptureToolButton::getIterableButtonTypes());
-    return m_shortcuts;
-}
-
 bool ConfigHandler::setShortcut(const QString& shortcutName,
                                 const QString& shortutValue)
 {
@@ -697,7 +689,12 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
 const QString& ConfigHandler::shortcut(const QString& shortcutName)
 {
     m_settings.beginGroup("Shortcuts");
-    m_strRes = m_settings.value(shortcutName).toString();
+    if (m_settings.contains(shortcutName)) {
+        m_strRes = m_settings.value(shortcutName).toString();
+    } else {
+        m_strRes =
+          ConfigShortcuts().captureShortcutDefault(shortcutName).toString();
+    }
     m_settings.endGroup();
     return m_strRes;
 }
