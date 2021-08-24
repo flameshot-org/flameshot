@@ -49,7 +49,7 @@ CaptureWidget::CaptureWidget(uint id,
                              QWidget* parent)
   : QWidget(parent)
   , m_mouseIsClicked(false)
-  , m_newSelection(false)
+  , m_newSelection(true)
   , m_grabbing(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
@@ -188,6 +188,10 @@ CaptureWidget::CaptureWidget(uint id,
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
+    connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
+        // Show cursor if it was hidden while adjusting tool thickness
+        updateCursor();
+    });
 
     initPanel();
 }
@@ -215,6 +219,7 @@ void CaptureWidget::initButtons()
             m_sizeIndButton = b;
         }
         b->setColor(m_uiColor);
+        b->hide();
         makeChild(b);
 
         switch (t) {
@@ -253,8 +258,6 @@ void CaptureWidget::initButtons()
                     this,
                     &CaptureWidget::setState);
             vectorButtons << b;
-        } else {
-            b->hide();
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
@@ -494,7 +497,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
                 m_selection->setGeometry(
                   QRect(m_mousePressedPos, m_mousePressedPos));
                 m_selection->setVisible(false);
-                m_newSelection = true;
                 m_buttonHandler->hide();
                 update();
             } else {
@@ -663,7 +665,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
               m_buttonHandler->contains(m_context.mousePos);
             if (containsMouse) {
                 m_buttonHandler->hide();
-            } else {
+            } else if (m_selection->isVisible()) {
                 m_buttonHandler->show();
             }
         }
@@ -741,8 +743,10 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     }
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
-    m_newSelection = false;
     m_grabbing = false;
+    if (m_selection->isVisible()) {
+        m_newSelection = false;
+    }
 
     updateCursor();
 }
@@ -750,6 +754,36 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 void CaptureWidget::moveSelection(QPoint p)
 {
     adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
+}
+
+void CaptureWidget::updateThickness(int thicknessOffset)
+{
+    m_context.thickness += thicknessOffset;
+    m_context.thickness = qBound(1, m_context.thickness, 100);
+
+    QPoint topLeft =
+      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
+    int offset = m_notifierBox->width() / 4;
+    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    m_notifierBox->showMessage(QString::number(m_context.thickness));
+
+    if (m_activeButton && m_activeButton->tool() &&
+        m_activeButton->tool()->showMousePreview()) {
+        setCursor(Qt::BlankCursor);
+        update();
+    }
+
+    // update selected object thickness
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        toolItem->thicknessChanged(m_context.thickness);
+        if (!m_existingObjectIsChanged) {
+            m_captureToolObjectsBackup = m_captureToolObjects;
+            m_existingObjectIsChanged = true;
+        }
+    }
+
+    emit thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::moveLeft()
@@ -826,29 +860,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    m_context.thickness += thicknessOffset;
-    m_context.thickness = qBound(1, m_context.thickness, 100);
-    QPoint topLeft =
-      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
-    int offset = m_notifierBox->width() / 4;
-    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
-    m_notifierBox->showMessage(QString::number(m_context.thickness));
-    if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->showMousePreview()) {
-        update();
-    }
-
-    // update selected object thickness
-    // Reset selection if mouse pos is not in selection area
-    auto toolItem = activeToolObject();
-    if (toolItem) {
-        toolItem->thicknessChanged(m_context.thickness);
-        if (!m_existingObjectIsChanged) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_existingObjectIsChanged = true;
-        }
-    }
-    emit thicknessChanged(m_context.thickness);
+    updateThickness(thicknessOffset);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
@@ -1148,22 +1160,10 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
-            // increase thickness
-            m_context.thickness = qBound(1, m_context.thickness + 1, 100);
-
-            // show notifier circle
-            m_notifierBox->showMessage(QString::number(m_context.thickness));
-
-            emit thicknessChanged(m_context.thickness);
+            updateThickness(1);
             break;
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
-            // decrease thickness
-            m_context.thickness = qBound(1, m_context.thickness - 1, 100);
-
-            // show notifier circle
-            m_notifierBox->showMessage(QString::number(m_context.thickness));
-
-            emit thicknessChanged(m_context.thickness);
+            updateThickness(-1);
             break;
         default:
             break;
@@ -1574,7 +1574,9 @@ void CaptureWidget::copyScreenshot()
         processPixmapWithTool(&m_context.screenshot, m_activeTool);
     }
 
-    ScreenshotSaver().saveToClipboard(pixmap());
+    auto req = Controller::getInstance()->requests().find(m_id);
+    req->addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+
     close();
 }
 
@@ -1591,8 +1593,7 @@ void CaptureWidget::saveScreenshot()
     if (m_context.savePath.isEmpty()) {
         ScreenshotSaver(m_id).saveToFilesystemGUI(pixmap());
     } else {
-        ScreenshotSaver(m_id).saveToFilesystem(
-          pixmap(), m_context.savePath, "");
+        ScreenshotSaver(m_id).saveToFilesystem(pixmap(), m_context.savePath);
     }
     close();
 }
