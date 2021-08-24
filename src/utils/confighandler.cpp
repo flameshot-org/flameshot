@@ -777,7 +777,7 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
 bool ConfigHandler::checkAndHandleError() const
 {
     static bool errorFlag = false;
-    if (!checkUnrecognizedSettings()) {
+    if (!checkUnrecognizedSettings() || !checkShortcutConflicts()) {
         if (!errorFlag) {
             // do not spam the user with notifications
             auto msg =
@@ -813,4 +813,22 @@ bool ConfigHandler::checkUnrecognizedSettings() const
         return false;
     }
     return true;
+}
+
+/// Check if there are multiple shortcuts with the same key binding.
+bool ConfigHandler::checkShortcutConflicts() const
+{
+    bool retVal = true; // ok
+    m_settings.beginGroup("Shortcuts");
+    QStringList shortcuts = m_settings.allKeys();
+    for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
+        for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
+            if (m_settings.value(*key1) == m_settings.value(*key2)) {
+                retVal = false;
+                break;
+            }
+        }
+    }
+    m_settings.endGroup();
+    return retVal;
 }

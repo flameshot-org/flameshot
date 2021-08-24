@@ -120,6 +120,7 @@ public:
 
     bool checkAndHandleError() const;
     bool checkUnrecognizedSettings() const;
+    bool checkShortcutConflicts() const;
 signals:
     void error(const QString& message) const;
 
