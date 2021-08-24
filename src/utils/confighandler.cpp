@@ -743,8 +743,15 @@ const QStringList& ConfigHandler::recognizedGeneralOptions() const
 
 QStringList ConfigHandler::recognizedShortcutNames() const
 {
-    // TODO
-    return {};
+    // FIXME: Implement a more elegant solution in the future. Requires refactor
+    QStringList names;
+    ConfigShortcuts shortcuts;
+    for (const QStringList& entry : shortcuts.captureShortcutsDefault(
+           CaptureToolButton::getIterableButtonTypes())) {
+        names.append(entry[0]);
+    }
+    names.append(QStringLiteral("TYPE_IMAGEUPLOADER"));
+    return names;
 }
 
 /// Return keys from group `group`. Use "General" for general settings.
@@ -780,17 +787,22 @@ bool ConfigHandler::checkAndHandleError() const
 
 bool ConfigHandler::checkUnrecognizedSettings() const
 {
-    // sort the keys by group
+    // sort the config keys by group
     QStringList generalKeys = keysFromGroup("General"),
                 shortcutKeys = keysFromGroup("Shortcuts"),
-                recognizedGeneralKeys = recognizedGeneralOptions();
+                recognizedGeneralKeys = recognizedGeneralOptions(),
+                recognizedShortcutKeys = recognizedShortcutNames();
 
-    auto generalKeySet = QSet(generalKeys.begin(), generalKeys.end());
+    // form sets of unrecognized options by group
+    QSet generalKeySet = QSet(generalKeys.begin(), generalKeys.end()),
+         shortcutKeySet = QSet(shortcutKeys.begin(), shortcutKeys.end());
     generalKeySet.subtract(
       QSet(recognizedGeneralKeys.begin(), recognizedGeneralKeys.end()));
+    shortcutKeySet.subtract(
+      QSet(recognizedShortcutKeys.begin(), recognizedShortcutKeys.end()));
 
-    // check for outliers in [General]
-    if (!generalKeySet.isEmpty()) {
+    // check if the sets are empty
+    if (!generalKeySet.isEmpty() || !shortcutKeySet.isEmpty()) {
         return false;
     }
     return true;
