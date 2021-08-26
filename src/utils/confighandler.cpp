@@ -689,34 +689,39 @@ bool ConfigHandler::contains(const QString& key) const
 
 const QStringList& ConfigHandler::recognizedGeneralOptions() const
 {
-    static QStringList options = { // General tab in config window
-                                   "showHelp",
-                                   "showSidePanelButton",
-                                   "showDesktopNotification",
-                                   "disabledTrayIcon",
-                                   "historyConfirmationToDelete",
-                                   "checkForUpdates",
-                                   "startupLaunch",
-                                   "showStartupLaunchMessage",
-                                   "copyAndCloseAfterUpload",
-                                   "copyPathAfterSave",
-                                   "useJpgForClipboard",
-                                   "saveAfterCopy",
-                                   "savePath",
-                                   "savePathFixed",
-                                   "uploadHistoryMax",
-                                   "undoLimit",
-                                   // Interface tab
-                                   "uiColor",
-                                   "contrastUiColor",
-                                   "contrastOpacity",
-                                   "buttons",
-                                   // Filename Editor tab
-                                   "filenamePattern",
-                                   // Others
-                                   "saveAfterCopyPath",
-                                   "drawThickness",
-                                   "drawColor"
+    static QStringList options = {
+        // General tab in config window
+        "showHelp",
+        "showSidePanelButton",
+        "showDesktopNotification",
+        "disabledTrayIcon",
+        "historyConfirmationToDelete",
+        "checkForUpdates",
+        "startupLaunch",
+        "showStartupLaunchMessage",
+        "copyAndCloseAfterUpload",
+        "copyPathAfterSave",
+        "useJpgForClipboard",
+        "saveAfterCopy",
+        "savePath",
+        "savePathFixed",
+        "uploadHistoryMax",
+        "undoLimit",
+        // Interface tab
+        "uiColor",
+        "contrastUiColor",
+        "contrastOpacity",
+        "buttons",
+        // Filename Editor tab
+        "filenamePattern",
+        // Others
+        "saveAfterCopyPath",
+        "drawThickness",
+        "drawColor",
+        "userColors",
+        "drawFontSize",
+        "ignoreUpdateToVersion",
+        "keepOpenAppLauncher",
     };
     return options;
 }
