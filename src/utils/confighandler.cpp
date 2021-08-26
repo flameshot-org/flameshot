@@ -698,20 +698,53 @@ const QStringList& ConfigHandler::recognizedGeneralOptions() const
 QStringList ConfigHandler::recognizedShortcutNames() const
 {
     // FIXME: Implement a more elegant solution in the future. Requires refactor
-    QStringList names;
-    ConfigShortcuts shortcuts;
-    foreach (const QStringList& entry, shortcuts.captureShortcutsDefault(
-           CaptureToolButton::getIterableButtonTypes())) {
-        names.append(entry[0]);
-    }
-    names.append(QStringLiteral("TYPE_IMAGEUPLOADER"));
+    QStringList names = {
+        "TYPE_PENCIL",
+        "TYPE_DRAWER",
+        "TYPE_ARROW",
+        "TYPE_SELECTION",
+        "TYPE_RECTANGLE",
+        "TYPE_CIRCLE",
+        "TYPE_MARKER",
+        "TYPE_MOVESELECTION",
+        "TYPE_UNDO",
+        "TYPE_COPY",
+        "TYPE_SAVE",
+        "TYPE_EXIT",
+        "TYPE_IMAGEUPLOADER",
+    #if !defined(Q_OS_MACOS)
+        "TYPE_OPEN_APP",
+    #endif
+        "TYPE_PIXELATE",
+        "TYPE_REDO",
+        "TYPE_TEXT",
+        "TYPE_TOGGLE_PANEL",
+        "TYPE_RESIZE_LEFT",
+        "TYPE_RESIZE_RIGHT",
+        "TYPE_RESIZE_UP",
+        "TYPE_RESIZE_DOWN",
+        "TYPE_SELECT_ALL",
+        "TYPE_MOVE_LEFT",
+        "TYPE_MOVE_RIGHT",
+        "TYPE_MOVE_UP",
+        "TYPE_MOVE_DOWN",
+        "TYPE_COMMIT_CURRENT_TOOL",
+        "TYPE_DELETE_CURRENT_TOOL",
+        "TYPE_PIN",
+        "TYPE_SELECTIONINDICATOR",
+        "TYPE_SIZEINCREASE",
+        "TYPE_SIZEDECREASE",
+        "TYPE_CIRCLECOUNT",
+    };
     return names;
 }
+
 
 /// Return keys from group `group`. Use "General" for general settings.
 QStringList ConfigHandler::keysFromGroup(const QString& group) const
 {
     QStringList keys;
+    m_settings.endGroup();
     for (const QString& key : m_settings.allKeys()) {
         if (group == "General" && !key.contains('/')) {
             keys.append(key);
@@ -732,14 +765,17 @@ bool ConfigHandler::checkAndHandleError() const
 {
     static bool errorFlag = false;
     if (!checkUnrecognizedSettings() || !checkShortcutConflicts()) {
+        // do not spam the user with notifications
         if (!errorFlag) {
-            // do not spam the user with notifications
+            // NOTE: errorFlag must be set before sending the notification
+            // to avoid an infinite recursion caused by sendMessage calling
+            // desktopNotificationValue()
+            errorFlag = true;
             auto msg =
               "The configuration contains an error. Falling back to default.";
             SystemNotification().sendMessage(msg);
             emit error(msg);
         }
-        errorFlag = true;
         return false;
     }
     errorFlag = false;
@@ -764,25 +800,25 @@ bool ConfigHandler::checkUnrecognizedSettings() const
 
     // check if the sets are empty
     if (!generalKeySet.isEmpty() || !shortcutKeySet.isEmpty()) {
-        return false;
+        return false; // error
     }
-    return true;
+    return true; // ok
 }
 
 /// Check if there are multiple shortcuts with the same key binding.
 bool ConfigHandler::checkShortcutConflicts() const
 {
-    bool retVal = true; // ok
+    bool ok = true;
     m_settings.beginGroup("Shortcuts");
     QStringList shortcuts = m_settings.allKeys();
     for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
         for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
             if (m_settings.value(*key1) == m_settings.value(*key2)) {
-                retVal = false;
+                ok = false;
                 break;
             }
         }
     }
     m_settings.endGroup();
-    return retVal;
+    return ok;
 }
