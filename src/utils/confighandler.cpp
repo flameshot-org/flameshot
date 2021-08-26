@@ -845,7 +845,8 @@ bool ConfigHandler::checkShortcutConflicts() const
     QStringList shortcuts = m_settings.allKeys();
     for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
         for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
-            if (m_settings.value(*key1) == m_settings.value(*key2)) {
+            if (m_settings.value(*key1).isNull() &&
+                m_settings.value(*key1) == m_settings.value(*key2)) {
                 ok = false;
                 break;
             }
