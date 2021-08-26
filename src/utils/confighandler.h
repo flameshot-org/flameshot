@@ -9,6 +9,8 @@
 #include <QVariant>
 #include <QVector>
 
+class QFileSystemWatcher;
+
 class ConfigHandler : public QObject
 {
     Q_OBJECT
@@ -119,9 +121,10 @@ public:
     QStringList keysFromGroup(const QString& group) const;
     bool isValidShortcutName(const QString& name) const;
 
-    bool checkAndHandleError() const;
+    void checkAndHandleError() const;
     bool checkUnrecognizedSettings() const;
     bool checkShortcutConflicts() const;
+    bool hasError() const;
 signals:
     void error(const QString& message) const;
 
@@ -130,6 +133,11 @@ private:
     QVariant m_varRes;
     mutable QSettings m_settings;
     QVector<QStringList> m_shortcuts;
+
+    static bool m_hasError, m_errorCheckPending;
+    static QSharedPointer<QFileSystemWatcher> m_configWatcher;
+
+    void ensureFileWatched() const;
 
     bool normalizeButtons(QVector<int>&);
 

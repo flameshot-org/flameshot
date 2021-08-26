@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QFileSystemWatcher>
 #include <QKeySequence>
 #include <QStandardPaths>
 #include <algorithm>
@@ -16,9 +17,34 @@
 #include <QProcess>
 #endif
 
+bool ConfigHandler::m_hasError = false;
+bool ConfigHandler::m_errorCheckPending = false;
+QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;
+
 ConfigHandler::ConfigHandler()
 {
     m_settings.setDefaultFormat(QSettings::IniFormat);
+
+    if (m_configWatcher == nullptr && qApp != nullptr) {
+        // check for error on initial call
+        checkAndHandleError();
+        // check for error every time the file changes
+        m_configWatcher.reset(new QFileSystemWatcher());
+        ensureFileWatched();
+        QObject::connect(m_configWatcher.get(),
+                         &QFileSystemWatcher::fileChanged,
+                         [](const QString& fileName) {
+                             ConfigHandler().checkAndHandleError();
+                             if (!QFile(fileName).exists()) {
+                                 // File watcher stops watching a deleted file.
+                                 // Next time the config is accessed, force it
+                                 // to check for errors.
+                                 m_errorCheckPending = true;
+                             } else {
+                                 m_configWatcher->addPath(fileName);
+                             }
+                         });
+    }
 }
 
 QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
@@ -637,16 +663,16 @@ const QString& ConfigHandler::shortcut(const QString& shortcutName)
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
-    m_settings.setValue(key, value);
-    auto status = m_settings.status();
-    checkAndHandleError();
+    if (!hasError()) {
+        m_settings.setValue(key, value);
+    }
 }
 
 QVariant ConfigHandler::value(const QString& key,
                               const QVariant& fallback) const
 {
     auto val = m_settings.value(key, fallback);
-    if (!checkAndHandleError()) {
+    if (hasError()) {
         return fallback;
     }
     return val;
@@ -655,7 +681,7 @@ QVariant ConfigHandler::value(const QString& key,
 /// Wrapper for QSettings::contains, but returns false if there is an error.
 bool ConfigHandler::contains(const QString& key) const
 {
-    if (!checkAndHandleError()) {
+    if (hasError()) {
         return false;
     }
     return m_settings.contains(key);
@@ -712,9 +738,9 @@ QStringList ConfigHandler::recognizedShortcutNames() const
         "TYPE_SAVE",
         "TYPE_EXIT",
         "TYPE_IMAGEUPLOADER",
-    #if !defined(Q_OS_MACOS)
+#if !defined(Q_OS_MACOS)
         "TYPE_OPEN_APP",
-    #endif
+#endif
         "TYPE_PIXELATE",
         "TYPE_REDO",
         "TYPE_TEXT",
@@ -739,12 +765,10 @@ QStringList ConfigHandler::recognizedShortcutNames() const
     return names;
 }
 
-
 /// Return keys from group `group`. Use "General" for general settings.
 QStringList ConfigHandler::keysFromGroup(const QString& group) const
 {
     QStringList keys;
-    m_settings.endGroup();
     for (const QString& key : m_settings.allKeys()) {
         if (group == "General" && !key.contains('/')) {
             keys.append(key);
@@ -761,25 +785,28 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
     return false;
 }
 
-bool ConfigHandler::checkAndHandleError() const
+void ConfigHandler::checkAndHandleError() const
 {
-    static bool errorFlag = false;
+    if (!QFile(m_settings.fileName()).exists()) {
+        return;
+    }
     if (!checkUnrecognizedSettings() || !checkShortcutConflicts()) {
+        m_errorCheckPending = false;
         // do not spam the user with notifications
-        if (!errorFlag) {
+        if (!m_hasError) {
             // NOTE: errorFlag must be set before sending the notification
             // to avoid an infinite recursion caused by sendMessage calling
             // desktopNotificationValue()
-            errorFlag = true;
+            m_hasError = true;
             auto msg =
               "The configuration contains an error. Falling back to default.";
             SystemNotification().sendMessage(msg);
             emit error(msg);
         }
-        return false;
+    } else {
+        m_hasError = false;
     }
-    errorFlag = false;
-    return true;
+    ensureFileWatched();
 }
 
 bool ConfigHandler::checkUnrecognizedSettings() const
@@ -821,4 +848,27 @@ bool ConfigHandler::checkShortcutConflicts() const
     }
     m_settings.endGroup();
     return ok;
+}
+
+bool ConfigHandler::hasError() const
+{
+    if (m_errorCheckPending) {
+        checkAndHandleError();
+        m_errorCheckPending = false;
+    }
+    return m_hasError;
+}
+
+void ConfigHandler::ensureFileWatched() const
+{
+    QFile file(m_settings.fileName());
+    if (!file.exists()) {
+        file.open(QFileDevice::WriteOnly);
+        file.close();
+    }
+    if (m_configWatcher != nullptr && m_configWatcher->files().isEmpty() &&
+        qApp != nullptr // ensures that the organization name can be accessed
+    ) {
+        m_configWatcher->addPath(m_settings.fileName());
+    }
 }
