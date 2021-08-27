@@ -799,7 +799,7 @@ void ConfigHandler::checkAndHandleError() const
         m_errorCheckPending = false;
         // do not spam the user with notifications
         if (!m_hasError) {
-            // NOTE: errorFlag must be set before sending the notification
+            // NOTE: m_hasError must be set before sending the notification
             // to avoid an infinite recursion caused by sendMessage calling
             // desktopNotificationValue()
             m_hasError = true;
@@ -809,7 +809,15 @@ void ConfigHandler::checkAndHandleError() const
             emit error(msg);
         }
     } else {
-        m_hasError = false;
+        if (m_hasError) {
+            // NOTE: m_hasError must be set before sending the notification.
+            // Same reason as above.
+            m_hasError = false;
+            auto msg =
+              "You have successfully resolved the configuration error.";
+            SystemNotification().sendMessage(msg);
+            emit errorResolved(msg);
+        }
     }
     ensureFileWatched();
 }

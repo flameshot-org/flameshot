@@ -127,6 +127,7 @@ public:
     bool hasError() const;
 signals:
     void error(const QString& message) const;
+    void errorResolved(const QString& message) const;
 
 private:
     QString m_strRes;
