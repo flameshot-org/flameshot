@@ -47,6 +47,13 @@ ConfigHandler::ConfigHandler()
     }
 }
 
+/// Serves as an object to which slots can be connected.
+ConfigHandler *ConfigHandler::getInstance()
+{
+    static ConfigHandler config;
+    return &config;
+}
+
 QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
 {
     QVector<CaptureToolButton::ButtonType> buttons;
@@ -801,12 +808,11 @@ void ConfigHandler::checkAndHandleError() const
         if (!m_hasError) {
             // NOTE: m_hasError must be set before sending the notification
             // to avoid an infinite recursion caused by sendMessage calling
-            // desktopNotificationValue()
+            // desktopNotificationValue() and hence this function
             m_hasError = true;
-            auto msg =
-              "The configuration contains an error. Falling back to default.";
+            QString msg = errorMessage();
             SystemNotification().sendMessage(msg);
-            emit error(msg);
+            emit getInstance()->error(msg);
         }
     } else {
         if (m_hasError) {
@@ -816,7 +822,7 @@ void ConfigHandler::checkAndHandleError() const
             auto msg =
               "You have successfully resolved the configuration error.";
             SystemNotification().sendMessage(msg);
-            emit errorResolved(msg);
+            emit getInstance()->errorResolved(msg);
         }
     }
     ensureFileWatched();
@@ -871,6 +877,11 @@ bool ConfigHandler::hasError() const
         m_errorCheckPending = false;
     }
     return m_hasError;
+}
+
+QString ConfigHandler::errorMessage() const
+{
+    return QStringLiteral("The configuration contains an error. Falling back to default.");
 }
 
 void ConfigHandler::ensureFileWatched() const

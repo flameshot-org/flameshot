@@ -28,6 +28,8 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopWidget>
+#include <QFontMetrics>
+#include <QLabel>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -54,6 +56,8 @@ CaptureWidget::CaptureWidget(uint id,
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
+  , m_configError(false)
+  , m_configErrorResolved(false)
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
@@ -194,6 +198,21 @@ CaptureWidget::CaptureWidget(uint id,
     });
 
     initPanel();
+
+    m_config.checkAndHandleError();
+    if (m_config.hasError()) {
+        m_configError = true;
+    }
+    connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=] (const QString &msg) {
+        m_configError = true;
+        m_configErrorResolved = false;
+        update();
+    });
+    connect(ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=] (const QString &msg) {
+        m_configError = false;
+        m_configErrorResolved = true;
+        update();
+    });
 }
 
 CaptureWidget::~CaptureWidget()
@@ -364,6 +383,10 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     // area)
     if (m_showInitialMsg) {
         drawInitialMessage(&painter);
+    }
+
+    if (m_configError || m_configErrorResolved) {
+        drawConfigErrorMessage(&painter);
     }
 }
 
@@ -669,8 +692,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (m_activeButton && m_activeButton->tool() &&
-               m_activeButton->tool()->showMousePreview()) {
+    } else if (m_activeButton && m_activeButton->tool()) {
         update();
     } else {
         if (!m_selection->isVisible()) {
@@ -1691,6 +1713,28 @@ void CaptureWidget::drawInitialMessage(QPainter* painter)
 
     painter->drawRect(bRect);
     painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
+}
+
+void CaptureWidget::drawConfigErrorMessage(QPainter *painter)
+{
+    QString msg;
+    if (m_configError) {
+        msg = ConfigHandler().errorMessage();
+    } else if (m_configErrorResolved) {
+        msg = QStringLiteral("Configuration error resolved. Launch `flameshot gui` again to apply it.");
+    }
+
+    QFontMetrics fm = painter->fontMetrics();
+    int width = fm.horizontalAdvance(msg),
+            height = fm.height();
+    QRect textRect(size().width() - width, size().height() - height, width + 1, height);
+    QScreen *currentScreen = QGuiAppCurrentScreen().currentScreen();
+
+    if (!textRect.contains(QCursor::pos(currentScreen))) {
+        QColor textColor(Qt::white);
+        painter->setPen(textColor);
+        painter->drawText(textRect, msg);
+    }
 }
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)

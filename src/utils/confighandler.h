@@ -17,6 +17,8 @@ class ConfigHandler : public QObject
 public:
     explicit ConfigHandler();
 
+    static ConfigHandler* getInstance();
+
     QVector<CaptureToolButton::ButtonType> getButtons();
     void setButtons(const QVector<CaptureToolButton::ButtonType>&);
 
@@ -125,6 +127,7 @@ public:
     bool checkUnrecognizedSettings() const;
     bool checkShortcutConflicts() const;
     bool hasError() const;
+    QString errorMessage() const;
 signals:
     void error(const QString& message) const;
     void errorResolved(const QString& message) const;
