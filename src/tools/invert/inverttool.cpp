@@ -3,9 +3,9 @@
 
 #include "inverttool.h"
 #include "src/utils/screenshotsaver.h"
+#include <QImage>
 #include <QPainter>
 #include <QPixmap>
-#include <QImage>
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
 #include <QApplication>
@@ -69,14 +69,13 @@ void InvertTool::pressed(const CaptureContext& context)
 
     if (context.savePath.isEmpty()) {
         emit requestAction(REQ_HIDE_GUI);
-        bool ok = ScreenshotSaver().saveToFilesystemGUI(
-          inverted);
+        bool ok = ScreenshotSaver().saveToFilesystemGUI(inverted);
         if (ok) {
             emit requestAction(REQ_CAPTURE_DONE_OK);
         }
     } else {
-        bool ok = ScreenshotSaver().saveToFilesystem(
-          inverted, context.savePath);
+        bool ok =
+          ScreenshotSaver().saveToFilesystem(inverted, context.savePath);
         if (ok) {
             emit requestAction(REQ_CAPTURE_DONE_OK);
         }
