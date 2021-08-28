@@ -1315,6 +1315,19 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
 </context>
 <context>
+    <name>InvertTool</name>
+    <message>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
+        <source>Invert</source>
+        <translation>Invertir</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>Guarda la captura invertida</translation>
+    </message>
+</context>
+<context>
     <name>ScreenGrabber</name>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>

@@ -1377,6 +1377,19 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
     </message>
 </context>
 <context>
+    <name>InvertTool</name>
+    <message>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
+        <source>Invert</source>
+        <translation>Alderantzikatu</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>Gorde alderantzizko kaptura</translation>
+    </message>
+</context>
+<context>
     <name>ScreenGrabber</name>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>
