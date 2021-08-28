@@ -671,6 +671,7 @@ const QString& ConfigHandler::shortcut(const QString& shortcutName)
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
+    m_errorCheckPending = true;
     if (!hasError()) {
         m_settings.setValue(key, value);
     }
@@ -800,31 +801,26 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
 
 void ConfigHandler::checkAndHandleError() const
 {
+    bool hadError = m_hasError;
+    m_errorCheckPending = false;
+
     if (!QFile(m_settings.fileName()).exists()) {
-        return;
+        m_hasError = false;
     }
-    if (!checkUnrecognizedSettings() || !checkShortcutConflicts()) {
-        m_errorCheckPending = false;
-        // do not spam the user with notifications
-        if (!m_hasError) {
-            // NOTE: m_hasError must be set before sending the notification
-            // to avoid an infinite recursion caused by sendMessage calling
-            // desktopNotificationValue() and hence this function
-            m_hasError = true;
-            QString msg = errorMessage();
-            SystemNotification().sendMessage(msg);
-            emit getInstance()->error(msg);
-        }
-    } else {
-        if (m_hasError) {
-            // NOTE: m_hasError must be set before sending the notification.
-            // Same reason as above.
-            m_hasError = false;
-            auto msg =
-              "You have successfully resolved the configuration error.";
-            SystemNotification().sendMessage(msg);
-            emit getInstance()->errorResolved(msg);
-        }
+    else {
+        m_hasError = !checkUnrecognizedSettings() || !checkShortcutConflicts();
+    }
+
+    // Notify user every time m_hasError changes
+    if (!hadError && m_hasError) {
+        QString msg = errorMessage();
+        SystemNotification().sendMessage(msg);
+        emit getInstance()->error(msg);
+    } else if (hadError && !m_hasError) {
+        auto msg =
+          "You have successfully resolved the configuration error.";
+        SystemNotification().sendMessage(msg);
+        emit getInstance()->errorResolved(msg);
     }
     ensureFileWatched();
 }
