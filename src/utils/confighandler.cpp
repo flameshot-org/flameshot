@@ -38,11 +38,12 @@ ConfigHandler::ConfigHandler()
                              if (!QFile(fileName).exists()) {
                                  // File watcher stops watching a deleted file.
                                  // Next time the config is accessed, force it
-                                 // to check for errors.
+                                 // to check for errors (and watch again).
                                  m_errorCheckPending = true;
                              } else {
                                  m_configWatcher->addPath(fileName);
                              }
+                             emit getInstance()->fileChanged();
                          });
     }
 }

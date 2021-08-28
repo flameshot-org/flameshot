@@ -34,17 +34,10 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("Configuration"));
 
-    auto changedSlot = [this](QString s) {
-        QStringList files = m_configWatcher->files();
-        if (!files.contains(s)) {
-            this->m_configWatcher->addPath(s);
-        }
-        emit updateChildren();
-    };
-    m_configWatcher = new QFileSystemWatcher(this);
-    m_configWatcher->addPath(ConfigHandler().configFilePath());
-    connect(
-      m_configWatcher, &QFileSystemWatcher::fileChanged, this, changedSlot);
+    connect(ConfigHandler::getInstance(),
+            &ConfigHandler::fileChanged,
+            this,
+            &ConfigWindow::updateChildren);
 
     QColor background = this->palette().window().color();
     bool isDark = ColorUtils::colorIsDark(background);

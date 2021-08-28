@@ -129,6 +129,7 @@ public:
     bool hasError() const;
     QString errorMessage() const;
 signals:
+    void fileChanged() const;
     void error(const QString& message) const;
     void errorResolved(const QString& message) const;
 

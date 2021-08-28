@@ -29,7 +29,6 @@ private:
     ShortcutsWidget* m_shortcuts;
     GeneralConf* m_generalConfig;
     VisualsEditor* m_visuals;
-    QFileSystemWatcher* m_configWatcher;
 
     void initErrorLabel(QWidget* widget);
 };
