@@ -88,6 +88,8 @@ const QKeySequence& ConfigShortcuts::captureShortcutDefault(
         m_ks = QKeySequence(Qt::CTRL + Qt::Key_C);
     } else if (buttonType == "TYPE_SAVE") {
         m_ks = QKeySequence(Qt::CTRL + Qt::Key_S);
+    } else if (buttonType == "TYPE_INVERT") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_I);
     } else if (buttonType == "TYPE_EXIT") {
         m_ks = QKeySequence(Qt::CTRL + Qt::Key_Q);
     } else if (buttonType == "TYPE_IMAGEUPLOADER") {
