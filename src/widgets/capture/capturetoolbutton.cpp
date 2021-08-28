@@ -143,16 +143,17 @@ static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
       { CaptureToolButton::TYPE_REDO, 13 },
       { CaptureToolButton::TYPE_COPY, 14 },
       { CaptureToolButton::TYPE_SAVE, 15 },
-      { CaptureToolButton::TYPE_IMAGEUPLOADER, 16 },
+      { CaptureToolButton::TYPE_INVERT, 16 },
+      { CaptureToolButton::TYPE_IMAGEUPLOADER, 17 },
 #if !defined(Q_OS_MACOS)
-      { CaptureToolButton::TYPE_OPEN_APP, 17 },
-      { CaptureToolButton::TYPE_EXIT, 18 }, { CaptureToolButton::TYPE_PIN, 19 },
+      { CaptureToolButton::TYPE_OPEN_APP, 18 },
+      { CaptureToolButton::TYPE_EXIT, 19 }, { CaptureToolButton::TYPE_PIN, 20 },
 #else
-      { CaptureToolButton::TYPE_EXIT, 17 }, { CaptureToolButton::TYPE_PIN, 18 },
+      { CaptureToolButton::TYPE_EXIT, 18 }, { CaptureToolButton::TYPE_PIN, 19 },
 #endif
 
-      { CaptureToolButton::TYPE_SIZEINCREASE, 20 },
-      { CaptureToolButton::TYPE_SIZEDECREASE, 21 },
+      { CaptureToolButton::TYPE_SIZEINCREASE, 21 },
+      { CaptureToolButton::TYPE_SIZEDECREASE, 22 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureToolButton::ButtonType b)
@@ -179,6 +180,7 @@ QVector<CaptureToolButton::ButtonType>
       CaptureToolButton::TYPE_REDO,
       CaptureToolButton::TYPE_COPY,
       CaptureToolButton::TYPE_SAVE,
+      CaptureToolButton::TYPE_INVERT,
       CaptureToolButton::TYPE_EXIT,
       CaptureToolButton::TYPE_IMAGEUPLOADER,
 #if !defined(Q_OS_MACOS)

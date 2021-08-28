@@ -18,6 +18,7 @@
 #include "rectangle/rectangletool.h"
 #include "redo/redotool.h"
 #include "save/savetool.h"
+#include "invert/inverttool.h"
 #include "selection/selectiontool.h"
 #include "sizedecrease/sizedecreasetool.h"
 #include "sizeincrease/sizeincreasetool.h"
@@ -67,6 +68,9 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
             break;
         case CaptureToolButton::TYPE_SAVE:
             tool = new SaveTool(parent);
+            break;
+        case CaptureToolButton::TYPE_INVERT:
+            tool = new InvertTool(parent);
             break;
         case CaptureToolButton::TYPE_SELECTION:
             tool = new SelectionTool(parent);
