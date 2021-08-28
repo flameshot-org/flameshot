@@ -203,16 +203,17 @@ CaptureWidget::CaptureWidget(uint id,
     if (m_config.hasError()) {
         m_configError = true;
     }
-    connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=] (const QString &msg) {
+    connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=]() {
         m_configError = true;
         m_configErrorResolved = false;
         update();
     });
-    connect(ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=] (const QString &msg) {
-        m_configError = false;
-        m_configErrorResolved = true;
-        update();
-    });
+    connect(
+      ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=]() {
+          m_configError = false;
+          m_configErrorResolved = true;
+          update();
+      });
 }
 
 CaptureWidget::~CaptureWidget()
@@ -1715,20 +1716,21 @@ void CaptureWidget::drawInitialMessage(QPainter* painter)
     painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
 }
 
-void CaptureWidget::drawConfigErrorMessage(QPainter *painter)
+void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
 {
     QString msg;
     if (m_configError) {
         msg = ConfigHandler().errorMessage();
     } else if (m_configErrorResolved) {
-        msg = QStringLiteral("Configuration error resolved. Launch `flameshot gui` again to apply it.");
+        msg = QStringLiteral("Configuration error resolved. Launch `flameshot "
+                             "gui` again to apply it.");
     }
 
     QFontMetrics fm = painter->fontMetrics();
-    int width = fm.horizontalAdvance(msg),
-            height = fm.height();
-    QRect textRect(size().width() - width, size().height() - height, width + 1, height);
-    QScreen *currentScreen = QGuiAppCurrentScreen().currentScreen();
+    int width = fm.horizontalAdvance(msg), height = fm.height();
+    QRect textRect(
+      size().width() - width, size().height() - height, width + 1, height);
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
 
     if (!textRect.contains(QCursor::pos(currentScreen))) {
         QColor textColor(Qt::white);

@@ -19,6 +19,7 @@
 
 bool ConfigHandler::m_hasError = false;
 bool ConfigHandler::m_errorCheckPending = false;
+bool ConfigHandler::m_skipNextErrorCheck = false;
 QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;
 
 ConfigHandler::ConfigHandler()
@@ -34,16 +35,22 @@ ConfigHandler::ConfigHandler()
         QObject::connect(m_configWatcher.get(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
+                             emit getInstance()->fileChanged();
+
+                             if (QFile(fileName).exists()) {
+                                 m_configWatcher->addPath(fileName);
+                             }
+                             if (m_skipNextErrorCheck) {
+                                 m_skipNextErrorCheck = false;
+                                 return;
+                             }
                              ConfigHandler().checkAndHandleError();
                              if (!QFile(fileName).exists()) {
                                  // File watcher stops watching a deleted file.
                                  // Next time the config is accessed, force it
                                  // to check for errors (and watch again).
                                  m_errorCheckPending = true;
-                             } else {
-                                 m_configWatcher->addPath(fileName);
                              }
-                             emit getInstance()->fileChanged();
                          });
     }
 }
@@ -671,8 +678,8 @@ const QString& ConfigHandler::shortcut(const QString& shortcutName)
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
-    m_errorCheckPending = true;
     if (!hasError()) {
+        m_skipNextErrorCheck = true;
         m_settings.setValue(key, value);
     }
 }
@@ -802,12 +809,10 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
 void ConfigHandler::checkAndHandleError() const
 {
     bool hadError = m_hasError;
-    m_errorCheckPending = false;
 
     if (!QFile(m_settings.fileName()).exists()) {
         m_hasError = false;
-    }
-    else {
+    } else {
         m_hasError = !checkUnrecognizedSettings() || !checkShortcutConflicts();
     }
 
@@ -815,12 +820,11 @@ void ConfigHandler::checkAndHandleError() const
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
         SystemNotification().sendMessage(msg);
-        emit getInstance()->error(msg);
+        emit getInstance()->error();
     } else if (hadError && !m_hasError) {
-        auto msg =
-          "You have successfully resolved the configuration error.";
+        auto msg = "You have successfully resolved the configuration error.";
         SystemNotification().sendMessage(msg);
-        emit getInstance()->errorResolved(msg);
+        emit getInstance()->errorResolved();
     }
     ensureFileWatched();
 }

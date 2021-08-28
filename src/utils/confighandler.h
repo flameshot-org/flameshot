@@ -130,8 +130,8 @@ public:
     QString errorMessage() const;
 signals:
     void fileChanged() const;
-    void error(const QString& message) const;
-    void errorResolved(const QString& message) const;
+    void error() const;
+    void errorResolved() const;
 
 private:
     QString m_strRes;
@@ -139,7 +139,7 @@ private:
     mutable QSettings m_settings;
     QVector<QStringList> m_shortcuts;
 
-    static bool m_hasError, m_errorCheckPending;
+    static bool m_hasError, m_errorCheckPending, m_skipNextErrorCheck;
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
