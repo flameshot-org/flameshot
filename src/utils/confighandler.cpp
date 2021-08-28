@@ -48,7 +48,7 @@ ConfigHandler::ConfigHandler()
 }
 
 /// Serves as an object to which slots can be connected.
-ConfigHandler *ConfigHandler::getInstance()
+ConfigHandler* ConfigHandler::getInstance()
 {
     static ConfigHandler config;
     return &config;
@@ -881,7 +881,8 @@ bool ConfigHandler::hasError() const
 
 QString ConfigHandler::errorMessage() const
 {
-    return QStringLiteral("The configuration contains an error. Falling back to default.");
+    return QStringLiteral(
+      "The configuration contains an error. Falling back to default.");
 }
 
 void ConfigHandler::ensureFileWatched() const
