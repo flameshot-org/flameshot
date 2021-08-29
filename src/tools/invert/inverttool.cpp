@@ -2,24 +2,18 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "inverttool.h"
-#include "src/utils/screenshotsaver.h"
+#include <QApplication>
+#include <QGraphicsBlurEffect>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
 #include <QImage>
 #include <QPainter>
 #include <QPixmap>
-#if defined(Q_OS_MACOS)
-#include "src/widgets/capture/capturewidget.h"
-#include <QApplication>
-#include <QWidget>
-#endif
+
 
 InvertTool::InvertTool(QObject* parent)
-  : AbstractActionTool(parent)
+  : AbstractTwoPointTool(parent)
 {}
-
-bool InvertTool::closeOnButtonPressed() const
-{
-    return true;
-}
 
 QIcon InvertTool::icon(const QColor& background, bool inEditor) const
 {
@@ -39,45 +33,53 @@ ToolType InvertTool::type() const
 
 QString InvertTool::description() const
 {
-    return tr("Save the inverted capture");
+    return tr("Set Inverter as the paint tool");
 }
 
 CaptureTool* InvertTool::copy(QObject* parent)
 {
-    return new InvertTool(parent);
+    auto* tool = new InvertTool(parent);
+    copyParams(this, tool);
+    return tool;
+}
+
+void InvertTool::process(QPainter& painter, const QPixmap& pixmap)
+{
+    QPoint p0 = points().first;
+    QPoint p1 = points().second;
+    QRect selection = QRect(p0, p1).normalized();
+
+    // Invert selection
+    QPixmap inv = pixmap.copy(selection);
+    QImage img = inv.toImage();
+    img.invertPixels();
+
+    painter.drawImage(selection, img);
+}
+
+void InvertTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
+{
+    Q_UNUSED(pixmap)
+    Q_UNUSED(painter)
+}
+
+void InvertTool::paintMousePreview(QPainter& painter,
+                                     const CaptureContext& context)
+{
+    Q_UNUSED(context)
+    Q_UNUSED(painter)
 }
 
 void InvertTool::pressed(const CaptureContext& context)
 {
-#if defined(Q_OS_MACOS)
-    for (QWidget* widget : qApp->topLevelWidgets()) {
-        QString className(widget->metaObject()->className());
-        if (0 ==
-            className.compare(CaptureWidget::staticMetaObject.className())) {
-            widget->showNormal();
-            widget->hide();
-            break;
-        }
-    }
-#endif
-    emit requestAction(REQ_CLEAR_SELECTION);
+    Q_UNUSED(context)
+}
 
-    QPixmap inverted = context.selectedScreenshotArea();
-    QImage img = inverted.toImage();
-    img.invertPixels();
-    inverted.convertFromImage(img);
-
-    if (context.savePath.isEmpty()) {
-        emit requestAction(REQ_HIDE_GUI);
-        bool ok = ScreenshotSaver().saveToFilesystemGUI(inverted);
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    } else {
-        bool ok =
-          ScreenshotSaver().saveToFilesystem(inverted, context.savePath);
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    }
+void InvertTool::drawObjectSelection(QPainter& painter)
+{
+    QRect rect = QRect(std::min(points().first.x(), points().second.x()),
+                       std::min(points().first.y(), points().second.y()),
+                       std::abs(points().first.x() - points().second.x()),
+                       std::abs(points().first.y() - points().second.y()));
+    drawObjectSelectionRect(painter, rect);
 }
