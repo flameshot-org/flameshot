@@ -11,11 +11,266 @@
 #include <QFile>
 #include <QFileSystemWatcher>
 #include <QKeySequence>
+#include <QMap>
+#include <QSharedPointer>
 #include <QStandardPaths>
 #include <algorithm>
 #if defined(Q_OS_MACOS)
 #include <QProcess>
 #endif
+
+// HELPER FUNCTIONS
+
+QVector<int> fromButtonToInt(const QVector<CaptureToolButton::ButtonType>& l)
+{
+    QVector<int> buttons;
+    for (auto const i : l)
+        buttons << static_cast<int>(i);
+    return buttons;
+}
+
+QVector<CaptureToolButton::ButtonType> fromIntToButton(const QVector<int>& l)
+{
+    QVector<CaptureToolButton::ButtonType> buttons;
+    for (auto const i : l)
+        buttons << static_cast<CaptureToolButton::ButtonType>(i);
+    return buttons;
+}
+
+bool normalizeButtons(QVector<int>& buttons)
+{
+    QVector<int> listTypesInt =
+      fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
+
+    bool hasChanged = false;
+    for (int i = 0; i < buttons.size(); i++) {
+        if (!listTypesInt.contains(buttons.at(i))) {
+            buttons.remove(i);
+            hasChanged = true;
+        }
+    }
+    return hasChanged;
+}
+
+/**
+ * Handles the value of a configuration option.
+ *
+ * Each configuration option should usually be handled in three different ways:
+ * - have its value checked for errors (type, format, etc.)
+ * - have its value (that was taken from the config file) adapted for proper use
+ * - provided a fallback value in case: the config does not explicitly specify
+ *   it, or the config contains an error and is globally falling back to
+ *   defaults
+ *
+ * Subclass this class to handle custom value types.
+ *
+ * If you wish to handle simple value types (those supported by QVariant) you
+ * should use `SimpleValueHandler`. Note that you can't use that class if the
+ * value has some custom constraints on it.
+ *
+ * @note You will only need to override `get` if you have to change the value
+ * that was read from the config file. If you are fine with the value as long as
+ * it is error-free, you don't have to override it.
+ *
+ */
+class ValueHandler
+{
+public:
+    virtual bool check(const QVariant& val) = 0;
+    virtual QVariant get(const QVariant& val)
+    {
+        return val.isValid() ? val : fallback();
+    }
+    virtual QVariant fallback() { return QVariant(); };
+};
+
+class SimpleValueHandler : public ValueHandler
+{
+public:
+    SimpleValueHandler(QVariant::Type type = QVariant::UserType,
+                       const QVariant& def = {})
+      : m_defaultValue(def)
+      , m_type(type)
+    {}
+    bool check(const QVariant& val) override
+    {
+        // An invalid value means that the setting is not found in the config
+        return !val.isValid() || val.canConvert(m_type);
+    }
+
+    virtual QVariant fallback() override { return m_defaultValue; };
+
+protected:
+    QVariant m_defaultValue;
+    QVariant::Type m_type;
+};
+
+// CUSTOM TYPE HANDLERS
+
+class BoundedInt : public ValueHandler
+{
+public:
+    BoundedInt(int min, int max, int def)
+      : m_min(min)
+      , m_max(max)
+      , m_def(def)
+    {}
+    BoundedInt(int min, int def)
+      : m_min(min)
+      , m_max(min - 1)
+      , m_def(def)
+    {}
+
+    bool check(const QVariant& val) override
+    {
+        if (!val.canConvert(QVariant::Int)) {
+            return false;
+        }
+        int num = val.toInt();
+        return m_min <= num && (m_max < m_min || num <= m_max);
+    }
+    virtual QVariant fallback() override { return m_def; };
+
+private:
+    int m_min, m_max, m_def;
+};
+
+class ExistingDir : public SimpleValueHandler
+{
+    bool check(const QVariant& val) override
+    {
+        QSharedPointer<int>(new int);
+        if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+            return false;
+        }
+        QFileInfo info(val.toString());
+        return info.isDir() && info.exists();
+    }
+};
+
+class FilenamePattern : public ValueHandler
+{
+    bool check(const QVariant&) override { return true; }
+    QVariant get(const QVariant& val) override
+    {
+        return !val.isNull() ? val : fallback();
+    }
+    QVariant fallback() override
+    {
+        return ConfigHandler().filenamePatternDefault();
+    }
+};
+
+class Buttons : public SimpleValueHandler
+{
+public:
+    bool check(const QVariant& val) override
+    {
+        if (!val.canConvert<QList<int>>()) {
+            return false;
+        }
+        auto allButtons = CaptureToolButton::getIterableButtonTypes();
+        using CTB = CaptureToolButton;
+        for (int btn : val.value<QList<int>>()) {
+            if (!allButtons.contains(static_cast<CTB::ButtonType>(btn))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    QVariant fallback() override
+    {
+        auto buttons = CaptureToolButton::getIterableButtonTypes();
+        buttons.removeOne(CaptureToolButton::TYPE_SIZEDECREASE);
+        buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
+        // TODO: remove toList in v1.0
+        return QVariant::fromValue(fromButtonToInt(buttons).toList());
+    }
+};
+
+class UserColors : public SimpleValueHandler
+{
+    bool check(const QVariant& val) override
+    {
+        return false; // TODO
+    }
+};
+
+using SVH = SimpleValueHandler;
+/**
+ * Use this to declare a setting with a type that is recognized by QVariant.
+ *
+ * @param KEY Name of the setting as in the config file
+ *            (a c-style string literal)
+ * @param TYPE One of QVariant::Type. You only need to specify the name of the
+ *             type, the macro will prefix it with QVariant::
+ * @param DEF Default value
+ */
+#define SIMPLE(KEY, TYPE, DEF)                                                 \
+    {                                                                          \
+        QStringLiteral(KEY), QSharedPointer<SVH>(new SVH(QVariant::TYPE, DEF)) \
+    }
+/**
+ * Use this to declare a setting with a type that is either unrecognized by
+ * QVariant or if you need to place additional constraints on its value.
+ * @param KEY Name of the setting as in the config file
+ *            (a c-style string literal)
+ * @param TYPE An instance of a `ValueHandler` derivative. This must be
+ * specified in the form of a constructor, or the macro will misbehave.
+ */
+#define CUSTOM(KEY, TYPE)                                                      \
+    {                                                                          \
+        QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
+    }
+
+// This map contains all the information that is needed to parse, verify and
+// preprocess each configuration option in the General section.
+// Please keep it well structured
+// clang-format off
+static QMap<class QString, QSharedPointer<ValueHandler>>
+  recognizedGeneralOptions = {
+    SIMPLE("showHelp"                    ,Bool              ,true               ),
+    SIMPLE("showSidePanelButton"         ,Bool              ,true               ),
+    SIMPLE("showDesktopNotification"     ,Bool              ,true               ),
+    SIMPLE("disabledTrayIcon"            ,Bool              ,false              ),
+    SIMPLE("historyConfirmationToDelete" ,Bool              ,true               ),
+    SIMPLE("checkForUpdates"             ,Bool              ,true               ),
+#if defined(Q_OS_MACOS)
+    SIMPLE("startupLaunch"               ,Bool              ,false              ),
+#else
+    SIMPLE("startupLaunch"               ,Bool              ,true               ),
+#endif
+    SIMPLE("showStartupLaunchMessage"    ,Bool              ,true               ),
+    SIMPLE("copyAndCloseAfterUpload"     ,Bool              ,true               ),
+    SIMPLE("copyPathAfterSave"           ,Bool              ,false              ),
+    SIMPLE("useJpgForClipboard"          ,Bool              ,false              ),
+    // TODO obsolete?
+    SIMPLE("saveAfterCopy"               ,Bool              ,false              ),
+    CUSTOM("savePath"                    ,ExistingDir        {}                 ),
+    SIMPLE("savePathFixed"               ,Bool              ,false              ),
+    CUSTOM("uploadHistoryMax"            ,BoundedInt(1      ,25)                ),
+    CUSTOM("undoLimit"                   ,BoundedInt(1, 999 ,100)               ),
+    // Interface tab
+    SIMPLE("uiColor"                     ,Color             ,QColor(116, 0, 150)),
+    SIMPLE("contrastUiColor"             ,Color             ,QColor(39, 0, 50)  ),
+    CUSTOM("contrastOpacity"             ,BoundedInt(0, 255 ,190)               ),
+    CUSTOM("buttons"                     ,Buttons            {}                 ),
+    // Filename Editor tab
+    SIMPLE("filenamePattern"             ,String            ,{}                 ),
+    // Others
+    // TODO obsolete?
+    CUSTOM("saveAfterCopyPath"           ,ExistingDir        {}                 ),
+    SIMPLE("drawThickness"               ,UInt              ,3                  ),
+    SIMPLE("drawColor"                   ,Color             ,QColor(Qt::red)    ),
+    CUSTOM("userColors"                  ,UserColors         {}                 ),
+    SIMPLE("drawFontSize"                ,UInt              ,8                  ),
+    SIMPLE("ignoreUpdateToVersion"       ,String            ,""                 ),
+    SIMPLE("keepOpenAppLauncher"         ,Bool              ,false              ),
+    SIMPLE("fontFamily"         		 ,String            ,false              ),
+};
+// clang-format on
+
+// class ConfigHandler
 
 bool ConfigHandler::m_hasError = false;
 bool ConfigHandler::m_errorCheckPending = false;
@@ -508,7 +763,6 @@ void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
 int ConfigHandler::uploadHistoryMaxSizeValue()
 {
     return value(QStringLiteral("uploadHistoryMax"), 25).toInt();
-    ;
 }
 
 void ConfigHandler::setUploadHistoryMaxSize(const int max)
@@ -586,39 +840,6 @@ QString ConfigHandler::configFilePath() const
     return m_settings.fileName();
 }
 
-bool ConfigHandler::normalizeButtons(QVector<int>& buttons)
-{
-    QVector<int> listTypesInt =
-      fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
-
-    bool hasChanged = false;
-    for (int i = 0; i < buttons.size(); i++) {
-        if (!listTypesInt.contains(buttons.at(i))) {
-            buttons.remove(i);
-            hasChanged = true;
-        }
-    }
-    return hasChanged;
-}
-
-QVector<CaptureToolButton::ButtonType> ConfigHandler::fromIntToButton(
-  const QVector<int>& l)
-{
-    QVector<CaptureToolButton::ButtonType> buttons;
-    for (auto const i : l)
-        buttons << static_cast<CaptureToolButton::ButtonType>(i);
-    return buttons;
-}
-
-QVector<int> ConfigHandler::fromButtonToInt(
-  const QVector<CaptureToolButton::ButtonType>& l)
-{
-    QVector<int> buttons;
-    for (auto const i : l)
-        buttons << static_cast<int>(i);
-    return buttons;
-}
-
 bool ConfigHandler::setShortcut(const QString& shortcutName,
                                 const QString& shortutValue)
 {
@@ -665,14 +886,13 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
 
 const QString& ConfigHandler::shortcut(const QString& shortcutName)
 {
-    m_settings.beginGroup("Shortcuts");
     if (contains(shortcutName)) {
-        m_strRes = value(shortcutName).toString();
+        m_strRes =
+          value(QStringLiteral("Shortcuts/") + shortcutName).toString();
     } else {
         m_strRes =
           ConfigShortcuts().captureShortcutDefault(shortcutName).toString();
     }
-    m_settings.endGroup();
     return m_strRes;
 }
 
@@ -687,9 +907,32 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 QVariant ConfigHandler::value(const QString& key,
                               const QVariant& fallback) const
 {
+    // TODO remove fallback argument
+
+    // Perform check on entire config if due. Please make sure that this
+    // function is called in all scenarios - best to keep it as the first
+    // statement.
+    hasError();
+
     auto val = m_settings.value(key, fallback);
-    if (hasError()) {
-        return fallback;
+
+    // Check the value for semantic errors
+    if (m_settings.group() == QStringLiteral("Shortcuts") ||
+        key.startsWith("Shortcuts/")) {
+        if (!SimpleValueHandler(QVariant::KeySequence).check(val)) {
+            handleNewErrorState(true);
+        }
+        if (m_hasError) {
+            return QVariant();
+        }
+    } else { // general option
+        ValueHandler* handler = ::recognizedGeneralOptions[key].get();
+        if (!handler->check(val)) {
+            handleNewErrorState(true);
+        }
+        if (m_hasError) {
+            handler->fallback();
+        }
     }
     return val;
 }
@@ -705,40 +948,7 @@ bool ConfigHandler::contains(const QString& key) const
 
 const QStringList& ConfigHandler::recognizedGeneralOptions() const
 {
-    static QStringList options = {
-        // General tab in config window
-        "showHelp",
-        "showSidePanelButton",
-        "showDesktopNotification",
-        "disabledTrayIcon",
-        "historyConfirmationToDelete",
-        "checkForUpdates",
-        "startupLaunch",
-        "showStartupLaunchMessage",
-        "copyAndCloseAfterUpload",
-        "copyPathAfterSave",
-        "useJpgForClipboard",
-        "saveAfterCopy",
-        "savePath",
-        "savePathFixed",
-        "uploadHistoryMax",
-        "undoLimit",
-        // Interface tab
-        "uiColor",
-        "contrastUiColor",
-        "contrastOpacity",
-        "buttons",
-        // Filename Editor tab
-        "filenamePattern",
-        // Others
-        "saveAfterCopyPath",
-        "drawThickness",
-        "drawColor",
-        "userColors",
-        "drawFontSize",
-        "ignoreUpdateToVersion",
-        "keepOpenAppLauncher",
-    };
+    static QStringList options = ::recognizedGeneralOptions.keys();
     return options;
 }
 
@@ -808,24 +1018,13 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
 
 void ConfigHandler::checkAndHandleError() const
 {
-    bool hadError = m_hasError;
-
     if (!QFile(m_settings.fileName()).exists()) {
-        m_hasError = false;
+        handleNewErrorState(false);
     } else {
-        m_hasError = !checkUnrecognizedSettings() || !checkShortcutConflicts();
+        handleNewErrorState(!checkUnrecognizedSettings() ||
+                            !checkShortcutConflicts());
     }
 
-    // Notify user every time m_hasError changes
-    if (!hadError && m_hasError) {
-        QString msg = errorMessage();
-        SystemNotification().sendMessage(msg);
-        emit getInstance()->error();
-    } else if (hadError && !m_hasError) {
-        auto msg = "You have successfully resolved the configuration error.";
-        SystemNotification().sendMessage(msg);
-        emit getInstance()->errorResolved();
-    }
     ensureFileWatched();
 }
 
@@ -869,6 +1068,22 @@ bool ConfigHandler::checkShortcutConflicts() const
     }
     m_settings.endGroup();
     return ok;
+}
+
+void ConfigHandler::handleNewErrorState(bool error) const
+{
+    bool hadError = m_hasError;
+    m_hasError = error;
+    // Notify user every time m_hasError changes
+    if (!hadError && m_hasError) {
+        QString msg = errorMessage();
+        SystemNotification().sendMessage(msg);
+        emit getInstance()->error();
+    } else if (hadError && !m_hasError) {
+        auto msg = "You have successfully resolved the configuration error.";
+        SystemNotification().sendMessage(msg);
+        emit getInstance()->errorResolved();
+    }
 }
 
 bool ConfigHandler::hasError() const

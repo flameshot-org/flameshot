@@ -14,6 +14,7 @@ class QFileSystemWatcher;
 class ConfigHandler : public QObject
 {
     Q_OBJECT
+
 public:
     explicit ConfigHandler();
 
@@ -126,6 +127,7 @@ public:
     void checkAndHandleError() const;
     bool checkUnrecognizedSettings() const;
     bool checkShortcutConflicts() const;
+    void handleNewErrorState(bool error) const;
     bool hasError() const;
     QString errorMessage() const;
 signals:
@@ -143,11 +145,4 @@ private:
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
-
-    bool normalizeButtons(QVector<int>&);
-
-    QVector<CaptureToolButton::ButtonType> fromIntToButton(
-      const QVector<int>& l);
-    QVector<int> fromButtonToInt(
-      const QVector<CaptureToolButton::ButtonType>& l);
 };
