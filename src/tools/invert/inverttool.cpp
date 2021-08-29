@@ -10,7 +10,6 @@
 #include <QPainter>
 #include <QPixmap>
 
-
 InvertTool::InvertTool(QObject* parent)
   : AbstractTwoPointTool(parent)
 {}
@@ -64,7 +63,7 @@ void InvertTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 }
 
 void InvertTool::paintMousePreview(QPainter& painter,
-                                     const CaptureContext& context)
+                                   const CaptureContext& context)
 {
     Q_UNUSED(context)
     Q_UNUSED(painter)

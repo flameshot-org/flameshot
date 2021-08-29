@@ -127,7 +127,7 @@ QColor CaptureToolButton::m_mainColor = ConfigHandler().uiMainColorValue();
 
 static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
 {
-      { CaptureToolButton::TYPE_PENCIL, 0 },
+    { CaptureToolButton::TYPE_PENCIL, 0 },
       { CaptureToolButton::TYPE_DRAWER, 1 },
       { CaptureToolButton::TYPE_ARROW, 2 },
       { CaptureToolButton::TYPE_SELECTION, 3 },
