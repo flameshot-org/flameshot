@@ -24,5 +24,4 @@ private:
     QVBoxLayout* m_layout;
 };
 
-QString generateVersionString();
 QString generateKernelString();
