@@ -1346,14 +1346,14 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
         <translation>Odwrócić</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Zapisz odwrócony obraz</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
+        <source>Set Inverter as the paint tool</source>
+        <translation>Ustaw Inwerter jako narzędzie do malowania</translation>
     </message>
 </context>
 <context>

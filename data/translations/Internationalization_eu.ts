@@ -1379,14 +1379,14 @@ Baliteke &apos;#&apos; karakterea ihes egin behar izatea, &apos;\#FFF&apos;n bez
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
         <translation>Alderantzikatu</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Gorde alderantzizko kaptura</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
+        <source>Set Inverter as the paint tool</source>
+        <translation>Ezarri inbertsorea margotzeko tresna gisa</translation>
     </message>
 </context>
 <context>

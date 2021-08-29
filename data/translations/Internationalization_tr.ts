@@ -1319,14 +1319,14 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
         <translation>Ters</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Ters çevrilmiş yakalamayı kaydet</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
+        <source>Set Inverter as the paint tool</source>
+        <translation>Inverter'ı boyama aracı olarak ayarlayın</translation>
     </message>
 </context>
 <context>

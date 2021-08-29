@@ -1379,14 +1379,14 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
         <source>Invert</source>
         <translation>Invertovať</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Uložte obrátené zachytenie</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
+        <source>Set Inverter as the paint tool</source>
+        <translation>Nastavte invertor ako nástroj na maľovanie</translation>
     </message>
 </context>
 <context>
