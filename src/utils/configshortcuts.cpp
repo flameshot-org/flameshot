@@ -88,8 +88,6 @@ const QKeySequence& ConfigShortcuts::captureShortcutDefault(
         m_ks = QKeySequence(Qt::CTRL + Qt::Key_C);
     } else if (buttonType == "TYPE_SAVE") {
         m_ks = QKeySequence(Qt::CTRL + Qt::Key_S);
-    } else if (buttonType == "TYPE_INVERT") {
-        m_ks = QKeySequence(Qt::CTRL + Qt::Key_I);
     } else if (buttonType == "TYPE_EXIT") {
         m_ks = QKeySequence(Qt::CTRL + Qt::Key_Q);
     } else if (buttonType == "TYPE_IMAGEUPLOADER") {
@@ -106,6 +104,8 @@ const QKeySequence& ConfigShortcuts::captureShortcutDefault(
         m_ks = QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z);
     } else if (buttonType == "TYPE_TEXT") {
         m_ks = QKeySequence(Qt::Key_T);
+    } else if (buttonType == "TYPE_INVERT") {
+        m_ks = QKeySequence(Qt::Key_I);
     } else if (buttonType == "TYPE_TOGGLE_PANEL") {
         m_ks = QKeySequence(Qt::Key_Space);
     } else if (buttonType == "TYPE_RESIZE_LEFT") {
