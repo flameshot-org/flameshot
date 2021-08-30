@@ -1722,8 +1722,8 @@ void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
     if (m_configError) {
         msg = ConfigHandler().errorMessage();
     } else if (m_configErrorResolved) {
-        msg = QStringLiteral("Configuration error resolved. Launch `flameshot "
-                             "gui` again to apply it.");
+        msg = tr("Configuration error resolved. Launch `flameshot "
+                 "gui` again to apply it.");
     }
 
     QFontMetrics fm = painter->fontMetrics();

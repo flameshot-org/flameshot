@@ -58,8 +58,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
     m_autostart->setChecked(config.startupLaunch());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUpload());
+    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());

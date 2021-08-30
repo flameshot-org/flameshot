@@ -96,7 +96,7 @@ void ConfigWindow::keyPressEvent(QKeyEvent* e)
 void ConfigWindow::initErrorLabel(QWidget* widget)
 {
     QLabel* label = new QLabel(widget);
-    label->setText(QStringLiteral(
+    label->setText(tr(
       "<b>Configuration file has errors. Resolve them before continuing.</b>"));
     label->setStyleSheet(QStringLiteral(":disabled { color: %1; }")
                            .arg(qApp->palette().color(QPalette::Text).name()));

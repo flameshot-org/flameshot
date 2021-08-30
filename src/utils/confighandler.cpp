@@ -759,7 +759,7 @@ void ConfigHandler::checkAndHandleError() const
         setErrorState(false);
     } else {
         setErrorState(!checkUnrecognizedSettings() ||
-                            !checkShortcutConflicts() || !checkSemantics());
+                      !checkShortcutConflicts() || !checkSemantics());
     }
 
     ensureFileWatched();
@@ -826,7 +826,8 @@ void ConfigHandler::setErrorState(bool error) const
         SystemNotification().sendMessage(msg);
         emit getInstance()->error();
     } else if (hadError && !m_hasError) {
-        auto msg = "You have successfully resolved the configuration error.";
+        auto msg =
+          tr("You have successfully resolved the configuration error.");
         SystemNotification().sendMessage(msg);
         emit getInstance()->errorResolved();
     }
@@ -843,8 +844,7 @@ bool ConfigHandler::hasError() const
 
 QString ConfigHandler::errorMessage() const
 {
-    return QStringLiteral(
-      "The configuration contains an error. Falling back to default.");
+    return tr("The configuration contains an error. Falling back to default.");
 }
 
 void ConfigHandler::ensureFileWatched() const
@@ -885,8 +885,8 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
 #if defined(QT_DEBUG)
         // This should never happen, but just in case
         throw std::logic_error(
-          QStringLiteral("Bad config key '%1' in ConfigHandler. Please report "
-                         "this as a bug.")
+          tr("Bad config key '%1' in ConfigHandler. Please report "
+             "this as a bug.")
             .arg(key)
             .toStdString());
 #else
