@@ -91,12 +91,13 @@ public:
                          setIgnoreUpdateToVersion,
                          QString)
     CONFIG_GETTER_SETTER(undoLimit, setUndoLimit, int)
+    CONFIG_GETTER_SETTER(buttons,
+                         setButtons,
+                         QList<CaptureToolButton::ButtonType>)
 
     // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);
-    CONFIG_GETTER(buttons, QList<CaptureToolButton::ButtonType>)
-    void setButtons(const QList<CaptureToolButton::ButtonType>&);
     QString saveAsFileExtension();
     CONFIG_SETTER(setSaveAsFileExtension, setSaveAsFileExtension, QString)
     void setAllTheButtons();

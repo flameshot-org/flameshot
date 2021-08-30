@@ -110,9 +110,11 @@ public:
             return process(val);
         }
     }
-    virtual QString str(const QVariant& val) { return val.toString(); }
-    virtual QVariant set(const QVariant& val) { return val; }
     virtual QVariant fallback() { return QVariant(); };
+    virtual QVariant representation(const QVariant& val)
+    {
+        return val.toString();
+    }
 
 protected:
     virtual QVariant process(const QVariant& val) { return val; }
@@ -164,7 +166,7 @@ public:
         return QColor::isValidColor(val.toString());
     }
     QVariant fallback() override { return m_def; }
-    QString str(const QVariant& val) override
+    QVariant representation(const QVariant& val) override
     {
         return QString(val.value<QColor>().name());
     }
@@ -270,13 +272,11 @@ class FilenamePattern : public ValueHandler
     }
 };
 
-class Buttons : public ValueHandler
+class ButtonList : public ValueHandler
 {
+    using BList = QList<CaptureToolButton::ButtonType>;
     bool check(const QVariant& val) override
     {
-        if (!val.canConvert<QList<int>>()) {
-            return false;
-        }
         auto allButtons = CaptureToolButton::getIterableButtonTypes();
         using CTB = CaptureToolButton;
         for (int btn : val.value<QList<int>>()) {
@@ -288,9 +288,8 @@ class Buttons : public ValueHandler
     }
     QVariant value(const QVariant& val) override
     {
-        using ButtonList = QList<CaptureToolButton::ButtonType>;
         // Get unsorted button list
-        ButtonList buttons = ValueHandler::value(val).value<ButtonList>();
+        BList buttons = ValueHandler::value(val).value<BList>();
 
         using BT = CaptureToolButton::ButtonType;
         std::sort(buttons.begin(), buttons.end(), [](BT a, BT b) {
@@ -312,6 +311,12 @@ class Buttons : public ValueHandler
         buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
         // TODO: remove toList in v1.0
         return QVariant::fromValue(buttons);
+    }
+    QVariant representation(const QVariant& val) override
+    {
+        auto intList = fromButtonToInt(val.value<BList>());
+        normalizeButtons(intList);
+        return QVariant::fromValue(intList);
     }
 };
 
@@ -409,7 +414,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     CUSTOM("uiColor"                     ,Color              ( {116, 0, 150} )),
     CUSTOM("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
     CUSTOM("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
-    CUSTOM("buttons"                     ,Buttons            ( {}            )),
+    CUSTOM("buttons"                     ,ButtonList         ( {}            )),
     // Filename Editor tab
     CUSTOM("filenamePattern"             ,String             ( {}            )),
     // Others
@@ -563,14 +568,6 @@ void ConfigHandler::setStartupLaunch(const bool start)
 #endif
 }
 
-void ConfigHandler::setButtons(
-  const QList<CaptureToolButton::ButtonType>& buttons)
-{
-    QList<int> l = fromButtonToInt(buttons);
-    normalizeButtons(l);
-    setValue(QStringLiteral("buttons"), QVariant::fromValue(l));
-}
-
 QString ConfigHandler::saveAsFileExtension()
 {
     // TODO If the name of the option changes in the future, remove this
@@ -665,7 +662,8 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
     assertKeyRecognized(key);
     if (!hasError()) {
         m_skipNextErrorCheck = true;
-        m_settings.setValue(key, valueHandler(key)->str(value));
+        auto val = valueHandler(key)->representation(value);
+        m_settings.setValue(key, val);
     }
 }
 
