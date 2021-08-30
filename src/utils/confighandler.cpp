@@ -52,7 +52,7 @@ bool verifyLaunchFile()
  * @param TYPE An instance of a `ValueHandler` derivative. This must be
  * specified in the form of a constructor, or the macro will misbehave.
  */
-#define CUSTOM(KEY, TYPE)                                                      \
+#define OPTION(KEY, TYPE)                                                      \
     {                                                                          \
         QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
     }
@@ -63,47 +63,47 @@ bool verifyLaunchFile()
 static QMap<class QString, QSharedPointer<ValueHandler>>
   recognizedGeneralOptions = {
       // clang-format off
-    CUSTOM("showHelp"                    ,Bool               ( true          )),
-    CUSTOM("showSidePanelButton"         ,Bool               ( true          )),
-    CUSTOM("showDesktopNotification"     ,Bool               ( true          )),
-    CUSTOM("disabledTrayIcon"            ,Bool               ( false         )),
-    CUSTOM("historyConfirmationToDelete" ,Bool               ( true          )),
-    CUSTOM("checkForUpdates"             ,Bool               ( true          )),
+    OPTION("showHelp"                    ,Bool               ( true          )),
+    OPTION("showSidePanelButton"         ,Bool               ( true          )),
+    OPTION("showDesktopNotification"     ,Bool               ( true          )),
+    OPTION("disabledTrayIcon"            ,Bool               ( false         )),
+    OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
+    OPTION("checkForUpdates"             ,Bool               ( true          )),
 #if defined(Q_OS_MACOS)
     CUSTOM("startupLaunch"               ,Bool               ( false         )),
 #else
-    CUSTOM("startupLaunch"               ,Bool               ( true          )),
+    OPTION("startupLaunch"               ,Bool               ( true          )),
 #endif
-    CUSTOM("showStartupLaunchMessage"    ,Bool               ( true          )),
-    CUSTOM("copyAndCloseAfterUpload"     ,Bool               ( true          )),
-    CUSTOM("copyPathAfterSave"           ,Bool               ( false         )),
+    OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
+    OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
+    OPTION("copyPathAfterSave"           ,Bool               ( false         )),
 #if !defined(Q_OS_MACOS) // TODO is this the right way?
-    CUSTOM("useJpgForClipboard"          ,Bool               ( false         )),
+    OPTION("useJpgForClipboard"          ,Bool               ( false         )),
 #endif
     // TODO obsolete?
-    CUSTOM("saveAfterCopy"               ,Bool               ( false         )),
-    CUSTOM("savePath"                    ,ExistingDir        (               )),
-    CUSTOM("savePathFixed"               ,Bool               ( false         )),
-    CUSTOM("uploadHistoryMax"            ,LowerBoundedInt(1  , 25            )),
-    CUSTOM("undoLimit"                   ,BoundedInt(1, 999  , 100           )),
+    OPTION("saveAfterCopy"               ,Bool               ( false         )),
+    OPTION("savePath"                    ,ExistingDir        (               )),
+    OPTION("savePathFixed"               ,Bool               ( false         )),
+    OPTION("uploadHistoryMax"            ,LowerBoundedInt(1  , 25            )),
+    OPTION("undoLimit"                   ,BoundedInt(1, 999  , 100           )),
     // Interface tab
-    CUSTOM("uiColor"                     ,Color              ( {116, 0, 150} )),
-    CUSTOM("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
-    CUSTOM("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
-    CUSTOM("buttons"                     ,ButtonList         ( {}            )),
+    OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
+    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
+    OPTION("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
+    OPTION("buttons"                     ,ButtonList         ( {}            )),
     // Filename Editor tab
-    CUSTOM("filenamePattern"             ,String             ( {}            )),
+    OPTION("filenamePattern"             ,String             ( {}            )),
     // Others
     // TODO obsolete?
-    CUSTOM("saveAfterCopyPath"           ,ExistingDir        (               )),
-    CUSTOM("drawThickness"               ,LowerBoundedInt(1  , 3             )),
-    CUSTOM("drawColor"                   ,Color              ( Qt::red       )),
-    CUSTOM("userColors"                  ,UserColors         (               )),
-    CUSTOM("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
-    CUSTOM("ignoreUpdateToVersion"       ,String             ( ""            )),
-    CUSTOM("keepOpenAppLauncher"         ,Bool               ( false         )),
-    CUSTOM("fontFamily"                  ,String             ( ""            )),
-    CUSTOM("setSaveAsFileExtension"      ,String             ( ""            )),
+    OPTION("saveAfterCopyPath"           ,ExistingDir        (               )),
+    OPTION("drawThickness"               ,LowerBoundedInt(1  , 3             )),
+    OPTION("drawColor"                   ,Color              ( Qt::red       )),
+    OPTION("userColors"                  ,UserColors         (               )),
+    OPTION("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
+    OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
+    OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
+    OPTION("fontFamily"                  ,String             ( ""            )),
+    OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
       // clang-format on
   };
 
