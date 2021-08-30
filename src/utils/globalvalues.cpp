@@ -9,3 +9,9 @@ int GlobalValues::buttonBaseSize()
 {
     return QApplication::fontMetrics().lineSpacing() * 2.2;
 }
+
+QString GlobalValues::versionInfo()
+{
+    return QStringLiteral("Flameshot " APP_VERSION " (" FLAMESHOT_GIT_HASH ")"
+                          "\nCompiled with Qt " QT_VERSION_STR);
+}

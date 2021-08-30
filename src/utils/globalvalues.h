@@ -3,8 +3,11 @@
 
 #pragma once
 
+class QString;
+
 namespace GlobalValues {
 
 int buttonBaseSize();
+QString versionInfo();
 
 }

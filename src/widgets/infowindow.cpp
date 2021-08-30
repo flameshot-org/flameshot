@@ -3,6 +3,7 @@
 
 #include "infowindow.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/globalvalues.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QHeaderView>
@@ -65,9 +66,7 @@ void InfoWindow::initLabels()
     versionTitleLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     m_layout->addWidget(versionTitleLabel);
 
-    QString versionMsg = generateVersionString();
-
-    auto* versionLabel = new QLabel(versionMsg, this);
+    auto* versionLabel = new QLabel(GlobalValues::versionInfo(), this);
     versionLabel->setAlignment(Qt::AlignHCenter);
     versionLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
     m_layout->addWidget(versionLabel);
@@ -88,7 +87,8 @@ void InfoWindow::initLabels()
 void InfoWindow::copyInfo()
 {
     QClipboard* clipboard = QApplication::clipboard();
-    clipboard->setText(generateVersionString() + "\n" + generateKernelString());
+    clipboard->setText(GlobalValues::versionInfo() + "\n" +
+                       generateKernelString());
 }
 
 void InfoWindow::keyPressEvent(QKeyEvent* e)
@@ -96,14 +96,6 @@ void InfoWindow::keyPressEvent(QKeyEvent* e)
     if (e->key() == Qt::Key_Escape) {
         close();
     }
-}
-
-QString generateVersionString()
-{
-    QString version = "Flameshot " + QStringLiteral(APP_VERSION) + " (" +
-                      QStringLiteral(FLAMESHOT_GIT_HASH) +
-                      ")\nCompiled with Qt " + QT_VERSION_STR;
-    return version;
 }
 
 QString generateKernelString()
