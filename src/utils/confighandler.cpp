@@ -14,6 +14,7 @@
 #include <QMap>
 #include <QSharedPointer>
 #include <QStandardPaths>
+#include <QVector>
 #include <algorithm>
 #if defined(Q_OS_MACOS)
 #include <QProcess>
@@ -21,31 +22,31 @@
 
 // HELPER FUNCTIONS
 
-QVector<int> fromButtonToInt(const QVector<CaptureToolButton::ButtonType>& l)
+QList<int> fromButtonToInt(const QList<CaptureToolButton::ButtonType>& l)
 {
-    QVector<int> buttons;
+    QList<int> buttons;
     for (auto const i : l)
         buttons << static_cast<int>(i);
     return buttons;
 }
 
-QVector<CaptureToolButton::ButtonType> fromIntToButton(const QVector<int>& l)
+QList<CaptureToolButton::ButtonType> fromIntToButton(const QList<int>& l)
 {
-    QVector<CaptureToolButton::ButtonType> buttons;
+    QList<CaptureToolButton::ButtonType> buttons;
     for (auto const i : l)
         buttons << static_cast<CaptureToolButton::ButtonType>(i);
     return buttons;
 }
 
-bool normalizeButtons(QVector<int>& buttons)
+bool normalizeButtons(QList<int>& buttons)
 {
-    QVector<int> listTypesInt =
+    QList<int> listTypesInt =
       fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
 
     bool hasChanged = false;
     for (int i = 0; i < buttons.size(); i++) {
         if (!listTypesInt.contains(buttons.at(i))) {
-            buttons.remove(i);
+            buttons.removeAt(i);
             hasChanged = true;
         }
     }
@@ -71,6 +72,9 @@ bool normalizeButtons(QVector<int>& buttons)
  * @note You will only need to override `get` if you have to change the value
  * that was read from the config file. If you are fine with the value as long as
  * it is error-free, you don't have to override it.
+ *
+ * @note Keep in mind that you will probably want `check` to return `true` for
+ * invalid QVariant's (option not found in config file).
  *
  */
 class ValueHandler
@@ -166,6 +170,9 @@ class Buttons : public SimpleValueHandler
 public:
     bool check(const QVariant& val) override
     {
+        if (!val.isValid()) {
+            return true;
+        }
         if (!val.canConvert<QList<int>>()) {
             return false;
         }
@@ -178,13 +185,32 @@ public:
         }
         return true;
     }
+    QVariant get(const QVariant& val) override
+    {
+        using ButtonList = QList<CaptureToolButton::ButtonType>;
+        ButtonList buttons;
+
+        if (val.isValid()) {
+            auto intButtons = val.value<QList<int>>();
+            buttons = fromIntToButton(intButtons);
+        } else {
+            buttons = fallback().value<ButtonList>();
+        }
+
+        using BT = CaptureToolButton::ButtonType;
+        std::sort(buttons.begin(), buttons.end(), [](BT a, BT b) {
+            return CaptureToolButton::getPriorityByButton(a) <
+                   CaptureToolButton::getPriorityByButton(b);
+        });
+        return QVariant::fromValue(buttons);
+    }
     QVariant fallback() override
     {
         auto buttons = CaptureToolButton::getIterableButtonTypes();
         buttons.removeOne(CaptureToolButton::TYPE_SIZEDECREASE);
         buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
         // TODO: remove toList in v1.0
-        return QVariant::fromValue(fromButtonToInt(buttons).toList());
+        return QVariant::fromValue(buttons);
     }
 };
 
@@ -282,6 +308,7 @@ ConfigHandler::ConfigHandler()
     m_settings.setDefaultFormat(QSettings::IniFormat);
 
     if (m_configWatcher == nullptr && qApp != nullptr) {
+        // TODO
         // check for error on initial call
         checkAndHandleError();
         // check for error every time the file changes
@@ -317,41 +344,18 @@ ConfigHandler* ConfigHandler::getInstance()
     return &config;
 }
 
-QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
+QList<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
 {
-    QVector<CaptureToolButton::ButtonType> buttons;
-    if (contains(QStringLiteral("buttons"))) {
-        // TODO: remove toList in v1.0
-        QVector<int> buttonsInt =
-          value(QStringLiteral("buttons")).value<QList<int>>().toVector();
-        bool modified = normalizeButtons(buttonsInt);
-        if (modified) {
-            setValue(QStringLiteral("buttons"),
-                     QVariant::fromValue(buttonsInt.toList()));
-        }
-        buttons = fromIntToButton(buttonsInt);
-    } else {
-        // Default tools
-        buttons = CaptureToolButton::getIterableButtonTypes();
-        buttons.removeOne(CaptureToolButton::TYPE_SIZEDECREASE);
-        buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
-    }
-
-    using bt = CaptureToolButton::ButtonType;
-    std::sort(buttons.begin(), buttons.end(), [](bt a, bt b) {
-        return CaptureToolButton::getPriorityByButton(a) <
-               CaptureToolButton::getPriorityByButton(b);
-    });
-    return buttons;
+    return value("buttons").value<decltype(getButtons())>();
 }
 
 void ConfigHandler::setButtons(
-  const QVector<CaptureToolButton::ButtonType>& buttons)
+  const QList<CaptureToolButton::ButtonType>& buttons)
 {
-    QVector<int> l = fromButtonToInt(buttons);
+    QList<int> l = fromButtonToInt(buttons);
     normalizeButtons(l);
     // TODO: remove toList in v1.0
-    setValue(QStringLiteral("buttons"), QVariant::fromValue(l.toList()));
+    setValue(QStringLiteral("buttons"), QVariant::fromValue(l));
 }
 
 QVector<QColor> ConfigHandler::getUserColors()
@@ -829,10 +833,10 @@ void ConfigHandler::setDefaultSettings()
 
 void ConfigHandler::setAllTheButtons()
 {
-    QVector<int> buttons =
+    QList<int> buttons =
       fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
     // TODO: remove toList in v1.0
-    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons.toList()));
+    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
 }
 
 QString ConfigHandler::configFilePath() const
@@ -931,8 +935,9 @@ QVariant ConfigHandler::value(const QString& key,
             handleNewErrorState(true);
         }
         if (m_hasError) {
-            handler->fallback();
+            return handler->fallback();
         }
+        return handler->get(val);
     }
     return val;
 }

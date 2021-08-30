@@ -20,8 +20,8 @@ public:
 
     static ConfigHandler* getInstance();
 
-    QVector<CaptureToolButton::ButtonType> getButtons();
-    void setButtons(const QVector<CaptureToolButton::ButtonType>&);
+    QList<CaptureToolButton::ButtonType> getButtons();
+    void setButtons(const QList<CaptureToolButton::ButtonType>&);
 
     QVector<QColor> getUserColors();
 

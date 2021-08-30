@@ -59,7 +59,7 @@ void ButtonListView::updateActiveButtons(QListWidgetItem* item)
                    CaptureToolButton::getPriorityByButton(b);
         });
     } else {
-        m_listButtons.remove(m_listButtons.indexOf(bType));
+        m_listButtons.removeOne(bType);
     }
     ConfigHandler().setButtons(m_listButtons);
 }

@@ -43,7 +43,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     show();
 }
 
-const QVector<QStringList>& ShortcutsWidget::shortcuts()
+const QList<QStringList>& ShortcutsWidget::shortcuts()
 {
     return m_shortcuts;
 }

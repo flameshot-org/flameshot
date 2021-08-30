@@ -5,8 +5,8 @@
 
 ConfigShortcuts::ConfigShortcuts() {}
 
-const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
-  const QVector<CaptureToolButton::ButtonType>& buttons)
+const QList<QStringList>& ConfigShortcuts::captureShortcutsDefault(
+  const QList<CaptureToolButton::ButtonType>& buttons)
 {
     // get shortcuts names from capture buttons
     for (const CaptureToolButton::ButtonType& t : buttons) {
