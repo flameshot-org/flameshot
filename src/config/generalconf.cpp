@@ -11,6 +11,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QSettings>
 #include <QSizePolicy>
 #include <QSpinBox>
 #include <QStandardPaths>
@@ -149,11 +150,12 @@ void GeneralConf::importConfiguration()
 
 void GeneralConf::exportFileConfiguration()
 {
-    QString fileName = QFileDialog::getSaveFileName(
-      this, tr("Save File"), QStringLiteral("flameshot.conf"));
+    QString defaultFileName = QSettings().fileName();
+    QString fileName =
+      QFileDialog::getSaveFileName(this, tr("Save File"), defaultFileName);
 
-    // Cancel button
-    if (fileName.isNull()) {
+    // Cancel button or target same as source
+    if (fileName.isNull() || fileName == defaultFileName) {
         return;
     }
 
