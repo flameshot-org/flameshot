@@ -37,7 +37,7 @@ UIcolorEditor::UIcolorEditor(QWidget* parent)
 void UIcolorEditor::updateComponents()
 {
     ConfigHandler config;
-    m_uiColor = config.uiMainColor();
+    m_uiColor = config.uiColor();
     m_contrastColor = config.contrastUiColor();
     m_buttonContrast->setColor(m_contrastColor);
     m_buttonMainColor->setColor(m_uiColor);
@@ -53,7 +53,7 @@ void UIcolorEditor::updateUIcolor()
 {
     ConfigHandler config;
     if (m_lastButtonPressed == m_buttonMainColor) {
-        config.setUiMainColor(m_uiColor);
+        config.setUiColor(m_uiColor);
     } else {
         config.setContrastUiColor(m_contrastColor);
     }

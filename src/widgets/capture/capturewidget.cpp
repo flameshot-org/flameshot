@@ -88,7 +88,7 @@ CaptureWidget::CaptureWidget(uint id,
     setAttribute(Qt::WA_DeleteOnClose);
     m_showInitialMsg = m_config.showHelp();
     m_opacity = m_config.contrastOpacity();
-    m_uiColor = m_config.uiMainColor();
+    m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(savePath, fullScreen);

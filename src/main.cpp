@@ -506,7 +506,7 @@ int main(int argc, char* argv[])
         if (mainColor) {
             QString colorCode = parser.value(mainColorOption);
             QColor parsedColor(colorCode);
-            config.setUiMainColor(parsedColor);
+            config.setUiColor(parsedColor);
         }
         if (contrastColor) {
             QString colorCode = parser.value(contrastColorOption);

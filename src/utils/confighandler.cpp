@@ -53,6 +53,25 @@ bool normalizeButtons(QList<int>& buttons)
     return hasChanged;
 }
 
+bool verifyLaunchFile()
+{
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
+                                          "autostart/",
+                                          QStandardPaths::LocateDirectory) +
+                   "Flameshot.desktop";
+    bool res = QFile(path).exists();
+#elif defined(Q_OS_WIN)
+    QSettings bootUpSettings(
+      "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+      QSettings::NativeFormat);
+    bool res =
+      bootUpSettings.value("Flameshot").toString() ==
+      QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
+#endif
+    return res;
+}
+
 // VALUE HANDLING
 
 /**
@@ -354,9 +373,9 @@ class UserColors : public ValueHandler
 // This map contains all the information that is needed to parse, verify and
 // preprocess each configuration option in the General section.
 // NOTE: Please keep it well structured
-// clang-format off
 static QMap<class QString, QSharedPointer<ValueHandler>>
   recognizedGeneralOptions = {
+      // clang-format off
     CUSTOM("showHelp"                    ,Bool               ( true          )),
     CUSTOM("showSidePanelButton"         ,Bool               ( true          )),
     CUSTOM("showDesktopNotification"     ,Bool               ( true          )),
@@ -371,7 +390,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     CUSTOM("showStartupLaunchMessage"    ,Bool               ( true          )),
     CUSTOM("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     CUSTOM("copyPathAfterSave"           ,Bool               ( false         )),
+#if !defined(Q_OS_MACOS) // TODO is this the right way?
     CUSTOM("useJpgForClipboard"          ,Bool               ( false         )),
+#endif
     // TODO obsolete?
     CUSTOM("saveAfterCopy"               ,Bool               ( false         )),
     CUSTOM("savePath"                    ,ExistingDir        (               )),
@@ -396,15 +417,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     CUSTOM("keepOpenAppLauncher"         ,Bool               ( false         )),
     CUSTOM("fontFamily"                  ,String             ( ""            )),
     CUSTOM("setSaveAsFileExtension"      ,String             ( ""            )),
-};
-// clang-format on
+      // clang-format on
+  };
 
-// class ConfigHandler
-
-bool ConfigHandler::m_hasError = false;
-bool ConfigHandler::m_errorCheckPending = false;
-bool ConfigHandler::m_skipNextErrorCheck = false;
-QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;
+// CLASS CONFIGHANDLER
 
 ConfigHandler::ConfigHandler()
 {
@@ -446,228 +462,17 @@ ConfigHandler* ConfigHandler::getInstance()
     return &config;
 }
 
-QList<CaptureToolButton::ButtonType> ConfigHandler::buttons()
-{
-    return value("buttons").value<decltype(buttons())>();
-}
+// SPECIAL CASES
 
-void ConfigHandler::setButtons(
-  const QList<CaptureToolButton::ButtonType>& buttons)
-{
-    QList<int> l = fromButtonToInt(buttons);
-    normalizeButtons(l);
-    // TODO: remove toList in v1.0
-    setValue(QStringLiteral("buttons"), QVariant::fromValue(l));
-}
-
-QVector<QColor> ConfigHandler::userColors()
-{
-    return value(QStringLiteral("userColors")).value<QVector<QColor>>();
-}
-
-QString ConfigHandler::savePath()
-{
-    return value(QStringLiteral("savePath")).toString();
-}
-
-void ConfigHandler::setSavePath(const QString& savePath)
-{
-    setValue(QStringLiteral("savePath"), savePath);
-}
-
-bool ConfigHandler::savePathFixed()
-{
-    return value(QStringLiteral("savePathFixed")).toBool();
-}
-
-void ConfigHandler::setSavePathFixed(bool savePathFixed)
-{
-    setValue(QStringLiteral("savePathFixed"), savePathFixed);
-}
-
-QColor ConfigHandler::uiMainColor()
-{
-    return value(QStringLiteral("uiColor")).value<QColor>();
-}
-
-void ConfigHandler::setUiMainColor(const QColor& c)
-{
-    setValue(QStringLiteral("uiColor"), c.name());
-}
-
-QColor ConfigHandler::contrastUiColor()
-{
-    return value(QStringLiteral("contrastUiColor")).value<QColor>();
-}
-
-void ConfigHandler::setContrastUiColor(const QColor& c)
-{
-    setValue(QStringLiteral("contrastUiColor"), c.name());
-}
-
-QColor ConfigHandler::drawColor()
-{
-    return value(QStringLiteral("drawColor")).value<QColor>();
-}
-
-void ConfigHandler::setDrawColor(const QColor& c)
-{
-    setValue(QStringLiteral("drawColor"), c.name());
-}
-
-QString ConfigHandler::fontFamily()
-{
-    m_strRes = value(QStringLiteral("fontFamily")).toString();
-    return m_strRes;
-}
-
-void ConfigHandler::setFontFamily(const QString& fontFamily)
-{
-    setValue(QStringLiteral("fontFamily"), fontFamily);
-}
-
-bool ConfigHandler::showHelp()
-{
-    return value(QStringLiteral("showHelp")).toBool();
-}
-
-void ConfigHandler::setShowHelp(bool showHelp)
-{
-    setValue(QStringLiteral("showHelp"), showHelp);
-}
-
-bool ConfigHandler::showSidePanelButton()
-{
-    return value(QStringLiteral("showSidePanelButton")).toBool();
-}
-
-void ConfigHandler::setShowSidePanelButton(bool showSidePanelButton)
-{
-    setValue(QStringLiteral("showSidePanelButton"), showSidePanelButton);
-}
-
-void ConfigHandler::setIgnoreUpdateToVersion(const QString& text)
-{
-    setValue(QStringLiteral("ignoreUpdateToVersion"), text);
-}
-
-QString ConfigHandler::ignoreUpdateToVersion()
-{
-    return value(QStringLiteral("ignoreUpdateToVersion")).toString();
-}
-
-void ConfigHandler::setUndoLimit(int value)
-{
-    setValue(QStringLiteral("undoLimit"), value);
-}
-
-int ConfigHandler::undoLimit()
-{
-    return value(QStringLiteral("undoLimit")).toInt();
-}
-
-bool ConfigHandler::showDesktopNotification()
-{
-    return value(QStringLiteral("showDesktopNotification")).toBool();
-}
-
-void ConfigHandler::setDesktopNotification(bool showDesktopNotification)
-{
-    setValue(QStringLiteral("showDesktopNotification"),
-             showDesktopNotification);
-}
-
-QString ConfigHandler::filenamePatternDefault()
-{
-    return QStringLiteral("%F_%H-%M");
-}
-
-QString ConfigHandler::filenamePattern()
-{
-    return value(QStringLiteral("filenamePattern")).toString();
-}
-
-void ConfigHandler::setFilenamePattern(const QString& pattern)
-{
-    return setValue(QStringLiteral("filenamePattern"), pattern);
-}
-
-bool ConfigHandler::disabledTrayIcon()
-{
-    return value(QStringLiteral("disabledTrayIcon")).toBool();
-}
-
-void ConfigHandler::setDisabledTrayIcon(bool disabledTrayIcon)
-{
-    setValue(QStringLiteral("disabledTrayIcon"), disabledTrayIcon);
-}
-
-int ConfigHandler::drawThickness()
-{
-    return value(QStringLiteral("drawThickness")).toInt();
-}
-
-void ConfigHandler::setDrawThickness(int thickness)
-{
-    setValue(QStringLiteral("drawThickness"), thickness);
-}
-
-int ConfigHandler::drawFontSize()
-{
-    return value(QStringLiteral("drawFontSize")).toInt();
-}
-
-void ConfigHandler::setDrawFontSize(int fontSize)
-{
-    setValue(QStringLiteral("drawFontSize"), fontSize);
-}
-
-bool ConfigHandler::keepOpenAppLauncher()
-{
-    return value(QStringLiteral("keepOpenAppLauncher")).toBool();
-}
-
-void ConfigHandler::setKeepOpenAppLauncher(bool keepOpen)
-{
-    setValue(QStringLiteral("keepOpenAppLauncher"), keepOpen);
-}
-
-bool ConfigHandler::checkForUpdates()
-{
-    return value(QStringLiteral("checkForUpdates")).toBool();
-}
-
-void ConfigHandler::setCheckForUpdates(bool checkForUpdates)
-{
-    setValue(QStringLiteral("checkForUpdates"), checkForUpdates);
-}
-
-// TODO special case
 bool ConfigHandler::startupLaunch()
 {
-    return value(QStringLiteral("startupLaunch")).toBool();
-}
-
-bool ConfigHandler::verifyLaunchFile()
-{
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
-                                          "autostart/",
-                                          QStandardPaths::LocateDirectory) +
-                   "Flameshot.desktop";
-    bool res = QFile(path).exists();
-#elif defined(Q_OS_WIN)
-    QSettings bootUpSettings(
-      "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-      QSettings::NativeFormat);
-    bool res =
-      bootUpSettings.value("Flameshot").toString() ==
-      QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
-#endif
+    bool res = value(QStringLiteral("startupLaunch")).toBool();
+    if (res != verifyLaunchFile()) {
+        setStartupLaunch(res);
+    }
     return res;
 }
 
-// TODO special case
 void ConfigHandler::setStartupLaunch(const bool start)
 {
     if (start == value(QStringLiteral("startupLaunch")).toBool()) {
@@ -752,99 +557,33 @@ void ConfigHandler::setStartupLaunch(const bool start)
 #endif
 }
 
-bool ConfigHandler::showStartupLaunchMessage()
+void ConfigHandler::setButtons(
+  const QList<CaptureToolButton::ButtonType>& buttons)
 {
-    return value(QStringLiteral("showStartupLaunchMessage")).toBool();
-}
-
-void ConfigHandler::setShowStartupLaunchMessage(bool showStartupLaunchMessage)
-{
-    setValue(QStringLiteral("showStartupLaunchMessage"),
-             showStartupLaunchMessage);
-}
-
-int ConfigHandler::contrastOpacity()
-{
-    return value(QStringLiteral("contrastOpacity")).toInt();
-}
-
-void ConfigHandler::setContrastOpacity(int transparency)
-{
-    setValue(QStringLiteral("contrastOpacity"), transparency);
-}
-
-bool ConfigHandler::copyAndCloseAfterUploadEnabled()
-{
-    return value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
-}
-
-void ConfigHandler::setCopyAndCloseAfterUploadEnabled(bool value)
-{
-    setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
-}
-
-bool ConfigHandler::historyConfirmationToDelete()
-{
-    return value(QStringLiteral("historyConfirmationToDelete")).toBool();
-}
-
-void ConfigHandler::setHistoryConfirmationToDelete(bool check)
-{
-    setValue(QStringLiteral("historyConfirmationToDelete"), check);
-}
-
-int ConfigHandler::uploadHistoryMaxSize()
-{
-    return value(QStringLiteral("uploadHistoryMax")).toInt();
-}
-
-void ConfigHandler::setUploadHistoryMaxSize(int max)
-{
-    setValue(QStringLiteral("uploadHistoryMax"), max);
-}
-
-bool ConfigHandler::saveAfterCopy()
-{
-    return value(QStringLiteral("saveAfterCopy")).toBool();
-}
-
-void ConfigHandler::setSaveAfterCopy(bool save)
-{
-    setValue(QStringLiteral("saveAfterCopy"), save);
-}
-
-bool ConfigHandler::copyPathAfterSaveEnabled()
-{
-    return value(QStringLiteral("copyPathAfterSave")).toBool();
-}
-
-void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
-{
-    setValue(QStringLiteral("copyPathAfterSave"), value);
-}
-
-bool ConfigHandler::useJpgForClipboard() const
-{
-#if !defined(Q_OS_MACOS)
-    // FIXME - temporary fix to disable option for MacOS
-    // TODO this is not a good way to disable it
-    return value(QStringLiteral("useJpgForClipboard")).toBool();
-#endif
-}
-
-void ConfigHandler::setUseJpgForClipboard(const bool value)
-{
-    setValue(QStringLiteral("useJpgForClipboard"), value);
-}
-
-void ConfigHandler::setSaveAsFileExtension(const QString& extension)
-{
-    setValue(QStringLiteral("setSaveAsFileExtension"), extension);
+    QList<int> l = fromButtonToInt(buttons);
+    normalizeButtons(l);
+    setValue(QStringLiteral("buttons"), QVariant::fromValue(l));
 }
 
 QString ConfigHandler::saveAsFileExtension()
 {
-    return value(QStringLiteral("setSaveAsFileExtension")).toString();
+    // TODO If the name of the option changes in the future, remove this
+    // function and use the macro CONFIG_GETTER_SETTER instead.
+    return value("setSaveAsFileExtension").toString();
+}
+
+void ConfigHandler::setAllTheButtons()
+{
+    QList<int> buttons =
+      fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
+    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
+}
+
+// DEFAULTS
+
+QString ConfigHandler::filenamePatternDefault()
+{
+    return QStringLiteral("%F_%H-%M");
 }
 
 void ConfigHandler::setDefaultSettings()
@@ -859,18 +598,12 @@ void ConfigHandler::setDefaultSettings()
     m_settings.sync();
 }
 
-void ConfigHandler::setAllTheButtons()
-{
-    // TODO do away with this
-    QList<int> buttons =
-      fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
-    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
-}
-
 QString ConfigHandler::configFilePath() const
 {
     return m_settings.fileName();
 }
+
+// GENERIC GETTERS AND SETTERS
 
 bool ConfigHandler::setShortcut(const QString& shortcutName,
                                 const QString& shortutValue)
@@ -918,20 +651,12 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
 
 QString ConfigHandler::shortcut(const QString& shortcutName)
 {
-    // TODO
     return value(QStringLiteral("Shortcuts/") + shortcutName).toString();
-    if (contains(shortcutName)) {
-        m_strRes =
-          value(QStringLiteral("Shortcuts/") + shortcutName).toString();
-    } else {
-        m_strRes =
-          ConfigShortcuts().captureShortcutDefault(shortcutName).toString();
-    }
-    return m_strRes;
 }
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
+    assertKeyRecognized(key);
     if (!hasError()) {
         m_skipNextErrorCheck = true;
         m_settings.setValue(key, value);
@@ -940,9 +665,9 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 
 QVariant ConfigHandler::value(const QString& key) const
 {
+    assertKeyRecognized(key);
     // Perform check on entire config if due. Please make sure that this
-    // function is called in all scenarios - best to keep it as the first
-    // statement.
+    // function is called in all scenarios - best to keep it on top.
     hasError();
 
     auto val = m_settings.value(key);
@@ -951,7 +676,7 @@ QVariant ConfigHandler::value(const QString& key) const
 
     // Check the value for semantic errors
     if (val.isValid() && !handler->check(val)) {
-        handleNewErrorState(true);
+        setErrorState(true);
     }
     if (m_hasError) {
         return handler->fallback();
@@ -960,25 +685,18 @@ QVariant ConfigHandler::value(const QString& key) const
     return handler->value(val);
 }
 
-/// Wrapper for QSettings::contains, but returns false if there is an error.
-bool ConfigHandler::contains(const QString& key) const
+const QSet<QString>& ConfigHandler::recognizedGeneralOptions() const
 {
-    if (hasError()) {
-        return false;
-    }
-    return m_settings.contains(key);
-}
-
-const QStringList& ConfigHandler::recognizedGeneralOptions() const
-{
-    static QStringList options = ::recognizedGeneralOptions.keys();
+    static QSet<QString> options = QSet(::recognizedGeneralOptions.keyBegin(),
+                                        ::recognizedGeneralOptions.keyEnd());
     return options;
 }
 
-QStringList ConfigHandler::recognizedShortcutNames() const
+const QSet<QString>& ConfigHandler::recognizedShortcutNames() const
 {
     // FIXME: Implement a more elegant solution in the future. Requires refactor
-    QStringList names = {
+    // in other classes
+    static QSet<QString> names = {
         "TYPE_PENCIL",
         "TYPE_DRAWER",
         "TYPE_ARROW",
@@ -1020,23 +738,17 @@ QStringList ConfigHandler::recognizedShortcutNames() const
 }
 
 /// Return keys from group `group`. Use "General" for general settings.
-QStringList ConfigHandler::keysFromGroup(const QString& group) const
+QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 {
-    QStringList keys;
+    QSet<QString> keys;
     for (const QString& key : m_settings.allKeys()) {
         if (group == "General" && !key.contains('/')) {
-            keys.append(key);
+            keys.insert(key);
         } else if (key.startsWith(group + "/")) {
-            keys.append(key.mid(group.size() + 1));
+            keys.insert(key.mid(group.size() + 1));
         }
     }
     return keys;
-}
-
-bool ConfigHandler::isValidShortcutName(const QString& name) const
-{
-    // TODO
-    return false;
 }
 
 // ERROR HANDLING
@@ -1044,9 +756,9 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
 void ConfigHandler::checkAndHandleError() const
 {
     if (!QFile(m_settings.fileName()).exists()) {
-        handleNewErrorState(false);
+        setErrorState(false);
     } else {
-        handleNewErrorState(!checkUnrecognizedSettings() ||
+        setErrorState(!checkUnrecognizedSettings() ||
                             !checkShortcutConflicts() || !checkSemantics());
     }
 
@@ -1056,21 +768,17 @@ void ConfigHandler::checkAndHandleError() const
 bool ConfigHandler::checkUnrecognizedSettings() const
 {
     // sort the config keys by group
-    QStringList generalKeys = keysFromGroup("General"),
-                shortcutKeys = keysFromGroup("Shortcuts"),
-                recognizedGeneralKeys = recognizedGeneralOptions(),
-                recognizedShortcutKeys = recognizedShortcutNames();
+    QSet<QString> generalKeys = keysFromGroup("General"),
+                  shortcutKeys = keysFromGroup("Shortcuts"),
+                  recognizedGeneralKeys = recognizedGeneralOptions(),
+                  recognizedShortcutKeys = recognizedShortcutNames();
 
-    // form sets of unrecognized options by group
-    QSet generalKeySet = QSet(generalKeys.begin(), generalKeys.end()),
-         shortcutKeySet = QSet(shortcutKeys.begin(), shortcutKeys.end());
-    generalKeySet.subtract(
-      QSet(recognizedGeneralKeys.begin(), recognizedGeneralKeys.end()));
-    shortcutKeySet.subtract(
-      QSet(recognizedShortcutKeys.begin(), recognizedShortcutKeys.end()));
+    // subtract recognized keys
+    generalKeys.subtract(recognizedGeneralKeys);
+    shortcutKeys.subtract(recognizedShortcutKeys);
 
-    // check if the sets are empty
-    if (!generalKeySet.isEmpty() || !shortcutKeySet.isEmpty()) {
+    // what is left are the unrecognized keys - hopefully empty
+    if (!generalKeys.isEmpty() || !shortcutKeys.isEmpty()) {
         return false; // error
     }
     return true; // ok
@@ -1108,7 +816,7 @@ bool ConfigHandler::checkSemantics() const
     return true;
 }
 
-void ConfigHandler::handleNewErrorState(bool error) const
+void ConfigHandler::setErrorState(bool error) const
 {
     bool hadError = m_hasError;
     m_hasError = error;
@@ -1167,3 +875,29 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
     }
     return handler;
 }
+
+void ConfigHandler::assertKeyRecognized(const QString& key) const
+{
+    bool recognized = key.startsWith(QStringLiteral("Shortcuts/"))
+                        ? recognizedShortcutNames().contains(key.mid(10))
+                        : ::recognizedGeneralOptions.contains(key);
+    if (!recognized) {
+#if defined(QT_DEBUG)
+        // This should never happen, but just in case
+        throw std::logic_error(
+          QStringLiteral("Bad config key '%1' in ConfigHandler. Please report "
+                         "this as a bug.")
+            .arg(key)
+            .toStdString());
+#else
+        setNewErrorState(true);
+#endif
+    }
+}
+
+// STATIC MEMBER DEFINITIONS
+
+bool ConfigHandler::m_hasError = false;
+bool ConfigHandler::m_errorCheckPending = false;
+bool ConfigHandler::m_skipNextErrorCheck = false;
+QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;

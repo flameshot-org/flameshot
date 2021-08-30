@@ -19,7 +19,7 @@ PinWidget::PinWidget(const QPixmap& pixmap, QWidget* parent)
     setAttribute(Qt::WA_TranslucentBackground);
 
     ConfigHandler conf;
-    m_baseColor = conf.uiMainColor();
+    m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
 
     m_layout = new QVBoxLayout(this);

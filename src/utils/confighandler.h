@@ -14,6 +14,34 @@ class ValueHandler;
 template<class T>
 class QSharedPointer;
 
+/**
+ * Implements a getter for a config option. `KEY` is the option key as used with
+ * `QSettings` and `TYPE` is the C++ type. `KEY` is simultaneously the name of
+ * the getter function.
+ */
+#define CONFIG_GETTER(KEY, TYPE)                                               \
+    TYPE KEY() { return value(QStringLiteral(#KEY)).value<TYPE>(); }
+
+/**
+ * Implements a setter for a config option. `FUNC` is the name of the function,
+ * `KEY` is the option key as used with `QSettings` and `TYPE` is the C++ type.
+ */
+#define CONFIG_SETTER(FUNC, KEY, TYPE)                                         \
+    void FUNC(const TYPE& value)                                               \
+    {                                                                          \
+        setValue(QStringLiteral(#KEY), QVariant::fromValue(value));            \
+    }
+
+/**
+ * Combines the functionality of `CONFIG_GETTER` and `CONFIG_SETTER`. `GETFUNC`
+ * is simultaneously the name of the getter function and the option key as used
+ * with `QSettings`. `SETFUNC` is the name of the setter function. `TYPE` is the
+ * C++ type of the value.
+ */
+#define CONFIG_GETTER_SETTER(GETFUNC, SETFUNC, TYPE)                           \
+    CONFIG_GETTER(GETFUNC, TYPE)                                               \
+    CONFIG_SETTER(SETFUNC, GETFUNC, TYPE)
+
 class ConfigHandler : public QObject
 {
     Q_OBJECT
@@ -23,132 +51,95 @@ public:
 
     static ConfigHandler* getInstance();
 
-    QList<CaptureToolButton::ButtonType> buttons();
-    void setButtons(const QList<CaptureToolButton::ButtonType>&);
+    // Definitions of getters and setters for config options
+    // Some special cases are implemented regularly, without the macro
+    // NOTE: When adding new options, make sure to add an entry in
+    // recognizedGeneralOptions in the cpp file.
+    CONFIG_GETTER_SETTER(userColors, setUserColors, QVector<QColor>);
+    CONFIG_GETTER_SETTER(savePath, setSavePath, QString)
+    CONFIG_GETTER_SETTER(savePathFixed, setSavePathFixed, bool)
+    CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
+    CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
+    CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
+    CONFIG_GETTER_SETTER(fontFamily, setFontFamily, QString)
+    CONFIG_GETTER_SETTER(showHelp, setShowHelp, bool)
+    CONFIG_GETTER_SETTER(showSidePanelButton, setShowSidePanelButton, bool)
+    CONFIG_GETTER_SETTER(showDesktopNotification,
+                         setShowDesktopNotification,
+                         bool)
+    CONFIG_GETTER_SETTER(filenamePattern, setFilenamePattern, QString)
+    CONFIG_GETTER_SETTER(disabledTrayIcon, setDisabledTrayIcon, bool)
+    CONFIG_GETTER_SETTER(drawThickness, setDrawThickness, int)
+    CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
+    CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
+    CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
+    CONFIG_GETTER_SETTER(showStartupLaunchMessage,
+                         setShowStartupLaunchMessage,
+                         bool)
+    CONFIG_GETTER_SETTER(contrastOpacity, setContrastOpacity, int)
+    CONFIG_GETTER_SETTER(copyAndCloseAfterUpload,
+                         setCopyAndCloseAfterUpload,
+                         bool)
+    CONFIG_GETTER_SETTER(historyConfirmationToDelete,
+                         setHistoryConfirmationToDelete,
+                         bool)
+    CONFIG_GETTER_SETTER(uploadHistoryMax, setUploadHistoryMax, int)
+    CONFIG_GETTER_SETTER(saveAfterCopy, setSaveAfterCopy, bool)
+    CONFIG_GETTER_SETTER(copyPathAfterSave,
+                         setCopyPathAfterSave,
+                         bool)
+    CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
+    CONFIG_GETTER_SETTER(ignoreUpdateToVersion,
+                         setIgnoreUpdateToVersion,
+                         QString)
+    CONFIG_GETTER_SETTER(undoLimit, setUndoLimit, int)
 
-    QVector<QColor> userColors();
-
-    QString savePath();
-    void setSavePath(const QString&);
-
-    bool savePathFixed();
-    void setSavePathFixed(bool);
-
-    QColor uiMainColor();
-    void setUiMainColor(const QColor&);
-
-    QColor contrastUiColor();
-    void setContrastUiColor(const QColor&);
-
-    QColor drawColor();
-    void setDrawColor(const QColor&);
-
-    QString fontFamily();
-    void setFontFamily(const QString&);
-
-    bool showHelp();
-    void setShowHelp(const bool);
-
-    bool showSidePanelButton();
-    void setShowSidePanelButton(bool);
-
-    bool showDesktopNotification();
-    void setDesktopNotification(bool);
-
-    QString filenamePatternDefault();
-    QString filenamePattern();
-    void setFilenamePattern(const QString&);
-
-    bool disabledTrayIcon();
-    void setDisabledTrayIcon(bool);
-
-    int drawThickness();
-    void setDrawThickness(const int);
-
-    int drawFontSize();
-    void setDrawFontSize(const int);
-
-    bool keepOpenAppLauncher();
-    void setKeepOpenAppLauncher(const bool);
-
-    bool checkForUpdates();
-    void setCheckForUpdates(const bool);
-
-    bool verifyLaunchFile();
+    // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);
-
-    bool showStartupLaunchMessage();
-    void setShowStartupLaunchMessage(const bool);
-
-    int contrastOpacity();
-    void setContrastOpacity(const int);
-
-    bool copyAndCloseAfterUploadEnabled();
-    void setCopyAndCloseAfterUploadEnabled(const bool);
-
-    bool historyConfirmationToDelete();
-    void setHistoryConfirmationToDelete(const bool save);
-
-    int uploadHistoryMaxSize();
-    void setUploadHistoryMaxSize(const int);
-
-    bool saveAfterCopy();
-    void setSaveAfterCopy(const bool);
-
-    bool copyPathAfterSaveEnabled();
-    void setCopyPathAfterSaveEnabled(const bool);
-
-    bool useJpgForClipboard() const;
-    void setUseJpgForClipboard(const bool);
-    // TODO different than option name
+    CONFIG_GETTER(buttons, QList<CaptureToolButton::ButtonType>)
+    void setButtons(const QList<CaptureToolButton::ButtonType>&);
     QString saveAsFileExtension();
-    void setSaveAsFileExtension(const QString& extension);
-
-    void setDefaultSettings();
+    CONFIG_SETTER(setSaveAsFileExtension, setSaveAsFileExtension, QString)
     void setAllTheButtons();
 
-    void setIgnoreUpdateToVersion(const QString& text);
-    QString ignoreUpdateToVersion();
-
-    void setUndoLimit(int value);
-    int undoLimit();
-
-    bool setShortcut(const QString&, const QString&);
-    QString shortcut(const QString&);
-
+    // DEFAULTS
+    QString filenamePatternDefault();
+    void setDefaultSettings();
     QString configFilePath() const;
 
+    // GENERIC GETTERS AND SETTERS
+    bool setShortcut(const QString&, const QString&);
+    QString shortcut(const QString&);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
-    bool contains(const QString& key) const;
 
-    const QStringList& recognizedGeneralOptions() const;
-    QStringList recognizedShortcutNames() const;
-    QStringList keysFromGroup(const QString& group) const;
-    bool isValidShortcutName(const QString& name) const;
+    // INFO
+    const QSet<QString>& recognizedGeneralOptions() const;
+    const QSet<QString>& recognizedShortcutNames() const;
+    QSet<QString> keysFromGroup(const QString& group) const;
 
+    // ERROR HANDLING
     void checkAndHandleError() const;
     bool checkUnrecognizedSettings() const;
     bool checkShortcutConflicts() const;
     bool checkSemantics() const;
-    void handleNewErrorState(bool error) const;
+    void setErrorState(bool error) const;
     bool hasError() const;
     QString errorMessage() const;
+
 signals:
-    void fileChanged() const;
     void error() const;
     void errorResolved() const;
+    void fileChanged() const;
 
 private:
-    QString m_strRes;
-    QVariant m_varRes;
     mutable QSettings m_settings;
-    QVector<QStringList> m_shortcuts;
 
     static bool m_hasError, m_errorCheckPending, m_skipNextErrorCheck;
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
     QSharedPointer<ValueHandler> valueHandler(const QString& key) const;
+    void assertKeyRecognized(const QString& key) const;
 };
