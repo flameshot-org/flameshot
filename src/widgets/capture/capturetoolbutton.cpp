@@ -122,7 +122,7 @@ void CaptureToolButton::setColor(const QColor& c)
     updateIcon();
 }
 
-QColor CaptureToolButton::m_mainColor = ConfigHandler().uiMainColorValue();
+QColor CaptureToolButton::m_mainColor = ConfigHandler().uiMainColor();
 
 static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
 {

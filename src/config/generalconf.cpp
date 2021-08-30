@@ -54,13 +54,13 @@ GeneralConf::GeneralConf(QWidget* parent)
 void GeneralConf::_updateComponents(bool allowEmptySavePath)
 {
     ConfigHandler config;
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_autostart->setChecked(config.startupLaunchValue());
+    m_helpMessage->setChecked(config.showHelp());
+    m_sidePanelButton->setChecked(config.showSidePanelButton());
+    m_sysNotifications->setChecked(config.showDesktopNotification());
+    m_autostart->setChecked(config.startupLaunch());
     m_copyAndCloseAfterUpload->setChecked(
       config.copyAndCloseAfterUploadEnabled());
-    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
+    m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_historyConfirmationToDelete->setChecked(
@@ -68,14 +68,14 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_checkForUpdates->setChecked(config.checkForUpdates());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
-    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
+    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSize());
     m_undoLimit->setValue(config.undoLimit());
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    m_showTray->setChecked(!config.disabledTrayIconValue());
+    m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
 }
 

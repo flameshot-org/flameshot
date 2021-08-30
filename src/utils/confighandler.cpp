@@ -446,9 +446,9 @@ ConfigHandler* ConfigHandler::getInstance()
     return &config;
 }
 
-QList<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
+QList<CaptureToolButton::ButtonType> ConfigHandler::buttons()
 {
-    return value("buttons").value<decltype(getButtons())>();
+    return value("buttons").value<decltype(buttons())>();
 }
 
 void ConfigHandler::setButtons(
@@ -460,7 +460,7 @@ void ConfigHandler::setButtons(
     setValue(QStringLiteral("buttons"), QVariant::fromValue(l));
 }
 
-QVector<QColor> ConfigHandler::getUserColors()
+QVector<QColor> ConfigHandler::userColors()
 {
     return value(QStringLiteral("userColors")).value<QVector<QColor>>();
 }
@@ -485,27 +485,27 @@ void ConfigHandler::setSavePathFixed(bool savePathFixed)
     setValue(QStringLiteral("savePathFixed"), savePathFixed);
 }
 
-QColor ConfigHandler::uiMainColorValue()
+QColor ConfigHandler::uiMainColor()
 {
     return value(QStringLiteral("uiColor")).value<QColor>();
 }
 
-void ConfigHandler::setUIMainColor(const QColor& c)
+void ConfigHandler::setUiMainColor(const QColor& c)
 {
     setValue(QStringLiteral("uiColor"), c.name());
 }
 
-QColor ConfigHandler::uiContrastColorValue()
+QColor ConfigHandler::contrastUiColor()
 {
     return value(QStringLiteral("contrastUiColor")).value<QColor>();
 }
 
-void ConfigHandler::setUIContrastColor(const QColor& c)
+void ConfigHandler::setContrastUiColor(const QColor& c)
 {
     setValue(QStringLiteral("contrastUiColor"), c.name());
 }
 
-QColor ConfigHandler::drawColorValue()
+QColor ConfigHandler::drawColor()
 {
     return value(QStringLiteral("drawColor")).value<QColor>();
 }
@@ -515,18 +515,18 @@ void ConfigHandler::setDrawColor(const QColor& c)
     setValue(QStringLiteral("drawColor"), c.name());
 }
 
-void ConfigHandler::setFontFamily(const QString& fontFamily)
-{
-    setValue(QStringLiteral("fontFamily"), fontFamily);
-}
-
-const QString& ConfigHandler::fontFamily()
+QString ConfigHandler::fontFamily()
 {
     m_strRes = value(QStringLiteral("fontFamily")).toString();
     return m_strRes;
 }
 
-bool ConfigHandler::showHelpValue()
+void ConfigHandler::setFontFamily(const QString& fontFamily)
+{
+    setValue(QStringLiteral("fontFamily"), fontFamily);
+}
+
+bool ConfigHandler::showHelp()
 {
     return value(QStringLiteral("showHelp")).toBool();
 }
@@ -536,7 +536,7 @@ void ConfigHandler::setShowHelp(bool showHelp)
     setValue(QStringLiteral("showHelp"), showHelp);
 }
 
-bool ConfigHandler::showSidePanelButtonValue()
+bool ConfigHandler::showSidePanelButton()
 {
     return value(QStringLiteral("showSidePanelButton")).toBool();
 }
@@ -566,7 +566,7 @@ int ConfigHandler::undoLimit()
     return value(QStringLiteral("undoLimit")).toInt();
 }
 
-bool ConfigHandler::desktopNotificationValue()
+bool ConfigHandler::showDesktopNotification()
 {
     return value(QStringLiteral("showDesktopNotification")).toBool();
 }
@@ -582,7 +582,7 @@ QString ConfigHandler::filenamePatternDefault()
     return QStringLiteral("%F_%H-%M");
 }
 
-QString ConfigHandler::filenamePatternValue()
+QString ConfigHandler::filenamePattern()
 {
     return value(QStringLiteral("filenamePattern")).toString();
 }
@@ -592,7 +592,7 @@ void ConfigHandler::setFilenamePattern(const QString& pattern)
     return setValue(QStringLiteral("filenamePattern"), pattern);
 }
 
-bool ConfigHandler::disabledTrayIconValue()
+bool ConfigHandler::disabledTrayIcon()
 {
     return value(QStringLiteral("disabledTrayIcon")).toBool();
 }
@@ -602,7 +602,7 @@ void ConfigHandler::setDisabledTrayIcon(bool disabledTrayIcon)
     setValue(QStringLiteral("disabledTrayIcon"), disabledTrayIcon);
 }
 
-int ConfigHandler::drawThicknessValue()
+int ConfigHandler::drawThickness()
 {
     return value(QStringLiteral("drawThickness")).toInt();
 }
@@ -612,7 +612,7 @@ void ConfigHandler::setDrawThickness(int thickness)
     setValue(QStringLiteral("drawThickness"), thickness);
 }
 
-int ConfigHandler::drawFontSizeValue()
+int ConfigHandler::drawFontSize()
 {
     return value(QStringLiteral("drawFontSize")).toInt();
 }
@@ -622,7 +622,7 @@ void ConfigHandler::setDrawFontSize(int fontSize)
     setValue(QStringLiteral("drawFontSize"), fontSize);
 }
 
-bool ConfigHandler::keepOpenAppLauncherValue()
+bool ConfigHandler::keepOpenAppLauncher()
 {
     return value(QStringLiteral("keepOpenAppLauncher")).toBool();
 }
@@ -643,7 +643,7 @@ void ConfigHandler::setCheckForUpdates(bool checkForUpdates)
 }
 
 // TODO special case
-bool ConfigHandler::startupLaunchValue()
+bool ConfigHandler::startupLaunch()
 {
     return value(QStringLiteral("startupLaunch")).toBool();
 }
@@ -763,7 +763,7 @@ void ConfigHandler::setShowStartupLaunchMessage(bool showStartupLaunchMessage)
              showStartupLaunchMessage);
 }
 
-int ConfigHandler::contrastOpacityValue()
+int ConfigHandler::contrastOpacity()
 {
     return value(QStringLiteral("contrastOpacity")).toInt();
 }
@@ -793,7 +793,7 @@ void ConfigHandler::setHistoryConfirmationToDelete(bool check)
     setValue(QStringLiteral("historyConfirmationToDelete"), check);
 }
 
-int ConfigHandler::uploadHistoryMaxSizeValue()
+int ConfigHandler::uploadHistoryMaxSize()
 {
     return value(QStringLiteral("uploadHistoryMax")).toInt();
 }
@@ -803,7 +803,7 @@ void ConfigHandler::setUploadHistoryMaxSize(int max)
     setValue(QStringLiteral("uploadHistoryMax"), max);
 }
 
-bool ConfigHandler::saveAfterCopyValue()
+bool ConfigHandler::saveAfterCopy()
 {
     return value(QStringLiteral("saveAfterCopy")).toBool();
 }
@@ -842,7 +842,7 @@ void ConfigHandler::setSaveAsFileExtension(const QString& extension)
     setValue(QStringLiteral("setSaveAsFileExtension"), extension);
 }
 
-QString ConfigHandler::getSaveAsFileExtension()
+QString ConfigHandler::saveAsFileExtension()
 {
     return value(QStringLiteral("setSaveAsFileExtension")).toString();
 }

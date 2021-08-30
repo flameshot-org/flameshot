@@ -23,10 +23,10 @@ public:
 
     static ConfigHandler* getInstance();
 
-    QList<CaptureToolButton::ButtonType> getButtons();
+    QList<CaptureToolButton::ButtonType> buttons();
     void setButtons(const QList<CaptureToolButton::ButtonType>&);
 
-    QVector<QColor> getUserColors();
+    QVector<QColor> userColors();
 
     QString savePath();
     void setSavePath(const QString&);
@@ -34,54 +34,54 @@ public:
     bool savePathFixed();
     void setSavePathFixed(bool);
 
-    QColor uiMainColorValue();
-    void setUIMainColor(const QColor&);
+    QColor uiMainColor();
+    void setUiMainColor(const QColor&);
 
-    QColor uiContrastColorValue();
-    void setUIContrastColor(const QColor&);
+    QColor contrastUiColor();
+    void setContrastUiColor(const QColor&);
 
-    QColor drawColorValue();
+    QColor drawColor();
     void setDrawColor(const QColor&);
 
+    QString fontFamily();
     void setFontFamily(const QString&);
-    const QString& fontFamily();
 
-    bool showHelpValue();
+    bool showHelp();
     void setShowHelp(const bool);
 
-    bool showSidePanelButtonValue();
-    void setShowSidePanelButton(const bool);
+    bool showSidePanelButton();
+    void setShowSidePanelButton(bool);
 
-    bool desktopNotificationValue();
-    void setDesktopNotification(const bool);
+    bool showDesktopNotification();
+    void setDesktopNotification(bool);
 
     QString filenamePatternDefault();
-    QString filenamePatternValue();
+    QString filenamePattern();
     void setFilenamePattern(const QString&);
 
-    bool disabledTrayIconValue();
-    void setDisabledTrayIcon(const bool);
+    bool disabledTrayIcon();
+    void setDisabledTrayIcon(bool);
 
-    int drawThicknessValue();
+    int drawThickness();
     void setDrawThickness(const int);
 
-    int drawFontSizeValue();
+    int drawFontSize();
     void setDrawFontSize(const int);
 
-    bool keepOpenAppLauncherValue();
+    bool keepOpenAppLauncher();
     void setKeepOpenAppLauncher(const bool);
 
     bool checkForUpdates();
     void setCheckForUpdates(const bool);
 
     bool verifyLaunchFile();
-    bool startupLaunchValue();
+    bool startupLaunch();
     void setStartupLaunch(const bool);
 
     bool showStartupLaunchMessage();
     void setShowStartupLaunchMessage(const bool);
 
-    int contrastOpacityValue();
+    int contrastOpacity();
     void setContrastOpacity(const int);
 
     bool copyAndCloseAfterUploadEnabled();
@@ -90,10 +90,10 @@ public:
     bool historyConfirmationToDelete();
     void setHistoryConfirmationToDelete(const bool save);
 
-    int uploadHistoryMaxSizeValue();
+    int uploadHistoryMaxSize();
     void setUploadHistoryMaxSize(const int);
 
-    bool saveAfterCopyValue();
+    bool saveAfterCopy();
     void setSaveAfterCopy(const bool);
 
     bool copyPathAfterSaveEnabled();
@@ -101,8 +101,9 @@ public:
 
     bool useJpgForClipboard() const;
     void setUseJpgForClipboard(const bool);
+    // TODO different than option name
+    QString saveAsFileExtension();
     void setSaveAsFileExtension(const QString& extension);
-    QString getSaveAsFileExtension();
 
     void setDefaultSettings();
     void setAllTheButtons();

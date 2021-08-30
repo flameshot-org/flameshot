@@ -47,7 +47,7 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
 #endif
 
     m_spinner = new LoadSpinner(this);
-    m_spinner->setColor(ConfigHandler().uiMainColorValue());
+    m_spinner->setColor(ConfigHandler().uiMainColor());
     m_spinner->start();
 
     m_infoLabel = new QLabel(tr("Uploading Image"));

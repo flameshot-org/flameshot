@@ -86,10 +86,10 @@ CaptureWidget::CaptureWidget(uint id,
             this,
             &CaptureWidget::childLeave);
     setAttribute(Qt::WA_DeleteOnClose);
-    m_showInitialMsg = m_config.showHelpValue();
-    m_opacity = m_config.contrastOpacityValue();
-    m_uiColor = m_config.uiMainColorValue();
-    m_contrastUiColor = m_config.uiContrastColorValue();
+    m_showInitialMsg = m_config.showHelp();
+    m_opacity = m_config.contrastOpacity();
+    m_uiColor = m_config.uiMainColor();
+    m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
@@ -228,7 +228,7 @@ CaptureWidget::~CaptureWidget()
 void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
-    auto visibleButtonTypes = m_config.getButtons();
+    auto visibleButtonTypes = m_config.buttons();
     QVector<CaptureToolButton*> vectorButtons;
 
     // Add all buttons but hide those that were disabled in the Interface config
@@ -714,7 +714,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         }
         m_colorPicker->hide();
         if (!m_context.color.isValid()) {
-            m_context.color = ConfigHandler().drawColorValue();
+            m_context.color = ConfigHandler().drawColor();
             m_panel->show();
         }
     } else if (m_mouseIsClicked) {
@@ -904,11 +904,11 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 
 void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 {
-    m_context.color = m_config.drawColorValue();
+    m_context.color = m_config.drawColor();
     m_context.savePath = savePath;
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
-    m_context.thickness = m_config.drawThicknessValue();
+    m_context.thickness = m_config.drawThickness();
     m_context.fullscreen = fullscreen;
 }
 
@@ -931,7 +931,7 @@ void CaptureWidget::initPanel()
 #endif
     }
 
-    if (ConfigHandler().showSidePanelButtonValue()) {
+    if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
         makeChild(panelToggleButton);
@@ -1099,9 +1099,9 @@ void CaptureWidget::loadDrawThickness()
     if ((m_activeButton && m_activeButton->tool() &&
          m_activeButton->tool()->type() == ToolType::TEXT) ||
         (m_activeTool && m_activeTool->type() == ToolType::TEXT)) {
-        m_context.thickness = m_config.drawFontSizeValue();
+        m_context.thickness = m_config.drawFontSize();
     } else {
-        m_context.thickness = m_config.drawThicknessValue();
+        m_context.thickness = m_config.drawThickness();
     }
     emit m_sidePanel->thicknessChanged(m_context.thickness);
 }

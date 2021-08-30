@@ -21,7 +21,7 @@ void VisualsEditor::updateComponents()
 {
     m_buttonList->updateComponents();
     m_colorEditor->updateComponents();
-    int opacity = ConfigHandler().contrastOpacityValue();
+    int opacity = ConfigHandler().contrastOpacity();
     m_opacitySlider->setMapedValue(0, opacity, 255);
 }
 
@@ -50,7 +50,7 @@ void VisualsEditor::initOpacitySlider()
     m_layout->addWidget(label);
     m_layout->addLayout(localLayout);
 
-    int opacity = ConfigHandler().contrastOpacityValue();
+    int opacity = ConfigHandler().contrastOpacity();
     m_opacitySlider->setMapedValue(0, opacity, 255);
 }
 

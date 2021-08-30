@@ -506,12 +506,12 @@ int main(int argc, char* argv[])
         if (mainColor) {
             QString colorCode = parser.value(mainColorOption);
             QColor parsedColor(colorCode);
-            config.setUIMainColor(parsedColor);
+            config.setUiMainColor(parsedColor);
         }
         if (contrastColor) {
             QString colorCode = parser.value(contrastColorOption);
             QColor parsedColor(colorCode);
-            config.setUIContrastColor(parsedColor);
+            config.setContrastUiColor(parsedColor);
         }
 
         // Open gui when no options
