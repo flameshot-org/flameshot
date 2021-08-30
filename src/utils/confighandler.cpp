@@ -222,6 +222,18 @@ class ExistingDir : public ValueHandler
         QFileInfo info(val.toString());
         return info.isDir() && info.exists();
     }
+
+    QVariant fallback() override
+    {
+        QString path =
+          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+        if (!QFileInfo(path).isDir()) {
+            // TODO can we rely on the fact that home exists?
+            path =
+              QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+        }
+        return path;
+    }
 };
 
 class FilenamePattern : public ValueHandler

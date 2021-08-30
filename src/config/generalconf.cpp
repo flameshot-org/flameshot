@@ -73,9 +73,6 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
-    } else {
-        ConfigHandler().setSavePath(
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIconValue());
@@ -366,10 +363,6 @@ void GeneralConf::initSaveAfterCopy()
     QHBoxLayout* pathLayout = new QHBoxLayout();
 
     QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
     QString foreground = this->palette().windowText().color().name();
@@ -477,10 +470,6 @@ void GeneralConf::saveAfterCopyChanged(bool checked)
 void GeneralConf::changeSavePath()
 {
     QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     path = chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
