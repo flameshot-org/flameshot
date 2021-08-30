@@ -5,6 +5,7 @@ target_sources(
           filenamehandler.h
           screengrabber.h
           systemnotification.h
+          valuehandler.h
           configshortcuts.h
           request.h
           strfparse.h
@@ -16,6 +17,7 @@ target_sources(
           screengrabber.cpp
           confighandler.cpp
           systemnotification.cpp
+          valuehandler.cpp
           screenshotsaver.cpp
           dbusutils.cpp
           globalvalues.cpp
