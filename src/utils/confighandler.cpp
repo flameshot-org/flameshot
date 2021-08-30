@@ -53,6 +53,8 @@ bool normalizeButtons(QList<int>& buttons)
     return hasChanged;
 }
 
+// VALUE HANDLING
+
 /**
  * Handles the value of a configuration option.
  *
@@ -143,7 +145,6 @@ class ExistingDir : public SimpleValueHandler
 {
     bool check(const QVariant& val) override
     {
-        QSharedPointer<int>(new int);
         if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
             return false;
         }
@@ -218,7 +219,51 @@ class UserColors : public SimpleValueHandler
 {
     bool check(const QVariant& val) override
     {
-        return false; // TODO
+        if (!val.isValid()) {
+            return true;
+        }
+        if (!val.canConvert(QVariant::StringList)) {
+            return false;
+        }
+        for (const QString& str : val.toStringList()) {
+            if (!QColor::isValidColor(str)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    QVariant get(const QVariant& val) override
+    {
+        if (!check(val)) {
+            return fallback();
+        }
+
+        QStringList strColors = val.toStringList();
+        if (strColors.isEmpty()) {
+            return fallback();
+        }
+
+        QVector<QColor> colors;
+        colors.reserve(strColors.size());
+
+        for (const QString& str : strColors) {
+            colors.append(QColor(str));
+        }
+
+        return QVariant::fromValue(colors);
+    }
+    QVariant fallback() override
+    {
+        return QVariant::fromValue(QVector<QColor>{ Qt::darkRed,
+                                                    Qt::red,
+                                                    Qt::yellow,
+                                                    Qt::green,
+                                                    Qt::darkGreen,
+                                                    Qt::cyan,
+                                                    Qt::blue,
+                                                    Qt::magenta,
+                                                    Qt::darkMagenta,
+                                                    QColor() });
     }
 };
 
@@ -293,6 +338,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     SIMPLE("ignoreUpdateToVersion"       ,String            ,""                 ),
     SIMPLE("keepOpenAppLauncher"         ,Bool              ,false              ),
     SIMPLE("fontFamily"         		 ,String            ,false              ),
+    SIMPLE("setSaveAsFileExtension"	     ,String            ,""                 ),
 };
 // clang-format on
 
@@ -360,30 +406,7 @@ void ConfigHandler::setButtons(
 
 QVector<QColor> ConfigHandler::getUserColors()
 {
-    QVector<QColor> colors;
-    const QVector<QColor>& defaultColors = {
-        Qt::darkRed, Qt::red,  Qt::yellow,  Qt::green,       Qt::darkGreen,
-        Qt::cyan,    Qt::blue, Qt::magenta, Qt::darkMagenta, QColor()
-    };
-
-    if (contains(QStringLiteral("userColors"))) {
-        for (const QString& hex :
-             value(QStringLiteral("userColors")).toStringList()) {
-            if (QColor::isValidColor(hex)) {
-                colors.append(QColor(hex));
-            } else if (hex == QStringLiteral("picker")) {
-                colors.append(QColor());
-            }
-        }
-
-        if (colors.isEmpty()) {
-            colors = defaultColors;
-        }
-    } else {
-        colors = defaultColors;
-    }
-
-    return colors;
+    return value(QStringLiteral("userColors")).value<QVector<QColor>>();
 }
 
 QString ConfigHandler::savePath()
@@ -398,9 +421,6 @@ void ConfigHandler::setSavePath(const QString& savePath)
 
 bool ConfigHandler::savePathFixed()
 {
-    if (!contains(QStringLiteral("savePathFixed"))) {
-        setValue(QStringLiteral("savePathFixed"), false);
-    }
     return value(QStringLiteral("savePathFixed")).toBool();
 }
 
@@ -411,16 +431,7 @@ void ConfigHandler::setSavePathFixed(bool savePathFixed)
 
 QColor ConfigHandler::uiMainColorValue()
 {
-    QColor res = QColor(116, 0, 150);
-
-    if (contains(QStringLiteral("uiColor"))) {
-        QString hex = value(QStringLiteral("uiColor")).toString();
-
-        if (QColor::isValidColor(hex)) {
-            res = QColor(hex);
-        }
-    }
-    return res;
+    return value(QStringLiteral("uiColor")).value<QColor>();
 }
 
 void ConfigHandler::setUIMainColor(const QColor& c)
@@ -430,17 +441,7 @@ void ConfigHandler::setUIMainColor(const QColor& c)
 
 QColor ConfigHandler::uiContrastColorValue()
 {
-    QColor res = QColor(39, 0, 50);
-
-    if (contains(QStringLiteral("contrastUiColor"))) {
-        QString hex = value(QStringLiteral("contrastUiColor")).toString();
-
-        if (QColor::isValidColor(hex)) {
-            res = QColor(hex);
-        }
-    }
-
-    return res;
+    return value(QStringLiteral("contrastUiColor")).value<QColor>();
 }
 
 void ConfigHandler::setUIContrastColor(const QColor& c)
@@ -450,17 +451,7 @@ void ConfigHandler::setUIContrastColor(const QColor& c)
 
 QColor ConfigHandler::drawColorValue()
 {
-    QColor res(Qt::red);
-
-    if (contains(QStringLiteral("drawColor"))) {
-        QString hex = value(QStringLiteral("drawColor")).toString();
-
-        if (QColor::isValidColor(hex)) {
-            res = QColor(hex);
-        }
-    }
-
-    return res;
+    return value(QStringLiteral("drawColor")).value<QColor>();
 }
 
 void ConfigHandler::setDrawColor(const QColor& c)
@@ -475,26 +466,26 @@ void ConfigHandler::setFontFamily(const QString& fontFamily)
 
 const QString& ConfigHandler::fontFamily()
 {
-    m_strRes = value(QStringLiteral("fontFamily"), QString()).toString();
+    m_strRes = value(QStringLiteral("fontFamily")).toString();
     return m_strRes;
 }
 
 bool ConfigHandler::showHelpValue()
 {
-    return value(QStringLiteral("showHelp"), true).toBool();
+    return value(QStringLiteral("showHelp")).toBool();
 }
 
-void ConfigHandler::setShowHelp(const bool showHelp)
+void ConfigHandler::setShowHelp(bool showHelp)
 {
     setValue(QStringLiteral("showHelp"), showHelp);
 }
 
 bool ConfigHandler::showSidePanelButtonValue()
 {
-    return value(QStringLiteral("showSidePanelButton"), true).toBool();
+    return value(QStringLiteral("showSidePanelButton")).toBool();
 }
 
-void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton)
+void ConfigHandler::setShowSidePanelButton(bool showSidePanelButton)
 {
     setValue(QStringLiteral("showSidePanelButton"), showSidePanelButton);
 }
@@ -516,16 +507,15 @@ void ConfigHandler::setUndoLimit(int value)
 
 int ConfigHandler::undoLimit()
 {
-    int val = value(QStringLiteral("undoLimit"), 100).toInt();
-    return qBound(1, val, 999);
+    return value(QStringLiteral("undoLimit")).toInt();
 }
 
 bool ConfigHandler::desktopNotificationValue()
 {
-    return value(QStringLiteral("showDesktopNotification"), true).toBool();
+    return value(QStringLiteral("showDesktopNotification")).toBool();
 }
 
-void ConfigHandler::setDesktopNotification(const bool showDesktopNotification)
+void ConfigHandler::setDesktopNotification(bool showDesktopNotification)
 {
     setValue(QStringLiteral("showDesktopNotification"),
              showDesktopNotification);
@@ -533,17 +523,12 @@ void ConfigHandler::setDesktopNotification(const bool showDesktopNotification)
 
 QString ConfigHandler::filenamePatternDefault()
 {
-    m_strRes = QLatin1String("%F_%H-%M");
-    return m_strRes;
+    return QStringLiteral("%F_%H-%M");
 }
 
 QString ConfigHandler::filenamePatternValue()
 {
-    m_strRes = value(QStringLiteral("filenamePattern")).toString();
-    if (m_strRes.isEmpty()) {
-        m_strRes = filenamePatternDefault();
-    }
-    return m_strRes;
+    return value(QStringLiteral("filenamePattern")).toString();
 }
 
 void ConfigHandler::setFilenamePattern(const QString& pattern)
@@ -553,30 +538,30 @@ void ConfigHandler::setFilenamePattern(const QString& pattern)
 
 bool ConfigHandler::disabledTrayIconValue()
 {
-    return value(QStringLiteral("disabledTrayIcon"), false).toBool();
+    return value(QStringLiteral("disabledTrayIcon")).toBool();
 }
 
-void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon)
+void ConfigHandler::setDisabledTrayIcon(bool disabledTrayIcon)
 {
     setValue(QStringLiteral("disabledTrayIcon"), disabledTrayIcon);
 }
 
 int ConfigHandler::drawThicknessValue()
 {
-    return value(QStringLiteral("drawThickness"), 3).toInt();
+    return value(QStringLiteral("drawThickness")).toInt();
 }
 
-void ConfigHandler::setDrawThickness(const int thickness)
+void ConfigHandler::setDrawThickness(int thickness)
 {
     setValue(QStringLiteral("drawThickness"), thickness);
 }
 
 int ConfigHandler::drawFontSizeValue()
 {
-    return value(QStringLiteral("drawFontSize"), 8).toInt();
+    return value(QStringLiteral("drawFontSize")).toInt();
 }
 
-void ConfigHandler::setDrawFontSize(const int fontSize)
+void ConfigHandler::setDrawFontSize(int fontSize)
 {
     setValue(QStringLiteral("drawFontSize"), fontSize);
 }
@@ -586,33 +571,25 @@ bool ConfigHandler::keepOpenAppLauncherValue()
     return value(QStringLiteral("keepOpenAppLauncher")).toBool();
 }
 
-void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
+void ConfigHandler::setKeepOpenAppLauncher(bool keepOpen)
 {
     setValue(QStringLiteral("keepOpenAppLauncher"), keepOpen);
 }
 
 bool ConfigHandler::checkForUpdates()
 {
-    return value(QStringLiteral("checkForUpdates"), true).toBool();
+    return value(QStringLiteral("checkForUpdates")).toBool();
 }
 
-void ConfigHandler::setCheckForUpdates(const bool checkForUpdates)
+void ConfigHandler::setCheckForUpdates(bool checkForUpdates)
 {
     setValue(QStringLiteral("checkForUpdates"), checkForUpdates);
 }
 
+// TODO special case
 bool ConfigHandler::startupLaunchValue()
 {
-#if defined(Q_OS_MACOS)
-    bool res = false;
-#else
-    bool res = true;
-#endif
-    res = value(QStringLiteral("startupLaunch"), res).toBool();
-    if (res != verifyLaunchFile()) {
-        setStartupLaunch(res);
-    }
-    return res;
+    return value(QStringLiteral("startupLaunch")).toBool();
 }
 
 bool ConfigHandler::verifyLaunchFile()
@@ -634,6 +611,7 @@ bool ConfigHandler::verifyLaunchFile()
     return res;
 }
 
+// TODO special case
 void ConfigHandler::setStartupLaunch(const bool start)
 {
     if (start == value(QStringLiteral("startupLaunch")).toBool()) {
@@ -720,14 +698,10 @@ void ConfigHandler::setStartupLaunch(const bool start)
 
 bool ConfigHandler::showStartupLaunchMessage()
 {
-    if (!contains(QStringLiteral("showStartupLaunchMessage"))) {
-        setValue(QStringLiteral("showStartupLaunchMessage"), true);
-    }
     return value(QStringLiteral("showStartupLaunchMessage")).toBool();
 }
 
-void ConfigHandler::setShowStartupLaunchMessage(
-  const bool showStartupLaunchMessage)
+void ConfigHandler::setShowStartupLaunchMessage(bool showStartupLaunchMessage)
 {
     setValue(QStringLiteral("showStartupLaunchMessage"),
              showStartupLaunchMessage);
@@ -735,41 +709,40 @@ void ConfigHandler::setShowStartupLaunchMessage(
 
 int ConfigHandler::contrastOpacityValue()
 {
-    int val = value(QStringLiteral("contrastOpacity"), 190).toInt();
-    return qBound(0, val, 255);
+    return value(QStringLiteral("contrastOpacity")).toInt();
 }
 
-void ConfigHandler::setContrastOpacity(const int transparency)
+void ConfigHandler::setContrastOpacity(int transparency)
 {
     setValue(QStringLiteral("contrastOpacity"), transparency);
 }
 
 bool ConfigHandler::copyAndCloseAfterUploadEnabled()
 {
-    return value(QStringLiteral("copyAndCloseAfterUpload"), true).toBool();
+    return value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
 }
 
-void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
+void ConfigHandler::setCopyAndCloseAfterUploadEnabled(bool value)
 {
     setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
 }
 
 bool ConfigHandler::historyConfirmationToDelete()
 {
-    return value(QStringLiteral("historyConfirmationToDelete"), true).toBool();
+    return value(QStringLiteral("historyConfirmationToDelete")).toBool();
 }
 
-void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
+void ConfigHandler::setHistoryConfirmationToDelete(bool check)
 {
     setValue(QStringLiteral("historyConfirmationToDelete"), check);
 }
 
 int ConfigHandler::uploadHistoryMaxSizeValue()
 {
-    return value(QStringLiteral("uploadHistoryMax"), 25).toInt();
+    return value(QStringLiteral("uploadHistoryMax")).toInt();
 }
 
-void ConfigHandler::setUploadHistoryMaxSize(const int max)
+void ConfigHandler::setUploadHistoryMaxSize(int max)
 {
     setValue(QStringLiteral("uploadHistoryMax"), max);
 }
@@ -779,14 +752,14 @@ bool ConfigHandler::saveAfterCopyValue()
     return value(QStringLiteral("saveAfterCopy")).toBool();
 }
 
-void ConfigHandler::setSaveAfterCopy(const bool save)
+void ConfigHandler::setSaveAfterCopy(bool save)
 {
     setValue(QStringLiteral("saveAfterCopy"), save);
 }
 
 bool ConfigHandler::copyPathAfterSaveEnabled()
 {
-    return value(QStringLiteral("copyPathAfterSave"), false).toBool();
+    return value(QStringLiteral("copyPathAfterSave")).toBool();
 }
 
 void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
@@ -798,7 +771,8 @@ bool ConfigHandler::useJpgForClipboard() const
 {
 #if !defined(Q_OS_MACOS)
     // FIXME - temporary fix to disable option for MacOS
-    return value(QStringLiteral("useJpgForClipboard"), false).toBool();
+    // TODO this is not a good way to disable it
+    return value(QStringLiteral("useJpgForClipboard")).toBool();
 #endif
 }
 
@@ -814,9 +788,7 @@ void ConfigHandler::setSaveAsFileExtension(const QString& extension)
 
 QString ConfigHandler::getSaveAsFileExtension()
 {
-    return m_settings
-      .value(QStringLiteral("setSaveAsFileExtension"), QString(".png"))
-      .toString();
+    return value(QStringLiteral("setSaveAsFileExtension")).toString();
 }
 
 void ConfigHandler::setDefaultSettings()
@@ -833,9 +805,9 @@ void ConfigHandler::setDefaultSettings()
 
 void ConfigHandler::setAllTheButtons()
 {
+    // TODO do away with this
     QList<int> buttons =
       fromButtonToInt(CaptureToolButton::getIterableButtonTypes());
-    // TODO: remove toList in v1.0
     setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
 }
 
@@ -908,17 +880,14 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
     }
 }
 
-QVariant ConfigHandler::value(const QString& key,
-                              const QVariant& fallback) const
+QVariant ConfigHandler::value(const QString& key) const
 {
-    // TODO remove fallback argument
-
     // Perform check on entire config if due. Please make sure that this
     // function is called in all scenarios - best to keep it as the first
     // statement.
     hasError();
 
-    auto val = m_settings.value(key, fallback);
+    auto val = m_settings.value(key);
 
     // Check the value for semantic errors
     if (m_settings.group() == QStringLiteral("Shortcuts") ||

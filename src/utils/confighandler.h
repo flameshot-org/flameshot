@@ -116,7 +116,7 @@ public:
     QString configFilePath() const;
 
     void setValue(const QString& key, const QVariant& value);
-    QVariant value(const QString& key, const QVariant& fallback = {}) const;
+    QVariant value(const QString& key) const;
     bool contains(const QString& key) const;
 
     const QStringList& recognizedGeneralOptions() const;
