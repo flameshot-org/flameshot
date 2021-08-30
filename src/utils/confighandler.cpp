@@ -69,7 +69,7 @@ bool normalizeButtons(QList<int>& buttons)
  *
  * If you wish to handle simple value types (those supported by QVariant) you
  * should use `SimpleValueHandler`. Note that you can't use that class if the
- * value has some custom constraints on it.
+ * value has some custom constraints on it. TODO
  *
  * @note You will only need to override `get` if you have to change the value
  * that was read from the config file. If you are fine with the value as long as
@@ -83,35 +83,70 @@ class ValueHandler
 {
 public:
     virtual bool check(const QVariant& val) = 0;
-    virtual QVariant get(const QVariant& val)
+    virtual QVariant value(const QVariant& val)
     {
-        return val.isValid() ? val : fallback();
+        if (!val.isValid() || !check(val)) {
+            return fallback();
+        } else {
+            return process(val);
+        }
     }
     virtual QVariant fallback() { return QVariant(); };
-};
-
-class SimpleValueHandler : public ValueHandler
-{
-public:
-    SimpleValueHandler(QVariant::Type type = QVariant::UserType,
-                       const QVariant& def = {})
-      : m_defaultValue(def)
-      , m_type(type)
-    {}
-    bool check(const QVariant& val) override
-    {
-        // An invalid value means that the setting is not found in the config
-        return !val.isValid() || val.canConvert(m_type);
-    }
-
-    virtual QVariant fallback() override { return m_defaultValue; };
 
 protected:
-    QVariant m_defaultValue;
-    QVariant::Type m_type;
+    virtual QVariant process(const QVariant& val) { return val; }
 };
 
 // CUSTOM TYPE HANDLERS
+
+class Bool : public ValueHandler
+{
+public:
+    Bool(bool def)
+      : m_def(def)
+    {}
+    bool check(const QVariant& val) override
+    {
+        QString str = val.toString();
+        if (str != "true" && str != "false") {
+            return false;
+        }
+        return true;
+    }
+    QVariant fallback() override { return m_def; }
+
+private:
+    bool m_def;
+};
+
+class String : public ValueHandler
+{
+public:
+    String(const QString& def)
+      : m_def(def)
+    {}
+    bool check(const QVariant&) override { return true; }
+    QVariant fallback() override { return m_def; }
+
+private:
+    QString m_def;
+};
+
+class Color : public ValueHandler
+{
+public:
+    Color(const QColor& def)
+      : m_def(def)
+    {}
+    bool check(const QVariant& val) override
+    {
+        return QColor::isValidColor(val.toString());
+    }
+    QVariant fallback() override { return m_def; }
+
+private:
+    QColor m_def;
+};
 
 class BoundedInt : public ValueHandler
 {
@@ -121,19 +156,13 @@ public:
       , m_max(max)
       , m_def(def)
     {}
-    BoundedInt(int min, int def)
-      : m_min(min)
-      , m_max(min - 1)
-      , m_def(def)
-    {}
 
     bool check(const QVariant& val) override
     {
-        if (!val.canConvert(QVariant::Int)) {
-            return false;
-        }
-        int num = val.toInt();
-        return m_min <= num && (m_max < m_min || num <= m_max);
+        QString str = val.toString();
+        bool conversionOk;
+        int num = str.toInt(&conversionOk);
+        return conversionOk && (m_max < m_min || num <= m_max);
     }
     virtual QVariant fallback() override { return m_def; };
 
@@ -141,7 +170,49 @@ private:
     int m_min, m_max, m_def;
 };
 
-class ExistingDir : public SimpleValueHandler
+class LowerBoundedInt : public ValueHandler
+{
+public:
+    LowerBoundedInt(int min, int def)
+      : m_min(min)
+      , m_def(def)
+    {}
+    bool check(const QVariant& val) override
+    {
+        QString str = val.toString();
+        bool conversionOk;
+        int num = str.toInt(&conversionOk);
+        return conversionOk && num >= m_min;
+    };
+    virtual QVariant fallback() override { return m_def; }
+
+private:
+    int m_min, m_def;
+};
+
+class KeySequence : public ValueHandler
+{
+public:
+    KeySequence(const QString& shortcutName)
+      : m_shortcutName(shortcutName)
+    {}
+    bool check(const QVariant& val) override
+    {
+        // TODO
+        return true;
+    }
+    QVariant fallback() override
+    {
+        return ConfigShortcuts()
+          .captureShortcutDefault(m_shortcutName)
+          .toString();
+    }
+
+private:
+    QString m_shortcutName;
+};
+
+class ExistingDir : public ValueHandler
 {
     bool check(const QVariant& val) override
     {
@@ -156,24 +227,16 @@ class ExistingDir : public SimpleValueHandler
 class FilenamePattern : public ValueHandler
 {
     bool check(const QVariant&) override { return true; }
-    QVariant get(const QVariant& val) override
-    {
-        return !val.isNull() ? val : fallback();
-    }
     QVariant fallback() override
     {
         return ConfigHandler().filenamePatternDefault();
     }
 };
 
-class Buttons : public SimpleValueHandler
+class Buttons : public ValueHandler
 {
-public:
     bool check(const QVariant& val) override
     {
-        if (!val.isValid()) {
-            return true;
-        }
         if (!val.canConvert<QList<int>>()) {
             return false;
         }
@@ -186,23 +249,23 @@ public:
         }
         return true;
     }
-    QVariant get(const QVariant& val) override
+    QVariant value(const QVariant& val) override
     {
         using ButtonList = QList<CaptureToolButton::ButtonType>;
-        ButtonList buttons;
-
-        if (val.isValid()) {
-            auto intButtons = val.value<QList<int>>();
-            buttons = fromIntToButton(intButtons);
-        } else {
-            buttons = fallback().value<ButtonList>();
-        }
+        // Get unsorted button list
+        ButtonList buttons = ValueHandler::value(val).value<ButtonList>();
 
         using BT = CaptureToolButton::ButtonType;
         std::sort(buttons.begin(), buttons.end(), [](BT a, BT b) {
             return CaptureToolButton::getPriorityByButton(a) <
                    CaptureToolButton::getPriorityByButton(b);
         });
+        return QVariant::fromValue(buttons);
+    }
+    QVariant process(const QVariant& val) override
+    {
+        QList<int> intButtons = val.value<QList<int>>();
+        auto buttons = fromIntToButton(intButtons);
         return QVariant::fromValue(buttons);
     }
     QVariant fallback() override
@@ -215,7 +278,7 @@ public:
     }
 };
 
-class UserColors : public SimpleValueHandler
+class UserColors : public ValueHandler
 {
     bool check(const QVariant& val) override
     {
@@ -232,12 +295,8 @@ class UserColors : public SimpleValueHandler
         }
         return true;
     }
-    QVariant get(const QVariant& val) override
+    QVariant process(const QVariant& val) override
     {
-        if (!check(val)) {
-            return fallback();
-        }
-
         QStringList strColors = val.toStringList();
         if (strColors.isEmpty()) {
             return fallback();
@@ -267,20 +326,6 @@ class UserColors : public SimpleValueHandler
     }
 };
 
-using SVH = SimpleValueHandler;
-/**
- * Use this to declare a setting with a type that is recognized by QVariant.
- *
- * @param KEY Name of the setting as in the config file
- *            (a c-style string literal)
- * @param TYPE One of QVariant::Type. You only need to specify the name of the
- *             type, the macro will prefix it with QVariant::
- * @param DEF Default value
- */
-#define SIMPLE(KEY, TYPE, DEF)                                                 \
-    {                                                                          \
-        QStringLiteral(KEY), QSharedPointer<SVH>(new SVH(QVariant::TYPE, DEF)) \
-    }
 /**
  * Use this to declare a setting with a type that is either unrecognized by
  * QVariant or if you need to place additional constraints on its value.
@@ -296,49 +341,49 @@ using SVH = SimpleValueHandler;
 
 // This map contains all the information that is needed to parse, verify and
 // preprocess each configuration option in the General section.
-// Please keep it well structured
+// NOTE: Please keep it well structured
 // clang-format off
 static QMap<class QString, QSharedPointer<ValueHandler>>
   recognizedGeneralOptions = {
-    SIMPLE("showHelp"                    ,Bool              ,true               ),
-    SIMPLE("showSidePanelButton"         ,Bool              ,true               ),
-    SIMPLE("showDesktopNotification"     ,Bool              ,true               ),
-    SIMPLE("disabledTrayIcon"            ,Bool              ,false              ),
-    SIMPLE("historyConfirmationToDelete" ,Bool              ,true               ),
-    SIMPLE("checkForUpdates"             ,Bool              ,true               ),
+    CUSTOM("showHelp"                    ,Bool               ( true          )),
+    CUSTOM("showSidePanelButton"         ,Bool               ( true          )),
+    CUSTOM("showDesktopNotification"     ,Bool               ( true          )),
+    CUSTOM("disabledTrayIcon"            ,Bool               ( false         )),
+    CUSTOM("historyConfirmationToDelete" ,Bool               ( true          )),
+    CUSTOM("checkForUpdates"             ,Bool               ( true          )),
 #if defined(Q_OS_MACOS)
-    SIMPLE("startupLaunch"               ,Bool              ,false              ),
+    CUSTOM("startupLaunch"               ,Bool               ( false         )),
 #else
-    SIMPLE("startupLaunch"               ,Bool              ,true               ),
+    CUSTOM("startupLaunch"               ,Bool               ( true          )),
 #endif
-    SIMPLE("showStartupLaunchMessage"    ,Bool              ,true               ),
-    SIMPLE("copyAndCloseAfterUpload"     ,Bool              ,true               ),
-    SIMPLE("copyPathAfterSave"           ,Bool              ,false              ),
-    SIMPLE("useJpgForClipboard"          ,Bool              ,false              ),
+    CUSTOM("showStartupLaunchMessage"    ,Bool               ( true          )),
+    CUSTOM("copyAndCloseAfterUpload"     ,Bool               ( true          )),
+    CUSTOM("copyPathAfterSave"           ,Bool               ( false         )),
+    CUSTOM("useJpgForClipboard"          ,Bool               ( false         )),
     // TODO obsolete?
-    SIMPLE("saveAfterCopy"               ,Bool              ,false              ),
-    CUSTOM("savePath"                    ,ExistingDir        {}                 ),
-    SIMPLE("savePathFixed"               ,Bool              ,false              ),
-    CUSTOM("uploadHistoryMax"            ,BoundedInt(1      ,25)                ),
-    CUSTOM("undoLimit"                   ,BoundedInt(1, 999 ,100)               ),
+    CUSTOM("saveAfterCopy"               ,Bool               ( false         )),
+    CUSTOM("savePath"                    ,ExistingDir        (               )),
+    CUSTOM("savePathFixed"               ,Bool               ( false         )),
+    CUSTOM("uploadHistoryMax"            ,LowerBoundedInt(1  , 25            )),
+    CUSTOM("undoLimit"                   ,BoundedInt(1, 999  , 100           )),
     // Interface tab
-    SIMPLE("uiColor"                     ,Color             ,QColor(116, 0, 150)),
-    SIMPLE("contrastUiColor"             ,Color             ,QColor(39, 0, 50)  ),
-    CUSTOM("contrastOpacity"             ,BoundedInt(0, 255 ,190)               ),
-    CUSTOM("buttons"                     ,Buttons            {}                 ),
+    CUSTOM("uiColor"                     ,Color              ( {116, 0, 150} )),
+    CUSTOM("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
+    CUSTOM("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
+    CUSTOM("buttons"                     ,Buttons            ( {}            )),
     // Filename Editor tab
-    SIMPLE("filenamePattern"             ,String            ,{}                 ),
+    CUSTOM("filenamePattern"             ,String             ( {}            )),
     // Others
     // TODO obsolete?
-    CUSTOM("saveAfterCopyPath"           ,ExistingDir        {}                 ),
-    SIMPLE("drawThickness"               ,UInt              ,3                  ),
-    SIMPLE("drawColor"                   ,Color             ,QColor(Qt::red)    ),
-    CUSTOM("userColors"                  ,UserColors         {}                 ),
-    SIMPLE("drawFontSize"                ,UInt              ,8                  ),
-    SIMPLE("ignoreUpdateToVersion"       ,String            ,""                 ),
-    SIMPLE("keepOpenAppLauncher"         ,Bool              ,false              ),
-    SIMPLE("fontFamily"         		 ,String            ,false              ),
-    SIMPLE("setSaveAsFileExtension"	     ,String            ,""                 ),
+    CUSTOM("saveAfterCopyPath"           ,ExistingDir        (               )),
+    CUSTOM("drawThickness"               ,LowerBoundedInt(1  , 3             )),
+    CUSTOM("drawColor"                   ,Color              ( Qt::red       )),
+    CUSTOM("userColors"                  ,UserColors         (               )),
+    CUSTOM("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
+    CUSTOM("ignoreUpdateToVersion"       ,String             ( ""            )),
+    CUSTOM("keepOpenAppLauncher"         ,Bool               ( false         )),
+    CUSTOM("fontFamily"                  ,String             ( ""            )),
+    CUSTOM("setSaveAsFileExtension"      ,String             ( ""            )),
 };
 // clang-format on
 
@@ -354,7 +399,6 @@ ConfigHandler::ConfigHandler()
     m_settings.setDefaultFormat(QSettings::IniFormat);
 
     if (m_configWatcher == nullptr && qApp != nullptr) {
-        // TODO
         // check for error on initial call
         checkAndHandleError();
         // check for error every time the file changes
@@ -860,8 +904,10 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
     return !error;
 }
 
-const QString& ConfigHandler::shortcut(const QString& shortcutName)
+QString ConfigHandler::shortcut(const QString& shortcutName)
 {
+    // TODO
+    return value(QStringLiteral("Shortcuts/") + shortcutName).toString();
     if (contains(shortcutName)) {
         m_strRes =
           value(QStringLiteral("Shortcuts/") + shortcutName).toString();
@@ -889,26 +935,17 @@ QVariant ConfigHandler::value(const QString& key) const
 
     auto val = m_settings.value(key);
 
+    auto handler = valueHandler(key);
+
     // Check the value for semantic errors
-    if (m_settings.group() == QStringLiteral("Shortcuts") ||
-        key.startsWith("Shortcuts/")) {
-        if (!SimpleValueHandler(QVariant::KeySequence).check(val)) {
-            handleNewErrorState(true);
-        }
-        if (m_hasError) {
-            return QVariant();
-        }
-    } else { // general option
-        ValueHandler* handler = ::recognizedGeneralOptions[key].get();
-        if (!handler->check(val)) {
-            handleNewErrorState(true);
-        }
-        if (m_hasError) {
-            return handler->fallback();
-        }
-        return handler->get(val);
+    if (val.isValid() && !handler->check(val)) {
+        handleNewErrorState(true);
     }
-    return val;
+    if (m_hasError) {
+        return handler->fallback();
+    }
+
+    return handler->value(val);
 }
 
 /// Wrapper for QSettings::contains, but returns false if there is an error.
@@ -990,13 +1027,15 @@ bool ConfigHandler::isValidShortcutName(const QString& name) const
     return false;
 }
 
+// ERROR HANDLING
+
 void ConfigHandler::checkAndHandleError() const
 {
     if (!QFile(m_settings.fileName()).exists()) {
         handleNewErrorState(false);
     } else {
         handleNewErrorState(!checkUnrecognizedSettings() ||
-                            !checkShortcutConflicts());
+                            !checkShortcutConflicts() || !checkSemantics());
     }
 
     ensureFileWatched();
@@ -1044,6 +1083,19 @@ bool ConfigHandler::checkShortcutConflicts() const
     return ok;
 }
 
+bool ConfigHandler::checkSemantics() const
+{
+    QStringList allKeys = m_settings.allKeys();
+    for (const QString& key : allKeys) {
+        QVariant val = m_settings.value(key);
+        // obtain a handler for the value
+        if (val.isValid() && !valueHandler(key)->check(val)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void ConfigHandler::handleNewErrorState(bool error) const
 {
     bool hadError = m_hasError;
@@ -1087,4 +1139,19 @@ void ConfigHandler::ensureFileWatched() const
     ) {
         m_configWatcher->addPath(m_settings.fileName());
     }
+}
+
+QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
+  const QString& key) const
+{
+    QSharedPointer<ValueHandler> handler;
+    if (m_settings.group() == QStringLiteral("Shortcuts") ||
+        key.startsWith("Shortcuts/")) {
+        QString _key = key;
+        _key.replace("Shortcuts/", "");
+        handler.reset(new KeySequence(_key));
+    } else { // General group
+        handler = ::recognizedGeneralOptions.value(key);
+    }
+    return handler;
 }

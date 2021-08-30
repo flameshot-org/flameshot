@@ -10,6 +10,9 @@
 #include <QVector>
 
 class QFileSystemWatcher;
+class ValueHandler;
+template<class T>
+class QSharedPointer;
 
 class ConfigHandler : public QObject
 {
@@ -111,7 +114,7 @@ public:
     int undoLimit();
 
     bool setShortcut(const QString&, const QString&);
-    const QString& shortcut(const QString&);
+    QString shortcut(const QString&);
 
     QString configFilePath() const;
 
@@ -127,6 +130,7 @@ public:
     void checkAndHandleError() const;
     bool checkUnrecognizedSettings() const;
     bool checkShortcutConflicts() const;
+    bool checkSemantics() const;
     void handleNewErrorState(bool error) const;
     bool hasError() const;
     QString errorMessage() const;
@@ -145,4 +149,5 @@ private:
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
+    QSharedPointer<ValueHandler> valueHandler(const QString& key) const;
 };
