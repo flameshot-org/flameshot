@@ -110,6 +110,8 @@ public:
             return process(val);
         }
     }
+    virtual QString str(const QVariant& val) { return val.toString(); }
+    virtual QVariant set(const QVariant& val) { return val; }
     virtual QVariant fallback() { return QVariant(); };
 
 protected:
@@ -162,6 +164,10 @@ public:
         return QColor::isValidColor(val.toString());
     }
     QVariant fallback() override { return m_def; }
+    QString str(const QVariant& val) override
+    {
+        return QString(val.value<QColor>().name());
+    }
 
 private:
     QColor m_def;
@@ -659,7 +665,7 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
     assertKeyRecognized(key);
     if (!hasError()) {
         m_skipNextErrorCheck = true;
-        m_settings.setValue(key, value);
+        m_settings.setValue(key, valueHandler(key)->str(value));
     }
 }
 
