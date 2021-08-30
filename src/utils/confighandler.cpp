@@ -48,18 +48,25 @@ bool verifyLaunchFile()
  * Use this to declare a setting with a type that is either unrecognized by
  * QVariant or if you need to place additional constraints on its value.
  * @param KEY Name of the setting as in the config file
- *            (a c-style string literal)
+ *            (a C-style string literal)
  * @param TYPE An instance of a `ValueHandler` derivative. This must be
- * specified in the form of a constructor, or the macro will misbehave.
+ *             specified in the form of a constructor, or the macro will
+ *             misbehave.
  */
 #define OPTION(KEY, TYPE)                                                      \
     {                                                                          \
         QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
     }
 
-// This map contains all the information that is needed to parse, verify and
-// preprocess each configuration option in the General section.
-// NOTE: Please keep it well structured
+/**
+ * This map contains all the information that is needed to parse, verify and
+ * preprocess each configuration option in the General section.
+ * It is structured so that three columns stand out:
+ *
+ *   KEY TYPE DEFAULT_VALUE
+ *
+ * NOTE: Please keep it well structured
+ */
 static QMap<class QString, QSharedPointer<ValueHandler>>
   recognizedGeneralOptions = {
       // clang-format off
@@ -253,8 +260,8 @@ QString ConfigHandler::saveAsFileExtension()
 
 void ConfigHandler::setAllTheButtons()
 {
-    QList<int> buttons =
-      ButtonList::toIntList(CaptureToolButton::getIterableButtonTypes());
+    QList<CaptureToolButton::ButtonType> buttons =
+      CaptureToolButton::getIterableButtonTypes();
     setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
 }
 
@@ -433,6 +440,14 @@ QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 
 // ERROR HANDLING
 
+/**
+ * @brief Parse the configuration to find any errors in it.
+ *
+ * If the error state changes as a result of the check, it will perform the
+ * appropriate action, e.g. notify the user.
+ *
+ * @see ConfigHandler::setErrorState for all the actions.
+ */
 void ConfigHandler::checkAndHandleError() const
 {
     if (!QFile(m_settings.fileName()).exists()) {
@@ -445,6 +460,14 @@ void ConfigHandler::checkAndHandleError() const
     ensureFileWatched();
 }
 
+/**
+ * @brief Parse the config to find settings with unrecognized names.
+ * @return Whether the config passes this check.
+ *
+ * @note An unrecognized option is one that is not included in
+ * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
+ * group the option belongs to.
+ */
 bool ConfigHandler::checkUnrecognizedSettings() const
 {
     // sort the config keys by group
@@ -464,7 +487,10 @@ bool ConfigHandler::checkUnrecognizedSettings() const
     return true; // ok
 }
 
-/// Check if there are multiple shortcuts with the same key binding.
+/**
+ * @brief Check if there are multiple shortcuts with the same key binding.
+ * @return Whether the config passes this check.
+ */
 bool ConfigHandler::checkShortcutConflicts() const
 {
     bool ok = true;
@@ -483,12 +509,15 @@ bool ConfigHandler::checkShortcutConflicts() const
     return ok;
 }
 
+/**
+ * @brief Check each config value semantically.
+ * @return Whether the config passes this check.
+ */
 bool ConfigHandler::checkSemantics() const
 {
     QStringList allKeys = m_settings.allKeys();
     for (const QString& key : allKeys) {
         QVariant val = m_settings.value(key);
-        // obtain a handler for the value
         if (val.isValid() && !valueHandler(key)->check(val)) {
             return false;
         }
@@ -496,6 +525,14 @@ bool ConfigHandler::checkSemantics() const
     return true;
 }
 
+/**
+ * @brief Update the tracked error state of the config.
+ * @param error The new error state.
+ *
+ * The error state is tracked so that signals are not emitted and the user is
+ * not spammed every time the config file changes. Instead, only changes in
+ * error state get reported.
+ */
 void ConfigHandler::setErrorState(bool error) const
 {
     bool hadError = m_hasError;
@@ -513,6 +550,11 @@ void ConfigHandler::setErrorState(bool error) const
     }
 }
 
+/**
+ * @brief Return if the config contains an error.
+ *
+ * If an error check is due, it will be performed.
+ */
 bool ConfigHandler::hasError() const
 {
     if (m_errorCheckPending) {
@@ -522,6 +564,7 @@ bool ConfigHandler::hasError() const
     return m_hasError;
 }
 
+/// Error message that can be used by other classes as well
 QString ConfigHandler::errorMessage() const
 {
     return tr("The configuration contains an error. Falling back to default.");
@@ -541,6 +584,14 @@ void ConfigHandler::ensureFileWatched() const
     }
 }
 
+/**
+ * @brief Obtain a `ValueHandler` for the config option with the given key.
+ * @return Smart pointer to the handler.
+ *
+ * @note If the key is from the "General" group, the `recognizedGeneralOptions`
+ * map is looked up. If it is from "Shortcuts", a generic `KeySequence` value
+ * handler is returned.
+ */
 QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
   const QString& key) const
 {
@@ -556,6 +607,11 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
     return handler;
 }
 
+/**
+ * This is used so that we can check if there is a mismatch between a config key
+ * and its getter function.
+ * Debug: throw an exception; Release: set error state
+ */
 void ConfigHandler::assertKeyRecognized(const QString& key) const
 {
     bool recognized = key.startsWith(QStringLiteral("Shortcuts/"))

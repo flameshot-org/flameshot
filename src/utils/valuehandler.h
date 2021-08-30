@@ -9,38 +9,72 @@
 class QVariant;
 
 /**
- * Handles the value of a configuration option.
+ * @brief Handles the value of a configuration option (abstract class).
  *
- * Each configuration option should usually be handled in three different ways:
- * - have its value checked for errors (type, format, etc.)
- * - have its value (that was taken from the config file) adapted for proper use
+ * Each configuration option is represented as a `QVariant`. If the option was
+ * not specified in a config file, the `QVariant` will be invalid.
+ *
+ * Each option will usually be handled in three different ways:
+ * - have its value checked for semantic errors (type, format, etc).
+ *   @see ValueHandler::check
+ * - have its value (that was taken from the config file) adapted for proper
+ * use.
+ *   @see ValueHandler::value
  * - provided a fallback value in case: the config does not explicitly specify
  *   it, or the config contains an error and is globally falling back to
- *   defaults
+ *   defaults.
+ *   @see ValueHandler::fallback.
+ * - some options may want to be stored in the config file in a different way
+ *   than the default one provided by `QVariant`.
+ *   @see ValueHandler::representation
  *
- * Subclass this class to handle custom value types.
- *
- * If you wish to handle simple value types (those supported by QVariant) you
- * should use `SimpleValueHandler`. Note that you can't use that class if the
- * value has some custom constraints on it. TODO
- *
- * @note You will only need to override `get` if you have to change the value
- * that was read from the config file. If you are fine with the value as long as
- * it is error-free, you don't have to override it.
- *
- * @note Keep in mind that you will probably want `check` to return `true` for
- * invalid QVariant's (option not found in config file).
+ * @note Please see the documentation of the functions to learn when you should
+ * override each.
  *
  */
 class ValueHandler
 {
 public:
+    /**
+     * @brief Check the value semantically.
+     * @param val The value that was read from the config file
+     * @return Whether the value is correct
+     * @note The function should presume that `val.isValid()` is true.
+     */
     virtual bool check(const QVariant& val) = 0;
-    virtual QVariant value(const QVariant& val);
+    /**
+     * @brief Adapt the value for proper use.
+     * @param val The value that was read from the config file
+     * @return The modified value
+     *
+     * If the value is invalid (unspecified in the config) or does not pass
+     * `check`, the fallback will be returned. Otherwise the value is processed
+     * by `process` and then returned.
+     *
+     * @note Cannot be overriden
+     * @see fallback, process
+     */
+    QVariant value(const QVariant& val);
+    /**
+     * @brief Fallback value (default value).
+     */
     virtual QVariant fallback();
+    /**
+     * @brief Return the representaion of the value in the config file.
+     *
+     * Override this if you want to write the value in a different format than
+     * the one provided by `QVariant`.
+     */
     virtual QVariant representation(const QVariant& val);
 
 protected:
+    /**
+     * @brief Process a value, presuming it is a valid `QVariant`.
+     * @param val The value that was read from the config file
+     * @return The processed value
+     * @note You will usually want to override this. In rare cases, you may want
+     * to override `value`.
+     */
     virtual QVariant process(const QVariant& val);
 };
 
@@ -130,7 +164,6 @@ class ButtonList : public ValueHandler
 {
 public:
     bool check(const QVariant& val) override;
-    QVariant value(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
     QVariant representation(const QVariant& val) override;

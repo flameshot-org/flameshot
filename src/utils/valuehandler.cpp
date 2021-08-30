@@ -183,7 +183,8 @@ QVariant FilenamePattern::fallback()
 
 // BUTTON LIST
 
-using BList = QList<CaptureToolButton::ButtonType>;
+using BType = CaptureToolButton::ButtonType;
+using BList = QList<BType>;
 
 bool ButtonList::check(const QVariant& val)
 {
@@ -197,23 +198,20 @@ bool ButtonList::check(const QVariant& val)
     return true;
 }
 
-QVariant ButtonList::value(const QVariant& val)
+// Helper
+void sortButtons(BList& buttons)
 {
-    // Get unsorted button list
-    BList buttons = ValueHandler::value(val).value<BList>();
-
-    using BT = CaptureToolButton::ButtonType;
-    std::sort(buttons.begin(), buttons.end(), [](BT a, BT b) {
+    std::sort(buttons.begin(), buttons.end(), [](BType a, BType b) {
         return CaptureToolButton::getPriorityByButton(a) <
                CaptureToolButton::getPriorityByButton(b);
     });
-    return QVariant::fromValue(buttons);
 }
 
 QVariant ButtonList::process(const QVariant& val)
 {
     QList<int> intButtons = val.value<QList<int>>();
     auto buttons = ButtonList::fromIntList(intButtons);
+    sortButtons(buttons);
     return QVariant::fromValue(buttons);
 }
 
@@ -222,7 +220,7 @@ QVariant ButtonList::fallback()
     auto buttons = CaptureToolButton::getIterableButtonTypes();
     buttons.removeOne(CaptureToolButton::TYPE_SIZEDECREASE);
     buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
-    // TODO: remove toList in v1.0
+    sortButtons(buttons);
     return QVariant::fromValue(buttons);
 }
 

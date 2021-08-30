@@ -15,16 +15,17 @@ template<class T>
 class QSharedPointer;
 
 /**
- * Implements a getter for a config option. `KEY` is the option key as used with
- * `QSettings` and `TYPE` is the C++ type. `KEY` is simultaneously the name of
- * the getter function.
+ * Declare and implement a getter for a config option. `KEY` is the option key
+ * as it appears in the config file, `TYPE` is the C++ type. At the same time
+ * `KEY` is the name of the generated getter function.
  */
 #define CONFIG_GETTER(KEY, TYPE)                                               \
     TYPE KEY() { return value(QStringLiteral(#KEY)).value<TYPE>(); }
 
 /**
- * Implements a setter for a config option. `FUNC` is the name of the function,
- * `KEY` is the option key as used with `QSettings` and `TYPE` is the C++ type.
+ * Declare and implement a setter for a config option. `FUNC` is the name of the
+ * generated function, `KEY` is the option key as it appears in the config file
+ * and `TYPE` is the C++ type.
  */
 #define CONFIG_SETTER(FUNC, KEY, TYPE)                                         \
     void FUNC(const TYPE& value)                                               \
@@ -34,9 +35,9 @@ class QSharedPointer;
 
 /**
  * Combines the functionality of `CONFIG_GETTER` and `CONFIG_SETTER`. `GETFUNC`
- * is simultaneously the name of the getter function and the option key as used
- * with `QSettings`. `SETFUNC` is the name of the setter function. `TYPE` is the
- * C++ type of the value.
+ * is simultaneously the name of the getter function and the option key as it
+ * appears in the config file. `SETFUNC` is the name of the setter function.
+ * `TYPE` is the C++ type of the value.
  */
 #define CONFIG_GETTER_SETTER(GETFUNC, SETFUNC, TYPE)                           \
     CONFIG_GETTER(GETFUNC, TYPE)                                               \
