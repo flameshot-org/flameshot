@@ -246,27 +246,28 @@ void ButtonHandler::resetRegionTrack()
 
 void ButtonHandler::updateBlockedSides()
 {
+    QRegion screenRegion{};
+    for (const QRect& rect : m_screenRegions) {
+        screenRegion += rect;
+    }
+
     const int EXTENSION = m_separator * 2 + m_buttonBaseSize;
     // Right
     QPoint pointA(m_selection.right() + EXTENSION, m_selection.bottom());
     QPoint pointB(pointA.x(), m_selection.top());
-    m_blockedRight =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedRight = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Left
     pointA.setX(m_selection.left() - EXTENSION);
     pointB.setX(pointA.x());
-    m_blockedLeft =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedLeft = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Bottom
     pointA = QPoint(m_selection.left(), m_selection.bottom() + EXTENSION);
     pointB = QPoint(m_selection.right(), pointA.y());
-    m_blockedBotton =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedBotton = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Top
     pointA.setY(m_selection.top() - EXTENSION);
     pointB.setY(pointA.y());
-    m_blockedTop =
-      !(m_screenRegions.contains(pointA) && m_screenRegions.contains(pointB));
+    m_blockedTop = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Auxiliary
     m_oneHorizontalBlocked =
       (!m_blockedRight && m_blockedLeft) || (m_blockedRight && !m_blockedLeft);
@@ -377,13 +378,10 @@ bool ButtonHandler::contains(const QPoint& p) const
 
 void ButtonHandler::updateScreenRegions(const QVector<QRect>& rects)
 {
-    m_screenRegions = QRegion();
-    for (const QRect& rect : rects) {
-        m_screenRegions += rect;
-    }
+    m_screenRegions = rects;
 }
 
 void ButtonHandler::updateScreenRegions(const QRect& rect)
 {
-    m_screenRegions = QRegion(rect);
+    m_screenRegions = {rect};
 }
