@@ -626,7 +626,7 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
             .arg(key)
             .toStdString());
 #else
-        setNewErrorState(true);
+        setErrorState(true);
 #endif
     }
 }
