@@ -77,7 +77,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
     OPTION("checkForUpdates"             ,Bool               ( true          )),
 #if defined(Q_OS_MACOS)
-    CUSTOM("startupLaunch"               ,Bool               ( false         )),
+    OPTION("startupLaunch"               ,Bool               ( false         )),
 #else
     OPTION("startupLaunch"               ,Bool               ( true          )),
 #endif
