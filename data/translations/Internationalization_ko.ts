@@ -1330,14 +1330,14 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
         <source>Invert</source>
         <translation>거꾸로 하다</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
-        <source>Set Inverter as the paint tool</source>
-        <translation>인버터를 페인트 도구로 설정</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>거꾸로 된 스크린샷 저장</translation>
     </message>
 </context>
 <context>

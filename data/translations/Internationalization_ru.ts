@@ -1491,14 +1491,14 @@ You can find me in the system tray.</source>
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
         <source>Invert</source>
         <translation>Инвертировать</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
-        <source>Set Inverter as the paint tool</source>
-        <translation>Установите инвертор как инструмент для рисования</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>Сохраните перевернутый снимок</translation>
     </message>
 </context>
 <context>

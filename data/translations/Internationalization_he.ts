@@ -1312,14 +1312,14 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
         <source>Invert</source>
         <translation>הפוך</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
-        <source>Set Inverter as the paint tool</source>
-        <translation>הגדר את המהפך ככלי הצביעה</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>שמור את הלכידה ההפוכה</translation>
     </message>
 </context>
 <context>

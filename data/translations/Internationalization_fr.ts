@@ -1323,14 +1323,14 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
         <source>Invert</source>
         <translation>Inverser</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
-        <source>Set Inverter as the paint tool</source>
-        <translation>Définir l'onduleur comme outil de peinture</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>Sauvegarder la capture inversée</translation>
     </message>
 </context>
 <context>

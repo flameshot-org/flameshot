@@ -1379,14 +1379,14 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
 <context>
     <name>InvertTool</name>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="26"/>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
         <source>Invert</source>
         <translation>Revertet</translation>
     </message>
     <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="36"/>
-        <source>Set Inverter as the paint tool</source>
-        <translation>Defina o Inversor como uma ferramenta de pintura</translation>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
+        <source>Save the inverted capture</source>
+        <translation>Salve a imagem invertida</translation>
     </message>
 </context>
 <context>
