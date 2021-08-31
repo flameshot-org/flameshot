@@ -59,7 +59,11 @@ void InvertTool::process(QPainter& painter, const QPixmap& pixmap)
 void InvertTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    Q_UNUSED(painter)
+    painter.fillRect(std::min(points().first.x(), points().second.x()),
+                     std::min(points().first.y(), points().second.y()),
+                     std::abs(points().first.x() - points().second.x()),
+                     std::abs(points().first.y() - points().second.y()),
+                     QBrush(Qt::black));
 }
 
 void InvertTool::paintMousePreview(QPainter& painter,
