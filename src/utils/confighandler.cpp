@@ -99,7 +99,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
     OPTION("buttons"                     ,ButtonList         ( {}            )),
     // Filename Editor tab
-    OPTION("filenamePattern"             ,String             ( {}            )),
+    OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others
     // TODO obsolete?
     OPTION("saveAfterCopyPath"           ,ExistingDir        (               )),

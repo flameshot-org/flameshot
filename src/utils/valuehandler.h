@@ -158,6 +158,7 @@ class FilenamePattern : public ValueHandler
 {
     bool check(const QVariant&) override;
     QVariant fallback() override;
+    QVariant process(const QVariant&) override;
 };
 
 class ButtonList : public ValueHandler

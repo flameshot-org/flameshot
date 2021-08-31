@@ -181,6 +181,12 @@ QVariant FilenamePattern::fallback()
     return ConfigHandler().filenamePatternDefault();
 }
 
+QVariant FilenamePattern::process(const QVariant& val)
+{
+    QString str = val.toString();
+    return !str.isEmpty() ? val : fallback();
+}
+
 // BUTTON LIST
 
 using BType = CaptureToolButton::ButtonType;
