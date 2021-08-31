@@ -255,19 +255,23 @@ void ButtonHandler::updateBlockedSides()
     // Right
     QPoint pointA(m_selection.right() + EXTENSION, m_selection.bottom());
     QPoint pointB(pointA.x(), m_selection.top());
-    m_blockedRight = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
+    m_blockedRight =
+      !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Left
     pointA.setX(m_selection.left() - EXTENSION);
     pointB.setX(pointA.x());
-    m_blockedLeft = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
+    m_blockedLeft =
+      !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Bottom
     pointA = QPoint(m_selection.left(), m_selection.bottom() + EXTENSION);
     pointB = QPoint(m_selection.right(), pointA.y());
-    m_blockedBotton = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
+    m_blockedBotton =
+      !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Top
     pointA.setY(m_selection.top() - EXTENSION);
     pointB.setY(pointA.y());
-    m_blockedTop = !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
+    m_blockedTop =
+      !(screenRegion.contains(pointA) && screenRegion.contains(pointB));
     // Auxiliary
     m_oneHorizontalBlocked =
       (!m_blockedRight && m_blockedLeft) || (m_blockedRight && !m_blockedLeft);
@@ -383,5 +387,5 @@ void ButtonHandler::updateScreenRegions(const QVector<QRect>& rects)
 
 void ButtonHandler::updateScreenRegions(const QRect& rect)
 {
-    m_screenRegions = {rect};
+    m_screenRegions = { rect };
 }
