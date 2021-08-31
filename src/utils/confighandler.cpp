@@ -374,8 +374,8 @@ QVariant ConfigHandler::value(const QString& key) const
 
 const QSet<QString>& ConfigHandler::recognizedGeneralOptions() const
 {
-    static QSet<QString> options = QSet(::recognizedGeneralOptions.keyBegin(),
-                                        ::recognizedGeneralOptions.keyEnd());
+    static QSet<QString> options =
+      QSet<QString>::fromList(::recognizedGeneralOptions.keys());
     return options;
 }
 
