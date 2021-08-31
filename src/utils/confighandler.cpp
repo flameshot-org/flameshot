@@ -126,7 +126,7 @@ ConfigHandler::ConfigHandler()
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
         ensureFileWatched();
-        QObject::connect(m_configWatcher.get(),
+        QObject::connect(m_configWatcher.data(),
                          &QFileSystemWatcher::fileChanged,
                          [](const QString& fileName) {
                              emit getInstance()->fileChanged();
