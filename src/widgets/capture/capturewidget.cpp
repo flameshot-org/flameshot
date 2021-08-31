@@ -1726,10 +1726,9 @@ void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
                  "gui` again to apply it.");
     }
 
-    QFontMetrics fm = painter->fontMetrics();
-    int width = fm.horizontalAdvance(msg), height = fm.height();
-    QRect textRect(
-      size().width() - width, size().height() - height, width + 1, height);
+    auto textRect = painter->fontMetrics().boundingRect(msg);
+    int w = textRect.width(), h = textRect.height();
+    textRect = { size().width() - w, size().height() - h, w + 100, h + 100 };
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
 
     if (!textRect.contains(QCursor::pos(currentScreen))) {
