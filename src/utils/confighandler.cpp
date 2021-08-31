@@ -61,15 +61,12 @@ bool verifyLaunchFile()
 /**
  * This map contains all the information that is needed to parse, verify and
  * preprocess each configuration option in the General section.
- * It is structured so that three columns stand out:
- *
- *   KEY TYPE DEFAULT_VALUE
- *
  * NOTE: Please keep it well structured
  */
+// clang-format off
 static QMap<class QString, QSharedPointer<ValueHandler>>
   recognizedGeneralOptions = {
-      // clang-format off
+//         KEY                            TYPE                 DEFAULT_VALUE
     OPTION("showHelp"                    ,Bool               ( true          )),
     OPTION("showSidePanelButton"         ,Bool               ( true          )),
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
@@ -111,8 +108,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
     OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
-      // clang-format on
   };
+// clang-format on
 
 // CLASS CONFIGHANDLER
 
