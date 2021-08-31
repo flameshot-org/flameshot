@@ -1326,19 +1326,6 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     </message>
 </context>
 <context>
-    <name>InvertTool</name>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
-        <source>Invert</source>
-        <translation>Invertieren</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Speichere die invertierte Aufnahme</translation>
-    </message>
-</context>
-<context>
     <name>ScreenGrabber</name>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>

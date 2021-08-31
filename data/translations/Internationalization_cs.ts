@@ -1377,19 +1377,6 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     </message>
 </context>
 <context>
-    <name>InvertTool</name>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
-        <source>Invert</source>
-        <translation>Invertovat</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Uložte obrácené zachycení</translation>
-    </message>
-</context>
-<context>
     <name>ScreenGrabber</name>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>

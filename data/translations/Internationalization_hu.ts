@@ -1126,19 +1126,6 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
 </context>
 <context>
-    <name>InvertTool</name>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
-        <source>Invert</source>
-        <translation>Fordított</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Mentse a fordított képernyőképet</translation>
-    </message>
-</context>
-<context>
     <name>ScreenGrabber</name>
     <message>
         <source>Unable to capture screen</source>

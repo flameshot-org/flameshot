@@ -1489,19 +1489,6 @@ You can find me in the system tray.</source>
     </message>
 </context>
 <context>
-    <name>InvertTool</name>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="32"/>
-        <source>Invert</source>
-        <translation>Инвертировать</translation>
-    </message>
-    <message>
-        <location filename="../../src/tools/invert/inverttool.cpp" line="42"/>
-        <source>Save the inverted capture</source>
-        <translation>Сохраните перевернутый снимок</translation>
-    </message>
-</context>
-<context>
     <name>ScreenGrabber</name>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="143"/>
