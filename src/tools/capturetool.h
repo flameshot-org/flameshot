@@ -27,13 +27,14 @@ enum class ToolType
     RECTANGLE,
     REDO,
     SAVE,
+    INVERT,
     SELECTION,
     SIZEINDICATOR,
     TEXT,
     UNDO,
     UPLOAD,
     SIZEINCREASE,
-    SIZEDECREASE
+    SIZEDECREASE,
 };
 
 class CaptureTool : public QObject
