@@ -272,7 +272,7 @@ QString ConfigHandler::filenamePatternDefault()
 void ConfigHandler::setDefaultSettings()
 {
     foreach (const QString& key, m_settings.allKeys()) {
-        if (key.startsWith("Shortcuts/")) {
+        if (isShortcut(key)) {
             // Do not reset Shortcuts
             continue;
         }
@@ -429,7 +429,7 @@ QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
         if (group == "General" && !key.contains('/')) {
             keys.insert(key);
         } else if (key.startsWith(group + "/")) {
-            keys.insert(key.mid(group.size() + 1));
+            keys.insert(baseName(key));
         }
     }
     return keys;
@@ -595,8 +595,7 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
   const QString& key) const
 {
     QSharedPointer<ValueHandler> handler;
-    if (m_settings.group() == QStringLiteral("Shortcuts") ||
-        key.startsWith("Shortcuts/")) {
+    if (isShortcut(key)) {
         QString _key = key;
         _key.replace("Shortcuts/", "");
         handler.reset(new KeySequence(_key));
@@ -613,8 +612,8 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
  */
 void ConfigHandler::assertKeyRecognized(const QString& key) const
 {
-    bool recognized = key.startsWith(QStringLiteral("Shortcuts/"))
-                        ? recognizedShortcutNames().contains(key.mid(10))
+    bool recognized = isShortcut(key)
+                        ? recognizedShortcutNames().contains(baseName(key))
                         : ::recognizedGeneralOptions.contains(key);
     if (!recognized) {
 #if defined(QT_DEBUG)
@@ -628,6 +627,17 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
         setErrorState(true);
 #endif
     }
+}
+
+bool ConfigHandler::isShortcut(const QString& key) const
+{
+    return m_settings.group() == QStringLiteral("Shortcuts") ||
+           key.startsWith(QStringLiteral("Shortcuts/"));
+}
+
+QString ConfigHandler::baseName(QString key) const
+{
+    return QFileInfo(key).baseName();
 }
 
 // STATIC MEMBER DEFINITIONS
