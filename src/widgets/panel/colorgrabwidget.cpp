@@ -6,6 +6,7 @@
 #include <QKeyEvent>
 #include <QPainter>
 #include <QShortcut>
+#include <QTimer>
 
 // Width and height are the same
 #define WIDTH 165
@@ -63,7 +64,7 @@ bool ColorGrabWidget::eventFilter(QObject* obj, QEvent* event)
         return true;
     } else if (event->type() == QEvent::MouseButtonPress) {
         m_mousePressReceived = true;
-        show();
+        QTimer::singleShot(500, this, [this]() { show(); });
         return true;
     } else if (event->type() == QEvent::MouseButtonRelease) {
         if (!m_mousePressReceived) {
