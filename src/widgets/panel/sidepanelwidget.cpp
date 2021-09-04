@@ -6,6 +6,7 @@
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
+#include <QApplication>
 #include <QFormLayout>
 #include <QKeyEvent>
 #include <QLabel>
@@ -41,7 +42,6 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
       isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
     QIcon grabIcon(modifier + "colorize.svg");
     m_colorGrabButton = new QPushButton(grabIcon, QLatin1String(""));
-    m_colorGrabber = new ColorGrabWidget(m_pixmap, this);
     updateGrabButton(false);
     m_layout->addWidget(m_colorGrabButton);
     m_layout->addWidget(m_colorWheel);
@@ -55,11 +55,51 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::thicknessChanged,
             this,
             &SidePanelWidget::updateThickness);
-    // color grab sigslots
+    // color grab button sigslots
     connect(m_colorGrabButton,
             &QPushButton::pressed,
             this,
             &SidePanelWidget::startColorGrab);
+    // color wheel sigslots
+    connect(m_colorWheel,
+            &color_widgets::ColorWheel::mouseReleaseOnColor,
+            this,
+            &SidePanelWidget::colorChanged);
+    connect(m_colorWheel,
+            &color_widgets::ColorWheel::colorChanged,
+            this,
+            &SidePanelWidget::updateColorNoWheel);
+}
+
+void SidePanelWidget::updateColor(const QColor& c)
+{
+    m_color = c;
+    updateColorNoWheel(c);
+    m_colorWheel->setColor(c);
+}
+
+void SidePanelWidget::updateThickness(const int& t)
+{
+    m_thickness = qBound(0, t, 100);
+    m_thicknessSlider->setValue(m_thickness);
+}
+
+void SidePanelWidget::updateColorNoWheel(const QColor& c)
+{
+    m_colorLabel->setStyleSheet(
+      QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
+}
+
+void SidePanelWidget::updateCurrentThickness(int value)
+{
+    emit thicknessChanged(value);
+}
+
+void SidePanelWidget::startColorGrab()
+{
+    m_revertColor = m_color;
+    m_colorGrabber = new ColorGrabWidget(m_pixmap);
+    updateGrabButton(true);
     connect(m_colorGrabber,
             &ColorGrabWidget::colorUpdated,
             this,
@@ -72,72 +112,22 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &ColorGrabWidget::grabAborted,
             this,
             &SidePanelWidget::onColorGrabAborted);
-    // color wheel sigslots
-    connect(m_colorWheel,
-            &color_widgets::ColorWheel::mouseReleaseOnColor,
-            this,
-            &SidePanelWidget::colorChanged);
-    connect(m_colorWheel,
-            &color_widgets::ColorWheel::colorChanged,
-            this,
-            &SidePanelWidget::updateColorNoWheel);
-
-}
-
-void SidePanelWidget::updateColor(const QColor& c)
-{
-    m_color = c;
-    m_colorLabel->setStyleSheet(
-      QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
-    m_colorWheel->setColor(m_color);
-}
-
-void SidePanelWidget::updateThickness(const int& t)
-{
-    m_thickness = qBound(0, t, 100);
-    m_thicknessSlider->setValue(m_thickness);
-}
-
-void SidePanelWidget::updateColorNoWheel(const QColor& c)
-{
-    m_color = c;
-    m_colorLabel->setStyleSheet(
-      QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
-}
-
-void SidePanelWidget::updateCurrentThickness(int value)
-{
-    emit thicknessChanged(value);
-}
-
-void SidePanelWidget::startColorGrab()
-{
-    updateGrabButton(true);
     m_colorGrabber->startGrabbing();
 }
 
 void SidePanelWidget::onColorGrabFinished()
 {
-    setFocus();
-    updateGrabButton(false);
+    finalizeGrab();
     m_color = m_colorGrabber->color();
     emit colorChanged(m_color);
 }
 
 void SidePanelWidget::onColorGrabAborted()
 {
+    finalizeGrab();
     // Restore color that was selected before we started grabbing
-    updateColor(m_color);
+    updateColor(m_revertColor);
     updateGrabButton(false);
-}
-
-bool SidePanelWidget::handleMouseButtonPressed(QMouseEvent* e)
-{
-// TODO what is this
-//    if (m_colorGrabButton->geometry().contains(e->pos()) ||
-//        e->button() == Qt::RightButton)
-//        updateColorNoWheel(m_color);
-    return true;
 }
 
 void SidePanelWidget::onColorUpdated(const QColor& color)
@@ -152,4 +142,12 @@ void SidePanelWidget::updateGrabButton(const bool activated)
     } else {
         m_colorGrabButton->setText(tr("Grab Color"));
     }
+}
+
+void SidePanelWidget::finalizeGrab()
+{
+    updateGrabButton(false);
+    // Unhovers the button - a minor detail
+    QEvent leaveEvent(QEvent::Leave);
+    qApp->sendEvent(m_colorGrabButton, &leaveEvent);
 }

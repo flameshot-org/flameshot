@@ -21,20 +21,19 @@ signals:
     void grabAborted();
 
 private:
-
+    bool eventFilter(QObject* obj, QEvent* event) override;
     void paintEvent(QPaintEvent* e);
-    void hideEvent(QHideEvent* e) override;
-    void mousePressEvent(QMouseEvent* e) override;
-    void mouseReleaseEvent(QMouseEvent* e) override;
-    void mouseMoveEvent(QMouseEvent* e) override;
-    void keyPressEvent(QKeyEvent* e) override;
+    void showEvent(QShowEvent* event) override;
 
-    QColor getColorAtPoint(const QPoint& point);
+    QPoint cursorPos() const;
+    QColor getColorAtPoint(const QPoint& point) const;
+    void finalize();
 
     QPixmap* m_pixmap;
+    QImage m_previewImage;
     QColor m_color;
 
-    bool m_ignoreFirstMouseRelease = false;
+    bool m_mousePressReceived;
 };
 
 #endif // COLORGRABWIDGET_H

@@ -42,10 +42,8 @@ private slots:
     void onColorUpdated(const QColor& color);
 
 private:
-    bool handleKeyPress(QKeyEvent* e);
-    bool handleMouseButtonPressed(QMouseEvent* e);
-
     void updateGrabButton(const bool activated);
+    void finalizeGrab();
 
     QVBoxLayout* m_layout;
     QPushButton* m_colorGrabButton;
@@ -54,6 +52,7 @@ private:
     QLabel* m_colorLabel;
     QPixmap* m_pixmap;
     QColor m_color;
+    QColor m_revertColor;
     QSlider* m_thicknessSlider;
     int m_thickness;
 };
