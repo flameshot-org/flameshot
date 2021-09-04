@@ -9,6 +9,7 @@
 class QVBoxLayout;
 class QPushButton;
 class QLabel;
+class QLineEdit;
 class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
@@ -29,10 +30,8 @@ signals:
 
 public slots:
     void updateColor(const QColor& c);
-    void updateThickness(const int& t);
-
-private slots:
     void updateColorNoWheel(const QColor& c);
+    void updateThickness(const int& t);
     void updateCurrentThickness(int value);
 
 private slots:
@@ -45,11 +44,15 @@ private:
     void updateGrabButton(const bool activated);
     void finalizeGrab();
 
+    bool eventFilter(QObject* obj, QEvent* event) override;
+    void hideEvent(QHideEvent* event) override;
+
     QVBoxLayout* m_layout;
     QPushButton* m_colorGrabButton;
     ColorGrabWidget* m_colorGrabber;
     color_widgets::ColorWheel* m_colorWheel;
     QLabel* m_colorLabel;
+    QLineEdit* m_colorHex;
     QPixmap* m_pixmap;
     QColor m_color;
     QColor m_revertColor;

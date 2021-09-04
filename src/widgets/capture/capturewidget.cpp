@@ -956,7 +956,7 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::updateActiveLayer);
 
-    m_sidePanel = new SidePanelWidget(&m_context.screenshot);
+    m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,

@@ -7,10 +7,13 @@
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
 #include <QApplication>
+#include <QDebug> // TODO remove
 #include <QFormLayout>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QShortcut>
 #include <QSlider>
 #include <QVBoxLayout>
 #if defined(Q_OS_MACOS)
@@ -22,6 +25,9 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
   , m_pixmap(p)
 {
     m_layout = new QVBoxLayout(this);
+    if (parent) {
+        parent->installEventFilter(this);
+    }
 
     QFormLayout* colorForm = new QFormLayout();
     m_thicknessSlider = new QSlider(Qt::Horizontal);
@@ -35,6 +41,8 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
 
     m_colorWheel = new color_widgets::ColorWheel(this);
     m_colorWheel->setColor(m_color);
+    m_colorHex = new QLineEdit(this);
+    m_colorHex->setAlignment(Qt::AlignCenter);
 
     QColor background = this->palette().window().color();
     bool isDark = ColorUtils::colorIsDark(background);
@@ -45,6 +53,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     updateGrabButton(false);
     m_layout->addWidget(m_colorGrabButton);
     m_layout->addWidget(m_colorWheel);
+    m_layout->addWidget(m_colorHex);
 
     // thickness sigslots
     connect(m_thicknessSlider,
@@ -55,6 +64,14 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::thicknessChanged,
             this,
             &SidePanelWidget::updateThickness);
+    // color hex editor sigslots
+    connect(m_colorHex, &QLineEdit::editingFinished, this, [=]() {
+        if (!QColor::isValidColor(m_colorHex->text())) {
+            m_colorHex->setText(m_color.name(QColor::HexRgb));
+        } else {
+            updateColor(m_colorHex->text());
+        }
+    });
     // color grab button sigslots
     connect(m_colorGrabButton,
             &QPushButton::pressed,
@@ -78,16 +95,17 @@ void SidePanelWidget::updateColor(const QColor& c)
     m_colorWheel->setColor(c);
 }
 
-void SidePanelWidget::updateThickness(const int& t)
-{
-    m_thickness = qBound(0, t, 100);
-    m_thicknessSlider->setValue(m_thickness);
-}
-
 void SidePanelWidget::updateColorNoWheel(const QColor& c)
 {
     m_colorLabel->setStyleSheet(
       QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
+    m_colorHex->setText(c.name(QColor::HexRgb));
+}
+
+void SidePanelWidget::updateThickness(const int& t)
+{
+    m_thickness = qBound(0, t, 100);
+    m_thicknessSlider->setValue(m_thickness);
 }
 
 void SidePanelWidget::updateCurrentThickness(int value)
@@ -150,4 +168,27 @@ void SidePanelWidget::finalizeGrab()
     // Unhovers the button - a minor detail
     QEvent leaveEvent(QEvent::Leave);
     qApp->sendEvent(m_colorGrabButton, &leaveEvent);
+}
+
+bool SidePanelWidget::eventFilter(QObject* obj, QEvent* event)
+{
+    if (event->type() == QEvent::ShortcutOverride) {
+        // Override Escape shortcut from CaptureWidget
+        auto* e = static_cast<QKeyEvent*>(event);
+        if (e->key() == Qt::Key_Escape && m_colorHex->hasFocus()) {
+            m_colorHex->clearFocus();
+            e->accept();
+            return true;
+        }
+    } else if (event->type() == QEvent::MouseButtonPress) {
+        // Clicks outside of the Color Hex editor
+        m_colorHex->clearFocus();
+    }
+    return QWidget::eventFilter(obj, event);
+}
+
+void SidePanelWidget::hideEvent(QHideEvent* event)
+{
+    QWidget::hideEvent(event);
+    m_colorHex->clearFocus();
 }
