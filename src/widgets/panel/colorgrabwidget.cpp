@@ -43,7 +43,7 @@ QColor ColorGrabWidget::color()
     return m_color;
 }
 
-bool ColorGrabWidget::eventFilter(QObject* obj, QEvent* event)
+bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
 {
     // Consume shortcut events and handle key presses from whole app
     if (event->type() == QEvent::KeyPress ||
@@ -66,7 +66,12 @@ bool ColorGrabWidget::eventFilter(QObject* obj, QEvent* event)
         return true;
     } else if (event->type() == QEvent::MouseButtonPress) {
         m_mousePressReceived = true;
-        QTimer::singleShot(500, this, [this]() { show(); });
+        auto* e = static_cast<QMouseEvent*>(event);
+        if (e->buttons() == Qt::LeftButton && !isVisible()) {
+            QTimer::singleShot(500, this, [this]() { show(); });
+        } else if (e->buttons() == Qt::RightButton) {
+            show();
+        }
         return true;
     } else if (event->type() == QEvent::MouseButtonRelease) {
         if (!m_mousePressReceived) {
@@ -76,8 +81,11 @@ bool ColorGrabWidget::eventFilter(QObject* obj, QEvent* event)
             // closed.
             return false;
         }
-        emit colorGrabbed(getColorAtPoint(cursorPos()));
-        finalize();
+        auto* e = static_cast<QMouseEvent*>(event);
+        if (e->button() == Qt::LeftButton) {
+            emit colorGrabbed(getColorAtPoint(cursorPos()));
+            finalize();
+        }
         return true;
     } else if (event->type() == QEvent::MouseButtonDblClick) {
         return true;
@@ -91,7 +99,7 @@ void ColorGrabWidget::paintEvent(QPaintEvent*)
     painter.drawImage(QRectF(0, 0, width(), height()), m_previewImage);
 }
 
-void ColorGrabWidget::showEvent(QShowEvent* event)
+void ColorGrabWidget::showEvent(QShowEvent*)
 {
     // Set the window geometry
     QRect rect(0, 0, WIDTH, WIDTH);
