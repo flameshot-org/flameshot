@@ -5,8 +5,10 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include <QPainter>
+#include <QScreen>
 #include <QShortcut>
 #include <QTimer>
+#include <stdexcept>
 
 // Width and height are the same
 #define WIDTH 165
