@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
     // Options
     CommandOption pathOption(
       { "p", "path" },
-      QObject::tr("Path where the capture will be saved"),
+      QObject::tr("Existing directory or new file to save to"),
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
@@ -213,14 +213,17 @@ int main(int argc, char* argv[])
     };
 
     const QString pathErr =
-      QObject::tr("Invalid path, it must be a real path in the system");
+      QObject::tr("Invalid path, must be an existing directory or a new file "
+                  "in an existing directory");
     auto pathChecker = [pathErr](const QString& pathValue) -> bool {
-        bool res = QDir(pathValue).exists();
-        if (!res) {
+        QFileInfo fileInfo(pathValue);
+        if (fileInfo.isDir() || fileInfo.dir().exists()) {
+            return true;
+        } else {
             SystemNotification().sendMessage(
               QObject::tr(pathErr.toLatin1().data()));
+            return false;
         }
-        return res;
     };
 
     const QString booleanErr =
@@ -247,9 +250,12 @@ int main(int argc, char* argv[])
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
-    parser.AddOptions(
-      { pathOption, delayOption, rawImageOption, selectionOption },
-      guiArgument);
+    parser.AddOptions({ pathOption,
+                        clipboardOption,
+                        delayOption,
+                        rawImageOption,
+                        selectionOption },
+                      guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
                         pathOption,
@@ -288,11 +294,18 @@ int main(int argc, char* argv[])
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
         QString pathValue = parser.value(pathOption);
+        if (!pathValue.isEmpty()) {
+            pathValue = QDir(pathValue).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
+        bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
         bool isSelection = parser.isSet(selectionOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
+        if (toClipboard) {
+            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        }
         uint id = req.id();
 
         // Send message
@@ -301,7 +314,7 @@ int main(int argc, char* argv[])
           QStringLiteral("/"),
           QLatin1String(""),
           QStringLiteral("graphicCapture"));
-        m << pathValue << delay << id;
+        m << pathValue << toClipboard << delay << id;
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
@@ -315,6 +328,9 @@ int main(int argc, char* argv[])
         }
     } else if (parser.isSet(fullArgument)) { // FULL
         QString pathValue = parser.value(pathOption);
+        if (!pathValue.isEmpty()) {
+            pathValue = QDir(pathValue).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
@@ -370,6 +386,9 @@ int main(int argc, char* argv[])
         int number =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
         QString pathValue = parser.value(pathOption);
+        if (!pathValue.isEmpty()) {
+            pathValue = QDir(pathValue).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);

@@ -42,6 +42,8 @@ public:
 
     void setCheckForUpdatesEnabled(const bool enabled);
 
+    QMap<uint, CaptureRequest>& requests();
+
 signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);

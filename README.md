@@ -211,7 +211,9 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-If you want use Flameshot as a default screenshot utility, chances are you want to launch it using the <kbd>Prt Sc</kbd> key. Flameshot doesn't yet offer a fully-automated option to do so, but you can configure your system to do so.
+Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>option</kbd>-<kbd>shift</kbd>-<kbd>4</kbd> (macOS) as default global hotkeys.
+
+On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but with a bit of configuration you can set this up:
 
 #### On KDE Plasma desktop
 

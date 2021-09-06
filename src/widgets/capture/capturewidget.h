@@ -127,6 +127,7 @@ private:
     void repositionSelection(QRect r);
     void adjustSelection(QMargins m);
     void moveSelection(QPoint p);
+    void updateThickness(int thicknessOffset);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
@@ -156,6 +157,7 @@ private:
     bool m_mouseIsClicked;
     bool m_newSelection;
     bool m_grabbing;
+    bool m_movingSelection;
     bool m_showInitialMsg;
     bool m_captureDone;
     bool m_previewEnabled;
