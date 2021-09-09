@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class SidePanelWidget;
+class OverlayMessage;
 
 class ColorGrabWidget : public QWidget
 {

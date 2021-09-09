@@ -131,7 +131,6 @@ private:
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
-    void drawInitialMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool updateLayersPanel = true,
                        bool drawSelection = false);
@@ -158,7 +157,6 @@ private:
     bool m_newSelection;
     bool m_grabbing;
     bool m_movingSelection;
-    bool m_showInitialMsg;
     bool m_captureDone;
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;

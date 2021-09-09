@@ -3,6 +3,7 @@
 
 #include "colorutils.h"
 #include "confighandler.h"
+#include "overlaymessage.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include <QApplication>
 #include <QDebug>
@@ -46,6 +47,11 @@ void ColorGrabWidget::startGrabbing()
     // This is undone in the destructor.
     qApp->setOverrideCursor(Qt::CrossCursor);
     qApp->installEventFilter(this);
+    OverlayMessage::push(
+      "Press Enter or Left Mouse Button to accept color\n"
+      "Press and hold Left Mouse Button to precisely select color\n"
+      "Press Space to toggle magnifier\n"
+      "Press ESC to cancel");
 }
 
 QColor ColorGrabWidget::color()
@@ -78,6 +84,11 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
             // press the widget remains static.
             updateWidget();
         }
+
+        OverlayMessage* overlayMsg = OverlayMessage::instance();
+        overlayMsg->setVisibility(
+          !overlayMsg->geometry().contains(cursorPos()));
+
         m_color = getColorAtPoint(cursorPos());
         emit colorUpdated(m_color);
         return true;
@@ -168,5 +179,6 @@ void ColorGrabWidget::finalize()
 {
     qApp->removeEventFilter(this);
     qApp->restoreOverrideCursor();
+    OverlayMessage::pop();
     close();
 }
