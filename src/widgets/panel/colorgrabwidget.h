@@ -27,6 +27,7 @@ private:
 
     QPoint cursorPos() const;
     QColor getColorAtPoint(const QPoint& point) const;
+    void updateWidget();
     void finalize();
 
     QPixmap* m_pixmap;

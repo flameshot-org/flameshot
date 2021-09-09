@@ -1,8 +1,11 @@
 #include "colorgrabwidget.h"
 #include "sidepanelwidget.h"
 
+#include "colorutils.h"
+#include "confighandler.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include <QApplication>
+#include <QDebug>
 #include <QKeyEvent>
 #include <QPainter>
 #include <QScreen>
@@ -10,10 +13,14 @@
 #include <QTimer>
 #include <stdexcept>
 
-// Width and height are the same
-#define WIDTH 165
-// NOTE: WIDTH should be divisible by ZOOM_LEVEL for best precision
-#define ZOOM_LEVEL 15
+// Width (= height) and zoom level of the widget before the user clicks
+#define WIDTH1 80
+#define ZOOM1 8
+// Width (= height) and zoom level of the widget after the user clicks
+#define WIDTH2 165
+#define ZOOM2 15
+
+// NOTE: WIDTH1(2) should be divisible by ZOOM1(2) for best precision.
 
 ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
@@ -24,13 +31,16 @@ ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
         throw std::logic_error("Pixmap must not be null");
     }
     setAttribute(Qt::WA_DeleteOnClose);
+    // We don't need this widget to receive mouse events because we use
+    // eventFilter on other objects that do
+    setAttribute(Qt::WA_TransparentForMouseEvents);
     setWindowFlags(Qt::BypassWindowManagerHint | Qt::FramelessWindowHint);
     setMouseTracking(true);
 }
 
 void ColorGrabWidget::startGrabbing()
 {
-    // NOTE: grabbing the mouse would prevent move events being received
+    // NOTE: grabMouse() would prevent move events being received
     // With this method we just need to make sure that mouse press and release
     // events get consumed before they reach their target widget.
     // This is undone in the destructor.
@@ -57,10 +67,17 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         } else if (key == Qt::Key_Return || key == Qt::Key_Enter) {
             emit colorGrabbed(m_color);
             finalize();
+        } else if (key == Qt::Key_Space && !m_mousePressReceived) {
+            setVisible(!isVisible());
         }
         return true;
     } else if (event->type() == QEvent::MouseMove) {
         // NOTE: This relies on the fact that CaptureWidget tracks mouse moves
+        if (!m_mousePressReceived) {
+            // Update only before the user clicks the mouse, after the mouse
+            // press the widget remains static.
+            updateWidget();
+        }
         m_color = getColorAtPoint(cursorPos());
         emit colorUpdated(m_color);
         return true;
@@ -69,9 +86,8 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         auto* e = static_cast<QMouseEvent*>(event);
         if (e->buttons() == Qt::LeftButton && !isVisible()) {
             QTimer::singleShot(500, this, [this]() { show(); });
-        } else if (e->buttons() == Qt::RightButton) {
-            show();
         }
+        updateWidget();
         return true;
     } else if (event->type() == QEvent::MouseButtonRelease) {
         if (!m_mousePressReceived) {
@@ -101,15 +117,7 @@ void ColorGrabWidget::paintEvent(QPaintEvent*)
 
 void ColorGrabWidget::showEvent(QShowEvent*)
 {
-    // Set the window geometry
-    QRect rect(0, 0, WIDTH, WIDTH);
-    rect.moveCenter(cursorPos());
-    setGeometry(rect);
-    // Store a pixmap containing the zoomed-in section
-    QRect sourceRect(
-      0, 0, rect.width() / ZOOM_LEVEL, rect.width() / ZOOM_LEVEL);
-    sourceRect.moveCenter(rect.center());
-    m_previewImage = m_pixmap->copy(sourceRect).toImage();
+    updateWidget();
 }
 
 QPoint ColorGrabWidget::cursorPos() const
@@ -124,7 +132,7 @@ QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
         QPoint point = mapFromGlobal(p);
         // we divide coordinate-wise to avoid rounding to nearest
         return m_previewImage.pixel(
-          QPoint(point.x() / ZOOM_LEVEL, point.y() / ZOOM_LEVEL));
+          QPoint(point.x() / ZOOM2, point.y() / ZOOM2));
     }
     QPoint point = p;
 #if defined(Q_OS_MACOS)
@@ -138,6 +146,22 @@ QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
 #endif
     QPixmap pixel = m_pixmap->copy(QRect(point, point));
     return pixel.toImage().pixel(0, 0);
+}
+
+void ColorGrabWidget::updateWidget()
+{
+    int width = m_mousePressReceived ? WIDTH2 : WIDTH1;
+    float zoom = m_mousePressReceived ? ZOOM2 : ZOOM1;
+    // Set window size and move its center to the mouse cursor
+    QRect rect(0, 0, width, width);
+    rect.moveCenter(cursorPos());
+    setGeometry(rect);
+    // Store a pixmap containing the zoomed-in section around the cursor
+    QRect sourceRect(0, 0, width / zoom, width / zoom);
+    sourceRect.moveCenter(rect.center());
+    m_previewImage = m_pixmap->copy(sourceRect).toImage();
+    // Repaint
+    update();
 }
 
 void ColorGrabWidget::finalize()
