@@ -181,9 +181,9 @@ void ColorGrabWidget::setExtraZoomActive(bool active)
         hide();
     } else {
         if (!isVisible()) {
-            QTimer::singleShot(500, this, [this]() { show(); });
+            QTimer::singleShot(250, this, [this]() { show(); });
         } else {
-            QTimer::singleShot(300, this, [this]() { updateWidget(); });
+            QTimer::singleShot(250, this, [this]() { updateWidget(); });
         }
     }
 }
