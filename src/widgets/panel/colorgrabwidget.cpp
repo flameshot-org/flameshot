@@ -15,8 +15,9 @@
 #include <stdexcept>
 
 // Width (= height) and zoom level of the widget before the user clicks
-#define WIDTH1 80
-#define ZOOM1 8
+// The width should also be an odd number so the cursor can be in the center
+#define WIDTH1 77
+#define ZOOM1 11
 // Width (= height) and zoom level of the widget after the user clicks
 #define WIDTH2 165
 #define ZOOM2 15
@@ -27,7 +28,8 @@ ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
   , m_mousePressReceived(false)
-  , m_extraZoomActivated(false)
+  , m_extraZoomActive(false)
+  , m_magnifierActive(false)
 {
     if (p == nullptr) {
         throw std::logic_error("Pixmap must not be null");
@@ -74,21 +76,26 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         } else if (key == Qt::Key_Return || key == Qt::Key_Enter) {
             emit colorGrabbed(m_color);
             finalize();
-        } else if (key == Qt::Key_Space && !m_extraZoomActivated) {
-            setVisible(!isVisible());
+        } else if (key == Qt::Key_Space && !m_extraZoomActive) {
+            setMagnifierActive(!m_magnifierActive);
         }
         return true;
     } else if (event->type() == QEvent::MouseMove) {
         // NOTE: This relies on the fact that CaptureWidget tracks mouse moves
-        if (!m_extraZoomActivated) {
+        if (!m_extraZoomActive) {
             // Update only before the user clicks the mouse, after the mouse
             // press the widget remains static.
             updateWidget();
         }
 
+        // Hide overlay message when cursor is over it
         OverlayMessage* overlayMsg = OverlayMessage::instance();
         overlayMsg->setVisibility(
           !overlayMsg->geometry().contains(cursorPos()));
+
+        if (m_extraZoomActive && !geometry().contains(cursorPos())) {
+            setExtraZoomActive(false);
+        }
 
         m_color = getColorAtPoint(cursorPos());
         emit colorUpdated(m_color);
@@ -97,14 +104,13 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         m_mousePressReceived = true;
         auto* e = static_cast<QMouseEvent*>(event);
         if (e->buttons() == Qt::RightButton) {
-            setVisible(!isVisible());
+            setMagnifierActive(!m_magnifierActive);
         } else if (e->buttons() == Qt::LeftButton) {
-            m_extraZoomActivated = true;
+            setExtraZoomActive(true);
             if (!isVisible()) {
                 QTimer::singleShot(500, this, [this]() { show(); });
             }
         }
-        updateWidget();
         return true;
     } else if (event->type() == QEvent::MouseButtonRelease) {
         if (!m_mousePressReceived) {
@@ -115,7 +121,7 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
             return false;
         }
         auto* e = static_cast<QMouseEvent*>(event);
-        if (e->button() == Qt::LeftButton) {
+        if (e->button() == Qt::LeftButton && m_extraZoomActive) {
             emit colorGrabbed(getColorAtPoint(cursorPos()));
             finalize();
         }
@@ -145,7 +151,7 @@ QPoint ColorGrabWidget::cursorPos() const
 /// @note The point is in screen coordinates.
 QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
 {
-    if (isVisible() && geometry().contains(p)) {
+    if (m_extraZoomActive && geometry().contains(p)) {
         QPoint point = mapFromGlobal(p);
         // we divide coordinate-wise to avoid rounding to nearest
         return m_previewImage.pixel(
@@ -165,10 +171,26 @@ QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
     return pixel.toImage().pixel(0, 0);
 }
 
+void ColorGrabWidget::setExtraZoomActive(bool active)
+{
+    m_extraZoomActive = active;
+    if (!active && !m_magnifierActive) {
+        hide();
+    } else {
+        updateWidget();
+    }
+}
+
+void ColorGrabWidget::setMagnifierActive(bool active)
+{
+    m_magnifierActive = active;
+    setVisible(active);
+}
+
 void ColorGrabWidget::updateWidget()
 {
-    int width = m_extraZoomActivated ? WIDTH2 : WIDTH1;
-    float zoom = m_extraZoomActivated ? ZOOM2 : ZOOM1;
+    int width = m_extraZoomActive ? WIDTH2 : WIDTH1;
+    float zoom = m_extraZoomActive ? ZOOM2 : ZOOM1;
     // Set window size and move its center to the mouse cursor
     QRect rect(0, 0, width, width);
     rect.moveCenter(cursorPos());

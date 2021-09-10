@@ -28,6 +28,8 @@ private:
 
     QPoint cursorPos() const;
     QColor getColorAtPoint(const QPoint& point) const;
+    void setExtraZoomActive(bool active);
+    void setMagnifierActive(bool active);
     void updateWidget();
     void finalize();
 
@@ -36,7 +38,8 @@ private:
     QColor m_color;
 
     bool m_mousePressReceived;
-    bool m_extraZoomActivated;
+    bool m_extraZoomActive;
+    bool m_magnifierActive;
 };
 
 #endif // COLORGRABWIDGET_H
