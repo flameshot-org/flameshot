@@ -53,6 +53,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_mouseIsClicked(false)
   , m_newSelection(true)
   , m_grabbing(false)
+  , m_movingSelection(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
@@ -610,25 +611,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_buttonHandler->hide();
         }
         QRect inputRect;
-        if (m_newSelection) {
-            // Drawing a new selection
-            inputRect = symmetryMod
-                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
-                                  m_context.mousePos)
-                          : QRect(m_dragStartPoint, m_context.mousePos);
-
-        } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
-            // Moving the whole selection
-            if (m_adjustmentButtonPressed || activeToolObject().isNull()) {
-                setCursor(Qt::OpenHandCursor);
-                QRect initialRect = m_selection->savedGeometry().normalized();
-                QPoint newTopLeft =
-                  initialRect.topLeft() + (e->pos() - m_dragStartPoint);
-                inputRect = QRect(newTopLeft, initialRect.size());
-            } else {
-                return;
-            }
-        } else {
+        if (m_mouseOverHandle != SelectionWidget::NO_SIDE) {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
@@ -670,6 +653,27 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 if (symmetryMod) {
                     r.setLeft(r.left() - offset.x());
                 }
+            }
+        } else if (!m_movingSelection &&
+                   (!m_selection->geometry().contains(e->pos()) ||
+                    m_newSelection)) {
+            m_newSelection = true;
+            // Drawing a new selection
+            inputRect = symmetryMod
+                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
+                                  m_context.mousePos)
+                          : QRect(m_dragStartPoint, m_context.mousePos);
+        } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
+            // Moving the whole selection
+            m_movingSelection = true;
+            if (m_adjustmentButtonPressed || activeToolObject().isNull()) {
+                setCursor(Qt::OpenHandCursor);
+                QRect initialRect = m_selection->savedGeometry().normalized();
+                QPoint newTopLeft =
+                  initialRect.topLeft() + (e->pos() - m_dragStartPoint);
+                inputRect = QRect(newTopLeft, initialRect.size());
+            } else {
+                return;
             }
         }
         m_selection->setGeometry(inputRect.intersected(rect()).normalized());
@@ -767,6 +771,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
     m_grabbing = false;
+    m_movingSelection = false;
     if (m_selection->isVisible()) {
         m_newSelection = false;
     }

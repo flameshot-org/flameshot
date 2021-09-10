@@ -159,6 +159,7 @@ private:
     bool m_mouseIsClicked;
     bool m_newSelection;
     bool m_grabbing;
+    bool m_movingSelection;
     bool m_showInitialMsg;
     bool m_captureDone;
     bool m_previewEnabled;
