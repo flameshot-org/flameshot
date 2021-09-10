@@ -788,7 +788,6 @@ void CaptureWidget::updateThickness(int thickness)
             m_existingObjectIsChanged = true;
         }
     }
-
     emit thicknessChanged(m_context.thickness);
 }
 
