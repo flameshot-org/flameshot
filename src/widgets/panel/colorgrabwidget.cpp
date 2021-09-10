@@ -180,9 +180,10 @@ void ColorGrabWidget::setExtraZoomActive(bool active)
     if (!active && !m_magnifierActive) {
         hide();
     } else {
-        updateWidget();
         if (!isVisible()) {
             QTimer::singleShot(500, this, [this]() { show(); });
+        } else {
+            QTimer::singleShot(300, this, [this]() { updateWidget(); });
         }
     }
 }
