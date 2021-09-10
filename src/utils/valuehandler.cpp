@@ -162,13 +162,15 @@ bool ExistingDir::check(const QVariant& val)
 
 QVariant ExistingDir::fallback()
 {
-    QString path =
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    if (!QFileInfo(path).isDir()) {
-        // TODO can we rely on the fact that home exists?
-        path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    using SP = QStandardPaths;
+    for (auto location :
+         { SP::PicturesLocation, SP::HomeLocation, SP::TempLocation }) {
+        QString path = SP::writableLocation(location);
+        if (QFileInfo(path).isDir()) {
+            return path;
+        }
     }
-    return path;
+    return {};
 }
 
 // FILENAME PATTERN
