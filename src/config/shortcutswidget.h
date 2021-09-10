@@ -39,6 +39,10 @@ private:
     QTableWidget* m_table;
     QVBoxLayout* m_layout;
     QList<QStringList> m_shortcuts;
+
+    void initShortcuts();
+    void appendShortcut(const QString& shortcutName,
+                        const QString& description);
 };
 
 #endif // HOTKEYSCONFIG_H

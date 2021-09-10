@@ -3,7 +3,6 @@
 
 #include "confighandler.h"
 #include "src/tools/capturetool.h"
-#include "src/utils/configshortcuts.h"
 #include "systemnotification.h"
 #include "valuehandler.h"
 #include <QCoreApplication>

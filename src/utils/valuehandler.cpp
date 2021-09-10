@@ -1,6 +1,5 @@
 #include "valuehandler.h"
 #include "confighandler.h"
-#include "configshortcuts.h"
 #include <QColor>
 #include <QFileInfo>
 #include <QStandardPaths>
