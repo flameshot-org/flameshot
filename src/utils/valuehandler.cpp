@@ -138,7 +138,10 @@ KeySequence::KeySequence(const QString& shortcutName)
 
 bool KeySequence::check(const QVariant& val)
 {
-    // TODO
+    QString str = val.toString();
+    if (!str.isEmpty() && QKeySequence(str).toString().isEmpty()) {
+        return false;
+    }
     return true;
 }
 
