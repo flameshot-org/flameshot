@@ -132,8 +132,8 @@ QVariant LowerBoundedInt::fallback()
 
 // KEY SEQUENCE
 
-KeySequence::KeySequence(const QString& shortcutName)
-  : m_shortcutName(shortcutName)
+KeySequence::KeySequence(const QKeySequence& fallback)
+  : m_fallback(fallback)
 {}
 
 bool KeySequence::check(const QVariant& val)
@@ -147,7 +147,7 @@ bool KeySequence::check(const QVariant& val)
 
 QVariant KeySequence::fallback()
 {
-    return ConfigShortcuts().captureShortcutDefault(m_shortcutName).toString();
+    return m_fallback;
 }
 
 // EXISTING DIR

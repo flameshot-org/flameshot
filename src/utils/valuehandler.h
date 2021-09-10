@@ -139,12 +139,12 @@ private:
 class KeySequence : public ValueHandler
 {
 public:
-    KeySequence(const QString& shortcutName);
+    KeySequence(const QKeySequence& fallback = {});
     bool check(const QVariant& val) override;
     QVariant fallback() override;
 
 private:
-    QString m_shortcutName;
+    QKeySequence m_fallback;
 };
 
 class ExistingDir : public ValueHandler

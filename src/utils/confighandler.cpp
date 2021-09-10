@@ -58,6 +58,12 @@ bool verifyLaunchFile()
         QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
     }
 
+#define SHORTCUT(NAME, DEFAULT_VALUE)                                          \
+    {                                                                          \
+        QStringLiteral(NAME), QSharedPointer<KeySequence>(new KeySequence(     \
+                                QKeySequence(QLatin1String(DEFAULT_VALUE))))   \
+    }
+
 /**
  * This map contains all the information that is needed to parse, verify and
  * preprocess each configuration option in the General section.
@@ -109,6 +115,50 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("fontFamily"                  ,String             ( ""            )),
     OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
   };
+
+static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
+//           NAME                           DEFAULT_SHORTCUT
+    SHORTCUT("TYPE_PENCIL"              ,   "P"                     ),
+    SHORTCUT("TYPE_DRAWER"              ,   "D"                     ),
+    SHORTCUT("TYPE_ARROW"               ,   "A"                     ),
+    SHORTCUT("TYPE_SELECTION"           ,   "S"                     ),
+    SHORTCUT("TYPE_RECTANGLE"           ,   "R"                     ),
+    SHORTCUT("TYPE_CIRCLE"              ,   "C"                     ),
+    SHORTCUT("TYPE_MARKER"              ,   "M"                     ),
+    SHORTCUT("TYPE_MOVESELECTION"       ,   "Ctrl+M"                ),
+    SHORTCUT("TYPE_UNDO"                ,   "Ctrl+Z"                ),
+    SHORTCUT("TYPE_COPY"                ,   "Ctrl+C"                ),
+    SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
+    SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
+    SHORTCUT("TYPE_IMAGEUPLOADER"       ,   "Ctrl+U"                ),
+#if !defined(Q_OS_MACOS)
+    SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
+#endif
+    SHORTCUT("TYPE_PIXELATE"            ,   "B"                     ),
+    SHORTCUT("TYPE_REDO"                ,   "Ctrl+Shift+Z"          ),
+    SHORTCUT("TYPE_TEXT"                ,   "T"                     ),
+    SHORTCUT("TYPE_TOGGLE_PANEL"        ,   "Space"                 ),
+    SHORTCUT("TYPE_RESIZE_LEFT"         ,   "Shift+Left"            ),
+    SHORTCUT("TYPE_RESIZE_RIGHT"        ,   "Shift+Right"           ),
+    SHORTCUT("TYPE_RESIZE_UP"           ,   "Shift+Up"              ),
+    SHORTCUT("TYPE_RESIZE_DOWN"         ,   "Shift+Down"            ),
+    SHORTCUT("TYPE_SELECT_ALL"          ,   "Ctrl+A"                ),
+    SHORTCUT("TYPE_MOVE_LEFT"           ,   "Left"                  ),
+    SHORTCUT("TYPE_MOVE_RIGHT"          ,   "Right"                 ),
+    SHORTCUT("TYPE_MOVE_UP"             ,   "Up"                    ),
+    SHORTCUT("TYPE_MOVE_DOWN"           ,   "Down"                  ),
+    SHORTCUT("TYPE_COMMIT_CURRENT_TOOL" ,   "Ctrl+Return"           ),
+#if defined(Q_OS_MACOS)
+    SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
+#else
+    SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
+#endif
+    SHORTCUT("TYPE_PIN"                 ,                           ),
+    SHORTCUT("TYPE_SELECTIONINDICATOR"  ,                           ),
+    SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
+    SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
+    SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+};
 // clang-format on
 
 // CLASS CONFIGHANDLER
@@ -378,46 +428,8 @@ const QSet<QString>& ConfigHandler::recognizedGeneralOptions() const
 
 const QSet<QString>& ConfigHandler::recognizedShortcutNames() const
 {
-    // FIXME: Implement a more elegant solution in the future. Requires refactor
-    // in other classes
-    static QSet<QString> names = {
-        "TYPE_PENCIL",
-        "TYPE_DRAWER",
-        "TYPE_ARROW",
-        "TYPE_SELECTION",
-        "TYPE_RECTANGLE",
-        "TYPE_CIRCLE",
-        "TYPE_MARKER",
-        "TYPE_MOVESELECTION",
-        "TYPE_UNDO",
-        "TYPE_COPY",
-        "TYPE_SAVE",
-        "TYPE_EXIT",
-        "TYPE_IMAGEUPLOADER",
-#if !defined(Q_OS_MACOS)
-        "TYPE_OPEN_APP",
-#endif
-        "TYPE_PIXELATE",
-        "TYPE_REDO",
-        "TYPE_TEXT",
-        "TYPE_TOGGLE_PANEL",
-        "TYPE_RESIZE_LEFT",
-        "TYPE_RESIZE_RIGHT",
-        "TYPE_RESIZE_UP",
-        "TYPE_RESIZE_DOWN",
-        "TYPE_SELECT_ALL",
-        "TYPE_MOVE_LEFT",
-        "TYPE_MOVE_RIGHT",
-        "TYPE_MOVE_UP",
-        "TYPE_MOVE_DOWN",
-        "TYPE_COMMIT_CURRENT_TOOL",
-        "TYPE_DELETE_CURRENT_TOOL",
-        "TYPE_PIN",
-        "TYPE_SELECTIONINDICATOR",
-        "TYPE_SIZEINCREASE",
-        "TYPE_SIZEDECREASE",
-        "TYPE_CIRCLECOUNT",
-    };
+    static QSet<QString> names =
+      QSet<QString>::fromList(recognizedShortcuts.keys());
     return names;
 }
 
@@ -598,7 +610,8 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
     if (isShortcut(key)) {
         QString _key = key;
         _key.replace("Shortcuts/", "");
-        handler.reset(new KeySequence(_key));
+        handler = recognizedShortcuts.value(
+          _key, QSharedPointer<KeySequence>(new KeySequence()));
     } else { // General group
         handler = ::recognizedGeneralOptions.value(key);
     }
