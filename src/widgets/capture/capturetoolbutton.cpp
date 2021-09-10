@@ -172,6 +172,7 @@ QList<CaptureToolButton::ButtonType> CaptureToolButton::iterableButtonTypes = {
     CaptureToolButton::TYPE_MARKER,
     CaptureToolButton::TYPE_TEXT,
     CaptureToolButton::TYPE_PIXELATE,
+    CaptureToolButton::TYPE_INVERT,
     CaptureToolButton::TYPE_SELECTIONINDICATOR,
     CaptureToolButton::TYPE_MOVESELECTION,
     CaptureToolButton::TYPE_UNDO,

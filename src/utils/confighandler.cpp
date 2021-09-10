@@ -93,8 +93,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
-    OPTION("uploadHistoryMax"            ,LowerBoundedInt(1  , 25            )),
-    OPTION("undoLimit"                   ,BoundedInt(1, 999  , 100           )),
+    OPTION("uploadHistoryMax"            ,LowerBoundedInt(0  , 25            )),
+    OPTION("undoLimit"                   ,BoundedInt(0, 999  , 100           )),
     // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
@@ -134,6 +134,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
 #endif
     SHORTCUT("TYPE_PIXELATE"            ,   "B"                     ),
+    SHORTCUT("TYPE_INVERT"              ,   "I"                     ),
     SHORTCUT("TYPE_REDO"                ,   "Ctrl+Shift+Z"          ),
     SHORTCUT("TYPE_TEXT"                ,   "T"                     ),
     SHORTCUT("TYPE_TOGGLE_PANEL"        ,   "Space"                 ),

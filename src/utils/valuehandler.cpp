@@ -196,8 +196,8 @@ using BList = QList<BType>;
 
 bool ButtonList::check(const QVariant& val)
 {
-    auto allButtons = CaptureToolButton::getIterableButtonTypes();
     using CTB = CaptureToolButton;
+    auto allButtons = CTB::getIterableButtonTypes();
     for (int btn : val.value<QList<int>>()) {
         if (!allButtons.contains(static_cast<CTB::ButtonType>(btn))) {
             return false;
