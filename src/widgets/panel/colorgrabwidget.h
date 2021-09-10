@@ -36,6 +36,7 @@ private:
     QColor m_color;
 
     bool m_mousePressReceived;
+    bool m_extraZoomActivated;
 };
 
 #endif // COLORGRABWIDGET_H

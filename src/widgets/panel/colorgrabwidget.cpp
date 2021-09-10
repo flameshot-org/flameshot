@@ -27,6 +27,7 @@ ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
   , m_mousePressReceived(false)
+  , m_extraZoomActivated(false)
 {
     if (p == nullptr) {
         throw std::logic_error("Pixmap must not be null");
@@ -50,7 +51,7 @@ void ColorGrabWidget::startGrabbing()
     OverlayMessage::push(
       "Press Enter or Left Mouse Button to accept color\n"
       "Press and hold Left Mouse Button to precisely select color\n"
-      "Press Space to toggle magnifier\n"
+      "Press Space or Right Mouse Button to toggle magnifier\n"
       "Press ESC to cancel");
 }
 
@@ -73,13 +74,13 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         } else if (key == Qt::Key_Return || key == Qt::Key_Enter) {
             emit colorGrabbed(m_color);
             finalize();
-        } else if (key == Qt::Key_Space && !m_mousePressReceived) {
+        } else if (key == Qt::Key_Space && !m_extraZoomActivated) {
             setVisible(!isVisible());
         }
         return true;
     } else if (event->type() == QEvent::MouseMove) {
         // NOTE: This relies on the fact that CaptureWidget tracks mouse moves
-        if (!m_mousePressReceived) {
+        if (!m_extraZoomActivated) {
             // Update only before the user clicks the mouse, after the mouse
             // press the widget remains static.
             updateWidget();
@@ -95,8 +96,13 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
     } else if (event->type() == QEvent::MouseButtonPress) {
         m_mousePressReceived = true;
         auto* e = static_cast<QMouseEvent*>(event);
-        if (e->buttons() == Qt::LeftButton && !isVisible()) {
-            QTimer::singleShot(500, this, [this]() { show(); });
+        if (e->buttons() == Qt::RightButton) {
+            setVisible(!isVisible());
+        } else if (e->buttons() == Qt::LeftButton) {
+            m_extraZoomActivated = true;
+            if (!isVisible()) {
+                QTimer::singleShot(500, this, [this]() { show(); });
+            }
         }
         updateWidget();
         return true;
@@ -161,8 +167,8 @@ QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
 
 void ColorGrabWidget::updateWidget()
 {
-    int width = m_mousePressReceived ? WIDTH2 : WIDTH1;
-    float zoom = m_mousePressReceived ? ZOOM2 : ZOOM1;
+    int width = m_extraZoomActivated ? WIDTH2 : WIDTH1;
+    float zoom = m_extraZoomActivated ? ZOOM2 : ZOOM1;
     // Set window size and move its center to the mouse cursor
     QRect rect(0, 0, width, width);
     rect.moveCenter(cursorPos());
