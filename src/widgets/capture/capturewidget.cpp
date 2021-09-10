@@ -196,7 +196,17 @@ CaptureWidget::CaptureWidget(uint id,
 
     initPanel();
 
-    OverlayMessage::init(this);
+    OverlayMessage::init(this,
+                         QGuiAppCurrentScreen().currentScreen()->geometry());
+
+    if (m_config.showHelpValue()) {
+        OverlayMessage::push(
+          tr("Select an area with the mouse, or press Esc to exit."
+             "\nPress Enter to capture the screen."
+             "\nPress Right Click to show the color picker."
+             "\nUse the Mouse Wheel to change the thickness of your tool."
+             "\nPress Space to open the side panel."));
+    }
 }
 
 CaptureWidget::~CaptureWidget()
@@ -871,14 +881,6 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
     if (!m_context.fullscreen) {
         m_panel->setFixedHeight(height());
         m_buttonHandler->updateScreenRegions(rect());
-    }
-    if (m_config.showHelpValue()) {
-        OverlayMessage::push(
-          tr("Select an area with the mouse, or press Esc to exit."
-             "\nPress Enter to capture the screen."
-             "\nPress Right Click to show the color picker."
-             "\nUse the Mouse Wheel to change the thickness of your tool."
-             "\nPress Space to open the side panel."));
     }
 }
 

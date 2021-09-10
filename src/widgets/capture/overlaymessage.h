@@ -20,9 +20,9 @@
 class OverlayMessage : public QWidget
 {
 public:
-    OverlayMessage(QWidget* parent = nullptr);
+    OverlayMessage() = delete;
 
-    static void init(QWidget* parent);
+    static void init(QWidget* parent, const QRect& targetArea);
     static void push(const QString& msg);
     static void pop();
     static void setVisibility(bool visible);
@@ -30,7 +30,10 @@ public:
 
 private:
     QStack<QString> m_messageStack;
+    QRect m_targetArea;
     static OverlayMessage* m_instance;
+
+    OverlayMessage(QWidget* parent, const QRect& center);
 
     void paintEvent(QPaintEvent*) override;
     void showEvent(QShowEvent*) override;

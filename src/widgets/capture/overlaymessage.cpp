@@ -10,8 +10,9 @@
 #include <QScreen>
 #include <QWidget>
 
-OverlayMessage::OverlayMessage(QWidget* parent)
+OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
   : QWidget(parent)
+  , m_targetArea(targetArea)
 {
     // NOTE: do not call the static functions from the constructor
     m_instance = this;
@@ -21,9 +22,9 @@ OverlayMessage::OverlayMessage(QWidget* parent)
     QWidget::hide();
 }
 
-void OverlayMessage::init(QWidget* parent)
+void OverlayMessage::init(QWidget* parent, const QRect& targetArea)
 {
-    new OverlayMessage(parent);
+    new OverlayMessage(parent, targetArea);
 }
 
 void OverlayMessage::push(const QString& msg)
@@ -73,7 +74,8 @@ void OverlayMessage::paintEvent(QPaintEvent*)
     painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
     painter.setPen(QPen(textColor));
 
-    painter.drawRect(bRect);
+    float margin = painter.pen().widthF();
+    painter.drawRect(bRect - QMarginsF(margin, margin, margin, margin));
     painter.drawText(bRect, Qt::AlignCenter, m_messageStack.top());
 }
 
@@ -88,9 +90,7 @@ QRectF OverlayMessage::boundingRect() const
     // same text and options to get the boundingRect that the text will
     // have.
     QRectF bRect = QApplication::fontMetrics().boundingRect(
-      m_instance->parentWidget()->geometry(),
-      Qt::AlignCenter,
-      m_messageStack.top());
+      m_targetArea, Qt::AlignCenter, m_messageStack.top());
 
     // These four calls provide padding for the rect
     const int margin = QApplication::fontMetrics().height() / 2;
