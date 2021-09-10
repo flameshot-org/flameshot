@@ -6,6 +6,7 @@
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
+#include "utilitypanel.h"
 #include <QApplication>
 #include <QDebug> // TODO remove
 #include <QFormLayout>
@@ -49,8 +50,8 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     QString modifier =
       isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
     QIcon grabIcon(modifier + "colorize.svg");
-    m_colorGrabButton = new QPushButton(grabIcon, QLatin1String(""));
-    updateGrabButton(false);
+    m_colorGrabButton = new QPushButton(grabIcon, tr("Grab Color"));
+
     m_layout->addWidget(m_colorGrabButton);
     m_layout->addWidget(m_colorWheel);
     m_layout->addWidget(m_colorHex);
@@ -117,7 +118,6 @@ void SidePanelWidget::startColorGrab()
 {
     m_revertColor = m_color;
     m_colorGrabber = new ColorGrabWidget(m_pixmap);
-    updateGrabButton(true);
     connect(m_colorGrabber,
             &ColorGrabWidget::colorUpdated,
             this,
@@ -130,6 +130,8 @@ void SidePanelWidget::startColorGrab()
             &ColorGrabWidget::grabAborted,
             this,
             &SidePanelWidget::onColorGrabAborted);
+
+    emit togglePanel();
     m_colorGrabber->startGrabbing();
 }
 
@@ -145,7 +147,6 @@ void SidePanelWidget::onColorGrabAborted()
     finalizeGrab();
     // Restore color that was selected before we started grabbing
     updateColor(m_revertColor);
-    updateGrabButton(false);
 }
 
 void SidePanelWidget::onColorUpdated(const QColor& color)
@@ -153,21 +154,9 @@ void SidePanelWidget::onColorUpdated(const QColor& color)
     updateColorNoWheel(color);
 }
 
-void SidePanelWidget::updateGrabButton(const bool activated)
-{
-    if (activated) {
-        m_colorGrabButton->setText(tr("Press ESC to cancel"));
-    } else {
-        m_colorGrabButton->setText(tr("Grab Color"));
-    }
-}
-
 void SidePanelWidget::finalizeGrab()
 {
-    updateGrabButton(false);
-    // Unhovers the button - a minor detail
-    QEvent leaveEvent(QEvent::Leave);
-    qApp->sendEvent(m_colorGrabButton, &leaveEvent);
+    emit togglePanel();
 }
 
 bool SidePanelWidget::eventFilter(QObject* obj, QEvent* event)

@@ -41,7 +41,6 @@ private slots:
     void onColorUpdated(const QColor& color);
 
 private:
-    void updateGrabButton(const bool activated);
     void finalizeGrab();
 
     bool eventFilter(QObject* obj, QEvent* event) override;
