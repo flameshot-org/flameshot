@@ -15,7 +15,6 @@
 #include <stdexcept>
 
 // Width (= height) and zoom level of the widget before the user clicks
-// The width should also be an odd number so the cursor can be in the center
 #define WIDTH1 77
 #define ZOOM1 11
 // Width (= height) and zoom level of the widget after the user clicks
@@ -23,6 +22,7 @@
 #define ZOOM2 15
 
 // NOTE: WIDTH1(2) should be divisible by ZOOM1(2) for best precision.
+//       WIDTH1 should be odd so the cursor can be centered on a pixel.
 
 ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
@@ -82,6 +82,16 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         return true;
     } else if (event->type() == QEvent::MouseMove) {
         // NOTE: This relies on the fact that CaptureWidget tracks mouse moves
+
+        if (m_extraZoomActive && !geometry().contains(cursorPos())) {
+            setExtraZoomActive(false);
+            return true;
+        }
+        if (!m_extraZoomActive && !m_magnifierActive) {
+            // This fixes an issue when the mouse leaves the zoom area before
+            // the widget even appears.
+            hide();
+        }
         if (!m_extraZoomActive) {
             // Update only before the user clicks the mouse, after the mouse
             // press the widget remains static.
@@ -93,10 +103,6 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         overlayMsg->setVisibility(
           !overlayMsg->geometry().contains(cursorPos()));
 
-        if (m_extraZoomActive && !geometry().contains(cursorPos())) {
-            setExtraZoomActive(false);
-        }
-
         m_color = getColorAtPoint(cursorPos());
         emit colorUpdated(m_color);
         return true;
@@ -107,9 +113,6 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
             setMagnifierActive(!m_magnifierActive);
         } else if (e->buttons() == Qt::LeftButton) {
             setExtraZoomActive(true);
-            if (!isVisible()) {
-                QTimer::singleShot(500, this, [this]() { show(); });
-            }
         }
         return true;
     } else if (event->type() == QEvent::MouseButtonRelease) {
@@ -178,6 +181,9 @@ void ColorGrabWidget::setExtraZoomActive(bool active)
         hide();
     } else {
         updateWidget();
+        if (!isVisible()) {
+            QTimer::singleShot(500, this, [this]() { show(); });
+        }
     }
 }
 
