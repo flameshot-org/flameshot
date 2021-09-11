@@ -194,6 +194,7 @@ CaptureWidget::CaptureWidget(uint id,
         // Show cursor if it was hidden while adjusting tool thickness
         updateCursor();
         m_thicknessByKeyboard = 0;
+        setDrawThickness(m_context.thickness);
     });
 
     initPanel();
