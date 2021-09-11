@@ -132,7 +132,8 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-#if !(defined(QT_DEBUG) && defined(Q_OS_LINUX))
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=true to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
         resize(pixmap().size());

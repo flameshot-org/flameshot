@@ -222,6 +222,11 @@ target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
 target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
 #target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
 target_compile_definitions(flameshot PRIVATE FLAMESHOT_APP_VERSION_URL="${GIT_API_URL}")
+# Enable easier debugging of screenshot capture mode
+if (DEFINED FLAMESHOT_DEBUG_CAPTURE)
+    target_compile_definitions(flameshot PRIVATE
+        FLAMESHOT_DEBUG_CAPTURE="${FLAMESHOT_DEBUG_CAPTURE}")
+endif ()
 
 foreach (FILE ${QM_FILES})
     get_filename_component(F_NAME ${FILE} NAME)
