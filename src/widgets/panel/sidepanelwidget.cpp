@@ -65,9 +65,9 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_layout->addLayout(colorForm);
 
     connect(m_thicknessSlider,
-            &QSlider::valueChanged,
+            &QSlider::sliderMoved,
             this,
-            &SidePanelWidget::updateCurrentThickness);
+            &SidePanelWidget::thicknessChanged);
     connect(this,
             &SidePanelWidget::thicknessChanged,
             this,
@@ -118,11 +118,6 @@ void SidePanelWidget::updateColorNoWheel(const QColor& c)
     m_color = c;
     m_colorLabel->setStyleSheet(
       QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
-}
-
-void SidePanelWidget::updateCurrentThickness(int value)
-{
-    emit thicknessChanged(value);
 }
 
 void SidePanelWidget::colorGrabberActivated()
