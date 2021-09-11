@@ -61,6 +61,8 @@ set(RUN_IN_PLACE
         ${DEFAULT_RUN_IN_PLACE}
         CACHE BOOL "Run directly in source directory structure")
 
+
+option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
 option(USE_EXTERNAL_SPDLOG "Use external spdlog library" OFF)
