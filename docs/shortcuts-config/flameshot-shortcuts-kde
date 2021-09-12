@@ -24,7 +24,7 @@ Type=SIMPLE_ACTION_DATA
 ActionsCount=1
 
 [Data_1_1Actions0]
-Arguments='Pictures/Screenshots' 0 0
+Arguments='Pictures/Screenshots' false 0 0
 Call=graphicCapture
 RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
@@ -53,7 +53,7 @@ Type=SIMPLE_ACTION_DATA
 ActionsCount=1
 
 [Data_1_2Actions0]
-Arguments='Pictures/Screenshots' 3000 0
+Arguments='Pictures/Screenshots' false 3000 0
 Call=graphicCapture
 RemoteApp=org.flameshot.Flameshot
 RemoteObj=/
@@ -102,7 +102,7 @@ Type=SHORTCUT
 Uuid={3c7ead73-00ad-4f90-bdba-5d15a70b8b43}
 
 [Data_1_4]
-Comment=Take a full-screen (all monitors) screenshot and copy it to the clipboard
+Comment=Take a full-screen (all monitors) screenshot and copy it to the clipboard and ask where to save
 Enabled=true
 Name=Take full-screen screenshot and copy it to clipboard
 Type=SIMPLE_ACTION_DATA
