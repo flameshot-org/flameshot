@@ -58,9 +58,9 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
 
     // thickness sigslots
     connect(m_thicknessSlider,
-            &QSlider::valueChanged,
+            &QSlider::sliderMoved,
             this,
-            &SidePanelWidget::updateCurrentThickness);
+            &SidePanelWidget::thicknessChanged);
     connect(this,
             &SidePanelWidget::thicknessChanged,
             this,
@@ -107,11 +107,6 @@ void SidePanelWidget::updateThickness(const int& t)
 {
     m_thickness = qBound(0, t, 100);
     m_thicknessSlider->setValue(m_thickness);
-}
-
-void SidePanelWidget::updateCurrentThickness(int value)
-{
-    emit thicknessChanged(value);
 }
 
 void SidePanelWidget::startColorGrab()

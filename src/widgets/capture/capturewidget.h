@@ -151,6 +151,7 @@ private:
 
     // Outside selection opacity
     int m_opacity;
+    int m_thicknessByKeyboard;
 
     // utility flags
     bool m_mouseIsClicked;

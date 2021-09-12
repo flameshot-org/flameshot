@@ -70,6 +70,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_selection(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
+  , m_thicknessByKeyboard(0)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
 
@@ -132,7 +133,8 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-#if !(defined(QT_DEBUG) && defined(Q_OS_LINUX))
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=true to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
         resize(pixmap().size());
@@ -192,6 +194,8 @@ CaptureWidget::CaptureWidget(uint id,
     connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
         // Show cursor if it was hidden while adjusting tool thickness
         updateCursor();
+        m_thicknessByKeyboard = 0;
+        setDrawThickness(m_context.thickness);
     });
 
     initPanel();
@@ -767,10 +771,9 @@ void CaptureWidget::moveSelection(QPoint p)
     adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
 }
 
-void CaptureWidget::updateThickness(int thicknessOffset)
+void CaptureWidget::updateThickness(int thickness)
 {
-    m_context.thickness += thicknessOffset;
-    m_context.thickness = qBound(1, m_context.thickness, 100);
+    m_context.thickness = qBound(1, thickness, 100);
 
     QPoint topLeft =
       QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
@@ -793,7 +796,6 @@ void CaptureWidget::updateThickness(int thicknessOffset)
             m_existingObjectIsChanged = true;
         }
     }
-
     emit thicknessChanged(m_context.thickness);
 }
 
@@ -819,6 +821,20 @@ void CaptureWidget::moveDown()
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
 {
+    // If the key is a digit, change the thickness
+    bool ok;
+    int digit = e->text().toInt(&ok);
+    if (ok && e->modifiers() == Qt::NoModifier) { // digit received
+        m_thicknessByKeyboard = 10 * m_thicknessByKeyboard + digit;
+        updateThickness(m_thicknessByKeyboard);
+        if (m_context.thickness != m_thicknessByKeyboard) {
+            // The thickness was out of range and was clipped by updateThickness
+            m_thicknessByKeyboard = 0;
+        }
+    } else {
+        m_thicknessByKeyboard = 0;
+    }
+
     if (!m_selection->isVisible()) {
         return;
     } else if (e->key() == Qt::Key_Control) {
@@ -871,7 +887,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    updateThickness(thicknessOffset);
+    updateThickness(m_context.thickness + thicknessOffset);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
@@ -1171,10 +1187,10 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
-            updateThickness(1);
+            updateThickness(m_context.thickness + 1);
             break;
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
-            updateThickness(-1);
+            updateThickness(m_context.thickness - 1);
             break;
         default:
             break;

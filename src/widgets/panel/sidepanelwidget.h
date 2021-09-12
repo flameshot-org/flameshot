@@ -32,7 +32,6 @@ public slots:
     void updateColor(const QColor& c);
     void updateColorNoWheel(const QColor& c);
     void updateThickness(const int& t);
-    void updateCurrentThickness(int value);
 
 private slots:
     void startColorGrab();
