@@ -21,6 +21,7 @@
 #include "src/widgets/capture/hovereventfilter.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
+#include "src/widgets/capture/overlaymessage.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
@@ -84,7 +85,6 @@ CaptureWidget::CaptureWidget(uint id,
             this,
             &CaptureWidget::childLeave);
     setAttribute(Qt::WA_DeleteOnClose);
-    m_showInitialMsg = m_config.showHelpValue();
     m_opacity = m_config.contrastOpacityValue();
     m_uiColor = m_config.uiMainColorValue();
     m_contrastUiColor = m_config.uiContrastColorValue();
@@ -199,6 +199,18 @@ CaptureWidget::CaptureWidget(uint id,
     });
 
     initPanel();
+
+    OverlayMessage::init(this,
+                         QGuiAppCurrentScreen().currentScreen()->geometry());
+
+    if (m_config.showHelpValue()) {
+        OverlayMessage::push(
+          tr("Select an area with the mouse, or press Esc to exit."
+             "\nPress Enter to capture the screen."
+             "\nPress Right Click to show the color picker."
+             "\nUse the Mouse Wheel to change the thickness of your tool."
+             "\nPress Space to open the side panel."));
+    }
 }
 
 CaptureWidget::~CaptureWidget()
@@ -364,12 +376,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
     // draw inactive region
     drawInactiveRegion(&painter);
-
-    // show initial message on screen capture call if required (before selecting
-    // area)
-    if (m_showInitialMsg) {
-        drawInitialMessage(&painter);
-    }
 }
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
@@ -485,7 +491,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         showColorPicker(m_mousePressedPos);
         return;
     } else if (e->button() == Qt::LeftButton) {
-        m_showInitialMsg = false;
+        OverlayMessage::pop();
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -972,7 +978,7 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::updateActiveLayer);
 
-    m_sidePanel = new SidePanelWidget(&m_context.screenshot);
+    m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,
@@ -1325,7 +1331,6 @@ void CaptureWidget::selectAll()
     m_selection->setGeometry(newGeometry);
     m_context.selection = extendedRect(newGeometry);
     m_selection->setVisible(true);
-    m_showInitialMsg = false;
     m_buttonHandler->updatePosition(m_selection->geometry());
     updateSizeIndicator();
     m_buttonHandler->show();
@@ -1662,56 +1667,6 @@ QRect CaptureWidget::extendedRect(const QRect& r) const
                  r.top() * devicePixelRatio,
                  r.width() * devicePixelRatio,
                  r.height() * devicePixelRatio);
-}
-
-void CaptureWidget::drawInitialMessage(QPainter* painter)
-{
-    if (nullptr == painter) {
-        return;
-    }
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-    QRect helpRect;
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
-        helpRect = currentScreen->geometry();
-    } else {
-        helpRect = QGuiApplication::primaryScreen()->geometry();
-    }
-#else
-    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#endif
-
-    helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
-
-    QString helpTxt =
-      tr("Select an area with the mouse, or press Esc to exit."
-         "\nPress Enter to capture the screen."
-         "\nPress Right Click to show the color picker."
-         "\nUse the Mouse Wheel to change the thickness of your tool."
-         "\nPress Space to open the side panel.");
-
-    // We draw the white contrasting background for the text, using the
-    // same text and options to get the boundingRect that the text will
-    // have.
-    QRectF bRect = painter->boundingRect(helpRect, Qt::AlignCenter, helpTxt);
-
-    // These four calls provide padding for the rect
-    const int margin = QApplication::fontMetrics().height() / 2;
-    bRect.setWidth(bRect.width() + margin);
-    bRect.setHeight(bRect.height() + margin);
-    bRect.setX(bRect.x() - margin);
-    bRect.setY(bRect.y() - margin);
-
-    QColor rectColor(m_uiColor);
-    rectColor.setAlpha(180);
-    QColor textColor(
-      (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
-
-    painter->setBrush(QBrush(rectColor, Qt::SolidPattern));
-    painter->setPen(QPen(textColor));
-
-    painter->drawRect(bRect);
-    painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
 }
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)
