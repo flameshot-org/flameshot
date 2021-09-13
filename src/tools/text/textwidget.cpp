@@ -39,18 +39,11 @@ void TextWidget::setFont(const QFont& f)
     adjustSize();
 }
 
-void TextWidget::updateFont(const QFont& f)
+void TextWidget::setAlignment(Qt::AlignmentFlag alignment)
 {
-    setFont(f);
+    QTextEdit::setAlignment(alignment);
+    adjustSize();
 }
-
-void TextWidget::setFontPointSize(qreal s)
-{
-    QFont f = font();
-    f.setPointSize(s);
-    setFont(f);
-}
-
 void TextWidget::setTextColor(const QColor& c)
 {
     QString s(
