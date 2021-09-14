@@ -93,6 +93,21 @@ bool Color::check(const QVariant& val)
     return QColor::isValidColor(val.toString());
 }
 
+QVariant Color::process(const QVariant& val)
+{
+    QString str = val.toString();
+    QColor color(str);
+    if (str.length() == 9 && str[0] == '#') {
+        // Convert #RRGGBBAA (flameshot) to #AARRGGBB (QColor)
+        int blue = color.blue();
+        color.setBlue(color.green());
+        color.setGreen(color.red());
+        color.setRed(color.alpha());
+        color.setAlpha(blue);
+    }
+    return color;
+}
+
 QVariant Color::fallback()
 {
     return m_def;
@@ -100,7 +115,17 @@ QVariant Color::fallback()
 
 QVariant Color::representation(const QVariant& val)
 {
-    return QString(val.value<QColor>().name());
+    QString str = val.toString();
+    QColor color(str);
+    if (str.length() == 9 && str[0] == '#') {
+        // Convert #AARRGGBB (QColor) to #RRGGBBAA (flameshot)
+        int alpha = color.alpha();
+        color.setAlpha(color.red());
+        color.setRed(color.green());
+        color.setGreen(color.blue());
+        color.setBlue(alpha);
+    }
+    return color.name();
 }
 
 QString Color::expected()
