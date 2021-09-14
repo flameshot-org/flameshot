@@ -641,7 +641,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
