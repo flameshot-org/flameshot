@@ -87,10 +87,9 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
-#if !defined(Q_OS_MACOS) // TODO is this the right way?
+#if !defined(Q_OS_MACOS)
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
 #endif
-    // TODO obsolete?
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
@@ -104,8 +103,6 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // Filename Editor tab
     OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others
-    // TODO obsolete?
-    OPTION("saveAfterCopyPath"           ,ExistingDir        (               )),
     OPTION("drawThickness"               ,LowerBoundedInt(1  , 3             )),
     OPTION("drawColor"                   ,Color              ( Qt::red       )),
     OPTION("userColors"                  ,UserColors         (               )),
