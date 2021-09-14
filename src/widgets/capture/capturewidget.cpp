@@ -744,7 +744,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             newGeometry.setBottom(top);
         }
         m_selection->setGeometry(newGeometry);
-        m_context.selection = extendedRect(newGeometry);
         updateSizeIndicator();
         m_buttonHandler->updatePosition(newGeometry);
         m_buttonHandler->show();
@@ -1040,6 +1039,11 @@ void CaptureWidget::initSelection()
     connect(m_selection, &SelectionWidget::animationEnded, this, [this]() {
         this->m_buttonHandler->updatePosition(this->m_selection->geometry());
     });
+    connect(m_selection, &SelectionWidget::resized, this, [this]() {
+        QRect constrainedToCaptureArea =
+          m_selection->geometry().intersected(rect());
+        m_context.selection = extendedRect(constrainedToCaptureArea);
+    });
     m_selection->setVisible(false);
     m_selection->setGeometry(QRect());
 }
@@ -1283,8 +1287,6 @@ void CaptureWidget::repositionSelection(QRect r)
 {
     if (m_selection->isVisible()) {
         m_selection->setGeometry(r);
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -1323,7 +1325,6 @@ void CaptureWidget::selectAll()
 {
     QRect newGeometry = rect();
     m_selection->setGeometry(newGeometry);
-    m_context.selection = extendedRect(newGeometry);
     m_selection->setVisible(true);
     m_showInitialMsg = false;
     m_buttonHandler->updatePosition(m_selection->geometry());
