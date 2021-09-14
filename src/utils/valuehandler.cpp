@@ -26,6 +26,11 @@ QVariant ValueHandler::representation(const QVariant& val)
     return val.toString();
 }
 
+QString ValueHandler::description()
+{
+    return {};
+}
+
 QVariant ValueHandler::process(const QVariant& val)
 {
     return val;
@@ -51,6 +56,11 @@ QVariant Bool::fallback()
     return m_def;
 }
 
+QString Bool::description()
+{
+    return QStringLiteral("true or false");
+}
+
 // STRING
 
 String::String(const QString& def)
@@ -65,6 +75,11 @@ bool String::check(const QVariant&)
 QVariant String::fallback()
 {
     return m_def;
+}
+
+QString String::description()
+{
+    return QStringLiteral("string");
 }
 
 // COLOR
@@ -88,6 +103,11 @@ QVariant Color::representation(const QVariant& val)
     return QString(val.value<QColor>().name());
 }
 
+QString Color::description()
+{
+    return QStringLiteral("color name or hex value");
+}
+
 // BOUNDED INT
 
 BoundedInt::BoundedInt(int min, int max, int def)
@@ -107,6 +127,11 @@ bool BoundedInt::check(const QVariant& val)
 QVariant BoundedInt::fallback()
 {
     return m_def;
+}
+
+QString BoundedInt::description()
+{
+    return QStringLiteral("number between %1 and %2").arg(m_min).arg(m_max);
 }
 
 // LOWER BOUNDED INT
@@ -129,6 +154,11 @@ QVariant LowerBoundedInt::fallback()
     return m_def;
 }
 
+QString LowerBoundedInt::description()
+{
+    return QStringLiteral("number >= %1").arg(m_min);
+}
+
 // KEY SEQUENCE
 
 KeySequence::KeySequence(const QKeySequence& fallback)
@@ -147,6 +177,11 @@ bool KeySequence::check(const QVariant& val)
 QVariant KeySequence::fallback()
 {
     return m_fallback;
+}
+
+QString KeySequence::description()
+{
+    return QStringLiteral("keyboard shortcut");
 }
 
 // EXISTING DIR
@@ -173,6 +208,11 @@ QVariant ExistingDir::fallback()
     return {};
 }
 
+QString ExistingDir::description()
+{
+    return QStringLiteral("existing directory");
+}
+
 // FILENAME PATTERN
 
 bool FilenamePattern::check(const QVariant&)
@@ -189,6 +229,11 @@ QVariant FilenamePattern::process(const QVariant& val)
 {
     QString str = val.toString();
     return !str.isEmpty() ? val : fallback();
+}
+
+QString FilenamePattern::description()
+{
+    return QStringLiteral("please edit using the GUI");
 }
 
 // BUTTON LIST
@@ -239,6 +284,11 @@ QVariant ButtonList::representation(const QVariant& val)
     auto intList = toIntList(val.value<BList>());
     normalizeButtons(intList);
     return QVariant::fromValue(intList);
+}
+
+QString ButtonList::description()
+{
+    return QStringLiteral("please don't edit by hand");
 }
 
 QList<CaptureToolButton::ButtonType> ButtonList::fromIntList(
@@ -322,4 +372,9 @@ QVariant UserColors::fallback()
                                                 Qt::magenta,
                                                 Qt::darkMagenta,
                                                 QColor() });
+}
+
+QString UserColors::description()
+{
+    return QStringLiteral("list of colors separated by comma");
 }

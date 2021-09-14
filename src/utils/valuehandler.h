@@ -66,6 +66,7 @@ public:
      * the one provided by `QVariant`.
      */
     virtual QVariant representation(const QVariant& val);
+    virtual QString description();
 
 protected:
     /**
@@ -84,6 +85,7 @@ public:
     Bool(bool def);
     bool check(const QVariant& val) override;
     QVariant fallback() override;
+    QString description() override;
 
 private:
     bool m_def;
@@ -95,6 +97,7 @@ public:
     String(const QString& def);
     bool check(const QVariant&) override;
     QVariant fallback() override;
+    QString description() override;
 
 private:
     QString m_def;
@@ -107,6 +110,7 @@ public:
     bool check(const QVariant& val) override;
     QVariant fallback() override;
     QVariant representation(const QVariant& val) override;
+    QString description() override;
 
 private:
     QColor m_def;
@@ -119,7 +123,7 @@ public:
 
     bool check(const QVariant& val) override;
     virtual QVariant fallback() override;
-    ;
+    QString description() override;
 
 private:
     int m_min, m_max, m_def;
@@ -131,6 +135,7 @@ public:
     LowerBoundedInt(int min, int def);
     bool check(const QVariant& val) override;
     virtual QVariant fallback() override;
+    QString description() override;
 
 private:
     int m_min, m_def;
@@ -142,6 +147,7 @@ public:
     KeySequence(const QKeySequence& fallback = {});
     bool check(const QVariant& val) override;
     QVariant fallback() override;
+    QString description() override;
 
 private:
     QKeySequence m_fallback;
@@ -150,8 +156,8 @@ private:
 class ExistingDir : public ValueHandler
 {
     bool check(const QVariant& val) override;
-
     QVariant fallback() override;
+    QString description() override;
 };
 
 class FilenamePattern : public ValueHandler
@@ -159,6 +165,7 @@ class FilenamePattern : public ValueHandler
     bool check(const QVariant&) override;
     QVariant fallback() override;
     QVariant process(const QVariant&) override;
+    QString description() override;
 };
 
 class ButtonList : public ValueHandler
@@ -168,6 +175,7 @@ public:
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
     QVariant representation(const QVariant& val) override;
+    QString description() override;
 
     // UTILITY FUNCTIONS
     static QList<CaptureToolButton::ButtonType> fromIntList(const QList<int>&);
@@ -180,4 +188,5 @@ class UserColors : public ValueHandler
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
+    QString description() override;
 };

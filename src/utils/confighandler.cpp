@@ -14,6 +14,7 @@
 #include <QMap>
 #include <QSharedPointer>
 #include <QStandardPaths>
+#include <QTextStream>
 #include <QVector>
 #include <algorithm>
 #if defined(Q_OS_MACOS)
@@ -163,13 +164,15 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 
 // CLASS CONFIGHANDLER
 
-ConfigHandler::ConfigHandler()
+ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
 {
     m_settings.setDefaultFormat(QSettings::IniFormat);
 
     if (m_configWatcher == nullptr && qApp != nullptr) {
-        // check for error on initial call
-        checkAndHandleError();
+        if (!skipInitialErrorCheck) {
+            // check for error on initial call
+            checkAndHandleError();
+        }
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
         ensureFileWatched();
@@ -449,6 +452,111 @@ QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 
 // ERROR HANDLING
 
+bool ConfigHandler::checkForErrors(QTextStream* log) const
+{
+    return checkUnrecognizedSettings(log) & checkShortcutConflicts(log) &
+           checkSemantics(log);
+}
+
+/**
+ * @brief Parse the config to find settings with unrecognized names.
+ * @return Whether the config passes this check.
+ *
+ * @note An unrecognized option is one that is not included in
+ * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
+ * group the option belongs to.
+ */
+bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
+{
+    // sort the config keys by group
+    QSet<QString> generalKeys = keysFromGroup("General"),
+                  shortcutKeys = keysFromGroup("Shortcuts"),
+                  recognizedGeneralKeys = recognizedGeneralOptions(),
+                  recognizedShortcutKeys = recognizedShortcutNames();
+
+    // subtract recognized keys
+    generalKeys.subtract(recognizedGeneralKeys);
+    shortcutKeys.subtract(recognizedShortcutKeys);
+
+    // what is left are the unrecognized keys - hopefully empty
+    bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
+    if (log != nullptr) {
+        for (const QString& key : generalKeys) {
+            *log << QStringLiteral("Unrecognized setting: '%1'\n").arg(key);
+        }
+        for (const QString& key : shortcutKeys) {
+            *log
+              << QStringLiteral("Unrecognized shortcut name: '%1'.\n").arg(key);
+        }
+    }
+    return ok;
+}
+
+/**
+ * @brief Check if there are multiple shortcuts with the same key binding.
+ * @return Whether the config passes this check.
+ */
+bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
+{
+    bool ok = true;
+    m_settings.beginGroup("Shortcuts");
+    QStringList shortcuts = m_settings.allKeys();
+    QStringList reportedInLog;
+    for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
+        for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
+            // values stored in variables are useful when running debugger
+            QString value1 = m_settings.value(*key1).toString(),
+                    value2 = m_settings.value(*key2).toString();
+            if (!value1.isEmpty() && value1 == value2) {
+                ok = false;
+                if (log == nullptr) {
+                    break;
+                } else if (!reportedInLog.contains(*key1) &&
+                           !reportedInLog.contains(*key2)) {
+                    reportedInLog.append(*key1);
+                    reportedInLog.append(*key2);
+                    *log << QStringLiteral("Shortcut conflict: '%1' and '%2' "
+                                           "have the same shortcut: %3\n")
+                              .arg(*key1)
+                              .arg(*key2)
+                              .arg(value1);
+                }
+            }
+        }
+    }
+    m_settings.endGroup();
+    return ok;
+}
+
+/**
+ * @brief Check each config value semantically.
+ * @return Whether the config passes this check.
+ */
+bool ConfigHandler::checkSemantics(QTextStream* log) const
+{
+    QStringList allKeys = m_settings.allKeys();
+    bool ok = true;
+    for (const QString& key : allKeys) {
+        if (!recognizedGeneralOptions().contains(key) &&
+            !recognizedShortcutNames().contains(baseName(key))) {
+            continue;
+        }
+        QVariant val = m_settings.value(key);
+        auto valueHandler = this->valueHandler(key);
+        if (val.isValid() && !valueHandler->check(val)) {
+            ok = false;
+            if (log == nullptr) {
+                break;
+            } else {
+                *log << QStringLiteral("Semantic error in '%1'. Expected: %2\n")
+                          .arg(key)
+                          .arg(valueHandler->description());
+            }
+        }
+    }
+    return ok;
+}
+
 /**
  * @brief Parse the configuration to find any errors in it.
  *
@@ -462,78 +570,10 @@ void ConfigHandler::checkAndHandleError() const
     if (!QFile(m_settings.fileName()).exists()) {
         setErrorState(false);
     } else {
-        setErrorState(!checkUnrecognizedSettings() ||
-                      !checkShortcutConflicts() || !checkSemantics());
+        setErrorState(!checkForErrors());
     }
 
     ensureFileWatched();
-}
-
-/**
- * @brief Parse the config to find settings with unrecognized names.
- * @return Whether the config passes this check.
- *
- * @note An unrecognized option is one that is not included in
- * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
- * group the option belongs to.
- */
-bool ConfigHandler::checkUnrecognizedSettings() const
-{
-    // sort the config keys by group
-    QSet<QString> generalKeys = keysFromGroup("General"),
-                  shortcutKeys = keysFromGroup("Shortcuts"),
-                  recognizedGeneralKeys = recognizedGeneralOptions(),
-                  recognizedShortcutKeys = recognizedShortcutNames();
-
-    // subtract recognized keys
-    generalKeys.subtract(recognizedGeneralKeys);
-    shortcutKeys.subtract(recognizedShortcutKeys);
-
-    // what is left are the unrecognized keys - hopefully empty
-    if (!generalKeys.isEmpty() || !shortcutKeys.isEmpty()) {
-        return false; // error
-    }
-    return true; // ok
-}
-
-/**
- * @brief Check if there are multiple shortcuts with the same key binding.
- * @return Whether the config passes this check.
- */
-bool ConfigHandler::checkShortcutConflicts() const
-{
-    bool ok = true;
-    m_settings.beginGroup("Shortcuts");
-    QStringList shortcuts = m_settings.allKeys();
-    for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
-        for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
-            // values stored in variables are useful for debugging
-            QString value1 = m_settings.value(*key1).toString(),
-                    value2 = m_settings.value(*key2).toString();
-            if (!value1.isEmpty() && value1 == value2) {
-                ok = false;
-                break;
-            }
-        }
-    }
-    m_settings.endGroup();
-    return ok;
-}
-
-/**
- * @brief Check each config value semantically.
- * @return Whether the config passes this check.
- */
-bool ConfigHandler::checkSemantics() const
-{
-    QStringList allKeys = m_settings.allKeys();
-    for (const QString& key : allKeys) {
-        QVariant val = m_settings.value(key);
-        if (val.isValid() && !valueHandler(key)->check(val)) {
-            return false;
-        }
-    }
-    return true;
 }
 
 /**

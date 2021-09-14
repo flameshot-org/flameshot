@@ -13,6 +13,7 @@ class QFileSystemWatcher;
 class ValueHandler;
 template<class T>
 class QSharedPointer;
+class QTextStream;
 
 /**
  * Declare and implement a getter for a config option. `KEY` is the option key
@@ -48,7 +49,7 @@ class ConfigHandler : public QObject
     Q_OBJECT
 
 public:
-    explicit ConfigHandler();
+    explicit ConfigHandler(bool skipInitialErrorCheck = false);
 
     static ConfigHandler* getInstance();
 
@@ -120,10 +121,11 @@ public:
     QSet<QString> keysFromGroup(const QString& group) const;
 
     // ERROR HANDLING
+    bool checkForErrors(QTextStream* log = nullptr) const;
+    bool checkUnrecognizedSettings(QTextStream* log = nullptr) const;
+    bool checkShortcutConflicts(QTextStream* log = nullptr) const;
+    bool checkSemantics(QTextStream* log = nullptr) const;
     void checkAndHandleError() const;
-    bool checkUnrecognizedSettings() const;
-    bool checkShortcutConflicts() const;
-    bool checkSemantics() const;
     void setErrorState(bool error) const;
     bool hasError() const;
     QString errorMessage() const;

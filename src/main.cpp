@@ -165,6 +165,8 @@ int main(int argc, char* argv[])
       { "a", "autostart" },
       QObject::tr("Enable or disable run at startup"),
       QStringLiteral("bool"));
+    CommandOption checkOption(
+      "check", QObject::tr("Check the configuration for errors"));
     CommandOption showHelpOption(
       { "s", "showhelp" },
       QObject::tr("Show the help message in the capture mode"),
@@ -270,7 +272,8 @@ int main(int argc, char* argv[])
                         trayOption,
                         showHelpOption,
                         mainColorOption,
-                        contrastColorOption },
+                        contrastColorOption,
+                        checkOption },
                       configArgument);
     // Parse
     if (!parser.parse(app.arguments())) {
@@ -447,8 +450,19 @@ int main(int argc, char* argv[])
         bool help = parser.isSet(showHelpOption);
         bool mainColor = parser.isSet(mainColorOption);
         bool contrastColor = parser.isSet(contrastColorOption);
+        bool check = parser.isSet(checkOption);
         bool someFlagSet =
-          (filename || tray || help || mainColor || contrastColor);
+          (filename || tray || help || mainColor || contrastColor || check);
+        if (check) {
+            QTextStream stream(stderr);
+            bool ok = ConfigHandler(true).checkForErrors(&stream);
+            if (ok) {
+                stream << QStringLiteral("No errors detected.\n");
+                goto finish;
+            } else {
+                return 1;
+            }
+        }
         ConfigHandler config;
         if (autostart) {
             QDBusMessage m = QDBusMessage::createMethodCall(
