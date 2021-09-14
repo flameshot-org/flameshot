@@ -21,6 +21,7 @@
 #include "src/widgets/capture/hovereventfilter.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
+#include "src/widgets/capture/overlaymessage.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
@@ -73,6 +74,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_selection(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
+  , m_thicknessByKeyboard(0)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
 
@@ -87,7 +89,6 @@ CaptureWidget::CaptureWidget(uint id,
             this,
             &CaptureWidget::childLeave);
     setAttribute(Qt::WA_DeleteOnClose);
-    m_showInitialMsg = m_config.showHelp();
     m_opacity = m_config.contrastOpacity();
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
@@ -136,7 +137,8 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-#if !(defined(QT_DEBUG) && defined(Q_OS_LINUX))
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=true to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
         resize(pixmap().size());
@@ -196,6 +198,8 @@ CaptureWidget::CaptureWidget(uint id,
     connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
         // Show cursor if it was hidden while adjusting tool thickness
         updateCursor();
+        m_thicknessByKeyboard = 0;
+        setDrawThickness(m_context.thickness);
     });
 
     initPanel();
@@ -215,6 +219,17 @@ CaptureWidget::CaptureWidget(uint id,
           m_configErrorResolved = true;
           update();
       });
+    OverlayMessage::init(this,
+                         QGuiAppCurrentScreen().currentScreen()->geometry());
+
+    if (m_config.showHelp()) {
+        OverlayMessage::push(
+          tr("Select an area with the mouse, or press Esc to exit."
+             "\nPress Enter to capture the screen."
+             "\nPress Right Click to show the color picker."
+             "\nUse the Mouse Wheel to change the thickness of your tool."
+             "\nPress Space to open the side panel."));
+    }
 }
 
 CaptureWidget::~CaptureWidget()
@@ -381,12 +396,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     // draw inactive region
     drawInactiveRegion(&painter);
 
-    // show initial message on screen capture call if required (before selecting
-    // area)
-    if (m_showInitialMsg) {
-        drawInitialMessage(&painter);
-    }
-
     if (m_configError || m_configErrorResolved) {
         drawConfigErrorMessage(&painter);
     }
@@ -505,7 +514,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         showColorPicker(m_mousePressedPos);
         return;
     } else if (e->button() == Qt::LeftButton) {
-        m_showInitialMsg = false;
+        OverlayMessage::pop();
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -784,10 +793,9 @@ void CaptureWidget::moveSelection(QPoint p)
     adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
 }
 
-void CaptureWidget::updateThickness(int thicknessOffset)
+void CaptureWidget::updateThickness(int thickness)
 {
-    m_context.thickness += thicknessOffset;
-    m_context.thickness = qBound(1, m_context.thickness, 100);
+    m_context.thickness = qBound(1, thickness, 100);
 
     QPoint topLeft =
       QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
@@ -810,7 +818,6 @@ void CaptureWidget::updateThickness(int thicknessOffset)
             m_existingObjectIsChanged = true;
         }
     }
-
     emit thicknessChanged(m_context.thickness);
 }
 
@@ -836,6 +843,20 @@ void CaptureWidget::moveDown()
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
 {
+    // If the key is a digit, change the thickness
+    bool ok;
+    int digit = e->text().toInt(&ok);
+    if (ok && e->modifiers() == Qt::NoModifier) { // digit received
+        m_thicknessByKeyboard = 10 * m_thicknessByKeyboard + digit;
+        updateThickness(m_thicknessByKeyboard);
+        if (m_context.thickness != m_thicknessByKeyboard) {
+            // The thickness was out of range and was clipped by updateThickness
+            m_thicknessByKeyboard = 0;
+        }
+    } else {
+        m_thicknessByKeyboard = 0;
+    }
+
     if (!m_selection->isVisible()) {
         return;
     } else if (e->key() == Qt::Key_Control) {
@@ -888,7 +909,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    updateThickness(thicknessOffset);
+    updateThickness(m_context.thickness + thicknessOffset);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
@@ -979,7 +1000,7 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::updateActiveLayer);
 
-    m_sidePanel = new SidePanelWidget(&m_context.screenshot);
+    m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,
@@ -1188,10 +1209,10 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
-            updateThickness(1);
+            updateThickness(m_context.thickness + 1);
             break;
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
-            updateThickness(-1);
+            updateThickness(m_context.thickness - 1);
             break;
         default:
             break;
@@ -1332,7 +1353,6 @@ void CaptureWidget::selectAll()
     m_selection->setGeometry(newGeometry);
     m_context.selection = extendedRect(newGeometry);
     m_selection->setVisible(true);
-    m_showInitialMsg = false;
     m_buttonHandler->updatePosition(m_selection->geometry());
     updateSizeIndicator();
     m_buttonHandler->show();
@@ -1669,56 +1689,6 @@ QRect CaptureWidget::extendedRect(const QRect& r) const
                  r.top() * devicePixelRatio,
                  r.width() * devicePixelRatio,
                  r.height() * devicePixelRatio);
-}
-
-void CaptureWidget::drawInitialMessage(QPainter* painter)
-{
-    if (nullptr == painter) {
-        return;
-    }
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-    QRect helpRect;
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
-        helpRect = currentScreen->geometry();
-    } else {
-        helpRect = QGuiApplication::primaryScreen()->geometry();
-    }
-#else
-    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#endif
-
-    helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
-
-    QString helpTxt =
-      tr("Select an area with the mouse, or press Esc to exit."
-         "\nPress Enter to capture the screen."
-         "\nPress Right Click to show the color picker."
-         "\nUse the Mouse Wheel to change the thickness of your tool."
-         "\nPress Space to open the side panel.");
-
-    // We draw the white contrasting background for the text, using the
-    // same text and options to get the boundingRect that the text will
-    // have.
-    QRectF bRect = painter->boundingRect(helpRect, Qt::AlignCenter, helpTxt);
-
-    // These four calls provide padding for the rect
-    const int margin = QApplication::fontMetrics().height() / 2;
-    bRect.setWidth(bRect.width() + margin);
-    bRect.setHeight(bRect.height() + margin);
-    bRect.setX(bRect.x() - margin);
-    bRect.setY(bRect.y() - margin);
-
-    QColor rectColor(m_uiColor);
-    rectColor.setAlpha(180);
-    QColor textColor(
-      (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
-
-    painter->setBrush(QBrush(rectColor, Qt::SolidPattern));
-    painter->setPen(QPen(textColor));
-
-    painter->drawRect(bRect);
-    painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
 }
 
 void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
