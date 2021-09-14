@@ -23,7 +23,7 @@ QString MoveTool::name() const
     return tr("Move");
 }
 
-ToolType MoveTool::nameID() const
+ToolType MoveTool::type() const
 {
     return ToolType::MOVE;
 }

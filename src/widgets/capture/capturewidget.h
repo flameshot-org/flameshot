@@ -45,7 +45,6 @@ public:
                            QWidget* parent = nullptr);
     ~CaptureWidget();
 
-    void updateButtons();
     QPixmap pixmap();
     void showAppUpdateNotification(const QString& appLatestVersion,
                                    const QString& appLatestUrl);
@@ -86,8 +85,7 @@ private slots:
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
-    void processTool(CaptureTool* t);
-    void handleButtonSignal(CaptureTool::Request r);
+    void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
     void setDrawThickness(const int& t);
     void updateActiveLayer(const int& layer);
@@ -120,6 +118,7 @@ private:
     void initPanel();
     void initSelection();
     void initShortcuts();
+    void initButtons();
     void updateSizeIndicator();
     void updateCursor();
     void pushToolToStack();
@@ -128,14 +127,16 @@ private:
     void repositionSelection(QRect r);
     void adjustSelection(QMargins m);
     void moveSelection(QPoint p);
+    void updateThickness(int thicknessOffset);
 
     QRect extendedSelection() const;
-    QRect extendedRect(QRect* r) const;
-    void drawInitialMessage(QPainter* painter);
+    QRect extendedRect(const QRect& r) const;
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool updateLayersPanel = true,
                        bool drawSelection = false);
     void drawObjectSelection();
+
+    void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
 
     ////////////////////////////////////////
     // Class members
@@ -150,12 +151,13 @@ private:
 
     // Outside selection opacity
     int m_opacity;
+    int m_thicknessByKeyboard;
 
     // utility flags
     bool m_mouseIsClicked;
     bool m_newSelection;
     bool m_grabbing;
-    bool m_showInitialMsg;
+    bool m_movingSelection;
     bool m_captureDone;
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;

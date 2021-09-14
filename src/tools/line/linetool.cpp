@@ -22,7 +22,7 @@ QString LineTool::name() const
     return tr("Line");
 }
 
-ToolType LineTool::nameID() const
+ToolType LineTool::type() const
 {
     return ToolType::LINE;
 }

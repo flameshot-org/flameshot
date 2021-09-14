@@ -104,7 +104,6 @@ public:
     void setUndoLimit(int value);
     int undoLimit();
 
-    QVector<QStringList> shortcuts();
     bool setShortcut(const QString&, const QString&);
     const QString& shortcut(const QString&);
 

@@ -21,6 +21,7 @@
 #include "src/widgets/capture/hovereventfilter.h"
 #include "src/widgets/capture/modificationcommand.h"
 #include "src/widgets/capture/notifierbox.h"
+#include "src/widgets/capture/overlaymessage.h"
 #include "src/widgets/orientablepushbutton.h"
 #include "src/widgets/panel/sidepanelwidget.h"
 #include "src/widgets/panel/utilitypanel.h"
@@ -49,8 +50,9 @@ CaptureWidget::CaptureWidget(uint id,
                              QWidget* parent)
   : QWidget(parent)
   , m_mouseIsClicked(false)
-  , m_newSelection(false)
+  , m_newSelection(true)
   , m_grabbing(false)
+  , m_movingSelection(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
@@ -68,6 +70,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_selection(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
+  , m_thicknessByKeyboard(0)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
 
@@ -82,8 +85,9 @@ CaptureWidget::CaptureWidget(uint id,
             this,
             &CaptureWidget::childLeave);
     setAttribute(Qt::WA_DeleteOnClose);
-    m_showInitialMsg = m_config.showHelpValue();
     m_opacity = m_config.contrastOpacityValue();
+    m_uiColor = m_config.uiMainColorValue();
+    m_contrastUiColor = m_config.uiContrastColorValue();
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
@@ -129,15 +133,17 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-        // Comment For CaptureWidget Debugging under Linux
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=true to enable easier debugging
+#if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
         resize(pixmap().size());
 #endif
+#endif
     }
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
-    updateButtons();
+    initButtons();
     QVector<QRect> areas;
     if (m_context.fullscreen) {
         QPoint topLeftOffset = QPoint(0, 0);
@@ -185,8 +191,26 @@ CaptureWidget::CaptureWidget(uint id,
     // Init notification widget
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
+    connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
+        // Show cursor if it was hidden while adjusting tool thickness
+        updateCursor();
+        m_thicknessByKeyboard = 0;
+        setDrawThickness(m_context.thickness);
+    });
 
     initPanel();
+
+    OverlayMessage::init(this,
+                         QGuiAppCurrentScreen().currentScreen()->geometry());
+
+    if (m_config.showHelpValue()) {
+        OverlayMessage::push(
+          tr("Select an area with the mouse, or press Esc to exit."
+             "\nPress Enter to capture the screen."
+             "\nPress Right Click to show the color picker."
+             "\nUse the Mouse Wheel to change the thickness of your tool."
+             "\nPress Space to open the side panel."));
+    }
 }
 
 CaptureWidget::~CaptureWidget()
@@ -198,13 +222,8 @@ CaptureWidget::~CaptureWidget()
     }
 }
 
-// redefineButtons retrieves the buttons configured to be shown with the
-// selection in the capture
-void CaptureWidget::updateButtons()
+void CaptureWidget::initButtons()
 {
-    m_uiColor = m_config.uiMainColorValue();
-    m_contrastUiColor = m_config.uiContrastColorValue();
-
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.getButtons();
     QVector<CaptureToolButton*> vectorButtons;
@@ -217,6 +236,7 @@ void CaptureWidget::updateButtons()
             m_sizeIndButton = b;
         }
         b->setColor(m_uiColor);
+        b->hide();
         makeChild(b);
 
         switch (t) {
@@ -247,7 +267,7 @@ void CaptureWidget::updateButtons()
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
-                &CaptureWidget::handleButtonSignal);
+                &CaptureWidget::handleToolSignal);
 
         if (visibleButtonTypes.contains(t)) {
             connect(b,
@@ -255,8 +275,6 @@ void CaptureWidget::updateButtons()
                     this,
                     &CaptureWidget::setState);
             vectorButtons << b;
-        } else {
-            b->hide();
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
@@ -264,15 +282,6 @@ void CaptureWidget::updateButtons()
 
 QPixmap CaptureWidget::pixmap()
 {
-    QPixmap p;
-    if (m_toolWidget && m_activeTool) {
-        p = m_context.selectedScreenshotArea().copy();
-        QPainter painter(&p);
-        painter.setRenderHint(QPainter::Antialiasing);
-        m_activeTool->process(painter, p);
-    } else {
-        p = m_context.selectedScreenshotArea();
-    }
     return m_context.selectedScreenshotArea();
 }
 
@@ -367,12 +376,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
     // draw inactive region
     drawInactiveRegion(&painter);
-
-    // show initial message on screen capture call if required (before selecting
-    // area)
-    if (m_showInitialMsg) {
-        drawInitialMessage(&painter);
-    }
 }
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
@@ -398,7 +401,7 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 {
     if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->nameID() != ToolType::MOVE) {
+        m_activeButton->tool()->type() != ToolType::MOVE) {
         if (commitCurrentTool()) {
             return false;
         }
@@ -415,10 +418,10 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         connect(m_activeTool,
                 &CaptureTool::requestAction,
                 this,
-                &CaptureWidget::handleButtonSignal);
+                &CaptureWidget::handleToolSignal);
         m_context.mousePos = pos;
         m_activeTool->drawStart(m_context);
-        if (m_activeTool->nameID() == ToolType::CIRCLECOUNT) {
+        if (m_activeTool->type() == ToolType::CIRCLECOUNT) {
             // While it is based on AbstractTwoPointTool it has the only one
             // point and shouldn't wait for second point and move event
             m_activeTool->drawEnd(m_context.mousePos);
@@ -488,7 +491,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         showColorPicker(m_mousePressedPos);
         return;
     } else if (e->button() == Qt::LeftButton) {
-        m_showInitialMsg = false;
+        OverlayMessage::pop();
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -505,7 +508,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
                 m_selection->setGeometry(
                   QRect(m_mousePressedPos, m_mousePressedPos));
                 m_selection->setVisible(false);
-                m_newSelection = true;
                 m_buttonHandler->hide();
                 update();
             } else {
@@ -534,7 +536,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
     if (activeLayerIndex != -1) {
         // Start object editing
         auto activeTool = m_captureToolObjects.at(activeLayerIndex);
-        if (activeTool && activeTool->nameID() == ToolType::TEXT) {
+        if (activeTool && activeTool->type() == ToolType::TEXT) {
             m_activeTool = activeTool;
             m_mouseIsClicked = false;
             m_context.mousePos = *m_activeTool->pos();
@@ -542,7 +544,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_activeTool->setEditMode(true);
             drawToolsData(true, false);
             m_mouseIsClicked = false;
-            handleButtonSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
+            handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     }
@@ -588,32 +590,14 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     } else if (m_mouseIsClicked &&
                (!m_activeButton ||
                 (m_activeButton && m_activeButton->tool() &&
-                 m_activeButton->tool()->nameID() == ToolType::MOVE))) {
+                 m_activeButton->tool()->type() == ToolType::MOVE))) {
         // Drawing, moving, or stretching a selection
         m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
             m_buttonHandler->hide();
         }
         QRect inputRect;
-        if (m_newSelection) {
-            // Drawing a new selection
-            inputRect = symmetryMod
-                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
-                                  m_context.mousePos)
-                          : QRect(m_dragStartPoint, m_context.mousePos);
-
-        } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
-            // Moving the whole selection
-            if (m_adjustmentButtonPressed || activeToolObject().isNull()) {
-                setCursor(Qt::OpenHandCursor);
-                QRect initialRect = m_selection->savedGeometry().normalized();
-                QPoint newTopLeft =
-                  initialRect.topLeft() + (e->pos() - m_dragStartPoint);
-                inputRect = QRect(newTopLeft, initialRect.size());
-            } else {
-                return;
-            }
-        } else {
+        if (m_mouseOverHandle != SelectionWidget::NO_SIDE) {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
@@ -656,6 +640,27 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                     r.setLeft(r.left() - offset.x());
                 }
             }
+        } else if (!m_movingSelection &&
+                   (!m_selection->geometry().contains(e->pos()) ||
+                    m_newSelection)) {
+            m_newSelection = true;
+            // Drawing a new selection
+            inputRect = symmetryMod
+                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
+                                  m_context.mousePos)
+                          : QRect(m_dragStartPoint, m_context.mousePos);
+        } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
+            // Moving the whole selection
+            m_movingSelection = true;
+            if (m_adjustmentButtonPressed || activeToolObject().isNull()) {
+                setCursor(Qt::OpenHandCursor);
+                QRect initialRect = m_selection->savedGeometry().normalized();
+                QPoint newTopLeft =
+                  initialRect.topLeft() + (e->pos() - m_dragStartPoint);
+                inputRect = QRect(newTopLeft, initialRect.size());
+            } else {
+                return;
+            }
         }
         m_selection->setGeometry(inputRect.intersected(rect()).normalized());
         update();
@@ -674,7 +679,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
               m_buttonHandler->contains(m_context.mousePos);
             if (containsMouse) {
                 m_buttonHandler->hide();
-            } else {
+            } else if (m_selection->isVisible()) {
                 m_buttonHandler->show();
             }
         }
@@ -745,15 +750,18 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             newGeometry.setBottom(top);
         }
         m_selection->setGeometry(newGeometry);
-        m_context.selection = extendedRect(&newGeometry);
+        m_context.selection = extendedRect(newGeometry);
         updateSizeIndicator();
         m_buttonHandler->updatePosition(newGeometry);
         m_buttonHandler->show();
     }
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
-    m_newSelection = false;
     m_grabbing = false;
+    m_movingSelection = false;
+    if (m_selection->isVisible()) {
+        m_newSelection = false;
+    }
 
     updateCursor();
 }
@@ -761,6 +769,34 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 void CaptureWidget::moveSelection(QPoint p)
 {
     adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
+}
+
+void CaptureWidget::updateThickness(int thickness)
+{
+    m_context.thickness = qBound(1, thickness, 100);
+
+    QPoint topLeft =
+      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
+    int offset = m_notifierBox->width() / 4;
+    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    m_notifierBox->showMessage(QString::number(m_context.thickness));
+
+    if (m_activeButton && m_activeButton->tool() &&
+        m_activeButton->tool()->showMousePreview()) {
+        setCursor(Qt::BlankCursor);
+        update();
+    }
+
+    // update selected object thickness
+    auto toolItem = activeToolObject();
+    if (toolItem) {
+        toolItem->thicknessChanged(m_context.thickness);
+        if (!m_existingObjectIsChanged) {
+            m_captureToolObjectsBackup = m_captureToolObjects;
+            m_existingObjectIsChanged = true;
+        }
+    }
+    emit thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::moveLeft()
@@ -785,6 +821,20 @@ void CaptureWidget::moveDown()
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
 {
+    // If the key is a digit, change the thickness
+    bool ok;
+    int digit = e->text().toInt(&ok);
+    if (ok && e->modifiers() == Qt::NoModifier) { // digit received
+        m_thicknessByKeyboard = 10 * m_thicknessByKeyboard + digit;
+        updateThickness(m_thicknessByKeyboard);
+        if (m_context.thickness != m_thicknessByKeyboard) {
+            // The thickness was out of range and was clipped by updateThickness
+            m_thicknessByKeyboard = 0;
+        }
+    } else {
+        m_thicknessByKeyboard = 0;
+    }
+
     if (!m_selection->isVisible()) {
         return;
     } else if (e->key() == Qt::Key_Control) {
@@ -837,29 +887,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    m_context.thickness += thicknessOffset;
-    m_context.thickness = qBound(1, m_context.thickness, 100);
-    QPoint topLeft =
-      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
-    int offset = m_notifierBox->width() / 4;
-    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
-    m_notifierBox->showMessage(QString::number(m_context.thickness));
-    if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->showMousePreview()) {
-        update();
-    }
-
-    // update selected object thickness
-    // Reset selection if mouse pos is not in selection area
-    auto toolItem = activeToolObject();
-    if (toolItem) {
-        toolItem->thicknessChanged(m_context.thickness);
-        if (!m_existingObjectIsChanged) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_existingObjectIsChanged = true;
-        }
-    }
-    emit thicknessChanged(m_context.thickness);
+    updateThickness(m_context.thickness + thicknessOffset);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
@@ -950,7 +978,7 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::updateActiveLayer);
 
-    m_sidePanel = new SidePanelWidget(&m_context.screenshot);
+    m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
             &SidePanelWidget::colorChanged,
             this,
@@ -971,8 +999,8 @@ void CaptureWidget::initPanel()
             &SidePanelWidget::togglePanel,
             m_panel,
             &UtilityPanel::toggle);
-    m_sidePanel->colorChanged(m_context.color);
-    m_sidePanel->thicknessChanged(m_context.thickness);
+    emit m_sidePanel->colorChanged(m_context.color);
+    emit m_sidePanel->thicknessChanged(m_context.thickness);
     m_panel->pushWidget(m_sidePanel);
 
     // Fill undo/redo/history list widget
@@ -1036,7 +1064,12 @@ void CaptureWidget::setState(CaptureToolButton* b)
         }
     }
     if (m_activeButton != b) {
-        processTool(b->tool());
+        auto backup = m_activeTool;
+        // The tool is active during the pressed().
+        // This must be done in order to handle tool requests correctly.
+        m_activeTool = b->tool();
+        m_activeTool->pressed(m_context);
+        m_activeTool = backup;
     }
 
     // Only close activated from button
@@ -1068,25 +1101,16 @@ void CaptureWidget::setState(CaptureToolButton* b)
 void CaptureWidget::loadDrawThickness()
 {
     if ((m_activeButton && m_activeButton->tool() &&
-         m_activeButton->tool()->nameID() == ToolType::TEXT) ||
-        (m_activeTool && m_activeTool->nameID() == ToolType::TEXT)) {
+         m_activeButton->tool()->type() == ToolType::TEXT) ||
+        (m_activeTool && m_activeTool->type() == ToolType::TEXT)) {
         m_context.thickness = m_config.drawFontSizeValue();
     } else {
         m_context.thickness = m_config.drawThicknessValue();
     }
-    m_sidePanel->thicknessChanged(m_context.thickness);
+    emit m_sidePanel->thicknessChanged(m_context.thickness);
 }
 
-void CaptureWidget::processTool(CaptureTool* t)
-{
-    auto backup = m_activeTool;
-    // The tool is active during the pressed().
-    m_activeTool = t;
-    t->pressed(m_context);
-    m_activeTool = backup;
-}
-
-void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
+void CaptureWidget::handleToolSignal(CaptureTool::Request r)
 {
     switch (r) {
         case CaptureTool::REQ_CLEAR_MODIFICATIONS:
@@ -1158,26 +1182,15 @@ void CaptureWidget::handleButtonSignal(CaptureTool::Request r)
             } else {
                 QWidget* w = m_activeTool->widget();
                 w->setAttribute(Qt::WA_DeleteOnClose);
+                w->activateWindow();
                 w->show();
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
-            // increase thickness
-            m_context.thickness = qBound(1, m_context.thickness + 1, 100);
-
-            // show notifier circle
-            m_notifierBox->showMessage(QString::number(m_context.thickness));
-
-            emit thicknessChanged(m_context.thickness);
+            updateThickness(m_context.thickness + 1);
             break;
         case CaptureTool::REQ_DECREASE_TOOL_SIZE:
-            // decrease thickness
-            m_context.thickness = qBound(1, m_context.thickness - 1, 100);
-
-            // show notifier circle
-            m_notifierBox->showMessage(QString::number(m_context.thickness));
-
-            emit thicknessChanged(m_context.thickness);
+            updateThickness(m_context.thickness - 1);
             break;
         default:
             break;
@@ -1195,7 +1208,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
         auto toolItem = activeToolObject();
         if (toolItem) {
             // Change color
-            emit toolItem->colorChanged(c);
+            toolItem->colorChanged(c);
             drawToolsData(false, true);
         }
     }
@@ -1205,7 +1218,7 @@ void CaptureWidget::updateActiveLayer(const int& layer)
 {
     // TODO - refactor this part, make all objects to work with
     // m_activeTool->isChanged() and remove m_existingObjectIsChanged
-    if (m_activeTool && m_activeTool->nameID() == ToolType::TEXT &&
+    if (m_activeTool && m_activeTool->type() == ToolType::TEXT &&
         m_activeTool->isChanged()) {
         commitCurrentTool();
     }
@@ -1227,8 +1240,7 @@ void CaptureWidget::removeToolObject(int index)
 {
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
-        const ToolType currentToolType =
-          m_captureToolObjects.at(index)->nameID();
+        const ToolType currentToolType = m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.removeAt(index);
         if (currentToolType == ToolType::CIRCLECOUNT) {
@@ -1236,7 +1248,7 @@ void CaptureWidget::removeToolObject(int index)
             int circleCount = 1;
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
                 auto toolItem = m_captureToolObjects.at(cnt);
-                if (toolItem->nameID() != ToolType::CIRCLECOUNT) {
+                if (toolItem->type() != ToolType::CIRCLECOUNT) {
                     continue;
                 }
                 if (cnt >= index) {
@@ -1256,7 +1268,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     // save draw thickness for text and other tool separately
     if (m_activeButton) {
         if (m_activeButton->tool() &&
-            m_activeButton->tool()->nameID() == ToolType::TEXT) {
+            m_activeButton->tool()->type() == ToolType::TEXT) {
             m_config.setDrawFontSize(m_context.thickness);
         } else {
             m_config.setDrawThickness(m_context.thickness);
@@ -1266,7 +1278,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     auto toolItem = activeToolObject();
     if (toolItem) {
         // Change thickness
-        emit toolItem->thicknessChanged(t);
+        toolItem->thicknessChanged(t);
         drawToolsData(false, true);
     } else {
         emit thicknessChanged(m_context.thickness);
@@ -1278,7 +1290,7 @@ void CaptureWidget::repositionSelection(QRect r)
     if (m_selection->isVisible()) {
         m_selection->setGeometry(r);
         QRect newGeometry = m_selection->geometry().intersected(rect());
-        m_context.selection = extendedRect(&newGeometry);
+        m_context.selection = extendedRect(newGeometry);
         m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
         update();
@@ -1317,9 +1329,8 @@ void CaptureWidget::selectAll()
 {
     QRect newGeometry = rect();
     m_selection->setGeometry(newGeometry);
-    m_context.selection = extendedRect(&newGeometry);
+    m_context.selection = extendedRect(newGeometry);
     m_selection->setVisible(true);
-    m_showInitialMsg = false;
     m_buttonHandler->updatePosition(m_selection->geometry());
     updateSizeIndicator();
     m_buttonHandler->show();
@@ -1328,25 +1339,22 @@ void CaptureWidget::selectAll()
 
 void CaptureWidget::initShortcuts()
 {
-    QString shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_EXIT).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(close()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_EXIT")), this, SLOT(close()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_SAVE).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(saveScreenshot()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SAVE")),
+                  this,
+                  SLOT(saveScreenshot()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_COPY).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(copyScreenshot()));
+    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_COPY")),
+                  this,
+                  SLOT(copyScreenshot()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_UNDO).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(undo()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
-    shortcut = ConfigHandler().shortcut(
-      QVariant::fromValue(CaptureToolButton::ButtonType::TYPE_REDO).toString());
-    new QShortcut(QKeySequence(shortcut), this, SLOT(redo()));
+    new QShortcut(
+      QKeySequence(ConfigHandler().shortcut("TYPE_REDO")), this, SLOT(redo()));
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                   this,
@@ -1377,6 +1385,7 @@ void CaptureWidget::initShortcuts()
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                   this,
                   SLOT(moveDown()));
+
     new QShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
@@ -1397,7 +1406,7 @@ void CaptureWidget::initShortcuts()
 void CaptureWidget::deleteCurrentTool()
 {
     int thickness_old = m_context.thickness;
-    emit m_panel->slotButtonDelete(true);
+    m_panel->slotButtonDelete(true);
     drawObjectSelection();
     if (thickness_old != m_context.thickness) {
         emit thicknessChanged(m_context.thickness);
@@ -1425,7 +1434,7 @@ void CaptureWidget::updateCursor()
             setCursor(Qt::ArrowCursor);
         }
     } else if (m_activeButton && m_activeButton->tool() &&
-               m_activeButton->tool()->nameID() == ToolType::MOVE) {
+               m_activeButton->tool()->type() == ToolType::MOVE) {
         setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
         using sw = SelectionWidget;
@@ -1510,14 +1519,12 @@ void CaptureWidget::pushToolToStack()
 void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
 {
     QPixmap pixmapItem = m_context.origScreenshot.copy();
-    QPainter painter(&pixmapItem);
-    painter.setRenderHint(QPainter::Antialiasing);
     int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        if (toolItem->nameID() == ToolType::CIRCLECOUNT) {
+        if (toolItem->type() == ToolType::CIRCLECOUNT) {
             toolItem->setCount(circleCount++);
         }
-        toolItem->process(painter, pixmapItem);
+        processPixmapWithTool(&pixmapItem, toolItem);
     }
 
     m_context.screenshot = pixmapItem.copy();
@@ -1549,6 +1556,13 @@ void CaptureWidget::drawObjectSelection()
             uncheckActiveTool();
         }
     }
+}
+
+void CaptureWidget::processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool)
+{
+    QPainter painter(pixmap);
+    painter.setRenderHint(QPainter::Antialiasing);
+    tool->process(painter, *pixmap);
 }
 
 QPointer<CaptureTool> CaptureWidget::activeToolObject()
@@ -1583,12 +1597,12 @@ void CaptureWidget::copyScreenshot()
 {
     m_captureDone = true;
     if (m_activeTool != nullptr) {
-        QPainter painter(&m_context.screenshot);
-        painter.setRenderHint(QPainter::Antialiasing);
-        m_activeTool->process(painter, m_context.screenshot);
+        processPixmapWithTool(&m_context.screenshot, m_activeTool);
     }
 
-    ScreenshotSaver().saveToClipboard(pixmap());
+    auto req = Controller::getInstance()->requests().find(m_id);
+    req->addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+
     close();
 }
 
@@ -1599,16 +1613,13 @@ void CaptureWidget::saveScreenshot()
 #endif
     m_captureDone = true;
     if (m_activeTool != nullptr) {
-        QPainter painter(&m_context.screenshot);
-        painter.setRenderHint(QPainter::Antialiasing);
-        m_activeTool->process(painter, m_context.screenshot);
+        processPixmapWithTool(&m_context.screenshot, m_activeTool);
     }
     hide();
     if (m_context.savePath.isEmpty()) {
         ScreenshotSaver(m_id).saveToFilesystemGUI(pixmap());
     } else {
-        ScreenshotSaver(m_id).saveToFilesystem(
-          pixmap(), m_context.savePath, "");
+        ScreenshotSaver(m_id).saveToFilesystem(pixmap(), m_context.savePath);
     }
     close();
 }
@@ -1646,66 +1657,16 @@ QRect CaptureWidget::extendedSelection() const
         return QRect();
     }
     QRect r = m_selection->geometry();
-    return extendedRect(&r);
+    return extendedRect(r);
 }
 
-QRect CaptureWidget::extendedRect(QRect* r) const
+QRect CaptureWidget::extendedRect(const QRect& r) const
 {
     auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
-    return QRect(r->left() * devicePixelRatio,
-                 r->top() * devicePixelRatio,
-                 r->width() * devicePixelRatio,
-                 r->height() * devicePixelRatio);
-}
-
-void CaptureWidget::drawInitialMessage(QPainter* painter)
-{
-    if (nullptr == painter) {
-        return;
-    }
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-    QRect helpRect;
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
-        helpRect = currentScreen->geometry();
-    } else {
-        helpRect = QGuiApplication::primaryScreen()->geometry();
-    }
-#else
-    QRect helpRect = QGuiApplication::primaryScreen()->geometry();
-#endif
-
-    helpRect.moveTo(mapFromGlobal(helpRect.topLeft()));
-
-    QString helpTxt =
-      tr("Select an area with the mouse, or press Esc to exit."
-         "\nPress Enter to capture the screen."
-         "\nPress Right Click to show the color picker."
-         "\nUse the Mouse Wheel to change the thickness of your tool."
-         "\nPress Space to open the side panel.");
-
-    // We draw the white contrasting background for the text, using the
-    // same text and options to get the boundingRect that the text will
-    // have.
-    QRectF bRect = painter->boundingRect(helpRect, Qt::AlignCenter, helpTxt);
-
-    // These four calls provide padding for the rect
-    const int margin = QApplication::fontMetrics().height() / 2;
-    bRect.setWidth(bRect.width() + margin);
-    bRect.setHeight(bRect.height() + margin);
-    bRect.setX(bRect.x() - margin);
-    bRect.setY(bRect.y() - margin);
-
-    QColor rectColor(m_uiColor);
-    rectColor.setAlpha(180);
-    QColor textColor(
-      (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
-
-    painter->setBrush(QBrush(rectColor, Qt::SolidPattern));
-    painter->setPen(QPen(textColor));
-
-    painter->drawRect(bRect);
-    painter->drawText(helpRect, Qt::AlignCenter, helpTxt);
+    return QRect(r.left() * devicePixelRatio,
+                 r.top() * devicePixelRatio,
+                 r.width() * devicePixelRatio,
+                 r.height() * devicePixelRatio);
 }
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)

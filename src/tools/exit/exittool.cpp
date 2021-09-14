@@ -23,7 +23,7 @@ QString ExitTool::name() const
     return tr("Exit");
 }
 
-ToolType ExitTool::nameID() const
+ToolType ExitTool::type() const
 {
     return ToolType::EXIT;
 }

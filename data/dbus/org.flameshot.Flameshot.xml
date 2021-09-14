@@ -5,6 +5,7 @@
       <!--
         graphicCapture:
         @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
+        @toClipboard: Whether to copy the screenshot to clipboard or not.
         @delay: delay time in milliseconds.
         @id: identificator of the call.
 
@@ -13,6 +14,7 @@
     -->
     <method name="graphicCapture">
       <arg name="path" type="s" direction="in"/>
+      <arg name="toClipboard" type="b" direction="in"/>
       <arg name="delay" type="i" direction="in"/>
       <arg name="id" type="u" direction="in"/>
     </method>

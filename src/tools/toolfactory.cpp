@@ -8,6 +8,7 @@
 #include "copy/copytool.h"
 #include "exit/exittool.h"
 #include "imgur/imguruploadertool.h"
+#include "invert/inverttool.h"
 #include "launcher/applaunchertool.h"
 #include "line/linetool.h"
 #include "marker/markertool.h"
@@ -67,6 +68,9 @@ CaptureTool* ToolFactory::CreateTool(CaptureToolButton::ButtonType t,
             break;
         case CaptureToolButton::TYPE_SAVE:
             tool = new SaveTool(parent);
+            break;
+        case CaptureToolButton::TYPE_INVERT:
+            tool = new InvertTool(parent);
             break;
         case CaptureToolButton::TYPE_SELECTION:
             tool = new SelectionTool(parent);

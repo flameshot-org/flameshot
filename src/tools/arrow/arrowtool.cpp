@@ -72,7 +72,7 @@ QString ArrowTool::name() const
     return tr("Arrow");
 }
 
-ToolType ArrowTool::nameID() const
+ToolType ArrowTool::type() const
 {
     return ToolType::ARROW;
 }

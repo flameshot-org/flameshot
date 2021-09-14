@@ -52,8 +52,8 @@ bool DraggableWidgetMaker::eventFilter(QObject* obj, QEvent* event)
             }
         } break;
         case QEvent::MouseButtonRelease: {
+            m_isPressing = false;
             if (m_isDragging) {
-                m_isPressing = false;
                 m_isDragging = false;
                 event->ignore();
                 return true;

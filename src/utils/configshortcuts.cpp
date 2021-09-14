@@ -1,5 +1,6 @@
 #include "configshortcuts.h"
 #include "src/tools/capturetool.h"
+#include <QMetaEnum>
 #include <QVariant>
 
 ConfigShortcuts::ConfigShortcuts() {}
@@ -7,71 +8,31 @@ ConfigShortcuts::ConfigShortcuts() {}
 const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
   const QVector<CaptureToolButton::ButtonType>& buttons)
 {
-    // get shortcuts names from tools
+    // get shortcuts names from capture buttons
     for (const CaptureToolButton::ButtonType& t : buttons) {
         CaptureToolButton* b = new CaptureToolButton(t, nullptr);
         QString shortcutName = QVariant::fromValue(t).toString();
-        QKeySequence ks = captureShortcutDefault(t);
         if (shortcutName != "TYPE_IMAGEUPLOADER") {
-            m_shortcuts << (QStringList()
-                            << shortcutName << b->tool()->description()
-                            << ks.toString());
+            addShortcut(shortcutName, b->tool()->description());
         }
         delete b;
     }
 
-    m_shortcuts << (QStringList()
-                    << "TYPE_TOGGLE_PANEL" << QObject::tr("Toggle side panel")
-                    << QKeySequence(Qt::Key_Space).toString());
+    // additional tools that don't have their own buttons
+    addShortcut("TYPE_TOGGLE_PANEL", "Toggle side panel");
+    addShortcut("TYPE_RESIZE_LEFT", "Resize selection left 1px");
+    addShortcut("TYPE_RESIZE_RIGHT", "Resize selection right 1px");
+    addShortcut("TYPE_RESIZE_UP", "Resize selection up 1px");
+    addShortcut("TYPE_RESIZE_DOWN", "Resize selection down 1px");
+    addShortcut("TYPE_SELECT_ALL", "Select entire screen");
+    addShortcut("TYPE_MOVE_LEFT", "Move selection left 1px");
+    addShortcut("TYPE_MOVE_RIGHT", "Move selection right 1px");
+    addShortcut("TYPE_MOVE_UP", "Move selection up 1px");
+    addShortcut("TYPE_MOVE_DOWN", "Move selection down 1px");
+    addShortcut("TYPE_COMMIT_CURRENT_TOOL", "Commit text in text area");
+    addShortcut("TYPE_DELETE_CURRENT_TOOL", "Delete current tool");
 
-    m_shortcuts << (QStringList()
-                    << "TYPE_RESIZE_LEFT"
-                    << QObject::tr("Resize selection left 1px")
-                    << QKeySequence(Qt::SHIFT + Qt::Key_Left).toString());
-    m_shortcuts << (QStringList()
-                    << "TYPE_RESIZE_RIGHT"
-                    << QObject::tr("Resize selection right 1px")
-                    << QKeySequence(Qt::SHIFT + Qt::Key_Right).toString());
-    m_shortcuts << (QStringList()
-                    << "TYPE_RESIZE_UP"
-                    << QObject::tr("Resize selection up 1px")
-                    << QKeySequence(Qt::SHIFT + Qt::Key_Up).toString());
-    m_shortcuts << (QStringList()
-                    << "TYPE_RESIZE_DOWN"
-                    << QObject::tr("Resize selection down 1px")
-                    << QKeySequence(Qt::SHIFT + Qt::Key_Down).toString());
-
-    m_shortcuts << (QStringList()
-                    << "TYPE_SELECT_ALL" << QObject::tr("Select entire screen")
-                    << QKeySequence(Qt::CTRL + Qt::Key_A).toString());
-
-    m_shortcuts << (QStringList() << "TYPE_MOVE_LEFT"
-                                  << QObject::tr("Move selection left 1px")
-                                  << QKeySequence(Qt::Key_Left).toString());
-    m_shortcuts << (QStringList() << "TYPE_MOVE_RIGHT"
-                                  << QObject::tr("Move selection right 1px")
-                                  << QKeySequence(Qt::Key_Right).toString());
-    m_shortcuts << (QStringList()
-                    << "TYPE_MOVE_UP" << QObject::tr("Move selection up 1px")
-                    << QKeySequence(Qt::Key_Up).toString());
-    m_shortcuts << (QStringList() << "TYPE_MOVE_DOWN"
-                                  << QObject::tr("Move selection down 1px")
-                                  << QKeySequence(Qt::Key_Down).toString());
-    m_shortcuts << (QStringList()
-                    << "TYPE_COMMIT_CURRENT_TOOL"
-                    << QObject::tr("Commit text in text area")
-                    << QKeySequence(Qt::CTRL + Qt::Key_Return).toString());
-
-#if defined(Q_OS_MACOS)
-    m_shortcuts << (QStringList()
-                    << "TYPE_DELETE_CURRENT_TOOL"
-                    << QObject::tr("Delete current tool")
-                    << QKeySequence(Qt::Key_Backspace).toString());
-#else
-    m_shortcuts << (QStringList() << "TYPE_DELETE_CURRENT_TOOL"
-                                  << QObject::tr("Delete current tool")
-                                  << QKeySequence(Qt::Key_Delete).toString());
-#endif
+    // non-editable shortcuts have an empty shortcut name
 
     m_shortcuts << (QStringList() << "" << QObject::tr("Quit capture")
                                   << QKeySequence(Qt::Key_Escape).toString());
@@ -102,66 +63,87 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
 }
 
 const QKeySequence& ConfigShortcuts::captureShortcutDefault(
-  const CaptureToolButton::ButtonType& buttonType)
+  const QString& buttonType)
 {
     m_ks = QKeySequence();
-    switch (buttonType) {
-        case CaptureToolButton::ButtonType::TYPE_PENCIL:
-            m_ks = QKeySequence(Qt::Key_P);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_DRAWER:
-            m_ks = QKeySequence(Qt::Key_D);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_ARROW:
-            m_ks = QKeySequence(Qt::Key_A);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_SELECTION:
-            m_ks = QKeySequence(Qt::Key_S);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_RECTANGLE:
-            m_ks = QKeySequence(Qt::Key_R);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_CIRCLE:
-            m_ks = QKeySequence(Qt::Key_C);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_MARKER:
-            m_ks = QKeySequence(Qt::Key_M);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_MOVESELECTION:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_M);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_UNDO:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_Z);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_COPY:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_C);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_SAVE:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_S);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_EXIT:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_Q);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_U);
-            break;
+    if (buttonType == "TYPE_PENCIL") {
+        m_ks = QKeySequence(Qt::Key_P);
+    } else if (buttonType == "TYPE_DRAWER") {
+        m_ks = QKeySequence(Qt::Key_D);
+    } else if (buttonType == "TYPE_ARROW") {
+        m_ks = QKeySequence(Qt::Key_A);
+    } else if (buttonType == "TYPE_SELECTION") {
+        m_ks = QKeySequence(Qt::Key_S);
+    } else if (buttonType == "TYPE_RECTANGLE") {
+        m_ks = QKeySequence(Qt::Key_R);
+    } else if (buttonType == "TYPE_CIRCLE") {
+        m_ks = QKeySequence(Qt::Key_C);
+    } else if (buttonType == "TYPE_MARKER") {
+        m_ks = QKeySequence(Qt::Key_M);
+    } else if (buttonType == "TYPE_MOVESELECTION") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_M);
+    } else if (buttonType == "TYPE_UNDO") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_Z);
+    } else if (buttonType == "TYPE_COPY") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_C);
+    } else if (buttonType == "TYPE_SAVE") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_S);
+    } else if (buttonType == "TYPE_EXIT") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_Q);
+    } else if (buttonType == "TYPE_IMAGEUPLOADER") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_U);
+    }
 #if !defined(Q_OS_MACOS)
-        case CaptureToolButton::ButtonType::TYPE_OPEN_APP:
-            m_ks = QKeySequence(Qt::CTRL + Qt::Key_O);
-            break;
+    else if (buttonType == "TYPE_OPEN_APP") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_O);
+    }
 #endif
-        case CaptureToolButton::ButtonType::TYPE_PIXELATE:
-            m_ks = QKeySequence(Qt::Key_B);
-            break;
-        case CaptureToolButton::ButtonType::TYPE_REDO:
-            m_ks = QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z);
-            break;
-            //    case CaptureToolButton::ButtonType::TYPE_PIN:
-        case CaptureToolButton::ButtonType::TYPE_TEXT:
-            m_ks = QKeySequence(Qt::Key_T);
-            break;
-        default:
-            break;
+    else if (buttonType == "TYPE_PIXELATE") {
+        m_ks = QKeySequence(Qt::Key_B);
+    } else if (buttonType == "TYPE_REDO") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Z);
+    } else if (buttonType == "TYPE_TEXT") {
+        m_ks = QKeySequence(Qt::Key_T);
+    } else if (buttonType == "TYPE_INVERT") {
+        m_ks = QKeySequence(Qt::Key_I);
+    } else if (buttonType == "TYPE_TOGGLE_PANEL") {
+        m_ks = QKeySequence(Qt::Key_Space);
+    } else if (buttonType == "TYPE_RESIZE_LEFT") {
+        m_ks = QKeySequence(Qt::SHIFT + Qt::Key_Left);
+    } else if (buttonType == "TYPE_RESIZE_RIGHT") {
+        m_ks = QKeySequence(Qt::SHIFT + Qt::Key_Right);
+    } else if (buttonType == "TYPE_RESIZE_UP") {
+        m_ks = QKeySequence(Qt::SHIFT + Qt::Key_Up);
+    } else if (buttonType == "TYPE_RESIZE_DOWN") {
+        m_ks = QKeySequence(Qt::SHIFT + Qt::Key_Down);
+    } else if (buttonType == "TYPE_SELECT_ALL") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_A);
+    } else if (buttonType == "TYPE_MOVE_LEFT") {
+        m_ks = QKeySequence(Qt::Key_Left);
+    } else if (buttonType == "TYPE_MOVE_RIGHT") {
+        m_ks = QKeySequence(Qt::Key_Right);
+    } else if (buttonType == "TYPE_MOVE_UP") {
+        m_ks = QKeySequence(Qt::Key_Up);
+    } else if (buttonType == "TYPE_MOVE_DOWN") {
+        m_ks = QKeySequence(Qt::Key_Down);
+    } else if (buttonType == "TYPE_COMMIT_CURRENT_TOOL") {
+        m_ks = QKeySequence(Qt::CTRL + Qt::Key_Return);
+    } else if (buttonType == "TYPE_DELETE_CURRENT_TOOL") {
+#if defined(Q_OS_MACOS)
+        m_ks = QKeySequence(Qt::Key_Backspace);
+#else
+        m_ks = QKeySequence(Qt::Key_Delete);
+#endif
     }
     return m_ks;
+}
+
+// Helper function
+void ConfigShortcuts::addShortcut(const QString& shortcutName,
+                                  const QString& description)
+{
+    m_shortcuts << (QStringList()
+                    << shortcutName
+                    << QObject::tr(description.toStdString().c_str())
+                    << captureShortcutDefault(shortcutName).toString());
 }
