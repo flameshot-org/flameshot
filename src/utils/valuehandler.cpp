@@ -90,7 +90,11 @@ Color::Color(const QColor& def)
 
 bool Color::check(const QVariant& val)
 {
-    return QColor::isValidColor(val.toString());
+    QString str = val.toString();
+    // Disable #RGB, #RRRGGGBBB and #RRRRGGGGBBBB formats that QColor supports
+    return QColor::isValidColor(str) &&
+           (str[0] != '#' ||
+            (str.length() != 4 && str.length() != 10 && str.length() != 13));
 }
 
 QVariant Color::process(const QVariant& val)
