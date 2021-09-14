@@ -40,6 +40,7 @@ protected:
 
 signals:
     void animationEnded();
+    void resized();
 
 public slots:
     void updateColor(const QColor& c);
