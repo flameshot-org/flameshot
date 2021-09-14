@@ -361,7 +361,7 @@ bool UserColors::check(const QVariant& val)
         return false;
     }
     for (const QString& str : val.toStringList()) {
-        if (!QColor::isValidColor(str)) {
+        if (!QColor::isValidColor(str) && str != "picker") {
             return false;
         }
     }
@@ -379,7 +379,11 @@ QVariant UserColors::process(const QVariant& val)
     colors.reserve(strColors.size());
 
     for (const QString& str : strColors) {
-        colors.append(QColor(str));
+        if (str != "picker") {
+            colors.append(QColor(str));
+        } else {
+            colors.append(QColor());
+        }
     }
 
     return QVariant::fromValue(colors);
