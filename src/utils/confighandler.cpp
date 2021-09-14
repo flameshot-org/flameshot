@@ -550,7 +550,7 @@ bool ConfigHandler::checkSemantics(QTextStream* log) const
             } else {
                 *log << QStringLiteral("Semantic error in '%1'. Expected: %2\n")
                           .arg(key)
-                          .arg(valueHandler->description());
+                          .arg(valueHandler->expected());
             }
         }
     }

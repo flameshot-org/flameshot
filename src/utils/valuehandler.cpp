@@ -26,7 +26,7 @@ QVariant ValueHandler::representation(const QVariant& val)
     return val.toString();
 }
 
-QString ValueHandler::description()
+QString ValueHandler::expected()
 {
     return {};
 }
@@ -56,7 +56,7 @@ QVariant Bool::fallback()
     return m_def;
 }
 
-QString Bool::description()
+QString Bool::expected()
 {
     return QStringLiteral("true or false");
 }
@@ -77,7 +77,7 @@ QVariant String::fallback()
     return m_def;
 }
 
-QString String::description()
+QString String::expected()
 {
     return QStringLiteral("string");
 }
@@ -103,7 +103,7 @@ QVariant Color::representation(const QVariant& val)
     return QString(val.value<QColor>().name());
 }
 
-QString Color::description()
+QString Color::expected()
 {
     return QStringLiteral("color name or hex value");
 }
@@ -129,7 +129,7 @@ QVariant BoundedInt::fallback()
     return m_def;
 }
 
-QString BoundedInt::description()
+QString BoundedInt::expected()
 {
     return QStringLiteral("number between %1 and %2").arg(m_min).arg(m_max);
 }
@@ -154,7 +154,7 @@ QVariant LowerBoundedInt::fallback()
     return m_def;
 }
 
-QString LowerBoundedInt::description()
+QString LowerBoundedInt::expected()
 {
     return QStringLiteral("number >= %1").arg(m_min);
 }
@@ -179,7 +179,7 @@ QVariant KeySequence::fallback()
     return m_fallback;
 }
 
-QString KeySequence::description()
+QString KeySequence::expected()
 {
     return QStringLiteral("keyboard shortcut");
 }
@@ -208,7 +208,7 @@ QVariant ExistingDir::fallback()
     return {};
 }
 
-QString ExistingDir::description()
+QString ExistingDir::expected()
 {
     return QStringLiteral("existing directory");
 }
@@ -231,7 +231,7 @@ QVariant FilenamePattern::process(const QVariant& val)
     return !str.isEmpty() ? val : fallback();
 }
 
-QString FilenamePattern::description()
+QString FilenamePattern::expected()
 {
     return QStringLiteral("please edit using the GUI");
 }
@@ -286,7 +286,7 @@ QVariant ButtonList::representation(const QVariant& val)
     return QVariant::fromValue(intList);
 }
 
-QString ButtonList::description()
+QString ButtonList::expected()
 {
     return QStringLiteral("please don't edit by hand");
 }
@@ -374,7 +374,7 @@ QVariant UserColors::fallback()
                                                 QColor() });
 }
 
-QString UserColors::description()
+QString UserColors::expected()
 {
     return QStringLiteral("list of colors separated by comma");
 }
