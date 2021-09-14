@@ -97,6 +97,7 @@ void SelectionWidget::resizeEvent(QResizeEvent*)
 void SelectionWidget::moveEvent(QMoveEvent*)
 {
     updateAreas();
+    emit resized();
 }
 
 void SelectionWidget::updateColor(const QColor& c)
