@@ -1108,22 +1108,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="198"/>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>משך השהייה לא תקין, חייב להיות מספר גדול מ־0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation>מספר מסך לא תקין, לא יכול להיות מספק שלילי</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="unfinished"></translation>
+        <translation>נתיב לא תקין, חייב להיות נתיב מערכת אמיתי</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>ערך לא תקין, יש להגדיר כ־&apos;true&apos; או &apos;false&apos;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1174,12 +1174,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation>כברירת מחדל Flameshot פועל ברקע ומוסיף סמל מגש לתצורה.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="506"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>שלום אני כאן! נא להקיש על הסמל במגש ללכידת מסך או הקשה על לחצן עכבר ימני להצגת אפשרויות נוספות.</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="22"/>
@@ -1189,27 +1189,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="27"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>שינוי גודל הבחירה לשמאל פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="31"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>שינוי גודל הבחירה לימין פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="35"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>שינוי גודל הבחירה מעלה פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="39"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation>שינוי גודל הבחירה מטה פיקסל 1</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="43"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation>בחירת כל המסך</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="47"/>
@@ -1280,7 +1280,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="36"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת מרובע ככלי הצביע</translation>
     </message>
 </context>
 <context>
@@ -1327,7 +1327,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="39"/>
         <source>Set Selection as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדרת בחירה ככלי הצביע</translation>
     </message>
 </context>
 <context>
@@ -1340,17 +1340,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation>נא להזין קיצור־דרך חדש לשינוי </translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>הקשה על Esc כדי לבטל או ⌘+Backspace כדי להשבית את קיצור המקלדת.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>הקש Esc כדי לבטל או על Backspace כדי להשבית את קיצור המקלדת.</translation>
     </message>
 </context>
 <context>
@@ -1363,7 +1363,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>קיצורי־דרך זמינים במצב לכידת מסך.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
@@ -1396,7 +1396,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="209"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation>תפיסת צבע</translation>
     </message>
 </context>
 <context>
@@ -1404,12 +1404,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>הקטנת גודל כלי</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>הקטנת גודל הכלים האחרים</translation>
     </message>
 </context>
 <context>
@@ -1417,12 +1417,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדלת גודל כלי</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>הגדלת גודל הכלי האחר</translation>
     </message>
 </context>
 <context>
@@ -1430,12 +1430,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="23"/>
         <source>Selection Size Indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>מחוון גודל־בחירה</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation type="unfinished"></translation>
+        <translation>הצגת ממדי הבחירה (X Y)</translation>
     </message>
 </context>
 <context>
@@ -1600,12 +1600,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation type="unfinished"></translation>
+        <translation>שנוי הצבע שמזיז את הבוררים וצפיה בשינויים בלחצני התצוגה המקדימה.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation type="unfinished"></translation>
+        <translation>בחירת לחצן להסגלה</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
@@ -1615,7 +1615,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation type="unfinished"></translation>
+        <translation>הקשה על לחצן זה הגדרת מצב מהדורת הצבע הראשי.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
@@ -1625,7 +1625,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation type="unfinished"></translation>
+        <translation>הקשה על לחצן זה להגדרת מצב מהדורת צבע הניגודיות.</translation>
     </message>
 </context>
 <context>
@@ -1646,7 +1646,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation>זמינה גרסת Flamesho %1 חדשה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
@@ -1656,7 +1656,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation>מאוחר יותר</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
@@ -1682,7 +1682,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="40"/>
         <source>Opacity of area outside selection:</source>
-        <translation type="unfinished"></translation>
+        <translation>אטימות השטח מחוץ לבחירה:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>
