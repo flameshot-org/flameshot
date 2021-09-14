@@ -23,7 +23,7 @@ QString AppLauncher::name() const
     return tr("App Launcher");
 }
 
-ToolType AppLauncher::nameID() const
+ToolType AppLauncher::type() const
 {
     return ToolType::LAUNCHER;
 }

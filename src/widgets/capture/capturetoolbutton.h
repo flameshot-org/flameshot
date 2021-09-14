@@ -18,6 +18,8 @@ class CaptureToolButton : public CaptureButton
 public:
     // Don't forget to add the new types to CaptureButton::iterableButtonTypes
     // in the .cpp and the order value in the private array buttonTypeOrder
+    // NOTE: Add new entries to the BOTTOM so existing user configurations don't
+    // get messed up.
     enum ButtonType
     {
         TYPE_PENCIL = 0,
@@ -42,6 +44,7 @@ public:
         TYPE_CIRCLECOUNT = 19,
         TYPE_SIZEINCREASE = 20,
         TYPE_SIZEDECREASE = 21,
+        TYPE_INVERT = 22,
     };
     Q_ENUM(ButtonType)
 

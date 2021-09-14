@@ -24,7 +24,7 @@ QString CopyTool::name() const
     return tr("Copy");
 }
 
-ToolType CopyTool::nameID() const
+ToolType CopyTool::type() const
 {
     return ToolType::COPY;
 }
@@ -41,6 +41,7 @@ CaptureTool* CopyTool::copy(QObject* parent)
 
 void CopyTool::pressed(const CaptureContext& context)
 {
+    emit requestAction(REQ_CLEAR_SELECTION);
     emit requestAction(REQ_CAPTURE_DONE_OK);
     ScreenshotSaver().saveToClipboard(context.selectedScreenshotArea());
 }

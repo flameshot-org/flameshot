@@ -23,7 +23,7 @@ QString PixelateTool::name() const
     return tr("Pixelate");
 }
 
-ToolType PixelateTool::nameID() const
+ToolType PixelateTool::type() const
 {
     return ToolType::PIXELATE;
 }

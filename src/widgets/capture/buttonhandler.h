@@ -48,7 +48,7 @@ private:
 
     QVector<CaptureToolButton*> m_vectorButtons;
 
-    QRegion m_screenRegions;
+    QVector<QRect> m_screenRegions;
 
     QRect m_selection;
 

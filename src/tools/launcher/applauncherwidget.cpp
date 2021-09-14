@@ -10,6 +10,7 @@
 #include <QCheckBox>
 #include <QDir>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QLineEdit>
 #include <QList>
 #include <QListView>
@@ -87,7 +88,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
 {
     if (!QFileInfo(m_tempFile).isReadable()) {
         m_tempFile =
-          FileNameHandler().generateAbsolutePath(QDir::tempPath()) + ".png";
+          FileNameHandler().properScreenshotPath(QDir::tempPath(), "png");
         bool ok = m_pixmap.save(m_tempFile);
         if (!ok) {
             QMessageBox::about(
@@ -245,5 +246,14 @@ void AppLauncherWidget::addAppsToListWidget(
         buttonItem->setIcon(app.icon);
         buttonItem->setText(app.name);
         buttonItem->setToolTip(app.description);
+    }
+}
+
+void AppLauncherWidget::keyPressEvent(QKeyEvent* keyEvent)
+{
+    if (keyEvent->key() == Qt::Key_Escape) {
+        close();
+    } else {
+        QWidget::keyPressEvent(keyEvent);
     }
 }

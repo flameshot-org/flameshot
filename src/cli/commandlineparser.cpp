@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "commandlineparser.h"
+#include "src/utils/globalvalues.h"
 #include <QApplication>
 #include <QTextStream>
 
@@ -305,8 +306,7 @@ QString CommandLineParser::value(const CommandOption& option) const
 
 void CommandLineParser::printVersion()
 {
-    out << "Flameshot " << qApp->applicationVersion() << "\nCompiled with Qt "
-        << static_cast<QString>(QT_VERSION_STR) << "\n";
+    out << GlobalValues::versionInfo() << QStringLiteral("\n");
 }
 
 void CommandLineParser::printHelp(QStringList args, const Node* node)
