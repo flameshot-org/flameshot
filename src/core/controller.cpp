@@ -66,7 +66,7 @@ Controller::Controller()
 
     // init tray icon
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if (!ConfigHandler().disabledTrayIconValue()) {
+    if (!ConfigHandler().disabledTrayIcon()) {
         enableTrayIcon();
     }
 #elif defined(Q_OS_WIN)

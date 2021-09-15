@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2020 Yurii Puchkov at Namecheap & Contributors
 
 #include "shortcutswidget.h"
+#include "capturetool.h"
 #include "setshortcutwidget.h"
 #include "src/core/qguiappcurrentscreen.h"
-#include "src/utils/configshortcuts.h"
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -37,13 +37,12 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    m_shortcuts = ConfigShortcuts().captureShortcutsDefault(
-      CaptureToolButton::getIterableButtonTypes());
+    initShortcuts();
     initInfoTable();
     show();
 }
 
-const QVector<QStringList>& ShortcutsWidget::shortcuts()
+const QList<QStringList>& ShortcutsWidget::shortcuts()
 {
     return m_shortcuts;
 }
@@ -156,6 +155,71 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
         }
         delete setShortcutDialog;
     }
+}
+
+void ShortcutsWidget::initShortcuts()
+{
+    auto buttons = CaptureToolButton::getIterableButtonTypes();
+
+    // get shortcuts names from capture buttons
+    for (const CaptureToolButton::ButtonType& t : buttons) {
+        CaptureToolButton* b = new CaptureToolButton(t, nullptr);
+        QString shortcutName = QVariant::fromValue(t).toString();
+        if (shortcutName != "TYPE_IMAGEUPLOADER") {
+            appendShortcut(shortcutName, b->tool()->description());
+        }
+        delete b;
+    }
+
+    // additional tools that don't have their own buttons
+    appendShortcut("TYPE_TOGGLE_PANEL", "Toggle side panel");
+    appendShortcut("TYPE_RESIZE_LEFT", "Resize selection left 1px");
+    appendShortcut("TYPE_RESIZE_RIGHT", "Resize selection right 1px");
+    appendShortcut("TYPE_RESIZE_UP", "Resize selection up 1px");
+    appendShortcut("TYPE_RESIZE_DOWN", "Resize selection down 1px");
+    appendShortcut("TYPE_SELECT_ALL", "Select entire screen");
+    appendShortcut("TYPE_MOVE_LEFT", "Move selection left 1px");
+    appendShortcut("TYPE_MOVE_RIGHT", "Move selection right 1px");
+    appendShortcut("TYPE_MOVE_UP", "Move selection up 1px");
+    appendShortcut("TYPE_MOVE_DOWN", "Move selection down 1px");
+    appendShortcut("TYPE_COMMIT_CURRENT_TOOL", "Commit text in text area");
+    appendShortcut("TYPE_DELETE_CURRENT_TOOL", "Delete current tool");
+
+    // non-editable shortcuts have an empty shortcut name
+
+    m_shortcuts << (QStringList() << "" << QObject::tr("Quit capture")
+                                  << QKeySequence(Qt::Key_Escape).toString());
+
+    // Global hotkeys
+#if defined(Q_OS_MACOS)
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Screenshot history") << "⇧⌘⌥H");
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Capture screen") << "⇧⌘⌥4");
+#elif defined(Q_OS_WIN)
+    m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
+                                  << "Shift+Print Screen");
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Capture screen") << "Print Screen");
+#else
+    // TODO - Linux doesn't support global shortcuts for (XServer and Wayland),
+    // possibly it will be solved in the QHotKey library later. So it is
+    // disabled for now.
+#endif
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Show color picker") << "Right Click");
+    m_shortcuts << (QStringList()
+                    << "" << QObject::tr("Change the tool's thickness")
+                    << "Mouse Wheel");
+}
+
+void ShortcutsWidget::appendShortcut(const QString& shortcutName,
+                                     const QString& description)
+{
+    m_shortcuts << (QStringList()
+                    << shortcutName
+                    << QObject::tr(description.toStdString().c_str())
+                    << ConfigHandler().shortcut(shortcutName));
 }
 
 #if defined(Q_OS_MACOS)

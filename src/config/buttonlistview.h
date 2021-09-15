@@ -22,7 +22,7 @@ protected:
     void initButtonList();
 
 private:
-    QVector<CaptureToolButton::ButtonType> m_listButtons;
+    QList<CaptureToolButton::ButtonType> m_listButtons;
     QMap<QString, CaptureToolButton::ButtonType> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem*);

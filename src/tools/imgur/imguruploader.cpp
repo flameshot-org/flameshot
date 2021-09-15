@@ -47,7 +47,7 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
 #endif
 
     m_spinner = new LoadSpinner(this);
-    m_spinner->setColor(ConfigHandler().uiMainColorValue());
+    m_spinner->setColor(ConfigHandler().uiColor());
     m_spinner->start();
 
     m_infoLabel = new QLabel(tr("Uploading Image"));
@@ -94,7 +94,7 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         imageName = history.packFileName("imgur", deleteToken, imageName);
         history.save(m_pixmap, imageName);
 
-        if (ConfigHandler().copyAndCloseAfterUploadEnabled()) {
+        if (ConfigHandler().copyAndCloseAfterUpload()) {
             SystemNotification().sendMessage(
               QObject::tr("URL copied to clipboard."));
             QApplication::clipboard()->setText(m_imageURL.toString());

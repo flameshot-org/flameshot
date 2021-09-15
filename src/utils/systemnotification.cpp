@@ -35,7 +35,7 @@ void SystemNotification::sendMessage(const QString& text,
                                      const QString& savePath,
                                      const int timeout)
 {
-    if (!ConfigHandler().desktopNotificationValue()) {
+    if (!ConfigHandler().showDesktopNotification()) {
         return;
     }
 

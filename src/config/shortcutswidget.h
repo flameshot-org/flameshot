@@ -18,7 +18,7 @@ class ShortcutsWidget : public QWidget
     Q_OBJECT
 public:
     explicit ShortcutsWidget(QWidget* parent = nullptr);
-    const QVector<QStringList>& shortcuts();
+    const QList<QStringList>& shortcuts();
 
 private:
     void initInfoTable();
@@ -38,7 +38,11 @@ private:
     ConfigHandler m_config;
     QTableWidget* m_table;
     QVBoxLayout* m_layout;
-    QVector<QStringList> m_shortcuts;
+    QList<QStringList> m_shortcuts;
+
+    void initShortcuts();
+    void appendShortcut(const QString& shortcutName,
+                        const QString& description);
 };
 
 #endif // HOTKEYSCONFIG_H

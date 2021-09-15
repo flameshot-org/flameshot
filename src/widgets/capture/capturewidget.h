@@ -22,6 +22,7 @@
 #include <QUndoStack>
 #include <QWidget>
 
+class QLabel;
 class QPaintEvent;
 class QResizeEvent;
 class QMouseEvent;
@@ -131,6 +132,7 @@ private:
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
+    void drawConfigErrorMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData(bool updateLayersPanel = true,
                        bool drawSelection = false);
@@ -161,6 +163,8 @@ private:
     bool m_captureDone;
     bool m_previewEnabled;
     bool m_adjustmentButtonPressed;
+    bool m_configError;
+    bool m_configErrorResolved;
 
     UpdateNotificationWidget* m_updateNotificationWidget;
     quint64 m_lastMouseWheel;

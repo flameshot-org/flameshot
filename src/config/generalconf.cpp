@@ -42,7 +42,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyPathAfterSave();
     initUseJpgForClipboard();
     initSaveAfterCopy();
-    initUploadHistoryMaxSize();
+    inituploadHistoryMax();
     initUndoLimit();
 
     m_layout->addStretch();
@@ -55,31 +55,27 @@ GeneralConf::GeneralConf(QWidget* parent)
 void GeneralConf::_updateComponents(bool allowEmptySavePath)
 {
     ConfigHandler config;
-    m_helpMessage->setChecked(config.showHelpValue());
-    m_sidePanelButton->setChecked(config.showSidePanelButtonValue());
-    m_sysNotifications->setChecked(config.desktopNotificationValue());
-    m_autostart->setChecked(config.startupLaunchValue());
-    m_copyAndCloseAfterUpload->setChecked(
-      config.copyAndCloseAfterUploadEnabled());
-    m_saveAfterCopy->setChecked(config.saveAfterCopyValue());
-    m_copyPathAfterSave->setChecked(config.copyPathAfterSaveEnabled());
+    m_helpMessage->setChecked(config.showHelp());
+    m_sidePanelButton->setChecked(config.showSidePanelButton());
+    m_sysNotifications->setChecked(config.showDesktopNotification());
+    m_autostart->setChecked(config.startupLaunch());
+    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
+    m_saveAfterCopy->setChecked(config.saveAfterCopy());
+    m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
-    m_uploadHistoryMaxSize->setValue(config.uploadHistoryMaxSizeValue());
+    m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
-    } else {
-        ConfigHandler().setSavePath(
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation));
     }
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    m_showTray->setChecked(!config.disabledTrayIconValue());
+    m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
 }
 
@@ -100,7 +96,7 @@ void GeneralConf::showSidePanelButtonChanged(bool checked)
 
 void GeneralConf::showDesktopNotificationChanged(bool checked)
 {
-    ConfigHandler().setDesktopNotification(checked);
+    ConfigHandler().setShowDesktopNotification(checked);
 }
 
 void GeneralConf::showTrayIconChanged(bool checked)
@@ -344,7 +340,7 @@ void GeneralConf::initCopyAndCloseAfterUpload()
     m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
 
     connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyAndCloseAfterUploadEnabled(checked);
+        ConfigHandler().setCopyAndCloseAfterUpload(checked);
     });
 }
 
@@ -368,10 +364,6 @@ void GeneralConf::initSaveAfterCopy()
     QHBoxLayout* pathLayout = new QHBoxLayout();
 
     QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     m_savePath = new QLineEdit(path, this);
     m_savePath->setDisabled(true);
     QString foreground = this->palette().windowText().color().name();
@@ -401,7 +393,7 @@ void GeneralConf::historyConfirmationToDelete(bool checked)
     ConfigHandler().setHistoryConfirmationToDelete(checked);
 }
 
-void GeneralConf::initUploadHistoryMaxSize()
+void GeneralConf::inituploadHistoryMax()
 {
     QGroupBox* box = new QGroupBox(tr("Latest Uploads Max Size"));
     box->setFlat(true);
@@ -410,22 +402,22 @@ void GeneralConf::initUploadHistoryMaxSize()
     QVBoxLayout* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
-    m_uploadHistoryMaxSize = new QSpinBox(this);
-    m_uploadHistoryMaxSize->setMaximum(50);
+    m_uploadHistoryMax = new QSpinBox(this);
+    m_uploadHistoryMax->setMaximum(50);
     QString foreground = this->palette().windowText().color().name();
-    m_uploadHistoryMaxSize->setStyleSheet(
+    m_uploadHistoryMax->setStyleSheet(
       QStringLiteral("color: %1").arg(foreground));
 
-    connect(m_uploadHistoryMaxSize,
+    connect(m_uploadHistoryMax,
             SIGNAL(valueChanged(int)),
             this,
-            SLOT(uploadHistoryMaxSizeChanged(int)));
-    vboxLayout->addWidget(m_uploadHistoryMaxSize);
+            SLOT(uploadHistoryMaxChanged(int)));
+    vboxLayout->addWidget(m_uploadHistoryMax);
 }
 
-void GeneralConf::uploadHistoryMaxSizeChanged(int max)
+void GeneralConf::uploadHistoryMaxChanged(int max)
 {
-    ConfigHandler().setUploadHistoryMaxSize(max);
+    ConfigHandler().setUploadHistoryMax(max);
 }
 
 void GeneralConf::initUndoLimit()
@@ -479,10 +471,6 @@ void GeneralConf::saveAfterCopyChanged(bool checked)
 void GeneralConf::changeSavePath()
 {
     QString path = ConfigHandler().savePath();
-    if (path.isEmpty()) {
-        path =
-          QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    }
     path = chooseFolder(path);
     if (!path.isEmpty()) {
         m_savePath->setText(path);
@@ -496,7 +484,7 @@ void GeneralConf::initCopyPathAfterSave()
     m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
     m_scrollAreaLayout->addWidget(m_copyPathAfterSave);
     connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyPathAfterSaveEnabled(checked);
+        ConfigHandler().setCopyPathAfterSave(checked);
     });
 }
 

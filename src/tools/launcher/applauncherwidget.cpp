@@ -42,7 +42,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowTitle(tr("Open With"));
 
-    m_keepOpen = ConfigHandler().keepOpenAppLauncherValue();
+    m_keepOpen = ConfigHandler().keepOpenAppLauncher();
 
     QString dirLocal = QDir::homePath() + "/.local/share/applications/";
     QDir appsDirLocal(dirLocal);
@@ -57,7 +57,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
 
     m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
     m_keepOpenCheckbox = new QCheckBox(tr("Keep open after selection"), this);
-    m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncherValue());
+    m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncher());
     connect(m_keepOpenCheckbox,
             &QCheckBox::clicked,
             this,

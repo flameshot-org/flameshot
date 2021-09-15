@@ -58,7 +58,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
 {
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
-    if ((ConfigHandler().saveAfterCopyValue()) &&
+    if ((ConfigHandler().saveAfterCopy()) &&
         (!ConfigHandler().savePath().isEmpty())) {
         saveToFilesystem(capture,
                          ConfigHandler().savePath(),
@@ -126,7 +126,7 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
         mimeTypeList.append(mimeType);
     dialog.setMimeTypeFilters(mimeTypeList);
 
-    QString suffix = ConfigHandler().getSaveAsFileExtension();
+    QString suffix = ConfigHandler().saveAsFileExtension();
     QString defaultMimeType =
       QMimeDatabase().mimeTypeForFile("image" + suffix).name();
     dialog.selectMimeTypeFilter(defaultMimeType);
@@ -179,7 +179,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 
         QString msg = QObject::tr("Capture saved as ") + savePath;
 
-        if (config.copyPathAfterSaveEnabled()) {
+        if (config.copyPathAfterSave()) {
             msg =
               QObject::tr("Capture is saved and copied to the clipboard as ") +
               savePath;
@@ -190,7 +190,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         Controller::getInstance()->sendCaptureSaved(
           m_id, QFileInfo(savePath).canonicalFilePath());
 
-        if (config.copyPathAfterSaveEnabled()) {
+        if (config.copyPathAfterSave()) {
             QApplication::clipboard()->setText(savePath);
         }
 

@@ -66,7 +66,7 @@ void OverlayMessage::paintEvent(QPaintEvent*)
     QRectF bRect = boundingRect();
     bRect.moveTo(0, 0);
 
-    QColor rectColor(ConfigHandler().uiMainColorValue());
+    QColor rectColor(ConfigHandler().uiColor());
     rectColor.setAlpha(180);
     QColor textColor(
       (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
