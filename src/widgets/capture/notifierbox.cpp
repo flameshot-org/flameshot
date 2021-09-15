@@ -16,7 +16,7 @@ NotifierBox::NotifierBox(QWidget* parent)
     m_timer->setSingleShot(true);
     m_timer->setInterval(600);
     connect(m_timer, &QTimer::timeout, this, &NotifierBox::hide);
-    m_bgColor = ConfigHandler().uiMainColorValue();
+    m_bgColor = ConfigHandler().uiColor();
     m_foregroundColor =
       (ColorUtils::colorIsDark(m_bgColor) ? Qt::white : Qt::black);
     m_bgColor.setAlpha(180);

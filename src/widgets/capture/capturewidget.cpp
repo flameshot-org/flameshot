@@ -29,6 +29,8 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopWidget>
+#include <QFontMetrics>
+#include <QLabel>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QScreen>
@@ -56,6 +58,8 @@ CaptureWidget::CaptureWidget(uint id,
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
+  , m_configError(false)
+  , m_configErrorResolved(false)
   , m_activeButton(nullptr)
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
@@ -85,9 +89,9 @@ CaptureWidget::CaptureWidget(uint id,
             this,
             &CaptureWidget::childLeave);
     setAttribute(Qt::WA_DeleteOnClose);
-    m_opacity = m_config.contrastOpacityValue();
-    m_uiColor = m_config.uiMainColorValue();
-    m_contrastUiColor = m_config.uiContrastColorValue();
+    m_opacity = m_config.contrastOpacity();
+    m_uiColor = m_config.uiColor();
+    m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(savePath, fullScreen);
     initShortcuts();
@@ -200,10 +204,25 @@ CaptureWidget::CaptureWidget(uint id,
 
     initPanel();
 
+    m_config.checkAndHandleError();
+    if (m_config.hasError()) {
+        m_configError = true;
+    }
+    connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=]() {
+        m_configError = true;
+        m_configErrorResolved = false;
+        update();
+    });
+    connect(
+      ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=]() {
+          m_configError = false;
+          m_configErrorResolved = true;
+          update();
+      });
     OverlayMessage::init(this,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
 
-    if (m_config.showHelpValue()) {
+    if (m_config.showHelp()) {
         OverlayMessage::push(
           tr("Select an area with the mouse, or press Esc to exit."
              "\nPress Enter to capture the screen."
@@ -225,7 +244,7 @@ CaptureWidget::~CaptureWidget()
 void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
-    auto visibleButtonTypes = m_config.getButtons();
+    auto visibleButtonTypes = m_config.buttons();
     QVector<CaptureToolButton*> vectorButtons;
 
     // Add all buttons but hide those that were disabled in the Interface config
@@ -376,6 +395,10 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
     // draw inactive region
     drawInactiveRegion(&painter);
+
+    if (m_configError || m_configErrorResolved) {
+        drawConfigErrorMessage(&painter);
+    }
 }
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
@@ -683,8 +706,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (m_activeButton && m_activeButton->tool() &&
-               m_activeButton->tool()->showMousePreview()) {
+    } else if (m_activeButton && m_activeButton->tool()) {
         update();
     } else {
         if (!m_selection->isVisible()) {
@@ -705,7 +727,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
         }
         m_colorPicker->hide();
         if (!m_context.color.isValid()) {
-            m_context.color = ConfigHandler().drawColorValue();
+            m_context.color = ConfigHandler().drawColor();
             m_panel->show();
         }
     } else if (m_mouseIsClicked) {
@@ -907,11 +929,11 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 
 void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 {
-    m_context.color = m_config.drawColorValue();
+    m_context.color = m_config.drawColor();
     m_context.savePath = savePath;
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
-    m_context.thickness = m_config.drawThicknessValue();
+    m_context.thickness = m_config.drawThickness();
     m_context.fullscreen = fullscreen;
 }
 
@@ -934,7 +956,7 @@ void CaptureWidget::initPanel()
 #endif
     }
 
-    if (ConfigHandler().showSidePanelButtonValue()) {
+    if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
         makeChild(panelToggleButton);
@@ -1107,9 +1129,9 @@ void CaptureWidget::loadDrawThickness()
     if ((m_activeButton && m_activeButton->tool() &&
          m_activeButton->tool()->type() == ToolType::TEXT) ||
         (m_activeTool && m_activeTool->type() == ToolType::TEXT)) {
-        m_context.thickness = m_config.drawFontSizeValue();
+        m_context.thickness = m_config.drawFontSize();
     } else {
-        m_context.thickness = m_config.drawThicknessValue();
+        m_context.thickness = m_config.drawThickness();
     }
     emit m_sidePanel->thicknessChanged(m_context.thickness);
 }
@@ -1668,6 +1690,28 @@ QRect CaptureWidget::extendedRect(const QRect& r) const
                  r.top() * devicePixelRatio,
                  r.width() * devicePixelRatio,
                  r.height() * devicePixelRatio);
+}
+
+void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
+{
+    QString msg;
+    if (m_configError) {
+        msg = ConfigHandler().errorMessage();
+    } else if (m_configErrorResolved) {
+        msg = tr("Configuration error resolved. Launch `flameshot "
+                 "gui` again to apply it.");
+    }
+
+    auto textRect = painter->fontMetrics().boundingRect(msg);
+    int w = textRect.width(), h = textRect.height();
+    textRect = { size().width() - w, size().height() - h, w + 100, h + 100 };
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+
+    if (!textRect.contains(QCursor::pos(currentScreen))) {
+        QColor textColor(Qt::white);
+        painter->setPen(textColor);
+        painter->drawText(textRect, msg);
+    }
 }
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)

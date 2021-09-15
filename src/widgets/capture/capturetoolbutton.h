@@ -51,7 +51,7 @@ public:
     explicit CaptureToolButton(const ButtonType, QWidget* parent = nullptr);
     ~CaptureToolButton();
 
-    static QVector<CaptureToolButton::ButtonType> getIterableButtonTypes();
+    static QList<CaptureToolButton::ButtonType> getIterableButtonTypes();
     static int getPriorityByButton(CaptureToolButton::ButtonType);
 
     QString name() const;
@@ -64,7 +64,7 @@ public:
 
 protected:
     void mousePressEvent(QMouseEvent* e) override;
-    static QVector<ButtonType> iterableButtonTypes;
+    static QList<ButtonType> iterableButtonTypes;
 
     CaptureTool* m_tool;
 

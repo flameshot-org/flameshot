@@ -11,12 +11,12 @@ ColorPicker::ColorPicker(QWidget* parent)
   : QWidget(parent)
 {
     ConfigHandler config;
-    m_colorList = config.getUserColors();
+    m_colorList = config.userColors();
     m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
     setMouseTracking(true);
     // save the color values in member variables for faster access
-    m_uiColor = config.uiMainColorValue();
-    m_drawColor = config.drawColorValue();
+    m_uiColor = config.uiColor();
+    m_drawColor = config.drawColor();
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;

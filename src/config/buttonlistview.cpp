@@ -59,7 +59,7 @@ void ButtonListView::updateActiveButtons(QListWidgetItem* item)
                    CaptureToolButton::getPriorityByButton(b);
         });
     } else {
-        m_listButtons.remove(m_listButtons.indexOf(bType));
+        m_listButtons.removeOne(bType);
     }
     ConfigHandler().setButtons(m_listButtons);
 }
@@ -85,7 +85,7 @@ void ButtonListView::selectAll()
 
 void ButtonListView::updateComponents()
 {
-    m_listButtons = ConfigHandler().getButtons();
+    m_listButtons = ConfigHandler().buttons();
     auto listTypes = CaptureToolButton::getIterableButtonTypes();
     for (int i = 0; i < this->count(); ++i) {
         QListWidgetItem* item = this->item(i);

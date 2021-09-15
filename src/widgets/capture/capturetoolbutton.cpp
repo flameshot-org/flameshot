@@ -81,8 +81,7 @@ void CaptureToolButton::updateIcon()
     setIconSize(size() * 0.6);
 }
 
-QVector<CaptureToolButton::ButtonType>
-CaptureToolButton::getIterableButtonTypes()
+QList<CaptureToolButton::ButtonType> CaptureToolButton::getIterableButtonTypes()
 {
     return iterableButtonTypes;
 }
@@ -123,7 +122,7 @@ void CaptureToolButton::setColor(const QColor& c)
     updateIcon();
 }
 
-QColor CaptureToolButton::m_mainColor = ConfigHandler().uiMainColorValue();
+QColor CaptureToolButton::m_mainColor = ConfigHandler().uiColor();
 
 static std::map<CaptureToolButton::ButtonType, int> buttonTypeOrder
 {
@@ -163,31 +162,30 @@ int CaptureToolButton::getPriorityByButton(CaptureToolButton::ButtonType b)
                                         : it->second;
 }
 
-QVector<CaptureToolButton::ButtonType>
-  CaptureToolButton::iterableButtonTypes = {
-      CaptureToolButton::TYPE_PENCIL,
-      CaptureToolButton::TYPE_DRAWER,
-      CaptureToolButton::TYPE_ARROW,
-      CaptureToolButton::TYPE_SELECTION,
-      CaptureToolButton::TYPE_RECTANGLE,
-      CaptureToolButton::TYPE_CIRCLE,
-      CaptureToolButton::TYPE_MARKER,
-      CaptureToolButton::TYPE_TEXT,
-      CaptureToolButton::TYPE_PIXELATE,
-      CaptureToolButton::TYPE_INVERT,
-      CaptureToolButton::TYPE_CIRCLECOUNT,
-      CaptureToolButton::TYPE_SELECTIONINDICATOR,
-      CaptureToolButton::TYPE_MOVESELECTION,
-      CaptureToolButton::TYPE_UNDO,
-      CaptureToolButton::TYPE_REDO,
-      CaptureToolButton::TYPE_COPY,
-      CaptureToolButton::TYPE_SAVE,
-      CaptureToolButton::TYPE_EXIT,
-      CaptureToolButton::TYPE_IMAGEUPLOADER,
+QList<CaptureToolButton::ButtonType> CaptureToolButton::iterableButtonTypes = {
+    CaptureToolButton::TYPE_PENCIL,
+    CaptureToolButton::TYPE_DRAWER,
+    CaptureToolButton::TYPE_ARROW,
+    CaptureToolButton::TYPE_SELECTION,
+    CaptureToolButton::TYPE_RECTANGLE,
+    CaptureToolButton::TYPE_CIRCLE,
+    CaptureToolButton::TYPE_MARKER,
+    CaptureToolButton::TYPE_TEXT,
+    CaptureToolButton::TYPE_PIXELATE,
+    CaptureToolButton::TYPE_INVERT,
+    CaptureToolButton::TYPE_SELECTIONINDICATOR,
+    CaptureToolButton::TYPE_MOVESELECTION,
+    CaptureToolButton::TYPE_UNDO,
+    CaptureToolButton::TYPE_REDO,
+    CaptureToolButton::TYPE_COPY,
+    CaptureToolButton::TYPE_SAVE,
+    CaptureToolButton::TYPE_EXIT,
+    CaptureToolButton::TYPE_IMAGEUPLOADER,
 #if !defined(Q_OS_MACOS)
-      CaptureToolButton::TYPE_OPEN_APP,
+    CaptureToolButton::TYPE_OPEN_APP,
 #endif
-      CaptureToolButton::TYPE_PIN,
-      CaptureToolButton::TYPE_SIZEINCREASE,
-      CaptureToolButton::TYPE_SIZEDECREASE,
-  };
+    CaptureToolButton::TYPE_PIN,
+    CaptureToolButton::TYPE_CIRCLECOUNT,
+    CaptureToolButton::TYPE_SIZEINCREASE,
+    CaptureToolButton::TYPE_SIZEDECREASE,
+};
