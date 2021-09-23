@@ -72,4 +72,4 @@ void CaptureButton::setColor(const QColor& c)
     setStyleSheet(styleSheet());
 }
 
-QColor CaptureButton::m_mainColor = ConfigHandler().uiColor();
+QColor CaptureButton::m_mainColor;
