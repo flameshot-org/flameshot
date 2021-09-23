@@ -15,7 +15,7 @@ bugs and added new features in version 0.9.
   - Behind the scenes we configure flameshot to automatically run on xcb. This significantly improves the 
     wayland experience. This resolves issues with multimonitor setups and copying to the clipboard
     
-- New option to allow the the clipboard image to be a jpeg instead of a png. This may reduce bandwidth when pasting the 
+- New option to allow the clipboard image to be a jpeg instead of a png. This may reduce bandwidth when pasting the 
 image into chat or email clients
 
 - New global shortcut menu. All actions hotkeys are fully customizable. 
