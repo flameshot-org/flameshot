@@ -69,8 +69,8 @@ _flameshot() {
 }
 
 if [[ -n ${ZSH_VERSION} ]]; then
-    autoload -U bashcompinit
-    bashcompinit
+	autoload -U bashcompinit
+	bashcompinit
 fi
 
 complete -F _flameshot flameshot

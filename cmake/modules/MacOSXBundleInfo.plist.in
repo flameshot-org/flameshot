@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
- 	<string>English</string>
+	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>flameshot</string>
 	<key>CFBundleGetInfoString</key>
@@ -37,10 +37,10 @@
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>LSUIElement</key>
-    <string>1</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Application requires access to save screenshots to your gallery</string>
-    <key>NSSupportsAutomaticGraphicsSwitching</key>
-    <true/>
+	<string>1</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Application requires access to save screenshots to your gallery</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
 </dict>
 </plist>
