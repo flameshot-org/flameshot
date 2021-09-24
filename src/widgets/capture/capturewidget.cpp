@@ -386,7 +386,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
         painter.restore();
-    } else if (m_previewEnabled && m_activeButton && m_activeButton->tool() &&
+    } else if (m_previewEnabled && activeButtonTool() &&
                m_activeButton->tool()->showMousePreview()) {
         painter.save();
         m_activeButton->tool()->paintMousePreview(painter, m_context);
@@ -423,8 +423,8 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 
 bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 {
-    if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->type() != CaptureTool::TYPE_MOVESELECTION) {
+    if (activeButtonToolType() != CaptureTool::NONE &&
+        activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
         if (commitCurrentTool()) {
             return false;
         }
@@ -611,9 +611,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             drawToolsData(false);
         }
     } else if (m_mouseIsClicked &&
-               (!m_activeButton || (m_activeButton && m_activeButton->tool() &&
-                                    m_activeButton->tool()->type() ==
-                                      CaptureTool::TYPE_MOVESELECTION))) {
+               (!m_activeButton ||
+                (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION))) {
         // Drawing, moving, or stretching a selection
         m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
@@ -706,7 +705,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (m_activeButton && m_activeButton->tool()) {
+    } else if (activeButtonTool()) {
         update();
     } else {
         if (!m_selection->isVisible()) {
@@ -802,8 +801,7 @@ void CaptureWidget::updateThickness(int thickness)
     m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
     m_notifierBox->showMessage(QString::number(m_context.thickness));
 
-    if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->showMousePreview()) {
+    if (activeButtonTool() && m_activeButton->tool()->showMousePreview()) {
         setCursor(Qt::BlankCursor);
         update();
     }
@@ -1126,8 +1124,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
 
 void CaptureWidget::loadDrawThickness()
 {
-    if ((m_activeButton && m_activeButton->tool() &&
-         m_activeButton->tool()->type() == CaptureTool::TYPE_TEXT) ||
+    if ((activeButtonToolType() == CaptureTool::TYPE_TEXT) ||
         (m_activeTool && m_activeTool->type() == CaptureTool::TYPE_TEXT)) {
         m_context.thickness = m_config.drawFontSize();
     } else {
@@ -1294,8 +1291,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     m_context.thickness = qBound(1, t, 100);
     // save draw thickness for text and other tool separately
     if (m_activeButton) {
-        if (m_activeButton->tool() &&
-            m_activeButton->tool()->type() == CaptureTool::TYPE_TEXT) {
+        if (activeButtonToolType() == CaptureTool::TYPE_TEXT) {
             m_config.setDrawFontSize(m_context.thickness);
         } else {
             m_config.setDrawThickness(m_context.thickness);
@@ -1457,9 +1453,7 @@ void CaptureWidget::updateCursor()
         } else {
             setCursor(Qt::ArrowCursor);
         }
-    } else if (m_activeButton && m_activeButton->tool() &&
-               m_activeButton->tool()->type() ==
-                 CaptureTool::TYPE_MOVESELECTION) {
+    } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
         using sw = SelectionWidget;
@@ -1588,6 +1582,23 @@ void CaptureWidget::processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool)
     QPainter painter(pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
     tool->process(painter, *pixmap);
+}
+
+CaptureTool* CaptureWidget::activeButtonTool() const
+{
+    if (m_activeButton == nullptr) {
+        return nullptr;
+    }
+    return m_activeButton->tool();
+}
+
+CaptureTool::Type CaptureWidget::activeButtonToolType() const
+{
+    auto* activeTool = activeButtonTool();
+    if (activeTool == nullptr) {
+        return CaptureTool::NONE;
+    }
+    return activeTool->type();
 }
 
 QPointer<CaptureTool> CaptureWidget::activeToolObject()

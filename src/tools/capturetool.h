@@ -23,6 +23,7 @@ public:
     //   - CaptureToolButton::buttonTypeOrder
     enum Type
     {
+        NONE = -1,
         TYPE_PENCIL = 0,
         TYPE_DRAWER = 1,
         TYPE_ARROW = 2,

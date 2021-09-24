@@ -140,6 +140,9 @@ private:
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
 
+    CaptureTool* activeButtonTool() const;
+    CaptureTool::Type activeButtonToolType() const;
+
     ////////////////////////////////////////
     // Class members
 
