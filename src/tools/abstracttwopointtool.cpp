@@ -82,12 +82,12 @@ void AbstractTwoPointTool::drawMoveWithAdjustment(const QPoint& p)
     m_points.second = m_points.first + adjustedVector(p - m_points.first);
 }
 
-void AbstractTwoPointTool::colorChanged(const QColor& c)
+void AbstractTwoPointTool::onColorChanged(const QColor& c)
 {
     m_color = c;
 }
 
-void AbstractTwoPointTool::thicknessChanged(int th)
+void AbstractTwoPointTool::onThicknessChanged(int th)
 {
     m_thickness = th;
 }
@@ -101,10 +101,10 @@ void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
 
 void AbstractTwoPointTool::drawStart(const CaptureContext& context)
 {
-    colorChanged(context.color);
+    onColorChanged(context.color);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
-    thicknessChanged(context.thickness);
+    onThicknessChanged(context.thickness);
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const

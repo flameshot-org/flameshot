@@ -200,9 +200,9 @@ public slots:
     // Called right after pressign the button which activates the tool.
     virtual void pressed(const CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
-    virtual void colorChanged(const QColor& c) = 0;
+    virtual void onColorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.
-    virtual void thicknessChanged(int th) = 0;
+    virtual void onThicknessChanged(int th) = 0;
     virtual int thickness() { return -1; };
 
 private:

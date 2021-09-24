@@ -433,11 +433,11 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         connect(this,
                 &CaptureWidget::colorChanged,
                 m_activeTool,
-                &CaptureTool::colorChanged);
+                &CaptureTool::onColorChanged);
         connect(this,
                 &CaptureWidget::thicknessChanged,
                 m_activeTool,
-                &CaptureTool::thicknessChanged);
+                &CaptureTool::onThicknessChanged);
         connect(m_activeTool,
                 &CaptureTool::requestAction,
                 this,
@@ -809,7 +809,7 @@ void CaptureWidget::updateThickness(int thickness)
     // update selected object thickness
     auto toolItem = activeToolObject();
     if (toolItem) {
-        toolItem->thicknessChanged(m_context.thickness);
+        toolItem->onThicknessChanged(m_context.thickness);
         if (!m_existingObjectIsChanged) {
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
@@ -1231,7 +1231,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
         auto toolItem = activeToolObject();
         if (toolItem) {
             // Change color
-            toolItem->colorChanged(c);
+            toolItem->onColorChanged(c);
             drawToolsData(false, true);
         }
     }
@@ -1301,7 +1301,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     auto toolItem = activeToolObject();
     if (toolItem) {
         // Change thickness
-        toolItem->thicknessChanged(t);
+        toolItem->onThicknessChanged(t);
         drawToolsData(false, true);
     } else {
         emit thicknessChanged(m_context.thickness);
@@ -1505,11 +1505,11 @@ void CaptureWidget::pushToolToStack()
         disconnect(this,
                    &CaptureWidget::colorChanged,
                    m_activeTool,
-                   &CaptureTool::colorChanged);
+                   &CaptureTool::onColorChanged);
         disconnect(this,
                    &CaptureWidget::thicknessChanged,
                    m_activeTool,
-                   &CaptureTool::thicknessChanged);
+                   &CaptureTool::onThicknessChanged);
         if (m_panel->toolWidget()) {
             disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
         }

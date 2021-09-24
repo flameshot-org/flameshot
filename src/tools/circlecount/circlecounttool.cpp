@@ -119,7 +119,7 @@ void CircleCountTool::drawObjectSelection(QPainter& painter)
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
-    thicknessChanged(context.thickness + PADDING_VALUE);
+    onThicknessChanged(context.thickness + PADDING_VALUE);
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function

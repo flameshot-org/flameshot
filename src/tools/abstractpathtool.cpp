@@ -54,12 +54,12 @@ void AbstractPathTool::drawMove(const QPoint& p)
     addPoint(p);
 }
 
-void AbstractPathTool::colorChanged(const QColor& c)
+void AbstractPathTool::onColorChanged(const QColor& c)
 {
     m_color = c;
 }
 
-void AbstractPathTool::thicknessChanged(int th)
+void AbstractPathTool::onThicknessChanged(int th)
 {
     m_thickness = th;
 }

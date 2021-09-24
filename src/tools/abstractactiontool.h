@@ -23,6 +23,6 @@ public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void drawStart(const CaptureContext& context) override;
-    void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
+    void onColorChanged(const QColor& c) override;
+    void onThicknessChanged(int th) override;
 };

@@ -50,12 +50,12 @@ void AbstractActionTool::drawStart(const CaptureContext& context)
     Q_UNUSED(context)
 }
 
-void AbstractActionTool::colorChanged(const QColor& c)
+void AbstractActionTool::onColorChanged(const QColor& c)
 {
     Q_UNUSED(c)
 }
 
-void AbstractActionTool::thicknessChanged(int th)
+void AbstractActionTool::onThicknessChanged(int th)
 {
     Q_UNUSED(th)
 }

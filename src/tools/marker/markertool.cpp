@@ -77,7 +77,7 @@ void MarkerTool::paintMousePreview(QPainter& painter,
 void MarkerTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    thicknessChanged(context.thickness + PADDING_VALUE);
+    onThicknessChanged(context.thickness + PADDING_VALUE);
 }
 
 void MarkerTool::pressed(const CaptureContext& context)

@@ -234,7 +234,7 @@ void TextTool::pressed(const CaptureContext& context)
     Q_UNUSED(context)
 }
 
-void TextTool::colorChanged(const QColor& c)
+void TextTool::onColorChanged(const QColor& c)
 {
     m_color = c;
     if (m_widget) {
@@ -242,7 +242,7 @@ void TextTool::colorChanged(const QColor& c)
     }
 }
 
-void TextTool::thicknessChanged(int th)
+void TextTool::onThicknessChanged(int th)
 {
     m_size = th;
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
