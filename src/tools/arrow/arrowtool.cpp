@@ -72,9 +72,9 @@ QString ArrowTool::name() const
     return tr("Arrow");
 }
 
-ToolType ArrowTool::type() const
+CaptureTool::Type ArrowTool::type() const
 {
-    return ToolType::ARROW;
+    return CaptureTool::TYPE_ARROW;
 }
 
 QString ArrowTool::description() const

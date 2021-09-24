@@ -18,9 +18,9 @@ QString PencilTool::name() const
     return tr("Pencil");
 }
 
-ToolType PencilTool::type() const
+CaptureTool::Type PencilTool::type() const
 {
-    return ToolType::PENCIL;
+    return CaptureTool::TYPE_PENCIL;
 }
 
 QString PencilTool::description() const

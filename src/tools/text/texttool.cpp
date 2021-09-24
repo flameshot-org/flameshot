@@ -80,9 +80,9 @@ QString TextTool::info()
     return name();
 }
 
-ToolType TextTool::type() const
+CaptureTool::Type TextTool::type() const
 {
-    return ToolType::TEXT;
+    return CaptureTool::TYPE_TEXT;
 }
 
 QString TextTool::description() const

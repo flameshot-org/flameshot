@@ -23,7 +23,7 @@ public:
 
 protected:
     void copyParams(const ArrowTool* from, ArrowTool* to);
-    ToolType type() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void pressed(const CaptureContext& context) override;

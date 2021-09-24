@@ -23,9 +23,9 @@ QString PixelateTool::name() const
     return tr("Pixelate");
 }
 
-ToolType PixelateTool::type() const
+CaptureTool::Type PixelateTool::type() const
 {
-    return ToolType::PIXELATE;
+    return CaptureTool::TYPE_PIXELATE;
 }
 
 QString PixelateTool::description() const

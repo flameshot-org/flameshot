@@ -22,9 +22,9 @@ QString RectangleTool::name() const
     return tr("Rectangle");
 }
 
-ToolType RectangleTool::type() const
+CaptureTool::Type RectangleTool::type() const
 {
-    return ToolType::RECTANGLE;
+    return CaptureTool::TYPE_RECTANGLE;
 }
 
 QString RectangleTool::description() const

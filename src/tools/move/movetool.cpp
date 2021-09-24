@@ -23,9 +23,9 @@ QString MoveTool::name() const
     return tr("Move");
 }
 
-ToolType MoveTool::type() const
+CaptureTool::Type MoveTool::type() const
 {
-    return ToolType::MOVE;
+    return CaptureTool::TYPE_MOVESELECTION;
 }
 
 QString MoveTool::description() const

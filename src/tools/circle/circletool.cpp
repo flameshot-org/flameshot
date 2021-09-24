@@ -20,9 +20,9 @@ QString CircleTool::name() const
     return tr("Circle");
 }
 
-ToolType CircleTool::type() const
+CaptureTool::Type CircleTool::type() const
 {
-    return ToolType::CIRCLE;
+    return CaptureTool::TYPE_CIRCLE;
 }
 
 QString CircleTool::description() const

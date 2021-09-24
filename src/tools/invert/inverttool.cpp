@@ -25,9 +25,9 @@ QString InvertTool::name() const
     return tr("Invert");
 }
 
-ToolType InvertTool::type() const
+CaptureTool::Type InvertTool::type() const
 {
-    return ToolType::INVERT;
+    return CaptureTool::TYPE_INVERT;
 }
 
 QString InvertTool::description() const

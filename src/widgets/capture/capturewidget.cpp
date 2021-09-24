@@ -249,9 +249,9 @@ void CaptureWidget::initButtons()
 
     // Add all buttons but hide those that were disabled in the Interface config
     // This will allow keyboard shortcuts for those buttons to work
-    for (const CaptureToolButton::ButtonType& t : allButtonTypes) {
+    for (const CaptureTool::Type& t : allButtonTypes) {
         CaptureToolButton* b = new CaptureToolButton(t, this);
-        if (t == CaptureToolButton::TYPE_SELECTIONINDICATOR) {
+        if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }
         b->setColor(m_uiColor);
@@ -259,12 +259,12 @@ void CaptureWidget::initButtons()
         makeChild(b);
 
         switch (t) {
-            case CaptureToolButton::ButtonType::TYPE_EXIT:
-            case CaptureToolButton::ButtonType::TYPE_SAVE:
-            case CaptureToolButton::ButtonType::TYPE_COPY:
-            case CaptureToolButton::ButtonType::TYPE_UNDO:
-            case CaptureToolButton::ButtonType::TYPE_IMAGEUPLOADER:
-            case CaptureToolButton::ButtonType::TYPE_REDO:
+            case CaptureTool::TYPE_EXIT:
+            case CaptureTool::TYPE_SAVE:
+            case CaptureTool::TYPE_COPY:
+            case CaptureTool::TYPE_UNDO:
+            case CaptureTool::TYPE_IMAGEUPLOADER:
+            case CaptureTool::TYPE_REDO:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
                 break;
@@ -424,7 +424,7 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
 {
     if (m_activeButton && m_activeButton->tool() &&
-        m_activeButton->tool()->type() != ToolType::MOVE) {
+        m_activeButton->tool()->type() != CaptureTool::TYPE_MOVESELECTION) {
         if (commitCurrentTool()) {
             return false;
         }
@@ -444,7 +444,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
                 &CaptureWidget::handleToolSignal);
         m_context.mousePos = pos;
         m_activeTool->drawStart(m_context);
-        if (m_activeTool->type() == ToolType::CIRCLECOUNT) {
+        if (m_activeTool->type() == CaptureTool::TYPE_CIRCLECOUNT) {
             // While it is based on AbstractTwoPointTool it has the only one
             // point and shouldn't wait for second point and move event
             m_activeTool->drawEnd(m_context.mousePos);
@@ -559,7 +559,7 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
     if (activeLayerIndex != -1) {
         // Start object editing
         auto activeTool = m_captureToolObjects.at(activeLayerIndex);
-        if (activeTool && activeTool->type() == ToolType::TEXT) {
+        if (activeTool && activeTool->type() == CaptureTool::TYPE_TEXT) {
             m_activeTool = activeTool;
             m_mouseIsClicked = false;
             m_context.mousePos = *m_activeTool->pos();
@@ -611,9 +611,9 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             drawToolsData(false);
         }
     } else if (m_mouseIsClicked &&
-               (!m_activeButton ||
-                (m_activeButton && m_activeButton->tool() &&
-                 m_activeButton->tool()->type() == ToolType::MOVE))) {
+               (!m_activeButton || (m_activeButton && m_activeButton->tool() &&
+                                    m_activeButton->tool()->type() ==
+                                      CaptureTool::TYPE_MOVESELECTION))) {
         // Drawing, moving, or stretching a selection
         m_selection->setVisible(true);
         if (m_buttonHandler->isVisible()) {
@@ -1127,8 +1127,8 @@ void CaptureWidget::setState(CaptureToolButton* b)
 void CaptureWidget::loadDrawThickness()
 {
     if ((m_activeButton && m_activeButton->tool() &&
-         m_activeButton->tool()->type() == ToolType::TEXT) ||
-        (m_activeTool && m_activeTool->type() == ToolType::TEXT)) {
+         m_activeButton->tool()->type() == CaptureTool::TYPE_TEXT) ||
+        (m_activeTool && m_activeTool->type() == CaptureTool::TYPE_TEXT)) {
         m_context.thickness = m_config.drawFontSize();
     } else {
         m_context.thickness = m_config.drawThickness();
@@ -1244,7 +1244,7 @@ void CaptureWidget::updateActiveLayer(const int& layer)
 {
     // TODO - refactor this part, make all objects to work with
     // m_activeTool->isChanged() and remove m_existingObjectIsChanged
-    if (m_activeTool && m_activeTool->type() == ToolType::TEXT &&
+    if (m_activeTool && m_activeTool->type() == CaptureTool::TYPE_TEXT &&
         m_activeTool->isChanged()) {
         commitCurrentTool();
     }
@@ -1266,15 +1266,16 @@ void CaptureWidget::removeToolObject(int index)
 {
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
-        const ToolType currentToolType = m_captureToolObjects.at(index)->type();
+        const CaptureTool::Type currentToolType =
+          m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.removeAt(index);
-        if (currentToolType == ToolType::CIRCLECOUNT) {
+        if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
             // Do circle count reindex
             int circleCount = 1;
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
                 auto toolItem = m_captureToolObjects.at(cnt);
-                if (toolItem->type() != ToolType::CIRCLECOUNT) {
+                if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
                     continue;
                 }
                 if (cnt >= index) {
@@ -1294,7 +1295,7 @@ void CaptureWidget::setDrawThickness(const int& t)
     // save draw thickness for text and other tool separately
     if (m_activeButton) {
         if (m_activeButton->tool() &&
-            m_activeButton->tool()->type() == ToolType::TEXT) {
+            m_activeButton->tool()->type() == CaptureTool::TYPE_TEXT) {
             m_config.setDrawFontSize(m_context.thickness);
         } else {
             m_config.setDrawThickness(m_context.thickness);
@@ -1457,7 +1458,8 @@ void CaptureWidget::updateCursor()
             setCursor(Qt::ArrowCursor);
         }
     } else if (m_activeButton && m_activeButton->tool() &&
-               m_activeButton->tool()->type() == ToolType::MOVE) {
+               m_activeButton->tool()->type() ==
+                 CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
         using sw = SelectionWidget;
@@ -1544,7 +1546,7 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     QPixmap pixmapItem = m_context.origScreenshot.copy();
     int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        if (toolItem->type() == ToolType::CIRCLECOUNT) {
+        if (toolItem->type() == CaptureTool::TYPE_CIRCLECOUNT) {
             toolItem->setCount(circleCount++);
         }
         processPixmapWithTool(&pixmapItem, toolItem);

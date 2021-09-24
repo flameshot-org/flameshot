@@ -43,7 +43,7 @@ public:
 
 protected:
     void copyParams(const TextTool* from, TextTool* to);
-    ToolType type() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void drawEnd(const QPoint& p) override;

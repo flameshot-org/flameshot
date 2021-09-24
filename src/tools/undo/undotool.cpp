@@ -23,9 +23,9 @@ QString UndoTool::name() const
     return tr("Undo");
 }
 
-ToolType UndoTool::type() const
+CaptureTool::Type UndoTool::type() const
 {
-    return ToolType::UNDO;
+    return CaptureTool::TYPE_UNDO;
 }
 
 QString UndoTool::description() const

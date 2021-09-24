@@ -9,39 +9,46 @@
 #include <QIcon>
 #include <QPainter>
 
-enum class ToolType
-{
-    ARROW,
-    CIRCLE,
-    CIRCLECOUNT,
-    COPY,
-    EXIT,
-    IMGUR,
-    LAUNCHER,
-    LINE,
-    MARKER,
-    MOVE,
-    PENCIL,
-    PIN,
-    PIXELATE,
-    RECTANGLE,
-    REDO,
-    SAVE,
-    INVERT,
-    SELECTION,
-    SIZEINDICATOR,
-    TEXT,
-    UNDO,
-    UPLOAD,
-    SIZEINCREASE,
-    SIZEDECREASE,
-};
-
 class CaptureTool : public QObject
 {
     Q_OBJECT
 
 public:
+    // IMPORTANT:
+    //   Add new entries to the BOTTOM so existing user configurations don't get
+    //   messed up.
+    // ALSO NOTE:
+    //   When adding new types, don't forget to update:
+    //   - CaptureToolButton::iterableButtonTypes
+    //   - CaptureToolButton::buttonTypeOrder
+    enum Type
+    {
+        TYPE_PENCIL = 0,
+        TYPE_DRAWER = 1,
+        TYPE_ARROW = 2,
+        TYPE_SELECTION = 3,
+        TYPE_RECTANGLE = 4,
+        TYPE_CIRCLE = 5,
+        TYPE_MARKER = 6,
+        TYPE_SELECTIONINDICATOR = 7,
+        TYPE_MOVESELECTION = 8,
+        TYPE_UNDO = 9,
+        TYPE_COPY = 10,
+        TYPE_SAVE = 11,
+        TYPE_EXIT = 12,
+        TYPE_IMAGEUPLOADER = 13,
+        TYPE_OPEN_APP = 14,
+        TYPE_PIXELATE = 15,
+        TYPE_REDO = 16,
+        TYPE_PIN = 17,
+        TYPE_TEXT = 18,
+        TYPE_CIRCLECOUNT = 19,
+        TYPE_SIZEINCREASE = 20,
+        TYPE_SIZEDECREASE = 21,
+        TYPE_INVERT = 22,
+    };
+    Q_ENUM(Type);
+
     // Request actions on the main widget
     enum Request
     {
@@ -108,7 +115,7 @@ public:
     virtual QString name() const = 0;
     // Codename for the tool, this shouldn't change as it is used as ID
     // for the tool in the internals of Flameshot
-    virtual ToolType type() const = 0;
+    virtual CaptureTool::Type type() const = 0;
     // Short description of the tool.
     virtual QString description() const = 0;
     // Short tool item info

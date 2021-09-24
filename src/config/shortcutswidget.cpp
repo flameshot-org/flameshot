@@ -162,7 +162,7 @@ void ShortcutsWidget::initShortcuts()
     auto buttons = CaptureToolButton::getIterableButtonTypes();
 
     // get shortcuts names from capture buttons
-    for (const CaptureToolButton::ButtonType& t : buttons) {
+    for (const CaptureTool::Type& t : buttons) {
         CaptureToolButton* b = new CaptureToolButton(t, nullptr);
         QString shortcutName = QVariant::fromValue(t).toString();
         if (shortcutName != "TYPE_IMAGEUPLOADER") {
