@@ -705,7 +705,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (activeButtonTool()) {
+    } else if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
         update();
     } else {
         if (!m_selection->isVisible()) {
