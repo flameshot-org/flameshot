@@ -20,7 +20,7 @@ public:
                                QWidget* parent = nullptr);
     ~CaptureToolButton();
 
-    static QList<CaptureTool::Type> getIterableButtonTypes();
+    static const QList<CaptureTool::Type>& getIterableButtonTypes();
     static int getPriorityByButton(CaptureTool::Type);
 
     QString name() const;

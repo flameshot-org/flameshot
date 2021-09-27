@@ -81,7 +81,7 @@ void CaptureToolButton::updateIcon()
     setIconSize(size() * 0.6);
 }
 
-QList<CaptureTool::Type> CaptureToolButton::getIterableButtonTypes()
+const QList<CaptureTool::Type>& CaptureToolButton::getIterableButtonTypes()
 {
     return iterableButtonTypes;
 }
