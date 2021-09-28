@@ -25,9 +25,9 @@ security default-keychain -s build.keychain
 security unlock-keychain -p "${APPLE_TEMP_CI_KEYCHAIN_PASS}" build.keychain
 
 # import certificate
-[ -r "${TEMP_CI_CERT_FILENAME}" ] && rm ${TEMP_CI_CERT_FILENAME}
+[ -r "${TEMP_CI_CERT_FILENAME}" ] && rm "${TEMP_CI_CERT_FILENAME}"
 echo "${APPLE_DEVELOPER_ID_APPLICATION_CERT_DATA}" | base64 --decode > "${TEMP_CI_CERT_FILENAME}"
 security import "${TEMP_CI_CERT_FILENAME}" -P "${APPLE_DEVELOPER_ID_APPLICATION_CERT_PASS}" -k build.keychain -T /usr/bin/codesign
-[ -r "${TEMP_CI_CERT_FILENAME}" ] && rm ${TEMP_CI_CERT_FILENAME}
+[ -r "${TEMP_CI_CERT_FILENAME}" ] && rm "${TEMP_CI_CERT_FILENAME}"
 security find-identity -v
 security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "${APPLE_TEMP_CI_KEYCHAIN_PASS}" build.keychain

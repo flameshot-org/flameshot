@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC0-1.0
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Flameshot</name>
-  <releases> 
+  <releases>
     <release version="0.10.1" date="2021-07-25"/>
     <release version="0.10.0" date="2021-05-16"/>
     <release version="0.9.0" date="2021-02-27"/>
@@ -38,5 +38,4 @@ SPDX-License-Identifier: CC0-1.0
   <url type="homepage">https://github.com/flameshot-org/flameshot</url>
   <update_contact>https://github.com/flameshot-org/flameshot/issues/new</update_contact>
   <launchable type="desktop-id">org.flameshot.Flameshot.desktop</launchable>
-
 </component>

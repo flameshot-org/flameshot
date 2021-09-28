@@ -27,4 +27,3 @@ if(CACHE_BINARY)
 else()
   message(WARNING "${CACHE_OPTION} is enabled but was not found. Not using it")
 endif()
-

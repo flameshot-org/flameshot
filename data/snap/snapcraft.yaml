@@ -69,8 +69,8 @@ parts:
     build-packages:
       - g++
       - make
-      - qt5-default 
-      - qttools5-dev-tools 
+      - qt5-default
+      - qttools5-dev-tools
       - libqt5svg5-dev
     stage-packages:
       - dbus-x11
@@ -78,11 +78,11 @@ parts:
       - openssl
       - ca-certificates
       - qtwayland5
-      - libqt5dbus5 
-      - libqt5network5 
-      - libqt5core5a 
-      - libqt5widgets5 
-      - libqt5gui5 
+      - libqt5dbus5
+      - libqt5network5
+      - libqt5core5a
+      - libqt5widgets5
+      - libqt5gui5
       - libqt5svg5
       - libxkbcommon0
       - ttf-ubuntu-font-family

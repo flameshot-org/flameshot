@@ -21,19 +21,19 @@ _flameshot() {
 			return 0
 			;;
 		screen)
-			COMPREPLY=( $(compgen -W "$screen_opts --help -h" -- ${cur}) )
+			COMPREPLY=( $(compgen -W "$screen_opts --help -h" -- "${cur}") )
 			return 0
 			;;
 		gui)
-			COMPREPLY=( $(compgen -W "$gui_opts --help -h" -- ${cur}) )
+			COMPREPLY=( $(compgen -W "$gui_opts --help -h" -- "${cur}") )
 			return 0
 			;;
 		full)
-			COMPREPLY=( $(compgen -W "$full_opts --help -h" -- ${cur}) )
+			COMPREPLY=( $(compgen -W "$full_opts --help -h" -- "${cur}") )
 			return 0
 			;;
 		config)
-			COMPREPLY=( $(compgen -W "$config_opts --help -h" -- ${cur}) )
+			COMPREPLY=( $(compgen -W "$config_opts --help -h" -- "${cur}") )
 			return 0
 			;;
 		-f|--filename|-p|--path)
@@ -41,7 +41,7 @@ _flameshot() {
 			return 0
 			;;
 		-s|--showhelp|-t|--trayicon)
-			COMPREPLY=( $(compgen -W "true false" -- ${cur}) )
+			COMPREPLY=( $(compgen -W "true false" -- "${cur}") )
 			return 0
 			;;
 		-d|--delay|-h|--help|-c|--clipboard|--version|-v|--number|-n)
@@ -54,23 +54,23 @@ _flameshot() {
 	# Options
 	case "${cur}" in
 		-*)
-			COMPREPLY=( $( compgen -W "--version --help -v -h" -- ${cur}) )
+			COMPREPLY=( $( compgen -W "--version --help -v -h" -- "${cur}") )
 			return 0
 			;;
 		--*)
-			COMPREPLY=( $( compgen -W "--version --help" -- ${cur}) )
+			COMPREPLY=( $( compgen -W "--version --help" -- "${cur}") )
 			return 0
 			;;
 		*)
-			COMPREPLY=( $( compgen -W "${cmd}" -- ${cur}) )
+			COMPREPLY=( $( compgen -W "${cmd}" -- "${cur}") )
 			return 0
 			;;
 	esac
 }
 
 if [[ -n ${ZSH_VERSION} ]]; then
-    autoload -U bashcompinit
-    bashcompinit
+	autoload -U bashcompinit
+	bashcompinit
 fi
 
 complete -F _flameshot flameshot

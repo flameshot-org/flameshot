@@ -30,7 +30,7 @@ echo ">> Redundancy in the path will be removed"
 "$flameshot" screen -p /tmp/flameshot_path_test/subdir/..///redundancy_removed.png
 
 sleep 2
-echo ">> If the destionation is a directory, the file name is generated from strf from the config"
+echo ">> If the destination is a directory, the file name is generated from strf from the config"
 "$flameshot" screen -p ./
 
 sleep 2

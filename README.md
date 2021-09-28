@@ -252,7 +252,7 @@ Steps for using the configuration:
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
-To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)). 
+To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
 1. Remove the binding on <kbd>Prt Sc</kbd> using the following command.
 
@@ -275,7 +275,7 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 1. Go to `Keyboard` settings
 2. Switch to the tab `Application Shortcuts`
 3. Find the entry
-        
+
     ```text
     Command                        Shortcut
     xfce4-screenshooter -fd 1      Print
@@ -360,7 +360,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 - Qt >= 5.9
   + Development tools
-- GCC >= 7.4 
+- GCC >= 7.4
 - CMake >= 3.13
 
 #### Run-time
@@ -448,8 +448,8 @@ When `make` command completed you can launch flameshot from `project_folder/buil
 
 ### Install
 
-Simply use `make install` with privileges. 
-Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
+Simply use `make install` with privileges.
+Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
 https://flameshot.org/guide/faq/
@@ -472,7 +472,7 @@ This program will not transfer any information to other networked systems unless
 ## Code Signing Policy
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
-Code signing is currently a manual process so not every patch release will be signed. 
+Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)

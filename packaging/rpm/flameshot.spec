@@ -54,7 +54,7 @@ Requires: libqt5-qttools >= 5.9.0
 Requires: libQt5Svg5 >= 5.9.0
 %endif
 
-	
+
 %description
 Powerful and simple to use screenshot software with built-in
 editor with advanced features.
