@@ -208,13 +208,13 @@ CaptureWidget::CaptureWidget(uint id,
     connect(ConfigHandler::getInstance(), &ConfigHandler::error, this, [=]() {
         m_configError = true;
         m_configErrorResolved = false;
-        update();
+        OverlayMessage::instance()->update();
     });
     connect(
       ConfigHandler::getInstance(), &ConfigHandler::errorResolved, this, [=]() {
           m_configError = false;
           m_configErrorResolved = true;
-          update();
+          OverlayMessage::instance()->update();
       });
 
     OverlayMessage::init(this,
