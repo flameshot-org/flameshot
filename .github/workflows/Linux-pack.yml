@@ -2,7 +2,7 @@ name: Packaging(Linux)
 
 on:
   push:
-    branches: 
+    branches:
       - master
     paths-ignore:
       - 'README.md'
@@ -37,13 +37,13 @@ jobs:
               os: debian,
               symbol: buster,
               arch: amd64
-            }          
+            }
           - {
               name: debian-10,
               os: debian,
               symbol: buster,
               arch: arm64
-            }       
+            }
           - {
               name: debian-10,
               os: debian,
@@ -55,13 +55,13 @@ jobs:
               os: debian,
               symbol: bullseye,
               arch: amd64
-            }          
+            }
           - {
               name: debian-11,
               os: debian,
               symbol: bullseye,
               arch: arm64
-            }       
+            }
           - {
               name: debian-11,
               os: debian,
@@ -75,7 +75,7 @@ jobs:
               arch: amd64
             }
     steps:
-      - name: Enable Docker Experimental Features 
+      - name: Enable Docker Experimental Features
         run: |
           echo $'{\n  "experimental": true\n}' | sudo tee /etc/docker/daemon.json
           mkdir -p ~/.docker
@@ -115,7 +115,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -324,7 +324,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -438,7 +438,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -484,7 +484,7 @@ jobs:
             openssl \
             ca-certificates
       - name: Get go-appimage tool
-      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution, 
+      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
       # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
         run: |
@@ -614,7 +614,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
