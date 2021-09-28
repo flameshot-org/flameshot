@@ -64,7 +64,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
-  , m_mouseOverHandle(SelectionWidget::NO_SIDE)
+  , m_mouseOverHandle(SelectionWidget::CENTER)
   , m_id(id)
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
@@ -376,7 +376,7 @@ void CaptureWidget::uncheckActiveTool()
     updateCursor();
     update(); // clear mouse preview
     // re-enable interaction with selection
-    m_selection->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+    m_selection->setIgnoreMouse(false);
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
@@ -478,7 +478,7 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
     int activeLayerIndex = -1;
     if (m_activeButton.isNull() &&
         m_captureToolObjects.captureToolObjects().size() > 0 &&
-        m_selection->getMouseSide(pos) == SelectionWidget::NO_SIDE) {
+        m_selection->getMouseSide(pos) == SelectionWidget::CENTER) {
         auto toolItem = activeToolObject();
         if (!toolItem ||
             (toolItem && !toolItem->selectionRect().contains(pos))) {
@@ -506,7 +506,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
 
     // reset object selection if capture area selection is active
-    if (m_selection->getMouseSide(e->pos()) != SelectionWidget::NO_SIDE) {
+    if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
     }
 
@@ -530,7 +530,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         // New selection
         if (m_captureToolObjects.captureToolObjects().size() == 0) {
             if (!m_selection->geometry().contains(e->pos()) &&
-                m_mouseOverHandle == SelectionWidget::NO_SIDE) {
+                m_mouseOverHandle == SelectionWidget::CENTER) {
                 m_selection->setGeometry(
                   QRect(m_mousePressedPos, m_mousePressedPos));
                 m_selection->setVisible(false);
@@ -622,7 +622,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_buttonHandler->hide();
         }
         QRect inputRect;
-        if (m_mouseOverHandle != SelectionWidget::NO_SIDE) {
+        if (m_mouseOverHandle != SelectionWidget::CENTER) {
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
@@ -674,7 +674,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                           ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
                                   m_context.mousePos)
                           : QRect(m_dragStartPoint, m_context.mousePos);
-        } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
+        } else if (m_mouseOverHandle == SelectionWidget::CENTER) {
         }
         m_selection->setGeometry(inputRect.intersected(rect()).normalized());
         update();
@@ -1097,7 +1097,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
 
     if (b->tool()->isSelectable()) {
         // disable interaction with selection while the tool is active
-        m_selection->setAttribute(Qt::WA_TransparentForMouseEvents);
+        m_selection->setIgnoreMouse(true);
         if (m_activeButton != b) {
             QWidget* confW = b->tool()->configurationWidget();
             m_panel->setToolWidget(confW);
@@ -1450,22 +1450,7 @@ void CaptureWidget::updateCursor()
     } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
-        if (m_mouseOverHandle != SelectionWidget::NO_SIDE) {
-            // TODO remove branch
-        } else if (m_selection->isVisible() &&
-                   m_selection->geometry().contains(m_context.mousePos)) {
-            if (m_adjustmentButtonPressed) {
-                setCursor(Qt::OpenHandCursor);
-            } else {
-                setCursor(Qt::ArrowCursor);
-            }
-        } else if (m_selection->isVisible() &&
-                   m_captureToolObjects.captureToolObjects().size() > 0 &&
-                   m_activeTool.isNull()) {
-            setCursor(Qt::ArrowCursor);
-        } else {
-            setCursor(Qt::CrossCursor);
-        }
+        setCursor(Qt::CrossCursor);
     } else {
         setCursor(Qt::CrossCursor);
     }

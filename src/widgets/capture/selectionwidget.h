@@ -13,21 +13,25 @@ class SelectionWidget : public QWidget
 public:
     enum SideType
     {
-        TOPLEFT_SIDE,
-        BOTTOMLEFT_SIDE,
-        TOPRIGHT_SIDE,
-        BOTTOMRIGHT_SIDE,
-        TOP_SIDE,
-        BOTTOM_SIDE,
-        RIGHT_SIDE,
-        LEFT_SIDE,
-        NO_SIDE,
+        NO_SIDE = 0,
+        TOP_SIDE = 0b0001,
+        BOTTOM_SIDE = 0b0010,
+        RIGHT_SIDE = 0b0100,
+        LEFT_SIDE = 0b1000,
+        TOPLEFT_SIDE = TOP_SIDE | LEFT_SIDE,
+        BOTTOMLEFT_SIDE = BOTTOM_SIDE | LEFT_SIDE,
+        TOPRIGHT_SIDE = TOP_SIDE | RIGHT_SIDE,
+        BOTTOMRIGHT_SIDE = BOTTOM_SIDE | RIGHT_SIDE,
+        CENTER = 0b10000,
     };
+    Q_ENUM(SideType)
 
     explicit SelectionWidget(const QColor& c, QWidget* parent = nullptr);
 
     SideType getMouseSide(const QPoint& point) const;
     QVector<QRect> handlerAreas();
+
+    void setIgnoreMouse(bool ignore);
 
     void setGeometryAnimated(const QRect& r);
     void setGeometry(const QRect& r);
@@ -42,6 +46,7 @@ protected:
     bool eventFilter(QObject*, QEvent*) override;
     void mousePressEvent(QMouseEvent* e) override;
     void mouseReleaseEvent(QMouseEvent* e) override;
+    void parentMouseMoveEvent(QMouseEvent* e);
 
     void paintEvent(QPaintEvent*);
     void resizeEvent(QResizeEvent*);
@@ -66,8 +71,7 @@ private:
     QRect m_geometryBackup;
 
     QPoint m_dragStartPos;
-    bool m_draggingAround;
-    SideType m_resizingSide;
+    SideType m_activeSide;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

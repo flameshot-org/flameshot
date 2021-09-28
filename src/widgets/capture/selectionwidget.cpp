@@ -17,8 +17,7 @@
 SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
   : QWidget(parent)
   , m_color(c)
-  , m_draggingAround(false)
-  , m_resizingSide(NO_SIDE)
+  , m_activeSide(NO_SIDE)
 {
     setMouseTracking(true);
     parent->installEventFilter(this);
@@ -31,7 +30,6 @@ SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
             this,
             &SelectionWidget::animationEnded);
 
-    // TODO setAttribute(Qt::WA_TransparentForMouseEvents);
     int sideVal = GlobalValues::buttonBaseSize() * 0.6;
     int handleSide = sideVal / 2;
     const QRect areaRect(0, 0, sideVal, sideVal);
@@ -64,6 +62,8 @@ SelectionWidget::SideType SelectionWidget::getMouseSide(
         return RIGHT_SIDE;
     } else if (m_BArea.contains(point)) {
         return BOTTOM_SIDE;
+    } else if (rect().contains(point)) {
+        return CENTER;
     } else {
         return NO_SIDE;
     }
@@ -75,6 +75,34 @@ QVector<QRect> SelectionWidget::handlerAreas()
     areas << m_TLHandle << m_TRHandle << m_BLHandle << m_BRHandle << m_LHandle
           << m_THandle << m_RHandle << m_BHandle;
     return areas;
+}
+
+// helper function
+SelectionWidget::SideType getProperSide(SelectionWidget::SideType side,
+                                        const QRect& r)
+{
+    using SideType = SelectionWidget::SideType;
+    int intSide = side;
+    if (r.right() < r.left()) {
+        intSide ^= SideType::LEFT_SIDE;
+        intSide ^= SideType::RIGHT_SIDE;
+    }
+    if (r.bottom() < r.top()) {
+        intSide ^= SideType::TOP_SIDE;
+        intSide ^= SideType::BOTTOM_SIDE;
+    }
+
+    return (SideType)intSide;
+}
+
+void SelectionWidget::setIgnoreMouse(bool ignore)
+{
+    setAttribute(Qt::WA_TransparentForMouseEvents, ignore);
+    if (ignore) {
+        unsetCursor();
+    } else {
+        setCursor(Qt::ArrowCursor);
+    }
 }
 
 void SelectionWidget::setGeometryAnimated(const QRect& r)
@@ -121,54 +149,12 @@ bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 {
     if (event->type() == QEvent::MouseMove) {
         if (testAttribute(Qt::WA_TransparentForMouseEvents)) {
+            unsetCursor();
             return false;
         }
         auto* e = static_cast<QMouseEvent*>(event);
-        if (!(m_draggingAround || fullGeometry().contains(e->pos()))) {
-            return false;
-        }
-        QPoint localPos = mapFromParent(e->pos());
-        auto mouseSide = getMouseSide(localPos);
-        QPoint pos = e->pos();
-        if (mouseSide == TOPLEFT_SIDE || m_resizingSide == TOPLEFT_SIDE) {
-            setCursor(Qt::SizeFDiagCursor);
-            if (e->buttons() == Qt::LeftButton) {
-                //                auto r = fullGeometry();
-                //                r.setTopLeft(pos - localPos);
-                //                QWidget::setGeometry(r);
-                //                m_resizingSide = mouseSide;
-            }
-        }
-        switch (mouseSide) {
-            case TOPLEFT_SIDE:
-            case BOTTOMRIGHT_SIDE:
-                break;
-            case TOPRIGHT_SIDE:
-            case BOTTOMLEFT_SIDE:
-                setCursor(Qt::SizeBDiagCursor);
-                break;
-            case LEFT_SIDE:
-            case RIGHT_SIDE:
-                setCursor(Qt::SizeHorCursor);
-                break;
-            case TOP_SIDE:
-            case BOTTOM_SIDE:
-                setCursor(Qt::SizeVerCursor);
-                break;
-            default:
-                if (e->buttons() == Qt::LeftButton) {
-                    move(this->pos() + pos - m_dragStartPos);
-                    m_dragStartPos = pos;
-                    qDebug() << "Delta: " << pos - m_dragStartPos;
-                    qDebug() << "Parent: " << pos;
-                    qDebug() << "dragStartPos: " << m_dragStartPos;
-                    qDebug() << "pos(): " << this->pos();
-                    setCursor(Qt::ClosedHandCursor);
-                } else {
-                    unsetCursor();
-                }
-                break;
-        }
+        parentMouseMoveEvent(e);
+        return e->isAccepted();
     }
     return QWidget::eventFilter(obj, event);
 }
@@ -176,17 +162,93 @@ bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 void SelectionWidget::mousePressEvent(QMouseEvent* e)
 {
     QPoint pos = mapToParent(e->pos());
-    if (e->button() == Qt::LeftButton && fullGeometry().contains(pos)) {
+    if (e->button() == Qt::LeftButton) {
         m_dragStartPos = pos;
-        m_draggingAround = true;
-        saveGeometry();
+        m_activeSide = getMouseSide(e->pos());
     }
 }
 
 void SelectionWidget::mouseReleaseEvent(QMouseEvent* e)
 {
-    m_draggingAround = false;
-    unsetCursor();
+    m_activeSide = NO_SIDE;
+    setCursor(Qt::ArrowCursor);
+}
+
+void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
+{
+    if (m_activeSide == NO_SIDE) {
+        e->ignore();
+    }
+
+    // Mouse position relative to CaptureWidget
+    QPoint pos = e->pos();
+    auto geom = geometry();
+
+    SideType mouseSide = m_activeSide;
+    if (!m_activeSide) {
+        mouseSide = getMouseSide(mapFromParent(e->pos()));
+    }
+    switch (mouseSide) {
+        case TOPLEFT_SIDE:
+            setCursor(Qt::SizeFDiagCursor);
+            if (m_activeSide)
+                geom = QRect(pos, geom.bottomRight());
+            break;
+        case BOTTOMRIGHT_SIDE:
+            setCursor(Qt::SizeFDiagCursor);
+            if (m_activeSide)
+                geom = QRect(geom.topLeft(), pos);
+            break;
+        case TOPRIGHT_SIDE:
+            setCursor(Qt::SizeBDiagCursor);
+            if (m_activeSide)
+                geom = QRect(QPoint(geom.left(), pos.y()),
+                             QPoint(pos.x(), geom.bottom()));
+            break;
+        case BOTTOMLEFT_SIDE:
+            setCursor(Qt::SizeBDiagCursor);
+            if (m_activeSide)
+                geom = QRect(QPoint(pos.x(), geom.top()),
+                             QPoint(geom.right(), pos.y()));
+            break;
+        case LEFT_SIDE:
+            setCursor(Qt::SizeHorCursor);
+            if (m_activeSide)
+                geom = QRect(QPoint(pos.x(), geom.top()), geom.bottomRight());
+            break;
+        case RIGHT_SIDE:
+            setCursor(Qt::SizeHorCursor);
+            if (m_activeSide)
+                geom = QRect(geom.topLeft(), QPoint(pos.x(), geom.bottom()));
+            break;
+        case TOP_SIDE:
+            setCursor(Qt::SizeVerCursor);
+            if (m_activeSide)
+                geom = QRect(QPoint(geom.left(), pos.y()), geom.bottomRight());
+            break;
+        case BOTTOM_SIDE:
+            setCursor(Qt::SizeVerCursor);
+            if (m_activeSide)
+                geom = QRect(geom.topLeft(), QPoint(geom.right(), pos.y()));
+            break;
+        default:
+            if (m_activeSide) {
+                setCursor(Qt::ClosedHandCursor);
+                move(this->pos() + pos - m_dragStartPos);
+                m_dragStartPos = pos;
+                return;
+            } else {
+                setCursor(Qt::ArrowCursor);
+                return;
+            }
+            break;
+    }
+    // finalize geometry change
+    if (m_activeSide) {
+        setGeometry(geom.normalized());
+        m_activeSide = getProperSide(m_activeSide, geom);
+    }
+    m_dragStartPos = pos;
 }
 
 void SelectionWidget::paintEvent(QPaintEvent*)
@@ -221,12 +283,10 @@ void SelectionWidget::updateColor(const QColor& c)
 void SelectionWidget::updateAreas()
 {
     QRect r = rect();
-    QPoint pos(MARGIN, MARGIN);
-    pos = {};
-    m_TLArea.moveTo(m_areaOffset + pos);
-    m_TRArea.moveTo(r.topRight() + m_areaOffset + pos);
-    m_BLArea.moveTo(r.bottomLeft() + m_areaOffset + pos);
-    m_BRArea.moveTo(r.bottomRight() + m_areaOffset + pos);
+    m_TLArea.moveTo(r.topLeft() + m_areaOffset);
+    m_TRArea.moveTo(r.topRight() + m_areaOffset);
+    m_BLArea.moveTo(r.bottomLeft() + m_areaOffset);
+    m_BRArea.moveTo(r.bottomRight() + m_areaOffset);
 
     m_LArea = QRect(m_TLArea.bottomLeft(), m_BLArea.topRight());
     m_TArea = QRect(m_TLArea.topRight(), m_TRArea.bottomLeft());
