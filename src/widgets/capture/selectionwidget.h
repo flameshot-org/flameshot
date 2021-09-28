@@ -30,10 +30,19 @@ public:
     QVector<QRect> handlerAreas();
 
     void setGeometryAnimated(const QRect& r);
+    void setGeometry(const QRect& r);
+    QRect geometry() const;
+    QRect fullGeometry() const;
     void saveGeometry();
     QRect savedGeometry();
 
+    QRect rect() const;
+
 protected:
+    bool eventFilter(QObject*, QEvent*) override;
+    void mousePressEvent(QMouseEvent* e) override;
+    void mouseReleaseEvent(QMouseEvent* e) override;
+
     void paintEvent(QPaintEvent*);
     void resizeEvent(QResizeEvent*);
     void moveEvent(QMoveEvent*);
@@ -41,6 +50,7 @@ protected:
 signals:
     void animationEnded();
     void resized();
+    void geometryChanged();
 
 public slots:
     void updateColor(const QColor& c);
@@ -54,6 +64,10 @@ private:
     QPoint m_areaOffset;
     QPoint m_handleOffset;
     QRect m_geometryBackup;
+
+    QPoint m_dragStartPos;
+    bool m_draggingAround;
+    SideType m_resizingSide;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

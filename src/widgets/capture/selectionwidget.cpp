@@ -2,14 +2,27 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
+#include "capturetool.h"
+#include "capturetoolbutton.h"
 #include "src/utils/globalvalues.h"
+#include <QApplication>
+#include <QDebug>
+#include <QEvent>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QPropertyAnimation>
+
+#define MARGIN (m_THandle.width())
 
 SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
   : QWidget(parent)
   , m_color(c)
+  , m_draggingAround(false)
+  , m_resizingSide(NO_SIDE)
 {
+    setMouseTracking(true);
+    parent->installEventFilter(this);
+
     m_animation = new QPropertyAnimation(this, "geometry", this);
     m_animation->setEasingCurve(QEasingCurve::InOutQuad);
     m_animation->setDuration(200);
@@ -18,10 +31,11 @@ SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
             this,
             &SelectionWidget::animationEnded);
 
-    setAttribute(Qt::WA_TransparentForMouseEvents);
+    // TODO setAttribute(Qt::WA_TransparentForMouseEvents);
     int sideVal = GlobalValues::buttonBaseSize() * 0.6;
     int handleSide = sideVal / 2;
     const QRect areaRect(0, 0, sideVal, sideVal);
+
     const QRect handleRect(0, 0, handleSide, handleSide);
     m_TLHandle = m_TRHandle = m_BLHandle = m_BRHandle = m_LHandle = m_THandle =
       m_RHandle = m_BHandle = handleRect;
@@ -72,6 +86,22 @@ void SelectionWidget::setGeometryAnimated(const QRect& r)
     }
 }
 
+void SelectionWidget::setGeometry(const QRect& r)
+{
+    QWidget::setGeometry(r + QMargins(MARGIN, MARGIN, MARGIN, MARGIN));
+    emit geometryChanged();
+}
+
+QRect SelectionWidget::geometry() const
+{
+    return QWidget::geometry() - QMargins(MARGIN, MARGIN, MARGIN, MARGIN);
+}
+
+QRect SelectionWidget::fullGeometry() const
+{
+    return QWidget::geometry();
+}
+
 void SelectionWidget::saveGeometry()
 {
     m_geometryBackup = geometry();
@@ -82,22 +112,105 @@ QRect SelectionWidget::savedGeometry()
     return m_geometryBackup;
 }
 
+QRect SelectionWidget::rect() const
+{
+    return QWidget::rect() - QMargins(MARGIN, MARGIN, MARGIN, MARGIN);
+}
+
+bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
+{
+    if (event->type() == QEvent::MouseMove) {
+        if (testAttribute(Qt::WA_TransparentForMouseEvents)) {
+            return false;
+        }
+        auto* e = static_cast<QMouseEvent*>(event);
+        if (!(m_draggingAround || fullGeometry().contains(e->pos()))) {
+            return false;
+        }
+        QPoint localPos = mapFromParent(e->pos());
+        auto mouseSide = getMouseSide(localPos);
+        QPoint pos = e->pos();
+        if (mouseSide == TOPLEFT_SIDE || m_resizingSide == TOPLEFT_SIDE) {
+            setCursor(Qt::SizeFDiagCursor);
+            if (e->buttons() == Qt::LeftButton) {
+                //                auto r = fullGeometry();
+                //                r.setTopLeft(pos - localPos);
+                //                QWidget::setGeometry(r);
+                //                m_resizingSide = mouseSide;
+            }
+        }
+        switch (mouseSide) {
+            case TOPLEFT_SIDE:
+            case BOTTOMRIGHT_SIDE:
+                break;
+            case TOPRIGHT_SIDE:
+            case BOTTOMLEFT_SIDE:
+                setCursor(Qt::SizeBDiagCursor);
+                break;
+            case LEFT_SIDE:
+            case RIGHT_SIDE:
+                setCursor(Qt::SizeHorCursor);
+                break;
+            case TOP_SIDE:
+            case BOTTOM_SIDE:
+                setCursor(Qt::SizeVerCursor);
+                break;
+            default:
+                if (e->buttons() == Qt::LeftButton) {
+                    move(this->pos() + pos - m_dragStartPos);
+                    m_dragStartPos = pos;
+                    qDebug() << "Delta: " << pos - m_dragStartPos;
+                    qDebug() << "Parent: " << pos;
+                    qDebug() << "dragStartPos: " << m_dragStartPos;
+                    qDebug() << "pos(): " << this->pos();
+                    setCursor(Qt::ClosedHandCursor);
+                } else {
+                    unsetCursor();
+                }
+                break;
+        }
+    }
+    return QWidget::eventFilter(obj, event);
+}
+
+void SelectionWidget::mousePressEvent(QMouseEvent* e)
+{
+    QPoint pos = mapToParent(e->pos());
+    if (e->button() == Qt::LeftButton && fullGeometry().contains(pos)) {
+        m_dragStartPos = pos;
+        m_draggingAround = true;
+        saveGeometry();
+    }
+}
+
+void SelectionWidget::mouseReleaseEvent(QMouseEvent* e)
+{
+    m_draggingAround = false;
+    unsetCursor();
+}
+
 void SelectionWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
     p.setPen(m_color);
     p.drawRect(rect() + QMargins(0, 0, -1, -1));
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setBrush(m_color);
+    for (auto rect : handlerAreas()) {
+        p.drawEllipse(rect);
+    }
 }
 
 void SelectionWidget::resizeEvent(QResizeEvent*)
 {
     updateAreas();
+    emit geometryChanged();
 }
 
 void SelectionWidget::moveEvent(QMoveEvent*)
 {
     updateAreas();
-    emit resized();
+    emit geometryChanged();
 }
 
 void SelectionWidget::updateColor(const QColor& c)
@@ -108,10 +221,12 @@ void SelectionWidget::updateColor(const QColor& c)
 void SelectionWidget::updateAreas()
 {
     QRect r = rect();
-    m_TLArea.moveTo(m_areaOffset + pos());
-    m_TRArea.moveTo(r.topRight() + m_areaOffset + pos());
-    m_BLArea.moveTo(r.bottomLeft() + m_areaOffset + pos());
-    m_BRArea.moveTo(r.bottomRight() + m_areaOffset + pos());
+    QPoint pos(MARGIN, MARGIN);
+    pos = {};
+    m_TLArea.moveTo(m_areaOffset + pos);
+    m_TRArea.moveTo(r.topRight() + m_areaOffset + pos);
+    m_BLArea.moveTo(r.bottomLeft() + m_areaOffset + pos);
+    m_BRArea.moveTo(r.bottomRight() + m_areaOffset + pos);
 
     m_LArea = QRect(m_TLArea.bottomLeft(), m_BLArea.topRight());
     m_TArea = QRect(m_TLArea.topRight(), m_TRArea.bottomLeft());

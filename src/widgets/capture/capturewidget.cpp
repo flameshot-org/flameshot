@@ -219,6 +219,7 @@ CaptureWidget::CaptureWidget(uint id,
           m_configErrorResolved = true;
           update();
       });
+
     OverlayMessage::init(this,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
 
@@ -374,6 +375,8 @@ void CaptureWidget::uncheckActiveTool()
     releaseActiveTool();
     updateCursor();
     update(); // clear mouse preview
+    // re-enable interaction with selection
+    m_selection->setAttribute(Qt::WA_TransparentForMouseEvents, false);
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
@@ -672,17 +675,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                                   m_context.mousePos)
                           : QRect(m_dragStartPoint, m_context.mousePos);
         } else if (m_mouseOverHandle == SelectionWidget::NO_SIDE) {
-            // Moving the whole selection
-            m_movingSelection = true;
-            if (m_adjustmentButtonPressed || activeToolObject().isNull()) {
-                setCursor(Qt::OpenHandCursor);
-                QRect initialRect = m_selection->savedGeometry().normalized();
-                QPoint newTopLeft =
-                  initialRect.topLeft() + (e->pos() - m_dragStartPoint);
-                inputRect = QRect(newTopLeft, initialRect.size());
-            } else {
-                return;
-            }
         }
         m_selection->setGeometry(inputRect.intersected(rect()).normalized());
         update();
@@ -1062,16 +1054,18 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
 void CaptureWidget::initSelection()
 {
     m_selection = new SelectionWidget(m_uiColor, this);
-    connect(m_selection, &SelectionWidget::animationEnded, this, [this]() {
-        this->m_buttonHandler->updatePosition(this->m_selection->geometry());
-    });
-    connect(m_selection, &SelectionWidget::resized, this, [this]() {
+    m_selection->setVisible(false);
+    m_selection->setGeometry(QRect());
+    auto onGeometryChanged = [this]() {
+        m_buttonHandler->updatePosition(m_selection->geometry());
         QRect constrainedToCaptureArea =
           m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(constrainedToCaptureArea);
-    });
-    m_selection->setVisible(false);
-    m_selection->setGeometry(QRect());
+    };
+    connect(
+      m_selection, &SelectionWidget::animationEnded, this, onGeometryChanged);
+    connect(
+      m_selection, &SelectionWidget::geometryChanged, this, onGeometryChanged);
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
@@ -1102,6 +1096,8 @@ void CaptureWidget::setState(CaptureToolButton* b)
     }
 
     if (b->tool()->isSelectable()) {
+        // disable interaction with selection while the tool is active
+        m_selection->setAttribute(Qt::WA_TransparentForMouseEvents);
         if (m_activeButton != b) {
             QWidget* confW = b->tool()->configurationWidget();
             m_panel->setToolWidget(confW);
@@ -1312,9 +1308,7 @@ void CaptureWidget::repositionSelection(QRect r)
 {
     if (m_selection->isVisible()) {
         m_selection->setGeometry(r);
-        m_buttonHandler->updatePosition(m_selection->geometry());
         updateSizeIndicator();
-        update();
     }
 }
 
@@ -1456,29 +1450,8 @@ void CaptureWidget::updateCursor()
     } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else if (!m_activeButton) {
-        using sw = SelectionWidget;
-        if (m_mouseOverHandle != sw::NO_SIDE) {
-            // cursor on the handlers
-            switch (m_mouseOverHandle) {
-                case sw::TOPLEFT_SIDE:
-                case sw::BOTTOMRIGHT_SIDE:
-                    setCursor(Qt::SizeFDiagCursor);
-                    break;
-                case sw::TOPRIGHT_SIDE:
-                case sw::BOTTOMLEFT_SIDE:
-                    setCursor(Qt::SizeBDiagCursor);
-                    break;
-                case sw::LEFT_SIDE:
-                case sw::RIGHT_SIDE:
-                    setCursor(Qt::SizeHorCursor);
-                    break;
-                case sw::TOP_SIDE:
-                case sw::BOTTOM_SIDE:
-                    setCursor(Qt::SizeVerCursor);
-                    break;
-                default:
-                    break;
-            }
+        if (m_mouseOverHandle != SelectionWidget::NO_SIDE) {
+            // TODO remove branch
         } else if (m_selection->isVisible() &&
                    m_selection->geometry().contains(m_context.mousePos)) {
             if (m_adjustmentButtonPressed) {
@@ -1733,22 +1706,11 @@ void CaptureWidget::drawInactiveRegion(QPainter* painter)
     painter->setBrush(overlayColor);
     QRect r;
     if (m_selection->isVisible()) {
-        r = m_selection->geometry().normalized().adjusted(0, 0, -1, -1);
+        r = m_selection->geometry().normalized();
     }
     QRegion grey(rect());
     grey = grey.subtracted(r);
 
     painter->setClipRegion(grey);
     painter->drawRect(-1, -1, rect().width() + 1, rect().height() + 1);
-    painter->setClipRect(rect());
-
-    if (m_selection->isVisible()) {
-        // paint handlers
-        painter->setPen(m_uiColor);
-        painter->setRenderHint(QPainter::Antialiasing);
-        painter->setBrush(m_uiColor);
-        for (auto rect : m_selection->handlerAreas()) {
-            painter->drawRoundedRect(rect, 100, 100);
-        }
-    }
 }
