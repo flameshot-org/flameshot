@@ -161,6 +161,10 @@ bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 
 void SelectionWidget::mousePressEvent(QMouseEvent* e)
 {
+    // e->ignore();
+    // TODO QWidget::mousePressEvent(e);
+    // if (e->isAccepted())
+    // return;
     QPoint pos = mapToParent(e->pos());
     if (e->button() == Qt::LeftButton) {
         m_dragStartPos = pos;
@@ -183,53 +187,59 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     // Mouse position relative to CaptureWidget
     QPoint pos = e->pos();
     auto geom = geometry();
+    bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
     SideType mouseSide = m_activeSide;
     if (!m_activeSide) {
         mouseSide = getMouseSide(mapFromParent(e->pos()));
     }
+    QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
+    int &newLeft = newTopLeft.rx(), &newRight = newBottomRight.rx(),
+        &newTop = newTopLeft.ry(), &newBottom = newBottomRight.ry();
     switch (mouseSide) {
         case TOPLEFT_SIDE:
             setCursor(Qt::SizeFDiagCursor);
             if (m_activeSide)
-                geom = QRect(pos, geom.bottomRight());
+                newTopLeft = pos;
             break;
         case BOTTOMRIGHT_SIDE:
             setCursor(Qt::SizeFDiagCursor);
             if (m_activeSide)
-                geom = QRect(geom.topLeft(), pos);
+                newBottomRight = pos;
             break;
         case TOPRIGHT_SIDE:
             setCursor(Qt::SizeBDiagCursor);
-            if (m_activeSide)
-                geom = QRect(QPoint(geom.left(), pos.y()),
-                             QPoint(pos.x(), geom.bottom()));
+            if (m_activeSide) {
+                newTop = pos.y();
+                newRight = pos.x();
+            }
             break;
         case BOTTOMLEFT_SIDE:
             setCursor(Qt::SizeBDiagCursor);
-            if (m_activeSide)
-                geom = QRect(QPoint(pos.x(), geom.top()),
-                             QPoint(geom.right(), pos.y()));
+            if (m_activeSide) {
+                newBottom = pos.y();
+                newLeft = pos.x();
+            }
             break;
         case LEFT_SIDE:
             setCursor(Qt::SizeHorCursor);
             if (m_activeSide)
-                geom = QRect(QPoint(pos.x(), geom.top()), geom.bottomRight());
+                newLeft = pos.x();
             break;
         case RIGHT_SIDE:
             setCursor(Qt::SizeHorCursor);
             if (m_activeSide)
-                geom = QRect(geom.topLeft(), QPoint(pos.x(), geom.bottom()));
+                newRight = pos.x();
             break;
         case TOP_SIDE:
             setCursor(Qt::SizeVerCursor);
             if (m_activeSide)
-                geom = QRect(QPoint(geom.left(), pos.y()), geom.bottomRight());
+                newTop = pos.y();
             break;
         case BOTTOM_SIDE:
             setCursor(Qt::SizeVerCursor);
             if (m_activeSide)
-                geom = QRect(geom.topLeft(), QPoint(geom.right(), pos.y()));
+                newBottom = pos.y();
             break;
         default:
             if (m_activeSide) {
@@ -245,6 +255,14 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     }
     // finalize geometry change
     if (m_activeSide) {
+        if (symmetryMod) {
+            QPoint deltaTopLeft = newTopLeft - geom.topLeft();
+            QPoint deltaBottomRight = newBottomRight - geom.bottomRight();
+            newTopLeft = geom.topLeft() + deltaTopLeft - deltaBottomRight;
+            newBottomRight =
+              geom.bottomRight() + deltaBottomRight - deltaTopLeft;
+        }
+        geom = { newTopLeft, newBottomRight };
         setGeometry(geom.normalized());
         m_activeSide = getProperSide(m_activeSide, geom);
     }

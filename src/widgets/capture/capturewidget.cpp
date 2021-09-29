@@ -626,45 +626,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             // Dragging a handle
             inputRect = m_selection->savedGeometry();
             QPoint offset = e->pos() - m_dragStartPoint;
-
-            using sw = SelectionWidget;
-            QRect& r = inputRect;
-            if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
-                m_mouseOverHandle == sw::TOP_SIDE ||
-                m_mouseOverHandle == sw::TOPRIGHT_SIDE) {
-                // dragging one of the top handles
-                r.setTop(r.top() + offset.y());
-                if (symmetryMod) {
-                    r.setBottom(r.bottom() - offset.y());
-                }
-            }
-            if (m_mouseOverHandle == sw::TOPLEFT_SIDE ||
-                m_mouseOverHandle == sw::LEFT_SIDE ||
-                m_mouseOverHandle == sw::BOTTOMLEFT_SIDE) {
-                // dragging one of the left handles
-                r.setLeft(r.left() + offset.x());
-                if (symmetryMod) {
-                    r.setRight(r.right() - offset.x());
-                }
-            }
-            if (m_mouseOverHandle == sw::BOTTOMLEFT_SIDE ||
-                m_mouseOverHandle == sw::BOTTOM_SIDE ||
-                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) {
-                // dragging one of the bottom handles
-                r.setBottom(r.bottom() + offset.y());
-                if (symmetryMod) {
-                    r.setTop(r.top() - offset.y());
-                }
-            }
-            if (m_mouseOverHandle == sw::TOPRIGHT_SIDE ||
-                m_mouseOverHandle == sw::RIGHT_SIDE ||
-                m_mouseOverHandle == sw::BOTTOMRIGHT_SIDE) {
-                // dragging one of the right handles
-                r.setRight(r.right() + offset.x());
-                if (symmetryMod) {
-                    r.setLeft(r.left() - offset.x());
-                }
-            }
         } else if (!m_movingSelection &&
                    (!m_selection->geometry().contains(e->pos()) ||
                     m_newSelection)) {
