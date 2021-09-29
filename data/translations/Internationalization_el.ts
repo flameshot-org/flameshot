@@ -428,7 +428,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="112"/>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Import</source>
-        <translation type="unfinished">Importar</translation>
+        <translation>εισαγωγή</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="119"/>
@@ -441,23 +441,23 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="119"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Impossible llegir el fitxer.</translation>
+        <translation>Δεν είναι δυνατή η ανάγνωση του αρχείου.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="127"/>
         <location filename="../../src/config/generalconf.cpp" line="150"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Impossible escriure al fitxer.</translation>
+        <translation>Δεν είναι δυνατή η εγγραφή αρχείου.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="137"/>
         <source>Save File</source>
-        <translation type="unfinished">Guardar Arxiu</translation>
+        <translation>Αποθήκευση αρχείου</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="159"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Confirmar Reset</translation>
+        <translation>Επιβεβαίωση Επαναφοράς</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="160"/>
@@ -467,12 +467,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="196"/>
         <source>Show help message</source>
-        <translation type="unfinished">Mostra el missatge d&apos;ajuda</translation>
+        <translation>Εμφάνιση μηνύματος βοήθειας</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="200"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">Mostra el missatge d&apos;ajuda en iniciar el mode de captura.</translation>
+        <translation>Εμφάνιση του μηνύματος βοήθειας στην αρχή της λειτουργίας λήψης.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
@@ -488,7 +488,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="223"/>
         <location filename="../../src/config/generalconf.cpp" line="227"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Mostra les notificacions d&apos;escriptori</translation>
+        <translation>Εμφάνιση ειδοποιήσεων στην επιφάνειας εργασίας</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="239"/>
@@ -509,17 +509,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Fitxer de Configuració</translation>
+        <translation>Αρχείο διαμόρφωσης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Export</source>
-        <translation type="unfinished">Exportar</translation>
+        <translation>Εξαγωγή</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="291"/>
         <source>Reset</source>
-        <translation type="unfinished">Reset</translation>
+        <translation>Επαναφορά</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
@@ -530,7 +530,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">Llançament a l&apos;inici</translation>
+        <translation>Εκκίνηση κατά την εκκίνηση</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
@@ -626,12 +626,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copia l&apos;URL</translation>
+        <translation>Αντιγραφή διεύθυνσης URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Η διεύθυνση URL αντιγράφηκε στο πρόχειρο.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
@@ -705,17 +705,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">S&apos;està pujant la imatge</translation>
+        <translation>Μεταφόρτωση εικόνας</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copia l&apos;URL</translation>
+        <translation>Αντιγραφή διεύθυνσης URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
         <source>Open URL</source>
-        <translation type="unfinished">Obri l&apos;URL</translation>
+        <translation>Άνοιγμα URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
@@ -725,23 +725,23 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Imatge al porta-retalls.</translation>
+        <translation>Εικόνα στο Πρόχειρο.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">No es pot obrir l&apos;URL.</translation>
+        <translation>Δεν είναι δυνατό το άνοιγμα της διεύθυνσης URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Η διεύθυνση URL αντιγράφηκε στο πρόχειρο.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">La captura s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Το στιγμιότυπο οθόνης αντιγράφηκε στο πρόχειρο.</translation>
     </message>
 </context>
 <context>
@@ -1125,12 +1125,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="31"/>
         <source>Unable to write in</source>
-        <translation type="unfinished">Δεν κατάφερε να γράψει στο</translation>
+        <translation>Δεν είναι δυνατή η εγγραφή στο</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">L&apos;URL s&apos;ha copiat al porta-retalls.</translation>
+        <translation>Η διεύθυνση URL αντιγράφηκε στο πρόχειρο.</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="50"/>
@@ -1231,7 +1231,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Ix de la captura</translation>
+        <translation>Κλείστε την λήψη</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
@@ -1248,12 +1248,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostra el selector de color</translation>
+        <translation>Εμφάνιση επιλογέα χρώματος</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="98"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Canvia el gruix de l&apos;eina</translation>
+        <translation>Αλλάξτε το πάχος του εργαλείου</translation>
     </message>
 </context>
 <context>
