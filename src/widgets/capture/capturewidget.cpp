@@ -1372,10 +1372,7 @@ void CaptureWidget::pushToolToStack()
 
         // disable signal connect for updating layer because it may call this
         // function again on text objects
-        disconnect(m_panel,
-                   &UtilityPanel::layerChanged,
-                   this,
-                   &CaptureWidget::updateActiveLayer);
+        m_panel->blockSignals(true);
 
         m_captureToolObjectsBackup = m_captureToolObjects;
         m_captureToolObjects.append(m_activeTool);
@@ -1384,10 +1381,7 @@ void CaptureWidget::pushToolToStack()
         drawToolsData();
 
         // restore signal connection for updating layer
-        connect(m_panel,
-                &UtilityPanel::layerChanged,
-                this,
-                &CaptureWidget::updateActiveLayer);
+        m_panel->blockSignals(false);
     }
 }
 
