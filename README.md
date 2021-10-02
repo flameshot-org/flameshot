@@ -20,19 +20,19 @@
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
-      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg" alt="Latest Stable Release" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
-      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
+      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg" alt="Total Downloads" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
+      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg" alt="License" />
     </a>
   <a href="https://hosted.weblate.org/engage/flameshot/">
     <img src="https://hosted.weblate.org/widgets/flameshot/-/flameshot/svg-badge.svg" alt="Translation status" />
   </a>
   <a href="https://flameshot.org">
-      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?label=docs" alt="Docs" />
     </a>
     <br>
     <a href="https://snapcraft.io/flameshot">
