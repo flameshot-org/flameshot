@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "penciltool.h"
+#include <QDebug>
 #include <QPainter>
 
 PencilTool::PencilTool(QObject* parent)

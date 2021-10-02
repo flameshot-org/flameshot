@@ -41,7 +41,6 @@ CaptureTool* MoveTool::copy(QObject* parent)
 void MoveTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)
-    emit requestAction(REQ_MOVE_MODE);
 }
 
 bool MoveTool::isSelectable() const

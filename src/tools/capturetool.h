@@ -67,8 +67,6 @@ public:
         REQ_REDO_MODIFICATION,
         // Remove all the modifications.
         REQ_CLEAR_MODIFICATIONS,
-        // Disable the active tool.
-        REQ_MOVE_MODE,
         // Open the color picker under the mouse.
         REQ_SHOW_COLOR_PICKER,
         // Open/Close the side-panel.

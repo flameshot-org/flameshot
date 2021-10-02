@@ -24,21 +24,19 @@ public:
         BOTTOMRIGHT_SIDE = BOTTOM_SIDE | RIGHT_SIDE,
         CENTER = 0b10000,
     };
-    Q_ENUM(SideType)
 
     explicit SelectionWidget(const QColor& c, QWidget* parent = nullptr);
 
-    SideType getMouseSide(const QPoint& point) const;
+    SideType getMouseSide(const QPoint& mousePos) const;
     QVector<QRect> handlerAreas();
 
     void setIgnoreMouse(bool ignore);
+    void setIdleCentralCursor(const QCursor& cursor);
 
     void setGeometryAnimated(const QRect& r);
     void setGeometry(const QRect& r);
     QRect geometry() const;
     QRect fullGeometry() const;
-    void saveGeometry();
-    QRect savedGeometry();
 
     QRect rect() const;
 
@@ -56,6 +54,7 @@ signals:
     void animationEnded();
     void resized();
     void geometryChanged();
+    void geometrySettled();
 
 public slots:
     void updateColor(const QColor& c);
@@ -72,6 +71,7 @@ private:
 
     QPoint m_dragStartPos;
     SideType m_activeSide;
+    QCursor m_idleCentralCursor;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

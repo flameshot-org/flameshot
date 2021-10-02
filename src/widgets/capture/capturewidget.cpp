@@ -28,6 +28,7 @@
 #include "src/widgets/updatenotificationwidget.h"
 #include <QApplication>
 #include <QDateTime>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
@@ -52,9 +53,6 @@ CaptureWidget::CaptureWidget(uint id,
                              QWidget* parent)
   : QWidget(parent)
   , m_mouseIsClicked(false)
-  , m_newSelection(true)
-  , m_grabbing(false)
-  , m_movingSelection(false)
   , m_captureDone(false)
   , m_previewEnabled(true)
   , m_adjustmentButtonPressed(false)
@@ -64,7 +62,6 @@ CaptureWidget::CaptureWidget(uint id,
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
-  , m_mouseOverHandle(SelectionWidget::CENTER)
   , m_id(id)
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
@@ -322,7 +319,7 @@ bool CaptureWidget::commitCurrentTool()
 
 void CaptureWidget::deleteToolWidgetOrClose()
 {
-    if (!m_activeButton.isNull()) {
+    if (m_activeButton != nullptr) {
         uncheckActiveTool();
     } else if (m_panel->activeLayerIndex() >= 0) {
         // remove active tool selection
@@ -368,15 +365,15 @@ void CaptureWidget::releaseActiveTool()
 
 void CaptureWidget::uncheckActiveTool()
 {
+    qDebug() << "uncheckActiveTool";
     // uncheck active tool
     m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
     m_activeButton = nullptr;
     releaseActiveTool();
     updateCursor();
+    updateSelectionState();
     update(); // clear mouse preview
-    // re-enable interaction with selection
-    m_selection->setIgnoreMouse(false);
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
@@ -476,9 +473,11 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 {
     // Try to select existing tool, "-1" - no active tool
     int activeLayerIndex = -1;
+    auto selectionMouseSide = m_selection->getMouseSide(pos);
     if (m_activeButton.isNull() &&
         m_captureToolObjects.captureToolObjects().size() > 0 &&
-        m_selection->getMouseSide(pos) == SelectionWidget::CENTER) {
+        (selectionMouseSide == SelectionWidget::NO_SIDE ||
+         selectionMouseSide == SelectionWidget::CENTER)) {
         auto toolItem = activeToolObject();
         if (!toolItem ||
             (toolItem && !toolItem->selectionRect().contains(pos))) {
@@ -525,21 +524,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
             // return if success
             return;
         }
-
-        m_selection->saveGeometry();
-        // New selection
-        if (m_captureToolObjects.captureToolObjects().size() == 0) {
-            if (!m_selection->geometry().contains(e->pos()) &&
-                m_mouseOverHandle == SelectionWidget::CENTER) {
-                m_selection->setGeometry(
-                  QRect(m_mousePressedPos, m_mousePressedPos));
-                m_selection->setVisible(false);
-                m_buttonHandler->hide();
-                update();
-            } else {
-                m_grabbing = true;
-            }
-        }
     }
 
     // Commit current tool if it has edit widget and mouse click is outside
@@ -579,7 +563,6 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
-    bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
     int activeLayerIndex = -1;
     if (m_mouseIsClicked) {
@@ -616,29 +599,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     } else if (m_mouseIsClicked &&
                (!m_activeButton ||
                 (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION))) {
-        // Drawing, moving, or stretching a selection
-        m_selection->setVisible(true);
-        if (m_buttonHandler->isVisible()) {
-            m_buttonHandler->hide();
-        }
-        QRect inputRect;
-        if (m_mouseOverHandle != SelectionWidget::CENTER) {
-            // Dragging a handle
-            inputRect = m_selection->savedGeometry();
-            QPoint offset = e->pos() - m_dragStartPoint;
-        } else if (!m_movingSelection &&
-                   (!m_selection->geometry().contains(e->pos()) ||
-                    m_newSelection)) {
-            m_newSelection = true;
-            // Drawing a new selection
-            inputRect = symmetryMod
-                          ? QRect(m_dragStartPoint * 2 - m_context.mousePos,
-                                  m_context.mousePos)
-                          : QRect(m_dragStartPoint, m_context.mousePos);
-        } else if (m_mouseOverHandle == SelectionWidget::CENTER) {
-        }
-        m_selection->setGeometry(inputRect.intersected(rect()).normalized());
-        update();
+        return; // TODO rm this branch
     } else if (m_mouseIsClicked && m_activeTool) {
         // drawing with a tool
         if (m_adjustmentButtonPressed) {
@@ -661,10 +622,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     } else if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
         update();
     } else {
-        if (!m_selection->isVisible()) {
-            return;
-        }
-        m_mouseOverHandle = m_selection->getMouseSide(m_context.mousePos);
         updateCursor();
     }
 }
@@ -695,46 +652,12 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
             if (m_activeToolIsMoved) {
                 m_activeToolIsMoved = false;
                 pushObjectsStateToUndoStack();
-            } else if (e->pos() == m_mousePressedPos &&
-                       m_activeButton.isNull()) {
-                // Try to select existing tool if it was in the selection area
-                // but need to select another one
-                m_panel->setActiveLayer(
-                  m_captureToolObjects.find(e->pos(), size()));
             }
             drawToolsData(true, true);
         }
     }
-
-    if (!m_buttonHandler->isVisible() && m_selection->isVisible()) {
-        // Show the buttons after the resize of the selection or the creation
-        // of a new one.
-
-        // Don't go outside
-        QRect newGeometry = m_selection->geometry().intersected(rect());
-        // normalize
-        if (newGeometry.width() <= 0) {
-            int left = newGeometry.left();
-            newGeometry.setLeft(newGeometry.right());
-            newGeometry.setRight(left);
-        }
-        if (newGeometry.height() <= 0) {
-            int top = newGeometry.top();
-            newGeometry.setTop(newGeometry.bottom());
-            newGeometry.setBottom(top);
-        }
-        m_selection->setGeometry(newGeometry);
-        updateSizeIndicator();
-        m_buttonHandler->updatePosition(newGeometry);
-        m_buttonHandler->show();
-    }
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
-    m_grabbing = false;
-    m_movingSelection = false;
-    if (m_selection->isVisible()) {
-        m_newSelection = false;
-    }
 
     updateCursor();
 }
@@ -1022,11 +945,16 @@ void CaptureWidget::initSelection()
         QRect constrainedToCaptureArea =
           m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(constrainedToCaptureArea);
+        updateSizeIndicator();
+        m_buttonHandler->hide();
     };
     connect(
       m_selection, &SelectionWidget::animationEnded, this, onGeometryChanged);
     connect(
       m_selection, &SelectionWidget::geometryChanged, this, onGeometryChanged);
+    connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
+        m_buttonHandler->show();
+    });
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
@@ -1057,8 +985,6 @@ void CaptureWidget::setState(CaptureToolButton* b)
     }
 
     if (b->tool()->isSelectable()) {
-        // disable interaction with selection while the tool is active
-        m_selection->setIgnoreMouse(true);
         if (m_activeButton != b) {
             QWidget* confW = b->tool()->configurationWidget();
             m_panel->setToolWidget(confW);
@@ -1075,6 +1001,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         }
         loadDrawThickness();
         updateCursor();
+        updateSelectionState();
         update(); // clear mouse preview
     }
 }
@@ -1105,8 +1032,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             hide();
             break;
         case CaptureTool::REQ_HIDE_SELECTION:
-            m_newSelection = true;
-            m_selection->setVisible(false);
+            m_selection->hide();
             updateCursor();
             break;
         case CaptureTool::REQ_SELECT_ALL:
@@ -1126,9 +1052,6 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             break;
         case CaptureTool::REQ_SHOW_COLOR_PICKER:
             // TODO
-            break;
-        case CaptureTool::REQ_MOVE_MODE:
-            setState(m_activeButton); // Disable the actual button
             break;
         case CaptureTool::REQ_CLEAR_SELECTION:
             if (m_panel->activeLayerIndex() >= 0) {
@@ -1194,8 +1117,13 @@ void CaptureWidget::setDrawColor(const QColor& c)
     }
 }
 
-void CaptureWidget::updateActiveLayer(const int& layer)
+void CaptureWidget::updateActiveLayer(int layer)
 {
+    if (layer != -1) {
+        m_selection->setIgnoreMouse(true);
+    } else if (m_activeButton == nullptr) {
+        m_selection->setIgnoreMouse(false);
+    }
     // TODO - refactor this part, make all objects to work with
     // m_activeTool->isChanged() and remove m_existingObjectIsChanged
     if (m_activeTool && m_activeTool->type() == CaptureTool::TYPE_TEXT &&
@@ -1243,7 +1171,7 @@ void CaptureWidget::removeToolObject(int index)
     }
 }
 
-void CaptureWidget::setDrawThickness(const int& t)
+void CaptureWidget::setDrawThickness(int t)
 {
     m_context.thickness = qBound(1, t, 100);
     // save draw thickness for text and other tool separately
@@ -1402,18 +1330,22 @@ void CaptureWidget::updateCursor()
 {
     if (m_colorPicker && m_colorPicker->isVisible()) {
         setCursor(Qt::ArrowCursor);
-    } else if (m_grabbing) {
-        if (m_adjustmentButtonPressed) {
-            setCursor(Qt::OpenHandCursor);
-        } else {
-            setCursor(Qt::ArrowCursor);
-        }
     } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
-    } else if (!m_activeButton) {
-        setCursor(Qt::CrossCursor);
     } else {
         setCursor(Qt::CrossCursor);
+    }
+}
+
+void CaptureWidget::updateSelectionState()
+{
+    auto toolType = activeButtonToolType();
+    if (toolType == CaptureTool::TYPE_MOVESELECTION) {
+        m_selection->setIdleCentralCursor(Qt::OpenHandCursor);
+        m_selection->setIgnoreMouse(false);
+    } else {
+        m_selection->setIdleCentralCursor(Qt::ArrowCursor);
+        m_selection->setIgnoreMouse(toolType != CaptureTool::NONE);
     }
 }
 

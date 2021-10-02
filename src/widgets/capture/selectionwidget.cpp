@@ -43,26 +43,31 @@ SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
     m_handleOffset = QPoint(-handleSide / 2, -handleSide / 2);
 }
 
+/**
+ * @brief Get the side where the mouse cursor is.
+ * @param mousePos Mouse cursor position relative to the parent widget.
+ */
 SelectionWidget::SideType SelectionWidget::getMouseSide(
-  const QPoint& point) const
+  const QPoint& mousePos) const
 {
-    if (m_TLArea.contains(point)) {
+    QPoint localPos = mapFromParent(mousePos);
+    if (m_TLArea.contains(localPos)) {
         return TOPLEFT_SIDE;
-    } else if (m_TRArea.contains(point)) {
+    } else if (m_TRArea.contains(localPos)) {
         return TOPRIGHT_SIDE;
-    } else if (m_BLArea.contains(point)) {
+    } else if (m_BLArea.contains(localPos)) {
         return BOTTOMLEFT_SIDE;
-    } else if (m_BRArea.contains(point)) {
+    } else if (m_BRArea.contains(localPos)) {
         return BOTTOMRIGHT_SIDE;
-    } else if (m_LArea.contains(point)) {
+    } else if (m_LArea.contains(localPos)) {
         return LEFT_SIDE;
-    } else if (m_TArea.contains(point)) {
+    } else if (m_TArea.contains(localPos)) {
         return TOP_SIDE;
-    } else if (m_RArea.contains(point)) {
+    } else if (m_RArea.contains(localPos)) {
         return RIGHT_SIDE;
-    } else if (m_BArea.contains(point)) {
+    } else if (m_BArea.contains(localPos)) {
         return BOTTOM_SIDE;
-    } else if (rect().contains(point)) {
+    } else if (rect().contains(localPos)) {
         return CENTER;
     } else {
         return NO_SIDE;
@@ -97,12 +102,22 @@ SelectionWidget::SideType getProperSide(SelectionWidget::SideType side,
 
 void SelectionWidget::setIgnoreMouse(bool ignore)
 {
+    qDebug() << "setIgnoreMouse " << ignore;
     setAttribute(Qt::WA_TransparentForMouseEvents, ignore);
     if (ignore) {
         unsetCursor();
     } else {
         setCursor(Qt::ArrowCursor);
     }
+}
+
+/**
+ * Set the cursor that will be active when the mouse is inside the selection and
+ * the mouse is not clicked.
+ */
+void SelectionWidget::setIdleCentralCursor(const QCursor& cursor)
+{
+    m_idleCentralCursor = cursor;
 }
 
 void SelectionWidget::setGeometryAnimated(const QRect& r)
@@ -130,16 +145,6 @@ QRect SelectionWidget::fullGeometry() const
     return QWidget::geometry();
 }
 
-void SelectionWidget::saveGeometry()
-{
-    m_geometryBackup = geometry();
-}
-
-QRect SelectionWidget::savedGeometry()
-{
-    return m_geometryBackup;
-}
-
 QRect SelectionWidget::rect() const
 {
     return QWidget::rect() - QMargins(MARGIN, MARGIN, MARGIN, MARGIN);
@@ -147,35 +152,48 @@ QRect SelectionWidget::rect() const
 
 bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 {
-    if (event->type() == QEvent::MouseMove) {
-        if (testAttribute(Qt::WA_TransparentForMouseEvents)) {
-            unsetCursor();
-            return false;
+    if (testAttribute(Qt::WA_TransparentForMouseEvents)) {
+        unsetCursor();
+        return false;
+    }
+
+    if (event->type() == QEvent::MouseButtonPress) {
+        if (!m_activeSide) {
+            show();
+            QMouseEvent* e = static_cast<QMouseEvent*>(event);
+            m_dragStartPos = e->pos();
+            m_activeSide = TOPLEFT_SIDE;
+            setGeometry({ e->pos(), e->pos() });
         }
+        return false;
+    } else if (event->type() == QEvent::MouseButtonRelease) {
+        QMouseEvent e = *static_cast<QMouseEvent*>(event);
+        e.setLocalPos(mapFromParent(e.pos()));
+        mouseReleaseEvent(&e);
+    } else if (event->type() == QEvent::MouseMove) {
         auto* e = static_cast<QMouseEvent*>(event);
         parentMouseMoveEvent(e);
-        return e->isAccepted();
     }
-    return QWidget::eventFilter(obj, event);
+    return false;
 }
 
 void SelectionWidget::mousePressEvent(QMouseEvent* e)
 {
-    // e->ignore();
-    // TODO QWidget::mousePressEvent(e);
-    // if (e->isAccepted())
-    // return;
+    e->ignore();
+    QWidget::mousePressEvent(e); // TODO toy with this
     QPoint pos = mapToParent(e->pos());
     if (e->button() == Qt::LeftButton) {
         m_dragStartPos = pos;
-        m_activeSide = getMouseSide(e->pos());
+        m_activeSide = getMouseSide(pos);
     }
 }
 
 void SelectionWidget::mouseReleaseEvent(QMouseEvent* e)
 {
+    e->ignore();
     m_activeSide = NO_SIDE;
     setCursor(Qt::ArrowCursor);
+    emit geometrySettled();
 }
 
 void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
@@ -191,7 +209,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
 
     SideType mouseSide = m_activeSide;
     if (!m_activeSide) {
-        mouseSide = getMouseSide(mapFromParent(e->pos()));
+        mouseSide = getMouseSide(e->pos());
     }
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
     int &newLeft = newTopLeft.rx(), &newRight = newBottomRight.rx(),
@@ -248,7 +266,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                 m_dragStartPos = pos;
                 return;
             } else {
-                setCursor(Qt::ArrowCursor);
+                setCursor(m_idleCentralCursor);
                 return;
             }
             break;

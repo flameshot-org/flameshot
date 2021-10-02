@@ -88,8 +88,8 @@ private slots:
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
-    void setDrawThickness(const int& t);
-    void updateActiveLayer(const int& layer);
+    void setDrawThickness(int t);
+    void updateActiveLayer(int layer);
 
 public:
     void removeToolObject(int index = -1);
@@ -122,6 +122,7 @@ private:
     void initButtons();
     void updateSizeIndicator();
     void updateCursor();
+    void updateSelectionState();
     void pushToolToStack();
     void makeChild(QWidget* w);
 
@@ -161,7 +162,6 @@ private:
     // utility flags
     bool m_mouseIsClicked;
     bool m_newSelection;
-    bool m_grabbing;
     bool m_movingSelection;
     bool m_captureDone;
     bool m_previewEnabled;

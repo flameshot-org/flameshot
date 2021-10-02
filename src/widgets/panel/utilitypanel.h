@@ -39,7 +39,7 @@ signals:
 public slots:
     void toggle();
     void slotButtonDelete(bool clicked);
-    void slotCaptureToolsCurrentRowChanged(int currentRow);
+    void onCurrentRowChanged(int currentRow);
 
 private:
     void initInternalPanel();
