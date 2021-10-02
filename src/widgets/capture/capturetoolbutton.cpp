@@ -105,8 +105,10 @@ void CaptureToolButton::animatedShow()
     if (!isVisible()) {
         show();
         m_emergeAnimation->start();
-        connect(
-          m_emergeAnimation, &QPropertyAnimation::finished, this, []() {});
+        connect(m_emergeAnimation,
+                &QPropertyAnimation::finished,
+                this,
+                [this]() { updateIcon(); });
     }
 }
 
