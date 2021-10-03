@@ -1224,17 +1224,6 @@ void CaptureWidget::resizeDown()
     adjustSelection(QMargins(0, 0, 0, 1));
 }
 
-void CaptureWidget::selectAll()
-{
-    QRect newGeometry = rect();
-    m_selection->setGeometry(newGeometry);
-    m_selection->setVisible(true);
-    m_buttonHandler->updatePosition(m_selection->geometry());
-    updateSizeIndicator();
-    m_buttonHandler->show();
-    update();
-}
-
 void CaptureWidget::initShortcuts()
 {
     new QShortcut(
@@ -1296,7 +1285,12 @@ void CaptureWidget::initShortcuts()
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SELECT_ALL")),
                   this,
-                  SLOT(selectAll()));
+                  [this]() {
+                      m_selection->show();
+                      m_selection->setGeometry(rect());
+                      m_buttonHandler->show();
+                      updateSelectionState();
+                  });
 
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
 }
