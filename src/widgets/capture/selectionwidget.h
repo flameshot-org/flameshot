@@ -42,8 +42,8 @@ public:
 
 protected:
     bool eventFilter(QObject*, QEvent*) override;
-    void mousePressEvent(QMouseEvent* e) override;
-    void mouseReleaseEvent(QMouseEvent* e) override;
+    void parentMousePressEvent(QMouseEvent* e);
+    void parentMouseReleaseEvent(QMouseEvent* e);
     void parentMouseMoveEvent(QMouseEvent* e);
 
     void paintEvent(QPaintEvent*);
@@ -52,7 +52,6 @@ protected:
 
 signals:
     void animationEnded();
-    void resized();
     void geometryChanged();
     void geometrySettled();
 
@@ -68,11 +67,12 @@ private:
     QColor m_color;
     QPoint m_areaOffset;
     QPoint m_handleOffset;
-    QRect m_geometryBackup;
 
     QPoint m_dragStartPos;
     SideType m_activeSide;
     QCursor m_idleCentralCursor;
+    bool m_ignoreMouse;
+    bool m_mouseStartMove;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

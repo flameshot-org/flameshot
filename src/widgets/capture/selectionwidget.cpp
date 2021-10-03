@@ -17,17 +17,18 @@ SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
   : QWidget(parent)
   , m_color(c)
   , m_activeSide(NO_SIDE)
+  , m_ignoreMouse(false)
 {
-    setMouseTracking(true);
+    // prevents this widget from consuming CaptureToolButton mouse events
+    setAttribute(Qt::WA_TransparentForMouseEvents);
     parent->installEventFilter(this);
 
     m_animation = new QPropertyAnimation(this, "geometry", this);
     m_animation->setEasingCurve(QEasingCurve::InOutQuad);
     m_animation->setDuration(200);
-    connect(m_animation,
-            &QPropertyAnimation::finished,
-            this,
-            &SelectionWidget::animationEnded);
+    connect(m_animation, &QPropertyAnimation::finished, this, [this]() {
+        emit geometrySettled();
+    });
 
     int sideVal = GlobalValues::buttonBaseSize() * 0.6;
     int handleSide = sideVal / 2;
@@ -49,6 +50,9 @@ SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
 SelectionWidget::SideType SelectionWidget::getMouseSide(
   const QPoint& mousePos) const
 {
+    if (!isVisible()) {
+        return NO_SIDE;
+    }
     QPoint localPos = mapFromParent(mousePos);
     if (m_TLArea.contains(localPos)) {
         return TOPLEFT_SIDE;
@@ -101,7 +105,7 @@ SelectionWidget::SideType getProperSide(SelectionWidget::SideType side,
 
 void SelectionWidget::setIgnoreMouse(bool ignore)
 {
-    setAttribute(Qt::WA_TransparentForMouseEvents, ignore);
+    m_ignoreMouse = ignore;
     updateCursor();
 }
 
@@ -146,45 +150,35 @@ QRect SelectionWidget::rect() const
 
 bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 {
-    if (testAttribute(Qt::WA_TransparentForMouseEvents)) {
+    if (event->type() == QEvent::MouseButtonRelease) {
+        parentMouseReleaseEvent(static_cast<QMouseEvent*>(event));
+    } else if (m_ignoreMouse) {
         unsetCursor();
-        return false;
-    }
-
-    if (event->type() == QEvent::MouseButtonPress) {
-        if (!m_activeSide) {
-            show();
-            QMouseEvent* e = static_cast<QMouseEvent*>(event);
-            m_dragStartPos = e->pos();
-            m_activeSide = TOPLEFT_SIDE;
-            setGeometry({ e->pos(), e->pos() });
-        }
-        return false;
-    } else if (event->type() == QEvent::MouseButtonRelease) {
-        QMouseEvent e = *static_cast<QMouseEvent*>(event);
-        e.setLocalPos(mapFromParent(e.pos()));
-        mouseReleaseEvent(&e);
+    } else if (event->type() == QEvent::MouseButtonPress) {
+        parentMousePressEvent(static_cast<QMouseEvent*>(event));
     } else if (event->type() == QEvent::MouseMove) {
-        auto* e = static_cast<QMouseEvent*>(event);
-        parentMouseMoveEvent(e);
+        parentMouseMoveEvent(static_cast<QMouseEvent*>(event));
     }
     return false;
 }
 
-void SelectionWidget::mousePressEvent(QMouseEvent* e)
+void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 {
-    e->ignore();
-    QWidget::mousePressEvent(e); // TODO toy with this
-    QPoint pos = mapToParent(e->pos());
-    if (e->button() == Qt::LeftButton) {
-        m_dragStartPos = pos;
-        m_activeSide = getMouseSide(pos);
+    if (e->button() != Qt::LeftButton) {
+        return;
     }
+
+    m_dragStartPos = e->pos();
+    m_activeSide = getMouseSide(e->pos());
 }
 
-void SelectionWidget::mouseReleaseEvent(QMouseEvent* e)
+void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
 {
-    e->ignore();
+    // move threshold was not crossed and no drag operation is active
+    if (!getMouseSide(e->pos())) {
+        hide();
+    }
+
     m_activeSide = NO_SIDE;
     updateCursor();
     emit geometrySettled();
@@ -192,21 +186,27 @@ void SelectionWidget::mouseReleaseEvent(QMouseEvent* e)
 
 void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
 {
-    if (m_activeSide == NO_SIDE) {
-        e->ignore();
-    }
+    updateCursor();
 
-    // Mouse position relative to CaptureWidget
-    QPoint pos = e->pos();
-    auto geom = geometry();
-    bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
+    if (e->buttons() != Qt::LeftButton) {
+        return;
+    }
 
     SideType mouseSide = m_activeSide;
     if (!m_activeSide) {
         mouseSide = getMouseSide(e->pos());
     }
 
-    updateCursor();
+    if (!isVisible() || !mouseSide) {
+        show();
+        m_dragStartPos = e->pos();
+        m_activeSide = TOPLEFT_SIDE;
+        setGeometry({ e->pos(), e->pos() });
+    }
+
+    QPoint pos = e->pos();
+    auto geom = geometry();
+    bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
     int &newLeft = newTopLeft.rx(), &newRight = newBottomRight.rx(),

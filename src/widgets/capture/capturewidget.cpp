@@ -370,8 +370,8 @@ void CaptureWidget::uncheckActiveTool()
     m_activeButton->setColor(m_uiColor);
     m_activeButton = nullptr;
     releaseActiveTool();
-    updateCursor();
     updateSelectionState();
+    updateCursor();
     update(); // clear mouse preview
 }
 
@@ -536,6 +536,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 
     selectToolItemAtPos(m_mousePressedPos);
 
+    updateSelectionState();
     updateCursor();
 }
 
@@ -583,7 +584,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             QPointer<CaptureTool> activeTool =
               m_captureToolObjects.at(activeLayerIndex);
             if (m_activeToolOffsetToMouseOnStart.isNull()) {
-                setCursor(Qt::OpenHandCursor);
+                setCursor(Qt::ClosedHandCursor);
                 m_activeToolOffsetToMouseOnStart =
                   e->pos() - *activeTool->pos();
             }
@@ -620,9 +621,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         }
     } else if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
         update();
-    } else {
-        updateCursor();
     }
+    updateCursor();
 }
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
@@ -658,6 +658,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     m_mouseIsClicked = false;
     m_activeToolIsMoved = false;
 
+    updateSelectionState();
     updateCursor();
 }
 
@@ -948,11 +949,13 @@ void CaptureWidget::initSelection()
         m_buttonHandler->hide();
     };
     connect(
-      m_selection, &SelectionWidget::animationEnded, this, onGeometryChanged);
-    connect(
       m_selection, &SelectionWidget::geometryChanged, this, onGeometryChanged);
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
-        m_buttonHandler->show();
+        if (m_selection->isVisible()) {
+            m_buttonHandler->show();
+        } else {
+            m_buttonHandler->hide();
+        }
     });
 }
 
@@ -1118,11 +1121,6 @@ void CaptureWidget::setDrawColor(const QColor& c)
 
 void CaptureWidget::updateActiveLayer(int layer)
 {
-    if (layer != -1) {
-        m_selection->setIgnoreMouse(true);
-    } else if (m_activeButton == nullptr) {
-        m_selection->setIgnoreMouse(false);
-    }
     // TODO - refactor this part, make all objects to work with
     // m_activeTool->isChanged() and remove m_existingObjectIsChanged
     if (m_activeTool && m_activeTool->type() == CaptureTool::TYPE_TEXT &&
@@ -1141,6 +1139,7 @@ void CaptureWidget::updateActiveLayer(int layer)
         pushObjectsStateToUndoStack();
     }
     drawToolsData(false, true);
+    updateSelectionState();
 }
 
 void CaptureWidget::removeToolObject(int index)
@@ -1329,6 +1328,12 @@ void CaptureWidget::updateCursor()
 {
     if (m_colorPicker && m_colorPicker->isVisible()) {
         setCursor(Qt::ArrowCursor);
+    } else if (m_activeButton != nullptr &&
+               activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
+        setCursor(Qt::CrossCursor);
+    } else if (m_selection->getMouseSide(mapFromGlobal(QCursor::pos())) !=
+               SelectionWidget::NO_SIDE) {
+        setCursor(m_selection->cursor());
     } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else {
@@ -1344,7 +1349,11 @@ void CaptureWidget::updateSelectionState()
         m_selection->setIgnoreMouse(false);
     } else {
         m_selection->setIdleCentralCursor(Qt::ArrowCursor);
-        m_selection->setIgnoreMouse(toolType != CaptureTool::NONE);
+        if (toolType == CaptureTool::NONE) {
+            m_selection->setIgnoreMouse(m_panel->activeLayerIndex() != -1);
+        } else {
+            m_selection->setIgnoreMouse(true);
+        }
     }
 }
 
