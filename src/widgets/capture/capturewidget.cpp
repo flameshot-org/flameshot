@@ -496,7 +496,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
     m_startMove = false;
     m_startMovePos = QPoint();
-    m_dragStartPoint = m_mousePressedPos = e->pos();
+    m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
     if (m_colorPicker->isVisible()) {
         updateCursor();
@@ -553,7 +553,6 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_activeTool->setEditMode(true);
             drawToolsData(true, false);
-            m_mouseIsClicked = false;
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
@@ -563,12 +562,16 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
-
-    int activeLayerIndex = -1;
-    if (m_mouseIsClicked) {
-        activeLayerIndex = m_panel->activeLayerIndex();
+    if (e->buttons() != Qt::LeftButton) {
+        if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
+            update();
+        }
+        updateCursor();
+        return;
     }
-    if (m_mouseIsClicked && !m_activeButton && activeLayerIndex >= 0) {
+
+    // The rest assumes that left mouse button is clicked
+    if (!m_activeButton && m_panel->activeLayerIndex() >= 0) {
         // Move existing object
         if (!m_startMove) {
             // Check for the minimal offset to start moving an object
@@ -582,7 +585,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         }
         if (m_startMove) {
             QPointer<CaptureTool> activeTool =
-              m_captureToolObjects.at(activeLayerIndex);
+              m_captureToolObjects.at(m_panel->activeLayerIndex());
             if (m_activeToolOffsetToMouseOnStart.isNull()) {
                 setCursor(Qt::ClosedHandCursor);
                 m_activeToolOffsetToMouseOnStart =
@@ -596,11 +599,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
             drawToolsData(false);
         }
-    } else if (m_mouseIsClicked &&
-               (!m_activeButton ||
-                (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION))) {
-        return; // TODO rm this branch
-    } else if (m_mouseIsClicked && m_activeTool) {
+    } else if (m_activeTool) {
         // drawing with a tool
         if (m_adjustmentButtonPressed) {
             m_activeTool->drawMoveWithAdjustment(e->pos());
@@ -619,8 +618,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
-        update();
     }
     updateCursor();
 }

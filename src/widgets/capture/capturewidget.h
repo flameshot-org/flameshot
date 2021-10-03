@@ -187,7 +187,6 @@ private:
     HoverEventFilter* m_eventFilter;
     SelectionWidget* m_selection;
 
-    QPoint m_dragStartPoint;
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
 
