@@ -374,7 +374,7 @@ void CaptureWidget::uncheckActiveTool()
     releaseActiveTool();
     updateSelectionState();
     updateCursor();
-    update(); // clear mouse preview
+    update(); // clear mouse preview // TODO reduce affected rect
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
@@ -445,6 +445,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
                 &CaptureWidget::handleToolSignal);
         m_context.mousePos = pos;
         m_activeTool->drawStart(m_context);
+        // TODO this is the wrong place to do this
         if (m_activeTool->type() == CaptureTool::TYPE_CIRCLECOUNT) {
             // While it is based on AbstractTwoPointTool it has the only one
             // point and shouldn't wait for second point and move event
@@ -530,10 +531,11 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     // Commit current tool if it has edit widget and mouse click is outside
     // of it
     if (m_toolWidget && !m_toolWidget->geometry().contains(e->pos())) {
+        auto updateRect = m_toolWidget->geometry();
         commitCurrentTool();
         m_panel->setToolWidget(nullptr);
         drawToolsData();
-        update();
+        update(updateRect);
     }
 
     selectToolItemAtPos(m_mousePressedPos);
@@ -566,7 +568,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
         if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
-            update();
+            update(); // TODO reduce affected rect
         }
         updateCursor();
         return;
@@ -608,7 +610,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         } else {
             m_activeTool->drawMove(e->pos());
         }
-        update();
+        update(); // TODO constrain to draw blob
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -673,7 +675,7 @@ void CaptureWidget::updateThickness(int thickness)
 
     if (activeButtonTool() && m_activeButton->tool()->showMousePreview()) {
         setCursor(Qt::BlankCursor);
-        update();
+        update(); // TODO constrain to mouse preview blob
     }
 
     // update selected object thickness
@@ -977,7 +979,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         loadDrawThickness();
         updateCursor();
         updateSelectionState();
-        update(); // clear mouse preview
+        update(); // clear mouse preview // TODO reduce affected rect
     }
 }
 
@@ -994,6 +996,7 @@ void CaptureWidget::loadDrawThickness()
 
 void CaptureWidget::handleToolSignal(CaptureTool::Request r)
 {
+    // TODO remove obsolete requests
     switch (r) {
         case CaptureTool::REQ_CLEAR_MODIFICATIONS:
             m_captureToolObjects.clear();
@@ -1331,7 +1334,7 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     }
 
     m_context.screenshot = pixmapItem.copy();
-    update();
+    update(); // TODO determine affected rect
     if (updateLayersPanel) {
         m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
     }
@@ -1404,13 +1407,13 @@ void CaptureWidget::togglePanel()
 void CaptureWidget::childEnter()
 {
     m_previewEnabled = false;
-    update();
+    update(); // TODO constrain to mouse preview rect
 }
 
 void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
-    update();
+    update(); // TODO constrain to mouse preview rect
 }
 
 void CaptureWidget::copyScreenshot()
