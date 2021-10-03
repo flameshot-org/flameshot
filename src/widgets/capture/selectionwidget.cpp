@@ -6,7 +6,6 @@
 #include "capturetoolbutton.h"
 #include "src/utils/globalvalues.h"
 #include <QApplication>
-#include <QDebug>
 #include <QEvent>
 #include <QMouseEvent>
 #include <QPainter>
@@ -102,13 +101,8 @@ SelectionWidget::SideType getProperSide(SelectionWidget::SideType side,
 
 void SelectionWidget::setIgnoreMouse(bool ignore)
 {
-    qDebug() << "setIgnoreMouse " << ignore;
     setAttribute(Qt::WA_TransparentForMouseEvents, ignore);
-    if (ignore) {
-        unsetCursor();
-    } else {
-        setCursor(Qt::ArrowCursor);
-    }
+    updateCursor();
 }
 
 /**
@@ -192,7 +186,7 @@ void SelectionWidget::mouseReleaseEvent(QMouseEvent* e)
 {
     e->ignore();
     m_activeSide = NO_SIDE;
-    setCursor(Qt::ArrowCursor);
+    updateCursor();
     emit geometrySettled();
 }
 
@@ -211,65 +205,55 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     if (!m_activeSide) {
         mouseSide = getMouseSide(e->pos());
     }
+
+    updateCursor();
+
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
     int &newLeft = newTopLeft.rx(), &newRight = newBottomRight.rx(),
         &newTop = newTopLeft.ry(), &newBottom = newBottomRight.ry();
     switch (mouseSide) {
         case TOPLEFT_SIDE:
-            setCursor(Qt::SizeFDiagCursor);
             if (m_activeSide)
                 newTopLeft = pos;
             break;
         case BOTTOMRIGHT_SIDE:
-            setCursor(Qt::SizeFDiagCursor);
             if (m_activeSide)
                 newBottomRight = pos;
             break;
         case TOPRIGHT_SIDE:
-            setCursor(Qt::SizeBDiagCursor);
             if (m_activeSide) {
                 newTop = pos.y();
                 newRight = pos.x();
             }
             break;
         case BOTTOMLEFT_SIDE:
-            setCursor(Qt::SizeBDiagCursor);
             if (m_activeSide) {
                 newBottom = pos.y();
                 newLeft = pos.x();
             }
             break;
         case LEFT_SIDE:
-            setCursor(Qt::SizeHorCursor);
             if (m_activeSide)
                 newLeft = pos.x();
             break;
         case RIGHT_SIDE:
-            setCursor(Qt::SizeHorCursor);
             if (m_activeSide)
                 newRight = pos.x();
             break;
         case TOP_SIDE:
-            setCursor(Qt::SizeVerCursor);
             if (m_activeSide)
                 newTop = pos.y();
             break;
         case BOTTOM_SIDE:
-            setCursor(Qt::SizeVerCursor);
             if (m_activeSide)
                 newBottom = pos.y();
             break;
         default:
             if (m_activeSide) {
-                setCursor(Qt::ClosedHandCursor);
                 move(this->pos() + pos - m_dragStartPos);
                 m_dragStartPos = pos;
-                return;
-            } else {
-                setCursor(m_idleCentralCursor);
-                return;
             }
-            break;
+            return;
     }
     // finalize geometry change
     if (m_activeSide) {
@@ -337,4 +321,47 @@ void SelectionWidget::updateAreas()
     m_THandle.moveTo(m_TArea.center() + m_handleOffset);
     m_RHandle.moveTo(m_RArea.center() + m_handleOffset);
     m_BHandle.moveTo(m_BArea.center() + m_handleOffset);
+}
+
+void SelectionWidget::updateCursor()
+{
+    SideType mouseSide = m_activeSide;
+    if (!m_activeSide) {
+        mouseSide = getMouseSide(parentWidget()->mapFromGlobal(QCursor::pos()));
+    }
+
+    switch (mouseSide) {
+        case TOPLEFT_SIDE:
+            setCursor(Qt::SizeFDiagCursor);
+            break;
+        case BOTTOMRIGHT_SIDE:
+            setCursor(Qt::SizeFDiagCursor);
+            break;
+        case TOPRIGHT_SIDE:
+            setCursor(Qt::SizeBDiagCursor);
+            break;
+        case BOTTOMLEFT_SIDE:
+            setCursor(Qt::SizeBDiagCursor);
+            break;
+        case LEFT_SIDE:
+            setCursor(Qt::SizeHorCursor);
+            break;
+        case RIGHT_SIDE:
+            setCursor(Qt::SizeHorCursor);
+            break;
+        case TOP_SIDE:
+            setCursor(Qt::SizeVerCursor);
+            break;
+        case BOTTOM_SIDE:
+            setCursor(Qt::SizeVerCursor);
+            break;
+        default:
+            if (m_activeSide) {
+                setCursor(Qt::ClosedHandCursor);
+            } else {
+                setCursor(m_idleCentralCursor);
+                return;
+            }
+            break;
+    }
 }

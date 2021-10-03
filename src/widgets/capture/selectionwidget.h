@@ -61,6 +61,7 @@ public slots:
 
 private:
     void updateAreas();
+    void updateCursor();
 
     QPropertyAnimation* m_animation;
 
