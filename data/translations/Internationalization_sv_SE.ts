@@ -225,7 +225,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Error</source>
-        <translation type="unfinished">Fel</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
@@ -435,7 +435,7 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../src/config/generalconf.cpp" line="112"/>
         <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Import</source>
-        <translation type="unfinished">Importera</translation>
+        <translation>Importera</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="119"/>
@@ -443,38 +443,38 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../src/config/generalconf.cpp" line="150"/>
         <location filename="../../src/config/generalconf.cpp" line="537"/>
         <source>Error</source>
-        <translation type="unfinished">Fel</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="119"/>
         <source>Unable to read file.</source>
-        <translation type="unfinished">Kunde inte läsa filen.</translation>
+        <translation>Kunde inte läsa filen.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="127"/>
         <location filename="../../src/config/generalconf.cpp" line="150"/>
         <source>Unable to write file.</source>
-        <translation type="unfinished">Kunde inte skriva till filen.</translation>
+        <translation>Kunde inte skriva till fil.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="137"/>
         <source>Save File</source>
-        <translation type="unfinished">Spara fil</translation>
+        <translation>Spara fil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="159"/>
         <source>Confirm Reset</source>
-        <translation type="unfinished">Bekräfta återställning</translation>
+        <translation>Bekräfta återställning</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="160"/>
         <source>Are you sure you want to reset the configuration?</source>
-        <translation type="unfinished">Är du säker på att du vill återställa konfigurationen?</translation>
+        <translation>Är du säker på att du vill återställa konfigurationen?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="196"/>
         <source>Show help message</source>
-        <translation type="unfinished">Visa hjälpmeddelande</translation>
+        <translation>Visa hjälpmeddelande</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="200"/>
@@ -495,17 +495,17 @@ Tryck Space för att öppna sidopanelen.</translation>
         <location filename="../../src/config/generalconf.cpp" line="223"/>
         <location filename="../../src/config/generalconf.cpp" line="227"/>
         <source>Show desktop notifications</source>
-        <translation type="unfinished">Visa skrivbordsnotifieringar</translation>
+        <translation>Visa skrivbordsnotifieringar</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="239"/>
         <source>Show tray icon</source>
-        <translation type="unfinished">Visa ikon i systemfältet</translation>
+        <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the systemtray icon</source>
-        <translation type="unfinished">Visa ikon i systemfältet</translation>
+        <translation>Visa ikon i systemfältet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
@@ -516,17 +516,17 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Configuration File</source>
-        <translation type="unfinished">Konfigurationsfil</translation>
+        <translation>Konfigurationsfil</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="277"/>
         <source>Export</source>
-        <translation type="unfinished">Exportera</translation>
+        <translation>Exportera</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="291"/>
         <source>Reset</source>
-        <translation type="unfinished">Återställ</translation>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
@@ -537,13 +537,13 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Launch at startup</source>
-        <translation type="unfinished">Starta vid uppstart</translation>
+        <translation>Starta vid uppstart</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>Launch Flameshot</source>
-        <translation type="unfinished">Starta Flameshot</translation>
+        <translation>Starta Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
@@ -633,12 +633,12 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Kopiera URL</translation>
+        <translation>Kopiera URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="145"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL kopierad till klippbord.</translation>
+        <translation>URL kopierad till urklipp.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
@@ -1179,7 +1179,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL kopierad till klippbord.</translation>
+        <translation>URL kopierad till urklipp.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="508"/>
@@ -1267,12 +1267,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Visa färgväljare</translation>
+        <translation>Visa färgväljaren</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="98"/>
         <source>Change the tool&apos;s thickness</source>
-        <translation type="unfinished">Ändra verktygets tjocklek</translation>
+        <translation>Ändra verktygets tjocklek</translation>
     </message>
 </context>
 <context>
@@ -1373,12 +1373,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Description</source>
-        <translation type="unfinished">Beskrivning</translation>
+        <translation>Beskrivning</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation type="unfinished">Tangent</translation>
+        <translation>Tangent</translation>
     </message>
 </context>
 <context>
