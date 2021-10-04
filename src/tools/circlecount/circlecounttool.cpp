@@ -38,6 +38,9 @@ QRect CircleCountTool::mousePreviewRect(const CaptureContext& context) const
 
 QRect CircleCountTool::boundingRect() const
 {
+    if (!isValid()) {
+        return {};
+    }
     int bubble_size = thickness() + THICKNESS_OFFSET + PADDING_VALUE;
     return QRect(points().first.x() - bubble_size,
                  points().first.y() - bubble_size,

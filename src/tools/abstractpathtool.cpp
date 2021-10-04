@@ -76,7 +76,7 @@ QRect AbstractPathTool::boundingRect() const
     }
 
     int offset =
-      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
+      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness * 0.7 + 0.5));
     return QRect(min_x - offset,
                  min_y - offset,
                  std::abs(min_x - max_x) + offset * 2,

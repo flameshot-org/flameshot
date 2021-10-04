@@ -77,8 +77,11 @@ QRect AbstractTwoPointTool::mousePreviewRect(
 
 QRect AbstractTwoPointTool::boundingRect() const
 {
+    if (!isValid()) {
+        return {};
+    }
     int offset =
-      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
+      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness * 0.7 + 0.5));
     QRect rect =
       QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
             std::min(m_points.first.y(), m_points.second.y()) - offset,

@@ -1294,10 +1294,7 @@ void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
     QRect r(tool->mousePreviewRect(m_context));
     r += QMargins(r.width(), r.height(), r.width(), r.height());
 
-    QRect toolObjectRect = tool->boundingRect();
-    if (!toolObjectRect.isNull()) {
-        toolObjectRect = paddedUpdateRect(toolObjectRect);
-    }
+    QRect toolObjectRect = paddedUpdateRect(tool->boundingRect());
 
     // oldRect is united with the current rect to handle sudden mouse movement
     update(r.united(oldRect).united(toolObjectRect));
@@ -1516,7 +1513,11 @@ QRect CaptureWidget::extendedRect(const QRect& r) const
 
 QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
 {
-    return r + QMargins(20, 20, 20, 20);
+    if (r.isNull()) {
+        return r;
+    } else {
+        return r + QMargins(20, 20, 20, 20);
+    }
 }
 
 void CaptureWidget::drawConfigErrorMessage(QPainter* painter)

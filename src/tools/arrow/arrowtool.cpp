@@ -84,6 +84,10 @@ QString ArrowTool::description() const
 
 QRect ArrowTool::boundingRect() const
 {
+    if (!isValid()) {
+        return {};
+    }
+
     int offset =
       thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
 
