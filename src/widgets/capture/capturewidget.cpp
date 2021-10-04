@@ -1343,7 +1343,8 @@ void CaptureWidget::pushToolToStack()
 
 void CaptureWidget::drawToolsData()
 {
-    // TODO refactor this for performance
+    // TODO refactor this for performance. The objects should not all be updated
+    // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
     int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
@@ -1476,14 +1477,19 @@ void CaptureWidget::undo()
         m_panel->setActiveLayer(-1);
     }
 
+    // drawToolsData is called twice to update both previous and new regions
+    // FIXME this is a temporary workaround
+    drawToolsData();
     m_undoStack.undo();
     drawToolsData();
-    update();
     updateLayersPanel();
 }
 
 void CaptureWidget::redo()
 {
+    // drawToolsData is called twice to update both previous and new regions
+    // FIXME this is a temporary workaround
+    drawToolsData();
     m_undoStack.redo();
     drawToolsData();
     update();
