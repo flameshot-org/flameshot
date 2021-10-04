@@ -600,7 +600,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_activeToolIsMoved = true;
             // update the old region of the selection, margins are added to
             // ensure selection outline is updated too
-            update(activeTool->boundingRect() + QMargins(10, 10, 10, 10));
+            update(paddedUpdateRect(activeTool->boundingRect()));
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
             drawToolsData();
         }
@@ -1118,6 +1118,8 @@ void CaptureWidget::removeToolObject(int index)
         const CaptureTool::Type currentToolType =
           m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
+        update(
+          paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
         m_captureToolObjects.removeAt(index);
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
             // Do circle count reindex
@@ -1294,7 +1296,7 @@ void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
 
     QRect toolObjectRect = tool->boundingRect();
     if (!toolObjectRect.isNull()) {
-        toolObjectRect += QMargins(20, 20, 20, 20);
+        toolObjectRect = paddedUpdateRect(toolObjectRect);
     }
 
     // oldRect is united with the current rect to handle sudden mouse movement
@@ -1349,7 +1351,7 @@ void CaptureWidget::drawToolsData()
             toolItem->setCount(circleCount++);
         }
         processPixmapWithTool(&pixmapItem, toolItem);
-        update(toolItem->boundingRect() + QMargins(10, 10, 10, 10));
+        update(paddedUpdateRect(toolItem->boundingRect()));
     }
 
     m_context.screenshot = pixmapItem;
@@ -1476,6 +1478,7 @@ void CaptureWidget::undo()
 
     m_undoStack.undo();
     drawToolsData();
+    update();
     updateLayersPanel();
 }
 
@@ -1483,6 +1486,7 @@ void CaptureWidget::redo()
 {
     m_undoStack.redo();
     drawToolsData();
+    update();
     updateLayersPanel();
 }
 
@@ -1502,6 +1506,11 @@ QRect CaptureWidget::extendedRect(const QRect& r) const
                  r.top() * devicePixelRatio,
                  r.width() * devicePixelRatio,
                  r.height() * devicePixelRatio);
+}
+
+QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
+{
+    return r + QMargins(20, 20, 20, 20);
 }
 
 void CaptureWidget::drawConfigErrorMessage(QPainter* painter)

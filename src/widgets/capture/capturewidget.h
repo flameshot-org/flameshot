@@ -121,6 +121,7 @@ private:
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
+    QRect paddedUpdateRect(const QRect& r) const;
     void drawConfigErrorMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData();
