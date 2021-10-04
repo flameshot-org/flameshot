@@ -16,12 +16,12 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
     QRect mousePreviewRect(const CaptureContext& context) const override;
+    QRect boundingRect() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
-    void drawObjectSelection(QPainter& painter) override;
-    int thickness() override { return m_thickness; };
+    int thickness() const override { return m_thickness; };
     const QColor& color() { return m_color; };
-    const QPair<QPoint, QPoint> points() { return m_points; };
+    const QPair<QPoint, QPoint> points() const { return m_points; };
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 

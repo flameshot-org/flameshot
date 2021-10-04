@@ -21,6 +21,7 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect boundingRect() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
@@ -52,7 +53,7 @@ public slots:
     void pressed(const CaptureContext& context) override;
     void onColorChanged(const QColor& c) override;
     void onThicknessChanged(int th) override;
-    virtual int thickness() override { return m_size; };
+    virtual int thickness() const override { return m_size; };
 
 private slots:
     void updateText(const QString& s);

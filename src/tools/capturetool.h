@@ -110,6 +110,7 @@ public:
     {
         return {};
     };
+    virtual QRect boundingRect() const = 0;
 
     // The icon of the tool.
     // inEditor is true when the icon is requested inside the editor
@@ -152,7 +153,10 @@ public:
     {
         process(painter, pixmap);
     };
-    virtual void drawObjectSelection(QPainter& painter) { Q_UNUSED(painter) };
+    virtual void drawObjectSelection(QPainter& painter)
+    {
+        drawObjectSelectionRect(painter, boundingRect());
+    };
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
@@ -206,7 +210,7 @@ public slots:
     virtual void onColorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.
     virtual void onThicknessChanged(int th) = 0;
-    virtual int thickness() { return -1; };
+    virtual int thickness() const { return -1; };
 
 private:
     unsigned int m_count;

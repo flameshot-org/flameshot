@@ -36,6 +36,15 @@ QRect CircleCountTool::mousePreviewRect(const CaptureContext& context) const
     return rect;
 }
 
+QRect CircleCountTool::boundingRect() const
+{
+    int bubble_size = thickness() + THICKNESS_OFFSET + PADDING_VALUE;
+    return QRect(points().first.x() - bubble_size,
+                 points().first.y() - bubble_size,
+                 bubble_size * 2,
+                 bubble_size * 2);
+}
+
 QString CircleCountTool::name() const
 {
     return tr("Circle Counter");
@@ -112,16 +121,6 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.setFont(orig_font);
     painter.setBrush(orig_brush);
     painter.setPen(orig_pen);
-}
-
-void CircleCountTool::drawObjectSelection(QPainter& painter)
-{
-    int bubble_size = thickness() + THICKNESS_OFFSET + PADDING_VALUE;
-    drawObjectSelectionRect(painter,
-                            QRect(points().first.x() - bubble_size,
-                                  points().first.y() - bubble_size,
-                                  bubble_size * 2,
-                                  bubble_size * 2));
 }
 
 void CircleCountTool::paintMousePreview(QPainter& painter,

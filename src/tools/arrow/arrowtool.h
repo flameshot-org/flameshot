@@ -16,10 +16,10 @@ public:
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
+    QRect boundingRect() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
-    void drawObjectSelection(QPainter& painter) override;
 
 protected:
     void copyParams(const ArrowTool* from, ArrowTool* to);

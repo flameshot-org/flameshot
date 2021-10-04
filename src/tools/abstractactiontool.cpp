@@ -22,6 +22,11 @@ bool AbstractActionTool::showMousePreview() const
     return false;
 }
 
+QRect AbstractActionTool::boundingRect() const
+{
+    return {};
+}
+
 void AbstractActionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(painter)

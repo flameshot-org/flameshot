@@ -75,6 +75,19 @@ QRect AbstractTwoPointTool::mousePreviewRect(
     return rect;
 }
 
+QRect AbstractTwoPointTool::boundingRect() const
+{
+    int offset =
+      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
+    QRect rect =
+      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
+            std::min(m_points.first.y(), m_points.second.y()) - offset,
+            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
+            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
+
+    return rect;
+}
+
 void AbstractTwoPointTool::drawEnd(const QPoint& p)
 {
     Q_UNUSED(p)
@@ -167,16 +180,4 @@ void AbstractTwoPointTool::move(const QPoint& pos)
 const QPoint* AbstractTwoPointTool::pos()
 {
     return &m_points.first;
-}
-
-void AbstractTwoPointTool::drawObjectSelection(QPainter& painter)
-{
-    int offset =
-      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
-    QRect rect =
-      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
-            std::min(m_points.first.y(), m_points.second.y()) - offset,
-            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
-            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
-    drawObjectSelectionRect(painter, rect);
 }

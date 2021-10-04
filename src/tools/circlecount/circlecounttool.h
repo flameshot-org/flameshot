@@ -17,10 +17,10 @@ public:
     QString info() override;
 
     QRect mousePreviewRect(const CaptureContext& context) const override;
+    QRect boundingRect() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
-    void drawObjectSelection(QPainter& painter) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 

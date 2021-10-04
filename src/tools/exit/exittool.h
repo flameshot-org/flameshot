@@ -16,6 +16,7 @@ public:
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
+    // TODO create a new abstract class to get rid of such baggage
 
     CaptureTool* copy(QObject* parent = nullptr) override;
 

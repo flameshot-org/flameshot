@@ -1302,10 +1302,19 @@ void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
     if (!tool || !tool->showMousePreview()) {
         return;
     }
+
     static QRect oldRect;
+
     QRect r(tool->mousePreviewRect(m_context));
     r += QMargins(r.width(), r.height(), r.width(), r.height());
-    update(r.united(oldRect));
+
+    QRect toolObjectRect = tool->boundingRect();
+    if (!toolObjectRect.isNull()) {
+        toolObjectRect += QMargins(20, 20, 20, 20);
+    }
+
+    // oldRect is united with the current rect to handle sudden mouse movement
+    update(r.united(oldRect).united(toolObjectRect));
     oldRect = r;
 }
 

@@ -14,6 +14,7 @@ public:
     bool isValid() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect boundingRect() const override;
 
     void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,

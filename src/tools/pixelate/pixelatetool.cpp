@@ -33,6 +33,14 @@ QString PixelateTool::description() const
     return tr("Set Pixelate as the paint tool");
 }
 
+QRect PixelateTool::boundingRect() const
+{
+    return QRect(std::min(points().first.x(), points().second.x()),
+                 std::min(points().first.y(), points().second.y()),
+                 std::abs(points().first.x() - points().second.x()),
+                 std::abs(points().first.y() - points().second.y()));
+}
+
 CaptureTool* PixelateTool::copy(QObject* parent)
 {
     auto* tool = new PixelateTool(parent);
@@ -99,13 +107,4 @@ void PixelateTool::paintMousePreview(QPainter& painter,
 void PixelateTool::pressed(const CaptureContext& context)
 {
     Q_UNUSED(context)
-}
-
-void PixelateTool::drawObjectSelection(QPainter& painter)
-{
-    QRect rect = QRect(std::min(points().first.x(), points().second.x()),
-                       std::min(points().first.y(), points().second.y()),
-                       std::abs(points().first.x() - points().second.x()),
-                       std::abs(points().first.y() - points().second.y()));
-    drawObjectSelectionRect(painter, rect);
 }

@@ -55,6 +55,11 @@ bool TextTool::showMousePreview() const
     return false;
 }
 
+QRect TextTool::boundingRect() const
+{
+    return m_textArea;
+}
+
 QIcon TextTool::icon(const QColor& background, bool inEditor) const
 {
     Q_UNUSED(inEditor)
@@ -202,7 +207,7 @@ void TextTool::drawObjectSelection(QPainter& painter)
     if (m_text.isEmpty()) {
         return;
     }
-    drawObjectSelectionRect(painter, m_textArea);
+    drawObjectSelectionRect(painter, boundingRect());
 }
 
 void TextTool::paintMousePreview(QPainter& painter,

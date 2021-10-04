@@ -16,10 +16,10 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
     QRect mousePreviewRect(const CaptureContext& context) const override;
+    QRect boundingRect() const override;
     void move(const QPoint& mousePos) override;
     const QPoint* pos() override;
-    void drawObjectSelection(QPainter& painter) override;
-    int thickness() override { return m_thickness; };
+    int thickness() const override { return m_thickness; };
 
 public slots:
     void drawEnd(const QPoint& p) override;
