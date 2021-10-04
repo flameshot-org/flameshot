@@ -418,6 +418,11 @@ void SelectionWidget::setGeometryByKeyboard(const QRect& r)
     if (rect.height() <= 0)
         rect.setHeight(1);
     setGeometry(rect);
+    connect(
+      &timer,
+      &QTimer::timeout,
+      this,
+      [this]() { emit geometrySettled(); },
+      Qt::UniqueConnection);
     timer.start(400);
-    timer.callOnTimeout(this, [this]() { emit geometrySettled(); });
 }
