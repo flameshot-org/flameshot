@@ -78,6 +78,7 @@ private slots:
     void setDrawColor(const QColor& c);
     void setDrawThickness(int t);
     void updateActiveLayer(int layer);
+    void selectAll();
 
 public:
     void removeToolObject(int index = -1);

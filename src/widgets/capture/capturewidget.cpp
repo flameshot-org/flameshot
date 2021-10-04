@@ -1103,6 +1103,14 @@ void CaptureWidget::updateActiveLayer(int layer)
     updateSelectionState();
 }
 
+void CaptureWidget::selectAll()
+{
+    m_selection->show();
+    m_selection->setGeometry(rect());
+    m_buttonHandler->show();
+    updateSelectionState();
+}
+
 void CaptureWidget::removeToolObject(int index)
 {
     --index;
@@ -1215,12 +1223,7 @@ void CaptureWidget::initShortcuts()
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SELECT_ALL")),
                   this,
-                  [this]() {
-                      m_selection->show();
-                      m_selection->setGeometry(rect());
-                      m_buttonHandler->show();
-                      updateSelectionState();
-                  });
+                  SLOT(selectAll()));
 
     new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
 }

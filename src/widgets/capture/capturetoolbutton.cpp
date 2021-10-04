@@ -142,7 +142,7 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
       { CaptureTool::TYPE_OPEN_APP, 18 }, { CaptureTool::TYPE_EXIT, 19 },
       { CaptureTool::TYPE_PIN, 20 },
 #else
-      { CaptureTool::EXIT, 18 }, { CaptureTool::PIN, 19 },
+      { CaptureTool::TYPE_EXIT, 18 }, { CaptureTool::TYPE_PIN, 19 },
 #endif
 
       { CaptureTool::TYPE_SIZEINCREASE, 21 },

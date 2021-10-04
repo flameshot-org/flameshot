@@ -180,7 +180,7 @@ void UtilityPanel::fillCaptureTools(
 
 void UtilityPanel::setActiveLayer(int index)
 {
-    assert(index >= -1);
+    Q_ASSERT(index >= -1);
     m_captureTools->setCurrentRow(index + 1);
 }
 
