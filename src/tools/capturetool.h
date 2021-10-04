@@ -57,22 +57,12 @@ public:
         REQ_CLOSE_GUI,
         // Call hide() in the editor.
         REQ_HIDE_GUI,
-        // Select the whole screen.
-        REQ_SELECT_ALL,
-        // Disable the selection.
-        REQ_HIDE_SELECTION,
         // Undo the last active modification in the stack.
         REQ_UNDO_MODIFICATION,
         // Redo the next modification in the stack.
         REQ_REDO_MODIFICATION,
-        // Remove all the modifications.
-        REQ_CLEAR_MODIFICATIONS,
         // Open the color picker under the mouse.
         REQ_SHOW_COLOR_PICKER,
-        // Open/Close the side-panel.
-        REQ_TOGGLE_SIDEBAR,
-        // Call update() in the editor.
-        REQ_REDRAW,
         // Notify to redraw screenshot with tools without object selection.
         REQ_CLEAR_SELECTION,
         // Notify is the screenshot has been saved.

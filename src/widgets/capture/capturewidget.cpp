@@ -603,10 +603,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             drawToolsData(false);
         }
     } else if (m_activeTool) {
-        // TODO rm
-        static int x = 0;
-        ++x;
-        qDebug() << "move " << x;
         // drawing with a tool
         if (m_adjustmentButtonPressed) {
             m_activeTool->drawMoveWithAdjustment(e->pos());
@@ -1002,37 +998,18 @@ void CaptureWidget::loadDrawThickness()
 
 void CaptureWidget::handleToolSignal(CaptureTool::Request r)
 {
-    // TODO remove obsolete requests
     switch (r) {
-        case CaptureTool::REQ_CLEAR_MODIFICATIONS:
-            m_captureToolObjects.clear();
-            m_undoStack.setIndex(0);
-            update();
-            break;
         case CaptureTool::REQ_CLOSE_GUI:
             close();
             break;
         case CaptureTool::REQ_HIDE_GUI:
             hide();
             break;
-        case CaptureTool::REQ_HIDE_SELECTION:
-            m_selection->hide();
-            updateCursor();
-            break;
-        case CaptureTool::REQ_SELECT_ALL:
-            m_selection->setGeometryAnimated(rect());
-            break;
         case CaptureTool::REQ_UNDO_MODIFICATION:
             undo();
             break;
         case CaptureTool::REQ_REDO_MODIFICATION:
             redo();
-            break;
-        case CaptureTool::REQ_REDRAW:
-            update();
-            break;
-        case CaptureTool::REQ_TOGGLE_SIDEBAR:
-            m_panel->toggle();
             break;
         case CaptureTool::REQ_SHOW_COLOR_PICKER:
             // TODO
