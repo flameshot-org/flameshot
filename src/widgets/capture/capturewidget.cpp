@@ -370,11 +370,11 @@ void CaptureWidget::uncheckActiveTool()
     // uncheck active tool
     m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
+    updateToolMousePreview(activeButtonTool());
     m_activeButton = nullptr;
     releaseActiveTool();
     updateSelectionState();
     updateCursor();
-    update(); // clear mouse preview // TODO reduce affected rect
 }
 
 void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
@@ -501,6 +501,7 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
+    // updateToolMousePreview(activeButtonTool());
     if (m_colorPicker->isVisible()) {
         updateCursor();
         return;
@@ -567,9 +568,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
-        if (activeButtonTool() && activeButtonTool()->showMousePreview()) {
-            update(); // TODO reduce affected rect
-        }
+        updateToolMousePreview(activeButtonTool());
         updateCursor();
         return;
     }
@@ -604,13 +603,18 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             drawToolsData(false);
         }
     } else if (m_activeTool) {
+        // TODO rm
+        static int x = 0;
+        ++x;
+        qDebug() << "move " << x;
         // drawing with a tool
         if (m_adjustmentButtonPressed) {
             m_activeTool->drawMoveWithAdjustment(e->pos());
         } else {
             m_activeTool->drawMove(e->pos());
         }
-        update(); // TODO constrain to draw blob
+        // update drawing object
+        updateToolMousePreview(m_activeTool);
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -665,6 +669,8 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 
 void CaptureWidget::updateThickness(int thickness)
 {
+    auto tool = activeButtonTool();
+    updateToolMousePreview(tool);
     m_context.thickness = qBound(1, thickness, 100);
 
     QPoint topLeft =
@@ -673,9 +679,9 @@ void CaptureWidget::updateThickness(int thickness)
     m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
     m_notifierBox->showMessage(QString::number(m_context.thickness));
 
-    if (activeButtonTool() && m_activeButton->tool()->showMousePreview()) {
+    if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
-        update(); // TODO constrain to mouse preview blob
+        updateToolMousePreview(tool);
     }
 
     // update selected object thickness
@@ -979,7 +985,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         loadDrawThickness();
         updateCursor();
         updateSelectionState();
-        update(); // clear mouse preview // TODO reduce affected rect
+        updateToolMousePreview(b->tool());
     }
 }
 
@@ -1291,6 +1297,18 @@ void CaptureWidget::updateSelectionState()
     }
 }
 
+void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
+{
+    if (!tool || !tool->showMousePreview()) {
+        return;
+    }
+    static QRect oldRect;
+    QRect r(tool->mousePreviewRect(m_context));
+    r += QMargins(r.width(), r.height(), r.width(), r.height());
+    update(r.united(oldRect));
+    oldRect = r;
+}
+
 void CaptureWidget::pushToolToStack()
 {
     // append current tool to the new state
@@ -1334,7 +1352,7 @@ void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
     }
 
     m_context.screenshot = pixmapItem.copy();
-    update(); // TODO determine affected rect
+    update();
     if (updateLayersPanel) {
         m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
     }
@@ -1407,13 +1425,13 @@ void CaptureWidget::togglePanel()
 void CaptureWidget::childEnter()
 {
     m_previewEnabled = false;
-    update(); // TODO constrain to mouse preview rect
+    updateToolMousePreview(activeButtonTool());
 }
 
 void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
-    update(); // TODO constrain to mouse preview rect
+    updateToolMousePreview(activeButtonTool());
 }
 
 void CaptureWidget::copyScreenshot()

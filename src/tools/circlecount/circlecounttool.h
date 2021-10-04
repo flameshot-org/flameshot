@@ -16,6 +16,8 @@ public:
     QString description() const override;
     QString info() override;
 
+    QRect mousePreviewRect(const CaptureContext& context) const override;
+
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
     void drawObjectSelection(QPainter& painter) override;

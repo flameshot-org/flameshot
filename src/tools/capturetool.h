@@ -93,6 +93,7 @@ public:
       , m_editMode(false)
     {}
 
+    // TODO unused
     virtual void setCapture(const QPixmap& pixmap){};
 
     // Returns false when the tool is in an inconsistent state and shouldn't
@@ -105,6 +106,10 @@ public:
     virtual bool isSelectable() const = 0;
     // Enable mouse preview.
     virtual bool showMousePreview() const = 0;
+    virtual QRect mousePreviewRect(const CaptureContext& context) const
+    {
+        return {};
+    };
 
     // The icon of the tool.
     // inEditor is true when the icon is requested inside the editor

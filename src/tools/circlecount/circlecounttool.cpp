@@ -28,6 +28,14 @@ QString CircleCountTool::info()
     return m_tempString;
 }
 
+QRect CircleCountTool::mousePreviewRect(const CaptureContext& context) const
+{
+    int width = (context.thickness + THICKNESS_OFFSET) * 2;
+    QRect rect(0, 0, width, width);
+    rect.moveCenter(context.mousePos);
+    return rect;
+}
+
 QString CircleCountTool::name() const
 {
     return tr("Circle Counter");

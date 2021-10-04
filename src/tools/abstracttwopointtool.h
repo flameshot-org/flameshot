@@ -15,6 +15,7 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect mousePreviewRect(const CaptureContext& context) const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
     void drawObjectSelection(QPainter& painter) override;

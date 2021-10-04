@@ -44,6 +44,13 @@ bool AbstractPathTool::showMousePreview() const
     return true;
 }
 
+QRect AbstractPathTool::mousePreviewRect(const CaptureContext& context) const
+{
+    QRect rect(0, 0, context.thickness + 2, context.thickness + 2);
+    rect.moveCenter(context.mousePos);
+    return rect;
+}
+
 void AbstractPathTool::drawEnd(const QPoint& p)
 {
     Q_UNUSED(p)
