@@ -40,7 +40,8 @@ QRect InvertTool::boundingRect() const
     return QRect(std::min(points().first.x(), points().second.x()),
                  std::min(points().first.y(), points().second.y()),
                  std::abs(points().first.x() - points().second.x()),
-                 std::abs(points().first.y() - points().second.y()));
+                 std::abs(points().first.y() - points().second.y()))
+      .normalized();
 }
 
 CaptureTool* InvertTool::copy(QObject* parent)

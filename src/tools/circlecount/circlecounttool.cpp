@@ -55,6 +55,13 @@ CaptureTool::Type CircleCountTool::type() const
     return CaptureTool::TYPE_CIRCLECOUNT;
 }
 
+void CircleCountTool::copyParams(const CircleCountTool* from,
+                                 CircleCountTool* to)
+{
+    AbstractTwoPointTool::copyParams(from, to);
+    to->setCount(from->count());
+}
+
 QString CircleCountTool::description() const
 {
     return tr("Add an autoincrementing counter bubble");

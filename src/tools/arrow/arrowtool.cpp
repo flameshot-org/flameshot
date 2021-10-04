@@ -123,7 +123,7 @@ QRect ArrowTool::boundingRect() const
                        line_pos_max_x - line_pos_min_x + offset * 2,
                        line_pos_max_y - line_pos_min_y + offset * 2);
 
-    return rect;
+    return rect.normalized();
 }
 
 CaptureTool* ArrowTool::copy(QObject* parent)

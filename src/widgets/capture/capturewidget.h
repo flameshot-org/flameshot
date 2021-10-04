@@ -112,6 +112,7 @@ private:
     void updateCursor();
     void updateSelectionState();
     void updateToolMousePreview(CaptureTool* tool);
+    void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
 
@@ -121,8 +122,7 @@ private:
     QRect extendedRect(const QRect& r) const;
     void drawConfigErrorMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(bool updateLayersPanel = true,
-                       bool drawSelection = false);
+    void drawToolsData();
     void drawObjectSelection();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);

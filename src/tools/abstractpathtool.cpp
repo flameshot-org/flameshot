@@ -80,7 +80,8 @@ QRect AbstractPathTool::boundingRect() const
     return QRect(min_x - offset,
                  min_y - offset,
                  std::abs(min_x - max_x) + offset * 2,
-                 std::abs(min_y - max_y) + offset * 2);
+                 std::abs(min_y - max_y) + offset * 2)
+      .normalized();
 }
 
 void AbstractPathTool::drawEnd(const QPoint& p)

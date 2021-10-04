@@ -26,6 +26,7 @@ public:
 
 protected:
     CaptureTool::Type type() const override;
+    void copyParams(const CircleCountTool* from, CircleCountTool* to);
 
 public slots:
     void drawStart(const CaptureContext& context) override;

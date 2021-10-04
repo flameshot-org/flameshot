@@ -313,6 +313,9 @@ bool CaptureWidget::commitCurrentTool()
             m_toolWidget) {
             pushToolToStack();
         }
+        if (m_toolWidget) {
+            m_toolWidget->update();
+        }
         releaseActiveTool();
         return true;
     }
@@ -326,7 +329,6 @@ void CaptureWidget::deleteToolWidgetOrClose()
     } else if (m_panel->activeLayerIndex() >= 0) {
         // remove active tool selection
         m_panel->setActiveLayer(-1);
-        drawToolsData(false, true);
     } else if (m_panel->isVisible()) {
         // hide panel if visible
         m_panel->hide();
@@ -406,7 +408,7 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 {
     // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
-    if (!toolItem || toolItem && !toolItem->selectionRect().contains(pos)) {
+    if (!toolItem || toolItem && !toolItem->boundingRect().contains(pos)) {
         selectToolItemAtPos(pos);
     }
 
@@ -455,8 +457,6 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
             m_captureToolObjects.append(m_activeTool);
             pushObjectsStateToUndoStack();
             releaseActiveTool();
-            drawToolsData();
-
             m_mouseIsClicked = false;
         }
         return true;
@@ -482,7 +482,7 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
          selectionMouseSide == SelectionWidget::CENTER)) {
         auto toolItem = activeToolObject();
         if (!toolItem ||
-            (toolItem && !toolItem->selectionRect().contains(pos))) {
+            (toolItem && !toolItem->boundingRect().contains(pos))) {
             activeLayerIndex = m_captureToolObjects.find(pos, size());
             int thickness_old = m_context.thickness;
             m_panel->setActiveLayer(activeLayerIndex);
@@ -501,7 +501,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
     m_activeToolOffsetToMouseOnStart = QPoint();
-    // updateToolMousePreview(activeButtonTool());
     if (m_colorPicker->isVisible()) {
         updateCursor();
         return;
@@ -532,11 +531,10 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     // Commit current tool if it has edit widget and mouse click is outside
     // of it
     if (m_toolWidget && !m_toolWidget->geometry().contains(e->pos())) {
-        auto updateRect = m_toolWidget->geometry();
         commitCurrentTool();
         m_panel->setToolWidget(nullptr);
         drawToolsData();
-        update(updateRect);
+        updateLayersPanel();
     }
 
     selectToolItemAtPos(m_mousePressedPos);
@@ -557,7 +555,8 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_context.mousePos = *m_activeTool->pos();
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_activeTool->setEditMode(true);
-            drawToolsData(true, false);
+            drawToolsData();
+            updateLayersPanel();
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
@@ -599,8 +598,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_captureToolObjectsBackup = m_captureToolObjects;
             }
             m_activeToolIsMoved = true;
+            // update the old region of the selection, margins are added to
+            // ensure selection outline is updated too
+            update(activeTool->boundingRect() + QMargins(10, 10, 10, 10));
             activeTool->move(e->pos() - m_activeToolOffsetToMouseOnStart);
-            drawToolsData(false);
+            drawToolsData();
         }
     } else if (m_activeTool) {
         // drawing with a tool
@@ -653,7 +655,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
                 m_activeToolIsMoved = false;
                 pushObjectsStateToUndoStack();
             }
-            drawToolsData(true, true);
         }
     }
     m_mouseIsClicked = false;
@@ -1017,7 +1018,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
         case CaptureTool::REQ_CLEAR_SELECTION:
             if (m_panel->activeLayerIndex() >= 0) {
                 m_panel->setActiveLayer(-1);
-                drawToolsData(false, false);
+                drawToolsData();
             }
             break;
         case CaptureTool::REQ_CAPTURE_DONE_OK:
@@ -1073,7 +1074,7 @@ void CaptureWidget::setDrawColor(const QColor& c)
         if (toolItem) {
             // Change color
             toolItem->onColorChanged(c);
-            drawToolsData(false, true);
+            drawToolsData();
         }
     }
 }
@@ -1097,7 +1098,8 @@ void CaptureWidget::updateActiveLayer(int layer)
         m_existingObjectIsChanged = false;
         pushObjectsStateToUndoStack();
     }
-    drawToolsData(false, true);
+    drawToolsData();
+    drawObjectSelection();
     updateSelectionState();
 }
 
@@ -1125,6 +1127,7 @@ void CaptureWidget::removeToolObject(int index)
         }
         pushObjectsStateToUndoStack();
         drawToolsData();
+        updateLayersPanel();
     }
 }
 
@@ -1144,7 +1147,8 @@ void CaptureWidget::setDrawThickness(int t)
     if (toolItem) {
         // Change thickness
         toolItem->onThicknessChanged(t);
-        drawToolsData(false, true);
+        drawToolsData();
+        drawObjectSelection();
     } else {
         emit thicknessChanged(m_context.thickness);
     }
@@ -1295,6 +1299,11 @@ void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
     oldRect = r;
 }
 
+void CaptureWidget::updateLayersPanel()
+{
+    m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
+}
+
 void CaptureWidget::pushToolToStack()
 {
     // append current tool to the new state
@@ -1320,36 +1329,28 @@ void CaptureWidget::pushToolToStack()
         pushObjectsStateToUndoStack();
         releaseActiveTool();
         drawToolsData();
+        updateLayersPanel();
 
         // restore signal connection for updating layer
         m_panel->blockSignals(false);
     }
 }
 
-void CaptureWidget::drawToolsData(bool updateLayersPanel, bool drawSelection)
+void CaptureWidget::drawToolsData()
 {
-    QPixmap pixmapItem = m_context.origScreenshot.copy();
+    // TODO refactor this for performance
+    QPixmap pixmapItem = m_context.origScreenshot;
     int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
         if (toolItem->type() == CaptureTool::TYPE_CIRCLECOUNT) {
             toolItem->setCount(circleCount++);
         }
         processPixmapWithTool(&pixmapItem, toolItem);
+        update(toolItem->boundingRect() + QMargins(10, 10, 10, 10));
     }
 
-    m_context.screenshot = pixmapItem.copy();
-    update();
-    if (updateLayersPanel) {
-        m_panel->fillCaptureTools(m_captureToolObjects.captureToolObjects());
-    }
-
-    if (drawSelection) {
-        int thickness_old = m_context.thickness;
-        drawObjectSelection();
-        if (thickness_old != m_context.thickness) {
-            emit thicknessChanged(m_context.thickness);
-        }
-    }
+    m_context.screenshot = pixmapItem;
+    drawObjectSelection();
 }
 
 void CaptureWidget::drawObjectSelection()
@@ -1456,7 +1457,9 @@ void CaptureWidget::setCaptureToolObjects(
 {
     // Used for undo/redo
     m_captureToolObjects = captureToolObjects;
-    drawToolsData(true, true);
+    drawToolsData();
+    updateLayersPanel();
+    drawObjectSelection();
 }
 
 void CaptureWidget::undo()
@@ -1470,12 +1473,14 @@ void CaptureWidget::undo()
 
     m_undoStack.undo();
     drawToolsData();
+    updateLayersPanel();
 }
 
 void CaptureWidget::redo()
 {
     m_undoStack.redo();
     drawToolsData();
+    updateLayersPanel();
 }
 
 QRect CaptureWidget::extendedSelection() const

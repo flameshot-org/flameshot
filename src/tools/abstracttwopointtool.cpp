@@ -85,7 +85,7 @@ QRect AbstractTwoPointTool::boundingRect() const
             std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
             std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
 
-    return rect;
+    return rect.normalized();
 }
 
 void AbstractTwoPointTool::drawEnd(const QPoint& p)

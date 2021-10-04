@@ -135,7 +135,7 @@ public:
     // Counter for all object types (currently is used for the CircleCounter
     // only)
     virtual void setCount(int count) { m_count = count; };
-    virtual int count() { return m_count; };
+    virtual int count() const { return m_count; };
 
     // Called every time the tool has to draw
     virtual void process(QPainter& painter, const QPixmap& pixmap) = 0;
@@ -154,9 +154,6 @@ public:
     // Move tool objects
     virtual void move(const QPoint& pos) { Q_UNUSED(pos) };
     virtual const QPoint* pos() { return nullptr; };
-
-    // get selection region
-    const QRect& selectionRect() { return m_selectionRect; };
 
 signals:
     void requestAction(Request r);
@@ -181,7 +178,6 @@ protected:
         painter.setPen(QPen(Qt::white, 1, Qt::DotLine));
         painter.drawRect(rect);
         painter.setPen(orig_pen);
-        m_selectionRect = rect;
     }
 
 public slots:
@@ -205,5 +201,4 @@ public slots:
 private:
     unsigned int m_count;
     bool m_editMode;
-    QRect m_selectionRect;
 };
