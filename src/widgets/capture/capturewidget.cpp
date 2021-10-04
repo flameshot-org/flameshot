@@ -91,7 +91,8 @@ CaptureWidget::CaptureWidget(uint id,
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(savePath, fullScreen);
-    initShortcuts();
+    initSelection();
+    initShortcuts(); // must be called after initSelection
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -178,9 +179,6 @@ CaptureWidget::CaptureWidget(uint id,
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
 
-    initSelection();
-    updateCursor();
-
     // Init color picker
     m_colorPicker = new ColorPicker(this);
     connect(m_colorPicker,
@@ -228,6 +226,8 @@ CaptureWidget::CaptureWidget(uint id,
              "\nUse the Mouse Wheel to change the thickness of your tool."
              "\nPress Space to open the side panel."));
     }
+
+    updateCursor();
 }
 
 CaptureWidget::~CaptureWidget()
@@ -254,6 +254,8 @@ void CaptureWidget::initButtons()
         }
         b->setColor(m_uiColor);
         b->hide();
+        // must be enabled for SelectionWidget's eventFilter to work correctly
+        b->setAttribute(Qt::WA_NoMousePropagation);
         makeChild(b);
 
         switch (t) {
@@ -659,11 +661,6 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
     updateCursor();
 }
 
-void CaptureWidget::moveSelection(QPoint p)
-{
-    adjustSelection(QMargins(-p.x(), -p.y(), p.x(), p.y()));
-}
-
 void CaptureWidget::updateThickness(int thickness)
 {
     m_context.thickness = qBound(1, thickness, 100);
@@ -689,26 +686,6 @@ void CaptureWidget::updateThickness(int thickness)
         }
     }
     emit thicknessChanged(m_context.thickness);
-}
-
-void CaptureWidget::moveLeft()
-{
-    moveSelection(QPoint(-1, 0));
-}
-
-void CaptureWidget::moveRight()
-{
-    moveSelection(QPoint(1, 0));
-}
-
-void CaptureWidget::moveUp()
-{
-    moveSelection(QPoint(0, -1));
-}
-
-void CaptureWidget::moveDown()
-{
-    moveSelection(QPoint(0, 1));
 }
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
@@ -937,16 +914,15 @@ void CaptureWidget::initSelection()
     m_selection = new SelectionWidget(m_uiColor, this);
     m_selection->setVisible(false);
     m_selection->setGeometry(QRect());
-    auto onGeometryChanged = [this]() {
+    connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {
         m_buttonHandler->updatePosition(m_selection->geometry());
         QRect constrainedToCaptureArea =
           m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(constrainedToCaptureArea);
         updateSizeIndicator();
         m_buttonHandler->hide();
-    };
-    connect(
-      m_selection, &SelectionWidget::geometryChanged, this, onGeometryChanged);
+        updateCursor();
+    });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisible()) {
             m_buttonHandler->show();
@@ -1188,42 +1164,6 @@ void CaptureWidget::setDrawThickness(int t)
     }
 }
 
-void CaptureWidget::repositionSelection(QRect r)
-{
-    if (m_selection->isVisible()) {
-        m_selection->setGeometry(r);
-        updateSizeIndicator();
-    }
-}
-
-void CaptureWidget::adjustSelection(QMargins m)
-{
-    QRect newGeometry = m_selection->geometry() + m;
-    if (rect().contains(newGeometry)) {
-        repositionSelection(newGeometry);
-    }
-}
-
-void CaptureWidget::resizeLeft()
-{
-    adjustSelection(QMargins(0, 0, -1, 0));
-}
-
-void CaptureWidget::resizeRight()
-{
-    adjustSelection(QMargins(0, 0, 1, 0));
-}
-
-void CaptureWidget::resizeUp()
-{
-    adjustSelection(QMargins(0, 0, 0, -1));
-}
-
-void CaptureWidget::resizeDown()
-{
-    adjustSelection(QMargins(0, 0, 0, 1));
-}
-
 void CaptureWidget::initShortcuts()
 {
     new QShortcut(
@@ -1248,29 +1188,29 @@ void CaptureWidget::initShortcuts()
                   SLOT(togglePanel()));
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
-                  this,
+                  m_selection,
                   SLOT(resizeLeft()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
-                  this,
+                  m_selection,
                   SLOT(resizeRight()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
-                  this,
+                  m_selection,
                   SLOT(resizeUp()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
-                  this,
+                  m_selection,
                   SLOT(resizeDown()));
 
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
-                  this,
+                  m_selection,
                   SLOT(moveLeft()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
-                  this,
+                  m_selection,
                   SLOT(moveRight()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
-                  this,
+                  m_selection,
                   SLOT(moveUp()));
     new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
-                  this,
+                  m_selection,
                   SLOT(moveDown()));
 
     new QShortcut(

@@ -71,16 +71,6 @@ private slots:
     void childEnter();
     void childLeave();
 
-    void resizeLeft();
-    void resizeRight();
-    void resizeUp();
-    void resizeDown();
-
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
-
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
@@ -124,9 +114,6 @@ private:
     void pushToolToStack();
     void makeChild(QWidget* w);
 
-    void repositionSelection(QRect r);
-    void adjustSelection(QMargins m);
-    void moveSelection(QPoint p);
     void updateThickness(int thicknessOffset);
 
     QRect extendedSelection() const;

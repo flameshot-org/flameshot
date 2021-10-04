@@ -58,9 +58,20 @@ signals:
 public slots:
     void updateColor(const QColor& c);
 
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
+
+    void resizeLeft();
+    void resizeRight();
+    void resizeUp();
+    void resizeDown();
+
 private:
     void updateAreas();
     void updateCursor();
+    void setGeometryByKeyboard(const QRect& r);
 
     QPropertyAnimation* m_animation;
 

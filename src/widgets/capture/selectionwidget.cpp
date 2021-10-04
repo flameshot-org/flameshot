@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPropertyAnimation>
+#include <QTimer>
 
 #define MARGIN (m_THandle.width())
 
@@ -130,6 +131,7 @@ void SelectionWidget::setGeometryAnimated(const QRect& r)
 void SelectionWidget::setGeometry(const QRect& r)
 {
     QWidget::setGeometry(r + QMargins(MARGIN, MARGIN, MARGIN, MARGIN));
+    updateCursor();
     emit geometryChanged();
 }
 
@@ -150,10 +152,11 @@ QRect SelectionWidget::rect() const
 
 bool SelectionWidget::eventFilter(QObject* obj, QEvent* event)
 {
-    if (event->type() == QEvent::MouseButtonRelease) {
-        parentMouseReleaseEvent(static_cast<QMouseEvent*>(event));
-    } else if (m_ignoreMouse) {
+    if (m_ignoreMouse && dynamic_cast<QMouseEvent*>(event)) {
+        m_activeSide = NO_SIDE;
         unsetCursor();
+    } else if (event->type() == QEvent::MouseButtonRelease) {
+        parentMouseReleaseEvent(static_cast<QMouseEvent*>(event));
     } else if (event->type() == QEvent::MouseButtonPress) {
         parentMousePressEvent(static_cast<QMouseEvent*>(event));
     } else if (event->type() == QEvent::MouseMove) {
@@ -174,7 +177,7 @@ void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 
 void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
 {
-    // move threshold was not crossed and no drag operation is active
+    // released outside of the selection area
     if (!getMouseSide(e->pos())) {
         hide();
     }
@@ -300,6 +303,46 @@ void SelectionWidget::updateColor(const QColor& c)
     m_color = c;
 }
 
+void SelectionWidget::moveLeft()
+{
+    setGeometryByKeyboard(geometry().adjusted(-1, 0, -1, 0));
+}
+
+void SelectionWidget::moveRight()
+{
+    setGeometryByKeyboard(geometry().adjusted(1, 0, 1, 0));
+}
+
+void SelectionWidget::moveUp()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, -1, 0, -1));
+}
+
+void SelectionWidget::moveDown()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 1, 0, 1));
+}
+
+void SelectionWidget::resizeLeft()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 0, -1, 0));
+}
+
+void SelectionWidget::resizeRight()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 0, 1, 0));
+}
+
+void SelectionWidget::resizeUp()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 0, 0, -1));
+}
+
+void SelectionWidget::resizeDown()
+{
+    setGeometryByKeyboard(geometry().adjusted(0, 0, 0, 1));
+}
+
 void SelectionWidget::updateAreas()
 {
     QRect r = rect();
@@ -364,4 +407,17 @@ void SelectionWidget::updateCursor()
             }
             break;
     }
+}
+
+void SelectionWidget::setGeometryByKeyboard(const QRect& r)
+{
+    static QTimer timer;
+    QRect rect = r.intersected(parentWidget()->rect());
+    if (rect.width() <= 0)
+        rect.setWidth(1);
+    if (rect.height() <= 0)
+        rect.setHeight(1);
+    setGeometry(rect);
+    timer.start(400);
+    timer.callOnTimeout(this, [this]() { emit geometrySettled(); });
 }
