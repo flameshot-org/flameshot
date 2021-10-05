@@ -243,6 +243,10 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
+    auto& request = *Controller::getInstance()->requests().find(m_id);
+    if (request.tasks() == CaptureRequest::NO_TASK) {
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
+    }
     QVector<CaptureToolButton*> vectorButtons;
 
     // Add all buttons but hide those that were disabled in the Interface config
@@ -262,6 +266,7 @@ void CaptureWidget::initButtons()
             case CaptureTool::TYPE_EXIT:
             case CaptureTool::TYPE_SAVE:
             case CaptureTool::TYPE_COPY:
+            case CaptureTool::TYPE_ACCEPT:
             case CaptureTool::TYPE_UNDO:
             case CaptureTool::TYPE_IMAGEUPLOADER:
             case CaptureTool::TYPE_REDO:
@@ -1179,6 +1184,13 @@ void CaptureWidget::initShortcuts()
                   this,
                   SLOT(copyScreenshot()));
 
+    auto& request = *Controller::getInstance()->requests().find(m_id);
+    if (request.tasks() != CaptureRequest::NO_TASK) {
+        new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_ACCEPT")),
+                      this,
+                      SLOT(acceptCapture()));
+    }
+
     new QShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
@@ -1454,6 +1466,12 @@ void CaptureWidget::saveScreenshot()
     } else {
         ScreenshotSaver(m_id).saveToFilesystem(pixmap(), m_context.savePath);
     }
+    close();
+}
+
+void CaptureWidget::acceptCapture()
+{
+    m_captureDone = true;
     close();
 }
 

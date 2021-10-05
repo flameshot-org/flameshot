@@ -37,6 +37,7 @@ public:
     QString path() const;
     QVariant data() const;
     CaptureMode captureMode() const;
+    ExportTask tasks() const;
 
     void addTask(ExportTask task);
     void exportCapture(const QPixmap& p);

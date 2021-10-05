@@ -62,6 +62,11 @@ QVariant CaptureRequest::data() const
     return m_data;
 }
 
+CaptureRequest::ExportTask CaptureRequest::tasks() const
+{
+    return m_tasks;
+}
+
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
     m_tasks |= task;
