@@ -20,13 +20,12 @@ public:
     enum ExportTask
     {
         NO_TASK = 0,
-        CLIPBOARD_SAVE_TASK = 1,
-        FILESYSTEM_SAVE_TASK = 2,
+        COPY_TASK = 1,
+        SAVE_TASK = 2,
     };
 
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
-                   const QString& path = QLatin1String(""),
                    const QVariant& data = QVariant(),
                    ExportTask tasks = NO_TASK);
 
@@ -40,6 +39,7 @@ public:
     ExportTask tasks() const;
 
     void addTask(ExportTask task);
+    void addSaveTask(const QString& path);
     void exportCapture(const QPixmap& p);
 
 private:
