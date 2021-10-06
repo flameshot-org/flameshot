@@ -33,9 +33,12 @@ void FlameshotDBusAdapter::graphicCapture(QString path,
                                           int delay,
                                           uint id)
 {
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay);
     if (toClipboard) {
-        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        req.addTask(CaptureRequest::COPY_TASK);
+    }
+    if (!path.isEmpty()) {
+        req.addSaveTask(path);
     }
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
@@ -48,9 +51,11 @@ void FlameshotDBusAdapter::fullScreen(QString path,
 {
     CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, path);
     if (toClipboard) {
-        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        req.addTask(CaptureRequest::COPY_TASK);
     }
-    req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    if (!path.isEmpty()) {
+        req.addSaveTask(path);
+    }
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
 }
@@ -66,11 +71,13 @@ void FlameshotDBusAdapter::captureScreen(int number,
                                          int delay,
                                          uint id)
 {
-    CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, path, number);
+    CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
     if (toClipboard) {
-        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        req.addTask(CaptureRequest::COPY_TASK);
     }
-    req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+    if (!path.isEmpty()) {
+        req.addSaveTask(path);
+    }
     req.setStaticID(id);
     Controller::getInstance()->requestCapture(req);
 }

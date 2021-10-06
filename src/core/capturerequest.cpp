@@ -5,15 +5,14 @@
 #include "src/utils/screenshotsaver.h"
 #include <QDateTime>
 #include <QVector>
+#include <stdexcept>
 
 CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
                                const uint delay,
-                               const QString& path,
                                const QVariant& data,
                                CaptureRequest::ExportTask tasks)
   : m_mode(mode)
   , m_delay(delay)
-  , m_path(path)
   , m_tasks(tasks)
   , m_data(data)
   , m_forcedID(false)
@@ -69,12 +68,21 @@ CaptureRequest::ExportTask CaptureRequest::tasks() const
 
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
+    if (task == SAVE_TASK) {
+        throw std::logic_error("SAVE_TASK must be added using addSaveTask");
+    }
     m_tasks |= task;
+}
+
+void CaptureRequest::addSaveTask(const QString& path)
+{
+    m_tasks |= SAVE_TASK;
+    m_path = path;
 }
 
 void CaptureRequest::exportCapture(const QPixmap& p)
 {
-    if ((m_tasks & ExportTask::FILESYSTEM_SAVE_TASK) != ExportTask::NO_TASK) {
+    if ((m_tasks & ExportTask::SAVE_TASK) != ExportTask::NO_TASK) {
         if (m_path.isEmpty()) {
             ScreenshotSaver(m_id).saveToFilesystemGUI(p);
         } else {
@@ -82,7 +90,7 @@ void CaptureRequest::exportCapture(const QPixmap& p)
         }
     }
 
-    if ((m_tasks & ExportTask::CLIPBOARD_SAVE_TASK) != ExportTask::NO_TASK) {
+    if ((m_tasks & ExportTask::COPY_TASK) != ExportTask::NO_TASK) {
         ScreenshotSaver().saveToClipboard(p);
     }
 }
