@@ -15,6 +15,7 @@ public:
     QString name() const override;
     QString description() const override;
     QString info() override;
+    bool isValid() const override;
 
     QRect mousePreviewRect(const CaptureContext& context) const override;
     QRect boundingRect() const override;
@@ -34,4 +35,5 @@ public slots:
 
 private:
     QString m_tempString;
+    bool m_valid;
 };

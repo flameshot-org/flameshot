@@ -14,6 +14,7 @@ namespace {
 
 CircleCountTool::CircleCountTool(QObject* parent)
   : AbstractTwoPointTool(parent)
+  , m_valid(false)
 {}
 
 QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
@@ -26,6 +27,11 @@ QString CircleCountTool::info()
 {
     m_tempString = QString("%1 - %2").arg(name()).arg(count());
     return m_tempString;
+}
+
+bool CircleCountTool::isValid() const
+{
+    return m_valid;
 }
 
 QRect CircleCountTool::mousePreviewRect(const CaptureContext& context) const
@@ -63,6 +69,7 @@ void CircleCountTool::copyParams(const CircleCountTool* from,
 {
     AbstractTwoPointTool::copyParams(from, to);
     to->setCount(from->count());
+    to->m_valid = from->m_valid;
 }
 
 QString CircleCountTool::description() const
@@ -156,6 +163,7 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
+    m_valid = true;
 }
 
 void CircleCountTool::pressed(const CaptureContext& context)
