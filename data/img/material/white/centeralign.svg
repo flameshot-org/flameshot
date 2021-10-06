@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 80 80"
+   version="1.1">
+   <rect
+       style="fill:#ffffff"
+       width="80"
+       height="10"
+       x="1"
+       y="10" />
+    <rect
+       style="fill:#ffffff"
+       width="60"
+       height="10"
+       x="10"
+       y="30" />
+    <rect
+       style="fill:#ffffff"
+       width="80"
+       height="10"
+       x="1"
+       y="50" />
+    <rect
+       style="fill:#ffffff"
+       width="60"
+       height="10"
+       x="10"
+       y="70" />
+</svg>
