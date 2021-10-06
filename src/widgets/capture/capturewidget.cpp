@@ -10,6 +10,7 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
+#include "copytool.h"
 #include "src/core/controller.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
@@ -63,6 +64,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
   , m_id(id)
+  , m_request(&*Controller::getInstance()->requests().find(id))
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
@@ -243,8 +245,8 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    auto& request = *Controller::getInstance()->requests().find(m_id);
-    if (request.tasks() == CaptureRequest::NO_TASK) {
+    if (m_request->tasks() == CaptureRequest::NO_TASK) {
+        allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     }
     QVector<CaptureToolButton*> vectorButtons;
@@ -263,10 +265,6 @@ void CaptureWidget::initButtons()
         makeChild(b);
 
         switch (t) {
-            case CaptureTool::TYPE_EXIT:
-            case CaptureTool::TYPE_SAVE:
-            case CaptureTool::TYPE_COPY:
-            case CaptureTool::TYPE_ACCEPT:
             case CaptureTool::TYPE_UNDO:
             case CaptureTool::TYPE_IMAGEUPLOADER:
             case CaptureTool::TYPE_REDO:
@@ -314,6 +312,7 @@ QPixmap CaptureWidget::pixmap()
 bool CaptureWidget::commitCurrentTool()
 {
     if (m_activeTool) {
+        processPixmapWithTool(&m_context.screenshot, m_activeTool);
         if (m_activeTool->isValid() && !m_activeTool->editMode() &&
             m_toolWidget) {
             pushToolToStack();
@@ -566,7 +565,13 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     } else if (m_selection->geometry().contains(event->pos())) {
-        copyScreenshot();
+        CopyTool copyTool;
+        connect(&copyTool,
+                &CopyTool::requestAction,
+                this,
+                &CaptureWidget::handleToolSignal);
+        copyTool.pressed(m_context);
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 }
 
@@ -950,6 +955,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         return;
     }
 
+    commitCurrentTool();
     if (m_toolWidget && m_activeTool) {
         if (m_activeTool->isValid()) {
             pushToolToStack();
@@ -964,11 +970,6 @@ void CaptureWidget::setState(CaptureToolButton* b)
         m_activeTool = b->tool();
         m_activeTool->pressed(m_context);
         m_activeTool = backup;
-    }
-
-    // Only close activated from button
-    if (b->tool()->closeOnButtonPressed()) {
-        close();
     }
 
     if (b->tool()->isSelectable()) {
@@ -1021,12 +1022,6 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             break;
         case CaptureTool::REQ_SHOW_COLOR_PICKER:
             // TODO
-            break;
-        case CaptureTool::REQ_CLEAR_SELECTION:
-            if (m_panel->activeLayerIndex() >= 0) {
-                m_panel->setActiveLayer(-1);
-                drawToolsData();
-            }
             break;
         case CaptureTool::REQ_CAPTURE_DONE_OK:
             m_captureDone = true;
@@ -1173,24 +1168,6 @@ void CaptureWidget::setDrawThickness(int t)
 
 void CaptureWidget::initShortcuts()
 {
-    new QShortcut(
-      QKeySequence(ConfigHandler().shortcut("TYPE_EXIT")), this, SLOT(close()));
-
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SAVE")),
-                  this,
-                  SLOT(saveScreenshot()));
-
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_COPY")),
-                  this,
-                  SLOT(copyScreenshot()));
-
-    auto& request = *Controller::getInstance()->requests().find(m_id);
-    if (request.tasks() != CaptureRequest::NO_TASK) {
-        new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_ACCEPT")),
-                      this,
-                      SLOT(acceptCapture()));
-    }
-
     new QShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
@@ -1436,43 +1413,6 @@ void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
     updateToolMousePreview(activeButtonTool());
-}
-
-void CaptureWidget::copyScreenshot()
-{
-    m_captureDone = true;
-    if (m_activeTool != nullptr) {
-        processPixmapWithTool(&m_context.screenshot, m_activeTool);
-    }
-
-    auto req = Controller::getInstance()->requests().find(m_id);
-    req->addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-
-    close();
-}
-
-void CaptureWidget::saveScreenshot()
-{
-#if defined(Q_OS_MACOS)
-    showNormal();
-#endif
-    m_captureDone = true;
-    if (m_activeTool != nullptr) {
-        processPixmapWithTool(&m_context.screenshot, m_activeTool);
-    }
-    hide();
-    if (m_context.savePath.isEmpty()) {
-        ScreenshotSaver(m_id).saveToFilesystemGUI(pixmap());
-    } else {
-        ScreenshotSaver(m_id).saveToFilesystem(pixmap(), m_context.savePath);
-    }
-    close();
-}
-
-void CaptureWidget::acceptCapture()
-{
-    m_captureDone = true;
-    close();
 }
 
 void CaptureWidget::setCaptureToolObjects(

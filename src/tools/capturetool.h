@@ -64,8 +64,6 @@ public:
         REQ_REDO_MODIFICATION,
         // Open the color picker under the mouse.
         REQ_SHOW_COLOR_PICKER,
-        // Notify to redraw screenshot with tools without object selection.
-        REQ_CLEAR_SELECTION,
         // Notify is the screenshot has been saved.
         REQ_CAPTURE_DONE_OK,
         // Instance this->widget()'s widget inside the editor under the mouse.

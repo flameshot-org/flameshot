@@ -62,10 +62,6 @@ signals:
     void thicknessChanged(int thickness);
 
 private slots:
-    // TODO replace with tools
-    void copyScreenshot();
-    void saveScreenshot();
-    void acceptCapture();
     void undo();
     void redo();
     void togglePanel();
@@ -178,6 +174,7 @@ private:
 
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
+    CaptureRequest* m_request;
 
     CaptureToolObjects m_captureToolObjects;
     CaptureToolObjects m_captureToolObjectsBackup;

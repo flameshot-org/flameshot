@@ -46,8 +46,8 @@ CaptureTool* ImgurUploaderTool::copy(QObject* parent)
 
 void ImgurUploaderTool::pressed(const CaptureContext& context)
 {
-    emit requestAction(REQ_CLEAR_SELECTION);
     capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    emit requestAction(REQ_CLOSE_GUI);
 }
