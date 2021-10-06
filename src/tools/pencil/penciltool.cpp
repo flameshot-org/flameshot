@@ -58,7 +58,7 @@ void PencilTool::drawStart(const CaptureContext& context)
     m_pathArea.setBottomRight(context.mousePos);
 }
 
-void PencilTool::pressed(const CaptureContext& context)
+void PencilTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

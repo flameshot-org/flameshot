@@ -252,7 +252,7 @@ void TextTool::drawStart(const CaptureContext& context)
     emit requestAction(REQ_ADD_CHILD_WIDGET);
 }
 
-void TextTool::pressed(const CaptureContext& context)
+void TextTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

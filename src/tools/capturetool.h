@@ -190,7 +190,7 @@ public slots:
     // Called when the tool is activated.
     virtual void drawStart(const CaptureContext& context) = 0;
     // Called right after pressign the button which activates the tool.
-    virtual void pressed(const CaptureContext& context) = 0;
+    virtual void pressed(CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
     virtual void onColorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.

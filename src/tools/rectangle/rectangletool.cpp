@@ -73,7 +73,7 @@ void RectangleTool::drawStart(const CaptureContext& context)
     onThicknessChanged(context.thickness);
 }
 
-void RectangleTool::pressed(const CaptureContext& context)
+void RectangleTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

@@ -70,7 +70,7 @@ CaptureTool* PinTool::copy(QObject* parent)
     return new PinTool(parent);
 }
 
-void PinTool::pressed(const CaptureContext& context)
+void PinTool::pressed(CaptureContext& context)
 {
     emit requestAction(REQ_CAPTURE_DONE_OK);
     m_geometry = context.selection;

@@ -45,33 +45,9 @@ CaptureTool* SaveTool::copy(QObject* parent)
     return new SaveTool(parent);
 }
 
-void SaveTool::pressed(const CaptureContext& context)
+void SaveTool::pressed(CaptureContext& context)
 {
-#if defined(Q_OS_MACOS)
-    for (QWidget* widget : qApp->topLevelWidgets()) {
-        QString className(widget->metaObject()->className());
-        if (0 ==
-            className.compare(CaptureWidget::staticMetaObject.className())) {
-            widget->showNormal();
-            widget->hide();
-            break;
-        }
-    }
-#endif
-    if (context.savePath.isEmpty()) {
-        emit requestAction(REQ_HIDE_GUI);
-        qApp->processEvents();
-        bool ok = ScreenshotSaver().saveToFilesystemGUI(
-          context.selectedScreenshotArea());
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    } else {
-        bool ok = ScreenshotSaver().saveToFilesystem(
-          context.selectedScreenshotArea(), context.savePath);
-        if (ok) {
-            emit requestAction(REQ_CAPTURE_DONE_OK);
-        }
-    }
+    context.request->addSaveTask();
+    emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_CLOSE_GUI);
 }

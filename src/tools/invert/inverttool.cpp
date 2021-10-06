@@ -82,7 +82,7 @@ void InvertTool::paintMousePreview(QPainter& painter,
     Q_UNUSED(painter)
 }
 
-void InvertTool::pressed(const CaptureContext& context)
+void InvertTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }
