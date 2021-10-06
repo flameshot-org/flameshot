@@ -18,8 +18,8 @@ architectures:
 
 apps:
   flameshot:
-    command: flameshot
-    desktop: usr/share/applications/org.flameshot.Flameshot.desktop
+    command: usr/local/bin/flameshot
+    desktop: usr/local/share/applications/org.flameshot.Flameshot.desktop
     extensions:
       - kde-neon
     environment:
@@ -33,6 +33,7 @@ apps:
       - network
       - network-bind
       - opengl
+      - x11
 
 parts:
   flameshot:
