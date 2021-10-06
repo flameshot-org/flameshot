@@ -62,7 +62,6 @@ void AcceptTool::pressed(const CaptureContext&)
         }
     }
 #endif
-    emit requestAction(REQ_CLEAR_SELECTION);
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_HIDE_GUI);
+    emit requestAction(REQ_CLOSE_GUI);
 }

@@ -3,6 +3,7 @@
 
 #include "savetool.h"
 #include "src/utils/screenshotsaver.h"
+#include <QApplication> // TODO rm
 #include <QPainter>
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
@@ -57,9 +58,9 @@ void SaveTool::pressed(const CaptureContext& context)
         }
     }
 #endif
-    emit requestAction(REQ_CLEAR_SELECTION);
     if (context.savePath.isEmpty()) {
         emit requestAction(REQ_HIDE_GUI);
+        qApp->processEvents();
         bool ok = ScreenshotSaver().saveToFilesystemGUI(
           context.selectedScreenshotArea());
         if (ok) {
@@ -72,4 +73,5 @@ void SaveTool::pressed(const CaptureContext& context)
             emit requestAction(REQ_CAPTURE_DONE_OK);
         }
     }
+    emit requestAction(REQ_CLOSE_GUI);
 }
