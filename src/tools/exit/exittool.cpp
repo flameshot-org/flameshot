@@ -38,7 +38,7 @@ CaptureTool* ExitTool::copy(QObject* parent)
     return new ExitTool(parent);
 }
 
-void ExitTool::pressed(const CaptureContext& context)
+void ExitTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
     emit requestAction(REQ_CLOSE_GUI);

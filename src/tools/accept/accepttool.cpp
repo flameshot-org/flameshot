@@ -8,7 +8,6 @@
 #include <QStyle>
 #if defined(Q_OS_MACOS)
 #include "src/widgets/capture/capturewidget.h"
-#include <QApplication>
 #include <QWidget>
 #endif
 
@@ -49,19 +48,8 @@ CaptureTool* AcceptTool::copy(QObject* parent)
     return new AcceptTool(parent);
 }
 
-void AcceptTool::pressed(const CaptureContext&)
+void AcceptTool::pressed(CaptureContext&)
 {
-#if defined(Q_OS_MACOS)
-    for (QWidget* widget : qApp->topLevelWidgets()) {
-        QString className(widget->metaObject()->className());
-        if (0 ==
-            className.compare(CaptureWidget::staticMetaObject.className())) {
-            widget->showNormal();
-            widget->hide();
-            break;
-        }
-    }
-#endif
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_CLOSE_GUI);
 }

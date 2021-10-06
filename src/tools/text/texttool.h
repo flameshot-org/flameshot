@@ -50,7 +50,7 @@ public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void drawStart(const CaptureContext& context) override;
-    void pressed(const CaptureContext& context) override;
+    void pressed(CaptureContext& context) override;
     void onColorChanged(const QColor& c) override;
     void onThicknessChanged(int th) override;
     virtual int thickness() const override { return m_size; };

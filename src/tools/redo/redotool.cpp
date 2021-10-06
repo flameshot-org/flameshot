@@ -38,7 +38,7 @@ CaptureTool* RedoTool::copy(QObject* parent)
     return new RedoTool(parent);
 }
 
-void RedoTool::pressed(const CaptureContext& context)
+void RedoTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
     emit requestAction(REQ_REDO_MODIFICATION);

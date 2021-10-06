@@ -39,7 +39,7 @@ public:
     ExportTask tasks() const;
 
     void addTask(ExportTask task);
-    void addSaveTask(const QString& path);
+    void addSaveTask(const QString& path = QString());
     void exportCapture(const QPixmap& p);
 
 private:

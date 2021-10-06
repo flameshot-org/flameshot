@@ -64,7 +64,6 @@ CaptureWidget::CaptureWidget(uint id,
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
   , m_id(id)
-  , m_request(&*Controller::getInstance()->requests().find(id))
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
@@ -92,7 +91,7 @@ CaptureWidget::CaptureWidget(uint id,
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
-    initContext(savePath, fullScreen);
+    initContext(fullScreen);
     initSelection();
     initShortcuts(); // must be called after initSelection
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
@@ -234,6 +233,17 @@ CaptureWidget::CaptureWidget(uint id,
 
 CaptureWidget::~CaptureWidget()
 {
+#if defined(Q_OS_MACOS)
+    for (QWidget* widget : qApp->topLevelWidgets()) {
+        QString className(widget->metaObject()->className());
+        if (0 ==
+            className.compare(CaptureWidget::staticMetaObject.className())) {
+            widget->showNormal();
+            widget->hide();
+            break;
+        }
+    }
+#endif
     if (m_captureDone) {
         emit captureTaken(m_id, this->pixmap(), m_context.selection);
     } else {
@@ -245,7 +255,7 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    if (m_request->tasks() == CaptureRequest::NO_TASK) {
+    if (m_context.request->tasks() == CaptureRequest::NO_TASK) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     }
@@ -792,14 +802,14 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
 }
 
-void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
+void CaptureWidget::initContext(bool fullscreen)
 {
     m_context.color = m_config.drawColor();
-    m_context.savePath = savePath;
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
     m_context.thickness = m_config.drawThickness();
     m_context.fullscreen = fullscreen;
+    m_context.request = &*Controller::getInstance()->requests().find(m_id);
 }
 
 void CaptureWidget::initPanel()
