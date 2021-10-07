@@ -794,7 +794,7 @@ void CaptureWidget::moveSelection(QPoint p)
 
 void CaptureWidget::updateThickness(int thickness)
 {
-    m_context.thickness = qBound(1, thickness, 100);
+    m_context.thickness = qBound(1, thickness, maxDrawThickness);
 
     QPoint topLeft =
       QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
@@ -1290,7 +1290,7 @@ void CaptureWidget::removeToolObject(int index)
 
 void CaptureWidget::setDrawThickness(const int& t)
 {
-    m_context.thickness = qBound(1, t, 100);
+    m_context.thickness = qBound(1, t, maxDrawThickness);
     // save draw thickness for text and other tool separately
     if (m_activeButton) {
         if (m_activeButton->tool() &&
