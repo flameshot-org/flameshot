@@ -84,7 +84,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             this,
             &SidePanelWidget::colorChanged);
     connect(m_colorWheel,
-            &color_widgets::ColorWheel::colorChanged,
+            &color_widgets::ColorWheel::colorSelected,
             this,
             &SidePanelWidget::updateColorNoWheel);
 }
