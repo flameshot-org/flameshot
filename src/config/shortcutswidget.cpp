@@ -169,9 +169,8 @@ void ShortcutsWidget::initShortcuts()
         if (t != CaptureTool::TYPE_IMAGEUPLOADER) {
             appendShortcut(shortcutName, tool->description());
             if (shortcutName == "TYPE_COPY")
-                m_shortcuts << (QStringList()
-                            << "" << tool->description()
-                            << "Left Double-click");
+                m_shortcuts << (QStringList() << "" << tool->description()
+                                              << "Left Double-click");
         }
         delete tool;
     }
