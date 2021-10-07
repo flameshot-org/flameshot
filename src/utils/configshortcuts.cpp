@@ -14,6 +14,10 @@ const QVector<QStringList>& ConfigShortcuts::captureShortcutsDefault(
         QString shortcutName = QVariant::fromValue(t).toString();
         if (shortcutName != "TYPE_IMAGEUPLOADER") {
             addShortcut(shortcutName, b->tool()->description());
+            if (shortcutName == "TYPE_COPY")
+                m_shortcuts << (QStringList()
+                            << "" << b->tool()->description()
+                            << "Left Double-click");
         }
         delete b;
     }
