@@ -20,19 +20,19 @@
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
-      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg" alt="Latest Stable Release" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
-      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
+      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg" alt="Total Downloads" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
+      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg" alt="License" />
     </a>
   <a href="https://hosted.weblate.org/engage/flameshot/">
     <img src="https://hosted.weblate.org/widgets/flameshot/-/flameshot/svg-badge.svg" alt="Translation status" />
   </a>
   <a href="https://flameshot.org">
-      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?label=docs" alt="Docs" />
     </a>
     <br>
     <a href="https://snapcraft.io/flameshot">
@@ -200,6 +200,7 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd>                                            | Redo the next modification                    |
 | <kbd>Ctrl</kbd> + <kbd>Q</kbd>                                            | Leave the capture screen                                         |
 | <kbd>Ctrl</kbd> + <kbd>O</kbd>                                            | Choose an app to open the capture                                |
+| <kbd>Ctrl</kbd> + <kbd>Return</kbd>                                            | Commit text in text area|
 | <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
 | Right Click                                                               | Show the color wheel                                              |
@@ -251,7 +252,7 @@ Steps for using the configuration:
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
-To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)). 
+To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
 1. Remove the binding on <kbd>Prt Sc</kbd> using the following command.
 
@@ -274,7 +275,7 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 1. Go to `Keyboard` settings
 2. Switch to the tab `Application Shortcuts`
 3. Find the entry
-        
+
     ```text
     Command                        Shortcut
     xfce4-screenshooter -fd 1      Print
@@ -359,7 +360,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 - Qt >= 5.9
   + Development tools
-- GCC >= 7.4 
+- GCC >= 7.4
 - CMake >= 3.13
 
 #### Run-time
@@ -447,8 +448,8 @@ When `make` command completed you can launch flameshot from `project_folder/buil
 
 ### Install
 
-Simply use `make install` with privileges. 
-Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
+Simply use `make install` with privileges.
+Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
 https://flameshot.org/guide/faq/
@@ -471,7 +472,7 @@ This program will not transfer any information to other networked systems unless
 ## Code Signing Policy
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
-Code signing is currently a manual process so not every patch release will be signed. 
+Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)

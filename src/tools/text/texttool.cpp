@@ -17,6 +17,7 @@ TextTool::TextTool(QObject* parent)
     if (!fontFamily.isEmpty()) {
         m_font.setFamily(ConfigHandler().fontFamily());
     }
+    m_alignment = Qt::AlignRight;
 }
 
 TextTool::~TextTool()
@@ -28,6 +29,7 @@ void TextTool::copyParams(const TextTool* from, TextTool* to)
 {
     CaptureTool::copyParams(from, to);
     to->m_font = from->m_font;
+    to->m_alignment = from->m_alignment;
     to->m_text = from->m_text;
     to->m_size = from->m_size;
     to->m_color = from->m_color;
@@ -102,6 +104,7 @@ QWidget* TextTool::widget()
     m_widget->setTextColor(m_color);
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
     m_widget->setFont(m_font);
+    m_widget->setAlignment(m_alignment);
     m_widget->setText(m_text);
     m_widget->selectAll();
     connect(m_widget, &TextWidget::textUpdated, this, &TextTool::updateText);
@@ -143,11 +146,16 @@ QWidget* TextTool::configurationWidget()
             &TextConfig::fontWeightChanged,
             this,
             &TextTool::updateFontWeight);
+
+    connect(
+      m_confW, &TextConfig::alignmentChanged, this, &TextTool::updateAlignment);
+
     m_confW->setFontFamily(m_font.family());
     m_confW->setItalic(m_font.italic());
     m_confW->setUnderline(m_font.underline());
     m_confW->setStrikeOut(m_font.strikeOut());
     m_confW->setWeight(m_font.weight());
+    m_confW->setTextAlignment(m_alignment);
     return m_confW;
 }
 
@@ -173,6 +181,11 @@ CaptureTool* TextTool::copy(QObject* parent)
                 &TextConfig::fontWeightChanged,
                 tt,
                 &TextTool::updateFontWeight);
+
+        connect(m_confW,
+                &TextConfig::alignmentChanged,
+                tt,
+                &TextTool::updateAlignment);
     }
     copyParams(this, tt);
     return tt;
@@ -196,10 +209,15 @@ void TextTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.setFont(m_font);
     painter.setPen(m_color);
     if (!editMode()) {
-        painter.drawText(m_textArea + QMargins(-val, -val, val, val), m_text);
+        painter.drawText(
+          m_textArea + QMargins(-val, -val, val, val), m_alignment, m_text);
     }
     painter.setFont(orig_font);
     painter.setPen(orig_pen);
+
+    if (m_widget) {
+        m_widget->setAlignment(m_alignment);
+    }
 }
 
 void TextTool::drawObjectSelection(QPainter& painter)
@@ -307,6 +325,14 @@ void TextTool::updateFontItalic(const bool italic)
 void TextTool::move(const QPoint& pos)
 {
     m_textArea.moveTo(pos);
+}
+
+void TextTool::updateAlignment(Qt::AlignmentFlag alignment)
+{
+    m_alignment = alignment;
+    if (m_widget) {
+        m_widget->setAlignment(m_alignment);
+    }
 }
 
 const QPoint* TextTool::pos()

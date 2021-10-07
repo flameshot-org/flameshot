@@ -20,6 +20,7 @@ public:
     void setStrikeOut(const bool s);
     void setWeight(const int w);
     void setItalic(const bool i);
+    void setTextAlignment(Qt::AlignmentFlag alignment);
 
 signals:
     void fontFamilyChanged(const QString& f);
@@ -27,7 +28,7 @@ signals:
     void fontStrikeOutChanged(const bool dashed);
     void fontWeightChanged(const QFont::Weight w);
     void fontItalicChanged(const bool italic);
-
+    void alignmentChanged(Qt::AlignmentFlag alignment);
 public slots:
 
 private slots:
@@ -40,4 +41,8 @@ private:
     QPushButton* m_underlineButton;
     QPushButton* m_weightButton;
     QPushButton* m_italicButton;
+
+    QPushButton* m_leftAlignButton;
+    QPushButton* m_centerAlignButton;
+    QPushButton* m_rightAlignButton;
 };

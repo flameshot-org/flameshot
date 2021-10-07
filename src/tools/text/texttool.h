@@ -4,9 +4,9 @@
 #pragma once
 
 #include "src/tools/capturetool.h"
+#include "textconfig.h"
 #include <QPoint>
 #include <QPointer>
-
 class TextWidget;
 class TextConfig;
 
@@ -62,11 +62,13 @@ private slots:
     void updateFontStrikeOut(const bool s);
     void updateFontWeight(const QFont::Weight w);
     void updateFontItalic(const bool italic);
+    void updateAlignment(Qt::AlignmentFlag alignment);
 
 private:
     void closeEditor();
 
     QFont m_font;
+    Qt::AlignmentFlag m_alignment;
     QString m_text;
     QString m_textOld;
     int m_size;

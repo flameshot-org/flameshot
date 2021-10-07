@@ -560,6 +560,8 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             handleToolSignal(CaptureTool::REQ_ADD_CHILD_WIDGET);
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
+    } else if (m_selection->geometry().contains(event->pos())) {
+        copyScreenshot();
     }
 }
 
@@ -668,7 +670,7 @@ void CaptureWidget::updateThickness(int thickness)
 {
     auto tool = activeButtonTool();
     updateToolMousePreview(tool);
-    m_context.thickness = qBound(1, thickness, 100);
+    m_context.thickness = qBound(1, thickness, maxDrawThickness);
 
     QPoint topLeft =
       QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
@@ -1143,7 +1145,7 @@ void CaptureWidget::removeToolObject(int index)
 
 void CaptureWidget::setDrawThickness(int t)
 {
-    m_context.thickness = qBound(1, t, 100);
+    m_context.thickness = qBound(1, t, maxDrawThickness);
     // save draw thickness for text and other tool separately
     if (m_activeButton) {
         if (activeButtonToolType() == CaptureTool::TYPE_TEXT) {

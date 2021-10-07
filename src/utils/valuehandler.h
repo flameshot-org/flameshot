@@ -51,7 +51,7 @@ public:
      * `check`, the fallback will be returned. Otherwise the value is processed
      * by `process` and then returned.
      *
-     * @note Cannot be overriden
+     * @note Cannot be overridden
      * @see fallback, process
      */
     QVariant value(const QVariant& val);
@@ -60,7 +60,7 @@ public:
      */
     virtual QVariant fallback();
     /**
-     * @brief Return the representaion of the value in the config file.
+     * @brief Return the representation of the value in the config file.
      *
      * Override this if you want to write the value in a different format than
      * the one provided by `QVariant`.
