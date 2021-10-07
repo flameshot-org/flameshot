@@ -637,9 +637,9 @@ jobs:
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
+        snapcraft-args: --enable-experimental-extensions
       - name: Rename snap name
         shell: bash
-        snapcraft-args: --enable-experimental-extensions
         run: |
           mkdir -p $GITHUB_WORKSPACE/build
           cp ${{ steps.snapcraft.outputs.snap }} $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap
