@@ -14,6 +14,8 @@ class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
 
+constexpr int maxDrawThickness = 50;
+
 class SidePanelWidget : public QWidget
 {
     Q_OBJECT
