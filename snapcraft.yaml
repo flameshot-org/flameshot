@@ -28,12 +28,14 @@ apps:
       QT_QPA_PLATFORMTHEME: gtk3
     slots: [dbus-flameshot]
     plugs:
+      - kde-frameworks-5-plug
       - home
       - removable-media
       - network
       - network-bind
       - opengl
       - x11
+      - wayland
 
 parts:
   flameshot:
@@ -58,6 +60,7 @@ parts:
       - g++
       - make
       - qt5-default
+      - git
     stage-packages:
       - dbus-x11
       - libgtk2.0-0
