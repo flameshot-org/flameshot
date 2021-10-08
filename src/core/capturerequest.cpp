@@ -45,7 +45,9 @@ QByteArray CaptureRequest::serialize() const
 {
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
-    stream << m_mode << m_delay << m_tasks << m_data << m_forcedID << m_id
+    // Convert enums to integers
+    qint32 tasks = m_tasks, mode = m_mode;
+    stream << mode << m_delay << tasks << m_data << m_forcedID << m_id
            << m_path;
     return data;
 }
@@ -54,13 +56,18 @@ CaptureRequest CaptureRequest::deserialize(const QByteArray& data)
 {
     QDataStream stream(data);
     CaptureRequest request;
-    stream >> request.m_mode;
+    qint32 tasks, mode;
+    stream >> mode;
     stream >> request.m_delay;
-    stream >> request.m_tasks;
+    stream >> tasks;
     stream >> request.m_data;
     stream >> request.m_forcedID;
     stream >> request.m_id;
     stream >> request.m_path;
+
+    // Convert integers to enums
+    request.m_tasks = static_cast<ExportTask>(tasks);
+    request.m_mode = static_cast<CaptureMode>(mode);
     return request;
 }
 

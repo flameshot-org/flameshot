@@ -319,7 +319,7 @@ void CaptureWidget::initButtons()
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
-    keyMap << QPair("Mouse", "Select screenshot area");
+    keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
     using CT = CaptureTool;
     for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
         if (!m_tools.contains(toolType)) {
@@ -333,10 +333,10 @@ void CaptureWidget::initHelpMessage()
             keyMap << QPair(shortcut, tool->description());
         }
     }
-    keyMap << QPair("Mouse Wheel", "Change tool size");
-    keyMap << QPair("Right Click", "Show color picker");
-    keyMap << QPair("Space", "Open side panel");
-    keyMap << QPair("Esc", "Exit");
+    keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
+    keyMap << QPair(tr("Right Click"), tr("Show color picker"));
+    keyMap << QPair(tr("Space"), tr("Open side panel"));
+    keyMap << QPair(tr("Esc"), tr("Exit"));
     OverlayMessage::pushKeyMap(keyMap);
 }
 
