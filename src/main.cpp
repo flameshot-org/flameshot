@@ -309,6 +309,15 @@ int main(int argc, char* argv[])
         if (toClipboard) {
             req.addTask(CaptureRequest::COPY_TASK);
         }
+        if (isRaw) {
+            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        }
+        if (!pathValue.isEmpty()) {
+            req.addSaveTask(pathValue);
+        }
+        if (isSelection) {
+            req.addTask(CaptureRequest::PRINT_GEOMETRY_TASK);
+        }
         uint id = req.id();
 
         // Send message
@@ -316,8 +325,8 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("graphicCapture"));
-        m << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
@@ -356,6 +365,9 @@ int main(int argc, char* argv[])
         if (toClipboard) {
             req.addTask(CaptureRequest::COPY_TASK);
         }
+        if (isRaw) {
+            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        }
         if (!pathValue.isEmpty()) {
             req.addSaveTask(pathValue);
         }
@@ -367,8 +379,8 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("fullScreen"));
-        m << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
@@ -414,6 +426,9 @@ int main(int argc, char* argv[])
         if (toClipboard) {
             req.addTask(CaptureRequest::COPY_TASK);
         }
+        if (isRaw) {
+            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        }
         if (!pathValue.isEmpty()) {
             req.addSaveTask(pathValue);
         }
@@ -425,8 +440,8 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("captureScreen"));
-        m << number << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
