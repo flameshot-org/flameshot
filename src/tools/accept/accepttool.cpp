@@ -23,8 +23,7 @@ bool AcceptTool::closeOnButtonPressed() const
 QIcon AcceptTool::icon(const QColor& background, bool inEditor) const
 {
     Q_UNUSED(inEditor)
-    // TODO add new icon
-    return qApp->style()->standardIcon(QStyle::SP_DialogApplyButton);
+    return QIcon(iconPath(background) + "accept.svg");
 }
 
 QString AcceptTool::name() const
