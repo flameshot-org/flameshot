@@ -218,7 +218,7 @@ On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but wi
 
 #### On KDE Plasma desktop
 
-To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
+To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
 
 |  Keys                                                  |  Description                                                                       |
 |---                                                     |---                                                                                 |
@@ -242,7 +242,7 @@ Steps for using the configuration:
 
     ```shell
     cd ~/Desktop
-    wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+    wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys
     ```
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
 4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
