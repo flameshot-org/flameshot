@@ -691,6 +691,7 @@ void CaptureWidget::updateThickness(int thickness)
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
         }
+        setDrawThickness(m_context.thickness);
     }
     emit thicknessChanged(m_context.thickness);
 }
