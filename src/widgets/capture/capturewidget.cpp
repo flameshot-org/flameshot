@@ -372,7 +372,7 @@ void CaptureWidget::uncheckActiveTool()
     // uncheck active tool
     m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
     m_activeButton = nullptr;
     releaseActiveTool();
     updateSelectionState();
@@ -569,7 +569,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
-        updateToolMousePreview(activeButtonTool());
+        updateTool(activeButtonTool());
         updateCursor();
         return;
     }
@@ -614,7 +614,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_activeTool->drawMove(e->pos());
         }
         // update drawing object
-        updateToolMousePreview(m_activeTool);
+        updateTool(m_activeTool);
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -669,7 +669,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 void CaptureWidget::updateThickness(int thickness)
 {
     auto tool = activeButtonTool();
-    updateToolMousePreview(tool);
+    updateTool(tool);
     m_context.thickness = qBound(1, thickness, maxDrawThickness);
 
     QPoint topLeft =
@@ -680,7 +680,7 @@ void CaptureWidget::updateThickness(int thickness)
 
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
-        updateToolMousePreview(tool);
+        updateTool(tool);
     }
 
     // update selected object thickness
@@ -985,7 +985,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         loadDrawThickness();
         updateCursor();
         updateSelectionState();
-        updateToolMousePreview(b->tool());
+        updateTool(b->tool());
     }
 }
 
@@ -1286,7 +1286,7 @@ void CaptureWidget::updateSelectionState()
     }
 }
 
-void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
+void CaptureWidget::updateTool(CaptureTool* tool)
 {
     if (!tool || !tool->showMousePreview()) {
         return;
@@ -1426,13 +1426,13 @@ void CaptureWidget::togglePanel()
 void CaptureWidget::childEnter()
 {
     m_previewEnabled = false;
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
 }
 
 void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
 }
 
 void CaptureWidget::copyScreenshot()
