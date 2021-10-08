@@ -41,6 +41,29 @@ uint CaptureRequest::id() const
     return id;
 }
 
+QByteArray CaptureRequest::serialize() const
+{
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    stream << m_mode << m_delay << m_tasks << m_data << m_forcedID << m_id
+           << m_path;
+    return data;
+}
+
+CaptureRequest CaptureRequest::deserialize(const QByteArray& data)
+{
+    QDataStream stream(data);
+    CaptureRequest request;
+    stream >> request.m_mode;
+    stream >> request.m_delay;
+    stream >> request.m_tasks;
+    stream >> request.m_data;
+    stream >> request.m_forcedID;
+    stream >> request.m_id;
+    stream >> request.m_path;
+    return request;
+}
+
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
 {
     return m_mode;

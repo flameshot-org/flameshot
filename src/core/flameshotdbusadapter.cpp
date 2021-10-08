@@ -28,6 +28,13 @@ FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 
+void FlameshotDBusAdapter::requestCapture(const QByteArray& requestData)
+{
+    CaptureRequest req = CaptureRequest::deserialize(requestData);
+    req.setStaticID(req.id());
+    Controller::getInstance()->requestCapture(req);
+}
+
 void FlameshotDBusAdapter::graphicCapture(QString path,
                                           bool toClipboard,
                                           int delay,

@@ -2,7 +2,16 @@
 <node>
   <interface name="org.flameshot.Flameshot">
 
-      <!--
+    <!--
+        requestCapture:
+        @requestData: Serialized CaptureRequest object.
+
+        Start a capture using a CaptureRequest.
+    -->
+    <method name="requestCapture">
+      <arg name="requestData" type="ay" direction="in"/>
+    </method>
+    <!--
         graphicCapture:
         @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
         @toClipboard: Whether to copy the screenshot to clipboard or not.
