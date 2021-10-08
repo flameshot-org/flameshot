@@ -15,15 +15,19 @@ public:
     QString name() const override;
     QString description() const override;
     QString info() override;
+    bool isValid() const override;
+
+    QRect mousePreviewRect(const CaptureContext& context) const override;
+    QRect boundingRect() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
-    void drawObjectSelection(QPainter& painter) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
 protected:
-    ToolType type() const override;
+    CaptureTool::Type type() const override;
+    void copyParams(const CircleCountTool* from, CircleCountTool* to);
 
 public slots:
     void drawStart(const CaptureContext& context) override;
@@ -31,4 +35,5 @@ public slots:
 
 private:
     QString m_tempString;
+    bool m_valid;
 };

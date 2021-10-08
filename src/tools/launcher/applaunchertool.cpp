@@ -23,9 +23,9 @@ QString AppLauncher::name() const
     return tr("App Launcher");
 }
 
-ToolType AppLauncher::type() const
+CaptureTool::Type AppLauncher::type() const
 {
-    return ToolType::LAUNCHER;
+    return CaptureTool::TYPE_OPEN_APP;
 }
 
 QString AppLauncher::description() const

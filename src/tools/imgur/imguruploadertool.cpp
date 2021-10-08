@@ -24,9 +24,9 @@ QString ImgurUploaderTool::name() const
     return tr("Image Uploader");
 }
 
-ToolType ImgurUploaderTool::type() const
+CaptureTool::Type ImgurUploaderTool::type() const
 {
-    return ToolType::IMGUR;
+    return CaptureTool::TYPE_IMAGEUPLOADER;
 }
 
 QString ImgurUploaderTool::description() const

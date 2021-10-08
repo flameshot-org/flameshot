@@ -4,11 +4,7 @@
 #include "markertool.h"
 #include <QPainter>
 
-namespace {
-
 #define PADDING_VALUE 14
-
-}
 
 MarkerTool::MarkerTool(QObject* parent)
   : AbstractTwoPointTool(parent)
@@ -27,14 +23,22 @@ QString MarkerTool::name() const
     return tr("Marker");
 }
 
-ToolType MarkerTool::type() const
+CaptureTool::Type MarkerTool::type() const
 {
-    return ToolType::MARKER;
+    return CaptureTool::TYPE_MARKER;
 }
 
 QString MarkerTool::description() const
 {
     return tr("Set the Marker as the paint tool");
+}
+
+QRect MarkerTool::mousePreviewRect(const CaptureContext& context) const
+{
+    int width = PADDING_VALUE + context.thickness;
+    QRect rect(0, 0, width + 2, width + 2);
+    rect.moveCenter(context.mousePos);
+    return rect;
 }
 
 CaptureTool* MarkerTool::copy(QObject* parent)
@@ -77,7 +81,7 @@ void MarkerTool::paintMousePreview(QPainter& painter,
 void MarkerTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    thicknessChanged(context.thickness + PADDING_VALUE);
+    onThicknessChanged(context.thickness + PADDING_VALUE);
 }
 
 void MarkerTool::pressed(const CaptureContext& context)

@@ -4,55 +4,24 @@
 #pragma once
 
 #include "capturebutton.h"
+#include "src/tools/capturetool.h"
 #include <QMap>
 #include <QVector>
 
 class QWidget;
 class QPropertyAnimation;
-class CaptureTool;
 
 class CaptureToolButton : public CaptureButton
 {
     Q_OBJECT
 
 public:
-    // Don't forget to add the new types to CaptureButton::iterableButtonTypes
-    // in the .cpp and the order value in the private array buttonTypeOrder
-    // NOTE: Add new entries to the BOTTOM so existing user configurations don't
-    // get messed up.
-    enum ButtonType
-    {
-        TYPE_PENCIL = 0,
-        TYPE_DRAWER = 1,
-        TYPE_ARROW = 2,
-        TYPE_SELECTION = 3,
-        TYPE_RECTANGLE = 4,
-        TYPE_CIRCLE = 5,
-        TYPE_MARKER = 6,
-        TYPE_SELECTIONINDICATOR = 7,
-        TYPE_MOVESELECTION = 8,
-        TYPE_UNDO = 9,
-        TYPE_COPY = 10,
-        TYPE_SAVE = 11,
-        TYPE_EXIT = 12,
-        TYPE_IMAGEUPLOADER = 13,
-        TYPE_OPEN_APP = 14,
-        TYPE_PIXELATE = 15,
-        TYPE_REDO = 16,
-        TYPE_PIN = 17,
-        TYPE_TEXT = 18,
-        TYPE_CIRCLECOUNT = 19,
-        TYPE_SIZEINCREASE = 20,
-        TYPE_SIZEDECREASE = 21,
-        TYPE_INVERT = 22,
-    };
-    Q_ENUM(ButtonType)
-
-    explicit CaptureToolButton(const ButtonType, QWidget* parent = nullptr);
+    explicit CaptureToolButton(const CaptureTool::Type,
+                               QWidget* parent = nullptr);
     ~CaptureToolButton();
 
-    static QList<CaptureToolButton::ButtonType> getIterableButtonTypes();
-    static int getPriorityByButton(CaptureToolButton::ButtonType);
+    static const QList<CaptureTool::Type>& getIterableButtonTypes();
+    static int getPriorityByButton(CaptureTool::Type);
 
     QString name() const;
     QString description() const;
@@ -64,7 +33,7 @@ public:
 
 protected:
     void mousePressEvent(QMouseEvent* e) override;
-    static QList<ButtonType> iterableButtonTypes;
+    static QList<CaptureTool::Type> iterableButtonTypes;
 
     CaptureTool* m_tool;
 
@@ -73,7 +42,7 @@ signals:
 
 private:
     CaptureToolButton(QWidget* parent = nullptr);
-    ButtonType m_buttonType;
+    CaptureTool::Type m_buttonType;
 
     QPropertyAnimation* m_emergeAnimation;
 

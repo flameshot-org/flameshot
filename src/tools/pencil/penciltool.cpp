@@ -18,9 +18,9 @@ QString PencilTool::name() const
     return tr("Pencil");
 }
 
-ToolType PencilTool::type() const
+CaptureTool::Type PencilTool::type() const
 {
-    return ToolType::PENCIL;
+    return CaptureTool::TYPE_PENCIL;
 }
 
 QString PencilTool::description() const
@@ -52,7 +52,7 @@ void PencilTool::paintMousePreview(QPainter& painter,
 void PencilTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    thicknessChanged(context.thickness);
+    onThicknessChanged(context.thickness);
     m_points.append(context.mousePos);
     m_pathArea.setTopLeft(context.mousePos);
     m_pathArea.setBottomRight(context.mousePos);

@@ -34,7 +34,7 @@ public:
     CaptureTool* copy(QObject* parent = nullptr) override;
 
 protected:
-    ToolType type() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void pressed(const CaptureContext& context) override;

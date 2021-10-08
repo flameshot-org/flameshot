@@ -22,9 +22,9 @@ QString RectangleTool::name() const
     return tr("Rectangle");
 }
 
-ToolType RectangleTool::type() const
+CaptureTool::Type RectangleTool::type() const
 {
-    return ToolType::RECTANGLE;
+    return CaptureTool::TYPE_RECTANGLE;
 }
 
 QString RectangleTool::description() const
@@ -70,7 +70,7 @@ void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
 void RectangleTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    thicknessChanged(context.thickness);
+    onThicknessChanged(context.thickness);
 }
 
 void RectangleTool::pressed(const CaptureContext& context)

@@ -1,4 +1,5 @@
 #include "valuehandler.h"
+#include "capturetool.h"
 #include "confighandler.h"
 #include <QColor>
 #include <QFileInfo>
@@ -267,15 +268,16 @@ QString FilenamePattern::expected()
 
 // BUTTON LIST
 
-using BType = CaptureToolButton::ButtonType;
-using BList = QList<BType>;
+using BType = CaptureTool::Type;
+using BList = QList<CaptureTool::Type>;
 
 bool ButtonList::check(const QVariant& val)
 {
+    // TODO stop using CTB
     using CTB = CaptureToolButton;
     auto allButtons = CTB::getIterableButtonTypes();
     for (int btn : val.value<QList<int>>()) {
-        if (!allButtons.contains(static_cast<CTB::ButtonType>(btn))) {
+        if (!allButtons.contains(static_cast<BType>(btn))) {
             return false;
         }
     }
@@ -302,8 +304,8 @@ QVariant ButtonList::process(const QVariant& val)
 QVariant ButtonList::fallback()
 {
     auto buttons = CaptureToolButton::getIterableButtonTypes();
-    buttons.removeOne(CaptureToolButton::TYPE_SIZEDECREASE);
-    buttons.removeOne(CaptureToolButton::TYPE_SIZEINCREASE);
+    buttons.removeOne(CaptureTool::TYPE_SIZEDECREASE);
+    buttons.removeOne(CaptureTool::TYPE_SIZEINCREASE);
     sortButtons(buttons);
     return QVariant::fromValue(buttons);
 }
@@ -320,17 +322,16 @@ QString ButtonList::expected()
     return QStringLiteral("please don't edit by hand");
 }
 
-QList<CaptureToolButton::ButtonType> ButtonList::fromIntList(
-  const QList<int>& l)
+QList<CaptureTool::Type> ButtonList::fromIntList(const QList<int>& l)
 {
-    QList<CaptureToolButton::ButtonType> buttons;
+    QList<CaptureTool::Type> buttons;
     buttons.reserve(l.size());
     for (auto const i : l)
-        buttons << static_cast<CaptureToolButton::ButtonType>(i);
+        buttons << static_cast<CaptureTool::Type>(i);
     return buttons;
 }
 
-QList<int> ButtonList::toIntList(const QList<CaptureToolButton::ButtonType>& l)
+QList<int> ButtonList::toIntList(const QList<CaptureTool::Type>& l)
 {
     QList<int> buttons;
     buttons.reserve(l.size());

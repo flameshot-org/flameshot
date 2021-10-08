@@ -25,9 +25,9 @@ QString PinTool::name() const
     return tr("Pin Tool");
 }
 
-ToolType PinTool::type() const
+CaptureTool::Type PinTool::type() const
 {
-    return ToolType::PIN;
+    return CaptureTool::TYPE_PIN;
 }
 
 QString PinTool::description() const

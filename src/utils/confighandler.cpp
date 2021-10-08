@@ -307,7 +307,7 @@ QString ConfigHandler::saveAsFileExtension()
 
 void ConfigHandler::setAllTheButtons()
 {
-    QList<CaptureToolButton::ButtonType> buttons =
+    QList<CaptureTool::Type> buttons =
       CaptureToolButton::getIterableButtonTypes();
     setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
 }

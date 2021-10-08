@@ -22,8 +22,8 @@ protected:
     void initButtonList();
 
 private:
-    QList<CaptureToolButton::ButtonType> m_listButtons;
-    QMap<QString, CaptureToolButton::ButtonType> m_buttonTypeByName;
+    QList<CaptureTool::Type> m_listButtons;
+    QMap<QString, CaptureTool::Type> m_buttonTypeByName;
 
     void updateActiveButtons(QListWidgetItem*);
 };

@@ -19,6 +19,5 @@ public:
     ToolFactory(const ToolFactory&) = delete;
     ToolFactory& operator=(const ToolFactory&) = delete;
 
-    CaptureTool* CreateTool(CaptureToolButton::ButtonType t,
-                            QObject* parent = nullptr);
+    CaptureTool* CreateTool(CaptureTool::Type t, QObject* parent = nullptr);
 };

@@ -57,6 +57,11 @@ bool TextTool::showMousePreview() const
     return false;
 }
 
+QRect TextTool::boundingRect() const
+{
+    return m_textArea;
+}
+
 QIcon TextTool::icon(const QColor& background, bool inEditor) const
 {
     Q_UNUSED(inEditor)
@@ -82,9 +87,9 @@ QString TextTool::info()
     return name();
 }
 
-ToolType TextTool::type() const
+CaptureTool::Type TextTool::type() const
 {
-    return ToolType::TEXT;
+    return CaptureTool::TYPE_TEXT;
 }
 
 QString TextTool::description() const
@@ -220,7 +225,7 @@ void TextTool::drawObjectSelection(QPainter& painter)
     if (m_text.isEmpty()) {
         return;
     }
-    drawObjectSelectionRect(painter, m_textArea);
+    drawObjectSelectionRect(painter, boundingRect());
 }
 
 void TextTool::paintMousePreview(QPainter& painter,
@@ -252,7 +257,7 @@ void TextTool::pressed(const CaptureContext& context)
     Q_UNUSED(context)
 }
 
-void TextTool::colorChanged(const QColor& c)
+void TextTool::onColorChanged(const QColor& c)
 {
     m_color = c;
     if (m_widget) {
@@ -260,7 +265,7 @@ void TextTool::colorChanged(const QColor& c)
     }
 }
 
-void TextTool::thicknessChanged(int th)
+void TextTool::onThicknessChanged(int th)
 {
     m_size = th;
     m_font.setPointSize(m_size + BASE_POINT_SIZE);

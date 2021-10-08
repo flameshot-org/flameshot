@@ -25,9 +25,9 @@ QString SelectionTool::name() const
     return tr("Rectangular Selection");
 }
 
-ToolType SelectionTool::type() const
+CaptureTool::Type SelectionTool::type() const
 {
-    return ToolType::SELECTION;
+    return CaptureTool::TYPE_SELECTION;
 }
 
 QString SelectionTool::description() const
