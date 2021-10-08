@@ -1162,6 +1162,7 @@ void CaptureWidget::setDrawThickness(int t)
         toolItem->onThicknessChanged(t);
         drawToolsData();
         drawObjectSelection();
+        updateTool(toolItem);
     } else {
         emit thicknessChanged(m_context.thickness);
     }
