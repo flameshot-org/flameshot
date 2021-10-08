@@ -328,6 +328,7 @@ void CaptureWidget::initHelpMessage()
         auto* tool = m_tools[toolType];
         QString shortcut =
           ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
+        shortcut.replace("Return", "Enter");
         if (!shortcut.isEmpty()) {
             keyMap << QPair(shortcut, tool->description());
         }
