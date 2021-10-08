@@ -265,7 +265,7 @@ void CaptureWidget::initButtons()
 
     // Add all buttons but hide those that were disabled in the Interface config
     // This will allow keyboard shortcuts for those buttons to work
-    for (const CaptureTool::Type& t : allButtonTypes) {
+    for (CaptureTool::Type t : allButtonTypes) {
         CaptureToolButton* b = new CaptureToolButton(t, this);
         if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
@@ -298,6 +298,8 @@ void CaptureWidget::initButtons()
                 break;
         }
 
+        m_tools[t] = b->tool();
+
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
@@ -320,7 +322,10 @@ void CaptureWidget::initHelpMessage()
     keyMap << QPair("Mouse", "Select screenshot area");
     using CT = CaptureTool;
     for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
-        auto* tool = ToolFactory().CreateTool(toolType);
+        if (!m_tools.contains(toolType)) {
+            continue;
+        }
+        auto* tool = m_tools[toolType];
         QString shortcut =
           ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
         if (!shortcut.isEmpty()) {

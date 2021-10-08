@@ -176,6 +176,7 @@ private:
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
 
+    QMap<CaptureTool::Type, CaptureTool*> m_tools;
     CaptureToolObjects m_captureToolObjects;
     CaptureToolObjects m_captureToolObjectsBackup;
 
