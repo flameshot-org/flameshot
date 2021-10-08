@@ -372,7 +372,7 @@ void CaptureWidget::uncheckActiveTool()
     // uncheck active tool
     m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
     m_activeButton = nullptr;
     releaseActiveTool();
     updateSelectionState();
@@ -569,7 +569,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
-        updateToolMousePreview(activeButtonTool());
+        updateTool(activeButtonTool());
         updateCursor();
         return;
     }
@@ -614,7 +614,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_activeTool->drawMove(e->pos());
         }
         // update drawing object
-        updateToolMousePreview(m_activeTool);
+        updateTool(m_activeTool);
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -669,7 +669,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 void CaptureWidget::updateThickness(int thickness)
 {
     auto tool = activeButtonTool();
-    updateToolMousePreview(tool);
+    updateTool(tool);
     m_context.thickness = qBound(1, thickness, maxDrawThickness);
 
     QPoint topLeft =
@@ -680,7 +680,7 @@ void CaptureWidget::updateThickness(int thickness)
 
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
-        updateToolMousePreview(tool);
+        updateTool(tool);
     }
 
     // update selected object thickness
@@ -691,6 +691,7 @@ void CaptureWidget::updateThickness(int thickness)
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
         }
+        setDrawThickness(m_context.thickness);
     }
     emit thicknessChanged(m_context.thickness);
 }
@@ -984,7 +985,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         loadDrawThickness();
         updateCursor();
         updateSelectionState();
-        updateToolMousePreview(b->tool());
+        updateTool(b->tool());
     }
 }
 
@@ -1161,6 +1162,7 @@ void CaptureWidget::setDrawThickness(int t)
         toolItem->onThicknessChanged(t);
         drawToolsData();
         drawObjectSelection();
+        updateTool(toolItem);
     } else {
         emit thicknessChanged(m_context.thickness);
     }
@@ -1285,22 +1287,30 @@ void CaptureWidget::updateSelectionState()
     }
 }
 
-void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
+void CaptureWidget::updateTool(CaptureTool* tool)
 {
     if (!tool || !tool->showMousePreview()) {
         return;
     }
 
-    static QRect oldRect;
+    static QRect oldPreviewRect, oldToolObjectRect;
 
-    QRect r(tool->mousePreviewRect(m_context));
-    r += QMargins(r.width(), r.height(), r.width(), r.height());
+    QRect previewRect(tool->mousePreviewRect(m_context));
+    previewRect += QMargins(previewRect.width(),
+                            previewRect.height(),
+                            previewRect.width(),
+                            previewRect.height());
 
     QRect toolObjectRect = paddedUpdateRect(tool->boundingRect());
 
-    // oldRect is united with the current rect to handle sudden mouse movement
-    update(r.united(oldRect).united(toolObjectRect));
-    oldRect = r;
+    // old rects are united with current rects to handle sudden mouse movement
+    update(previewRect);
+    update(toolObjectRect);
+    update(oldPreviewRect);
+    update(oldToolObjectRect);
+
+    oldPreviewRect = previewRect;
+    oldToolObjectRect = toolObjectRect;
 }
 
 void CaptureWidget::updateLayersPanel()
@@ -1417,13 +1427,13 @@ void CaptureWidget::togglePanel()
 void CaptureWidget::childEnter()
 {
     m_previewEnabled = false;
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
 }
 
 void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
 }
 
 void CaptureWidget::copyScreenshot()

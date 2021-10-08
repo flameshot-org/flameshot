@@ -112,7 +112,7 @@ private:
     void updateSizeIndicator();
     void updateCursor();
     void updateSelectionState();
-    void updateToolMousePreview(CaptureTool* tool);
+    void updateTool(CaptureTool* tool);
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
