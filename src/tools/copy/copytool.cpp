@@ -31,7 +31,7 @@ CaptureTool::Type CopyTool::type() const
 
 QString CopyTool::description() const
 {
-    return tr("Copy the selection into the clipboard");
+    return tr("Copy selection to clipboard");
 }
 
 CaptureTool* CopyTool::copy(QObject* parent)

@@ -37,7 +37,7 @@ CaptureTool::Type SaveTool::type() const
 
 QString SaveTool::description() const
 {
-    return tr("Save the capture");
+    return tr("Save screenshot to a file");
 }
 
 CaptureTool* SaveTool::copy(QObject* parent)

@@ -385,7 +385,9 @@ bool ConfigHandler::setShortcut(const QString& shortcutName,
 
 QString ConfigHandler::shortcut(const QString& shortcutName)
 {
-    return value(QStringLiteral("Shortcuts/") + shortcutName).toString();
+    QString val = value(QStringLiteral("Shortcuts/") + shortcutName).toString();
+    val.replace("Return", "Enter");
+    return val;
 }
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
