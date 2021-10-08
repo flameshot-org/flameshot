@@ -22,19 +22,6 @@ signals:
 
 public slots:
     Q_NOREPLY void requestCapture(const QByteArray& requestData);
-    Q_NOREPLY void graphicCapture(QString path,
-                                  bool toClipboard,
-                                  int delay,
-                                  uint id);
-    Q_NOREPLY void fullScreen(QString path,
-                              bool toClipboard,
-                              int delay,
-                              uint id);
-    Q_NOREPLY void captureScreen(int number,
-                                 QString path,
-                                 bool toClipboard,
-                                 int delay,
-                                 uint id);
     Q_NOREPLY void openLauncher();
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);

@@ -35,58 +35,9 @@ void FlameshotDBusAdapter::requestCapture(const QByteArray& requestData)
     Controller::getInstance()->requestCapture(req);
 }
 
-void FlameshotDBusAdapter::graphicCapture(QString path,
-                                          bool toClipboard,
-                                          int delay,
-                                          uint id)
-{
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay);
-    if (toClipboard) {
-        req.addTask(CaptureRequest::COPY_TASK);
-    }
-    if (!path.isEmpty()) {
-        req.addSaveTask(path);
-    }
-    req.setStaticID(id);
-    Controller::getInstance()->requestCapture(req);
-}
-
-void FlameshotDBusAdapter::fullScreen(QString path,
-                                      bool toClipboard,
-                                      int delay,
-                                      uint id)
-{
-    CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, path);
-    if (toClipboard) {
-        req.addTask(CaptureRequest::COPY_TASK);
-    }
-    if (!path.isEmpty()) {
-        req.addSaveTask(path);
-    }
-    req.setStaticID(id);
-    Controller::getInstance()->requestCapture(req);
-}
-
 void FlameshotDBusAdapter::openLauncher()
 {
     Controller::getInstance()->openLauncherWindow();
-}
-
-void FlameshotDBusAdapter::captureScreen(int number,
-                                         QString path,
-                                         bool toClipboard,
-                                         int delay,
-                                         uint id)
-{
-    CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
-    if (toClipboard) {
-        req.addTask(CaptureRequest::COPY_TASK);
-    }
-    if (!path.isEmpty()) {
-        req.addSaveTask(path);
-    }
-    req.setStaticID(id);
-    Controller::getInstance()->requestCapture(req);
 }
 
 void FlameshotDBusAdapter::openConfig()
