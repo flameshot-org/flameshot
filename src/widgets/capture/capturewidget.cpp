@@ -220,12 +220,7 @@ CaptureWidget::CaptureWidget(uint id,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
 
     if (m_config.showHelp()) {
-        OverlayMessage::push(
-          tr("Select an area with the mouse, or press Esc to exit."
-             "\nPress Enter to capture the screen."
-             "\nPress Right Click to show the color picker."
-             "\nUse the Mouse Wheel to change the thickness of your tool."
-             "\nPress Space to open the side panel."));
+        initHelpMessage();
     }
 
     updateCursor();
@@ -317,6 +312,26 @@ void CaptureWidget::initButtons()
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
+}
+
+void CaptureWidget::initHelpMessage()
+{
+    QList<QPair<QString, QString>> keyMap;
+    keyMap << QPair("Mouse", "Select screenshot area");
+    using CT = CaptureTool;
+    for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
+        auto* tool = ToolFactory().CreateTool(toolType);
+        QString shortcut =
+          ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
+        if (!shortcut.isEmpty()) {
+            keyMap << QPair(shortcut, tool->description());
+        }
+    }
+    keyMap << QPair("Mouse Wheel", "Change tool size");
+    keyMap << QPair("Right Click", "Show color picker");
+    keyMap << QPair("Space", "Open side panel");
+    keyMap << QPair("Esc", "Exit");
+    OverlayMessage::pushKeyMap(keyMap);
 }
 
 QPixmap CaptureWidget::pixmap()
