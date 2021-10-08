@@ -88,6 +88,7 @@ private slots:
 
 public:
     void removeToolObject(int index = -1);
+    QPoint widgetToCapturePoint(QPoint point);
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
@@ -127,7 +128,6 @@ private:
     void makeChildMoving(QWidget* w);
     bool allowMoving();
     void updateViewTransform(bool updateScrollbars = true);
-    QPoint widgetToCapturePoint(QPoint point);
     QPoint scrollWidgetPoint(QPoint);
     QPoint scrollPosition() const;
     void updateButtonRegions();

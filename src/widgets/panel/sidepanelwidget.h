@@ -14,6 +14,8 @@ class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
 
+class CaptureWidget;
+
 constexpr int maxDrawThickness = 50;
 
 class SidePanelWidget : public QWidget
@@ -23,7 +25,8 @@ class SidePanelWidget : public QWidget
     friend class QColorPickingEventFilter;
 
 public:
-    explicit SidePanelWidget(QPixmap* p, QWidget* parent = nullptr);
+    explicit SidePanelWidget(QPixmap* p, CaptureWidget* parent = nullptr);
+    ~SidePanelWidget();
 
 signals:
     void colorChanged(const QColor& c);
@@ -54,6 +57,7 @@ private:
     QLabel* m_colorLabel;
     QLineEdit* m_colorHex;
     QPixmap* m_pixmap;
+    CaptureWidget* m_captureWidget;
     QColor m_color;
     QColor m_revertColor;
     QSlider* m_thicknessSlider;

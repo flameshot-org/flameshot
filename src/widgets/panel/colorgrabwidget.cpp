@@ -5,6 +5,7 @@
 #include "confighandler.h"
 #include "overlaymessage.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "capturewidget.h"
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
@@ -24,9 +25,10 @@
 // NOTE: WIDTH1(2) should be divisible by ZOOM1(2) for best precision.
 //       WIDTH1 should be odd so the cursor can be centered on a pixel.
 
-ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
+ColorGrabWidget::ColorGrabWidget(QPixmap* p, CaptureWidget *captureWidget, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
+  , m_captureWidget(captureWidget)
   , m_mousePressReceived(false)
   , m_extraZoomActive(false)
   , m_magnifierActive(false)
@@ -57,6 +59,12 @@ void ColorGrabWidget::startGrabbing()
       "Press ESC to cancel");
 }
 
+void ColorGrabWidget::abort()
+{
+    emit grabAborted();
+    finalize();
+}
+
 QColor ColorGrabWidget::color()
 {
     return m_color;
@@ -82,11 +90,15 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         return true;
     } else if (event->type() == QEvent::MouseMove) {
         // NOTE: This relies on the fact that CaptureWidget tracks mouse moves
-
         if (m_extraZoomActive && !geometry().contains(cursorPos())) {
             setExtraZoomActive(false);
             return true;
         }
+
+        auto* e = static_cast<QMouseEvent*>(event);
+        UpdateCapturePoint(e);
+
+
         if (!m_extraZoomActive && !m_magnifierActive) {
             // This fixes an issue when the mouse leaves the zoom area before
             // the widget even appears.
@@ -96,6 +108,9 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
             // Update only before the user clicks the mouse, after the mouse
             // press the widget remains static.
             updateWidget();
+        }
+        if (e->buttons() == Qt::MiddleButton) {
+            return false; // Do not consume middle click so that dragging keeps working
         }
 
         // Hide overlay message when cursor is over it
@@ -109,6 +124,10 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
     } else if (event->type() == QEvent::MouseButtonPress) {
         m_mousePressReceived = true;
         auto* e = static_cast<QMouseEvent*>(event);
+        UpdateCapturePoint(e);
+        if (e->buttons() == Qt::MiddleButton) {
+            return false; // Do not consume middle click so that dragging keeps working
+        }
         if (e->buttons() == Qt::RightButton) {
             setMagnifierActive(!m_magnifierActive);
         } else if (e->buttons() == Qt::LeftButton) {
@@ -124,12 +143,20 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
             return false;
         }
         auto* e = static_cast<QMouseEvent*>(event);
+        UpdateCapturePoint(e);
+        if (e->button() == Qt::MiddleButton) {
+            return false; // Do not consume middle click so that dragging keeps working
+        }
         if (e->button() == Qt::LeftButton && m_extraZoomActive) {
             emit colorGrabbed(getColorAtPoint(cursorPos()));
             finalize();
         }
         return true;
     } else if (event->type() == QEvent::MouseButtonDblClick) {
+        auto* e = static_cast<QMouseEvent*>(event);
+        if (e->buttons() == Qt::MiddleButton) {
+            return false; // Do not consume middle click so that dragging keeps working
+        }
         return true;
     }
     return false;
@@ -170,6 +197,7 @@ QColor ColorGrabWidget::getColorAtPoint(const QPoint& p) const
                          currentScreen->devicePixelRatio());
     }
 #endif
+    point = m_capturePoint;
     QPixmap pixel = m_pixmap->copy(QRect(point, point));
     return pixel.toImage().pixel(0, 0);
 }
@@ -204,8 +232,10 @@ void ColorGrabWidget::updateWidget()
     setGeometry(rect);
     // Store a pixmap containing the zoomed-in section around the cursor
     QRect sourceRect(0, 0, width / zoom, width / zoom);
-    sourceRect.moveCenter(rect.center());
-    m_previewImage = m_pixmap->copy(sourceRect).toImage();
+    sourceRect.moveCenter(m_capturePoint);
+    if (m_pixmap->rect().contains(m_capturePoint)) {
+        m_previewImage = m_pixmap->copy(sourceRect).toImage();
+    }
     // Repaint
     update();
 }
@@ -216,4 +246,10 @@ void ColorGrabWidget::finalize()
     qApp->restoreOverrideCursor();
     OverlayMessage::pop();
     close();
+}
+
+void ColorGrabWidget::UpdateCapturePoint(QMouseEvent *event)
+{
+    m_capturePoint = m_captureWidget->widgetToCapturePoint(
+                m_captureWidget->mapFromGlobal(event->globalPos()));
 }

@@ -5,14 +5,16 @@
 
 class SidePanelWidget;
 class OverlayMessage;
+class CaptureWidget;
 
 class ColorGrabWidget : public QWidget
 {
     Q_OBJECT
 public:
-    ColorGrabWidget(QPixmap* p, QWidget* parent = nullptr);
+    ColorGrabWidget(QPixmap* p, CaptureWidget *captureWidget, QWidget* parent = nullptr);
 
     void startGrabbing();
+    void abort();
 
     QColor color();
 
@@ -32,10 +34,13 @@ private:
     void setMagnifierActive(bool active);
     void updateWidget();
     void finalize();
+    void UpdateCapturePoint(QMouseEvent* event);
 
     QPixmap* m_pixmap;
+    CaptureWidget* m_captureWidget;
     QImage m_previewImage;
     QColor m_color;
+    QPoint m_capturePoint;
 
     bool m_mousePressReceived;
     bool m_extraZoomActive;

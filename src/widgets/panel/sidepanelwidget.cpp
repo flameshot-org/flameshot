@@ -7,6 +7,7 @@
 #include "src/utils/colorutils.h"
 #include "src/utils/pathinfo.h"
 #include "utilitypanel.h"
+#include "capturewidget.h"
 #include <QApplication>
 #include <QDebug> // TODO remove
 #include <QFormLayout>
@@ -21,9 +22,10 @@
 #include <QScreen>
 #endif
 
-SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
+SidePanelWidget::SidePanelWidget(QPixmap* p, CaptureWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
+  , m_captureWidget(parent)
 {
     m_layout = new QVBoxLayout(this);
     if (parent) {
@@ -89,6 +91,18 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::updateColorNoWheel);
 }
 
+SidePanelWidget::~SidePanelWidget()
+{
+    if (m_colorGrabber != nullptr) {
+        disconnect(m_colorGrabber,
+                &ColorGrabWidget::grabAborted,
+                this,
+                &SidePanelWidget::onColorGrabAborted);
+        m_colorGrabber->abort();
+        m_colorGrabber = nullptr;
+    }
+}
+
 void SidePanelWidget::updateColor(const QColor& c)
 {
     m_color = c;
@@ -112,7 +126,7 @@ void SidePanelWidget::updateThickness(const int& t)
 void SidePanelWidget::startColorGrab()
 {
     m_revertColor = m_color;
-    m_colorGrabber = new ColorGrabWidget(m_pixmap);
+    m_colorGrabber = new ColorGrabWidget(m_pixmap, m_captureWidget);
     connect(m_colorGrabber,
             &ColorGrabWidget::colorUpdated,
             this,
@@ -134,12 +148,14 @@ void SidePanelWidget::onColorGrabFinished()
 {
     finalizeGrab();
     m_color = m_colorGrabber->color();
+    m_colorGrabber = nullptr;
     emit colorChanged(m_color);
 }
 
 void SidePanelWidget::onColorGrabAborted()
 {
     finalizeGrab();
+    m_colorGrabber = nullptr;
     // Restore color that was selected before we started grabbing
     updateColor(m_revertColor);
 }
