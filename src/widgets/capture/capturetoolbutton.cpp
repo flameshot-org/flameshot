@@ -68,6 +68,7 @@ void CaptureToolButton::initButton()
     } else if (!shortcut.isEmpty()) {
         tooltip += QStringLiteral(" (%1)").arg(shortcut);
     }
+    tooltip.replace("Return", "Enter");
     setToolTip(tooltip);
 
     m_emergeAnimation = new QPropertyAnimation(this, "size", this);
