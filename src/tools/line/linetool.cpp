@@ -22,9 +22,9 @@ QString LineTool::name() const
     return tr("Line");
 }
 
-ToolType LineTool::type() const
+CaptureTool::Type LineTool::type() const
 {
-    return ToolType::LINE;
+    return CaptureTool::TYPE_DRAWER;
 }
 
 QString LineTool::description() const

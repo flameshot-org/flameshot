@@ -23,9 +23,9 @@ QString ExitTool::name() const
     return tr("Exit");
 }
 
-ToolType ExitTool::type() const
+CaptureTool::Type ExitTool::type() const
 {
-    return ToolType::EXIT;
+    return CaptureTool::TYPE_EXIT;
 }
 
 QString ExitTool::description() const

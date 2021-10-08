@@ -71,25 +71,14 @@ private slots:
     void childEnter();
     void childLeave();
 
-    void selectAll();
-
-    void resizeLeft();
-    void resizeRight();
-    void resizeUp();
-    void resizeDown();
-
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
-
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
-    void setDrawThickness(const int& t);
-    void updateActiveLayer(const int& layer);
+    void setDrawThickness(int t);
+    void updateActiveLayer(int layer);
+    void selectAll();
 
 public:
     void removeToolObject(int index = -1);
@@ -122,23 +111,26 @@ private:
     void initButtons();
     void updateSizeIndicator();
     void updateCursor();
+    void updateSelectionState();
+    void updateToolMousePreview(CaptureTool* tool);
+    void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
 
-    void repositionSelection(QRect r);
-    void adjustSelection(QMargins m);
-    void moveSelection(QPoint p);
     void updateThickness(int thicknessOffset);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
+    QRect paddedUpdateRect(const QRect& r) const;
     void drawConfigErrorMessage(QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData(bool updateLayersPanel = true,
-                       bool drawSelection = false);
+    void drawToolsData();
     void drawObjectSelection();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
+
+    CaptureTool* activeButtonTool() const;
+    CaptureTool::Type activeButtonToolType() const;
 
     ////////////////////////////////////////
     // Class members
@@ -158,7 +150,6 @@ private:
     // utility flags
     bool m_mouseIsClicked;
     bool m_newSelection;
-    bool m_grabbing;
     bool m_movingSelection;
     bool m_captureDone;
     bool m_previewEnabled;
@@ -184,7 +175,6 @@ private:
     HoverEventFilter* m_eventFilter;
     SelectionWidget* m_selection;
 
-    QPoint m_dragStartPoint;
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
 

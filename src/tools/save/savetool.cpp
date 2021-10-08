@@ -29,9 +29,9 @@ QString SaveTool::name() const
     return tr("Save");
 }
 
-ToolType SaveTool::type() const
+CaptureTool::Type SaveTool::type() const
 {
-    return ToolType::SAVE;
+    return CaptureTool::TYPE_SAVE;
 }
 
 QString SaveTool::description() const

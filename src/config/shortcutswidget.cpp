@@ -5,6 +5,7 @@
 #include "capturetool.h"
 #include "setshortcutwidget.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "toolfactory.h"
 #include <QHeaderView>
 #include <QIcon>
 #include <QKeyEvent>
@@ -159,16 +160,19 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
 
 void ShortcutsWidget::initShortcuts()
 {
-    auto buttons = CaptureToolButton::getIterableButtonTypes();
+    auto buttonTypes = CaptureToolButton::getIterableButtonTypes();
 
     // get shortcuts names from capture buttons
-    for (const CaptureToolButton::ButtonType& t : buttons) {
-        CaptureToolButton* b = new CaptureToolButton(t, nullptr);
+    for (const CaptureTool::Type& t : buttonTypes) {
+        CaptureTool* tool = ToolFactory().CreateTool(t);
         QString shortcutName = QVariant::fromValue(t).toString();
-        if (shortcutName != "TYPE_IMAGEUPLOADER") {
-            appendShortcut(shortcutName, b->tool()->description());
+        if (t != CaptureTool::TYPE_IMAGEUPLOADER) {
+            appendShortcut(shortcutName, tool->description());
+            if (shortcutName == "TYPE_COPY")
+                m_shortcuts << (QStringList() << "" << tool->description()
+                                              << "Left Double-click");
         }
-        delete b;
+        delete tool;
     }
 
     // additional tools that don't have their own buttons

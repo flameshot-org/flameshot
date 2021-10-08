@@ -21,6 +21,7 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect boundingRect() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
@@ -43,16 +44,16 @@ public:
 
 protected:
     void copyParams(const TextTool* from, TextTool* to);
-    ToolType type() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
-    void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
-    virtual int thickness() override { return m_size; };
+    void onColorChanged(const QColor& c) override;
+    void onThicknessChanged(int th) override;
+    virtual int thickness() const override { return m_size; };
 
 private slots:
     void updateText(const QString& s);

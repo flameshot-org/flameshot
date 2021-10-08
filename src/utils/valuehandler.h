@@ -183,8 +183,8 @@ public:
     QString expected() override;
 
     // UTILITY FUNCTIONS
-    static QList<CaptureToolButton::ButtonType> fromIntList(const QList<int>&);
-    static QList<int> toIntList(const QList<CaptureToolButton::ButtonType>& l);
+    static QList<CaptureTool::Type> fromIntList(const QList<int>&);
+    static QList<int> toIntList(const QList<CaptureTool::Type>& l);
     static bool normalizeButtons(QList<int>& buttons);
 };
 

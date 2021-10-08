@@ -23,9 +23,9 @@ QString RedoTool::name() const
     return tr("Redo");
 }
 
-ToolType RedoTool::type() const
+CaptureTool::Type RedoTool::type() const
 {
-    return ToolType::REDO;
+    return CaptureTool::TYPE_REDO;
 }
 
 QString RedoTool::description() const

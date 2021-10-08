@@ -14,6 +14,7 @@ public:
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
+    QRect mousePreviewRect(const CaptureContext& context) const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
     void process(QPainter& painter, const QPixmap& pixmap) override;
@@ -21,7 +22,7 @@ public:
                            const CaptureContext& context) override;
 
 protected:
-    ToolType type() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void drawStart(const CaptureContext& context) override;

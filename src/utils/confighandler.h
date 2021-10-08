@@ -93,9 +93,7 @@ public:
                          setIgnoreUpdateToVersion,
                          QString)
     CONFIG_GETTER_SETTER(undoLimit, setUndoLimit, int)
-    CONFIG_GETTER_SETTER(buttons,
-                         setButtons,
-                         QList<CaptureToolButton::ButtonType>)
+    CONFIG_GETTER_SETTER(buttons, setButtons, QList<CaptureTool::Type>)
 
     // SPECIAL CASES
     bool startupLaunch();

@@ -67,6 +67,30 @@ bool AbstractTwoPointTool::showMousePreview() const
     return true;
 }
 
+QRect AbstractTwoPointTool::mousePreviewRect(
+  const CaptureContext& context) const
+{
+    QRect rect(0, 0, context.thickness + 2, context.thickness + 2);
+    rect.moveCenter(context.mousePos);
+    return rect;
+}
+
+QRect AbstractTwoPointTool::boundingRect() const
+{
+    if (!isValid()) {
+        return {};
+    }
+    int offset =
+      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness * 0.7 + 0.5));
+    QRect rect =
+      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
+            std::min(m_points.first.y(), m_points.second.y()) - offset,
+            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
+            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
+
+    return rect.normalized();
+}
+
 void AbstractTwoPointTool::drawEnd(const QPoint& p)
 {
     Q_UNUSED(p)
@@ -82,12 +106,12 @@ void AbstractTwoPointTool::drawMoveWithAdjustment(const QPoint& p)
     m_points.second = m_points.first + adjustedVector(p - m_points.first);
 }
 
-void AbstractTwoPointTool::colorChanged(const QColor& c)
+void AbstractTwoPointTool::onColorChanged(const QColor& c)
 {
     m_color = c;
 }
 
-void AbstractTwoPointTool::thicknessChanged(int th)
+void AbstractTwoPointTool::onThicknessChanged(int th)
 {
     m_thickness = th;
 }
@@ -101,10 +125,10 @@ void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
 
 void AbstractTwoPointTool::drawStart(const CaptureContext& context)
 {
-    colorChanged(context.color);
+    onColorChanged(context.color);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
-    thicknessChanged(context.thickness);
+    onThicknessChanged(context.thickness);
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
@@ -159,16 +183,4 @@ void AbstractTwoPointTool::move(const QPoint& pos)
 const QPoint* AbstractTwoPointTool::pos()
 {
     return &m_points.first;
-}
-
-void AbstractTwoPointTool::drawObjectSelection(QPainter& painter)
-{
-    int offset =
-      m_thickness <= 1 ? 1 : static_cast<int>(round(m_thickness / 2 + 0.5));
-    QRect rect =
-      QRect(std::min(m_points.first.x(), m_points.second.x()) - offset,
-            std::min(m_points.first.y(), m_points.second.y()) - offset,
-            std::abs(m_points.first.x() - m_points.second.x()) + offset * 2,
-            std::abs(m_points.first.y() - m_points.second.y()) + offset * 2);
-    drawObjectSelectionRect(painter, rect);
 }
