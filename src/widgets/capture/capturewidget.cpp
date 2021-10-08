@@ -1292,16 +1292,24 @@ void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
         return;
     }
 
-    static QRect oldRect;
+    static QRect oldPreviewRect, oldToolObjectRect;
 
-    QRect r(tool->mousePreviewRect(m_context));
-    r += QMargins(r.width(), r.height(), r.width(), r.height());
+    QRect previewRect(tool->mousePreviewRect(m_context));
+    previewRect += QMargins(previewRect.width(),
+                            previewRect.height(),
+                            previewRect.width(),
+                            previewRect.height());
 
     QRect toolObjectRect = paddedUpdateRect(tool->boundingRect());
 
-    // oldRect is united with the current rect to handle sudden mouse movement
-    update(r.united(oldRect).united(toolObjectRect));
-    oldRect = r;
+    // old rects are united with current rects to handle sudden mouse movement
+    update(previewRect);
+    update(toolObjectRect);
+    update(oldPreviewRect);
+    update(oldToolObjectRect);
+
+    oldPreviewRect = previewRect;
+    oldToolObjectRect = toolObjectRect;
 }
 
 void CaptureWidget::updateLayersPanel()
