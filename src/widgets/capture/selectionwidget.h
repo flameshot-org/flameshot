@@ -6,6 +6,7 @@
 #include <QWidget>
 
 class QPropertyAnimation;
+class CaptureWidget;
 
 class SelectionWidget : public QWidget
 {
@@ -25,7 +26,7 @@ public:
         CENTER = 0b10000,
     };
 
-    explicit SelectionWidget(const QColor& c, QWidget* parent = nullptr);
+    explicit SelectionWidget(const QColor& c, QWidget* parent, CaptureWidget *captureWidget);
 
     SideType getMouseSide(const QPoint& mousePos) const;
     QVector<QRect> handlerAreas();
@@ -77,6 +78,7 @@ private:
     void updateAreas();
     void updateCursor();
     void setGeometryByKeyboard(const QRect& r);
+    QPoint scrollToCapturePoint(QPoint);
 
     QPropertyAnimation* m_animation;
 
@@ -102,4 +104,5 @@ private:
 
     QRect m_TLArea, m_TRArea, m_BLArea, m_BRArea;
     QRect m_LArea, m_TArea, m_RArea, m_BArea;
+    CaptureWidget *captureWidget;
 };

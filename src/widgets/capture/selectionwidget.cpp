@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "selectionwidget.h"
+#include "capturewidget.h"
 #include "capturetool.h"
 #include "capturetoolbutton.h"
 #include "src/utils/globalvalues.h"
@@ -14,11 +15,12 @@
 
 #define MARGIN (m_THandle.width())
 
-SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
+SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent, CaptureWidget *captureWidget)
   : QWidget(parent)
   , m_color(c)
   , m_activeSide(NO_SIDE)
   , m_ignoreMouse(false)
+  , captureWidget(captureWidget)
 {
     // prevents this widget from consuming CaptureToolButton mouse events
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -179,7 +181,7 @@ void SelectionWidget::parentMousePressEvent(QMouseEvent* e)
 void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
 {
     // released outside of the selection area
-    if (!getMouseSide(e->pos())) {
+    if (!getMouseSide(e->pos()) && e->button() == Qt::MouseButton::LeftButton) {
         hide();
     }
 
@@ -187,6 +189,9 @@ void SelectionWidget::parentMouseReleaseEvent(QMouseEvent* e)
     updateCursor();
     emit geometrySettled();
 }
+
+#include <QDebug>
+
 
 void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
 {
@@ -201,15 +206,18 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
         mouseSide = getMouseSide(e->pos());
     }
 
+    auto capturePos = scrollToCapturePoint(e->pos());
+
     if (!isVisible() || !mouseSide) {
         show();
         m_dragStartPos = e->pos();
         m_activeSide = TOPLEFT_SIDE;
-        setGeometry({ e->pos(), e->pos() });
+
+        setCaptureGeometry({capturePos, capturePos});
     }
 
     QPoint pos = e->pos();
-    auto geom = geometry();
+    auto geom = captureGeomtry();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
     QPoint newTopLeft = geom.topLeft(), newBottomRight = geom.bottomRight();
@@ -218,43 +226,47 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     switch (mouseSide) {
         case TOPLEFT_SIDE:
             if (m_activeSide)
-                newTopLeft = pos;
+                newTopLeft = capturePos;
             break;
         case BOTTOMRIGHT_SIDE:
             if (m_activeSide)
-                newBottomRight = pos;
+                newBottomRight = capturePos;
             break;
         case TOPRIGHT_SIDE:
             if (m_activeSide) {
-                newTop = pos.y();
-                newRight = pos.x();
+                newTop = capturePos.y();
+                newRight = capturePos.x();
             }
             break;
         case BOTTOMLEFT_SIDE:
             if (m_activeSide) {
-                newBottom = pos.y();
-                newLeft = pos.x();
+                newBottom = capturePos.y();
+                newLeft = capturePos.x();
             }
             break;
         case LEFT_SIDE:
             if (m_activeSide)
-                newLeft = pos.x();
+                newLeft = capturePos.x();
             break;
         case RIGHT_SIDE:
             if (m_activeSide)
-                newRight = pos.x();
+                newRight = capturePos.x();
             break;
         case TOP_SIDE:
             if (m_activeSide)
-                newTop = pos.y();
+                newTop = capturePos.y();
             break;
         case BOTTOM_SIDE:
             if (m_activeSide)
-                newBottom = pos.y();
+                newBottom = capturePos.y();
             break;
         default:
             if (m_activeSide) {
-                move(this->pos() + pos - m_dragStartPos);
+                auto dragAmount = pos - m_dragStartPos;
+                auto captureMoveAmount = captureWidget->widgetToCapturePoint(dragAmount)
+                         - captureWidget->widgetToCapturePoint(QPoint(0, 0));
+                m_captureGeometry.translate(captureMoveAmount);
+                move(this->pos() + dragAmount);
                 m_dragStartPos = pos;
             }
             return;
@@ -269,7 +281,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
               geom.bottomRight() + deltaBottomRight - deltaTopLeft;
         }
         geom = { newTopLeft, newBottomRight };
-        setGeometry(geom.normalized());
+        setCaptureGeometry(geom.normalized());
         m_activeSide = getProperSide(m_activeSide, geom);
     }
     m_dragStartPos = pos;
@@ -284,7 +296,6 @@ void SelectionWidget::setCaptureGeometry(QRect rect)
 {
     m_captureGeometry = rect;
     setGeometry(captureToWidgetRect(rect));
-    emit resized();
 }
 
 void SelectionWidget::SetScale(float v)
@@ -328,42 +339,42 @@ void SelectionWidget::updateColor(const QColor& c)
 
 void SelectionWidget::moveLeft()
 {
-    setGeometryByKeyboard(geometry().adjusted(-1, 0, -1, 0));
+    setGeometryByKeyboard(captureGeomtry().adjusted(-1, 0, -1, 0));
 }
 
 void SelectionWidget::moveRight()
 {
-    setGeometryByKeyboard(geometry().adjusted(1, 0, 1, 0));
+    setGeometryByKeyboard(captureGeomtry().adjusted(1, 0, 1, 0));
 }
 
 void SelectionWidget::moveUp()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, -1, 0, -1));
+    setGeometryByKeyboard(captureGeomtry().adjusted(0, -1, 0, -1));
 }
 
 void SelectionWidget::moveDown()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 1, 0, 1));
+    setGeometryByKeyboard(captureGeomtry().adjusted(0, 1, 0, 1));
 }
 
 void SelectionWidget::resizeLeft()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, -1, 0));
+    setGeometryByKeyboard(captureGeomtry().adjusted(0, 0, -1, 0));
 }
 
 void SelectionWidget::resizeRight()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, 1, 0));
+    setGeometryByKeyboard(captureGeomtry().adjusted(0, 0, 1, 0));
 }
 
 void SelectionWidget::resizeUp()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, 0, -1));
+    setGeometryByKeyboard(captureGeomtry().adjusted(0, 0, 0, -1));
 }
 
 void SelectionWidget::resizeDown()
 {
-    setGeometryByKeyboard(geometry().adjusted(0, 0, 0, 1));
+    setGeometryByKeyboard(captureGeomtry().adjusted(0, 0, 0, 1));
 }
 
 void SelectionWidget::updateAreas()
@@ -435,12 +446,12 @@ void SelectionWidget::updateCursor()
 void SelectionWidget::setGeometryByKeyboard(const QRect& r)
 {
     static QTimer timer;
-    QRect rect = r.intersected(parentWidget()->rect());
+    QRect rect = r.intersected(captureWidget->imageSize());
     if (rect.width() <= 0)
         rect.setWidth(1);
     if (rect.height() <= 0)
         rect.setHeight(1);
-    setGeometry(rect);
+    setCaptureGeometry(rect);
     connect(
       &timer,
       &QTimer::timeout,
@@ -448,4 +459,9 @@ void SelectionWidget::setGeometryByKeyboard(const QRect& r)
       [this]() { emit geometrySettled(); },
       Qt::UniqueConnection);
     timer.start(400);
+}
+
+QPoint SelectionWidget::scrollToCapturePoint(QPoint pos)
+{
+    return captureWidget->widgetToCapturePoint(captureWidget->scrollWidgetPointToThis(pos));
 }

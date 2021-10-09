@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 // Based on Lightscreen areadialog.cpp, Copyright 2017  Christian Kaiser
@@ -120,8 +120,6 @@ CaptureWidget::CaptureWidget(uint id,
     initContext(savePath,
                 windowMode == CaptureWindowMode::FullScreenAll ||
                   windowMode == CaptureWindowMode::FullScreenCurrent);
-    initSelection();
-    initShortcuts();
 
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -181,6 +179,9 @@ CaptureWidget::CaptureWidget(uint id,
         setContentsMargins(0, 0, 0, 0);
         setFrameShape(QFrame::NoFrame);
     }
+
+    initSelection(); // must be called after PaintBackground widget is created
+    initShortcuts(); // must be called after initSelection
 
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);
@@ -634,6 +635,12 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = widgetToCapturePoint(e->pos());
     auto scrollWidgetPos = scrollWidgetPoint(e->pos()); // position relative to ScrollArea::widget
+
+    if (m_middleClickDrag) {
+        m_viewOffset = (m_initialOffset + -(e->pos() - m_viewDragStartPoint));
+        updateViewTransform();
+        repaint();
+    }
     if (e->buttons() != Qt::LeftButton) {
         updateTool(activeButtonTool());
         updateCursor();
@@ -1014,13 +1021,13 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
 
 void CaptureWidget::initSelection()
 {
-    m_selection = new SelectionWidget(m_uiColor, widget());
+    m_selection = new SelectionWidget(m_uiColor, widget(), this);
     m_selection->setVisible(false);
     m_selection->setCaptureGeometry(QRect());
     connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {
         m_buttonHandler->updatePosition(m_selection->geometry());
         QRect constrainedToCaptureArea =
-          m_selection->captureGeometry().intersected(m_context.screenshot.rect());
+          m_selection->captureGeomtry().intersected(m_context.screenshot.rect());
         //TODO: handle all
         m_context.selection = constrainedToCaptureArea;
         updateSizeIndicator();
@@ -1554,6 +1561,16 @@ QPoint CaptureWidget::widgetToCapturePoint(QPoint point)
 QPoint CaptureWidget::scrollWidgetPoint(QPoint p)
 {
     return p - (viewport()->pos() + widget()->pos());
+}
+
+QPoint CaptureWidget::scrollWidgetPointToThis(QPoint p)
+{
+    return p + (viewport()->pos() + widget()->pos());
+}
+
+QRect CaptureWidget::imageSize() const
+{
+    return m_context.screenshot.rect();
 }
 
 void CaptureWidget::updateButtonRegions()
