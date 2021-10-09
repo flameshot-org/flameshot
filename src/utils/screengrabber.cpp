@@ -166,6 +166,19 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 }
 
+QPixmap ScreenGrabber::grabScreen(bool& ok)
+{
+    auto current = QGuiAppCurrentScreen().currentScreen();
+    int number = 0;
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        if (screen == current) {
+            return grabScreen(number, ok);
+        }
+        number++;
+    }
+    return grabScreen(-1, ok);
+}
+
 QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
 {
     QPixmap p;

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
+﻿// SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 // Based on Lightscreen areadialog.cpp, Copyright 2017  Christian Kaiser
@@ -127,7 +127,11 @@ CaptureWidget::CaptureWidget(uint id,
     if (windowMode != CaptureWindowMode::DebugNonFullScreen) {
         // Grab Screenshot
         bool ok = true;
-        m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        if (m_captureCurrentScreen) {
+            m_context.screenshot = ScreenGrabber().grabScreen(ok);
+        } else {
+            m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
+        }
         if (!ok) {
             SystemNotification().sendMessage(tr("Unable to capture screen"));
             this->close();
@@ -702,10 +706,6 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
                 m_buttonHandler->show();
             }
         }
-    } else if (m_middleClickDrag) {
-        m_viewOffset = (m_initialOffset + -(e->pos() - m_viewDragStartPoint));
-        updateViewTransform();
-        repaint();
     }
     updateCursor();
 }
