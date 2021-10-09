@@ -254,12 +254,14 @@ void CaptureWidget::initButtons()
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
-        allButtonTypes.removeOne(CaptureTool::TYPE_SAVE);
-        allButtonTypes.removeOne(CaptureTool::TYPE_COPY);
-        allButtonTypes.removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
-        visibleButtonTypes.removeOne(CaptureTool::TYPE_SAVE);
-        visibleButtonTypes.removeOne(CaptureTool::TYPE_COPY);
-        visibleButtonTypes.removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+        // Remove irrelevant buttons from both lists
+        for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
+            buttonList->removeOne(CaptureTool::TYPE_SAVE);
+            buttonList->removeOne(CaptureTool::TYPE_COPY);
+            buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+            buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
+            buttonList->removeOne(CaptureTool::TYPE_PIN);
+        }
     }
     QVector<CaptureToolButton*> vectorButtons;
 
