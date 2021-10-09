@@ -37,11 +37,7 @@ QString InvertTool::description() const
 
 QRect InvertTool::boundingRect() const
 {
-    return QRect(std::min(points().first.x(), points().second.x()),
-                 std::min(points().first.y(), points().second.y()),
-                 std::abs(points().first.x() - points().second.x()),
-                 std::abs(points().first.y() - points().second.y()))
-      .normalized();
+    return QRect(points().first, points().second).normalized();
 }
 
 CaptureTool* InvertTool::copy(QObject* parent)
@@ -53,26 +49,20 @@ CaptureTool* InvertTool::copy(QObject* parent)
 
 void InvertTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    QPoint p0 = points().first;
-    QPoint p1 = points().second;
-    QRect selection = QRect(p0, p1).normalized();
+    QRect selection = boundingRect();
 
     // Invert selection
     QPixmap inv = pixmap.copy(selection);
     QImage img = inv.toImage();
     img.invertPixels();
 
-    painter.drawImage(selection, img);
+    painter.drawImage(selection.intersected(pixmap.rect()), img);
 }
 
 void InvertTool::drawSearchArea(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.fillRect(std::min(points().first.x(), points().second.x()),
-                     std::min(points().first.y(), points().second.y()),
-                     std::abs(points().first.x() - points().second.x()),
-                     std::abs(points().first.y() - points().second.y()),
-                     QBrush(Qt::black));
+    painter.fillRect(boundingRect(), QBrush(Qt::black));
 }
 
 void InvertTool::paintMousePreview(QPainter& painter,
