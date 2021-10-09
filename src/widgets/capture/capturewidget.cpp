@@ -176,6 +176,11 @@ CaptureWidget::CaptureWidget(uint id,
     setWidget(new PaintBackground(this));
     widget()->resize(m_context.screenshot.size());
     widget()->setMouseTracking(true);
+    if (windowMode == CaptureWindowMode::FullScreenAll ||
+        windowMode == CaptureWindowMode::FullScreenCurrent) {
+        setContentsMargins(0, 0, 0, 0);
+        setFrameShape(QFrame::NoFrame);
+    }
 
     // Create buttons
     m_buttonHandler = new ButtonHandler(this);

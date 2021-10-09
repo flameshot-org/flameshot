@@ -112,6 +112,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
     OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
+    OPTION("windowMode"                  ,String             ( ""            )),
   };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {

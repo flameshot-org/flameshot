@@ -52,7 +52,7 @@ private:
 
     QVBoxLayout* m_layout;
     QPushButton* m_colorGrabButton;
-    ColorGrabWidget* m_colorGrabber;
+    ColorGrabWidget* m_colorGrabber = nullptr;
     color_widgets::ColorWheel* m_colorWheel;
     QLabel* m_colorLabel;
     QLineEdit* m_colorHex;
