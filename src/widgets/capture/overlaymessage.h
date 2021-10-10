@@ -23,6 +23,7 @@ public:
     OverlayMessage() = delete;
 
     static void init(QWidget* parent, const QRect& targetArea);
+    static void UpdateTargetArea(const QRect& targetArea);
     static void push(const QString& msg);
     static void pop();
     static void setVisibility(bool visible);

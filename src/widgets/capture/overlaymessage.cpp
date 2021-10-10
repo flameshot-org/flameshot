@@ -27,6 +27,12 @@ void OverlayMessage::init(QWidget* parent, const QRect& targetArea)
     new OverlayMessage(parent, targetArea);
 }
 
+void OverlayMessage::UpdateTargetArea(const QRect &targetArea)
+{
+    m_instance->m_targetArea = targetArea;
+    m_instance->updateGeometry();
+}
+
 void OverlayMessage::push(const QString& msg)
 {
     m_instance->m_messageStack.push(msg);

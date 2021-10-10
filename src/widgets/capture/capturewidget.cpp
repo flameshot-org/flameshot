@@ -840,6 +840,7 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
     QWidget::resizeEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     updateButtonRegions();
+    OverlayMessage::UpdateTargetArea(viewport()->rect());
 }
 
 void CaptureWidget::moveEvent(QMoveEvent* e)
