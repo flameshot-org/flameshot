@@ -45,6 +45,7 @@ bool DraggableWidgetMaker::eventFilter(QObject* obj, QEvent* event)
                     QPoint totalMovedDiff = eventPos - m_mousePressPos;
                     if (totalMovedDiff.manhattanLength() > 3) {
                         m_isDragging = true;
+                        m_hasMoved = true;
                     }
                 }
 

@@ -41,6 +41,9 @@ public slots:
     void slotButtonDelete(bool clicked);
     void onCurrentRowChanged(int currentRow);
 
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
 private:
     void initInternalPanel();
 

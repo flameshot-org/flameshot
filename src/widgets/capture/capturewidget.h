@@ -37,6 +37,7 @@ class HoverEventFilter;
 class UpdateNotificationWidget;
 class UtilityPanel;
 class SidePanelWidget;
+class DraggableWidgetMaker;
 
 class CaptureWidget : public QScrollArea
 {
@@ -133,6 +134,7 @@ private:
     void updateViewTransform(bool updateScrollbars = true);
     QPoint scrollPosition() const;
     void updateButtonRegions();
+    void updateUtilityPanelSize();
 
     void updateThickness(int thicknessOffset);
 
@@ -187,6 +189,8 @@ private:
 
     ButtonHandler* m_buttonHandler;
     UtilityPanel* m_panel;
+    QPushButton* m_panelButton = nullptr;
+    DraggableWidgetMaker* m_panelButtonMover = nullptr;
     SidePanelWidget* m_sidePanel;
     ColorPicker* m_colorPicker;
     ConfigHandler m_config;

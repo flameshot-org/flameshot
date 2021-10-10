@@ -542,7 +542,8 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
         auto toolItem = activeToolObject();
         if (!toolItem ||
             (toolItem && !toolItem->boundingRect().contains(capturePoint))) {
-            activeLayerIndex = m_captureToolObjects.find(capturePoint, m_context.screenshot.size());
+            activeLayerIndex = m_captureToolObjects.find(
+              capturePoint, m_context.screenshot.size());
             int thickness_old = m_context.thickness;
             m_panel->setActiveLayer(activeLayerIndex);
             drawObjectSelection();
@@ -638,7 +639,8 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = widgetToCapturePoint(e->pos());
-    auto scrollWidgetPos = scrollWidgetPoint(e->pos()); // position relative to ScrollArea::widget
+    auto scrollWidgetPos =
+      scrollWidgetPoint(e->pos()); // position relative to ScrollArea::widget
 
     if (m_middleClickDrag) {
         m_viewOffset = (m_initialOffset + -(e->pos() - m_viewDragStartPoint));
@@ -698,8 +700,8 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
-            const bool containsMouse =
-              m_buttonHandler->contains(m_context.mousePos); // TODO: probably wrong position
+            const bool containsMouse = m_buttonHandler->contains(
+              m_context.mousePos); // TODO: probably wrong position
             if (containsMouse) {
                 m_buttonHandler->hide();
             } else if (m_selection->isVisible()) {
@@ -898,41 +900,34 @@ void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 void CaptureWidget::initPanel()
 {
     QRect panelRect = rect();
-    if (m_context.fullscreen) {
-#if (defined(Q_OS_MACOS) || defined(Q_OS_LINUX))
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        panelRect = currentScreen->geometry();
-        auto devicePixelRatio = currentScreen->devicePixelRatio();
-        panelRect.moveTo(static_cast<int>(panelRect.x() / devicePixelRatio),
-                         static_cast<int>(panelRect.y() / devicePixelRatio));
-#else
+    if (windowMode == FullScreenAll) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
+        // this is probably wrong in case of mixed dpi multiscreen setups
         auto devicePixelRatio =
           QGuiApplication::primaryScreen()->devicePixelRatio();
         panelRect.moveTo(panelRect.x() / devicePixelRatio,
                          panelRect.y() / devicePixelRatio);
-#endif
+    } else {
+        // Doesn't matter too much at this point, actual size will be known once
+        // the window has been created and shown.
+        panelRect = rect();
+
     }
 
     if (ConfigHandler().showSidePanelButton()) {
         auto* panelToggleButton =
           new OrientablePushButton(tr("Tool Settings"), this);
+        m_panelButton = panelToggleButton;
         makeChild(panelToggleButton);
         panelToggleButton->setColor(m_uiColor);
         panelToggleButton->setOrientation(
           OrientablePushButton::VerticalBottomToTop);
-#if defined(Q_OS_MACOS)
-        panelToggleButton->move(
-          0,
-          static_cast<int>(panelRect.height() / 2) -
-            static_cast<int>(panelToggleButton->width() / 2));
-#else
         panelToggleButton->move(panelRect.x(),
                                 panelRect.y() + panelRect.height() / 2 -
                                   panelToggleButton->width() / 2);
-#endif
         panelToggleButton->setCursor(Qt::ArrowCursor);
-        (new DraggableWidgetMaker(this))->makeDraggable(panelToggleButton);
+        m_panelButtonMover = new DraggableWidgetMaker(this);
+        m_panelButtonMover->makeDraggable(panelToggleButton);
         connect(panelToggleButton,
                 &QPushButton::clicked,
                 this,
@@ -942,16 +937,14 @@ void CaptureWidget::initPanel()
     m_panel = new UtilityPanel(this);
     m_panel->hide();
     makeChild(m_panel);
-#if defined(Q_OS_MACOS)
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
-    m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
-    m_panel->setFixedHeight(currentScreen->geometry().height());
-#else
-    panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
-    panelRect.setWidth(m_colorPicker->width() * 1.5);
-    m_panel->setGeometry(panelRect);
-#endif
+    if (windowMode != FullScreenAll) {
+        m_panel->setFixedWidth(static_cast<int>(m_colorPicker->width() * 1.5));
+    } else {
+        panelRect.moveTo(mapFromGlobal(panelRect.topLeft()));
+        panelRect.setWidth(m_colorPicker->width() * 1.5);
+        m_panel->setGeometry(panelRect);
+    }
+
     connect(m_panel,
             &UtilityPanel::layerChanged,
             this,
@@ -1027,8 +1020,9 @@ void CaptureWidget::initSelection()
     connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {
         m_buttonHandler->updatePosition(m_selection->geometry());
         QRect constrainedToCaptureArea =
-          m_selection->captureGeomtry().intersected(m_context.screenshot.rect());
-        //TODO: handle all
+          m_selection->captureGeomtry().intersected(
+            m_context.screenshot.rect());
+        // TODO: handle all
         m_context.selection = constrainedToCaptureArea;
         updateSizeIndicator();
         m_buttonHandler->hide();
@@ -1364,8 +1358,8 @@ void CaptureWidget::updateCursor()
     } else if (m_activeButton != nullptr &&
                activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
         widget()->setCursor(Qt::CrossCursor);
-    } else if (m_selection->getMouseSide(scrollWidgetPoint(mapFromGlobal(QCursor::pos()))) !=
-               SelectionWidget::NO_SIDE) {
+    } else if (m_selection->getMouseSide(scrollWidgetPoint(
+                 mapFromGlobal(QCursor::pos()))) != SelectionWidget::NO_SIDE) {
         widget()->setCursor(m_selection->cursor());
     } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
         widget()->setCursor(Qt::OpenHandCursor);
@@ -1530,8 +1524,9 @@ void CaptureWidget::makeChildMoving(QWidget* w)
 
 bool CaptureWidget::allowMoving()
 {
-    return horizontalScrollBar()->isVisible() || verticalScrollBar()->isVisible();
-    //return windowMode == CaptureWindowMode::MaximizeWindow;
+    return horizontalScrollBar()->isVisible() ||
+           verticalScrollBar()->isVisible();
+    // return windowMode == CaptureWindowMode::MaximizeWindow;
 }
 
 void CaptureWidget::updateViewTransform(bool updateScrollbars)
@@ -1576,9 +1571,21 @@ QRect CaptureWidget::imageSize() const
 void CaptureWidget::updateButtonRegions()
 {
     if (allowMoving()) {
-        m_panel->setFixedHeight(height());
         QRect visibleRegion = viewport()->rect().translated(-widget()->pos());
         m_buttonHandler->updateScreenRegions(visibleRegion);
+    }
+    updateUtilityPanelSize();
+}
+
+void CaptureWidget::updateUtilityPanelSize()
+{
+    if (windowMode != CaptureWindowMode::FullScreenAll) {
+        m_panel->setFixedHeight(viewport()->height());
+    }
+    if (m_panelButton != nullptr && !m_panelButtonMover->hasMoved()) {
+        m_panelButton->move(m_panel->x(),
+                            m_panel->y() + m_panel->height() / 2 -
+                              m_panelButton->height() / 2);
     }
 }
 
@@ -1743,7 +1750,6 @@ void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)
 {
-    QTransform captureToView = m_viewTransform.inverted();
     QColor overlayColor(0, 0, 0, m_opacity);
     painter->setBrush(overlayColor);
     QRect r;

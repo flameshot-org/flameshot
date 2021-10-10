@@ -15,6 +15,7 @@ public:
     DraggableWidgetMaker(QObject* parent = nullptr);
 
     void makeDraggable(QWidget* widget);
+    bool hasMoved() const { return m_hasMoved; }
 
 protected:
     bool eventFilter(QObject* obj, QEvent* event) override;
@@ -22,6 +23,7 @@ protected:
 private:
     bool m_isPressing = false;
     bool m_isDragging = false;
+    bool m_hasMoved = false;
     QPoint m_mouseMovePos;
     QPoint m_mousePressPos;
 };

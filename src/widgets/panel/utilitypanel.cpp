@@ -12,7 +12,6 @@
 
 UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   : QWidget(captureWidget)
-  , m_captureWidget(captureWidget)
   , m_internalPanel(nullptr)
   , m_upLayout(nullptr)
   , m_bottomLayout(nullptr)
@@ -22,6 +21,7 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   , m_layersLayout(nullptr)
   , m_captureTools(nullptr)
   , m_buttonDelete(nullptr)
+  , m_captureWidget(captureWidget)
 {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -198,6 +198,12 @@ void UtilityPanel::onCurrentRowChanged(int currentRow)
         m_buttonDelete->setDisabled(true);
     }
     emit layerChanged(activeLayerIndex());
+}
+
+void UtilityPanel::resizeEvent(QResizeEvent *event)
+{
+    m_internalPanel->setFixedSize(size());
+    QWidget::resizeEvent(event);
 }
 
 void UtilityPanel::slotButtonDelete(bool clicked)
