@@ -125,6 +125,14 @@ void ColorPicker::mouseMoveEvent(QMouseEvent* e)
     }
 }
 
+void ColorPicker::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::MouseButton::LeftButton) {
+        hide();
+        emit colorSelected(m_colorList.at(m_selectedIndex));
+    }
+}
+
 void ColorPicker::showEvent(QShowEvent* event)
 {
     grabMouse();
@@ -133,5 +141,4 @@ void ColorPicker::showEvent(QShowEvent* event)
 void ColorPicker::hideEvent(QHideEvent* event)
 {
     releaseMouse();
-    emit colorSelected(m_colorList.at(m_selectedIndex));
 }

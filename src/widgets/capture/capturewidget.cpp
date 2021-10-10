@@ -469,11 +469,6 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
         selectToolItemAtPos(pos);
     }
 
-    // save current state for undo/redo stack
-    if (m_panel->activeLayerIndex() >= 0) {
-        m_captureToolObjectsBackup = m_captureToolObjects;
-    }
-
     // Call color picker
     m_colorPicker->move(pos.x() - m_colorPicker->width() / 2,
                         pos.y() - m_colorPicker->height() / 2);
@@ -714,18 +709,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 
 void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 {
-    if (e->button() == Qt::LeftButton && m_colorPicker->isVisible()) {
-        // Color picker
-        if (m_colorPicker->isVisible() && m_panel->activeLayerIndex() >= 0 &&
-            m_context.color.isValid()) {
-            pushObjectsStateToUndoStack();
-        }
-        m_colorPicker->hide();
-        if (!m_context.color.isValid()) {
-            m_context.color = ConfigHandler().drawColor();
-            m_panel->show();
-        }
-    } else if (m_mouseIsClicked) {
+    if (m_mouseIsClicked) {
         if (m_activeTool) {
             // end draw/edit
             m_activeTool->drawEnd(m_context.mousePos);
@@ -1164,8 +1148,12 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
 
 void CaptureWidget::setDrawColor(const QColor& c)
 {
-    m_context.color = c;
-    if (m_context.color.isValid()) {
+    if (c.isValid()) {
+        if (m_panel->activeLayerIndex() >= 0) {
+            m_captureToolObjectsBackup = m_captureToolObjects;
+        }
+
+        m_context.color = c;
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
 
@@ -1175,7 +1163,11 @@ void CaptureWidget::setDrawColor(const QColor& c)
             // Change color
             toolItem->onColorChanged(c);
             drawToolsData();
+            pushObjectsStateToUndoStack();
         }
+    } else {
+        m_context.color = ConfigHandler().drawColor();
+        m_panel->show();
     }
 }
 

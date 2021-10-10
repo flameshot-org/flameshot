@@ -18,6 +18,7 @@ protected:
     void paintEvent(QPaintEvent* event) override;
     void repaint(int i, QPainter& painter);
     void mouseMoveEvent(QMouseEvent*);
+    void mouseReleaseEvent(QMouseEvent *);
     void showEvent(QShowEvent* event) override;
     void hideEvent(QHideEvent* event) override;
 
