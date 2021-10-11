@@ -240,7 +240,7 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
-        emit captureTaken(m_context.requestId, pixmap(), m_context.selection);
+        emit captureTaken(m_context.requestId, pixmap());
     } else {
         emit captureFailed(m_context.requestId);
     }

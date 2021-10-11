@@ -45,7 +45,7 @@ public:
     QMap<uint, CaptureRequest>& requests();
 
 signals:
-    void captureTaken(uint id, QPixmap p, QRect selection);
+    void captureTaken(uint id, QPixmap p);
     void captureFailed(uint id);
     void captureSaved(uint id, QString savePath);
 
@@ -75,7 +75,7 @@ private slots:
                             const QString& forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
 
-    void handleCaptureTaken(uint id, QPixmap p, QRect selection);
+    void handleCaptureTaken(uint id, QPixmap p);
     void handleCaptureFailed(uint id);
 
     void handleReplyCheckUpdates(QNetworkReply* reply);

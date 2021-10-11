@@ -28,5 +28,5 @@ public slots:
     Q_NOREPLY void autostartEnabled(bool enabled);
 
 private slots:
-    void handleCaptureTaken(uint id, const QPixmap& p, QRect selection);
+    void handleCaptureTaken(uint id, const QPixmap& p);
 };

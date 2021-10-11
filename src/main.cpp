@@ -152,6 +152,8 @@ int main(int argc, char* argv[])
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
+    CommandOption pinOption("pin",
+                            QObject::tr("Pin the capture to the screen"));
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
@@ -256,13 +258,15 @@ int main(int argc, char* argv[])
                         clipboardOption,
                         delayOption,
                         rawImageOption,
-                        selectionOption },
+                        selectionOption,
+                        pinOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
                         pathOption,
                         delayOption,
-                        rawImageOption },
+                        rawImageOption,
+                        pinOption },
                       screenArgument);
     parser.AddOptions(
       { pathOption, clipboardOption, delayOption, rawImageOption },
@@ -304,6 +308,7 @@ int main(int argc, char* argv[])
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
         bool isSelection = parser.isSet(selectionOption);
+        bool isPin = parser.isSet(pinOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
         if (toClipboard) {
@@ -317,6 +322,9 @@ int main(int argc, char* argv[])
         }
         if (isSelection) {
             req.addTask(CaptureRequest::PRINT_GEOMETRY_TASK);
+        }
+        if (isPin) {
+            req.addTask(CaptureRequest::PIN_TASK);
         }
         uint id = req.id();
 
@@ -349,13 +357,14 @@ int main(int argc, char* argv[])
         // Not a valid command
         if (!isRaw && !toClipboard && pathValue.isEmpty()) {
             QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", "))
-                << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << "\n\n";
+            out
+              << "Invalid format, set how to export the screenshot with one of "
+              << "the following flags:\n "
+              << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
+              << rawImageOption.dashedNames().join(QStringLiteral(", "))
+              << "\n "
+              << clipboardOption.dashedNames().join(QStringLiteral(", "))
+              << "\n\n";
             parser.parse(QStringList() << argv[0] << QStringLiteral("full")
                                        << QStringLiteral("-h"));
             goto finish;
@@ -407,8 +416,9 @@ int main(int argc, char* argv[])
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
+        bool isPin = parser.isSet(pinOption);
         // Not a valid command
-        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
+        if (!isRaw && !toClipboard && !isPin && pathValue.isEmpty()) {
             QTextStream out(stdout);
             out << "Invalid format, set where to save the content with one of "
                 << "the following flags:\n "
@@ -416,7 +426,7 @@ int main(int argc, char* argv[])
                 << rawImageOption.dashedNames().join(QStringLiteral(", "))
                 << "\n "
                 << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << "\n\n";
+                << pinOption.dashedNames().join(QStringLiteral(", ")) << "\n\n";
             parser.parse(QStringList() << argv[0] << QStringLiteral("screen")
                                        << QStringLiteral("-h"));
             goto finish;
@@ -431,6 +441,9 @@ int main(int argc, char* argv[])
         }
         if (!pathValue.isEmpty()) {
             req.addSaveTask(pathValue);
+        }
+        if (isPin) {
+            req.addTask(CaptureRequest::PIN_TASK);
         }
         uint id = req.id();
         DBusUtils dbusUtils;

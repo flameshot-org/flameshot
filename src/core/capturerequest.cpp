@@ -2,7 +2,9 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
+#include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
+#include "systemnotification.h"
 #include <QDateTime>
 #include <QVector>
 #include <stdexcept>
@@ -110,17 +112,33 @@ void CaptureRequest::addSaveTask(const QString& path)
     m_path = path;
 }
 
-void CaptureRequest::exportCapture(const QPixmap& p)
+void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 {
-    if ((m_tasks & ExportTask::SAVE_TASK) != ExportTask::NO_TASK) {
+    m_tasks |= PIN_TASK;
+    m_pinWindowGeometry = pinWindowGeometry;
+}
+
+void CaptureRequest::exportCapture(const QPixmap& capture)
+{
+    if (m_tasks & SAVE_TASK) {
         if (m_path.isEmpty()) {
-            ScreenshotSaver(m_id).saveToFilesystemGUI(p);
+            ScreenshotSaver(m_id).saveToFilesystemGUI(capture);
         } else {
-            ScreenshotSaver(m_id).saveToFilesystem(p, m_path);
+            ScreenshotSaver(m_id).saveToFilesystem(capture, m_path);
         }
     }
 
-    if ((m_tasks & ExportTask::COPY_TASK) != ExportTask::NO_TASK) {
-        ScreenshotSaver().saveToClipboard(p);
+    if (m_tasks & COPY_TASK) {
+        ScreenshotSaver().saveToClipboard(capture);
+    }
+
+    if (m_tasks & PIN_TASK) {
+        QWidget* widget = new PinWidget(capture, m_pinWindowGeometry);
+        widget->show();
+        widget->activateWindow();
+        if (m_mode == SCREEN_MODE || m_mode == FULLSCREEN_MODE) {
+            SystemNotification().sendMessage(
+              QObject::tr("Full screen screenshot pinned to screen"));
+        }
     }
 }

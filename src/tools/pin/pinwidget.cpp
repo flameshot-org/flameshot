@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "pinwidget.h"
+#include "qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QLabel>
@@ -9,7 +10,9 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
-PinWidget::PinWidget(const QPixmap& pixmap, QWidget* parent)
+PinWidget::PinWidget(const QPixmap& pixmap,
+                     const QRect& geometry,
+                     QWidget* parent)
   : QWidget(parent)
   , m_pixmap(pixmap)
 {
@@ -17,6 +20,7 @@ PinWidget::PinWidget(const QPixmap& pixmap, QWidget* parent)
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     ConfigHandler conf;
     m_baseColor = conf.uiColor();
@@ -38,6 +42,31 @@ PinWidget::PinWidget(const QPixmap& pixmap, QWidget* parent)
 
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+
+    qreal devicePixelRatio = 1;
+#if defined(Q_OS_MACOS)
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    if (currentScreen) {
+        devicePixelRatio = currentScreen->devicePixelRatio();
+    }
+#endif
+    const int m = margin * devicePixelRatio;
+    QRect adjusted_pos = geometry + QMargins(m, m, m, m);
+    setGeometry(adjusted_pos);
+#if defined(Q_OS_MACOS)
+    if (currentScreen) {
+        QPoint topLeft = currentScreen->geometry().topLeft();
+        adjusted_pos.setX((adjusted_pos.x() - topLeft.x()) / devicePixelRatio +
+                          topLeft.x());
+
+        adjusted_pos.setY((adjusted_pos.y() - topLeft.y()) / devicePixelRatio +
+                          topLeft.y());
+        adjusted_pos.setWidth(adjusted_pos.size().width() / devicePixelRatio);
+        adjusted_pos.setHeight(adjusted_pos.size().height() / devicePixelRatio);
+        resize(0, 0);
+        move(adjusted_pos.x(), adjusted_pos.y());
+    }
+#endif
 }
 
 int PinWidget::margin() const
@@ -62,6 +91,7 @@ void PinWidget::enterEvent(QEvent*)
 {
     m_shadowEffect->setColor(m_hoverColor);
 }
+
 void PinWidget::leaveEvent(QEvent*)
 {
     m_shadowEffect->setColor(m_baseColor);

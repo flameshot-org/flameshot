@@ -63,12 +63,12 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled)
     controller->updateConfigComponents();
 }
 
-void FlameshotDBusAdapter::handleCaptureTaken(uint id,
-                                              const QPixmap& p,
-                                              QRect selection)
+void FlameshotDBusAdapter::handleCaptureTaken(uint id, const QPixmap& p)
 {
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     p.save(&buffer, "PNG");
+    // TODO remove selection parameter
+    QRect selection;
     emit captureTaken(id, byteArray, selection);
 }
