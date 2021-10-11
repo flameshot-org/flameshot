@@ -100,6 +100,8 @@ protected:
     void mouseMoveEvent(QMouseEvent* mouseEvent) override;
     void mouseReleaseEvent(QMouseEvent* mouseEvent) override;
     void mouseDoubleClickEvent(QMouseEvent* event) override;
+    void leaveEvent(QEvent *event) override;
+    void enterEvent(QEvent *event) override;
     void keyPressEvent(QKeyEvent* keyEvent) override;
     void keyReleaseEvent(QKeyEvent* keyEvent) override;
     void wheelEvent(QWheelEvent* wheelEvent) override;
@@ -145,6 +147,7 @@ private:
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData();
     void drawObjectSelection();
+    void redrawErrorMessage();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
 
@@ -177,6 +180,8 @@ private:
     bool m_adjustmentButtonPressed;
     bool m_configError;
     bool m_configErrorResolved;
+    bool m_mouseOutside = false;
+    bool m_hadErrorMessage = false;
 
     UpdateNotificationWidget* m_updateNotificationWidget;
     quint64 m_lastMouseWheel;

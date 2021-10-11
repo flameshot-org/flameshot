@@ -458,6 +458,8 @@ void CaptureWidget::drawContent(QPainter& painter)
         drawErrorMessage(tr("Configuration error resolved. Launch `flameshot "
                             "gui` again to apply it."),
                          &painter);
+    } else {
+        m_hadErrorMessage = false;
     }
 }
 
@@ -563,7 +565,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
     auto scrollWidgetPos = scrollWidgetPoint(
       m_mousePressedPos); // position relative to ScrollArea::widget
-    auto capturePoint = widgetToCapturePoint(m_mousePressedPos);
 
     // reset object selection if capture area selection is active
     if (m_selection->getMouseSide(scrollWidgetPos) != SelectionWidget::CENTER) {
@@ -631,6 +632,17 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
     }
 }
 
+void CaptureWidget::leaveEvent(QEvent *event)
+{
+    m_mouseOutside = true;
+    redrawErrorMessage();
+}
+
+void CaptureWidget::enterEvent(QEvent *event)
+{
+    m_mouseOutside = false;
+}
+
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = widgetToCapturePoint(e->pos());
@@ -642,6 +654,11 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
         updateViewTransform();
         repaint();
     }
+
+    if (m_hadErrorMessage) {
+        redrawErrorMessage();
+    }
+
     if (e->buttons() != Qt::LeftButton) {
         updateTool(activeButtonTool());
         updateCursor();
@@ -852,11 +869,15 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 void CaptureWidget::changeEvent(QEvent* e)
 {
     if (e->type() == QEvent::ActivationChange) {
-        QPoint bottomRight = rect().bottomRight();
-        // Update the message in the bottom right corner. A rough estimate is
-        // used for the update rect
-        update(QRect(bottomRight - QPoint(1000, 200), bottomRight));
+        redrawErrorMessage();
     }
+}
+
+void CaptureWidget::redrawErrorMessage() {
+    QPoint bottomRight = rect().bottomRight();
+    // Update the message in the bottom right corner. A rough estimate is
+    // used for the update rect
+    update(QRect(bottomRight - QPoint(1000, 200), bottomRight));
 }
 
 void CaptureWidget::scrollContentsBy(int dx, int dy)
@@ -1548,12 +1569,12 @@ QPoint CaptureWidget::widgetToCapturePoint(QPoint point)
 
 QPoint CaptureWidget::scrollWidgetPoint(QPoint p)
 {
-    return p - (viewport()->pos() + widget()->pos());
+    return widget()->mapFrom(this, p);
 }
 
 QPoint CaptureWidget::scrollWidgetPointToThis(QPoint p)
 {
-    return p + (viewport()->pos() + widget()->pos());
+    return widget()->mapTo(this, p);
 }
 
 QRect CaptureWidget::imageSize() const
@@ -1728,17 +1749,20 @@ QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
 void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 {
     auto textRect = painter->fontMetrics().boundingRect(msg);
-    int w = textRect.width(), h = textRect.height();
-    textRect = {
-        size().width() - w - 10, size().height() - h - 5, w + 100, h + 100
-    };
-    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    auto sizeOffset = viewport()->size() - textRect.size();
+    textRect.moveTo(QPoint{sizeOffset.width(), sizeOffset.height()} // bottom left corner
+                    + m_viewOffset); // compensate for scrollview movement
+    textRect.adjust(-10, -5, 0, 0); // padding
 
-    if (!textRect.contains(QCursor::pos(currentScreen))) {
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    auto mouseRelativeToContent = widget()->mapFromGlobal(QCursor::pos(currentScreen));
+
+    if (!textRect.contains(mouseRelativeToContent) || m_mouseOutside) {
         QColor textColor(Qt::white);
         painter->setPen(textColor);
         painter->drawText(textRect, msg);
     }
+    m_hadErrorMessage = true;
 }
 
 void CaptureWidget::drawInactiveRegion(QPainter* painter)
