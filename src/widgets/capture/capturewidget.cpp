@@ -1220,7 +1220,7 @@ void CaptureWidget::updateActiveLayer(int layer)
 void CaptureWidget::selectAll()
 {
     m_selection->show();
-    m_selection->setGeometry(rect());
+    m_selection->setCaptureGeometry(m_context.screenshot.rect());
     m_buttonHandler->show();
     updateSelectionState();
 }
