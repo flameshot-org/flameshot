@@ -135,7 +135,7 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=true to enable easier debugging
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
@@ -415,7 +415,7 @@ void CaptureWidget::uncheckActiveTool()
     // uncheck active tool
     m_panel->setToolWidget(nullptr);
     m_activeButton->setColor(m_uiColor);
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
     m_activeButton = nullptr;
     releaseActiveTool();
     updateSelectionState();
@@ -442,8 +442,17 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     // draw inactive region
     drawInactiveRegion(&painter);
 
-    if (m_configError || m_configErrorResolved) {
-        drawConfigErrorMessage(&painter);
+    if (!isActiveWindow()) {
+        drawErrorMessage(
+          tr("Flameshot has lost focus. Keyboard shortcuts won't "
+             "work until you click somewhere."),
+          &painter);
+    } else if (m_configError) {
+        drawErrorMessage(ConfigHandler().errorMessage(), &painter);
+    } else if (m_configErrorResolved) {
+        drawErrorMessage(tr("Configuration error resolved. Launch `flameshot "
+                            "gui` again to apply it."),
+                         &painter);
     }
 }
 
@@ -540,6 +549,7 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
+    activateWindow();
     m_startMove = false;
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
@@ -618,7 +628,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
-        updateToolMousePreview(activeButtonTool());
+        updateTool(activeButtonTool());
         updateCursor();
         return;
     }
@@ -663,7 +673,7 @@ void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
             m_activeTool->drawMove(e->pos());
         }
         // update drawing object
-        updateToolMousePreview(m_activeTool);
+        updateTool(m_activeTool);
         // Hides the buttons under the mouse. If the mouse leaves, it shows
         // them.
         if (m_buttonHandler->buttonsAreInside()) {
@@ -718,7 +728,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 void CaptureWidget::updateThickness(int thickness)
 {
     auto tool = activeButtonTool();
-    updateToolMousePreview(tool);
+    updateTool(tool);
     m_context.thickness = qBound(1, thickness, maxDrawThickness);
 
     QPoint topLeft =
@@ -729,7 +739,7 @@ void CaptureWidget::updateThickness(int thickness)
 
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
-        updateToolMousePreview(tool);
+        updateTool(tool);
     }
 
     // update selected object thickness
@@ -740,6 +750,7 @@ void CaptureWidget::updateThickness(int thickness)
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
         }
+        setDrawThickness(m_context.thickness);
     }
     emit thicknessChanged(m_context.thickness);
 }
@@ -829,6 +840,16 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 {
     QWidget::moveEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
+}
+
+void CaptureWidget::changeEvent(QEvent* e)
+{
+    if (e->type() == QEvent::ActivationChange) {
+        QPoint bottomRight = rect().bottomRight();
+        // Update the message in the bottom right corner. A rough estimate is
+        // used for the update rect
+        update(QRect(bottomRight - QPoint(1000, 200), bottomRight));
+    }
 }
 
 void CaptureWidget::initContext(bool fullscreen, uint requestId)
@@ -1039,7 +1060,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         loadDrawThickness();
         updateCursor();
         updateSelectionState();
-        updateToolMousePreview(b->tool());
+        updateTool(b->tool());
     }
 }
 
@@ -1210,6 +1231,7 @@ void CaptureWidget::setDrawThickness(int t)
         toolItem->onThicknessChanged(t);
         drawToolsData();
         drawObjectSelection();
+        updateTool(toolItem);
     } else {
         emit thicknessChanged(m_context.thickness);
     }
@@ -1323,22 +1345,30 @@ void CaptureWidget::updateSelectionState()
     }
 }
 
-void CaptureWidget::updateToolMousePreview(CaptureTool* tool)
+void CaptureWidget::updateTool(CaptureTool* tool)
 {
     if (!tool || !tool->showMousePreview()) {
         return;
     }
 
-    static QRect oldRect;
+    static QRect oldPreviewRect, oldToolObjectRect;
 
-    QRect r(tool->mousePreviewRect(m_context));
-    r += QMargins(r.width(), r.height(), r.width(), r.height());
+    QRect previewRect(tool->mousePreviewRect(m_context));
+    previewRect += QMargins(previewRect.width(),
+                            previewRect.height(),
+                            previewRect.width(),
+                            previewRect.height());
 
     QRect toolObjectRect = paddedUpdateRect(tool->boundingRect());
 
-    // oldRect is united with the current rect to handle sudden mouse movement
-    update(r.united(oldRect).united(toolObjectRect));
-    oldRect = r;
+    // old rects are united with current rects to handle sudden mouse movement
+    update(previewRect);
+    update(toolObjectRect);
+    update(oldPreviewRect);
+    update(oldToolObjectRect);
+
+    oldPreviewRect = previewRect;
+    oldToolObjectRect = toolObjectRect;
 }
 
 void CaptureWidget::updateLayersPanel()
@@ -1455,13 +1485,13 @@ void CaptureWidget::togglePanel()
 void CaptureWidget::childEnter()
 {
     m_previewEnabled = false;
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
 }
 
 void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
-    updateToolMousePreview(activeButtonTool());
+    updateTool(activeButtonTool());
 }
 
 void CaptureWidget::setCaptureToolObjects(
@@ -1529,19 +1559,13 @@ QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
     }
 }
 
-void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
+void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 {
-    QString msg;
-    if (m_configError) {
-        msg = ConfigHandler().errorMessage();
-    } else if (m_configErrorResolved) {
-        msg = tr("Configuration error resolved. Launch `flameshot "
-                 "gui` again to apply it.");
-    }
-
     auto textRect = painter->fontMetrics().boundingRect(msg);
     int w = textRect.width(), h = textRect.height();
-    textRect = { size().width() - w, size().height() - h, w + 100, h + 100 };
+    textRect = {
+        size().width() - w - 10, size().height() - h - 5, w + 100, h + 100
+    };
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
 
     if (!textRect.contains(QCursor::pos(currentScreen))) {
