@@ -132,7 +132,9 @@ void SelectionWidget::setGeometry(const QRect& r)
 {
     QWidget::setGeometry(r + QMargins(MARGIN, MARGIN, MARGIN, MARGIN));
     updateCursor();
-    emit geometryChanged();
+    if (isVisible()) {
+        emit geometryChanged();
+    }
 }
 
 QRect SelectionWidget::geometry() const
@@ -289,13 +291,17 @@ void SelectionWidget::paintEvent(QPaintEvent*)
 void SelectionWidget::resizeEvent(QResizeEvent*)
 {
     updateAreas();
-    emit geometryChanged();
+    if (isVisible()) {
+        emit geometryChanged();
+    }
 }
 
 void SelectionWidget::moveEvent(QMoveEvent*)
 {
     updateAreas();
-    emit geometryChanged();
+    if (isVisible()) {
+        emit geometryChanged();
+    }
 }
 
 void SelectionWidget::updateColor(const QColor& c)
