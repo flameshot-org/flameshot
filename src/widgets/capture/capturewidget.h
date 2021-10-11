@@ -101,7 +101,7 @@ private:
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
-    void initContext(bool fullscreen);
+    void initContext(bool fullscreen, uint requestId);
     void initPanel();
     void initSelection();
     void initShortcuts();
@@ -174,7 +174,6 @@ private:
     SelectionWidget* m_selection;
 
     SelectionWidget::SideType m_mouseOverHandle;
-    uint m_id;
 
     QMap<CaptureTool::Type, CaptureTool*> m_tools;
     CaptureToolObjects m_captureToolObjects;
