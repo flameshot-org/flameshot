@@ -94,6 +94,7 @@ protected:
     void wheelEvent(QWheelEvent* wheelEvent) override;
     void resizeEvent(QResizeEvent* resizeEvent) override;
     void moveEvent(QMoveEvent* moveEvent) override;
+    void changeEvent(QEvent* changeEvent) override;
 
 private:
     void loadDrawThickness();
@@ -122,7 +123,7 @@ private:
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
     QRect paddedUpdateRect(const QRect& r) const;
-    void drawConfigErrorMessage(QPainter* painter);
+    void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
     void drawToolsData();
     void drawObjectSelection();

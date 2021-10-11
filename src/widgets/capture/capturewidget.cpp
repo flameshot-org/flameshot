@@ -135,7 +135,7 @@ CaptureWidget::CaptureWidget(uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=true to enable easier debugging
+// Call cmake with -DFLAMESHOT_DEBUG_CAPTURE=ON to enable easier debugging
 #if !defined(FLAMESHOT_DEBUG_CAPTURE)
         setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
                        Qt::FramelessWindowHint | Qt::Tool);
@@ -399,8 +399,17 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     // draw inactive region
     drawInactiveRegion(&painter);
 
-    if (m_configError || m_configErrorResolved) {
-        drawConfigErrorMessage(&painter);
+    if (!isActiveWindow()) {
+        drawErrorMessage(
+          tr("Flameshot has lost focus. Keyboard shortcuts won't "
+             "work until you click somewhere."),
+          &painter);
+    } else if (m_configError) {
+        drawErrorMessage(ConfigHandler().errorMessage(), &painter);
+    } else if (m_configErrorResolved) {
+        drawErrorMessage(tr("Configuration error resolved. Launch `flameshot "
+                            "gui` again to apply it."),
+                         &painter);
     }
 }
 
@@ -497,6 +506,7 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
 
 void CaptureWidget::mousePressEvent(QMouseEvent* e)
 {
+    activateWindow();
     m_startMove = false;
     m_startMovePos = QPoint();
     m_mousePressedPos = e->pos();
@@ -781,6 +791,16 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
 {
     QWidget::moveEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
+}
+
+void CaptureWidget::changeEvent(QEvent* e)
+{
+    if (e->type() == QEvent::ActivationChange) {
+        QPoint bottomRight = rect().bottomRight();
+        // Update the message in the bottom right corner. A rough estimate is
+        // used for the update rect
+        update(QRect(bottomRight - QPoint(1000, 200), bottomRight));
+    }
 }
 
 void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
@@ -1532,19 +1552,13 @@ QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
     }
 }
 
-void CaptureWidget::drawConfigErrorMessage(QPainter* painter)
+void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 {
-    QString msg;
-    if (m_configError) {
-        msg = ConfigHandler().errorMessage();
-    } else if (m_configErrorResolved) {
-        msg = tr("Configuration error resolved. Launch `flameshot "
-                 "gui` again to apply it.");
-    }
-
     auto textRect = painter->fontMetrics().boundingRect(msg);
     int w = textRect.width(), h = textRect.height();
-    textRect = { size().width() - w, size().height() - h, w + 100, h + 100 };
+    textRect = {
+        size().width() - w - 10, size().height() - h - 5, w + 100, h + 100
+    };
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
 
     if (!textRect.contains(QCursor::pos(currentScreen))) {
