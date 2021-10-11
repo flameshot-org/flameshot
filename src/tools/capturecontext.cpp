@@ -19,6 +19,7 @@ CaptureRequest* CaptureContext::request()
     return &*Controller::getInstance()->requests().find(requestId);
 }
 
-CaptureRequest* CaptureContext::request() const {
+CaptureRequest* CaptureContext::request() const
+{
     return &*Controller::getInstance()->requests().find(requestId);
 }
