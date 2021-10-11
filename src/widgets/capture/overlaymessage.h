@@ -34,6 +34,7 @@ public:
 private:
     QStack<QString> m_messageStack;
     QRect m_targetArea;
+    QColor m_fillColor, m_textColor;
     static OverlayMessage* m_instance;
 
     OverlayMessage(QWidget* parent, const QRect& center);
