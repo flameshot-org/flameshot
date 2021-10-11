@@ -154,6 +154,8 @@ int main(int argc, char* argv[])
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
     CommandOption pinOption("pin",
                             QObject::tr("Pin the capture to the screen"));
+    CommandOption uploadOption({ "u", "upload" },
+                               QObject::tr("Upload screenshot"));
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
@@ -259,6 +261,7 @@ int main(int argc, char* argv[])
                         delayOption,
                         rawImageOption,
                         selectionOption,
+                        uploadOption,
                         pinOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
@@ -266,11 +269,15 @@ int main(int argc, char* argv[])
                         pathOption,
                         delayOption,
                         rawImageOption,
+                        uploadOption,
                         pinOption },
                       screenArgument);
-    parser.AddOptions(
-      { pathOption, clipboardOption, delayOption, rawImageOption },
-      fullArgument);
+    parser.AddOptions({ pathOption,
+                        clipboardOption,
+                        delayOption,
+                        rawImageOption,
+                        uploadOption },
+                      fullArgument);
     parser.AddOptions({ autostartOption,
                         filenameOption,
                         trayOption,
@@ -309,6 +316,7 @@ int main(int argc, char* argv[])
         bool isRaw = parser.isSet(rawImageOption);
         bool isSelection = parser.isSet(selectionOption);
         bool isPin = parser.isSet(pinOption);
+        bool isUpload = parser.isSet(uploadOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
         if (toClipboard) {
@@ -325,6 +333,9 @@ int main(int argc, char* argv[])
         }
         if (isPin) {
             req.addTask(CaptureRequest::PIN_TASK);
+        }
+        if (isUpload) {
+            req.addTask(CaptureRequest::UPLOAD_TASK);
         }
         uint id = req.id();
 
@@ -354,8 +365,9 @@ int main(int argc, char* argv[])
         int delay = parser.value(delayOption).toInt();
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
+        bool isUpload = parser.isSet(uploadOption);
         // Not a valid command
-        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
+        if (!isRaw && !toClipboard && !isUpload && pathValue.isEmpty()) {
             QTextStream out(stdout);
             out
               << "Invalid format, set how to export the screenshot with one of "
@@ -379,6 +391,9 @@ int main(int argc, char* argv[])
         }
         if (!pathValue.isEmpty()) {
             req.addSaveTask(pathValue);
+        }
+        if (isUpload) {
+            req.addTask(CaptureRequest::UPLOAD_TASK);
         }
         uint id = req.id();
         DBusUtils dbusUtils;
@@ -417,8 +432,10 @@ int main(int argc, char* argv[])
         bool toClipboard = parser.isSet(clipboardOption);
         bool isRaw = parser.isSet(rawImageOption);
         bool isPin = parser.isSet(pinOption);
+        bool isUpload = parser.isSet(uploadOption);
         // Not a valid command
-        if (!isRaw && !toClipboard && !isPin && pathValue.isEmpty()) {
+        if (!isRaw && !toClipboard && !isPin && !isUpload &&
+            pathValue.isEmpty()) {
             QTextStream out(stdout);
             out << "Invalid format, set where to save the content with one of "
                 << "the following flags:\n "
@@ -444,6 +461,9 @@ int main(int argc, char* argv[])
         }
         if (isPin) {
             req.addTask(CaptureRequest::PIN_TASK);
+        }
+        if (isUpload) {
+            req.addTask(CaptureRequest::UPLOAD_TASK);
         }
         uint id = req.id();
         DBusUtils dbusUtils;

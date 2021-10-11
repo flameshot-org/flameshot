@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
+#include "imguruploader.h"
 #include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
 #include "systemnotification.h"
@@ -140,5 +141,11 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
             SystemNotification().sendMessage(
               QObject::tr("Full screen screenshot pinned to screen"));
         }
+    }
+
+    if (m_tasks & UPLOAD_TASK) {
+        QWidget* widget = new ImgurUploader(capture);
+        widget->show();
+        widget->activateWindow();
     }
 }

@@ -25,6 +25,7 @@ public:
         PRINT_RAW_TASK = 4,
         PRINT_GEOMETRY_TASK = 8,
         PIN_TASK = 16,
+        UPLOAD_TASK = 32,
     };
 
     CaptureRequest(CaptureMode mode,

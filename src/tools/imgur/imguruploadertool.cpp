@@ -19,6 +19,7 @@ QIcon ImgurUploaderTool::icon(const QColor& background, bool inEditor) const
     Q_UNUSED(inEditor);
     return QIcon(iconPath(background) + "cloud-upload.svg");
 }
+
 QString ImgurUploaderTool::name() const
 {
     return tr("Image Uploader");
@@ -34,11 +35,6 @@ QString ImgurUploaderTool::description() const
     return tr("Upload the selection to Imgur");
 }
 
-QWidget* ImgurUploaderTool::widget()
-{
-    return new ImgurUploader(capture);
-}
-
 CaptureTool* ImgurUploaderTool::copy(QObject* parent)
 {
     return new ImgurUploaderTool(parent);
@@ -46,8 +42,7 @@ CaptureTool* ImgurUploaderTool::copy(QObject* parent)
 
 void ImgurUploaderTool::pressed(CaptureContext& context)
 {
-    capture = context.selectedScreenshotArea();
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    context.request()->addTask(CaptureRequest::UPLOAD_TASK);
     emit requestAction(REQ_CLOSE_GUI);
 }
