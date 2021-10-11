@@ -636,11 +636,13 @@ void CaptureWidget::leaveEvent(QEvent *event)
 {
     m_mouseOutside = true;
     redrawErrorMessage();
+    QScrollArea::leaveEvent(event);
 }
 
 void CaptureWidget::enterEvent(QEvent *event)
 {
     m_mouseOutside = false;
+    QScrollArea::enterEvent(event);
 }
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
@@ -757,10 +759,14 @@ void CaptureWidget::updateThickness(int thickness)
     updateTool(tool);
     m_context.thickness = qBound(1, thickness, maxDrawThickness);
 
-    QPoint topLeft =
-      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
     int offset = m_notifierBox->width() / 4;
-    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    QPoint notifierBoxPosition(offset, offset);
+    if (windowMode == CaptureWindowMode::FullScreenAll) {
+        QPoint topLeft =
+          QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
+        notifierBoxPosition += mapFromGlobal(topLeft);
+    }
+    m_notifierBox->move(notifierBoxPosition);
     m_notifierBox->showMessage(QString::number(m_context.thickness));
 
     if (tool && tool->showMousePreview()) {
@@ -854,7 +860,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
 {
-    QWidget::resizeEvent(e);
+    QScrollArea::resizeEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     updateButtonRegions();
     OverlayMessage::UpdateTargetArea(viewport()->rect());
@@ -862,12 +868,13 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
 
 void CaptureWidget::moveEvent(QMoveEvent* e)
 {
-    QWidget::moveEvent(e);
+    QScrollArea::moveEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
 }
 
 void CaptureWidget::changeEvent(QEvent* e)
 {
+    QScrollArea::changeEvent(e);
     if (e->type() == QEvent::ActivationChange) {
         redrawErrorMessage();
     }
