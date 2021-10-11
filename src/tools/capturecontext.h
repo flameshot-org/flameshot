@@ -29,7 +29,9 @@ struct CaptureContext
     int thickness;
     // Mode of the capture widget
     bool fullscreen;
-    CaptureRequest* request;
+    uint requestId;
 
     QPixmap selectedScreenshotArea() const;
+    CaptureRequest* request();
+    CaptureRequest* request() const;
 };

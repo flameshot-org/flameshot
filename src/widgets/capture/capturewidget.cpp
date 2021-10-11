@@ -63,7 +63,6 @@ CaptureWidget::CaptureWidget(uint id,
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
-  , m_id(id)
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
@@ -91,7 +90,7 @@ CaptureWidget::CaptureWidget(uint id,
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
-    initContext(fullScreen);
+    initContext(fullScreen, id);
     initSelection();
     initShortcuts(); // must be called after initSelection
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
@@ -240,9 +239,9 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
-        emit captureTaken(m_id, this->pixmap(), m_context.selection);
+        emit captureTaken(m_context.requestId, pixmap(), m_context.selection);
     } else {
-        emit captureFailed(m_id);
+        emit captureFailed(m_context.requestId);
     }
 }
 
@@ -250,7 +249,7 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    if (m_context.request->tasks() == CaptureRequest::NO_TASK) {
+    if (m_context.request()->tasks() == CaptureRequest::NO_TASK) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
@@ -832,14 +831,24 @@ void CaptureWidget::moveEvent(QMoveEvent* e)
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
 }
 
-void CaptureWidget::initContext(bool fullscreen)
+void CaptureWidget::initContext(bool fullscreen, uint requestId)
 {
     m_context.color = m_config.drawColor();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
     m_context.thickness = m_config.drawThickness();
     m_context.fullscreen = fullscreen;
-    m_context.request = &*Controller::getInstance()->requests().find(m_id);
+
+    // initialize m_context.request
+    if (requestId != 0) {
+        m_context.requestId = requestId;
+    } else {
+        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
+        uint id = req.id();
+        req.setStaticID(id);
+        Controller::getInstance()->requests().insert(id, req);
+        m_context.requestId = id;
+    }
 }
 
 void CaptureWidget::initPanel()
