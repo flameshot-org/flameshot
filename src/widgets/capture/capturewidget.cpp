@@ -571,7 +571,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         showColorPicker(m_mousePressedPos);
         return;
     } else if (e->button() == Qt::LeftButton) {
-        OverlayMessage::pop();
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -1009,6 +1008,7 @@ void CaptureWidget::initSelection()
         updateSizeIndicator();
         m_buttonHandler->hide();
         updateCursor();
+        OverlayMessage::pop();
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisible()) {
