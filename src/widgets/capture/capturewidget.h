@@ -107,7 +107,7 @@ private:
     void initSelection();
     void initShortcuts();
     void initButtons();
-    void pushHelpMessage();
+    void initHelpMessage();
     void updateSizeIndicator();
     void updateCursor();
     void updateSelectionState();
@@ -173,6 +173,7 @@ private:
     NotifierBox* m_notifierBox;
     HoverEventFilter* m_eventFilter;
     SelectionWidget* m_selection;
+    QString m_helpMessage;
 
     SelectionWidget::SideType m_mouseOverHandle;
 
