@@ -1088,6 +1088,11 @@ void CaptureWidget::onToolSizeChanged(int t)
         setCursor(Qt::BlankCursor);
     }
 
+    // update thickness of object being drawn
+    if (m_activeTool != nullptr) {
+        updateTool(m_activeTool);
+    }
+
     // update thickness of selected object
     auto toolItem = activeToolObject();
     if (toolItem) {
