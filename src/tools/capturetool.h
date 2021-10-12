@@ -47,6 +47,7 @@ public:
         TYPE_SIZEINCREASE = 20,
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
+        TYPE_ACCEPT = 23,
     };
     Q_ENUM(Type);
 
@@ -63,8 +64,6 @@ public:
         REQ_REDO_MODIFICATION,
         // Open the color picker under the mouse.
         REQ_SHOW_COLOR_PICKER,
-        // Notify to redraw screenshot with tools without object selection.
-        REQ_CLEAR_SELECTION,
         // Notify is the screenshot has been saved.
         REQ_CAPTURE_DONE_OK,
         // Instance this->widget()'s widget inside the editor under the mouse.
@@ -191,7 +190,7 @@ public slots:
     // Called when the tool is activated.
     virtual void drawStart(const CaptureContext& context) = 0;
     // Called right after pressign the button which activates the tool.
-    virtual void pressed(const CaptureContext& context) = 0;
+    virtual void pressed(CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
     virtual void onColorChanged(const QColor& c) = 0;
     // Called when the thickness of the tool is updated in the editor.

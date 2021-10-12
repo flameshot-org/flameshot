@@ -44,7 +44,7 @@ void CircleTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawEllipse(QRect(points().first, points().second));
 }
 
-void CircleTool::pressed(const CaptureContext& context)
+void CircleTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

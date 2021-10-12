@@ -10,6 +10,7 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
+#include "copytool.h"
 #include "src/core/controller.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
@@ -62,7 +63,6 @@ CaptureWidget::CaptureWidget(uint id,
   , m_activeTool(nullptr)
   , m_toolWidget(nullptr)
   , m_colorPicker(nullptr)
-  , m_id(id)
   , m_lastMouseWheel(0)
   , m_updateNotificationWidget(nullptr)
   , m_activeToolIsMoved(false)
@@ -90,7 +90,7 @@ CaptureWidget::CaptureWidget(uint id,
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
-    initContext(savePath, fullScreen);
+    initContext(fullScreen, id);
     initSelection();
     initShortcuts(); // must be called after initSelection
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
@@ -219,12 +219,8 @@ CaptureWidget::CaptureWidget(uint id,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
 
     if (m_config.showHelp()) {
-        OverlayMessage::push(
-          tr("Select an area with the mouse, or press Esc to exit."
-             "\nPress Enter to capture the screen."
-             "\nPress Right Click to show the color picker."
-             "\nUse the Mouse Wheel to change the thickness of your tool."
-             "\nPress Space to open the side panel."));
+        initHelpMessage();
+        OverlayMessage::push(m_helpMessage);
     }
 
     updateCursor();
@@ -232,10 +228,21 @@ CaptureWidget::CaptureWidget(uint id,
 
 CaptureWidget::~CaptureWidget()
 {
+#if defined(Q_OS_MACOS)
+    for (QWidget* widget : qApp->topLevelWidgets()) {
+        QString className(widget->metaObject()->className());
+        if (0 ==
+            className.compare(CaptureWidget::staticMetaObject.className())) {
+            widget->showNormal();
+            widget->hide();
+            break;
+        }
+    }
+#endif
     if (m_captureDone) {
-        emit captureTaken(m_id, this->pixmap(), m_context.selection);
+        emit captureTaken(m_context.requestId, pixmap(), m_context.selection);
     } else {
-        emit captureFailed(m_id);
+        emit captureFailed(m_context.requestId);
     }
 }
 
@@ -243,11 +250,24 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
+    if (m_context.request()->tasks() == CaptureRequest::NO_TASK) {
+        allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
+        visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
+    } else {
+        // Remove irrelevant buttons from both lists
+        for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
+            buttonList->removeOne(CaptureTool::TYPE_SAVE);
+            buttonList->removeOne(CaptureTool::TYPE_COPY);
+            buttonList->removeOne(CaptureTool::TYPE_IMAGEUPLOADER);
+            buttonList->removeOne(CaptureTool::TYPE_OPEN_APP);
+            buttonList->removeOne(CaptureTool::TYPE_PIN);
+        }
+    }
     QVector<CaptureToolButton*> vectorButtons;
 
     // Add all buttons but hide those that were disabled in the Interface config
     // This will allow keyboard shortcuts for those buttons to work
-    for (const CaptureTool::Type& t : allButtonTypes) {
+    for (CaptureTool::Type t : allButtonTypes) {
         CaptureToolButton* b = new CaptureToolButton(t, this);
         if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
@@ -259,9 +279,6 @@ void CaptureWidget::initButtons()
         makeChild(b);
 
         switch (t) {
-            case CaptureTool::TYPE_EXIT:
-            case CaptureTool::TYPE_SAVE:
-            case CaptureTool::TYPE_COPY:
             case CaptureTool::TYPE_UNDO:
             case CaptureTool::TYPE_IMAGEUPLOADER:
             case CaptureTool::TYPE_REDO:
@@ -283,6 +300,8 @@ void CaptureWidget::initButtons()
                 break;
         }
 
+        m_tools[t] = b->tool();
+
         connect(b->tool(),
                 &CaptureTool::requestAction,
                 this,
@@ -299,6 +318,34 @@ void CaptureWidget::initButtons()
     m_buttonHandler->setButtons(vectorButtons);
 }
 
+void CaptureWidget::initHelpMessage()
+{
+    QList<QPair<QString, QString>> keyMap;
+    if (keyMap.isEmpty()) {
+        keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
+        using CT = CaptureTool;
+        for (auto toolType :
+             { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
+            if (!m_tools.contains(toolType)) {
+                continue;
+            }
+            auto* tool = m_tools[toolType];
+            QString shortcut = ConfigHandler().shortcut(
+              QVariant::fromValue(toolType).toString());
+            shortcut.replace("Return", "Enter");
+            if (!shortcut.isEmpty()) {
+                keyMap << QPair(shortcut, tool->description());
+            }
+        }
+        keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
+        keyMap << QPair(tr("Right Click"), tr("Show color picker"));
+        keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
+                        tr("Open side panel"));
+        keyMap << QPair(tr("Esc"), tr("Exit"));
+    }
+    m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
+}
+
 QPixmap CaptureWidget::pixmap()
 {
     return m_context.selectedScreenshotArea();
@@ -309,6 +356,7 @@ QPixmap CaptureWidget::pixmap()
 bool CaptureWidget::commitCurrentTool()
 {
     if (m_activeTool) {
+        processPixmapWithTool(&m_context.screenshot, m_activeTool);
         if (m_activeTool->isValid() && !m_activeTool->editMode() &&
             m_toolWidget) {
             pushToolToStack();
@@ -528,7 +576,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         showColorPicker(m_mousePressedPos);
         return;
     } else if (e->button() == Qt::LeftButton) {
-        OverlayMessage::pop();
         m_mouseIsClicked = true;
 
         // Click using a tool excluding tool MOVE
@@ -571,7 +618,13 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     } else if (m_selection->geometry().contains(event->pos())) {
-        copyScreenshot();
+        CopyTool copyTool;
+        connect(&copyTool,
+                &CopyTool::requestAction,
+                this,
+                &CaptureWidget::handleToolSignal);
+        copyTool.pressed(m_context);
+        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
     }
 }
 
@@ -803,14 +856,24 @@ void CaptureWidget::changeEvent(QEvent* e)
     }
 }
 
-void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
+void CaptureWidget::initContext(bool fullscreen, uint requestId)
 {
     m_context.color = m_config.drawColor();
-    m_context.savePath = savePath;
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     m_context.mousePos = mapFromGlobal(QCursor::pos());
     m_context.thickness = m_config.drawThickness();
     m_context.fullscreen = fullscreen;
+
+    // initialize m_context.request
+    if (requestId != 0) {
+        m_context.requestId = requestId;
+    } else {
+        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
+        uint id = req.id();
+        req.setStaticID(id);
+        Controller::getInstance()->requests().insert(id, req);
+        m_context.requestId = id;
+    }
 }
 
 void CaptureWidget::initPanel()
@@ -950,12 +1013,18 @@ void CaptureWidget::initSelection()
         updateSizeIndicator();
         m_buttonHandler->hide();
         updateCursor();
+        OverlayMessage::pop();
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisible()) {
             m_buttonHandler->show();
         } else {
             m_buttonHandler->hide();
+        }
+    });
+    connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
+        if (!m_selection->isVisible()) {
+            OverlayMessage::push(m_helpMessage);
         }
     });
 }
@@ -966,6 +1035,7 @@ void CaptureWidget::setState(CaptureToolButton* b)
         return;
     }
 
+    commitCurrentTool();
     if (m_toolWidget && m_activeTool) {
         if (m_activeTool->isValid()) {
             pushToolToStack();
@@ -980,11 +1050,6 @@ void CaptureWidget::setState(CaptureToolButton* b)
         m_activeTool = b->tool();
         m_activeTool->pressed(m_context);
         m_activeTool = backup;
-    }
-
-    // Only close activated from button
-    if (b->tool()->closeOnButtonPressed()) {
-        close();
     }
 
     if (b->tool()->isSelectable()) {
@@ -1037,12 +1102,6 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             break;
         case CaptureTool::REQ_SHOW_COLOR_PICKER:
             // TODO
-            break;
-        case CaptureTool::REQ_CLEAR_SELECTION:
-            if (m_panel->activeLayerIndex() >= 0) {
-                m_panel->setActiveLayer(-1);
-                drawToolsData();
-            }
             break;
         case CaptureTool::REQ_CAPTURE_DONE_OK:
             m_captureDone = true;
@@ -1190,17 +1249,6 @@ void CaptureWidget::setDrawThickness(int t)
 
 void CaptureWidget::initShortcuts()
 {
-    new QShortcut(
-      QKeySequence(ConfigHandler().shortcut("TYPE_EXIT")), this, SLOT(close()));
-
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SAVE")),
-                  this,
-                  SLOT(saveScreenshot()));
-
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_COPY")),
-                  this,
-                  SLOT(copyScreenshot()));
-
     new QShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
@@ -1454,37 +1502,6 @@ void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
     updateTool(activeButtonTool());
-}
-
-void CaptureWidget::copyScreenshot()
-{
-    m_captureDone = true;
-    if (m_activeTool != nullptr) {
-        processPixmapWithTool(&m_context.screenshot, m_activeTool);
-    }
-
-    auto req = Controller::getInstance()->requests().find(m_id);
-    req->addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-
-    close();
-}
-
-void CaptureWidget::saveScreenshot()
-{
-#if defined(Q_OS_MACOS)
-    showNormal();
-#endif
-    m_captureDone = true;
-    if (m_activeTool != nullptr) {
-        processPixmapWithTool(&m_context.screenshot, m_activeTool);
-    }
-    hide();
-    if (m_context.savePath.isEmpty()) {
-        ScreenshotSaver(m_id).saveToFilesystemGUI(pixmap());
-    } else {
-        ScreenshotSaver(m_id).saveToFilesystem(pixmap(), m_context.savePath);
-    }
-    close();
 }
 
 void CaptureWidget::setCaptureToolObjects(

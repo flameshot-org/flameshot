@@ -22,5 +22,5 @@ public:
     CaptureTool* copy(QObject* parent = nullptr) override;
 
 public slots:
-    void pressed(const CaptureContext& context) override;
+    void pressed(CaptureContext& context) override;
 };

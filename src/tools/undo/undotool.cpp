@@ -38,7 +38,7 @@ CaptureTool* UndoTool::copy(QObject* parent)
     return new UndoTool(parent);
 }
 
-void UndoTool::pressed(const CaptureContext& context)
+void UndoTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
     emit requestAction(REQ_UNDO_MODIFICATION);

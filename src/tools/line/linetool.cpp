@@ -46,7 +46,7 @@ void LineTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawLine(points().first, points().second);
 }
 
-void LineTool::pressed(const CaptureContext& context)
+void LineTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

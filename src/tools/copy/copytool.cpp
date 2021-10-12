@@ -31,7 +31,7 @@ CaptureTool::Type CopyTool::type() const
 
 QString CopyTool::description() const
 {
-    return tr("Copy the selection into the clipboard");
+    return tr("Copy selection to clipboard");
 }
 
 CaptureTool* CopyTool::copy(QObject* parent)
@@ -39,9 +39,9 @@ CaptureTool* CopyTool::copy(QObject* parent)
     return new CopyTool(parent);
 }
 
-void CopyTool::pressed(const CaptureContext& context)
+void CopyTool::pressed(CaptureContext& context)
 {
-    emit requestAction(REQ_CLEAR_SELECTION);
+    context.request()->addTask(CaptureRequest::COPY_TASK);
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    ScreenshotSaver().saveToClipboard(context.selectedScreenshotArea());
+    emit requestAction(REQ_CLOSE_GUI);
 }

@@ -70,12 +70,12 @@ CaptureTool* PinTool::copy(QObject* parent)
     return new PinTool(parent);
 }
 
-void PinTool::pressed(const CaptureContext& context)
+void PinTool::pressed(CaptureContext& context)
 {
-    emit requestAction(REQ_CLEAR_SELECTION);
     emit requestAction(REQ_CAPTURE_DONE_OK);
     m_geometry = context.selection;
     m_geometry.setTopLeft(m_geometry.topLeft() + context.widgetOffset);
     m_pixmap = context.selectedScreenshotArea();
     emit requestAction(REQ_ADD_EXTERNAL_WIDGETS);
+    emit requestAction(REQ_CLOSE_GUI);
 }

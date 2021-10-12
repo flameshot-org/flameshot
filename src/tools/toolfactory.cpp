@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "toolfactory.h"
+#include "accept/accepttool.h"
 #include "arrow/arrowtool.h"
 #include "circle/circletool.h"
 #include "circlecount/circlecounttool.h"
@@ -63,6 +64,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEINCREASE, SizeIncreaseTool);
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
+        if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
         default:
             return nullptr;
     }
