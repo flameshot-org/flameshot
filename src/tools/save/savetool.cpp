@@ -3,13 +3,7 @@
 
 #include "savetool.h"
 #include "src/utils/screenshotsaver.h"
-#include <QApplication> // TODO rm
 #include <QPainter>
-#if defined(Q_OS_MACOS)
-#include "src/widgets/capture/capturewidget.h"
-#include <QApplication>
-#include <QWidget>
-#endif
 
 SaveTool::SaveTool(QObject* parent)
   : AbstractActionTool(parent)
