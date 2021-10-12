@@ -162,6 +162,9 @@ int main(int argc, char* argv[])
     CommandOption filenameOption({ "f", "filename" },
                                  QObject::tr("Set the filename pattern"),
                                  QStringLiteral("pattern"));
+    CommandOption acceptOnSelectOption(
+      { "s", "accept-on-select" },
+      QObject::tr("Accept capture as soon as a selection is made"));
     CommandOption trayOption({ "t", "trayicon" },
                              QObject::tr("Enable or disable the trayicon"),
                              QStringLiteral("bool"));
@@ -262,7 +265,8 @@ int main(int argc, char* argv[])
                         rawImageOption,
                         selectionOption,
                         uploadOption,
-                        pinOption },
+                        pinOption,
+                        acceptOnSelectOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
@@ -317,6 +321,7 @@ int main(int argc, char* argv[])
         bool isSelection = parser.isSet(selectionOption);
         bool isPin = parser.isSet(pinOption);
         bool isUpload = parser.isSet(uploadOption);
+        bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
         if (toClipboard) {
@@ -337,7 +342,11 @@ int main(int argc, char* argv[])
         if (isUpload) {
             req.addTask(CaptureRequest::UPLOAD_TASK);
         }
+        if (acceptOnSelect) {
+            req.addTask(CaptureRequest::ACCEPT_ON_SELECT);
+        }
         uint id = req.id();
+        // TODO print error if -s is specified alone
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall(

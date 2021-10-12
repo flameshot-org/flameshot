@@ -26,6 +26,7 @@ public:
         PRINT_GEOMETRY_TASK = 8,
         PIN_TASK = 16,
         UPLOAD_TASK = 32,
+        ACCEPT_ON_SELECT = 64,
     };
 
     CaptureRequest(CaptureMode mode,
