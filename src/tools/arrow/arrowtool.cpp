@@ -151,7 +151,7 @@ void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.fillPath(m_arrowPath, QBrush(color()));
 }
 
-void ArrowTool::pressed(const CaptureContext& context)
+void ArrowTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

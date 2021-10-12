@@ -1,17 +1,16 @@
 #include "overlaymessage.h"
 #include "colorutils.h"
 #include "confighandler.h"
-#include "qguiappcurrentscreen.h"
 
 #include <QApplication>
 #include <QDebug>
+#include <QLabel>
 #include <QPainter>
 #include <QPen>
 #include <QScreen>
-#include <QWidget>
 
 OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
-  : QWidget(parent)
+  : QLabel(parent)
   , m_targetArea(targetArea)
 {
     // NOTE: do not call the static functions from the constructor
@@ -19,6 +18,20 @@ OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
     m_messageStack.push(QString()); // Default message is empty
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setAttribute(Qt::WA_AlwaysStackOnTop);
+    setAlignment(Qt::AlignCenter);
+    setTextFormat(Qt::RichText);
+
+    m_fillColor = ConfigHandler().uiColor();
+    int opacity = ConfigHandler().contrastOpacity();
+    m_textColor =
+      (ColorUtils::colorIsDark(m_fillColor) ? Qt::white : Qt::black);
+    // map a background opacity range 0-255 to a fill opacity range 190-160
+    // we do this because an opaque background makes the box look opaque too
+    m_fillColor.setAlpha(160 + (180 - 220) / (255.0 - 0) * (opacity - 255));
+    setStyleSheet(
+      QStringLiteral("QLabel { color: %1; }").arg(m_textColor.name()));
+
+    setMargin(QApplication::fontMetrics().height() / 2);
     QWidget::hide();
 }
 
@@ -27,9 +40,14 @@ void OverlayMessage::init(QWidget* parent, const QRect& targetArea)
     new OverlayMessage(parent, targetArea);
 }
 
+/**
+ * @brief Push a message to the message stack.
+ * @param msg Message text formatted as rich text
+ */
 void OverlayMessage::push(const QString& msg)
 {
     m_instance->m_messageStack.push(msg);
+    m_instance->setText(m_instance->m_messageStack.top());
     setVisibility(true);
 }
 
@@ -39,13 +57,8 @@ void OverlayMessage::pop()
         m_instance->m_messageStack.pop();
     }
 
-    if (m_instance->m_messageStack.size() == 1) {
-        // Only empty message left (don't show it)
-        m_instance->QWidget::hide();
-    } else {
-        // Still visible, resize for new message
-        m_instance->updateGeometry();
-    }
+    m_instance->setText(m_instance->m_messageStack.top());
+    setVisibility(m_instance->m_messageStack.size() > 1);
 }
 
 void OverlayMessage::setVisibility(bool visible)
@@ -59,52 +72,56 @@ OverlayMessage* OverlayMessage::instance()
     return m_instance;
 }
 
-void OverlayMessage::paintEvent(QPaintEvent*)
+void OverlayMessage::pushKeyMap(const QList<QPair<QString, QString>>& map)
+{
+    push(compileFromKeyMap(map));
+}
+
+/**
+ * @brief Compile a message from a set of shortcuts and descriptions.
+ * @param map List of (shortcut, description) pairs
+ */
+QString OverlayMessage::compileFromKeyMap(
+  const QList<QPair<QString, QString>>& map)
+{
+    QString str = QStringLiteral("<table>");
+    for (const auto& pair : map) {
+        str += QStringLiteral("<tr>"
+                              "<td align=\"right\"><b>%1 </b></td>"
+                              "<td align=\"left\">&nbsp;&nbsp;%2</td>"
+                              "</tr>")
+                 .arg(pair.first)
+                 .arg(pair.second);
+    }
+    str += QStringLiteral("</table>");
+    return str;
+}
+
+void OverlayMessage::paintEvent(QPaintEvent* e)
 {
     QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
 
-    QRectF bRect = boundingRect();
-    bRect.moveTo(0, 0);
-
-    QColor rectColor(ConfigHandler().uiColor());
-    rectColor.setAlpha(180);
-    QColor textColor(
-      (ColorUtils::colorIsDark(rectColor) ? Qt::white : Qt::black));
-
-    painter.setBrush(QBrush(rectColor, Qt::SolidPattern));
-    painter.setPen(QPen(textColor));
-
+    painter.setBrush(QBrush(m_fillColor, Qt::SolidPattern));
+    painter.setPen(QPen(m_textColor, 1.5));
     float margin = painter.pen().widthF();
-    painter.drawRect(bRect - QMarginsF(margin, margin, margin, margin));
-    painter.drawText(bRect, Qt::AlignCenter, m_messageStack.top());
+    painter.drawRoundedRect(
+      rect() - QMarginsF(margin, margin, margin, margin), 5, 5);
+
+    return QLabel::paintEvent(e);
 }
 
-void OverlayMessage::showEvent(QShowEvent*)
+QRect OverlayMessage::boundingRect() const
 {
-    update();
-}
-
-QRectF OverlayMessage::boundingRect() const
-{
-    // We draw the white contrasting background for the text, using the
-    // same text and options to get the boundingRect that the text will
-    // have.
-    QRectF bRect = QApplication::fontMetrics().boundingRect(
-      m_targetArea, Qt::AlignCenter, m_messageStack.top());
-
-    // These four calls provide padding for the rect
-    const int margin = QApplication::fontMetrics().height() / 2;
-    bRect.setWidth(bRect.width() + margin);
-    bRect.setHeight(bRect.height() + margin);
-    bRect.setX(bRect.x() - margin);
-    bRect.setY(bRect.y() - margin);
-    return bRect;
+    QRect geom = QRect(QPoint(), sizeHint());
+    geom.moveCenter(m_targetArea.center());
+    return geom;
 }
 
 void OverlayMessage::updateGeometry()
 {
-    m_instance->setGeometry(m_instance->boundingRect().toRect());
-    QWidget::updateGeometry();
+    setGeometry(boundingRect());
+    QLabel::updateGeometry();
 }
 
 OverlayMessage* OverlayMessage::m_instance = nullptr;

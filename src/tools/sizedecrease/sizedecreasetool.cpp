@@ -52,7 +52,7 @@ CaptureTool* SizeDecreaseTool::copy(QObject* parent)
     return new SizeDecreaseTool(parent);
 }
 
-void SizeDecreaseTool::pressed(const CaptureContext& context)
+void SizeDecreaseTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
     emit requestAction(REQ_DECREASE_TOOL_SIZE);

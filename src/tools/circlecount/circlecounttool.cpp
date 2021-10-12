@@ -166,7 +166,7 @@ void CircleCountTool::drawStart(const CaptureContext& context)
     m_valid = true;
 }
 
-void CircleCountTool::pressed(const CaptureContext& context)
+void CircleCountTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

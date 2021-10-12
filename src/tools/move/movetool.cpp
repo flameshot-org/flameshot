@@ -38,7 +38,7 @@ CaptureTool* MoveTool::copy(QObject* parent)
     return new MoveTool(parent);
 }
 
-void MoveTool::pressed(const CaptureContext& context)
+void MoveTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

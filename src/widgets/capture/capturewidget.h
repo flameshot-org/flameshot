@@ -62,9 +62,6 @@ signals:
     void toolSizeChanged(int size);
 
 private slots:
-    // TODO replace with tools
-    void copyScreenshot();
-    void saveScreenshot();
     void undo();
     void redo();
     void togglePanel();
@@ -105,11 +102,12 @@ private:
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
-    void initContext(const QString& savePath, bool fullscreen);
+    void initContext(bool fullscreen, uint requestId);
     void initPanel();
     void initSelection();
     void initShortcuts();
     void initButtons();
+    void initHelpMessage();
     void updateSizeIndicator();
     void updateCursor();
     void updateSelectionState();
@@ -175,10 +173,11 @@ private:
     NotifierBox* m_notifierBox;
     HoverEventFilter* m_eventFilter;
     SelectionWidget* m_selection;
+    QString m_helpMessage;
 
     SelectionWidget::SideType m_mouseOverHandle;
-    uint m_id;
 
+    QMap<CaptureTool::Type, CaptureTool*> m_tools;
     CaptureToolObjects m_captureToolObjects;
     CaptureToolObjects m_captureToolObjectsBackup;
 
