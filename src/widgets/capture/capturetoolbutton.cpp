@@ -177,6 +177,5 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
     CaptureTool::TYPE_OPEN_APP,
 #endif
     CaptureTool::TYPE_PIN,           CaptureTool::TYPE_SIZEINCREASE,
-    CaptureTool::TYPE_SIZEDECREASE,
-    CaptureTool::TYPE_ACCEPT,
+    CaptureTool::TYPE_SIZEDECREASE,  CaptureTool::TYPE_ACCEPT,
 };
