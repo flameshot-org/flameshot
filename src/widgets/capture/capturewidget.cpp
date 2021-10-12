@@ -1002,22 +1002,12 @@ void CaptureWidget::setState(CaptureToolButton* b)
             m_activeButton->setColor(m_uiColor);
             m_activeButton = nullptr;
         }
-        loadDrawThickness();
+        m_context.thickness = ConfigHandler().toolSize(activeButtonToolType());
+        emit m_sidePanel->thicknessChanged(m_context.thickness);
         updateCursor();
         updateSelectionState();
         updateTool(b->tool());
     }
-}
-
-void CaptureWidget::loadDrawThickness()
-{
-    if ((activeButtonToolType() == CaptureTool::TYPE_TEXT) ||
-        (m_activeTool && m_activeTool->type() == CaptureTool::TYPE_TEXT)) {
-        m_context.thickness = m_config.drawFontSize();
-    } else {
-        m_context.thickness = m_config.drawThickness();
-    }
-    emit m_sidePanel->thicknessChanged(m_context.thickness);
 }
 
 void CaptureWidget::handleToolSignal(CaptureTool::Request r)

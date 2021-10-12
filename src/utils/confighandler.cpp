@@ -104,13 +104,15 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others
     OPTION("drawThickness"               ,LowerBoundedInt(1  , 3             )),
+    OPTION("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
     OPTION("drawColor"                   ,Color              ( Qt::red       )),
     OPTION("userColors"                  ,UserColors         (               )),
-    OPTION("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
     OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
+    // NOTE: If another tool size is added besides drawThickness and
+    // drawFontSize, remember to update ConfigHandler::toolSize
   };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -310,6 +312,24 @@ void ConfigHandler::setAllTheButtons()
     QList<CaptureTool::Type> buttons =
       CaptureToolButton::getIterableButtonTypes();
     setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
+}
+
+void ConfigHandler::setToolSize(CaptureTool::Type toolType, int size)
+{
+    if (toolType == CaptureTool::TYPE_TEXT) {
+        setDrawFontSize(size);
+    } else if (toolType != CaptureTool::NONE) {
+        setDrawThickness(size);
+    }
+}
+
+int ConfigHandler::toolSize(CaptureTool::Type toolType)
+{
+    if (toolType == CaptureTool::TYPE_TEXT) {
+        return drawFontSize();
+    } else {
+        return drawThickness();
+    }
 }
 
 // DEFAULTS

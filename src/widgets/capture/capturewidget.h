@@ -97,7 +97,6 @@ protected:
     void changeEvent(QEvent* changeEvent) override;
 
 private:
-    void loadDrawThickness();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
