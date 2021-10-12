@@ -1,7 +1,7 @@
 #pragma once
 
+#include <QLabel>
 #include <QStack>
-#include <QWidget>
 
 /**
  * @brief Overlay a message in capture mode.
@@ -17,7 +17,7 @@
  * @note You have to make sure that widgets pop the messages they pushed when
  * they are closed, to avoid potential bugs and resource leaks.
  */
-class OverlayMessage : public QWidget
+class OverlayMessage : public QLabel
 {
 public:
     OverlayMessage() = delete;
@@ -28,16 +28,19 @@ public:
     static void setVisibility(bool visible);
     static OverlayMessage* instance();
 
+    static void pushKeyMap(const QList<QPair<QString, QString>>& map);
+    static QString compileFromKeyMap(const QList<QPair<QString, QString>>& map);
+
 private:
     QStack<QString> m_messageStack;
     QRect m_targetArea;
+    QColor m_fillColor, m_textColor;
     static OverlayMessage* m_instance;
 
     OverlayMessage(QWidget* parent, const QRect& center);
 
     void paintEvent(QPaintEvent*) override;
-    void showEvent(QShowEvent*) override;
 
-    QRectF boundingRect() const;
+    QRect boundingRect() const;
     void updateGeometry();
 };

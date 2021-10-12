@@ -50,7 +50,7 @@ void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.drawRect(QRect(points().first, points().second));
 }
 
-void SelectionTool::pressed(const CaptureContext& context)
+void SelectionTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

@@ -84,7 +84,7 @@ void MarkerTool::drawStart(const CaptureContext& context)
     onThicknessChanged(context.thickness + PADDING_VALUE);
 }
 
-void MarkerTool::pressed(const CaptureContext& context)
+void MarkerTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

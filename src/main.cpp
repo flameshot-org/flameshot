@@ -307,7 +307,16 @@ int main(int argc, char* argv[])
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
         if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+            req.addTask(CaptureRequest::COPY_TASK);
+        }
+        if (isRaw) {
+            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        }
+        if (!pathValue.isEmpty()) {
+            req.addSaveTask(pathValue);
+        }
+        if (isSelection) {
+            req.addTask(CaptureRequest::PRINT_GEOMETRY_TASK);
         }
         uint id = req.id();
 
@@ -316,8 +325,8 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("graphicCapture"));
-        m << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
@@ -352,12 +361,15 @@ int main(int argc, char* argv[])
             goto finish;
         }
 
-        CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, pathValue);
+        CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
         if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+            req.addTask(CaptureRequest::COPY_TASK);
+        }
+        if (isRaw) {
+            req.addTask(CaptureRequest::PRINT_RAW_TASK);
         }
         if (!pathValue.isEmpty()) {
-            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+            req.addSaveTask(pathValue);
         }
         uint id = req.id();
         DBusUtils dbusUtils;
@@ -367,8 +379,8 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("fullScreen"));
-        m << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
@@ -410,13 +422,15 @@ int main(int argc, char* argv[])
             goto finish;
         }
 
-        CaptureRequest req(
-          CaptureRequest::SCREEN_MODE, delay, pathValue, number);
+        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
         if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+            req.addTask(CaptureRequest::COPY_TASK);
+        }
+        if (isRaw) {
+            req.addTask(CaptureRequest::PRINT_RAW_TASK);
         }
         if (!pathValue.isEmpty()) {
-            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+            req.addSaveTask(pathValue);
         }
         uint id = req.id();
         DBusUtils dbusUtils;
@@ -426,8 +440,8 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("captureScreen"));
-        m << number << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);

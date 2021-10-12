@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "capturerequest.h"
 #include <QPainter>
 #include <QPixmap>
 #include <QPoint>
@@ -28,6 +29,9 @@ struct CaptureContext
     int thickness;
     // Mode of the capture widget
     bool fullscreen;
+    uint requestId;
 
     QPixmap selectedScreenshotArea() const;
+    CaptureRequest* request();
+    CaptureRequest* request() const;
 };

@@ -2,37 +2,14 @@
 <node>
   <interface name="org.flameshot.Flameshot">
 
-      <!--
-        graphicCapture:
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
-        @toClipboard: Whether to copy the screenshot to clipboard or not.
-        @delay: delay time in milliseconds.
-        @id: identificator of the call.
-
-        Open the user interface used to capture the screen. Sends a captureTaken signal with the raw image after closing the GUI
-        due to a capture taken. It could send a captureFailed signal if the screenshot can't be retrieved.
-    -->
-    <method name="graphicCapture">
-      <arg name="path" type="s" direction="in"/>
-      <arg name="toClipboard" type="b" direction="in"/>
-      <arg name="delay" type="i" direction="in"/>
-      <arg name="id" type="u" direction="in"/>
-    </method>
-
     <!--
-        fullScreen:
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
-        @toClipboard: Whether to copy the screenshot to clipboard or not.
-        @delay: delay time in milliseconds, both return the @id defined in the call of this method.
-        @id: identificator of the call.
+        requestCapture:
+        @requestData: Serialized CaptureRequest object.
 
-        Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
+        Start a capture using a CaptureRequest.
     -->
-    <method name="fullScreen">
-      <arg name="path" type="s" direction="in"/>
-      <arg name="toClipboard" type="b" direction="in"/>
-      <arg name="delay" type="i" direction="in"/>
-      <arg name="id" type="u" direction="in"/>
+    <method name="requestCapture">
+      <arg name="requestData" type="ay" direction="in"/>
     </method>
 
     <!--
@@ -42,24 +19,6 @@
     -->
     <method name="openLauncher">
       <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
-        captureScreen:
-        @number: number of the screen to be captured.
-        @path: the path where the screenshot will be saved. When the argument is empty the program will ask for a path graphically.
-        @toClipboard: Whether to copy the screenshot to clipboard or not.
-        @delay: delay time in milliseconds, both return the @id defined in the call of this method.
-        @id: identificator of the call.
-
-        Takes a screenshot of the whole screen and sends a captureTaken signal with the raw image or a captureFailed signal.
-    -->
-    <method name="captureScreen">
-      <arg name="number" type="i" direction="in"/>
-      <arg name="path" type="s" direction="in"/>
-      <arg name="toClipboard" type="b" direction="in"/>
-      <arg name="delay" type="i" direction="in"/>
-      <arg name="id" type="u" direction="in"/>
     </method>
 
     <!--

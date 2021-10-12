@@ -96,7 +96,7 @@ void PixelateTool::paintMousePreview(QPainter& painter,
     Q_UNUSED(painter)
 }
 
-void PixelateTool::pressed(const CaptureContext& context)
+void PixelateTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

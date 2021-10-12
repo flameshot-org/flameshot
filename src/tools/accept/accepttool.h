@@ -3,31 +3,25 @@
 
 #pragma once
 
-#include "src/tools/abstracttwopointtool.h"
-#include <QPainter>
-#include <QPainterPath>
+#include "abstractactiontool.h"
 
-class ArrowTool : public AbstractTwoPointTool
+class AcceptTool : public AbstractActionTool
 {
     Q_OBJECT
 public:
-    explicit ArrowTool(QObject* parent = nullptr);
+    explicit AcceptTool(QObject* parent = nullptr);
+
+    bool closeOnButtonPressed() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
     QString description() const override;
-    QRect boundingRect() const override;
 
     CaptureTool* copy(QObject* parent = nullptr) override;
-    void process(QPainter& painter, const QPixmap& pixmap) override;
 
 protected:
-    void copyParams(const ArrowTool* from, ArrowTool* to);
     CaptureTool::Type type() const override;
 
 public slots:
     void pressed(CaptureContext& context) override;
-
-private:
-    QPainterPath m_arrowPath;
 };
