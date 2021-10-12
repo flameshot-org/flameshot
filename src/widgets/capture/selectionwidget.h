@@ -50,10 +50,14 @@ protected:
     void resizeEvent(QResizeEvent*);
     void moveEvent(QMoveEvent*);
 
+    void showEvent(QShowEvent*) override;
+    void hideEvent(QHideEvent*) override;
+
 signals:
     void animationEnded();
     void geometryChanged();
     void geometrySettled();
+    void visibilityChanged();
 
 public slots:
     void updateColor(const QColor& c);

@@ -304,6 +304,16 @@ void SelectionWidget::moveEvent(QMoveEvent*)
     }
 }
 
+void SelectionWidget::showEvent(QShowEvent*)
+{
+    emit visibilityChanged();
+}
+
+void SelectionWidget::hideEvent(QHideEvent*)
+{
+    emit visibilityChanged();
+}
+
 void SelectionWidget::updateColor(const QColor& c)
 {
     m_color = c;

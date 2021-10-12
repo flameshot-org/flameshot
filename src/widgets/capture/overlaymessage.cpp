@@ -74,14 +74,15 @@ OverlayMessage* OverlayMessage::instance()
 
 void OverlayMessage::pushKeyMap(const QList<QPair<QString, QString>>& map)
 {
-    push(compileKeyMap(map));
+    push(compileFromKeyMap(map));
 }
 
 /**
  * @brief Compile a message from a set of shortcuts and descriptions.
  * @param map List of (shortcut, description) pairs
  */
-QString OverlayMessage::compileKeyMap(const QList<QPair<QString, QString>>& map)
+QString OverlayMessage::compileFromKeyMap(
+  const QList<QPair<QString, QString>>& map)
 {
     QString str = QStringLiteral("<table>");
     for (const auto& pair : map) {
