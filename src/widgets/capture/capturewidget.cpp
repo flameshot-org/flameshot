@@ -219,7 +219,8 @@ CaptureWidget::CaptureWidget(uint id,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
 
     if (m_config.showHelp()) {
-        pushHelpMessage();
+        initHelpMessage();
+        OverlayMessage::push(m_helpMessage);
     }
 
     updateCursor();
@@ -317,9 +318,9 @@ void CaptureWidget::initButtons()
     m_buttonHandler->setButtons(vectorButtons);
 }
 
-void CaptureWidget::pushHelpMessage()
+void CaptureWidget::initHelpMessage()
 {
-    static QList<QPair<QString, QString>> keyMap;
+    QList<QPair<QString, QString>> keyMap;
     if (keyMap.isEmpty()) {
         keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
         using CT = CaptureTool;
@@ -342,7 +343,7 @@ void CaptureWidget::pushHelpMessage()
                         tr("Open side panel"));
         keyMap << QPair(tr("Esc"), tr("Exit"));
     }
-    OverlayMessage::pushKeyMap(keyMap);
+    m_helpMessage = OverlayMessage::compileFromKeyMap(keyMap);
 }
 
 QPixmap CaptureWidget::pixmap()
@@ -1022,8 +1023,8 @@ void CaptureWidget::initSelection()
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
-        if (!m_selection->isVisible() && ConfigHandler().showHelp()) {
-            pushHelpMessage();
+        if (!m_selection->isVisible()) {
+            OverlayMessage::push(m_helpMessage);
         }
     });
 }
