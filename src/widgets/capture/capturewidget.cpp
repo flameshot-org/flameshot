@@ -48,6 +48,8 @@
 // CaptureWidget is the main component used to capture the screen. It contains
 // an area of selection with its respective buttons.
 
+#define DEBUG_MULTISCREEN_IN_WINDOW 0
+
 using namespace CaptureConfig;
 
 class PaintBackground : public QWidget
@@ -124,7 +126,9 @@ CaptureWidget::CaptureWidget(uint id,
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
 
-    if (windowMode != CaptureWindowMode::DebugNonFullScreen) {
+    if (windowMode == CaptureWindowMode::DebugNonFullScreen) {
+        m_context.screenshot = QPixmap(1024, 768);
+    } else {
         // Grab Screenshot
         bool ok = true;
         if (m_captureCurrentScreen) {
@@ -191,34 +195,22 @@ CaptureWidget::CaptureWidget(uint id,
     m_buttonHandler = new ButtonHandler(this);
     initButtons();
     QVector<QRect> areas;
-    if (windowMode != DebugNonFullScreen) {
+    if (windowMode == CaptureWindowMode::FullScreenAll ||
+        (windowMode == CaptureWindowMode::MaximizeWindow &&
+         DEBUG_MULTISCREEN_IN_WINDOW)) {
         QPoint topLeftOffset = QPoint(0, 0);
 #if defined(Q_OS_WIN)
         topLeftOffset = topLeft;
 #endif
-
-        if (m_captureCurrentScreen) {
-            // MacOS works just with one active display, so we need to append
-            // just one current display and keep multiple displays logic for
-            // other OS
-            QRect r;
-            QScreen* screen = QGuiAppCurrentScreen().currentScreen();
-            r = screen->geometry();
-            // all calculations are processed according to (0, 0) start
-            // point so we need to move current object to (0, 0)
-            r.moveTo(0, 0);
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            QRect r = screen->geometry();
+            r.moveTo(r.x() / screen->devicePixelRatio(),
+                     r.y() / screen->devicePixelRatio());
+            r.moveTo(r.topLeft() - topLeftOffset);
             areas.append(r);
-        } else {
-            for (QScreen* const screen : QGuiApplication::screens()) {
-                QRect r = screen->geometry();
-                r.moveTo(r.x() / screen->devicePixelRatio(),
-                         r.y() / screen->devicePixelRatio());
-                r.moveTo(r.topLeft() - topLeftOffset);
-                areas.append(r);
-            }
         }
     } else {
-        areas.append(rect());
+        areas.append(m_context.screenshot.rect());
     }
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
@@ -632,14 +624,14 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
     }
 }
 
-void CaptureWidget::leaveEvent(QEvent *event)
+void CaptureWidget::leaveEvent(QEvent* event)
 {
     m_mouseOutside = true;
     redrawErrorMessage();
     QScrollArea::leaveEvent(event);
 }
 
-void CaptureWidget::enterEvent(QEvent *event)
+void CaptureWidget::enterEvent(QEvent* event)
 {
     m_mouseOutside = false;
     QScrollArea::enterEvent(event);
@@ -863,7 +855,9 @@ void CaptureWidget::resizeEvent(QResizeEvent* e)
     QScrollArea::resizeEvent(e);
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
     updateButtonRegions();
-    OverlayMessage::UpdateTargetArea(viewport()->rect());
+    if (windowMode != CaptureWindowMode::FullScreenAll) {
+        OverlayMessage::UpdateTargetArea(viewport()->rect());
+    }
 }
 
 void CaptureWidget::moveEvent(QMoveEvent* e)
@@ -880,7 +874,8 @@ void CaptureWidget::changeEvent(QEvent* e)
     }
 }
 
-void CaptureWidget::redrawErrorMessage() {
+void CaptureWidget::redrawErrorMessage()
+{
     QPoint bottomRight = rect().bottomRight();
     // Update the message in the bottom right corner. A rough estimate is
     // used for the update rect
@@ -924,7 +919,6 @@ void CaptureWidget::initPanel()
         // Doesn't matter too much at this point, actual size will be known once
         // the window has been created and shown.
         panelRect = rect();
-
     }
 
     if (ConfigHandler().showSidePanelButton()) {
@@ -1591,7 +1585,7 @@ QRect CaptureWidget::imageSize() const
 
 void CaptureWidget::updateButtonRegions()
 {
-    if (allowMoving()) {
+    if (allowMoving() && !DEBUG_MULTISCREEN_IN_WINDOW) {
         QRect visibleRegion = viewport()->rect().translated(-widget()->pos());
         m_buttonHandler->updateScreenRegions(visibleRegion);
     }
@@ -1757,12 +1751,14 @@ void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 {
     auto textRect = painter->fontMetrics().boundingRect(msg);
     auto sizeOffset = viewport()->size() - textRect.size();
-    textRect.moveTo(QPoint{sizeOffset.width(), sizeOffset.height()} // bottom left corner
+    textRect.moveTo(QPoint{ sizeOffset.width(), sizeOffset.height() }
+                    // bottom left corner
                     + m_viewOffset); // compensate for scrollview movement
-    textRect.adjust(-10, -5, 0, 0); // padding
+    textRect.adjust(-10, -5, 0, 0);  // padding
 
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    auto mouseRelativeToContent = widget()->mapFromGlobal(QCursor::pos(currentScreen));
+    auto mouseRelativeToContent =
+      widget()->mapFromGlobal(QCursor::pos(currentScreen));
 
     if (!textRect.contains(mouseRelativeToContent) || m_mouseOutside) {
         QColor textColor(Qt::white);
