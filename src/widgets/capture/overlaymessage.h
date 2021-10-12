@@ -29,7 +29,7 @@ public:
     static OverlayMessage* instance();
 
     static void pushKeyMap(const QList<QPair<QString, QString>>& map);
-    static QString compileKeyMap(const QList<QPair<QString, QString>>& map);
+    static QString compileFromKeyMap(const QList<QPair<QString, QString>>& map);
 
 private:
     QStack<QString> m_messageStack;

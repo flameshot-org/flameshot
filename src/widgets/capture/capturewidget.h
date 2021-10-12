@@ -107,7 +107,7 @@ private:
     void initSelection();
     void initShortcuts();
     void initButtons();
-    void initHelpMessage();
+    void pushHelpMessage();
     void updateSizeIndicator();
     void updateCursor();
     void updateSelectionState();

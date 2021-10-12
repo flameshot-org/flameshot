@@ -219,7 +219,7 @@ CaptureWidget::CaptureWidget(uint id,
                          QGuiAppCurrentScreen().currentScreen()->geometry());
 
     if (m_config.showHelp()) {
-        initHelpMessage();
+        pushHelpMessage();
     }
 
     updateCursor();
@@ -317,27 +317,30 @@ void CaptureWidget::initButtons()
     m_buttonHandler->setButtons(vectorButtons);
 }
 
-void CaptureWidget::initHelpMessage()
+void CaptureWidget::pushHelpMessage()
 {
-    QList<QPair<QString, QString>> keyMap;
-    keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
-    using CT = CaptureTool;
-    for (auto toolType : { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
-        if (!m_tools.contains(toolType)) {
-            continue;
+    static QList<QPair<QString, QString>> keyMap;
+    if (keyMap.isEmpty()) {
+        keyMap << QPair(tr("Mouse"), tr("Select screenshot area"));
+        using CT = CaptureTool;
+        for (auto toolType :
+             { CT::TYPE_ACCEPT, CT::TYPE_SAVE, CT::TYPE_COPY }) {
+            if (!m_tools.contains(toolType)) {
+                continue;
+            }
+            auto* tool = m_tools[toolType];
+            QString shortcut = ConfigHandler().shortcut(
+              QVariant::fromValue(toolType).toString());
+            shortcut.replace("Return", "Enter");
+            if (!shortcut.isEmpty()) {
+                keyMap << QPair(shortcut, tool->description());
+            }
         }
-        auto* tool = m_tools[toolType];
-        QString shortcut =
-          ConfigHandler().shortcut(QVariant::fromValue(toolType).toString());
-        shortcut.replace("Return", "Enter");
-        if (!shortcut.isEmpty()) {
-            keyMap << QPair(shortcut, tool->description());
-        }
+        keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
+        keyMap << QPair(tr("Right Click"), tr("Show color picker"));
+        keyMap << QPair(tr("Space"), tr("Open side panel"));
+        keyMap << QPair(tr("Esc"), tr("Exit"));
     }
-    keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
-    keyMap << QPair(tr("Right Click"), tr("Show color picker"));
-    keyMap << QPair(tr("Space"), tr("Open side panel"));
-    keyMap << QPair(tr("Esc"), tr("Exit"));
     OverlayMessage::pushKeyMap(keyMap);
 }
 
@@ -1015,6 +1018,11 @@ void CaptureWidget::initSelection()
             m_buttonHandler->show();
         } else {
             m_buttonHandler->hide();
+        }
+    });
+    connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
+        if (!m_selection->isVisible() && ConfigHandler().showHelp()) {
+            pushHelpMessage();
         }
     });
 }
