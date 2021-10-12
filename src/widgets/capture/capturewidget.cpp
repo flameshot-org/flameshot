@@ -163,7 +163,7 @@ CaptureWidget::CaptureWidget(uint id,
                 }
             }
             move(topLeft);
-            resize(m_context.screenshot.size());
+            setFixedSize(m_context.screenshot.size());
         } else if (windowMode == CaptureWindowMode::FullScreenCurrent) {
             // Emulate fullscreen mode
             //        setWindowFlags(Qt::WindowStaysOnTopHint |f

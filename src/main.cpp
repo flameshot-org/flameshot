@@ -49,7 +49,8 @@ void wayland_hacks()
 {
     // Workaround to https://github.com/ksnip/ksnip/issues/416
     DesktopInfo info;
-    if (info.windowManager() == DesktopInfo::GNOME) {
+    if (info.windowManager() == DesktopInfo::GNOME /*&&
+         QT_VERSION < QT_VERSION_CHECK(5, 15, 2)*/) {
         qputenv("QT_QPA_PLATFORM", "xcb");
     }
 }

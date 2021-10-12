@@ -126,7 +126,7 @@ void SidePanelWidget::updateThickness(const int& t)
 void SidePanelWidget::startColorGrab()
 {
     m_revertColor = m_color;
-    m_colorGrabber = new ColorGrabWidget(m_pixmap, m_captureWidget);
+    m_colorGrabber = new ColorGrabWidget(m_pixmap, m_captureWidget, m_captureWidget);
     connect(m_colorGrabber,
             &ColorGrabWidget::colorUpdated,
             this,

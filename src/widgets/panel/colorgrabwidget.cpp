@@ -1,11 +1,11 @@
 #include "colorgrabwidget.h"
 #include "sidepanelwidget.h"
 
+#include "capturewidget.h"
 #include "colorutils.h"
 #include "confighandler.h"
 #include "overlaymessage.h"
 #include "src/core/qguiappcurrentscreen.h"
-#include "capturewidget.h"
 #include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
@@ -13,6 +13,7 @@
 #include <QScreen>
 #include <QShortcut>
 #include <QTimer>
+#include <QWindow>
 #include <stdexcept>
 
 // Width (= height) and zoom level of the widget before the user clicks
@@ -25,8 +26,12 @@
 // NOTE: WIDTH1(2) should be divisible by ZOOM1(2) for best precision.
 //       WIDTH1 should be odd so the cursor can be centered on a pixel.
 
-ColorGrabWidget::ColorGrabWidget(QPixmap* p, CaptureWidget *captureWidget, QWidget* parent)
-  : QWidget(parent)
+ColorGrabWidget::ColorGrabWidget(QPixmap* p,
+                                 CaptureWidget* captureWidget,
+                                 QWidget* parent)
+  : QWidget(QApplication::platformName() != "wayland"
+              ? nullptr
+              : parent)  // moving top level windows doesn't work when using Qt wayland plugin
   , m_pixmap(p)
   , m_captureWidget(captureWidget)
   , m_mousePressReceived(false)
@@ -41,7 +46,6 @@ ColorGrabWidget::ColorGrabWidget(QPixmap* p, CaptureWidget *captureWidget, QWidg
     // eventFilter on other objects that do
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setWindowFlags(Qt::BypassWindowManagerHint | Qt::FramelessWindowHint);
-    setMouseTracking(true);
 }
 
 void ColorGrabWidget::startGrabbing()
@@ -98,7 +102,6 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         auto* e = static_cast<QMouseEvent*>(event);
         UpdateCapturePoint(e);
 
-
         if (!m_extraZoomActive && !m_magnifierActive) {
             // This fixes an issue when the mouse leaves the zoom area before
             // the widget even appears.
@@ -110,12 +113,14 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
             updateWidget();
         }
         if (e->buttons() == Qt::MiddleButton) {
-            return false; // Do not consume middle click so that dragging keeps working
+            return false; // Do not consume middle click so that dragging keeps
+                          // working
         }
 
         // Hide overlay message when cursor is over it
         OverlayMessage* overlayMsg = OverlayMessage::instance();
-        auto overlayCursorPos = overlayMsg->parentWidget()->mapFromGlobal(cursorPos());
+        auto overlayCursorPos =
+          overlayMsg->parentWidget()->mapFromGlobal(cursorPos());
         overlayMsg->setVisibility(
           !overlayMsg->geometry().contains(overlayCursorPos));
 
@@ -127,7 +132,8 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         auto* e = static_cast<QMouseEvent*>(event);
         UpdateCapturePoint(e);
         if (e->buttons() == Qt::MiddleButton) {
-            return false; // Do not consume middle click so that dragging keeps working
+            return false; // Do not consume middle click so that dragging keeps
+                          // working
         }
         if (e->buttons() == Qt::RightButton) {
             setMagnifierActive(!m_magnifierActive);
@@ -146,7 +152,8 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
         auto* e = static_cast<QMouseEvent*>(event);
         UpdateCapturePoint(e);
         if (e->button() == Qt::MiddleButton) {
-            return false; // Do not consume middle click so that dragging keeps working
+            return false; // Do not consume middle click so that dragging keeps
+                          // working
         }
         if (e->button() == Qt::LeftButton && m_extraZoomActive) {
             emit colorGrabbed(getColorAtPoint(cursorPos()));
@@ -156,7 +163,8 @@ bool ColorGrabWidget::eventFilter(QObject*, QEvent* event)
     } else if (event->type() == QEvent::MouseButtonDblClick) {
         auto* e = static_cast<QMouseEvent*>(event);
         if (e->buttons() == Qt::MiddleButton) {
-            return false; // Do not consume middle click so that dragging keeps working
+            return false; // Do not consume middle click so that dragging keeps
+                          // working
         }
         return true;
     }
@@ -231,6 +239,7 @@ void ColorGrabWidget::updateWidget()
     QRect rect(0, 0, width, width);
     rect.moveCenter(cursorPos());
     setGeometry(rect);
+    move(rect.topLeft());
     // Store a pixmap containing the zoomed-in section around the cursor
     QRect sourceRect(0, 0, width / zoom, width / zoom);
     sourceRect.moveCenter(m_capturePoint);
@@ -249,8 +258,8 @@ void ColorGrabWidget::finalize()
     close();
 }
 
-void ColorGrabWidget::UpdateCapturePoint(QMouseEvent *event)
+void ColorGrabWidget::UpdateCapturePoint(QMouseEvent* event)
 {
     m_capturePoint = m_captureWidget->widgetToCapturePoint(
-                m_captureWidget->mapFromGlobal(event->globalPos()));
+      m_captureWidget->mapFromGlobal(event->globalPos()));
 }
