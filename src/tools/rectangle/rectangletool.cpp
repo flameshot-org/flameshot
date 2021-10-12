@@ -70,7 +70,7 @@ void RectangleTool::process(QPainter& painter, const QPixmap& pixmap)
 void RectangleTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    onThicknessChanged(context.thickness);
+    onThicknessChanged(context.toolSize);
 }
 
 void RectangleTool::pressed(const CaptureContext& context)

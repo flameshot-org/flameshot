@@ -35,7 +35,7 @@ QString MarkerTool::description() const
 
 QRect MarkerTool::mousePreviewRect(const CaptureContext& context) const
 {
-    int width = PADDING_VALUE + context.thickness;
+    int width = PADDING_VALUE + context.toolSize;
     QRect rect(0, 0, width + 2, width + 2);
     rect.moveCenter(context.mousePos);
     return rect;
@@ -71,7 +71,7 @@ void MarkerTool::paintMousePreview(QPainter& painter,
     auto pen = painter.pen();
     painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
-    painter.setPen(QPen(context.color, PADDING_VALUE + context.thickness));
+    painter.setPen(QPen(context.color, PADDING_VALUE + context.toolSize));
     painter.drawLine(context.mousePos, context.mousePos);
     painter.setPen(pen);
     painter.setOpacity(opacity);
@@ -81,7 +81,7 @@ void MarkerTool::paintMousePreview(QPainter& painter,
 void MarkerTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    onThicknessChanged(context.thickness + PADDING_VALUE);
+    onThicknessChanged(context.toolSize + PADDING_VALUE);
 }
 
 void MarkerTool::pressed(const CaptureContext& context)

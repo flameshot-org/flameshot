@@ -59,7 +59,7 @@ signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
-    void thicknessChanged(int thickness);
+    void toolSizeChanged(int thickness);
 
 private slots:
     // TODO replace with tools
@@ -76,7 +76,8 @@ private slots:
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
-    void setDrawThickness(int t);
+    void onToolSizeChanged(int size);
+    void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
     void selectAll();
 
@@ -117,7 +118,7 @@ private:
     void pushToolToStack();
     void makeChild(QWidget* w);
 
-    void updateThickness(int thicknessOffset);
+    void setToolSize(int size);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;

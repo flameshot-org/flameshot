@@ -33,7 +33,7 @@ signals:
 public slots:
     void updateColor(const QColor& c);
     void updateColorNoWheel(const QColor& c);
-    void updateThickness(const int& t);
+    void onThicknessChanged(const int& t);
 
 private slots:
     void startColorGrab();

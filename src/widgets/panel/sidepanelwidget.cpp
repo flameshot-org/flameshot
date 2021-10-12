@@ -64,7 +64,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     connect(this,
             &SidePanelWidget::thicknessChanged,
             this,
-            &SidePanelWidget::updateThickness);
+            &SidePanelWidget::onThicknessChanged);
     // color hex editor sigslots
     connect(m_colorHex, &QLineEdit::editingFinished, this, [=]() {
         if (!QColor::isValidColor(m_colorHex->text())) {
@@ -103,7 +103,7 @@ void SidePanelWidget::updateColorNoWheel(const QColor& c)
     m_colorHex->setText(c.name(QColor::HexRgb));
 }
 
-void SidePanelWidget::updateThickness(const int& t)
+void SidePanelWidget::onThicknessChanged(const int& t)
 {
     m_thickness = qBound(0, t, maxDrawThickness);
     m_thicknessSlider->setValue(m_thickness);

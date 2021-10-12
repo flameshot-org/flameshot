@@ -36,7 +36,7 @@ bool CircleCountTool::isValid() const
 
 QRect CircleCountTool::mousePreviewRect(const CaptureContext& context) const
 {
-    int width = (context.thickness + THICKNESS_OFFSET) * 2;
+    int width = (context.toolSize + THICKNESS_OFFSET) * 2;
     QRect rect(0, 0, width, width);
     rect.moveCenter(context.mousePos);
     return rect;
@@ -143,7 +143,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
-    onThicknessChanged(context.thickness + PADDING_VALUE);
+    onThicknessChanged(context.toolSize + PADDING_VALUE);
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function

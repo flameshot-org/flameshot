@@ -248,7 +248,7 @@ void TextTool::drawMove(const QPoint& p)
 void TextTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    m_size = context.thickness;
+    m_size = context.toolSize;
     emit requestAction(REQ_ADD_CHILD_WIDGET);
 }
 
