@@ -38,7 +38,6 @@ CaptureTool::Type AcceptTool::type() const
 
 QString AcceptTool::description() const
 {
-    // TODO better message
     return tr("Accept the capture");
 }
 
