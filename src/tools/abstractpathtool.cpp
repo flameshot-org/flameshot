@@ -99,9 +99,9 @@ void AbstractPathTool::onColorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractPathTool::onThicknessChanged(int th)
+void AbstractPathTool::onSizeChanged(int size)
 {
-    m_thickness = th;
+    m_thickness = size;
 }
 
 void AbstractPathTool::addPoint(const QPoint& point)

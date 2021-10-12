@@ -265,9 +265,9 @@ void TextTool::onColorChanged(const QColor& c)
     }
 }
 
-void TextTool::onThicknessChanged(int th)
+void TextTool::onSizeChanged(int size)
 {
-    m_size = th;
+    m_size = size;
     m_font.setPointSize(m_size + BASE_POINT_SIZE);
     if (m_widget) {
         m_widget->setFont(m_font);

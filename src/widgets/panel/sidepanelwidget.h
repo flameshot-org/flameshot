@@ -14,7 +14,7 @@ class ColorGrabWidget;
 class QColorPickingEventFilter;
 class QSlider;
 
-constexpr int maxDrawThickness = 50;
+constexpr int maxToolSize = 50;
 
 class SidePanelWidget : public QWidget
 {
@@ -27,13 +27,13 @@ public:
 
 signals:
     void colorChanged(const QColor& c);
-    void thicknessChanged(int t);
+    void toolSizeChanged(int t);
     void togglePanel();
 
 public slots:
     void updateColor(const QColor& c);
     void updateColorNoWheel(const QColor& c);
-    void onThicknessChanged(const int& t);
+    void onToolSizeChanged(const int& t);
 
 private slots:
     void startColorGrab();
@@ -56,6 +56,6 @@ private:
     QPixmap* m_pixmap;
     QColor m_color;
     QColor m_revertColor;
-    QSlider* m_thicknessSlider;
-    int m_thickness;
+    QSlider* m_toolSizeSlider;
+    int m_toolSize;
 };

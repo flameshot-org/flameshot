@@ -212,9 +212,8 @@ void ShortcutsWidget::initShortcuts()
 #endif
     m_shortcuts << (QStringList()
                     << "" << QObject::tr("Show color picker") << "Right Click");
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Change the tool's thickness")
-                    << "Mouse Wheel");
+    m_shortcuts << (QStringList() << "" << QObject::tr("Change the tool's size")
+                                  << "Mouse Wheel");
 }
 
 void ShortcutsWidget::appendShortcut(const QString& shortcutName,

@@ -52,8 +52,8 @@ public slots:
     void drawStart(const CaptureContext& context) override;
     void pressed(const CaptureContext& context) override;
     void onColorChanged(const QColor& c) override;
-    void onThicknessChanged(int th) override;
-    virtual int thickness() const override { return m_size; };
+    void onSizeChanged(int size) override;
+    virtual int size() const override { return m_size; };
 
 private slots:
     void updateText(const QString& s);

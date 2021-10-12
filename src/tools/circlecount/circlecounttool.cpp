@@ -47,7 +47,7 @@ QRect CircleCountTool::boundingRect() const
     if (!isValid()) {
         return {};
     }
-    int bubble_size = thickness() + THICKNESS_OFFSET + PADDING_VALUE;
+    int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
     return QRect(points().first.x() - bubble_size,
                  points().first.y() - bubble_size,
                  bubble_size * 2,
@@ -97,7 +97,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QColor antiContrastColor =
       ColorUtils::colorIsDark(color()) ? Qt::black : Qt::white;
 
-    int bubble_size = thickness() + THICKNESS_OFFSET;
+    int bubble_size = size() + THICKNESS_OFFSET;
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
     painter.drawEllipse(
@@ -143,7 +143,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
-    onThicknessChanged(context.toolSize + PADDING_VALUE);
+    onSizeChanged(context.toolSize + PADDING_VALUE);
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function
@@ -151,7 +151,7 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
     auto orig_opacity = painter.opacity();
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color,
-                        (thickness() + THICKNESS_OFFSET) * 2,
+                        (size() + THICKNESS_OFFSET) * 2,
                         Qt::SolidLine,
                         Qt::RoundCap));
     painter.drawLine(context.mousePos,

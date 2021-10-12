@@ -24,7 +24,7 @@ struct CaptureContext
     QPoint widgetOffset;
     // Mouse position inside the widget
     QPoint mousePos;
-    // Value of the desired thickness
+    // Size of the active tool
     int toolSize;
     // Mode of the capture widget
     bool fullscreen;

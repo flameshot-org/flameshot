@@ -31,12 +31,12 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     }
 
     QFormLayout* colorForm = new QFormLayout();
-    m_thicknessSlider = new QSlider(Qt::Horizontal);
-    m_thicknessSlider->setRange(1, maxDrawThickness);
-    m_thicknessSlider->setValue(m_thickness);
+    m_toolSizeSlider = new QSlider(Qt::Horizontal);
+    m_toolSizeSlider->setRange(1, maxToolSize);
+    m_toolSizeSlider->setValue(m_toolSize);
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    colorForm->addRow(tr("Active thickness:"), m_thicknessSlider);
+    colorForm->addRow(tr("Active tool size:"), m_toolSizeSlider);
     colorForm->addRow(tr("Active color:"), m_colorLabel);
     m_layout->addLayout(colorForm);
 
@@ -56,15 +56,15 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_layout->addWidget(m_colorWheel);
     m_layout->addWidget(m_colorHex);
 
-    // thickness sigslots
-    connect(m_thicknessSlider,
+    // tool size sigslots
+    connect(m_toolSizeSlider,
             &QSlider::sliderMoved,
             this,
-            &SidePanelWidget::thicknessChanged);
+            &SidePanelWidget::toolSizeChanged);
     connect(this,
-            &SidePanelWidget::thicknessChanged,
+            &SidePanelWidget::toolSizeChanged,
             this,
-            &SidePanelWidget::onThicknessChanged);
+            &SidePanelWidget::onToolSizeChanged);
     // color hex editor sigslots
     connect(m_colorHex, &QLineEdit::editingFinished, this, [=]() {
         if (!QColor::isValidColor(m_colorHex->text())) {
@@ -103,10 +103,10 @@ void SidePanelWidget::updateColorNoWheel(const QColor& c)
     m_colorHex->setText(c.name(QColor::HexRgb));
 }
 
-void SidePanelWidget::onThicknessChanged(const int& t)
+void SidePanelWidget::onToolSizeChanged(const int& t)
 {
-    m_thickness = qBound(0, t, maxDrawThickness);
-    m_thicknessSlider->setValue(m_thickness);
+    m_toolSize = qBound(0, t, maxToolSize);
+    m_toolSizeSlider->setValue(m_toolSize);
 }
 
 void SidePanelWidget::startColorGrab()

@@ -194,9 +194,9 @@ public slots:
     virtual void pressed(const CaptureContext& context) = 0;
     // Called when the color is changed in the editor.
     virtual void onColorChanged(const QColor& c) = 0;
-    // Called when the thickness of the tool is updated in the editor.
-    virtual void onThicknessChanged(int th) = 0;
-    virtual int thickness() const { return -1; };
+    // Called when the size the tool size is changed by the user.
+    virtual void onSizeChanged(int size) = 0;
+    virtual int size() const { return -1; };
 
 private:
     unsigned int m_count;

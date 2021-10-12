@@ -59,7 +59,7 @@ signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
-    void toolSizeChanged(int thickness);
+    void toolSizeChanged(int size);
 
 private slots:
     // TODO replace with tools
@@ -146,7 +146,7 @@ private:
 
     // Outside selection opacity
     int m_opacity;
-    int m_thicknessByKeyboard;
+    int m_toolSizeByKeyboard;
 
     // utility flags
     bool m_mouseIsClicked;

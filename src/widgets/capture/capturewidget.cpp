@@ -71,7 +71,7 @@ CaptureWidget::CaptureWidget(uint id,
   , m_selection(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
-  , m_thicknessByKeyboard(0)
+  , m_toolSizeByKeyboard(0)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
 
@@ -187,7 +187,7 @@ CaptureWidget::CaptureWidget(uint id,
             &CaptureWidget::setDrawColor);
     m_colorPicker->hide();
 
-    // Init thickness sigslots
+    // Init tool size sigslots
     connect(this,
             &CaptureWidget::toolSizeChanged,
             this,
@@ -197,9 +197,9 @@ CaptureWidget::CaptureWidget(uint id,
     m_notifierBox = new NotifierBox(this);
     m_notifierBox->hide();
     connect(m_notifierBox, &NotifierBox::hidden, this, [this]() {
-        // Show cursor if it was hidden while adjusting tool thickness
+        // Show cursor if it was hidden while adjusting tool size
         updateCursor();
-        m_thicknessByKeyboard = 0;
+        m_toolSizeByKeyboard = 0;
         onToolSizeChanged(m_context.toolSize);
         onToolSizeSettled(m_context.toolSize);
     });
@@ -230,7 +230,7 @@ CaptureWidget::CaptureWidget(uint id,
           tr("Select an area with the mouse, or press Esc to exit."
              "\nPress Enter to capture the screen."
              "\nPress Right Click to show the color picker."
-             "\nUse the Mouse Wheel to change the thickness of your tool."
+             "\nUse the Mouse Wheel to change the size of your tool."
              "\nPress Space to open the side panel."));
     }
 
@@ -456,7 +456,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         connect(this,
                 &CaptureWidget::toolSizeChanged,
                 m_activeTool,
-                &CaptureTool::onThicknessChanged);
+                &CaptureTool::onSizeChanged);
         connect(m_activeTool,
                 &CaptureTool::requestAction,
                 this,
@@ -500,10 +500,10 @@ int CaptureWidget::selectToolItemAtPos(const QPoint& pos)
         if (!toolItem ||
             (toolItem && !toolItem->boundingRect().contains(pos))) {
             activeLayerIndex = m_captureToolObjects.find(pos, size());
-            int thickness_old = m_context.toolSize;
+            int oldToolSize = m_context.toolSize;
             m_panel->setActiveLayer(activeLayerIndex);
             drawObjectSelection();
-            if (thickness_old != m_context.toolSize) {
+            if (oldToolSize != m_context.toolSize) {
                 emit toolSizeChanged(m_context.toolSize);
             }
         }
@@ -692,7 +692,7 @@ void CaptureWidget::mouseReleaseEvent(QMouseEvent* e)
 void CaptureWidget::setToolSize(int size)
 {
     int oldSize = m_context.toolSize;
-    m_context.toolSize = qBound(1, size, maxDrawThickness);
+    m_context.toolSize = qBound(1, size, maxToolSize);
     updateTool(activeButtonTool());
 
     QPoint topLeft =
@@ -708,18 +708,18 @@ void CaptureWidget::setToolSize(int size)
 
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
 {
-    // If the key is a digit, change the thickness
+    // If the key is a digit, change the tool size
     bool ok;
     int digit = e->text().toInt(&ok);
     if (ok && e->modifiers() == Qt::NoModifier) { // digit received
-        m_thicknessByKeyboard = 10 * m_thicknessByKeyboard + digit;
-        setToolSize(m_thicknessByKeyboard);
-        if (m_context.toolSize != m_thicknessByKeyboard) {
-            // The thickness was out of range and was clipped by updateThickness
-            m_thicknessByKeyboard = 0;
+        m_toolSizeByKeyboard = 10 * m_toolSizeByKeyboard + digit;
+        setToolSize(m_toolSizeByKeyboard);
+        if (m_context.toolSize != m_toolSizeByKeyboard) {
+            // The tool size was out of range and was clipped by setToolSize
+            m_toolSizeByKeyboard = 0;
         }
     } else {
-        m_thicknessByKeyboard = 0;
+        m_toolSizeByKeyboard = 0;
     }
 
     if (!m_selection->isVisible()) {
@@ -752,21 +752,21 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
      * impossible to scroll. It's easier to calculate number of requests and do
      * not accept events faster that one in 200ms.
      * */
-    int thicknessOffset = 0;
+    int toolSizeOffset = 0;
     if (e->angleDelta().y() >= 60) {
         // mouse scroll (wheel) increment
-        thicknessOffset = 1;
+        toolSizeOffset = 1;
     } else if (e->angleDelta().y() <= -60) {
         // mouse scroll (wheel) decrement
-        thicknessOffset = -1;
+        toolSizeOffset = -1;
     } else {
         // touchpad scroll
         qint64 current = QDateTime::currentMSecsSinceEpoch();
         if ((current - m_lastMouseWheel) > 200) {
             if (e->angleDelta().y() > 0) {
-                thicknessOffset = 1;
+                toolSizeOffset = 1;
             } else if (e->angleDelta().y() < 0) {
-                thicknessOffset = -1;
+                toolSizeOffset = -1;
             }
             m_lastMouseWheel = current;
         } else {
@@ -774,7 +774,7 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    setToolSize(m_context.toolSize + thicknessOffset);
+    setToolSize(m_context.toolSize + toolSizeOffset);
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
@@ -881,7 +881,7 @@ void CaptureWidget::initPanel()
             this,
             &CaptureWidget::setDrawColor);
     connect(m_sidePanel,
-            &SidePanelWidget::thicknessChanged,
+            &SidePanelWidget::toolSizeChanged,
             this,
             &CaptureWidget::onToolSizeChanged);
     connect(this,
@@ -891,7 +891,7 @@ void CaptureWidget::initPanel()
     connect(this,
             &CaptureWidget::toolSizeChanged,
             m_sidePanel,
-            &SidePanelWidget::onThicknessChanged);
+            &SidePanelWidget::onToolSizeChanged);
     connect(m_sidePanel,
             &SidePanelWidget::togglePanel,
             m_panel,
@@ -1088,16 +1088,16 @@ void CaptureWidget::onToolSizeChanged(int t)
         setCursor(Qt::BlankCursor);
     }
 
-    // update thickness of object being drawn
+    // update tool size of object being drawn
     if (m_activeTool != nullptr) {
         updateTool(m_activeTool);
     }
 
-    // update thickness of selected object
+    // update tool size of selected object
     auto toolItem = activeToolObject();
     if (toolItem) {
         // Change thickness
-        toolItem->onThicknessChanged(t);
+        toolItem->onSizeChanged(t);
         if (!m_existingObjectIsChanged) {
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_existingObjectIsChanged = true;
@@ -1260,10 +1260,10 @@ void CaptureWidget::initShortcuts()
 
 void CaptureWidget::deleteCurrentTool()
 {
-    int thickness_old = m_context.toolSize;
+    int oldToolSize = m_context.toolSize;
     m_panel->slotButtonDelete(true);
     drawObjectSelection();
-    if (thickness_old != m_context.toolSize) {
+    if (oldToolSize != m_context.toolSize) {
         emit toolSizeChanged(m_context.toolSize);
     }
 }
@@ -1353,7 +1353,7 @@ void CaptureWidget::pushToolToStack()
         disconnect(this,
                    &CaptureWidget::toolSizeChanged,
                    m_activeTool,
-                   &CaptureTool::onThicknessChanged);
+                   &CaptureTool::onSizeChanged);
         if (m_panel->toolWidget()) {
             disconnect(m_panel->toolWidget(), nullptr, m_activeTool, nullptr);
         }
@@ -1399,9 +1399,8 @@ void CaptureWidget::drawObjectSelection()
         QPainter painter(&m_context.screenshot);
         toolItem->drawObjectSelection(painter);
         // TODO move this elsewhere
-        if (m_context.toolSize != toolItem->thickness()) {
-            m_context.toolSize =
-              toolItem->thickness() <= 0 ? 0 : toolItem->thickness();
+        if (m_context.toolSize != toolItem->size()) {
+            m_context.toolSize = toolItem->size();
         }
         if (activeToolObject() && m_activeButton) {
             uncheckActiveTool();

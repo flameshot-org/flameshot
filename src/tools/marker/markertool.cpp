@@ -56,7 +56,7 @@ void MarkerTool::process(QPainter& painter, const QPixmap& pixmap)
     auto pen = painter.pen();
     painter.setCompositionMode(QPainter::CompositionMode_Multiply);
     painter.setOpacity(0.35);
-    painter.setPen(QPen(color(), thickness()));
+    painter.setPen(QPen(color(), size()));
     painter.drawLine(points().first, points().second);
     painter.setPen(pen);
     painter.setOpacity(opacity);
@@ -81,7 +81,7 @@ void MarkerTool::paintMousePreview(QPainter& painter,
 void MarkerTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
-    onThicknessChanged(context.toolSize + PADDING_VALUE);
+    onSizeChanged(context.toolSize + PADDING_VALUE);
 }
 
 void MarkerTool::pressed(const CaptureContext& context)
