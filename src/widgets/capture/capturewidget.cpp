@@ -338,7 +338,8 @@ void CaptureWidget::pushHelpMessage()
         }
         keyMap << QPair(tr("Mouse Wheel"), tr("Change tool size"));
         keyMap << QPair(tr("Right Click"), tr("Show color picker"));
-        keyMap << QPair(tr("Space"), tr("Open side panel"));
+        keyMap << QPair(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL"),
+                        tr("Open side panel"));
         keyMap << QPair(tr("Esc"), tr("Exit"));
     }
     OverlayMessage::pushKeyMap(keyMap);
