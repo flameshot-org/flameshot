@@ -302,12 +302,12 @@ void Controller::startVisualCapture(const uint id,
 #elif defined(Q_OS_MACOS)
         // In "Emulate fullscreen mode"
         m_captureWindow->showFullScreen();
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
 #else
         m_captureWindow->showFullScreen();
 //        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
 #endif
-        m_captureWindow->activateWindow();
-        m_captureWindow->raise();
         if (!m_appLatestUrl.isEmpty() &&
             ConfigHandler().ignoreUpdateToVersion().compare(
               m_appLatestVersion) < 0) {
