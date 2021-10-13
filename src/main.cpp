@@ -56,6 +56,32 @@ void wayland_hacks()
 }
 #endif
 
+#ifdef Q_OS_WIN
+void windowsHighDPIHack() 
+{
+    // On Windows when main screen is set to highDPI one or there is only highDPI screen
+    // the default font size gets set incorectly. In the observations it was set to
+    // 8.25 / scaleFactor. It might be too small ont the high dpi screen, but even
+    // worse moving the window to normal DPI screen applies the difference in DPI
+    // resulting in 8.25 / (scaleFactor^2) which is wrong.
+    // Doesn't seem to happen when the low DPI screen is chosen as main one.
+    // 
+    // Likely related to https://bugreports.qt.io/browse/QTBUG-58610 and
+    // https://codereview.qt-project.org/c/qt/qtbase/+/264388
+    // Seems to be fixed in Qt6. In a test app it reported default
+    // font size as ~8 regardless of which screen was chosen as main one.
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QFont font;
+    font.resolve();
+    if (font.pointSizeF() < 8) {
+        font.setPointSizeF(8);
+        QApplication::setFont(font);
+    }
+#endif
+}
+#endif
+
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_LINUX
@@ -63,6 +89,12 @@ int main(int argc, char* argv[])
 #endif
     spdlog::set_level(spdlog::level::debug); // Set global log level to debug
     spdlog::set_pattern("[source %s] [function %!] [line %#] %v");
+
+    // Configure high DPi scaling, must be done before creating application
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+      Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
     // required for the button serialization
     // TODO: change to QVector in v1.0
@@ -77,6 +109,9 @@ int main(int argc, char* argv[])
         QtSingleApplication app(argc, argv);
 #endif
         QApplication::setStyle(new StyleOverride);
+#ifdef Q_OS_WIN
+        windowsHighDPIHack();
+#endif
 
         QTranslator translator, qtTranslator;
         QStringList trPaths = PathInfo::translationsPaths();
