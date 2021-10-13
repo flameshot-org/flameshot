@@ -43,6 +43,6 @@ CaptureTool* ImgurUploaderTool::copy(QObject* parent)
 void ImgurUploaderTool::pressed(CaptureContext& context)
 {
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    context.request()->addTask(CaptureRequest::UPLOAD_TASK);
+    context.request()->addTask(CaptureRequest::UPLOAD);
     emit requestAction(REQ_CLOSE_GUI);
 }

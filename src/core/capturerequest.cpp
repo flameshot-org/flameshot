@@ -101,27 +101,27 @@ CaptureRequest::ExportTask CaptureRequest::tasks() const
 
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
-    if (task == SAVE_TASK) {
-        throw std::logic_error("SAVE_TASK must be added using addSaveTask");
+    if (task == SAVE) {
+        throw std::logic_error("SAVE task must be added using addSaveTask");
     }
     m_tasks |= task;
 }
 
 void CaptureRequest::addSaveTask(const QString& path)
 {
-    m_tasks |= SAVE_TASK;
+    m_tasks |= SAVE;
     m_path = path;
 }
 
 void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 {
-    m_tasks |= PIN_TASK;
+    m_tasks |= PIN;
     m_pinWindowGeometry = pinWindowGeometry;
 }
 
 void CaptureRequest::exportCapture(const QPixmap& capture)
 {
-    if (m_tasks & SAVE_TASK) {
+    if (m_tasks & SAVE) {
         if (m_path.isEmpty()) {
             ScreenshotSaver(m_id).saveToFilesystemGUI(capture);
         } else {
@@ -129,11 +129,11 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
         }
     }
 
-    if (m_tasks & COPY_TASK) {
+    if (m_tasks & COPY) {
         ScreenshotSaver().saveToClipboard(capture);
     }
 
-    if (m_tasks & PIN_TASK) {
+    if (m_tasks & PIN) {
         QWidget* widget = new PinWidget(capture, m_pinWindowGeometry);
         widget->show();
         widget->activateWindow();
@@ -143,7 +143,7 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
         }
     }
 
-    if (m_tasks & UPLOAD_TASK) {
+    if (m_tasks & UPLOAD) {
         QWidget* widget = new ImgurUploader(capture);
         widget->show();
         widget->activateWindow();

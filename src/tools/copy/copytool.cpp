@@ -41,7 +41,7 @@ CaptureTool* CopyTool::copy(QObject* parent)
 
 void CopyTool::pressed(CaptureContext& context)
 {
-    context.request()->addTask(CaptureRequest::COPY_TASK);
+    context.request()->addTask(CaptureRequest::COPY);
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_CLOSE_GUI);
 }

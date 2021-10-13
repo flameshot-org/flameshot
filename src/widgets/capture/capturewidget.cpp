@@ -1020,7 +1020,7 @@ void CaptureWidget::initSelection()
             auto req = m_context.request();
             if (req->tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
                 m_captureDone = true;
-                if (req->tasks() & CaptureRequest::PIN_TASK) {
+                if (req->tasks() & CaptureRequest::PIN) {
                     QRect geometry = m_context.selection;
                     geometry.setTopLeft(geometry.topLeft() +
                                         m_context.widgetOffset);

@@ -49,7 +49,7 @@ CaptureTool* AcceptTool::copy(QObject* parent)
 void AcceptTool::pressed(CaptureContext& context)
 {
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    if (context.request()->tasks() & CaptureRequest::PIN_TASK) {
+    if (context.request()->tasks() & CaptureRequest::PIN) {
         QRect geometry = context.selection;
         geometry.moveTopLeft(geometry.topLeft() + context.widgetOffset);
         context.request()->addPinTask(geometry);

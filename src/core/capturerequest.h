@@ -20,12 +20,12 @@ public:
     enum ExportTask
     {
         NO_TASK = 0,
-        COPY_TASK = 1,
-        SAVE_TASK = 2,
-        PRINT_RAW_TASK = 4,
-        PRINT_GEOMETRY_TASK = 8,
-        PIN_TASK = 16,
-        UPLOAD_TASK = 32,
+        COPY = 1,
+        SAVE = 2,
+        PRINT_RAW = 4,
+        PRINT_GEOMETRY = 8,
+        PIN = 16,
+        UPLOAD = 32,
         ACCEPT_ON_SELECT = 64,
     };
 
