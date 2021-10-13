@@ -6,6 +6,7 @@
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QLabel>
+#include <QScreen>
 #include <QShortcut>
 #include <QVBoxLayout>
 #include <QWheelEvent>
