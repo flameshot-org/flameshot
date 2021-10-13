@@ -345,9 +345,12 @@ int main(int argc, char* argv[])
         }
         if (acceptOnSelect) {
             req.addTask(CaptureRequest::ACCEPT_ON_SELECT);
+            if (!clipboard && !raw && path.isEmpty() && !printGeometry &&
+                !pin && !upload) {
+                req.addSaveTask();
+            }
         }
         uint id = req.id();
-        // TODO print error if -s is specified alone
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall(
@@ -378,33 +381,22 @@ int main(int argc, char* argv[])
         bool raw = parser.isSet(rawImageOption);
         bool upload = parser.isSet(uploadOption);
         // Not a valid command
-        if (!raw && !clipboard && !upload && path.isEmpty()) {
-            QTextStream out(stdout);
-            out
-              << "Invalid format, set how to export the screenshot with one of "
-              << "the following flags:\n "
-              << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-              << rawImageOption.dashedNames().join(QStringLiteral(", "))
-              << "\n "
-              << clipboardOption.dashedNames().join(QStringLiteral(", "))
-              << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("full")
-                                       << QStringLiteral("-h"));
-            goto finish;
-        }
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
         }
-        if (raw) {
-            req.addTask(CaptureRequest::PRINT_RAW);
-        }
         if (!path.isEmpty()) {
             req.addSaveTask(path);
         }
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
+        }
         if (upload) {
             req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (!clipboard && path.isEmpty() && !raw && !upload) {
+            req.addSaveTask();
         }
         uint id = req.id();
         DBusUtils dbusUtils;
@@ -445,21 +437,6 @@ int main(int argc, char* argv[])
         bool raw = parser.isSet(rawImageOption);
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
-        // Not a valid command
-        if (!raw && !clipboard && !pin && !upload &&
-            path.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", "))
-                << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << pinOption.dashedNames().join(QStringLiteral(", ")) << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("screen")
-                                       << QStringLiteral("-h"));
-            goto finish;
-        }
 
         CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
         if (clipboard) {
@@ -477,6 +454,11 @@ int main(int argc, char* argv[])
         if (upload) {
             req.addTask(CaptureRequest::UPLOAD);
         }
+
+        if (!clipboard && !raw && path.isEmpty() && !pin && !upload) {
+            req.addSaveTask();
+        }
+
         uint id = req.id();
         DBusUtils dbusUtils;
 
