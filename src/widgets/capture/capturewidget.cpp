@@ -1472,6 +1472,7 @@ void CaptureWidget::drawToolsData()
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
+    pixmapItem.setDevicePixelRatio(1);
     int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
         if (toolItem->type() == CaptureTool::TYPE_CIRCLECOUNT) {
@@ -1624,9 +1625,7 @@ void CaptureWidget::updateUtilityPanelSize()
 
 void CaptureWidget::updateScale()
 {
-    qDebug() << "update scale " << devicePixelRatioF();
     QSizeF size = m_context.screenshot.rect().size() / devicePixelRatioF();
-    qDebug() << "size.tosize " << size.toSize();
     widget()->resize(size.toSize());
 }
 
