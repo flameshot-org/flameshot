@@ -38,10 +38,11 @@ public:
     void setGeometry(const QRect& r);
     QRect geometry() const;
     QRect fullGeometry() const;
+    void refreshGeometry();
 
     QRect rect() const;
 
-    QRect captureGeomtry();
+    QRect captureGeomtry() const;
     void setCaptureGeometry(QRect rect);
     void SetScale(float v);
     QRect captureToWidgetRect(QRect rect);
@@ -93,7 +94,7 @@ private:
     bool m_mouseStartMove;
 
     QRect m_captureGeometry;
-    QTransform transform;
+    QTransform m_captureToWidgetTransform;
 
     // naming convention for handles
     // T top, B bottom, R Right, L left

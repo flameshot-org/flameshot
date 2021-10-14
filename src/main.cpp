@@ -60,11 +60,7 @@ void wayland_hacks()
 void windowsHighDPIHack() 
 {
     // On Windows when main screen is set to highDPI one or there is only highDPI screen
-    // the default font size gets set incorectly. In the observations it was set to
-    // 8.25 / scaleFactor. It might be too small ont the high dpi screen, but even
-    // worse moving the window to normal DPI screen applies the difference in DPI
-    // resulting in 8.25 / (scaleFactor^2) which is wrong.
-    // Doesn't seem to happen when the low DPI screen is chosen as main one.
+    // the default font size gets set incorectly.
     // 
     // Likely related to https://bugreports.qt.io/browse/QTBUG-58610 and
     // https://codereview.qt-project.org/c/qt/qtbase/+/264388
@@ -74,7 +70,7 @@ void windowsHighDPIHack()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QFont font;
     font.resolve();
-    if (font.pointSizeF() < 8) {
+    if (font.pointSizeF() < 8 || font.pointSizeF() > 9.5) {
         font.setPointSizeF(8);
         QApplication::setFont(font);
     }

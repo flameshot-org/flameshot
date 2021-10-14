@@ -148,6 +148,11 @@ QRect SelectionWidget::fullGeometry() const
     return QWidget::geometry();
 }
 
+void SelectionWidget::refreshGeometry()
+{
+    setGeometry(captureToWidgetRect(m_captureGeometry));
+}
+
 QRect SelectionWidget::rect() const
 {
     return QWidget::rect() - QMargins(MARGIN, MARGIN, MARGIN, MARGIN);
@@ -266,7 +271,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
                 auto captureMoveAmount = captureWidget->widgetToCapturePoint(dragAmount)
                          - captureWidget->widgetToCapturePoint(QPoint(0, 0));
                 m_captureGeometry.translate(captureMoveAmount);
-                move(this->pos() + dragAmount);
+                move(m_captureToWidgetTransform.map(m_captureGeometry.topLeft()) - QPoint(MARGIN, MARGIN));
                 m_dragStartPos = pos;
             }
             return;
@@ -287,7 +292,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
     m_dragStartPos = pos;
 }
 
-QRect SelectionWidget::captureGeomtry()
+QRect SelectionWidget::captureGeomtry() const
 {
     return m_captureGeometry;
 }
@@ -295,17 +300,18 @@ QRect SelectionWidget::captureGeomtry()
 void SelectionWidget::setCaptureGeometry(QRect rect)
 {
     m_captureGeometry = rect;
-    setGeometry(captureToWidgetRect(rect));
+    refreshGeometry();
 }
 
 void SelectionWidget::SetScale(float v)
 {
-    transform = QTransform::fromScale(v, v);
+    v = 1 / v;
+    m_captureToWidgetTransform = QTransform::fromScale(v, v);
 }
 
 QRect SelectionWidget::captureToWidgetRect(QRect rect)
 {
-    return transform.mapRect(rect);
+    return m_captureToWidgetTransform.mapRect(rect);
 }
 
 void SelectionWidget::paintEvent(QPaintEvent*)

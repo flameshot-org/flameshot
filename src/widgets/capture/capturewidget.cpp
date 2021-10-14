@@ -37,6 +37,7 @@
 #include <QScreen>
 #include <QScrollBar>
 #include <QShortcut>
+#include <QWindow>
 #include <QtDebug>
 #include <draggablewidgetmaker.h>
 
@@ -180,7 +181,7 @@ CaptureWidget::CaptureWidget(uint id,
     }
 
     setWidget(new PaintBackground(this));
-    widget()->resize(m_context.screenshot.size());
+    updateScale();
     widget()->setMouseTracking(true);
     if (windowMode == CaptureWindowMode::FullScreenAll ||
         windowMode == CaptureWindowMode::FullScreenCurrent) {
@@ -263,7 +264,6 @@ CaptureWidget::CaptureWidget(uint id,
              "\nUse the Mouse Wheel to change the thickness of your tool."
              "\nPress Space to open the side panel."));
     }
-
     updateCursor();
 }
 
@@ -423,7 +423,13 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
 void CaptureWidget::drawContent(QPainter& painter)
 {
+    painter.save();
+    // change coordinates so they match capture coordinates
+    float captureToDrawScale = 1.0f / (m_viewScale * devicePixelRatioF());
+    painter.scale(captureToDrawScale, captureToDrawScale);
+
     painter.drawPixmap(0, 0, m_context.screenshot);
+    painter.drawPixmap(m_context.screenshot.rect(), m_context.screenshot);
 
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();
@@ -438,7 +444,10 @@ void CaptureWidget::drawContent(QPainter& painter)
 
     // draw inactive region
     drawInactiveRegion(&painter);
+    painter.restore();
 
+    painter.save();
+    painter.translate(widget()->mapFrom(viewport(), QPoint(0, 0)));
     if (!isActiveWindow()) {
         drawErrorMessage(
           tr("Flameshot has lost focus. Keyboard shortcuts won't "
@@ -453,6 +462,7 @@ void CaptureWidget::drawContent(QPainter& painter)
     } else {
         m_hadErrorMessage = false;
     }
+    painter.restore();
 }
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
@@ -888,8 +898,7 @@ void CaptureWidget::scrollContentsBy(int dx, int dy)
     Q_UNUSED(dy);
 
     m_viewOffset =
-      (QPointF(horizontalScrollBar()->value(), verticalScrollBar()->value()) *
-       m_viewScale)
+      (QPointF(horizontalScrollBar()->value(), verticalScrollBar()->value()))
         .toPoint();
     updateViewTransform(false);
     QScrollArea::scrollContentsBy(dx, dy);
@@ -1036,11 +1045,7 @@ void CaptureWidget::initSelection()
         updateCursor();
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
-        if (m_selection->isVisible()) {
-            m_buttonHandler->show();
-        } else {
-            m_buttonHandler->hide();
-        }
+        refreshToolButtonVisibility();
     });
 }
 
@@ -1546,26 +1551,30 @@ bool CaptureWidget::allowMoving()
 
 void CaptureWidget::updateViewTransform(bool updateScrollbars)
 {
-    if (!updateScrollbars) {
-        m_viewTransform =
-          QTransform::fromTranslate(m_viewOffset.x(), m_viewOffset.y());
-        m_viewTransform.scale(m_viewScale, m_viewScale);
-        m_selection->SetScale(m_viewScale);
-    } else {
+    if (updateScrollbars) {
         auto b = m_viewOffset;
         horizontalScrollBar()->setValue(b.x());
         verticalScrollBar()->setValue(b.y());
         m_viewOffset =
           QPoint(horizontalScrollBar()->value(), verticalScrollBar()->value());
     }
+    float resultingScale = m_viewScale * devicePixelRatioF();
+
+    auto p = m_viewOffset * resultingScale;
+
+    m_viewTransform = QTransform::fromTranslate(p.x(), p.y());
+    m_viewTransform.scale(resultingScale, resultingScale);
+    m_selection->SetScale(resultingScale);
+
     updateButtonRegions();
+    m_selection->refreshGeometry();
     m_buttonHandler->updatePosition(m_selection->geometry());
+    refreshToolButtonVisibility();
 }
 
-QPoint CaptureWidget::widgetToCapturePoint(QPoint point)
+QPoint CaptureWidget::widgetToCapturePoint(QPointF point)
 {
-    return m_viewTransform.map(point);
-    // return m_viewOffset + point * m_viewScale;
+    return m_viewTransform.map(point).toPoint();
 }
 
 QPoint CaptureWidget::scrollWidgetPoint(QPoint p)
@@ -1592,6 +1601,15 @@ void CaptureWidget::updateButtonRegions()
     updateUtilityPanelSize();
 }
 
+void CaptureWidget::refreshToolButtonVisibility()
+{
+    if (m_selection->isVisible()) {
+        m_buttonHandler->show();
+    } else {
+        m_buttonHandler->hide();
+    }
+}
+
 void CaptureWidget::updateUtilityPanelSize()
 {
     if (windowMode != CaptureWindowMode::FullScreenAll) {
@@ -1602,6 +1620,20 @@ void CaptureWidget::updateUtilityPanelSize()
                             m_panel->y() + m_panel->height() / 2 -
                               m_panelButton->height() / 2);
     }
+}
+
+void CaptureWidget::updateScale()
+{
+    qDebug() << "update scale " << devicePixelRatioF();
+    QSizeF size = m_context.screenshot.rect().size() / devicePixelRatioF();
+    qDebug() << "size.tosize " << size.toSize();
+    widget()->resize(size.toSize());
+}
+
+void CaptureWidget::handleScaleFactorChange()
+{
+    updateScale();
+    updateViewTransform(false);
 }
 
 QPoint CaptureWidget::scrollPosition() const
@@ -1689,6 +1721,12 @@ void CaptureWidget::OpenAndShow()
             show();
             break;
     }
+    handleScaleFactorChange();
+
+    connect(windowHandle(),
+            &QWindow::screenChanged,
+            this,
+            &CaptureWidget::handleScaleFactorChange);
 }
 
 void CaptureWidget::undo()
@@ -1750,15 +1788,14 @@ QRect CaptureWidget::paddedUpdateRect(const QRect& r) const
 void CaptureWidget::drawErrorMessage(const QString& msg, QPainter* painter)
 {
     auto textRect = painter->fontMetrics().boundingRect(msg);
-    auto sizeOffset = viewport()->size() - textRect.size();
-    textRect.moveTo(QPoint{ sizeOffset.width(), sizeOffset.height() }
-                    // bottom left corner
-                    + m_viewOffset); // compensate for scrollview movement
-    textRect.adjust(-10, -5, 0, 0);  // padding
+    auto sizeOffset =
+      viewport()->size() - textRect.size(); // bottom right corner of view
+    textRect.moveTo(QPoint(sizeOffset.width(), sizeOffset.height()));
+    textRect.adjust(-10, -5, 0, 0); // padding
 
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
     auto mouseRelativeToContent =
-      widget()->mapFromGlobal(QCursor::pos(currentScreen));
+      viewport()->mapFromGlobal(QCursor::pos(currentScreen));
 
     if (!textRect.contains(mouseRelativeToContent) || m_mouseOutside) {
         QColor textColor(Qt::white);

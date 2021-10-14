@@ -89,7 +89,7 @@ private slots:
 
 public:
     void removeToolObject(int index = -1);
-    QPoint widgetToCapturePoint(QPoint point);
+    QPoint widgetToCapturePoint(QPointF point);
     QPoint scrollWidgetPoint(QPoint);
     QPoint scrollWidgetPointToThis(QPoint);
     QRect imageSize() const;
@@ -136,7 +136,10 @@ private:
     void updateViewTransform(bool updateScrollbars = true);
     QPoint scrollPosition() const;
     void updateButtonRegions();
+    void refreshToolButtonVisibility();
     void updateUtilityPanelSize();
+    void updateScale();
+    void handleScaleFactorChange();
 
     void updateThickness(int thicknessOffset);
 

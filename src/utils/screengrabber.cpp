@@ -148,12 +148,29 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     QRect geometry;
     for (QScreen* const screen : QGuiApplication::screens()) {
         QRect scrRect = screen->geometry();
+#ifdef Q_OS_WIN
+        // On Win10 21H1 with Qt 5.15.2 positions are correct as the bitmap in
+        // memory without any scaling but each size is multiplied by device
+        // pixel ratio
+        scrRect.setSize(scrRect.size() * screen->devicePixelRatio());
+        geometry = geometry.united(scrRect);
+#else
+        // this likely wrong for other os as well, but so far windows was tested
         scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
                        scrRect.y() / screen->devicePixelRatio());
         geometry = geometry.united(scrRect);
+#endif
     }
 
-    QPixmap p(QApplication::primaryScreen()->grabWindow(
+    auto primaryScreen = QApplication::primaryScreen();
+#ifdef Q_OS_WIN
+    // The roundtrip pixelDimensions->int(pixelDimensions / pixelRatio) -> pixelDimensions in capturedImage
+    // is potentially lossy, but that's how GrabWindow expects the dimensions.
+    geometry.setSize(geometry.size() / primaryScreen->devicePixelRatio());
+    geometry.moveTopLeft(geometry.topLeft() /
+                         primaryScreen->devicePixelRatio());
+#endif
+    QPixmap p(primaryScreen->grabWindow(
       QApplication::desktop()->winId(),
       geometry.x(),
       geometry.y(),
