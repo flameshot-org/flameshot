@@ -45,7 +45,7 @@ public:
     QMap<uint, CaptureRequest>& requests();
 
 signals:
-    void captureTaken(uint id, QPixmap p);
+    void captureTaken(uint id, QPixmap p, const QRect& selection);
     void captureFailed(uint id);
     void captureSaved(uint id, QString savePath);
 

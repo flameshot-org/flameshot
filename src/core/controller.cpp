@@ -331,11 +331,12 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
         CaptureRequest& request = *requests().find(id);
+        QRect geometry = ScreenGrabber().screenGeometry(n);
         if (request.tasks() & CaptureRequest::PIN) {
             // change geometry for pin task
-            request.addPinTask(ScreenGrabber().screenGeometry(n));
+            request.addPinTask(geometry);
         }
-        emit captureTaken(id, p);
+        emit captureTaken(id, p, geometry);
     } else {
         emit captureFailed(id);
     }
@@ -564,7 +565,8 @@ void Controller::startFullscreenCapture(const uint id)
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     if (ok) {
-        emit captureTaken(id, p);
+        // selection parameter is unused here
+        emit captureTaken(id, p, {});
     } else {
         emit captureFailed(id);
     }

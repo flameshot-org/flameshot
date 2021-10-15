@@ -86,7 +86,7 @@ void DBusUtils::selectionTaken(uint id, QByteArray rawImage, QRect selection)
 
         QTextStream out(&file);
         out << selection.width() << " " << selection.height() << " "
-            << selection.x() << " " << selection.y();
+            << selection.x() << " " << selection.y() << Qt::endl;
         file.close();
         qApp->exit();
     }

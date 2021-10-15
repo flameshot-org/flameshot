@@ -165,7 +165,7 @@ void CaptureLauncher::disconnectCaptureSlots()
                &CaptureLauncher::captureFailed);
 }
 
-void CaptureLauncher::captureTaken(uint id, QPixmap p)
+void CaptureLauncher::captureTaken(uint id, QPixmap p, const QRect& selection)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
