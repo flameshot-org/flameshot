@@ -250,7 +250,9 @@ void ConfigHandler::setStartupLaunch(const bool start)
                    << process.readAll();
     }
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/autostart/";
+    QString path =
+      QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+      "/autostart/";
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
         autostartDir.mkpath(".");
