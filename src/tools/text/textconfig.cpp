@@ -77,6 +77,7 @@ TextConfig::TextConfig(QWidget* parent)
     m_leftAlignButton =
       new QPushButton(QIcon(iconPrefix + "leftalign.svg"), QLatin1String(""));
     m_leftAlignButton->setCheckable(true);
+    m_leftAlignButton->setAutoExclusive(true);
     connect(m_leftAlignButton, &QPushButton::clicked, this, [this] {
         alignmentChanged(Qt::AlignLeft);
     });
@@ -85,6 +86,7 @@ TextConfig::TextConfig(QWidget* parent)
     m_centerAlignButton =
       new QPushButton(QIcon(iconPrefix + "centeralign.svg"), QLatin1String(""));
     m_centerAlignButton->setCheckable(true);
+    m_centerAlignButton->setAutoExclusive(true);
     connect(m_centerAlignButton, &QPushButton::clicked, this, [this] {
         alignmentChanged(Qt::AlignCenter);
     });
@@ -93,6 +95,7 @@ TextConfig::TextConfig(QWidget* parent)
     m_rightAlignButton =
       new QPushButton(QIcon(iconPrefix + "rightalign.svg"), QLatin1String(""));
     m_rightAlignButton->setCheckable(true);
+    m_rightAlignButton->setAutoExclusive(true);
     connect(m_rightAlignButton, &QPushButton::clicked, this, [this] {
         alignmentChanged(Qt::AlignRight);
     });
