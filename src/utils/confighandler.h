@@ -108,8 +108,8 @@ public:
     QString configFilePath() const;
 
     // GENERIC GETTERS AND SETTERS
-    bool setShortcut(const QString&, const QString&);
-    QString shortcut(const QString&);
+    bool setShortcut(const QString& actionName, const QString& shortcut);
+    QString shortcut(const QString& actionName);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
 
@@ -137,11 +137,16 @@ private:
     mutable QSettings m_settings;
 
     static bool m_hasError, m_errorCheckPending, m_skipNextErrorCheck;
+    static int m_hasShortcutConflicts;
+    static QMap<QString, QStringList> m_shortcutValueNameMap;
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
     QSharedPointer<ValueHandler> valueHandler(const QString& key) const;
     void assertKeyRecognized(const QString& key) const;
+    void updateShortcutValueNameMap();
     bool isShortcut(const QString& key) const;
+    void beginGroup(const QString& group) const;
+    void endGroup() const;
     QString baseName(QString key) const;
 };
