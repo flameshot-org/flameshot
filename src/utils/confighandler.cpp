@@ -169,11 +169,13 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
                qApp->applicationName())
 {
 
+    static bool wasEverChecked = false;
+    if (!skipInitialErrorCheck && !wasEverChecked) {
+        // check for error on initial call
+        checkAndHandleError();
+        wasEverChecked = true;
+    }
     if (m_configWatcher == nullptr) {
-        if (!skipInitialErrorCheck) {
-            // check for error on initial call
-            checkAndHandleError();
-        }
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
         ensureFileWatched();
