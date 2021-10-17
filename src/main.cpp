@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
                   "nothing if raw is specified"));
     CommandOption screenNumberOption(
       { "n", "number" },
-      QObject::tr("Define the screen to capture") + ",\n" +
+      QObject::tr("Define the screen to capture (starting from 0)") + ",\n" +
         QObject::tr("default: screen containing the cursor"),
       QObject::tr("Screen number"),
       QStringLiteral("-1"));
