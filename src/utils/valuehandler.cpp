@@ -152,7 +152,7 @@ bool BoundedInt::check(const QVariant& val)
     QString str = val.toString();
     bool conversionOk;
     int num = str.toInt(&conversionOk);
-    return conversionOk && (m_max < m_min || num <= m_max);
+    return conversionOk && m_min <= num && num <= m_max;
 }
 
 QVariant BoundedInt::fallback()
