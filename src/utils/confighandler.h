@@ -138,7 +138,7 @@ private:
 
     static bool m_hasError, m_errorCheckPending, m_skipNextErrorCheck;
     static int m_hasShortcutConflicts;
-    static QMap<QString, QStringList> m_shortcutValueNameMap;
+    static QMap<QString, QStringList> m_actionShortcutMap;
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
@@ -146,7 +146,5 @@ private:
     void assertKeyRecognized(const QString& key) const;
     void updateShortcutValueNameMap();
     bool isShortcut(const QString& key) const;
-    void beginGroup(const QString& group) const;
-    void endGroup() const;
     QString baseName(QString key) const;
 };

@@ -3,6 +3,7 @@
 #include "confighandler.h"
 #include <QColor>
 #include <QFileInfo>
+#include <QKeySequence>
 #include <QStandardPaths>
 #include <QVariant>
 
@@ -212,6 +213,24 @@ QVariant KeySequence::fallback()
 QString KeySequence::expected()
 {
     return QStringLiteral("keyboard shortcut");
+}
+
+QVariant KeySequence::representation(const QVariant& val)
+{
+    QString str(val.toString());
+    if (QKeySequence(str) == QKeySequence(Qt::Key_Return)) {
+        return QStringLiteral("Enter");
+    }
+    return str;
+}
+
+QVariant KeySequence::process(const QVariant& val)
+{
+    QString str(val.toString());
+    if (str == "Enter") {
+        return QKeySequence(Qt::Key_Return).toString();
+    }
+    return str;
 }
 
 // EXISTING DIR

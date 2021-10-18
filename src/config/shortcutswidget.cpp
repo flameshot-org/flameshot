@@ -38,14 +38,8 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    initShortcuts();
     initInfoTable();
     show();
-}
-
-const QList<QStringList>& ShortcutsWidget::shortcuts()
-{
-    return m_shortcuts;
 }
 
 void ShortcutsWidget::initInfoTable()
@@ -56,7 +50,6 @@ void ShortcutsWidget::initInfoTable()
     m_layout->addWidget(m_table);
 
     m_table->setColumnCount(2);
-    m_table->setRowCount(m_shortcuts.size());
     m_table->setSelectionMode(QAbstractItemView::NoSelection);
     m_table->setFocusPolicy(Qt::NoFocus);
     m_table->verticalHeader()->hide();
@@ -70,17 +63,31 @@ void ShortcutsWidget::initInfoTable()
             this,
             SLOT(slotShortcutCellClicked(int, int)));
 
+    // populate with dynamic data
+    populateInfoTable();
+
+    // adjust size
+    m_table->horizontalHeader()->setMinimumSectionSize(200);
+    m_table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    m_table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
+                                               QSizePolicy::Expanding);
+    m_table->resizeColumnsToContents();
+    m_table->resizeRowsToContents();
+}
+
+void ShortcutsWidget::populateInfoTable()
+{
+    loadShortcuts();
+    m_table->setRowCount(m_shortcuts.size());
+
     // add content
-    for (int i = 0; i < shortcuts().size(); ++i) {
+    for (int i = 0; i < m_shortcuts.size(); ++i) {
         const auto current_shortcut = m_shortcuts.at(i);
         const auto identifier = current_shortcut.at(0);
         const auto description = current_shortcut.at(1);
-        const auto default_key_sequence = current_shortcut.at(2);
+        const auto key_sequence = current_shortcut.at(2);
         m_table->setItem(i, 0, new QTableWidgetItem(description));
 
-        const auto key_sequence = identifier.isEmpty()
-                                    ? default_key_sequence
-                                    : m_config.shortcut(identifier);
 #if defined(Q_OS_MACOS)
         QTableWidgetItem* item =
           new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
@@ -106,14 +113,6 @@ void ShortcutsWidget::initInfoTable()
             item->setFlags(item->flags() ^ Qt::ItemIsEditable);
         }
     }
-
-    // adjust size
-    m_table->resizeColumnsToContents();
-    m_table->resizeRowsToContents();
-    m_table->horizontalHeader()->setMinimumSectionSize(200);
-    m_table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
-    m_table->horizontalHeader()->setSizePolicy(QSizePolicy::Expanding,
-                                               QSizePolicy::Expanding);
 }
 
 void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
@@ -140,26 +139,17 @@ void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
                 shortcutValue = QKeySequence("");
             }
 #endif
-
             if (m_config.setShortcut(shortcutName, shortcutValue.toString())) {
-#if defined(Q_OS_MACOS)
-                QTableWidgetItem* item = new QTableWidgetItem(
-                  nativeOSHotKeyText(shortcutValue.toString()));
-#else
-                QTableWidgetItem* item =
-                  new QTableWidgetItem(shortcutValue.toString());
-#endif
-                item->setTextAlignment(Qt::AlignCenter);
-                item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-                m_table->setItem(row, col, item);
+                populateInfoTable();
             }
         }
         delete setShortcutDialog;
     }
 }
 
-void ShortcutsWidget::initShortcuts()
+void ShortcutsWidget::loadShortcuts()
 {
+    m_shortcuts.clear();
     auto buttonTypes = CaptureToolButton::getIterableButtonTypes();
 
     // get shortcuts names from capture buttons
@@ -220,10 +210,11 @@ void ShortcutsWidget::initShortcuts()
 void ShortcutsWidget::appendShortcut(const QString& shortcutName,
                                      const QString& description)
 {
+    QString shortcut = ConfigHandler().shortcut(shortcutName);
     m_shortcuts << (QStringList()
                     << shortcutName
                     << QObject::tr(description.toStdString().c_str())
-                    << ConfigHandler().shortcut(shortcutName));
+                    << shortcut.replace("Return", "Enter"));
 }
 
 #if defined(Q_OS_MACOS)

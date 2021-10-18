@@ -158,6 +158,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
 };
+
 // clang-format on
 
 // CLASS CONFIGHANDLER
@@ -168,15 +169,17 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
                qApp->organizationName(),
                qApp->applicationName())
 {
-
     static bool wasEverChecked = false;
+    static bool firstInitialization = true;
+    if (firstInitialization) {
+        updateShortcutValueNameMap();
+    }
     if (!skipInitialErrorCheck && !wasEverChecked) {
         // check for error on initial call
         checkAndHandleError();
         wasEverChecked = true;
     }
-    if (m_configWatcher == nullptr) {
-        updateShortcutValueNameMap();
+    if (firstInitialization) {
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
         ensureFileWatched();
@@ -202,6 +205,7 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
                              }
                          });
     }
+    firstInitialization = false;
 }
 
 /// Serves as an object to which slots can be connected.
@@ -349,6 +353,7 @@ QString ConfigHandler::configFilePath() const
 bool ConfigHandler::setShortcut(const QString& actionName,
                                 const QString& shortcut)
 {
+    qDebug() << actionName;
     static QVector<QKeySequence> reservedShortcuts = {
 #if defined(Q_OS_MACOS)
         Qt::CTRL + Qt::Key_Backspace,
@@ -364,7 +369,6 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     }
 
     bool error = false;
-    beginGroup("Shortcuts");
 
     if (shortcut.isEmpty()) {
         setValue(actionName, "");
@@ -373,51 +377,52 @@ bool ConfigHandler::setShortcut(const QString& actionName,
         error = true;
     } else {
         // Make no difference for Return and Enter keys
-        QString shortcutItem = shortcut;
-        if (shortcutItem == "Enter") {
-            shortcutItem = QKeySequence(Qt::Key_Return).toString();
-        }
+        QString newShortcut = KeySequence().value(shortcut).toString();
         if (m_hasShortcutConflicts) {
             error = true;
             goto done;
         } else {
             QStringList& actionsBoundToThisShortcut =
-              m_shortcutValueNameMap[shortcut];
+              m_actionShortcutMap[newShortcut];
             // No other actions bound to this shortcut or they are, but only
             // because it's a default (not configured explicitly by the user)
             if (actionsBoundToThisShortcut.isEmpty() ||
-                !m_settings.contains(actionsBoundToThisShortcut[0])) {
+                !m_settings.contains(actionsBoundToThisShortcut.at(0))) {
+                if (!actionsBoundToThisShortcut.isEmpty()) {
+                    QString otherAction = actionsBoundToThisShortcut.at(0);
+                    // The other action is actually this one
+                    if (otherAction != actionName) {
+                        m_settings.setValue("Shortcuts/" + otherAction,
+                                            QString());
+                    }
+                }
                 // Set the shortcut normally
                 actionsBoundToThisShortcut.clear();
-                actionsBoundToThisShortcut << shortcutItem;
-                m_settings.setValue(actionName, shortcutItem);
+                actionsBoundToThisShortcut << actionName;
+                // Mark the old shortcut as unbound
+                m_actionShortcutMap.remove(ConfigHandler::shortcut(actionName));
+                m_settings.setValue("Shortcuts/" + actionName, newShortcut);
             }
-            // TODO empty shortcut?
         }
     }
 done:
-    endGroup();
     return !error;
 }
 
 QString ConfigHandler::shortcut(const QString& actionName)
 {
-    if (actionName == "TYPE_SAVE") {
-        int x = 0;
-        int y = x;
-    }
-    endGroup();
-    QString optionName = QStringLiteral("Shortcuts/") + actionName;
-    QString shortcut = value(optionName).toString();
+    QString setting = QStringLiteral("Shortcuts/") + actionName;
+    QString shortcut = value(setting).toString();
     if (shortcut.isEmpty()) {
         return {};
     }
 
-    QStringList& actionsBoundToShortcut = m_shortcutValueNameMap[shortcut];
+    QStringList& actionsBoundToShortcut = m_actionShortcutMap[shortcut];
     // If this action wants to use shortcut only because it's a default, and
     // there is another action that was configured with this shortcut by the
     // user, unbind it.
-    if (!m_settings.contains(optionName) && actionsBoundToShortcut.size() >= 1 && actionsBoundToShortcut[0] != actionName) {
+    if (!m_settings.contains(setting) && actionsBoundToShortcut.size() >= 1 &&
+        actionsBoundToShortcut[0] != actionName) {
         return {};
     }
 
@@ -428,6 +433,7 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
     assertKeyRecognized(key);
     if (!hasError()) {
+        // don't let the file watcher initiate another error check
         m_skipNextErrorCheck = true;
         auto val = valueHandler(key)->representation(value);
         m_settings.setValue(key, val);
@@ -536,11 +542,21 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
  */
 bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
 {
-    // This attribute is set by shortcut(), setShortcut() and
-    // initShortcutValueNameMap().
-    //    return !m_hasShortcutConflicts;
+    if (m_hasShortcutConflicts && log != nullptr) {
+        for (auto& shortcut : m_actionShortcutMap.keys()) {
+            QStringList& actions = m_actionShortcutMap[shortcut];
+            if (actions.size() > 1) {
+                *log << QStringLiteral(
+                          "Shortcut '%1' bound to multiple actions: %2")
+                          .arg(shortcut)
+                          .arg(actions.join(", "))
+                     << "\n";
+            }
+        }
+    }
+    return !m_hasShortcutConflicts;
     bool ok = true;
-    beginGroup("Shortcuts");
+    m_settings.beginGroup("Shortcuts");
     QStringList shortcuts = m_settings.allKeys();
     QStringList reportedInLog;
     for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
@@ -571,7 +587,7 @@ bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
             }
         }
     }
-    endGroup();
+    m_settings.endGroup();
     return ok;
 }
 
@@ -584,12 +600,18 @@ bool ConfigHandler::checkSemantics(QTextStream* log) const
     QStringList allKeys = m_settings.allKeys();
     bool ok = true;
     for (const QString& key : allKeys) {
+        // Test if the key is recognized
         if (!recognizedGeneralOptions().contains(key) &&
-            !recognizedShortcutNames().contains(baseName(key))) {
+            (!isShortcut(key) ||
+             !recognizedShortcutNames().contains(baseName(key)))) {
             continue;
         }
         QVariant val = m_settings.value(key);
         auto valueHandler = this->valueHandler(key);
+        if (valueHandler == nullptr) { // TODO rm
+            valueHandler = this->valueHandler(key);
+            auto a = valueHandler;
+        }
         if (val.isValid() && !valueHandler->check(val)) {
             ok = false;
             if (log == nullptr) {
@@ -695,10 +717,8 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
 {
     QSharedPointer<ValueHandler> handler;
     if (isShortcut(key)) {
-        QString _key = key;
-        _key.replace("Shortcuts/", "");
         handler = recognizedShortcuts.value(
-          _key, QSharedPointer<KeySequence>(new KeySequence()));
+          baseName(key), QSharedPointer<KeySequence>(new KeySequence()));
     } else { // General group
         handler = ::recognizedGeneralOptions.value(key);
     }
@@ -731,36 +751,27 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
 
 void ConfigHandler::updateShortcutValueNameMap()
 {
+    m_actionShortcutMap.clear();
     m_hasShortcutConflicts = false;
-    beginGroup(QStringLiteral("Shortcuts"));
+    m_settings.beginGroup(QStringLiteral("Shortcuts"));
     for (auto actionName : m_settings.allKeys()) {
         QString shortcut = m_settings.value(actionName).toString();
-        QStringList& listOfActions = m_shortcutValueNameMap[shortcut];
-        listOfActions.append(actionName);
+        QStringList& listOfActions = m_actionShortcutMap[shortcut];
+        if (!listOfActions.contains(actionName)) {
+            listOfActions.append(actionName);
+        }
         if (listOfActions.size() > 1) {
             // multiple actions bound to same shortcut
             m_hasShortcutConflicts = true;
         }
     }
-    endGroup();
+    m_settings.endGroup();
 }
 
 bool ConfigHandler::isShortcut(const QString& key) const
 {
     return m_settings.group() == QStringLiteral("Shortcuts") ||
            key.startsWith(QStringLiteral("Shortcuts/"));
-}
-
-void ConfigHandler::beginGroup(const QString& group) const
-{
-    m_settings.endGroup();
-    m_settings.beginGroup(group);
-}
-
-void ConfigHandler::endGroup() const
-{
-    // For consistency with beginGroup
-    m_settings.endGroup();
 }
 
 QString ConfigHandler::baseName(QString key) const
@@ -776,12 +787,11 @@ bool ConfigHandler::m_skipNextErrorCheck = false;
 int ConfigHandler::m_hasShortcutConflicts = 0;
 
 /**
- * @brief Maps shortcut values to action names.
+ * @brief Maps each shortcut to a list of actions it is bound to.
  *
- * Each key shortcut is mapped to a list of actions that can be triggered by it,
- * as specified in the config files. This map is populated before shortcut
- * conflicts are considered. In fact, this map is used to check for conflicts.
+ * This map is populated before shortcut conflicts are considered. In fact, this
+ * map is used to check for conflicts.
  */
-QMap<QString, QStringList> ConfigHandler::m_shortcutValueNameMap;
+QMap<QString, QStringList> ConfigHandler::m_actionShortcutMap;
 
 QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;

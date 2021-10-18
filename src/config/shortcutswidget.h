@@ -18,10 +18,10 @@ class ShortcutsWidget : public QWidget
     Q_OBJECT
 public:
     explicit ShortcutsWidget(QWidget* parent = nullptr);
-    const QList<QStringList>& shortcuts();
 
 private:
     void initInfoTable();
+    void populateInfoTable();
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
     const QString& nativeOSHotKeyText(const QString& text);
@@ -40,7 +40,7 @@ private:
     QVBoxLayout* m_layout;
     QList<QStringList> m_shortcuts;
 
-    void initShortcuts();
+    void loadShortcuts();
     void appendShortcut(const QString& shortcutName,
                         const QString& description);
 };
