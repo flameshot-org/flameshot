@@ -59,9 +59,9 @@ void ShortcutsWidget::initInfoTable()
     names << tr("Description") << tr("Key");
     m_table->setHorizontalHeaderLabels(names);
     connect(m_table,
-            SIGNAL(cellClicked(int, int)),
+            &QTableWidget::cellClicked,
             this,
-            SLOT(slotShortcutCellClicked(int, int)));
+            &ShortcutsWidget::onShortcutCellClicked);
 
     // populate with dynamic data
     populateInfoTable();
@@ -115,7 +115,7 @@ void ShortcutsWidget::populateInfoTable()
     }
 }
 
-void ShortcutsWidget::slotShortcutCellClicked(int row, int col)
+void ShortcutsWidget::onShortcutCellClicked(int row, int col)
 {
     if (col == 1) {
         // Ignore non-changable shortcuts

@@ -28,7 +28,7 @@ private:
 #endif
 
 private slots:
-    void slotShortcutCellClicked(int, int);
+    void onShortcutCellClicked(int, int);
 
 private:
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
