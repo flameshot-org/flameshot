@@ -39,6 +39,10 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
     m_layout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     initInfoTable();
+    connect(ConfigHandler::getInstance(),
+            &ConfigHandler::fileChanged,
+            this,
+            &ShortcutsWidget::populateInfoTable);
     show();
 }
 

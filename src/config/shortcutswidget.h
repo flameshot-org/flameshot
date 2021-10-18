@@ -21,13 +21,13 @@ public:
 
 private:
     void initInfoTable();
-    void populateInfoTable();
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
     const QString& nativeOSHotKeyText(const QString& text);
 #endif
 
 private slots:
+    void populateInfoTable();
     void onShortcutCellClicked(int, int);
 
 private:
