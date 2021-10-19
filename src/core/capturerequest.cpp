@@ -2,10 +2,14 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
+#include "confighandler.h"
+#include "controller.h"
 #include "imguruploader.h"
 #include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
 #include "systemnotification.h"
+#include <QApplication>
+#include <QClipboard>
 #include <QDateTime>
 #include <QVector>
 #include <stdexcept>
@@ -144,8 +148,21 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
     }
 
     if (m_tasks & UPLOAD) {
-        QWidget* widget = new ImgurUploader(capture);
+        ImgurUploader* widget = new ImgurUploader(capture);
         widget->show();
         widget->activateWindow();
+        QObject::connect(
+          widget, &ImgurUploader::uploadOk, [this, widget](const QUrl& url) {
+              if (ConfigHandler().copyAndCloseAfterUpload()) {
+                  if (m_tasks & COPY) {
+                      QApplication::clipboard()->setText(url.toString());
+                      SystemNotification().sendMessage(
+                        QObject::tr("URL copied to clipboard."));
+                  }
+                  widget->close();
+              } else {
+                  widget->showPostUploadDialog();
+              }
+          });
     }
 }

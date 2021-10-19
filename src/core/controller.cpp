@@ -51,7 +51,6 @@
 
 Controller::Controller()
   : m_captureWindow(nullptr)
-  , m_history(nullptr)
   , m_trayIcon(nullptr)
   , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
@@ -111,7 +110,6 @@ Controller::Controller()
 
 Controller::~Controller()
 {
-    delete m_history;
     delete m_trayIconMenu;
 }
 
@@ -426,8 +424,7 @@ void Controller::enableTrayIcon()
 
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
-    connect(
-      recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
+    connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentUploads()));
 
     // generate menu
     m_trayIconMenu->addAction(captureAction);
@@ -533,22 +530,17 @@ void Controller::updateConfigComponents()
     }
 }
 
-void Controller::updateRecentScreenshots()
+void Controller::showRecentUploads()
 {
-    if (nullptr != m_history) {
-        if (m_history->isVisible()) {
-            m_history->loadHistory();
-        }
+    static HistoryWidget* historyWidget = nullptr;
+    if (nullptr == historyWidget) {
+        historyWidget = new HistoryWidget();
+        connect(historyWidget, &QObject::destroyed, this, []() {
+            historyWidget = nullptr;
+        });
     }
-}
-
-void Controller::showRecentScreenshots()
-{
-    if (nullptr == m_history) {
-        m_history = new HistoryWidget();
-    }
-    m_history->loadHistory();
-    m_history->show();
+    historyWidget->loadHistory();
+    historyWidget->show();
 #if defined(Q_OS_MACOS)
     m_history->activateWindow();
     m_history->raise();

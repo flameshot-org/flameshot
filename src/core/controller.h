@@ -38,7 +38,6 @@ public:
     void operator=(const Controller&) = delete;
 
     void enableExports();
-    void updateRecentScreenshots();
 
     void setCheckForUpdatesEnabled(const bool enabled);
 
@@ -65,7 +64,7 @@ public slots:
 
     void updateConfigComponents();
 
-    void showRecentScreenshots();
+    void showRecentUploads();
 
     void sendCaptureSaved(uint id, const QString& savePath);
 
@@ -101,7 +100,6 @@ private:
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
 
-    HistoryWidget* m_history;
     QMenu* m_trayIconMenu;
 
     QNetworkAccessManager* m_networkCheckUpdates;
