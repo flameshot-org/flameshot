@@ -6,6 +6,7 @@ These are the code changes that need to take place
 - [ ] Update version and changelog at packaging/debian/changelog
 - [ ] Update version and changelog at packaging/rpm/flameshot.spec
 - [ ] Update data/appdata/flameshot.metainfo.xml
+- [ ] Update MacOs version in cmake/modules/MacOSXBundleInfo.plist.in 
 
 These are the steps for actually making the release
 - [ ] Download all binaries from CI run started from PR related to code changes shown above

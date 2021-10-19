@@ -70,7 +70,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
         if (!QColor::isValidColor(m_colorHex->text())) {
             m_colorHex->setText(m_color.name(QColor::HexRgb));
         } else {
-            updateColor(m_colorHex->text());
+            emit colorChanged(m_colorHex->text());
         }
     });
     // color grab button sigslots
@@ -79,28 +79,18 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             this,
             &SidePanelWidget::startColorGrab);
     // color wheel sigslots
+    //   re-emit ColorWheel::colorSelected as SidePanelWidget::colorChanged
     connect(m_colorWheel,
             &color_widgets::ColorWheel::mouseReleaseOnColor,
             this,
             &SidePanelWidget::colorChanged);
-    connect(m_colorWheel,
-            &color_widgets::ColorWheel::colorSelected,
-            this,
-            &SidePanelWidget::updateColorNoWheel);
 }
 
-void SidePanelWidget::updateColor(const QColor& c)
+void SidePanelWidget::onColorChanged(const QColor& c)
 {
     m_color = c;
     updateColorNoWheel(c);
     m_colorWheel->setColor(c);
-}
-
-void SidePanelWidget::updateColorNoWheel(const QColor& c)
-{
-    m_colorLabel->setStyleSheet(
-      QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
-    m_colorHex->setText(c.name(QColor::HexRgb));
 }
 
 void SidePanelWidget::onToolSizeChanged(const int& t)
@@ -116,7 +106,7 @@ void SidePanelWidget::startColorGrab()
     connect(m_colorGrabber,
             &ColorGrabWidget::colorUpdated,
             this,
-            &SidePanelWidget::onColorUpdated);
+            &SidePanelWidget::onTemporaryColorUpdated);
     connect(m_colorGrabber,
             &ColorGrabWidget::colorGrabbed,
             this,
@@ -141,10 +131,10 @@ void SidePanelWidget::onColorGrabAborted()
 {
     finalizeGrab();
     // Restore color that was selected before we started grabbing
-    updateColor(m_revertColor);
+    onColorChanged(m_revertColor);
 }
 
-void SidePanelWidget::onColorUpdated(const QColor& color)
+void SidePanelWidget::onTemporaryColorUpdated(const QColor& color)
 {
     updateColorNoWheel(color);
 }
@@ -152,6 +142,13 @@ void SidePanelWidget::onColorUpdated(const QColor& color)
 void SidePanelWidget::finalizeGrab()
 {
     emit togglePanel();
+}
+
+void SidePanelWidget::updateColorNoWheel(const QColor& c)
+{
+    m_colorLabel->setStyleSheet(
+      QStringLiteral("QLabel { background-color : %1; }").arg(c.name()));
+    m_colorHex->setText(c.name(QColor::HexRgb));
 }
 
 bool SidePanelWidget::eventFilter(QObject* obj, QEvent* event)

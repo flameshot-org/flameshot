@@ -31,18 +31,18 @@ signals:
     void togglePanel();
 
 public slots:
-    void updateColor(const QColor& c);
-    void updateColorNoWheel(const QColor& c);
     void onToolSizeChanged(const int& t);
+    void onColorChanged(const QColor& c);
 
 private slots:
     void startColorGrab();
     void onColorGrabFinished();
     void onColorGrabAborted();
-    void onColorUpdated(const QColor& color);
+    void onTemporaryColorUpdated(const QColor& color);
 
 private:
     void finalizeGrab();
+    void updateColorNoWheel(const QColor& c);
 
     bool eventFilter(QObject* obj, QEvent* event) override;
     void hideEvent(QHideEvent* event) override;
