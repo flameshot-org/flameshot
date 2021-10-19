@@ -542,8 +542,8 @@ void Controller::showRecentUploads()
     historyWidget->loadHistory();
     historyWidget->show();
 #if defined(Q_OS_MACOS)
-    m_history->activateWindow();
-    m_history->raise();
+    historyWidget->activateWindow();
+    historyWidget->raise();
 #endif
 }
 

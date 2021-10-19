@@ -151,10 +151,12 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
         ImgurUploader* widget = new ImgurUploader(capture);
         widget->show();
         widget->activateWindow();
+        // NOTE: lambda can't capture 'this' because it might be destroyed later
+        ExportTask tasks = m_tasks;
         QObject::connect(
-          widget, &ImgurUploader::uploadOk, [this, widget](const QUrl& url) {
+          widget, &ImgurUploader::uploadOk, [widget, tasks](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
-                  if (m_tasks & COPY) {
+                  if (!(tasks & COPY)) {
                       QApplication::clipboard()->setText(url.toString());
                       SystemNotification().sendMessage(
                         QObject::tr("URL copied to clipboard."));
