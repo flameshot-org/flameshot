@@ -160,8 +160,10 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
                       QApplication::clipboard()->setText(url.toString());
                       SystemNotification().sendMessage(
                         QObject::tr("URL copied to clipboard."));
+                      widget->close();
+                  } else {
+                      widget->showPostUploadDialog();
                   }
-                  widget->close();
               } else {
                   widget->showPostUploadDialog();
               }
