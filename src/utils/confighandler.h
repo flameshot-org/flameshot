@@ -101,6 +101,8 @@ public:
     QString saveAsFileExtension();
     CONFIG_SETTER(setSaveAsFileExtension, setSaveAsFileExtension, QString)
     void setAllTheButtons();
+    void setToolSize(CaptureTool::Type toolType, int size);
+    int toolSize(CaptureTool::Type toolType);
 
     // DEFAULTS
     QString filenamePatternDefault();

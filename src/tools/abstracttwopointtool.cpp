@@ -70,7 +70,7 @@ bool AbstractTwoPointTool::showMousePreview() const
 QRect AbstractTwoPointTool::mousePreviewRect(
   const CaptureContext& context) const
 {
-    QRect rect(0, 0, context.thickness + 2, context.thickness + 2);
+    QRect rect(0, 0, context.toolSize + 2, context.toolSize + 2);
     rect.moveCenter(context.mousePos);
     return rect;
 }
@@ -111,15 +111,15 @@ void AbstractTwoPointTool::onColorChanged(const QColor& c)
     m_color = c;
 }
 
-void AbstractTwoPointTool::onThicknessChanged(int th)
+void AbstractTwoPointTool::onSizeChanged(int size)
 {
-    m_thickness = th;
+    m_thickness = size;
 }
 
 void AbstractTwoPointTool::paintMousePreview(QPainter& painter,
                                              const CaptureContext& context)
 {
-    painter.setPen(QPen(context.color, context.thickness));
+    painter.setPen(QPen(context.color, context.toolSize));
     painter.drawLine(context.mousePos, context.mousePos);
 }
 
@@ -128,7 +128,7 @@ void AbstractTwoPointTool::drawStart(const CaptureContext& context)
     onColorChanged(context.color);
     m_points.first = context.mousePos;
     m_points.second = context.mousePos;
-    onThicknessChanged(context.thickness);
+    onSizeChanged(context.toolSize);
 }
 
 QPoint AbstractTwoPointTool::adjustedVector(QPoint v) const
