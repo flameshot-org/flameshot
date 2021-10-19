@@ -100,7 +100,7 @@ Controller::Controller()
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
-                     [&]() { this->showRecentScreenshots(); });
+                     [&]() { this->showRecentUploads(); });
 #endif
 
     if (ConfigHandler().checkForUpdates()) {
