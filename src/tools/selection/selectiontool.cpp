@@ -46,7 +46,7 @@ void SelectionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
     painter.setPen(
-      QPen(color(), thickness(), Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
+      QPen(color(), size(), Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
     painter.drawRect(QRect(points().first, points().second));
 }
 

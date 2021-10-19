@@ -59,7 +59,7 @@ signals:
     void captureTaken(uint id, QPixmap p, QRect selection);
     void captureFailed(uint id);
     void colorChanged(const QColor& c);
-    void thicknessChanged(int thickness);
+    void toolSizeChanged(int size);
 
 private slots:
     void undo();
@@ -73,7 +73,8 @@ private slots:
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
     void setDrawColor(const QColor& c);
-    void setDrawThickness(int t);
+    void onToolSizeChanged(int size);
+    void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
     void selectAll();
 
@@ -94,7 +95,6 @@ protected:
     void changeEvent(QEvent* changeEvent) override;
 
 private:
-    void loadDrawThickness();
     void pushObjectsStateToUndoStack();
     void releaseActiveTool();
     void uncheckActiveTool();
@@ -116,7 +116,7 @@ private:
     void pushToolToStack();
     void makeChild(QWidget* w);
 
-    void updateThickness(int thicknessOffset);
+    void setToolSize(int size);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
@@ -144,7 +144,7 @@ private:
 
     // Outside selection opacity
     int m_opacity;
-    int m_thicknessByKeyboard;
+    int m_toolSizeByKeyboard;
 
     // utility flags
     bool m_mouseIsClicked;
