@@ -138,8 +138,10 @@ private:
     void updateButtonRegions();
     void refreshToolButtonVisibility();
     void updateUtilityPanelSize();
-    void updateScale();
+    void updateScale(int iteration = 0);
     void handleScaleFactorChange();
+    QRect preferredWindowGeometry(QScreen *screen = nullptr) const;
+    QScreen* guessFullscreenScreen();
 
     void updateThickness(int thicknessOffset);
 
@@ -209,6 +211,8 @@ private:
     QPoint m_viewDragStartPoint; // widget coordinates
     SelectionWidget::SideType m_mouseOverHandle;
     uint m_id;
+    QPoint m_topLeftCorner; // position of top left image corner relative to screen geomtry 0,0
+    int windowGeometryUpdateActive = 0;
 
     CaptureToolObjects m_captureToolObjects;
     CaptureToolObjects m_captureToolObjectsBackup;

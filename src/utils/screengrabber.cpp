@@ -10,6 +10,7 @@
 #include <QGuiApplication>
 #include <QPixmap>
 #include <QScreen>
+#include <algorithm>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "request.h"
@@ -185,42 +186,51 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 
 QPixmap ScreenGrabber::grabScreen(bool& ok)
 {
-    auto current = QGuiAppCurrentScreen().currentScreen();
-    int number = 0;
-    for (QScreen* const screen : QGuiApplication::screens()) {
-        if (screen == current) {
-            return grabScreen(number, ok);
-        }
-        number++;
-    }
-    return grabScreen(-1, ok);
+    return grabScreen(QGuiAppCurrentScreen().currentScreen(), ok);
 }
 
 QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
 {
+    auto screens = QGuiApplication::screens();
+    QScreen* screen = screens.value(screenNumber, QApplication::primaryScreen());
+    return grabScreen(screen, ok);
+}
+
+QPixmap ScreenGrabber::grabScreen(QScreen* captureScreen, bool& ok)
+{
     QPixmap p;
+#ifdef Q_OS_WIN
+    {
+        QScreen* currentScreen = captureScreen;
+        auto platformScreen = currentScreen->handle();
+        // Pass 0 as window id so that qt adds the corresponding screen offset internally
+        // after conversion to actual pixel coordinates. That way reducing chance of
+        // rounding errors when making pixelRatio calculations and converting to integers.
+        p = captureScreen->grabWindow(0, 0, 0, captureScreen->size().width(), captureScreen->size().height());
+        ok = true;
+        return p;
+    }
+#else
     bool isVirtual = QApplication::desktop()->isVirtualDesktop();
     if (isVirtual || m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
             QPoint topLeft(0, 0);
+            QRect geometry = captureScreen->geometry();
 #ifdef Q_OS_WIN
             for (QScreen* const screen : QGuiApplication::screens()) {
                 QPoint topLeftScreen = screen->geometry().topLeft();
-                if (topLeft.x() > topLeftScreen.x() ||
-                    topLeft.y() > topLeftScreen.y()) {
-                    topLeft = topLeftScreen;
-                }
+                topLeft.setX(qMin(topLeft.x(), topLeftScreen.x()));
+                topLeft.setY(qMin(topLeft.y(), topLeftScreen.y()));
             }
+            geometry.setSize(geometry.size() * captureScreen->devicePixelRatio());
+            geometry.translate(-topLeft);
 #endif
-            QRect geometry =
-              QApplication::desktop()->screenGeometry(screenNumber);
-            geometry.moveTo(geometry.topLeft() - topLeft);
             p = p.copy(geometry);
         }
     } else {
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        p = currentScreen->grabWindow(screenNumber,
+        p = currentScreen->grabWindow(QApplication::desktop()->winId(),
                                       currentScreen->geometry().x(),
                                       currentScreen->geometry().y(),
                                       currentScreen->geometry().width(),
@@ -228,4 +238,5 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
         ok = true;
     }
     return p;
+#endif
 }

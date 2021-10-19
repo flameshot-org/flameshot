@@ -5,6 +5,7 @@
 
 #include "src/utils/desktopinfo.h"
 #include <QObject>
+#include <QScreen>
 
 class ScreenGrabber : public QObject
 {
@@ -12,6 +13,7 @@ class ScreenGrabber : public QObject
 public:
     explicit ScreenGrabber(QObject* parent = nullptr);
     QPixmap grabEntireDesktop(bool& ok);
+    QPixmap grabScreen(QScreen* screen, bool& ok);
     QPixmap grabScreen(int screenNumber, bool& ok);
     QPixmap grabScreen(bool& ok);
 

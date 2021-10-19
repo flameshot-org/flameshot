@@ -63,13 +63,23 @@ public:
     {
         captureWidget = parent;
         setAutoFillBackground(false);
+        setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     }
 
     void paintEvent(QPaintEvent*) override
     {
         QPainter p(this);
         captureWidget->drawContent(p);
+        if (size() != sizeHint()) {
+            QTimer::singleShot(50, this, [=]() { setFixedSize(sizeHint()); });
+        }
     }
+
+    QSize sizeHint() const override
+    {
+        return captureWidget->imageSize().size() / devicePixelRatioF();
+    }
+    QSize minimumSizeHint() const override { return sizeHint(); }
 };
 
 // enableSaveWindow
@@ -163,8 +173,9 @@ CaptureWidget::CaptureWidget(uint id,
                     topLeft.setY(topLeftScreen.y());
                 }
             }
-            move(topLeft);
-            setFixedSize(m_context.screenshot.size());
+
+            this->m_topLeftCorner = topLeft;
+            setGeometry(preferredWindowGeometry(guessFullscreenScreen()));
         } else if (windowMode == CaptureWindowMode::FullScreenCurrent) {
             // Emulate fullscreen mode
             //        setWindowFlags(Qt::WindowStaysOnTopHint |f
@@ -917,6 +928,8 @@ void CaptureWidget::initContext(const QString& savePath, bool fullscreen)
 void CaptureWidget::initPanel()
 {
     QRect panelRect = rect();
+    // These are only initial positions, panel and button will later get
+    // moved and resized based on window placment and active screen.
     if (windowMode == FullScreenAll) {
         panelRect = QGuiApplication::primaryScreen()->geometry();
         // this is probably wrong in case of mixed dpi multiscreen setups
@@ -925,8 +938,6 @@ void CaptureWidget::initPanel()
         panelRect.moveTo(panelRect.x() / devicePixelRatio,
                          panelRect.y() / devicePixelRatio);
     } else {
-        // Doesn't matter too much at this point, actual size will be known once
-        // the window has been created and shown.
         panelRect = rect();
     }
 
@@ -1615,6 +1626,22 @@ void CaptureWidget::updateUtilityPanelSize()
 {
     if (windowMode != CaptureWindowMode::FullScreenAll) {
         m_panel->setFixedHeight(viewport()->height());
+    } else {
+        auto screen = QGuiApplication::primaryScreen();
+
+        // convert geometry to pixel coordinates
+        QRectF geometry = screen->geometry();
+        geometry.setSize(geometry.size() * screen->devicePixelRatio());
+        geometry.translate(-m_topLeftCorner);
+
+        // and then to window coordinates
+        // assumes that fullscreen window is correctly positioned and scaled
+        float scaleChange = 1 / devicePixelRatioF();
+        QTransform transform = QTransform::fromScale(scaleChange, scaleChange);
+        geometry = transform.mapRect(geometry);
+
+        m_panel->move(geometry.topLeft().toPoint());
+        m_panel->setFixedHeight(qRound(geometry.height()));
     }
     if (m_panelButton != nullptr && !m_panelButtonMover->hasMoved()) {
         m_panelButton->move(m_panel->x(),
@@ -1623,16 +1650,103 @@ void CaptureWidget::updateUtilityPanelSize()
     }
 }
 
-void CaptureWidget::updateScale()
+void CaptureWidget::updateScale(int iteration)
 {
-    QSizeF size = m_context.screenshot.rect().size() / devicePixelRatioF();
-    widget()->resize(size.toSize());
+    // Moving or resizing a window can cause new screen
+    // changed event. Avoid multiple activations at the same time
+    // and let the first one finish.
+    if (windowGeometryUpdateActive) {
+        return;
+    }
+    windowGeometryUpdateActive++;
+
+    if (windowMode == FullScreenAll) {
+        auto preferred = preferredWindowGeometry();
+        if (preferred != geometry()) {
+            setFixedSize(preferred.size());
+            move(preferred.topLeft());
+        }
+
+
+        // Correct position and size depends screen on which the window is located,
+        // but the screen on which the window is located depends on position, size and
+        // some Qt or OS heuristics. 
+        // It may take a few iterations until the window settles in correct position.
+        const int MAX_ITERATIONS = 10;
+        QMetaObject::invokeMethod(this, [=](){
+            auto nextPreferred = preferredWindowGeometry();
+            if (nextPreferred != geometry() &&
+                // In case it doesn't settle better giveup with bad geometry
+                // making it difficult to stop
+                iteration < MAX_ITERATIONS) {
+                updateScale(iteration + 1);
+            }
+        }, Qt::QueuedConnection);
+    }
+    windowGeometryUpdateActive--;
+    // resizing the widget imediately sometimes doesn't work
+    // so schedule it slightly later
+    QMetaObject::invokeMethod(
+      this,
+      [=]() { widget()->setFixedSize(widget()->sizeHint()); },
+      Qt::QueuedConnection);
 }
 
 void CaptureWidget::handleScaleFactorChange()
 {
     updateScale();
     updateViewTransform(false);
+}
+
+QRect CaptureWidget::preferredWindowGeometry(QScreen *targetScreen) const
+{
+    if (!targetScreen) {
+        targetScreen = this->screen();
+    }
+    switch (windowMode) {
+        case FullScreenAll: {
+            // This has been tested only on Windows10
+            float scale = targetScreen->devicePixelRatio();
+            QSize size = m_context.screenshot.size() / scale;
+            auto screenCorner = targetScreen->geometry().topLeft();
+            QPoint pos =
+              screenCorner + ((m_topLeftCorner - screenCorner) / scale);
+            return QRect(pos, size);
+        } break;
+        case FullScreenCurrent: {
+            return targetScreen->geometry();
+        }
+        case MaximizeWindow: {
+            return geometry();
+        }
+    }
+    return QRect();
+}
+
+QScreen* CaptureWidget::guessFullscreenScreen()
+{
+    auto screens = QApplication::screens();
+    size_t index = 0;
+    for (auto screen : screens) {
+        auto geometry = preferredWindowGeometry(screen);
+        auto center = geometry.center();
+        if (screen->geometry().contains(center)) {
+            return screen;
+        }
+        else if (screen->geometry().intersects(geometry)) {
+            bool lastIntersecting = true;
+            for (size_t i = index + 1; i < screens.size(); i++) {
+                if (screens[i]->geometry().intersects(geometry)) {
+                    lastIntersecting = false;
+                }
+            }
+            if (lastIntersecting) {
+                return screen;
+            }
+        }
+        index++;
+    }
+    return nullptr;
 }
 
 QPoint CaptureWidget::scrollPosition() const
