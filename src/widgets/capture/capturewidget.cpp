@@ -184,7 +184,10 @@ CaptureWidget::CaptureWidget(uint id,
     connect(m_colorPicker,
             &ColorPicker::colorSelected,
             this,
-            &CaptureWidget::setDrawColor);
+            [this](const QColor& c) {
+                m_context.mousePos = mapFromGlobal(QCursor::pos());
+                setDrawColor(c);
+            });
     m_colorPicker->hide();
 
     // Init notification widget
@@ -950,7 +953,7 @@ void CaptureWidget::initPanel()
     connect(this,
             &CaptureWidget::colorChanged,
             m_sidePanel,
-            &SidePanelWidget::updateColor);
+            &SidePanelWidget::onColorChanged);
     connect(this,
             &CaptureWidget::thicknessChanged,
             m_sidePanel,
@@ -1161,6 +1164,8 @@ void CaptureWidget::setDrawColor(const QColor& c)
     if (m_context.color.isValid()) {
         ConfigHandler().setDrawColor(m_context.color);
         emit colorChanged(c);
+        // Update mouse preview
+        updateTool(activeButtonTool());
 
         // change color for the active tool
         auto toolItem = activeToolObject();

@@ -163,10 +163,13 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 // CLASS CONFIGHANDLER
 
 ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
+  : m_settings(QSettings::IniFormat,
+               QSettings::UserScope,
+               qApp->organizationName(),
+               qApp->applicationName())
 {
-    m_settings.setDefaultFormat(QSettings::IniFormat);
 
-    if (m_configWatcher == nullptr && qApp != nullptr) {
+    if (m_configWatcher == nullptr) {
         if (!skipInitialErrorCheck) {
             // check for error on initial call
             checkAndHandleError();
@@ -250,9 +253,9 @@ void ConfigHandler::setStartupLaunch(const bool start)
                    << process.readAll();
     }
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
-                                          "autostart/",
-                                          QStandardPaths::LocateDirectory);
+    QString path =
+      QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+      "/autostart/";
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
         autostartDir.mkpath(".");
