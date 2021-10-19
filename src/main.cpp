@@ -351,6 +351,7 @@ int main(int argc, char* argv[])
             }
         }
         uint id = req.id();
+        req.setStaticID(id);
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall(
@@ -399,6 +400,7 @@ int main(int argc, char* argv[])
             req.addSaveTask();
         }
         uint id = req.id();
+        req.setStaticID(id);
         DBusUtils dbusUtils;
 
         // Send message
@@ -460,6 +462,7 @@ int main(int argc, char* argv[])
         }
 
         uint id = req.id();
+        req.setStaticID(id);
         DBusUtils dbusUtils;
 
         // Send message

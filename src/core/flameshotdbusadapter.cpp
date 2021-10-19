@@ -31,7 +31,6 @@ FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 void FlameshotDBusAdapter::requestCapture(const QByteArray& requestData)
 {
     CaptureRequest req = CaptureRequest::deserialize(requestData);
-    req.setStaticID(req.id());
     Controller::getInstance()->requestCapture(req);
 }
 
