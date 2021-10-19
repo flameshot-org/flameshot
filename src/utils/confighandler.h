@@ -114,8 +114,8 @@ public:
     QVariant value(const QString& key) const;
 
     // INFO
-    const QSet<QString>& recognizedGeneralOptions() const;
-    const QSet<QString>& recognizedShortcutNames() const;
+    static QSet<QString>& recognizedGeneralOptions();
+    static QSet<QString>& recognizedShortcutNames();
     QSet<QString> keysFromGroup(const QString& group) const;
 
     // ERROR HANDLING
@@ -137,14 +137,11 @@ private:
     mutable QSettings m_settings;
 
     static bool m_hasError, m_errorCheckPending, m_skipNextErrorCheck;
-    static int m_hasShortcutConflicts;
-    static QMap<QString, QStringList> m_actionShortcutMap;
     static QSharedPointer<QFileSystemWatcher> m_configWatcher;
 
     void ensureFileWatched() const;
     QSharedPointer<ValueHandler> valueHandler(const QString& key) const;
     void assertKeyRecognized(const QString& key) const;
-    void updateShortcutValueNameMap();
     bool isShortcut(const QString& key) const;
     QString baseName(QString key) const;
 };

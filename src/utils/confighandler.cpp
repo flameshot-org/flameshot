@@ -171,9 +171,6 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
 {
     static bool wasEverChecked = false;
     static bool firstInitialization = true;
-    if (firstInitialization) {
-        updateShortcutValueNameMap();
-    }
     if (!skipInitialErrorCheck && !wasEverChecked) {
         // check for error on initial call
         checkAndHandleError();
@@ -195,7 +192,6 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
                                  m_skipNextErrorCheck = false;
                                  return;
                              }
-                             ConfigHandler().updateShortcutValueNameMap();
                              ConfigHandler().checkAndHandleError();
                              if (!QFile(fileName).exists()) {
                                  // File watcher stops watching a deleted file.
@@ -378,34 +374,13 @@ bool ConfigHandler::setShortcut(const QString& actionName,
     } else {
         // Make no difference for Return and Enter keys
         QString newShortcut = KeySequence().value(shortcut).toString();
-        if (m_hasShortcutConflicts) {
-            error = true;
-            goto done;
-        } else {
-            QStringList& actionsBoundToThisShortcut =
-              m_actionShortcutMap[newShortcut];
-            // No other actions bound to this shortcut or they are, but only
-            // because it's a default (not configured explicitly by the user)
-            if (actionsBoundToThisShortcut.isEmpty() ||
-                !m_settings.contains(actionsBoundToThisShortcut.at(0))) {
-                if (!actionsBoundToThisShortcut.isEmpty()) {
-                    QString otherAction = actionsBoundToThisShortcut.at(0);
-                    // The other action is actually this one
-                    if (otherAction != actionName) {
-                        m_settings.setValue("Shortcuts/" + otherAction,
-                                            QString());
-                    }
-                }
-                // Set the shortcut normally
-                actionsBoundToThisShortcut.clear();
-                actionsBoundToThisShortcut << actionName;
-                // Mark the old shortcut as unbound
-                m_actionShortcutMap.remove(ConfigHandler::shortcut(actionName));
-                m_settings.setValue("Shortcuts/" + actionName, newShortcut);
-            }
+        m_settings.beginGroup("Shortcuts");
+        auto allActions = m_settings.allKeys();
+        for (auto &action : allActions) {
+            // TODO
         }
+        m_settings.endGroup();
     }
-done:
     return !error;
 }
 
@@ -414,15 +389,6 @@ QString ConfigHandler::shortcut(const QString& actionName)
     QString setting = QStringLiteral("Shortcuts/") + actionName;
     QString shortcut = value(setting).toString();
     if (shortcut.isEmpty()) {
-        return {};
-    }
-
-    QStringList& actionsBoundToShortcut = m_actionShortcutMap[shortcut];
-    // If this action wants to use shortcut only because it's a default, and
-    // there is another action that was configured with this shortcut by the
-    // user, unbind it.
-    if (!m_settings.contains(setting) && actionsBoundToShortcut.size() >= 1 &&
-        actionsBoundToShortcut[0] != actionName) {
         return {};
     }
 
@@ -462,14 +428,14 @@ QVariant ConfigHandler::value(const QString& key) const
     return handler->value(val);
 }
 
-const QSet<QString>& ConfigHandler::recognizedGeneralOptions() const
+QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
     static QSet<QString> options =
       QSet<QString>::fromList(::recognizedGeneralOptions.keys());
     return options;
 }
 
-const QSet<QString>& ConfigHandler::recognizedShortcutNames() const
+QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
     static QSet<QString> names =
       QSet<QString>::fromList(recognizedShortcuts.keys());
@@ -542,19 +508,6 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
  */
 bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
 {
-    if (m_hasShortcutConflicts && log != nullptr) {
-        for (auto& shortcut : m_actionShortcutMap.keys()) {
-            QStringList& actions = m_actionShortcutMap[shortcut];
-            if (actions.size() > 1) {
-                *log << QStringLiteral(
-                          "Shortcut '%1' bound to multiple actions: %2")
-                          .arg(shortcut)
-                          .arg(actions.join(", "))
-                     << "\n";
-            }
-        }
-    }
-    return !m_hasShortcutConflicts;
     bool ok = true;
     m_settings.beginGroup("Shortcuts");
     QStringList shortcuts = m_settings.allKeys();
@@ -749,25 +702,6 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
     }
 }
 
-void ConfigHandler::updateShortcutValueNameMap()
-{
-    m_actionShortcutMap.clear();
-    m_hasShortcutConflicts = false;
-    m_settings.beginGroup(QStringLiteral("Shortcuts"));
-    for (auto actionName : m_settings.allKeys()) {
-        QString shortcut = m_settings.value(actionName).toString();
-        QStringList& listOfActions = m_actionShortcutMap[shortcut];
-        if (!listOfActions.contains(actionName)) {
-            listOfActions.append(actionName);
-        }
-        if (listOfActions.size() > 1) {
-            // multiple actions bound to same shortcut
-            m_hasShortcutConflicts = true;
-        }
-    }
-    m_settings.endGroup();
-}
-
 bool ConfigHandler::isShortcut(const QString& key) const
 {
     return m_settings.group() == QStringLiteral("Shortcuts") ||
@@ -784,14 +718,5 @@ QString ConfigHandler::baseName(QString key) const
 bool ConfigHandler::m_hasError = false;
 bool ConfigHandler::m_errorCheckPending = false;
 bool ConfigHandler::m_skipNextErrorCheck = false;
-int ConfigHandler::m_hasShortcutConflicts = 0;
-
-/**
- * @brief Maps each shortcut to a list of actions it is bound to.
- *
- * This map is populated before shortcut conflicts are considered. In fact, this
- * map is used to check for conflicts.
- */
-QMap<QString, QStringList> ConfigHandler::m_actionShortcutMap;
 
 QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;
