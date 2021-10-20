@@ -60,7 +60,7 @@ void AbstractActionTool::onColorChanged(const QColor& c)
     Q_UNUSED(c)
 }
 
-void AbstractActionTool::onThicknessChanged(int th)
+void AbstractActionTool::onSizeChanged(int size)
 {
-    Q_UNUSED(th)
+    Q_UNUSED(size)
 }

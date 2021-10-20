@@ -88,8 +88,7 @@ QRect ArrowTool::boundingRect() const
         return {};
     }
 
-    int offset =
-      thickness() <= 1 ? 1 : static_cast<int>(round(thickness() / 2 + 0.5));
+    int offset = size() <= 1 ? 1 : static_cast<int>(round(size() / 2 + 0.5));
 
     // get min and max arrow pos
     int min_x = points().first.x();
@@ -146,10 +145,9 @@ void ArrowTool::copyParams(const ArrowTool* from, ArrowTool* to)
 void ArrowTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(color(), thickness()));
-    painter.drawLine(
-      getShorterLine(points().first, points().second, thickness()));
-    m_arrowPath = getArrowHead(points().first, points().second, thickness());
+    painter.setPen(QPen(color(), size()));
+    painter.drawLine(getShorterLine(points().first, points().second, size()));
+    m_arrowPath = getArrowHead(points().first, points().second, size());
     painter.fillPath(m_arrowPath, QBrush(color()));
 }
 
