@@ -13,7 +13,9 @@ class PinWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit PinWidget(const QPixmap& pixmap, QWidget* parent = nullptr);
+    explicit PinWidget(const QPixmap& pixmap,
+                       const QRect& geometry,
+                       QWidget* parent = nullptr);
 
     int margin() const;
 

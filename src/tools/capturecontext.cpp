@@ -5,6 +5,7 @@
 #include "capturerequest.h"
 #include "controller.h"
 
+// TODO rename
 QPixmap CaptureContext::selectedScreenshotArea() const
 {
     if (selection.isNull()) {

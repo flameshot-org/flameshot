@@ -12,6 +12,7 @@ class ScreenGrabber : public QObject
 public:
     explicit ScreenGrabber(QObject* parent = nullptr);
     QPixmap grabEntireDesktop(bool& ok);
+    QRect screenGeometry(int screenNumber);
     QPixmap grabScreen(int screenNumber, bool& ok);
 
 private:

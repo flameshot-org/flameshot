@@ -38,14 +38,13 @@ public:
     void operator=(const Controller&) = delete;
 
     void enableExports();
-    void updateRecentScreenshots();
 
     void setCheckForUpdatesEnabled(const bool enabled);
 
     QMap<uint, CaptureRequest>& requests();
 
 signals:
-    void captureTaken(uint id, QPixmap p, QRect selection);
+    void captureTaken(uint id, QPixmap p, const QRect& selection);
     void captureFailed(uint id);
     void captureSaved(uint id, QString savePath);
 
@@ -65,7 +64,7 @@ public slots:
 
     void updateConfigComponents();
 
-    void showRecentScreenshots();
+    void showRecentUploads();
 
     void sendCaptureSaved(uint id, const QString& savePath);
 
@@ -75,7 +74,7 @@ private slots:
                             const QString& forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
 
-    void handleCaptureTaken(uint id, QPixmap p, QRect selection);
+    void handleCaptureTaken(uint id, QPixmap p);
     void handleCaptureFailed(uint id);
 
     void handleReplyCheckUpdates(QNetworkReply* reply);
@@ -101,7 +100,6 @@ private:
     QPointer<ConfigWindow> m_configWindow;
     QPointer<QSystemTrayIcon> m_trayIcon;
 
-    HistoryWidget* m_history;
     QMenu* m_trayIconMenu;
 
     QNetworkAccessManager* m_networkCheckUpdates;

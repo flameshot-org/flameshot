@@ -166,36 +166,49 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 }
 
+QRect ScreenGrabber::screenGeometry(int screenNumber)
+{
+    QPixmap p;
+    QRect geometry;
+    bool isVirtual = QApplication::desktop()->isVirtualDesktop();
+    if (isVirtual || m_info.waylandDetected()) {
+        QPoint topLeft(0, 0);
+#ifdef Q_OS_WIN
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            QPoint topLeftScreen = screen->geometry().topLeft();
+            if (topLeft.x() > topLeftScreen.x() ||
+                topLeft.y() > topLeftScreen.y()) {
+                topLeft = topLeftScreen;
+            }
+        }
+#endif
+        geometry = QApplication::desktop()->screenGeometry(screenNumber);
+        geometry.moveTo(geometry.topLeft() - topLeft);
+    } else {
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        geometry = currentScreen->geometry();
+    }
+    return geometry;
+}
+
 QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
 {
     QPixmap p;
     bool isVirtual = QApplication::desktop()->isVirtualDesktop();
+    QRect geometry = screenGeometry(screenNumber);
     if (isVirtual || m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
-            QPoint topLeft(0, 0);
-#ifdef Q_OS_WIN
-            for (QScreen* const screen : QGuiApplication::screens()) {
-                QPoint topLeftScreen = screen->geometry().topLeft();
-                if (topLeft.x() > topLeftScreen.x() ||
-                    topLeft.y() > topLeftScreen.y()) {
-                    topLeft = topLeftScreen;
-                }
-            }
-#endif
-            QRect geometry =
-              QApplication::desktop()->screenGeometry(screenNumber);
-            geometry.moveTo(geometry.topLeft() - topLeft);
-            p = p.copy(geometry);
+            return p.copy(geometry);
         }
     } else {
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        p = currentScreen->grabWindow(screenNumber,
-                                      currentScreen->geometry().x(),
-                                      currentScreen->geometry().y(),
-                                      currentScreen->geometry().width(),
-                                      currentScreen->geometry().height());
         ok = true;
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        return currentScreen->grabWindow(screenNumber,
+                                         geometry.x(),
+                                         geometry.y(),
+                                         geometry.width(),
+                                         geometry.height());
     }
     return p;
 }

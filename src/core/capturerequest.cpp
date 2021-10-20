@@ -2,7 +2,14 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
+#include "confighandler.h"
+#include "controller.h"
+#include "imguruploader.h"
+#include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
+#include "systemnotification.h"
+#include <QApplication>
+#include <QClipboard>
 #include <QDateTime>
 #include <QVector>
 #include <stdexcept>
@@ -98,29 +105,68 @@ CaptureRequest::ExportTask CaptureRequest::tasks() const
 
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
-    if (task == SAVE_TASK) {
-        throw std::logic_error("SAVE_TASK must be added using addSaveTask");
+    if (task == SAVE) {
+        throw std::logic_error("SAVE task must be added using addSaveTask");
     }
     m_tasks |= task;
 }
 
 void CaptureRequest::addSaveTask(const QString& path)
 {
-    m_tasks |= SAVE_TASK;
+    m_tasks |= SAVE;
     m_path = path;
 }
 
-void CaptureRequest::exportCapture(const QPixmap& p)
+void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 {
-    if ((m_tasks & ExportTask::SAVE_TASK) != ExportTask::NO_TASK) {
+    m_tasks |= PIN;
+    m_pinWindowGeometry = pinWindowGeometry;
+}
+
+void CaptureRequest::exportCapture(const QPixmap& capture)
+{
+    if (m_tasks & SAVE) {
         if (m_path.isEmpty()) {
-            ScreenshotSaver(m_id).saveToFilesystemGUI(p);
+            ScreenshotSaver(m_id).saveToFilesystemGUI(capture);
         } else {
-            ScreenshotSaver(m_id).saveToFilesystem(p, m_path);
+            ScreenshotSaver(m_id).saveToFilesystem(capture, m_path);
         }
     }
 
-    if ((m_tasks & ExportTask::COPY_TASK) != ExportTask::NO_TASK) {
-        ScreenshotSaver().saveToClipboard(p);
+    if (m_tasks & COPY) {
+        ScreenshotSaver().saveToClipboard(capture);
+    }
+
+    if (m_tasks & PIN) {
+        QWidget* widget = new PinWidget(capture, m_pinWindowGeometry);
+        widget->show();
+        widget->activateWindow();
+        if (m_mode == SCREEN_MODE || m_mode == FULLSCREEN_MODE) {
+            SystemNotification().sendMessage(
+              QObject::tr("Full screen screenshot pinned to screen"));
+        }
+    }
+
+    if (m_tasks & UPLOAD) {
+        ImgurUploader* widget = new ImgurUploader(capture);
+        widget->show();
+        widget->activateWindow();
+        // NOTE: lambda can't capture 'this' because it might be destroyed later
+        ExportTask tasks = m_tasks;
+        QObject::connect(
+          widget, &ImgurUploader::uploadOk, [widget, tasks](const QUrl& url) {
+              if (ConfigHandler().copyAndCloseAfterUpload()) {
+                  if (!(tasks & COPY)) {
+                      QApplication::clipboard()->setText(url.toString());
+                      SystemNotification().sendMessage(
+                        QObject::tr("URL copied to clipboard."));
+                      widget->close();
+                  } else {
+                      widget->showPostUploadDialog();
+                  }
+              } else {
+                  widget->showPostUploadDialog();
+              }
+          });
     }
 }

@@ -89,7 +89,7 @@ public:
     // be included in the tool undo/redo stack.
     virtual bool isValid() const = 0;
     // Close the capture after the process() call if the tool was activated
-    // from a button press.
+    // from a button press. TODO remove this function
     virtual bool closeOnButtonPressed() const = 0;
     // If the tool keeps active after the selection.
     virtual bool isSelectable() const = 0;

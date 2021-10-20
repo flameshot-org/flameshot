@@ -110,7 +110,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
-    OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
+    OPTION("setSaveAsFileExtension"      ,String             ( ".png"        )),
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
   };

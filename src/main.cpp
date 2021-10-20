@@ -152,12 +152,19 @@ int main(int argc, char* argv[])
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
+    CommandOption pinOption("pin",
+                            QObject::tr("Pin the capture to the screen"));
+    CommandOption uploadOption({ "u", "upload" },
+                               QObject::tr("Upload screenshot"));
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
     CommandOption filenameOption({ "f", "filename" },
                                  QObject::tr("Set the filename pattern"),
                                  QStringLiteral("pattern"));
+    CommandOption acceptOnSelectOption(
+      { "s", "accept-on-select" },
+      QObject::tr("Accept capture as soon as a selection is made"));
     CommandOption trayOption({ "t", "trayicon" },
                              QObject::tr("Enable or disable the trayicon"),
                              QStringLiteral("bool"));
@@ -256,17 +263,25 @@ int main(int argc, char* argv[])
                         clipboardOption,
                         delayOption,
                         rawImageOption,
-                        selectionOption },
+                        selectionOption,
+                        uploadOption,
+                        pinOption,
+                        acceptOnSelectOption },
                       guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
                         pathOption,
                         delayOption,
-                        rawImageOption },
+                        rawImageOption,
+                        uploadOption,
+                        pinOption },
                       screenArgument);
-    parser.AddOptions(
-      { pathOption, clipboardOption, delayOption, rawImageOption },
-      fullArgument);
+    parser.AddOptions({ pathOption,
+                        clipboardOption,
+                        delayOption,
+                        rawImageOption,
+                        uploadOption },
+                      fullArgument);
     parser.AddOptions({ autostartOption,
                         filenameOption,
                         trayOption,
@@ -296,29 +311,47 @@ int main(int argc, char* argv[])
         }
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
-        QString pathValue = parser.value(pathOption);
-        if (!pathValue.isEmpty()) {
-            pathValue = QDir(pathValue).absolutePath();
+        // Option values
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
-        bool toClipboard = parser.isSet(clipboardOption);
-        bool isRaw = parser.isSet(rawImageOption);
-        bool isSelection = parser.isSet(selectionOption);
+        bool clipboard = parser.isSet(clipboardOption);
+        bool raw = parser.isSet(rawImageOption);
+        bool printGeometry = parser.isSet(selectionOption);
+        bool pin = parser.isSet(pinOption);
+        bool upload = parser.isSet(uploadOption);
+        bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         DBusUtils dbusUtils;
-        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::COPY_TASK);
+        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+        if (clipboard) {
+            req.addTask(CaptureRequest::COPY);
         }
-        if (isRaw) {
-            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
         }
-        if (!pathValue.isEmpty()) {
-            req.addSaveTask(pathValue);
+        if (!path.isEmpty()) {
+            req.addSaveTask(path);
         }
-        if (isSelection) {
-            req.addTask(CaptureRequest::PRINT_GEOMETRY_TASK);
+        if (printGeometry) {
+            req.addTask(CaptureRequest::PRINT_GEOMETRY);
+        }
+        if (pin) {
+            req.addTask(CaptureRequest::PIN);
+        }
+        if (upload) {
+            req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (acceptOnSelect) {
+            req.addTask(CaptureRequest::ACCEPT_ON_SELECT);
+            if (!clipboard && !raw && path.isEmpty() && !printGeometry &&
+                !pin && !upload) {
+                req.addSaveTask();
+            }
         }
         uint id = req.id();
+        req.setStaticID(id);
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall(
@@ -331,47 +364,43 @@ int main(int argc, char* argv[])
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
-        if (isRaw) {
+        if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
             return waitAfterConnecting(delay, app);
-        } else if (isSelection) {
+        } else if (printGeometry) {
             dbusUtils.connectSelectionCapture(sessionBus, id);
             return waitAfterConnecting(delay, app);
         }
     } else if (parser.isSet(fullArgument)) { // FULL
-        QString pathValue = parser.value(pathOption);
-        if (!pathValue.isEmpty()) {
-            pathValue = QDir(pathValue).absolutePath();
+        // Option values
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
-        bool toClipboard = parser.isSet(clipboardOption);
-        bool isRaw = parser.isSet(rawImageOption);
+        bool clipboard = parser.isSet(clipboardOption);
+        bool raw = parser.isSet(rawImageOption);
+        bool upload = parser.isSet(uploadOption);
         // Not a valid command
-        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", "))
-                << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("full")
-                                       << QStringLiteral("-h"));
-            goto finish;
-        }
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::COPY_TASK);
+        if (clipboard) {
+            req.addTask(CaptureRequest::COPY);
         }
-        if (isRaw) {
-            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        if (!path.isEmpty()) {
+            req.addSaveTask(path);
         }
-        if (!pathValue.isEmpty()) {
-            req.addSaveTask(pathValue);
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
+        }
+        if (upload) {
+            req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (!clipboard && path.isEmpty() && !raw && !upload) {
+            req.addSaveTask();
         }
         uint id = req.id();
+        req.setStaticID(id);
         DBusUtils dbusUtils;
 
         // Send message
@@ -385,7 +414,7 @@ int main(int argc, char* argv[])
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
-        if (isRaw) {
+        if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
             // timeout just in case
             QTimer t;
@@ -398,41 +427,42 @@ int main(int argc, char* argv[])
         }
     } else if (parser.isSet(screenArgument)) { // SCREEN
         QString numberStr = parser.value(screenNumberOption);
+        // Option values
         int number =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
-        QString pathValue = parser.value(pathOption);
-        if (!pathValue.isEmpty()) {
-            pathValue = QDir(pathValue).absolutePath();
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
-        bool toClipboard = parser.isSet(clipboardOption);
-        bool isRaw = parser.isSet(rawImageOption);
-        // Not a valid command
-        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", "))
-                << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("screen")
-                                       << QStringLiteral("-h"));
-            goto finish;
-        }
+        bool clipboard = parser.isSet(clipboardOption);
+        bool raw = parser.isSet(rawImageOption);
+        bool pin = parser.isSet(pinOption);
+        bool upload = parser.isSet(uploadOption);
 
         CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::COPY_TASK);
+        if (clipboard) {
+            req.addTask(CaptureRequest::COPY);
         }
-        if (isRaw) {
-            req.addTask(CaptureRequest::PRINT_RAW_TASK);
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
         }
-        if (!pathValue.isEmpty()) {
-            req.addSaveTask(pathValue);
+        if (!path.isEmpty()) {
+            req.addSaveTask(path);
         }
+        if (pin) {
+            req.addTask(CaptureRequest::PIN);
+        }
+        if (upload) {
+            req.addTask(CaptureRequest::UPLOAD);
+        }
+
+        if (!clipboard && !raw && path.isEmpty() && !pin && !upload) {
+            req.addSaveTask();
+        }
+
         uint id = req.id();
+        req.setStaticID(id);
         DBusUtils dbusUtils;
 
         // Send message
@@ -446,7 +476,7 @@ int main(int argc, char* argv[])
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
-        if (isRaw) {
+        if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
             // timeout just in case
             QTimer t;

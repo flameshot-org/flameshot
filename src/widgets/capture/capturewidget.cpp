@@ -1021,6 +1021,17 @@ void CaptureWidget::initSelection()
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisible()) {
+            auto req = m_context.request();
+            if (req->tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
+                m_captureDone = true;
+                if (req->tasks() & CaptureRequest::PIN) {
+                    QRect geometry = m_context.selection;
+                    geometry.setTopLeft(geometry.topLeft() +
+                                        m_context.widgetOffset);
+                    req->addPinTask(geometry);
+                }
+                close();
+            }
             m_buttonHandler->show();
         } else {
             m_buttonHandler->hide();
@@ -1221,6 +1232,7 @@ void CaptureWidget::selectAll()
 {
     m_selection->show();
     m_selection->setGeometry(rect());
+    emit m_selection->geometrySettled();
     m_buttonHandler->show();
     updateSelectionState();
 }
