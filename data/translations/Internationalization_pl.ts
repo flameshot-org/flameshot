@@ -139,10 +139,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Wybierz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
-Wciśnij Enter, aby wykonać zrzut ekranu.
-Prawy klik, aby pokazać próbnik kolorów.
-Spacja, aby pokazać panel boczny.</translation>
+        <translation>Wybierz obszar za pomocą myszy lub naciśnij Esc, aby wyjść.
+Wciśnij Enter, aby przechwycić ekran.
+Wciśnij prawy przycisk myszy, aby wyświetlić próbnik kolorów.
+Użyj kółka myszy, aby zmienić grubość narzędzia.
+Wciśnij Spację, aby otworzyć panel boczny.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
@@ -1107,7 +1108,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished">Wydrukuj geometrię zaznaczenia w formacie W H X Y. Nic nie robi jeśli określono źródła</translation>
+        <translation>Drukuje geometrię zaznaczenia w formacie W H X Y. Nie robi nic, jeśli podano raw</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1204,7 +1205,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku do konfiguracji</translation>
+        <translation>Domyślnie uruchamia Flameshot w tle i dodaje ikonę w zasobniku do konfiguracji.</translation>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
