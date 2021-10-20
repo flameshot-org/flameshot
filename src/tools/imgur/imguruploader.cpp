@@ -51,6 +51,7 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
     m_spinner->start();
 
     m_infoLabel = new QLabel(tr("Uploading Image"));
+    m_infoLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
