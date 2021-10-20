@@ -26,7 +26,7 @@ private:
 private slots:
     void startCapture();
     void startDrag();
-    void captureTaken(uint id, QPixmap p);
+    void captureTaken(uint id, QPixmap p, const QRect& selection);
     void captureFailed(uint id);
 
 private:
