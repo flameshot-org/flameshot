@@ -66,7 +66,9 @@ int main(int argc, char* argv[])
     // required for the button serialization
     // TODO: change to QVector in v1.0
     qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
-    qApp->setApplicationVersion(static_cast<QString>(APP_VERSION));
+    QCoreApplication::setApplicationVersion(APP_VERSION);
+    QCoreApplication::setApplicationName(QStringLiteral("flameshot"));
+    QCoreApplication::setOrganizationName(QStringLiteral("flameshot"));
 
     // no arguments, just launch Flameshot
     if (argc == 1) {
@@ -99,8 +101,6 @@ int main(int argc, char* argv[])
         app.installTranslator(&translator);
         app.installTranslator(&qtTranslator);
         app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
-        app.setApplicationName(QStringLiteral("flameshot"));
-        app.setOrganizationName(QStringLiteral("flameshot"));
 
         auto c = Controller::getInstance();
 #if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -121,9 +121,6 @@ int main(int argc, char* argv[])
      * CLI parsing  |
      * ------------*/
     QCoreApplication app(argc, argv);
-    app.setApplicationName(QStringLiteral("flameshot"));
-    app.setOrganizationName(QStringLiteral("flameshot"));
-    app.setApplicationVersion(qApp->applicationVersion());
     CommandLineParser parser;
     // Add description
     parser.setDescription(
