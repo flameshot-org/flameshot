@@ -69,12 +69,14 @@ void InfoWindow::initLabels()
     auto* versionLabel = new QLabel(GlobalValues::versionInfo(), this);
     versionLabel->setAlignment(Qt::AlignHCenter);
     versionLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    versionLabel->setCursor(QCursor(Qt::IBeamCursor));
     m_layout->addWidget(versionLabel);
 
     QString kernelInfo = generateKernelString();
     auto* kernelLabel = new QLabel(kernelInfo, this);
     kernelLabel->setAlignment(Qt::AlignHCenter);
     kernelLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    kernelLabel->setCursor(QCursor(Qt::IBeamCursor));
     m_layout->addWidget(kernelLabel);
 
     auto* copyVersion = new QPushButton("Copy Info", this);
