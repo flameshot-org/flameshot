@@ -366,32 +366,51 @@ bool ConfigHandler::setShortcut(const QString& actionName,
 
     bool error = false;
 
+    m_settings.beginGroup("Shortcuts");
     if (shortcut.isEmpty()) {
         setValue(actionName, "");
     } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
         // do not allow to set reserved shortcuts
         error = true;
     } else {
+        error = false;
         // Make no difference for Return and Enter keys
         QString newShortcut = KeySequence().value(shortcut).toString();
-        m_settings.beginGroup("Shortcuts");
-        auto allActions = m_settings.allKeys();
-        for (auto &action : allActions) {
-            // TODO
+        for (auto& otherAction : m_settings.allKeys()) {
+            if (actionName == otherAction) {
+                continue;
+            }
+            QString existingShortcut =
+              KeySequence().value(m_settings.value(otherAction)).toString();
+            if (newShortcut == existingShortcut) {
+                error = true;
+                goto done;
+            }
         }
-        m_settings.endGroup();
+        m_settings.setValue(actionName, KeySequence().value(shortcut));
     }
+done:
+    m_settings.endGroup();
     return !error;
 }
 
 QString ConfigHandler::shortcut(const QString& actionName)
 {
-    QString setting = QStringLiteral("Shortcuts/") + actionName;
+    QString setting = "Shortcuts/" + actionName;
     QString shortcut = value(setting).toString();
-    if (shortcut.isEmpty()) {
-        return {};
+    if (!m_settings.contains(setting)) {
+        // The action uses a shortcut that is a flameshot default
+        // (not set explicitly by user)
+        m_settings.beginGroup("Shortcuts");
+        for (auto& otherAction : m_settings.allKeys()) {
+            if (m_settings.value(otherAction) == shortcut) {
+                // We found an explicit shortcut - it will take precedence
+                m_settings.endGroup();
+                return {};
+            }
+        }
+        m_settings.endGroup();
     }
-
     return shortcut;
 }
 
@@ -561,10 +580,6 @@ bool ConfigHandler::checkSemantics(QTextStream* log) const
         }
         QVariant val = m_settings.value(key);
         auto valueHandler = this->valueHandler(key);
-        if (valueHandler == nullptr) { // TODO rm
-            valueHandler = this->valueHandler(key);
-            auto a = valueHandler;
-        }
         if (val.isValid() && !valueHandler->check(val)) {
             ok = false;
             if (log == nullptr) {
