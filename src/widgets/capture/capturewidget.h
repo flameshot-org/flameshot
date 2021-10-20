@@ -26,6 +26,7 @@ class QLabel;
 class QPaintEvent;
 class QResizeEvent;
 class QMouseEvent;
+class QShortcut;
 class QNetworkAccessManager;
 class QNetworkReply;
 class ColorPicker;
@@ -115,6 +116,10 @@ private:
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
+
+    QList<QShortcut*> newShortcut(const QKeySequence& key,
+                                  QWidget* parent,
+                                  const char* slot);
 
     void updateThickness(int thicknessOffset);
 
