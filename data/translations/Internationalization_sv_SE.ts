@@ -479,7 +479,7 @@ Tryck Space för att öppna sidopanelen.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="200"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation type="unfinished">Visa hjälpmeddelande vid början av skärmklippsläge.</translation>
+        <translation>Visa hjälpmeddelandet i början i fildelningsläget.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="210"/>
@@ -1250,7 +1250,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
         <source>Quit capture</source>
-        <translation type="unfinished">Stäng skärmavbildning</translation>
+        <translation>Sluta fånga</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
@@ -1368,7 +1368,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
         <source>Available shortcuts in the screen capture mode.</source>
-        <translation type="unfinished">Tillgängliga kortkommandon i skärmklippsläge.</translation>
+        <translation>Tillgängliga genvägar i skärmklippningsläget.</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
