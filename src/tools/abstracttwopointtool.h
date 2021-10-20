@@ -19,7 +19,7 @@ public:
     QRect boundingRect() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
-    int thickness() const override { return m_thickness; };
+    int size() const override { return m_thickness; };
     const QColor& color() { return m_color; };
     const QPair<QPoint, QPoint> points() const { return m_points; };
     void paintMousePreview(QPainter& painter,
@@ -30,7 +30,7 @@ public slots:
     void drawMove(const QPoint& p) override;
     void drawMoveWithAdjustment(const QPoint& p) override;
     void onColorChanged(const QColor& c) override;
-    void onThicknessChanged(int th) override;
+    void onSizeChanged(int size) override;
     virtual void drawStart(const CaptureContext& context) override;
 
 private:
