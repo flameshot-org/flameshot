@@ -283,7 +283,6 @@ void CaptureWidget::initButtons()
 
         switch (t) {
             case CaptureTool::TYPE_UNDO:
-            case CaptureTool::TYPE_IMAGEUPLOADER:
             case CaptureTool::TYPE_REDO:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots

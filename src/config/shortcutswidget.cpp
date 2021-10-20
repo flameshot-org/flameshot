@@ -160,12 +160,10 @@ void ShortcutsWidget::loadShortcuts()
     for (const CaptureTool::Type& t : buttonTypes) {
         CaptureTool* tool = ToolFactory().CreateTool(t);
         QString shortcutName = QVariant::fromValue(t).toString();
-        if (t != CaptureTool::TYPE_IMAGEUPLOADER) {
-            appendShortcut(shortcutName, tool->description());
-            if (shortcutName == "TYPE_COPY")
-                m_shortcuts << (QStringList() << "" << tool->description()
-                                              << "Left Double-click");
-        }
+        appendShortcut(shortcutName, tool->description());
+        if (shortcutName == "TYPE_COPY")
+            m_shortcuts << (QStringList() << "" << tool->description()
+                                          << "Left Double-click");
         delete tool;
     }
 
