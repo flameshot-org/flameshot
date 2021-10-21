@@ -7,6 +7,9 @@
 #include "external/QHotkey/QHotkey"
 #endif
 
+#include "imguruploader.h"
+#include "pinwidget.h"
+#include "screenshotsaver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
@@ -21,6 +24,7 @@
 #include "src/widgets/notificationwidget.h"
 #include <QAction>
 #include <QApplication>
+#include <QBuffer>
 #include <QClipboard>
 #include <QDebug>
 #include <QDesktopServices>
@@ -536,6 +540,81 @@ void Controller::sendCaptureSaved(uint id, const QString& savePath)
     emit captureSaved(id, savePath);
 }
 
+void Controller::exportCapture(QPixmap capture,
+                               QRect& selection,
+                               const CaptureRequest& req)
+{
+    int tasks = req.tasks();
+    int id = req.id();
+    int mode = req.captureMode();
+    QString path = req.path();
+    using CR = CaptureRequest;
+
+    if (tasks & CR::PRINT_GEOMETRY) {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        QTextStream(stdout) << selection.width() << " " << selection.height()
+                            << " " << selection.x() << " " << selection.y();
+        emit captureTaken(0, capture, selection);
+    }
+
+    if (tasks & CR::PRINT_RAW) {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        capture.save(&buffer, "PNG");
+        QTextStream(stdout) << byteArray;
+        emit captureTaken(0, capture, selection);
+    }
+
+    if (tasks & CR::SAVE) {
+        if (req.path().isEmpty()) {
+            ScreenshotSaver(id).saveToFilesystemGUI(capture);
+        } else {
+            ScreenshotSaver(id).saveToFilesystem(capture, path);
+        }
+        emit captureTaken(0, capture, selection);
+    }
+
+    if (tasks & CR::COPY) {
+        ScreenshotSaver().saveToClipboard(capture);
+        emit captureTaken(0, capture, selection);
+    }
+
+    if (tasks & CR::PIN) {
+        QWidget* widget = new PinWidget(capture, selection);
+        widget->show();
+        widget->activateWindow();
+        if (mode == CR::SCREEN_MODE || mode == CR::FULLSCREEN_MODE) {
+            SystemNotification().sendMessage(
+              QObject::tr("Full screen screenshot pinned to screen"));
+        }
+        emit captureTaken(0, capture, selection);
+    }
+
+    if (tasks & CR::UPLOAD) {
+        ImgurUploader* widget = new ImgurUploader(capture);
+        widget->show();
+        widget->activateWindow();
+        // NOTE: lambda can't capture 'this' because it might be destroyed later
+        QObject::connect(
+          widget, &ImgurUploader::uploadOk, [=](const QUrl& url) {
+              if (ConfigHandler().copyAndCloseAfterUpload()) {
+                  if (!(tasks & CR::COPY)) {
+                      QApplication::clipboard()->setText(url.toString());
+                      SystemNotification().sendMessage(
+                        QObject::tr("URL copied to clipboard."));
+                      widget->close();
+                  } else {
+                      widget->showPostUploadDialog();
+                  }
+              } else {
+                  widget->showPostUploadDialog();
+              }
+              emit captureTaken(0, capture, selection);
+          });
+    }
+}
+
 void Controller::startFullscreenCapture(const uint id)
 {
     bool ok = true;
@@ -551,11 +630,11 @@ void Controller::startFullscreenCapture(const uint id)
 void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
 {
     auto it = m_requestMap.find(id);
+    CaptureRequest& req = *it;
     if (it != m_requestMap.end()) {
-        it.value().exportCapture(p, selection);
+        exportCapture(p, selection, req);
         m_requestMap.erase(it);
     }
-    emit captureTaken(id, p, selection);
 }
 
 void Controller::handleCaptureFailed(uint id)

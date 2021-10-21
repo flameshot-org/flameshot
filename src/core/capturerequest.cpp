@@ -16,6 +16,8 @@
 #include <QVector>
 #include <stdexcept>
 
+// TODO remove unused includes
+
 CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
                                const uint delay,
                                const QVariant& data,
@@ -123,67 +125,4 @@ void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 {
     m_tasks |= PIN;
     m_pinWindowGeometry = pinWindowGeometry;
-}
-
-void CaptureRequest::exportCapture(const QPixmap& capture,
-                                   const QRect& geometry)
-{
-    if (m_tasks & PRINT_GEOMETRY) {
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
-        QTextStream(stdout) << geometry.width() << " " << geometry.height()
-                            << " " << geometry.x() << " " << geometry.y();
-    }
-
-    if (m_tasks & PRINT_RAW) {
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
-        capture.save(&buffer, "PNG");
-        QTextStream(stdout) << byteArray;
-    }
-
-    if (m_tasks & SAVE) {
-        if (m_path.isEmpty()) {
-            ScreenshotSaver(m_id).saveToFilesystemGUI(capture);
-        } else {
-            ScreenshotSaver(m_id).saveToFilesystem(capture, m_path);
-        }
-    }
-
-    if (m_tasks & COPY) {
-        ScreenshotSaver().saveToClipboard(capture);
-    }
-
-    if (m_tasks & PIN) {
-        QWidget* widget = new PinWidget(capture, m_pinWindowGeometry);
-        widget->show();
-        widget->activateWindow();
-        if (m_mode == SCREEN_MODE || m_mode == FULLSCREEN_MODE) {
-            SystemNotification().sendMessage(
-              QObject::tr("Full screen screenshot pinned to screen"));
-        }
-    }
-
-    if (m_tasks & UPLOAD) {
-        ImgurUploader* widget = new ImgurUploader(capture);
-        widget->show();
-        widget->activateWindow();
-        // NOTE: lambda can't capture 'this' because it might be destroyed later
-        ExportTask tasks = m_tasks;
-        QObject::connect(
-          widget, &ImgurUploader::uploadOk, [widget, tasks](const QUrl& url) {
-              if (ConfigHandler().copyAndCloseAfterUpload()) {
-                  if (!(tasks & COPY)) {
-                      QApplication::clipboard()->setText(url.toString());
-                      SystemNotification().sendMessage(
-                        QObject::tr("URL copied to clipboard."));
-                      widget->close();
-                  } else {
-                      widget->showPostUploadDialog();
-                  }
-              } else {
-                  widget->showPostUploadDialog();
-              }
-          });
-    }
 }

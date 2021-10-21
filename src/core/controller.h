@@ -42,6 +42,7 @@ public:
     QMap<uint, CaptureRequest>& requests();
 
 signals:
+    // TODO remove all parameters from captureTaken and update dependencies
     void captureTaken(uint id, QPixmap p, const QRect& selection);
     void captureFailed(uint id);
     void captureSaved(uint id, QString savePath);
@@ -65,6 +66,7 @@ public slots:
     void showRecentUploads();
 
     void sendCaptureSaved(uint id, const QString& savePath);
+    void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
 
 private slots:
     void startFullscreenCapture(const uint id = 0);
