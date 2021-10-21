@@ -5,9 +5,12 @@
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
+#include <QComboBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
+#include <QImageWriter>
+#include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
@@ -386,6 +389,29 @@ void GeneralConf::initSaveAfterCopy()
 
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
+
+    QHBoxLayout* extensionLayout = new QHBoxLayout();
+
+    extensionLayout->addWidget(new QLabel(tr("Preferred save file extension:")));
+    m_defaultFileExtension = new QComboBox(this);
+    m_defaultFileExtension->addItem("");
+
+    QStringList mimeTypeList;
+    foreach (auto mimeType, QImageWriter::supportedImageFormats())
+        mimeTypeList.append(mimeType);
+
+    m_defaultFileExtension->addItems(mimeTypeList);
+
+    int currentIndex = m_defaultFileExtension->findText(ConfigHandler().defaultFileExtension());
+    m_defaultFileExtension->setCurrentIndex(currentIndex);
+
+    connect(m_defaultFileExtension,
+        SIGNAL(currentTextChanged(QString)),
+        this,
+        SLOT(setDefaultFileExtension(QString)));
+
+    extensionLayout->addWidget(m_defaultFileExtension);
+    m_layout->addLayout(extensionLayout);
 }
 
 void GeneralConf::historyConfirmationToDelete(bool checked)
@@ -516,6 +542,11 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
 void GeneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
+}
+
+void GeneralConf::setDefaultFileExtension(QString extension)
+{
+    ConfigHandler().setDefaultFileExtension(extension);
 }
 
 void GeneralConf::useJpgForClipboardChanged(bool checked)

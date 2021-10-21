@@ -93,6 +93,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
+    OPTION("defaultFileExtension"        ,String             ( ""            )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt(0  , 25            )),
     OPTION("undoLimit"                   ,BoundedInt(0, 999  , 100           )),
     // Interface tab
@@ -110,7 +111,6 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
-    OPTION("setSaveAsFileExtension"      ,String             ( ".png"        )),
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
   };
@@ -302,13 +302,6 @@ void ConfigHandler::setStartupLaunch(const bool start)
         bootUpPath.endGroup();
     }
 #endif
-}
-
-QString ConfigHandler::saveAsFileExtension()
-{
-    // TODO If the name of the option changes in the future, remove this
-    // function and use the macro CONFIG_GETTER_SETTER instead.
-    return value("setSaveAsFileExtension").toString();
 }
 
 void ConfigHandler::setAllTheButtons()
