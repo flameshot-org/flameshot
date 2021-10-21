@@ -119,14 +119,6 @@ Controller* Controller::getInstance()
     return &c;
 }
 
-void Controller::enableExports()
-{
-    connect(
-      this, &Controller::captureTaken, this, &Controller::handleCaptureTaken);
-    connect(
-      this, &Controller::captureFailed, this, &Controller::handleCaptureFailed);
-}
-
 void Controller::setCheckForUpdatesEnabled(const bool enabled)
 {
     if (m_appUpdates != nullptr) {
@@ -243,7 +235,7 @@ void Controller::requestCapture(const CaptureRequest& request)
             break;
         }
         default:
-            emit captureFailed(id);
+            handleCaptureFailed(id);
             break;
     }
 }
@@ -286,14 +278,6 @@ void Controller::startVisualCapture(const uint id,
         m_captureWindow = new CaptureWidget(id, forcedSavePath);
         // m_captureWindow = new CaptureWidget(id, forcedSavePath, false); //
         // debug
-        connect(m_captureWindow,
-                &CaptureWidget::captureFailed,
-                this,
-                &Controller::captureFailed);
-        connect(m_captureWindow,
-                &CaptureWidget::captureTaken,
-                this,
-                &Controller::captureTaken);
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
@@ -334,9 +318,9 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
             // change geometry for pin task
             request.addPinTask(geometry);
         }
-        emit captureTaken(id, p, geometry);
+        handleCaptureTaken(id, p, geometry);
     } else {
-        emit captureFailed(id);
+        handleCaptureFailed(id);
     }
 }
 
@@ -557,25 +541,27 @@ void Controller::startFullscreenCapture(const uint id)
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     if (ok) {
-        // selection parameter is unused here
-        emit captureTaken(id, p, {});
+        QRect selection; // `flameshot full` does not support --selection
+        handleCaptureTaken(id, p, selection);
     } else {
-        emit captureFailed(id);
+        handleCaptureFailed(id);
     }
 }
 
-void Controller::handleCaptureTaken(uint id, QPixmap p)
+void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
 {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {
         it.value().exportCapture(p);
         m_requestMap.erase(it);
     }
+    emit captureTaken(id, p, selection);
 }
 
 void Controller::handleCaptureFailed(uint id)
 {
     m_requestMap.remove(id);
+    emit captureFailed(id);
 }
 
 void Controller::doLater(int msec, QObject* receiver, lambda func)

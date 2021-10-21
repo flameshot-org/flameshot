@@ -37,8 +37,6 @@ public:
     ~Controller();
     void operator=(const Controller&) = delete;
 
-    void enableExports();
-
     void setCheckForUpdatesEnabled(const bool enabled);
 
     QMap<uint, CaptureRequest>& requests();
@@ -74,7 +72,8 @@ private slots:
                             const QString& forcedSavePath = QString());
     void startScreenGrab(const uint id = 0, const int screenNumber = -1);
 
-    void handleCaptureTaken(uint id, QPixmap p);
+public slots: // TODO move these up
+    void handleCaptureTaken(uint id, QPixmap p, QRect selection);
     void handleCaptureFailed(uint id);
 
     void handleReplyCheckUpdates(QNetworkReply* reply);

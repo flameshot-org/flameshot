@@ -113,9 +113,6 @@ int main(int argc, char* argv[])
         dbus.registerObject(QStringLiteral("/"), c);
         dbus.registerService(QStringLiteral("org.flameshot.Flameshot"));
 #endif
-        // Exporting captures must be connected after the dbus interface
-        // or the dbus signal gets blocked until we end the exports.
-        c->enableExports();
         return app.exec();
     }
 

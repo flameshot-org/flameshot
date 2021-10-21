@@ -250,9 +250,10 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
-        emit captureTaken(m_context.requestId, pixmap(), m_context.selection);
+        Controller::getInstance()->handleCaptureTaken(
+          m_context.requestId, pixmap(), m_context.selection);
     } else {
-        emit captureFailed(m_context.requestId);
+        Controller::getInstance()->handleCaptureFailed(m_context.requestId);
     }
 }
 
