@@ -33,14 +33,15 @@
 #include <desktopinfo.h>
 #endif
 
-int waitAfterConnecting(int delay, QCoreApplication& app)
+// TODO will be obsolete
+int waitAfterConnecting(int delay)
 {
     QTimer t;
     t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
     QObject::connect(&t, &QTimer::timeout, qApp, &QCoreApplication::quit);
     t.start();
     // wait
-    return app.exec();
+    return qApp->exec();
 }
 
 #ifdef Q_OS_LINUX
@@ -98,9 +99,9 @@ int main(int argc, char* argv[])
           "_",
           QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 
-        app.installTranslator(&translator);
-        app.installTranslator(&qtTranslator);
-        app.setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
+        qApp->installTranslator(&translator);
+        qApp->installTranslator(&qtTranslator);
+        qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
         auto c = Controller::getInstance();
 #if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -113,14 +114,14 @@ int main(int argc, char* argv[])
         dbus.registerObject(QStringLiteral("/"), c);
         dbus.registerService(QStringLiteral("org.flameshot.Flameshot"));
 #endif
-        return app.exec();
+        return qApp->exec();
     }
 
 #if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     /*--------------|
      * CLI parsing  |
      * ------------*/
-    QCoreApplication app(argc, argv);
+    new QCoreApplication(argc, argv);
     CommandLineParser parser;
     // Add description
     parser.setDescription(
@@ -285,7 +286,7 @@ int main(int argc, char* argv[])
                         checkOption },
                       configArgument);
     // Parse
-    if (!parser.parse(app.arguments())) {
+    if (!parser.parse(qApp->arguments())) {
         goto finish;
     }
 
@@ -360,13 +361,16 @@ int main(int argc, char* argv[])
 
         if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
-            return waitAfterConnecting(delay, app);
+            return waitAfterConnecting(delay);
         } else if (printGeometry) {
             dbusUtils.connectSelectionCapture(sessionBus, id);
-            return waitAfterConnecting(delay, app);
+            return waitAfterConnecting(delay);
         }
     } else if (parser.isSet(fullArgument)) { // FULL
-        QApplication app(argc, argv);
+        // Recreate the application as a QApplication
+        // TODO find a way so we don't have to do this
+        delete qApp;
+        new QApplication(argc, argv);
         // Option values
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -405,7 +409,7 @@ int main(int argc, char* argv[])
             QTextStream(stderr) << "screenshot aborted\n";
             qApp->exit(1);
         });
-        app.exec();
+        qApp->exec();
     } else if (parser.isSet(screenArgument)) { // SCREEN
         QString numberStr = parser.value(screenNumberOption);
         // Option values
@@ -466,7 +470,7 @@ int main(int argc, char* argv[])
               &t, &QTimer::timeout, qApp, &QCoreApplication::quit);
             t.start();
             // wait
-            return app.exec();
+            return qApp->exec();
         }
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
