@@ -392,7 +392,8 @@ void GeneralConf::initSaveAfterCopy()
 
     QHBoxLayout* extensionLayout = new QHBoxLayout();
 
-    extensionLayout->addWidget(new QLabel(tr("Preferred save file extension:")));
+    extensionLayout->addWidget(
+      new QLabel(tr("Preferred save file extension:")));
     m_defaultFileExtension = new QComboBox(this);
     m_defaultFileExtension->addItem("");
 
@@ -402,13 +403,14 @@ void GeneralConf::initSaveAfterCopy()
 
     m_defaultFileExtension->addItems(mimeTypeList);
 
-    int currentIndex = m_defaultFileExtension->findText(ConfigHandler().defaultFileExtension());
+    int currentIndex =
+      m_defaultFileExtension->findText(ConfigHandler().defaultFileExtension());
     m_defaultFileExtension->setCurrentIndex(currentIndex);
 
     connect(m_defaultFileExtension,
-        SIGNAL(currentTextChanged(QString)),
-        this,
-        SLOT(setDefaultFileExtension(QString)));
+            SIGNAL(currentTextChanged(QString)),
+            this,
+            SLOT(setDefaultFileExtension(QString)));
 
     extensionLayout->addWidget(m_defaultFileExtension);
     m_layout->addLayout(extensionLayout);
