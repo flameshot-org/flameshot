@@ -18,7 +18,6 @@
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
-#include <QTextStream>
 #include <QTimer>
 #include <QTranslator>
 
@@ -28,6 +27,7 @@
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "src/core/flameshotdbusadapter.h"
 #include "src/utils/dbusutils.h"
+#include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
@@ -366,6 +366,7 @@ int main(int argc, char* argv[])
             return waitAfterConnecting(delay, app);
         }
     } else if (parser.isSet(fullArgument)) { // FULL
+        QApplication app(argc, argv);
         // Option values
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -393,32 +394,18 @@ int main(int argc, char* argv[])
         if (!clipboard && path.isEmpty() && !raw && !upload) {
             req.addSaveTask();
         }
-        uint id = req.id();
-        req.setStaticID(id);
-        DBusUtils dbusUtils;
-
-        // Send message
-        QDBusMessage m = QDBusMessage::createMethodCall(
-          QStringLiteral("org.flameshot.Flameshot"),
-          QStringLiteral("/"),
-          QLatin1String(""),
-          QStringLiteral("requestCapture"));
-        m << req.serialize();
-        QDBusConnection sessionBus = QDBusConnection::sessionBus();
-        dbusUtils.checkDBusConnection(sessionBus);
-        sessionBus.call(m);
-
-        if (raw) {
-            dbusUtils.connectPrintCapture(sessionBus, id);
-            // timeout just in case
-            QTimer t;
-            t.setInterval(delay + 2000);
-            QObject::connect(
-              &t, &QTimer::timeout, qApp, &QCoreApplication::quit);
-            t.start();
-            // wait
-            return app.exec();
-        }
+        Controller* controller = Controller::getInstance();
+        controller->requestCapture(req);
+        QObject::connect(controller,
+                         &Controller::captureTaken,
+                         [&](uint, QPixmap, QRect) { qApp->exit(0); });
+        QObject::connect(controller, &Controller::captureFailed, [](uint) {
+            // TODO use abstract logger
+            // TODO do we have to do more stuff here?
+            QTextStream(stderr) << "screenshot aborted\n";
+            qApp->exit(1);
+        });
+        app.exec();
     } else if (parser.isSet(screenArgument)) { // SCREEN
         QString numberStr = parser.value(screenNumberOption);
         // Option values
@@ -492,10 +479,10 @@ int main(int argc, char* argv[])
         bool someFlagSet =
           (filename || tray || help || mainColor || contrastColor || check);
         if (check) {
-            QTextStream stream(stderr);
-            bool ok = ConfigHandler(true).checkForErrors(&stream);
+            QTextStream err(stderr);
+            bool ok = ConfigHandler(true).checkForErrors(&err);
             if (ok) {
-                stream << QStringLiteral("No errors detected.\n");
+                err << QStringLiteral("No errors detected.\n");
                 goto finish;
             } else {
                 return 1;

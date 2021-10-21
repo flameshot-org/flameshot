@@ -19,8 +19,6 @@ public:
 
 public slots:
     void selectionTaken(uint id, QByteArray rawImage, QRect selection);
-    void captureTaken(uint id, QByteArray rawImage, QRect selection);
-    void captureFailed(uint id);
 
 private:
     uint m_id;

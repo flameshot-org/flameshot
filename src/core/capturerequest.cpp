@@ -9,8 +9,10 @@
 #include "src/utils/screenshotsaver.h"
 #include "systemnotification.h"
 #include <QApplication>
+#include <QBuffer>
 #include <QClipboard>
 #include <QDateTime>
+#include <QTextStream>
 #include <QVector>
 #include <stdexcept>
 
@@ -123,8 +125,23 @@ void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
     m_pinWindowGeometry = pinWindowGeometry;
 }
 
-void CaptureRequest::exportCapture(const QPixmap& capture)
+void CaptureRequest::exportCapture(const QPixmap& capture,
+                                   const QRect& geometry)
 {
+    if (m_tasks & PRINT_GEOMETRY) {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        QTextStream(stdout) << geometry.width() << " " << geometry.height()
+                            << " " << geometry.x() << " " << geometry.y();
+    }
+
+    if (m_tasks & PRINT_RAW) {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        capture.save(&buffer, "PNG");
+        QTextStream(stdout) << byteArray;
+    }
+
     if (m_tasks & SAVE) {
         if (m_path.isEmpty()) {
             ScreenshotSaver(m_id).saveToFilesystemGUI(capture);

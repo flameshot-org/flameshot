@@ -552,7 +552,7 @@ void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
 {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {
-        it.value().exportCapture(p);
+        it.value().exportCapture(p, selection);
         m_requestMap.erase(it);
     }
     emit captureTaken(id, p, selection);

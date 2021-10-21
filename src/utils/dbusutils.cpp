@@ -8,6 +8,8 @@
 #include <QRect>
 #include <QTextStream>
 
+// TODO obsolete
+
 DBusUtils::DBusUtils(QObject* parent)
   : QObject(parent)
 {}
@@ -54,26 +56,6 @@ void DBusUtils::checkDBusConnection(const QDBusConnection& connection)
 {
     if (!connection.isConnected()) {
         SystemNotification().sendMessage(tr("Unable to connect via DBus"));
-        qApp->exit(1);
-    }
-}
-
-void DBusUtils::captureTaken(uint id, QByteArray rawImage, QRect selection)
-{
-    if (m_id == id) {
-        QFile file;
-        file.open(stdout, QIODevice::WriteOnly);
-
-        file.write(rawImage);
-        file.close();
-        qApp->exit();
-    }
-}
-
-void DBusUtils::captureFailed(uint id)
-{
-    if (m_id == id) {
-        QTextStream(stdout) << "screenshot aborted\n";
         qApp->exit(1);
     }
 }
