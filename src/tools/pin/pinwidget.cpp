@@ -121,9 +121,18 @@ void PinWidget::mouseMoveEvent(QMouseEvent* e)
 
 void PinWidget::setScaledPixmap(const QSize& size)
 {
+    ConfigHandler config;
+    
     const qreal scale = qApp->devicePixelRatio();
-    QPixmap scaledPixmap = m_pixmap.scaled(
-      size * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    
+    if (config.antialiasingPinZoom()) {
+        QPixmap scaledPixmap = m_pixmap.scaled(
+            size * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    } else {
+        QPixmap scaledPixmap = m_pixmap.scaled(
+            size * scale, Qt::KeepAspectRatio, Qt::FastTransformation);
+    }
+    
     scaledPixmap.setDevicePixelRatio(scale);
     m_label->setPixmap(scaledPixmap);
 }

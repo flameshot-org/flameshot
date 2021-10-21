@@ -40,6 +40,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
+    initAntialiasingPinZoom();
     initUseJpgForClipboard();
     initSaveAfterCopy();
     inituploadHistoryMax();
@@ -62,6 +63,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
+    m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
@@ -487,6 +489,17 @@ void GeneralConf::initCopyPathAfterSave()
         ConfigHandler().setCopyPathAfterSave(checked);
     });
 }
+
+void GeneralConf::initAntialiasingPinZoom()
+{
+    m_antialiasingPinZoom = new QCheckBox(tr("Anti-aliasing image when zoom the pinned image"), this);
+    m_antialiasingPinZoom->setToolTip(tr("After zooming the pinned image, should the image get smoothened or stay pixelated"));
+    m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
+    connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
 
 const QString GeneralConf::chooseFolder(const QString pathDefault)
 {
