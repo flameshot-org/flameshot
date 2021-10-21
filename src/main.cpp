@@ -56,6 +56,22 @@ void wayland_hacks()
 }
 #endif
 
+void requestCaptureAndWait(const CaptureRequest& req)
+{
+    Controller* controller = Controller::getInstance();
+    controller->requestCapture(req);
+    QObject::connect(controller,
+                     &Controller::captureTaken,
+                     [&](uint, QPixmap, QRect) { qApp->exit(0); });
+    QObject::connect(controller, &Controller::captureFailed, [](uint) {
+        // TODO use abstract logger
+        // TODO do we have to do more stuff here?
+        QTextStream(stderr) << "screenshot aborted\n";
+        qApp->exit(1);
+    });
+    qApp->exec();
+}
+
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_LINUX
@@ -398,19 +414,12 @@ int main(int argc, char* argv[])
         if (!clipboard && path.isEmpty() && !raw && !upload) {
             req.addSaveTask();
         }
-        Controller* controller = Controller::getInstance();
-        controller->requestCapture(req);
-        QObject::connect(controller,
-                         &Controller::captureTaken,
-                         [&](uint, QPixmap, QRect) { qApp->exit(0); });
-        QObject::connect(controller, &Controller::captureFailed, [](uint) {
-            // TODO use abstract logger
-            // TODO do we have to do more stuff here?
-            QTextStream(stderr) << "screenshot aborted\n";
-            qApp->exit(1);
-        });
-        qApp->exec();
+        requestCaptureAndWait(req);
     } else if (parser.isSet(screenArgument)) { // SCREEN
+        // Recreate the application as a QApplication
+        // TODO find a way so we don't have to do this
+        delete qApp;
+        new QApplication(argc, argv);
         QString numberStr = parser.value(screenNumberOption);
         // Option values
         int number =
@@ -446,32 +455,7 @@ int main(int argc, char* argv[])
             req.addSaveTask();
         }
 
-        uint id = req.id();
-        req.setStaticID(id);
-        DBusUtils dbusUtils;
-
-        // Send message
-        QDBusMessage m = QDBusMessage::createMethodCall(
-          QStringLiteral("org.flameshot.Flameshot"),
-          QStringLiteral("/"),
-          QLatin1String(""),
-          QStringLiteral("requestCapture"));
-        m << req.serialize();
-        QDBusConnection sessionBus = QDBusConnection::sessionBus();
-        dbusUtils.checkDBusConnection(sessionBus);
-        sessionBus.call(m);
-
-        if (raw) {
-            dbusUtils.connectPrintCapture(sessionBus, id);
-            // timeout just in case
-            QTimer t;
-            t.setInterval(delay + 2000);
-            QObject::connect(
-              &t, &QTimer::timeout, qApp, &QCoreApplication::quit);
-            t.start();
-            // wait
-            return qApp->exec();
-        }
+        requestCaptureAndWait(req);
     } else if (parser.isSet(configArgument)) { // CONFIG
         bool autostart = parser.isSet(autostartOption);
         bool filename = parser.isSet(filenameOption);
