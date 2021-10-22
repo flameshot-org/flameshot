@@ -492,14 +492,16 @@ void GeneralConf::initCopyPathAfterSave()
 
 void GeneralConf::initAntialiasingPinZoom()
 {
-    m_antialiasingPinZoom = new QCheckBox(tr("Anti-aliasing image when zoom the pinned image"), this);
-    m_antialiasingPinZoom->setToolTip(tr("After zooming the pinned image, should the image get smoothened or stay pixelated"));
+    m_antialiasingPinZoom =
+      new QCheckBox(tr("Anti-aliasing image when zoom the pinned image"), this);
+    m_antialiasingPinZoom->setToolTip(
+      tr("After zooming the pinned image, should the image get smoothened or "
+         "stay pixelated"));
     m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
     });
 }
-
 
 const QString GeneralConf::chooseFolder(const QString pathDefault)
 {
