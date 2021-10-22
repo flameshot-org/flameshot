@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "controller.h"
+#include "flameshotdaemon.h"
 
 #if defined(Q_OS_MACOS)
 #include "external/QHotkey/QHotkey"
@@ -576,14 +577,12 @@ void Controller::exportCapture(QPixmap capture,
     }
 
     if (tasks & CR::COPY) {
-        ScreenshotSaver().saveToClipboard(capture);
+        FlameshotDaemon::copyToClipboard(capture);
         emit captureTaken(0, capture, selection);
     }
 
     if (tasks & CR::PIN) {
-        QWidget* widget = new PinWidget(capture, selection);
-        widget->show();
-        widget->activateWindow();
+        FlameshotDaemon::createPin(capture, selection);
         if (mode == CR::SCREEN_MODE || mode == CR::FULLSCREEN_MODE) {
             SystemNotification().sendMessage(
               QObject::tr("Full screen screenshot pinned to screen"));

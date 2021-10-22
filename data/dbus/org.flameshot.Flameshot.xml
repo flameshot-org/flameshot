@@ -13,6 +13,27 @@
     </method>
 
     <!--
+        attachPin:
+        @data: Byte array containing the screenshot and geometry information.
+
+        Attach a pinned screenshot widget to the daemon.
+    -->
+    <method name="attachPin">
+      <arg name="data" type="ay" direction="in"/>
+    </method>
+
+    <!--
+        attachClipboard:
+        @screenshot: Byte array containing the screenshot pixmap.
+
+        Prevent losing clipboard data when a flameshot subcommand exits, by
+        attaching the clipboard data to the daemon.
+    -->
+    <method name="attachClipboard">
+      <arg name="screenshot" type="ay" direction="in"/>
+    </method>
+
+    <!--
         openLauncher:
 
         Opens the capture launcher.

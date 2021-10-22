@@ -11,6 +11,7 @@
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
 #include "src/core/controller.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/pathinfo.h"
@@ -122,6 +123,7 @@ int main(int argc, char* argv[])
         auto c = Controller::getInstance();
 #if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
         new FlameshotDBusAdapter(c);
+        FlameshotDaemon::start();
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
             SystemNotification().sendMessage(

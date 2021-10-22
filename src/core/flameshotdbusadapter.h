@@ -26,6 +26,9 @@ public slots:
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
     Q_NOREPLY void autostartEnabled(bool enabled);
+    // TODO temporary, just to forward signals to FlameshotDaemon
+    Q_NOREPLY void attachClipboard(const QByteArray& data);
+    Q_NOREPLY void attachPin(const QByteArray& data);
 
 private slots:
     void handleCaptureTaken(uint id, const QPixmap& p, const QRect& selection);

@@ -3,6 +3,7 @@
 
 #include "flameshotdbusadapter.h"
 #include "src/core/controller.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
@@ -60,6 +61,16 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled)
     auto controller = Controller::getInstance();
     // Autostart is not saved in a .ini file, requires manual update
     controller->updateConfigComponents();
+}
+
+void FlameshotDBusAdapter::attachClipboard(const QByteArray& data)
+{
+    FlameshotDaemon::instance()->attachClipboard(data);
+}
+
+void FlameshotDBusAdapter::attachPin(const QByteArray& data)
+{
+    FlameshotDaemon::instance()->attachPin(data);
 }
 
 void FlameshotDBusAdapter::handleCaptureTaken(uint id,
