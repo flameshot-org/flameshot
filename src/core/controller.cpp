@@ -354,17 +354,13 @@ void Controller::initTrayIcon()
         enableTrayIcon();
     }
 #elif defined(Q_OS_WIN)
-    Controller::getInstance()->enableTrayIcon();
+    enableTrayIcon();
 
     GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
-    connect(nativeFilter,
-            &GlobalShortcutFilter::printPressed,
-            Controller::instance(),
-            [this]() {
-                this->requestCapture(
-                  CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
-            });
+    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
+        this->requestCapture(CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
+    });
 #endif
 }
 
