@@ -27,7 +27,8 @@ public slots:
     Q_NOREPLY void trayIconEnabled(bool enabled);
     Q_NOREPLY void autostartEnabled(bool enabled);
     // TODO temporary, just to forward signals to FlameshotDaemon
-    Q_NOREPLY void attachClipboard(const QByteArray& data);
+    Q_NOREPLY void attachScreenshotToClipboard(const QByteArray& data);
+    Q_NOREPLY void attachTextToClipboard(QString text);
     Q_NOREPLY void attachPin(const QByteArray& data);
 
 private slots:

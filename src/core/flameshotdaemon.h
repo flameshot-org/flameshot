@@ -6,6 +6,7 @@
 
 class QPixmap;
 class QRect;
+class QDBusMessage;
 
 class FlameshotDaemon : public QObject
 {
@@ -16,17 +17,22 @@ public:
     static FlameshotDaemon* instance();
     static void createPin(QPixmap capture, QRect geometry);
     static void copyToClipboard(QPixmap capture);
+    static void copyToClipboard(QString text);
     // TODO static void createAppLauncher();
 private:
     FlameshotDaemon();
     void quitIfIdle();
     void attachPin(QPixmap pixmap, QRect geometry);
-    void attachClipboard(QPixmap pixmap);
+    void attachScreenshotToClipboard(QPixmap pixmap);
 
 private slots:
     Q_NOREPLY void attachPin(const QByteArray& data);
-    Q_NOREPLY void attachClipboard(const QByteArray& screenshot);
-    void onClipboardChanged();
+    Q_NOREPLY void attachScreenshotToClipboard(const QByteArray& screenshot);
+    Q_NOREPLY void attachTextToClipboard(QString text);
+
+private:
+    static QDBusMessage createMethodCall(QString method);
+    static void call(const QDBusMessage& m);
 
 private:
     // TODO toggle this using a config option?

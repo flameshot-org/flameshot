@@ -23,14 +23,25 @@
     </method>
 
     <!--
-        attachClipboard:
+        attachScreenshotToClipboard:
         @screenshot: Byte array containing the screenshot pixmap.
 
-        Prevent losing clipboard data when a flameshot subcommand exits, by
-        attaching the clipboard data to the daemon.
+        Copy the screenshot to the daemon's clipboard, to prevent losing the
+        clipboard when a flameshot subcommand exits.
     -->
-    <method name="attachClipboard">
+    <method name="attachScreenshotToClipboard">
       <arg name="screenshot" type="ay" direction="in"/>
+    </method>
+
+    <!--
+        attachTextToClipboard:
+        @text: Text to be copied to the clipboard.
+
+        Copy the text to the daemon's clipboard, to prevent losing the
+        clipboard when a flameshot subcommand exits.
+    -->
+    <method name="attachTextToClipboard">
+      <arg name="text" type="s" direction="in"/>
     </method>
 
     <!--

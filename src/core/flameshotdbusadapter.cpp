@@ -63,9 +63,14 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled)
     controller->updateConfigComponents();
 }
 
-void FlameshotDBusAdapter::attachClipboard(const QByteArray& data)
+void FlameshotDBusAdapter::attachScreenshotToClipboard(const QByteArray& data)
 {
-    FlameshotDaemon::instance()->attachClipboard(data);
+    FlameshotDaemon::instance()->attachScreenshotToClipboard(data);
+}
+
+void FlameshotDBusAdapter::attachTextToClipboard(QString text)
+{
+    FlameshotDaemon::instance()->attachTextToClipboard(text);
 }
 
 void FlameshotDBusAdapter::attachPin(const QByteArray& data)

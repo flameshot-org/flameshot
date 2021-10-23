@@ -3,6 +3,7 @@
 #include "dbusutils.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
+#include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDBusConnection>
@@ -16,6 +17,13 @@ void FlameshotDaemon::start()
 {
     if (!m_instance) {
         m_instance = new FlameshotDaemon();
+        connect(QApplication::clipboard(),
+                &QClipboard::dataChanged,
+                instance(),
+                []() {
+                    instance()->m_hostingClipboard = false;
+                    instance()->quitIfIdle();
+                });
     }
 }
 
@@ -30,34 +38,34 @@ void FlameshotDaemon::createPin(QPixmap capture, QRect geometry)
     QDataStream stream(&data, QIODevice::WriteOnly);
     stream << capture;
     stream << geometry;
-    QDBusMessage m =
-      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
-                                     QStringLiteral("/"),
-                                     QLatin1String(""),
-                                     QStringLiteral("attachPin"));
+    QDBusMessage m = createMethodCall(QStringLiteral("attachPin"));
     m << data;
-    QDBusConnection sessionBus = QDBusConnection::sessionBus();
-    DBusUtils().checkDBusConnection(sessionBus);
-    sessionBus.call(m);
+    call(m);
 }
 
 void FlameshotDaemon::copyToClipboard(QPixmap capture)
 {
     if (instance()) {
-        instance()->attachClipboard(capture);
+        instance()->attachScreenshotToClipboard(capture);
         return;
     }
+
     QDBusMessage m =
-      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
-                                     QStringLiteral("/"),
-                                     QLatin1String(""),
-                                     QStringLiteral("attachClipboard"));
+      createMethodCall(QStringLiteral("attachScreenshotToClipboard"));
 
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
     stream << capture;
 
     m << data;
+    call(m);
+}
+
+void FlameshotDaemon::copyToClipboard(QString text)
+{
+    auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
+
+    m << text;
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     DBusUtils().checkDBusConnection(sessionBus);
@@ -96,6 +104,7 @@ void FlameshotDaemon::quitIfIdle()
 void FlameshotDaemon::attachPin(QPixmap pixmap, QRect geometry)
 {
     PinWidget* pinWidget = new PinWidget(pixmap, geometry);
+    m_widgets.append(pinWidget);
     connect(pinWidget, &QObject::destroyed, this, [=]() {
         m_widgets.removeOne(pinWidget);
         quitIfIdle();
@@ -105,15 +114,9 @@ void FlameshotDaemon::attachPin(QPixmap pixmap, QRect geometry)
     pinWidget->activateWindow();
 }
 
-void FlameshotDaemon::attachClipboard(QPixmap pixmap)
+void FlameshotDaemon::attachScreenshotToClipboard(QPixmap pixmap)
 {
     QClipboard* clipboard = QApplication::clipboard();
-    connect(clipboard,
-            &QClipboard::dataChanged,
-            m_instance,
-            &FlameshotDaemon::onClipboardChanged,
-            Qt::UniqueConnection);
-
     clipboard->blockSignals(true);
     ScreenshotSaver().saveToClipboard(pixmap);
     clipboard->blockSignals(false);
@@ -133,7 +136,7 @@ void FlameshotDaemon::attachPin(const QByteArray& data)
     attachPin(pixmap, geometry);
 }
 
-void FlameshotDaemon::attachClipboard(const QByteArray& screenshot)
+void FlameshotDaemon::attachScreenshotToClipboard(const QByteArray& screenshot)
 {
     m_hostingClipboard = true;
 
@@ -141,13 +144,34 @@ void FlameshotDaemon::attachClipboard(const QByteArray& screenshot)
     QPixmap p;
     stream >> p;
 
-    attachClipboard(p);
+    attachScreenshotToClipboard(p);
 }
 
-void FlameshotDaemon::onClipboardChanged()
+void FlameshotDaemon::attachTextToClipboard(QString text)
 {
-    m_hostingClipboard = false;
-    quitIfIdle();
+    m_hostingClipboard = true;
+    QClipboard* clipboard = QApplication::clipboard();
+
+    clipboard->blockSignals(true);
+    QApplication::clipboard()->setText(text);
+    clipboard->blockSignals(false);
+}
+
+QDBusMessage FlameshotDaemon::createMethodCall(QString method)
+{
+    QDBusMessage m =
+      QDBusMessage::createMethodCall(QStringLiteral("org.flameshot.Flameshot"),
+                                     QStringLiteral("/"),
+                                     QLatin1String(""),
+                                     method);
+    return m;
+}
+
+void FlameshotDaemon::call(const QDBusMessage& m)
+{
+    QDBusConnection sessionBus = QDBusConnection::sessionBus();
+    DBusUtils().checkDBusConnection(sessionBus);
+    sessionBus.call(m);
 }
 
 // STATIC ATTRIBUTES
