@@ -551,7 +551,8 @@ void Controller::exportCapture(QPixmap capture,
     int tasks = req.tasks(), id = req.id(), mode = req.captureMode();
     QString path = req.path();
     static CR::ExportTask finishedTasks;
-    finishedTasks = CR::NO_TASK;
+    // If there was an ACCEPT_ON_SELECT task, it is finished
+    finishedTasks = (CR::ExportTask)(tasks & CR::ACCEPT_ON_SELECT);
 
     if (tasks & CR::PRINT_GEOMETRY) {
         QByteArray byteArray;

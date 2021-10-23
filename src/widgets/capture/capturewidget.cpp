@@ -253,7 +253,7 @@ CaptureWidget::~CaptureWidget()
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Controller::getInstance()->handleCaptureTaken(
-          m_context.requestId, pixmap(), m_context.selection);
+          m_context.requestId, pixmap(), geometry);
     } else {
         Controller::getInstance()->handleCaptureFailed(m_context.requestId);
     }
