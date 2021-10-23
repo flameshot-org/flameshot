@@ -54,6 +54,8 @@ public slots:
     void openInfoWindow();
     void appUpdates();
     void openLauncherWindow();
+    // TODO move tray icon handling to FlameshotDaemon
+    void initTrayIcon();
     void enableTrayIcon();
     void disableTrayIcon();
     void sendTrayNotification(

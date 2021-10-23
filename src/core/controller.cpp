@@ -68,21 +68,6 @@ Controller::Controller()
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
     qApp->setQuitOnLastWindowClosed(false);
 
-    // init tray icon
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if (!ConfigHandler().disabledTrayIcon()) {
-        enableTrayIcon();
-    }
-#elif defined(Q_OS_WIN)
-    enableTrayIcon();
-
-    GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
-    qApp->installNativeEventFilter(nativeFilter);
-    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
-        this->requestCapture(CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
-    });
-#endif
-
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
@@ -363,6 +348,27 @@ void Controller::openLauncherWindow()
 #if defined(Q_OS_MACOS)
     m_launcherWindow->activateWindow();
     m_launcherWindow->raise();
+#endif
+}
+
+void Controller::initTrayIcon()
+{
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (!ConfigHandler().disabledTrayIcon()) {
+        enableTrayIcon();
+    }
+#elif defined(Q_OS_WIN)
+    Controller::getInstance()->enableTrayIcon();
+
+    GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
+    qApp->installNativeEventFilter(nativeFilter);
+    connect(nativeFilter,
+            &GlobalShortcutFilter::printPressed,
+            Controller::instance(),
+            [this]() {
+                this->requestCapture(
+                  CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
+            });
 #endif
 }
 

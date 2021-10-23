@@ -1,5 +1,7 @@
 #include "flameshotdaemon.h"
 
+#include "confighandler.h"
+#include "controller.h"
 #include "dbusutils.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
@@ -13,17 +15,28 @@
 
 // TODO handle if daemon can't be contacted via dbus
 
+FlameshotDaemon::FlameshotDaemon()
+  : m_persist(false)
+  , m_hostingClipboard(false)
+{
+    connect(
+      QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() {
+          if (!m_hostingClipboard) {
+              return;
+          }
+          m_hostingClipboard = false;
+          quitIfIdle();
+      });
+    Controller::getInstance()->initTrayIcon();
+    // TODO on windows/(Mac maybe?), always persist so hotkeys can be used
+    // TODO consider which config options could influence this
+    // init tray icon
+}
+
 void FlameshotDaemon::start()
 {
     if (!m_instance) {
         m_instance = new FlameshotDaemon();
-        connect(QApplication::clipboard(),
-                &QClipboard::dataChanged,
-                instance(),
-                []() {
-                    instance()->m_hostingClipboard = false;
-                    instance()->quitIfIdle();
-                });
     }
 }
 
@@ -72,14 +85,6 @@ void FlameshotDaemon::copyToClipboard(QString text)
     sessionBus.call(m);
 }
 
-FlameshotDaemon::FlameshotDaemon()
-  : m_persist(false)
-  , m_hostingClipboard(false)
-{
-    // TODO on windows/(Mac maybe?), always persist so hotkeys can be used
-    // TODO consider which config options could influence this
-}
-
 FlameshotDaemon* FlameshotDaemon::instance()
 {
     return m_instance;
@@ -116,6 +121,7 @@ void FlameshotDaemon::attachPin(QPixmap pixmap, QRect geometry)
 
 void FlameshotDaemon::attachScreenshotToClipboard(QPixmap pixmap)
 {
+    m_hostingClipboard = true;
     QClipboard* clipboard = QApplication::clipboard();
     clipboard->blockSignals(true);
     ScreenshotSaver().saveToClipboard(pixmap);
@@ -138,8 +144,6 @@ void FlameshotDaemon::attachPin(const QByteArray& data)
 
 void FlameshotDaemon::attachScreenshotToClipboard(const QByteArray& screenshot)
 {
-    m_hostingClipboard = true;
-
     QDataStream stream(screenshot);
     QPixmap p;
     stream >> p;
