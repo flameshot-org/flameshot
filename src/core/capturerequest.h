@@ -55,7 +55,6 @@ private:
     QString m_path;
     ExportTask m_tasks;
     QVariant m_data;
-    QRect m_pinWindowGeometry;
 
     bool m_forcedID;
     uint m_id;

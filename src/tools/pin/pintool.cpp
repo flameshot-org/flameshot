@@ -43,8 +43,6 @@ CaptureTool* PinTool::copy(QObject* parent)
 void PinTool::pressed(CaptureContext& context)
 {
     emit requestAction(REQ_CAPTURE_DONE_OK);
-    QRect geometry = context.selection;
-    geometry.setTopLeft(geometry.topLeft() + context.widgetOffset);
-    context.request()->addPinTask(geometry);
+    context.request()->addTask(CaptureRequest::PIN);
     emit requestAction(REQ_CLOSE_GUI);
 }

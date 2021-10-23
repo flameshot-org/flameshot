@@ -52,7 +52,7 @@ void AcceptTool::pressed(CaptureContext& context)
     if (context.request()->tasks() & CaptureRequest::PIN) {
         QRect geometry = context.selection;
         geometry.moveTopLeft(geometry.topLeft() + context.widgetOffset);
-        context.request()->addPinTask(geometry);
+        context.request()->addTask(CaptureRequest::PIN);
     }
     emit requestAction(REQ_CLOSE_GUI);
 }

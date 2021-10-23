@@ -120,9 +120,3 @@ void CaptureRequest::addSaveTask(const QString& path)
     m_tasks |= SAVE;
     m_path = path;
 }
-
-void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
-{
-    m_tasks |= PIN;
-    m_pinWindowGeometry = pinWindowGeometry;
-}

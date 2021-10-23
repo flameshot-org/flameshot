@@ -302,12 +302,7 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     }
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
-        CaptureRequest& request = *requests().find(id);
         QRect geometry = ScreenGrabber().screenGeometry(n);
-        if (request.tasks() & CaptureRequest::PIN) {
-            // change geometry for pin task
-            request.addPinTask(geometry);
-        }
         handleCaptureTaken(id, p, geometry);
     } else {
         handleCaptureFailed(id);
