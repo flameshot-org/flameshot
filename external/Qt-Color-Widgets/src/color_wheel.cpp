@@ -18,6 +18,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * This file was modified by the Flameshot contributors.
  */
 #include "color_wheel.hpp"
 
@@ -191,6 +192,9 @@ public:
     /// Updates the outer ring that displays the hue selector
     void render_ring()
     {
+        if (!w->isVisible()) {
+            return;
+        }
         hue_ring = QPixmap(outer_radius() * 2, outer_radius() * 2);
         hue_ring.fill(Qt::transparent);
         QPainter painter(&hue_ring);
