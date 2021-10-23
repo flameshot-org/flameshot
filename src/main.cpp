@@ -324,6 +324,8 @@ int main(int argc, char* argv[])
         }
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
+        delete qApp;
+        new QApplication(argc, argv);
         // Option values
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -336,7 +338,6 @@ int main(int argc, char* argv[])
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
-        DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
@@ -363,27 +364,7 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-        uint id = req.id();
-        req.setStaticID(id);
-
-        // Send message
-        QDBusMessage m = QDBusMessage::createMethodCall(
-          QStringLiteral("org.flameshot.Flameshot"),
-          QStringLiteral("/"),
-          QLatin1String(""),
-          QStringLiteral("requestCapture"));
-        m << req.serialize();
-        QDBusConnection sessionBus = QDBusConnection::sessionBus();
-        dbusUtils.checkDBusConnection(sessionBus);
-        sessionBus.call(m);
-
-        if (raw) {
-            dbusUtils.connectPrintCapture(sessionBus, id);
-            return waitAfterConnecting(delay);
-        } else if (printGeometry) {
-            dbusUtils.connectSelectionCapture(sessionBus, id);
-            return waitAfterConnecting(delay);
-        }
+        requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         // Recreate the application as a QApplication
         // TODO find a way so we don't have to do this
