@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "imguruploader.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/history.h"
@@ -190,7 +191,7 @@ void ImgurUploader::openURL()
 
 void ImgurUploader::copyURL()
 {
-    QApplication::clipboard()->setText(m_imageURL.toString());
+    FlameshotDaemon::copyToClipboard(m_imageURL.toString());
     m_notification->showMessage(tr("URL copied to clipboard."));
 }
 
@@ -204,6 +205,6 @@ void ImgurUploader::openDeleteURL()
 
 void ImgurUploader::copyImage()
 {
-    QApplication::clipboard()->setPixmap(m_pixmap);
+    FlameshotDaemon::copyToClipboard(m_pixmap);
     m_notification->showMessage(tr("Screenshot copied to clipboard."));
 }

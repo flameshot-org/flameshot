@@ -545,18 +545,18 @@ void Controller::exportCapture(QPixmap capture,
                                QRect& selection,
                                const CaptureRequest& req)
 {
-    int tasks = req.tasks();
-    int id = req.id();
-    int mode = req.captureMode();
-    QString path = req.path();
     using CR = CaptureRequest;
+    int tasks = req.tasks(), id = req.id(), mode = req.captureMode();
+    QString path = req.path();
+    static CR::ExportTask finishedTasks;
+    finishedTasks = CR::NO_TASK;
 
     if (tasks & CR::PRINT_GEOMETRY) {
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         QTextStream(stdout) << selection.width() << " " << selection.height()
                             << " " << selection.x() << " " << selection.y();
-        emit captureTaken(0, capture, selection);
+        finishedTasks |= CR::PRINT_GEOMETRY;
     }
 
     if (tasks & CR::PRINT_RAW) {
@@ -564,7 +564,7 @@ void Controller::exportCapture(QPixmap capture,
         QBuffer buffer(&byteArray);
         capture.save(&buffer, "PNG");
         QTextStream(stdout) << byteArray;
-        emit captureTaken(0, capture, selection);
+        finishedTasks |= CR::PRINT_RAW;
     }
 
     if (tasks & CR::SAVE) {
@@ -573,12 +573,12 @@ void Controller::exportCapture(QPixmap capture,
         } else {
             ScreenshotSaver(id).saveToFilesystem(capture, path);
         }
-        emit captureTaken(0, capture, selection);
+        finishedTasks |= CR::SAVE;
     }
 
     if (tasks & CR::COPY) {
         FlameshotDaemon::copyToClipboard(capture);
-        emit captureTaken(0, capture, selection);
+        finishedTasks |= CR::COPY;
     }
 
     if (tasks & CR::PIN) {
@@ -587,7 +587,7 @@ void Controller::exportCapture(QPixmap capture,
             SystemNotification().sendMessage(
               QObject::tr("Full screen screenshot pinned to screen"));
         }
-        emit captureTaken(0, capture, selection);
+        finishedTasks |= CR::COPY;
     }
 
     if (tasks & CR::UPLOAD) {
@@ -603,14 +603,32 @@ void Controller::exportCapture(QPixmap capture,
                       SystemNotification().sendMessage(
                         QObject::tr("URL copied to clipboard."));
                       widget->close();
+                      finishedTasks |= CR::UPLOAD;
+                      if (finishedTasks == tasks) {
+                          emit captureTaken(0, capture, selection);
+                      }
                   } else {
                       widget->showPostUploadDialog();
+                      connect(widget, &QObject::destroyed, this, [=]() {
+                          finishedTasks |= CR::UPLOAD;
+                          if (finishedTasks == tasks) {
+                              emit captureTaken(0, capture, selection);
+                          }
+                      });
                   }
               } else {
                   widget->showPostUploadDialog();
+                  connect(widget, &QObject::destroyed, this, [=]() {
+                      finishedTasks |= CR::UPLOAD;
+                      if (finishedTasks == tasks) {
+                          emit captureTaken(0, capture, selection);
+                      }
+                  });
               }
-              emit captureTaken(0, capture, selection);
           });
+    }
+    if (finishedTasks == tasks) {
+        emit captureTaken(0, capture, selection);
     }
 }
 
