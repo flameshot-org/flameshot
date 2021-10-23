@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDesktopWidget>
+#include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMenu>
@@ -555,8 +556,9 @@ void Controller::exportCapture(QPixmap capture,
     if (tasks & CR::PRINT_GEOMETRY) {
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
-        QTextStream(stdout) << selection.width() << " " << selection.height()
-                            << " " << selection.x() << " " << selection.y();
+        QTextStream(stdout)
+          << selection.width() << " " << selection.height() << " "
+          << selection.x() << " " << selection.y() << "\n";
         finishedTasks |= CR::PRINT_GEOMETRY;
     }
 
@@ -564,7 +566,11 @@ void Controller::exportCapture(QPixmap capture,
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         capture.save(&buffer, "PNG");
-        QTextStream(stdout) << byteArray;
+        QFile file;
+        file.open(stdout, QIODevice::WriteOnly);
+
+        file.write(byteArray);
+        file.close();
         finishedTasks |= CR::PRINT_RAW;
     }
 
