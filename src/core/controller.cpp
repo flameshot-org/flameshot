@@ -588,7 +588,7 @@ void Controller::exportCapture(QPixmap capture,
             SystemNotification().sendMessage(
               QObject::tr("Full screen screenshot pinned to screen"));
         }
-        finishedTasks |= CR::COPY;
+        finishedTasks |= CR::PIN;
     }
 
     if (tasks & CR::UPLOAD) {
