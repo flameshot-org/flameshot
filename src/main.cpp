@@ -34,17 +34,6 @@
 #include <desktopinfo.h>
 #endif
 
-// TODO will be obsolete
-int waitAfterConnecting(int delay)
-{
-    QTimer t;
-    t.setInterval(delay + 1000 * 60 * 15); // 15 minutes timeout
-    QObject::connect(&t, &QTimer::timeout, qApp, &QCoreApplication::quit);
-    t.start();
-    // wait
-    return qApp->exec();
-}
-
 #ifdef Q_OS_LINUX
 // source: https://github.com/ksnip/ksnip/issues/416
 void wayland_hacks()
