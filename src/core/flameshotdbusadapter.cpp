@@ -35,11 +35,6 @@ void FlameshotDBusAdapter::requestCapture(const QByteArray& requestData)
     Controller::getInstance()->requestCapture(req);
 }
 
-void FlameshotDBusAdapter::openLauncher()
-{
-    Controller::getInstance()->openLauncherWindow();
-}
-
 void FlameshotDBusAdapter::openConfig()
 {
     Controller::getInstance()->openConfigWindow();

@@ -165,16 +165,14 @@ void CaptureLauncher::disconnectCaptureSlots()
                &CaptureLauncher::captureFailed);
 }
 
+// TODO get rid of id parameter
 void CaptureLauncher::captureTaken(uint id, QPixmap p, const QRect& selection)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
 
-    if (id == m_id) {
-        m_id = 0;
-        m_imageLabel->setScreenshot(p);
-        show();
-    }
+    m_imageLabel->setScreenshot(p);
+    show();
 
     auto mode = static_cast<CaptureRequest::CaptureMode>(
       m_captureType->currentData().toInt());

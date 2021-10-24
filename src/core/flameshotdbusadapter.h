@@ -22,7 +22,6 @@ signals:
 
 public slots:
     Q_NOREPLY void requestCapture(const QByteArray& requestData);
-    Q_NOREPLY void openLauncher();
     Q_NOREPLY void openConfig();
     Q_NOREPLY void trayIconEnabled(bool enabled);
     Q_NOREPLY void autostartEnabled(bool enabled);

@@ -45,15 +45,6 @@
     </method>
 
     <!--
-        openLauncher:
-
-        Opens the capture launcher.
-    -->
-    <method name="openLauncher">
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
         openConfig:
 
         Opens the configuration window.

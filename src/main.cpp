@@ -302,17 +302,11 @@ int main(int argc, char* argv[])
     //--------------
     if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
-        QDBusMessage m = QDBusMessage::createMethodCall(
-          QStringLiteral("org.flameshot.Flameshot"),
-          QStringLiteral("/"),
-          QLatin1String(""),
-          QStringLiteral("openLauncher"));
-        QDBusConnection sessionBus = QDBusConnection::sessionBus();
-        if (!sessionBus.isConnected()) {
-            SystemNotification().sendMessage(
-              QObject::tr("Unable to connect via DBus"));
-        }
-        sessionBus.call(m);
+        delete qApp;
+        new QApplication(argc, argv);
+        Controller *controller = Controller::getInstance();
+        controller->openLauncherWindow();
+        qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
         delete qApp;
         new QApplication(argc, argv);
