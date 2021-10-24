@@ -304,7 +304,7 @@ int main(int argc, char* argv[])
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
         delete qApp;
         new QApplication(argc, argv);
-        Controller *controller = Controller::getInstance();
+        Controller* controller = Controller::getInstance();
         controller->openLauncherWindow();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
