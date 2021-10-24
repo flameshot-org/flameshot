@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
         return qApp->exec();
     }
 
-#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if !defined(Q_OS_WIN)
     /*--------------|
      * CLI parsing  |
      * ------------*/
