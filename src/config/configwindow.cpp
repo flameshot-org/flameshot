@@ -187,7 +187,7 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
 
         qApp->processEvents();
         QPoint center = dialog.geometry().center();
-        QRect dialogRect(0, 0, 400, 400);
+        QRect dialogRect(0, 0, 600, 400);
         dialogRect.moveCenter(center);
         dialog.setGeometry(dialogRect);
 

@@ -111,14 +111,14 @@ public:
     QString configFilePath() const;
 
     // GENERIC GETTERS AND SETTERS
-    bool setShortcut(const QString&, const QString&);
-    QString shortcut(const QString&);
+    bool setShortcut(const QString& actionName, const QString& shortcut);
+    QString shortcut(const QString& actionName);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
 
     // INFO
-    const QSet<QString>& recognizedGeneralOptions() const;
-    const QSet<QString>& recognizedShortcutNames() const;
+    static QSet<QString>& recognizedGeneralOptions();
+    static QSet<QString>& recognizedShortcutNames();
     QSet<QString> keysFromGroup(const QString& group) const;
 
     // ERROR HANDLING
