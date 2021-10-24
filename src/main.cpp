@@ -121,9 +121,10 @@ int main(int argc, char* argv[])
         qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
         auto c = Controller::getInstance();
-#if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
-        new FlameshotDBusAdapter(c);
         FlameshotDaemon::start();
+
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+        new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
             SystemNotification().sendMessage(
@@ -135,7 +136,7 @@ int main(int argc, char* argv[])
         return qApp->exec();
     }
 
-#if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     /*--------------|
      * CLI parsing  |
      * ------------*/

@@ -38,6 +38,7 @@ private:
     // TODO toggle this using a config option?
     bool m_persist;
     bool m_hostingClipboard;
+    bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
     static FlameshotDaemon* m_instance;
 

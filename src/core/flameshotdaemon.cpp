@@ -18,19 +18,24 @@
 FlameshotDaemon::FlameshotDaemon()
   : m_persist(false)
   , m_hostingClipboard(false)
+  , m_clipboardSignalBlocked(false)
 {
     connect(
       QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() {
-          if (!m_hostingClipboard) {
+          if (!m_hostingClipboard || m_clipboardSignalBlocked) {
+              m_clipboardSignalBlocked = false;
               return;
           }
           m_hostingClipboard = false;
           quitIfIdle();
       });
-    Controller::getInstance()->initTrayIcon();
-    // TODO on windows/(Mac maybe?), always persist so hotkeys can be used
-    // TODO consider which config options could influence this
     // init tray icon
+    Controller::getInstance()->initTrayIcon();
+#ifdef Q_OS_WIN
+    m_persist = true;
+#endif
+    // TODO on Mac?, always persist so hotkeys can be used
+    // TODO consider which config options could influence this
 }
 
 void FlameshotDaemon::start()
@@ -76,6 +81,10 @@ void FlameshotDaemon::copyToClipboard(QPixmap capture)
 
 void FlameshotDaemon::copyToClipboard(QString text)
 {
+    if (instance()) {
+        instance()->attachTextToClipboard(text);
+        return;
+    }
     auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
 
     m << text;
@@ -124,6 +133,9 @@ void FlameshotDaemon::attachScreenshotToClipboard(QPixmap pixmap)
     m_hostingClipboard = true;
     QClipboard* clipboard = QApplication::clipboard();
     clipboard->blockSignals(true);
+    // This variable is necessary because the signal doesn't get blocked on
+    // windows for some reason
+    m_clipboardSignalBlocked = true;
     ScreenshotSaver().saveToClipboard(pixmap);
     clipboard->blockSignals(false);
 }
@@ -157,7 +169,10 @@ void FlameshotDaemon::attachTextToClipboard(QString text)
     QClipboard* clipboard = QApplication::clipboard();
 
     clipboard->blockSignals(true);
-    QApplication::clipboard()->setText(text);
+    // This variable is necessary because the signal doesn't get blocked on
+    // windows for some reason
+    m_clipboardSignalBlocked = true;
+    clipboard->setText(text);
     clipboard->blockSignals(false);
 }
 
