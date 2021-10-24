@@ -20,10 +20,13 @@ public:
     enum ExportTask
     {
         NO_TASK = 0,
-        COPY_TASK = 1,
-        SAVE_TASK = 2,
-        PRINT_RAW_TASK = 4,
-        PRINT_GEOMETRY_TASK = 8,
+        COPY = 1,
+        SAVE = 2,
+        PRINT_RAW = 4,
+        PRINT_GEOMETRY = 8,
+        PIN = 16,
+        UPLOAD = 32,
+        ACCEPT_ON_SELECT = 64,
     };
 
     CaptureRequest(CaptureMode mode,
@@ -44,7 +47,8 @@ public:
 
     void addTask(ExportTask task);
     void addSaveTask(const QString& path = QString());
-    void exportCapture(const QPixmap& p);
+    void addPinTask(const QRect& pinWindowGeometry);
+    void exportCapture(const QPixmap& capture);
 
 private:
     CaptureMode m_mode;
@@ -52,6 +56,7 @@ private:
     QString m_path;
     ExportTask m_tasks;
     QVariant m_data;
+    QRect m_pinWindowGeometry;
 
     bool m_forcedID;
     uint m_id;

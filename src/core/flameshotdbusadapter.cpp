@@ -31,7 +31,6 @@ FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 void FlameshotDBusAdapter::requestCapture(const QByteArray& requestData)
 {
     CaptureRequest req = CaptureRequest::deserialize(requestData);
-    req.setStaticID(req.id());
     Controller::getInstance()->requestCapture(req);
 }
 
@@ -65,7 +64,7 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled)
 
 void FlameshotDBusAdapter::handleCaptureTaken(uint id,
                                               const QPixmap& p,
-                                              QRect selection)
+                                              const QRect& selection)
 {
     QByteArray byteArray;
     QBuffer buffer(&byteArray);

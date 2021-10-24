@@ -87,6 +87,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
+    OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
 #if !defined(Q_OS_MACOS)
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
 #endif
@@ -110,7 +111,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
-    OPTION("setSaveAsFileExtension"      ,String             ( ""            )),
+    OPTION("setSaveAsFileExtension"      ,String             ( ".png"        )),
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
   };

@@ -51,7 +51,6 @@
 
 Controller::Controller()
   : m_captureWindow(nullptr)
-  , m_history(nullptr)
   , m_trayIcon(nullptr)
   , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
@@ -101,7 +100,7 @@ Controller::Controller()
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
-                     [&]() { this->showRecentScreenshots(); });
+                     [&]() { this->showRecentUploads(); });
 #endif
 
     if (ConfigHandler().checkForUpdates()) {
@@ -111,7 +110,6 @@ Controller::Controller()
 
 Controller::~Controller()
 {
-    delete m_history;
     delete m_trayIconMenu;
 }
 
@@ -330,8 +328,13 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     }
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
-        QRect selection; // `flameshot screen` does not support --selection
-        emit captureTaken(id, p, selection);
+        CaptureRequest& request = *requests().find(id);
+        QRect geometry = ScreenGrabber().screenGeometry(n);
+        if (request.tasks() & CaptureRequest::PIN) {
+            // change geometry for pin task
+            request.addPinTask(geometry);
+        }
+        emit captureTaken(id, p, geometry);
     } else {
         emit captureFailed(id);
     }
@@ -421,8 +424,7 @@ void Controller::enableTrayIcon()
 
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
-    connect(
-      recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
+    connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentUploads()));
 
     // generate menu
     m_trayIconMenu->addAction(captureAction);
@@ -528,25 +530,20 @@ void Controller::updateConfigComponents()
     }
 }
 
-void Controller::updateRecentScreenshots()
+void Controller::showRecentUploads()
 {
-    if (nullptr != m_history) {
-        if (m_history->isVisible()) {
-            m_history->loadHistory();
-        }
+    static HistoryWidget* historyWidget = nullptr;
+    if (nullptr == historyWidget) {
+        historyWidget = new HistoryWidget();
+        connect(historyWidget, &QObject::destroyed, this, []() {
+            historyWidget = nullptr;
+        });
     }
-}
-
-void Controller::showRecentScreenshots()
-{
-    if (nullptr == m_history) {
-        m_history = new HistoryWidget();
-    }
-    m_history->loadHistory();
-    m_history->show();
+    historyWidget->loadHistory();
+    historyWidget->show();
 #if defined(Q_OS_MACOS)
-    m_history->activateWindow();
-    m_history->raise();
+    historyWidget->activateWindow();
+    historyWidget->raise();
 #endif
 }
 
@@ -560,14 +557,14 @@ void Controller::startFullscreenCapture(const uint id)
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     if (ok) {
-        QRect selection; // `flameshot full` does not support --selection
-        emit captureTaken(id, p, selection);
+        // selection parameter is unused here
+        emit captureTaken(id, p, {});
     } else {
         emit captureFailed(id);
     }
 }
 
-void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
+void Controller::handleCaptureTaken(uint id, QPixmap p)
 {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {

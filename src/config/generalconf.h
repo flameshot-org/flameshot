@@ -58,6 +58,7 @@ private:
     void initCopyAndCloseAfterUpload();
     void initSaveAfterCopy();
     void initCopyPathAfterSave();
+    void initAntialiasingPinZoom();
     void initUseJpgForClipboard();
 
     void _updateComponents(bool allowEmptySavePath);
@@ -75,6 +76,7 @@ private:
     QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_copyAndCloseAfterUpload;
     QCheckBox* m_copyPathAfterSave;
+    QCheckBox* m_antialiasingPinZoom;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;

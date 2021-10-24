@@ -51,6 +51,8 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
     m_spinner->start();
 
     m_infoLabel = new QLabel(tr("Uploading Image"));
+    m_infoLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    m_infoLabel->setCursor(QCursor(Qt::IBeamCursor));
 
     m_vLayout = new QVBoxLayout();
     setLayout(m_vLayout);
@@ -66,7 +68,8 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     upload();
-    // QTimer::singleShot(2000, this, &ImgurUploader::onUploadOk); // testing
+    // QTimer::singleShot(2000, this, &ImgurUploader::showPostUploadDialog); //
+    // testing
 }
 
 void ImgurUploader::handleReply(QNetworkReply* reply)
@@ -94,14 +97,7 @@ void ImgurUploader::handleReply(QNetworkReply* reply)
         imageName = history.packFileName("imgur", deleteToken, imageName);
         history.save(m_pixmap, imageName);
 
-        if (ConfigHandler().copyAndCloseAfterUpload()) {
-            SystemNotification().sendMessage(
-              QObject::tr("URL copied to clipboard."));
-            QApplication::clipboard()->setText(m_imageURL.toString());
-            close();
-        } else {
-            onUploadOk();
-        }
+        emit uploadOk(m_imageURL);
     } else {
         m_infoLabel->setText(reply->errorString());
     }
@@ -144,7 +140,7 @@ void ImgurUploader::upload()
     m_NetworkAM->post(request, byteArray);
 }
 
-void ImgurUploader::onUploadOk()
+void ImgurUploader::showPostUploadDialog()
 {
     m_infoLabel->deleteLater();
 
