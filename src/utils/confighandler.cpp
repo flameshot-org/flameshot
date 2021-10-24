@@ -131,7 +131,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
     SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
     SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
-    SHORTCUT("TYPE_IMAGEUPLOADER"       ,   "Ctrl+U"                ),
+    SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
 #if !defined(Q_OS_MACOS)
     SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
 #endif
@@ -161,6 +161,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
 };
+
 // clang-format on
 
 // CLASS CONFIGHANDLER
@@ -171,12 +172,14 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
                qApp->organizationName(),
                qApp->applicationName())
 {
-
-    if (m_configWatcher == nullptr) {
-        if (!skipInitialErrorCheck) {
-            // check for error on initial call
-            checkAndHandleError();
-        }
+    static bool wasEverChecked = false;
+    static bool firstInitialization = true;
+    if (!skipInitialErrorCheck && !wasEverChecked) {
+        // check for error on initial call
+        checkAndHandleError();
+        wasEverChecked = true;
+    }
+    if (firstInitialization) {
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
         ensureFileWatched();
@@ -201,6 +204,7 @@ ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
                              }
                          });
     }
+    firstInitialization = false;
 }
 
 /// Serves as an object to which slots can be connected.
@@ -363,59 +367,79 @@ QString ConfigHandler::configFilePath() const
 
 // GENERIC GETTERS AND SETTERS
 
-bool ConfigHandler::setShortcut(const QString& shortcutName,
-                                const QString& shortutValue)
+bool ConfigHandler::setShortcut(const QString& actionName,
+                                const QString& shortcut)
 {
-    bool error = false;
-    m_settings.beginGroup("Shortcuts");
-
-    QVector<QKeySequence> reservedShortcuts;
-
+    qDebug() << actionName;
+    static QVector<QKeySequence> reservedShortcuts = {
 #if defined(Q_OS_MACOS)
-    reservedShortcuts << QKeySequence(Qt::CTRL + Qt::Key_Backspace)
-                      << QKeySequence(Qt::Key_Escape);
+        Qt::CTRL + Qt::Key_Backspace,
+        Qt::Key_Escape,
 #else
-    reservedShortcuts << QKeySequence(Qt::Key_Backspace)
-                      << QKeySequence(Qt::Key_Escape);
+        Qt::Key_Backspace,
+        Qt::Key_Escape,
 #endif
+    };
 
-    if (shortutValue.isEmpty()) {
-        setValue(shortcutName, "");
-    } else if (reservedShortcuts.contains(QKeySequence(shortutValue))) {
+    if (hasError()) {
+        return false;
+    }
+
+    bool error = false;
+
+    m_settings.beginGroup("Shortcuts");
+    if (shortcut.isEmpty()) {
+        setValue(actionName, "");
+    } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
         // do not allow to set reserved shortcuts
         error = true;
     } else {
+        error = false;
         // Make no difference for Return and Enter keys
-        QString shortcutItem = shortutValue;
-        if (shortcutItem == "Enter") {
-            shortcutItem = QKeySequence(Qt::Key_Return).toString();
-        }
-
-        // do not allow to set overlapped shortcuts
-        foreach (auto currentShortcutName, m_settings.allKeys()) {
-            if (value(currentShortcutName) == shortcutItem) {
-                setValue(shortcutName, "");
+        QString newShortcut = KeySequence().value(shortcut).toString();
+        for (auto& otherAction : m_settings.allKeys()) {
+            if (actionName == otherAction) {
+                continue;
+            }
+            QString existingShortcut =
+              KeySequence().value(m_settings.value(otherAction)).toString();
+            if (newShortcut == existingShortcut) {
                 error = true;
-                break;
+                goto done;
             }
         }
-        if (!error) {
-            setValue(shortcutName, shortcutItem);
-        }
+        m_settings.setValue(actionName, KeySequence().value(shortcut));
     }
+done:
     m_settings.endGroup();
     return !error;
 }
 
-QString ConfigHandler::shortcut(const QString& shortcutName)
+QString ConfigHandler::shortcut(const QString& actionName)
 {
-    return value(QStringLiteral("Shortcuts/") + shortcutName).toString();
+    QString setting = "Shortcuts/" + actionName;
+    QString shortcut = value(setting).toString();
+    if (!m_settings.contains(setting)) {
+        // The action uses a shortcut that is a flameshot default
+        // (not set explicitly by user)
+        m_settings.beginGroup("Shortcuts");
+        for (auto& otherAction : m_settings.allKeys()) {
+            if (m_settings.value(otherAction) == shortcut) {
+                // We found an explicit shortcut - it will take precedence
+                m_settings.endGroup();
+                return {};
+            }
+        }
+        m_settings.endGroup();
+    }
+    return shortcut;
 }
 
 void ConfigHandler::setValue(const QString& key, const QVariant& value)
 {
     assertKeyRecognized(key);
     if (!hasError()) {
+        // don't let the file watcher initiate another error check
         m_skipNextErrorCheck = true;
         auto val = valueHandler(key)->representation(value);
         m_settings.setValue(key, val);
@@ -444,14 +468,14 @@ QVariant ConfigHandler::value(const QString& key) const
     return handler->value(val);
 }
 
-const QSet<QString>& ConfigHandler::recognizedGeneralOptions() const
+QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
     static QSet<QString> options =
       QSet<QString>::fromList(::recognizedGeneralOptions.keys());
     return options;
 }
 
-const QSet<QString>& ConfigHandler::recognizedShortcutNames() const
+QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
     static QSet<QString> names =
       QSet<QString>::fromList(recognizedShortcuts.keys());
@@ -515,8 +539,12 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
 }
 
 /**
- * @brief Check if there are multiple shortcuts with the same key binding.
+ * @brief Check if there are multiple actions with the same shortcut.
  * @return Whether the config passes this check.
+ *
+ * @note It is not considered a conflict if action A uses shortcut S because it
+ * is the flameshot default (not because the user explicitly configured it), and
+ * action B uses the same shortcut.
  */
 bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
 {
@@ -529,12 +557,18 @@ bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
             // values stored in variables are useful when running debugger
             QString value1 = m_settings.value(*key1).toString(),
                     value2 = m_settings.value(*key2).toString();
-            if (!value1.isEmpty() && value1 == value2) {
+            // The check will pass if:
+            // - one shortcut is empty (the action doesn't use a shortcut)
+            // - or one of the settings is not found in m_settings, i.e.
+            //   user wants to use flameshot's default shortcut for the action
+            // - or the shortcuts for both actions are different
+            if (!(value1.isEmpty() || !m_settings.contains(*key1) ||
+                  !m_settings.contains(*key2) || value1 != value2)) {
                 ok = false;
                 if (log == nullptr) {
                     break;
-                } else if (!reportedInLog.contains(*key1) &&
-                           !reportedInLog.contains(*key2)) {
+                } else if (!reportedInLog.contains(*key1) && // No duplicate
+                           !reportedInLog.contains(*key2)) { // log entries
                     reportedInLog.append(*key1);
                     reportedInLog.append(*key2);
                     *log << QStringLiteral("Shortcut conflict: '%1' and '%2' "
@@ -559,8 +593,10 @@ bool ConfigHandler::checkSemantics(QTextStream* log) const
     QStringList allKeys = m_settings.allKeys();
     bool ok = true;
     for (const QString& key : allKeys) {
+        // Test if the key is recognized
         if (!recognizedGeneralOptions().contains(key) &&
-            !recognizedShortcutNames().contains(baseName(key))) {
+            (!isShortcut(key) ||
+             !recognizedShortcutNames().contains(baseName(key)))) {
             continue;
         }
         QVariant val = m_settings.value(key);
@@ -670,10 +706,8 @@ QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
 {
     QSharedPointer<ValueHandler> handler;
     if (isShortcut(key)) {
-        QString _key = key;
-        _key.replace("Shortcuts/", "");
         handler = recognizedShortcuts.value(
-          _key, QSharedPointer<KeySequence>(new KeySequence()));
+          baseName(key), QSharedPointer<KeySequence>(new KeySequence()));
     } else { // General group
         handler = ::recognizedGeneralOptions.value(key);
     }
@@ -720,4 +754,5 @@ QString ConfigHandler::baseName(QString key) const
 bool ConfigHandler::m_hasError = false;
 bool ConfigHandler::m_errorCheckPending = false;
 bool ConfigHandler::m_skipNextErrorCheck = false;
+
 QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;
