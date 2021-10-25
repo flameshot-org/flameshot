@@ -446,10 +446,10 @@ bool SaveFileExtension::check(const QVariant& val)
         extension.remove(0, 1);
 
     QStringList imageFormatList;
-    foreach (auto mimeType, QImageWriter::supportedImageFormats())
-        imageFormatList.append("." + mimeType);
+    foreach (auto imageFormat, QImageWriter::supportedImageFormats())
+        imageFormatList.append(imageFormat);
 
-    if (!imageFormatList.contains(val.toString()))
+    if (!imageFormatList.contains(extension))
         return false;
 
     return true;
