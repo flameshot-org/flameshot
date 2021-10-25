@@ -442,7 +442,7 @@ bool SaveFileExtension::check(const QVariant& val)
 
     QString extension = val.toString();
 
-    if(extension.startsWith("."))
+    if (extension.startsWith("."))
         extension.remove(0, 1);
 
     QStringList imageFormatList;
@@ -459,7 +459,7 @@ QVariant SaveFileExtension::process(const QVariant& val)
 {
     QString extension = val.toString();
 
-    if(extension.startsWith("."))
+    if (extension.startsWith("."))
         extension.remove(0, 1);
 
     return QVariant::fromValue(extension);
