@@ -126,7 +126,7 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
         mimeTypeList.append(mimeType);
     dialog.setMimeTypeFilters(mimeTypeList);
 
-    QString suffix = ConfigHandler().defaultFileExtension();
+    QString suffix = ConfigHandler().setSaveAsFileExtension();
     QString defaultMimeType =
       QMimeDatabase().mimeTypeForFile("image." + suffix).name();
     dialog.selectMimeTypeFilter(defaultMimeType);

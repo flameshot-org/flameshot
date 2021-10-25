@@ -93,7 +93,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
-    OPTION("defaultFileExtension"        ,String             ( ""            )),
+    OPTION("setSaveAsFileExtension"      ,SaveFileExtension  (               )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt(0  , 25            )),
     OPTION("undoLimit"                   ,BoundedInt(0, 999  , 100           )),
     // Interface tab

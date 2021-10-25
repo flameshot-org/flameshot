@@ -40,7 +40,7 @@ private slots:
     void resetConfiguration();
     void togglePathFixed();
     void useJpgForClipboardChanged(bool checked);
-    void setDefaultFileExtension(QString extension);
+    void setSaveAsFileExtension(QString extension);
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -88,5 +88,5 @@ private:
     QCheckBox* m_useJpgForClipboard;
     QSpinBox* m_uploadHistoryMax;
     QSpinBox* m_undoLimit;
-    QComboBox* m_defaultFileExtension;
+    QComboBox* m_setSaveAsFileExtension;
 };

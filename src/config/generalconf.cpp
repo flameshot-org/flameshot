@@ -394,25 +394,25 @@ void GeneralConf::initSaveAfterCopy()
 
     extensionLayout->addWidget(
       new QLabel(tr("Preferred save file extension:")));
-    m_defaultFileExtension = new QComboBox(this);
-    m_defaultFileExtension->addItem("");
+    m_setSaveAsFileExtension = new QComboBox(this);
+    m_setSaveAsFileExtension->addItem("");
 
-    QStringList mimeTypeList;
+    QStringList imageFormatList;
     foreach (auto mimeType, QImageWriter::supportedImageFormats())
-        mimeTypeList.append(mimeType);
+        imageFormatList.append(mimeType);
 
-    m_defaultFileExtension->addItems(mimeTypeList);
+    m_setSaveAsFileExtension->addItems(imageFormatList);
 
     int currentIndex =
-      m_defaultFileExtension->findText(ConfigHandler().defaultFileExtension());
-    m_defaultFileExtension->setCurrentIndex(currentIndex);
+      m_setSaveAsFileExtension->findText(ConfigHandler().setSaveAsFileExtension());
+    m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
 
-    connect(m_defaultFileExtension,
+    connect(m_setSaveAsFileExtension,
             SIGNAL(currentTextChanged(QString)),
             this,
-            SLOT(setDefaultFileExtension(QString)));
+            SLOT(setSaveAsFileExtension(QString)));
 
-    extensionLayout->addWidget(m_defaultFileExtension);
+    extensionLayout->addWidget(m_setSaveAsFileExtension);
     m_layout->addLayout(extensionLayout);
 }
 
@@ -546,9 +546,9 @@ void GeneralConf::togglePathFixed()
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
 }
 
-void GeneralConf::setDefaultFileExtension(QString extension)
+void GeneralConf::setSaveAsFileExtension(QString extension)
 {
-    ConfigHandler().setDefaultFileExtension(extension);
+    ConfigHandler().setSaveAsFileExtension(extension);
 }
 
 void GeneralConf::useJpgForClipboardChanged(bool checked)
