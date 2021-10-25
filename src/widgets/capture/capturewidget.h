@@ -73,8 +73,8 @@ private slots:
 
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
-    void handleLeftClick(CaptureToolButton* b);
-    void handleRightClick(CaptureToolButton* b);
+    void handleButtonLeftClick(CaptureToolButton* b);
+    void handleButtonRightClick(CaptureToolButton* b);
     void setDrawColor(const QColor& c);
     void onToolSizeChanged(int size);
     void onToolSizeSettled(int size);

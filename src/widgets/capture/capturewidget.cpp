@@ -320,37 +320,22 @@ void CaptureWidget::initButtons()
             connect(b,
                     &CaptureToolButton::pressedButtonLeftClick,
                     this,
-                    &CaptureWidget::handleLeftClick);
+                    &CaptureWidget::handleButtonLeftClick);
 
-            switch (t) {
-                case CaptureTool::TYPE_SELECTIONINDICATOR:
-                case CaptureTool::TYPE_MOVESELECTION:
-                case CaptureTool::TYPE_UNDO:
-                case CaptureTool::TYPE_IMAGEUPLOADER:
-                case CaptureTool::TYPE_REDO:
-                case CaptureTool::TYPE_SIZEINCREASE:
-                case CaptureTool::TYPE_SIZEDECREASE:
-                case CaptureTool::TYPE_SAVE:
-                case CaptureTool::TYPE_COPY:
-                case CaptureTool::TYPE_OPEN_APP:
-                case CaptureTool::TYPE_PIN:
-                case CaptureTool::TYPE_EXIT:
-                    // skip tools that are not drawing tools
-                    break;
-                default:
-                    connect(b,
-                            &CaptureToolButton::pressedButtonRightClick,
-                            this,
-                            &CaptureWidget::handleRightClick);
-                    break;
+            if (b->tool()->isSelectable()) {
+                connect(b,
+                        &CaptureToolButton::pressedButtonRightClick,
+                        this,
+                        &CaptureWidget::handleButtonRightClick);
             }
+
             vectorButtons << b;
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
 }
 
-void CaptureWidget::handleRightClick(CaptureToolButton* b)
+void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
 {
     if (!b) {
         return;
@@ -365,7 +350,7 @@ void CaptureWidget::handleRightClick(CaptureToolButton* b)
     }
 }
 
-void CaptureWidget::handleLeftClick(CaptureToolButton* b)
+void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
 {
     if (!b) {
         return;
