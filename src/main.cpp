@@ -427,12 +427,11 @@ int main(int argc, char* argv[])
         bool autostart = parser.isSet(autostartOption);
         bool filename = parser.isSet(filenameOption);
         bool tray = parser.isSet(trayOption);
-        bool help = parser.isSet(showHelpOption);
         bool mainColor = parser.isSet(mainColorOption);
         bool contrastColor = parser.isSet(contrastColorOption);
         bool check = parser.isSet(checkOption);
         bool someFlagSet =
-          (filename || tray || help || mainColor || contrastColor || check);
+          (filename || tray || mainColor || contrastColor || check);
         if (check) {
             QTextStream err(stderr);
             bool ok = ConfigHandler(true).checkForErrors(&err);
@@ -445,22 +444,7 @@ int main(int argc, char* argv[])
         }
         ConfigHandler config;
         if (autostart) {
-            QDBusMessage m = QDBusMessage::createMethodCall(
-              QStringLiteral("org.flameshot.Flameshot"),
-              QStringLiteral("/"),
-              QLatin1String(""),
-              QStringLiteral("autostartEnabled"));
-            if (parser.value(autostartOption) == QLatin1String("false")) {
-                m << false;
-            } else if (parser.value(autostartOption) == QLatin1String("true")) {
-                m << true;
-            }
-            QDBusConnection sessionBus = QDBusConnection::sessionBus();
-            if (!sessionBus.isConnected()) {
-                SystemNotification().sendMessage(
-                  QObject::tr("Unable to connect via DBus"));
-            }
-            sessionBus.call(m);
+            config.setStartupLaunch(parser.value(autostartOption) == "true");
         }
         if (filename) {
             QString newFilename(parser.value(filenameOption));
@@ -473,31 +457,10 @@ int main(int argc, char* argv[])
                    .arg(fh.parsedPattern());
         }
         if (tray) {
-            QDBusMessage m = QDBusMessage::createMethodCall(
-              QStringLiteral("org.flameshot.Flameshot"),
-              QStringLiteral("/"),
-              QLatin1String(""),
-              QStringLiteral("trayIconEnabled"));
-            if (parser.value(trayOption) == QLatin1String("false")) {
-                m << false;
-            } else if (parser.value(trayOption) == QLatin1String("true")) {
-                m << true;
-            }
-            QDBusConnection sessionBus = QDBusConnection::sessionBus();
-            if (!sessionBus.isConnected()) {
-                SystemNotification().sendMessage(
-                  QObject::tr("Unable to connect via DBus"));
-            }
-            sessionBus.call(m);
-        }
-        if (help) {
-            if (parser.value(showHelpOption) == QLatin1String("false")) {
-                config.setShowHelp(false);
-            } else if (parser.value(showHelpOption) == QLatin1String("true")) {
-                config.setShowHelp(true);
-            }
+            config.setDisabledTrayIcon(parser.value(trayOption) == "false");
         }
         if (mainColor) {
+            // TODO use value handler
             QString colorCode = parser.value(mainColorOption);
             QColor parsedColor(colorCode);
             config.setUiColor(parsedColor);
@@ -510,17 +473,12 @@ int main(int argc, char* argv[])
 
         // Open gui when no options
         if (!someFlagSet) {
-            QDBusMessage m = QDBusMessage::createMethodCall(
-              QStringLiteral("org.flameshot.Flameshot"),
-              QStringLiteral("/"),
-              QLatin1String(""),
-              QStringLiteral("openConfig"));
-            QDBusConnection sessionBus = QDBusConnection::sessionBus();
-            if (!sessionBus.isConnected()) {
-                SystemNotification().sendMessage(
-                  QObject::tr("Unable to connect via DBus"));
-            }
-            sessionBus.call(m);
+            delete qApp;
+            new QApplication(argc, argv);
+            QObject::connect(
+              qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
+            Controller::getInstance()->openConfigWindow();
+            qApp->exec();
         }
     }
 finish:

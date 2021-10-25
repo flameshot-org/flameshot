@@ -99,16 +99,6 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
     ConfigHandler().setShowDesktopNotification(checked);
 }
 
-void GeneralConf::showTrayIconChanged(bool checked)
-{
-    auto controller = Controller::getInstance();
-    if (checked) {
-        controller->enableTrayIcon();
-    } else {
-        controller->disableTrayIcon();
-    }
-}
-
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
@@ -243,10 +233,9 @@ void GeneralConf::initShowTrayIcon()
     m_showTray->setToolTip(tr("Show the systemtray icon"));
     m_scrollAreaLayout->addWidget(m_showTray);
 
-    connect(m_showTray,
-            &QCheckBox::stateChanged,
-            this,
-            &GeneralConf::showTrayIconChanged);
+    connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
+        ConfigHandler().setDisabledTrayIcon(!checked);
+    });
 #endif
 }
 

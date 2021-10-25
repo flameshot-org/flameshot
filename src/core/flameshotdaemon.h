@@ -18,6 +18,7 @@ public:
     static void createPin(QPixmap capture, QRect geometry);
     static void copyToClipboard(QPixmap capture);
     static void copyToClipboard(QString text);
+    static void enableTrayIcon(bool enable);
     // TODO static void createAppLauncher();
 private:
     FlameshotDaemon();

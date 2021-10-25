@@ -26,7 +26,6 @@ private slots:
     void showHelpChanged(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
-    void showTrayIconChanged(bool checked);
     void checkForUpdatesChanged(bool checked);
     void autostartChanged(bool checked);
     void historyConfirmationToDelete(bool checked);

@@ -94,6 +94,20 @@ void FlameshotDaemon::copyToClipboard(QString text)
     sessionBus.call(m);
 }
 
+void FlameshotDaemon::enableTrayIcon(bool enable)
+{
+#if !defined(Q_OS_WIN) // TODO maybe Mac too?
+    if (!instance()) {
+        return;
+    }
+    if (enable) {
+        Controller::getInstance()->enableTrayIcon();
+    } else {
+        Controller::getInstance()->disableTrayIcon();
+    }
+#endif
+}
+
 FlameshotDaemon* FlameshotDaemon::instance()
 {
     return m_instance;

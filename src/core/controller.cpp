@@ -94,6 +94,18 @@ Controller::Controller()
                      [&]() { this->showRecentUploads(); });
 #endif
 
+    connect(ConfigHandler::getInstance(),
+            &ConfigHandler::fileChanged,
+            this,
+            [this]() {
+                ConfigHandler config;
+                if (config.disabledTrayIcon()) {
+                    disableTrayIcon();
+                } else {
+                    enableTrayIcon();
+                }
+            });
+
     if (ConfigHandler().checkForUpdates()) {
         getLatestAvailableVersion();
     }
@@ -248,6 +260,7 @@ void Controller::startVisualCapture(const uint id,
 #endif
 
     if (nullptr == m_captureWindow) {
+        // TODO is this unnecessary now?
         int timeout = 5000; // 5 seconds
         const int delay = 100;
         QWidget* modalWidget = nullptr;
