@@ -198,3 +198,10 @@ class UserColors : public ValueHandler
     QVariant fallback() override;
     QString expected() override;
 };
+
+class SaveFileExtension : public ValueHandler
+{
+    bool check(const QVariant& val) override;
+    QVariant process(const QVariant& val) override;
+    QString expected() override;
+};
