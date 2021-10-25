@@ -88,6 +88,9 @@ public:
     CONFIG_GETTER_SETTER(uploadHistoryMax, setUploadHistoryMax, int)
     CONFIG_GETTER_SETTER(saveAfterCopy, setSaveAfterCopy, bool)
     CONFIG_GETTER_SETTER(copyPathAfterSave, setCopyPathAfterSave, bool)
+    CONFIG_GETTER_SETTER(setSaveAsFileExtension,
+                         setSaveAsFileExtension,
+                         QString)
     CONFIG_GETTER_SETTER(antialiasingPinZoom, setAntialiasingPinZoom, bool)
     CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
     CONFIG_GETTER_SETTER(ignoreUpdateToVersion,
@@ -99,8 +102,6 @@ public:
     // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);
-    QString saveAsFileExtension();
-    CONFIG_SETTER(setSaveAsFileExtension, setSaveAsFileExtension, QString)
     void setAllTheButtons();
     void setToolSize(CaptureTool::Type toolType, int size);
     int toolSize(CaptureTool::Type toolType);

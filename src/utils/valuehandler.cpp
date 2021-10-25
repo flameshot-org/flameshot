@@ -3,6 +3,7 @@
 #include "confighandler.h"
 #include <QColor>
 #include <QFileInfo>
+#include <QImageWriter>
 #include <QKeySequence>
 #include <QStandardPaths>
 #include <QVariant>
@@ -430,4 +431,41 @@ QVariant UserColors::fallback()
 QString UserColors::expected()
 {
     return QStringLiteral("list of colors separated by comma");
+}
+
+// SET SAVE FILE AS EXTENSION
+
+bool SaveFileExtension::check(const QVariant& val)
+{
+    if (!val.canConvert(QVariant::String) || val.toString().isEmpty())
+        return false;
+
+    QString extension = val.toString();
+
+    if (extension.startsWith("."))
+        extension.remove(0, 1);
+
+    QStringList imageFormatList;
+    foreach (auto imageFormat, QImageWriter::supportedImageFormats())
+        imageFormatList.append(imageFormat);
+
+    if (!imageFormatList.contains(extension))
+        return false;
+
+    return true;
+}
+
+QVariant SaveFileExtension::process(const QVariant& val)
+{
+    QString extension = val.toString();
+
+    if (extension.startsWith("."))
+        extension.remove(0, 1);
+
+    return QVariant::fromValue(extension);
+}
+
+QString SaveFileExtension::expected()
+{
+    return QStringLiteral("supported image extension");
 }
