@@ -153,9 +153,12 @@ public:
     bool check(const QVariant& val) override;
     QVariant fallback() override;
     QString expected() override;
+    QVariant representation(const QVariant& val) override;
 
 private:
     QKeySequence m_fallback;
+
+    QVariant process(const QVariant& val) override;
 };
 
 class ExistingDir : public ValueHandler

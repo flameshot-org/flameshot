@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QFileInfo>
 #include <QImageWriter>
+#include <QKeySequence>
 #include <QStandardPaths>
 #include <QVariant>
 
@@ -152,7 +153,7 @@ bool BoundedInt::check(const QVariant& val)
     QString str = val.toString();
     bool conversionOk;
     int num = str.toInt(&conversionOk);
-    return conversionOk && (m_max < m_min || num <= m_max);
+    return conversionOk && m_min <= num && num <= m_max;
 }
 
 QVariant BoundedInt::fallback()
@@ -213,6 +214,24 @@ QVariant KeySequence::fallback()
 QString KeySequence::expected()
 {
     return QStringLiteral("keyboard shortcut");
+}
+
+QVariant KeySequence::representation(const QVariant& val)
+{
+    QString str(val.toString());
+    if (QKeySequence(str) == QKeySequence(Qt::Key_Return)) {
+        return QStringLiteral("Enter");
+    }
+    return str;
+}
+
+QVariant KeySequence::process(const QVariant& val)
+{
+    QString str(val.toString());
+    if (str == "Enter") {
+        return QKeySequence(Qt::Key_Return).toString();
+    }
+    return str;
 }
 
 // EXISTING DIR
