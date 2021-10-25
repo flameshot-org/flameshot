@@ -318,13 +318,60 @@ void CaptureWidget::initButtons()
 
         if (visibleButtonTypes.contains(t)) {
             connect(b,
-                    &CaptureToolButton::pressedButton,
+                    &CaptureToolButton::pressedButtonLeftClick,
                     this,
-                    &CaptureWidget::setState);
+                    &CaptureWidget::handleLeftClick);
+
+            switch (t) {
+                case CaptureTool::TYPE_SELECTIONINDICATOR:
+                case CaptureTool::TYPE_MOVESELECTION:
+                case CaptureTool::TYPE_UNDO:
+                case CaptureTool::TYPE_IMAGEUPLOADER:
+                case CaptureTool::TYPE_REDO:
+                case CaptureTool::TYPE_SIZEINCREASE:
+                case CaptureTool::TYPE_SIZEDECREASE:
+                case CaptureTool::TYPE_SAVE:
+                case CaptureTool::TYPE_COPY:
+                case CaptureTool::TYPE_OPEN_APP:
+                case CaptureTool::TYPE_PIN:
+                case CaptureTool::TYPE_EXIT:
+                    // skip tools that are not drawing tools
+                    break;
+                default:
+                    connect(b,
+                            &CaptureToolButton::pressedButtonRightClick,
+                            this,
+                            &CaptureWidget::handleRightClick);
+                    break;
+            }
             vectorButtons << b;
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
+}
+
+void CaptureWidget::handleRightClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    // if button already selected, do not deselect it on right click
+    if (!m_activeButton || m_activeButton != b) {
+        setState(b);
+    }
+    if (!m_panel->isVisible()) {
+        m_panel->show();
+    }
+}
+
+void CaptureWidget::handleLeftClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    setState(b);
 }
 
 void CaptureWidget::initHelpMessage()

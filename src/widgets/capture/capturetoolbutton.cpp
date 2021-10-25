@@ -100,7 +100,10 @@ void CaptureToolButton::mousePressEvent(QMouseEvent* e)
 {
     activateWindow();
     if (e->button() == Qt::LeftButton) {
-        emit pressedButton(this);
+        emit pressedButtonLeftClick(this);
+        emit pressed();
+    } else if (e->button() == Qt::RightButton) {
+        emit pressedButtonRightClick(this);
         emit pressed();
     }
 }

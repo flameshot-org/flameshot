@@ -214,3 +214,8 @@ void UtilityPanel::slotButtonDelete(bool clicked)
     }
     m_captureTools->setCurrentRow(currentRow);
 }
+
+bool UtilityPanel::isVisible() const
+{
+    return !m_internalPanel->isHidden();
+}
