@@ -415,7 +415,7 @@ void GeneralConf::initSaveAfterCopy()
             SLOT(setSaveAsFileExtension(QString)));
 
     extensionLayout->addWidget(m_setSaveAsFileExtension);
-    m_layout->addLayout(extensionLayout);
+    vboxLayout->addLayout(extensionLayout);
 }
 
 void GeneralConf::historyConfirmationToDelete(bool checked)
