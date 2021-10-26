@@ -1037,7 +1037,7 @@ void CaptureWidget::initSelection()
         }
     });
     connect(m_selection, &SelectionWidget::visibilityChanged, this, [this]() {
-        if (!m_selection->isVisible()) {
+        if (!m_selection->isVisible() && !m_helpMessage.isEmpty()) {
             OverlayMessage::push(m_helpMessage);
         }
     });
