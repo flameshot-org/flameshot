@@ -91,8 +91,6 @@ CaptureWidget::CaptureWidget(uint id,
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
     initContext(fullScreen, id);
-    initSelection();
-    initShortcuts(); // must be called after initSelection
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -143,9 +141,6 @@ CaptureWidget::CaptureWidget(uint id,
 #endif
 #endif
     }
-    // Create buttons
-    m_buttonHandler = new ButtonHandler(this);
-    initButtons();
     QVector<QRect> areas;
     if (m_context.fullscreen) {
         QPoint topLeftOffset = QPoint(0, 0);
@@ -176,8 +171,14 @@ CaptureWidget::CaptureWidget(uint id,
     } else {
         areas.append(rect());
     }
+
+    m_buttonHandler = new ButtonHandler(this);
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
+
+    initButtons();
+    initSelection(); // button handler must be initialized before
+    initShortcuts(); // must be called after initSelection
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
@@ -234,6 +235,7 @@ CaptureWidget::CaptureWidget(uint id,
     }
 
     updateCursor();
+    m_selection->show();
 }
 
 CaptureWidget::~CaptureWidget()
@@ -1005,11 +1007,10 @@ void CaptureWidget::showAppUpdateNotification(const QString& appLatestVersion,
 
 void CaptureWidget::initSelection()
 {
+    // Be mindful of the order of statements, so that slots are called properly
     m_selection = new SelectionWidget(m_uiColor, this);
-    m_selection->setVisible(false);
-    m_selection->setGeometry(QRect());
+    QRect initialSelection = m_context.request()->initialSelection();
     connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {
-        m_buttonHandler->updatePosition(m_selection->geometry());
         QRect constrainedToCaptureArea =
           m_selection->geometry().intersected(rect());
         m_context.selection = extendedRect(constrainedToCaptureArea);
@@ -1019,9 +1020,10 @@ void CaptureWidget::initSelection()
         OverlayMessage::pop();
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
-        if (m_selection->isVisible()) {
+        if (m_selection->isVisibleTo(this)) {
             auto req = m_context.request();
             if (req->tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
+                req->removeTask(CaptureRequest::ACCEPT_ON_SELECT);
                 m_captureDone = true;
                 if (req->tasks() & CaptureRequest::PIN) {
                     QRect geometry = m_context.selection;
@@ -1031,6 +1033,7 @@ void CaptureWidget::initSelection()
                 }
                 close();
             }
+            m_buttonHandler->updatePosition(m_selection->geometry());
             m_buttonHandler->show();
         } else {
             m_buttonHandler->hide();
@@ -1041,6 +1044,13 @@ void CaptureWidget::initSelection()
             OverlayMessage::push(m_helpMessage);
         }
     });
+    initialSelection.moveTopLeft(initialSelection.topLeft() - mapToGlobal({}));
+    m_selection->setGeometry(initialSelection);
+    m_selection->setVisible(!initialSelection.isNull());
+    if (!initialSelection.isNull()) {
+        m_context.selection = extendedRect(m_selection->geometry());
+        emit m_selection->geometrySettled();
+    }
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)

@@ -15,6 +15,7 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/pathinfo.h"
 #include "src/utils/systemnotification.h"
+#include "src/utils/valuehandler.h"
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
@@ -55,6 +56,7 @@ void wayland_hacks()
 }
 #endif
 
+#include <iostream>
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_LINUX
@@ -159,6 +161,9 @@ int main(int argc, char* argv[])
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
+    CommandOption regionOption("region",
+                               QObject::tr("Screenshot region to select"),
+                               QStringLiteral("WxH+X+Y or string"));
     CommandOption filenameOption({ "f", "filename" },
                                  QObject::tr("Set the filename pattern"),
                                  QStringLiteral("pattern"));
@@ -216,9 +221,15 @@ int main(int argc, char* argv[])
       QObject::tr("Invalid delay, it must be higher than 0");
     const QString numberErr =
       QObject::tr("Invalid screen number, it must be non negative");
+    const QString regionErr = QObject::tr(
+      "Invalid region, use 'WxH+X+Y' or 'all' or 'screen0/screen1/...'.");
     auto numericChecker = [](const QString& delayValue) -> bool {
         int value = delayValue.toInt();
         return value >= 0;
+    };
+    auto regionChecker = [](const QString& region) -> bool {
+        Region valueHandler;
+        return valueHandler.check(region);
     };
 
     const QString pathErr =
@@ -245,6 +256,7 @@ int main(int argc, char* argv[])
     contrastColorOption.addChecker(colorChecker, colorErr);
     mainColorOption.addChecker(colorChecker, colorErr);
     delayOption.addChecker(numericChecker, delayErr);
+    regionOption.addChecker(regionChecker, regionErr);
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
     autostartOption.addChecker(booleanChecker, booleanErr);
@@ -262,6 +274,7 @@ int main(int argc, char* argv[])
     parser.AddOptions({ pathOption,
                         clipboardOption,
                         delayOption,
+                        regionOption,
                         rawImageOption,
                         selectionOption,
                         uploadOption,
@@ -317,6 +330,7 @@ int main(int argc, char* argv[])
             path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
+        QString region = parser.value(regionOption);
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
         bool printGeometry = parser.isSet(selectionOption);
@@ -325,6 +339,9 @@ int main(int argc, char* argv[])
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         DBusUtils dbusUtils;
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+        if (!region.isEmpty()) {
+            req.setInitialSelection(Region().value(region).toRect());
+        }
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
         }

@@ -54,8 +54,8 @@ QByteArray CaptureRequest::serialize() const
     QDataStream stream(&data, QIODevice::WriteOnly);
     // Convert enums to integers
     qint32 tasks = m_tasks, mode = m_mode;
-    stream << mode << m_delay << tasks << m_data << m_forcedID << m_id
-           << m_path;
+    stream << mode << m_delay << tasks << m_data << m_forcedID << m_id << m_path
+           << m_initialSelection;
     return data;
 }
 
@@ -71,6 +71,7 @@ CaptureRequest CaptureRequest::deserialize(const QByteArray& data)
     stream >> request.m_forcedID;
     stream >> request.m_id;
     stream >> request.m_path;
+    stream >> request.m_initialSelection;
 
     // Convert integers to enums
     request.m_tasks = static_cast<ExportTask>(tasks);
@@ -103,12 +104,22 @@ CaptureRequest::ExportTask CaptureRequest::tasks() const
     return m_tasks;
 }
 
+QRect CaptureRequest::initialSelection() const
+{
+    return m_initialSelection;
+}
+
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
     if (task == SAVE) {
         throw std::logic_error("SAVE task must be added using addSaveTask");
     }
     m_tasks |= task;
+}
+
+void CaptureRequest::removeTask(CaptureRequest::ExportTask task)
+{
+    ((int&)m_tasks) &= ~task;
 }
 
 void CaptureRequest::addSaveTask(const QString& path)
@@ -121,6 +132,11 @@ void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 {
     m_tasks |= PIN;
     m_pinWindowGeometry = pinWindowGeometry;
+}
+
+void CaptureRequest::setInitialSelection(const QRect& selection)
+{
+    m_initialSelection = selection;
 }
 
 void CaptureRequest::exportCapture(const QPixmap& capture)

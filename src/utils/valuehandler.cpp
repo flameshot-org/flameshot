@@ -1,6 +1,7 @@
 #include "valuehandler.h"
 #include "capturetool.h"
 #include "confighandler.h"
+#include "screengrabber.h"
 #include <QColor>
 #include <QFileInfo>
 #include <QImageWriter>
@@ -468,4 +469,57 @@ QVariant SaveFileExtension::process(const QVariant& val)
 QString SaveFileExtension::expected()
 {
     return QStringLiteral("supported image extension");
+}
+
+// REGION
+
+bool Region::check(const QVariant& val)
+{
+    QVariant region = process(val);
+    return process(val).isValid();
+}
+
+#include <QApplication> // TODO remove after FIXME (see below)
+
+QVariant Region::process(const QVariant& val)
+{
+    // FIXME: This is temporary, just before D-Bus is removed
+    char** argv = new char*[1];
+    int* argc = new int{ 0 };
+    if (QGuiApplication::screens().empty())
+        new QApplication(*argc, argv);
+
+    QString str = val.toString();
+
+    if (str == "all") {
+        return ScreenGrabber().desktopGeometry();
+    } else if (str.startsWith("screen")) {
+        bool ok;
+        int number = str.midRef(6).toInt(&ok);
+        if (!ok || number < 0) {
+            return {};
+        }
+        return ScreenGrabber().screenGeometry(number);
+    }
+
+    QString num("(\\d+)");
+    QString sep("[,x\\.\\+\\s]");
+    QRegExp regex(QStringLiteral("%1%2%1%2%1%2%1").arg(num).arg(sep));
+
+    if (!regex.exactMatch(str)) {
+        return {};
+    }
+
+    int w, h, x, y;
+    bool w_ok, h_ok, x_ok, y_ok;
+    w = regex.cap(1).toInt(&w_ok);
+    h = regex.cap(2).toInt(&h_ok);
+    x = regex.cap(3).toInt(&x_ok);
+    y = regex.cap(4).toInt(&y_ok);
+
+    if (!(w_ok && h_ok && x_ok && y_ok) || x < 0 || y < 0 || w < 0 || h < 0) {
+        return {};
+    }
+
+    return QRect(x, y, w, h);
 }
