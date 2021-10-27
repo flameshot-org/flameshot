@@ -465,6 +465,13 @@ int main(int argc, char* argv[])
 
         CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
         if (!region.isEmpty()) {
+            if (region.startsWith("screen")) {
+                // TODO use abstract logger
+                QTextStream(stderr) << "The 'screen' command does not support "
+                                       "'--region screen<N>'.\n"
+                                       "See flameshot --help.\n";
+                exit(1);
+            }
             req.setInitialSelection(Region().value(region).toRect());
         }
         if (clipboard) {
