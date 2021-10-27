@@ -32,6 +32,7 @@ public:
       QList<QPointer<CaptureTool>> captureToolObjectsHistory);
     void setActiveLayer(int index);
     int activeLayerIndex();
+    bool isVisible() const;
 
 signals:
     void layerChanged(int layer);
