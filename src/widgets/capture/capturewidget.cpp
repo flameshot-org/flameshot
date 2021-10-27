@@ -318,13 +318,45 @@ void CaptureWidget::initButtons()
 
         if (visibleButtonTypes.contains(t)) {
             connect(b,
-                    &CaptureToolButton::pressedButton,
+                    &CaptureToolButton::pressedButtonLeftClick,
                     this,
-                    &CaptureWidget::setState);
+                    &CaptureWidget::handleButtonLeftClick);
+
+            if (b->tool()->isSelectable()) {
+                connect(b,
+                        &CaptureToolButton::pressedButtonRightClick,
+                        this,
+                        &CaptureWidget::handleButtonRightClick);
+            }
+
             vectorButtons << b;
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
+}
+
+void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    // if button already selected, do not deselect it on right click
+    if (!m_activeButton || m_activeButton != b) {
+        setState(b);
+    }
+    if (!m_panel->isVisible()) {
+        m_panel->show();
+    }
+}
+
+void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    setState(b);
 }
 
 void CaptureWidget::initHelpMessage()
