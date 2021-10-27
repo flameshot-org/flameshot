@@ -556,6 +556,11 @@ void Controller::startFullscreenCapture(const uint id)
 {
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    CaptureRequest req(*requests().find(id));
+    QRect region = req.initialSelection();
+    if (!region.isNull()) {
+        p = p.copy(region);
+    }
     if (ok) {
         // selection parameter is unused here
         emit captureTaken(id, p, {});

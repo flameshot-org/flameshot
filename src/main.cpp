@@ -284,6 +284,7 @@ int main(int argc, char* argv[])
                         clipboardOption,
                         pathOption,
                         delayOption,
+                        regionOption,
                         rawImageOption,
                         uploadOption,
                         pinOption },
@@ -291,6 +292,7 @@ int main(int argc, char* argv[])
     parser.AddOptions({ pathOption,
                         clipboardOption,
                         delayOption,
+                        regionOption,
                         rawImageOption,
                         uploadOption },
                       fullArgument);
@@ -394,12 +396,16 @@ int main(int argc, char* argv[])
             path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
+        QString region = parser.value(regionOption);
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
         bool upload = parser.isSet(uploadOption);
         // Not a valid command
 
         CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
+        if (!region.isEmpty()) {
+            req.setInitialSelection(Region().value(region).toRect());
+        }
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
         }
@@ -451,12 +457,16 @@ int main(int argc, char* argv[])
             path = QDir(path).absolutePath();
         }
         int delay = parser.value(delayOption).toInt();
+        QString region = parser.value(regionOption);
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
 
         CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
+        if (!region.isEmpty()) {
+            req.setInitialSelection(Region().value(region).toRect());
+        }
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
         }
