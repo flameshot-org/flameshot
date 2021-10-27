@@ -235,7 +235,6 @@ CaptureWidget::CaptureWidget(uint id,
     }
 
     updateCursor();
-    m_selection->show();
 }
 
 CaptureWidget::~CaptureWidget()
@@ -1044,7 +1043,10 @@ void CaptureWidget::initSelection()
             OverlayMessage::push(m_helpMessage);
         }
     });
-    initialSelection.moveTopLeft(initialSelection.topLeft() - mapToGlobal({}));
+    if (!initialSelection.isNull()) {
+        initialSelection.moveTopLeft(initialSelection.topLeft() -
+                                     mapToGlobal({}));
+    }
     m_selection->setGeometry(initialSelection);
     m_selection->setVisible(!initialSelection.isNull());
     if (!initialSelection.isNull()) {

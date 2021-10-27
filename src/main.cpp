@@ -56,7 +56,6 @@ void wayland_hacks()
 }
 #endif
 
-#include <iostream>
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_LINUX
