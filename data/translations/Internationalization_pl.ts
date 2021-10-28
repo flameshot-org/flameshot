@@ -139,11 +139,11 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Wybierz obszar za pomocą myszy lub naciśnij Esc, aby wyjść.
-Wciśnij Enter, aby przechwycić ekran.
-Wciśnij prawy przycisk myszy, aby wyświetlić próbnik kolorów.
-Użyj kółka myszy, aby zmienić grubość narzędzia.
-Wciśnij Spację, aby otworzyć panel boczny.</translation>
+        <translation>Wybierz obszar za pomocą myszy lub wciśnij Esc aby wyjść.
+Wciśnij Enter, aby wykonać zrzut ekranu.
+Prawy klik, aby pokazać próbnik kolorów.
+Użyj kółka myszy aby zmienić grubość narzędzia.
+Spacja, aby pokazać panel boczny.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
