@@ -130,6 +130,7 @@ jobs:
           If ($env:TYPE -eq "installer")
           {
             cpack -G WIX -B "$env:GITHUB_WORKSPACE\build\Package"
+            type /build/Package/_CPack_Packages/win32/WIX/wix.log
           }
           ElseIf($env:TYPE -eq "portable")
           {
