@@ -502,9 +502,14 @@ QVariant Region::process(const QVariant& val)
         return ScreenGrabber().screenGeometry(number);
     }
 
-    QString num("(\\d+)");
-    QString sep("[,x\\.\\+\\s]");
-    QRegExp regex(QStringLiteral("%1%2%1%2%1%2%1").arg(num).arg(sep));
+    QRegExp regex("(-{,1}\\d+)"   // number (any sign)
+                  "[x,\\.\\s]"    // separator ('x', ',', '.', or whitespace)
+                  "(-{,1}\\d+)"   // number (any sign)
+                  "[\\+,\\.\\s]*" // separator ('+',',', '.', or whitespace)
+                  "(-{,1}\\d+)"   // number (non-negative)
+                  "[\\+,\\.\\s]*" // separator ('+', ',', '.', or whitespace)
+                  "(-{,1}\\d+)"   // number (non-negative)
+    );
 
     if (!regex.exactMatch(str)) {
         return {};
@@ -517,9 +522,9 @@ QVariant Region::process(const QVariant& val)
     x = regex.cap(3).toInt(&x_ok);
     y = regex.cap(4).toInt(&y_ok);
 
-    if (!(w_ok && h_ok && x_ok && y_ok) || x < 0 || y < 0 || w < 0 || h < 0) {
+    if (!(w_ok && h_ok && x_ok && y_ok)) {
         return {};
     }
 
-    return QRect(x, y, w, h);
+    return QRect(x, y, w, h).normalized();
 }
