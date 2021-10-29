@@ -17,6 +17,7 @@
 #include <QTextStream>
 #include <QVector>
 #include <algorithm>
+#include <stdexcept>
 #if defined(Q_OS_MACOS)
 #include <QProcess>
 #endif
