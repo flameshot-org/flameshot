@@ -333,7 +333,9 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
         if (region.isNull()) {
             region = ScreenGrabber().screenGeometry(n);
         } else {
-            region = region.intersected(ScreenGrabber().screenGeometry(n));
+            QRect screenGeom = ScreenGrabber().screenGeometry(n);
+            screenGeom.moveTopLeft({ 0, 0 });
+            region = region.intersected(screenGeom);
             p = p.copy(region);
         }
         if (req.tasks() & CaptureRequest::PIN) {
