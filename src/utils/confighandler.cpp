@@ -465,14 +465,15 @@ QVariant ConfigHandler::value(const QString& key) const
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
     static QSet<QString> options =
-      QSet<QString>(::recognizedGeneralOptions.keys().begin(), ::recognizedGeneralOptions.keys().end());
+      QSet<QString>(::recognizedGeneralOptions.keys().begin(),
+                    ::recognizedGeneralOptions.keys().end());
     return options;
 }
 
 QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
-    static QSet<QString> names =
-      QSet<QString>(recognizedShortcuts.keys().begin(), recognizedShortcuts.keys().end());
+    static QSet<QString> names = QSet<QString>(
+      recognizedShortcuts.keys().begin(), recognizedShortcuts.keys().end());
     return names;
 }
 
