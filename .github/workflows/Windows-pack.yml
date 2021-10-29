@@ -125,6 +125,8 @@ jobs:
         working-directory: build
         shell: pwsh
         run: |
+          # Chocolately made thier own package called cpack and its first in the path. This is a hack since we are only using cmake's cpack
+          Remove-Item C:\ProgramData\Chocolatey\bin\cpack.exe
           If ($env:TYPE -eq "installer")
           {
             cpack -G WIX -B "$env:GITHUB_WORKSPACE\build\Package"
@@ -139,7 +141,7 @@ jobs:
       - name: Package Clean
         shell: pwsh
         run: |
-          Remove-Item $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages -Recurse
+          # Remove-Item $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages -Recurse
           New-Item -Path $env:GITHUB_WORKSPACE\build\Package\installer -ItemType Directory
           New-Item -Path $env:GITHUB_WORKSPACE\build\Package\portable -ItemType Directory
 
