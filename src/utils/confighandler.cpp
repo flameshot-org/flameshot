@@ -18,6 +18,7 @@
 #include <QVector>
 #include <algorithm>
 #include <stdexcept>
+
 #if defined(Q_OS_MACOS)
 #include <QProcess>
 #endif
@@ -72,95 +73,95 @@ bool verifyLaunchFile()
  */
 // clang-format off
 static QMap<class QString, QSharedPointer<ValueHandler>>
-  recognizedGeneralOptions = {
+        recognizedGeneralOptions = {
 //         KEY                            TYPE                 DEFAULT_VALUE
-    OPTION("showHelp"                    ,Bool               ( true          )),
-    OPTION("showSidePanelButton"         ,Bool               ( true          )),
-    OPTION("showDesktopNotification"     ,Bool               ( true          )),
-    OPTION("disabledTrayIcon"            ,Bool               ( false         )),
-    OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
-    OPTION("checkForUpdates"             ,Bool               ( true          )),
+        OPTION("showHelp", Bool(true)),
+        OPTION("showSidePanelButton", Bool(true)),
+        OPTION("showDesktopNotification", Bool(true)),
+        OPTION("disabledTrayIcon", Bool(false)),
+        OPTION("historyConfirmationToDelete", Bool(true)),
+        OPTION("checkForUpdates", Bool(true)),
 #if defined(Q_OS_MACOS)
-    OPTION("startupLaunch"               ,Bool               ( false         )),
+        OPTION("startupLaunch"               ,Bool               ( false         )),
 #else
-    OPTION("startupLaunch"               ,Bool               ( true          )),
+        OPTION("startupLaunch", Bool(true)),
 #endif
-    OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
-    OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
-    OPTION("copyPathAfterSave"           ,Bool               ( false         )),
-    OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
+        OPTION("showStartupLaunchMessage", Bool(true)),
+        OPTION("copyAndCloseAfterUpload", Bool(true)),
+        OPTION("copyPathAfterSave", Bool(false)),
+        OPTION("antialiasingPinZoom", Bool(true)),
 #if !defined(Q_OS_MACOS)
-    OPTION("useJpgForClipboard"          ,Bool               ( false         )),
+        OPTION("useJpgForClipboard", Bool(false)),
 #endif
-    OPTION("saveAfterCopy"               ,Bool               ( false         )),
-    OPTION("savePath"                    ,ExistingDir        (               )),
-    OPTION("savePathFixed"               ,Bool               ( false         )),
-    OPTION("setSaveAsFileExtension"      ,SaveFileExtension  (               )),
-    OPTION("uploadHistoryMax"            ,LowerBoundedInt(0  , 25            )),
-    OPTION("undoLimit"                   ,BoundedInt(0, 999  , 100           )),
-    // Interface tab
-    OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
-    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
-    OPTION("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
-    OPTION("buttons"                     ,ButtonList         ( {}            )),
-    // Filename Editor tab
-    OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
-    // Others
-    OPTION("drawThickness"               ,LowerBoundedInt(1  , 3             )),
-    OPTION("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
-    OPTION("drawColor"                   ,Color              ( Qt::red       )),
-    OPTION("userColors"                  ,UserColors         (               )),
-    OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
-    OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
-    OPTION("fontFamily"                  ,String             ( ""            )),
-    // NOTE: If another tool size is added besides drawThickness and
-    // drawFontSize, remember to update ConfigHandler::toolSize
-  };
+        OPTION("saveAfterCopy", Bool(false)),
+        OPTION("savePath", ExistingDir()),
+        OPTION("savePathFixed", Bool(false)),
+        OPTION("setSaveAsFileExtension", SaveFileExtension()),
+        OPTION("uploadHistoryMax", LowerBoundedInt(0, 25)),
+        OPTION("undoLimit", BoundedInt(0, 999, 100)),
+        // Interface tab
+        OPTION("uiColor", Color({116, 0, 150})),
+        OPTION("contrastUiColor", Color({39, 0, 50})),
+        OPTION("contrastOpacity", BoundedInt(0, 255, 190)),
+        OPTION("buttons", ButtonList({})),
+        // Filename Editor tab
+        OPTION("filenamePattern", FilenamePattern({})),
+        // Others
+        OPTION("drawThickness", LowerBoundedInt(1, 3)),
+        OPTION("drawFontSize", LowerBoundedInt(1, 8)),
+        OPTION("drawColor", Color(Qt::red)),
+        OPTION("userColors", UserColors()),
+        OPTION("ignoreUpdateToVersion", String("")),
+        OPTION("keepOpenAppLauncher", Bool(false)),
+        OPTION("fontFamily", String("")),
+        // NOTE: If another tool size is added besides drawThickness and
+        // drawFontSize, remember to update ConfigHandler::toolSize
+};
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 //           NAME                           DEFAULT_SHORTCUT
-    SHORTCUT("TYPE_PENCIL"              ,   "P"                     ),
-    SHORTCUT("TYPE_DRAWER"              ,   "D"                     ),
-    SHORTCUT("TYPE_ARROW"               ,   "A"                     ),
-    SHORTCUT("TYPE_SELECTION"           ,   "S"                     ),
-    SHORTCUT("TYPE_RECTANGLE"           ,   "R"                     ),
-    SHORTCUT("TYPE_CIRCLE"              ,   "C"                     ),
-    SHORTCUT("TYPE_MARKER"              ,   "M"                     ),
-    SHORTCUT("TYPE_MOVESELECTION"       ,   "Ctrl+M"                ),
-    SHORTCUT("TYPE_UNDO"                ,   "Ctrl+Z"                ),
-    SHORTCUT("TYPE_COPY"                ,   "Ctrl+C"                ),
-    SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
-    SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
-    SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
-    SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
+        SHORTCUT("TYPE_PENCIL", "P"),
+        SHORTCUT("TYPE_DRAWER", "D"),
+        SHORTCUT("TYPE_ARROW", "A"),
+        SHORTCUT("TYPE_SELECTION", "S"),
+        SHORTCUT("TYPE_RECTANGLE", "R"),
+        SHORTCUT("TYPE_CIRCLE", "C"),
+        SHORTCUT("TYPE_MARKER", "M"),
+        SHORTCUT("TYPE_MOVESELECTION", "Ctrl+M"),
+        SHORTCUT("TYPE_UNDO", "Ctrl+Z"),
+        SHORTCUT("TYPE_COPY", "Ctrl+C"),
+        SHORTCUT("TYPE_SAVE", "Ctrl+S"),
+        SHORTCUT("TYPE_ACCEPT", "Return"),
+        SHORTCUT("TYPE_EXIT", "Ctrl+Q"),
+        SHORTCUT("TYPE_IMAGEUPLOADER",),
 #if !defined(Q_OS_MACOS)
-    SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
+        SHORTCUT("TYPE_OPEN_APP", "Ctrl+O"),
 #endif
-    SHORTCUT("TYPE_PIXELATE"            ,   "B"                     ),
-    SHORTCUT("TYPE_INVERT"              ,   "I"                     ),
-    SHORTCUT("TYPE_REDO"                ,   "Ctrl+Shift+Z"          ),
-    SHORTCUT("TYPE_TEXT"                ,   "T"                     ),
-    SHORTCUT("TYPE_TOGGLE_PANEL"        ,   "Space"                 ),
-    SHORTCUT("TYPE_RESIZE_LEFT"         ,   "Shift+Left"            ),
-    SHORTCUT("TYPE_RESIZE_RIGHT"        ,   "Shift+Right"           ),
-    SHORTCUT("TYPE_RESIZE_UP"           ,   "Shift+Up"              ),
-    SHORTCUT("TYPE_RESIZE_DOWN"         ,   "Shift+Down"            ),
-    SHORTCUT("TYPE_SELECT_ALL"          ,   "Ctrl+A"                ),
-    SHORTCUT("TYPE_MOVE_LEFT"           ,   "Left"                  ),
-    SHORTCUT("TYPE_MOVE_RIGHT"          ,   "Right"                 ),
-    SHORTCUT("TYPE_MOVE_UP"             ,   "Up"                    ),
-    SHORTCUT("TYPE_MOVE_DOWN"           ,   "Down"                  ),
-    SHORTCUT("TYPE_COMMIT_CURRENT_TOOL" ,   "Ctrl+Return"           ),
+        SHORTCUT("TYPE_PIXELATE", "B"),
+        SHORTCUT("TYPE_INVERT", "I"),
+        SHORTCUT("TYPE_REDO", "Ctrl+Shift+Z"),
+        SHORTCUT("TYPE_TEXT", "T"),
+        SHORTCUT("TYPE_TOGGLE_PANEL", "Space"),
+        SHORTCUT("TYPE_RESIZE_LEFT", "Shift+Left"),
+        SHORTCUT("TYPE_RESIZE_RIGHT", "Shift+Right"),
+        SHORTCUT("TYPE_RESIZE_UP", "Shift+Up"),
+        SHORTCUT("TYPE_RESIZE_DOWN", "Shift+Down"),
+        SHORTCUT("TYPE_SELECT_ALL", "Ctrl+A"),
+        SHORTCUT("TYPE_MOVE_LEFT", "Left"),
+        SHORTCUT("TYPE_MOVE_RIGHT", "Right"),
+        SHORTCUT("TYPE_MOVE_UP", "Up"),
+        SHORTCUT("TYPE_MOVE_DOWN", "Down"),
+        SHORTCUT("TYPE_COMMIT_CURRENT_TOOL", "Ctrl+Return"),
 #if defined(Q_OS_MACOS)
-    SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
+        SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
 #else
-    SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
+        SHORTCUT("TYPE_DELETE_CURRENT_TOOL", "Delete"),
 #endif
-    SHORTCUT("TYPE_PIN"                 ,                           ),
-    SHORTCUT("TYPE_SELECTIONINDICATOR"  ,                           ),
-    SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
-    SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
-    SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+        SHORTCUT("TYPE_PIN",),
+        SHORTCUT("TYPE_SELECTIONINDICATOR",),
+        SHORTCUT("TYPE_SIZEINCREASE",),
+        SHORTCUT("TYPE_SIZEDECREASE",),
+        SHORTCUT("TYPE_CIRCLECOUNT",),
 };
 
 // clang-format on
@@ -464,16 +465,27 @@ QVariant ConfigHandler::value(const QString& key) const
 
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     static QSet<QString> options =
       QSet<QString>(::recognizedGeneralOptions.keys().begin(),
                     ::recognizedGeneralOptions.keys().end());
+#else
+    static QSet<QString> options =
+      QSet<QString>::fromList(::recognizedGeneralOptions.keys());
+#endif
     return options;
 }
 
 QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     static QSet<QString> names = QSet<QString>(
       recognizedShortcuts.keys().begin(), recognizedShortcuts.keys().end());
+#else
+    static QSet<QString> names =
+      QSet<QString>::fromList(recognizedShortcuts.keys());
+#endif
     return names;
 }
 
