@@ -617,7 +617,10 @@ void Controller::exportCapture(QPixmap capture,
               }
           });
     }
-    emit captureTaken(capture, selection);
+
+    if (!(tasks & CR::UPLOAD)) {
+        emit captureTaken(capture, selection);
+    }
 }
 
 void Controller::startFullscreenCapture(const CaptureRequest& req)

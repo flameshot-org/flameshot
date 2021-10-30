@@ -9,7 +9,7 @@ class QRect;
 class QDBusMessage;
 class QDBusConnection;
 
-class FlameshotDaemon : public QObject
+class FlameshotDaemon : private QObject
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.flameshot.Flameshot")
@@ -18,7 +18,7 @@ public:
     static FlameshotDaemon* instance();
     static void createPin(QPixmap capture, QRect geometry);
     static void copyToClipboard(QPixmap capture);
-    static void copyToClipboard(QString text);
+    static void copyToClipboard(QString text, QString notification = "");
     static void enableTrayIcon(bool enable);
     // TODO static void createAppLauncher();
 private:
@@ -30,7 +30,7 @@ private:
 private slots:
     Q_NOREPLY void attachPin(const QByteArray& data);
     Q_NOREPLY void attachScreenshotToClipboard(const QByteArray& screenshot);
-    Q_NOREPLY void attachTextToClipboard(QString text);
+    Q_NOREPLY void attachTextToClipboard(QString text, QString notification);
 
 private:
     static QDBusMessage createMethodCall(QString method);

@@ -6,13 +6,11 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/history.h"
-#include "src/utils/systemnotification.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
 #include <QBuffer>
-#include <QClipboard>
 #include <QCursor>
 #include <QDesktopServices>
 #include <QDrag>

@@ -26,12 +26,14 @@
     <!--
         attachTextToClipboard:
         @text: Text to be copied to the clipboard.
+        @notification: Optional notification to send.
 
         Copy the text to the daemon's clipboard, to prevent losing the
         clipboard when a flameshot subcommand exits.
     -->
     <method name="attachTextToClipboard">
       <arg name="text" type="s" direction="in"/>
+      <arg name="notification" type="s" direction="in"/>
     </method>
 
   </interface>

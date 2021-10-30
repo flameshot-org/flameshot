@@ -3,6 +3,7 @@
 
 #include "screenshotsaver.h"
 #include "src/core/controller.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
@@ -170,17 +171,11 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         ConfigHandler().setSavePath(pathNoFile);
 
         QString msg = QObject::tr("Capture saved as ") + savePath;
-
-        if (config.copyPathAfterSave()) {
-            msg =
-              QObject::tr("Capture is saved and copied to the clipboard as ") +
-              savePath;
-        }
-
         SystemNotification().sendMessage(msg, savePath);
 
         if (config.copyPathAfterSave()) {
-            QApplication::clipboard()->setText(savePath);
+            FlameshotDaemon::copyToClipboard(
+              savePath, QObject::tr("Path copied to clipboard as ") + savePath);
         }
 
     } else {

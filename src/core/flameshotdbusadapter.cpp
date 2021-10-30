@@ -15,9 +15,10 @@ void FlameshotDBusAdapter::attachScreenshotToClipboard(const QByteArray& data)
     FlameshotDaemon::instance()->attachScreenshotToClipboard(data);
 }
 
-void FlameshotDBusAdapter::attachTextToClipboard(QString text)
+void FlameshotDBusAdapter::attachTextToClipboard(QString text,
+                                                 QString notification)
 {
-    FlameshotDaemon::instance()->attachTextToClipboard(text);
+    FlameshotDaemon::instance()->attachTextToClipboard(text, notification);
 }
 
 void FlameshotDBusAdapter::attachPin(const QByteArray& data)

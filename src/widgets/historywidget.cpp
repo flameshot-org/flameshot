@@ -1,9 +1,8 @@
 #include "historywidget.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
-#include <QApplication>
-#include <QClipboard>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDesktopWidget>
@@ -141,7 +140,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     buttonCopyUrl->setText(tr("Copy URL"));
     buttonCopyUrl->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonCopyUrl, &QPushButton::clicked, this, [=]() {
-        QApplication::clipboard()->setText(url);
+        FlameshotDaemon::copyToClipboard(url);
         m_notification->showMessage(tr("URL copied to clipboard."));
         this->close();
     });

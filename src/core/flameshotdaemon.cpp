@@ -78,15 +78,15 @@ void FlameshotDaemon::copyToClipboard(QPixmap capture)
     call(m);
 }
 
-void FlameshotDaemon::copyToClipboard(QString text)
+void FlameshotDaemon::copyToClipboard(QString text, QString notification)
 {
     if (instance()) {
-        instance()->attachTextToClipboard(text);
+        instance()->attachTextToClipboard(text, notification);
         return;
     }
     auto m = createMethodCall(QStringLiteral("attachTextToClipboard"));
 
-    m << text;
+    m << text << notification;
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     checkDBusConnection(sessionBus);
@@ -176,7 +176,7 @@ void FlameshotDaemon::attachScreenshotToClipboard(const QByteArray& screenshot)
     attachScreenshotToClipboard(p);
 }
 
-void FlameshotDaemon::attachTextToClipboard(QString text)
+void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
 {
     m_hostingClipboard = true;
     QClipboard* clipboard = QApplication::clipboard();
@@ -186,6 +186,9 @@ void FlameshotDaemon::attachTextToClipboard(QString text)
     // windows for some reason
     m_clipboardSignalBlocked = true;
     clipboard->setText(text);
+    if (!notification.isEmpty()) {
+        SystemNotification().sendMessage(notification);
+    }
     clipboard->blockSignals(false);
 }
 
