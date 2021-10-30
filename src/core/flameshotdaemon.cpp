@@ -2,7 +2,6 @@
 
 #include "confighandler.h"
 #include "controller.h"
-#include "dbusutils.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "systemnotification.h"
@@ -90,7 +89,7 @@ void FlameshotDaemon::copyToClipboard(QString text)
     m << text;
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
-    DBusUtils().checkDBusConnection(sessionBus);
+    checkDBusConnection(sessionBus);
     sessionBus.call(m);
 }
 
@@ -200,10 +199,18 @@ QDBusMessage FlameshotDaemon::createMethodCall(QString method)
     return m;
 }
 
+void FlameshotDaemon::checkDBusConnection(const QDBusConnection& connection)
+{
+    if (!connection.isConnected()) {
+        SystemNotification().sendMessage(tr("Unable to connect via DBus"));
+        qApp->exit(1);
+    }
+}
+
 void FlameshotDaemon::call(const QDBusMessage& m)
 {
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
-    DBusUtils().checkDBusConnection(sessionBus);
+    checkDBusConnection(sessionBus);
     sessionBus.call(m);
 }
 

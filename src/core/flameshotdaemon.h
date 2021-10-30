@@ -7,6 +7,7 @@
 class QPixmap;
 class QRect;
 class QDBusMessage;
+class QDBusConnection;
 
 class FlameshotDaemon : public QObject
 {
@@ -33,6 +34,7 @@ private slots:
 
 private:
     static QDBusMessage createMethodCall(QString method);
+    static void checkDBusConnection(const QDBusConnection& connection);
     static void call(const QDBusMessage& m);
 
 private:

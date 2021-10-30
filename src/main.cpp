@@ -27,7 +27,6 @@
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "src/core/flameshotdbusadapter.h"
-#include "src/utils/dbusutils.h"
 #include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
