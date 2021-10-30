@@ -37,8 +37,6 @@ public:
     void setStaticID(uint id);
 
     uint id() const;
-    QByteArray serialize() const;
-    static CaptureRequest deserialize(const QByteArray& data);
     uint delay() const;
     QString path() const;
     QVariant data() const;

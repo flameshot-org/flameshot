@@ -3,16 +3,6 @@
   <interface name="org.flameshot.Flameshot">
 
     <!--
-        requestCapture:
-        @requestData: Serialized CaptureRequest object.
-
-        Start a capture using a CaptureRequest.
-    -->
-    <method name="requestCapture">
-      <arg name="requestData" type="ay" direction="in"/>
-    </method>
-
-    <!--
         attachPin:
         @data: Byte array containing the screenshot and geometry information.
 

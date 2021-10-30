@@ -15,8 +15,6 @@ public:
     virtual ~FlameshotDBusAdapter();
 
 public slots:
-    Q_NOREPLY void requestCapture(const QByteArray& requestData);
-    // TODO temporary, just to forward signals to FlameshotDaemon
     Q_NOREPLY void attachScreenshotToClipboard(const QByteArray& data);
     Q_NOREPLY void attachTextToClipboard(QString text);
     Q_NOREPLY void attachPin(const QByteArray& data);
