@@ -14,6 +14,30 @@
 
 // TODO handle if daemon can't be contacted via dbus
 
+/**
+ * @brief A way of accessing the flameshot daemon both from the daemon itself,
+ * and from subcommands.
+ *
+ * The daemon is necessary in order to:
+ * - Host the system tray,
+ * - Listen for hotkey events that will trigger captures,
+ * - Host pinned screenshot widgets,
+ * - Host the clipboard on X11, where the clipboard gets lost once flameshot
+ *   quits.
+ *
+ * If the `autoCloseIdleDaemon` option is true, the daemon will close as soon as
+ * it is not needed to host pinned screenshots and the clipboard. On Windows,
+ * this option is disabled and the daemon always persists, because the system
+ * tray is currently the only way to interact with flameshot.
+ *
+ * Both the daemon and non-daemon flameshot processes use the same public API,
+ * which is implemented as static methods. In the daemon process, this class is
+ * also instantiated as a singleton, so it can listen to D-Bus calls via the
+ * sigslot mechanism. The instantiation is done by calling `start` (this must be
+ * done only in the daemon process).
+ *
+ * @note The daemon will be automatically launched where necessary, via D-Bus.
+ */
 FlameshotDaemon::FlameshotDaemon()
   : m_persist(false)
   , m_hostingClipboard(false)
