@@ -32,6 +32,12 @@ FlameshotDaemon::FlameshotDaemon()
     Controller::getInstance()->initTrayIcon();
 #ifdef Q_OS_WIN
     m_persist = true;
+#else
+    m_persist = !ConfigHandler().autoCloseIdleDaemon();
+    connect(ConfigHandler::getInstance(),
+            &ConfigHandler::fileChanged,
+            this,
+            [this]() { m_persist = !ConfigHandler().autoCloseIdleDaemon(); });
 #endif
     // TODO on Mac?, always persist so hotkeys can be used
     // TODO consider which config options could influence this
