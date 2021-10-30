@@ -26,7 +26,6 @@
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
-#include <QClipboard>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDesktopWidget>
