@@ -5,27 +5,10 @@
 #include "src/core/controller.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/screengrabber.h"
-#include "src/utils/screenshotsaver.h"
-#include "src/utils/systemnotification.h"
-#include <QBuffer>
+
 FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
   : QDBusAbstractAdaptor(parent)
-{
-    auto controller = Controller::getInstance();
-    connect(controller,
-            &Controller::captureFailed,
-            this,
-            &FlameshotDBusAdapter::captureFailed);
-    connect(controller,
-            &Controller::captureTaken,
-            this,
-            &FlameshotDBusAdapter::handleCaptureTaken);
-    connect(controller,
-            &Controller::captureSaved,
-            this,
-            &FlameshotDBusAdapter::captureSaved);
-}
+{}
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 
@@ -49,7 +32,6 @@ void FlameshotDBusAdapter::trayIconEnabled(bool enabled)
         controller->disableTrayIcon();
     }
 }
-
 void FlameshotDBusAdapter::autostartEnabled(bool enabled)
 {
     ConfigHandler().setStartupLaunch(enabled);
@@ -71,14 +53,4 @@ void FlameshotDBusAdapter::attachTextToClipboard(QString text)
 void FlameshotDBusAdapter::attachPin(const QByteArray& data)
 {
     FlameshotDaemon::instance()->attachPin(data);
-}
-
-void FlameshotDBusAdapter::handleCaptureTaken(uint id,
-                                              const QPixmap& p,
-                                              const QRect& selection)
-{
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    p.save(&buffer, "PNG");
-    emit captureTaken(id, byteArray, selection);
 }

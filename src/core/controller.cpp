@@ -547,11 +547,6 @@ void Controller::showRecentUploads()
 #endif
 }
 
-void Controller::sendCaptureSaved(uint id, const QString& savePath)
-{
-    emit captureSaved(id, savePath);
-}
-
 void Controller::exportCapture(QPixmap capture,
                                QRect& selection,
                                const CaptureRequest& req)

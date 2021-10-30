@@ -98,8 +98,6 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 
     if (ok) {
         saveMessage += QObject::tr("Capture saved as ") + completePath;
-        Controller::getInstance()->sendCaptureSaved(
-          m_id, QFileInfo(completePath).canonicalFilePath());
     } else {
         saveMessage += QObject::tr("Error trying to save as ") + completePath;
         notificationPath = "";
@@ -186,9 +184,6 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         }
 
         SystemNotification().sendMessage(msg, savePath);
-
-        Controller::getInstance()->sendCaptureSaved(
-          m_id, QFileInfo(savePath).canonicalFilePath());
 
         if (config.copyPathAfterSave()) {
             QApplication::clipboard()->setText(savePath);
