@@ -14,31 +14,7 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_delay(delay)
   , m_tasks(tasks)
   , m_data(data)
-  , m_forcedID(false)
-  , m_id(0)
 {}
-
-void CaptureRequest::setStaticID(uint id)
-{
-    m_forcedID = true;
-    m_id = id;
-}
-
-uint CaptureRequest::id() const
-{
-    if (m_forcedID) {
-        return m_id;
-    }
-
-    uint id = 0;
-    QVector<uint> v;
-    v << qHash(m_mode) << qHash(m_delay * QDateTime::currentMSecsSinceEpoch())
-      << qHash(m_path) << qHash(m_tasks) << m_data.toInt();
-    for (uint i : v) {
-        id ^= i + 0x9e3779b9 + (id << 6) + (id >> 2);
-    }
-    return id;
-}
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
 {

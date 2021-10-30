@@ -20,7 +20,6 @@
 
 CaptureLauncher::CaptureLauncher(QDialog* parent)
   : QDialog(parent)
-  , m_id(0)
 {
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
@@ -107,7 +106,6 @@ void CaptureLauncher::startCapture()
     auto mode = static_cast<CaptureRequest::CaptureMode>(
       m_captureType->currentData().toInt());
     CaptureRequest req(mode, 600 + m_delaySpinBox->value() * 1000);
-    m_id = req.id();
     connectCaptureSlots();
     Controller::getInstance()->requestCapture(req);
 }
@@ -165,8 +163,7 @@ void CaptureLauncher::disconnectCaptureSlots()
                &CaptureLauncher::captureFailed);
 }
 
-// TODO get rid of id parameter
-void CaptureLauncher::captureTaken(uint id, QPixmap p, const QRect& selection)
+void CaptureLauncher::captureTaken(QPixmap p, const QRect&)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
@@ -183,14 +180,10 @@ void CaptureLauncher::captureTaken(uint id, QPixmap p, const QRect& selection)
     m_launchButton->setEnabled(true);
 }
 
-void CaptureLauncher::captureFailed(uint id)
+void CaptureLauncher::captureFailed()
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
-
-    if (id == m_id) {
-        m_id = 0;
-        show();
-    }
+    show();
     m_launchButton->setEnabled(true);
 }

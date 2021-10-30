@@ -211,40 +211,35 @@ void Controller::appUpdates()
 
 void Controller::requestCapture(const CaptureRequest& request)
 {
-    uint id = request.id();
-    m_requestMap.insert(id, request);
-
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
-            doLater(request.delay(), this, [this, id]() {
-                this->startFullscreenCapture(id);
+            doLater(request.delay(), this, [this, &request]() {
+                startFullscreenCapture(request);
             });
             break;
             // TODO: Figure out the code path that gets here so the deprated
             // warning can be fixed
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
-            doLater(request.delay(), this, [this, id, number]() {
-                this->startScreenGrab(id, number);
+            doLater(request.delay(), this, [this, request, number]() {
+                startScreenGrab(request, number);
             });
             break;
         }
         case CaptureRequest::GRAPHICAL_MODE: {
-            QString&& path = request.path();
-            doLater(request.delay(), this, [this, id, path]() {
-                this->startVisualCapture(id, path);
+            doLater(request.delay(), this, [this, &request]() {
+                startVisualCapture(request);
             });
             break;
         }
         default:
-            handleCaptureFailed(id);
+            handleCaptureFailed();
             break;
     }
 }
 
 // creation of a new capture in GUI mode
-void Controller::startVisualCapture(const uint id,
-                                    const QString& forcedSavePath)
+void Controller::startVisualCapture(const CaptureRequest& req)
 {
 #if defined(Q_OS_MACOS)
     // This is required on MacOS because of Mission Control. If you'll switch to
@@ -278,8 +273,8 @@ void Controller::startVisualCapture(const uint id,
             return;
         }
 
-        m_captureWindow = new CaptureWidget(id, forcedSavePath);
-        // m_captureWindow = new CaptureWidget(id, forcedSavePath, false); //
+        m_captureWindow = new CaptureWidget(req);
+        // m_captureWindow = new CaptureWidget(forcedSavePath, false); //
         // debug
 
 #ifdef Q_OS_WIN
@@ -300,11 +295,12 @@ void Controller::startVisualCapture(const uint id,
                                                        m_appLatestUrl);
         }
     } else {
-        emit captureFailed(id);
+        emit captureFailed();
     }
 }
 
-void Controller::startScreenGrab(const uint id, const int screenNumber)
+void Controller::startScreenGrab(const CaptureRequest& req,
+                                 const int screenNumber)
 {
     bool ok = true;
     int n = screenNumber;
@@ -316,9 +312,9 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
         QRect geometry = ScreenGrabber().screenGeometry(n);
-        handleCaptureTaken(id, p, geometry);
+        exportCapture(p, geometry, req);
     } else {
-        handleCaptureFailed(id);
+        handleCaptureFailed();
     }
 }
 
@@ -401,7 +397,7 @@ void Controller::enableTrayIcon()
         }
 #else
       // Wait 400 ms to hide the QMenu
-        doLater(400, this, [this]() { this->startVisualCapture(); });
+        doLater(400, this, [this]() { startVisualCapture(); });
 #endif
     });
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
@@ -551,7 +547,7 @@ void Controller::exportCapture(QPixmap capture,
                                const CaptureRequest& req)
 {
     using CR = CaptureRequest;
-    int tasks = req.tasks(), id = req.id(), mode = req.captureMode();
+    int tasks = req.tasks(), mode = req.captureMode();
     QString path = req.path();
 
     if (tasks & CR::PRINT_GEOMETRY) {
@@ -575,9 +571,9 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::SAVE) {
         if (req.path().isEmpty()) {
-            ScreenshotSaver(id).saveToFilesystemGUI(capture);
+            ScreenshotSaver().saveToFilesystemGUI(capture);
         } else {
-            ScreenshotSaver(id).saveToFilesystem(capture, path);
+            ScreenshotSaver().saveToFilesystem(capture, path);
         }
     }
 
@@ -606,50 +602,46 @@ void Controller::exportCapture(QPixmap capture,
                       SystemNotification().sendMessage(
                         QObject::tr("URL copied to clipboard."));
                       widget->close();
-                      emit captureTaken(0, capture, selection);
+                      emit captureTaken(capture, selection);
                   } else {
                       widget->showPostUploadDialog();
                       connect(widget, &QObject::destroyed, this, [=]() {
-                          emit captureTaken(0, capture, selection);
+                          emit captureTaken(capture, selection);
                       });
                   }
               } else {
                   widget->showPostUploadDialog();
                   connect(widget, &QObject::destroyed, this, [=]() {
-                      emit captureTaken(0, capture, selection);
+                      emit captureTaken(capture, selection);
                   });
               }
           });
     }
-    emit captureTaken(0, capture, selection);
+    emit captureTaken(capture, selection);
 }
 
-void Controller::startFullscreenCapture(const uint id)
+void Controller::startFullscreenCapture(const CaptureRequest& req)
 {
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     if (ok) {
         QRect selection; // `flameshot full` does not support --selection
-        handleCaptureTaken(id, p, selection);
-    } else {
-        handleCaptureFailed(id);
-    }
-}
-
-void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
-{
-    auto it = m_requestMap.find(id);
-    CaptureRequest& req = *it;
-    if (it != m_requestMap.end()) {
         exportCapture(p, selection, req);
-        m_requestMap.erase(it);
+    } else {
+        handleCaptureFailed();
     }
 }
 
-void Controller::handleCaptureFailed(uint id)
+void Controller::handleCaptureTaken(const CaptureRequest& req,
+                                    QPixmap p,
+                                    QRect selection)
 {
-    m_requestMap.remove(id);
-    emit captureFailed(id);
+    exportCapture(p, selection, req);
+}
+
+void Controller::handleCaptureFailed()
+{
+    emit captureFailed();
 }
 
 void Controller::doLater(int msec, QObject* receiver, lambda func)

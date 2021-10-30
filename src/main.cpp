@@ -51,8 +51,8 @@ void requestCaptureAndWait(const CaptureRequest& req)
     controller->requestCapture(req);
     QObject::connect(controller,
                      &Controller::captureTaken,
-                     [&](uint, QPixmap, QRect) { qApp->exit(0); });
-    QObject::connect(controller, &Controller::captureFailed, [](uint) {
+                     [&](QPixmap, QRect) { qApp->exit(0); });
+    QObject::connect(controller, &Controller::captureFailed, []() {
         // TODO use abstract logger
         // TODO do we have to do more stuff here?
         QTextStream(stderr) << "screenshot aborted\n";

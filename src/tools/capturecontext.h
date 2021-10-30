@@ -29,9 +29,7 @@ struct CaptureContext
     int toolSize;
     // Mode of the capture widget
     bool fullscreen;
-    uint requestId;
+    CaptureRequest request = CaptureRequest::GRAPHICAL_MODE;
 
     QPixmap selectedScreenshotArea() const;
-    CaptureRequest* request();
-    CaptureRequest* request() const;
 };

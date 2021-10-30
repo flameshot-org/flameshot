@@ -43,8 +43,8 @@ public:
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
-    void captureTaken(uint id, QPixmap p, const QRect& selection);
-    void captureFailed(uint id);
+    void captureTaken(QPixmap p, const QRect& selection);
+    void captureFailed();
 
 public slots:
     void requestCapture(const CaptureRequest& request);
@@ -69,14 +69,17 @@ public slots:
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
 
 private slots:
-    void startFullscreenCapture(const uint id = 0);
-    void startVisualCapture(const uint id = 0,
-                            const QString& forcedSavePath = QString());
-    void startScreenGrab(const uint id = 0, const int screenNumber = -1);
+    void startFullscreenCapture(const CaptureRequest& req);
+    void startVisualCapture(
+      const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
+    void startScreenGrab(const CaptureRequest& req,
+                         const int screenNumber = -1);
 
 public slots: // TODO move these up
-    void handleCaptureTaken(uint id, QPixmap p, QRect selection);
-    void handleCaptureFailed(uint id);
+    void handleCaptureTaken(const CaptureRequest& req,
+                            QPixmap p,
+                            QRect selection);
+    void handleCaptureFailed();
 
     void handleReplyCheckUpdates(QNetworkReply* reply);
 

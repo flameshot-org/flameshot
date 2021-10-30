@@ -21,13 +21,7 @@
 #include "src/widgets/capture/capturewidget.h"
 #endif
 
-ScreenshotSaver::ScreenshotSaver()
-  : m_id(0)
-{}
-
-ScreenshotSaver::ScreenshotSaver(const unsigned id)
-  : m_id(id)
-{}
+ScreenshotSaver::ScreenshotSaver() {}
 
 void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
                                           const QString& imageType)

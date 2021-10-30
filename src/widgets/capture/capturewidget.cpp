@@ -48,8 +48,8 @@
 // an area of selection with its respective buttons.
 
 // enableSaveWindow
-CaptureWidget::CaptureWidget(uint id,
-                             const QString& savePath,
+
+CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
                              QWidget* parent)
   : QWidget(parent)
@@ -90,7 +90,7 @@ CaptureWidget::CaptureWidget(uint id,
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
-    initContext(fullScreen, id);
+    initContext(fullScreen, req);
     initSelection();
     initShortcuts(); // must be called after initSelection
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
@@ -252,10 +252,10 @@ CaptureWidget::~CaptureWidget()
     if (m_captureDone) {
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
-        Controller::getInstance()->handleCaptureTaken(
-          m_context.requestId, pixmap(), geometry);
+        Controller::getInstance()->exportCapture(
+          pixmap(), geometry, m_context.request);
     } else {
-        Controller::getInstance()->handleCaptureFailed(m_context.requestId);
+        Controller::getInstance()->handleCaptureFailed();
     }
 }
 
@@ -263,7 +263,7 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    if (m_context.request()->tasks() == CaptureRequest::NO_TASK) {
+    if (m_context.request.tasks() == CaptureRequest::NO_TASK) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
@@ -862,7 +862,7 @@ void CaptureWidget::changeEvent(QEvent* e)
     }
 }
 
-void CaptureWidget::initContext(bool fullscreen, uint requestId)
+void CaptureWidget::initContext(bool fullscreen, const CaptureRequest& req)
 {
     m_context.color = m_config.drawColor();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
@@ -871,15 +871,7 @@ void CaptureWidget::initContext(bool fullscreen, uint requestId)
     m_context.fullscreen = fullscreen;
 
     // initialize m_context.request
-    if (requestId != 0) {
-        m_context.requestId = requestId;
-    } else {
-        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
-        uint id = req.id();
-        req.setStaticID(id);
-        Controller::getInstance()->requests().insert(id, req);
-        m_context.requestId = id;
-    }
+    m_context.request = req;
 }
 
 void CaptureWidget::initPanel()
@@ -1024,9 +1016,9 @@ void CaptureWidget::initSelection()
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisible()) {
-            auto req = m_context.request();
-            if (req->tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
-                req->removeTask(CaptureRequest::ACCEPT_ON_SELECT);
+            auto& req = m_context.request;
+            if (req.tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
+                req.removeTask(CaptureRequest::ACCEPT_ON_SELECT);
                 m_captureDone = true;
                 close();
             }

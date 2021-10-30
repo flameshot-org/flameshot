@@ -40,8 +40,7 @@ class CaptureWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit CaptureWidget(uint id = 0,
-                           const QString& savePath = QString(),
+    explicit CaptureWidget(const CaptureRequest& req,
                            bool fullScreen = true,
                            QWidget* parent = nullptr);
     ~CaptureWidget();
@@ -100,7 +99,7 @@ private:
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
-    void initContext(bool fullscreen, uint requestId);
+    void initContext(bool fullscreen, const CaptureRequest& req);
     void initPanel();
     void initSelection();
     void initShortcuts();
