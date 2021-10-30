@@ -559,9 +559,6 @@ void Controller::exportCapture(QPixmap capture,
     using CR = CaptureRequest;
     int tasks = req.tasks(), id = req.id(), mode = req.captureMode();
     QString path = req.path();
-    static CR::ExportTask finishedTasks;
-    // If there was an ACCEPT_ON_SELECT task, it is finished
-    finishedTasks = (CR::ExportTask)(tasks & CR::ACCEPT_ON_SELECT);
 
     if (tasks & CR::PRINT_GEOMETRY) {
         QByteArray byteArray;
@@ -569,7 +566,6 @@ void Controller::exportCapture(QPixmap capture,
         QTextStream(stdout)
           << selection.width() << " " << selection.height() << " "
           << selection.x() << " " << selection.y() << "\n";
-        finishedTasks |= CR::PRINT_GEOMETRY;
     }
 
     if (tasks & CR::PRINT_RAW) {
@@ -581,7 +577,6 @@ void Controller::exportCapture(QPixmap capture,
 
         file.write(byteArray);
         file.close();
-        finishedTasks |= CR::PRINT_RAW;
     }
 
     if (tasks & CR::SAVE) {
@@ -590,12 +585,10 @@ void Controller::exportCapture(QPixmap capture,
         } else {
             ScreenshotSaver(id).saveToFilesystem(capture, path);
         }
-        finishedTasks |= CR::SAVE;
     }
 
     if (tasks & CR::COPY) {
         FlameshotDaemon::copyToClipboard(capture);
-        finishedTasks |= CR::COPY;
     }
 
     if (tasks & CR::PIN) {
@@ -604,7 +597,6 @@ void Controller::exportCapture(QPixmap capture,
             SystemNotification().sendMessage(
               QObject::tr("Full screen screenshot pinned to screen"));
         }
-        finishedTasks |= CR::PIN;
     }
 
     if (tasks & CR::UPLOAD) {
@@ -620,33 +612,22 @@ void Controller::exportCapture(QPixmap capture,
                       SystemNotification().sendMessage(
                         QObject::tr("URL copied to clipboard."));
                       widget->close();
-                      finishedTasks |= CR::UPLOAD;
-                      if (finishedTasks == tasks) {
-                          emit captureTaken(0, capture, selection);
-                      }
+                      emit captureTaken(0, capture, selection);
                   } else {
                       widget->showPostUploadDialog();
                       connect(widget, &QObject::destroyed, this, [=]() {
-                          finishedTasks |= CR::UPLOAD;
-                          if (finishedTasks == tasks) {
-                              emit captureTaken(0, capture, selection);
-                          }
+                          emit captureTaken(0, capture, selection);
                       });
                   }
               } else {
                   widget->showPostUploadDialog();
                   connect(widget, &QObject::destroyed, this, [=]() {
-                      finishedTasks |= CR::UPLOAD;
-                      if (finishedTasks == tasks) {
-                          emit captureTaken(0, capture, selection);
-                      }
+                      emit captureTaken(0, capture, selection);
                   });
               }
           });
     }
-    if (finishedTasks == tasks) {
-        emit captureTaken(0, capture, selection);
-    }
+    emit captureTaken(0, capture, selection);
 }
 
 void Controller::startFullscreenCapture(const uint id)

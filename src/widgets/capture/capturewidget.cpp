@@ -1026,6 +1026,7 @@ void CaptureWidget::initSelection()
         if (m_selection->isVisible()) {
             auto req = m_context.request();
             if (req->tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
+                req->removeTask(CaptureRequest::ACCEPT_ON_SELECT);
                 m_captureDone = true;
                 close();
             }

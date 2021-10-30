@@ -2,17 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
-#include "confighandler.h"
-#include "controller.h"
-#include "imguruploader.h"
-#include "pinwidget.h"
-#include "src/utils/screenshotsaver.h"
-#include "systemnotification.h"
-#include <QApplication>
-#include <QBuffer>
-#include <QClipboard>
 #include <QDateTime>
-#include <QTextStream>
 #include <QVector>
 #include <stdexcept>
 
@@ -113,6 +103,11 @@ void CaptureRequest::addTask(CaptureRequest::ExportTask task)
         throw std::logic_error("SAVE task must be added using addSaveTask");
     }
     m_tasks |= task;
+}
+
+void CaptureRequest::removeTask(ExportTask task)
+{
+    ((int&)m_tasks) &= ~task;
 }
 
 void CaptureRequest::addSaveTask(const QString& path)

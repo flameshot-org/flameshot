@@ -46,6 +46,7 @@ public:
     ExportTask tasks() const;
 
     void addTask(ExportTask task);
+    void removeTask(ExportTask task);
     void addSaveTask(const QString& path = QString());
     void addPinTask(const QRect& pinWindowGeometry);
 
