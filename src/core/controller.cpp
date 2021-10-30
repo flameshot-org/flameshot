@@ -213,7 +213,7 @@ void Controller::requestCapture(const CaptureRequest& request)
 {
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
-            doLater(request.delay(), this, [this, &request]() {
+            doLater(request.delay(), this, [this, request]() {
                 startFullscreenCapture(request);
             });
             break;
@@ -227,7 +227,7 @@ void Controller::requestCapture(const CaptureRequest& request)
             break;
         }
         case CaptureRequest::GRAPHICAL_MODE: {
-            doLater(request.delay(), this, [this, &request]() {
+            doLater(request.delay(), this, [this, request]() {
                 startVisualCapture(request);
             });
             break;
