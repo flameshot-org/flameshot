@@ -87,12 +87,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Целия екран (текущия монитор)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>Целия екран (всички монитори)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
