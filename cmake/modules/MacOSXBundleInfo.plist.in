@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>flameshot</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.flameshot</string>
+	<string>@MACOSX_BUNDLE_IDENTIFIER@</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -23,9 +23,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.10.1</string>
+	<string>@PROJECT_VERSION@</string>
 	<key>CFBundleLongVersionString</key>
-	<string>0.10.1</string>
+	<string>@PROJECT_VERSION@</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
