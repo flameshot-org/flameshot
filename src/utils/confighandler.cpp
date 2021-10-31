@@ -466,9 +466,8 @@ QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    static QSet<QString> options =
-      QSet<QString>(::recognizedGeneralOptions.keys().begin(),
-                    ::recognizedGeneralOptions.keys().end());
+    auto keys = ::recognizedGeneralOptions.keys();
+    static QSet<QString> options = QSet<QString>(keys.begin(), keys.end());
 #else
     static QSet<QString> options =
       QSet<QString>::fromList(::recognizedGeneralOptions.keys());
@@ -479,8 +478,8 @@ QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    static QSet<QString> names = QSet<QString>(
-      recognizedShortcuts.keys().begin(), recognizedShortcuts.keys().end());
+    auto keys = recognizedShortcuts.keys();
+    static QSet<QString> names = QSet<QString>(keys.begin(), keys.end());
 #else
     static QSet<QString> names =
       QSet<QString>::fromList(recognizedShortcuts.keys());
