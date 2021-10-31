@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>flameshot</string>
 	<key>CFBundleIdentifier</key>
-	<string>https://flameshot.org/</string>
+	<string>org.flameshot</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
