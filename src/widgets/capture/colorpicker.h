@@ -17,7 +17,7 @@ signals:
 protected:
     void paintEvent(QPaintEvent* event) override;
     void repaint(int i, QPainter& painter);
-    void mouseMoveEvent(QMouseEvent*);
+    void mouseMoveEvent(QMouseEvent*) override;
     void showEvent(QShowEvent* event) override;
     void hideEvent(QHideEvent* event) override;
 

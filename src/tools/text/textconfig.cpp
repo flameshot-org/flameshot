@@ -152,24 +152,22 @@ void TextConfig::weightButtonPressed(const bool w)
 
 void TextConfig::setTextAlignment(Qt::AlignmentFlag alignment)
 {
-
     switch (alignment) {
-        case (Qt::AlignLeft):
-            m_leftAlignButton->setChecked(true);
-            m_centerAlignButton->setChecked(false);
-            m_rightAlignButton->setChecked(false);
-            break;
-
         case (Qt::AlignCenter):
             m_leftAlignButton->setChecked(false);
             m_centerAlignButton->setChecked(true);
             m_rightAlignButton->setChecked(false);
             break;
-
         case (Qt::AlignRight):
             m_leftAlignButton->setChecked(false);
             m_centerAlignButton->setChecked(false);
             m_rightAlignButton->setChecked(true);
+            break;
+        case (Qt::AlignLeft):
+        default:
+            m_leftAlignButton->setChecked(true);
+            m_centerAlignButton->setChecked(false);
+            m_rightAlignButton->setChecked(false);
             break;
     }
     emit alignmentChanged(alignment);

@@ -183,6 +183,12 @@ target_link_libraries(
 )
 
 if (APPLE)
+    set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")
+    set_target_properties(
+            flameshot
+            PROPERTIES
+            XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_IDENTIFIER}
+    )
     target_link_libraries(
             flameshot
             qhotkey

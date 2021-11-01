@@ -46,9 +46,9 @@ protected:
     void parentMouseReleaseEvent(QMouseEvent* e);
     void parentMouseMoveEvent(QMouseEvent* e);
 
-    void paintEvent(QPaintEvent*);
-    void resizeEvent(QResizeEvent*);
-    void moveEvent(QMoveEvent*);
+    void paintEvent(QPaintEvent*) override;
+    void resizeEvent(QResizeEvent*) override;
+    void moveEvent(QMoveEvent*) override;
 
     void showEvent(QShowEvent*) override;
     void hideEvent(QHideEvent*) override;
