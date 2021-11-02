@@ -14,7 +14,7 @@ public:
     QPixmap grabEntireDesktop(bool& ok);
     QRect screenGeometry(int screenNumber);
     QPixmap grabScreen(int screenNumber, bool& ok);
-    void freeDesktopPortal(bool &ok, QPixmap& res);
+    void freeDesktopPortal(bool& ok, QPixmap& res);
 
 private:
     DesktopInfo m_info;

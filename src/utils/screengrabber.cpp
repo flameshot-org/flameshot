@@ -23,33 +23,30 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
 {}
 
-void ScreenGrabber::freeDesktopPortal(bool &ok, QPixmap& res) {
+void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
+{
 
     QDBusInterface screenshotInterface(
-            QStringLiteral("org.freedesktop.portal.Desktop"),
-            QStringLiteral("/org/freedesktop/portal/desktop"),
-            QStringLiteral("org.freedesktop.portal.Screenshot"));
+      QStringLiteral("org.freedesktop.portal.Desktop"),
+      QStringLiteral("/org/freedesktop/portal/desktop"),
+      QStringLiteral("org.freedesktop.portal.Screenshot"));
 
     // unique token
     QString token =
-            QUuid::createUuid().toString().remove('-').remove('{').remove(
-                    '}');
+      QUuid::createUuid().toString().remove('-').remove('{').remove('}');
 
     // premake interface
-    auto *request = new OrgFreedesktopPortalRequestInterface(
-            QStringLiteral("org.freedesktop.portal.Desktop"),
-            "/org/freedesktop/portal/desktop/request/" +
-            QDBusConnection::sessionBus()
-                    .baseService()
-                    .remove(':')
-                    .replace('.', '_') +
-            "/" + token,
-            QDBusConnection::sessionBus(),
-            this);
+    auto* request = new OrgFreedesktopPortalRequestInterface(
+      QStringLiteral("org.freedesktop.portal.Desktop"),
+      "/org/freedesktop/portal/desktop/request/" +
+        QDBusConnection::sessionBus().baseService().remove(':').replace('.',
+                                                                        '_') +
+        "/" + token,
+      QDBusConnection::sessionBus(),
+      this);
 
     QEventLoop loop;
-    const auto gotSignal = [&res, &loop](uint status,
-                                         const QVariantMap &map) {
+    const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
         if (status == 0) {
             QString uri = map.value("uri").toString().remove(0, 7);
             res = QPixmap(uri);
@@ -61,17 +58,14 @@ void ScreenGrabber::freeDesktopPortal(bool &ok, QPixmap& res) {
     };
 
     // prevent racy situations and listen before calling screenshot
-    QMetaObject::Connection conn =
-            QObject::connect(request,
-                             &org::freedesktop::portal::Request::Response,
-                             gotSignal);
+    QMetaObject::Connection conn = QObject::connect(
+      request, &org::freedesktop::portal::Request::Response, gotSignal);
 
     screenshotInterface.call(
-            QStringLiteral("Screenshot"),
-            "",
-            QMap<QString, QVariant>(
-                    {{"handle_token", QVariant(token)},
-                     {"interactive",  QVariant(false)}}));
+      QStringLiteral("Screenshot"),
+      "",
+      QMap<QString, QVariant>({ { "handle_token", QVariant(token) },
+                                { "interactive", QVariant(false) } }));
 
     loop.exec();
     QObject::disconnect(conn);
@@ -81,7 +75,6 @@ void ScreenGrabber::freeDesktopPortal(bool &ok, QPixmap& res) {
     if (res.isNull()) {
         ok = false;
     }
-
 }
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
@@ -104,7 +97,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             case DesktopInfo::GNOME: {
                 freeDesktopPortal(ok, res);
                 break;
-           }
+            }
             case DesktopInfo::KDE: {
                 // https://github.com/KDE/spectacle/blob/517a7baf46a4ca0a45f32fd3f2b1b7210b180134/src/PlatformBackends/KWinWaylandImageGrabber.cpp#L145
                 QDBusInterface kwinInterface(
@@ -122,7 +115,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             }
             case DesktopInfo::SWAY: {
                 freeDesktopPortal(ok, res);
-               break;
+                break;
             }
             default:
                 ok = false;
