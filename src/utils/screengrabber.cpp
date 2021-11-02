@@ -26,6 +26,7 @@ ScreenGrabber::ScreenGrabber(QObject* parent)
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {
 
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QDBusInterface screenshotInterface(
       QStringLiteral("org.freedesktop.portal.Desktop"),
       QStringLiteral("/org/freedesktop/portal/desktop"),
@@ -75,6 +76,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     if (res.isNull()) {
         ok = false;
     }
+#endif
 }
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
