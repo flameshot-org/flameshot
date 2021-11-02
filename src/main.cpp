@@ -30,6 +30,7 @@
 #include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QSharedMemory>
 #include <desktopinfo.h>
 #endif
 
@@ -59,6 +60,22 @@ void requestCaptureAndWait(const CaptureRequest& req)
         qApp->exit(1);
     });
     qApp->exec();
+}
+
+QSharedMemory* guiMutexLock()
+{
+    QString key = "org.flameshot.Flameshot-" APP_VERSION;
+    auto* shm = new QSharedMemory(key);
+#ifdef Q_OS_UNIX
+    // Destroy shared memory if the last instance crashed on Unix
+    shm->attach();
+    delete shm;
+    shm = new QSharedMemory(key);
+#endif
+    if (!shm->create(1)) {
+        return nullptr;
+    }
+    return shm;
 }
 
 int main(int argc, char* argv[])
@@ -307,8 +324,21 @@ int main(int argc, char* argv[])
         controller->openLauncherWindow();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
+        // Prevent multiple instances of 'flameshot gui' from running if not
+        // configured to do so.
+        auto* mutex = guiMutexLock();
+        if (!mutex) {
+            return 1;
+        }
+
         delete qApp;
         new QApplication(argc, argv);
+
+        QObject::connect(qApp, &QCoreApplication::aboutToQuit, [mutex]() {
+            mutex->detach();
+            delete mutex;
+        });
+
         // Option values
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
