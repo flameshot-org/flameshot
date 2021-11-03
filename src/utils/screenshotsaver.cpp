@@ -90,7 +90,9 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 {
     QString completePath = FileNameHandler().properScreenshotPath(
       path, ConfigHandler().setSaveAsFileExtension());
-    bool ok = capture.save(completePath);
+    QFile file{ completePath };
+    file.open(QIODevice::WriteOnly);
+    bool ok = capture.save(&file);
     QString saveMessage = messagePrefix;
     QString notificationPath = completePath;
     if (!saveMessage.isEmpty()) {
@@ -103,6 +105,9 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
           m_id, QFileInfo(completePath).canonicalFilePath());
     } else {
         saveMessage += QObject::tr("Error trying to save as ") + completePath;
+        if (file.error() != QFile::NoError) {
+            saveMessage += ": " + file.errorString();
+        }
         notificationPath = "";
     }
 
@@ -171,7 +176,10 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         return ok;
     }
 
-    ok = capture.save(savePath);
+    QFile file{ savePath };
+    file.open(QIODevice::WriteOnly);
+
+    ok = capture.save(&file);
 
     if (ok) {
         QString pathNoFile =
@@ -198,6 +206,11 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 
     } else {
         QString msg = QObject::tr("Error trying to save as ") + savePath;
+
+        if (file.error() != QFile::NoError) {
+            msg += ": " + file.errorString();
+        }
+
         QMessageBox saveErrBox(
           QMessageBox::Warning, QObject::tr("Save Error"), msg);
         saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));

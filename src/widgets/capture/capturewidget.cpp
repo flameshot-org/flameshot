@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 // Based on Lightscreen areadialog.cpp, Copyright 2017  Christian Kaiser
@@ -319,13 +319,45 @@ void CaptureWidget::initButtons()
 
         if (visibleButtonTypes.contains(t)) {
             connect(b,
-                    &CaptureToolButton::pressedButton,
+                    &CaptureToolButton::pressedButtonLeftClick,
                     this,
-                    &CaptureWidget::setState);
+                    &CaptureWidget::handleButtonLeftClick);
+
+            if (b->tool()->isSelectable()) {
+                connect(b,
+                        &CaptureToolButton::pressedButtonRightClick,
+                        this,
+                        &CaptureWidget::handleButtonRightClick);
+            }
+
             vectorButtons << b;
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
+}
+
+void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    // if button already selected, do not deselect it on right click
+    if (!m_activeButton || m_activeButton != b) {
+        setState(b);
+    }
+    if (!m_panel->isVisible()) {
+        m_panel->show();
+    }
+}
+
+void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    setState(b);
 }
 
 void CaptureWidget::initHelpMessage()
@@ -475,7 +507,7 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 {
     // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
-    if (!toolItem || toolItem && !toolItem->boundingRect().contains(pos)) {
+    if (!toolItem || (toolItem && !toolItem->boundingRect().contains(pos))) {
         selectToolItemAtPos(pos);
     }
 

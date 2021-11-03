@@ -21,18 +21,18 @@ if (APPLE)
             COMMAND bash "-c" "mkdir -p flameshot.iconset"
     )
     execute_process(
-            COMMAND bash "-c" "sips -z 16 16     ../data/img/app/flameshot.png --out flameshot.iconset/icon_16x16.png"
-            COMMAND bash "-c" "sips -z 32 32     ../data/img/app/flameshot.png --out flameshot.iconset/icon_16x16@2x.png"
-            COMMAND bash "-c" "sips -z 32 32     ../data/img/app/flameshot.png --out flameshot.iconset/icon_32x32.png"
-            COMMAND bash "-c" "sips -z 64 64     ../data/img/app/flameshot.png --out flameshot.iconset/icon_32x32@2x.png"
-            COMMAND bash "-c" "sips -z 64 64     ../data/img/app/flameshot.png --out flameshot.iconset/icon_64x64x.png"
-            COMMAND bash "-c" "sips -z 128 128   ../data/img/app/flameshot.png --out flameshot.iconset/icon_64x64@2.png"
-            COMMAND bash "-c" "sips -z 128 128   ../data/img/app/flameshot.png --out flameshot.iconset/icon_128x128.png"
-            COMMAND bash "-c" "sips -z 256 256   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_128x128@2x.png"
-            COMMAND bash "-c" "sips -z 256 256   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256.png"
-            COMMAND bash "-c" "sips -z 512 512   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256@2x.png"
-            COMMAND bash "-c" "sips -z 512 512   ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512.png"
-            COMMAND bash "-c" "sips -z 1024 1024 ../data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512@2x.png"
+            COMMAND bash "-c" "sips -z 16 16     \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_16x16.png"
+            COMMAND bash "-c" "sips -z 32 32     \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_16x16@2x.png"
+            COMMAND bash "-c" "sips -z 32 32     \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_32x32.png"
+            COMMAND bash "-c" "sips -z 64 64     \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_32x32@2x.png"
+            COMMAND bash "-c" "sips -z 64 64     \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_64x64x.png"
+            COMMAND bash "-c" "sips -z 128 128   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_64x64@2.png"
+            COMMAND bash "-c" "sips -z 128 128   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.png --out flameshot.iconset/icon_128x128.png"
+            COMMAND bash "-c" "sips -z 256 256   \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_128x128@2x.png"
+            COMMAND bash "-c" "sips -z 256 256   \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256.png"
+            COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256@2x.png"
+            COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512.png"
+            COMMAND bash "-c" "sips -z 1024 1024 \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512@2x.png"
             COMMAND bash "-c" "iconutil -c icns flameshot.iconset"
     )
 
@@ -42,7 +42,7 @@ if (APPLE)
 
     execute_process(
             # copy icon from cache generated on the localhost if generation on CI failed
-            COMMAND bash "-c" "[[ -r 'flameshot.icns' ]] || cp ../packaging/macos/flameshot.icns ./"
+            COMMAND bash "-c" "[[ -r 'flameshot.icns' ]] || cp \"${CMAKE_SOURCE_DIR}\"/packaging/macos/flameshot.icns ./"
     )
 
     # Set application icon
@@ -183,6 +183,12 @@ target_link_libraries(
 )
 
 if (APPLE)
+    set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")
+    set_target_properties(
+            flameshot
+            PROPERTIES
+            XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_IDENTIFIER}
+    )
     target_link_libraries(
             flameshot
             qhotkey
@@ -254,54 +260,56 @@ install(TARGETS flameshot
         BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-# Install desktop files, completion and dbus files
-configure_file(${CMAKE_SOURCE_DIR}/data/desktopEntry/package/org.flameshot.Flameshot.desktop
-        ${CMAKE_CURRENT_BINARY_DIR}/share/applications/org.flameshot.Flameshot.desktop @ONLY)
+if (UNIX)
+    # Install desktop files, completion and dbus files
+    configure_file(${CMAKE_SOURCE_DIR}/data/desktopEntry/package/org.flameshot.Flameshot.desktop
+            ${CMAKE_CURRENT_BINARY_DIR}/share/applications/org.flameshot.Flameshot.desktop @ONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
-        ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
+            ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
-        ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
+            ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
-        ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
+            ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
-        ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/interfaces/org.flameshot.Flameshot.xml COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
+            ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/interfaces/org.flameshot.Flameshot.xml COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.service.in
-        ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service)
+    configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.service.in
+            ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service)
 
-# Install man pages
-configure_file(${CMAKE_SOURCE_DIR}/data/man/man1/flameshot.1
-        ${CMAKE_CURRENT_BINARY_DIR}/share/man/man1/flameshot.1 COPYONLY)
+    # Install man pages
+    configure_file(${CMAKE_SOURCE_DIR}/data/man/man1/flameshot.1
+            ${CMAKE_CURRENT_BINARY_DIR}/share/man/man1/flameshot.1 COPYONLY)
 
-# Install Icons
-configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/org.flameshot.Flameshot.png
-        ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/org.flameshot.Flameshot.png COPYONLY)
+    # Install Icons
+    configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/org.flameshot.Flameshot.png
+            ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/org.flameshot.Flameshot.png COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/org.flameshot.Flameshot.png
-        ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/128x128/apps/org.flameshot.Flameshot.png COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/org.flameshot.Flameshot.png
+            ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/128x128/apps/org.flameshot.Flameshot.png COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/org.flameshot.Flameshot.svg
-        ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/org.flameshot.Flameshot.svg
+            ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg COPYONLY)
 
-# Install icon with both names
-configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/flameshot.png
-        ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/flameshot.png COPYONLY)
+    # Install icon with both names
+    configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/48x48/apps/flameshot.png
+            ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/48x48/apps/flameshot.png COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/flameshot.png
-        ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/128x128/apps/flameshot.png COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/128x128/apps/flameshot.png
+            ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/128x128/apps/flameshot.png COPYONLY)
 
-configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/flameshot.svg
-        ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/flameshot.svg COPYONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/flameshot.svg
+            ${CMAKE_CURRENT_BINARY_DIR}/share/icons/hicolor/scalable/apps/flameshot.svg COPYONLY)
 
-# Install assets
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
+    # Install assets
+    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
 
-# Install Translations
-install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)
+    # Install Translations
+    install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)
+endif ()
 
 # windeployqt
 if (WIN32)

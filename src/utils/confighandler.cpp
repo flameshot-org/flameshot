@@ -17,6 +17,8 @@
 #include <QTextStream>
 #include <QVector>
 #include <algorithm>
+#include <stdexcept>
+
 #if defined(Q_OS_MACOS)
 #include <QProcess>
 #endif
@@ -71,7 +73,7 @@ bool verifyLaunchFile()
  */
 // clang-format off
 static QMap<class QString, QSharedPointer<ValueHandler>>
-  recognizedGeneralOptions = {
+        recognizedGeneralOptions = {
 //         KEY                            TYPE                 DEFAULT_VALUE
     OPTION("showHelp"                    ,Bool               ( true          )),
     OPTION("showSidePanelButton"         ,Bool               ( true          )),
@@ -114,7 +116,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("fontFamily"                  ,String             ( ""            )),
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
-  };
+};
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 //           NAME                           DEFAULT_SHORTCUT
@@ -161,7 +163,6 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
     SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
 };
-
 // clang-format on
 
 // CLASS CONFIGHANDLER
@@ -463,15 +464,26 @@ QVariant ConfigHandler::value(const QString& key) const
 
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    auto keys = ::recognizedGeneralOptions.keys();
+    static QSet<QString> options = QSet<QString>(keys.begin(), keys.end());
+#else
     static QSet<QString> options =
       QSet<QString>::fromList(::recognizedGeneralOptions.keys());
+#endif
     return options;
 }
 
 QSet<QString>& ConfigHandler::recognizedShortcutNames()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    auto keys = recognizedShortcuts.keys();
+    static QSet<QString> names = QSet<QString>(keys.begin(), keys.end());
+#else
     static QSet<QString> names =
       QSet<QString>::fromList(recognizedShortcuts.keys());
+#endif
     return names;
 }
 
