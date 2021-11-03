@@ -93,6 +93,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #if !defined(Q_OS_MACOS)
         OPTION("useJpgForClipboard"          ,Bool               ( false         )),
 #endif
+        OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
         OPTION("saveAfterCopy"               ,Bool               ( false         )),
         OPTION("savePath"                    ,ExistingDir        (               )),
         OPTION("savePathFixed"               ,Bool               ( false         )),
