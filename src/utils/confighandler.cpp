@@ -80,6 +80,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
     OPTION("checkForUpdates"             ,Bool               ( true          )),
+    OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif

@@ -324,20 +324,21 @@ int main(int argc, char* argv[])
         controller->openLauncherWindow();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
-        // Prevent multiple instances of 'flameshot gui' from running if not
-        // configured to do so.
-        auto* mutex = guiMutexLock();
-        if (!mutex) {
-            return 1;
-        }
-
         delete qApp;
         new QApplication(argc, argv);
-
-        QObject::connect(qApp, &QCoreApplication::aboutToQuit, [mutex]() {
-            mutex->detach();
-            delete mutex;
-        });
+        // Prevent multiple instances of 'flameshot gui' from running if not
+        // configured to do so.
+        if (!ConfigHandler().allowMultipleGuiInstances()) {
+            auto* mutex = guiMutexLock();
+            if (!mutex) {
+                return 1;
+            }
+            QObject::connect(
+              qApp, &QCoreApplication::aboutToQuit, qApp, [mutex]() {
+                  mutex->detach();
+                  delete mutex;
+              });
+        }
 
         // Option values
         QString path = parser.value(pathOption);

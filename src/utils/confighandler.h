@@ -75,6 +75,9 @@ public:
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
     CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
     CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
+    CONFIG_GETTER_SETTER(allowMultipleGuiInstances,
+                         setAllowMultipleGuiInstances,
+                         bool)
     CONFIG_GETTER_SETTER(autoCloseIdleDaemon, setAutoCloseIdleDaemon, bool)
     CONFIG_GETTER_SETTER(showStartupLaunchMessage,
                          setShowStartupLaunchMessage,
