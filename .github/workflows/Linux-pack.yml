@@ -90,8 +90,9 @@ jobs:
               ;;
           esac
           if [ -n "${QEMU_ARCH}" ]; then
-            docker rm $(docker create --volume qemu-user-static:/usr/bin multiarch/qemu-user-static:${QEMU_ARCH} dummy)
-            docker run --rm --privileged --volume qemu-user-static:/usr/bin:ro multiarch/qemu-user-static:register --persistent yes --credential yes
+            sudo apt-get -y -qq update
+            sudo apt-get -y install qemu binfmt-support qemu-user-static
+            docker run --rm --privileged multiarch/qemu-user-static --reset --persistent yes --credential yes
             cat /proc/sys/fs/binfmt_misc/qemu-${QEMU_ARCH}
           fi
       - name: Checkout Source code
@@ -300,6 +301,12 @@ jobs:
               name: fedora-34,
               os: fedora,
               symbol: 34,
+              arch: x86_64
+            }
+          - {
+              name: fedora-35,
+              os: fedora,
+              symbol: 35,
               arch: x86_64
             }
           - {
