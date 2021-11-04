@@ -396,7 +396,7 @@ apt install git openssl ca-certificates
 
 ```shell
 # Compile-time
-dnf install gcc-c++ cmake qt5-devel qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ cmake qt5-qtbase-devel qt5-linguist
 
 # Run-time
 dnf install qt5-qtbase qt5-qtsvg-devel
