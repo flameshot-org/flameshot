@@ -1,5 +1,6 @@
 name: Feature Request
 description: Got an idea for a feature that can make Flameshot even better? Propose your suggestion here!
+labels: ["Enhancement"]
 body:
 - type: markdown
   attributes:
