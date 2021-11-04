@@ -294,8 +294,6 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
 - If you are using Gnome you need to install the [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/) extension in order to see the system tray icon.
 
-- If you are using Gnome41 or later you need to install the [Unsafe Mode Extesnsion](https://extensions.gnome.org/extension/4517/unsafe-mode/). This may be changed in the future but as of now Flameshot using a private DBus interface. See [this issue](https://github.com/flameshot-org/flameshot/issues/1910) for more details
-
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard. Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture to a file. Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
 - Flameshot works best with a desktop environment that includes D-Bus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc).
