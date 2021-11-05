@@ -179,8 +179,6 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         return ok;
     }
 
-    // TODO: Add check to see if suffix was chopped off
-
     QFile file{ savePath };
     file.open(QIODevice::WriteOnly);
 
