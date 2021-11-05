@@ -133,10 +133,13 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
     dialog.setMimeTypeFilters(mimeTypeList);
 
     QString suffix = ConfigHandler().setSaveAsFileExtension();
+    if (suffix.isEmpty()) {
+        suffix = "png";
+    }
     QString defaultMimeType =
       QMimeDatabase().mimeTypeForFile("image." + suffix).name();
     dialog.selectMimeTypeFilter(defaultMimeType);
-
+    dialog.setDefaultSuffix(suffix);
     if (dialog.exec() == QDialog::Accepted) {
         return dialog.selectedFiles().first();
     } else {
