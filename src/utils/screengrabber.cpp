@@ -151,12 +151,11 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 }
 
-QRect ScreenGrabber::screenGeometry(int screenNumber)
+QRect ScreenGrabber::screenGeometry(QScreen* screen)
 {
     QPixmap p;
     QRect geometry;
-    bool isVirtual = QApplication::desktop()->isVirtualDesktop();
-    if (isVirtual || m_info.waylandDetected()) {
+    if (m_info.waylandDetected()) {
         QPoint topLeft(0, 0);
 #ifdef Q_OS_WIN
         for (QScreen* const screen : QGuiApplication::screens()) {
@@ -167,7 +166,7 @@ QRect ScreenGrabber::screenGeometry(int screenNumber)
             }
         }
 #endif
-        geometry = QApplication::desktop()->screenGeometry(screenNumber);
+        geometry = screen->geometry();
         geometry.moveTo(geometry.topLeft() - topLeft);
     } else {
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
@@ -176,12 +175,11 @@ QRect ScreenGrabber::screenGeometry(int screenNumber)
     return geometry;
 }
 
-QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
+QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
 {
     QPixmap p;
-    bool isVirtual = QApplication::desktop()->isVirtualDesktop();
-    QRect geometry = screenGeometry(screenNumber);
-    if (isVirtual || m_info.waylandDetected()) {
+    QRect geometry = screenGeometry(screen);
+    if (m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
             return p.copy(geometry);
@@ -189,11 +187,11 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
     } else {
         ok = true;
         QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        return currentScreen->grabWindow(screenNumber,
-                                         geometry.x(),
+        return currentScreen->grabWindow(geometry.x(),
                                          geometry.y(),
                                          geometry.width(),
                                          geometry.height());
+
     }
     return p;
 }
