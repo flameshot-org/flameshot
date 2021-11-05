@@ -47,7 +47,7 @@ StartupWMClass=flameshot
 Actions=Configure;Capture;Launcher;
 X-DBUS-StartupType=Unique
 X-DBUS-ServiceName=org.flameshot.Flameshot
-X-KDE-DBUS-Restricted-Interfaces=org.kde.kwin.Screenshot
+X-KDE-DBUS-Restricted-Interfaces=org.kde.kwin.Screenshot,org.kde.KWin.ScreenShot2
 
 [Desktop Action Configure]
 Name=Configure
