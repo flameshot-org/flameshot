@@ -133,10 +133,13 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
     dialog.setMimeTypeFilters(mimeTypeList);
 
     QString suffix = ConfigHandler().setSaveAsFileExtension();
+    if (suffix.isEmpty()) {
+        suffix = "png";
+    }
     QString defaultMimeType =
       QMimeDatabase().mimeTypeForFile("image." + suffix).name();
     dialog.selectMimeTypeFilter(defaultMimeType);
-
+    dialog.setDefaultSuffix(suffix);
     if (dialog.exec() == QDialog::Accepted) {
         return dialog.selectedFiles().first();
     } else {
@@ -175,6 +178,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     if (savePath == "") {
         return ok;
     }
+
+    // TODO: Add check to see if suffix was chopped off
 
     QFile file{ savePath };
     file.open(QIODevice::WriteOnly);
