@@ -41,6 +41,7 @@
 #include <QSystemTrayIcon>
 #include <QThread>
 #include <QVersionNumber>
+#include <imguruploaddialog.h>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -602,6 +603,13 @@ void Controller::exportCapture(QPixmap capture,
     }
 
     if (tasks & CR::UPLOAD) {
+        if (!ConfigHandler().uploadWithoutConfirmation()) {
+            ImgurUploadDialog* dialog = new ImgurUploadDialog();
+            if (dialog->exec() == QDialog::Rejected) {
+                emit captureFailed();
+                return;
+            }
+        }
         ImgurUploader* widget = new ImgurUploader(capture);
         widget->show();
         widget->activateWindow();

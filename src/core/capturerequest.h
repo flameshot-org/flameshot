@@ -49,7 +49,6 @@ public:
     void addSaveTask(const QString& path = QString());
     void addPinTask(const QRect& pinWindowGeometry);
     void setInitialSelection(const QRect& selection);
-    void exportCapture(const QPixmap& capture);
 
 private:
     CaptureMode m_mode;
