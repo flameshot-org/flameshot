@@ -157,9 +157,10 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
           widget, &ImgurUploader::uploadOk, [widget, tasks](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & COPY)) {
-                      QApplication::clipboard()->setText(url.toString());
                       SystemNotification().sendMessage(
                         QObject::tr("URL copied to clipboard."));
+
+                      QApplication::clipboard()->setText(url.toString());
                       widget->close();
                   } else {
                       widget->showPostUploadDialog();
