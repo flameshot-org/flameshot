@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/include
+
+Name: QtColorWidgets
+Description: Color wheel widget and dialog for Qt
+Version: @QtColorWidgets_VERSION@
+Libs: -L${libdir} -l@i_target_name@@i_target_output_suffix@
+Cflags: -I${includedir}/@i_project_name@ -I${includedir}

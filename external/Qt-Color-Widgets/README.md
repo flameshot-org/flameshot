@@ -17,6 +17,8 @@ The provided widgets are:
 * ColorPaletteWidget, A widget to use and manage a list of palettes
 * Color2DSlider,      An analog widget used to select 2 color components
 * ColorLineEdit,      A widget to manipulate a string representing a color
+* HarmonyColorWheel,  A ColorWheel which allows defining multiple colors, separated by hue
+* GradientListModel,  A QAbstractListModel used to list gradients (useful for combo boxes, list views and the like)
 
 they are all in the color_widgets namespace.
 
@@ -28,8 +30,14 @@ Using it in a project
 
 For QMake-based projects, include color_widgets.pri in the QMake project file.
 For CMake-based projects, add this as subdirectory, it will be compiled as a
-library and you can link the required targets to ColorWidgets-qt5.
+library and you can link the required targets to ColorWidgets.
 All the required files are in ./src and ./include.
+
+
+Documentation
+-------------
+
+See https://mattbas.gitlab.io/Qt-Color-Widgets/
 
 
 Installing as a Qt Designer/Creator Plugin
@@ -41,7 +49,7 @@ Compile the library and install in
 (Qt SDK)/Tools/QtCreator/bin/designer/
 (Qt SDK)/(Qt Version)/(Toolchain)/plugins/designer
 
-cd build && cmake .. && make ColorWidgetsPlugin && make install
+    mkdir build && cd build && cmake .. && make QtColorWidgetsPlugin && make install
 
 
 Latest Version
@@ -49,8 +57,8 @@ Latest Version
 
 The latest version of the sources can be found at the following locations:
 
-* https://github.com/mbasaglia/Qt-Color-Widgets
-* git://github.com/mbasaglia/Qt-Color-Widgets.git
+* https://gitlab.com/mattbas/Qt-Color-Widgets
+* git@gitlab.com:mattbas/Qt-Color-Widgets.git
 
 
 License
@@ -61,4 +69,4 @@ As a special exception, this library can be included in any project under the
 terms of any of the GNU liceses, distributing the whole project under a
 different GNU license, see LICENSE-EXCEPTION for details.
 
-Copyright (C) 2013-2017 Mattia Basaglia <mattia.basaglia@gmail.com>
+Copyright (C) 2013-2020 Mattia Basaglia <dev@dragon.best>
