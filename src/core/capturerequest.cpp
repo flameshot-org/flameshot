@@ -7,6 +7,7 @@
 #include "imguruploader.h"
 #include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
+#include "src/widgets/imguruploaddialog.h"
 #include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
@@ -148,6 +149,12 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
     }
 
     if (m_tasks & UPLOAD) {
+        if (!ConfigHandler().uploadWithoutConfirmation()) {
+            ImgurUploadDialog* dialog = new ImgurUploadDialog();
+            if (dialog->exec() == QDialog::Rejected) {
+                return;
+            }
+        }
         ImgurUploader* widget = new ImgurUploader(capture);
         widget->show();
         widget->activateWindow();

@@ -44,6 +44,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
     initAntialiasingPinZoom();
+    initUploadWithoutConfirmation();
     initUseJpgForClipboard();
     initSaveAfterCopy();
     inituploadHistoryMax();
@@ -68,6 +69,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -528,6 +530,18 @@ void GeneralConf::initAntialiasingPinZoom()
     m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
     connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
+void GeneralConf::initUploadWithoutConfirmation()
+{
+    m_uploadWithoutConfirmation =
+      new QCheckBox(tr("Upload to Imgur without confirmation"), this);
+    m_uploadWithoutConfirmation->setToolTip(
+      tr("Upload to Imgur without confirmation"));
+    m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
+    connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUploadWithoutConfirmation(checked);
     });
 }
 
