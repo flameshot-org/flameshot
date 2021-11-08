@@ -85,8 +85,9 @@ void DBusUtils::selectionTaken(uint id, QByteArray rawImage, QRect selection)
         file.open(stdout, QIODevice::WriteOnly);
 
         QTextStream out(&file);
-        out << selection.width() << " " << selection.height() << " "
-            << selection.x() << " " << selection.y() << "\n";
+        // TODO also make this change in D-Bus refactor branch
+        out << selection.width() << "x" << selection.height() << "+"
+            << selection.x() << "+" << selection.y() << "\n";
         file.close();
         qApp->exit();
     }
