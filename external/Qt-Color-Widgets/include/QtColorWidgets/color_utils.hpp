@@ -44,7 +44,7 @@ QCP_EXPORT inline qreal color_lumaF(const QColor& c)
     return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
 }
 
-QCP_EXPORT QColor color_from_lch(qreal hue, qreal chroma, qreal luma, qreal alpha = 1 );
+QCP_EXPORT QColor color_from_lch(float hue, float chroma, float luma, float alpha = 1 );
 
 QCP_EXPORT inline QColor rainbow_lch(qreal hue)
 {
@@ -72,7 +72,7 @@ QCP_EXPORT inline qreal color_HSL_saturationF(const QColor& col)
 }
 
 
-QCP_EXPORT QColor color_from_hsl(qreal hue, qreal sat, qreal lig, qreal alpha = 1 );
+QCP_EXPORT QColor color_from_hsl(float hue, float sat, float lig, float alpha = 1 );
 
 QCP_EXPORT QColor get_screen_color(const QPoint &global_pos);
 

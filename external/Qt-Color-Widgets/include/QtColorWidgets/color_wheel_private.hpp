@@ -53,7 +53,7 @@ public:
     ColorSpaceEnum color_space = ColorHSV;
     bool rotating_selector = true;
     ShapeEnum selector_shape = ShapeTriangle;
-    QColor (*color_from)(qreal,qreal,qreal,qreal);
+    QColor (*color_from)(float,float,float,float);
     QColor (*rainbow_from_hue)(qreal);
     int max_size = 128;
 
