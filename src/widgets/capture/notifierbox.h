@@ -14,7 +14,7 @@ public:
     explicit NotifierBox(QWidget* parent = nullptr);
 
 protected:
-    virtual void enterEvent(QEvent*) override;
+    virtual void enterEvent(QEnterEvent*) override;
     virtual void paintEvent(QPaintEvent*) override;
 
 signals:

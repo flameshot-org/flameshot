@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QDataStream>
 #include <QScrollArea>
 #include <QWidget>
 

@@ -6,7 +6,6 @@
 #include <QClipboard>
 #include <QDateTime>
 #include <QDesktopServices>
-#include <QDesktopWidget>
 #include <QFileInfo>
 #include <QIcon>
 #include <QLabel>
@@ -24,7 +23,7 @@ HistoryWidget::HistoryWidget(QWidget* parent)
     setWindowIcon(QIcon(":img/app/flameshot.svg"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Latest Uploads"));
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
+    //resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
     m_notification = new NotificationWidget();
 
     QGridLayout* layout = new QGridLayout(this);

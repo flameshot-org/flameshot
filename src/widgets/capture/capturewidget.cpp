@@ -30,7 +30,6 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
 #include <QPaintEvent>

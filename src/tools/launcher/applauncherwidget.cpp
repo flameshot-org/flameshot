@@ -19,6 +19,7 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QTabWidget>
+#include <QRegExp>
 
 namespace {
 

@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QDateTime>
+#include <QIODevice>
 #include <QVector>
 #include <stdexcept>
 
