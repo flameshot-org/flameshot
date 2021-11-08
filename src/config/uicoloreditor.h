@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "color_wheel.hpp"
+#include "QtColorWidgets/color_wheel.hpp"
 #include "src/widgets/capture/capturetoolbutton.h"
 #include <QGroupBox>
 

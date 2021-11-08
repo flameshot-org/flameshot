@@ -81,7 +81,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     // color wheel sigslots
     //   re-emit ColorWheel::colorSelected as SidePanelWidget::colorChanged
     connect(m_colorWheel,
-            &color_widgets::ColorWheel::mouseReleaseOnColor,
+            &color_widgets::ColorWheel::colorSelected,
             this,
             &SidePanelWidget::colorChanged);
 }
