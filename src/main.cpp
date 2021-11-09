@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
+#include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
 
@@ -31,7 +32,6 @@
 #include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
-#include <QSharedMemory>
 #include <desktopinfo.h>
 #endif
 
