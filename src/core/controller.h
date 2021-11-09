@@ -72,8 +72,7 @@ private slots:
     void startFullscreenCapture(const CaptureRequest& req);
     void startVisualCapture(
       const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
-    void startScreenGrab(const CaptureRequest& req,
-                         const int screenNumber = -1);
+    void startScreenGrab(CaptureRequest req, const int screenNumber = -1);
 
 public slots: // TODO move these up
     void handleCaptureTaken(const CaptureRequest& req,

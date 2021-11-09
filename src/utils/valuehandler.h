@@ -205,3 +205,12 @@ class SaveFileExtension : public ValueHandler
     QVariant process(const QVariant& val) override;
     QString expected() override;
 };
+
+class Region : public ValueHandler
+{
+public:
+    bool check(const QVariant& val) override;
+
+private:
+    QVariant process(const QVariant& val) override;
+};

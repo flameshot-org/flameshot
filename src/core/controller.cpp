@@ -299,8 +299,7 @@ void Controller::startVisualCapture(const CaptureRequest& req)
     }
 }
 
-void Controller::startScreenGrab(const CaptureRequest& req,
-                                 const int screenNumber)
+void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 {
     bool ok = true;
     int n = screenNumber;
@@ -312,6 +311,19 @@ void Controller::startScreenGrab(const CaptureRequest& req,
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
         QRect geometry = ScreenGrabber().screenGeometry(n);
+        QRect region = req.initialSelection();
+        if (region.isNull()) {
+            region = ScreenGrabber().screenGeometry(n);
+        } else {
+            QRect screenGeom = ScreenGrabber().screenGeometry(n);
+            screenGeom.moveTopLeft({ 0, 0 });
+            region = region.intersected(screenGeom);
+            p = p.copy(region);
+        }
+        if (req.tasks() & CaptureRequest::PIN) {
+            // change geometry for pin task
+            req.addPinTask(region);
+        }
         exportCapture(p, geometry, req);
     } else {
         handleCaptureFailed();
@@ -554,8 +566,8 @@ void Controller::exportCapture(QPixmap capture,
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         QTextStream(stdout)
-          << selection.width() << " " << selection.height() << " "
-          << selection.x() << " " << selection.y() << "\n";
+          << selection.width() << "x" << selection.height() << "+"
+          << selection.x() << "+" << selection.y() << "\n";
     }
 
     if (tasks & CR::PRINT_RAW) {
@@ -599,8 +611,6 @@ void Controller::exportCapture(QPixmap capture,
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
                       FlameshotDaemon::copyToClipboard(url.toString());
-                      SystemNotification().sendMessage(
-                        QObject::tr("URL copied to clipboard."));
                       widget->close();
                       emit captureTaken(capture, selection);
                   } else {
@@ -627,6 +637,10 @@ void Controller::startFullscreenCapture(const CaptureRequest& req)
 {
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    QRect region = req.initialSelection();
+    if (!region.isNull()) {
+        p = p.copy(region);
+    }
     if (ok) {
         QRect selection; // `flameshot full` does not support --selection
         exportCapture(p, selection, req);

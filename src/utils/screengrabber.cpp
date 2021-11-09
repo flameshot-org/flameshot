@@ -130,14 +130,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     }
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
-    QRect geometry;
-    for (QScreen* const screen : QGuiApplication::screens()) {
-        QRect scrRect = screen->geometry();
-        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
-                       scrRect.y() / screen->devicePixelRatio());
-        geometry = geometry.united(scrRect);
-    }
-
+    QRect geometry = desktopGeometry();
     QPixmap p(QApplication::primaryScreen()->grabWindow(
       QApplication::desktop()->winId(),
       geometry.x(),
@@ -196,4 +189,17 @@ QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
                                          geometry.height());
     }
     return p;
+}
+
+QRect ScreenGrabber::desktopGeometry()
+{
+    QRect geometry;
+
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        QRect scrRect = screen->geometry();
+        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
+                       scrRect.y() / screen->devicePixelRatio());
+        geometry = geometry.united(scrRect);
+    }
+    return geometry;
 }

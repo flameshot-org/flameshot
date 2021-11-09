@@ -50,6 +50,11 @@ CaptureRequest::ExportTask CaptureRequest::tasks() const
     return m_tasks;
 }
 
+QRect CaptureRequest::initialSelection() const
+{
+    return m_initialSelection;
+}
+
 void CaptureRequest::addTask(CaptureRequest::ExportTask task)
 {
     if (task == SAVE) {
@@ -73,6 +78,11 @@ void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 {
     m_tasks |= PIN;
     m_pinWindowGeometry = pinWindowGeometry;
+}
+
+void CaptureRequest::setInitialSelection(const QRect& selection)
+{
+    m_initialSelection = selection;
 }
 
 void CaptureRequest::exportCapture(const QPixmap& capture)
