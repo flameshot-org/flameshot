@@ -38,7 +38,8 @@ protected:
     CaptureTool* m_tool;
 
 signals:
-    void pressedButton(CaptureToolButton*);
+    void pressedButtonLeftClick(CaptureToolButton*);
+    void pressedButtonRightClick(CaptureToolButton*);
 
 private:
     CaptureToolButton(QWidget* parent = nullptr);

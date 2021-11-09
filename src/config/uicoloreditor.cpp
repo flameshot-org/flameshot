@@ -131,11 +131,11 @@ void UIcolorEditor::initButtons()
                                     " mode of the contrast color."));
 
     connect(m_buttonMainColor,
-            &CaptureToolButton::pressedButton,
+            &CaptureToolButton::pressedButtonLeftClick,
             this,
             &UIcolorEditor::changeLastButton);
     connect(m_buttonContrast,
-            &CaptureToolButton::pressedButton,
+            &CaptureToolButton::pressedButtonLeftClick,
             this,
             &UIcolorEditor::changeLastButton);
     // clicking the labels changes the button too

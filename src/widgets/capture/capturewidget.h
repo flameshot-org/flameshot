@@ -26,6 +26,7 @@ class QLabel;
 class QPaintEvent;
 class QResizeEvent;
 class QMouseEvent;
+class QShortcut;
 class QNetworkAccessManager;
 class QNetworkReply;
 class ColorPicker;
@@ -69,6 +70,8 @@ private slots:
 
     void setState(CaptureToolButton* b);
     void handleToolSignal(CaptureTool::Request r);
+    void handleButtonLeftClick(CaptureToolButton* b);
+    void handleButtonRightClick(CaptureToolButton* b);
     void setDrawColor(const QColor& c);
     void onToolSizeChanged(int size);
     void onToolSizeSettled(int size);
@@ -112,6 +115,10 @@ private:
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
+
+    QList<QShortcut*> newShortcut(const QKeySequence& key,
+                                  QWidget* parent,
+                                  const char* slot);
 
     void setToolSize(int size);
 

@@ -23,7 +23,7 @@ signals:
 
 private:
     bool eventFilter(QObject* obj, QEvent* event) override;
-    void paintEvent(QPaintEvent* e);
+    void paintEvent(QPaintEvent* e) override;
     void showEvent(QShowEvent* event) override;
 
     QPoint cursorPos() const;

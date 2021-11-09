@@ -5,9 +5,12 @@
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
+#include <QComboBox>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
+#include <QImageWriter>
+#include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
@@ -40,6 +43,8 @@ GeneralConf::GeneralConf(QWidget* parent)
     initShowStartupLaunchMessage();
     initCopyAndCloseAfterUpload();
     initCopyPathAfterSave();
+    initAntialiasingPinZoom();
+    initUploadWithoutConfirmation();
     initUseJpgForClipboard();
     initSaveAfterCopy();
     inituploadHistoryMax();
@@ -62,7 +67,9 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
+    m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
     m_useJpgForClipboard->setChecked(config.useJpgForClipboard());
+    m_uploadWithoutConfirmation->setChecked(config.uploadWithoutConfirmation());
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
@@ -375,6 +382,31 @@ void GeneralConf::initSaveAfterCopy()
 
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
+
+    QHBoxLayout* extensionLayout = new QHBoxLayout();
+
+    extensionLayout->addWidget(
+      new QLabel(tr("Preferred save file extension:")));
+    m_setSaveAsFileExtension = new QComboBox(this);
+    m_setSaveAsFileExtension->addItem("");
+
+    QStringList imageFormatList;
+    foreach (auto mimeType, QImageWriter::supportedImageFormats())
+        imageFormatList.append(mimeType);
+
+    m_setSaveAsFileExtension->addItems(imageFormatList);
+
+    int currentIndex = m_setSaveAsFileExtension->findText(
+      ConfigHandler().setSaveAsFileExtension());
+    m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
+
+    connect(m_setSaveAsFileExtension,
+            SIGNAL(currentTextChanged(QString)),
+            this,
+            SLOT(setSaveAsFileExtension(QString)));
+
+    extensionLayout->addWidget(m_setSaveAsFileExtension);
+    vboxLayout->addLayout(extensionLayout);
 }
 
 void GeneralConf::historyConfirmationToDelete(bool checked)
@@ -477,6 +509,31 @@ void GeneralConf::initCopyPathAfterSave()
     });
 }
 
+void GeneralConf::initAntialiasingPinZoom()
+{
+    m_antialiasingPinZoom =
+      new QCheckBox(tr("Anti-aliasing image when zoom the pinned image"), this);
+    m_antialiasingPinZoom->setToolTip(
+      tr("After zooming the pinned image, should the image get smoothened or "
+         "stay pixelated"));
+    m_scrollAreaLayout->addWidget(m_antialiasingPinZoom);
+    connect(m_antialiasingPinZoom, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setAntialiasingPinZoom(checked);
+    });
+}
+
+void GeneralConf::initUploadWithoutConfirmation()
+{
+    m_uploadWithoutConfirmation =
+      new QCheckBox(tr("Upload to Imgur without confirmation"), this);
+    m_uploadWithoutConfirmation->setToolTip(
+      tr("Upload to Imgur without confirmation"));
+    m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
+    connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUploadWithoutConfirmation(checked);
+    });
+}
+
 const QString GeneralConf::chooseFolder(const QString pathDefault)
 {
     QString path;
@@ -505,6 +562,11 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
 void GeneralConf::togglePathFixed()
 {
     ConfigHandler().setSavePathFixed(m_screenshotPathFixedCheck->isChecked());
+}
+
+void GeneralConf::setSaveAsFileExtension(QString extension)
+{
+    ConfigHandler().setSaveAsFileExtension(extension);
 }
 
 void GeneralConf::useJpgForClipboardChanged(bool checked)

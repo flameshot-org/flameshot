@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 // Based on Lightscreen areadialog.cpp, Copyright 2017  Christian Kaiser
@@ -293,7 +293,6 @@ void CaptureWidget::initButtons()
 
         switch (t) {
             case CaptureTool::TYPE_UNDO:
-            case CaptureTool::TYPE_IMAGEUPLOADER:
             case CaptureTool::TYPE_REDO:
                 // nothing to do, just skip non-dynamic buttons with existing
                 // hard coded slots
@@ -303,12 +302,12 @@ void CaptureWidget::initButtons()
                 QString shortcut =
                   ConfigHandler().shortcut(QVariant::fromValue(t).toString());
                 if (!shortcut.isNull()) {
-                    QShortcut* key =
-                      new QShortcut(QKeySequence(shortcut), this);
-                    CaptureWidget* captureWidget = this;
-                    connect(key, &QShortcut::activated, this, [=]() {
-                        captureWidget->setState(b);
-                    });
+                    auto shortcuts = newShortcut(shortcut, this, nullptr);
+                    for (auto* shortcut : shortcuts) {
+                        connect(shortcut, &QShortcut::activated, this, [=]() {
+                            setState(b);
+                        });
+                    }
                 }
                 break;
         }
@@ -322,13 +321,45 @@ void CaptureWidget::initButtons()
 
         if (visibleButtonTypes.contains(t)) {
             connect(b,
-                    &CaptureToolButton::pressedButton,
+                    &CaptureToolButton::pressedButtonLeftClick,
                     this,
-                    &CaptureWidget::setState);
+                    &CaptureWidget::handleButtonLeftClick);
+
+            if (b->tool()->isSelectable()) {
+                connect(b,
+                        &CaptureToolButton::pressedButtonRightClick,
+                        this,
+                        &CaptureWidget::handleButtonRightClick);
+            }
+
             vectorButtons << b;
         }
     }
     m_buttonHandler->setButtons(vectorButtons);
+}
+
+void CaptureWidget::handleButtonRightClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    // if button already selected, do not deselect it on right click
+    if (!m_activeButton || m_activeButton != b) {
+        setState(b);
+    }
+    if (!m_panel->isVisible()) {
+        m_panel->show();
+    }
+}
+
+void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
+{
+    if (!b) {
+        return;
+    }
+
+    setState(b);
 }
 
 void CaptureWidget::initHelpMessage()
@@ -478,7 +509,7 @@ void CaptureWidget::showColorPicker(const QPoint& pos)
 {
     // Try to select new object if current pos out of active object
     auto toolItem = activeToolObject();
-    if (!toolItem || toolItem && !toolItem->boundingRect().contains(pos)) {
+    if (!toolItem || (toolItem && !toolItem->boundingRect().contains(pos))) {
         selectToolItemAtPos(pos);
     }
 
@@ -1259,57 +1290,57 @@ void CaptureWidget::removeToolObject(int index)
 
 void CaptureWidget::initShortcuts()
 {
-    new QShortcut(
+    newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_UNDO")), this, SLOT(undo()));
 
-    new QShortcut(
+    newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_REDO")), this, SLOT(redo()));
 
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
-                  this,
-                  SLOT(togglePanel()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
+                this,
+                SLOT(togglePanel()));
 
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
-                  m_selection,
-                  SLOT(resizeLeft()));
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
-                  m_selection,
-                  SLOT(resizeRight()));
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
-                  m_selection,
-                  SLOT(resizeUp()));
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
-                  m_selection,
-                  SLOT(resizeDown()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
+                m_selection,
+                SLOT(resizeLeft()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
+                m_selection,
+                SLOT(resizeRight()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
+                m_selection,
+                SLOT(resizeUp()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
+                m_selection,
+                SLOT(resizeDown()));
 
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
-                  m_selection,
-                  SLOT(moveLeft()));
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
-                  m_selection,
-                  SLOT(moveRight()));
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
-                  m_selection,
-                  SLOT(moveUp()));
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
-                  m_selection,
-                  SLOT(moveDown()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
+                m_selection,
+                SLOT(moveLeft()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
+                m_selection,
+                SLOT(moveRight()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
+                m_selection,
+                SLOT(moveUp()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
+                m_selection,
+                SLOT(moveDown()));
 
-    new QShortcut(
+    newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
       SLOT(deleteCurrentTool()));
 
-    new QShortcut(
+    newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_COMMIT_CURRENT_TOOL")),
       this,
       SLOT(commitCurrentTool()));
 
-    new QShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SELECT_ALL")),
-                  this,
-                  SLOT(selectAll()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_SELECT_ALL")),
+                this,
+                SLOT(selectAll()));
 
-    new QShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
+    newShortcut(Qt::Key_Escape, this, SLOT(deleteToolWidgetOrClose()));
 }
 
 void CaptureWidget::deleteCurrentTool()
@@ -1495,6 +1526,26 @@ void CaptureWidget::makeChild(QWidget* w)
 {
     w->setParent(this);
     w->installEventFilter(m_eventFilter);
+}
+
+/**
+ * @brief Wrapper around `new QShortcut`, properly handling Enter/Return.
+ */
+QList<QShortcut*> CaptureWidget::newShortcut(const QKeySequence& key,
+                                             QWidget* parent,
+                                             const char* slot)
+{
+    QList<QShortcut*> shortcuts;
+    QString strKey = key.toString();
+    if (strKey.contains("Enter") || strKey.contains("Return")) {
+        strKey.replace("Enter", "Return");
+        shortcuts << new QShortcut(strKey, parent, slot);
+        strKey.replace("Return", "Enter");
+        shortcuts << new QShortcut(strKey, parent, slot);
+    } else {
+        shortcuts << new QShortcut(key, parent, slot);
+    }
+    return shortcuts;
 }
 
 void CaptureWidget::togglePanel()

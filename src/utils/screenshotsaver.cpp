@@ -83,8 +83,11 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
                                        const QString& path,
                                        const QString& messagePrefix)
 {
-    QString completePath = FileNameHandler().properScreenshotPath(path);
-    bool ok = capture.save(completePath);
+    QString completePath = FileNameHandler().properScreenshotPath(
+      path, ConfigHandler().setSaveAsFileExtension());
+    QFile file{ completePath };
+    file.open(QIODevice::WriteOnly);
+    bool ok = capture.save(&file);
     QString saveMessage = messagePrefix;
     QString notificationPath = completePath;
     if (!saveMessage.isEmpty()) {
@@ -95,6 +98,9 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
         saveMessage += QObject::tr("Capture saved as ") + completePath;
     } else {
         saveMessage += QObject::tr("Error trying to save as ") + completePath;
+        if (file.error() != QFile::NoError) {
+            saveMessage += ": " + file.errorString();
+        }
         notificationPath = "";
     }
 
@@ -119,11 +125,14 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
         mimeTypeList.append(mimeType);
     dialog.setMimeTypeFilters(mimeTypeList);
 
-    QString suffix = ConfigHandler().saveAsFileExtension();
+    QString suffix = ConfigHandler().setSaveAsFileExtension();
+    if (suffix.isEmpty()) {
+        suffix = "png";
+    }
     QString defaultMimeType =
-      QMimeDatabase().mimeTypeForFile("image" + suffix).name();
+      QMimeDatabase().mimeTypeForFile("image." + suffix).name();
     dialog.selectMimeTypeFilter(defaultMimeType);
-
+    dialog.setDefaultSuffix(suffix);
     if (dialog.exec() == QDialog::Accepted) {
         return dialog.selectedFiles().first();
     } else {
@@ -141,7 +150,8 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         defaultSavePath =
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
-    QString savePath = FileNameHandler().properScreenshotPath(defaultSavePath);
+    QString savePath = FileNameHandler().properScreenshotPath(
+      defaultSavePath, ConfigHandler().setSaveAsFileExtension());
 #if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
@@ -162,7 +172,10 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         return ok;
     }
 
-    ok = capture.save(savePath);
+    QFile file{ savePath };
+    file.open(QIODevice::WriteOnly);
+
+    ok = capture.save(&file);
 
     if (ok) {
         QString pathNoFile =
@@ -180,6 +193,11 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 
     } else {
         QString msg = QObject::tr("Error trying to save as ") + savePath;
+
+        if (file.error() != QFile::NoError) {
+            msg += ": " + file.errorString();
+        }
+
         QMessageBox saveErrBox(
           QMessageBox::Warning, QObject::tr("Save Error"), msg);
         saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));

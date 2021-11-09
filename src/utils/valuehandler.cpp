@@ -3,6 +3,8 @@
 #include "confighandler.h"
 #include <QColor>
 #include <QFileInfo>
+#include <QImageWriter>
+#include <QKeySequence>
 #include <QStandardPaths>
 #include <QVariant>
 
@@ -151,7 +153,7 @@ bool BoundedInt::check(const QVariant& val)
     QString str = val.toString();
     bool conversionOk;
     int num = str.toInt(&conversionOk);
-    return conversionOk && (m_max < m_min || num <= m_max);
+    return conversionOk && m_min <= num && num <= m_max;
 }
 
 QVariant BoundedInt::fallback()
@@ -212,6 +214,24 @@ QVariant KeySequence::fallback()
 QString KeySequence::expected()
 {
     return QStringLiteral("keyboard shortcut");
+}
+
+QVariant KeySequence::representation(const QVariant& val)
+{
+    QString str(val.toString());
+    if (QKeySequence(str) == QKeySequence(Qt::Key_Return)) {
+        return QStringLiteral("Enter");
+    }
+    return str;
+}
+
+QVariant KeySequence::process(const QVariant& val)
+{
+    QString str(val.toString());
+    if (str == "Enter") {
+        return QKeySequence(Qt::Key_Return).toString();
+    }
+    return str;
 }
 
 // EXISTING DIR
@@ -411,4 +431,41 @@ QVariant UserColors::fallback()
 QString UserColors::expected()
 {
     return QStringLiteral("list of colors separated by comma");
+}
+
+// SET SAVE FILE AS EXTENSION
+
+bool SaveFileExtension::check(const QVariant& val)
+{
+    if (!val.canConvert(QVariant::String) || val.toString().isEmpty())
+        return false;
+
+    QString extension = val.toString();
+
+    if (extension.startsWith("."))
+        extension.remove(0, 1);
+
+    QStringList imageFormatList;
+    foreach (auto imageFormat, QImageWriter::supportedImageFormats())
+        imageFormatList.append(imageFormat);
+
+    if (!imageFormatList.contains(extension))
+        return false;
+
+    return true;
+}
+
+QVariant SaveFileExtension::process(const QVariant& val)
+{
+    QString extension = val.toString();
+
+    if (extension.startsWith("."))
+        extension.remove(0, 1);
+
+    return QVariant::fromValue(extension);
+}
+
+QString SaveFileExtension::expected()
+{
+    return QStringLiteral("supported image extension");
 }

@@ -34,6 +34,9 @@ public:
                    const QVariant& data = QVariant(),
                    ExportTask tasks = NO_TASK);
 
+    void setStaticID(uint id);
+
+    uint id() const;
     uint delay() const;
     QString path() const;
     QVariant data() const;
@@ -44,6 +47,7 @@ public:
     void removeTask(ExportTask task);
     void addSaveTask(const QString& path = QString());
     void addPinTask(const QRect& pinWindowGeometry);
+    void exportCapture(const QPixmap& capture);
 
 private:
     CaptureMode m_mode;
@@ -51,6 +55,7 @@ private:
     QString m_path;
     ExportTask m_tasks;
     QVariant m_data;
+    QRect m_pinWindowGeometry;
 
     CaptureRequest() {}
 };

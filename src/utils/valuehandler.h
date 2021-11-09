@@ -153,9 +153,12 @@ public:
     bool check(const QVariant& val) override;
     QVariant fallback() override;
     QString expected() override;
+    QVariant representation(const QVariant& val) override;
 
 private:
     QKeySequence m_fallback;
+
+    QVariant process(const QVariant& val) override;
 };
 
 class ExistingDir : public ValueHandler
@@ -193,5 +196,12 @@ class UserColors : public ValueHandler
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
+    QString expected() override;
+};
+
+class SaveFileExtension : public ValueHandler
+{
+    bool check(const QVariant& val) override;
+    QVariant process(const QVariant& val) override;
     QString expected() override;
 };
