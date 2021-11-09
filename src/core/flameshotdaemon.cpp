@@ -12,8 +12,6 @@
 #include <QPixmap>
 #include <QRect>
 
-// TODO handle if daemon can't be contacted via dbus
-
 /**
  * @brief A way of accessing the flameshot daemon both from the daemon itself,
  * and from subcommands.
@@ -37,6 +35,7 @@
  * done only in the daemon process).
  *
  * @note The daemon will be automatically launched where necessary, via D-Bus.
+ * This applies only on Linux.
  */
 FlameshotDaemon::FlameshotDaemon()
   : m_persist(false)
@@ -63,8 +62,6 @@ FlameshotDaemon::FlameshotDaemon()
             this,
             [this]() { m_persist = !ConfigHandler().autoCloseIdleDaemon(); });
 #endif
-    // TODO on Mac?, always persist so hotkeys can be used
-    // TODO consider which config options could influence this
 }
 
 void FlameshotDaemon::start()
@@ -125,7 +122,7 @@ void FlameshotDaemon::copyToClipboard(QString text, QString notification)
 
 void FlameshotDaemon::enableTrayIcon(bool enable)
 {
-#if !defined(Q_OS_WIN) // TODO maybe Mac too?
+#if !defined(Q_OS_WIN)
     if (!instance()) {
         return;
     }
@@ -137,8 +134,22 @@ void FlameshotDaemon::enableTrayIcon(bool enable)
 #endif
 }
 
+/**
+ * @brief Is this instance of flameshot hosting any windows as a daemon?
+ */
+bool FlameshotDaemon::isThisInstanceHostingWidgets()
+{
+    return instance() && !instance()->m_widgets.isEmpty();
+}
+
 FlameshotDaemon* FlameshotDaemon::instance()
 {
+    // Because we don't use DBus on MacOS, each instance of flameshot is its own
+    // mini-daemon, responsible for hosting its own persistent widgets (e.g.
+    // pins).
+#if defined(Q_OS_MACOS)
+    start();
+#endif
     return m_instance;
 }
 
@@ -148,7 +159,7 @@ FlameshotDaemon* FlameshotDaemon::instance()
  */
 void FlameshotDaemon::quitIfIdle()
 {
-    if (m_persist) {
+    if (m_persist && !instance()) {
         return;
     }
     if (!m_hostingClipboard && m_widgets.isEmpty()) {

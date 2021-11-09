@@ -52,9 +52,13 @@ void requestCaptureAndWait(const CaptureRequest& req)
 {
     Controller* controller = Controller::getInstance();
     controller->requestCapture(req);
-    QObject::connect(controller,
-                     &Controller::captureTaken,
-                     [&](QPixmap, QRect) { qApp->exit(0); });
+    QObject::connect(
+      controller, &Controller::captureTaken, [&](QPixmap, QRect) {
+          // Only useful on MacOS because each instance hosts its own widgets
+          if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
+              qApp->exit(0);
+          }
+      });
     QObject::connect(controller, &Controller::captureFailed, []() {
         // TODO use abstract logger
         // TODO do we have to do more stuff here?
