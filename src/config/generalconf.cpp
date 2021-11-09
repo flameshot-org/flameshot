@@ -49,6 +49,10 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSaveAfterCopy();
     inituploadHistoryMax();
     initUndoLimit();
+    initAllowMultipleGuiInstances();
+#if !defined(Q_OS_WIN)
+    initAutoCloseIdleDaemon();
+#endif
 
     m_layout->addStretch();
 
@@ -73,6 +77,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
+    m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
+    m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
@@ -110,6 +116,16 @@ void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
     Controller::getInstance()->setCheckForUpdatesEnabled(checked);
+}
+
+void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
+{
+    ConfigHandler().setAllowMultipleGuiInstances(checked);
+}
+
+void GeneralConf::autoCloseIdleDaemonChanged(bool checked)
+{
+    ConfigHandler().setAutoCloseIdleDaemon(checked);
 }
 
 void GeneralConf::autostartChanged(bool checked)
@@ -301,6 +317,32 @@ void GeneralConf::initCheckForUpdates()
             &QCheckBox::clicked,
             this,
             &GeneralConf::checkForUpdatesChanged);
+}
+
+void GeneralConf::initAllowMultipleGuiInstances()
+{
+    m_allowMultipleGuiInstances = new QCheckBox(
+      tr("Allow multiple flameshot GUI instances simultaneously"), this);
+    m_allowMultipleGuiInstances->setToolTip(tr(
+      "This allows you to take screenshots of flameshot itself for example."));
+    m_scrollAreaLayout->addWidget(m_allowMultipleGuiInstances);
+    connect(m_allowMultipleGuiInstances,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::allowMultipleGuiInstancesChanged);
+}
+
+void GeneralConf::initAutoCloseIdleDaemon()
+{
+    m_autoCloseIdleDaemon = new QCheckBox(
+      tr("Automatically close daemon when it is not needed"), this);
+    m_autoCloseIdleDaemon->setToolTip(
+      tr("Automatically close daemon when it is not needed"));
+    m_scrollAreaLayout->addWidget(m_autoCloseIdleDaemon);
+    connect(m_autoCloseIdleDaemon,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::autoCloseIdleDaemonChanged);
 }
 
 void GeneralConf::initAutostart()
