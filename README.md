@@ -69,6 +69,8 @@
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
   - [Packages from Repository](#packages-from-repository)
+  - [MacOS](#macos)
+  - [Windows](#windows)
 - [Compilation](#compilation)
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
@@ -294,8 +296,6 @@ Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead o
 
 - If you are using Gnome you need to install the [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/) extension in order to see the system tray icon.
 
-- If you are using Gnome41 or later you need to install the [Unsafe Mode Extesnsion](https://extensions.gnome.org/extension/4517/unsafe-mode/). This may be changed in the future but as of now Flameshot using a private DBus interface. See [this issue](https://github.com/flameshot-org/flameshot/issues/1910) for more details
-
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard. Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture to a file. Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
 - Flameshot works best with a desktop environment that includes D-Bus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc).
@@ -330,11 +330,16 @@ There are packages available in the repository of some Linux distributions:
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
 
-There are also options for installing on macOS:
+### MacOS
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
+
+### Windows
+
+- [Chocolatey](https://chocolatey.org/packages/flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
@@ -396,7 +401,7 @@ apt install git openssl ca-certificates
 
 ```shell
 # Compile-time
-dnf install gcc-c++ cmake qt5-devel qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ cmake qt5-qtbase-devel qt5-linguist
 
 # Run-time
 dnf install qt5-qtbase qt5-qtsvg-devel

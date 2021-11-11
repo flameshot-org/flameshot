@@ -93,6 +93,9 @@ public:
                          QString)
     CONFIG_GETTER_SETTER(antialiasingPinZoom, setAntialiasingPinZoom, bool)
     CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
+    CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
+                         setUploadWithoutConfirmation,
+                         bool)
     CONFIG_GETTER_SETTER(ignoreUpdateToVersion,
                          setIgnoreUpdateToVersion,
                          QString)
