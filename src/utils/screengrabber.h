@@ -13,6 +13,7 @@ public:
     explicit ScreenGrabber(QObject* parent = nullptr);
     QPixmap grabEntireDesktop(bool& ok);
     QPixmap grabScreen(int screenNumber, bool& ok);
+    void freeDesktopPortal(bool& ok, QPixmap& res);
 
 private:
     DesktopInfo m_info;
