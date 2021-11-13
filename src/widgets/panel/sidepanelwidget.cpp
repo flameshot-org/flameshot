@@ -55,9 +55,11 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_layout = new QVBoxLayout(this);
 
     QFormLayout* colorForm = new QFormLayout();
+    colorForm->setRowWrapPolicy(QFormLayout::WrapLongRows);
     m_thicknessSlider = new QSlider(Qt::Horizontal);
     m_thicknessSlider->setRange(1, 100);
     m_thicknessSlider->setValue(m_thickness);
+    m_thicknessSlider->setMinimumWidth(100);
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     colorForm->addRow(tr("Active thickness:"), m_thicknessSlider);
