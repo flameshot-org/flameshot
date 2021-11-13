@@ -23,9 +23,9 @@ QString UndoTool::name() const
     return tr("Undo");
 }
 
-ToolType UndoTool::nameID() const
+CaptureTool::Type UndoTool::type() const
 {
-    return ToolType::UNDO;
+    return CaptureTool::TYPE_UNDO;
 }
 
 QString UndoTool::description() const
@@ -38,7 +38,7 @@ CaptureTool* UndoTool::copy(QObject* parent)
     return new UndoTool(parent);
 }
 
-void UndoTool::pressed(const CaptureContext& context)
+void UndoTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
     emit requestAction(REQ_UNDO_MODIFICATION);

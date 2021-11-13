@@ -22,9 +22,8 @@ signals:
     void textUpdated(const QString& s);
 
 public slots:
-    void updateFont(const QFont& f);
     void setTextColor(const QColor& c);
-    void setFontPointSize(qreal s);
+    void setAlignment(Qt::AlignmentFlag alignment);
 
 private slots:
     void emitTextUpdated();

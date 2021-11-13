@@ -37,9 +37,9 @@ QString SizeDecreaseTool::name() const
     return tr("Decrease Tool Size");
 }
 
-ToolType SizeDecreaseTool::nameID() const
+CaptureTool::Type SizeDecreaseTool::type() const
 {
-    return ToolType::SIZEDECREASE;
+    return CaptureTool::TYPE_SIZEDECREASE;
 }
 
 QString SizeDecreaseTool::description() const
@@ -52,7 +52,7 @@ CaptureTool* SizeDecreaseTool::copy(QObject* parent)
     return new SizeDecreaseTool(parent);
 }
 
-void SizeDecreaseTool::pressed(const CaptureContext& context)
+void SizeDecreaseTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
     emit requestAction(REQ_DECREASE_TOOL_SIZE);

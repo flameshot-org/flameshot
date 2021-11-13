@@ -18,9 +18,9 @@ QString PencilTool::name() const
     return tr("Pencil");
 }
 
-ToolType PencilTool::nameID() const
+CaptureTool::Type PencilTool::type() const
 {
-    return ToolType::PENCIL;
+    return CaptureTool::TYPE_PENCIL;
 }
 
 QString PencilTool::description() const
@@ -38,27 +38,27 @@ CaptureTool* PencilTool::copy(QObject* parent)
 void PencilTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(pixmap)
-    painter.setPen(QPen(m_color, thickness()));
+    painter.setPen(QPen(m_color, size()));
     painter.drawPolyline(m_points.data(), m_points.size());
 }
 
 void PencilTool::paintMousePreview(QPainter& painter,
                                    const CaptureContext& context)
 {
-    painter.setPen(QPen(context.color, context.thickness + 2));
+    painter.setPen(QPen(context.color, context.toolSize + 2));
     painter.drawLine(context.mousePos, context.mousePos);
 }
 
 void PencilTool::drawStart(const CaptureContext& context)
 {
     m_color = context.color;
-    thicknessChanged(context.thickness);
+    onSizeChanged(context.toolSize);
     m_points.append(context.mousePos);
     m_pathArea.setTopLeft(context.mousePos);
     m_pathArea.setBottomRight(context.mousePos);
 }
 
-void PencilTool::pressed(const CaptureContext& context)
+void PencilTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

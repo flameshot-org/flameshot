@@ -2,7 +2,7 @@ name: Packaging(Linux)
 
 on:
   push:
-    branches: 
+    branches:
       - master
     paths-ignore:
       - 'README.md'
@@ -37,17 +37,35 @@ jobs:
               os: debian,
               symbol: buster,
               arch: amd64
-            }          
+            }
           - {
               name: debian-10,
               os: debian,
               symbol: buster,
               arch: arm64
-            }       
+            }
           - {
               name: debian-10,
               os: debian,
               symbol: buster,
+              arch: armhf
+            }
+          - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
+              arch: amd64
+            }
+          - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
+              arch: arm64
+            }
+          - {
+              name: debian-11,
+              os: debian,
+              symbol: bullseye,
               arch: armhf
             }
           - {
@@ -57,7 +75,7 @@ jobs:
               arch: amd64
             }
     steps:
-      - name: Enable Docker Experimental Features 
+      - name: Enable Docker Experimental Features
         run: |
           echo $'{\n  "experimental": true\n}' | sudo tee /etc/docker/daemon.json
           mkdir -p ~/.docker
@@ -98,7 +116,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -286,12 +304,6 @@ jobs:
       matrix:
         dist:
           - {
-              name: fedora-32,
-              os: fedora,
-              symbol: 32,
-              arch: x86_64
-            }
-          - {
               name: fedora-33,
               os: fedora,
               symbol: 33,
@@ -319,7 +331,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -433,7 +445,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -479,7 +491,7 @@ jobs:
             openssl \
             ca-certificates
       - name: Get go-appimage tool
-      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution, 
+      # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
       # Will try new tool https://github.com/probonopd/go-appimage written in golang by probonopd.
         run: |
@@ -490,12 +502,11 @@ jobs:
           APPIMAGETOOL_ARCH: x86_64
       - name: Packaging appimage
         run: |
-          sed  -i 's|Exec=/usr/bin/flameshot|Exec=flameshot|g' data/desktopEntry/package/org.flameshot.Flameshot.desktop
           APPIMAGE_DST_PATH=$GITHUB_WORKSPACE/${PRODUCT}.AppDir
           mkdir -p ${APPIMAGE_DST_PATH}
 
           cd $GITHUB_WORKSPACE
-          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr
+          cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=/usr -DUSE_LAUNCHER_ABSOLUTE_PATH:BOOL=OFF
           make -j$(nproc) DESTDIR=${APPIMAGE_DST_PATH} install
 
           $GITHUB_WORKSPACE/appimagetool -s deploy ${APPIMAGE_DST_PATH}/usr/share/applications/org.flameshot.Flameshot.desktop
@@ -610,7 +621,7 @@ jobs:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
-        with: 
+        with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
@@ -633,6 +644,8 @@ jobs:
       - name: Packaging snap
         uses: snapcore/action-build@v1
         id: snapcraft
+        with: 
+          snapcraft-args: --enable-experimental-extensions
       - name: Rename snap name
         shell: bash
         run: |

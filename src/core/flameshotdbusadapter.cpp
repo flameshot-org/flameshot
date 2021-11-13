@@ -28,52 +28,15 @@ FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
 
 FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
 
-void FlameshotDBusAdapter::graphicCapture(QString path, int delay, uint id)
+void FlameshotDBusAdapter::requestCapture(const QByteArray& requestData)
 {
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
-    //    if (toClipboard) {
-    //        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-    //    }
-    req.setStaticID(id);
-    Controller::getInstance()->requestCapture(req);
-}
-
-void FlameshotDBusAdapter::fullScreen(QString path,
-                                      bool toClipboard,
-                                      int delay,
-                                      uint id)
-{
-    CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, path);
-    if (toClipboard) {
-        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-    }
-    if (!path.isEmpty()) {
-        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-    }
-    req.setStaticID(id);
+    CaptureRequest req = CaptureRequest::deserialize(requestData);
     Controller::getInstance()->requestCapture(req);
 }
 
 void FlameshotDBusAdapter::openLauncher()
 {
     Controller::getInstance()->openLauncherWindow();
-}
-
-void FlameshotDBusAdapter::captureScreen(int number,
-                                         QString path,
-                                         bool toClipboard,
-                                         int delay,
-                                         uint id)
-{
-    CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, path, number);
-    if (toClipboard) {
-        req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
-    }
-    if (!path.isEmpty()) {
-        req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-    }
-    req.setStaticID(id);
-    Controller::getInstance()->requestCapture(req);
 }
 
 void FlameshotDBusAdapter::openConfig()
@@ -101,7 +64,7 @@ void FlameshotDBusAdapter::autostartEnabled(bool enabled)
 
 void FlameshotDBusAdapter::handleCaptureTaken(uint id,
                                               const QPixmap& p,
-                                              QRect selection)
+                                              const QRect& selection)
 {
     QByteArray byteArray;
     QBuffer buffer(&byteArray);

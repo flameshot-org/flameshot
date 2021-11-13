@@ -35,6 +35,7 @@
 #include <QOperatingSystemVersion>
 #include <QSystemTrayIcon>
 #include <QThread>
+#include <QVersionNumber>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -50,7 +51,6 @@
 
 Controller::Controller()
   : m_captureWindow(nullptr)
-  , m_history(nullptr)
   , m_trayIcon(nullptr)
   , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
@@ -63,12 +63,9 @@ Controller::Controller()
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
     qApp->setQuitOnLastWindowClosed(false);
 
-    // set default shortcusts if not set yet
-    ConfigHandler().setShortcutsDefault();
-
     // init tray icon
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if (!ConfigHandler().disabledTrayIconValue()) {
+    if (!ConfigHandler().disabledTrayIcon()) {
         enableTrayIcon();
     }
 #elif defined(Q_OS_WIN)
@@ -103,7 +100,7 @@ Controller::Controller()
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
-                     [&]() { this->showRecentScreenshots(); });
+                     [&]() { this->showRecentUploads(); });
 #endif
 
     if (ConfigHandler().checkForUpdates()) {
@@ -113,7 +110,6 @@ Controller::Controller()
 
 Controller::~Controller()
 {
-    delete m_history;
     delete m_trayIconMenu;
 }
 
@@ -133,11 +129,18 @@ void Controller::enableExports()
 
 void Controller::setCheckForUpdatesEnabled(const bool enabled)
 {
-    m_appUpdates->setVisible(enabled);
-    m_appUpdates->setEnabled(enabled);
+    if (m_appUpdates != nullptr) {
+        m_appUpdates->setVisible(enabled);
+        m_appUpdates->setEnabled(enabled);
+    }
     if (enabled) {
         getLatestAvailableVersion();
     }
+}
+
+QMap<uint, CaptureRequest>& Controller::requests()
+{
+    return m_requestMap;
 }
 
 void Controller::getLatestAvailableVersion()
@@ -170,29 +173,12 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         QJsonObject json = response.object();
         m_appLatestVersion = json["tag_name"].toString().replace("v", "");
 
-        // Transform strings version for correct comparison
-        QStringList appLatestVersion =
-          m_appLatestVersion.replace("v", "").split(".");
-        QStringList currentVersion =
-          QStringLiteral(APP_VERSION).replace("v", "").split(".");
-        // transform versions to the string which can be compared correctly,
-        // example: versions "0.8.5.9" and "0.8.5.10" are transformed into:
-        // "0000.0008.0005.0009" and "0000.0008.0005.0010"
-        // For string comparison you'll get:
-        // "0.8.5.9" < "0.8.5.10" INCORRECT (lower version is bigger)
-        // "0000.0008.0005.0009" > "0000.0008.0005.0010" CORRECT
-        std::transform(
-          appLatestVersion.begin(),
-          appLatestVersion.end(),
-          appLatestVersion.begin(),
-          [](QString c) -> QString { return c = ("0000" + c).right(4); });
-        std::transform(
-          currentVersion.begin(),
-          currentVersion.end(),
-          currentVersion.begin(),
-          [](QString c) -> QString { return c = ("0000" + c).right(4); });
+        QVersionNumber appLatestVersion =
+          QVersionNumber::fromString(m_appLatestVersion);
+        QVersionNumber currentVersion = QVersionNumber::fromString(
+          QStringLiteral(APP_VERSION).replace("v", ""));
 
-        if (currentVersion.join(".").compare(appLatestVersion.join(".")) < 0) {
+        if (currentVersion < appLatestVersion) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
@@ -342,8 +328,21 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
     }
     QPixmap p(ScreenGrabber().grabScreen(n, ok));
     if (ok) {
-        QRect selection; // `flameshot screen` does not support --selection
-        emit captureTaken(id, p, selection);
+        CaptureRequest& req = *requests().find(id);
+        QRect region = req.initialSelection();
+        if (region.isNull()) {
+            region = ScreenGrabber().screenGeometry(n);
+        } else {
+            QRect screenGeom = ScreenGrabber().screenGeometry(n);
+            screenGeom.moveTopLeft({ 0, 0 });
+            region = region.intersected(screenGeom);
+            p = p.copy(region);
+        }
+        if (req.tasks() & CaptureRequest::PIN) {
+            // change geometry for pin task
+            req.addPinTask(region);
+        }
+        emit captureTaken(id, p, region);
     } else {
         emit captureFailed(id);
     }
@@ -433,8 +432,7 @@ void Controller::enableTrayIcon()
 
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
-    connect(
-      recentAction, SIGNAL(triggered()), this, SLOT(showRecentScreenshots()));
+    connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentUploads()));
 
     // generate menu
     m_trayIconMenu->addAction(captureAction);
@@ -540,25 +538,20 @@ void Controller::updateConfigComponents()
     }
 }
 
-void Controller::updateRecentScreenshots()
+void Controller::showRecentUploads()
 {
-    if (nullptr != m_history) {
-        if (m_history->isVisible()) {
-            m_history->loadHistory();
-        }
+    static HistoryWidget* historyWidget = nullptr;
+    if (nullptr == historyWidget) {
+        historyWidget = new HistoryWidget();
+        connect(historyWidget, &QObject::destroyed, this, []() {
+            historyWidget = nullptr;
+        });
     }
-}
-
-void Controller::showRecentScreenshots()
-{
-    if (nullptr == m_history) {
-        m_history = new HistoryWidget();
-    }
-    m_history->loadHistory();
-    m_history->show();
+    historyWidget->loadHistory();
+    historyWidget->show();
 #if defined(Q_OS_MACOS)
-    m_history->activateWindow();
-    m_history->raise();
+    historyWidget->activateWindow();
+    historyWidget->raise();
 #endif
 }
 
@@ -571,15 +564,20 @@ void Controller::startFullscreenCapture(const uint id)
 {
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    CaptureRequest req(*requests().find(id));
+    QRect region = req.initialSelection();
+    if (!region.isNull()) {
+        p = p.copy(region);
+    }
     if (ok) {
-        QRect selection; // `flameshot full` does not support --selection
-        emit captureTaken(id, p, selection);
+        // selection parameter is unused here
+        emit captureTaken(id, p, {});
     } else {
         emit captureFailed(id);
     }
 }
 
-void Controller::handleCaptureTaken(uint id, QPixmap p, QRect selection)
+void Controller::handleCaptureTaken(uint id, QPixmap p)
 {
     auto it = m_requestMap.find(id);
     if (it != m_requestMap.end()) {

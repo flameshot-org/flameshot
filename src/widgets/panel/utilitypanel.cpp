@@ -137,7 +137,7 @@ void UtilityPanel::initInternalPanel()
     connect(m_captureTools,
             SIGNAL(currentRowChanged(int)),
             this,
-            SLOT(slotCaptureToolsCurrentRowChanged(int)));
+            SLOT(onCurrentRowChanged(int)));
 
     QHBoxLayout* layersButtons = new QHBoxLayout();
     m_layersLayout->addLayout(layersButtons);
@@ -180,10 +180,8 @@ void UtilityPanel::fillCaptureTools(
 
 void UtilityPanel::setActiveLayer(int index)
 {
-    index++;
-    if (index >= 0 && index < m_captureTools->count()) {
-        m_captureTools->setCurrentRow(index);
-    }
+    Q_ASSERT(index >= -1);
+    m_captureTools->setCurrentRow(index + 1);
 }
 
 int UtilityPanel::activeLayerIndex()
@@ -192,14 +190,14 @@ int UtilityPanel::activeLayerIndex()
                                              : -1;
 }
 
-void UtilityPanel::slotCaptureToolsCurrentRowChanged(int currentRow)
+void UtilityPanel::onCurrentRowChanged(int currentRow)
 {
     if (currentRow > 0) {
         m_buttonDelete->setDisabled(false);
     } else {
         m_buttonDelete->setDisabled(true);
     }
-    emit layerChanged(currentRow);
+    emit layerChanged(activeLayerIndex());
 }
 
 void UtilityPanel::slotButtonDelete(bool clicked)
@@ -215,4 +213,9 @@ void UtilityPanel::slotButtonDelete(bool clicked)
         currentRow = 0;
     }
     m_captureTools->setCurrentRow(currentRow);
+}
+
+bool UtilityPanel::isVisible() const
+{
+    return !m_internalPanel->isHidden();
 }

@@ -9,7 +9,7 @@ First read the FAQ: https://flameshot.org/guide/faq/
 
 If you don't know how to get some of the following information from your
 computer, visit:
-https://flameshot.org/issue-reporting/
+https://flameshot.org/guide/issue-reporting/
 
 **Note** that if you don't provide the requested information, the bugreport most
 probably will considered as invalid and will be closed unless you provide

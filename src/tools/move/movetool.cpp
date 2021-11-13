@@ -23,9 +23,9 @@ QString MoveTool::name() const
     return tr("Move");
 }
 
-ToolType MoveTool::nameID() const
+CaptureTool::Type MoveTool::type() const
 {
-    return ToolType::MOVE;
+    return CaptureTool::TYPE_MOVESELECTION;
 }
 
 QString MoveTool::description() const
@@ -38,10 +38,9 @@ CaptureTool* MoveTool::copy(QObject* parent)
     return new MoveTool(parent);
 }
 
-void MoveTool::pressed(const CaptureContext& context)
+void MoveTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
-    emit requestAction(REQ_MOVE_MODE);
 }
 
 bool MoveTool::isSelectable() const

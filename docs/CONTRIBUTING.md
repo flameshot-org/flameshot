@@ -42,7 +42,6 @@ For small fixes or incremental improvements simply fork the repo and follow the 
 
 After reporting you should aim to answer questions or clarifications as this helps pinpoint the cause of the issue.
 
-### Donations
+## Donations
 
-I improve Flameshot in my free time because I want to create something good for everyone to use.
-If you want you can donate some bucks [here](https://www.paypal.me/lupoDharkael).
+The best way to fund flameshot is to create a bounty here: https://rysolv.com/issues

@@ -4,9 +4,9 @@
 #pragma once
 
 #include "src/tools/capturetool.h"
+#include "textconfig.h"
 #include <QPoint>
 #include <QPointer>
-
 class TextWidget;
 class TextConfig;
 
@@ -21,6 +21,7 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect boundingRect() const override;
 
     QIcon icon(const QColor& background, bool inEditor) const override;
     QString name() const override;
@@ -43,16 +44,16 @@ public:
 
 protected:
     void copyParams(const TextTool* from, TextTool* to);
-    ToolType nameID() const override;
+    CaptureTool::Type type() const override;
 
 public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void drawStart(const CaptureContext& context) override;
-    void pressed(const CaptureContext& context) override;
-    void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
-    virtual int thickness() override { return m_size; };
+    void pressed(CaptureContext& context) override;
+    void onColorChanged(const QColor& c) override;
+    void onSizeChanged(int size) override;
+    virtual int size() const override { return m_size; };
 
 private slots:
     void updateText(const QString& s);
@@ -61,11 +62,13 @@ private slots:
     void updateFontStrikeOut(const bool s);
     void updateFontWeight(const QFont::Weight w);
     void updateFontItalic(const bool italic);
+    void updateAlignment(Qt::AlignmentFlag alignment);
 
 private:
     void closeEditor();
 
     QFont m_font;
+    Qt::AlignmentFlag m_alignment;
     QString m_text;
     QString m_textOld;
     int m_size;

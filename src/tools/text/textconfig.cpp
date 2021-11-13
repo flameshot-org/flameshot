@@ -18,6 +18,9 @@ TextConfig::TextConfig(QWidget* parent)
   , m_underlineButton(nullptr)
   , m_weightButton(nullptr)
   , m_italicButton(nullptr)
+  , m_leftAlignButton(nullptr)
+  , m_centerAlignButton(nullptr)
+  , m_rightAlignButton(nullptr)
 {
     m_layout = new QVBoxLayout(this);
 
@@ -71,12 +74,45 @@ TextConfig::TextConfig(QWidget* parent)
     m_italicButton->setToolTip(tr("Italic"));
     QHBoxLayout* modifiersLayout = new QHBoxLayout();
 
+    m_leftAlignButton =
+      new QPushButton(QIcon(iconPrefix + "leftalign.svg"), QLatin1String(""));
+    m_leftAlignButton->setCheckable(true);
+    m_leftAlignButton->setAutoExclusive(true);
+    connect(m_leftAlignButton, &QPushButton::clicked, this, [this] {
+        alignmentChanged(Qt::AlignLeft);
+    });
+    m_leftAlignButton->setToolTip(tr("Left Align"));
+
+    m_centerAlignButton =
+      new QPushButton(QIcon(iconPrefix + "centeralign.svg"), QLatin1String(""));
+    m_centerAlignButton->setCheckable(true);
+    m_centerAlignButton->setAutoExclusive(true);
+    connect(m_centerAlignButton, &QPushButton::clicked, this, [this] {
+        alignmentChanged(Qt::AlignCenter);
+    });
+    m_centerAlignButton->setToolTip(tr("Center Align"));
+
+    m_rightAlignButton =
+      new QPushButton(QIcon(iconPrefix + "rightalign.svg"), QLatin1String(""));
+    m_rightAlignButton->setCheckable(true);
+    m_rightAlignButton->setAutoExclusive(true);
+    connect(m_rightAlignButton, &QPushButton::clicked, this, [this] {
+        alignmentChanged(Qt::AlignRight);
+    });
+    m_rightAlignButton->setToolTip(tr("Right Align"));
+
+    QHBoxLayout* alignmentLayout = new QHBoxLayout();
+    alignmentLayout->addWidget(m_leftAlignButton);
+    alignmentLayout->addWidget(m_centerAlignButton);
+    alignmentLayout->addWidget(m_rightAlignButton);
+
     m_layout->addWidget(m_fontsCB);
     modifiersLayout->addWidget(m_strikeOutButton);
     modifiersLayout->addWidget(m_underlineButton);
     modifiersLayout->addWidget(m_weightButton);
     modifiersLayout->addWidget(m_italicButton);
     m_layout->addLayout(modifiersLayout);
+    m_layout->addLayout(alignmentLayout);
 }
 
 void TextConfig::setFontFamily(const QString& fontFamily)
@@ -112,4 +148,27 @@ void TextConfig::weightButtonPressed(const bool w)
     } else {
         emit fontWeightChanged(QFont::Normal);
     }
+}
+
+void TextConfig::setTextAlignment(Qt::AlignmentFlag alignment)
+{
+    switch (alignment) {
+        case (Qt::AlignCenter):
+            m_leftAlignButton->setChecked(false);
+            m_centerAlignButton->setChecked(true);
+            m_rightAlignButton->setChecked(false);
+            break;
+        case (Qt::AlignRight):
+            m_leftAlignButton->setChecked(false);
+            m_centerAlignButton->setChecked(false);
+            m_rightAlignButton->setChecked(true);
+            break;
+        case (Qt::AlignLeft):
+        default:
+            m_leftAlignButton->setChecked(true);
+            m_centerAlignButton->setChecked(false);
+            m_rightAlignButton->setChecked(false);
+            break;
+    }
+    emit alignmentChanged(alignment);
 }

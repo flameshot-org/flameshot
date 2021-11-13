@@ -22,6 +22,12 @@ class ImgurUploader : public QWidget
 public:
     explicit ImgurUploader(const QPixmap& capture, QWidget* parent = nullptr);
 
+signals:
+    void uploadOk(const QUrl& url);
+
+public slots:
+    void showPostUploadDialog();
+
 private slots:
     void handleReply(QNetworkReply* reply);
     void startDrag();
@@ -50,5 +56,4 @@ private:
     NotificationWidget* m_notification;
 
     void upload();
-    void onUploadOk();
 };

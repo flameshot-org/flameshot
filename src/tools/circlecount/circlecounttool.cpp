@@ -14,6 +14,7 @@ namespace {
 
 CircleCountTool::CircleCountTool(QObject* parent)
   : AbstractTwoPointTool(parent)
+  , m_valid(false)
 {}
 
 QIcon CircleCountTool::icon(const QColor& background, bool inEditor) const
@@ -28,14 +29,47 @@ QString CircleCountTool::info()
     return m_tempString;
 }
 
+bool CircleCountTool::isValid() const
+{
+    return m_valid;
+}
+
+QRect CircleCountTool::mousePreviewRect(const CaptureContext& context) const
+{
+    int width = (context.toolSize + THICKNESS_OFFSET) * 2;
+    QRect rect(0, 0, width, width);
+    rect.moveCenter(context.mousePos);
+    return rect;
+}
+
+QRect CircleCountTool::boundingRect() const
+{
+    if (!isValid()) {
+        return {};
+    }
+    int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
+    return QRect(points().first.x() - bubble_size,
+                 points().first.y() - bubble_size,
+                 bubble_size * 2,
+                 bubble_size * 2);
+}
+
 QString CircleCountTool::name() const
 {
     return tr("Circle Counter");
 }
 
-ToolType CircleCountTool::nameID() const
+CaptureTool::Type CircleCountTool::type() const
 {
-    return ToolType::CIRCLECOUNT;
+    return CaptureTool::TYPE_CIRCLECOUNT;
+}
+
+void CircleCountTool::copyParams(const CircleCountTool* from,
+                                 CircleCountTool* to)
+{
+    AbstractTwoPointTool::copyParams(from, to);
+    to->setCount(from->count());
+    to->m_valid = from->m_valid;
 }
 
 QString CircleCountTool::description() const
@@ -63,7 +97,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QColor antiContrastColor =
       ColorUtils::colorIsDark(color()) ? Qt::black : Qt::white;
 
-    int bubble_size = thickness() + THICKNESS_OFFSET;
+    int bubble_size = size() + THICKNESS_OFFSET;
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
     painter.drawEllipse(
@@ -106,20 +140,10 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     painter.setPen(orig_pen);
 }
 
-void CircleCountTool::drawObjectSelection(QPainter& painter)
-{
-    int bubble_size = thickness() + THICKNESS_OFFSET + PADDING_VALUE;
-    drawObjectSelectionRect(painter,
-                            QRect(points().first.x() - bubble_size,
-                                  points().first.y() - bubble_size,
-                                  bubble_size * 2,
-                                  bubble_size * 2));
-}
-
 void CircleCountTool::paintMousePreview(QPainter& painter,
                                         const CaptureContext& context)
 {
-    thicknessChanged(context.thickness + PADDING_VALUE);
+    onSizeChanged(context.toolSize + PADDING_VALUE);
 
     // Thickness for pen is *2 to range from radius to diameter to match the
     // ellipse draw function
@@ -127,7 +151,7 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
     auto orig_opacity = painter.opacity();
     painter.setOpacity(0.35);
     painter.setPen(QPen(context.color,
-                        (thickness() + THICKNESS_OFFSET) * 2,
+                        (size() + THICKNESS_OFFSET) * 2,
                         Qt::SolidLine,
                         Qt::RoundCap));
     painter.drawLine(context.mousePos,
@@ -139,9 +163,10 @@ void CircleCountTool::paintMousePreview(QPainter& painter,
 void CircleCountTool::drawStart(const CaptureContext& context)
 {
     AbstractTwoPointTool::drawStart(context);
+    m_valid = true;
 }
 
-void CircleCountTool::pressed(const CaptureContext& context)
+void CircleCountTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }

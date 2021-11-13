@@ -92,7 +92,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     screenPixmap.setDevicePixelRatio(currentScreen->devicePixelRatio());
     return screenPixmap;
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if (m_info.waylandDectected()) {
+    if (m_info.waylandDetected()) {
         QPixmap res;
         // handle screenshot based on DE
         switch (m_info.windowManager()) {
@@ -130,14 +130,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
     }
 #endif
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_WIN)
-    QRect geometry;
-    for (QScreen* const screen : QGuiApplication::screens()) {
-        QRect scrRect = screen->geometry();
-        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
-                       scrRect.y() / screen->devicePixelRatio());
-        geometry = geometry.united(scrRect);
-    }
-
+    QRect geometry = desktopGeometry();
     QPixmap p(QApplication::primaryScreen()->grabWindow(
       QApplication::desktop()->winId(),
       geometry.x(),
@@ -151,36 +144,62 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 #endif
 }
 
+QRect ScreenGrabber::screenGeometry(int screenNumber)
+{
+    QPixmap p;
+    QRect geometry;
+    bool isVirtual = QApplication::desktop()->isVirtualDesktop();
+    if (isVirtual || m_info.waylandDetected()) {
+        QPoint topLeft(0, 0);
+#ifdef Q_OS_WIN
+        for (QScreen* const screen : QGuiApplication::screens()) {
+            QPoint topLeftScreen = screen->geometry().topLeft();
+            if (topLeft.x() > topLeftScreen.x() ||
+                topLeft.y() > topLeftScreen.y()) {
+                topLeft = topLeftScreen;
+            }
+        }
+#endif
+        geometry = QApplication::desktop()->screenGeometry(screenNumber);
+        geometry.moveTo(geometry.topLeft() - topLeft);
+    } else {
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        geometry = currentScreen->geometry();
+    }
+    return geometry;
+}
+
 QPixmap ScreenGrabber::grabScreen(int screenNumber, bool& ok)
 {
     QPixmap p;
     bool isVirtual = QApplication::desktop()->isVirtualDesktop();
-    if (isVirtual || m_info.waylandDectected()) {
+    QRect geometry = screenGeometry(screenNumber);
+    if (isVirtual || m_info.waylandDetected()) {
         p = grabEntireDesktop(ok);
         if (ok) {
-            QPoint topLeft(0, 0);
-#ifdef Q_OS_WIN
-            for (QScreen* const screen : QGuiApplication::screens()) {
-                QPoint topLeftScreen = screen->geometry().topLeft();
-                if (topLeft.x() > topLeftScreen.x() ||
-                    topLeft.y() > topLeftScreen.y()) {
-                    topLeft = topLeftScreen;
-                }
-            }
-#endif
-            QRect geometry =
-              QApplication::desktop()->screenGeometry(screenNumber);
-            geometry.moveTo(geometry.topLeft() - topLeft);
-            p = p.copy(geometry);
+            return p.copy(geometry);
         }
     } else {
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        p = currentScreen->grabWindow(screenNumber,
-                                      currentScreen->geometry().x(),
-                                      currentScreen->geometry().y(),
-                                      currentScreen->geometry().width(),
-                                      currentScreen->geometry().height());
         ok = true;
+        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+        return currentScreen->grabWindow(screenNumber,
+                                         geometry.x(),
+                                         geometry.y(),
+                                         geometry.width(),
+                                         geometry.height());
     }
     return p;
+}
+
+QRect ScreenGrabber::desktopGeometry()
+{
+    QRect geometry;
+
+    for (QScreen* const screen : QGuiApplication::screens()) {
+        QRect scrRect = screen->geometry();
+        scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
+                       scrRect.y() / screen->devicePixelRatio());
+        geometry = geometry.united(scrRect);
+    }
+    return geometry;
 }

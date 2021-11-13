@@ -15,6 +15,7 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/pathinfo.h"
 #include "src/utils/systemnotification.h"
+#include "src/utils/valuehandler.h"
 #include <QApplication>
 #include <QDir>
 #include <QLibraryInfo>
@@ -149,16 +150,26 @@ int main(int argc, char* argv[])
     // Options
     CommandOption pathOption(
       { "p", "path" },
-      QObject::tr("Path where the capture will be saved"),
+      QObject::tr("Existing directory or new file to save to"),
       QStringLiteral("path"));
     CommandOption clipboardOption(
       { "c", "clipboard" }, QObject::tr("Save the capture to the clipboard"));
+    CommandOption pinOption("pin",
+                            QObject::tr("Pin the capture to the screen"));
+    CommandOption uploadOption({ "u", "upload" },
+                               QObject::tr("Upload screenshot"));
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
+    CommandOption regionOption("region",
+                               QObject::tr("Screenshot region to select"),
+                               QStringLiteral("WxH+X+Y or string"));
     CommandOption filenameOption({ "f", "filename" },
                                  QObject::tr("Set the filename pattern"),
                                  QStringLiteral("pattern"));
+    CommandOption acceptOnSelectOption(
+      { "s", "accept-on-select" },
+      QObject::tr("Accept capture as soon as a selection is made"));
     CommandOption trayOption({ "t", "trayicon" },
                              QObject::tr("Enable or disable the trayicon"),
                              QStringLiteral("bool"));
@@ -166,6 +177,8 @@ int main(int argc, char* argv[])
       { "a", "autostart" },
       QObject::tr("Enable or disable run at startup"),
       QStringLiteral("bool"));
+    CommandOption checkOption(
+      "check", QObject::tr("Check the configuration for errors"));
     CommandOption showHelpOption(
       { "s", "showhelp" },
       QObject::tr("Show the help message in the capture mode"),
@@ -185,7 +198,7 @@ int main(int argc, char* argv[])
                   "nothing if raw is specified"));
     CommandOption screenNumberOption(
       { "n", "number" },
-      QObject::tr("Define the screen to capture") + ",\n" +
+      QObject::tr("Define the screen to capture (starting from 0)") + ",\n" +
         QObject::tr("default: screen containing the cursor"),
       QObject::tr("Screen number"),
       QStringLiteral("-1"));
@@ -208,20 +221,29 @@ int main(int argc, char* argv[])
       QObject::tr("Invalid delay, it must be higher than 0");
     const QString numberErr =
       QObject::tr("Invalid screen number, it must be non negative");
+    const QString regionErr = QObject::tr(
+      "Invalid region, use 'WxH+X+Y' or 'all' or 'screen0/screen1/...'.");
     auto numericChecker = [](const QString& delayValue) -> bool {
         int value = delayValue.toInt();
         return value >= 0;
     };
+    auto regionChecker = [](const QString& region) -> bool {
+        Region valueHandler;
+        return valueHandler.check(region);
+    };
 
     const QString pathErr =
-      QObject::tr("Invalid path, it must be a real path in the system");
+      QObject::tr("Invalid path, must be an existing directory or a new file "
+                  "in an existing directory");
     auto pathChecker = [pathErr](const QString& pathValue) -> bool {
-        bool res = QDir(pathValue).exists();
-        if (!res) {
+        QFileInfo fileInfo(pathValue);
+        if (fileInfo.isDir() || fileInfo.dir().exists()) {
+            return true;
+        } else {
             SystemNotification().sendMessage(
               QObject::tr(pathErr.toLatin1().data()));
+            return false;
         }
-        return res;
     };
 
     const QString booleanErr =
@@ -234,6 +256,7 @@ int main(int argc, char* argv[])
     contrastColorOption.addChecker(colorChecker, colorErr);
     mainColorOption.addChecker(colorChecker, colorErr);
     delayOption.addChecker(numericChecker, delayErr);
+    regionOption.addChecker(regionChecker, regionErr);
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
     autostartOption.addChecker(booleanChecker, booleanErr);
@@ -248,24 +271,39 @@ int main(int argc, char* argv[])
     parser.AddArgument(configArgument);
     auto helpOption = parser.addHelpOption();
     auto versionOption = parser.addVersionOption();
-    parser.AddOptions(
-      { pathOption, delayOption, rawImageOption, selectionOption },
-      guiArgument);
+    parser.AddOptions({ pathOption,
+                        clipboardOption,
+                        delayOption,
+                        regionOption,
+                        rawImageOption,
+                        selectionOption,
+                        uploadOption,
+                        pinOption,
+                        acceptOnSelectOption },
+                      guiArgument);
     parser.AddOptions({ screenNumberOption,
                         clipboardOption,
                         pathOption,
                         delayOption,
-                        rawImageOption },
+                        regionOption,
+                        rawImageOption,
+                        uploadOption,
+                        pinOption },
                       screenArgument);
-    parser.AddOptions(
-      { pathOption, clipboardOption, delayOption, rawImageOption },
-      fullArgument);
+    parser.AddOptions({ pathOption,
+                        clipboardOption,
+                        delayOption,
+                        regionOption,
+                        rawImageOption,
+                        uploadOption },
+                      fullArgument);
     parser.AddOptions({ autostartOption,
                         filenameOption,
                         trayOption,
                         showHelpOption,
                         mainColorOption,
-                        contrastColorOption },
+                        contrastColorOption,
+                        checkOption },
                       configArgument);
     // Parse
     if (!parser.parse(app.arguments())) {
@@ -288,60 +326,104 @@ int main(int argc, char* argv[])
         }
         sessionBus.call(m);
     } else if (parser.isSet(guiArgument)) { // GUI
-        QString pathValue = parser.value(pathOption);
+        // Option values
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
-        bool isRaw = parser.isSet(rawImageOption);
-        bool isSelection = parser.isSet(selectionOption);
+        QString region = parser.value(regionOption);
+        bool clipboard = parser.isSet(clipboardOption);
+        bool raw = parser.isSet(rawImageOption);
+        bool printGeometry = parser.isSet(selectionOption);
+        bool pin = parser.isSet(pinOption);
+        bool upload = parser.isSet(uploadOption);
+        bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         DBusUtils dbusUtils;
-        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, pathValue);
+        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
+        if (!region.isEmpty()) {
+            req.setInitialSelection(Region().value(region).toRect());
+        }
+        if (clipboard) {
+            req.addTask(CaptureRequest::COPY);
+        }
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
+        }
+        if (!path.isEmpty()) {
+            req.addSaveTask(path);
+        }
+        if (printGeometry) {
+            req.addTask(CaptureRequest::PRINT_GEOMETRY);
+        }
+        if (pin) {
+            req.addTask(CaptureRequest::PIN);
+        }
+        if (upload) {
+            req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (acceptOnSelect) {
+            req.addTask(CaptureRequest::ACCEPT_ON_SELECT);
+            if (!clipboard && !raw && path.isEmpty() && !printGeometry &&
+                !pin && !upload) {
+                req.addSaveTask();
+            }
+        }
         uint id = req.id();
+        req.setStaticID(id);
 
         // Send message
         QDBusMessage m = QDBusMessage::createMethodCall(
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("graphicCapture"));
-        m << pathValue << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
-        if (isRaw) {
+        if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
             return waitAfterConnecting(delay, app);
-        } else if (isSelection) {
+        } else if (printGeometry) {
             dbusUtils.connectSelectionCapture(sessionBus, id);
             return waitAfterConnecting(delay, app);
         }
     } else if (parser.isSet(fullArgument)) { // FULL
-        QString pathValue = parser.value(pathOption);
+        // Option values
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
-        bool toClipboard = parser.isSet(clipboardOption);
-        bool isRaw = parser.isSet(rawImageOption);
+        QString region = parser.value(regionOption);
+        bool clipboard = parser.isSet(clipboardOption);
+        bool raw = parser.isSet(rawImageOption);
+        bool upload = parser.isSet(uploadOption);
         // Not a valid command
-        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", "))
-                << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("full")
-                                       << QStringLiteral("-h"));
-            goto finish;
-        }
 
-        CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay, pathValue);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        CaptureRequest req(CaptureRequest::FULLSCREEN_MODE, delay);
+        if (!region.isEmpty()) {
+            req.setInitialSelection(Region().value(region).toRect());
         }
-        if (!pathValue.isEmpty()) {
-            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
+        if (clipboard) {
+            req.addTask(CaptureRequest::COPY);
+        }
+        if (!path.isEmpty()) {
+            req.addSaveTask(path);
+        }
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
+        }
+        if (upload) {
+            req.addTask(CaptureRequest::UPLOAD);
+        }
+        if (!clipboard && path.isEmpty() && !raw && !upload) {
+            req.addSaveTask();
         }
         uint id = req.id();
+        req.setStaticID(id);
         DBusUtils dbusUtils;
 
         // Send message
@@ -349,13 +431,13 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("fullScreen"));
-        m << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
-        if (isRaw) {
+        if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
             // timeout just in case
             QTimer t;
@@ -368,36 +450,53 @@ int main(int argc, char* argv[])
         }
     } else if (parser.isSet(screenArgument)) { // SCREEN
         QString numberStr = parser.value(screenNumberOption);
+        // Option values
         int number =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
-        QString pathValue = parser.value(pathOption);
+        QString path = parser.value(pathOption);
+        if (!path.isEmpty()) {
+            path = QDir(path).absolutePath();
+        }
         int delay = parser.value(delayOption).toInt();
-        bool toClipboard = parser.isSet(clipboardOption);
-        bool isRaw = parser.isSet(rawImageOption);
-        // Not a valid command
-        if (!isRaw && !toClipboard && pathValue.isEmpty()) {
-            QTextStream out(stdout);
-            out << "Invalid format, set where to save the content with one of "
-                << "the following flags:\n "
-                << pathOption.dashedNames().join(QStringLiteral(", ")) << "\n "
-                << rawImageOption.dashedNames().join(QStringLiteral(", "))
-                << "\n "
-                << clipboardOption.dashedNames().join(QStringLiteral(", "))
-                << "\n\n";
-            parser.parse(QStringList() << argv[0] << QStringLiteral("screen")
-                                       << QStringLiteral("-h"));
-            goto finish;
+        QString region = parser.value(regionOption);
+        bool clipboard = parser.isSet(clipboardOption);
+        bool raw = parser.isSet(rawImageOption);
+        bool pin = parser.isSet(pinOption);
+        bool upload = parser.isSet(uploadOption);
+
+        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
+        if (!region.isEmpty()) {
+            if (region.startsWith("screen")) {
+                // TODO use abstract logger
+                QTextStream(stderr) << "The 'screen' command does not support "
+                                       "'--region screen<N>'.\n"
+                                       "See flameshot --help.\n";
+                exit(1);
+            }
+            req.setInitialSelection(Region().value(region).toRect());
+        }
+        if (clipboard) {
+            req.addTask(CaptureRequest::COPY);
+        }
+        if (raw) {
+            req.addTask(CaptureRequest::PRINT_RAW);
+        }
+        if (!path.isEmpty()) {
+            req.addSaveTask(path);
+        }
+        if (pin) {
+            req.addTask(CaptureRequest::PIN);
+        }
+        if (upload) {
+            req.addTask(CaptureRequest::UPLOAD);
         }
 
-        CaptureRequest req(
-          CaptureRequest::SCREEN_MODE, delay, pathValue, number);
-        if (toClipboard) {
-            req.addTask(CaptureRequest::CLIPBOARD_SAVE_TASK);
+        if (!clipboard && !raw && path.isEmpty() && !pin && !upload) {
+            req.addSaveTask();
         }
-        if (!pathValue.isEmpty()) {
-            req.addTask(CaptureRequest::FILESYSTEM_SAVE_TASK);
-        }
+
         uint id = req.id();
+        req.setStaticID(id);
         DBusUtils dbusUtils;
 
         // Send message
@@ -405,13 +504,13 @@ int main(int argc, char* argv[])
           QStringLiteral("org.flameshot.Flameshot"),
           QStringLiteral("/"),
           QLatin1String(""),
-          QStringLiteral("captureScreen"));
-        m << number << pathValue << toClipboard << delay << id;
+          QStringLiteral("requestCapture"));
+        m << req.serialize();
         QDBusConnection sessionBus = QDBusConnection::sessionBus();
         dbusUtils.checkDBusConnection(sessionBus);
         sessionBus.call(m);
 
-        if (isRaw) {
+        if (raw) {
             dbusUtils.connectPrintCapture(sessionBus, id);
             // timeout just in case
             QTimer t;
@@ -429,8 +528,19 @@ int main(int argc, char* argv[])
         bool help = parser.isSet(showHelpOption);
         bool mainColor = parser.isSet(mainColorOption);
         bool contrastColor = parser.isSet(contrastColorOption);
+        bool check = parser.isSet(checkOption);
         bool someFlagSet =
-          (filename || tray || help || mainColor || contrastColor);
+          (filename || tray || help || mainColor || contrastColor || check);
+        if (check) {
+            QTextStream stream(stderr);
+            bool ok = ConfigHandler(true).checkForErrors(&stream);
+            if (ok) {
+                stream << QStringLiteral("No errors detected.\n");
+                goto finish;
+            } else {
+                return 1;
+            }
+        }
         ConfigHandler config;
         if (autostart) {
             QDBusMessage m = QDBusMessage::createMethodCall(
@@ -488,12 +598,12 @@ int main(int argc, char* argv[])
         if (mainColor) {
             QString colorCode = parser.value(mainColorOption);
             QColor parsedColor(colorCode);
-            config.setUIMainColor(parsedColor);
+            config.setUiColor(parsedColor);
         }
         if (contrastColor) {
             QString colorCode = parser.value(contrastColorOption);
             QColor parsedColor(colorCode);
-            config.setUIContrastColor(parsedColor);
+            config.setContrastUiColor(parsedColor);
         }
 
         // Open gui when no options

@@ -19,20 +19,23 @@
     <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28MacOS%29">
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
     </a>
-    <a href="https://github.com/flameshot-org/flameshot/releases">
-      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square" alt="Latest Stable Release" />
+    <a href="https://flameshot.org/nightly">
+      <img src="https://img.shields.io/badge/nightly%20builds-available-%23AA00FF" alt="Nightly Build" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
-      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg?style=flat-square" alt="Total Downloads" />
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg" alt="Latest Stable Release" />
+    </a>
+    <a href="https://github.com/flameshot-org/flameshot/releases">
+      <img src="https://img.shields.io/github/downloads/flameshot-org/flameshot/total.svg" alt="Total Downloads" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg?style=flat-square" alt="License" />
+      <img src="https://img.shields.io/github/license/flameshot-org/flameshot.svg" alt="License" />
     </a>
   <a href="https://hosted.weblate.org/engage/flameshot/">
     <img src="https://hosted.weblate.org/widgets/flameshot/-/flameshot/svg-badge.svg" alt="Translation status" />
   </a>
   <a href="https://flameshot.org">
-      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
+      <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?label=docs" alt="Docs" />
     </a>
     <br>
     <a href="https://snapcraft.io/flameshot">
@@ -66,6 +69,8 @@
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
   - [Packages from Repository](#packages-from-repository)
+  - [MacOS](#macos)
+  - [Windows](#windows)
 - [Compilation](#compilation)
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
@@ -200,6 +205,7 @@ These shortcuts are available in GUI mode:
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd>                                            | Redo the next modification                    |
 | <kbd>Ctrl</kbd> + <kbd>Q</kbd>                                            | Leave the capture screen                                         |
 | <kbd>Ctrl</kbd> + <kbd>O</kbd>                                            | Choose an app to open the capture                                |
+| <kbd>Ctrl</kbd> + <kbd>Return</kbd>                                            | Commit text in text area|
 | <kbd>Return</kbd>                                             | Upload the selection to Imgur                                      |
 | <kbd>Spacebar</kbd>                                                       | Toggle visibility of sidebar with options of the selected tool, color picker for the drawing color and history menu |
 | Right Click                                                               | Show the color wheel                                              |
@@ -211,11 +217,13 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-If you want use Flameshot as a default screenshot utility, chances are you want to launch it using the <kbd>Prt Sc</kbd> key. Flameshot doesn't yet offer a fully-automated option to do so, but you can configure your system to do so.
+Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>option</kbd>-<kbd>shift</kbd>-<kbd>4</kbd> (macOS) as default global hotkeys.
+
+On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but with a bit of configuration you can set this up:
 
 #### On KDE Plasma desktop
 
-To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
+To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
 
 |  Keys                                                  |  Description                                                                       |
 |---                                                     |---                                                                                 |
@@ -239,17 +247,17 @@ Steps for using the configuration:
 
     ```shell
     cd ~/Desktop
-    wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+    wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys
     ```
 3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
-4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
+4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
-To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)). 
+To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
 1. Remove the binding on <kbd>Prt Sc</kbd> using the following command.
 
@@ -272,7 +280,7 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 1. Go to `Keyboard` settings
 2. Switch to the tab `Application Shortcuts`
 3. Find the entry
-        
+
     ```text
     Command                        Shortcut
     xfce4-screenshooter -fd 1      Print
@@ -322,11 +330,16 @@ There are packages available in the repository of some Linux distributions:
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
 
-There are also options for installing on macOS:
+### MacOS
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
+
+### Windows
+
+- [Chocolatey](https://chocolatey.org/packages/flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
@@ -357,7 +370,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 - Qt >= 5.9
   + Development tools
-- GCC >= 7.4 
+- GCC >= 7.4
 - CMake >= 3.13
 
 #### Run-time
@@ -388,7 +401,7 @@ apt install git openssl ca-certificates
 
 ```shell
 # Compile-time
-dnf install gcc-c++ cmake qt5-devel qt5-qtbase-devel qt5-linguist
+dnf install gcc-c++ cmake qt5-qtbase-devel qt5-linguist
 
 # Run-time
 dnf install qt5-qtbase qt5-qtsvg-devel
@@ -445,8 +458,8 @@ When `make` command completed you can launch flameshot from `project_folder/buil
 
 ### Install
 
-Simply use `make install` with privileges. 
-Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal. 
+Simply use `make install` with privileges.
+Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
 https://flameshot.org/guide/faq/
@@ -469,7 +482,7 @@ This program will not transfer any information to other networked systems unless
 ## Code Signing Policy
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
-Code signing is currently a manual process so not every patch release will be signed. 
+Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
