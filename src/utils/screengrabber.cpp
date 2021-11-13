@@ -47,16 +47,17 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
       this);
 
     QEventLoop loop;
-    const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
-        if (status == 0) {
-            QString uri = map.value("uri").toString().remove(0, 7);
-            res = QPixmap(uri);
-            res.setDevicePixelRatio(qApp->devicePixelRatio());
-            QFile imgFile(uri);
-            imgFile.remove();
-        }
-        loop.quit();
-    }
+    const auto gotSignal =
+      [&res, &loop](uint status, const QVariantMap& map) {
+          if (status == 0) {
+              QString uri = map.value("uri").toString().remove(0, 7);
+              res = QPixmap(uri);
+              res.setDevicePixelRatio(qApp->devicePixelRatio());
+              QFile imgFile(uri);
+              imgFile.remove();
+          }
+          loop.quit();
+      }
 
     // prevent racy situations and listen before calling screenshot
     QMetaObject::Connection conn = QObject::connect(
