@@ -57,7 +57,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
               imgFile.remove();
           }
           loop.quit();
-      }
+      };
 
     // prevent racy situations and listen before calling screenshot
     QMetaObject::Connection conn = QObject::connect(
