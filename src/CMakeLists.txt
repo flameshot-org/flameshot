@@ -33,6 +33,8 @@ if (APPLE)
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_256x256@2x.png"
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512.png"
             COMMAND bash "-c" "sips -z 1024 1024 \"${CMAKE_SOURCE_DIR}\"/data/img/app/org.flameshot.Flameshot-1024.png --out flameshot.iconset/icon_512x512@2x.png"
+          
+          
             COMMAND bash "-c" "iconutil -c icns flameshot.iconset"
     )
 
@@ -231,6 +233,10 @@ target_compile_definitions(flameshot PRIVATE FLAMESHOT_APP_VERSION_URL="${GIT_AP
 # Enable easier debugging of screenshot capture mode
 if (FLAMESHOT_DEBUG_CAPTURE)
     target_compile_definitions(flameshot PRIVATE FLAMESHOT_DEBUG_CAPTURE)
+endif ()
+
+if (USE_MONOCHROME_ICON)
+    target_compile_definitions(flameshot PRIVATE USE_MONOCHROME_ICON)
 endif ()
 
 foreach (FILE ${QM_FILES})
