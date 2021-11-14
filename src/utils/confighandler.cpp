@@ -90,9 +90,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
-#if !defined(Q_OS_MACOS)
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
-#endif
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
