@@ -5,9 +5,10 @@ body:
 - type: markdown
   attributes:
     value: |
-      1. Please speak English, this is the language all maintainers can speak and write.
-      2. Please only use this form to submit feature request and not bugs or questions.
+      1. Please write in English, this is the language all maintainers can speak and write.
+      2. Please only use this form to submit feature request and **not** bugs or questions.
       3. Please take a moment to check that your feature hasn't already been suggested.
+      4. One picture worth a thousand words. If you think you can convey the message better by a drawing or pictrure, consider adding one.
 - type: textarea
   id: description
   attributes:
@@ -16,3 +17,4 @@ body:
       I think it would be great if ...
   validations:
     required: true
+
