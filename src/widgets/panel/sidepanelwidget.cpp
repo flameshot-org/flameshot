@@ -35,7 +35,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     m_toolSizeSlider = new QSlider(Qt::Horizontal);
     m_toolSizeSlider->setRange(1, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);
-    m_toolSizeSlider->setMinimumWidth(100);
+    m_toolSizeSlider->setMinimumWidth(minSliderWidth);
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     colorForm->addRow(tr("Active tool size:"), m_toolSizeSlider);
