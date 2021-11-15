@@ -45,7 +45,7 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
         <source>Unable to write in</source>
-        <translation>לא ניתן לכתוב ב־</translation>
+        <translation>לא ניתן לכתוב ל־</translation>
     </message>
 </context>
 <context>
@@ -58,7 +58,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="85"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>הגדרת החץ ככלי לצבע</translation>
+        <translation>הגדרת ה&apos;חץ&apos; ככלי לצבע</translation>
     </message>
 </context>
 <context>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="76"/>
         <source>Take new screenshot</source>
-        <translation>לכידת מסך חדשה</translation>
+        <translation>לכידת־מסך חדשה</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="85"/>
@@ -175,7 +175,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="34"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>הגדרת העיגול ככלי לצביעה</translation>
+        <translation>הגדרת ה&apos;עיגול&apos; ככלי לצביעה</translation>
     </message>
 </context>
 <context>
@@ -211,7 +211,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
-        <translation>זמינה גרסה חדשה %1</translation>
+        <translation>גרסה חדשה %1, זמינה</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="205"/>
@@ -246,7 +246,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;About</source>
-        <translation>&amp;אודות</translation>
+        <translation>&amp;על אודות</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="426"/>
@@ -256,7 +256,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="433"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;עדכונים אחרונים</translation>
+        <translation>&amp;העלאות אחרונות</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -270,7 +270,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="399"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;לכידת מסך</translation>
+        <translation>&amp;לכידת־מסך</translation>
     </message>
 </context>
 <context>
@@ -312,7 +312,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>עריכת שם הלכידות:</translation>
+        <translation>עריכת שמות הלכידות:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
