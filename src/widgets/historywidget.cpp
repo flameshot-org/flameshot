@@ -1,5 +1,6 @@
 #include "historywidget.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
@@ -17,11 +18,10 @@
 #include <QScrollArea>
 #include <QUrl>
 #include <QVBoxLayout>
-
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
 {
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Latest Uploads"));
     resize(QDesktopWidget().availableGeometry(this).size() * 0.5);

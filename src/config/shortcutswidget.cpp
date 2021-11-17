@@ -5,6 +5,7 @@
 #include "capturetool.h"
 #include "setshortcutwidget.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/globalvalues.h"
 #include "toolfactory.h"
 #include <QHeaderView>
 #include <QIcon>
@@ -25,7 +26,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
   : QWidget(parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Hot Keys"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))

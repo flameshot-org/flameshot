@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2020 Yurii Puchkov at Namecheap & Contributors
 
 #include "setshortcutwidget.h"
+#include "src/utils/globalvalues.h"
 #include <QIcon>
 #include <QKeyEvent>
 #include <QLabel>
@@ -12,7 +13,7 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent)
   : QDialog(parent)
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Set Shortcut"));
     m_ks = QKeySequence();
 
