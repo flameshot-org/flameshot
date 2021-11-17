@@ -9,5 +9,6 @@ namespace GlobalValues {
 
 int buttonBaseSize();
 QString versionInfo();
-
+QString iconPath();
+QString iconPathPNG();
 }

@@ -5,6 +5,7 @@
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/systemnotification.h"
 #include "utils/desktopinfo.h"
 #include <QApplication>
@@ -216,7 +217,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 
         QMessageBox saveErrBox(
           QMessageBox::Warning, QObject::tr("Save Error"), msg);
-        saveErrBox.setWindowIcon(QIcon(":img/app/flameshot.svg"));
+        saveErrBox.setWindowIcon(QIcon(GlobalValues::iconPath()));
         saveErrBox.exec();
     }
 

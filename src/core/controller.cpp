@@ -10,6 +10,7 @@
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
@@ -465,7 +466,7 @@ void Controller::enableTrayIcon()
     m_trayIcon->setContextMenu(m_trayIconMenu);
 #endif
     QIcon trayIcon =
-      QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
+      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
     m_trayIcon->setIcon(trayIcon);
 
 #if defined(Q_OS_MACOS)
@@ -527,7 +528,7 @@ void Controller::sendTrayNotification(const QString& text,
 {
     if (m_trayIcon) {
         m_trayIcon->showMessage(
-          title, text, QIcon(":img/app/flameshot.svg"), timeout);
+          title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
 }
 

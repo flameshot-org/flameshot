@@ -3,6 +3,7 @@
 
 #include "imguruploaddialog.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/globalvalues.h"
 #include <QCheckBox>
 #include <QDialogButtonBox>
 #include <QLabel>
@@ -13,7 +14,7 @@ ImgurUploadDialog::ImgurUploadDialog(QDialog* parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
     setMinimumSize(400, 120);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Upload Confirmation"));
 
     layout = new QVBoxLayout(this);

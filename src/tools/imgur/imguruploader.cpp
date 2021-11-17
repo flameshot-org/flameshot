@@ -4,6 +4,7 @@
 #include "imguruploader.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/utils/systemnotification.h"
 #include "src/widgets/imagelabel.h"
@@ -37,7 +38,7 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
   , m_pixmap(capture)
 {
     setWindowTitle(tr("Upload to Imgur"));
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QRect position = frameGeometry();

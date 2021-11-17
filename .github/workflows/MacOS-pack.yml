@@ -55,7 +55,7 @@ jobs:
           mkdir -p "${DIR_BULD}"
           cd "${DIR_BULD}"
           rm -rf ./src/flameshot.dmg ./src/flameshot.app/
-          cmake .. -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5
+          cmake .. -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
 
       - name: Compile
         run: |

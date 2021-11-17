@@ -3,6 +3,7 @@
 
 #include "capturelauncher.h"
 #include "src/core/controller.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/widgets/imagelabel.h"
@@ -23,7 +24,7 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
   , m_id(0)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     m_imageLabel = new ImageLabel(this);
     bool ok;
     m_imageLabel->setScreenshot(ScreenGrabber().grabEntireDesktop(ok));

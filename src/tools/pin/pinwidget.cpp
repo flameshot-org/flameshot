@@ -4,6 +4,7 @@
 #include "pinwidget.h"
 #include "qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/globalvalues.h"
 #include <QApplication>
 #include <QLabel>
 #include <QScreen>
@@ -17,7 +18,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
   : QWidget(parent)
   , m_pixmap(pixmap)
 {
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     // set the bottom widget background transparent
     setAttribute(Qt::WA_TranslucentBackground);

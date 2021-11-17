@@ -39,7 +39,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
   , m_pixmap(p)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Open With"));
 
     m_keepOpen = ConfigHandler().keepOpenAppLauncher();
