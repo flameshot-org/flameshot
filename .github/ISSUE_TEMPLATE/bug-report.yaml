@@ -1,0 +1,87 @@
+name: Bug Report
+description: Found something you weren't expecting?  Report it here!
+labels: ["Unconfirmed Bug"]
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to fill out this bug report.
+      NOTE: Please read the instructions below before filling the form.
+- type: markdown
+  attributes:
+    value: |
+      1. Please write in English, this is the language all maintainers can speak and write.
+      2. Please take a moment to check that your issue doesn't already exist and not already reported.
+      3. Please make sure the solution to your problem is not already mentioned in the FAQ (https://flameshot.org/guide/faq/)
+      4. Please provide the information for each field as complete as possible.
+- type: textarea
+  id: flameshot-ver
+  attributes:
+    label: Flameshot Version
+    description: The Flameshot version (or commit reference) your are running. You can right-click on the tray icon > About > copy
+    placeholder: e.g Flameshot v0.10.1 (065aa98c)
+  validations:
+    required: true
+- type: dropdown
+  id: installation-type
+  attributes:
+    label: Installation Type
+    description: How have you installed flameshot?
+    multiple: true
+    options:
+      - Linux, MacOS, or Windows Package manager (apt, pacman, eopkg, choco, brew, ...)
+      - User repository (AUR)
+      - Flatpak from Flathub
+      - Flatpak from Github
+      - Snap from Snapcraft
+      - Snap from
+      - AppImage
+      - Using the ready-made package from Github Releases
+      - Compiled from source
+  validations:
+    required: true
+- type: input
+  id: os-ver
+  attributes:
+    label: Operating System type and version
+    description: "The operating system you are using Flameshot on:"
+  validations:
+    required: true
+- type: textarea
+  id: description
+  attributes:
+    label: Description
+    description: |
+      Please provide a description of your issue here. Please explain in details what the issue is. If you can, provide screenshots or screen recordings to demonstrate the issue.
+  validations:
+      required: true
+- type: textarea
+  id: steps-to-reproduce
+  attributes:
+    label: Steps to reproduce
+    description: Please write the steps we should take to reproduce this buggy behaviour
+    placeholder: |
+      1. run `flameshot gui`
+      2. select a region on the primary monitor
+      3. save to file
+      4. ...
+  validations:
+      required: false
+- type: textarea
+  id: screenshots
+  attributes:
+    label: Screenshots or screen recordings
+    description: If you think it would be beneficial for us to understand the issue, please provide a screenshots or screen recordig. For screen recording you can use [Peek](https://github.com/phw/peek)
+- type: textarea
+  id: systeminfo
+  attributes:
+    label: System Information
+    description: |
+      Please provide the detailed information about your computer including:
+        1. Operating system and version
+        2. Your monitor configuration (easiest way would be to add a screenshot of your monitor setup from settings window)
+        3. If using Linux (https://flameshot.org/guide/issue-reporting/):
+          - Your Desktop Environment and your Window Manager
+          - if you are using Xorg or Wayland
+  validations:
+      required: true
