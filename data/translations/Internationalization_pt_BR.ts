@@ -585,7 +585,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Launch at startup</source>
-        <translation>Eexecutar junto ao sistema</translation>
+        <translation>Executar junto ao sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
