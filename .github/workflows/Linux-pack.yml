@@ -538,7 +538,7 @@ jobs:
             ${{ github.workspace }}/Flameshot-*.x86_64.AppImage.sha256sum
 
   flatpak-pack:
-    name: Build flatpak on ubuntu-20.04
+    name: Build flatpak on maintenance ubuntu-20.04
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Source code
@@ -578,7 +578,7 @@ jobs:
           MANIFEST_PATH=$GITHUB_WORKSPACE/packaging/flatpak/org.flameshot.Flameshot.yml
           RUNTIME_REPO="https://flathub.org/repo/flathub.flatpakrepo"
           APP_ID="org.flameshot.Flameshot"
-          BRANCH="master"
+          BRANCH="v0.10.2"
 
           flatpak-builder --user --disable-rofiles-fuse --repo=repo --force-clean flatpak_app ${MANIFEST_PATH} --install-deps-from=flathub
           flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
