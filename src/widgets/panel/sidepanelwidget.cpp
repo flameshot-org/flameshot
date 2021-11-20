@@ -30,17 +30,31 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
         parent->installEventFilter(this);
     }
 
-    QFormLayout* colorForm = new QFormLayout();
-    colorForm->setRowWrapPolicy(QFormLayout::WrapLongRows);
+    QGridLayout* colorLayout = new QGridLayout();
+
+    // Create Active Tool Size
+    QLabel* activeToolSizeText = new QLabel(tr("Active tool size: "));
+
     m_toolSizeSlider = new QSlider(Qt::Horizontal);
     m_toolSizeSlider->setRange(1, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);
     m_toolSizeSlider->setMinimumWidth(minSliderWidth);
+
+    colorLayout->addWidget(activeToolSizeText, 0, 0);
+    colorLayout->addWidget(m_toolSizeSlider, 1, 0);
+
+    // Create Active Color
+    QHBoxLayout* colorHBox = new QHBoxLayout();
+    QLabel* colorText = new QLabel(tr("Active Color: "));
+
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    colorForm->addRow(tr("Active tool size:"), m_toolSizeSlider);
-    colorForm->addRow(tr("Active color:"), m_colorLabel);
-    m_layout->addLayout(colorForm);
+
+    colorHBox->addWidget(colorText);
+    colorHBox->addWidget(m_colorLabel);
+    colorLayout->addLayout(colorHBox, 2, 0);
+
+    m_layout->addLayout(colorLayout);
 
     m_colorWheel = new color_widgets::ColorWheel(this);
     m_colorWheel->setColor(m_color);
