@@ -91,19 +91,18 @@ Controller::Controller()
 
     // set global shortcuts for MacOS
     m_HotkeyScreenshotCapture =
-      new QHotkey(QKeySequence("Ctrl+Alt+Shift+4"), true, this);
+      new QHotkey(QKeySequence(ConfigHandler().shortcut("TAKE_SCREENSHOT")), true, this);
     QObject::connect(m_HotkeyScreenshotCapture,
                      &QHotkey::activated,
                      qApp,
                      [&]() { this->startVisualCapture(); });
     m_HotkeyScreenshotHistory =
-      new QHotkey(QKeySequence("Ctrl+Alt+Shift+H"), true, this);
+      new QHotkey(QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
                      [&]() { this->showRecentUploads(); });
 #endif
-
     if (ConfigHandler().checkForUpdates()) {
         getLatestAvailableVersion();
     }

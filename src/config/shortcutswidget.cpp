@@ -129,9 +129,9 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
             return;
         }
 
-        SetShortcutDialog* setShortcutDialog = new SetShortcutDialog();
+        QString shortcutName = m_shortcuts.at(row).at(0);
+        SetShortcutDialog* setShortcutDialog = new SetShortcutDialog(nullptr, shortcutName);
         if (0 != setShortcutDialog->exec()) {
-            QString shortcutName = m_shortcuts.at(row).at(0);
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
 
             // set no shortcut is Backspace
@@ -189,10 +189,8 @@ void ShortcutsWidget::loadShortcuts()
 
     // Global hotkeys
 #if defined(Q_OS_MACOS)
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Screenshot history") << "⇧⌘⌥H");
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Capture screen") << "⇧⌘⌥4");
+    appendShortcut("TAKE_SCREENSHOT", "Capture screen");
+    appendShortcut("SCREENSHOT_HISTORY", "Screenshot history");
 #elif defined(Q_OS_WIN)
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");
