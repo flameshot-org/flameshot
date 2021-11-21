@@ -130,7 +130,8 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
         }
 
         QString shortcutName = m_shortcuts.at(row).at(0);
-        SetShortcutDialog* setShortcutDialog = new SetShortcutDialog(nullptr, shortcutName);
+        SetShortcutDialog* setShortcutDialog =
+          new SetShortcutDialog(nullptr, shortcutName);
         if (0 != setShortcutDialog->exec()) {
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
 
