@@ -34,12 +34,16 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent, QString shortcutName)
 
     QString msg = "";
 #if defined(Q_OS_MAC)
-    msg = tr("Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.");
+    msg = tr(
+      "Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.");
 #else
-    msg = tr("Press Esc to cancel or Backspace to disable the keyboard shortcut.");
+    msg =
+      tr("Press Esc to cancel or Backspace to disable the keyboard shortcut.");
 #endif
-    if (shortcutName == "TAKE_SCREENSHOT" || shortcutName == "SCREENSHOT_HISTORY"){
-        msg += "\n" + tr("Require restart flameshot"); 
+    if (shortcutName == "TAKE_SCREENSHOT" ||
+        shortcutName == "SCREENSHOT_HISTORY") {
+        msg +=
+          "\n" + tr("Flameshot must be restarted for changes to take effect.");
     }
     QLabel* infoBottom = new QLabel(msg);
     infoBottom->setMargin(10);
