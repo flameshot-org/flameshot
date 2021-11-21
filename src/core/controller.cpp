@@ -226,8 +226,6 @@ void Controller::requestCapture(const CaptureRequest& request)
                 this->startFullscreenCapture(id);
             });
             break;
-            // TODO: Figure out the code path that gets here so the deprated
-            // warning can be fixed
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
             doLater(request.delay(), this, [this, id, number]() {
@@ -320,20 +318,25 @@ void Controller::startVisualCapture(const uint id,
 void Controller::startScreenGrab(const uint id, const int screenNumber)
 {
     bool ok = true;
-    int n = screenNumber;
+    auto screen = qApp->screens()[screenNumber];
 
-    if (n < 0) {
+    if (screenNumber < 0) {
         QPoint globalCursorPos = QCursor::pos();
-        n = qApp->desktop()->screenNumber(globalCursorPos);
+#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
+        screen = qApp->screenAt(globalCursorPos);
+#else
+        screen =
+          qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
+#endif
     }
-    QPixmap p(ScreenGrabber().grabScreen(n, ok));
+    QPixmap p(ScreenGrabber().grabScreen(screen, ok));
     if (ok) {
         CaptureRequest& req = *requests().find(id);
         QRect region = req.initialSelection();
         if (region.isNull()) {
-            region = ScreenGrabber().screenGeometry(n);
+            region = ScreenGrabber().screenGeometry(screen);
         } else {
-            QRect screenGeom = ScreenGrabber().screenGeometry(n);
+            QRect screenGeom = ScreenGrabber().screenGeometry(screen);
             screenGeom.moveTopLeft({ 0, 0 });
             region = region.intersected(screenGeom);
             p = p.copy(region);
