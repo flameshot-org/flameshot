@@ -323,7 +323,12 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
 
     if (screenNumber < 0) {
         QPoint globalCursorPos = QCursor::pos();
+#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
         screen = qApp->screenAt(globalCursorPos);
+#else
+        screen =
+          qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
+#endif
     }
     QPixmap p(ScreenGrabber().grabScreen(screen, ok));
     if (ok) {
