@@ -9,7 +9,7 @@
 #include <QLayout>
 #include <QPixmap>
 
-SetShortcutDialog::SetShortcutDialog(QDialog* parent)
+SetShortcutDialog::SetShortcutDialog(QDialog* parent, QString shortcutName)
   : QDialog(parent)
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -32,13 +32,20 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent)
 
     m_layout->addWidget(infoIcon);
 
+    QString msg = "";
 #if defined(Q_OS_MAC)
-    QLabel* infoBottom = new QLabel(tr(
-      "Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut."));
+    msg = tr(
+      "Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.");
 #else
-    QLabel* infoBottom = new QLabel(
-      tr("Press Esc to cancel or Backspace to disable the keyboard shortcut."));
+    msg =
+      tr("Press Esc to cancel or Backspace to disable the keyboard shortcut.");
 #endif
+    if (shortcutName == "TAKE_SCREENSHOT" ||
+        shortcutName == "SCREENSHOT_HISTORY") {
+        msg +=
+          "\n" + tr("Flameshot must be restarted for changes to take effect.");
+    }
+    QLabel* infoBottom = new QLabel(msg);
     infoBottom->setMargin(10);
     infoBottom->setAlignment(Qt::AlignCenter);
     m_layout->addWidget(infoBottom);
