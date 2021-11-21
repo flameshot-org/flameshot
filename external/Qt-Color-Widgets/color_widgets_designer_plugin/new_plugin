@@ -1,0 +1,236 @@
+#!/bin/bash
+#
+# Copyright (C) 2013-2020 Mattia Basaglia
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+SELFDIR=$(dirname $(readlink -se "${BASH_SOURCE[0]}"))
+
+function class_to_underscore()
+{
+    echo "$1" | sed -r -e 's/([a-z])([A-Z])/\1_\L\2/g' -e 's/[A-Z]/\L\0/g'
+}
+
+function class_to_header()
+{
+    echo "$(class_to_underscore "$1").hpp"
+}
+
+function header_to_source()
+{
+    echo "$1" | sed -r -e 's/\.h(pp)?$/.cpp/i'
+}
+
+function read_arg()
+{
+    varname=$1
+    prompt="$2"
+    default="$3"
+    [ "$default" ] && prompt="${prompt} [$default]"
+    read -p "$prompt: " -i "$default" $varname
+    [ -z "${!varname}" ] && eval "$varname=\"$default\""
+}
+
+function header_to_guard()
+{
+    echo "$1" | tr [:lower:] [:upper:] | tr /. _
+}
+
+read_arg class "Class name"
+[ -z "$class" ] && exit 1
+read_arg description "Description"
+read_arg header "Header" "$(class_to_header "$class")"
+
+read_arg plugin "Plugin Class" "${class}_Plugin"
+read_arg plugin_header "Plugin Header" "$(class_to_header "$plugin")"
+read_arg plugin_source "Plugin Source" "$(header_to_source "$plugin_header")"
+read_arg plugin_path "Plugin Path" "$SELFDIR"
+read_arg plugin_author "Author" "$(git config user.name)"
+read_arg plugin_copyright "Copyright" "2013-$(date +%Y) $plugin_author"
+
+echo "Summary:"
+echo "  Class:         $class"
+echo "  Description:   $description"
+echo "  Header:        $header"
+echo "  Plugin Class:  $plugin"
+echo "  Plugin Header: $plugin_header"
+echo "  Plugin Source: $plugin_source"
+echo "  Plugin Path:   $plugin_path"
+echo "  Author:        $plugin_author"
+echo "  Copyright:     $plugin_copyright"
+
+object_name="$(class_to_underscore $class)"
+
+cat >"$plugin_path/$plugin_source" <<PLUGIN
+/**
+ * \file
+ *
+ * \author $plugin_author
+ *
+ * \copyright Copyright (C) $plugin_copyright
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+#include "$plugin_header"
+#include "QtColorWidgets/$header"
+
+QWidget* $plugin::createWidget(QWidget *parent)
+{
+    color_widgets::$class *widget = new color_widgets::$class(parent);
+    return widget;
+}
+
+QIcon $plugin::icon() const
+{
+    return QIcon();
+}
+
+QString $plugin::domXml() const
+{
+    return "<ui language=\"c++\">\n"
+           " <widget class=\"color_widgets::$class\" name=\"$object_name\">\n"
+           " </widget>\n"
+           "</ui>\n";
+}
+
+bool $plugin::isContainer() const
+{
+    return false;
+}
+
+$plugin::$plugin(QObject *parent) :
+    QObject(parent), initialized(false)
+{
+}
+
+void $plugin::initialize(QDesignerFormEditorInterface *)
+{
+    initialized = true;
+}
+
+bool $plugin::isInitialized() const
+{
+    return initialized;
+}
+
+QString $plugin::name() const
+{
+    return "color_widgets::$class";
+}
+
+QString $plugin::group() const
+{
+    return "Color Widgets";
+}
+
+QString $plugin::toolTip() const
+{
+    return "$description";
+}
+
+QString $plugin::whatsThis() const
+{
+    return toolTip();
+}
+
+QString $plugin::includeFile() const
+{
+    return "QtColorWidgets/$header";
+}
+
+PLUGIN
+
+header_guard="COLOR_WIDGETS_$(header_to_guard "$plugin_header")"
+cat >"$plugin_path/$plugin_header" <<PLUGIN
+/**
+ * \file
+ *
+ * \author $plugin_author
+ *
+ * \copyright Copyright (C) $plugin_copyright
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+#ifndef $header_guard
+#define $header_guard
+
+#include <QObject>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
+
+class $plugin : public QObject, public QDesignerCustomWidgetInterface
+{
+    Q_OBJECT
+    Q_INTERFACES(QDesignerCustomWidgetInterface)
+
+public:
+    explicit $plugin(QObject *parent = nullptr);
+
+    void initialize(QDesignerFormEditorInterface *core) Q_DECL_OVERRIDE;
+    bool isInitialized() const Q_DECL_OVERRIDE;
+
+    QWidget *createWidget(QWidget *parent) Q_DECL_OVERRIDE;
+
+    QString name() const Q_DECL_OVERRIDE;
+    QString group() const Q_DECL_OVERRIDE;
+    QIcon icon() const Q_DECL_OVERRIDE;
+    QString toolTip() const Q_DECL_OVERRIDE;
+    QString whatsThis() const Q_DECL_OVERRIDE;
+    bool isContainer() const Q_DECL_OVERRIDE;
+
+    QString domXml() const Q_DECL_OVERRIDE;
+
+    QString includeFile() const Q_DECL_OVERRIDE;
+
+private:
+    bool initialized;
+};
+
+
+#endif // $header_guard
+
+PLUGIN
+
+sed -i -r \
+    -e "\\~# add new sources above this line~i\\$plugin_source" \
+    -e "\\~# add new headers above this line~i\\$plugin_header" \
+    "$plugin_path/CMakeLists.txt"
+
+sed -i -r \
+    -e "\\~// add new plugin headers above this line~i#include \"$plugin_header\"" \
+    -e "\\~// add new plugins above this line~i\    widgets.push_back(new $plugin(this));" \
+    "$plugin_path/color_widget_plugin_collection.cpp"

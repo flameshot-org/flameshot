@@ -1,0 +1,34 @@
+#include "${i_versioned_entity}_version.h"
+
+
+unsigned int @i_versioned_entity@_versionMajor () {
+	return ${${i_versioned_entity}_VERSION_MAJOR};
+}
+
+
+unsigned int @i_versioned_entity@_versionMinor () {
+	return ${${i_versioned_entity}_VERSION_MINOR};
+}
+
+
+unsigned int @i_versioned_entity@_versionPatch () {
+	return ${${i_versioned_entity}_VERSION_PATCH};
+}
+
+
+const char* @i_versioned_entity@_versionGitInfo () {
+	return
+		"${gitDescribe}"
+		"${gitUntracked}";
+}
+
+
+const char*	@i_versioned_entity@_versionFullString () {
+	return
+		"${${i_versioned_entity}_VERSION_MAJOR}."
+		"${${i_versioned_entity}_VERSION_MINOR}."
+		"${${i_versioned_entity}_VERSION_PATCH}"
+		"${${i_versioned_entity}_VERSION_PRE_RELEASE}"
+		"+${gitDescribe}"
+		"${gitUntracked}";
+}
