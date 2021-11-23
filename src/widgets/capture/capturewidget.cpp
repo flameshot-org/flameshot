@@ -972,6 +972,14 @@ void CaptureWidget::initPanel()
             &UtilityPanel::layerChanged,
             this,
             &CaptureWidget::updateActiveLayer);
+    connect(m_panel,
+            &UtilityPanel::moveUpClicked,
+            this,
+            &CaptureWidget::onMoveCaptureToolUp);
+    connect(m_panel,
+            &UtilityPanel::moveDownClicked,
+            this,
+            &CaptureWidget::onMoveCaptureToolDown);
 
     m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
@@ -1269,6 +1277,22 @@ void CaptureWidget::updateActiveLayer(int layer)
     drawToolsData();
     drawObjectSelection();
     updateSelectionState();
+}
+
+void CaptureWidget::onMoveCaptureToolUp(int captureToolIndex)
+{
+    auto tool = m_captureToolObjects.at(captureToolIndex);
+    m_captureToolObjects.removeAt(captureToolIndex);
+    m_captureToolObjects.insert(captureToolIndex - 1, tool);
+    updateLayersPanel();
+}
+
+void CaptureWidget::onMoveCaptureToolDown(int captureToolIndex)
+{
+    auto tool = m_captureToolObjects.at(captureToolIndex);
+    m_captureToolObjects.removeAt(captureToolIndex);
+    m_captureToolObjects.insert(captureToolIndex + 1, tool);
+    updateLayersPanel();
 }
 
 void CaptureWidget::selectAll()
