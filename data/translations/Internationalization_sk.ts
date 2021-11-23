@@ -174,7 +174,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Set the Circle as the paint tool</translation>
+        <translation>Nastaviť kruh ako kresliaci nástroj</translation>
     </message>
 </context>
 <context>
@@ -240,7 +240,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="417"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;Open Launcher</translation>
+        <translation>&amp;Otvoriť Spúšťač</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
@@ -336,7 +336,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation></translation>
+        <translation>Obnoviť</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -636,12 +636,12 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation></translation>
+        <translation>Maximálne Veľkosť Posledných Uploadov</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation></translation>
+        <translation>Vrátiť limiť</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
