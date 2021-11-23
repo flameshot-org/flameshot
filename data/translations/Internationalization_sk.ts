@@ -636,7 +636,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Maximálna Veľkosť Posledných Uploadov</translation>
+        <translation>Maximálne Veľkosť Posledných Uploadov</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
