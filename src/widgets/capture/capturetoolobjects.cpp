@@ -21,7 +21,7 @@ void CaptureToolObjects::append(const QPointer<CaptureTool>& captureTool)
 
 void CaptureToolObjects::insert(int index, const QPointer<CaptureTool> &captureTool)
 {
-    if (!captureTool.isNull() and index >= 0 and index <= m_captureToolObjects.size()) {
+    if (!captureTool.isNull() && index >= 0 && index <= m_captureToolObjects.size()) {
         m_captureToolObjects.insert(index, captureTool->copy(captureTool->parent()));
         m_imageCache.clear();
     }

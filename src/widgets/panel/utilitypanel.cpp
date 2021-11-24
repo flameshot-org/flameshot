@@ -22,6 +22,8 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   , m_layersLayout(nullptr)
   , m_captureTools(nullptr)
   , m_buttonDelete(nullptr)
+  , m_buttonMoveUp(nullptr)
+  , m_buttonMoveDown(nullptr)
 {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -217,7 +219,7 @@ void UtilityPanel::onCurrentRowChanged(int currentRow)
 {
     m_buttonDelete->setDisabled(currentRow <= 0);
     m_buttonMoveDown->setDisabled(currentRow == 0
-                                  or currentRow+1 == m_captureTools->count());
+                                  || currentRow+1 == m_captureTools->count());
     m_buttonMoveUp->setDisabled(currentRow <= 1);
 
     emit layerChanged(activeLayerIndex());
