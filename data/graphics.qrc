@@ -37,6 +37,8 @@
         <file>img/material/black/circle-outline.svg</file>
         <file>img/material/black/pixelate.svg</file>
         <file>img/material/black/arrow-bottom-left.svg</file>
+        <file>img/material/black/cloud.svg</file>
+        <file>img/material/black/droplr.svg</file>
         <file>img/material/white/undo-variant.svg</file>
         <file>img/material/white/text.svg</file>
         <file>img/material/white/square.svg</file>
@@ -78,5 +80,7 @@
         <file>img/material/white/plus.svg</file>
         <file>img/material/black/minus.svg</file>
         <file>img/material/white/minus.svg</file>
+        <file>img/material/white/cloud.svg</file>
+        <file>img/material/white/droplr.svg</file>
     </qresource>
 </RCC>

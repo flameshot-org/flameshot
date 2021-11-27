@@ -95,6 +95,15 @@ public:
     void setSaveAsFileExtension(const QString& extension);
     QString getSaveAsFileExtension();
 
+    bool cloudImgur();
+    void setCloudImgur(const bool);
+    bool cloudDroplr();
+    void setCloudDroplr(const bool);
+    void setDroplrUsername(const QString& username);
+    QString droplrUsername();
+    void setDroplrPassword(const QString& password);
+    QString droplrPassword();
+
     void setDefaultSettings();
     void setAllTheButtons();
 

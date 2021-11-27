@@ -3,6 +3,8 @@
 
 #include "imguruploadertool.h"
 #include "imguruploader.h"
+#include "src/tools/droplr/droplruploader.h"
+#include "src/utils/confighandler.h"
 #include <QPainter>
 
 ImgurUploaderTool::ImgurUploaderTool(QObject* parent)
@@ -17,7 +19,11 @@ bool ImgurUploaderTool::closeOnButtonPressed() const
 QIcon ImgurUploaderTool::icon(const QColor& background, bool inEditor) const
 {
     Q_UNUSED(inEditor);
-    return QIcon(iconPath(background) + "cloud-upload.svg");
+    if (ConfigHandler().cloudImgur()) {
+        return QIcon(iconPath(background) + "cloud-upload.svg");
+    } else {
+        return QIcon(iconPath(background) + "droplr.svg");
+    }
 }
 QString ImgurUploaderTool::name() const
 {
@@ -31,12 +37,20 @@ ToolType ImgurUploaderTool::nameID() const
 
 QString ImgurUploaderTool::description() const
 {
-    return tr("Upload the selection to Imgur");
+    if (ConfigHandler().cloudImgur()) {
+        return tr("Upload the selection to Imgur");
+    } else {
+        return tr("Upload the selection to Droplr");
+    }
 }
 
 QWidget* ImgurUploaderTool::widget()
 {
-    return new ImgurUploader(capture);
+    if (ConfigHandler().cloudImgur()) {
+        return new ImgurUploader(capture);
+    } else {
+        return new DroplrUploader(capture);
+    }
 }
 
 CaptureTool* ImgurUploaderTool::copy(QObject* parent)

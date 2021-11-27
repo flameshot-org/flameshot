@@ -6,6 +6,7 @@ target_sources(
           extendedslider.cpp
           filenameeditor.cpp
           generalconf.cpp
+          cloudconf.cpp
           strftimechooserwidget.cpp
           styleoverride.cpp
           uicoloreditor.cpp

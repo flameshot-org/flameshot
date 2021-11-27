@@ -599,6 +599,54 @@ QString ConfigHandler::getSaveAsFileExtension()
       .toString();
 }
 
+bool ConfigHandler::cloudImgur()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("cloudImgur"))) {
+        res = m_settings.value(QStringLiteral("cloudImgur")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCloudImgur(const bool value)
+{
+    m_settings.setValue(QStringLiteral("cloudImgur"), value);
+}
+
+bool ConfigHandler::cloudDroplr()
+{
+    bool res = true;
+    if (m_settings.contains(QStringLiteral("cloudDroplr"))) {
+        res = m_settings.value(QStringLiteral("cloudDroplr")).toBool();
+    }
+    return res;
+}
+
+void ConfigHandler::setCloudDroplr(const bool value)
+{
+    m_settings.setValue(QStringLiteral("cloudDroplr"), value);
+}
+
+void ConfigHandler::setDroplrUsername(const QString& username)
+{
+    m_settings.setValue(QStringLiteral("droplrUsername"), username);
+}
+
+QString ConfigHandler::droplrUsername()
+{
+    return m_settings.value(QStringLiteral("droplrUsername"), "").toString();
+}
+
+void ConfigHandler::setDroplrPassword(const QString& password)
+{
+    m_settings.setValue(QStringLiteral("droplrPassword"), password);
+}
+
+QString ConfigHandler::droplrPassword()
+{
+    return m_settings.value(QStringLiteral("droplrPassword"), "").toString();
+}
+
 void ConfigHandler::setDefaultSettings()
 {
     foreach (const QString& key, m_settings.allKeys()) {

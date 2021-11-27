@@ -12,6 +12,8 @@ target_sources(
         imgur/imguruploadertool.h
         imgur/imguruploader.cpp
         imgur/imguruploadertool.cpp
+        droplr/droplruploader.h
+        droplr/droplruploader.cpp
 )
 target_sources(
   flameshot

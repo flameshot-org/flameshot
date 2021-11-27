@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "configwindow.h"
+#include "src/config/cloudconf.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/generalconf.h"
 #include "src/config/shortcutswidget.h"
@@ -58,6 +59,10 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     m_generalConfig = new GeneralConf();
     addTab(m_generalConfig, QIcon(modifier + "config.svg"), tr("General"));
 
+    // cloud
+    m_cloudConfig = new CloudConf();
+    addTab(m_cloudConfig, QIcon(modifier + "cloud.svg"), tr("Cloud"));
+
     // shortcuts
     m_shortcuts = new ShortcutsWidget();
     addTab(m_shortcuts, QIcon(modifier + "shortcut.svg"), tr("Shortcuts"));
@@ -75,6 +80,10 @@ ConfigWindow::ConfigWindow(QWidget* parent)
             &ConfigWindow::updateChildren,
             m_generalConfig,
             &GeneralConf::updateComponents);
+    connect(this,
+            &ConfigWindow::updateChildren,
+            m_cloudConfig,
+            &CloudConf::updateComponents);
 }
 
 void ConfigWindow::keyPressEvent(QKeyEvent* e)
