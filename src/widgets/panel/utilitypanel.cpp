@@ -150,14 +150,12 @@ void UtilityPanel::initInternalPanel()
     m_buttonDelete->setDisabled(true);
 
     m_buttonMoveUp = new QPushButton(this);
-    m_buttonMoveUp->setText("Up");
+    m_buttonMoveUp->setIcon(QIcon(":/img/material/black/move_up.svg"));
     m_buttonMoveUp->setDisabled(true);
-    m_buttonMoveUp->setMaximumWidth(35); // TODO: remove
 
     m_buttonMoveDown = new QPushButton(this);
-    m_buttonMoveDown->setText("Down");
+    m_buttonMoveDown->setIcon(QIcon(":/img/material/black/move_down.svg"));
     m_buttonMoveDown->setDisabled(true);
-    m_buttonMoveDown->setMaximumWidth(50); // TODO: remove
 
     layersButtons->addWidget(m_buttonDelete);
     layersButtons->addWidget(m_buttonMoveUp);
@@ -218,8 +216,8 @@ int UtilityPanel::activeLayerIndex()
 void UtilityPanel::onCurrentRowChanged(int currentRow)
 {
     m_buttonDelete->setDisabled(currentRow <= 0);
-    m_buttonMoveDown->setDisabled(currentRow == 0
-                                  || currentRow+1 == m_captureTools->count());
+    m_buttonMoveDown->setDisabled(currentRow == 0 ||
+                                  currentRow + 1 == m_captureTools->count());
     m_buttonMoveUp->setDisabled(currentRow <= 1);
 
     emit layerChanged(activeLayerIndex());

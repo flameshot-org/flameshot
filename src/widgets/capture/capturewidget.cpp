@@ -1281,6 +1281,8 @@ void CaptureWidget::updateActiveLayer(int layer)
 
 void CaptureWidget::onMoveCaptureToolUp(int captureToolIndex)
 {
+    m_captureToolObjectsBackup = m_captureToolObjects;
+    pushObjectsStateToUndoStack();
     auto tool = m_captureToolObjects.at(captureToolIndex);
     m_captureToolObjects.removeAt(captureToolIndex);
     m_captureToolObjects.insert(captureToolIndex - 1, tool);
@@ -1289,6 +1291,8 @@ void CaptureWidget::onMoveCaptureToolUp(int captureToolIndex)
 
 void CaptureWidget::onMoveCaptureToolDown(int captureToolIndex)
 {
+    m_captureToolObjectsBackup = m_captureToolObjects;
+    pushObjectsStateToUndoStack();
     auto tool = m_captureToolObjects.at(captureToolIndex);
     m_captureToolObjects.removeAt(captureToolIndex);
     m_captureToolObjects.insert(captureToolIndex + 1, tool);
