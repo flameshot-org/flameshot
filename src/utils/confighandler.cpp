@@ -615,7 +615,7 @@ void ConfigHandler::setCloudImgur(const bool value)
 
 bool ConfigHandler::cloudDroplr()
 {
-    bool res = true;
+    bool res = false;
     if (m_settings.contains(QStringLiteral("cloudDroplr"))) {
         res = m_settings.value(QStringLiteral("cloudDroplr")).toBool();
     }
