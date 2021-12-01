@@ -66,7 +66,6 @@ DroplrUploader::DroplrUploader(const QPixmap& capture, QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     upload();
-    // QTimer::singleShot(2000, this, &DroplrUploader::onUploadOk); // testing
 }
 
 void DroplrUploader::handleReply(QNetworkReply* reply)
