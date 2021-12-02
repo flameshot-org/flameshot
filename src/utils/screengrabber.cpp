@@ -179,9 +179,8 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
         }
     } else {
         ok = true;
-        QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-        return currentScreen->grabWindow(
-          geometry.x(), geometry.y(), geometry.width(), geometry.height());
+        return screen->grabWindow(
+          0, geometry.x(), geometry.y(), geometry.width(), geometry.height());
     }
     return p;
 }
