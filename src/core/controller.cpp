@@ -318,7 +318,7 @@ void Controller::startVisualCapture(const uint id,
 void Controller::startScreenGrab(const uint id, const int screenNumber)
 {
     bool ok = true;
-    auto screen = qApp->screens()[screenNumber];
+    QScreen* screen;
 
     if (screenNumber < 0) {
         QPoint globalCursorPos = QCursor::pos();
@@ -328,6 +328,8 @@ void Controller::startScreenGrab(const uint id, const int screenNumber)
         screen =
           qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
 #endif
+    } else {
+        screen = qApp->screens()[screenNumber];
     }
     QPixmap p(ScreenGrabber().grabScreen(screen, ok));
     if (ok) {
