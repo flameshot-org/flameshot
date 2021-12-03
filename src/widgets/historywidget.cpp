@@ -201,17 +201,17 @@ void HistoryWidget::removeItem(QLayout* pl,
                                const QString& fileName,
                                const QString& deleteToken)
 {
-    /* hide();
-     ImgS3Uploader* imgUploader = new ImgS3Uploader();
-     imgUploader->show();
-     imgUploader->deleteResource(fileName, deleteToken);
-     connect(imgUploader, &QWidget::destroyed, this, [=]() {
-         if (imgUploader->resultStatus) {
-             removeLayoutItem(pl);
-         }
-         imgUploader->deleteLater();
-         show();
-     });*/
+    //    hide();
+    //    ImgUploaderBase* imgUploader = UploaderManager().uploader(QPixmap());
+    //    imgUploader->show();
+    //    imgUploader->deleteImage(fileName, deleteToken);
+    //    connect(imgUploader, &QWidget::destroyed, this, [=]() {
+    //        if (imgUploader->resultStatus) {
+    //            removeLayoutItem(pl);
+    //        }
+    //        imgUploader->deleteLater();
+    //        show();
+    //    });
 }
 
 void HistoryWidget::removeLayoutItem(QLayout* pl)

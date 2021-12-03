@@ -8,7 +8,7 @@
 #include "src/tools/imgupload/storages/imguploaderbase.h"
 #include <QObject>
 
-#define IMG_UPLOADER_STORAGE_DEFAULT "imgur"
+#define IMG_UPLOADER_STORAGE_DEFAULT "s3"
 
 class QPixmap;
 class QWidget;
