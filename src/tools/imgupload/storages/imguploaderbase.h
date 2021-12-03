@@ -16,30 +16,41 @@ class QPushButton;
 class QUrl;
 class NotificationWidget;
 
-class ImgurUploader : public QWidget
+class ImgUploaderBase : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ImgurUploader(const QPixmap& capture, QWidget* parent = nullptr);
+    explicit ImgUploaderBase(const QPixmap& capture, QWidget* parent = nullptr);
+
+    LoadSpinner* spinner();
+
+    const QUrl& imageURL();
+    void setImageURL(const QUrl&);
+    const QPixmap& pixmap();
+    void setPixmap(const QPixmap&);
+    void setInfoLabelText(const QString&);
+
+    NotificationWidget* notification();
+    virtual void deleteImage(const QString& fileName,
+                             const QString& deleteToken) = 0;
+    virtual void upload() = 0;
 
 signals:
     void uploadOk(const QUrl& url);
+    void deleteOk();
 
 public slots:
     void showPostUploadDialog();
 
 private slots:
-    void handleReply(QNetworkReply* reply);
     void startDrag();
-
     void openURL();
     void copyURL();
-    void openDeleteURL();
     void copyImage();
+    void deleteCurrentImage();
 
 private:
     QPixmap m_pixmap;
-    QNetworkAccessManager* m_NetworkAM;
 
     QVBoxLayout* m_vLayout;
     QHBoxLayout* m_hLayout;
@@ -52,8 +63,8 @@ private:
     QPushButton* m_copyUrlButton;
     QPushButton* m_toClipboardButton;
     QUrl m_imageURL;
-    QUrl m_deleteImageURL;
     NotificationWidget* m_notification;
 
-    void upload();
+public:
+    QString m_currentImageName;
 };

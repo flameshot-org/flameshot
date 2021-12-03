@@ -1,4 +1,5 @@
 #include "historywidget.h"
+#include "src/tools/imgupload/imguploadermanager.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
@@ -18,6 +19,7 @@
 #include <QScrollArea>
 #include <QUrl>
 #include <QVBoxLayout>
+
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
 {
@@ -101,7 +103,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     History history;
     HISTORY_FILE_NAME unpackFileName = history.unpackFileName(fileName);
 
-    QString url = "https://imgur.com/" + unpackFileName.file;
+    QString url = ImgUploaderManager(this).url() + unpackFileName.file;
 
     // load pixmap
     QPixmap pixmap;
@@ -170,9 +172,11 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
                 QMessageBox::Yes | QMessageBox::No)) {
             return;
         }
-        QDesktopServices::openUrl(
-          QUrl(QStringLiteral("https://imgur.com/delete/%1")
-                 .arg(unpackFileName.token)));
+
+        ImgUploaderBase* imgUploaderBase =
+          ImgUploaderManager(this).uploader(unpackFileName.type);
+        imgUploaderBase->deleteImage(unpackFileName.file, unpackFileName.token);
+
         removeCacheFile(fullFileName);
         removeLayoutItem(phbl);
     });
