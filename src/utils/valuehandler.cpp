@@ -499,7 +499,7 @@ QVariant Region::process(const QVariant& val)
         if (!ok || number < 0) {
             return {};
         }
-        return ScreenGrabber().screenGeometry(number);
+        return ScreenGrabber().screenGeometry(qApp->screens()[number]);
     }
 
     QRegExp regex("(-{,1}\\d+)"   // number (any sign)

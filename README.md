@@ -51,7 +51,7 @@
 
 ## Preview
 
-![image](https://github.com/flameshot-org/flameshot-org.github.io/blob/master/docs/media/animatedUsage.gif)
+![image](https://raw.githubusercontent.com/flameshot-org/flameshot/master/data/img/preview/animatedUsage.gif)
 
 ## Index
 
@@ -69,6 +69,8 @@
 - [Installation](#installation)
   - [Prebuilt Packages](#prebuilt-packages)
   - [Packages from Repository](#packages-from-repository)
+  - [MacOS](#macos)
+  - [Windows](#windows)
 - [Compilation](#compilation)
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
@@ -328,11 +330,16 @@ There are packages available in the repository of some Linux distributions:
 - [NixOS](https://search.nixos.org/packages?query=flameshot): `nix-env -iA nixos.flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
 - [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Windows](https://github.com/majkinetor/au-packages/tree/master/flameshot)
 
-There are also options for installing on macOS:
+### MacOS
 
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
+
+### Windows
+
+- [Chocolatey](https://chocolatey.org/packages/flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>

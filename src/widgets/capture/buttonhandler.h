@@ -44,6 +44,8 @@ private:
                                    const int elements,
                                    const bool upToDown) const;
 
+    int calculateShift(int elements, bool reverse) const;
+
     QRect intersectWithAreas(const QRect& rect);
 
     QVector<CaptureToolButton*> m_vectorButtons;

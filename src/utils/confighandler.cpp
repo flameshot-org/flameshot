@@ -94,9 +94,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
     OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
-#if !defined(Q_OS_MACOS)
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
-#endif
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
     OPTION("savePath"                    ,ExistingDir        (               )),
@@ -159,6 +157,8 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_COMMIT_CURRENT_TOOL" ,   "Ctrl+Return"           ),
 #if defined(Q_OS_MACOS)
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
+    SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Shift+X"          ),
+    SHORTCUT("SCREENSHOT_HISTORY"       ,   "Alt+Shift+X"           ),
 #else
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
 #endif

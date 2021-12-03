@@ -14,6 +14,7 @@
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/systemnotification.h"
@@ -80,20 +81,19 @@ Controller::Controller()
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
 
     // set global shortcuts for MacOS
-    m_HotkeyScreenshotCapture =
-      new QHotkey(QKeySequence("Ctrl+Alt+Shift+4"), true, this);
+    m_HotkeyScreenshotCapture = new QHotkey(
+      QKeySequence(ConfigHandler().shortcut("TAKE_SCREENSHOT")), true, this);
     QObject::connect(m_HotkeyScreenshotCapture,
                      &QHotkey::activated,
                      qApp,
                      [&]() { this->startVisualCapture(); });
-    m_HotkeyScreenshotHistory =
-      new QHotkey(QKeySequence("Ctrl+Alt+Shift+H"), true, this);
+    m_HotkeyScreenshotHistory = new QHotkey(
+      QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
                      [&]() { this->showRecentUploads(); });
 #endif
-
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
@@ -218,8 +218,6 @@ void Controller::requestCapture(const CaptureRequest& request)
                 startFullscreenCapture(request);
             });
             break;
-            // TODO: Figure out the code path that gets here so the deprated
-            // warning can be fixed
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
             doLater(request.delay(), this, [this, request, number]() {
@@ -303,20 +301,27 @@ void Controller::startVisualCapture(const CaptureRequest& req)
 void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 {
     bool ok = true;
-    int n = screenNumber;
+    QScreen* screen;
 
-    if (n < 0) {
+    if (screenNumber < 0) {
         QPoint globalCursorPos = QCursor::pos();
-        n = qApp->desktop()->screenNumber(globalCursorPos);
+#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
+        screen = qApp->screenAt(globalCursorPos);
+#else
+        screen =
+          qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
+#endif
+    } else {
+        screen = qApp->screens()[screenNumber];
     }
-    QPixmap p(ScreenGrabber().grabScreen(n, ok));
+    QPixmap p(ScreenGrabber().grabScreen(screen, ok));
     if (ok) {
-        QRect geometry = ScreenGrabber().screenGeometry(n);
+        QRect geometry = ScreenGrabber().screenGeometry(screen);
         QRect region = req.initialSelection();
         if (region.isNull()) {
-            region = ScreenGrabber().screenGeometry(n);
+            region = ScreenGrabber().screenGeometry(screen);
         } else {
-            QRect screenGeom = ScreenGrabber().screenGeometry(n);
+            QRect screenGeom = ScreenGrabber().screenGeometry(screen);
             screenGeom.moveTopLeft({ 0, 0 });
             region = region.intersected(screenGeom);
             p = p.copy(region);
@@ -465,7 +470,7 @@ void Controller::enableTrayIcon()
     m_trayIcon->setContextMenu(m_trayIconMenu);
 #endif
     QIcon trayIcon =
-      QIcon::fromTheme("flameshot-tray", QIcon(":img/app/flameshot.png"));
+      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
     m_trayIcon->setIcon(trayIcon);
 
 #if defined(Q_OS_MACOS)
@@ -527,7 +532,7 @@ void Controller::sendTrayNotification(const QString& text,
 {
     if (m_trayIcon) {
         m_trayIcon->showMessage(
-          title, text, QIcon(":img/app/flameshot.svg"), timeout);
+          title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
 }
 

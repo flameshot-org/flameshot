@@ -74,7 +74,7 @@ void UIcolorEditor::initColorWheel()
 {
     m_colorWheel = new color_widgets::ColorWheel(this);
     connect(m_colorWheel,
-            &color_widgets::ColorWheel::mouseReleaseOnColor,
+            &color_widgets::ColorWheel::colorSelected,
             this,
             &UIcolorEditor::updateUIcolor);
     connect(m_colorWheel,

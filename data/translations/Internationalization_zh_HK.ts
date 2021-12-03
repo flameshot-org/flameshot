@@ -92,7 +92,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
         <source>Full Screen (All Monitors)</source>
-        <translation>满屏（所有顯示器）</translation>
+        <translation>滿屏（所有顯示器）</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="65"/>
@@ -202,7 +202,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation></translation>
+        <translation>捷徑</translation>
     </message>
 </context>
 <context>
@@ -210,17 +210,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
-        <translation></translation>
+        <translation>新版本 %1 現在可用</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="207"/>
         <source>You have the latest version</source>
-        <translation></translation>
+        <translation>你已有最新版本</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
         <source>Failed to get information about the latest version.</source>
-        <translation></translation>
+        <translation>無法獲取最新版本的資訊</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
@@ -255,12 +255,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="428"/>
         <source>Check for updates</source>
-        <translation></translation>
+        <translation>更新檢查</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Latest Uploads</source>
-        <translation></translation>
+        <translation>&amp;最新上載</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -336,7 +336,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation></translation>
+        <translation>復原</translation>
     </message>
     <message>
         <source>Reset</source>

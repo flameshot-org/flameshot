@@ -5,6 +5,7 @@
 #include "capturetool.h"
 #include "setshortcutwidget.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/utils/globalvalues.h"
 #include "toolfactory.h"
 #include <QHeaderView>
 #include <QIcon>
@@ -25,7 +26,7 @@ ShortcutsWidget::ShortcutsWidget(QWidget* parent)
   : QWidget(parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Hot Keys"));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
@@ -128,9 +129,10 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
             return;
         }
 
-        SetShortcutDialog* setShortcutDialog = new SetShortcutDialog();
+        QString shortcutName = m_shortcuts.at(row).at(0);
+        SetShortcutDialog* setShortcutDialog =
+          new SetShortcutDialog(nullptr, shortcutName);
         if (0 != setShortcutDialog->exec()) {
-            QString shortcutName = m_shortcuts.at(row).at(0);
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
 
             // set no shortcut is Backspace
@@ -188,10 +190,8 @@ void ShortcutsWidget::loadShortcuts()
 
     // Global hotkeys
 #if defined(Q_OS_MACOS)
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Screenshot history") << "⇧⌘⌥H");
-    m_shortcuts << (QStringList()
-                    << "" << QObject::tr("Capture screen") << "⇧⌘⌥4");
+    appendShortcut("TAKE_SCREENSHOT", "Capture screen");
+    appendShortcut("SCREENSHOT_HISTORY", "Screenshot history");
 #elif defined(Q_OS_WIN)
     m_shortcuts << (QStringList() << "" << QObject::tr("Screenshot history")
                                   << "Shift+Print Screen");

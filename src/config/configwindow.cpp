@@ -36,7 +36,7 @@ ConfigWindow::ConfigWindow(QWidget* parent)
     layout->addWidget(m_tabWidget);
 
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Configuration"));
 
     connect(ConfigHandler::getInstance(),

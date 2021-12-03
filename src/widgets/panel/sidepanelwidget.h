@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "color_wheel.hpp"
+#include "QtColorWidgets/color_wheel.hpp"
 #include <QWidget>
 
 class QVBoxLayout;
@@ -15,6 +15,7 @@ class QColorPickingEventFilter;
 class QSlider;
 
 constexpr int maxToolSize = 50;
+constexpr int minSliderWidth = 100;
 
 class SidePanelWidget : public QWidget
 {
