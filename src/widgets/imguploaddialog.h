@@ -10,11 +10,11 @@ class QLabel;
 class QDialogButtonBox;
 class QVBoxLayout;
 
-class ImgurUploadDialog : public QDialog
+class ImgUploadDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit ImgurUploadDialog(QDialog* parent = nullptr);
+    explicit ImgUploadDialog(QDialog* parent = nullptr);
 
 private:
     QCheckBox* m_uploadWithoutConfirmation;

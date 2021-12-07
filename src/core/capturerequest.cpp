@@ -4,10 +4,10 @@
 #include "capturerequest.h"
 #include "confighandler.h"
 #include "controller.h"
-#include "imguruploader.h"
+#include "imgupload/imguploadermanager.h"
 #include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
-#include "src/widgets/imguruploaddialog.h"
+#include "src/widgets/imguploaddialog.h"
 #include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
@@ -166,18 +166,19 @@ void CaptureRequest::exportCapture(const QPixmap& capture)
 
     if (m_tasks & UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
-            ImgurUploadDialog* dialog = new ImgurUploadDialog();
+            ImgUploadDialog* dialog = new ImgUploadDialog();
             if (dialog->exec() == QDialog::Rejected) {
                 return;
             }
         }
-        ImgurUploader* widget = new ImgurUploader(capture);
+
+        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
         widget->show();
         widget->activateWindow();
         // NOTE: lambda can't capture 'this' because it might be destroyed later
         ExportTask tasks = m_tasks;
         QObject::connect(
-          widget, &ImgurUploader::uploadOk, [widget, tasks](const QUrl& url) {
+          widget, &ImgUploaderBase::uploadOk, [widget, tasks](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & COPY)) {
                       SystemNotification().sendMessage(
