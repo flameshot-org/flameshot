@@ -5,11 +5,11 @@
 
 #include "src/tools/abstractactiontool.h"
 
-class ImgurUploaderTool : public AbstractActionTool
+class ImgUploaderTool : public AbstractActionTool
 {
     Q_OBJECT
 public:
-    explicit ImgurUploaderTool(QObject* parent = nullptr);
+    explicit ImgUploaderTool(QObject* parent = nullptr);
 
     bool closeOnButtonPressed() const override;
 

@@ -8,7 +8,7 @@
 #include "circlecount/circlecounttool.h"
 #include "copy/copytool.h"
 #include "exit/exittool.h"
-#include "imgur/imguruploadertool.h"
+#include "imgupload/imguploadertool.h"
 #include "invert/inverttool.h"
 #include "launcher/applaunchertool.h"
 #include "line/linetool.h"
@@ -24,7 +24,6 @@
 #include "sizedecrease/sizedecreasetool.h"
 #include "sizeincrease/sizeincreasetool.h"
 #include "sizeindicator/sizeindicatortool.h"
-#include "src/utils/confighandler.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
 
@@ -52,7 +51,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);
         if_TYPE_return_TOOL(TYPE_EXIT, ExitTool);
-        if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgurUploaderTool);
+        if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgUploaderTool);
 #if !defined(Q_OS_MACOS)
         if_TYPE_return_TOOL(TYPE_OPEN_APP, AppLauncher);
 #endif
