@@ -51,7 +51,7 @@ osascript -  "$1"  <<EOF
 EOF
 
   else
-    notify "GUI Test 1: --path" "Make a selection, then accept"
+    notify-send "GUI Test 1: --path" "Make a selection, then accept"
   fi
 }
 
