@@ -41,8 +41,8 @@ cmd() {
     sleep 1
 }
 
-notify(){ 
-  if [[ $FLAMESHOT_PLATFORM == "MAC" ]] 
+notify() {
+  if [ "$FLAMESHOT_PLATFORM" = "MAC" ]
   then
 osascript -  "$1"  <<EOF
   on run argv
@@ -55,8 +55,8 @@ EOF
   fi
 }
 
-display_img(){ 
-  if [[ $FLAMESHOT_PLATFORM == "MAC" ]] 
+display_img() {
+  if [ "$FLAMESHOT_PLATFORM" = "MAC" ]
   then
     open -a Preview.app -f
   else
