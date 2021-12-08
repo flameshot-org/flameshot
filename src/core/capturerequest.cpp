@@ -23,62 +23,7 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_delay(delay)
   , m_tasks(tasks)
   , m_data(data)
-  , m_forcedID(false)
-  , m_id(0)
 {}
-
-void CaptureRequest::setStaticID(uint id)
-{
-    m_forcedID = true;
-    m_id = id;
-}
-
-uint CaptureRequest::id() const
-{
-    if (m_forcedID) {
-        return m_id;
-    }
-
-    uint id = 0;
-    QVector<uint> v;
-    v << qHash(m_mode) << qHash(m_delay * QDateTime::currentMSecsSinceEpoch())
-      << qHash(m_path) << qHash(m_tasks) << m_data.toInt();
-    for (uint i : v) {
-        id ^= i + 0x9e3779b9 + (id << 6) + (id >> 2);
-    }
-    return id;
-}
-
-QByteArray CaptureRequest::serialize() const
-{
-    QByteArray data;
-    QDataStream stream(&data, QIODevice::WriteOnly);
-    // Convert enums to integers
-    qint32 tasks = m_tasks, mode = m_mode;
-    stream << mode << m_delay << tasks << m_data << m_forcedID << m_id << m_path
-           << m_initialSelection;
-    return data;
-}
-
-CaptureRequest CaptureRequest::deserialize(const QByteArray& data)
-{
-    QDataStream stream(data);
-    CaptureRequest request;
-    qint32 tasks, mode;
-    stream >> mode;
-    stream >> request.m_delay;
-    stream >> tasks;
-    stream >> request.m_data;
-    stream >> request.m_forcedID;
-    stream >> request.m_id;
-    stream >> request.m_path;
-    stream >> request.m_initialSelection;
-
-    // Convert integers to enums
-    request.m_tasks = static_cast<ExportTask>(tasks);
-    request.m_mode = static_cast<CaptureMode>(mode);
-    return request;
-}
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
 {
@@ -118,7 +63,7 @@ void CaptureRequest::addTask(CaptureRequest::ExportTask task)
     m_tasks |= task;
 }
 
-void CaptureRequest::removeTask(CaptureRequest::ExportTask task)
+void CaptureRequest::removeTask(ExportTask task)
 {
     ((int&)m_tasks) &= ~task;
 }
@@ -138,60 +83,4 @@ void CaptureRequest::addPinTask(const QRect& pinWindowGeometry)
 void CaptureRequest::setInitialSelection(const QRect& selection)
 {
     m_initialSelection = selection;
-}
-
-void CaptureRequest::exportCapture(const QPixmap& capture)
-{
-    if (m_tasks & SAVE) {
-        if (m_path.isEmpty()) {
-            ScreenshotSaver(m_id).saveToFilesystemGUI(capture);
-        } else {
-            ScreenshotSaver(m_id).saveToFilesystem(capture, m_path);
-        }
-    }
-
-    if (m_tasks & COPY) {
-        ScreenshotSaver().saveToClipboard(capture);
-    }
-
-    if (m_tasks & PIN) {
-        QWidget* widget = new PinWidget(capture, m_pinWindowGeometry);
-        widget->show();
-        widget->activateWindow();
-        if (m_mode == SCREEN_MODE || m_mode == FULLSCREEN_MODE) {
-            SystemNotification().sendMessage(
-              QObject::tr("Full screen screenshot pinned to screen"));
-        }
-    }
-
-    if (m_tasks & UPLOAD) {
-        if (!ConfigHandler().uploadWithoutConfirmation()) {
-            ImgUploadDialog* dialog = new ImgUploadDialog();
-            if (dialog->exec() == QDialog::Rejected) {
-                return;
-            }
-        }
-
-        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
-        widget->show();
-        widget->activateWindow();
-        // NOTE: lambda can't capture 'this' because it might be destroyed later
-        ExportTask tasks = m_tasks;
-        QObject::connect(
-          widget, &ImgUploaderBase::uploadOk, [widget, tasks](const QUrl& url) {
-              if (ConfigHandler().copyAndCloseAfterUpload()) {
-                  if (!(tasks & COPY)) {
-                      SystemNotification().sendMessage(
-                        QObject::tr("URL copied to clipboard."));
-
-                      QApplication::clipboard()->setText(url.toString());
-                      widget->close();
-                  } else {
-                      widget->showPostUploadDialog();
-                  }
-              } else {
-                  widget->showPostUploadDialog();
-              }
-          });
-    }
 }

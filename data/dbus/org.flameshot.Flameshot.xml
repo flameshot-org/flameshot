@@ -3,90 +3,38 @@
   <interface name="org.flameshot.Flameshot">
 
     <!--
-        requestCapture:
-        @requestData: Serialized CaptureRequest object.
+        attachPin:
+        @data: Byte array containing the screenshot and geometry information.
 
-        Start a capture using a CaptureRequest.
+        Attach a pinned screenshot widget to the daemon.
     -->
-    <method name="requestCapture">
-      <arg name="requestData" type="ay" direction="in"/>
+    <method name="attachPin">
+      <arg name="data" type="ay" direction="in"/>
     </method>
 
     <!--
-        openLauncher:
+        attachScreenshotToClipboard:
+        @screenshot: Byte array containing the screenshot pixmap.
 
-        Opens the capture launcher.
+        Copy the screenshot to the daemon's clipboard, to prevent losing the
+        clipboard when a flameshot subcommand exits.
     -->
-    <method name="openLauncher">
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    <method name="attachScreenshotToClipboard">
+      <arg name="screenshot" type="ay" direction="in"/>
     </method>
 
     <!--
-        openConfig:
+        attachTextToClipboard:
+        @text: Text to be copied to the clipboard.
+        @notification: Optional notification to send.
 
-        Opens the configuration window.
+        Copy the text to the daemon's clipboard, to prevent losing the
+        clipboard when a flameshot subcommand exits.
     -->
-    <method name="openConfig">
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    <method name="attachTextToClipboard">
+      <arg name="text" type="s" direction="in"/>
+      <arg name="notification" type="s" direction="in"/>
     </method>
-
-    <!--
-        trayIconEnabled:
-        @enabled: The new state for the trayIcon.
-
-        Enable or disable the trayIcon.
-    -->
-    <method name="trayIconEnabled">
-      <arg name="enabled" type="b" direction="in"/>
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
-        autostartEnabled:
-        @enabled: The new state for the autostart.
-
-        Enable or disable the autostart of the program.
-    -->
-    <method name="autostartEnabled">
-      <arg name="enabled" type="b" direction="in"/>
-      <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
-    </method>
-
-    <!--
-        captureTaken:
-        @id: identificator of the call.
-        @rawImage: raw image in PNG format.
-        @selection: QRect selection geometry.
-
-        Successful capture signal returning the image.
-    -->
-    <signal name="captureTaken">
-      <arg name="id" type="u" direction="out"/>
-      <arg name="rawImage" type="ay" direction="out"/>
-      <arg name="selection" type="(iiii)" direction="out"/>
-    </signal>
-
-    <!--
-        captureFailed:
-        @id: identificator of the call.
-
-        Whenever the capture fails.
-    -->
-    <signal name="captureFailed">
-      <arg name="id" type="u" direction="out"/>
-    </signal>
-
-    <!--
-        captureSaved:
-        @id: identificator of the call.
-        @savePath: canonical path of the newly created image file.
-
-        An image was written to disk after capture.
-    -->
-    <signal name="captureSaved">
-      <arg name="id" type="u" direction="out"/>
-      <arg name="savePath" type="s" direction="out"/>
-    </signal>
 
   </interface>
 </node>

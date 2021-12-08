@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QUrl>
 
-#if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusMessage>
@@ -14,7 +14,7 @@ SystemNotification::SystemNotification(QObject* parent)
   : QObject(parent)
   , m_interface(nullptr)
 {
-#if not(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
+#if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
     m_interface =
       new QDBusInterface(QStringLiteral("org.freedesktop.Notifications"),
                          QStringLiteral("/org/freedesktop/Notifications"),
