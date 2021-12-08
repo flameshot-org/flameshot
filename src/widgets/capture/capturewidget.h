@@ -41,8 +41,7 @@ class CaptureWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit CaptureWidget(uint id = 0,
-                           const QString& savePath = QString(),
+    explicit CaptureWidget(const CaptureRequest& req,
                            bool fullScreen = true,
                            QWidget* parent = nullptr);
     ~CaptureWidget();
@@ -57,8 +56,6 @@ public slots:
     void deleteToolWidgetOrClose();
 
 signals:
-    void captureTaken(uint id, const QPixmap& capture, const QRect& selection);
-    void captureFailed(uint id);
     void colorChanged(const QColor& c);
     void toolSizeChanged(int size);
 
@@ -105,7 +102,7 @@ private:
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
-    void initContext(bool fullscreen, uint requestId);
+    void initContext(bool fullscreen, const CaptureRequest& req);
     void initPanel();
     void initSelection();
     void initShortcuts();

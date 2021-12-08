@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "infowindow.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/globalvalues.h"
 #include <QApplication>
@@ -88,9 +89,8 @@ void InfoWindow::initLabels()
 
 void InfoWindow::copyInfo()
 {
-    QClipboard* clipboard = QApplication::clipboard();
-    clipboard->setText(GlobalValues::versionInfo() + "\n" +
-                       generateKernelString());
+    FlameshotDaemon::copyToClipboard(GlobalValues::versionInfo() + "\n" +
+                                     generateKernelString());
 }
 
 void InfoWindow::keyPressEvent(QKeyEvent* e)

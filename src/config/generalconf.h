@@ -27,8 +27,9 @@ private slots:
     void showHelpChanged(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
-    void showTrayIconChanged(bool checked);
     void checkForUpdatesChanged(bool checked);
+    void allowMultipleGuiInstancesChanged(bool checked);
+    void autoCloseIdleDaemonChanged(bool checked);
     void autostartChanged(bool checked);
     void historyConfirmationToDelete(bool checked);
     void uploadHistoryMaxChanged(int max);
@@ -55,6 +56,8 @@ private:
     void initUndoLimit();
     void initConfigButtons();
     void initCheckForUpdates();
+    void initAllowMultipleGuiInstances();
+    void initAutoCloseIdleDaemon();
     void initAutostart();
     void initShowStartupLaunchMessage();
     void initCopyAndCloseAfterUpload();
@@ -75,6 +78,8 @@ private:
     QCheckBox* m_helpMessage;
     QCheckBox* m_sidePanelButton;
     QCheckBox* m_checkForUpdates;
+    QCheckBox* m_allowMultipleGuiInstances;
+    QCheckBox* m_autoCloseIdleDaemon;
     QCheckBox* m_autostart;
     QCheckBox* m_showStartupLaunchMessage;
     QCheckBox* m_copyAndCloseAfterUpload;

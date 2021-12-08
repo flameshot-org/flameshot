@@ -29,9 +29,14 @@ class QTextStream;
  * and `TYPE` is the C++ type.
  */
 #define CONFIG_SETTER(FUNC, KEY, TYPE)                                         \
-    void FUNC(const TYPE& value)                                               \
+    void FUNC(const TYPE& val)                                                 \
     {                                                                          \
-        setValue(QStringLiteral(#KEY), QVariant::fromValue(value));            \
+        QString key = QStringLiteral(#KEY);                                    \
+        /* Without this check, multiple `flameshot gui` instances running */   \
+        /* simultaneously would cause an endless loop of fileWatcher calls */  \
+        if (QVariant::fromValue(val) != value(key)) {                          \
+            setValue(key, QVariant::fromValue(val));                           \
+        }                                                                      \
     }
 
 /**
@@ -75,6 +80,10 @@ public:
     CONFIG_GETTER_SETTER(drawFontSize, setDrawFontSize, int)
     CONFIG_GETTER_SETTER(keepOpenAppLauncher, setKeepOpenAppLauncher, bool)
     CONFIG_GETTER_SETTER(checkForUpdates, setCheckForUpdates, bool)
+    CONFIG_GETTER_SETTER(allowMultipleGuiInstances,
+                         setAllowMultipleGuiInstances,
+                         bool)
+    CONFIG_GETTER_SETTER(autoCloseIdleDaemon, setAutoCloseIdleDaemon, bool)
     CONFIG_GETTER_SETTER(showStartupLaunchMessage,
                          setShowStartupLaunchMessage,
                          bool)

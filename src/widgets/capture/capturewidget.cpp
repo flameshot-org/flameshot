@@ -48,8 +48,8 @@
 // an area of selection with its respective buttons.
 
 // enableSaveWindow
-CaptureWidget::CaptureWidget(uint id,
-                             const QString& savePath,
+
+CaptureWidget::CaptureWidget(const CaptureRequest& req,
                              bool fullScreen,
                              QWidget* parent)
   : QWidget(parent)
@@ -90,7 +90,7 @@ CaptureWidget::CaptureWidget(uint id,
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
     setMouseTracking(true);
-    initContext(fullScreen, id);
+    initContext(fullScreen, req);
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
     // Top left of the whole set of screens
     QPoint topLeft(0, 0);
@@ -251,9 +251,12 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
-        emit captureTaken(m_context.requestId, pixmap(), m_context.selection);
+        QRect geometry(m_context.selection);
+        geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
+        Controller::getInstance()->exportCapture(
+          pixmap(), geometry, m_context.request);
     } else {
-        emit captureFailed(m_context.requestId);
+        Controller::getInstance()->handleCaptureFailed();
     }
 }
 
@@ -261,7 +264,7 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    if (m_context.request()->tasks() == CaptureRequest::NO_TASK) {
+    if (m_context.request.tasks() == CaptureRequest::NO_TASK) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
@@ -891,7 +894,7 @@ void CaptureWidget::changeEvent(QEvent* e)
     }
 }
 
-void CaptureWidget::initContext(bool fullscreen, uint requestId)
+void CaptureWidget::initContext(bool fullscreen, const CaptureRequest& req)
 {
     m_context.color = m_config.drawColor();
     m_context.widgetOffset = mapToGlobal(QPoint(0, 0));
@@ -900,15 +903,7 @@ void CaptureWidget::initContext(bool fullscreen, uint requestId)
     m_context.fullscreen = fullscreen;
 
     // initialize m_context.request
-    if (requestId != 0) {
-        m_context.requestId = requestId;
-    } else {
-        CaptureRequest req(CaptureRequest::GRAPHICAL_MODE);
-        uint id = req.id();
-        req.setStaticID(id);
-        Controller::getInstance()->requests().insert(id, req);
-        m_context.requestId = id;
-    }
+    m_context.request = req;
 }
 
 void CaptureWidget::initPanel()
@@ -1040,7 +1035,7 @@ void CaptureWidget::initSelection()
 {
     // Be mindful of the order of statements, so that slots are called properly
     m_selection = new SelectionWidget(m_uiColor, this);
-    QRect initialSelection = m_context.request()->initialSelection();
+    QRect initialSelection = m_context.request.initialSelection();
     connect(m_selection, &SelectionWidget::geometryChanged, this, [this]() {
         QRect constrainedToCaptureArea =
           m_selection->geometry().intersected(rect());
@@ -1052,16 +1047,10 @@ void CaptureWidget::initSelection()
     });
     connect(m_selection, &SelectionWidget::geometrySettled, this, [this]() {
         if (m_selection->isVisibleTo(this)) {
-            auto req = m_context.request();
-            if (req->tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
-                req->removeTask(CaptureRequest::ACCEPT_ON_SELECT);
+            auto& req = m_context.request;
+            if (req.tasks() & CaptureRequest::ACCEPT_ON_SELECT) {
+                req.removeTask(CaptureRequest::ACCEPT_ON_SELECT);
                 m_captureDone = true;
-                if (req->tasks() & CaptureRequest::PIN) {
-                    QRect geometry = m_context.selection;
-                    geometry.setTopLeft(geometry.topLeft() +
-                                        m_context.widgetOffset);
-                    req->addPinTask(geometry);
-                }
                 close();
             }
             m_buttonHandler->updatePosition(m_selection->geometry());

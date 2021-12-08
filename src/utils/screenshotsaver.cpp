@@ -3,6 +3,7 @@
 
 #include "screenshotsaver.h"
 #include "src/core/controller.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/globalvalues.h"
@@ -22,13 +23,7 @@
 #include "src/widgets/capture/capturewidget.h"
 #endif
 
-ScreenshotSaver::ScreenshotSaver()
-  : m_id(0)
-{}
-
-ScreenshotSaver::ScreenshotSaver(const unsigned id)
-  : m_id(id)
-{}
+ScreenshotSaver::ScreenshotSaver() {}
 
 void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
                                           const QString& imageType)
@@ -102,8 +97,6 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 
     if (ok) {
         saveMessage += QObject::tr("Capture saved as ") + completePath;
-        Controller::getInstance()->sendCaptureSaved(
-          m_id, QFileInfo(completePath).canonicalFilePath());
     } else {
         saveMessage += QObject::tr("Error trying to save as ") + completePath;
         if (file.error() != QFile::NoError) {
@@ -192,20 +185,11 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         ConfigHandler().setSavePath(pathNoFile);
 
         QString msg = QObject::tr("Capture saved as ") + savePath;
-
-        if (config.copyPathAfterSave()) {
-            msg =
-              QObject::tr("Capture is saved and copied to the clipboard as ") +
-              savePath;
-        }
-
         SystemNotification().sendMessage(msg, savePath);
 
-        Controller::getInstance()->sendCaptureSaved(
-          m_id, QFileInfo(savePath).canonicalFilePath());
-
         if (config.copyPathAfterSave()) {
-            QApplication::clipboard()->setText(savePath);
+            FlameshotDaemon::copyToClipboard(
+              savePath, QObject::tr("Path copied to clipboard as ") + savePath);
         }
 
     } else {
