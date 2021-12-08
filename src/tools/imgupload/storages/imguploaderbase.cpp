@@ -1,29 +1,26 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
-#include "imguruploader.h"
+#include "imguploaderbase.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/filenamehandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
 #include "src/widgets/notificationwidget.h"
 #include <QApplication>
-#include <QBuffer>
+// FIXME #include <QBuffer>
+#include <QClipboard>
 #include <QCursor>
 #include <QDesktopServices>
 #include <QDrag>
 #include <QGuiApplication>
-#include <QHBoxLayout>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLabel>
 #include <QMimeData>
 #include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QPushButton>
 #include <QRect>
 #include <QScreen>
@@ -32,11 +29,11 @@
 #include <QUrlQuery>
 #include <QVBoxLayout>
 
-ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
+ImgUploaderBase::ImgUploaderBase(const QPixmap& capture, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(capture)
 {
-    setWindowTitle(tr("Upload to Imgur"));
+    setWindowTitle(tr("Upload image"));
     setWindowIcon(QIcon(GlobalValues::iconPath()));
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
@@ -59,52 +56,45 @@ ImgurUploader::ImgurUploader(const QPixmap& capture, QWidget* parent)
     m_vLayout->addWidget(m_spinner, 0, Qt::AlignHCenter);
     m_vLayout->addWidget(m_infoLabel);
 
-    m_NetworkAM = new QNetworkAccessManager(this);
-    connect(m_NetworkAM,
-            &QNetworkAccessManager::finished,
-            this,
-            &ImgurUploader::handleReply);
-
     setAttribute(Qt::WA_DeleteOnClose);
-
-    upload();
-    // QTimer::singleShot(2000, this, &ImgurUploader::showPostUploadDialog); //
-    // testing
 }
 
-void ImgurUploader::handleReply(QNetworkReply* reply)
+LoadSpinner* ImgUploaderBase::spinner()
 {
-    m_spinner->deleteLater();
-    if (reply->error() == QNetworkReply::NoError) {
-        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject json = response.object();
-        QJsonObject data = json[QStringLiteral("data")].toObject();
-        m_imageURL.setUrl(data[QStringLiteral("link")].toString());
-
-        auto deleteToken = data[QStringLiteral("deletehash")].toString();
-        m_deleteImageURL.setUrl(
-          QStringLiteral("https://imgur.com/delete/%1").arg(deleteToken));
-
-        // save history
-        QString imageName = m_imageURL.toString();
-        int lastSlash = imageName.lastIndexOf("/");
-        if (lastSlash >= 0) {
-            imageName = imageName.mid(lastSlash + 1);
-        }
-
-        // save image to history
-        History history;
-        imageName = history.packFileName("imgur", deleteToken, imageName);
-        history.save(m_pixmap, imageName);
-
-        emit uploadOk(m_imageURL);
-    } else {
-        m_infoLabel->setText(reply->errorString());
-    }
-    new QShortcut(Qt::Key_Escape, this, SLOT(close()));
+    return m_spinner;
 }
 
-void ImgurUploader::startDrag()
+const QUrl& ImgUploaderBase::imageURL()
+{
+    return m_imageURL;
+}
+
+void ImgUploaderBase::setImageURL(const QUrl& imageURL)
+{
+    m_imageURL = imageURL;
+}
+
+const QPixmap& ImgUploaderBase::pixmap()
+{
+    return m_pixmap;
+}
+
+void ImgUploaderBase::setPixmap(const QPixmap& pixmap)
+{
+    m_pixmap = pixmap;
+}
+
+NotificationWidget* ImgUploaderBase::notification()
+{
+    return m_notification;
+}
+
+void ImgUploaderBase::setInfoLabelText(const QString& text)
+{
+    m_infoLabel->setText(text);
+}
+
+void ImgUploaderBase::startDrag()
 {
     QMimeData* mimeData = new QMimeData;
     mimeData->setUrls(QList<QUrl>{ m_imageURL });
@@ -117,30 +107,7 @@ void ImgurUploader::startDrag()
     dragHandler->exec();
 }
 
-void ImgurUploader::upload()
-{
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    m_pixmap.save(&buffer, "PNG");
-
-    QUrlQuery urlQuery;
-    urlQuery.addQueryItem(QStringLiteral("title"), QStringLiteral(""));
-    QString description = FileNameHandler().parsedPattern();
-    urlQuery.addQueryItem(QStringLiteral("description"), description);
-
-    QUrl url(QStringLiteral("https://api.imgur.com/3/image"));
-    url.setQuery(urlQuery);
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader,
-                      "application/application/x-www-form-urlencoded");
-    request.setRawHeader(
-      "Authorization",
-      QStringLiteral("Client-ID %1").arg(IMGUR_CLIENT_ID).toUtf8());
-
-    m_NetworkAM->post(request, byteArray);
-}
-
-void ImgurUploader::showPostUploadDialog()
+void ImgUploaderBase::showPostUploadDialog()
 {
     m_infoLabel->deleteLater();
 
@@ -150,8 +117,10 @@ void ImgurUploader::showPostUploadDialog()
     ImageLabel* imageLabel = new ImageLabel();
     imageLabel->setScreenshot(m_pixmap);
     imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    connect(
-      imageLabel, &ImageLabel::dragInitiated, this, &ImgurUploader::startDrag);
+    connect(imageLabel,
+            &ImageLabel::dragInitiated,
+            this,
+            &ImgUploaderBase::startDrag);
     m_vLayout->addWidget(imageLabel);
 
     m_hLayout = new QHBoxLayout();
@@ -167,20 +136,20 @@ void ImgurUploader::showPostUploadDialog()
     m_hLayout->addWidget(m_toClipboardButton);
 
     connect(
-      m_copyUrlButton, &QPushButton::clicked, this, &ImgurUploader::copyURL);
+      m_copyUrlButton, &QPushButton::clicked, this, &ImgUploaderBase::copyURL);
     connect(
-      m_openUrlButton, &QPushButton::clicked, this, &ImgurUploader::openURL);
+      m_openUrlButton, &QPushButton::clicked, this, &ImgUploaderBase::openURL);
     connect(m_openDeleteUrlButton,
             &QPushButton::clicked,
             this,
-            &ImgurUploader::openDeleteURL);
+            &ImgUploaderBase::deleteCurrentImage);
     connect(m_toClipboardButton,
             &QPushButton::clicked,
             this,
-            &ImgurUploader::copyImage);
+            &ImgUploaderBase::copyImage);
 }
 
-void ImgurUploader::openURL()
+void ImgUploaderBase::openURL()
 {
     bool successful = QDesktopServices::openUrl(m_imageURL);
     if (!successful) {
@@ -188,22 +157,22 @@ void ImgurUploader::openURL()
     }
 }
 
-void ImgurUploader::copyURL()
+void ImgUploaderBase::copyURL()
 {
     FlameshotDaemon::copyToClipboard(m_imageURL.toString());
     m_notification->showMessage(tr("URL copied to clipboard."));
 }
 
-void ImgurUploader::openDeleteURL()
-{
-    bool successful = QDesktopServices::openUrl(m_deleteImageURL);
-    if (!successful) {
-        m_notification->showMessage(tr("Unable to open the URL."));
-    }
-}
-
-void ImgurUploader::copyImage()
+void ImgUploaderBase::copyImage()
 {
     FlameshotDaemon::copyToClipboard(m_pixmap);
     m_notification->showMessage(tr("Screenshot copied to clipboard."));
+}
+
+void ImgUploaderBase::deleteCurrentImage()
+{
+    History history;
+    HISTORY_FILE_NAME unpackFileName =
+      history.unpackFileName(m_currentImageName);
+    deleteImage(unpackFileName.file, unpackFileName.token);
 }

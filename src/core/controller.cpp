@@ -8,11 +8,12 @@
 #include "external/QHotkey/QHotkey"
 #endif
 
-#include "imguruploader.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
+#include "src/tools/imgupload/imguploadermanager.h"
+#include "src/tools/imgupload/storages/imguploaderbase.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
@@ -22,11 +23,13 @@
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/historywidget.h"
+#include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
 #include "src/widgets/notificationwidget.h"
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
+#include <QClipboard>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDesktopWidget>
@@ -42,7 +45,6 @@
 #include <QSystemTrayIcon>
 #include <QThread>
 #include <QVersionNumber>
-#include <imguruploaddialog.h>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -609,34 +611,31 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
-            ImgurUploadDialog* dialog = new ImgurUploadDialog();
+            ImgUploadDialog* dialog = new ImgUploadDialog();
             if (dialog->exec() == QDialog::Rejected) {
-                emit captureFailed();
                 return;
             }
         }
-        ImgurUploader* widget = new ImgurUploader(capture);
+
+        ImgUploaderBase* widget = ImgUploaderManager().uploader(capture);
         widget->show();
         widget->activateWindow();
         // NOTE: lambda can't capture 'this' because it might be destroyed later
+        CR::ExportTask tasks = tasks;
         QObject::connect(
-          widget, &ImgurUploader::uploadOk, [=](const QUrl& url) {
+          widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
-                      FlameshotDaemon::copyToClipboard(url.toString());
+                      SystemNotification().sendMessage(
+                        QObject::tr("URL copied to clipboard."));
+
+                      QApplication::clipboard()->setText(url.toString());
                       widget->close();
-                      emit captureTaken(capture, selection);
                   } else {
                       widget->showPostUploadDialog();
-                      connect(widget, &QObject::destroyed, this, [=]() {
-                          emit captureTaken(capture, selection);
-                      });
                   }
               } else {
                   widget->showPostUploadDialog();
-                  connect(widget, &QObject::destroyed, this, [=]() {
-                      emit captureTaken(capture, selection);
-                  });
               }
           });
     }

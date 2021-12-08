@@ -567,9 +567,9 @@ void GeneralConf::initAntialiasingPinZoom()
 void GeneralConf::initUploadWithoutConfirmation()
 {
     m_uploadWithoutConfirmation =
-      new QCheckBox(tr("Upload to Imgur without confirmation"), this);
+      new QCheckBox(tr("Upload image without confirmation"), this);
     m_uploadWithoutConfirmation->setToolTip(
-      tr("Upload to Imgur without confirmation"));
+      tr("Upload image without confirmation"));
     m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
-#include "imguruploaddialog.h"
+#include "imguploaddialog.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include <QCheckBox>
@@ -9,7 +9,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-ImgurUploadDialog::ImgurUploadDialog(QDialog* parent)
+ImgUploadDialog::ImgUploadDialog(QDialog* parent)
   : QDialog(parent)
 {
     setAttribute(Qt::WA_DeleteOnClose);
@@ -19,8 +19,7 @@ ImgurUploadDialog::ImgurUploadDialog(QDialog* parent)
 
     layout = new QVBoxLayout(this);
 
-    m_uploadLabel =
-      new QLabel(tr("Do you want to upload this capture to Imgur?"), this);
+    m_uploadLabel = new QLabel(tr("Do you want to upload this capture?"), this);
 
     layout->addWidget(m_uploadLabel);
 
@@ -33,9 +32,8 @@ ImgurUploadDialog::ImgurUploadDialog(QDialog* parent)
     layout->addWidget(buttonBox);
 
     m_uploadWithoutConfirmation =
-      new QCheckBox(tr("Upload to Imgur without confirmation"), this);
-    m_uploadWithoutConfirmation->setToolTip(
-      tr("Upload to Imgur without confirmation"));
+      new QCheckBox(tr("Upload without confirmation"), this);
+    m_uploadWithoutConfirmation->setToolTip(tr("Upload without confirmation"));
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);
     });

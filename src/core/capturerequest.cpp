@@ -4,10 +4,10 @@
 #include "capturerequest.h"
 #include "confighandler.h"
 #include "controller.h"
-#include "imguruploader.h"
+#include "imgupload/imguploadermanager.h"
 #include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"
-#include "src/widgets/imguruploaddialog.h"
+#include "src/widgets/imguploaddialog.h"
 #include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
