@@ -41,6 +41,20 @@ cmd() {
     sleep 1
 }
 
+notify(){ 
+  if [[ $FLAMESHOT_PLATFORM == "MAC" ]] 
+  then
+osascript -  "$1"  <<EOF
+  on run argv
+    display notification (item 1 of argv) with title "Flameshot"
+  end run
+EOF
+
+  else
+    notify "GUI Test 1: --path" "Make a selection, then accept"
+  fi
+}
+
 wait_for_key() {
     echo "Press Enter to continue..." >&2 && read ____
 }
@@ -70,30 +84,30 @@ sleep 1
 # ┗━━━━━━━━━━━━━━━┛
 
 wait_for_key
-notify-send "GUI Test 1: --path" "Make a selection, then accept"
+notify "GUI Test 1: --path" #"Make a selection, then accept"
 cmd flameshot gui --path /tmp/
 wait_for_key
-notify-send "GUI Test 2: Clipboard" "Make a selection, then accept"
+notify "GUI Test 2: Clipboard" "Make a selection, then accept"
 cmd flameshot gui --clipboard
 wait_for_key
-notify-send "GUI Test 3: Print geometry" "Make a selection, then accept"
+notify "GUI Test 3: Print geometry" "Make a selection, then accept"
 cmd command "$FLAMESHOT" gui --print-geometry
 wait_for_key
-notify-send "GUI Test 4: Pin" "Make a selection, then accept"
+notify "GUI Test 4: Pin" "Make a selection, then accept"
 cmd flameshot gui --pin
 wait_for_key
-notify-send "GUI Test 5: Print raw" "Make a selection, then accept"
+notify "GUI Test 5: Print raw" "Make a selection, then accept"
 cmd command "$FLAMESHOT" gui --raw | display
 wait_for_key
-notify-send "GUI Test 6: Copy on select" "Make a selection, flameshot will close automatically"
+notify "GUI Test 6: Copy on select" "Make a selection, flameshot will close automatically"
 cmd flameshot gui --clipboard --accept-on-select
 wait_for_key
-notify-send "GUI Test 7: File dialog on select" "After selecting, a file dialog will open"
+notify "GUI Test 7: File dialog on select" "After selecting, a file dialog will open"
 cmd flameshot gui --accept-on-select
 
 # All options except for --print-geometry (incompatible with --raw)
 wait_for_key
-notify-send "GUI Test 8: All actions except print-geometry" "Just make a selection"
+notify "GUI Test 8: All actions except print-geometry" "Just make a selection"
 cmd command "$FLAMESHOT" gui -p /tmp/ -c -r --pin | display
 
 echo '>> All tests done.'
