@@ -462,7 +462,8 @@ Simply use `make install` with privileges.
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
-https://flameshot.org/guide/faq/
+
+<https://flameshot.org/docs/guide/faq/>
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
