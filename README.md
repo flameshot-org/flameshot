@@ -497,6 +497,6 @@ Thanks to those who have shown interest in the early development process:
 - ismatori
 
 Thanks to sponsors:
-- Namecheap
-- JetBrains
-- SignPath
+- [Namecheap](https://www.namecheap.com/)
+- [JetBrains](https://www.jetbrains.com/)
+- [SignPath](https://signpath.io/)
