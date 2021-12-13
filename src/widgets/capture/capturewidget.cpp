@@ -800,6 +800,20 @@ void CaptureWidget::setToolSize(int size)
     }
 }
 
+/**
+ * Show notifier box displaying the selected circle count
+ */
+void CaptureWidget::setCircleCount(int count)
+{
+    m_context.circleCount = count;
+
+    QPoint topLeft =
+      QGuiAppCurrentScreen().currentScreen()->geometry().topLeft();
+    int offset = m_notifierBox->width() / 4;
+    m_notifierBox->move(mapFromGlobal(topLeft) + QPoint(offset, offset));
+    m_notifierBox->showMessage(QString::number(m_context.circleCount));
+}
+
 void CaptureWidget::keyPressEvent(QKeyEvent* e)
 {
     // If the key is a digit, change the tool size

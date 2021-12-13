@@ -121,6 +121,7 @@ private:
                                   const char* slot);
 
     void setToolSize(int size);
+    void setCircleCount(int count);
 
     QRect extendedSelection() const;
     QRect extendedRect(const QRect& r) const;
