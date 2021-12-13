@@ -176,6 +176,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     m_buttonHandler->updateScreenRegions(areas);
     m_buttonHandler->hide();
 
+    m_context.circleCount = 1;
+
     initButtons();
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
@@ -554,6 +556,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
             // While it is based on AbstractTwoPointTool it has the only one
             // point and shouldn't wait for second point and move event
             m_activeTool->drawEnd(m_context.mousePos);
+            m_activeTool->setCount(m_context.circleCount++);
 
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_captureToolObjects.append(m_activeTool);
@@ -1475,11 +1478,7 @@ void CaptureWidget::drawToolsData()
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
-    int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        if (toolItem->type() == CaptureTool::TYPE_CIRCLECOUNT) {
-            toolItem->setCount(circleCount++);
-        }
         processPixmapWithTool(&pixmapItem, toolItem);
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
