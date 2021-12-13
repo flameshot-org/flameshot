@@ -860,21 +860,21 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
      * impossible to scroll. It's easier to calculate number of requests and do
      * not accept events faster that one in 200ms.
      * */
-    int toolSizeOffset = 0;
+    int offset = 0;
     if (e->angleDelta().y() >= 60) {
         // mouse scroll (wheel) increment
-        toolSizeOffset = 1;
+        offset = 1;
     } else if (e->angleDelta().y() <= -60) {
         // mouse scroll (wheel) decrement
-        toolSizeOffset = -1;
+        offset = -1;
     } else {
         // touchpad scroll
         qint64 current = QDateTime::currentMSecsSinceEpoch();
         if ((current - m_lastMouseWheel) > 200) {
             if (e->angleDelta().y() > 0) {
-                toolSizeOffset = 1;
+                offset = 1;
             } else if (e->angleDelta().y() < 0) {
-                toolSizeOffset = -1;
+                offset = -1;
             }
             m_lastMouseWheel = current;
         } else {
@@ -882,7 +882,13 @@ void CaptureWidget::wheelEvent(QWheelEvent* e)
         }
     }
 
-    setToolSize(m_context.toolSize + toolSizeOffset);
+    bool counterMod = qApp->keyboardModifiers() & Qt::ControlModifier;
+
+    if (counterMod) {
+        setCircleCount(m_context.circleCount + offset);
+    } else {
+        setToolSize(m_context.toolSize + offset);
+    }
 }
 
 void CaptureWidget::resizeEvent(QResizeEvent* e)
