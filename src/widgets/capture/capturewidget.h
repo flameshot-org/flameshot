@@ -120,6 +120,7 @@ private:
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
+    void restoreCircleCountState();
 
     QList<QShortcut*> newShortcut(const QKeySequence& key,
                                   QWidget* parent,
