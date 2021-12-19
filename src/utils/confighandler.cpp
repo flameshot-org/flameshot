@@ -386,7 +386,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
 
     bool error = false;
 
-    m_settings.beginGroup("Shortcuts");
+    m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     if (shortcut.isEmpty()) {
         setValue(actionName, "");
     } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
@@ -416,12 +416,12 @@ done:
 
 QString ConfigHandler::shortcut(const QString& actionName)
 {
-    QString setting = "Shortcuts/" + actionName;
+    QString setting = CONFIG_GROUP_SHORTCUTS "/" + actionName;
     QString shortcut = value(setting).toString();
     if (!m_settings.contains(setting)) {
         // The action uses a shortcut that is a flameshot default
         // (not set explicitly by user)
-        m_settings.beginGroup("Shortcuts");
+        m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
         for (auto& otherAction : m_settings.allKeys()) {
             if (m_settings.value(otherAction) == shortcut) {
                 // We found an explicit shortcut - it will take precedence
@@ -469,7 +469,6 @@ QVariant ConfigHandler::value(const QString& key) const
 
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
-
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     auto keys = ::recognizedGeneralOptions.keys();
     static QSet<QString> options = QSet<QString>(keys.begin(), keys.end());
@@ -492,12 +491,13 @@ QSet<QString>& ConfigHandler::recognizedShortcutNames()
     return names;
 }
 
-/// Return keys from group `group`. Use "General" for general settings.
+// Return keys from group `group`. Use CONFIG_GROUP_GENERAL (General) for
+// general settings.
 QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 {
     QSet<QString> keys;
     for (const QString& key : m_settings.allKeys()) {
-        if (group == "General" && !key.contains('/')) {
+        if (group == CONFIG_GROUP_GENERAL && !key.contains('/')) {
             keys.insert(key);
         } else if (key.startsWith(group + "/")) {
             keys.insert(baseName(key));
@@ -514,6 +514,20 @@ bool ConfigHandler::checkForErrors(QTextStream* log) const
            checkSemantics(log);
 }
 
+void ConfigHandler::cleanUnusedKeys(const QString& group,
+                                    const QSet<QString>& keys) const
+{
+    for (const QString& key : keys) {
+        if (group == CONFIG_GROUP_GENERAL && !key.contains('/')) {
+            m_settings.remove(key);
+        } else {
+            m_settings.beginGroup(group);
+            m_settings.remove(key);
+            m_settings.endGroup();
+        }
+    }
+}
+
 /**
  * @brief Parse the config to find settings with unrecognized names.
  * @return Whether the config passes this check.
@@ -525,14 +539,37 @@ bool ConfigHandler::checkForErrors(QTextStream* log) const
 bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
 {
     // sort the config keys by group
-    QSet<QString> generalKeys = keysFromGroup("General"),
-                  shortcutKeys = keysFromGroup("Shortcuts"),
+    QSet<QString> generalKeys = keysFromGroup(CONFIG_GROUP_GENERAL),
+                  shortcutKeys = keysFromGroup(CONFIG_GROUP_SHORTCUTS),
                   recognizedGeneralKeys = recognizedGeneralOptions(),
                   recognizedShortcutKeys = recognizedShortcutNames();
 
     // subtract recognized keys
     generalKeys.subtract(recognizedGeneralKeys);
     shortcutKeys.subtract(recognizedShortcutKeys);
+
+    // automatically clean up unused keys
+    if (!generalKeys.isEmpty()) {
+        cleanUnusedKeys(CONFIG_GROUP_GENERAL, generalKeys);
+        generalKeys = keysFromGroup(CONFIG_GROUP_GENERAL),
+        generalKeys.subtract(recognizedGeneralKeys);
+    }
+    if (!shortcutKeys.isEmpty()) {
+        cleanUnusedKeys(CONFIG_GROUP_SHORTCUTS, shortcutKeys);
+        shortcutKeys = keysFromGroup(CONFIG_GROUP_SHORTCUTS);
+        shortcutKeys.subtract(recognizedShortcutKeys);
+    }
+
+    // clean up unused groups
+    QStringList settingsGroups = m_settings.childGroups();
+    for (const auto& group : settingsGroups) {
+        if (group != QLatin1String(CONFIG_GROUP_SHORTCUTS) &&
+            group != QLatin1String(CONFIG_GROUP_GENERAL)) {
+            m_settings.beginGroup(group);
+            m_settings.remove("");
+            m_settings.endGroup();
+        }
+    }
 
     // what is left are the unrecognized keys - hopefully empty
     bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
@@ -559,7 +596,7 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
 bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
 {
     bool ok = true;
-    m_settings.beginGroup("Shortcuts");
+    m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     QStringList shortcuts = m_settings.allKeys();
     QStringList reportedInLog;
     for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
@@ -707,9 +744,10 @@ void ConfigHandler::ensureFileWatched() const
  * @brief Obtain a `ValueHandler` for the config option with the given key.
  * @return Smart pointer to the handler.
  *
- * @note If the key is from the "General" group, the `recognizedGeneralOptions`
- * map is looked up. If it is from "Shortcuts", a generic `KeySequence` value
- * handler is returned.
+ * @note If the key is from the CONFIG_GROUP_GENERAL (General) group, the
+ * `recognizedGeneralOptions` map is looked up. If it is from
+ * CONFIG_GROUP_SHORTCUTS (Shortcuts), a generic `KeySequence` value handler is
+ * returned.
  */
 QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
   const QString& key) const
@@ -750,8 +788,8 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
 
 bool ConfigHandler::isShortcut(const QString& key) const
 {
-    return m_settings.group() == QStringLiteral("Shortcuts") ||
-           key.startsWith(QStringLiteral("Shortcuts/"));
+    return m_settings.group() == QStringLiteral(CONFIG_GROUP_SHORTCUTS) ||
+           key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"));
 }
 
 QString ConfigHandler::baseName(QString key) const
