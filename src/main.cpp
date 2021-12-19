@@ -60,9 +60,7 @@ void requestCaptureAndWait(const CaptureRequest& req)
           }
       });
     QObject::connect(controller, &Controller::captureFailed, []() {
-        // TODO use abstract logger
-        // TODO do we have to do more stuff here?
-        QTextStream(stderr) << "screenshot aborted\n";
+        AbstractLogger::info() << "Screenshot aborted.";
         qApp->exit(1);
     });
     qApp->exec();
@@ -241,14 +239,15 @@ int main(int argc, char* argv[])
                   "You may need to escape the '#' sign as in '\\#FFF'");
 
     const QString delayErr =
-      QObject::tr("Invalid delay, it must be higher than 0");
+      QObject::tr("Invalid delay, it must be a number greater than 0");
     const QString numberErr =
       QObject::tr("Invalid screen number, it must be non negative");
     const QString regionErr = QObject::tr(
       "Invalid region, use 'WxH+X+Y' or 'all' or 'screen0/screen1/...'.");
     auto numericChecker = [](const QString& delayValue) -> bool {
-        int value = delayValue.toInt();
-        return value >= 0;
+        bool ok;
+        int value = delayValue.toInt(&ok);
+        return ok && value >= 0;
     };
     auto regionChecker = [](const QString& region) -> bool {
         Region valueHandler;

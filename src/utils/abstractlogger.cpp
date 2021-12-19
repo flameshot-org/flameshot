@@ -48,7 +48,7 @@ AbstractLogger AbstractLogger::error(int targets)
     return AbstractLogger(Error, targets);
 }
 
-void AbstractLogger::sendMessage(QString msg, Channel channel)
+AbstractLogger& AbstractLogger::sendMessage(QString msg, Channel channel)
 {
     if (m_targets & Notification) {
         SystemNotification().sendMessage(
@@ -113,6 +113,9 @@ AbstractLogger& AbstractLogger::enableMessageHeader(bool enable)
  */
 QString AbstractLogger::messageHeader(Channel channel, Target target)
 {
+    if (!m_enableMessageHeader) {
+        return "";
+    }
     QString messageChannel;
     if (channel == Info) {
         messageChannel = "info";

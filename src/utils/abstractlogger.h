@@ -6,9 +6,8 @@
 /**
  * @brief A class that allows you to log events to where they need to go.
  */
-class AbstractLogger : public QObject
+class AbstractLogger
 {
-    Q_OBJECT
 public:
     enum Target
     {
@@ -37,7 +36,7 @@ public:
     static AbstractLogger warning(int targets = Default);
     static AbstractLogger error(int targets = Default);
 
-    void sendMessage(QString msg, Channel channel);
+    AbstractLogger& sendMessage(QString msg, Channel channel);
     AbstractLogger& operator<<(QString msg);
     AbstractLogger& addOutputString(QString& str);
     AbstractLogger& attachNotificationPath(QString path);
@@ -50,5 +49,5 @@ private:
     Channel m_defaultChannel;
     QList<QTextStream*> m_textStreams;
     QString m_notificationPath;
-    bool m_enableMessageHeader;
+    bool m_enableMessageHeader = true;
 };
