@@ -9,6 +9,9 @@
 #include <QVariant>
 #include <QVector>
 
+#define CONFIG_GROUP_GENERAL "General"
+#define CONFIG_GROUP_SHORTCUTS "Shortcuts"
+
 class QFileSystemWatcher;
 class ValueHandler;
 template<class T>
@@ -68,6 +71,9 @@ public:
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
+    CONFIG_GETTER_SETTER(predefinedColorPaletteLarge,
+                         setPredefinedColorPaletteLarge,
+                         bool)
     CONFIG_GETTER_SETTER(fontFamily, setFontFamily, QString)
     CONFIG_GETTER_SETTER(showHelp, setShowHelp, bool)
     CONFIG_GETTER_SETTER(showSidePanelButton, setShowSidePanelButton, bool)
@@ -160,4 +166,5 @@ private:
     void assertKeyRecognized(const QString& key) const;
     bool isShortcut(const QString& key) const;
     QString baseName(QString key) const;
+    void cleanUnusedKeys(const QString& group, const QSet<QString>& keys) const;
 };
