@@ -68,6 +68,9 @@ public:
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
+    CONFIG_GETTER_SETTER(predefinedColorPaletteLarge,
+                         setPredefinedColorPaletteLarge,
+                         bool)
     CONFIG_GETTER_SETTER(fontFamily, setFontFamily, QString)
     CONFIG_GETTER_SETTER(showHelp, setShowHelp, bool)
     CONFIG_GETTER_SETTER(showSidePanelButton, setShowSidePanelButton, bool)
