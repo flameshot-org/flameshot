@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screengrabber.h"
+#include "abstractlogger.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/systemnotification.h"
@@ -124,7 +125,7 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
                 break;
         }
         if (!ok) {
-            SystemNotification().sendMessage(tr("Unable to capture screen"));
+            AbstractLogger::error() << tr("Unable to capture screen");
         }
         return res;
     }

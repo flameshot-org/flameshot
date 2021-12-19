@@ -6,18 +6,25 @@
 // TODO add null checks and exceptions
 // TODO only send notification when flushed
 
-AbstractLogger::AbstractLogger(Type type, int channels)
-  : m_channels(channels)
+AbstractLogger::AbstractLogger(Channel channel, int targets)
+  : m_defaultChannel(channel)
+  , m_targets(targets)
 {
-    if (channels & LogFile) {
+    if (targets & LogFile) {
         // TODO
     }
 }
 
-AbstractLogger::AbstractLogger(QString& str, Type type, int additionalChannels)
-  : AbstractLogger(type, additionalChannels)
+/**
+ * @brief Construct an AbstractLogger with output to a string.
+ * @param additionalChannels Optional additional targets to output to.
+ */
+AbstractLogger::AbstractLogger(QString& str,
+                               Channel channel,
+                               int additionalChannels)
+  : AbstractLogger(channel, additionalChannels)
 {
-    // TODO error if channels excludes String.
+    // TODO error if targets excludes String.
     m_textStreams << new QTextStream(&str);
 }
 
@@ -26,34 +33,99 @@ AbstractLogger::~AbstractLogger()
     qDeleteAll(m_textStreams);
 }
 
-AbstractLogger& AbstractLogger::operator<<(const QString& msg)
+AbstractLogger AbstractLogger::info(int targets)
 {
-    if (m_channels & Notification) {
-        SystemNotification().sendMessage(msg);
+    return AbstractLogger(Info, targets);
+}
+
+AbstractLogger AbstractLogger::warning(int targets)
+{
+    return AbstractLogger(Warning, targets);
+}
+
+AbstractLogger AbstractLogger::error(int targets)
+{
+    return AbstractLogger(Error, targets);
+}
+
+void AbstractLogger::sendMessage(QString msg, Channel channel)
+{
+    if (m_targets & Notification) {
+        SystemNotification().sendMessage(
+          msg, messageHeader(channel, Notification), m_notificationPath);
     }
     if (!m_textStreams.isEmpty()) {
         foreach (auto* stream, m_textStreams) {
-            *stream << msg;
+            *stream << messageHeader(channel, String) << msg << "\n";
         }
     }
-    if (m_channels & LogFile) {
+    if (m_targets & LogFile) {
         // TODO
     }
-    if (m_channels & Stdout) {
-        // TODO this doesn't work with dbus. Either remove dbus or change this.
-        // TODO should we ever log to stdout?
-        QTextStream stream(stdout);
-        stream << msg << "\n";
-    }
-    if (m_channels & Stderr) {
-        // TODO this doesn't work with dbus. Either remove dbus or change this.
+    if (m_targets & Stderr) {
         QTextStream stream(stderr);
-        stream << msg << "\n";
+        stream << messageHeader(channel, Stderr) << msg << "\n";
+    }
+}
+
+/**
+ * @brief Send a message to the default channel of this logger.
+ * @param msg
+ * @return
+ */
+AbstractLogger& AbstractLogger::operator<<(QString msg)
+{
+    sendMessage(msg, m_defaultChannel);
+    return *this;
+}
+
+AbstractLogger& AbstractLogger::addOutputString(QString& str)
+{
+    m_textStreams << new QTextStream(&str);
+    return *this;
+}
+
+/**
+ * @brief Attach a path to a notification so it can be dragged and dropped.
+ */
+AbstractLogger& AbstractLogger::attachNotificationPath(QString path)
+{
+    if (m_targets & Notification) {
+        m_notificationPath = path;
+    } else {
+        assert("Cannot attach notification path to a logger without a "
+               "notification channel.");
     }
     return *this;
 }
 
-void AbstractLogger::addOutputString(QString& str)
+/**
+ * @brief Enable/disable message header (e.g. "flameshot: info:").
+ */
+AbstractLogger& AbstractLogger::enableMessageHeader(bool enable)
 {
-    m_textStreams << new QTextStream(&str);
+    m_enableMessageHeader = enable;
+    return *this;
+}
+
+/**
+ * @brief Generate a message header for the given channel and target.
+ */
+QString AbstractLogger::messageHeader(Channel channel, Target target)
+{
+    QString messageChannel;
+    if (channel == Info) {
+        messageChannel = "info";
+    } else if (channel == Warning) {
+        messageChannel = "warning";
+    } else if (channel == Error) {
+        messageChannel = "error";
+    }
+
+    if (target == Notification) {
+        messageChannel[0] = messageChannel[0].toUpper();
+        return "Flameshot " + messageChannel;
+    } else {
+        return "flameshot: " + messageChannel + ": ";
+    }
 }

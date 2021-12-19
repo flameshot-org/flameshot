@@ -4,7 +4,6 @@
 #include "confighandler.h"
 #include "abstractlogger.h"
 #include "src/tools/capturetool.h"
-#include "systemnotification.h"
 #include "valuehandler.h"
 #include <QCoreApplication>
 #include <QDebug>
@@ -659,12 +658,12 @@ void ConfigHandler::setErrorState(bool error) const
     // Notify user every time m_hasError changes
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
-        SystemNotification().sendMessage(msg);
+        AbstractLogger::error() << msg;
         emit getInstance()->error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
-        SystemNotification().sendMessage(msg);
+        AbstractLogger::info() << msg;
         emit getInstance()->errorResolved();
     }
 }

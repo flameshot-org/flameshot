@@ -10,31 +10,45 @@ class AbstractLogger : public QObject
 {
     Q_OBJECT
 public:
-    enum Channel
+    enum Target
     {
         Notification = 0x01,
-        LogFile = 0x02,
-        Stderr = 0x04,
-        Stdout = 0x08,
+        Stderr = 0x02,
+        LogFile = 0x08,
         String = 0x10,
         Default = Notification | LogFile | Stderr,
     };
 
-    enum Type
+    enum Channel
     {
         Info,
         Warning,
         Error
     };
 
-    AbstractLogger(Type type = Info, int channels = Stdout);
-    AbstractLogger(QString& str, Type type, int additionalChannels = String);
+    AbstractLogger(Channel channel = Info, int targets = Default);
+    AbstractLogger(QString& str,
+                   Channel channel,
+                   int additionalTargets = String);
     ~AbstractLogger();
 
-    AbstractLogger& operator<<(const QString& msg);
-    void addOutputString(QString& str);
+    // Convenience functions
+    static AbstractLogger info(int targets = Default);
+    static AbstractLogger warning(int targets = Default);
+    static AbstractLogger error(int targets = Default);
+
+    void sendMessage(QString msg, Channel channel);
+    AbstractLogger& operator<<(QString msg);
+    AbstractLogger& addOutputString(QString& str);
+    AbstractLogger& attachNotificationPath(QString path);
+    AbstractLogger& enableMessageHeader(bool enable);
 
 private:
-    int m_channels;
+    QString messageHeader(Channel type, Target channel);
+
+    int m_targets;
+    Channel m_defaultChannel;
     QList<QTextStream*> m_textStreams;
+    QString m_notificationPath;
+    bool m_enableMessageHeader;
 };

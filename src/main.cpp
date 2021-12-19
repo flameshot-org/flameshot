@@ -16,7 +16,6 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/pathinfo.h"
-#include "src/utils/systemnotification.h"
 #include "src/utils/valuehandler.h"
 #include <QApplication>
 #include <QDir>
@@ -139,8 +138,8 @@ int main(int argc, char* argv[])
         new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
-            SystemNotification().sendMessage(
-              QObject::tr("Unable to connect via DBus"));
+            AbstractLogger::error()
+              << QObject::tr("Unable to connect via DBus");
         }
         dbus.registerObject(QStringLiteral("/"), c);
         dbus.registerService(QStringLiteral("org.flameshot.Flameshot"));
@@ -264,8 +263,7 @@ int main(int argc, char* argv[])
         if (fileInfo.isDir() || fileInfo.dir().exists()) {
             return true;
         } else {
-            SystemNotification().sendMessage(
-              QObject::tr(pathErr.toLatin1().data()));
+            AbstractLogger::error() << QObject::tr(pathErr.toLatin1().data());
             return false;
         }
     };
@@ -502,7 +500,7 @@ int main(int argc, char* argv[])
         bool someFlagSet =
           (filename || tray || mainColor || contrastColor || check);
         if (check) {
-            AbstractLogger err(AbstractLogger::Error, AbstractLogger::Stderr);
+            AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
             bool ok = ConfigHandler(true).checkForErrors(&err);
             if (ok) {
                 err << QStringLiteral("No errors detected.\n");
