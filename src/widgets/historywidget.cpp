@@ -1,12 +1,10 @@
 #include "historywidget.h"
-#include "src/tools/storage/imguploader.h"
-#include "src/tools/storage/s3/imgs3uploader.h"
-#include "src/tools/storage/storagemanager.h"
+#include "src/core/flameshotdaemon.h"
+#include "src/tools/imgupload/imguploadermanager.h"
 #include "src/utils/confighandler.h"
+#include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/widgets/notificationwidget.h"
-#include <QApplication>
-#include <QClipboard>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDesktopWidget>
@@ -24,7 +22,7 @@
 HistoryWidget::HistoryWidget(QWidget* parent)
   : QDialog(parent)
 {
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setWindowTitle(tr("Latest Uploads"));
     resize(QDesktopWidget().availableGeometry(this).size() * 0.5);
@@ -104,10 +102,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     History history;
     HISTORY_FILE_NAME unpackFileName = history.unpackFileName(fileName);
 
-    QString url;
-
-    StorageManager storageManager;
-    url = storageManager.storageUrl(unpackFileName.type) + unpackFileName.file;
+    QString url = ImgUploaderManager(this).url() + unpackFileName.file;
 
     // load pixmap
     QPixmap pixmap;
@@ -147,7 +142,7 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
     buttonCopyUrl->setText(tr("Copy URL"));
     buttonCopyUrl->setMinimumHeight(HISTORYPIXMAP_MAX_PREVIEW_HEIGHT);
     connect(buttonCopyUrl, &QPushButton::clicked, this, [=]() {
-        QApplication::clipboard()->setText(url);
+        FlameshotDaemon::copyToClipboard(url);
         m_notification->showMessage(tr("URL copied to clipboard."));
         this->close();
     });
@@ -176,24 +171,13 @@ void HistoryWidget::addLine(const QString& path, const QString& fileName)
                 QMessageBox::Yes | QMessageBox::No)) {
             return;
         }
-        // TODO - remove dependency injection (s3 & imgur)
-        if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_S3) == 0) {
-            if (unpackFileName.token.length() > 0) {
-                removeItem(phbl, unpackFileName.file, unpackFileName.token);
-            } else {
-                // for compatibility with previous versions and to be able to
-                // remove previous screenshots
-                removeCacheFile(fullFileName);
-                removeLayoutItem(phbl);
-            }
-        } else if (unpackFileName.type.compare(SCREENSHOT_STORAGE_TYPE_IMGUR) ==
-                   0) {
-            QDesktopServices::openUrl(
-              QUrl(QStringLiteral("https://imgur.com/delete/%1")
-                     .arg(unpackFileName.token)));
-            removeCacheFile(fullFileName);
-            removeLayoutItem(phbl);
-        }
+
+        ImgUploaderBase* imgUploaderBase =
+          ImgUploaderManager(this).uploader(unpackFileName.type);
+        imgUploaderBase->deleteImage(unpackFileName.file, unpackFileName.token);
+
+        removeCacheFile(fullFileName);
+        removeLayoutItem(phbl);
     });
 
     // layout
@@ -217,17 +201,17 @@ void HistoryWidget::removeItem(QLayout* pl,
                                const QString& fileName,
                                const QString& deleteToken)
 {
-    hide();
-    ImgS3Uploader* imgUploader = new ImgS3Uploader();
-    imgUploader->show();
-    imgUploader->deleteResource(fileName, deleteToken);
-    connect(imgUploader, &QWidget::destroyed, this, [=]() {
-        if (imgUploader->resultStatus) {
-            removeLayoutItem(pl);
-        }
-        imgUploader->deleteLater();
-        show();
-    });
+    /* hide();
+     ImgS3Uploader* imgUploader = new ImgS3Uploader();
+     imgUploader->show();
+     imgUploader->deleteResource(fileName, deleteToken);
+     connect(imgUploader, &QWidget::destroyed, this, [=]() {
+         if (imgUploader->resultStatus) {
+             removeLayoutItem(pl);
+         }
+         imgUploader->deleteLater();
+         show();
+     });*/
 }
 
 void HistoryWidget::removeLayoutItem(QLayout* pl)

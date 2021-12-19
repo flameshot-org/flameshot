@@ -139,10 +139,10 @@ Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Selecione uma área com o mouse, ou precione Esc para sair.
+        <translation>Selecione uma área com o mouse, ou pressione Esc para sair.
 Pressione Enter para capturar a tela.
 Pressione o botão direito do mouse para abrir o seletor de cores.
-Use a roda do mouse para aumentar a grossura do pincel.
+Use a roda do mouse para alterar a espessura do pincel.
 Pressione espaço para abrir o painel lateral.</translation>
     </message>
     <message>
@@ -585,7 +585,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Launch at startup</source>
-        <translation>Eexecutar junto ao sistema</translation>
+        <translation>Executar junto ao sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="317"/>
@@ -641,7 +641,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite de desfazer</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>

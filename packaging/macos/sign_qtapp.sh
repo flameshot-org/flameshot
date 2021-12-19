@@ -21,7 +21,7 @@ if [[ "${APPLE_DEV_IDENTITY}" == "" ]]; then
 fi
 
 echo "--> Start application signing process"
-codesign --sign "${APPLE_DEV_IDENTITY}" --verbose --deep ${APP_NAME}.app
+codesign --sign "${APPLE_DEV_IDENTITY}" --verbose --deep "${APP_NAME}.app"
 
 echo "--> Start packaging process"
 "$(brew --prefix qt5)/bin/macdeployqt" "${APP_NAME}.app" -dmg -sign-for-notarization="${APPLE_DEV_IDENTITY}"

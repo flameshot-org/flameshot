@@ -32,6 +32,7 @@ public:
       QList<QPointer<CaptureTool>> captureToolObjectsHistory);
     void setActiveLayer(int index);
     int activeLayerIndex();
+    bool isVisible() const;
 
 signals:
     void layerChanged(int layer);
@@ -39,7 +40,7 @@ signals:
 public slots:
     void toggle();
     void slotButtonDelete(bool clicked);
-    void slotCaptureToolsCurrentRowChanged(int currentRow);
+    void onCurrentRowChanged(int currentRow);
 
 private:
     void initInternalPanel();

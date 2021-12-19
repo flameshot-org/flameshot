@@ -1,0 +1,23 @@
+#ifndef @CMAKE_PROJECT_NAME@_VERSION_H
+#define @CMAKE_PROJECT_NAME@_VERSION_H
+
+
+#include "@i_export_header@"
+
+
+@i_export_macro@ unsigned int @i_versioned_entity@_versionMajor ();
+
+
+@i_export_macro@ unsigned int @i_versioned_entity@_versionMinor ();
+
+
+@i_export_macro@ unsigned int @i_versioned_entity@_versionPatch ();
+
+
+@i_export_macro@ const char* @i_versioned_entity@_versionGitInfo ();
+
+
+@i_export_macro@ const char* @i_versioned_entity@_versionFullString ();
+
+
+#endif /* @CMAKE_PROJECT_NAME@_VERSION_H */

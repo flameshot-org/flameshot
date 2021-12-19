@@ -156,7 +156,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
         <source>Circle Counter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
@@ -230,7 +230,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="401"/>
@@ -584,12 +584,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
@@ -649,7 +649,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -909,7 +909,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="33"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -917,12 +917,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -977,7 +977,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="111"/>
@@ -991,27 +991,27 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="133"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="134"/>
         <source>See</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="137"/>
         <source>Capture the entire desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="139"/>
         <source>Open the capture launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="142"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="144"/>
@@ -1021,22 +1021,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="146"/>
         <source>Capture a single screen.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Path where the capture will be saved</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="154"/>
         <source>Save the capture to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="156"/>
         <source>Delay time in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="159"/>
@@ -1046,7 +1046,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="162"/>
         <source>Enable or disable the trayicon</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="166"/>
@@ -1061,32 +1061,32 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="173"/>
         <source>Define the main UI color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="177"/>
         <source>Define the contrast UI color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Print raw PNG capture</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Define the screen to capture</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>default: screen containing the cursor</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="189"/>
@@ -1102,7 +1102,7 @@ Press Space to open the side panel.</source>
 - #RRRRGGGGBBBB
 - Named colors like &apos;blue&apos; or &apos;red&apos;
 You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
@@ -1112,17 +1112,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/main.cpp" line="209"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="216"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="227"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1147,27 +1147,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Arguments</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="323"/>
         <source>arguments</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>Usage</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>options</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="508"/>
@@ -1182,22 +1182,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
@@ -1207,27 +1207,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="52"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="55"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="58"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
@@ -1281,12 +1281,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="23"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/redo/redotool.cpp" line="33"/>
         <source>Redo the next modification</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1328,12 +1328,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="16"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
@@ -1351,7 +1351,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
@@ -1374,12 +1374,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
         <source>Active thickness:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="208"/>
@@ -1389,7 +1389,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="210"/>
         <source>Grab Color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1397,12 +1397,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1410,12 +1410,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

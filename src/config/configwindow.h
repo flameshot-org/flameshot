@@ -10,9 +10,9 @@ class ShortcutsWidget;
 class GeneralConf;
 class QFileSystemWatcher;
 class VisualsEditor;
-class UploadStorageConfig;
+class QWidget;
 
-class ConfigWindow : public QTabWidget
+class ConfigWindow : public QWidget
 {
     Q_OBJECT
 public:
@@ -25,10 +25,19 @@ protected:
     void keyPressEvent(QKeyEvent*);
 
 private:
+    QTabWidget* m_tabWidget;
+
     FileNameEditor* m_filenameEditor;
+    QWidget* m_filenameEditorTab;
+
     ShortcutsWidget* m_shortcuts;
+    QWidget* m_shortcutsTab;
+
     GeneralConf* m_generalConfig;
-    UploadStorageConfig* m_uploadStorageConfig;
+    QWidget* m_generalConfigTab;
+
     VisualsEditor* m_visuals;
-    QFileSystemWatcher* m_configWatcher;
+    QWidget* m_visualsTab;
+
+    void initErrorIndicator(QWidget* tab, QWidget* widget);
 };

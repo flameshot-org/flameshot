@@ -99,7 +99,7 @@ int CaptureToolObjects::findWithRadius(QPainter& painter,
             m_imageCache.insert(0, image);
         }
 
-        if (toolItem->nameID() == ToolType::TEXT) {
+        if (toolItem->type() == CaptureTool::TYPE_TEXT) {
             if (currentRadius > SEARCH_RADIUS_NEAR) {
                 // Text already has a big currentRadius and no need to search
                 // with a bit bigger currentRadius than

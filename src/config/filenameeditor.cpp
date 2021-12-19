@@ -92,7 +92,7 @@ void FileNameEditor::initWidgets()
 void FileNameEditor::savePattern()
 {
     QString pattern = m_nameEditor->text();
-    m_nameHandler->setPattern(pattern);
+    ConfigHandler().setFilenamePattern(pattern);
 }
 
 void FileNameEditor::showParsedPattern(const QString& p)
@@ -103,7 +103,7 @@ void FileNameEditor::showParsedPattern(const QString& p)
 
 void FileNameEditor::resetName()
 {
-    m_nameEditor->setText(ConfigHandler().filenamePatternValue());
+    m_nameEditor->setText(ConfigHandler().filenamePattern());
 }
 
 void FileNameEditor::addToNameEditor(QString s)
@@ -114,6 +114,6 @@ void FileNameEditor::addToNameEditor(QString s)
 
 void FileNameEditor::updateComponents()
 {
-    m_nameEditor->setText(ConfigHandler().filenamePatternValue());
+    m_nameEditor->setText(ConfigHandler().filenamePattern());
     m_outputLabel->setText(m_nameHandler->parsedPattern());
 }

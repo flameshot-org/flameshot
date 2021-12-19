@@ -87,7 +87,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="53"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="56"/>
@@ -202,7 +202,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="63"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -210,17 +210,17 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="198"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="207"/>
         <source>You have the latest version</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="215"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
@@ -230,7 +230,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="296"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="401"/>
@@ -255,12 +255,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="428"/>
         <source>Check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="435"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -336,7 +336,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Reset</source>
@@ -559,7 +559,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
         <location filename="../../src/config/generalconf.cpp" line="255"/>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="272"/>
@@ -580,7 +580,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
         <location filename="../../src/config/generalconf.cpp" line="301"/>
         <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Automatic check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
@@ -596,7 +596,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>Show welcome message on launch</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="342"/>
@@ -631,29 +631,29 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="393"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
         <location filename="../../src/config/generalconf.cpp" line="475"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="509"/>
         <location filename="../../src/config/generalconf.cpp" line="512"/>
         <source>Copy file path after save</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="528"/>
@@ -671,12 +671,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="26"/>
         <source>Latest Uploads</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="90"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="141"/>
@@ -691,17 +691,17 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="151"/>
         <source>Open in browser</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="167"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -981,12 +981,12 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1015,7 +1015,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
         <source>Error while saving to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
@@ -1026,22 +1026,22 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="175"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="111"/>
@@ -1140,7 +1140,7 @@ Stiskněte mezerník pro otevření postranního panelu.</translation>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1232,7 +1232,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Per default runs Flameshot in the background and   adds a tray icon for configuration.</source>
@@ -1246,68 +1246,68 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/core/controller.cpp" line="508"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="24"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="52"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="55"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="58"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
@@ -1318,13 +1318,13 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
         <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="86"/>
         <source>Screenshot history</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="89"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
@@ -1402,22 +1402,22 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="16"/>
         <source>Set Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
         <source>Enter new shortcut to change </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1425,7 +1425,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
         <source>Hot Keys</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
@@ -1471,12 +1471,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1484,12 +1484,12 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1713,22 +1713,22 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1741,7 +1741,7 @@ Možná budete muset napsat před &apos;#&apos; opačné (obrácené) lomítko, 
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

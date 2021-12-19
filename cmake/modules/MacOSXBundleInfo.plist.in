@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
- 	<string>English</string>
+	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>flameshot</string>
 	<key>CFBundleGetInfoString</key>
@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>flameshot</string>
 	<key>CFBundleIdentifier</key>
-	<string>https://flameshot.org/</string>
+	<string>@MACOSX_BUNDLE_IDENTIFIER@</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -23,9 +23,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.8.5</string>
+	<string>@PROJECT_VERSION@</string>
 	<key>CFBundleLongVersionString</key>
-	<string></string>
+	<string>@PROJECT_VERSION@</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
@@ -37,10 +37,10 @@
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>LSUIElement</key>
-    <string>1</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Application requires access to save screenshots to your gallery</string>
-    <key>NSSupportsAutomaticGraphicsSwitching</key>
-    <true/>
+	<string>1</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Application requires access to save screenshots to your gallery</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
 </dict>
 </plist>

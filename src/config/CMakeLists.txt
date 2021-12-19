@@ -12,5 +12,4 @@ target_sources(
           visualseditor.cpp
           shortcutswidget.cpp
           setshortcutwidget.cpp
-          uploadstorageconfig.cpp
 )

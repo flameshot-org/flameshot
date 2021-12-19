@@ -4,7 +4,7 @@ echo "Change the permision of .dmg file"
 hdiutil convert "flameshot.dmg" -format UDRW -o "flameshot_rw.dmg"
 
 echo "Mount it and save the device"
-DEVICE=$(hdiutil attach -readwrite -noverify "flameshot_rw.dmg" | egrep '^/dev/' | sed 1q | awk '{print $1}')
+DEVICE=$(hdiutil attach -readwrite -noverify "flameshot_rw.dmg" | grep -E '^/dev/' | sed 1q | awk '{print $1}')
 sleep 5
 
 echo "Create the sysmbolic link to application folder"

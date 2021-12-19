@@ -10,6 +10,7 @@
 #include <QCheckBox>
 #include <QDir>
 #include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QLineEdit>
 #include <QList>
 #include <QListView>
@@ -38,10 +39,10 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
   , m_pixmap(p)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(":img/app/flameshot.svg"));
+    setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowTitle(tr("Open With"));
 
-    m_keepOpen = ConfigHandler().keepOpenAppLauncherValue();
+    m_keepOpen = ConfigHandler().keepOpenAppLauncher();
 
     QString dirLocal = QDir::homePath() + "/.local/share/applications/";
     QDir appsDirLocal(dirLocal);
@@ -56,7 +57,7 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
 
     m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
     m_keepOpenCheckbox = new QCheckBox(tr("Keep open after selection"), this);
-    m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncherValue());
+    m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncher());
     connect(m_keepOpenCheckbox,
             &QCheckBox::clicked,
             this,
@@ -87,7 +88,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
 {
     if (!QFileInfo(m_tempFile).isReadable()) {
         m_tempFile =
-          FileNameHandler().generateAbsolutePath(QDir::tempPath()) + ".png";
+          FileNameHandler().properScreenshotPath(QDir::tempPath(), "png");
         bool ok = m_pixmap.save(m_tempFile);
         if (!ok) {
             QMessageBox::about(
@@ -245,5 +246,14 @@ void AppLauncherWidget::addAppsToListWidget(
         buttonItem->setIcon(app.icon);
         buttonItem->setText(app.name);
         buttonItem->setToolTip(app.description);
+    }
+}
+
+void AppLauncherWidget::keyPressEvent(QKeyEvent* keyEvent)
+{
+    if (keyEvent->key() == Qt::Key_Escape) {
+        close();
+    } else {
+        QWidget::keyPressEvent(keyEvent);
     }
 }

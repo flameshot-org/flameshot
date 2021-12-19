@@ -31,8 +31,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt_ver: [ 5.15.2 ]
-        qt_target: [ desktop ]
+        qt_ver: [5.15.2]
+        qt_target: [desktop]
         config:
           - {
             arch: x86,
@@ -50,14 +50,14 @@ jobs:
             qt_arch_install: msvc2019_64,
             pak_arch: win64
           }
-        type: [ portable, installer ]
+        type: [portable, installer]
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      #          ref: master
+#          ref: master
 
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
@@ -80,17 +80,14 @@ jobs:
           # echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
           echo "VERSION=$(cat CMakeLists.txt |grep 'set.*(.*FLAMESHOT_VERSION' | sed 's/[^0-9.]*//' |sed 's/)//g')" >> $GITHUB_ENV
 
-      # Cannot build OpenSSL:
-      #   Error: run-vcpkg action execution failed: Error: Last command execution failed with error code '3221225477'.
-      # TODO - lukka/run-vcpkg@v7 ISSUE (Uncomment after fix). Build OpenSSL.
-      #- name: Restore from cache and run vcpkg
-      #  uses: lukka/run-vcpkg@v7
-      #  with:
-      #    vcpkgArguments: ${{env.VCPKG_PACKAGES}}
-      #    vcpkgDirectory: '${{ github.workspace }}\vcpkg'
-      #    appendedCacheKey: ${{ matrix.config.vcpkg_triplet }}
-      #    vcpkgGitCommitId: ${{ env.VCPKG_VERSION }}
-      #    vcpkgTriplet: ${{ matrix.config.vcpkg_triplet }}
+      - name: Restore from cache and run vcpkg
+        uses: lukka/run-vcpkg@v4
+        with:
+          vcpkgArguments: ${{env.VCPKG_PACKAGES}}
+          vcpkgDirectory: '${{ github.workspace }}\vcpkg'
+          appendedCacheKey: ${{ matrix.config.vcpkg_triplet }}
+          vcpkgGitCommitId: ${{ env.VCPKG_VERSION }}
+          vcpkgTriplet: ${{ matrix.config.vcpkg_triplet }}
 
       - name: Cache Qt
         id: cache-qt
@@ -103,37 +100,21 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: ${{ matrix.qt_ver }}
-          target: ${{ matrix.qt_target }}
+          target:  ${{ matrix.qt_target }}
           arch: ${{ matrix.config.qt_arch }}
           dir: '${{ github.workspace }}/build/'
           modules: 'qtscript'
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      # TODO - lukka/run-vcpkg@v7 ISSUE (Comment after fix). Take previous binaries.
-      - name: Copy OpenSSL libraries ${{ matrix.config.arch }}
-        working-directory: build
-        shell: bash
-        run: |
-          export OPENSSL_ROOT_DIR="../vcpkg/installed/${{ matrix.config.arch }}-windows/bin/"
-          mkdir -p "${OPENSSL_ROOT_DIR}"
-          [ $(ls "${OPENSSL_ROOT_DIR}" | wc -l) -eq 0 ] &&  cp ../packaging/win-installer/openssl/x64/* "${OPENSSL_ROOT_DIR}"
-
       - name: Configure
         working-directory: build
         shell: pwsh
-        # TODO - lukka/run-vcpkg@v7 ISSUE (Comment after fix). Take previous binaries.
         run: |
           cmake ..  ${{matrix.config.generator}}  `
+          -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake"  `
           -DENABLE_OPENSSL=ON `
           -DCMAKE_BUILD_TYPE=Release  `
           -DRUN_IN_PLACE=${{ contains(matrix.type, 'portable') }}
-        # TODO - lukka/run-vcpkg@v7 ISSUE (Uncomment after fix). Build OpenSSL.
-        #run: |
-        #  cmake ..  ${{matrix.config.generator}}  `
-        #  -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake"  `
-        #  -DENABLE_OPENSSL=ON `
-        #  -DCMAKE_BUILD_TYPE=Release  `
-        #  -DRUN_IN_PLACE=${{ contains(matrix.type, 'portable') }}
 
       - name: Compile
         working-directory: build
@@ -144,6 +125,8 @@ jobs:
         working-directory: build
         shell: pwsh
         run: |
+          # Chocolately made thier own package called cpack and its first in the path. This is a hack since we are only using cmake's cpack, doesnt seem to be required after a CI update
+          #Remove-Item C:\ProgramData\Chocolatey\bin\cpack.exe
           If ($env:TYPE -eq "installer")
           {
             cpack -G WIX -B "$env:GITHUB_WORKSPACE\build\Package"
@@ -158,24 +141,24 @@ jobs:
       - name: Package Clean
         shell: pwsh
         run: |
-          Remove-Item $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages -Recurse
+          # Remove-Item $env:GITHUB_WORKSPACE\build\Package\_CPack_Packages -Recurse
           New-Item -Path $env:GITHUB_WORKSPACE\build\Package\installer -ItemType Directory
           New-Item -Path $env:GITHUB_WORKSPACE\build\Package\portable -ItemType Directory
 
       - name: Package Prepare (installer)
-        if: matrix.type == 'installer'
+        if:  matrix.type == 'installer'
         shell: pwsh
         run: |
           Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/Flameshot-*-${{ matrix.config.pak_arch }}.msi -Destination $env:GITHUB_WORKSPACE/build/Package/installer/Flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.msi
 
       - name: Package Prepare (portable)
-        if: matrix.type == 'portable'
+        if:  matrix.type == 'portable'
         shell: pwsh
         run: |
           Move-Item -Path $env:GITHUB_WORKSPACE/build/Package/flameshot-*-${{ matrix.config.pak_arch }}.zip -Destination $env:GITHUB_WORKSPACE/build/Package/portable/flameshot-$env:VERSION-${{ matrix.config.pak_arch }}.zip
 
       - name: SHA256Sum of Windows installer(daily build)
-        if: matrix.type == 'installer'
+        if:  matrix.type == 'installer'
         shell: bash
         run: |
           sha256sum $GITHUB_WORKSPACE/build/Package/installer/Flameshot-${VERSION}-${{ matrix.config.pak_arch }}.msi
@@ -186,7 +169,7 @@ jobs:
           echo "=======no operation for you can see link in the log console====="
 
       - name: SHA256Sum of Windows portable(daily build)
-        if: matrix.type == 'portable'
+        if:  matrix.type == 'portable'
         shell: bash
         run: |
           sha256sum $GITHUB_WORKSPACE/build/Package/portable/flameshot-${VERSION}-${{ matrix.config.pak_arch }}.zip
@@ -197,7 +180,7 @@ jobs:
           echo "=====no operation for you can see link in the log console====="
 
       - name: Upload Windows installer(daily build)
-        if: matrix.type == 'installer'
+        if:  matrix.type == 'installer'
         shell: bash
         run: |
           python -m pip install -U -q requests
@@ -206,7 +189,7 @@ jobs:
           echo "=====no operation for you can see link in the log console====="
 
       - name: Upload Windows portable(daily build)
-        if: matrix.type == 'portable'
+        if:  matrix.type == 'portable'
         shell: bash
         run: |
           python -m pip install -U -q requests

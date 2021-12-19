@@ -20,13 +20,17 @@ public:
     enum ExportTask
     {
         NO_TASK = 0,
-        CLIPBOARD_SAVE_TASK = 1,
-        FILESYSTEM_SAVE_TASK = 2,
+        COPY = 1,
+        SAVE = 2,
+        PRINT_RAW = 4,
+        PRINT_GEOMETRY = 8,
+        PIN = 16,
+        UPLOAD = 32,
+        ACCEPT_ON_SELECT = 64,
     };
 
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
-                   const QString& path = QLatin1String(""),
                    const QVariant& data = QVariant(),
                    ExportTask tasks = NO_TASK);
 
@@ -37,9 +41,14 @@ public:
     QString path() const;
     QVariant data() const;
     CaptureMode captureMode() const;
+    ExportTask tasks() const;
+    QRect initialSelection() const;
 
     void addTask(ExportTask task);
-    void exportCapture(const QPixmap& p);
+    void removeTask(ExportTask task);
+    void addSaveTask(const QString& path = QString());
+    void addPinTask(const QRect& pinWindowGeometry);
+    void setInitialSelection(const QRect& selection);
 
 private:
     CaptureMode m_mode;
@@ -47,9 +56,9 @@ private:
     QString m_path;
     ExportTask m_tasks;
     QVariant m_data;
+    QRect m_pinWindowGeometry, m_initialSelection;
 
-    bool m_forcedID;
-    uint m_id;
+    CaptureRequest() {}
 };
 
 using eTask = CaptureRequest::ExportTask;

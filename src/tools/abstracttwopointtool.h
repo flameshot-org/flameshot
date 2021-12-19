@@ -15,12 +15,13 @@ public:
     bool closeOnButtonPressed() const override;
     bool isSelectable() const override;
     bool showMousePreview() const override;
+    QRect mousePreviewRect(const CaptureContext& context) const override;
+    QRect boundingRect() const override;
     void move(const QPoint& pos) override;
     const QPoint* pos() override;
-    void drawObjectSelection(QPainter& painter) override;
-    int thickness() override { return m_thickness; };
+    int size() const override { return m_thickness; };
     const QColor& color() { return m_color; };
-    const QPair<QPoint, QPoint> points() { return m_points; };
+    const QPair<QPoint, QPoint> points() const { return m_points; };
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
 
@@ -28,8 +29,8 @@ public slots:
     void drawEnd(const QPoint& p) override;
     void drawMove(const QPoint& p) override;
     void drawMoveWithAdjustment(const QPoint& p) override;
-    void colorChanged(const QColor& c) override;
-    void thicknessChanged(int th) override;
+    void onColorChanged(const QColor& c) override;
+    void onSizeChanged(int size) override;
     virtual void drawStart(const CaptureContext& context) override;
 
 private:

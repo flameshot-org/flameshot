@@ -3,377 +3,29 @@
 
 #include "confighandler.h"
 #include "src/tools/capturetool.h"
-#include "src/tools/storage/storagemanager.h"
-#include "src/utils/configshortcuts.h"
+#include "systemnotification.h"
+#include "valuehandler.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QFileSystemWatcher>
 #include <QKeySequence>
+#include <QMap>
+#include <QSharedPointer>
 #include <QStandardPaths>
+#include <QTextStream>
+#include <QVector>
 #include <algorithm>
+#include <stdexcept>
+
 #if defined(Q_OS_MACOS)
 #include <QProcess>
 #endif
 
-ConfigHandler::ConfigHandler()
-{
-    m_settings.setDefaultFormat(QSettings::IniFormat);
-}
+// HELPER FUNCTIONS
 
-QVector<CaptureToolButton::ButtonType> ConfigHandler::getButtons()
-{
-    QVector<CaptureToolButton::ButtonType> buttons;
-    if (m_settings.contains(QStringLiteral("buttons"))) {
-        // TODO: remove toList in v1.0
-        QVector<int> buttonsInt = m_settings.value(QStringLiteral("buttons"))
-                                    .value<QList<int>>()
-                                    .toVector();
-        bool modified = normalizeButtons(buttonsInt);
-        if (modified) {
-            m_settings.setValue(QStringLiteral("buttons"),
-                                QVariant::fromValue(buttonsInt.toList()));
-        }
-        buttons = fromIntToButton(buttonsInt);
-    } else {
-        // Default tools
-        buttons << CaptureToolButton::TYPE_PENCIL
-                << CaptureToolButton::TYPE_DRAWER
-                << CaptureToolButton::TYPE_ARROW
-                << CaptureToolButton::TYPE_SELECTION
-                << CaptureToolButton::TYPE_RECTANGLE
-                << CaptureToolButton::TYPE_CIRCLE
-                << CaptureToolButton::TYPE_MARKER
-                << CaptureToolButton::TYPE_PIXELATE
-                << CaptureToolButton::TYPE_SELECTIONINDICATOR
-                << CaptureToolButton::TYPE_MOVESELECTION
-                << CaptureToolButton::TYPE_UNDO << CaptureToolButton::TYPE_REDO
-                << CaptureToolButton::TYPE_COPY << CaptureToolButton::TYPE_SAVE
-                << CaptureToolButton::TYPE_EXIT
-                << CaptureToolButton::TYPE_IMAGEUPLOADER
-#if not defined(Q_OS_MACOS)
-                << CaptureToolButton::TYPE_OPEN_APP
-#endif
-                << CaptureToolButton::TYPE_PIN << CaptureToolButton::TYPE_TEXT
-                << CaptureToolButton::TYPE_CIRCLECOUNT;
-    }
-
-    using bt = CaptureToolButton::ButtonType;
-    std::sort(buttons.begin(), buttons.end(), [](bt a, bt b) {
-        return CaptureToolButton::getPriorityByButton(a) <
-               CaptureToolButton::getPriorityByButton(b);
-    });
-    return buttons;
-}
-
-void ConfigHandler::setButtons(
-  const QVector<CaptureToolButton::ButtonType>& buttons)
-{
-    QVector<int> l = fromButtonToInt(buttons);
-    normalizeButtons(l);
-    // TODO: remove toList in v1.0
-    m_settings.setValue(QStringLiteral("buttons"),
-                        QVariant::fromValue(l.toList()));
-}
-
-QVector<QColor> ConfigHandler::getUserColors()
-{
-    QVector<QColor> colors;
-    const QVector<QColor>& defaultColors = {
-        Qt::white,     Qt::red,      Qt::green,       Qt::blue,
-        Qt::black,     Qt::darkRed,  Qt::darkGreen,   Qt::darkBlue,
-        Qt::darkGray,  Qt::cyan,     Qt::magenta,     Qt::yellow,
-        Qt::lightGray, Qt::darkCyan, Qt::darkMagenta, Qt::darkYellow,
-        QColor()
-    };
-
-    if (m_settings.contains(QStringLiteral("userColors"))) {
-        for (const QString& hex :
-             m_settings.value(QStringLiteral("userColors")).toStringList()) {
-            if (QColor::isValidColor(hex)) {
-                colors.append(QColor(hex));
-            } else if (hex == QStringLiteral("picker")) {
-                colors.append(QColor());
-            }
-        }
-
-        if (colors.isEmpty()) {
-            colors = defaultColors;
-        }
-    } else {
-        colors = defaultColors;
-    }
-
-    return colors;
-}
-
-QString ConfigHandler::savePath()
-{
-    return m_settings.value(QStringLiteral("savePath")).toString();
-}
-
-void ConfigHandler::setSavePath(const QString& savePath)
-{
-    m_settings.setValue(QStringLiteral("savePath"), savePath);
-}
-
-bool ConfigHandler::savePathFixed()
-{
-    if (!m_settings.contains(QStringLiteral("savePathFixed"))) {
-        m_settings.setValue(QStringLiteral("savePathFixed"), false);
-    }
-    return m_settings.value(QStringLiteral("savePathFixed")).toBool();
-}
-
-void ConfigHandler::setSavePathFixed(bool savePathFixed)
-{
-    m_settings.setValue(QStringLiteral("savePathFixed"), savePathFixed);
-}
-
-QColor ConfigHandler::uiMainColorValue()
-{
-    QColor res = QColor(116, 0, 150);
-
-    if (m_settings.contains(QStringLiteral("uiColor"))) {
-        QString hex = m_settings.value(QStringLiteral("uiColor")).toString();
-
-        if (QColor::isValidColor(hex)) {
-            res = QColor(hex);
-        }
-    }
-    return res;
-}
-
-void ConfigHandler::setUIMainColor(const QColor& c)
-{
-    m_settings.setValue(QStringLiteral("uiColor"), c.name());
-}
-
-QColor ConfigHandler::uiContrastColorValue()
-{
-    QColor res = QColor(39, 0, 50);
-
-    if (m_settings.contains(QStringLiteral("contrastUiColor"))) {
-        QString hex =
-          m_settings.value(QStringLiteral("contrastUiColor")).toString();
-
-        if (QColor::isValidColor(hex)) {
-            res = QColor(hex);
-        }
-    }
-
-    return res;
-}
-
-void ConfigHandler::setUIContrastColor(const QColor& c)
-{
-    m_settings.setValue(QStringLiteral("contrastUiColor"), c.name());
-}
-
-QColor ConfigHandler::drawColorValue()
-{
-    QColor res(Qt::red);
-
-    if (m_settings.contains(QStringLiteral("drawColor"))) {
-        QString hex = m_settings.value(QStringLiteral("drawColor")).toString();
-
-        if (QColor::isValidColor(hex)) {
-            res = QColor(hex);
-        }
-    }
-
-    return res;
-}
-
-void ConfigHandler::setDrawColor(const QColor& c)
-{
-    m_settings.setValue(QStringLiteral("drawColor"), c.name());
-}
-
-void ConfigHandler::setFontFamily(const QString& fontFamily)
-{
-    m_settings.setValue(QStringLiteral("fontFamily"), fontFamily);
-}
-
-const QString& ConfigHandler::fontFamily()
-{
-    m_strRes.clear();
-    if (m_settings.contains(QStringLiteral("fontFamily"))) {
-        m_strRes = m_settings.value(QStringLiteral("fontFamily")).toString();
-    }
-    return m_strRes;
-}
-
-bool ConfigHandler::showHelpValue()
-{
-    bool res = true;
-    if (m_settings.contains(QStringLiteral("showHelp"))) {
-        res = m_settings.value(QStringLiteral("showHelp")).toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setShowHelp(const bool showHelp)
-{
-    m_settings.setValue(QStringLiteral("showHelp"), showHelp);
-}
-
-bool ConfigHandler::showSidePanelButtonValue()
-{
-    return m_settings.value(QStringLiteral("showSidePanelButton"), true)
-      .toBool();
-}
-
-void ConfigHandler::setShowSidePanelButton(const bool showSidePanelButton)
-{
-    m_settings.setValue(QStringLiteral("showSidePanelButton"),
-                        showSidePanelButton);
-}
-
-void ConfigHandler::setIgnoreUpdateToVersion(const QString& text)
-{
-    m_settings.setValue(QStringLiteral("ignoreUpdateToVersion"), text);
-}
-
-QString ConfigHandler::ignoreUpdateToVersion()
-{
-    return m_settings.value(QStringLiteral("ignoreUpdateToVersion")).toString();
-}
-
-void ConfigHandler::setUndoLimit(int value)
-{
-    m_settings.setValue(QStringLiteral("undoLimit"), value);
-}
-
-int ConfigHandler::undoLimit()
-{
-    int limit = 100;
-    if (m_settings.contains(QStringLiteral("undoLimit"))) {
-        limit = m_settings.value(QStringLiteral("undoLimit")).toInt();
-        limit = qBound(1, limit, 999);
-    }
-    return limit;
-}
-
-bool ConfigHandler::desktopNotificationValue()
-{
-    bool res = true;
-    if (m_settings.contains(QStringLiteral("showDesktopNotification"))) {
-        res =
-          m_settings.value(QStringLiteral("showDesktopNotification")).toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setDesktopNotification(const bool showDesktopNotification)
-{
-    m_settings.setValue(QStringLiteral("showDesktopNotification"),
-                        showDesktopNotification);
-}
-
-QString ConfigHandler::filenamePatternDefault()
-{
-    m_strRes = QLatin1String("%F_%H-%M");
-    return m_strRes;
-}
-
-QString ConfigHandler::filenamePatternValue()
-{
-    m_strRes = m_settings.value(QStringLiteral("filenamePattern")).toString();
-    if (m_strRes.isEmpty()) {
-        m_strRes = filenamePatternDefault();
-    }
-    return m_strRes;
-}
-
-void ConfigHandler::setFilenamePattern(const QString& pattern)
-{
-    return m_settings.setValue(QStringLiteral("filenamePattern"), pattern);
-}
-
-bool ConfigHandler::disabledTrayIconValue()
-{
-    bool res = false;
-    if (m_settings.contains(QStringLiteral("disabledTrayIcon"))) {
-        res = m_settings.value(QStringLiteral("disabledTrayIcon")).toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setDisabledTrayIcon(const bool disabledTrayIcon)
-{
-    m_settings.setValue(QStringLiteral("disabledTrayIcon"), disabledTrayIcon);
-}
-
-int ConfigHandler::drawThicknessValue()
-{
-    int res = 3;
-    if (m_settings.contains(QStringLiteral("drawThickness"))) {
-        res = m_settings.value(QStringLiteral("drawThickness")).toInt();
-    }
-    return res;
-}
-
-void ConfigHandler::setDrawThickness(const int thickness)
-{
-    m_settings.setValue(QStringLiteral("drawThickness"), thickness);
-}
-
-int ConfigHandler::drawFontSizeValue()
-{
-    int res = 8;
-    if (m_settings.contains(QStringLiteral("drawFontSize"))) {
-        res = m_settings.value(QStringLiteral("drawFontSize")).toInt();
-    }
-    return res;
-}
-
-void ConfigHandler::setDrawFontSize(const int fontSize)
-{
-    m_settings.setValue(QStringLiteral("drawFontSize"), fontSize);
-}
-
-bool ConfigHandler::keepOpenAppLauncherValue()
-{
-    return m_settings.value(QStringLiteral("keepOpenAppLauncher")).toBool();
-}
-
-void ConfigHandler::setKeepOpenAppLauncher(const bool keepOpen)
-{
-    m_settings.setValue(QStringLiteral("keepOpenAppLauncher"), keepOpen);
-}
-
-bool ConfigHandler::checkForUpdates()
-{
-    bool res = true;
-    if (m_settings.contains(QStringLiteral("checkForUpdates"))) {
-        res = m_settings.value(QStringLiteral("checkForUpdates")).toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setCheckForUpdates(const bool checkForUpdates)
-{
-    m_settings.setValue(QStringLiteral("checkForUpdates"), checkForUpdates);
-}
-
-bool ConfigHandler::startupLaunchValue()
-{
-#if defined(Q_OS_MACOS)
-    bool res = false;
-#else
-    bool res = true;
-#endif
-    if (m_settings.contains(QStringLiteral("startupLaunch"))) {
-        res = m_settings.value(QStringLiteral("startupLaunch")).toBool();
-    }
-    if (res != verifyLaunchFile()) {
-        setStartupLaunch(res);
-    }
-    return res;
-}
-
-bool ConfigHandler::verifyLaunchFile()
+bool verifyLaunchFile()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
@@ -392,12 +44,199 @@ bool ConfigHandler::verifyLaunchFile()
     return res;
 }
 
+// VALUE HANDLING
+
+/**
+ * Use this to declare a setting with a type that is either unrecognized by
+ * QVariant or if you need to place additional constraints on its value.
+ * @param KEY Name of the setting as in the config file
+ *            (a C-style string literal)
+ * @param TYPE An instance of a `ValueHandler` derivative. This must be
+ *             specified in the form of a constructor, or the macro will
+ *             misbehave.
+ */
+#define OPTION(KEY, TYPE)                                                      \
+    {                                                                          \
+        QStringLiteral(KEY), QSharedPointer<ValueHandler>(new TYPE)            \
+    }
+
+#define SHORTCUT(NAME, DEFAULT_VALUE)                                          \
+    {                                                                          \
+        QStringLiteral(NAME), QSharedPointer<KeySequence>(new KeySequence(     \
+                                QKeySequence(QLatin1String(DEFAULT_VALUE))))   \
+    }
+
+/**
+ * This map contains all the information that is needed to parse, verify and
+ * preprocess each configuration option in the General section.
+ * NOTE: Please keep it well structured
+ */
+// clang-format off
+static QMap<class QString, QSharedPointer<ValueHandler>>
+        recognizedGeneralOptions = {
+//         KEY                            TYPE                 DEFAULT_VALUE
+    OPTION("showHelp"                    ,Bool               ( true          )),
+    OPTION("showSidePanelButton"         ,Bool               ( true          )),
+    OPTION("showDesktopNotification"     ,Bool               ( true          )),
+    OPTION("disabledTrayIcon"            ,Bool               ( false         )),
+    OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
+    OPTION("checkForUpdates"             ,Bool               ( true          )),
+    OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
+#if !defined(Q_OS_WIN)
+    OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
+#endif
+#if defined(Q_OS_MACOS)
+    OPTION("startupLaunch"               ,Bool               ( false         )),
+#else
+    OPTION("startupLaunch"               ,Bool               ( true          )),
+#endif
+    OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
+    OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
+    OPTION("copyPathAfterSave"           ,Bool               ( false         )),
+    OPTION("antialiasingPinZoom"         ,Bool               ( true          )),
+    OPTION("useJpgForClipboard"          ,Bool               ( false         )),
+    OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
+    OPTION("saveAfterCopy"               ,Bool               ( false         )),
+    OPTION("savePath"                    ,ExistingDir        (               )),
+    OPTION("savePathFixed"               ,Bool               ( false         )),
+    OPTION("setSaveAsFileExtension"      ,SaveFileExtension  (               )),
+    OPTION("uploadHistoryMax"            ,LowerBoundedInt(0  , 25            )),
+    OPTION("undoLimit"                   ,BoundedInt(0, 999  , 100           )),
+    // Interface tab
+    OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
+    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
+    OPTION("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
+    OPTION("buttons"                     ,ButtonList         ( {}            )),
+    // Filename Editor tab
+    OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
+    // Others
+    OPTION("drawThickness"               ,LowerBoundedInt(1  , 3             )),
+    OPTION("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
+    OPTION("drawColor"                   ,Color              ( Qt::red       )),
+    OPTION("userColors"                  ,UserColors         (               )),
+    OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
+    OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
+    OPTION("fontFamily"                  ,String             ( ""            )),
+    // NOTE: If another tool size is added besides drawThickness and
+    // drawFontSize, remember to update ConfigHandler::toolSize
+};
+
+static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
+//           NAME                           DEFAULT_SHORTCUT
+    SHORTCUT("TYPE_PENCIL"              ,   "P"                     ),
+    SHORTCUT("TYPE_DRAWER"              ,   "D"                     ),
+    SHORTCUT("TYPE_ARROW"               ,   "A"                     ),
+    SHORTCUT("TYPE_SELECTION"           ,   "S"                     ),
+    SHORTCUT("TYPE_RECTANGLE"           ,   "R"                     ),
+    SHORTCUT("TYPE_CIRCLE"              ,   "C"                     ),
+    SHORTCUT("TYPE_MARKER"              ,   "M"                     ),
+    SHORTCUT("TYPE_MOVESELECTION"       ,   "Ctrl+M"                ),
+    SHORTCUT("TYPE_UNDO"                ,   "Ctrl+Z"                ),
+    SHORTCUT("TYPE_COPY"                ,   "Ctrl+C"                ),
+    SHORTCUT("TYPE_SAVE"                ,   "Ctrl+S"                ),
+    SHORTCUT("TYPE_ACCEPT"              ,   "Return"                ),
+    SHORTCUT("TYPE_EXIT"                ,   "Ctrl+Q"                ),
+    SHORTCUT("TYPE_IMAGEUPLOADER"       ,                           ),
+#if !defined(Q_OS_MACOS)
+    SHORTCUT("TYPE_OPEN_APP"            ,   "Ctrl+O"                ),
+#endif
+    SHORTCUT("TYPE_PIXELATE"            ,   "B"                     ),
+    SHORTCUT("TYPE_INVERT"              ,   "I"                     ),
+    SHORTCUT("TYPE_REDO"                ,   "Ctrl+Shift+Z"          ),
+    SHORTCUT("TYPE_TEXT"                ,   "T"                     ),
+    SHORTCUT("TYPE_TOGGLE_PANEL"        ,   "Space"                 ),
+    SHORTCUT("TYPE_RESIZE_LEFT"         ,   "Shift+Left"            ),
+    SHORTCUT("TYPE_RESIZE_RIGHT"        ,   "Shift+Right"           ),
+    SHORTCUT("TYPE_RESIZE_UP"           ,   "Shift+Up"              ),
+    SHORTCUT("TYPE_RESIZE_DOWN"         ,   "Shift+Down"            ),
+    SHORTCUT("TYPE_SELECT_ALL"          ,   "Ctrl+A"                ),
+    SHORTCUT("TYPE_MOVE_LEFT"           ,   "Left"                  ),
+    SHORTCUT("TYPE_MOVE_RIGHT"          ,   "Right"                 ),
+    SHORTCUT("TYPE_MOVE_UP"             ,   "Up"                    ),
+    SHORTCUT("TYPE_MOVE_DOWN"           ,   "Down"                  ),
+    SHORTCUT("TYPE_COMMIT_CURRENT_TOOL" ,   "Ctrl+Return"           ),
+#if defined(Q_OS_MACOS)
+    SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Backspace"             ),
+    SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Shift+X"          ),
+    SHORTCUT("SCREENSHOT_HISTORY"       ,   "Alt+Shift+X"           ),
+#else
+    SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
+#endif
+    SHORTCUT("TYPE_PIN"                 ,                           ),
+    SHORTCUT("TYPE_SELECTIONINDICATOR"  ,                           ),
+    SHORTCUT("TYPE_SIZEINCREASE"        ,                           ),
+    SHORTCUT("TYPE_SIZEDECREASE"        ,                           ),
+    SHORTCUT("TYPE_CIRCLECOUNT"         ,                           ),
+};
+// clang-format on
+
+// CLASS CONFIGHANDLER
+
+ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
+  : m_settings(QSettings::IniFormat,
+               QSettings::UserScope,
+               qApp->organizationName(),
+               qApp->applicationName())
+{
+    static bool wasEverChecked = false;
+    static bool firstInitialization = true;
+    if (!skipInitialErrorCheck && !wasEverChecked) {
+        // check for error on initial call
+        checkAndHandleError();
+        wasEverChecked = true;
+    }
+    if (firstInitialization) {
+        // check for error every time the file changes
+        m_configWatcher.reset(new QFileSystemWatcher());
+        ensureFileWatched();
+        QObject::connect(m_configWatcher.data(),
+                         &QFileSystemWatcher::fileChanged,
+                         [](const QString& fileName) {
+                             emit getInstance()->fileChanged();
+
+                             if (QFile(fileName).exists()) {
+                                 m_configWatcher->addPath(fileName);
+                             }
+                             if (m_skipNextErrorCheck) {
+                                 m_skipNextErrorCheck = false;
+                                 return;
+                             }
+                             ConfigHandler().checkAndHandleError();
+                             if (!QFile(fileName).exists()) {
+                                 // File watcher stops watching a deleted file.
+                                 // Next time the config is accessed, force it
+                                 // to check for errors (and watch again).
+                                 m_errorCheckPending = true;
+                             }
+                         });
+    }
+    firstInitialization = false;
+}
+
+/// Serves as an object to which slots can be connected.
+ConfigHandler* ConfigHandler::getInstance()
+{
+    static ConfigHandler config;
+    return &config;
+}
+
+// SPECIAL CASES
+
+bool ConfigHandler::startupLaunch()
+{
+    bool res = value(QStringLiteral("startupLaunch")).toBool();
+    if (res != verifyLaunchFile()) {
+        setStartupLaunch(res);
+    }
+    return res;
+}
+
 void ConfigHandler::setStartupLaunch(const bool start)
 {
-    if (start == m_settings.value(QStringLiteral("startupLaunch")).toBool()) {
+    if (start == value(QStringLiteral("startupLaunch")).toBool()) {
         return;
     }
-    m_settings.setValue(QStringLiteral("startupLaunch"), start);
+    setValue(QStringLiteral("startupLaunch"), start);
 #if defined(Q_OS_MACOS)
     /* TODO - there should be more correct way via API, but didn't find it
      without extra dependencies, there should be something like that:
@@ -427,9 +266,9 @@ void ConfigHandler::setStartupLaunch(const bool start)
                    << process.readAll();
     }
 #elif defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    QString path = QStandardPaths::locate(QStandardPaths::GenericConfigLocation,
-                                          "autostart/",
-                                          QStandardPaths::LocateDirectory);
+    QString path =
+      QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+      "/autostart/";
     QDir autostartDir(path);
     if (!autostartDir.exists()) {
         autostartDir.mkpath(".");
@@ -476,166 +315,42 @@ void ConfigHandler::setStartupLaunch(const bool start)
 #endif
 }
 
-bool ConfigHandler::showStartupLaunchMessage()
+void ConfigHandler::setAllTheButtons()
 {
-    if (!m_settings.contains(QStringLiteral("showStartupLaunchMessage"))) {
-        m_settings.setValue(QStringLiteral("showStartupLaunchMessage"), true);
+    QList<CaptureTool::Type> buttons =
+      CaptureToolButton::getIterableButtonTypes();
+    setValue(QStringLiteral("buttons"), QVariant::fromValue(buttons));
+}
+
+void ConfigHandler::setToolSize(CaptureTool::Type toolType, int size)
+{
+    if (toolType == CaptureTool::TYPE_TEXT) {
+        setDrawFontSize(size);
+    } else if (toolType != CaptureTool::NONE) {
+        setDrawThickness(size);
     }
-    return m_settings.value(QStringLiteral("showStartupLaunchMessage"))
-      .toBool();
 }
 
-void ConfigHandler::setShowStartupLaunchMessage(
-  const bool showStartupLaunchMessage)
+int ConfigHandler::toolSize(CaptureTool::Type toolType)
 {
-    m_settings.setValue(QStringLiteral("showStartupLaunchMessage"),
-                        showStartupLaunchMessage);
-}
-
-int ConfigHandler::contrastOpacityValue()
-{
-    int opacity = 190;
-    if (m_settings.contains(QStringLiteral("contrastOpacity"))) {
-        opacity = m_settings.value(QStringLiteral("contrastOpacity")).toInt();
-        opacity = qBound(0, opacity, 255);
-    }
-    return opacity;
-}
-
-void ConfigHandler::setContrastOpacity(const int transparency)
-{
-    m_settings.setValue(QStringLiteral("contrastOpacity"), transparency);
-}
-
-bool ConfigHandler::copyAndCloseAfterUploadEnabled()
-{
-    bool res = true;
-    if (m_settings.contains(QStringLiteral("copyAndCloseAfterUpload"))) {
-        res =
-          m_settings.value(QStringLiteral("copyAndCloseAfterUpload")).toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setCopyAndCloseAfterUploadEnabled(const bool value)
-{
-    m_settings.setValue(QStringLiteral("copyAndCloseAfterUpload"), value);
-}
-
-bool ConfigHandler::historyConfirmationToDelete()
-{
-    bool res = true;
-    if (m_settings.contains(QStringLiteral("historyConfirmationToDelete"))) {
-        res = m_settings.value(QStringLiteral("historyConfirmationToDelete"))
-                .toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setHistoryConfirmationToDelete(const bool check)
-{
-    m_settings.setValue(QStringLiteral("historyConfirmationToDelete"), check);
-}
-
-int ConfigHandler::uploadHistoryMaxSizeValue()
-{
-    int max = 25;
-    if (m_settings.contains(QStringLiteral("uploadHistoryMax"))) {
-        max = m_settings.value(QStringLiteral("uploadHistoryMax")).toInt();
-    }
-    return max;
-}
-
-void ConfigHandler::setUploadHistoryMaxSize(const int max)
-{
-    m_settings.setValue(QStringLiteral("uploadHistoryMax"), max);
-}
-
-bool ConfigHandler::saveAfterCopyValue()
-{
-    return m_settings.value(QStringLiteral("saveAfterCopy")).toBool();
-}
-
-void ConfigHandler::setSaveAfterCopy(const bool save)
-{
-    m_settings.setValue(QStringLiteral("saveAfterCopy"), save);
-}
-
-bool ConfigHandler::copyPathAfterSaveEnabled()
-{
-    bool res = false;
-    if (m_settings.contains(QStringLiteral("copyPathAfterSave"))) {
-        res = m_settings.value(QStringLiteral("copyPathAfterSave")).toBool();
-    }
-    return res;
-}
-
-void ConfigHandler::setCopyPathAfterSaveEnabled(const bool value)
-{
-    m_settings.setValue(QStringLiteral("copyPathAfterSave"), value);
-}
-
-bool ConfigHandler::useJpgForClipboard() const
-{
-#if not defined(Q_OS_MACOS)
-    // FIXME - temporary fix to disable option for MacOS
-    if (m_settings.contains(QStringLiteral("useJpgForClipboard"))) {
-        return m_settings.value(QStringLiteral("useJpgForClipboard")).toBool();
-    }
-#endif
-    return false;
-}
-
-void ConfigHandler::setUseJpgForClipboard(const bool value)
-{
-    m_settings.setValue(QStringLiteral("useJpgForClipboard"), value);
-}
-
-void ConfigHandler::setSaveAsFileExtension(const QString& extension)
-{
-    m_settings.setValue(QStringLiteral("setSaveAsFileExtension"), extension);
-}
-
-QString ConfigHandler::getSaveAsFileExtension()
-{
-    return m_settings
-      .value(QStringLiteral("setSaveAsFileExtension"), QString(".png"))
-      .toString();
-}
-
-void ConfigHandler::setUploadStorage(const QString& uploadStorage)
-{
-    StorageManager storageManager;
-    if (storageManager.storageLocked().isEmpty()) {
-        m_settings.setValue(QStringLiteral("uploadStorage"), uploadStorage);
+    if (toolType == CaptureTool::TYPE_TEXT) {
+        return drawFontSize();
     } else {
-        m_settings.setValue(QStringLiteral("uploadStorage"),
-                            storageManager.storageLocked());
+        return drawThickness();
     }
 }
 
-const QString& ConfigHandler::uploadStorage()
-{
-    StorageManager storageManager;
-    // check for storage lock
-    if (!storageManager.storageLocked().isEmpty()) {
-        setUploadStorage(storageManager.storageLocked());
-    }
+// DEFAULTS
 
-    // get storage
-    m_strRes = m_settings.value(QStringLiteral("uploadStorage")).toString();
-    if (m_strRes.isEmpty()) {
-        StorageManager storageManager;
-        m_strRes = storageManager.storageDefault();
-        setUploadStorage(m_strRes);
-    }
-    return m_strRes;
+QString ConfigHandler::filenamePatternDefault()
+{
+    return QStringLiteral("%F_%H-%M");
 }
 
 void ConfigHandler::setDefaultSettings()
 {
     foreach (const QString& key, m_settings.allKeys()) {
-        if (key.startsWith("Shortcuts/")) {
+        if (isShortcut(key)) {
             // Do not reset Shortcuts
             continue;
         }
@@ -644,161 +359,410 @@ void ConfigHandler::setDefaultSettings()
     m_settings.sync();
 }
 
-void ConfigHandler::setAllTheButtons()
-{
-    QVector<int> buttons;
-    auto listTypes = CaptureToolButton::getIterableButtonTypes();
-    for (const CaptureToolButton::ButtonType t : listTypes) {
-        buttons << static_cast<int>(t);
-    }
-    // TODO: remove toList in v1.0
-    m_settings.setValue(QStringLiteral("buttons"),
-                        QVariant::fromValue(buttons.toList()));
-}
-
 QString ConfigHandler::configFilePath() const
 {
     return m_settings.fileName();
 }
 
-bool ConfigHandler::normalizeButtons(QVector<int>& buttons)
+// GENERIC GETTERS AND SETTERS
+
+bool ConfigHandler::setShortcut(const QString& actionName,
+                                const QString& shortcut)
 {
-    auto listTypes = CaptureToolButton::getIterableButtonTypes();
-    QVector<int> listTypesInt;
-    for (auto i : listTypes)
-        listTypesInt << static_cast<int>(i);
-
-    bool hasChanged = false;
-    for (int i = 0; i < buttons.size(); i++) {
-        if (!listTypesInt.contains(buttons.at(i))) {
-            buttons.remove(i);
-            hasChanged = true;
-        }
-    }
-    return hasChanged;
-}
-
-QVector<CaptureToolButton::ButtonType> ConfigHandler::fromIntToButton(
-  const QVector<int>& l)
-{
-    QVector<CaptureToolButton::ButtonType> buttons;
-    for (auto const i : l)
-        buttons << static_cast<CaptureToolButton::ButtonType>(i);
-    return buttons;
-}
-
-QVector<int> ConfigHandler::fromButtonToInt(
-  const QVector<CaptureToolButton::ButtonType>& l)
-{
-    QVector<int> buttons;
-    for (auto const i : l)
-        buttons << static_cast<int>(i);
-    return buttons;
-}
-
-QVector<QStringList> ConfigHandler::shortcuts()
-{
-    ConfigShortcuts configShortcuts;
-    m_shortcuts = configShortcuts.captureShortcutsDefault(getButtons());
-    return m_shortcuts;
-}
-
-void ConfigHandler::setShortcutsDefault()
-{
-    ConfigShortcuts configShortcuts;
-    for (auto shortcutItem : shortcuts()) {
-        QString shortcutName = shortcutItem.at(0);
-        QString shortcutDescription = shortcutItem.at(1);
-        QString shortcutValueDefault = shortcutItem.at(2);
-
-        QString shortcutValue = shortcut(shortcutName);
-
-        QKeySequence ks = QKeySequence();
-        if (shortcutValue.isNull()) {
-            ks = QKeySequence(shortcutValueDefault);
-            if (!setShortcut(shortcutName, ks.toString())) {
-                shortcutValue = shortcutValueDefault;
-            }
-        }
-
-        m_shortcuts << (QStringList() << shortcutName << shortcutDescription
-                                      << shortcutValue);
-    }
-}
-
-bool ConfigHandler::setShortcut(const QString& shortcutName,
-                                const QString& shortutValue)
-{
-    bool error = false;
-    m_settings.beginGroup("Shortcuts");
-
-    QVector<QKeySequence> reservedShortcuts;
-
+    qDebug() << actionName;
+    static QVector<QKeySequence> reservedShortcuts = {
 #if defined(Q_OS_MACOS)
-    reservedShortcuts << QKeySequence(Qt::CTRL + Qt::Key_Backspace)
-                      << QKeySequence(Qt::Key_Escape);
+        Qt::CTRL + Qt::Key_Backspace,
+        Qt::Key_Escape,
 #else
-    reservedShortcuts << QKeySequence(Qt::Key_Backspace)
-                      << QKeySequence(Qt::Key_Escape);
+        Qt::Key_Backspace,
+        Qt::Key_Escape,
 #endif
+    };
 
-    if (shortutValue.isEmpty()) {
-        m_settings.setValue(shortcutName, "");
-    } else if (reservedShortcuts.contains(QKeySequence(shortutValue))) {
+    if (hasError()) {
+        return false;
+    }
+
+    bool error = false;
+
+    m_settings.beginGroup("Shortcuts");
+    if (shortcut.isEmpty()) {
+        setValue(actionName, "");
+    } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
         // do not allow to set reserved shortcuts
         error = true;
     } else {
+        error = false;
         // Make no difference for Return and Enter keys
-        QString shortcutItem = shortutValue;
-        if (shortcutItem == "Enter") {
-            shortcutItem = QKeySequence(Qt::Key_Return).toString();
-        }
-
-        // do not allow to set overlapped shortcuts
-        foreach (auto currentShortcutName, m_settings.allKeys()) {
-            if (m_settings.value(currentShortcutName) == shortcutItem) {
-                m_settings.setValue(shortcutName, "");
+        QString newShortcut = KeySequence().value(shortcut).toString();
+        for (auto& otherAction : m_settings.allKeys()) {
+            if (actionName == otherAction) {
+                continue;
+            }
+            QString existingShortcut =
+              KeySequence().value(m_settings.value(otherAction)).toString();
+            if (newShortcut == existingShortcut) {
                 error = true;
-                break;
+                goto done;
             }
         }
-        if (!error) {
-            m_settings.setValue(shortcutName, shortcutItem);
-        }
+        m_settings.setValue(actionName, KeySequence().value(shortcut));
     }
+done:
     m_settings.endGroup();
     return !error;
 }
 
-const QString& ConfigHandler::shortcut(const QString& shortcutName)
+QString ConfigHandler::shortcut(const QString& actionName)
 {
+    QString setting = "Shortcuts/" + actionName;
+    QString shortcut = value(setting).toString();
+    if (!m_settings.contains(setting)) {
+        // The action uses a shortcut that is a flameshot default
+        // (not set explicitly by user)
+        m_settings.beginGroup("Shortcuts");
+        for (auto& otherAction : m_settings.allKeys()) {
+            if (m_settings.value(otherAction) == shortcut) {
+                // We found an explicit shortcut - it will take precedence
+                m_settings.endGroup();
+                return {};
+            }
+        }
+        m_settings.endGroup();
+    }
+    return shortcut;
+}
+
+void ConfigHandler::setValue(const QString& key, const QVariant& value)
+{
+    assertKeyRecognized(key);
+    if (!hasError()) {
+        // don't let the file watcher initiate another error check
+        m_skipNextErrorCheck = true;
+        auto val = valueHandler(key)->representation(value);
+        m_settings.setValue(key, val);
+    }
+}
+
+QVariant ConfigHandler::value(const QString& key) const
+{
+    assertKeyRecognized(key);
+    // Perform check on entire config if due. Please make sure that this
+    // function is called in all scenarios - best to keep it on top.
+    hasError();
+
+    auto val = m_settings.value(key);
+
+    auto handler = valueHandler(key);
+
+    // Check the value for semantic errors
+    if (val.isValid() && !handler->check(val)) {
+        setErrorState(true);
+    }
+    if (m_hasError) {
+        return handler->fallback();
+    }
+
+    return handler->value(val);
+}
+
+QSet<QString>& ConfigHandler::recognizedGeneralOptions()
+{
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    auto keys = ::recognizedGeneralOptions.keys();
+    static QSet<QString> options = QSet<QString>(keys.begin(), keys.end());
+#else
+    static QSet<QString> options =
+      QSet<QString>::fromList(::recognizedGeneralOptions.keys());
+#endif
+    return options;
+}
+
+QSet<QString>& ConfigHandler::recognizedShortcutNames()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    auto keys = recognizedShortcuts.keys();
+    static QSet<QString> names = QSet<QString>(keys.begin(), keys.end());
+#else
+    static QSet<QString> names =
+      QSet<QString>::fromList(recognizedShortcuts.keys());
+#endif
+    return names;
+}
+
+/// Return keys from group `group`. Use "General" for general settings.
+QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
+{
+    QSet<QString> keys;
+    for (const QString& key : m_settings.allKeys()) {
+        if (group == "General" && !key.contains('/')) {
+            keys.insert(key);
+        } else if (key.startsWith(group + "/")) {
+            keys.insert(baseName(key));
+        }
+    }
+    return keys;
+}
+
+// ERROR HANDLING
+
+bool ConfigHandler::checkForErrors(QTextStream* log) const
+{
+    return checkUnrecognizedSettings(log) & checkShortcutConflicts(log) &
+           checkSemantics(log);
+}
+
+/**
+ * @brief Parse the config to find settings with unrecognized names.
+ * @return Whether the config passes this check.
+ *
+ * @note An unrecognized option is one that is not included in
+ * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
+ * group the option belongs to.
+ */
+bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
+{
+    // sort the config keys by group
+    QSet<QString> generalKeys = keysFromGroup("General"),
+                  shortcutKeys = keysFromGroup("Shortcuts"),
+                  recognizedGeneralKeys = recognizedGeneralOptions(),
+                  recognizedShortcutKeys = recognizedShortcutNames();
+
+    // subtract recognized keys
+    generalKeys.subtract(recognizedGeneralKeys);
+    shortcutKeys.subtract(recognizedShortcutKeys);
+
+    // what is left are the unrecognized keys - hopefully empty
+    bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
+    if (log != nullptr) {
+        for (const QString& key : generalKeys) {
+            *log << QStringLiteral("Unrecognized setting: '%1'\n").arg(key);
+        }
+        for (const QString& key : shortcutKeys) {
+            *log
+              << QStringLiteral("Unrecognized shortcut name: '%1'.\n").arg(key);
+        }
+    }
+    return ok;
+}
+
+/**
+ * @brief Check if there are multiple actions with the same shortcut.
+ * @return Whether the config passes this check.
+ *
+ * @note It is not considered a conflict if action A uses shortcut S because it
+ * is the flameshot default (not because the user explicitly configured it), and
+ * action B uses the same shortcut.
+ */
+bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
+{
+    bool ok = true;
     m_settings.beginGroup("Shortcuts");
-    m_strRes = m_settings.value(shortcutName).toString();
+    QStringList shortcuts = m_settings.allKeys();
+    QStringList reportedInLog;
+    for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
+        for (auto key2 = key1 + 1; key2 != shortcuts.end(); ++key2) {
+            // values stored in variables are useful when running debugger
+            QString value1 = m_settings.value(*key1).toString(),
+                    value2 = m_settings.value(*key2).toString();
+            // The check will pass if:
+            // - one shortcut is empty (the action doesn't use a shortcut)
+            // - or one of the settings is not found in m_settings, i.e.
+            //   user wants to use flameshot's default shortcut for the action
+            // - or the shortcuts for both actions are different
+            if (!(value1.isEmpty() || !m_settings.contains(*key1) ||
+                  !m_settings.contains(*key2) || value1 != value2)) {
+                ok = false;
+                if (log == nullptr) {
+                    break;
+                } else if (!reportedInLog.contains(*key1) && // No duplicate
+                           !reportedInLog.contains(*key2)) { // log entries
+                    reportedInLog.append(*key1);
+                    reportedInLog.append(*key2);
+                    *log << QStringLiteral("Shortcut conflict: '%1' and '%2' "
+                                           "have the same shortcut: %3\n")
+                              .arg(*key1)
+                              .arg(*key2)
+                              .arg(value1);
+                }
+            }
+        }
+    }
     m_settings.endGroup();
-    return m_strRes;
+    return ok;
 }
 
-void ConfigHandler::setValue(const QString& group,
-                             const QString& key,
-                             const QVariant& value)
+/**
+ * @brief Check each config value semantically.
+ * @return Whether the config passes this check.
+ */
+bool ConfigHandler::checkSemantics(QTextStream* log) const
 {
-    if (!group.isEmpty()) {
-        m_settings.beginGroup(group);
+    QStringList allKeys = m_settings.allKeys();
+    bool ok = true;
+    for (const QString& key : allKeys) {
+        // Test if the key is recognized
+        if (!recognizedGeneralOptions().contains(key) &&
+            (!isShortcut(key) ||
+             !recognizedShortcutNames().contains(baseName(key)))) {
+            continue;
+        }
+        QVariant val = m_settings.value(key);
+        auto valueHandler = this->valueHandler(key);
+        if (val.isValid() && !valueHandler->check(val)) {
+            ok = false;
+            if (log == nullptr) {
+                break;
+            } else {
+                *log << QStringLiteral("Semantic error in '%1'. Expected: %2\n")
+                          .arg(key)
+                          .arg(valueHandler->expected());
+            }
+        }
     }
-    m_settings.setValue(key, value);
-    if (!group.isEmpty()) {
-        m_settings.endGroup();
+    return ok;
+}
+
+/**
+ * @brief Parse the configuration to find any errors in it.
+ *
+ * If the error state changes as a result of the check, it will perform the
+ * appropriate action, e.g. notify the user.
+ *
+ * @see ConfigHandler::setErrorState for all the actions.
+ */
+void ConfigHandler::checkAndHandleError() const
+{
+    if (!QFile(m_settings.fileName()).exists()) {
+        setErrorState(false);
+    } else {
+        setErrorState(!checkForErrors());
+    }
+
+    ensureFileWatched();
+}
+
+/**
+ * @brief Update the tracked error state of the config.
+ * @param error The new error state.
+ *
+ * The error state is tracked so that signals are not emitted and the user is
+ * not spammed every time the config file changes. Instead, only changes in
+ * error state get reported.
+ */
+void ConfigHandler::setErrorState(bool error) const
+{
+    bool hadError = m_hasError;
+    m_hasError = error;
+    // Notify user every time m_hasError changes
+    if (!hadError && m_hasError) {
+        QString msg = errorMessage();
+        SystemNotification().sendMessage(msg);
+        emit getInstance()->error();
+    } else if (hadError && !m_hasError) {
+        auto msg =
+          tr("You have successfully resolved the configuration error.");
+        SystemNotification().sendMessage(msg);
+        emit getInstance()->errorResolved();
     }
 }
 
-QVariant& ConfigHandler::value(const QString& group, const QString& key)
+/**
+ * @brief Return if the config contains an error.
+ *
+ * If an error check is due, it will be performed.
+ */
+bool ConfigHandler::hasError() const
 {
-    if (!group.isEmpty()) {
-        m_settings.beginGroup(group);
+    if (m_errorCheckPending) {
+        checkAndHandleError();
+        m_errorCheckPending = false;
     }
-    m_varRes = m_settings.value(key);
-    if (!group.isEmpty()) {
-        m_settings.endGroup();
-    }
-    return m_varRes;
+    return m_hasError;
 }
+
+/// Error message that can be used by other classes as well
+QString ConfigHandler::errorMessage() const
+{
+    return tr("The configuration contains an error. Falling back to default.");
+}
+
+void ConfigHandler::ensureFileWatched() const
+{
+    QFile file(m_settings.fileName());
+    if (!file.exists()) {
+        file.open(QFileDevice::WriteOnly);
+        file.close();
+    }
+    if (m_configWatcher != nullptr && m_configWatcher->files().isEmpty() &&
+        qApp != nullptr // ensures that the organization name can be accessed
+    ) {
+        m_configWatcher->addPath(m_settings.fileName());
+    }
+}
+
+/**
+ * @brief Obtain a `ValueHandler` for the config option with the given key.
+ * @return Smart pointer to the handler.
+ *
+ * @note If the key is from the "General" group, the `recognizedGeneralOptions`
+ * map is looked up. If it is from "Shortcuts", a generic `KeySequence` value
+ * handler is returned.
+ */
+QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
+  const QString& key) const
+{
+    QSharedPointer<ValueHandler> handler;
+    if (isShortcut(key)) {
+        handler = recognizedShortcuts.value(
+          baseName(key), QSharedPointer<KeySequence>(new KeySequence()));
+    } else { // General group
+        handler = ::recognizedGeneralOptions.value(key);
+    }
+    return handler;
+}
+
+/**
+ * This is used so that we can check if there is a mismatch between a config key
+ * and its getter function.
+ * Debug: throw an exception; Release: set error state
+ */
+void ConfigHandler::assertKeyRecognized(const QString& key) const
+{
+    bool recognized = isShortcut(key)
+                        ? recognizedShortcutNames().contains(baseName(key))
+                        : ::recognizedGeneralOptions.contains(key);
+    if (!recognized) {
+#if defined(QT_DEBUG)
+        // This should never happen, but just in case
+        throw std::logic_error(
+          tr("Bad config key '%1' in ConfigHandler. Please report "
+             "this as a bug.")
+            .arg(key)
+            .toStdString());
+#else
+        setErrorState(true);
+#endif
+    }
+}
+
+bool ConfigHandler::isShortcut(const QString& key) const
+{
+    return m_settings.group() == QStringLiteral("Shortcuts") ||
+           key.startsWith(QStringLiteral("Shortcuts/"));
+}
+
+QString ConfigHandler::baseName(QString key) const
+{
+    return QFileInfo(key).baseName();
+}
+
+// STATIC MEMBER DEFINITIONS
+
+bool ConfigHandler::m_hasError = false;
+bool ConfigHandler::m_errorCheckPending = false;
+bool ConfigHandler::m_skipNextErrorCheck = false;
+
+QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;

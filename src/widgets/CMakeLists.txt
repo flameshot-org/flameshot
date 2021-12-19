@@ -13,6 +13,7 @@ target_sources(
         orientablepushbutton.h
         historywidget.h
         updatenotificationwidget.h
+        imguploaddialog.h
         capture/capturetoolobjects.h
 )
 
@@ -27,5 +28,6 @@ target_sources(
         orientablepushbutton.cpp
         historywidget.cpp
         updatenotificationwidget.cpp
+        imguploaddialog.cpp
         capture/capturetoolobjects.cpp
 )

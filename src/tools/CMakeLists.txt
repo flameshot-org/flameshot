@@ -8,22 +8,14 @@ target_sources(flameshot PRIVATE sizeincrease/sizeincreasetool.h sizeincrease/si
 target_sources(flameshot PRIVATE sizedecrease/sizedecreasetool.h sizedecrease/sizedecreasetool.cpp)
 target_sources(
   flameshot
-  PRIVATE storage/storagemanager.h
-          storage/storagemanager.cpp
-          storage/imguploader.h
-          storage/imguploadertool.h
-          storage/imguploader.cpp
-          storage/imguploadertool.cpp
-          storage/imgur/imguruploader.h
-          storage/imgur/imguruploadertool.h
-          storage/imgur/imguruploader.cpp
-          storage/imgur/imguruploadertool.cpp
-          storage/s3/imgs3settings.h
-          storage/s3/imgs3settings.cpp
-          storage/s3/imgs3uploader.h
-          storage/s3/imgs3uploadertool.h
-          storage/s3/imgs3uploader.cpp
-          storage/s3/imgs3uploadertool.cpp
+        PRIVATE imgupload/storages/imgur/imguruploader.h
+        imgupload/storages/imgur/imguruploader.cpp
+        imgupload/storages/imguploaderbase.h
+        imgupload/storages/imguploaderbase.cpp
+        imgupload/imguploadertool.h
+        imgupload/imguploadertool.cpp
+        imgupload/imguploadermanager.h
+        imgupload/imguploadermanager.cpp
 )
 target_sources(
   flameshot
@@ -49,6 +41,8 @@ target_sources(
 target_sources(flameshot PRIVATE rectangle/rectangletool.h rectangle/rectangletool.cpp)
 target_sources(flameshot PRIVATE redo/redotool.h redo/redotool.cpp)
 target_sources(flameshot PRIVATE save/savetool.h save/savetool.cpp)
+target_sources(flameshot PRIVATE accept/accepttool.h accept/accepttool.cpp)
+target_sources(flameshot PRIVATE invert/inverttool.h invert/inverttool.cpp)
 target_sources(flameshot PRIVATE selection/selectiontool.h selection/selectiontool.cpp)
 target_sources(flameshot PRIVATE sizeindicator/sizeindicatortool.h sizeindicator/sizeindicatortool.cpp)
 target_sources(

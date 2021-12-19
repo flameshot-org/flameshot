@@ -174,7 +174,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation></translation>
+        <translation>Nastaviť kruh ako kresliaci nástroj</translation>
     </message>
 </context>
 <context>
@@ -240,7 +240,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/core/controller.cpp" line="417"/>
         <source>&amp;Open Launcher</source>
-        <translation></translation>
+        <translation>&amp;Otvoriť Spúšťač</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="422"/>
@@ -336,7 +336,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnoviť</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -636,12 +636,12 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálna Veľkosť Posledných Uploadov</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrátiť limiť</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
@@ -1187,12 +1187,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Saving canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukladanie zrušené</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukladanie zrušené</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
@@ -1307,7 +1307,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazať momentálny nástroj</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
@@ -1412,7 +1412,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stlačte Esc pre zrušenie alebo ⌘+Backspace pre vypnutie klávesovej skratky.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
@@ -1471,12 +1471,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšiť Nástroj</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšiť ostatné nástroje</translation>
     </message>
 </context>
 <context>
@@ -1484,12 +1484,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť Nástroj</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť ostatné nástroje</translation>
     </message>
 </context>
 <context>
@@ -1741,7 +1741,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
