@@ -53,6 +53,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 #if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
 #endif
+    initPredefinedColorPaletteLarge();
 
     m_layout->addStretch();
 
@@ -367,6 +368,20 @@ void GeneralConf::initShowStartupLaunchMessage()
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowStartupLaunchMessage(checked);
     });
+}
+
+void GeneralConf::initPredefinedColorPaletteLarge()
+{
+    m_predefinedColorPaletteLarge =
+      new QCheckBox(tr("Use large predefined color palette"), this);
+    m_predefinedColorPaletteLarge->setToolTip(
+      tr("Use large predefined color palette"));
+    m_scrollAreaLayout->addWidget(m_predefinedColorPaletteLarge);
+
+    connect(
+      m_predefinedColorPaletteLarge, &QCheckBox::clicked, [](bool checked) {
+          ConfigHandler().setPredefinedColorPaletteLarge(checked);
+      });
 }
 
 void GeneralConf::initCopyAndCloseAfterUpload()
