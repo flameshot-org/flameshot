@@ -7,6 +7,7 @@
 #include "QtSolutions/qtsingleapplication.h"
 #endif
 
+#include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
@@ -28,6 +29,7 @@
 #include "spdlog/spdlog.h"
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
 #include <QApplication>
 #include <QDBusConnection>
@@ -500,7 +502,7 @@ int main(int argc, char* argv[])
         bool someFlagSet =
           (filename || tray || mainColor || contrastColor || check);
         if (check) {
-            QTextStream err(stderr);
+            AbstractLogger err(AbstractLogger::Error, AbstractLogger::Stderr);
             bool ok = ConfigHandler(true).checkForErrors(&err);
             if (ok) {
                 err << QStringLiteral("No errors detected.\n");

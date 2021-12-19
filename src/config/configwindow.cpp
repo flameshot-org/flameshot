@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "configwindow.h"
+#include "abstractlogger.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/generalconf.h"
 #include "src/config/shortcutswidget.h"
@@ -161,7 +162,7 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
     connect(btnShowErrors, &QPushButton::clicked, this, [this]() {
         // Generate error log message
         QString str;
-        QTextStream stream(&str);
+        AbstractLogger stream(str, AbstractLogger::Error);
         ConfigHandler().checkForErrors(&stream);
 
         // Set up dialog

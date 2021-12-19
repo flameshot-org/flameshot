@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "confighandler.h"
+#include "abstractlogger.h"
 #include "src/tools/capturetool.h"
 #include "systemnotification.h"
 #include "valuehandler.h"
@@ -14,7 +15,6 @@
 #include <QMap>
 #include <QSharedPointer>
 #include <QStandardPaths>
-#include <QTextStream>
 #include <QVector>
 #include <algorithm>
 #include <stdexcept>
@@ -508,7 +508,7 @@ QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 
 // ERROR HANDLING
 
-bool ConfigHandler::checkForErrors(QTextStream* log) const
+bool ConfigHandler::checkForErrors(AbstractLogger* log) const
 {
     return checkUnrecognizedSettings(log) & checkShortcutConflicts(log) &
            checkSemantics(log);
@@ -522,7 +522,7 @@ bool ConfigHandler::checkForErrors(QTextStream* log) const
  * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
  * group the option belongs to.
  */
-bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
+bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log) const
 {
     // sort the config keys by group
     QSet<QString> generalKeys = keysFromGroup("General"),
@@ -556,7 +556,7 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
  * is the flameshot default (not because the user explicitly configured it), and
  * action B uses the same shortcut.
  */
-bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
+bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
 {
     bool ok = true;
     m_settings.beginGroup("Shortcuts");
@@ -598,7 +598,7 @@ bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
  * @brief Check each config value semantically.
  * @return Whether the config passes this check.
  */
-bool ConfigHandler::checkSemantics(QTextStream* log) const
+bool ConfigHandler::checkSemantics(AbstractLogger* log) const
 {
     QStringList allKeys = m_settings.allKeys();
     bool ok = true;
