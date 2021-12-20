@@ -1,5 +1,6 @@
 #include "abstractlogger.h"
 #include "systemnotification.h"
+#include <cassert>
 
 #include <QFileInfo>
 
