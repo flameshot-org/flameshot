@@ -3,9 +3,6 @@
 
 #include <QFileInfo>
 
-// TODO add null checks and exceptions
-// TODO only send notification when flushed
-
 AbstractLogger::AbstractLogger(Channel channel, int targets)
   : m_defaultChannel(channel)
   , m_targets(targets)
@@ -24,7 +21,6 @@ AbstractLogger::AbstractLogger(QString& str,
                                int additionalChannels)
   : AbstractLogger(channel, additionalChannels)
 {
-    // TODO error if targets excludes String.
     m_textStreams << new QTextStream(&str);
 }
 
