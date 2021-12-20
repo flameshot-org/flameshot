@@ -1144,6 +1144,12 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
         case CaptureTool::REQ_CAPTURE_DONE_OK:
             m_captureDone = true;
             break;
+        case CaptureTool::REQ_CLEAR_SELECTION:
+            if (m_panel->activeLayerIndex() >= 0) {
+                m_panel->setActiveLayer(-1);
+                drawToolsData(false);
+            }
+            break;
         case CaptureTool::REQ_ADD_CHILD_WIDGET:
             if (!m_activeTool) {
                 break;
@@ -1471,7 +1477,7 @@ void CaptureWidget::pushToolToStack()
     }
 }
 
-void CaptureWidget::drawToolsData()
+void CaptureWidget::drawToolsData(bool drawSelection)
 {
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
@@ -1486,7 +1492,9 @@ void CaptureWidget::drawToolsData()
     }
 
     m_context.screenshot = pixmapItem;
-    drawObjectSelection();
+    if (drawSelection) {
+        drawObjectSelection();
+    }
 }
 
 void CaptureWidget::drawObjectSelection()
