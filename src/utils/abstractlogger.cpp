@@ -62,6 +62,7 @@ AbstractLogger& AbstractLogger::sendMessage(QString msg, Channel channel)
         QTextStream stream(stderr);
         stream << messageHeader(channel, Stderr) << msg << "\n";
     }
+    return *this;
 }
 
 /**
