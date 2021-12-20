@@ -42,6 +42,7 @@ CaptureTool* PinTool::copy(QObject* parent)
 
 void PinTool::pressed(CaptureContext& context)
 {
+    emit requestAction(REQ_CLEAR_SELECTION);
     emit requestAction(REQ_CAPTURE_DONE_OK);
     context.request.addTask(CaptureRequest::PIN);
     emit requestAction(REQ_CLOSE_GUI);

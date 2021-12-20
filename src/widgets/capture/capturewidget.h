@@ -127,7 +127,7 @@ private:
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData();
+    void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
