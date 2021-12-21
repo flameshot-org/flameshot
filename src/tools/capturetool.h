@@ -66,6 +66,8 @@ public:
         REQ_SHOW_COLOR_PICKER,
         // Notify is the screenshot has been saved.
         REQ_CAPTURE_DONE_OK,
+        // Notify to redraw screenshot with tools without object selection.
+        REQ_CLEAR_SELECTION,
         // Instance this->widget()'s widget inside the editor under the mouse.
         REQ_ADD_CHILD_WIDGET,
         // Instance this->widget()'s widget which handles its own lifetime.
