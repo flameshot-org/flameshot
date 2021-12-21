@@ -1,10 +1,10 @@
 #include "flameshotdaemon.h"
 
+#include "abstractlogger.h"
 #include "confighandler.h"
 #include "controller.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
-#include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDBusConnection>
@@ -228,7 +228,7 @@ void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
     m_clipboardSignalBlocked = true;
     clipboard->setText(text);
     if (!notification.isEmpty()) {
-        SystemNotification().sendMessage(notification);
+        AbstractLogger::info() << notification;
     }
     clipboard->blockSignals(false);
 }
@@ -246,7 +246,7 @@ QDBusMessage FlameshotDaemon::createMethodCall(QString method)
 void FlameshotDaemon::checkDBusConnection(const QDBusConnection& connection)
 {
     if (!connection.isConnected()) {
-        SystemNotification().sendMessage(tr("Unable to connect via DBus"));
+        AbstractLogger::error() << tr("Unable to connect via DBus");
         qApp->exit(1);
     }
 }

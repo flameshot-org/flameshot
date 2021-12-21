@@ -2,12 +2,12 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
+#include "abstractlogger.h"
 #include "src/core/controller.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/globalvalues.h"
-#include "src/utils/systemnotification.h"
 #include "utils/desktopinfo.h"
 #include <QApplication>
 #include <QBuffer>
@@ -43,8 +43,8 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
         mimeData->setData("image/" + imageType, array);
         QApplication::clipboard()->setMimeData(mimeData);
     } else {
-        SystemNotification().sendMessage(
-          QObject::tr("Error while saving to clipboard"));
+        AbstractLogger::error()
+          << QObject::tr("Error while saving to clipboard");
     }
 }
 
@@ -60,8 +60,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
                          ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
     } else {
-        SystemNotification().sendMessage(
-          QObject::tr("Capture saved to clipboard."));
+        AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
     if (ConfigHandler().useJpgForClipboard()) {
         // FIXME - it doesn't work on MacOS
@@ -97,15 +96,18 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 
     if (ok) {
         saveMessage += QObject::tr("Capture saved as ") + completePath;
+        AbstractLogger::info().attachNotificationPath(notificationPath)
+          << saveMessage;
     } else {
         saveMessage += QObject::tr("Error trying to save as ") + completePath;
         if (file.error() != QFile::NoError) {
             saveMessage += ": " + file.errorString();
         }
         notificationPath = "";
+        AbstractLogger::error().attachNotificationPath(notificationPath)
+          << saveMessage;
     }
 
-    SystemNotification().sendMessage(saveMessage, notificationPath);
     return ok;
 }
 
@@ -185,7 +187,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         ConfigHandler().setSavePath(pathNoFile);
 
         QString msg = QObject::tr("Capture saved as ") + savePath;
-        SystemNotification().sendMessage(msg, savePath);
+        AbstractLogger().attachNotificationPath(savePath) << msg;
 
         if (config.copyPathAfterSave()) {
             FlameshotDaemon::copyToClipboard(

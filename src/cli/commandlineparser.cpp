@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "commandlineparser.h"
+#include "abstractlogger.h"
 #include "src/utils/globalvalues.h"
 #include <QApplication>
 #include <QTextStream>
@@ -12,8 +13,9 @@ CommandLineParser::CommandLineParser()
 
 namespace {
 
-QTextStream out(stdout);
-QTextStream err(stderr);
+AbstractLogger out =
+  AbstractLogger::info(AbstractLogger::Stderr).enableMessageHeader(false);
+AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
 
 auto versionOption =
   CommandOption({ "v", "version" },
@@ -97,7 +99,7 @@ bool CommandLineParser::processArgs(const QStringList& args,
         --actualIt;
     } else {
         ok = false;
-        out << QStringLiteral("'%1' is not a valid argument.").arg(argument);
+        err << QStringLiteral("'%1' is not a valid argument.").arg(argument);
     }
     return ok;
 }
@@ -119,7 +121,7 @@ bool CommandLineParser::processOptions(const QStringList& args,
     bool isDoubleDashed = arg.startsWith(QLatin1String("--"));
     ok = isDoubleDashed ? arg.length() > 3 : arg.length() == 2;
     if (!ok) {
-        out << QStringLiteral("the option %1 has a wrong format.").arg(arg);
+        err << QStringLiteral("the option %1 has a wrong format.").arg(arg);
         return ok;
     }
     arg = isDoubleDashed ? arg.remove(0, 2) : arg.remove(0, 1);
@@ -137,7 +139,7 @@ bool CommandLineParser::processOptions(const QStringList& args,
         if (argName.isEmpty()) {
             argName = qApp->applicationName();
         }
-        out << QStringLiteral("the option '%1' is not a valid option "
+        err << QStringLiteral("the option '%1' is not a valid option "
                               "for the argument '%2'.")
                  .arg(arg)
                  .arg(argName);
@@ -148,7 +150,7 @@ bool CommandLineParser::processOptions(const QStringList& args,
     CommandOption option = *optionIt;
     bool requiresValue = !(option.valueName().isEmpty());
     if (!requiresValue && equalsPos != -1) {
-        out << QStringLiteral("the option '%1' contains a '=' and it doesn't "
+        err << QStringLiteral("the option '%1' contains a '=' and it doesn't "
                               "require a value.")
                  .arg(arg);
         ok = false;
@@ -158,7 +160,7 @@ bool CommandLineParser::processOptions(const QStringList& args,
         if (actualIt + 1 != args.cend()) {
             ++actualIt;
         } else {
-            out << QStringLiteral("Expected value after the option '%1'.")
+            err << QStringLiteral("Expected value after the option '%1'.")
                      .arg(arg);
             ok = false;
             return ok;
@@ -169,10 +171,10 @@ bool CommandLineParser::processOptions(const QStringList& args,
     if (requiresValue) {
         ok = option.checkValue(valueStr);
         if (!ok) {
-            QString err = option.errorMsg();
-            if (!err.endsWith(QLatin1String(".")))
-                err += QLatin1String(".");
-            out << err;
+            QString msg = option.errorMsg();
+            if (!msg.endsWith(QLatin1String(".")))
+                msg += QLatin1String(".");
+            err << msg;
             return ok;
         }
         option.setValue(valueStr);
@@ -196,7 +198,7 @@ bool CommandLineParser::parse(const QStringList& args)
             printVersion();
             m_foundOptions << versionOption;
         } else {
-            out << "Invalid arguments after the version option.";
+            err << "Invalid arguments after the version option.";
             ok = false;
         }
         return ok;
@@ -214,7 +216,9 @@ bool CommandLineParser::parse(const QStringList& args)
         }
     }
     if (!ok && !m_generalErrorMessage.isEmpty()) {
-        out << QStringLiteral(" %1\n").arg(m_generalErrorMessage);
+        err.enableMessageHeader(false);
+        err << m_generalErrorMessage;
+        err.enableMessageHeader(true);
     }
     return ok;
 }
@@ -306,7 +310,7 @@ QString CommandLineParser::value(const CommandOption& option) const
 
 void CommandLineParser::printVersion()
 {
-    out << GlobalValues::versionInfo() << QStringLiteral("\n");
+    out << GlobalValues::versionInfo();
 }
 
 void CommandLineParser::printHelp(QStringList args, const Node* node)
@@ -397,7 +401,7 @@ bool CommandLineParser::processIfOptionIsHelp(
             printHelp(args, actualNode);
             actualIt++;
         } else {
-            out << "Invalid arguments after the help option.";
+            err << "Invalid arguments after the help option.";
             ok = false;
         }
     }
