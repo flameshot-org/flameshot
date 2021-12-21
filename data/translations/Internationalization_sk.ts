@@ -1741,7 +1741,7 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation></translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
 </context>
 <context>

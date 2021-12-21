@@ -601,7 +601,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation></translation>
+        <translation>Undo limit</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
@@ -1083,12 +1083,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Print raw PNG capture</source>
-        <translation></translation>
+        <translation>Print raw PNG capture</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="183"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
-        <translation></translation>
+        <translation>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1165,22 +1165,22 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
         <source>Arguments</source>
-        <translation></translation>
+        <translation>Arguments</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="323"/>
         <source>arguments</source>
-        <translation></translation>
+        <translation>arguments</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>Usage</source>
-        <translation></translation>
+        <translation>Usage</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="324"/>
         <source>options</source>
-        <translation></translation>
+        <translation>options</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="331"/>

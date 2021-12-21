@@ -1880,7 +1880,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="40"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Затененность области вне выделенной:</translation>
+        <translation>Затенённость области вне выделенной:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>

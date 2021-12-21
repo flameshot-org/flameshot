@@ -336,7 +336,7 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="78"/>
         <source>Restore</source>
-        <translation></translation>
+        <translation>Restore</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -604,12 +604,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="411"/>
         <source>Latest Uploads Max Size</source>
-        <translation></translation>
+        <translation>Latest Uploads Max Size</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="441"/>
         <source>Undo limit</source>
-        <translation></translation>
+        <translation>Undo limit</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="470"/>
@@ -999,12 +999,12 @@ Spacja, aby pokazać panel boczny.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Saving canceled</source>
-        <translation></translation>
+        <translation>Saving canceled</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
-        <translation></translation>
+        <translation>Save canceled</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
@@ -1275,7 +1275,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
         <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
         <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
-        <translation></translation>
+        <translation>Delete current tool</translation>
     </message>
     <message>
         <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
@@ -1380,7 +1380,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation></translation>
+        <translation>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
@@ -1439,12 +1439,12 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation></translation>
+        <translation>Decrease Tool Size</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation></translation>
+        <translation>Decrease the size of the other tools</translation>
     </message>
 </context>
 <context>
@@ -1452,12 +1452,12 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation></translation>
+        <translation>Increase Tool Size</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation></translation>
+        <translation>Increase the size of the other tools</translation>
     </message>
 </context>
 <context>
@@ -1709,7 +1709,7 @@ Może być konieczne opuszczenie znaku &apos;#&apos; jak np.: &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
         <source>&lt;Empty&gt;</source>
-        <translation></translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
 </context>
 <context>
