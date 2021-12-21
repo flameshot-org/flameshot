@@ -24,9 +24,6 @@
 #include <QTimer>
 #include <QTranslator>
 
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/spdlog.h"
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
@@ -87,8 +84,6 @@ int main(int argc, char* argv[])
 #ifdef Q_OS_LINUX
     wayland_hacks();
 #endif
-    spdlog::set_level(spdlog::level::debug); // Set global log level to debug
-    spdlog::set_pattern("[source %s] [function %!] [line %#] %v");
 
     // required for the button serialization
     // TODO: change to QVector in v1.0
