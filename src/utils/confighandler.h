@@ -9,6 +9,9 @@
 #include <QVariant>
 #include <QVector>
 
+#define CONFIG_GROUP_GENERAL "General"
+#define CONFIG_GROUP_SHORTCUTS "Shortcuts"
+
 class QFileSystemWatcher;
 class ValueHandler;
 template<class T>
@@ -164,4 +167,5 @@ private:
     void assertKeyRecognized(const QString& key) const;
     bool isShortcut(const QString& key) const;
     QString baseName(QString key) const;
+    void cleanUnusedKeys(const QString& group, const QSet<QString>& keys) const;
 };
