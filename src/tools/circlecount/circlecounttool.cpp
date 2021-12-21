@@ -4,8 +4,6 @@
 #include "circlecounttool.h"
 #include "colorutils.h"
 #include <QPainter>
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/cfg/env.h"
 
 namespace {
 #define PADDING_VALUE 2
