@@ -163,8 +163,8 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
     SHORTCUT("TYPE_DELETE_CURRENT_TOOL" ,   "Delete"                ),
 #endif
 #if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
-    SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Print Screen"     ),
-    SHORTCUT("SCREENSHOT_HISTORY"       ,   "Alt+Print Screen"      ),
+    SHORTCUT("TAKE_SCREENSHOT"          ,   "Ctrl+Shift+P"          ),
+    SHORTCUT("SCREENSHOT_HISTORY"       ,   "Alt+Shift+P"           ),
 #endif
     SHORTCUT("TYPE_PIN"                 ,                           ),
     SHORTCUT("TYPE_SELECTIONINDICATOR"  ,                           ),
