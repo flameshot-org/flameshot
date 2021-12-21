@@ -310,7 +310,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation></translation>
+        <translation>Restore</translation>
     </message>
 </context>
 <context>
@@ -534,11 +534,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Latest Uploads Max Size</source>
-        <translation></translation>
+        <translation>Latest Uploads Max Size</translation>
     </message>
     <message>
         <source>Undo limit</source>
-        <translation></translation>
+        <translation>Undo limit</translation>
     </message>
 </context>
 <context>
@@ -1081,15 +1081,15 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Delete current tool</source>
-        <translation></translation>
+        <translation>Delete current tool</translation>
     </message>
     <message>
         <source>Saving canceled</source>
-        <translation></translation>
+        <translation>Saving canceled</translation>
     </message>
     <message>
         <source>Save canceled</source>
-        <translation></translation>
+        <translation>Save canceled</translation>
     </message>
 </context>
 <context>
@@ -1159,7 +1159,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation></translation>
+        <translation>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</translation>
     </message>
 </context>
 <context>
@@ -1204,22 +1204,22 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <name>SizeDecreaseTool</name>
     <message>
         <source>Decrease Tool Size</source>
-        <translation></translation>
+        <translation>Decrease Tool Size</translation>
     </message>
     <message>
         <source>Decrease the size of the other tools</source>
-        <translation></translation>
+        <translation>Decrease the size of the other tools</translation>
     </message>
 </context>
 <context>
     <name>SizeIncreaseTool</name>
     <message>
         <source>Increase Tool Size</source>
-        <translation></translation>
+        <translation>Increase Tool Size</translation>
     </message>
     <message>
         <source>Increase the size of the other tools</source>
-        <translation></translation>
+        <translation>Increase the size of the other tools</translation>
     </message>
 </context>
 <context>
@@ -1434,7 +1434,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
-        <translation></translation>
+        <translation>&lt;Empty&gt;</translation>
     </message>
 </context>
 <context>
