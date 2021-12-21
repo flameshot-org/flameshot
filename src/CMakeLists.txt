@@ -33,8 +33,8 @@ if (APPLE)
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out flameshot.iconset/icon_256x256@2x.png"
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out flameshot.iconset/icon_512x512.png"
             COMMAND bash "-c" "sips -z 1024 1024 \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out flameshot.iconset/icon_512x512@2x.png"
-          
-          
+
+
             COMMAND bash "-c" "iconutil -c icns flameshot.iconset"
     )
 
@@ -215,6 +215,15 @@ if (WIN32)
     endif ()
 endif ()
 
+# Choose default color palette (small or large)
+if($ENV{FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+    set(FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE true)
+else()
+    set(FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE false)
+endif()
+message("Flameshot predefined color palette large: " ${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+target_compile_definitions(flameshot PRIVATE PREDEFINED_COLOR_PALETTE_LARGE=${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+
 find_package (Git)
 if (GIT_FOUND)
     message("git found: ${GIT_EXECUTABLE} in version     ${GIT_VERSION_STRING}")
@@ -347,7 +356,7 @@ if (WIN32)
         if (ENABLE_OPENSSL)
             if (EXISTS ${OPENSSL_ROOT_DIR}/bin)
 
-             install(
+                install(
                         DIRECTORY ${OPENSSL_ROOT_DIR}/bin/
                         DESTINATION bin
                         FILES_MATCHING

@@ -417,16 +417,36 @@ QVariant UserColors::process(const QVariant& val)
 
 QVariant UserColors::fallback()
 {
-    return QVariant::fromValue(QVector<QColor>{ Qt::darkRed,
-                                                Qt::red,
-                                                Qt::yellow,
-                                                Qt::green,
-                                                Qt::darkGreen,
-                                                Qt::cyan,
-                                                Qt::blue,
-                                                Qt::magenta,
-                                                Qt::darkMagenta,
-                                                QColor() });
+    if (ConfigHandler().predefinedColorPaletteLarge()) {
+        return QVariant::fromValue(QVector<QColor>{ Qt::white,
+                                                    Qt::red,
+                                                    Qt::green,
+                                                    Qt::blue,
+                                                    Qt::black,
+                                                    Qt::darkRed,
+                                                    Qt::darkGreen,
+                                                    Qt::darkBlue,
+                                                    Qt::darkGray,
+                                                    Qt::cyan,
+                                                    Qt::magenta,
+                                                    Qt::yellow,
+                                                    Qt::lightGray,
+                                                    Qt::darkCyan,
+                                                    Qt::darkMagenta,
+                                                    Qt::darkYellow,
+                                                    QColor() });
+    } else {
+        return QVariant::fromValue(QVector<QColor>{ Qt::darkRed,
+                                                    Qt::red,
+                                                    Qt::yellow,
+                                                    Qt::green,
+                                                    Qt::darkGreen,
+                                                    Qt::cyan,
+                                                    Qt::blue,
+                                                    Qt::magenta,
+                                                    Qt::darkMagenta,
+                                                    QColor() });
+    }
 }
 
 QString UserColors::expected()

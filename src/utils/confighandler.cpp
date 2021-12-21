@@ -117,6 +117,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
+    // PREDEFINED_COLOR_PALETTE_LARGE is defined in src/CMakeList.txt file and can be overwritten in GitHub actions
+    OPTION("predefinedColorPaletteLarge", Bool               ( PREDEFINED_COLOR_PALETTE_LARGE )),
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
 };
