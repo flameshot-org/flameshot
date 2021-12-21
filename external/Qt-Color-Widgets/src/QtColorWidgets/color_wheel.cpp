@@ -231,7 +231,11 @@ void ColorWheel::mouseReleaseEvent(QMouseEvent *ev)
 
 void ColorWheel::resizeEvent(QResizeEvent *)
 {
-    p->render_ring();
+    static bool skipFirst = true;
+    // Skip the first time in order to prevent QPainter warning messages
+    if (!skipFirst)
+        p->render_ring();
+    skipFirst = false;
     p->render_inner_selector();
 }
 
