@@ -79,7 +79,11 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
+
+#if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
+#endif
+
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
