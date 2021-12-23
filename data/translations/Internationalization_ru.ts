@@ -221,7 +221,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation>Ошибка конфигурации устранена. Запустите `flameshot gui` снова, чтобы применить её.</translation>
+        <translation>Ошибка конфигурации устранена. Запустите `flameshot gui` снова, чтобы применить ее.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -846,7 +846,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use large predefined color palette</source>
-        <translation>Использовать большую предопределённую цветовую палитру</translation>
+        <translation>Используйте большую предопределенную цветовую палитру</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
@@ -913,12 +913,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="572"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Сглаживание изображения при масштабировании прикреплённого изображения</translation>
+        <translation>Сглаживание изображения при масштабировании прикрепленного изображения</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="574"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным</translation>
+        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="585"/>
@@ -1331,7 +1331,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Установить «Инвертор» в качестве инструмента рисования</translation>
+        <translation>Установить Инвертор в качестве инструмента рисования</translation>
     </message>
 </context>
 <context>
@@ -1578,7 +1578,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
-        <translation>Проверить конфигурацию на наличие ошибок</translation>
+        <translation type="unfinished">Проверить конфигурацию на наличие ошибок</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
