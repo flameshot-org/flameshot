@@ -143,18 +143,23 @@ void UtilityPanel::initInternalPanel()
 
     QHBoxLayout* layersButtons = new QHBoxLayout();
     m_layersLayout->addLayout(layersButtons);
+
     m_layersLayout->addWidget(m_captureTools);
 
+    bool isDark = ColorUtils::colorIsDark(bgColor);
+    QString coloredIconPath =
+      isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+
     m_buttonDelete = new QPushButton(this);
-    m_buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
+    m_buttonDelete->setIcon(QIcon(coloredIconPath + "delete.svg"));
     m_buttonDelete->setDisabled(true);
 
     m_buttonMoveUp = new QPushButton(this);
-    m_buttonMoveUp->setIcon(QIcon(":/img/material/black/move_up.svg"));
+    m_buttonMoveUp->setIcon(QIcon(coloredIconPath + "move_up.svg"));
     m_buttonMoveUp->setDisabled(true);
 
     m_buttonMoveDown = new QPushButton(this);
-    m_buttonMoveDown->setIcon(QIcon(":/img/material/black/move_down.svg"));
+    m_buttonMoveDown->setIcon(QIcon(coloredIconPath + "move_down.svg"));
     m_buttonMoveDown->setDisabled(true);
 
     layersButtons->addWidget(m_buttonDelete);

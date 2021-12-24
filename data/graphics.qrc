@@ -94,5 +94,6 @@
         <file>img/material/black/move_up.svg</file>
         <file>img/material/white/move_down.svg</file>
         <file>img/material/white/move_up.svg</file>
+        <file>img/material/white/delete.svg</file>
     </qresource>
 </RCC>
