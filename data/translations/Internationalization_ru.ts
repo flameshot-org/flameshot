@@ -918,7 +918,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="574"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным?</translation>
+        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="585"/>
@@ -1608,17 +1608,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>Укажите экран для захвата (начиная с 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимая область, используйте «WxH+X+Y» или «all» или «screen0/screen1/...».</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="258"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимый путь, укажите существующий каталог или новый файл в имеющемся каталоге</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1683,7 +1683,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="608"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Полноэкранный снимок закреплён на экране</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="630"/>
@@ -1802,7 +1802,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер инструмента</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1845,7 +1845,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить снимок экрана в файл</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1898,7 +1898,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо перезапустить Flameshot для применения изменений.</translation>
     </message>
 </context>
 <context>
@@ -1941,12 +1941,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Размер активного инструмента: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
         <source>Active Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Активный цвет: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="69"/>
@@ -1990,7 +1990,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать размеры X и Y выделения</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2138,17 +2138,17 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание по левому краю</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание по центру</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание по правому краю</translation>
     </message>
 </context>
 <context>
@@ -2293,7 +2293,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать</translation>
     </message>
 </context>
 <context>
@@ -2301,7 +2301,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Безымянный</translation>
     </message>
 </context>
 <context>
@@ -2309,12 +2309,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Безымянный</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %(2 цвета)</translation>
     </message>
 </context>
 <context>
@@ -2323,88 +2323,89 @@ You can find me in the system tray.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть новую палитру из файла</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Дублировать текущую палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить текущую палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Вернуть изменения к текущей палитре</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить изменения в текущей палитре</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить цвет в палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить выбранный цвет из палитры</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая палитра</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="202"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Палитры GIMP (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение палитры (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить файл палитры
+%1</translation>
     </message>
 </context>
 <context>
@@ -2412,17 +2413,17 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="335"/>
         <source>Add Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить цвет...</translation>
     </message>
 </context>
 <context>
@@ -2430,7 +2431,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 цвета)</translation>
     </message>
 </context>
 <context>
@@ -2438,12 +2439,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>
