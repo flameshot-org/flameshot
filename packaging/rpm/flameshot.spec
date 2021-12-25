@@ -8,7 +8,7 @@
 %define is_suse_leap (0%{?is_opensuse} && 0%{?sle_version} >= 150200)
 
 Name: flameshot
-Version: 0.10.1
+Version: 11.0.0
 %if %{is_rhel_or_fedora}
 Release: 1%{?dist}
 %endif
@@ -121,6 +121,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Fri Dec 24 2021 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
+- Update for 11.0 release.
+
 * Sun Aug 29 2021 Zetao Yang <vitzys@outlook.com> - 0.10.1-2
 - Minor SPEC fixes.
 
