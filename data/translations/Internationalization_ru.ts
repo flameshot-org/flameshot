@@ -918,7 +918,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="574"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным?</translation>
+        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="585"/>
