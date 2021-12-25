@@ -6,7 +6,7 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 
 
 ## New Features
-- The on screen help menu has been clarified and dynamically updates the hotkeys based on user defined hotkeys. 
+- The on-screen help menu has been clarified and dynamically updates the hotkeys based on user defined hotkeys. 
 
 <p align=center><img src="images/help_screen.png" width=50%> </p>
 
@@ -15,13 +15,13 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 - Flameshot can now be run in "one off" mode which means the background systray component is now optional. See the CLI details below.
 
 - The CLI has been completely refactored. With the new architecture we added the following:
-  - The man page has been rewritten to reflect all the new options. The best place to learn about these new feature is the man page or flameshot --help, but some notable new features will be outlined here. 
+  - The man page has been rewritten to reflect all the new options. The best place to learn about these new features is the man page or flameshot --help, but some notable new features will be outlined here. 
   - CLI is now callable from MacOS.
-  - CLI options are unified wherever possible. This means if an argument is added to "flameshot gui" it is also likely to be support in "flameshot full".
-  - ```--region``` is a new flag that allows users to specify the exact region to screenshot. It uses the same syntax as xrandr ```WxH+x+y```.
+  - CLI options are unified wherever possible. This means if an argument is added to "flameshot gui" it is also likely to be supported in "flameshot full".
+  - `--region` is a new flag that allows users to specify the exact region to screenshot. It uses the same syntax as xrandr: `WxH+x+y`.
     - This is likely to be added to the launcher in the next release. 
-  - ```--accept-on-select``` This flag will save the image as soon as the mouse is released when selecting a region.
-  - The CLI now supports pinning, uploading, and copying to clipboard. 
+  - `--accept-on-select` This flag will save the image as soon as the mouse is released when selecting a region.
+  - The CLI now supports pinning (`--pin`), uploading (`--upload`), and copying to clipboard (`--clipboard`). 
 
 
 - MacOS now uses monochrome icon to match the system theme better.
@@ -31,7 +31,7 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 - The sidebar now shows the hexidecimal color value when the color picker is used:
 <p align=center><img src="images/hex.png" width=25%> </p>
 
--  The about screen lists system information and allows you to copy this for easy access in bug submission forms. 
+- The about screen lists system information and allows you to copy this for easy access in bug submission forms. 
 
 - Every file format supported by your underlying system is now an option for file format when saving. 
 
@@ -51,11 +51,11 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 
 - Even if a button is hidden from the toolbar, it can still be activated via hotkey.
 
-- The uploader now gives users a confirmation box before uploading. This can be disabled **if you disable this and accidentally upload sensitive information, there is nothing we can do. It's recommended to leave the the confirmation enabled.**
+- The uploader now gives users a confirmation box before uploading. This can be disabled. **If you disable this and accidentally upload sensitive information, there is nothing we can do. It's recommended to leave the confirmation enabled.** Also, a keyboard shortcut for upload has been enabled (`Ctrl+U` by default)
 
 - MacOS users can now bind a custom hotkey for taking a screenshot. 
 
-- The config file parser has been reworked. It will now alert users if there is an error in their file. If a repair is possible, Flameshot attempts to repair the file. 
+- The config file parser has been reworked. It will now alert users if there is an error in their config. If a repair is possible, Flameshot attempts to repair the file. 
   - We do our best not to break existing configs, but sometimes adding new features or removing old ones force this to change. 
 
 - Double clicking can be used to copy the screenshot to the clipboard. 
@@ -76,6 +76,8 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 - Path handling has been improved.
 
 - Fixed an issue where running Flameshot for the first time on NixOS would fail to create the config file.
+
+- Fixed a problem with some window managers where Flameshot would lose focus and shortcuts would stop working.
 
 ## Known Issues
 - Fractional scaling on linux is still not resolved.  (But we have identified a workaround finally. Hope to merge soon.)
