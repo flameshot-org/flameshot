@@ -1578,7 +1578,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
-        <translation type="unfinished">Проверить конфигурацию на наличие ошибок</translation>
+        <translation>Проверить конфигурацию на наличие ошибок</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
