@@ -7,6 +7,7 @@
 #include "QtSolutions/qtsingleapplication.h"
 #endif
 
+#include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
@@ -15,7 +16,6 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/pathinfo.h"
-#include "src/utils/systemnotification.h"
 #include "src/utils/valuehandler.h"
 #include <QApplication>
 #include <QDir>
@@ -24,10 +24,8 @@
 #include <QTimer>
 #include <QTranslator>
 
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/spdlog.h"
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+#include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
 #include <QApplication>
 #include <QDBusConnection>
@@ -59,9 +57,7 @@ void requestCaptureAndWait(const CaptureRequest& req)
           }
       });
     QObject::connect(controller, &Controller::captureFailed, []() {
-        // TODO use abstract logger
-        // TODO do we have to do more stuff here?
-        QTextStream(stderr) << "screenshot aborted\n";
+        AbstractLogger::info() << "Screenshot aborted.";
         qApp->exit(1);
     });
     qApp->exec();
@@ -88,8 +84,6 @@ int main(int argc, char* argv[])
 #ifdef Q_OS_LINUX
     wayland_hacks();
 #endif
-    spdlog::set_level(spdlog::level::debug); // Set global log level to debug
-    spdlog::set_pattern("[source %s] [function %!] [line %#] %v");
 
     // required for the button serialization
     // TODO: change to QVector in v1.0
@@ -137,8 +131,8 @@ int main(int argc, char* argv[])
         new FlameshotDBusAdapter(c);
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (!dbus.isConnected()) {
-            SystemNotification().sendMessage(
-              QObject::tr("Unable to connect via DBus"));
+            AbstractLogger::error()
+              << QObject::tr("Unable to connect via DBus");
         }
         dbus.registerObject(QStringLiteral("/"), c);
         dbus.registerService(QStringLiteral("org.flameshot.Flameshot"));
@@ -240,14 +234,15 @@ int main(int argc, char* argv[])
                   "You may need to escape the '#' sign as in '\\#FFF'");
 
     const QString delayErr =
-      QObject::tr("Invalid delay, it must be higher than 0");
+      QObject::tr("Invalid delay, it must be a number greater than 0");
     const QString numberErr =
       QObject::tr("Invalid screen number, it must be non negative");
     const QString regionErr = QObject::tr(
       "Invalid region, use 'WxH+X+Y' or 'all' or 'screen0/screen1/...'.");
     auto numericChecker = [](const QString& delayValue) -> bool {
-        int value = delayValue.toInt();
-        return value >= 0;
+        bool ok;
+        int value = delayValue.toInt(&ok);
+        return ok && value >= 0;
     };
     auto regionChecker = [](const QString& region) -> bool {
         Region valueHandler;
@@ -262,8 +257,7 @@ int main(int argc, char* argv[])
         if (fileInfo.isDir() || fileInfo.dir().exists()) {
             return true;
         } else {
-            SystemNotification().sendMessage(
-              QObject::tr(pathErr.toLatin1().data()));
+            AbstractLogger::error() << QObject::tr(pathErr.toLatin1().data());
             return false;
         }
     };
@@ -500,7 +494,7 @@ int main(int argc, char* argv[])
         bool someFlagSet =
           (filename || tray || mainColor || contrastColor || check);
         if (check) {
-            QTextStream err(stderr);
+            AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
             bool ok = ConfigHandler(true).checkForErrors(&err);
             if (ok) {
                 err << QStringLiteral("No errors detected.\n");

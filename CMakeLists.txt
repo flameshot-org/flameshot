@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
-set(FLAMESHOT_VERSION 0.10.2.1)
+set(FLAMESHOT_VERSION 11.0.0)
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")
@@ -66,7 +66,6 @@ option(FLAMESHOT_DEBUG_CAPTURE "Enable mode to make debugging easier" OFF)
 option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
-option(USE_EXTERNAL_SPDLOG "Use external spdlog library" OFF)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
 
 include(cmake/StandardProjectSettings.cmake)
@@ -102,13 +101,6 @@ if(USE_EXTERNAL_SINGLEAPPLICATION)
 else()
   add_subdirectory(external/singleapplication)
   set(QTSINGLEAPPLICATION_LIBRARY SingleApplication::SingleApplication)
-endif()
-
-if(USE_EXTERNAL_SPDLOG)
-  find_package(spdlog REQUIRED)
-  message(STATUS "Using external spdlog library")
-else()
-  add_subdirectory(external/spdlog)
 endif()
 
 

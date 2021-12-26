@@ -10,6 +10,7 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
+#include "abstractlogger.h"
 #include "copytool.h"
 #include "src/core/controller.h"
 #include "src/core/qguiappcurrentscreen.h"
@@ -38,9 +39,6 @@
 #include <QScreen>
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
-
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/spdlog.h"
 
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
@@ -100,7 +98,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         bool ok = true;
         m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
         if (!ok) {
-            SystemNotification().sendMessage(tr("Unable to capture screen"));
+            AbstractLogger::error() << tr("Unable to capture screen");
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
