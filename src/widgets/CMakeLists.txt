@@ -14,6 +14,8 @@ target_sources(
         historywidget.h
         updatenotificationwidget.h
         imguruploaddialog.h
+        colorpickerwidget.h
+        spinbox.h
         capture/capturetoolobjects.h
 )
 
@@ -29,5 +31,7 @@ target_sources(
         historywidget.cpp
         updatenotificationwidget.cpp
         imguruploaddialog.cpp
+        colorpickerwidget.cpp
+        spinbox.cpp
         capture/capturetoolobjects.cpp
 )

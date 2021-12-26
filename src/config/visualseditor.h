@@ -3,12 +3,14 @@
 
 #pragma once
 
+#include <QTabWidget>
 #include <QWidget>
 
 class ExtendedSlider;
 class QVBoxLayout;
 class ButtonListView;
 class UIcolorEditor;
+class ColorPickerEditor;
 
 class VisualsEditor : public QWidget
 {
@@ -21,8 +23,16 @@ public slots:
 
 private:
     QVBoxLayout* m_layout;
-    ButtonListView* m_buttonList;
+
+    QTabWidget* m_tabWidget;
+
     UIcolorEditor* m_colorEditor;
+    QWidget* m_colorEditorTab;
+
+    ColorPickerEditor* m_colorEditor1;
+    QWidget* m_colorEditorTab1;
+
+    ButtonListView* m_buttonList;
     ExtendedSlider* m_opacitySlider;
 
     void initWidgets();

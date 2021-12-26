@@ -1,5 +1,6 @@
 #include "valuehandler.h"
 #include "capturetool.h"
+#include "colorpickerwidget.h"
 #include "confighandler.h"
 #include "screengrabber.h"
 #include <QColor>
@@ -381,7 +382,7 @@ bool ButtonList::normalizeButtons(QList<int>& buttons)
 bool UserColors::check(const QVariant& val)
 {
     if (!val.isValid()) {
-        return true;
+        return false;
     }
     if (!val.canConvert(QVariant::StringList)) {
         return false;
@@ -417,16 +418,8 @@ QVariant UserColors::process(const QVariant& val)
 
 QVariant UserColors::fallback()
 {
-    return QVariant::fromValue(QVector<QColor>{ Qt::darkRed,
-                                                Qt::red,
-                                                Qt::yellow,
-                                                Qt::green,
-                                                Qt::darkGreen,
-                                                Qt::cyan,
-                                                Qt::blue,
-                                                Qt::magenta,
-                                                Qt::darkMagenta,
-                                                QColor() });
+    auto colorList = ColorPickerWidget::getDefaultColors();
+    return QVariant::fromValue(colorList);
 }
 
 QString UserColors::expected()
