@@ -2,6 +2,42 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr_TR">
 <context>
+    <name>AbstractWidgetList</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
+        <source>Add New</source>
+        <translation>Yeni Ekle</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
+        <source>Move Up</source>
+        <translation>Yukarı Taşı</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
+        <source>Move Down</source>
+        <translation>Aşağı Taşı</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
+        <source>Remove</source>
+        <translation>Kaldır</translation>
+    </message>
+</context>
+<context>
+    <name>AcceptTool</name>
+    <message>
+        <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
+        <source>Accept</source>
+        <translation>Kabul Et</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
+        <source>Accept the capture</source>
+        <translation>Yakalamayı kabul et</translation>
+    </message>
+</context>
+<context>
     <name>AppLauncher</name>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
@@ -17,33 +53,33 @@
 <context>
     <name>AppLauncherWidget</name>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="42"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="43"/>
         <source>Open With</source>
         <translation>Birlikte aç</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="57"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Launch in terminal</source>
         <translation>Terminalde aç</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="59"/>
         <source>Keep open after selection</source>
         <translation>Seçimden sonra açık tut</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="94"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
         <source>Unable to write in</source>
         <translation>Yazılamadı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="109"/>
+        <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
         <source>Unable to launch in terminal.</source>
         <translation>Terminalde başlatılamadı.</translation>
     </message>
@@ -128,25 +164,79 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="99"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="103"/>
         <source>Unable to capture screen</source>
         <translation>Ekran resmi alınamadı</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="1672"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
+        <source>Mouse</source>
+        <translation>Fare</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
+        <source>Select screenshot area</source>
+        <translation>Ekran görüntüsü alanı seç</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
+        <source>Mouse Wheel</source>
+        <translation>Fare Tekerleği</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
+        <source>Change tool size</source>
+        <translation>Araç boyutunu değiştir</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
+        <source>Right Click</source>
+        <translation>Sağ Tık</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
+        <source>Show color picker</source>
+        <translation>Renk seçici göster</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
+        <source>Open side panel</source>
+        <translation>Yan paneli aç</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
+        <source>Esc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
+        <source>Exit</source>
+        <translation>Çıkış</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
+        <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
+        <translation>Flameshot odağı kaybetti. Klavye kısayolları, siz bir yere tıklayana kadar çalışmayacaktır.</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
+        <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
+        <translation>Yapılandırma hatası çözüldü. Uygulamak için `flameshot gui` yeniden başlatın.</translation>
+    </message>
+    <message>
         <source>Select an area with the mouse, or press Esc to exit.
 Press Enter to capture the screen.
 Press Right Click to show the color picker.
 Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</source>
-        <translation>Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
+        <translation type="vanished">Fareyle bir alan seçin veya çıkmak için Esc tuşuna basın.
 Ekranı yakalamak için Enter tuşuna basın.
 Renk seçiciyi göstermek için farenin sağ tuşuna tıklayın.
 Aracınızın kalınlığını değiştirmek için Fare Tekerleğini kullanın.
 Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="903"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="930"/>
         <source>Tool Settings</source>
         <translation>Araç Ayarları</translation>
     </message>
@@ -154,12 +244,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="33"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="59"/>
         <source>Circle Counter</source>
         <translation>Daire Sayacı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="43"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="77"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>Otomatik artan bir sayaç balonu ekleyin</translation>
     </message>
@@ -178,87 +268,190 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
 </context>
 <context>
+    <name>ColorDialog</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="14"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
+        <source>Select Color</source>
+        <translation>Renk Seç</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
+        <source>Saturation</source>
+        <translation>Doygunluk</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
+        <source>Hue</source>
+        <translation>Ton</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
+        <source>Hex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
+        <source>Blue</source>
+        <translation>Mavi</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
+        <source>Value</source>
+        <translation>Değer</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
+        <source>Green</source>
+        <translation>Yeşil</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
+        <source>Alpha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
+        <source>Red</source>
+        <translation>Kırmızı</translation>
+    </message>
+</context>
+<context>
+    <name>ColorGrabWidget</name>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="54"/>
+        <source>Accept color</source>
+        <translation>Rengi kabul et</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="55"/>
+        <source>Precisely select color</source>
+        <translation>Rengi tam olarak seç</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
+        <source>Toggle magnifier</source>
+        <translation>Büyüteci aç/kapat</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+</context>
+<context>
+    <name>ConfigHandler</name>
+    <message>
+        <location filename="../../src/utils/confighandler.cpp" line="705"/>
+        <source>You have successfully resolved the configuration error.</source>
+        <translation>Yapılandırma hatasını başarıyla çözdünüz.</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/confighandler.cpp" line="728"/>
+        <source>The configuration contains an error. Falling back to default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/confighandler.cpp" line="781"/>
+        <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="28"/>
+        <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="49"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>Arayüz</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="55"/>
+        <location filename="../../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
         <translation>Dosya Adı Düzenleyici</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="59"/>
+        <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>General</source>
         <translation>Genel</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="63"/>
+        <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
         <translation>Kısayollar</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/configwindow.cpp" line="124"/>
+        <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Yapılandırma dosyasında hatalar var. Devam etmeden önce bunları çözün.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="198"/>
+        <location filename="../../src/core/controller.cpp" line="181"/>
         <source>New version %1 is available</source>
         <translation>Yeni %1 sürümü mevcut</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="207"/>
+        <location filename="../../src/core/controller.cpp" line="190"/>
         <source>You have the latest version</source>
         <translation>En son sürüme sahipsiniz</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="215"/>
+        <location filename="../../src/core/controller.cpp" line="198"/>
         <source>Failed to get information about the latest version.</source>
         <translation>En son sürüm hakkında bilgi alınamadı.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="296"/>
+        <location filename="../../src/core/controller.cpp" line="273"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="296"/>
+        <location filename="../../src/core/controller.cpp" line="273"/>
         <source>Unable to close active modal widgets</source>
         <translation>Etkin modal widget&apos;lar kapatılamıyor</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="401"/>
+        <location filename="../../src/core/controller.cpp" line="407"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Ekran Resmi Al</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="417"/>
+        <location filename="../../src/core/controller.cpp" line="423"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Başlatıcı Aç</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="422"/>
+        <location filename="../../src/core/controller.cpp" line="428"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Ayarlar</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="425"/>
+        <location filename="../../src/core/controller.cpp" line="431"/>
         <source>&amp;About</source>
         <translation>&amp;Hakkında</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="428"/>
+        <location filename="../../src/core/controller.cpp" line="434"/>
         <source>Check for updates</source>
         <translation>Güncellemeleri denetle</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="435"/>
+        <location filename="../../src/core/controller.cpp" line="441"/>
         <source>&amp;Latest Uploads</source>
         <translation>&amp;Son Yüklenenler</translation>
     </message>
@@ -267,7 +460,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="vanished">&amp;Bilgi</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="431"/>
+        <location filename="../../src/core/controller.cpp" line="437"/>
         <source>&amp;Quit</source>
         <translation>&amp;Çıkış</translation>
     </message>
@@ -281,16 +474,19 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
-        <source>Copy the selection into the clipboard</source>
+        <source>Copy selection to clipboard</source>
         <translation>Seçimi panoya kopyala</translation>
+    </message>
+    <message>
+        <source>Copy the selection into the clipboard</source>
+        <translation type="vanished">Seçimi panoya kopyala</translation>
     </message>
 </context>
 <context>
     <name>DBusUtils</name>
     <message>
-        <location filename="../../src/utils/dbusutils.cpp" line="56"/>
         <source>Unable to connect via DBus</source>
-        <translation>DBus ile bağlanılamadı</translation>
+        <translation type="vanished">DBus ile bağlanılamadı</translation>
     </message>
 </context>
 <context>
@@ -356,6 +552,14 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
         <translation>İsmi siler</translation>
+    </message>
+</context>
+<context>
+    <name>FlameshotDaemon</name>
+    <message>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="249"/>
+        <source>Unable to connect via DBus</source>
+        <translation type="unfinished">DBus ile bağlanılamadı</translation>
     </message>
 </context>
 <context>
@@ -432,188 +636,231 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="112"/>
-        <location filename="../../src/config/generalconf.cpp" line="284"/>
+        <location filename="../../src/config/generalconf.cpp" line="139"/>
+        <location filename="../../src/config/generalconf.cpp" line="296"/>
         <source>Import</source>
         <translation>Dışa aktar</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="119"/>
-        <location filename="../../src/config/generalconf.cpp" line="127"/>
-        <location filename="../../src/config/generalconf.cpp" line="150"/>
-        <location filename="../../src/config/generalconf.cpp" line="537"/>
+        <location filename="../../src/config/generalconf.cpp" line="146"/>
+        <location filename="../../src/config/generalconf.cpp" line="154"/>
+        <location filename="../../src/config/generalconf.cpp" line="178"/>
+        <location filename="../../src/config/generalconf.cpp" line="612"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="119"/>
+        <location filename="../../src/config/generalconf.cpp" line="146"/>
         <source>Unable to read file.</source>
         <translation>Dosya okunamıyor.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="127"/>
-        <location filename="../../src/config/generalconf.cpp" line="150"/>
+        <location filename="../../src/config/generalconf.cpp" line="154"/>
+        <location filename="../../src/config/generalconf.cpp" line="178"/>
         <source>Unable to write file.</source>
         <translation>Dosya yazılamıyor.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="137"/>
+        <location filename="../../src/config/generalconf.cpp" line="165"/>
         <source>Save File</source>
         <translation>Dosyayı Kaydet</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="159"/>
+        <location filename="../../src/config/generalconf.cpp" line="187"/>
         <source>Confirm Reset</source>
         <translation>Sıfırlamayı Onayla</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="160"/>
+        <location filename="../../src/config/generalconf.cpp" line="188"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Ayarları sıfırlamak istediğinizden emin misiniz?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="196"/>
+        <location filename="../../src/config/generalconf.cpp" line="219"/>
         <source>Show help message</source>
         <translation>Yardım mesajını göster</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="200"/>
+        <location filename="../../src/config/generalconf.cpp" line="220"/>
         <source>Show the help message at the beginning in the capture mode.</source>
         <translation>Yakalama modunda başlangıçta yardım mesajını göster.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="210"/>
+        <location filename="../../src/config/generalconf.cpp" line="230"/>
         <source>Show the side panel button</source>
         <translation>Yan panel düğmesini göster</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="213"/>
+        <location filename="../../src/config/generalconf.cpp" line="232"/>
         <source>Show the side panel toggle button in the capture mode.</source>
         <translation>Çekim modunda yan panel geçiş düğmesini göster.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="223"/>
-        <location filename="../../src/config/generalconf.cpp" line="227"/>
+        <location filename="../../src/config/generalconf.cpp" line="243"/>
+        <location filename="../../src/config/generalconf.cpp" line="244"/>
         <source>Show desktop notifications</source>
         <translation>Masaüstü bildirimlerini göster</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="239"/>
+        <location filename="../../src/config/generalconf.cpp" line="256"/>
         <source>Show tray icon</source>
         <translation>Tepsi simgesini göster</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="242"/>
+        <location filename="../../src/config/generalconf.cpp" line="257"/>
         <source>Show the systemtray icon</source>
         <translation>Sistem tepsisi simgesini göster</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="255"/>
-        <location filename="../../src/config/generalconf.cpp" line="260"/>
+        <location filename="../../src/config/generalconf.cpp" line="269"/>
+        <location filename="../../src/config/generalconf.cpp" line="272"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Son yüklenenlerden ekran görüntüsünü silmek için onay gerekli</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="272"/>
+        <location filename="../../src/config/generalconf.cpp" line="284"/>
         <source>Configuration File</source>
         <translation>Yapılandırma Dosyası</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="277"/>
+        <location filename="../../src/config/generalconf.cpp" line="289"/>
         <source>Export</source>
         <translation>Dışa aktar</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="291"/>
+        <location filename="../../src/config/generalconf.cpp" line="303"/>
         <source>Reset</source>
         <translation>Sıfırla</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="301"/>
-        <location filename="../../src/config/generalconf.cpp" line="303"/>
+        <location filename="../../src/config/generalconf.cpp" line="313"/>
+        <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Automatic check for updates</source>
         <translation>Otomatik güncelleme denetimi</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="314"/>
+        <location filename="../../src/config/generalconf.cpp" line="326"/>
+        <source>Allow multiple flameshot GUI instances simultaneously</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="327"/>
+        <source>This allows you to take screenshots of flameshot itself for example.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="339"/>
+        <location filename="../../src/config/generalconf.cpp" line="341"/>
+        <source>Automatically close daemon when it is not needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="351"/>
         <source>Launch at startup</source>
         <translation>Başlangıçta başlat</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="317"/>
-        <location filename="../../src/config/generalconf.cpp" line="331"/>
+        <location filename="../../src/config/generalconf.cpp" line="352"/>
         <source>Launch Flameshot</source>
         <translation>Flameshot&apos;ı başlat</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="327"/>
+        <location filename="../../src/config/generalconf.cpp" line="362"/>
+        <location filename="../../src/config/generalconf.cpp" line="365"/>
         <source>Show welcome message on launch</source>
         <translation>Açılışta karşılama mesajını göster</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="342"/>
+        <location filename="../../src/config/generalconf.cpp" line="376"/>
+        <location filename="../../src/config/generalconf.cpp" line="378"/>
+        <source>Use large predefined color palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="390"/>
         <source>Copy URL after upload</source>
         <translation>Yüklemeden sonra URL&apos;yi kopyala</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="347"/>
+        <location filename="../../src/config/generalconf.cpp" line="392"/>
         <source>Copy URL and close window after upload</source>
         <translation>URL&apos;yi kopyalayın ve yüklemeden sonra pencereyi kapatın</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="357"/>
+        <location filename="../../src/config/generalconf.cpp" line="402"/>
         <source>Save image after copy</source>
         <translation>Kopyaladıktan sonra görüntüyü kaydet</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="358"/>
+        <location filename="../../src/config/generalconf.cpp" line="403"/>
         <source>Save image file after copying it</source>
         <translation>Görüntü dosyasını kopyaladıktan sonra kaydedin</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="365"/>
+        <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Save Path</source>
         <translation>Kaydetme Yolu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="385"/>
+        <location filename="../../src/config/generalconf.cpp" line="426"/>
         <source>Change...</source>
         <translation>Değiştir...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="393"/>
+        <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Kaydedilecek ekran görüntüleri için sabit yol kullan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="411"/>
+        <location filename="../../src/config/generalconf.cpp" line="446"/>
+        <source>Preferred save file extension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="476"/>
         <source>Latest Uploads Max Size</source>
         <translation>Son Yüklenenler Azami Boyutu</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="441"/>
+        <location filename="../../src/config/generalconf.cpp" line="503"/>
         <source>Undo limit</source>
         <translation>Geri alma sınırı</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="470"/>
-        <location filename="../../src/config/generalconf.cpp" line="475"/>
+        <location filename="../../src/config/generalconf.cpp" line="529"/>
+        <location filename="../../src/config/generalconf.cpp" line="531"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Pano için JPG biçimini kullan (PNG varsayılanı)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="509"/>
-        <location filename="../../src/config/generalconf.cpp" line="512"/>
+        <location filename="../../src/config/generalconf.cpp" line="561"/>
+        <location filename="../../src/config/generalconf.cpp" line="562"/>
         <source>Copy file path after save</source>
         <translation>Kaydettikten sonra dosya yolunu kopyala</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="528"/>
+        <location filename="../../src/config/generalconf.cpp" line="572"/>
+        <source>Anti-aliasing image when zoom the pinned image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="574"/>
+        <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="585"/>
+        <location filename="../../src/config/generalconf.cpp" line="587"/>
+        <source>Upload image without confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="603"/>
         <source>Choose a Folder</source>
         <translation>Bir Klasör Seçin</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="537"/>
+        <location filename="../../src/config/generalconf.cpp" line="612"/>
         <source>Unable to write to directory.</source>
         <translation>Dizine yazılamıyor.</translation>
     </message>
@@ -621,37 +868,37 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="26"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="27"/>
         <source>Latest Uploads</source>
         <translation>Son Yüklenenler</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="90"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="91"/>
         <source>Screenshots history is empty</source>
         <translation>Ekran görüntüsü geçmişi boş</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="141"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="142"/>
         <source>Copy URL</source>
         <translation>URL Kopyala</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="145"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="146"/>
         <source>URL copied to clipboard.</source>
         <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="151"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="152"/>
         <source>Open in browser</source>
         <translation>Tarayıcıda aç</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="167"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Confirm to delete</source>
         <translation>Silmeyi onayla</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
+        <location filename="../../src/widgets/historywidget.cpp" line="169"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
         <translation>En son yüklemelerden ve sunucudan bir ekran görüntüsünü silmek istediğinizden emin misiniz?</translation>
     </message>
@@ -669,6 +916,25 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <source>Error</source>
         <translation type="obsolete">Hata</translation>
+    </message>
+</context>
+<context>
+    <name>ImgUploadDialog</name>
+    <message>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
+        <source>Upload Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
+        <source>Do you want to upload this capture?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
+        <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
+        <source>Upload without confirmation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -707,71 +973,121 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     </message>
 </context>
 <context>
-    <name>ImgurUploader</name>
+    <name>ImgUploaderBase</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="39"/>
-        <source>Upload to Imgur</source>
-        <translation>Imgur&apos;a yükle</translation>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="36"/>
+        <source>Upload image</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="53"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation>Resim Yükleniyor</translation>
+        <translation type="unfinished">Resim Yükleniyor</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="165"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation>URL Kopyala</translation>
+        <translation type="unfinished">URL Kopyala</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="166"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation>URL Aç</translation>
+        <translation type="unfinished">URL Aç</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="167"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation>Resmi sil</translation>
+        <translation type="unfinished">Resmi sil</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="168"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation>Resim Pano&apos;ya.</translation>
+        <translation type="unfinished">Resim Pano&apos;ya.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="192"/>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="206"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation>URL açılamıyor.</translation>
+        <translation type="unfinished">URL açılamıyor.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="199"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>URL copied to clipboard.</source>
         <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="213"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Ekran görüntüsü panoya kopyalandı.</translation>
     </message>
 </context>
 <context>
-    <name>ImgurUploaderTool</name>
+    <name>ImgUploaderTool</name>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="24"/>
+        <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation>Resim Yükleme Aracı</translation>
+        <translation type="unfinished">Resim Yükleme Aracı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploadertool.cpp" line="34"/>
+        <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
+        <source>Upload the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploader</name>
+    <message>
+        <source>Upload to Imgur</source>
+        <translation type="vanished">Imgur&apos;a yükle</translation>
+    </message>
+    <message>
+        <source>Uploading Image</source>
+        <translation type="vanished">Resim Yükleniyor</translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="vanished">URL Kopyala</translation>
+    </message>
+    <message>
+        <source>Open URL</source>
+        <translation type="vanished">URL Aç</translation>
+    </message>
+    <message>
+        <source>Delete image</source>
+        <translation type="vanished">Resmi sil</translation>
+    </message>
+    <message>
+        <source>Image to Clipboard.</source>
+        <translation type="vanished">Resim Pano&apos;ya.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="92"/>
+        <source>Unable to open the URL.</source>
+        <translation>URL açılamıyor.</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="vanished">URL panoya kopyalandı.</translation>
+    </message>
+    <message>
+        <source>Screenshot copied to clipboard.</source>
+        <translation type="vanished">Ekran görüntüsü panoya kopyalandı.</translation>
+    </message>
+</context>
+<context>
+    <name>ImgurUploaderTool</name>
+    <message>
+        <source>Image Uploader</source>
+        <translation type="vanished">Resim Yükleme Aracı</translation>
+    </message>
+    <message>
         <source>Upload the selection to Imgur</source>
-        <translation>Seçimi Imgur&apos;a yükle</translation>
+        <translation type="vanished">Seçimi Imgur&apos;a yükle</translation>
     </message>
 </context>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="24"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="32"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
@@ -828,18 +1144,31 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="vanished">Tanım</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="46"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="54"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Lisans&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="55"/>
+        <location filename="../../src/widgets/infowindow.cpp" line="65"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
         <translation>&lt;u&gt;&lt;b&gt;Sürüm&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
         <translation type="vanished">&lt;u&gt;&lt;b&gt;Kısayollar&lt;/b&gt;&lt;/u&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>InvertTool</name>
+    <message>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
+        <source>Invert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
+        <source>Set Inverter as the paint tool</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -858,12 +1187,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>MarkerTool</name>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="27"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
         <source>Marker</source>
         <translation>İşaretleyici</translation>
     </message>
     <message>
-        <location filename="../../src/tools/marker/markertool.cpp" line="37"/>
+        <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
         <translation>İşaretleyiciyi boyama aracı olarak ayarla</translation>
     </message>
@@ -910,12 +1239,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>PixelateTool</name>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="23"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="24"/>
         <source>Pixelate</source>
         <translation>Pikselleştir</translation>
     </message>
     <message>
-        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="33"/>
+        <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
         <translation>Piksellleştirmeyi boyama aracı olarak ayarla</translation>
     </message>
@@ -936,19 +1265,19 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="221"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="203"/>
         <source>Save Error</source>
         <translation>Kaydetme Hatası</translation>
     </message>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="99"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="201"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="187"/>
         <source>Capture saved as </source>
         <translation>Yakalama farklı kaydedildi </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="62"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="65"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="61"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="64"/>
         <source>Capture saved to clipboard.</source>
         <translation>Yakalama, panoya kaydedildi.</translation>
     </message>
@@ -957,152 +1286,193 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <translation type="vanished">Yakalama panoya kaydedildi</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="48"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="47"/>
         <source>Error while saving to clipboard</source>
         <translation>Panoya kaydederken hata oluştu</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="103"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="219"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="101"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="196"/>
         <source>Error trying to save as </source>
         <translation>Farklı kaydetmeye çalışılırken hata oluştu </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="175"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="170"/>
         <source>Save screenshot</source>
         <translation>Ekran görüntüsünü kaydet</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
+        <source>Path copied to clipboard as </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Saving canceled</source>
-        <translation>Kaydetme iptal edildi</translation>
+        <translation type="vanished">Kaydetme iptal edildi</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="183"/>
         <source>Save canceled</source>
-        <translation>Kaydetme iptal edildi</translation>
+        <translation type="vanished">Kaydetme iptal edildi</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
         <source>Capture is saved and copied to the clipboard as </source>
-        <translation>Yakalama kaydedilir ve panoya şu adla kopyalanır </translation>
+        <translation type="vanished">Yakalama kaydedilir ve panoya şu adla kopyalanır </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="111"/>
-        <location filename="../../src/main.cpp" line="286"/>
-        <location filename="../../src/main.cpp" line="448"/>
-        <location filename="../../src/main.cpp" line="476"/>
-        <location filename="../../src/main.cpp" line="508"/>
+        <location filename="../../src/main.cpp" line="141"/>
         <source>Unable to connect via DBus</source>
         <translation>DBus ile bağlanılamadı</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="133"/>
+        <location filename="../../src/main.cpp" line="157"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>Güçlü ve kullanımı kolay ekran görüntüsü yazılımı.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="134"/>
+        <location filename="../../src/main.cpp" line="158"/>
         <source>See</source>
         <translation>Bak</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="137"/>
+        <location filename="../../src/main.cpp" line="161"/>
         <source>Capture the entire desktop.</source>
         <translation>Masaüstünün tamamını yakalayın.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="139"/>
+        <location filename="../../src/main.cpp" line="163"/>
         <source>Open the capture launcher.</source>
         <translation>Yakalama başlatıcısını açın.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="142"/>
+        <location filename="../../src/main.cpp" line="166"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>GUI modunda elle yakalama başlatın.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="144"/>
+        <location filename="../../src/main.cpp" line="168"/>
         <source>Configure</source>
         <translation>Yapılandır</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="146"/>
+        <location filename="../../src/main.cpp" line="170"/>
         <source>Capture a single screen.</source>
         <translation>Tek bir ekran yakalayın.</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="151"/>
         <source>Path where the capture will be saved</source>
-        <translation>Yakalamanın kaydedileceği yol</translation>
+        <translation type="vanished">Yakalamanın kaydedileceği yol</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="154"/>
+        <location filename="../../src/main.cpp" line="175"/>
+        <source>Existing directory or new file to save to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="178"/>
         <source>Save the capture to the clipboard</source>
         <translation>Yakalamayı panoya kaydedin</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="156"/>
+        <location filename="../../src/main.cpp" line="180"/>
+        <source>Pin the capture to the screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="182"/>
+        <source>Upload screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="184"/>
         <source>Delay time in milliseconds</source>
         <translation>Milisaniye cinsinden gecikme süresi</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="159"/>
+        <location filename="../../src/main.cpp" line="187"/>
+        <source>Screenshot region to select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="190"/>
         <source>Set the filename pattern</source>
         <translation>Dosya adı desenini ayarlayın</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="162"/>
+        <location filename="../../src/main.cpp" line="194"/>
+        <source>Accept capture as soon as a selection is made</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="196"/>
         <source>Enable or disable the trayicon</source>
         <translation>Tepsi simgesini etkinleştirin veya devre dışı bırakın</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="166"/>
+        <location filename="../../src/main.cpp" line="200"/>
         <source>Enable or disable run at startup</source>
         <translation>Başlangıçta çalışmayı etkinleştirin veya devre dışı bırakın</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="170"/>
+        <location filename="../../src/main.cpp" line="203"/>
+        <source>Check the configuration for errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="206"/>
         <source>Show the help message in the capture mode</source>
         <translation>Çekim modunda yardım mesajını göster</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="173"/>
+        <location filename="../../src/main.cpp" line="209"/>
         <source>Define the main UI color</source>
         <translation>Ana kullanıcı arayüzü rengini tanımlayın</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="177"/>
+        <location filename="../../src/main.cpp" line="213"/>
         <source>Define the contrast UI color</source>
         <translation>Kontrast kullanıcı arayüzü rengini tanımlayın</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="180"/>
+        <location filename="../../src/main.cpp" line="216"/>
         <source>Print raw PNG capture</source>
         <translation>Ham PNG yakalamayı yazdırın</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="183"/>
+        <location filename="../../src/main.cpp" line="219"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
         <translation>Seçimin geometrisini W H X Y biçiminde yazdırır. Raw belirtilirse hiçbir şey yapmaz</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="187"/>
-        <source>Define the screen to capture</source>
-        <translation>Yakalanacak ekranı tanımlayın</translation>
+        <location filename="../../src/main.cpp" line="223"/>
+        <source>Define the screen to capture (starting from 0)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="188"/>
+        <location filename="../../src/main.cpp" line="246"/>
+        <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="258"/>
+        <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define the screen to capture</source>
+        <translation type="vanished">Yakalanacak ekranı tanımlayın</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="224"/>
         <source>default: screen containing the cursor</source>
         <translation>varsayılan: imleci içeren ekran</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="189"/>
+        <location filename="../../src/main.cpp" line="225"/>
         <source>Screen number</source>
         <translation>Ekran numarası</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="198"/>
+        <location filename="../../src/main.cpp" line="234"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -1119,22 +1489,21 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 &apos;#&apos; işaretini &apos;\#FFF&apos; şeklinde kaçırmanız gerekebilir</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="207"/>
+        <location filename="../../src/main.cpp" line="243"/>
         <source>Invalid delay, it must be higher than 0</source>
         <translation>Geçersiz gecikme, 0&apos;dan yüksek olmalıdır</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="209"/>
+        <location filename="../../src/main.cpp" line="245"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>Geçersiz ekran numarası, negatif olmamalıdır</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="216"/>
         <source>Invalid path, it must be a real path in the system</source>
-        <translation>Geçersiz yol, sistemde gerçek bir yol olmalıdır</translation>
+        <translation type="vanished">Geçersiz yol, sistemde gerçek bir yol olmalıdır</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="227"/>
+        <location filename="../../src/main.cpp" line="272"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>Geçersiz değer, &apos;true&apos; veya &apos;false&apos; olarak tanımlanmalıdır</translation>
     </message>
@@ -1149,17 +1518,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Yazılamadı</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgur/imguruploader.cpp" line="99"/>
+        <location filename="../../src/core/controller.cpp" line="608"/>
+        <source>Full screen screenshot pinned to screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/core/controller.cpp" line="630"/>
         <source>URL copied to clipboard.</source>
         <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="50"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="51"/>
         <source>Options</source>
         <translation>Seçenekler</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="64"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="65"/>
         <source>Arguments</source>
         <translation>Argümanlar</translation>
     </message>
@@ -1184,97 +1558,86 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>Varsayılan olarak arka planda Flameshot çalıştırır ve yapılandırma için bir tepsi simgesi ekler.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="508"/>
+        <location filename="../../src/core/controller.cpp" line="513"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Merhaba ben burdayım! Ekran görüntüsü almak için tepsideki simgeye tıklayın veya daha fazla seçenek görmek için sağ düğmeyle tıklayın.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="24"/>
         <source>Toggle side panel</source>
-        <translation>Yan paneli aç / kapat</translation>
+        <translation type="vanished">Yan paneli aç / kapat</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="29"/>
         <source>Resize selection left 1px</source>
-        <translation>Seçimi sola 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Seçimi sola 1 piksel yeniden boyutlandır</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="33"/>
         <source>Resize selection right 1px</source>
-        <translation>Seçimi sağa 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Seçimi sağa 1 piksel yeniden boyutlandır</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="37"/>
         <source>Resize selection up 1px</source>
-        <translation>Seçimi yukarı 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Seçimi yukarı 1 piksel yeniden boyutlandır</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="41"/>
         <source>Resize selection down 1px</source>
-        <translation>Seçimi aşağı 1 piksel yeniden boyutlandır</translation>
+        <translation type="vanished">Seçimi aşağı 1 piksel yeniden boyutlandır</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="45"/>
         <source>Select entire screen</source>
-        <translation>Tüm ekranı seçin</translation>
+        <translation type="vanished">Tüm ekranı seçin</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="49"/>
         <source>Move selection left 1px</source>
-        <translation>Seçimi 1 piksel sola taşı</translation>
+        <translation type="vanished">Seçimi 1 piksel sola taşı</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="52"/>
         <source>Move selection right 1px</source>
-        <translation>Seçimi 1 piksel sağa taşı</translation>
+        <translation type="vanished">Seçimi 1 piksel sağa taşı</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="55"/>
         <source>Move selection up 1px</source>
-        <translation>Seçimi 1 piksel yukarı taşı</translation>
+        <translation type="vanished">Seçimi 1 piksel yukarı taşı</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="58"/>
         <source>Move selection down 1px</source>
-        <translation>Seçimi 1 piksel aşağı taşı</translation>
+        <translation type="vanished">Seçimi 1 piksel aşağı taşı</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="62"/>
         <source>Commit text in text area</source>
-        <translation>Metin alanındaki metni kaydet</translation>
+        <translation type="vanished">Metin alanındaki metni kaydet</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="68"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="72"/>
         <source>Delete current tool</source>
-        <translation>Geçerli aracı sil</translation>
+        <translation type="vanished">Geçerli aracı sil</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="76"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
         <source>Quit capture</source>
         <translation>Çıkış</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="82"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="86"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
         <source>Screenshot history</source>
         <translation>Ekran görüntüsü geçmişi</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="84"/>
-        <location filename="../../src/utils/configshortcuts.cpp" line="89"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Capture screen</source>
         <translation>Ekran görüntüsü al</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="96"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="206"/>
         <source>Show color picker</source>
         <translation>Renk seçici göster</translation>
     </message>
     <message>
-        <location filename="../../src/utils/configshortcuts.cpp" line="98"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
+        <source>Change the tool&apos;s size</source>
+        <translation>Aracın boyutunu değiştir</translation>
+    </message>
+    <message>
         <source>Change the tool&apos;s thickness</source>
-        <translation>Araç kalınlığını değiştir</translation>
+        <translation type="vanished">Araç kalınlığını değiştir</translation>
     </message>
 </context>
 <context>
@@ -1306,20 +1669,24 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SaveTool</name>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="29"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="24"/>
         <source>Save</source>
         <translation>Kaydet</translation>
     </message>
     <message>
-        <location filename="../../src/tools/save/savetool.cpp" line="39"/>
+        <location filename="../../src/tools/save/savetool.cpp" line="34"/>
+        <source>Save screenshot to a file</source>
+        <translation>Ekran görüntüsünü bir dosyaya kaydet</translation>
+    </message>
+    <message>
         <source>Save the capture</source>
-        <translation>Yakalamayı kaydet</translation>
+        <translation type="vanished">Yakalamayı kaydet</translation>
     </message>
 </context>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="143"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="127"/>
         <source>Unable to capture screen</source>
         <translation>Ekran resmi alınamadı</translation>
     </message>
@@ -1340,35 +1707,40 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SetShortcutDialog</name>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="16"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="17"/>
         <source>Set Shortcut</source>
         <translation>Kısayol Ayarla</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="22"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="23"/>
         <source>Enter new shortcut to change </source>
         <translation>Değiştirmek için yeni kısayolu girin </translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="35"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="37"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
         <translation>İptal etmek için Esc tuşuna veya klavye kısayolunu devre dışı bırakmak için ⌘+Backspace tuşuna basın.</translation>
     </message>
     <message>
-        <location filename="../../src/config/setshortcutwidget.cpp" line="39"/>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="41"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
         <translation>İptal etmek için Esc tuşuna veya klavye kısayolunu devre dışı bırakmak için Geri tuşuna basın.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
+        <source>Flameshot must be restarted for changes to take effect.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ShortcutsWidget</name>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="27"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="30"/>
         <source>Hot Keys</source>
         <translation>Kısayol Tuşları</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="52"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="53"/>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation>Ekran yakalama modunda kullanılabilir kısayollar.</translation>
     </message>
@@ -1386,22 +1758,29 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SidePanelWidget</name>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="63"/>
         <source>Active thickness:</source>
-        <translation>Etkin kalınlık:</translation>
+        <translation type="vanished">Etkin kalınlık:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="64"/>
         <source>Active color:</source>
-        <translation>Etkin renk:</translation>
+        <translation type="vanished">Etkin renk:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="208"/>
         <source>Press ESC to cancel</source>
-        <translation>İptal etmek için ESC&apos;ye basın</translation>
+        <translation type="vanished">İptal etmek için ESC&apos;ye basın</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="210"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
+        <source>Active tool size: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
+        <source>Active Color: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="69"/>
         <source>Grab Color</source>
         <translation>Rengi Yakala</translation>
     </message>
@@ -1441,8 +1820,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     </message>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
+        <source>Show X and Y dimensions of the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show the dimensions of the selection (X Y)</source>
-        <translation>Seçimin boyutlarını gösterir (X Y)</translation>
+        <translation type="vanished">Seçimin boyutlarını gösterir (X Y)</translation>
     </message>
 </context>
 <context>
@@ -1564,35 +1947,50 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="44"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="47"/>
         <source>StrikeOut</source>
         <translation>Üstçizgi</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="53"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="56"/>
         <source>Underline</source>
         <translation>Altçizgi</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="62"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="65"/>
         <source>Bold</source>
         <translation>Kalın</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="71"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="74"/>
         <source>Italic</source>
         <translation>Eğik</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
+        <source>Left Align</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
+        <source>Center Align</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
+        <source>Right Align</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TextTool</name>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="66"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="73"/>
         <source>Text</source>
         <translation>Metin</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/texttool.cpp" line="90"/>
+        <location filename="../../src/tools/text/texttool.cpp" line="97"/>
         <source>Add text to your capture</source>
         <translation>Bilgisayardan yazı ekle</translation>
     </message>
@@ -1700,6 +2098,164 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/config/visualseditor.cpp" line="71"/>
         <source>Select All</source>
         <translation>Tümünü Seç</translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::ColorDialog</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
+        <source>Pick</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::ColorPalette</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
+        <source>Unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::ColorPaletteModel</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
+        <source>Unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
+        <source>%1 (%2 colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::ColorPaletteWidget</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
+        <source>Open a new palette from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
+        <source>Create a new palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
+        <source>Duplicate the current palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
+        <source>Delete the current palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
+        <source>Revert changes to the current palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
+        <source>Save changes to the current palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
+        <source>Add a color to the palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
+        <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
+        <source>Remove the selected color from the palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
+        <source>New Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="202"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
+        <source>GIMP Palettes (*.gpl)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
+        <source>Palette Image (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
+        <source>All Files (*)</source>
+        <translation>Tüm Dosyalar (*)</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
+        <source>Open Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
+        <source>Failed to load the palette file
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::GradientEditor</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="335"/>
+        <source>Add Color</source>
+        <translation>Renk Ekle</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
+        <source>Remove Color</source>
+        <translation>Renk Kaldır</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
+        <source>Edit Color...</source>
+        <translation>Rengi Düzenle...</translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::GradientListModel</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
+        <source>%1 (%2 colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>color_widgets::Swatch</name>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
+        <source>Clear Color</source>
+        <translation>Rengi Temizle</translation>
+    </message>
+    <message>
+        <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
+        <source>%1 (%2)</source>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>

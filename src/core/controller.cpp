@@ -8,6 +8,7 @@
 #include "external/QHotkey/QHotkey"
 #endif
 
+#include "abstractlogger.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "src/config/configwindow.h"
@@ -18,14 +19,12 @@
 #include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
-#include "src/utils/systemnotification.h"
 #include "src/widgets/capture/capturetoolbutton.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/historywidget.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
-#include "src/widgets/notificationwidget.h"
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
@@ -604,8 +603,8 @@ void Controller::exportCapture(QPixmap capture,
     if (tasks & CR::PIN) {
         FlameshotDaemon::createPin(capture, selection);
         if (mode == CR::SCREEN_MODE || mode == CR::FULLSCREEN_MODE) {
-            SystemNotification().sendMessage(
-              QObject::tr("Full screen screenshot pinned to screen"));
+            AbstractLogger::info()
+              << QObject::tr("Full screen screenshot pinned to screen");
         }
     }
 
@@ -626,9 +625,8 @@ void Controller::exportCapture(QPixmap capture,
           widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
-                      SystemNotification().sendMessage(
-                        QObject::tr("URL copied to clipboard."));
-
+                      AbstractLogger::info()
+                        << QObject::tr("URL copied to clipboard.");
                       QApplication::clipboard()->setText(url.toString());
                       widget->close();
                   } else {
