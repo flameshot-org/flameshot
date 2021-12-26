@@ -19,17 +19,12 @@ location for the `config.ini` file depends on OS:
 Local configuration file `config.ini` example:
 ```
 [General]
-; Lock storage selection for the enterprise users
-; (it will lock to the default storage)
-STORAGE_LOCKED=s3
-
 ; Path with s3 creds for upload and other settings
 STORAGE_CONFIG_URL="https://git.examle.com/projects/repos/flameshot_config/raw/config.ini"
 ```
 Where:
 
 - `STORAGE_CONFIG_URL` - url with the remote configuration file
-- `STORAGE_LOCKED` - if you want to disable option to switch storages (optional)
 
 _Note: local configuration file is optional and default value is set to the non-CS Namecheap teams._
 

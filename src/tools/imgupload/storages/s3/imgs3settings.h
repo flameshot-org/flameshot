@@ -40,8 +40,6 @@ class ImgS3Settings
 public:
     ImgS3Settings();
 
-    const QString& storageLocked();
-
     const QString& credsUrl();
     const QString& xApiKey();
     const QString& url();
@@ -72,7 +70,6 @@ private:
 
     // class members
     QSettings* m_localSettings;
-    QString m_storageLocked;
     QString m_qstr;
 
     // s3
