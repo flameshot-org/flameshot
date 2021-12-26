@@ -113,17 +113,6 @@ void ImgS3Settings::updateSettingsFromRemoteConfig(const QSettings* settings)
     //    }
 }
 
-const QString& ImgS3Settings::storageLocked()
-{
-    if (m_localSettings->contains("STORAGE_LOCKED")) {
-        m_storageLocked =
-          m_localSettings->value(QStringLiteral("STORAGE_LOCKED")).toString();
-    } else {
-        m_storageLocked.clear();
-    }
-    return m_storageLocked;
-}
-
 const QString& ImgS3Settings::localConfigFilePath(const QString& fileName)
 {
     // get s3 settings
