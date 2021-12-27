@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить новый</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Поднять</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Опустить</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять захват</translation>
     </message>
 </context>
 <context>
@@ -171,57 +171,57 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Мышь</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите область снимка</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Колесо мыши</translation>
+        <translation>Колесо мыши</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер инструмента</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Right Click</source>
-        <translation type="unfinished">Правый клик</translation>
+        <translation>Правый клик</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Показать выбор цвета</translation>
+        <translation>Показать палитру цветов</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть боковую панель</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Exit</source>
-        <translation type="unfinished">Выход</translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot потерял фокус. Сочетания клавиш не будут работать, пока вы не щёлкните где-нибудь.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка конфигурации устранена. Запустите `flameshot gui` снова, чтобы применить её.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -273,55 +273,55 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="14"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation type="unfinished"></translation>
+        <translation>Насыщенность</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation type="unfinished"></translation>
+        <translation>Оттенок</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Шестнадцатеричный</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Синий</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Зеленый</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Альфа</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Красный</translation>
     </message>
 </context>
 <context>
@@ -329,22 +329,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="54"/>
         <source>Accept color</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить цвет</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="55"/>
         <source>Precisely select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Точный выбор цвета</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Toggle magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить лупу</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -352,17 +352,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы успешно устранили ошибку конфигурации.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="728"/>
         <source>The configuration contains an error. Falling back to default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация содержит ошибку. Возврат к умолчанию.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="781"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный ключ конфигурации &apos;%1&apos; в ConfigHandler. Пожалуйста, сообщите об этом как об ошибке.</translation>
     </message>
 </context>
 <context>
@@ -395,7 +395,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;В файле конфигурации есть ошибки. Решите их перед продолжением.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Storage</source>
@@ -479,7 +479,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать выделение в буфер обмена</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -563,7 +563,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="249"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Не удалось подключиться через DBus</translation>
+        <translation>Не удалось подключиться через DBus</translation>
     </message>
 </context>
 <context>
@@ -813,18 +813,18 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить открывать несколько экземпляров графического интерфейса flameshot одновременно</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это позволяет, например, делать скриншоты самой программы flameshot.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически закрывать фоновую службу, когда она не требуется</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="351"/>
@@ -846,7 +846,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать большую предопределённую цветовую палитру</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
@@ -886,7 +886,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>Preferred save file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Предпочтительное расширение файла сохранения:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="476"/>
@@ -913,18 +913,18 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="572"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation type="unfinished"></translation>
+        <translation>Сглаживание изображения при масштабировании прикреплённого изображения</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="574"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation type="unfinished"></translation>
+        <translation>Должно ли изображение после масштабирования сглаживаться или оставаться пиксельным</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="585"/>
         <location filename="../../src/config/generalconf.cpp" line="587"/>
         <source>Upload image without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка изображения без подтверждения</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="603"/>
@@ -1054,18 +1054,18 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтверждение загрузки</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите загрузить этот снимок?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка без подтверждения</translation>
     </message>
 </context>
 <context>
@@ -1124,47 +1124,47 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="36"/>
         <source>Upload image</source>
-        <translation type="unfinished">Загрузить изображение</translation>
+        <translation>Отправить изображение</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Загрузка изображения</translation>
+        <translation>Отправка изображения</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Копировать ссылку</translation>
+        <translation>Копировать ссылку</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation type="unfinished">Открыть ссылку</translation>
+        <translation>Открыть ссылку</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation type="unfinished">Удалить изображение</translation>
+        <translation>Удалить изображение</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Изображение в буфер обмена.</translation>
+        <translation>Изображение в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Не удалось открыть ссылку.</translation>
+        <translation>Не удалось открыть ссылку.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">Ссылка скопирована в буфер обмена.</translation>
+        <translation>Ссылка скопирована в буфер обмена.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Снимок скопирован в буфер обмена.</translation>
+        <translation>Снимок скопирован в буфер обмена.</translation>
     </message>
 </context>
 <context>
@@ -1180,12 +1180,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Загрузка изображения</translation>
+        <translation>Загрузчик изображений</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить выделенное</translation>
     </message>
 </context>
 <context>
@@ -1326,12 +1326,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation type="unfinished"></translation>
+        <translation>Инвертировать</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить «Инвертор» в качестве инструмента рисования</translation>
     </message>
 </context>
 <context>
@@ -1467,7 +1467,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Path copied to clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>Путь скопирован в буфер обмена как </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1528,7 +1528,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="175"/>
         <source>Existing directory or new file to save to</source>
-        <translation type="unfinished"></translation>
+        <translation>Существующая директория или новый файл для сохранения</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1538,12 +1538,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Pin the capture to the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрепить захват на экране</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="182"/>
         <source>Upload screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить скриншот</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1553,7 +1553,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Screenshot region to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор области скриншота</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1563,7 +1563,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять захват, как только будет сделан выбор</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="196"/>
@@ -1578,7 +1578,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверить конфигурацию на наличие ошибок</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
@@ -1608,17 +1608,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>Укажите экран для захвата (начиная с 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимая область, используйте «WxH+X+Y» или «all» или «screen0/screen1/...».</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="258"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимый путь, укажите существующий каталог или новый файл в имеющемся каталоге</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1683,7 +1683,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="608"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Полноэкранный снимок закреплён на экране</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="630"/>
@@ -1802,7 +1802,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер инструмента</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1845,7 +1845,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить снимок экрана в файл</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1898,7 +1898,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо перезапустить Flameshot для применения изменений.</translation>
     </message>
 </context>
 <context>
@@ -1941,12 +1941,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Размер активного инструмента: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
         <source>Active Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Активный цвет: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="69"/>
@@ -1990,7 +1990,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать размеры X и Y выделения</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2138,17 +2138,17 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание по левому краю</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание по центру</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation type="unfinished"></translation>
+        <translation>Выравнивание по правому краю</translation>
     </message>
 </context>
 <context>
@@ -2293,7 +2293,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать</translation>
     </message>
 </context>
 <context>
@@ -2301,7 +2301,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Безымянный</translation>
     </message>
 </context>
 <context>
@@ -2309,12 +2309,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Безымянный</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %(2 цвета)</translation>
     </message>
 </context>
 <context>
@@ -2323,88 +2323,89 @@ You can find me in the system tray.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть новую палитру из файла</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Дублировать текущую палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить текущую палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Вернуть изменения к текущей палитре</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить изменения в текущей палитре</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить цвет в палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить выбранный цвет из палитры</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая палитра</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="202"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Палитры GIMP (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение палитры (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть палитру</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить файл палитры
+%1</translation>
     </message>
 </context>
 <context>
@@ -2412,17 +2413,17 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="335"/>
         <source>Add Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить цвет...</translation>
     </message>
 </context>
 <context>
@@ -2430,7 +2431,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 цвета)</translation>
     </message>
 </context>
 <context>
@@ -2438,12 +2439,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить цвет</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>
