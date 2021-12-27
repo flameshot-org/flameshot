@@ -15,7 +15,7 @@ public:
         Stderr = 0x02,
         LogFile = 0x08,
         String = 0x10,
-        Default = LogFile | Stderr,
+        Default = Notification | LogFile | Stderr,
     };
 
     enum Channel
