@@ -119,7 +119,7 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
 {
     QLabel* label = new QLabel(tab);
     QPushButton* btnShowErrors = new QPushButton("Show errors", tab);
-    QHBoxLayout* btnLayout = new QHBoxLayout(tab);
+    QHBoxLayout* btnLayout = new QHBoxLayout();
 
     // Set up label
     label->setText(tr(
