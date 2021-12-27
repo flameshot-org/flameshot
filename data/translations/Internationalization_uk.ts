@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished">Застосувати</translation>
+        <translation>Застосувати</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished">Застосувати вибране</translation>
+        <translation>Застосувати вибір ділянки</translation>
     </message>
 </context>
 <context>
@@ -1331,7 +1331,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Установити Інвертор інструментом малювання</translation>
     </message>
 </context>
 <context>
@@ -1467,7 +1467,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="192"/>
         <source>Path copied to clipboard as </source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях скопійовано до буфера обміну як </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1528,7 +1528,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="175"/>
         <source>Existing directory or new file to save to</source>
-        <translation type="unfinished"></translation>
+        <translation>Наявний каталог або новий файл для збереження</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1538,7 +1538,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="180"/>
         <source>Pin the capture to the screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Закріпити вибрану ділянку на екрані</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="182"/>
@@ -1553,7 +1553,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
         <source>Screenshot region to select</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибір ділянки знімка екрана</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1563,7 +1563,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати вибір ділянки, коли її обрано</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="196"/>
@@ -1578,7 +1578,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірити налаштування для помилок</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="206"/>
@@ -1608,17 +1608,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/main.cpp" line="223"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>Визначте екран для вибору ділянки (починаючи з 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неприпустима ділянка, використовуйте «WxH+X+Y» або «all» або «screen0/screen1/...».</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="258"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Неприпустимий шлях. Укажіть наявний каталог або новий файл у наявному каталозі</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1683,7 +1683,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="608"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Знімок усього екрана прикріплено на екран</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="630"/>
@@ -1802,7 +1802,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінення розміру інструмента</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1898,7 +1898,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot потрібно перезапустити, щоб застосувати зміни.</translation>
     </message>
 </context>
 <context>
@@ -1990,7 +1990,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати розміри X і Y вибраного</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2293,7 +2293,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати</translation>
     </message>
 </context>
 <context>
@@ -2314,7 +2314,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 кольори)</translation>
     </message>
 </context>
 <context>
@@ -2347,7 +2347,7 @@ You can find me in the system tray.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Скасувати зміни поточної палітри</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
@@ -2387,7 +2387,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Зображення палітри (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
