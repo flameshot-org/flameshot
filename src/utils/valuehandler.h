@@ -198,6 +198,7 @@ class UserColors : public ValueHandler
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
     QString expected() override;
+    QVariant representation(const QVariant& val) override;
 };
 
 class SaveFileExtension : public ValueHandler

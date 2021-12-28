@@ -10,7 +10,7 @@ SpinBox::SpinBox(QWidget* parent)
     ConfigHandler config;
     m_colorList = config.userColors();
 
-    this->setRange(0, m_colorList.size() - 1);
+    this->setRange(1, m_colorList.size() - 1);
     this->setWrapping(true);
 }
 

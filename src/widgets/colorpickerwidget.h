@@ -22,7 +22,6 @@ public slots:
 protected:
     void paintEvent(QPaintEvent* event) override;
     void repaint(int i, QPainter& painter);
-    void mouseMoveEvent(QMouseEvent*) override;
 
     int m_colorAreaSize;
     int m_selectedIndex, m_lastIndex;

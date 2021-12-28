@@ -9,7 +9,22 @@
 
 ColorPicker::ColorPicker(QWidget* parent)
   : ColorPickerWidget(parent)
-{}
+{
+    setMouseTracking(true);
+}
+
+void ColorPicker::mouseMoveEvent(QMouseEvent* e)
+{
+    for (int i = 0; i < m_colorList.size(); ++i) {
+        if (m_colorAreaList.at(i).contains(e->pos())) {
+            m_selectedIndex = i;
+            update(m_colorAreaList.at(i) + QMargins(10, 10, 10, 10));
+            update(m_colorAreaList.at(m_lastIndex) + QMargins(10, 10, 10, 10));
+            m_lastIndex = i;
+            break;
+        }
+    }
+}
 
 void ColorPicker::showEvent(QShowEvent* event)
 {

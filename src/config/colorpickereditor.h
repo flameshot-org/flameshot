@@ -11,7 +11,9 @@ class ColorPickerWidget;
 class QVBoxLayout;
 class QHBoxLayout;
 class QLabel;
-class QGridLayout;
+class QPushButton;
+class QLineEdit;
+class QColor;
 
 class ColorPickerEditor : public QWidget
 {
@@ -19,13 +21,23 @@ class ColorPickerEditor : public QWidget
 public:
     explicit ColorPickerEditor(QWidget* parent = nullptr);
 
+private slots:
+    void addPreset();
+
 private:
     QLabel* m_spinboxLabel;
     SpinBox* m_spinbox;
     ColorPickerWidget* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
+    QPushButton* m_deletePreset;
+
+    QLineEdit* m_colorInput;
+    QLabel* m_addPresetLabel;
+    QPushButton* m_addPresetButton;
+
+    QColor m_color;
+    int m_selectedIndex;
 
     QHBoxLayout* m_hLayout;
     QVBoxLayout* m_vLayout;
-    QGridLayout* m_gLayout;
 };

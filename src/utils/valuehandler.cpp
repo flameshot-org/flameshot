@@ -427,6 +427,23 @@ QString UserColors::expected()
     return QStringLiteral("list of colors separated by comma");
 }
 
+QVariant UserColors::representation(const QVariant& val)
+{
+    QVector<QColor> colors = val.value<QVector<QColor>>();
+
+    QStringList strColors;
+
+    for (const auto& col : colors) {
+        if (col.isValid()) {
+            strColors.append(col.name(QColor::HexRgb));
+        } else {
+            strColors.append(QStringLiteral("picker"));
+        }
+    }
+
+    return QVariant::fromValue(strColors);
+}
+
 // SET SAVE FILE AS EXTENSION
 
 bool SaveFileExtension::check(const QVariant& val)

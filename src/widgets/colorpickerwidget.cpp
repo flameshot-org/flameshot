@@ -15,7 +15,6 @@ ColorPickerWidget::ColorPickerWidget(QWidget* parent)
     ConfigHandler config;
     m_colorList = config.userColors();
     m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
-    setMouseTracking(true);
     // save the color values in member variables for faster access
     m_uiColor = config.uiColor();
     QColor drawColor = config.drawColor();
@@ -30,6 +29,8 @@ ColorPickerWidget::ColorPickerWidget(QWidget* parent)
     // selected color.
     const int extraSize = 6;
     double radius = (m_colorList.size() * m_colorAreaSize / 1.3) / 3.141592;
+    setMinimumSize(radius * 2 + m_colorAreaSize + extraSize,
+                   radius * 2 + m_colorAreaSize + extraSize);
     resize(radius * 2 + m_colorAreaSize + extraSize,
            radius * 2 + m_colorAreaSize + extraSize);
     double degree = 360 / (m_colorList.size());
@@ -113,19 +114,8 @@ void ColorPickerWidget::repaint(int i, QPainter& painter)
             lastRect.setY(lastRect.y() + nStep);
             lastRect.setHeight(lastRect.height() - nStep);
             lastRect.setWidth(lastRect.width() - nStep);
-        }
-    }
-}
 
-void ColorPickerWidget::mouseMoveEvent(QMouseEvent* e)
-{
-    for (int i = 0; i < m_colorList.size(); ++i) {
-        if (m_colorAreaList.at(i).contains(e->pos())) {
-            m_selectedIndex = i;
-            update(m_colorAreaList.at(i) + QMargins(10, 10, 10, 10));
-            update(m_colorAreaList.at(m_lastIndex) + QMargins(10, 10, 10, 10));
-            m_lastIndex = i;
-            break;
+            painter.setPen(QColor(Qt::black));
         }
     }
 }
@@ -139,6 +129,6 @@ void ColorPickerWidget::updateWidget(int index)
 }
 
 QVector<QColor> ColorPickerWidget::defaultColors = {
-    Qt::darkRed, Qt::red,  Qt::yellow,  Qt::green,       Qt::darkGreen,
-    Qt::cyan,    Qt::blue, Qt::magenta, Qt::darkMagenta, QColor()
+    QColor(),      Qt::darkRed, Qt::red,  Qt::yellow,  Qt::green,
+    Qt::darkGreen, Qt::cyan,    Qt::blue, Qt::magenta, Qt::darkMagenta
 };
