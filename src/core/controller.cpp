@@ -519,12 +519,10 @@ void Controller::enableTrayIcon()
 
 void Controller::disableTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
     if (m_trayIcon) {
         m_trayIcon->hide();
     }
     ConfigHandler().setDisabledTrayIcon(true);
-#endif
 }
 
 void Controller::sendTrayNotification(const QString& text,
