@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include <QDebug>
 #include <QWidget>
 
 class ColorPickerWidget : public QWidget
@@ -14,11 +13,6 @@ public:
 
     static const QVector<QColor>& getDefaultColors();
     void updateWidget();
-
-signals:
-    void colorSelected(QColor c);
-
-public slots:
     void updateSelection(int index);
 
 protected:

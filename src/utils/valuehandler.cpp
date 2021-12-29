@@ -400,7 +400,7 @@ bool UserColors::check(const QVariant& val)
 
     int sz = val.toStringList().size();
 
-    return true && sz >= m_min && sz <= m_max;
+    return sz >= m_min && sz <= m_max;
 }
 
 QVariant UserColors::process(const QVariant& val)

@@ -8,12 +8,11 @@
 
 class SpinBox;
 class ColorPickerWidget;
-class QVBoxLayout;
-class QHBoxLayout;
 class QLabel;
 class QPushButton;
 class QLineEdit;
 class QColor;
+class QGridLayout;
 
 class ColorPickerEditor : public QWidget
 {
@@ -29,11 +28,11 @@ private:
     void addPreset();
     void deletePreset();
 
-    QLabel* m_spinboxLabel;
-    SpinBox* m_spinbox;
-
     ColorPickerWidget* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
+
+    QLabel* m_spinboxLabel;
+    SpinBox* m_spinbox;
     QPushButton* m_deletePresetButton;
 
     QLineEdit* m_colorInput;
@@ -43,6 +42,5 @@ private:
     QColor m_color;
     int m_selectedIndex;
 
-    QHBoxLayout* m_hLayout;
-    QVBoxLayout* m_vLayout;
+    QGridLayout* m_gLayout;
 };

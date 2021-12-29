@@ -11,6 +11,9 @@ class ColorPicker : public ColorPickerWidget
 public:
     explicit ColorPicker(QWidget* parent = nullptr);
 
+signals:
+    void colorSelected(QColor c);
+
 protected:
     void showEvent(QShowEvent* event) override;
     void hideEvent(QHideEvent* event) override;

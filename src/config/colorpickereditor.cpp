@@ -9,6 +9,7 @@
 
 #include <QApplication>
 #include <QColor>
+#include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -24,48 +25,57 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     ConfigHandler config;
     m_color = config.drawColor();
 
-    m_hLayout = new QHBoxLayout(this);
+    m_gLayout = new QGridLayout(this);
+
+    m_colorpicker = new ColorPickerWidget(this);
+    m_gLayout->addWidget(m_colorpicker, 0, 0);
 
     m_colorWheel = new color_widgets::ColorWheel(this);
     m_colorWheel->setColor(m_color);
+    const int size = GlobalValues::buttonBaseSize() * 3.5;
+    m_colorWheel->setMinimumSize(size, size);
+    m_gLayout->addWidget(m_colorWheel, 1, 0);
 
-    m_colorpicker = new ColorPickerWidget(this);
-
-    m_hLayout->addWidget(m_colorWheel);
-    m_hLayout->addWidget(m_colorpicker);
-
-    m_vLayout = new QVBoxLayout();
-    m_vLayout->setAlignment(Qt::AlignVCenter);
+    QVBoxLayout* m_vLocalLayout1 = new QVBoxLayout();
+    m_vLocalLayout1->addStretch();
 
     m_spinboxLabel = new QLabel(tr("Select Preset:"), this);
+    m_vLocalLayout1->addWidget(m_spinboxLabel);
+
     m_spinbox = new SpinBox(this);
-
     connect(m_spinbox,
             QOverload<int>::of(&QSpinBox::valueChanged),
             m_colorpicker,
-            &ColorPickerWidget::updateSelection);
-
-    connect(m_spinbox,
-            QOverload<int>::of(&QSpinBox::valueChanged),
-            m_colorpicker,
-            [=](int val) { m_selectedIndex = val; });
-
-    m_vLayout->addWidget(m_spinboxLabel);
-    m_vLayout->addWidget(m_spinbox);
+            [=](int val) {
+                m_selectedIndex = val;
+                m_colorpicker->updateSelection(val);
+            });
+    m_spinbox->setToolTip(tr("Select preset using the spinbox"));
+    m_vLocalLayout1->addWidget(m_spinbox);
 
     m_deletePresetButton = new QPushButton(tr("Delete"), this);
-
+    m_deletePresetButton->setToolTip(
+      tr("Press button to delete the selected preset"));
     connect(m_deletePresetButton,
             &QPushButton::pressed,
             this,
             &ColorPickerEditor::onDeletePreset);
+    m_vLocalLayout1->addWidget(m_deletePresetButton);
 
-    m_vLayout->addWidget(m_deletePresetButton);
+    m_vLocalLayout1->addStretch();
+
+    m_gLayout->addLayout(m_vLocalLayout1, 0, 1);
+
+    QVBoxLayout* m_vLocalLayout2 = new QVBoxLayout();
+    m_vLocalLayout2->addStretch();
 
     m_addPresetLabel = new QLabel(tr("Add Preset:"), this);
+    m_vLocalLayout2->addWidget(m_addPresetLabel);
+
     m_colorInput = new QLineEdit(this);
     m_colorInput->setText(m_color.name(QColor::HexRgb));
-
+    m_colorInput->setToolTip(
+      tr("Enter color manually or select it using the color-wheel"));
     connect(m_colorWheel,
             &color_widgets::ColorWheel::colorSelected,
             this,
@@ -73,27 +83,19 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
                 m_color = c;
                 m_colorInput->setText(m_color.name(QColor::HexRgb));
             });
-
-    connect(m_colorInput, &QLineEdit::editingFinished, this, [=]() {
-        if (QColor::isValidColor(m_colorInput->text())) {
-            m_color = QColor(m_colorInput->text());
-            m_colorWheel->setColor(m_color);
-        }
-        m_colorInput->setText(m_color.name(QColor::HexRgb));
-    });
+    m_vLocalLayout2->addWidget(m_colorInput);
 
     m_addPresetButton = new QPushButton(tr("Add"), this);
-
+    m_addPresetButton->setToolTip(tr("Press button to add preset"));
     connect(m_addPresetButton,
             &QPushButton::pressed,
             this,
             &ColorPickerEditor::onAddPreset);
+    m_vLocalLayout2->addWidget(m_addPresetButton);
 
-    m_vLayout->addWidget(m_addPresetLabel);
-    m_vLayout->addWidget(m_colorInput);
-    m_vLayout->addWidget(m_addPresetButton);
+    m_vLocalLayout2->addStretch();
 
-    m_hLayout->addLayout(m_vLayout);
+    m_gLayout->addLayout(m_vLocalLayout2, 1, 1);
 }
 
 void ColorPickerEditor::addPreset()
@@ -109,8 +111,7 @@ void ColorPickerEditor::addPreset()
     const int maxPresetsAllowed = 10;
 
     if (colors.size() > maxPresetsAllowed) {
-        QMessageBox::critical(
-          this, tr("Error"), tr("Unable to add more presets."));
+        QMessageBox::critical(this, tr("Error"), tr("Unable to add preset."));
         return;
     }
 
@@ -128,7 +129,7 @@ void ColorPickerEditor::deletePreset()
 
     if (colors.size() < minPresetsAllowed) {
         QMessageBox::critical(
-          this, tr("Error"), tr("Unable to remove presets."));
+          this, tr("Error"), tr("Unable to remove preset."));
         return;
     }
 

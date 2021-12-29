@@ -71,7 +71,6 @@ void VisualsEditor::initWidgets()
     m_colorpickerEditorTab = new QWidget();
     QVBoxLayout* colorpickerEditorLayout =
       new QVBoxLayout(m_colorpickerEditorTab);
-    m_colorpickerEditorTab->setLayout(colorpickerEditorLayout);
     colorpickerEditorLayout->addWidget(m_colorpickerEditor);
     m_tabWidget->addTab(m_colorpickerEditorTab, tr("Colorpicker Editor"));
 
