@@ -84,7 +84,7 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
                                        const QString& messagePrefix)
 {
     QString completePath = FileNameHandler().properScreenshotPath(
-      path, ConfigHandler().setSaveAsFileExtension());
+      path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
     file.open(QIODevice::WriteOnly);
     bool ok = capture.save(&file);
@@ -128,7 +128,7 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
         mimeTypeList.append(mimeType);
     dialog.setMimeTypeFilters(mimeTypeList);
 
-    QString suffix = ConfigHandler().setSaveAsFileExtension();
+    QString suffix = ConfigHandler().saveAsFileExtension();
     if (suffix.isEmpty()) {
         suffix = "png";
     }
@@ -154,7 +154,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
     QString savePath = FileNameHandler().properScreenshotPath(
-      defaultSavePath, ConfigHandler().setSaveAsFileExtension());
+      defaultSavePath, ConfigHandler().saveAsFileExtension());
 #if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
