@@ -194,11 +194,16 @@ public:
 
 class UserColors : public ValueHandler
 {
+public:
+    UserColors(int min, int max);
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
     QString expected() override;
     QVariant representation(const QVariant& val) override;
+
+private:
+    int m_min, m_max;
 };
 
 class SaveFileExtension : public ValueHandler

@@ -22,14 +22,19 @@ public:
     explicit ColorPickerEditor(QWidget* parent = nullptr);
 
 private slots:
-    void addPreset();
+    void onAddPreset();
+    void onDeletePreset();
 
 private:
+    void addPreset();
+    void deletePreset();
+
     QLabel* m_spinboxLabel;
     SpinBox* m_spinbox;
+
     ColorPickerWidget* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
-    QPushButton* m_deletePreset;
+    QPushButton* m_deletePresetButton;
 
     QLineEdit* m_colorInput;
     QLabel* m_addPresetLabel;

@@ -29,8 +29,8 @@ private:
     UIcolorEditor* m_colorEditor;
     QWidget* m_colorEditorTab;
 
-    ColorPickerEditor* m_colorEditor1;
-    QWidget* m_colorEditorTab1;
+    ColorPickerEditor* m_colorpickerEditor;
+    QWidget* m_colorpickerEditorTab;
 
     ButtonListView* m_buttonList;
     ExtendedSlider* m_opacitySlider;

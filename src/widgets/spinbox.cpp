@@ -7,31 +7,42 @@
 SpinBox::SpinBox(QWidget* parent)
   : QSpinBox(parent)
 {
-    ConfigHandler config;
-    m_colorList = config.userColors();
-
-    this->setRange(1, m_colorList.size() - 1);
-    this->setWrapping(true);
+    initSpinbox();
 }
 
 int SpinBox::valueFromText(const QString& text) const
 {
     if (!QColor::isValidColor(text)) {
-        return 0;
+        return 1;
     }
 
     const QColor color = QColor(text);
 
-    for (int i = 0; i < m_colorList.size(); ++i) {
+    for (int i = 1; i < m_colorList.size(); ++i) {
         if (m_colorList.at(i) == color) {
             return i;
         }
     }
 
-    return 0;
+    return 1;
 }
 
 QString SpinBox::textFromValue(int value) const
 {
     return m_colorList[value].name(QColor::HexRgb);
+}
+
+void SpinBox::initSpinbox()
+{
+    ConfigHandler config;
+    m_colorList = config.userColors();
+
+    setRange(1, m_colorList.size() - 1);
+    setWrapping(true);
+}
+
+void SpinBox::updateWidget()
+{
+    initSpinbox();
+    update();
 }

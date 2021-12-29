@@ -379,6 +379,11 @@ bool ButtonList::normalizeButtons(QList<int>& buttons)
 
 // USER COLORS
 
+UserColors::UserColors(int min, int max)
+  : m_min(min)
+  , m_max(max)
+{}
+
 bool UserColors::check(const QVariant& val)
 {
     if (!val.isValid()) {
@@ -392,7 +397,10 @@ bool UserColors::check(const QVariant& val)
             return false;
         }
     }
-    return true;
+
+    int sz = val.toStringList().size();
+
+    return true && sz >= m_min && sz <= m_max;
 }
 
 QVariant UserColors::process(const QVariant& val)
@@ -424,7 +432,10 @@ QVariant UserColors::fallback()
 
 QString UserColors::expected()
 {
-    return QStringLiteral("list of colors separated by comma");
+    return QStringLiteral(
+             "list of colors(min %1 and max %2) separated by comma")
+      .arg(m_min - 1)
+      .arg(m_max - 1);
 }
 
 QVariant UserColors::representation(const QVariant& val)

@@ -11,6 +11,16 @@ ColorPicker::ColorPicker(QWidget* parent)
   : ColorPickerWidget(parent)
 {
     setMouseTracking(true);
+
+    ConfigHandler config;
+    QColor drawColor = config.drawColor();
+    for (int i = 0; i < m_colorList.size(); ++i) {
+        if (m_colorList.at(i) == drawColor) {
+            m_selectedIndex = i;
+            m_lastIndex = i;
+            break;
+        }
+    }
 }
 
 void ColorPicker::mouseMoveEvent(QMouseEvent* e)

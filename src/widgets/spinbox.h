@@ -11,11 +11,14 @@ class SpinBox : public QSpinBox
     Q_OBJECT
 public:
     explicit SpinBox(QWidget* parent = nullptr);
+    void updateWidget();
 
 protected:
     int valueFromText(const QString& text) const override;
     QString textFromValue(int value) const override;
 
 private:
+    void initSpinbox();
+
     QVector<QColor> m_colorList;
 };

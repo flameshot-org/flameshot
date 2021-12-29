@@ -12,6 +12,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QString>
 #include <QVector>
@@ -33,7 +34,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     m_hLayout->addWidget(m_colorWheel);
     m_hLayout->addWidget(m_colorpicker);
 
-    m_vLayout = new QVBoxLayout(this);
+    m_vLayout = new QVBoxLayout();
     m_vLayout->setAlignment(Qt::AlignVCenter);
 
     m_spinboxLabel = new QLabel(tr("Select Preset:"), this);
@@ -42,7 +43,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     connect(m_spinbox,
             QOverload<int>::of(&QSpinBox::valueChanged),
             m_colorpicker,
-            &ColorPickerWidget::updateWidget);
+            &ColorPickerWidget::updateSelection);
 
     connect(m_spinbox,
             QOverload<int>::of(&QSpinBox::valueChanged),
@@ -52,9 +53,14 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     m_vLayout->addWidget(m_spinboxLabel);
     m_vLayout->addWidget(m_spinbox);
 
-    m_deletePreset = new QPushButton(tr("Delete"), this);
+    m_deletePresetButton = new QPushButton(tr("Delete"), this);
 
-    m_vLayout->addWidget(m_deletePreset);
+    connect(m_deletePresetButton,
+            &QPushButton::pressed,
+            this,
+            &ColorPickerEditor::onDeletePreset);
+
+    m_vLayout->addWidget(m_deletePresetButton);
 
     m_addPresetLabel = new QLabel(tr("Add Preset:"), this);
     m_colorInput = new QLineEdit(this);
@@ -81,15 +87,13 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     connect(m_addPresetButton,
             &QPushButton::pressed,
             this,
-            &ColorPickerEditor::addPreset);
+            &ColorPickerEditor::onAddPreset);
 
     m_vLayout->addWidget(m_addPresetLabel);
     m_vLayout->addWidget(m_colorInput);
     m_vLayout->addWidget(m_addPresetButton);
 
     m_hLayout->addLayout(m_vLayout);
-
-    setLayout(m_hLayout);
 }
 
 void ColorPickerEditor::addPreset()
@@ -102,18 +106,55 @@ void ColorPickerEditor::addPreset()
 
     colors << m_color;
 
-    // QString colorsString = QString();
+    const int maxPresetsAllowed = 10;
 
-    // for (int i = 0; i < colors.size(); ++i) {
-    //     if (colors[i] == QColor()) {
-    //         colorsString.append(QStringLiteral("picker"));
-    //     } else {
-    //         colorsString.append(colors[i].name(QColor::HexRgb));
-    //     }
-    //     if (i < colors.size() - 1) {
-    //         colorsString.append(QStringLiteral(", "));
-    //     }
-    // }
+    if (colors.size() > maxPresetsAllowed) {
+        QMessageBox::critical(
+          this, tr("Error"), tr("Unable to add more presets."));
+        return;
+    }
 
     config.setUserColors(colors);
+}
+
+void ColorPickerEditor::deletePreset()
+{
+    ConfigHandler config;
+    QVector<QColor> colors = config.userColors();
+
+    colors.remove(m_selectedIndex);
+
+    const int minPresetsAllowed = 3;
+
+    if (colors.size() < minPresetsAllowed) {
+        QMessageBox::critical(
+          this, tr("Error"), tr("Unable to remove presets."));
+        return;
+    }
+
+    config.setUserColors(colors);
+}
+
+void ColorPickerEditor::onAddPreset()
+{
+    if (QColor::isValidColor(m_colorInput->text())) {
+        m_color = QColor(m_colorInput->text());
+        m_colorInput->setText(m_color.name(QColor::HexRgb));
+    } else {
+        m_colorInput->setText(m_color.name(QColor::HexRgb));
+        return;
+    }
+
+    addPreset();
+    m_spinbox->setValue(1);
+    m_colorpicker->updateWidget();
+    m_spinbox->updateWidget();
+}
+
+void ColorPickerEditor::onDeletePreset()
+{
+    deletePreset();
+    m_spinbox->setValue(1);
+    m_colorpicker->updateWidget();
+    m_spinbox->updateWidget();
 }

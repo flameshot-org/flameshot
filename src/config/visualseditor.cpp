@@ -67,12 +67,13 @@ void VisualsEditor::initWidgets()
     colorEditorLayout->addWidget(m_colorEditor);
     m_tabWidget->addTab(m_colorEditorTab, tr("UI Color Editor"));
 
-    m_colorEditor1 = new ColorPickerEditor();
-    m_colorEditorTab1 = new QWidget();
-    QVBoxLayout* colorEditorLayout1 = new QVBoxLayout(m_colorEditorTab1);
-    m_colorEditorTab1->setLayout(colorEditorLayout1);
-    colorEditorLayout1->addWidget(m_colorEditor1);
-    m_tabWidget->addTab(m_colorEditorTab1, tr("UI Color Editor 1"));
+    m_colorpickerEditor = new ColorPickerEditor();
+    m_colorpickerEditorTab = new QWidget();
+    QVBoxLayout* colorpickerEditorLayout =
+      new QVBoxLayout(m_colorpickerEditorTab);
+    m_colorpickerEditorTab->setLayout(colorpickerEditorLayout);
+    colorpickerEditorLayout->addWidget(m_colorpickerEditor);
+    m_tabWidget->addTab(m_colorpickerEditorTab, tr("Colorpicker Editor"));
 
     initOpacitySlider();
 

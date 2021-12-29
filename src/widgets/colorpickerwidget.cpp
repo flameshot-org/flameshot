@@ -9,44 +9,10 @@
 
 ColorPickerWidget::ColorPickerWidget(QWidget* parent)
   : QWidget(parent)
-  , m_selectedIndex(0)
-  , m_lastIndex(0)
+  , m_selectedIndex(1)
+  , m_lastIndex(1)
 {
-    ConfigHandler config;
-    m_colorList = config.userColors();
-    m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
-    // save the color values in member variables for faster access
-    m_uiColor = config.uiColor();
-    QColor drawColor = config.drawColor();
-    for (int i = 0; i < m_colorList.size(); ++i) {
-        if (m_colorList.at(i) == drawColor) {
-            m_selectedIndex = i;
-            m_lastIndex = i;
-            break;
-        }
-    }
-    // extraSize represents the extra space needed for the highlight of the
-    // selected color.
-    const int extraSize = 6;
-    double radius = (m_colorList.size() * m_colorAreaSize / 1.3) / 3.141592;
-    setMinimumSize(radius * 2 + m_colorAreaSize + extraSize,
-                   radius * 2 + m_colorAreaSize + extraSize);
-    resize(radius * 2 + m_colorAreaSize + extraSize,
-           radius * 2 + m_colorAreaSize + extraSize);
-    double degree = 360 / (m_colorList.size());
-    double degreeAcum = degree;
-    // this line is the radius of the circle which will be rotated to add
-    // the color components.
-    QLineF baseLine =
-      QLineF(QPoint(radius + extraSize / 2, radius + extraSize / 2),
-             QPoint(radius * 2, radius));
-
-    for (int i = 0; i < m_colorList.size(); ++i) {
-        m_colorAreaList.append(QRect(
-          baseLine.x2(), baseLine.y2(), m_colorAreaSize, m_colorAreaSize));
-        baseLine.setAngle(degreeAcum);
-        degreeAcum += degree;
-    }
+    initColorPicker();
 }
 
 const QVector<QColor>& ColorPickerWidget::getDefaultColors()
@@ -120,12 +86,51 @@ void ColorPickerWidget::repaint(int i, QPainter& painter)
     }
 }
 
-void ColorPickerWidget::updateWidget(int index)
+void ColorPickerWidget::updateSelection(int index)
 {
     m_selectedIndex = index;
     update(m_colorAreaList.at(index) + QMargins(10, 10, 10, 10));
     update(m_colorAreaList.at(m_lastIndex) + QMargins(10, 10, 10, 10));
     m_lastIndex = index;
+}
+
+void ColorPickerWidget::updateWidget()
+{
+    m_colorAreaList.clear();
+    initColorPicker();
+    update();
+}
+
+void ColorPickerWidget::initColorPicker()
+{
+    ConfigHandler config;
+    m_colorList = config.userColors();
+    m_colorAreaSize = GlobalValues::buttonBaseSize() * 0.6;
+    // save the color values in member variables for faster access
+    m_uiColor = config.uiColor();
+
+    // extraSize represents the extra space needed for the highlight of the
+    // selected color.
+    const int extraSize = 6;
+    double radius = GlobalValues::buttonBaseSize() * 1.5;
+    setMinimumSize(radius * 2 + m_colorAreaSize + extraSize,
+                   radius * 2 + m_colorAreaSize + extraSize);
+    resize(radius * 2 + m_colorAreaSize + extraSize,
+           radius * 2 + m_colorAreaSize + extraSize);
+    double degree = (double)360 / m_colorList.size();
+    double degreeAcum = 90;
+    // this line is the radius of the circle which will be rotated to add
+    // the color components.
+    QLineF baseLine =
+      QLineF(QPoint(radius + extraSize / 2, radius + extraSize / 2),
+             QPoint(radius + extraSize / 2, extraSize / 2));
+
+    for (int i = 0; i < m_colorList.size(); ++i) {
+        m_colorAreaList.append(QRect(
+          baseLine.x2(), baseLine.y2(), m_colorAreaSize, m_colorAreaSize));
+        degreeAcum += degree;
+        baseLine.setAngle(degreeAcum);
+    }
 }
 
 QVector<QColor> ColorPickerWidget::defaultColors = {
