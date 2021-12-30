@@ -457,8 +457,8 @@ void GeneralConf::initSaveAfterCopy()
 
     m_setSaveAsFileExtension->addItems(imageFormatList);
 
-    int currentIndex = m_setSaveAsFileExtension->findText(
-      ConfigHandler().setSaveAsFileExtension());
+    int currentIndex =
+      m_setSaveAsFileExtension->findText(ConfigHandler().saveAsFileExtension());
     m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
 
     connect(m_setSaveAsFileExtension,
