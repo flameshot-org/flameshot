@@ -175,8 +175,13 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
-You can also edit some of the settings (like overriding the default colors) in the configuration file located at `~/.config/flameshot/flameshot.ini`.
+You can also edit some of the settings (like overriding the default colors) in the configuration file.\
+Linux path : `~/.config/flameshot/flameshot.ini`.\
+Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
 
+When copying over the config file from Linux to Windows or vice versa, 
+make sure to correct the `savePath` variable,\
+so that the screenshots save in the right directory on your desired file system.
 
 ## Keyboard shortcuts
 
