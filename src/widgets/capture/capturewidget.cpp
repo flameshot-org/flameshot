@@ -67,6 +67,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
   , m_selection(nullptr)
+  , m_magnifier(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
   , m_toolSizeByKeyboard(0)
@@ -177,6 +178,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initButtons();
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
+    // init magnify
+    if (m_config.showMagnifier())
+        m_magnifier = new MagnifierWidget(
+          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
@@ -673,6 +678,15 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
+    if (m_magnifier) {
+        if (!m_activeButton) {
+            m_magnifier->show();
+            m_magnifier->update();
+        } else {
+            m_magnifier->hide();
+        }
+    }
+
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
         updateTool(activeButtonTool());
