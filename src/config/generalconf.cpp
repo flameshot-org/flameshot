@@ -57,6 +57,8 @@ GeneralConf::GeneralConf(QWidget* parent)
 
     m_layout->addStretch();
 
+    initShowMagnifier();
+    initSquareMagnifier();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -79,6 +81,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
+    m_showMagnifier->setChecked(config.showMagnifier());
+    m_squareMagnifier->setChecked(config.squareMagnifier());
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -618,6 +622,24 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
         }
     }
     return path;
+}
+
+void GeneralConf::initShowMagnifier()
+{
+    m_showMagnifier = new QCheckBox(tr("Show magnifier"), this);
+    m_scrollAreaLayout->addWidget(m_showMagnifier);
+    connect(m_showMagnifier, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowMagnifier(checked);
+    });
+}
+
+void GeneralConf::initSquareMagnifier()
+{
+    m_squareMagnifier = new QCheckBox(tr("Square shaped magnifier"), this);
+    m_scrollAreaLayout->addWidget(m_squareMagnifier);
+    connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setSquareMagnifier(checked);
+    });
 }
 
 void GeneralConf::togglePathFixed()
