@@ -18,6 +18,7 @@
 #include <QDBusReply>
 #include <QDir>
 #include <QUuid>
+#include <QUrl>
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
@@ -50,10 +51,12 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     QEventLoop loop;
     const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
         if (status == 0) {
-            QString uri = map.value("uri").toString().remove(0, 7);
-            res = QPixmap(uri);
+            //QString uri = map.value("uri").toString().remove(0, 7);
+            QUrl uri = map.value("uri").toString();
+            QString uriString = uri.toLocalFile();
+            res = QPixmap(uriString);
             res.setDevicePixelRatio(qApp->devicePixelRatio());
-            QFile imgFile(uri);
+            QFile imgFile(uriString);
             imgFile.remove();
         }
         loop.quit();
