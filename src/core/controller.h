@@ -35,11 +35,8 @@ public:
 
     Controller(const Controller&) = delete;
     ~Controller();
-    void operator=(const Controller&) = delete;
 
     void setCheckForUpdatesEnabled(const bool enabled);
-
-    QMap<uint, CaptureRequest>& requests();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
@@ -61,8 +58,6 @@ public slots:
       const QString& text,
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
-
-    void updateConfigComponents();
 
     void showRecentUploads();
 
@@ -96,7 +91,6 @@ private:
     QString m_appLatestVersion;
     bool m_showCheckAppUpdateStatus;
 
-    QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;
     QPointer<CaptureLauncher> m_launcherWindow;

@@ -134,11 +134,6 @@ void Controller::setCheckForUpdatesEnabled(const bool enabled)
     }
 }
 
-QMap<uint, CaptureRequest>& Controller::requests()
-{
-    return m_requestMap;
-}
-
 void Controller::getLatestAvailableVersion()
 {
     // This features is required for MacOS and Windows user and for Linux users
@@ -532,13 +527,6 @@ void Controller::sendTrayNotification(const QString& text,
     if (m_trayIcon) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
-    }
-}
-
-void Controller::updateConfigComponents()
-{
-    if (m_configWindow) {
-        m_configWindow->updateChildren();
     }
 }
 
