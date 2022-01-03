@@ -69,11 +69,6 @@ Controller::Controller()
 #endif
 {
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
-    // NOTE: setQuitOnLastWindowClosed must be called both here and in
-    // FlameshotDaemon::start because we don't know the order of calls.
-    if (!FlameshotDaemon::instance()) {
-        qApp->setQuitOnLastWindowClosed(true);
-    }
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
