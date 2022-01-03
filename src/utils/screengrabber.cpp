@@ -17,8 +17,8 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDir>
-#include <QUuid>
 #include <QUrl>
+#include <QUuid>
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
@@ -51,7 +51,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     QEventLoop loop;
     const auto gotSignal = [&res, &loop](uint status, const QVariantMap& map) {
         if (status == 0) {
-            //QString uri = map.value("uri").toString().remove(0, 7);
+            // Parse this as URI to handle unicode properly
             QUrl uri = map.value("uri").toString();
             QString uriString = uri.toLocalFile();
             res = QPixmap(uriString);
