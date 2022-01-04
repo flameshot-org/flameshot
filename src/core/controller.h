@@ -33,9 +33,6 @@ class Controller : public QObject
 public:
     static Controller* getInstance();
 
-    Controller(const Controller&) = delete;
-    ~Controller();
-
     void setCheckForUpdatesEnabled(const bool enabled);
 
 signals:
@@ -79,6 +76,7 @@ public slots: // TODO move these up
 
 private:
     Controller();
+    ~Controller();
     void getLatestAvailableVersion();
 
     // replace QTimer::singleShot introduced in Qt 5.4
