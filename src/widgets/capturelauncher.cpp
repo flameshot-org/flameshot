@@ -22,6 +22,7 @@
 CaptureLauncher::CaptureLauncher(QDialog* parent)
   : QDialog(parent)
 {
+    qApp->installEventFilter(this); // see eventFilter()
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     m_imageLabel = new ImageLabel(this);

@@ -33,13 +33,7 @@ class Controller : public QObject
 public:
     static Controller* getInstance();
 
-    Controller(const Controller&) = delete;
-    ~Controller();
-    void operator=(const Controller&) = delete;
-
     void setCheckForUpdatesEnabled(const bool enabled);
-
-    QMap<uint, CaptureRequest>& requests();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
@@ -62,8 +56,6 @@ public slots:
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
 
-    void updateConfigComponents();
-
     void showRecentUploads();
 
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
@@ -84,6 +76,7 @@ public slots: // TODO move these up
 
 private:
     Controller();
+    ~Controller();
     void getLatestAvailableVersion();
 
     // replace QTimer::singleShot introduced in Qt 5.4
@@ -96,7 +89,6 @@ private:
     QString m_appLatestVersion;
     bool m_showCheckAppUpdateStatus;
 
-    QMap<uint, CaptureRequest> m_requestMap;
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;
     QPointer<CaptureLauncher> m_launcherWindow;

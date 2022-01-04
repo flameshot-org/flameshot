@@ -68,6 +68,7 @@ void FlameshotDaemon::start()
 {
     if (!m_instance) {
         m_instance = new FlameshotDaemon();
+        qApp->setQuitOnLastWindowClosed(false);
     }
 }
 
