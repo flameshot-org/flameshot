@@ -69,7 +69,6 @@ Controller::Controller()
 #endif
 {
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
-    qApp->setQuitOnLastWindowClosed(false);
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
@@ -132,11 +131,6 @@ void Controller::setCheckForUpdatesEnabled(const bool enabled)
     if (enabled) {
         getLatestAvailableVersion();
     }
-}
-
-QMap<uint, CaptureRequest>& Controller::requests()
-{
-    return m_requestMap;
 }
 
 void Controller::getLatestAvailableVersion()
@@ -532,13 +526,6 @@ void Controller::sendTrayNotification(const QString& text,
     if (m_trayIcon) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
-    }
-}
-
-void Controller::updateConfigComponents()
-{
-    if (m_configWindow) {
-        m_configWindow->updateChildren();
     }
 }
 
