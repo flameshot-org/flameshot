@@ -217,7 +217,7 @@ These shortcuts are available in GUI mode:
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
 | <kbd>Print screen</kbd>                                          | Capture Screen |
 | <kbd>Shift</kbd> + <kbd>Print</kbd>                                            | Screenshot History                                     |
-| <kbd>Ctrl</kbd> + drawing *line*, *arrow* or *marker*      | Drawing only horizontaly, verticaly or diagonaly |
+| <kbd>Ctrl</kbd> + drawing *line*, *arrow* or *marker*      | Drawing only horizontally, vertically or diagonally |
 | <kbd>Ctrl</kbd> + drawing *rectangle* or *circle*      | Keeping aspect ratio |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
