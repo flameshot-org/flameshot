@@ -1,12 +1,15 @@
 # Checklist for making a new release
 
 These are the code changes that need to take place
-- [ ] Create and push git tag
 - [ ] Update version in CMakeLists.txt
 - [ ] Update version and changelog at packaging/debian/changelog
 - [ ] Update version and changelog at packaging/rpm/flameshot.spec
 - [ ] Update data/appdata/flameshot.metainfo.xml
 - [ ] Update MacOs version in cmake/modules/MacOSXBundleInfo.plist.in 
+- [ ] Commit and push to a PR
+- [ ] Merge PR to main
+- [ ] Create and push git tag on main
+- [ ] Manually retrigger the github actions so it uses the latest git tag 
 
 These are the steps for actually making the release
 - [ ] Download all binaries from CI run started from PR related to code changes shown above
