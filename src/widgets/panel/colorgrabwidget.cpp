@@ -39,8 +39,10 @@ ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
     // eventFilter on other objects that do
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setAttribute(Qt::WA_QuitOnClose, false);
-    setWindowFlags(Qt::BypassWindowManagerHint | Qt::FramelessWindowHint |
-                   Qt::WindowDoesNotAcceptFocus);
+    // On Windows: don't activate the widget so CaptureWidget remains active
+    setAttribute(Qt::WA_ShowWithoutActivating);
+    setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
+                   Qt::FramelessWindowHint | Qt::WindowDoesNotAcceptFocus);
     setMouseTracking(true);
 }
 
