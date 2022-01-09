@@ -19,7 +19,7 @@ public:
     QRect desktopGeometry();
 
     // only linux supported for now
-    void grabCursor(const QRect & geometry, QPixmap & res);
+    void grabCursor(const QRect& geometry, QPixmap& res);
 
 private:
     DesktopInfo m_info;

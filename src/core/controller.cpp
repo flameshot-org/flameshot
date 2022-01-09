@@ -575,10 +575,8 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::SAVE) {
 
-        if(ConfigHandler::getInstance()->includeCursor())
-        {
-            if(selection.isEmpty() or selection.isNull())
-            {
+        if (ConfigHandler::getInstance()->includeCursor()) {
+            if (selection.isEmpty() or selection.isNull()) {
                 selection = req.initialSelection();
             }
 

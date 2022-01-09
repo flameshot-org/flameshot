@@ -9,9 +9,9 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGuiApplication>
+#include <QPainter>
 #include <QPixmap>
 #include <QScreen>
-#include <QPainter>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "request.h"
@@ -209,10 +209,10 @@ QRect ScreenGrabber::desktopGeometry()
     return geometry;
 }
 
-void ScreenGrabber::grabCursor(const QRect & geometry, QPixmap & res)
+void ScreenGrabber::grabCursor(const QRect& geometry, QPixmap& res)
 {
 #ifdef Q_OS_LINUX
-    Display * display = XOpenDisplay(nullptr);
+    Display* display = XOpenDisplay(nullptr);
     Window root = DefaultRootWindow(display);
     XWindowAttributes gwa;
     XGetWindowAttributes(display, root, &gwa);
@@ -222,13 +222,16 @@ void ScreenGrabber::grabCursor(const QRect & geometry, QPixmap & res)
         cursorPos = QCursor::pos() - geometry.topLeft();
     }
     // gets whatever cursor is rendered
-    XFixesCursorImage * cursor = XFixesGetCursorImage(display);
+    XFixesCursorImage* cursor = XFixesGetCursorImage(display);
     cursorPos -= QPoint(cursor->xhot, cursor->yhot);
     std::vector<std::uint32_t> pixels(cursor->width * cursor->height);
     for (size_t i = 0; i < pixels.size(); ++i) {
         pixels[i] = cursor->pixels[i];
     }
-    const QImage cursorImage((uchar*)(pixels.data()), cursor->width, cursor->height, QImage::Format_ARGB32_Premultiplied);
+    const QImage cursorImage((uchar*)(pixels.data()),
+                             cursor->width,
+                             cursor->height,
+                             QImage::Format_ARGB32_Premultiplied);
     QPainter painter(&res);
     painter.drawImage(cursorPos, cursorImage);
 
