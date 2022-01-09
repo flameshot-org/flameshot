@@ -115,6 +115,9 @@ public:
                          QString)
     CONFIG_GETTER_SETTER(undoLimit, setUndoLimit, int)
     CONFIG_GETTER_SETTER(buttons, setButtons, QList<CaptureTool::Type>)
+    CONFIG_GETTER_SETTER(includeCursor,
+                         setIncludeCursor,
+                         bool)
 
     // SPECIAL CASES
     bool startupLaunch();
@@ -122,7 +125,6 @@ public:
     void setAllTheButtons();
     void setToolSize(CaptureTool::Type toolType, int size);
     int toolSize(CaptureTool::Type toolType);
-    bool includeCursor() const noexcept { return true; }
 
     // DEFAULTS
     QString filenamePatternDefault();

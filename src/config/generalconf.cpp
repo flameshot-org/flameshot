@@ -54,6 +54,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAutoCloseIdleDaemon();
 #endif
     initPredefinedColorPaletteLarge();
+    initIncludeCursor();
 
     m_layout->addStretch();
 
@@ -88,6 +89,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
+    m_includeCursor->setChecked(config.includeCursor());
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
@@ -364,7 +366,6 @@ void GeneralConf::initShowStartupLaunchMessage()
 {
     m_showStartupLaunchMessage =
       new QCheckBox(tr("Show welcome message on launch"), this);
-    ConfigHandler config;
     m_showStartupLaunchMessage->setToolTip(
       tr("Show welcome message on launch"));
     m_scrollAreaLayout->addWidget(m_showStartupLaunchMessage);
@@ -385,7 +386,21 @@ void GeneralConf::initPredefinedColorPaletteLarge()
     connect(
       m_predefinedColorPaletteLarge, &QCheckBox::clicked, [](bool checked) {
           ConfigHandler().setPredefinedColorPaletteLarge(checked);
-      });
+    });
+}
+
+void GeneralConf::initIncludeCursor()
+{
+    m_includeCursor = new QCheckBox(tr("Include mouse cursor into the screenshot"), this);
+    m_includeCursor->setToolTip(
+      tr("If checked the mouse cursor will be included in the screenshot"));
+    m_scrollAreaLayout->addWidget(m_includeCursor);
+
+    QObject::connect(m_includeCursor,
+                     &QCheckBox::clicked,
+                     [](bool checked) {
+        ConfigHandler().setIncludeCursor(checked);
+    });
 }
 
 void GeneralConf::initCopyAndCloseAfterUpload()

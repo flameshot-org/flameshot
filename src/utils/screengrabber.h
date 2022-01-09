@@ -19,7 +19,6 @@ public:
     QRect desktopGeometry();
 
     // only linux supported for now
-    QPixmap grabEntireDesktopWithCursor(bool & ok);
     void grabCursor(const QRect & geometry, QPixmap & res);
 
 private:
