@@ -574,6 +574,18 @@ void Controller::exportCapture(QPixmap capture,
     }
 
     if (tasks & CR::SAVE) {
+
+        if(ConfigHandler::getInstance()->includeCursor())
+        {
+            if(selection.isEmpty() or selection.isNull())
+            {
+                selection = req.initialSelection();
+            }
+
+            // temporarily override the cursor with ArrowCursor to be sure is an arrow one
+            ScreenGrabber().grabCursor(selection, capture);
+        }
+
         if (req.path().isEmpty()) {
             ScreenshotSaver().saveToFilesystemGUI(capture);
         } else {
@@ -631,7 +643,7 @@ void Controller::exportCapture(QPixmap capture,
 void Controller::startFullscreenCapture(const CaptureRequest& req)
 {
     bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    QPixmap p(ScreenGrabber().grabEntireDesktopWithCursor(ok));
     QRect region = req.initialSelection();
     if (!region.isNull()) {
         p = p.copy(region);
@@ -648,6 +660,10 @@ void Controller::handleCaptureTaken(const CaptureRequest& req,
                                     QPixmap p,
                                     QRect selection)
 {
+    if(ConfigHandler::getInstance()->includeCursor())
+    {
+        ScreenGrabber().grabCursor(selection, p);
+    }
     exportCapture(p, selection, req);
 }
 

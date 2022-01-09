@@ -122,6 +122,7 @@ public:
     void setAllTheButtons();
     void setToolSize(CaptureTool::Type toolType, int size);
     int toolSize(CaptureTool::Type toolType);
+    bool includeCursor() const noexcept { return true; }
 
     // DEFAULTS
     QString filenamePatternDefault();
