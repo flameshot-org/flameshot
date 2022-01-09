@@ -392,9 +392,9 @@ void GeneralConf::initPredefinedColorPaletteLarge()
 void GeneralConf::initIncludeCursor()
 {
     m_includeCursor =
-      new QCheckBox(tr("Include mouse cursor into the screenshot"), this);
+      new QCheckBox(tr("Include the mouse cursor into the screenshot"), this);
     m_includeCursor->setToolTip(
-      tr("If checked the mouse cursor will be included in the screenshot"));
+      tr("If checked the mouse cursor will be included into the screenshot"));
     m_scrollAreaLayout->addWidget(m_includeCursor);
 
     QObject::connect(m_includeCursor, &QCheckBox::clicked, [](bool checked) {
