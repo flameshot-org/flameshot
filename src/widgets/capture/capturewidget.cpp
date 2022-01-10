@@ -106,7 +106,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 
 #if defined(Q_OS_WIN)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
-                       Qt::Popup);
+                       Qt::SubWindow // Hides the taskbar icon
+        );
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
