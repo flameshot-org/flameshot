@@ -9,6 +9,7 @@
 
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
+#include "src/config/configresolver.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
 #include "src/core/controller.h"
@@ -77,6 +78,24 @@ QSharedMemory* guiMutexLock()
         return nullptr;
     }
     return shm;
+}
+
+void showConfigResolver()
+{
+    if (ConfigHandler().hasError()) {
+        ConfigResolver* resolver = new ConfigResolver();
+        QObject::connect(resolver, &ConfigResolver::rejected, [resolver]() {
+            resolver->deleteLater();
+            exit(1);
+        });
+        QObject::connect(resolver, &ConfigResolver::accepted, [resolver]() {
+            resolver->close();
+            resolver->deleteLater();
+            // Ensure that the dialog is closed before starting capture
+            qApp->processEvents();
+        });
+        resolver->exec();
+    }
 }
 
 int main(int argc, char* argv[])
@@ -332,6 +351,8 @@ int main(int argc, char* argv[])
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
         delete qApp;
         new QApplication(argc, argv);
+        if (ConfigHandler().hasError())
+            showConfigResolver();
         Controller* controller = Controller::getInstance();
         controller->openLauncherWindow();
         qApp->exec();
@@ -351,6 +372,9 @@ int main(int argc, char* argv[])
                   delete mutex;
               });
         }
+
+        if (ConfigHandler().hasError())
+            showConfigResolver();
 
         // Option values
         QString path = parser.value(pathOption);
@@ -394,12 +418,17 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
+
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         // Recreate the application as a QApplication
         // TODO find a way so we don't have to do this
         delete qApp;
         new QApplication(argc, argv);
+
+        if (ConfigHandler().hasError())
+            showConfigResolver();
+
         // Option values
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -437,6 +466,10 @@ int main(int argc, char* argv[])
         // TODO find a way so we don't have to do this
         delete qApp;
         new QApplication(argc, argv);
+
+        if (ConfigHandler().hasError())
+            showConfigResolver();
+
         QString numberStr = parser.value(screenNumberOption);
         // Option values
         int number =
@@ -504,6 +537,10 @@ int main(int argc, char* argv[])
             }
         }
         ConfigHandler config;
+
+        if (config.hasError())
+            showConfigResolver();
+
         if (autostart) {
             config.setStartupLaunch(parser.value(autostartOption) == "true");
         }

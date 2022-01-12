@@ -449,9 +449,6 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 QVariant ConfigHandler::value(const QString& key) const
 {
     assertKeyRecognized(key);
-    // Perform check on entire config if due. Please make sure that this
-    // function is called in all scenarios - best to keep it on top.
-    hasError();
 
     auto val = m_settings.value(key);
 
@@ -466,6 +463,16 @@ QVariant ConfigHandler::value(const QString& key) const
     }
 
     return handler->value(val);
+}
+
+void ConfigHandler::remove(const QString& key)
+{
+    m_settings.remove(key);
+}
+
+void ConfigHandler::resetValue(const QString& key)
+{
+    m_settings.setValue(key, valueHandler(key)->fallback());
 }
 
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
@@ -492,8 +499,10 @@ QSet<QString>& ConfigHandler::recognizedShortcutNames()
     return names;
 }
 
-// Return keys from group `group`. Use CONFIG_GROUP_GENERAL (General) for
-// general settings.
+/**
+ * @brief Return keys from group `group`.
+ * Use CONFIG_GROUP_GENERAL (General) for general settings.
+ */
 QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 {
     QSet<QString> keys;
@@ -515,20 +524,6 @@ bool ConfigHandler::checkForErrors(AbstractLogger* log) const
            checkSemantics(log);
 }
 
-void ConfigHandler::cleanUnusedKeys(const QString& group,
-                                    const QSet<QString>& keys) const
-{
-    for (const QString& key : keys) {
-        if (group == CONFIG_GROUP_GENERAL && !key.contains('/')) {
-            m_settings.remove(key);
-        } else {
-            m_settings.beginGroup(group);
-            m_settings.remove(key);
-            m_settings.endGroup();
-        }
-    }
-}
-
 /**
  * @brief Parse the config to find settings with unrecognized names.
  * @return Whether the config passes this check.
@@ -537,7 +532,8 @@ void ConfigHandler::cleanUnusedKeys(const QString& group,
  * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
  * group the option belongs to.
  */
-bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log) const
+bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
+                                              QList<QString>* offenders) const
 {
     // sort the config keys by group
     QSet<QString> generalKeys = keysFromGroup(CONFIG_GROUP_GENERAL),
@@ -549,38 +545,21 @@ bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log) const
     generalKeys.subtract(recognizedGeneralKeys);
     shortcutKeys.subtract(recognizedShortcutKeys);
 
-    // automatically clean up unused keys
-    if (!generalKeys.isEmpty()) {
-        cleanUnusedKeys(CONFIG_GROUP_GENERAL, generalKeys);
-        generalKeys = keysFromGroup(CONFIG_GROUP_GENERAL),
-        generalKeys.subtract(recognizedGeneralKeys);
-    }
-    if (!shortcutKeys.isEmpty()) {
-        cleanUnusedKeys(CONFIG_GROUP_SHORTCUTS, shortcutKeys);
-        shortcutKeys = keysFromGroup(CONFIG_GROUP_SHORTCUTS);
-        shortcutKeys.subtract(recognizedShortcutKeys);
-    }
-
-    // clean up unused groups
-    QStringList settingsGroups = m_settings.childGroups();
-    for (const auto& group : settingsGroups) {
-        if (group != QLatin1String(CONFIG_GROUP_SHORTCUTS) &&
-            group != QLatin1String(CONFIG_GROUP_GENERAL)) {
-            m_settings.beginGroup(group);
-            m_settings.remove("");
-            m_settings.endGroup();
-        }
-    }
-
     // what is left are the unrecognized keys - hopefully empty
     bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
-    if (log != nullptr) {
+    if (log != nullptr || offenders != nullptr) {
         for (const QString& key : generalKeys) {
-            *log << QStringLiteral("Unrecognized setting: '%1'\n").arg(key);
+            if (log)
+                *log << QStringLiteral("Unrecognized setting: '%1'\n").arg(key);
+            if (offenders)
+                offenders->append(key);
         }
         for (const QString& key : shortcutKeys) {
-            *log
-              << QStringLiteral("Unrecognized shortcut name: '%1'.\n").arg(key);
+            if (log)
+                *log << QStringLiteral("Unrecognized shortcut name: '%1'.\n")
+                          .arg(key);
+            if (offenders)
+                offenders->append(key);
         }
     }
     return ok;
@@ -634,9 +613,12 @@ bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
 
 /**
  * @brief Check each config value semantically.
+ * @param log Destination for error log output.
+ * @param offenders Destination for the semantically invalid keys.
  * @return Whether the config passes this check.
  */
-bool ConfigHandler::checkSemantics(AbstractLogger* log) const
+bool ConfigHandler::checkSemantics(AbstractLogger* log,
+                                   QList<QString>* offenders) const
 {
     QStringList allKeys = m_settings.allKeys();
     bool ok = true;
@@ -650,14 +632,17 @@ bool ConfigHandler::checkSemantics(AbstractLogger* log) const
         QVariant val = m_settings.value(key);
         auto valueHandler = this->valueHandler(key);
         if (val.isValid() && !valueHandler->check(val)) {
+            // Key does not pass the check
             ok = false;
-            if (log == nullptr) {
+            if (log == nullptr && offenders == nullptr)
                 break;
-            } else {
-                *log << QStringLiteral("Semantic error in '%1'. Expected: %2\n")
+            if (log != nullptr) {
+                *log << QStringLiteral("Bad value in '%1'. Expected: %2\n")
                           .arg(key)
                           .arg(valueHandler->expected());
             }
+            if (offenders != nullptr)
+                offenders->append(key);
         }
     }
     return ok;
@@ -724,7 +709,8 @@ bool ConfigHandler::hasError() const
 /// Error message that can be used by other classes as well
 QString ConfigHandler::errorMessage() const
 {
-    return tr("The configuration contains an error. Falling back to default.");
+    return tr(
+      "The configuration contains an error. Open configuration to resolve.");
 }
 
 void ConfigHandler::ensureFileWatched() const
