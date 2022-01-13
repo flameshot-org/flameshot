@@ -59,6 +59,7 @@ void ConfigResolver::populate()
     for (const auto& key : semanticallyWrong) {
         auto* label = new QLabel(key);
         auto* reset = new QPushButton(tr("Reset"));
+        label->setToolTip("This setting has a bad value.");
         reset->setToolTip(tr("Reset to the default value."));
         layout()->addWidget(label, row, 0);
         layout()->addWidget(reset, row, 1);
@@ -74,6 +75,7 @@ void ConfigResolver::populate()
     for (const auto& key : unrecognized) {
         auto* label = new QLabel(key);
         auto* remove = new QPushButton(tr("Remove"));
+        label->setToolTip("This setting is unrecognized.");
         remove->setToolTip(tr("Remove this setting."));
         layout()->addWidget(label, row, 0);
         layout()->addWidget(remove, row, 1);
