@@ -38,7 +38,7 @@ void ConfigResolver::populate()
     resetLayout();
 
     bool anyErrors = !semanticallyWrong.isEmpty() || !unrecognized.isEmpty();
-    int i = 0;
+    int row = 0;
 
     // No errors detected
     if (!anyErrors) {
@@ -52,7 +52,7 @@ void ConfigResolver::populate()
           1,
           2,
           Qt::AlignCenter);
-        ++i;
+        ++row;
     }
 
     // List semantically incorrect settings with a "Reset" button
@@ -60,27 +60,27 @@ void ConfigResolver::populate()
         auto* label = new QLabel(key);
         auto* reset = new QPushButton(tr("Reset"));
         reset->setToolTip(tr("Reset to the default value."));
-        layout()->addWidget(label, i, 0, Qt::AlignRight);
-        layout()->addWidget(reset, i, 1);
+        layout()->addWidget(label, row, 0, Qt::AlignRight);
+        layout()->addWidget(reset, row, 1);
         reset->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
         connect(reset, &QPushButton::clicked, this, [key]() {
             ConfigHandler().resetValue(key);
         });
 
-        ++i;
+        ++row;
     }
     // List unrecognized settings with a "Remove" button
     for (const auto& key : unrecognized) {
         auto* label = new QLabel(key);
         auto* remove = new QPushButton(tr("Remove"));
         remove->setToolTip(tr("Remove this setting."));
-        layout()->addWidget(label, i, 0, Qt::AlignRight);
-        layout()->addWidget(remove, i, 1);
+        layout()->addWidget(label, row, 0, Qt::AlignRight);
+        layout()->addWidget(remove, row, 1);
         connect(remove, &QPushButton::clicked, this, [key]() {
             ConfigHandler().remove(key);
         });
-        ++i;
+        ++row;
     }
 
     if (!config.checkShortcutConflicts()) {
@@ -91,15 +91,15 @@ void ConfigResolver::populate()
         conflicts->setWordWrap(true);
         conflicts->setMaximumWidth(geometry().width());
         conflicts->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        layout()->addWidget(conflicts, i, 0, 1, 2, Qt::AlignCenter);
-        ++i;
+        layout()->addWidget(conflicts, row, 0, 1, 2, Qt::AlignCenter);
+        ++row;
     }
 
     using BBox = QDialogButtonBox;
 
     // Add button box at the bottom
     auto* buttons = new BBox(this);
-    layout()->addWidget(buttons, i, 0, 1, 2, Qt::AlignCenter);
+    layout()->addWidget(buttons, row, 0, 1, 2, Qt::AlignCenter);
     if (anyErrors) {
         QPushButton* resolveAll = new QPushButton(tr("Resolve all"));
         resolveAll->setToolTip(tr("Resolve all listed errors."));
