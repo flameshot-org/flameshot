@@ -553,7 +553,7 @@ bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
                 *log << QStringLiteral("Unrecognized shortcut name: '%1'.\n")
                           .arg(key);
             if (offenders)
-                offenders->append(key);
+                offenders->append(CONFIG_GROUP_SHORTCUTS "/" + key);
         }
     }
     return ok;
