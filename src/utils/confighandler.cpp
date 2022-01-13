@@ -173,19 +173,13 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 
 // CLASS CONFIGHANDLER
 
-ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
+ConfigHandler::ConfigHandler()
   : m_settings(QSettings::IniFormat,
                QSettings::UserScope,
                qApp->organizationName(),
                qApp->applicationName())
 {
-    static bool wasEverChecked = false;
     static bool firstInitialization = true;
-    if (!skipInitialErrorCheck && !wasEverChecked) {
-        // check for error on initial call
-        checkAndHandleError();
-        wasEverChecked = true;
-    }
     if (firstInitialization) {
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
@@ -787,7 +781,7 @@ QString ConfigHandler::baseName(QString key) const
 // STATIC MEMBER DEFINITIONS
 
 bool ConfigHandler::m_hasError = false;
-bool ConfigHandler::m_errorCheckPending = false;
+bool ConfigHandler::m_errorCheckPending = true;
 bool ConfigHandler::m_skipNextErrorCheck = false;
 
 QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;

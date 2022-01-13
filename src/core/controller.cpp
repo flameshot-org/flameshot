@@ -139,14 +139,9 @@ void Controller::setOrigin(Origin origin)
     m_origin = origin;
 }
 
-Controller::Origin Controller::origin() const
+Controller::Origin Controller::origin()
 {
     return m_origin;
-}
-
-void Controller::cancel()
-{
-    m_canceled = true;
 }
 
 void Controller::getLatestAvailableVersion()
@@ -169,20 +164,35 @@ void Controller::getLatestAvailableVersion()
     });
 }
 
-void Controller::showConfigResolver()
+/**
+ * @brief Prompt the user to resolve config errors if necessary.
+ * @return Whether errors were resolved.
+ */
+bool Controller::resolveAnyConfigErrors()
 {
-    ConfigResolver* resolver = new ConfigResolver();
-    QObject::connect(resolver, &ConfigResolver::rejected, [resolver]() {
-        resolver->deleteLater();
-        exit(1);
-    });
-    QObject::connect(resolver, &ConfigResolver::accepted, [resolver]() {
-        resolver->close();
-        resolver->deleteLater();
-        // Ensure that the dialog is closed before starting capture
+    bool resolved = true;
+    if (ConfigHandler().hasError()) {
+        ConfigResolver* resolver = new ConfigResolver();
+        QObject::connect(
+          resolver, &ConfigResolver::rejected, [this, resolver, &resolved]() {
+              resolved = false;
+              resolver->deleteLater();
+              if (origin() == CLI) {
+                  exit(1);
+              }
+          });
+        QObject::connect(
+          resolver, &ConfigResolver::accepted, [resolver, &resolved]() {
+              resolved = true;
+              resolver->close();
+              resolver->deleteLater();
+              // Ensure that the dialog is closed before starting capture
+              qApp->processEvents();
+          });
+        resolver->exec();
         qApp->processEvents();
-    });
-    resolver->exec();
+    }
+    return resolved;
 }
 
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
@@ -239,9 +249,7 @@ void Controller::appUpdates()
 
 void Controller::requestCapture(const CaptureRequest& request)
 {
-    if (ConfigHandler().hasError())
-        showConfigResolver();
-    if (m_canceled)
+    if (!resolveAnyConfigErrors())
         return;
 
     switch (request.captureMode()) {
@@ -272,6 +280,9 @@ void Controller::requestCapture(const CaptureRequest& request)
 // creation of a new capture in GUI mode
 void Controller::startVisualCapture(const CaptureRequest& req)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
 #if defined(Q_OS_MACOS)
     // This is required on MacOS because of Mission Control. If you'll switch to
     // another Desktop you cannot take a new screenshot from the tray, you have
@@ -332,6 +343,9 @@ void Controller::startVisualCapture(const CaptureRequest& req)
 
 void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     bool ok = true;
     QScreen* screen;
 
@@ -371,9 +385,7 @@ void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 // creation of the configuration window
 void Controller::openConfigWindow()
 {
-    if (ConfigHandler().hasError())
-        showConfigResolver();
-    if (m_canceled)
+    if (!resolveAnyConfigErrors())
         return;
 
     if (!m_configWindow) {
@@ -400,9 +412,7 @@ void Controller::openInfoWindow()
 
 void Controller::openLauncherWindow()
 {
-    if (ConfigHandler().hasError())
-        showConfigResolver();
-    if (m_canceled)
+    if (!resolveAnyConfigErrors())
         return;
 
     if (!m_launcherWindow) {
@@ -677,6 +687,9 @@ void Controller::exportCapture(QPixmap capture,
 
 void Controller::startFullscreenCapture(const CaptureRequest& req)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     QRect region = req.initialSelection();
@@ -713,3 +726,6 @@ void Controller::doLater(int msec, QObject* receiver, lambda func)
     timer->setInterval(msec);
     timer->start();
 }
+
+// STATIC ATTRIBUTES
+Controller::Origin Controller::m_origin = Controller::DAEMON;

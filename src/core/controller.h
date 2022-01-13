@@ -30,19 +30,18 @@ class Controller : public QObject
 {
     Q_OBJECT
 
+public:
     enum Origin
     {
         CLI,
         DAEMON
     };
 
-public:
     static Controller* getInstance();
 
     void setCheckForUpdatesEnabled(const bool enabled);
-    void setOrigin(Origin origin);
-    Origin origin() const;
-    void cancel();
+    static void setOrigin(Origin origin);
+    static Origin origin();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
@@ -83,7 +82,7 @@ private:
     Controller();
     ~Controller();
     void getLatestAvailableVersion();
-    void showConfigResolver();
+    bool resolveAnyConfigErrors();
     void sendTrayNotification(
       const QString& text,
       const QString& title = QStringLiteral("Flameshot Info"),
@@ -98,8 +97,7 @@ private:
     QString m_appLatestUrl;
     QString m_appLatestVersion;
     bool m_showCheckAppUpdateStatus;
-    bool m_canceled = false;
-    Origin m_origin = DAEMON;
+    static Origin m_origin;
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;

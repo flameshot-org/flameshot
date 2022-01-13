@@ -40,11 +40,8 @@ void ConfigResolver::populate()
     bool anyErrors = !semanticallyWrong.isEmpty() || !unrecognized.isEmpty();
 
     // No errors detected
-    if (!anyErrors) {
-        layout()->addWidget(
-          new QLabel("<b>No errors detected.</b>"), 0, 0, Qt::AlignCenter);
+    if (!anyErrors)
         accept();
-    }
 
     layout()->addWidget(
       new QLabel("<b>You must resolve all errors before continuing:</b>"),
