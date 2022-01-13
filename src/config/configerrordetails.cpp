@@ -17,7 +17,7 @@ ConfigErrorDetails::ConfigErrorDetails(QWidget* parent)
     ConfigHandler().checkForErrors(&stream);
 
     // Set up dialog
-    setWindowTitle(QStringLiteral("Configuration errors"));
+    setWindowTitle(tr("Configuration errors"));
     setLayout(new QVBoxLayout(this));
 
     // Add text display

@@ -119,7 +119,7 @@ void ConfigWindow::keyPressEvent(QKeyEvent* e)
 void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
 {
     QLabel* label = new QLabel(tab);
-    QPushButton* btnResolve = new QPushButton("Resolve", tab);
+    QPushButton* btnResolve = new QPushButton(tr("Resolve"), tab);
     QHBoxLayout* btnLayout = new QHBoxLayout();
 
     // Set up label

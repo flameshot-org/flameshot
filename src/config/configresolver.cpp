@@ -10,7 +10,7 @@
 ConfigResolver::ConfigResolver(QWidget* parent)
   : QDialog(parent)
 {
-    setWindowTitle("Resolve configuration errors");
+    setWindowTitle(tr("Resolve configuration errors"));
     setMinimumSize({ 250, 200 });
     setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
     populate();
@@ -45,7 +45,8 @@ void ConfigResolver::populate()
         accept();
     } else {
         layout()->addWidget(
-          new QLabel("<b>You must resolve all errors before continuing:</b>"),
+          new QLabel(
+            tr("<b>You must resolve all errors before continuing:</b>")),
           0,
           0,
           1,
@@ -57,8 +58,8 @@ void ConfigResolver::populate()
     // List semantically incorrect settings with a "Reset" button
     for (const auto& key : semanticallyWrong) {
         auto* label = new QLabel(key);
-        auto* reset = new QPushButton("Reset");
-        reset->setToolTip("Reset to the default value.");
+        auto* reset = new QPushButton(tr("Reset"));
+        reset->setToolTip(tr("Reset to the default value."));
         layout()->addWidget(label, i, 0, Qt::AlignRight);
         layout()->addWidget(reset, i, 1);
         reset->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -72,8 +73,8 @@ void ConfigResolver::populate()
     // List unrecognized settings with a "Remove" button
     for (const auto& key : unrecognized) {
         auto* label = new QLabel(key);
-        auto* remove = new QPushButton("Remove");
-        remove->setToolTip("Remove this setting.");
+        auto* remove = new QPushButton(tr("Remove"));
+        remove->setToolTip(tr("Remove this setting."));
         layout()->addWidget(label, i, 0, Qt::AlignRight);
         layout()->addWidget(remove, i, 1);
         connect(remove, &QPushButton::clicked, this, [key]() {
@@ -83,10 +84,10 @@ void ConfigResolver::populate()
     }
 
     if (!config.checkShortcutConflicts()) {
-        auto* conflicts =
-          new QLabel("Some keyboard shortcuts have conflicts.\n"
-                     "This will NOT prevent flameshot from starting.\n"
-                     "Please solve them manually in the configuration file.");
+        auto* conflicts = new QLabel(
+          tr("Some keyboard shortcuts have conflicts.\n"
+             "This will NOT prevent flameshot from starting.\n"
+             "Please solve them manually in the configuration file."));
         conflicts->setWordWrap(true);
         conflicts->setMaximumWidth(geometry().width());
         conflicts->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
@@ -100,8 +101,8 @@ void ConfigResolver::populate()
     auto* buttons = new BBox(this);
     layout()->addWidget(buttons, i, 0, 1, 2, Qt::AlignCenter);
     if (anyErrors) {
-        QPushButton* resolveAll = new QPushButton("Resolve all");
-        resolveAll->setToolTip("Resolve all listed errors.");
+        QPushButton* resolveAll = new QPushButton(tr("Resolve all"));
+        resolveAll->setToolTip(tr("Resolve all listed errors."));
         buttons->addButton(resolveAll, BBox::ResetRole);
         connect(resolveAll, &QPushButton::clicked, this, [=]() {
             for (const auto& key : semanticallyWrong)
@@ -111,7 +112,7 @@ void ConfigResolver::populate()
         });
     }
 
-    QPushButton* details = new QPushButton("Details");
+    QPushButton* details = new QPushButton(tr("Details"));
     buttons->addButton(details, BBox::HelpRole);
     connect(details, &QPushButton::clicked, this, [this]() {
         (new ConfigErrorDetails(this))->exec();
