@@ -62,6 +62,8 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 
 - Added an option to enable anti-aliasing when zooming in on a pinned image. 
 
+- Added completions for the fish shell
+
 ## Bug Fixes 
 - The border that indicates an object is moveable is no longer saved or copied with the underlying image. 
 
