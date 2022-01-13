@@ -11,6 +11,7 @@
 #include "abstractlogger.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
+#include "src/config/configresolver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/imgupload/imguploadermanager.h"
@@ -69,7 +70,6 @@ Controller::Controller()
 #endif
 {
     m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
-    qApp->setQuitOnLastWindowClosed(false);
 
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
@@ -134,9 +134,14 @@ void Controller::setCheckForUpdatesEnabled(const bool enabled)
     }
 }
 
-QMap<uint, CaptureRequest>& Controller::requests()
+void Controller::setOrigin(Origin origin)
 {
-    return m_requestMap;
+    m_origin = origin;
+}
+
+Controller::Origin Controller::origin()
+{
+    return m_origin;
 }
 
 void Controller::getLatestAvailableVersion()
@@ -157,6 +162,38 @@ void Controller::getLatestAvailableVersion()
             this->getLatestAvailableVersion();
         }
     });
+}
+
+/**
+ * @brief Prompt the user to resolve config errors if necessary.
+ * @return Whether errors were resolved.
+ */
+bool Controller::resolveAnyConfigErrors()
+{
+    bool resolved = true;
+    ConfigHandler config;
+    if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
+        ConfigResolver* resolver = new ConfigResolver();
+        QObject::connect(
+          resolver, &ConfigResolver::rejected, [this, resolver, &resolved]() {
+              resolved = false;
+              resolver->deleteLater();
+              if (origin() == CLI) {
+                  exit(1);
+              }
+          });
+        QObject::connect(
+          resolver, &ConfigResolver::accepted, [resolver, &resolved]() {
+              resolved = true;
+              resolver->close();
+              resolver->deleteLater();
+              // Ensure that the dialog is closed before starting capture
+              qApp->processEvents();
+          });
+        resolver->exec();
+        qApp->processEvents();
+    }
+    return resolved;
 }
 
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
@@ -213,6 +250,9 @@ void Controller::appUpdates()
 
 void Controller::requestCapture(const CaptureRequest& request)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
             doLater(request.delay(), this, [this, request]() {
@@ -241,6 +281,9 @@ void Controller::requestCapture(const CaptureRequest& request)
 // creation of a new capture in GUI mode
 void Controller::startVisualCapture(const CaptureRequest& req)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
 #if defined(Q_OS_MACOS)
     // This is required on MacOS because of Mission Control. If you'll switch to
     // another Desktop you cannot take a new screenshot from the tray, you have
@@ -301,6 +344,9 @@ void Controller::startVisualCapture(const CaptureRequest& req)
 
 void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     bool ok = true;
     QScreen* screen;
 
@@ -340,6 +386,9 @@ void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 // creation of the configuration window
 void Controller::openConfigWindow()
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     if (!m_configWindow) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
@@ -364,6 +413,9 @@ void Controller::openInfoWindow()
 
 void Controller::openLauncherWindow()
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     if (!m_launcherWindow) {
         m_launcherWindow = new CaptureLauncher();
     }
@@ -519,12 +571,10 @@ void Controller::enableTrayIcon()
 
 void Controller::disableTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
     if (m_trayIcon) {
         m_trayIcon->hide();
     }
     ConfigHandler().setDisabledTrayIcon(true);
-#endif
 }
 
 void Controller::sendTrayNotification(const QString& text,
@@ -534,13 +584,6 @@ void Controller::sendTrayNotification(const QString& text,
     if (m_trayIcon) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
-    }
-}
-
-void Controller::updateConfigComponents()
-{
-    if (m_configWindow) {
-        m_configWindow->updateChildren();
     }
 }
 
@@ -625,9 +668,8 @@ void Controller::exportCapture(QPixmap capture,
           widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
-                      AbstractLogger::info()
-                        << QObject::tr("URL copied to clipboard.");
-                      QApplication::clipboard()->setText(url.toString());
+                      FlameshotDaemon::copyToClipboard(
+                        url.toString(), tr("URL copied to clipboard."));
                       widget->close();
                   } else {
                       widget->showPostUploadDialog();
@@ -645,6 +687,9 @@ void Controller::exportCapture(QPixmap capture,
 
 void Controller::startFullscreenCapture(const CaptureRequest& req)
 {
+    if (!resolveAnyConfigErrors())
+        return;
+
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
     QRect region = req.initialSelection();
@@ -681,3 +726,6 @@ void Controller::doLater(int msec, QObject* receiver, lambda func)
     timer->setInterval(msec);
     timer->start();
 }
+
+// STATIC ATTRIBUTES
+Controller::Origin Controller::m_origin = Controller::DAEMON;

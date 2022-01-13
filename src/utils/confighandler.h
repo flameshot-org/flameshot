@@ -58,7 +58,7 @@ class ConfigHandler : public QObject
     Q_OBJECT
 
 public:
-    explicit ConfigHandler(bool skipInitialErrorCheck = false);
+    explicit ConfigHandler();
 
     static ConfigHandler* getInstance();
 
@@ -104,9 +104,7 @@ public:
     CONFIG_GETTER_SETTER(uploadHistoryMax, setUploadHistoryMax, int)
     CONFIG_GETTER_SETTER(saveAfterCopy, setSaveAfterCopy, bool)
     CONFIG_GETTER_SETTER(copyPathAfterSave, setCopyPathAfterSave, bool)
-    CONFIG_GETTER_SETTER(setSaveAsFileExtension,
-                         setSaveAsFileExtension,
-                         QString)
+    CONFIG_GETTER_SETTER(saveAsFileExtension, setSaveAsFileExtension, QString)
     CONFIG_GETTER_SETTER(antialiasingPinZoom, setAntialiasingPinZoom, bool)
     CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
@@ -135,6 +133,8 @@ public:
     QString shortcut(const QString& actionName);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
+    void remove(const QString& key);
+    void resetValue(const QString& key);
 
     // INFO
     static QSet<QString>& recognizedGeneralOptions();
@@ -143,9 +143,11 @@ public:
 
     // ERROR HANDLING
     bool checkForErrors(AbstractLogger* log = nullptr) const;
-    bool checkUnrecognizedSettings(AbstractLogger* log = nullptr) const;
+    bool checkUnrecognizedSettings(AbstractLogger* log = nullptr,
+                                   QList<QString>* offenders = nullptr) const;
     bool checkShortcutConflicts(AbstractLogger* log = nullptr) const;
-    bool checkSemantics(AbstractLogger* log = nullptr) const;
+    bool checkSemantics(AbstractLogger* log = nullptr,
+                        QList<QString>* offenders = nullptr) const;
     void checkAndHandleError() const;
     void setErrorState(bool error) const;
     bool hasError() const;
