@@ -3,6 +3,7 @@
 
 #include "configwindow.h"
 #include "abstractlogger.h"
+#include "src/config/configresolver.h"
 #include "src/config/filenameeditor.h"
 #include "src/config/generalconf.h"
 #include "src/config/shortcutswidget.h"
@@ -118,7 +119,7 @@ void ConfigWindow::keyPressEvent(QKeyEvent* e)
 void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
 {
     QLabel* label = new QLabel(tab);
-    QPushButton* btnShowErrors = new QPushButton("Show errors", tab);
+    QPushButton* btnResolve = new QPushButton(tr("Resolve"), tab);
     QHBoxLayout* btnLayout = new QHBoxLayout();
 
     // Set up label
@@ -129,9 +130,9 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
     label->setVisible(ConfigHandler().hasError());
 
     // Set up "Show errors" button
-    btnShowErrors->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
-    btnLayout->addWidget(btnShowErrors);
-    btnShowErrors->setVisible(ConfigHandler().hasError());
+    btnResolve->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+    btnLayout->addWidget(btnResolve);
+    btnResolve->setVisible(ConfigHandler().hasError());
 
     widget->setEnabled(!ConfigHandler().hasError());
 
@@ -142,14 +143,14 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
         layout->insertLayout(1, btnLayout);
     } else {
         widget->layout()->addWidget(label);
-        widget->layout()->addWidget(btnShowErrors);
+        widget->layout()->addWidget(btnResolve);
     }
 
     // Sigslots
     connect(ConfigHandler::getInstance(), &ConfigHandler::error, widget, [=]() {
         widget->setEnabled(false);
         label->show();
-        btnShowErrors->show();
+        btnResolve->show();
     });
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::errorResolved,
@@ -157,41 +158,9 @@ void ConfigWindow::initErrorIndicator(QWidget* tab, QWidget* widget)
             [=]() {
                 widget->setEnabled(true);
                 label->hide();
-                btnShowErrors->hide();
+                btnResolve->hide();
             });
-    connect(btnShowErrors, &QPushButton::clicked, this, [this]() {
-        // Generate error log message
-        QString str;
-        AbstractLogger stream(str, AbstractLogger::Error);
-        ConfigHandler().checkForErrors(&stream);
-
-        // Set up dialog
-        QDialog dialog;
-        dialog.setWindowTitle(QStringLiteral("Configuration errors"));
-        dialog.setLayout(new QVBoxLayout(&dialog));
-
-        // Add text display
-        QTextEdit* textDisplay = new QTextEdit(&dialog);
-        textDisplay->setPlainText(str);
-        textDisplay->setReadOnly(true);
-        dialog.layout()->addWidget(textDisplay);
-
-        // Add Ok button
-        using BBox = QDialogButtonBox;
-        BBox* buttons = new BBox(BBox::Ok);
-        dialog.layout()->addWidget(buttons);
-        connect(buttons, &QDialogButtonBox::clicked, this, [&dialog]() {
-            dialog.close();
-        });
-
-        dialog.show();
-
-        qApp->processEvents();
-        QPoint center = dialog.geometry().center();
-        QRect dialogRect(0, 0, 600, 400);
-        dialogRect.moveCenter(center);
-        dialog.setGeometry(dialogRect);
-
-        dialog.exec();
+    connect(btnResolve, &QPushButton::clicked, this, [this]() {
+        ConfigResolver().exec();
     });
 }
