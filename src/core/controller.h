@@ -30,10 +30,19 @@ class Controller : public QObject
 {
     Q_OBJECT
 
+    enum Origin
+    {
+        CLI,
+        DAEMON
+    };
+
 public:
     static Controller* getInstance();
 
     void setCheckForUpdatesEnabled(const bool enabled);
+    void setOrigin(Origin origin);
+    Origin origin() const;
+    void cancel();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
@@ -51,10 +60,6 @@ public slots:
     void initTrayIcon();
     void enableTrayIcon();
     void disableTrayIcon();
-    void sendTrayNotification(
-      const QString& text,
-      const QString& title = QStringLiteral("Flameshot Info"),
-      const int timeout = 5000);
 
     void showRecentUploads();
 
@@ -78,6 +83,11 @@ private:
     Controller();
     ~Controller();
     void getLatestAvailableVersion();
+    void showConfigResolver();
+    void sendTrayNotification(
+      const QString& text,
+      const QString& title = QStringLiteral("Flameshot Info"),
+      const int timeout = 5000);
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
@@ -88,6 +98,8 @@ private:
     QString m_appLatestUrl;
     QString m_appLatestVersion;
     bool m_showCheckAppUpdateStatus;
+    bool m_canceled = false;
+    Origin m_origin = DAEMON;
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;

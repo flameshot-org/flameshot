@@ -11,6 +11,7 @@
 #include "abstractlogger.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
+#include "src/config/configresolver.h"
 #include "src/config/configwindow.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/imgupload/imguploadermanager.h"
@@ -133,6 +134,21 @@ void Controller::setCheckForUpdatesEnabled(const bool enabled)
     }
 }
 
+void Controller::setOrigin(Origin origin)
+{
+    m_origin = origin;
+}
+
+Controller::Origin Controller::origin() const
+{
+    return m_origin;
+}
+
+void Controller::cancel()
+{
+    m_canceled = true;
+}
+
 void Controller::getLatestAvailableVersion()
 {
     // This features is required for MacOS and Windows user and for Linux users
@@ -151,6 +167,22 @@ void Controller::getLatestAvailableVersion()
             this->getLatestAvailableVersion();
         }
     });
+}
+
+void Controller::showConfigResolver()
+{
+    ConfigResolver* resolver = new ConfigResolver();
+    QObject::connect(resolver, &ConfigResolver::rejected, [resolver]() {
+        resolver->deleteLater();
+        exit(1);
+    });
+    QObject::connect(resolver, &ConfigResolver::accepted, [resolver]() {
+        resolver->close();
+        resolver->deleteLater();
+        // Ensure that the dialog is closed before starting capture
+        qApp->processEvents();
+    });
+    resolver->exec();
 }
 
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
@@ -207,6 +239,11 @@ void Controller::appUpdates()
 
 void Controller::requestCapture(const CaptureRequest& request)
 {
+    if (ConfigHandler().hasError())
+        showConfigResolver();
+    if (m_canceled)
+        return;
+
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
             doLater(request.delay(), this, [this, request]() {
@@ -334,6 +371,11 @@ void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 // creation of the configuration window
 void Controller::openConfigWindow()
 {
+    if (ConfigHandler().hasError())
+        showConfigResolver();
+    if (m_canceled)
+        return;
+
     if (!m_configWindow) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
@@ -358,6 +400,11 @@ void Controller::openInfoWindow()
 
 void Controller::openLauncherWindow()
 {
+    if (ConfigHandler().hasError())
+        showConfigResolver();
+    if (m_canceled)
+        return;
+
     if (!m_launcherWindow) {
         m_launcherWindow = new CaptureLauncher();
     }
