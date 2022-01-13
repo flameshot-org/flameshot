@@ -38,20 +38,22 @@ void ConfigResolver::populate()
     resetLayout();
 
     bool anyErrors = !semanticallyWrong.isEmpty() || !unrecognized.isEmpty();
+    int i = 0;
 
     // No errors detected
-    if (!anyErrors)
+    if (!anyErrors) {
         accept();
+    } else {
+        layout()->addWidget(
+          new QLabel("<b>You must resolve all errors before continuing:</b>"),
+          0,
+          0,
+          1,
+          2,
+          Qt::AlignCenter);
+        ++i;
+    }
 
-    layout()->addWidget(
-      new QLabel("<b>You must resolve all errors before continuing:</b>"),
-      0,
-      0,
-      1,
-      2,
-      Qt::AlignCenter);
-
-    int i = 1;
     // List semantically incorrect settings with a "Reset" button
     for (const auto& key : semanticallyWrong) {
         auto* label = new QLabel(key);
@@ -80,27 +82,43 @@ void ConfigResolver::populate()
         ++i;
     }
 
+    if (!config.checkShortcutConflicts()) {
+        auto* conflicts =
+          new QLabel("Some keyboard shortcuts have conflicts.\n"
+                     "This will NOT prevent flameshot from starting.\n"
+                     "Please solve them manually in the configuration file.");
+        conflicts->setWordWrap(true);
+        conflicts->setMaximumWidth(geometry().width());
+        conflicts->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        layout()->addWidget(conflicts, i, 0, 1, 2, Qt::AlignCenter);
+        ++i;
+    }
+
     using BBox = QDialogButtonBox;
 
     // Add button box at the bottom
     auto* buttons = new BBox(this);
     layout()->addWidget(buttons, i, 0, 1, 2, Qt::AlignCenter);
-    QPushButton *resolveAll = new QPushButton("Resolve all"),
-                *details = new QPushButton("Details");
-    resolveAll->setToolTip("Resolve all listed errors.");
-    buttons->addButton(resolveAll, BBox::ResetRole);
-    buttons->addButton(details, BBox::HelpRole);
+    if (anyErrors) {
+        QPushButton* resolveAll = new QPushButton("Resolve all");
+        resolveAll->setToolTip("Resolve all listed errors.");
+        buttons->addButton(resolveAll, BBox::ResetRole);
+        connect(resolveAll, &QPushButton::clicked, this, [=]() {
+            for (const auto& key : semanticallyWrong)
+                ConfigHandler().resetValue(key);
+            for (const auto& key : unrecognized)
+                ConfigHandler().remove(key);
+        });
+    }
 
-    connect(resolveAll, &QPushButton::clicked, this, [=]() {
-        for (const auto& key : semanticallyWrong)
-            ConfigHandler().resetValue(key);
-        for (const auto& key : unrecognized)
-            ConfigHandler().remove(key);
-    });
+    QPushButton* details = new QPushButton("Details");
+    buttons->addButton(details, BBox::HelpRole);
     connect(details, &QPushButton::clicked, this, [this]() {
         (new ConfigErrorDetails(this))->exec();
     });
+
     buttons->addButton(BBox::Cancel);
+
     connect(buttons, &BBox::rejected, this, [this]() { reject(); });
 }
 
@@ -111,4 +129,5 @@ void ConfigResolver::resetLayout()
     }
     delete layout();
     setLayout(new QGridLayout());
+    layout()->setSizeConstraint(QLayout::SetFixedSize);
 }

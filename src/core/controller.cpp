@@ -171,7 +171,8 @@ void Controller::getLatestAvailableVersion()
 bool Controller::resolveAnyConfigErrors()
 {
     bool resolved = true;
-    if (ConfigHandler().hasError()) {
+    ConfigHandler config;
+    if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
         ConfigResolver* resolver = new ConfigResolver();
         QObject::connect(
           resolver, &ConfigResolver::rejected, [this, resolver, &resolved]() {
