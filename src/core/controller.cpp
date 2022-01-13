@@ -611,7 +611,7 @@ void Controller::exportCapture(QPixmap capture,
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
                       FlameshotDaemon::copyToClipboard(
-                        url.toString(), "URL copied to clipboard.");
+                        url.toString(), tr("URL copied to clipboard."));
                       widget->close();
                   } else {
                       widget->showPostUploadDialog();
