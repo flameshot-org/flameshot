@@ -328,6 +328,7 @@ int main(int argc, char* argv[])
 
     // PROCESS DATA
     //--------------
+    Controller::setOrigin(Controller::CLI);
     if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
         delete qApp;
@@ -394,12 +395,14 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
+
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         // Recreate the application as a QApplication
         // TODO find a way so we don't have to do this
         delete qApp;
         new QApplication(argc, argv);
+
         // Option values
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -437,6 +440,7 @@ int main(int argc, char* argv[])
         // TODO find a way so we don't have to do this
         delete qApp;
         new QApplication(argc, argv);
+
         QString numberStr = parser.value(screenNumberOption);
         // Option values
         int number =
@@ -495,7 +499,7 @@ int main(int argc, char* argv[])
           (filename || tray || mainColor || contrastColor || check);
         if (check) {
             AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
-            bool ok = ConfigHandler(true).checkForErrors(&err);
+            bool ok = ConfigHandler().checkForErrors(&err);
             if (ok) {
                 err << QStringLiteral("No errors detected.\n");
                 goto finish;
@@ -503,43 +507,45 @@ int main(int argc, char* argv[])
                 return 1;
             }
         }
-        ConfigHandler config;
-        if (autostart) {
-            config.setStartupLaunch(parser.value(autostartOption) == "true");
-        }
-        if (filename) {
-            QString newFilename(parser.value(filenameOption));
-            config.setFilenamePattern(newFilename);
-            FileNameHandler fh;
-            QTextStream(stdout)
-              << QStringLiteral("The new pattern is '%1'\n"
-                                "Parsed pattern example: %2\n")
-                   .arg(newFilename)
-                   .arg(fh.parsedPattern());
-        }
-        if (tray) {
-            config.setDisabledTrayIcon(parser.value(trayOption) == "false");
-        }
-        if (mainColor) {
-            // TODO use value handler
-            QString colorCode = parser.value(mainColorOption);
-            QColor parsedColor(colorCode);
-            config.setUiColor(parsedColor);
-        }
-        if (contrastColor) {
-            QString colorCode = parser.value(contrastColorOption);
-            QColor parsedColor(colorCode);
-            config.setContrastUiColor(parsedColor);
-        }
-
-        // Open gui when no options
         if (!someFlagSet) {
+            // Open gui when no options are given
             delete qApp;
             new QApplication(argc, argv);
             QObject::connect(
               qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
             Controller::getInstance()->openConfigWindow();
             qApp->exec();
+        } else {
+            ConfigHandler config;
+
+            if (autostart) {
+                config.setStartupLaunch(parser.value(autostartOption) ==
+                                        "true");
+            }
+            if (filename) {
+                QString newFilename(parser.value(filenameOption));
+                config.setFilenamePattern(newFilename);
+                FileNameHandler fh;
+                QTextStream(stdout)
+                  << QStringLiteral("The new pattern is '%1'\n"
+                                    "Parsed pattern example: %2\n")
+                       .arg(newFilename)
+                       .arg(fh.parsedPattern());
+            }
+            if (tray) {
+                config.setDisabledTrayIcon(parser.value(trayOption) == "false");
+            }
+            if (mainColor) {
+                // TODO use value handler
+                QString colorCode = parser.value(mainColorOption);
+                QColor parsedColor(colorCode);
+                config.setUiColor(parsedColor);
+            }
+            if (contrastColor) {
+                QString colorCode = parser.value(contrastColorOption);
+                QColor parsedColor(colorCode);
+                config.setContrastUiColor(parsedColor);
+            }
         }
     }
 finish:
