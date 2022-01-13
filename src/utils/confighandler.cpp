@@ -544,14 +544,13 @@ bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
     if (log != nullptr || offenders != nullptr) {
         for (const QString& key : generalKeys) {
             if (log)
-                *log << QStringLiteral("Unrecognized setting: '%1'\n").arg(key);
+                *log << tr("Unrecognized setting: '%1'\n").arg(key);
             if (offenders)
                 offenders->append(key);
         }
         for (const QString& key : shortcutKeys) {
             if (log)
-                *log << QStringLiteral("Unrecognized shortcut name: '%1'.\n")
-                          .arg(key);
+                *log << tr("Unrecognized shortcut name: '%1'.\n").arg(key);
             if (offenders)
                 offenders->append(CONFIG_GROUP_SHORTCUTS "/" + key);
         }
@@ -592,8 +591,8 @@ bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
                            !reportedInLog.contains(*key2)) { // log entries
                     reportedInLog.append(*key1);
                     reportedInLog.append(*key2);
-                    *log << QStringLiteral("Shortcut conflict: '%1' and '%2' "
-                                           "have the same shortcut: %3\n")
+                    *log << tr("Shortcut conflict: '%1' and '%2' "
+                               "have the same shortcut: %3\n")
                               .arg(*key1)
                               .arg(*key2)
                               .arg(value1);
@@ -631,7 +630,7 @@ bool ConfigHandler::checkSemantics(AbstractLogger* log,
             if (log == nullptr && offenders == nullptr)
                 break;
             if (log != nullptr) {
-                *log << QStringLiteral("Bad value in '%1'. Expected: %2\n")
+                *log << tr("Bad value in '%1'. Expected: %2\n")
                           .arg(key)
                           .arg(valueHandler->expected());
             }
