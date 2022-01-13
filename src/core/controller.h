@@ -63,6 +63,10 @@ public slots:
     void showRecentUploads();
 
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
+    void sendTrayNotification(
+      const QString& text,
+      const QString& title = QStringLiteral("Flameshot Info"),
+      const int timeout = 5000);
 
 private slots:
     void startFullscreenCapture(const CaptureRequest& req);
@@ -83,10 +87,6 @@ private:
     ~Controller();
     void getLatestAvailableVersion();
     bool resolveAnyConfigErrors();
-    void sendTrayNotification(
-      const QString& text,
-      const QString& title = QStringLiteral("Flameshot Info"),
-      const int timeout = 5000);
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
