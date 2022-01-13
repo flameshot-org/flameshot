@@ -5,6 +5,7 @@
 #include "src/utils/valuehandler.h"
 #include <QDialogButtonBox>
 #include <QLabel>
+#include <QSplitter>
 #include <QVBoxLayout>
 
 ConfigResolver::ConfigResolver(QWidget* parent)
@@ -50,8 +51,7 @@ void ConfigResolver::populate()
           0,
           0,
           1,
-          2,
-          Qt::AlignCenter);
+          2);
         ++row;
     }
 
@@ -60,7 +60,7 @@ void ConfigResolver::populate()
         auto* label = new QLabel(key);
         auto* reset = new QPushButton(tr("Reset"));
         reset->setToolTip(tr("Reset to the default value."));
-        layout()->addWidget(label, row, 0, Qt::AlignRight);
+        layout()->addWidget(label, row, 0);
         layout()->addWidget(reset, row, 1);
         reset->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -75,7 +75,7 @@ void ConfigResolver::populate()
         auto* label = new QLabel(key);
         auto* remove = new QPushButton(tr("Remove"));
         remove->setToolTip(tr("Remove this setting."));
-        layout()->addWidget(label, row, 0, Qt::AlignRight);
+        layout()->addWidget(label, row, 0);
         layout()->addWidget(remove, row, 1);
         connect(remove, &QPushButton::clicked, this, [key]() {
             ConfigHandler().remove(key);
@@ -94,6 +94,12 @@ void ConfigResolver::populate()
         layout()->addWidget(conflicts, row, 0, 1, 2, Qt::AlignCenter);
         ++row;
     }
+
+    QFrame* separator = new QFrame(this);
+    separator->setFrameShape(QFrame::HLine);
+    separator->setFrameShadow(QFrame::Sunken);
+    layout()->addWidget(separator, row, 0, 1, 2);
+    ++row;
 
     using BBox = QDialogButtonBox;
 
