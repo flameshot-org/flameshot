@@ -3,6 +3,8 @@ target_sources(
   PRIVATE buttonlistview.cpp
           clickablelabel.cpp
           configwindow.cpp
+          configresolver.cpp
+          configerrordetails.cpp
           extendedslider.cpp
           filenameeditor.cpp
           generalconf.cpp
