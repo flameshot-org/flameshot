@@ -610,9 +610,8 @@ void Controller::exportCapture(QPixmap capture,
           widget, &ImgUploaderBase::uploadOk, [=](const QUrl& url) {
               if (ConfigHandler().copyAndCloseAfterUpload()) {
                   if (!(tasks & CR::COPY)) {
-                      AbstractLogger::info()
-                        << QObject::tr("URL copied to clipboard.");
-                      QApplication::clipboard()->setText(url.toString());
+                      FlameshotDaemon::copyToClipboard(
+                        url.toString(), "URL copied to clipboard.");
                       widget->close();
                   } else {
                       widget->showPostUploadDialog();
