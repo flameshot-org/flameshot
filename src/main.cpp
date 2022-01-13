@@ -497,7 +497,8 @@ int main(int argc, char* argv[])
             AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
             bool ok = ConfigHandler(true).checkForErrors(&err);
             if (ok) {
-                err << QStringLiteral("No errors detected.\n");
+                AbstractLogger::info()
+                  << QStringLiteral("No errors detected.\n");
                 goto finish;
             } else {
                 return 1;
