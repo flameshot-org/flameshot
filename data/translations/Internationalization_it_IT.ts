@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi Nuovo</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta Su</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta Giù</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Accetta</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Accetta la cattura</translation>
     </message>
 </context>
 <context>
@@ -160,42 +160,42 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Mouse</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona l&apos;area dello screenshot</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotellina del mouse</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia la dimensione dello strumento</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Clic destro</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostra selettore colore</translation>
+        <translation>Mostra selettore colore</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri pannello laterale</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
@@ -205,12 +205,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot ha perso la messa a fuoco. Le scorciatoie da tastiera non funzioneranno finché non fai clic da qualche parte.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di configurazione risolto. Avvia di nuovo &quot;flameshot gui&quot; per applicarlo.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -262,55 +262,55 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="14"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona Colore</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation type="unfinished"></translation>
+        <translation>Saturazione</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonalità</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Esadecimale</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Blu</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfa</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rosso</translation>
     </message>
 </context>
 <context>
@@ -318,22 +318,22 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="54"/>
         <source>Accept color</source>
-        <translation type="unfinished"></translation>
+        <translation>Accetta colore</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="55"/>
         <source>Precisely select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona con precisione il colore</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="56"/>
         <source>Toggle magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Attiva/disattiva lente d&apos;ingrandimento</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella</translation>
     </message>
 </context>
 <context>
@@ -341,12 +341,12 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hai risolto con successo l&apos;errore di configurazione.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="728"/>
         <source>The configuration contains an error. Falling back to default.</source>
-        <translation type="unfinished"></translation>
+        <translation>La configurazione contiene un errore. Ritorno al default.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="781"/>
@@ -384,7 +384,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Il file di configurazione contiene errori. Risolvili prima di continuare.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -460,7 +460,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia la selezione negli appunti</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -655,18 +655,18 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation type="unfinished"></translation>
+        <translation>Consenti più istanze della GUI di flameshot contemporaneamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciò ti consente di acquisire schermate di Flameshot stesso, ad esempio.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="339"/>
         <location filename="../../src/config/generalconf.cpp" line="341"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi automaticamente il demone quando non è necessario</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="351"/>
@@ -688,7 +688,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <location filename="../../src/config/generalconf.cpp" line="378"/>
         <source>Use large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa una grande tavolozza di colori predefinita</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
@@ -728,7 +728,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>Preferred save file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estensione file di salvataggio preferita:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="476"/>
@@ -766,7 +766,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <location filename="../../src/config/generalconf.cpp" line="585"/>
         <location filename="../../src/config/generalconf.cpp" line="587"/>
         <source>Upload image without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica immagine senza conferma</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="603"/>
@@ -844,7 +844,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica senza conferma</translation>
     </message>
 </context>
 <context>
@@ -883,7 +883,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="36"/>
         <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation>Carica immagine</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>

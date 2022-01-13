@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceptar la captura</translation>
     </message>
 </context>
 <context>
@@ -171,47 +171,47 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Mouse</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar área de captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Rueda del Ratón</translation>
+        <translation>Rueda del Ratón</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar tamaño de la herramienta</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Right Click</source>
-        <translation type="unfinished">Click Derecho</translation>
+        <translation>Clic Derecho</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostrar el selector de color</translation>
+        <translation>Mostrar el selector de color</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir panel lateral</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Exit</source>
-        <translation type="unfinished">Salir</translation>
+        <translation>Salir</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de configuración resuelto. Lanza `flameshot gui` de nuevo para aplicarlo.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -279,13 +279,13 @@ Presiona Espacio para abrir el panel lateral.</translation>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation type="unfinished"></translation>
+        <translation>Saturación</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tono</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
@@ -297,31 +297,31 @@ Presiona Espacio para abrir el panel lateral.</translation>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alfa</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rojo</translation>
     </message>
 </context>
 <context>
@@ -344,7 +344,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="57"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -352,12 +352,12 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Has resuelto exitosamente el error de configuración.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="728"/>
         <source>The configuration contains an error. Falling back to default.</source>
-        <translation type="unfinished"></translation>
+        <translation>La configuración contiene un error. Revirtiendo a la predeterminada.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="781"/>
@@ -395,7 +395,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;El archivo de configuración contiene errores. Resuélvelos antes de continuar.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -475,7 +475,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar selección al portapapeles</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -559,7 +559,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="249"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede conectar a través de DBus</translation>
     </message>
 </context>
 <context>
@@ -741,7 +741,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir múltiples instancias simultáneas del GUI de flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="327"/>
