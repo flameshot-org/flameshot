@@ -123,7 +123,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Fri Dec 24 2021 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
+* Fri Jan 14 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
 - Update for 11.0 release.
 
 * Sun Aug 29 2021 Zetao Yang <vitzys@outlook.com> - 0.10.1-2
