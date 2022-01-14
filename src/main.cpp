@@ -47,7 +47,7 @@ void wayland_hacks()
 
 void requestCaptureAndWait(const CaptureRequest& req)
 {
-    Controller* controller = Controller::getInstance();
+    Controller* controller = Controller::instance();
     controller->requestCapture(req);
     QObject::connect(
       controller, &Controller::captureTaken, [&](QPixmap, QRect) {
@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
         qApp->installTranslator(&qtTranslator);
         qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
-        auto c = Controller::getInstance();
+        auto c = Controller::instance();
         FlameshotDaemon::start();
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -333,8 +333,8 @@ int main(int argc, char* argv[])
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
         delete qApp;
         new QApplication(argc, argv);
-        Controller* controller = Controller::getInstance();
-        controller->openLauncherWindow();
+        Controller* controller = Controller::instance();
+        controller->launcher();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
         delete qApp;
@@ -514,7 +514,7 @@ int main(int argc, char* argv[])
             new QApplication(argc, argv);
             QObject::connect(
               qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
-            Controller::getInstance()->openConfigWindow();
+            Controller::instance()->config();
             qApp->exec();
         } else {
             ConfigHandler config;

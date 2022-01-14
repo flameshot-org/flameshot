@@ -87,13 +87,13 @@ Controller::Controller()
     QObject::connect(m_HotkeyScreenshotCapture,
                      &QHotkey::activated,
                      qApp,
-                     [&]() { this->startVisualCapture(); });
+                     [this]() { gui(); });
     m_HotkeyScreenshotHistory = new QHotkey(
       QKeySequence(ConfigHandler().shortcut("SCREENSHOT_HISTORY")), true, this);
     QObject::connect(m_HotkeyScreenshotHistory,
                      &QHotkey::activated,
                      qApp,
-                     [&]() { this->showRecentUploads(); });
+                     [this]() { history(); });
 #endif
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
@@ -117,10 +117,191 @@ Controller::~Controller()
     delete m_trayIconMenu;
 }
 
-Controller* Controller::getInstance()
+Controller* Controller::instance()
 {
     static Controller c;
     return &c;
+}
+
+void Controller::gui(const CaptureRequest& req)
+{
+    if (!resolveAnyConfigErrors())
+        return;
+
+#if defined(Q_OS_MACOS)
+    // This is required on MacOS because of Mission Control. If you'll switch to
+    // another Desktop you cannot take a new screenshot from the tray, you have
+    // to switch back to the Flameshot Desktop manually. It is not obvious and a
+    // large number of users are confused and report a bug.
+    if (m_captureWindow) {
+        m_captureWindow->close();
+        delete m_captureWindow;
+        m_captureWindow = nullptr;
+    }
+#endif
+
+    if (nullptr == m_captureWindow) {
+        // TODO is this unnecessary now?
+        int timeout = 5000; // 5 seconds
+        const int delay = 100;
+        QWidget* modalWidget = nullptr;
+        for (; timeout >= 0; timeout -= delay) {
+            modalWidget = qApp->activeModalWidget();
+            if (nullptr == modalWidget) {
+                break;
+            }
+            modalWidget->close();
+            modalWidget->deleteLater();
+            QThread::msleep(delay);
+        }
+        if (0 == timeout) {
+            QMessageBox::warning(
+              nullptr, tr("Error"), tr("Unable to close active modal widgets"));
+            return;
+        }
+
+        m_captureWindow = new CaptureWidget(req);
+        // m_captureWindow = new CaptureWidget(forcedSavePath, false); //
+        // debug
+
+#ifdef Q_OS_WIN
+        m_captureWindow->show();
+#elif defined(Q_OS_MACOS)
+        // In "Emulate fullscreen mode"
+        m_captureWindow->showFullScreen();
+        m_captureWindow->activateWindow();
+        m_captureWindow->raise();
+#else
+        m_captureWindow->showFullScreen();
+//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
+#endif
+        if (!m_appLatestUrl.isEmpty() &&
+            ConfigHandler().ignoreUpdateToVersion().compare(
+              m_appLatestVersion) < 0) {
+            m_captureWindow->showAppUpdateNotification(m_appLatestVersion,
+                                                       m_appLatestUrl);
+        }
+    } else {
+        emit captureFailed();
+    }
+}
+
+void Controller::screen(CaptureRequest req, const int screenNumber)
+{
+    if (!resolveAnyConfigErrors())
+        return;
+
+    bool ok = true;
+    QScreen* screen;
+
+    if (screenNumber < 0) {
+        QPoint globalCursorPos = QCursor::pos();
+#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
+        screen = qApp->screenAt(globalCursorPos);
+#else
+        screen =
+          qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
+#endif
+    } else {
+        screen = qApp->screens()[screenNumber];
+    }
+    QPixmap p(ScreenGrabber().grabScreen(screen, ok));
+    if (ok) {
+        QRect geometry = ScreenGrabber().screenGeometry(screen);
+        QRect region = req.initialSelection();
+        if (region.isNull()) {
+            region = ScreenGrabber().screenGeometry(screen);
+        } else {
+            QRect screenGeom = ScreenGrabber().screenGeometry(screen);
+            screenGeom.moveTopLeft({ 0, 0 });
+            region = region.intersected(screenGeom);
+            p = p.copy(region);
+        }
+        if (req.tasks() & CaptureRequest::PIN) {
+            // change geometry for pin task
+            req.addPinTask(region);
+        }
+        exportCapture(p, geometry, req);
+    } else {
+        handleCaptureFailed();
+    }
+}
+
+void Controller::full(const CaptureRequest& req)
+{
+    if (!resolveAnyConfigErrors())
+        return;
+
+    bool ok = true;
+    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
+    QRect region = req.initialSelection();
+    if (!region.isNull()) {
+        p = p.copy(region);
+    }
+    if (ok) {
+        QRect selection; // `flameshot full` does not support --selection
+        exportCapture(p, selection, req);
+    } else {
+        handleCaptureFailed();
+    }
+}
+
+void Controller::launcher()
+{
+    if (!resolveAnyConfigErrors())
+        return;
+
+    if (!m_launcherWindow) {
+        m_launcherWindow = new CaptureLauncher();
+    }
+    m_launcherWindow->show();
+#if defined(Q_OS_MACOS)
+    m_launcherWindow->activateWindow();
+    m_launcherWindow->raise();
+#endif
+}
+
+void Controller::config()
+{
+    if (!resolveAnyConfigErrors())
+        return;
+
+    if (!m_configWindow) {
+        m_configWindow = new ConfigWindow();
+        m_configWindow->show();
+#if defined(Q_OS_MACOS)
+        m_configWindow->activateWindow();
+        m_configWindow->raise();
+#endif
+    }
+}
+
+void Controller::info()
+{
+    if (!m_infoWindow) {
+        m_infoWindow = new InfoWindow();
+#if defined(Q_OS_MACOS)
+        m_infoWindow->activateWindow();
+        m_infoWindow->raise();
+#endif
+    }
+}
+
+void Controller::history()
+{
+    static HistoryWidget* historyWidget = nullptr;
+    if (nullptr == historyWidget) {
+        historyWidget = new HistoryWidget();
+        connect(historyWidget, &QObject::destroyed, this, []() {
+            historyWidget = nullptr;
+        });
+    }
+    historyWidget->loadHistory();
+    historyWidget->show();
+#if defined(Q_OS_MACOS)
+    historyWidget->activateWindow();
+    historyWidget->raise();
+#endif
 }
 
 void Controller::setCheckForUpdatesEnabled(const bool enabled)
@@ -255,175 +436,24 @@ void Controller::requestCapture(const CaptureRequest& request)
 
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
-            doLater(request.delay(), this, [this, request]() {
-                startFullscreenCapture(request);
-            });
+            doLater(
+              request.delay(), this, [this, request]() { full(request); });
             break;
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
             doLater(request.delay(), this, [this, request, number]() {
-                startScreenGrab(request, number);
+                screen(request, number);
             });
             break;
         }
         case CaptureRequest::GRAPHICAL_MODE: {
-            doLater(request.delay(), this, [this, request]() {
-                startVisualCapture(request);
-            });
+            doLater(request.delay(), this, [this, request]() { gui(request); });
             break;
         }
         default:
             handleCaptureFailed();
             break;
     }
-}
-
-// creation of a new capture in GUI mode
-void Controller::startVisualCapture(const CaptureRequest& req)
-{
-    if (!resolveAnyConfigErrors())
-        return;
-
-#if defined(Q_OS_MACOS)
-    // This is required on MacOS because of Mission Control. If you'll switch to
-    // another Desktop you cannot take a new screenshot from the tray, you have
-    // to switch back to the Flameshot Desktop manually. It is not obvious and a
-    // large number of users are confused and report a bug.
-    if (m_captureWindow) {
-        m_captureWindow->close();
-        delete m_captureWindow;
-        m_captureWindow = nullptr;
-    }
-#endif
-
-    if (nullptr == m_captureWindow) {
-        // TODO is this unnecessary now?
-        int timeout = 5000; // 5 seconds
-        const int delay = 100;
-        QWidget* modalWidget = nullptr;
-        for (; timeout >= 0; timeout -= delay) {
-            modalWidget = qApp->activeModalWidget();
-            if (nullptr == modalWidget) {
-                break;
-            }
-            modalWidget->close();
-            modalWidget->deleteLater();
-            QThread::msleep(delay);
-        }
-        if (0 == timeout) {
-            QMessageBox::warning(
-              nullptr, tr("Error"), tr("Unable to close active modal widgets"));
-            return;
-        }
-
-        m_captureWindow = new CaptureWidget(req);
-        // m_captureWindow = new CaptureWidget(forcedSavePath, false); //
-        // debug
-
-#ifdef Q_OS_WIN
-        m_captureWindow->show();
-#elif defined(Q_OS_MACOS)
-        // In "Emulate fullscreen mode"
-        m_captureWindow->showFullScreen();
-        m_captureWindow->activateWindow();
-        m_captureWindow->raise();
-#else
-        m_captureWindow->showFullScreen();
-//        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
-#endif
-        if (!m_appLatestUrl.isEmpty() &&
-            ConfigHandler().ignoreUpdateToVersion().compare(
-              m_appLatestVersion) < 0) {
-            m_captureWindow->showAppUpdateNotification(m_appLatestVersion,
-                                                       m_appLatestUrl);
-        }
-    } else {
-        emit captureFailed();
-    }
-}
-
-void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
-{
-    if (!resolveAnyConfigErrors())
-        return;
-
-    bool ok = true;
-    QScreen* screen;
-
-    if (screenNumber < 0) {
-        QPoint globalCursorPos = QCursor::pos();
-#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
-        screen = qApp->screenAt(globalCursorPos);
-#else
-        screen =
-          qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
-#endif
-    } else {
-        screen = qApp->screens()[screenNumber];
-    }
-    QPixmap p(ScreenGrabber().grabScreen(screen, ok));
-    if (ok) {
-        QRect geometry = ScreenGrabber().screenGeometry(screen);
-        QRect region = req.initialSelection();
-        if (region.isNull()) {
-            region = ScreenGrabber().screenGeometry(screen);
-        } else {
-            QRect screenGeom = ScreenGrabber().screenGeometry(screen);
-            screenGeom.moveTopLeft({ 0, 0 });
-            region = region.intersected(screenGeom);
-            p = p.copy(region);
-        }
-        if (req.tasks() & CaptureRequest::PIN) {
-            // change geometry for pin task
-            req.addPinTask(region);
-        }
-        exportCapture(p, geometry, req);
-    } else {
-        handleCaptureFailed();
-    }
-}
-
-// creation of the configuration window
-void Controller::openConfigWindow()
-{
-    if (!resolveAnyConfigErrors())
-        return;
-
-    if (!m_configWindow) {
-        m_configWindow = new ConfigWindow();
-        m_configWindow->show();
-#if defined(Q_OS_MACOS)
-        m_configWindow->activateWindow();
-        m_configWindow->raise();
-#endif
-    }
-}
-
-// creation of the window of information
-void Controller::openInfoWindow()
-{
-    if (!m_infoWindow) {
-        m_infoWindow = new InfoWindow();
-#if defined(Q_OS_MACOS)
-        m_infoWindow->activateWindow();
-        m_infoWindow->raise();
-#endif
-    }
-}
-
-void Controller::openLauncherWindow()
-{
-    if (!resolveAnyConfigErrors())
-        return;
-
-    if (!m_launcherWindow) {
-        m_launcherWindow = new CaptureLauncher();
-    }
-    m_launcherWindow->show();
-#if defined(Q_OS_MACOS)
-    m_launcherWindow->activateWindow();
-    m_launcherWindow->raise();
-#endif
 }
 
 void Controller::initTrayIcon()
@@ -460,27 +490,23 @@ void Controller::enableTrayIcon()
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
         if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
-            startVisualCapture();
+            gui();
         } else {
             // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
             // the QMenu)
-            doLater(400, this, [this]() { this->startVisualCapture(); });
+            doLater(400, this, [this]() { gui(); });
         }
 #else
       // Wait 400 ms to hide the QMenu
-        doLater(400, this, [this]() { startVisualCapture(); });
+        doLater(400, this, [this]() { gui(); });
 #endif
     });
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
-    connect(launcherAction,
-            &QAction::triggered,
-            this,
-            &Controller::openLauncherWindow);
+    connect(launcherAction, &QAction::triggered, this, &Controller::launcher);
     QAction* configAction = new QAction(tr("&Configuration"), this);
-    connect(
-      configAction, &QAction::triggered, this, &Controller::openConfigWindow);
+    connect(configAction, &QAction::triggered, this, &Controller::config);
     QAction* infoAction = new QAction(tr("&About"), this);
-    connect(infoAction, &QAction::triggered, this, &Controller::openInfoWindow);
+    connect(infoAction, &QAction::triggered, this, &Controller::info);
 
     m_appUpdates = new QAction(tr("Check for updates"), this);
     connect(m_appUpdates, &QAction::triggered, this, &Controller::appUpdates);
@@ -490,7 +516,7 @@ void Controller::enableTrayIcon()
 
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
-    connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentUploads()));
+    connect(recentAction, SIGNAL(triggered()), this, SLOT(history()));
 
     // generate menu
     m_trayIconMenu->addAction(captureAction);
@@ -544,7 +570,7 @@ void Controller::enableTrayIcon()
 #else
     auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
         if (r == QSystemTrayIcon::Trigger) {
-            startVisualCapture();
+            gui();
         }
     };
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
@@ -585,23 +611,6 @@ void Controller::sendTrayNotification(const QString& text,
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
-}
-
-void Controller::showRecentUploads()
-{
-    static HistoryWidget* historyWidget = nullptr;
-    if (nullptr == historyWidget) {
-        historyWidget = new HistoryWidget();
-        connect(historyWidget, &QObject::destroyed, this, []() {
-            historyWidget = nullptr;
-        });
-    }
-    historyWidget->loadHistory();
-    historyWidget->show();
-#if defined(Q_OS_MACOS)
-    historyWidget->activateWindow();
-    historyWidget->raise();
-#endif
 }
 
 void Controller::exportCapture(QPixmap capture,
@@ -682,25 +691,6 @@ void Controller::exportCapture(QPixmap capture,
 
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(capture, selection);
-    }
-}
-
-void Controller::startFullscreenCapture(const CaptureRequest& req)
-{
-    if (!resolveAnyConfigErrors())
-        return;
-
-    bool ok = true;
-    QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
-    QRect region = req.initialSelection();
-    if (!region.isNull()) {
-        p = p.copy(region);
-    }
-    if (ok) {
-        QRect selection; // `flameshot full` does not support --selection
-        exportCapture(p, selection, req);
-    } else {
-        handleCaptureFailed();
     }
 }
 

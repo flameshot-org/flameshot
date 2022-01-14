@@ -253,10 +253,10 @@ CaptureWidget::~CaptureWidget()
     if (m_captureDone) {
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
-        Controller::getInstance()->exportCapture(
+        Controller::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        Controller::getInstance()->handleCaptureFailed();
+        Controller::instance()->handleCaptureFailed();
     }
 }
 

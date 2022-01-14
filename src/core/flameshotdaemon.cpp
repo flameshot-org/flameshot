@@ -52,7 +52,7 @@ FlameshotDaemon::FlameshotDaemon()
           quitIfIdle();
       });
     // init tray icon
-    Controller::getInstance()->initTrayIcon();
+    Controller::instance()->initTrayIcon();
 #ifdef Q_OS_WIN
     m_persist = true;
 #else
@@ -128,9 +128,9 @@ void FlameshotDaemon::enableTrayIcon(bool enable)
         return;
     }
     if (enable) {
-        Controller::getInstance()->enableTrayIcon();
+        Controller::instance()->enableTrayIcon();
     } else {
-        Controller::getInstance()->disableTrayIcon();
+        Controller::instance()->disableTrayIcon();
     }
 #endif
 }

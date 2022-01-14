@@ -109,7 +109,7 @@ void CaptureLauncher::startCapture()
       m_captureType->currentData().toInt());
     CaptureRequest req(mode, 600 + m_delaySpinBox->value() * 1000);
     connectCaptureSlots();
-    Controller::getInstance()->requestCapture(req);
+    Controller::instance()->requestCapture(req);
 }
 
 void CaptureLauncher::startDrag()
@@ -138,11 +138,11 @@ void CaptureLauncher::startDrag()
 
 void CaptureLauncher::connectCaptureSlots()
 {
-    connect(Controller::getInstance(),
+    connect(Controller::instance(),
             &Controller::captureTaken,
             this,
             &CaptureLauncher::captureTaken);
-    connect(Controller::getInstance(),
+    connect(Controller::instance(),
             &Controller::captureFailed,
             this,
             &CaptureLauncher::captureFailed);
@@ -155,11 +155,11 @@ void CaptureLauncher::disconnectCaptureSlots()
     // (random number, usually from 1 up to 20).
     // So no it enables signal on "Capture new screenshot" button and disables
     // on first success of fail.
-    disconnect(Controller::getInstance(),
+    disconnect(Controller::instance(),
                &Controller::captureTaken,
                this,
                &CaptureLauncher::captureTaken);
-    disconnect(Controller::getInstance(),
+    disconnect(Controller::instance(),
                &Controller::captureFailed,
                this,
                &CaptureLauncher::captureFailed);

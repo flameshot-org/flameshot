@@ -34,12 +34,12 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
 
         // Show screenshots history
         if (VK_SNAPSHOT == keycode && MOD_SHIFT == modifiers) {
-            Controller::getInstance()->showRecentUploads();
+            Controller::instance()->history();
         }
 
         // Capture screen
         if (VK_SNAPSHOT == keycode && 0 == modifiers) {
-            Controller::getInstance()->requestCapture(
+            Controller::instance()->requestCapture(
               CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
         }
 

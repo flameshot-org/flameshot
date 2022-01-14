@@ -45,7 +45,7 @@ void SystemNotification::sendMessage(const QString& text,
       [&]() {
           // The call is queued to avoid recursive static initialization of
           // Controller and ConfigHandler.
-          Controller::getInstance()->sendTrayNotification(text, title, timeout);
+          Controller::instance()->sendTrayNotification(text, title, timeout);
       },
       Qt::QueuedConnection);
 #else
