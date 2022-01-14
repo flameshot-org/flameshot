@@ -74,10 +74,7 @@ public slots:
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
 
-public slots: // TODO move these up
-    void handleCaptureTaken(const CaptureRequest& req,
-                            QPixmap p,
-                            QRect selection);
+public slots:
     void handleCaptureFailed();
 
     void handleReplyCheckUpdates(QNetworkReply* reply);

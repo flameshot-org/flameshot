@@ -694,13 +694,6 @@ void Controller::exportCapture(QPixmap capture,
     }
 }
 
-void Controller::handleCaptureTaken(const CaptureRequest& req,
-                                    QPixmap p,
-                                    QRect selection)
-{
-    exportCapture(p, selection, req);
-}
-
 void Controller::handleCaptureFailed()
 {
     emit captureFailed();
