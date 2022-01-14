@@ -4,6 +4,7 @@
 #pragma once
 
 #include "src/core/capturerequest.h"
+#include "src/widgets/systemtray.h"
 #include <QMap>
 #include <QMenu>
 #include <QObject>
@@ -50,9 +51,9 @@ public slots:
     void history();
 
 public:
-    void setCheckForUpdatesEnabled(const bool enabled);
     static void setOrigin(Origin origin);
     static Origin origin();
+    void getLatestAvailableVersion();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
@@ -62,7 +63,6 @@ signals:
 public slots:
     void requestCapture(const CaptureRequest& request);
 
-    void appUpdates();
     // TODO move tray icon handling to FlameshotDaemon
     void initTrayIcon();
     void enableTrayIcon();
@@ -81,8 +81,6 @@ public slots:
 
 private:
     Controller();
-    ~Controller();
-    void getLatestAvailableVersion();
     bool resolveAnyConfigErrors();
 
     // replace QTimer::singleShot introduced in Qt 5.4
@@ -90,7 +88,6 @@ private:
     void doLater(int msec, QObject* receiver, lambda func);
 
     // class members
-    QAction* m_appUpdates;
     QString m_appLatestUrl;
     QString m_appLatestVersion;
     bool m_showCheckAppUpdateStatus;
@@ -100,9 +97,7 @@ private:
     QPointer<InfoWindow> m_infoWindow;
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
-    QPointer<QSystemTrayIcon> m_trayIcon;
-
-    QMenu* m_trayIconMenu;
+    QPointer<SystemTray> m_trayIcon;
 
     QNetworkAccessManager* m_networkCheckUpdates;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
@@ -110,4 +105,5 @@ private:
     QHotkey* m_HotkeyScreenshotCapture;
     QHotkey* m_HotkeyScreenshotHistory;
 #endif
+    friend class SystemTray; // FIXME remove
 };

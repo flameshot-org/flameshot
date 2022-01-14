@@ -120,7 +120,6 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
-    Controller::instance()->setCheckForUpdatesEnabled(checked);
 }
 
 void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)

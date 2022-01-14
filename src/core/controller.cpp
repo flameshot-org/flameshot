@@ -61,7 +61,6 @@
 Controller::Controller()
   : m_captureWindow(nullptr)
   , m_trayIcon(nullptr)
-  , m_trayIconMenu(nullptr)
   , m_networkCheckUpdates(nullptr)
   , m_showCheckAppUpdateStatus(false)
 #if defined(Q_OS_MACOS)
@@ -112,11 +111,6 @@ Controller::Controller()
     }
 }
 
-Controller::~Controller()
-{
-    delete m_trayIconMenu;
-}
-
 Controller* Controller::instance()
 {
     static Controller c;
@@ -161,7 +155,7 @@ void Controller::gui(const CaptureRequest& req)
         }
 
         m_captureWindow = new CaptureWidget(req);
-        // m_captureWindow = new CaptureWidget(forcedSavePath, false); //
+        // m_captureWindow = new CaptureWidget(req, false); //
         // debug
 
 #ifdef Q_OS_WIN
@@ -304,17 +298,6 @@ void Controller::history()
 #endif
 }
 
-void Controller::setCheckForUpdatesEnabled(const bool enabled)
-{
-    if (m_appUpdates != nullptr) {
-        m_appUpdates->setVisible(enabled);
-        m_appUpdates->setEnabled(enabled);
-    }
-    if (enabled) {
-        getLatestAvailableVersion();
-    }
-}
-
 void Controller::setOrigin(Origin origin)
 {
     m_origin = origin;
@@ -396,8 +379,9 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
-            if (m_appUpdates != nullptr) {
-                m_appUpdates->setText(newVersion);
+            QAction* appUpdates = m_trayIcon->appUpdates();
+            if (appUpdates != nullptr) {
+                appUpdates->setText(newVersion);
             }
             if (m_showCheckAppUpdateStatus) {
                 sendTrayNotification(newVersion, "Flameshot");
@@ -417,16 +401,6 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
         }
     }
     m_showCheckAppUpdateStatus = false;
-}
-
-void Controller::appUpdates()
-{
-    if (m_appLatestUrl.isEmpty()) {
-        m_showCheckAppUpdateStatus = true;
-        getLatestAvailableVersion();
-    } else {
-        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
-    }
 }
 
 void Controller::requestCapture(const CaptureRequest& request)
@@ -475,123 +449,11 @@ void Controller::initTrayIcon()
 
 void Controller::enableTrayIcon()
 {
-    ConfigHandler().setDisabledTrayIcon(false);
-    if (m_trayIcon) {
+    if (m_trayIcon == nullptr) {
+        m_trayIcon = new SystemTray();
+    } else {
         m_trayIcon->show();
         return;
-    }
-    if (nullptr == m_trayIconMenu) {
-        m_trayIconMenu = new QMenu();
-        Q_ASSERT(m_trayIconMenu);
-    }
-
-    QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
-    connect(captureAction, &QAction::triggered, this, [this]() {
-#if defined(Q_OS_MACOS)
-        auto currentMacOsVersion = QOperatingSystemVersion::current();
-        if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
-            gui();
-        } else {
-            // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
-            // the QMenu)
-            doLater(400, this, [this]() { gui(); });
-        }
-#else
-      // Wait 400 ms to hide the QMenu
-        doLater(400, this, [this]() { gui(); });
-#endif
-    });
-    QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
-    connect(launcherAction, &QAction::triggered, this, &Controller::launcher);
-    QAction* configAction = new QAction(tr("&Configuration"), this);
-    connect(configAction, &QAction::triggered, this, &Controller::config);
-    QAction* infoAction = new QAction(tr("&About"), this);
-    connect(infoAction, &QAction::triggered, this, &Controller::info);
-
-    m_appUpdates = new QAction(tr("Check for updates"), this);
-    connect(m_appUpdates, &QAction::triggered, this, &Controller::appUpdates);
-
-    QAction* quitAction = new QAction(tr("&Quit"), this);
-    connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
-
-    // recent screenshots
-    QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
-    connect(recentAction, SIGNAL(triggered()), this, SLOT(history()));
-
-    // generate menu
-    m_trayIconMenu->addAction(captureAction);
-    m_trayIconMenu->addAction(launcherAction);
-    m_trayIconMenu->addSeparator();
-    m_trayIconMenu->addAction(recentAction);
-    m_trayIconMenu->addSeparator();
-    m_trayIconMenu->addAction(configAction);
-    m_trayIconMenu->addSeparator();
-    m_trayIconMenu->addAction(m_appUpdates);
-    m_trayIconMenu->addAction(infoAction);
-    m_trayIconMenu->addSeparator();
-    m_trayIconMenu->addAction(quitAction);
-    setCheckForUpdatesEnabled(ConfigHandler().checkForUpdates());
-
-    if (nullptr == m_trayIcon) {
-        m_trayIcon = new QSystemTrayIcon();
-        Q_ASSERT(m_trayIcon);
-    }
-    m_trayIcon->setToolTip(QStringLiteral("Flameshot"));
-#if defined(Q_OS_MACOS)
-    // Because of the following issues on MacOS "Catalina":
-    // https://bugreports.qt.io/browse/QTBUG-86393
-    // https://developer.apple.com/forums/thread/126072
-    auto currentMacOsVersion = QOperatingSystemVersion::current();
-    if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
-        m_trayIcon->setContextMenu(m_trayIconMenu);
-    }
-#else
-    m_trayIcon->setContextMenu(m_trayIconMenu);
-#endif
-    QIcon trayIcon =
-      QIcon::fromTheme("flameshot-tray", QIcon(GlobalValues::iconPathPNG()));
-    m_trayIcon->setIcon(trayIcon);
-
-#if defined(Q_OS_MACOS)
-    if (currentMacOsVersion < currentMacOsVersion.MacOSBigSur) {
-        // Because of the following issues on MacOS "Catalina":
-        // https://bugreports.qt.io/browse/QTBUG-86393
-        // https://developer.apple.com/forums/thread/126072
-        auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
-            if (m_trayIconMenu->isVisible()) {
-                m_trayIconMenu->hide();
-            } else {
-                m_trayIconMenu->popup(QCursor::pos());
-            }
-        };
-        connect(
-          m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
-    }
-#else
-    auto trayIconActivated = [this](QSystemTrayIcon::ActivationReason r) {
-        if (r == QSystemTrayIcon::Trigger) {
-            gui();
-        }
-    };
-    connect(m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
-#endif
-
-#ifdef Q_OS_WIN
-    // Ensure proper removal of tray icon when program quits on Windows.
-    connect(
-      qApp, &QCoreApplication::aboutToQuit, m_trayIcon, &QSystemTrayIcon::hide);
-#endif
-
-    m_trayIcon->show();
-
-    if (ConfigHandler().showStartupLaunchMessage()) {
-        m_trayIcon->showMessage(
-          "Flameshot",
-          QObject::tr(
-            "Hello, I'm here! Click icon in the tray to take a screenshot or "
-            "click with a right button to see more options."),
-          trayIcon,
-          3000);
     }
 }
 
@@ -600,7 +462,6 @@ void Controller::disableTrayIcon()
     if (m_trayIcon) {
         m_trayIcon->hide();
     }
-    ConfigHandler().setDisabledTrayIcon(true);
 }
 
 void Controller::sendTrayNotification(const QString& text,

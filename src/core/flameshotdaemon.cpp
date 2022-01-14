@@ -121,6 +121,7 @@ void FlameshotDaemon::copyToClipboard(QString text, QString notification)
     sessionBus.call(m);
 }
 
+// TODO unused method
 void FlameshotDaemon::enableTrayIcon(bool enable)
 {
 #if !defined(Q_OS_WIN)
