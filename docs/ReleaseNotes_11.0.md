@@ -21,7 +21,8 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
   - `--region` is a new flag that allows users to specify the exact region to screenshot. It uses the same syntax as xrandr: `WxH+x+y`.
     - This is likely to be added to the launcher in the next release. 
   - `--accept-on-select` This flag will save the image as soon as the mouse is released when selecting a region.
-  - The CLI now supports pinning (`--pin`), uploading (`--upload`), and copying to clipboard (`--clipboard`). 
+  - The CLI now supports pinning (`--pin`), uploading (`--upload`), and copying to clipboard (`--clipboard`).
+    Note that in case one of these options (or `--path`, `--raw` also) is used, an *Accept* button is shown and the *Save*, *Copy*, *Upload*, *Pin*, *Open With* buttons are hidden.
 
 
 - MacOS now uses monochrome icon to match the system theme better.
