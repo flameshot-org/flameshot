@@ -256,7 +256,7 @@ CaptureWidget::~CaptureWidget()
         Controller::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        Controller::instance()->handleCaptureFailed();
+        emit Controller::instance()->captureFailed();
     }
 }
 

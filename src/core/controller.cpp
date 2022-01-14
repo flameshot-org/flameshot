@@ -217,7 +217,7 @@ void Controller::screen(CaptureRequest req, const int screenNumber)
         }
         exportCapture(p, geometry, req);
     } else {
-        handleCaptureFailed();
+        emit captureFailed();
     }
 }
 
@@ -236,7 +236,7 @@ void Controller::full(const CaptureRequest& req)
         QRect selection; // `flameshot full` does not support --selection
         exportCapture(p, selection, req);
     } else {
-        handleCaptureFailed();
+        emit captureFailed();
     }
 }
 
@@ -425,7 +425,7 @@ void Controller::requestCapture(const CaptureRequest& request)
             break;
         }
         default:
-            handleCaptureFailed();
+            emit captureFailed();
             break;
     }
 }
@@ -553,11 +553,6 @@ void Controller::exportCapture(QPixmap capture,
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(capture, selection);
     }
-}
-
-void Controller::handleCaptureFailed()
-{
-    emit captureFailed();
 }
 
 void Controller::doLater(int msec, QObject* receiver, lambda func)

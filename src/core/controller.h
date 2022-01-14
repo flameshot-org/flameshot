@@ -75,8 +75,6 @@ public slots:
       const int timeout = 5000);
 
 public slots:
-    void handleCaptureFailed();
-
     void handleReplyCheckUpdates(QNetworkReply* reply);
 
 private:
