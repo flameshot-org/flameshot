@@ -116,6 +116,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %endif
 %{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/zsh/site-functions/_%{name}
+%{_datadir}/fish/vendor_completions.d/%{name}.fish
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
 %{_datadir}/icons/hicolor/*/apps/*.png
