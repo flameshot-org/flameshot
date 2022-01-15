@@ -200,7 +200,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Exit</source>
-        <translation type="unfinished">Uscita</translation>
+        <translation>Esci</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
@@ -341,7 +341,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Errori di configurazione</translation>
     </message>
 </context>
 <context>
@@ -350,25 +350,29 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="547"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazione non riconosciuta: &apos;%1&apos;
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="553"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nome del collegamento non riconosciuto: &apos;%1&apos;.
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="594"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Conflitto collegamento: &apos;%1&apos; e &apos;%2&apos; hanno lo stesso collegamento: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="633"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Valore errato in &apos;%1&apos;. Previsto: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="682"/>
@@ -378,7 +382,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>La configurazione contiene un errore. Apri la configurazione per risolvere.</translation>
     </message>
     <message>
         <source>The configuration contains an error. Falling back to default.</source>
@@ -387,7 +391,7 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="759"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation></translation>
+        <translation>Chiave di configurazione &apos;%1&apos; errata in ConfigHandler. Si prega di segnalare questo come un bug.</translation>
     </message>
 </context>
 <context>
@@ -395,54 +399,56 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Risolvere gli errori di configurazione</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Devi risolvere tutti gli errori prima di continuare:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Ripristina</translation>
+        <translation>Ripristina</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina il valore predefinito.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation type="unfinished">Rimuovi</translation>
+        <translation>Rimuovi</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi questa impostazione.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcune scorciatoie da tastiera presentano conflitti.
+Ciò NON impedirà l&apos;avvio di flameshot.
+Si prega di risolverli manualmente nel file di configurazione.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>Risolvere tutto</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Risolvere tutti gli errori elencati.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="123"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Dettagli</translation>
     </message>
 </context>
 <context>
@@ -475,7 +481,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="122"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Risolvere</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
@@ -548,7 +554,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="672"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiato negli appunti.</translation>
+        <translation>URL copiato negli appunti.</translation>
     </message>
 </context>
 <context>
@@ -645,7 +651,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="262"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Impossibile connettersi tramite DBus</translation>
+        <translation>Impossibile connettersi tramite DBus</translation>
     </message>
 </context>
 <context>
@@ -856,12 +862,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="576"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation></translation>
+        <translation>Anti-alias dell&apos;immagine quando si esegue lo zoom dell&apos;immagine bloccata</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="578"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation></translation>
+        <translation>Dopo aver ingrandito l&apos;immagine bloccata, l&apos;immagine dovrebbe essere smussata o rimanere pixelata</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="589"/>
@@ -934,12 +940,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation></translation>
+        <translation>Conferma di caricamento</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation></translation>
+        <translation>Vuoi caricare questa acquisizione?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
@@ -989,42 +995,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Caricamento dell&apos;immagine</translation>
+        <translation>Caricamento Immagine</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copia URL</translation>
+        <translation>Copia URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation type="unfinished">Apri URL</translation>
+        <translation>Apri URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation type="unfinished">Elimina immagine</translation>
+        <translation>Elimina immagine</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Immagine negli Appunti.</translation>
+        <translation>Immagine negli Appunti.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Impossibile aprire l&apos;URL.</translation>
+        <translation>Impossibile aprire l&apos;URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiato negli appunti.</translation>
+        <translation>URL copiato negli appunti.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">Screenshot copiato negli appunti.</translation>
+        <translation>Screenshot copiato negli appunti.</translation>
     </message>
 </context>
 <context>
@@ -1032,12 +1038,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Uploader di immagini</translation>
+        <translation>Caricatore di immagini</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation></translation>
+        <translation>Carica la selezione</translation>
     </message>
 </context>
 <context>
@@ -1114,12 +1120,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation></translation>
+        <translation>Inverti</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation></translation>
+        <translation>Imposta l&apos;Inverter come strumento di pittura</translation>
     </message>
 </context>
 <context>
@@ -1292,7 +1298,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation>Directory esistente o nuovo file in cui salvare</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
@@ -1302,7 +1308,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Pin the capture to the screen</source>
-        <translation></translation>
+        <translation>Blocca l&apos;acquisizione sullo schermo</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="176"/>
@@ -1317,7 +1323,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="181"/>
         <source>Screenshot region to select</source>
-        <translation></translation>
+        <translation>Screenshot della regione da selezionare</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1327,7 +1333,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation></translation>
+        <translation>Accetta l&apos;acquisizione non appena viene effettuata una selezione</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1342,7 +1348,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation></translation>
+        <translation>Controllare la configurazione per errori</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -1372,22 +1378,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="217"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation></translation>
+        <translation>Definisci lo schermo da catturare (a partire da 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo non valido, deve essere un numero maggiore di 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation></translation>
+        <translation>Regione non valida, usa WxH+X+Y&apos; o &apos;tutto&apos; o &apos;schermo0/schermo1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation></translation>
+        <translation>Percorso non valido, deve essere una directory esistente o un nuovo file in una directory esistente</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1441,7 +1447,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/core/controller.cpp" line="650"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation></translation>
+        <translation>Schermata a schermo intero bloccata sullo schermo</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1492,7 +1498,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="194"/>
         <source>Path copied to clipboard as </source>
-        <translation></translation>
+        <translation>Percorso copiato negli appunti come </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1587,7 +1593,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation></translation>
+        <translation>Modifica le dimensioni dello strumento</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1630,7 +1636,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation></translation>
+        <translation>Salva lo screenshot in un file</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1683,7 +1689,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation></translation>
+        <translation>Flameshot deve essere riavviato per rendere effettive le modifiche.</translation>
     </message>
 </context>
 <context>
@@ -1726,7 +1732,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation></translation>
+        <translation>Dimensione strumento attivo: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
@@ -1775,7 +1781,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation></translation>
+        <translation>Mostra le dimensioni X e Y della selezione</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -1923,17 +1929,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation></translation>
+        <translation>Allinea a sinistra</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation></translation>
+        <translation>Allinea al centro</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation></translation>
+        <translation>Allinea a destra</translation>
     </message>
 </context>
 <context>
@@ -2059,7 +2065,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation></translation>
+        <translation>Scegli</translation>
     </message>
 </context>
 <context>
@@ -2067,7 +2073,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Senza nome</translation>
     </message>
 </context>
 <context>
@@ -2075,12 +2081,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Senza nome</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1 (%2 colori)</translation>
     </message>
 </context>
 <context>
@@ -2089,55 +2095,55 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation></translation>
+        <translation>Apri una nuova tavolozza da file</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation></translation>
+        <translation>Crea una nuova tavolozza</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation></translation>
+        <translation>Duplica la tavolozza corrente</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation></translation>
+        <translation>Elimina la tavolozza corrente</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation></translation>
+        <translation>Ripristina le modifiche alla tavolozza corrente</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation></translation>
+        <translation>Salva le modifiche alla tavolozza corrente</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation></translation>
+        <translation>Aggiungi un colore alla tavolozza</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation></translation>
+        <translation>Rimuovere il colore selezionato dalla tavolozza</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation></translation>
+        <translation>Nuova tavolozza</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
@@ -2148,29 +2154,30 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation></translation>
+        <translation>Tavolozze GIMP (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation></translation>
+        <translation>Immagine tavolozza (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation></translation>
+        <translation>Tutti i files (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation></translation>
+        <translation>Apri tavolozza</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation></translation>
+        <translation>Impossibile caricare il file della tavolozza
+%1</translation>
     </message>
 </context>
 <context>
@@ -2183,12 +2190,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation></translation>
+        <translation>Rimuovi colore</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation></translation>
+        <translation>Modifica colore...</translation>
     </message>
 </context>
 <context>
@@ -2196,7 +2203,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1 (%2 colori)</translation>
     </message>
 </context>
 <context>
@@ -2204,7 +2211,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation></translation>
+        <translation>Colore chiaro</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
