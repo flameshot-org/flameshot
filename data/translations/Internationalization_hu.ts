@@ -5,30 +5,30 @@
     <name>AbstractWidgetList</name>
     <message>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>AcceptTool</name>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -168,11 +168,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mouse Wheel</source>
@@ -180,7 +180,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -192,11 +192,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Exit</source>
@@ -204,11 +204,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -237,57 +237,64 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ColorDialog</name>
     <message>
         <source>Select Color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Saturation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hue</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>ColorGrabWidget</name>
     <message>
         <source>Accept color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Precisely select color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Toggle magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Cancel</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigErrorDetails</name>
+    <message>
+        <source>Configuration errors</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -295,14 +302,79 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ConfigHandler</name>
     <message>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The configuration contains an error. Falling back to default.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Unrecognized setting: &apos;%1&apos;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unrecognized shortcut name: &apos;%1&apos;.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bad value in &apos;%1&apos;. Expected: %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The configuration contains an error. Open configuration to resolve.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigResolver</name>
+    <message>
+        <source>Resolve configuration errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished">Visszaállítás</translation>
+    </message>
+    <message>
+        <source>Reset to the default value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove this setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some keyboard shortcuts have conflicts.
+This will NOT prevent flameshot from starting.
+Please solve them manually in the configuration file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolve all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolve all listed errors.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -330,6 +402,10 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Resolve</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -387,6 +463,10 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
         <source>Unable to close active modal widgets</source>
         <translation>Nem sikerült bezárni az aktív widgeteket</translation>
     </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
 </context>
 <context>
     <name>CopyTool</name>
@@ -404,7 +484,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Copy selection to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -486,7 +566,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>FlameshotDaemon</name>
     <message>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -704,35 +784,35 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Automatically close daemon when it is not needed</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Use large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Preferred save file extension:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Upload image without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -785,15 +865,15 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ImgUploadDialog</name>
     <message>
         <source>Upload Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Do you want to upload this capture?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Upload without confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -835,7 +915,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ImgUploaderBase</name>
     <message>
         <source>Upload image</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Uploading Image</source>
@@ -855,11 +935,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -878,7 +958,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Upload the selection</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1006,11 +1086,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>InvertTool</name>
     <message>
         <source>Invert</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Set Inverter as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1123,7 +1203,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation>URL másolva a vágólapra.</translation>
+        <translation type="vanished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Options</source>
@@ -1243,7 +1323,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
-        <translation>Érvénytelen késleltetés, 0-nál nagyobb értéknel kell lennie</translation>
+        <translation type="vanished">Érvénytelen késleltetés, 0-nál nagyobb értéknel kell lennie</translation>
     </message>
     <message>
         <source>Invalid screen number, it must be non negative</source>
@@ -1363,50 +1443,54 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Change the tool&apos;s size</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Full screen screenshot pinned to screen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Existing directory or new file to save to</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Pin the capture to the screen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Upload screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Screenshot region to select</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Accept capture as soon as a selection is made</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Check the configuration for errors</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Path copied to clipboard as </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Invalid delay, it must be a number greater than 0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1444,7 +1528,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Save screenshot to a file</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1485,7 +1569,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1527,11 +1611,11 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Active tool size: </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Active Color: </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1568,7 +1652,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Show X and Y dimensions of the selection</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1693,15 +1777,15 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Left Align</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Center Align</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Right Align</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1806,122 +1890,122 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <name>color_widgets::ColorDialog</name>
     <message>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>color_widgets::ColorPalette</name>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>color_widgets::ColorPaletteModel</name>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>color_widgets::ColorPaletteWidget</name>
     <message>
         <source>Open a new palette from file</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Create a new palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Duplicate the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Delete the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Revert changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Save changes to the current palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Add a color to the palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Remove the selected color from the palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>New Palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Palette Image (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Open Palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Failed to load the palette file
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>color_widgets::GradientEditor</name>
     <message>
         <source>Add Color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Remove Color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Edit Color...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>color_widgets::GradientListModel</name>
     <message>
         <source>%1 (%2 colors)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>color_widgets::Swatch</name>
     <message>
         <source>Clear Color</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>%1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

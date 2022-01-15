@@ -53,7 +53,9 @@ Requires: libQt5Core5 >= 5.9.0
 Requires: libqt5-qttools >= 5.9.0
 Requires: libQt5Svg5 >= 5.9.0
 %endif
-
+Requires: xdg-desktop-portal%{?_isa}
+Requires: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
+Requires: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace%{?_isa})
 
 %description
 Powerful and simple to use screenshot software with built-in
@@ -114,6 +116,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %endif
 %{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/zsh/site-functions/_%{name}
+%{_datadir}/fish/vendor_completions.d/%{name}.fish
 %{_datadir}/dbus-1/interfaces/org.flameshot.Flameshot.xml
 %{_datadir}/dbus-1/services/org.flameshot.Flameshot.service
 %{_datadir}/icons/hicolor/*/apps/*.png
@@ -121,7 +124,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Fri Dec 24 2021 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
+* Fri Jan 14 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
 - Update for 11.0 release.
 
 * Sun Aug 29 2021 Zetao Yang <vitzys@outlook.com> - 0.10.1-2
