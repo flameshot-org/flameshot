@@ -34,7 +34,7 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation>Принять захват</translation>
+        <translation>Подтвердить захват</translation>
     </message>
 </context>
 <context>
@@ -581,7 +581,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="24"/>
         <source>Copy</source>
-        <translation>Скопировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
@@ -670,7 +670,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="262"/>
         <source>Unable to connect via DBus</source>
-        <translation>Не удалось подключиться через DBus</translation>
+        <translation>Не удалось подключиться по DBus</translation>
     </message>
 </context>
 <context>
@@ -899,7 +899,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="288"/>
         <source>Configuration File</source>
-        <translation>Файл настроек</translation>
+        <translation>Файл конфигурации</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="293"/>
@@ -1591,7 +1591,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="135"/>
         <source>Unable to connect via DBus</source>
-        <translation>Не удалось подключиться через DBus</translation>
+        <translation>Не удалось подключиться по DBus</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
@@ -2385,7 +2385,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="40"/>
         <source>Opacity of area outside selection:</source>
-        <translation>Затенённость области вне выделенной:</translation>
+        <translation>Затенённость области вне выделения:</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="65"/>

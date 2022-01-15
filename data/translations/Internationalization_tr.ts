@@ -352,7 +352,7 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma hataları</translation>
     </message>
 </context>
 <context>
@@ -361,25 +361,29 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="547"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tanınmayan ayar: &apos;%1&apos;
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="553"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tanınmayan kısayol adı: &apos;%1&apos;.
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="594"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kısayol çakışması: &apos;%1&apos; ve &apos;%2&apos; aynı kısayola sahip: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="633"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; içinde hatalı değer. Beklenen: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="682"/>
@@ -389,12 +393,12 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma bir hata içeriyor. Çözümlemek için yapılandırmayı açın.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="759"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation></translation>
+        <translation>ConfigHandler&apos;da hatalı yapılandırma anahtarı &apos;%1&apos;. Lütfen bunu bir hata olarak bildirin.</translation>
     </message>
 </context>
 <context>
@@ -402,54 +406,56 @@ Yan paneli açmak için Boşluk tuşuna basın.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma hatalarını çöz</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Devam etmeden önce tüm hataları çözmelisiniz:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Sıfırla</translation>
+        <translation>Sıfırla</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Öntanımlı değere sıfırla.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation type="unfinished">Kaldır</translation>
+        <translation>Kaldır</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu ayarı kaldır.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bazı klavye kısayollarında çakışmalar var.
+Bu, flameshot&apos;ın başlamasını ENGELLEMEYECEKTİR.
+Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tümünü çöz</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Listelenen tüm hataları çöz.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="123"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayrıntılar</translation>
     </message>
 </context>
 <context>
@@ -482,7 +488,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="122"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Çöz</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
@@ -550,7 +556,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="672"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL panoya kopyalandı.</translation>
+        <translation>URL panoya kopyalandı.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -656,7 +662,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="262"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">DBus ile bağlanılamadı</translation>
+        <translation>DBus ile bağlanılamıyor</translation>
     </message>
 </context>
 <context>
@@ -838,18 +844,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation></translation>
+        <translation>Aynı anda birden fazla flameshot grafiksel arayüz örneğine izin ver</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation></translation>
+        <translation>Bu, örneğin flameshot&apos;ın kendisinin ekran görüntülerini almanıza olanak tanır.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation></translation>
+        <translation>Gerekli olmadığında arka plan programını otomatik olarak kapat</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
@@ -871,7 +877,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Use large predefined color palette</source>
-        <translation></translation>
+        <translation>Önceden tanımlanmış büyük renk paleti kullan</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
@@ -886,12 +892,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="406"/>
         <source>Save image after copy</source>
-        <translation>Kopyaladıktan sonra görüntüyü kaydet</translation>
+        <translation>Kopyaladıktan sonra resmi kaydet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="407"/>
         <source>Save image file after copying it</source>
-        <translation>Görüntü dosyasını kopyaladıktan sonra kaydedin</translation>
+        <translation>Resim dosyasını kopyaladıktan sonra kaydedin</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="414"/>
@@ -911,7 +917,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="450"/>
         <source>Preferred save file extension:</source>
-        <translation></translation>
+        <translation>Tercih edilen kaydetme dosyası uzantısı:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
@@ -927,7 +933,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="533"/>
         <location filename="../../src/config/generalconf.cpp" line="535"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Pano için JPG biçimini kullan (PNG varsayılanı)</translation>
+        <translation>Pano için JPG biçimini kullan (öntanımlı: PNG)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="565"/>
@@ -1079,32 +1085,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">Resim Yükleniyor</translation>
+        <translation>Resim Karşıya Yükleniyor</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation type="unfinished">URL Kopyala</translation>
+        <translation>URL Kopyala</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation type="unfinished">URL Aç</translation>
+        <translation>URL Aç</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation type="unfinished">Resmi sil</translation>
+        <translation>Resmi sil</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Resim Pano&apos;ya.</translation>
+        <translation>Resim Pano&apos;ya.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">URL açılamıyor.</translation>
+        <translation>URL açılamıyor.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
@@ -1122,7 +1128,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Resim Yükleme Aracı</translation>
+        <translation>Resim Karşıya Yükleme Aracı</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
@@ -1418,7 +1424,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="135"/>
         <source>Unable to connect via DBus</source>
-        <translation>DBus ile bağlanılamadı</translation>
+        <translation>DBus ile bağlanılamıyor</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
@@ -1547,7 +1553,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçersiz gecikme, 0&apos;dan büyük bir sayı olmalıdır</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
@@ -1566,7 +1572,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>default: screen containing the cursor</source>
-        <translation>varsayılan: imleci içeren ekran</translation>
+        <translation>öntanımlı: imleci içeren ekran</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
@@ -1655,7 +1661,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="335"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Varsayılan olarak arka planda Flameshot çalıştırır ve yapılandırma için bir tepsi simgesi ekler.</translation>
+        <translation>Öntanımlı olarak arka planda Flameshot çalıştırır ve yapılandırma için bir tepsi simgesi ekler.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="564"/>
