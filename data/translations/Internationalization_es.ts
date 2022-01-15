@@ -11,17 +11,17 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation></translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation></translation>
+        <translation>Bajar</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation></translation>
+        <translation>Eliminar</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Establece la Flecha como herramienta de dibujo</translation>
+        <translation>Establecer la Flecha como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -153,7 +153,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Area:</source>
-        <translation>Area:</translation>
+        <translation>Área:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
@@ -251,7 +251,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="75"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Agregar una burbuja de contador de incremento automático</translation>
+        <translation>Añadir una burbuja contadora de incremento automático</translation>
     </message>
 </context>
 <context>
@@ -264,7 +264,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Establece el Círculo como herramienta de dibujo</translation>
+        <translation>Establecer el Círculo como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -273,7 +273,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="14"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation></translation>
+        <translation>Seleccionar Color</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
@@ -329,12 +329,12 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation></translation>
+        <translation>Aceptar color</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation></translation>
+        <translation>Seleccionar color precisamente</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -847,7 +847,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation></translation>
+        <translation>Esto te permite tomar capturas de pantalla de Flameshot mismo, por ejemplo.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
@@ -895,7 +895,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="407"/>
         <source>Save image file after copying it</source>
-        <translation>Save image file after copying it</translation>
+        <translation>Guardar archivo de imagen luego de copiarlo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="414"/>
@@ -910,17 +910,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="438"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Use fixed path for screenshots to save</translation>
+        <translation>Utiliza ruta fija para guardar las capturas de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="450"/>
         <source>Preferred save file extension:</source>
-        <translation></translation>
+        <translation>Extensión de archivo preferida al guardar:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Latest Uploads Max Size</translation>
+        <translation>Tamaño Máximo de Últimas Subidas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="507"/>
@@ -931,7 +931,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="533"/>
         <location filename="../../src/config/generalconf.cpp" line="535"/>
         <source>Use JPG format for clipboard (PNG default)</source>
-        <translation>Utilice el formato JPG para el portapapeles (PNG por defecto)</translation>
+        <translation>Utilizar el formato JPG para el portapapeles (PNG por defecto)</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="565"/>
@@ -947,13 +947,13 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="578"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation></translation>
+        <translation>Después de ampliar la imagen fijada, ¿la imagen debe suavizarse o permanecer pixelada?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="589"/>
         <location filename="../../src/config/generalconf.cpp" line="591"/>
         <source>Upload image without confirmation</source>
-        <translation></translation>
+        <translation>Subir imagen sin confirmación</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="607"/>
@@ -1001,7 +1001,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="169"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>¿Está seguro de que desea eliminar una captura de pantalla de las últimas cargas y el servidor?</translation>
+        <translation>¿Estás seguro de que deseas eliminar una captura de pantalla de las últimas subidas y el servidor?</translation>
     </message>
 </context>
 <context>
@@ -1024,18 +1024,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation></translation>
+        <translation>Confirmación de Subida</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation></translation>
+        <translation>¿Deseas subir esta captura?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation></translation>
+        <translation>Subir sin confirmación</translation>
     </message>
 </context>
 <context>
@@ -1108,7 +1108,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation></translation>
+        <translation>No se puede abrir la URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
@@ -1126,12 +1126,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Subir Imagen</translation>
+        <translation>Cargador de Imágenes</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation></translation>
+        <translation>Subir la selección</translation>
     </message>
 </context>
 <context>
@@ -1268,12 +1268,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation></translation>
+        <translation>Invertir</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation></translation>
+        <translation>Establecer el Inversor como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -1286,7 +1286,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Establece la Línea como herramienta de dibujo</translation>
+        <translation>Establecer la Línea como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -1299,7 +1299,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Establece el Marcador como herramienta de dibujo</translation>
+        <translation>Establecer el Marcador como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -1307,12 +1307,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="23"/>
         <source>Move</source>
-        <translation>Mover Selección</translation>
+        <translation>Mover</translation>
     </message>
     <message>
         <location filename="../../src/tools/move/movetool.cpp" line="33"/>
         <source>Move the selection area</source>
-        <translation>Mueve la selección</translation>
+        <translation>Mover el área seleccionada</translation>
     </message>
 </context>
 <context>
@@ -1325,7 +1325,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Establece el Lápiz como herramienta de dibujo</translation>
+        <translation>Establecer el Lápiz como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -1338,7 +1338,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Fija la imagen sobre el escritorio</translation>
+        <translation>Fijar imagen en el escritorio</translation>
     </message>
 </context>
 <context>
@@ -1351,7 +1351,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Establecer Pixelado como herramienta de pintura</translation>
+        <translation>Establecer Pixelar como la herramienta de pintura</translation>
     </message>
 </context>
 <context>
@@ -1359,12 +1359,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Failed to register %1. Error: %2</translation>
+        <translation>Falla al registrar %1. Error: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation>Failed to unregister %1. Error: %2</translation>
+        <translation>Falla al desregistrar %1. Error: %2</translation>
     </message>
 </context>
 <context>
@@ -1409,7 +1409,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="194"/>
         <source>Path copied to clipboard as </source>
-        <translation></translation>
+        <translation>Ruta copiada al portapapeles como </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1431,37 +1431,37 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="151"/>
         <source>Powerful yet simple to use screenshot software.</source>
-        <translation>Powerful yet simple to use screenshot software.</translation>
+        <translation>Software de captura de pantalla poderoso pero sencillo de usar.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="152"/>
         <source>See</source>
-        <translation>See</translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="155"/>
         <source>Capture the entire desktop.</source>
-        <translation>Capture the entire desktop.</translation>
+        <translation>Capturar el escritorio completo.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="157"/>
         <source>Open the capture launcher.</source>
-        <translation>Open the capture launcher.</translation>
+        <translation>Abrir el lanzador de capturas.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="160"/>
         <source>Start a manual capture in GUI mode.</source>
-        <translation>Start a manual capture in GUI mode.</translation>
+        <translation>Iniciar una captura manual en el modo GUI.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="162"/>
         <source>Configure</source>
-        <translation>Configure</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="164"/>
         <source>Capture a single screen.</source>
-        <translation>Capture a single screen.</translation>
+        <translation>Capturar una sola pantalla.</translation>
     </message>
     <message>
         <source>Path where the capture will be saved</source>
@@ -1470,17 +1470,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation>Directorio existente o nuevo archivo en el que guardar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
         <source>Save the capture to the clipboard</source>
-        <translation>Save the capture to the clipboard</translation>
+        <translation>Guarda la captura en el portapapeles</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Pin the capture to the screen</source>
-        <translation></translation>
+        <translation>Fija la captura a la pantalla</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="176"/>
@@ -1758,7 +1758,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Establece el Rectángulo como herramienta de dibujo</translation>
+        <translation>Establecer el Rectángulo como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -1809,7 +1809,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Establece la Selección como herramienta de dibujo</translation>
+        <translation>Establecer Selección como la herramienta de dibujo</translation>
     </message>
 </context>
 <context>
@@ -2285,7 +2285,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation></translation>
+        <translation>Eliminar el color seleccionado de la paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
@@ -2337,7 +2337,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation></translation>
+        <translation>Eliminar color</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
