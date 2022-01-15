@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation></translation>
+        <translation>接受</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation></translation>
+        <translation>接受捕获的截图</translation>
     </message>
 </context>
 <context>
@@ -197,7 +197,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Show color picker</source>
-        <translation type="unfinished">显示颜色选择器</translation>
+        <translation>显示颜色选择器</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
@@ -330,7 +330,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation></translation>
+        <translation>接受颜色</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -924,7 +924,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Use large predefined color palette</source>
-        <translation></translation>
+        <translation>使用大型预定义调色盘</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
@@ -991,12 +991,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="576"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation></translation>
+        <translation>缩放贴图时应用反锯齿</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="578"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation></translation>
+        <translation>对贴图进行缩放后，对图像进行平滑处理还是维持像素化状态</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="589"/>
@@ -1069,18 +1069,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation></translation>
+        <translation>上传确认</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation></translation>
+        <translation>您是否想要上传该捕获图像？</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation></translation>
+        <translation>上传无需确认</translation>
     </message>
 </context>
 <context>
@@ -1124,42 +1124,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation type="unfinished">正在上传</translation>
+        <translation>正在上传图像</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation type="unfinished">复制链接</translation>
+        <translation>复制链接</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation type="unfinished">打开链接</translation>
+        <translation>打开链接</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation type="unfinished">删除图像</translation>
+        <translation>删除图像</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">保存文件到剪贴板。</translation>
+        <translation>图像到剪贴板。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">无法打开此链接。</translation>
+        <translation>无法打开链接。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>URL copied to clipboard.</source>
-        <translation></translation>
+        <translation>链接已复制到剪贴板。</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation type="unfinished">截图复制到剪贴板。</translation>
+        <translation>截图已复制到剪贴板。</translation>
     </message>
 </context>
 <context>
@@ -1167,12 +1167,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">上传图片</translation>
+        <translation>图像上传工具</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation></translation>
+        <translation>上传选中区域</translation>
     </message>
 </context>
 <context>
@@ -1313,12 +1313,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation></translation>
+        <translation>反色</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation></translation>
+        <translation>将反色设置为绘画工具</translation>
     </message>
 </context>
 <context>
@@ -1331,7 +1331,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>将直线线设置为绘画工具</translation>
+        <translation>将直线设置为绘画工具</translation>
     </message>
 </context>
 <context>
@@ -1454,7 +1454,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="194"/>
         <source>Path copied to clipboard as </source>
-        <translation></translation>
+        <translation>路径已复制到剪贴板 </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1515,7 +1515,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation>要保存的目标目录路径或新文件</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
@@ -1525,12 +1525,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Pin the capture to the screen</source>
-        <translation></translation>
+        <translation>将捕获图像作为贴图放置在屏幕上</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="176"/>
         <source>Upload screenshot</source>
-        <translation></translation>
+        <translation>上传截图</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1540,7 +1540,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="181"/>
         <source>Screenshot region to select</source>
-        <translation></translation>
+        <translation>要选择的屏幕区域</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1550,7 +1550,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation></translation>
+        <translation>在选中选区后立刻接受捕获图像</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1565,7 +1565,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation></translation>
+        <translation>检查配置文件错误</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -1595,7 +1595,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="217"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation></translation>
+        <translation>定义要捕获的屏幕（从 0 开始）</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
@@ -1605,12 +1605,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation></translation>
+        <translation>无效的区域，请使用“WxH+X+Y”或“all”或“screen0/screen1/...”。</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation></translation>
+        <translation>无效的路径，必须为已有目录或者已有目录中的一个新文件</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1674,7 +1674,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="650"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation></translation>
+        <translation>已将全屏截图作为贴图固定到屏幕</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1790,7 +1790,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation></translation>
+        <translation>更改工具大小</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1833,7 +1833,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation></translation>
+        <translation>保存屏幕截图到文件</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1886,7 +1886,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation></translation>
+        <translation>火焰截图必须重新启动以使修改生效。</translation>
     </message>
 </context>
 <context>
@@ -1929,12 +1929,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation></translation>
+        <translation>当前工具大小: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
         <source>Active Color: </source>
-        <translation></translation>
+        <translation>当前颜色: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="69"/>
@@ -1978,7 +1978,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation></translation>
+        <translation>显示选区的横纵尺寸</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2098,7 +2098,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/systemnotification.cpp" line="30"/>
         <source>Flameshot Info</source>
-        <translation>Flameshot 消息</translation>
+        <translation>火焰截图消息</translation>
     </message>
 </context>
 <context>
@@ -2126,17 +2126,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation></translation>
+        <translation>左对齐</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation></translation>
+        <translation>中心对齐</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation></translation>
+        <translation>右对齐</translation>
     </message>
 </context>
 <context>
@@ -2262,7 +2262,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation></translation>
+        <translation>选取</translation>
     </message>
 </context>
 <context>
@@ -2283,7 +2283,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1（%2 个颜色）</translation>
     </message>
 </context>
 <context>
@@ -2292,55 +2292,55 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation></translation>
+        <translation>从文件打开新调色板</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation></translation>
+        <translation>创建新调色板</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation></translation>
+        <translation>制作当前调色板的副本</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation></translation>
+        <translation>删除当前调色板</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation></translation>
+        <translation>将修改回退到当前调色板</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation></translation>
+        <translation>将修改保存到当前调色板</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation></translation>
+        <translation>向调色板添加颜色</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation></translation>
+        <translation>从调色板移除选中的颜色</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation></translation>
+        <translation>新建调色板</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
@@ -2351,17 +2351,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation></translation>
+        <translation>GIMP 调色板 (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation></translation>
+        <translation>调色板图像 (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation></translation>
+        <translation>所有文件 (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
@@ -2373,7 +2373,8 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation></translation>
+        <translation>加载调色板文件失败
+%1</translation>
     </message>
 </context>
 <context>
@@ -2399,7 +2400,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1（%2 个颜色）</translation>
     </message>
 </context>
 <context>
@@ -2407,7 +2408,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation></translation>
+        <translation>清除颜色</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
