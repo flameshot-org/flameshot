@@ -131,7 +131,10 @@ void SystemTray::initMenu()
 
     // recent screenshots
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
-    connect(recentAction, SIGNAL(triggered()), this, SLOT(history()));
+    connect(recentAction,
+            &QAction::triggered,
+            Controller::instance(),
+            &Controller::history);
 
     m_menu->addAction(captureAction);
     m_menu->addAction(launcherAction);
