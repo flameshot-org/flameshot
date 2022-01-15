@@ -21,6 +21,7 @@ public:
     //   When adding new types, don't forget to update:
     //   - CaptureToolButton::iterableButtonTypes
     //   - CaptureToolButton::buttonTypeOrder
+    //   - ConfigHandler::recognisedShortcut
     enum Type
     {
         NONE = -1,
@@ -48,6 +49,7 @@ public:
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
+        TYPE_CURSOR = 24,
     };
     Q_ENUM(Type);
 

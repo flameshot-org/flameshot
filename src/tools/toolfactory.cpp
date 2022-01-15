@@ -6,6 +6,7 @@
 #include "arrow/arrowtool.h"
 #include "circle/circletool.h"
 #include "circlecount/circlecounttool.h"
+#include "cursor/cursor.h"
 #include "copy/copytool.h"
 #include "exit/exittool.h"
 #include "imgupload/imguploadertool.h"
@@ -64,6 +65,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SIZEDECREASE, SizeDecreaseTool);
         if_TYPE_return_TOOL(TYPE_INVERT, InvertTool);
         if_TYPE_return_TOOL(TYPE_ACCEPT, AcceptTool);
+        if_TYPE_return_TOOL(TYPE_CURSOR, CursorTool);
         default:
             return nullptr;
     }
