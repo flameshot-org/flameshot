@@ -352,7 +352,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибки конфигурации</translation>
     </message>
 </context>
 <context>
@@ -361,25 +361,29 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/confighandler.cpp" line="547"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная настройка: «%1»
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="553"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестное название сочетания клавиш: «%1».
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="594"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Конфликт сочетания клавиш: «%1» и «%2» совпадают: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="633"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Неверное значение в «%1». Ожидалось: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="682"/>
@@ -389,7 +393,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация содержит ошибку. Откройте конфигурацию для решения.</translation>
     </message>
     <message>
         <source>The configuration contains an error. Falling back to default.</source>
@@ -406,54 +410,56 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Устраните ошибки конфигурации</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вы должны устранить все ошибки, прежде чем продолжить:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс к значению по умолчанию.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить эту настройку.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Некоторые сочетания клавиш конфликтуют.
+Это НЕ помешает запуску flameshot.
+Пожалуйста, исправьте их вручную в файле конфигурации.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>Устранить все</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Устранить все перечисленные ошибки.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="123"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Подробности</translation>
     </message>
 </context>
 <context>
@@ -486,7 +492,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="122"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Решить</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
@@ -558,7 +564,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="672"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">Ссылка скопирована в буфер обмена.</translation>
+        <translation>Ссылка скопирована в буфер обмена.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -1484,7 +1490,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Выбрать «Карандаш» инструментом для рисования</translation>
+        <translation>Выбрать «Карандаш» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1510,7 +1516,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Выбрать «Размытие» инструментом для рисования</translation>
+        <translation>Выбрать «Размытие» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1714,7 +1720,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимая задержка, должно быть больше 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
@@ -1923,7 +1929,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Выбрать «Прямоугольник» инструментом для рисования</translation>
+        <translation>Выбрать «Прямоугольник» инструментом рисования</translation>
     </message>
 </context>
 <context>
@@ -1974,7 +1980,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Выбрать «Прямоугольное выделение» инструментом для рисования</translation>
+        <translation>Выбрать «Прямоугольное выделение» инструментом рисования</translation>
     </message>
 </context>
 <context>
