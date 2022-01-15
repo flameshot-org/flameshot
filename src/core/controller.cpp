@@ -18,32 +18,28 @@
 #include "src/tools/imgupload/storages/imguploaderbase.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include "src/utils/history.h"
 #include "src/utils/screengrabber.h"
-#include "src/widgets/capture/capturetoolbutton.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/historywidget.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
+#include "src/widgets/systemtray.h"
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
 #include <QDebug>
 #include <QDesktopServices>
-#include <QDesktopWidget>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QMenu>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QOperatingSystemVersion>
-#include <QSystemTrayIcon>
 #include <QThread>
+#include <QTimer>
 #include <QVersionNumber>
 
 #ifdef Q_OS_WIN
@@ -51,7 +47,6 @@
 #endif
 
 #if defined(Q_OS_MACOS)
-#include <QOperatingSystemVersion>
 #include <QScreen>
 #endif
 

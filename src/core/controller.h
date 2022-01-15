@@ -4,19 +4,14 @@
 #pragma once
 
 #include "src/core/capturerequest.h"
-#include "src/widgets/systemtray.h"
-#include <QMap>
-#include <QMenu>
 #include <QObject>
-#include <QPixmap>
 #include <QPointer>
-#include <QTimer>
 #include <functional>
 
+class SystemTray;
 class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
-class QSystemTrayIcon;
 class CaptureLauncher;
 class HistoryWidget;
 class QNetworkAccessManager;
