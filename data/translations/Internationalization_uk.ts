@@ -352,7 +352,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилки конфігурації</translation>
     </message>
 </context>
 <context>
@@ -361,25 +361,29 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/confighandler.cpp" line="547"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Нерозпізнане налаштування: «%1»
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="553"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Нерозпізнана назва комбінації клавіш: «%1».
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="594"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Конфлікт комбінацій клавіш: «%1» і «%2» мають однакову комбінацію клавіш: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="633"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильне значення в «%1». Очікувалося: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="682"/>
@@ -389,7 +393,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфігурація містить помилку. Відкрийте конфігурацію для розвʼязання.</translation>
     </message>
     <message>
         <source>The configuration contains an error. Falling back to default.</source>
@@ -406,54 +410,56 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Усуньте помилки конфігурації</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ви повинні усунути всі помилки, перш ніж продовжити:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Скинути</translation>
+        <translation>Скинути</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити типові значення.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation type="unfinished">Вилучити</translation>
+        <translation>Вилучити</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вилучити це налаштування.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деякі комбінації клавіш конфліктують.
+Це НЕ заважатиме запуску flameshot.
+Виправте їх вручну у файлі конфігурації.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>Виправити всі</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Виправити всі перераховані помилки.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="123"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Подробиці</translation>
     </message>
 </context>
 <context>
@@ -486,7 +492,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="122"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Виправити</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
@@ -558,7 +564,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="672"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>URL-адресу скопійовано у буфер обміну.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -1714,7 +1720,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Неприпустима затримка, вона має бути числом більшим за 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
