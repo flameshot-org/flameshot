@@ -155,8 +155,7 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
 #endif
 
       { CaptureTool::TYPE_SIZEINCREASE, 22 },
-      { CaptureTool::TYPE_SIZEDECREASE, 23 },
-      { CaptureTool::TYPE_CURSOR, 24 },
+      { CaptureTool::TYPE_SIZEDECREASE, 23 }, { CaptureTool::TYPE_CURSOR, 24 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)

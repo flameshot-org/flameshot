@@ -1385,8 +1385,7 @@ void CaptureWidget::updateCursor()
     if (m_colorPicker && m_colorPicker->isVisible()) {
         setCursor(Qt::ArrowCursor);
     } else if (type != CaptureTool::TYPE_MOVESELECTION) {
-        if(type == CaptureTool::TYPE_CURSOR)
-        {
+        if (type == CaptureTool::TYPE_CURSOR) {
             setCursor(Qt::ArrowCursor);
             return;
         }

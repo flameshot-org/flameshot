@@ -2,10 +2,9 @@
 #include "colorutils.h"
 #include <QPainter>
 
-namespace
-{
-    static constexpr int PADDING_VALUE = 2;
-    static constexpr int THICKNESS_OFFSET = 8;
+namespace {
+static constexpr int PADDING_VALUE = 2;
+static constexpr int THICKNESS_OFFSET = 8;
 }
 
 CursorTool::CursorTool(QObject* parent)
@@ -27,10 +26,7 @@ QRect CursorTool::boundingRect() const
 {
     const int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
     const QPoint first = points().first;
-    return QRect(first.x(),
-                 first.y(),
-                 bubble_size * 2,
-                 bubble_size * 2);
+    return QRect(first.x(), first.y(), bubble_size * 2, bubble_size * 2);
 }
 
 QString CursorTool::name() const
