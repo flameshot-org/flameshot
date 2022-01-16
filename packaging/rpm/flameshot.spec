@@ -53,9 +53,10 @@ Requires: libQt5Core5 >= 5.9.0
 Requires: libqt5-qttools >= 5.9.0
 Requires: libQt5Svg5 >= 5.9.0
 %endif
-Requires: xdg-desktop-portal%{?_isa}
-Requires: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
-Requires: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace%{?_isa})
+Recommends: xdg-desktop-portal%{?_isa}
+Recommends: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
+Recommends: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace-wayland%{?_isa})
+Recommends: (xdg-desktop-portal-wlr%{?_isa} if wlroots%{?_isa})
 
 %description
 Powerful and simple to use screenshot software with built-in
