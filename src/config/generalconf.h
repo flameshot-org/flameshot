@@ -67,7 +67,6 @@ private:
     void initUseJpgForClipboard();
     void initUploadWithoutConfirmation();
     void initPredefinedColorPaletteLarge();
-    void initIncludeCursor();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -101,5 +100,4 @@ private:
     QSpinBox* m_undoLimit;
     QComboBox* m_setSaveAsFileExtension;
     QCheckBox* m_predefinedColorPaletteLarge;
-    QCheckBox* m_includeCursor;
 };

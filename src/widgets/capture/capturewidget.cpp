@@ -1381,15 +1381,20 @@ void CaptureWidget::updateSizeIndicator()
 
 void CaptureWidget::updateCursor()
 {
+    const auto type = activeButtonToolType();
     if (m_colorPicker && m_colorPicker->isVisible()) {
         setCursor(Qt::ArrowCursor);
-    } else if (m_activeButton != nullptr &&
-               activeButtonToolType() != CaptureTool::TYPE_MOVESELECTION) {
+    } else if (type != CaptureTool::TYPE_MOVESELECTION) {
+        if(type == CaptureTool::TYPE_CURSOR)
+        {
+            setCursor(Qt::ArrowCursor);
+            return;
+        }
         setCursor(Qt::CrossCursor);
     } else if (m_selection->getMouseSide(mapFromGlobal(QCursor::pos())) !=
                SelectionWidget::NO_SIDE) {
         setCursor(m_selection->cursor());
-    } else if (activeButtonToolType() == CaptureTool::TYPE_MOVESELECTION) {
+    } else if (type == CaptureTool::TYPE_MOVESELECTION) {
         setCursor(Qt::OpenHandCursor);
     } else {
         setCursor(Qt::CrossCursor);

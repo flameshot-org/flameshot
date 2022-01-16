@@ -1,12 +1,18 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+
 #include "cursor.h"
 #include "colorutils.h"
-
 #include <QPainter>
-#include <QCursor>
-#include <abstractlogger.h>
+
+namespace
+{
+    static constexpr int PADDING_VALUE = 2;
+    static constexpr int THICKNESS_OFFSET = 8;
+}
 
 CursorTool::CursorTool(QObject* parent)
-  : CaptureTool(parent)
+  : AbstractTwoPointTool(parent)
 {}
 
 QIcon CursorTool::icon(const QColor& background, bool inEditor) const
@@ -27,14 +33,22 @@ bool CursorTool::isValid() const
 
 QRect CursorTool::mousePreviewRect(const CaptureContext& context) const
 {
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-    return {};
+    int width = (context.toolSize + THICKNESS_OFFSET) * 2;
+    QRect rect(0, 0, width, width);
+    rect.moveCenter(context.mousePos);
+    return rect;
 }
+
+#include <QCursor>
 
 QRect CursorTool::boundingRect() const
 {
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-    return QRect(QCursor::pos(), QPoint(24, 24));
+    const int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
+    const QPoint first = points().first;
+    return QRect(first.x(),
+                 first.y(),
+                 bubble_size * 2,
+                 bubble_size * 2);
 }
 
 QString CursorTool::name() const
@@ -48,14 +62,14 @@ CaptureTool::Type CursorTool::type() const
 }
 
 void CursorTool::copyParams(const CursorTool* from,
-                            CursorTool* to)
+                                 CursorTool* to)
 {
-    CaptureTool::copyParams(from, to);
+    AbstractTwoPointTool::copyParams(from, to);
 }
 
 QString CursorTool::description() const
 {
-    return tr("Includes the mouse cursor into the screenshot");
+    return tr("Include the mouse cursor into the screenshot");
 }
 
 CaptureTool* CursorTool::copy(QObject* parent)
@@ -67,60 +81,24 @@ CaptureTool* CursorTool::copy(QObject* parent)
 
 void CursorTool::process(QPainter& painter, const QPixmap& pixmap)
 {
-    Q_UNUSED(painter)
-    Q_UNUSED(pixmap)
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
+    Q_UNUSED(pixmap);
+    const QImage img(":/img/app/left_ptr.svg");
+    painter.drawImage(boundingRect(), img);
 }
 
 void CursorTool::paintMousePreview(QPainter& painter,
                                    const CaptureContext& context)
 {
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
+    Q_UNUSED(painter);
+    Q_UNUSED(context);
 }
 
 void CursorTool::drawStart(const CaptureContext& context)
 {
-    Q_UNUSED(context);
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
+    AbstractTwoPointTool::drawStart(context);
 }
 
-bool CursorTool::closeOnButtonPressed() const
+void CursorTool::pressed(CaptureContext& context)
 {
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-    return false;
-}
-
-bool CursorTool::isSelectable() const
-{
-    return true;
-}
-
-bool CursorTool::showMousePreview() const
-{
-    return false;
-}
-
-void CursorTool::drawEnd(const QPoint & p)
-{
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-}
-
-void CursorTool::drawMove(const QPoint & p)
-{
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-}
-
-void CursorTool::pressed(CaptureContext & context)
-{
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-}
-
-void CursorTool::onColorChanged(const QColor & c)
-{
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
-}
-
-void CursorTool::onSizeChanged(int size)
-{
-    AbstractLogger::info() << __PRETTY_FUNCTION__;
+    Q_UNUSED(context)
 }

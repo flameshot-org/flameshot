@@ -1,8 +1,8 @@
 #pragma once
 
-#include "capturetool.h"
+#include <abstracttwopointtool.h>
 
-class CursorTool : public CaptureTool
+class CursorTool : public AbstractTwoPointTool
 {
     Q_OBJECT
 public:
@@ -28,16 +28,8 @@ protected:
 
 public slots:
     void drawStart(const CaptureContext& context) override;
+    void pressed(CaptureContext& context) override;
 
-public:
-    bool closeOnButtonPressed() const override;
-    bool isSelectable() const override;
-    bool showMousePreview() const override;
-
-public slots:
-    void drawEnd(const QPoint & p) override;
-    void drawMove(const QPoint & p) override;
-    void pressed(CaptureContext & context) override;
-    void onColorChanged(const QColor & c) override;
-    void onSizeChanged(int size) override;
+private:
+    QString m_tempString;
 };

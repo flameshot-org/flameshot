@@ -54,7 +54,6 @@ GeneralConf::GeneralConf(QWidget* parent)
     initAutoCloseIdleDaemon();
 #endif
     initPredefinedColorPaletteLarge();
-    initIncludeCursor();
 
     m_layout->addStretch();
 
@@ -89,7 +88,6 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
     m_undoLimit->setValue(config.undoLimit());
-    m_includeCursor->setChecked(config.includeCursor());
 
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
@@ -387,19 +385,6 @@ void GeneralConf::initPredefinedColorPaletteLarge()
       m_predefinedColorPaletteLarge, &QCheckBox::clicked, [](bool checked) {
           ConfigHandler().setPredefinedColorPaletteLarge(checked);
       });
-}
-
-void GeneralConf::initIncludeCursor()
-{
-    m_includeCursor =
-      new QCheckBox(tr("Include the mouse cursor into the screenshot"), this);
-    m_includeCursor->setToolTip(
-      tr("If checked the mouse cursor will be included into the screenshot"));
-    m_scrollAreaLayout->addWidget(m_includeCursor);
-
-    QObject::connect(m_includeCursor, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setIncludeCursor(checked);
-    });
 }
 
 void GeneralConf::initCopyAndCloseAfterUpload()

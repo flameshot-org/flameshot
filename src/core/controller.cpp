@@ -574,15 +574,6 @@ void Controller::exportCapture(QPixmap capture,
     }
 
     if (tasks & CR::SAVE) {
-
-        if (ConfigHandler::getInstance()->includeCursor()) {
-            if (selection.isEmpty() or selection.isNull()) {
-                selection = req.initialSelection();
-            }
-
-            ScreenGrabber().grabCursor(selection, capture);
-        }
-
         if (req.path().isEmpty()) {
             ScreenshotSaver().saveToFilesystemGUI(capture);
         } else {

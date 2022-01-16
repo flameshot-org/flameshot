@@ -20,11 +20,6 @@
 #include <QDir>
 #include <QUrl>
 #include <QUuid>
-
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/extensions/Xfixes.h>
 #endif
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
@@ -207,36 +202,4 @@ QRect ScreenGrabber::desktopGeometry()
         geometry = geometry.united(scrRect);
     }
     return geometry;
-}
-
-void ScreenGrabber::grabCursor(const QRect& geometry, QPixmap& res)
-{
-#ifdef Q_OS_LINUX
-    Display* display = XOpenDisplay(nullptr);
-    Window root = DefaultRootWindow(display);
-    XWindowAttributes gwa;
-    XGetWindowAttributes(display, root, &gwa);
-    const auto goodArea = QRect(0, 0, gwa.width, gwa.height).contains(geometry);
-    QPoint cursorPos = QCursor::pos();
-    if (goodArea) {
-        cursorPos = QCursor::pos() - geometry.topLeft();
-    }
-    // gets whatever cursor is rendered
-    XFixesCursorImage* cursor = XFixesGetCursorImage(display);
-    cursorPos -= QPoint(cursor->xhot, cursor->yhot);
-    std::vector<std::uint32_t> pixels(cursor->width * cursor->height);
-    for (size_t i = 0; i < pixels.size(); ++i) {
-        pixels[i] = cursor->pixels[i];
-    }
-    const QImage cursorImage((uchar*)(pixels.data()),
-                             cursor->width,
-                             cursor->height,
-                             QImage::Format_ARGB32_Premultiplied);
-    QPainter painter(&res);
-    painter.drawImage(cursorPos, cursorImage);
-
-    XFree(cursor);
-    XDestroyWindow(display, root);
-    XCloseDisplay(display);
-#endif
 }

@@ -48,7 +48,6 @@ private slots:
     void copyURL();
     void copyImage();
     void deleteCurrentImage();
-    void saveScreenshotToFilesystem();
 
 private:
     QPixmap m_pixmap;
@@ -63,7 +62,6 @@ private:
     QPushButton* m_openDeleteUrlButton;
     QPushButton* m_copyUrlButton;
     QPushButton* m_toClipboardButton;
-    QPushButton* m_saveToFilesystemButton;
     QUrl m_imageURL;
     NotificationWidget* m_notification;
 
