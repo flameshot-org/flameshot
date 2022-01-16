@@ -100,6 +100,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.metainf
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %files -f Internationalization.lang
+%{_datadir}/%{name}/translations/Internationalization_grc.qm
 %doc README.md
 %license LICENSE
 %dir %{_datadir}/%{name}
