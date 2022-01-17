@@ -216,7 +216,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation></translation>
+        <translation>Flameshot ha perdido el foco. Los atajos de teclado no funcionarán a menos de que hagas clic en alguna parte.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
@@ -339,7 +339,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation></translation>
+        <translation>Alternar lupa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -398,7 +398,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="759"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation></translation>
+        <translation>Clave de configuración inadecuada &quot;%1&quot; en ConfigHandler. Por favor, reporta esto como un error.</translation>
     </message>
 </context>
 <context>
@@ -438,7 +438,9 @@ Presiona Espacio para abrir el panel lateral.</translation>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algunos atajos de teclado tienen conflictos.
+Esto NO impedirá que Flameshot inicie.
+Por favor, resuélvelos manualmente en el archivo de configuración.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
@@ -486,7 +488,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="122"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolver</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
@@ -524,7 +526,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="458"/>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;Tomar captura de pantalla</translation>
+        <translation>&amp;Tomar Captura de Pantalla</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="474"/>
@@ -539,7 +541,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="482"/>
         <source>&amp;About</source>
-        <translation>&amp;Sobre</translation>
+        <translation>&amp;Acerca de</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="485"/>
@@ -554,7 +556,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="672"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada al portapapeles.</translation>
+        <translation>URL copiada al portapapeles.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -652,7 +654,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="89"/>
         <source>Deletes the name</source>
-        <translation>Borra el patrón</translation>
+        <translation>Borra el nombre</translation>
     </message>
 </context>
 <context>
@@ -805,18 +807,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Show tray icon</source>
-        <translation>Mostrar icono en la barra de tareas</translation>
+        <translation>Mostrar icono en la bandeja</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="261"/>
         <source>Show the systemtray icon</source>
-        <translation>Mostrar el icono en la barra de tareas</translation>
+        <translation>Mostrar el icono en la bandeja del sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="273"/>
         <location filename="../../src/config/generalconf.cpp" line="276"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Se requiere confirmación para eliminar la captura de pantalla de las últimas cargas</translation>
+        <translation>Se requiere confirmación para borrar la captura de pantalla de las últimas subidas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="288"/>
@@ -853,7 +855,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation></translation>
+        <translation>Cerrar el daemon automáticamente cuando no se lo necesita</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
@@ -875,7 +877,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Use large predefined color palette</source>
-        <translation></translation>
+        <translation>Usar una gran paleta de colores predefinida</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
@@ -925,7 +927,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="507"/>
         <source>Undo limit</source>
-        <translation>Deshacer límite</translation>
+        <translation>Límite de deshacer</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="533"/>
@@ -1001,7 +1003,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/historywidget.cpp" line="169"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>¿Estás seguro de que deseas eliminar una captura de pantalla de las últimas subidas y el servidor?</translation>
+        <translation>¿Estás seguro de que deseas borrar una captura de pantalla de las últimas subidas y el servidor?</translation>
     </message>
 </context>
 <context>
@@ -1098,7 +1100,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation type="unfinished">Borrar imagen</translation>
+        <translation>Borrar imagen</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
@@ -1495,7 +1497,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="181"/>
         <source>Screenshot region to select</source>
-        <translation></translation>
+        <translation>Región de captura de pantalla a seleccionar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1505,42 +1507,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation></translation>
+        <translation>Aceptar captura en cuanto se haga una selección</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
         <source>Enable or disable the trayicon</source>
-        <translation>Enable or disable the trayicon</translation>
+        <translation>Activar o desactivar el icono de la bandeja</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="194"/>
         <source>Enable or disable run at startup</source>
-        <translation>Enable or disable run at startup</translation>
+        <translation>Activar o desactivar la ejecución al inicio</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation></translation>
+        <translation>Comprobar si hay errores en la configuración</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
         <source>Show the help message in the capture mode</source>
-        <translation>Show the help message in the capture mode</translation>
+        <translation>Mostrar el mensaje de ayuda en el modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="203"/>
         <source>Define the main UI color</source>
-        <translation>Define the main UI color</translation>
+        <translation>Definir el color principal de la interfaz de usuario</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="207"/>
         <source>Define the contrast UI color</source>
-        <translation>Define the contrast UI color</translation>
+        <translation>Definir el color de contraste de la interfaz de usuario</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="210"/>
         <source>Print raw PNG capture</source>
-        <translation>Print raw PNG capture</translation>
+        <translation>Imprimir la captura PNG sin procesar</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="213"/>
@@ -1550,7 +1552,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="217"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation></translation>
+        <translation>Definir la pantalla a capturar (empezando por 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
@@ -1565,7 +1567,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation></translation>
+        <translation>Ruta inválida, debe ser un directorio existente o un nuevo archivo en un directorio existente</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1574,7 +1576,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="218"/>
         <source>default: screen containing the cursor</source>
-        <translation>default: screen containing the cursor</translation>
+        <translation>por defecto: pantalla que contiene el cursor</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="219"/>
@@ -1605,7 +1607,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/main.cpp" line="239"/>
         <source>Invalid screen number, it must be non negative</source>
-        <translation>Invalid screen number, it must be non negative</translation>
+        <translation>Número de pantalla inválido, no debe ser negativo</translation>
     </message>
     <message>
         <source>Invalid path, it must be a real path in the system</source>
@@ -1614,7 +1616,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/main.cpp" line="266"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
-        <translation>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</translation>
+        <translation>Valor inválido, debe ser definido como &quot;verdadero&quot; o &quot;falso&quot;</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/openwithprogram.cpp" line="30"/>
@@ -1629,7 +1631,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/core/controller.cpp" line="650"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation></translation>
+        <translation>Captura de pantalla completa fijada a la pantalla</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1643,17 +1645,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="67"/>
         <source>Arguments</source>
-        <translation>Arguments</translation>
+        <translation>Argumentos</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="327"/>
         <source>arguments</source>
-        <translation>arguments</translation>
+        <translation>argumentos</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
         <source>Usage</source>
-        <translation>Usage</translation>
+        <translation>Uso</translation>
     </message>
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
@@ -1663,12 +1665,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/cli/commandlineparser.cpp" line="335"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
-        <translation>Per default runs Flameshot in the background and adds a tray icon for configuration.</translation>
+        <translation>Por defecto, Flameshot se ejecuta en segundo plano y añade un icono en la bandeja para su configuración.</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="564"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</translation>
+        <translation>¡Hola, estoy aquí! Haz clic en el icono en la bandeja para tomar una captura de pantalla o clic derecho para ver más opciones.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -1726,12 +1728,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
         <source>Screenshot history</source>
-        <translation>Screenshot history</translation>
+        <translation>Historial de capturas de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
         <source>Capture screen</source>
-        <translation>Capture screen</translation>
+        <translation>Capturar pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="206"/>
@@ -1741,7 +1743,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation></translation>
+        <translation>Cambiar el tamaño de la herramienta</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1784,7 +1786,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation></translation>
+        <translation>Guardar captura de pantalla en un archivo</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1817,7 +1819,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="17"/>
         <source>Set Shortcut</source>
-        <translation>Set Shortcut</translation>
+        <translation>Establecer Atajo</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="23"/>
@@ -1827,17 +1829,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="37"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</translation>
+        <translation>Presiona Esc para cancelar o ⌘+Retroceso para desactivar el atajo de teclado.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="41"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>Press Esc to cancel or Backspace to disable the keyboard shortcut.</translation>
+        <translation>Presiona Esc para cancelar o Retroceso para desactivar el atajo de teclado.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation></translation>
+        <translation>Flameshot debe ser reiniciado para que los cambios tengan efecto.</translation>
     </message>
 </context>
 <context>
@@ -1845,7 +1847,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="30"/>
         <source>Hot Keys</source>
-        <translation>Hot Keys</translation>
+        <translation>Teclas de Acceso Rápido</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="53"/>
@@ -1880,7 +1882,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation></translation>
+        <translation>Tamaño de la herramienta activa: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
@@ -1898,12 +1900,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="37"/>
         <source>Decrease Tool Size</source>
-        <translation>Decrease Tool Size</translation>
+        <translation>Disminuir el Tamaño de la Herramienta</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Decrease the size of the other tools</translation>
+        <translation>Disminuir el tamaño de las otras herramientas</translation>
     </message>
 </context>
 <context>
@@ -1911,12 +1913,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="37"/>
         <source>Increase Tool Size</source>
-        <translation>Increase Tool Size</translation>
+        <translation>Aumentar el Tamaño de la Herramienta</translation>
     </message>
     <message>
         <location filename="../../src/tools/sizeincrease/sizeincreasetool.cpp" line="47"/>
         <source>Increase the size of the other tools</source>
-        <translation>Increase the size of the other tools</translation>
+        <translation>Aumentar el tamaño de las otras herramientas</translation>
     </message>
 </context>
 <context>
@@ -1929,7 +1931,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation></translation>
+        <translation>Mostrar las dimensiones X e Y de la selección</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2077,17 +2079,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation></translation>
+        <translation>Alinear a la Izquierda</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation></translation>
+        <translation>Alinear al Centro</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation></translation>
+        <translation>Alinear a la Derecha</translation>
     </message>
 </context>
 <context>
@@ -2159,7 +2161,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
         <source>New Flameshot version %1 is available</source>
-        <translation>New Flameshot version %1 is available</translation>
+        <translation>Nueva versión %1 de Flameshot está disponible</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
@@ -2169,7 +2171,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation>Later</translation>
+        <translation>Luego</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
@@ -2182,7 +2184,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation>Cerrar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
@@ -2213,7 +2215,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation></translation>
+        <translation>Elegir</translation>
     </message>
 </context>
 <context>
@@ -2221,7 +2223,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Sin Nombre</translation>
     </message>
 </context>
 <context>
@@ -2229,7 +2231,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Sin Nombre</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
@@ -2243,43 +2245,43 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation></translation>
+        <translation>Abrir una nueva paleta desde un archivo</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation></translation>
+        <translation>Crear una nueva paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation></translation>
+        <translation>Duplicar la paleta actual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation></translation>
+        <translation>Borrar la paleta actual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation></translation>
+        <translation>Revertir cambios a la paleta actual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation></translation>
+        <translation>Guardar cambios a la paleta actual</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation></translation>
+        <translation>Añadir un color a la paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
@@ -2291,7 +2293,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation></translation>
+        <translation>Nueva Paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
@@ -2302,7 +2304,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation></translation>
+        <translation>Paletas de GIMP(*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
@@ -2312,19 +2314,20 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation></translation>
+        <translation>Todos los Archivos (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation></translation>
+        <translation>Abrir Paleta</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation></translation>
+        <translation>No se pudo cargar el archivo de paleta
+%1</translation>
     </message>
 </context>
 <context>
@@ -2342,7 +2345,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation></translation>
+        <translation>Editar Color...</translation>
     </message>
 </context>
 <context>
@@ -2358,7 +2361,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation></translation>
+        <translation>Quitar Color</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
