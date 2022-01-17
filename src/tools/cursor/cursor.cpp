@@ -62,3 +62,8 @@ void CursorTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
 }
+
+void CursorTool::paintMousePreview(QPainter &painter, const CaptureContext &context)
+{
+    return;
+}
