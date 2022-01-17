@@ -110,7 +110,13 @@ void FlameshotDaemon::createPin(QPixmap capture, QRect geometry)
     }
 
     QByteArray data;
+  
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QDataStream stream(&data, QIODeviceBase::WriteOnly);
+#else
     QDataStream stream(&data, QIODevice::WriteOnly);
+#endif
+
     stream << capture;
     stream << geometry;
     QDBusMessage m = createMethodCall(QStringLiteral("attachPin"));
@@ -129,7 +135,13 @@ void FlameshotDaemon::copyToClipboard(QPixmap capture)
       createMethodCall(QStringLiteral("attachScreenshotToClipboard"));
 
     QByteArray data;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    QDataStream stream(&data, QIODeviceBase::WriteOnly);
+#else
     QDataStream stream(&data, QIODevice::WriteOnly);
+#endif
+
     stream << capture;
 
     m << data;

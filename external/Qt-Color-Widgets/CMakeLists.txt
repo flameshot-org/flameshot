@@ -42,9 +42,11 @@ SET (${COLORWIDGET_PROJECT_NAME}_VERSION "${${COLORWIDGET_PROJECT_NAME}_VERSION_
 
 
 
+if(NOT QT_VERSION_MAJOR)
+  set(QT_VERSION_MAJOR 5 CACHE STRING "Qt version to use (4, 5 or 6), defaults to 5")
+endif()
 
-set(QT_VERSION_MAJOR 5)
-find_package(QT NAMES Qt5 Qt4 COMPONENTS Core QUIET)
+find_package(QT NAMES Qt${QT_VERSION_MAJOR} COMPONENTS Core QUIET)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets REQUIRED)
 
 
@@ -55,6 +57,9 @@ set(CMAKE_AUTOUIC ON)
 # Auto generate moc files
 set(CMAKE_AUTORCC ON)
 
+
+option(BUILD_SHARED_LIBS "Build the shared library" ON)
+option(BUILD_STATIC_LIBS "Build the static library" OFF)
 
 set (TARGET_NAME ${COLORWIDGET_PROJECT_NAME})
 option(COLOR_WIDGETS_QT_SUFFIX "Append qt version to the target output files" OFF)
@@ -67,10 +72,12 @@ endif()
 set (INCLUDE_PREFIX "QtColorWidgets")
 set (COLOR_WIDGETS_LIBRARY "${TARGET_NAME}")
 
-add_definitions(-DQTCOLORWIDGETS_STATICALLY_LINKED)
+if ( ${BUILD_STATIC_LIBS} )
+    add_definitions(-DQTCOLORWIDGETS_STATICALLY_LINKED)
+endif()
 
 
-add_library (${TARGET_NAME} STATIC "")
+add_library (${TARGET_NAME} "")
 set_target_properties(${TARGET_NAME}
   PROPERTIES
   EXPORT_NAME "${TARGET_NAME}${TARGET_OUTPUT_SUFFIX}")
@@ -154,10 +161,10 @@ add_subdirectory (gallery)
 
 option(QTCOLORWIDGETS_DESIGNER_PLUGIN "Build QtDesigner plugin" ON)
 if (${QTCOLORWIDGETS_DESIGNER_PLUGIN})
-    find_package (Qt5Designer QUIET)
-    if (Qt5Designer_FOUND)
+  find_package (Qt${QT_VERSION_MAJOR}Designer QUIET)
+  if (Qt${QT_VERSION_MAJOR}Designer_FOUND)
         add_subdirectory (color_widgets_designer_plugin)
-    endif(Qt5Designer_FOUND)
+      endif(Qt${QT_VERSION_MAJOR}Designer_FOUND)
 endif()
 
 configure_file(Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
@@ -167,3 +174,4 @@ add_custom_target(
     COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/gallery/*.png ${CMAKE_CURRENT_BINARY_DIR}/doxygen/html
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
+

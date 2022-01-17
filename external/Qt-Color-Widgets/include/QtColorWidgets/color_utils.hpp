@@ -29,7 +29,15 @@
 #include "QtColorWidgets/colorwidgets_global.hpp"
 
 namespace color_widgets {
-namespace utils {
+
+// Qt6 change the type of QColor from qreal to float
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    typedef float qt_color_type;
+#else
+    typedef qreal qt_color_type;
+#endif
+
+    namespace utils {
 
 
 QCP_EXPORT inline qreal color_chromaF(const QColor& c)
@@ -44,7 +52,7 @@ QCP_EXPORT inline qreal color_lumaF(const QColor& c)
     return 0.30 * c.redF() + 0.59 * c.greenF() + 0.11 * c.blueF();
 }
 
-QCP_EXPORT QColor color_from_lch(qreal hue, qreal chroma, qreal luma, qreal alpha = 1 );
+QCP_EXPORT QColor color_from_lch(qt_color_type hue, qt_color_type chroma, qt_color_type luma, qt_color_type alpha = 1 );
 
 QCP_EXPORT inline QColor rainbow_lch(qreal hue)
 {
@@ -72,7 +80,7 @@ QCP_EXPORT inline qreal color_HSL_saturationF(const QColor& col)
 }
 
 
-QCP_EXPORT QColor color_from_hsl(qreal hue, qreal sat, qreal lig, qreal alpha = 1 );
+QCP_EXPORT QColor color_from_hsl(qt_color_type hue, qt_color_type sat, qt_color_type lig, qt_color_type alpha = 1 );
 
 QCP_EXPORT QColor get_screen_color(const QPoint &global_pos);
 

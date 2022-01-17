@@ -142,7 +142,7 @@ void ColorWheel::paintEvent(QPaintEvent * )
     painter.setClipping(false);
 
     // lum-sat selector
-    // we define the color of the selecto based on the background color of the widget
+    // we define the color of the selection based on the background color of the widget
     // in order to improve to contrast
     if (p->backgroundIsDark)
     {
@@ -231,11 +231,7 @@ void ColorWheel::mouseReleaseEvent(QMouseEvent *ev)
 
 void ColorWheel::resizeEvent(QResizeEvent *)
 {
-    static bool skipFirst = true;
-    // Skip the first time in order to prevent QPainter warning messages
-    if (!skipFirst)
-        p->render_ring();
-    skipFirst = false;
+    p->render_ring();
     p->render_inner_selector();
 }
 

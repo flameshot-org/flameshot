@@ -10,21 +10,27 @@ add_library(${PROJECT_NAME} STATIC
 )
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
+if(NOT QT_DEFAULT_MAJOR_VERSION)
+    set(QT_DEFAULT_MAJOR_VERSION 5 CACHE STRING "Qt version to use (5 or 6), defaults to 5")
+endif()
+
 # Find dependencies
-find_package(Qt5 COMPONENTS Network REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Network)
+set(QT_COMPONENTS Core Network)
+set(QT_LIBRARIES Qt${QT_DEFAULT_MAJOR_VERSION}::Core Qt${QT_DEFAULT_MAJOR_VERSION}::Network)
 
 if(QAPPLICATION_CLASS STREQUAL QApplication)
-    find_package(Qt5 COMPONENTS Widgets REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Widgets)
+    list(APPEND QT_COMPONENTS Widgets)
+    list(APPEND QT_LIBRARIES Qt${QT_DEFAULT_MAJOR_VERSION}::Widgets)
 elseif(QAPPLICATION_CLASS STREQUAL QGuiApplication)
-    find_package(Qt5 COMPONENTS Gui REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Gui)
+    list(APPEND QT_COMPONENTS Gui)
+    list(APPEND QT_LIBRARIES Qt${QT_DEFAULT_MAJOR_VERSION}::Gui)
 else()
     set(QAPPLICATION_CLASS QCoreApplication)
-    find_package(Qt5 COMPONENTS Core REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core)
 endif()
+
+find_package(Qt${QT_DEFAULT_MAJOR_VERSION} COMPONENTS ${QT_COMPONENTS} REQUIRED)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC ${QT_LIBRARIES})
 
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE advapi32)

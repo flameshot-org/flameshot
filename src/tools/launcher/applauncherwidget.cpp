@@ -19,6 +19,7 @@
 #include <QPixmap>
 #include <QProcess>
 #include <QTabWidget>
+#include <QRegularExpression>
 
 namespace {
 
@@ -98,7 +99,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     }
     QString command = index.data(Qt::UserRole)
                         .toString()
-                        .replace(QRegExp("(\\%.)"), '"' + m_tempFile + '"');
+                        .replace(QRegularExpression("(\\%.)"), '"' + m_tempFile + '"');
 
     QString app_name = index.data(Qt::UserRole).toString().split(" ").at(0);
     bool inTerminal =
@@ -116,7 +117,6 @@ void AppLauncherWidget::launch(const QModelIndex& index)
         close();
     }
 }
-
 void AppLauncherWidget::checkboxClicked(const bool enabled)
 {
     m_keepOpen = enabled;
@@ -133,7 +133,8 @@ void AppLauncherWidget::searchChanged(const QString& text)
         m_tabWidget->hide();
         m_filterList->show();
         m_filterList->clear();
-        QRegExp regexp(text, Qt::CaseInsensitive, QRegExp::Wildcard);
+        auto reOptions = QRegularExpression::CaseInsensitiveOption;
+        QRegularExpression regexp(QRegularExpression::wildcardToRegularExpression(text), reOptions);
         QVector<DesktopAppData> apps;
 
         for (auto const& i : catIconNames.toStdMap()) {
@@ -152,6 +153,8 @@ void AppLauncherWidget::searchChanged(const QString& text)
         addAppsToListWidget(m_filterList, apps);
     }
 }
+
+
 
 void AppLauncherWidget::initListWidget()
 {

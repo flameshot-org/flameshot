@@ -1,9 +1,9 @@
-#include "messagereceiver.h"
 #include <QDebug>
+#include "messagereceiver.h"
 
-MessageReceiver::MessageReceiver(QObject* parent)
-  : QObject(parent)
-{}
+MessageReceiver::MessageReceiver(QObject *parent) : QObject(parent)
+{
+}
 
 void MessageReceiver::receivedMessage(int instanceId, QByteArray message)
 {

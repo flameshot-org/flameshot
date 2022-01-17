@@ -1,0 +1,38 @@
+default:
+    before_script:
+        - apt-get update -qq
+        - apt-get install -y cmake qtbase5-dev g++
+
+variables:
+    DEBIAN_FRONTEND: noninteractive
+
+
+pages:
+    image: ubuntu:latest
+    stage: deploy
+    script:
+        - apt-get install -y doxygen graphviz g++
+        - mkdir -p build
+        - cd build
+        - cmake ..
+        - make QtColorWidgets_docs
+    after_script:
+        - mv build/doxygen/html public
+    artifacts:
+        paths:
+            - public
+    when: always
+    only:
+        - master
+    needs: ["linux:build"]
+
+
+linux:build:
+    image: ubuntu:latest
+    stage: build
+    script:
+        - mkdir build
+        - cd build
+        - cmake ..
+        - make
+    when: always

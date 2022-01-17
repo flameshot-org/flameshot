@@ -1,0 +1,4 @@
+build/
+cmake-build-debug/
+*.pro.user
+*.idea/

@@ -54,13 +54,13 @@
 
 #include "calculator.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     SingleApplication app(argc, argv);
 
     Calculator calc;
 
-    QObject::connect(&app, &SingleApplication::instanceStarted, [&calc]() {
+    QObject::connect( &app, &SingleApplication::instanceStarted, [ &calc ]() {
         calc.raise();
         calc.activateWindow();
     });

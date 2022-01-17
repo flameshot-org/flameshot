@@ -220,7 +220,7 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - {
+         - {
               name: fedora-35,
               os: fedora,
               symbol: 35,

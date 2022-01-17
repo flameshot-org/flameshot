@@ -28,9 +28,18 @@
 #include <QPainterPath>
 #include <QMouseEvent>
 
+
+
 namespace color_widgets {
 
-enum MouseStatus
+// Qt6 change the type of QColor from qreal to float
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    typedef float qt_color_type;
+#else
+    typedef qreal qt_color_type;
+#endif
+
+    enum MouseStatus
 {
     Nothing,
     DragCircle,
@@ -53,7 +62,7 @@ public:
     ColorSpaceEnum color_space = ColorHSV;
     bool rotating_selector = true;
     ShapeEnum selector_shape = ShapeTriangle;
-    QColor (*color_from)(qreal,qreal,qreal,qreal);
+    QColor (*color_from)(qt_color_type,qt_color_type,qt_color_type,qt_color_type);
     QColor (*rainbow_from_hue)(qreal);
     int max_size = 128;
 
@@ -72,7 +81,7 @@ public:
 
     virtual ~Private(){}
 
-    /// Calculate outer wheel radius from idget center
+    /// Calculate outer wheel radius from Widget center
     qreal outer_radius() const
     {
         return qMin(w->geometry().width(), w->geometry().height())/2;

@@ -1,12 +1,12 @@
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets REQUIRED)
 
-qt5_wrap_cpp(MOC_HEADERS
+qt6_wrap_cpp(MOC_HEADERS
         qhotkey.h
         qhotkey_p.h)
 
 set(LIBS
-        Qt5::Core
-        Qt5::Widgets)
+        Qt6::Core
+        Qt6::Widgets)
 
 set(SRC_FILES
         qhotkey.cpp)
@@ -26,10 +26,10 @@ elseif(WIN32)
     set(SRC_FILES ${SRC_FILES} qhotkey_win.cpp)
 else()
     find_package(X11 REQUIRED)
-    find_package(Qt5X11Extras REQUIRED)
+    find_package(Qt6X11Extras REQUIRED)
 
     include_directories(${X11_INCLUDE_DIR})
-    set(LIBS ${LIBS} ${X11_LIBRARIES} Qt5::X11Extras)
+    set(LIBS ${LIBS} ${X11_LIBRARIES} Qt6::X11Extras)
     set(SRC_FILES ${SRC_FILES} qhotkey_x11.cpp)
 endif()
 

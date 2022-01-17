@@ -2,7 +2,7 @@
 
 #include <QString>
 #include <QTextStream>
-
+#include <QList>
 /**
  * @brief A class that allows you to log events to where they need to go.
  */

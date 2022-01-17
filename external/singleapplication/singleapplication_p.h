@@ -32,13 +32,12 @@
 #ifndef SINGLEAPPLICATION_P_H
 #define SINGLEAPPLICATION_P_H
 
-#include "singleapplication.h"
 #include <QtCore/QSharedMemory>
 #include <QtNetwork/QLocalServer>
 #include <QtNetwork/QLocalSocket>
+#include "singleapplication.h"
 
-struct InstancesInfo
-{
+struct InstancesInfo {
     bool primary;
     quint32 secondary;
     qint64 primaryPid;
@@ -46,61 +45,65 @@ struct InstancesInfo
     quint16 checksum; // Must be the last field
 };
 
-struct ConnectionInfo
-{
+struct ConnectionInfo {
     qint64 msgLen = 0;
     quint32 instanceId = 0;
     quint8 stage = 0;
 };
 
-class SingleApplicationPrivate : public QObject
-{
-    Q_OBJECT
+class SingleApplicationPrivate : public QObject {
+Q_OBJECT
 public:
-    enum ConnectionType : quint8
-    {
+    enum ConnectionType : quint8 {
         InvalidConnection = 0,
         NewInstance = 1,
         SecondaryInstance = 2,
         Reconnect = 3
     };
-    enum ConnectionStage : quint8
-    {
-        StageHeader = 0,
-        StageBody = 1,
-        StageConnected = 2,
+    enum ConnectionStage : quint8 {
+        StageInitHeader = 0,
+        StageInitBody = 1,
+        StageConnectedHeader = 2,
+        StageConnectedBody = 3,
     };
     Q_DECLARE_PUBLIC(SingleApplication)
 
-    SingleApplicationPrivate(SingleApplication* q_ptr);
+    SingleApplicationPrivate( SingleApplication *q_ptr );
     ~SingleApplicationPrivate() override;
 
-    QString getUsername();
+    static QString getUsername();
     void genBlockServerName();
-    void initializeMemoryBlock();
+    void initializeMemoryBlock() const;
     void startPrimary();
     void startSecondary();
-    bool connectToPrimary(int msecs, ConnectionType connectionType);
-    quint16 blockChecksum();
-    qint64 primaryPid();
-    QString primaryUser();
-    void readInitMessageHeader(QLocalSocket* socket);
-    void readInitMessageBody(QLocalSocket* socket);
-    void randomSleep();
+    bool connectToPrimary( int msecs, ConnectionType connectionType );
+    quint16 blockChecksum() const;
+    qint64 primaryPid() const;
+    QString primaryUser() const;
+    bool isFrameComplete(QLocalSocket *sock);
+    void readMessageHeader(QLocalSocket *socket, ConnectionStage nextStage);
+    void readInitMessageBody(QLocalSocket *socket);
+    void writeAck(QLocalSocket *sock);
+    bool writeConfirmedFrame(int msecs, const QByteArray &msg);
+    bool writeConfirmedMessage(int msecs, const QByteArray &msg);
+    static void randomSleep();
+    void addAppData(const QString &data);
+    QStringList appData() const;
 
-    SingleApplication* q_ptr;
-    QSharedMemory* memory;
-    QLocalSocket* socket;
-    QLocalServer* server;
+    SingleApplication *q_ptr;
+    QSharedMemory *memory;
+    QLocalSocket *socket;
+    QLocalServer *server;
     quint32 instanceNumber;
     QString blockServerName;
     SingleApplication::Options options;
     QMap<QLocalSocket*, ConnectionInfo> connectionMap;
+    QStringList appDataList;
 
 public Q_SLOTS:
     void slotConnectionEstablished();
-    void slotDataAvailable(QLocalSocket*, quint32);
-    void slotClientConnectionClosed(QLocalSocket*, quint32);
+    void slotDataAvailable( QLocalSocket*, quint32 );
+    void slotClientConnectionClosed( QLocalSocket*, quint32 );
 };
 
 #endif // SINGLEAPPLICATION_P_H

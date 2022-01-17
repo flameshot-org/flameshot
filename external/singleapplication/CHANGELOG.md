@@ -3,12 +3,37 @@ Changelog
 
 If by accident I have forgotten to credit someone in the CHANGELOG, email me and I will fix it.
 
+__3.3.2__
+---------
+
+* Fixed crash caused by sending a `writeAck` on a removed connection. - _Nicolas Werner_
+
+__3.3.1__
+---------
+
+* Added support for _AppImage_ dynamic executable paths. - _Michael Klein_
+
+__3.3.0__
+---------
+
+* Fixed message fragmentation issue causing crashes and incorrectly / inconsistently received messages. - _Nils Jeisecke_
+
+__3.2.0__
+---------
+
+* Added support for Qt 6  - _Jonas Kvinge_
+* Fixed warning in `Qt 5.9` with `min`/`max` functions on Windows - _Nick Korotysh_
+* Fix return value of connectToPrimary() when connect is successful - _Jonas Kvinge_
+* Fix build issue with MinGW GCC pedantic mode - _Iakov Kirilenko_
+* Fixed conversion from `int` to `quint32` and Clang Tidy warnings - _Hennadii Chernyshchyk_
+
 __3.1.5__
+---------
 
 * Improved library stability in edge cases and very rapid process initialisation
 * Fixed Bug where the shared memory block may have been modified without a lock
-* Fixed Bug causing instanceStarted() to not get emmited when a second instance
-  has been started before the primary has initiated it's QLocalServer.
+* Fixed Bug causing `instanceStarted()` to not get emitted when a second instance
+  has been started before the primary has initiated it's `QLocalServer`.
 
 __3.1.4__
 ---------

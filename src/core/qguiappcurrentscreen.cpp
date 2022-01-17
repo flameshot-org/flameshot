@@ -3,7 +3,6 @@
 
 #include "qguiappcurrentscreen.h"
 #include <QCursor>
-#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QPoint>
 #include <QScreen>

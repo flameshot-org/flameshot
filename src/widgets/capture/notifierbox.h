@@ -4,7 +4,9 @@
 #pragma once
 
 #include <QWidget>
-
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#include <QDesktopWidget>
+#endif
 class QTimer;
 
 class NotifierBox : public QWidget
@@ -14,7 +16,11 @@ public:
     explicit NotifierBox(QWidget* parent = nullptr);
 
 protected:
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    virtual void enterEvent(QEnterEvent*) override;
+#else
     virtual void enterEvent(QEvent*) override;
+#endif
     virtual void paintEvent(QPaintEvent*) override;
 
 signals:

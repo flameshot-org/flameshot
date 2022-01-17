@@ -9,7 +9,8 @@
 #include <QKeySequence>
 #include <QStandardPaths>
 #include <QVariant>
-
+#include <QStringView>
+#include <QRegularExpression>
 // VALUE HANDLER
 
 QVariant ValueHandler::value(const QVariant& val)
@@ -153,7 +154,7 @@ BoundedInt::BoundedInt(int min, int max, int def)
 bool BoundedInt::check(const QVariant& val)
 {
     QString str = val.toString();
-    bool conversionOk;
+    bool conversionOk = false;
     int num = str.toInt(&conversionOk);
     return conversionOk && m_min <= num && num <= m_max;
 }
@@ -178,7 +179,7 @@ LowerBoundedInt::LowerBoundedInt(int min, int def)
 bool LowerBoundedInt::check(const QVariant& val)
 {
     QString str = val.toString();
-    bool conversionOk;
+    bool conversionOk=false;
     int num = str.toInt(&conversionOk);
     return conversionOk && num >= m_min;
 }
@@ -240,7 +241,11 @@ QVariant KeySequence::process(const QVariant& val)
 
 bool ExistingDir::check(const QVariant& val)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    if (!val.canConvert<String>() || val.toString().isEmpty()) {
+#else
     if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+#endif
         return false;
     }
     QFileInfo info(val.toString());
@@ -391,7 +396,7 @@ bool UserColors::check(const QVariant& val)
     if (!val.isValid()) {
         return false;
     }
-    if (!val.canConvert(QVariant::StringList)) {
+    if (!val.canConvert<QStringList>()) {
         return false;
     }
     for (const QString& str : val.toStringList()) {
@@ -466,7 +471,19 @@ QVariant UserColors::representation(const QVariant& val)
 
 bool SaveFileExtension::check(const QVariant& val)
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
     if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+=======
+    if (!val.canConvert<String>() || val.toString().isEmpty())
+>>>>>>> 339240f7 (Working on qt6)
+=======
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+    if (!val.canConvert<String>() || val.toString().isEmpty()) {
+#else
+    if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
+#endif
+>>>>>>> afc80ff7 (builds and runs on qt5/6...still some warnings to clean up)
         return false;
     }
 
@@ -477,8 +494,9 @@ bool SaveFileExtension::check(const QVariant& val)
     }
 
     QStringList imageFormatList;
-    foreach (auto imageFormat, QImageWriter::supportedImageFormats())
+    foreach (auto imageFormat, QImageWriter::supportedImageFormats()) {
         imageFormatList.append(imageFormat);
+    }
 
     if (!imageFormatList.contains(extension)) {
         return false;
@@ -529,14 +547,16 @@ QVariant Region::process(const QVariant& val)
         return ScreenGrabber().desktopGeometry();
     } else if (str.startsWith("screen")) {
         bool ok;
-        int number = str.midRef(6).toInt(&ok);
+        QStringView mid = QStringView{str}.mid(6);
+        int number = mid.toInt(&ok);
+        //int number = str.midRef(6).toInt(&ok);
         if (!ok || number < 0) {
             return {};
         }
         return ScreenGrabber().screenGeometry(qApp->screens()[number]);
     }
 
-    QRegExp regex("(-{,1}\\d+)"   // number (any sign)
+    QRegularExpression regex("(-{,1}\\d+)"   // number (any sign)
                   "[x,\\.\\s]"    // separator ('x', ',', '.', or whitespace)
                   "(-{,1}\\d+)"   // number (any sign)
                   "[\\+,\\.\\s]*" // separator ('+',',', '.', or whitespace)
@@ -545,16 +565,16 @@ QVariant Region::process(const QVariant& val)
                   "(-{,1}\\d+)"   // number (non-negative)
     );
 
-    if (!regex.exactMatch(str)) {
+    if (!regex.match(str).hasMatch()) {
         return {};
     }
 
     int w, h, x, y;
     bool w_ok, h_ok, x_ok, y_ok;
-    w = regex.cap(1).toInt(&w_ok);
-    h = regex.cap(2).toInt(&h_ok);
-    x = regex.cap(3).toInt(&x_ok);
-    y = regex.cap(4).toInt(&y_ok);
+    w = regex.match(str).captured(1).toInt(&w_ok);
+    h = regex.match(str).captured(2).toInt(&h_ok);
+    x = regex.match(str).captured(3).toInt(&x_ok);
+    y = regex.match(str).captured(4).toInt(&y_ok);
 
     if (!(w_ok && h_ok && x_ok && y_ok)) {
         return {};

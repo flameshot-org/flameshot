@@ -37,6 +37,17 @@
 
 namespace color_widgets {
 
+// pos is deprecated in Qt6
+template <typename T>
+QPointF pos_wrap(T* event)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        return event->position();
+#else
+        return event->pos();
+#endif
+}
+
 class GradientEditor::Private
 {
 public:
@@ -107,8 +118,8 @@ public:
 
     void drop_event(QDropEvent* event, GradientEditor* owner)
     {
-        drop_index = closest(event->pos(), owner);
-        drop_pos = move_pos(event->pos(), owner);
+        drop_index = closest(pos_wrap(event).toPoint(), owner);
+        drop_pos = move_pos(pos_wrap(event).toPoint(), owner);
         if ( drop_index == -1 )
             drop_index = stops.size();
 
@@ -309,7 +320,7 @@ void GradientEditor::mouseReleaseEvent(QMouseEvent *ev)
     {
         ev->accept();
         QRect bound_rect = rect();
-        QPoint localpt = ev->localPos().toPoint();
+        QPoint localpt = pos_wrap(ev).toPoint();
         const int w_margin = 24;
         const int h_margin = 8;
         bool x_out = localpt.x() < -w_margin || localpt.x() > bound_rect.width() + w_margin;
@@ -354,8 +365,11 @@ void GradientEditor::mouseReleaseEvent(QMouseEvent *ev)
                 p->show_dialog_highlighted();
             });
         }
-
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        menu.exec(ev->globalPosition().toPoint());
+#else
         menu.exec(ev->globalPos());
+#endif
     }
     else
     {
@@ -503,8 +517,7 @@ QSize GradientEditor::sizeHint() const
         std::swap(w, h);
     }
     QSlider s;
-    return style()->sizeFromContents(QStyle::CT_Slider, &opt, QSize(w, h), &s)
-        .expandedTo(QApplication::globalStrut());
+    return style()->sizeFromContents(QStyle::CT_Slider, &opt, QSize(w, h), &s);
 }
 
 int GradientEditor::selectedStop() const

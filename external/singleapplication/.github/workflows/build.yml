@@ -1,0 +1,87 @@
+name: "CI: Build Test"
+
+on:
+  push:
+    branches-ignore:
+      - "releases/**"
+    paths-ignore:
+      - "**.md"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        qt_version: [5.12.6, 5.13.2, 5.14.0, 5.15.0, 6.0.0]
+        platform: [ubuntu-20.04, windows-latest, macos-latest]
+        include:
+          - qt_version: 6.0.0
+            additional_arguments: -D QT_DEFAULT_MAJOR_VERSION=6
+          - platform: ubuntu-20.04
+            make: make
+            CXXFLAGS: -Wall -Wextra -pedantic -Werror
+            MAKEFLAGS: -j2
+          - platform: macos-latest
+            make: make
+            CXXFLAGS: -Wall -Wextra -pedantic -Werror
+            MAKEFLAGS: -j3
+          - platform: windows-latest
+            make: nmake
+            CXXFLAGS: /W4 /WX /MP
+
+    runs-on: ${{ matrix.platform }}
+    env:
+      CXXFLAGS: ${{ matrix.CXXFLAGS }}
+      MAKEFLAGS: ${{ matrix.MAKEFLAGS }}
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2.3.4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2.14.0
+        with:
+          version: ${{ matrix.qt_version }}
+
+      - name: Build library with CMake
+        run: |
+          cmake . ${{ matrix.additional_arguments }}
+          cmake --build .
+
+      - name: Build basic example with CMake
+        working-directory: examples/basic/
+        run: |
+          cmake . ${{ matrix.additional_arguments }}
+          cmake --build .
+
+      - name: Build calculator example CMake
+        working-directory: examples/calculator/
+        run: |
+          cmake . ${{ matrix.additional_arguments }}
+          cmake --build .
+
+      - name: Build sending_arguments example with CMake
+        working-directory: examples/sending_arguments/
+        run: |
+          cmake . ${{ matrix.additional_arguments }}
+          cmake --build .
+
+      - name: Setup MSVC environment for QMake
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Build basic example with QMake
+        working-directory: examples/basic/
+        run: |
+          qmake
+          ${{ matrix.make }}
+
+      - name: Build calculator example QMake
+        working-directory: examples/calculator/
+        run: |
+          qmake
+          ${{ matrix.make }}
+
+      - name: Build sending_arguments example with QMake
+        working-directory: examples/sending_arguments/
+        run: |
+          qmake
+          ${{ matrix.make }}

@@ -31,7 +31,6 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QLabel>
 #include <QPaintEvent>
@@ -1098,7 +1097,7 @@ void CaptureWidget::initSelection()
     });
     if (!initialSelection.isNull()) {
         initialSelection.moveTopLeft(initialSelection.topLeft() -
-                                     mapToGlobal({}));
+                                     mapToGlobal(QPoint{}));
     }
     m_selection->setGeometry(initialSelection);
     m_selection->setVisible(!initialSelection.isNull());

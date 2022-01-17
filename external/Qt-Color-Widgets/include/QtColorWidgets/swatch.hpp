@@ -57,6 +57,11 @@ class QCP_EXPORT Swatch : public QWidget
     Q_PROPERTY(QPen border READ border WRITE setBorder NOTIFY borderChanged)
 
     /**
+     * \brief Selection rectangle for selected color
+     */
+    Q_PROPERTY(QPen selection READ selectionPen WRITE setSelectionPen)
+
+    /**
      * \brief Forces the Swatch to display that many rows of colors
      *
      * If there are too few elements, the widget will display less than this
@@ -139,6 +144,7 @@ public:
     QSize maxColorSize() const;
     ColorSizePolicy colorSizePolicy() const;
     QPen border() const;
+    QPen selectionPen() const;
 
     int forcedRows() const;
     int forcedColumns() const;
@@ -150,14 +156,23 @@ public:
 public Q_SLOTS:
     void setPalette(const ColorPalette& palette);
     void setSelected(int selected);
+
+    /**
+     * Sets the given color as selected color.
+     * If the given color is not in the palette, the function returns
+     * false
+     */
+    bool setSelectedColor(const QColor& color);
     void clearSelection();
     void setColorSize(const QSize& colorSize);
     void setMaxColorSize(const QSize& colorSize);
     void setColorSizePolicy(ColorSizePolicy colorSizePolicy);
     void setBorder(const QPen& border);
+    void setSelectionPen(const QPen& selected);
     void setForcedRows(int forcedRows);
     void setForcedColumns(int forcedColumns);
     void setReadOnly(bool readOnly);
+
     /**
      * \brief Remove the currently seleceted color
      **/

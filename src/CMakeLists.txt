@@ -1,14 +1,29 @@
 find_package(
-        Qt5
+    Qt${QT_VERSION_MAJOR}
         CONFIG
         REQUIRED
         Core
+        Core5Compat
         Gui
         Widgets
         Network
         Svg
         DBus
         LinguistTools)
+
+if (USE_WAYLAND_CLIPBOARD)
+    find_package(KF5GuiAddons)
+endif()
+
+if (USE_QT6)
+  find_package(
+      Qt6
+          CONFIG
+          REQUIRED
+          Core5Compat
+          )
+endif()
+
 
 if (USE_WAYLAND_CLIPBOARD)
     find_package(KF5GuiAddons)
@@ -118,17 +133,22 @@ set(FLAMESHOT_TS_FILES
          )
 
 if (GENERATE_TS)
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
+  if(USE_QT6)
+      qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
+  else()
+      qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
+  endif()
 else ()
+  if(USE_QT6)
+    qt6_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
+  else()
     qt5_add_translation(QM_FILES ${FLAMESHOT_TS_FILES})
+  endif()
 endif ()
 
 target_sources(
         flameshot
         PRIVATE
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/QtColorWidgets/color_utils.cpp
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/src/QtColorWidgets/color_wheel.cpp
-        # ${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include/QtColorWidgets/color_wheel.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../data/graphics.qrc
         ${CMAKE_CURRENT_SOURCE_DIR}/../data/flameshot.rc # windows binary icon resource file
         ${QM_FILES}
@@ -188,19 +208,30 @@ else ()
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication>)
 endif()
 
+
 target_link_libraries(
         flameshot
         project_warnings
         project_options
-        Qt5::Svg
-        Qt5::DBus
-        Qt5::Network
-        Qt5::Widgets
+        Qt${QT_VERSION_MAJOR}::Svg
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Widgets
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
 
 )
 
+if (USE_WAYLAND_CLIPBOARD)
+  target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
+  target_link_libraries(flameshot KF5::GuiAddons)
+endif()
+
+if (USE_QT6)
+  target_link_libraries(
+          flameshot
+          Qt6::Core5Compat
+  )
 if (USE_WAYLAND_CLIPBOARD)
   target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
   target_link_libraries(flameshot KF5::GuiAddons)
