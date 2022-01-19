@@ -1,6 +1,6 @@
 app-id: org.flameshot.Flameshot
 runtime: org.kde.Platform
-runtime-version: '5.15'
+runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
 command: flameshot
 finish-args:
@@ -26,7 +26,8 @@ modules:
   - name: flameshot
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=Release 
+      - -DUSE_WAYLAND_CLIPBOARD=1
     sources:
       - type: git
         url: https://github.com/flameshot-org/flameshot.git
