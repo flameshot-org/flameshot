@@ -484,6 +484,7 @@ jobs:
             fcitx-frontend-qt5 \
             openssl \
             ca-certificates
+
       - name: Get go-appimage tool
       # Will not use linuxdeployqt anymore, because it suopprts currently still-supported mainstream distribution,
       # which is glibc 2.23. For more information, please see https://github.com/probonopd/linuxdeployqt/issues/340.
