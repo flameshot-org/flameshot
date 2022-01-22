@@ -303,13 +303,7 @@ jobs:
       fail-fast: false
       matrix:
         dist:
-          - {
-              name: fedora-34,
-              os: fedora,
-              symbol: 34,
-              arch: x86_64
-            }
-          - {
+         - {
               name: fedora-35,
               os: fedora,
               symbol: 35,
