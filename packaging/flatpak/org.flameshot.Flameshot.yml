@@ -26,8 +26,7 @@ modules:
   - name: flameshot
     buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release 
-      - -DUSE_WAYLAND_CLIPBOARD=1
+      - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: git
         url: https://github.com/flameshot-org/flameshot.git

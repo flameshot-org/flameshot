@@ -67,7 +67,6 @@ option(USE_MONOCHROME_ICON "Build using monochrome icon as default" OFF)
 option(GENERATE_TS "Regenerate translation source files" OFF)
 option(USE_EXTERNAL_SINGLEAPPLICATION "Use external QtSingleApplication library" OFF)
 option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" ON)
-option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 
 include(cmake/StandardProjectSettings.cmake)
 
@@ -108,7 +107,6 @@ endif()
 option(BUILD_STATIC_LIBS ON)
 option(BUILD_SHARED_LIBS OFF)
 add_subdirectory(external/Qt-Color-Widgets EXCLUDE_FROM_ALL) 
-
 
 if (APPLE)
   add_subdirectory(external/QHotkey)

@@ -10,10 +10,6 @@ find_package(
         DBus
         LinguistTools)
 
-if (USE_WAYLAND_CLIPBOARD)
-    find_package(KF5GuiAddons)
-endif()
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -194,13 +190,7 @@ target_link_libraries(
         Qt5::Widgets
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
-
 )
-
-if (USE_WAYLAND_CLIPBOARD)
-  target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
-  target_link_libraries(flameshot KF5::GuiAddons)
-endif()
 
 if (APPLE)
     set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")

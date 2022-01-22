@@ -9,11 +9,6 @@
 #include "src/utils/filenamehandler.h"
 #include "src/utils/globalvalues.h"
 #include "utils/desktopinfo.h"
-
-#if USE_WAYLAND_CLIPBOARD
-#include <KSystemClipboard>
-#endif
-
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
@@ -38,26 +33,15 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
     imageWriter.write(capture.toImage());
 
-    QPixmap formattedPixmap;
+    QPixmap pngPixmap;
     bool isLoaded =
-      formattedPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
-                                   array.size(),
-                                   imageType.toUpper().toUtf8());
+      pngPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
+                             array.size(),
+                             imageType.toUpper().toUtf8());
     if (isLoaded) {
-
-        auto mimeData = new QMimeData();
-
-#ifdef USE_WAYLAND_CLIPBOARD
-        mimeData->setImageData(formattedPixmap.toImage());
-        mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
-                          QByteArray());
-        KSystemClipboard::instance()->setMimeData(mimeData,
-                                                  QClipboard::Clipboard);
-#else
+        QMimeData* mimeData = new QMimeData;
         mimeData->setData("image/" + imageType, array);
         QApplication::clipboard()->setMimeData(mimeData);
-#endif
-
     } else {
         AbstractLogger::error()
           << QObject::tr("Error while saving to clipboard");
