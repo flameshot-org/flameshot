@@ -6,6 +6,7 @@
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/history.h"
+#include "src/utils/screenshotsaver.h"
 #include "src/widgets/imagelabel.h"
 #include "src/widgets/loadspinner.h"
 #include "src/widgets/notificationwidget.h"
@@ -130,10 +131,12 @@ void ImgUploaderBase::showPostUploadDialog()
     m_openUrlButton = new QPushButton(tr("Open URL"));
     m_openDeleteUrlButton = new QPushButton(tr("Delete image"));
     m_toClipboardButton = new QPushButton(tr("Image to Clipboard."));
+    m_saveToFilesystemButton = new QPushButton(tr("Save image"));
     m_hLayout->addWidget(m_copyUrlButton);
     m_hLayout->addWidget(m_openUrlButton);
     m_hLayout->addWidget(m_openDeleteUrlButton);
     m_hLayout->addWidget(m_toClipboardButton);
+    m_hLayout->addWidget(m_saveToFilesystemButton);
 
     connect(
       m_copyUrlButton, &QPushButton::clicked, this, &ImgUploaderBase::copyURL);
@@ -147,6 +150,11 @@ void ImgUploaderBase::showPostUploadDialog()
             &QPushButton::clicked,
             this,
             &ImgUploaderBase::copyImage);
+
+    QObject::connect(m_saveToFilesystemButton,
+                     &QPushButton::clicked,
+                     this,
+                     &ImgUploaderBase::saveScreenshotToFilesystem);
 }
 
 void ImgUploaderBase::openURL()
@@ -175,4 +183,14 @@ void ImgUploaderBase::deleteCurrentImage()
     HISTORY_FILE_NAME unpackFileName =
       history.unpackFileName(m_currentImageName);
     deleteImage(unpackFileName.file, unpackFileName.token);
+}
+
+void ImgUploaderBase::saveScreenshotToFilesystem()
+{
+    if (!ScreenshotSaver().saveToFilesystemGUI(m_pixmap)) {
+        m_notification->showMessage(
+          tr("Unable to save the screenshot to disk."));
+        return;
+    }
+    m_notification->showMessage(tr("Screenshot saved."));
 }
