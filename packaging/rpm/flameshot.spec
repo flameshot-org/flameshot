@@ -34,6 +34,9 @@ BuildRequires: ninja-build
 BuildRequires: desktop-file-utils
 
 BuildRequires: cmake(Qt5Core) >= 5.9.0
+%if %{is_rhel_or_fedora}
+BuildRequires: cmake(KF5GuiAddons) >= 5.89.0
+%endif
 BuildRequires: cmake(Qt5DBus) >= 5.9.0
 BuildRequires: cmake(Qt5Gui) >= 5.9.0
 BuildRequires: cmake(Qt5LinguistTools) >= 5.9.0
@@ -78,7 +81,10 @@ Features:
 %cmake -DCMAKE_BUILD_TYPE=Release
 %endif
 %if %{is_rhel_or_fedora}
-%cmake -G Ninja -DCMAKE_BUILD_TYPE=Release
+	
+%cmake -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_WAYLAND_CLIPBOARD:BOOL=ON \
 %endif
 %cmake_build
 
