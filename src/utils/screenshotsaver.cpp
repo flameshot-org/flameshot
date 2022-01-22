@@ -119,8 +119,9 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
     if (parent) {
         dialog.setWindowModality(Qt::WindowModal);
     }
-
+#if defined(Q_OS_MACOS)
     dialog.setOptions(QFileDialog::Option::DontUseNativeDialog);
+#endif
     dialog.setAcceptMode(QFileDialog::AcceptSave);
 
     // Build string list of supported image formats
@@ -138,7 +139,8 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
     dialog.selectMimeTypeFilter(defaultMimeType);
     dialog.setDefaultSuffix(suffix);
     if (dialog.exec() == QDialog::Accepted) {
-        return dialog.selectedFiles().first();
+        const QStringList selectedFiles = dialog.selectedFiles();
+        return selectedFiles.first();
     } else {
         return QString();
     }
