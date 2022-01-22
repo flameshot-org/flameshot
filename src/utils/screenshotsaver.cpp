@@ -120,6 +120,7 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
         dialog.setWindowModality(Qt::WindowModal);
     }
 
+    dialog.setOptions(QFileDialog::Option::DontUseNativeDialog);
     dialog.setAcceptMode(QFileDialog::AcceptSave);
 
     // Build string list of supported image formats
