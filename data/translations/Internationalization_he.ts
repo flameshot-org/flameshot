@@ -47,7 +47,7 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation>בחירת יישום לפתיחת הלכידה</translation>
+        <translation>נא לבחור יישום לפתיחת הלכידה</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Select screenshot area</source>
-        <translation>בחירת אזור צילום־מסך</translation>
+        <translation>נא לבחור את אזור צילום־המסך</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
@@ -275,7 +275,7 @@ Press Space to open the side panel.</source>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation>בחירת צבע</translation>
+        <translation>נא לבחור צבע</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
@@ -408,7 +408,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="759"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation>מפתח תצורה שגוי &apos;%1&apos; ב־ConfigHandler. נא לדווח זאת כתקל.</translation>
+        <translation>מפתח תצורה &apos;%1&apos; ב־ConfigHandler, שגוי. נא לדווח זאת כתקל.</translation>
     </message>
 </context>
 <context>
@@ -966,7 +966,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="607"/>
         <source>Choose a Folder</source>
-        <translation>בחירת תיקייה</translation>
+        <translation>נא לבחור תיקייה</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="616"/>
@@ -2122,7 +2122,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
         <source>Select a Button to modify it</source>
-        <translation>בחירת לחצן להסגלה</translation>
+        <translation>נא לבחור לחצן להסגלה</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
