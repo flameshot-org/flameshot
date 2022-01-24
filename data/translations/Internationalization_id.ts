@@ -1285,7 +1285,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="22"/>
         <source>Line</source>
-        <translation>Baris</translation>
+        <translation>Garis</translation>
     </message>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
