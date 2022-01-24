@@ -1514,7 +1514,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation type="unfinished"></translation>
+        <translation>پیکربندی را برای وجود خطاها بررسی کنید</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -1554,12 +1554,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>منطقهٔ نامعتبر، از «⁦WxH+X+Y⁩» یا «⁦all⁩» یا «⁦screen0/screen1/...⁩» استفاده کنید.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation type="unfinished"></translation>
+        <translation>مسیر نامعتبر است، باید یک شاخهٔ موجود یا یک پروندهٔ جدید در یک شاخهٔ موجود باشد</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1662,7 +1662,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="650"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>نماگرفت تمام‌صفحه در صفحه سنجاق شد</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -1831,7 +1831,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>برای اعمال تغییرات، فلیم‌شات باید راه‌اندازی مجدد شود.</translation>
     </message>
 </context>
 <context>
@@ -2326,7 +2326,8 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>بار کردن پروندهٔ تخته‌رنگ شکست خورد
+%1</translation>
     </message>
 </context>
 <context>
