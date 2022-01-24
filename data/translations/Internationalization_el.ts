@@ -857,7 +857,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation>Κλείστε αυτόματα το daemon  όταν δεν χρειάζεται</translation>
+        <translation>Κλείστε αυτόματα το daemon όταν δεν χρειάζεται</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
