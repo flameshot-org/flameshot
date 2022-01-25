@@ -7,10 +7,10 @@
 #include <QFileInfo>
 #include <QImageWriter>
 #include <QKeySequence>
-#include <QStandardPaths>
-#include <QVariant>
-#include <QStringView>
 #include <QRegularExpression>
+#include <QStandardPaths>
+#include <QStringView>
+#include <QVariant>
 // VALUE HANDLER
 
 QVariant ValueHandler::value(const QVariant& val)
@@ -179,7 +179,7 @@ LowerBoundedInt::LowerBoundedInt(int min, int def)
 bool LowerBoundedInt::check(const QVariant& val)
 {
     QString str = val.toString();
-    bool conversionOk=false;
+    bool conversionOk = false;
     int num = str.toInt(&conversionOk);
     return conversionOk && num >= m_min;
 }
@@ -241,7 +241,7 @@ QVariant KeySequence::process(const QVariant& val)
 
 bool ExistingDir::check(const QVariant& val)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     if (!val.canConvert<String>() || val.toString().isEmpty()) {
 #else
     if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
@@ -471,19 +471,13 @@ QVariant UserColors::representation(const QVariant& val)
 
 bool SaveFileExtension::check(const QVariant& val)
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
-=======
-    if (!val.canConvert<String>() || val.toString().isEmpty())
->>>>>>> 339240f7 (Working on qt6)
-=======
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     if (!val.canConvert<String>() || val.toString().isEmpty()) {
 #else
     if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
 #endif
->>>>>>> afc80ff7 (builds and runs on qt5/6...still some warnings to clean up)
+
         return false;
     }
 
@@ -547,22 +541,23 @@ QVariant Region::process(const QVariant& val)
         return ScreenGrabber().desktopGeometry();
     } else if (str.startsWith("screen")) {
         bool ok;
-        QStringView mid = QStringView{str}.mid(6);
+        QStringView mid = QStringView{ str }.mid(6);
         int number = mid.toInt(&ok);
-        //int number = str.midRef(6).toInt(&ok);
+        // int number = str.midRef(6).toInt(&ok);
         if (!ok || number < 0) {
             return {};
         }
         return ScreenGrabber().screenGeometry(qApp->screens()[number]);
     }
 
-    QRegularExpression regex("(-{,1}\\d+)"   // number (any sign)
-                  "[x,\\.\\s]"    // separator ('x', ',', '.', or whitespace)
-                  "(-{,1}\\d+)"   // number (any sign)
-                  "[\\+,\\.\\s]*" // separator ('+',',', '.', or whitespace)
-                  "(-{,1}\\d+)"   // number (non-negative)
-                  "[\\+,\\.\\s]*" // separator ('+', ',', '.', or whitespace)
-                  "(-{,1}\\d+)"   // number (non-negative)
+    QRegularExpression regex(
+      "(-{,1}\\d+)"   // number (any sign)
+      "[x,\\.\\s]"    // separator ('x', ',', '.', or whitespace)
+      "(-{,1}\\d+)"   // number (any sign)
+      "[\\+,\\.\\s]*" // separator ('+',',', '.', or whitespace)
+      "(-{,1}\\d+)"   // number (non-negative)
+      "[\\+,\\.\\s]*" // separator ('+', ',', '.', or whitespace)
+      "(-{,1}\\d+)"   // number (non-negative)
     );
 
     if (!regex.match(str).hasMatch()) {

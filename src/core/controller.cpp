@@ -1,11 +1,11 @@
-#include <QList>// SPDX-License-Identifier: GPL-3.0-or-later
+#include <QList> // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "controller.h"
 #include "flameshotdaemon.h"
 
 #if defined(Q_OS_MACOS)
-#include "external/QHotkey/QHotkey"
+#include "external/QHotkey/QHotkey/qhotkey.h"
 #endif
 
 #include "abstractlogger.h"
@@ -78,7 +78,12 @@ Controller::Controller()
     // permissions on the first run. Otherwise it will be hidden under the
     // CaptureWidget
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     currentScreen->grabWindow(QApplication::desktop()->winId(), 0, 0, 1, 1);
+#else
+    currentScreen->grabWindow(0, 0, 0, 1, 1);
+#endif
 
     // set global shortcuts for MacOS
     m_HotkeyScreenshotCapture = new QHotkey(

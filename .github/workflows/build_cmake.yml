@@ -68,7 +68,7 @@ jobs:
         #
         # We need to source the profile file to make sure conan is in PATH
         run: |
-          cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+          cmake $GITHUB_WORKSPACE -DUSE_QT6=OFF -DCMAKE_BUILD_TYPE=$BUILD_TYPE
       - name: Build
         working-directory: ${{runner.workspace}}/build
         shell: bash
@@ -109,7 +109,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: 5.15.2
+          version: 6.2.2
           target:  desktop
           dir: '${{ github.workspace }}/build/'
 

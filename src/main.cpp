@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
     wayland_hacks();
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     qRegisterMetaTypeStreamOperators<QList<int>>("QList<int>");
 #endif
     QCoreApplication::setApplicationVersion(APP_VERSION);

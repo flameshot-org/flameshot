@@ -3,7 +3,7 @@ image:
 clone_folder: c:\projects\source
 
 environment:
-  Qt5_INSTALL_DIR: 'C:\Qt\5.15.2\msvc2019_64'
+  Qt5_INSTALL_DIR: 'C:\Qt\6.2.2\msvc2019_64'
   PATH: '%Qt5_INSTALL_DIR%\bin;%PATH%'
 
 build_script:
@@ -13,7 +13,7 @@ build_script:
 
     cd build
 
-    set QTDIR=%Qt5_INSTALL_DIR%
+    set QTDIR=%Qt6_INSTALL_DIR%
 
     set "VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC"
 

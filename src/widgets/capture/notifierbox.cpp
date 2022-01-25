@@ -26,7 +26,7 @@ NotifierBox::NotifierBox(QWidget* parent)
     setFixedSize(QSize(size, size));
 }
 
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 void NotifierBox::enterEvent(QEnterEvent*)
 #else
 void NotifierBox::enterEvent(QEvent*)

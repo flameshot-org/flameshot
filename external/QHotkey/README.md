@@ -14,6 +14,32 @@ The QHotkey is a class that can be used to create hotkeys/global shortcuts, aka 
 
 **Note:** For now Wayland is not supported, as it is simply not possible to register a global shortcut with wayland. For more details, or possible Ideas on how to get Hotkeys working on wayland, see [Issue #14](https://github.com/Skycoder42/QHotkey/issues/14).
 
+## Building
+
+QHotkey supports both Qt6 and Qt5. When using Qt6, version 6.2.0 or later required. It can be built by either the CMake or qmake building systems.
+
+### CMake
+
+The CMake `QT_MAJOR` variable controls which major version of Qt is used for building, and defaults to `5`. For example, use the CMake command line option `-DQT_MAJOR=6` for building with Qt6. To build the testing application `QHotkeyTest`, specify `-DQHOTKEY_EXAMPLES=ON`. CMake example usage:
+
+```
+$ cd QHotkey
+$ cmake -B build -S . -DQT_MAJOR=6
+$ cmake --build build
+# cmake --install build
+```
+
+### qmake
+
+The major version of Qt is chosen by the qmake invokation itself, as the qmake executable is tied to a specific Qt version. The executable name can vary between operating systems. qmake example usage:
+
+```
+$ cd QHotkey
+$ qmake
+$ make
+# make install
+```
+
 ## Installation
 The package is providet as qpm  package, [`de.skycoder42.qhotkey`](https://www.qpm.io/packages/de.skycoder42.qhotkey/index.html). You can install it either via qpmx (preferred) or directly via qpm.
 
@@ -48,17 +74,17 @@ The following example shows a simple application that will run without a window 
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
+	QApplication app(argc, argv);
 
-	auto hotkey = new QHotkey(QKeySequence("ctrl+alt+Q"), true, &a);//The hotkey will be automatically registered
-	qDebug() << "Is Registered: " << hotkey->isRegistered();
+	QHotkey hotkey(QKeySequence("Ctrl+Alt+Q"), true, &app); //The hotkey will be automatically registered
+	qDebug() << "Is segistered:" << hotkey.isRegistered();
 
-	QObject::connect(hotkey, &QHotkey::activated, qApp, [&](){
+	QObject::connect(&hotkey, &QHotkey::activated, qApp, [&](){
 		qDebug() << "Hotkey Activated - the application will quit now";
 		qApp->quit();
 	});
 
-	return a.exec();
+	return app.exec();
 }
 ```
 

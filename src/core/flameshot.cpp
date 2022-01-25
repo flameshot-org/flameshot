@@ -26,7 +26,6 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
-#include <QDesktopWidget>
 #include <QFile>
 #include <QMessageBox>
 #include <QThread>

@@ -1,0 +1,165 @@
+/*!
+@class QHotkey
+
+Each instance of QHotkey represents one shortcut, i.e. one key + modifiers. These shortcuts, once registered, will be activated if the
+user presses that combination - no matter in which application he currently is.
+
+For more details and an example, check the main page.
+
+@sa @ref index "Mainpage"
+*/
+
+/*!
+@property QHotkey::registered
+
+@default{`false`}
+
+If a hotkey is registered, this means that it is set active in the OS and hotkey events will be send to the application.
+If it is registered and the keys are pressed, the activated() signal will be emitted.
+
+@warning Registering/Unregistering hotkeys on other threads but the main thread is allowed, but will block the calling
+thread until the applications eventloop has the time to handle it. If the loop is not running, the function will block until
+it does. This does not happen if used from the main thread.
+
+@accessors{
+	@readAc{isRegistered()}
+	@writeAc{setRegistered()}
+	@notifyAc{registeredChanged()}
+}
+
+In addition to the normal accessors, a modification of the QHotkey::shortcut property can change this property, too.
+
+@sa QHotkey::shortcut, QHotkey::activated, QHotkey::isKeyCaptured
+*/
+
+/*!
+@property QHotkey::shortcut
+
+@default{`QKeySequence()` (`Qt::Key_unknown` + `Qt::NoModifier`)}
+
+Holds the shortcut this hotkey will be registered on. It can be used as QKeySequence or as a combination of
+a Qt::Key and Qt::KeyboardModifiers. All write-accessors specifiy an additional parameter to immediatly register
+the hotkey.
+
+@note Since the operating systems do not support hotkeys that consist of multiple key-combinations in a sequence,
+only the first key/modifier combination of a QKeySequence will be used.
+
+@warning changing the shortcut on other threads but the main thread is allowed, but will block the calling
+thread until the applications eventloop has the time to handle it. If the loop is not running, the function will block until
+it does. This does not happen if used from the main thread.
+
+@accessors{
+	@readAc{
+		<b>shortcut()</b><br/>
+		keyCode()<br/>
+		modifiers()
+	}
+	@writeAc{
+		<b>setShortcut(const QKeySequence &, bool)</b><br/>
+		setShortcut(Qt::Key, Qt::KeyboardModifiers, bool)
+	}
+}
+
+@sa QHotkey::registered, QHotkey::isKeyCaptured, QHotkey::currentNativeShortcut, QHotkey::setNativeShortcut
+*/
+
+/*!
+@fn QHotkey::QHotkey(QObject *)
+
+@param parent The parent object
+*/
+
+/*!
+@fn QHotkey::QHotkey(const QKeySequence &, bool, QObject *)
+
+@param parent The parent object
+@param shortcut The shortcut this hotkey should be registered for
+@param autoRegister Specifies, whether the hotkey should be automatically registered or not
+
+@sa QHotkey::shortcut, QHotkey::registered
+*/
+
+/*!
+@fn QHotkey::QHotkey(Qt::Key, Qt::KeyboardModifiers, bool, QObject *)
+
+@param parent The parent object
+@param keyCode The key this hotkey should be registered for
+@param modifiers The modifiers that have to be pressed together with the `key`
+@param autoRegister Specifies, whether the hotkey should be automatically registered or not
+
+@sa QHotkey::shortcut, QHotkey::registered
+*/
+
+/*!
+@fn QHotkey::QHotkey(const NativeShortcut &, bool, QObject *)
+
+@param parent The parent object
+@param shortcut The native shortcut this hotkey should be registered for
+@param autoRegister Specifies, whether the hotkey should be automatically registered or not
+
+@note Please check QHotkey::setNativeShortcut for important hints!
+
+@sa QHotkey::setNativeShortcut, QHotkey::registered
+*/
+
+/*!
+@fn QHotkey::~QHotkey
+
+If the hotkey is still registered on destruction, it will automatically unregister itself.
+
+@warning If using a hotkey on a thread other than the main thread, make shure the QApplication is still running it's eventloop.
+Otherwise your application will hang up.
+
+@sa QHotkey::registered
+*/
+
+/*!
+@fn QHotkey::setNativeShortcut
+
+@param nativeShortcut The native shortcut to be set
+@param autoRegister Specifies, whether the hotkey should be automatically registered, or not
+@returns `true`, if the shortcut could be successfully set/registered, `false` if not
+
+@warning Setting the native shortcut will cause the shortcut(), keyCode() and modifiers() functions
+to return "invalid values", i.e. if a hotkey has an explicitly set native shortcut, it will not be able
+to get the Qt values for them.
+
+@sa QHotkey::currentNativeShortcut, QHotkey::shortcut, QHotkey::registered
+*/
+
+/*!
+@fn QHotkey::activated
+
+This signal can only be emitted if Hotkey::registered is set to true (with a valid key-sequence). The signal will always be emitted
+from the thread this instance lives on.
+
+@note This is a private signal. It can be used in signal connections but cannot be emitted by the user.
+*/
+
+/*!
+@fn QHotkey::addGlobalMapping
+
+@param shortcut The keysequence to add the mapping for
+@param nativeShortcut The native shortcut to overwrite the sequence with
+
+This method can be used to remap specific hotkey to a different native representation than the
+one that would be used by default. This can be useful if specific key combinations work fine
+on allmost all platforms, but on one you need a different keycode for the same effect. See
+[Issue #15](https://github.com/Skycoder42/QHotkey/issues/15) for an example where this is the
+case.
+
+The advantage of using this approach via simply registering it as native key directly, is that
+these mappings work for cases where users input their own hotkeys.
+*/
+
+/*!
+@class QHotkey::NativeShortcut
+
+The NativeShortcut holds the native keycode and modifiers, after they have been translated
+from Qt::Key and Qt::Modifiers into the native ones.
+
+It can be used to find out how a current hotkey is mapped to the system, or to explicitly create
+a shortcut from those native values
+
+@sa QHotkey::setNativeShortcut
+*/

@@ -18,8 +18,8 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include <QProcess>
-#include <QTabWidget>
 #include <QRegularExpression>
+#include <QTabWidget>
 
 namespace {
 
@@ -97,9 +97,10 @@ void AppLauncherWidget::launch(const QModelIndex& index)
             return;
         }
     }
-    QString command = index.data(Qt::UserRole)
-                        .toString()
-                        .replace(QRegularExpression("(\\%.)"), '"' + m_tempFile + '"');
+    QString command =
+      index.data(Qt::UserRole)
+        .toString()
+        .replace(QRegularExpression("(\\%.)"), '"' + m_tempFile + '"');
 
     QString app_name = index.data(Qt::UserRole).toString().split(" ").at(0);
     bool inTerminal =
@@ -134,7 +135,8 @@ void AppLauncherWidget::searchChanged(const QString& text)
         m_filterList->show();
         m_filterList->clear();
         auto reOptions = QRegularExpression::CaseInsensitiveOption;
-        QRegularExpression regexp(QRegularExpression::wildcardToRegularExpression(text), reOptions);
+        QRegularExpression regexp(
+          QRegularExpression::wildcardToRegularExpression(text), reOptions);
         QVector<DesktopAppData> apps;
 
         for (auto const& i : catIconNames.toStdMap()) {
@@ -153,8 +155,6 @@ void AppLauncherWidget::searchChanged(const QString& text)
         addAppsToListWidget(m_filterList, apps);
     }
 }
-
-
 
 void AppLauncherWidget::initListWidget()
 {

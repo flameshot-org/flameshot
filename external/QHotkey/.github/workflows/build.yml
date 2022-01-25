@@ -1,0 +1,71 @@
+name: Build
+
+on:
+  push:
+    branches-ignore:
+      - "releases/**"
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        qt_version: [5.12.11, 5.15.2, 6.2.0]
+        platform: [ubuntu-20.04, windows-latest, macos-latest]
+        include:
+          - qt_version: 6.2.0
+            additional_arguments: -D QT_DEFAULT_MAJOR_VERSION=6
+          - platform: ubuntu-20.04
+            make: make
+            CXXFLAGS: -Wall -Wextra -pedantic -Werror
+            MAKEFLAGS: -j2
+          - platform: macos-latest
+            make: make
+            CXXFLAGS: -Wall -Wextra -pedantic -Werror -Wno-gnu-zero-variadic-macro-arguments # Ignore false-positive warning for qCWarning
+            MAKEFLAGS: -j3
+          - platform: windows-latest
+            make: nmake
+            CXXFLAGS: /W4 /WX /MP
+
+    runs-on: ${{ matrix.platform }}
+    env:
+      CXXFLAGS: ${{ matrix.CXXFLAGS }}
+      MAKEFLAGS: ${{ matrix.MAKEFLAGS }}
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2.3.4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2.14.0
+        with:
+          version: ${{ matrix.qt_version }}
+
+      - name: Build with CMake as static
+        run: |
+          cmake . -D QHOTKEY_EXAMPLES=ON ${{ matrix.additional_arguments }}
+          cmake --build .
+
+      - name: Build with CMake as shared
+        run: |
+          cmake . -D BUILD_SHARED_LIBS=ON -D QHOTKEY_EXAMPLES=ON ${{ matrix.additional_arguments }}
+          cmake --build .
+
+      - name: Setup MSVC environment for QMake
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Build with QMake as static
+        working-directory: HotkeyTest
+        run: |
+          qmake
+          ${{ matrix.make }}
+
+      - name: Build with QMake as shared
+        working-directory: HotkeyTest
+        run: |
+          qmake "DEFINES+=QHOTKEY_SHARED QHOTKEY_LIBRARY"
+          ${{ matrix.make }}

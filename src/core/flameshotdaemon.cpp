@@ -110,8 +110,8 @@ void FlameshotDaemon::createPin(QPixmap capture, QRect geometry)
     }
 
     QByteArray data;
-  
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QDataStream stream(&data, QIODeviceBase::WriteOnly);
 #else
     QDataStream stream(&data, QIODevice::WriteOnly);
@@ -136,7 +136,7 @@ void FlameshotDaemon::copyToClipboard(QPixmap capture)
 
     QByteArray data;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QDataStream stream(&data, QIODeviceBase::WriteOnly);
 #else
     QDataStream stream(&data, QIODevice::WriteOnly);

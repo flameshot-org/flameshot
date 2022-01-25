@@ -48,14 +48,14 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install Qt
-        run: brew install qt@5 cmake
+        run: brew install qt@6 cmake
 
       - name: Configure
         run: |
           mkdir -p "${DIR_BULD}"
           cd "${DIR_BULD}"
           rm -rf ./src/flameshot.dmg ./src/flameshot.app/
-          cmake .. -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DUSE_MONOCHROME_ICON=True
+          cmake .. -DQt6_DIR=$(brew --prefix qt6)/lib/cmake/Qt6 -DUSE_MONOCHROME_ICON=True
 
       - name: Compile
         run: |
