@@ -6,7 +6,9 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class InfoWindow; }
+namespace Ui {
+class InfoWindow;
+}
 QT_END_NAMESPACE
 
 class InfoWindow : public QWidget
@@ -14,11 +16,11 @@ class InfoWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit InfoWindow(QWidget *parent = nullptr);
+    explicit InfoWindow(QWidget* parent = nullptr);
     ~InfoWindow();
 
 private:
-    Ui::InfoWindow *ui;
+    Ui::InfoWindow* ui;
 
 protected:
     void keyPressEvent(QKeyEvent* event);
