@@ -4,7 +4,10 @@ add_subdirectory(capture)
 # Required to generate MOC
 target_sources(
         flameshot
-        PRIVATE capturelauncher.h
+        PRIVATE
+        infowindow.ui
+
+        capturelauncher.h
         draggablewidgetmaker.h
         imagelabel.h
         infowindow.h
