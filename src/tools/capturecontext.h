@@ -27,6 +27,8 @@ struct CaptureContext
     QPoint mousePos;
     // Size of the active tool
     int toolSize;
+    // Current circle count
+    int circleCount;
     // Mode of the capture widget
     bool fullscreen;
     CaptureRequest request = CaptureRequest::GRAPHICAL_MODE;

@@ -22,6 +22,8 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   , m_layersLayout(nullptr)
   , m_captureTools(nullptr)
   , m_buttonDelete(nullptr)
+  , m_buttonMoveUp(nullptr)
+  , m_buttonMoveDown(nullptr)
 {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -141,18 +143,47 @@ void UtilityPanel::initInternalPanel()
 
     QHBoxLayout* layersButtons = new QHBoxLayout();
     m_layersLayout->addLayout(layersButtons);
+
     m_layersLayout->addWidget(m_captureTools);
 
+    bool isDark = ColorUtils::colorIsDark(bgColor);
+    QString coloredIconPath =
+      isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+
     m_buttonDelete = new QPushButton(this);
-    m_buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
+    m_buttonDelete->setIcon(QIcon(coloredIconPath + "delete.svg"));
+    m_buttonDelete->setMinimumWidth(m_buttonDelete->height());
     m_buttonDelete->setDisabled(true);
+
+    m_buttonMoveUp = new QPushButton(this);
+    m_buttonMoveUp->setIcon(QIcon(coloredIconPath + "move_up.svg"));
+    m_buttonMoveUp->setMinimumWidth(m_buttonMoveUp->height());
+    m_buttonMoveUp->setDisabled(true);
+
+    m_buttonMoveDown = new QPushButton(this);
+    m_buttonMoveDown->setIcon(QIcon(coloredIconPath + "move_down.svg"));
+    m_buttonMoveDown->setMinimumWidth(m_buttonMoveDown->height());
+    m_buttonMoveDown->setDisabled(true);
+
     layersButtons->addWidget(m_buttonDelete);
+    layersButtons->addWidget(m_buttonMoveUp);
+    layersButtons->addWidget(m_buttonMoveDown);
     layersButtons->addStretch();
 
     connect(m_buttonDelete,
             SIGNAL(clicked(bool)),
             this,
             SLOT(slotButtonDelete(bool)));
+
+    connect(m_buttonMoveUp,
+            &QPushButton::clicked,
+            this,
+            &UtilityPanel::slotUpClicked);
+
+    connect(m_buttonMoveDown,
+            &QPushButton::clicked,
+            this,
+            &UtilityPanel::slotDownClicked);
 
     // Bottom
     QPushButton* closeButton = new QPushButton(this);
@@ -192,12 +223,30 @@ int UtilityPanel::activeLayerIndex()
 
 void UtilityPanel::onCurrentRowChanged(int currentRow)
 {
-    if (currentRow > 0) {
-        m_buttonDelete->setDisabled(false);
-    } else {
-        m_buttonDelete->setDisabled(true);
-    }
+    m_buttonDelete->setDisabled(currentRow <= 0);
+    m_buttonMoveDown->setDisabled(currentRow == 0 ||
+                                  currentRow + 1 == m_captureTools->count());
+    m_buttonMoveUp->setDisabled(currentRow <= 1);
+
     emit layerChanged(activeLayerIndex());
+}
+
+void UtilityPanel::slotUpClicked(bool clicked)
+{
+    Q_UNUSED(clicked);
+    // subtract 1 because there's <empty> in m_captureTools as [0] element
+    int toolRow = m_captureTools->currentRow() - 1;
+    m_captureTools->setCurrentRow(toolRow);
+    emit moveUpClicked(toolRow);
+}
+
+void UtilityPanel::slotDownClicked(bool clicked)
+{
+    Q_UNUSED(clicked);
+    // subtract 1 because there's <empty> in m_captureTools as [0] element
+    int toolRow = m_captureTools->currentRow() - 1;
+    m_captureTools->setCurrentRow(toolRow + 2);
+    emit moveDownClicked(toolRow);
 }
 
 void UtilityPanel::slotButtonDelete(bool clicked)

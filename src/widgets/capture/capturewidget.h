@@ -76,6 +76,8 @@ private slots:
     void onToolSizeChanged(int size);
     void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
+    void onMoveCaptureToolUp(int captureToolIndex);
+    void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
 
 public:
@@ -115,6 +117,7 @@ private:
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
+    void restoreCircleCountState();
 
     QList<QShortcut*> newShortcut(const QKeySequence& key,
                                   QWidget* parent,
