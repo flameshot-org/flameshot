@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../../data/graphics.qrc">
-    <normaloff>:/img/app/flameshot.svg</normaloff>:/img/app/flameshot.svg</iconset>
+    <normaloff>:/img/app/flameshot.png</normaloff>:/img/app/flameshot.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -34,6 +34,7 @@
       <widget class="QLabel" name="License">
        <property name="font">
         <font>
+         <weight>75</weight>
          <bold>true</bold>
          <underline>true</underline>
         </font>
@@ -79,6 +80,7 @@
       <widget class="QLabel" name="Version">
        <property name="font">
         <font>
+         <weight>75</weight>
          <bold>true</bold>
          <underline>true</underline>
         </font>
