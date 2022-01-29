@@ -1326,11 +1326,8 @@ void CaptureWidget::removeToolObject(int index)
           paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
             removedCircleCount = m_captureToolObjects.at(index)->count();
-        }
-        m_captureToolObjects.removeAt(index);
-        if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
             --m_context.circleCount;
-            // Decrement circle counter number starting from deleted circle
+            // Decrement circle counter numbers starting from deleted circle
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
                 auto toolItem = m_captureToolObjects.at(cnt);
                 if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
@@ -1342,6 +1339,7 @@ void CaptureWidget::removeToolObject(int index)
                 }
             }
         }
+        m_captureToolObjects.removeAt(index);
         pushObjectsStateToUndoStack();
         drawToolsData();
         updateLayersPanel();
@@ -1586,7 +1584,7 @@ void CaptureWidget::makeChild(QWidget* w)
 
 void CaptureWidget::restoreCircleCountState()
 {
-    int largest = 1;
+    int largest = 0;
     for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
         auto toolItem = m_captureToolObjects.at(cnt);
         if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
@@ -1661,8 +1659,6 @@ void CaptureWidget::undo()
     drawToolsData();
     updateLayersPanel();
 
-    // FIXME restore m_context.circleCount since this state isn't saved in undo
-    // stack
     restoreCircleCountState();
 }
 
@@ -1676,8 +1672,6 @@ void CaptureWidget::redo()
     update();
     updateLayersPanel();
 
-    // FIXME restore m_context.circleCount since this state isn't saved in undo
-    // stack
     restoreCircleCountState();
 }
 
