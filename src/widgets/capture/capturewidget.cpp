@@ -73,6 +73,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
 
+    m_context.circleCount = 1;
+
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
     connect(m_eventFilter,
@@ -555,6 +557,8 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
             // point and shouldn't wait for second point and move event
             m_activeTool->drawEnd(m_context.mousePos);
 
+            m_activeTool->setCount(m_context.circleCount++);
+
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_captureToolObjects.append(m_activeTool);
             pushObjectsStateToUndoStack();
@@ -967,6 +971,14 @@ void CaptureWidget::initPanel()
             &UtilityPanel::layerChanged,
             this,
             &CaptureWidget::updateActiveLayer);
+    connect(m_panel,
+            &UtilityPanel::moveUpClicked,
+            this,
+            &CaptureWidget::onMoveCaptureToolUp);
+    connect(m_panel,
+            &UtilityPanel::moveDownClicked,
+            this,
+            &CaptureWidget::onMoveCaptureToolDown);
 
     m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
@@ -1266,6 +1278,26 @@ void CaptureWidget::updateActiveLayer(int layer)
     updateSelectionState();
 }
 
+void CaptureWidget::onMoveCaptureToolUp(int captureToolIndex)
+{
+    m_captureToolObjectsBackup = m_captureToolObjects;
+    pushObjectsStateToUndoStack();
+    auto tool = m_captureToolObjects.at(captureToolIndex);
+    m_captureToolObjects.removeAt(captureToolIndex);
+    m_captureToolObjects.insert(captureToolIndex - 1, tool);
+    updateLayersPanel();
+}
+
+void CaptureWidget::onMoveCaptureToolDown(int captureToolIndex)
+{
+    m_captureToolObjectsBackup = m_captureToolObjects;
+    pushObjectsStateToUndoStack();
+    auto tool = m_captureToolObjects.at(captureToolIndex);
+    m_captureToolObjects.removeAt(captureToolIndex);
+    m_captureToolObjects.insert(captureToolIndex + 1, tool);
+    updateLayersPanel();
+}
+
 void CaptureWidget::selectAll()
 {
     m_selection->show();
@@ -1279,26 +1311,30 @@ void CaptureWidget::removeToolObject(int index)
 {
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
+        // in case this tool is circle counter
+        int removedCircleCount = -1;
+
         const CaptureTool::Type currentToolType =
           m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         update(
           paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
-        m_captureToolObjects.removeAt(index);
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
-            // Do circle count reindex
-            int circleCount = 1;
+            removedCircleCount = m_captureToolObjects.at(index)->count();
+            --m_context.circleCount;
+            // Decrement circle counter numbers starting from deleted circle
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
                 auto toolItem = m_captureToolObjects.at(cnt);
                 if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
                     continue;
                 }
-                if (cnt >= index) {
-                    m_captureToolObjects.at(cnt)->setCount(circleCount);
+                auto circleTool = m_captureToolObjects.at(cnt);
+                if (circleTool->count() >= removedCircleCount) {
+                    circleTool->setCount(circleTool->count() - 1);
                 }
-                circleCount++;
             }
         }
+        m_captureToolObjects.removeAt(index);
         pushObjectsStateToUndoStack();
         drawToolsData();
         updateLayersPanel();
@@ -1481,11 +1517,7 @@ void CaptureWidget::drawToolsData(bool drawSelection)
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
-    int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        if (toolItem->type() == CaptureTool::TYPE_CIRCLECOUNT) {
-            toolItem->setCount(circleCount++);
-        }
         processPixmapWithTool(&pixmapItem, toolItem);
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
@@ -1545,6 +1577,20 @@ void CaptureWidget::makeChild(QWidget* w)
 {
     w->setParent(this);
     w->installEventFilter(m_eventFilter);
+}
+
+void CaptureWidget::restoreCircleCountState()
+{
+    int largest = 0;
+    for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
+        auto toolItem = m_captureToolObjects.at(cnt);
+        if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
+            continue;
+        }
+        if (toolItem->count() > largest)
+            largest = toolItem->count();
+    }
+    m_context.circleCount = largest + 1;
 }
 
 /**
@@ -1609,6 +1655,8 @@ void CaptureWidget::undo()
     m_undoStack.undo();
     drawToolsData();
     updateLayersPanel();
+
+    restoreCircleCountState();
 }
 
 void CaptureWidget::redo()
@@ -1620,6 +1668,8 @@ void CaptureWidget::redo()
     drawToolsData();
     update();
     updateLayersPanel();
+
+    restoreCircleCountState();
 }
 
 QRect CaptureWidget::extendedSelection() const
