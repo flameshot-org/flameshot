@@ -152,14 +152,17 @@ void UtilityPanel::initInternalPanel()
 
     m_buttonDelete = new QPushButton(this);
     m_buttonDelete->setIcon(QIcon(coloredIconPath + "delete.svg"));
+    m_buttonDelete->setMinimumWidth(m_buttonDelete->height());
     m_buttonDelete->setDisabled(true);
 
     m_buttonMoveUp = new QPushButton(this);
     m_buttonMoveUp->setIcon(QIcon(coloredIconPath + "move_up.svg"));
+    m_buttonMoveUp->setMinimumWidth(m_buttonMoveUp->height());
     m_buttonMoveUp->setDisabled(true);
 
     m_buttonMoveDown = new QPushButton(this);
     m_buttonMoveDown->setIcon(QIcon(coloredIconPath + "move_down.svg"));
+    m_buttonMoveDown->setMinimumWidth(m_buttonMoveDown->height());
     m_buttonMoveDown->setDisabled(true);
 
     layersButtons->addWidget(m_buttonDelete);
