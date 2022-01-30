@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+// SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
-#include "src/widgets/spinbox.h"
+#include "src/widgets/colorspinbox.h"
 #include "src/utils/confighandler.h"
 
-SpinBox::SpinBox(QWidget* parent)
+ColorSpinBox::ColorSpinBox(QWidget* parent)
   : QSpinBox(parent)
 {
-    initSpinbox();
+    initColorSpinbox();
 }
 
-int SpinBox::valueFromText(const QString& text) const
+int ColorSpinBox::valueFromText(const QString& text) const
 {
     if (!QColor::isValidColor(text)) {
         return 1;
@@ -27,12 +27,12 @@ int SpinBox::valueFromText(const QString& text) const
     return 1;
 }
 
-QString SpinBox::textFromValue(int value) const
+QString ColorSpinBox::textFromValue(int value) const
 {
     return m_colorList[value].name(QColor::HexRgb);
 }
 
-void SpinBox::initSpinbox()
+void ColorSpinBox::initColorSpinbox()
 {
     ConfigHandler config;
     m_colorList = config.userColors();
@@ -41,8 +41,8 @@ void SpinBox::initSpinbox()
     setWrapping(true);
 }
 
-void SpinBox::updateWidget()
+void ColorSpinBox::updateWidget()
 {
-    initSpinbox();
+    initColorSpinbox();
     update();
 }

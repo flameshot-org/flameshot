@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+// SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #pragma once
 
 #include "QtColorWidgets/color_wheel.hpp"
 #include <QWidget>
 
-class SpinBox;
+class ColorSpinBox;
 class ColorPickerWidget;
 class QLabel;
 class QPushButton;
@@ -31,8 +31,8 @@ private:
     ColorPickerWidget* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
 
-    QLabel* m_spinboxLabel;
-    SpinBox* m_spinbox;
+    QLabel* m_colorSpinboxLabel;
+    ColorSpinBox* m_colorSpinbox;
     QPushButton* m_deletePresetButton;
 
     QLineEdit* m_colorInput;

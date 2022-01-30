@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+// SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #include "colorpickereditor.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 #include "src/widgets/colorpickerwidget.h"
-#include "src/widgets/spinbox.h"
+#include "src/widgets/colorspinbox.h"
 
 #include <QApplication>
 #include <QColor>
@@ -39,19 +39,19 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     QVBoxLayout* m_vLocalLayout1 = new QVBoxLayout();
     m_vLocalLayout1->addStretch();
 
-    m_spinboxLabel = new QLabel(tr("Select Preset:"), this);
-    m_vLocalLayout1->addWidget(m_spinboxLabel);
+    m_colorSpinboxLabel = new QLabel(tr("Select Preset:"), this);
+    m_vLocalLayout1->addWidget(m_colorSpinboxLabel);
 
-    m_spinbox = new SpinBox(this);
-    connect(m_spinbox,
+    m_colorSpinbox = new ColorSpinBox(this);
+    connect(m_colorSpinbox,
             QOverload<int>::of(&QSpinBox::valueChanged),
             m_colorpicker,
             [=](int val) {
                 m_selectedIndex = val;
                 m_colorpicker->updateSelection(val);
             });
-    m_spinbox->setToolTip(tr("Select preset using the spinbox"));
-    m_vLocalLayout1->addWidget(m_spinbox);
+    m_colorSpinbox->setToolTip(tr("Select preset using the spinbox"));
+    m_vLocalLayout1->addWidget(m_colorSpinbox);
 
     m_deletePresetButton = new QPushButton(tr("Delete"), this);
     m_deletePresetButton->setToolTip(
@@ -108,10 +108,13 @@ void ColorPickerEditor::addPreset()
 
     colors << m_color;
 
-    const int maxPresetsAllowed = 10;
+    const int maxPresetsAllowed = 17;
 
     if (colors.size() > maxPresetsAllowed) {
-        QMessageBox::critical(this, tr("Error"), tr("Unable to add preset."));
+        QMessageBox::critical(
+          this,
+          tr("Error"),
+          tr("Unable to add preset. Maximum limit reached."));
         return;
     }
 
@@ -129,7 +132,9 @@ void ColorPickerEditor::deletePreset()
 
     if (colors.size() < minPresetsAllowed) {
         QMessageBox::critical(
-          this, tr("Error"), tr("Unable to remove preset."));
+          this,
+          tr("Error"),
+          tr("Unable to remove preset. Minimum limit reached."));
         return;
     }
 
@@ -147,15 +152,15 @@ void ColorPickerEditor::onAddPreset()
     }
 
     addPreset();
-    m_spinbox->setValue(1);
+    m_colorSpinbox->setValue(1);
     m_colorpicker->updateWidget();
-    m_spinbox->updateWidget();
+    m_colorSpinbox->updateWidget();
 }
 
 void ColorPickerEditor::onDeletePreset()
 {
     deletePreset();
-    m_spinbox->setValue(1);
+    m_colorSpinbox->setValue(1);
     m_colorpicker->updateWidget();
-    m_spinbox->updateWidget();
+    m_colorSpinbox->updateWidget();
 }

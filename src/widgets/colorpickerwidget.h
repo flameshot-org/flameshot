@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+// SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #pragma once
 
@@ -11,7 +11,8 @@ class ColorPickerWidget : public QWidget
 public:
     explicit ColorPickerWidget(QWidget* parent = nullptr);
 
-    static const QVector<QColor>& getDefaultColors();
+    static const QVector<QColor>& getDefaultSmallColorPalette();
+    static const QVector<QColor>& getDefaultLargeColorPalette();
     void updateWidget();
     void updateSelection(int index);
 
@@ -28,5 +29,5 @@ protected:
 
 private:
     void initColorPicker();
-    static QVector<QColor> defaultColors;
+    static QVector<QColor> defaultSmallColorPalette, defaultLargeColorPalette;
 };

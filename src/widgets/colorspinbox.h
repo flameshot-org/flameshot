@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+// SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #pragma once
 
 #include <QColor>
 #include <QSpinBox>
 
-class SpinBox : public QSpinBox
+class ColorSpinBox : public QSpinBox
 {
     Q_OBJECT
 public:
-    explicit SpinBox(QWidget* parent = nullptr);
+    explicit ColorSpinBox(QWidget* parent = nullptr);
     void updateWidget();
 
 protected:
@@ -18,7 +18,7 @@ protected:
     QString textFromValue(int value) const override;
 
 private:
-    void initSpinbox();
+    void initColorSpinbox();
 
     QVector<QColor> m_colorList;
 };

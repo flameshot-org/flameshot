@@ -112,7 +112,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("drawThickness"               ,LowerBoundedInt    (1  , 3             )),
     OPTION("drawFontSize"                ,LowerBoundedInt    (1  , 8             )),
     OPTION("drawColor"                   ,Color              ( Qt::red       )),
-    OPTION("userColors"                  ,UserColors(3,        10            )),
+    OPTION("userColors"                  ,UserColors(3,        17            )),
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+// SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #include "colorpickerwidget.h"
 #include "src/utils/confighandler.h"
@@ -15,9 +15,14 @@ ColorPickerWidget::ColorPickerWidget(QWidget* parent)
     initColorPicker();
 }
 
-const QVector<QColor>& ColorPickerWidget::getDefaultColors()
+const QVector<QColor>& ColorPickerWidget::getDefaultSmallColorPalette()
 {
-    return defaultColors;
+    return defaultSmallColorPalette;
+}
+
+const QVector<QColor>& ColorPickerWidget::getDefaultLargeColorPalette()
+{
+    return defaultLargeColorPalette;
 }
 
 void ColorPickerWidget::paintEvent(QPaintEvent* e)
@@ -44,9 +49,14 @@ void ColorPickerWidget::repaint(int i, QPainter& painter)
         c.setAlpha(100);
         painter.setPen(c);
         QRect highlight = m_colorAreaList.at(i);
-        highlight.moveTo(highlight.x() - 3, highlight.y() - 3);
-        highlight.setHeight(highlight.height() + 6);
-        highlight.setWidth(highlight.width() + 6);
+        const int highlightThickness = 6;
+
+        // makes the highlight and color circles concentric
+        highlight.moveTo(highlight.x() - (highlightThickness / 2),
+                         highlight.y() - (highlightThickness / 2));
+
+        highlight.setHeight(highlight.height() + highlightThickness);
+        highlight.setWidth(highlight.width() + highlightThickness);
         painter.drawRoundedRect(highlight, 100, 100);
         painter.setPen(QColor(Qt::black));
     }
@@ -112,7 +122,7 @@ void ColorPickerWidget::initColorPicker()
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;
-    double radius = GlobalValues::buttonBaseSize() * 1.5;
+    double radius = GlobalValues::buttonBaseSize() * 2;
     setMinimumSize(radius * 2 + m_colorAreaSize + extraSize,
                    radius * 2 + m_colorAreaSize + extraSize);
     resize(radius * 2 + m_colorAreaSize + extraSize,
@@ -133,7 +143,14 @@ void ColorPickerWidget::initColorPicker()
     }
 }
 
-QVector<QColor> ColorPickerWidget::defaultColors = {
+QVector<QColor> ColorPickerWidget::defaultSmallColorPalette = {
     QColor(),      Qt::darkRed, Qt::red,  Qt::yellow,  Qt::green,
     Qt::darkGreen, Qt::cyan,    Qt::blue, Qt::magenta, Qt::darkMagenta
+};
+
+QVector<QColor> ColorPickerWidget::defaultLargeColorPalette = {
+    QColor(),        Qt::white,     Qt::red,       Qt::green,     Qt::blue,
+    Qt::black,       Qt::darkRed,   Qt::darkGreen, Qt::darkBlue,  Qt::darkGray,
+    Qt::cyan,        Qt::magenta,   Qt::yellow,    Qt::lightGray, Qt::darkCyan,
+    Qt::darkMagenta, Qt::darkYellow
 };

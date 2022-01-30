@@ -427,9 +427,11 @@ QVariant UserColors::process(const QVariant& val)
 QVariant UserColors::fallback()
 {
     if (ConfigHandler().predefinedColorPaletteLarge()) {
-        return QVariant::fromValue(ColorPickerWidget::getDefaultColors());
+        return QVariant::fromValue(
+          ColorPickerWidget::getDefaultLargeColorPalette());
     } else {
-        return QVariant::fromValue(ColorPickerWidget::getDefaultColors());
+        return QVariant::fromValue(
+          ColorPickerWidget::getDefaultSmallColorPalette());
     }
 }
 
