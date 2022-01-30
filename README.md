@@ -175,8 +175,13 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
-You can also edit some of the settings (like overriding the default colors) in the configuration file located at `~/.config/flameshot/flameshot.ini`.
+You can also edit some of the settings (like overriding the default colors) in the configuration file.\
+Linux path : `~/.config/flameshot/flameshot.ini`.\
+Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
 
+When copying over the config file from Linux to Windows or vice versa, 
+make sure to correct the `savePath` variable,\
+so that the screenshots save in the right directory on your desired file system.
 
 ## Keyboard shortcuts
 
@@ -212,6 +217,8 @@ These shortcuts are available in GUI mode:
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
 | <kbd>Print screen</kbd>                                          | Capture Screen |
 | <kbd>Shift</kbd> + <kbd>Print</kbd>                                            | Screenshot History                                     |
+| <kbd>Ctrl</kbd> + drawing *line*, *arrow* or *marker*      | Drawing only horizontally, vertically or diagonally |
+| <kbd>Ctrl</kbd> + drawing *rectangle* or *circle*      | Keeping aspect ratio |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
 
@@ -462,11 +469,12 @@ Simply use `make install` with privileges.
 Note: If you install from source, there is no uninstaller, you will need to manually remove the files. Consider using [CMAKE_INSTALL_PREFIX](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) to install to a custom location for easy removal.
 
 ### FAQ
-https://flameshot.org/guide/faq/
+
+<https://flameshot.org/docs/guide/faq/>
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
-- The logo of Flameshot is licensed under [Free Art License v1.3](img/app/flameshotLogoLicense.txt)
+- The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
 - The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h (GPLv2)
@@ -496,6 +504,7 @@ Thanks to those who have shown interest in the early development process:
 - ismatori
 
 Thanks to sponsors:
-- Namecheap
-- JetBrains
-- SignPath
+- [Namecheap](https://www.namecheap.com/)
+- [JetBrains](https://www.jetbrains.com/)
+- [SignPath](https://signpath.io/)
+- [AnonAddy](https://anonaddy.com)

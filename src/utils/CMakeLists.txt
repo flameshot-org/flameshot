@@ -1,7 +1,7 @@
 # Required to generate MOC
 target_sources(
   flameshot
-  PRIVATE dbusutils.h
+  PRIVATE abstractlogger.h
           filenamehandler.h
           screengrabber.h
           systemnotification.h
@@ -12,13 +12,13 @@ target_sources(
 
 target_sources(
   flameshot
-  PRIVATE filenamehandler.cpp
+  PRIVATE abstractlogger.cpp
+          filenamehandler.cpp
           screengrabber.cpp
           confighandler.cpp
           systemnotification.cpp
           valuehandler.cpp
           screenshotsaver.cpp
-          dbusutils.cpp
           globalvalues.cpp
           desktopfileparse.cpp
           desktopinfo.cpp

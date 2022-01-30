@@ -4,7 +4,11 @@ add_subdirectory(capture)
 # Required to generate MOC
 target_sources(
         flameshot
-        PRIVATE capturelauncher.h
+        PRIVATE
+        infowindow.ui
+        capturelauncher.ui
+
+        capturelauncher.h
         draggablewidgetmaker.h
         imagelabel.h
         infowindow.h
@@ -13,9 +17,9 @@ target_sources(
         orientablepushbutton.h
         historywidget.h
         updatenotificationwidget.h
-        imguruploaddialog.h
         colorpickerwidget.h
         spinbox.h
+        imguploaddialog.h
         capture/capturetoolobjects.h
 )
 
@@ -30,8 +34,8 @@ target_sources(
         orientablepushbutton.cpp
         historywidget.cpp
         updatenotificationwidget.cpp
-        imguruploaddialog.cpp
         colorpickerwidget.cpp
         spinbox.cpp
+        imguploaddialog.cpp
         capture/capturetoolobjects.cpp
 )

@@ -10,6 +10,10 @@ find_package(
         DBus
         LinguistTools)
 
+if (USE_WAYLAND_CLIPBOARD)
+    find_package(KF5GuiAddons)
+endif()
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -33,8 +37,8 @@ if (APPLE)
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out flameshot.iconset/icon_256x256@2x.png"
             COMMAND bash "-c" "sips -z 512 512   \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out flameshot.iconset/icon_512x512.png"
             COMMAND bash "-c" "sips -z 1024 1024 \"${CMAKE_SOURCE_DIR}\"/data/img/app/flameshot.monochrome-1024.png --out flameshot.iconset/icon_512x512@2x.png"
-          
-          
+
+
             COMMAND bash "-c" "iconutil -c icns flameshot.iconset"
     )
 
@@ -76,36 +80,42 @@ add_subdirectory(widgets)
 add_subdirectory(tools)
 
 
-
-
 set(FLAMESHOT_TS_FILES
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it_IT.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nb_NO.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_HK.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_bg.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fi.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_gl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_grc.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_he.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_id.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it_IT.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nb_NO.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_vi.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_HK.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts
+         )
 
 if (GENERATE_TS)
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
@@ -162,6 +172,12 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/panel>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/capture>
          $<INSTALL_INTERFACE:include/mylib>)
+target_include_directories(
+    flameshot
+    PUBLIC
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
+         )
+
 
 if (USE_EXTERNAL_SINGLEAPPLICATION)
     add_compile_definitions(USE_EXTERNAL_SINGLEAPPLICATION=1)
@@ -182,8 +198,13 @@ target_link_libraries(
         Qt5::Widgets
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
-        spdlog::spdlog
+
 )
+
+if (USE_WAYLAND_CLIPBOARD)
+  target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
+  target_link_libraries(flameshot KF5::GuiAddons)
+endif()
 
 if (APPLE)
     set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")
@@ -214,6 +235,15 @@ if (WIN32)
         message(WARNING "OpenSSL is required to upload screenshots")
     endif ()
 endif ()
+
+# Choose default color palette (small or large)
+if($ENV{FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+    set(FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE true)
+else()
+    set(FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE false)
+endif()
+message("Flameshot predefined color palette large: " ${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
+target_compile_definitions(flameshot PRIVATE PREDEFINED_COLOR_PALETTE_LARGE=${FLAMESHOT_PREDEFINED_COLOR_PALETTE_LARGE})
 
 find_package (Git)
 if (GIT_FOUND)
@@ -275,11 +305,14 @@ if (UNIX)
     configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
             ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
             ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
             ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
+
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.fish
+            ${CMAKE_CURRENT_BINARY_DIR}/share/fish/vendor_completions.d/flameshot.fish COPYONLY)
 
     configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
             ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/interfaces/org.flameshot.Flameshot.xml COPYONLY)
@@ -347,7 +380,7 @@ if (WIN32)
         if (ENABLE_OPENSSL)
             if (EXISTS ${OPENSSL_ROOT_DIR}/bin)
 
-             install(
+                install(
                         DIRECTORY ${OPENSSL_ROOT_DIR}/bin/
                         DESTINATION bin
                         FILES_MATCHING

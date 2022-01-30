@@ -426,8 +426,11 @@ QVariant UserColors::process(const QVariant& val)
 
 QVariant UserColors::fallback()
 {
-    auto colorList = ColorPickerWidget::getDefaultColors();
-    return QVariant::fromValue(colorList);
+    if (ConfigHandler().predefinedColorPaletteLarge()) {
+        return QVariant::fromValue(ColorPickerWidget::getDefaultColors());
+    } else {
+        return QVariant::fromValue(ColorPickerWidget::getDefaultColors());
+    }
 }
 
 QString UserColors::expected()

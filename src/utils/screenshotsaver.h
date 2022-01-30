@@ -12,7 +12,6 @@ class ScreenshotSaver
 {
 public:
     ScreenshotSaver();
-    ScreenshotSaver(const unsigned id);
 
     void saveToClipboard(const QPixmap& capture);
     void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
@@ -22,7 +21,6 @@ public:
     bool saveToFilesystemGUI(const QPixmap& capture);
 
 private:
-    unsigned m_id;
     QString ShowSaveFileDialog(QWidget* parent,
                                const QString& title,
                                const QString& directory);

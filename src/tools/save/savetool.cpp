@@ -41,7 +41,8 @@ CaptureTool* SaveTool::copy(QObject* parent)
 
 void SaveTool::pressed(CaptureContext& context)
 {
-    context.request()->addSaveTask();
+    emit requestAction(REQ_CLEAR_SELECTION);
+    context.request.addSaveTask();
     emit requestAction(REQ_CAPTURE_DONE_OK);
     emit requestAction(REQ_CLOSE_GUI);
 }

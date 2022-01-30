@@ -49,6 +49,11 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSaveAfterCopy();
     inituploadHistoryMax();
     initUndoLimit();
+    initAllowMultipleGuiInstances();
+#if !defined(Q_OS_WIN)
+    initAutoCloseIdleDaemon();
+#endif
+    initPredefinedColorPaletteLarge();
 
     m_layout->addStretch();
 
@@ -73,6 +78,12 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_historyConfirmationToDelete->setChecked(
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
+    m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
+
+#if !defined(Q_OS_WIN)
+    m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
+#endif
+
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
@@ -106,20 +117,20 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
     ConfigHandler().setShowDesktopNotification(checked);
 }
 
-void GeneralConf::showTrayIconChanged(bool checked)
-{
-    auto controller = Controller::getInstance();
-    if (checked) {
-        controller->enableTrayIcon();
-    } else {
-        controller->disableTrayIcon();
-    }
-}
-
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
     Controller::getInstance()->setCheckForUpdatesEnabled(checked);
+}
+
+void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)
+{
+    ConfigHandler().setAllowMultipleGuiInstances(checked);
+}
+
+void GeneralConf::autoCloseIdleDaemonChanged(bool checked)
+{
+    ConfigHandler().setAutoCloseIdleDaemon(checked);
 }
 
 void GeneralConf::autostartChanged(bool checked)
@@ -250,10 +261,9 @@ void GeneralConf::initShowTrayIcon()
     m_showTray->setToolTip(tr("Show the systemtray icon"));
     m_scrollAreaLayout->addWidget(m_showTray);
 
-    connect(m_showTray,
-            &QCheckBox::stateChanged,
-            this,
-            &GeneralConf::showTrayIconChanged);
+    connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
+        ConfigHandler().setDisabledTrayIcon(!checked);
+    });
 #endif
 }
 
@@ -314,6 +324,32 @@ void GeneralConf::initCheckForUpdates()
             &GeneralConf::checkForUpdatesChanged);
 }
 
+void GeneralConf::initAllowMultipleGuiInstances()
+{
+    m_allowMultipleGuiInstances = new QCheckBox(
+      tr("Allow multiple flameshot GUI instances simultaneously"), this);
+    m_allowMultipleGuiInstances->setToolTip(tr(
+      "This allows you to take screenshots of flameshot itself for example."));
+    m_scrollAreaLayout->addWidget(m_allowMultipleGuiInstances);
+    connect(m_allowMultipleGuiInstances,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::allowMultipleGuiInstancesChanged);
+}
+
+void GeneralConf::initAutoCloseIdleDaemon()
+{
+    m_autoCloseIdleDaemon = new QCheckBox(
+      tr("Automatically close daemon when it is not needed"), this);
+    m_autoCloseIdleDaemon->setToolTip(
+      tr("Automatically close daemon when it is not needed"));
+    m_scrollAreaLayout->addWidget(m_autoCloseIdleDaemon);
+    connect(m_autoCloseIdleDaemon,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::autoCloseIdleDaemonChanged);
+}
+
 void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
@@ -336,6 +372,20 @@ void GeneralConf::initShowStartupLaunchMessage()
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowStartupLaunchMessage(checked);
     });
+}
+
+void GeneralConf::initPredefinedColorPaletteLarge()
+{
+    m_predefinedColorPaletteLarge =
+      new QCheckBox(tr("Use large predefined color palette"), this);
+    m_predefinedColorPaletteLarge->setToolTip(
+      tr("Use large predefined color palette"));
+    m_scrollAreaLayout->addWidget(m_predefinedColorPaletteLarge);
+
+    connect(
+      m_predefinedColorPaletteLarge, &QCheckBox::clicked, [](bool checked) {
+          ConfigHandler().setPredefinedColorPaletteLarge(checked);
+      });
 }
 
 void GeneralConf::initCopyAndCloseAfterUpload()
@@ -407,8 +457,8 @@ void GeneralConf::initSaveAfterCopy()
 
     m_setSaveAsFileExtension->addItems(imageFormatList);
 
-    int currentIndex = m_setSaveAsFileExtension->findText(
-      ConfigHandler().setSaveAsFileExtension());
+    int currentIndex =
+      m_setSaveAsFileExtension->findText(ConfigHandler().saveAsFileExtension());
     m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
 
     connect(m_setSaveAsFileExtension,
@@ -536,9 +586,9 @@ void GeneralConf::initAntialiasingPinZoom()
 void GeneralConf::initUploadWithoutConfirmation()
 {
     m_uploadWithoutConfirmation =
-      new QCheckBox(tr("Upload to Imgur without confirmation"), this);
+      new QCheckBox(tr("Upload image without confirmation"), this);
     m_uploadWithoutConfirmation->setToolTip(
-      tr("Upload to Imgur without confirmation"));
+      tr("Upload image without confirmation"));
     m_scrollAreaLayout->addWidget(m_uploadWithoutConfirmation);
     connect(m_uploadWithoutConfirmation, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setUploadWithoutConfirmation(checked);

@@ -41,8 +41,7 @@ class CaptureWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit CaptureWidget(uint id = 0,
-                           const QString& savePath = QString(),
+    explicit CaptureWidget(const CaptureRequest& req,
                            bool fullScreen = true,
                            QWidget* parent = nullptr);
     ~CaptureWidget();
@@ -57,8 +56,6 @@ public slots:
     void deleteToolWidgetOrClose();
 
 signals:
-    void captureTaken(uint id, const QPixmap& capture, const QRect& selection);
-    void captureFailed(uint id);
     void colorChanged(const QColor& c);
     void toolSizeChanged(int size);
 
@@ -79,6 +76,8 @@ private slots:
     void onToolSizeChanged(int size);
     void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
+    void onMoveCaptureToolUp(int captureToolIndex);
+    void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
 
 public:
@@ -105,7 +104,7 @@ private:
     void showColorPicker(const QPoint& pos);
     bool startDrawObjectTool(const QPoint& pos);
     QPointer<CaptureTool> activeToolObject();
-    void initContext(bool fullscreen, uint requestId);
+    void initContext(bool fullscreen, const CaptureRequest& req);
     void initPanel();
     void initSelection();
     void initShortcuts();
@@ -118,6 +117,7 @@ private:
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
+    void restoreCircleCountState();
 
     QList<QShortcut*> newShortcut(const QKeySequence& key,
                                   QWidget* parent,
@@ -130,7 +130,7 @@ private:
     QRect paddedUpdateRect(const QRect& r) const;
     void drawErrorMessage(const QString& msg, QPainter* painter);
     void drawInactiveRegion(QPainter* painter);
-    void drawToolsData();
+    void drawToolsData(bool drawSelection = true);
     void drawObjectSelection();
 
     void processPixmapWithTool(QPixmap* pixmap, CaptureTool* tool);
