@@ -84,6 +84,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
 #endif
 
+    m_predefinedColorPaletteLarge->setChecked(
+      config.predefinedColorPaletteLarge());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());

@@ -13,9 +13,8 @@
 #include <QVBoxLayout>
 
 UIcolorEditor::UIcolorEditor(QWidget* parent)
-  : QGroupBox(parent)
+  : QWidget(parent)
 {
-    setTitle(tr("UI Color Editor"));
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_hLayout = new QHBoxLayout;
     m_vLayout = new QVBoxLayout;

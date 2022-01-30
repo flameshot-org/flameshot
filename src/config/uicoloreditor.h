@@ -12,7 +12,7 @@ class QHBoxLayout;
 class CaptureToolButton;
 class ClickableLabel;
 
-class UIcolorEditor : public QGroupBox
+class UIcolorEditor : public QWidget
 {
     Q_OBJECT
 public:
