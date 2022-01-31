@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-class HistoryFileName;
+struct HistoryFileName;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
