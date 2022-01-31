@@ -232,6 +232,11 @@ void FlameshotDaemon::attachScreenshotToClipboard(const QByteArray& screenshot)
 
 void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
 {
+    // Must send notification before clipboard modification on linux
+    if (!notification.isEmpty()) {
+        AbstractLogger::info() << notification;
+    }
+
     m_hostingClipboard = true;
     QClipboard* clipboard = QApplication::clipboard();
 
@@ -240,9 +245,6 @@ void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
     // windows for some reason
     m_clipboardSignalBlocked = true;
     clipboard->setText(text);
-    if (!notification.isEmpty()) {
-        AbstractLogger::info() << notification;
-    }
     clipboard->blockSignals(false);
 }
 
