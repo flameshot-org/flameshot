@@ -180,8 +180,7 @@ void ImgUploaderBase::copyImage()
 void ImgUploaderBase::deleteCurrentImage()
 {
     History history;
-    HISTORY_FILE_NAME unpackFileName =
-      history.unpackFileName(m_currentImageName);
+    HistoryFileName unpackFileName = history.unpackFileName(m_currentImageName);
     deleteImage(unpackFileName.file, unpackFileName.token);
 }
 

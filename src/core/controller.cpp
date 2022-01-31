@@ -23,9 +23,9 @@
 #include "src/widgets/capture/capturetoolbutton.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
-#include "src/widgets/historywidget.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
+#include "src/widgets/uploadhistory.h"
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
@@ -175,7 +175,7 @@ bool Controller::resolveAnyConfigErrors()
     if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
         ConfigResolver* resolver = new ConfigResolver();
         QObject::connect(
-          resolver, &ConfigResolver::rejected, [this, resolver, &resolved]() {
+          resolver, &ConfigResolver::rejected, [resolver, &resolved]() {
               resolved = false;
               resolver->deleteLater();
               if (origin() == CLI) {
@@ -250,8 +250,9 @@ void Controller::appUpdates()
 
 void Controller::requestCapture(const CaptureRequest& request)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
@@ -281,15 +282,16 @@ void Controller::requestCapture(const CaptureRequest& request)
 // creation of a new capture in GUI mode
 void Controller::startVisualCapture(const CaptureRequest& req)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
 #if defined(Q_OS_MACOS)
     // This is required on MacOS because of Mission Control. If you'll switch to
     // another Desktop you cannot take a new screenshot from the tray, you have
     // to switch back to the Flameshot Desktop manually. It is not obvious and a
     // large number of users are confused and report a bug.
-    if (m_captureWindow) {
+    if (m_captureWindow != nullptr) {
         m_captureWindow->close();
         delete m_captureWindow;
         m_captureWindow = nullptr;
@@ -386,10 +388,11 @@ void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 // creation of the configuration window
 void Controller::openConfigWindow()
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
-    if (!m_configWindow) {
+    if (m_configWindow == nullptr) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
 #if defined(Q_OS_MACOS)
@@ -402,7 +405,7 @@ void Controller::openConfigWindow()
 // creation of the window of information
 void Controller::openInfoWindow()
 {
-    if (!m_infoWindow) {
+    if (m_infoWindow == nullptr) {
         m_infoWindow = new InfoWindow();
 #if defined(Q_OS_MACOS)
         m_infoWindow->activateWindow();
@@ -413,10 +416,11 @@ void Controller::openInfoWindow()
 
 void Controller::openLauncherWindow()
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
-    if (!m_launcherWindow) {
+    if (m_launcherWindow == nullptr) {
         m_launcherWindow = new CaptureLauncher();
     }
     m_launcherWindow->show();
@@ -446,7 +450,7 @@ void Controller::initTrayIcon()
 void Controller::enableTrayIcon()
 {
     ConfigHandler().setDisabledTrayIcon(false);
-    if (m_trayIcon) {
+    if (m_trayIcon != nullptr) {
         m_trayIcon->show();
         return;
     }
@@ -455,7 +459,7 @@ void Controller::enableTrayIcon()
         Q_ASSERT(m_trayIconMenu);
     }
 
-    QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
+    auto* captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
@@ -471,25 +475,25 @@ void Controller::enableTrayIcon()
         doLater(400, this, [this]() { startVisualCapture(); });
 #endif
     });
-    QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
+    auto* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
             &QAction::triggered,
             this,
             &Controller::openLauncherWindow);
-    QAction* configAction = new QAction(tr("&Configuration"), this);
+    auto* configAction = new QAction(tr("&Configuration"), this);
     connect(
       configAction, &QAction::triggered, this, &Controller::openConfigWindow);
-    QAction* infoAction = new QAction(tr("&About"), this);
+    auto* infoAction = new QAction(tr("&About"), this);
     connect(infoAction, &QAction::triggered, this, &Controller::openInfoWindow);
 
     m_appUpdates = new QAction(tr("Check for updates"), this);
     connect(m_appUpdates, &QAction::triggered, this, &Controller::appUpdates);
 
-    QAction* quitAction = new QAction(tr("&Quit"), this);
+    auto* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
     // recent screenshots
-    QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
+    auto* recentAction = new QAction(tr("&Latest Uploads"), this);
     connect(recentAction, SIGNAL(triggered()), this, SLOT(showRecentUploads()));
 
     // generate menu
@@ -571,7 +575,7 @@ void Controller::enableTrayIcon()
 
 void Controller::disableTrayIcon()
 {
-    if (m_trayIcon) {
+    if (m_trayIcon != nullptr) {
         m_trayIcon->hide();
     }
     ConfigHandler().setDisabledTrayIcon(true);
@@ -581,7 +585,7 @@ void Controller::sendTrayNotification(const QString& text,
                                       const QString& title,
                                       const int timeout)
 {
-    if (m_trayIcon) {
+    if (m_trayIcon != nullptr) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
@@ -589,15 +593,16 @@ void Controller::sendTrayNotification(const QString& text,
 
 void Controller::showRecentUploads()
 {
-    static HistoryWidget* historyWidget = nullptr;
-    if (nullptr == historyWidget) {
-        historyWidget = new HistoryWidget();
+    static UploadHistory* historyWidget = nullptr;
+    if (historyWidget == nullptr) {
+        historyWidget = new UploadHistory;
+        historyWidget->loadHistory();
         connect(historyWidget, &QObject::destroyed, this, []() {
             historyWidget = nullptr;
         });
     }
-    historyWidget->loadHistory();
     historyWidget->show();
+
 #if defined(Q_OS_MACOS)
     historyWidget->activateWindow();
     historyWidget->raise();
@@ -653,7 +658,7 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
-            ImgUploadDialog* dialog = new ImgUploadDialog();
+            auto* dialog = new ImgUploadDialog();
             if (dialog->exec() == QDialog::Rejected) {
                 return;
             }
@@ -687,8 +692,9 @@ void Controller::exportCapture(QPixmap capture,
 
 void Controller::startFullscreenCapture(const CaptureRequest& req)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
@@ -718,7 +724,7 @@ void Controller::handleCaptureFailed()
 
 void Controller::doLater(int msec, QObject* receiver, lambda func)
 {
-    QTimer* timer = new QTimer(receiver);
+    auto* timer = new QTimer(receiver);
     QObject::connect(timer, &QTimer::timeout, receiver, [timer, func]() {
         func();
         timer->deleteLater();
