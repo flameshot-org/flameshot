@@ -230,7 +230,7 @@ On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but wi
 
 #### On KDE Plasma desktop
 
-To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
+To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process (or [this file](docs/shortcuts-config/flameshot-shortcuts-kde-flatpak.khotkeys) if you installed Flameshot as a Flatpak). This file will assign the following keys to the following actions by default:
 
 |  Keys                                                  |  Description                                                                       |
 |---                                                     |---                                                                                 |
