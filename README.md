@@ -261,6 +261,11 @@ Steps for using the configuration:
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+8. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
+
+    ```shell
+    ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
+    ```
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
