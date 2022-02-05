@@ -268,4 +268,3 @@ bool UtilityPanel::isVisible() const
 {
     return !m_internalPanel->isHidden();
 }
-
