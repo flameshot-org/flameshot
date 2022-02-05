@@ -58,7 +58,7 @@ class ConfigHandler : public QObject
     Q_OBJECT
 
 public:
-    explicit ConfigHandler(bool skipInitialErrorCheck = false);
+    explicit ConfigHandler();
 
     static ConfigHandler* getInstance();
 
@@ -133,6 +133,8 @@ public:
     QString shortcut(const QString& actionName);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
+    void remove(const QString& key);
+    void resetValue(const QString& key);
 
     // INFO
     static QSet<QString>& recognizedGeneralOptions();
@@ -141,9 +143,11 @@ public:
 
     // ERROR HANDLING
     bool checkForErrors(AbstractLogger* log = nullptr) const;
-    bool checkUnrecognizedSettings(AbstractLogger* log = nullptr) const;
+    bool checkUnrecognizedSettings(AbstractLogger* log = nullptr,
+                                   QList<QString>* offenders = nullptr) const;
     bool checkShortcutConflicts(AbstractLogger* log = nullptr) const;
-    bool checkSemantics(AbstractLogger* log = nullptr) const;
+    bool checkSemantics(AbstractLogger* log = nullptr,
+                        QList<QString>* offenders = nullptr) const;
     void checkAndHandleError() const;
     void setErrorState(bool error) const;
     bool hasError() const;

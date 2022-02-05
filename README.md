@@ -261,6 +261,11 @@ Steps for using the configuration:
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+8. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
+
+    ```shell
+    ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
+    ```
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
@@ -474,7 +479,7 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
-- The logo of Flameshot is licensed under [Free Art License v1.3](img/app/flameshotLogoLicense.txt)
+- The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
 - The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h (GPLv2)

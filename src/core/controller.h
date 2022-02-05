@@ -17,7 +17,7 @@ class ConfigWindow;
 class InfoWindow;
 class QSystemTrayIcon;
 class CaptureLauncher;
-class HistoryWidget;
+class UploadHistory;
 class QNetworkAccessManager;
 class QNetworkReply;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
@@ -31,9 +31,17 @@ class Controller : public QObject
     Q_OBJECT
 
 public:
+    enum Origin
+    {
+        CLI,
+        DAEMON
+    };
+
     static Controller* getInstance();
 
     void setCheckForUpdatesEnabled(const bool enabled);
+    static void setOrigin(Origin origin);
+    static Origin origin();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
@@ -51,14 +59,14 @@ public slots:
     void initTrayIcon();
     void enableTrayIcon();
     void disableTrayIcon();
-    void sendTrayNotification(
-      const QString& text,
-      const QString& title = QStringLiteral("Flameshot Info"),
-      const int timeout = 5000);
 
     void showRecentUploads();
 
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
+    void sendTrayNotification(
+      const QString& text,
+      const QString& title = QStringLiteral("Flameshot Info"),
+      const int timeout = 5000);
 
 private slots:
     void startFullscreenCapture(const CaptureRequest& req);
@@ -78,6 +86,7 @@ private:
     Controller();
     ~Controller();
     void getLatestAvailableVersion();
+    bool resolveAnyConfigErrors();
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
@@ -88,6 +97,7 @@ private:
     QString m_appLatestUrl;
     QString m_appLatestVersion;
     bool m_showCheckAppUpdateStatus;
+    static Origin m_origin;
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;
