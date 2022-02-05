@@ -54,9 +54,9 @@ QWidget* UtilityPanel::toolWidget() const
 void UtilityPanel::setToolWidget(QWidget* w)
 {
     if (m_toolWidget) {
-        m_toolWidget->close();
-        delete m_toolWidget;
-        m_toolWidget = nullptr;
+        m_toolWidget->hide();
+        m_toolWidget->setParent(this);
+        m_toolWidget->deleteLater();
     }
     if (w) {
         m_toolWidget = w;
@@ -219,3 +219,4 @@ bool UtilityPanel::isVisible() const
 {
     return !m_internalPanel->isHidden();
 }
+
