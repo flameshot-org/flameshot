@@ -30,7 +30,7 @@ NotificationWidget::NotificationWidget(QWidget* parent)
     connect(
       m_hideAnimation, &QPropertyAnimation::finished, m_label, &QLabel::hide);
 
-    auto mainLayout = new QVBoxLayout();
+    auto* mainLayout = new QVBoxLayout();
     setLayout(mainLayout);
 
     mainLayout->addWidget(m_content);

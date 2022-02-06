@@ -40,7 +40,7 @@ void showOpenWithMenu(const QPixmap& capture)
     info.oaifInFlags = OAIF_ALLOW_REGISTRATION | OAIF_EXEC;
     SHOpenWithDialog(nullptr, &info);
 #else
-    auto w = new AppLauncherWidget(capture);
+    auto* w = new AppLauncherWidget(capture);
     w->show();
 #endif
 }

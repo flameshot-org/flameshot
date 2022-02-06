@@ -161,7 +161,7 @@ QWidget* TextTool::configurationWidget()
 
 CaptureTool* TextTool::copy(QObject* parent)
 {
-    TextTool* tt = new TextTool(parent);
+    auto* tt = new TextTool(parent);
     if (m_confW) {
         connect(
           m_confW, &TextConfig::fontFamilyChanged, tt, &TextTool::updateFamily);

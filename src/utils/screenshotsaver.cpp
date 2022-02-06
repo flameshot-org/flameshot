@@ -45,7 +45,7 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
                                    imageType.toUpper().toUtf8());
     if (isLoaded) {
 
-        auto mimeData = new QMimeData();
+        auto* mimeData = new QMimeData();
 
 #ifdef USE_WAYLAND_CLIPBOARD
         mimeData->setImageData(formattedPixmap.toImage());

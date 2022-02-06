@@ -210,7 +210,7 @@ void GeneralConf::initScrollArea()
     m_scrollArea = new QScrollArea(this);
     m_layout->addWidget(m_scrollArea);
 
-    QWidget* content = new QWidget(m_scrollArea);
+    auto* content = new QWidget(m_scrollArea);
     m_scrollArea->setWidget(content);
     m_scrollArea->setWidgetResizable(true);
     m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
@@ -228,7 +228,7 @@ void GeneralConf::initShowHelp()
 {
     m_helpMessage = new QCheckBox(tr("Show help message"), this);
     m_helpMessage->setToolTip(tr("Show the help message at the beginning "
-                                 "in the capture mode."));
+                                 "in the capture mode"));
     m_scrollAreaLayout->addWidget(m_helpMessage);
 
     connect(
@@ -239,7 +239,7 @@ void GeneralConf::initShowSidePanelButton()
 {
     m_sidePanelButton = new QCheckBox(tr("Show the side panel button"), this);
     m_sidePanelButton->setToolTip(
-      tr("Show the side panel toggle button in the capture mode."));
+      tr("Show the side panel toggle button in the capture mode"));
     m_scrollAreaLayout->addWidget(m_sidePanelButton);
 
     connect(m_sidePanelButton,
@@ -251,7 +251,7 @@ void GeneralConf::initShowSidePanelButton()
 void GeneralConf::initShowDesktopNotification()
 {
     m_sysNotifications = new QCheckBox(tr("Show desktop notifications"), this);
-    m_sysNotifications->setToolTip(tr("Show desktop notifications"));
+    m_sysNotifications->setToolTip(tr("Enable desktop notifications"));
     m_scrollAreaLayout->addWidget(m_sysNotifications);
 
     connect(m_sysNotifications,
@@ -264,7 +264,7 @@ void GeneralConf::initShowTrayIcon()
 {
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
-    m_showTray->setToolTip(tr("Show the systemtray icon"));
+    m_showTray->setToolTip(tr("Show icon in the system tray"));
     m_scrollAreaLayout->addWidget(m_showTray);
 
     connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
@@ -279,7 +279,7 @@ void GeneralConf::initHistoryConfirmationToDelete()
       tr("Confirmation required to delete screenshot from the latest uploads"),
       this);
     m_historyConfirmationToDelete->setToolTip(
-      tr("Confirmation required to delete screenshot from the latest uploads"));
+      tr("Ask for confirmation to delete screenshot from the latest uploads"));
     m_scrollAreaLayout->addWidget(m_historyConfirmationToDelete);
 
     connect(m_historyConfirmationToDelete,
@@ -290,8 +290,8 @@ void GeneralConf::initHistoryConfirmationToDelete()
 
 void GeneralConf::initConfigButtons()
 {
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QGroupBox* box = new QGroupBox(tr("Configuration File"));
+    auto* buttonLayout = new QHBoxLayout();
+    auto* box = new QGroupBox(tr("Configuration File"));
     box->setFlat(true);
     box->setLayout(buttonLayout);
     m_layout->addWidget(box);
@@ -321,7 +321,7 @@ void GeneralConf::initConfigButtons()
 void GeneralConf::initCheckForUpdates()
 {
     m_checkForUpdates = new QCheckBox(tr("Automatic check for updates"), this);
-    m_checkForUpdates->setToolTip(tr("Automatic check for updates"));
+    m_checkForUpdates->setToolTip(tr("Check for updates automatically"));
     m_scrollAreaLayout->addWidget(m_checkForUpdates);
 
     connect(m_checkForUpdates,
@@ -335,7 +335,7 @@ void GeneralConf::initAllowMultipleGuiInstances()
     m_allowMultipleGuiInstances = new QCheckBox(
       tr("Allow multiple flameshot GUI instances simultaneously"), this);
     m_allowMultipleGuiInstances->setToolTip(tr(
-      "This allows you to take screenshots of flameshot itself for example."));
+      "This allows you to take screenshots of Flameshot itself for example"));
     m_scrollAreaLayout->addWidget(m_allowMultipleGuiInstances);
     connect(m_allowMultipleGuiInstances,
             &QCheckBox::clicked,
@@ -359,7 +359,8 @@ void GeneralConf::initAutoCloseIdleDaemon()
 void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
-    m_autostart->setToolTip(tr("Launch Flameshot"));
+    m_autostart->setToolTip(
+      tr("Launch Flameshot daemon when computer is booted"));
     m_scrollAreaLayout->addWidget(m_autostart);
 
     connect(
@@ -372,7 +373,8 @@ void GeneralConf::initShowStartupLaunchMessage()
       new QCheckBox(tr("Show welcome message on launch"), this);
     ConfigHandler config;
     m_showStartupLaunchMessage->setToolTip(
-      tr("Show welcome message on launch"));
+      tr("Show the welcome message box in the middle of the screen while "
+         "taking a screenshot"));
     m_scrollAreaLayout->addWidget(m_showStartupLaunchMessage);
 
     connect(m_showStartupLaunchMessage, &QCheckBox::clicked, [](bool checked) {
@@ -385,7 +387,7 @@ void GeneralConf::initPredefinedColorPaletteLarge()
     m_predefinedColorPaletteLarge =
       new QCheckBox(tr("Use large predefined color palette"), this);
     m_predefinedColorPaletteLarge->setToolTip(
-      tr("Use large predefined color palette"));
+      tr("Use a large predefined color palette"));
     m_scrollAreaLayout->addWidget(m_predefinedColorPaletteLarge);
 
     connect(
@@ -399,7 +401,7 @@ void GeneralConf::initCopyAndCloseAfterUpload()
     m_copyAndCloseAfterUpload =
       new QCheckBox(tr("Copy URL after upload"), this);
     m_copyAndCloseAfterUpload->setToolTip(
-      tr("Copy URL and close window after upload"));
+      tr("Copy URL and close window after uploading was successful"));
     m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
 
     connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
@@ -410,21 +412,22 @@ void GeneralConf::initCopyAndCloseAfterUpload()
 void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
-    m_saveAfterCopy->setToolTip(tr("Save image file after copying it"));
+    m_saveAfterCopy->setToolTip(
+      tr("After copying the screenshot, save it to a file as well"));
     m_scrollAreaLayout->addWidget(m_saveAfterCopy);
     connect(m_saveAfterCopy,
             &QCheckBox::clicked,
             this,
             &GeneralConf::saveAfterCopyChanged);
 
-    QGroupBox* box = new QGroupBox(tr("Save Path"));
+    auto* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
-    QHBoxLayout* pathLayout = new QHBoxLayout();
+    auto* pathLayout = new QHBoxLayout();
 
     QString path = ConfigHandler().savePath();
     m_savePath = new QLineEdit(path, this);
@@ -450,7 +453,7 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 
-    QHBoxLayout* extensionLayout = new QHBoxLayout();
+    auto* extensionLayout = new QHBoxLayout();
 
     extensionLayout->addWidget(
       new QLabel(tr("Preferred save file extension:")));
@@ -483,11 +486,11 @@ void GeneralConf::historyConfirmationToDelete(bool checked)
 
 void GeneralConf::inituploadHistoryMax()
 {
-    QGroupBox* box = new QGroupBox(tr("Latest Uploads Max Size"));
+    auto* box = new QGroupBox(tr("Latest Uploads Max Size"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
     m_uploadHistoryMax = new QSpinBox(this);
@@ -510,11 +513,11 @@ void GeneralConf::uploadHistoryMaxChanged(int max)
 
 void GeneralConf::initUndoLimit()
 {
-    QGroupBox* box = new QGroupBox(tr("Undo limit"));
+    auto* box = new QGroupBox(tr("Undo limit"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
     m_undoLimit = new QSpinBox(this);
@@ -569,7 +572,8 @@ void GeneralConf::changeSavePath()
 void GeneralConf::initCopyPathAfterSave()
 {
     m_copyPathAfterSave = new QCheckBox(tr("Copy file path after save"), this);
-    m_copyPathAfterSave->setToolTip(tr("Copy file path after save"));
+    m_copyPathAfterSave->setToolTip(tr("Copy the file path to clipboard after "
+                                       "the file is saved"));
     m_scrollAreaLayout->addWidget(m_copyPathAfterSave);
     connect(m_copyPathAfterSave, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setCopyPathAfterSave(checked);
@@ -629,6 +633,9 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
 void GeneralConf::initShowMagnifier()
 {
     m_showMagnifier = new QCheckBox(tr("Show magnifier"), this);
+    m_showMagnifier->setToolTip(tr("Enable a magnifier while selecting the "
+                                   "screenshot area"));
+
     m_scrollAreaLayout->addWidget(m_showMagnifier);
     connect(m_showMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowMagnifier(checked);
@@ -638,6 +645,7 @@ void GeneralConf::initShowMagnifier()
 void GeneralConf::initSquareMagnifier()
 {
     m_squareMagnifier = new QCheckBox(tr("Square shaped magnifier"), this);
+    m_squareMagnifier->setToolTip(tr("Make the magnifier to be square-shaped"));
     m_scrollAreaLayout->addWidget(m_squareMagnifier);
     connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setSquareMagnifier(checked);

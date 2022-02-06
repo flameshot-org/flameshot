@@ -30,7 +30,7 @@ void ButtonListView::initButtonList()
         m_buttonTypeByName.insert(tool->name(), t);
 
         // init the menu option
-        QListWidgetItem* m_buttonItem = new QListWidgetItem(this);
+        auto* m_buttonItem = new QListWidgetItem(this);
 
         // when the background is lighter than gray, it uses the white icons
         QColor bgColor = this->palette().color(QWidget::backgroundRole());

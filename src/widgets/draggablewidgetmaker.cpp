@@ -15,12 +15,12 @@ void DraggableWidgetMaker::makeDraggable(QWidget* widget)
 
 bool DraggableWidgetMaker::eventFilter(QObject* obj, QEvent* event)
 {
-    auto widget = static_cast<QWidget*>(obj);
+    auto* widget = static_cast<QWidget*>(obj);
 
     // based on https://stackoverflow.com/a/12221360/964478
     switch (event->type()) {
         case QEvent::MouseButtonPress: {
-            auto mouseEvent = static_cast<QMouseEvent*>(event);
+            auto* mouseEvent = static_cast<QMouseEvent*>(event);
 
             m_isPressing = false;
             m_isDragging = false;
@@ -31,7 +31,7 @@ bool DraggableWidgetMaker::eventFilter(QObject* obj, QEvent* event)
             }
         } break;
         case QEvent::MouseMove: {
-            auto mouseEvent = static_cast<QMouseEvent*>(event);
+            auto* mouseEvent = static_cast<QMouseEvent*>(event);
 
             if (m_isPressing) {
                 QPoint widgetPos = widget->mapToGlobal(widget->pos());
