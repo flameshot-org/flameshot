@@ -76,17 +76,28 @@ int PinWidget::margin() const
     return 7;
 }
 
-void PinWidget::wheelEvent(QWheelEvent* e)
+void PinWidget::wheelEvent(QWheelEvent* event)
 {
-    int val = e->angleDelta().y() > 0 ? 15 : -15;
-    int newWidth = qBound(50, m_label->width() + val, maximumWidth());
-    int newHeight = qBound(50, m_label->height() + val, maximumHeight());
+    // getting the mouse wheel rotation in degree
+    const QPoint degrees = event->angleDelta() / 8;
 
-    QSize size(newWidth, newHeight);
-    setScaledPixmap(size);
+    // is the user zooming in or out ?
+    const int direction = degrees.y() > 0 ? 1 : -1;
+
+    // step taken in pixels (including direction)
+    const int step = degrees.manhattanLength() * direction;
+    const int newWidth = qBound(50, m_label->width() + step, maximumWidth());
+    const int newHeight = qBound(50, m_label->height() + step, maximumHeight());
+
+    // Actual scaling of the pixmap
+    const QSize newSize(newWidth, newHeight);
+    const qreal scale = qApp->devicePixelRatio();
+    const bool isExpanding = direction > 0;
+    setScaledPixmapToLabel(newSize, scale, isExpanding);
+
+    // Reflect scaling to the label
     adjustSize();
-
-    e->accept();
+    event->accept();
 }
 
 void PinWidget::enterEvent(QEvent*)
@@ -114,27 +125,24 @@ void PinWidget::mousePressEvent(QMouseEvent* e)
 void PinWidget::mouseMoveEvent(QMouseEvent* e)
 {
     const QPoint delta = e->globalPos() - m_dragStart;
-    int offsetW = width() * m_offsetX;
-    int offsetH = height() * m_offsetY;
+    const int offsetW = width() * m_offsetX;
+    const int offsetH = height() * m_offsetY;
     move(m_dragStart.x() + delta.x() - offsetW,
          m_dragStart.y() + delta.y() - offsetH);
 }
 
-void PinWidget::setScaledPixmap(const QSize& size)
+void PinWidget::setScaledPixmapToLabel(const QSize& newSize,
+                                       const qreal scale,
+                                       const bool expanding)
 {
     ConfigHandler config;
     QPixmap scaledPixmap;
-
-    const qreal scale = qApp->devicePixelRatio();
-
-    if (config.antialiasingPinZoom()) {
-        scaledPixmap = m_pixmap.scaled(
-          size * scale, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    } else {
-        scaledPixmap = m_pixmap.scaled(
-          size * scale, Qt::KeepAspectRatio, Qt::FastTransformation);
-    }
-
+    const auto aspectRatio =
+      expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
+    const auto transformType = config.antialiasingPinZoom()
+                                 ? Qt::SmoothTransformation
+                                 : Qt::FastTransformation;
+    scaledPixmap = m_pixmap.scaled(newSize * scale, aspectRatio, transformType);
     scaledPixmap.setDevicePixelRatio(scale);
     m_label->setPixmap(scaledPixmap);
 }
