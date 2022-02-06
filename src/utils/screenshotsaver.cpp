@@ -18,7 +18,6 @@
 #include <QBuffer>
 #include <QClipboard>
 #include <QFileDialog>
-#include <QImageWriter>
 #include <QMessageBox>
 #include <QMimeData>
 #include <QStandardPaths>
@@ -28,10 +27,70 @@
 #include "src/widgets/capture/capturewidget.h"
 #endif
 
-ScreenshotSaver::ScreenshotSaver() {}
+bool saveToFilesystem(const QPixmap& capture,
+                      const QString& path,
+                      const QString& messagePrefix)
+{
+    QString completePath = FileNameHandler().properScreenshotPath(
+      path, ConfigHandler().saveAsFileExtension());
+    QFile file{ completePath };
+    file.open(QIODevice::WriteOnly);
+    bool okay = capture.save(&file);
+    QString saveMessage = messagePrefix;
+    QString notificationPath = completePath;
+    if (!saveMessage.isEmpty()) {
+        saveMessage += " ";
+    }
 
-void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
-                                          const QString& imageType)
+    if (okay) {
+        saveMessage += QObject::tr("Capture saved as ") + completePath;
+        AbstractLogger::info().attachNotificationPath(notificationPath)
+          << saveMessage;
+    } else {
+        saveMessage += QObject::tr("Error trying to save as ") + completePath;
+        if (file.error() != QFile::NoError) {
+            saveMessage += ": " + file.errorString();
+        }
+        notificationPath = "";
+        AbstractLogger::error().attachNotificationPath(notificationPath)
+          << saveMessage;
+    }
+
+    return okay;
+}
+
+QString ShowSaveFileDialog(const QString& title, const QString& directory)
+{
+    QFileDialog dialog(nullptr, title, directory);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+
+    // Build string list of supported image formats
+    QStringList mimeTypeList;
+    foreach (auto mimeType, QImageWriter::supportedMimeTypes()) {
+        // HEIF is meant for videos and it causes a glitch on MacOS
+        // because the native dialog lumps together heic and heif
+        if (mimeType != "image/heif") {
+            mimeTypeList.append(mimeType);
+        }
+    }
+    dialog.setMimeTypeFilters(mimeTypeList);
+
+    QString suffix = ConfigHandler().saveAsFileExtension();
+    if (suffix.isEmpty()) {
+        suffix = "png";
+    }
+    QString defaultMimeType =
+      QMimeDatabase().mimeTypeForFile("image." + suffix).name();
+    dialog.selectMimeTypeFilter(defaultMimeType);
+    dialog.setDefaultSuffix(suffix);
+    if (dialog.exec() == QDialog::Accepted) {
+        return dialog.selectedFiles().constFirst();
+    } else {
+        return {};
+    }
+}
+
+void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
     QBuffer buffer{ &array };
@@ -64,9 +123,9 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
     }
 }
 
-// TODO: If data is saved to the clipboard before the notification is sent via
+// If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
-void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
+void saveToClipboard(const QPixmap& capture)
 {
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
@@ -95,73 +154,9 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     }
 }
 
-bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
-                                       const QString& path,
-                                       const QString& messagePrefix)
+bool saveToFilesystemGUI(const QPixmap& capture)
 {
-    QString completePath = FileNameHandler().properScreenshotPath(
-      path, ConfigHandler().saveAsFileExtension());
-    QFile file{ completePath };
-    file.open(QIODevice::WriteOnly);
-    bool ok = capture.save(&file);
-    QString saveMessage = messagePrefix;
-    QString notificationPath = completePath;
-    if (!saveMessage.isEmpty()) {
-        saveMessage += " ";
-    }
-
-    if (ok) {
-        saveMessage += QObject::tr("Capture saved as ") + completePath;
-        AbstractLogger::info().attachNotificationPath(notificationPath)
-          << saveMessage;
-    } else {
-        saveMessage += QObject::tr("Error trying to save as ") + completePath;
-        if (file.error() != QFile::NoError) {
-            saveMessage += ": " + file.errorString();
-        }
-        notificationPath = "";
-        AbstractLogger::error().attachNotificationPath(notificationPath)
-          << saveMessage;
-    }
-
-    return ok;
-}
-
-QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
-                                            const QString& title,
-                                            const QString& directory)
-{
-    QFileDialog dialog(parent, title, directory);
-    if (parent) {
-        dialog.setWindowModality(Qt::WindowModal);
-    }
-
-    dialog.setAcceptMode(QFileDialog::AcceptSave);
-
-    // Build string list of supported image formats
-    QStringList mimeTypeList;
-    foreach (auto mimeType, QImageWriter::supportedMimeTypes())
-        mimeTypeList.append(mimeType);
-    dialog.setMimeTypeFilters(mimeTypeList);
-
-    QString suffix = ConfigHandler().saveAsFileExtension();
-    if (suffix.isEmpty()) {
-        suffix = "png";
-    }
-    QString defaultMimeType =
-      QMimeDatabase().mimeTypeForFile("image." + suffix).name();
-    dialog.selectMimeTypeFilter(defaultMimeType);
-    dialog.setDefaultSuffix(suffix);
-    if (dialog.exec() == QDialog::Accepted) {
-        return dialog.selectedFiles().first();
-    } else {
-        return QString();
-    }
-}
-
-bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
-{
-    bool ok = false;
+    bool okay = false;
     ConfigHandler config;
     QString defaultSavePath = ConfigHandler().savePath();
     if (defaultSavePath.isEmpty() || !QDir(defaultSavePath).exists() ||
@@ -183,20 +178,18 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        // auto imageFormats = QImageWriter::supportedImageFormats();
-        savePath =
-          ShowSaveFileDialog(nullptr, QObject::tr("Save screenshot"), savePath);
+        savePath = ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath);
     }
     if (savePath == "") {
-        return ok;
+        return okay;
     }
 
     QFile file{ savePath };
     file.open(QIODevice::WriteOnly);
 
-    ok = capture.save(&file);
+    okay = capture.save(&file);
 
-    if (ok) {
+    if (okay) {
         QString pathNoFile =
           savePath.left(savePath.lastIndexOf(QLatin1String("/")));
 
@@ -223,5 +216,5 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         saveErrBox.exec();
     }
 
-    return ok;
+    return okay;
 }
