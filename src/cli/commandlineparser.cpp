@@ -44,8 +44,9 @@ QString optionsToString(const QList<CommandOption>& options,
     }
     // check the length of the arguments
     for (auto const& arg : arguments) {
-        if (arg.name().length() > size)
+        if (arg.name().length() > size) {
             size = arg.name().length();
+        }
     }
     // generate the text
     QString result;
@@ -172,8 +173,9 @@ bool CommandLineParser::processOptions(const QStringList& args,
         ok = option.checkValue(valueStr);
         if (!ok) {
             QString msg = option.errorMsg();
-            if (!msg.endsWith(QLatin1String(".")))
+            if (!msg.endsWith(QLatin1String("."))) {
                 msg += QLatin1String(".");
+            }
             err << msg;
             return ok;
         }
@@ -338,11 +340,13 @@ void CommandLineParser::printHelp(QStringList args, const Node* node)
 
     // add command options and subarguments
     QList<CommandArgument> subArgs;
-    for (const Node& n : node->subNodes)
+    for (const Node& n : node->subNodes) {
         subArgs.append(n.argument);
+    }
     auto modifiedOptions = node->options;
-    if (m_withHelp)
+    if (m_withHelp) {
         modifiedOptions << helpOption;
+    }
     if (m_withVersion && node == &m_parseTree) {
         modifiedOptions << versionOption;
     }

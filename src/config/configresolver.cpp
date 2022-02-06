@@ -113,10 +113,12 @@ void ConfigResolver::populate()
         resolveAll->setToolTip(tr("Resolve all listed errors."));
         buttons->addButton(resolveAll, BBox::ResetRole);
         connect(resolveAll, &QPushButton::clicked, this, [=]() {
-            for (const auto& key : semanticallyWrong)
+            for (const auto& key : semanticallyWrong) {
                 ConfigHandler().resetValue(key);
-            for (const auto& key : unrecognized)
+            }
+            for (const auto& key : unrecognized) {
                 ConfigHandler().remove(key);
+            }
         });
     }
 

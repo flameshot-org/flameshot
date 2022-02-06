@@ -183,9 +183,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
     // init magnify
-    if (m_config.showMagnifier())
+    if (m_config.showMagnifier()) {
         m_magnifier = new MagnifierWidget(
           m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
+    }
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
@@ -1600,8 +1601,9 @@ void CaptureWidget::restoreCircleCountState()
         if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
             continue;
         }
-        if (toolItem->count() > largest)
+        if (toolItem->count() > largest) {
             largest = toolItem->count();
+        }
     }
     m_context.circleCount = largest + 1;
 }

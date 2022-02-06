@@ -163,9 +163,10 @@ void ShortcutsWidget::loadShortcuts()
         CaptureTool* tool = ToolFactory().CreateTool(t);
         QString shortcutName = QVariant::fromValue(t).toString();
         appendShortcut(shortcutName, tool->description());
-        if (shortcutName == "TYPE_COPY")
+        if (shortcutName == "TYPE_COPY") {
             m_shortcuts << (QStringList() << "" << tool->description()
                                           << "Left Double-click");
+        }
         delete tool;
     }
 

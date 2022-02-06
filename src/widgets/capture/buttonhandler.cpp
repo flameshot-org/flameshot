@@ -25,8 +25,9 @@ ButtonHandler::ButtonHandler(QObject* parent)
 
 void ButtonHandler::hide()
 {
-    for (CaptureToolButton* b : m_vectorButtons)
+    for (CaptureToolButton* b : m_vectorButtons) {
         b->hide();
+    }
 }
 
 void ButtonHandler::show()
@@ -34,8 +35,9 @@ void ButtonHandler::show()
     if (m_vectorButtons.isEmpty() || m_vectorButtons.first()->isVisible()) {
         return;
     }
-    for (CaptureToolButton* b : m_vectorButtons)
+    for (CaptureToolButton* b : m_vectorButtons) {
         b->animatedShow();
+    }
 }
 
 bool ButtonHandler::isVisible() const
@@ -353,11 +355,13 @@ void ButtonHandler::adjustHorizontalCenter(QPoint& center)
 // setButtons redefines the buttons of the button handler
 void ButtonHandler::setButtons(const QVector<CaptureToolButton*> v)
 {
-    if (v.isEmpty())
+    if (v.isEmpty()) {
         return;
+    }
 
-    for (CaptureToolButton* b : m_vectorButtons)
+    for (CaptureToolButton* b : m_vectorButtons) {
         delete (b);
+    }
     m_vectorButtons = v;
     m_buttonBaseSize = GlobalValues::buttonBaseSize();
     m_buttonExtendedSize = m_buttonBaseSize + m_separator;

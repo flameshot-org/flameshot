@@ -103,8 +103,9 @@ void ColorPickerEditor::addPreset()
     ConfigHandler config;
     QVector<QColor> colors = config.userColors();
 
-    if (colors.contains(m_color))
+    if (colors.contains(m_color)) {
         return;
+    }
 
     colors << m_color;
 

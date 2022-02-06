@@ -35,10 +35,11 @@ MagnifierWidget::MagnifierWidget(const QPixmap& p,
 void MagnifierWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
-    if (m_square)
+    if (m_square) {
         drawMagnifier(p);
-    else
+    } else {
         drawMagnifierCircle(p);
+    }
 }
 
 void MagnifierWidget::drawMagnifierCircle(QPainter& painter)

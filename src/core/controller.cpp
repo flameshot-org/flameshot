@@ -346,8 +346,9 @@ void Controller::startVisualCapture(const CaptureRequest& req)
 
 void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     bool ok = true;
     QScreen* screen;

@@ -348,8 +348,9 @@ QList<CaptureTool::Type> ButtonList::fromIntList(const QList<int>& l)
 {
     QList<CaptureTool::Type> buttons;
     buttons.reserve(l.size());
-    for (auto const i : l)
+    for (auto const i : l) {
         buttons << static_cast<CaptureTool::Type>(i);
+    }
     return buttons;
 }
 
@@ -357,8 +358,9 @@ QList<int> ButtonList::toIntList(const QList<CaptureTool::Type>& l)
 {
     QList<int> buttons;
     buttons.reserve(l.size());
-    for (auto const i : l)
+    for (auto const i : l) {
         buttons << static_cast<int>(i);
+    }
     return buttons;
 }
 
@@ -464,20 +466,23 @@ QVariant UserColors::representation(const QVariant& val)
 
 bool SaveFileExtension::check(const QVariant& val)
 {
-    if (!val.canConvert(QVariant::String) || val.toString().isEmpty())
+    if (!val.canConvert(QVariant::String) || val.toString().isEmpty()) {
         return false;
+    }
 
     QString extension = val.toString();
 
-    if (extension.startsWith("."))
+    if (extension.startsWith(".")) {
         extension.remove(0, 1);
+    }
 
     QStringList imageFormatList;
     foreach (auto imageFormat, QImageWriter::supportedImageFormats())
         imageFormatList.append(imageFormat);
 
-    if (!imageFormatList.contains(extension))
+    if (!imageFormatList.contains(extension)) {
         return false;
+    }
 
     return true;
 }
@@ -486,8 +491,9 @@ QVariant SaveFileExtension::process(const QVariant& val)
 {
     QString extension = val.toString();
 
-    if (extension.startsWith("."))
+    if (extension.startsWith(".")) {
         extension.remove(0, 1);
+    }
 
     return QVariant::fromValue(extension);
 }
@@ -512,8 +518,9 @@ QVariant Region::process(const QVariant& val)
     // FIXME: This is temporary, just before D-Bus is removed
     char** argv = new char*[1];
     int* argc = new int{ 0 };
-    if (QGuiApplication::screens().empty())
+    if (QGuiApplication::screens().empty()) {
         new QApplication(*argc, argv);
+    }
 
     QString str = val.toString();
 

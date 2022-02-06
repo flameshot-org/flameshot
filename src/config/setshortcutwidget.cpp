@@ -58,14 +58,18 @@ const QKeySequence& SetShortcutDialog::shortcut()
 
 void SetShortcutDialog::keyPressEvent(QKeyEvent* ke)
 {
-    if (ke->modifiers() & Qt::ShiftModifier)
+    if (ke->modifiers() & Qt::ShiftModifier) {
         m_modifier += "Shift+";
-    if (ke->modifiers() & Qt::ControlModifier)
+    }
+    if (ke->modifiers() & Qt::ControlModifier) {
         m_modifier += "Ctrl+";
-    if (ke->modifiers() & Qt::AltModifier)
+    }
+    if (ke->modifiers() & Qt::AltModifier) {
         m_modifier += "Alt+";
-    if (ke->modifiers() & Qt::MetaModifier)
+    }
+    if (ke->modifiers() & Qt::MetaModifier) {
         m_modifier += "Meta+";
+    }
 
     QString key = QKeySequence(ke->key()).toString();
     m_ks = QKeySequence(m_modifier + key);
