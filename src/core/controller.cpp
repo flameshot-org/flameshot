@@ -639,9 +639,9 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::SAVE) {
         if (req.path().isEmpty()) {
-            ScreenshotSaver().saveToFilesystemGUI(capture);
+            saveToFilesystemGUI(capture);
         } else {
-            ScreenshotSaver().saveToFilesystem(capture, path);
+            saveToFilesystem(capture, path);
         }
     }
 

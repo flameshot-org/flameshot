@@ -27,8 +27,70 @@
 #include "src/widgets/capture/capturewidget.h"
 #endif
 
-void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
-                                          const QString& imageType)
+bool saveToFilesystem(const QPixmap& capture,
+                      const QString& path,
+                      const QString& messagePrefix)
+{
+    QString completePath = FileNameHandler().properScreenshotPath(
+      path, ConfigHandler().saveAsFileExtension());
+    QFile file{ completePath };
+    file.open(QIODevice::WriteOnly);
+    bool okay = capture.save(&file);
+    QString saveMessage = messagePrefix;
+    QString notificationPath = completePath;
+    if (!saveMessage.isEmpty()) {
+        saveMessage += " ";
+    }
+
+    if (okay) {
+        saveMessage += QObject::tr("Capture saved as ") + completePath;
+        AbstractLogger::info().attachNotificationPath(notificationPath)
+          << saveMessage;
+    } else {
+        saveMessage += QObject::tr("Error trying to save as ") + completePath;
+        if (file.error() != QFile::NoError) {
+            saveMessage += ": " + file.errorString();
+        }
+        notificationPath = "";
+        AbstractLogger::error().attachNotificationPath(notificationPath)
+          << saveMessage;
+    }
+
+    return okay;
+}
+
+QString ShowSaveFileDialog(const QString& title, const QString& directory)
+{
+    QFileDialog dialog(nullptr, title, directory);
+    dialog.setAcceptMode(QFileDialog::AcceptSave);
+
+    // Build string list of supported image formats
+    QStringList mimeTypeList;
+    foreach (auto mimeType, QImageWriter::supportedMimeTypes()) {
+        // HEIF is meant for videos and it causes a glitch on MacOS
+        // because the native dialog lumps together heic and heif
+        if (mimeType != "image/heif") {
+            mimeTypeList.append(mimeType);
+        }
+    }
+    dialog.setMimeTypeFilters(mimeTypeList);
+
+    QString suffix = ConfigHandler().saveAsFileExtension();
+    if (suffix.isEmpty()) {
+        suffix = "png";
+    }
+    QString defaultMimeType =
+      QMimeDatabase().mimeTypeForFile("image." + suffix).name();
+    dialog.selectMimeTypeFilter(defaultMimeType);
+    dialog.setDefaultSuffix(suffix);
+    if (dialog.exec() == QDialog::Accepted) {
+        return dialog.selectedFiles().constFirst();
+    } else {
+        return {};
+    }
+}
+
+void saveToClipboardMime(const QPixmap& capture, const QString& imageType)
 {
     QByteArray array;
     QBuffer buffer{ &array };
@@ -63,7 +125,7 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
 
 // If data is saved to the clipboard before the notification is sent via
 // dbus, the application freezes.
-void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
+void saveToClipboard(const QPixmap& capture)
 {
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
@@ -92,76 +154,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
     }
 }
 
-bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
-                                       const QString& path,
-                                       const QString& messagePrefix)
-{
-    QString completePath = FileNameHandler().properScreenshotPath(
-      path, ConfigHandler().saveAsFileExtension());
-    QFile file{ completePath };
-    file.open(QIODevice::WriteOnly);
-    bool okay = capture.save(&file);
-    QString saveMessage = messagePrefix;
-    QString notificationPath = completePath;
-    if (!saveMessage.isEmpty()) {
-        saveMessage += " ";
-    }
-
-    if (okay) {
-        saveMessage += QObject::tr("Capture saved as ") + completePath;
-        AbstractLogger::info().attachNotificationPath(notificationPath)
-          << saveMessage;
-    } else {
-        saveMessage += QObject::tr("Error trying to save as ") + completePath;
-        if (file.error() != QFile::NoError) {
-            saveMessage += ": " + file.errorString();
-        }
-        notificationPath = "";
-        AbstractLogger::error().attachNotificationPath(notificationPath)
-          << saveMessage;
-    }
-
-    return okay;
-}
-
-QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
-                                            const QString& title,
-                                            const QString& directory)
-{
-    QFileDialog dialog(parent, title, directory);
-    if (parent) {
-        dialog.setWindowModality(Qt::WindowModal);
-    }
-
-    dialog.setAcceptMode(QFileDialog::AcceptSave);
-
-    // Build string list of supported image formats
-    QStringList mimeTypeList;
-    foreach (auto mimeType, QImageWriter::supportedMimeTypes()) {
-        // HEIF is meant for videos and it causes a glitch on MacOS
-        // because the native dialog lumps together heic and heif
-        if (mimeType != "image/heif") {
-            mimeTypeList.append(mimeType);
-        }
-    }
-    dialog.setMimeTypeFilters(mimeTypeList);
-
-    QString suffix = ConfigHandler().saveAsFileExtension();
-    if (suffix.isEmpty()) {
-        suffix = "png";
-    }
-    QString defaultMimeType =
-      QMimeDatabase().mimeTypeForFile("image." + suffix).name();
-    dialog.selectMimeTypeFilter(defaultMimeType);
-    dialog.setDefaultSuffix(suffix);
-    if (dialog.exec() == QDialog::Accepted) {
-        return dialog.selectedFiles().constFirst();
-    } else {
-        return QString();
-    }
-}
-
-bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
+bool saveToFilesystemGUI(const QPixmap& capture)
 {
     bool okay = false;
     ConfigHandler config;
@@ -186,8 +179,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
 #endif
     if (!config.savePathFixed()) {
         // auto imageFormats = QImageWriter::supportedImageFormats();
-        savePath =
-          ShowSaveFileDialog(nullptr, QObject::tr("Save screenshot"), savePath);
+        savePath = ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath);
     }
     if (savePath == "") {
         return okay;
