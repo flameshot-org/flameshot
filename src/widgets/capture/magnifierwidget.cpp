@@ -35,10 +35,11 @@ MagnifierWidget::MagnifierWidget(const QPixmap& p,
 void MagnifierWidget::paintEvent(QPaintEvent*)
 {
     QPainter p(this);
-    if (m_square)
+    if (m_square) {
         drawMagnifier(p);
-    else
+    } else {
         drawMagnifierCircle(p);
+    }
 }
 
 void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
@@ -89,7 +90,7 @@ void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
     painter.drawPixmapFragments(
       &frag, 1, m_paddedScreenshot, QPainter::OpaqueHint);
     painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-    for (auto& rect :
+    for (const auto& rect :
          { crossHairTop, crossHairRight, crossHairBottom, crossHairLeft }) {
         painter.fillRect(rect, m_color);
     }
@@ -165,7 +166,7 @@ void MagnifierWidget::drawMagnifier(QPainter& painter)
     painter.fillRect(crossHairBorder, m_borderColor);
     painter.drawPixmapFragments(&frag, 1, m_screenshot, QPainter::OpaqueHint);
     painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-    for (auto& rect :
+    for (const auto& rect :
          { crossHairTop, crossHairRight, crossHairBottom, crossHairLeft }) {
         painter.fillRect(rect, m_color);
     }

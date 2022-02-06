@@ -36,7 +36,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     m_colorWheel->setMinimumSize(size, size);
     m_gLayout->addWidget(m_colorWheel, 1, 0);
 
-    QVBoxLayout* m_vLocalLayout1 = new QVBoxLayout();
+    auto* m_vLocalLayout1 = new QVBoxLayout();
     m_vLocalLayout1->addStretch();
 
     m_colorSpinboxLabel = new QLabel(tr("Select Preset:"), this);
@@ -66,7 +66,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
 
     m_gLayout->addLayout(m_vLocalLayout1, 0, 1);
 
-    QVBoxLayout* m_vLocalLayout2 = new QVBoxLayout();
+    auto* m_vLocalLayout2 = new QVBoxLayout();
     m_vLocalLayout2->addStretch();
 
     m_addPresetLabel = new QLabel(tr("Add Preset:"), this);
@@ -103,8 +103,9 @@ void ColorPickerEditor::addPreset()
     ConfigHandler config;
     QVector<QColor> colors = config.userColors();
 
-    if (colors.contains(m_color))
+    if (colors.contains(m_color)) {
         return;
+    }
 
     colors << m_color;
 

@@ -131,7 +131,7 @@ QRect ArrowTool::boundingRect() const
 
 CaptureTool* ArrowTool::copy(QObject* parent)
 {
-    ArrowTool* tool = new ArrowTool(parent);
+    auto* tool = new ArrowTool(parent);
     copyParams(this, tool);
     return tool;
 }

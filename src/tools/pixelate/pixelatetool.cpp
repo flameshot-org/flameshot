@@ -55,10 +55,9 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 
     // If thickness is less than 1, use old blur process
     if (size() <= 1) {
-        QGraphicsBlurEffect* blur = new QGraphicsBlurEffect;
+        auto* blur = new QGraphicsBlurEffect;
         blur->setBlurRadius(10);
-        QGraphicsPixmapItem* item =
-          new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
+        auto* item = new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
         item->setGraphicsEffect(blur);
 
         QGraphicsScene scene;

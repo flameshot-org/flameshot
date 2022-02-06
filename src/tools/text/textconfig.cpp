@@ -72,7 +72,7 @@ TextConfig::TextConfig(QWidget* parent)
             this,
             &TextConfig::fontItalicChanged);
     m_italicButton->setToolTip(tr("Italic"));
-    QHBoxLayout* modifiersLayout = new QHBoxLayout();
+    auto* modifiersLayout = new QHBoxLayout();
 
     m_leftAlignButton =
       new QPushButton(QIcon(iconPrefix + "leftalign.svg"), QLatin1String(""));
@@ -101,7 +101,7 @@ TextConfig::TextConfig(QWidget* parent)
     });
     m_rightAlignButton->setToolTip(tr("Right Align"));
 
-    QHBoxLayout* alignmentLayout = new QHBoxLayout();
+    auto* alignmentLayout = new QHBoxLayout();
     alignmentLayout->addWidget(m_leftAlignButton);
     alignmentLayout->addWidget(m_centerAlignButton);
     alignmentLayout->addWidget(m_rightAlignButton);
