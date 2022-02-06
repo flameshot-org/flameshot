@@ -305,10 +305,10 @@ if (UNIX)
     configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
             ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash
             ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.zsh
             ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
 
     configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.fish
