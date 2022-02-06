@@ -78,13 +78,13 @@ int PinWidget::margin() const
 
 void PinWidget::wheelEvent(QWheelEvent* event)
 {
-    // Getting the mouse wheel rotation in degree
+    // getting the mouse wheel rotation in degree
     const QPoint degrees = event->angleDelta() / 8;
 
-    // is enlarging or shrinking ?
+    // is the user zooming in or out ?
     const int direction = degrees.y() > 0 ? 1 : -1;
 
-    // step taken in pixels
+    // step taken in pixels (including direction)
     const int step = degrees.manhattanLength() * direction;
     const int newWidth = qBound(50, m_label->width() + step, maximumWidth());
     const int newHeight = qBound(50, m_label->height() + step, maximumHeight());
