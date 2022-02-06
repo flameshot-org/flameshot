@@ -1128,7 +1128,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Image Uploader</translation>
+        <translation>Cargador de imaxes</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
@@ -1192,7 +1192,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="32"/>
         <source>About</source>
-        <translation>About</translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -1245,7 +1245,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="54"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation>&lt;u&gt;&lt;b&gt;Licenza&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.cpp" line="65"/>

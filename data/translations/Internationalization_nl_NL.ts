@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation></translation>
+        <translation>Nieuwe Toevoegen</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation></translation>
+        <translation>Naar boven</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation></translation>
+        <translation>Naar beneden</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation></translation>
+        <translation>Accepteren</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation></translation>
+        <translation>Accepteer de vangst</translation>
     </message>
 </context>
 <context>
@@ -176,32 +176,32 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Select screenshot area</source>
-        <translation></translation>
+        <translation>Selecteer screenshot gebied</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Muiswiel</translation>
+        <translation>Muiswiel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Change tool size</source>
-        <translation></translation>
+        <translation>Gereedschapsmaat wijzigen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Right Click</source>
-        <translation type="unfinished">Rechtsklikken</translation>
+        <translation>Rechtsklikken</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Kleurkiezer tonen</translation>
+        <translation>Kleurkiezer tonen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
         <source>Open side panel</source>
-        <translation></translation>
+        <translation>Open zijpaneel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
@@ -211,17 +211,17 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Exit</source>
-        <translation type="unfinished">Afsluiten</translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation></translation>
+        <translation>Flameshot is de focus kwijt. Toetsenbord sneltoetsen werken niet totdat je ergens klikt.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation></translation>
+        <translation>Configuratie fout opgelost. Start `flameshot gui` opnieuw om het toe te passen.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -274,21 +274,21 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation></translation>
+        <translation>Selecteer Kleur</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation></translation>
+        <translation>Verzadiging</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
-        <translation></translation>
+        <translation>Kleurtje</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
@@ -309,7 +309,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation></translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
@@ -338,22 +338,22 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation></translation>
+        <translation>Accepteer kleur</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation></translation>
+        <translation>Kies precies de kleur</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation></translation>
+        <translation>Vergrootglas</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Annuleer</translation>
     </message>
 </context>
 <context>
@@ -361,7 +361,7 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuratie fouten</translation>
     </message>
 </context>
 <context>
@@ -370,40 +370,44 @@ Druk op spatie om het zijpaneel te openen.</translation>
         <location filename="../../src/utils/confighandler.cpp" line="547"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-herkende instelling: &apos;%1&apos;
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="553"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-herkende snelkoppelingsnaam: &apos;%1&apos;.
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="594"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Snelkoppelingsconflict: &apos;%1&apos; en &apos;%2&apos; hebben dezelfde snelkoppeling: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="633"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Slechte waarde in &apos;%1&apos;. Verwacht: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="682"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation></translation>
+        <translation>U hebt de configuratiefout met succes opgelost.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="705"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>De configuratie bevat een fout. Open de configuratie om op te lossen.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="759"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
-        <translation></translation>
+        <translation>Slechte config key &apos;%1&apos; in ConfigHandler. Gelieve dit als een bug te melden.</translation>
     </message>
 </context>
 <context>
@@ -411,54 +415,56 @@ Druk op spatie om het zijpaneel te openen.</translation>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuratiefouten oplossen</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;U moet alle fouten oplossen voordat u verdergaat:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
         <source>Reset</source>
-        <translation type="unfinished">Standaardwaarden</translation>
+        <translation>Terugstellen</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Terugzetten op de standaardwaarde.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder deze instelling.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sommige sneltoetsen hebben conflicten.
+Dit zal NIET voorkomen dat flameshot start.
+Los ze alstublieft handmatig op in het configuratiebestand.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation type="unfinished"></translation>
+        <translation>Los alles op</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los alle vermelde fouten op.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="123"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatie</translation>
     </message>
 </context>
 <context>
@@ -491,12 +497,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="122"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Oplossen</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation></translation>
+        <translation>&lt;b&gt;Configuratie bestand heeft fouten. Los ze op alvorens verder te gaan.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -559,7 +565,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="672"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL gekopieerd naar klembord.</translation>
+        <translation>URL gekopieerd naar klembord.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -581,7 +587,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/copy/copytool.cpp" line="34"/>
         <source>Copy selection to clipboard</source>
-        <translation></translation>
+        <translation>Kopieer selectie naar klembord</translation>
     </message>
     <message>
         <source>Copy the selection into the clipboard</source>
@@ -665,7 +671,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="262"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Kan niet verbinden via DBus</translation>
+        <translation>Kan niet verbinden via DBus</translation>
     </message>
 </context>
 <context>
@@ -847,18 +853,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation></translation>
+        <translation>Sta meerdere flameshot GUI instanties tegelijk toe</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation></translation>
+        <translation>Hiermee kunt u screenshots maken van bijvoorbeeld Flameshot zelf.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation></translation>
+        <translation>Automatisch sluiten van de daemon wanneer deze niet nodig is</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
@@ -880,7 +886,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Use large predefined color palette</source>
-        <translation></translation>
+        <translation>Gebruik groot voorgedefinieerd kleurenpalet</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
@@ -920,7 +926,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="450"/>
         <source>Preferred save file extension:</source>
-        <translation></translation>
+        <translation>Voorkeursbestandsextensie:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
@@ -947,18 +953,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="576"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation></translation>
+        <translation>Anti-aliasing afbeelding bij het inzoomen van de vastgepinde afbeelding</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="578"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation></translation>
+        <translation>Na het zoomen van de vastgepinde afbeelding, moet de afbeelding gladder worden of pixelig blijven</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="589"/>
         <location filename="../../src/config/generalconf.cpp" line="591"/>
         <source>Upload image without confirmation</source>
-        <translation></translation>
+        <translation>Afbeelding uploaden zonder bevestiging</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="607"/>
@@ -1029,18 +1035,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation></translation>
+        <translation>Upload Bevestigingn</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation></translation>
+        <translation>Wil je deze opname uploaden?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation></translation>
+        <translation>Uploaden zonder bevestiging</translation>
     </message>
 </context>
 <context>
@@ -1088,42 +1094,42 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
         <source>Uploading Image</source>
-        <translation></translation>
+        <translation>Afbeelding uploaden</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
         <source>Copy URL</source>
-        <translation type="unfinished">URL kopiëren</translation>
+        <translation>URL kopiëren</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Open URL</source>
-        <translation type="unfinished">URL openen</translation>
+        <translation>URL openen</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Delete image</source>
-        <translation type="unfinished">Afbeelding verwijderen</translation>
+        <translation>Afbeelding verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Afbeelding naar klembord.</translation>
+        <translation>Afbeelding naar klembord.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Kan URL niet openen.</translation>
+        <translation>Kan URL niet openen.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL gekopieerd naar klembord.</translation>
+        <translation>URL gekopieerd naar klembord.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
         <source>Screenshot copied to clipboard.</source>
-        <translation></translation>
+        <translation>Screenshot gekopieerd naar klembord.</translation>
     </message>
 </context>
 <context>
@@ -1131,12 +1137,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation type="unfinished">Afbeelding uploader</translation>
+        <translation>Afbeelding uploader</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation></translation>
+        <translation>Uploaden van de selectie</translation>
     </message>
 </context>
 <context>
@@ -1273,12 +1279,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation></translation>
+        <translation>Omkeren</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation></translation>
+        <translation>Inverter instellen als schildergereedschap</translation>
     </message>
 </context>
 <context>
@@ -1414,7 +1420,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="194"/>
         <source>Path copied to clipboard as </source>
-        <translation></translation>
+        <translation>Pad gekopieerd naar klembord als </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1475,7 +1481,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation>Bestaande map of nieuw bestand om op te slaan</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
@@ -1485,7 +1491,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Pin the capture to the screen</source>
-        <translation></translation>
+        <translation>Zet de opname vast op het scherm</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="176"/>
@@ -1500,7 +1506,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="181"/>
         <source>Screenshot region to select</source>
-        <translation></translation>
+        <translation>Screenshot regio te selecteren</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1510,7 +1516,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation></translation>
+        <translation>Accepteer vastlegging zodra een selectie is gemaakt</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1525,7 +1531,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation></translation>
+        <translation>Controleer de configuratie op fouten</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -1555,22 +1561,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="217"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation></translation>
+        <translation>Definieer het vast te leggen scherm (beginnend bij 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige vertraging, het moet een getal groter dan 0 zijn</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation></translation>
+        <translation>Ongeldige regio, gebruik &apos;BxH+X+Y&apos; of &apos;alle&apos; of &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation></translation>
+        <translation>Ongeldig pad, moet een bestaande map zijn of een nieuw bestand in een bestaande map</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1634,7 +1640,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/core/controller.cpp" line="650"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation></translation>
+        <translation>Schermvullende schermafbeelding vastgepind op scherm</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1746,7 +1752,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation></translation>
+        <translation>De grootte van het gereedschap wijzigen</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1790,7 +1796,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation></translation>
+        <translation>Screenshot opslaan als bestand</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1843,7 +1849,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation></translation>
+        <translation>Flameshot moet opnieuw worden opgestart om de wijzigingen van kracht te laten worden.</translation>
     </message>
 </context>
 <context>
@@ -1886,7 +1892,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation></translation>
+        <translation>Actief gereedschap: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
@@ -1935,7 +1941,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation></translation>
+        <translation>Toon X en Y afmetingen van de selectie</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -1982,7 +1988,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="47"/>
         <source>Week (01-53)</source>
-        <translation>Week (01-53)</translation>
+        <translation>Wek (01-53)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="50"/>
@@ -2083,17 +2089,17 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation></translation>
+        <translation>Links uitlijnen</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation></translation>
+        <translation>Midden uitlijnen</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation></translation>
+        <translation>Rechts uitlijnen</translation>
     </message>
 </context>
 <context>
@@ -2175,7 +2181,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
         <source>Later</source>
-        <translation>Later</translation>
+        <translation>Straks</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
@@ -2219,7 +2225,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation></translation>
+        <translation>Kies</translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2233,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Naamloos</translation>
     </message>
 </context>
 <context>
@@ -2235,12 +2241,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Naamloos</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1 (%2 kleuren)</translation>
     </message>
 </context>
 <context>
@@ -2250,62 +2256,62 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation></translation>
+        <translation>Open een nieuw palet vanuit een bestand</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation></translation>
+        <translation>Maak een nieuw palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation></translation>
+        <translation>Dupliceer het huidige palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
-        <translation></translation>
+        <translation>Verwijder het huidige palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
-        <translation></translation>
+        <translation>Wijzigingen terugdraaien naar het huidige palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
-        <translation></translation>
+        <translation>Wijzigingen opslaan in het huidige palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
-        <translation></translation>
+        <translation>Voeg een kleur toe aan het palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
-        <translation></translation>
+        <translation>Verwijder de geselecteerde kleur uit het palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="186"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="201"/>
         <source>New Palette</source>
-        <translation></translation>
+        <translation>Nieuw Palet</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
@@ -2316,29 +2322,30 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
         <source>GIMP Palettes (*.gpl)</source>
-        <translation></translation>
+        <translation>GIMP Paletten (*.gpl)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation></translation>
+        <translation>Palet afbeelding (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
         <source>All Files (*)</source>
-        <translation></translation>
+        <translation>Alle bestanden (*)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="231"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="244"/>
         <source>Open Palette</source>
-        <translation></translation>
+        <translation>Palet openen</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="245"/>
         <source>Failed to load the palette file
 %1</source>
-        <translation></translation>
+        <translation>Het laden van het paletbestand is mislukt
+%1</translation>
     </message>
 </context>
 <context>
@@ -2351,12 +2358,12 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
         <source>Remove Color</source>
-        <translation></translation>
+        <translation>Verwijder Kleur</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="352"/>
         <source>Edit Color...</source>
-        <translation></translation>
+        <translation>Bewerk Kleur...</translation>
     </message>
 </context>
 <context>
@@ -2364,7 +2371,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_list_model.cpp" line="231"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1 (%2 kleuren)</translation>
     </message>
 </context>
 <context>
@@ -2372,7 +2379,7 @@ Mogelijk moet je het &apos;#&apos;-teken insluiten. Voorbeeld: &apos;\#FFF&apos;
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation></translation>
+        <translation>Heldere Kleur</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
