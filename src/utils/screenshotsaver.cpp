@@ -178,7 +178,6 @@ bool saveToFilesystemGUI(const QPixmap& capture)
     }
 #endif
     if (!config.savePathFixed()) {
-        // auto imageFormats = QImageWriter::supportedImageFormats();
         savePath = ShowSaveFileDialog(QObject::tr("Save screenshot"), savePath);
     }
     if (savePath == "") {
