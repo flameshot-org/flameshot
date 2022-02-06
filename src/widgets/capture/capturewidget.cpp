@@ -290,7 +290,7 @@ void CaptureWidget::initButtons()
     // Add all buttons but hide those that were disabled in the Interface config
     // This will allow keyboard shortcuts for those buttons to work
     for (CaptureTool::Type t : allButtonTypes) {
-        CaptureToolButton* b = new CaptureToolButton(t, this);
+        auto* b = new CaptureToolButton(t, this);
         if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }

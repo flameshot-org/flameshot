@@ -94,7 +94,7 @@ void ShortcutsWidget::populateInfoTable()
         m_table->setItem(i, 0, new QTableWidgetItem(description));
 
 #if defined(Q_OS_MACOS)
-        QTableWidgetItem* item =
+        auto* item =
           new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
 #else
         QTableWidgetItem* item = new QTableWidgetItem(key_sequence);
@@ -130,7 +130,7 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
         }
 
         QString shortcutName = m_shortcuts.at(row).at(0);
-        SetShortcutDialog* setShortcutDialog =
+        auto* setShortcutDialog =
           new SetShortcutDialog(nullptr, shortcutName);
         if (0 != setShortcutDialog->exec()) {
             QKeySequence shortcutValue = setShortcutDialog->shortcut();

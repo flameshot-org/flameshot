@@ -173,7 +173,7 @@ bool Controller::resolveAnyConfigErrors()
     bool resolved = true;
     ConfigHandler config;
     if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
-        ConfigResolver* resolver = new ConfigResolver();
+        auto* resolver = new ConfigResolver();
         QObject::connect(
           resolver, &ConfigResolver::rejected, [resolver, &resolved]() {
               resolved = false;

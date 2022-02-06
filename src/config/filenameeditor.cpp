@@ -30,7 +30,7 @@ void FileNameEditor::initLayout()
     m_layout->addWidget(new QLabel(tr("Preview:")));
     m_layout->addWidget(m_outputLabel);
 
-    QHBoxLayout* horizLayout = new QHBoxLayout();
+    auto* horizLayout = new QHBoxLayout();
     horizLayout->addWidget(m_saveButton);
     horizLayout->addWidget(m_resetButton);
     horizLayout->addWidget(m_clearButton);

@@ -20,12 +20,12 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent, QString shortcutName)
     m_layout = new QVBoxLayout(this);
     m_layout->setAlignment(Qt::AlignHCenter);
 
-    QLabel* infoTop = new QLabel(tr("Enter new shortcut to change "));
+    auto* infoTop = new QLabel(tr("Enter new shortcut to change "));
     infoTop->setMargin(10);
     infoTop->setAlignment(Qt::AlignCenter);
     m_layout->addWidget(infoTop);
 
-    QLabel* infoIcon = new QLabel();
+    auto* infoIcon = new QLabel();
     infoIcon->setAlignment(Qt::AlignCenter);
     infoIcon->setPixmap(QPixmap(":/img/app/keyboard.svg"));
     m_layout->addWidget(infoIcon);
@@ -45,7 +45,7 @@ SetShortcutDialog::SetShortcutDialog(QDialog* parent, QString shortcutName)
         msg +=
           "\n" + tr("Flameshot must be restarted for changes to take effect.");
     }
-    QLabel* infoBottom = new QLabel(msg);
+    auto* infoBottom = new QLabel(msg);
     infoBottom->setMargin(10);
     infoBottom->setAlignment(Qt::AlignCenter);
     m_layout->addWidget(infoBottom);

@@ -97,7 +97,7 @@ void ConfigResolver::populate()
         ++row;
     }
 
-    QFrame* separator = new QFrame(this);
+    auto* separator = new QFrame(this);
     separator->setFrameShape(QFrame::HLine);
     separator->setFrameShadow(QFrame::Sunken);
     layout()->addWidget(separator, row, 0, 1, 2);
@@ -109,7 +109,7 @@ void ConfigResolver::populate()
     auto* buttons = new BBox(this);
     layout()->addWidget(buttons, row, 0, 1, 2, Qt::AlignCenter);
     if (anyErrors) {
-        QPushButton* resolveAll = new QPushButton(tr("Resolve all"));
+        auto* resolveAll = new QPushButton(tr("Resolve all"));
         resolveAll->setToolTip(tr("Resolve all listed errors."));
         buttons->addButton(resolveAll, BBox::ResetRole);
         connect(resolveAll, &QPushButton::clicked, this, [=]() {
@@ -122,7 +122,7 @@ void ConfigResolver::populate()
         });
     }
 
-    QPushButton* details = new QPushButton(tr("Details"));
+    auto* details = new QPushButton(tr("Details"));
     buttons->addButton(details, BBox::HelpRole);
     connect(details, &QPushButton::clicked, this, [this]() {
         (new ConfigErrorDetails(this))->exec();

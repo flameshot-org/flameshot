@@ -317,7 +317,7 @@ void sortButtons(BList& buttons)
 
 QVariant ButtonList::process(const QVariant& val)
 {
-    QList<int> intButtons = val.value<QList<int>>();
+    auto intButtons = val.value<QList<int>>();
     auto buttons = ButtonList::fromIntList(intButtons);
     sortButtons(buttons);
     return QVariant::fromValue(buttons);
@@ -447,7 +447,7 @@ QString UserColors::expected()
 
 QVariant UserColors::representation(const QVariant& val)
 {
-    QVector<QColor> colors = val.value<QVector<QColor>>();
+    auto colors = val.value<QVector<QColor>>();
 
     QStringList strColors;
 

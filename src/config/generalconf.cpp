@@ -210,7 +210,7 @@ void GeneralConf::initScrollArea()
     m_scrollArea = new QScrollArea(this);
     m_layout->addWidget(m_scrollArea);
 
-    QWidget* content = new QWidget(m_scrollArea);
+    auto* content = new QWidget(m_scrollArea);
     m_scrollArea->setWidget(content);
     m_scrollArea->setWidgetResizable(true);
     m_scrollArea->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
@@ -290,8 +290,8 @@ void GeneralConf::initHistoryConfirmationToDelete()
 
 void GeneralConf::initConfigButtons()
 {
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QGroupBox* box = new QGroupBox(tr("Configuration File"));
+    auto* buttonLayout = new QHBoxLayout();
+    auto* box = new QGroupBox(tr("Configuration File"));
     box->setFlat(true);
     box->setLayout(buttonLayout);
     m_layout->addWidget(box);
@@ -417,14 +417,14 @@ void GeneralConf::initSaveAfterCopy()
             this,
             &GeneralConf::saveAfterCopyChanged);
 
-    QGroupBox* box = new QGroupBox(tr("Save Path"));
+    auto* box = new QGroupBox(tr("Save Path"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
-    QHBoxLayout* pathLayout = new QHBoxLayout();
+    auto* pathLayout = new QHBoxLayout();
 
     QString path = ConfigHandler().savePath();
     m_savePath = new QLineEdit(path, this);
@@ -450,7 +450,7 @@ void GeneralConf::initSaveAfterCopy()
     vboxLayout->addLayout(pathLayout);
     vboxLayout->addWidget(m_screenshotPathFixedCheck);
 
-    QHBoxLayout* extensionLayout = new QHBoxLayout();
+    auto* extensionLayout = new QHBoxLayout();
 
     extensionLayout->addWidget(
       new QLabel(tr("Preferred save file extension:")));
@@ -483,11 +483,11 @@ void GeneralConf::historyConfirmationToDelete(bool checked)
 
 void GeneralConf::inituploadHistoryMax()
 {
-    QGroupBox* box = new QGroupBox(tr("Latest Uploads Max Size"));
+    auto* box = new QGroupBox(tr("Latest Uploads Max Size"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
     m_uploadHistoryMax = new QSpinBox(this);
@@ -510,11 +510,11 @@ void GeneralConf::uploadHistoryMaxChanged(int max)
 
 void GeneralConf::initUndoLimit()
 {
-    QGroupBox* box = new QGroupBox(tr("Undo limit"));
+    auto* box = new QGroupBox(tr("Undo limit"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
-    QVBoxLayout* vboxLayout = new QVBoxLayout();
+    auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
 
     m_undoLimit = new QSpinBox(this);
