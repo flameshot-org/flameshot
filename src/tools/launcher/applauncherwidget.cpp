@@ -167,7 +167,7 @@ void AppLauncherWidget::initListWidget()
             continue;
         }
 
-        QListWidget* itemsWidget = new QListWidget();
+        auto* itemsWidget = new QListWidget();
         configureListView(itemsWidget);
 
         const QVector<DesktopAppData>& appList = m_appsMap[cat];
@@ -234,7 +234,7 @@ void AppLauncherWidget::addAppsToListWidget(
   const QVector<DesktopAppData>& appList)
 {
     for (const DesktopAppData& app : appList) {
-        QListWidgetItem* buttonItem = new QListWidgetItem(widget);
+        auto* buttonItem = new QListWidgetItem(widget);
         buttonItem->setData(Qt::DecorationRole, app.icon);
         buttonItem->setData(Qt::DisplayRole, app.name);
         buttonItem->setData(Qt::UserRole, app.exec);

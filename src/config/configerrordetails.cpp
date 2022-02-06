@@ -21,7 +21,7 @@ ConfigErrorDetails::ConfigErrorDetails(QWidget* parent)
     setLayout(new QVBoxLayout(this));
 
     // Add text display
-    QTextEdit* textDisplay = new QTextEdit(this);
+    auto* textDisplay = new QTextEdit(this);
     textDisplay->setPlainText(str);
     textDisplay->setReadOnly(true);
     layout()->addWidget(textDisplay);
