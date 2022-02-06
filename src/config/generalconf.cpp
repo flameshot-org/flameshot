@@ -359,7 +359,8 @@ void GeneralConf::initAutoCloseIdleDaemon()
 void GeneralConf::initAutostart()
 {
     m_autostart = new QCheckBox(tr("Launch at startup"), this);
-    m_autostart->setToolTip(tr("Launch Flameshot daemon when computer is booted"));
+    m_autostart->setToolTip(
+      tr("Launch Flameshot daemon when computer is booted"));
     m_scrollAreaLayout->addWidget(m_autostart);
 
     connect(
@@ -411,7 +412,8 @@ void GeneralConf::initCopyAndCloseAfterUpload()
 void GeneralConf::initSaveAfterCopy()
 {
     m_saveAfterCopy = new QCheckBox(tr("Save image after copy"), this);
-    m_saveAfterCopy->setToolTip(tr("After copying the screenshot, save it to a file as well"));
+    m_saveAfterCopy->setToolTip(
+      tr("After copying the screenshot, save it to a file as well"));
     m_scrollAreaLayout->addWidget(m_saveAfterCopy);
     connect(m_saveAfterCopy,
             &QCheckBox::clicked,
