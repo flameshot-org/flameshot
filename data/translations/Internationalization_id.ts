@@ -111,52 +111,81 @@
 <context>
     <name>CaptureLauncher</name>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="42"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Mode Cuplikan&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Mode Cuplikan&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="48"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="31"/>
         <source>Rectangular Region</source>
         <translation>Daerah Persegi Panjang</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="54"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="37"/>
         <source>Full Screen (Current Display)</source>
         <translation>Layar Penuh (Tampilan saat ini)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="57"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="40"/>
         <source>Full Screen (All Monitors)</source>
         <translation>Layar Penuh (Semua Monitor)</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="66"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="43"/>
         <source>No Delay</source>
         <translation>Tanpa Jeda</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="51"/>
         <source> second</source>
         <translation> detik</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="75"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="125"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="125"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="51"/>
         <source> seconds</source>
         <translation> detik</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="77"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="96"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="126"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="126"/>
         <source>Take new screenshot</source>
         <translation>Ambil tangkapan layar baru</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="54"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="122"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="122"/>
         <source>Area:</source>
         <translation>Area:</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
+        <source>Capture Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.ui" line="22"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.ui" line="39"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
+        <source>Capture Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.ui" line="61"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="123"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="123"/>
         <source>Delay:</source>
         <translation>Jeda:</translation>
     </message>
@@ -164,63 +193,63 @@
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="102"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="105"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
         <translation>Tidak dapat menangkap layar</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="378"/>
         <source>Mouse</source>
         <translation>Mouse</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="378"/>
         <source>Select screenshot area</source>
         <translation>Pilih area tangkapan layar</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
         <source>Mouse Wheel</source>
         <translation>Roda Mouse</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
         <source>Change tool size</source>
         <translation>Ubah ukuran alat</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="394"/>
         <source>Right Click</source>
         <translation>Klik Kanan</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="394"/>
         <source>Show color picker</source>
         <translation>Tampilkan pemilih warna</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="388"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="396"/>
         <source>Open side panel</source>
         <translation>Buka panel samping</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Exit</source>
         <translation>Keluar</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="497"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>Flameshot telah kehilangan fokus. Pintasan keyboard tidak akan berfungsi sampai Anda mengklik di suatu tempat.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="503"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="511"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>Kesalahan konfigurasi teratasi. Jalankan `flameshot gui` lagi untuk menerapkannya.</translation>
     </message>
@@ -237,7 +266,7 @@ Use the Mouse Wheel to change the thickness of your tool.
 Press Space to open the side panel.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="930"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="949"/>
         <source>Tool Settings</source>
         <translation>Pengaturan Alat</translation>
     </message>
@@ -358,6 +387,65 @@ Press Space to open the side panel.</translation>
     </message>
 </context>
 <context>
+    <name>ColorPickerEditor</name>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
+        <source>Select Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
+        <source>Select preset using the spinbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
+        <source>Press button to delete the selected preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
+        <source>Add Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
+        <source>Enter color manually or select it using the color-wheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
+        <source>Press button to add preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="137"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
+        <source>Unable to add preset. Maximum limit reached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="138"/>
+        <source>Unable to remove preset. Minimum limit reached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigErrorDetails</name>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
@@ -368,45 +456,45 @@ Press Space to open the side panel.</translation>
 <context>
     <name>ConfigHandler</name>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="547"/>
+        <location filename="../../src/utils/confighandler.cpp" line="549"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
         <translation>Pengaturan tidak dikenal: &apos;%1&apos;
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="553"/>
+        <location filename="../../src/utils/confighandler.cpp" line="557"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
         <translation>Nama shortcut tidak dikenal: &apos;%1&apos;.
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="594"/>
+        <location filename="../../src/utils/confighandler.cpp" line="600"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
         <translation>Konflik shortcut: &apos;%1&apos; dan &apos;%2&apos; memiliki shortcut yang samaL %3
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="633"/>
+        <location filename="../../src/utils/confighandler.cpp" line="640"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
         <translation>Nilai buruk pada &apos;%1&apos;: Seharusnya: %2
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="682"/>
+        <location filename="../../src/utils/confighandler.cpp" line="690"/>
         <source>You have successfully resolved the configuration error.</source>
         <translation>Anda telah berhasil mengatasi kesalahan konfigurasi.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="705"/>
+        <location filename="../../src/utils/confighandler.cpp" line="713"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
         <translation>Konfigurasi berisi kesalahan. Buka konfigurasi untuk mengatasinya.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="759"/>
+        <location filename="../../src/utils/confighandler.cpp" line="767"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
         <translation>Kunci konfig &apos;%1&apos; buruk pada ConfigHandler. Mohon laporkan ini sebagai bug.</translation>
     </message>
@@ -463,7 +551,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
         <translation>Atasi semua kesalahan yang terdaftar.</translation>
     </message>
     <message>
-        <location filename="../../src/config/configresolver.cpp" line="123"/>
+        <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
         <translation>Detail</translation>
     </message>
@@ -524,42 +612,42 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
         <translation>Gagal mengambil informasi versi terbaru.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="315"/>
+        <location filename="../../src/core/controller.cpp" line="317"/>
         <source>Error</source>
         <translation>Galat</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="315"/>
+        <location filename="../../src/core/controller.cpp" line="317"/>
         <source>Unable to close active modal widgets</source>
         <translation>Tidak dapat menutup widget modal aktif</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="474"/>
+        <location filename="../../src/core/controller.cpp" line="479"/>
         <source>&amp;Open Launcher</source>
         <translation>&amp;Buka Peluncur</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="479"/>
+        <location filename="../../src/core/controller.cpp" line="484"/>
         <source>&amp;Configuration</source>
         <translation>&amp;Pengaturan</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="482"/>
+        <location filename="../../src/core/controller.cpp" line="487"/>
         <source>&amp;About</source>
         <translation>&amp;Ihwal</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="485"/>
+        <location filename="../../src/core/controller.cpp" line="490"/>
         <source>Check for updates</source>
         <translation>Periksa pembaruan</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="492"/>
+        <location filename="../../src/core/controller.cpp" line="497"/>
         <source>&amp;Latest Uploads</source>
         <translation>&amp;Unggahan Terbaru</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="672"/>
+        <location filename="../../src/core/controller.cpp" line="678"/>
         <source>URL copied to clipboard.</source>
         <translation>URL tersalin ke clipboard.</translation>
     </message>
@@ -568,12 +656,12 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
         <translation type="vanished">&amp;Informació</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="488"/>
+        <location filename="../../src/core/controller.cpp" line="493"/>
         <source>&amp;Quit</source>
         <translation>&amp;Hentikan Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="458"/>
+        <location filename="../../src/core/controller.cpp" line="463"/>
         <source>&amp;Take Screenshot</source>
         <translation>&amp;Ambil Cuplikan Layar</translation>
     </message>
@@ -670,7 +758,7 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
 <context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="262"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="264"/>
         <source>Unable to connect via DBus</source>
         <translation>Tidak dapat terhubung via DBus</translation>
     </message>
@@ -745,271 +833,336 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="143"/>
-        <location filename="../../src/config/generalconf.cpp" line="300"/>
+        <location filename="../../src/config/generalconf.cpp" line="149"/>
+        <location filename="../../src/config/generalconf.cpp" line="306"/>
         <source>Import</source>
         <translation>Impor</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="150"/>
-        <location filename="../../src/config/generalconf.cpp" line="158"/>
-        <location filename="../../src/config/generalconf.cpp" line="182"/>
-        <location filename="../../src/config/generalconf.cpp" line="616"/>
+        <location filename="../../src/config/generalconf.cpp" line="156"/>
+        <location filename="../../src/config/generalconf.cpp" line="164"/>
+        <location filename="../../src/config/generalconf.cpp" line="188"/>
+        <location filename="../../src/config/generalconf.cpp" line="626"/>
         <source>Error</source>
         <translation>Galat</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="150"/>
+        <location filename="../../src/config/generalconf.cpp" line="156"/>
         <source>Unable to read file.</source>
         <translation>Tidak bisa membaca berkas.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="158"/>
-        <location filename="../../src/config/generalconf.cpp" line="182"/>
+        <location filename="../../src/config/generalconf.cpp" line="164"/>
+        <location filename="../../src/config/generalconf.cpp" line="188"/>
         <source>Unable to write file.</source>
         <translation>Tak bisa menulis berkas.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="169"/>
+        <location filename="../../src/config/generalconf.cpp" line="175"/>
         <source>Save File</source>
         <translation>Simpan File</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="191"/>
+        <location filename="../../src/config/generalconf.cpp" line="197"/>
         <source>Confirm Reset</source>
         <translation>Konfirmasi atur ulang</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="192"/>
+        <location filename="../../src/config/generalconf.cpp" line="198"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>Apakah Anda yakin ingin mengatur ulang konfigurasi?</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="223"/>
+        <location filename="../../src/config/generalconf.cpp" line="229"/>
         <source>Show help message</source>
         <translation>Tampilkan pesan bantuan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="224"/>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation>Tampilkan pesan bantuan di awal dalam mode capture.</translation>
+        <translation type="vanished">Tampilkan pesan bantuan di awal dalam mode capture.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="234"/>
+        <location filename="../../src/config/generalconf.cpp" line="240"/>
         <source>Show the side panel button</source>
         <translation>Tampilkan tombol panel samping</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="236"/>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation>Tampilkan tombol panel samping di mode capture.</translation>
+        <translation type="vanished">Tampilkan tombol panel samping di mode capture.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="247"/>
-        <location filename="../../src/config/generalconf.cpp" line="248"/>
+        <location filename="../../src/config/generalconf.cpp" line="253"/>
         <source>Show desktop notifications</source>
         <translation>Tampilkan notifikasi desktop</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="260"/>
+        <location filename="../../src/config/generalconf.cpp" line="266"/>
         <source>Show tray icon</source>
         <translation>Tampilkan ikon baki</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="261"/>
         <source>Show the systemtray icon</source>
-        <translation>Tampilkan ikon baki sistem</translation>
+        <translation type="vanished">Tampilkan ikon baki sistem</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="273"/>
-        <location filename="../../src/config/generalconf.cpp" line="276"/>
+        <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>Konfirmasi diperlukan untuk menghapus screenshot dari unggahan terbaru</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="288"/>
+        <location filename="../../src/config/generalconf.cpp" line="294"/>
         <source>Configuration File</source>
         <translation>Konfigurasi Berkas</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="293"/>
+        <location filename="../../src/config/generalconf.cpp" line="299"/>
         <source>Export</source>
         <translation>Ekspor</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="307"/>
+        <location filename="../../src/config/generalconf.cpp" line="313"/>
         <source>Reset</source>
         <translation>Setel ulang</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="317"/>
-        <location filename="../../src/config/generalconf.cpp" line="318"/>
+        <location filename="../../src/config/generalconf.cpp" line="323"/>
         <source>Automatic check for updates</source>
         <translation>Pemeriksaan otomatis pembaruan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="330"/>
+        <location filename="../../src/config/generalconf.cpp" line="336"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
         <translation>Izinkan beberapa instance flameshot GUI secara bersamaan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="331"/>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation>Ini memungkinkan Anda untuk mengambil screenshot dari flameshot itu sendiri misalnya.</translation>
+        <translation type="vanished">Ini memungkinkan Anda untuk mengambil screenshot dari flameshot itu sendiri misalnya.</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="343"/>
-        <location filename="../../src/config/generalconf.cpp" line="345"/>
+        <location filename="../../src/config/generalconf.cpp" line="349"/>
+        <location filename="../../src/config/generalconf.cpp" line="351"/>
         <source>Automatically close daemon when it is not needed</source>
         <translation>Otomatis tutup daemon ketika tidak dibutuhkan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="355"/>
+        <location filename="../../src/config/generalconf.cpp" line="361"/>
         <source>Launch at startup</source>
         <translation>Luncurkan saat startup</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Launch Flameshot</source>
-        <translation>Luncurkan Flameshot</translation>
+        <translation type="vanished">Luncurkan Flameshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="366"/>
-        <location filename="../../src/config/generalconf.cpp" line="369"/>
+        <location filename="../../src/config/generalconf.cpp" line="373"/>
         <source>Show welcome message on launch</source>
         <translation>Tampilkan pesan selamat datang saat peluncuran</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="380"/>
-        <location filename="../../src/config/generalconf.cpp" line="382"/>
+        <location filename="../../src/config/generalconf.cpp" line="388"/>
         <source>Use large predefined color palette</source>
         <translation>Gunakan palet warna besar yang telah ditentukan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="394"/>
+        <location filename="../../src/config/generalconf.cpp" line="402"/>
         <source>Copy URL after upload</source>
         <translation>Salin URL setelah mengunggah</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Copy URL and close window after upload</source>
-        <translation>Salin URL dan tutup jendela setelah mengunggah</translation>
+        <translation type="vanished">Salin URL dan tutup jendela setelah mengunggah</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="406"/>
+        <location filename="../../src/config/generalconf.cpp" line="414"/>
         <source>Save image after copy</source>
         <translation>Simpan gambar setelah menyalin</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="407"/>
         <source>Save image file after copying it</source>
-        <translation>Simpan file gambar setelah menyalinnya</translation>
+        <translation type="vanished">Simpan file gambar setelah menyalinnya</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="414"/>
+        <location filename="../../src/config/generalconf.cpp" line="230"/>
+        <source>Show the help message at the beginning in the capture mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="242"/>
+        <source>Show the side panel toggle button in the capture mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="254"/>
+        <source>Enable desktop notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="267"/>
+        <source>Show icon in the system tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="282"/>
+        <source>Ask for confirmation to delete screenshot from the latest uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="324"/>
+        <source>Check for updates automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="337"/>
+        <source>This allows you to take screenshots of Flameshot itself for example</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="363"/>
+        <source>Launch Flameshot daemon when computer is booted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="376"/>
+        <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="390"/>
+        <source>Use a large predefined color palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="404"/>
+        <source>Copy URL and close window after uploading was successful</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="416"/>
+        <source>After copying the screenshot, save it to a file as well</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="423"/>
         <source>Save Path</source>
         <translation>Simpan Jalur</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="430"/>
+        <location filename="../../src/config/generalconf.cpp" line="439"/>
         <source>Change...</source>
         <translation>Ubah...</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="438"/>
+        <location filename="../../src/config/generalconf.cpp" line="447"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>Gunakan lokasi tetap untuk menyimpan tangkapan layar</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="450"/>
+        <location filename="../../src/config/generalconf.cpp" line="459"/>
         <source>Preferred save file extension:</source>
         <translation>Ekstensi file penyimpanan yang disukai:</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="480"/>
+        <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Latest Uploads Max Size</source>
         <translation>Ukuran Maksimal Unggahan Terbaru</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="507"/>
+        <location filename="../../src/config/generalconf.cpp" line="516"/>
         <source>Undo limit</source>
         <translation>Batas undurkan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="533"/>
-        <location filename="../../src/config/generalconf.cpp" line="535"/>
+        <location filename="../../src/config/generalconf.cpp" line="542"/>
+        <location filename="../../src/config/generalconf.cpp" line="544"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>Gunakan format JPG untuk clipboard (PNG default)</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="565"/>
-        <location filename="../../src/config/generalconf.cpp" line="566"/>
+        <location filename="../../src/config/generalconf.cpp" line="574"/>
         <source>Copy file path after save</source>
         <translation>Salin lokasi file setelah menyimpan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="576"/>
+        <location filename="../../src/config/generalconf.cpp" line="575"/>
+        <source>Copy the file path to clipboard after the file is saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="586"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
         <translation>Gambar anti-aliasing saat memperbesar gambar yang disematkan</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="578"/>
+        <location filename="../../src/config/generalconf.cpp" line="588"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
         <translation>Setelah memperbesar gambar tersemat, harusnya gambar diperhalus atau tetap ber pixel</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="589"/>
-        <location filename="../../src/config/generalconf.cpp" line="591"/>
+        <location filename="../../src/config/generalconf.cpp" line="599"/>
+        <location filename="../../src/config/generalconf.cpp" line="601"/>
         <source>Upload image without confirmation</source>
         <translation>Unggah gambar tanpa konfirmasi</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="607"/>
+        <location filename="../../src/config/generalconf.cpp" line="617"/>
         <source>Choose a Folder</source>
         <translation>Pilih Folder</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="616"/>
+        <location filename="../../src/config/generalconf.cpp" line="626"/>
         <source>Unable to write to directory.</source>
         <translation>Tidak dapat menulis ke direktori.</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="635"/>
+        <source>Show magnifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="636"/>
+        <source>Enable a magnifier while selecting the screenshot area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="647"/>
+        <source>Square shaped magnifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="648"/>
+        <source>Make the magnifier to be square-shaped</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>HistoryWidget</name>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="27"/>
         <source>Latest Uploads</source>
-        <translation>Upload Terbaru</translation>
+        <translation type="vanished">Upload Terbaru</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="91"/>
         <source>Screenshots history is empty</source>
-        <translation>Riwayat cuplikan layar kosong</translation>
+        <translation type="vanished">Riwayat cuplikan layar kosong</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="142"/>
         <source>Copy URL</source>
-        <translation>Salin URL</translation>
+        <translation type="vanished">Salin URL</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="146"/>
         <source>URL copied to clipboard.</source>
-        <translation>URL disalin ke papan klip.</translation>
+        <translation type="vanished">URL disalin ke papan klip.</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="152"/>
         <source>Open in browser</source>
-        <translation>Buka di peramban</translation>
+        <translation type="vanished">Buka di peramban</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="168"/>
         <source>Confirm to delete</source>
-        <translation>Konfirmasi hapus</translation>
+        <translation type="vanished">Konfirmasi hapus</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/historywidget.cpp" line="169"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Apakah Anda yakin ingin menghapus screenshot dari unggahan terbaru dan server?</translation>
+        <translation type="vanished">Apakah Anda yakin ingin menghapus screenshot dari unggahan terbaru dan server?</translation>
     </message>
 </context>
 <context>
@@ -1084,49 +1237,64 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
 <context>
     <name>ImgUploaderBase</name>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="36"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
         <translation>Unggah gambar</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
         <source>Uploading Image</source>
         <translation>Mengunggah Gambar</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="129"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Copy URL</source>
         <translation>Salin URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Open URL</source>
         <translation>Buka URL</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Delete image</source>
         <translation>Hapus gambar</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Image to Clipboard.</source>
         <translation>Gambar ke Clipboard.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="156"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
         <source>Unable to open the URL.</source>
         <translation>Tidak dapat membuka URL.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="171"/>
         <source>URL copied to clipboard.</source>
         <translation>URL tersalin ke clipboard.</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="177"/>
         <source>Screenshot copied to clipboard.</source>
         <translation>Screenshot tersalin ke clipboard.</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
+        <source>Unable to save the screenshot to disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
+        <source>Screenshot saved.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1196,9 +1364,60 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
 <context>
     <name>InfoWindow</name>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="32"/>
+        <location filename="../../src/widgets/infowindow.ui" line="14"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>About</source>
         <translation>Tentang</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="26"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="43"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="56"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
+        <source>GPLv3+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="89"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="102"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
+        <source>Flameshot v</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="115"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
+        <source>OS Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/infowindow.ui" line="128"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <source>Copy Info</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -1249,14 +1468,12 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
         <translation type="vanished">Descripció</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="54"/>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Lisensi&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Lisensi&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/infowindow.cpp" line="65"/>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Versi&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Versi&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
@@ -1374,23 +1591,23 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="61"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="63"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="136"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="138"/>
         <source>Capture saved to clipboard.</source>
         <translation>Cuplikan layar tersimpan ke papan klip.</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="47"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="122"/>
         <source>Error while saving to clipboard</source>
         <translation>Gagal saat menyimpan ke papan klip</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="172"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="181"/>
         <source>Save screenshot</source>
         <translation>Simpan cuplikan layar</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="194"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="203"/>
         <source>Path copied to clipboard as </source>
         <translation>Jalur tersalin ke clipboard sebagai </translation>
     </message>
@@ -1407,19 +1624,19 @@ Mohon atasi mereka secara manual di file konfigurasi.</translation>
         <translation type="vanished">Cuplikan layar tersimpan dan disalin ke papan klip sebagai </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="205"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="214"/>
         <source>Save Error</source>
         <translation>Gagal menyimpan</translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="98"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="189"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="46"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
         <source>Capture saved as </source>
         <translation>Cuplikan layar disimpan sebagai </translation>
     </message>
     <message>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="102"/>
-        <location filename="../../src/utils/screenshotsaver.cpp" line="198"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="50"/>
+        <location filename="../../src/utils/screenshotsaver.cpp" line="207"/>
         <source>Error trying to save as </source>
         <translation>Gagal ketika mencoba menyimpan sebagai </translation>
     </message>
@@ -1635,42 +1852,42 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
         <translation type="vanished">URL disalin ke papan klip.</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="53"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="54"/>
         <source>Options</source>
         <translation>Opsi</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="67"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="68"/>
         <source>Arguments</source>
         <translation>Argumen</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="327"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="329"/>
         <source>arguments</source>
         <translation>argumen</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
         <source>Usage</source>
         <translation>Penggunaan</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="328"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="330"/>
         <source>options</source>
         <translation>opsi</translation>
     </message>
     <message>
-        <location filename="../../src/cli/commandlineparser.cpp" line="335"/>
+        <location filename="../../src/cli/commandlineparser.cpp" line="337"/>
         <source>Per default runs Flameshot in the background and adds a tray icon for configuration.</source>
         <translation>Per default menjalankan Flameshot di latar belakang dan menambahkan ikon baki untuk konfigurasi.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="564"/>
+        <location filename="../../src/core/controller.cpp" line="569"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>Halo, Saya disini! Klik ikon di baki untuk mengambil screenshot atau klik dengan tombol kanan untuk melihat opsi lebih banyak.</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="650"/>
+        <location filename="../../src/core/controller.cpp" line="656"/>
         <source>Full screen screenshot pinned to screen</source>
         <translation>Screenshot layar penuh disematkan ke layar</translation>
     </message>
@@ -1723,27 +1940,27 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
         <translation type="vanished">Delete current tool</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="188"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
         <source>Quit capture</source>
         <translation>Keluar capture</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="196"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
         <translation>Riwayat screenshot</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="199"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
         <source>Capture screen</source>
         <translation>Ambil capture</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="206"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="205"/>
         <source>Show color picker</source>
         <translation>Tampilkan pemilih warna</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="206"/>
         <source>Change the tool&apos;s size</source>
         <translation>Ubah ukuran alat</translation>
     </message>
@@ -2110,37 +2327,36 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
 <context>
     <name>UIcolorEditor</name>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="18"/>
         <source>UI Color Editor</source>
-        <translation>Pengedit Warna UI</translation>
+        <translation type="vanished">Pengedit Warna UI</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="89"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
         <translation>Ubah warna dengan memindahkan pemilih dan lihat perubahan di tombol pratinjau.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="100"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
         <source>Select a Button to modify it</source>
         <translation>Pilih Tombol untuk mengubahnya</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="110"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="109"/>
         <source>Main Color</source>
         <translation>Warna Utama</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
         <source>Click on this button to set the edition mode of the main color.</source>
         <translation>Klik pada tombol ini untuk mengatur warna utama dari mode edisi.</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
         <source>Contrast Color</source>
         <translation>Warna Kontras</translation>
     </message>
     <message>
-        <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
+        <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
         <translation>Klik pada tombol ini untuk mengatur warna kontras pada mode edisi.</translation>
     </message>
@@ -2182,14 +2398,70 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
     </message>
 </context>
 <context>
+    <name>UploadHistory</name>
+    <message>
+        <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
+        <source>Upload History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished">Riwayat cuplikan layar kosong</translation>
+    </message>
+</context>
+<context>
+    <name>UploadLineItem</name>
+    <message>
+        <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
+        <source>Copy URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
+        <source>Open In Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
+        <source>Confirm to delete</source>
+        <translation type="unfinished">Konfirmasi hapus</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
+        <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
+        <translation type="unfinished">Apakah Anda yakin ingin menghapus screenshot dari unggahan terbaru dan server?</translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="159"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="190"/>
         <source>Close</source>
         <translation>Tutup</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="169"/>
+        <location filename="../../src/widgets/panel/utilitypanel.cpp" line="200"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Kosong&gt;</translation>
     </message>
@@ -2197,17 +2469,27 @@ Anda mungkin perlu untuk escape dari tanda &apos;#&apos; seperti pada &apos;\#FF
 <context>
     <name>VisualsEditor</name>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="40"/>
+        <location filename="../../src/config/visualseditor.cpp" line="41"/>
         <source>Opacity of area outside selection:</source>
         <translation>Opacity area di luar seleksi:</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="65"/>
+        <location filename="../../src/config/visualseditor.cpp" line="68"/>
+        <source>UI Color Editor</source>
+        <translation type="unfinished">Pengedit Warna UI</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="74"/>
+        <source>Colorpicker Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/visualseditor.cpp" line="79"/>
         <source>Button Selection</source>
         <translation>Seleksi Tombol</translation>
     </message>
     <message>
-        <location filename="../../src/config/visualseditor.cpp" line="71"/>
+        <location filename="../../src/config/visualseditor.cpp" line="85"/>
         <source>Select All</source>
         <translation>Pilih Semua</translation>
     </message>
