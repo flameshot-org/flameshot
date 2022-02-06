@@ -28,7 +28,7 @@ protected:
     void leaveEvent(QEvent*);
 
 private:
-    void setScaledPixmap(const QSize& size);
+    void setScaledPixmapToLabel(const QSize& newSize, const qreal scale, const bool expanding);
 
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
