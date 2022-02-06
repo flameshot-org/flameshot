@@ -18,10 +18,10 @@
 
 _flameshot_gui_opts=(
     {-p,--path}'[Existing directory or new file to save to]':dir:_files
-    {-c,--clipboard}'[Save the capture to the clipboard]]'
-    {-d,--delay}'[Delay time in milliseconds]]'
+    {-c,--clipboard}'[Save the capture to the clipboard]'
+    {-d,--delay}'[Delay time in milliseconds]'
     "--region[Screenshot region to select <WxH+X+Y or string>]"
-    {-r,--raw}'[Print raw PNG capture]]'
+    {-r,--raw}'[Print raw PNG capture]'
     {-g,--geometry}'[Print geometry of the selection in the format W H X Y. Does nothing if raw is specified]'
     {-u,--upload}'[Upload screenshot]'
     "--pin[Pin the capture to the screen]"
