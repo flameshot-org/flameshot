@@ -631,6 +631,9 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
 void GeneralConf::initShowMagnifier()
 {
     m_showMagnifier = new QCheckBox(tr("Show magnifier"), this);
+    m_showMagnifier->setToolTip(tr("Enable a magnifier while selecting the "
+                                   "screenshot area"));
+
     m_scrollAreaLayout->addWidget(m_showMagnifier);
     connect(m_showMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setShowMagnifier(checked);
@@ -640,6 +643,7 @@ void GeneralConf::initShowMagnifier()
 void GeneralConf::initSquareMagnifier()
 {
     m_squareMagnifier = new QCheckBox(tr("Square shaped magnifier"), this);
+    m_squareMagnifier->setToolTip(tr("Make the magnifier to be square-shaped"));
     m_scrollAreaLayout->addWidget(m_squareMagnifier);
     connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setSquareMagnifier(checked);
