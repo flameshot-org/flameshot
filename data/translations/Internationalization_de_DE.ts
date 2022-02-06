@@ -171,7 +171,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Mouse</source>
-        <translation></translation>
+        <translation>Mouse</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
@@ -206,7 +206,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
         <source>Esc</source>
-        <translation></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="389"/>
@@ -296,14 +296,14 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <source>Hex</source>
-        <translation></translation>
+        <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation></translation>
+        <translation>Blue</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
@@ -317,21 +317,21 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation></translation>
+        <translation>Green</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
-        <translation></translation>
+        <translation>Alpha</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation></translation>
+        <translation>Red</translation>
     </message>
 </context>
 <context>
@@ -349,7 +349,7 @@ Drücke die Leertaste um das Seitenmenü zu öffnen.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation></translation>
+        <translation>Lupe einschalten</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -503,7 +503,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="126"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation></translation>
+        <translation>&lt;b&gt;Die Konfigurationsdatei enthält Fehler. Behebe diese, bevor Du fortfährst.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -865,7 +865,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <location filename="../../src/config/generalconf.cpp" line="345"/>
         <source>Automatically close daemon when it is not needed</source>
-        <translation></translation>
+        <translation>Automatisches Schließen des Daemons, wenn er nicht benötigt wird</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="355"/>
@@ -887,7 +887,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
         <location filename="../../src/config/generalconf.cpp" line="380"/>
         <location filename="../../src/config/generalconf.cpp" line="382"/>
         <source>Use large predefined color palette</source>
-        <translation></translation>
+        <translation>Große vordefinierte Farbpalette verwenden</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="394"/>
@@ -927,7 +927,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="450"/>
         <source>Preferred save file extension:</source>
-        <translation></translation>
+        <translation>Bevorzugte Dateierweiterung zum Speichern:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="480"/>
@@ -954,18 +954,18 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="576"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation></translation>
+        <translation>Anti-Aliasing-Bild beim Zoomen des angehefteten Bildes</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="578"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation></translation>
+        <translation>Soll das Bild nach dem Zoomen des angehefteten Bildes geglättet werden oder pixelig bleiben</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="589"/>
         <location filename="../../src/config/generalconf.cpp" line="591"/>
         <source>Upload image without confirmation</source>
-        <translation></translation>
+        <translation>Bild ohne Bestätigung hochladen</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="607"/>
@@ -1036,18 +1036,18 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation></translation>
+        <translation>Hochladen Bestätigung</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation></translation>
+        <translation>Möchtest du diese Aufnahme hochladen?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation></translation>
+        <translation>Hochladen ohne Bestätigung</translation>
     </message>
 </context>
 <context>
@@ -1090,7 +1090,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="36"/>
         <source>Upload image</source>
-        <translation></translation>
+        <translation>Upload image</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="50"/>
@@ -1125,7 +1125,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="163"/>
         <source>URL copied to clipboard.</source>
-        <translation></translation>
+        <translation>URL in Zwischenablage kopiert.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="169"/>
@@ -1143,7 +1143,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation></translation>
+        <translation>Auswahl hochladen</translation>
     </message>
 </context>
 <context>
@@ -1284,12 +1284,12 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation></translation>
+        <translation>Invertieren</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation></translation>
+        <translation>Inverter als Malwerkzeug festlegen</translation>
     </message>
 </context>
 <context>
@@ -1425,7 +1425,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="194"/>
         <source>Path copied to clipboard as </source>
-        <translation></translation>
+        <translation>Pfad in die Zwischenablage kopiert als </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1486,7 +1486,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation>Vorhandenes Verzeichnis oder neue Datei zum Speichern</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
@@ -1496,12 +1496,12 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="174"/>
         <source>Pin the capture to the screen</source>
-        <translation></translation>
+        <translation>Anheften der Aufnahme an den Bildschirm</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="176"/>
         <source>Upload screenshot</source>
-        <translation></translation>
+        <translation>Upload screenshot</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="178"/>
@@ -1511,7 +1511,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="181"/>
         <source>Screenshot region to select</source>
-        <translation></translation>
+        <translation>Bildschirmfoto auszuwählender Bereich</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1521,7 +1521,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation></translation>
+        <translation>Erfassung akzeptieren, sobald eine Auswahl getroffen wurde</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1536,7 +1536,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation></translation>
+        <translation>Überprüfe die Konfiguration auf Fehler</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -1566,7 +1566,7 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="217"/>
         <source>Define the screen to capture (starting from 0)</source>
-        <translation></translation>
+        <translation>Definiere den zu erfassenden Bildschirm (beginnend bei 0)</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="237"/>
@@ -1576,12 +1576,12 @@ Bitte beseitige sie manuell in der Konfigurationsdatei.</translation>
     <message>
         <location filename="../../src/main.cpp" line="240"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
-        <translation></translation>
+        <translation>Ungültiger Bereich, verwende &apos;WxH+X+Y&apos; oder &apos;all&apos; oder &apos;screen0/screen1/...&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="253"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
-        <translation></translation>
+        <translation>Ungültiger Pfad, muss ein bestehendes Verzeichnis oder eine neue Datei in einem bestehenden Verzeichnis sein</translation>
     </message>
     <message>
         <source>Define the screen to capture</source>
@@ -1675,7 +1675,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/core/controller.cpp" line="650"/>
         <source>Full screen screenshot pinned to screen</source>
-        <translation></translation>
+        <translation>Vollbild-Screenshot an den Bildschirm geheftet</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
@@ -1757,7 +1757,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Change the tool&apos;s size</source>
-        <translation></translation>
+        <translation>Größe des Werkzeugs ändern</translation>
     </message>
     <message>
         <source>Change the tool&apos;s thickness</source>
@@ -1800,7 +1800,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/tools/save/savetool.cpp" line="34"/>
         <source>Save screenshot to a file</source>
-        <translation></translation>
+        <translation>Bildschirmfoto in einer Datei speichern</translation>
     </message>
     <message>
         <source>Save the capture</source>
@@ -1853,7 +1853,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
         <source>Flameshot must be restarted for changes to take effect.</source>
-        <translation></translation>
+        <translation>Flameshot muss neu gestartet werden, damit die Änderungen wirksam werden.</translation>
     </message>
 </context>
 <context>
@@ -1896,12 +1896,12 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
         <source>Active tool size: </source>
-        <translation></translation>
+        <translation>Aktive Werkzeuggröße: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
         <source>Active Color: </source>
-        <translation></translation>
+        <translation>Active Color: </translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="69"/>
@@ -1945,7 +1945,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/tools/sizeindicator/sizeindicatortool.cpp" line="33"/>
         <source>Show X and Y dimensions of the selection</source>
-        <translation></translation>
+        <translation>X- und Y-Abmessungen der Auswahl anzeigen</translation>
     </message>
     <message>
         <source>Show the dimensions of the selection (X Y)</source>
@@ -2093,17 +2093,17 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
         <source>Left Align</source>
-        <translation></translation>
+        <translation>Links ausrichten</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
         <source>Center Align</source>
-        <translation></translation>
+        <translation>Mittig ausrichten</translation>
     </message>
     <message>
         <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
         <source>Right Align</source>
-        <translation></translation>
+        <translation>Rechts ausrichten</translation>
     </message>
 </context>
 <context>
@@ -2229,7 +2229,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.cpp" line="79"/>
         <source>Pick</source>
-        <translation></translation>
+        <translation>Wähle</translation>
     </message>
 </context>
 <context>
@@ -2237,7 +2237,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette.cpp" line="428"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Ohne Namen</translation>
     </message>
 </context>
 <context>
@@ -2245,12 +2245,12 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="70"/>
         <source>Unnamed</source>
-        <translation></translation>
+        <translation>Ohne Namen</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation></translation>
+        <translation>%1 (%2 Farben)</translation>
     </message>
 </context>
 <context>
@@ -2260,21 +2260,21 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
-        <translation></translation>
+        <translation>Öffnen einer neuen Palette aus einer Datei</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
-        <translation></translation>
+        <translation>Eine neue Palette anlegen</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
-        <translation></translation>
+        <translation>Duplizieren der aktuellen Palette</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
@@ -2321,7 +2321,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="187"/>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="202"/>
         <source>Name</source>
-        <translation></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="228"/>
@@ -2357,7 +2357,7 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="335"/>
         <source>Add Color</source>
-        <translation></translation>
+        <translation>Add Color</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/gradient_editor.cpp" line="344"/>
@@ -2383,12 +2383,12 @@ Eventuell muss das &apos;#&apos; Zeichen als &apos;\#FFF&apos; maskiert werden</
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="824"/>
         <source>Clear Color</source>
-        <translation></translation>
+        <translation>Transparente Farbe</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
         <source>%1 (%2)</source>
-        <translation></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>

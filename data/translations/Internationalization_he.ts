@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>הגדרת ה&apos;חץ&apos; ככלי לצבע</translation>
+        <translation>הגדרת ה&apos;חץ&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -265,7 +265,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>הגדרת ה&apos;עיגול&apos; ככלי לצביעה</translation>
+        <translation>הגדרת ה&apos;עיגול&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -850,7 +850,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="330"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>אפשור ריבוי מופעי flameshot GUI בה־בעת</translation>
+        <translation>אפשור ריבוי אדגמי flameshot GUI בה־בעת</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="331"/>
@@ -1277,7 +1277,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>הגדרת המשכל ככלי הצביעה</translation>
+        <translation>הגדרת המשכל ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -1290,7 +1290,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>הגדרת &apos;קו&apos; ככלי הצביעה</translation>
+        <translation>הגדרת &apos;קו&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -1303,7 +1303,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>הגדרת &apos;מדגש&apos; ככלי הצביע</translation>
+        <translation>הגדרת &apos;מדגש&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -1329,7 +1329,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>הגדרת &apos;עיפרון&apos; ככלי הצביע</translation>
+        <translation>הגדרת &apos;עיפרון&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -1355,7 +1355,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>הגדרת &apos;פיקסול&apos; ככלי הצביע</translation>
+        <translation>הגדרת &apos;פיקסול&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -1762,7 +1762,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>הגדרת מרובע ככלי הצביע</translation>
+        <translation>הגדרת &apos;מרובע&apos; ככלי צבע</translation>
     </message>
 </context>
 <context>
@@ -1813,7 +1813,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>הגדרת בחירה ככלי הצביע</translation>
+        <translation>הגדרת &apos;בחירה&apos; ככלי הצביע</translation>
     </message>
 </context>
 <context>
@@ -1831,12 +1831,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="37"/>
         <source>Press Esc to cancel or ⌘+Backspace to disable the keyboard shortcut.</source>
-        <translation>הקשה על Esc כדי לבטל או ⌘+Backspace כדי להשבית את קיצור המקלדת.</translation>
+        <translation>הקשה על Esc לבטול או ⌘+Backspace כדי להשבית את קיצור המקלדת.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="41"/>
         <source>Press Esc to cancel or Backspace to disable the keyboard shortcut.</source>
-        <translation>הקש Esc כדי לבטל או על Backspace כדי להשבית את קיצור המקלדת.</translation>
+        <translation>הקשה על Esc לבטול או על Backspace כדי להשבית את קיצור המקלדת.</translation>
     </message>
     <message>
         <location filename="../../src/config/setshortcutwidget.cpp" line="46"/>
@@ -2132,7 +2132,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="114"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>הקשה על לחצן זה הגדרת מצב מהדורת הצבע הראשי.</translation>
+        <translation>נא להקיש על לחצן זה להגדרת מצב עריכת צבע הראשי.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="125"/>
@@ -2142,7 +2142,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="130"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>הקשה על לחצן זה להגדרת מצב מהדורת צבע הניגודיות.</translation>
+        <translation>נא להקיש על לחצן זה להגדרת מצב עריכת צבע ניגודיות.</translation>
     </message>
 </context>
 <context>

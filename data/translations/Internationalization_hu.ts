@@ -5,30 +5,30 @@
     <name>AbstractWidgetList</name>
     <message>
         <source>Add New</source>
-        <translation></translation>
+        <translation>Új hozzáadása</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation></translation>
+        <translation>Mozogj feljebb</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation></translation>
+        <translation>Mozgás lefelé</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation></translation>
+        <translation>Eltávolítani</translation>
     </message>
 </context>
 <context>
     <name>AcceptTool</name>
     <message>
         <source>Accept</source>
-        <translation></translation>
+        <translation>Elfogadom</translation>
     </message>
     <message>
         <source>Accept the capture</source>
-        <translation></translation>
+        <translation>Fogadja el az elfogást</translation>
     </message>
 </context>
 <context>
@@ -172,7 +172,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Select screenshot area</source>
-        <translation></translation>
+        <translation>Képernyőkép terület kiválasztása</translation>
     </message>
     <message>
         <source>Mouse Wheel</source>
@@ -180,7 +180,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Change tool size</source>
-        <translation></translation>
+        <translation>Szerszámméret váltás</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -192,7 +192,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Open side panel</source>
-        <translation></translation>
+        <translation>Nyitott oldalfal</translation>
     </message>
     <message>
         <source>Esc</source>
@@ -204,11 +204,11 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation></translation>
+        <translation>Flameshot elvesztette a fókuszt. A billentyűparancsok nem működnek, amíg nem kattintasz valahol.</translation>
     </message>
     <message>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation></translation>
+        <translation>Konfigurációs hiba megoldva. Indítsa el újra a `flameshot gui-t` az alkalmazáshoz.</translation>
     </message>
 </context>
 <context>
@@ -237,15 +237,15 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ColorDialog</name>
     <message>
         <source>Select Color</source>
-        <translation></translation>
+        <translation>Válasszon színt</translation>
     </message>
     <message>
         <source>Saturation</source>
-        <translation></translation>
+        <translation>Telítettség</translation>
     </message>
     <message>
         <source>Hue</source>
-        <translation></translation>
+        <translation>Árnyalat</translation>
     </message>
     <message>
         <source>Hex</source>
@@ -257,7 +257,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation></translation>
+        <translation>Érték</translation>
     </message>
     <message>
         <source>Green</source>
@@ -276,7 +276,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ColorGrabWidget</name>
     <message>
         <source>Accept color</source>
-        <translation></translation>
+        <translation>Szín elfogadása</translation>
     </message>
     <message>
         <source>Precisely select color</source>
@@ -1183,7 +1183,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Error trying to save as </source>
-        <translation>Hiba a mentés közben a következőként </translation>
+        <translation>Hiba a mentésnél </translation>
     </message>
     <message>
         <source>Unable to connect via DBus</source>
