@@ -81,6 +81,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
     OPTION("checkForUpdates"             ,Bool               ( true          )),
     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
+    OPTION("showMagnifier"               ,Bool               ( false         )),
+    OPTION("squareMagnifier"             ,Bool               ( false         )),
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif
