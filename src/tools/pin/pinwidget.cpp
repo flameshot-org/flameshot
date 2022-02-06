@@ -76,17 +76,27 @@ int PinWidget::margin() const
     return 7;
 }
 
-void PinWidget::wheelEvent(QWheelEvent* e)
+void PinWidget::wheelEvent(QWheelEvent* event)
 {
-    int val = e->angleDelta().y() > 0 ? 15 : -15;
-    int newWidth = qBound(50, m_label->width() + val, maximumWidth());
-    int newHeight = qBound(50, m_label->height() + val, maximumHeight());
+    const QPoint numPixels = event->pixelDelta();
+    const QPoint numDegrees = event->angleDelta() / 8;
 
-    QSize size(newWidth, newHeight);
+    QPoint num;
+    if (!numPixels.isNull()) {
+        num = numPixels;
+    } else if (!numDegrees.isNull()) {
+        num = numDegrees / 15;
+    }
+
+    const int mult = num.y() > 0 ? 1 : -1;
+    const int val = num.manhattanLength() * mult;
+    const int newWidth = qBound(50, (m_label->width() + val), maximumWidth());
+    const int newHeight = qBound(50, (m_label->height() + val), maximumHeight());
+
+    const QSize size(newWidth, newHeight);
     setScaledPixmap(size);
     adjustSize();
-
-    e->accept();
+    event->accept();
 }
 
 void PinWidget::enterEvent(QEvent*)
