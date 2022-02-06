@@ -30,10 +30,10 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
         parent->installEventFilter(this);
     }
 
-    QGridLayout* colorLayout = new QGridLayout();
+    auto* colorLayout = new QGridLayout();
 
     // Create Active Tool Size
-    QLabel* activeToolSizeText = new QLabel(tr("Active tool size: "));
+    auto* activeToolSizeText = new QLabel(tr("Active tool size: "));
 
     m_toolSizeSlider = new QSlider(Qt::Horizontal);
     m_toolSizeSlider->setRange(1, maxToolSize);
@@ -44,8 +44,8 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     colorLayout->addWidget(m_toolSizeSlider, 1, 0);
 
     // Create Active Color
-    QHBoxLayout* colorHBox = new QHBoxLayout();
-    QLabel* colorText = new QLabel(tr("Active Color: "));
+    auto* colorHBox = new QHBoxLayout();
+    auto* colorText = new QLabel(tr("Active Color: "));
 
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);

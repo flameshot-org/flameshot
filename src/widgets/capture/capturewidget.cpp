@@ -183,9 +183,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
     // init magnify
-    if (m_config.showMagnifier())
+    if (m_config.showMagnifier()) {
         m_magnifier = new MagnifierWidget(
           m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
+    }
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
@@ -289,7 +290,7 @@ void CaptureWidget::initButtons()
     // Add all buttons but hide those that were disabled in the Interface config
     // This will allow keyboard shortcuts for those buttons to work
     for (CaptureTool::Type t : allButtonTypes) {
-        CaptureToolButton* b = new CaptureToolButton(t, this);
+        auto* b = new CaptureToolButton(t, this);
         if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }
@@ -1600,8 +1601,9 @@ void CaptureWidget::restoreCircleCountState()
         if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
             continue;
         }
-        if (toolItem->count() > largest)
+        if (toolItem->count() > largest) {
             largest = toolItem->count();
+        }
     }
     m_context.circleCount = largest + 1;
 }

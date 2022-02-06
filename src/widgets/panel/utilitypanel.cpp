@@ -116,7 +116,7 @@ void UtilityPanel::initInternalPanel()
 {
     m_internalPanel = new QScrollArea(this);
     m_internalPanel->setAttribute(Qt::WA_NoMousePropagation);
-    QWidget* widget = new QWidget();
+    auto* widget = new QWidget();
     m_internalPanel->setWidget(widget);
     m_internalPanel->setWidgetResizable(true);
 
@@ -141,7 +141,7 @@ void UtilityPanel::initInternalPanel()
             this,
             SLOT(onCurrentRowChanged(int)));
 
-    QHBoxLayout* layersButtons = new QHBoxLayout();
+    auto* layersButtons = new QHBoxLayout();
     m_layersLayout->addLayout(layersButtons);
 
     m_layersLayout->addWidget(m_captureTools);
@@ -186,7 +186,7 @@ void UtilityPanel::initInternalPanel()
             &UtilityPanel::slotDownClicked);
 
     // Bottom
-    QPushButton* closeButton = new QPushButton(this);
+    auto* closeButton = new QPushButton(this);
     closeButton->setText(tr("Close"));
     connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
     m_bottomLayout->addWidget(closeButton);
@@ -200,7 +200,7 @@ void UtilityPanel::fillCaptureTools(
     m_captureTools->addItem(tr("<Empty>"));
 
     for (auto toolItem : captureToolObjects) {
-        QListWidgetItem* item = new QListWidgetItem(
+        auto* item = new QListWidgetItem(
           toolItem->icon(QColor(Qt::white), false), toolItem->info());
         m_captureTools->addItem(item);
     }
