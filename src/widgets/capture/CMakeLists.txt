@@ -9,6 +9,7 @@ target_sources(
         hovereventfilter.h
         overlaymessage.h
         selectionwidget.h
+        magnifierwidget.h
         notifierbox.h
         modificationcommand.h)
 
@@ -23,4 +24,5 @@ target_sources(
         overlaymessage.cpp
         notifierbox.cpp
         selectionwidget.cpp
+        magnifierwidget.cpp
         modificationcommand.cpp)
