@@ -69,16 +69,15 @@ void VisualsEditor::initWidgets()
 
     m_colorpickerEditor = new ColorPickerEditor();
     m_colorpickerEditorTab = new QWidget();
-    auto* colorpickerEditorLayout =
-      new QVBoxLayout(m_colorpickerEditorTab);
+    auto* colorpickerEditorLayout = new QVBoxLayout(m_colorpickerEditorTab);
     colorpickerEditorLayout->addWidget(m_colorpickerEditor);
     m_tabWidget->addTab(m_colorpickerEditorTab, tr("Colorpicker Editor"));
 
     initOpacitySlider();
 
-    auto *boxButtons = new QGroupBox();
+    auto* boxButtons = new QGroupBox();
     boxButtons->setTitle(tr("Button Selection"));
-    auto *listLayout = new QVBoxLayout(boxButtons);
+    auto* listLayout = new QVBoxLayout(boxButtons);
     m_buttonList = new ButtonListView();
     m_layout->addWidget(boxButtons);
     listLayout->addWidget(m_buttonList);

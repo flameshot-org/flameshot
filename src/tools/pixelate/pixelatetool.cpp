@@ -57,8 +57,7 @@ void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
     if (size() <= 1) {
         auto* blur = new QGraphicsBlurEffect;
         blur->setBlurRadius(10);
-        auto* item =
-          new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
+        auto* item = new QGraphicsPixmapItem(pixmap.copy(selectionScaled));
         item->setGraphicsEffect(blur);
 
         QGraphicsScene scene;
