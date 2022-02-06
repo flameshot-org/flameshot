@@ -131,12 +131,17 @@ void PinWidget::mouseMoveEvent(QMouseEvent* e)
          m_dragStart.y() + delta.y() - offsetH);
 }
 
-void PinWidget::setScaledPixmapToLabel(const QSize& newSize, const qreal scale, const bool expanding)
+void PinWidget::setScaledPixmapToLabel(const QSize& newSize,
+                                       const qreal scale,
+                                       const bool expanding)
 {
     ConfigHandler config;
     QPixmap scaledPixmap;
-    const auto aspectRatio = expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
-    const auto transformType = config.antialiasingPinZoom() ? Qt::SmoothTransformation : Qt::FastTransformation;
+    const auto aspectRatio =
+      expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
+    const auto transformType = config.antialiasingPinZoom()
+                                 ? Qt::SmoothTransformation
+                                 : Qt::FastTransformation;
     scaledPixmap = m_pixmap.scaled(newSize * scale, aspectRatio, transformType);
     scaledPixmap.setDevicePixelRatio(scale);
     m_label->setPixmap(scaledPixmap);
