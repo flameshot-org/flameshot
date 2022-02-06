@@ -119,7 +119,7 @@ void CaptureLauncher::captureTaken(QPixmap screenshot)
       ui->captureType->currentData().toInt());
 
     if (mode == CaptureRequest::FULLSCREEN_MODE) {
-        ScreenshotSaver().saveToFilesystemGUI(screenshot);
+        saveToFilesystemGUI(screenshot);
     }
     ui->launchButton->setEnabled(true);
 }

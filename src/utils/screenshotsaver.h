@@ -6,22 +6,11 @@
 #include <QString>
 
 class QPixmap;
-class QWidget;
 
-class ScreenshotSaver
-{
-public:
-    ScreenshotSaver();
-
-    void saveToClipboard(const QPixmap& capture);
-    void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
-    bool saveToFilesystem(const QPixmap& capture,
-                          const QString& path,
-                          const QString& messagePrefix = "");
-    bool saveToFilesystemGUI(const QPixmap& capture);
-
-private:
-    QString ShowSaveFileDialog(QWidget* parent,
-                               const QString& title,
-                               const QString& directory);
-};
+bool saveToFilesystem(const QPixmap& capture,
+                      const QString& path,
+                      const QString& messagePrefix = "");
+QString ShowSaveFileDialog(const QString& title, const QString& directory);
+void saveToClipboardMime(const QPixmap& capture, const QString& imageType);
+void saveToClipboard(const QPixmap& capture);
+bool saveToFilesystemGUI(const QPixmap& capture);

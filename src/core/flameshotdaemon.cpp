@@ -203,7 +203,7 @@ void FlameshotDaemon::attachScreenshotToClipboard(QPixmap pixmap)
     // This variable is necessary because the signal doesn't get blocked on
     // windows for some reason
     m_clipboardSignalBlocked = true;
-    ScreenshotSaver().saveToClipboard(pixmap);
+    saveToClipboard(pixmap);
     clipboard->blockSignals(false);
 }
 
