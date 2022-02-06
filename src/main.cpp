@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
         qApp->installTranslator(&qtTranslator);
         qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
-        auto c = Controller::getInstance();
+        auto *c = Controller::getInstance();
         FlameshotDaemon::start();
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))

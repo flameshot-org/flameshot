@@ -21,7 +21,7 @@ FileNameEditor::FileNameEditor(QWidget* parent)
 void FileNameEditor::initLayout()
 {
     m_layout = new QVBoxLayout(this);
-    auto infoLabel = new QLabel(tr("Edit the name of your captures:"), this);
+    auto *infoLabel = new QLabel(tr("Edit the name of your captures:"), this);
     infoLabel->setFixedHeight(20);
     m_layout->addWidget(infoLabel);
     m_layout->addWidget(m_helperButtons);

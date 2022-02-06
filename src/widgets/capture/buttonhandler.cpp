@@ -337,7 +337,7 @@ void ButtonHandler::moveButtonsToPoints(const QVector<QPoint>& points,
                                         int& index)
 {
     for (const QPoint& p : points) {
-        auto button = m_vectorButtons[index];
+        auto *button = m_vectorButtons[index];
         button->move(p);
         ++index;
     }

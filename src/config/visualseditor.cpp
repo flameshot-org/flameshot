@@ -76,9 +76,9 @@ void VisualsEditor::initWidgets()
 
     initOpacitySlider();
 
-    auto boxButtons = new QGroupBox();
+    auto *boxButtons = new QGroupBox();
     boxButtons->setTitle(tr("Button Selection"));
-    auto listLayout = new QVBoxLayout(boxButtons);
+    auto *listLayout = new QVBoxLayout(boxButtons);
     m_buttonList = new ButtonListView();
     m_layout->addWidget(boxButtons);
     listLayout->addWidget(m_buttonList);
