@@ -1,5 +1,6 @@
 #include "valuehandler.h"
 #include "capturetool.h"
+#include "colorpickerwidget.h"
 #include "confighandler.h"
 #include "screengrabber.h"
 #include <QColor>
@@ -378,10 +379,15 @@ bool ButtonList::normalizeButtons(QList<int>& buttons)
 
 // USER COLORS
 
+UserColors::UserColors(int min, int max)
+  : m_min(min)
+  , m_max(max)
+{}
+
 bool UserColors::check(const QVariant& val)
 {
     if (!val.isValid()) {
-        return true;
+        return false;
     }
     if (!val.canConvert(QVariant::StringList)) {
         return false;
@@ -391,7 +397,10 @@ bool UserColors::check(const QVariant& val)
             return false;
         }
     }
-    return true;
+
+    int sz = val.toStringList().size();
+
+    return sz >= m_min && sz <= m_max;
 }
 
 QVariant UserColors::process(const QVariant& val)
@@ -417,21 +426,38 @@ QVariant UserColors::process(const QVariant& val)
 
 QVariant UserColors::fallback()
 {
-    return QVariant::fromValue(QVector<QColor>{ Qt::darkRed,
-                                                Qt::red,
-                                                Qt::yellow,
-                                                Qt::green,
-                                                Qt::darkGreen,
-                                                Qt::cyan,
-                                                Qt::blue,
-                                                Qt::magenta,
-                                                Qt::darkMagenta,
-                                                QColor() });
+    if (ConfigHandler().predefinedColorPaletteLarge()) {
+        return QVariant::fromValue(
+          ColorPickerWidget::getDefaultLargeColorPalette());
+    } else {
+        return QVariant::fromValue(
+          ColorPickerWidget::getDefaultSmallColorPalette());
+    }
 }
 
 QString UserColors::expected()
 {
-    return QStringLiteral("list of colors separated by comma");
+    return QStringLiteral(
+             "list of colors(min %1 and max %2) separated by comma")
+      .arg(m_min - 1)
+      .arg(m_max - 1);
+}
+
+QVariant UserColors::representation(const QVariant& val)
+{
+    QVector<QColor> colors = val.value<QVector<QColor>>();
+
+    QStringList strColors;
+
+    for (const auto& col : colors) {
+        if (col.isValid()) {
+            strColors.append(col.name(QColor::HexRgb));
+        } else {
+            strColors.append(QStringLiteral("picker"));
+        }
+    }
+
+    return QVariant::fromValue(strColors);
 }
 
 // SET SAVE FILE AS EXTENSION

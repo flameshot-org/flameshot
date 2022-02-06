@@ -2,13 +2,18 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "screenshotsaver.h"
+#include "abstractlogger.h"
 #include "src/core/controller.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
 #include "src/utils/globalvalues.h"
-#include "src/utils/systemnotification.h"
 #include "utils/desktopinfo.h"
+
+#if USE_WAYLAND_CLIPBOARD
+#include <KSystemClipboard>
+#endif
+
 #include <QApplication>
 #include <QBuffer>
 #include <QClipboard>
@@ -33,18 +38,29 @@ void ScreenshotSaver::saveToClipboardMime(const QPixmap& capture,
     QImageWriter imageWriter{ &buffer, imageType.toUpper().toUtf8() };
     imageWriter.write(capture.toImage());
 
-    QPixmap pngPixmap;
+    QPixmap formattedPixmap;
     bool isLoaded =
-      pngPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
-                             array.size(),
-                             imageType.toUpper().toUtf8());
+      formattedPixmap.loadFromData(reinterpret_cast<uchar*>(array.data()),
+                                   array.size(),
+                                   imageType.toUpper().toUtf8());
     if (isLoaded) {
-        QMimeData* mimeData = new QMimeData;
+
+        auto mimeData = new QMimeData();
+
+#ifdef USE_WAYLAND_CLIPBOARD
+        mimeData->setImageData(formattedPixmap.toImage());
+        mimeData->setData(QStringLiteral("x-kde-force-image-copy"),
+                          QByteArray());
+        KSystemClipboard::instance()->setMimeData(mimeData,
+                                                  QClipboard::Clipboard);
+#else
         mimeData->setData("image/" + imageType, array);
         QApplication::clipboard()->setMimeData(mimeData);
+#endif
+
     } else {
-        SystemNotification().sendMessage(
-          QObject::tr("Error while saving to clipboard"));
+        AbstractLogger::error()
+          << QObject::tr("Error while saving to clipboard");
     }
 }
 
@@ -60,8 +76,7 @@ void ScreenshotSaver::saveToClipboard(const QPixmap& capture)
                          ConfigHandler().savePath(),
                          QObject::tr("Capture saved to clipboard."));
     } else {
-        SystemNotification().sendMessage(
-          QObject::tr("Capture saved to clipboard."));
+        AbstractLogger() << QObject::tr("Capture saved to clipboard.");
     }
     if (ConfigHandler().useJpgForClipboard()) {
         // FIXME - it doesn't work on MacOS
@@ -85,7 +100,7 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
                                        const QString& messagePrefix)
 {
     QString completePath = FileNameHandler().properScreenshotPath(
-      path, ConfigHandler().setSaveAsFileExtension());
+      path, ConfigHandler().saveAsFileExtension());
     QFile file{ completePath };
     file.open(QIODevice::WriteOnly);
     bool ok = capture.save(&file);
@@ -97,15 +112,18 @@ bool ScreenshotSaver::saveToFilesystem(const QPixmap& capture,
 
     if (ok) {
         saveMessage += QObject::tr("Capture saved as ") + completePath;
+        AbstractLogger::info().attachNotificationPath(notificationPath)
+          << saveMessage;
     } else {
         saveMessage += QObject::tr("Error trying to save as ") + completePath;
         if (file.error() != QFile::NoError) {
             saveMessage += ": " + file.errorString();
         }
         notificationPath = "";
+        AbstractLogger::error().attachNotificationPath(notificationPath)
+          << saveMessage;
     }
 
-    SystemNotification().sendMessage(saveMessage, notificationPath);
     return ok;
 }
 
@@ -126,7 +144,7 @@ QString ScreenshotSaver::ShowSaveFileDialog(QWidget* parent,
         mimeTypeList.append(mimeType);
     dialog.setMimeTypeFilters(mimeTypeList);
 
-    QString suffix = ConfigHandler().setSaveAsFileExtension();
+    QString suffix = ConfigHandler().saveAsFileExtension();
     if (suffix.isEmpty()) {
         suffix = "png";
     }
@@ -152,7 +170,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
           QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     }
     QString savePath = FileNameHandler().properScreenshotPath(
-      defaultSavePath, ConfigHandler().setSaveAsFileExtension());
+      defaultSavePath, ConfigHandler().saveAsFileExtension());
 #if defined(Q_OS_MACOS)
     for (QWidget* widget : qApp->topLevelWidgets()) {
         QString className(widget->metaObject()->className());
@@ -185,7 +203,7 @@ bool ScreenshotSaver::saveToFilesystemGUI(const QPixmap& capture)
         ConfigHandler().setSavePath(pathNoFile);
 
         QString msg = QObject::tr("Capture saved as ") + savePath;
-        SystemNotification().sendMessage(msg, savePath);
+        AbstractLogger().attachNotificationPath(savePath) << msg;
 
         if (config.copyPathAfterSave()) {
             FlameshotDaemon::copyToClipboard(

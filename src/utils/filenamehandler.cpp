@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "filenamehandler.h"
+#include "abstractlogger.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/strfparse.h"
 #include <QDir>
@@ -9,18 +10,16 @@
 #include <exception>
 #include <locale>
 
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/cfg/env.h"
-#include "spdlog/spdlog.h"
-
 FileNameHandler::FileNameHandler(QObject* parent)
   : QObject(parent)
 {
+    auto err = AbstractLogger::error(AbstractLogger::Stderr);
     try {
-        std::locale::global(std::locale(""));
+        std::locale::global(std::locale());
     } catch (std::exception& e) {
-        spdlog::error("Locales on your system are not properly configured. "
-                      "Falling back to defaults");
+        err << "Locales on your system are not properly configured. Falling "
+               "back to defaults";
+
         std::locale::global(std::locale("en_US.UTF-8"));
     }
 }

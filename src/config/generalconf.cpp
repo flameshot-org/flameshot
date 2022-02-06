@@ -53,9 +53,12 @@ GeneralConf::GeneralConf(QWidget* parent)
 #if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
 #endif
+    initPredefinedColorPaletteLarge();
 
     m_layout->addStretch();
 
+    initShowMagnifier();
+    initSquareMagnifier();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -78,7 +81,15 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
       config.historyConfirmationToDelete());
     m_checkForUpdates->setChecked(config.checkForUpdates());
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
+    m_showMagnifier->setChecked(config.showMagnifier());
+    m_squareMagnifier->setChecked(config.squareMagnifier());
+
+#if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
+#endif
+
+    m_predefinedColorPaletteLarge->setChecked(
+      config.predefinedColorPaletteLarge());
     m_showStartupLaunchMessage->setChecked(config.showStartupLaunchMessage());
     m_screenshotPathFixedCheck->setChecked(config.savePathFixed());
     m_uploadHistoryMax->setValue(config.uploadHistoryMax());
@@ -369,6 +380,20 @@ void GeneralConf::initShowStartupLaunchMessage()
     });
 }
 
+void GeneralConf::initPredefinedColorPaletteLarge()
+{
+    m_predefinedColorPaletteLarge =
+      new QCheckBox(tr("Use large predefined color palette"), this);
+    m_predefinedColorPaletteLarge->setToolTip(
+      tr("Use large predefined color palette"));
+    m_scrollAreaLayout->addWidget(m_predefinedColorPaletteLarge);
+
+    connect(
+      m_predefinedColorPaletteLarge, &QCheckBox::clicked, [](bool checked) {
+          ConfigHandler().setPredefinedColorPaletteLarge(checked);
+      });
+}
+
 void GeneralConf::initCopyAndCloseAfterUpload()
 {
     m_copyAndCloseAfterUpload =
@@ -438,8 +463,8 @@ void GeneralConf::initSaveAfterCopy()
 
     m_setSaveAsFileExtension->addItems(imageFormatList);
 
-    int currentIndex = m_setSaveAsFileExtension->findText(
-      ConfigHandler().setSaveAsFileExtension());
+    int currentIndex =
+      m_setSaveAsFileExtension->findText(ConfigHandler().saveAsFileExtension());
     m_setSaveAsFileExtension->setCurrentIndex(currentIndex);
 
     connect(m_setSaveAsFileExtension,
@@ -599,6 +624,24 @@ const QString GeneralConf::chooseFolder(const QString pathDefault)
         }
     }
     return path;
+}
+
+void GeneralConf::initShowMagnifier()
+{
+    m_showMagnifier = new QCheckBox(tr("Show magnifier"), this);
+    m_scrollAreaLayout->addWidget(m_showMagnifier);
+    connect(m_showMagnifier, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowMagnifier(checked);
+    });
+}
+
+void GeneralConf::initSquareMagnifier()
+{
+    m_squareMagnifier = new QCheckBox(tr("Square shaped magnifier"), this);
+    m_scrollAreaLayout->addWidget(m_squareMagnifier);
+    connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setSquareMagnifier(checked);
+    });
 }
 
 void GeneralConf::togglePathFixed()

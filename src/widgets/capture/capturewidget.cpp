@@ -10,6 +10,7 @@
 // <http://www.gnu.org/licenses/old-licenses/library.txt>
 
 #include "capturewidget.h"
+#include "abstractlogger.h"
 #include "copytool.h"
 #include "src/core/controller.h"
 #include "src/core/qguiappcurrentscreen.h"
@@ -39,9 +40,6 @@
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
 
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_DEBUG
-#include "spdlog/spdlog.h"
-
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
 // CaptureWidget is the main component used to capture the screen. It contains
@@ -69,11 +67,14 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
   , m_selection(nullptr)
+  , m_magnifier(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
   , m_toolSizeByKeyboard(0)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
+
+    m_context.circleCount = 1;
 
     // Base config of the widget
     m_eventFilter = new HoverEventFilter(this);
@@ -86,6 +87,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             this,
             &CaptureWidget::childLeave);
     setAttribute(Qt::WA_DeleteOnClose);
+    setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
     m_uiColor = m_config.uiColor();
     m_contrastUiColor = m_config.contrastUiColor();
@@ -100,14 +102,15 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         bool ok = true;
         m_context.screenshot = ScreenGrabber().grabEntireDesktop(ok);
         if (!ok) {
-            SystemNotification().sendMessage(tr("Unable to capture screen"));
+            AbstractLogger::error() << tr("Unable to capture screen");
             this->close();
         }
         m_context.origScreenshot = m_context.screenshot;
 
 #if defined(Q_OS_WIN)
         setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |
-                       Qt::Popup);
+                       Qt::SubWindow // Hides the taskbar icon
+        );
 
         for (QScreen* const screen : QGuiApplication::screens()) {
             QPoint topLeftScreen = screen->geometry().topLeft();
@@ -179,6 +182,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initButtons();
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
+    // init magnify
+    if (m_config.showMagnifier())
+        m_magnifier = new MagnifierWidget(
+          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
@@ -555,6 +562,8 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
             // point and shouldn't wait for second point and move event
             m_activeTool->drawEnd(m_context.mousePos);
 
+            m_activeTool->setCount(m_context.circleCount++);
+
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_captureToolObjects.append(m_activeTool);
             pushObjectsStateToUndoStack();
@@ -675,6 +684,15 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
+    if (m_magnifier) {
+        if (!m_activeButton) {
+            m_magnifier->show();
+            m_magnifier->update();
+        } else {
+            m_magnifier->hide();
+        }
+    }
+
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
         updateTool(activeButtonTool());
@@ -967,6 +985,14 @@ void CaptureWidget::initPanel()
             &UtilityPanel::layerChanged,
             this,
             &CaptureWidget::updateActiveLayer);
+    connect(m_panel,
+            &UtilityPanel::moveUpClicked,
+            this,
+            &CaptureWidget::onMoveCaptureToolUp);
+    connect(m_panel,
+            &UtilityPanel::moveDownClicked,
+            this,
+            &CaptureWidget::onMoveCaptureToolDown);
 
     m_sidePanel = new SidePanelWidget(&m_context.screenshot, this);
     connect(m_sidePanel,
@@ -1101,14 +1127,13 @@ void CaptureWidget::setState(CaptureToolButton* b)
 
     if (b->tool()->isSelectable()) {
         if (m_activeButton != b) {
-            QWidget* confW = b->tool()->configurationWidget();
-            m_panel->setToolWidget(confW);
             if (m_activeButton) {
                 m_activeButton->setColor(m_uiColor);
             }
             m_activeButton = b;
             m_activeButton->setColor(m_contrastUiColor);
             m_panel->setActiveLayer(-1);
+            m_panel->setToolWidget(b->tool()->configurationWidget());
         } else if (m_activeButton) {
             m_panel->clearToolWidget();
             m_activeButton->setColor(m_uiColor);
@@ -1142,6 +1167,12 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
             break;
         case CaptureTool::REQ_CAPTURE_DONE_OK:
             m_captureDone = true;
+            break;
+        case CaptureTool::REQ_CLEAR_SELECTION:
+            if (m_panel->activeLayerIndex() >= 0) {
+                m_panel->setActiveLayer(-1);
+                drawToolsData(false);
+            }
             break;
         case CaptureTool::REQ_ADD_CHILD_WIDGET:
             if (!m_activeTool) {
@@ -1260,6 +1291,26 @@ void CaptureWidget::updateActiveLayer(int layer)
     updateSelectionState();
 }
 
+void CaptureWidget::onMoveCaptureToolUp(int captureToolIndex)
+{
+    m_captureToolObjectsBackup = m_captureToolObjects;
+    pushObjectsStateToUndoStack();
+    auto tool = m_captureToolObjects.at(captureToolIndex);
+    m_captureToolObjects.removeAt(captureToolIndex);
+    m_captureToolObjects.insert(captureToolIndex - 1, tool);
+    updateLayersPanel();
+}
+
+void CaptureWidget::onMoveCaptureToolDown(int captureToolIndex)
+{
+    m_captureToolObjectsBackup = m_captureToolObjects;
+    pushObjectsStateToUndoStack();
+    auto tool = m_captureToolObjects.at(captureToolIndex);
+    m_captureToolObjects.removeAt(captureToolIndex);
+    m_captureToolObjects.insert(captureToolIndex + 1, tool);
+    updateLayersPanel();
+}
+
 void CaptureWidget::selectAll()
 {
     m_selection->show();
@@ -1273,26 +1324,30 @@ void CaptureWidget::removeToolObject(int index)
 {
     --index;
     if (index >= 0 && index < m_captureToolObjects.size()) {
+        // in case this tool is circle counter
+        int removedCircleCount = -1;
+
         const CaptureTool::Type currentToolType =
           m_captureToolObjects.at(index)->type();
         m_captureToolObjectsBackup = m_captureToolObjects;
         update(
           paddedUpdateRect(m_captureToolObjects.at(index)->boundingRect()));
-        m_captureToolObjects.removeAt(index);
         if (currentToolType == CaptureTool::TYPE_CIRCLECOUNT) {
-            // Do circle count reindex
-            int circleCount = 1;
+            removedCircleCount = m_captureToolObjects.at(index)->count();
+            --m_context.circleCount;
+            // Decrement circle counter numbers starting from deleted circle
             for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
                 auto toolItem = m_captureToolObjects.at(cnt);
                 if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
                     continue;
                 }
-                if (cnt >= index) {
-                    m_captureToolObjects.at(cnt)->setCount(circleCount);
+                auto circleTool = m_captureToolObjects.at(cnt);
+                if (circleTool->count() >= removedCircleCount) {
+                    circleTool->setCount(circleTool->count() - 1);
                 }
-                circleCount++;
             }
         }
+        m_captureToolObjects.removeAt(index);
         pushObjectsStateToUndoStack();
         drawToolsData();
         updateLayersPanel();
@@ -1470,22 +1525,20 @@ void CaptureWidget::pushToolToStack()
     }
 }
 
-void CaptureWidget::drawToolsData()
+void CaptureWidget::drawToolsData(bool drawSelection)
 {
     // TODO refactor this for performance. The objects should not all be updated
     // at once every time
     QPixmap pixmapItem = m_context.origScreenshot;
-    int circleCount = 1;
     for (auto toolItem : m_captureToolObjects.captureToolObjects()) {
-        if (toolItem->type() == CaptureTool::TYPE_CIRCLECOUNT) {
-            toolItem->setCount(circleCount++);
-        }
         processPixmapWithTool(&pixmapItem, toolItem);
         update(paddedUpdateRect(toolItem->boundingRect()));
     }
 
     m_context.screenshot = pixmapItem;
-    drawObjectSelection();
+    if (drawSelection) {
+        drawObjectSelection();
+    }
 }
 
 void CaptureWidget::drawObjectSelection()
@@ -1537,6 +1590,20 @@ void CaptureWidget::makeChild(QWidget* w)
 {
     w->setParent(this);
     w->installEventFilter(m_eventFilter);
+}
+
+void CaptureWidget::restoreCircleCountState()
+{
+    int largest = 0;
+    for (int cnt = 0; cnt < m_captureToolObjects.size(); cnt++) {
+        auto toolItem = m_captureToolObjects.at(cnt);
+        if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
+            continue;
+        }
+        if (toolItem->count() > largest)
+            largest = toolItem->count();
+    }
+    m_context.circleCount = largest + 1;
 }
 
 /**
@@ -1601,6 +1668,8 @@ void CaptureWidget::undo()
     m_undoStack.undo();
     drawToolsData();
     updateLayersPanel();
+
+    restoreCircleCountState();
 }
 
 void CaptureWidget::redo()
@@ -1612,6 +1681,8 @@ void CaptureWidget::redo()
     drawToolsData();
     update();
     updateLayersPanel();
+
+    restoreCircleCountState();
 }
 
 QRect CaptureWidget::extendedSelection() const

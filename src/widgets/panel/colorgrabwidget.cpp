@@ -38,7 +38,11 @@ ColorGrabWidget::ColorGrabWidget(QPixmap* p, QWidget* parent)
     // We don't need this widget to receive mouse events because we use
     // eventFilter on other objects that do
     setAttribute(Qt::WA_TransparentForMouseEvents);
-    setWindowFlags(Qt::BypassWindowManagerHint | Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_QuitOnClose, false);
+    // On Windows: don't activate the widget so CaptureWidget remains active
+    setAttribute(Qt::WA_ShowWithoutActivating);
+    setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
+                   Qt::FramelessWindowHint | Qt::WindowDoesNotAcceptFocus);
     setMouseTracking(true);
 }
 
@@ -200,11 +204,26 @@ void ColorGrabWidget::updateWidget()
     float zoom = m_extraZoomActive ? ZOOM2 : ZOOM1;
     // Set window size and move its center to the mouse cursor
     QRect rect(0, 0, width, width);
+
+    auto realCursorPos = cursorPos();
+    auto adjustedCursorPos = realCursorPos;
+
+#if defined(Q_OS_MACOS)
+    QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
+    if (currentScreen) {
+        adjustedCursorPos =
+          QPoint((realCursorPos.x() - currentScreen->geometry().x()) *
+                   currentScreen->devicePixelRatio(),
+                 (realCursorPos.y() - currentScreen->geometry().y()) *
+                   currentScreen->devicePixelRatio());
+    }
+#endif
+
     rect.moveCenter(cursorPos());
     setGeometry(rect);
     // Store a pixmap containing the zoomed-in section around the cursor
     QRect sourceRect(0, 0, width / zoom, width / zoom);
-    sourceRect.moveCenter(rect.center());
+    sourceRect.moveCenter(adjustedCursorPos);
     m_previewImage = m_pixmap->copy(sourceRect).toImage();
     // Repaint
     update();

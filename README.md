@@ -175,8 +175,13 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
-You can also edit some of the settings (like overriding the default colors) in the configuration file located at `~/.config/flameshot/flameshot.ini`.
+You can also edit some of the settings (like overriding the default colors) in the configuration file.\
+Linux path : `~/.config/flameshot/flameshot.ini`.\
+Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
 
+When copying over the config file from Linux to Windows or vice versa, 
+make sure to correct the `savePath` variable,\
+so that the screenshots save in the right directory on your desired file system.
 
 ## Keyboard shortcuts
 
@@ -212,6 +217,8 @@ These shortcuts are available in GUI mode:
 | Mouse Wheel                                                               | Change the tool's thickness                                    |
 | <kbd>Print screen</kbd>                                          | Capture Screen |
 | <kbd>Shift</kbd> + <kbd>Print</kbd>                                            | Screenshot History                                     |
+| <kbd>Ctrl</kbd> + drawing *line*, *arrow* or *marker*      | Drawing only horizontally, vertically or diagonally |
+| <kbd>Ctrl</kbd> + drawing *rectangle* or *circle*      | Keeping aspect ratio |
 
 <kbd>Shift</kbd> + drag a handler of the selection area: mirror redimension in the opposite handler.
 
@@ -254,6 +261,11 @@ Steps for using the configuration:
 5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
 6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
 7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+8. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
+
+    ```shell
+    ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
+    ```
 
 #### On Ubuntu (Tested on 18.04, 20.04)
 
@@ -467,7 +479,7 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 
 ## License
 - The main code is licensed under [GPLv3](LICENSE)
-- The logo of Flameshot is licensed under [Free Art License v1.3](img/app/flameshotLogoLicense.txt)
+- The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
 - The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h (GPLv2)

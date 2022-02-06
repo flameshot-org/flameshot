@@ -2,8 +2,8 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "confighandler.h"
+#include "abstractlogger.h"
 #include "src/tools/capturetool.h"
-#include "systemnotification.h"
 #include "valuehandler.h"
 #include <QCoreApplication>
 #include <QDebug>
@@ -14,7 +14,6 @@
 #include <QMap>
 #include <QSharedPointer>
 #include <QStandardPaths>
-#include <QTextStream>
 #include <QVector>
 #include <algorithm>
 #include <stdexcept>
@@ -82,6 +81,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
     OPTION("checkForUpdates"             ,Bool               ( true          )),
     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
+    OPTION("showMagnifier"               ,Bool               ( false         )),
+    OPTION("squareMagnifier"             ,Bool               ( false         )),
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif
@@ -97,26 +98,28 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("useJpgForClipboard"          ,Bool               ( false         )),
     OPTION("uploadWithoutConfirmation"   ,Bool               ( false         )),
     OPTION("saveAfterCopy"               ,Bool               ( false         )),
-    OPTION("savePath"                    ,ExistingDir        (               )),
+    OPTION("savePath"                    ,ExistingDir        (                   )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
-    OPTION("setSaveAsFileExtension"      ,SaveFileExtension  (               )),
-    OPTION("uploadHistoryMax"            ,LowerBoundedInt(0  , 25            )),
-    OPTION("undoLimit"                   ,BoundedInt(0, 999  , 100           )),
+    OPTION("saveAsFileExtension"         ,SaveFileExtension  (                   )),
+    OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25          )),
+    OPTION("undoLimit"                   ,BoundedInt         (0, 999, 100    )),
     // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
-    OPTION("contrastOpacity"             ,BoundedInt(0, 255  , 190           )),
+    OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
     OPTION("buttons"                     ,ButtonList         ( {}            )),
     // Filename Editor tab
     OPTION("filenamePattern"             ,FilenamePattern    ( {}            )),
     // Others
-    OPTION("drawThickness"               ,LowerBoundedInt(1  , 3             )),
-    OPTION("drawFontSize"                ,LowerBoundedInt(1  , 8             )),
+    OPTION("drawThickness"               ,LowerBoundedInt    (1  , 3             )),
+    OPTION("drawFontSize"                ,LowerBoundedInt    (1  , 8             )),
     OPTION("drawColor"                   ,Color              ( Qt::red       )),
-    OPTION("userColors"                  ,UserColors         (               )),
+    OPTION("userColors"                  ,UserColors(3,        17            )),
     OPTION("ignoreUpdateToVersion"       ,String             ( ""            )),
     OPTION("keepOpenAppLauncher"         ,Bool               ( false         )),
     OPTION("fontFamily"                  ,String             ( ""            )),
+    // PREDEFINED_COLOR_PALETTE_LARGE is defined in src/CMakeList.txt file and can be overwritten in GitHub actions
+    OPTION("predefinedColorPaletteLarge", Bool               ( PREDEFINED_COLOR_PALETTE_LARGE )),
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
 };
@@ -172,19 +175,13 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 
 // CLASS CONFIGHANDLER
 
-ConfigHandler::ConfigHandler(bool skipInitialErrorCheck)
+ConfigHandler::ConfigHandler()
   : m_settings(QSettings::IniFormat,
                QSettings::UserScope,
                qApp->organizationName(),
                qApp->applicationName())
 {
-    static bool wasEverChecked = false;
     static bool firstInitialization = true;
-    if (!skipInitialErrorCheck && !wasEverChecked) {
-        // check for error on initial call
-        checkAndHandleError();
-        wasEverChecked = true;
-    }
     if (firstInitialization) {
         // check for error every time the file changes
         m_configWatcher.reset(new QFileSystemWatcher());
@@ -386,7 +383,7 @@ bool ConfigHandler::setShortcut(const QString& actionName,
 
     bool error = false;
 
-    m_settings.beginGroup("Shortcuts");
+    m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     if (shortcut.isEmpty()) {
         setValue(actionName, "");
     } else if (reservedShortcuts.contains(QKeySequence(shortcut))) {
@@ -416,12 +413,12 @@ done:
 
 QString ConfigHandler::shortcut(const QString& actionName)
 {
-    QString setting = "Shortcuts/" + actionName;
+    QString setting = CONFIG_GROUP_SHORTCUTS "/" + actionName;
     QString shortcut = value(setting).toString();
     if (!m_settings.contains(setting)) {
         // The action uses a shortcut that is a flameshot default
         // (not set explicitly by user)
-        m_settings.beginGroup("Shortcuts");
+        m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
         for (auto& otherAction : m_settings.allKeys()) {
             if (m_settings.value(otherAction) == shortcut) {
                 // We found an explicit shortcut - it will take precedence
@@ -448,9 +445,6 @@ void ConfigHandler::setValue(const QString& key, const QVariant& value)
 QVariant ConfigHandler::value(const QString& key) const
 {
     assertKeyRecognized(key);
-    // Perform check on entire config if due. Please make sure that this
-    // function is called in all scenarios - best to keep it on top.
-    hasError();
 
     auto val = m_settings.value(key);
 
@@ -467,9 +461,18 @@ QVariant ConfigHandler::value(const QString& key) const
     return handler->value(val);
 }
 
+void ConfigHandler::remove(const QString& key)
+{
+    m_settings.remove(key);
+}
+
+void ConfigHandler::resetValue(const QString& key)
+{
+    m_settings.setValue(key, valueHandler(key)->fallback());
+}
+
 QSet<QString>& ConfigHandler::recognizedGeneralOptions()
 {
-
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     auto keys = ::recognizedGeneralOptions.keys();
     static QSet<QString> options = QSet<QString>(keys.begin(), keys.end());
@@ -492,12 +495,15 @@ QSet<QString>& ConfigHandler::recognizedShortcutNames()
     return names;
 }
 
-/// Return keys from group `group`. Use "General" for general settings.
+/**
+ * @brief Return keys from group `group`.
+ * Use CONFIG_GROUP_GENERAL (General) for general settings.
+ */
 QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 {
     QSet<QString> keys;
     for (const QString& key : m_settings.allKeys()) {
-        if (group == "General" && !key.contains('/')) {
+        if (group == CONFIG_GROUP_GENERAL && !key.contains('/')) {
             keys.insert(key);
         } else if (key.startsWith(group + "/")) {
             keys.insert(baseName(key));
@@ -508,7 +514,7 @@ QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 
 // ERROR HANDLING
 
-bool ConfigHandler::checkForErrors(QTextStream* log) const
+bool ConfigHandler::checkForErrors(AbstractLogger* log) const
 {
     return checkUnrecognizedSettings(log) & checkShortcutConflicts(log) &
            checkSemantics(log);
@@ -522,11 +528,12 @@ bool ConfigHandler::checkForErrors(QTextStream* log) const
  * `recognizedGeneralOptions` or `recognizedShortcutNames` depending on the
  * group the option belongs to.
  */
-bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
+bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
+                                              QList<QString>* offenders) const
 {
     // sort the config keys by group
-    QSet<QString> generalKeys = keysFromGroup("General"),
-                  shortcutKeys = keysFromGroup("Shortcuts"),
+    QSet<QString> generalKeys = keysFromGroup(CONFIG_GROUP_GENERAL),
+                  shortcutKeys = keysFromGroup(CONFIG_GROUP_SHORTCUTS),
                   recognizedGeneralKeys = recognizedGeneralOptions(),
                   recognizedShortcutKeys = recognizedShortcutNames();
 
@@ -536,13 +543,18 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
 
     // what is left are the unrecognized keys - hopefully empty
     bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
-    if (log != nullptr) {
+    if (log != nullptr || offenders != nullptr) {
         for (const QString& key : generalKeys) {
-            *log << QStringLiteral("Unrecognized setting: '%1'\n").arg(key);
+            if (log)
+                *log << tr("Unrecognized setting: '%1'\n").arg(key);
+            if (offenders)
+                offenders->append(key);
         }
         for (const QString& key : shortcutKeys) {
-            *log
-              << QStringLiteral("Unrecognized shortcut name: '%1'.\n").arg(key);
+            if (log)
+                *log << tr("Unrecognized shortcut name: '%1'.\n").arg(key);
+            if (offenders)
+                offenders->append(CONFIG_GROUP_SHORTCUTS "/" + key);
         }
     }
     return ok;
@@ -556,10 +568,10 @@ bool ConfigHandler::checkUnrecognizedSettings(QTextStream* log) const
  * is the flameshot default (not because the user explicitly configured it), and
  * action B uses the same shortcut.
  */
-bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
+bool ConfigHandler::checkShortcutConflicts(AbstractLogger* log) const
 {
     bool ok = true;
-    m_settings.beginGroup("Shortcuts");
+    m_settings.beginGroup(CONFIG_GROUP_SHORTCUTS);
     QStringList shortcuts = m_settings.allKeys();
     QStringList reportedInLog;
     for (auto key1 = shortcuts.begin(); key1 != shortcuts.end(); ++key1) {
@@ -581,8 +593,8 @@ bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
                            !reportedInLog.contains(*key2)) { // log entries
                     reportedInLog.append(*key1);
                     reportedInLog.append(*key2);
-                    *log << QStringLiteral("Shortcut conflict: '%1' and '%2' "
-                                           "have the same shortcut: %3\n")
+                    *log << tr("Shortcut conflict: '%1' and '%2' "
+                               "have the same shortcut: %3\n")
                               .arg(*key1)
                               .arg(*key2)
                               .arg(value1);
@@ -596,9 +608,12 @@ bool ConfigHandler::checkShortcutConflicts(QTextStream* log) const
 
 /**
  * @brief Check each config value semantically.
+ * @param log Destination for error log output.
+ * @param offenders Destination for the semantically invalid keys.
  * @return Whether the config passes this check.
  */
-bool ConfigHandler::checkSemantics(QTextStream* log) const
+bool ConfigHandler::checkSemantics(AbstractLogger* log,
+                                   QList<QString>* offenders) const
 {
     QStringList allKeys = m_settings.allKeys();
     bool ok = true;
@@ -612,14 +627,17 @@ bool ConfigHandler::checkSemantics(QTextStream* log) const
         QVariant val = m_settings.value(key);
         auto valueHandler = this->valueHandler(key);
         if (val.isValid() && !valueHandler->check(val)) {
+            // Key does not pass the check
             ok = false;
-            if (log == nullptr) {
+            if (log == nullptr && offenders == nullptr)
                 break;
-            } else {
-                *log << QStringLiteral("Semantic error in '%1'. Expected: %2\n")
+            if (log != nullptr) {
+                *log << tr("Bad value in '%1'. Expected: %2\n")
                           .arg(key)
                           .arg(valueHandler->expected());
             }
+            if (offenders != nullptr)
+                offenders->append(key);
         }
     }
     return ok;
@@ -659,12 +677,12 @@ void ConfigHandler::setErrorState(bool error) const
     // Notify user every time m_hasError changes
     if (!hadError && m_hasError) {
         QString msg = errorMessage();
-        SystemNotification().sendMessage(msg);
+        AbstractLogger::error() << msg;
         emit getInstance()->error();
     } else if (hadError && !m_hasError) {
         auto msg =
           tr("You have successfully resolved the configuration error.");
-        SystemNotification().sendMessage(msg);
+        AbstractLogger::info() << msg;
         emit getInstance()->errorResolved();
     }
 }
@@ -686,7 +704,8 @@ bool ConfigHandler::hasError() const
 /// Error message that can be used by other classes as well
 QString ConfigHandler::errorMessage() const
 {
-    return tr("The configuration contains an error. Falling back to default.");
+    return tr(
+      "The configuration contains an error. Open configuration to resolve.");
 }
 
 void ConfigHandler::ensureFileWatched() const
@@ -707,9 +726,10 @@ void ConfigHandler::ensureFileWatched() const
  * @brief Obtain a `ValueHandler` for the config option with the given key.
  * @return Smart pointer to the handler.
  *
- * @note If the key is from the "General" group, the `recognizedGeneralOptions`
- * map is looked up. If it is from "Shortcuts", a generic `KeySequence` value
- * handler is returned.
+ * @note If the key is from the CONFIG_GROUP_GENERAL (General) group, the
+ * `recognizedGeneralOptions` map is looked up. If it is from
+ * CONFIG_GROUP_SHORTCUTS (Shortcuts), a generic `KeySequence` value handler is
+ * returned.
  */
 QSharedPointer<ValueHandler> ConfigHandler::valueHandler(
   const QString& key) const
@@ -750,8 +770,8 @@ void ConfigHandler::assertKeyRecognized(const QString& key) const
 
 bool ConfigHandler::isShortcut(const QString& key) const
 {
-    return m_settings.group() == QStringLiteral("Shortcuts") ||
-           key.startsWith(QStringLiteral("Shortcuts/"));
+    return m_settings.group() == QStringLiteral(CONFIG_GROUP_SHORTCUTS) ||
+           key.startsWith(QStringLiteral(CONFIG_GROUP_SHORTCUTS "/"));
 }
 
 QString ConfigHandler::baseName(QString key) const
@@ -762,7 +782,7 @@ QString ConfigHandler::baseName(QString key) const
 // STATIC MEMBER DEFINITIONS
 
 bool ConfigHandler::m_hasError = false;
-bool ConfigHandler::m_errorCheckPending = false;
+bool ConfigHandler::m_errorCheckPending = true;
 bool ConfigHandler::m_skipNextErrorCheck = false;
 
 QSharedPointer<QFileSystemWatcher> ConfigHandler::m_configWatcher;

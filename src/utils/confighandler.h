@@ -9,11 +9,15 @@
 #include <QVariant>
 #include <QVector>
 
+#define CONFIG_GROUP_GENERAL "General"
+#define CONFIG_GROUP_SHORTCUTS "Shortcuts"
+
 class QFileSystemWatcher;
 class ValueHandler;
 template<class T>
 class QSharedPointer;
 class QTextStream;
+class AbstractLogger;
 
 /**
  * Declare and implement a getter for a config option. `KEY` is the option key
@@ -54,7 +58,7 @@ class ConfigHandler : public QObject
     Q_OBJECT
 
 public:
-    explicit ConfigHandler(bool skipInitialErrorCheck = false);
+    explicit ConfigHandler();
 
     static ConfigHandler* getInstance();
 
@@ -68,6 +72,9 @@ public:
     CONFIG_GETTER_SETTER(uiColor, setUiColor, QColor)
     CONFIG_GETTER_SETTER(contrastUiColor, setContrastUiColor, QColor)
     CONFIG_GETTER_SETTER(drawColor, setDrawColor, QColor)
+    CONFIG_GETTER_SETTER(predefinedColorPaletteLarge,
+                         setPredefinedColorPaletteLarge,
+                         bool)
     CONFIG_GETTER_SETTER(fontFamily, setFontFamily, QString)
     CONFIG_GETTER_SETTER(showHelp, setShowHelp, bool)
     CONFIG_GETTER_SETTER(showSidePanelButton, setShowSidePanelButton, bool)
@@ -97,9 +104,7 @@ public:
     CONFIG_GETTER_SETTER(uploadHistoryMax, setUploadHistoryMax, int)
     CONFIG_GETTER_SETTER(saveAfterCopy, setSaveAfterCopy, bool)
     CONFIG_GETTER_SETTER(copyPathAfterSave, setCopyPathAfterSave, bool)
-    CONFIG_GETTER_SETTER(setSaveAsFileExtension,
-                         setSaveAsFileExtension,
-                         QString)
+    CONFIG_GETTER_SETTER(saveAsFileExtension, setSaveAsFileExtension, QString)
     CONFIG_GETTER_SETTER(antialiasingPinZoom, setAntialiasingPinZoom, bool)
     CONFIG_GETTER_SETTER(useJpgForClipboard, setUseJpgForClipboard, bool)
     CONFIG_GETTER_SETTER(uploadWithoutConfirmation,
@@ -110,6 +115,8 @@ public:
                          QString)
     CONFIG_GETTER_SETTER(undoLimit, setUndoLimit, int)
     CONFIG_GETTER_SETTER(buttons, setButtons, QList<CaptureTool::Type>)
+    CONFIG_GETTER_SETTER(showMagnifier, setShowMagnifier, bool)
+    CONFIG_GETTER_SETTER(squareMagnifier, setSquareMagnifier, bool)
 
     // SPECIAL CASES
     bool startupLaunch();
@@ -128,6 +135,8 @@ public:
     QString shortcut(const QString& actionName);
     void setValue(const QString& key, const QVariant& value);
     QVariant value(const QString& key) const;
+    void remove(const QString& key);
+    void resetValue(const QString& key);
 
     // INFO
     static QSet<QString>& recognizedGeneralOptions();
@@ -135,10 +144,12 @@ public:
     QSet<QString> keysFromGroup(const QString& group) const;
 
     // ERROR HANDLING
-    bool checkForErrors(QTextStream* log = nullptr) const;
-    bool checkUnrecognizedSettings(QTextStream* log = nullptr) const;
-    bool checkShortcutConflicts(QTextStream* log = nullptr) const;
-    bool checkSemantics(QTextStream* log = nullptr) const;
+    bool checkForErrors(AbstractLogger* log = nullptr) const;
+    bool checkUnrecognizedSettings(AbstractLogger* log = nullptr,
+                                   QList<QString>* offenders = nullptr) const;
+    bool checkShortcutConflicts(AbstractLogger* log = nullptr) const;
+    bool checkSemantics(AbstractLogger* log = nullptr,
+                        QList<QString>* offenders = nullptr) const;
     void checkAndHandleError() const;
     void setErrorState(bool error) const;
     bool hasError() const;
@@ -160,4 +171,5 @@ private:
     void assertKeyRecognized(const QString& key) const;
     bool isShortcut(const QString& key) const;
     QString baseName(QString key) const;
+    void cleanUnusedKeys(const QString& group, const QSet<QString>& keys) const;
 };

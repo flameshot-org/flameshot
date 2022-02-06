@@ -3,6 +3,7 @@
 
 #include "visualseditor.h"
 #include "src/config/buttonlistview.h"
+#include "src/config/colorpickereditor.h"
 #include "src/config/extendedslider.h"
 #include "src/config/uicoloreditor.h"
 #include "src/utils/confighandler.h"
@@ -56,8 +57,22 @@ void VisualsEditor::initOpacitySlider()
 
 void VisualsEditor::initWidgets()
 {
+    m_tabWidget = new QTabWidget();
+    m_layout->addWidget(m_tabWidget);
+
     m_colorEditor = new UIcolorEditor();
-    m_layout->addWidget(m_colorEditor);
+    m_colorEditorTab = new QWidget();
+    QVBoxLayout* colorEditorLayout = new QVBoxLayout(m_colorEditorTab);
+    m_colorEditorTab->setLayout(colorEditorLayout);
+    colorEditorLayout->addWidget(m_colorEditor);
+    m_tabWidget->addTab(m_colorEditorTab, tr("UI Color Editor"));
+
+    m_colorpickerEditor = new ColorPickerEditor();
+    m_colorpickerEditorTab = new QWidget();
+    QVBoxLayout* colorpickerEditorLayout =
+      new QVBoxLayout(m_colorpickerEditorTab);
+    colorpickerEditorLayout->addWidget(m_colorpickerEditor);
+    m_tabWidget->addTab(m_colorpickerEditorTab, tr("Colorpicker Editor"));
 
     initOpacitySlider();
 

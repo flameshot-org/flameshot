@@ -1,10 +1,10 @@
 #include "flameshotdaemon.h"
 
+#include "abstractlogger.h"
 #include "confighandler.h"
 #include "controller.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
-#include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDBusConnection>
@@ -68,6 +68,7 @@ void FlameshotDaemon::start()
 {
     if (!m_instance) {
         m_instance = new FlameshotDaemon();
+        qApp->setQuitOnLastWindowClosed(false);
     }
 }
 
@@ -142,6 +143,18 @@ bool FlameshotDaemon::isThisInstanceHostingWidgets()
     return instance() && !instance()->m_widgets.isEmpty();
 }
 
+/**
+ * @brief Return the daemon instance.
+ *
+ * If this instance of flameshot is the daemon, a singleton instance of
+ * `FlameshotDaemon` is returned. As a side effect`start` will called if it
+ * wasn't called earlier. If this instance of flameshot is not the daemon,
+ * `nullptr` is returned.
+ *
+ * This strategy is used because the daemon needs to receive signals from D-Bus,
+ * for which an instance of a `QObject` is required. The singleton serves as
+ * that object.
+ */
 FlameshotDaemon* FlameshotDaemon::instance()
 {
     // Because we don't use DBus on MacOS, each instance of flameshot is its own
@@ -159,7 +172,7 @@ FlameshotDaemon* FlameshotDaemon::instance()
  */
 void FlameshotDaemon::quitIfIdle()
 {
-    if (m_persist && !instance()) {
+    if (m_persist) {
         return;
     }
     if (!m_hostingClipboard && m_widgets.isEmpty()) {
@@ -219,6 +232,11 @@ void FlameshotDaemon::attachScreenshotToClipboard(const QByteArray& screenshot)
 
 void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
 {
+    // Must send notification before clipboard modification on linux
+    if (!notification.isEmpty()) {
+        AbstractLogger::info() << notification;
+    }
+
     m_hostingClipboard = true;
     QClipboard* clipboard = QApplication::clipboard();
 
@@ -227,9 +245,6 @@ void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
     // windows for some reason
     m_clipboardSignalBlocked = true;
     clipboard->setText(text);
-    if (!notification.isEmpty()) {
-        SystemNotification().sendMessage(notification);
-    }
     clipboard->blockSignals(false);
 }
 
@@ -246,7 +261,7 @@ QDBusMessage FlameshotDaemon::createMethodCall(QString method)
 void FlameshotDaemon::checkDBusConnection(const QDBusConnection& connection)
 {
     if (!connection.isConnected()) {
-        SystemNotification().sendMessage(tr("Unable to connect via DBus"));
+        AbstractLogger::error() << tr("Unable to connect via DBus");
         qApp->exit(1);
     }
 }

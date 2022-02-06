@@ -44,7 +44,7 @@ SET (${COLORWIDGET_PROJECT_NAME}_VERSION "${${COLORWIDGET_PROJECT_NAME}_VERSION_
 
 
 set(QT_VERSION_MAJOR 5)
-find_package(QT NAMES Qt5 Qt6 Qt4 COMPONENTS Core QUIET)
+find_package(QT NAMES Qt5 Qt4 COMPONENTS Core QUIET)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets REQUIRED)
 
 
@@ -55,9 +55,6 @@ set(CMAKE_AUTOUIC ON)
 # Auto generate moc files
 set(CMAKE_AUTORCC ON)
 
-
-option(BUILD_SHARED_LIBS "Build the shared library" ON)
-option(BUILD_STATIC_LIBS "Build the static library" OFF)
 
 set (TARGET_NAME ${COLORWIDGET_PROJECT_NAME})
 option(COLOR_WIDGETS_QT_SUFFIX "Append qt version to the target output files" OFF)
@@ -70,12 +67,10 @@ endif()
 set (INCLUDE_PREFIX "QtColorWidgets")
 set (COLOR_WIDGETS_LIBRARY "${TARGET_NAME}")
 
-if ( ${BUILD_STATIC_LIBS} )
-    add_definitions(-DQTCOLORWIDGETS_STATICALLY_LINKED)
-endif()
+add_definitions(-DQTCOLORWIDGETS_STATICALLY_LINKED)
 
 
-add_library (${TARGET_NAME} "")
+add_library (${TARGET_NAME} STATIC "")
 set_target_properties(${TARGET_NAME}
   PROPERTIES
   EXPORT_NAME "${TARGET_NAME}${TARGET_OUTPUT_SUFFIX}")
