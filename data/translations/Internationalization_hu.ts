@@ -95,7 +95,7 @@
     <name>CaptureLauncher</name>
     <message>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Rögzítési mód&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Rögzítési mód&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Rectangular Region</source>
@@ -132,6 +132,18 @@
     <message>
         <source>Full Screen (Current Display)</source>
         <translation>Teljes képernyő (Jelenlegi kijelzőn)</translation>
+    </message>
+    <message>
+        <source>Capture Launcher</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture Mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -292,6 +304,53 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
 </context>
 <context>
+    <name>ColorPickerEditor</name>
+    <message>
+        <source>Select Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select preset using the spinbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press button to delete the selected preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter color manually or select it using the color-wheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press button to add preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Unable to add preset. Maximum limit reached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to remove preset. Minimum limit reached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigErrorDetails</name>
     <message>
         <source>Configuration errors</source>
@@ -353,7 +412,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eltávolítani</translation>
     </message>
     <message>
         <source>Remove this setting.</source>
@@ -676,7 +735,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode.</source>
-        <translation>Súgó üzenet mutatása rögzítő mód kezdetekor.</translation>
+        <translation type="vanished">Súgó üzenet mutatása rögzítő mód kezdetekor.</translation>
     </message>
     <message>
         <source>Show the side panel button</source>
@@ -684,7 +743,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode.</source>
-        <translation>Oldalsó panel nyitó gomb megjelenítése rögzítő módban.</translation>
+        <translation type="vanished">Oldalsó panel nyitó gomb megjelenítése rögzítő módban.</translation>
     </message>
     <message>
         <source>Show desktop notifications</source>
@@ -696,7 +755,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Show the systemtray icon</source>
-        <translation>Ikon megjelenítése a tálcán</translation>
+        <translation type="vanished">Ikon megjelenítése a tálcán</translation>
     </message>
     <message>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
@@ -724,7 +783,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Launch Flameshot</source>
-        <translation>Flameshot indítása</translation>
+        <translation type="vanished">Flameshot indítása</translation>
     </message>
     <message>
         <source>Show welcome message on launch</source>
@@ -736,7 +795,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
-        <translation>URL vágolapra másolása és ablak bezárása feltöltés után</translation>
+        <translation type="vanished">URL vágolapra másolása és ablak bezárása feltöltés után</translation>
     </message>
     <message>
         <source>Save image after copy</source>
@@ -744,7 +803,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Save image file after copying it</source>
-        <translation>Fénykép elmentése másolás után</translation>
+        <translation type="vanished">Fénykép elmentése másolás után</translation>
     </message>
     <message>
         <source>Save Path</source>
@@ -787,10 +846,6 @@ Please solve them manually in the configuration file.</source>
         <translation></translation>
     </message>
     <message>
-        <source>This allows you to take screenshots of flameshot itself for example.</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Automatically close daemon when it is not needed</source>
         <translation></translation>
     </message>
@@ -814,36 +869,104 @@ Please solve them manually in the configuration file.</source>
         <source>Upload image without confirmation</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Show the help message at the beginning in the capture mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the side panel toggle button in the capture mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable desktop notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show icon in the system tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask for confirmation to delete screenshot from the latest uploads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for updates automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This allows you to take screenshots of Flameshot itself for example</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch Flameshot daemon when computer is booted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use a large predefined color palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL and close window after uploading was successful</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After copying the screenshot, save it to a file as well</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the file path to clipboard after the file is saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show magnifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable a magnifier while selecting the screenshot area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Square shaped magnifier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make the magnifier to be square-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HistoryWidget</name>
     <message>
         <source>Latest Uploads</source>
-        <translation>Korábbi Feltöltések</translation>
+        <translation type="vanished">Korábbi Feltöltések</translation>
     </message>
     <message>
         <source>Screenshots history is empty</source>
-        <translation>Nincs korábbi képernyőmentésed</translation>
+        <translation type="vanished">Nincs korábbi képernyőmentésed</translation>
     </message>
     <message>
         <source>Copy URL</source>
-        <translation>URL másolása</translation>
+        <translation type="vanished">URL másolása</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation>URL másolva a vágólapra.</translation>
+        <translation type="vanished">URL másolva a vágólapra.</translation>
     </message>
     <message>
         <source>Open in browser</source>
-        <translation>Megnyitás böngészőben</translation>
+        <translation type="vanished">Megnyitás böngészőben</translation>
     </message>
     <message>
         <source>Confirm to delete</source>
-        <translation>Törlés megerősítése</translation>
+        <translation type="vanished">Törlés megerősítése</translation>
     </message>
     <message>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation>Biztosan törölni szeretnéd a képernyőmentést a korábbi feltöltések közül és a szerverről is?</translation>
+        <translation type="vanished">Biztosan törölni szeretnéd a képernyőmentést a korábbi feltöltések közül és a szerverről is?</translation>
     </message>
 </context>
 <context>
@@ -948,6 +1071,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <source>Screenshot copied to clipboard.</source>
         <translation type="unfinished">Képernyőmentés másolva a vágólapra.</translation>
+    </message>
+    <message>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to save the screenshot to disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screenshot saved.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1067,11 +1202,11 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;License&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Licensz&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Licensz&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Version&lt;/b&gt;&lt;/u&gt;</source>
-        <translation>&lt;u&gt;&lt;b&gt;Verzió&lt;/b&gt;&lt;/u&gt;</translation>
+        <translation type="vanished">&lt;u&gt;&lt;b&gt;Verzió&lt;/b&gt;&lt;/u&gt;</translation>
     </message>
     <message>
         <source>&lt;u&gt;&lt;b&gt;Shortcuts&lt;/b&gt;&lt;/u&gt;</source>
@@ -1080,6 +1215,34 @@ Please solve them manually in the configuration file.</source>
     <message>
         <source>Available shortcuts in the screen capture mode.</source>
         <translation type="vanished">Elérhető gyorsbillentyűk a képernyőfelvétel módban.</translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPLv3+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flameshot v</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OS Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1803,7 +1966,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <name>UIcolorEditor</name>
     <message>
         <source>UI Color Editor</source>
-        <translation>Kezelőfelület Színeinek Szerkesztése</translation>
+        <translation type="vanished">Kezelőfelület Színeinek Szerkesztése</translation>
     </message>
     <message>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
@@ -1861,6 +2024,44 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
 </context>
 <context>
+    <name>UploadHistory</name>
+    <message>
+        <source>Upload History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Screenshots history is empty</source>
+        <translation type="unfinished">Nincs korábbi képernyőmentésed</translation>
+    </message>
+</context>
+<context>
+    <name>UploadLineItem</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL</source>
+        <translation type="unfinished">URL másolása</translation>
+    </message>
+    <message>
+        <source>Open In Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm to delete</source>
+        <translation type="unfinished">Törlés megerősítése</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
+        <translation type="unfinished">Biztosan törölni szeretnéd a képernyőmentést a korábbi feltöltések közül és a szerverről is?</translation>
+    </message>
+</context>
+<context>
     <name>UtilityPanel</name>
     <message>
         <source>Close</source>
@@ -1884,6 +2085,14 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Select All</source>
         <translation>Összes kiválasztása</translation>
+    </message>
+    <message>
+        <source>UI Color Editor</source>
+        <translation type="unfinished">Kezelőfelület Színeinek Szerkesztése</translation>
+    </message>
+    <message>
+        <source>Colorpicker Editor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
