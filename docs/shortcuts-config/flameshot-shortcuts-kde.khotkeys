@@ -101,7 +101,7 @@ Type=SIMPLE_ACTION_DATA
 ActionsCount=1
 
 [Data_1_4Actions0]
-CommandURL=flameshot full --clipboard --path ''
+CommandURL=flameshot full --clipboard
 Type=COMMAND_URL
 
 [Data_1_4Conditions]

@@ -256,12 +256,13 @@ Steps for using the configuration:
     cd ~/Desktop
     wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys
     ```
-3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
-4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
-5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
-6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
-7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
-8. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
+3. Make sure you have the `khotkeys` installed using your package manager to enable custom shortcuts in KDE Plasma.
+4. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
+5. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
+6. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
+7. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
+8. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+9. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
 
     ```shell
     ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
