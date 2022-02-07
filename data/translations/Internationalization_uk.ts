@@ -390,12 +390,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
         <source>Select Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати шаблон:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
         <source>Select preset using the spinbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть шаблон за допомогою обертача</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
@@ -405,17 +405,17 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть кнопку, щоб видалити вибраний шаблон</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати шаблон:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть колір вручну або виберіть його за допомогою кола кольорів</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
@@ -425,7 +425,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
         <source>Press button to add preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть кнопку, щоб додати шаблон</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
@@ -436,12 +436,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося додати шаблон. Досягнуто максимальної межі.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="138"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося вилучити шаблон. Досягнуто мінімальної межі.</translation>
     </message>
 </context>
 <context>
@@ -1063,12 +1063,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="230"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати повідомлення довідки на початку режиму захоплення</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати перемикач бічної панелі в режимі захоплення</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
@@ -1083,7 +1083,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="282"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Запитувати підтвердження, щоб видалити знімок екрана з останніх вивантажень</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
@@ -1093,32 +1093,32 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation type="unfinished"></translation>
+        <translation>Це дозволяє робити знімки екрана самого Flameshot, наприклад</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускати фонову службу Flameshot під час завантаження комп’ютера</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Показ вікна вітального повідомлення у центрі екрана під час створення знімка екрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати велику заздалегідь визначену палітру кольорів</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="404"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Копіювання URL-адреси та закриття вікна після завантаження було успішним</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="416"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation type="unfinished"></translation>
+        <translation>Після копіювання знімка екрана зберігати його до файлу</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="423"/>
@@ -1164,7 +1164,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="575"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Копіювати шлях до буфера обміну після збереження файлу</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
@@ -1200,7 +1200,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="636"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути лупу, якщо вибрано ділянку знімка екрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
@@ -1210,7 +1210,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="648"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Зробити лупу квадратною</translation>
     </message>
 </context>
 <context>
@@ -1443,7 +1443,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося зберегти знімок екрана на диск.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
@@ -2676,7 +2676,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор вибору кольорів</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
