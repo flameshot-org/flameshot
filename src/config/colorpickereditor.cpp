@@ -2,13 +2,13 @@
 // SPDX-FileCopyrightText: 2022 Dearsh Oberoi
 
 #include "colorpickereditor.h"
+#include "colorpickereditmode.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include "src/widgets/colorpickerwidget.h"
-#include "src/widgets/colorspinbox.h"
 
 #include <QApplication>
 #include <QColor>
+#include <QDebug>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -27,7 +27,11 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
 
     m_gLayout = new QGridLayout(this);
 
-    m_colorpicker = new ColorPickerWidget(this);
+    m_colorpicker = new ColorPickerEditMode(this);
+    connect(m_colorpicker,
+            &ColorPickerEditMode::colorSelected,
+            this,
+            [this](int index) { m_selectedIndex = index; });
     m_gLayout->addWidget(m_colorpicker, 0, 0);
 
     m_colorWheel = new color_widgets::ColorWheel(this);
@@ -39,19 +43,8 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
     QVBoxLayout* m_vLocalLayout1 = new QVBoxLayout();
     m_vLocalLayout1->addStretch();
 
-    m_colorSpinboxLabel = new QLabel(tr("Select Preset:"), this);
-    m_vLocalLayout1->addWidget(m_colorSpinboxLabel);
-
-    m_colorSpinbox = new ColorSpinBox(this);
-    connect(m_colorSpinbox,
-            QOverload<int>::of(&QSpinBox::valueChanged),
-            m_colorpicker,
-            [=](int val) {
-                m_selectedIndex = val;
-                m_colorpicker->updateSelection(val);
-            });
-    m_colorSpinbox->setToolTip(tr("Select preset using the spinbox"));
-    m_vLocalLayout1->addWidget(m_colorSpinbox);
+    m_colorEditLabel = new QLabel(tr("Select Preset:"), this);
+    m_vLocalLayout1->addWidget(m_colorEditLabel);
 
     m_deletePresetButton = new QPushButton(tr("Delete"), this);
     m_deletePresetButton->setToolTip(
@@ -82,6 +75,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
             [=](QColor c) {
                 m_color = c;
                 m_colorInput->setText(m_color.name(QColor::HexRgb));
+                qDebug() << c.name(QColor::HexRgb);
             });
     m_vLocalLayout2->addWidget(m_colorInput);
 
@@ -152,15 +146,11 @@ void ColorPickerEditor::onAddPreset()
     }
 
     addPreset();
-    m_colorSpinbox->setValue(1);
     m_colorpicker->updateWidget();
-    m_colorSpinbox->updateWidget();
 }
 
 void ColorPickerEditor::onDeletePreset()
 {
     deletePreset();
-    m_colorSpinbox->setValue(1);
     m_colorpicker->updateWidget();
-    m_colorSpinbox->updateWidget();
 }

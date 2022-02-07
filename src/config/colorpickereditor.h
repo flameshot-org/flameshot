@@ -6,8 +6,7 @@
 #include "QtColorWidgets/color_wheel.hpp"
 #include <QWidget>
 
-class ColorSpinBox;
-class ColorPickerWidget;
+class ColorPickerEditMode;
 class QLabel;
 class QPushButton;
 class QLineEdit;
@@ -28,11 +27,10 @@ private:
     void addPreset();
     void deletePreset();
 
-    ColorPickerWidget* m_colorpicker;
+    ColorPickerEditMode* m_colorpicker;
     color_widgets::ColorWheel* m_colorWheel;
 
-    QLabel* m_colorSpinboxLabel;
-    ColorSpinBox* m_colorSpinbox;
+    QLabel* m_colorEditLabel;
     QPushButton* m_deletePresetButton;
 
     QLineEdit* m_colorInput;
