@@ -400,7 +400,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymazať</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
@@ -420,7 +420,7 @@ Stlačte medzerník pre otvorenie postranného panelu.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
@@ -1045,22 +1045,22 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Enable desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť desktop notifikácie</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show icon in the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázať ikonu v systémovej lište</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="282"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Opýtať sa na potvrdenie vymazania snímky obrazovky z posledných nahratí</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Check for updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrolovať aktualizácie automaticky</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
@@ -1070,27 +1070,27 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Spusti Flameshot démon pri bootovaní počítača</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázať uvítaciu správu v strede obrazovky pri zachytávaní snímky obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť veľkú preddefinovanú farebnú paletu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="404"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Skopírovať URL a zatvoriť okno po úspešnom uploade</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="416"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation type="unfinished"></translation>
+        <translation>Po skopírovaní snímky obrazovky uložiť snímku aj ako súbor</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="423"/>
@@ -1136,7 +1136,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="575"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Skopírovať cestu k súboru potom ako je súbor uložený</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
@@ -1167,17 +1167,17 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="635"/>
         <source>Show magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázať lupu</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="636"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť lupu pri vyberaní oblasti snímky obrazovky</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Square shaped magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Lupa v tvare štvorca</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="648"/>
@@ -1320,7 +1320,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť obrázok</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -1340,12 +1340,12 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je možné uložiť snímku obrazovku na disk.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
         <source>Screenshot saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Snímka obrazovky uložená.</translation>
     </message>
 </context>
 <context>
@@ -1426,28 +1426,28 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licensia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>GPLv3+</source>
-        <translation type="unfinished"></translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
@@ -1461,7 +1461,7 @@ Riešte ich ručne v konfiguračnom súbore.</translation>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
-        <translation type="unfinished"></translation>
+        <translation>OS Info</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
@@ -2467,12 +2467,12 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation type="unfinished"></translation>
+        <translation>História uploadov</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">História snímok obrazovky je prázdna</translation>
+        <translation>História snímkov obrazovky je prázdna</translation>
     </message>
 </context>
 <context>
@@ -2496,19 +2496,19 @@ Možno budete musieť napísať pred &apos;#&apos; opačnú lomku, teda &apos;\#
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Kopírovať URL</translation>
+        <translation>Skopírovať URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť v prehliadači</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Potvrďte odstránenie</translation>
+        <translation>Potvrďte odstránenie</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
