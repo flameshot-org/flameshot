@@ -25,9 +25,7 @@
 #include <QTranslator>
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-#include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
-#include <QApplication>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <desktopinfo.h>
@@ -79,6 +77,33 @@ QSharedMemory* guiMutexLock()
     return shm;
 }
 
+void install_translations()
+{
+    QTranslator translator;
+    QTranslator qtTranslator;
+    QStringList trPaths = PathInfo::translationsPaths();
+
+    for (const QString& path : trPaths) {
+        bool match = translator.load(QLocale(),
+                                     QStringLiteral("Internationalization"),
+                                     QStringLiteral("_"),
+                                     path);
+        if (match) {
+            break;
+        }
+    }
+    qtTranslator.load(QLocale::system(),
+                      "qt",
+                      "_",
+                      QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+
+    // This translator is for translating Flameshot strings
+    qApp->installTranslator(&translator);
+
+    // This translator is for translating system dialogs like "ok", "cancel"
+    qApp->installTranslator(&qtTranslator);
+}
+
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_LINUX
@@ -100,28 +125,7 @@ int main(int argc, char* argv[])
         QtSingleApplication app(argc, argv);
 #endif
         QApplication::setStyle(new StyleOverride);
-
-        QTranslator translator, qtTranslator;
-        QStringList trPaths = PathInfo::translationsPaths();
-
-        for (const QString& path : trPaths) {
-            bool match = translator.load(QLocale(),
-                                         QStringLiteral("Internationalization"),
-                                         QStringLiteral("_"),
-                                         path);
-            if (match) {
-                break;
-            }
-        }
-
-        qtTranslator.load(
-          QLocale::system(),
-          "qt",
-          "_",
-          QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-
-        qApp->installTranslator(&translator);
-        qApp->installTranslator(&qtTranslator);
+        install_translations();
         qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
         auto* c = Controller::getInstance();
@@ -145,6 +149,8 @@ int main(int argc, char* argv[])
      * CLI parsing  |
      * ------------*/
     new QCoreApplication(argc, argv);
+    install_translations();
+
     CommandLineParser parser;
     // Add description
     parser.setDescription(
