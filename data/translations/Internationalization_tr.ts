@@ -1694,7 +1694,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation>Kaydedilecek mevcut dizin veya yeni dosya</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
