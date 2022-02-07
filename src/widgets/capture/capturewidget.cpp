@@ -821,7 +821,8 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
     // If the key is a digit, change the tool size
     bool ok;
     int digit = e->text().toInt(&ok);
-    if (ok && e->modifiers() == Qt::NoModifier) { // digit received
+    if (ok && ((e->modifiers() == Qt::NoModifier) ||
+               e->modifiers() == Qt::KeypadModifier)) { // digit received
         m_toolSizeByKeyboard = 10 * m_toolSizeByKeyboard + digit;
         setToolSize(m_toolSizeByKeyboard);
         if (m_context.toolSize != m_toolSizeByKeyboard) {
@@ -1242,6 +1243,8 @@ void CaptureWidget::onToolSizeChanged(int t)
         drawToolsData();
         updateTool(toolItem);
     }
+    // Force a repaint to prevent artifacting
+    this->repaint();
 }
 
 void CaptureWidget::onToolSizeSettled(int size)
