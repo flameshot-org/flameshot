@@ -51,6 +51,15 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
                 m_colorEdit->setText(
                   m_colorList[m_selectedIndex].name(QColor::HexRgb));
             });
+    connect(m_colorpicker,
+            &ColorPickerEditMode::presetSwapped,
+            this,
+            [this](int index) {
+                m_selectedIndex = index;
+                m_colorList = m_config.userColors();
+                m_colorEdit->setText(
+                  m_colorList[m_selectedIndex].name(QColor::HexRgb));
+            });
     m_vLocalLayout1->addWidget(m_colorEdit);
 
     m_deletePresetButton = new QPushButton(tr("Delete"), this);

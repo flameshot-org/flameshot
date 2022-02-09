@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "src/utils/confighandler.h"
 #include "src/widgets/colorpickerwidget.h"
 
 class ColorPickerEditMode : public ColorPickerWidget
@@ -13,7 +14,15 @@ public:
 
 signals:
     void colorSelected(int index);
+    void presetSwapped(int index);
 
-protected:
-    void mousePressEvent(QMouseEvent* e) override;
+private:
+    bool eventFilter(QObject* obj, QEvent* event) override;
+
+    bool m_isPressing = false;
+    bool m_isDragging = false;
+    QPoint m_mouseMovePos;
+    QPoint m_mousePressPos;
+    QPoint m_draggedPresetInitialPos;
+    ConfigHandler m_config;
 };
