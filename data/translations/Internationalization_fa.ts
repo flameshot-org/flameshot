@@ -411,12 +411,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>اضافه کردن رنگ پیشفرض:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>اضافه کردن دستی رنگ یا انتخاب رنگ با استفاده از چرخ رنگ</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
@@ -426,7 +426,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
         <source>Press button to add preset</source>
-        <translation type="unfinished"></translation>
+        <translation>دکمه را فشار دهید تا به رنگهای پیشفرض اضافه شود</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
@@ -484,12 +484,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="690"/>
         <source>You have successfully resolved the configuration error.</source>
-        <translation type="unfinished"></translation>
+        <translation>شما با موفقیت تمام خطاها در تنظیمات را اصلاح کردید.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="713"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation type="unfinished"></translation>
+        <translation>تنظیمات دارای خطا است. تنظیمات را باز کنید تا بتوانید اصلاحشان کنید.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="767"/>
@@ -953,7 +953,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="388"/>
         <source>Use large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>از پالت بزرگ رنگ های پیشفرض استفاده کن</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="402"/>
