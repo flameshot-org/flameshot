@@ -11,7 +11,6 @@ ColorPickerEditMode::ColorPickerEditMode(QWidget* parent)
 {
     m_isPressing = false;
     m_isDragging = false;
-    m_draggedPresetInitialPos = m_colorAreaList[m_selectedIndex].topLeft();
     installEventFilter(this);
 }
 
@@ -24,15 +23,15 @@ bool ColorPickerEditMode::eventFilter(QObject* obj, QEvent* event)
             auto mouseEvent = static_cast<QMouseEvent*>(event);
 
             if (mouseEvent->button() == Qt::LeftButton) {
-                m_isPressing = true;
                 m_mousePressPos = mouseEvent->pos();
                 m_mouseMovePos = m_mousePressPos;
 
                 for (int i = 1; i < m_colorList.size(); ++i) {
                     if (m_colorAreaList.at(i).contains(m_mousePressPos)) {
-                        m_selectedIndex = i;
+                        m_isPressing = true;
                         m_draggedPresetInitialPos =
                           m_colorAreaList[i].topLeft();
+                        m_selectedIndex = i;
                         update(m_colorAreaList.at(i) +
                                QMargins(10, 10, 10, 10));
                         update(m_colorAreaList.at(m_lastIndex) +
