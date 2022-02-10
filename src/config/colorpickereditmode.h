@@ -14,7 +14,7 @@ public:
 
 signals:
     void colorSelected(int index);
-    void presetSwapped(int index);
+    void presetsSwapped(int index);
 
 private:
     bool eventFilter(QObject* obj, QEvent* event) override;

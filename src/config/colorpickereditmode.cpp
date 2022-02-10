@@ -9,6 +9,9 @@
 ColorPickerEditMode::ColorPickerEditMode(QWidget* parent)
   : ColorPickerWidget(parent)
 {
+    m_isPressing = false;
+    m_isDragging = false;
+    m_draggedPresetInitialPos = m_colorAreaList[m_selectedIndex].topLeft();
     installEventFilter(this);
 }
 
@@ -20,8 +23,6 @@ bool ColorPickerEditMode::eventFilter(QObject* obj, QEvent* event)
         case QEvent::MouseButtonPress: {
             auto mouseEvent = static_cast<QMouseEvent*>(event);
 
-            m_isPressing = false;
-            m_isDragging = false;
             if (mouseEvent->button() == Qt::LeftButton) {
                 m_isPressing = true;
                 m_mousePressPos = mouseEvent->pos();
@@ -48,20 +49,18 @@ bool ColorPickerEditMode::eventFilter(QObject* obj, QEvent* event)
 
             if (m_isPressing) {
                 QPoint eventPos = mouseEvent->pos();
-                if (m_colorAreaList[m_selectedIndex].contains(eventPos)) {
-                    QPoint diff = eventPos - m_mouseMovePos;
-                    m_colorAreaList[m_selectedIndex].translate(diff);
-                    widget->update();
+                QPoint diff = eventPos - m_mouseMovePos;
+                m_colorAreaList[m_selectedIndex].translate(diff);
+                widget->update();
 
-                    if (!m_isDragging) {
-                        QPoint totalMovedDiff = eventPos - m_mousePressPos;
-                        if (totalMovedDiff.manhattanLength() > 3) {
-                            m_isDragging = true;
-                        }
+                if (!m_isDragging) {
+                    QPoint totalMovedDiff = eventPos - m_mousePressPos;
+                    if (totalMovedDiff.manhattanLength() > 3) {
+                        m_isDragging = true;
                     }
-
-                    m_mouseMovePos = eventPos;
                 }
+
+                m_mouseMovePos = eventPos;
             }
         } break;
         case QEvent::MouseButtonRelease: {
@@ -76,17 +75,18 @@ bool ColorPickerEditMode::eventFilter(QObject* obj, QEvent* event)
                 for (int i = 1; i < m_colorList.size(); ++i) {
                     if (i != m_selectedIndex &&
                         m_colorAreaList.at(i).contains(draggedPresetCenter)) {
+                        // swap colors
                         QColor temp = m_colorList[i];
                         m_colorList[i] = m_colorList[m_selectedIndex];
                         m_colorList[m_selectedIndex] = temp;
                         m_config.setUserColors(m_colorList);
+
                         m_colorAreaList[m_selectedIndex].moveTo(
                           m_draggedPresetInitialPos);
                         m_selectedIndex = i;
                         widget->update();
                         m_lastIndex = i;
-                        emit colorSelected(m_selectedIndex);
-                        emit presetSwapped(m_selectedIndex);
+                        emit presetsSwapped(m_selectedIndex);
                         swapped = true;
                         break;
                     }

@@ -52,7 +52,7 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
                   m_colorList[m_selectedIndex].name(QColor::HexRgb));
             });
     connect(m_colorpicker,
-            &ColorPickerEditMode::presetSwapped,
+            &ColorPickerEditMode::presetsSwapped,
             this,
             [this](int index) {
                 m_selectedIndex = index;
@@ -62,6 +62,15 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
             });
     m_vLocalLayout1->addWidget(m_colorEdit);
 
+    m_updatePresetButton = new QPushButton(tr("Update"), this);
+    m_updatePresetButton->setToolTip(
+      tr("Press button to update the selected preset"));
+    connect(m_updatePresetButton,
+            &QPushButton::pressed,
+            this,
+            &ColorPickerEditor::onUpdatePreset);
+    m_vLocalLayout1->addWidget(m_updatePresetButton);
+
     m_deletePresetButton = new QPushButton(tr("Delete"), this);
     m_deletePresetButton->setToolTip(
       tr("Press button to delete the selected preset"));
@@ -70,15 +79,6 @@ ColorPickerEditor::ColorPickerEditor(QWidget* parent)
             this,
             &ColorPickerEditor::onDeletePreset);
     m_vLocalLayout1->addWidget(m_deletePresetButton);
-
-    m_updatePresetButton = new QPushButton(tr("Update"), this);
-    m_deletePresetButton->setToolTip(
-      tr("Press button to update the selected preset"));
-    connect(m_updatePresetButton,
-            &QPushButton::pressed,
-            this,
-            &ColorPickerEditor::onUpdatePreset);
-    m_vLocalLayout1->addWidget(m_updatePresetButton);
 
     m_vLocalLayout1->addStretch();
 
@@ -182,6 +182,7 @@ void ColorPickerEditor::onAddPreset()
     m_colorpicker->updateWidget();
     m_selectedIndex = 1;
     m_colorpicker->updateSelection(m_selectedIndex);
+    m_colorEdit->setText(m_colorList[m_selectedIndex].name(QColor::HexRgb));
 }
 
 void ColorPickerEditor::onDeletePreset()
@@ -190,6 +191,7 @@ void ColorPickerEditor::onDeletePreset()
     m_colorpicker->updateWidget();
     m_selectedIndex = 1;
     m_colorpicker->updateSelection(m_selectedIndex);
+    m_colorEdit->setText(m_colorList[m_selectedIndex].name(QColor::HexRgb));
 }
 
 void ColorPickerEditor::onUpdatePreset()
