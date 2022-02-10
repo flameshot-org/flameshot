@@ -17,6 +17,7 @@
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
+#include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include <QPointer>
 #include <QUndoStack>
@@ -180,6 +181,7 @@ private:
     NotifierBox* m_notifierBox;
     HoverEventFilter* m_eventFilter;
     SelectionWidget* m_selection;
+    MagnifierWidget* m_magnifier;
     QString m_helpMessage;
 
     SelectionWidget::SideType m_mouseOverHandle;

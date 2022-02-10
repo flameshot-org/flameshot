@@ -184,7 +184,7 @@ void FlameshotDaemon::quitIfIdle()
 
 void FlameshotDaemon::attachPin(QPixmap pixmap, QRect geometry)
 {
-    PinWidget* pinWidget = new PinWidget(pixmap, geometry);
+    auto* pinWidget = new PinWidget(pixmap, geometry);
     m_widgets.append(pinWidget);
     connect(pinWidget, &QObject::destroyed, this, [=]() {
         m_widgets.removeOne(pinWidget);
@@ -203,7 +203,7 @@ void FlameshotDaemon::attachScreenshotToClipboard(QPixmap pixmap)
     // This variable is necessary because the signal doesn't get blocked on
     // windows for some reason
     m_clipboardSignalBlocked = true;
-    ScreenshotSaver().saveToClipboard(pixmap);
+    saveToClipboard(pixmap);
     clipboard->blockSignals(false);
 }
 

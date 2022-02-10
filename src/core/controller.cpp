@@ -173,7 +173,7 @@ bool Controller::resolveAnyConfigErrors()
     bool resolved = true;
     ConfigHandler config;
     if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
-        ConfigResolver* resolver = new ConfigResolver();
+        auto* resolver = new ConfigResolver();
         QObject::connect(
           resolver, &ConfigResolver::rejected, [resolver, &resolved]() {
               resolved = false;
@@ -346,8 +346,9 @@ void Controller::startVisualCapture(const CaptureRequest& req)
 
 void Controller::startScreenGrab(CaptureRequest req, const int screenNumber)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     bool ok = true;
     QScreen* screen;
@@ -638,9 +639,9 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::SAVE) {
         if (req.path().isEmpty()) {
-            ScreenshotSaver().saveToFilesystemGUI(capture);
+            saveToFilesystemGUI(capture);
         } else {
-            ScreenshotSaver().saveToFilesystem(capture, path);
+            saveToFilesystem(capture, path);
         }
     }
 

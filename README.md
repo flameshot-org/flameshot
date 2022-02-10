@@ -19,7 +19,7 @@
     <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28MacOS%29">
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
     </a>
-    <a href="https://flameshot.org/nightly">
+    <a href="https://flameshot.org/docs/installation/development-build/">
       <img src="https://img.shields.io/badge/nightly%20builds-available-%23AA00FF" alt="Nightly Build" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
@@ -224,7 +224,7 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>option</kbd>-<kbd>shift</kbd>-<kbd>4</kbd> (macOS) as default global hotkeys.
+Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>shift</kbd>-<kbd>x</kbd> (macOS) as default global hotkeys.
 
 On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but with a bit of configuration you can set this up:
 
@@ -256,12 +256,13 @@ Steps for using the configuration:
     cd ~/Desktop
     wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys
     ```
-3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
-4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
-5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
-6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
-7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
-8. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
+3. Make sure you have the `khotkeys` installed using your package manager to enable custom shortcuts in KDE Plasma.
+4. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
+5. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
+6. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
+7. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
+8. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+9. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
 
     ```shell
     ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot

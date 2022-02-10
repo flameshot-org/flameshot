@@ -81,6 +81,8 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
     OPTION("checkForUpdates"             ,Bool               ( true          )),
     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
+    OPTION("showMagnifier"               ,Bool               ( false         )),
+    OPTION("squareMagnifier"             ,Bool               ( false         )),
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif
@@ -543,16 +545,20 @@ bool ConfigHandler::checkUnrecognizedSettings(AbstractLogger* log,
     bool ok = generalKeys.isEmpty() && shortcutKeys.isEmpty();
     if (log != nullptr || offenders != nullptr) {
         for (const QString& key : generalKeys) {
-            if (log)
+            if (log) {
                 *log << tr("Unrecognized setting: '%1'\n").arg(key);
-            if (offenders)
+            }
+            if (offenders) {
                 offenders->append(key);
+            }
         }
         for (const QString& key : shortcutKeys) {
-            if (log)
+            if (log) {
                 *log << tr("Unrecognized shortcut name: '%1'.\n").arg(key);
-            if (offenders)
+            }
+            if (offenders) {
                 offenders->append(CONFIG_GROUP_SHORTCUTS "/" + key);
+            }
         }
     }
     return ok;
@@ -627,15 +633,17 @@ bool ConfigHandler::checkSemantics(AbstractLogger* log,
         if (val.isValid() && !valueHandler->check(val)) {
             // Key does not pass the check
             ok = false;
-            if (log == nullptr && offenders == nullptr)
+            if (log == nullptr && offenders == nullptr) {
                 break;
+            }
             if (log != nullptr) {
                 *log << tr("Bad value in '%1'. Expected: %2\n")
                           .arg(key)
                           .arg(valueHandler->expected());
             }
-            if (offenders != nullptr)
+            if (offenders != nullptr) {
                 offenders->append(key);
+            }
         }
     }
     return ok;

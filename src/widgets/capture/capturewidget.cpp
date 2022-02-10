@@ -67,6 +67,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_panel(nullptr)
   , m_sidePanel(nullptr)
   , m_selection(nullptr)
+  , m_magnifier(nullptr)
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
   , m_toolSizeByKeyboard(0)
@@ -181,6 +182,11 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     initButtons();
     initSelection(); // button handler must be initialized before
     initShortcuts(); // must be called after initSelection
+    // init magnify
+    if (m_config.showMagnifier()) {
+        m_magnifier = new MagnifierWidget(
+          m_context.screenshot, m_uiColor, m_config.squareMagnifier(), this);
+    }
 
     // Init color picker
     m_colorPicker = new ColorPicker(this);
@@ -284,7 +290,7 @@ void CaptureWidget::initButtons()
     // Add all buttons but hide those that were disabled in the Interface config
     // This will allow keyboard shortcuts for those buttons to work
     for (CaptureTool::Type t : allButtonTypes) {
-        CaptureToolButton* b = new CaptureToolButton(t, this);
+        auto* b = new CaptureToolButton(t, this);
         if (t == CaptureTool::TYPE_SELECTIONINDICATOR) {
             m_sizeIndButton = b;
         }
@@ -679,6 +685,15 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 void CaptureWidget::mouseMoveEvent(QMouseEvent* e)
 {
+    if (m_magnifier) {
+        if (!m_activeButton) {
+            m_magnifier->show();
+            m_magnifier->update();
+        } else {
+            m_magnifier->hide();
+        }
+    }
+
     m_context.mousePos = e->pos();
     if (e->buttons() != Qt::LeftButton) {
         updateTool(activeButtonTool());
@@ -806,7 +821,8 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
     // If the key is a digit, change the tool size
     bool ok;
     int digit = e->text().toInt(&ok);
-    if (ok && e->modifiers() == Qt::NoModifier) { // digit received
+    if (ok && ((e->modifiers() == Qt::NoModifier) ||
+               e->modifiers() == Qt::KeypadModifier)) { // digit received
         m_toolSizeByKeyboard = 10 * m_toolSizeByKeyboard + digit;
         setToolSize(m_toolSizeByKeyboard);
         if (m_context.toolSize != m_toolSizeByKeyboard) {
@@ -1227,6 +1243,8 @@ void CaptureWidget::onToolSizeChanged(int t)
         drawToolsData();
         updateTool(toolItem);
     }
+    // Force a repaint to prevent artifacting
+    this->repaint();
 }
 
 void CaptureWidget::onToolSizeSettled(int size)
@@ -1586,8 +1604,9 @@ void CaptureWidget::restoreCircleCountState()
         if (toolItem->type() != CaptureTool::TYPE_CIRCLECOUNT) {
             continue;
         }
-        if (toolItem->count() > largest)
+        if (toolItem->count() > largest) {
             largest = toolItem->count();
+        }
     }
     m_context.circleCount = largest + 1;
 }

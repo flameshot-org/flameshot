@@ -43,7 +43,7 @@ void ColorPickerWidget::repaint(int i, QPainter& painter)
 {
     // draw the highlight when we have to draw the selected color
     if (i == m_selectedIndex) {
-        QColor c = QColor(m_uiColor);
+        auto c = QColor(m_uiColor);
         c.setAlpha(155);
         painter.setBrush(c);
         c.setAlpha(100);
