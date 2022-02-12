@@ -166,21 +166,21 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
         <source>Capture Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκκινητής Λήψης</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="22"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτα Κειμένου</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="39"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία Λήψης</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="61"/>
@@ -391,58 +391,58 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
         <source>Select Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε Προεπιλογή:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
         <source>Select preset using the spinbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε προεπιλογή χρησιμοποιώντας το spinbox</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαγραφή</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Πατήστε το κουμπί για να διαγράψετε την επιλεγμένη προεπιλογή</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη Προεπιλογής:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισαγάγετε το χρώμα χειροκίνητα ή επιλέξτε το χρησιμοποιώντας τον τροχό χρώματος</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
         <source>Press button to add preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Πατήστε το κουμπί για να προσθέσετε προεπιλογή</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="137"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η προσθήκη προκαθορισμένης ρύθμισης. Συμπληρώθηκε το μέγιστο όριο.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="138"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η κατάργηση της προεπιλογής. Συμπληρώθηκε το ελάχιστο όριο.</translation>
     </message>
 </context>
 <context>
@@ -980,62 +980,62 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="230"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφανίστε το μήνυμα βοήθειας στην αρχή στη λειτουργία λήψης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση του κουμπιού εναλλαγής του πλαϊνού πίνακα στη λειτουργία λήψης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Enable desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποίηση ειδοποιήσεων επιφάνειας εργασίας</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show icon in the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση εικονιδίου στο tray συστήματος</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="282"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Ζητήστε επιβεβαίωση για τη διαγραφή στιγμιότυπου οθόνης από τις πιο πρόσφατες μεταφορτώσεις</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Check for updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Έλεγχος ενημερώσεων αυτόματα</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτό σας επιτρέπει να τραβάτε στιγμιότυπα οθόνης του ίδιου του Flameshot, για παράδειγμα</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Εκκίνηση του Flameshot daemon κατά την έναρξη του υπολογιστή</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση του πλαισίου μηνύματος καλωσορίσματος στη μέση της οθόνης κατά τη λήψη ενός στιγμιότυπου οθόνης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση μιας μεγάλης προκαθορισμένης παλέτα χρωμάτων</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="404"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή της διεύθυνσης URL και κλείσιμο του παραθύρου μετά την επιτυχή μεταφόρτωση</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="416"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφού αντιγράψετε το στιγμιότυπο οθόνης, αποθηκεύστε το και σε αρχείο</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="423"/>
@@ -1081,7 +1081,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="575"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή της διαδρομής του αρχείου στο πρόχειρο μετά την αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
@@ -1112,22 +1112,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="635"/>
         <source>Show magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση μεγεθυντικού φακού</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="636"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποιήστε έναν μεγεθυντικό φακό ενώ επιλέγετε την περιοχή στιγμιότυπου οθόνης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Square shaped magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεγεθυντικός φακός τετράγωνου σχήματος</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="648"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάντε τον μεγεθυντικό φακό να έχει τετράγωνο σχήμα</translation>
     </message>
 </context>
 <context>
@@ -1261,7 +1261,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση εικόνας</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -1281,12 +1281,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατή η αποθήκευση του στιγμιότυπου οθόνης στο δίσκο.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
         <source>Screenshot saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το στιγμιότυπο οθόνης αποθηκεύτηκε.</translation>
     </message>
 </context>
 <context>
@@ -1367,49 +1367,49 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Άδεια</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>GPLv3+</source>
-        <translation type="unfinished"></translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Έκδοση</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>Flameshot v</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Πληροφορίες Λειτουργικού Συστήματος</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή πληροφοριών</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -2392,12 +2392,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation type="unfinished"></translation>
+        <translation>Ιστορικό Mεταφόρτωσης</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">Το ιστορικό στιγμιότυπων οθόνης είναι κενό</translation>
+        <translation>Το ιστορικό στιγμιότυπων οθόνης είναι κενό</translation>
     </message>
 </context>
 <context>
@@ -2407,38 +2407,38 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Φόρμα</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτα Κειμένου</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή διεύθυνσης URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα σε Πρόγραμμα περιήγησης</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Επιβεβαίωση για διαγραφή</translation>
+        <translation>Επιβεβαίωση για διαγραφή</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Είστε βέβαιοι ότι θέλετε να διαγράψετε ένα στιγμιότυπο οθόνης από τις πιο πρόσφατες μεταφορτώσεις και διακομιστή;</translation>
+        <translation>Είστε βέβαιοι ότι θέλετε να διαγράψετε ένα στιγμιότυπο οθόνης από τις πιο πρόσφατες μεταφορτώσεις και διακομιστή;</translation>
     </message>
 </context>
 <context>
@@ -2464,12 +2464,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Επεξεργαστής Χρωμάτων Διεπαφής χρήστη</translation>
+        <translation>Επεξεργαστής Χρωμάτων Διεπαφής χρήστη</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργαστής Επιλογέα Χρώματος</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
