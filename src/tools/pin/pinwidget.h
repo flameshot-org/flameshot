@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include <QGraphicsDropShadowEffect>
 #include <QWidget>
 
-class QVBoxLayout;
 class QLabel;
+class QVBoxLayout;
+class QGraphicsDropShadowEffect;
 
 class PinWidget : public QWidget
 {
@@ -17,15 +17,13 @@ public:
                        const QRect& geometry,
                        QWidget* parent = nullptr);
 
-    int margin() const;
-
 protected:
-    void wheelEvent(QWheelEvent* e);
-    void mouseDoubleClickEvent(QMouseEvent*);
-    void mousePressEvent(QMouseEvent*);
-    void mouseMoveEvent(QMouseEvent*);
-    void enterEvent(QEvent*);
-    void leaveEvent(QEvent*);
+    void wheelEvent(QWheelEvent* e) override;
+    void mouseDoubleClickEvent(QMouseEvent*) override;
+    void mousePressEvent(QMouseEvent*) override;
+    void mouseMoveEvent(QMouseEvent*) override;
+    void enterEvent(QEvent*) override;
+    void leaveEvent(QEvent*) override;
 
 private:
     void setScaledPixmapToLabel(const QSize& newSize,

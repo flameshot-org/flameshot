@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
+#include <QGraphicsDropShadowEffect>
 
 #include "pinwidget.h"
 #include "qguiappcurrentscreen.h"
@@ -11,6 +12,12 @@
 #include <QShortcut>
 #include <QVBoxLayout>
 #include <QWheelEvent>
+
+namespace
+{
+    static constexpr int MARGIN = 7;
+    static constexpr int BLUR_RADIUS =  2 * MARGIN;
+}
 
 PinWidget::PinWidget(const QPixmap& pixmap,
                      const QRect& geometry,
@@ -29,12 +36,11 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_hoverColor = conf.contrastUiColor();
 
     m_layout = new QVBoxLayout(this);
-    const int margin = this->margin();
-    m_layout->setContentsMargins(margin, margin, margin, margin);
+    m_layout->setContentsMargins(MARGIN, MARGIN, MARGIN, MARGIN);
 
     m_shadowEffect = new QGraphicsDropShadowEffect(this);
     m_shadowEffect->setColor(m_baseColor);
-    m_shadowEffect->setBlurRadius(2 * margin);
+    m_shadowEffect->setBlurRadius(BLUR_RADIUS);
     m_shadowEffect->setOffset(0, 0);
     setGraphicsEffect(m_shadowEffect);
 
@@ -52,7 +58,7 @@ PinWidget::PinWidget(const QPixmap& pixmap,
         devicePixelRatio = currentScreen->devicePixelRatio();
     }
 #endif
-    const int m = margin * devicePixelRatio;
+    const int m = MARGIN * devicePixelRatio;
     QRect adjusted_pos = geometry + QMargins(m, m, m, m);
     setGeometry(adjusted_pos);
 #if defined(Q_OS_MACOS)
@@ -69,11 +75,6 @@ PinWidget::PinWidget(const QPixmap& pixmap,
         move(adjusted_pos.x(), adjusted_pos.y());
     }
 #endif
-}
-
-int PinWidget::margin() const
-{
-    return 7;
 }
 
 void PinWidget::wheelEvent(QWheelEvent* event)
@@ -135,14 +136,12 @@ void PinWidget::setScaledPixmapToLabel(const QSize& newSize,
                                        const qreal scale,
                                        const bool expanding)
 {
-    ConfigHandler config;
-    QPixmap scaledPixmap;
     const auto aspectRatio =
       expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
-    const auto transformType = config.antialiasingPinZoom()
+    const auto transformType = ConfigHandler().antialiasingPinZoom()
                                  ? Qt::SmoothTransformation
                                  : Qt::FastTransformation;
-    scaledPixmap = m_pixmap.scaled(newSize * scale, aspectRatio, transformType);
+    QPixmap scaledPixmap = m_pixmap.scaled(newSize * scale, aspectRatio, transformType);
     scaledPixmap.setDevicePixelRatio(scale);
     m_label->setPixmap(scaledPixmap);
 }
