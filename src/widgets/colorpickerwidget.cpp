@@ -122,7 +122,8 @@ void ColorPickerWidget::initColorPicker()
     // extraSize represents the extra space needed for the highlight of the
     // selected color.
     const int extraSize = 6;
-    double radius = GlobalValues::buttonBaseSize() * 2;
+    const double slope = 3;
+    double radius = slope * m_colorList.size() + GlobalValues::buttonBaseSize();
     setMinimumSize(radius * 2 + m_colorAreaSize + extraSize,
                    radius * 2 + m_colorAreaSize + extraSize);
     resize(radius * 2 + m_colorAreaSize + extraSize,

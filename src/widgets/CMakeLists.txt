@@ -21,7 +21,6 @@ target_sources(
         uploadlineitem.h
         updatenotificationwidget.h
         colorpickerwidget.h
-        colorspinbox.h
         imguploaddialog.h
         capture/capturetoolobjects.h
 )
@@ -39,7 +38,6 @@ target_sources(
         uploadlineitem.cpp
         updatenotificationwidget.cpp
         colorpickerwidget.cpp
-        colorspinbox.cpp
         imguploaddialog.cpp
         capture/capturetoolobjects.cpp
 )
