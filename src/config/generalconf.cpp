@@ -47,13 +47,14 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadWithoutConfirmation();
     initUseJpgForClipboard();
     initSaveAfterCopy();
-    inituploadHistoryMax();
+    initUploadHistoryMax();
     initUndoLimit();
     initAllowMultipleGuiInstances();
 #if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
 #endif
     initPredefinedColorPaletteLarge();
+    initCopyOnDoubleClick();
 
     m_layout->addStretch();
 
@@ -395,6 +396,16 @@ void GeneralConf::initPredefinedColorPaletteLarge()
           ConfigHandler().setPredefinedColorPaletteLarge(checked);
       });
 }
+void GeneralConf::initCopyOnDoubleClick()
+{
+    m_copyOnDoubleClick = new QCheckBox(tr("Copy on double click"), this);
+    m_copyOnDoubleClick->setToolTip(tr("Enable Copy on Double Click"));
+    m_scrollAreaLayout->addWidget(m_copyOnDoubleClick);
+
+    connect(m_copyOnDoubleClick, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyOnDoubleClick(checked);
+    });
+}
 
 void GeneralConf::initCopyAndCloseAfterUpload()
 {
@@ -484,7 +495,7 @@ void GeneralConf::historyConfirmationToDelete(bool checked)
     ConfigHandler().setHistoryConfirmationToDelete(checked);
 }
 
-void GeneralConf::inituploadHistoryMax()
+void GeneralConf::initUploadHistoryMax()
 {
     auto* box = new QGroupBox(tr("Latest Uploads Max Size"));
     box->setFlat(true);

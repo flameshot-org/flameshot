@@ -673,7 +673,8 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     } else if (m_selection->geometry().contains(event->pos())) {
-        if (event->button() == Qt::LeftButton) {
+        if ((event->button() == Qt::LeftButton) &&
+            (m_config.copyOnDoubleClick())) {
             CopyTool copyTool;
             connect(&copyTool,
                     &CopyTool::requestAction,
