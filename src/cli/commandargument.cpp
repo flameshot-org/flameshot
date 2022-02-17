@@ -3,12 +3,13 @@
 
 #include "commandargument.h"
 
-CommandArgument::CommandArgument() {}
+#include <utility>
 
-CommandArgument::CommandArgument(const QString& name,
-                                 const QString& description)
-  : m_name(name)
-  , m_description(description)
+CommandArgument::CommandArgument() = default;
+
+CommandArgument::CommandArgument(QString name, QString description)
+  : m_name(std::move(name))
+  , m_description(std::move(description))
 {}
 
 void CommandArgument::setName(const QString& name)

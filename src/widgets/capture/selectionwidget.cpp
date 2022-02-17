@@ -11,12 +11,13 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QTimer>
+#include <utility>
 
 #define MARGIN (m_THandle.width())
 
-SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
+SelectionWidget::SelectionWidget(QColor c, QWidget* parent)
   : QWidget(parent)
-  , m_color(c)
+  , m_color(std::move(c))
   , m_activeSide(NO_SIDE)
   , m_ignoreMouse(false)
 {

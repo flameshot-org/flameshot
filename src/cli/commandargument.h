@@ -9,7 +9,7 @@ class CommandArgument
 {
 public:
     CommandArgument();
-    explicit CommandArgument(const QString& name, const QString& description);
+    explicit CommandArgument(QString name, QString description);
 
     void setName(const QString& name);
     QString name() const;

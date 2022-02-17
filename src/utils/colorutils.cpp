@@ -18,7 +18,7 @@ QColor ColorUtils::contrastColor(const QColor& c)
 {
     int change = colorIsDark(c) ? 30 : -45;
 
-    return QColor(qBound(0, c.red() + change, 255),
-                  qBound(0, c.green() + change, 255),
-                  qBound(0, c.blue() + change, 255));
+    return { qBound(0, c.red() + change, 255),
+             qBound(0, c.green() + change, 255),
+             qBound(0, c.blue() + change, 255) };
 }

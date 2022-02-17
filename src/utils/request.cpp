@@ -18,4 +18,5 @@ OrgFreedesktopPortalRequestInterface::OrgFreedesktopPortalRequestInterface(
                            parent)
 {}
 
-OrgFreedesktopPortalRequestInterface::~OrgFreedesktopPortalRequestInterface() {}
+OrgFreedesktopPortalRequestInterface::~OrgFreedesktopPortalRequestInterface() =
+  default;

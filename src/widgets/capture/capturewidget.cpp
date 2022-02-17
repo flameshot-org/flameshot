@@ -1696,7 +1696,7 @@ void CaptureWidget::redo()
 QRect CaptureWidget::extendedSelection() const
 {
     if (!m_selection->isVisible()) {
-        return QRect();
+        return {};
     }
     QRect r = m_selection->geometry();
     return extendedRect(r);
@@ -1705,10 +1705,10 @@ QRect CaptureWidget::extendedSelection() const
 QRect CaptureWidget::extendedRect(const QRect& r) const
 {
     auto devicePixelRatio = m_context.screenshot.devicePixelRatio();
-    return QRect(r.left() * devicePixelRatio,
-                 r.top() * devicePixelRatio,
-                 r.width() * devicePixelRatio,
-                 r.height() * devicePixelRatio);
+    return { static_cast<int>(r.left() * devicePixelRatio),
+             static_cast<int>(r.top() * devicePixelRatio),
+             static_cast<int>(r.width() * devicePixelRatio),
+             static_cast<int>(r.height() * devicePixelRatio) };
 }
 
 QRect CaptureWidget::paddedUpdateRect(const QRect& r) const

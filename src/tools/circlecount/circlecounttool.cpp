@@ -46,10 +46,10 @@ QRect CircleCountTool::boundingRect() const
         return {};
     }
     int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
-    return QRect(points().first.x() - bubble_size,
-                 points().first.y() - bubble_size,
-                 bubble_size * 2,
-                 bubble_size * 2);
+    return { points().first.x() - bubble_size,
+             points().first.y() - bubble_size,
+             bubble_size * 2,
+             bubble_size * 2 };
 }
 
 QString CircleCountTool::name() const

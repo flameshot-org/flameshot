@@ -3,26 +3,28 @@
 
 #include "commandoption.h"
 
+#include <utility>
+
 CommandOption::CommandOption(const QString& name,
-                             const QString& description,
-                             const QString& valueName,
-                             const QString& defaultValue)
+                             QString description,
+                             QString valueName,
+                             QString defaultValue)
   : m_names(name)
-  , m_description(description)
-  , m_valueName(valueName)
-  , m_value(defaultValue)
+  , m_description(std::move(description))
+  , m_valueName(std::move(valueName))
+  , m_value(std::move(defaultValue))
 {
     m_checker = [](QString const&) { return true; };
 }
 
-CommandOption::CommandOption(const QStringList& names,
-                             const QString& description,
-                             const QString& valueName,
-                             const QString& defaultValue)
-  : m_names(names)
-  , m_description(description)
-  , m_valueName(valueName)
-  , m_value(defaultValue)
+CommandOption::CommandOption(QStringList names,
+                             QString description,
+                             QString valueName,
+                             QString defaultValue)
+  : m_names(std::move(names))
+  , m_description(std::move(description))
+  , m_valueName(std::move(valueName))
+  , m_value(std::move(defaultValue))
 {
     m_checker = [](QString const&) -> bool { return true; };
 }

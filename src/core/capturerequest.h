@@ -31,7 +31,7 @@ public:
 
     CaptureRequest(CaptureMode mode,
                    const uint delay = 0,
-                   const QVariant& data = QVariant(),
+                   QVariant data = QVariant(),
                    ExportTask tasks = NO_TASK);
 
     void setStaticID(uint id);

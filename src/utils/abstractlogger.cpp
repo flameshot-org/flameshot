@@ -32,17 +32,17 @@ AbstractLogger::~AbstractLogger()
 
 AbstractLogger AbstractLogger::info(int targets)
 {
-    return AbstractLogger(Info, targets);
+    return { Info, targets };
 }
 
 AbstractLogger AbstractLogger::warning(int targets)
 {
-    return AbstractLogger(Warning, targets);
+    return { Warning, targets };
 }
 
 AbstractLogger AbstractLogger::error(int targets)
 {
-    return AbstractLogger(Error, targets);
+    return { Error, targets };
 }
 
 AbstractLogger& AbstractLogger::sendMessage(QString msg, Channel channel)

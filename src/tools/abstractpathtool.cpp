@@ -126,8 +126,8 @@ void AbstractPathTool::move(const QPoint& mousePos)
     }
     QPoint basePos = *pos();
     QPoint offset = mousePos - basePos;
-    for (int index = 0; index < m_points.size(); ++index) {
-        m_points[index] += offset;
+    for (auto& m_point : m_points) {
+        m_point += offset;
     }
 }
 

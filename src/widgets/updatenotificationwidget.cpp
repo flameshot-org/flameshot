@@ -12,14 +12,15 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWheelEvent>
+#include <utility>
 
 UpdateNotificationWidget::UpdateNotificationWidget(
   QWidget* parent,
   const QString& appLatestVersion,
-  const QString& appLatestUrl)
+  QString appLatestUrl)
   : QWidget(parent)
   , m_appLatestVersion(appLatestVersion)
-  , m_appLatestUrl(appLatestUrl)
+  , m_appLatestUrl(std::move(appLatestUrl))
   , m_layout(nullptr)
 {
     setMinimumSize(400, 100);

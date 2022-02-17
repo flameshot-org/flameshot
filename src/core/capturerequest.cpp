@@ -14,15 +14,16 @@
 #include <QDateTime>
 #include <QVector>
 #include <stdexcept>
+#include <utility>
 
 CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
                                const uint delay,
-                               const QVariant& data,
+                               QVariant data,
                                CaptureRequest::ExportTask tasks)
   : m_mode(mode)
   , m_delay(delay)
   , m_tasks(tasks)
-  , m_data(data)
+  , m_data(std::move(data))
 {}
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
