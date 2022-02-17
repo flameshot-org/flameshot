@@ -12,14 +12,14 @@ class CommandOption
 {
 public:
     CommandOption(const QString& name,
-                  const QString& description,
-                  const QString& valueName = QString(),
-                  const QString& defaultValue = QString());
+                  QString description,
+                  QString valueName = QString(),
+                  QString defaultValue = QString());
 
-    CommandOption(const QStringList& names,
-                  const QString& description,
-                  const QString& valueName = QString(),
-                  const QString& defaultValue = QString());
+    CommandOption(QStringList names,
+                  QString description,
+                  QString valueName = QString(),
+                  QString defaultValue = QString());
 
     void setName(const QString& name);
     void setNames(const QStringList& names);

@@ -50,8 +50,9 @@ QLine getShorterLine(QPoint p1, QPoint p2, const int thickness)
         // looks not very bad
         val = thickness / 4;
         l.setLength(val);
-    } else
+    } else {
         l.setLength(l.length() + thickness * 2 - val);
+    }
     return l.toLine();
 }
 

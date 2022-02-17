@@ -99,7 +99,7 @@ private:
 class String : public ValueHandler
 {
 public:
-    String(const QString& def);
+    String(QString def);
     bool check(const QVariant&) override;
     QVariant fallback() override;
     QString expected() override;
@@ -111,7 +111,7 @@ private:
 class Color : public ValueHandler
 {
 public:
-    Color(const QColor& def);
+    Color(QColor def);
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
