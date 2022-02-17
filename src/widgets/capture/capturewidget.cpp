@@ -673,13 +673,16 @@ void CaptureWidget::mouseDoubleClickEvent(QMouseEvent* event)
             m_panel->setToolWidget(m_activeTool->configurationWidget());
         }
     } else if (m_selection->geometry().contains(event->pos())) {
-        CopyTool copyTool;
-        connect(&copyTool,
-                &CopyTool::requestAction,
-                this,
-                &CaptureWidget::handleToolSignal);
-        copyTool.pressed(m_context);
-        qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        if ((event->button() == Qt::LeftButton) &&
+            (m_config.copyOnDoubleClick())) {
+            CopyTool copyTool;
+            connect(&copyTool,
+                    &CopyTool::requestAction,
+                    this,
+                    &CaptureWidget::handleToolSignal);
+            copyTool.pressed(m_context);
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+        }
     }
 }
 

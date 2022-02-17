@@ -162,8 +162,10 @@ void ShortcutsWidget::loadShortcuts()
         QString shortcutName = QVariant::fromValue(t).toString();
         appendShortcut(shortcutName, tool->description());
         if (shortcutName == "TYPE_COPY") {
-            m_shortcuts << (QStringList() << "" << tool->description()
-                                          << "Left Double-click");
+            if (m_config.copyOnDoubleClick()) {
+                m_shortcuts << (QStringList() << "" << tool->description()
+                                              << "Left Double-click");
+            }
         }
         delete tool;
     }
