@@ -49,5 +49,5 @@ QSize LauncherItemDelegate::sizeHint(const QStyleOptionViewItem& option,
     Q_UNUSED(option)
     Q_UNUSED(index)
     const int size = GlobalValues::buttonBaseSize();
-    return QSize(static_cast<int>(size * 3.2), static_cast<int>(size * 3.7));
+    return { static_cast<int>(size * 3.2), static_cast<int>(size * 3.7) };
 }

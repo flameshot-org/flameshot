@@ -67,10 +67,10 @@ QString optionsToString(const QList<CommandOption>& options,
     if (!arguments.isEmpty()) {
         result += QObject::tr("Arguments") + ":\n";
     }
-    for (int i = 0; i < arguments.length(); ++i) {
+    for (const auto& argument : arguments) {
         result += QStringLiteral("  %1  %2\n")
-                    .arg(arguments.at(i).name().leftJustified(size, ' '))
-                    .arg(arguments.at(i).description());
+                    .arg(argument.name().leftJustified(size, ' '))
+                    .arg(argument.description());
     }
     return result;
 }
@@ -363,9 +363,8 @@ CommandLineParser::Node* CommandLineParser::findParent(
     }
     // find the parent in the subNodes recursively
     Node* res = nullptr;
-    for (auto i = m_parseTree.subNodes.begin(); i != m_parseTree.subNodes.end();
-         ++i) {
-        res = recursiveParentSearch(parent, *i);
+    for (auto& subNode : m_parseTree.subNodes) {
+        res = recursiveParentSearch(parent, subNode);
         if (res != nullptr) {
             break;
         }
@@ -381,8 +380,8 @@ CommandLineParser::Node* CommandLineParser::recursiveParentSearch(
     if (node.argument == parent) {
         res = &node;
     } else {
-        for (auto i = node.subNodes.begin(); i != node.subNodes.end(); ++i) {
-            res = recursiveParentSearch(parent, *i);
+        for (auto& subNode : node.subNodes) {
+            res = recursiveParentSearch(parent, subNode);
             if (res != nullptr) {
                 break;
             }
