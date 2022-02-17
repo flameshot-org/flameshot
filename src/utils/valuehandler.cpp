@@ -23,7 +23,7 @@ QVariant ValueHandler::value(const QVariant& val)
 
 QVariant ValueHandler::fallback()
 {
-    return QVariant();
+    return {};
 }
 
 QVariant ValueHandler::representation(const QVariant& val)
@@ -68,8 +68,8 @@ QString Bool::expected()
 
 // STRING
 
-String::String(const QString& def)
-  : m_def(def)
+String::String(QString def)
+  : m_def(std::move(def))
 {}
 
 bool String::check(const QVariant&)
@@ -89,8 +89,8 @@ QString String::expected()
 
 // COLOR
 
-Color::Color(const QColor& def)
-  : m_def(def)
+Color::Color(QColor def)
+  : m_def(std::move(def))
 {}
 
 bool Color::check(const QVariant& val)
@@ -512,6 +512,7 @@ bool Region::check(const QVariant& val)
 }
 
 #include <QApplication> // TODO remove after FIXME (see below)
+#include <utility>
 
 QVariant Region::process(const QVariant& val)
 {

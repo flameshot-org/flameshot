@@ -20,7 +20,7 @@ class UpdateNotificationWidget : public QWidget
 public:
     explicit UpdateNotificationWidget(QWidget* parent,
                                       const QString& appLatestVersion,
-                                      const QString& appLatestUrl);
+                                      QString appLatestUrl);
     void setAppLatestVersion(const QString& latestVersion);
 
     void hide();
