@@ -272,7 +272,8 @@ void CaptureWidget::initButtons()
 {
     auto allButtonTypes = CaptureToolButton::getIterableButtonTypes();
     auto visibleButtonTypes = m_config.buttons();
-    if (m_context.request.tasks() == CaptureRequest::NO_TASK) {
+    if ((m_context.request.tasks() == CaptureRequest::NO_TASK) ||
+        (m_context.request.tasks() == CaptureRequest::PRINT_GEOMETRY)) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
     } else {
