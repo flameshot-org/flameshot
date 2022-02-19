@@ -432,7 +432,7 @@ Press Space to open the side panel.</source>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="137"/>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
@@ -2469,7 +2469,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">屏幕截图历史为空</translation>
+        <translation>屏幕截图历史为空</translation>
     </message>
 </context>
 <context>
@@ -2493,7 +2493,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">复制链接</translation>
+        <translation>复制链接</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
@@ -2505,12 +2505,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">确认进行删除</translation>
+        <translation>确认进行删除</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">您确认要从最近的上传历史和服务器上删除该屏幕截图吗？</translation>
+        <translation>您确认要从最近的上传和服务器上删除该屏幕截图吗？</translation>
     </message>
 </context>
 <context>
@@ -2536,7 +2536,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">用户界面颜色编辑器</translation>
+        <translation>用户界面颜色编辑器</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
