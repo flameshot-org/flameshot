@@ -172,13 +172,13 @@ void PinWidget::paintEvent(QPaintEvent* event)
                                  : Qt::FastTransformation;
     const qreal iw = m_pixmap.width();
     const qreal ih = m_pixmap.height();
-    const qreal nw = qBound(MIN_SIZE, iw * m_currentStepScaleFactor * m_scaleFactor, static_cast<qreal>(maximumWidth()));
-    const qreal nh = qBound(MIN_SIZE, ih * m_currentStepScaleFactor * m_scaleFactor, static_cast<qreal>(maximumHeight()));
-    const QPixmap pix =
-      m_pixmap.scaled(nw,
-                      nh,
-                      aspectRatio,
-                      transformType);
+    const qreal nw = qBound(MIN_SIZE,
+                            iw * m_currentStepScaleFactor * m_scaleFactor,
+                            static_cast<qreal>(maximumWidth()));
+    const qreal nh = qBound(MIN_SIZE,
+                            ih * m_currentStepScaleFactor * m_scaleFactor,
+                            static_cast<qreal>(maximumHeight()));
+    const QPixmap pix = m_pixmap.scaled(nw, nh, aspectRatio, transformType);
     m_label->setPixmap(pix);
     adjustSize();
 }
