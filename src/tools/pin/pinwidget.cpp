@@ -83,7 +83,12 @@ PinWidget::PinWidget(const QPixmap& pixmap,
 bool PinWidget::scrollEvent(QWheelEvent* event)
 {
     const auto phase = event->phase();
-    if (phase == Qt::ScrollPhase::ScrollUpdate) {
+    if (phase == Qt::ScrollPhase::ScrollUpdate
+#if defined(Q_OS_LINUX)
+        // Linux is getting only NoScrollPhase events.
+        or phase == Qt::ScrollPhase::NoScrollPhase
+#endif
+            ) {
         const auto angle = event->angleDelta();
         if (angle.y() == 0) {
             return true;
@@ -93,7 +98,12 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
                                      : m_currentStepScaleFactor - STEP;
         m_expanding = m_currentStepScaleFactor >= 1.0;
     }
+#if defined(Q_OS_MACOS)
+    // ScrollEnd is currently supported only on Mac OSX
     if (phase == Qt::ScrollPhase::ScrollEnd) {
+#else
+    else{
+#endif
         m_scaleFactor *= m_currentStepScaleFactor;
         m_currentStepScaleFactor = 1.0;
         m_expanding = false;
