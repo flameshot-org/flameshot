@@ -26,11 +26,11 @@ protected:
     void enterEvent(QEvent*) override;
     void leaveEvent(QEvent*) override;
 
-    bool event(QEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
+    bool event(QEvent* event) override;
+    void paintEvent(QPaintEvent* event) override;
 
 private:
-    bool gestureEvent(QGestureEvent *event);
+    bool gestureEvent(QGestureEvent* event);
     bool scrollEvent(QWheelEvent* e);
     void pinchTriggered(QPinchGesture*);
 
@@ -42,7 +42,7 @@ private:
     QGraphicsDropShadowEffect* m_shadowEffect;
     QColor m_baseColor, m_hoverColor;
 
-    bool m_expanding{false};
-    qreal m_scaleFactor{1};
-    qreal m_currentStepScaleFactor{1};
+    bool m_expanding{ false };
+    qreal m_scaleFactor{ 1 };
+    qreal m_currentStepScaleFactor{ 1 };
 };

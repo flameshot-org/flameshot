@@ -15,11 +15,10 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
-namespace
-{
-    static constexpr int MARGIN = 7;
-    static constexpr int BLUR_RADIUS =  2 * MARGIN;
-    static constexpr qreal STEP = 0.03;
+namespace {
+static constexpr int MARGIN = 7;
+static constexpr int BLUR_RADIUS = 2 * MARGIN;
+static constexpr qreal STEP = 0.03;
 }
 
 PinWidget::PinWidget(const QPixmap& pixmap,
@@ -86,11 +85,12 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
     const auto phase = event->phase();
     if (phase == Qt::ScrollPhase::ScrollUpdate) {
         const auto angle = event->angleDelta();
-        if(angle.y() == 0)
-        {
+        if (angle.y() == 0) {
             return true;
         }
-        m_currentStepScaleFactor = angle.y() > 0 ? m_currentStepScaleFactor + STEP : m_currentStepScaleFactor - STEP;
+        m_currentStepScaleFactor = angle.y() > 0
+                                     ? m_currentStepScaleFactor + STEP
+                                     : m_currentStepScaleFactor - STEP;
         m_expanding = m_currentStepScaleFactor >= 1.0;
     }
     if (phase == Qt::ScrollPhase::ScrollEnd) {
@@ -134,29 +134,25 @@ void PinWidget::mouseMoveEvent(QMouseEvent* e)
          m_dragStart.y() + delta.y() - offsetH);
 }
 
-bool PinWidget::gestureEvent(QGestureEvent *event)
+bool PinWidget::gestureEvent(QGestureEvent* event)
 {
-    if (QGesture *pinch = event->gesture(Qt::PinchGesture))
-    {
-        pinchTriggered(static_cast<QPinchGesture *>(pinch));
+    if (QGesture* pinch = event->gesture(Qt::PinchGesture)) {
+        pinchTriggered(static_cast<QPinchGesture*>(pinch));
     }
     return true;
 }
 
-bool PinWidget::event(QEvent *event)
+bool PinWidget::event(QEvent* event)
 {
-    if (event->type() == QEvent::Gesture)
-    {
+    if (event->type() == QEvent::Gesture) {
         return gestureEvent(static_cast<QGestureEvent*>(event));
-    }
-    else if(event->type() == QEvent::Wheel)
-    {
+    } else if (event->type() == QEvent::Wheel) {
         return scrollEvent(static_cast<QWheelEvent*>(event));
     }
     return QWidget::event(event);
 }
 
-void PinWidget::paintEvent(QPaintEvent * event)
+void PinWidget::paintEvent(QPaintEvent* event)
 {
     const auto aspectRatio =
       m_expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
@@ -165,15 +161,16 @@ void PinWidget::paintEvent(QPaintEvent * event)
                                  : Qt::FastTransformation;
     const qreal iw = m_pixmap.width();
     const qreal ih = m_pixmap.height();
-    const QPixmap pix = m_pixmap.scaled(iw * m_currentStepScaleFactor * m_scaleFactor,
-                    ih * m_currentStepScaleFactor * m_scaleFactor,
-                    aspectRatio,
-                    transformType);
+    const QPixmap pix =
+      m_pixmap.scaled(iw * m_currentStepScaleFactor * m_scaleFactor,
+                      ih * m_currentStepScaleFactor * m_scaleFactor,
+                      aspectRatio,
+                      transformType);
     m_label->setPixmap(pix);
     adjustSize();
 }
 
-void PinWidget::pinchTriggered(QPinchGesture *gesture)
+void PinWidget::pinchTriggered(QPinchGesture* gesture)
 {
     const QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
     if (changeFlags & QPinchGesture::ScaleFactorChanged) {
