@@ -11,9 +11,6 @@ class QGestureEvent;
 class QPinchGesture;
 class QGraphicsDropShadowEffect;
 
-#include <QLoggingCategory>
-Q_DECLARE_LOGGING_CATEGORY(lcExample)
-
 class PinWidget : public QWidget
 {
     Q_OBJECT
@@ -37,10 +34,6 @@ private:
     bool scrollEvent(QWheelEvent* e);
     void pinchTriggered(QPinchGesture*);
 
-    void setScaledPixmapToLabel(const QSize& newSize,
-                                const qreal scale,
-                                const bool expanding);
-
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
     QLabel* m_label;
@@ -49,7 +42,6 @@ private:
     QGraphicsDropShadowEffect* m_shadowEffect;
     QColor m_baseColor, m_hoverColor;
 
-    bool m_gestureEvent{false};
     bool m_expanding{false};
     qreal scaleFactor{1};
     qreal currentStepScaleFactor{1};

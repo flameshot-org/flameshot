@@ -8,15 +8,12 @@
 #include "qguiappcurrentscreen.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
-#include <QApplication>
+
 #include <QLabel>
 #include <QScreen>
 #include <QShortcut>
 #include <QVBoxLayout>
 #include <QWheelEvent>
-
-
-Q_LOGGING_CATEGORY(lcExample, "mycat")
 
 namespace
 {
@@ -86,7 +83,23 @@ PinWidget::PinWidget(const QPixmap& pixmap,
 
 bool PinWidget::scrollEvent(QWheelEvent* event)
 {
-    return false;
+    const auto phase = event->phase();
+    if (phase == Qt::ScrollPhase::ScrollUpdate) {
+        const auto angle = event->angleDelta();
+        if(angle.y() == 0)
+        {
+            return true;
+        }
+        currentStepScaleFactor = angle.y() > 0 ? currentStepScaleFactor + 0.03 : currentStepScaleFactor - 0.03;
+        m_expanding = currentStepScaleFactor > 1.0;
+    }
+    if (phase == Qt::ScrollPhase::ScrollEnd) {
+        scaleFactor *= currentStepScaleFactor;
+        currentStepScaleFactor = 1;
+        m_expanding = false;
+    }
+    update();
+    return true;
 }
 
 void PinWidget::enterEvent(QEvent*)
@@ -123,19 +136,6 @@ void PinWidget::mouseMoveEvent(QMouseEvent* e)
          m_dragStart.y() + delta.y() - offsetH);
 }
 
-void PinWidget::setScaledPixmapToLabel(const QSize& newSize,
-                                       const qreal scale,
-                                       const bool expanding)
-{
-    const auto aspectRatio =
-      expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
-    const auto transformType = ConfigHandler().antialiasingPinZoom()
-                                 ? Qt::SmoothTransformation
-                                 : Qt::FastTransformation;
-    QPixmap scaledPixmap = m_pixmap.scaled(newSize * scale, aspectRatio, transformType);
-    m_label->setPixmap(scaledPixmap);
-}
-
 bool PinWidget::gestureEvent(QGestureEvent *event)
 {
     if (QGesture *pinch = event->gesture(Qt::PinchGesture))
@@ -147,53 +147,45 @@ bool PinWidget::gestureEvent(QGestureEvent *event)
 
 bool PinWidget::event(QEvent *event)
 {
-    if(event->type() == QEvent::Wheel)
-    {
-        return scrollEvent(static_cast<QWheelEvent*>(event));
-    }
-    else if (event->type() == QEvent::Gesture)
+    if (event->type() == QEvent::Gesture)
     {
         return gestureEvent(static_cast<QGestureEvent*>(event));
+    }
+    else if(event->type() == QEvent::Wheel)
+    {
+        return scrollEvent(static_cast<QWheelEvent*>(event));
     }
     return QWidget::event(event);
 }
 
 void PinWidget::paintEvent(QPaintEvent * event)
 {
-
     const auto aspectRatio =
       m_expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
     const auto transformType = ConfigHandler().antialiasingPinZoom()
                                  ? Qt::SmoothTransformation
                                  : Qt::FastTransformation;
-    if(m_gestureEvent)
-    {
-        const qreal iw = m_pixmap.width();
-        const qreal ih = m_pixmap.height();
-        const QPixmap pix = m_pixmap.scaled(iw * currentStepScaleFactor * scaleFactor,
-                            ih * currentStepScaleFactor * scaleFactor,
-                            aspectRatio,
-                            transformType);
-        m_label->setPixmap(pix);
-        adjustSize();
-    }
+    const qreal iw = m_pixmap.width();
+    const qreal ih = m_pixmap.height();
+    const QPixmap pix = m_pixmap.scaled(iw * currentStepScaleFactor * scaleFactor,
+                    ih * currentStepScaleFactor * scaleFactor,
+                    aspectRatio,
+                    transformType);
+    m_label->setPixmap(pix);
+    adjustSize();
 }
 
 void PinWidget::pinchTriggered(QPinchGesture *gesture)
 {
-    QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+    const QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
     if (changeFlags & QPinchGesture::ScaleFactorChanged) {
         currentStepScaleFactor = gesture->totalScaleFactor();
         m_expanding = currentStepScaleFactor > gesture->lastScaleFactor();
     }
-    if (gesture->state() == Qt::GestureStarted) {
-        m_gestureEvent = true;
-    }
-    else if (gesture->state() == Qt::GestureFinished) {
+    if (gesture->state() == Qt::GestureFinished) {
         scaleFactor *= currentStepScaleFactor;
         currentStepScaleFactor = 1;
         m_expanding = false;
-        m_gestureEvent = false;
     }
     update();
 }
