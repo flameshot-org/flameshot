@@ -88,7 +88,7 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
         // Linux is getting only NoScrollPhase events.
         or phase == Qt::ScrollPhase::NoScrollPhase
 #endif
-            ) {
+    ) {
         const auto angle = event->angleDelta();
         if (angle.y() == 0) {
             return true;
@@ -102,7 +102,7 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
     // ScrollEnd is currently supported only on Mac OSX
     if (phase == Qt::ScrollPhase::ScrollEnd) {
 #else
-    else{
+    else {
 #endif
         m_scaleFactor *= m_currentStepScaleFactor;
         m_currentStepScaleFactor = 1.0;
