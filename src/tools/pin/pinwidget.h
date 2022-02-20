@@ -43,6 +43,6 @@ private:
     QColor m_baseColor, m_hoverColor;
 
     bool m_expanding{false};
-    qreal scaleFactor{1};
-    qreal currentStepScaleFactor{1};
+    qreal m_scaleFactor{1};
+    qreal m_currentStepScaleFactor{1};
 };

@@ -19,6 +19,7 @@ namespace
 {
     static constexpr int MARGIN = 7;
     static constexpr int BLUR_RADIUS =  2 * MARGIN;
+    static constexpr qreal STEP = 0.03;
 }
 
 PinWidget::PinWidget(const QPixmap& pixmap,
@@ -89,12 +90,12 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
         {
             return true;
         }
-        currentStepScaleFactor = angle.y() > 0 ? currentStepScaleFactor + 0.03 : currentStepScaleFactor - 0.03;
-        m_expanding = currentStepScaleFactor > 1.0;
+        m_currentStepScaleFactor = angle.y() > 0 ? m_currentStepScaleFactor + STEP : m_currentStepScaleFactor - STEP;
+        m_expanding = m_currentStepScaleFactor >= 1.0;
     }
     if (phase == Qt::ScrollPhase::ScrollEnd) {
-        scaleFactor *= currentStepScaleFactor;
-        currentStepScaleFactor = 1;
+        m_scaleFactor *= m_currentStepScaleFactor;
+        m_currentStepScaleFactor = 1.0;
         m_expanding = false;
     }
     update();
@@ -113,8 +114,6 @@ void PinWidget::leaveEvent(QEvent*)
 
 void PinWidget::mouseDoubleClickEvent(QMouseEvent*)
 {
-    scaleFactor = 1;
-    currentStepScaleFactor = 1;
     update();
     close();
 }
@@ -166,8 +165,8 @@ void PinWidget::paintEvent(QPaintEvent * event)
                                  : Qt::FastTransformation;
     const qreal iw = m_pixmap.width();
     const qreal ih = m_pixmap.height();
-    const QPixmap pix = m_pixmap.scaled(iw * currentStepScaleFactor * scaleFactor,
-                    ih * currentStepScaleFactor * scaleFactor,
+    const QPixmap pix = m_pixmap.scaled(iw * m_currentStepScaleFactor * m_scaleFactor,
+                    ih * m_currentStepScaleFactor * m_scaleFactor,
                     aspectRatio,
                     transformType);
     m_label->setPixmap(pix);
@@ -178,14 +177,13 @@ void PinWidget::pinchTriggered(QPinchGesture *gesture)
 {
     const QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
     if (changeFlags & QPinchGesture::ScaleFactorChanged) {
-        currentStepScaleFactor = gesture->totalScaleFactor();
-        m_expanding = currentStepScaleFactor > gesture->lastScaleFactor();
+        m_currentStepScaleFactor = gesture->totalScaleFactor();
+        m_expanding = m_currentStepScaleFactor > gesture->lastScaleFactor();
     }
     if (gesture->state() == Qt::GestureFinished) {
-        scaleFactor *= currentStepScaleFactor;
-        currentStepScaleFactor = 1;
+        m_scaleFactor *= m_currentStepScaleFactor;
+        m_currentStepScaleFactor = 1;
         m_expanding = false;
     }
     update();
 }
-
