@@ -19,6 +19,7 @@ namespace {
 static constexpr int MARGIN = 7;
 static constexpr int BLUR_RADIUS = 2 * MARGIN;
 static constexpr qreal STEP = 0.03;
+static constexpr qreal MIN_SIZE = 100.0;
 }
 
 PinWidget::PinWidget(const QPixmap& pixmap,
@@ -171,9 +172,11 @@ void PinWidget::paintEvent(QPaintEvent* event)
                                  : Qt::FastTransformation;
     const qreal iw = m_pixmap.width();
     const qreal ih = m_pixmap.height();
+    const qreal nw = qBound(MIN_SIZE, iw * m_currentStepScaleFactor * m_scaleFactor, static_cast<qreal>(maximumWidth()));
+    const qreal nh = qBound(MIN_SIZE, ih * m_currentStepScaleFactor * m_scaleFactor, static_cast<qreal>(maximumHeight()));
     const QPixmap pix =
-      m_pixmap.scaled(iw * m_currentStepScaleFactor * m_scaleFactor,
-                      ih * m_currentStepScaleFactor * m_scaleFactor,
+      m_pixmap.scaled(nw,
+                      nh,
                       aspectRatio,
                       transformType);
     m_label->setPixmap(pix);
