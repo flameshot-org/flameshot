@@ -49,7 +49,6 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_label = new QLabel();
     m_label->setPixmap(m_pixmap);
     m_layout->addWidget(m_label);
-    this->setStyleSheet("border: 5px solid red");
 
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q), this, SLOT(close()));
     new QShortcut(Qt::Key_Escape, this, SLOT(close()));
