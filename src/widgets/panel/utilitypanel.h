@@ -12,7 +12,6 @@ class QPropertyAnimation;
 class QScrollArea;
 class QPushButton;
 class QListWidget;
-class CaptureTool;
 class QPushButton;
 class CaptureWidget;
 
@@ -22,14 +21,14 @@ class UtilityPanel : public QWidget
 public:
     explicit UtilityPanel(CaptureWidget* captureWidget);
 
-    QWidget* toolWidget() const;
-    void setToolWidget(QWidget* w);
+    [[nodiscard]] QWidget* toolWidget() const;
+    void setToolWidget(QWidget* weight);
     void clearToolWidget();
-    void pushWidget(QWidget* w);
+    void pushWidget(QWidget* widget);
     void hide();
     void show();
     void fillCaptureTools(
-      QList<QPointer<CaptureTool>> captureToolObjectsHistory);
+      const QList<QPointer<CaptureTool>>& captureToolObjectsHistory);
     void setActiveLayer(int index);
     int activeLayerIndex();
     bool isVisible() const;

@@ -12,8 +12,8 @@
 
 TextConfig::TextConfig(QWidget* parent)
   : QWidget(parent)
-  , m_layout(nullptr)
-  , m_fontsCB(nullptr)
+  , m_layout(new QVBoxLayout(this))
+  , m_fontsCB(new QComboBox())
   , m_strikeOutButton(nullptr)
   , m_underlineButton(nullptr)
   , m_weightButton(nullptr)
@@ -22,10 +22,9 @@ TextConfig::TextConfig(QWidget* parent)
   , m_centerAlignButton(nullptr)
   , m_rightAlignButton(nullptr)
 {
-    m_layout = new QVBoxLayout(this);
 
     QFontDatabase fontDB;
-    m_fontsCB = new QComboBox();
+
     connect(m_fontsCB,
             &QComboBox::currentTextChanged,
             this,
@@ -121,29 +120,30 @@ void TextConfig::setFontFamily(const QString& fontFamily)
       m_fontsCB->findText(fontFamily.isEmpty() ? font().family() : fontFamily));
 }
 
-void TextConfig::setUnderline(const bool u)
+void TextConfig::setUnderline(const bool underline)
 {
-    m_underlineButton->setChecked(u);
+    m_underlineButton->setChecked(underline);
 }
 
-void TextConfig::setStrikeOut(const bool s)
+void TextConfig::setStrikeOut(const bool strikeout)
 {
-    m_strikeOutButton->setChecked(s);
+    m_strikeOutButton->setChecked(strikeout);
 }
 
-void TextConfig::setWeight(const int w)
+void TextConfig::setWeight(const int weight)
 {
-    m_weightButton->setChecked(static_cast<QFont::Weight>(w) == QFont::Bold);
+    m_weightButton->setChecked(static_cast<QFont::Weight>(weight) ==
+                               QFont::Bold);
 }
 
-void TextConfig::setItalic(const bool i)
+void TextConfig::setItalic(const bool italic)
 {
-    m_italicButton->setChecked(i);
+    m_italicButton->setChecked(italic);
 }
 
-void TextConfig::weightButtonPressed(const bool w)
+void TextConfig::weightButtonPressed(const bool weight)
 {
-    if (w) {
+    if (weight) {
         emit fontWeightChanged(QFont::Bold);
     } else {
         emit fontWeightChanged(QFont::Normal);

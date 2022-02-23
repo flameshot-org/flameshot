@@ -8,8 +8,6 @@
 #include "src/utils/pathinfo.h"
 #include "utilitypanel.h"
 #include <QApplication>
-#include <QDebug> // TODO remove
-#include <QFormLayout>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
@@ -23,9 +21,10 @@
 
 SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
+  , m_layout(new QVBoxLayout(this))
   , m_pixmap(p)
 {
-    m_layout = new QVBoxLayout(this);
+
     if (parent) {
         parent->installEventFilter(this);
     }
@@ -109,7 +108,7 @@ void SidePanelWidget::onColorChanged(const QColor& c)
     m_colorWheel->setColor(c);
 }
 
-void SidePanelWidget::onToolSizeChanged(const int& t)
+void SidePanelWidget::onToolSizeChanged(int t)
 {
     m_toolSize = qBound(0, t, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);

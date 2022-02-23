@@ -16,10 +16,10 @@ public:
     explicit TextConfig(QWidget* parent = nullptr);
 
     void setFontFamily(const QString& fontFamily);
-    void setUnderline(const bool u);
-    void setStrikeOut(const bool s);
-    void setWeight(const int w);
-    void setItalic(const bool i);
+    void setUnderline(bool underline);
+    void setStrikeOut(bool strikeout);
+    void setWeight(int weight);
+    void setItalic(bool italic);
     void setTextAlignment(Qt::AlignmentFlag alignment);
 
 signals:
@@ -32,7 +32,7 @@ signals:
 public slots:
 
 private slots:
-    void weightButtonPressed(const bool w);
+    void weightButtonPressed(bool weight);
 
 private:
     QVBoxLayout* m_layout;

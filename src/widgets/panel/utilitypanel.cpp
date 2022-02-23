@@ -53,31 +53,31 @@ QWidget* UtilityPanel::toolWidget() const
     return m_toolWidget;
 }
 
-void UtilityPanel::setToolWidget(QWidget* w)
+void UtilityPanel::setToolWidget(QWidget* widget)
 {
-    if (m_toolWidget) {
+    if (m_toolWidget != nullptr) {
         m_toolWidget->hide();
         m_toolWidget->setParent(this);
         m_toolWidget->deleteLater();
     }
-    if (w) {
-        m_toolWidget = w;
+    if (widget != nullptr) {
+        m_toolWidget = widget;
         m_toolWidget->setSizePolicy(QSizePolicy::Ignored,
                                     QSizePolicy::Preferred);
-        m_upLayout->addWidget(w);
+        m_upLayout->addWidget(widget);
     }
 }
 
 void UtilityPanel::clearToolWidget()
 {
-    if (m_toolWidget) {
+    if (m_toolWidget != nullptr) {
         m_toolWidget->deleteLater();
     }
 }
 
-void UtilityPanel::pushWidget(QWidget* w)
+void UtilityPanel::pushWidget(QWidget* widget)
 {
-    m_layout->insertWidget(m_layout->count() - 1, w);
+    m_layout->insertWidget(m_layout->count() - 1, widget);
 }
 
 void UtilityPanel::show()
@@ -193,7 +193,7 @@ void UtilityPanel::initInternalPanel()
 }
 
 void UtilityPanel::fillCaptureTools(
-  QList<QPointer<CaptureTool>> captureToolObjects)
+  const QList<QPointer<CaptureTool>>& captureToolObjects)
 {
     int currentSelection = m_captureTools->currentRow();
     m_captureTools->clear();
