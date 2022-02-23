@@ -3,11 +3,13 @@
 
 #pragma once
 
-#include <QGraphicsDropShadowEffect>
 #include <QWidget>
 
-class QVBoxLayout;
 class QLabel;
+class QVBoxLayout;
+class QGestureEvent;
+class QPinchGesture;
+class QGraphicsDropShadowEffect;
 
 class PinWidget : public QWidget
 {
@@ -17,20 +19,20 @@ public:
                        const QRect& geometry,
                        QWidget* parent = nullptr);
 
-    int margin() const;
-
 protected:
-    void wheelEvent(QWheelEvent* e);
-    void mouseDoubleClickEvent(QMouseEvent*);
-    void mousePressEvent(QMouseEvent*);
-    void mouseMoveEvent(QMouseEvent*);
-    void enterEvent(QEvent*);
-    void leaveEvent(QEvent*);
+    void mouseDoubleClickEvent(QMouseEvent*) override;
+    void mousePressEvent(QMouseEvent*) override;
+    void mouseMoveEvent(QMouseEvent*) override;
+    void enterEvent(QEvent*) override;
+    void leaveEvent(QEvent*) override;
+
+    bool event(QEvent* event) override;
+    void paintEvent(QPaintEvent* event) override;
 
 private:
-    void setScaledPixmapToLabel(const QSize& newSize,
-                                const qreal scale,
-                                const bool expanding);
+    bool gestureEvent(QGestureEvent* event);
+    bool scrollEvent(QWheelEvent* e);
+    void pinchTriggered(QPinchGesture*);
 
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
@@ -39,4 +41,8 @@ private:
     qreal m_offsetX, m_offsetY;
     QGraphicsDropShadowEffect* m_shadowEffect;
     QColor m_baseColor, m_hoverColor;
+
+    bool m_expanding{ false };
+    qreal m_scaleFactor{ 1 };
+    qreal m_currentStepScaleFactor{ 1 };
 };
