@@ -38,7 +38,7 @@ bool GlobalShortcutFilter::nativeEventFilter(const QByteArray& eventType,
         }
 
         // Capture screen
-        if (VK_SNAPSHOT == keycode && 0 == modifiers) {
+        if (VK_SNAPSHOT == keycode && (0 == modifiers || MOD_ALT == modifiers)) {
             Controller::getInstance()->requestCapture(
               CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
         }
