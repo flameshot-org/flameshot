@@ -7,6 +7,8 @@
 #include "QtSolutions/qtsingleapplication.h"
 #endif
 
+// aweaeawe a
+
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
 #include "src/config/styleoverride.h"
