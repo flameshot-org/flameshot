@@ -180,7 +180,7 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="61"/>
@@ -205,7 +205,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="378"/>
         <source>Select screenshot area</source>
-        <translation></translation>
+        <translation>Área de seleção</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
@@ -245,12 +245,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
-        <translation></translation>
+        <translation>Flameshot perdeu o foco. Os atalhos de teclado não funcionarão até que você clique em algum lugar.</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="511"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
-        <translation></translation>
+        <translation>Erro de configuração resolvido. Inicie o “flameshot gui” novamente para aplicá-lo.</translation>
     </message>
     <message>
         <source>Select an area with the mouse, or press Esc to exit.
@@ -303,14 +303,14 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
-        <translation></translation>
+        <translation>Selecionar Color</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
-        <translation></translation>
+        <translation>Saturação</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
@@ -331,21 +331,21 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
-        <translation></translation>
+        <translation>Azul</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
-        <translation></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
-        <translation></translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
@@ -359,7 +359,7 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
-        <translation></translation>
+        <translation>Vermelho</translation>
     </message>
 </context>
 <context>
@@ -367,12 +367,12 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Accept color</source>
-        <translation></translation>
+        <translation>Aceitar cor</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
-        <translation></translation>
+        <translation>Selecione a cor com precisão</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -382,7 +382,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -390,7 +390,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
         <source>Select Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione Predefinição:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
@@ -400,7 +400,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
@@ -420,7 +420,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
@@ -449,7 +449,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalhes dos erros</translation>
     </message>
 </context>
 <context>
