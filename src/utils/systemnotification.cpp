@@ -8,6 +8,8 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#else
+#include "src/core/flameshotdaemon.h"
 #endif
 
 SystemNotification::SystemNotification(QObject* parent)
