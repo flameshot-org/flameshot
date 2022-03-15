@@ -14,6 +14,7 @@ public:
     QAction* appUpdates();
 
 private:
+    void initTrayIcon();
     void initMenu();
     void enableCheckUpdatesAction(bool enable);
 

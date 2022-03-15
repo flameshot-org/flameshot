@@ -8,6 +8,7 @@ class QPixmap;
 class QRect;
 class QDBusMessage;
 class QDBusConnection;
+class SystemTray;
 
 class FlameshotDaemon : private QObject
 {
@@ -18,8 +19,12 @@ public:
     static void createPin(QPixmap capture, QRect geometry);
     static void copyToClipboard(QPixmap capture);
     static void copyToClipboard(QString text, QString notification = "");
-    static void enableTrayIcon(bool enable);
     static bool isThisInstanceHostingWidgets();
+
+    void sendTrayNotification(
+      const QString& text,
+      const QString& title = QStringLiteral("Flameshot Info"),
+      const int timeout = 5000);
 
 private:
     FlameshotDaemon();
@@ -31,7 +36,9 @@ private:
     void attachScreenshotToClipboard(const QByteArray& screenshot);
     void attachTextToClipboard(QString text, QString notification);
 
-private:
+    void initTrayIcon();
+    void enableTrayIcon(bool enable);
+
     static QDBusMessage createMethodCall(QString method);
     static void checkDBusConnection(const QDBusConnection& connection);
     static void call(const QDBusMessage& m);
@@ -40,6 +47,7 @@ private:
     bool m_hostingClipboard;
     bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
+    SystemTray* m_trayIcon;
     static FlameshotDaemon* m_instance;
 
     friend class FlameshotDBusAdapter;

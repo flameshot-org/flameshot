@@ -5,12 +5,18 @@
 #include "controller.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
+#include "src/utils/globalvalues.h"
+#include "src/widgets/systemtray.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QPixmap>
 #include <QRect>
+
+#ifdef Q_OS_WIN
+#include "src/core/globalshortcutfilter.h"
+#endif
 
 /**
  * @brief A way of accessing the flameshot daemon both from the daemon itself,
@@ -41,6 +47,7 @@ FlameshotDaemon::FlameshotDaemon()
   : m_persist(false)
   , m_hostingClipboard(false)
   , m_clipboardSignalBlocked(false)
+  , m_trayIcon(nullptr)
 {
     connect(
       QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() {
@@ -51,8 +58,7 @@ FlameshotDaemon::FlameshotDaemon()
           m_hostingClipboard = false;
           quitIfIdle();
       });
-    // init tray icon
-    Controller::instance()->initTrayIcon();
+    initTrayIcon();
 #ifdef Q_OS_WIN
     m_persist = true;
 #else
@@ -60,7 +66,15 @@ FlameshotDaemon::FlameshotDaemon()
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
-            [this]() { m_persist = !ConfigHandler().autoCloseIdleDaemon(); });
+            [this]() {
+                ConfigHandler config;
+                if (config.disabledTrayIcon()) {
+                    enableTrayIcon(false);
+                } else {
+                    enableTrayIcon(true);
+                }
+                m_persist = !config.autoCloseIdleDaemon();
+            });
 #endif
 }
 
@@ -121,27 +135,22 @@ void FlameshotDaemon::copyToClipboard(QString text, QString notification)
     sessionBus.call(m);
 }
 
-// TODO unused method
-void FlameshotDaemon::enableTrayIcon(bool enable)
-{
-#if !defined(Q_OS_WIN)
-    if (!instance()) {
-        return;
-    }
-    if (enable) {
-        Controller::instance()->enableTrayIcon();
-    } else {
-        Controller::instance()->disableTrayIcon();
-    }
-#endif
-}
-
 /**
  * @brief Is this instance of flameshot hosting any windows as a daemon?
  */
 bool FlameshotDaemon::isThisInstanceHostingWidgets()
 {
     return instance() && !instance()->m_widgets.isEmpty();
+}
+
+void FlameshotDaemon::sendTrayNotification(const QString& text,
+                                           const QString& title,
+                                           const int timeout)
+{
+    if (m_trayIcon) {
+        m_trayIcon->showMessage(
+          title, text, QIcon(GlobalValues::iconPath()), timeout);
+    }
 }
 
 /**
@@ -245,6 +254,39 @@ void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
         AbstractLogger::info() << notification;
     }
     clipboard->blockSignals(false);
+}
+
+void FlameshotDaemon::initTrayIcon()
+{
+#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+    if (!ConfigHandler().disabledTrayIcon()) {
+        enableTrayIcon(true);
+    }
+#elif defined(Q_OS_WIN)
+    enableTrayIcon(true);
+
+    GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
+    qApp->installNativeEventFilter(nativeFilter);
+    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
+        Controller::instance()->gui();
+    });
+#endif
+}
+
+void FlameshotDaemon::enableTrayIcon(bool enable)
+{
+#if !defined(Q_OS_WIN)
+    if (enable) {
+        if (m_trayIcon == nullptr) {
+            m_trayIcon = new SystemTray();
+        } else {
+            m_trayIcon->show();
+            return;
+        }
+    } else if (m_trayIcon) {
+        m_trayIcon->hide();
+    }
+#endif
 }
 
 QDBusMessage FlameshotDaemon::createMethodCall(QString method)

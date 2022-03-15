@@ -5,7 +5,6 @@
 
 #include "src/utils/confighandler.h"
 #include <QApplication>
-#include <QDesktopServices>
 #include <QMenu>
 #include <QUrl>
 #include <QVersionNumber>

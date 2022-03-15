@@ -17,7 +17,6 @@
 #include "src/tools/imgupload/imguploadermanager.h"
 #include "src/tools/imgupload/storages/imguploaderbase.h"
 #include "src/utils/confighandler.h"
-#include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
@@ -28,7 +27,6 @@
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
-#include <QClipboard>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QFile>
@@ -42,10 +40,6 @@
 #include <QTimer>
 #include <QVersionNumber>
 
-#ifdef Q_OS_WIN
-#include "src/core/globalshortcutfilter.h"
-#endif
-
 #if defined(Q_OS_MACOS)
 #include <QScreen>
 #endif
@@ -55,7 +49,6 @@
 
 Controller::Controller()
   : m_captureWindow(nullptr)
-  , m_trayIcon(nullptr)
   , m_networkCheckUpdates(nullptr)
   , m_showCheckAppUpdateStatus(false)
 #if defined(Q_OS_MACOS)
@@ -89,17 +82,6 @@ Controller::Controller()
                      qApp,
                      [this]() { history(); });
 #endif
-    connect(ConfigHandler::getInstance(),
-            &ConfigHandler::fileChanged,
-            this,
-            [this]() {
-                ConfigHandler config;
-                if (config.disabledTrayIcon()) {
-                    disableTrayIcon();
-                } else {
-                    enableTrayIcon();
-                }
-            });
 
     if (ConfigHandler().checkForUpdates()) {
         getLatestAvailableVersion();
@@ -383,26 +365,33 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 
         QVersionNumber appLatestVersion =
           QVersionNumber::fromString(m_appLatestVersion);
-        emit newVersionAvailable(appLatestVersion);
         if (getVersion() < appLatestVersion) {
+            emit newVersionAvailable(appLatestVersion);
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
             if (m_showCheckAppUpdateStatus) {
-                sendTrayNotification(newVersion, "Flameshot");
+                if (FlameshotDaemon::instance()) {
+                    FlameshotDaemon::instance()->sendTrayNotification(
+                      newVersion, "Flameshot");
+                }
                 QDesktopServices::openUrl(QUrl(m_appLatestUrl));
             }
         } else if (m_showCheckAppUpdateStatus) {
-            sendTrayNotification(tr("You have the latest version"),
-                                 "Flameshot");
+            if (FlameshotDaemon::instance()) {
+                FlameshotDaemon::instance()->sendTrayNotification(
+                  tr("You have the latest version"), "Flameshot");
+            }
         }
     } else {
         qWarning() << "Failed to get information about the latest version. "
                    << reply->errorString();
         if (m_showCheckAppUpdateStatus) {
-            sendTrayNotification(
-              tr("Failed to get information about the latest version."),
-              "Flameshot");
+            if (FlameshotDaemon::instance()) {
+                FlameshotDaemon::instance()->sendTrayNotification(
+                  tr("Failed to get information about the latest version."),
+                  "Flameshot");
+            }
         }
     }
     m_showCheckAppUpdateStatus = false;
@@ -432,50 +421,6 @@ void Controller::requestCapture(const CaptureRequest& request)
         default:
             emit captureFailed();
             break;
-    }
-}
-
-void Controller::initTrayIcon()
-{
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
-    if (!ConfigHandler().disabledTrayIcon()) {
-        enableTrayIcon();
-    }
-#elif defined(Q_OS_WIN)
-    enableTrayIcon();
-
-    GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
-    qApp->installNativeEventFilter(nativeFilter);
-    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
-        this->requestCapture(CaptureRequest(CaptureRequest::GRAPHICAL_MODE));
-    });
-#endif
-}
-
-void Controller::enableTrayIcon()
-{
-    if (m_trayIcon == nullptr) {
-        m_trayIcon = new SystemTray();
-    } else {
-        m_trayIcon->show();
-        return;
-    }
-}
-
-void Controller::disableTrayIcon()
-{
-    if (m_trayIcon) {
-        m_trayIcon->hide();
-    }
-}
-
-void Controller::sendTrayNotification(const QString& text,
-                                      const QString& title,
-                                      const int timeout)
-{
-    if (m_trayIcon) {
-        m_trayIcon->showMessage(
-          title, text, QIcon(GlobalValues::iconPath()), timeout);
     }
 }
 

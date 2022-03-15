@@ -61,17 +61,7 @@ signals:
 
 public slots:
     void requestCapture(const CaptureRequest& request);
-
-    // TODO move tray icon handling to FlameshotDaemon
-    void initTrayIcon();
-    void enableTrayIcon();
-    void disableTrayIcon();
-
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
-    void sendTrayNotification(
-      const QString& text,
-      const QString& title = QStringLiteral("Flameshot Info"),
-      const int timeout = 5000);
 
 public slots:
     void handleReplyCheckUpdates(QNetworkReply* reply);
@@ -95,7 +85,6 @@ private:
     QPointer<InfoWindow> m_infoWindow;
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
-    QPointer<SystemTray> m_trayIcon;
 
     QNetworkAccessManager* m_networkCheckUpdates;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
