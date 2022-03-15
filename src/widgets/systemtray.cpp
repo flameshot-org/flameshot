@@ -8,6 +8,7 @@
 #include <QDesktopServices>
 #include <QMenu>
 #include <QUrl>
+#include <QVersionNumber>
 
 SystemTray::SystemTray(QObject* parent)
   : QSystemTrayIcon(parent)
@@ -123,8 +124,19 @@ void SystemTray::initMenu()
             &Controller::info);
 
     m_appUpdates = new QAction(tr("Check for updates"), this);
-    connect(
-      m_appUpdates, &QAction::triggered, this, &SystemTray::checkForUpdates);
+    connect(m_appUpdates,
+            &QAction::triggered,
+            Controller::instance(),
+            &Controller::checkForUpdates);
+
+    connect(Controller::instance(),
+            &Controller::newVersionAvailable,
+            this,
+            [this](QVersionNumber version) {
+                QString newVersion =
+                  tr("New version %1 is available").arg(version.toString());
+                m_appUpdates->setText(newVersion);
+            });
 
     QAction* quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
@@ -157,15 +169,5 @@ void SystemTray::enableCheckUpdatesAction(bool enable)
     }
     if (enable) {
         Controller::instance()->getLatestAvailableVersion();
-    }
-}
-
-void SystemTray::checkForUpdates()
-{
-    if (Controller::instance()->m_appLatestUrl.isEmpty()) {
-        // FIXME m_showCheckAppUpdateStatus = true;
-        Controller::instance()->getLatestAvailableVersion();
-    } else {
-        QDesktopServices::openUrl(QUrl(Controller::instance()->m_appLatestUrl));
     }
 }

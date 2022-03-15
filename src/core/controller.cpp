@@ -293,6 +293,12 @@ void Controller::history()
 #endif
 }
 
+QVersionNumber Controller::getVersion()
+{
+    return QVersionNumber::fromString(
+      QStringLiteral(APP_VERSION).replace("v", ""));
+}
+
 void Controller::setOrigin(Origin origin)
 {
     m_origin = origin;
@@ -355,6 +361,16 @@ bool Controller::resolveAnyConfigErrors()
     return resolved;
 }
 
+void Controller::checkForUpdates()
+{
+    if (m_appLatestUrl.isEmpty()) {
+        m_showCheckAppUpdateStatus = true;
+        Controller::instance()->getLatestAvailableVersion();
+    } else {
+        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
+    }
+}
+
 void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 {
     if (!ConfigHandler().checkForUpdates()) {
@@ -367,17 +383,11 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 
         QVersionNumber appLatestVersion =
           QVersionNumber::fromString(m_appLatestVersion);
-        QVersionNumber currentVersion = QVersionNumber::fromString(
-          QStringLiteral(APP_VERSION).replace("v", ""));
-
-        if (currentVersion < appLatestVersion) {
+        emit newVersionAvailable(appLatestVersion);
+        if (getVersion() < appLatestVersion) {
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =
               tr("New version %1 is available").arg(m_appLatestVersion);
-            QAction* appUpdates = m_trayIcon->appUpdates();
-            if (appUpdates != nullptr) {
-                appUpdates->setText(newVersion);
-            }
             if (m_showCheckAppUpdateStatus) {
                 sendTrayNotification(newVersion, "Flameshot");
                 QDesktopServices::openUrl(QUrl(m_appLatestUrl));

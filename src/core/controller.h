@@ -6,6 +6,7 @@
 #include "src/core/capturerequest.h"
 #include <QObject>
 #include <QPointer>
+#include <QVersionNumber>
 #include <functional>
 
 class SystemTray;
@@ -45,6 +46,8 @@ public slots:
     void info();
     void history();
 
+    QVersionNumber getVersion();
+
 public:
     static void setOrigin(Origin origin);
     static Origin origin();
@@ -54,6 +57,7 @@ signals:
     // TODO remove all parameters from captureTaken and update dependencies
     void captureTaken(QPixmap p, const QRect& selection);
     void captureFailed();
+    void newVersionAvailable(QVersionNumber version);
 
 public slots:
     void requestCapture(const CaptureRequest& request);
@@ -71,6 +75,7 @@ public slots:
 
 public slots:
     void handleReplyCheckUpdates(QNetworkReply* reply);
+    void checkForUpdates();
 
 private:
     Controller();

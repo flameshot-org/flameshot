@@ -13,9 +13,6 @@ public:
 
     QAction* appUpdates();
 
-private slots:
-    void checkForUpdates();
-
 private:
     void initMenu();
     void enableCheckUpdatesAction(bool enable);
