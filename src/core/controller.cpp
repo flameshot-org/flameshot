@@ -29,6 +29,7 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
+#include <QDesktopWidget>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
