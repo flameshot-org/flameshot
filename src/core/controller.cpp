@@ -20,10 +20,10 @@
 #include "src/utils/screengrabber.h"
 #include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/capturelauncher.h"
-#include "src/widgets/historywidget.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
 #include "src/widgets/trayicon.h"
+#include "src/widgets/uploadhistory.h"
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>
@@ -96,15 +96,16 @@ Controller* Controller::instance()
 
 void Controller::gui(const CaptureRequest& req)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
 #if defined(Q_OS_MACOS)
     // This is required on MacOS because of Mission Control. If you'll switch to
     // another Desktop you cannot take a new screenshot from the tray, you have
     // to switch back to the Flameshot Desktop manually. It is not obvious and a
     // large number of users are confused and report a bug.
-    if (m_captureWindow) {
+    if (m_captureWindow != nullptr) {
         m_captureWindow->close();
         delete m_captureWindow;
         m_captureWindow = nullptr;
@@ -260,15 +261,16 @@ void Controller::info()
 
 void Controller::history()
 {
-    static HistoryWidget* historyWidget = nullptr;
-    if (nullptr == historyWidget) {
-        historyWidget = new HistoryWidget();
+    static UploadHistory* historyWidget = nullptr;
+    if (historyWidget == nullptr) {
+        historyWidget = new UploadHistory;
+        historyWidget->loadHistory();
         connect(historyWidget, &QObject::destroyed, this, []() {
             historyWidget = nullptr;
         });
     }
-    historyWidget->loadHistory();
     historyWidget->show();
+
 #if defined(Q_OS_MACOS)
     historyWidget->activateWindow();
     historyWidget->raise();
@@ -320,9 +322,9 @@ bool Controller::resolveAnyConfigErrors()
     bool resolved = true;
     ConfigHandler config;
     if (!config.checkUnrecognizedSettings() || !config.checkSemantics()) {
-        ConfigResolver* resolver = new ConfigResolver();
+        auto* resolver = new ConfigResolver();
         QObject::connect(
-          resolver, &ConfigResolver::rejected, [this, resolver, &resolved]() {
+          resolver, &ConfigResolver::rejected, [resolver, &resolved]() {
               resolved = false;
               resolver->deleteLater();
               if (origin() == CLI) {
@@ -399,8 +401,9 @@ void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
 
 void Controller::requestCapture(const CaptureRequest& request)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
@@ -453,9 +456,9 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::SAVE) {
         if (req.path().isEmpty()) {
-            ScreenshotSaver().saveToFilesystemGUI(capture);
+            saveToFilesystemGUI(capture);
         } else {
-            ScreenshotSaver().saveToFilesystem(capture, path);
+            saveToFilesystem(capture, path);
         }
     }
 
@@ -473,7 +476,7 @@ void Controller::exportCapture(QPixmap capture,
 
     if (tasks & CR::UPLOAD) {
         if (!ConfigHandler().uploadWithoutConfirmation()) {
-            ImgUploadDialog* dialog = new ImgUploadDialog();
+            auto* dialog = new ImgUploadDialog();
             if (dialog->exec() == QDialog::Rejected) {
                 return;
             }
@@ -507,7 +510,7 @@ void Controller::exportCapture(QPixmap capture,
 
 void Controller::doLater(int msec, QObject* receiver, lambda func)
 {
-    QTimer* timer = new QTimer(receiver);
+    auto* timer = new QTimer(receiver);
     QObject::connect(timer, &QTimer::timeout, receiver, [timer, func]() {
         func();
         timer->deleteLater();

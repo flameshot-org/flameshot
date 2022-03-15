@@ -80,8 +80,6 @@ add_subdirectory(widgets)
 add_subdirectory(tools)
 
 
-
-
 set(FLAMESHOT_TS_FILES
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_bg.ts
       ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
@@ -174,6 +172,12 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/panel>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/capture>
          $<INSTALL_INTERFACE:include/mylib>)
+target_include_directories(
+    flameshot
+    PUBLIC
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
+         )
+
 
 if (USE_EXTERNAL_SINGLEAPPLICATION)
     add_compile_definitions(USE_EXTERNAL_SINGLEAPPLICATION=1)
@@ -301,10 +305,10 @@ if (UNIX)
     configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
             ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash
             ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.zsh
             ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
 
     configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.fish

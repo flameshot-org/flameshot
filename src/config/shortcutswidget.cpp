@@ -94,8 +94,7 @@ void ShortcutsWidget::populateInfoTable()
         m_table->setItem(i, 0, new QTableWidgetItem(description));
 
 #if defined(Q_OS_MACOS)
-        QTableWidgetItem* item =
-          new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
+        auto* item = new QTableWidgetItem(nativeOSHotKeyText(key_sequence));
 #else
         QTableWidgetItem* item = new QTableWidgetItem(key_sequence);
 #endif
@@ -130,8 +129,7 @@ void ShortcutsWidget::onShortcutCellClicked(int row, int col)
         }
 
         QString shortcutName = m_shortcuts.at(row).at(0);
-        SetShortcutDialog* setShortcutDialog =
-          new SetShortcutDialog(nullptr, shortcutName);
+        auto* setShortcutDialog = new SetShortcutDialog(nullptr, shortcutName);
         if (0 != setShortcutDialog->exec()) {
             QKeySequence shortcutValue = setShortcutDialog->shortcut();
 
@@ -163,9 +161,12 @@ void ShortcutsWidget::loadShortcuts()
         CaptureTool* tool = ToolFactory().CreateTool(t);
         QString shortcutName = QVariant::fromValue(t).toString();
         appendShortcut(shortcutName, tool->description());
-        if (shortcutName == "TYPE_COPY")
-            m_shortcuts << (QStringList() << "" << tool->description()
-                                          << "Left Double-click");
+        if (shortcutName == "TYPE_COPY") {
+            if (m_config.copyOnDoubleClick()) {
+                m_shortcuts << (QStringList() << "" << tool->description()
+                                              << "Left Double-click");
+            }
+        }
         delete tool;
     }
 

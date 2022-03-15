@@ -14,7 +14,7 @@ class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;
-class HistoryWidget;
+class UploadHistory;
 class QNetworkAccessManager;
 class QNetworkReply;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \

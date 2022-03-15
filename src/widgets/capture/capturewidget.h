@@ -17,6 +17,7 @@
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
+#include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include <QPointer>
 #include <QUndoStack>
@@ -76,6 +77,8 @@ private slots:
     void onToolSizeChanged(int size);
     void onToolSizeSettled(int size);
     void updateActiveLayer(int layer);
+    void onMoveCaptureToolUp(int captureToolIndex);
+    void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
 
 public:
@@ -115,6 +118,7 @@ private:
     void updateLayersPanel();
     void pushToolToStack();
     void makeChild(QWidget* w);
+    void restoreCircleCountState();
 
     QList<QShortcut*> newShortcut(const QKeySequence& key,
                                   QWidget* parent,
@@ -177,6 +181,7 @@ private:
     NotifierBox* m_notifierBox;
     HoverEventFilter* m_eventFilter;
     SelectionWidget* m_selection;
+    MagnifierWidget* m_magnifier;
     QString m_helpMessage;
 
     SelectionWidget::SideType m_mouseOverHandle;

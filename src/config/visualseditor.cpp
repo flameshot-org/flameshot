@@ -3,6 +3,7 @@
 
 #include "visualseditor.h"
 #include "src/config/buttonlistview.h"
+#include "src/config/colorpickereditor.h"
 #include "src/config/extendedslider.h"
 #include "src/config/uicoloreditor.h"
 #include "src/utils/confighandler.h"
@@ -31,12 +32,12 @@ void VisualsEditor::initOpacitySlider()
     m_opacitySlider->setFocusPolicy(Qt::NoFocus);
     m_opacitySlider->setOrientation(Qt::Horizontal);
     m_opacitySlider->setRange(0, 100);
-    QHBoxLayout* localLayout = new QHBoxLayout();
+    auto* localLayout = new QHBoxLayout();
     localLayout->addWidget(new QLabel(QStringLiteral("0%")));
     localLayout->addWidget(m_opacitySlider);
     localLayout->addWidget(new QLabel(QStringLiteral("100%")));
 
-    QLabel* label = new QLabel();
+    auto* label = new QLabel();
     QString labelMsg = tr("Opacity of area outside selection:") + " %1%";
     ExtendedSlider* opacitySlider = m_opacitySlider;
     connect(m_opacitySlider,
@@ -56,19 +57,32 @@ void VisualsEditor::initOpacitySlider()
 
 void VisualsEditor::initWidgets()
 {
+    m_tabWidget = new QTabWidget();
+    m_layout->addWidget(m_tabWidget);
+
     m_colorEditor = new UIcolorEditor();
-    m_layout->addWidget(m_colorEditor);
+    m_colorEditorTab = new QWidget();
+    auto* colorEditorLayout = new QVBoxLayout(m_colorEditorTab);
+    m_colorEditorTab->setLayout(colorEditorLayout);
+    colorEditorLayout->addWidget(m_colorEditor);
+    m_tabWidget->addTab(m_colorEditorTab, tr("UI Color Editor"));
+
+    m_colorpickerEditor = new ColorPickerEditor();
+    m_colorpickerEditorTab = new QWidget();
+    auto* colorpickerEditorLayout = new QVBoxLayout(m_colorpickerEditorTab);
+    colorpickerEditorLayout->addWidget(m_colorpickerEditor);
+    m_tabWidget->addTab(m_colorpickerEditorTab, tr("Colorpicker Editor"));
 
     initOpacitySlider();
 
-    auto boxButtons = new QGroupBox();
+    auto* boxButtons = new QGroupBox();
     boxButtons->setTitle(tr("Button Selection"));
-    auto listLayout = new QVBoxLayout(boxButtons);
+    auto* listLayout = new QVBoxLayout(boxButtons);
     m_buttonList = new ButtonListView();
     m_layout->addWidget(boxButtons);
     listLayout->addWidget(m_buttonList);
 
-    QPushButton* setAllButtons = new QPushButton(tr("Select All"));
+    auto* setAllButtons = new QPushButton(tr("Select All"));
     connect(setAllButtons,
             &QPushButton::clicked,
             m_buttonList,

@@ -97,11 +97,11 @@ void ImgUploaderBase::setInfoLabelText(const QString& text)
 
 void ImgUploaderBase::startDrag()
 {
-    QMimeData* mimeData = new QMimeData;
+    auto* mimeData = new QMimeData;
     mimeData->setUrls(QList<QUrl>{ m_imageURL });
     mimeData->setImageData(m_pixmap);
 
-    QDrag* dragHandler = new QDrag(this);
+    auto* dragHandler = new QDrag(this);
     dragHandler->setMimeData(mimeData);
     dragHandler->setPixmap(m_pixmap.scaled(
       256, 256, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
@@ -115,7 +115,7 @@ void ImgUploaderBase::showPostUploadDialog()
     m_notification = new NotificationWidget();
     m_vLayout->addWidget(m_notification);
 
-    ImageLabel* imageLabel = new ImageLabel();
+    auto* imageLabel = new ImageLabel();
     imageLabel->setScreenshot(m_pixmap);
     imageLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     connect(imageLabel,
@@ -180,14 +180,13 @@ void ImgUploaderBase::copyImage()
 void ImgUploaderBase::deleteCurrentImage()
 {
     History history;
-    HISTORY_FILE_NAME unpackFileName =
-      history.unpackFileName(m_currentImageName);
+    HistoryFileName unpackFileName = history.unpackFileName(m_currentImageName);
     deleteImage(unpackFileName.file, unpackFileName.token);
 }
 
 void ImgUploaderBase::saveScreenshotToFilesystem()
 {
-    if (!ScreenshotSaver().saveToFilesystemGUI(m_pixmap)) {
+    if (!saveToFilesystemGUI(m_pixmap)) {
         m_notification->showMessage(
           tr("Unable to save the screenshot to disk."));
         return;

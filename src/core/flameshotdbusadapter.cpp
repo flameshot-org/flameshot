@@ -8,7 +8,7 @@ FlameshotDBusAdapter::FlameshotDBusAdapter(QObject* parent)
   : QDBusAbstractAdaptor(parent)
 {}
 
-FlameshotDBusAdapter::~FlameshotDBusAdapter() {}
+FlameshotDBusAdapter::~FlameshotDBusAdapter() = default;
 
 void FlameshotDBusAdapter::attachScreenshotToClipboard(const QByteArray& data)
 {

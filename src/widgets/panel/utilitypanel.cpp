@@ -22,6 +22,8 @@ UtilityPanel::UtilityPanel(CaptureWidget* captureWidget)
   , m_layersLayout(nullptr)
   , m_captureTools(nullptr)
   , m_buttonDelete(nullptr)
+  , m_buttonMoveUp(nullptr)
+  , m_buttonMoveDown(nullptr)
 {
     initInternalPanel();
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -51,31 +53,31 @@ QWidget* UtilityPanel::toolWidget() const
     return m_toolWidget;
 }
 
-void UtilityPanel::setToolWidget(QWidget* w)
+void UtilityPanel::setToolWidget(QWidget* widget)
 {
-    if (m_toolWidget) {
-        m_toolWidget->close();
-        delete m_toolWidget;
-        m_toolWidget = nullptr;
+    if (m_toolWidget != nullptr) {
+        m_toolWidget->hide();
+        m_toolWidget->setParent(this);
+        m_toolWidget->deleteLater();
     }
-    if (w) {
-        m_toolWidget = w;
+    if (widget != nullptr) {
+        m_toolWidget = widget;
         m_toolWidget->setSizePolicy(QSizePolicy::Ignored,
                                     QSizePolicy::Preferred);
-        m_upLayout->addWidget(w);
+        m_upLayout->addWidget(widget);
     }
 }
 
 void UtilityPanel::clearToolWidget()
 {
-    if (m_toolWidget) {
+    if (m_toolWidget != nullptr) {
         m_toolWidget->deleteLater();
     }
 }
 
-void UtilityPanel::pushWidget(QWidget* w)
+void UtilityPanel::pushWidget(QWidget* widget)
 {
-    m_layout->insertWidget(m_layout->count() - 1, w);
+    m_layout->insertWidget(m_layout->count() - 1, widget);
 }
 
 void UtilityPanel::show()
@@ -114,7 +116,7 @@ void UtilityPanel::initInternalPanel()
 {
     m_internalPanel = new QScrollArea(this);
     m_internalPanel->setAttribute(Qt::WA_NoMousePropagation);
-    QWidget* widget = new QWidget();
+    auto* widget = new QWidget();
     m_internalPanel->setWidget(widget);
     m_internalPanel->setWidgetResizable(true);
 
@@ -139,14 +141,33 @@ void UtilityPanel::initInternalPanel()
             this,
             SLOT(onCurrentRowChanged(int)));
 
-    QHBoxLayout* layersButtons = new QHBoxLayout();
+    auto* layersButtons = new QHBoxLayout();
     m_layersLayout->addLayout(layersButtons);
+
     m_layersLayout->addWidget(m_captureTools);
 
+    bool isDark = ColorUtils::colorIsDark(bgColor);
+    QString coloredIconPath =
+      isDark ? PathInfo::whiteIconPath() : PathInfo::blackIconPath();
+
     m_buttonDelete = new QPushButton(this);
-    m_buttonDelete->setIcon(QIcon(":/img/material/black/delete.svg"));
+    m_buttonDelete->setIcon(QIcon(coloredIconPath + "delete.svg"));
+    m_buttonDelete->setMinimumWidth(m_buttonDelete->height());
     m_buttonDelete->setDisabled(true);
+
+    m_buttonMoveUp = new QPushButton(this);
+    m_buttonMoveUp->setIcon(QIcon(coloredIconPath + "move_up.svg"));
+    m_buttonMoveUp->setMinimumWidth(m_buttonMoveUp->height());
+    m_buttonMoveUp->setDisabled(true);
+
+    m_buttonMoveDown = new QPushButton(this);
+    m_buttonMoveDown->setIcon(QIcon(coloredIconPath + "move_down.svg"));
+    m_buttonMoveDown->setMinimumWidth(m_buttonMoveDown->height());
+    m_buttonMoveDown->setDisabled(true);
+
     layersButtons->addWidget(m_buttonDelete);
+    layersButtons->addWidget(m_buttonMoveUp);
+    layersButtons->addWidget(m_buttonMoveDown);
     layersButtons->addStretch();
 
     connect(m_buttonDelete,
@@ -154,22 +175,32 @@ void UtilityPanel::initInternalPanel()
             this,
             SLOT(slotButtonDelete(bool)));
 
+    connect(m_buttonMoveUp,
+            &QPushButton::clicked,
+            this,
+            &UtilityPanel::slotUpClicked);
+
+    connect(m_buttonMoveDown,
+            &QPushButton::clicked,
+            this,
+            &UtilityPanel::slotDownClicked);
+
     // Bottom
-    QPushButton* closeButton = new QPushButton(this);
+    auto* closeButton = new QPushButton(this);
     closeButton->setText(tr("Close"));
     connect(closeButton, &QPushButton::clicked, this, &UtilityPanel::toggle);
     m_bottomLayout->addWidget(closeButton);
 }
 
 void UtilityPanel::fillCaptureTools(
-  QList<QPointer<CaptureTool>> captureToolObjects)
+  const QList<QPointer<CaptureTool>>& captureToolObjects)
 {
     int currentSelection = m_captureTools->currentRow();
     m_captureTools->clear();
     m_captureTools->addItem(tr("<Empty>"));
 
     for (auto toolItem : captureToolObjects) {
-        QListWidgetItem* item = new QListWidgetItem(
+        auto* item = new QListWidgetItem(
           toolItem->icon(QColor(Qt::white), false), toolItem->info());
         m_captureTools->addItem(item);
     }
@@ -192,12 +223,30 @@ int UtilityPanel::activeLayerIndex()
 
 void UtilityPanel::onCurrentRowChanged(int currentRow)
 {
-    if (currentRow > 0) {
-        m_buttonDelete->setDisabled(false);
-    } else {
-        m_buttonDelete->setDisabled(true);
-    }
+    m_buttonDelete->setDisabled(currentRow <= 0);
+    m_buttonMoveDown->setDisabled(currentRow == 0 ||
+                                  currentRow + 1 == m_captureTools->count());
+    m_buttonMoveUp->setDisabled(currentRow <= 1);
+
     emit layerChanged(activeLayerIndex());
+}
+
+void UtilityPanel::slotUpClicked(bool clicked)
+{
+    Q_UNUSED(clicked);
+    // subtract 1 because there's <empty> in m_captureTools as [0] element
+    int toolRow = m_captureTools->currentRow() - 1;
+    m_captureTools->setCurrentRow(toolRow);
+    emit moveUpClicked(toolRow);
+}
+
+void UtilityPanel::slotDownClicked(bool clicked)
+{
+    Q_UNUSED(clicked);
+    // subtract 1 because there's <empty> in m_captureTools as [0] element
+    int toolRow = m_captureTools->currentRow() - 1;
+    m_captureTools->setCurrentRow(toolRow + 2);
+    emit moveDownClicked(toolRow);
 }
 
 void UtilityPanel::slotButtonDelete(bool clicked)

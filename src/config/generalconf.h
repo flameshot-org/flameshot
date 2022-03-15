@@ -46,27 +46,30 @@ private slots:
 private:
     const QString chooseFolder(const QString currentPath = "");
 
-    void initScrollArea();
-    void initShowHelp();
-    void initShowSidePanelButton();
-    void initShowDesktopNotification();
-    void initShowTrayIcon();
-    void initHistoryConfirmationToDelete();
-    void inituploadHistoryMax();
-    void initUndoLimit();
-    void initConfigButtons();
-    void initCheckForUpdates();
     void initAllowMultipleGuiInstances();
+    void initAntialiasingPinZoom();
     void initAutoCloseIdleDaemon();
     void initAutostart();
-    void initShowStartupLaunchMessage();
+    void initCheckForUpdates();
+    void initConfigButtons();
     void initCopyAndCloseAfterUpload();
-    void initSaveAfterCopy();
+    void initCopyOnDoubleClick();
     void initCopyPathAfterSave();
-    void initAntialiasingPinZoom();
-    void initUseJpgForClipboard();
-    void initUploadWithoutConfirmation();
+    void initHistoryConfirmationToDelete();
     void initPredefinedColorPaletteLarge();
+    void initSaveAfterCopy();
+    void initScrollArea();
+    void initShowDesktopNotification();
+    void initShowHelp();
+    void initShowMagnifier();
+    void initShowSidePanelButton();
+    void initShowStartupLaunchMessage();
+    void initShowTrayIcon();
+    void initSquareMagnifier();
+    void initUndoLimit();
+    void initUploadWithoutConfirmation();
+    void initUseJpgForClipboard();
+    void initUploadHistoryMax();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -100,4 +103,7 @@ private:
     QSpinBox* m_undoLimit;
     QComboBox* m_setSaveAsFileExtension;
     QCheckBox* m_predefinedColorPaletteLarge;
+    QCheckBox* m_showMagnifier;
+    QCheckBox* m_squareMagnifier;
+    QCheckBox* m_copyOnDoubleClick;
 };

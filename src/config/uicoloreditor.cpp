@@ -13,9 +13,8 @@
 #include <QVBoxLayout>
 
 UIcolorEditor::UIcolorEditor(QWidget* parent)
-  : QGroupBox(parent)
+  : QWidget(parent)
 {
-    setTitle(tr("UI Color Editor"));
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     m_hLayout = new QHBoxLayout;
     m_vLayout = new QVBoxLayout;
@@ -99,13 +98,13 @@ void UIcolorEditor::initButtons()
 
     m_vLayout->addWidget(new QLabel(tr("Select a Button to modify it"), this));
 
-    QGroupBox* frame = new QGroupBox();
+    auto* frame = new QGroupBox();
     frame->setFixedSize(frameSize, frameSize);
 
     m_buttonMainColor = new CaptureToolButton(m_buttonIconType, frame);
     m_buttonMainColor->move(m_buttonMainColor->x() + extraSize / 2,
                             m_buttonMainColor->y() + extraSize / 2);
-    QHBoxLayout* h1 = new QHBoxLayout();
+    auto* h1 = new QHBoxLayout();
     h1->addWidget(frame);
     m_labelMain = new ClickableLabel(tr("Main Color"), this);
     h1->addWidget(m_labelMain);
@@ -114,12 +113,12 @@ void UIcolorEditor::initButtons()
     m_buttonMainColor->setToolTip(tr("Click on this button to set the edition"
                                      " mode of the main color."));
 
-    QGroupBox* frame2 = new QGroupBox();
+    auto* frame2 = new QGroupBox();
     m_buttonContrast = new CaptureToolButton(m_buttonIconType, frame2);
     m_buttonContrast->move(m_buttonContrast->x() + extraSize / 2,
                            m_buttonContrast->y() + extraSize / 2);
 
-    QHBoxLayout* h2 = new QHBoxLayout();
+    auto* h2 = new QHBoxLayout();
     h2->addWidget(frame2);
     frame2->setFixedSize(frameSize, frameSize);
     m_labelContrast = new ClickableLabel(tr("Contrast Color"), this);

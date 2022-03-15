@@ -44,8 +44,9 @@ QString optionsToString(const QList<CommandOption>& options,
     }
     // check the length of the arguments
     for (auto const& arg : arguments) {
-        if (arg.name().length() > size)
+        if (arg.name().length() > size) {
             size = arg.name().length();
+        }
     }
     // generate the text
     QString result;
@@ -66,10 +67,10 @@ QString optionsToString(const QList<CommandOption>& options,
     if (!arguments.isEmpty()) {
         result += QObject::tr("Arguments") + ":\n";
     }
-    for (int i = 0; i < arguments.length(); ++i) {
+    for (const auto& argument : arguments) {
         result += QStringLiteral("  %1  %2\n")
-                    .arg(arguments.at(i).name().leftJustified(size, ' '))
-                    .arg(arguments.at(i).description());
+                    .arg(argument.name().leftJustified(size, ' '))
+                    .arg(argument.description());
     }
     return result;
 }
@@ -172,8 +173,9 @@ bool CommandLineParser::processOptions(const QStringList& args,
         ok = option.checkValue(valueStr);
         if (!ok) {
             QString msg = option.errorMsg();
-            if (!msg.endsWith(QLatin1String(".")))
+            if (!msg.endsWith(QLatin1String("."))) {
                 msg += QLatin1String(".");
+            }
             err << msg;
             return ok;
         }
@@ -338,11 +340,13 @@ void CommandLineParser::printHelp(QStringList args, const Node* node)
 
     // add command options and subarguments
     QList<CommandArgument> subArgs;
-    for (const Node& n : node->subNodes)
+    for (const Node& n : node->subNodes) {
         subArgs.append(n.argument);
+    }
     auto modifiedOptions = node->options;
-    if (m_withHelp)
+    if (m_withHelp) {
         modifiedOptions << helpOption;
+    }
     if (m_withVersion && node == &m_parseTree) {
         modifiedOptions << versionOption;
     }
@@ -359,9 +363,8 @@ CommandLineParser::Node* CommandLineParser::findParent(
     }
     // find the parent in the subNodes recursively
     Node* res = nullptr;
-    for (auto i = m_parseTree.subNodes.begin(); i != m_parseTree.subNodes.end();
-         ++i) {
-        res = recursiveParentSearch(parent, *i);
+    for (auto& subNode : m_parseTree.subNodes) {
+        res = recursiveParentSearch(parent, subNode);
         if (res != nullptr) {
             break;
         }
@@ -377,8 +380,8 @@ CommandLineParser::Node* CommandLineParser::recursiveParentSearch(
     if (node.argument == parent) {
         res = &node;
     } else {
-        for (auto i = node.subNodes.begin(); i != node.subNodes.end(); ++i) {
-            res = recursiveParentSearch(parent, *i);
+        for (auto& subNode : node.subNodes) {
+            res = recursiveParentSearch(parent, subNode);
             if (res != nullptr) {
                 break;
             }

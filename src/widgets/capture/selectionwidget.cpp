@@ -11,12 +11,13 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <QTimer>
+#include <utility>
 
 #define MARGIN (m_THandle.width())
 
-SelectionWidget::SelectionWidget(const QColor& c, QWidget* parent)
+SelectionWidget::SelectionWidget(QColor c, QWidget* parent)
   : QWidget(parent)
-  , m_color(c)
+  , m_color(std::move(c))
   , m_activeSide(NO_SIDE)
   , m_ignoreMouse(false)
 {
@@ -218,12 +219,14 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
         &newTop = newTopLeft.ry(), &newBottom = newBottomRight.ry();
     switch (mouseSide) {
         case TOPLEFT_SIDE:
-            if (m_activeSide)
+            if (m_activeSide) {
                 newTopLeft = pos;
+            }
             break;
         case BOTTOMRIGHT_SIDE:
-            if (m_activeSide)
+            if (m_activeSide) {
                 newBottomRight = pos;
+            }
             break;
         case TOPRIGHT_SIDE:
             if (m_activeSide) {
@@ -238,20 +241,24 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
             }
             break;
         case LEFT_SIDE:
-            if (m_activeSide)
+            if (m_activeSide) {
                 newLeft = pos.x();
+            }
             break;
         case RIGHT_SIDE:
-            if (m_activeSide)
+            if (m_activeSide) {
                 newRight = pos.x();
+            }
             break;
         case TOP_SIDE:
-            if (m_activeSide)
+            if (m_activeSide) {
                 newTop = pos.y();
+            }
             break;
         case BOTTOM_SIDE:
-            if (m_activeSide)
+            if (m_activeSide) {
                 newBottom = pos.y();
+            }
             break;
         default:
             if (m_activeSide) {
@@ -429,10 +436,12 @@ void SelectionWidget::setGeometryByKeyboard(const QRect& r)
 {
     static QTimer timer;
     QRect rect = r.intersected(parentWidget()->rect());
-    if (rect.width() <= 0)
+    if (rect.width() <= 0) {
         rect.setWidth(1);
-    if (rect.height() <= 0)
+    }
+    if (rect.height() <= 0) {
         rect.setHeight(1);
+    }
     setGeometry(rect);
     connect(
       &timer,
