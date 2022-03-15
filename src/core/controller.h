@@ -9,7 +9,7 @@
 #include <QVersionNumber>
 #include <functional>
 
-class SystemTray;
+class TrayIcon;
 class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
@@ -92,5 +92,4 @@ private:
     QHotkey* m_HotkeyScreenshotCapture;
     QHotkey* m_HotkeyScreenshotHistory;
 #endif
-    friend class SystemTray; // FIXME remove
 };

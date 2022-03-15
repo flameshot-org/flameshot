@@ -8,7 +8,7 @@ class QPixmap;
 class QRect;
 class QDBusMessage;
 class QDBusConnection;
-class SystemTray;
+class TrayIcon;
 
 class FlameshotDaemon : private QObject
 {
@@ -47,7 +47,7 @@ private:
     bool m_hostingClipboard;
     bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
-    SystemTray* m_trayIcon;
+    TrayIcon* m_trayIcon;
     static FlameshotDaemon* m_instance;
 
     friend class FlameshotDBusAdapter;

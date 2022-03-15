@@ -23,7 +23,7 @@
 #include "src/widgets/historywidget.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
-#include "src/widgets/systemtray.h"
+#include "src/widgets/trayicon.h"
 #include <QAction>
 #include <QApplication>
 #include <QBuffer>

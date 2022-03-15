@@ -6,7 +6,7 @@
 #include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "src/utils/globalvalues.h"
-#include "src/widgets/systemtray.h"
+#include "src/widgets/trayicon.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDBusConnection>
@@ -278,7 +278,7 @@ void FlameshotDaemon::enableTrayIcon(bool enable)
 #if !defined(Q_OS_WIN)
     if (enable) {
         if (m_trayIcon == nullptr) {
-            m_trayIcon = new SystemTray();
+            m_trayIcon = new TrayIcon();
         } else {
             m_trayIcon->show();
             return;
