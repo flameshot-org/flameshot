@@ -45,7 +45,9 @@ void SystemNotification::sendMessage(const QString& text,
       [&]() {
           // The call is queued to avoid recursive static initialization of
           // Controller and ConfigHandler.
-          Controller::instance()->sendTrayNotification(text, title, timeout);
+          if (FlameshotDaemon::instance())
+              FlameshotDaemon::instance()->sendTrayNotification(
+                text, title, timeout);
       },
       Qt::QueuedConnection);
 #else

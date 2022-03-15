@@ -55,7 +55,7 @@ TrayIcon::TrayIcon(QObject* parent)
 
 #ifdef Q_OS_WIN
     // Ensure proper removal of tray icon when program quits on Windows.
-    connect(qApp, &QCoreApplication::aboutToQuit, this, &SystemTray::hide);
+    connect(qApp, &QCoreApplication::aboutToQuit, this, &TrayIcon::hide);
 #endif
 
     show(); // TODO needed?
