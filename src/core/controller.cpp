@@ -408,7 +408,7 @@ void Controller::exportCapture(QPixmap capture,
     }
 
     if (!(tasks & CR::UPLOAD)) {
-        emit captureTaken(capture, selection);
+        emit captureTaken(capture);
     }
 }
 

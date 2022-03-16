@@ -83,11 +83,11 @@ void CaptureLauncher::connectCaptureSlots() const
     connect(Controller::instance(),
             &Controller::captureTaken,
             this,
-            &CaptureLauncher::captureTaken);
+            &CaptureLauncher::onCaptureTaken);
     connect(Controller::instance(),
             &Controller::captureFailed,
             this,
-            &CaptureLauncher::captureFailed);
+            &CaptureLauncher::onCaptureFailed);
 }
 
 void CaptureLauncher::disconnectCaptureSlots() const
@@ -100,14 +100,14 @@ void CaptureLauncher::disconnectCaptureSlots() const
     disconnect(Controller::instance(),
                &Controller::captureTaken,
                this,
-               &CaptureLauncher::captureTaken);
+               &CaptureLauncher::onCaptureTaken);
     disconnect(Controller::instance(),
                &Controller::captureFailed,
                this,
-               &CaptureLauncher::captureFailed);
+               &CaptureLauncher::onCaptureFailed);
 }
 
-void CaptureLauncher::captureTaken(QPixmap screenshot)
+void CaptureLauncher::onCaptureTaken(QPixmap screenshot)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
@@ -124,7 +124,7 @@ void CaptureLauncher::captureTaken(QPixmap screenshot)
     ui->launchButton->setEnabled(true);
 }
 
-void CaptureLauncher::captureFailed()
+void CaptureLauncher::onCaptureFailed()
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();

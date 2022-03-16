@@ -7,7 +7,6 @@
 #include <QObject>
 #include <QPointer>
 #include <QVersionNumber>
-#include <functional>
 
 class CaptureWidget;
 class ConfigWindow;
@@ -18,7 +17,6 @@ class UploadHistory;
      defined(Q_OS_MACX))
 class QHotkey;
 #endif
-using lambda = std::function<void(void)>;
 
 class Controller : public QObject
 {
@@ -51,8 +49,7 @@ public:
     static Origin origin();
 
 signals:
-    // TODO remove all parameters from captureTaken and update dependencies
-    void captureTaken(QPixmap p, const QRect& selection);
+    void captureTaken(QPixmap p);
     void captureFailed();
 
 public slots:
