@@ -3,7 +3,7 @@
 
 #include "capturelauncher.h"
 #include "./ui_capturelauncher.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
@@ -75,17 +75,17 @@ void CaptureLauncher::startCapture()
                        additionalDelayToHideUI +
                          ui->delayTime->value() * secondsToMilliseconds);
     connectCaptureSlots();
-    Controller::instance()->requestCapture(req);
+    Flameshot::instance()->requestCapture(req);
 }
 
 void CaptureLauncher::connectCaptureSlots() const
 {
-    connect(Controller::instance(),
-            &Controller::captureTaken,
+    connect(Flameshot::instance(),
+            &Flameshot::captureTaken,
             this,
             &CaptureLauncher::onCaptureTaken);
-    connect(Controller::instance(),
-            &Controller::captureFailed,
+    connect(Flameshot::instance(),
+            &Flameshot::captureFailed,
             this,
             &CaptureLauncher::onCaptureFailed);
 }
@@ -97,12 +97,12 @@ void CaptureLauncher::disconnectCaptureSlots() const
     // (random number, usually from 1 up to 20).
     // So now it enables signal on "Capture new screenshot" button and disables
     // on first success of fail.
-    disconnect(Controller::instance(),
-               &Controller::captureTaken,
+    disconnect(Flameshot::instance(),
+               &Flameshot::captureTaken,
                this,
                &CaptureLauncher::onCaptureTaken);
-    disconnect(Controller::instance(),
-               &Controller::captureFailed,
+    disconnect(Flameshot::instance(),
+               &Flameshot::captureFailed,
                this,
                &CaptureLauncher::onCaptureFailed);
 }

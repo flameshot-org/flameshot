@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
-#include "controller.h"
+#include "flameshot.h"
 #include "flameshotdaemon.h"
 
 #if defined(Q_OS_MACOS)
@@ -37,7 +37,7 @@
 #include <QScreen>
 #endif
 
-Controller::Controller()
+Flameshot::Flameshot()
   : m_captureWindow(nullptr)
 #if defined(Q_OS_MACOS)
   , m_HotkeyScreenshotCapture(nullptr)
@@ -70,13 +70,13 @@ Controller::Controller()
 #endif
 }
 
-Controller* Controller::instance()
+Flameshot* Flameshot::instance()
 {
-    static Controller c;
+    static Flameshot c;
     return &c;
 }
 
-CaptureWidget* Controller::gui(const CaptureRequest& req)
+CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 {
     if (!resolveAnyConfigErrors()) {
         return nullptr;
@@ -135,7 +135,7 @@ CaptureWidget* Controller::gui(const CaptureRequest& req)
     }
 }
 
-void Controller::screen(CaptureRequest req, const int screenNumber)
+void Flameshot::screen(CaptureRequest req, const int screenNumber)
 {
     if (!resolveAnyConfigErrors())
         return;
@@ -176,7 +176,7 @@ void Controller::screen(CaptureRequest req, const int screenNumber)
     }
 }
 
-void Controller::full(const CaptureRequest& req)
+void Flameshot::full(const CaptureRequest& req)
 {
     if (!resolveAnyConfigErrors())
         return;
@@ -195,7 +195,7 @@ void Controller::full(const CaptureRequest& req)
     }
 }
 
-void Controller::launcher()
+void Flameshot::launcher()
 {
     if (!resolveAnyConfigErrors())
         return;
@@ -210,7 +210,7 @@ void Controller::launcher()
 #endif
 }
 
-void Controller::config()
+void Flameshot::config()
 {
     if (!resolveAnyConfigErrors())
         return;
@@ -225,7 +225,7 @@ void Controller::config()
     }
 }
 
-void Controller::info()
+void Flameshot::info()
 {
     if (!m_infoWindow) {
         m_infoWindow = new InfoWindow();
@@ -236,7 +236,7 @@ void Controller::info()
     }
 }
 
-void Controller::history()
+void Flameshot::history()
 {
     static UploadHistory* historyWidget = nullptr;
     if (historyWidget == nullptr) {
@@ -254,18 +254,18 @@ void Controller::history()
 #endif
 }
 
-QVersionNumber Controller::getVersion()
+QVersionNumber Flameshot::getVersion()
 {
     return QVersionNumber::fromString(
       QStringLiteral(APP_VERSION).replace("v", ""));
 }
 
-void Controller::setOrigin(Origin origin)
+void Flameshot::setOrigin(Origin origin)
 {
     m_origin = origin;
 }
 
-Controller::Origin Controller::origin()
+Flameshot::Origin Flameshot::origin()
 {
     return m_origin;
 }
@@ -274,7 +274,7 @@ Controller::Origin Controller::origin()
  * @brief Prompt the user to resolve config errors if necessary.
  * @return Whether errors were resolved.
  */
-bool Controller::resolveAnyConfigErrors()
+bool Flameshot::resolveAnyConfigErrors()
 {
     bool resolved = true;
     ConfigHandler config;
@@ -302,7 +302,7 @@ bool Controller::resolveAnyConfigErrors()
     return resolved;
 }
 
-void Controller::requestCapture(const CaptureRequest& request)
+void Flameshot::requestCapture(const CaptureRequest& request)
 {
     if (!resolveAnyConfigErrors()) {
         return;
@@ -331,9 +331,9 @@ void Controller::requestCapture(const CaptureRequest& request)
     }
 }
 
-void Controller::exportCapture(QPixmap capture,
-                               QRect& selection,
-                               const CaptureRequest& req)
+void Flameshot::exportCapture(QPixmap capture,
+                              QRect& selection,
+                              const CaptureRequest& req)
 {
     using CR = CaptureRequest;
     int tasks = req.tasks(), mode = req.captureMode();
@@ -413,4 +413,4 @@ void Controller::exportCapture(QPixmap capture,
 }
 
 // STATIC ATTRIBUTES
-Controller::Origin Controller::m_origin = Controller::DAEMON;
+Flameshot::Origin Flameshot::m_origin = Flameshot::DAEMON;

@@ -1,5 +1,5 @@
 #include "systemnotification.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QUrl>
@@ -46,7 +46,7 @@ void SystemNotification::sendMessage(const QString& text,
       this,
       [&]() {
           // The call is queued to avoid recursive static initialization of
-          // Controller and ConfigHandler.
+          // Flameshot and ConfigHandler.
           if (FlameshotDaemon::instance())
               FlameshotDaemon::instance()->sendTrayNotification(
                 text, title, timeout);

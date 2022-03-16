@@ -1,6 +1,6 @@
 #include "trayicon.h"
 
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/globalvalues.h"
 
@@ -116,18 +116,16 @@ void TrayIcon::initMenu()
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
             &QAction::triggered,
-            Controller::instance(),
-            &Controller::launcher);
+            Flameshot::instance(),
+            &Flameshot::launcher);
     QAction* configAction = new QAction(tr("&Configuration"), this);
     connect(configAction,
             &QAction::triggered,
-            Controller::instance(),
-            &Controller::config);
+            Flameshot::instance(),
+            &Flameshot::config);
     QAction* infoAction = new QAction(tr("&About"), this);
-    connect(infoAction,
-            &QAction::triggered,
-            Controller::instance(),
-            &Controller::info);
+    connect(
+      infoAction, &QAction::triggered, Flameshot::instance(), &Flameshot::info);
 
     m_appUpdates = new QAction(tr("Check for updates"), this);
     connect(m_appUpdates,
@@ -151,8 +149,8 @@ void TrayIcon::initMenu()
     QAction* recentAction = new QAction(tr("&Latest Uploads"), this);
     connect(recentAction,
             &QAction::triggered,
-            Controller::instance(),
-            &Controller::history);
+            Flameshot::instance(),
+            &Flameshot::history);
 
     m_menu->addAction(captureAction);
     m_menu->addAction(launcherAction);
@@ -180,6 +178,6 @@ void TrayIcon::enableCheckUpdatesAction(bool enable)
 
 void TrayIcon::startGuiCapture()
 {
-    auto* widget = Controller::instance()->gui();
+    auto* widget = Flameshot::instance()->gui();
     FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
 }

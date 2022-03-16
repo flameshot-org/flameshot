@@ -11,7 +11,7 @@
 #include "src/cli/commandlineparser.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
@@ -47,15 +47,15 @@ void wayland_hacks()
 
 void requestCaptureAndWait(const CaptureRequest& req)
 {
-    Controller* controller = Controller::instance();
-    controller->requestCapture(req);
-    QObject::connect(controller, &Controller::captureTaken, [&](QPixmap) {
+    Flameshot* flameshot = Flameshot::instance();
+    flameshot->requestCapture(req);
+    QObject::connect(flameshot, &Flameshot::captureTaken, [&](QPixmap) {
         // Only useful on MacOS because each instance hosts its own widgets
         if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
             qApp->exit(0);
         }
     });
-    QObject::connect(controller, &Controller::captureFailed, []() {
+    QObject::connect(flameshot, &Flameshot::captureFailed, []() {
         AbstractLogger::info() << "Screenshot aborted.";
         qApp->exit(1);
     });
@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
         qApp->installTranslator(&qtTranslator);
         qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
-        auto c = Controller::instance();
+        auto c = Flameshot::instance();
         FlameshotDaemon::start();
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -327,13 +327,13 @@ int main(int argc, char* argv[])
 
     // PROCESS DATA
     //--------------
-    Controller::setOrigin(Controller::CLI);
+    Flameshot::setOrigin(Flameshot::CLI);
     if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
         delete qApp;
         new QApplication(argc, argv);
-        Controller* controller = Controller::instance();
-        controller->launcher();
+        Flameshot* flameshot = Flameshot::instance();
+        flameshot->launcher();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
         delete qApp;
@@ -513,7 +513,7 @@ int main(int argc, char* argv[])
             new QApplication(argc, argv);
             QObject::connect(
               qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
-            Controller::instance()->config();
+            Flameshot::instance()->config();
             qApp->exec();
         } else {
             ConfigHandler config;

@@ -2,7 +2,7 @@
 
 #include "abstractlogger.h"
 #include "confighandler.h"
-#include "controller.h"
+#include "flameshot.h"
 #include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "src/utils/globalvalues.h"
@@ -325,7 +325,7 @@ void FlameshotDaemon::initTrayIcon()
     GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
     connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
-        Controller::instance()->gui();
+        Flameshot::instance()->gui();
     });
 #endif
 }
@@ -358,7 +358,7 @@ void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
 
         QVersionNumber appLatestVersion =
           QVersionNumber::fromString(m_appLatestVersion);
-        if (Controller::instance()->getVersion() < appLatestVersion) {
+        if (Flameshot::instance()->getVersion() < appLatestVersion) {
             emit newVersionAvailable(appLatestVersion);
             m_appLatestUrl = json["html_url"].toString();
             QString newVersion =

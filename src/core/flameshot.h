@@ -18,7 +18,7 @@ class UploadHistory;
 class QHotkey;
 #endif
 
-class Controller : public QObject
+class Flameshot : public QObject
 {
     Q_OBJECT
 
@@ -29,7 +29,7 @@ public:
         DAEMON
     };
 
-    static Controller* instance();
+    static Flameshot* instance();
 
 public slots:
     CaptureWidget* gui(
@@ -57,7 +57,7 @@ public slots:
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
 
 private:
-    Controller();
+    Flameshot();
     bool resolveAnyConfigErrors();
 
     // class members
