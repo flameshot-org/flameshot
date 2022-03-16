@@ -310,18 +310,19 @@ void Controller::requestCapture(const CaptureRequest& request)
 
     switch (request.captureMode()) {
         case CaptureRequest::FULLSCREEN_MODE:
-            doLater(
-              request.delay(), this, [this, request]() { full(request); });
+            QTimer::singleShot(request.delay(),
+                               [this, request] { full(request); });
             break;
         case CaptureRequest::SCREEN_MODE: {
             int&& number = request.data().toInt();
-            doLater(request.delay(), this, [this, request, number]() {
+            QTimer::singleShot(request.delay(), [this, request, number]() {
                 screen(request, number);
             });
             break;
         }
         case CaptureRequest::GRAPHICAL_MODE: {
-            doLater(request.delay(), this, [this, request]() { gui(request); });
+            QTimer::singleShot(
+              request.delay(), this, [this, request]() { gui(request); });
             break;
         }
         default:
@@ -409,17 +410,6 @@ void Controller::exportCapture(QPixmap capture,
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(capture, selection);
     }
-}
-
-void Controller::doLater(int msec, QObject* receiver, lambda func)
-{
-    auto* timer = new QTimer(receiver);
-    QObject::connect(timer, &QTimer::timeout, receiver, [timer, func]() {
-        func();
-        timer->deleteLater();
-    });
-    timer->setInterval(msec);
-    timer->start();
 }
 
 // STATIC ATTRIBUTES

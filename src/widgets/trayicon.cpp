@@ -7,6 +7,7 @@
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QMenu>
+#include <QTimer>
 #include <QUrl>
 #include <QVersionNumber>
 
@@ -47,8 +48,7 @@ TrayIcon::TrayIcon(QObject* parent)
                 m_menu->popup(QCursor::pos());
             }
         };
-        connect(
-          m_trayIcon, &QSystemTrayIcon::activated, this, trayIconActivated);
+        connect(this, &QSystemTrayIcon::activated, this, trayIconActivated);
     }
 #else
     connect(this, &TrayIcon::activated, this, [this](ActivationReason r) {
@@ -104,12 +104,11 @@ void TrayIcon::initMenu()
         } else {
             // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
             // the QMenu)
-            Controller::instance()->doLater(
-              400, this, [this]() { startGuiCapture(); });
+            QTimer::singleShot(400, this, [this]() { startGuiCapture(); });
         }
 #else
     // Wait 400 ms to hide the QMenu
-    Controller::instance()->doLater(400, this, [this]() {
+    QTimer::singleShot(400, this, [this]() {
         startGuiCapture();
     });
 #endif

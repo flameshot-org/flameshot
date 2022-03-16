@@ -63,12 +63,6 @@ private:
     Controller();
     bool resolveAnyConfigErrors();
 
-    // replace QTimer::singleShot introduced in Qt 5.4
-    // the actual target Qt version is 5.3
-public: // TODO temporary
-    void doLater(int msec, QObject* receiver, lambda func);
-
-private:
     // class members
     static Origin m_origin;
 

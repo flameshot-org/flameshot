@@ -19,6 +19,7 @@
 #include <QNetworkReply>
 #include <QPixmap>
 #include <QRect>
+#include <QTimer>
 #include <QUrl>
 
 #ifdef Q_OS_WIN
@@ -190,7 +191,7 @@ void FlameshotDaemon::getLatestAvailableVersion()
     m_networkCheckUpdates->get(requestCheckUpdates);
 
     // check for updates each 24 hours
-    Controller::instance()->doLater(1000 * 60 * 60 * 24, this, [this]() {
+    QTimer::singleShot(1000 * 60 * 60 * 24, [this]() {
         if (ConfigHandler().checkForUpdates()) {
             this->getLatestAvailableVersion();
         }
