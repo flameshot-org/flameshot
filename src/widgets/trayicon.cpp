@@ -1,6 +1,7 @@
 #include "trayicon.h"
 
 #include "src/core/controller.h"
+#include "src/core/flameshotdaemon.h"
 #include "src/utils/globalvalues.h"
 
 #include "src/utils/confighandler.h"
@@ -52,7 +53,7 @@ TrayIcon::TrayIcon(QObject* parent)
 #else
     connect(this, &TrayIcon::activated, this, [this](ActivationReason r) {
         if (r == Trigger) {
-            Controller::instance()->gui();
+            startGuiCapture();
         }
     });
 #endif
@@ -99,16 +100,18 @@ void TrayIcon::initMenu()
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
         if (currentMacOsVersion >= currentMacOsVersion.MacOSBigSur) {
-            gui();
+            startGuiCapture();
         } else {
             // It seems it is not relevant for MacOS BigSur (Wait 400 ms to hide
             // the QMenu)
-            doLater(400, this, [this]() { gui(); });
+            Controller::instance()->doLater(
+              400, this, [this]() { startGuiCapture(); });
         }
 #else
     // Wait 400 ms to hide the QMenu
-    CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, 400);
-    Controller::instance()->requestCapture(req);
+    Controller::instance()->doLater(400, this, [this]() {
+        startGuiCapture();
+    });
 #endif
     });
     QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
@@ -130,11 +133,11 @@ void TrayIcon::initMenu()
     m_appUpdates = new QAction(tr("Check for updates"), this);
     connect(m_appUpdates,
             &QAction::triggered,
-            Controller::instance(),
-            &Controller::checkForUpdates);
+            FlameshotDaemon::instance(),
+            &FlameshotDaemon::checkForUpdates);
 
-    connect(Controller::instance(),
-            &Controller::newVersionAvailable,
+    connect(FlameshotDaemon::instance(),
+            &FlameshotDaemon::newVersionAvailable,
             this,
             [this](QVersionNumber version) {
                 QString newVersion =
@@ -172,6 +175,12 @@ void TrayIcon::enableCheckUpdatesAction(bool enable)
         m_appUpdates->setEnabled(enable);
     }
     if (enable) {
-        Controller::instance()->getLatestAvailableVersion();
+        FlameshotDaemon::instance()->getLatestAvailableVersion();
     }
+}
+
+void TrayIcon::startGuiCapture()
+{
+    auto* widget = Controller::instance()->gui();
+    FlameshotDaemon::instance()->showUpdateNotificationIfAvailable(widget);
 }

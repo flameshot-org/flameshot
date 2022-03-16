@@ -18,6 +18,8 @@ private:
     void initMenu();
     void enableCheckUpdatesAction(bool enable);
 
+    void startGuiCapture();
+
     QMenu* m_menu;
     QAction* m_appUpdates;
 };

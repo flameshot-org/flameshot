@@ -9,7 +9,6 @@
 #endif
 
 #include "abstractlogger.h"
-#include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "src/config/configresolver.h"
 #include "src/config/configwindow.h"
@@ -22,21 +21,14 @@
 #include "src/widgets/capturelauncher.h"
 #include "src/widgets/imguploaddialog.h"
 #include "src/widgets/infowindow.h"
-#include "src/widgets/trayicon.h"
 #include "src/widgets/uploadhistory.h"
-#include <QAction>
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFile>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QMessageBox>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QThread>
 #include <QTimer>
 #include <QVersionNumber>
@@ -45,20 +37,13 @@
 #include <QScreen>
 #endif
 
-// Controller is the core component of Flameshot, creates the trayIcon and
-// launches the capture widget
-
 Controller::Controller()
   : m_captureWindow(nullptr)
-  , m_networkCheckUpdates(nullptr)
-  , m_showCheckAppUpdateStatus(false)
 #if defined(Q_OS_MACOS)
   , m_HotkeyScreenshotCapture(nullptr)
   , m_HotkeyScreenshotHistory(nullptr)
 #endif
 {
-    m_appLatestVersion = QStringLiteral(APP_VERSION).replace("v", "");
-
     QString StyleSheet = CaptureButton::globalStyleSheet();
     qApp->setStyleSheet(StyleSheet);
 
@@ -83,10 +68,6 @@ Controller::Controller()
                      qApp,
                      [this]() { history(); });
 #endif
-
-    if (ConfigHandler().checkForUpdates()) {
-        getLatestAvailableVersion();
-    }
 }
 
 Controller* Controller::instance()
@@ -95,10 +76,10 @@ Controller* Controller::instance()
     return &c;
 }
 
-void Controller::gui(const CaptureRequest& req)
+CaptureWidget* Controller::gui(const CaptureRequest& req)
 {
     if (!resolveAnyConfigErrors()) {
-        return;
+        return nullptr;
     }
 
 #if defined(Q_OS_MACOS)
@@ -130,7 +111,7 @@ void Controller::gui(const CaptureRequest& req)
         if (0 == timeout) {
             QMessageBox::warning(
               nullptr, tr("Error"), tr("Unable to close active modal widgets"));
-            return;
+            return nullptr;
         }
 
         m_captureWindow = new CaptureWidget(req);
@@ -148,12 +129,7 @@ void Controller::gui(const CaptureRequest& req)
         m_captureWindow->showFullScreen();
 //        m_captureWindow->show(); // For CaptureWidget Debugging under Linux
 #endif
-        if (!m_appLatestUrl.isEmpty() &&
-            ConfigHandler().ignoreUpdateToVersion().compare(
-              m_appLatestVersion) < 0) {
-            m_captureWindow->showAppUpdateNotification(m_appLatestVersion,
-                                                       m_appLatestUrl);
-        }
+        return m_captureWindow;
     } else {
         emit captureFailed();
     }
@@ -294,26 +270,6 @@ Controller::Origin Controller::origin()
     return m_origin;
 }
 
-void Controller::getLatestAvailableVersion()
-{
-    // This features is required for MacOS and Windows user and for Linux users
-    // who installed Flameshot not from the repository.
-    m_networkCheckUpdates = new QNetworkAccessManager(this);
-    QNetworkRequest requestCheckUpdates(QUrl(FLAMESHOT_APP_VERSION_URL));
-    connect(m_networkCheckUpdates,
-            &QNetworkAccessManager::finished,
-            this,
-            &Controller::handleReplyCheckUpdates);
-    m_networkCheckUpdates->get(requestCheckUpdates);
-
-    // check for updates each 24 hours
-    doLater(1000 * 60 * 60 * 24, this, [this]() {
-        if (ConfigHandler().checkForUpdates()) {
-            this->getLatestAvailableVersion();
-        }
-    });
-}
-
 /**
  * @brief Prompt the user to resolve config errors if necessary.
  * @return Whether errors were resolved.
@@ -344,60 +300,6 @@ bool Controller::resolveAnyConfigErrors()
         qApp->processEvents();
     }
     return resolved;
-}
-
-void Controller::checkForUpdates()
-{
-    if (m_appLatestUrl.isEmpty()) {
-        m_showCheckAppUpdateStatus = true;
-        Controller::instance()->getLatestAvailableVersion();
-    } else {
-        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
-    }
-}
-
-void Controller::handleReplyCheckUpdates(QNetworkReply* reply)
-{
-    if (!ConfigHandler().checkForUpdates()) {
-        return;
-    }
-    if (reply->error() == QNetworkReply::NoError) {
-        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject json = response.object();
-        m_appLatestVersion = json["tag_name"].toString().replace("v", "");
-
-        QVersionNumber appLatestVersion =
-          QVersionNumber::fromString(m_appLatestVersion);
-        if (getVersion() < appLatestVersion) {
-            emit newVersionAvailable(appLatestVersion);
-            m_appLatestUrl = json["html_url"].toString();
-            QString newVersion =
-              tr("New version %1 is available").arg(m_appLatestVersion);
-            if (m_showCheckAppUpdateStatus) {
-                if (FlameshotDaemon::instance()) {
-                    FlameshotDaemon::instance()->sendTrayNotification(
-                      newVersion, "Flameshot");
-                }
-                QDesktopServices::openUrl(QUrl(m_appLatestUrl));
-            }
-        } else if (m_showCheckAppUpdateStatus) {
-            if (FlameshotDaemon::instance()) {
-                FlameshotDaemon::instance()->sendTrayNotification(
-                  tr("You have the latest version"), "Flameshot");
-            }
-        }
-    } else {
-        qWarning() << "Failed to get information about the latest version. "
-                   << reply->errorString();
-        if (m_showCheckAppUpdateStatus) {
-            if (FlameshotDaemon::instance()) {
-                FlameshotDaemon::instance()->sendTrayNotification(
-                  tr("Failed to get information about the latest version."),
-                  "Flameshot");
-            }
-        }
-    }
-    m_showCheckAppUpdateStatus = false;
 }
 
 void Controller::requestCapture(const CaptureRequest& request)

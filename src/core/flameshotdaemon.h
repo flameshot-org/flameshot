@@ -9,8 +9,12 @@ class QRect;
 class QDBusMessage;
 class QDBusConnection;
 class TrayIcon;
+class QNetworkAccessManager;
+class QNetworkReply;
+class QVersionNumber;
+class CaptureWidget;
 
-class FlameshotDaemon : private QObject
+class FlameshotDaemon : public QObject
 {
     Q_OBJECT
 public:
@@ -26,6 +30,15 @@ public:
       const QString& title = QStringLiteral("Flameshot Info"),
       const int timeout = 5000);
 
+    void showUpdateNotificationIfAvailable(CaptureWidget* widget);
+
+public slots:
+    void checkForUpdates();
+    void getLatestAvailableVersion();
+
+signals:
+    void newVersionAvailable(QVersionNumber version);
+
 private:
     FlameshotDaemon();
     void quitIfIdle();
@@ -39,6 +52,10 @@ private:
     void initTrayIcon();
     void enableTrayIcon(bool enable);
 
+private slots:
+    void handleReplyCheckUpdates(QNetworkReply* reply);
+
+private:
     static QDBusMessage createMethodCall(QString method);
     static void checkDBusConnection(const QDBusConnection& connection);
     static void call(const QDBusMessage& m);
@@ -48,6 +65,12 @@ private:
     bool m_clipboardSignalBlocked;
     QList<QWidget*> m_widgets;
     TrayIcon* m_trayIcon;
+
+    QString m_appLatestUrl;
+    QString m_appLatestVersion;
+    bool m_showCheckAppUpdateStatus;
+    QNetworkAccessManager* m_networkCheckUpdates;
+
     static FlameshotDaemon* m_instance;
 
     friend class FlameshotDBusAdapter;

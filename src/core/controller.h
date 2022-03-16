@@ -9,14 +9,11 @@
 #include <QVersionNumber>
 #include <functional>
 
-class TrayIcon;
 class CaptureWidget;
 class ConfigWindow;
 class InfoWindow;
 class CaptureLauncher;
 class UploadHistory;
-class QNetworkAccessManager;
-class QNetworkReply;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
 class QHotkey;
@@ -37,7 +34,8 @@ public:
     static Controller* instance();
 
 public slots:
-    void gui(const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
+    CaptureWidget* gui(
+      const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
     void screen(CaptureRequest req, const int screenNumber = -1);
     void full(const CaptureRequest& req);
     void launcher();
@@ -51,21 +49,15 @@ public slots:
 public:
     static void setOrigin(Origin origin);
     static Origin origin();
-    void getLatestAvailableVersion();
 
 signals:
     // TODO remove all parameters from captureTaken and update dependencies
     void captureTaken(QPixmap p, const QRect& selection);
     void captureFailed();
-    void newVersionAvailable(QVersionNumber version);
 
 public slots:
     void requestCapture(const CaptureRequest& request);
     void exportCapture(QPixmap p, QRect& selection, const CaptureRequest& req);
-
-public slots:
-    void handleReplyCheckUpdates(QNetworkReply* reply);
-    void checkForUpdates();
 
 private:
     Controller();
@@ -73,12 +65,11 @@ private:
 
     // replace QTimer::singleShot introduced in Qt 5.4
     // the actual target Qt version is 5.3
+public: // TODO temporary
     void doLater(int msec, QObject* receiver, lambda func);
 
+private:
     // class members
-    QString m_appLatestUrl;
-    QString m_appLatestVersion;
-    bool m_showCheckAppUpdateStatus;
     static Origin m_origin;
 
     QPointer<CaptureWidget> m_captureWindow;
@@ -86,7 +77,6 @@ private:
     QPointer<CaptureLauncher> m_launcherWindow;
     QPointer<ConfigWindow> m_configWindow;
 
-    QNetworkAccessManager* m_networkCheckUpdates;
 #if (defined(Q_OS_MAC) || defined(Q_OS_MAC64) || defined(Q_OS_MACOS) ||        \
      defined(Q_OS_MACX))
     QHotkey* m_HotkeyScreenshotCapture;

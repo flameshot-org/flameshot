@@ -6,13 +6,20 @@
 #include "pinwidget.h"
 #include "screenshotsaver.h"
 #include "src/utils/globalvalues.h"
+#include "src/widgets/capture/capturewidget.h"
 #include "src/widgets/trayicon.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QDesktopServices>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QPixmap>
 #include <QRect>
+#include <QUrl>
 
 #ifdef Q_OS_WIN
 #include "src/core/globalshortcutfilter.h"
@@ -32,22 +39,26 @@
  * If the `autoCloseIdleDaemon` option is true, the daemon will close as soon as
  * it is not needed to host pinned screenshots and the clipboard. On Windows,
  * this option is disabled and the daemon always persists, because the system
- * tray is currently the only way to interact with flameshot.
+ * tray is currently the only way to interact with flameshot there.
  *
  * Both the daemon and non-daemon flameshot processes use the same public API,
  * which is implemented as static methods. In the daemon process, this class is
  * also instantiated as a singleton, so it can listen to D-Bus calls via the
  * sigslot mechanism. The instantiation is done by calling `start` (this must be
- * done only in the daemon process).
+ * done only in the daemon process). Any instance (as opposed to static) members
+ * can only be used if the current process is a daemon.
  *
  * @note The daemon will be automatically launched where necessary, via D-Bus.
- * This applies only on Linux.
+ * This applies only to Linux.
  */
 FlameshotDaemon::FlameshotDaemon()
   : m_persist(false)
   , m_hostingClipboard(false)
   , m_clipboardSignalBlocked(false)
   , m_trayIcon(nullptr)
+  , m_networkCheckUpdates(nullptr)
+  , m_showCheckAppUpdateStatus(false)
+  , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
 {
     connect(
       QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() {
@@ -58,7 +69,6 @@ FlameshotDaemon::FlameshotDaemon()
           m_hostingClipboard = false;
           quitIfIdle();
       });
-    initTrayIcon();
 #ifdef Q_OS_WIN
     m_persist = true;
 #else
@@ -76,12 +86,17 @@ FlameshotDaemon::FlameshotDaemon()
                 m_persist = !config.autoCloseIdleDaemon();
             });
 #endif
+    if (ConfigHandler().checkForUpdates()) {
+        getLatestAvailableVersion();
+    }
 }
 
 void FlameshotDaemon::start()
 {
     if (!m_instance) {
         m_instance = new FlameshotDaemon();
+        // Tray icon needs FlameshotDaemon::instance() to be non-null
+        m_instance->initTrayIcon();
         qApp->setQuitOnLastWindowClosed(false);
     }
 }
@@ -150,6 +165,45 @@ void FlameshotDaemon::sendTrayNotification(const QString& text,
     if (m_trayIcon) {
         m_trayIcon->showMessage(
           title, text, QIcon(GlobalValues::iconPath()), timeout);
+    }
+}
+
+void FlameshotDaemon::showUpdateNotificationIfAvailable(CaptureWidget* widget)
+{
+    if (!m_appLatestUrl.isEmpty() &&
+        ConfigHandler().ignoreUpdateToVersion().compare(m_appLatestVersion) <
+          0) {
+        widget->showAppUpdateNotification(m_appLatestVersion, m_appLatestUrl);
+    }
+}
+
+void FlameshotDaemon::getLatestAvailableVersion()
+{
+    // This features is required for MacOS and Windows user and for Linux users
+    // who installed Flameshot not from the repository.
+    m_networkCheckUpdates = new QNetworkAccessManager(this);
+    QNetworkRequest requestCheckUpdates(QUrl(FLAMESHOT_APP_VERSION_URL));
+    connect(m_networkCheckUpdates,
+            &QNetworkAccessManager::finished,
+            this,
+            &FlameshotDaemon::handleReplyCheckUpdates);
+    m_networkCheckUpdates->get(requestCheckUpdates);
+
+    // check for updates each 24 hours
+    Controller::instance()->doLater(1000 * 60 * 60 * 24, this, [this]() {
+        if (ConfigHandler().checkForUpdates()) {
+            this->getLatestAvailableVersion();
+        }
+    });
+}
+
+void FlameshotDaemon::checkForUpdates()
+{
+    if (m_appLatestUrl.isEmpty()) {
+        m_showCheckAppUpdateStatus = true;
+        getLatestAvailableVersion();
+    } else {
+        QDesktopServices::openUrl(QUrl(m_appLatestUrl));
     }
 }
 
@@ -289,6 +343,45 @@ void FlameshotDaemon::enableTrayIcon(bool enable)
         m_trayIcon->hide();
     }
 #endif
+}
+
+void FlameshotDaemon::handleReplyCheckUpdates(QNetworkReply* reply)
+{
+    if (!ConfigHandler().checkForUpdates()) {
+        return;
+    }
+    if (reply->error() == QNetworkReply::NoError) {
+        QJsonDocument response = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject json = response.object();
+        m_appLatestVersion = json["tag_name"].toString().replace("v", "");
+
+        QVersionNumber appLatestVersion =
+          QVersionNumber::fromString(m_appLatestVersion);
+        if (Controller::instance()->getVersion() < appLatestVersion) {
+            emit newVersionAvailable(appLatestVersion);
+            m_appLatestUrl = json["html_url"].toString();
+            QString newVersion =
+              tr("New version %1 is available").arg(m_appLatestVersion);
+            if (m_showCheckAppUpdateStatus) {
+                sendTrayNotification(newVersion, "Flameshot");
+                QDesktopServices::openUrl(QUrl(m_appLatestUrl));
+            }
+        } else if (m_showCheckAppUpdateStatus) {
+            sendTrayNotification(tr("You have the latest version"),
+                                 "Flameshot");
+        }
+    } else {
+        qWarning() << "Failed to get information about the latest version. "
+                   << reply->errorString();
+        if (m_showCheckAppUpdateStatus) {
+            if (FlameshotDaemon::instance()) {
+                FlameshotDaemon::instance()->sendTrayNotification(
+                  tr("Failed to get information about the latest version."),
+                  "Flameshot");
+            }
+        }
+    }
+    m_showCheckAppUpdateStatus = false;
 }
 
 QDBusMessage FlameshotDaemon::createMethodCall(QString method)
