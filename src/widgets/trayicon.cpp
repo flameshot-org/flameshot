@@ -9,6 +9,10 @@
 #include <QUrl>
 #include <QVersionNumber>
 
+#if defined(Q_OS_MACOS)
+#include <QOperatingSystemVersion>
+#endif
+
 TrayIcon::TrayIcon(QObject* parent)
   : QSystemTrayIcon(parent)
 {
