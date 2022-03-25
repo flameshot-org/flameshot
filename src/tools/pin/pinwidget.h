@@ -45,4 +45,5 @@ private:
     bool m_expanding{ false };
     qreal m_scaleFactor{ 1 };
     qreal m_currentStepScaleFactor{ 1 };
+    bool m_sizeChanged{ false };
 };
