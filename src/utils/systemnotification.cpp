@@ -1,5 +1,5 @@
 #include "systemnotification.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QUrl>
@@ -8,6 +8,8 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#else
+#include "src/core/flameshotdaemon.h"
 #endif
 
 SystemNotification::SystemNotification(QObject* parent)
@@ -44,8 +46,10 @@ void SystemNotification::sendMessage(const QString& text,
       this,
       [&]() {
           // The call is queued to avoid recursive static initialization of
-          // Controller and ConfigHandler.
-          Controller::getInstance()->sendTrayNotification(text, title, timeout);
+          // Flameshot and ConfigHandler.
+          if (FlameshotDaemon::instance())
+              FlameshotDaemon::instance()->sendTrayNotification(
+                text, title, timeout);
       },
       Qt::QueuedConnection);
 #else

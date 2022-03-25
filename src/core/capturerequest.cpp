@@ -3,7 +3,7 @@
 
 #include "capturerequest.h"
 #include "confighandler.h"
-#include "controller.h"
+#include "flameshot.h"
 #include "imgupload/imguploadermanager.h"
 #include "pinwidget.h"
 #include "src/utils/screenshotsaver.h"

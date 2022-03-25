@@ -12,7 +12,7 @@
 #include "capturewidget.h"
 #include "abstractlogger.h"
 #include "copytool.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
 #include "src/utils/colorutils.h"
@@ -261,10 +261,10 @@ CaptureWidget::~CaptureWidget()
     if (m_captureDone) {
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
-        Controller::getInstance()->exportCapture(
+        Flameshot::instance()->exportCapture(
           pixmap(), geometry, m_context.request);
     } else {
-        Controller::getInstance()->handleCaptureFailed();
+        emit Flameshot::instance()->captureFailed();
     }
 }
 

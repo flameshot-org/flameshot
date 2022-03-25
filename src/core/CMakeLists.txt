@@ -1,5 +1,5 @@
 target_sources(flameshot PRIVATE
-    controller.h
+    flameshot.h
     flameshotdaemon.h
     flameshotdbusadapter.h
     qguiappcurrentscreen.h
@@ -7,7 +7,7 @@ target_sources(flameshot PRIVATE
 
 target_sources(flameshot PRIVATE
     capturerequest.cpp
-    controller.cpp
+    flameshot.cpp
     flameshotdaemon.cpp
     flameshotdbusadapter.cpp
     qguiappcurrentscreen.cpp
