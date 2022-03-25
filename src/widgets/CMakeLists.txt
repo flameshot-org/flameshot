@@ -13,6 +13,7 @@ target_sources(
         capturelauncher.h
         draggablewidgetmaker.h
         imagelabel.h
+        trayicon.h
         infowindow.h
         loadspinner.h
         notificationwidget.h
@@ -30,6 +31,7 @@ target_sources(
         PRIVATE capturelauncher.cpp
         draggablewidgetmaker.cpp
         imagelabel.cpp
+        trayicon.cpp
         infowindow.cpp
         loadspinner.cpp
         notificationwidget.cpp

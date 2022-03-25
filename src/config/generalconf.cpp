@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "generalconf.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
 #include <QComboBox>
@@ -127,7 +127,6 @@ void GeneralConf::showDesktopNotificationChanged(bool checked)
 void GeneralConf::checkForUpdatesChanged(bool checked)
 {
     ConfigHandler().setCheckForUpdates(checked);
-    Controller::getInstance()->setCheckForUpdatesEnabled(checked);
 }
 
 void GeneralConf::allowMultipleGuiInstancesChanged(bool checked)

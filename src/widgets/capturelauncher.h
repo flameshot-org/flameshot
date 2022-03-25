@@ -26,6 +26,6 @@ private:
 
 private slots:
     void startCapture();
-    void captureTaken(QPixmap p);
-    void captureFailed();
+    void onCaptureTaken(QPixmap p);
+    void onCaptureFailed();
 };

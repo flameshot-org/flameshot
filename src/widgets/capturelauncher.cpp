@@ -3,7 +3,7 @@
 
 #include "capturelauncher.h"
 #include "./ui_capturelauncher.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
@@ -75,19 +75,19 @@ void CaptureLauncher::startCapture()
                        additionalDelayToHideUI +
                          ui->delayTime->value() * secondsToMilliseconds);
     connectCaptureSlots();
-    Controller::getInstance()->requestCapture(req);
+    Flameshot::instance()->requestCapture(req);
 }
 
 void CaptureLauncher::connectCaptureSlots() const
 {
-    connect(Controller::getInstance(),
-            &Controller::captureTaken,
+    connect(Flameshot::instance(),
+            &Flameshot::captureTaken,
             this,
-            &CaptureLauncher::captureTaken);
-    connect(Controller::getInstance(),
-            &Controller::captureFailed,
+            &CaptureLauncher::onCaptureTaken);
+    connect(Flameshot::instance(),
+            &Flameshot::captureFailed,
             this,
-            &CaptureLauncher::captureFailed);
+            &CaptureLauncher::onCaptureFailed);
 }
 
 void CaptureLauncher::disconnectCaptureSlots() const
@@ -97,17 +97,17 @@ void CaptureLauncher::disconnectCaptureSlots() const
     // (random number, usually from 1 up to 20).
     // So now it enables signal on "Capture new screenshot" button and disables
     // on first success of fail.
-    disconnect(Controller::getInstance(),
-               &Controller::captureTaken,
+    disconnect(Flameshot::instance(),
+               &Flameshot::captureTaken,
                this,
-               &CaptureLauncher::captureTaken);
-    disconnect(Controller::getInstance(),
-               &Controller::captureFailed,
+               &CaptureLauncher::onCaptureTaken);
+    disconnect(Flameshot::instance(),
+               &Flameshot::captureFailed,
                this,
-               &CaptureLauncher::captureFailed);
+               &CaptureLauncher::onCaptureFailed);
 }
 
-void CaptureLauncher::captureTaken(QPixmap screenshot)
+void CaptureLauncher::onCaptureTaken(QPixmap screenshot)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
@@ -124,7 +124,7 @@ void CaptureLauncher::captureTaken(QPixmap screenshot)
     ui->launchButton->setEnabled(true);
 }
 
-void CaptureLauncher::captureFailed()
+void CaptureLauncher::onCaptureFailed()
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();

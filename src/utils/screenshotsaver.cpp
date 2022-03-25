@@ -3,7 +3,7 @@
 
 #include "screenshotsaver.h"
 #include "abstractlogger.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
