@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-
 #include "generalconf.h"
 #include "src/core/controller.h"
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDebug>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
@@ -49,6 +49,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initSaveAfterCopy();
     initUploadHistoryMax();
     initUndoLimit();
+    initUploadClientSecret();
     initAllowMultipleGuiInstances();
 #if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
@@ -515,6 +516,33 @@ void GeneralConf::initUploadHistoryMax()
             this,
             SLOT(uploadHistoryMaxChanged(int)));
     vboxLayout->addWidget(m_uploadHistoryMax);
+}
+
+void GeneralConf::initUploadClientSecret()
+{
+    auto* box = new QGroupBox(tr("Imgur API Key"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+
+    m_uploadClientKey = new QLineEdit(this);
+    QString foreground = this->palette().windowText().color().name();
+    m_uploadClientKey->setStyleSheet(
+      QStringLiteral("color: %1").arg(foreground));
+    m_uploadClientKey->setText(ConfigHandler().uploadClientSecret());
+    connect(m_uploadClientKey,
+            SIGNAL(editingFinished()),
+            this,
+            SLOT(uploadClientKeyEdited()));
+    vboxLayout->addWidget(m_uploadClientKey);
+}
+
+void GeneralConf::uploadClientKeyEdited()
+{
+    ConfigHandler().setUploadClientSecret(m_uploadClientKey->text());
+    qDebug() << m_uploadClientKey->text();
 }
 
 void GeneralConf::uploadHistoryMaxChanged(int max)
