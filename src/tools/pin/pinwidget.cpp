@@ -109,6 +109,8 @@ bool PinWidget::scrollEvent(QWheelEvent* event)
         m_currentStepScaleFactor = 1.0;
         m_expanding = false;
     }
+
+    m_sizeChanged = true;
     update();
     return true;
 }
@@ -165,22 +167,27 @@ bool PinWidget::event(QEvent* event)
 
 void PinWidget::paintEvent(QPaintEvent* event)
 {
-    const auto aspectRatio =
-      m_expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
-    const auto transformType = ConfigHandler().antialiasingPinZoom()
-                                 ? Qt::SmoothTransformation
-                                 : Qt::FastTransformation;
-    const qreal iw = m_pixmap.width();
-    const qreal ih = m_pixmap.height();
-    const qreal nw = qBound(MIN_SIZE,
-                            iw * m_currentStepScaleFactor * m_scaleFactor,
-                            static_cast<qreal>(maximumWidth()));
-    const qreal nh = qBound(MIN_SIZE,
-                            ih * m_currentStepScaleFactor * m_scaleFactor,
-                            static_cast<qreal>(maximumHeight()));
-    const QPixmap pix = m_pixmap.scaled(nw, nh, aspectRatio, transformType);
-    m_label->setPixmap(pix);
-    adjustSize();
+    if (m_sizeChanged) {
+        const auto aspectRatio =
+          m_expanding ? Qt::KeepAspectRatioByExpanding : Qt::KeepAspectRatio;
+        const auto transformType = ConfigHandler().antialiasingPinZoom()
+                                     ? Qt::SmoothTransformation
+                                     : Qt::FastTransformation;
+        const qreal iw = m_pixmap.width();
+        const qreal ih = m_pixmap.height();
+        const qreal nw = qBound(MIN_SIZE,
+                                iw * m_currentStepScaleFactor * m_scaleFactor,
+                                static_cast<qreal>(maximumWidth()));
+        const qreal nh = qBound(MIN_SIZE,
+                                ih * m_currentStepScaleFactor * m_scaleFactor,
+                                static_cast<qreal>(maximumHeight()));
+
+        const QPixmap pix = m_pixmap.scaled(nw, nh, aspectRatio, transformType);
+
+        m_label->setPixmap(pix);
+        adjustSize();
+        m_sizeChanged = false;
+    }
 }
 
 void PinWidget::pinchTriggered(QPinchGesture* gesture)
@@ -195,5 +202,6 @@ void PinWidget::pinchTriggered(QPinchGesture* gesture)
         m_currentStepScaleFactor = 1;
         m_expanding = false;
     }
+    m_sizeChanged = true;
     update();
 }
