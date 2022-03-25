@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGuiApplication>
+#include <QPainter>
 #include <QPixmap>
 #include <QScreen>
 
@@ -82,6 +83,7 @@ void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
     }
 #endif
 }
+
 QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
 {
     ok = true;

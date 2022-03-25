@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
 
 #include "capturerequest.h"
-#include "confighandler.h"
 #include "controller.h"
 #include "imgupload/imguploadermanager.h"
 #include "pinwidget.h"

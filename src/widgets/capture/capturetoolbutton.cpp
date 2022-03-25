@@ -18,8 +18,8 @@
 
 CaptureToolButton::CaptureToolButton(const CaptureTool::Type t, QWidget* parent)
   : CaptureButton(parent)
-  , m_buttonType(t)
   , m_tool(nullptr)
+  , m_buttonType(t)
   , m_emergeAnimation(nullptr)
 {
     initButton();
@@ -155,7 +155,7 @@ static std::map<CaptureTool::Type, int> buttonTypeOrder
 #endif
 
       { CaptureTool::TYPE_SIZEINCREASE, 22 },
-      { CaptureTool::TYPE_SIZEDECREASE, 23 },
+      { CaptureTool::TYPE_SIZEDECREASE, 23 }, { CaptureTool::TYPE_CURSOR, 24 },
 };
 
 int CaptureToolButton::getPriorityByButton(CaptureTool::Type b)
@@ -181,4 +181,5 @@ QList<CaptureTool::Type> CaptureToolButton::iterableButtonTypes = {
 #endif
     CaptureTool::TYPE_PIN,           CaptureTool::TYPE_SIZEINCREASE,
     CaptureTool::TYPE_SIZEDECREASE,  CaptureTool::TYPE_ACCEPT,
+    CaptureTool::TYPE_CURSOR,
 };

@@ -372,7 +372,6 @@ void GeneralConf::initShowStartupLaunchMessage()
 {
     m_showStartupLaunchMessage =
       new QCheckBox(tr("Show welcome message on launch"), this);
-    ConfigHandler config;
     m_showStartupLaunchMessage->setToolTip(
       tr("Show the welcome message box in the middle of the screen while "
          "taking a screenshot"));
