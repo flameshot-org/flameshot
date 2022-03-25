@@ -5,7 +5,6 @@
 #include "src/utils/confighandler.h"
 #include <QCheckBox>
 #include <QComboBox>
-#include <QDebug>
 #include <QFile>
 #include <QFileDialog>
 #include <QGroupBox>
@@ -542,7 +541,6 @@ void GeneralConf::initUploadClientSecret()
 void GeneralConf::uploadClientKeyEdited()
 {
     ConfigHandler().setUploadClientSecret(m_uploadClientKey->text());
-    qDebug() << m_uploadClientKey->text();
 }
 
 void GeneralConf::uploadHistoryMaxChanged(int max)
