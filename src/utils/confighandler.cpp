@@ -101,11 +101,11 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("savePath"                    ,ExistingDir        (                   )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
     OPTION("saveAsFileExtension"         ,SaveFileExtension  (                   )),
-    OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25          )),
+    OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25               )),
     OPTION("undoLimit"                   ,BoundedInt         (0, 999, 100    )),
     // Interface tab
-    OPTION("uiColor"                     ,Color              ( {116, 0, 150} )),
-    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}   )),
+    OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
+    OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
     OPTION("buttons"                     ,ButtonList         ( {}            )),
     // Filename Editor tab
@@ -123,6 +123,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // NOTE: If another tool size is added besides drawThickness and
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
+    OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
