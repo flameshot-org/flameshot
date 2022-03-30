@@ -40,6 +40,7 @@ private slots:
     void exportFileConfiguration();
     void resetConfiguration();
     void togglePathFixed();
+    void uploadClientKeyEdited();
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(QString extension);
 
@@ -70,6 +71,7 @@ private:
     void initUploadWithoutConfirmation();
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
+    void initUploadClientSecret();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -95,6 +97,7 @@ private:
     QPushButton* m_resetButton;
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
+    QLineEdit* m_uploadClientKey;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
