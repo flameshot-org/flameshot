@@ -350,6 +350,18 @@ There are packages available in the repository of some Linux distributions:
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
 
+**Note** that because of macOS security features, you may not be able to open flameshot when installed using brew.
+If you see the message `“flameshot” cannot be opened because the developer cannot be verified.` you will need to
+follow the steps below: 
+1. Go to system preferences -> security & privacy; 
+1. Click on the `General` tab; 
+1. Click on the lock and authenticate; 
+1. In the section `Allow apps downloaded from` select the option `App Store and identified developers`; 
+1. Click on the button `Open Anyway` close to the message `"flameshot" was blocked from use because it is not from an identified developer`; 
+1. Click the `Open` button in the popup.
+
+After following all those steps above, `flameshot` will open without problems in your Mac.
+
 ### Windows
 
 - [Chocolatey](https://chocolatey.org/packages/flameshot)
