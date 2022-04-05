@@ -43,7 +43,7 @@ public:
     AbstractLogger& enableMessageHeader(bool enable);
 
 private:
-    QString messageHeader(Channel type, Target channel);
+    QString messageHeader(Channel channel, Target target);
 
     int m_targets;
     Channel m_defaultChannel;
