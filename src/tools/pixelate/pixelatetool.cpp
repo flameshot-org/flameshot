@@ -1,6 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-
 #include "pixelatetool.h"
 #include <QApplication>
 #include <QGraphicsBlurEffect>
@@ -8,10 +5,13 @@
 #include <QGraphicsScene>
 #include <QImage>
 #include <QPainter>
+#include <abstractlogger.h>
 
 PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
-{}
+{
+    m_invertSelection = false;
+}
 
 QIcon PixelateTool::icon(const QColor& background, bool inEditor) const
 {
@@ -43,12 +43,19 @@ CaptureTool* PixelateTool::copy(QObject* parent)
 {
     auto* tool = new PixelateTool(parent);
     copyParams(this, tool);
+    tool->m_invertSelection = this->m_invertSelection;
     return tool;
 }
 
 void PixelateTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     QRect selection = boundingRect().intersected(pixmap.rect());
+    if (m_invertSelection) {
+        QRegion reverse_selection(pixmap.rect());
+        reverse_selection = reverse_selection.subtracted(selection);
+        painter.setClipRegion(reverse_selection);
+        selection = pixmap.rect();
+    }
     auto pixelRatio = pixmap.devicePixelRatio();
     QRect selectionScaled = QRect(selection.topLeft() * pixelRatio,
                                   selection.bottomRight() * pixelRatio);
@@ -98,4 +105,22 @@ void PixelateTool::paintMousePreview(QPainter& painter,
 void PixelateTool::pressed(CaptureContext& context)
 {
     Q_UNUSED(context)
+}
+
+QWidget* PixelateTool::configurationWidget()
+{
+    if (m_confW == nullptr) {
+        m_confW = new PixelateConfig();
+        m_confW->setInvertSelection(m_invertSelection);
+        connect(m_confW,
+                &PixelateConfig::toggleInvertSelection,
+                this,
+                &PixelateTool::setInvertSelection);
+    }
+    return m_confW;
+}
+
+void PixelateTool::setInvertSelection(bool invert)
+{
+    m_invertSelection = invert;
 }

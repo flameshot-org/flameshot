@@ -1,9 +1,8 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-FileCopyrightText: 2017-2019 Alejandro Sirgo Rica & Contributors
-
 #pragma once
 
+#include "pixelateconfig.h"
 #include "src/tools/abstracttwopointtool.h"
+#include <QPointer>
 
 class PixelateTool : public AbstractTwoPointTool
 {
@@ -21,10 +20,17 @@ public:
     void drawSearchArea(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
                            const CaptureContext& context) override;
+    QWidget* configurationWidget() override;
+    bool isInverSelection();
 
 protected:
     CaptureTool::Type type() const override;
 
 public slots:
     void pressed(CaptureContext& context) override;
+    void setInvertSelection(bool invert);
+
+private:
+    QPointer<PixelateConfig> m_confW;
+    bool m_invertSelection;
 };

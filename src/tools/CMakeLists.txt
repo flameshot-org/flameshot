@@ -1,5 +1,8 @@
 target_sources(flameshot PRIVATE arrow/arrowtool.h arrow/arrowtool.cpp)
-target_sources(flameshot PRIVATE pixelate/pixelatetool.h pixelate/pixelatetool.cpp)
+target_sources(flameshot PRIVATE pixelate/pixelatetool.h
+                                 pixelate/pixelatetool.cpp
+                                 pixelate/pixelateconfig.h
+                                 pixelate/pixelateconfig.cpp)
 target_sources(flameshot PRIVATE circle/circletool.h circle/circletool.cpp)
 target_sources(flameshot PRIVATE circlecount/circlecounttool.h circlecount/circlecounttool.cpp)
 target_sources(flameshot PRIVATE copy/copytool.h copy/copytool.cpp)
