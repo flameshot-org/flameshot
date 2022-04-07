@@ -1225,6 +1225,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
  */
 void CaptureWidget::onToolSizeChanged(int t)
 {
+    m_context.toolSize = t;
     CaptureTool* tool = activeButtonTool();
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
@@ -1247,6 +1248,7 @@ void CaptureWidget::onToolSizeChanged(int t)
         drawToolsData();
         updateTool(toolItem);
     }
+
     // Force a repaint to prevent artifacting
     this->repaint();
 }
