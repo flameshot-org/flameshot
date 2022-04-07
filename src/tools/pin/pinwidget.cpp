@@ -6,10 +6,12 @@
 
 #include "pinwidget.h"
 #include "qguiappcurrentscreen.h"
+#include "screenshotsaver.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/globalvalues.h"
 
 #include <QLabel>
+#include <QMenu>
 #include <QScreen>
 #include <QShortcut>
 #include <QVBoxLayout>
@@ -83,6 +85,13 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     }
 #endif
     grabGesture(Qt::PinchGesture);
+
+    this->setContextMenuPolicy(Qt::CustomContextMenu);
+
+    connect(this,
+            SIGNAL(customContextMenuRequested(const QPoint&)),
+            this,
+            SLOT(showContextMenu(const QPoint&)));
 }
 
 bool PinWidget::scrollEvent(QWheelEvent* event)
@@ -208,4 +217,31 @@ void PinWidget::pinchTriggered(QPinchGesture* gesture)
     }
     m_sizeChanged = true;
     update();
+}
+
+void PinWidget::showContextMenu(const QPoint& pos)
+{
+    QMenu contextMenu(tr("Context menu"), this);
+
+    QAction copy2ClipboardAction("Copy to clipboard", this);
+    connect(&copy2ClipboardAction,
+            SIGNAL(triggered()),
+            this,
+            SLOT(copyToClipboard()));
+    contextMenu.addAction(&copy2ClipboardAction);
+
+    QAction saveToFileAction("Save to file", this);
+    connect(&saveToFileAction, SIGNAL(triggered()), this, SLOT(saveToFile()));
+    contextMenu.addAction(&saveToFileAction);
+
+    contextMenu.exec(mapToGlobal(pos));
+}
+
+void PinWidget::copyToClipboard()
+{
+    saveToClipboard(m_pixmap);
+}
+void PinWidget::saveToFile()
+{
+    saveToFilesystemGUI(m_pixmap);
 }

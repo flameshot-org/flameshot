@@ -46,4 +46,9 @@ private:
     qreal m_scaleFactor{ 1 };
     qreal m_currentStepScaleFactor{ 1 };
     bool m_sizeChanged{ false };
+
+private slots:
+    void showContextMenu(const QPoint& pos);
+    void copyToClipboard();
+    void saveToFile();
 };
