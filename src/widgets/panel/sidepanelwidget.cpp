@@ -73,7 +73,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
 
     // tool size sigslots
     connect(m_toolSizeSlider,
-            &QSlider::sliderMoved,
+            &QSlider::valueChanged,
             this,
             &SidePanelWidget::toolSizeChanged);
     connect(this,

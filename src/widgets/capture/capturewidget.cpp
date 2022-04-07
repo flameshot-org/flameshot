@@ -1225,10 +1225,12 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
  */
 void CaptureWidget::onToolSizeChanged(int t)
 {
+
     m_context.toolSize = t;
     CaptureTool* tool = activeButtonTool();
     if (tool && tool->showMousePreview()) {
         setCursor(Qt::BlankCursor);
+        tool->onSizeChanged(t);
     }
 
     // update tool size of object being drawn
