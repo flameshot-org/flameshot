@@ -25,7 +25,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
   , m_pixmap(p)
 {
 
-    if (parent) {
+    if (parent != nullptr) {
         parent->installEventFilter(this);
     }
 
@@ -101,11 +101,11 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::colorChanged);
 }
 
-void SidePanelWidget::onColorChanged(const QColor& c)
+void SidePanelWidget::onColorChanged(const QColor& color)
 {
-    m_color = c;
-    updateColorNoWheel(c);
-    m_colorWheel->setColor(c);
+    m_color = color;
+    updateColorNoWheel(color);
+    m_colorWheel->setColor(color);
 }
 
 void SidePanelWidget::onToolSizeChanged(int t)
