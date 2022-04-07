@@ -28,7 +28,7 @@ public:
 
 signals:
     void colorChanged(const QColor& color);
-    void toolSizeChanged(int tootl);
+    void toolSizeChanged(int size);
     void togglePanel();
 
 public slots:
