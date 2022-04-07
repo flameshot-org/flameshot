@@ -18,10 +18,10 @@
 #include <QWheelEvent>
 
 namespace {
-static constexpr int MARGIN = 7;
-static constexpr int BLUR_RADIUS = 2 * MARGIN;
-static constexpr qreal STEP = 0.03;
-static constexpr qreal MIN_SIZE = 100.0;
+constexpr int MARGIN = 7;
+constexpr int BLUR_RADIUS = 2 * MARGIN;
+constexpr qreal STEP = 0.03;
+constexpr qreal MIN_SIZE = 100.0;
 }
 
 PinWidget::PinWidget(const QPixmap& pixmap,
@@ -29,6 +29,9 @@ PinWidget::PinWidget(const QPixmap& pixmap,
                      QWidget* parent)
   : QWidget(parent)
   , m_pixmap(pixmap)
+  , m_layout(new QVBoxLayout(this))
+  , m_label(new QLabel())
+  , m_shadowEffect(new QGraphicsDropShadowEffect(this))
 {
     setWindowIcon(QIcon(GlobalValues::iconPath()));
     setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
@@ -40,16 +43,13 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     m_baseColor = conf.uiColor();
     m_hoverColor = conf.contrastUiColor();
 
-    m_layout = new QVBoxLayout(this);
     m_layout->setContentsMargins(MARGIN, MARGIN, MARGIN, MARGIN);
 
-    m_shadowEffect = new QGraphicsDropShadowEffect(this);
     m_shadowEffect->setColor(m_baseColor);
     m_shadowEffect->setBlurRadius(BLUR_RADIUS);
     m_shadowEffect->setOffset(0, 0);
     setGraphicsEffect(m_shadowEffect);
 
-    m_label = new QLabel();
     m_label->setPixmap(m_pixmap);
     m_layout->addWidget(m_label);
 
@@ -59,19 +59,20 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     qreal devicePixelRatio = 1;
 #if defined(Q_OS_MACOS)
     QScreen* currentScreen = QGuiAppCurrentScreen().currentScreen();
-    if (currentScreen) {
+    if (currentScreen != nullptr) {
         devicePixelRatio = currentScreen->devicePixelRatio();
     }
 #endif
-    const int m = MARGIN * devicePixelRatio;
-    QRect adjusted_pos = geometry + QMargins(m, m, m, m);
+    const int margin =
+      static_cast<int>(static_cast<double>(MARGIN) * devicePixelRatio);
+    QRect adjusted_pos = geometry + QMargins(margin, margin, margin, margin);
     setGeometry(adjusted_pos);
 #if defined(Q_OS_LINUX)
     setWindowFlags(Qt::X11BypassWindowManagerHint);
 #endif
 
 #if defined(Q_OS_MACOS)
-    if (currentScreen) {
+    if (currentScreen != nullptr) {
         QPoint topLeft = currentScreen->geometry().topLeft();
         adjusted_pos.setX((adjusted_pos.x() - topLeft.x()) / devicePixelRatio +
                           topLeft.x());
@@ -89,9 +90,9 @@ PinWidget::PinWidget(const QPixmap& pixmap,
     this->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(this,
-            SIGNAL(customContextMenuRequested(const QPoint&)),
+            &QWidget::customContextMenuRequested,
             this,
-            SLOT(showContextMenu(const QPoint&)));
+            &PinWidget::showContextMenu);
 }
 
 bool PinWidget::scrollEvent(QWheelEvent* event)
@@ -223,15 +224,16 @@ void PinWidget::showContextMenu(const QPoint& pos)
 {
     QMenu contextMenu(tr("Context menu"), this);
 
-    QAction copy2ClipboardAction("Copy to clipboard", this);
-    connect(&copy2ClipboardAction,
-            SIGNAL(triggered()),
+    QAction copyToClipboardAction(tr("Copy to clipboard"), this);
+    connect(&copyToClipboardAction,
+            &QAction::triggered,
             this,
-            SLOT(copyToClipboard()));
-    contextMenu.addAction(&copy2ClipboardAction);
+            &PinWidget::copyToClipboard);
+    contextMenu.addAction(&copyToClipboardAction);
 
-    QAction saveToFileAction("Save to file", this);
-    connect(&saveToFileAction, SIGNAL(triggered()), this, SLOT(saveToFile()));
+    QAction saveToFileAction(tr("Save to file"), this);
+    connect(
+      &saveToFileAction, &QAction::triggered, this, &PinWidget::saveToFile);
     contextMenu.addAction(&saveToFileAction);
 
     contextMenu.exec(mapToGlobal(pos));
