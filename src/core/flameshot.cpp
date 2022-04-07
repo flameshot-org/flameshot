@@ -132,6 +132,7 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         return m_captureWindow;
     } else {
         emit captureFailed();
+        return nullptr;
     }
 }
 
@@ -151,6 +152,11 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
         screen =
           qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
 #endif
+    } else if (screenNumber >= qApp->screens().count()) {
+        AbstractLogger() << QObject::tr(
+          "Requested screen exceeds screen count");
+        emit captureFailed();
+        return;
     } else {
         screen = qApp->screens()[screenNumber];
     }

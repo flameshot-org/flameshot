@@ -442,7 +442,7 @@ int main(int argc, char* argv[])
 
         QString numberStr = parser.value(screenNumberOption);
         // Option values
-        int number =
+        int screenNumber =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -455,7 +455,7 @@ int main(int argc, char* argv[])
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
 
-        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
+        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, screenNumber);
         if (!region.isEmpty()) {
             if (region.startsWith("screen")) {
                 // TODO use abstract logger
