@@ -486,7 +486,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     Q_UNUSED(paintEvent)
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_context.screenshot);
-
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
@@ -513,6 +512,10 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                             "gui` again to apply it."),
                          &painter);
     }
+
+    // This is required on KDE Wayland to draw across multiple screens
+    this->setGeometry(
+      0, 0, m_context.screenshot.width(), m_context.screenshot.height());
 }
 
 void CaptureWidget::showColorPicker(const QPoint& pos)
