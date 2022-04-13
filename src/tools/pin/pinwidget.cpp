@@ -245,5 +245,7 @@ void PinWidget::copyToClipboard()
 }
 void PinWidget::saveToFile()
 {
+    this->hide();
     saveToFilesystemGUI(m_pixmap);
+    this->show();
 }
