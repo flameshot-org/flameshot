@@ -443,11 +443,10 @@ void SelectionWidget::setGeometryByKeyboard(const QRect& r)
         rect.setHeight(1);
     }
     setGeometry(rect);
-    connect(
-      &timer,
-      &QTimer::timeout,
-      this,
-      [this]() { emit geometrySettled(); },
-      Qt::UniqueConnection);
+    connect(&timer,
+            &QTimer::timeout,
+            this,
+            &SelectionWidget::geometrySettled,
+            Qt::UniqueConnection);
     timer.start(400);
 }
