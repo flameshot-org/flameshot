@@ -353,12 +353,9 @@ There are packages available in the repository of some Linux distributions:
 **Note** that because of macOS security features, you may not be able to open flameshot when installed using brew.
 If you see the message `“flameshot” cannot be opened because the developer cannot be verified.` you will need to
 follow the steps below: 
-1. Go to system preferences -> security & privacy; 
-1. Click on the `General` tab; 
-1. Click on the lock and authenticate; 
-1. In the section `Allow apps downloaded from` select the option `App Store and identified developers`; 
-1. Click on the button `Open Anyway` close to the message `"flameshot" was blocked from use because it is not from an identified developer`; 
-1. Click the `Open` button in the popup.
+1. Go to the Applications folder (Finder > Go > Applications, or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>A</kbd>) 
+1. Right-Click on "flameshot.app" and choose "Open" from the context menu
+2. In the dialog click "Open"
 
 After following all those steps above, `flameshot` will open without problems in your Mac.
 
