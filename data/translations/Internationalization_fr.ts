@@ -1267,7 +1267,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Image dans le presse-papiers.</translation>
+        <translation type="unfinished">Copier l&apos;image dans le presse-papiers.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>

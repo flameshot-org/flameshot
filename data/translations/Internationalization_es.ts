@@ -166,7 +166,7 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
         <source>Capture Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Capturar Lanzador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="22"/>
@@ -180,7 +180,7 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Captura</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="61"/>
@@ -390,7 +390,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
         <source>Select Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Preajuste:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
@@ -400,48 +400,48 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Presiona el botón para borrar el preajuste seleccionado</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Preajuste:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingresa un color manualmente o selecciónalo utilizando la rueda de colores</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
         <source>Press button to add preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Presiona el botón para añadir preajuste</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="137"/>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede añadir el preajuste. Se ha alcanzado el límite máximo.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="138"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede borrar el preajuste. Se ha alcanzado el límite mínimo.</translation>
     </message>
 </context>
 <context>
@@ -991,62 +991,62 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="230"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el mensaje de ayuda al inicio en el modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el botón de alternancia del panel lateral en el modo de captura</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Enable desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar notificaciones de escritorio</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show icon in the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar icono en la bandeja del sistema</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="282"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedir confirmación para eliminar las capturas de pantalla de las últimas subidas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Check for updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobar las actualizaciones automáticamente</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation type="unfinished"></translation>
+        <translation>Esto le permite tomar capturas de pantalla de Flameshot mismo, por ejemplo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>Lanzar daemon de Flameshot al iniciar el equipo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar el cuadro de mensaje de bienvenida en el centro de la pantalla mientras se toma una captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilice una amplia paleta de colores predefinida</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="404"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar la URL y cerrar la ventana después de que la subida haya sido exitosa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="416"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation type="unfinished"></translation>
+        <translation>Después de copiar la captura de pantalla, guardarla también en un archivo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="423"/>
@@ -1092,7 +1092,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="575"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar la ruta del archivo al portapapeles luego de guardar el archivo</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
@@ -1123,22 +1123,22 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="635"/>
         <source>Show magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar lupa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="636"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar una lupa al seleccionar el área de captura de pantalla</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Square shaped magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Lupa cuadrada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="648"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Hacer que la lupa tenga forma cuadrada</translation>
     </message>
 </context>
 <context>
@@ -1276,7 +1276,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar imagen</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -1296,12 +1296,12 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede guardar la captura de pantalla en el disco.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
         <source>Screenshot saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Captura de pantalla guardada.</translation>
     </message>
 </context>
 <context>
@@ -1382,49 +1382,49 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ícono</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>GPLv3+</source>
-        <translation type="unfinished"></translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versión</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>Flameshot v</source>
-        <translation type="unfinished"></translation>
+        <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del sistema operativo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar Información</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -2395,7 +2395,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
         <source>Ignore</source>
-        <translation>Ignore</translation>
+        <translation>Ignorar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
@@ -2405,7 +2405,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
         <source>Update</source>
-        <translation>Update</translation>
+        <translation>Actualizar</translation>
     </message>
 </context>
 <context>
@@ -2415,12 +2415,12 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir Historial</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">Historial de capturas vacío</translation>
+        <translation>El historial de capturas está vacío</translation>
     </message>
 </context>
 <context>
@@ -2444,24 +2444,24 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copiar URL</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir en Navegador</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Confirmar para borrar</translation>
+        <translation>Confirmar la eliminación</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">¿Estás seguro de que deseas borrar una captura de pantalla de las últimas subidas y el servidor?</translation>
+        <translation>¿Estás seguro de que deseas borrar una captura de pantalla de las últimas subidas y el servidor?</translation>
     </message>
 </context>
 <context>
@@ -2487,12 +2487,12 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Editor de Color de Interfaz</translation>
+        <translation>Editor de Color de la Interfaz</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor del Selector de Color</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>
