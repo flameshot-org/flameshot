@@ -210,7 +210,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished">Roda do mouse</translation>
+        <translation>Roda do mouse (&quot;scroll&quot;)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
@@ -220,12 +220,12 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="394"/>
         <source>Right Click</source>
-        <translation type="unfinished">Botão Direito</translation>
+        <translation>Botão Direito</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="394"/>
         <source>Show color picker</source>
-        <translation type="unfinished">Mostrar seletor de cores</translation>
+        <translation>Mostrar seletor de cores</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="396"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Exit</source>
-        <translation type="unfinished">Sair</translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
@@ -377,7 +377,7 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Toggle magnifier</source>
-        <translation></translation>
+        <translation>Habilitar/Desabilitar a lupa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -405,12 +405,12 @@ Pressione espaço para abrir o painel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Pressione o botão para deletar a predefinição selecionada</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Predefinição:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
@@ -431,7 +431,7 @@ Pressione espaço para abrir o painel lateral.</translation>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
         <location filename="../../src/config/colorpickereditor.cpp" line="137"/>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
@@ -647,7 +647,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="678"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para a área de transferência.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -753,7 +753,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="264"/>
         <source>Unable to connect via DBus</source>
-        <translation type="unfinished">Não foi possível conectar via DBus</translation>
+        <translation>Não foi possível conectar via DBus</translation>
     </message>
 </context>
 <context>
@@ -1157,22 +1157,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="635"/>
         <source>Show magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar lupa</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="636"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar uma lupa ao selecionar a área de captura de tela</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="647"/>
         <source>Square shaped magnifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Lupa de forma quadrada</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="648"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar a lupa para um formato quadrado</translation>
     </message>
 </context>
 <context>
@@ -1290,17 +1290,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copiar URL</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="131"/>
         <source>Open URL</source>
-        <translation type="unfinished">Abrir URL</translation>
+        <translation>Abrir URL</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="132"/>
         <source>Delete image</source>
-        <translation type="unfinished">Deletar imagem</translation>
+        <translation>Deletar imagem</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
@@ -1315,12 +1315,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
         <source>Unable to open the URL.</source>
-        <translation type="unfinished">Não foi possível abrir a URL.</translation>
+        <translation>Não foi possível abrir a URL.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="171"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL copiada para a área de transferência.</translation>
+        <translation>URL copiada para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="177"/>
@@ -2462,7 +2462,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
         <source>Screenshots history is empty</source>
-        <translation type="unfinished">O histórico de capturas de tela está vazio</translation>
+        <translation>O histórico de capturas de tela está vazio</translation>
     </message>
 </context>
 <context>
@@ -2486,7 +2486,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation type="unfinished">Copiar URL</translation>
+        <translation>Copiar URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
@@ -2498,12 +2498,12 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
         <source>Confirm to delete</source>
-        <translation type="unfinished">Confirme para deletar</translation>
+        <translation>Confirme para deletar</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="51"/>
         <source>Are you sure you want to delete a screenshot from the latest uploads and server?</source>
-        <translation type="unfinished">Tem certeza de que deseja deletar uma captura de tela dos últimos uploads e servidor?</translation>
+        <translation>Tem certeza de que deseja deletar uma captura de tela dos últimos envios e do servidor?</translation>
     </message>
 </context>
 <context>
@@ -2529,7 +2529,7 @@ Você pode ter que invalidar o sinal &apos;#&apos;, por exemplo &apos;\#FFF&apos
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="68"/>
         <source>UI Color Editor</source>
-        <translation type="unfinished">Interface de Edição de Cores</translation>
+        <translation>Interface de Edição de Cores</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
