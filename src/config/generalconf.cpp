@@ -468,7 +468,6 @@ void GeneralConf::initSaveAfterCopy()
     extensionLayout->addWidget(
       new QLabel(tr("Preferred save file extension:")));
     m_setSaveAsFileExtension = new QComboBox(this);
-    m_setSaveAsFileExtension->addItem("");
 
     QStringList imageFormatList;
     foreach (auto mimeType, QImageWriter::supportedImageFormats())
