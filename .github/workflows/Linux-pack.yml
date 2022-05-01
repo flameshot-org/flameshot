@@ -74,6 +74,13 @@ jobs:
               symbol: focal,
               arch: amd64
             }
+          - {
+              name: ubuntu-22.04,
+              os: ubuntu,
+              symbol: jammy,
+              arch: amd64
+            }
+ 
     steps:
       - name: Enable Docker Experimental Features
         run: |
@@ -206,96 +213,6 @@ jobs:
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb
             ${{ github.workspace }}/build/${{ env.PRODUCT }}-*-${{ env.RELEASE }}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb.sha256sum
 
-  deb-pack-extra:
-    name: Build deb on ubuntu-18.04 (extra job to packaging deb)
-    runs-on: ubuntu-20.04
-    container:
-      image: flameshotorg/ci-building-images:ubuntu-bionic
-    steps:
-      - name: Checkout Source code
-        if: github.event_name == 'push'
-        # Because git version < 2.18(ubuntu 18.04), so only actions/checkout@v1 can be used.
-        # If you use actions/checkout@v2, you will have no .git folder.
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
-          ref: master
-      - name: Checkout Source code
-        if: github.event_name == 'pull_request'
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
-          ref: refs/pull/${{ github.event.number }}/head
-      - name: Set env & Print flameshot version
-        shell: bash
-        run: |
-          last_committed_tag=$(git tag -l --sort=-v:refname | head -1)
-          git_revno=$(git rev-list $(git describe --tags --abbrev=0)..HEAD --count)
-          git_hash=$(git rev-parse --short HEAD)
-          echo "=======FLAMESHOT VERSION========"
-          echo ${last_committed_tag:1}
-          echo "Details: ${last_committed_tag}+git${git_revno}.${git_hash}"
-          echo "================================"
-          echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
-      - name: Install dependencies
-        run: |
-          apt-get -y -qq update
-          apt-get -y --no-install-recommends install \
-            qt5-default \
-            qttools5-dev-tools \
-            qttools5-dev \
-            libqt5dbus5 \
-            libqt5network5 \
-            libqt5core5a \
-            libqt5widgets5 \
-            libqt5gui5 \
-            libqt5svg5-dev \
-            python3 \
-            python3-pip
-      - name: Prepare cmake(>=3.13.0)
-        run: |
-          apt-get -y autoremove cmake
-          wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}.tar.gz
-          tar -xf cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}.tar.gz
-          cd ./cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}
-          cp -r bin /usr/
-          cp -r share /usr/
-          cp -r doc /usr/share/
-          cp -r man /usr/share/
-          cd ..
-          rm -rf cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH} cmake-${CMAKE_VERSION}-Linux-${CMAKE_ARCH}.tar.gz
-          echo "======CMAKE VERSION======"
-          cmake --version
-          echo "========================="
-        env:
-          CMAKE_VERSION: "3.19.4"
-          CMAKE_ARCH: x86_64
-      - name: Packaging on ubuntu-18.04
-        run: |
-          cp -r $GITHUB_WORKSPACE/packaging/debian $GITHUB_WORKSPACE
-          mkdir -p $GITHUB_WORKSPACE/build
-          sed -e "/cmake (>= 3.13~),/d" -i $GITHUB_WORKSPACE/debian/control
-          dpkg-buildpackage -b
-          cp $GITHUB_WORKSPACE/../${PRODUCT}_*-${RELEASE}_amd64.deb $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
-      - name: SHA256Sum of ubuntu-18.04 package(daily build)
-        run: |
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb
-          sha256sum $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb > $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum
-          echo "============ubuntu-18.04 sha256sum download link=============="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb.sha256sum)
-          echo "=====no operation for you can see link in the log console====="
-      - name: Upload ubuntu-18.04 package(daily build)
-        run: |
-          echo "===================ubuntu-18.04 download link=================="
-          echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.ubuntu-18.04.amd64.deb)
-          echo "======no operation for you can see link in the log console====="
-      - name: Artifact Upload
-        uses: actions/upload-artifact@v2
-        with:
-          name: Linux-distribution-artifact
-          path: |
-            ${{ github.workspace }}/build/*
-
   rpm-pack:
     name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
     runs-on: ubuntu-20.04
@@ -307,6 +224,12 @@ jobs:
               name: fedora-35,
               os: fedora,
               symbol: 35,
+              arch: x86_64
+            }
+          - {
+              name: fedora-36,
+              os: fedora,
+              symbol: 36,
               arch: x86_64
             }
           - {
@@ -419,17 +342,15 @@ jobs:
               arch: amd64,
               image_repo: flameshotorg/ci-building-images
             }
-          # - {
-          #     name: ubuntu-20.04,
-          #     os: ubuntu,
-          #     symbol: focal,
-          #     arch: arm64,
-          #     image_repo: flameshotorg/ci-building-images
-          #   }
     container:
       image: ${{ matrix.config.image_repo }}:${{ matrix.config.os }}-${{ matrix.config.symbol }}
       options: --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined
     steps:
+      - name:
+        shell: bash
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Checkout Source code
         if: github.event_name == 'push'
         uses: actions/checkout@v2
