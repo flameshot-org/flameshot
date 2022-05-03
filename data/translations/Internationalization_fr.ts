@@ -1267,7 +1267,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="133"/>
         <source>Image to Clipboard.</source>
-        <translation type="unfinished">Copier l&apos;image dans le presse-papiers.</translation>
+        <translation>Copier l&apos;image dans le presse-papiers.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
@@ -1588,7 +1588,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished">Échec de désinscription %1. Erreur : %2</translation>
+        <translation type="unfinished">Échec de la désinscription %1. Erreur : %2</translation>
     </message>
 </context>
 <context>
