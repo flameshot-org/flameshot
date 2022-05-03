@@ -518,7 +518,7 @@ QSet<QString> ConfigHandler::keysFromGroup(const QString& group) const
 
 bool ConfigHandler::checkForErrors(AbstractLogger* log) const
 {
-    return checkUnrecognizedSettings(log) & checkShortcutConflicts(log) &
+    return checkUnrecognizedSettings(log) && checkShortcutConflicts(log) &&
            checkSemantics(log);
 }
 
