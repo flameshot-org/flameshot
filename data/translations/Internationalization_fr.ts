@@ -1588,7 +1588,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
         <source>Failed to unregister %1. Error: %2</source>
-        <translation type="unfinished">Échec de la désinscription %1. Erreur : %2</translation>
+        <translation>Échec de la désinscription %1. Erreur : %2</translation>
     </message>
 </context>
 <context>
