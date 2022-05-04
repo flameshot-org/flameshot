@@ -8,8 +8,10 @@
 #include "src/utils/screengrabber.h"
 #include "src/utils/screenshotsaver.h"
 #include "src/widgets/imagelabel.h"
+#include <QDir>
+#include <QFile>
 #include <QMimeData>
-
+#include <QStandardPaths>
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSWidget.cpp
 // https://github.com/KDE/spectacle/blob/941c1a517be82bed25d1254ebd735c29b0d2951c/src/Gui/KSMainWindow.cpp
 
@@ -57,13 +59,72 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
             this,
             &CaptureLauncher::startCapture);
 
+    connect(ui->captureType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            [this]() {
+                auto mode = static_cast<CaptureRequest::CaptureMode>(
+                  ui->captureType->currentData().toInt());
+                if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
+                    ui->sizeLabel->show();
+                    ui->screenshotX->show();
+                    ui->screenshotY->show();
+                    ui->screenshotWidth->show();
+                    ui->screenshotHeight->show();
+                } else {
+                    ui->sizeLabel->hide();
+                    ui->screenshotX->hide();
+                    ui->screenshotY->hide();
+                    ui->screenshotWidth->hide();
+                    ui->screenshotHeight->hide();
+                }
+            });
+
+    auto last_region = getLastRegion();
+    ui->screenshotX->setText(QString::number(last_region.x()));
+    ui->screenshotY->setText(QString::number(last_region.y()));
+    ui->screenshotWidth->setText(QString::number(last_region.width()));
+    ui->screenshotHeight->setText(QString::number(last_region.height()));
     show();
 }
 
+void CaptureLauncher::setLastRegion()
+{
+    auto cachePath = getCachePath() + "/region.txt";
+
+    QFile file(cachePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        auto newRegion = QRect(ui->screenshotX->text().toInt(),
+                               ui->screenshotY->text().toInt(),
+                               ui->screenshotWidth->text().toInt(),
+                               ui->screenshotHeight->text().toInt());
+        QDataStream out(&file);
+        out << newRegion;
+        file.close();
+    }
+}
+
+QRect CaptureLauncher::getLastRegion()
+{
+    auto cachePath = getCachePath() + "/region.txt";
+    QFile file(cachePath);
+
+    QRect lastRegion;
+    if (file.open(QIODevice::ReadOnly)) {
+        QDataStream in(&file);
+        in >> lastRegion;
+        file.close();
+    } else {
+        lastRegion = QRect(0, 0, 0, 0);
+    }
+
+    return lastRegion;
+}
 // HACK:
 // https://github.com/KDE/spectacle/blob/fa1e780b8bf3df3ac36c410b9ece4ace041f401b/src/Gui/KSMainWindow.cpp#L70
 void CaptureLauncher::startCapture()
 {
+    setLastRegion();
     ui->launchButton->setEnabled(false);
     hide();
 
@@ -74,6 +135,14 @@ void CaptureLauncher::startCapture()
     CaptureRequest req(mode,
                        additionalDelayToHideUI +
                          ui->delayTime->value() * secondsToMilliseconds);
+
+    if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
+        req.setInitialSelection(QRect(ui->screenshotX->text().toInt(),
+                                      ui->screenshotY->text().toInt(),
+                                      ui->screenshotWidth->text().toInt(),
+                                      ui->screenshotHeight->text().toInt()));
+    }
+
     connectCaptureSlots();
     Flameshot::instance()->requestCapture(req);
 }
@@ -107,7 +176,7 @@ void CaptureLauncher::disconnectCaptureSlots() const
                &CaptureLauncher::onCaptureFailed);
 }
 
-void CaptureLauncher::onCaptureTaken(QPixmap screenshot)
+void CaptureLauncher::onCaptureTaken(QPixmap const& screenshot)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
@@ -135,4 +204,14 @@ void CaptureLauncher::onCaptureFailed()
 CaptureLauncher::~CaptureLauncher()
 {
     delete ui;
+}
+
+QString getCachePath()
+{
+    auto cachePath =
+      QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    if (!QDir(cachePath).exists()) {
+        QDir().mkpath(cachePath);
+    }
+    return cachePath;
 }

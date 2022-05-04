@@ -23,9 +23,13 @@ private:
     Ui::CaptureLauncher* ui;
     void connectCaptureSlots() const;
     void disconnectCaptureSlots() const;
+    void setLastRegion();
+    QRect getLastRegion();
 
 private slots:
     void startCapture();
-    void onCaptureTaken(QPixmap p);
+    void onCaptureTaken(QPixmap const& p);
     void onCaptureFailed();
 };
+
+QString getCachePath();
