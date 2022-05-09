@@ -166,21 +166,21 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
         <source>Capture Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>捕获启动器</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="22"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>文本标签</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="39"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>捕获模式</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="61"/>
@@ -391,7 +391,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
         <source>Select Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>选择预设：</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
@@ -401,32 +401,32 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
         <source>Press button to delete the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>按下按钮删除选定的预设</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
         <source>Add Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>添加预设：</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">手动输入颜色或使用色轮选择颜色</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>添加</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
         <source>Press button to add preset</source>
-        <translation type="unfinished"></translation>
+        <translation>按下按钮添加预设</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
@@ -437,12 +437,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法添加预设。达到最大限度。</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="138"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法删除预设。已达到最低限制。</translation>
     </message>
 </context>
 <context>
@@ -1040,57 +1040,57 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="230"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>在捕获之前显示帮助信息</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="242"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation type="unfinished"></translation>
+        <translation>在捕获模式下显示侧边栏切换按钮</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="254"/>
         <source>Enable desktop notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>启用桌面通知</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="267"/>
         <source>Show icon in the system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>在系统托盘中显示图标</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="282"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">从最近的上传历史中删除屏幕截图需要进行确认</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
         <source>Check for updates automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>自动检查更新</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="337"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation type="unfinished"></translation>
+        <translation>例如，这允许您截取 Flameshot 本身作为屏幕截图</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="363"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation type="unfinished"></translation>
+        <translation>开机自启动</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="376"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>在截取屏幕截图时在屏幕中间显示欢迎消息框</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="390"/>
         <source>Use a large predefined color palette</source>
-        <translation type="unfinished"></translation>
+        <translation>使用一个大的预定义调色板</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="404"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation type="unfinished"></translation>
+        <translation>上传成功后复制 URL 并关闭窗口</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="416"/>
