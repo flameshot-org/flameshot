@@ -416,7 +416,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation type="unfinished">手动输入颜色或使用色轮选择颜色</translation>
+        <translation>手动输入颜色或使用色轮选择颜色</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
@@ -1060,7 +1060,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="282"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation type="unfinished">从最近的上传历史中删除屏幕截图需要进行确认</translation>
+        <translation>从最近的上传历史中删除屏幕截图需要进行确认</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="324"/>
