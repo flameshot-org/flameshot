@@ -173,7 +173,7 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de texto</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="39"/>
@@ -395,7 +395,7 @@ Presiona Espacio para abrir el panel lateral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
         <source>Select preset using the spinbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione preestablecido usando el cuadro de número</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
@@ -1061,7 +1061,7 @@ Por favor, resuélvelos manualmente en el archivo de configuración.</translatio
     <message>
         <location filename="../../src/config/generalconf.cpp" line="447"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Utiliza ruta fija para guardar las capturas de pantalla</translation>
+        <translation>Usar ubicación fija para guardar las capturas</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="459"/>
@@ -2430,14 +2430,14 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta de texto</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
@@ -2612,7 +2612,7 @@ Puede ser que necesites preceder el símbolo &quot;#&quot; con &quot;\&quot;, co
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="229"/>
         <source>Palette Image (%1)</source>
-        <translation>Paleta de Imagen (%1)</translation>
+        <translation>Imagen de paleta (%1)</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.cpp" line="230"/>
