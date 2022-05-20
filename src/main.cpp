@@ -9,6 +9,7 @@
 
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
+#include "src/config/cacheutils.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
 #include "src/core/flameshot.h"
@@ -23,7 +24,6 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
@@ -50,7 +50,7 @@ void requestCaptureAndWait(const CaptureRequest& req)
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
     QObject::connect(flameshot, &Flameshot::captureTaken, [&](QPixmap) {
-        // Only useful on MacOS because each instance hosts its own widgets
+        // Only u seful on MacOS because each instance hosts its own widgets
         if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
             qApp->exit(0);
         }
@@ -394,7 +394,6 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         // Recreate the application as a QApplication

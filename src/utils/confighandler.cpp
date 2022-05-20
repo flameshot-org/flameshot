@@ -101,9 +101,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("savePath"                    ,ExistingDir        (                   )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
     OPTION("saveAsFileExtension"         ,SaveFileExtension  (                   )),
+    OPTION("saveLastRegion"              ,Bool               (true            )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25               )),
     OPTION("undoLimit"                   ,BoundedInt         (0, 999, 100    )),
-    // Interface tab
+  // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
