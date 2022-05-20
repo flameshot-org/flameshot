@@ -12,6 +12,10 @@
 #include "src/core/flameshotdaemon.h"
 #endif
 
+#ifndef FLAMESHOT_ICON
+  #define FLAMESHOT_ICON "flameshot"
+#endif
+
 SystemNotification::SystemNotification(QObject* parent)
   : QObject(parent)
   , m_interface(nullptr)
@@ -63,7 +67,7 @@ void SystemNotification::sendMessage(const QString& text,
     }
     args << (qAppName())                 // appname
          << static_cast<unsigned int>(0) // id
-         << "flameshot"                  // icon
+         << FLAMESHOT_ICON               // icon
          << title                        // summary
          << text                         // body
          << QStringList()                // actions
