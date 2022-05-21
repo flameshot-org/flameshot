@@ -12,8 +12,6 @@
 #include "src/core/flameshotdaemon.h"
 #endif
 
-#include <iostream>
-
 #ifndef FLAMESHOT_ICON
   #define FLAMESHOT_ICON "flameshot"
 #endif
@@ -67,8 +65,6 @@ void SystemNotification::sendMessage(const QString& text,
         hintsMap[QStringLiteral("x-kde-urls")] =
           QStringList({ fullPath.toString() });
     }
-
-    std::cout << "icon path: " << FLAMESHOT_ICON << std::endl;
     
     args << (qAppName())                 // appname
          << static_cast<unsigned int>(0) // id
