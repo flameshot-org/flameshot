@@ -275,7 +275,7 @@ void CaptureWidget::initButtons()
     if (m_context.request.tasks() == CaptureRequest::NO_TASK) {
         allButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
         visibleButtonTypes.removeOne(CaptureTool::TYPE_ACCEPT);
-    } else if (m_context.request.tasks() != CaptureRequest::PRINT_GEOMETRY){
+    } else if (m_context.request.tasks() != CaptureRequest::PRINT_GEOMETRY) {
         // Remove irrelevant buttons from both lists
         for (auto* buttonList : { &allButtonTypes, &visibleButtonTypes }) {
             buttonList->removeOne(CaptureTool::TYPE_SAVE);
