@@ -46,9 +46,10 @@ parts:
       - kde-frameworks-5-qt-5-15-core20
     source: https://github.com/flameshot-org/flameshot.git
     plugin: cmake
-      # This cannot be enabled until the KF5 toolkit in the snap is updated
-      #cmake-parameters:
-      #  - -DUSE_WAYLAND_CLIPBOARD=1
+    cmake-parameters:
+       - -DFLAMESHOT_ICON=/snap/flameshot/current/usr/local/share/icons/hicolor/scalable/apps/flameshot.svg
+       # This cannot be enabled until the KF5 toolkit in the snap is updated
+       #- -DUSE_WAYLAND_CLIPBOARD=1
     source-type: git
     override-pull: |
       snapcraftctl pull
