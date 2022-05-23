@@ -173,7 +173,7 @@
         <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Étiquette de texte</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="39"/>
@@ -205,7 +205,7 @@
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="378"/>
         <source>Select screenshot area</source>
-        <translation></translation>
+        <translation>Sélectionner la zone de capture d&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
@@ -968,7 +968,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="388"/>
         <source>Use large predefined color palette</source>
-        <translation></translation>
+        <translation>Utiliser une large palette de couleurs prédéfinies</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="402"/>
@@ -1076,7 +1076,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="516"/>
         <source>Undo limit</source>
-        <translation>Undo limit</translation>
+        <translation>Annuler la limite</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="542"/>
@@ -1097,12 +1097,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="586"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation></translation>
+        <translation>Anticrénelage de l&apos;image lors du zoom de l&apos;image épinglée</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="588"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
-        <translation></translation>
+        <translation>Après avoir zoomé sur l&apos;image épinglée, l&apos;image doit-elle être lissée ou rester pixelisée ?</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="599"/>
@@ -1192,18 +1192,18 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation></translation>
+        <translation>Confirmation du téléversement</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation></translation>
+        <translation>Voulez-vous téléverser cette capture ?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation></translation>
+        <translation>Téléverser sans confirmation</translation>
     </message>
 </context>
 <context>
@@ -1282,7 +1282,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="171"/>
         <source>URL copied to clipboard.</source>
-        <translation></translation>
+        <translation>URL copiée dans le presse-papiers.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="177"/>
@@ -1310,7 +1310,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation></translation>
+        <translation>Téléverser la sélection</translation>
     </message>
 </context>
 <context>
@@ -1492,7 +1492,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="25"/>
         <source>Invert</source>
-        <translation></translation>
+        <translation>Inverser</translation>
     </message>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
@@ -1633,7 +1633,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/utils/screenshotsaver.cpp" line="203"/>
         <source>Path copied to clipboard as </source>
-        <translation></translation>
+        <translation>Chemin d&apos;accès copié dans le presse-papiers en tant que </translation>
     </message>
     <message>
         <source>Saving canceled</source>
@@ -1694,7 +1694,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="169"/>
         <source>Existing directory or new file to save to</source>
-        <translation></translation>
+        <translation type="unfinished">Dossier existant ou nouveau fichier à sauvegarder dans</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="172"/>
@@ -1719,7 +1719,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="181"/>
         <source>Screenshot region to select</source>
-        <translation></translation>
+        <translation>Zone de capture d&apos;écran à sélectionner</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -1729,7 +1729,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="188"/>
         <source>Accept capture as soon as a selection is made</source>
-        <translation></translation>
+        <translation>Accepter la capture d&apos;écran dès qu&apos;une sélection est faite</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="190"/>
@@ -1744,7 +1744,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="197"/>
         <source>Check the configuration for errors</source>
-        <translation></translation>
+        <translation>Vérifiez l&apos;absence d&apos;erreurs dans la configuration</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="200"/>
@@ -2425,7 +2425,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>étiquette de texte</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
