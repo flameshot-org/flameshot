@@ -47,7 +47,9 @@
   </p>
 </div>
 
+### Potential freezes
 
+**Versions 10.x.x to 11.0.0 may freeze your system when you're saving the screenshot.**
 
 ## Preview
 
