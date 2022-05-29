@@ -561,17 +561,7 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         // TODO this is the wrong place to do this
 	
         if (m_activeTool->type() == CaptureTool::TYPE_CIRCLECOUNT) {
-            // While it is based on AbstractTwoPointTool it has the only one
-            // point and shouldn't wait for second point and move event
-            //m_activeTool->drawEnd(m_context.mousePos);
-
             m_activeTool->setCount(m_context.circleCount++);
-
-            //m_captureToolObjectsBackup = m_captureToolObjects;
-            //m_captureToolObjects.append(m_activeTool);
-            //pushObjectsStateToUndoStack();
-            //releaseActiveTool();
-            //m_mouseIsClicked = false;
         }
 	
         return true;
