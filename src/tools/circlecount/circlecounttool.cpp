@@ -46,10 +46,18 @@ QRect CircleCountTool::boundingRect() const
         return {};
     }
     int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
-    return { points().first.x() - bubble_size,
-             points().first.y() - bubble_size,
-             bubble_size * 2,
-             bubble_size * 2 };
+
+    int line_pos_min_x = std::min(points().first.x()-bubble_size, points().second.x());
+    int line_pos_min_y = std::min(points().first.y()-bubble_size, points().second.y());
+    int line_pos_max_x = std::max(points().first.x()+bubble_size, points().second.x());
+    int line_pos_max_y = std::max(points().first.y()+bubble_size, points().second.y());
+    
+    return {
+	line_pos_min_x,
+	line_pos_min_y,
+	line_pos_max_x - line_pos_min_x,
+	line_pos_max_y - line_pos_min_y
+    };    
 }
 
 QString CircleCountTool::name() const
@@ -95,6 +103,10 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QColor antiContrastColor =
       ColorUtils::colorIsDark(color()) ? Qt::black : Qt::white;
 
+    
+    painter.setPen(QPen(color(), size()));
+    painter.drawLine(points().first, points().second);
+    
     int bubble_size = size() + THICKNESS_OFFSET;
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
@@ -131,7 +143,6 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     // Draw text
     painter.setPen(contrastColor);
     painter.drawText(textRect, Qt::AlignCenter, QString::number(count()));
-
     // restore original font, brush, and pen
     painter.setFont(orig_font);
     painter.setBrush(orig_brush);
