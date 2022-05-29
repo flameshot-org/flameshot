@@ -103,11 +103,32 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QColor antiContrastColor =
       ColorUtils::colorIsDark(color()) ? Qt::black : Qt::white;
 
-    
-    painter.setPen(QPen(color(), size()));
-    painter.drawLine(points().first, points().second);
-    
     int bubble_size = size() + THICKNESS_OFFSET;
+    
+    QLineF line(points().first, points().second);
+
+    if(line.length() > bubble_size)
+    {
+	painter.setPen(QPen(color(), size()));
+	painter.setBrush(color());
+
+	int middleX = points().first.x();
+	int middleY = points().first.y();
+    
+	QLineF normal1 = line.normalVector();
+	normal1.setLength(bubble_size);
+	QPoint p1 = normal1.p2().toPoint();
+	QPoint p2(middleX-(p1.x()-middleX), middleY-(p1.y()-middleY));
+    
+	QPainterPath path;
+	path.moveTo(points().first);
+	path.lineTo(p1);
+	path.lineTo(points().second);
+	path.lineTo(p2);
+	path.lineTo(points().first);
+	painter.drawPath(path);
+    }
+    
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
     painter.drawEllipse(
