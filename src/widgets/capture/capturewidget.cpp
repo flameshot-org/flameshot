@@ -559,11 +559,11 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         m_context.mousePos = pos;
         m_activeTool->drawStart(m_context);
         // TODO this is the wrong place to do this
-	
+
         if (m_activeTool->type() == CaptureTool::TYPE_CIRCLECOUNT) {
             m_activeTool->setCount(m_context.circleCount++);
         }
-	
+
         return true;
     }
     return false;

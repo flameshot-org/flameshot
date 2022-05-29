@@ -47,17 +47,19 @@ QRect CircleCountTool::boundingRect() const
     }
     int bubble_size = size() + THICKNESS_OFFSET + PADDING_VALUE;
 
-    int line_pos_min_x = std::min(points().first.x()-bubble_size, points().second.x());
-    int line_pos_min_y = std::min(points().first.y()-bubble_size, points().second.y());
-    int line_pos_max_x = std::max(points().first.x()+bubble_size, points().second.x());
-    int line_pos_max_y = std::max(points().first.y()+bubble_size, points().second.y());
-    
-    return {
-	line_pos_min_x,
-	line_pos_min_y,
-	line_pos_max_x - line_pos_min_x,
-	line_pos_max_y - line_pos_min_y
-    };    
+    int line_pos_min_x =
+      std::min(points().first.x() - bubble_size, points().second.x());
+    int line_pos_min_y =
+      std::min(points().first.y() - bubble_size, points().second.y());
+    int line_pos_max_x =
+      std::max(points().first.x() + bubble_size, points().second.x());
+    int line_pos_max_y =
+      std::max(points().first.y() + bubble_size, points().second.y());
+
+    return { line_pos_min_x,
+             line_pos_min_y,
+             line_pos_max_x - line_pos_min_x,
+             line_pos_max_y - line_pos_min_y };
 }
 
 QString CircleCountTool::name() const
@@ -104,31 +106,30 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
       ColorUtils::colorIsDark(color()) ? Qt::black : Qt::white;
 
     int bubble_size = size() + THICKNESS_OFFSET;
-    
+
     QLineF line(points().first, points().second);
 
-    if(line.length() > bubble_size)
-    {
-	painter.setPen(QPen(color(), size()));
-	painter.setBrush(color());
+    if (line.length() > bubble_size) {
+        painter.setPen(QPen(color(), size()));
+        painter.setBrush(color());
 
-	int middleX = points().first.x();
-	int middleY = points().first.y();
-    
-	QLineF normal1 = line.normalVector();
-	normal1.setLength(bubble_size);
-	QPoint p1 = normal1.p2().toPoint();
-	QPoint p2(middleX-(p1.x()-middleX), middleY-(p1.y()-middleY));
-    
-	QPainterPath path;
-	path.moveTo(points().first);
-	path.lineTo(p1);
-	path.lineTo(points().second);
-	path.lineTo(p2);
-	path.lineTo(points().first);
-	painter.drawPath(path);
+        int middleX = points().first.x();
+        int middleY = points().first.y();
+
+        QLineF normal1 = line.normalVector();
+        normal1.setLength(bubble_size);
+        QPoint p1 = normal1.p2().toPoint();
+        QPoint p2(middleX - (p1.x() - middleX), middleY - (p1.y() - middleY));
+
+        QPainterPath path;
+        path.moveTo(points().first);
+        path.lineTo(p1);
+        path.lineTo(points().second);
+        path.lineTo(p2);
+        path.lineTo(points().first);
+        painter.drawPath(path);
     }
-    
+
     painter.setPen(contrastColor);
     painter.setBrush(antiContrastColor);
     painter.drawEllipse(
