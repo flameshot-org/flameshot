@@ -108,6 +108,12 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
             }
             default:
                 ok = false;
+                AbstractLogger::error()
+                  << tr("Unable to detect desktop environment (GNOME? KDE? "
+                        "Sway? ...)");
+                AbstractLogger::error()
+                  << tr("Hint: try setting the XDG_CURRENT_DESKTOP environment "
+                        "variable.");
                 break;
         }
         if (!ok) {

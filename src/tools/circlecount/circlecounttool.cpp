@@ -4,6 +4,7 @@
 #include "circlecounttool.h"
 #include "colorutils.h"
 #include <QPainter>
+#include <QPainterPath>
 
 namespace {
 #define PADDING_VALUE 2
