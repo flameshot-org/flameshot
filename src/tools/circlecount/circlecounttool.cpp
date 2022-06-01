@@ -111,7 +111,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     QLineF line(points().first, points().second);
 
     if (line.length() > bubble_size) {
-        painter.setPen(QPen(color(), size()));
+        painter.setPen(QPen(color(), 0));
         painter.setBrush(color());
 
         int middleX = points().first.x();
