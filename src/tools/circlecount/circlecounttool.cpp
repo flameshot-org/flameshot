@@ -109,7 +109,7 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
     int bubble_size = size() + THICKNESS_OFFSET;
 
     QLineF line(points().first, points().second);
-
+    // if the mouse is outside of the bubble, draw the pointer
     if (line.length() > bubble_size) {
         painter.setPen(QPen(color(), 0));
         painter.setBrush(color());
@@ -117,9 +117,9 @@ void CircleCountTool::process(QPainter& painter, const QPixmap& pixmap)
         int middleX = points().first.x();
         int middleY = points().first.y();
 
-        QLineF normal1 = line.normalVector();
-        normal1.setLength(bubble_size);
-        QPoint p1 = normal1.p2().toPoint();
+        QLineF normal = line.normalVector();
+        normal.setLength(bubble_size);
+        QPoint p1 = normal.p2().toPoint();
         QPoint p2(middleX - (p1.x() - middleX), middleY - (p1.y() - middleY));
 
         QPainterPath path;
