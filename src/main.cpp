@@ -50,7 +50,7 @@ void requestCaptureAndWait(const CaptureRequest& req)
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
     QObject::connect(flameshot, &Flameshot::captureTaken, [&](QPixmap) {
-        // Only u seful on MacOS because each instance hosts its own widgets
+        // Only useful on MacOS because each instance hosts its own widgets
         if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
             qApp->exit(0);
         }
@@ -178,7 +178,8 @@ int main(int argc, char* argv[])
                               QStringLiteral("milliseconds"));
 
     CommandOption useLastRegionOption(
-      "last-region", QObject::tr("Repeat screenshot with previously selected region"));
+      "last-region",
+      QObject::tr("Repeat screenshot with previously selected region"));
 
     CommandOption regionOption("region",
                                QObject::tr("Screenshot region to select"),
@@ -376,8 +377,7 @@ int main(int argc, char* argv[])
         if (!region.isEmpty()) {
             auto selectionRegion = Region().value(region).toRect();
             req.setInitialSelection(selectionRegion);
-        }
-        else if (useLastRegion){
+        } else if (useLastRegion) {
             req.setInitialSelection(getLastRegion());
         }
         if (clipboard) {
