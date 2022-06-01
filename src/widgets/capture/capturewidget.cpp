@@ -12,6 +12,7 @@
 #include "capturewidget.h"
 #include "abstractlogger.h"
 #include "copytool.h"
+#include "src/config/cacheutils.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
@@ -259,6 +260,8 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
+        auto lastRegion = m_selection->geometry();
+        setLastRegion(lastRegion);
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
@@ -1700,7 +1703,7 @@ void CaptureWidget::redo()
 
 QRect CaptureWidget::extendedSelection() const
 {
-    if (!m_selection->isVisible()) {
+    if (m_selection == nullptr) {
         return {};
     }
     QRect r = m_selection->geometry();

@@ -9,6 +9,7 @@
 
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
+#include "src/config/cacheutils.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
 #include "src/core/flameshot.h"
@@ -23,7 +24,6 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
@@ -176,6 +176,11 @@ int main(int argc, char* argv[])
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
+
+    CommandOption useLastRegionOption(
+      "last-region",
+      QObject::tr("Repeat screenshot with previously selected region"));
+
     CommandOption regionOption("region",
                                QObject::tr("Screenshot region to select"),
                                QStringLiteral("WxH+X+Y or string"));
@@ -272,6 +277,7 @@ int main(int argc, char* argv[])
     mainColorOption.addChecker(colorChecker, colorErr);
     delayOption.addChecker(numericChecker, delayErr);
     regionOption.addChecker(regionChecker, regionErr);
+    useLastRegionOption.addChecker(booleanChecker, booleanErr);
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
     autostartOption.addChecker(booleanChecker, booleanErr);
@@ -290,6 +296,7 @@ int main(int argc, char* argv[])
                         clipboardOption,
                         delayOption,
                         regionOption,
+                        useLastRegionOption,
                         rawImageOption,
                         selectionOption,
                         uploadOption,
@@ -359,6 +366,7 @@ int main(int argc, char* argv[])
         }
         int delay = parser.value(delayOption).toInt();
         QString region = parser.value(regionOption);
+        bool useLastRegion = parser.isSet(useLastRegionOption);
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
         bool printGeometry = parser.isSet(selectionOption);
@@ -367,7 +375,10 @@ int main(int argc, char* argv[])
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
         if (!region.isEmpty()) {
-            req.setInitialSelection(Region().value(region).toRect());
+            auto selectionRegion = Region().value(region).toRect();
+            req.setInitialSelection(selectionRegion);
+        } else if (useLastRegion) {
+            req.setInitialSelection(getLastRegion());
         }
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
@@ -394,7 +405,6 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         // Recreate the application as a QApplication

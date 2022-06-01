@@ -95,7 +95,7 @@ void TrayIcon::initMenu()
 {
     m_menu = new QMenu();
 
-    QAction* captureAction = new QAction(tr("&Take Screenshot"), this);
+    auto* captureAction = new QAction(tr("&Take Screenshot"), this);
     connect(captureAction, &QAction::triggered, this, [this]() {
 #if defined(Q_OS_MACOS)
         auto currentMacOsVersion = QOperatingSystemVersion::current();
@@ -113,17 +113,17 @@ void TrayIcon::initMenu()
     });
 #endif
     });
-    QAction* launcherAction = new QAction(tr("&Open Launcher"), this);
+    auto* launcherAction = new QAction(tr("&Open Launcher"), this);
     connect(launcherAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::launcher);
-    QAction* configAction = new QAction(tr("&Configuration"), this);
+    auto* configAction = new QAction(tr("&Configuration"), this);
     connect(configAction,
             &QAction::triggered,
             Flameshot::instance(),
             &Flameshot::config);
-    QAction* infoAction = new QAction(tr("&About"), this);
+    auto* infoAction = new QAction(tr("&About"), this);
     connect(
       infoAction, &QAction::triggered, Flameshot::instance(), &Flameshot::info);
 

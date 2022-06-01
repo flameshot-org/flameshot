@@ -25,6 +25,7 @@ public slots:
 
 private slots:
     void showHelpChanged(bool checked);
+    void saveLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void checkForUpdatesChanged(bool checked);
@@ -72,6 +73,7 @@ private:
     void initUseJpgForClipboard();
     void initUploadHistoryMax();
     void initUploadClientSecret();
+    void initSaveLastRegion();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -91,6 +93,7 @@ private:
     QCheckBox* m_copyAndCloseAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
+    QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
