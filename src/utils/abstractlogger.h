@@ -15,6 +15,7 @@ public:
         Stderr = 0x02,
         LogFile = 0x08,
         String = 0x10,
+        Stdout = 0x20,
         Default = Notification | LogFile | Stderr,
     };
 
