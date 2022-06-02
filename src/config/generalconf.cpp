@@ -73,7 +73,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_sidePanelButton->setChecked(config.showSidePanelButton());
     m_sysNotifications->setChecked(config.showDesktopNotification());
     m_autostart->setChecked(config.startupLaunch());
-    m_copyAndCloseAfterUpload->setChecked(config.copyAndCloseAfterUpload());
+    m_copyURLAfterUpload->setChecked(config.copyURLAfterUpload());
     m_saveAfterCopy->setChecked(config.saveAfterCopy());
     m_copyPathAfterSave->setChecked(config.copyPathAfterSave());
     m_antialiasingPinZoom->setChecked(config.antialiasingPinZoom());
@@ -428,14 +428,13 @@ void GeneralConf::initCopyOnDoubleClick()
 
 void GeneralConf::initCopyAndCloseAfterUpload()
 {
-    m_copyAndCloseAfterUpload =
-      new QCheckBox(tr("Copy URL after upload"), this);
-    m_copyAndCloseAfterUpload->setToolTip(
-      tr("Copy URL and close window after uploading was successful"));
-    m_scrollAreaLayout->addWidget(m_copyAndCloseAfterUpload);
+    m_copyURLAfterUpload = new QCheckBox(tr("Copy URL after upload"), this);
+    m_copyURLAfterUpload->setToolTip(
+      tr("Copy URL after uploading was successful"));
+    m_scrollAreaLayout->addWidget(m_copyURLAfterUpload);
 
-    connect(m_copyAndCloseAfterUpload, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setCopyAndCloseAfterUpload(checked);
+    connect(m_copyURLAfterUpload, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setCopyURLAfterUpload(checked);
     });
 }
 
