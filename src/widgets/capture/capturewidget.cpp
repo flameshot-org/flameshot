@@ -439,7 +439,7 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_panel->hide();
     } else if (m_toolWidget) {
         // delete toolWidget if exists
-        m_toolWidget->close();
+        m_toolWidget->hide();
         delete m_toolWidget;
         m_toolWidget = nullptr;
     } else if (m_colorPicker && m_colorPicker->isVisible()) {
@@ -466,7 +466,7 @@ void CaptureWidget::releaseActiveTool()
         m_activeTool = nullptr;
     }
     if (m_toolWidget) {
-        m_toolWidget->close();
+        m_toolWidget->hide();
         delete m_toolWidget;
         m_toolWidget = nullptr;
     }
@@ -1180,7 +1180,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 break;
             }
             if (m_toolWidget) {
-                m_toolWidget->close();
+                m_toolWidget->hide();
                 delete m_toolWidget;
                 m_toolWidget = nullptr;
             }
