@@ -203,14 +203,17 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
         mouseSide = getMouseSide(e->pos());
     }
 
+    QPoint pos;
+
     if (!isVisible() || !mouseSide) {
         show();
-        m_dragStartPos = e->pos();
         m_activeSide = TOPLEFT_SIDE;
-        setGeometry({ e->pos(), e->pos() });
+        pos = m_dragStartPos;
+        setGeometry({ pos, pos });
+    } else {
+        pos = e->pos();
     }
 
-    QPoint pos = e->pos();
     auto geom = geometry();
     bool symmetryMod = qApp->keyboardModifiers() & Qt::ShiftModifier;
 
@@ -280,7 +283,7 @@ void SelectionWidget::parentMouseMoveEvent(QMouseEvent* e)
         setGeometry(geom.normalized());
         m_activeSide = getProperSide(m_activeSide, geom);
     }
-    m_dragStartPos = pos;
+    m_dragStartPos = e->pos();
 }
 
 void SelectionWidget::paintEvent(QPaintEvent*)
