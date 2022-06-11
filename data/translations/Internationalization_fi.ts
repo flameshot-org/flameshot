@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Set the Arrow as the paint tool</translation>
+        <translation>Aseta nuoli maalaustyökaluksi</translation>
     </message>
 </context>
 <context>
@@ -276,12 +276,12 @@ Paina väliyöntiä avataksesi sivupaneelin.</translation>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="57"/>
         <source>Circle Counter</source>
-        <translation>Circle Counter</translation>
+        <translation>Ympyrä laskuri</translation>
     </message>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="75"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Add an autoincrementing counter bubble</translation>
+        <translation>Lisää automaattisesti kasvava laskurikupla</translation>
     </message>
 </context>
 <context>
@@ -289,12 +289,12 @@ Paina väliyöntiä avataksesi sivupaneelin.</translation>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="20"/>
         <source>Circle</source>
-        <translation>Circle</translation>
+        <translation>Kehä</translation>
     </message>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Set the Circle as the paint tool</translation>
+        <translation>Aseta ympyrä maalaustyökaluksi</translation>
     </message>
 </context>
 <context>
@@ -614,7 +614,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/controller.cpp" line="317"/>
         <source>Unable to close active modal widgets</source>
-        <translation>Unable to close active modal widgets</translation>
+        <translation>Aktiivisia modaalisia widgettejä ei voi sulkea</translation>
     </message>
     <message>
         <location filename="../../src/core/controller.cpp" line="479"/>
@@ -695,7 +695,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/exit/exittool.cpp" line="33"/>
         <source>Leave the capture screen</source>
-        <translation>Leave the capture screen</translation>
+        <translation>Jätä kaappausnäyttö</translation>
     </message>
 </context>
 <context>
@@ -902,7 +902,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="279"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Confirmation required to delete screenshot from the latest uploads</translation>
+        <translation>Vahvistus tarvitaan kuvakaappauksen poistamiseksi viimeisimmistä latauksista</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="294"/>
@@ -1498,7 +1498,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Set the Line as the paint tool</translation>
+        <translation>Aseta viiva maalaustyökaluksi</translation>
     </message>
 </context>
 <context>
@@ -1506,12 +1506,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="23"/>
         <source>Marker</source>
-        <translation>Marker</translation>
+        <translation>Merkki</translation>
     </message>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Set the Marker as the paint tool</translation>
+        <translation>Aseta Marker maalaustyökaluksi</translation>
     </message>
 </context>
 <context>
@@ -1532,12 +1532,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="18"/>
         <source>Pencil</source>
-        <translation>Pencil</translation>
+        <translation>Kynä</translation>
     </message>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Set the Pencil as the paint tool</translation>
+        <translation>Aseta lyijykynä maalaustyökaluksi</translation>
     </message>
 </context>
 <context>
