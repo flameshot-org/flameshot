@@ -33,6 +33,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initScrollArea();
 
     initShowHelp();
+    initSaveLastRegion();
     initShowSidePanelButton();
     initShowDesktopNotification();
     initShowTrayIcon();
@@ -84,6 +85,7 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_allowMultipleGuiInstances->setChecked(config.allowMultipleGuiInstances());
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
+    m_saveLastRegion->setChecked(config.saveLastRegion());
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -107,6 +109,11 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 void GeneralConf::updateComponents()
 {
     _updateComponents(false);
+}
+
+void GeneralConf::saveLastRegion(bool checked)
+{
+    ConfigHandler().setSaveLastRegion(checked);
 }
 
 void GeneralConf::showHelpChanged(bool checked)
@@ -233,6 +240,19 @@ void GeneralConf::initShowHelp()
 
     connect(
       m_helpMessage, &QCheckBox::clicked, this, &GeneralConf::showHelpChanged);
+}
+
+void GeneralConf::initSaveLastRegion()
+{
+    m_saveLastRegion = new QCheckBox(tr("Use last region"), this);
+    m_saveLastRegion->setToolTip(tr("Uses the last region as the default "
+                                    "selection for the next screenshot"));
+    m_scrollAreaLayout->addWidget(m_saveLastRegion);
+
+    connect(m_saveLastRegion,
+            &QCheckBox::clicked,
+            this,
+            &GeneralConf::saveLastRegion);
 }
 
 void GeneralConf::initShowSidePanelButton()

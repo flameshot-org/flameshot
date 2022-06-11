@@ -34,7 +34,7 @@ public:
 public slots:
     CaptureWidget* gui(
       const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
-    void screen(CaptureRequest req, const int screenNumber = -1);
+    void screen(CaptureRequest req, int const screenNumber = -1);
     void full(const CaptureRequest& req);
     void launcher();
     void config();

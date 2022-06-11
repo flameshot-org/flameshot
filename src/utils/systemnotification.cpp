@@ -12,6 +12,13 @@
 #include "src/core/flameshotdaemon.h"
 #endif
 
+// work-around for snap, which cannot install icons into
+// the system folder, so instead the absolute path to the
+// icon (saved somwhere in /snap/flameshot/...) is passed
+#ifndef FLAMESHOT_ICON
+#define FLAMESHOT_ICON "flameshot"
+#endif
+
 SystemNotification::SystemNotification(QObject* parent)
   : QObject(parent)
   , m_interface(nullptr)
@@ -61,9 +68,10 @@ void SystemNotification::sendMessage(const QString& text,
         hintsMap[QStringLiteral("x-kde-urls")] =
           QStringList({ fullPath.toString() });
     }
+
     args << (qAppName())                 // appname
          << static_cast<unsigned int>(0) // id
-         << "flameshot"                  // icon
+         << FLAMESHOT_ICON               // icon
          << title                        // summary
          << text                         // body
          << QStringList()                // actions

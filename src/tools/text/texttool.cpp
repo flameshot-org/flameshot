@@ -114,12 +114,12 @@ QWidget* TextTool::widget()
 void TextTool::closeEditor()
 {
     if (!m_widget.isNull()) {
-        m_widget->close();
+        m_widget->hide();
         delete m_widget;
         m_widget = nullptr;
     }
     if (!m_confW.isNull()) {
-        m_confW->close();
+        m_confW->hide();
         delete m_confW;
         m_confW = nullptr;
     }

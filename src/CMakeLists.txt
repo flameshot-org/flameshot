@@ -65,6 +65,10 @@ endif ()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
 
+if(FLAMESHOT_ICON)
+  target_compile_definitions(flameshot PUBLIC FLAMESHOT_ICON="${FLAMESHOT_ICON}")
+endif()
+
 if (WIN32)
     set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
     if (MSVC)

@@ -3,16 +3,13 @@
 
 #include "capturerequest.h"
 #include "confighandler.h"
-#include "flameshot.h"
 #include "imgupload/imguploadermanager.h"
 #include "pinwidget.h"
+#include "src/config/cacheutils.h"
 #include "src/utils/screenshotsaver.h"
-#include "src/widgets/imguploaddialog.h"
-#include "systemnotification.h"
 #include <QApplication>
 #include <QClipboard>
 #include <QDateTime>
-#include <QVector>
 #include <stdexcept>
 #include <utility>
 
@@ -24,7 +21,13 @@ CaptureRequest::CaptureRequest(CaptureRequest::CaptureMode mode,
   , m_delay(delay)
   , m_tasks(tasks)
   , m_data(std::move(data))
-{}
+{
+
+    ConfigHandler config;
+    if (config.saveLastRegion()) {
+        setInitialSelection(getLastRegion());
+    }
+}
 
 CaptureRequest::CaptureMode CaptureRequest::captureMode() const
 {
