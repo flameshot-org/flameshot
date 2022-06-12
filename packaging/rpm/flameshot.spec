@@ -8,7 +8,7 @@
 %define is_suse_leap (0%{?is_opensuse} && 0%{?sle_version} >= 150200)
 
 Name: flameshot
-Version: 11.0.0.4
+Version: 11.0.0.5
 %if %{is_rhel_or_fedora}
 Release: 1%{?dist}
 %endif
