@@ -175,6 +175,7 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
+
 You can also edit some of the settings (like overriding the default colors) in the configuration file.\
 Linux path : `~/.config/flameshot/flameshot.ini`.\
 Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
@@ -295,7 +296,6 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
 
 Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
 
-
 #### On XFCE 4
 
 1. Go to `Keyboard` settings
@@ -309,7 +309,6 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
-
 
 ## Considerations
 
@@ -384,7 +383,6 @@ After following all those steps above, `flameshot` will open without problems in
 
 
 Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
-
 
 ## Compilation
 
@@ -496,6 +494,7 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 <https://flameshot.org/docs/guide/faq/>
 
 ## License
+
 - The main code is licensed under [GPLv3](LICENSE)
 - The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
@@ -507,18 +506,21 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Privacy Policy
+
 This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
 
-
 ## Code Signing Policy
+
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
 Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
+
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ## Acknowledgment
+
 Thanks to those who have shown interest in the early development process:
 - [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)
