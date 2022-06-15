@@ -3,7 +3,7 @@ This is the beta for the version 12.0 release. We will be in beta for about a we
 
 ## New Features
 - Created basic layer movement functionality (up, down) by @affirVega in https://github.com/flameshot-org/flameshot/pull/2108
-<p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/layer.png" width=50%> </p>
+<p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/layer.git" width=50%> </p>
 
 - Added a new widget to allow the colorwheel to be more easily customized by https://github.com/flameshot-org/flameshot/pull/2202
 <p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/colorwheel.png" width=50%> </p>
@@ -12,7 +12,7 @@ This is the beta for the version 12.0 release. We will be in beta for about a we
 - Added magnifier for more precise selections by @SilasDo in https://github.com/flameshot-org/flameshot/pull/2219
   - The new magnifier can be enabled in ```Configuration > General > Show Magnifier``` 
   - There is an option to make the magnifier a square or circle
-<p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/magnfier.png" width=50%> </p>
+<p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/magnfier.git" width=50%> </p>
 
 - Incremental markers can now have a point if you drag when placing them. @vozdeckyl in https://github.com/flameshot-org/flameshot/pull/2638
 <p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/number_pointer.png" width=50%> </p>
