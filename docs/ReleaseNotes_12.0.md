@@ -20,6 +20,7 @@ This is the beta for the version 12.0 release. We will be in beta for about a we
 - Added the ability to cache the last region by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2615
   - The launcher tool will automatically populate the coordinates for the last selection region
   - If ```Configuration > General > Use last region``` is selected, Flameshot will always initialize with the last successfully captured region
+<p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/region_launcher.png" width=50%> </p>
 
 - Pinned screenshots can now be copied to the clipboard or saved to a file if a user right clicks on the pinned image by @zhangfuwen in https://github.com/flameshot-org/flameshot/pull/2519
 
@@ -33,7 +34,7 @@ This is the beta for the version 12.0 release. We will be in beta for about a we
 
 - Make KDE use Freedesktop portal by @greenfoo in https://github.com/flameshot-org/flameshot/pull/2495
 
-- Allow final actions when printing geometry by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2444
+- Allow final actions when printing geometry when invoke by CLI by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2444
 
 - Many Flameshot widgets have been reworked to use .ui XML files and Qt Designer. This has been done to allow non C++ developers to more easily contribute to the graphical side of Flameshot.
 <p align=center><img src="https://github.com/flameshot-org/flameshot/blob/master/docs/images/ui_file.png" width=50%> </p>
