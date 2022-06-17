@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj ny</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Flyt op</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Flyt ned</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Accepter skærmklippet</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>App Starter</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg en app for at åbne skærmklippet</translation>
     </message>
 </context>
 <context>
@@ -55,33 +55,33 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="43"/>
         <source>Open With</source>
-        <translation type="unfinished"></translation>
+        <translation>Åben med</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Start i terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="59"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Hold åben efter selektion</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
         <source>Unable to launch in terminal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke starte i terminalen.</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
         <source>Unable to write in</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke skrive i</translation>
     </message>
 </context>
 <context>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="72"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pil</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Indstil pilen som malingsværktøj</translation>
     </message>
 </context>
 <context>
@@ -113,52 +113,52 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="42"/>
         <source>&lt;b&gt;Capture Mode&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Skærmklipstilstand&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="48"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Rektangulær Område</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="54"/>
         <source>Full Screen (Current Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuld Skærm (Nuværende Skærm)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="57"/>
         <source>Full Screen (All Monitors)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuld Skærm (Alle Skærme)</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="66"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen ventetid</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> anden</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="73"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> sekunder</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="77"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag nyt skærmbillede</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="86"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Område:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="87"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ventetid:</translation>
     </message>
 </context>
 <context>
@@ -167,27 +167,27 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="102"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke indfange skærmen</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Mus</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="370"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg skærmbillede område</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Musehjul</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="385"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændre værktøjs størrelse</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="386"/>
