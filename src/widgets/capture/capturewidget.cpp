@@ -1205,6 +1205,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 w->setAttribute(Qt::WA_DeleteOnClose);
                 w->activateWindow();
                 w->show();
+                Flameshot::instance()->setExternalWidgets();
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
