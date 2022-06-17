@@ -145,6 +145,10 @@
         <source>Capture Mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>WxH+x+y</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CaptureWidget</name>
@@ -306,14 +310,6 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
 <context>
     <name>ColorPickerEditor</name>
     <message>
-        <source>Select Preset:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select preset using the spinbox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -347,6 +343,22 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Unable to remove preset. Minimum limit reached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter color to update preset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished">Frissítés</translation>
+    </message>
+    <message>
+        <source>Press button to update the selected preset</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -472,7 +484,7 @@ Please solve them manually in the configuration file.</source>
     <name>Controller</name>
     <message>
         <source>&amp;Configuration</source>
-        <translation>&amp;Konfiguráció</translation>
+        <translation type="vanished">&amp;Konfiguráció</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -480,51 +492,51 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Bezárás</translation>
+        <translation type="vanished">&amp;Bezárás</translation>
     </message>
     <message>
         <source>&amp;Take Screenshot</source>
-        <translation>&amp;Képernyő Mentés Készítése</translation>
+        <translation type="vanished">&amp;Képernyő Mentés Készítése</translation>
     </message>
     <message>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;Alkalmazásindító Megnyitása</translation>
+        <translation type="vanished">&amp;Alkalmazásindító Megnyitása</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Rólunk</translation>
+        <translation type="vanished">&amp;Rólunk</translation>
     </message>
     <message>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;Eddigi Feltöltések</translation>
+        <translation type="vanished">&amp;Eddigi Feltöltések</translation>
     </message>
     <message>
         <source>New version %1 is available</source>
-        <translation>Elérhető az új %1 verzió</translation>
+        <translation type="vanished">Elérhető az új %1 verzió</translation>
     </message>
     <message>
         <source>You have the latest version</source>
-        <translation>A legfrisebb verzió van feltelepítve</translation>
+        <translation type="vanished">A legfrisebb verzió van feltelepítve</translation>
     </message>
     <message>
         <source>Check for updates</source>
-        <translation>Frissítések keresése</translation>
+        <translation type="vanished">Frissítések keresése</translation>
     </message>
     <message>
         <source>Failed to get information about the latest version.</source>
-        <translation>Nem sikerült információt szerezni a legújabb verzióról.</translation>
+        <translation type="vanished">Nem sikerült információt szerezni a legújabb verzióról.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Hiba</translation>
+        <translation type="vanished">Hiba</translation>
     </message>
     <message>
         <source>Unable to close active modal widgets</source>
-        <translation>Nem sikerült bezárni az aktív widgeteket</translation>
+        <translation type="vanished">Nem sikerült bezárni az aktív widgeteket</translation>
     </message>
     <message>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished">URL másolva a vágólapra.</translation>
+        <translation type="obsolete">URL másolva a vágólapra.</translation>
     </message>
 </context>
 <context>
@@ -615,6 +627,21 @@ Please solve them manually in the configuration file.</source>
     </message>
 </context>
 <context>
+    <name>Flameshot</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Hiba</translation>
+    </message>
+    <message>
+        <source>Unable to close active modal widgets</source>
+        <translation type="unfinished">Nem sikerült bezárni az aktív widgeteket</translation>
+    </message>
+    <message>
+        <source>URL copied to clipboard.</source>
+        <translation type="unfinished">URL másolva a vágólapra.</translation>
+    </message>
+</context>
+<context>
     <name>FlameshotDBusAdapter</name>
     <message>
         <source>Unable to capture screen</source>
@@ -626,6 +653,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <source>Unable to connect via DBus</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>New version %1 is available</source>
+        <translation type="unfinished">Elérhető az új %1 verzió</translation>
+    </message>
+    <message>
+        <source>You have the latest version</source>
+        <translation type="unfinished">A legfrisebb verzió van feltelepítve</translation>
+    </message>
+    <message>
+        <source>Failed to get information about the latest version.</source>
+        <translation type="unfinished">Nem sikerült információt szerezni a legújabb verzióról.</translation>
     </message>
 </context>
 <context>
@@ -935,6 +974,26 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Make the magnifier to be square-shaped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use last region</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uses the last region as the default selection for the next screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy on double click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Copy on Double Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Imgur API Key</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1312,6 +1371,21 @@ Please solve them manually in the configuration file.</source>
     </message>
 </context>
 <context>
+    <name>PinWidget</name>
+    <message>
+        <source>Context menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">Másolás vágólapra</translation>
+    </message>
+    <message>
+        <source>Save to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PixelateTool</name>
     <message>
         <source>Pixelate</source>
@@ -1656,6 +1730,14 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Requested screen exceeds screen count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat screenshot with previously selected region</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RectangleTool</name>
@@ -1699,6 +1781,14 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Unable to capture screen</source>
         <translation>Nem sikerült rögzíteni a kijelzőt</translation>
+    </message>
+    <message>
+        <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1960,6 +2050,41 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Add text to your capture</source>
         <translation>Adj szöveget a rögzítéshez</translation>
+    </message>
+</context>
+<context>
+    <name>TrayIcon</name>
+    <message>
+        <source>&amp;Take Screenshot</source>
+        <translation type="unfinished">&amp;Képernyő Mentés Készítése</translation>
+    </message>
+    <message>
+        <source>&amp;Open Launcher</source>
+        <translation type="unfinished">&amp;Alkalmazásindító Megnyitása</translation>
+    </message>
+    <message>
+        <source>&amp;Configuration</source>
+        <translation type="unfinished">&amp;Konfiguráció</translation>
+    </message>
+    <message>
+        <source>&amp;About</source>
+        <translation type="unfinished">&amp;Rólunk</translation>
+    </message>
+    <message>
+        <source>Check for updates</source>
+        <translation type="unfinished">Frissítések keresése</translation>
+    </message>
+    <message>
+        <source>New version %1 is available</source>
+        <translation type="unfinished">Elérhető az új %1 verzió</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished">&amp;Bezárás</translation>
+    </message>
+    <message>
+        <source>&amp;Latest Uploads</source>
+        <translation type="unfinished">&amp;Eddigi Feltöltések</translation>
     </message>
 </context>
 <context>
