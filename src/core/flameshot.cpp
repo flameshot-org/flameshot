@@ -419,7 +419,6 @@ void Flameshot::exportCapture(QPixmap capture,
 void Flameshot::setExternalWidgets()
 {
     m_have_external_widgets = true;
-
 }
 
 // STATIC ATTRIBUTES
