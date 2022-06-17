@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation type="unfinished"></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -423,22 +423,22 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργασία Προεπιλογής:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Εισαγάγετε χρώμα για ενημέρωση προεπιλογής</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
         <source>Update</source>
-        <translation type="unfinished">Ενημέρωση</translation>
+        <translation>Ενημέρωση</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Πατήστε το κουμπί για να ενημερώσετε την επιλεγμένη προεπιλογή</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -785,17 +785,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="111"/>
         <source>Unable to close active modal widgets</source>
-        <translation type="unfinished">Δεν είναι δυνατό το κλείσιμο των ενεργών γραφικών στοιχείων</translation>
+        <translation>Δεν είναι δυνατό το κλείσιμο των ενεργών γραφικών στοιχείων</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η διεύθυνση URL αντιγράφηκε στο πρόχειρο.</translation>
     </message>
 </context>
 <context>
@@ -803,17 +803,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Η νέα έκδοση % 1 είναι διαθέσιμη</translation>
+        <translation>Η νέα έκδοση % 1 είναι διαθέσιμη</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
         <source>You have the latest version</source>
-        <translation type="unfinished">Έχετε την πιο πρόσφατη έκδοση</translation>
+        <translation>Έχετε την πιο πρόσφατη έκδοση</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
         <source>Failed to get information about the latest version.</source>
-        <translation type="unfinished">Αποτυχία λήψης πληροφοριών για την πιο πρόσφατη έκδοση.</translation>
+        <translation>Αποτυχία λήψης πληροφοριών για την πιο πρόσφατη έκδοση.</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
@@ -1047,12 +1047,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρησιμοποιήστε την τελευταία περιοχή</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρησιμοποιεί την τελευταία περιοχή ως προεπιλεγμένη επιλογή για το επόμενο στιγμιότυπο οθόνης</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1102,12 +1102,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντιγραφή με διπλό κλικ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργοποιήστε την Αντιγραφή με Διπλό Κλικ</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -1147,7 +1147,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur API Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Κλειδί API Imgur</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1654,17 +1654,17 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Γενικό πλαίσιο μενού</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Copia al porta-retalls</translation>
+        <translation>Αντιγραφή στο πρόχειρο</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση στο αρχείο</translation>
     </message>
 </context>
 <context>
@@ -1817,7 +1817,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναλάβετε το στιγμιότυπο οθόνης με την προηγουμένως επιλεγμένη περιοχή</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1956,7 +1956,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation type="unfinished"></translation>
+        <translation>Η ζητούμενη οθόνη υπερβαίνει τον αριθμό οθονών</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2128,12 +2128,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν είναι δυνατός ο εντοπισμός του περιβάλλοντος επιφάνειας εργασίας (GNOME; KDE; Sway; ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Συμβουλή: δοκιμάστε να ρυθμίσετε τη μεταβλητή περιβάλλοντος XDG_CURRENT_DESKTOP.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2450,42 +2450,42 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="98"/>
         <source>&amp;Take Screenshot</source>
-        <translation type="unfinished">&amp;Λήψη Στιγμιότυπου οθόνης</translation>
+        <translation>&amp;Λήψη Στιγμιότυπου οθόνης</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation type="unfinished">&amp;Άνοιγμα Εκκινητή</translation>
+        <translation>&amp;Άνοιγμα Εκκινητή</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
         <source>&amp;Configuration</source>
-        <translation type="unfinished">&amp;Διαμόρφωση</translation>
+        <translation>&amp;Διαμόρφωση</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="126"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Σχετικά με</translation>
+        <translation>&amp;Σχετικά με</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation type="unfinished">Έλεγχος για ενημερώσεις</translation>
+        <translation>Έλεγχος για ενημερώσεις</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>
         <source>New version %1 is available</source>
-        <translation type="unfinished">Η νέα έκδοση % 1 είναι διαθέσιμη</translation>
+        <translation>Η νέα έκδοση % 1 είναι διαθέσιμη</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="145"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">%Κλείσιμο</translation>
+        <translation>%Κλείσιμο</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation type="unfinished">&amp;Τελευταίες Μεταφορτώσεις</translation>
+        <translation>&amp;Τελευταίες Μεταφορτώσεις</translation>
     </message>
 </context>
 <context>
