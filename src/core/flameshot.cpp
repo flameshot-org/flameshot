@@ -3,7 +3,6 @@
 
 #include "flameshot.h"
 #include "flameshotdaemon.h"
-
 #if defined(Q_OS_MACOS)
 #include "external/QHotkey/QHotkey"
 #endif
@@ -25,7 +24,6 @@
 #include <QApplication>
 #include <QBuffer>
 #include <QDebug>
-#include <QDesktopServices>
 #include <QDesktopWidget>
 #include <QFile>
 #include <QMessageBox>
@@ -116,8 +114,6 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
         }
 
         m_captureWindow = new CaptureWidget(req);
-        // m_captureWindow = new CaptureWidget(req, false); //
-        // debug
 
 #ifdef Q_OS_WIN
         m_captureWindow->show();
@@ -139,20 +135,16 @@ CaptureWidget* Flameshot::gui(const CaptureRequest& req)
 
 void Flameshot::screen(CaptureRequest req, const int screenNumber)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     bool ok = true;
     QScreen* screen;
 
     if (screenNumber < 0) {
         QPoint globalCursorPos = QCursor::pos();
-#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
         screen = qApp->screenAt(globalCursorPos);
-#else
-        screen =
-          qApp->screens()[qApp->desktop()->screenNumber(globalCursorPos)];
-#endif
     } else if (screenNumber >= qApp->screens().count()) {
         AbstractLogger() << QObject::tr(
           "Requested screen exceeds screen count");
@@ -185,8 +177,9 @@ void Flameshot::screen(CaptureRequest req, const int screenNumber)
 
 void Flameshot::full(const CaptureRequest& req)
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
     bool ok = true;
     QPixmap p(ScreenGrabber().grabEntireDesktop(ok));
@@ -204,10 +197,11 @@ void Flameshot::full(const CaptureRequest& req)
 
 void Flameshot::launcher()
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
-    if (!m_launcherWindow) {
+    if (m_launcherWindow == nullptr) {
         m_launcherWindow = new CaptureLauncher();
     }
     m_launcherWindow->show();
@@ -219,10 +213,11 @@ void Flameshot::launcher()
 
 void Flameshot::config()
 {
-    if (!resolveAnyConfigErrors())
+    if (!resolveAnyConfigErrors()) {
         return;
+    }
 
-    if (!m_configWindow) {
+    if (m_configWindow == nullptr) {
         m_configWindow = new ConfigWindow();
         m_configWindow->show();
 #if defined(Q_OS_MACOS)
@@ -234,7 +229,7 @@ void Flameshot::config()
 
 void Flameshot::info()
 {
-    if (!m_infoWindow) {
+    if (m_infoWindow == nullptr) {
         m_infoWindow = new InfoWindow();
 #if defined(Q_OS_MACOS)
         m_infoWindow->activateWindow();
@@ -424,6 +419,7 @@ void Flameshot::exportCapture(QPixmap capture,
 void Flameshot::setExternalWidgets()
 {
     m_have_external_widgets = true;
+
 }
 
 // STATIC ATTRIBUTES

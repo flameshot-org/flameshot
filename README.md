@@ -175,6 +175,7 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
+
 You can also edit some of the settings (like overriding the default colors) in the configuration file.\
 Linux path : `~/.config/flameshot/flameshot.ini`.\
 Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
@@ -268,25 +269,32 @@ Steps for using the configuration:
     ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
     ```
 
-#### On Ubuntu (Tested on 18.04, 20.04)
+#### On Ubuntu (Tested on 18.04, 20.04, 22.04)
 
 To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
-1. Remove the binding on <kbd>Prt Sc</kbd> using the following command.
+1. Remove the binding on <kbd>Prt Sc</kbd>:
 
-  ```shell
-  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
-  ```
+   Ubuntu 18.04/20.04 using the following command:
+    ```shell
+    gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+    ```
+   
+   Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
 
-2. Ubuntu 18.04: Go to Settings > Device > Keyboard and press the '+' button at the bottom.
-   Ubuntu 20.04: Go to Settings > Keyboard and press the '+' button at the bottom.
+2. Add custom binding on <kbd>Prt Sc</kbd>:
+ 
+   Ubuntu 18.04: Go to _Settings_ > _Device_ > _Keyboard_ and press the '+' button at the bottom.
+   
+   Ubuntu 20.04: Go to _Settings_ > _Keyboard_ and press the '+' button at the bottom.
+   
+   Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
 3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
 
 4. Then click "_Set Shortcut.._" and press <kbd>Prt Sc</kbd>. This will show as "_print_".
 
 Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
-
 
 #### On XFCE 4
 
@@ -301,7 +309,6 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
-
 
 ## Considerations
 
@@ -377,7 +384,6 @@ After following all those steps above, `flameshot` will open without problems in
 
 Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
 
-
 ## Compilation
 
 To build the application in your system, you'll need to install the dependencies needed for it and package names might be different for each distribution, see [Dependencies](#dependencies) below for more information. You can also install most of the Qt dependencies via [their installer](https://www.qt.io/download-qt-installer). If you were developing Qt apps before, you probably already have them.
@@ -410,7 +416,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 ```shell
 # Compile-time
-apt install g++ cmake build-essential qt5-default qttools5-dev-tools libqt5svg5-dev qttools5-dev
+apt install g++ cmake build-essential qtbase5-dev qttools5-dev-tools libqt5svg5-dev qttools5-dev
 
 # Run-time
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5
@@ -488,6 +494,7 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 <https://flameshot.org/docs/guide/faq/>
 
 ## License
+
 - The main code is licensed under [GPLv3](LICENSE)
 - The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
@@ -499,18 +506,21 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Privacy Policy
+
 This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
 
-
 ## Code Signing Policy
+
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
 Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
+
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ## Acknowledgment
+
 Thanks to those who have shown interest in the early development process:
 - [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)

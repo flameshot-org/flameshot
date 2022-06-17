@@ -3,6 +3,7 @@
 
 #include "capturelauncher.h"
 #include "./ui_capturelauncher.h"
+#include "src/config/cacheutils.h"
 #include "src/core/flameshot.h"
 #include "src/utils/globalvalues.h"
 #include "src/utils/screengrabber.h"
@@ -57,6 +58,32 @@ CaptureLauncher::CaptureLauncher(QDialog* parent)
             this,
             &CaptureLauncher::startCapture);
 
+    connect(ui->captureType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            [this]() {
+                auto mode = static_cast<CaptureRequest::CaptureMode>(
+                  ui->captureType->currentData().toInt());
+                if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
+                    ui->sizeLabel->show();
+                    ui->screenshotX->show();
+                    ui->screenshotY->show();
+                    ui->screenshotWidth->show();
+                    ui->screenshotHeight->show();
+                } else {
+                    ui->sizeLabel->hide();
+                    ui->screenshotX->hide();
+                    ui->screenshotY->hide();
+                    ui->screenshotWidth->hide();
+                    ui->screenshotHeight->hide();
+                }
+            });
+
+    auto lastRegion = getLastRegion();
+    ui->screenshotX->setText(QString::number(lastRegion.x()));
+    ui->screenshotY->setText(QString::number(lastRegion.y()));
+    ui->screenshotWidth->setText(QString::number(lastRegion.width()));
+    ui->screenshotHeight->setText(QString::number(lastRegion.height()));
     show();
 }
 
@@ -74,6 +101,14 @@ void CaptureLauncher::startCapture()
     CaptureRequest req(mode,
                        additionalDelayToHideUI +
                          ui->delayTime->value() * secondsToMilliseconds);
+
+    if (mode == CaptureRequest::CaptureMode::GRAPHICAL_MODE) {
+        req.setInitialSelection(QRect(ui->screenshotX->text().toInt(),
+                                      ui->screenshotY->text().toInt(),
+                                      ui->screenshotWidth->text().toInt(),
+                                      ui->screenshotHeight->text().toInt()));
+    }
+
     connectCaptureSlots();
     Flameshot::instance()->requestCapture(req);
 }
@@ -107,7 +142,7 @@ void CaptureLauncher::disconnectCaptureSlots() const
                &CaptureLauncher::onCaptureFailed);
 }
 
-void CaptureLauncher::onCaptureTaken(QPixmap screenshot)
+void CaptureLauncher::onCaptureTaken(QPixmap const& screenshot)
 {
     // MacOS specific, more details in the function disconnectCaptureSlots()
     disconnectCaptureSlots();
