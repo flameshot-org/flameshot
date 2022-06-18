@@ -396,7 +396,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть Enter або клацніть лівою кнопкою миші</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Утримуйте ліву кнопку миші</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть Пробіл або клацніть правою кнопкою миші</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -426,7 +426,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -2415,22 +2415,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation>Подвійне клацання лівою кнопкою миші</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Показати/сховати бічну панель</translation>
+        <translation>Перемикання бічної панелі</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Змінити розмір виділення ліворуч на 1 піксель</translation>
+        <translation>Змінити розмір виділення вліво на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Змінити розмір виділення праворуч на 1 піксель</translation>
+        <translation>Змінити розмір виділення праворуч на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
