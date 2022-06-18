@@ -306,6 +306,22 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
+    <message>
+        <source>Enter or Left Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hold Left Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space or Right Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished">Esc</translation>
+    </message>
 </context>
 <context>
     <name>ColorPickerEditor</name>
@@ -1842,6 +1858,66 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <message>
         <source>Key</source>
         <translation>Billentyű kombináció</translation>
+    </message>
+    <message>
+        <source>Left Double-click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle side panel</source>
+        <translation type="unfinished">Oldalsó panel ki- és bekapcsolása</translation>
+    </message>
+    <message>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished">Kijelölés átméretezése balra 1px-el</translation>
+    </message>
+    <message>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished">Kijelölés átméretezése jobbra 1px-el</translation>
+    </message>
+    <message>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished">Kijelölés átméretezése fel 1px-el</translation>
+    </message>
+    <message>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished">Kijelölés átméretezése le 1px-el</translation>
+    </message>
+    <message>
+        <source>Select entire screen</source>
+        <translation type="unfinished">Teljes kijelző kijelölése</translation>
+    </message>
+    <message>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished">Kijelölés mozgatása balra 1px-el</translation>
+    </message>
+    <message>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished">Kijelölés mozgatása jobbra 1px-el</translation>
+    </message>
+    <message>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished">Kijelölés mozgatása fel 1px-el</translation>
+    </message>
+    <message>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished">Kijelölés mozgatása le 1px-el</translation>
+    </message>
+    <message>
+        <source>Commit text in text area</source>
+        <translation type="unfinished">Szöveg megadása a szöveg mezőben</translation>
+    </message>
+    <message>
+        <source>Delete current tool</source>
+        <translation type="unfinished">Delete current tool</translation>
+    </message>
+    <message>
+        <source>Capture screen</source>
+        <translation type="unfinished">Képernyő rögzítése</translation>
+    </message>
+    <message>
+        <source>Screenshot history</source>
+        <translation type="unfinished">Képernyőmentési előzmények</translation>
     </message>
 </context>
 <context>

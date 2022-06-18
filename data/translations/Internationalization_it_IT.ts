@@ -383,9 +383,19 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <translation>Accetta colore</translation>
     </message>
     <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <source>Enter or Left Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
         <translation>Seleziona con precisione il colore</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <source>Hold Left Click</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -393,9 +403,19 @@ Premi la barra spaziatrice per aprire il pannello laterale.</translation>
         <translation>Attiva/disattiva lente d&apos;ingrandimento</translation>
     </message>
     <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <source>Space or Right Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
         <translation>Cancella</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <source>Esc</source>
+        <translation type="unfinished">Esc</translation>
     </message>
 </context>
 <context>
@@ -2072,6 +2092,81 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
         <translation>Tasto</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
+        <source>Left Double-click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
+        <source>Toggle side panel</source>
+        <translation type="unfinished">Attiva/disattiva il pannello laterale</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished">Ridimensiona la selezione a sinistra di 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished">Ridimensiona la selezione a destra di 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished">Ridimensiona la selezione sopra di 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished">Ridimensiona la selezione giù di 1 px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
+        <source>Select entire screen</source>
+        <translation type="unfinished">Seleziona tutto lo schermo</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished">Sposta la selezione a sinistra di 1 px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished">Sposta la selezione a destra di 1 px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished">Sposta la selezione sopra di 1 px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished">Sposta la selezione giù di 1 px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <source>Commit text in text area</source>
+        <translation type="unfinished">Conferma testo nell&apos;area testo</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
+        <source>Delete current tool</source>
+        <translation type="unfinished">Elimina lo strumento corrente</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
+        <source>Capture screen</source>
+        <translation type="unfinished">Cattura schermo</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished">Cronologia degli screenshot</translation>
     </message>
 </context>
 <context>

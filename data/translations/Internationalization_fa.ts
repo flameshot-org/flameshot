@@ -395,9 +395,19 @@ Press Space to open the side panel.</source>
         <translation>پذیرش رنگ</translation>
     </message>
     <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <source>Enter or Left Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
         <translation>گزینش رنگ دقیق</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <source>Hold Left Click</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -405,9 +415,19 @@ Press Space to open the side panel.</source>
         <translation>تغییر حالت ذره‌بین</translation>
     </message>
     <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <source>Space or Right Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
         <translation>لغو</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <source>Esc</source>
+        <translation type="unfinished">گریز</translation>
     </message>
 </context>
 <context>
@@ -2195,6 +2215,81 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
         <translation>کلید</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
+        <source>Left Double-click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
+        <source>Toggle side panel</source>
+        <translation type="unfinished">تغییر وضعیت تابلو کناری</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
+        <source>Resize selection left 1px</source>
+        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به چپ</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
+        <source>Resize selection right 1px</source>
+        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به راست</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
+        <source>Resize selection up 1px</source>
+        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به بالا</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
+        <source>Resize selection down 1px</source>
+        <translation type="unfinished">تغییر اندازه محوطه گزیده شده 1 پیکسل به پایین</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
+        <source>Select entire screen</source>
+        <translation type="unfinished">گزینش کل صفحه</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <source>Move selection left 1px</source>
+        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به چپ</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
+        <source>Move selection right 1px</source>
+        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به راست</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <source>Move selection up 1px</source>
+        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به بالا</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
+        <source>Move selection down 1px</source>
+        <translation type="unfinished">جابه‌جایی محوطه گزیده شده 1 پیکسل به پایین</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <source>Commit text in text area</source>
+        <translation type="unfinished">متن ثبت در ناحیهٔ متنی</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
+        <source>Delete current tool</source>
+        <translation type="unfinished">حذف ابزار فعلی</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
+        <source>Capture screen</source>
+        <translation type="unfinished">نماگرفت از صفحه</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <source>Screenshot history</source>
+        <translation type="unfinished">تاریخچهٔ نماگرفت</translation>
     </message>
 </context>
 <context>
