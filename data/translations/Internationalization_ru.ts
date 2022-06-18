@@ -764,7 +764,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Укажите название для ваших снимков:</translation>
+        <translation>Правка имени ваших снимков:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -1088,7 +1088,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Automatic check for updates</source>
-        <translation>Автоматическая проверка обновлений</translation>
+        <translation>Автоматически проверять обновления</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
@@ -1155,7 +1155,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Использует последнюю область в качестве выделения по умолчанию для следующего снимка экрана</translation>
+        <translation>Использовать последнюю область стандартным выделением для следующего снимка экрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1312,7 +1312,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Square shaped magnifier</source>
-        <translation>Лупа квадратной формы</translation>
+        <translation>Квадратная лупа</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
@@ -2410,7 +2410,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation>Клавиша</translation>
+        <translation>Сочетание клавиш</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
@@ -2528,7 +2528,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Уменьшите размер других инструментов</translation>
+        <translation>Уменьшить размер других инструментов</translation>
     </message>
 </context>
 <context>
