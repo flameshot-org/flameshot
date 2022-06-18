@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="86"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Выбрать «Стрелку» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Стрелка»</translation>
     </message>
 </context>
 <context>
@@ -308,7 +308,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Выбрать «Окружность» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Окружность»</translation>
     </message>
 </context>
 <context>
@@ -1276,7 +1276,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="641"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Сглаживание изображения при масштабировании прикреплённого изображения</translation>
+        <translation>Сглаживать изображение при масштабировании закреплённого снимка</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="643"/>
@@ -1779,7 +1779,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Выбрать «Инвертор» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Инвертор»</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1792,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Выбрать «Линию» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Линия»</translation>
     </message>
 </context>
 <context>
@@ -1805,7 +1805,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Выбрать «Маркер» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Маркер»</translation>
     </message>
 </context>
 <context>
@@ -1831,7 +1831,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Выбрать «Карандаш» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Карандаш»</translation>
     </message>
 </context>
 <context>
@@ -1844,7 +1844,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Прикрепить изображение к рабочему столу</translation>
+        <translation>Закрепить снимок на рабочем столе</translation>
     </message>
 </context>
 <context>
@@ -1875,7 +1875,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Выбрать «Размытие» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Размытие»</translation>
     </message>
 </context>
 <context>
@@ -2298,7 +2298,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Выбрать «Прямоугольник» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Прямоугольник»</translation>
     </message>
 </context>
 <context>
@@ -2359,7 +2359,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Выбрать «Прямоугольное выделение» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Прямоугольное выделение»</translation>
     </message>
 </context>
 <context>
