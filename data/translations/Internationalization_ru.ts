@@ -1048,7 +1048,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="299"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Требовать подтверждение при удалении снимка из последних выгрузок</translation>
+        <translation>Требовать подтверждение при удалении снимка из последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
@@ -1107,7 +1107,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Copy URL after upload</source>
-        <translation>Копировать ссылку после выгрузки</translation>
+        <translation>Копировать ссылку после отправки</translation>
     </message>
     <message>
         <source>Copy URL and close window after upload</source>
@@ -1155,7 +1155,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="302"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation>Запрашивать подтверждение при удалении снимков экрана из последних выгрузок</translation>
+        <translation>Запрашивать подтверждение при удалении снимков экрана из последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="344"/>
@@ -1195,7 +1195,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation>Копировать ссылку и закрывать окно после успешной выгрузки</translation>
+        <translation>Копировать ссылку и закрывать окно после успешной отправки</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
@@ -1225,7 +1225,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Максимальный размер последних выгрузок</translation>
+        <translation>Максимальный размер последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
@@ -1267,7 +1267,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/config/generalconf.cpp" line="654"/>
         <location filename="../../src/config/generalconf.cpp" line="656"/>
         <source>Upload image without confirmation</source>
-        <translation>Выгружать изображение без подтверждения</translation>
+        <translation>Отправлять изображение без подтверждения</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="672"/>
@@ -1410,18 +1410,18 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="18"/>
         <source>Upload Confirmation</source>
-        <translation>Подтверждение выгрузки</translation>
+        <translation>Подтверждение отправки</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="22"/>
         <source>Do you want to upload this capture?</source>
-        <translation>Хотите выгрузить этот снимок?</translation>
+        <translation>Хотите отправить этот снимок?</translation>
     </message>
     <message>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="35"/>
         <location filename="../../src/widgets/imguploaddialog.cpp" line="36"/>
         <source>Upload without confirmation</source>
-        <translation>Выгружать без подтверждения</translation>
+        <translation>Отправлять без подтверждения</translation>
     </message>
 </context>
 <context>
@@ -1480,12 +1480,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation>Выгрузить изображение</translation>
+        <translation>Отправить изображение</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
         <source>Uploading Image</source>
-        <translation>Выгружается изображение</translation>
+        <translation>Изображение отправляется</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="130"/>
@@ -1556,7 +1556,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
         <source>Upload the selection</source>
-        <translation>Загрузить выделенное</translation>
+        <translation>Отправить выделенное</translation>
     </message>
 </context>
 <context>
@@ -1989,7 +1989,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="177"/>
         <source>Upload screenshot</source>
-        <translation>Загрузить скриншот</translation>
+        <translation>Отправить снимок экрана</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="179"/>
@@ -2104,8 +2104,8 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 - #RRGGBB
 - #RRRGGGBBB
 - #RRRRGGGGBBBB
-- Именованные цвета, такие как &quot;синий&quot; или &quot;красный&quot;
-Возможно, вам потребуется экранировать знак &apos;#&apos;, как в &apos;\ #FFF&apos;</translation>
+- Именованные цвета, такие как «синий» или «красный»
+Возможно, вам потребуется экранировать знак «#», как в «\#FFF»</translation>
     </message>
     <message>
         <source>Invalid delay, it must be higher than 0</source>
@@ -2896,7 +2896,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_model.cpp" line="144"/>
         <source>%1 (%2 colors)</source>
-        <translation>%1 %(2 цвета)</translation>
+        <translation>%1 (%2 цвета)</translation>
     </message>
 </context>
 <context>
