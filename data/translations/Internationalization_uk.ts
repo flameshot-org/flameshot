@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -422,12 +422,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -437,7 +437,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -1130,12 +1130,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -2138,7 +2138,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
