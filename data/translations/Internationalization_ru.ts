@@ -1235,7 +1235,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
         <source>Undo limit</source>
-        <translation>Количество действий в очереди отмены</translation>
+        <translation>Число действий в очереди отмены</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="597"/>
