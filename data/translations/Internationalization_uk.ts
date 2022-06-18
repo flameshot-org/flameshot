@@ -442,12 +442,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation></translation>
+        <translation>Змінити стиль:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation></translation>
+        <translation>Введіть колір для оновлення стилю</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -457,7 +457,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation></translation>
+        <translation>Натисніть кнопку, щоб оновити вибраний стиль</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -1150,12 +1150,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation></translation>
+        <translation>Використовувати останню ділянку</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation></translation>
+        <translation>Використовує останню ділянку типовим виділенням для наступного знімка екрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -2158,7 +2158,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation></translation>
+        <translation>Запитаний екран перевищує кількість екранів</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2435,57 +2435,57 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Змінити розмір виділення вгору на 1 піксель</translation>
+        <translation>Змінити розмір виділення вгору на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Змінити розмір виділення вниз на 1 піксель</translation>
+        <translation>Змінити розмір виділення вниз на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Виберіть весь екран</translation>
+        <translation>Вибрати весь екран</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Перемістити виділення вліво на 1 піксель</translation>
+        <translation>Перемістити виділення вліво на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Перемістити виділення вправо на 1 піксель</translation>
+        <translation>Перемістити виділення вправо на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Перемістити виділення вгору на 1 піксель</translation>
+        <translation>Перемістити виділення вгору на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Перемістити виділення вниз на 1 піксель</translation>
+        <translation>Перемістити виділення вниз на 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Фіксувати текст у текстовій області</translation>
+        <translation>Зафіксувати текст у текстовій області</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Видалити поточний інструмент</translation>
+        <translation>Видалити поточний інструмент</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Захоплення екрана</translation>
+        <translation>Захоплення екрана</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">Історія знімків екрана</translation>
+        <translation>Журнал знімків екрана</translation>
     </message>
 </context>
 <context>
