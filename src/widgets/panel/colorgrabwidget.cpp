@@ -55,10 +55,10 @@ void ColorGrabWidget::startGrabbing()
     qApp->setOverrideCursor(Qt::CrossCursor);
     qApp->installEventFilter(this);
     OverlayMessage::pushKeyMap(
-      { { "Enter or Left Click", tr("Accept color") },
-        { "Hold Left Click", tr("Precisely select color") },
-        { "Space or Right Click", tr("Toggle magnifier") },
-        { "Esc", tr("Cancel") } });
+      { { tr("Enter or Left Click"), tr("Accept color") },
+        { tr("Hold Left Click"), tr("Precisely select color") },
+        { tr("Space or Right Click"), tr("Toggle magnifier") },
+        { tr("Esc"), tr("Cancel") } });
 }
 
 QColor ColorGrabWidget::color()
