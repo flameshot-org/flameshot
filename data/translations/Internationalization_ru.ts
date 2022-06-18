@@ -1093,7 +1093,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Разрешить открывать несколько экземпляров графического интерфейса flameshot одновременно</translation>
+        <translation>Разрешить несколько экземпляров графического интерфейса Flameshot</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -2014,7 +2014,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="179"/>
         <source>Delay time in milliseconds</source>
-        <translation>Время задержки в миллисекундах</translation>
+        <translation>Задержка в миллисекундах</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -2651,12 +2651,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Minute (00-59)</source>
-        <translation>Минута (00-59)</translation>
+        <translation>Минуты (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Second (00-59)</source>
-        <translation>Секунда (00-59)</translation>
+        <translation>Секунды (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
@@ -2768,7 +2768,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;Последние выгрузки</translation>
+        <translation>&amp;Последние отправки</translation>
     </message>
 </context>
 <context>
