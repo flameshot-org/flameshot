@@ -310,6 +310,14 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
 
+#### On Xorg
+
+To use flameshot in the same way as a default screenshot application, run flameshot in the background from startup. For `xorg`, add the following line to `.xinitrc`: `flameshot &`.
+
+Alternatively, if you are on a window manager such as `i3wm` you can add a line to your config file. For `i3` add `exec_always flameshot &`
+
+To launch flameshot with a hotkey, configure it in a hotkey daemon like `sxhkd`.
+
 ## Considerations
 
 - Experimental Gnome Wayland and Plasma Wayland support.
