@@ -1068,7 +1068,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="299"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Требовать подтверждение при удалении снимка из последних отправок</translation>
+        <translation>Подтверждать удаление снимка из последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
@@ -1245,7 +1245,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Максимальный размер последних отправок</translation>
+        <translation>Максимальное число последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
@@ -1571,7 +1571,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation>Загрузчик изображений</translation>
+        <translation>Отправщик изображений</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
@@ -2425,22 +2425,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation>Изменить размер выделения влево на 1 пиксель</translation>
+        <translation>Изменить размер выделения влево на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation>Изменить размер выделения вправо на 1 пиксель</translation>
+        <translation>Изменить размер выделения вправо на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation>Изменить размер выделения вверх на 1 пиксель</translation>
+        <translation>Изменить размер выделения вверх на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation>Изменить размер выделения вниз на 1 пиксель</translation>
+        <translation>Изменить размер выделения вниз на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
@@ -2450,22 +2450,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation>Переместить выделение влево на 1 пиксель</translation>
+        <translation>Переместить выделение влево на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation>Переместить выделение вправо на 1 пиксель</translation>
+        <translation>Переместить выделение вправо на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation>Переместить выделение вверх на 1 пиксель</translation>
+        <translation>Переместить выделение вверх на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation>Переместить выделение вниз на 1 пиксель</translation>
+        <translation>Переместить выделение вниз на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
@@ -2780,7 +2780,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Измените цвет, перемещая выделение, и посмотрите изменения в кнопках предварительного просмотра.</translation>
+        <translation>Цвет меняется перемещением селекторов, изменения отображаются на кнопках предпросмотра.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
@@ -2795,7 +2795,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Нажмите на эту кнопку, чтобы перейти в режим редактирования основного цвета.</translation>
+        <translation>Нажмите на эту кнопку, чтобы перейти в режим правки основного цвета.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
@@ -2805,7 +2805,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Нажмите на эту кнопку, чтобы перейти в режим редактирования контрастного цвета.</translation>
+        <translation>Нажмите на эту кнопку, чтобы перейти в режим правки контрастного цвета.</translation>
     </message>
 </context>
 <context>
