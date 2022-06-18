@@ -426,7 +426,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esc</translation>
     </message>
 </context>
 <context>
@@ -1716,7 +1716,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Échec de l&apos;enregistrement %1. Erreur : %2</translation>
+        <translation>Échec de l&apos;enregistrement %1. Erreur&#x202f;: %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>

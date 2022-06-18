@@ -320,7 +320,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esc</translation>
     </message>
 </context>
 <context>

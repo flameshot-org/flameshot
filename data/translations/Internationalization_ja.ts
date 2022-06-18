@@ -426,7 +426,7 @@ Enter を押すと画面をキャプチャー。
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esc</translation>
     </message>
 </context>
 <context>
