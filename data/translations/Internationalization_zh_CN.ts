@@ -397,7 +397,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>回车或左键单击</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -407,7 +407,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>按住左键</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -417,7 +417,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>空格键或右键单击</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -427,7 +427,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -1394,7 +1394,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation>Upload image</translation>
+        <translation>上传图像</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
@@ -2299,77 +2299,77 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation>左键双击</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">切换侧面板</translation>
+        <translation>切换侧面板</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">向左改变选区大小1像素</translation>
+        <translation>将选区大小向左调整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">向右改变选区大小1像素</translation>
+        <translation>将选区大小向右调整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">向上改变选区大小1像素</translation>
+        <translation>将选区大小向上调整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">向下改变选区大小1像素</translation>
+        <translation>将选区大小向下调整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">选择整个屏幕</translation>
+        <translation>选择整个屏幕</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">向左移动选区1像素</translation>
+        <translation>将选区向左调整 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">向右移动选区1像素</translation>
+        <translation>将选区向右移动 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">向上移动选区1像素</translation>
+        <translation>将选区向上移动 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">向下移动选区1像素</translation>
+        <translation>将选区向下移动 1px</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">在文本区域提交文本</translation>
+        <translation>在文本区域提交文本</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">删除当前工具</translation>
+        <translation>删除当前工具</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">捕获屏幕</translation>
+        <translation>捕获屏幕</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">屏幕截图历史</translation>
+        <translation>屏幕截图历史</translation>
     </message>
 </context>
 <context>
