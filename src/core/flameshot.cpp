@@ -37,7 +37,6 @@
 
 Flameshot::Flameshot()
   : m_captureWindow(nullptr)
-  , m_have_external_widgets(false)
 #if defined(Q_OS_MACOS)
   , m_HotkeyScreenshotCapture(nullptr)
   , m_HotkeyScreenshotHistory(nullptr)
@@ -412,13 +411,12 @@ void Flameshot::exportCapture(QPixmap capture,
     if (!(tasks & CR::UPLOAD)) {
         emit captureTaken(capture);
     }
-    if (!m_have_external_widgets)
-        qApp->quit();
-}
-
-void Flameshot::setExternalWidgets()
-{
-    m_have_external_widgets = true;
+    // hacks: close a window to trigger qt's quitOnLastWindowClose
+    // if not create tmp_window and close, the `flameshot gui` won't exit after
+    // click copy button
+    QWidget* tmp = new QWidget();
+    tmp->show();
+    tmp->close();
 }
 
 // STATIC ATTRIBUTES
