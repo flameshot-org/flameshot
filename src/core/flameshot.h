@@ -47,7 +47,6 @@ public slots:
 public:
     static void setOrigin(Origin origin);
     static Origin origin();
-    void setExternalWidgets();
 
 signals:
     void captureTaken(QPixmap p);
@@ -60,7 +59,6 @@ public slots:
 private:
     Flameshot();
     bool resolveAnyConfigErrors();
-    bool m_have_external_widgets;
 
     // class members
     static Origin m_origin;
