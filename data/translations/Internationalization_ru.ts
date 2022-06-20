@@ -94,7 +94,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="86"/>
         <source>Set the Arrow as the paint tool</source>
-        <translation>Выбрать «Стрелку» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Стрелка»</translation>
     </message>
 </context>
 <context>
@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation>WxH+x+y</translation>
+        <translation>Ш×В+x+y</translation>
     </message>
 </context>
 <context>
@@ -308,7 +308,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circle/circletool.cpp" line="30"/>
         <source>Set the Circle as the paint tool</source>
-        <translation>Выбрать «Окружность» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Окружность»</translation>
     </message>
 </context>
 <context>
@@ -396,7 +396,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter или левый щелчок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Удерживать левый щелчок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Пробел или правый щелчок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -426,7 +426,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Esc</source>
-        <translation type="unfinished">Esc</translation>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
@@ -764,7 +764,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="24"/>
         <source>Edit the name of your captures:</source>
-        <translation>Укажите название для ваших снимков:</translation>
+        <translation>Правка имени ваших снимков:</translation>
     </message>
     <message>
         <location filename="../../src/config/filenameeditor.cpp" line="28"/>
@@ -1068,7 +1068,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="299"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
-        <translation>Требовать подтверждение при удалении снимка из последних отправок</translation>
+        <translation>Подтверждать удаление снимка из последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="314"/>
@@ -1088,12 +1088,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Automatic check for updates</source>
-        <translation>Автоматическая проверка обновлений</translation>
+        <translation>Автоматически проверять обновления</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Разрешить открывать несколько экземпляров графического интерфейса flameshot одновременно</translation>
+        <translation>Разрешить несколько экземпляров графического интерфейса Flameshot</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1155,7 +1155,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation>Использует последнюю область в качестве выделения по умолчанию для следующего снимка экрана</translation>
+        <translation>Использовать последнюю область стандартным выделением для следующего снимка экрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1245,7 +1245,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
         <source>Latest Uploads Max Size</source>
-        <translation>Максимальный размер последних отправок</translation>
+        <translation>Максимальное число последних отправок</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
@@ -1276,7 +1276,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="641"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Сглаживание изображения при масштабировании прикреплённого изображения</translation>
+        <translation>Сглаживать изображение при масштабировании закреплённого снимка</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="643"/>
@@ -1312,7 +1312,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Square shaped magnifier</source>
-        <translation>Лупа квадратной формы</translation>
+        <translation>Квадратная лупа</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
@@ -1571,7 +1571,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="23"/>
         <source>Image Uploader</source>
-        <translation>Загрузчик изображений</translation>
+        <translation>Отправщик изображений</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/imguploadertool.cpp" line="33"/>
@@ -1779,7 +1779,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/invert/inverttool.cpp" line="35"/>
         <source>Set Inverter as the paint tool</source>
-        <translation>Выбрать «Инвертор» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Инвертор»</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1792,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/line/linetool.cpp" line="32"/>
         <source>Set the Line as the paint tool</source>
-        <translation>Выбрать «Линию» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Линия»</translation>
     </message>
 </context>
 <context>
@@ -1805,7 +1805,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/marker/markertool.cpp" line="33"/>
         <source>Set the Marker as the paint tool</source>
-        <translation>Выбрать «Маркер» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Маркер»</translation>
     </message>
 </context>
 <context>
@@ -1831,7 +1831,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pencil/penciltool.cpp" line="28"/>
         <source>Set the Pencil as the paint tool</source>
-        <translation>Выбрать «Карандаш» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Карандаш»</translation>
     </message>
 </context>
 <context>
@@ -1844,7 +1844,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="35"/>
         <source>Pin image on the desktop</source>
-        <translation>Прикрепить изображение к рабочему столу</translation>
+        <translation>Закрепить снимок на рабочем столе</translation>
     </message>
 </context>
 <context>
@@ -1875,7 +1875,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="34"/>
         <source>Set Pixelate as the paint tool</source>
-        <translation>Выбрать «Размытие» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Размытие»</translation>
     </message>
 </context>
 <context>
@@ -2014,7 +2014,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="179"/>
         <source>Delay time in milliseconds</source>
-        <translation>Время задержки в миллисекундах</translation>
+        <translation>Задержка в миллисекундах</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
@@ -2298,7 +2298,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/rectangle/rectangletool.cpp" line="32"/>
         <source>Set the Rectangle as the paint tool</source>
-        <translation>Выбрать «Прямоугольник» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Прямоугольник»</translation>
     </message>
 </context>
 <context>
@@ -2354,12 +2354,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="25"/>
         <source>Rectangular Selection</source>
-        <translation>Прямоугольное выделение</translation>
+        <translation>Прямоугольная рамка</translation>
     </message>
     <message>
         <location filename="../../src/tools/selection/selectiontool.cpp" line="35"/>
         <source>Set Selection as the paint tool</source>
-        <translation>Выбрать «Прямоугольное выделение» инструментом рисования</translation>
+        <translation>Выбрать инструмент «Прямоугольная рамка»</translation>
     </message>
 </context>
 <context>
@@ -2410,82 +2410,82 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="64"/>
         <source>Key</source>
-        <translation>Клавиша</translation>
+        <translation>Сочетание клавиш</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation>Левый двойной щелчок</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished">Показать/скрыть боковую панель</translation>
+        <translation>Показать/скрыть боковую панель</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
         <source>Resize selection left 1px</source>
-        <translation type="unfinished">Изменить размер выделения влево на 1 пиксель</translation>
+        <translation>Изменить размер выделения влево на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
         <source>Resize selection right 1px</source>
-        <translation type="unfinished">Изменить размер выделения вправо на 1 пиксель</translation>
+        <translation>Изменить размер выделения вправо на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
         <source>Resize selection up 1px</source>
-        <translation type="unfinished">Изменить размер выделения вверх на 1 пиксель</translation>
+        <translation>Изменить размер выделения вверх на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
         <source>Resize selection down 1px</source>
-        <translation type="unfinished">Изменить размер выделения вниз на 1 пиксель</translation>
+        <translation>Изменить размер выделения вниз на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
         <source>Select entire screen</source>
-        <translation type="unfinished">Выбрать весь экран</translation>
+        <translation>Выбрать весь экран</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation type="unfinished">Переместить выделение влево на 1 пиксель</translation>
+        <translation>Переместить выделение влево на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation type="unfinished">Переместить выделение вправо на 1 пиксель</translation>
+        <translation>Переместить выделение вправо на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation type="unfinished">Переместить выделение вверх на 1 пиксель</translation>
+        <translation>Переместить выделение вверх на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation type="unfinished">Переместить выделение вниз на 1 пиксель</translation>
+        <translation>Переместить выделение вниз на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
         <source>Commit text in text area</source>
-        <translation type="unfinished">Подтвердить текст в текстовой области</translation>
+        <translation>Подтвердить текст в текстовой области</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
         <source>Delete current tool</source>
-        <translation type="unfinished">Удалить текущий инструмент</translation>
+        <translation>Удалить текущий инструмент</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
         <source>Capture screen</source>
-        <translation type="unfinished">Захватить экран</translation>
+        <translation>Захватить экран</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
         <source>Screenshot history</source>
-        <translation type="unfinished">История снимков</translation>
+        <translation>История снимков</translation>
     </message>
 </context>
 <context>
@@ -2528,7 +2528,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/tools/sizedecrease/sizedecreasetool.cpp" line="47"/>
         <source>Decrease the size of the other tools</source>
-        <translation>Уменьшите размер других инструментов</translation>
+        <translation>Уменьшить размер других инструментов</translation>
     </message>
 </context>
 <context>
@@ -2651,12 +2651,12 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="63"/>
         <source>Minute (00-59)</source>
-        <translation>Минута (00-59)</translation>
+        <translation>Минуты (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="64"/>
         <source>Second (00-59)</source>
-        <translation>Секунда (00-59)</translation>
+        <translation>Секунды (00-59)</translation>
     </message>
     <message>
         <location filename="../../src/config/strftimechooserwidget.cpp" line="67"/>
@@ -2738,7 +2738,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="116"/>
         <source>&amp;Open Launcher</source>
-        <translation>&amp;Приложение захвата</translation>
+        <translation>&amp;Запуск захвата</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="121"/>
@@ -2768,7 +2768,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="149"/>
         <source>&amp;Latest Uploads</source>
-        <translation>&amp;Последние выгрузки</translation>
+        <translation>&amp;Последние отправки</translation>
     </message>
 </context>
 <context>
@@ -2780,7 +2780,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="88"/>
         <source>Change the color moving the selectors and see the changes in the preview buttons.</source>
-        <translation>Измените цвет, перемещая выделение, и посмотрите изменения в кнопках предварительного просмотра.</translation>
+        <translation>Цвет меняется перемещением селекторов, изменения отображаются на кнопках предпросмотра.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="99"/>
@@ -2795,7 +2795,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="113"/>
         <source>Click on this button to set the edition mode of the main color.</source>
-        <translation>Нажмите на эту кнопку, чтобы перейти в режим редактирования основного цвета.</translation>
+        <translation>Нажмите на эту кнопку, чтобы перейти в режим правки основного цвета.</translation>
     </message>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="124"/>
@@ -2805,7 +2805,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/uicoloreditor.cpp" line="129"/>
         <source>Click on this button to set the edition mode of the contrast color.</source>
-        <translation>Нажмите на эту кнопку, чтобы перейти в режим редактирования контрастного цвета.</translation>
+        <translation>Нажмите на эту кнопку, чтобы перейти в режим правки контрастного цвета.</translation>
     </message>
 </context>
 <context>
@@ -2852,7 +2852,7 @@ You can find me in the system tray.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation>История загрузок</translation>
+        <translation>История отправок</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
