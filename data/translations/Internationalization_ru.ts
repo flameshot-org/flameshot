@@ -295,7 +295,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
-        <translation>Добавить круг с автоприращающимся счётчиком</translation>
+        <translation>Добавить круг-счётчик с автоприращением</translation>
     </message>
 </context>
 <context>
@@ -636,7 +636,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
-        <translation>Редактор имён файлов</translation>
+        <translation>Шаблон имён файлов</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="78"/>
@@ -1240,7 +1240,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Предпочтительное расширение файла сохранения:</translation>
+        <translation>Приоритетное расширение файла сохранения:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
