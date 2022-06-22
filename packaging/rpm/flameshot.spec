@@ -132,7 +132,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
-* Mon Jun 13 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.0.0-1
+* Wed Jun 21 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.0.0-1
 - Update for 12.0 release.
 
 * Fri Jan 14 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
