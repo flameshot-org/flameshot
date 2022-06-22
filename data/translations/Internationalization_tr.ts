@@ -1685,7 +1685,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation></translation>
+        <translation>Context menu</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>

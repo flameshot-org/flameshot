@@ -442,7 +442,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation>Изменить предустановку:</translation>
+        <translation>Править предустановку:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
@@ -602,7 +602,7 @@ Press Space to open the side panel.</source>
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
         <translation>Некоторые сочетания клавиш конфликтуют.
-Это НЕ помешает запуску flameshot.
+Это НЕ помешает запуску Flameshot.
 Пожалуйста, исправьте их вручную в файле конфигурации.</translation>
     </message>
     <message>
@@ -834,7 +834,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
         <source>New version %1 is available</source>
-        <translation>Доступна новая версия %1</translation>
+        <translation>Доступна новая версия: %1</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
@@ -1185,7 +1185,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation>Это позволяет вам делать снимки самого Flameshot, например</translation>
+        <translation>Это позволяет, например, делать снимки самого Flameshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="383"/>
@@ -1195,7 +1195,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation>Показывать окно приветствия в середине экрана во время создания снимка экрана</translation>
+        <translation>Показывать окно приветствия в центре экрана при создании снимка экрана</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
@@ -1240,7 +1240,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Приоритетное расширение файла сохранения:</translation>
+        <translation>Желаемое расширение файла сохранения:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
@@ -2753,7 +2753,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="130"/>
         <source>Check for updates</source>
-        <translation>Проверить обновления</translation>
+        <translation>Проверка обновлений</translation>
     </message>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="141"/>

@@ -170,7 +170,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
-        <translation></translation>
+        <translation>Capture Launcher</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
@@ -178,7 +178,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
@@ -186,7 +186,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation></translation>
+        <translation>Capture Mode</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -396,7 +396,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -434,12 +434,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation></translation>
+        <translation>Edit Preset:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation></translation>
+        <translation>Enter color to update preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -449,37 +449,37 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation></translation>
+        <translation>Press button to update the selected preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
-        <translation></translation>
+        <translation>Press button to delete the selected preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
-        <translation></translation>
+        <translation>Add Preset:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation></translation>
+        <translation>Enter color manually or select it using the color-wheel</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
-        <translation></translation>
+        <translation>Add</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
-        <translation></translation>
+        <translation>Press button to add preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
@@ -490,12 +490,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation></translation>
+        <translation>Unable to add preset. Maximum limit reached.</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation></translation>
+        <translation>Unable to remove preset. Minimum limit reached.</translation>
     </message>
 </context>
 <context>
@@ -503,7 +503,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configerrordetails.cpp" line="20"/>
         <source>Configuration errors</source>
-        <translation></translation>
+        <translation>Configuration errors</translation>
     </message>
 </context>
 <context>
@@ -512,25 +512,29 @@ Press Space to open the side panel.</source>
         <location filename="../../src/utils/confighandler.cpp" line="552"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation></translation>
+        <translation>Unrecognized setting: &apos;%1&apos;
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="560"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation></translation>
+        <translation>Unrecognized shortcut name: &apos;%1&apos;.
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="603"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation></translation>
+        <translation>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="643"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation></translation>
+        <translation>Bad value in &apos;%1&apos;. Expected: %2
+</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="693"/>
@@ -540,7 +544,7 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="716"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation></translation>
+        <translation>The configuration contains an error. Open configuration to resolve.</translation>
     </message>
     <message>
         <location filename="../../src/utils/confighandler.cpp" line="770"/>
@@ -553,12 +557,12 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="14"/>
         <source>Resolve configuration errors</source>
-        <translation></translation>
+        <translation>Resolve configuration errors</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="50"/>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation></translation>
+        <translation>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="61"/>
@@ -568,39 +572,41 @@ Press Space to open the side panel.</source>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="63"/>
         <source>Reset to the default value.</source>
-        <translation></translation>
+        <translation>Reset to the default value.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="77"/>
         <source>Remove</source>
-        <translation></translation>
+        <translation>Remove</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="79"/>
         <source>Remove this setting.</source>
-        <translation></translation>
+        <translation>Remove this setting.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="90"/>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation></translation>
+        <translation>Some keyboard shortcuts have conflicts.
+This will NOT prevent flameshot from starting.
+Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="112"/>
         <source>Resolve all</source>
-        <translation></translation>
+        <translation>Resolve all</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="113"/>
         <source>Resolve all listed errors.</source>
-        <translation></translation>
+        <translation>Resolve all listed errors.</translation>
     </message>
     <message>
         <location filename="../../src/config/configresolver.cpp" line="125"/>
         <source>Details</source>
-        <translation></translation>
+        <translation>Details</translation>
     </message>
 </context>
 <context>
@@ -633,7 +639,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
-        <translation></translation>
+        <translation>Resolve</translation>
     </message>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
@@ -800,7 +806,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation></translation>
+        <translation>URL copied to clipboard.</translation>
     </message>
 </context>
 <context>
@@ -1043,82 +1049,82 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="237"/>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation></translation>
+        <translation>Show the help message at the beginning in the capture mode</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation></translation>
+        <translation>Use last region</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation></translation>
+        <translation>Uses the last region as the default selection for the next screenshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation></translation>
+        <translation>Show the side panel toggle button in the capture mode</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Enable desktop notifications</source>
-        <translation></translation>
+        <translation>Enable desktop notifications</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Show icon in the system tray</source>
-        <translation></translation>
+        <translation>Show icon in the system tray</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="302"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation></translation>
+        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="344"/>
         <source>Check for updates automatically</source>
-        <translation></translation>
+        <translation>Check for updates automatically</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation></translation>
+        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation></translation>
+        <translation>Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation></translation>
+        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Use a large predefined color palette</source>
-        <translation></translation>
+        <translation>Use a large predefined color palette</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation></translation>
+        <translation>Copy on double click</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation></translation>
+        <translation>Enable Copy on Double Click</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation></translation>
+        <translation>Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation></translation>
+        <translation>After copying the screenshot, save it to a file as well</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="453"/>
@@ -1148,7 +1154,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur API Key</source>
-        <translation></translation>
+        <translation>Imgur API Key</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1169,7 +1175,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="630"/>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation></translation>
+        <translation>Copy the file path to clipboard after the file is saved</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="641"/>
@@ -1200,22 +1206,22 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="690"/>
         <source>Show magnifier</source>
-        <translation></translation>
+        <translation>Show magnifier</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="691"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation></translation>
+        <translation>Enable a magnifier while selecting the screenshot area</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Square shaped magnifier</source>
-        <translation></translation>
+        <translation>Square shaped magnifier</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Make the magnifier to be square-shaped</source>
-        <translation></translation>
+        <translation>Make the magnifier to be square-shaped</translation>
     </message>
 </context>
 <context>
@@ -1349,7 +1355,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="134"/>
         <source>Save image</source>
-        <translation></translation>
+        <translation>Save image</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="164"/>
@@ -1369,12 +1375,12 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="191"/>
         <source>Unable to save the screenshot to disk.</source>
-        <translation></translation>
+        <translation>Unable to save the screenshot to disk.</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="194"/>
         <source>Screenshot saved.</source>
-        <translation></translation>
+        <translation>Screenshot saved.</translation>
     </message>
 </context>
 <context>
@@ -1457,7 +1463,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
-        <translation></translation>
+        <translation>Icon</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
@@ -1465,7 +1471,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
-        <translation></translation>
+        <translation>License</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
@@ -1473,7 +1479,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>GPLv3+</source>
-        <translation></translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
@@ -1481,7 +1487,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
-        <translation></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
@@ -1489,7 +1495,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>Flameshot v</source>
-        <translation></translation>
+        <translation>Flameshot v</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
@@ -1497,7 +1503,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
-        <translation></translation>
+        <translation>OS Info</translation>
     </message>
     <message>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
@@ -1505,7 +1511,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
-        <translation></translation>
+        <translation>Copy Info</translation>
     </message>
     <message>
         <source>Right Click</source>
@@ -1655,7 +1661,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation></translation>
+        <translation>Context menu</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
@@ -1665,7 +1671,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation></translation>
+        <translation>Save to file</translation>
     </message>
 </context>
 <context>
@@ -1822,7 +1828,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation></translation>
+        <translation>Repeat screenshot with previously selected region</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1887,7 +1893,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/main.cpp" line="243"/>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation></translation>
+        <translation>Invalid delay, it must be a number greater than 0</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="246"/>
@@ -1961,7 +1967,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation></translation>
+        <translation>Requested screen exceeds screen count</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2133,12 +2139,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation></translation>
+        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation></translation>
+        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2212,7 +2218,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
@@ -2649,7 +2655,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
-        <translation></translation>
+        <translation>Upload History</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadhistory.cpp" line="62"/>
@@ -2665,7 +2671,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <source>Form</source>
-        <translation></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
@@ -2673,7 +2679,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
@@ -2681,7 +2687,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
-        <translation></translation>
+        <translation>Copy URL</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
@@ -2689,7 +2695,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
-        <translation></translation>
+        <translation>Open In Browser</translation>
     </message>
     <message>
         <location filename="../../src/widgets/uploadlineitem.cpp" line="50"/>
@@ -2730,7 +2736,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</translati
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="74"/>
         <source>Colorpicker Editor</source>
-        <translation></translation>
+        <translation>Colorpicker Editor</translation>
     </message>
     <message>
         <location filename="../../src/config/visualseditor.cpp" line="79"/>

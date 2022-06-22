@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -396,7 +396,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
@@ -406,7 +406,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -416,7 +416,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
@@ -442,12 +442,12 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
         <source>Edit Preset:</source>
-        <translation></translation>
+        <translation>Edit Preset:</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
         <source>Enter color to update preset</source>
-        <translation></translation>
+        <translation>Enter color to update preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
@@ -457,7 +457,7 @@ Appuyer sur Espace pour ouvrir le panneau latéral.</translation>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
         <source>Press button to update the selected preset</source>
-        <translation></translation>
+        <translation>Press button to update the selected preset</translation>
     </message>
     <message>
         <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
@@ -818,7 +818,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/core/flameshot.cpp" line="400"/>
         <source>URL copied to clipboard.</source>
-        <translation></translation>
+        <translation>URL copied to clipboard.</translation>
     </message>
 </context>
 <context>
@@ -1078,12 +1078,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="247"/>
         <source>Use last region</source>
-        <translation></translation>
+        <translation>Use last region</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="248"/>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation></translation>
+        <translation>Uses the last region as the default selection for the next screenshot</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="262"/>
@@ -1133,12 +1133,12 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
         <source>Copy on double click</source>
-        <translation></translation>
+        <translation>Copy on double click</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="421"/>
         <source>Enable Copy on Double Click</source>
-        <translation></translation>
+        <translation>Enable Copy on Double Click</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="434"/>
@@ -1178,7 +1178,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
         <source>Imgur API Key</source>
-        <translation></translation>
+        <translation>Imgur API Key</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
@@ -1685,7 +1685,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation></translation>
+        <translation>Context menu</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
@@ -1695,7 +1695,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
         <source>Save to file</source>
-        <translation></translation>
+        <translation>Save to file</translation>
     </message>
 </context>
 <context>
@@ -1716,7 +1716,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="307"/>
         <source>Failed to register %1. Error: %2</source>
-        <translation>Échec de l&apos;enregistrement %1. Erreur&#x202f;: %2</translation>
+        <translation>Échec de l&apos;enregistrement %1. Erreur : %2</translation>
     </message>
     <message>
         <location filename="../../external/QHotkey/qhotkey.cpp" line="329"/>
@@ -1852,7 +1852,7 @@ Veuillez résoudre ce problème manuellement depuis le fichier de configuration.
     <message>
         <location filename="../../src/main.cpp" line="184"/>
         <source>Repeat screenshot with previously selected region</source>
-        <translation></translation>
+        <translation>Repeat screenshot with previously selected region</translation>
     </message>
     <message>
         <location filename="../../src/main.cpp" line="187"/>
@@ -1991,7 +1991,7 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/core/flameshot.cpp" line="148"/>
         <source>Requested screen exceeds screen count</source>
-        <translation></translation>
+        <translation>Requested screen exceeds screen count</translation>
     </message>
     <message>
         <location filename="../../src/core/flameshot.cpp" line="378"/>
@@ -2159,12 +2159,12 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="112"/>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation></translation>
+        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="115"/>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation></translation>
+        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
     </message>
     <message>
         <location filename="../../src/utils/screengrabber.cpp" line="120"/>
@@ -2238,12 +2238,12 @@ Vous devrez probablement remplacer le signe &apos;#&apos; par &apos;\#FFF&apos;<
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
         <source>Toggle side panel</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="175"/>

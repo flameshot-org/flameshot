@@ -191,7 +191,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -1539,7 +1539,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
         <source>Context menu</source>
-        <translation></translation>
+        <translation>Context menu</translation>
     </message>
     <message>
         <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>

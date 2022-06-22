@@ -135,19 +135,19 @@
     </message>
     <message>
         <source>Capture Launcher</source>
-        <translation></translation>
+        <translation>Capture Launcher</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <source>Capture Mode</source>
-        <translation></translation>
+        <translation>Capture Mode</translation>
     </message>
     <message>
         <source>WxH+x+y</source>
-        <translation></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -308,15 +308,15 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Enter or Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Hold Left Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Space or Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Esc</source>
@@ -327,27 +327,27 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <name>ColorPickerEditor</name>
     <message>
         <source>Delete</source>
-        <translation></translation>
+        <translation>Delete</translation>
     </message>
     <message>
         <source>Press button to delete the selected preset</source>
-        <translation></translation>
+        <translation>Press button to delete the selected preset</translation>
     </message>
     <message>
         <source>Add Preset:</source>
-        <translation></translation>
+        <translation>Add Preset:</translation>
     </message>
     <message>
         <source>Enter color manually or select it using the color-wheel</source>
-        <translation></translation>
+        <translation>Enter color manually or select it using the color-wheel</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation></translation>
+        <translation>Add</translation>
     </message>
     <message>
         <source>Press button to add preset</source>
-        <translation></translation>
+        <translation>Press button to add preset</translation>
     </message>
     <message>
         <source>Error</source>
@@ -355,19 +355,19 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Unable to add preset. Maximum limit reached.</source>
-        <translation></translation>
+        <translation>Unable to add preset. Maximum limit reached.</translation>
     </message>
     <message>
         <source>Unable to remove preset. Minimum limit reached.</source>
-        <translation></translation>
+        <translation>Unable to remove preset. Minimum limit reached.</translation>
     </message>
     <message>
         <source>Edit Preset:</source>
-        <translation></translation>
+        <translation>Edit Preset:</translation>
     </message>
     <message>
         <source>Enter color to update preset</source>
-        <translation></translation>
+        <translation>Enter color to update preset</translation>
     </message>
     <message>
         <source>Update</source>
@@ -375,14 +375,14 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Press button to update the selected preset</source>
-        <translation></translation>
+        <translation>Press button to update the selected preset</translation>
     </message>
 </context>
 <context>
     <name>ConfigErrorDetails</name>
     <message>
         <source>Configuration errors</source>
-        <translation></translation>
+        <translation>Configuration errors</translation>
     </message>
 </context>
 <context>
@@ -398,37 +398,41 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     <message>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
-        <translation></translation>
+        <translation>Unrecognized setting: &apos;%1&apos;
+</translation>
     </message>
     <message>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
-        <translation></translation>
+        <translation>Unrecognized shortcut name: &apos;%1&apos;.
+</translation>
     </message>
     <message>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
-        <translation></translation>
+        <translation>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
+</translation>
     </message>
     <message>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
-        <translation></translation>
+        <translation>Bad value in &apos;%1&apos;. Expected: %2
+</translation>
     </message>
     <message>
         <source>The configuration contains an error. Open configuration to resolve.</source>
-        <translation></translation>
+        <translation>The configuration contains an error. Open configuration to resolve.</translation>
     </message>
 </context>
 <context>
     <name>ConfigResolver</name>
     <message>
         <source>Resolve configuration errors</source>
-        <translation></translation>
+        <translation>Resolve configuration errors</translation>
     </message>
     <message>
         <source>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</source>
-        <translation></translation>
+        <translation>&lt;b&gt;You must resolve all errors before continuing:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -436,7 +440,7 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Reset to the default value.</source>
-        <translation></translation>
+        <translation>Reset to the default value.</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -444,25 +448,27 @@ Nyomd meg a Space billentyűt, hogy megnyisd az oldalsó panelt.</translation>
     </message>
     <message>
         <source>Remove this setting.</source>
-        <translation></translation>
+        <translation>Remove this setting.</translation>
     </message>
     <message>
         <source>Some keyboard shortcuts have conflicts.
 This will NOT prevent flameshot from starting.
 Please solve them manually in the configuration file.</source>
-        <translation></translation>
+        <translation>Some keyboard shortcuts have conflicts.
+This will NOT prevent flameshot from starting.
+Please solve them manually in the configuration file.</translation>
     </message>
     <message>
         <source>Resolve all</source>
-        <translation></translation>
+        <translation>Resolve all</translation>
     </message>
     <message>
         <source>Resolve all listed errors.</source>
-        <translation></translation>
+        <translation>Resolve all listed errors.</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation></translation>
+        <translation>Details</translation>
     </message>
 </context>
 <context>
@@ -493,7 +499,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Resolve</source>
-        <translation></translation>
+        <translation>Resolve</translation>
     </message>
 </context>
 <context>
@@ -926,91 +932,91 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Show the help message at the beginning in the capture mode</source>
-        <translation></translation>
+        <translation>Show the help message at the beginning in the capture mode</translation>
     </message>
     <message>
         <source>Show the side panel toggle button in the capture mode</source>
-        <translation></translation>
+        <translation>Show the side panel toggle button in the capture mode</translation>
     </message>
     <message>
         <source>Enable desktop notifications</source>
-        <translation></translation>
+        <translation>Enable desktop notifications</translation>
     </message>
     <message>
         <source>Show icon in the system tray</source>
-        <translation></translation>
+        <translation>Show icon in the system tray</translation>
     </message>
     <message>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
-        <translation></translation>
+        <translation>Ask for confirmation to delete screenshot from the latest uploads</translation>
     </message>
     <message>
         <source>Check for updates automatically</source>
-        <translation></translation>
+        <translation>Check for updates automatically</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
-        <translation></translation>
+        <translation>This allows you to take screenshots of Flameshot itself for example</translation>
     </message>
     <message>
         <source>Launch Flameshot daemon when computer is booted</source>
-        <translation></translation>
+        <translation>Launch Flameshot daemon when computer is booted</translation>
     </message>
     <message>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
-        <translation></translation>
+        <translation>Show the welcome message box in the middle of the screen while taking a screenshot</translation>
     </message>
     <message>
         <source>Use a large predefined color palette</source>
-        <translation></translation>
+        <translation>Use a large predefined color palette</translation>
     </message>
     <message>
         <source>Copy URL and close window after uploading was successful</source>
-        <translation></translation>
+        <translation>Copy URL and close window after uploading was successful</translation>
     </message>
     <message>
         <source>After copying the screenshot, save it to a file as well</source>
-        <translation></translation>
+        <translation>After copying the screenshot, save it to a file as well</translation>
     </message>
     <message>
         <source>Copy the file path to clipboard after the file is saved</source>
-        <translation></translation>
+        <translation>Copy the file path to clipboard after the file is saved</translation>
     </message>
     <message>
         <source>Show magnifier</source>
-        <translation></translation>
+        <translation>Show magnifier</translation>
     </message>
     <message>
         <source>Enable a magnifier while selecting the screenshot area</source>
-        <translation></translation>
+        <translation>Enable a magnifier while selecting the screenshot area</translation>
     </message>
     <message>
         <source>Square shaped magnifier</source>
-        <translation></translation>
+        <translation>Square shaped magnifier</translation>
     </message>
     <message>
         <source>Make the magnifier to be square-shaped</source>
-        <translation></translation>
+        <translation>Make the magnifier to be square-shaped</translation>
     </message>
     <message>
         <source>Use last region</source>
-        <translation></translation>
+        <translation>Use last region</translation>
     </message>
     <message>
         <source>Uses the last region as the default selection for the next screenshot</source>
-        <translation></translation>
+        <translation>Uses the last region as the default selection for the next screenshot</translation>
     </message>
     <message>
         <source>Copy on double click</source>
-        <translation></translation>
+        <translation>Copy on double click</translation>
     </message>
     <message>
         <source>Enable Copy on Double Click</source>
-        <translation></translation>
+        <translation>Enable Copy on Double Click</translation>
     </message>
     <message>
         <source>Imgur API Key</source>
-        <translation></translation>
+        <translation>Imgur API Key</translation>
     </message>
 </context>
 <context>
@@ -1149,15 +1155,15 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Save image</source>
-        <translation></translation>
+        <translation>Save image</translation>
     </message>
     <message>
         <source>Unable to save the screenshot to disk.</source>
-        <translation></translation>
+        <translation>Unable to save the screenshot to disk.</translation>
     </message>
     <message>
         <source>Screenshot saved.</source>
-        <translation></translation>
+        <translation>Screenshot saved.</translation>
     </message>
 </context>
 <context>
@@ -1293,31 +1299,31 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation></translation>
+        <translation>Icon</translation>
     </message>
     <message>
         <source>License</source>
-        <translation></translation>
+        <translation>License</translation>
     </message>
     <message>
         <source>GPLv3+</source>
-        <translation></translation>
+        <translation>GPLv3+</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Flameshot v</source>
-        <translation></translation>
+        <translation>Flameshot v</translation>
     </message>
     <message>
         <source>OS Info</source>
-        <translation></translation>
+        <translation>OS Info</translation>
     </message>
     <message>
         <source>Copy Info</source>
-        <translation></translation>
+        <translation>Copy Info</translation>
     </message>
 </context>
 <context>
@@ -1390,7 +1396,7 @@ Please solve them manually in the configuration file.</source>
     <name>PinWidget</name>
     <message>
         <source>Context menu</source>
-        <translation></translation>
+        <translation>Context menu</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -1398,7 +1404,7 @@ Please solve them manually in the configuration file.</source>
     </message>
     <message>
         <source>Save to file</source>
-        <translation></translation>
+        <translation>Save to file</translation>
     </message>
 </context>
 <context>
@@ -1744,15 +1750,15 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Invalid delay, it must be a number greater than 0</source>
-        <translation></translation>
+        <translation>Invalid delay, it must be a number greater than 0</translation>
     </message>
     <message>
         <source>Requested screen exceeds screen count</source>
-        <translation></translation>
+        <translation>Requested screen exceeds screen count</translation>
     </message>
     <message>
         <source>Repeat screenshot with previously selected region</source>
-        <translation></translation>
+        <translation>Repeat screenshot with previously selected region</translation>
     </message>
 </context>
 <context>
@@ -1800,11 +1806,11 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
-        <translation></translation>
+        <translation>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</translation>
     </message>
     <message>
         <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
-        <translation></translation>
+        <translation>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</translation>
     </message>
 </context>
 <context>
@@ -1861,7 +1867,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Left Double-click</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2228,7 +2234,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <name>UploadHistory</name>
     <message>
         <source>Upload History</source>
-        <translation></translation>
+        <translation>Upload History</translation>
     </message>
     <message>
         <source>Screenshots history is empty</source>
@@ -2239,11 +2245,11 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     <name>UploadLineItem</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation>TextLabel</translation>
     </message>
     <message>
         <source>Copy URL</source>
@@ -2251,7 +2257,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Open In Browser</source>
-        <translation></translation>
+        <translation>Open In Browser</translation>
     </message>
     <message>
         <source>Confirm to delete</source>
@@ -2293,7 +2299,7 @@ Lehet, hogy meg kepp adnod egy &apos;\&apos; karaktert a &apos;#&apos; karakter 
     </message>
     <message>
         <source>Colorpicker Editor</source>
-        <translation></translation>
+        <translation>Colorpicker Editor</translation>
     </message>
 </context>
 <context>
