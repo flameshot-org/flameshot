@@ -656,7 +656,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;В файле конфигурации есть ошибки. Решите их перед продолжением.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Файл конфигурации содержит ошибки. Исправьте их перед продолжением.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Storage</source>
@@ -1093,7 +1093,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
-        <translation>Разрешить несколько экземпляров графического интерфейса Flameshot</translation>
+        <translation>Разрешить несколько экземпляров графической оболочки Flameshot</translation>
     </message>
     <message>
         <source>This allows you to take screenshots of flameshot itself for example.</source>
@@ -1122,7 +1122,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="408"/>
         <source>Use large predefined color palette</source>
-        <translation>Использовать большую предопределённую цветовую палитру</translation>
+        <translation>Использовать большую предопределённую палитру цветов</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="432"/>
@@ -1200,7 +1200,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Use a large predefined color palette</source>
-        <translation>Использовать большую предустановленную цветовую палитру</translation>
+        <translation>Использовать большую предопределённую палитру цветов</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="420"/>
@@ -1240,7 +1240,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
-        <translation>Желаемое расширение файла сохранения:</translation>
+        <translation>Базовое расширение файла сохранения:</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="518"/>
@@ -1276,7 +1276,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="641"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
-        <translation>Сглаживать изображение при масштабировании закреплённого снимка</translation>
+        <translation>Сглаживать закреплённый снимок при масштабировании</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="643"/>
@@ -1302,7 +1302,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="690"/>
         <source>Show magnifier</source>
-        <translation>Показать лупу</translation>
+        <translation>Показывать лупу</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="691"/>
@@ -2208,7 +2208,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет! Для создания снимка щёлкните по значку в трее. Иные возможности доступны по щелчку правой кнопкой.</translation>
+        <translation>Привет! Для создания снимка щёлкните по значку в трее. Прочие функции — в меню правого щелчка.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
@@ -2450,22 +2450,22 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
         <source>Move selection left 1px</source>
-        <translation>Переместить выделение влево на 1 пикс</translation>
+        <translation>Сдвинуть выделение влево на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
         <source>Move selection right 1px</source>
-        <translation>Переместить выделение вправо на 1 пикс</translation>
+        <translation>Сдвинуть выделение вправо на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
         <source>Move selection up 1px</source>
-        <translation>Переместить выделение вверх на 1 пикс</translation>
+        <translation>Сдвинуть выделение вверх на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
         <source>Move selection down 1px</source>
-        <translation>Переместить выделение вниз на 1 пикс</translation>
+        <translation>Сдвинуть выделение вниз на 1 пикс</translation>
     </message>
     <message>
         <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
