@@ -49,14 +49,19 @@ void requestCaptureAndWait(const CaptureRequest& req)
 {
     Flameshot* flameshot = Flameshot::instance();
     flameshot->requestCapture(req);
-#if defined(Q_OS_MACOS)
-    // Only useful on MacOS because each instance hosts its own widgets
     QObject::connect(flameshot, &Flameshot::captureTaken, [&](const QPixmap&) {
+#if defined(Q_OS_MACOS)
+        // Only useful on MacOS because each instance hosts its own widgets
         if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
             qApp->exit(0);
         }
-    });
+#else
+        // if this instance is not daemon, make sure it exit after caputre finish
+        if (FlameshotDaemon::instance() == nullptr && !Flameshot::instance()->haveExternalWidget()) {
+            qApp->exit(0);
+        }
 #endif
+    });
     QObject::connect(flameshot, &Flameshot::captureFailed, []() {
         AbstractLogger::info() << "Screenshot aborted.";
         qApp->exit(1);
