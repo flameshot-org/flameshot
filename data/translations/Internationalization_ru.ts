@@ -1235,7 +1235,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Use fixed path for screenshots to save</source>
-        <translation>Использовать постоянный путь сохранения для снимков экрана</translation>
+        <translation>Использовать постоянный путь сохранения для снимков</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="489"/>
@@ -2208,7 +2208,7 @@ You can find me in the system tray.</source>
     <message>
         <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
-        <translation>Привет! Для создания снимка щёлкните по значку в трее. Прочие функции — в меню правого щелчка.</translation>
+        <translation>Привет! Для создания снимка щёлкните по значку в трее. Прочие функции в меню правого щелчка.</translation>
     </message>
     <message>
         <source>Toggle side panel</source>
