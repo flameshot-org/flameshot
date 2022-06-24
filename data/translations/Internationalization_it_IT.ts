@@ -1091,7 +1091,7 @@ Si prega di risolverli manualmente nel file di configurazione.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
-        <source>Imgur API Key</source>
+        <source>Imgur Application Client ID</source>
         <translation>Chiave API Imgur</translation>
     </message>
     <message>

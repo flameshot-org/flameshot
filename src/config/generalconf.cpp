@@ -537,7 +537,7 @@ void GeneralConf::initUploadHistoryMax()
 
 void GeneralConf::initUploadClientSecret()
 {
-    auto* box = new QGroupBox(tr("Imgur API Key"));
+    auto* box = new QGroupBox(tr("Imgur Application Client ID"));
     box->setFlat(true);
     m_layout->addWidget(box);
 
