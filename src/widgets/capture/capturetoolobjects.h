@@ -14,6 +14,7 @@ public:
     explicit CaptureToolObjects(QObject* parent = nullptr);
     QList<QPointer<CaptureTool>> captureToolObjects();
     void append(const QPointer<CaptureTool>& captureTool);
+    void insert(int index, const QPointer<CaptureTool>& captureTool);
     void removeAt(int index);
     void clear();
     int size();

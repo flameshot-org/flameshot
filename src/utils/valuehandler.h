@@ -1,6 +1,7 @@
 #pragma once
 
 #include "src/widgets/capture/capturetoolbutton.h"
+#include "src/widgets/colorpickerwidget.h"
 
 #include <QColor>
 #include <QList>
@@ -98,7 +99,7 @@ private:
 class String : public ValueHandler
 {
 public:
-    String(const QString& def);
+    String(QString def);
     bool check(const QVariant&) override;
     QVariant fallback() override;
     QString expected() override;
@@ -110,7 +111,7 @@ private:
 class Color : public ValueHandler
 {
 public:
-    Color(const QColor& def);
+    Color(QColor def);
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
@@ -193,10 +194,16 @@ public:
 
 class UserColors : public ValueHandler
 {
+public:
+    UserColors(int min, int max);
     bool check(const QVariant& val) override;
     QVariant process(const QVariant& val) override;
     QVariant fallback() override;
     QString expected() override;
+    QVariant representation(const QVariant& val) override;
+
+private:
+    int m_min, m_max;
 };
 
 class SaveFileExtension : public ValueHandler

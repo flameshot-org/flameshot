@@ -9,7 +9,7 @@
 StrftimeChooserWidget::StrftimeChooserWidget(QWidget* parent)
   : QWidget(parent)
 {
-    QGridLayout* layout = new QGridLayout(this);
+    auto* layout = new QGridLayout(this);
     auto k = m_buttonData.keys();
     int middle = k.length() / 2;
     // add the buttons in 2 columns (they need to be even)
@@ -18,7 +18,7 @@ StrftimeChooserWidget::StrftimeChooserWidget(QWidget* parent)
             QString key = k.last();
             k.pop_back();
             QString variable = m_buttonData.value(key);
-            QPushButton* button = new QPushButton(this);
+            auto* button = new QPushButton(this);
             button->setText(tr(key.toStdString().data()));
             button->setToolTip(variable);
             button->setSizePolicy(QSizePolicy::Expanding,

@@ -11,7 +11,6 @@
 
 LoadSpinner::LoadSpinner(QWidget* parent)
   : QWidget(parent)
-  , m_startAngle(0)
   , m_span(0)
   , m_growing(true)
 {

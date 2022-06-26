@@ -16,7 +16,7 @@
 //     along with Flameshot.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "imgs3settings.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include <QByteArray>
 #include <QDateTime>
 #include <QDir>

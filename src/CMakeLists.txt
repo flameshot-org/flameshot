@@ -10,6 +10,10 @@ find_package(
         DBus
         LinguistTools)
 
+if (USE_WAYLAND_CLIPBOARD)
+    find_package(KF5GuiAddons)
+endif()
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -61,6 +65,10 @@ endif ()
 
 add_executable(Flameshot::flameshot ALIAS flameshot)
 
+if(FLAMESHOT_ICON)
+  target_compile_definitions(flameshot PUBLIC FLAMESHOT_ICON="${FLAMESHOT_ICON}")
+endif()
+
 if (WIN32)
     set_property(TARGET flameshot PROPERTY WIN32_EXECUTABLE true)
     if (MSVC)
@@ -76,36 +84,42 @@ add_subdirectory(widgets)
 add_subdirectory(tools)
 
 
-
-
 set(FLAMESHOT_TS_FILES
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it_IT.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nb_NO.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_HK.ts
-        ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts)
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_bg.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ca.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_cs.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_de_DE.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_el.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_es.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_eu.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fa.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fi.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_fr.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_gl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_grc.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_he.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_hu.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_id.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_it_IT.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ja.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ka.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ko.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nb_NO.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl_NL.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_nl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pl.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_pt_BR.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_ru.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sk.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sr_SP.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_sv_SE.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_tr.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_uk.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_vi.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_CN.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_HK.ts
+      ${CMAKE_SOURCE_DIR}/data/translations/Internationalization_zh_TW.ts
+         )
 
 if (GENERATE_TS)
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${FLAMESHOT_TS_FILES})
@@ -162,6 +176,12 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/panel>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/widgets/capture>
          $<INSTALL_INTERFACE:include/mylib>)
+target_include_directories(
+    flameshot
+    PUBLIC
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
+         )
+
 
 if (USE_EXTERNAL_SINGLEAPPLICATION)
     add_compile_definitions(USE_EXTERNAL_SINGLEAPPLICATION=1)
@@ -182,7 +202,13 @@ target_link_libraries(
         Qt5::Widgets
         ${QTSINGLEAPPLICATION_LIBRARY}
         QtColorWidgets
+
 )
+
+if (USE_WAYLAND_CLIPBOARD)
+  target_compile_definitions(flameshot PRIVATE USE_WAYLAND_CLIPBOARD=1)
+  target_link_libraries(flameshot KF5::GuiAddons)
+endif()
 
 if (APPLE)
     set(MACOSX_BUNDLE_IDENTIFIER "org.flameshot")
@@ -236,7 +262,6 @@ else()
 endif ()
 target_compile_definitions(flameshot PRIVATE APP_PREFIX="${CMAKE_INSTALL_PREFIX}")
 target_compile_definitions(flameshot PRIVATE APP_VERSION="v${PROJECT_VERSION}")
-target_compile_definitions(flameshot PRIVATE IMGUR_CLIENT_ID="313baf0c7b4d3ff")
 #target_compile_definitions(flameshot PRIVATE QAPPLICATION_CLASS=QApplication)
 target_compile_definitions(flameshot PRIVATE FLAMESHOT_APP_VERSION_URL="${GIT_API_URL}")
 # Enable easier debugging of screenshot capture mode
@@ -283,10 +308,10 @@ if (UNIX)
     configure_file(${CMAKE_SOURCE_DIR}/data/appdata/org.flameshot.Flameshot.metainfo.xml
             ${CMAKE_CURRENT_BINARY_DIR}/share/metainfo/org.flameshot.Flameshot.metainfo.xml COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash
             ${CMAKE_CURRENT_BINARY_DIR}/share/bash-completion/completions/flameshot COPYONLY)
 
-    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.bash_zsh
+    configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.zsh
             ${CMAKE_CURRENT_BINARY_DIR}/share/zsh/site-functions/_flameshot COPYONLY)
 
     configure_file(${CMAKE_SOURCE_DIR}/data/shell-completion/flameshot.fish

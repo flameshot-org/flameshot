@@ -8,8 +8,6 @@
 #include "src/utils/pathinfo.h"
 #include "utilitypanel.h"
 #include <QApplication>
-#include <QDebug> // TODO remove
-#include <QFormLayout>
 #include <QKeyEvent>
 #include <QLabel>
 #include <QLineEdit>
@@ -23,17 +21,18 @@
 
 SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
   : QWidget(parent)
+  , m_layout(new QVBoxLayout(this))
   , m_pixmap(p)
 {
-    m_layout = new QVBoxLayout(this);
-    if (parent) {
+
+    if (parent != nullptr) {
         parent->installEventFilter(this);
     }
 
-    QGridLayout* colorLayout = new QGridLayout();
+    auto* colorLayout = new QGridLayout();
 
     // Create Active Tool Size
-    QLabel* activeToolSizeText = new QLabel(tr("Active tool size: "));
+    auto* activeToolSizeText = new QLabel(tr("Active tool size: "));
 
     m_toolSizeSlider = new QSlider(Qt::Horizontal);
     m_toolSizeSlider->setRange(1, maxToolSize);
@@ -44,8 +43,8 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
     colorLayout->addWidget(m_toolSizeSlider, 1, 0);
 
     // Create Active Color
-    QHBoxLayout* colorHBox = new QHBoxLayout();
-    QLabel* colorText = new QLabel(tr("Active Color: "));
+    auto* colorHBox = new QHBoxLayout();
+    auto* colorText = new QLabel(tr("Active Color: "));
 
     m_colorLabel = new QLabel();
     m_colorLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -74,7 +73,7 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
 
     // tool size sigslots
     connect(m_toolSizeSlider,
-            &QSlider::sliderMoved,
+            &QSlider::valueChanged,
             this,
             &SidePanelWidget::toolSizeChanged);
     connect(this,
@@ -102,14 +101,14 @@ SidePanelWidget::SidePanelWidget(QPixmap* p, QWidget* parent)
             &SidePanelWidget::colorChanged);
 }
 
-void SidePanelWidget::onColorChanged(const QColor& c)
+void SidePanelWidget::onColorChanged(const QColor& color)
 {
-    m_color = c;
-    updateColorNoWheel(c);
-    m_colorWheel->setColor(c);
+    m_color = color;
+    updateColorNoWheel(color);
+    m_colorWheel->setColor(color);
 }
 
-void SidePanelWidget::onToolSizeChanged(const int& t)
+void SidePanelWidget::onToolSizeChanged(int t)
 {
     m_toolSize = qBound(0, t, maxToolSize);
     m_toolSizeSlider->setValue(m_toolSize);

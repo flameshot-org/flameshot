@@ -100,31 +100,20 @@ QPixmap ScreenGrabber::grabEntireDesktop(bool& ok)
         QPixmap res;
         // handle screenshot based on DE
         switch (m_info.windowManager()) {
-            case DesktopInfo::GNOME: {
-                freeDesktopPortal(ok, res);
-                break;
-            }
-            case DesktopInfo::KDE: {
-                // https://github.com/KDE/spectacle/blob/517a7baf46a4ca0a45f32fd3f2b1b7210b180134/src/PlatformBackends/KWinWaylandImageGrabber.cpp#L145
-                QDBusInterface kwinInterface(
-                  QStringLiteral("org.kde.KWin"),
-                  QStringLiteral("/Screenshot"),
-                  QStringLiteral("org.kde.kwin.Screenshot"));
-                QDBusReply<QString> reply =
-                  kwinInterface.call(QStringLiteral("screenshotFullscreen"));
-                res = QPixmap(reply.value());
-                if (!res.isNull()) {
-                    QFile dbusResult(reply.value());
-                    dbusResult.remove();
-                }
-                break;
-            }
+            case DesktopInfo::GNOME:
+            case DesktopInfo::KDE:
             case DesktopInfo::SWAY: {
                 freeDesktopPortal(ok, res);
                 break;
             }
             default:
                 ok = false;
+                AbstractLogger::error()
+                  << tr("Unable to detect desktop environment (GNOME? KDE? "
+                        "Sway? ...)");
+                AbstractLogger::error()
+                  << tr("Hint: try setting the XDG_CURRENT_DESKTOP environment "
+                        "variable.");
                 break;
         }
         if (!ok) {

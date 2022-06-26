@@ -14,7 +14,7 @@ QPainterPath getArrowHead(QPoint p1, QPoint p2, const int thickness)
     // Create the vector for the position of the base  of the arrowhead
     QLineF temp(QPoint(0, 0), p2 - p1);
     int val = ArrowHeight + thickness * 4;
-    if (base.length() < val) {
+    if (base.length() < (val - thickness * 2)) {
         val = static_cast<int>(base.length() + thickness * 2);
     }
     temp.setLength(base.length() + thickness * 2 - val);
@@ -45,10 +45,14 @@ QLine getShorterLine(QPoint p1, QPoint p2, const int thickness)
 {
     QLineF l(p1, p2);
     int val = ArrowHeight + thickness * 4;
-    if (l.length() < val) {
-        val = static_cast<int>(l.length() + thickness * 2);
+    if (l.length() < (val - thickness * 2)) {
+        // here should be 0, but then we lose "angle", so this is hack, but
+        // looks not very bad
+        val = thickness / 4;
+        l.setLength(val);
+    } else {
+        l.setLength(l.length() + thickness * 2 - val);
     }
-    l.setLength(l.length() + thickness * 2 - val);
     return l.toLine();
 }
 
@@ -131,7 +135,7 @@ QRect ArrowTool::boundingRect() const
 
 CaptureTool* ArrowTool::copy(QObject* parent)
 {
-    ArrowTool* tool = new ArrowTool(parent);
+    auto* tool = new ArrowTool(parent);
     copyParams(this, tool);
     return tool;
 }

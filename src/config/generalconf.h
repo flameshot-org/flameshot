@@ -25,6 +25,7 @@ public slots:
 
 private slots:
     void showHelpChanged(bool checked);
+    void saveLastRegion(bool checked);
     void showSidePanelButtonChanged(bool checked);
     void showDesktopNotificationChanged(bool checked);
     void checkForUpdatesChanged(bool checked);
@@ -40,33 +41,39 @@ private slots:
     void exportFileConfiguration();
     void resetConfiguration();
     void togglePathFixed();
+    void uploadClientKeyEdited();
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(QString extension);
 
 private:
     const QString chooseFolder(const QString currentPath = "");
 
-    void initScrollArea();
-    void initShowHelp();
-    void initShowSidePanelButton();
-    void initShowDesktopNotification();
-    void initShowTrayIcon();
-    void initHistoryConfirmationToDelete();
-    void inituploadHistoryMax();
-    void initUndoLimit();
-    void initConfigButtons();
-    void initCheckForUpdates();
     void initAllowMultipleGuiInstances();
+    void initAntialiasingPinZoom();
     void initAutoCloseIdleDaemon();
     void initAutostart();
-    void initShowStartupLaunchMessage();
+    void initCheckForUpdates();
+    void initConfigButtons();
     void initCopyAndCloseAfterUpload();
-    void initSaveAfterCopy();
+    void initCopyOnDoubleClick();
     void initCopyPathAfterSave();
-    void initAntialiasingPinZoom();
-    void initUseJpgForClipboard();
-    void initUploadWithoutConfirmation();
+    void initHistoryConfirmationToDelete();
     void initPredefinedColorPaletteLarge();
+    void initSaveAfterCopy();
+    void initScrollArea();
+    void initShowDesktopNotification();
+    void initShowHelp();
+    void initShowMagnifier();
+    void initShowSidePanelButton();
+    void initShowStartupLaunchMessage();
+    void initShowTrayIcon();
+    void initSquareMagnifier();
+    void initUndoLimit();
+    void initUploadWithoutConfirmation();
+    void initUseJpgForClipboard();
+    void initUploadHistoryMax();
+    void initUploadClientSecret();
+    void initSaveLastRegion();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -86,12 +93,14 @@ private:
     QCheckBox* m_copyAndCloseAfterUpload;
     QCheckBox* m_copyPathAfterSave;
     QCheckBox* m_antialiasingPinZoom;
+    QCheckBox* m_saveLastRegion;
     QCheckBox* m_uploadWithoutConfirmation;
     QPushButton* m_importButton;
     QPushButton* m_exportButton;
     QPushButton* m_resetButton;
     QCheckBox* m_saveAfterCopy;
     QLineEdit* m_savePath;
+    QLineEdit* m_uploadClientKey;
     QPushButton* m_changeSaveButton;
     QCheckBox* m_screenshotPathFixedCheck;
     QCheckBox* m_historyConfirmationToDelete;
@@ -100,4 +109,7 @@ private:
     QSpinBox* m_undoLimit;
     QComboBox* m_setSaveAsFileExtension;
     QCheckBox* m_predefinedColorPaletteLarge;
+    QCheckBox* m_showMagnifier;
+    QCheckBox* m_squareMagnifier;
+    QCheckBox* m_copyOnDoubleClick;
 };

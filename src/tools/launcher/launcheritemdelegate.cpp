@@ -22,7 +22,7 @@ void LauncherItemDelegate::paint(QPainter* painter,
           rect.x(), rect.y(), rect.width() - 1, rect.height() - 1);
         painter->restore();
     }
-    QIcon icon = index.data(Qt::DecorationRole).value<QIcon>();
+    auto icon = index.data(Qt::DecorationRole).value<QIcon>();
 
     const int iconSide = static_cast<int>(GlobalValues::buttonBaseSize() * 1.3);
     const int halfIcon = iconSide / 2;
@@ -49,5 +49,5 @@ QSize LauncherItemDelegate::sizeHint(const QStyleOptionViewItem& option,
     Q_UNUSED(option)
     Q_UNUSED(index)
     const int size = GlobalValues::buttonBaseSize();
-    return QSize(static_cast<int>(size * 3.2), static_cast<int>(size * 3.7));
+    return { static_cast<int>(size * 3.2), static_cast<int>(size * 3.7) };
 }

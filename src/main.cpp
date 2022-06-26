@@ -9,9 +9,10 @@
 
 #include "abstractlogger.h"
 #include "src/cli/commandlineparser.h"
+#include "src/config/cacheutils.h"
 #include "src/config/styleoverride.h"
 #include "src/core/capturerequest.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/core/flameshotdaemon.h"
 #include "src/utils/confighandler.h"
 #include "src/utils/filenamehandler.h"
@@ -23,7 +24,6 @@
 #include <QSharedMemory>
 #include <QTimer>
 #include <QTranslator>
-
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
 #include "abstractlogger.h"
 #include "src/core/flameshotdbusadapter.h"
@@ -47,16 +47,17 @@ void wayland_hacks()
 
 void requestCaptureAndWait(const CaptureRequest& req)
 {
-    Controller* controller = Controller::getInstance();
-    controller->requestCapture(req);
-    QObject::connect(
-      controller, &Controller::captureTaken, [&](QPixmap, QRect) {
-          // Only useful on MacOS because each instance hosts its own widgets
-          if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
-              qApp->exit(0);
-          }
-      });
-    QObject::connect(controller, &Controller::captureFailed, []() {
+    Flameshot* flameshot = Flameshot::instance();
+    flameshot->requestCapture(req);
+#if defined(Q_OS_MACOS)
+    // Only useful on MacOS because each instance hosts its own widgets
+    QObject::connect(flameshot, &Flameshot::captureTaken, [&](const QPixmap&) {
+        if (!FlameshotDaemon::isThisInstanceHostingWidgets()) {
+            qApp->exit(0);
+        }
+    });
+#endif
+    QObject::connect(flameshot, &Flameshot::captureFailed, []() {
         AbstractLogger::info() << "Screenshot aborted.";
         qApp->exit(1);
     });
@@ -124,7 +125,7 @@ int main(int argc, char* argv[])
         qApp->installTranslator(&qtTranslator);
         qApp->setAttribute(Qt::AA_DontCreateNativeWidgetSiblings, true);
 
-        auto c = Controller::getInstance();
+        auto c = Flameshot::instance();
         FlameshotDaemon::start();
 
 #if !(defined(Q_OS_MACOS) || defined(Q_OS_WIN))
@@ -177,6 +178,11 @@ int main(int argc, char* argv[])
     CommandOption delayOption({ "d", "delay" },
                               QObject::tr("Delay time in milliseconds"),
                               QStringLiteral("milliseconds"));
+
+    CommandOption useLastRegionOption(
+      "last-region",
+      QObject::tr("Repeat screenshot with previously selected region"));
+
     CommandOption regionOption("region",
                                QObject::tr("Screenshot region to select"),
                                QStringLiteral("WxH+X+Y or string"));
@@ -273,6 +279,7 @@ int main(int argc, char* argv[])
     mainColorOption.addChecker(colorChecker, colorErr);
     delayOption.addChecker(numericChecker, delayErr);
     regionOption.addChecker(regionChecker, regionErr);
+    useLastRegionOption.addChecker(booleanChecker, booleanErr);
     pathOption.addChecker(pathChecker, pathErr);
     trayOption.addChecker(booleanChecker, booleanErr);
     autostartOption.addChecker(booleanChecker, booleanErr);
@@ -291,6 +298,7 @@ int main(int argc, char* argv[])
                         clipboardOption,
                         delayOption,
                         regionOption,
+                        useLastRegionOption,
                         rawImageOption,
                         selectionOption,
                         uploadOption,
@@ -328,13 +336,13 @@ int main(int argc, char* argv[])
 
     // PROCESS DATA
     //--------------
-    Controller::setOrigin(Controller::CLI);
+    Flameshot::setOrigin(Flameshot::CLI);
     if (parser.isSet(helpOption) || parser.isSet(versionOption)) {
     } else if (parser.isSet(launcherArgument)) { // LAUNCHER
         delete qApp;
         new QApplication(argc, argv);
-        Controller* controller = Controller::getInstance();
-        controller->openLauncherWindow();
+        Flameshot* flameshot = Flameshot::instance();
+        flameshot->launcher();
         qApp->exec();
     } else if (parser.isSet(guiArgument)) { // GUI
         delete qApp;
@@ -360,6 +368,7 @@ int main(int argc, char* argv[])
         }
         int delay = parser.value(delayOption).toInt();
         QString region = parser.value(regionOption);
+        bool useLastRegion = parser.isSet(useLastRegionOption);
         bool clipboard = parser.isSet(clipboardOption);
         bool raw = parser.isSet(rawImageOption);
         bool printGeometry = parser.isSet(selectionOption);
@@ -368,7 +377,10 @@ int main(int argc, char* argv[])
         bool acceptOnSelect = parser.isSet(acceptOnSelectOption);
         CaptureRequest req(CaptureRequest::GRAPHICAL_MODE, delay, path);
         if (!region.isEmpty()) {
-            req.setInitialSelection(Region().value(region).toRect());
+            auto selectionRegion = Region().value(region).toRect();
+            req.setInitialSelection(selectionRegion);
+        } else if (useLastRegion) {
+            req.setInitialSelection(getLastRegion());
         }
         if (clipboard) {
             req.addTask(CaptureRequest::COPY);
@@ -395,7 +407,6 @@ int main(int argc, char* argv[])
                 req.addSaveTask();
             }
         }
-
         requestCaptureAndWait(req);
     } else if (parser.isSet(fullArgument)) { // FULL
         // Recreate the application as a QApplication
@@ -443,7 +454,7 @@ int main(int argc, char* argv[])
 
         QString numberStr = parser.value(screenNumberOption);
         // Option values
-        int number =
+        int screenNumber =
           numberStr.startsWith(QLatin1String("-")) ? -1 : numberStr.toInt();
         QString path = parser.value(pathOption);
         if (!path.isEmpty()) {
@@ -456,7 +467,7 @@ int main(int argc, char* argv[])
         bool pin = parser.isSet(pinOption);
         bool upload = parser.isSet(uploadOption);
 
-        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, number);
+        CaptureRequest req(CaptureRequest::SCREEN_MODE, delay, screenNumber);
         if (!region.isEmpty()) {
             if (region.startsWith("screen")) {
                 // TODO use abstract logger
@@ -514,7 +525,7 @@ int main(int argc, char* argv[])
             new QApplication(argc, argv);
             QObject::connect(
               qApp, &QApplication::lastWindowClosed, qApp, &QApplication::quit);
-            Controller::getInstance()->openConfigWindow();
+            Flameshot::instance()->config();
             qApp->exec();
         } else {
             ConfigHandler config;

@@ -12,14 +12,15 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWheelEvent>
+#include <utility>
 
 UpdateNotificationWidget::UpdateNotificationWidget(
   QWidget* parent,
   const QString& appLatestVersion,
-  const QString& appLatestUrl)
+  QString appLatestUrl)
   : QWidget(parent)
   , m_appLatestVersion(appLatestVersion)
-  , m_appLatestUrl(appLatestUrl)
+  , m_appLatestUrl(std::move(appLatestUrl))
   , m_layout(nullptr)
 {
     setMinimumSize(400, 100);
@@ -94,7 +95,7 @@ void UpdateNotificationWidget::initInternalPanel()
 {
     m_internalPanel = new QScrollArea(this);
     m_internalPanel->setAttribute(Qt::WA_NoMousePropagation);
-    QWidget* widget = new QWidget();
+    auto* widget = new QWidget();
     m_internalPanel->setWidget(widget);
     m_internalPanel->setWidgetResizable(true);
 
@@ -113,13 +114,13 @@ void UpdateNotificationWidget::initInternalPanel()
     m_layout->addWidget(m_notification);
 
     // buttons layout
-    QHBoxLayout* buttonsLayout = new QHBoxLayout();
-    QSpacerItem* bottonsSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
+    auto* buttonsLayout = new QHBoxLayout();
+    auto* bottonsSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding);
     buttonsLayout->addSpacerItem(bottonsSpacer);
     m_layout->addLayout(buttonsLayout);
 
     // ignore
-    QPushButton* ignoreBtn = new QPushButton(tr("Ignore"), this);
+    auto* ignoreBtn = new QPushButton(tr("Ignore"), this);
     buttonsLayout->addWidget(ignoreBtn);
     connect(ignoreBtn,
             &QPushButton::clicked,
@@ -127,7 +128,7 @@ void UpdateNotificationWidget::initInternalPanel()
             &UpdateNotificationWidget::ignoreButton);
 
     // later
-    QPushButton* laterBtn = new QPushButton(tr("Later"), this);
+    auto* laterBtn = new QPushButton(tr("Later"), this);
     buttonsLayout->addWidget(laterBtn);
     connect(laterBtn,
             &QPushButton::clicked,
@@ -135,7 +136,7 @@ void UpdateNotificationWidget::initInternalPanel()
             &UpdateNotificationWidget::laterButton);
 
     // update
-    QPushButton* updateBtn = new QPushButton(tr("Update"), this);
+    auto* updateBtn = new QPushButton(tr("Update"), this);
     buttonsLayout->addWidget(updateBtn);
     connect(updateBtn,
             &QPushButton::clicked,

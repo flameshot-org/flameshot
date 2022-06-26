@@ -37,7 +37,7 @@ QString SelectionTool::description() const
 
 CaptureTool* SelectionTool::copy(QObject* parent)
 {
-    SelectionTool* tool = new SelectionTool(parent);
+    auto* tool = new SelectionTool(parent);
     copyParams(this, tool);
     return tool;
 }

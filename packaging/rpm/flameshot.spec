@@ -8,7 +8,7 @@
 %define is_suse_leap (0%{?is_opensuse} && 0%{?sle_version} >= 150200)
 
 Name: flameshot
-Version: 11.0.0.3
+Version: 12.0.0.1
 %if %{is_rhel_or_fedora}
 Release: 1%{?dist}
 %endif
@@ -34,6 +34,9 @@ BuildRequires: ninja-build
 BuildRequires: desktop-file-utils
 
 BuildRequires: cmake(Qt5Core) >= 5.9.0
+%if %{is_rhel_or_fedora}
+BuildRequires: cmake(KF5GuiAddons) >= 5.89.0
+%endif
 BuildRequires: cmake(Qt5DBus) >= 5.9.0
 BuildRequires: cmake(Qt5Gui) >= 5.9.0
 BuildRequires: cmake(Qt5LinguistTools) >= 5.9.0
@@ -53,9 +56,10 @@ Requires: libQt5Core5 >= 5.9.0
 Requires: libqt5-qttools >= 5.9.0
 Requires: libQt5Svg5 >= 5.9.0
 %endif
-Requires: xdg-desktop-portal%{?_isa}
-Requires: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
-Requires: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace%{?_isa})
+Recommends: xdg-desktop-portal%{?_isa}
+Recommends: (xdg-desktop-portal-gnome%{?_isa} if gnome-shell%{?_isa})
+Recommends: (xdg-desktop-portal-kde%{?_isa} if plasma-workspace-wayland%{?_isa})
+Recommends: (xdg-desktop-portal-wlr%{?_isa} if wlroots%{?_isa})
 
 %description
 Powerful and simple to use screenshot software with built-in
@@ -77,7 +81,10 @@ Features:
 %cmake -DCMAKE_BUILD_TYPE=Release
 %endif
 %if %{is_rhel_or_fedora}
-%cmake -G Ninja -DCMAKE_BUILD_TYPE=Release
+	
+%cmake -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_WAYLAND_CLIPBOARD:BOOL=ON \
 %endif
 %cmake_build
 
@@ -100,6 +107,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.metainf
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %files -f Internationalization.lang
+%{_datadir}/%{name}/translations/Internationalization_grc.qm
 %doc README.md
 %license LICENSE
 %dir %{_datadir}/%{name}
@@ -124,6 +132,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1*
 
 %changelog
+* Wed Jun 21 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 12.0.0-1
+- Update for 12.0 release.
+
 * Fri Jan 14 2022 Jeremy Borgman <borgman.jeremy@pm.me> - 11.0.0-1
 - Update for 11.0 release.
 

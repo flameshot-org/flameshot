@@ -1,5 +1,5 @@
 #include "systemnotification.h"
-#include "src/core/controller.h"
+#include "src/core/flameshot.h"
 #include "src/utils/confighandler.h"
 #include <QApplication>
 #include <QUrl>
@@ -8,6 +8,15 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusMessage>
+#else
+#include "src/core/flameshotdaemon.h"
+#endif
+
+// work-around for snap, which cannot install icons into
+// the system folder, so instead the absolute path to the
+// icon (saved somwhere in /snap/flameshot/...) is passed
+#ifndef FLAMESHOT_ICON
+#define FLAMESHOT_ICON "flameshot"
 #endif
 
 SystemNotification::SystemNotification(QObject* parent)
@@ -44,8 +53,10 @@ void SystemNotification::sendMessage(const QString& text,
       this,
       [&]() {
           // The call is queued to avoid recursive static initialization of
-          // Controller and ConfigHandler.
-          Controller::getInstance()->sendTrayNotification(text, title, timeout);
+          // Flameshot and ConfigHandler.
+          if (FlameshotDaemon::instance())
+              FlameshotDaemon::instance()->sendTrayNotification(
+                text, title, timeout);
       },
       Qt::QueuedConnection);
 #else
@@ -57,9 +68,10 @@ void SystemNotification::sendMessage(const QString& text,
         hintsMap[QStringLiteral("x-kde-urls")] =
           QStringList({ fullPath.toString() });
     }
+
     args << (qAppName())                 // appname
          << static_cast<unsigned int>(0) // id
-         << "flameshot"                  // icon
+         << FLAMESHOT_ICON               // icon
          << title                        // summary
          << text                         // body
          << QStringList()                // actions

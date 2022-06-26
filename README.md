@@ -19,7 +19,7 @@
     <a href="https://github.com/flameshot-org/flameshot/actions?query=workflow%3APackaging%28MacOS%29">
       <img src="https://img.shields.io/github/workflow/status/flameshot-org/flameshot/Packaging(MacOS)?label=macos" alt="MacOS Build Status" />
     </a>
-    <a href="https://flameshot.org/nightly">
+    <a href="https://flameshot.org/docs/installation/development-build/">
       <img src="https://img.shields.io/badge/nightly%20builds-available-%23AA00FF" alt="Nightly Build" />
     </a>
     <a href="https://github.com/flameshot-org/flameshot/releases">
@@ -175,6 +175,7 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
+
 You can also edit some of the settings (like overriding the default colors) in the configuration file.\
 Linux path : `~/.config/flameshot/flameshot.ini`.\
 Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
@@ -224,7 +225,7 @@ These shortcuts are available in GUI mode:
 
 ### Global
 
-Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>option</kbd>-<kbd>shift</kbd>-<kbd>4</kbd> (macOS) as default global hotkeys.
+Flameshot uses <kbd>Print screen</kbd> (Windows) and <kbd>cmd</kbd>-<kbd>shift</kbd>-<kbd>x</kbd> (macOS) as default global hotkeys.
 
 On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but with a bit of configuration you can set this up:
 
@@ -256,31 +257,44 @@ Steps for using the configuration:
     cd ~/Desktop
     wget https://raw.githubusercontent.com/flameshot-org/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys
     ```
-3. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
-4. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
-5. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
-6. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
-7. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+3. Make sure you have the `khotkeys` installed using your package manager to enable custom shortcuts in KDE Plasma.
+4. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
+5. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
+6. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
+7. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
+8. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+9. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
 
-#### On Ubuntu (Tested on 18.04, 20.04)
+    ```shell
+    ln -s /var/lib/flatpak/exports/bin/org.flameshot.Flameshot ~/.local/bin/flameshot
+    ```
+
+#### On Ubuntu (Tested on 18.04, 20.04, 22.04)
 
 To use Flameshot instead of the default screenshot application in Ubuntu we need to remove the binding on <kbd>Prt Sc</kbd> key, and then create a new binding for `/usr/bin/flameshot gui` ([adaptated](https://askubuntu.com/posts/1039949/revisions) from [Pavel's answer on AskUbuntu](https://askubuntu.com/revisions/1036473/1)).
 
-1. Remove the binding on <kbd>Prt Sc</kbd> using the following command.
+1. Remove the binding on <kbd>Prt Sc</kbd>:
 
-  ```shell
-  gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
-  ```
+   Ubuntu 18.04/20.04 using the following command:
+    ```shell
+    gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
+    ```
+   
+   Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
 
-2. Ubuntu 18.04: Go to Settings > Device > Keyboard and press the '+' button at the bottom.
-   Ubuntu 20.04: Go to Settings > Keyboard and press the '+' button at the bottom.
+2. Add custom binding on <kbd>Prt Sc</kbd>:
+ 
+   Ubuntu 18.04: Go to _Settings_ > _Device_ > _Keyboard_ and press the '+' button at the bottom.
+   
+   Ubuntu 20.04: Go to _Settings_ > _Keyboard_ and press the '+' button at the bottom.
+   
+   Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
 3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
 
 4. Then click "_Set Shortcut.._" and press <kbd>Prt Sc</kbd>. This will show as "_print_".
 
 Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
-
 
 #### On XFCE 4
 
@@ -295,7 +309,6 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
-
 
 ## Considerations
 
@@ -344,6 +357,15 @@ There are packages available in the repository of some Linux distributions:
 - [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install flameshot`
 - [Homebrew](https://brew.sh): `brew install --cask flameshot`
 
+**Note** that because of macOS security features, you may not be able to open flameshot when installed using brew.
+If you see the message `“flameshot” cannot be opened because the developer cannot be verified.` you will need to
+follow the steps below: 
+1. Go to the Applications folder (Finder > Go > Applications, or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>A</kbd>) 
+1. Right-Click on "flameshot.app" and choose "Open" from the context menu
+2. In the dialog click "Open"
+
+After following all those steps above, `flameshot` will open without problems in your Mac.
+
 ### Windows
 
 - [Chocolatey](https://chocolatey.org/packages/flameshot)
@@ -361,7 +383,6 @@ There are packages available in the repository of some Linux distributions:
 
 
 Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
-
 
 ## Compilation
 
@@ -395,7 +416,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 ```shell
 # Compile-time
-apt install g++ cmake build-essential qt5-default qttools5-dev-tools libqt5svg5-dev qttools5-dev
+apt install g++ cmake build-essential qtbase5-dev qttools5-dev-tools libqt5svg5-dev qttools5-dev
 
 # Run-time
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5
@@ -473,8 +494,9 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 <https://flameshot.org/docs/guide/faq/>
 
 ## License
+
 - The main code is licensed under [GPLv3](LICENSE)
-- The logo of Flameshot is licensed under [Free Art License v1.3](img/app/flameshotLogoLicense.txt)
+- The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
 - The code at capture/capturewidget.cpp is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.cpp (GPLv2)
 - The code at capture/capturewidget.h is based on https://github.com/ckaiser/Lightscreen/blob/master/dialogs/areadialog.h (GPLv2)
@@ -484,18 +506,21 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Privacy Policy
+
 This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
 
-
 ## Code Signing Policy
+
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
 Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
+
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ## Acknowledgment
+
 Thanks to those who have shown interest in the early development process:
 - [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)
