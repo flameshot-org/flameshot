@@ -1181,8 +1181,8 @@ Rozwiąż błędy ręcznie w pliku konfiguracyjnym.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
-        <source>Imgur API Key</source>
-        <translation>Imgur API Key</translation>
+        <source>Imgur Application Client ID</source>
+        <translation>Imgur Application Client ID</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="571"/>
