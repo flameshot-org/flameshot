@@ -66,7 +66,7 @@ This is the beta for the version 12.0 release. We will be in beta for about a we
 - Fix alignment bug and applied many clang format warnings by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2448
 - fix the --print-geometry for zsh by @mmahmoudian in https://github.com/flameshot-org/flameshot/pull/2437
 - fix bug on macos with save dialog by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2379
-- allow numpad numers to resize and fix text artifacting on large resize by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2386
+- allow numpad numbers to resize and fix text artifacting on large resize by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2386
 - Zooming in/out happens at different speed by @AndreaMarangoni in https://github.com/flameshot-org/flameshot/pull/2378
 - fix: arrow tool glitches by @UnkwUsr in https://github.com/flameshot-org/flameshot/pull/2395
 - Fix double click by @borgmanJeremy in https://github.com/flameshot-org/flameshot/pull/2432
