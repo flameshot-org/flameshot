@@ -115,7 +115,7 @@ def download_url(url: str) -> str:
 def _file_unquote(file: str) -> str:
     """Given a URL encoded file unquote it.
 
-    All occurences of `\', `/' and `../' will be ignored to avoid possible
+    All occurrences of `\', `/' and `../' will be ignored to avoid possible
     directory traversals.
     """
     return urllib.parse.unquote(file).replace('../', '').replace('/', '').replace('\\', '')
@@ -300,7 +300,7 @@ def upload(files: List[str], message: str = '', sender: str = None,
     Also accepts optional parameters:
      - `message': message used as a description of the transfer
      - `sender': email address used to receive an ACK if the upload is
-                 successfull. For every download by the recipients an email
+                 successful. For every download by the recipients an email
                  will be also sent
      - `recipients': list of email addresses of recipients. When the upload
                      succeed every recipients will receive an email with a link

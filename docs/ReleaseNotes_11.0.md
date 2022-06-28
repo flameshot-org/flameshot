@@ -29,7 +29,7 @@ We will be in beta for 1-2 weeks depending on what kind of issues are found and 
 
 <p align=center><img src="images/monochrome.png" width=50%> </p>
 
-- The sidebar now shows the hexidecimal color value when the color picker is used:
+- The sidebar now shows the hexadecimal color value when the color picker is used:
 <p align=center><img src="images/hex.png" width=25%> </p>
 
 - The about screen lists system information and allows you to copy this for easy access in bug submission forms. 

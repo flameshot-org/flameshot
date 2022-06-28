@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Change the permision of .dmg file"
+echo "Change the permission of .dmg file"
 hdiutil convert "flameshot.dmg" -format UDRW -o "flameshot_rw.dmg"
 
 echo "Mount it and save the device"
