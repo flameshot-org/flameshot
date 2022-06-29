@@ -1101,6 +1101,8 @@ void CaptureWidget::initSelection()
         m_context.selection = extendedRect(m_selection->geometry());
         emit m_selection->geometrySettled();
     }
+
+        updateSizeIndicator();
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
