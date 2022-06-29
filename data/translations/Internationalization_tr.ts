@@ -1173,7 +1173,7 @@ Lütfen bunları yapılandırma dosyasında elle çözün.</translation>
     </message>
     <message>
         <location filename="../../src/config/generalconf.cpp" line="540"/>
-        <source>Imgur API Key</source>
+        <source>Imgur Application Client ID</source>
         <translation>Imgur API Anahtarı</translation>
     </message>
     <message>
