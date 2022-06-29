@@ -1102,7 +1102,7 @@ void CaptureWidget::initSelection()
         emit m_selection->geometrySettled();
     }
 
-        updateSizeIndicator();
+    updateSizeIndicator();
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
