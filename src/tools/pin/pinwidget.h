@@ -33,6 +33,7 @@ private:
     bool gestureEvent(QGestureEvent* event);
     bool scrollEvent(QWheelEvent* e);
     void pinchTriggered(QPinchGesture*);
+    void closePin();
 
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
