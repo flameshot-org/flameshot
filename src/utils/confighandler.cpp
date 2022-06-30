@@ -86,11 +86,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif
-#if defined(Q_OS_MACOS)
     OPTION("startupLaunch"               ,Bool               ( false         )),
-#else
-    OPTION("startupLaunch"               ,Bool               ( true          )),
-#endif
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
