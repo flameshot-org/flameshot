@@ -96,11 +96,19 @@ void AppLauncherWidget::launch(const QModelIndex& index)
             return;
         }
     }
-    QString command = index.data(Qt::UserRole)
-                        .toString()
-                        .replace(QRegExp("(\\%.)"), '"' + m_tempFile + '"');
+    // Heuristically, if there is a % in the command we assume it is the file name slot
+    QString command = index.data(Qt::UserRole).toString();
+    // no quotes because it is going in an array!
+    if (command.contains("%"))
+        command = command.replace(QRegExp("(\\%.)"),  m_tempFile );
+    else
+    {
+         // we really should append the file name if there
+        command.append(m_tempFile); // were no replacements
+    }
 
-    QString app_name = index.data(Qt::UserRole).toString().split(" ").at(0);
+    QStringList prog_args = command.split(" ");
+    QString app_name = prog_args.at(0);
     bool inTerminal =
       index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (inTerminal) {
@@ -110,7 +118,8 @@ void AppLauncherWidget::launch(const QModelIndex& index)
               this, tr("Error"), tr("Unable to launch in terminal."));
         }
     } else {
-        QProcess::startDetached(app_name, { m_tempFile });
+        prog_args.removeAt(0);  // strip program name out
+        QProcess::startDetached(app_name, prog_args);
     }
     if (!m_keepOpen) {
         close();
