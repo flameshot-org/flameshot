@@ -35,6 +35,9 @@ private:
     void pinchTriggered(QPinchGesture*);
     void closePin();
 
+    void rotateLeft();
+    void rotateRight();
+
     QPixmap m_pixmap;
     QVBoxLayout* m_layout;
     QLabel* m_label;
@@ -45,6 +48,7 @@ private:
 
     bool m_expanding{ false };
     qreal m_scaleFactor{ 1 };
+    unsigned int m_rotateFactor{ 0 };
     qreal m_currentStepScaleFactor{ 1 };
     bool m_sizeChanged{ false };
 
