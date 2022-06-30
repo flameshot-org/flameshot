@@ -95,6 +95,11 @@ PinWidget::PinWidget(const QPixmap& pixmap,
             &PinWidget::showContextMenu);
 }
 
+void PinWidget::closePin()
+{
+    update();
+    close();
+}
 bool PinWidget::scrollEvent(QWheelEvent* event)
 {
     const auto phase = event->phase();
@@ -141,8 +146,7 @@ void PinWidget::leaveEvent(QEvent*)
 
 void PinWidget::mouseDoubleClickEvent(QMouseEvent*)
 {
-    update();
-    close();
+    closePin();
 }
 
 void PinWidget::mousePressEvent(QMouseEvent* e)
@@ -235,6 +239,11 @@ void PinWidget::showContextMenu(const QPoint& pos)
     connect(
       &saveToFileAction, &QAction::triggered, this, &PinWidget::saveToFile);
     contextMenu.addAction(&saveToFileAction);
+
+    QAction closePinAction(tr("Close"), this);
+    connect(&closePinAction, &QAction::triggered, this, &PinWidget::closePin);
+    contextMenu.addSeparator();
+    contextMenu.addAction(&closePinAction);
 
     contextMenu.exec(mapToGlobal(pos));
 }
