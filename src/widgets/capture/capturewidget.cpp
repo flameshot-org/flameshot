@@ -12,6 +12,7 @@
 #include "capturewidget.h"
 #include "abstractlogger.h"
 #include "copytool.h"
+#include "src/config/cacheutils.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
@@ -259,6 +260,8 @@ CaptureWidget::~CaptureWidget()
     }
 #endif
     if (m_captureDone) {
+        auto lastRegion = m_selection->geometry();
+        setLastRegion(lastRegion);
         QRect geometry(m_context.selection);
         geometry.setTopLeft(geometry.topLeft() + m_context.widgetOffset);
         Flameshot::instance()->exportCapture(
@@ -436,7 +439,7 @@ void CaptureWidget::deleteToolWidgetOrClose()
         m_panel->hide();
     } else if (m_toolWidget) {
         // delete toolWidget if exists
-        m_toolWidget->close();
+        m_toolWidget->hide();
         delete m_toolWidget;
         m_toolWidget = nullptr;
     } else if (m_colorPicker && m_colorPicker->isVisible()) {
@@ -463,7 +466,7 @@ void CaptureWidget::releaseActiveTool()
         m_activeTool = nullptr;
     }
     if (m_toolWidget) {
-        m_toolWidget->close();
+        m_toolWidget->hide();
         delete m_toolWidget;
         m_toolWidget = nullptr;
     }
@@ -559,19 +562,11 @@ bool CaptureWidget::startDrawObjectTool(const QPoint& pos)
         m_context.mousePos = pos;
         m_activeTool->drawStart(m_context);
         // TODO this is the wrong place to do this
+
         if (m_activeTool->type() == CaptureTool::TYPE_CIRCLECOUNT) {
-            // While it is based on AbstractTwoPointTool it has the only one
-            // point and shouldn't wait for second point and move event
-            m_activeTool->drawEnd(m_context.mousePos);
-
             m_activeTool->setCount(m_context.circleCount++);
-
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_captureToolObjects.append(m_activeTool);
-            pushObjectsStateToUndoStack();
-            releaseActiveTool();
-            m_mouseIsClicked = false;
         }
+
         return true;
     }
     return false;
@@ -1106,6 +1101,8 @@ void CaptureWidget::initSelection()
         m_context.selection = extendedRect(m_selection->geometry());
         emit m_selection->geometrySettled();
     }
+
+    updateSizeIndicator();
 }
 
 void CaptureWidget::setState(CaptureToolButton* b)
@@ -1185,7 +1182,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 break;
             }
             if (m_toolWidget) {
-                m_toolWidget->close();
+                m_toolWidget->hide();
                 delete m_toolWidget;
                 m_toolWidget = nullptr;
             }
@@ -1205,6 +1202,7 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 w->setAttribute(Qt::WA_DeleteOnClose);
                 w->activateWindow();
                 w->show();
+                Flameshot::instance()->setExternalWidget(true);
             }
             break;
         case CaptureTool::REQ_INCREASE_TOOL_SIZE:
@@ -1788,7 +1786,7 @@ void CaptureWidget::redo()
 
 QRect CaptureWidget::extendedSelection() const
 {
-    if (!m_selection->isVisible()) {
+    if (m_selection == nullptr) {
         return {};
     }
     QRect r = m_selection->geometry();

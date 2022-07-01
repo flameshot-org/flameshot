@@ -14,7 +14,7 @@ CommandLineParser::CommandLineParser()
 namespace {
 
 AbstractLogger out =
-  AbstractLogger::info(AbstractLogger::Stderr).enableMessageHeader(false);
+  AbstractLogger::info(AbstractLogger::Stdout).enableMessageHeader(false);
 AbstractLogger err = AbstractLogger::error(AbstractLogger::Stderr);
 
 auto versionOption =

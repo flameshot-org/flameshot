@@ -34,7 +34,7 @@ public:
 public slots:
     CaptureWidget* gui(
       const CaptureRequest& req = CaptureRequest::GRAPHICAL_MODE);
-    void screen(CaptureRequest req, const int screenNumber = -1);
+    void screen(CaptureRequest req, int const screenNumber = -1);
     void full(const CaptureRequest& req);
     void launcher();
     void config();
@@ -47,6 +47,8 @@ public slots:
 public:
     static void setOrigin(Origin origin);
     static Origin origin();
+    void setExternalWidget(bool b);
+    bool haveExternalWidget();
 
 signals:
     void captureTaken(QPixmap p);
@@ -62,6 +64,7 @@ private:
 
     // class members
     static Origin m_origin;
+    bool m_haveExternalWidget;
 
     QPointer<CaptureWidget> m_captureWindow;
     QPointer<InfoWindow> m_infoWindow;

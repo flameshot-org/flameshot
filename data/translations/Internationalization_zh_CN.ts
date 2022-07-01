@@ -87,12 +87,12 @@
 <context>
     <name>ArrowTool</name>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="72"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="76"/>
         <source>Arrow</source>
         <translation>箭头</translation>
     </message>
     <message>
-        <location filename="../../src/tools/arrow/arrowtool.cpp" line="82"/>
+        <location filename="../../src/tools/arrow/arrowtool.cpp" line="86"/>
         <source>Set the Arrow as the paint tool</source>
         <translation>选择箭头作为绘画工具</translation>
     </message>
@@ -115,141 +115,156 @@
         <translation type="vanished">&lt;b&gt;捕获模式&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="31"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
         <translation>方形区域</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="37"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
         <source>Full Screen (Current Display)</source>
         <translation>全屏（当前屏幕）</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="40"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="41"/>
         <source>Full Screen (All Monitors)</source>
         <translation>全屏（所有显示器）</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="43"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="44"/>
         <source>No Delay</source>
         <translation>无延迟</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="51"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> second</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="75"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="125"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="125"/>
-        <location filename="../../src/widgets/capturelauncher.cpp" line="51"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
+        <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> seconds</source>
         <translation> 秒</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="96"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="126"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="126"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <source>Take new screenshot</source>
         <translation>获取新屏幕截图</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="54"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="122"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="122"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
         <translation>区域：</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="119"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="176"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <source>Capture Launcher</source>
         <translation>捕获启动器</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="22"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="120"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="34"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
         <translation>文本标签</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="39"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="121"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
         <translation>捕获模式</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capturelauncher.ui" line="61"/>
-        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="123"/>
-        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="123"/>
+        <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
         <translation>延迟：</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
+        <location filename="../../build/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
+        <source>WxH+x+y</source>
+        <translation>宽x高+x+y</translation>
     </message>
 </context>
 <context>
     <name>CaptureWidget</name>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="105"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="106"/>
         <source>Unable to capture screen</source>
         <translatorcomment>无法捕获屏幕</translatorcomment>
         <translation>无法捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="378"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Mouse</source>
         <translation>鼠标</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="378"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Select screenshot area</source>
         <translation>选择截屏区域</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Mouse Wheel</source>
         <translation>鼠标滚轮</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="393"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
         <translation>改变工具大小</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="394"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Right Click</source>
         <translation>右键单击</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="394"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Show color picker</source>
         <translation>显示颜色选择器</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="396"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
         <source>Open side panel</source>
         <translation>打开侧边栏</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
         <source>Exit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="505"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
         <source>Flameshot has lost focus. Keyboard shortcuts won&apos;t work until you click somewhere.</source>
         <translation>火焰截图丢失了屏幕焦点。您需要点击一次屏幕才能正常使用键盘快捷键。</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/capture/capturewidget.cpp" line="511"/>
+        <location filename="../../src/widgets/capture/capturewidget.cpp" line="515"/>
         <source>Configuration error resolved. Launch `flameshot gui` again to apply it.</source>
         <translation>已解决配置文件错误。请再次运行 `flameshot gui` 命令以应用更改。</translation>
     </message>
@@ -274,12 +289,12 @@ Press Space to open the side panel.</source>
 <context>
     <name>CircleCountTool</name>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="57"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="68"/>
         <source>Circle Counter</source>
         <translation>圆圈计数</translation>
     </message>
     <message>
-        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="75"/>
+        <location filename="../../src/tools/circlecount/circlecounttool.cpp" line="86"/>
         <source>Add an autoincrementing counter bubble</source>
         <translation>添加数字自动递增的计数圆圈</translation>
     </message>
@@ -303,6 +318,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="14"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="318"/>
         <source>Select Color</source>
         <translation>选择颜色</translation>
     </message>
@@ -310,6 +326,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="55"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="319"/>
         <source>Saturation</source>
         <translation>饱和度</translation>
     </message>
@@ -317,6 +334,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="62"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="320"/>
         <source>Hue</source>
         <translation>色相</translation>
     </message>
@@ -324,13 +342,15 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="79"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="321"/>
         <source>Hex</source>
-        <translation></translation>
+        <translation>Hex</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="86"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="322"/>
         <source>Blue</source>
         <translation>蓝</translation>
     </message>
@@ -338,6 +358,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="123"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="323"/>
         <source>Value</source>
         <translation>值</translation>
     </message>
@@ -345,6 +366,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="130"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="324"/>
         <source>Green</source>
         <translation>绿</translation>
     </message>
@@ -352,6 +374,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="137"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="325"/>
         <source>Alpha</source>
         <translation>透明</translation>
     </message>
@@ -359,6 +382,7 @@ Press Space to open the side panel.</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_dialog.ui" line="144"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_dialog.h" line="326"/>
         <source>Red</source>
         <translation>红</translation>
     </message>
@@ -371,9 +395,19 @@ Press Space to open the side panel.</source>
         <translation>接受颜色</translation>
     </message>
     <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="58"/>
+        <source>Enter or Left Click</source>
+        <translation>回车或左键单击</translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
         <source>Precisely select color</source>
         <translation>精确选择颜色</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="59"/>
+        <source>Hold Left Click</source>
+        <translation>按住左键</translation>
     </message>
     <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
@@ -381,66 +415,94 @@ Press Space to open the side panel.</source>
         <translation>切换放大镜</translation>
     </message>
     <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="60"/>
+        <source>Space or Right Click</source>
+        <translation>空格键或右键单击</translation>
+    </message>
+    <message>
         <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
         <source>Cancel</source>
         <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/panel/colorgrabwidget.cpp" line="61"/>
+        <source>Esc</source>
+        <translation>Esc</translation>
     </message>
 </context>
 <context>
     <name>ColorPickerEditor</name>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="42"/>
         <source>Select Preset:</source>
-        <translation>选择预设：</translation>
+        <translation type="vanished">选择预设：</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="53"/>
         <source>Select preset using the spinbox</source>
-        <translation>使用spinbox选择预设</translation>
+        <translation type="vanished">使用spinbox选择预设</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="56"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="40"/>
+        <source>Edit Preset:</source>
+        <translation>编辑预设：</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="45"/>
+        <source>Enter color to update preset</source>
+        <translation>输入颜色以更新预设</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="65"/>
+        <source>Update</source>
+        <translation>更新</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="67"/>
+        <source>Press button to update the selected preset</source>
+        <translation>点击按钮以更新选中的预设</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/colorpickereditor.cpp" line="74"/>
         <source>Delete</source>
         <translation>刪除</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="58"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="76"/>
         <source>Press button to delete the selected preset</source>
         <translation>按下按钮删除选定的预设</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="72"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="90"/>
         <source>Add Preset:</source>
         <translation>添加预设：</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="78"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="96"/>
         <source>Enter color manually or select it using the color-wheel</source>
         <translation>手动输入颜色或使用色轮选择颜色</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="88"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="106"/>
         <source>Add</source>
         <translation>添加</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="89"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="107"/>
         <source>Press button to add preset</source>
         <translation>按下按钮添加预设</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="117"/>
-        <location filename="../../src/config/colorpickereditor.cpp" line="137"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="130"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="147"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="118"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="131"/>
         <source>Unable to add preset. Maximum limit reached.</source>
         <translation>无法添加预设。达到最大限度。</translation>
     </message>
     <message>
-        <location filename="../../src/config/colorpickereditor.cpp" line="138"/>
+        <location filename="../../src/config/colorpickereditor.cpp" line="148"/>
         <source>Unable to remove preset. Minimum limit reached.</source>
         <translation>无法删除预设。已达到最低限制。</translation>
     </message>
@@ -456,40 +518,40 @@ Press Space to open the side panel.</source>
 <context>
     <name>ConfigHandler</name>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="549"/>
+        <location filename="../../src/utils/confighandler.cpp" line="552"/>
         <source>Unrecognized setting: &apos;%1&apos;
 </source>
         <translation>无法识别的设置：“%1”
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="557"/>
+        <location filename="../../src/utils/confighandler.cpp" line="560"/>
         <source>Unrecognized shortcut name: &apos;%1&apos;.
 </source>
         <translation>无法识别的快捷键名称：“%1”
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="600"/>
+        <location filename="../../src/utils/confighandler.cpp" line="603"/>
         <source>Shortcut conflict: &apos;%1&apos; and &apos;%2&apos; have the same shortcut: %3
 </source>
         <translation>快捷键冲突：“%1”和“%2”有同样的快捷键：%3
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="640"/>
+        <location filename="../../src/utils/confighandler.cpp" line="643"/>
         <source>Bad value in &apos;%1&apos;. Expected: %2
 </source>
         <translation>“%1”使用了不正确的值，期望为：%2
 </translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="690"/>
+        <location filename="../../src/utils/confighandler.cpp" line="693"/>
         <source>You have successfully resolved the configuration error.</source>
         <translation>您已成功解决配置文件错误。</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="713"/>
+        <location filename="../../src/utils/confighandler.cpp" line="716"/>
         <source>The configuration contains an error. Open configuration to resolve.</source>
         <translation>配置文件存在错误。请打开配置界面进行处理。</translation>
     </message>
@@ -498,7 +560,7 @@ Press Space to open the side panel.</source>
         <translation type="vanished">配置文件存在错误。已回退到使用默认配置。</translation>
     </message>
     <message>
-        <location filename="../../src/utils/confighandler.cpp" line="767"/>
+        <location filename="../../src/utils/confighandler.cpp" line="770"/>
         <source>Bad config key &apos;%1&apos; in ConfigHandler. Please report this as a bug.</source>
         <translation>ConfigHandler 中存在错误的配置键“%1”。请向我们报告这个问题。</translation>
     </message>
@@ -563,37 +625,37 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>ConfigWindow</name>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="42"/>
+        <location filename="../../src/config/configwindow.cpp" line="40"/>
         <source>Configuration</source>
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="61"/>
+        <location filename="../../src/config/configwindow.cpp" line="59"/>
         <source>Interface</source>
         <translation>界面</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="71"/>
+        <location filename="../../src/config/configwindow.cpp" line="69"/>
         <source>Filename Editor</source>
         <translation>文件名编辑器</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="80"/>
+        <location filename="../../src/config/configwindow.cpp" line="78"/>
         <source>General</source>
         <translation>常规</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="89"/>
+        <location filename="../../src/config/configwindow.cpp" line="87"/>
         <source>Shortcuts</source>
         <translation>快捷键</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="122"/>
+        <location filename="../../src/config/configwindow.cpp" line="120"/>
         <source>Resolve</source>
         <translation>处理</translation>
     </message>
     <message>
-        <location filename="../../src/config/configwindow.cpp" line="126"/>
+        <location filename="../../src/config/configwindow.cpp" line="124"/>
         <source>&lt;b&gt;Configuration file has errors. Resolve them before continuing.&lt;/b&gt;</source>
         <translation>&lt;b&gt;配置文件存在错误。请在继续操作前进行处理。&lt;/b&gt;</translation>
     </message>
@@ -601,73 +663,60 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="../../src/core/controller.cpp" line="217"/>
         <source>New version %1 is available</source>
-        <translation>新版本 %1 已经可用</translation>
+        <translation type="vanished">新版本 %1 已经可用</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="226"/>
         <source>You have the latest version</source>
-        <translation>您正在运行最新版本</translation>
+        <translation type="vanished">您正在运行最新版本</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="234"/>
         <source>Failed to get information about the latest version.</source>
-        <translation>获取最新版本信息时失败。</translation>
+        <translation type="vanished">获取最新版本信息时失败。</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="317"/>
         <source>Error</source>
-        <translation>错误</translation>
+        <translation type="vanished">错误</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="317"/>
         <source>Unable to close active modal widgets</source>
-        <translation>无法关闭活动模态组件</translation>
+        <translation type="vanished">无法关闭活动模态组件</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="463"/>
         <source>&amp;Take Screenshot</source>
-        <translation>进行截图(&amp;T)</translation>
+        <translation type="vanished">进行截图(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="479"/>
         <source>&amp;Open Launcher</source>
-        <translation>打开启动器(&amp;O)</translation>
+        <translation type="vanished">打开启动器(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="484"/>
         <source>&amp;Configuration</source>
-        <translation>配置(&amp;C)</translation>
+        <translation type="vanished">配置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="487"/>
         <source>&amp;About</source>
-        <translation>关于(&amp;A)</translation>
+        <translation type="vanished">关于(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="490"/>
         <source>Check for updates</source>
-        <translation>检查更新</translation>
+        <translation type="vanished">检查更新</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="497"/>
         <source>&amp;Latest Uploads</source>
-        <translation>最近的上传(&amp;L)</translation>
+        <translation type="vanished">最近的上传(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="678"/>
         <source>URL copied to clipboard.</source>
-        <translation>链接已复制到剪贴板。</translation>
+        <translation type="vanished">链接已复制到剪贴板。</translation>
     </message>
     <message>
         <source>&amp;Information</source>
         <translation type="vanished">信息(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="493"/>
         <source>&amp;Quit</source>
-        <translation>退出(&amp;Q)</translation>
+        <translation type="vanished">退出(&amp;Q)</translation>
     </message>
 </context>
 <context>
@@ -760,9 +809,42 @@ Please solve them manually in the configuration file.</source>
     </message>
 </context>
 <context>
+    <name>Flameshot</name>
+    <message>
+        <location filename="../../src/core/flameshot.cpp" line="111"/>
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/flameshot.cpp" line="111"/>
+        <source>Unable to close active modal widgets</source>
+        <translation>无法关闭活动模态微件</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/flameshot.cpp" line="400"/>
+        <source>URL copied to clipboard.</source>
+        <translation>链接已复制至剪贴板。</translation>
+    </message>
+</context>
+<context>
     <name>FlameshotDaemon</name>
     <message>
-        <location filename="../../src/core/flameshotdaemon.cpp" line="264"/>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="363"/>
+        <source>New version %1 is available</source>
+        <translation>新版本 %1 可用</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="369"/>
+        <source>You have the latest version</source>
+        <translation>你正在运行最新版本</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="378"/>
+        <source>Failed to get information about the latest version.</source>
+        <translation>未能获取最新版本信息。</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/flameshotdaemon.cpp" line="399"/>
         <source>Unable to connect via DBus</source>
         <translation>无法使用 DBus 连接</translation>
     </message>
@@ -889,47 +971,47 @@ Please solve them manually in the configuration file.</source>
 <context>
     <name>GeneralConf</name>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="149"/>
-        <location filename="../../src/config/generalconf.cpp" line="306"/>
+        <location filename="../../src/config/generalconf.cpp" line="156"/>
+        <location filename="../../src/config/generalconf.cpp" line="326"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="156"/>
-        <location filename="../../src/config/generalconf.cpp" line="164"/>
-        <location filename="../../src/config/generalconf.cpp" line="188"/>
-        <location filename="../../src/config/generalconf.cpp" line="626"/>
+        <location filename="../../src/config/generalconf.cpp" line="163"/>
+        <location filename="../../src/config/generalconf.cpp" line="171"/>
+        <location filename="../../src/config/generalconf.cpp" line="195"/>
+        <location filename="../../src/config/generalconf.cpp" line="681"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="156"/>
+        <location filename="../../src/config/generalconf.cpp" line="163"/>
         <source>Unable to read file.</source>
         <translation>无法读取文件。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="164"/>
-        <location filename="../../src/config/generalconf.cpp" line="188"/>
+        <location filename="../../src/config/generalconf.cpp" line="171"/>
+        <location filename="../../src/config/generalconf.cpp" line="195"/>
         <source>Unable to write file.</source>
         <translation>无法写入文件。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="175"/>
+        <location filename="../../src/config/generalconf.cpp" line="182"/>
         <source>Save File</source>
         <translation>保存到文件</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="197"/>
+        <location filename="../../src/config/generalconf.cpp" line="204"/>
         <source>Confirm Reset</source>
         <translation>确定重置</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="198"/>
+        <location filename="../../src/config/generalconf.cpp" line="205"/>
         <source>Are you sure you want to reset the configuration?</source>
         <translation>你确定你想要重置配置？</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="229"/>
+        <location filename="../../src/config/generalconf.cpp" line="236"/>
         <source>Show help message</source>
         <translation>显示帮助信息</translation>
     </message>
@@ -938,7 +1020,7 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">在捕获之前显示帮助信息。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="240"/>
+        <location filename="../../src/config/generalconf.cpp" line="260"/>
         <source>Show the side panel button</source>
         <translation>显示侧边栏按钮</translation>
     </message>
@@ -947,12 +1029,12 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">在捕获模式下显示侧边栏切换按钮。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="253"/>
+        <location filename="../../src/config/generalconf.cpp" line="273"/>
         <source>Show desktop notifications</source>
         <translation>显示桌面通知</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="266"/>
+        <location filename="../../src/config/generalconf.cpp" line="286"/>
         <source>Show tray icon</source>
         <translation>显示托盘图标</translation>
     </message>
@@ -961,32 +1043,32 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">显示任务栏图标</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="279"/>
+        <location filename="../../src/config/generalconf.cpp" line="299"/>
         <source>Confirmation required to delete screenshot from the latest uploads</source>
         <translation>从最近的上传历史中删除屏幕截图需要进行确认</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="294"/>
+        <location filename="../../src/config/generalconf.cpp" line="314"/>
         <source>Configuration File</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="299"/>
+        <location filename="../../src/config/generalconf.cpp" line="319"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="313"/>
+        <location filename="../../src/config/generalconf.cpp" line="333"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="323"/>
+        <location filename="../../src/config/generalconf.cpp" line="343"/>
         <source>Automatic check for updates</source>
         <translation>自动检查更新</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="336"/>
+        <location filename="../../src/config/generalconf.cpp" line="356"/>
         <source>Allow multiple flameshot GUI instances simultaneously</source>
         <translation>允许同时运行多个 flameshot GUI 实例</translation>
     </message>
@@ -995,13 +1077,13 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">这样能允许您获取火焰截图自身的截图。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="349"/>
-        <location filename="../../src/config/generalconf.cpp" line="351"/>
+        <location filename="../../src/config/generalconf.cpp" line="369"/>
+        <location filename="../../src/config/generalconf.cpp" line="371"/>
         <source>Automatically close daemon when it is not needed</source>
         <translation>不需要时自动关闭守护程序</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="361"/>
+        <location filename="../../src/config/generalconf.cpp" line="381"/>
         <source>Launch at startup</source>
         <translation>开机时启动</translation>
     </message>
@@ -1010,17 +1092,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">启动火焰截图</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="373"/>
+        <location filename="../../src/config/generalconf.cpp" line="393"/>
         <source>Show welcome message on launch</source>
         <translation>启动时显示欢迎消息</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="388"/>
+        <location filename="../../src/config/generalconf.cpp" line="408"/>
         <source>Use large predefined color palette</source>
         <translation>使用大型预定义调色盘</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="402"/>
+        <location filename="../../src/config/generalconf.cpp" line="432"/>
         <source>Copy URL after upload</source>
         <translation>上传后复制 URL</translation>
     </message>
@@ -1029,7 +1111,7 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">上传后复制 URL 并关闭窗口</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="414"/>
+        <location filename="../../src/config/generalconf.cpp" line="444"/>
         <source>Save image after copy</source>
         <translation>复制后保存图像</translation>
     </message>
@@ -1038,154 +1120,179 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">复制到剪贴板后保存图像文件</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="230"/>
+        <location filename="../../src/config/generalconf.cpp" line="237"/>
         <source>Show the help message at the beginning in the capture mode</source>
         <translation>在捕获之前显示帮助信息</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="242"/>
+        <location filename="../../src/config/generalconf.cpp" line="247"/>
+        <source>Use last region</source>
+        <translation>使用上一次的区域</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="248"/>
+        <source>Uses the last region as the default selection for the next screenshot</source>
+        <translation>使用上一次选中的区域作为下一次截图的默认选区</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="262"/>
         <source>Show the side panel toggle button in the capture mode</source>
         <translation>在捕获模式下显示侧边栏切换按钮</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="254"/>
+        <location filename="../../src/config/generalconf.cpp" line="274"/>
         <source>Enable desktop notifications</source>
         <translation>启用桌面通知</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="267"/>
+        <location filename="../../src/config/generalconf.cpp" line="287"/>
         <source>Show icon in the system tray</source>
         <translation>在系统托盘中显示图标</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="282"/>
+        <location filename="../../src/config/generalconf.cpp" line="302"/>
         <source>Ask for confirmation to delete screenshot from the latest uploads</source>
         <translation>从最近的上传历史中删除屏幕截图需要进行确认</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="324"/>
+        <location filename="../../src/config/generalconf.cpp" line="344"/>
         <source>Check for updates automatically</source>
         <translation>自动检查更新</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="337"/>
+        <location filename="../../src/config/generalconf.cpp" line="357"/>
         <source>This allows you to take screenshots of Flameshot itself for example</source>
         <translation>例如，这允许您截取 Flameshot 本身作为屏幕截图</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="363"/>
+        <location filename="../../src/config/generalconf.cpp" line="383"/>
         <source>Launch Flameshot daemon when computer is booted</source>
         <translation>开机自启动</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="376"/>
+        <location filename="../../src/config/generalconf.cpp" line="396"/>
         <source>Show the welcome message box in the middle of the screen while taking a screenshot</source>
         <translation>在截取屏幕截图时在屏幕中间显示欢迎消息框</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="390"/>
+        <location filename="../../src/config/generalconf.cpp" line="410"/>
         <source>Use a large predefined color palette</source>
         <translation>使用一个大的预定义调色板</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="404"/>
+        <location filename="../../src/config/generalconf.cpp" line="420"/>
+        <source>Copy on double click</source>
+        <translation>双击以复制</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="421"/>
+        <source>Enable Copy on Double Click</source>
+        <translation>启用双击时复制</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="434"/>
         <source>Copy URL and close window after uploading was successful</source>
         <translation>上传成功后复制 URL 并关闭窗口</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="416"/>
+        <location filename="../../src/config/generalconf.cpp" line="446"/>
         <source>After copying the screenshot, save it to a file as well</source>
         <translation>复制屏幕截图后，也将其保存到文件中</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="423"/>
+        <location filename="../../src/config/generalconf.cpp" line="453"/>
         <source>Save Path</source>
         <translation>保存路径</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="439"/>
+        <location filename="../../src/config/generalconf.cpp" line="469"/>
         <source>Change...</source>
         <translation>变更…</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="447"/>
+        <location filename="../../src/config/generalconf.cpp" line="477"/>
         <source>Use fixed path for screenshots to save</source>
         <translation>使用固定的屏幕截图保存路径</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="459"/>
+        <location filename="../../src/config/generalconf.cpp" line="489"/>
         <source>Preferred save file extension:</source>
         <translation>偏好的保存文件扩展名：</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="489"/>
+        <location filename="../../src/config/generalconf.cpp" line="518"/>
         <source>Latest Uploads Max Size</source>
         <translation>之前的上传最大数量</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="516"/>
+        <location filename="../../src/config/generalconf.cpp" line="540"/>
+        <source>Imgur Application Client ID</source>
+        <translation>Imgur API 键值</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/generalconf.cpp" line="571"/>
         <source>Undo limit</source>
         <translation>撤销次数限制</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="542"/>
-        <location filename="../../src/config/generalconf.cpp" line="544"/>
+        <location filename="../../src/config/generalconf.cpp" line="597"/>
+        <location filename="../../src/config/generalconf.cpp" line="599"/>
         <source>Use JPG format for clipboard (PNG default)</source>
         <translation>剪贴板使用 JPG 格式（默认为 PNG）</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="574"/>
+        <location filename="../../src/config/generalconf.cpp" line="629"/>
         <source>Copy file path after save</source>
         <translation>保存文件后复制文件路径</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="575"/>
+        <location filename="../../src/config/generalconf.cpp" line="630"/>
         <source>Copy the file path to clipboard after the file is saved</source>
         <translation>文件保存后将文件路径复制到剪贴板上</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="586"/>
+        <location filename="../../src/config/generalconf.cpp" line="641"/>
         <source>Anti-aliasing image when zoom the pinned image</source>
         <translation>缩放贴图时应用反锯齿</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="588"/>
+        <location filename="../../src/config/generalconf.cpp" line="643"/>
         <source>After zooming the pinned image, should the image get smoothened or stay pixelated</source>
         <translation>对贴图进行缩放后，对图像进行平滑处理还是维持像素化状态</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="599"/>
-        <location filename="../../src/config/generalconf.cpp" line="601"/>
+        <location filename="../../src/config/generalconf.cpp" line="654"/>
+        <location filename="../../src/config/generalconf.cpp" line="656"/>
         <source>Upload image without confirmation</source>
         <translation>上传图像无需确认</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="617"/>
+        <location filename="../../src/config/generalconf.cpp" line="672"/>
         <source>Choose a Folder</source>
         <translation>选择文件夹</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="626"/>
+        <location filename="../../src/config/generalconf.cpp" line="681"/>
         <source>Unable to write to directory.</source>
         <translation>无法写入目录。</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="635"/>
+        <location filename="../../src/config/generalconf.cpp" line="690"/>
         <source>Show magnifier</source>
         <translation>显示放大镜</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="636"/>
+        <location filename="../../src/config/generalconf.cpp" line="691"/>
         <source>Enable a magnifier while selecting the screenshot area</source>
         <translation>选择屏幕截图区域时启用放大镜</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="647"/>
+        <location filename="../../src/config/generalconf.cpp" line="702"/>
         <source>Square shaped magnifier</source>
         <translation>方形放大镜</translation>
     </message>
     <message>
-        <location filename="../../src/config/generalconf.cpp" line="648"/>
+        <location filename="../../src/config/generalconf.cpp" line="703"/>
         <source>Make the magnifier to be square-shaped</source>
         <translation>使放大镜呈方形</translation>
     </message>
@@ -1287,7 +1394,7 @@ Please solve them manually in the configuration file.</source>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="37"/>
         <source>Upload image</source>
-        <translation></translation>
+        <translation>上传图像</translation>
     </message>
     <message>
         <location filename="../../src/tools/imgupload/storages/imguploaderbase.cpp" line="51"/>
@@ -1385,7 +1492,7 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">保存文件到剪贴板。</translation>
     </message>
     <message>
-        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="92"/>
+        <location filename="../../src/tools/imgupload/storages/imgur/imguruploader.cpp" line="93"/>
         <source>Unable to open the URL.</source>
         <translation>无法打开此链接。</translation>
     </message>
@@ -1415,6 +1522,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="117"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
@@ -1422,6 +1530,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="26"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="118"/>
         <source>Icon</source>
         <translation>图标</translation>
     </message>
@@ -1429,6 +1538,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="43"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="119"/>
         <source>License</source>
         <translation>许可证</translation>
     </message>
@@ -1436,6 +1546,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="56"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="120"/>
         <source>GPLv3+</source>
         <translation>GPLv3+</translation>
     </message>
@@ -1443,6 +1554,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="89"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="121"/>
         <source>Version</source>
         <translation>版本</translation>
     </message>
@@ -1450,6 +1562,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="102"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="122"/>
         <source>Flameshot v</source>
         <translation>Flameshot v</translation>
     </message>
@@ -1457,6 +1570,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="115"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="123"/>
         <source>OS Info</source>
         <translation>操作系统信息</translation>
     </message>
@@ -1464,6 +1578,7 @@ Please solve them manually in the configuration file.</source>
         <location filename="../../src/widgets/infowindow.ui" line="128"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_infowindow.h" line="124"/>
         <source>Copy Info</source>
         <translation>复制信息</translation>
     </message>
@@ -1619,6 +1734,24 @@ Please solve them manually in the configuration file.</source>
     </message>
 </context>
 <context>
+    <name>PinWidget</name>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="225"/>
+        <source>Context menu</source>
+        <translation>上下文菜单</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="227"/>
+        <source>Copy to clipboard</source>
+        <translation>复制到剪贴板</translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/pin/pinwidget.cpp" line="234"/>
+        <source>Save to file</source>
+        <translation>保存到文件</translation>
+    </message>
+</context>
+<context>
     <name>PixelateTool</name>
     <message>
         <location filename="../../src/tools/pixelate/pixelatetool.cpp" line="24"/>
@@ -1701,42 +1834,42 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">捕获已保存并复制到剪贴板，作为 </translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="135"/>
+        <location filename="../../src/main.cpp" line="136"/>
         <source>Unable to connect via DBus</source>
         <translation>无法通过DBus进行连接</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="151"/>
+        <location filename="../../src/main.cpp" line="152"/>
         <source>Powerful yet simple to use screenshot software.</source>
         <translation>强大又易用的屏幕截图软件。</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="152"/>
+        <location filename="../../src/main.cpp" line="153"/>
         <source>See</source>
         <translation>参见</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="155"/>
+        <location filename="../../src/main.cpp" line="156"/>
         <source>Capture the entire desktop.</source>
         <translation>捕获整个桌面。</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="157"/>
+        <location filename="../../src/main.cpp" line="158"/>
         <source>Open the capture launcher.</source>
         <translation>打开截图启动器。</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="160"/>
+        <location filename="../../src/main.cpp" line="161"/>
         <source>Start a manual capture in GUI mode.</source>
         <translation>以图形界面模式进行手动截图。</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="162"/>
+        <location filename="../../src/main.cpp" line="163"/>
         <source>Configure</source>
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="164"/>
+        <location filename="../../src/main.cpp" line="165"/>
         <source>Capture a single screen.</source>
         <translation>捕获单个屏幕。</translation>
     </message>
@@ -1745,102 +1878,107 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">截图保存路径</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="169"/>
+        <location filename="../../src/main.cpp" line="170"/>
         <source>Existing directory or new file to save to</source>
         <translation>要保存的目标目录路径或新文件</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="172"/>
+        <location filename="../../src/main.cpp" line="173"/>
         <source>Save the capture to the clipboard</source>
         <translation>将截图保存至剪贴板</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="174"/>
+        <location filename="../../src/main.cpp" line="175"/>
         <source>Pin the capture to the screen</source>
         <translation>将捕获图像作为贴图放置在屏幕上</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="176"/>
+        <location filename="../../src/main.cpp" line="177"/>
         <source>Upload screenshot</source>
         <translation>上传截图</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="178"/>
+        <location filename="../../src/main.cpp" line="179"/>
         <source>Delay time in milliseconds</source>
         <translation>延迟时间，以毫秒计</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="181"/>
+        <location filename="../../src/main.cpp" line="184"/>
+        <source>Repeat screenshot with previously selected region</source>
+        <translation>使用之前的选区重复截图</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="187"/>
         <source>Screenshot region to select</source>
         <translation>要选择的屏幕区域</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="184"/>
+        <location filename="../../src/main.cpp" line="190"/>
         <source>Set the filename pattern</source>
         <translation>设置文件名模式</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="188"/>
+        <location filename="../../src/main.cpp" line="194"/>
         <source>Accept capture as soon as a selection is made</source>
         <translation>在选中选区后立刻接受捕获图像</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="190"/>
+        <location filename="../../src/main.cpp" line="196"/>
         <source>Enable or disable the trayicon</source>
         <translation>启用或禁用托盘图标</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="194"/>
+        <location filename="../../src/main.cpp" line="200"/>
         <source>Enable or disable run at startup</source>
         <translation>启用或禁用开机启动</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="197"/>
+        <location filename="../../src/main.cpp" line="203"/>
         <source>Check the configuration for errors</source>
         <translation>检查配置文件错误</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="200"/>
+        <location filename="../../src/main.cpp" line="206"/>
         <source>Show the help message in the capture mode</source>
         <translation>在捕获模式中显示帮助信息</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="203"/>
+        <location filename="../../src/main.cpp" line="209"/>
         <source>Define the main UI color</source>
         <translation>定义用户界面主颜色</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="207"/>
+        <location filename="../../src/main.cpp" line="213"/>
         <source>Define the contrast UI color</source>
         <translation>定义用户界面对比色</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="210"/>
+        <location filename="../../src/main.cpp" line="216"/>
         <source>Print raw PNG capture</source>
         <translation>输出原始 PNG 图像</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="213"/>
+        <location filename="../../src/main.cpp" line="219"/>
         <source>Print geometry of the selection in the format W H X Y. Does nothing if raw is specified</source>
         <translation>使用 W H X Y 的格式输出选区几何参数。如果指定了 raw 参数则什么也不做</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="217"/>
+        <location filename="../../src/main.cpp" line="223"/>
         <source>Define the screen to capture (starting from 0)</source>
         <translation>定义要捕获的屏幕（从 0 开始）</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="237"/>
+        <location filename="../../src/main.cpp" line="243"/>
         <source>Invalid delay, it must be a number greater than 0</source>
         <translation>无效的延时，必须提供大于零的数值</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="240"/>
+        <location filename="../../src/main.cpp" line="246"/>
         <source>Invalid region, use &apos;WxH+X+Y&apos; or &apos;all&apos; or &apos;screen0/screen1/...&apos;.</source>
         <translation>无效的区域，请使用“WxH+X+Y”或“all”或“screen0/screen1/...”。</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="253"/>
+        <location filename="../../src/main.cpp" line="259"/>
         <source>Invalid path, must be an existing directory or a new file in an existing directory</source>
         <translation>无效的路径，必须为已有目录或者已有目录中的一个新文件</translation>
     </message>
@@ -1849,17 +1987,17 @@ Please solve them manually in the configuration file.</source>
         <translation type="vanished">定义要捕获的屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="218"/>
+        <location filename="../../src/main.cpp" line="224"/>
         <source>default: screen containing the cursor</source>
         <translation>默认：包含鼠标指针的屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="219"/>
+        <location filename="../../src/main.cpp" line="225"/>
         <source>Screen number</source>
         <translation>屏幕编号</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="228"/>
+        <location filename="../../src/main.cpp" line="234"/>
         <source>Invalid color, this flag supports the following formats:
 - #RGB (each of R, G, and B is a single hex digit)
 - #RRGGBB
@@ -1880,7 +2018,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">无效的延迟时间，数字必须大于0</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="239"/>
+        <location filename="../../src/main.cpp" line="245"/>
         <source>Invalid screen number, it must be non negative</source>
         <translation>无效的屏幕编号，编号不能为负数</translation>
     </message>
@@ -1889,7 +2027,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">无效的路径，必须为系统中真实存在的路径</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="266"/>
+        <location filename="../../src/main.cpp" line="272"/>
         <source>Invalid value, it must be defined as &apos;true&apos; or &apos;false&apos;</source>
         <translation>无效的值，必须指定“true”或“false”</translation>
     </message>
@@ -1904,7 +2042,12 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation>无法写入</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="656"/>
+        <location filename="../../src/core/flameshot.cpp" line="148"/>
+        <source>Requested screen exceeds screen count</source>
+        <translation>请求的屏幕超出了屏幕编号</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/flameshot.cpp" line="378"/>
         <source>Full screen screenshot pinned to screen</source>
         <translation>已将全屏截图作为贴图固定到屏幕</translation>
     </message>
@@ -1947,7 +2090,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">默认情况下，火焰截图启动后将在后台运行，并在托盘显示一个图标。</translation>
     </message>
     <message>
-        <location filename="../../src/core/controller.cpp" line="569"/>
+        <location filename="../../src/widgets/trayicon.cpp" line="71"/>
         <source>Hello, I&apos;m here! Click icon in the tray to take a screenshot or click with a right button to see more options.</source>
         <translation>我已启动并在后台运行！点击托盘图标即可进行屏幕截图，右键点击托盘图标可查看更多选项。</translation>
     </message>
@@ -2000,27 +2143,27 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">删除当前工具</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="187"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="189"/>
         <source>Quit capture</source>
         <translation>退出捕获</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="197"/>
         <source>Screenshot history</source>
         <translation>屏幕截图历史</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="198"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="200"/>
         <source>Capture screen</source>
         <translation>捕获屏幕</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="205"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="207"/>
         <source>Show color picker</source>
         <translation>显示颜色选择器</translation>
     </message>
     <message>
-        <location filename="../../src/config/shortcutswidget.cpp" line="206"/>
+        <location filename="../../src/config/shortcutswidget.cpp" line="208"/>
         <source>Change the tool&apos;s size</source>
         <translation>更改工具大小</translation>
     </message>
@@ -2075,7 +2218,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>ScreenGrabber</name>
     <message>
-        <location filename="../../src/utils/screengrabber.cpp" line="131"/>
+        <location filename="../../src/utils/screengrabber.cpp" line="112"/>
+        <source>Unable to detect desktop environment (GNOME? KDE? Sway? ...)</source>
+        <translation>无法探测当前桌面环境（GNOME？KDE？Sway？……）</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="115"/>
+        <source>Hint: try setting the XDG_CURRENT_DESKTOP environment variable.</source>
+        <translation>提示：请尝试设置 XDG_CURRENT_DESKTOP 环境变量。</translation>
+    </message>
+    <message>
+        <location filename="../../src/utils/screengrabber.cpp" line="120"/>
         <source>Unable to capture screen</source>
         <translation>无法捕获屏幕</translation>
     </message>
@@ -2143,6 +2296,81 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <source>Key</source>
         <translation>键</translation>
     </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="167"/>
+        <source>Left Double-click</source>
+        <translation>左键双击</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="174"/>
+        <source>Toggle side panel</source>
+        <translation>切换侧面板</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="175"/>
+        <source>Resize selection left 1px</source>
+        <translation>将选区大小向左调整 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="176"/>
+        <source>Resize selection right 1px</source>
+        <translation>将选区大小向右调整 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="177"/>
+        <source>Resize selection up 1px</source>
+        <translation>将选区大小向上调整 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="178"/>
+        <source>Resize selection down 1px</source>
+        <translation>将选区大小向下调整 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="179"/>
+        <source>Select entire screen</source>
+        <translation>选择整个屏幕</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="180"/>
+        <source>Move selection left 1px</source>
+        <translation>将选区向左调整 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="181"/>
+        <source>Move selection right 1px</source>
+        <translation>将选区向右移动 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="182"/>
+        <source>Move selection up 1px</source>
+        <translation>将选区向上移动 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="183"/>
+        <source>Move selection down 1px</source>
+        <translation>将选区向下移动 1px</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="184"/>
+        <source>Commit text in text area</source>
+        <translation>在文本区域提交文本</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="185"/>
+        <source>Delete current tool</source>
+        <translation>删除当前工具</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="194"/>
+        <source>Capture screen</source>
+        <translation>捕获屏幕</translation>
+    </message>
+    <message>
+        <location filename="../../src/config/shortcutswidget.cpp" line="195"/>
+        <source>Screenshot history</source>
+        <translation>屏幕截图历史</translation>
+    </message>
 </context>
 <context>
     <name>SidePanelWidget</name>
@@ -2159,17 +2387,17 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <translation type="vanished">按下 ESC 键以取消</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="36"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="35"/>
         <source>Active tool size: </source>
         <translation>当前工具大小: </translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="48"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="47"/>
         <source>Active Color: </source>
         <translation>当前颜色: </translation>
     </message>
     <message>
-        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="69"/>
+        <location filename="../../src/widgets/panel/sidepanelwidget.cpp" line="68"/>
         <source>Grab Color</source>
         <translation>获取颜色</translation>
     </message>
@@ -2328,7 +2556,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>SystemNotification</name>
     <message>
-        <location filename="../../src/utils/systemnotification.cpp" line="30"/>
+        <location filename="../../src/utils/systemnotification.cpp" line="39"/>
         <source>Flameshot Info</source>
         <translation>火焰截图消息</translation>
     </message>
@@ -2336,37 +2564,37 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>TextConfig</name>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="47"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="46"/>
         <source>StrikeOut</source>
         <translation>删除线</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="56"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="55"/>
         <source>Underline</source>
         <translation>下划线</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="65"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="64"/>
         <source>Bold</source>
         <translation>粗体</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="74"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="73"/>
         <source>Italic</source>
         <translation>斜体</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="84"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="83"/>
         <source>Left Align</source>
         <translation>左对齐</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="93"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="92"/>
         <source>Center Align</source>
         <translation>中心对齐</translation>
     </message>
     <message>
-        <location filename="../../src/tools/text/textconfig.cpp" line="102"/>
+        <location filename="../../src/tools/text/textconfig.cpp" line="101"/>
         <source>Right Align</source>
         <translation>右对齐</translation>
     </message>
@@ -2382,6 +2610,49 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/tools/text/texttool.cpp" line="97"/>
         <source>Add text to your capture</source>
         <translation>在您的捕获中添加文本</translation>
+    </message>
+</context>
+<context>
+    <name>TrayIcon</name>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="98"/>
+        <source>&amp;Take Screenshot</source>
+        <translation>进行截图(&amp;T)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="116"/>
+        <source>&amp;Open Launcher</source>
+        <translation>打开启动器(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="121"/>
+        <source>&amp;Configuration</source>
+        <translation>配置(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="126"/>
+        <source>&amp;About</source>
+        <translation>关于(&amp;A)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="130"/>
+        <source>Check for updates</source>
+        <translation>检查更新</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="141"/>
+        <source>New version %1 is available</source>
+        <translation>新版本 %1 可用</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="145"/>
+        <source>&amp;Quit</source>
+        <translation>退出(&amp;Q)</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets/trayicon.cpp" line="149"/>
+        <source>&amp;Latest Uploads</source>
+        <translation>最近的上传(&amp;L)</translation>
     </message>
 </context>
 <context>
@@ -2437,22 +2708,22 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
 <context>
     <name>UpdateNotificationWidget</name>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="69"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="70"/>
         <source>New Flameshot version %1 is available</source>
         <translation>新的 Flameshot %1 版已经可用</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="122"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="123"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="130"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="131"/>
         <source>Later</source>
         <translation>稍后</translation>
     </message>
     <message>
-        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="138"/>
+        <location filename="../../src/widgets/updatenotificationwidget.cpp" line="139"/>
         <source>Update</source>
         <translation>更新</translation>
     </message>
@@ -2463,6 +2734,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadhistory.ui" line="14"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadhistory.h" line="67"/>
         <source>Upload History</source>
         <translation>上传历史记录</translation>
     </message>
@@ -2478,6 +2750,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadlineitem.ui" line="20"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="113"/>
         <source>Form</source>
         <translation>表单</translation>
     </message>
@@ -2485,6 +2758,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadlineitem.ui" line="49"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="114"/>
         <source>TextLabel</source>
         <translation>文本标签</translation>
     </message>
@@ -2492,6 +2766,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadlineitem.ui" line="82"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="115"/>
         <source>Copy URL</source>
         <translation>复制链接</translation>
     </message>
@@ -2499,6 +2774,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../src/widgets/uploadlineitem.ui" line="95"/>
         <location filename="../../build/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
+        <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_uploadlineitem.h" line="116"/>
         <source>Open In Browser</source>
         <translation>在浏览器中打开</translation>
     </message>
@@ -2589,6 +2865,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="59"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="209"/>
         <source>Open a new palette from file</source>
         <translation>从文件打开新调色板</translation>
     </message>
@@ -2596,6 +2873,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="71"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="212"/>
         <source>Create a new palette</source>
         <translation>创建新调色板</translation>
     </message>
@@ -2603,6 +2881,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="83"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="215"/>
         <source>Duplicate the current palette</source>
         <translation>制作当前调色板的副本</translation>
     </message>
@@ -2610,6 +2889,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="121"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="218"/>
         <source>Delete the current palette</source>
         <translation>删除当前调色板</translation>
     </message>
@@ -2617,6 +2897,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="133"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="221"/>
         <source>Revert changes to the current palette</source>
         <translation>将修改回退到当前调色板</translation>
     </message>
@@ -2624,6 +2905,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="145"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="224"/>
         <source>Save changes to the current palette</source>
         <translation>将修改保存到当前调色板</translation>
     </message>
@@ -2631,6 +2913,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="170"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="227"/>
         <source>Add a color to the palette</source>
         <translation>向调色板添加颜色</translation>
     </message>
@@ -2638,6 +2921,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/color_palette_widget.ui" line="182"/>
         <location filename="../../build/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <location filename="../../cmake-build-debug/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
+        <location filename="../../cmake-build-relwithdebinfo/external/Qt-Color-Widgets/QtColorWidgets_autogen/include/ui_color_palette_widget.h" line="230"/>
         <source>Remove the selected color from the palette</source>
         <translation>从调色板移除选中的颜色</translation>
     </message>
@@ -2718,7 +3002,7 @@ You may need to escape the &apos;#&apos; sign as in &apos;\#FFF&apos;</source>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/swatch.cpp" line="833"/>
         <source>%1 (%2)</source>
-        <translation></translation>
+        <translation>%1 (%2)</translation>
     </message>
 </context>
 </TS>

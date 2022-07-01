@@ -175,6 +175,7 @@ You can use the graphical menu to configure Flameshot, but alternatively you can
     ```
 
 ### Config file
+
 You can also edit some of the settings (like overriding the default colors) in the configuration file.\
 Linux path : `~/.config/flameshot/flameshot.ini`.\
 Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
@@ -230,7 +231,7 @@ On Linux, Flameshot doesn't yet support <kbd>Pr Scr</kbd> out of the box, but wi
 
 #### On KDE Plasma desktop
 
-To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process. This file will assign the following keys to the following actions by default:
+To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-shortcuts-kde.khotkeys) in the repository that more or less automates this process. This file will assign the following hotkeys by default:
 
 |  Keys                                                  |  Description                                                                       |
 |---                                                     |---                                                                                 |
@@ -239,11 +240,11 @@ To make configuration easier, there's a [file](docs/shortcuts-config/flameshot-s
 | <kbd>Shift</kbd> + <kbd>Prt Sc</kbd>                   | Take a full-screen (all monitors) screenshot and save it                           |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Prt Sc</kbd> | Take a full-screen (all monitors) screenshot and copy it to the clipboard          |
 
-If you don't like the defaults, you can change them manually later.
+If you don't like the defaults, they can be changed later.
 
 Steps for using the configuration:
 
-1. The configuration file configures shortcuts so that Flameshot automatically saves (without opening the save dialog) screenshots to `~/Pictures/Screenshots` folder. Make sure you have that folder by running the following command:
+1. The configuration file makes Flameshot automatically save screenshots to `~/Pictures/Screenshots` without opening the save dialog. Make sure that folder exists by running:
 
     ```shell
     mkdir -p ~/Pictures/Screenshots
@@ -258,10 +259,10 @@ Steps for using the configuration:
     ```
 3. Make sure you have the `khotkeys` installed using your package manager to enable custom shortcuts in KDE Plasma.
 4. Go to _System Settings_ → _Shortcuts_ → _Custom Shortcuts_.
-5. If there's one, you'll need to disable an entry for Spectacle, the default KDE screenshot utility, first because its shortcuts might collide with Flameshot's ones; so, just uncheck the _Spectacle_ entry.
-6. Click _Edit_ → _Import..._, navigate to the Desktop folder (or wherever you saved the configuration file) and open the configuration file.
+5. If an entry exists for Spectacle (the default KDE screenshot utility), you'll need to disable it because its shortcuts might conflict with Flameshot's. Do this by unchecking the _Spectacle_ entry.
+6. Click _Edit_ → _Import..._, navigate to the configuration file and open it.
 7. Now the Flameshot entry should appear in the list. Click _Apply_ to apply the changes.
-8. If you want to change the defaults, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
+8. If you want to change the default hotkeys, you can expand the entry, select the appropriate action and modify it as you wish; the process is pretty self-explanatory.
 9. If you installed Flameshot as a Flatpak, you will need to create a symlink to the command:
 
     ```shell
@@ -295,7 +296,6 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
 
 Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI instead of the default application.
 
-
 #### On XFCE 4
 
 1. Go to `Keyboard` settings
@@ -309,7 +309,6 @@ Now every time you press <kbd>Prt Sc</kbd>, it will start the Flameshot GUI inst
 4. Replace `xfce4-screenshooter -fd 1` with `flameshot gui`
 
 Now every time you press <kbd>Prt Sc</kbd> it will start Flameshot GUI instead of the default application.
-
 
 ## Considerations
 
@@ -380,11 +379,10 @@ After following all those steps above, `flameshot` will open without problems in
 
 ### Tray icon
 
-**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/index.php/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/index.php/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some softwares, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
+**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/index.php/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/index.php/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some software, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
 
 
 Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
-
 
 ## Compilation
 
@@ -418,7 +416,7 @@ Also you can open and build/debug the project in a C++ IDE. For example, in Qt C
 
 ```shell
 # Compile-time
-apt install g++ cmake build-essential qt5-default qttools5-dev-tools libqt5svg5-dev qttools5-dev
+apt install g++ cmake build-essential qtbase5-dev qttools5-dev-tools libqt5svg5-dev qttools5-dev
 
 # Run-time
 apt install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5
@@ -496,6 +494,7 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 <https://flameshot.org/docs/guide/faq/>
 
 ## License
+
 - The main code is licensed under [GPLv3](LICENSE)
 - The logo of Flameshot is licensed under [Free Art License v1.3](data/img/app/flameshotLogoLicense.txt)
 - The button icons are licensed under Apache License 2.0. See: https://github.com/google/material-design-icons
@@ -507,18 +506,21 @@ Note: If you install from source, there is no uninstaller, you will need to manu
 Info: If I take code from your project and that implies a relicense to GPLv3, you can reuse my changes with the original previous license of your project applied.
 
 ## Privacy Policy
+
 This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
 
-
 ## Code Signing Policy
+
 Free code signing provided by [SignPath.io](https://signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
 
 Code signing is currently a manual process so not every patch release will be signed.
 
 ## Contribute
+
 If you want to contribute check the [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ## Acknowledgment
+
 Thanks to those who have shown interest in the early development process:
 - [lupoDharkael](https://github.com/lupoDharkael)
 - [Cosmo](https://github.com/philpem)

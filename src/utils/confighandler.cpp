@@ -86,11 +86,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
 #if !defined(Q_OS_WIN)
     OPTION("autoCloseIdleDaemon"         ,Bool               ( false         )),
 #endif
-#if defined(Q_OS_MACOS)
     OPTION("startupLaunch"               ,Bool               ( false         )),
-#else
-    OPTION("startupLaunch"               ,Bool               ( true          )),
-#endif
     OPTION("showStartupLaunchMessage"    ,Bool               ( true          )),
     OPTION("copyAndCloseAfterUpload"     ,Bool               ( true          )),
     OPTION("copyPathAfterSave"           ,Bool               ( false         )),
@@ -101,9 +97,10 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("savePath"                    ,ExistingDir        (                   )),
     OPTION("savePathFixed"               ,Bool               ( false         )),
     OPTION("saveAsFileExtension"         ,SaveFileExtension  (                   )),
+    OPTION("saveLastRegion"              ,Bool               (false          )),
     OPTION("uploadHistoryMax"            ,LowerBoundedInt    (0, 25               )),
     OPTION("undoLimit"                   ,BoundedInt         (0, 999, 100    )),
-    // Interface tab
+  // Interface tab
     OPTION("uiColor"                     ,Color              ( {116, 0, 150}   )),
     OPTION("contrastUiColor"             ,Color              ( {39, 0, 50}     )),
     OPTION("contrastOpacity"             ,BoundedInt         ( 0, 255, 190    )),
