@@ -1378,6 +1378,7 @@ void CaptureWidget::initShortcuts()
                 this,
                 SLOT(togglePanel()));
 
+    /*
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
                 m_selection,
                 SLOT(resizeLeft()));
@@ -1390,6 +1391,20 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
                 m_selection,
                 SLOT(resizeDown()));
+    */
+
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
+                this,
+                SLOT(moveLeftShift()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
+                this,
+                SLOT(moveRightShift()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
+                this,
+                SLOT(moveUpShift()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
+                this,
+                SLOT(moveDownShift()));
 
     /*
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
@@ -1713,6 +1728,54 @@ void CaptureWidget::moveDown()
     if(activeToolObject().isNull())
     {
 	m_selection->moveDown();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveLeftShift()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->resizeLeft();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveRightShift()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->resizeRight();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveUpShift()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->resizeUp();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveDownShift()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->resizeDown();
     }
     else
     {

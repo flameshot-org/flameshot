@@ -72,6 +72,11 @@ private slots:
     void moveUp();
     void moveDown();
 
+    void moveLeftShift();
+    void moveRightShift();
+    void moveUpShift();
+    void moveDownShift();
+
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
