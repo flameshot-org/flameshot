@@ -1665,7 +1665,9 @@ void CaptureWidget::moveLeft()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(-1,0));
+	drawToolsData();
     }
 }
 
@@ -1677,7 +1679,9 @@ void CaptureWidget::moveRight()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(1,0));
+	drawToolsData(); 
     }
 }
 
@@ -1689,7 +1693,9 @@ void CaptureWidget::moveUp()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,-1));
+	drawToolsData();
     }
 }
 
@@ -1701,7 +1707,9 @@ void CaptureWidget::moveDown()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,1));
+	drawToolsData();
     }
 }
 
@@ -1713,7 +1721,9 @@ void CaptureWidget::moveLeftShift()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(-5,0));
+	drawToolsData();
     }
 }
 
@@ -1725,7 +1735,9 @@ void CaptureWidget::moveRightShift()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(+5,0));
+	drawToolsData();
     }
 }
 
@@ -1737,7 +1749,9 @@ void CaptureWidget::moveUpShift()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,-5));
+	drawToolsData();
     }
 }
 
@@ -1749,7 +1763,9 @@ void CaptureWidget::moveDownShift()
     }
     else
     {
-	// ... 
+	update(paddedUpdateRect(activeToolObject()->boundingRect()));
+	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,5));
+	drawToolsData();
     }
 }
 
