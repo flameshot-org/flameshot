@@ -49,7 +49,6 @@ void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
     auto translated = QWidget::mapFromGlobal(relativeCursor);
     auto x = translated.x() + m_magPixels;
     auto y = translated.y() + m_magPixels;
- 
 
     int magX = static_cast<int>(x * m_devicePixelRatio - m_magPixels);
     int magY = static_cast<int>(y * m_devicePixelRatio - m_magPixels);
@@ -112,7 +111,6 @@ void MagnifierWidget::drawMagnifier(QPainter& painter)
     auto translated = QWidget::mapFromGlobal(relativeCursor);
     auto x = translated.x();
     auto y = translated.y();
-        
 
     int magX = static_cast<int>(x * m_devicePixelRatio - m_magPixels);
     int offsetX = 0;
