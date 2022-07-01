@@ -98,16 +98,22 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     }
     // Heuristically, if there is a % in the command we assume it is the file name slot
     QString command = index.data(Qt::UserRole).toString();
+    QStringList prog_args = command.split(" ");
     // no quotes because it is going in an array!
     if (command.contains("%"))
-        command = command.replace(QRegExp("(\\%.)"),  m_tempFile );
+    {
+        // but that means we need to substitute IN the array not the string!
+        for ( auto& i : prog_args)
+        {
+            if (i
+                .contains("%")) i.replace(QRegExp("(\\%.)"), m_tempFile);
+        }
+    }
     else
     {
          // we really should append the file name if there
-        command.append(m_tempFile); // were no replacements
+        prog_args.append(m_tempFile); // were no replacements
     }
-
-    QStringList prog_args = command.split(" ");
     QString app_name = prog_args.at(0);
     bool inTerminal =
       index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
