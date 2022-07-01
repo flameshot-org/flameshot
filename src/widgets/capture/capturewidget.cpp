@@ -1391,6 +1391,7 @@ void CaptureWidget::initShortcuts()
                 m_selection,
                 SLOT(resizeDown()));
 
+    /*
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
                 m_selection,
                 SLOT(moveLeft()));
@@ -1403,6 +1404,21 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                 m_selection,
                 SLOT(moveDown()));
+    */
+
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
+                this,
+                SLOT(moveLeft()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
+                this,
+                SLOT(moveRight()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
+                this,
+                SLOT(moveUp()));
+    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
+                this,
+                SLOT(moveDown()));
+    
 
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
@@ -1654,6 +1670,54 @@ void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
     updateTool(activeButtonTool());
+}
+
+void CaptureWidget::moveLeft()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->moveLeft();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveRight()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->moveRight();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveUp()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->moveUp();
+    }
+    else
+    {
+	// ... 
+    }
+}
+
+void CaptureWidget::moveDown()
+{
+    if(activeToolObject().isNull())
+    {
+	m_selection->moveDown();
+    }
+    else
+    {
+	// ... 
+    }
 }
 
 void CaptureWidget::setCaptureToolObjects(
