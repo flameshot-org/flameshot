@@ -1706,7 +1706,7 @@ void CaptureWidget::moveLeftShift()
         m_selection->resizeLeft();
     } else {
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(-5, 0));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(-10, 0));
         drawToolsData();
     }
 }
@@ -1717,7 +1717,7 @@ void CaptureWidget::moveRightShift()
         m_selection->resizeRight();
     } else {
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(+5, 0));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(+10, 0));
         drawToolsData();
     }
 }
@@ -1728,7 +1728,7 @@ void CaptureWidget::moveUpShift()
         m_selection->resizeUp();
     } else {
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -5));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -10));
         drawToolsData();
     }
 }
@@ -1739,7 +1739,7 @@ void CaptureWidget::moveDownShift()
         m_selection->resizeDown();
     } else {
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 5));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 10));
         drawToolsData();
     }
 }
