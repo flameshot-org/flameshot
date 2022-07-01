@@ -1390,7 +1390,7 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
                 this,
                 SLOT(moveDownShift()));
-    
+
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
                 this,
                 SLOT(moveLeft()));
@@ -1403,7 +1403,6 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
                 this,
                 SLOT(moveDown()));
-    
 
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
@@ -1659,113 +1658,89 @@ void CaptureWidget::childLeave()
 
 void CaptureWidget::moveLeft()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->moveLeft();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(-1,0));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->moveLeft();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(-1, 0));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveRight()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->moveRight();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(1,0));
-	drawToolsData(); 
+    if (activeToolObject().isNull()) {
+        m_selection->moveRight();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(1, 0));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveUp()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->moveUp();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,-1));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->moveUp();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -1));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveDown()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->moveDown();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,1));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->moveDown();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 1));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveLeftShift()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->resizeLeft();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(-5,0));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->resizeLeft();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(-5, 0));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveRightShift()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->resizeRight();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(+5,0));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->resizeRight();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(+5, 0));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveUpShift()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->resizeUp();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,-5));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->resizeUp();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -5));
+        drawToolsData();
     }
 }
 
 void CaptureWidget::moveDownShift()
 {
-    if(activeToolObject().isNull())
-    {
-	m_selection->resizeDown();
-    }
-    else
-    {
-	update(paddedUpdateRect(activeToolObject()->boundingRect()));
-	activeToolObject()->move(*activeToolObject()->pos()+QPoint(0,5));
-	drawToolsData();
+    if (activeToolObject().isNull()) {
+        m_selection->resizeDown();
+    } else {
+        update(paddedUpdateRect(activeToolObject()->boundingRect()));
+        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 5));
+        drawToolsData();
     }
 }
 
