@@ -9,7 +9,6 @@
 #include <QPainterPath>
 #include <QPen>
 #include <QPixmap>
-#include <QtDebug>
 
 MagnifierWidget::MagnifierWidget(const QPixmap& p,
                                  const QColor& c,
