@@ -44,8 +44,11 @@ void MagnifierWidget::paintEvent(QPaintEvent*)
 
 void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
 {
-    int x = QCursor::pos().x() + m_magPixels;
-    int y = QCursor::pos().y() + m_magPixels;
+    auto relativeCursor = QCursor::pos();
+    auto translated = QWidget::mapFromGlobal(relativeCursor);
+    auto x = translated.x() + m_magPixels;
+    auto y = translated.y() + m_magPixels;
+
     int magX = static_cast<int>(x * m_devicePixelRatio - m_magPixels);
     int magY = static_cast<int>(y * m_devicePixelRatio - m_magPixels);
     QRectF magniRect(magX, magY, m_pixels, m_pixels);
@@ -103,8 +106,11 @@ void MagnifierWidget::drawMagnifierCircle(QPainter& painter)
 // https://invent.kde.org/graphics/spectacle/-/blob/master/src/QuickEditor/QuickEditor.cpp#L841
 void MagnifierWidget::drawMagnifier(QPainter& painter)
 {
-    int x = QCursor::pos().x();
-    int y = QCursor::pos().y();
+    auto relativeCursor = QCursor::pos();
+    auto translated = QWidget::mapFromGlobal(relativeCursor);
+    auto x = translated.x();
+    auto y = translated.y();
+
     int magX = static_cast<int>(x * m_devicePixelRatio - m_magPixels);
     int offsetX = 0;
     if (magX < 0) {
