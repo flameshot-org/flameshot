@@ -180,7 +180,7 @@ You can also edit some of the settings (like overriding the default colors) in t
 Linux path : `~/.config/flameshot/flameshot.ini`.\
 Windows path : `C:\Users\{YOURNAME}\AppData\Roaming\flameshot\flameshot.ini`.
 
-When copying over the config file from Linux to Windows or vice versa, 
+When copying over the config file from Linux to Windows or vice versa,
 make sure to correct the `savePath` variable,\
 so that the screenshots save in the right directory on your desired file system.
 
@@ -279,15 +279,15 @@ To use Flameshot instead of the default screenshot application in Ubuntu we need
     ```shell
     gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot '[]'
     ```
-   
+
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Screenshots_ > _Take a screenshot interactively_ and press `backspace`
 
 2. Add custom binding on <kbd>Prt Sc</kbd>:
- 
+
    Ubuntu 18.04: Go to _Settings_ > _Device_ > _Keyboard_ and press the '+' button at the bottom.
-   
+
    Ubuntu 20.04: Go to _Settings_ > _Keyboard_ and press the '+' button at the bottom.
-   
+
    Ubuntu 22.04: Go to _Settings_ > _Keyboard_ > _View and Customise Shortcuts_ > _Custom shortcuts_ and press the '+' button at the bottom.
 
 3. Name the command as you like it, e.g. `flameshot`. And in the command insert `/usr/bin/flameshot gui`.
@@ -359,8 +359,8 @@ There are packages available in the repository of some Linux distributions:
 
 **Note** that because of macOS security features, you may not be able to open flameshot when installed using brew.
 If you see the message `“flameshot” cannot be opened because the developer cannot be verified.` you will need to
-follow the steps below: 
-1. Go to the Applications folder (Finder > Go > Applications, or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>A</kbd>) 
+follow the steps below:
+1. Go to the Applications folder (Finder > Go > Applications, or <kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>A</kbd>)
 1. Right-Click on "flameshot.app" and choose "Open" from the context menu
 2. In the dialog click "Open"
 
@@ -449,6 +449,12 @@ pacman -S qt5-svg
 
 # Optional
 pacman -S openssl ca-certificates
+```
+
+#### NixOS
+
+```shell
+nix-shell
 ```
 
 #### MacOS
