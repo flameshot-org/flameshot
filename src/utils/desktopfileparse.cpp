@@ -100,11 +100,13 @@ DesktopAppData DesktopFileParser::parseDesktopFile(const QString& fileName,
 
 int DesktopFileParser::processDirectory(const QDir& dir)
 {
-    // Note that https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
+    // Note that
+    // https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html
     // says files must end in .desktop or .directory
     // So filtering by .desktop stops us reading things like editor backups
     // .kdelnk is long deprecated
-    QStringList entries = dir.entryList({"*.desktop"},QDir::NoDotAndDotDot | QDir::Files);
+    QStringList entries =
+      dir.entryList({ "*.desktop" }, QDir::NoDotAndDotDot | QDir::Files);
     bool ok;
     int length = m_appList.length();
     for (QString file : entries) {
