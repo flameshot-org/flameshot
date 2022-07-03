@@ -9,6 +9,7 @@ SPDX-License-Identifier: CC0-1.0
   <project_license>GPL-3.0-or-later</project_license>
   <name>Flameshot</name>
   <releases>
+    <release version="12.1.0" date="2022-07-03"/>
     <release version="12.0.0" date="2022-06-21"/>
     <release version="11.0.0" date="2022-01-14"/>
     <release version="0.10.1" date="2021-07-25"/>
