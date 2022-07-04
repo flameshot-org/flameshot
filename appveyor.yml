@@ -43,7 +43,7 @@ artifacts:
 
 deploy:
 - provider: Webhook
-  #url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=test-signing
-  url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=release-signing
+  url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=test-signing
+  #url: https://app.signpath.io/API/v1/042f605f-b378-45d8-ad16-b7695b071036/Integrations/AppVeyor?ProjectSlug=flameshot&SigningPolicySlug=release-signing
   authorization:
     secure: G5nNnkfRSJ+EEx+7LlUSSoEyoL+pHYItvjrNxbWITE7RB+cm9qzuHRdwmrZdEDjdVCLZ2TkNawynMxYcGMZAQA==
