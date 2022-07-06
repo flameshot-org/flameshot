@@ -489,6 +489,33 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     Q_UNUSED(paintEvent)
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_context.screenshot);
+    if (ConfigHandler().value("showIntegratedWidthHeight").toBool()) {
+        const QRect& selection = extendedSelection();
+        QRect xybox;
+        QFontMetrics fm = painter.fontMetrics();
+        QString xy =
+          QString("%1 X %2").arg(selection.width()).arg(selection.height());
+
+        xybox = fm.boundingRect(xy);
+        // the small numbers here are just margins so the text doesn't smack
+        // right up to the box; they aren't critical and the box size itself
+        // is tied to the font metrics
+        xybox.setWidth(xybox.width() + 10);
+        xybox.setHeight(xybox.height() + 12);
+        if (xybox.width() > selection.width())
+            xybox.setWidth(selection.width());
+        painter.fillRect(selection.left(),
+                         selection.bottom() - xybox.height(),
+                         xybox.width(),
+                         xybox.height(),
+                         QBrush(QColor(128, 128, 128, 128)));
+        painter.drawText(selection.left(),
+                         selection.bottom() - xybox.height(),
+                         xybox.width(),
+                         xybox.height(),
+                         Qt::AlignVCenter | Qt::AlignHCenter,
+                         xy);
+    }
 
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();

@@ -74,6 +74,7 @@ private:
     void initUploadHistoryMax();
     void initUploadClientSecret();
     void initSaveLastRegion();
+    void initShowIntegratedWidthHeight();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -112,4 +113,5 @@ private:
     QCheckBox* m_showMagnifier;
     QCheckBox* m_squareMagnifier;
     QCheckBox* m_copyOnDoubleClick;
+    QCheckBox* m_showIntegratedWidthHeight;
 };

@@ -61,6 +61,7 @@ GeneralConf::GeneralConf(QWidget* parent)
 
     initShowMagnifier();
     initSquareMagnifier();
+    initShowIntegratedWidthHeight();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -104,6 +105,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
+    m_showIntegratedWidthHeight->setChecked(
+      config.value("showIntegratedWidthHeight").toBool());
 }
 
 void GeneralConf::updateComponents()
@@ -704,6 +707,18 @@ void GeneralConf::initSquareMagnifier()
     m_scrollAreaLayout->addWidget(m_squareMagnifier);
     connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setSquareMagnifier(checked);
+    });
+}
+
+void GeneralConf::initShowIntegratedWidthHeight()
+{
+    m_showIntegratedWidthHeight =
+      new QCheckBox(tr("Show integrated width and height"), this);
+    m_showIntegratedWidthHeight->setToolTip(
+      tr("Show Width X Height in corner of capture"));
+    m_scrollAreaLayout->addWidget(m_showIntegratedWidthHeight);
+    connect(m_showIntegratedWidthHeight, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setShowIntegratedWidthHeight(checked);
     });
 }
 
