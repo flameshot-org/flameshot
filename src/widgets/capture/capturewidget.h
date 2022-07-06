@@ -20,6 +20,7 @@
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include <QPointer>
+#include <QTimer>
 #include <QUndoStack>
 #include <QWidget>
 
@@ -210,4 +211,8 @@ private:
     // For start moving after more than X offset
     QPoint m_startMovePos;
     bool m_startMove;
+
+    // undo mechanism for keyboard moving
+    QTimer* m_keyboardMoveUndo;
+    bool m_keyboardMovingHappening;
 };
