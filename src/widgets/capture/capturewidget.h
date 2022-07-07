@@ -20,6 +20,7 @@
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include <QPointer>
+#include <QTimer>
 #include <QUndoStack>
 #include <QWidget>
 
@@ -80,9 +81,11 @@ private slots:
     void onMoveCaptureToolUp(int captureToolIndex);
     void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
+    void xywhTick();
 
 public:
     void removeToolObject(int index = -1);
+    void showxywh(bool show = true);
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
@@ -192,6 +195,10 @@ private:
 
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;
+
+    // XYWH display
+    bool m_xywhDisplay;
+    QTimer m_xywhTimer;
 
     QUndoStack m_undoStack;
 

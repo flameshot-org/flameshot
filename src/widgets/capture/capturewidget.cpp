@@ -72,9 +72,9 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_existingObjectIsChanged(false)
   , m_startMove(false)
   , m_toolSizeByKeyboard(0)
+  , m_xywhDisplay(false)
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
-
     m_context.circleCount = 1;
 
     // Base config of the widget
@@ -87,6 +87,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
             &HoverEventFilter::hoverOut,
             this,
             &CaptureWidget::childLeave);
+
+    connect(&m_xywhTimer, SIGNAL(timeout()), this, SLOT(xywhTick()));
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_QuitOnClose, false);
     m_opacity = m_config.contrastOpacity();
@@ -375,6 +377,22 @@ void CaptureWidget::handleButtonLeftClick(CaptureToolButton* b)
     setState(b);
 }
 
+void CaptureWidget::xywhTick()
+{
+    m_xywhDisplay = false;
+    repaint();
+}
+
+void CaptureWidget::showxywh(bool show)
+{
+    m_xywhDisplay = show;
+    m_xywhTimer.stop();
+    repaint();
+    if (show) {
+        m_xywhTimer.start(3000);
+    }
+}
+
 void CaptureWidget::initHelpMessage()
 {
     QList<QPair<QString, QString>> keyMap;
@@ -490,7 +508,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_context.screenshot);
     if (ConfigHandler().value("showIntegratedWidthHeight").toBool() &&
-        m_selection) {
+        m_selection && m_xywhDisplay) {
         const QRect& selection = m_selection->geometry().normalized();
         const qreal scale = m_context.screenshot.devicePixelRatio();
         QRect xybox;
@@ -559,7 +577,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          y0,
                          xybox.width(),
                          xybox.height(),
-                         //  Qt::AlignVCenter | Qt::AlignHCenter,
                          Qt::AlignVCenter | Qt::AlignHCenter,
                          xy);
         painter.restore();
@@ -689,7 +706,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
         updateCursor();
         return;
     }
-
     // reset object selection if capture area selection is active
     if (m_selection->getMouseSide(e->pos()) != SelectionWidget::CENTER) {
         m_panel->setActiveLayer(-1);
@@ -721,7 +737,6 @@ void CaptureWidget::mousePressEvent(QMouseEvent* e)
     }
 
     selectToolItemAtPos(m_mousePressedPos);
-
     updateSelectionState();
     updateCursor();
 }
@@ -1506,6 +1521,7 @@ void CaptureWidget::deleteCurrentTool()
 
 void CaptureWidget::updateSizeIndicator()
 {
+    showxywh(); // Note: even if sizeIndButton goes away, we have to keep this!
     if (m_sizeIndButton) {
         const QRect& selection = extendedSelection();
         m_sizeIndButton->setText(QStringLiteral("%1\n%2")
