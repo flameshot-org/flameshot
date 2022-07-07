@@ -6,22 +6,22 @@
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="67"/>
         <source>Add New</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeza Mpya</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="118"/>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Songa juu</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="119"/>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Songa chini</translation>
     </message>
     <message>
         <location filename="../../external/Qt-Color-Widgets/src/QtColorWidgets/abstract_widget_list.cpp" line="120"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Ondoa</translation>
     </message>
 </context>
 <context>
@@ -29,12 +29,12 @@
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="31"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubali</translation>
     </message>
     <message>
         <location filename="../../src/tools/accept/accepttool.cpp" line="41"/>
         <source>Accept the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Kubali picha ya skrini</translation>
     </message>
 </context>
 <context>
@@ -42,12 +42,12 @@
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="23"/>
         <source>App Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzinduzi wa Programmu</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applaunchertool.cpp" line="33"/>
         <source>Choose an app to open the capture</source>
-        <translation type="unfinished"></translation>
+        <translation>Chagua programu ya kufungua picha ya skrini</translation>
     </message>
 </context>
 <context>
@@ -55,23 +55,23 @@
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="43"/>
         <source>Open With</source>
-        <translation type="unfinished"></translation>
+        <translation>Fungua na</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="58"/>
         <source>Launch in terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Zindua kwa terminal</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="59"/>
         <source>Keep open after selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wacha wazi baada ya uteuzi</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="95"/>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitilafu</translation>
     </message>
     <message>
         <location filename="../../src/tools/launcher/applauncherwidget.cpp" line="110"/>
@@ -89,7 +89,7 @@
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="76"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Mshale</translation>
     </message>
     <message>
         <location filename="../../src/tools/arrow/arrowtool.cpp" line="86"/>
@@ -117,7 +117,7 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="32"/>
         <source>Rectangular Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehemu Mstatili</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="38"/>
@@ -132,12 +132,12 @@
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="44"/>
         <source>No Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Hakuna Kuchelewa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> second</source>
-        <translation type="unfinished"></translation>
+        <translation> sekunde</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="100"/>
@@ -146,7 +146,7 @@
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="185"/>
         <location filename="../../src/widgets/capturelauncher.cpp" line="52"/>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> sekunde</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="165"/>
@@ -154,7 +154,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="186"/>
         <source>Take new screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Chukua picha mpya ya skrini</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="66"/>
@@ -162,7 +162,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <source>Area:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehemu:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="14"/>
@@ -178,7 +178,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="177"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="179"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>NakalaLebo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="51"/>
@@ -186,7 +186,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="178"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="180"/>
         <source>Capture Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Hali ya Kunasa</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="80"/>
@@ -194,7 +194,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="181"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <source>Delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Chelewesha:</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capturelauncher.ui" line="93"/>
@@ -202,7 +202,7 @@
         <location filename="../../cmake-build-debug/src/flameshot_autogen/include/ui_capturelauncher.h" line="183"/>
         <location filename="../../cmake-build-relwithdebinfo/src/flameshot_autogen/include/ui_capturelauncher.h" line="184"/>
         <source>WxH+x+y</source>
-        <translation type="unfinished"></translation>
+        <translation>WxH+x+y</translation>
     </message>
 </context>
 <context>
@@ -211,52 +211,52 @@
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="106"/>
         <source>Unable to capture screen</source>
         <translatorcomment>Impossible capturar la pantalla</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>Kunasa skrini haiwezekani</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Kipanya</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="382"/>
         <source>Select screenshot area</source>
-        <translation type="unfinished"></translation>
+        <translation>Chagua sehemu ya picha ya skrini</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Mouse Wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Gurudumu la kipanya</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="397"/>
         <source>Change tool size</source>
-        <translation type="unfinished"></translation>
+        <translation>Badili ukubwa wa chombo</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Bonyeza Kulia</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="398"/>
         <source>Show color picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Onyesha kichagua rangi</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="400"/>
         <source>Open side panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Fungua paneli ya upande</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="401"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Toka</translation>
     </message>
     <message>
         <location filename="../../src/widgets/capture/capturewidget.cpp" line="509"/>
