@@ -521,7 +521,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         xywh_position position = center;
         if (xybox.width() > selection.width())
             xybox.setWidth(selection.width());
-        if (xybox.height()>selection.height())
+        if (xybox.height() > selection.height())
             xybox.setHeight(selection.height());
         switch (position) {
             case top_left:
@@ -533,7 +533,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                 y0 = selection.bottom() - xybox.height();
                 break;
             case top_right:
-                x0 = selection.right()- xybox.width();
+                x0 = selection.right() - xybox.width();
                 y0 = selection.top();
                 break;
             case bottom_right:
@@ -543,19 +543,17 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
             case center:
             default:
                 x0 = selection.left() + (selection.width() - xybox.width()) / 2;
-                y0 = selection.top() + (selection.height() - xybox.height()) / 2;
+                y0 =
+                  selection.top() + (selection.height() - xybox.height()) / 2;
         }
-        
+
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(128);
 
         painter.save();
 
-        painter.fillRect(x0,
-                         y0,
-                         xybox.width(),
-                         xybox.height(),
-                         QBrush(uicolor));
+        painter.fillRect(
+          x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
         painter.setPen(ConfigHandler().contrastUiColor());
         painter.drawText(x0,
                          y0,
