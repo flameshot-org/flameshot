@@ -518,7 +518,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
             bottom_right,
             center
         };
-        xywh_position position = center;
+        xywh_position position = bottom_right;
         if (xybox.width() > selection.width())
             xybox.setWidth(selection.width());
         if (xybox.height() > selection.height())
@@ -562,8 +562,9 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          //  Qt::AlignVCenter | Qt::AlignHCenter,
                          Qt::AlignVCenter | Qt::AlignHCenter,
                          xy);
+        painter.restore();
     }
-    painter.restore();
+
 
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();
