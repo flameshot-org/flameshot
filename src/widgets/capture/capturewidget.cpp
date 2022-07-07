@@ -565,7 +565,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         painter.restore();
     }
 
-
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();
         m_activeTool->process(painter, m_context.screenshot);
