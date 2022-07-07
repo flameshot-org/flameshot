@@ -493,8 +493,11 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         const QRect& selection = extendedSelection();
         QRect xybox;
         QFontMetrics fm = painter.fontMetrics();
-        QString xy =
-          QString("%1x%2+%3+%4").arg(selection.left()).arg(selection.top()).arg(selection.width()).arg(selection.height());
+        QString xy = QString("%1x%2+%3+%4")
+                       .arg(selection.left())
+                       .arg(selection.top())
+                       .arg(selection.width())
+                       .arg(selection.height());
 
         xybox = fm.boundingRect(xy);
         // the small numbers here are just margins so the text doesn't smack
