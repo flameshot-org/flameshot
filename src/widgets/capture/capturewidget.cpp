@@ -489,36 +489,83 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     Q_UNUSED(paintEvent)
     QPainter painter(this);
     painter.drawPixmap(0, 0, m_context.screenshot);
-    if (ConfigHandler().value("showIntegratedWidthHeight").toBool()) {
-        const QRect& selection = extendedSelection();
+    if (ConfigHandler().value("showIntegratedWidthHeight").toBool() &&
+        m_selection) {
+        const QRect& selection = m_selection->geometry().normalized();
+        const qreal scale = m_context.screenshot.devicePixelRatio();
         QRect xybox;
         QFontMetrics fm = painter.fontMetrics();
+
         QString xy = QString("%1x%2+%3+%4")
-                       .arg(selection.left())
-                       .arg(selection.top())
-                       .arg(selection.width())
-                       .arg(selection.height());
+                       .arg(static_cast<int>(selection.left() * scale))
+                       .arg(static_cast<int>(selection.top() * scale))
+                       .arg(static_cast<int>(selection.width() * scale))
+                       .arg(static_cast<int>(selection.height() * scale));
 
         xybox = fm.boundingRect(xy);
         // the small numbers here are just margins so the text doesn't smack
         // right up to the box; they aren't critical and the box size itself
         // is tied to the font metrics
-        xybox.setWidth(xybox.width() + 10);
-        xybox.setHeight(xybox.height() + 12);
+        xybox.adjust(0, 0, 10, 12);
+        // in anticipation of making the position adjustable
+        int x0, y0;
+        // Move these to header
+        enum xywh_position
+        {
+            top_left,
+            bottom_left,
+            top_right,
+            bottom_right,
+            center
+        };
+        xywh_position position = center;
         if (xybox.width() > selection.width())
             xybox.setWidth(selection.width());
-        painter.fillRect(selection.left(),
-                         selection.bottom() - xybox.height(),
+        if (xybox.height()>selection.height())
+            xybox.setHeight(selection.height());
+        switch (position) {
+            case top_left:
+                x0 = selection.left();
+                y0 = selection.top();
+                break;
+            case bottom_left:
+                x0 = selection.left();
+                y0 = selection.bottom() - xybox.height();
+                break;
+            case top_right:
+                x0 = selection.right()- xybox.width();
+                y0 = selection.top();
+                break;
+            case bottom_right:
+                x0 = selection.right() - xybox.width();
+                y0 = selection.bottom() - xybox.height();
+                break;
+            case center:
+            default:
+                x0 = selection.left() + (selection.width() - xybox.width()) / 2;
+                y0 = selection.top() + (selection.height() - xybox.height()) / 2;
+        }
+        
+        QColor uicolor = ConfigHandler().uiColor();
+        uicolor.setAlpha(128);
+
+        painter.save();
+
+        painter.fillRect(x0,
+                         y0,
                          xybox.width(),
                          xybox.height(),
-                         QBrush(QColor(128, 128, 128, 128)));
-        painter.drawText(selection.left(),
-                         selection.bottom() - xybox.height(),
+                         QBrush(uicolor));
+        painter.setPen(ConfigHandler().contrastUiColor());
+        painter.drawText(x0,
+                         y0,
                          xybox.width(),
                          xybox.height(),
+                         //  Qt::AlignVCenter | Qt::AlignHCenter,
                          Qt::AlignVCenter | Qt::AlignHCenter,
                          xy);
     }
+    painter.restore();
 
     if (m_activeTool && m_mouseIsClicked) {
         painter.save();
