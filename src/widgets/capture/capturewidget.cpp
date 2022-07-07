@@ -537,10 +537,13 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
             center
         };
         xywh_position position = bottom_right;
+// adjust for small selection
+#if 0 // seems more usable not to do this
         if (xybox.width() > selection.width())
             xybox.setWidth(selection.width());
         if (xybox.height() > selection.height())
             xybox.setHeight(selection.height());
+#endif
         switch (position) {
             case top_left:
                 x0 = selection.left();
@@ -566,7 +569,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         }
 
         QColor uicolor = ConfigHandler().uiColor();
-        uicolor.setAlpha(128);
+        uicolor.setAlpha(224);
 
         painter.save();
 
