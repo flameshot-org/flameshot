@@ -56,12 +56,12 @@ GeneralConf::GeneralConf(QWidget* parent)
 #endif
     initPredefinedColorPaletteLarge();
     initCopyOnDoubleClick();
+    initshowSelectionGeometry();
 
     m_layout->addStretch();
 
     initShowMagnifier();
     initSquareMagnifier();
-    initShowIntegratedWidthHeight();
     // this has to be at the end
     initConfigButtons();
     updateComponents();
@@ -105,8 +105,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
-    m_showIntegratedWidthHeight->setChecked(
-      config.value("showIntegratedWidthHeight").toBool());
+    // m_showSelectionGeometry->setChecked(
+    //   config.value("showSelectionGeometry").toBool());
 }
 
 void GeneralConf::updateComponents()
@@ -710,16 +710,46 @@ void GeneralConf::initSquareMagnifier()
     });
 }
 
-void GeneralConf::initShowIntegratedWidthHeight()
+void GeneralConf::initshowSelectionGeometry()
 {
-    m_showIntegratedWidthHeight =
-      new QCheckBox(tr("Show integrated width and height"), this);
-    m_showIntegratedWidthHeight->setToolTip(
-      tr("Show Width X Height in corner of capture"));
-    m_scrollAreaLayout->addWidget(m_showIntegratedWidthHeight);
-    connect(m_showIntegratedWidthHeight, &QCheckBox::clicked, [](bool checked) {
-        ConfigHandler().setShowIntegratedWidthHeight(checked);
-    });
+    auto* box = new QGroupBox(tr("Selection Geometry Display"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+    auto* selgeoLayout = new QHBoxLayout();
+    selgeoLayout->addWidget(new QLabel(tr("Display Location")));
+    m_selectGeometryLocation = new QComboBox(this);
+
+    m_selectGeometryLocation->addItem("None", GeneralConf::xywh_none);
+    m_selectGeometryLocation->addItem("Top Left", GeneralConf::xywh_top_left);
+    m_selectGeometryLocation->addItem("Top Right", GeneralConf::xywh_top_right);
+    m_selectGeometryLocation->addItem("Bottom Left",
+                                      GeneralConf::xywh_bottom_left);
+    m_selectGeometryLocation->addItem("Bottom Right",
+                                      GeneralConf::xywh_bottom_right);
+    m_selectGeometryLocation->addItem("Center", GeneralConf::xywh_center);
+
+    // pick up int from config and use findData
+    int pos = ConfigHandler().value("showSelectionGeometry").toInt();
+    m_selectGeometryLocation->setCurrentIndex(
+      m_selectGeometryLocation->findData(pos));
+
+    connect(m_selectGeometryLocation,
+            SIGNAL(currentIndexChanged(int)),
+            this,
+            SLOT(setGeometryLocation(int)));
+
+    selgeoLayout->addWidget(m_selectGeometryLocation);
+    vboxLayout->addLayout(selgeoLayout);
+    vboxLayout->addStretch();
+}
+
+void GeneralConf::setGeometryLocation(int index)
+{
+    ConfigHandler().setValue("showSelectionGeometry",
+                             m_selectGeometryLocation->itemData(index));
 }
 
 void GeneralConf::togglePathFixed()

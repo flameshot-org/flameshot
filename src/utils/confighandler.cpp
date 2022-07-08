@@ -121,7 +121,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     // drawFontSize, remember to update ConfigHandler::toolSize
     OPTION("copyOnDoubleClick"           ,Bool               ( false         )),
     OPTION("uploadClientSecret"          ,String             ( "313baf0c7b4d3ff"            )),
-    OPTION("showIntegratedWidthHeight"  , Bool               (true)),
+    OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {

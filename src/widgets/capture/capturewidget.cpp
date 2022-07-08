@@ -13,6 +13,7 @@
 #include "abstractlogger.h"
 #include "copytool.h"
 #include "src/config/cacheutils.h"
+#include "src/config/generalconf.h"
 #include "src/core/flameshot.h"
 #include "src/core/qguiappcurrentscreen.h"
 #include "src/tools/toolfactory.h"
@@ -73,6 +74,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
   , m_startMove(false)
   , m_toolSizeByKeyboard(0)
   , m_xywhDisplay(false)
+
 {
     m_undoStack.setUndoLimit(ConfigHandler().undoLimit());
     m_context.circleCount = 1;
@@ -506,9 +508,12 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
     QPainter painter(this);
+    GeneralConf::xywh_position position =
+      static_cast<GeneralConf::xywh_position>(
+        ConfigHandler().value("showSelectionGeometry").toInt());
+
     painter.drawPixmap(0, 0, m_context.screenshot);
-    if (ConfigHandler().value("showIntegratedWidthHeight").toBool() &&
-        m_selection && m_xywhDisplay) {
+    if (position != GeneralConf::xywh_none && m_selection && m_xywhDisplay) {
         const QRect& selection = m_selection->geometry().normalized();
         const qreal scale = m_context.screenshot.devicePixelRatio();
         QRect xybox;
@@ -528,15 +533,7 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         // in anticipation of making the position adjustable
         int x0, y0;
         // Move these to header
-        enum xywh_position
-        {
-            top_left,
-            bottom_left,
-            top_right,
-            bottom_right,
-            center
-        };
-        xywh_position position = bottom_right;
+
 // adjust for small selection
 #if 0 // seems more usable not to do this
         if (xybox.width() > selection.width())
@@ -545,23 +542,23 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
             xybox.setHeight(selection.height());
 #endif
         switch (position) {
-            case top_left:
+            case GeneralConf::xywh_top_left:
                 x0 = selection.left();
                 y0 = selection.top();
                 break;
-            case bottom_left:
+            case GeneralConf::xywh_bottom_left:
                 x0 = selection.left();
                 y0 = selection.bottom() - xybox.height();
                 break;
-            case top_right:
+            case GeneralConf::xywh_top_right:
                 x0 = selection.right() - xybox.width();
                 y0 = selection.top();
                 break;
-            case bottom_right:
+            case GeneralConf::xywh_bottom_right:
                 x0 = selection.right() - xybox.width();
                 y0 = selection.bottom() - xybox.height();
                 break;
-            case center:
+            case GeneralConf::xywh_center:
             default:
                 x0 = selection.left() + (selection.width() - xybox.width()) / 2;
                 y0 =
@@ -569,13 +566,14 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
         }
 
         QColor uicolor = ConfigHandler().uiColor();
-        uicolor.setAlpha(224);
+        uicolor.setAlpha(200);
 
         painter.save();
 
         painter.fillRect(
           x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
-        painter.setPen(ConfigHandler().contrastUiColor());
+        painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
+                                                        : Qt::black);
         painter.drawText(x0,
                          y0,
                          xybox.width(),

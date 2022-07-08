@@ -14,6 +14,7 @@
 #include "buttonhandler.h"
 #include "capturetoolbutton.h"
 #include "capturetoolobjects.h"
+#include "src/config/generalconf.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
@@ -196,7 +197,7 @@ private:
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;
 
-    // XYWH display
+    // XYWH display position and timer
     bool m_xywhDisplay;
     QTimer m_xywhTimer;
 
