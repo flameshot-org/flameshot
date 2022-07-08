@@ -722,8 +722,7 @@ void GeneralConf::initshowSelectionGeometry()
       tr("Milliseconds before geometry display hides; 0 means do not hide"));
     m_xywhTimeout->setValue(timeout);
     tobox->addWidget(m_xywhTimeout);
-    tobox->addWidget(
-      new QLabel(tr("Set geometry display timeout (ms)")));
+    tobox->addWidget(new QLabel(tr("Set geometry display timeout (ms)")));
 
     m_scrollAreaLayout->addLayout(tobox);
     connect(m_xywhTimeout,
