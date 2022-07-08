@@ -717,7 +717,7 @@ void GeneralConf::initshowSelectionGeometry()
     int timeout =
       ConfigHandler().value("showSelectionGeometryHideTime").toInt();
     m_xywhTimeout = new QSpinBox();
-    m_xywhTimeout->setRange(0, 1000000000);
+    m_xywhTimeout->setRange(0, INT_MAX);
     m_xywhTimeout->setToolTip(
       tr("Milliseconds before geometry display hides; 0 means do not hide"));
     m_xywhTimeout->setValue(timeout);
@@ -741,8 +741,10 @@ void GeneralConf::initshowSelectionGeometry()
     m_selectGeometryLocation = new QComboBox(this);
 
     m_selectGeometryLocation->addItem(tr("None"), GeneralConf::xywh_none);
-    m_selectGeometryLocation->addItem(tr("Top Left"), GeneralConf::xywh_top_left);
-    m_selectGeometryLocation->addItem(tr("Top Right"), GeneralConf::xywh_top_right);
+    m_selectGeometryLocation->addItem(tr("Top Left"),
+                                      GeneralConf::xywh_top_left);
+    m_selectGeometryLocation->addItem(tr("Top Right"),
+                                      GeneralConf::xywh_top_right);
     m_selectGeometryLocation->addItem(tr("Bottom Left"),
                                       GeneralConf::xywh_bottom_left);
     m_selectGeometryLocation->addItem(tr("Bottom Right"),
