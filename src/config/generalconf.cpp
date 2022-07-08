@@ -740,14 +740,14 @@ void GeneralConf::initshowSelectionGeometry()
     selgeoLayout->addWidget(new QLabel(tr("Display Location")));
     m_selectGeometryLocation = new QComboBox(this);
 
-    m_selectGeometryLocation->addItem("None", GeneralConf::xywh_none);
-    m_selectGeometryLocation->addItem("Top Left", GeneralConf::xywh_top_left);
-    m_selectGeometryLocation->addItem("Top Right", GeneralConf::xywh_top_right);
-    m_selectGeometryLocation->addItem("Bottom Left",
+    m_selectGeometryLocation->addItem(tr("None"), GeneralConf::xywh_none);
+    m_selectGeometryLocation->addItem(tr("Top Left"), GeneralConf::xywh_top_left);
+    m_selectGeometryLocation->addItem(tr("Top Right"), GeneralConf::xywh_top_right);
+    m_selectGeometryLocation->addItem(tr("Bottom Left"),
                                       GeneralConf::xywh_bottom_left);
-    m_selectGeometryLocation->addItem("Bottom Right",
+    m_selectGeometryLocation->addItem(tr("Bottom Right"),
                                       GeneralConf::xywh_bottom_right);
-    m_selectGeometryLocation->addItem("Center", GeneralConf::xywh_center);
+    m_selectGeometryLocation->addItem(tr("Center"), GeneralConf::xywh_center);
 
     // pick up int from config and use findData
     int pos = ConfigHandler().value("showSelectionGeometry").toInt();
