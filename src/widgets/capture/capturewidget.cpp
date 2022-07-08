@@ -508,10 +508,27 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
     QPainter painter(this);
+#define TEST_SINGLE_PAINT_SAVE 1
+#if TEST_SINGLE_PAINT_SAVE == 1
     GeneralConf::xywh_position position =
       static_cast<GeneralConf::xywh_position>(
         ConfigHandler().value("showSelectionGeometry").toInt());
 
+    bool save = false;
+    if (((position != GeneralConf::xywh_none && m_selection &&
+          m_xywhDisplay)) ||
+        (m_activeTool && m_mouseIsClicked) ||
+        (m_previewEnabled && activeButtonTool() &&
+         m_activeButton->tool()->showMousePreview())) {
+        painter.save();
+        save = true;
+    }
+#endif
+#if TEST_SINGLE_PAINT_SAVE == 0
+    GeneralConf::xywh_position position =
+      static_cast<GeneralConf::xywh_position>(
+        ConfigHandler().value("showSelectionGeometry").toInt());
+#endif
     painter.drawPixmap(0, 0, m_context.screenshot);
     if (position != GeneralConf::xywh_none && m_selection && m_xywhDisplay) {
         const QRect& selection = m_selection->geometry().normalized();
@@ -526,9 +543,9 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                        .arg(static_cast<int>(selection.height() * scale));
 
         xybox = fm.boundingRect(xy);
-        // the small numbers here are just margins so the text doesn't smack
-        // right up to the box; they aren't critical and the box size itself
-        // is tied to the font metrics
+        // the small numbers here are just margins so the text doesn't
+        // smack right up to the box; they aren't critical and the box
+        // size itself is tied to the font metrics
         xybox.adjust(0, 0, 10, 12);
         // in anticipation of making the position adjustable
         int x0, y0;
@@ -567,9 +584,9 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(200);
-
+#if TEST_SINGLE_PAINT_SAVE == 0
         painter.save();
-
+#endif
         painter.fillRect(
           x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
         painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
@@ -580,20 +597,33 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          xybox.height(),
                          Qt::AlignVCenter | Qt::AlignHCenter,
                          xy);
+#if TEST_SINGLE_PAINT_SAVE == 0
         painter.restore();
+#endif
     }
 
     if (m_activeTool && m_mouseIsClicked) {
+#if TEST_SINGLE_PAINT_SAVE == 0
         painter.save();
+#endif
         m_activeTool->process(painter, m_context.screenshot);
+#if TEST_SINGLE_PAINT_SAVE == 0
         painter.restore();
+#endif
     } else if (m_previewEnabled && activeButtonTool() &&
                m_activeButton->tool()->showMousePreview()) {
+#if TEST_SINGLE_PAINT_SAVE == 0
         painter.save();
+#endif
         m_activeButton->tool()->paintMousePreview(painter, m_context);
+#if TEST_SINGLE_PAINT_SAVE == 0
         painter.restore();
+#endif
     }
-
+#if TEST_SINGLE_PAINT_SAVE == 1
+    if (save)
+        painter.restore();
+#endif
     // draw inactive region
     drawInactiveRegion(&painter);
 
