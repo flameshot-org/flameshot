@@ -54,6 +54,7 @@ private slots:
     void useJpgForClipboardChanged(bool checked);
     void setSaveAsFileExtension(QString extension);
     void setGeometryLocation(int index);
+    void setSelGeoHideTime(int v);
 
 private:
     const QString chooseFolder(const QString currentPath = "");
@@ -125,4 +126,5 @@ private:
     QCheckBox* m_copyOnDoubleClick;
     QCheckBox* m_showSelectionGeometry;
     QComboBox* m_selectGeometryLocation;
+    QSpinBox* m_xywhTimeout;
 };

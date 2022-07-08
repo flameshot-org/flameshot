@@ -387,11 +387,13 @@ void CaptureWidget::xywhTick()
 
 void CaptureWidget::showxywh(bool show)
 {
+    int timeout =
+      ConfigHandler().value("showSelectionGeometryHideTime").toInt();
     m_xywhDisplay = show;
     m_xywhTimer.stop();
     repaint();
-    if (show) {
-        m_xywhTimer.start(3000);
+    if (show && timeout != 0) {
+        m_xywhTimer.start(timeout);
     }
 }
 
@@ -508,27 +510,26 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 {
     Q_UNUSED(paintEvent)
     QPainter painter(this);
-#define TEST_SINGLE_PAINT_SAVE 1
-#if TEST_SINGLE_PAINT_SAVE == 1
     GeneralConf::xywh_position position =
       static_cast<GeneralConf::xywh_position>(
         ConfigHandler().value("showSelectionGeometry").toInt());
-
+    /* QPainter::save and restore is somewhat costly so we try to guess
+       if we need to do it here. What that means is that if you add
+       anything to the paintEvent and want to save/restore you should
+       add a test to the below if statement -- also if you change
+       any of the conditions that current trigger it you'll need to change here,
+       too
+    */
     bool save = false;
-    if (((position != GeneralConf::xywh_none && m_selection &&
+    if (((position != GeneralConf::xywh_none &&
+          m_selection && // clause 1: xywh display
           m_xywhDisplay)) ||
-        (m_activeTool && m_mouseIsClicked) ||
-        (m_previewEnabled && activeButtonTool() &&
+        (m_activeTool && m_mouseIsClicked) ||      // clause 2: tool/click
+        (m_previewEnabled && activeButtonTool() && // clause 3: mouse preview
          m_activeButton->tool()->showMousePreview())) {
         painter.save();
         save = true;
     }
-#endif
-#if TEST_SINGLE_PAINT_SAVE == 0
-    GeneralConf::xywh_position position =
-      static_cast<GeneralConf::xywh_position>(
-        ConfigHandler().value("showSelectionGeometry").toInt());
-#endif
     painter.drawPixmap(0, 0, m_context.screenshot);
     if (position != GeneralConf::xywh_none && m_selection && m_xywhDisplay) {
         const QRect& selection = m_selection->geometry().normalized();
@@ -584,9 +585,6 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
 
         QColor uicolor = ConfigHandler().uiColor();
         uicolor.setAlpha(200);
-#if TEST_SINGLE_PAINT_SAVE == 0
-        painter.save();
-#endif
         painter.fillRect(
           x0, y0, xybox.width(), xybox.height(), QBrush(uicolor));
         painter.setPen(ColorUtils::colorIsDark(uicolor) ? Qt::white
@@ -597,33 +595,16 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
                          xybox.height(),
                          Qt::AlignVCenter | Qt::AlignHCenter,
                          xy);
-#if TEST_SINGLE_PAINT_SAVE == 0
-        painter.restore();
-#endif
     }
 
     if (m_activeTool && m_mouseIsClicked) {
-#if TEST_SINGLE_PAINT_SAVE == 0
-        painter.save();
-#endif
         m_activeTool->process(painter, m_context.screenshot);
-#if TEST_SINGLE_PAINT_SAVE == 0
-        painter.restore();
-#endif
     } else if (m_previewEnabled && activeButtonTool() &&
                m_activeButton->tool()->showMousePreview()) {
-#if TEST_SINGLE_PAINT_SAVE == 0
-        painter.save();
-#endif
         m_activeButton->tool()->paintMousePreview(painter, m_context);
-#if TEST_SINGLE_PAINT_SAVE == 0
-        painter.restore();
-#endif
     }
-#if TEST_SINGLE_PAINT_SAVE == 1
     if (save)
         painter.restore();
-#endif
     // draw inactive region
     drawInactiveRegion(&painter);
 
