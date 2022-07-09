@@ -366,9 +366,9 @@ void GeneralConf::initAllowMultipleGuiInstances()
 void GeneralConf::initAutoCloseIdleDaemon()
 {
     m_autoCloseIdleDaemon = new QCheckBox(
-      tr("Automatically close daemon when it is not needed"), this);
-    m_autoCloseIdleDaemon->setToolTip(
-      tr("Automatically close daemon when it is not needed"));
+      tr("Automatically unload from memory when it is not needed"), this);
+    m_autoCloseIdleDaemon->setToolTip(tr(
+      "Automatically close daemon (background process) when it is not needed"));
     m_scrollAreaLayout->addWidget(m_autoCloseIdleDaemon);
     connect(m_autoCloseIdleDaemon,
             &QCheckBox::clicked,
@@ -378,9 +378,9 @@ void GeneralConf::initAutoCloseIdleDaemon()
 
 void GeneralConf::initAutostart()
 {
-    m_autostart = new QCheckBox(tr("Launch at startup"), this);
-    m_autostart->setToolTip(
-      tr("Launch Flameshot daemon when computer is booted"));
+    m_autostart = new QCheckBox(tr("Launch in background at startup"), this);
+    m_autostart->setToolTip(tr(
+      "Launch Flameshot daemon (background process) when computer is booted"));
     m_scrollAreaLayout->addWidget(m_autostart);
 
     connect(
@@ -418,7 +418,8 @@ void GeneralConf::initPredefinedColorPaletteLarge()
 void GeneralConf::initCopyOnDoubleClick()
 {
     m_copyOnDoubleClick = new QCheckBox(tr("Copy on double click"), this);
-    m_copyOnDoubleClick->setToolTip(tr("Enable Copy on Double Click"));
+    m_copyOnDoubleClick->setToolTip(
+      tr("Enable Copy to clipboard on Double Click"));
     m_scrollAreaLayout->addWidget(m_copyOnDoubleClick);
 
     connect(m_copyOnDoubleClick, &QCheckBox::clicked, [](bool checked) {
@@ -596,7 +597,7 @@ void GeneralConf::initUseJpgForClipboard()
     m_useJpgForClipboard =
       new QCheckBox(tr("Use JPG format for clipboard (PNG default)"), this);
     m_useJpgForClipboard->setToolTip(
-      tr("Use JPG format for clipboard (PNG default)"));
+      tr("Use lossy JPG format for clipboard (lossless PNG default)"));
     m_scrollAreaLayout->addWidget(m_useJpgForClipboard);
 
 #if defined(Q_OS_MACOS)
