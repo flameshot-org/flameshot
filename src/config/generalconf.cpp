@@ -56,6 +56,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUndoLimit();
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
+    initshowSelectionGeometry();
 
     m_layout->addStretch();
 
@@ -104,6 +105,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
+    // m_showSelectionGeometry->setChecked(
+    //   config.value("showSelectionGeometry").toBool());
 }
 
 void GeneralConf::updateComponents()
@@ -706,6 +709,73 @@ void GeneralConf::initSquareMagnifier()
     connect(m_squareMagnifier, &QCheckBox::clicked, [](bool checked) {
         ConfigHandler().setSquareMagnifier(checked);
     });
+}
+
+void GeneralConf::initshowSelectionGeometry()
+{
+    auto* tobox = new QHBoxLayout();
+
+    int timeout =
+      ConfigHandler().value("showSelectionGeometryHideTime").toInt();
+    m_xywhTimeout = new QSpinBox();
+    m_xywhTimeout->setRange(0, INT_MAX);
+    m_xywhTimeout->setToolTip(
+      tr("Milliseconds before geometry display hides; 0 means do not hide"));
+    m_xywhTimeout->setValue(timeout);
+    tobox->addWidget(m_xywhTimeout);
+    tobox->addWidget(new QLabel(tr("Set geometry display timeout (ms)")));
+
+    m_scrollAreaLayout->addLayout(tobox);
+    connect(m_xywhTimeout,
+            SIGNAL(valueChanged(int)),
+            this,
+            SLOT(setSelGeoHideTime(int)));
+
+    auto* box = new QGroupBox(tr("Selection Geometry Display"));
+    box->setFlat(true);
+    m_layout->addWidget(box);
+
+    auto* vboxLayout = new QVBoxLayout();
+    box->setLayout(vboxLayout);
+    auto* selgeoLayout = new QHBoxLayout();
+    selgeoLayout->addWidget(new QLabel(tr("Display Location")));
+    m_selectGeometryLocation = new QComboBox(this);
+
+    m_selectGeometryLocation->addItem(tr("None"), GeneralConf::xywh_none);
+    m_selectGeometryLocation->addItem(tr("Top Left"),
+                                      GeneralConf::xywh_top_left);
+    m_selectGeometryLocation->addItem(tr("Top Right"),
+                                      GeneralConf::xywh_top_right);
+    m_selectGeometryLocation->addItem(tr("Bottom Left"),
+                                      GeneralConf::xywh_bottom_left);
+    m_selectGeometryLocation->addItem(tr("Bottom Right"),
+                                      GeneralConf::xywh_bottom_right);
+    m_selectGeometryLocation->addItem(tr("Center"), GeneralConf::xywh_center);
+
+    // pick up int from config and use findData
+    int pos = ConfigHandler().value("showSelectionGeometry").toInt();
+    m_selectGeometryLocation->setCurrentIndex(
+      m_selectGeometryLocation->findData(pos));
+
+    connect(m_selectGeometryLocation,
+            SIGNAL(currentIndexChanged(int)),
+            this,
+            SLOT(setGeometryLocation(int)));
+
+    selgeoLayout->addWidget(m_selectGeometryLocation);
+    vboxLayout->addLayout(selgeoLayout);
+    vboxLayout->addStretch();
+}
+
+void GeneralConf::setSelGeoHideTime(int v)
+{
+    ConfigHandler().setValue("showSelectionGeometryHideTime", v);
+}
+
+void GeneralConf::setGeometryLocation(int index)
+{
+    ConfigHandler().setValue("showSelectionGeometry",
+                             m_selectGeometryLocation->itemData(index));
 }
 
 void GeneralConf::togglePathFixed()
