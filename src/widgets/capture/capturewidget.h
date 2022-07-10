@@ -14,12 +14,14 @@
 #include "buttonhandler.h"
 #include "capturetoolbutton.h"
 #include "capturetoolobjects.h"
+#include "src/config/generalconf.h"
 #include "src/tools/capturecontext.h"
 #include "src/tools/capturetool.h"
 #include "src/utils/confighandler.h"
 #include "src/widgets/capture/magnifierwidget.h"
 #include "src/widgets/capture/selectionwidget.h"
 #include <QPointer>
+#include <QTimer>
 #include <QUndoStack>
 #include <QWidget>
 
@@ -80,9 +82,11 @@ private slots:
     void onMoveCaptureToolUp(int captureToolIndex);
     void onMoveCaptureToolDown(int captureToolIndex);
     void selectAll();
+    void xywhTick();
 
 public:
     void removeToolObject(int index = -1);
+    void showxywh(bool show = true);
 
 protected:
     void paintEvent(QPaintEvent* paintEvent) override;
@@ -192,6 +196,10 @@ private:
 
     QPoint m_mousePressedPos;
     QPoint m_activeToolOffsetToMouseOnStart;
+
+    // XYWH display position and timer
+    bool m_xywhDisplay;
+    QTimer m_xywhTimer;
 
     QUndoStack m_undoStack;
 
