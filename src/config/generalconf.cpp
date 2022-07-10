@@ -32,30 +32,30 @@ GeneralConf::GeneralConf(QWidget* parent)
     // It must be initialized before the checkboxes.
     initScrollArea();
 
-    initShowHelp();
-    initSaveLastRegion();
-    initShowSidePanelButton();
-    initShowDesktopNotification();
-    initShowTrayIcon();
-    initHistoryConfirmationToDelete();
-    initCheckForUpdates();
     initAutostart();
-    initShowStartupLaunchMessage();
-    initCopyAndCloseAfterUpload();
-    initCopyPathAfterSave();
-    initAntialiasingPinZoom();
-    initUploadWithoutConfirmation();
-    initUseJpgForClipboard();
-    initSaveAfterCopy();
-    initUploadHistoryMax();
-    initUndoLimit();
-    initUploadClientSecret();
-    initAllowMultipleGuiInstances();
 #if !defined(Q_OS_WIN)
     initAutoCloseIdleDaemon();
 #endif
-    initPredefinedColorPaletteLarge();
+    initShowTrayIcon();
+    initShowDesktopNotification();
+    initCheckForUpdates();
+    initShowStartupLaunchMessage();
+    initAllowMultipleGuiInstances();
+    initSaveLastRegion();
+    initShowHelp();
+    initShowSidePanelButton();
+    initUseJpgForClipboard();
     initCopyOnDoubleClick();
+    initSaveAfterCopy();
+    initCopyPathAfterSave();
+    initCopyAndCloseAfterUpload();
+    initUploadWithoutConfirmation();
+    initHistoryConfirmationToDelete();
+    initAntialiasingPinZoom();
+    initUploadHistoryMax();
+    initUndoLimit();
+    initUploadClientSecret();
+    initPredefinedColorPaletteLarge();
 
     m_layout->addStretch();
 
