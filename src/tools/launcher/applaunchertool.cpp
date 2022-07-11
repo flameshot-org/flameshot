@@ -6,8 +6,7 @@
 
 AppLauncher::AppLauncher(QObject* parent)
   : AbstractActionTool(parent)
-{
-}
+{}
 
 bool AppLauncher::closeOnButtonPressed() const
 {

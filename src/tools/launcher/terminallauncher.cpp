@@ -26,8 +26,7 @@ static const TerminalApp terminalApps[] = {
 
 TerminalLauncher::TerminalLauncher(QObject* parent)
   : QObject(parent)
-{
-}
+{}
 
 TerminalApp TerminalLauncher::getPreferedTerminal()
 {

@@ -8,8 +8,7 @@
 
 PinTool::PinTool(QObject* parent)
   : AbstractActionTool(parent)
-{
-}
+{}
 
 bool PinTool::closeOnButtonPressed() const
 {

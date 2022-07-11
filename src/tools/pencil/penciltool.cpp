@@ -6,8 +6,7 @@
 
 PencilTool::PencilTool(QObject* parent)
   : AbstractPathTool(parent)
-{
-}
+{}
 
 QIcon PencilTool::icon(const QColor& background, bool inEditor) const
 {

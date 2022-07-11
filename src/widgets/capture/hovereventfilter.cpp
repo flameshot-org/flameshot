@@ -14,8 +14,7 @@
 
 HoverEventFilter::HoverEventFilter(QObject* parent)
   : QObject(parent)
-{
-}
+{}
 
 bool HoverEventFilter::eventFilter(QObject* watched, QEvent* event)
 {

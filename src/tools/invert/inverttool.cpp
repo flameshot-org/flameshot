@@ -12,8 +12,7 @@
 
 InvertTool::InvertTool(QObject* parent)
   : AbstractTwoPointTool(parent)
-{
-}
+{}
 
 QIcon InvertTool::icon(const QColor& background, bool inEditor) const
 {

@@ -32,8 +32,7 @@ AbstractTwoPointTool::AbstractTwoPointTool(QObject* parent)
   : CaptureTool(parent)
   , m_thickness(1)
   , m_padding(0)
-{
-}
+{}
 
 void AbstractTwoPointTool::copyParams(const AbstractTwoPointTool* from,
                                       AbstractTwoPointTool* to)
