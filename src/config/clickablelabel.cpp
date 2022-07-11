@@ -5,7 +5,8 @@
 
 ClickableLabel::ClickableLabel(QWidget* parent)
   : QLabel(parent)
-{}
+{
+}
 
 ClickableLabel::ClickableLabel(QString s, QWidget* parent)
   : QLabel(parent)

@@ -11,7 +11,8 @@
 
 PixelateTool::PixelateTool(QObject* parent)
   : AbstractTwoPointTool(parent)
-{}
+{
+}
 
 QIcon PixelateTool::icon(const QColor& background, bool inEditor) const
 {

@@ -15,7 +15,8 @@ struct DesktopAppData
 {
     DesktopAppData()
       : showInTerminal()
-    {}
+    {
+    }
 
     DesktopAppData(const QString& name,
                    const QString& description,
@@ -26,7 +27,8 @@ struct DesktopAppData
       , exec(exec)
       , icon(icon)
       , showInTerminal(false)
-    {}
+    {
+    }
 
     bool operator==(const DesktopAppData& other) const
     {

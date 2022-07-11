@@ -16,7 +16,8 @@ OrgFreedesktopPortalRequestInterface::OrgFreedesktopPortalRequestInterface(
                            staticInterfaceName(),
                            connection,
                            parent)
-{}
+{
+}
 
 OrgFreedesktopPortalRequestInterface::~OrgFreedesktopPortalRequestInterface() =
   default;

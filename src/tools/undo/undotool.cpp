@@ -6,7 +6,8 @@
 
 UndoTool::UndoTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool UndoTool::closeOnButtonPressed() const
 {

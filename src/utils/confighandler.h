@@ -25,7 +25,10 @@ class AbstractLogger;
  * `KEY` is the name of the generated getter function.
  */
 #define CONFIG_GETTER(KEY, TYPE)                                               \
-    TYPE KEY() { return value(QStringLiteral(#KEY)).value<TYPE>(); }
+    TYPE KEY()                                                                 \
+    {                                                                          \
+        return value(QStringLiteral(#KEY)).value<TYPE>();                      \
+    }
 
 /**
  * Declare and implement a setter for a config option. `FUNC` is the name of the
@@ -120,7 +123,7 @@ public:
     CONFIG_GETTER_SETTER(copyOnDoubleClick, setCopyOnDoubleClick, bool)
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
-    CONFIG_GETTER_SETTER(showSelectionGeometry, setshowSelectionGeometry, int)
+    CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
     // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);

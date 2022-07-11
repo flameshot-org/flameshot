@@ -7,7 +7,8 @@
 
 CopyTool::CopyTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool CopyTool::closeOnButtonPressed() const
 {
