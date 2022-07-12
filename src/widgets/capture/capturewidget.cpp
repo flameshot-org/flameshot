@@ -1194,8 +1194,13 @@ void CaptureWidget::initSelection()
         }
     });
     if (!initialSelection.isNull()) {
+        const qreal scale = m_context.screenshot.devicePixelRatio();
         initialSelection.moveTopLeft(initialSelection.topLeft() -
                                      mapToGlobal({}));
+        initialSelection.setTop(initialSelection.top() / scale);
+        initialSelection.setBottom(initialSelection.bottom() / scale);
+        initialSelection.setLeft(initialSelection.left() / scale);
+        initialSelection.setRight(initialSelection.right() / scale);
     }
     m_selection->setGeometry(initialSelection);
     m_selection->setVisible(!initialSelection.isNull());
