@@ -85,7 +85,7 @@ private:
     void initUploadHistoryMax();
     void initUploadClientSecret();
     void initSaveLastRegion();
-    void initshowSelectionGeometry();
+    void initShowSelectionGeometry();
 
     void _updateComponents(bool allowEmptySavePath);
 
