@@ -79,7 +79,11 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showDesktopNotification"     ,Bool               ( true          )),
     OPTION("disabledTrayIcon"            ,Bool               ( false         )),
     OPTION("historyConfirmationToDelete" ,Bool               ( true          )),
+#ifdef DISABLE_UPDATE_CHECKER
+    OPTION("checkForUpdates"             ,Bool               ( false         )),
+#else
     OPTION("checkForUpdates"             ,Bool               ( true          )),
+#endif
     OPTION("allowMultipleGuiInstances"   ,Bool               ( false         )),
     OPTION("showMagnifier"               ,Bool               ( false         )),
     OPTION("squareMagnifier"             ,Bool               ( false         )),
