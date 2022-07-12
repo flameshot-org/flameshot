@@ -56,7 +56,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUndoLimit();
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
-    initshowSelectionGeometry();
+    initShowSelectionGeometry();
 
     m_layout->addStretch();
 
@@ -105,8 +105,6 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
 #if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray->setChecked(!config.disabledTrayIcon());
 #endif
-    // m_showSelectionGeometry->setChecked(
-    //   config.value("showSelectionGeometry").toBool());
 }
 
 void GeneralConf::updateComponents()
@@ -711,7 +709,7 @@ void GeneralConf::initSquareMagnifier()
     });
 }
 
-void GeneralConf::initshowSelectionGeometry()
+void GeneralConf::initShowSelectionGeometry()
 {
     auto* tobox = new QHBoxLayout();
 
@@ -737,8 +735,8 @@ void GeneralConf::initshowSelectionGeometry()
 
     auto* vboxLayout = new QVBoxLayout();
     box->setLayout(vboxLayout);
-    auto* selgeoLayout = new QHBoxLayout();
-    selgeoLayout->addWidget(new QLabel(tr("Display Location")));
+    auto* selGeoLayout = new QHBoxLayout();
+    selGeoLayout->addWidget(new QLabel(tr("Display Location")));
     m_selectGeometryLocation = new QComboBox(this);
 
     m_selectGeometryLocation->addItem(tr("None"), GeneralConf::xywh_none);
@@ -762,8 +760,8 @@ void GeneralConf::initshowSelectionGeometry()
             this,
             SLOT(setGeometryLocation(int)));
 
-    selgeoLayout->addWidget(m_selectGeometryLocation);
-    vboxLayout->addLayout(selgeoLayout);
+    selGeoLayout->addWidget(m_selectGeometryLocation);
+    vboxLayout->addLayout(selGeoLayout);
     vboxLayout->addStretch();
 }
 

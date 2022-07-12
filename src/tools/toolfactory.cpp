@@ -23,7 +23,6 @@
 #include "selection/selectiontool.h"
 #include "sizedecrease/sizedecreasetool.h"
 #include "sizeincrease/sizeincreasetool.h"
-#include "sizeindicator/sizeindicatortool.h"
 #include "text/texttool.h"
 #include "undo/undotool.h"
 
@@ -45,7 +44,6 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_RECTANGLE, RectangleTool);
         if_TYPE_return_TOOL(TYPE_CIRCLE, CircleTool);
         if_TYPE_return_TOOL(TYPE_MARKER, MarkerTool);
-        if_TYPE_return_TOOL(TYPE_SELECTIONINDICATOR, SizeIndicatorTool);
         if_TYPE_return_TOOL(TYPE_MOVESELECTION, MoveTool);
         if_TYPE_return_TOOL(TYPE_UNDO, UndoTool);
         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
