@@ -28,7 +28,8 @@
 
 ToolFactory::ToolFactory(QObject* parent)
   : QObject(parent)
-{}
+{
+}
 
 CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
 {

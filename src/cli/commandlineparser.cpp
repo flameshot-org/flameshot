@@ -9,7 +9,8 @@
 
 CommandLineParser::CommandLineParser()
   : m_description(qApp->applicationName())
-{}
+{
+}
 
 namespace {
 

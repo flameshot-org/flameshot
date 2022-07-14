@@ -21,8 +21,8 @@
 #include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QUrl>
 #include <QTimer>
+#include <QUrl>
 #endif
 
 #ifdef Q_OS_WIN

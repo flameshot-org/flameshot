@@ -23,7 +23,8 @@
 
 ScreenGrabber::ScreenGrabber(QObject* parent)
   : QObject(parent)
-{}
+{
+}
 
 void ScreenGrabber::freeDesktopPortal(bool& ok, QPixmap& res)
 {

@@ -10,17 +10,20 @@
 
 OrientablePushButton::OrientablePushButton(QWidget* parent)
   : CaptureButton(parent)
-{}
+{
+}
 
 OrientablePushButton::OrientablePushButton(const QString& text, QWidget* parent)
   : CaptureButton(text, parent)
-{}
+{
+}
 
 OrientablePushButton::OrientablePushButton(const QIcon& icon,
                                            const QString& text,
                                            QWidget* parent)
   : CaptureButton(icon, text, parent)
-{}
+{
+}
 
 QSize OrientablePushButton::sizeHint() const
 {

@@ -25,7 +25,10 @@ class AbstractLogger;
  * `KEY` is the name of the generated getter function.
  */
 #define CONFIG_GETTER(KEY, TYPE)                                               \
-    TYPE KEY() { return value(QStringLiteral(#KEY)).value<TYPE>(); }
+    TYPE KEY()                                                                 \
+    {                                                                          \
+        return value(QStringLiteral(#KEY)).value<TYPE>();                      \
+    }
 
 /**
  * Declare and implement a setter for a config option. `FUNC` is the name of the

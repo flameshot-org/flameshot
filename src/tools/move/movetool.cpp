@@ -6,7 +6,8 @@
 
 MoveTool::MoveTool(QObject* parent)
   : AbstractActionTool(parent)
-{}
+{
+}
 
 bool MoveTool::closeOnButtonPressed() const
 {
