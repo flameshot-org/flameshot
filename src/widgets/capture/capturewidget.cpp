@@ -921,7 +921,6 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 	    }
 		
 	    m_captureToolObjectsBackup = m_captureToolObjects;
-	    m_keyboardMovingHappening = true;
 	    m_keyboardMover->start(20);
 	}
     }
@@ -961,7 +960,6 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 	e->key() == Qt::Key_Up ||
 	e->key() == Qt::Key_Down) &&
 	!e->isAutoRepeat()) {
-	m_keyboardMovingHappening = false;
 	m_keyboardMover->stop();
 	m_moveFast = false;
 	pushObjectsStateToUndoStack();
