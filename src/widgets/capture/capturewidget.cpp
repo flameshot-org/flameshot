@@ -895,7 +895,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 	}
 	
     } else {
-	if (!m_keyboardMovingHappening) {
+	if (!e->isAutoRepeat()) {
 	    switch(e->key()){
 	    case Qt::Key_Left:
 		m_direction = Direction::Left;
@@ -920,7 +920,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 		m_moveFast = false;
 	    }
 		
-	    //m_captureToolObjectsBackup = m_captureToolObjects;
+	    m_captureToolObjectsBackup = m_captureToolObjects;
 	    m_keyboardMovingHappening = true;
 	    m_keyboardMover->start(20);
 	}
@@ -956,13 +956,15 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 
 void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 {
-    if (e->key() == Qt::Key_Left ||
+    if ((e->key() == Qt::Key_Left ||
 	e->key() == Qt::Key_Right ||
 	e->key() == Qt::Key_Up ||
-	e->key() == Qt::Key_Down) {
+	e->key() == Qt::Key_Down) &&
+	!e->isAutoRepeat()) {
 	m_keyboardMovingHappening = false;
 	m_keyboardMover->stop();
 	m_moveFast = false;
+	pushObjectsStateToUndoStack();
     }
     
     if (e->key() == Qt::Key_Control) {
@@ -1493,34 +1495,6 @@ void CaptureWidget::initShortcuts()
     newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_TOGGLE_PANEL")),
                 this,
                 SLOT(togglePanel()));
-/*
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_LEFT")),
-                this,
-                SLOT(moveLeftShift()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_RIGHT")),
-                this,
-                SLOT(moveRightShift()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_UP")),
-                this,
-                SLOT(moveUpShift()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_RESIZE_DOWN")),
-                this,
-                SLOT(moveDownShift()));
-
-    
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_LEFT")),
-                this,
-                SLOT(moveLeft()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_RIGHT")),
-                this,
-                SLOT(moveRight()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_UP")),
-                this,
-                SLOT(moveUp()));
-    newShortcut(QKeySequence(ConfigHandler().shortcut("TYPE_MOVE_DOWN")),
-                this,
-                SLOT(moveDown()));
-    */
     newShortcut(
       QKeySequence(ConfigHandler().shortcut("TYPE_DELETE_CURRENT_TOOL")),
       this,
@@ -1771,124 +1745,6 @@ void CaptureWidget::childLeave()
 {
     m_previewEnabled = true;
     updateTool(activeButtonTool());
-}
-
-void CaptureWidget::moveLeft()
-{
-    
-}
-
-void CaptureWidget::moveRight()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->moveRight();
-    } else {
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(1, 0));
-        drawToolsData();
-    }
-}
-
-void CaptureWidget::moveUp()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->moveUp();
-    } else {
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -1));
-        drawToolsData();
-    }
-}
-
-void CaptureWidget::moveDown()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->moveDown();
-    } else {
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 1));
-        drawToolsData();
-    }
-}
-
-void CaptureWidget::moveLeftShift()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->resizeLeft();
-    } else {
-
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(-10, 0));
-        drawToolsData();
-    }
-}
-
-void CaptureWidget::moveRightShift()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->resizeRight();
-    } else {
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(+10, 0));
-        drawToolsData();
-    }
-}
-
-void CaptureWidget::moveUpShift()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->resizeUp();
-    } else {
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -10));
-        drawToolsData();
-    }
-}
-
-void CaptureWidget::moveDownShift()
-{
-    if (activeToolObject().isNull()) {
-        m_selection->resizeDown();
-    } else {
-        if (!m_keyboardMovingHappening) {
-            m_captureToolObjectsBackup = m_captureToolObjects;
-            m_keyboardMovingHappening = true;
-        }
-        m_keyboardMover->start(200);
-        update(paddedUpdateRect(activeToolObject()->boundingRect()));
-        activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 10));
-        drawToolsData();
-    }
 }
 
 void CaptureWidget::setCaptureToolObjects(
