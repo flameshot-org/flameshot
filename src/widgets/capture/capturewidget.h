@@ -215,4 +215,14 @@ private:
     // undo mechanism for keyboard moving
     QTimer* m_keyboardMoveUndo;
     bool m_keyboardMovingHappening;
+
+    enum class Direction {
+	Up,
+	Down,
+	Left,
+	Right,
+	None
+    };
+    Direction m_direction;
+    bool m_moveFast;
 };
