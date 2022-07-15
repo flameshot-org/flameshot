@@ -249,10 +249,10 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
     updateCursor();
 
     // keyboard move undo timer
-    m_keyboardMoveUndo = new QTimer(this);
-    m_keyboardMoveUndo->setSingleShot(false);
+    m_keyboardMover = new QTimer(this);
+    m_keyboardMover->setSingleShot(false);
     
-    connect(m_keyboardMoveUndo, &QTimer::timeout, this, [=]() {
+    connect(m_keyboardMover, &QTimer::timeout, this, [=]() {
 							    update(paddedUpdateRect(activeToolObject()->boundingRect()));
 							    QPoint move;
 							    switch(m_direction){
@@ -280,7 +280,7 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
 							    activeToolObject()->move(*activeToolObject()->pos() + move);
 							    drawToolsData(); 
 							});
-    m_keyboardMoveUndo->setTimerType(Qt::PreciseTimer);
+    m_keyboardMover->setTimerType(Qt::PreciseTimer);
 }
 
 CaptureWidget::~CaptureWidget()
@@ -307,7 +307,7 @@ CaptureWidget::~CaptureWidget()
         emit Flameshot::instance()->captureFailed();
     }
 
-    delete m_keyboardMoveUndo;
+    delete m_keyboardMover;
 }
 
 void CaptureWidget::initButtons()
@@ -922,7 +922,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 		
 	    //m_captureToolObjectsBackup = m_captureToolObjects;
 	    m_keyboardMovingHappening = true;
-	    m_keyboardMoveUndo->start(20);
+	    m_keyboardMover->start(20);
 	}
     }
     
@@ -961,7 +961,7 @@ void CaptureWidget::keyReleaseEvent(QKeyEvent* e)
 	e->key() == Qt::Key_Up ||
 	e->key() == Qt::Key_Down) {
 	m_keyboardMovingHappening = false;
-	m_keyboardMoveUndo->stop();
+	m_keyboardMover->stop();
 	m_moveFast = false;
     }
     
@@ -1787,7 +1787,7 @@ void CaptureWidget::moveRight()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(1, 0));
         drawToolsData();
@@ -1803,7 +1803,7 @@ void CaptureWidget::moveUp()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -1));
         drawToolsData();
@@ -1819,7 +1819,7 @@ void CaptureWidget::moveDown()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 1));
         drawToolsData();
@@ -1836,7 +1836,7 @@ void CaptureWidget::moveLeftShift()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(-10, 0));
         drawToolsData();
@@ -1852,7 +1852,7 @@ void CaptureWidget::moveRightShift()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(+10, 0));
         drawToolsData();
@@ -1868,7 +1868,7 @@ void CaptureWidget::moveUpShift()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, -10));
         drawToolsData();
@@ -1884,7 +1884,7 @@ void CaptureWidget::moveDownShift()
             m_captureToolObjectsBackup = m_captureToolObjects;
             m_keyboardMovingHappening = true;
         }
-        m_keyboardMoveUndo->start(200);
+        m_keyboardMover->start(200);
         update(paddedUpdateRect(activeToolObject()->boundingRect()));
         activeToolObject()->move(*activeToolObject()->pos() + QPoint(0, 10));
         drawToolsData();
