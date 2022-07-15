@@ -71,7 +71,7 @@ body:
   id: screenshots
   attributes:
     label: Screenshots or screen recordings
-    description: If you think it would be beneficial for us to understand the issue, please provide a screenshots or screen recordig. For screen recording you can use [Peek](https://github.com/phw/peek)
+    description: If you think it would be beneficial for us to understand the issue, please provide a screenshots or screen recording. For screen recording you can use [Peek](https://github.com/phw/peek)
 - type: textarea
   id: systeminfo
   attributes:
