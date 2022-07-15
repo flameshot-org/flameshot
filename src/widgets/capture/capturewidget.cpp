@@ -921,7 +921,7 @@ void CaptureWidget::keyPressEvent(QKeyEvent* e)
 	    }
 		
 	    m_captureToolObjectsBackup = m_captureToolObjects;
-	    m_keyboardMover->start(20);
+	    m_keyboardMover->start(30);
 	}
     }
     
