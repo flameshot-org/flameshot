@@ -8,8 +8,7 @@ AbstractPathTool::AbstractPathTool(QObject* parent)
   : CaptureTool(parent)
   , m_thickness(1)
   , m_padding(0)
-{
-}
+{}
 
 void AbstractPathTool::copyParams(const AbstractPathTool* from,
                                   AbstractPathTool* to)

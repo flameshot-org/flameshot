@@ -6,8 +6,7 @@
 
 DraggableWidgetMaker::DraggableWidgetMaker(QObject* parent)
   : QObject(parent)
-{
-}
+{}
 
 void DraggableWidgetMaker::makeDraggable(QWidget* widget)
 {

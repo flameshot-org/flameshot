@@ -13,8 +13,7 @@
 
 AcceptTool::AcceptTool(QObject* parent)
   : AbstractActionTool(parent)
-{
-}
+{}
 
 bool AcceptTool::closeOnButtonPressed() const
 {

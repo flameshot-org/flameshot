@@ -7,8 +7,7 @@
 
 LauncherItemDelegate::LauncherItemDelegate(QObject* parent)
   : QStyledItemDelegate(parent)
-{
-}
+{}
 
 void LauncherItemDelegate::paint(QPainter* painter,
                                  const QStyleOptionViewItem& option,

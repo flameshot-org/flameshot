@@ -82,8 +82,7 @@ public:
       : QObject(parent)
       , m_count(0)
       , m_editMode(false)
-    {
-    }
+    {}
 
     // TODO unused
     virtual void setCapture(const QPixmap& pixmap){};

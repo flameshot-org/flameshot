@@ -9,8 +9,7 @@
 
 CaptureToolObjects::CaptureToolObjects(QObject* parent)
   : QObject(parent)
-{
-}
+{}
 
 void CaptureToolObjects::append(const QPointer<CaptureTool>& captureTool)
 {

@@ -7,8 +7,7 @@
 
 SaveTool::SaveTool(QObject* parent)
   : AbstractActionTool(parent)
-{
-}
+{}
 
 bool SaveTool::closeOnButtonPressed() const
 {

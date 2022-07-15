@@ -6,8 +6,7 @@
 
 RedoTool::RedoTool(QObject* parent)
   : AbstractActionTool(parent)
-{
-}
+{}
 
 bool RedoTool::closeOnButtonPressed() const
 {
