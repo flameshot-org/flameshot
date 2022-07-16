@@ -281,6 +281,8 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         drawToolsData();
     });
     m_keyboardMover->setTimerType(Qt::PreciseTimer);
+
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 CaptureWidget::~CaptureWidget()
