@@ -3,9 +3,14 @@
 
 #pragma once
 
-#include "src/utils/desktopfileparse.h"
 #include <QMap>
 #include <QWidget>
+
+#if defined(Q_OS_WIN)
+#include "src/utils/winlnkfileparse.h"
+#else
+#include "src/utils/desktopfileparse.h"
+#endif
 
 class QTabWidget;
 class QCheckBox;
@@ -32,7 +37,11 @@ private:
                              const QVector<DesktopAppData>& appList);
     void keyPressEvent(QKeyEvent* keyEvent) override;
 
+#if defined(Q_OS_WIN)
+    WinLnkFileParser m_parser;
+#else
     DesktopFileParser m_parser;
+#endif
     QPixmap m_pixmap;
     QString m_tempFile;
     bool m_keepOpen;
