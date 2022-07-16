@@ -41,9 +41,6 @@
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
 
-#include <chrono>
-#include <iostream>
-
 #define MOUSE_DISTANCE_TO_START_MOVING 3
 
 // CaptureWidget is the main component used to capture the screen. It contains
