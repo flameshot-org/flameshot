@@ -68,16 +68,6 @@ private slots:
     void childEnter();
     void childLeave();
 
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
-
-    void moveLeftShift();
-    void moveRightShift();
-    void moveUpShift();
-    void moveDownShift();
-
     void deleteCurrentTool();
 
     void setState(CaptureToolButton* b);
@@ -213,6 +203,16 @@ private:
     bool m_startMove;
 
     // undo mechanism for keyboard moving
-    QTimer* m_keyboardMoveUndo;
-    bool m_keyboardMovingHappening;
+    QTimer* m_keyboardMover;
+
+    enum class Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+        None
+    };
+    Direction m_direction;
+    bool m_moveFast;
 };
