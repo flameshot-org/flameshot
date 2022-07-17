@@ -98,7 +98,7 @@
 ## Usage
 
 Executing the command `flameshot` without parameters will launch a running
-instance of the program in background without taking actions.
+instance of the program in the background without taking actions.
 If your desktop environment provides tray area, a tray icon will also
 appear in the tray for users to perform configuration and management.
 
