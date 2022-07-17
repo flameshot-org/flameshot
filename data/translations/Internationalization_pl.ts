@@ -98,6 +98,19 @@
     </message>
 </context>
 <context>
+    <name>BoldarrowTool</name>
+    <message>
+        <location filename="../../src/tools/boldarrow/boldarrowtool.cpp" line="55"/>
+        <source>Bold Arrow</source>
+        <translation>Pogrubiona strzałka</translation>
+    </message>
+    <message>
+    <location filename="../../src/tools/boldarrow/boldarrowtool.cpp" line="65"/>
+        <source>Set the Bold Arrow as the paint tool</source>
+        <translation>Wybierz pogrubioną strzałkę jako narzędzie rysowania</translation>
+    </message>
+</context>
+<context>
     <name>BlurTool</name>
     <message>
         <source>Blur</source>
