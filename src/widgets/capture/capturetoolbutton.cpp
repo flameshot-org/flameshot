@@ -62,7 +62,7 @@ void CaptureToolButton::initButton()
     QString tooltip = m_tool->description();
     QString shortcut =
       ConfigHandler().shortcut(QVariant::fromValue(m_buttonType).toString());
-    if (m_buttonType == CaptureTool::TYPE_COPY) {
+    if (m_buttonType == CaptureTool::TYPE_COPY && ConfigHandler().copyOnDoubleClick()) {
         tooltip += QStringLiteral(" (%1Left Double-Click)")
                      .arg(shortcut.isEmpty() ? QString() : shortcut + " or ");
     } else if (!shortcut.isEmpty()) {
