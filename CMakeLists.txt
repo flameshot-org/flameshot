@@ -70,7 +70,7 @@ option(USE_LAUNCHER_ABSOLUTE_PATH "Use absolute path for the desktop launcher" O
 option(USE_WAYLAND_CLIPBOARD "USE KF Gui Wayland Clipboard" OFF)
 option(DISABLE_UPDATE_CHECKER "Disable check for updates" OFF)
 if (DISABLE_UPDATE_CHECKER)
-  add_definitions(-DDISABLE_UPDATE_CHECKER="ON")
+  add_compile_definitions(DISABLE_UPDATE_CHECKER)
 endif ()
 
 include(cmake/StandardProjectSettings.cmake)
