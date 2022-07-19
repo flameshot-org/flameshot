@@ -15,10 +15,10 @@
 WinLnkFileParser::WinLnkFileParser()
 {
     QStringList sListImgFileExt;
-    for (const auto &ext : QImageWriter::supportedImageFormats()) {
+    for (const auto& ext : QImageWriter::supportedImageFormats()) {
         sListImgFileExt.append(ext);
     }
-    this->getImageFileextAssociates(sListImgFileExt);
+    this->getImageFileExtAssociates(sListImgFileExt);
 }
 
 DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
@@ -28,9 +28,8 @@ DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
     ok = true;
 
     QFileInfo fiSymlink(fiLnk.symLinkTarget());
-    if (!fiSymlink.exists() ||
-            !fiSymlink.fileName().endsWith(".exe") ||
-            fiSymlink.baseName().contains("unins")) {
+    if (!fiSymlink.exists() || !fiSymlink.fileName().endsWith(".exe") ||
+        fiSymlink.baseName().contains("unins")) {
         ok = false;
         return res;
     }
@@ -39,7 +38,7 @@ DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
     res.exec = fiSymlink.absoluteFilePath();
 
     // Get icon from exe
-    QFileSystemModel *model = new QFileSystemModel;
+    QFileSystemModel* model = new QFileSystemModel;
     model->setRootPath(fiSymlink.path());
     res.icon = model->fileIcon(model->index(fiSymlink.filePath()));
 
@@ -49,7 +48,7 @@ DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
         res.categories = QStringList() << "Utility";
     }
 
-    for (const auto &app : m_appList) {
+    for (const auto& app : m_appList) {
         if (app.exec == res.exec) {
             ok = false;
             break;
@@ -65,14 +64,24 @@ DesktopAppData WinLnkFileParser::parseLnkFile(const QFileInfo& fiLnk,
 int WinLnkFileParser::processDirectory(const QDir& dir)
 {
     QStringList sListMenuFilter;
-    sListMenuFilter << "Accessibility" << "Administrative Tools" << "Setup" << "System Tools" << "Uninstall" << "Update" << "Updater" << "Windows PowerShell";
+    sListMenuFilter << "Accessibility"
+                    << "Administrative Tools"
+                    << "Setup"
+                    << "System Tools"
+                    << "Uninstall"
+                    << "Update"
+                    << "Updater"
+                    << "Windows PowerShell";
     const QString sMenuFilter("\\b(" + sListMenuFilter.join('|') + ")\\b");
     QRegularExpression regexfilter(sMenuFilter);
 
     bool ok;
     int length = m_appList.length();
     // Go through all subfolders and *.lnk files
-    QDirIterator it(dir.absolutePath(), {"*.lnk"}, QDir::NoFilter, QDirIterator::Subdirectories);
+    QDirIterator it(dir.absolutePath(),
+                    { "*.lnk" },
+                    QDir::NoFilter,
+                    QDirIterator::Subdirectories);
     while (it.hasNext()) {
         QFileInfo fiLnk(it.next());
         if (!regexfilter.match(fiLnk.absoluteFilePath()).hasMatch()) {
@@ -102,7 +111,7 @@ QVector<DesktopAppData> WinLnkFileParser::getAppsByCategory(
 }
 
 QMap<QString, QVector<DesktopAppData>> WinLnkFileParser::getAppsByCategory(
-        const QStringList& categories)
+  const QStringList& categories)
 {
     QMap<QString, QVector<DesktopAppData>> res;
 
@@ -117,7 +126,8 @@ QMap<QString, QVector<DesktopAppData>> WinLnkFileParser::getAppsByCategory(
     return res;
 }
 
-QString WinLnkFileParser::getAllUsersStartMenuPath() {
+QString WinLnkFileParser::getAllUsersStartMenuPath()
+{
     QString sRet("");
     WCHAR path[MAX_PATH];
     HRESULT hr = SHGetFolderPathW(NULL, CSIDL_COMMON_PROGRAMS, NULL, 0, path);
@@ -129,16 +139,19 @@ QString WinLnkFileParser::getAllUsersStartMenuPath() {
     return sRet;
 }
 
-void WinLnkFileParser::getImageFileextAssociates(const QStringList &sListImgExt) {
-    const QString sReg("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.%1\\OpenWithList");
+void WinLnkFileParser::getImageFileExtAssociates(const QStringList& sListImgExt)
+{
+    const QString sReg("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\"
+                       "CurrentVersion\\Explorer\\FileExts\\.%1\\OpenWithList");
 
-    for (const auto &sExt : qAsConst(sListImgExt)) {
+    for (const auto& sExt : qAsConst(sListImgExt)) {
         QString sPath(sReg.arg(sExt));
         QSettings registry(sPath, QSettings::NativeFormat);
-        for (const auto &key : registry.allKeys()) {
-            if (1 == key.size()) {  // Keys for OpenWith apps are a, b, c, ...
+        for (const auto& key : registry.allKeys()) {
+            if (1 == key.size()) { // Keys for OpenWith apps are a, b, c, ...
                 QString sVal = registry.value(key, "").toString();
-                if (sVal.endsWith(".exe") && !m_GraphicAppsList.contains(sVal)) {
+                if (sVal.endsWith(".exe") &&
+                    !m_GraphicAppsList.contains(sVal)) {
                     m_GraphicAppsList << sVal;
                 }
             }

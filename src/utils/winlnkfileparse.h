@@ -12,9 +12,11 @@
 class QDir;
 class QString;
 
-struct CompareAppByName {
-    bool operator()(const DesktopAppData a, const DesktopAppData b) {
-        return(a.name < b.name);
+struct CompareAppByName
+{
+    bool operator()(const DesktopAppData a, const DesktopAppData b)
+    {
+        return (a.name < b.name);
     }
 };
 
@@ -30,7 +32,7 @@ struct WinLnkFileParser
       const QStringList& categories);
 
 private:
-    void getImageFileextAssociates(const QStringList &sListImgExt);
+    void getImageFileExtAssociates(const QStringList& sListImgExt);
 
     QVector<DesktopAppData> m_appList;
     QStringList m_GraphicAppsList;

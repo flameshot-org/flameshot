@@ -18,14 +18,13 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include <QProcess>
-#include <QTabWidget>
 #include <QStandardPaths>
+#include <QTabWidget>
 
 namespace {
 #if defined(Q_OS_WIN)
-QMap<QString, QString> catIconNames(
-  { { "Graphics", "image.svg" },
-    { "Utility", "apps.svg" } });
+QMap<QString, QString> catIconNames({ { "Graphics", "image.svg" },
+                                      { "Utility", "apps.svg" } });
 }
 #else
 QMap<QString, QString> catIconNames(
@@ -52,8 +51,9 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
     m_keepOpen = ConfigHandler().keepOpenAppLauncher();
 
 #if defined(Q_OS_WIN)
-    QDir userAppsFolder(QStandardPaths::standardLocations(
-                            QStandardPaths::ApplicationsLocation).at(0));
+    QDir userAppsFolder(
+      QStandardPaths::standardLocations(QStandardPaths::ApplicationsLocation)
+        .at(0));
     m_parser.processDirectory(userAppsFolder);
 
     QString dir(m_parser.getAllUsersStartMenuPath());
@@ -256,7 +256,7 @@ void AppLauncherWidget::initAppMap()
         if (!m_appsMap.contains(name)) {
             continue;
         }
-        for (const auto &i : m_appsMap[name]) {
+        for (const auto& i : m_appsMap[name]) {
             if (!multimediaList.contains(i)) {
                 multimediaList.append(i);
             }

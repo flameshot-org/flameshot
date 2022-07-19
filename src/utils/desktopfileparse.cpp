@@ -109,7 +109,7 @@ int DesktopFileParser::processDirectory(const QDir& dir)
       dir.entryList({ "*.desktop" }, QDir::NoDotAndDotDot | QDir::Files);
     bool ok;
     int length = m_appList.length();
-    for (const QString &file : entries) {
+    for (const QString& file : entries) {
         DesktopAppData app = parseDesktopFile(dir.absoluteFilePath(file), ok);
         if (ok) {
             m_appList.append(app);
