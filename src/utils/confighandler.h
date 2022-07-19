@@ -121,6 +121,12 @@ public:
     CONFIG_GETTER_SETTER(uploadClientSecret, setUploadClientSecret, QString)
     CONFIG_GETTER_SETTER(saveLastRegion, setSaveLastRegion, bool)
     CONFIG_GETTER_SETTER(showSelectionGeometry, setShowSelectionGeometry, int)
+    CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
+                         setShowSelectionGeometryHideTime,
+                         int);
+    CONFIG_GETTER_SETTER(useDefaultExtPgm, setUseDefaultExtPgm, bool)
+    CONFIG_GETTER_SETTER(extPgm, setExtPgm, QString)
+    CONFIG_GETTER_SETTER(extPgmTerminal, setExtPgmTerminal, bool)
     // SPECIAL CASES
     bool startupLaunch();
     void setStartupLaunch(const bool);

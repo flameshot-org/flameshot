@@ -86,6 +86,7 @@ private:
     void initUploadClientSecret();
     void initSaveLastRegion();
     void initShowSelectionGeometry();
+    void initExtPgm();
 
     void _updateComponents(bool allowEmptySavePath);
 
@@ -127,4 +128,6 @@ private:
     QCheckBox* m_showSelectionGeometry;
     QComboBox* m_selectGeometryLocation;
     QSpinBox* m_xywhTimeout;
+    QCheckBox* m_useExtPgm;
+    QCheckBox* m_useExtPgmTerm;
 };

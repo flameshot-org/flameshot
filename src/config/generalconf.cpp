@@ -57,6 +57,7 @@ GeneralConf::GeneralConf(QWidget* parent)
     initUploadClientSecret();
     initPredefinedColorPaletteLarge();
     initShowSelectionGeometry();
+    initExtPgm();
 
     m_layout->addStretch();
 
@@ -87,6 +88,10 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     m_showMagnifier->setChecked(config.showMagnifier());
     m_squareMagnifier->setChecked(config.squareMagnifier());
     m_saveLastRegion->setChecked(config.saveLastRegion());
+    m_useExtPgm->setChecked(config.useDefaultExtPgm());
+    m_useExtPgmTerm->setChecked(config.extPgmTerminal());
+    m_showSelectionGeometry->setChecked(config.showSelectionGeometry());
+    m_xywhTimeout->setValue(config.showSelectionGeometryHideTime());
 
 #if !defined(Q_OS_WIN)
     m_autoCloseIdleDaemon->setChecked(config.autoCloseIdleDaemon());
@@ -709,12 +714,29 @@ void GeneralConf::initSquareMagnifier()
     });
 }
 
+void GeneralConf::initExtPgm()
+{
+    m_useExtPgm =
+      new QCheckBox(tr("Use default program (set program via launcher)"), this);
+    m_useExtPgmTerm =
+      new QCheckBox(tr("Default program run in terminal"), this);
+    m_scrollAreaLayout->addWidget(m_useExtPgm);
+    m_scrollAreaLayout->addWidget(m_useExtPgmTerm);
+    connect(m_useExtPgm, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setUseDefaultExtPgm(checked);
+    });
+    connect(m_useExtPgmTerm, &QCheckBox::clicked, [](bool checked) {
+        ConfigHandler().setExtPgmTerminal(checked);
+    });
+    m_useExtPgm->setChecked(ConfigHandler().useDefaultExtPgm());
+    m_useExtPgmTerm->setChecked(ConfigHandler().extPgmTerminal());
+}
+
 void GeneralConf::initShowSelectionGeometry()
 {
     auto* tobox = new QHBoxLayout();
 
-    int timeout =
-      ConfigHandler().value("showSelectionGeometryHideTime").toInt();
+    int timeout = ConfigHandler().showSelectionGeometryHideTime();
     m_xywhTimeout = new QSpinBox();
     m_xywhTimeout->setRange(0, INT_MAX);
     m_xywhTimeout->setToolTip(
@@ -751,7 +773,7 @@ void GeneralConf::initShowSelectionGeometry()
     m_selectGeometryLocation->addItem(tr("Center"), GeneralConf::xywh_center);
 
     // pick up int from config and use findData
-    int pos = ConfigHandler().value("showSelectionGeometry").toInt();
+    int pos = ConfigHandler().showSelectionGeometry();
     m_selectGeometryLocation->setCurrentIndex(
       m_selectGeometryLocation->findData(pos));
 
@@ -767,7 +789,7 @@ void GeneralConf::initShowSelectionGeometry()
 
 void GeneralConf::setSelGeoHideTime(int v)
 {
-    ConfigHandler().setValue("showSelectionGeometryHideTime", v);
+    ConfigHandler().setShowSelectionGeometryHideTime(v);
 }
 
 void GeneralConf::setGeometryLocation(int index)

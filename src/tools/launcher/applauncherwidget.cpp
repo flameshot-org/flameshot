@@ -38,53 +38,80 @@ AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
 {
+    QString cmd = ConfigHandler().extPgm();
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowIcon(QIcon(GlobalValues::iconPath()));
-    setWindowTitle(tr("Open With"));
+    if (ConfigHandler().useDefaultExtPgm() == false || cmd.isEmpty()) {
+        setWindowIcon(QIcon(GlobalValues::iconPath()));
+        setWindowTitle(tr("Open With"));
 
-    m_keepOpen = ConfigHandler().keepOpenAppLauncher();
+        m_keepOpen = ConfigHandler().keepOpenAppLauncher();
 
-    QString dirLocal = QDir::homePath() + "/.local/share/applications/";
-    QDir appsDirLocal(dirLocal);
-    m_parser.processDirectory(appsDirLocal);
+        QString dirLocal = QDir::homePath() + "/.local/share/applications/";
+        QDir appsDirLocal(dirLocal);
+        m_parser.processDirectory(appsDirLocal);
 
-    QString dir = QStringLiteral("/usr/share/applications/");
-    QDir appsDir(dir);
-    m_parser.processDirectory(appsDir);
+        QString dir = QStringLiteral("/usr/share/applications/");
+        QDir appsDir(dir);
+        m_parser.processDirectory(appsDir);
 
-    initAppMap();
-    initListWidget();
+        initAppMap();
+        initListWidget();
 
-    m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
-    m_keepOpenCheckbox = new QCheckBox(tr("Keep open after selection"), this);
-    m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncher());
-    connect(m_keepOpenCheckbox,
-            &QCheckBox::clicked,
-            this,
-            &AppLauncherWidget::checkboxClicked);
+        m_terminalCheckbox = new QCheckBox(tr("Launch in terminal"), this);
+        m_keepOpenCheckbox =
+          new QCheckBox(tr("Keep open after selection"), this);
+        m_setAsDefaultCheckbox = new QCheckBox(
+          tr("Set as default application for subsequent launches"), this);
+        m_keepOpenCheckbox->setChecked(ConfigHandler().keepOpenAppLauncher());
+        connect(m_keepOpenCheckbox,
+                &QCheckBox::clicked,
+                this,
+                &AppLauncherWidget::checkboxClicked);
 
-    // search items
-    m_lineEdit = new QLineEdit;
-    connect(m_lineEdit,
-            &QLineEdit::textChanged,
-            this,
-            &AppLauncherWidget::searchChanged);
-    m_filterList = new QListWidget;
-    m_filterList->hide();
-    configureListView(m_filterList);
-    connect(
-      m_filterList, &QListWidget::clicked, this, &AppLauncherWidget::launch);
+        // search items
+        m_lineEdit = new QLineEdit;
+        connect(m_lineEdit,
+                &QLineEdit::textChanged,
+                this,
+                &AppLauncherWidget::searchChanged);
+        m_filterList = new QListWidget;
+        m_filterList->hide();
+        configureListView(m_filterList);
+        connect(m_filterList,
+                &QListWidget::clicked,
+                this,
+                &AppLauncherWidget::launch);
 
-    m_layout = new QVBoxLayout(this);
-    m_layout->addWidget(m_filterList);
-    m_layout->addWidget(m_tabWidget);
-    m_layout->addWidget(m_lineEdit);
-    m_layout->addWidget(m_keepOpenCheckbox);
-    m_layout->addWidget(m_terminalCheckbox);
-    m_lineEdit->setFocus();
+        m_layout = new QVBoxLayout(this);
+        m_layout->addWidget(m_filterList);
+        m_layout->addWidget(m_tabWidget);
+        m_layout->addWidget(m_lineEdit);
+        m_layout->addWidget(m_keepOpenCheckbox);
+        m_layout->addWidget(m_terminalCheckbox);
+        m_layout->addWidget(m_setAsDefaultCheckbox);
+        m_lineEdit->setFocus();
+    } else {
+        launchCmd(cmd, ConfigHandler().extPgmTerminal());
+    }
 }
 
 void AppLauncherWidget::launch(const QModelIndex& index)
+{
+    // TODO check m_setAsDefaultCheckbox and store as default
+    QString command = index.data(Qt::UserRole).toString();
+    bool inTerminal =
+      index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
+    if (m_setAsDefaultCheckbox->isChecked()) {
+        ConfigHandler().setExtPgm(command);
+        ConfigHandler().setExtPgmTerminal(inTerminal);
+        // we assume if we are setting the default program we also want to use
+        // it
+        ConfigHandler().setUseDefaultExtPgm(true);
+    }
+    launchCmd(command, inTerminal);
+}
+
+void AppLauncherWidget::launchCmd(QString& command, bool inTerminal)
 {
     if (!QFileInfo(m_tempFile).isReadable()) {
         m_tempFile =
@@ -98,7 +125,6 @@ void AppLauncherWidget::launch(const QModelIndex& index)
     }
     // Heuristically, if there is a % in the command we assume it is the file
     // name slot
-    QString command = index.data(Qt::UserRole).toString();
     QStringList prog_args = command.split(" ");
     // no quotes because it is going in an array!
     if (command.contains("%")) {
@@ -112,8 +138,6 @@ void AppLauncherWidget::launch(const QModelIndex& index)
         prog_args.append(m_tempFile); // were no replacements
     }
     QString app_name = prog_args.at(0);
-    bool inTerminal =
-      index.data(Qt::UserRole + 1).toBool() || m_terminalCheckbox->isChecked();
     if (inTerminal) {
         bool ok = TerminalLauncher::launchDetached(command);
         if (!ok) {
