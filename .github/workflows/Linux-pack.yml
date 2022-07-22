@@ -122,13 +122,13 @@ jobs:
           fi
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -144,7 +144,7 @@ jobs:
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Get packpack tool
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: ${{ env.PACKPACK_REPO }}
           path: tools
@@ -206,7 +206,7 @@ jobs:
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.${{ matrix.dist.name }}.${{ matrix.dist.arch }}.deb)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-distribution-artifact
           path: |
@@ -241,13 +241,13 @@ jobs:
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -263,7 +263,7 @@ jobs:
           echo "================================"
           echo "VERSION=${last_committed_tag:1}" >> $GITHUB_ENV
       - name: Get packpack tool
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: ${{ env.PACKPACK_REPO }}
           path: tools
@@ -313,7 +313,7 @@ jobs:
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
         if: matrix.dist.os == 'fedora'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-distribution-artifact
           path: |
@@ -321,7 +321,7 @@ jobs:
 
       - name: Artifact Upload
         if: matrix.dist.os == 'opensuse-leap'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-distribution-artifact
           path: |
@@ -353,13 +353,13 @@ jobs:
 
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -451,7 +451,7 @@ jobs:
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/Flameshot-${VERSION}.x86_64.AppImage)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-distribution-artifact
           path: |
@@ -464,13 +464,13 @@ jobs:
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -517,7 +517,7 @@ jobs:
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/org.flameshot.Flameshot-${VERSION}.x86_64.flatpak)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-distribution-artifact
           path: |
@@ -530,13 +530,13 @@ jobs:
     steps:
       - name: Checkout Source code
         if: github.event_name == 'push'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: master
       - name: Checkout Source code
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
@@ -574,7 +574,7 @@ jobs:
           echo $(sh $GITHUB_WORKSPACE/scripts/upload_services/${UPLOAD_SERVICE}.sh $GITHUB_WORKSPACE/build/${PRODUCT}-${VERSION}-${RELEASE}.amd64.snap)
           echo "======no operation for you can see link in the log console====="
       - name: Artifact Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Linux-distribution-artifact
           path: |
