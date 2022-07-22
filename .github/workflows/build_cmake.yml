@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
 
     steps:
       - name: Checkout Source code
@@ -42,7 +42,7 @@ jobs:
             cmake \
             extra-cmake-modules \
             build-essential \
-            qt5-default \
+            qtbase5-dev \
             qttools5-dev-tools \
             qttools5-dev \
             libqt5dbus5 \

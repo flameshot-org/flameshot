@@ -27,7 +27,7 @@ env:
 jobs:
   deb-pack:
     name: Build deb on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -215,7 +215,7 @@ jobs:
 
   rpm-pack:
     name: Build rpm on ${{ matrix.dist.name }} ${{ matrix.dist.arch }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -330,7 +330,7 @@ jobs:
 
   appimage-pack:
     name: Build appimage on ${{ matrix.config.name }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
