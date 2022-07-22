@@ -124,7 +124,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("showSelectionGeometry"  , BoundedInt               (0,5,4)),
     OPTION("showSelectionGeometryHideTime", LowerBoundedInt       (0, 3000)),
     OPTION("extPgm"                     ,String             ( ""                )),
-    OPTION("useDefaultExtPgm"           ,Bool                ( false             )),
+    OPTION("useDefaultExtPgmOnAlt"      ,Bool                ( true             )),
     OPTION("extPgmTerminal"             ,Bool               ( false              ))
 };
 

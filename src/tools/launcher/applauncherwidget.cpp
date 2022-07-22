@@ -34,13 +34,15 @@ QMap<QString, QString> catIconNames(
     { "Utility", "applications-utilities" } });
 }
 
-AppLauncherWidget::AppLauncherWidget(const QPixmap& p, QWidget* parent)
+AppLauncherWidget::AppLauncherWidget(const QPixmap& p,
+                                     bool alt,
+                                     QWidget* parent)
   : QWidget(parent)
   , m_pixmap(p)
 {
     QString cmd = ConfigHandler().extPgm();
     setAttribute(Qt::WA_DeleteOnClose);
-    if (ConfigHandler().useDefaultExtPgm() == false || cmd.isEmpty()) {
+    if (ConfigHandler().useDefaultExtPgmOnAlt() == alt || cmd.isEmpty()) {
         setWindowIcon(QIcon(GlobalValues::iconPath()));
         setWindowTitle(tr("Open With"));
 
@@ -106,7 +108,7 @@ void AppLauncherWidget::launch(const QModelIndex& index)
         ConfigHandler().setExtPgmTerminal(inTerminal);
         // we assume if we are setting the default program we also want to use
         // it
-        ConfigHandler().setUseDefaultExtPgm(true);
+        ConfigHandler().setUseDefaultExtPgmOnAlt(true);
     }
     launchCmd(command, inTerminal);
 }

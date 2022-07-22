@@ -124,7 +124,7 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          setShowSelectionGeometryHideTime,
                          int);
-    CONFIG_GETTER_SETTER(useDefaultExtPgm, setUseDefaultExtPgm, bool)
+    CONFIG_GETTER_SETTER(useDefaultExtPgmOnAlt, setUseDefaultExtPgmOnAlt, bool)
     CONFIG_GETTER_SETTER(extPgm, setExtPgm, QString)
     CONFIG_GETTER_SETTER(extPgmTerminal, setExtPgmTerminal, bool)
     // SPECIAL CASES
