@@ -57,9 +57,9 @@ FlameshotDaemon::FlameshotDaemon()
   , m_hostingClipboard(false)
   , m_clipboardSignalBlocked(false)
   , m_trayIcon(nullptr)
-  , m_networkCheckUpdates(nullptr)
-  , m_showCheckAppUpdateStatus(false)
   , m_appLatestVersion(QStringLiteral(APP_VERSION).replace("v", ""))
+  , m_showCheckAppUpdateStatus(false)
+  , m_networkCheckUpdates(nullptr)
 {
     connect(
       QApplication::clipboard(), &QClipboard::dataChanged, this, [this]() {
@@ -74,6 +74,7 @@ FlameshotDaemon::FlameshotDaemon()
     m_persist = true;
 #else
     m_persist = !ConfigHandler().autoCloseIdleDaemon();
+#endif
     connect(ConfigHandler::getInstance(),
             &ConfigHandler::fileChanged,
             this,
@@ -84,9 +85,11 @@ FlameshotDaemon::FlameshotDaemon()
                 } else {
                     enableTrayIcon(true);
                 }
+#ifndef Q_OS_WIN
                 m_persist = !config.autoCloseIdleDaemon();
-            });
 #endif
+            });
+
     if (ConfigHandler().checkForUpdates()) {
         getLatestAvailableVersion();
     }
@@ -315,16 +318,13 @@ void FlameshotDaemon::attachTextToClipboard(QString text, QString notification)
 
 void FlameshotDaemon::initTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     if (!ConfigHandler().disabledTrayIcon()) {
         enableTrayIcon(true);
     }
-#elif defined(Q_OS_WIN)
-    enableTrayIcon(true);
-
+#if defined(Q_OS_WIN)
     GlobalShortcutFilter* nativeFilter = new GlobalShortcutFilter(this);
     qApp->installNativeEventFilter(nativeFilter);
-    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, [this]() {
+    connect(nativeFilter, &GlobalShortcutFilter::printPressed, this, []() {
         Flameshot::instance()->gui();
     });
 #endif

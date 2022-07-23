@@ -102,9 +102,8 @@ void GeneralConf::_updateComponents(bool allowEmptySavePath)
     if (allowEmptySavePath || !config.savePath().isEmpty()) {
         m_savePath->setText(config.savePath());
     }
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
+
     m_showTray->setChecked(!config.disabledTrayIcon());
-#endif
 }
 
 void GeneralConf::updateComponents()
@@ -283,7 +282,6 @@ void GeneralConf::initShowDesktopNotification()
 
 void GeneralConf::initShowTrayIcon()
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_UNIX)
     m_showTray = new QCheckBox(tr("Show tray icon"), this);
     m_showTray->setToolTip(tr("Show icon in the system tray"));
     m_scrollAreaLayout->addWidget(m_showTray);
@@ -291,7 +289,6 @@ void GeneralConf::initShowTrayIcon()
     connect(m_showTray, &QCheckBox::clicked, this, [](bool checked) {
         ConfigHandler().setDisabledTrayIcon(!checked);
     });
-#endif
 }
 
 void GeneralConf::initHistoryConfirmationToDelete()
