@@ -334,7 +334,7 @@ void Flameshot::requestCapture(const CaptureRequest& request)
     }
 }
 
-void Flameshot::exportCapture(const QPixmap &capture,
+void Flameshot::exportCapture(const QPixmap& capture,
                               QRect& selection,
                               const CaptureRequest& req)
 {

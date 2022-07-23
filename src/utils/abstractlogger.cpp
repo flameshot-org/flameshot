@@ -92,7 +92,7 @@ AbstractLogger& AbstractLogger::addOutputString(QString& str)
 /**
  * @brief Attach a path to a notification so it can be dragged and dropped.
  */
-AbstractLogger& AbstractLogger::attachNotificationPath(const QString &path)
+AbstractLogger& AbstractLogger::attachNotificationPath(const QString& path)
 {
     if (m_targets & Notification) {
         m_notificationPath = path;

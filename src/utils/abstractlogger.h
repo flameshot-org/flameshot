@@ -38,9 +38,9 @@ public:
     static AbstractLogger error(int targets = Default);
 
     AbstractLogger& sendMessage(const QString& msg, Channel channel);
-    AbstractLogger& operator<<(const QString &msg);
+    AbstractLogger& operator<<(const QString& msg);
     AbstractLogger& addOutputString(QString& str);
-    AbstractLogger& attachNotificationPath(const QString &path);
+    AbstractLogger& attachNotificationPath(const QString& path);
     AbstractLogger& enableMessageHeader(bool enable);
 
 private:
